@@ -2,12 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassValidator.java,v 1.2 2007-07-20 15:08:59 ftanguy Exp $
+ * $Id: ClassValidator.java,v 1.3 2007-07-24 13:47:31 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.validation;
 
-import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.Property;
 import org.eclipse.emf.common.util.EList;
 
 /**

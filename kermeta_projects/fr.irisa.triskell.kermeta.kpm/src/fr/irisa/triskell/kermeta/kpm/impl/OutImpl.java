@@ -2,18 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutImpl.java,v 1.4 2007-06-26 12:29:04 ftanguy Exp $
+ * $Id: OutImpl.java,v 1.5 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
-
-
-import fr.irisa.triskell.kermeta.extension.IAction;
-import fr.irisa.triskell.kermeta.kpm.Action;
-import fr.irisa.triskell.kermeta.kpm.KpmPackage;
-import fr.irisa.triskell.kermeta.kpm.Out;
-import fr.irisa.triskell.kermeta.kpm.Rule;
-import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.launcher.KermetaLauncher;
 
 
 import java.util.Map;
@@ -23,18 +14,20 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.ui.PlatformUI;
+
+import fr.irisa.triskell.kermeta.extension.IAction;
+import fr.irisa.triskell.kermeta.kpm.Action;
+import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Rule;
+import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.launcher.KermetaLauncher;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,7 +53,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * @generated
 	 * @ordered
 	 */
-	protected Action action = null;
+	protected Action action;
 
 	/**
 	 * The default value of the '{@link #isIndependant() <em>Independant</em>}' attribute.
@@ -96,6 +89,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.OUT;
 	}
@@ -205,7 +199,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void process(Unit unit, IProgressMonitor monitor, Map args) {
+	public void process(Unit unit, IProgressMonitor monitor, Map<String, Object> args) {
 		
 		if ( evaluate(unit) ) {
 		
@@ -247,6 +241,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KpmPackage.OUT__RULE:
@@ -262,6 +257,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KpmPackage.OUT__RULE:
@@ -275,6 +271,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case KpmPackage.OUT__RULE:
@@ -288,6 +285,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.OUT__ACTION:
@@ -306,6 +304,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.OUT__ACTION:
@@ -326,6 +325,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.OUT__ACTION:
@@ -346,6 +346,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KpmPackage.OUT__ACTION:
@@ -363,6 +364,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

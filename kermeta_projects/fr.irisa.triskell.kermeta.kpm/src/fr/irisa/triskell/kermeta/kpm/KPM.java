@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPM.java,v 1.7 2007-06-15 14:45:34 ftanguy Exp $
+ * $Id: KPM.java,v 1.8 2007-07-24 13:47:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -44,10 +44,10 @@ public interface KPM extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Actions</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Actions()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Action" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getActions();
+	EList<Action> getActions();
 
 	/**
 	 * Returns the value of the '<em><b>Filters</b></em>' containment reference list.
@@ -60,10 +60,10 @@ public interface KPM extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Filters</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Filters()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Filter" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getFilters();
+	EList<Filter> getFilters();
 
 	/**
 	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
@@ -76,10 +76,10 @@ public interface KPM extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Types</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Types()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Type" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getTypes();
+	EList<Type> getTypes();
 
 	/**
 	 * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
@@ -92,10 +92,10 @@ public interface KPM extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Rules</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Rules()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Rule" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getRules();
+	EList<Rule> getRules();
 
 	/**
 	 * Returns the value of the '<em><b>Events</b></em>' containment reference list.
@@ -108,10 +108,10 @@ public interface KPM extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Events</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Events()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Event" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getEvents();
+	EList<Event> getEvents();
 
 	/**
 	 * Returns the value of the '<em><b>Units</b></em>' containment reference list.
@@ -124,10 +124,10 @@ public interface KPM extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Units</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Units()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Unit" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getUnits();
+	EList<Unit> getUnits();
 
 	/**
 	 * Returns the value of the '<em><b>Rule Types</b></em>' containment reference list.
@@ -140,10 +140,10 @@ public interface KPM extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Rule Types</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_RuleTypes()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.RuleType" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getRuleTypes();
+	EList<RuleType> getRuleTypes();
 
 	/**
 	 * <!-- begin-user-doc -->

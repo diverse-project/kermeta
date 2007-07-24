@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterestHostImpl.java,v 1.1 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: InterestHostImpl.java,v 1.2 2007-07-24 13:47:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.interest.impl;
 
@@ -54,7 +54,7 @@ public class InterestHostImpl extends EObjectImpl implements InterestHost {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList entries = null;
+	protected EList<InterestEntry> entries;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,6 +70,7 @@ public class InterestHostImpl extends EObjectImpl implements InterestHost {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return InterestPackage.Literals.INTEREST_HOST;
 	}
@@ -79,9 +80,9 @@ public class InterestHostImpl extends EObjectImpl implements InterestHost {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getEntries() {
+	public EList<InterestEntry> getEntries() {
 		if (entries == null) {
-			entries = new EObjectContainmentEList(InterestEntry.class, this, InterestPackage.INTEREST_HOST__ENTRIES);
+			entries = new EObjectContainmentEList<InterestEntry>(InterestEntry.class, this, InterestPackage.INTEREST_HOST__ENTRIES);
 		}
 		return entries;
 	}
@@ -136,7 +137,7 @@ public class InterestHostImpl extends EObjectImpl implements InterestHost {
 	 * @generated NOT
 	 */
 	public void update(Unit key, Object newValue) {
-		// On récupère toutes les entrées qui ont comme unit le paramètre key
+		// On rÔøΩcupÔøΩre toutes les entrÔøΩes qui ont comme unit le paramÔøΩtre key
 		ArrayList<InterestEntry> entriesToUpdate = new ArrayList<InterestEntry>();
 		Iterator<InterestEntry> iterator = getEntries().iterator();
 		while ( iterator.hasNext() ) {
@@ -182,10 +183,11 @@ public class InterestHostImpl extends EObjectImpl implements InterestHost {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_HOST__ENTRIES:
-				return ((InternalEList)getEntries()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getEntries()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -195,6 +197,7 @@ public class InterestHostImpl extends EObjectImpl implements InterestHost {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_HOST__ENTRIES:
@@ -208,11 +211,13 @@ public class InterestHostImpl extends EObjectImpl implements InterestHost {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_HOST__ENTRIES:
 				getEntries().clear();
-				getEntries().addAll((Collection)newValue);
+				getEntries().addAll((Collection<? extends InterestEntry>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -223,6 +228,7 @@ public class InterestHostImpl extends EObjectImpl implements InterestHost {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_HOST__ENTRIES:
@@ -237,6 +243,7 @@ public class InterestHostImpl extends EObjectImpl implements InterestHost {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_HOST__ENTRIES:

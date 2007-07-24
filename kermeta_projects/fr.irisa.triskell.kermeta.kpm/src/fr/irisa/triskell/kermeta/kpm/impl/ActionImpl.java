@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionImpl.java,v 1.8 2007-07-20 15:08:47 ftanguy Exp $
+ * $Id: ActionImpl.java,v 1.9 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -13,9 +13,7 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
 
 import java.util.Map;
 
-import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Platform;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -72,6 +70,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.ACTION;
 	}
@@ -103,8 +102,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void execute(Unit unit, IProgressMonitor monitor, Map args) {
-		IConfigurationElement[] element = Platform.getExtensionRegistry().getConfigurationElementsFor(extensionPoint);
+	public void execute(Unit unit, IProgressMonitor monitor, Map<String, Object> args) {
+		//IConfigurationElement[] element = Platform.getExtensionRegistry().getConfigurationElementsFor(extensionPoint);
 	}
 
 	/**
@@ -112,6 +111,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.ACTION__EXTENSION_POINT:
@@ -125,6 +125,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.ACTION__EXTENSION_POINT:
@@ -139,6 +140,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.ACTION__EXTENSION_POINT:
@@ -153,6 +155,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KpmPackage.ACTION__EXTENSION_POINT:
@@ -166,6 +169,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

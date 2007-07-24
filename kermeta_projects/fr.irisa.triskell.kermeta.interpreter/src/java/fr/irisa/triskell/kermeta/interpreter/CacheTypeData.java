@@ -1,4 +1,4 @@
-/* $Id: CacheTypeData.java,v 1.4 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: CacheTypeData.java,v 1.5 2007-07-24 13:47:38 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : CacheTypeData.java
  * License    : EPL
@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-
-import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;

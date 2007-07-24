@@ -2,16 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UiSwitch.java,v 1.1 2007-04-04 13:25:29 ftanguy Exp $
+ * $Id: UiSwitch.java,v 1.2 2007-07-24 13:46:59 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.ui.util;
-
-import fr.irisa.triskell.kermeta.ui.*;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import fr.irisa.triskell.kermeta.ui.DependentFileTreeItem;
+import fr.irisa.triskell.kermeta.ui.FileDependencyTreeItem;
+import fr.irisa.triskell.kermeta.ui.TreeItem;
+import fr.irisa.triskell.kermeta.ui.UiPackage;
 
 /**
  * <!-- begin-user-doc -->

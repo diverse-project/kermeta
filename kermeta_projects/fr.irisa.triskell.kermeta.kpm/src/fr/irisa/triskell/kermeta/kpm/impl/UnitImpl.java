@@ -2,9 +2,29 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.14 2007-05-28 12:16:19 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.15 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
+
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.KPM;
@@ -14,35 +34,6 @@ import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.RuleType;
 import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-
-import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
-
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.SubProgressMonitor;
-
-import java.util.Iterator;
-import java.util.List;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -72,7 +63,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * @generated
 	 * @ordered
 	 */
-	protected Type type = null;
+	protected Type type;
 
 	/**
 	 * The cached value of the '{@link #getRules() <em>Rules</em>}' reference list.
@@ -82,7 +73,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList rules = null;
+	protected EList<Rule> rules;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -152,7 +143,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList dependencies = null;
+	protected EList<Dependency> dependencies;
 
 	/**
 	 * The cached value of the '{@link #getDependents() <em>Dependents</em>}' reference list.
@@ -162,7 +153,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList dependents = null;
+	protected EList<Dependency> dependents;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -178,6 +169,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.UNIT;
 	}
@@ -225,9 +217,9 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getRules() {
+	public EList<Rule> getRules() {
 		if (rules == null) {
-			rules = new EObjectResolvingEList(Rule.class, this, KpmPackage.UNIT__RULES);
+			rules = new EObjectResolvingEList<Rule>(Rule.class, this, KpmPackage.UNIT__RULES);
 		}
 		return rules;
 	}
@@ -302,9 +294,9 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getDependencies() {
+	public EList<Dependency> getDependencies() {
 		if (dependencies == null) {
-			dependencies = new EObjectContainmentEList(Dependency.class, this, KpmPackage.UNIT__DEPENDENCIES);
+			dependencies = new EObjectContainmentEList<Dependency>(Dependency.class, this, KpmPackage.UNIT__DEPENDENCIES);
 		}
 		return dependencies;
 	}
@@ -314,9 +306,9 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getDependents() {
+	public EList<Dependency> getDependents() {
 		if (dependents == null) {
-			dependents = new EObjectResolvingEList(Dependency.class, this, KpmPackage.UNIT__DEPENDENTS);
+			dependents = new EObjectResolvingEList<Dependency>(Dependency.class, this, KpmPackage.UNIT__DEPENDENTS);
 		}
 		return dependents;
 	}
@@ -335,7 +327,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void receiveEvent(String event, boolean synchrone, Map args, IProgressMonitor monitor) {
+	public void receiveEvent(String event, boolean synchrone, Map<String, Object> args, IProgressMonitor monitor) {
 		
 		if ( monitor == null )
 			monitor = new NullProgressMonitor();
@@ -435,7 +427,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void receiveSynchroneEvent(String event, Map args, IProgressMonitor monitor) {
+	public void receiveSynchroneEvent(String event, Map<String, Object> args, IProgressMonitor monitor) {
 		receiveEvent(event, true, args, monitor);
 	}
 
@@ -444,7 +436,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void receiveAsynchroneEvent(String event, Map args, IProgressMonitor monitor) {
+	public void receiveAsynchroneEvent(String event, Map<String, Object> args, IProgressMonitor monitor) {
 		receiveEvent(event, false, args, monitor);
 	}
 
@@ -461,6 +453,18 @@ public class UnitImpl extends EObjectImpl implements Unit {
 				return current;
 		}
 		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean equals(Object value) {
+		if ( value instanceof Unit )
+			return getValue().equals( ((Unit) value).getValue() );
+		else
+			return false;
 	}
 
 	/**
@@ -508,10 +512,11 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KpmPackage.UNIT__DEPENDENCIES:
-				return ((InternalEList)getDependencies()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getDependencies()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -521,6 +526,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.UNIT__TYPE:
@@ -547,6 +553,8 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.UNIT__TYPE:
@@ -554,7 +562,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 				return;
 			case KpmPackage.UNIT__RULES:
 				getRules().clear();
-				getRules().addAll((Collection)newValue);
+				getRules().addAll((Collection<? extends Rule>)newValue);
 				return;
 			case KpmPackage.UNIT__NAME:
 				setName((String)newValue);
@@ -567,11 +575,11 @@ public class UnitImpl extends EObjectImpl implements Unit {
 				return;
 			case KpmPackage.UNIT__DEPENDENCIES:
 				getDependencies().clear();
-				getDependencies().addAll((Collection)newValue);
+				getDependencies().addAll((Collection<? extends Dependency>)newValue);
 				return;
 			case KpmPackage.UNIT__DEPENDENTS:
 				getDependents().clear();
-				getDependents().addAll((Collection)newValue);
+				getDependents().addAll((Collection<? extends Dependency>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -582,6 +590,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.UNIT__TYPE:
@@ -614,6 +623,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KpmPackage.UNIT__TYPE:
@@ -639,6 +649,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

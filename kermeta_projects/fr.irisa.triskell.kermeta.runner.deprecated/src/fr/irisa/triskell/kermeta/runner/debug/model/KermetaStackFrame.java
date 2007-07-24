@@ -1,4 +1,4 @@
-/* $Id: KermetaStackFrame.java,v 1.8 2006-09-19 14:38:55 zdrey Exp $
+/* $Id: KermetaStackFrame.java,v 1.9 2007-07-24 13:47:19 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaStackFrame.java
  * License   : GPL
@@ -9,7 +9,6 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
@@ -19,11 +18,6 @@ import org.eclipse.debug.core.model.IRegisterGroup;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IVariable;
-import org.eclipse.ui.views.properties.IPropertySource;
-import org.eclipse.ui.views.tasklist.ITaskListResourceAdapter;
-
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.traceability.helper.Tracer;
 
 
 /**
@@ -157,7 +151,7 @@ public class KermetaStackFrame extends DebugElement implements IStackFrame {
         return thread.canStepReturn();
     }
 
-    /** TODO / ou FIXME : deleguer isStepping à la class KermetaDebugElement
+    /** TODO / ou FIXME : deleguer isStepping ï¿½ la class KermetaDebugElement
      * @see org.eclipse.debug.core.model.IStep#isStepping() */
     public boolean isStepping() {
     	System.out.println("IS STEPPING IN (KermetaStackFrame)?");

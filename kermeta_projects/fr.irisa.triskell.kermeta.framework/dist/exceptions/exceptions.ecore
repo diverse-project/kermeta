@@ -4,47 +4,71 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::utils|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="exceptions" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.ecore#//exceptions" nsPrefix="exceptions">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="exceptions" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.ecore#//exceptions" nsPrefix="exceptions">
       <eClassifiers xsi:type="ecore:EClass" name="Exception">
-        <eAnnotations source="kermeta"/>
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xA; * Generic exceptions&#xA; * The main class from which all the exception inherit&#xA; */"/>
+        </eAnnotations>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="message" containment="true">
-          <eAnnotations source="kermeta"/>
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xA;     * The message attached to the exception&#xA;     */"/>
+          </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="nestedException" eType="/1/exceptions/Exception" containment="true">
-          <eAnnotations source="kermeta"/>
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xA;     * Any nested exception&#xA;     */"/>
+          </eAnnotations>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="stackTrace" containment="true">
-          <eAnnotations source="kermeta"/>
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xA;     * The stack trace as a String&#xA;     * Filled by the interpreted when the exception is raised&#xA;     */"/>
+          </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="RuntimeError" eSuperTypes="/1/exceptions/Exception">
-        <eAnnotations source="kermeta"/>
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xA; * Exception for interpreter exceptions&#xA; */"/>
+        </eAnnotations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="expression" containment="true">
-          <eAnnotations source="kermeta"/>
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xA;  * The code that raised the exception&#xA;  */"/>
+          </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../language/behavior.ecore#/1/language/behavior/Expression"/>
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CallOnVoidTarget" eSuperTypes="/1/exceptions/RuntimeError">
-        <eAnnotations source="kermeta"/>
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xA; * Occurs when a feature is called on void&#xA; */"/>
+        </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypeCastError" eSuperTypes="/1/exceptions/RuntimeError">
-        <eAnnotations source="kermeta"/>
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xA; * Occurs when a cast (Object::asType operation) fails&#xA; */"/>
+        </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="NotImplementedException" eSuperTypes="/1/exceptions/RuntimeError">
-        <eAnnotations source="kermeta"/>
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xA; * Use this exception whenyou want to forbid the access to an unimplemented operation &#xA; * and invite to implement it&#xA; */"/>
+        </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="UpperBoundReachedError" eSuperTypes="/1/exceptions/RuntimeError">
-        <eAnnotations source="kermeta"/>
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/** &#xA; * Use this exception when user tries to add an element to a property which type is collection&#xA; * which has an upper bound != -1 ( ie *)&#xA; */"/>
+        </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="AbstractClassInstantiationError" eSuperTypes="/1/exceptions/RuntimeError">
-        <eAnnotations source="kermeta"/>
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xA; * Creation on an abstract class. Usually this is detected by the type-checker. The only&#xA; * case where this happens is when instantiating a type variable, whose bound type turns&#xA; * out to be abstract.&#xA; */"/>
+        </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="IncompatibleTypeError" eSuperTypes="/1/exceptions/RuntimeError">
-        <eAnnotations source="kermeta"/>
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xA; * Raised by the Object::set operation if the type of the &#xA; * Object to set has an incompatible type.&#xA; */"/>
+        </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="DivisionByZero" eSuperTypes="/1/exceptions/Exception"/>
       <eClassifiers xsi:type="ecore:EClass" name="OverflowError" eSuperTypes="/1/exceptions/Exception"/>
@@ -62,47 +86,52 @@
     </eSubpackages>
   </ecore:EPackage>
   <ecore:EAnnotation source="dependentResource">
-    <references href="../standard/collections.ecore#/0"/>
-    <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/java.ecore#/0"/>
-    <references href="../standard/java.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
+    <references href="../kunit/kunit.ecore#/0"/>
+    <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../language/behavior.ecore#/0"/>
+    <references href="../language/behavior.ecore#/1"/>
+    <references href="../language/behavior.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../persistence/resource.ecore#/2"/>
-    <references href="../language/reflective_collections.ecore#/0"/>
-    <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
-    <references href="../reflection/reflection.ecore#/0"/>
-    <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
-    <references href="../kunit/kunit.ecore#/0"/>
-    <references href="../kunit/kunit.ecore#/1"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../language/behavior.ecore#/0"/>
-    <references href="../language/behavior.ecore#/1"/>
+    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
     <references href="../Standard.ecore#/2"/>
-    <references href="../standard/primitive_types.ecore#/0"/>
-    <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/collections.ecore#/0"/>
+    <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
+    <references href="../standard/java.ecore#/0"/>
+    <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
+    <references href="../language/structure.ecore#/0"/>
+    <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
-    <references href="../language/structure.ecore#/0"/>
-    <references href="../language/structure.ecore#/1"/>
-    <references href="#/0"/>
-    <references href="#/1"/>
+    <references href="../language/reflective_collections.ecore#/0"/>
+    <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/2"/>
+    <references href="../standard/primitive_types.ecore#/0"/>
+    <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
+    <references href="#/0"/>
+    <references href="#/1"/>
+    <references href="../reflection/reflection.ecore#/0"/>
+    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

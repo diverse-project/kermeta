@@ -2,16 +2,39 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmSwitch.java,v 1.6 2007-05-15 15:22:53 ftanguy Exp $
+ * $Id: KpmSwitch.java,v 1.7 2007-07-24 13:47:13 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.util;
 
 import fr.irisa.triskell.kermeta.kpm.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import fr.irisa.triskell.kermeta.kpm.ANDExpression;
+import fr.irisa.triskell.kermeta.kpm.AbstractEntity;
+import fr.irisa.triskell.kermeta.kpm.Action;
+import fr.irisa.triskell.kermeta.kpm.Dependency;
+import fr.irisa.triskell.kermeta.kpm.Event;
+import fr.irisa.triskell.kermeta.kpm.ExistFilter;
+import fr.irisa.triskell.kermeta.kpm.Expression;
+import fr.irisa.triskell.kermeta.kpm.Filter;
+import fr.irisa.triskell.kermeta.kpm.FilterExpression;
+import fr.irisa.triskell.kermeta.kpm.In;
+import fr.irisa.triskell.kermeta.kpm.KPM;
+import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.NameFilter;
+import fr.irisa.triskell.kermeta.kpm.NestedExpression;
+import fr.irisa.triskell.kermeta.kpm.NullExpression;
+import fr.irisa.triskell.kermeta.kpm.ORExpression;
+import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Rule;
+import fr.irisa.triskell.kermeta.kpm.RuleType;
+import fr.irisa.triskell.kermeta.kpm.SimpleExpression;
+import fr.irisa.triskell.kermeta.kpm.Type;
+import fr.irisa.triskell.kermeta.kpm.TypeFilter;
+import fr.irisa.triskell.kermeta.kpm.Unit;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +49,7 @@ import org.eclipse.emf.ecore.EObject;
  * @see fr.irisa.triskell.kermeta.kpm.KpmPackage
  * @generated
  */
-public class KpmSwitch {
+public class KpmSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -54,7 +77,7 @@ public class KpmSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	public Object doSwitch(EObject theEObject) {
+	public T doSwitch(EObject theEObject) {
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
@@ -65,16 +88,16 @@ public class KpmSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(EClass theEClass, EObject theEObject) {
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
 		else {
-			List eSuperTypes = theEClass.getESuperTypes();
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
 					defaultCase(theEObject) :
-					doSwitch((EClass)eSuperTypes.get(0), theEObject);
+					doSwitch(eSuperTypes.get(0), theEObject);
 		}
 	}
 
@@ -85,56 +108,56 @@ public class KpmSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(int classifierID, EObject theEObject) {
+	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case KpmPackage.DEPENDENCY: {
-				Dependency dependency = (Dependency)theEObject;
-				Object result = caseDependency(dependency);
+			case KpmPackage.RULE: {
+				Rule rule = (Rule)theEObject;
+				T result = caseRule(rule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.IN: {
 				In in = (In)theEObject;
-				Object result = caseIn(in);
+				T result = caseIn(in);
 				if (result == null) result = caseAbstractEntity(in);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.ACTION: {
 				Action action = (Action)theEObject;
-				Object result = caseAction(action);
+				T result = caseAction(action);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.OUT: {
 				Out out = (Out)theEObject;
-				Object result = caseOut(out);
+				T result = caseOut(out);
 				if (result == null) result = caseAbstractEntity(out);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.FILTER: {
 				Filter filter = (Filter)theEObject;
-				Object result = caseFilter(filter);
+				T result = caseFilter(filter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.EXPRESSION: {
 				Expression expression = (Expression)theEObject;
-				Object result = caseExpression(expression);
+				T result = caseExpression(expression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.NESTED_EXPRESSION: {
 				NestedExpression nestedExpression = (NestedExpression)theEObject;
-				Object result = caseNestedExpression(nestedExpression);
+				T result = caseNestedExpression(nestedExpression);
 				if (result == null) result = caseExpression(nestedExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.OR_EXPRESSION: {
 				ORExpression orExpression = (ORExpression)theEObject;
-				Object result = caseORExpression(orExpression);
+				T result = caseORExpression(orExpression);
 				if (result == null) result = caseNestedExpression(orExpression);
 				if (result == null) result = caseExpression(orExpression);
 				if (result == null) result = defaultCase(theEObject);
@@ -142,7 +165,7 @@ public class KpmSwitch {
 			}
 			case KpmPackage.AND_EXPRESSION: {
 				ANDExpression andExpression = (ANDExpression)theEObject;
-				Object result = caseANDExpression(andExpression);
+				T result = caseANDExpression(andExpression);
 				if (result == null) result = caseNestedExpression(andExpression);
 				if (result == null) result = caseExpression(andExpression);
 				if (result == null) result = defaultCase(theEObject);
@@ -150,7 +173,7 @@ public class KpmSwitch {
 			}
 			case KpmPackage.FILTER_EXPRESSION: {
 				FilterExpression filterExpression = (FilterExpression)theEObject;
-				Object result = caseFilterExpression(filterExpression);
+				T result = caseFilterExpression(filterExpression);
 				if (result == null) result = caseSimpleExpression(filterExpression);
 				if (result == null) result = caseExpression(filterExpression);
 				if (result == null) result = defaultCase(theEObject);
@@ -158,33 +181,33 @@ public class KpmSwitch {
 			}
 			case KpmPackage.TYPE_FILTER: {
 				TypeFilter typeFilter = (TypeFilter)theEObject;
-				Object result = caseTypeFilter(typeFilter);
+				T result = caseTypeFilter(typeFilter);
 				if (result == null) result = caseFilter(typeFilter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.NAME_FILTER: {
 				NameFilter nameFilter = (NameFilter)theEObject;
-				Object result = caseNameFilter(nameFilter);
+				T result = caseNameFilter(nameFilter);
 				if (result == null) result = caseFilter(nameFilter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.ABSTRACT_ENTITY: {
 				AbstractEntity abstractEntity = (AbstractEntity)theEObject;
-				Object result = caseAbstractEntity(abstractEntity);
+				T result = caseAbstractEntity(abstractEntity);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.TYPE: {
 				Type type = (Type)theEObject;
-				Object result = caseType(type);
+				T result = caseType(type);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.NULL_EXPRESSION: {
 				NullExpression nullExpression = (NullExpression)theEObject;
-				Object result = caseNullExpression(nullExpression);
+				T result = caseNullExpression(nullExpression);
 				if (result == null) result = caseSimpleExpression(nullExpression);
 				if (result == null) result = caseExpression(nullExpression);
 				if (result == null) result = defaultCase(theEObject);
@@ -192,45 +215,45 @@ public class KpmSwitch {
 			}
 			case KpmPackage.EVENT: {
 				Event event = (Event)theEObject;
-				Object result = caseEvent(event);
+				T result = caseEvent(event);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.SIMPLE_EXPRESSION: {
 				SimpleExpression simpleExpression = (SimpleExpression)theEObject;
-				Object result = caseSimpleExpression(simpleExpression);
+				T result = caseSimpleExpression(simpleExpression);
 				if (result == null) result = caseExpression(simpleExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.KPM: {
 				KPM kpm = (KPM)theEObject;
-				Object result = caseKPM(kpm);
+				T result = caseKPM(kpm);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.UNIT: {
 				Unit unit = (Unit)theEObject;
-				Object result = caseUnit(unit);
+				T result = caseUnit(unit);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.EXIST_FILTER: {
 				ExistFilter existFilter = (ExistFilter)theEObject;
-				Object result = caseExistFilter(existFilter);
+				T result = caseExistFilter(existFilter);
 				if (result == null) result = caseFilter(existFilter);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case KpmPackage.RULE: {
-				Rule rule = (Rule)theEObject;
-				Object result = caseRule(rule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KpmPackage.RULE_TYPE: {
 				RuleType ruleType = (RuleType)theEObject;
-				Object result = caseRuleType(ruleType);
+				T result = caseRuleType(ruleType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case KpmPackage.DEPENDENCY: {
+				Dependency dependency = (Dependency)theEObject;
+				T result = caseDependency(dependency);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -239,347 +262,347 @@ public class KpmSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Dependency</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Dependency</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Dependency</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Dependency</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseDependency(Dependency object) {
+	public T caseDependency(Dependency object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>In</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>In</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>In</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>In</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseIn(In object) {
+	public T caseIn(In object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Action</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Action</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Action</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Action</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseAction(Action object) {
+	public T caseAction(Action object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Out</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Out</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Out</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Out</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseOut(Out object) {
+	public T caseOut(Out object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Filter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Filter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Filter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Filter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseFilter(Filter object) {
+	public T caseFilter(Filter object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseExpression(Expression object) {
+	public T caseExpression(Expression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Nested Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Nested Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Nested Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Nested Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseNestedExpression(NestedExpression object) {
+	public T caseNestedExpression(NestedExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>OR Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>OR Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>OR Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>OR Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseORExpression(ORExpression object) {
+	public T caseORExpression(ORExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>AND Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>AND Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>AND Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>AND Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseANDExpression(ANDExpression object) {
+	public T caseANDExpression(ANDExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Filter Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Filter Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Filter Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Filter Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseFilterExpression(FilterExpression object) {
+	public T caseFilterExpression(FilterExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Type Filter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Type Filter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Type Filter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Type Filter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseTypeFilter(TypeFilter object) {
+	public T caseTypeFilter(TypeFilter object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Name Filter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Name Filter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Name Filter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Name Filter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseNameFilter(NameFilter object) {
+	public T caseNameFilter(NameFilter object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Abstract Entity</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Entity</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Abstract Entity</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Entity</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseAbstractEntity(AbstractEntity object) {
+	public T caseAbstractEntity(AbstractEntity object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseType(Type object) {
+	public T caseType(Type object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Null Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Null Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Null Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Null Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseNullExpression(NullExpression object) {
+	public T caseNullExpression(NullExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Event</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Event</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Event</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Event</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseEvent(Event object) {
+	public T caseEvent(Event object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Simple Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Simple Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Simple Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Simple Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseSimpleExpression(SimpleExpression object) {
+	public T caseSimpleExpression(SimpleExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>KPM</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>KPM</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>KPM</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>KPM</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseKPM(KPM object) {
+	public T caseKPM(KPM object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Rule</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Rule</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Rule</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Rule</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseRule(Rule object) {
+	public T caseRule(Rule object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Unit</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Unit</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Unit</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Unit</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseUnit(Unit object) {
+	public T caseUnit(Unit object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Exist Filter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Exist Filter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Exist Filter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Exist Filter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseExistFilter(ExistFilter object) {
+	public T caseExistFilter(ExistFilter object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Rule Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Rule Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Rule Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Rule Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseRuleType(RuleType object) {
+	public T caseRuleType(RuleType object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	public Object defaultCase(EObject object) {
+	public T defaultCase(EObject object) {
 		return null;
 	}
 

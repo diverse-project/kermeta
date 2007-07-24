@@ -1,4 +1,4 @@
-/*$Id: AddMarkers.java,v 1.9 2007-07-20 15:09:26 ftanguy Exp $
+/*$Id: AddMarkers.java,v 1.10 2007-07-24 13:46:35 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
@@ -21,8 +21,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.QualifiedName;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Dependency;
@@ -30,6 +32,7 @@ import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 
 public class AddMarkers implements IAction, Interest {
@@ -144,11 +147,17 @@ public class AddMarkers implements IAction, Interest {
 			else {
 				KermetaMarkersHelper.createMarkers(file, kermetaUnit);
 				markedUnits.clear();
-				//markDependent(out, file, unit, unit, markedUnits, true);				
+				try {
+					markDependent(out, file, unit, unit, markedUnits, true);
+				} catch (URIMalformedException e) {
+					e.printStackTrace();
+				}				
 			}
 			
 			monitor.worked(1);
 			
+		} catch (URIMalformedException e) {
+			e.printStackTrace();
 		} finally {
 			
 			monitor.done();
@@ -158,12 +167,14 @@ public class AddMarkers implements IAction, Interest {
 
 	}
 
-	private void markDependent(Out out, IFile first, Unit top, Unit unit, List<Unit> markedUnits, boolean adding) {
+	private void markDependent(Out out, IFile first, Unit top, Unit unit, List<Unit> markedUnits, boolean adding) throws URIMalformedException {
 		
 		if ( markedUnits.contains(unit) )
 			return;
 		
 		String message = "File " + first.getFullPath().toString() + " contains error(s).\n";
+		KermetaUnit kermetaUnit = IOPlugin.getDefault().getKermetaUnit( "platform:/resource" + first.getFullPath().toString());
+		message += KermetaUnitHelper.getAllErrorsAsString(kermetaUnit);
 		
 		if ( top != unit ) {
 		

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Action.java,v 1.5 2007-04-04 13:43:54 ftanguy Exp $
+ * $Id: Action.java,v 1.6 2007-07-24 13:47:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -61,6 +61,6 @@ public interface Action extends EObject {
 	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
 	 * @generated
 	 */
-	void execute(Unit unit, IProgressMonitor monitor, Map args);
+	void execute(Unit unit, IProgressMonitor monitor, Map<String, Object> args);
 
 } // Action

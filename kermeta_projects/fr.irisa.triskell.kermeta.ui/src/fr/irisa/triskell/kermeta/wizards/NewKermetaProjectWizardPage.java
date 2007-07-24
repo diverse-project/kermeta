@@ -1,4 +1,4 @@
-/* $Id: NewKermetaProjectWizardPage.java,v 1.1 2007-04-04 13:25:30 ftanguy Exp $
+/* $Id: NewKermetaProjectWizardPage.java,v 1.2 2007-07-24 13:47:00 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewProjectWizardPage.java
  * License: GPL
@@ -12,17 +12,24 @@
 
 package fr.irisa.triskell.kermeta.wizards;
 
-import org.eclipse.swt.widgets.*;
-import org.eclipse.swt.layout.*;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.*;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.jface.viewers.*;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 
 /**
  * The "New" wizard page allows setting the container for

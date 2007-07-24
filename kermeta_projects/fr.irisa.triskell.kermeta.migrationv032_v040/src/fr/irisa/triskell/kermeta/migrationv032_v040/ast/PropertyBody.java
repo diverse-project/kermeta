@@ -1,7 +1,6 @@
 package fr.irisa.triskell.kermeta.migrationv032_v040.ast;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
-import antlr.Token;
 
 /**
  *

@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.7 2007-07-20 15:08:39 ftanguy Exp $
+/* $Id: CompileFramework.java,v 1.8 2007-07-24 13:47:05 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : CompileFramework.java
 * License : GPL
@@ -9,11 +9,7 @@
 */ 
 package fr.irisa.triskell.kermeta.dev.framework;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
@@ -22,7 +18,6 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 
@@ -84,7 +79,7 @@ public class CompileFramework {
         	}
         	System.out.println("SAVING IN KM...");
         	KmExporter exporter = new KmExporter();
-        	exporter.export(kermetaUnit, "platform:/resource/fr.irisa.triskell.kermeta.framework/dist");
+        	exporter.export(kermetaUnit, "platform:/plugin/fr.irisa.triskell.kermeta.framework/dist");
         	System.out.println("DONE");
 
         	System.out.println("SAVING IN ECORE...");

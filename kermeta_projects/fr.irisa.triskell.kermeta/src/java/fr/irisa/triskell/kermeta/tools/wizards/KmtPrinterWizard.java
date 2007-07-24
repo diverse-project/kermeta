@@ -1,4 +1,4 @@
-/* $Id: KmtPrinterWizard.java,v 1.12 2007-07-20 15:09:18 ftanguy Exp $
+/* $Id: KmtPrinterWizard.java,v 1.13 2007-07-24 13:46:39 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -13,16 +13,9 @@
  */
 package fr.irisa.triskell.kermeta.tools.wizards;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.util.Iterator;
-
 import org.eclipse.core.resources.IFile;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 import org.kermeta.io.printer.KMTOutputBuilder;
-
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 
 /**

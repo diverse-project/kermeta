@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmModelWizard.java,v 1.2 2007-04-11 07:21:10 ftanguy Exp $
+ * $Id: KpmModelWizard.java,v 1.3 2007-07-24 13:47:24 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.presentation;
 
@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.StringTokenizer;
 
+import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EClass;
@@ -148,7 +149,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected List initialObjectNames;
+	protected List<String> initialObjectNames;
 
 	/**
 	 * This just records the information.
@@ -169,11 +170,10 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection getInitialObjectNames() {
+	protected Collection<String> getInitialObjectNames() {
 		if (initialObjectNames == null) {
-			initialObjectNames = new ArrayList();
-			for (Iterator classifiers = kpmPackage.getEClassifiers().iterator(); classifiers.hasNext(); ) {
-				EClassifier eClassifier = (EClassifier)classifiers.next();
+			initialObjectNames = new ArrayList<String>();
+			for (EClassifier eClassifier : kpmPackage.getEClassifiers()) {
 				if (eClassifier instanceof EClass) {
 					EClass eClass = (EClass)eClassifier;
 					if (!eClass.isAbstract()) {
@@ -181,7 +181,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 					}
 				}
 			}
-			Collections.sort(initialObjectNames, java.text.Collator.getInstance());
+			Collections.sort(initialObjectNames, CommonPlugin.INSTANCE.getComparator());
 		}
 		return initialObjectNames;
 	}
@@ -204,6 +204,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean performFinish() {
 		try {
 			// Remember the file.
@@ -214,6 +215,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 			//
 			WorkspaceModifyOperation operation =
 				new WorkspaceModifyOperation() {
+					@Override
 					protected void execute(IProgressMonitor progressMonitor) {
 						try {
 							// Create a resource set
@@ -222,7 +224,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 
 							// Get the URI of the model file.
 							//
-							URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath().toString());
+							URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath().toString(), true);
 
 							// Create a resource for this file.
 							//
@@ -237,7 +239,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 
 							// Save the contents of the resource to the file system.
 							//
-							Map options = new HashMap();
+							Map<Object, Object> options = new HashMap<Object, Object>();
 							options.put(XMLResource.OPTION_ENCODING, initialObjectCreationPage.getEncoding());
 							resource.save(options);
 						}
@@ -310,6 +312,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		protected boolean validatePage() {
 			if (super.validatePage()) {
 				// Make sure the file ends in ".kpm".
@@ -358,7 +361,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 */
-		protected List encodings;
+		protected List<String> encodings;
 
 		/**
 		 * <!-- begin-user-doc -->
@@ -383,8 +386,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		public void createControl(Composite parent) {
-			Composite composite = new Composite(parent, SWT.NONE);
-			{
+			Composite composite = new Composite(parent, SWT.NONE); {
 				GridLayout layout = new GridLayout();
 				layout.numColumns = 1;
 				layout.verticalSpacing = 12;
@@ -414,8 +416,8 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 				initialObjectField.setLayoutData(data);
 			}
 
-			for (Iterator i = getInitialObjectNames().iterator(); i.hasNext(); ) {
-				initialObjectField.add(getLabel((String)i.next()));
+			for (String objectName : getInitialObjectNames()) {
+				initialObjectField.add(getLabel(objectName));
 			}
 
 			if (initialObjectField.getItemCount() == 1) {
@@ -439,8 +441,8 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 				encodingField.setLayoutData(data);
 			}
 
-			for (Iterator i = getEncodings().iterator(); i.hasNext(); ) {
-				encodingField.add((String)i.next());
+			for (String encoding : getEncodings()) {
+				encodingField.add(encoding);
 			}
 
 			encodingField.select(0);
@@ -476,6 +478,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		public void setVisible(boolean visible) {
 			super.setVisible(visible);
 			if (visible) {
@@ -498,8 +501,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 		public String getInitialObjectName() {
 			String label = initialObjectField.getText();
 
-			for (Iterator i = getInitialObjectNames().iterator(); i.hasNext(); ) {
-				String name = (String)i.next();
+			for (String name : getInitialObjectNames()) {
 				if (getLabel(name).equals(label)) {
 					return name;
 				}
@@ -537,9 +539,9 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		protected Collection getEncodings() {
+		protected Collection<String> getEncodings() {
 			if (encodings == null) {
-				encodings = new ArrayList();
+				encodings = new ArrayList<String>();
 				for (StringTokenizer stringTokenizer = new StringTokenizer(KpmEditorPlugin.INSTANCE.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens(); ) {
 					encodings.add(stringTokenizer.nextToken());
 				}
@@ -554,6 +556,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addPages() {
 		// Create a page, set the title, and the initial model file name.
 		//

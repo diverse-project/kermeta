@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractEntityImpl.java,v 1.1 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: AbstractEntityImpl.java,v 1.2 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -43,7 +43,7 @@ public abstract class AbstractEntityImpl extends EObjectImpl implements Abstract
 	 * @generated
 	 * @ordered
 	 */
-	protected SimpleExpression expression = null;
+	protected SimpleExpression expression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -59,6 +59,7 @@ public abstract class AbstractEntityImpl extends EObjectImpl implements Abstract
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.ABSTRACT_ENTITY;
 	}
@@ -122,6 +123,7 @@ public abstract class AbstractEntityImpl extends EObjectImpl implements Abstract
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KpmPackage.ABSTRACT_ENTITY__EXPRESSION:
@@ -135,6 +137,7 @@ public abstract class AbstractEntityImpl extends EObjectImpl implements Abstract
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.ABSTRACT_ENTITY__EXPRESSION:
@@ -148,6 +151,7 @@ public abstract class AbstractEntityImpl extends EObjectImpl implements Abstract
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.ABSTRACT_ENTITY__EXPRESSION:
@@ -162,6 +166,7 @@ public abstract class AbstractEntityImpl extends EObjectImpl implements Abstract
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.ABSTRACT_ENTITY__EXPRESSION:
@@ -176,6 +181,7 @@ public abstract class AbstractEntityImpl extends EObjectImpl implements Abstract
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KpmPackage.ABSTRACT_ENTITY__EXPRESSION:

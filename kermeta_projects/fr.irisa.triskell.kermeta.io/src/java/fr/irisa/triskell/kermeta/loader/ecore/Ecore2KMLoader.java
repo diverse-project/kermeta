@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.2 2007-07-20 15:08:11 ftanguy Exp $
+/*$Id: Ecore2KMLoader.java,v 1.3 2007-07-24 13:46:46 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -26,12 +26,9 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.AbstractKermetaUnitLoader;
 

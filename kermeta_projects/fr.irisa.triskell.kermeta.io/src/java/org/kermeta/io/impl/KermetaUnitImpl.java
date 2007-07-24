@@ -2,63 +2,34 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.3 2007-07-23 13:58:05 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.4 2007-07-24 13:46:46 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
-import antlr.ANTLRException;
-import antlr.MismatchedTokenException;
-import antlr.NoViableAltException;
-import antlr.RecognitionException;
-import antlr.TokenStreamRecognitionException;
-
-import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
-import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.Require;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Using;
-
-import fr.irisa.triskell.traceability.helper.Tracer;
-
-import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-
-
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Hashtable;
-import java.util.List;
 import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
-import java.util.Iterator;
-
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.IBuildingState;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.IoPackage;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.KermetaUnitLoader;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
@@ -66,7 +37,22 @@ import org.kermeta.io.ParsingError;
 import org.kermeta.io.WarningMessage;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
+import antlr.ANTLRException;
+import antlr.MismatchedTokenException;
+import antlr.NoViableAltException;
+import antlr.TokenStreamRecognitionException;
+
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
+
+import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Require;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Using;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
  * <!-- begin-user-doc -->

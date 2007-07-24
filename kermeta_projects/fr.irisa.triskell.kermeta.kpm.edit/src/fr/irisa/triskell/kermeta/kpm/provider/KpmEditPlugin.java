@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmEditPlugin.java,v 1.1 2007-04-11 07:19:57 ftanguy Exp $
+ * $Id: KpmEditPlugin.java,v 1.2 2007-07-24 13:47:43 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -52,6 +52,7 @@ public final class KpmEditPlugin extends EMFPlugin {
 	 * @return the singleton instance.
 	 * @generated
 	 */
+	@Override
 	public ResourceLocator getPluginResourceLocator() {
 		return plugin;
 	}

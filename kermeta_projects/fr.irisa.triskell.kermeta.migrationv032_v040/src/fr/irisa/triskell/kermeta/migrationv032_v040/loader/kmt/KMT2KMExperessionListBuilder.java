@@ -8,10 +8,10 @@ package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 import java.util.ArrayList;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.loader.AbstractKermetaUnitLoader;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FExpression;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FExpressionLst;
 
 
 

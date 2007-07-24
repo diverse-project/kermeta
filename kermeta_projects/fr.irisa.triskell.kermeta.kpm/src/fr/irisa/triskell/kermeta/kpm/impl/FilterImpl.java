@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FilterImpl.java,v 1.2 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: FilterImpl.java,v 1.3 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -39,6 +39,7 @@ public abstract class FilterImpl extends EObjectImpl implements Filter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.FILTER;
 	}

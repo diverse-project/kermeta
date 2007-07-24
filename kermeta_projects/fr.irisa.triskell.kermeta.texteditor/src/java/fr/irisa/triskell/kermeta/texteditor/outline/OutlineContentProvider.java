@@ -1,4 +1,4 @@
-/* $Id: OutlineContentProvider.java,v 1.5 2007-07-20 15:09:22 ftanguy Exp $
+/* $Id: OutlineContentProvider.java,v 1.6 2007-07-24 13:46:55 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineContentProvider.java
 * License : EPL
@@ -13,7 +13,6 @@ package fr.irisa.triskell.kermeta.texteditor.outline;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 

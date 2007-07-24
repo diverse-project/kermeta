@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InImpl.java,v 1.2 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: InImpl.java,v 1.3 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -51,6 +51,7 @@ public class InImpl extends AbstractEntityImpl implements In {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.IN;
 	}
@@ -101,6 +102,7 @@ public class InImpl extends AbstractEntityImpl implements In {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KpmPackage.IN__RULE:
@@ -116,6 +118,7 @@ public class InImpl extends AbstractEntityImpl implements In {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KpmPackage.IN__RULE:
@@ -129,6 +132,7 @@ public class InImpl extends AbstractEntityImpl implements In {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case KpmPackage.IN__RULE:
@@ -142,6 +146,7 @@ public class InImpl extends AbstractEntityImpl implements In {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.IN__RULE:
@@ -155,6 +160,7 @@ public class InImpl extends AbstractEntityImpl implements In {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.IN__RULE:
@@ -169,6 +175,7 @@ public class InImpl extends AbstractEntityImpl implements In {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.IN__RULE:
@@ -183,6 +190,7 @@ public class InImpl extends AbstractEntityImpl implements In {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KpmPackage.IN__RULE:

@@ -2,16 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterestSwitch.java,v 1.1 2007-04-04 13:43:56 ftanguy Exp $
+ * $Id: InterestSwitch.java,v 1.2 2007-07-24 13:47:11 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.interest.util;
-
-import fr.irisa.triskell.kermeta.kpm.interest.*;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import fr.irisa.triskell.kermeta.kpm.interest.InterestEntry;
+import fr.irisa.triskell.kermeta.kpm.interest.InterestHost;
+import fr.irisa.triskell.kermeta.kpm.interest.InterestKey;
+import fr.irisa.triskell.kermeta.kpm.interest.InterestPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  * @see fr.irisa.triskell.kermeta.kpm.interest.InterestPackage
  * @generated
  */
-public class InterestSwitch {
+public class InterestSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -54,7 +57,7 @@ public class InterestSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	public Object doSwitch(EObject theEObject) {
+	public T doSwitch(EObject theEObject) {
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
@@ -65,16 +68,16 @@ public class InterestSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(EClass theEClass, EObject theEObject) {
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
 		else {
-			List eSuperTypes = theEClass.getESuperTypes();
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
 					defaultCase(theEObject) :
-					doSwitch((EClass)eSuperTypes.get(0), theEObject);
+					doSwitch(eSuperTypes.get(0), theEObject);
 		}
 	}
 
@@ -85,23 +88,23 @@ public class InterestSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(int classifierID, EObject theEObject) {
+	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case InterestPackage.INTEREST_KEY: {
 				InterestKey interestKey = (InterestKey)theEObject;
-				Object result = caseInterestKey(interestKey);
+				T result = caseInterestKey(interestKey);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case InterestPackage.INTEREST_ENTRY: {
 				InterestEntry interestEntry = (InterestEntry)theEObject;
-				Object result = caseInterestEntry(interestEntry);
+				T result = caseInterestEntry(interestEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case InterestPackage.INTEREST_HOST: {
 				InterestHost interestHost = (InterestHost)theEObject;
-				Object result = caseInterestHost(interestHost);
+				T result = caseInterestHost(interestHost);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -110,62 +113,62 @@ public class InterestSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Key</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Key</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Key</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Key</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseInterestKey(InterestKey object) {
+	public T caseInterestKey(InterestKey object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Entry</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Entry</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Entry</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Entry</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseInterestEntry(InterestEntry object) {
+	public T caseInterestEntry(InterestEntry object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Host</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Host</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Host</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Host</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseInterestHost(InterestHost object) {
+	public T caseInterestHost(InterestHost object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	public Object defaultCase(EObject object) {
+	public T defaultCase(EObject object) {
 		return null;
 	}
 

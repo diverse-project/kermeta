@@ -2,23 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.3 2007-07-23 13:58:05 ftanguy Exp $
+ * $Id: IoPackageImpl.java,v 1.4 2007-07-24 13:46:46 ftanguy Exp $
  */
 package org.kermeta.io.impl;
-
-import antlr.ANTLRException;
-import antlr.RecognitionException;
-
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
-
-import fr.irisa.triskell.kermeta.KmPackage;
-
-import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-
-import fr.irisa.triskell.traceability.helper.Tracer;
-
-
-
 
 import java.util.List;
 import java.util.Set;
@@ -29,7 +15,6 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.IBuildingState;
@@ -43,8 +28,15 @@ import org.kermeta.io.PackageEntry;
 import org.kermeta.io.ParseErrorMessage;
 import org.kermeta.io.ParsingError;
 import org.kermeta.io.WarningMessage;
-
 import org.kermeta.io.plugin.IOPlugin;
+
+import antlr.ANTLRException;
+
+import com.ibm.eclipse.ldt.core.ast.ASTNode;
+
+import fr.irisa.triskell.kermeta.KmPackage;
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
+import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
  * <!-- begin-user-doc -->

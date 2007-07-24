@@ -1,4 +1,4 @@
-/*$Id: ToggleNatureAction.java,v 1.3 2007-07-23 14:01:23 ftanguy Exp $
+/*$Id: ToggleNatureAction.java,v 1.4 2007-07-24 13:46:59 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -25,7 +25,6 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
 import fr.irisa.triskell.eclipse.resources.NatureHelper;
-import fr.irisa.triskell.kermeta.kpm.builder.KPMResourceVisitor;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.resources.KermetaNature;

@@ -5,8 +5,8 @@ import java.util.Hashtable;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.URI;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
@@ -34,6 +34,13 @@ import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 public class KermetaUnitHelper {
 	
 	
+	private KermetaUnitStorer storer = null;
+	
+	public KermetaUnitHelper(KermetaUnitStorer storer) {
+		this.storer = storer;
+	}
+	
+	
 	//////////////////////////////////////
 	//////////////////////////////////////
 	//		Typechecking Mechanism		//
@@ -53,14 +60,14 @@ public class KermetaUnitHelper {
 	 * @author paco
 	 *
 	 */
-	private class TypecheckerThread extends Thread {
+	private class LoadingThread extends Thread {
 		public KermetaUnit unit;
 		
 		protected String absoluteFileName;
 		protected String content;
 		public IProgressMonitor monitor;
 		
-		public TypecheckerThread(String absoluteFileName, String content, IProgressMonitor monitor) {
+		public LoadingThread(String absoluteFileName, String content, IProgressMonitor monitor) {
 			this.absoluteFileName = absoluteFileName;
 			this.content = content;
 			this.monitor = monitor;
@@ -68,7 +75,7 @@ public class KermetaUnitHelper {
 		
 		public void run() {
 			try {
-				unit = __typecheckKMTFile(absoluteFileName, content, monitor);
+				unit = __loadFile(absoluteFileName, content, monitor);
 			} catch (KermetaIOFileNotFoundException e) {
 				e.printStackTrace();
 			}		
@@ -78,13 +85,13 @@ public class KermetaUnitHelper {
 	/**
 	 * As the class uses synchronization, it needs to be done via an instance.
 	 */
-	static private KermetaUnitHelper instance = new KermetaUnitHelper();
+//	static private KermetaUnitHelper instance = new KermetaUnitHelper();
 
 	
 	/**
 	 * A table to be able to check if a typechecking process is running.
 	 */
-	private Hashtable <String, TypecheckerThread> typecheckingThreads = new Hashtable <String, TypecheckerThread> ();
+	private Hashtable <String, LoadingThread> loadingThreads = new Hashtable <String, LoadingThread> ();
 	
 	/**
 	 * 
@@ -92,7 +99,7 @@ public class KermetaUnitHelper {
 	 * @param content
 	 * @return
 	 */
-	private KermetaUnit internTypecheckFile(String absoluteFileName, String content, IProgressMonitor monitor) {
+	private KermetaUnit internLoadFile(String absoluteFileName, String content, IProgressMonitor monitor) {
 		
 		//if ( Runtime.getRuntime().freeMemory() < 1000000 ) {
 		//	KermetaUnit.internalLog.info("Unloading all Kermeta Unit but the framework.km.");
@@ -101,12 +108,12 @@ public class KermetaUnitHelper {
 		
 		KermetaUnit result = null;
 		try {
-			TypecheckerThread thread;
-			synchronized (typecheckingThreads) {
-				thread = typecheckingThreads.get(absoluteFileName);
+			LoadingThread thread;
+			synchronized (loadingThreads) {
+				thread = loadingThreads.get(absoluteFileName);
 				if ( thread == null ) {
-					thread = new TypecheckerThread(absoluteFileName, content, monitor);
-					typecheckingThreads.put(absoluteFileName, thread);
+					thread = new LoadingThread(absoluteFileName, content, monitor);
+					loadingThreads.put(absoluteFileName, thread);
 				}
 			}
 			synchronized (thread) {
@@ -123,8 +130,8 @@ public class KermetaUnitHelper {
 				e.printStackTrace();
 			}
 		} finally {
-			synchronized(typecheckingThreads) {
-				typecheckingThreads.remove(absoluteFileName);
+			synchronized(loadingThreads) {
+				loadingThreads.remove(absoluteFileName);
 			}
 		}
 		return result;
@@ -138,73 +145,53 @@ public class KermetaUnitHelper {
 	 * @return
 	 * @throws KermetaIOFileNotFoundException 
 	 */
-	static private KermetaUnit __typecheckKMTFile (String absoluteFileName, String content, IProgressMonitor monitor) throws KermetaIOFileNotFoundException {
-		
-		//URI fileURI = URI.createFileURI(absoluteFileName);
+	private KermetaUnit __loadFile (String absoluteFileName, String content, IProgressMonitor monitor) throws KermetaIOFileNotFoundException {
 		KermetaUnit unit = null;
 		try {
-			unit = IOPlugin.getDefault().loadKermetaUnit( absoluteFileName, content );
-		
-			if ( unit == null )
-				return null;
-			
-			if ( ! unit.isErrored() ) {
-				KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
-				typechecker.checkUnit();
-			}
-			
-			if ( ! unit.isErrored() ) {
-				KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( unit );
-				constraintchecker.checkUnit();
-			}
-		
+			unit = storer.get(absoluteFileName);
+			storer.load(absoluteFileName, content);
 		} catch (URIMalformedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		System.out.println("***************************** End of typechecking " + absoluteFileName + "*********************");	
-		
-		//garbageCollect();
 		return unit;
 	}
 
-	static public KermetaUnit typecheckFile(IFile file) {
-		return typecheckFile(file, null, null);
+	public KermetaUnit loadFile(IFile file) {
+		return loadFile(file, null, null);
 	}
 	
-	static public KermetaUnit typecheckFile(IFile file, String content) {
-		return typecheckFile(file, content, null);
+	public KermetaUnit loadFile(IFile file, String content) {
+		return loadFile(file, content, null);
 	}
 	
-	static public KermetaUnit typecheckFile(IFile file, String content, IProgressMonitor monitor) {
+	public KermetaUnit loadFile(IFile file, String content, IProgressMonitor monitor) {
 		if ( file.getLocation() == null )
 			return null;
 		if ( monitor == null )
 			monitor = new NullProgressMonitor();
-		return typecheckFile("platform:/resource" + file.getFullPath().toString(), content, monitor);
+		return loadFile("platform:/resource" + file.getFullPath().toString(), content, monitor);
 	}
 	
-	static public KermetaUnit typecheckFile(String absoluteFileName, String content) {
-		return instance.internTypecheckFile(absoluteFileName, content, null);
+	public KermetaUnit loadFile(String absoluteFileName, String content) {
+		return internLoadFile(absoluteFileName, content, null);
 		//return __typecheckKMTFile(absoluteFileName, content);
 	}
 
-	static public KermetaUnit typecheckFile(String absoluteFileName, String content, IProgressMonitor monitor) {
+	public KermetaUnit loadFile(String absoluteFileName, String content, IProgressMonitor monitor) {
 		if ( monitor == null )
 			monitor = new NullProgressMonitor();
-		return instance.internTypecheckFile(absoluteFileName, content, monitor);
+		return internLoadFile(absoluteFileName, content, monitor);
 		//return __typecheckKMTFile(absoluteFileName, content);
 	}
 	
-	static public void abortTypechecking(String absoluteFileName) {
-		TypecheckerThread thread = instance.typecheckingThreads.get(absoluteFileName);
+	public void abortLoading(String absoluteFileName) {
+		LoadingThread thread = loadingThreads.get(absoluteFileName);
 		if ( thread != null )
-			instance.typecheckingThreads.remove(absoluteFileName);
+			loadingThreads.remove(absoluteFileName);
 	}
 	
-	static public void abortTypechecking(IFile file) {
-		abortTypechecking(file.getLocation().toString());
+	public void abortLoading(IFile file) {
+		abortLoading(file.getLocation().toString());
 	}
 	//////////////////////////////////////////////
 	//////////////////////////////////////////////

@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpointAction.java,v 1.10 2007-07-20 15:09:14 ftanguy Exp $
+/* $Id: KermetaBreakpointAction.java,v 1.11 2007-07-24 13:47:19 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaBreakpointAction.java
  * License   : EPL
@@ -9,8 +9,6 @@
  */
 package fr.irisa.triskell.kermeta.runner.actions;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -33,8 +31,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IBreakpointManager;
 import org.eclipse.debug.core.model.IBreakpoint;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.text.BadLocationException;
@@ -52,14 +48,10 @@ import org.eclipse.ui.texteditor.IUpdate;
 import org.kermeta.io.KermetaUnit;
 import org.osgi.framework.Bundle;
 
-import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaBreakpoint;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugModelPresentation;
-import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
-import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 
 /**
  * Action that is executed when user added a breakpoint

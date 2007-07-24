@@ -1,4 +1,4 @@
-/* $Id: KermetaASTHelper.java,v 1.1 2007-07-23 09:16:19 ftanguy Exp $
+/* $Id: KermetaASTHelper.java,v 1.2 2007-07-24 13:46:22 ftanguy Exp $
  * Project   : Kermeta 
  * File      : KermetaASTHelper.java
  * License   : EPL
@@ -12,7 +12,14 @@ package fr.irisa.triskell.kermeta.migrationv032_v040.parser;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.AnnotableClassMemberDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Annotation;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Annotations;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ClassDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Operation;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.OperationExpressionBody;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Tag;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.TopLevelDecl;
 
 
 /**

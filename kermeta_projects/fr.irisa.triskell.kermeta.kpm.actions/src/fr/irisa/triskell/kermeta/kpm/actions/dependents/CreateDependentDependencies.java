@@ -1,4 +1,4 @@
-/*$Id: CreateDependentDependencies.java,v 1.9 2007-07-20 15:09:26 ftanguy Exp $
+/*$Id: CreateDependentDependencies.java,v 1.10 2007-07-24 13:46:35 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	CreateDependentDependencies.java
 * License : EPL
@@ -19,13 +19,9 @@ import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
-import fr.irisa.triskell.kermeta.kpm.In;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Out;
-import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.helpers.RuleHelper;
-import fr.irisa.triskell.kermeta.kpm.helpers.InOutHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 
 public class CreateDependentDependencies implements IAction {
@@ -70,7 +66,7 @@ public class CreateDependentDependencies implements IAction {
 			 */
 			for ( KermetaUnit importedKermetaUnit : (List<KermetaUnit>) kermetaUnit.getImportedKermetaUnits() ) {
 				
-				if ( ! importedKermetaUnit.getUri().equals(IOPlugin.FRAMEWORK_KM_URI) ) {
+				if ( ! importedKermetaUnit.isFramework() ) {
 		
 					IFile importedFile = ResourceHelper.getIFile(importedKermetaUnit.getUri());
 						// the uri may be an incorrect path, ignore it (the typecheckec will do its job to report the error

@@ -2,35 +2,20 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.2 2007-07-20 15:08:06 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.3 2007-07-24 13:46:46 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.Collection;
-import org.eclipse.emf.common.notify.Notification;
 import java.util.Iterator;
 
-
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xml.type.internal.DataValue.URI.MalformedURIException;
@@ -41,8 +26,6 @@ import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOException;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KMLoader;
 import fr.irisa.triskell.kermeta.loader.ecore.EcoreBuildingState;

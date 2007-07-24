@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.13 2007-07-20 15:08:04 ftanguy Exp $
+/* $Id: TypeConformanceChecker.java,v 1.14 2007-07-24 13:46:45 ftanguy Exp $
 * Project : Kermeta (io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -14,11 +14,8 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
-
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;

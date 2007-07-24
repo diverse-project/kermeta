@@ -1,4 +1,4 @@
-/*$Id: WorkspaceChangeListener.java,v 1.4 2007-06-26 12:29:04 ftanguy Exp $
+/*$Id: WorkspaceChangeListener.java,v 1.5 2007-07-24 13:47:12 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -14,13 +14,7 @@ import java.util.ArrayList;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
-
-import fr.irisa.triskell.kermeta.extension.Interest;
-import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 
 public class WorkspaceChangeListener implements IResourceChangeListener {
 

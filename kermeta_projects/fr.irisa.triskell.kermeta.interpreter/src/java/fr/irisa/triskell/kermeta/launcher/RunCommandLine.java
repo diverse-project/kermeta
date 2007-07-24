@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.14 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: RunCommandLine.java,v 1.15 2007-07-24 13:47:37 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : EPL
@@ -20,6 +20,7 @@ import java.util.Vector;
 import junit.framework.TestResult;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_C;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_H;
@@ -29,14 +30,12 @@ import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_O;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_P;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_T;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_U;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.utils.argumentsreader.CheckOption;
 import fr.irisa.triskell.utils.argumentsreader.NoOption;
 import fr.irisa.triskell.utils.argumentsreader.Option;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 /**
  * Start a Kermeta program from the command line

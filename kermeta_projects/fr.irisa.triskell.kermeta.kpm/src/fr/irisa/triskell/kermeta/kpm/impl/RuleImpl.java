@@ -2,9 +2,31 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleImpl.java,v 1.5 2007-06-26 12:29:04 ftanguy Exp $
+ * $Id: RuleImpl.java,v 1.6 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.In;
@@ -14,35 +36,6 @@ import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.RuleType;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
-import org.eclipse.core.runtime.jobs.Job;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -70,7 +63,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * @generated
 	 * @ordered
 	 */
-	protected In in = null;
+	protected In in;
 
 	/**
 	 * The cached value of the '{@link #getEvent() <em>Event</em>}' reference.
@@ -80,7 +73,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * @generated
 	 * @ordered
 	 */
-	protected Event event = null;
+	protected Event event;
 
 	/**
 	 * The cached value of the '{@link #getOuts() <em>Outs</em>}' containment reference list.
@@ -90,7 +83,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList outs = null;
+	protected EList<Out> outs;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -120,7 +113,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * @generated
 	 * @ordered
 	 */
-	protected RuleType type = null;
+	protected RuleType type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,6 +129,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.RULE;
 	}
@@ -226,9 +220,9 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getOuts() {
+	public EList<Out> getOuts() {
 		if (outs == null) {
-			outs = new EObjectContainmentWithInverseEList(Out.class, this, KpmPackage.RULE__OUTS, KpmPackage.OUT__RULE);
+			outs = new EObjectContainmentWithInverseEList<Out>(Out.class, this, KpmPackage.RULE__OUTS, KpmPackage.OUT__RULE);
 		}
 		return outs;
 	}
@@ -302,7 +296,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * 
 	 * @generated NOT
 	 */
-	public void processAsSynchrone(Unit unit, Map args, IProgressMonitor monitor) {
+	public void processAsSynchrone(Unit unit, Map<String, Object> args, IProgressMonitor monitor) {
 
 		Iterator<Out> iterator = getOuts().iterator();
 		while ( iterator.hasNext() ) {
@@ -344,7 +338,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * 
 	 * @generated NOT
 	 */
-	public void processAsAsynchrone(Unit unit, Map args,
+	public void processAsAsynchrone(Unit unit, Map<String, Object> args,
 			IProgressMonitor monitor) {
 		Job job;
 		synchronized (jobs) {
@@ -353,7 +347,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 		if (job != null)
 			job.cancel();
 		final Unit finalUnit = unit;
-		final Map finalArgs = args;
+		final Map<String, Object> finalArgs = args;
 		job = new Job("Processing Rule " + getName()) {
 
 			public IStatus run(IProgressMonitor monitor) {
@@ -404,7 +398,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * 
 	 * @generated NOT
 	 */
-	public void process(final Unit unit, boolean synchrone, final Map args, final IProgressMonitor monitor) {
+	public void process(final Unit unit, boolean synchrone, final Map<String, Object> args, final IProgressMonitor monitor) {
 	
 		try {
 		
@@ -570,6 +564,8 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KpmPackage.RULE__IN:
@@ -577,7 +573,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 					msgs = ((InternalEObject)in).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KpmPackage.RULE__IN, null, msgs);
 				return basicSetIn((In)otherEnd, msgs);
 			case KpmPackage.RULE__OUTS:
-				return ((InternalEList)getOuts()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOuts()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -587,12 +583,13 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KpmPackage.RULE__IN:
 				return basicSetIn(null, msgs);
 			case KpmPackage.RULE__OUTS:
-				return ((InternalEList)getOuts()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getOuts()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -602,6 +599,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.RULE__IN:
@@ -625,6 +623,8 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.RULE__IN:
@@ -635,7 +635,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 				return;
 			case KpmPackage.RULE__OUTS:
 				getOuts().clear();
-				getOuts().addAll((Collection)newValue);
+				getOuts().addAll((Collection<? extends Out>)newValue);
 				return;
 			case KpmPackage.RULE__NAME:
 				setName((String)newValue);
@@ -652,6 +652,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.RULE__IN:
@@ -678,6 +679,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KpmPackage.RULE__IN:
@@ -699,6 +701,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

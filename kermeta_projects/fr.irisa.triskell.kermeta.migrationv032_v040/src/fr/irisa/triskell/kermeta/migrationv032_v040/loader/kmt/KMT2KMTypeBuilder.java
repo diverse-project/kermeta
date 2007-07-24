@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.4 2007-07-23 09:16:19 ftanguy Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.5 2007-07-24 13:46:22 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -15,12 +15,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.loader.AbstractKermetaUnitLoader;
 import org.kermeta.loader.LoadingContext;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;

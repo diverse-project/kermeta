@@ -1,4 +1,4 @@
-/* $Id: RunTestCase.java,v 1.13 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: RunTestCase.java,v 1.14 2007-07-24 13:47:37 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -21,7 +21,6 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 
-import fr.irisa.triskell.kermeta.interpreter.ConstraintInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;

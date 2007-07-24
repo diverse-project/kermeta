@@ -1,12 +1,10 @@
-/* $Id: Integer.java,v 1.9 2007-03-01 13:25:42 ffleurey Exp $ 
+/* $Id: Integer.java,v 1.10 2007-07-24 13:47:38 ftanguy Exp $ 
  * Implementation of Kermeta base type Integer 
  */
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
 
-import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 

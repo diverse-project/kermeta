@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.28 2007-07-20 15:09:14 ftanguy Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.29 2007-07-24 13:47:19 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -59,7 +59,6 @@ import org.kermeta.io.KermetaUnit;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.KermetaMessages;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;

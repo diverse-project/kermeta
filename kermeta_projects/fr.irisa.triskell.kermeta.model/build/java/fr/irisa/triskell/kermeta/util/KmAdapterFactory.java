@@ -6,14 +6,13 @@
  */
 package fr.irisa.triskell.kermeta.util;
 
-import fr.irisa.triskell.kermeta.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import fr.irisa.triskell.kermeta.DummyClass;
+import fr.irisa.triskell.kermeta.KmPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -2,29 +2,24 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.3 2007-07-23 13:58:05 ftanguy Exp $
+ * $Id: KermetaUnit.java,v 1.4 2007-07-24 13:46:47 ftanguy Exp $
  */
 package org.kermeta.io;
-
-import antlr.ANTLRException;
-import antlr.RecognitionException;
-
-import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
-
-import fr.irisa.triskell.kermeta.language.structure.Require;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Using;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-
-import fr.irisa.triskell.traceability.helper.Tracer;
 
 import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
+
+import antlr.ANTLRException;
+import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
+import fr.irisa.triskell.kermeta.language.structure.Require;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Using;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
  * <!-- begin-user-doc -->

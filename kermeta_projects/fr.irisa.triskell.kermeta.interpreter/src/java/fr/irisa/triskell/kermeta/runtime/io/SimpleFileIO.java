@@ -1,12 +1,17 @@
 package fr.irisa.triskell.kermeta.runtime.io;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import org.eclipse.core.resources.IFile;
+
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
-import java.io.*;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 
 
 

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.2 2007-07-23 09:16:19 ftanguy Exp $
+/* $Id: KMT2KMPass4.java,v 1.3 2007-07-24 13:46:22 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -28,9 +28,11 @@ import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ClassDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Operation;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Property;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;

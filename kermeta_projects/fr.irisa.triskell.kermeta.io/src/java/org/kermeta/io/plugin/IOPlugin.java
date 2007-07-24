@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.2 2007-07-20 15:08:20 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.3 2007-07-24 13:46:50 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -13,41 +13,25 @@
 package org.kermeta.io.plugin;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.Plugin;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.impl.EcorePackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-
-import org.apache.log4j.Logger;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitStorer;
-import org.kermeta.io.printer.KMTOutputBuilder;
 import org.osgi.framework.BundleContext;
 
-import fr.irisa.triskell.kermeta.KmPackage;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.impl.KmPackageImpl;
-import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
-import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
-import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
@@ -102,9 +86,10 @@ public class IOPlugin extends AbstractUIPlugin {
 	}
 	
 	private void initialize() {
-
+		
 		if ( ! INITIALIZED ) {
 			
+			kermetaUnitHelper = new org.kermeta.io.util2.KermetaUnitHelper( storer );
 			KmPackageImpl.init();
 			
 			if ( LOCAL_USE ) {
@@ -210,9 +195,9 @@ public class IOPlugin extends AbstractUIPlugin {
 			Runtime.getRuntime().gc();
 		}
 		
-
-		KermetaUnit kermetaUnit = getKermetaUnit( uri );
-		storer.load( uri, content );
+		KermetaUnit kermetaUnit = kermetaUnitHelper.loadFile(uri, content);
+		//KermetaUnit kermetaUnit = getKermetaUnit( uri );
+		//storer.load( uri, content );
 		return kermetaUnit;
 
 	}
@@ -256,6 +241,8 @@ public class IOPlugin extends AbstractUIPlugin {
 		s.addAll( storer.getKermetaUnits() );
 		return s;
 	}
+	
+	private org.kermeta.io.util2.KermetaUnitHelper kermetaUnitHelper;
 	
 }
 

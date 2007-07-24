@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadingContext.java,v 1.2 2007-07-20 15:08:18 ftanguy Exp $
+/*$Id: LoadingContext.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
 * Project : io
 * File : 	KMTLoadingContext.java
 * License : EPL
@@ -15,12 +15,10 @@ package org.kermeta.loader;
 import java.util.Hashtable;
 import java.util.Stack;
 
-
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;

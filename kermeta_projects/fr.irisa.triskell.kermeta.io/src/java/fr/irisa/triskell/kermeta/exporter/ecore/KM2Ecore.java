@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.36 2007-07-20 15:08:12 ftanguy Exp $
+/* $Id: KM2Ecore.java,v 1.37 2007-07-24 13:46:51 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.io.KermetaUnit;
 
-import fr.irisa.triskell.kermeta.ast.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;

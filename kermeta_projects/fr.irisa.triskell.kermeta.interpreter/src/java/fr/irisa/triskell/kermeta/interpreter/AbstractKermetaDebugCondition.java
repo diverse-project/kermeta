@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaDebugCondition.java,v 1.2 2005-12-01 18:41:11 zdrey Exp $
+/* $Id: AbstractKermetaDebugCondition.java,v 1.3 2007-07-24 13:47:38 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.interpreter (First iteration)
  * File      : IKermetaDebugConditionWrong.java
  * License   : EPL
@@ -12,8 +12,6 @@
 package fr.irisa.triskell.kermeta.interpreter;
 
 import org.eclipse.emf.ecore.EObject;
-
-import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 
 /** TODO : transform it in an AbstractClass */
 public abstract class AbstractKermetaDebugCondition {

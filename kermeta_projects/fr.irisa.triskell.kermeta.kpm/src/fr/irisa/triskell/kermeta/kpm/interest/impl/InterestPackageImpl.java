@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterestPackageImpl.java,v 1.1 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: InterestPackageImpl.java,v 1.2 2007-07-24 13:47:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.interest.impl;
 
@@ -285,6 +285,10 @@ public class InterestPackageImpl extends EPackageImpl implements InterestPackage
 		// Obtain other dependent packages
 		KpmPackage theKpmPackage = (KpmPackage)EPackage.Registry.INSTANCE.getEPackage(KpmPackage.eNS_URI);
 
+		// Create type parameters
+
+		// Set bounds for type parameters
+
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
@@ -299,29 +303,29 @@ public class InterestPackageImpl extends EPackageImpl implements InterestPackage
 		initEClass(interestHostEClass, InterestHost.class, "InterestHost", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInterestHost_Entries(), this.getInterestEntry(), null, "entries", null, 0, -1, InterestHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(interestHostEClass, null, "declareInterest");
-		addEParameter(op, this.getInterest(), "declaringObject", 0, 1);
-		addEParameter(op, theKpmPackage.getUnit(), "key", 0, 1);
+		EOperation op = addEOperation(interestHostEClass, null, "declareInterest", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getInterest(), "declaringObject", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKpmPackage.getUnit(), "key", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(interestHostEClass, null, "declareInterest");
-		addEParameter(op, this.getInterest(), "declaringObject", 0, 1);
-		addEParameter(op, theKpmPackage.getUnit(), "key", 0, 1);
-		addEParameter(op, ecorePackage.getEJavaObject(), "value", 0, 1);
+		op = addEOperation(interestHostEClass, null, "declareInterest", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getInterest(), "declaringObject", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKpmPackage.getUnit(), "key", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEJavaObject(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(interestHostEClass, this.getInterestEntry(), "findInterestEntry", 0, 1);
-		addEParameter(op, theKpmPackage.getUnit(), "key", 0, 1);
-		addEParameter(op, this.getInterest(), "declaringObject", 0, 1);
+		op = addEOperation(interestHostEClass, this.getInterestEntry(), "findInterestEntry", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKpmPackage.getUnit(), "key", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getInterest(), "declaringObject", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(interestHostEClass, null, "update");
-		addEParameter(op, theKpmPackage.getUnit(), "key", 0, 1);
-		addEParameter(op, ecorePackage.getEJavaObject(), "newValue", 0, 1);
+		op = addEOperation(interestHostEClass, null, "update", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKpmPackage.getUnit(), "key", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEJavaObject(), "newValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(interestHostEClass, null, "undeclareInterest");
-		addEParameter(op, this.getInterest(), "declaringObject", 0, 1);
-		addEParameter(op, theKpmPackage.getUnit(), "key", 0, 1);
+		op = addEOperation(interestHostEClass, null, "undeclareInterest", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getInterest(), "declaringObject", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKpmPackage.getUnit(), "key", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(interestHostEClass, ecorePackage.getEJavaObject(), "getValue", 0, 1);
-		addEParameter(op, theKpmPackage.getUnit(), "key", 0, 1);
+		op = addEOperation(interestHostEClass, ecorePackage.getEJavaObject(), "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKpmPackage.getUnit(), "key", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(interestEDataType, Interest.class, "Interest", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

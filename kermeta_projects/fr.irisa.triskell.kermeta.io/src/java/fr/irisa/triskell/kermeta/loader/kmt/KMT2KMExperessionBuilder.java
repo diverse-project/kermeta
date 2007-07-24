@@ -5,7 +5,6 @@
 package fr.irisa.triskell.kermeta.loader.kmt;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.loader.AbstractKermetaUnitLoader;
 import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.kermeta.ast.FAssignement;

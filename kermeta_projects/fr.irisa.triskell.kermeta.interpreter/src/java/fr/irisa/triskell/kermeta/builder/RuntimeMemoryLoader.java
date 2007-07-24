@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.23 2007-07-20 15:07:49 ftanguy Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.24 2007-07-24 13:47:38 ftanguy Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -12,7 +12,6 @@ package fr.irisa.triskell.kermeta.builder;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -25,9 +24,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.kermeta.io.KermetaUnit;
+
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Enumeration;
-import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;

@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.28 2007-07-20 15:08:10 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.29 2007-07-24 13:46:49 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -17,30 +17,13 @@
 
 package kermeta_io.typechecker_test;
 
-import java.io.File;
+import junit.framework.TestCase;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.plugin.IOPlugin;
 
-import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
-import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
-import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
-
-import junit.framework.TestCase;
 
 
 /**

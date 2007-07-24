@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreWizard.java,v 1.7 2007-07-20 15:09:18 ftanguy Exp $
+/* $Id: Kermeta2EcoreWizard.java,v 1.8 2007-07-24 13:46:39 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -13,23 +13,12 @@
  */
 package fr.irisa.triskell.kermeta.tools.wizards;
 
-import java.io.IOException;
-import java.util.List;
-
 import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.io.KermetaUnit;
 
-import fr.irisa.triskell.eclipse.console.messages.WarningMessage;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
-import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 
 /**
  * Pretty print of kmt files from a KermetaUnit.

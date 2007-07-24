@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass.java,v 1.2 2007-07-20 15:08:11 ftanguy Exp $
+/*$Id: Ecore2KMPass.java,v 1.3 2007-07-24 13:46:46 ftanguy Exp $
 * Project : io
 * File : 	Ecore2KMPass.java
 * License : EPL
@@ -35,7 +35,6 @@ import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;

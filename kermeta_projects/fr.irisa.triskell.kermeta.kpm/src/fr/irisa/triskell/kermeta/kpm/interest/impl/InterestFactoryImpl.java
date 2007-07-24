@@ -2,22 +2,23 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterestFactoryImpl.java,v 1.1 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: InterestFactoryImpl.java,v 1.2 2007-07-24 13:47:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.interest.impl;
-
-import fr.irisa.triskell.kermeta.extension.Interest;
-
-import fr.irisa.triskell.kermeta.kpm.interest.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import fr.irisa.triskell.kermeta.extension.Interest;
+import fr.irisa.triskell.kermeta.kpm.interest.InterestEntry;
+import fr.irisa.triskell.kermeta.kpm.interest.InterestFactory;
+import fr.irisa.triskell.kermeta.kpm.interest.InterestHost;
+import fr.irisa.triskell.kermeta.kpm.interest.InterestKey;
+import fr.irisa.triskell.kermeta.kpm.interest.InterestPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,6 +61,7 @@ public class InterestFactoryImpl extends EFactoryImpl implements InterestFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case InterestPackage.INTEREST_KEY: return createInterestKey();
@@ -75,6 +77,7 @@ public class InterestFactoryImpl extends EFactoryImpl implements InterestFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
 			case InterestPackage.INTEREST:
@@ -89,6 +92,7 @@ public class InterestFactoryImpl extends EFactoryImpl implements InterestFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case InterestPackage.INTEREST:
@@ -161,6 +165,7 @@ public class InterestFactoryImpl extends EFactoryImpl implements InterestFactory
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static InterestPackage getPackage() {
 		return InterestPackage.eINSTANCE;
 	}

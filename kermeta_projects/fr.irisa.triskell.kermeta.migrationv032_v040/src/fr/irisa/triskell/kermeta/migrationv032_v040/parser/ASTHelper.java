@@ -1,6 +1,6 @@
 
 
-/*$Id: ASTHelper.java,v 1.1 2007-07-23 09:16:19 ftanguy Exp $
+/*$Id: ASTHelper.java,v 1.2 2007-07-24 13:46:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io2
 * File : 	ASTHelper.java
 * License : EPL
@@ -12,9 +12,6 @@
 
 package fr.irisa.triskell.kermeta.migrationv032_v040.parser;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -23,10 +20,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.CompUnit;
-
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.CompUnit;
 
 
 public class ASTHelper {

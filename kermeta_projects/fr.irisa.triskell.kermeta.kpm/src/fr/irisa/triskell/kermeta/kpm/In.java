@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: In.java,v 1.2 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: In.java,v 1.3 2007-07-24 13:47:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -37,7 +37,7 @@ public interface In extends AbstractEntity {
 	 * @see #setRule(Rule)
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getIn_Rule()
 	 * @see fr.irisa.triskell.kermeta.kpm.Rule#getIn
-	 * @model opposite="in" required="true"
+	 * @model opposite="in" required="true" transient="false"
 	 * @generated
 	 */
 	Rule getRule();

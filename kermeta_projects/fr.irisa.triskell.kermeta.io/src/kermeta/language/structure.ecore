@@ -3,9 +3,9 @@
   <ecore:EAnnotation source="CompilationUnit">
     <details key="require" value="../Standard.kmt|behavior.kmt|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="language" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#//language" nsPrefix="language">
-      <eSubpackages name="structure" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#//language/structure" nsPrefix="structure">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="language" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#//language" nsPrefix="language">
+      <eSubpackages name="structure" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#//language/structure" nsPrefix="structure">
         <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
         <eClassifiers xsi:type="ecore:EClass" name="Object">
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Object"/>
@@ -180,6 +180,7 @@
           <eOperations name="containingResource">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getContainingResource(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xA;  * Returns the Resource currently containing (directly or indirectly) the object &#xA;  * or void if the object belongs to ne resource&#xA;  */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/containingResource"/>
             </eAnnotations>
@@ -197,14 +198,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitParameterizedType(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/ParameterizedType/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -212,10 +208,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/ParameterizedType/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -232,14 +225,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitModelType(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/ModelType/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -247,10 +235,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/ModelType/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="new">
@@ -322,14 +307,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitClass(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/Class/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -337,10 +317,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/Class/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -353,14 +330,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitMultiplicityElement(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/MultiplicityElement/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -368,10 +340,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/MultiplicityElement/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -385,14 +354,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitConstraint(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/Constraint/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -400,10 +364,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/Constraint/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="/1/language/structure/ConstraintLanguage">
@@ -438,14 +399,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitOperation(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/Operation/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -453,10 +409,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/Operation/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="body" containment="true">
@@ -472,14 +425,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitTag(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/Tag/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -487,10 +435,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/Tag/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -503,14 +448,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitProperty(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/Property/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -518,10 +458,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/Property/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="getterBody" containment="true">
@@ -548,14 +485,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitGenericTypeDefinition(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/GenericTypeDefinition/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -563,10 +495,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/GenericTypeDefinition/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -580,14 +509,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitClassDefinition(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/ClassDefinition/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -595,10 +519,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/ClassDefinition/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -612,14 +533,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitTypedElement(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/TypedElement/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -627,10 +543,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/TypedElement/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -653,14 +566,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitObjectTypeVariable(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/ObjectTypeVariable/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -668,10 +576,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/ObjectTypeVariable/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -687,14 +592,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitVirtualType(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/VirtualType/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -702,10 +602,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/VirtualType/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -722,14 +619,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitModelTypeVariable(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/ModelTypeVariable/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -737,10 +629,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/ModelTypeVariable/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -752,14 +641,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitModel(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/Model/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -767,10 +651,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/Model/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="filter" ordered="false" upperBound="-1">
@@ -846,14 +727,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitProductType(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/ProductType/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -861,10 +737,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/ProductType/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -881,14 +754,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitFunctionType(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/FunctionType/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -896,10 +764,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/FunctionType/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -937,14 +802,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitType(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/Type/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -952,10 +812,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/Type/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -969,14 +826,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitTypeVariableBinding(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/TypeVariableBinding/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -984,10 +836,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/TypeVariableBinding/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -1004,14 +853,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitPrimitiveType(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/PrimitiveType/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1019,10 +863,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/PrimitiveType/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="clone" eType="/1/language/structure/Object">
@@ -1042,14 +883,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitNamedElement(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/NamedElement/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1057,15 +893,14 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/NamedElement/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionContainer">
-          <eAnnotations source="kermeta"/>
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xA;class SelfType inherits Type, kermeta::reflection::SelfType, KMStructureVisitable&#xA;{&#xA; method acceptKMStructureVisitor&lt;ContextType, ResultType>(visitor : KMStructureVisitor&lt;ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is&#xA;  do&#xA;   result := visitor.visitSelfType(self, context)&#xA;  end&#xA;} */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/NamedElement"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/TypeDefinitionContainer"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
@@ -1074,14 +909,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitTypeDefinitionContainer(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/TypeDefinitionContainer/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1089,10 +919,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/TypeDefinitionContainer/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -1105,14 +932,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitPackage(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/Package/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1120,10 +942,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/Package/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -1135,14 +954,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitModelingUnit(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/ModelingUnit/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1150,10 +964,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/ModelingUnit/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -1165,14 +976,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitRequire(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/Require/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1180,10 +986,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/Require/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -1195,14 +998,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitUsing(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/Using/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1210,10 +1008,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/Using/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -1226,14 +1021,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitTypeDefinition(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/TypeDefinition/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1241,10 +1031,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/TypeDefinition/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -1260,14 +1047,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitVoidType(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/VoidType/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1275,10 +1057,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/VoidType/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -1295,14 +1074,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitDataType(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/DataType/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1310,10 +1084,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/DataType/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="clone" eType="/1/language/structure/Object">
@@ -1336,14 +1107,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitEnumeration(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/Enumeration/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1351,10 +1117,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/Enumeration/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="clone" eType="/1/language/structure/Object">
@@ -1374,14 +1137,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitEnumerationLiteral(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/EnumerationLiteral/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1389,10 +1147,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/EnumerationLiteral/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -1405,14 +1160,9 @@
               <details key="body" value="do&#xA;&#x9;result := visitor.visitParameter(self, context)&#xA;end"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/Parameter/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1420,549 +1170,353 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/Parameter/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Integer">
-          <eAnnotations source="kermeta"/>
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/** Alias to kermeta::standard::UnlimitedNatural */"/>
+          </eAnnotations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="KMStructureVisitor" abstract="true" eSuperTypes="/1/language/structure/Object">
-          <eAnnotations source="kermeta"/>
-          <eAnnotations source="kermeta.typeParameters">
-            <details key="ContextType" value="ContextType"/>
-            <details key="ResultType" value="ResultType"/>
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/** Implementation of the Visitor pattern for the model elements contained in structure package */"/>
           </eAnnotations>
+          <eTypeParameters name="ContextType"/>
+          <eTypeParameters name="ResultType"/>
           <eOperations name="visitClass">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Class"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitMultiplicityElement">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/MultiplicityElement"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitOperation">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Operation"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitTag">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Tag"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitProperty">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Property"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitClassDefinition">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ClassDefinition"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitTypedElement">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/TypedElement"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitObjectTypeVariable">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ObjectTypeVariable"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitVirtualType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/VirtualType"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitModelTypeVariable">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ModelTypeVariable"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitModel">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Model"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitProductType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ProductType"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitFunctionType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/FunctionType"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Type"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitTypeVariableBinding">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/TypeVariableBinding"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitPrimitiveType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/PrimitiveType"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitNamedElement">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/NamedElement"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitPackage">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Package"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitTypeDefinition">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/TypeDefinition"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitVoidType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/VoidType"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitDataType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/DataType"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitEnumeration">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Enumeration"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitEnumerationLiteral">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/EnumerationLiteral"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitParameter">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Parameter"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitGenericTypeDefinition">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/GenericTypeDefinition"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitParameterizedType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ParameterizedType"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitModelType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ModelType"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitTypeDefinitionContainer">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/TypeDefinitionContainer"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitConstraint">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Constraint"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitModelingUnit">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ModelingUnit"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitRequire">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Require"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
           <eOperations name="visitUsing">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Using"/>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="KMStructureVisitable" abstract="true">
-          <eAnnotations source="kermeta"/>
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/** All the classes defined in this &lt;code>kermeta::language::structure&lt;/code> package &#xA; * inherit this class. Part of Visitor pattern implementation. */"/>
+          </eAnnotations>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta">
               <details key="isAbstract" value="true"/>
             </eAnnotations>
-            <eAnnotations source="kermeta.typeVariable">
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.typeParameters">
-              <details key="ContextType" value="ContextType"/>
-              <details key="ResultType" value="ResultType"/>
-            </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
             <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
               <eAnnotations source="kermeta.typeVariableBindings">
                 <details key="0" value="ContextType"/>
@@ -1970,10 +1524,7 @@
               </eAnnotations>
             </eParameters>
             <eParameters name="context">
-              <eAnnotations source="kermeta.typeVariable">
-                <details key="ContextType" value="ContextType"/>
-              </eAnnotations>
-              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
         </eClassifiers>
@@ -1981,52 +1532,45 @@
     </eSubpackages>
   </ecore:EPackage>
   <ecore:EAnnotation source="dependentResource">
-    <references href="../standard/collections.ecore#/0"/>
-    <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/java.ecore#/0"/>
-    <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="dynamic_expression.ecore#/0"/>
     <references href="dynamic_expression.ecore#/1"/>
-    <references href="dynamic_expression.ecore#/2"/>
-    <references href="../persistence/resource.ecore#/0"/>
-    <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
-    <references href="reflective_collections.ecore#/0"/>
-    <references href="reflective_collections.ecore#/1"/>
-    <references href="reflective_collections.ecore#/2"/>
-    <references href="../reflection/reflection.ecore#/0"/>
-    <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
-    <references href="../kunit/assert.ecore#/0"/>
-    <references href="../kunit/assert.ecore#/1"/>
     <references href="behavior.ecore#/0"/>
     <references href="behavior.ecore#/1"/>
     <references href="behavior.ecore#/2"/>
+    <references href="../persistence/resource.ecore#/0"/>
+    <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
+    <references href="../kunit/assert.ecore#/0"/>
+    <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
-    <references href="../standard/primitive_types.ecore#/0"/>
-    <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../io/file_io.ecore#/0"/>
-    <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
+    <references href="../standard/collections.ecore#/0"/>
+    <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/java.ecore#/0"/>
+    <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
     <references href="#/0"/>
     <references href="#/1"/>
-    <references href="../exceptions/exceptions.ecore#/0"/>
-    <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
+    <references href="../io/file_io.ecore#/0"/>
+    <references href="../io/file_io.ecore#/1"/>
+    <references href="reflective_collections.ecore#/0"/>
+    <references href="reflective_collections.ecore#/1"/>
+    <references href="reflective_collections.ecore#/2"/>
+    <references href="../standard/primitive_types.ecore#/0"/>
+    <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
+    <references href="../exceptions/exceptions.ecore#/0"/>
+    <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/0"/>
+    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

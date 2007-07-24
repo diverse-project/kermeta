@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.10 2007-07-20 15:08:15 ftanguy Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.11 2007-07-24 13:46:46 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -19,9 +19,6 @@ import java.util.Iterator;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.impl.KermetaUnitImpl;
 import org.kermeta.loader.LoadingContext;
-
-import antlr.RecognitionException;
-import antlr.TokenStreamException;
 
 import fr.irisa.triskell.kermeta.ast.FExpression;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;

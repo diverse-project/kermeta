@@ -1,4 +1,4 @@
-/* $Id: EncodingHelper.java,v 1.1 2007-06-08 08:18:14 cfaucher Exp $
+/* $Id: EncodingHelper.java,v 1.2 2007-07-24 13:47:31 ftanguy Exp $
  * Project: fr.irisa.triskell.kermeta.model
  * File: EncodingHelper.java
  * License: EPL
@@ -12,6 +12,9 @@ package fr.irisa.triskell.kermeta.util;
 
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.impl.EModelElementImpl;
 
 /**
  * Encoding helper used to encode the string representing a path in a xmi file

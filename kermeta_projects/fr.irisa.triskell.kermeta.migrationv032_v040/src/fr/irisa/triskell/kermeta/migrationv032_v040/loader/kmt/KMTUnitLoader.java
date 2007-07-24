@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.1 2007-07-23 09:16:19 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.2 2007-07-24 13:46:22 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -13,42 +13,23 @@
 package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.Stack;
 
-
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.AbstractKermetaUnitLoader;
-import org.kermeta.loader.LoadingContext;
-import org.kermeta.loader.kmt.fixer.TypeContainementFixer;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
-
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOException;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
-import fr.irisa.triskell.kermeta.language.behavior.Conditional;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.Require;
-import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KMLoader;
 import fr.irisa.triskell.kermeta.loader.java.JavaKermetaUnitLoader;
 import fr.irisa.triskell.kermeta.loader.km.KMUnitLoader;
-import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTBuildingState;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.CompUnit;
 import fr.irisa.triskell.kermeta.migrationv032_v040.parser.ASTHelper;

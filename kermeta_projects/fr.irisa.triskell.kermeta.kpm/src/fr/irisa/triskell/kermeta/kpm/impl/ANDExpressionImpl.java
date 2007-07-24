@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ANDExpressionImpl.java,v 1.1 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: ANDExpressionImpl.java,v 1.2 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -36,6 +36,7 @@ public class ANDExpressionImpl extends NestedExpressionImpl implements ANDExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.AND_EXPRESSION;
 	}

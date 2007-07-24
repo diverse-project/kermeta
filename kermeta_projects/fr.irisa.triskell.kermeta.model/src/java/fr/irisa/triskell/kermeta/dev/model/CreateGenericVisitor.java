@@ -1,4 +1,4 @@
-/* $Id: CreateGenericVisitor.java,v 1.6 2005-08-31 14:12:49 ffleurey Exp $
+/* $Id: CreateGenericVisitor.java,v 1.7 2007-07-24 13:47:31 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : GPL
@@ -17,20 +17,16 @@ package fr.irisa.triskell.kermeta.dev.model;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
-import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 
 
 /**
@@ -115,7 +111,7 @@ public class CreateGenericVisitor {
 			classTemplate = "/*\n";
 			classTemplate += " * This code has been generated to visit an ecore model\n";
 			classTemplate += " * Creation date: " + new java.util.Date().toString() + "\n" ;
-			classTemplate += " * Template Created on 7 févr. 2005\n";
+			classTemplate += " * Template Created on 7 fï¿½vr. 2005\n";
 			classTemplate += " * By Franck FLEUREY (ffleurey@irisa.fr)\n";
 			classTemplate += " */\n";
 			classTemplate += "package XpackageNameX;\n";

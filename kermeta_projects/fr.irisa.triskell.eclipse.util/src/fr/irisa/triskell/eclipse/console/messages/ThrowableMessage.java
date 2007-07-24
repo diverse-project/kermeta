@@ -1,6 +1,6 @@
 
 
-/*$Id: ThrowableMessage.java,v 1.2 2007-02-20 14:19:55 ftanguy Exp $
+/*$Id: ThrowableMessage.java,v 1.3 2007-07-24 13:46:31 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -16,8 +16,6 @@ import java.io.PrintWriter;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;
-
-import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
 
 public class ThrowableMessage extends ConsoleMessage {
 

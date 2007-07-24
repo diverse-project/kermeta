@@ -1,6 +1,6 @@
 
 
-/*$Id: AbstractKermetaUnitLoader.java,v 1.2 2007-07-20 15:08:18 ftanguy Exp $
+/*$Id: AbstractKermetaUnitLoader.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitLoader.java
 * License : EPL
@@ -24,13 +24,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitLoader;
-import org.kermeta.io.KermetaUnitStorer;
-import org.kermeta.io.plugin.IOPlugin;
 
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Enumeration;
-import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 

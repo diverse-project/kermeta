@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Unit.java,v 1.13 2007-05-28 12:16:19 ftanguy Exp $
+ * $Id: Unit.java,v 1.14 2007-07-24 13:47:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -76,10 +76,10 @@ public interface Unit extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Rules</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Rules()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Rule"
+	 * @model
 	 * @generated
 	 */
-	EList getRules();
+	EList<Rule> getRules();
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -170,10 +170,10 @@ public interface Unit extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dependencies</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Dependencies()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Dependency" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getDependencies();
+	EList<Dependency> getDependencies();
 
 	/**
 	 * Returns the value of the '<em><b>Dependents</b></em>' reference list.
@@ -186,10 +186,10 @@ public interface Unit extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dependents</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Dependents()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Dependency"
+	 * @model
 	 * @generated
 	 */
-	EList getDependents();
+	EList<Dependency> getDependents();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -205,7 +205,7 @@ public interface Unit extends EObject {
 	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
 	 * @generated
 	 */
-	void receiveEvent(String event, boolean synchrone, Map args, IProgressMonitor monitor);
+	void receiveEvent(String event, boolean synchrone, Map<String, Object> args, IProgressMonitor monitor);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -213,7 +213,7 @@ public interface Unit extends EObject {
 	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
 	 * @generated
 	 */
-	void receiveSynchroneEvent(String event, Map args, IProgressMonitor monitor);
+	void receiveSynchroneEvent(String event, Map<String, Object> args, IProgressMonitor monitor);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -221,7 +221,7 @@ public interface Unit extends EObject {
 	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
 	 * @generated
 	 */
-	void receiveAsynchroneEvent(String event, Map args, IProgressMonitor monitor);
+	void receiveAsynchroneEvent(String event, Map<String, Object> args, IProgressMonitor monitor);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -294,5 +294,13 @@ public interface Unit extends EObject {
 	 * @generated
 	 */
 	Rule findRule(String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean equals(Object value);
 
 } // Unit

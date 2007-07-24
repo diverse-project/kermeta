@@ -2,18 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterestAdapterFactory.java,v 1.1 2007-04-04 13:43:56 ftanguy Exp $
+ * $Id: InterestAdapterFactory.java,v 1.2 2007-07-24 13:47:11 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.interest.util;
 
-import fr.irisa.triskell.kermeta.kpm.interest.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import fr.irisa.triskell.kermeta.kpm.interest.InterestEntry;
+import fr.irisa.triskell.kermeta.kpm.interest.InterestHost;
+import fr.irisa.triskell.kermeta.kpm.interest.InterestKey;
+import fr.irisa.triskell.kermeta.kpm.interest.InterestPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -52,6 +53,7 @@ public class InterestAdapterFactory extends AdapterFactoryImpl {
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object object) {
 		if (object == modelPackage) {
 			return true;
@@ -68,18 +70,22 @@ public class InterestAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected InterestSwitch modelSwitch =
-		new InterestSwitch() {
-			public Object caseInterestKey(InterestKey object) {
+	protected InterestSwitch<Adapter> modelSwitch =
+		new InterestSwitch<Adapter>() {
+			@Override
+			public Adapter caseInterestKey(InterestKey object) {
 				return createInterestKeyAdapter();
 			}
-			public Object caseInterestEntry(InterestEntry object) {
+			@Override
+			public Adapter caseInterestEntry(InterestEntry object) {
 				return createInterestEntryAdapter();
 			}
-			public Object caseInterestHost(InterestHost object) {
+			@Override
+			public Adapter caseInterestHost(InterestHost object) {
 				return createInterestHostAdapter();
 			}
-			public Object defaultCase(EObject object) {
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -92,8 +98,9 @@ public class InterestAdapterFactory extends AdapterFactoryImpl {
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
+	@Override
 	public Adapter createAdapter(Notifier target) {
-		return (Adapter)modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 

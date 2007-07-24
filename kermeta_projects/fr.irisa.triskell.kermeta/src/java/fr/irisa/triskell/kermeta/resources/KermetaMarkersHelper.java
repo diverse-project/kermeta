@@ -1,4 +1,4 @@
-/*$Id: KermetaMarkersHelper.java,v 1.5 2007-07-20 15:09:18 ftanguy Exp $
+/*$Id: KermetaMarkersHelper.java,v 1.6 2007-07-24 13:46:39 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	KermetaMarkersHelper.java
 * License : EPL
@@ -19,11 +19,8 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.Message;
-import org.kermeta.io.ParseErrorMessage;
 import org.kermeta.io.ParsingError;
 import org.kermeta.io.WarningMessage;
-
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
@@ -87,6 +84,10 @@ public class KermetaMarkersHelper {
                 	ParsingError pe = (ParsingError)message;
                 	offset = pe.getOffset() -1;
                 	length = pe.getLength();
+                	if ( length == 0 ) {
+                		length = 1;
+                		offset--;
+                	}
                 }
                /* else if (message instanceof KMTUnitLoadError) {
                 	offset = ((KMTUnitLoadError)message).getAstNode().getRangeStart();
@@ -276,7 +277,7 @@ public class KermetaMarkersHelper {
     	IMarker foundMarker = null;
     	for (int index = 0; index < markers.length; index++ ) {
     		String currentMessage = ((String) markers[index].getAttribute("message")).replace("\n", "");
-    		if ( currentMessage.equals(message) )
+    		if ( currentMessage.equals(message.replace("\n", "")) )
     			foundMarker = markers[index];
     	}
     	return foundMarker;

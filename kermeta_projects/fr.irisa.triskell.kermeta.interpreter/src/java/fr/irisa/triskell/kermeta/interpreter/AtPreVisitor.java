@@ -1,4 +1,4 @@
-/* $Id: AtPreVisitor.java,v 1.8 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: AtPreVisitor.java,v 1.9 2007-07-24 13:47:38 ftanguy Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -10,7 +10,6 @@
  */
 package fr.irisa.triskell.kermeta.interpreter;
 
-import java.util.ArrayList;
 import java.util.Vector;
 
 import org.eclipse.emf.ecore.EObject;
@@ -20,7 +19,6 @@ import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.4 2007-07-23 09:16:19 ftanguy Exp $
+/* $Id: KMT2KMPass2.java,v 1.5 2007-07-24 13:46:22 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
@@ -30,7 +29,14 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ClassDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ClassMemberDecls;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.DataTypeDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.EnumDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ModelTypeDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.PackageDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.SubPackageDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.TypeVarDecl;
 import fr.irisa.triskell.kermeta.migrationv032_v040.parser.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TagHelper;

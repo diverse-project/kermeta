@@ -1,4 +1,4 @@
-/* $Id: KermetaRunTarget.java,v 1.19 2007-06-01 11:33:22 dvojtise Exp $
+/* $Id: KermetaRunTarget.java,v 1.20 2007-07-24 13:47:19 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
  * License: EPL
@@ -14,24 +14,11 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
-import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IThread;
-import org.eclipse.ui.console.IConsole;
-import org.eclipse.ui.console.IConsoleListener;
-import org.eclipse.ui.console.IOConsole;
 
-import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
-import fr.irisa.triskell.kermeta.runner.RunnerConstants;
-import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
 import fr.irisa.triskell.kermeta.runner.debug.process.KermetaProcess;
 import fr.irisa.triskell.kermeta.runner.debug.process.KermetaRunProcess;

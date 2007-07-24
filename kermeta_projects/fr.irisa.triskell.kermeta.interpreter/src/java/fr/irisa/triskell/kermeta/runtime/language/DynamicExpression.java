@@ -1,4 +1,4 @@
-/* $Id: DynamicExpression.java,v 1.8 2007-07-20 15:07:47 ftanguy Exp $
+/* $Id: DynamicExpression.java,v 1.9 2007-07-24 13:47:37 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpression.java
 * License : EPL
@@ -17,14 +17,13 @@ import org.kermeta.io.ErrorMessage;
 
 import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.basetypes.Map;
-import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Map;
+import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 
 /*
  * Implementation  of kermeta::language::DynamicExpression 

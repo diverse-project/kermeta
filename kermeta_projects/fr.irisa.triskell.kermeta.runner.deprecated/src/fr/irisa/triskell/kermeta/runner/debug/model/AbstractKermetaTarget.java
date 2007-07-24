@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.20 2007-06-01 11:33:22 dvojtise Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.21 2007-07-24 13:47:19 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -16,7 +16,6 @@ import org.eclipse.core.internal.runtime.InternalPlatform;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;

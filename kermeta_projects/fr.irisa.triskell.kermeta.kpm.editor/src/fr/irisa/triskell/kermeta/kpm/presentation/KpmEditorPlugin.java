@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmEditorPlugin.java,v 1.1 2007-04-11 07:21:10 ftanguy Exp $
+ * $Id: KpmEditorPlugin.java,v 1.2 2007-07-24 13:47:24 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.presentation;
 
@@ -43,8 +43,8 @@ public final class KpmEditorPlugin extends EMFPlugin {
 	 */
 	public KpmEditorPlugin() {
 		super
-		  (new ResourceLocator [] {
-		   });
+			(new ResourceLocator [] {
+			});
 	}
 
 	/**
@@ -54,6 +54,7 @@ public final class KpmEditorPlugin extends EMFPlugin {
 	 * @return the singleton instance.
 	 * @generated
 	 */
+	@Override
 	public ResourceLocator getPluginResourceLocator() {
 		return plugin;
 	}
@@ -84,7 +85,7 @@ public final class KpmEditorPlugin extends EMFPlugin {
 		 */
 		public Implementation() {
 			super();
-
+	
 			// Remember the static instance.
 			//
 			plugin = this;

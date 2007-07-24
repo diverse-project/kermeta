@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.32 2007-07-20 15:08:19 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.33 2007-07-24 13:46:52 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -15,29 +15,18 @@
 
 package kermeta_io.test;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KMTOutputBuilder;
 import org.kermeta.io.util2.UserDirURI;
 
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
-import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
-import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 
 
 /**

@@ -1,4 +1,4 @@
-/*$Id: WorkspaceDeltaVisitor.java,v 1.10 2007-07-23 14:00:05 ftanguy Exp $
+/*$Id: WorkspaceDeltaVisitor.java,v 1.11 2007-07-24 13:47:12 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -26,7 +26,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.NatureHelper;
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;

@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugModelPresentation.java,v 1.10 2006-09-19 14:38:55 zdrey Exp $
+/* $Id: KermetaDebugModelPresentation.java,v 1.11 2007-07-24 13:47:19 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugModelPresentation.java
  * License   : EPL
@@ -25,10 +25,7 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorInput;
 
-import fr.irisa.triskell.kermeta.runner.RunnerConstants;
-import fr.irisa.triskell.kermeta.runner.RunnerIcons;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
-import fr.irisa.triskell.kermeta.runner.launching.KermetaSourceLocator;
 
 /**
  * 

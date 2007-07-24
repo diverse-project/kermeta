@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.2 2007-07-20 15:08:17 ftanguy Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -13,9 +13,6 @@
  */
 package org.kermeta.io.printer;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 

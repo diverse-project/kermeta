@@ -2,31 +2,23 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.5 2007-07-20 15:09:01 ftanguy Exp $
+ * $Id: PackageImpl.java,v 1.6 2007-07-24 13:47:32 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
-
-import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
 /**
  * <!-- begin-user-doc -->

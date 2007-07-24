@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMT.java,v 1.2 2007-07-20 15:09:26 ftanguy Exp $
+/*$Id: Ecore2KMT.java,v 1.3 2007-07-24 13:46:35 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	Ecore2KMT.java
 * License : EPL
@@ -15,7 +15,6 @@ package fr.irisa.triskell.kermeta.kpm.actions.transformation;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.kermeta.io.KermetaUnit;
@@ -29,7 +28,6 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
-import fr.irisa.triskell.kermeta.tools.wizards.KmtPrinterWizard;
 
 public class Ecore2KMT implements IAction {
 

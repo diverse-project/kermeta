@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ORExpressionImpl.java,v 1.1 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: ORExpressionImpl.java,v 1.2 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -36,6 +36,7 @@ public class ORExpressionImpl extends NestedExpressionImpl implements ORExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.OR_EXPRESSION;
 	}

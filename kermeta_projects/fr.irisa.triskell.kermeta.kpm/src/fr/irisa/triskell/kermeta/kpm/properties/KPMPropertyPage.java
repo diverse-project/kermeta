@@ -1,4 +1,4 @@
-/*$Id: KPMPropertyPage.java,v 1.4 2007-05-28 12:16:19 ftanguy Exp $
+/*$Id: KPMPropertyPage.java,v 1.5 2007-07-24 13:47:12 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -9,12 +9,8 @@
 */
 package fr.irisa.triskell.kermeta.kpm.properties;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
@@ -33,12 +29,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.PropertyPage;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.kpm.KPM;
-import fr.irisa.triskell.kermeta.kpm.Out;
-import fr.irisa.triskell.kermeta.kpm.Rule;
-import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.helpers.InOutHelper;
-import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
 import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;

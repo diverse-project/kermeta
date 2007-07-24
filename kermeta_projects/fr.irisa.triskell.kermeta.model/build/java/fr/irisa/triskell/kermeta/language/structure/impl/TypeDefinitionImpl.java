@@ -2,28 +2,23 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionImpl.java,v 1.6 2007-07-20 15:09:01 ftanguy Exp $
+ * $Id: TypeDefinitionImpl.java,v 1.7 2007-07-24 13:47:32 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
-
-import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 /**
  * <!-- begin-user-doc -->

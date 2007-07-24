@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitHelper.java,v 1.2 2007-07-20 15:08:10 ftanguy Exp $
+/*$Id: KermetaUnitHelper.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitHelper.java
 * License : EPL
@@ -27,7 +27,6 @@ import org.kermeta.io.WarningMessage;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
-import fr.irisa.triskell.kermeta.language.structure.Object;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 

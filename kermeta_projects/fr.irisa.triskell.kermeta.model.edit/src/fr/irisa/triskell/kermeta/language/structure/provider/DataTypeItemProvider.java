@@ -2,33 +2,26 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DataTypeItemProvider.java,v 1.10 2007-07-20 15:08:28 ftanguy Exp $
+ * $Id: DataTypeItemProvider.java,v 1.11 2007-07-24 13:46:28 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
-
-import fr.irisa.triskell.kermeta.language.structure.DataType;
-import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-
-import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import fr.irisa.triskell.kermeta.language.structure.DataType;
+import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
 /**
  * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.structure.DataType} object.

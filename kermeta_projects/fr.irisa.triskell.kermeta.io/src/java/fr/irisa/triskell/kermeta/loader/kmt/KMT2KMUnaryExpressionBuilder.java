@@ -8,7 +8,6 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import java.util.Hashtable;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.loader.AbstractKermetaUnitLoader;
 import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.kermeta.ast.UnaryExpression;

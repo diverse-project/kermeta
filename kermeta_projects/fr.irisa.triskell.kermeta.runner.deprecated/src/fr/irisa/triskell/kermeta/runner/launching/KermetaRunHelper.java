@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.20 2007-07-20 15:09:14 ftanguy Exp $
+/* $Id: KermetaRunHelper.java,v 1.21 2007-07-24 13:47:19 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: EPL
@@ -10,7 +10,6 @@
 package fr.irisa.triskell.kermeta.runner.launching;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
@@ -18,9 +17,7 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
-import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 
 /**

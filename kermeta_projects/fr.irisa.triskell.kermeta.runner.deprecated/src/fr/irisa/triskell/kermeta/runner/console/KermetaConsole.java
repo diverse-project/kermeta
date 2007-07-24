@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.23 2007-03-05 15:55:30 cfaucher Exp $
+/* $Id: KermetaConsole.java,v 1.24 2007-07-24 13:47:20 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -17,10 +17,7 @@ import java.io.InputStreamReader;
 
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
-import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.debug.ui.console.ConsoleColorProvider;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleListener;
@@ -32,7 +29,6 @@ import org.eclipse.ui.console.IOConsoleOutputStream;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
 import fr.irisa.triskell.kermeta.runner.dialogs.InputStreamDialog;
-import fr.irisa.triskell.kermeta.runner.launching.KermetaRunTarget;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 
 /**

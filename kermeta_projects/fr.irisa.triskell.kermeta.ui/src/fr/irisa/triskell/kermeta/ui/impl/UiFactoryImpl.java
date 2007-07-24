@@ -2,19 +2,20 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UiFactoryImpl.java,v 1.1 2007-04-04 13:25:29 ftanguy Exp $
+ * $Id: UiFactoryImpl.java,v 1.2 2007-07-24 13:46:59 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.ui.impl;
-
-import fr.irisa.triskell.kermeta.ui.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import fr.irisa.triskell.kermeta.ui.DependentFileTreeItem;
+import fr.irisa.triskell.kermeta.ui.FileDependencyTreeItem;
+import fr.irisa.triskell.kermeta.ui.UiFactory;
+import fr.irisa.triskell.kermeta.ui.UiPackage;
 
 /**
  * <!-- begin-user-doc -->

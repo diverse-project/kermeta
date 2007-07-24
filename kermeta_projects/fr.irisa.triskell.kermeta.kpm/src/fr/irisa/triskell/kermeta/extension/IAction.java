@@ -1,4 +1,4 @@
-/*$Id: IAction.java,v 1.2 2007-04-13 14:44:22 ftanguy Exp $
+/*$Id: IAction.java,v 1.3 2007-07-24 13:47:12 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -31,6 +31,6 @@ public interface IAction {
 	 * @param monitor A progress monitor to display process information.
 	 * @param args Any other usefull arguments can be sent via this map.
 	 */
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args);
+	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args);
 	
 }

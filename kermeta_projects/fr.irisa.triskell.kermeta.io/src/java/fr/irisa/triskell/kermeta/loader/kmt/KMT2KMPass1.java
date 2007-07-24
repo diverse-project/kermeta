@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.11 2007-07-23 13:57:20 ftanguy Exp $
+/* $Id: KMT2KMPass1.java,v 1.12 2007-07-24 13:46:45 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : GPL
@@ -17,24 +17,24 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.LoadingContext;
 
-
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
-import fr.irisa.triskell.kermeta.ast.*;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.ast.Filter;
+import fr.irisa.triskell.kermeta.ast.ImportStmt;
+import fr.irisa.triskell.kermeta.ast.PackageDecl;
+import fr.irisa.triskell.kermeta.ast.QualifiedID;
+import fr.irisa.triskell.kermeta.ast.StringLiteralContainer;
+import fr.irisa.triskell.kermeta.ast.StringLiteralOrQualifiedID;
+import fr.irisa.triskell.kermeta.ast.TopLevelDecls;
+import fr.irisa.triskell.kermeta.ast.UsingStmt;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
@@ -119,20 +119,23 @@ public class KMT2KMPass1 extends KMT2KMPass {
 				URI uri = URI.createURI( fileURI );
 				uri = EcoreHelper.getCanonicalURI(uri);
 				fileURI = uri.toString();
-				URIConverter converter = new URIConverterImpl();
-				uri = converter.normalize(uri);
-				try {
-					InputStream stream = converter.createInputStream(uri);
-					stream.close();
-					uriRequire = s;
-				} catch (IOException e) {
-					if ( fileURI.matches("http://.+") ) {
-						error = false;
-						uriRequire = fileURI;
-					} else
+				
+				if ( ! Registry.INSTANCE.keySet().contains( fileURI ) ) {
+					URIConverter converter = new URIConverterImpl();
+					uri = converter.normalize(uri);
+					try {
+						InputStream stream = converter.createInputStream(uri);
+						stream.close();
+						uriRequire = s;
+					} catch (IOException e) {
+						if ( fileURI.matches("http://.+") ) {
+							error = false;
+							uriRequire = fileURI;
+						} else
+							error = true;
+					} catch (IllegalArgumentException e) {
 						error = true;
-				} catch (IllegalArgumentException e) {
-					error = true;
+					}
 				}
 			}
 			

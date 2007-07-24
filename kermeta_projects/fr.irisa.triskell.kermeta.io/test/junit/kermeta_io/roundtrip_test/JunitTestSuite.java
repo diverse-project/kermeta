@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.14 2007-07-20 15:08:16 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.15 2007-07-24 13:46:51 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -14,38 +14,19 @@
  */
 package kermeta_io.roundtrip_test; 
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import junit.framework.TestCase;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 import org.kermeta.io.printer.KMTOutputBuilder;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
-import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 

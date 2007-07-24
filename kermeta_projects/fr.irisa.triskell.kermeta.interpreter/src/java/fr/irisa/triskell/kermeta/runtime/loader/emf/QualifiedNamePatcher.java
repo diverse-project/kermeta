@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.13 2007-07-20 15:07:49 ftanguy Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.14 2007-07-24 13:47:38 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 

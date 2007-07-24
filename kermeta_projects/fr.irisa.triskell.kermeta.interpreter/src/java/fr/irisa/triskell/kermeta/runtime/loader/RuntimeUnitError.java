@@ -1,4 +1,4 @@
-/* $Id: RuntimeUnitError.java,v 1.2 2006-06-22 18:01:37 zdrey Exp $
+/* $Id: RuntimeUnitError.java,v 1.3 2007-07-24 13:47:38 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RuntimeUnitError.java
  * License    : EPL
@@ -16,7 +16,6 @@ package fr.irisa.triskell.kermeta.runtime.loader;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 
 /**
  * @author zdrey

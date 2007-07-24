@@ -2,24 +2,39 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmFactoryImpl.java,v 1.7 2007-05-15 15:22:53 ftanguy Exp $
+ * $Id: KpmFactoryImpl.java,v 1.8 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
-
-import fr.irisa.triskell.kermeta.kpm.*;
 
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import fr.irisa.triskell.kermeta.kpm.ANDExpression;
+import fr.irisa.triskell.kermeta.kpm.Action;
+import fr.irisa.triskell.kermeta.kpm.Dependency;
+import fr.irisa.triskell.kermeta.kpm.Event;
+import fr.irisa.triskell.kermeta.kpm.ExistFilter;
+import fr.irisa.triskell.kermeta.kpm.FilterExpression;
+import fr.irisa.triskell.kermeta.kpm.In;
+import fr.irisa.triskell.kermeta.kpm.KPM;
+import fr.irisa.triskell.kermeta.kpm.KpmFactory;
+import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.NameFilter;
+import fr.irisa.triskell.kermeta.kpm.NullExpression;
+import fr.irisa.triskell.kermeta.kpm.ORExpression;
+import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Rule;
+import fr.irisa.triskell.kermeta.kpm.RuleType;
+import fr.irisa.triskell.kermeta.kpm.Type;
+import fr.irisa.triskell.kermeta.kpm.TypeFilter;
+import fr.irisa.triskell.kermeta.kpm.Unit;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,9 +77,10 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case KpmPackage.DEPENDENCY: return createDependency();
+			case KpmPackage.RULE: return createRule();
 			case KpmPackage.IN: return createIn();
 			case KpmPackage.ACTION: return createAction();
 			case KpmPackage.OUT: return createOut();
@@ -79,8 +95,8 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 			case KpmPackage.KPM: return createKPM();
 			case KpmPackage.UNIT: return createUnit();
 			case KpmPackage.EXIST_FILTER: return createExistFilter();
-			case KpmPackage.RULE: return createRule();
 			case KpmPackage.RULE_TYPE: return createRuleType();
+			case KpmPackage.DEPENDENCY: return createDependency();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -91,6 +107,7 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
 			case KpmPackage.IPROGRESS_MONITOR:
@@ -107,6 +124,7 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case KpmPackage.IPROGRESS_MONITOR:
@@ -339,6 +357,7 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static KpmPackage getPackage() {
 		return KpmPackage.eINSTANCE;
 	}

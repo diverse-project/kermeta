@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Rule.java,v 1.1 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: Rule.java,v 1.2 2007-07-24 13:47:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -102,10 +102,10 @@ public interface Rule extends EObject {
 	 * @return the value of the '<em>Outs</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getRule_Outs()
 	 * @see fr.irisa.triskell.kermeta.kpm.Out#getRule
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Out" opposite="rule" containment="true"
+	 * @model opposite="rule" containment="true"
 	 * @generated
 	 */
-	EList getOuts();
+	EList<Out> getOuts();
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -165,7 +165,7 @@ public interface Rule extends EObject {
 	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
 	 * @generated
 	 */
-	void process(Unit unit, boolean synchrone, Map args, IProgressMonitor monitor);
+	void process(Unit unit, boolean synchrone, Map<String, Object> args, IProgressMonitor monitor);
 
 	/**
 	 * <!-- begin-user-doc -->

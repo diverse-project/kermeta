@@ -2,17 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorer.java,v 1.2 2007-07-20 15:08:08 ftanguy Exp $
+ * $Id: KermetaUnitStorer.java,v 1.3 2007-07-24 13:46:47 ftanguy Exp $
  */
 package org.kermeta.io;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
-import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOException;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 
 /**

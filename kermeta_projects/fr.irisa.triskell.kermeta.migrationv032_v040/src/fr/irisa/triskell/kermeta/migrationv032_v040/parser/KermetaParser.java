@@ -1,23 +1,20 @@
 // $ANTLR : "Kermeta.g" -> "KermetaParser.java"$
 
 package fr.irisa.triskell.kermeta.migrationv032_v040.parser;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
-
-import com.ibm.eclipse.ldt.core.parser.*;
-
-import antlr.TokenBuffer;
-import antlr.TokenStreamException;
-import antlr.TokenStreamIOException;
-import antlr.ANTLRException;
-import antlr.LLkParser;
-import antlr.Token;
-import antlr.TokenStream;
-import antlr.RecognitionException;
 import antlr.NoViableAltException;
-import antlr.MismatchedTokenException;
-import antlr.SemanticException;
 import antlr.ParserSharedInputState;
+import antlr.RecognitionException;
+import antlr.Token;
+import antlr.TokenBuffer;
+import antlr.TokenStream;
+import antlr.TokenStreamException;
 import antlr.collections.impl.BitSet;
+
+import com.ibm.eclipse.ldt.core.parser.ParseContext;
+import com.ibm.eclipse.ldt.core.parser.ParseError;
+import com.ibm.eclipse.ldt.core.parser.ParseWarning;
+
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
 
 public class KermetaParser extends antlr.LLkParser       implements KermetaParserTokenTypes
  {

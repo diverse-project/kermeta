@@ -6,12 +6,13 @@
  */
 package fr.irisa.triskell.kermeta.language.util;
 
-import fr.irisa.triskell.kermeta.language.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import fr.irisa.triskell.kermeta.language.DummyClass;
+import fr.irisa.triskell.kermeta.language.LanguagePackage;
 
 /**
  * <!-- begin-user-doc -->

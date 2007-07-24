@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.20 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: DebugInterpreter.java,v 1.21 2007-07-24 13:47:38 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -17,24 +17,18 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 
-
+import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.CallSuperOperation;
-import fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall;
-
 import fr.irisa.triskell.kermeta.language.behavior.Conditional;
-
+import fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall;
 import fr.irisa.triskell.kermeta.language.behavior.Loop;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
-
-import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
-
-import fr.irisa.triskell.kermeta.language.structure.Operation;
 
 /**
  * This is the ExpressionInterpreter improved to handle the debugging mode

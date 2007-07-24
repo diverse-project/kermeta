@@ -2,17 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MessageImpl.java,v 1.2 2007-07-20 15:08:05 ftanguy Exp $
+ * $Id: MessageImpl.java,v 1.3 2007-07-24 13:46:46 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.kermeta.io.IoPackage;

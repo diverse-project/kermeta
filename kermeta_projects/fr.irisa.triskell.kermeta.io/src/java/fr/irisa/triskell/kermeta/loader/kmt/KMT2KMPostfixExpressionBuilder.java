@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.11 2007-07-20 15:08:06 ftanguy Exp $
+/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.12 2007-07-24 13:46:45 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMPostfixExpressionBuilder.java
  * License : EPL
@@ -10,7 +10,6 @@
 package fr.irisa.triskell.kermeta.loader.kmt;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.loader.AbstractKermetaUnitLoader;
 import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.kermeta.ast.ActualParameter;

@@ -1,4 +1,4 @@
-/* $Id: EnumerationHelper.java,v 1.1 2007-06-26 08:40:27 dvojtise Exp $ 
+/* $Id: EnumerationHelper.java,v 1.2 2007-07-24 13:47:37 ftanguy Exp $ 
  * helper on the Kermeta base type Enumeration 
  */
 
@@ -8,11 +8,9 @@ package fr.irisa.triskell.kermeta.runtime.rohelper;
 import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
-import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 
 /**
- * Implementation of Enumùeration methods for kermeta 
+ * Implementation of Enumï¿½eration methods for kermeta 
  * @author Franck Fleurey
  */
 public class EnumerationHelper {

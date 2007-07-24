@@ -2,37 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExpressionImpl.java,v 1.7 2007-07-20 15:09:04 ftanguy Exp $
+ * $Id: ExpressionImpl.java,v 1.8 2007-07-24 13:47:32 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
-
-import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-import fr.irisa.triskell.kermeta.language.structure.Type;
-
-import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
-
-import fr.irisa.triskell.kermeta.language.structure.impl.ObjectImpl;
-
-import java.util.Collection;
-
-import fr.irisa.triskell.kermeta.language.structure.impl.TypeContainerImpl;
-
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.impl.TypeContainerImpl;
 
 /**
  * <!-- begin-user-doc -->

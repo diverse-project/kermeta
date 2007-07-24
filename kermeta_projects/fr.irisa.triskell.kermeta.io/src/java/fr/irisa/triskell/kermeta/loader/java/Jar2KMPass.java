@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass.java,v 1.10 2007-07-20 15:08:07 ftanguy Exp $
+/* $Id: Jar2KMPass.java,v 1.11 2007-07-24 13:46:48 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass.java
  * License : EPL
@@ -11,13 +11,13 @@
 package fr.irisa.triskell.kermeta.loader.java;
 
 import java.lang.reflect.GenericArrayType;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 import java.util.Hashtable;
 import java.util.jar.JarEntry;
 
 import org.apache.log4j.Logger;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
@@ -25,7 +25,6 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-import org.kermeta.io.KermetaUnit;
 
 
 /**

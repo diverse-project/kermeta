@@ -6,11 +6,14 @@
  */
 package fr.irisa.triskell.kermeta.visitor;
 
-import java.lang.reflect.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Iterator;
-import org.eclipse.emf.ecore.EObject;
-import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
+
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EObject;
+
+import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**

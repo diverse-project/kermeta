@@ -1,4 +1,4 @@
-/* $Id: ResourceHandler.java,v 1.4 2005-11-04 16:59:38 zdrey Exp $
+/* $Id: ResourceHandler.java,v 1.5 2007-07-24 13:47:20 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : ResourceHandler.java
  * License : GPL
@@ -16,8 +16,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.internal.ide.AboutInfo;
-import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
 
 import fr.irisa.triskell.kermeta.KermetaMessages;

@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaStaticCallValidator.java,v 1.2 2007-07-20 15:08:56 ftanguy Exp $
+ * $Id: JavaStaticCallValidator.java,v 1.3 2007-07-24 13:47:32 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.validation;
 
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import org.eclipse.emf.common.util.EList;
 
 /**

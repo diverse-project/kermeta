@@ -2,17 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.3 2007-07-23 13:58:05 ftanguy Exp $
+ * $Id: IoFactoryImpl.java,v 1.4 2007-07-24 13:46:46 ftanguy Exp $
  */
 package org.kermeta.io.impl;
-
-import antlr.ANTLRException;
-import antlr.RecognitionException;
-
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
-
-import fr.irisa.triskell.traceability.helper.Tracer;
-
 
 import java.util.List;
 import java.util.Set;
@@ -21,13 +13,24 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.kermeta.io.*;
-
+import org.kermeta.io.ErrorMessage;
+import org.kermeta.io.IoFactory;
+import org.kermeta.io.IoPackage;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.KermetaUnitStorer;
+import org.kermeta.io.PackageEntry;
+import org.kermeta.io.ParseErrorMessage;
+import org.kermeta.io.ParsingError;
+import org.kermeta.io.WarningMessage;
 import org.kermeta.io.plugin.IOPlugin;
+
+import antlr.ANTLRException;
+
+import com.ibm.eclipse.ldt.core.ast.ASTNode;
+
+import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
  * <!-- begin-user-doc -->

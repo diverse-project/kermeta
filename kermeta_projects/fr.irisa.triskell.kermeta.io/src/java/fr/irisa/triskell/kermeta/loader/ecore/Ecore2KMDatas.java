@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMDatas.java,v 1.2 2007-07-20 15:08:11 ftanguy Exp $
+/*$Id: Ecore2KMDatas.java,v 1.3 2007-07-24 13:46:46 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMHelper.java
 * License : EPL
@@ -15,13 +15,11 @@ package fr.irisa.triskell.kermeta.loader.ecore;
 import java.util.Hashtable;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.ETypeParameter;
 
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;

@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.21 2007-07-23 13:55:53 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.22 2007-07-24 13:46:39 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -14,7 +14,6 @@
 package fr.irisa.triskell.kermeta.tools.wizards;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -43,7 +42,6 @@ import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;

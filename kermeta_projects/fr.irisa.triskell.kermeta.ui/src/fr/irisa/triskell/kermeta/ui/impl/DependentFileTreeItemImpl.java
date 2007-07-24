@@ -2,20 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependentFileTreeItemImpl.java,v 1.2 2007-05-15 15:22:48 ftanguy Exp $
+ * $Id: DependentFileTreeItemImpl.java,v 1.3 2007-07-24 13:46:59 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.ui.impl;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.ecore.EClass;
+
 import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.ui.DependentFileTreeItem;
-import fr.irisa.triskell.kermeta.ui.FileDependencyTreeItem;
 import fr.irisa.triskell.kermeta.ui.UiFactory;
 import fr.irisa.triskell.kermeta.ui.UiPackage;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

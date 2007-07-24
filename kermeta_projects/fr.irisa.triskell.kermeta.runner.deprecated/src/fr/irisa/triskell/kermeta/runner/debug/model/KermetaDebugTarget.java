@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.23 2007-06-01 11:33:22 dvojtise Exp $
+/* $Id: KermetaDebugTarget.java,v 1.24 2007-07-24 13:47:19 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -23,12 +23,10 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
-import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.debug.process.KermetaDebugProcess;
 import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteDebugUI;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaStepHandler;
-import fr.irisa.triskell.kermeta.runner.launching.ConstraintRunTarget;
 /**
  * KermetaDebugTarget, is the object of the debug framework that communicates 
  * with the Kermeta interpreter.

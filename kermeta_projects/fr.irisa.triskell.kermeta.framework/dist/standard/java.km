@@ -26,24 +26,24 @@
     </nestedPackage>
   </packages>
   <requires uri="primitive_types.kmt">
-    <ownedTag value="/**&#xA; * $Id: java.km,v 1.2 2007-07-20 15:08:40 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */"/>
+    <ownedTag value="/**&#xA; * $Id: java.km,v 1.3 2007-07-24 13:47:04 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */"/>
   </requires>
   <usings qualifiedName="kermeta::exceptions"/>
-  <referencedModelingUnits href="collections.km#/"/>
-  <referencedModelingUnits href="#/"/>
   <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
-  <referencedModelingUnits href="../persistence/resource.km#/"/>
-  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
-  <referencedModelingUnits href="../reflection/reflection.km#/"/>
   <referencedModelingUnits href="../kunit/kunit.km#/"/>
-  <referencedModelingUnits href="../kunit/assert.km#/"/>
   <referencedModelingUnits href="../language/behavior.km#/"/>
+  <referencedModelingUnits href="../persistence/resource.km#/"/>
+  <referencedModelingUnits href="../kunit/assert.km#/"/>
   <referencedModelingUnits href="../utils/stack.km#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>
-  <referencedModelingUnits href="primitive_types.km#/"/>
   <referencedModelingUnits href="../Standard.km#/"/>
-  <referencedModelingUnits href="../io/file_io.km#/"/>
+  <referencedModelingUnits href="collections.km#/"/>
+  <referencedModelingUnits href="#/"/>
   <referencedModelingUnits href="../language/structure.km#/"/>
-  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
+  <referencedModelingUnits href="../io/file_io.km#/"/>
+  <referencedModelingUnits href="primitive_types.km#/"/>
   <referencedModelingUnits href="../utils/hashtable.km#/"/>
+  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="../reflection/reflection.km#/"/>
 </kermeta_language_structure:ModelingUnit>

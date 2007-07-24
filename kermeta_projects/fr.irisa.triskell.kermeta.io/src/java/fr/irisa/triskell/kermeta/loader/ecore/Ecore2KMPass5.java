@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass5.java,v 1.3 2007-07-20 15:08:11 ftanguy Exp $
+/* $Id: Ecore2KMPass5.java,v 1.4 2007-07-24 13:46:46 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -16,23 +16,18 @@
 package fr.irisa.triskell.kermeta.loader.ecore;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EGenericType;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 

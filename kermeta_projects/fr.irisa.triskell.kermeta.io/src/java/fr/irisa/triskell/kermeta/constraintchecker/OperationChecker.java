@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.13 2007-07-20 15:08:18 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.14 2007-07-24 13:46:46 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -15,7 +15,6 @@
  */
 package fr.irisa.triskell.kermeta.constraintchecker;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -36,7 +35,6 @@ import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
-//import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**

@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.14 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: Traceback.java,v 1.15 2007-07-24 13:47:38 ftanguy Exp $
  * Project   : Kermeta Interpreter
  * File      : Traceback.java
  * License   : EPL
@@ -12,17 +12,14 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
-//import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;

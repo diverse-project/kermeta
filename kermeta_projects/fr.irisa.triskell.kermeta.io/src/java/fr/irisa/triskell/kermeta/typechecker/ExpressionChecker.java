@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.42 2007-07-23 11:48:05 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.43 2007-07-24 13:46:45 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -258,12 +258,22 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			    // store values of type variables in the call expression
 			    for(int i=0; i<op.getOperation().getTypeParameter().size(); i++) {
 			    	// Need to create new TypeVariableBindings
+			    	
+			    	TypeVariable typeVariable = op.getOperation().getTypeParameter().get(i);
+			    	fr.irisa.triskell.kermeta.language.structure.Type typeBinding = (fr.irisa.triskell.kermeta.language.structure.Type) binding.get( typeVariable );
+			    	
 			    	TypeVariableBinding tvb = StructureFactory.eINSTANCE.createTypeVariableBinding();
 			    	tvb.setVariable((TypeVariable) op.getOperation().getTypeParameter().get(i));
-			    	tvb.setType((fr.irisa.triskell.kermeta.language.structure.Type) binding.get(op.getOperation().getTypeParameter().get(i)));
+			    	tvb.setType( typeBinding );
 			    	// Jim: If parameterized virtual type bindings were possible on operation calls, then staticTypeVariableBindings would be
 			    	// TypeVariableBindings instead of just types, and the following line would add tvb instead.
-			        exp.getStaticTypeVariableBindings().add((fr.irisa.triskell.kermeta.language.structure.Type) binding.get(op.getOperation().getTypeParameter().get(i)));
+			    	if ( typeBinding != null )
+			    		exp.getStaticTypeVariableBindings().add((fr.irisa.triskell.kermeta.language.structure.Type) binding.get(op.getOperation().getTypeParameter().get(i)));
+			    	else {
+			    		String message = "TYPE-CHECKER : Binding not found for " + typeVariable.getName();
+			    		unit.error(message, exp);
+			    		error = true;
+			    	}
 			    }
 		    }
 		    

@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.2 2007-07-20 15:07:49 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.3 2007-07-24 13:47:38 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -11,18 +11,13 @@
  */
 package kermeta_interpreter.constraint_testcases;
 
-import java.io.File;
-
-import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.kermeta.io.plugin.IOPlugin;
-
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
+
+import org.apache.log4j.Logger;
+import org.kermeta.io.plugin.IOPlugin;
+
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
-import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**

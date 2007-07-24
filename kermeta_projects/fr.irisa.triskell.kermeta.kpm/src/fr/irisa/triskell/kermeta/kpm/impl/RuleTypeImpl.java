@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleTypeImpl.java,v 1.1 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: RuleTypeImpl.java,v 1.2 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -64,6 +64,7 @@ public class RuleTypeImpl extends EObjectImpl implements RuleType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.RULE_TYPE;
 	}
@@ -94,6 +95,7 @@ public class RuleTypeImpl extends EObjectImpl implements RuleType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.RULE_TYPE__NAME:
@@ -107,6 +109,7 @@ public class RuleTypeImpl extends EObjectImpl implements RuleType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.RULE_TYPE__NAME:
@@ -121,6 +124,7 @@ public class RuleTypeImpl extends EObjectImpl implements RuleType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.RULE_TYPE__NAME:
@@ -135,6 +139,7 @@ public class RuleTypeImpl extends EObjectImpl implements RuleType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KpmPackage.RULE_TYPE__NAME:
@@ -148,6 +153,7 @@ public class RuleTypeImpl extends EObjectImpl implements RuleType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

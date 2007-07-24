@@ -2,27 +2,22 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TreeItemImpl.java,v 1.1 2007-04-04 13:25:29 ftanguy Exp $
+ * $Id: TreeItemImpl.java,v 1.2 2007-07-24 13:46:59 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.ui.impl;
-
-import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.ui.TreeItem;
-import fr.irisa.triskell.kermeta.ui.UiPackage;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import fr.irisa.triskell.kermeta.ui.TreeItem;
+import fr.irisa.triskell.kermeta.ui.UiPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -1,4 +1,4 @@
-/* $Id: IKermetaRemoteInterpreter.java,v 1.7 2005-12-14 17:19:55 zdrey Exp $
+/* $Id: IKermetaRemoteInterpreter.java,v 1.8 2007-07-24 13:47:19 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : IKermetaRemoteInterpreter.java
  * License   : EPL
@@ -10,13 +10,10 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.remote.interpreter;
 
-import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
-import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 
 /**
  * Server side (receive and process the requests)

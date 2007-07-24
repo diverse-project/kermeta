@@ -2,31 +2,25 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FunctionTypeImpl.java,v 1.7 2007-07-20 15:09:01 ftanguy Exp $
+ * $Id: FunctionTypeImpl.java,v 1.8 2007-07-24 13:47:32 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
-
-import fr.irisa.triskell.kermeta.language.structure.FunctionType;
-import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 
 /**
  * <!-- begin-user-doc -->

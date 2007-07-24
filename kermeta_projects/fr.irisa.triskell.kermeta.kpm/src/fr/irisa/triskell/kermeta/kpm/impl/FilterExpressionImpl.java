@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FilterExpressionImpl.java,v 1.1 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: FilterExpressionImpl.java,v 1.2 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -46,7 +46,7 @@ public class FilterExpressionImpl extends SimpleExpressionImpl implements Filter
 	 * @generated
 	 * @ordered
 	 */
-	protected Filter filter = null;
+	protected Filter filter;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -62,6 +62,7 @@ public class FilterExpressionImpl extends SimpleExpressionImpl implements Filter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.FILTER_EXPRESSION;
 	}
@@ -109,6 +110,7 @@ public class FilterExpressionImpl extends SimpleExpressionImpl implements Filter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.FILTER_EXPRESSION__FILTER:
@@ -123,6 +125,7 @@ public class FilterExpressionImpl extends SimpleExpressionImpl implements Filter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.FILTER_EXPRESSION__FILTER:
@@ -137,6 +140,7 @@ public class FilterExpressionImpl extends SimpleExpressionImpl implements Filter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.FILTER_EXPRESSION__FILTER:
@@ -151,6 +155,7 @@ public class FilterExpressionImpl extends SimpleExpressionImpl implements Filter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KpmPackage.FILTER_EXPRESSION__FILTER:

@@ -1,4 +1,4 @@
-/* $Id: KermetaIcons.java,v 1.4 2007-05-29 16:17:47 dvojtise Exp $
+/* $Id: KermetaIcons.java,v 1.5 2007-07-24 13:46:39 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta (First iteration)
  * File      : KermetaIcons.java
  * License   : EPL
@@ -15,7 +15,7 @@ import java.util.Hashtable;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
-import fr.irisa.triskell.kermeta.KermetaConstants;
+
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 
 /**

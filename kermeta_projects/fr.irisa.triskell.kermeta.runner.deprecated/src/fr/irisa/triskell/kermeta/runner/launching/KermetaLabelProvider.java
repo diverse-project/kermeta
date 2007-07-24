@@ -1,4 +1,4 @@
-/* $Id: KermetaLabelProvider.java,v 1.1 2005-06-24 17:17:51 zdrey Exp $
+/* $Id: KermetaLabelProvider.java,v 1.2 2007-07-24 13:47:19 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLabelProvider.java
  * License   : GPL
@@ -9,9 +9,6 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
-import org.eclipse.debug.internal.ui.DebugPluginImages;
-import org.eclipse.debug.ui.DebugUITools;
-import org.eclipse.debug.ui.IDebugUIConstants;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;

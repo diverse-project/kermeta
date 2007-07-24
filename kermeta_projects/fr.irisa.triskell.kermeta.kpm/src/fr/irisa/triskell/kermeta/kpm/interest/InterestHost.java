@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterestHost.java,v 1.1 2007-04-04 13:43:56 ftanguy Exp $
+ * $Id: InterestHost.java,v 1.2 2007-07-24 13:47:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.interest;
 
@@ -42,10 +42,10 @@ public interface InterestHost extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Entries</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.kpm.interest.InterestPackage#getInterestHost_Entries()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.interest.InterestEntry" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getEntries();
+	EList<InterestEntry> getEntries();
 
 	/**
 	 * <!-- begin-user-doc -->

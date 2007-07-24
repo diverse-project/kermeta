@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Out.java,v 1.2 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: Out.java,v 1.3 2007-07-24 13:47:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -69,7 +69,7 @@ public interface Out extends AbstractEntity {
 	 * @see #setRule(Rule)
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getOut_Rule()
 	 * @see fr.irisa.triskell.kermeta.kpm.Rule#getOuts
-	 * @model opposite="outs"
+	 * @model opposite="outs" transient="false"
 	 * @generated
 	 */
 	Rule getRule();
@@ -117,6 +117,6 @@ public interface Out extends AbstractEntity {
 	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
 	 * @generated
 	 */
-	void process(Unit unit, IProgressMonitor monitor, Map args);
+	void process(Unit unit, IProgressMonitor monitor, Map<String, Object> args);
 
 } // Out

@@ -1,12 +1,9 @@
 package fr.irisa.triskell.kermeta.dev.model;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
-
-import javax.naming.Name;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -28,7 +25,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 /*
- * Created on 19 déc. 2004
+ * Created on 19 dï¿½c. 2004
  *
  * ECore implementation of package merge
  */

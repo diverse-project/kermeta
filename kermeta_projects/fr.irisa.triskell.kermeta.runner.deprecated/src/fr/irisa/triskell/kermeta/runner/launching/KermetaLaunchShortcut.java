@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.19 2007-07-20 15:09:14 ftanguy Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.20 2007-07-24 13:47:19 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -31,11 +31,16 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.util2.KermetaUnitHelper;
 
 import fr.irisa.triskell.kermeta.KermetaMessages;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 /**
  * Launch shortcut that appears when users selects a file > Run > Kermeta App.
@@ -244,15 +249,23 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 	 * @param mode
 	 */
 	private void launchSelectedFile(IFile ifile, String mode) {
-		// Parse the file
-	//	KermetaUnit unit = KermetaRunHelper.parse(ifile);
 		
 		selectedFile = ifile;
-		//KermetaWorkspace.getInstance().declareInterest(this);
 		
-		//KermetaUnit unit = KermetaWorkspace.getInstance().getKermetaUnit(ifile);
+		try {
+			unit = IOPlugin.getDefault().loadKermetaUnit(selectedFile);
+		} catch (KermetaIOFileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (URIMalformedException e1) {
+			e1.printStackTrace();
+		}
+		KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
+		typechecker.checkUnit();
 		
-		unit = KermetaUnitHelper.typecheckFile(selectedFile);
+		if ( ! unit.isErrored() ) {
+			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( unit );
+			constraintchecker.checkUnit();
+		}
 		
 		if ( unit.isErrored() ) {
 			MessageDialog.openError(new Shell(), "The file is not correctly typechecked.", fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper.getAllErrorsAsString(unit));

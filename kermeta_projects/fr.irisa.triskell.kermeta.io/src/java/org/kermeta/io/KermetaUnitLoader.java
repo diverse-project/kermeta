@@ -2,15 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitLoader.java,v 1.2 2007-07-20 15:08:08 ftanguy Exp $
+ * $Id: KermetaUnitLoader.java,v 1.3 2007-07-24 13:46:47 ftanguy Exp $
  */
 package org.kermeta.io;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.kermeta.io.plugin.IOPlugin;
 
 /**
  * <!-- begin-user-doc -->

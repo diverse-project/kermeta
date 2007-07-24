@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExistFilterImpl.java,v 1.2 2007-04-04 13:43:54 ftanguy Exp $
+ * $Id: ExistFilterImpl.java,v 1.3 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -38,6 +38,7 @@ public class ExistFilterImpl extends FilterImpl implements ExistFilter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.EXIST_FILTER;
 	}

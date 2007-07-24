@@ -1,6 +1,6 @@
 
 
-/*$Id: KMUnitLoader.java,v 1.2 2007-07-20 15:08:17 ftanguy Exp $
+/*$Id: KMUnitLoader.java,v 1.3 2007-07-24 13:46:47 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL
@@ -21,9 +21,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
@@ -32,7 +30,6 @@ import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.AbstractKermetaUnitLoader;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;

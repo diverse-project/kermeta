@@ -1,4 +1,4 @@
-/* $Id: KermetaCycleConstraintChecker.java,v 1.4 2007-07-20 15:08:18 ftanguy Exp $
+/* $Id: KermetaCycleConstraintChecker.java,v 1.5 2007-07-24 13:46:46 ftanguy Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -23,7 +23,6 @@ import fr.irisa.triskell.kermeta.directedgraph.DirectedGraphClass;
 import fr.irisa.triskell.kermeta.directedgraph.Findcycle;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Object;
-import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionSearcher;

@@ -1,6 +1,6 @@
 
 
-/*$Id: KmExporter.java,v 1.2 2007-07-20 15:08:17 ftanguy Exp $
+/*$Id: KmExporter.java,v 1.3 2007-07-24 13:46:50 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -12,37 +12,24 @@
 
 package fr.irisa.triskell.kermeta.exporter.km;
 
-import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
-import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
-import fr.irisa.triskell.kermeta.language.behavior.Conditional;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.language.structure.Tag;
-import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
-import fr.irisa.triskell.kermeta.modelhelper.StringHelper;
-import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
-
-import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Set;
-
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.kmt.fixer.TypeContainementFixer;
+
+import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
+import fr.irisa.triskell.kermeta.modelhelper.StringHelper;
 
 public class KmExporter {
 

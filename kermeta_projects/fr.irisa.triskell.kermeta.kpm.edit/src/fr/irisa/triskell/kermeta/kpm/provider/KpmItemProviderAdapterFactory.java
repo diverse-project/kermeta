@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmItemProviderAdapterFactory.java,v 1.4 2007-05-15 15:22:50 ftanguy Exp $
+ * $Id: KpmItemProviderAdapterFactory.java,v 1.5 2007-07-24 13:47:43 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -59,7 +59,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection supportedTypes = new ArrayList();
+	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
 	 * This constructs an instance.
@@ -72,7 +72,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);		
+		supportedTypes.add(IItemPropertySource.class);
 	}
 
 	/**
@@ -89,6 +89,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createDependencyAdapter() {
 		if (dependencyItemProvider == null) {
 			dependencyItemProvider = new DependencyItemProvider(this);
@@ -111,6 +112,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createInAdapter() {
 		if (inItemProvider == null) {
 			inItemProvider = new InItemProvider(this);
@@ -133,6 +135,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createActionAdapter() {
 		if (actionItemProvider == null) {
 			actionItemProvider = new ActionItemProvider(this);
@@ -155,6 +158,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createOutAdapter() {
 		if (outItemProvider == null) {
 			outItemProvider = new OutItemProvider(this);
@@ -177,6 +181,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createORExpressionAdapter() {
 		if (orExpressionItemProvider == null) {
 			orExpressionItemProvider = new ORExpressionItemProvider(this);
@@ -199,6 +204,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createANDExpressionAdapter() {
 		if (andExpressionItemProvider == null) {
 			andExpressionItemProvider = new ANDExpressionItemProvider(this);
@@ -221,6 +227,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createFilterExpressionAdapter() {
 		if (filterExpressionItemProvider == null) {
 			filterExpressionItemProvider = new FilterExpressionItemProvider(this);
@@ -243,6 +250,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTypeFilterAdapter() {
 		if (typeFilterItemProvider == null) {
 			typeFilterItemProvider = new TypeFilterItemProvider(this);
@@ -265,6 +273,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createNameFilterAdapter() {
 		if (nameFilterItemProvider == null) {
 			nameFilterItemProvider = new NameFilterItemProvider(this);
@@ -287,6 +296,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTypeAdapter() {
 		if (typeItemProvider == null) {
 			typeItemProvider = new TypeItemProvider(this);
@@ -309,6 +319,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createNullExpressionAdapter() {
 		if (nullExpressionItemProvider == null) {
 			nullExpressionItemProvider = new NullExpressionItemProvider(this);
@@ -331,6 +342,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createEventAdapter() {
 		if (eventItemProvider == null) {
 			eventItemProvider = new EventItemProvider(this);
@@ -353,6 +365,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createKPMAdapter() {
 		if (kpmItemProvider == null) {
 			kpmItemProvider = new KPMItemProvider(this);
@@ -375,6 +388,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createRuleAdapter() {
 		if (ruleItemProvider == null) {
 			ruleItemProvider = new RuleItemProvider(this);
@@ -397,6 +411,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createUnitAdapter() {
 		if (unitItemProvider == null) {
 			unitItemProvider = new UnitItemProvider(this);
@@ -419,6 +434,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createExistFilterAdapter() {
 		if (existFilterItemProvider == null) {
 			existFilterItemProvider = new ExistFilterItemProvider(this);
@@ -441,6 +457,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createRuleTypeAdapter() {
 		if (ruleTypeItemProvider == null) {
 			ruleTypeItemProvider = new RuleTypeItemProvider(this);
@@ -474,6 +491,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object type) {
 		return supportedTypes.contains(type) || super.isFactoryForType(type);
 	}
@@ -484,6 +502,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
 		return super.adapt(notifier, this);
 	}
@@ -493,10 +512,11 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class)type).isInstance(adapter))) {
+			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -545,7 +565,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * @generated
 	 */
 	public void dispose() {
-		if (dependencyItemProvider != null) dependencyItemProvider.dispose();
+		if (ruleItemProvider != null) ruleItemProvider.dispose();
 		if (inItemProvider != null) inItemProvider.dispose();
 		if (actionItemProvider != null) actionItemProvider.dispose();
 		if (outItemProvider != null) outItemProvider.dispose();
@@ -560,8 +580,8 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 		if (kpmItemProvider != null) kpmItemProvider.dispose();
 		if (unitItemProvider != null) unitItemProvider.dispose();
 		if (existFilterItemProvider != null) existFilterItemProvider.dispose();
-		if (ruleItemProvider != null) ruleItemProvider.dispose();
 		if (ruleTypeItemProvider != null) ruleTypeItemProvider.dispose();
+		if (dependencyItemProvider != null) dependencyItemProvider.dispose();
 	}
 
 }

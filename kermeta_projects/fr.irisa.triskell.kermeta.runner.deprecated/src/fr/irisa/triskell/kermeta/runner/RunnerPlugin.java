@@ -1,4 +1,4 @@
-/* $Id: RunnerPlugin.java,v 1.17 2007-01-08 17:20:04 ftanguy Exp $
+/* $Id: RunnerPlugin.java,v 1.18 2007-07-24 13:47:20 ftanguy Exp $
  * Project: Kermeta.runner
  * File: runner.java
  * License: EPL
@@ -9,6 +9,13 @@
  * Description: 
  */
 package fr.irisa.triskell.kermeta.runner;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -30,15 +37,10 @@ import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.part.FileEditorInput;
-import org.eclipse.ui.plugin.*;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.PrintWriter;
-import java.util.*;
 
 /**
  * The main plugin class to be used in the desktop.

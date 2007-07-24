@@ -1,6 +1,6 @@
 
 
-/*$Id: TypeDefinitionSearcher.java,v 1.2 2007-07-20 15:08:10 ftanguy Exp $
+/*$Id: TypeDefinitionSearcher.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	TypeDefinitionSearcher.java
 * License : EPL
@@ -12,7 +12,6 @@
 
 package fr.irisa.triskell.kermeta.modelhelper;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;

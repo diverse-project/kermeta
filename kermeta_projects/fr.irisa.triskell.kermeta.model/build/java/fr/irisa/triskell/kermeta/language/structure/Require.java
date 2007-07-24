@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Require.java,v 1.2 2007-07-20 15:09:02 ftanguy Exp $
+ * $Id: Require.java,v 1.3 2007-07-24 13:47:33 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
-import org.eclipse.emf.common.util.EList;
 
 
 /**

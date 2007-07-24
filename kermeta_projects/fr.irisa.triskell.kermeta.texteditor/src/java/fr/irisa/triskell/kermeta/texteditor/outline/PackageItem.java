@@ -1,6 +1,6 @@
 
 
-/*$Id: PackageItem.java,v 1.2 2007-07-20 15:09:22 ftanguy Exp $
+/*$Id: PackageItem.java,v 1.3 2007-07-24 13:46:55 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	PackageItem.java
 * License : EPL
@@ -18,20 +18,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.swt.graphics.Image;
 
-import fr.irisa.triskell.kermeta.language.structure.Class;
-import fr.irisa.triskell.kermeta.language.structure.Object;
-import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.texteditor.icons.blue.KermetaIconsBlue;

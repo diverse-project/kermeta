@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.2 2007-07-23 09:16:19 ftanguy Exp $
+/* $Id: KMT2KMPass6.java,v 1.3 2007-07-24 13:46:21 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -17,13 +17,10 @@ package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-
 import org.apache.log4j.Logger;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
-import fr.irisa.triskell.kermeta.migrationv032_v040.parser.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -36,6 +33,16 @@ import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ClassDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.GetterBody;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Invariant;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Operation;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.OperationEmptyBody;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.OperationExpressionBody;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Postcondition;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Precondition;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.SetterBody;
+import fr.irisa.triskell.kermeta.migrationv032_v040.parser.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TagHelper;

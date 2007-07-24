@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.46 2007-07-20 15:08:12 ftanguy Exp $
+/* $Id: KM2EcorePass1.java,v 1.47 2007-07-24 13:46:51 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -13,11 +13,8 @@
 package fr.irisa.triskell.kermeta.exporter.ecore;
 
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
-
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -46,7 +43,6 @@ import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
-import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
@@ -66,7 +62,6 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TextTabs;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 
 /**

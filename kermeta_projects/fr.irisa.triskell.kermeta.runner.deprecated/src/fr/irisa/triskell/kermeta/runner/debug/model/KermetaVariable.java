@@ -1,4 +1,4 @@
-/* $Id: KermetaVariable.java,v 1.5 2005-12-06 18:53:15 zdrey Exp $
+/* $Id: KermetaVariable.java,v 1.6 2007-07-24 13:47:19 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaVariable.java
  * License   : GPL
@@ -9,7 +9,6 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.DebugElement;

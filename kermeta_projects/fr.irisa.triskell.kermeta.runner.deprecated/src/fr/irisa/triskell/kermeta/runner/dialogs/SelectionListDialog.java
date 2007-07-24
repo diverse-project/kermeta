@@ -1,4 +1,4 @@
-/* $Id: SelectionListDialog.java,v 1.3 2005-06-09 13:35:19 zdrey Exp $
+/* $Id: SelectionListDialog.java,v 1.4 2007-07-24 13:47:19 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: SelectionListDialog.java
  * License: GPL
@@ -8,8 +8,6 @@
  * Authors: zdrey
  */
 package fr.irisa.triskell.kermeta.runner.dialogs;
-
-import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
@@ -21,7 +19,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.dialogs.TwoPaneElementSelector;
 
 /**
  * 

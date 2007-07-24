@@ -1,4 +1,4 @@
-/*$Id: Typecheck.java,v 1.4 2007-07-20 15:09:26 ftanguy Exp $
+/*$Id: Typecheck.java,v 1.5 2007-07-24 13:46:35 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -19,14 +19,17 @@ import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.util2.KermetaUnitHelper;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 public class Typecheck implements IAction {
 
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
+	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args) {
 			
 		if ( monitor.isCanceled() )
 			return;
@@ -106,25 +109,37 @@ public class Typecheck implements IAction {
 			 * 
 			 * 
 			 */
-			KermetaUnit kermetaUnit = KermetaUnitHelper.typecheckFile(file, content, monitor);
-			
-			
-			/*
-			 * 
-			 * Typechecking is done. Update the lastTimeModified field.
-			 * 
-			 * 
-			 */
-			unit.setLastTimeModified( new Date(file.getLocalTimeStamp()) );
-			
-			/*
-			 * 
-			 * Maybe, some objects needs ths Kermeta Unit.
-			 * Let's update their value.
-			 * 
-			 * 
-			 */
-			KermetaUnitHost.getInstance().update(unit, kermetaUnit);
+			//KermetaUnit kermetaUnit = KermetaUnitHelper.typecheckFile(file, content, monitor);
+			KermetaUnit kermetaUnit;
+			try {
+				kermetaUnit = IOPlugin.getDefault().loadKermetaUnit(file, content);
+				if ( ! kermetaUnit.isErrored() ) {
+					KermetaTypeChecker typechecker = new KermetaTypeChecker( kermetaUnit );
+					typechecker.checkUnit();			
+				}
+
+				/*
+				 * 
+				 * Typechecking is done. Update the lastTimeModified field.
+				 * 
+				 * 
+				 */
+				unit.setLastTimeModified( new Date(file.getLocalTimeStamp()) );
+				
+				/*
+				 * 
+				 * Maybe, some objects needs ths Kermeta Unit.
+				 * Let's update their value.
+				 * 
+				 * 
+				 */
+				KermetaUnitHost.getInstance().update(unit, kermetaUnit);
+				
+			} catch (KermetaIOFileNotFoundException e) {
+				e.printStackTrace();
+			} catch (URIMalformedException e) {
+				e.printStackTrace();
+			}
 			
 			monitor.worked(1);
 			

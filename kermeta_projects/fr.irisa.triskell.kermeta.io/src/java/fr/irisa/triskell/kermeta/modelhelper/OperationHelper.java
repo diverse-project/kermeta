@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.java,v 1.2 2007-07-20 15:08:10 ftanguy Exp $
+/* $Id: OperationHelper.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
  * Project   : Kermeta 
  * File      : OperationHelper.java
  * License   : EPL
@@ -16,7 +16,6 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;

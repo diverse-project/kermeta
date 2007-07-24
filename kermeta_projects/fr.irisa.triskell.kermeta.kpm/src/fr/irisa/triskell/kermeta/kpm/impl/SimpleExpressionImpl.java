@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimpleExpressionImpl.java,v 1.1 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: SimpleExpressionImpl.java,v 1.2 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -42,7 +42,7 @@ public abstract class SimpleExpressionImpl extends ExpressionImpl implements Sim
 	 * @generated
 	 * @ordered
 	 */
-	protected NestedExpression subExpression = null;
+	protected NestedExpression subExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -58,6 +58,7 @@ public abstract class SimpleExpressionImpl extends ExpressionImpl implements Sim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.SIMPLE_EXPRESSION;
 	}
@@ -132,6 +133,7 @@ public abstract class SimpleExpressionImpl extends ExpressionImpl implements Sim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KpmPackage.SIMPLE_EXPRESSION__SUB_EXPRESSION:
@@ -145,6 +147,7 @@ public abstract class SimpleExpressionImpl extends ExpressionImpl implements Sim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.SIMPLE_EXPRESSION__SUB_EXPRESSION:
@@ -158,6 +161,7 @@ public abstract class SimpleExpressionImpl extends ExpressionImpl implements Sim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.SIMPLE_EXPRESSION__SUB_EXPRESSION:
@@ -172,6 +176,7 @@ public abstract class SimpleExpressionImpl extends ExpressionImpl implements Sim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.SIMPLE_EXPRESSION__SUB_EXPRESSION:
@@ -186,6 +191,7 @@ public abstract class SimpleExpressionImpl extends ExpressionImpl implements Sim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KpmPackage.SIMPLE_EXPRESSION__SUB_EXPRESSION:

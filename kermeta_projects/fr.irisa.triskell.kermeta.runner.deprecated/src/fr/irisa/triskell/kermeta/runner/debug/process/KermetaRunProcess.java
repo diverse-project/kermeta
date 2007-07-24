@@ -1,4 +1,4 @@
-/** $Id: KermetaRunProcess.java,v 1.2 2006-06-19 13:36:50 zdrey Exp $
+/** $Id: KermetaRunProcess.java,v 1.3 2007-07-24 13:47:19 ftanguy Exp $
  * Project   : Kermeta Runner
  * File      : KermetaRunProcess.java
  * License   : EPL
@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.eclipse.debug.core.DebugException;
-import org.eclipse.debug.core.model.RuntimeProcess;
 
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;

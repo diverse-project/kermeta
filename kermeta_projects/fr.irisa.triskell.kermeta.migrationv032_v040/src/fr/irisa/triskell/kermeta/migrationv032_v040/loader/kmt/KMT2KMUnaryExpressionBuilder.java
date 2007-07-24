@@ -8,13 +8,12 @@ package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 import java.util.Hashtable;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.loader.AbstractKermetaUnitLoader;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.UnaryExpression;
 
 /**
  * @author Franck Fleurey

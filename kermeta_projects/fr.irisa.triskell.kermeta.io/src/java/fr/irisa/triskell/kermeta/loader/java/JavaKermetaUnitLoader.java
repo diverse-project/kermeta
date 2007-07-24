@@ -1,6 +1,6 @@
 
 
-/*$Id: JavaKermetaUnitLoader.java,v 1.2 2007-07-20 15:08:07 ftanguy Exp $
+/*$Id: JavaKermetaUnitLoader.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	JavaKermetaUnitLoader.java
 * License : EPL
@@ -25,7 +25,6 @@ import org.kermeta.loader.AbstractKermetaUnitLoader;
 import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 

@@ -2,18 +2,39 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmAdapterFactory.java,v 1.6 2007-05-15 15:22:53 ftanguy Exp $
+ * $Id: KpmAdapterFactory.java,v 1.7 2007-07-24 13:47:13 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.util;
 
 import fr.irisa.triskell.kermeta.kpm.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import fr.irisa.triskell.kermeta.kpm.ANDExpression;
+import fr.irisa.triskell.kermeta.kpm.AbstractEntity;
+import fr.irisa.triskell.kermeta.kpm.Action;
+import fr.irisa.triskell.kermeta.kpm.Dependency;
+import fr.irisa.triskell.kermeta.kpm.Event;
+import fr.irisa.triskell.kermeta.kpm.ExistFilter;
+import fr.irisa.triskell.kermeta.kpm.Expression;
+import fr.irisa.triskell.kermeta.kpm.Filter;
+import fr.irisa.triskell.kermeta.kpm.FilterExpression;
+import fr.irisa.triskell.kermeta.kpm.In;
+import fr.irisa.triskell.kermeta.kpm.KPM;
+import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.NameFilter;
+import fr.irisa.triskell.kermeta.kpm.NestedExpression;
+import fr.irisa.triskell.kermeta.kpm.NullExpression;
+import fr.irisa.triskell.kermeta.kpm.ORExpression;
+import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Rule;
+import fr.irisa.triskell.kermeta.kpm.RuleType;
+import fr.irisa.triskell.kermeta.kpm.SimpleExpression;
+import fr.irisa.triskell.kermeta.kpm.Type;
+import fr.irisa.triskell.kermeta.kpm.TypeFilter;
+import fr.irisa.triskell.kermeta.kpm.Unit;
 
 /**
  * <!-- begin-user-doc -->
@@ -52,6 +73,7 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object object) {
 		if (object == modelPackage) {
 			return true;
@@ -68,75 +90,98 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected KpmSwitch modelSwitch =
-		new KpmSwitch() {
-			public Object caseDependency(Dependency object) {
-				return createDependencyAdapter();
-			}
-			public Object caseIn(In object) {
-				return createInAdapter();
-			}
-			public Object caseAction(Action object) {
-				return createActionAdapter();
-			}
-			public Object caseOut(Out object) {
-				return createOutAdapter();
-			}
-			public Object caseFilter(Filter object) {
-				return createFilterAdapter();
-			}
-			public Object caseExpression(Expression object) {
-				return createExpressionAdapter();
-			}
-			public Object caseNestedExpression(NestedExpression object) {
-				return createNestedExpressionAdapter();
-			}
-			public Object caseORExpression(ORExpression object) {
-				return createORExpressionAdapter();
-			}
-			public Object caseANDExpression(ANDExpression object) {
-				return createANDExpressionAdapter();
-			}
-			public Object caseFilterExpression(FilterExpression object) {
-				return createFilterExpressionAdapter();
-			}
-			public Object caseTypeFilter(TypeFilter object) {
-				return createTypeFilterAdapter();
-			}
-			public Object caseNameFilter(NameFilter object) {
-				return createNameFilterAdapter();
-			}
-			public Object caseAbstractEntity(AbstractEntity object) {
-				return createAbstractEntityAdapter();
-			}
-			public Object caseType(Type object) {
-				return createTypeAdapter();
-			}
-			public Object caseNullExpression(NullExpression object) {
-				return createNullExpressionAdapter();
-			}
-			public Object caseEvent(Event object) {
-				return createEventAdapter();
-			}
-			public Object caseSimpleExpression(SimpleExpression object) {
-				return createSimpleExpressionAdapter();
-			}
-			public Object caseKPM(KPM object) {
-				return createKPMAdapter();
-			}
-			public Object caseUnit(Unit object) {
-				return createUnitAdapter();
-			}
-			public Object caseExistFilter(ExistFilter object) {
-				return createExistFilterAdapter();
-			}
-			public Object caseRule(Rule object) {
+	protected KpmSwitch<Adapter> modelSwitch =
+		new KpmSwitch<Adapter>() {
+			@Override
+			public Adapter caseRule(Rule object) {
 				return createRuleAdapter();
 			}
-			public Object caseRuleType(RuleType object) {
+			@Override
+			public Adapter caseIn(In object) {
+				return createInAdapter();
+			}
+			@Override
+			public Adapter caseAction(Action object) {
+				return createActionAdapter();
+			}
+			@Override
+			public Adapter caseOut(Out object) {
+				return createOutAdapter();
+			}
+			@Override
+			public Adapter caseFilter(Filter object) {
+				return createFilterAdapter();
+			}
+			@Override
+			public Adapter caseExpression(Expression object) {
+				return createExpressionAdapter();
+			}
+			@Override
+			public Adapter caseNestedExpression(NestedExpression object) {
+				return createNestedExpressionAdapter();
+			}
+			@Override
+			public Adapter caseORExpression(ORExpression object) {
+				return createORExpressionAdapter();
+			}
+			@Override
+			public Adapter caseANDExpression(ANDExpression object) {
+				return createANDExpressionAdapter();
+			}
+			@Override
+			public Adapter caseFilterExpression(FilterExpression object) {
+				return createFilterExpressionAdapter();
+			}
+			@Override
+			public Adapter caseTypeFilter(TypeFilter object) {
+				return createTypeFilterAdapter();
+			}
+			@Override
+			public Adapter caseNameFilter(NameFilter object) {
+				return createNameFilterAdapter();
+			}
+			@Override
+			public Adapter caseAbstractEntity(AbstractEntity object) {
+				return createAbstractEntityAdapter();
+			}
+			@Override
+			public Adapter caseType(Type object) {
+				return createTypeAdapter();
+			}
+			@Override
+			public Adapter caseNullExpression(NullExpression object) {
+				return createNullExpressionAdapter();
+			}
+			@Override
+			public Adapter caseEvent(Event object) {
+				return createEventAdapter();
+			}
+			@Override
+			public Adapter caseSimpleExpression(SimpleExpression object) {
+				return createSimpleExpressionAdapter();
+			}
+			@Override
+			public Adapter caseKPM(KPM object) {
+				return createKPMAdapter();
+			}
+			@Override
+			public Adapter caseUnit(Unit object) {
+				return createUnitAdapter();
+			}
+			@Override
+			public Adapter caseExistFilter(ExistFilter object) {
+				return createExistFilterAdapter();
+			}
+			@Override
+			public Adapter caseRuleType(RuleType object) {
 				return createRuleTypeAdapter();
 			}
-			public Object defaultCase(EObject object) {
+			@Override
+			public Adapter caseDependency(Dependency object) {
+				return createDependencyAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -149,8 +194,9 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
+	@Override
 	public Adapter createAdapter(Notifier target) {
-		return (Adapter)modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 

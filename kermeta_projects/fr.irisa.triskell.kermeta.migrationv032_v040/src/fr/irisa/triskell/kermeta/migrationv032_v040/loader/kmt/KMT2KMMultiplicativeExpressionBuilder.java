@@ -8,15 +8,17 @@ package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 import java.util.Hashtable;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.loader.AbstractKermetaUnitLoader;
 import org.kermeta.loader.LoadingContext;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.MultiplicativeExpression;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.MultiplicativeOp;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.UnaryExpression;
 
 
 /**

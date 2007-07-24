@@ -2,9 +2,20 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMImpl.java,v 1.11 2007-06-15 14:45:34 ftanguy Exp $
+ * $Id: KPMImpl.java,v 1.12 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
+
+import java.util.Collection;
+import java.util.Iterator;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import fr.irisa.triskell.kermeta.kpm.Action;
 import fr.irisa.triskell.kermeta.kpm.Event;
@@ -17,26 +28,7 @@ import fr.irisa.triskell.kermeta.kpm.NameFilter;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.RuleType;
 import fr.irisa.triskell.kermeta.kpm.Type;
-
 import fr.irisa.triskell.kermeta.kpm.Unit;
-
-import java.util.Collection;
-import org.eclipse.emf.common.notify.Notification;
-import java.util.Iterator;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -66,7 +58,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList actions = null;
+	protected EList<Action> actions;
 
 	/**
 	 * The cached value of the '{@link #getFilters() <em>Filters</em>}' containment reference list.
@@ -76,7 +68,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList filters = null;
+	protected EList<Filter> filters;
 
 	/**
 	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
@@ -86,7 +78,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList types = null;
+	protected EList<Type> types;
 
 	/**
 	 * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.
@@ -96,7 +88,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList rules = null;
+	protected EList<Rule> rules;
 
 	/**
 	 * The cached value of the '{@link #getEvents() <em>Events</em>}' containment reference list.
@@ -106,7 +98,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList events = null;
+	protected EList<Event> events;
 
 	/**
 	 * The cached value of the '{@link #getUnits() <em>Units</em>}' containment reference list.
@@ -116,7 +108,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList units = null;
+	protected EList<Unit> units;
 
 	/**
 	 * The cached value of the '{@link #getRuleTypes() <em>Rule Types</em>}' containment reference list.
@@ -126,7 +118,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList ruleTypes = null;
+	protected EList<RuleType> ruleTypes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -142,6 +134,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.KPM;
 	}
@@ -151,9 +144,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getActions() {
+	public EList<Action> getActions() {
 		if (actions == null) {
-			actions = new EObjectContainmentEList(Action.class, this, KpmPackage.KPM__ACTIONS);
+			actions = new EObjectContainmentEList<Action>(Action.class, this, KpmPackage.KPM__ACTIONS);
 		}
 		return actions;
 	}
@@ -163,9 +156,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getFilters() {
+	public EList<Filter> getFilters() {
 		if (filters == null) {
-			filters = new EObjectContainmentEList(Filter.class, this, KpmPackage.KPM__FILTERS);
+			filters = new EObjectContainmentEList<Filter>(Filter.class, this, KpmPackage.KPM__FILTERS);
 		}
 		return filters;
 	}
@@ -175,9 +168,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getEvents() {
+	public EList<Event> getEvents() {
 		if (events == null) {
-			events = new EObjectContainmentEList(Event.class, this, KpmPackage.KPM__EVENTS);
+			events = new EObjectContainmentEList<Event>(Event.class, this, KpmPackage.KPM__EVENTS);
 		}
 		return events;
 	}
@@ -187,9 +180,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getUnits() {
+	public EList<Unit> getUnits() {
 		if (units == null) {
-			units = new EObjectContainmentEList(Unit.class, this, KpmPackage.KPM__UNITS);
+			units = new EObjectContainmentEList<Unit>(Unit.class, this, KpmPackage.KPM__UNITS);
 		}
 		return units;
 	}
@@ -199,9 +192,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getRuleTypes() {
+	public EList<RuleType> getRuleTypes() {
 		if (ruleTypes == null) {
-			ruleTypes = new EObjectContainmentEList(RuleType.class, this, KpmPackage.KPM__RULE_TYPES);
+			ruleTypes = new EObjectContainmentEList<RuleType>(RuleType.class, this, KpmPackage.KPM__RULE_TYPES);
 		}
 		return ruleTypes;
 	}
@@ -397,22 +390,23 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KpmPackage.KPM__ACTIONS:
-				return ((InternalEList)getActions()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__FILTERS:
-				return ((InternalEList)getFilters()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getFilters()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__TYPES:
-				return ((InternalEList)getTypes()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__RULES:
-				return ((InternalEList)getRules()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__EVENTS:
-				return ((InternalEList)getEvents()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getEvents()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__UNITS:
-				return ((InternalEList)getUnits()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getUnits()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__RULE_TYPES:
-				return ((InternalEList)getRuleTypes()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getRuleTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -422,6 +416,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.KPM__ACTIONS:
@@ -447,35 +442,37 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.KPM__ACTIONS:
 				getActions().clear();
-				getActions().addAll((Collection)newValue);
+				getActions().addAll((Collection<? extends Action>)newValue);
 				return;
 			case KpmPackage.KPM__FILTERS:
 				getFilters().clear();
-				getFilters().addAll((Collection)newValue);
+				getFilters().addAll((Collection<? extends Filter>)newValue);
 				return;
 			case KpmPackage.KPM__TYPES:
 				getTypes().clear();
-				getTypes().addAll((Collection)newValue);
+				getTypes().addAll((Collection<? extends Type>)newValue);
 				return;
 			case KpmPackage.KPM__RULES:
 				getRules().clear();
-				getRules().addAll((Collection)newValue);
+				getRules().addAll((Collection<? extends Rule>)newValue);
 				return;
 			case KpmPackage.KPM__EVENTS:
 				getEvents().clear();
-				getEvents().addAll((Collection)newValue);
+				getEvents().addAll((Collection<? extends Event>)newValue);
 				return;
 			case KpmPackage.KPM__UNITS:
 				getUnits().clear();
-				getUnits().addAll((Collection)newValue);
+				getUnits().addAll((Collection<? extends Unit>)newValue);
 				return;
 			case KpmPackage.KPM__RULE_TYPES:
 				getRuleTypes().clear();
-				getRuleTypes().addAll((Collection)newValue);
+				getRuleTypes().addAll((Collection<? extends RuleType>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -486,6 +483,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.KPM__ACTIONS:
@@ -518,6 +516,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KpmPackage.KPM__ACTIONS:
@@ -543,9 +542,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getTypes() {
+	public EList<Type> getTypes() {
 		if (types == null) {
-			types = new EObjectContainmentEList(Type.class, this, KpmPackage.KPM__TYPES);
+			types = new EObjectContainmentEList<Type>(Type.class, this, KpmPackage.KPM__TYPES);
 		}
 		return types;
 	}
@@ -555,9 +554,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getRules() {
+	public EList<Rule> getRules() {
 		if (rules == null) {
-			rules = new EObjectContainmentEList(Rule.class, this, KpmPackage.KPM__RULES);
+			rules = new EObjectContainmentEList<Rule>(Rule.class, this, KpmPackage.KPM__RULES);
 		}
 		return rules;
 	}

@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.12 2007-07-20 15:08:11 ftanguy Exp $
+/* $Id: Ecore2KM.java,v 1.13 2007-07-24 13:46:46 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL
@@ -12,17 +12,13 @@
 package fr.irisa.triskell.kermeta.loader.ecore;
 
 import java.util.Hashtable;
-import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.ENamedElement;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 
 
 public class Ecore2KM {

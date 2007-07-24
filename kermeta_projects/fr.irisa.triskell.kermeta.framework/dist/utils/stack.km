@@ -75,21 +75,21 @@
   </packages>
   <requires uri="../Standard.kmt"/>
   <usings qualifiedName="kermeta::standard"/>
-  <referencedModelingUnits href="../standard/collections.km#/"/>
-  <referencedModelingUnits href="../standard/java.km#/"/>
   <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
-  <referencedModelingUnits href="../persistence/resource.km#/"/>
-  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
-  <referencedModelingUnits href="../reflection/reflection.km#/"/>
   <referencedModelingUnits href="../kunit/kunit.km#/"/>
-  <referencedModelingUnits href="../kunit/assert.km#/"/>
   <referencedModelingUnits href="../language/behavior.km#/"/>
+  <referencedModelingUnits href="../persistence/resource.km#/"/>
+  <referencedModelingUnits href="../kunit/assert.km#/"/>
   <referencedModelingUnits href="#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>
-  <referencedModelingUnits href="../standard/primitive_types.km#/"/>
   <referencedModelingUnits href="../Standard.km#/"/>
-  <referencedModelingUnits href="../io/file_io.km#/"/>
+  <referencedModelingUnits href="../standard/collections.km#/"/>
+  <referencedModelingUnits href="../standard/java.km#/"/>
   <referencedModelingUnits href="../language/structure.km#/"/>
-  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
+  <referencedModelingUnits href="../io/file_io.km#/"/>
+  <referencedModelingUnits href="../standard/primitive_types.km#/"/>
   <referencedModelingUnits href="hashtable.km#/"/>
+  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="../reflection/reflection.km#/"/>
 </kermeta_language_structure:ModelingUnit>

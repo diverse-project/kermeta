@@ -1,4 +1,4 @@
-/* $Id: TypeMatchChecker.java,v 1.6 2007-07-20 15:08:03 ftanguy Exp $
+/* $Id: TypeMatchChecker.java,v 1.7 2007-07-24 13:46:45 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeMatchChecker.java
 * License : EPL
@@ -26,12 +26,10 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
-import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 

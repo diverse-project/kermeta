@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2_1.java,v 1.3 2007-07-23 09:16:19 ftanguy Exp $
+/* $Id: KMT2KMPass2_1.java,v 1.4 2007-07-24 13:46:22 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMPass2_1.java
  * License : EPL
@@ -13,8 +13,6 @@
  */
 package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
-
-import java.util.Stack;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;

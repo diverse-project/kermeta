@@ -1,4 +1,4 @@
-/*$Id: KermetaPreferencePage.java,v 1.2 2007-04-13 14:47:56 ftanguy Exp $
+/*$Id: KermetaPreferencePage.java,v 1.3 2007-07-24 13:46:59 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -9,11 +9,12 @@
 */
 package fr.irisa.triskell.kermeta.ui.preferences;
 
-import org.eclipse.jface.preference.*;
+import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPreferencePage;
+
 import fr.irisa.triskell.kermeta.ui.KermetaUIPlugin;
 
 /**

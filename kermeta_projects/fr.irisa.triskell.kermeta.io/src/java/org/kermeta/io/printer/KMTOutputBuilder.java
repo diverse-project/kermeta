@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTOutputBuilder.java,v 1.2 2007-07-20 15:08:17 ftanguy Exp $
+/*$Id: KMTOutputBuilder.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io2
 * File : 	KMTOutputBuilder.java
 * License : EPL
@@ -13,8 +13,6 @@
 package org.kermeta.io.printer;
 
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;

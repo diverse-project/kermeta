@@ -1,4 +1,4 @@
-/* $Id: IKermetaRemoteDebugUI.java,v 1.3 2005-12-08 17:38:13 zdrey Exp $
+/* $Id: IKermetaRemoteDebugUI.java,v 1.4 2007-07-24 13:47:19 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : IKermetaRemoteDebugUI.java
  * License   : EPL
@@ -11,8 +11,6 @@ package fr.irisa.triskell.kermeta.runner.debug.remote.interpreter;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-
-import org.eclipse.debug.core.DebugException;
 
 /**
  * Client side

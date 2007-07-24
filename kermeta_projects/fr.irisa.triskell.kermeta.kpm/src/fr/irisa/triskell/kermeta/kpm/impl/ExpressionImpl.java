@@ -2,18 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExpressionImpl.java,v 1.2 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: ExpressionImpl.java,v 1.3 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import fr.irisa.triskell.kermeta.kpm.Expression;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
-
-import fr.irisa.triskell.kermeta.kpm.Unit;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,6 +36,7 @@ public abstract class ExpressionImpl extends EObjectImpl implements Expression {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.EXPRESSION;
 	}

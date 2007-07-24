@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteInterpreter.java,v 1.11 2006-05-16 15:35:59 jmottu Exp $
+/* $Id: KermetaRemoteInterpreter.java,v 1.12 2007-07-24 13:47:19 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteInterpreter.java
  * License   : EPL
@@ -11,28 +11,19 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.remote.interpreter;
 
-import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Enumeration;
 import java.util.Hashtable;
 
-import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
-
-
-import fr.irisa.triskell.kermeta.runner.RunnerConstants;
+import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
+import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions.ResumeCondition;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions.StepIntoCondition;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions.StepOverCondition;
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaDebugWrapper;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 
 

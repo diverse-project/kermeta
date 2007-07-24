@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.2 2007-07-23 09:16:19 ftanguy Exp $
+/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.3 2007-07-24 13:46:22 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMPostfixExpressionBuilder.java
  * License : EPL
@@ -10,10 +10,8 @@
 package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.loader.AbstractKermetaUnitLoader;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
@@ -21,6 +19,14 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
 import fr.irisa.triskell.kermeta.language.behavior.LambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ActualParameter;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.CallPostfix;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FExpression;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FExpressionLst;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.LambdaPostfix;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.LambdaPostfixParam;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ParamPostfix;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.PostfixExp;
 
 /**
  * @author Franck Fleurey

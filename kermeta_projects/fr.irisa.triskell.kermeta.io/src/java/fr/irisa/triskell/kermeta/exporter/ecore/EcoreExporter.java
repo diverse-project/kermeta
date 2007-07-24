@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.2 2007-07-20 15:08:12 ftanguy Exp $
+/*$Id: EcoreExporter.java,v 1.3 2007-07-24 13:46:51 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -13,14 +13,12 @@
 package fr.irisa.triskell.kermeta.exporter.ecore;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -36,29 +34,20 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.loader.kmt.fixer.TypeContainementFixer;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
-import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTBuildingState;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
 import fr.irisa.triskell.kermeta.modelhelper.StringHelper;
 
@@ -258,8 +247,8 @@ public class EcoreExporter {
 						if ( resources.get(importedUnit) != null )
 							annotation.getReferences().addAll( resources.get(importedUnit).getContents() );
 						
-					for ( Resource frameworkResource : frameworkResources )
-						annotation.getReferences().addAll( resource.getContents() );
+					/*for ( Resource frameworkResource : frameworkResources )
+						annotation.getReferences().addAll( resource.getContents() );*/
 					
 					resource.getContents().add( annotation );
 									

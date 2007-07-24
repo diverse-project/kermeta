@@ -2,19 +2,42 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactoryImpl.java,v 1.6 2007-07-20 15:09:04 ftanguy Exp $
+ * $Id: BehaviorFactoryImpl.java,v 1.7 2007-07-24 13:47:32 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
-
-import fr.irisa.triskell.kermeta.language.behavior.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import fr.irisa.triskell.kermeta.language.behavior.Assignment;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
+import fr.irisa.triskell.kermeta.language.behavior.Block;
+import fr.irisa.triskell.kermeta.language.behavior.BooleanLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.CallResult;
+import fr.irisa.triskell.kermeta.language.behavior.CallSuperOperation;
+import fr.irisa.triskell.kermeta.language.behavior.CallValue;
+import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
+import fr.irisa.triskell.kermeta.language.behavior.Conditional;
+import fr.irisa.triskell.kermeta.language.behavior.EmptyExpression;
+import fr.irisa.triskell.kermeta.language.behavior.IntegerLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaParameter;
+import fr.irisa.triskell.kermeta.language.behavior.Loop;
+import fr.irisa.triskell.kermeta.language.behavior.Raise;
+import fr.irisa.triskell.kermeta.language.behavior.Rescue;
+import fr.irisa.triskell.kermeta.language.behavior.SelfExpression;
+import fr.irisa.triskell.kermeta.language.behavior.StringLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
+import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
+import fr.irisa.triskell.kermeta.language.behavior.VoidLiteral;
 
 /**
  * <!-- begin-user-doc -->

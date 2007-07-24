@@ -1,4 +1,4 @@
-/* $Id: KermetaValue.java,v 1.7 2005-12-16 09:54:19 zdrey Exp $
+/* $Id: KermetaValue.java,v 1.8 2007-07-24 13:47:19 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaValue.java
  * License   : GPL
@@ -9,7 +9,6 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
 
 import org.eclipse.debug.core.DebugException;

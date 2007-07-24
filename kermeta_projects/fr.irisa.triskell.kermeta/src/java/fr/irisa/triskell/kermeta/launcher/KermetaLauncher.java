@@ -1,5 +1,5 @@
 
-/*$Id: KermetaLauncher.java,v 1.2 2007-07-20 15:09:18 ftanguy Exp $
+/*$Id: KermetaLauncher.java,v 1.3 2007-07-24 13:46:39 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta
  * File : 	KermetaLauncher.java
  * License : EPL
@@ -11,7 +11,6 @@
 
 package fr.irisa.triskell.kermeta.launcher;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import org.kermeta.io.KermetaUnit;

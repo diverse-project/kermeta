@@ -2,10 +2,8 @@ package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.loader.AbstractKermetaUnitLoader;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.CallResult;
@@ -22,6 +20,30 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ActualParameter;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Basictype;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FBlock;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FBooleanLiteral;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FConditional;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FExpression;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FExpressionLst;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FIntegerLiteral;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FJavaStaticCall;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FLambdaExpression;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FLambdaparam;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FLoop;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FRaiseException;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FRescue;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FSelfCall;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FStringLiteral;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FSuperCall;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FTypeOrVarLiteral;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FVariableDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FVoidLiteral;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ParentExp;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.PrimitiveExpression;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ResultCall;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ValueCall;
 
 /**
  * @author Franck Fleurey

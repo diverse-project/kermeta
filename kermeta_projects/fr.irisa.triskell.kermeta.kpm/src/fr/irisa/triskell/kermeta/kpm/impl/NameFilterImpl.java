@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NameFilterImpl.java,v 1.3 2007-06-26 12:29:04 ftanguy Exp $
+ * $Id: NameFilterImpl.java,v 1.4 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -64,6 +64,7 @@ public class NameFilterImpl extends FilterImpl implements NameFilter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.NAME_FILTER;
 	}
@@ -94,6 +95,7 @@ public class NameFilterImpl extends FilterImpl implements NameFilter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.NAME_FILTER__REGEX:
@@ -107,6 +109,7 @@ public class NameFilterImpl extends FilterImpl implements NameFilter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.NAME_FILTER__REGEX:
@@ -121,6 +124,7 @@ public class NameFilterImpl extends FilterImpl implements NameFilter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.NAME_FILTER__REGEX:
@@ -135,6 +139,7 @@ public class NameFilterImpl extends FilterImpl implements NameFilter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KpmPackage.NAME_FILTER__REGEX:
@@ -148,6 +153,7 @@ public class NameFilterImpl extends FilterImpl implements NameFilter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

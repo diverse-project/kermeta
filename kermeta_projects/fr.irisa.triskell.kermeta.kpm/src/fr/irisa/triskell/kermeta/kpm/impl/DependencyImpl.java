@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyImpl.java,v 1.6 2007-05-15 15:22:53 ftanguy Exp $
+ * $Id: DependencyImpl.java,v 1.7 2007-07-24 13:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -43,7 +43,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * @generated
 	 * @ordered
 	 */
-	protected RuleType type = null;
+	protected RuleType type;
 
 	/**
 	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
@@ -53,7 +53,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * @generated
 	 * @ordered
 	 */
-	protected Unit from = null;
+	protected Unit from;
 
 	/**
 	 * The cached value of the '{@link #getTo() <em>To</em>}' reference.
@@ -63,7 +63,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * @generated
 	 * @ordered
 	 */
-	protected Unit to = null;
+	protected Unit to;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -79,6 +79,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KpmPackage.Literals.DEPENDENCY;
 	}
@@ -202,6 +203,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.DEPENDENCY__TYPE:
@@ -222,6 +224,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.DEPENDENCY__TYPE:
@@ -242,6 +245,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.DEPENDENCY__TYPE:
@@ -262,6 +266,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KpmPackage.DEPENDENCY__TYPE:

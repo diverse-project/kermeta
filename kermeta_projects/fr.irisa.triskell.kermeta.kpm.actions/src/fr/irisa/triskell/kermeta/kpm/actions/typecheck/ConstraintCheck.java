@@ -1,6 +1,6 @@
 
 
-/*$Id: ConstraintCheck.java,v 1.4 2007-07-20 15:09:26 ftanguy Exp $
+/*$Id: ConstraintCheck.java,v 1.5 2007-07-24 13:46:35 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	ConstraintCheck.java
 * License : EPL
@@ -12,14 +12,11 @@
 
 package fr.irisa.triskell.kermeta.kpm.actions.typecheck;
 
-import java.util.Date;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Out;

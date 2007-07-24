@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass.java,v 1.11 2007-07-20 15:08:06 ftanguy Exp $
+/* $Id: KMT2KMPass.java,v 1.12 2007-07-24 13:46:45 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
  * License : GPL
@@ -16,12 +16,9 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Stack;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.loader.AbstractKermetaUnitLoader;
 import org.kermeta.loader.LoadingContext;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
@@ -44,11 +41,7 @@ import fr.irisa.triskell.kermeta.ast.TypeRef;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-//import fr.irisa.triskell.kermeta.language.structure.FOperation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
-//import fr.irisa.triskell.kermeta.language.structure.FProperty;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 
 

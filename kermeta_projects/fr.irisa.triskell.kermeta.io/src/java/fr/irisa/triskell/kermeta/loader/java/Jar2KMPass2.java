@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass2.java,v 1.6 2007-07-20 15:08:07 ftanguy Exp $
+/* $Id: Jar2KMPass2.java,v 1.7 2007-07-24 13:46:48 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass2.java
  * License : EPL
@@ -16,8 +16,6 @@ package fr.irisa.triskell.kermeta.loader.java;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
@@ -25,14 +23,13 @@ import java.util.jar.JarInputStream;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Filter;
 import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
-import org.kermeta.io.KermetaUnit;
 
 /**
  *  Jar2KM PASS 2 : creates packages and collects types

@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugUI.java,v 1.13 2006-09-20 07:40:59 zdrey Exp $
+/* $Id: KermetaRemoteDebugUI.java,v 1.14 2007-07-24 13:47:20 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugUI.java
  * License   : EPL
@@ -19,25 +19,17 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
-import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;
-import org.eclipse.debug.core.model.IThread;
-import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
-import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
-import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaBreakpoint;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugTarget;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugThread;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaStackFrame;
-import fr.irisa.triskell.kermeta.runner.debug.model.KermetaValue;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaVariable;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteDebugUI;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
@@ -45,7 +37,6 @@ import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableBre
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableCallFrame;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableValue;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableVariable;
-import fr.irisa.triskell.kermeta.runner.debug.util.KermetaDebugWrapper;
 
 public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermetaRemoteDebugUI {
 
@@ -179,7 +170,7 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 	}
 	
 	/**
-	 * TODO: should we carrément define a constructor : 
+	 * TODO: should we carrï¿½ment define a constructor : 
 	 * KermetaVariable(SerializableVariable v) ?
 	 * @param vars
 	 * @return an array of IVariable or null if there are no variable

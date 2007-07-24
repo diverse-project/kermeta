@@ -1,4 +1,4 @@
-/*$Id: DependenciesDoubleClickListener.java,v 1.2 2007-04-13 14:47:56 ftanguy Exp $
+/*$Id: DependenciesDoubleClickListener.java,v 1.3 2007-07-24 13:46:59 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -20,7 +20,6 @@ import org.eclipse.ui.part.FileEditorInput;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.ui.FileDependencyTreeItem;
 import fr.irisa.triskell.kermeta.ui.TreeItem;
 
 public class DependenciesDoubleClickListener implements IDoubleClickListener {

@@ -2,14 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RescueValidator.java,v 1.2 2007-07-20 15:08:57 ftanguy Exp $
+ * $Id: RescueValidator.java,v 1.3 2007-07-24 13:47:32 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.validation;
 
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
-
 import org.eclipse.emf.common.util.EList;
+
+import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 
 /**
  * A sample validator interface for {@link fr.irisa.triskell.kermeta.language.behavior.Rescue}.

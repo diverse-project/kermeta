@@ -1,4 +1,4 @@
-/* $Id: ExternJavaClassGenerator.java,v 1.11 2007-07-20 15:08:39 ftanguy Exp $
+/* $Id: ExternJavaClassGenerator.java,v 1.12 2007-07-24 13:47:05 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : ExternJavaClassGenerator.java
  * License : GPL
@@ -23,19 +23,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.List;
-
-import javax.naming.InitialContext;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
-
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall;
-import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 

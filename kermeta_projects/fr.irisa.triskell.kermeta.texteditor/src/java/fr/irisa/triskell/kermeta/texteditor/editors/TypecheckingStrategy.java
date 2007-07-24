@@ -1,4 +1,4 @@
-/* $Id: TypecheckingStrategy.java,v 1.6 2007-07-20 15:09:22 ftanguy Exp $
+/* $Id: TypecheckingStrategy.java,v 1.7 2007-07-24 13:46:56 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : TypecheckingStrategy.java
 * License : EPL
@@ -25,10 +25,13 @@ import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.util2.KermetaUnitHelper;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 
@@ -74,18 +77,30 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 						
 						IOPlugin.getDefault().unload( editor.getFile() );
 						
-						KermetaUnit kermetaUnit = KermetaUnitHelper.typecheckFile( editor.getFile(), editor.getFileContent() );
-						
-						if ( ! kermetaUnit.isErrored() ) {
-							KermetaConstraintChecker checker = new KermetaConstraintChecker(kermetaUnit);
-							checker.checkUnit();
-						}
-						
-						if (monitor.isCanceled())
-							return Status.CANCEL_STATUS;
-				
-						editor.updateValue(kermetaUnit);
-						KermetaMarkersHelper.createMarkers(editor.getFile(), kermetaUnit);
+						KermetaUnit kermetaUnit;
+						try {
+							kermetaUnit = IOPlugin.getDefault().loadKermetaUnit( editor.getFile(), editor.getFileContent() );
+							KermetaTypeChecker typechecker = new KermetaTypeChecker( kermetaUnit );
+							typechecker.checkUnit();
+							
+							if ( ! kermetaUnit.isErrored() ) {
+								KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( kermetaUnit );
+								constraintchecker.checkUnit();
+							}
+							
+							if (monitor.isCanceled())
+								return Status.CANCEL_STATUS;
+					
+							editor.updateValue(kermetaUnit);
+							KermetaMarkersHelper.createMarkers(editor.getFile(), kermetaUnit);	
+						} catch (KermetaIOFileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (URIMalformedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}						
+
 						return Status.OK_STATUS;
 					}
 					
@@ -110,7 +125,7 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 					
 					public IStatus run(IProgressMonitor monitor) {
 			
-						KermetaUnitHelper.abortTypechecking(editor.getFile());
+						//KermetaUnitHelper.abortTypechecking(editor.getFile());
 								
 						Unit unit = editor.getUnit();
 						KermetaUnitHost.getInstance().declareInterest(interest, unit);

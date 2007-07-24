@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterestEntryImpl.java,v 1.1 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: InterestEntryImpl.java,v 1.2 2007-07-24 13:47:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.interest.impl;
 
@@ -42,7 +42,7 @@ public class InterestEntryImpl extends EObjectImpl implements InterestEntry {
 	 * @generated
 	 * @ordered
 	 */
-	protected InterestKey key = null;
+	protected InterestKey key;
 
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -78,6 +78,7 @@ public class InterestEntryImpl extends EObjectImpl implements InterestEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return InterestPackage.Literals.INTEREST_ENTRY;
 	}
@@ -151,6 +152,7 @@ public class InterestEntryImpl extends EObjectImpl implements InterestEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_ENTRY__KEY:
@@ -164,6 +166,7 @@ public class InterestEntryImpl extends EObjectImpl implements InterestEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_ENTRY__KEY:
@@ -179,13 +182,14 @@ public class InterestEntryImpl extends EObjectImpl implements InterestEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_ENTRY__KEY:
 				setKey((InterestKey)newValue);
 				return;
 			case InterestPackage.INTEREST_ENTRY__VALUE:
-				setValue((Object)newValue);
+				setValue(newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -196,6 +200,7 @@ public class InterestEntryImpl extends EObjectImpl implements InterestEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_ENTRY__KEY:
@@ -213,6 +218,7 @@ public class InterestEntryImpl extends EObjectImpl implements InterestEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_ENTRY__KEY:
@@ -228,6 +234,7 @@ public class InterestEntryImpl extends EObjectImpl implements InterestEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

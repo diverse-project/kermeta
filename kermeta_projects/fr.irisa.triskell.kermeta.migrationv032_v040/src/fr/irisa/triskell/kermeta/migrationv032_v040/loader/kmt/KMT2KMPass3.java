@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.3 2007-07-23 09:16:19 ftanguy Exp $
+/* $Id: KMT2KMPass3.java,v 1.4 2007-07-24 13:46:21 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -13,9 +13,7 @@
 package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
 
-import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Stack;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -24,26 +22,37 @@ import org.kermeta.loader.LoadingContext;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
-import fr.irisa.triskell.kermeta.migrationv032_v040.parser.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
-import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.VirtualType;
-//import fr.irisa.triskell.kermeta.language.structure.FType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.AbstractModifier;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ClassDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.DataTypeDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.EnumDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.EnumLiteral;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.KermetaASTNodeVisitor;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ModelTypeDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Operation;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.OperationBody;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Param;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Property;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.PropertyBody;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.PropertyKind;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ReadOnlyModifier;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Type;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.TypeVarDecl;
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.UsingStmt;
+import fr.irisa.triskell.kermeta.migrationv032_v040.parser.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
-
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 

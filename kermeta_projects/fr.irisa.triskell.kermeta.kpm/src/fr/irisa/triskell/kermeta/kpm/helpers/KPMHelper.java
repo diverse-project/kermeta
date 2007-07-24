@@ -1,4 +1,4 @@
-/*$Id: KPMHelper.java,v 1.16 2007-07-23 14:00:21 ftanguy Exp $
+/*$Id: KPMHelper.java,v 1.17 2007-07-24 13:47:13 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -15,10 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceDelta;
-import org.eclipse.core.resources.IResourceDeltaVisitor;
-import org.eclipse.core.runtime.CoreException;
 
 import fr.irisa.triskell.kermeta.kpm.FilterExpression;
 import fr.irisa.triskell.kermeta.kpm.In;
@@ -29,7 +25,6 @@ import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.properties.KPMConstants;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 
 public class KPMHelper {
 
@@ -115,8 +110,7 @@ public class KPMHelper {
 		return kpm;
 	}
 	
-	static private void addOpenDependencyOnProject(KPM kpm, Unit unit) {
-		/* project */
+	/*static private void addOpenDependencyOnProject(KPM kpm, Unit unit) {
 		In in = InOutHelper.createIn();
 		Out out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.openProject");
 		
@@ -125,7 +119,7 @@ public class KPMHelper {
 		unit.getRules().add(rule);
 		
 		kpm.getUnits().add(unit);
-	}
+	}*/
 	
 	static public void addUpdateDependencyForKMTFile(KPM kpm) {
 		

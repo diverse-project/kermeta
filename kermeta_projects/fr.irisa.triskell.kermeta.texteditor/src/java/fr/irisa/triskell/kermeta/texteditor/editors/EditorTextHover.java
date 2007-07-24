@@ -1,4 +1,4 @@
-/* $Id: EditorTextHover.java,v 1.22 2007-07-20 15:09:23 ftanguy Exp $
+/* $Id: EditorTextHover.java,v 1.23 2007-07-24 13:46:56 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorTextHover.java
 * License : EPL
@@ -16,7 +16,6 @@ import java.util.Iterator;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IRegion;
@@ -24,17 +23,12 @@ import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.ITextHoverExtension;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
-
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
-
 import fr.irisa.triskell.kermeta.language.structure.Tag;
-
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 

@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.24 2007-02-13 09:20:53 ftanguy Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.25 2007-07-24 13:47:19 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: EPL
@@ -17,14 +17,10 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
-
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugTarget;
 
 

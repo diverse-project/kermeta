@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterestKeyImpl.java,v 1.1 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: InterestKeyImpl.java,v 1.2 2007-07-24 13:47:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.interest.impl;
 
@@ -64,7 +64,7 @@ public class InterestKeyImpl extends EObjectImpl implements InterestKey {
 	 * @generated
 	 * @ordered
 	 */
-	protected Unit unit = null;
+	protected Unit unit;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -80,6 +80,7 @@ public class InterestKeyImpl extends EObjectImpl implements InterestKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return InterestPackage.Literals.INTEREST_KEY;
 	}
@@ -148,6 +149,7 @@ public class InterestKeyImpl extends EObjectImpl implements InterestKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_KEY__DECLARING_OBJECT:
@@ -164,6 +166,7 @@ public class InterestKeyImpl extends EObjectImpl implements InterestKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_KEY__DECLARING_OBJECT:
@@ -181,6 +184,7 @@ public class InterestKeyImpl extends EObjectImpl implements InterestKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_KEY__DECLARING_OBJECT:
@@ -198,6 +202,7 @@ public class InterestKeyImpl extends EObjectImpl implements InterestKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case InterestPackage.INTEREST_KEY__DECLARING_OBJECT:
@@ -213,6 +218,7 @@ public class InterestKeyImpl extends EObjectImpl implements InterestKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
