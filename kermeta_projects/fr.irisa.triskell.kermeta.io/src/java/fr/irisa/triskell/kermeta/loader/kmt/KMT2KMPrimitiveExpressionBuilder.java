@@ -1,3 +1,16 @@
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.18 2007-07-24 15:08:35 cfaucher Exp $
+ * Project : Kermeta io
+ * File : KMT2KMExpressionBuilder.java
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 6 févr. 2005
+ * Authors : 
+ * 		Franck Fleurey 	<ffleurey@irisa.fr>
+ * 		Didier Vojtisek <dvojtise@irisa.fr>
+ * 		Francois Tanguy <ftanguy@irisa.fr>
+ */
+
 package fr.irisa.triskell.kermeta.loader.kmt;
 
 
