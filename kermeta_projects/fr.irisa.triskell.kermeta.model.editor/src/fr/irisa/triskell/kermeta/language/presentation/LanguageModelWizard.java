@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LanguageModelWizard.java,v 1.2 2006-10-24 09:19:08 cfaucher Exp $
+ * $Id: LanguageModelWizard.java,v 1.3 2007-07-24 08:50:53 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.presentation;
 
@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.StringTokenizer;
 
+import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EClass;
@@ -96,6 +97,13 @@ import org.eclipse.ui.PartInitException;
  */
 public class LanguageModelWizard extends Wizard implements INewWizard {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * This caches an instance of the model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -149,7 +157,7 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected List initialObjectNames;
+	protected List<String> initialObjectNames;
 
 	/**
 	 * This just records the information.
@@ -170,11 +178,10 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection getInitialObjectNames() {
+	protected Collection<String> getInitialObjectNames() {
 		if (initialObjectNames == null) {
-			initialObjectNames = new ArrayList();
-			for (Iterator classifiers = languagePackage.getEClassifiers().iterator(); classifiers.hasNext(); ) {
-				EClassifier eClassifier = (EClassifier)classifiers.next();
+			initialObjectNames = new ArrayList<String>();
+			for (EClassifier eClassifier : languagePackage.getEClassifiers()) {
 				if (eClassifier instanceof EClass) {
 					EClass eClass = (EClass)eClassifier;
 					if (!eClass.isAbstract()) {
@@ -182,7 +189,7 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 					}
 				}
 			}
-			Collections.sort(initialObjectNames, java.text.Collator.getInstance());
+			Collections.sort(initialObjectNames, CommonPlugin.INSTANCE.getComparator());
 		}
 		return initialObjectNames;
 	}
@@ -205,6 +212,7 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean performFinish() {
 		try {
 			// Remember the file.
@@ -215,6 +223,7 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 			//
 			WorkspaceModifyOperation operation =
 				new WorkspaceModifyOperation() {
+					@Override
 					protected void execute(IProgressMonitor progressMonitor) {
 						try {
 							// Create a resource set
@@ -223,7 +232,7 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 
 							// Get the URI of the model file.
 							//
-							URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath().toString());
+							URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath().toString(), true);
 
 							// Create a resource for this file.
 							//
@@ -238,7 +247,7 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 
 							// Save the contents of the resource to the file system.
 							//
-							Map options = new HashMap();
+							Map<Object, Object> options = new HashMap<Object, Object>();
 							options.put(XMLResource.OPTION_ENCODING, initialObjectCreationPage.getEncoding());
 							resource.save(options);
 						}
@@ -311,6 +320,7 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		protected boolean validatePage() {
 			if (super.validatePage()) {
 				// Make sure the file ends in ".language".
@@ -359,7 +369,7 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 */
-		protected List encodings;
+		protected List<String> encodings;
 
 		/**
 		 * <!-- begin-user-doc -->
@@ -384,8 +394,7 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		public void createControl(Composite parent) {
-			Composite composite = new Composite(parent, SWT.NONE);
-			{
+			Composite composite = new Composite(parent, SWT.NONE); {
 				GridLayout layout = new GridLayout();
 				layout.numColumns = 1;
 				layout.verticalSpacing = 12;
@@ -415,8 +424,8 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 				initialObjectField.setLayoutData(data);
 			}
 
-			for (Iterator i = getInitialObjectNames().iterator(); i.hasNext(); ) {
-				initialObjectField.add(getLabel((String)i.next()));
+			for (String objectName : getInitialObjectNames()) {
+				initialObjectField.add(getLabel(objectName));
 			}
 
 			if (initialObjectField.getItemCount() == 1) {
@@ -440,8 +449,8 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 				encodingField.setLayoutData(data);
 			}
 
-			for (Iterator i = getEncodings().iterator(); i.hasNext(); ) {
-				encodingField.add((String)i.next());
+			for (String encoding : getEncodings()) {
+				encodingField.add(encoding);
 			}
 
 			encodingField.select(0);
@@ -477,6 +486,7 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		public void setVisible(boolean visible) {
 			super.setVisible(visible);
 			if (visible) {
@@ -499,8 +509,7 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 		public String getInitialObjectName() {
 			String label = initialObjectField.getText();
 
-			for (Iterator i = getInitialObjectNames().iterator(); i.hasNext(); ) {
-				String name = (String)i.next();
+			for (String name : getInitialObjectNames()) {
 				if (getLabel(name).equals(label)) {
 					return name;
 				}
@@ -538,9 +547,9 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		protected Collection getEncodings() {
+		protected Collection<String> getEncodings() {
 			if (encodings == null) {
-				encodings = new ArrayList();
+				encodings = new ArrayList<String>();
 				for (StringTokenizer stringTokenizer = new StringTokenizer(KermetaEditorPlugin.INSTANCE.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens(); ) {
 					encodings.add(stringTokenizer.nextToken());
 				}
@@ -555,6 +564,7 @@ public class LanguageModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addPages() {
 		// Create a page, set the title, and the initial model file name.
 		//

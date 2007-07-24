@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmEditor.java,v 1.5 2007-07-20 15:09:10 ftanguy Exp $
+ * $Id: KmEditor.java,v 1.6 2007-07-24 08:50:53 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -155,8 +155,10 @@ import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 
+import org.eclipse.emf.edit.ui.provider.UnwrappingSelectionProvider;
 import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
 
+import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
 import fr.irisa.triskell.eclipse.resources.URIHelper;
@@ -182,6 +184,13 @@ import org.kermeta.io.plugin.IOPlugin;
 public class KmEditor
 	extends MultiPageEditorPart
 	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * This keeps track of the editing domain that is used to track all changes to the model.
 	 * <!-- begin-user-doc -->
@@ -311,7 +320,7 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection selectionChangedListeners = new ArrayList();
+	protected Collection<ISelectionChangedListener> selectionChangedListeners = new ArrayList<ISelectionChangedListener>();
 
 	/**
 	 * This keeps track of the selection of the editor as a whole.
@@ -357,12 +366,16 @@ public class KmEditor
 				}
 			}
 			public void partBroughtToTop(IWorkbenchPart p) {
+				// Ignore.
 			}
 			public void partClosed(IWorkbenchPart p) {
+				// Ignore.
 			}
 			public void partDeactivated(IWorkbenchPart p) {
+				// Ignore.
 			}
 			public void partOpened(IWorkbenchPart p) {
+				// Ignore.
 			}
 		};
 
@@ -372,7 +385,7 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection removedResources = new ArrayList();
+	protected Collection<Resource> removedResources = new ArrayList<Resource>();
 
 	/**
 	 * Resources that have been changed since last activation.
@@ -380,7 +393,7 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection changedResources = new ArrayList();
+	protected Collection<Resource> changedResources = new ArrayList<Resource>();
 
 	/**
 	 * Resources that have been saved.
@@ -388,7 +401,7 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection savedResources = new ArrayList();
+	protected Collection<Resource> savedResources = new ArrayList<Resource>();
 
 	/**
 	 * Map to store the diagnostic associated with a resource.
@@ -396,7 +409,7 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Map resourceToDiagnosticMap = new LinkedHashMap();
+	protected Map<Resource, Diagnostic> resourceToDiagnosticMap = new LinkedHashMap<Resource, Diagnostic>();
 
 	/**
 	 * Controls whether the problem indication should be updated.
@@ -414,6 +427,7 @@ public class KmEditor
 	 */
 	protected EContentAdapter problemIndicationAdapter = 
 		new EContentAdapter() {
+			@Override
 			public void notifyChanged(Notification notification) {
 				if (notification.getNotifier() instanceof Resource) {
 					switch (notification.getFeatureID(Resource.class)) {
@@ -421,7 +435,7 @@ public class KmEditor
 						case Resource.RESOURCE__ERRORS:
 						case Resource.RESOURCE__WARNINGS: {
 							Resource resource = (Resource)notification.getNotifier();
-							Diagnostic diagnostic = analyzeResourceProblems((Resource)notification.getNotifier(), null);
+							Diagnostic diagnostic = analyzeResourceProblems(resource, null);
 							if (diagnostic.getSeverity() != Diagnostic.OK) {
 								resourceToDiagnosticMap.put(resource, diagnostic);
 							}
@@ -437,6 +451,7 @@ public class KmEditor
 										 }
 									 });
 							}
+							break;
 						}
 					}
 				}
@@ -445,10 +460,12 @@ public class KmEditor
 				}
 			}
 
+			@Override
 			protected void setTarget(Resource target) {
 				basicSetTarget(target);
 			}
 
+			@Override
 			protected void unsetTarget(Resource target) {
 				basicUnsetTarget(target);
 			}
@@ -470,8 +487,8 @@ public class KmEditor
 					try {
 						class ResourceDeltaVisitor implements IResourceDeltaVisitor {
 							protected ResourceSet resourceSet = editingDomain.getResourceSet();
-							protected Collection changedResources = new ArrayList();
-							protected Collection removedResources = new ArrayList();
+							protected Collection<Resource> changedResources = new ArrayList<Resource>();
+							protected Collection<Resource> removedResources = new ArrayList<Resource>();
 
 							public boolean visit(IResourceDelta delta) {
 								if (delta.getFlags() != IResourceDelta.MARKERS &&
@@ -492,11 +509,11 @@ public class KmEditor
 								return true;
 							}
 
-							public Collection getChangedResources() {
+							public Collection<Resource> getChangedResources() {
 								return changedResources;
 							}
 
-							public Collection getRemovedResources() {
+							public Collection<Resource> getRemovedResources() {
 								return removedResources;
 							}
 						}
@@ -583,8 +600,7 @@ public class KmEditor
 			editingDomain.getCommandStack().flush();
 
 			updateProblemIndication = false;
-			for (Iterator i = changedResources.iterator(); i.hasNext(); ) {
-				Resource resource = (Resource)i.next();
+			for (Resource resource : changedResources) {
 				if (resource.isLoaded()) {
 					resource.unload();
 					try {
@@ -617,8 +633,7 @@ public class KmEditor
 					 0,
 					 null,
 					 new Object [] { editingDomain.getResourceSet() });
-			for (Iterator i = resourceToDiagnosticMap.values().iterator(); i.hasNext(); ) {
-				Diagnostic childDiagnostic = (Diagnostic)i.next();
+			for (Diagnostic childDiagnostic : resourceToDiagnosticMap.values()) {
 				if (childDiagnostic.getSeverity() != Diagnostic.OK) {
 					diagnostic.add(childDiagnostic);
 				}
@@ -682,18 +697,26 @@ public class KmEditor
 	 */
 	public KmEditor() {
 		super();
+		initializeEditingDomain();
+	}
 
+	/**
+	 * This sets up the editing domain for the model editor.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void initializeEditingDomain() {
 		// Create an adapter factory that yields item providers.
 		//
-		List factories = new ArrayList();
-		factories.add(new ResourceItemProviderAdapterFactory());
-		factories.add(new KmItemProviderAdapterFactory());
-		factories.add(new LanguageItemProviderAdapterFactory());
-		factories.add(new BehaviorItemProviderAdapterFactory());
-		factories.add(new StructureItemProviderAdapterFactory());
-		factories.add(new ReflectiveItemProviderAdapterFactory());
+		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
-		adapterFactory = new ComposedAdapterFactory(factories);
+		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new KmItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new LanguageItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new BehaviorItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new StructureItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
 		// Create the command stack that will notify this editor as commands are executed.
 		//
@@ -725,7 +748,7 @@ public class KmEditor
 
 		// Create the editing domain with a special command stack.
 		//
-		editingDomain = new AdapterFactoryEditingDomain(adapterFactory, commandStack, new HashMap());
+		editingDomain = new AdapterFactoryEditingDomain(adapterFactory, commandStack, new HashMap<Resource, Boolean>());
 	}
 
 	/**
@@ -734,6 +757,7 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected void firePropertyChange(int action) {
 		super.firePropertyChange(action);
 	}
@@ -744,8 +768,8 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSelectionToViewer(Collection collection) {
-		final Collection theSelection = collection;
+	public void setSelectionToViewer(Collection<?> collection) {
+		final Collection<?> theSelection = collection;
 		// Make sure it's okay.
 		//
 		if (theSelection != null && !theSelection.isEmpty()) {
@@ -894,7 +918,7 @@ public class KmEditor
 		contextMenu.addMenuListener(this);
 		Menu menu= contextMenu.createContextMenu(viewer.getControl());
 		viewer.getControl().setMenu(menu);
-		getSite().registerContextMenu(contextMenu, viewer);
+		getSite().registerContextMenu(contextMenu, new UnwrappingSelectionProvider(viewer));
 
 		int dndOperations = DND.DROP_COPY | DND.DROP_MOVE | DND.DROP_LINK;
 		Transfer[] transfers = new Transfer[] { LocalTransfer.getInstance() };
@@ -939,7 +963,7 @@ public class KmEditor
 	}
 
 	/**
-	 * Returns a dignostic describing the errors and warnings listed in the resource
+	 * Returns a diagnostic describing the errors and warnings listed in the resource
 	 * and the specified exception (if any).
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -977,6 +1001,7 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void createPages() {
 		// Creates the model from the editor input
 		//
@@ -985,17 +1010,19 @@ public class KmEditor
 		// Only creates the other pages if there is something that can be edited
 		//
 		if (!getEditingDomain().getResourceSet().getResources().isEmpty() &&
-		    !((Resource)getEditingDomain().getResourceSet().getResources().get(0)).getContents().isEmpty()) {
+		    !(getEditingDomain().getResourceSet().getResources().get(0)).getContents().isEmpty()) {
 			// Create a page for the selection tree view.
 			//
 			{
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), KmEditor.this) {
+						@Override
 						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
 							TreeViewer newTreeViewer = new TreeViewer(tree);
 							return newTreeViewer;
 						}
+						@Override
 						public void requestActivation() {
 							super.requestActivation();
 							setCurrentViewerPane(this);
@@ -1008,6 +1035,7 @@ public class KmEditor
 
 				selectionViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 				selectionViewer.setInput(editingDomain.getResourceSet());
+				selectionViewer.setSelection(new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
 				viewerPane.setTitle(editingDomain.getResourceSet());
 
 				new AdapterFactoryTreeEditor(selectionViewer.getTree(), adapterFactory);
@@ -1022,11 +1050,13 @@ public class KmEditor
 			{
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), KmEditor.this) {
+						@Override
 						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
 							TreeViewer newTreeViewer = new TreeViewer(tree);
 							return newTreeViewer;
 						}
+						@Override
 						public void requestActivation() {
 							super.requestActivation();
 							setCurrentViewerPane(this);
@@ -1049,9 +1079,11 @@ public class KmEditor
 			{
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), KmEditor.this) {
+						@Override
 						public Viewer createViewer(Composite composite) {
 							return new ListViewer(composite);
 						}
+						@Override
 						public void requestActivation() {
 							super.requestActivation();
 							setCurrentViewerPane(this);
@@ -1072,9 +1104,11 @@ public class KmEditor
 			{
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), KmEditor.this) {
+						@Override
 						public Viewer createViewer(Composite composite) {
 							return new TreeViewer(composite);
 						}
+						@Override
 						public void requestActivation() {
 							super.requestActivation();
 							setCurrentViewerPane(this);
@@ -1097,9 +1131,11 @@ public class KmEditor
 			{
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), KmEditor.this) {
+						@Override
 						public Viewer createViewer(Composite composite) {
 							return new TableViewer(composite);
 						}
+						@Override
 						public void requestActivation() {
 							super.requestActivation();
 							setCurrentViewerPane(this);
@@ -1138,9 +1174,11 @@ public class KmEditor
 			{
 				ViewerPane viewerPane =
 					new ViewerPane(getSite().getPage(), KmEditor.this) {
+						@Override
 						public Viewer createViewer(Composite composite) {
 							return new TreeViewer(composite);
 						}
+						@Override
 						public void requestActivation() {
 							super.requestActivation();
 							setCurrentViewerPane(this);
@@ -1174,7 +1212,12 @@ public class KmEditor
 				setPageText(pageIndex, getString("_UI_TreeWithColumnsPage_label"));
 			}
 
-			setActivePage(0);
+			getSite().getShell().getDisplay().asyncExec
+				(new Runnable() {
+					 public void run() {
+						 setActivePage(0);
+					 }
+				 });
 		}
 
 		// Ensures that this editor will only display the page's tab
@@ -1183,6 +1226,7 @@ public class KmEditor
 		getContainer().addControlListener
 			(new ControlAdapter() {
 				boolean guard = false;
+				@Override
 				public void controlResized(ControlEvent event) {
 					if (!guard) {
 						guard = true;
@@ -1192,7 +1236,12 @@ public class KmEditor
 				}
 			 });
 
-		updateProblemIndication();
+		getSite().getShell().getDisplay().asyncExec
+			(new Runnable() {
+				 public void run() {
+					 updateProblemIndication();
+				 }
+			 });
 	}
 
 	/**
@@ -1237,6 +1286,7 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected void pageChange(int pageIndex) {
 		super.pageChange(pageIndex);
 
@@ -1251,6 +1301,8 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public Object getAdapter(Class key) {
 		if (key.equals(IContentOutlinePage.class)) {
 			return showOutlineView() ? getContentOutlinePage() : null;
@@ -1277,6 +1329,7 @@ public class KmEditor
 			// The content outline is just a tree.
 			//
 			class MyContentOutlinePage extends ContentOutlinePage {
+				@Override
 				public void createControl(Composite parent) {
 					super.createControl(parent);
 					contentOutlineViewer = getTreeViewer();
@@ -1295,17 +1348,17 @@ public class KmEditor
 					if (!editingDomain.getResourceSet().getResources().isEmpty()) {
 					  // Select the root object in the view.
 					  //
-					  ArrayList selection = new ArrayList();
-					  selection.add(editingDomain.getResourceSet().getResources().get(0));
-					  contentOutlineViewer.setSelection(new StructuredSelection(selection), true);
+					  contentOutlineViewer.setSelection(new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
 					}
 				}
 
+				@Override
 				public void makeContributions(IMenuManager menuManager, IToolBarManager toolBarManager, IStatusLineManager statusLineManager) {
 					super.makeContributions(menuManager, toolBarManager, statusLineManager);
 					contentOutlineStatusLineManager = statusLineManager;
 				}
 
+				@Override
 				public void setActionBars(IActionBars actionBars) {
 					super.setActionBars(actionBars);
 					getActionBarContributor().shareGlobalActions(this, actionBars);
@@ -1339,11 +1392,13 @@ public class KmEditor
 		if (propertySheetPage == null) {
 			propertySheetPage =
 				new ExtendedPropertySheetPage(editingDomain) {
-					public void setSelectionToViewer(List selection) {
+					@Override
+					public void setSelectionToViewer(List<?> selection) {
 						KmEditor.this.setSelectionToViewer(selection);
 						KmEditor.this.setFocus();
 					}
 
+					@Override
 					public void setActionBars(IActionBars actionBars) {
 						super.setActionBars(actionBars);
 						getActionBarContributor().shareGlobalActions(this, actionBars);
@@ -1363,7 +1418,7 @@ public class KmEditor
 	 */
 	public void handleContentOutlineSelection(ISelection selection) {
 		if (currentViewerPane != null && !selection.isEmpty() && selection instanceof IStructuredSelection) {
-			Iterator selectedElements = ((IStructuredSelection)selection).iterator();
+			Iterator<?> selectedElements = ((IStructuredSelection)selection).iterator();
 			if (selectedElements.hasNext()) {
 				// Get the first selected element.
 				//
@@ -1372,7 +1427,7 @@ public class KmEditor
 				// If it's the selection viewer, then we want it to select the same selection as this selection.
 				//
 				if (currentViewerPane.getViewer() == selectionViewer) {
-					ArrayList selectionList = new ArrayList();
+					ArrayList<Object> selectionList = new ArrayList<Object>();
 					selectionList.add(selectedElement);
 					while (selectedElements.hasNext()) {
 						selectionList.add(selectedElements.next());
@@ -1400,6 +1455,7 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isDirty() {
 		return ((BasicCommandStack)editingDomain.getCommandStack()).isSaveNeeded();
 	}
@@ -1410,23 +1466,29 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
+		// Save only resources that have actually changed.
+		//
+		final Map<Object, Object> saveOptions = new HashMap<Object, Object>();
+		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+
 		// Do the work within an operation because this is a long running activity that modifies the workbench.
 		//
 		WorkspaceModifyOperation operation =
 			new WorkspaceModifyOperation() {
 				// This is the method that gets invoked when the operation runs.
 				//
+				@Override
 				public void execute(IProgressMonitor monitor) {
 					// Save the resources to the file system.
 					//
 					boolean first = true;
-					for (Iterator i = editingDomain.getResourceSet().getResources().iterator(); i.hasNext(); ) {
-						Resource resource = (Resource)i.next();
+					for (Resource resource : editingDomain.getResourceSet().getResources()) {
 						if ((first || !resource.getContents().isEmpty() || isPersisted(resource)) && !editingDomain.isReadOnly(resource)) {
 							try {
 								savedResources.add(resource);
-								resource.save(Collections.EMPTY_MAP);
+								resource.save(saveOptions);
 							}
 							catch (Exception exception) {
 								resourceToDiagnosticMap.put(resource, analyzeResourceProblems(resource, exception));
@@ -1458,7 +1520,7 @@ public class KmEditor
 	}
 
 	/**
-	 * This returns wether something has been persisted to the URI of the specified resource.
+	 * This returns whether something has been persisted to the URI of the specified resource.
 	 * The implementation uses the URI converter from the editor's resource set to try to open an input stream. 
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1474,6 +1536,7 @@ public class KmEditor
 			}
 		}
 		catch (IOException e) {
+			// Ignore
 		}
 		return result;
 	}
@@ -1484,6 +1547,7 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isSaveAsAllowed() {
 		return true;
 	}
@@ -1494,14 +1558,15 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void doSaveAs() {
-		SaveAsDialog saveAsDialog= new SaveAsDialog(getSite().getShell());
+		SaveAsDialog saveAsDialog = new SaveAsDialog(getSite().getShell());
 		saveAsDialog.open();
-		IPath path= saveAsDialog.getResult();
+		IPath path = saveAsDialog.getResult();
 		if (path != null) {
 			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 			if (file != null) {
-				doSaveAs(URI.createPlatformResourceURI(file.getFullPath().toString()), new FileEditorInput(file));
+				doSaveAs(URI.createPlatformResourceURI(file.getFullPath().toString(), true), new FileEditorInput(file));
 			}
 		}
 	}
@@ -1512,7 +1577,7 @@ public class KmEditor
 	 * @generated
 	 */
 	protected void doSaveAs(URI uri, IEditorInput editorInput) {
-		((Resource)editingDomain.getResourceSet().getResources().get(0)).setURI(uri);
+		(editingDomain.getResourceSet().getResources().get(0)).setURI(uri);
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
 		IProgressMonitor progressMonitor =
@@ -1551,6 +1616,7 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void init(IEditorSite site, IEditorInput editorInput) {
 		setSite(site);
 		setInputWithNotify(editorInput);
@@ -1565,6 +1631,7 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFocus() {
 		if (currentViewerPane != null) {
 			currentViewerPane.setFocus();
@@ -1614,8 +1681,7 @@ public class KmEditor
 	public void setSelection(ISelection selection) {
 		editorSelection = selection;
 
-		for (Iterator listeners = selectionChangedListeners.iterator(); listeners.hasNext(); ) {
-			ISelectionChangedListener listener = (ISelectionChangedListener)listeners.next();
+		for (ISelectionChangedListener listener : selectionChangedListeners) {
 			listener.selectionChanged(new SelectionChangedEvent(this, selection));
 		}
 		setStatusLineManager(selection);
@@ -1632,7 +1698,7 @@ public class KmEditor
 
 		if (statusLineManager != null) {
 			if (selection instanceof IStructuredSelection) {
-				Collection collection = ((IStructuredSelection)selection).toList();
+				Collection<?> collection = ((IStructuredSelection)selection).toList();
 				switch (collection.size()) {
 					case 0: {
 						statusLineManager.setMessage(getString("_UI_NoObjectSelected"));
@@ -1717,6 +1783,7 @@ public class KmEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void dispose() {
 		updateProblemIndication = false;
 

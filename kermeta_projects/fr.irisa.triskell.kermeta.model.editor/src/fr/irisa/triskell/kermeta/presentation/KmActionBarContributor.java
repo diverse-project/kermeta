@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmActionBarContributor.java,v 1.3 2006-10-24 09:19:08 cfaucher Exp $
+ * $Id: KmActionBarContributor.java,v 1.4 2007-07-24 08:50:53 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -55,6 +58,13 @@ public class KmActionBarContributor
 	implements ISelectionChangedListener {
 	
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * This keeps track of the active editor.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,6 +88,7 @@ public class KmActionBarContributor
 	 */
 	protected IAction showPropertiesViewAction =
 		new Action(KermetaEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
+			@Override
 			public void run() {
 				try {
 					getPage().showView("org.eclipse.ui.views.PropertySheet");
@@ -97,10 +108,12 @@ public class KmActionBarContributor
 	 */
 	protected IAction refreshViewerAction =
 		new Action(KermetaEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
+			@Override
 			public boolean isEnabled() {
 				return activeEditorPart instanceof IViewerProvider;
 			}
 
+			@Override
 			public void run() {
 				if (activeEditorPart instanceof IViewerProvider) {
 					Viewer viewer = ((IViewerProvider)activeEditorPart).getViewer();
@@ -118,7 +131,15 @@ public class KmActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection createChildActions;
+	protected Collection<IAction> createChildActions;
+
+	/**
+	 * This will contain a map of {@link org.eclipse.emf.edit.ui.action.CreateChildAction}s, keyed by sub-menu text.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected Map<String, Collection<IAction>> createChildSubmenuActions;
 
 	/**
 	 * This is the menu manager into which menu contribution items should be added for CreateChild actions.
@@ -135,7 +156,15 @@ public class KmActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection createSiblingActions;
+	protected Collection<IAction> createSiblingActions;
+
+	/**
+	 * This will contain a map of {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction}s, keyed by submenu text.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected Map<String, Collection<IAction>> createSiblingSubmenuActions;
 
 	/**
 	 * This is the menu manager into which menu contribution items should be added for CreateSibling actions.
@@ -164,6 +193,7 @@ public class KmActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
 		toolBarManager.add(new Separator("km-settings"));
 		toolBarManager.add(new Separator("km-additions"));
@@ -176,6 +206,7 @@ public class KmActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void contributeToMenu(IMenuManager menuManager) {
 		super.contributeToMenu(menuManager);
 
@@ -214,6 +245,7 @@ public class KmActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setActiveEditor(IEditorPart part) {
 		super.setActiveEditor(part);
 		activeEditorPart = part;
@@ -250,16 +282,18 @@ public class KmActionBarContributor
 		// Remove any menu items for old selection.
 		//
 		if (createChildMenuManager != null) {
+			depopulateManager(createChildMenuManager, createChildSubmenuActions);
 			depopulateManager(createChildMenuManager, createChildActions);
 		}
 		if (createSiblingMenuManager != null) {
+			depopulateManager(createSiblingMenuManager, createSiblingSubmenuActions);
 			depopulateManager(createSiblingMenuManager, createSiblingActions);
 		}
 
 		// Query the new selection for appropriate new child/sibling descriptors
 		//
-		Collection newChildDescriptors = null;
-		Collection newSiblingDescriptors = null;
+		Collection<?> newChildDescriptors = null;
+		Collection<?> newSiblingDescriptors = null;
 
 		ISelection selection = event.getSelection();
 		if (selection instanceof IStructuredSelection && ((IStructuredSelection)selection).size() == 1) {
@@ -274,13 +308,17 @@ public class KmActionBarContributor
 		// Generate actions for selection; populate and redraw the menus.
 		//
 		createChildActions = generateCreateChildActions(newChildDescriptors, selection);
+		createChildSubmenuActions = extractSubmenuActions(createChildActions);
 		createSiblingActions = generateCreateSiblingActions(newSiblingDescriptors, selection);
+		createSiblingSubmenuActions = extractSubmenuActions(createSiblingActions);
 
 		if (createChildMenuManager != null) {
+			populateManager(createChildMenuManager, createChildSubmenuActions, null);
 			populateManager(createChildMenuManager, createChildActions, null);
 			createChildMenuManager.update(true);
 		}
 		if (createSiblingMenuManager != null) {
+			populateManager(createSiblingMenuManager, createSiblingSubmenuActions, null);
 			populateManager(createSiblingMenuManager, createSiblingActions, null);
 			createSiblingMenuManager.update(true);
 		}
@@ -293,11 +331,11 @@ public class KmActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection generateCreateChildActions(Collection descriptors, ISelection selection) {
-		Collection actions = new ArrayList();
+	protected Collection<IAction> generateCreateChildActions(Collection<?> descriptors, ISelection selection) {
+		Collection<IAction> actions = new ArrayList<IAction>();
 		if (descriptors != null) {
-			for (Iterator i = descriptors.iterator(); i.hasNext(); ) {
-				actions.add(new CreateChildAction(activeEditorPart, selection, i.next()));
+			for (Object descriptor : descriptors) {
+				actions.add(new CreateChildAction(activeEditorPart, selection, descriptor));
 			}
 		}
 		return actions;
@@ -310,11 +348,11 @@ public class KmActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection generateCreateSiblingActions(Collection descriptors, ISelection selection) {
-		Collection actions = new ArrayList();
+	protected Collection<IAction> generateCreateSiblingActions(Collection<?> descriptors, ISelection selection) {
+		Collection<IAction> actions = new ArrayList<IAction>();
 		if (descriptors != null) {
-			for (Iterator i = descriptors.iterator(); i.hasNext(); ) {
-				actions.add(new CreateSiblingAction(activeEditorPart, selection, i.next()));
+			for (Object descriptor : descriptors) {
+				actions.add(new CreateSiblingAction(activeEditorPart, selection, descriptor));
 			}
 		}
 		return actions;
@@ -324,15 +362,14 @@ public class KmActionBarContributor
 	 * This populates the specified <code>manager</code> with {@link org.eclipse.jface.action.ActionContributionItem}s
 	 * based on the {@link org.eclipse.jface.action.IAction}s contained in the <code>actions</code> collection,
 	 * by inserting them before the specified contribution item <code>contributionID</code>.
-	 * If <code>ID</code> is <code>null</code>, they are simply added.
+	 * If <code>contributionID</code> is <code>null</code>, they are simply added.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void populateManager(IContributionManager manager, Collection actions, String contributionID) {
+	protected void populateManager(IContributionManager manager, Collection<? extends IAction> actions, String contributionID) {
 		if (actions != null) {
-			for (Iterator i = actions.iterator(); i.hasNext(); ) {
-				IAction action = (IAction)i.next();
+			for (IAction action : actions) {
 				if (contributionID != null) {
 					manager.insertBefore(contributionID, action);
 				}
@@ -350,7 +387,7 @@ public class KmActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void depopulateManager(IContributionManager manager, Collection actions) {
+	protected void depopulateManager(IContributionManager manager, Collection<? extends IAction> actions) {
 		if (actions != null) {
 			IContributionItem[] items = manager.getItems();
 			for (int i = 0; i < items.length; i++) {
@@ -374,20 +411,100 @@ public class KmActionBarContributor
 	}
 
 	/**
+	 * This extracts those actions in the <code>submenuActions</code> collection whose text is qualified and returns
+	 * a map of these actions, keyed by submenu text.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected Map<String, Collection<IAction>> extractSubmenuActions(Collection<IAction> createActions) {
+		Map<String, Collection<IAction>> createSubmenuActions = new LinkedHashMap<String, Collection<IAction>>();
+		if (createActions != null) {
+			for (Iterator<IAction> actions = createActions.iterator(); actions.hasNext(); ) {
+				IAction action = actions.next();
+				StringTokenizer st = new StringTokenizer(action.getText(), "|");
+				if (st.countTokens() == 2) {
+					String text = st.nextToken().trim();
+					Collection<IAction> submenuActions = createSubmenuActions.get(text);
+					if (submenuActions == null) {
+						createSubmenuActions.put(text, submenuActions = new ArrayList<IAction>());
+					}
+					action.setText(st.nextToken().trim());
+					submenuActions.add(action);
+					actions.remove();
+				}
+			}
+		}
+		return createSubmenuActions;
+	}
+
+	/**
+	 * This populates the specified <code>manager</code> with {@link org.eclipse.jface.action.MenuManager}s containing
+	 * {@link org.eclipse.jface.action.ActionContributionItem}s based on the {@link org.eclipse.jface.action.IAction}s
+	 * contained in the <code>submenuActions</code> collection, by inserting them before the specified contribution
+	 * item <code>contributionID</code>.
+	 * If <code>contributionID</code> is <code>null</code>, they are simply added.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void populateManager(IContributionManager manager, Map<String, Collection<IAction>> submenuActions, String contributionID) {
+		if (submenuActions != null) {
+			for (Map.Entry<String, Collection<IAction>> entry : submenuActions.entrySet()) {
+				MenuManager submenuManager = new MenuManager(entry.getKey());
+				if (contributionID != null) {
+					manager.insertBefore(contributionID, submenuManager);
+				}
+				else {
+					manager.add(submenuManager);
+				}
+				populateManager(submenuManager, entry.getValue(), null);
+			}
+		}
+	}
+
+	/**
+	 * This removes from the specified <code>manager</code> all {@link org.eclipse.jface.action.MenuManager}s and their
+	 * {@link org.eclipse.jface.action.ActionContributionItem}s based on the {@link org.eclipse.jface.action.IAction}s
+	 * contained in the <code>submenuActions</code> map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void depopulateManager(IContributionManager manager, Map<String, Collection<IAction>> submenuActions) {
+		if (submenuActions != null) {
+			IContributionItem[] items = manager.getItems();
+			for (int i = 0; i < items.length; i++) {
+				IContributionItem contributionItem = items[i];
+				if (contributionItem instanceof MenuManager) {
+					MenuManager submenuManager = (MenuManager)contributionItem;
+					if (submenuActions.containsKey(submenuManager.getMenuText())) {
+						depopulateManager(submenuManager, submenuActions.get(contributionItem));
+						manager.remove(contributionItem);
+					}
+				}
+			}
+		}
+	}
+
+	/**
 	 * This populates the pop-up menu before it appears.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void menuAboutToShow(IMenuManager menuManager) {
 		super.menuAboutToShow(menuManager);
 		MenuManager submenuManager = null;
 
 		submenuManager = new MenuManager(KermetaEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
+		populateManager(submenuManager, createChildSubmenuActions, null);
 		populateManager(submenuManager, createChildActions, null);
 		menuManager.insertBefore("edit", submenuManager);
 
 		submenuManager = new MenuManager(KermetaEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
+		populateManager(submenuManager, createSiblingSubmenuActions, null);
 		populateManager(submenuManager, createSiblingActions, null);
 		menuManager.insertBefore("edit", submenuManager);
 	}
@@ -398,6 +515,7 @@ public class KmActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected void addGlobalActions(IMenuManager menuManager) {
 		menuManager.insertAfter("additions-end", new Separator("ui-actions"));
 		menuManager.insertAfter("ui-actions", showPropertiesViewAction);
@@ -414,6 +532,7 @@ public class KmActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected boolean removeAllReferencesOnDelete() {
 		return true;
 	}
