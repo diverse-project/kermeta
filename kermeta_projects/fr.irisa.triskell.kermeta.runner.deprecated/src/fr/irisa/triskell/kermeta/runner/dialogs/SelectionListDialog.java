@@ -1,4 +1,4 @@
-/* $Id: SelectionListDialog.java,v 1.4 2007-07-24 13:47:19 ftanguy Exp $
+/* $Id: SelectionListDialog.java,v 1.5 2007-07-24 15:06:45 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SelectionListDialog.java
  * License: GPL
@@ -131,21 +131,5 @@ public class SelectionListDialog extends Dialog
     public java.util.List getList() { return selectionList; }
     public Object[] getArrayList() {return arrayList;}
     public String getSelectedItem() { return selectedItem; }
-    
-    
-/*    public int open()
-    {
-		if (selectionList == null) {
-			arrayList = new Object[0];
-		}
-		else
-		{
-		    arrayList = selectionList.toArray();
-		}
-		
-		setElements(arrayList);
-        return super.open();
-    }
-    */
     
 }
