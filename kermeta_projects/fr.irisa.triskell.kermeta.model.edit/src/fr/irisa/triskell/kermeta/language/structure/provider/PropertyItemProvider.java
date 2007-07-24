@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.17 2007-07-20 15:08:27 ftanguy Exp $
+ * $Id: PropertyItemProvider.java,v 1.18 2007-07-24 08:46:48 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -367,7 +367,7 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 		// We get the label (ClassDefinition name) of the parent of the given
 		// Property
 		return label == null || label.length() == 0 ? getString("_UI_Property_type")
-				: /*getString("_UI_Property_type") + " " + */label + " from "
+				: /*getString("_UI_Property_type") + " " + */label + " owned by "
 						+ parent;
 	}
 

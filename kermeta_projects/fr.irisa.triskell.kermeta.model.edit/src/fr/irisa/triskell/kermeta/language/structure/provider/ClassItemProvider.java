@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassItemProvider.java,v 1.15 2007-07-20 15:08:27 ftanguy Exp $
+ * $Id: ClassItemProvider.java,v 1.16 2007-07-24 08:46:48 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -208,17 +208,15 @@ public class ClassItemProvider extends ParameterizedTypeItemProvider implements
 		// class
 		// a '->' is added to show the "reference" semantic
 		String label = "";
-	       if (object instanceof Class && ((Class) object).getTypeDefinition().getName() != null) {
-	           label = " -> " + ((Class) object).getTypeDefinition().getName();
-	       }
-	             String parent = "";
-	             if (object instanceof Class && ((Class) object).eContainer() instanceof NamedElement && ((NamedElement) ((Class) object).eContainer()).getName() != null) {
-	           parent = " owned by "
-	                   + ((NamedElement) ((Class) object).eContainer()).getName();
-	       }
+	    if (object instanceof Class && ((Class) object).getTypeDefinition() != null) {
+	    	label = " -> " + ((Class) object).getTypeDefinition().getName();
+	    }
+	    String parent = "";
+	    if (object instanceof Class && ((Class) object).eContainer() instanceof NamedElement && ((NamedElement) ((Class) object).eContainer()).getName() != null) {
+	        parent = " owned by " + ((NamedElement) ((Class) object).eContainer()).getName();
+	    }
 
-	       return label == null || label.length() == 0 ? getString("_UI_Class_type")
-	               : getString("_UI_Class_type") + label + parent; 
+	    return label == null || label.length() == 0 ? getString("_UI_Class_type") : getString("_UI_Class_type") + label + parent; 
 	}
 
 	/**
