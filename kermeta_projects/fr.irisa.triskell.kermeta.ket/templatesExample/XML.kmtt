@@ -1,0 +1,14 @@
+ <%@ ket package="hello" require="http://www.eclipse.org/emf/2002/Ecore" using="ecore" class="XMLDemoTemplate"  parameters="p:EPackage" %>
+<!--Template -->
+<?xml version="1.0"?>
+<!DOCTYPE agl SYSTEM "http://agl.dtd">
+<!-- GraphElements -->
+<agl>
+  <graph id="<%=p.name%>" type="EClass">
+   <% p.eClassifiers.each{e| %>
+     <graph id="<%=e.name%>" type="EClass"/>   <% }
+   p.eClassifiers.select{e| var e1 : EClass e1 ?= e e!=void}.each{e2 | var e3 : EClass 
+   e3 ?= e2 e3.eReferences.each{e4|  %>
+     <edge from="<%=e4.name%>" to="<%=e4.eType.name%>" fromOrd="0" toOrd="0"/> <% }} %>
+  </graph>
+</agl>

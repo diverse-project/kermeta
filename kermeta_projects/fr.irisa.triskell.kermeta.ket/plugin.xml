@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.3"?>
+<plugin
+   id="fr.irisa.triskell.kermeta.ket"
+   name="Kermeta Template Plug-in"
+   version="1.0.0"
+   provider-name="IRISA/Triskell"
+   class="fr.irisa.triskell.kermeta.ecore.KermetaEcorePlugin">
+
+   <runtime>
+      <library name="fr.irisa.triskell.kermeta.ket.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="fr.irisa.triskell.kermeta"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="fr.irisa.triskell.kermeta.io"/>
+      <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
+   </requires>
+
+   <extension
+         id="kmtt"
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.kmtt"
+            id="fr.irisa.triskell.kermeta.ket.contribution">
+         <menu
+               label="KerMeta"
+               path="additions"
+               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu">
+            <separator name="additions"/>
+         </menu>
+         <action
+               label="Translate Kermeta Template..."
+               class="fr.irisa.triskell.kermeta.ket.Generator"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/Kermeta"
+               enablesFor="1"
+               id="fr.irisa.triskell.kermeta.ket.menu.action">
+         </action>
+      </objectContribution>
+      
+   </extension>
+</plugin>
