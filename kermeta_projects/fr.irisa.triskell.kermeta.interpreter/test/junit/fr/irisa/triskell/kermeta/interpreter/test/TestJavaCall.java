@@ -1,7 +1,7 @@
-/* $Id: TestJavaCall.java,v 1.9 2006-07-25 07:58:19 dvojtise Exp $
+/* $Id: TestJavaCall.java,v 1.10 2007-07-24 15:09:21 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TestJavaCall.java
- * License    : GPL
+ * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : 18 avr. 2005

@@ -1,7 +1,7 @@
-/* $Id: GenerateJUnitTestSuite.java,v 1.1 2006-07-26 12:10:16 dvojtise Exp $
+/* $Id: GenerateJUnitTestSuite.java,v 1.2 2007-07-24 15:09:21 cfaucher Exp $
  * Project : Kermeta.interpreter
  * File : GenerateJUnitTestSuite.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : 16 févr. 2005
