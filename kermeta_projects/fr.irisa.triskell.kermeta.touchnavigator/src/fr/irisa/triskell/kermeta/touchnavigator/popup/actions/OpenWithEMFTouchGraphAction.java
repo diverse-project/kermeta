@@ -1,4 +1,4 @@
-/* $Id: OpenWithEMFTouchGraphAction.java,v 1.4 2007-07-11 13:19:22 dvojtise Exp $
+/* $Id: OpenWithEMFTouchGraphAction.java,v 1.5 2007-07-25 07:10:21 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : Ecore2kmtAction.java
  * License    : EPL
@@ -16,15 +16,12 @@ package fr.irisa.triskell.kermeta.touchnavigator.popup.actions;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
-import org.eclipse.ui.IActionFilter;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
@@ -32,7 +29,6 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import fr.irisa.triskell.kermeta.tools.wizards.Ecore2kmtWizard;
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 import fr.irisa.triskell.kermeta.touchnavigator.views.TouchEMFModelView;
 
