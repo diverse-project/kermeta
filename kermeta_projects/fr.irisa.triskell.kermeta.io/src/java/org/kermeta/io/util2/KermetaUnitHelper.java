@@ -148,7 +148,7 @@ public class KermetaUnitHelper {
 	private KermetaUnit __loadFile (String absoluteFileName, String content, IProgressMonitor monitor) throws KermetaIOFileNotFoundException {
 		KermetaUnit unit = null;
 		try {
-			unit = storer.get(absoluteFileName);
+			unit = IOPlugin.getDefault().getKermetaUnit(absoluteFileName);
 			storer.load(absoluteFileName, content);
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
