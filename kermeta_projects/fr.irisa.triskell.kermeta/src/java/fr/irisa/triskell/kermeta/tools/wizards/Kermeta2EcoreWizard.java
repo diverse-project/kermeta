@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreWizard.java,v 1.8 2007-07-24 13:46:39 ftanguy Exp $
+/* $Id: Kermeta2EcoreWizard.java,v 1.9 2007-07-26 09:36:47 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -16,6 +16,13 @@ package fr.irisa.triskell.kermeta.tools.wizards;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
@@ -32,6 +39,8 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 	 */
 	public static final String DEFAULT_GEN_DIR = "build/ecore"; // "platform:/resource/project_name/" + DEFAULT_GEN_DIR
 	
+	
+	protected Button independentButton;
 	
 /*	protected ResourceSet trace_resource_set;
 	protected Resource trace_resource = null;
@@ -73,7 +82,29 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 		// eventually add new pages here
 			
 	}
-    
+	
+	@Override
+	public void createPageControls(Composite pageContainer) {
+		super.createPageControls(pageContainer);
+		outputPage = (DestFileWizardPage)this.getPage(OUTPUTFILE_PAGENAME);
+		
+		/*Composite composite = new Composite(outputPage.linkedResourceParent, SWT.NONE);
+		composite.setFont( outputPage.linkedResourceParent.getFont() );
+		outputPage.linkedResourceParent.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));*/
+		
+		
+		Group group = new Group(outputPage.linkedResourceParent, SWT.NONE);
+		GridLayout layout = new GridLayout(2, false);
+		group.setLayout(layout);
+		group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		group.setFont( outputPage.linkedResourceParent.getFont() );
+		group.setText("Independency from the Kermeta framework");
+				
+		Label label = new Label(group, SWT.NULL);
+		label.setText("yes / no : ");
+		independentButton = new Button(group, SWT.CHECK);
+		independentButton.setSelection(false);
+	}
 	
 	/**
 	 * PrettyPrint the given KermetaUnit to the file
@@ -102,15 +133,26 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
     		gendir = this.resolvePage.getEcoreFolder();
     	else
     		ecorelist = this.resolvePage.getEcoreFileList();*/
+
+    	if (trace_resource == null) initTraces();
+    	int i = fileURI.lastIndexOf("/");
+    	String targetDir = fileURI.substring(0, i);
+    	EcoreExporter exporter = new EcoreExporter();
 	    
-	    if(this.tracePage.enableFileDestinationButton.getSelection())
+	    if (  independentButton.getSelection() ) {
+	    	exporter.export(builder, targetDir,null, true);
+	    } else {
+	    	exporter.export(builder, targetDir,null, false);
+	    }
+	    
+	  /*  if(this.tracePage.enableFileDestinationButton.getSelection())
 	    {
 	    	if (trace_resource == null) initTraces();
 	    	
 	    	int i = fileURI.lastIndexOf("/");
 	    	String targetDir = fileURI.substring(0, i);
 	    	EcoreExporter exporter = new EcoreExporter();
-	    	exporter.export(builder, targetDir,null);
+	    	exporter.export(builder, targetDir,null, true);
 	    	
 	    	
 //	    	exporter = new KM2Ecore(resource, trace_resource, builder, gendir, ecorelist);
@@ -119,8 +161,8 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 	    	int index = fileURI.lastIndexOf("/");
 	    	String targetDir = fileURI.substring(0, index);
 	    	EcoreExporter exporter = new EcoreExporter();
-	    	exporter.export(builder, targetDir, fileURI);
-	    }
+	    	exporter.export(builder, targetDir, fileURI, true);
+	    }*/
 	    //		 display eventual warnings
 		/*if(exporter.messages.getAllWarnings().size() > 0){
 			WarningMessage message = new WarningMessage( exporter.messages.getAllMessagesAsString() );

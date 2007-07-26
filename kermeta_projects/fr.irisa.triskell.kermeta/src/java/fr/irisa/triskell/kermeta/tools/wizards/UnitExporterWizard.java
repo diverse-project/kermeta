@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.22 2007-07-24 13:46:39 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.23 2007-07-26 09:36:47 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -95,8 +95,8 @@ public class UnitExporterWizard extends Wizard {
 	/** pagenames */
 	public static final String OUTPUTFILE_PAGENAME = "OutputFile";
 
-	public static final String TRACEFILE_PAGENAME = "TraceFile";
-
+	public static final String TRACEFILE_PAGENAME = "TraceFile";	
+	
 	/**
 	 * Constructor for Km2kmtWizard.
 	 */
@@ -139,7 +139,7 @@ public class UnitExporterWizard extends Wizard {
 		if (this instanceof Kermeta2EcoreWizard) {
 			resolvePage = new Kermeta2EcoreResolveWizardPage(
 					OUTPUTFILE_PAGENAME, selection);
-			addPage(resolvePage);
+			addPage(resolvePage);			
 		}
 
 		tracePage = new ActivableDestFileWizardPage(TRACEFILE_PAGENAME,

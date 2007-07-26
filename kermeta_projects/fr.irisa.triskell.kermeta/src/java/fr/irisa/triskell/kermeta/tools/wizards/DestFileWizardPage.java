@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.11 2007-07-11 13:43:08 cfaucher Exp $
+/* $Id: DestFileWizardPage.java,v 1.12 2007-07-26 09:36:47 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -85,7 +85,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 
 	protected CreateLinkedResourceGroup linkedResourceGroup;
 
-	protected Composite linkedResourceParent;
+	public Composite linkedResourceParent;
 
 	protected Composite linkedResourceComposite;
 

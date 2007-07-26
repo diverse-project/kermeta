@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.3 2007-07-24 13:46:51 ftanguy Exp $
+/*$Id: EcoreExporter.java,v 1.4 2007-07-26 09:36:45 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -68,6 +68,8 @@ public class EcoreExporter {
 	private Hashtable <KermetaUnit, Boolean> pass1done = new Hashtable <KermetaUnit, Boolean> ();
 
 	private Hashtable <KermetaUnit, Boolean> pass2done = new Hashtable <KermetaUnit, Boolean> ();
+	
+	private Hashtable <KermetaUnit, Boolean> pass3done = new Hashtable <KermetaUnit, Boolean> ();
 
 	
 
@@ -125,6 +127,16 @@ public class EcoreExporter {
 		
 		for ( KermetaUnit unit : units )
 			pass2done.put( unit, false );	
+		
+		/*
+		 * 
+		 * Initialize the pass3done.
+		 * 
+		 */
+		pass3done.put(kermetaUnit, false);
+		
+		for ( KermetaUnit unit : units )
+			pass3done.put( unit, false );	
 	}
 	
 	private void initializeResourceSet() {
@@ -214,16 +226,18 @@ public class EcoreExporter {
 	}
 	
 	
-	public void export(KermetaUnit kermetaUnit, String rep, String fileName) {
+	public void export(KermetaUnit kermetaUnit, String rep, String fileName, boolean independency) {
 		initialize(kermetaUnit, rep, fileName);
 
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 		fillResourceSet(kermetaUnit);
 		//addEcoreFrameworkInResourceSet();
 		
 		applyPass1ToAll(kermetaUnit);
 		//initializeLoadings(kermetaUnit);
 		applyPass2ToAll(kermetaUnit);
+		
+		if ( independency )
+			applyPass3ToAll(kermetaUnit);
 		
 		try {
 			
@@ -262,8 +276,8 @@ public class EcoreExporter {
 		}	
 	}
 	
-	public void export(KermetaUnit kermetaUnit, String rep) {
-		export(kermetaUnit, rep, null);
+	public void export(KermetaUnit kermetaUnit, String rep, boolean independency) {
+		export(kermetaUnit, rep, null, independency);
 	}
 	
 	
@@ -316,6 +330,31 @@ public class EcoreExporter {
 		
 		loadings.put( kermetaUnit, false );
 		pass2done.put(kermetaUnit, true);
+	}
+	
+	private void applyPass3ToAll(KermetaUnit kermetaUnit) {
+		
+		if ( pass3done.get(kermetaUnit) )
+			return;
+		
+		loadings.put( kermetaUnit, true );
+		
+		System.out.println( "pass 3 : " + kermetaUnit.getUri() );
+		
+		Iterator <KermetaUnit> iterator = kermetaUnit.getImportedKermetaUnits().iterator();
+		while ( iterator.hasNext() ) {
+			KermetaUnit currentUnit = iterator.next();
+			if ( ! loadings.get( currentUnit ) )
+				applyPass3ToAll( currentUnit );
+		}
+		
+		if ( resources.get(kermetaUnit) != null ) {
+			KM2EcorePass3 pass3 = new KM2EcorePass3( resources.get(kermetaUnit), km2ecoremapping, kermetaUnit, getKermetaTypesAlias() );
+			pass3.accept( kermetaUnit.getModelingUnit() );
+		}
+		
+		loadings.put( kermetaUnit, false );
+		pass3done.put(kermetaUnit, true);
 	}
 	
 	
