@@ -1,4 +1,18 @@
+/* $Id: Visitor.java,v 1.2 2007-07-26 12:25:21 cfaucher Exp $
+ * Project    : fr.irisa.triskell.kermeta.ket
+ * File       : Visitor.java
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 23 Jul. 2007
+ * Authors : 
+ *        Olivier Barais <barais@irisa.fr>
+ * Description : 
+ *   First iteration of a template engine for Kermeta
+ */
+
 package fr.irisa.triskell.kermeta.ket.builder;
+
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
@@ -82,6 +96,7 @@ public class Visitor extends JETASTVisitor {
 			
 			element.accept(this);
 		}
+		out.println("result := _res");
 		out.println("end");
 		out.println("}");
 		
