@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass5.java,v 1.5 2007-07-26 13:49:59 ftanguy Exp $
+/* $Id: Ecore2KMPass5.java,v 1.6 2007-07-26 14:04:09 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -79,6 +79,8 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 		currentClassDefinition = (ClassDefinition) datas.getTypeDefinition(node);
 		isClassTypeOwner = true;
 		
+		context.pushContext();
+		
 		for ( Property p : ClassDefinitionHelper.getAllProperties(currentClassDefinition) )
 			context.addSymbol( new KMSymbolProperty(p) );
 		
@@ -92,6 +94,8 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 		// Set the super types of the type parameters and visit all other annotations
 		acceptList(((EClass)node).getEOperations());
 
+		context.popContext();
+		
 		return currentClassDefinition;
 	}
 	
