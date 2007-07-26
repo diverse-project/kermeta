@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:java_profile="http:///schemas/java_profile/0" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xsi:schemaLocation="http:///schemas/java_profile/0 pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA">
+  <uml:Package xmi:id="97847549-4b0f-4d78-861d-c1004c63a0f3" name="util">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="dee21af9-5d5e-4c28-bb0c-0b42f24bbce6" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="84c2ae84-a6f3-4f23-b7f6-fb406e597c88" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/API/net/sourceforge/flora/javaAPI/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="0407ebed-93a0-435b-a5ee-5d8cae57cc21" key="parentId" value="db2cad81-4e96-48df-b442-01aeefe82b44"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Class" xmi:id="849e4488-1769-419b-ba4b-9220f4aadfe0" name="FlrException">
+      <generalization xmi:type="uml:Generalization" xmi:id="ef5a50c6-f058-40b5-a72a-3f29a54ef844">
+        <general xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]RuntimeException"/>
+      </generalization>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="e0b3f388-0553-4ca1-8693-3fcd8c3dc6a6" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#long"/>
+        <defaultValue xmi:type="uml:LiteralString" value="1"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="d0d6678f-b9d6-432f-97c6-eba9573737ac" name="FlrException" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="3eaef16f-d492-4d1e-adbf-11f3e7e9e851" name="s">
+          <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="469e2100-ee72-4cf6-8986-ffa2d4f318db" name="return" type="849e4488-1769-419b-ba4b-9220f4aadfe0" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="42b98008-63a7-422c-af0a-5d3b0928cd6e">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="81c62271-0e7d-45bc-b444-79b0485f093b" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <java_profile:create xmi:id="3a5e47aa-1203-4fb3-8d7c-75aea844c3cc" base_Operation="d0d6678f-b9d6-432f-97c6-eba9573737ac"/>
+</xmi:XMI>

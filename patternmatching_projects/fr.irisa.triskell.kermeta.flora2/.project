@@ -39,19 +39,19 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>iprolog</name>
-			<type>2</type>
-			<location>C:/home/barais/tmp/XSB/packages/iprolog</location>
-		</link>
-		<link>
 			<name>API</name>
 			<type>2</type>
-			<location>C:/app/flora2/java/API</location>
+			<location>/home/paco/C::/app/flora2/java/API</location>
+		</link>
+		<link>
+			<name>iprolog</name>
+			<type>2</type>
+			<location>/home/paco/C::/home/barais/tmp/XSB/packages/iprolog</location>
 		</link>
 		<link>
 			<name>interprolog212</name>
 			<type>2</type>
-			<location>C:/app/interprolog212</location>
+			<location>/home/paco/C::/app/interprolog212</location>
 		</link>
 	</linkedResources>
 </projectDescription>

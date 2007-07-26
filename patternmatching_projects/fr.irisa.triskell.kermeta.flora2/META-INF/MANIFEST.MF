@@ -6,7 +6,8 @@ Bundle-Version: 1.0.0
 Bundle-Activator: fr.irisa.triskell.kermeta.flora2.Activator
 Bundle-Vendor: IRISA Triskell
 Bundle-Localization: plugin
-Require-Bundle: org.eclipse.core.runtime
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore
 Eclipse-LazyStart: true
 Export-Package: com.declarativa.interprolog,
  com.declarativa.interprolog.examples,

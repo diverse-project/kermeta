@@ -1,0 +1,1192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:java_profile="http:///schemas/java_profile/0" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xsi:schemaLocation="http:///schemas/java_profile/0 pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA">
+  <uml:Package xmi:id="01ba496d-e339-4091-b137-3273716f4034" name="gui">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="464c93c4-633f-4d19-92e0-7b6abe963b16" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="241b5108-be62-43ad-84bf-02073863f304" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/interprolog212/com/declarativa/interprolog/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="936e16f5-db1d-4d0c-9677-3556612b48c7" key="parentId" value="e450b8bf-d3c0-461c-99aa-e7b02a06fad9"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Class" xmi:id="311b0a1b-0fb3-44f8-9781-e0690e478bfe" name="SWISubprocessEngineWindow">
+      <generalization xmi:type="uml:Generalization" xmi:id="16928c98-4d9d-4ab1-a0b3-49ea58de6329" general="67b7e321-2235-4737-acf8-3a81d0dd648d"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="9b3d5878-4ea5-40ba-8931-a67402c3d84c" name="SWISubprocessEngineWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="ff0575ac-d7b3-436f-88a2-1aafed0ef526" name="e">
+          <type xmi:type="uml:Class" href="../model.auml#dbd74253-663e-42e4-88bc-c11e767cf827"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="880a57e9-552a-42f9-a7f8-3dc6cfe12e32" name="return" type="311b0a1b-0fb3-44f8-9781-e0690e478bfe" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="eb868868-48ab-48b4-a8ca-ba601cf9a1a5" name="SWISubprocessEngineWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="9d688d41-5ea5-4d83-b11b-6c22922091fe" name="e">
+          <type xmi:type="uml:Class" href="../model.auml#dbd74253-663e-42e4-88bc-c11e767cf827"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="b8d0bca0-fdf0-48cf-b29e-632a8cf8e41a" name="autoDisplay">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="69c910fd-15ed-4a6b-a40d-2e81401d7782" name="return" type="311b0a1b-0fb3-44f8-9781-e0690e478bfe" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="15f5f610-8790-445b-ba31-c62fb7bb13f3" name="main" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="8d72fda8-cded-43f0-a1e6-3378567ac529" name="args">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" href="images/model.auml#50470840-3731-45f1-a554-12c508d6767f"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="67b7e321-2235-4737-acf8-3a81d0dd648d" name="SubprocessEngineWindow" clientDependency="43416a99-20c2-4f18-a442-7f420b9668d7">
+      <generalization xmi:type="uml:Generalization" xmi:id="b0512c4e-f8e8-4e17-bac7-eeaf8cbbf235" general="38d00fba-a28d-45ef-95f8-d74db8f104ab"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="43416a99-20c2-4f18-a442-7f420b9668d7" name="SubprocessEngineWindow_implements_PrologOutputListener" client="67b7e321-2235-4737-acf8-3a81d0dd648d">
+        <supplier xmi:type="uml:Interface" href="../model.auml#ce501b86-3c93-41d1-9493-942b34d26188"/>
+        <contract xmi:type="uml:Interface" href="../model.auml#ce501b86-3c93-41d1-9493-942b34d26188"/>
+      </interfaceRealization>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="0be48454-ca54-4a2e-add3-00fad2f13b8f" name="SubprocessEngineWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="b9fd8941-4df4-41a7-9684-176a010ff680" name="e">
+          <type xmi:type="uml:Class" href="../model.auml#fd7d19fd-084b-47a4-abc8-ff9cec540f97"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="e1afd3f6-13be-496b-8807-776d06ede3b2" name="return" type="67b7e321-2235-4737-acf8-3a81d0dd648d" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="d34a9560-644a-4c8a-b8be-42b0d85e7337" name="SubprocessEngineWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="0bbba002-8d04-4f51-a929-17106012abba" name="e">
+          <type xmi:type="uml:Class" href="../model.auml#fd7d19fd-084b-47a4-abc8-ff9cec540f97"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="4ac8243e-7665-416c-8307-754d3c319590" name="autoDisplay">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="6f32c4ff-b1ac-4678-8e81-34aeee79d120" name="return" type="67b7e321-2235-4737-acf8-3a81d0dd648d" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="19e13ac8-84bc-44ac-bbd7-8c8ed62ef37f" name="sendToProlog" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="73834520-731c-4a14-8b04-ae6e0112656b" name="print" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="78c1ed25-acd3-494d-b14c-8f617673ed41" name="s">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="054fc6f5-d034-429b-b3fc-17e551d9fe97" name="XSBSubprocessEngineWindow">
+      <generalization xmi:type="uml:Generalization" xmi:id="1647ef93-5110-4dd3-bc1f-190d6e474244" general="67b7e321-2235-4737-acf8-3a81d0dd648d"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="caf16f63-eb57-4583-9109-f51f15498e55" name="XSBSubprocessEngineWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="71188e90-cb81-417d-a7dc-02693fc7f081" name="e">
+          <type xmi:type="uml:Class" href="../model.auml#c26cfb7a-51e1-482f-81b5-7bd27f49c016"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="728afb03-2e8f-4ee8-ac3d-f57a9de9a0dc" name="return" type="054fc6f5-d034-429b-b3fc-17e551d9fe97" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="790004c9-a279-45a1-bbff-c96a0dd6c859" name="XSBSubprocessEngineWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="493ca36e-fcbc-4e87-aa77-ec201483899f" name="e">
+          <type xmi:type="uml:Class" href="../model.auml#c26cfb7a-51e1-482f-81b5-7bd27f49c016"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="15adbaaa-bd64-4a3d-8752-3c7d032ed309" name="autoDisplay">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="5586ed8f-b207-453a-9e4b-fc017e7302b8" name="return" type="054fc6f5-d034-429b-b3fc-17e551d9fe97" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="a55796a6-1f53-42cb-b02c-502629b58656" name="main" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="37316678-4906-4d8d-888e-330dc2ec2c4b" name="args">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="f2de9165-567b-44ec-a2e2-c4a9e9424780" name="TermTreePane">
+      <generalization xmi:type="uml:Generalization" xmi:id="bcfa5cde-a1e7-4410-8bb0-875c4087b229">
+        <general xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JPanel"/>
+      </generalization>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="2887097a-0cf0-41a6-bd7f-519c044b99bf" name="lists" visibility="package">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JList"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="346c8a19-c6b2-4ad6-9879-92d9d5923067" name="model" visibility="package" type="e9ac249e-3b29-4bfc-81f9-6a157119a811" association="d1337b72-76d0-455c-a999-30ea72ed618e"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="88b3791d-361f-4066-9252-2ed539709688" name="levelTitles" visibility="package">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
+      </ownedAttribute>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="8bb59c40-9d49-4eaf-93ff-2f377c115d3c" name="ListHandler" visibility="package" clientDependency="47e3bf08-c57b-4423-80dd-3d03ed9cf663">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="5e250a21-ae61-4928-8b02-a0dab2e307b1" name="position" visibility="package">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedAttribute>
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="47e3bf08-c57b-4423-80dd-3d03ed9cf663" name="ListHandler_implements_ListSelectionListener" client="8bb59c40-9d49-4eaf-93ff-2f377c115d3c">
+          <supplier xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/event/model.auml#event.[C]ListSelectionListener"/>
+          <contract xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/event/model.auml#event.[C]ListSelectionListener"/>
+        </interfaceRealization>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="3f92bee7-1f9b-4542-9865-f719ae818077" name="ListHandler" visibility="package">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="632d2045-d037-4d7c-b6d7-8e995c370cc8" name="i">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="761ab922-f59b-46e7-a82f-a0fc1bc4cc28" name="return" type="8bb59c40-9d49-4eaf-93ff-2f377c115d3c" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="fa185c32-b4f5-47f5-8933-7305d5073a55" name="valueChanged" visibility="public">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="2ee83c5c-f5be-4f7e-9746-489ec73438f8" name="e">
+            <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/event/model.auml#event.[C]ListSelectionEvent"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="e54b2cf4-fca3-46f4-ac85-bad43ca98243" name="clearRightLists" visibility="package"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="7ce3298f-deb9-4528-a22b-2feea99b5d6a" name="repaintRight" visibility="package"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="82202d08-0986-48a2-ba51-7fda6ab42e4d" name="findModel" visibility="package">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="1f8bae14-2046-44f9-a35b-adee0b845026" name="position">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="ae1a324a-0cc3-4e2a-8a4f-000e4524441d" name="return" type="e9ac249e-3b29-4bfc-81f9-6a157119a811" direction="return"/>
+        </ownedOperation>
+      </nestedClassifier>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="adb09ec9-bd60-40d5-a460-387d51d336c6" name="TermTreePane" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="fa17bfad-f213-4d0f-acb9-0fa9b01fb595" name="m" type="e9ac249e-3b29-4bfc-81f9-6a157119a811"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="cdc716d0-0195-42cf-b77d-69cde84d7c01" name="levelTitles">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="485e97d0-8223-4923-b915-b64e1ed63f20" name="return" type="f2de9165-567b-44ec-a2e2-c4a9e9424780" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="b56b6415-2f66-4c65-acc9-fd5dc0855932" name="paneForList" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="7aad2bcd-af55-42b8-a7e8-bbab25475900" name="L">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="e9a2b1b6-3b5c-4787-93e2-16d7e83aed37" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JComponent"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="e9ac249e-3b29-4bfc-81f9-6a157119a811" name="TermTreeModel" clientDependency="29c4fe3c-1a16-4624-85b8-6aac12b1af83">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="2fe2537e-c25e-432c-ae1f-7e69a541242c" name="node" visibility="package" association="7d854304-3376-4f2e-a741-e873f1bd8652">
+        <type xmi:type="uml:Class" href="../model.auml#2e5c97eb-9406-454d-b1c4-44866a5adbb6"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="3b9a4394-5811-42a9-a912-a607663cd088" name="children" visibility="package" type="e9ac249e-3b29-4bfc-81f9-6a157119a811">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="29c4fe3c-1a16-4624-85b8-6aac12b1af83" name="TermTreeModel_implements_Serializable" client="e9ac249e-3b29-4bfc-81f9-6a157119a811">
+        <supplier xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]Serializable"/>
+        <contract xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]Serializable"/>
+      </interfaceRealization>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="3232928b-8de4-4089-b550-87c5b6fbcba1" name="example" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="9eb2e779-39e9-42a7-83f7-d3c40178e30a" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../model.auml#a7e851d5-0784-4515-a639-ed7ad292f1ec"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="2ffd8fe8-e855-4689-9271-1b4142d9c8e8" name="TermTreeModel" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="24fc990b-007d-4b67-a560-d15b87e623f4" name="root">
+          <type xmi:type="uml:Class" href="../model.auml#2e5c97eb-9406-454d-b1c4-44866a5adbb6"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="6b47197e-5e37-49a6-b4e8-b6cb9a670aba" name="children" type="e9ac249e-3b29-4bfc-81f9-6a157119a811">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="0b3c0345-eb9a-401c-a646-0bdc8f9f94bf" name="return" type="e9ac249e-3b29-4bfc-81f9-6a157119a811" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="fff9342a-64ad-4a87-af65-bc7f8b47350c" name="depth" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c5733dad-7489-488d-8d21-347f0aeb151e" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="d4c037db-6615-4b34-8177-8d03a74039c2" name="topList" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="1754d64d-6787-4586-93b9-353e53d29619" name="return" type="84b32ac1-7576-41b2-8e2e-52b1134a9bb0" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="d1337b72-76d0-455c-a999-30ea72ed618e" name="TermTreePane.model_Ass" memberEnd="9b2decc8-368f-44cc-bb7e-35095d5135b7 346c8a19-c6b2-4ad6-9879-92d9d5923067">
+      <ownedEnd xmi:type="uml:Property" xmi:id="9b2decc8-368f-44cc-bb7e-35095d5135b7" name="model;default" type="f2de9165-567b-44ec-a2e2-c4a9e9424780" association="d1337b72-76d0-455c-a999-30ea72ed618e"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="c14d56d2-bfcd-4fdf-8191-76e4da5fc99c" name="XSBTableWindow">
+      <generalization xmi:type="uml:Generalization" xmi:id="b44aa920-5f13-4ab8-8abb-4775a622ef44">
+        <general xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JFrame"/>
+      </generalization>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="23c89f31-e507-49b4-bc29-a376f3505ed1" name="XSBTableWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="7a4b36fa-fd45-4861-9df4-d7efba2e36f3" name="m" type="43711e21-24f1-4939-8210-a47360bde47f"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="580370d2-649c-4f51-b2d5-d2775f92b75e" name="columnTitles">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="b6ddddff-a0f4-4267-b19f-41a780942b49" name="return" type="c14d56d2-bfcd-4fdf-8191-76e4da5fc99c" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="43711e21-24f1-4939-8210-a47360bde47f" name="XSBTableModel">
+      <generalization xmi:type="uml:Generalization" xmi:id="16886891-ae44-415d-a745-75512a7347eb" general="e9ac249e-3b29-4bfc-81f9-6a157119a811"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="50d63c11-1373-4298-b554-71ddf4e5aabb" name="state" visibility="package">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="766deb60-5e50-4fd4-8e33-98454dc93da9" name="XSBTableModel" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="91def54d-46f7-4c0b-9e2c-9f63a01fc33f" name="root">
+          <type xmi:type="uml:Class" href="../model.auml#2e5c97eb-9406-454d-b1c4-44866a5adbb6"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="85469f42-69b2-42ed-a0c2-299af101eae8" name="children" type="e9ac249e-3b29-4bfc-81f9-6a157119a811">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c84ea11a-ee92-40ad-9c51-c59d927283c6" name="state">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="1bc0106e-d0b7-4863-ac5f-8509b6029ce8" name="return" type="43711e21-24f1-4939-8210-a47360bde47f" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="60269f15-8524-49c7-bb2e-ac9546a8273a" name="example" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="144efb5a-50ef-4ed1-82f8-7e3347568581" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../model.auml#a7e851d5-0784-4515-a639-ed7ad292f1ec"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="78ca50b5-4936-44c2-9cf7-1342612df8e4" name="PredicateTableModel" clientDependency="f0ab339b-01a2-4c28-ba2f-f94486ce65a3 011bd76f-b616-432c-8854-9a58efe95b7d">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="4406d3e1-d78d-497a-9a97-d7c713790148" name="template" visibility="package" isLeaf="true" association="3e354c4d-9763-4ae5-8245-a1275165d85a">
+        <type xmi:type="uml:Class" href="../model.auml#2e5c97eb-9406-454d-b1c4-44866a5adbb6"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="a550fcb4-7a6d-489d-b547-91d76750478b" name="tuples" visibility="package" isLeaf="true">
+        <type xmi:type="uml:Class" href="../model.auml#2e5c97eb-9406-454d-b1c4-44866a5adbb6"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="340f8a6b-7dd2-4cda-a4ca-1e0b8eaa1207" name="arity" visibility="package">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="f1c280ca-65ed-4fa7-896d-95789f149bfc" name="functor" visibility="package">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="f0ab339b-01a2-4c28-ba2f-f94486ce65a3" name="PredicateTableModel_implements_Serializable" client="78ca50b5-4936-44c2-9cf7-1342612df8e4">
+        <supplier xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]Serializable"/>
+        <contract xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]Serializable"/>
+      </interfaceRealization>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="011bd76f-b616-432c-8854-9a58efe95b7d" name="PredicateTableModel_implements_TableModel" client="78ca50b5-4936-44c2-9cf7-1342612df8e4">
+        <supplier xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/table/model.auml#table.[C]TableModel"/>
+        <contract xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/table/model.auml#table.[C]TableModel"/>
+      </interfaceRealization>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="f704d33f-1840-429f-a959-e61deb421008" name="example" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="2f2ed3fe-54ef-4ca7-b6fd-04fb88207b84" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../model.auml#a7e851d5-0784-4515-a639-ed7ad292f1ec"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="db8f642d-6d12-4169-b627-f2ab894069de" name="PredicateTableModel" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="9ae46aa2-f7bf-428d-b0d8-8ea925098cc6" name="template">
+          <type xmi:type="uml:Class" href="../model.auml#2e5c97eb-9406-454d-b1c4-44866a5adbb6"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="761ea115-a9c2-48d6-8e45-3ef0b7f882cc" name="tuples">
+          <type xmi:type="uml:Class" href="../model.auml#2e5c97eb-9406-454d-b1c4-44866a5adbb6"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="16fae4fd-3ddc-49cd-8c5c-1288c17cefe0" name="return" type="78ca50b5-4936-44c2-9cf7-1342612df8e4" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="c1c20e5c-5008-481d-9e7c-cde010527cf2" name="toString" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="a282c168-23da-4ae1-b904-d5e3459125a3" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="cfc4d17e-4172-479f-b5a3-27089d0b7bbf" name="addTableModelListener" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="1ac1e1eb-3147-4dc2-94dd-1b3bf326290e" name="l">
+          <type xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/event/model.auml#event.[C]TableModelListener"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="a49724cc-0c55-4f3e-816e-c905f8388c26" name="removeTableModelListener" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="7703e265-b997-4092-b42e-17215fe90cf2" name="l">
+          <type xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/event/model.auml#event.[C]TableModelListener"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="c93f3914-7a6a-4597-98c7-8d4f1718120c" name="getColumnClass" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="7f12f324-d8be-4df1-bfce-e010a1a2809b" name="columnIndex">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="fe69ae60-d5a1-4ec1-81d0-f45790c7a206" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Class"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="e6177fe9-9dbd-4fe1-bf06-214d8f121c28" name="isCellEditable" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="4863f0b8-b6fd-494b-bb56-d64d5f93f5c9" name="rowIndex">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="ca657546-5de7-4b2e-bb8b-86b73fb56bfb" name="columnIndex">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="bb0ccecd-afba-4f14-8dea-94cd28cdaa0e" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="db80468c-0560-4033-8bd9-ce164a83e1e3" name="setValueAt" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="f7b8fbd3-ff16-4293-bc0e-92e153f62b63" name="aValue">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="70a8ee96-0ccc-4257-92bb-74ee229d1ec8" name="rowIndex">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="40f365f1-5b7e-4e57-bbe0-af8197c4810c" name="columnIndex">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="11d56eb3-c6b7-477d-a426-3d0c602a6b5c" name="getColumnName" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="111d3505-cb92-4eb9-be71-c6d1dfc6936e" name="columnIndex">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="31968719-109c-4e1b-a7eb-7652c6ecb181" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="ec422054-28a0-4de9-89d0-081adf4931d0" name="getRowCount" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="584efa45-8909-4d16-88e7-0697ab63b3e2" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="b3f00308-8657-47de-8632-69bcf82685fd" name="getColumnCount" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="5a8190bb-e3d6-47a1-8842-d30f3285ff19" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="4877f220-b202-4ff5-b8ef-97b3b47b4fcc" name="getValueAt" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="de9e07c7-7a41-411e-96e8-ad67bbcec4c1" name="row">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="e769032b-8eb0-41ee-b080-474a3c97d24e" name="column">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="d54f90d6-0ea1-46b1-ab4d-dbaefa1b65d2" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="3e354c4d-9763-4ae5-8245-a1275165d85a" name="PredicateTableModel.template_Ass" memberEnd="5588d3a8-bf6b-49b1-ba17-da58643cb651 4406d3e1-d78d-497a-9a97-d7c713790148">
+      <ownedEnd xmi:type="uml:Property" xmi:id="5588d3a8-bf6b-49b1-ba17-da58643cb651" name="template;default" type="78ca50b5-4936-44c2-9cf7-1342612df8e4" association="3e354c4d-9763-4ae5-8245-a1275165d85a"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="38d00fba-a28d-45ef-95f8-d74db8f104ab" name="ListenerWindow" clientDependency="4f4f02da-e406-4b91-be3b-858addcae0ce" isAbstract="true">
+      <generalization xmi:type="uml:Generalization" xmi:id="a5aedb06-b681-434d-952e-ea715fea7752">
+        <general xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JFrame"/>
+      </generalization>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="bc54a645-ba87-4dee-bdc1-c19d0ce44166" name="prologOutput" visibility="public" association="71538de0-4e85-437b-97cc-8e8db5af038f">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JTextArea"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="c9acd07e-308f-41a3-b469-55686bcbabee" name="prologInput" visibility="public" association="19813cb1-f692-4e49-b8de-6aaa7916d6c3">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JTextArea"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="b00c397d-d3b7-4656-9970-15e1f8a3886f" name="historyMenu" visibility="package" association="58ee3cbb-ecd5-40ea-9a65-0a49b067849a">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JMenu"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="194d4c5b-85fc-47d5-8527-fd68ad7769bb" name="fileMenu" visibility="package" association="074e741d-a349-4bd2-8aea-b153def6ba26">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JMenu"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="975143f8-4f5c-4106-ac6b-c18f50945420" name="loadedFiles" visibility="package" association="0cddf250-cad7-42df-9f74-6ea59b3592a2">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/util/model.auml#util.[C]Vector"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="6609449e-1fbb-41c5-a07c-93eb8b42fc41" name="topLevelCount" visibility="private" isStatic="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        <defaultValue xmi:type="uml:LiteralString" value="0"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="e71c440b-0170-47aa-9560-0223ce1773e7" name="engine" visibility="public" association="cefbad98-d9da-4a01-af96-e50fc115c732">
+        <type xmi:type="uml:Class" href="../model.auml#0e350f55-6489-4287-ad54-35fcaad4fe47"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="ffd86124-bccc-4626-864e-19a3af962e94" name="debug" visibility="public" isStatic="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        <defaultValue xmi:type="uml:LiteralString" value="false"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="cc3e2a56-89d8-4f9b-b4ee-8f717b4d6968" name="prologStartCommand" visibility="public" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="9eb262f7-db9d-44be-a772-db27efa1f495" name="loadFromJar" visibility="public" isStatic="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        <defaultValue xmi:type="uml:LiteralString" value="true"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="4f4f02da-e406-4b91-be3b-858addcae0ce" name="ListenerWindow_implements_WindowListener" client="38d00fba-a28d-45ef-95f8-d74db8f104ab">
+        <supplier xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]WindowListener"/>
+        <contract xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]WindowListener"/>
+      </interfaceRealization>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="18503a8b-decb-4640-8c72-eb4a356ea85d" name="HistoryListener" visibility="package" clientDependency="ae466041-210b-454e-8e88-24ad6f8d2770">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="cb55cd80-8cc5-49f1-8ce0-ed4f70301c40" name="targetText" visibility="package" association="e012d933-260d-4948-b77a-00991a764454">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/text/model.auml#text.[C]JTextComponent"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="294c5a8d-d061-45fb-b351-b5c8a999f18e" name="memory" visibility="package">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedAttribute>
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="ae466041-210b-454e-8e88-24ad6f8d2770" name="HistoryListener_implements_ActionListener" client="18503a8b-decb-4640-8c72-eb4a356ea85d">
+          <supplier xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]ActionListener"/>
+          <contract xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]ActionListener"/>
+        </interfaceRealization>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="2f9fa070-1337-4f54-95aa-d4bcc7973a55" name="HistoryListener" visibility="package">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="78e7da67-9a7d-4802-af66-7785c88763c7" name="t">
+            <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/text/model.auml#text.[C]JTextComponent"/>
+          </ownedParameter>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="bf4fce8f-39ea-4717-8442-b77a1628d9e4" name="s">
+            <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+          </ownedParameter>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="2f9b4193-4191-4952-bcbb-1989fb1c595e" name="return" type="18503a8b-decb-4640-8c72-eb4a356ea85d" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="b28dc7c2-961f-41d7-9841-e7deff8f9569" name="actionPerformed" visibility="public">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="7096bea7-a48e-486c-a82d-b2a86f6dd153" name="e">
+            <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]ActionEvent"/>
+          </ownedParameter>
+        </ownedOperation>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="ea0afbe9-5672-4d07-b4c2-3aab15697364" name="LoadedFile" visibility="package">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="5c271eb2-e607-4355-87b5-722d0d1363a7" name="file" visibility="package" association="ee8fa1bc-0e68-4ab3-9293-bd03ab5db9f1">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]File"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="62d6c7bb-4bf7-4fc2-8900-01176832d9f5" name="method" visibility="package">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedAttribute>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="7e791f3b-8a97-40ee-abbd-ca5808e16ef0" name="LoadedFile" visibility="package">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="536d204c-d4fd-47f2-a586-d11532434ed0" name="file">
+            <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]File"/>
+          </ownedParameter>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="637e2390-f512-4ad3-b703-16e8aa6bf335" name="method">
+            <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+          </ownedParameter>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="7a54154a-7d2c-462a-8a12-dab9cff86617" name="return" type="ea0afbe9-5672-4d07-b4c2-3aab15697364" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="a94fcf11-e5fd-430d-a5a4-659cdef6fc65" name="equals" visibility="public">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="e7c020a7-13bc-4f3c-a8c4-9253e2817be2" name="o" type="ea0afbe9-5672-4d07-b4c2-3aab15697364"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="da8fe05a-7319-4c23-94fc-c4078bef0c12" name="return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+      </nestedClassifier>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="5574f093-4f51-4132-9522-90b62db44b70" name="ListenerWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="13e5dc28-d456-4377-8130-9368701f8032" name="e">
+          <type xmi:type="uml:Class" href="../model.auml#0e350f55-6489-4287-ad54-35fcaad4fe47"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="52acccc4-33db-421e-927c-40466848f654" name="return" type="38d00fba-a28d-45ef-95f8-d74db8f104ab" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1f308c4a-3d43-4969-9c32-9336aad1e393" name="ListenerWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="5862f9ca-74fc-4bdf-ba06-19898500c822" name="e">
+          <type xmi:type="uml:Class" href="../model.auml#0e350f55-6489-4287-ad54-35fcaad4fe47"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="050503b2-4a7c-4e8b-955f-f6c46fcfebe9" name="autoDisplay">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="2630b8b1-639c-4ed0-b7c9-6106fa844467" name="return" type="38d00fba-a28d-45ef-95f8-d74db8f104ab" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="322a9a91-a455-4ed9-ba7c-d7097f709407" name="windowOpened" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="2f0947c8-5774-46cf-ae72-6a990a92d2b7" name="e">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]WindowEvent"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="5e234274-8e89-426b-b6f5-c94741369e55" name="windowClosed" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="79ca6064-318a-4ef0-85f5-ffdfd5471082" name="e">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]WindowEvent"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="77b6802a-c0e9-4356-ac31-79942f65097e" name="windowIconified" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="caf3a9c4-73e3-49d0-9458-0da825be0af5" name="e">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]WindowEvent"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="d30a985f-de00-4ce3-bc2d-eff32a584f36" name="windowClosing" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="d58d7c90-232f-4048-a1b8-50b304dd05d0" name="e">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]WindowEvent"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="9f437f87-a353-46a2-ab6e-99f0b7195dd9" name="windowActivated" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c3f753a3-5f95-4b5d-9b25-0cd44ed82743" name="e">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]WindowEvent"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="70fa0e84-e2eb-4246-b9d7-f24403d9f59d" name="windowDeactivated" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="03a836de-6dd8-4896-8760-b0d4cbd5003f" name="e">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]WindowEvent"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1544f7e3-bfb0-4468-80e1-137447b75319" name="windowDeiconified" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="663f5564-88b7-47c2-9bf8-eee1d2e7dbe7" name="e">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]WindowEvent"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="3fb0f9a2-240e-4e31-b5dd-5507ae5c4bcc" name="guiExamples" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="ac8af672-bf5f-4d0f-8aa8-31b54d51b672" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../model.auml#a7e851d5-0784-4515-a639-ed7ad292f1ec"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="619e63bc-67d3-4ef6-ba47-08df3c7b3be3" name="constructWindowContents" visibility="package"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="39e5825a-eab4-4aa3-9e20-af0de37d8567" name="handlePrologInputDnD" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="18d8542a-7bdd-42e4-a6eb-079a16ed3ff1" name="dtde">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/dnd/model.auml#dnd.[C]DropTargetDropEvent"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="aff5d917-b6d5-4f68-b267-151b04476c94" name="processDraggedFile" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="7cfb40da-2094-44c9-be2c-8a2db0fea9ac" name="f">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]File"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="64341a3e-39a9-4d5d-ba90-13f99674ae88" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="90206d14-bfce-4850-b47e-9813e5c26126" name="errorMessage" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="795b460a-4df2-4409-be0f-9fd0b3ee9d10" name="m">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="bc15634b-53cd-4a1c-ab90-d3177b854d11" name="constructMenu" visibility="package"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="99a6c8e5-f701-4b04-a71e-cff99fa6426d" name="addItemToMenu" visibility="package" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c83b3389-f74f-40a4-9e3b-23cc391fae5e" name="menu">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JMenu"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="656e9cbf-7703-48ae-9f43-90330b3694e4" name="item">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="f09f531c-b2cd-4180-a1e3-c936d44fda1d" name="handler">
+          <type xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]ActionListener"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="134a2e96-f38d-4929-819a-4ab7d37fdd61" name="addItemToMenu" visibility="package" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="5ce83a6d-4ebb-4fa7-8f49-91a0b7b34a5a" name="menu">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JMenu"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c58bf92b-7177-4e0c-9368-bf112d3694eb" name="item">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="1d373db0-baab-4ce2-a160-16728a280bc4" name="mnemonics">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="08fcd7df-b199-40f2-8950-8f9b86094754" name="handler">
+          <type xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]ActionListener"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="67f9f894-5e7f-4b3a-a639-d9c091440f29" name="sendToProlog" visibility="public" isAbstract="true"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="d827cbf6-84ce-4eb7-b6ab-703ee5bf55fa" name="addToHistory" visibility="protected"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="66e95d9d-f569-4869-8d7a-2fea7b8d1a31" name="addToReloaders" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="6f66e033-7ea8-4db8-a250-89160e816a24" name="file">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]File"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="a517f9c9-fd58-4cab-b106-f94fa72aeb43" name="method">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="8281af43-58a6-4f05-8614-34a7b3836ece" name="successfulCommand" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="03113476-b2b8-42bc-8923-5fce47900960" name="s">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c0358641-8dac-48f8-8ff3-515a316b6380" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="c5c1a1ac-969f-4f1f-bcde-6305a484c642" name="reconsultFile" visibility="package"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="ac99f75d-7271-44f7-8317-5b69cad448f8" name="load_dynFile" visibility="package"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="a92174ad-dac3-43d6-a6c8-eb8939c41ff1" name="focusInput" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="eecc37e3-5498-47e3-9850-f5b1180b10de" name="scrollToBottom" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="f9896bac-9512-4aa4-9cc3-69eadc2de914" name="commonMain" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="6788dabb-f059-4211-ba89-4e373e2b3380" name="args">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1ecafd98-f3f7-4cfb-a9ec-534b3ade98fe" name="commonGreeting" visibility="public" isStatic="true"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="3bde8f25-14af-4d3c-93f5-e2ba39967038" name="commandArgs" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="8f2b2093-6dda-4ca9-ae2d-916620a193bb" name="args">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="d73f8af5-e687-408d-bfed-643b8be5f6d8" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="e8f6e580-189a-44be-a27b-ed7454c8ad78" name="remainingArgs" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="13f1a912-591f-4053-a4a6-b8055bc2c6a2" name="args">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="211e5626-82a4-41eb-876e-fef83e0d1b02" name="first">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c855c95a-283a-4008-bf00-af2e9f48a287" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="3ad0f80e-8e38-4456-ab10-c6041bab04b9" name="beep" visibility="public" isStatic="true"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="e012d933-260d-4948-b77a-00991a764454" name="HistoryListener.targetText_Ass" memberEnd="e3937d99-05b2-49d6-b3dd-09ab381052ad cb55cd80-8cc5-49f1-8ce0-ed4f70301c40">
+      <ownedEnd xmi:type="uml:Property" xmi:id="e3937d99-05b2-49d6-b3dd-09ab381052ad" name="targetText;default" type="18503a8b-decb-4640-8c72-eb4a356ea85d" association="e012d933-260d-4948-b77a-00991a764454"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="ee8fa1bc-0e68-4ab3-9293-bd03ab5db9f1" name="LoadedFile.file_Ass" memberEnd="2cf44aa4-f3f6-462a-a695-cd08465974eb 5c271eb2-e607-4355-87b5-722d0d1363a7">
+      <ownedEnd xmi:type="uml:Property" xmi:id="2cf44aa4-f3f6-462a-a695-cd08465974eb" name="file;default" type="ea0afbe9-5672-4d07-b4c2-3aab15697364" association="ee8fa1bc-0e68-4ab3-9293-bd03ab5db9f1"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="71538de0-4e85-437b-97cc-8e8db5af038f" name="ListenerWindow.prologOutput_Ass" memberEnd="4018ae5b-51c9-47bb-9ed0-29aa97df2b65 bc54a645-ba87-4dee-bdc1-c19d0ce44166">
+      <ownedEnd xmi:type="uml:Property" xmi:id="4018ae5b-51c9-47bb-9ed0-29aa97df2b65" name="prologOutput;default" type="38d00fba-a28d-45ef-95f8-d74db8f104ab" association="71538de0-4e85-437b-97cc-8e8db5af038f"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="19813cb1-f692-4e49-b8de-6aaa7916d6c3" name="ListenerWindow.prologInput_Ass" memberEnd="394ddc4d-63ab-4024-bfb9-bf5b94bba8bf c9acd07e-308f-41a3-b469-55686bcbabee">
+      <ownedEnd xmi:type="uml:Property" xmi:id="394ddc4d-63ab-4024-bfb9-bf5b94bba8bf" name="prologInput;default" type="38d00fba-a28d-45ef-95f8-d74db8f104ab" association="19813cb1-f692-4e49-b8de-6aaa7916d6c3"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="58ee3cbb-ecd5-40ea-9a65-0a49b067849a" name="ListenerWindow.historyMenu_Ass" memberEnd="6c7b0d96-977f-47d3-a9d4-09104a265830 b00c397d-d3b7-4656-9970-15e1f8a3886f">
+      <ownedEnd xmi:type="uml:Property" xmi:id="6c7b0d96-977f-47d3-a9d4-09104a265830" name="historyMenu;default" type="38d00fba-a28d-45ef-95f8-d74db8f104ab" association="58ee3cbb-ecd5-40ea-9a65-0a49b067849a"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="074e741d-a349-4bd2-8aea-b153def6ba26" name="ListenerWindow.fileMenu_Ass" memberEnd="e2b84928-ca76-477b-9b5c-15ab4f54539d 194d4c5b-85fc-47d5-8527-fd68ad7769bb">
+      <ownedEnd xmi:type="uml:Property" xmi:id="e2b84928-ca76-477b-9b5c-15ab4f54539d" name="fileMenu;default" type="38d00fba-a28d-45ef-95f8-d74db8f104ab" association="074e741d-a349-4bd2-8aea-b153def6ba26"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="0cddf250-cad7-42df-9f74-6ea59b3592a2" name="ListenerWindow.loadedFiles_Ass" memberEnd="603a1e7f-f064-44d0-a665-93784de0100c 975143f8-4f5c-4106-ac6b-c18f50945420">
+      <ownedEnd xmi:type="uml:Property" xmi:id="603a1e7f-f064-44d0-a665-93784de0100c" name="loadedFiles;default" type="38d00fba-a28d-45ef-95f8-d74db8f104ab" association="0cddf250-cad7-42df-9f74-6ea59b3592a2"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="cefbad98-d9da-4a01-af96-e50fc115c732" name="ListenerWindow.engine_Ass" memberEnd="37c33568-537b-4ec8-aa4d-e9b8ae2940c2 e71c440b-0170-47aa-9560-0223ce1773e7">
+      <ownedEnd xmi:type="uml:Property" xmi:id="37c33568-537b-4ec8-aa4d-e9b8ae2940c2" name="engine;default" type="38d00fba-a28d-45ef-95f8-d74db8f104ab" association="cefbad98-d9da-4a01-af96-e50fc115c732"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="dcefda0b-c734-4ff2-b617-ae9f46cf2779" name="PrologEventBroker" clientDependency="7515408e-e84b-4fdd-935f-d11c04226ec2">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="11c7a693-7926-49ef-9773-ff86e1c434f3" name="engine" visibility="package" association="cb60a957-4695-4a7a-b10a-9bf9ea36aa74">
+        <type xmi:type="uml:Interface" href="../model.auml#02e541d9-3b12-4475-8977-8fde0491d001"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="339b0868-6a76-418f-8fab-490fa6882876" name="goal" visibility="package">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="c8c658b3-bd94-4fd4-851e-76f9f5b0ec51" name="component" visibility="package" association="56f3412c-765e-42ae-baef-cc9fae6c322d">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JComponent"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="7515408e-e84b-4fdd-935f-d11c04226ec2" name="PrologEventBroker_implements_ActionListener" client="dcefda0b-c734-4ff2-b617-ae9f46cf2779">
+        <supplier xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]ActionListener"/>
+        <contract xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]ActionListener"/>
+      </interfaceRealization>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="448da95e-1780-4569-b711-f64138d39bf4" name="PrologEventBroker" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="160c19bb-ed42-45f3-adfe-e29bd5028923" name="e">
+          <type xmi:type="uml:Interface" href="../model.auml#02e541d9-3b12-4475-8977-8fde0491d001"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="4173592b-0bcd-462f-92ee-ef71e60b99db" name="g">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="17f065a7-4c05-46d2-9e89-d9f5404b31a6" name="return" type="dcefda0b-c734-4ff2-b617-ae9f46cf2779" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="9d72e7b6-aecc-42eb-9a54-fe00b6287b05" name="PrologEventBroker" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="2a1499a5-1c75-41d3-87b5-12b27fd38f15" name="e">
+          <type xmi:type="uml:Interface" href="../model.auml#02e541d9-3b12-4475-8977-8fde0491d001"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="7d2a0df6-b85d-4755-913c-6a084b8b40be" name="g">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="30f5f6be-8cc7-45d1-8193-454418362444" name="return" type="dcefda0b-c734-4ff2-b617-ae9f46cf2779" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="39d8fa1b-df7e-4df6-a8cb-1ae4d9b8fcd2" name="PrologEventBroker" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="62cbaa48-fe33-4be1-b2ff-5af1b21989c3" name="e">
+          <type xmi:type="uml:Interface" href="../model.auml#02e541d9-3b12-4475-8977-8fde0491d001"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c5038e30-9f90-414c-ad90-e72521a4a074" name="return" type="dcefda0b-c734-4ff2-b617-ae9f46cf2779" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="24fd3e75-2ae9-4218-9e89-aa2f2be11d00" name="maySetTooltipText" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="30fc84bb-c3b7-4ae3-9f50-14ba10fef46d" name="defaultTip">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="cb13514f-5656-455b-bff2-e8fa022ace76" name="actionPerformed" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="662b5271-f531-4cd1-8a83-7956a18a97d0" name="e">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]ActionEvent"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="cb60a957-4695-4a7a-b10a-9bf9ea36aa74" name="PrologEventBroker.engine_Ass" memberEnd="da2caa6a-bec0-4640-b6d6-6e7e0292ab16 11c7a693-7926-49ef-9773-ff86e1c434f3">
+      <ownedEnd xmi:type="uml:Property" xmi:id="da2caa6a-bec0-4640-b6d6-6e7e0292ab16" name="engine;default" type="dcefda0b-c734-4ff2-b617-ae9f46cf2779" association="cb60a957-4695-4a7a-b10a-9bf9ea36aa74"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="56f3412c-765e-42ae-baef-cc9fae6c322d" name="PrologEventBroker.component_Ass" memberEnd="0f214bd6-0b81-4fdc-b5ab-cb31d0add706 c8c658b3-bd94-4fd4-851e-76f9f5b0ec51">
+      <ownedEnd xmi:type="uml:Property" xmi:id="0f214bd6-0b81-4fdc-b5ab-cb31d0add706" name="component;default" type="dcefda0b-c734-4ff2-b617-ae9f46cf2779" association="56f3412c-765e-42ae-baef-cc9fae6c322d"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="1f4b8762-7127-4ebb-b7ae-4132c89da052" name="TermModelWindow">
+      <generalization xmi:type="uml:Generalization" xmi:id="f5a76272-cc57-4e3c-aebc-a93de5d10f75">
+        <general xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JFrame"/>
+      </generalization>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="f8ba6f4c-fa61-4c8f-8844-3e8d888ec708" name="model" visibility="package" association="c3243a57-0d8d-4410-9857-097a653917ee">
+        <type xmi:type="uml:Class" href="../model.auml#2e5c97eb-9406-454d-b1c4-44866a5adbb6"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="1ed13b0e-db66-46f1-9c0d-f22f85858c93" name="engine" visibility="package" association="38dd8239-4963-43de-9951-ecddf6a7764a">
+        <type xmi:type="uml:Interface" href="../model.auml#02e541d9-3b12-4475-8977-8fde0491d001"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="a0e2a9e3-7af9-470d-a221-5098c93724e0" name="TermModelWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="dfbe452c-07d0-4e45-bec6-e2ad025f74ff" name="tm">
+          <type xmi:type="uml:Class" href="../model.auml#2e5c97eb-9406-454d-b1c4-44866a5adbb6"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="f9df967a-1639-418e-b0eb-b39357aa93b5" name="return" type="1f4b8762-7127-4ebb-b7ae-4132c89da052" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="62543992-03c1-42b2-9bd5-062421bb6383" name="TermModelWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="4e13f1b2-112b-403d-94c1-89e22c49293c" name="tm">
+          <type xmi:type="uml:Class" href="../model.auml#2e5c97eb-9406-454d-b1c4-44866a5adbb6"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="96828ab0-a70c-43c7-91ce-43bd0e0e0f28" name="e">
+          <type xmi:type="uml:Interface" href="../model.auml#02e541d9-3b12-4475-8977-8fde0491d001"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="7d203ed4-04a0-40d5-aa11-6e509f47ea59" name="return" type="1f4b8762-7127-4ebb-b7ae-4132c89da052" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="c3243a57-0d8d-4410-9857-097a653917ee" name="TermModelWindow.model_Ass" memberEnd="29688ff7-5d09-42d3-9d82-b0e124f0f787 f8ba6f4c-fa61-4c8f-8844-3e8d888ec708">
+      <ownedEnd xmi:type="uml:Property" xmi:id="29688ff7-5d09-42d3-9d82-b0e124f0f787" name="model;default" type="1f4b8762-7127-4ebb-b7ae-4132c89da052" association="c3243a57-0d8d-4410-9857-097a653917ee"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="38dd8239-4963-43de-9951-ecddf6a7764a" name="TermModelWindow.engine_Ass" memberEnd="37c70c58-a94f-4898-aae8-19186a23dbf1 1ed13b0e-db66-46f1-9c0d-f22f85858c93">
+      <ownedEnd xmi:type="uml:Property" xmi:id="37c70c58-a94f-4898-aae8-19186a23dbf1" name="engine;default" type="1f4b8762-7127-4ebb-b7ae-4132c89da052" association="38dd8239-4963-43de-9951-ecddf6a7764a"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="685a617c-5630-4b1c-a2a4-5cb8d50e5924" name="TermTreeCellRenderer" visibility="package" clientDependency="b0c62650-ab57-4f44-8fdd-3889feb65cdc">
+      <generalization xmi:type="uml:Generalization" xmi:id="620912f7-f3f6-44e3-a55e-6316f37831a2">
+        <general xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JLabel"/>
+      </generalization>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="4bacd4e6-4243-4882-b93e-3e2910263eeb" name="selected" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="b0c62650-ab57-4f44-8fdd-3889feb65cdc" name="TermTreeCellRenderer_implements_TreeCellRenderer" client="685a617c-5630-4b1c-a2a4-5cb8d50e5924">
+        <supplier xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/tree/model.auml#tree.[C]TreeCellRenderer"/>
+        <contract xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/tree/model.auml#tree.[C]TreeCellRenderer"/>
+      </interfaceRealization>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="88a6b36f-61b2-48aa-9839-cb0d91e449b6" name="getTreeCellRendererComponent" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="722060d2-b7f0-4f8d-bd6f-e7f6f72fa6eb" name="tree">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JTree"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="7829d82a-6c1e-4e28-b765-29bf9c95145b" name="value">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="0b577a55-147c-4732-a46e-79cf4bd0e4c7" name="selected">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="1d3f8438-fc3d-486a-b5e1-c4b1f1d5e7c0" name="expanded">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="f67df2d7-56b0-433f-888a-071099146efc" name="leaf">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="5910141d-7233-48b7-99df-410bf4cf0c7f" name="row">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="5e8a37af-0451-47eb-a0a0-16cd811c18b9" name="hasFocus">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="903ed192-bc34-456b-a37c-ad9b3b20da01" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/model.auml#awt.[C]Component"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="5f2d6362-2dbd-44a3-8c4a-afaa96073f18" name="paint" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="304073e3-4e8a-4267-b2c1-cfc8da5f1245" name="g">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/model.auml#awt.[C]Graphics"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="84b32ac1-7576-41b2-8e2e-52b1134a9bb0" name="TermListModel" clientDependency="f208a5e7-5b71-49ca-ae79-db54a7694438 c843679c-ba4b-47a6-b194-1c84949b2b20">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="8198f63d-e814-4074-9b7d-d81307465ee1" name="terms" visibility="package">
+        <type xmi:type="uml:Class" href="../model.auml#2e5c97eb-9406-454d-b1c4-44866a5adbb6"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="f208a5e7-5b71-49ca-ae79-db54a7694438" name="TermListModel_implements_Serializable" client="84b32ac1-7576-41b2-8e2e-52b1134a9bb0">
+        <supplier xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]Serializable"/>
+        <contract xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]Serializable"/>
+      </interfaceRealization>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="c843679c-ba4b-47a6-b194-1c84949b2b20" name="TermListModel_implements_ListModel" client="84b32ac1-7576-41b2-8e2e-52b1134a9bb0">
+        <supplier xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]ListModel"/>
+        <contract xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]ListModel"/>
+      </interfaceRealization>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="6eb13b3d-93be-4086-b2ef-33c9d563eed5" name="example" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="1d528c76-9aa0-4d37-964d-de91ea3d648c" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../model.auml#a7e851d5-0784-4515-a639-ed7ad292f1ec"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="a2f73b21-20e7-447b-9df4-58ff14d15c60" name="addListDataListener" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c6780d59-6d17-4c53-89e4-61fb2fa637b7" name="l">
+          <type xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/event/model.auml#event.[C]ListDataListener"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="13a69281-08ce-400e-8b1f-1a5cab9d5321" name="removeListDataListener" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="a28d6451-8eca-4e57-b6ca-aa96cdd0900c" name="l">
+          <type xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/event/model.auml#event.[C]ListDataListener"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="0cd7f26f-f0b3-4f24-bdae-a827c0060505" name="getElementAt" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="223a970c-fe47-4c49-a51f-b853a4b1d084" name="index">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="d94315d6-3bc3-4f05-9d7e-4386aa6266ae" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="d009df9f-7807-4f73-9b1b-9ca8cef2b31a" name="getSize" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="73a9eaa5-41af-4838-9bdb-e76cc0912b40" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="e86de5a4-5dda-43d8-b493-74bb6a4a8e46" name="TermListModel" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="8a0e20a7-bba5-4fd9-a384-770fd48b5b65" name="terms">
+          <type xmi:type="uml:Class" href="../model.auml#2e5c97eb-9406-454d-b1c4-44866a5adbb6"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="8b7153d2-d9d4-4784-8714-208a03a5b76c" name="return" type="84b32ac1-7576-41b2-8e2e-52b1134a9bb0" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="85cf11de-bfb0-4ea7-bb31-6d882f9654b4" name="GNUSubprocessEngineWindow">
+      <generalization xmi:type="uml:Generalization" xmi:id="c5e60739-fa5c-4884-af9e-59975fb2d116" general="67b7e321-2235-4737-acf8-3a81d0dd648d"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="5bba35c8-31e4-43b7-9a47-ebc69d7aa4f1" name="GNUSubprocessEngineWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="2c01f9cd-1e62-4cf7-a55b-dfd3134b2902" name="e">
+          <type xmi:type="uml:Class" href="../model.auml#797c0ef2-ede8-4a1e-bb60-916797969b44"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c2d6d3ec-b47a-4b5d-9dd7-6eede3006e30" name="return" type="85cf11de-bfb0-4ea7-bb31-6d882f9654b4" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="39025e1c-6696-43c6-897e-76413e1739d8" name="GNUSubprocessEngineWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="78c5eec0-f425-4b05-8e16-a45c3f39b1b0" name="e">
+          <type xmi:type="uml:Class" href="../model.auml#797c0ef2-ede8-4a1e-bb60-916797969b44"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c88891be-679c-49a7-a27a-a1ab5fcc7433" name="autoDisplay">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="60a96394-89f2-4af9-88f4-e76499170d4a" name="return" type="85cf11de-bfb0-4ea7-bb31-6d882f9654b4" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="9745e0b1-166d-4076-9e75-a9f239032834" name="main" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="99228a2e-a855-49f0-97ee-178716bffb82" name="args">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="6b7277d6-bf48-43c2-bcad-7b7bc2766a95" name="RelationTreeModel" clientDependency="e8aedcc8-9278-49d7-af10-fa4836ca36a2">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="2192d8f9-dbbf-4cae-a229-c02c34c758d9" name="listeners" visibility="protected" association="062f6299-8c3b-4bea-b612-5853109ca468">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/util/model.auml#util.[C]Vector"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="99993686-878a-408f-a826-53f3b6bc4b60" name="engine" visibility="package" association="3add72d2-ddd1-46fc-9cbe-85d0bbab717f">
+        <type xmi:type="uml:Interface" href="../model.auml#02e541d9-3b12-4475-8977-8fde0491d001"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="d08fc995-2ab8-45fb-9a38-0607d2cd9877" name="root" visibility="package" type="8b74806d-eb04-4b69-92bd-d3be0e849e94" association="7cbf4bef-7ad0-42d7-82cb-46b5658efb9f"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="d0b5b09e-5756-403d-9256-4ed3f60f8e97" name="relationFunctor" visibility="package">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="e8aedcc8-9278-49d7-af10-fa4836ca36a2" name="RelationTreeModel_implements_TreeModel" client="6b7277d6-bf48-43c2-bcad-7b7bc2766a95">
+        <supplier xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/tree/model.auml#tree.[C]TreeModel"/>
+        <contract xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/tree/model.auml#tree.[C]TreeModel"/>
+      </interfaceRealization>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="079712d0-c153-482b-8dbf-931316246e56" name="BrowseAction">
+        <generalization xmi:type="uml:Generalization" xmi:id="e121c2cb-7a57-43bf-9ba5-3546304e725e">
+          <general xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]AbstractAction"/>
+        </generalization>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="539dc521-efee-47d8-8631-227ad68f4f42" name="relationFunctor" visibility="package">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="47968769-f347-4c9b-a8af-23566f0973dc" name="top" visibility="package" association="47580f19-7de3-4ca2-aa10-4c358f6333c9">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="991f8b71-93e0-4703-bd1b-7760fa9feff3" name="engine" visibility="package" association="b7a010e5-9b37-4c24-a068-5ee6a35699da">
+          <type xmi:type="uml:Interface" href="../model.auml#02e541d9-3b12-4475-8977-8fde0491d001"/>
+        </ownedAttribute>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="3ab63184-ee3a-4988-a95f-0fc5fd240a8e" name="BrowseAction" visibility="public">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="037f649b-e879-4bc8-b2b3-8a52f4ec1d47" name="engine">
+            <type xmi:type="uml:Interface" href="../model.auml#02e541d9-3b12-4475-8977-8fde0491d001"/>
+          </ownedParameter>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="aea7032f-58a5-4617-98e0-39e434a08e2d" name="relationFunctor">
+            <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+          </ownedParameter>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="f19c6a2f-44a3-42f0-8733-177c03f59917" name="top">
+            <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+          </ownedParameter>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="1978cc2b-48a6-4453-b143-2b5d62bd5e4b" name="return" type="079712d0-c153-482b-8dbf-931316246e56" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="b6bacc1c-3942-413e-b7ec-004e409d3fb7" name="actionPerformed" visibility="public">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="551ea29e-5635-42ca-bf8c-91f3349f2b7c" name="e">
+            <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/awt/event/model.auml#event.[C]ActionEvent"/>
+          </ownedParameter>
+        </ownedOperation>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="280314c4-a5f4-484a-9102-c788775681ac" name="NodeDescriptionTriple" clientDependency="863c76b6-3fc7-42ff-bbbc-9ffab7bd70cb">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="cf7101d5-09ce-4ad2-a96d-af0ccc01ca97" name="node" visibility="package" association="c7a68f5b-8381-4784-96f0-37a8c8b34c0f">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="eb1f8b31-859d-49f4-afc4-c9d9cd172bea" name="description" visibility="package" association="029b1253-e887-4eb1-8fa3-4ca23bf0fb3a">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="eb26bd81-8d28-4360-9900-2073cc6101e9" name="childCount" visibility="package">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedAttribute>
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="863c76b6-3fc7-42ff-bbbc-9ffab7bd70cb" name="NodeDescriptionTriple_implements_Serializable" client="280314c4-a5f4-484a-9102-c788775681ac">
+          <supplier xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]Serializable"/>
+          <contract xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]Serializable"/>
+        </interfaceRealization>
+      </nestedClassifier>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="b7d10e66-8050-468b-b1ef-f42cf8663d78" name="RelationTreeModel" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="ce0ea637-e5c4-4e77-a73e-8b35434befbc" name="engine">
+          <type xmi:type="uml:Interface" href="../model.auml#02e541d9-3b12-4475-8977-8fde0491d001"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="6d6d5286-a02e-48af-b5b1-a0b83c9dd5c4" name="relationFunctor">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="fcdc4498-b591-4b81-bfea-d52946a97a0f" name="root">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="d5b11c73-519e-4626-a1ae-df3e1294ee2e" name="return" type="6b7277d6-bf48-43c2-bcad-7b7bc2766a95" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="138201ff-e7b4-492e-b8ce-cbee9a0dac6d" name="browseRelation" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="7466f635-190d-43da-9c78-0de419403e01" name="engine">
+          <type xmi:type="uml:Interface" href="../model.auml#02e541d9-3b12-4475-8977-8fde0491d001"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="2e2c39ae-54bb-4e7f-8f3e-e703a4008b6d" name="relationFunctor">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="5b4368ee-7192-4baa-8e21-11977fc3cfab" name="top">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="d2a4de60-262a-4c7f-8293-aba5334485b7" name="getRoot" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c17e626e-b10c-4eff-8c75-5d89eca3d4bd" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="0f8e5fee-f637-4030-85c3-de95ea39cf83" name="getChild" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="0c503245-047e-4563-9438-d2dabd3b9824" name="parent">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="d0c9878c-ed18-4efc-912b-22311c00e21f" name="index">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="535556f5-f593-44bc-a442-717f50d6fca6" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="33985267-05ae-457f-b788-e74950f8c87e" name="getChildCount" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="8e048802-d437-4941-b697-751522eb4410" name="parent">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="4069e2ee-e27a-49d8-934c-9024b6f9a5d3" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="d406445d-3923-4957-b9ab-4287e943ed9d" name="isLeaf" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="ba2fd983-69b0-49da-b0f8-fee1d76c5d5c" name="node">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="dbf1ff80-97b3-4d02-81b8-9cc5f265c416" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="9ccbe581-3ae0-4c5b-b478-04720663c5a0" name="valueForPathChanged" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="6d284e42-f96a-4ef9-b353-bf17ec1d7db4" name="path">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/tree/model.auml#tree.[C]TreePath"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="d6f2851c-8726-4408-bd59-2ee55c40ffb1" name="newValue">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="745fb2a7-44bc-4991-a10c-3ab68383d3d0" name="getIndexOfChild" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="a68e83ec-c173-460e-9b5e-cac0d8452d52" name="parent">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="2739da03-abd8-44b5-9798-4dafe243ab70" name="child">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="ad234dae-da51-413c-bcd8-1888e6899b9d" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="54a14a61-0d91-4587-810a-04ac5e24de01" name="addTreeModelListener" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="8d96b8cd-489d-483d-a156-c46d6e31f056" name="l">
+          <type xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/event/model.auml#event.[C]TreeModelListener"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="76a96204-d26b-41de-b0d4-8e85d11d8719" name="removeTreeModelListener" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="ea2dc3f3-83f0-42bd-8298-3bc6a5cfca22" name="l">
+          <type xmi:type="uml:Interface" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/event/model.auml#event.[C]TreeModelListener"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="e27313eb-c43f-46cd-9c5d-53b09efbd714" name="example" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="311e9a8c-ed98-4046-aa1f-ea360ee2a14a" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../model.auml#a7e851d5-0784-4515-a639-ed7ad292f1ec"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="47580f19-7de3-4ca2-aa10-4c358f6333c9" name="BrowseAction.top_Ass" memberEnd="126e0f9a-9f43-49ea-994b-7012d0b2aedd 47968769-f347-4c9b-a8af-23566f0973dc">
+      <ownedEnd xmi:type="uml:Property" xmi:id="126e0f9a-9f43-49ea-994b-7012d0b2aedd" name="top;default" type="079712d0-c153-482b-8dbf-931316246e56" association="47580f19-7de3-4ca2-aa10-4c358f6333c9"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="b7a010e5-9b37-4c24-a068-5ee6a35699da" name="BrowseAction.engine_Ass" memberEnd="0bda9b7b-f8a2-405d-a265-35f154dbc6e9 991f8b71-93e0-4703-bd1b-7760fa9feff3">
+      <ownedEnd xmi:type="uml:Property" xmi:id="0bda9b7b-f8a2-405d-a265-35f154dbc6e9" name="engine;default" type="079712d0-c153-482b-8dbf-931316246e56" association="b7a010e5-9b37-4c24-a068-5ee6a35699da"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="c7a68f5b-8381-4784-96f0-37a8c8b34c0f" name="NodeDescriptionTriple.node_Ass" memberEnd="3368553d-c99d-4729-8fcd-540cf9fa41f8 cf7101d5-09ce-4ad2-a96d-af0ccc01ca97">
+      <ownedEnd xmi:type="uml:Property" xmi:id="3368553d-c99d-4729-8fcd-540cf9fa41f8" name="node;default" type="280314c4-a5f4-484a-9102-c788775681ac" association="c7a68f5b-8381-4784-96f0-37a8c8b34c0f"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="029b1253-e887-4eb1-8fa3-4ca23bf0fb3a" name="NodeDescriptionTriple.description_Ass" memberEnd="f1ce5995-436d-477b-a10f-13760d017bae eb1f8b31-859d-49f4-afc4-c9d9cd172bea">
+      <ownedEnd xmi:type="uml:Property" xmi:id="f1ce5995-436d-477b-a10f-13760d017bae" name="description;default" type="280314c4-a5f4-484a-9102-c788775681ac" association="029b1253-e887-4eb1-8fa3-4ca23bf0fb3a"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="062f6299-8c3b-4bea-b612-5853109ca468" name="RelationTreeModel.listeners_Ass" memberEnd="b76da8d0-28a7-40d3-a73e-9b8a04cc0ec3 2192d8f9-dbbf-4cae-a229-c02c34c758d9">
+      <ownedEnd xmi:type="uml:Property" xmi:id="b76da8d0-28a7-40d3-a73e-9b8a04cc0ec3" name="listeners;default" type="6b7277d6-bf48-43c2-bcad-7b7bc2766a95" association="062f6299-8c3b-4bea-b612-5853109ca468"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="3add72d2-ddd1-46fc-9cbe-85d0bbab717f" name="RelationTreeModel.engine_Ass" memberEnd="dc69d0bb-bf9f-4aeb-88f3-5a59861cccf6 99993686-878a-408f-a826-53f3b6bc4b60">
+      <ownedEnd xmi:type="uml:Property" xmi:id="dc69d0bb-bf9f-4aeb-88f3-5a59861cccf6" name="engine;default" type="6b7277d6-bf48-43c2-bcad-7b7bc2766a95" association="3add72d2-ddd1-46fc-9cbe-85d0bbab717f"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="8b74806d-eb04-4b69-92bd-d3be0e849e94" name="RelationTreeNode" visibility="package">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="14e9f17e-31b1-43f2-8572-5fe4cf00ea66" name="dgcalls" visibility="package" isStatic="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="ceb46f12-e530-407f-9dc8-71c6fb8cc9e9" name="myModel" visibility="package" type="6b7277d6-bf48-43c2-bcad-7b7bc2766a95" association="6aa13556-1024-49b5-94e2-9fc186d740a2"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="e1a9a0f2-4d3c-41d5-8fc8-7688bcc4a899" name="node" visibility="private" association="30f5b4e0-dca2-4d08-8f64-ab1b0dba2b88">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="2745de64-717e-46bd-9256-6493195201fd" name="nodeInArray" visibility="private">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="b9eaa5de-f6c3-4f5e-aa62-28a011ef4b76" name="childCountCache" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="c9228718-a822-4450-87f3-1fbbc0a1e53c" name="toStringCache" visibility="private">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="dd8d04b3-7a8f-46c8-9946-ecb725710af2" name="childrenCache" visibility="private" association="1e1a6086-38cc-40f0-89a5-2d3a22238b43">
+        <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/util/model.auml#util.[C]Vector"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="f90e3ff0-69bc-40f1-9409-526c3e0b234a" name="RelationTreeNode" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="792c59ad-22d6-4311-b459-6ce93b55cc60" name="model" type="6b7277d6-bf48-43c2-bcad-7b7bc2766a95"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="06163998-cbc0-4668-8ee2-acfe2e5701d4" name="node">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="db0d8763-0d65-4639-ab28-9c9fbdd40187" name="description">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="f5961277-d15d-4c8b-ba5e-77db1b62456e" name="childCount">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="fb0a8184-9c35-43dd-be49-0442d7d387ca" name="return" type="8b74806d-eb04-4b69-92bd-d3be0e849e94" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="06eab3b2-f0f6-4c3d-b46b-dd9164ba4931" name="RelationTreeNode" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="660d52c6-5d3e-40d1-b71a-4e53005c5339" name="model" type="6b7277d6-bf48-43c2-bcad-7b7bc2766a95"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="033ead0a-5930-4da5-bf73-248f290325d6" name="node">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="ae775619-e075-4455-890d-90f8151cb2bb" name="return" type="8b74806d-eb04-4b69-92bd-d3be0e849e94" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="ba38c130-08c3-493c-8dd5-e91e8387f13f" name="getChildCount" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="36584ae0-e023-4519-ba02-ca388c1dd926" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="761992c6-f446-4fe2-9fba-acfab8ff940e" name="isLeaf" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="969791c4-626c-40a9-8766-5a3a3428b3e6" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="6996fdbb-5113-47d8-8075-4a10f3223a6e" name="getChild" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="803414c5-b7cc-44c4-bcae-8f7b214795b6" name="index">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="70a66aba-2061-4d55-b21c-fff32f81eb6a" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="ce03a548-e123-4563-a143-60b6a070ac15" name="getIndexOfChild" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="a65e4231-265a-4fee-83cc-ad5933851265" name="child">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="1c8ce5bd-01ad-4ebe-8bad-9cb55fe89c36" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="cecef393-61a7-418b-bce7-ba692fe882a3" name="toString" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="b9d8fb31-907c-43f5-8013-63eb926902ac" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="86dcf662-a8c5-479b-993f-2a8edcf0f3bd" name="getEngine" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="487d522f-7b88-435f-9c6c-62c30fa570cc" name="return" direction="return">
+          <type xmi:type="uml:Interface" href="../model.auml#02e541d9-3b12-4475-8977-8fde0491d001"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="11d32530-203c-488c-8c34-556910990a1a" name="getRelationFunctor" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="81c9d86d-5057-4d7e-88d9-ace760316d89" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="7cbf4bef-7ad0-42d7-82cb-46b5658efb9f" name="RelationTreeModel.root_Ass" memberEnd="1a7563f7-ef0c-45da-b83a-3a1d970b158f d08fc995-2ab8-45fb-9a38-0607d2cd9877">
+      <ownedEnd xmi:type="uml:Property" xmi:id="1a7563f7-ef0c-45da-b83a-3a1d970b158f" name="root;default" type="6b7277d6-bf48-43c2-bcad-7b7bc2766a95" association="7cbf4bef-7ad0-42d7-82cb-46b5658efb9f"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="6aa13556-1024-49b5-94e2-9fc186d740a2" name="RelationTreeNode.myModel_Ass" memberEnd="233caa1c-86b8-40d4-9f60-e1a6617994f6 ceb46f12-e530-407f-9dc8-71c6fb8cc9e9">
+      <ownedEnd xmi:type="uml:Property" xmi:id="233caa1c-86b8-40d4-9f60-e1a6617994f6" name="myModel;default" type="8b74806d-eb04-4b69-92bd-d3be0e849e94" association="6aa13556-1024-49b5-94e2-9fc186d740a2"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="30f5b4e0-dca2-4d08-8f64-ab1b0dba2b88" name="RelationTreeNode.node_Ass" memberEnd="e5795497-06d3-4d35-b28a-50dee15ae2a0 e1a9a0f2-4d3c-41d5-8fc8-7688bcc4a899">
+      <ownedEnd xmi:type="uml:Property" xmi:id="e5795497-06d3-4d35-b28a-50dee15ae2a0" name="node;default" type="8b74806d-eb04-4b69-92bd-d3be0e849e94" association="30f5b4e0-dca2-4d08-8f64-ab1b0dba2b88"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="1e1a6086-38cc-40f0-89a5-2d3a22238b43" name="RelationTreeNode.childrenCache_Ass" memberEnd="08cb8320-eb3d-43b3-88eb-194a6492024e dd8d04b3-7a8f-46c8-9946-ecb725710af2">
+      <ownedEnd xmi:type="uml:Property" xmi:id="08cb8320-eb3d-43b3-88eb-194a6492024e" name="childrenCache;default" type="8b74806d-eb04-4b69-92bd-d3be0e849e94" association="1e1a6086-38cc-40f0-89a5-2d3a22238b43"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="7d854304-3376-4f2e-a741-e873f1bd8652" name="TermTreeModel.node_Ass" memberEnd="0da7ff6e-980e-4e7c-8a26-42117bd86e56 2fe2537e-c25e-432c-ae1f-7e69a541242c">
+      <ownedEnd xmi:type="uml:Property" xmi:id="0da7ff6e-980e-4e7c-8a26-42117bd86e56" name="node;default" type="e9ac249e-3b29-4bfc-81f9-6a157119a811" association="7d854304-3376-4f2e-a741-e873f1bd8652"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="daf81b7f-285a-4106-a0f1-cc2ee7c5f034" name="YAPSubprocessEngineWindow">
+      <generalization xmi:type="uml:Generalization" xmi:id="bcab15e2-2520-402a-93e4-28e27e20a6fc" general="67b7e321-2235-4737-acf8-3a81d0dd648d"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="5bd85536-d291-493d-8c93-2b7a3bfe7915" name="YAPSubprocessEngineWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="d26671b8-a0cb-45cf-83e4-c97a4c46f246" name="e">
+          <type xmi:type="uml:Class" href="../model.auml#06b50001-e1ea-490c-8aee-dce91f51cdaa"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="e49735a9-ca41-4f9d-bc16-d1ed14e0c85e" name="return" type="daf81b7f-285a-4106-a0f1-cc2ee7c5f034" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="be86e067-bdef-4436-9635-68845eae805c" name="YAPSubprocessEngineWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="a113c388-1660-4691-9659-5a47a333903e" name="e">
+          <type xmi:type="uml:Class" href="../model.auml#06b50001-e1ea-490c-8aee-dce91f51cdaa"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="a46a2b96-d4b6-4b89-ab7f-62faa32f7588" name="autoDisplay">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="1c86a736-31c7-490e-93f8-aa0cd16dc395" name="return" type="daf81b7f-285a-4106-a0f1-cc2ee7c5f034" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="fa4054e4-1870-4e45-871d-0fb26de19ff1" name="main" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="1c878a60-b1a1-474a-a51c-caa979197c09" name="args">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="86d1ddc2-b20d-4611-937f-82200d1a594c" name="TermTreeWindow">
+      <generalization xmi:type="uml:Generalization" xmi:id="dcbb645f-3266-43a5-9289-e9908db39bf1">
+        <general xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JFrame"/>
+      </generalization>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="2223667c-9476-4298-987b-22bc9a12e6df" name="TermTreeWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="dc2629dc-ee53-4aad-ad7f-a875fec40a88" name="m" type="e9ac249e-3b29-4bfc-81f9-6a157119a811"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="ce533808-f6b7-45f2-8426-690986c2c256" name="return" type="86d1ddc2-b20d-4611-937f-82200d1a594c" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="cd828657-3231-400b-b5e1-a1b4a9c6592d" name="TermTreeWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="e6ae1d01-ad11-48de-b038-a5093835f331" name="m" type="e9ac249e-3b29-4bfc-81f9-6a157119a811"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="b420cff9-1d80-40a0-b05c-43c4bdf98c85" name="levelTitles">
+          <type xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Object"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="cf6903ab-f560-4890-8923-9b4f3e1c643b" name="return" type="86d1ddc2-b20d-4611-937f-82200d1a594c" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="859db38f-f0fc-4c3c-b260-7fd3965f1e71" name="PredicateTableWindow">
+      <generalization xmi:type="uml:Generalization" xmi:id="bbb4c575-0a07-46fa-b570-cec24e368484">
+        <general xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JFrame"/>
+      </generalization>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="301e8d86-5a78-4924-8b8d-f7d72e75a578" name="PredicateTableWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="422a4415-e6c1-4f38-8b35-cc6d0ff3ff34" name="ptm" type="78ca50b5-4936-44c2-9cf7-1342612df8e4"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="a7961431-7883-4b67-bb92-62bec9a598d3" name="return" type="859db38f-f0fc-4c3c-b260-7fd3965f1e71" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="9face8a7-a614-4d38-b537-5083df1cbfa2" name="TermListWindow">
+      <generalization xmi:type="uml:Generalization" xmi:id="9d0ffdb3-deb9-42a4-bdbd-f0218cfd1b57">
+        <general xmi:type="uml:Class" href="../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/javax/swing/model.auml#swing.[C]JFrame"/>
+      </generalization>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1cdda7a4-0a7c-4801-a82c-436c030cf22b" name="TermListWindow" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="7596f453-d303-4b8f-be7f-46efc1211b91" name="ptm" type="84b32ac1-7576-41b2-8e2e-52b1134a9bb0"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="393311be-7aab-42c6-bf89-39c47ca3aace" name="return" type="9face8a7-a614-4d38-b537-5083df1cbfa2" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="634b22b5-c8cd-4de8-91c8-8fb893518dbf">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="ef104d2d-f3e3-4335-adf0-d7197bed27f4" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <java_profile:create xmi:id="731b8815-25b0-42c3-8ab3-b8da1d79aa8d" base_Operation="9b3d5878-4ea5-40ba-8931-a67402c3d84c"/>
+  <java_profile:create xmi:id="062eaef4-61bb-4ed1-933c-0bec0fa02f84" base_Operation="eb868868-48ab-48b4-a8ca-ba601cf9a1a5"/>
+  <java_profile:create xmi:id="e611fe6a-6da5-4d37-a41c-5aa65f953aa5" base_Operation="caf16f63-eb57-4583-9109-f51f15498e55"/>
+  <java_profile:create xmi:id="308cd033-bd28-4dba-82d3-90acdd8dc498" base_Operation="790004c9-a279-45a1-bbff-c96a0dd6c859"/>
+  <java_profile:create xmi:id="32f8ccb8-13aa-4aeb-bdfc-d314e6e1c49a" base_Operation="3f92bee7-1f9b-4542-9865-f719ae818077"/>
+  <java_profile:create xmi:id="02fe873c-9454-4544-bd69-cb37d721551c" base_Operation="adb09ec9-bd60-40d5-a460-387d51d336c6"/>
+  <java_profile:create xmi:id="2f57ac4c-c81b-4d05-81ab-bbd4dd85c0b3" base_Operation="23c89f31-e507-49b4-bc29-a376f3505ed1"/>
+  <java_profile:create xmi:id="2a5fa3f3-3012-41ee-9f78-bbab305fd43c" base_Operation="db8f642d-6d12-4169-b627-f2ab894069de"/>
+  <java_profile:create xmi:id="9c0e76d1-b0b6-4ac6-8bce-8e9226ec7ec0" base_Operation="2f9fa070-1337-4f54-95aa-d4bcc7973a55"/>
+  <java_profile:static xmi:id="3bee5ba6-9a8d-43f4-84bd-a3263a30ace4" base_Classifier="ea0afbe9-5672-4d07-b4c2-3aab15697364"/>
+  <java_profile:create xmi:id="b1a3e5ab-a571-4b26-aa5a-0e5b5f2d0f25" base_Operation="7e791f3b-8a97-40ee-abbd-ca5808e16ef0"/>
+  <java_profile:create xmi:id="27273fcc-82e6-416f-8d16-7a1503c56784" base_Operation="5574f093-4f51-4132-9522-90b62db44b70"/>
+  <java_profile:create xmi:id="75623300-e4c9-476f-9ae7-dd65e1b9135a" base_Operation="1f308c4a-3d43-4969-9c32-9336aad1e393"/>
+  <java_profile:create xmi:id="ef2d8755-d17c-4e6d-8c76-ca998977558b" base_Operation="448da95e-1780-4569-b711-f64138d39bf4"/>
+  <java_profile:create xmi:id="b299327a-9336-404f-bff3-0313d22b8abf" base_Operation="9d72e7b6-aecc-42eb-9a54-fe00b6287b05"/>
+  <java_profile:create xmi:id="716e93f8-7a6d-44ac-a887-bba9cd0d1cd0" base_Operation="39d8fa1b-df7e-4df6-a8cb-1ae4d9b8fcd2"/>
+  <java_profile:create xmi:id="c1bd3b76-3216-49dc-96af-a30b4fa7dae9" base_Operation="a0e2a9e3-7af9-470d-a221-5098c93724e0"/>
+  <java_profile:create xmi:id="a4598c7a-cfaa-41bf-a2f4-1f681cfc5161" base_Operation="62543992-03c1-42b2-9bd5-062421bb6383"/>
+  <java_profile:create xmi:id="2a13b347-bace-4275-a62d-9226d5702b46" base_Operation="e86de5a4-5dda-43d8-b493-74bb6a4a8e46"/>
+  <java_profile:create xmi:id="6a72e10c-0f02-401f-a545-83b6e959b170" base_Operation="766deb60-5e50-4fd4-8e33-98454dc93da9"/>
+  <java_profile:create xmi:id="17bd2217-909e-4983-95ea-2f6c72e63cfa" base_Operation="5bba35c8-31e4-43b7-9a47-ebc69d7aa4f1"/>
+  <java_profile:create xmi:id="872cb8eb-97f7-41b6-8fe9-9b65e116f170" base_Operation="39025e1c-6696-43c6-897e-76413e1739d8"/>
+  <java_profile:static xmi:id="7e19ad23-624e-4520-9792-549da9465785" base_Classifier="079712d0-c153-482b-8dbf-931316246e56"/>
+  <java_profile:create xmi:id="903a6e7e-e388-4942-8569-0e90b91c09da" base_Operation="3ab63184-ee3a-4988-a95f-0fc5fd240a8e"/>
+  <java_profile:static xmi:id="8cbff357-8276-4c2e-92a8-8ac9e6490b4e" base_Classifier="280314c4-a5f4-484a-9102-c788775681ac"/>
+  <java_profile:create xmi:id="7d6df59d-11d1-431b-83ca-b1ab5f28c457" base_Operation="b7d10e66-8050-468b-b1ef-f42cf8663d78"/>
+  <java_profile:create xmi:id="32f5a0a4-d672-4ab7-93ed-eb218abaa146" base_Operation="f90e3ff0-69bc-40f1-9409-526c3e0b234a"/>
+  <java_profile:create xmi:id="f49a5cca-f843-46f0-a066-fafc13b0958e" base_Operation="06eab3b2-f0f6-4c3d-b46b-dd9164ba4931"/>
+  <java_profile:create xmi:id="0c324029-057e-45c7-ba7b-5384e500ec76" base_Operation="0be48454-ca54-4a2e-add3-00fad2f13b8f"/>
+  <java_profile:create xmi:id="1ef82386-b326-478a-a686-482152275feb" base_Operation="d34a9560-644a-4c8a-b8be-42b0d85e7337"/>
+  <java_profile:create xmi:id="0429f137-c572-4193-b8cd-080c8ae390b1" base_Operation="2ffd8fe8-e855-4689-9271-1b4142d9c8e8"/>
+  <java_profile:create xmi:id="cd849aba-4702-47db-9209-ad4167314e99" base_Operation="5bd85536-d291-493d-8c93-2b7a3bfe7915"/>
+  <java_profile:create xmi:id="b4822c50-20f3-44b8-9116-a363417946bd" base_Operation="be86e067-bdef-4436-9635-68845eae805c"/>
+  <java_profile:create xmi:id="a5454344-fdb4-4e22-83fc-f674feba4a89" base_Operation="2223667c-9476-4298-987b-22bc9a12e6df"/>
+  <java_profile:create xmi:id="468e36dd-fd65-40a1-b5fb-6b827a50540e" base_Operation="cd828657-3231-400b-b5e1-a1b4a9c6592d"/>
+  <java_profile:create xmi:id="7cb87e6f-f8fa-480e-a86a-dae64635a365" base_Operation="301e8d86-5a78-4924-8b8d-f7d72e75a578"/>
+  <java_profile:create xmi:id="a45ed2e9-bc16-4185-b28f-918a2e77511f" base_Operation="1cdda7a4-0a7c-4801-a82c-436c030cf22b"/>
+</xmi:XMI>

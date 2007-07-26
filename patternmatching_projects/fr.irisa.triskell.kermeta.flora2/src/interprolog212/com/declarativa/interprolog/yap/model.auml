@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xmi:id="c5c98dde-902d-4e1b-ad16-22dcf3ed929e" name="yap">
+  <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="c949488c-48e5-44af-8f53-a702e61dc9dd" source="crossContainmentOwner">
+    <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="a5095102-ffaf-4337-8fc6-84cf1c3857d8" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/interprolog212/com/declarativa/interprolog/model.auml"/>
+    <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="8e476898-fa0f-454c-a975-37ff13245a4b" key="parentId" value="e450b8bf-d3c0-461c-99aa-e7b02a06fad9"/>
+  </eAnnotations>
+  <profileApplication xmi:type="uml:ProfileApplication" xmi:id="2bde5ad3-d12d-44c1-982d-fa0bbfa63d09">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="90336571-013c-4b56-8798-d951c8d4a50c" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+    </eAnnotations>
+    <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+  </profileApplication>
+</uml:Package>

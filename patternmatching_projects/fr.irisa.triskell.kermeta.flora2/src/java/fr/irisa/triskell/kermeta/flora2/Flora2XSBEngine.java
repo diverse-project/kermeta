@@ -1,4 +1,4 @@
-/* $Id: Flora2XSBEngine.java,v 1.5 2007-07-26 12:40:08 bmorin Exp $
+/* $Id: Flora2XSBEngine.java,v 1.6 2007-07-26 12:52:23 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * License : GPL
  * Copyright : IRISA / Universite de Rennes 1
@@ -15,6 +15,7 @@ package fr.irisa.triskell.kermeta.flora2;
 import net.sourceforge.flora.javaAPI.src.FloraObject;
 import net.sourceforge.flora.javaAPI.src.FloraSession;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -131,14 +132,12 @@ public class Flora2XSBEngine {
     private static fr.irisa.triskell.kermeta.language.structure.Class createParametrizedClass(RuntimeObject self, String className,
             fr.irisa.triskell.kermeta.language.structure.Class[] variableTypes) {
         // creating a class
-        fr.irisa.triskell.kermeta.language.structure.Class it_class = self
-                .getFactory().getMemory().getUnit().struct_factory.createClass();
+        fr.irisa.triskell.kermeta.language.structure.Class it_class = StructureFactory.eINSTANCE.createClass();
         // setting class definition accoarding Classname
-        it_class.setTypeDefinition((ClassDefinition) self.getFactory().getMemory().getUnit().typeDefinitionLookup(className));
+        it_class.setTypeDefinition((ClassDefinition) self.getFactory().getMemory().getUnit().getTypeDefinitionByName(className));
         if (variableTypes != null && variableTypes.length > 0) {
             for (int i = 0; i < variableTypes.length; i++) {
-                TypeVariableBinding binding = self.getFactory().getMemory()
-                    .getUnit().struct_factory.createTypeVariableBinding();
+                TypeVariableBinding binding = StructureFactory.eINSTANCE.createTypeVariableBinding();
                 binding.setVariable((TypeVariable) it_class.getTypeDefinition()
                         .getTypeParameter().get(i));
 
