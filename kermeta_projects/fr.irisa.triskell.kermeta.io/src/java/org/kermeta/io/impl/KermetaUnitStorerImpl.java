@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.3 2007-07-24 13:46:46 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.4 2007-07-26 13:49:59 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -151,6 +151,8 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 				kermetaUnit.setBuildingState( new KmBuildingState() );
 			else if ( extension.equals("jar") )
 				kermetaUnit.setBuildingState( new JavaBuildingState() );
+			else if ( ! EMFRegistryHelper.isRegistered( kermetaUnitURI ) )
+				kermetaUnit.error("Unknown Format. It is impossible to load this file.");
 		}
 		
     	WeakReference reference = new WeakReference( kermetaUnit );

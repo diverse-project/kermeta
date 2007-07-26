@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.43 2007-07-24 13:46:45 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.44 2007-07-26 13:49:59 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -174,7 +174,6 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	 */
 	protected Type checkOperationCall(CallableOperation op, CallExpression exp) {
 		// Get the type of the operation as a function type
-		
 	    Type operation_type = op.getType();
 		
 	    // The result is the return type of the operation

@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass5.java,v 1.4 2007-07-24 13:46:46 ftanguy Exp $
+/* $Id: Ecore2KMPass5.java,v 1.5 2007-07-26 13:49:59 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -51,6 +51,8 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 
 
@@ -77,6 +79,9 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 		currentClassDefinition = (ClassDefinition) datas.getTypeDefinition(node);
 		isClassTypeOwner = true;
 		
+		for ( Property p : ClassDefinitionHelper.getAllProperties(currentClassDefinition) )
+			context.addSymbol( new KMSymbolProperty(p) );
+		
 		// Set the super types of the type parameters
 		acceptList(((EClass)node).getETypeParameters());
 		
@@ -102,10 +107,12 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 		context.pushContext();
 		
 		// add type variable
-		for (Object next : currentOperation.getTypeParameter()) context.addTypeVar((TypeVariable)next);
+		for (Object next : currentOperation.getTypeParameter()) 
+			context.addTypeVar((TypeVariable)next);
 
 		// add parameters
-		for (Object next : currentOperation.getOwnedParameter()) context.addSymbol(new KMSymbolParameter((Parameter)next));
+		for (Object next : currentOperation.getOwnedParameter()) 
+			context.addSymbol(new KMSymbolParameter((Parameter)next));
 		
 		
 		// Set the super types of the type parameters

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.12 2007-07-24 13:46:45 ftanguy Exp $
+/* $Id: KMT2KMPass1.java,v 1.13 2007-07-26 13:49:59 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : GPL
@@ -39,6 +39,7 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Using;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 
 /**
@@ -103,6 +104,9 @@ public class KMT2KMPass1 extends KMT2KMPass {
 			String s = ((StringLiteralContainer)node).getString_literal().getText();
 			s = s.substring(1, s.length() -1 );
 			
+			if ( s.startsWith("./") )
+				s = s.substring(2, s.length());
+			
 			String fileURI = "";
 			if ( s.equals("kermeta") )
 				fileURI = s;
@@ -142,6 +146,8 @@ public class KMT2KMPass1 extends KMT2KMPass {
 			if ( ! error ) {
 				try {
 					currentImportedUnit = IOPlugin.getDefault().getKermetaUnit( fileURI );
+					if ( currentImportedUnit.isErrored() )
+						builder.error("The file " + fileURI + " is errored : " + KermetaUnitHelper.getAllErrorsAsString(currentImportedUnit), importStmt);
 					currentImportedUnit.setNeedASTTraces(true);
 				} catch ( URIMalformedException exception ) {
 					builder.error( exception.getMessage() );
