@@ -1,4 +1,4 @@
-/* $Id: AdaptationBuilder.kmt,v 1.2 2007-07-18 15:43:46 bmorin Exp $
+/* $Id: AdaptationBuilder.kmt,v 1.3 2007-07-26 07:15:51 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -85,7 +85,7 @@ class AdaptationBuilder
 							  if(not(c.~abstract) and not(c.interface)) then
 								  	bodyCreate:=""
 								  	paramCreate:=""
-								  	paramCreate:=paramCreate+"\tattribute isUnique:Boolean\n"
+								  	//paramCreate:=paramCreate+"\tattribute isUnique:Boolean\n"
 								  	paramClone:=paramCreate+"\treference new"+c.name+":pattern::"+getQualifiedName(c,c.ePackage,"")+"\n"
 								  	paramClone:=paramClone+"\tattribute real"+c.name+":pattern::"+getQualifiedName(c,c.ePackage,"")+"\n"
 									paramCreate:=paramCreate+"\tattribute new"+c.name+":pattern::"+getQualifiedName(c,c.ePackage,"")+"\n"
@@ -175,10 +175,10 @@ class AdaptationBuilder
 							}
 							body:=body+"\tend\n"
 							bodyUnset:=bodyUnset+"\tend\n"
-							adaptation:=adaptation+"class create"+c.name+" inherits Adaptation{\n"+paramCreate+"\n"+bodyCreate+"}\n\n"
-							adaptation:=adaptation+"class clone"+c.name+" inherits Adaptation{\n"+paramClone+"\n"+bodyClone+"}\n\n"
-							adaptation:=adaptation+"class set"+c.name+" inherits Adaptation{\n"+param+"\n"+body+"}\n\n"						
-							adaptation:=adaptation+"class unset"+c.name+" inherits Adaptation{\n"+param+"\n"+bodyUnset+"}\n\n"
+							adaptation:=adaptation+"class create"+c.name+" inherits createAdaptation{\n"+paramCreate+"\n"+bodyCreate+"}\n\n"
+							adaptation:=adaptation+"class clone"+c.name+" inherits cloneAdaptation{\n"+paramClone+"\n"+bodyClone+"}\n\n"
+							adaptation:=adaptation+"class set"+c.name+" inherits setAdaptation{\n"+param+"\n"+body+"}\n\n"						
+							adaptation:=adaptation+"class unset"+c.name+" inherits unsetAdaptation{\n"+param+"\n"+bodyUnset+"}\n\n"
 						  end}
 	result:=adaptation						  
 	end

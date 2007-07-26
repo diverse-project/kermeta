@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+/* $Id: weaver.kmt,v 1.2 2007-07-26 07:15:51 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -67,31 +67,26 @@ class Weaver
 		                         	
 				/*---Applying the adapter to the base model---*/       
 				var i:Integer init 0
-				var hash : Hashtable<Object, Object>
+				var binding : Hashtable<Object, Object>
 				var keys:Set<Object>
 				var input:String				
 				var apply:Boolean
 				var executePM:Boolean
 			 	var inputPM:String
 				from iteBindings until iteBindings.isOff loop 
-				     hash := iteBindings.next
+				     binding := iteBindings.next
 					 i:=i+1
 					 stdio.writeln("")
 					 stdio.writeln("")
 				     stdio.writeln("  -Binding"+i.toString+":")
-					 keys:=hash.keys
-					 keys.each{k | stdio.writeln(k.toString+" -> "+hash.getValue(k).toString)}
+					 keys:=binding.keys
+					 keys.each{k | stdio.writeln(k.toString+" -> "+binding.getValue(k).toString)}
 					 input:=stdio.read("apply this binding ? (true/false): ")//user interaction
 					 apply:=input.toBoolean
 					 if apply then //apply the adapter for the selected binding
 					 	 stdio.writeln("----------------------------")
 					 	 stdio.writeln("weaving the aspect for binding"+i.toString+"...")
-						 //adapter.binding:=hash
-						 adapter.apply(hash)
-						 /*adapter.adapt.each{a |
-					 		 		a.execute()
-					 	 } 
-					 	adapter.updateClones*/
+						 adapter.apply(binding)
 					 	stdio.writeln("weaving the aspect for binding"+i.toString+"... done")
 					 	stdio.writeln("----------------------------")
 					 	stdio.writeln("")
@@ -112,7 +107,7 @@ class Weaver
 			stdio.writeln("Saving Result")
 			saveModel(inputModel, resultUri, domainMMUri)		
 		else
-			var e:Exception init WeaverException.new
+			var e:WeaverException init WeaverException.new
 			e.display
 			raise e
 		end		
@@ -134,9 +129,9 @@ class Weaver
     end
 }
 
-class WeaverException inherits Exception
+class WeaverException inherits kermeta::exceptions::Exception
 {
 	operation display() : Void is do
-		stdio.writeln("WeaverException: Adapter contains no adaptation or at least one adaptation is not well typed")
+		message:="WeaverException: Adapter contains no adaptation or at least one adaptation is not well typed"
 	end
 }

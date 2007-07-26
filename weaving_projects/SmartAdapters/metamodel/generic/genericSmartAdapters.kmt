@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.2 2007-07-26 07:15:24 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -13,9 +13,9 @@ require "../../program/weaving/converter.kmt"
 using kermeta::standard
 using kermeta::utils
 using kermeta::persistence
+using kermeta::exceptions
 using patternframework
 using org::smartadapters::core
-//using org::smartadapters::core::adaptations
 using org::smartadapters::extension
 using ecore
 using utils
@@ -53,28 +53,18 @@ package smartadapters
 			initClone must be called before the first binding
 			*/
 			operation initClone() is do
-				//stdio.writeln("initClone")
 				converter:=Converter.new
-				//converter.initPrimitive
-				clone:=Hashtable</*P*/Object, Object>.new
+				clone:=Hashtable<Object, Object>.new
 				cloned:=Set<Object>.new
 				created:=Hashtable<Object, Object>.new
 				if(aspect.structure!=void) then
 				aspect.structure.content.each{elt |
-						/*var cloned:Object
-						cloned?=Object.clone(elt)
-						if(cloned!=void) then
-							clone.put(elt, cloned)
-						end*/
-						//if(cloned!=void) then
 							var newCloned:Object
 							newCloned:=converter.convert(Object.clone(elt), convert)
-							//stdio.writeln(newCloned.toString)
 							if(newCloned!=void) then
-								//stdio.writeln(elt.toString+"->"+newCloned.toString)
 								clone.put(elt, newCloned)
 							end
-						/*end*/}
+						}
 				end
 			end
 			
@@ -90,29 +80,16 @@ package smartadapters
 				end
 			end
 			
-			operation updateClone(pObj : /*P*/Object) is do
+			operation updateClone(pObj : Object) is do
 				clone.remove(pObj)
 				converter.deleteConverted(pObj)
-				/*var cloned:Object
-				cloned?=Object.clone(pObj)
-				if(cloned!=void) then
-					clone.put(pObj, cloned)
-				end*/
-				//if(cloned!=void) then
 					var newCloned:Object
 					newCloned:=converter.convert(Object.clone(pObj), convert)
 					if(newCloned!=void) then
 						clone.put(pObj, newCloned)
 					end
-				//end
 			end
 			
-			/**
-			returns the PObject that is actually in the base model
-				- a model base element
-			or	- a clone of an aspect element already inserted in the base model
-			or  - the element itself (composition of two models without using pattern matching)
-			*/
 			operation getRealObject(obj : Object, isCollect:Boolean) : Object is do
 				if(isCollect) then
 					var col:Collection<kermeta::reflection::Object>
@@ -154,235 +131,107 @@ package smartadapters
 	{
 		@aspect "true"
 		class DerivableAdapter
-		{	
-			operation isReallyAbstract() : ecore::EBoolean is do
-				result:=(alternatives.size<1)
-			end
-
-			operation resolve(derivation : Derivation) : smartadapters::core::Adapter raises Exception is do
-				if(derivation.isApplicableTo(self)) then
-					stdio.write("Deriving an adapter...")
-					var derivable:org::smartadapters::extension::DerivableAdapter init org::smartadapters::extension::DerivableAdapter.new
-					//ajout des adaptations non impliquées dans des alt/opt
-					adapt.each{a | 
-							if(not(a.isOptional) or (derivation.adaptations.contains(a))) then
-								derivable.adapt.add(a)						
-							end}														
-			
-					//ajout des adaptations/cibles impliquées dans les alternatives
-					alternatives.each{alt |
-						//si alt déterminée
-						//if(alt.isDetermined(derivation)) then  //test done in derivation.isApplicableTo(self)
-							if(alt.number>0) then
-								derivable.adapt.addAll(alt.selected)
-							else
-								if(not(alt.isOptional)) then
-									derivable.alternatives.add(alt)
-								end
-							end
-						//end
-						}
-					if(derivable.isConcretizable) then
-						var adapter:Adapter init Adapter.new
+		{
+			operation resolve(derivation:Derivation):Adapter is do
+				var adapter:DerivableAdapter init DerivableAdapter.new
+				var isChecked:Boolean init true
+				constraints.each{c | isChecked:=isChecked and c.check(derivation)}
+				if(isChecked) then
+					adapt.each{a | adapter.addAdaptation(derivation,a)}
+					alternatives.each{a | adapter.addAlternative(derivation,a)}
+					if(adapter.isConcretizable) then
+						var concreteAdapter:Adapter init Adapter.new
 						var hash:Hashtable<kermeta::reflection::Class,kermeta::reflection::Class> init Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new
-						hash.put(derivable.getMetaClass,adapter.getMetaClass)
-						derivable.adapt.each{a | hash.put(a.getMetaClass, a.getMetaClass)}
+						hash.put(adapter.getMetaClass,concreteAdapter.getMetaClass)
+						adapter.adapt.each{a | hash.put(a.getMetaClass, a.getMetaClass)}
 						if(converter==void) then
 							converter:=Converter.new
 						end
-						adapter?=converter.convert(derivable,hash)
-						/*stdio.writeln(adapter.toString)
-						adapter.adapt.each{a | stdio.writeln(a.toString)}
-						
-						/*var adapter:Adapter
-						adapter?=derivable*/
-						//stdio.writeln("  resulting adapter is not derivable")
-						result:=adapter
+						concreteAdapter?=converter.convert(adapter,hash)
+						result:=concreteAdapter
 					else
-						//stdio.writeln("  resulting adapter is derivable")
-						result:=derivable
-					end
-					stdio.writeln("  OK!")
+						result:=adapter
+					end					
 				else
-					var e:Exception init NonApplicableDerivation.new
+					var e:NonApplicableDerivation init NonApplicableDerivation.new
 					e.display
 					raise e
-				end	
+				end
 			end
+			
+			operation addAdaptation(d:Derivation, a:Adaptation) is do
+				if(not(a.isOptional) or d.selectedOptions.contains(a)) then
+					adapt.add(a)
+				end
+			end
+			
+			operation addConjunction(d:Derivation, c:EntityConjunction) is do
+				if(not(c.isOptional) or d.selectedOptions.contains(c)) then
+					c.~and.each{e |
+						var a:Adaptation
+						a?=e
+						if(a!=void) then
+							addAdaptation(d,a)
+						else
+							var alt:EntityAlternative
+							alt?=e
+							if(alt!=void) then
+								addAlternative(d,alt)
+							else
+								var conj:EntityConjunction
+								conj?=c
+								if(conj!=void) then
+									addConjunction(d,conj)
+								end
+							end
+						end
+					}
+				end
+			end
+			
+			operation addAlternative(d:Derivation, alt:EntityAlternative) is do
+				if(d.elements.exists{e | e.alternative==alt}) then
+					var v:AdapterElement 
+					var elt:DerivationElement
+					elt:=d.elements.select{e | e.alternative==alt}.one
+					v:=elt.selectedVariant
+					var a:Adaptation
+					a?=v
+					if(a!=void) then
+						addAdaptation(d,a)
+					else
+					   var altern:EntityAlternative
+					   altern?=v
+					   if(altern!=void) then
+					   		addAlternative(d,altern)
+					   else
+					   		var c:EntityConjunction
+					   		c?=v
+					   		if(c!=void) then
+					   			addConjunction(d,c)
+					   		end
+					   end
+					end
+
+				else
+					if(not(alt.isOptional) or d.selectedOptions.contains(alt)) then
+						self.alternatives.add(alt)
+					end
+				end
+			end
+
 			
 			operation isConcretizable() : ecore::EBoolean is do
 				result:=(alternatives.size==0)
 			end			
 		}
 		
-		@aspect "true"
-		class EntityAlternative
-		{	
-			attribute number : Integer
-			reference selected : Adaptation[0..*]
-			attribute error : Boolean
-				
-			/**
-			Returns true if the alternative is correctly determined
-			(if one and only one variant is fully selected in the derivation)
-			*/
-			operation isDetermined(derivation:Derivation) : ecore::EBoolean raises Exception is do
-				var oldNumber:Integer init 0
-				number:=0
-				self.selected.clear
-				error:=false
-				xor.each{elt | if(not(error)) then
-									isSelected(elt, derivation)
-									if(oldNumber>0) then
-										error:=not(oldNumber==number) //error : multiple variants
-									else
-										oldNumber:=number
-									end
-								end}
-				stdio.writeln("number: "+number.toString)
-				stdio.writeln("error: "+error.toString)
-				if(not(error)) then
-					//stdio.writeln("Alternative is well determined")
-					result:=true
-				else
-					var except:Exception init NonApplicableDerivation.new
-					except.display
-					raise except
-				end	
-			end
-			
-			/**
-			Returns 1 if elt is selected in derivation, 0 otherwise
-			*/
-			operation isSelected(elt:AdapterElement, derivation:Derivation) : ecore::EBoolean is do
-				//stdio.writeln("isSelected "+elt.name+" ?")
-				//Si adaptation obligatoire et présente dans la dérivation
-				var adapt:Adaptation init void
-				adapt?=elt
-				if(adapt!=void) then
-					if(derivation.adaptations.contains(adapt)) then
-						//stdio.writeln("  adaptation "+adapt.name+" is selected")
-						number:=number+1
-						selected.add(adapt)
-	 					result:=true
-	 				else	
-	 					//stdio.writeln("  adaptation "+adapt.name+" is not selected")
-	 					result:=false
-					end
-				end
-				
-				//Si conjonction, elle est sélectionnée ssi tout son contenu est sélectioné
-				var c:org::smartadapters::extension::EntityConjunction init void
-				c?=elt
-				if(c!=void) then
-					var select:ecore::EBoolean init true
-					var option:ecore::EBoolean init false
-					var number:Integer init 0
-					c.~and.each{e |
-							if(not(e.isOptional)) then
-								if(isSelected(e,derivation)) then
-									number:=number+1
-								else
-									select:= false//select and isSelected(e,derivation)
-								end
-							else
-								if(isSelected(e,derivation)) then
-									number:=number+1
-								end
-							end}
-					stdio.writeln("select:"+select.toString)		
-					
-					if(not(select)) then
-						error:=(number!=0)
-					end
-				end
-				
-				//Si alternative, elle est sélectionnée ssi elle est déterminée
-				var altern:EntityAlternative init void
-				altern?=elt
-				if(altern!=void) then						
-					if(altern.isDetermined(derivation)) then
-						//stdio.writeln("  alternative "+altern.name+" is selected")
-						result:=true
-					else
-						//stdio.writeln("  alternative "+altern.name+" is not selected")
-						result:=false
-					end
-				end
-			end			
-		}
-		
-		@aspect "true"
-		class Derivation
-		{
-			operation isApplicableTo(derivable:smartadapters::extension::DerivableAdapter) : ecore::EBoolean is do			
-				stdio.writeln("Checking derivation:")
-				var isApplicable:ecore::EBoolean init true
-				var elements:kermeta::standard::Set<smartadapters::extension::AdapterElement> init kermeta::standard::Set<smartadapters::extension::AdapterElement>.new
-
-				adaptations.each{a | elements.add(a)}
-
-				//on vérifie que les alternatives sont correctement déterminées
-				stdio.write("  - alternatives...")
-				derivable.alternatives.each{alt | isApplicable:=isApplicable and alt.isDetermined(self)}
-				
-				//on vérifie que les contraintes d'exlusion mutuelle sont respectées
-				//i.e. pour chaque contraintes, il y a au plus un élément présent dans la dérivation
-				if(isApplicable) then
-					stdio.writeln("  OK!")
-					stdio.write("  - mutual exclusions...")
-					derivable.xor.each{mutex | 
-									isApplicable:=isApplicable and elements.intersection(mutex.entities).size<=1}
-				else
-					stdio.writeln("  Error!")
-				end
-				
-				
-				//on vérifie que les dépendances sont respectées
-				if(isApplicable) then
-					stdio.writeln(" OK!")
-					stdio.write("  - dependencies")
-					derivable.~and.each{dep | 
-									if(elements.contains(dep.source)) then
-										isApplicable:=isApplicable and elements.containsAll(dep.dependencies)
-									end}
-				else
-					stdio.writeln("  Error!")
-				end
-				
-				if(isApplicable) then
-					stdio.writeln("  OK!")
-				else
-					stdio.writeln("  Error!")
-				end
-				
-				result:=isApplicable
-			end
-		}
-		
-		abstract class Exception {
-			operation display() is abstract
-		}
-		
-		class MultipleVariants inherits Exception {
+		class NonApplicableDerivation inherits kermeta::exceptions::Exception {
 			operation display() is do
-				stdio.writeln("Many variants of an alternative have been selected. Maybe the derivation is not well formed.")
+				message:="Derivation is not applicable to DerivableAdapter. Maybe the derivation is not well formed.\n
+				Please check that the derivation respects all the explicit and implicit constraints..."			
 			end
-		}
-		
-		class NonApplicableDerivation inherits Exception {
-			operation display() is do
-				stdio.writeln("Derivation is not applicable to DerivableAdapter. Maybe the derivation is not well formed.")
-				stdio.writeln("Please check that the derivation respects all the explicit and implicit constraints...")				
-			end
-		}
-		
-		class IncompleteConjunction inherits Exception {
-			operation display() is do
-				stdio.writeln("At least one mandatory element of a conjunction is missing. Maybe the derivation is not well formed")
-			end
-		}	
+		}		
 	}
-	
 }
 

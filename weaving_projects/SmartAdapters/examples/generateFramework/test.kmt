@@ -1,4 +1,4 @@
-/* $Id: test.kmt,v 1.3 2007-07-18 15:43:46 bmorin Exp $
+/* $Id: test.kmt,v 1.4 2007-07-26 07:15:06 bmorin Exp $
  * Creation date: May 4, 2007
  * License:
  * Copyright:
@@ -20,9 +20,9 @@ using specialize
 class frameworkGenerator
 {
 	operation main() : Void is do
-		//generateFSM()
+		generateFSM()
 		//generateClassDiag()
-		generateUML()
+		//generateUML()
 	end
 
 	operation generateFSM() : Void is do 

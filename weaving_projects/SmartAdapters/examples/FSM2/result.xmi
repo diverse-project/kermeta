@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
-<FSM:Fsm xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:FSM="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMM.ecore">
+<FSM:Fsm xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:FSM="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMM.ecore">
   <states name="a"/>
   <states name="b"/>
   <states name="c"/>
-  <states xsi:type="FSM:State" name="a"/>
+  <states name="clonedState"/>
+  <transitions source="//@states.0" target="//@states.2"/>
 </FSM:Fsm>

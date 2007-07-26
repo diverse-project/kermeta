@@ -1,4 +1,4 @@
-/* $Id: derive.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+/* $Id: derive.kmt,v 1.2 2007-07-26 07:15:05 bmorin Exp $
  * Creation date: April 23, 2007
  * License:
  * Copyright:
@@ -43,10 +43,13 @@ class Derive
 		adapt1.isOptional:=false
 		var adapt2:Adaptation init setTransition.new
 		adapt2.name:="adapt2"
-		adapt2.isOptional:=true
+		adapt2.isOptional:=false
 		var adapt3:Adaptation init setTransition.new
 		adapt3.name:="adapt3"
 		adapt3.isOptional:=false
+		var adapt4:Adaptation init setTransition.new
+		adapt4.name:="adapt4"
+		adapt4.isOptional:=true
 		
 		/**
 		Creating conjunctions
@@ -69,19 +72,35 @@ class Derive
 		alt1.xor.add(adapt3)
 		
 		/**
+		Creating constraints
+		*/
+		var c1:Dependency init Dependency.new
+		c1.source:=conj1
+		c1.dependencies.add(adapt4)
+		
+		var c2:MutualExclusion init MutualExclusion.new
+		c2.entities.add(adapt3)
+		c2.entities.add(adapt4)
+		
+		/**
 		Creating a derivable adapter
 		*/
 		var derivable:DerivableAdapter init DerivableAdapter.new
+		derivable.adapt.add(adapt4)
 		derivable.alternatives.add(alt1)
+		derivable.constraints.add(c1)
+		derivable.constraints.add(c2)
 		
 		/**
 		Création d'une dérivation (cohérente) produisant un adapter concret
 		*/
 		var derivation:Derivation init Derivation.new
-		derivation.adaptations.add(adapt1)
-		derivation.adaptations.add(adapt2)
-		//derivation.adaptations.add(adapt3)
-		
+		var elt1:DerivationElement init DerivationElement.new
+		derivation.elements.add(elt1)
+		elt1.alternative:=alt1
+		//elt1.selectedVariant:=conj1
+		elt1.selectedVariant:=adapt3
+		//derivation.selectedOptions.add(adapt4)
 		
 		/**
 		Deriving derivable adapter according to the derivation and saving the result

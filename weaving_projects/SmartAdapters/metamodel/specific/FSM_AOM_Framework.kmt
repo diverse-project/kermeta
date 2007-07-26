@@ -43,8 +43,8 @@ end
 	end
 }
 
-class cloneState inherits Adaptation{
-	attribute isUnique:Boolean
+class cloneState inherits cloneAdaptation{
+	//attribute isUnique:Boolean
 	reference newState:pattern::FSM::State
 	attribute realState:pattern::FSM::State
 
@@ -56,16 +56,29 @@ class cloneState inherits Adaptation{
 		var clonedState:FSM::State
 		var temp:FSM::State
 		temp?=adapter.getRealObject(newState,false)
-		if(isUnique) then
+		stdio.writeln(isUnique.name.toString)
+		if(isUnique==uniqueType.unique) then
+			stdio.writeln("isUnique==uniqueType.unique")
 			if(not(adapter.cloned.exists{o | o==temp})) then
 				clonedState?=Object.clone(temp)
 				adapter.clone.put(realState,clonedState)
 				adapter.cloned.add(temp)
 			end
 		else
-			clonedState?=Object.clone(temp)
-			adapter.clone.put(realState,clonedState)
-			adapter.cloned.add(temp)
+			stdio.writeln("else")
+			stdio.writeln(isUnique.name.toString)
+			var clone:Boolean init false
+			if(isUnique==uniqueType.non_unique) then
+				stdio.writeln("isUnique==uniqueType.onDemand")
+				var input:String init stdio.read("clone "+newState.toString+" (true/false) :")//user interaction
+				clone:=input.toBoolean
+			end
+			if(isUnique==uniqueType.non_unique or clone) then
+					stdio.writeln("isUnique==uniqueType.non_unique or clone")
+					clonedState?=Object.clone(temp)
+					adapter.clone.put(realState,clonedState)
+					adapter.cloned.add(temp)
+			end
 		end
 	end
 }

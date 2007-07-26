@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdaptersBase.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+/* $Id: genericSmartAdaptersBase.kmt,v 1.2 2007-07-26 07:15:24 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -63,6 +63,26 @@ package smartadapters
 				is abstract
 
 		}
+		
+		abstract class cloneAdaptation inherits Adaptation
+		{
+			attribute isUnique : uniqueType
+		}
+		
+		abstract class createAdaptation inherits Adaptation
+		{
+			attribute isUnique : uniqueType
+		}
+		
+		abstract class setAdaptation inherits Adaptation
+		{
+		
+		}
+		
+		abstract class unsetAdaptation inherits Adaptation
+		{
+		
+		}
 
 		class makeUnique inherits Adaptation
 		{
@@ -75,7 +95,9 @@ package smartadapters
 			operation execute() : Void is do
 				adapter.aspect.persistent.add(element)
 			end
-		}		
+		}
+		
+		enumeration uniqueType{unique; non_unique; onDemand;}		
 	}
 	
 
@@ -92,11 +114,12 @@ package smartadapters
 		{
 			attribute alternatives : EntityAlternative[0..*]
 
-			attribute options : AdapterElement[0..*]
+			attribute constraints : Constraint[0..*]#adapter
+			/*attribute options : AdapterElement[0..*]
 			
 			attribute xor : MutualExclusion[0..*]
 			
-			attribute ~and : Dependency[0..*]
+			attribute ~and : Dependency[0..*]*/
 			
 			@overloadable "true"
 			operation resolve(derivation : Derivation) : smartadapters::core::Adapter raises kermeta::exceptions::Exception is do
@@ -115,21 +138,51 @@ package smartadapters
 
 		}
 		
-		class MutualExclusion inherits AdapterElement
+		abstract class Constraint
 		{
-			reference entities : AdapterElement[0..*]
+			reference adapter:DerivableAdapter[1..1]
+			
+			operation check(d:Derivation): Boolean is abstract
 		}
 		
-		class Dependency inherits AdapterElement
+		class MutualExclusion inherits Constraint
+		{
+			reference entities : AdapterElement[2..*]
+			
+			operation check(d:Derivation): Boolean is do
+				var c:Set<AdapterElement> init Set<AdapterElement>.new
+				c.addAll(d.selectedOptions)
+				d.elements.each{e | c.add(e.selectedVariant)}
+				result:=c.intersection(entities).size<=1
+			end
+		}
+		
+		class Dependency inherits Constraint
 		{
 			reference source : AdapterElement[1..1]
 			
-			reference dependencies : AdapterElement[0..*]
+			reference dependencies : AdapterElement[1..*]
+
+			operation check(d:Derivation): Boolean is do
+				var c:Collection<AdapterElement> init Set<AdapterElement>.new
+				c.addAll(d.selectedOptions)
+				d.elements.each{e | c.add(e.selectedVariant)}
+				result:=not(c.contains(source)) or c.containsAll(self.dependencies)
+			end			
 		}
 		
 		class Derivation
 		{
-			reference adaptations : Adaptation[0..*]
+			reference elements : DerivationElement[0..*]
+			
+			reference selectedOptions : AdapterElement[0..*]
+		}
+		
+		class DerivationElement
+		{
+			reference alternative:EntityAlternative[1..1]
+			
+			reference selectedVariant:AdapterElement[1..1]
 		}	
 	}
 	
