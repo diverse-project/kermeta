@@ -8,10 +8,11 @@ Bundle-ClassPath: jet.jar,
 Bundle-Localization: plugin
 Bundle-Vendor: triskell / IRISA
 Require-Bundle: org.eclipse.text,
- org.eclipse.jet.core,
  org.eclipse.osgi,
  org.eclipse.ui,
  org.eclipse.core.resources,
  org.eclipse.core.runtime,
  org.eclipse.core.filebuffers,
- org.eclipse.core.filesystem
+ org.eclipse.core.filesystem,
+ org.eclipse.jet.core,
+ fr.irisa.triskell.kermeta
