@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.19 2007-07-24 13:46:46 ftanguy Exp $
+/* $Id: Ecore2KMPass2.java,v 1.20 2007-07-26 15:07:07 ftanguy Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -126,7 +126,8 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 				String res = (String)eAnnot.getDetails().get(KM2Ecore.ANNOTATION_ISCOMPOSITE_DETAILS);
 				isc = Boolean.valueOf(res);
 			}
-		}
+		} else if ( node.isDerived() )
+			isc = false;
 		prop.setIsComposite(isc);
 		return prop;
 	}
