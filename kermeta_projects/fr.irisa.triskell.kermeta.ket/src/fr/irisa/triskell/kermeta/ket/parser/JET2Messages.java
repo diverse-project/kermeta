@@ -1,4 +1,3 @@
-package fr.irisa.triskell.kermeta.ket.parser;
 /*******************************************************************************
  * Copyright (c) 2006, 2007 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
@@ -9,16 +8,24 @@ package fr.irisa.triskell.kermeta.ket.parser;
  * Contributors:
  *   IBM - Initial API and implementation
  *
- * </copyright>
  *
- * $Id: JET2Messages.java,v 1.1 2007-07-24 12:08:41 barais Exp $
- * /
+ * $Id: JET2Messages.java,v 1.2 2007-07-26 12:25:39 cfaucher Exp $
+ * Project    : fr.irisa.triskell.kermeta.ket
+ * File       : JET2Messages.java
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 23 Jul. 2007
+ * Authors : 
+ *        Olivier Barais <barais@irisa.fr>
+ * Description : 
+ *   First iteration of a template engine for Kermeta
+ *   
  *******************************************************************************/
 
-
+package fr.irisa.triskell.kermeta.ket.parser;
 
 import org.eclipse.osgi.util.NLS;
-
 
 /**
  * Access class for string resources.
