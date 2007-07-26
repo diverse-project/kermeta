@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.15 2007-07-24 13:46:51 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.16 2007-07-26 12:30:42 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -223,7 +223,7 @@ testkmtFile("test/roundtrip_testcases/kmt","012_testCommentAnnotations.main.kmt"
 		
 		
 		EcoreExporter exporter = new EcoreExporter();
-		exporter.export(kmtUnit, outputDir );
+		exporter.export(kmtUnit, outputDir, false );
 		
 		KermetaUnit ecoreUnit = IOPlugin.getDefault().loadKermetaUnit( ecoreFile );
 		
@@ -258,7 +258,7 @@ testkmtFile("test/roundtrip_testcases/kmt","012_testCommentAnnotations.main.kmt"
 		
 		// Export to ecore
 		EcoreExporter exporter = new EcoreExporter();
-		exporter.export(baseKMTUnit, outputDir);
+		exporter.export(baseKMTUnit, outputDir, false);
 	
 		// Regenerate the kmt from the previous ecore
 		KermetaUnit ecoreUnit = IOPlugin.getDefault().loadKermetaUnit( ecoreFile );
