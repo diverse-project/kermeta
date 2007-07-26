@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xmi:id="19c97f0c-bd2a-47ed-b911-41e6ca19485b" name="org.eclipse.core.runtime_3.2.0.v20060603">
+  <packagedElement xmi:type="uml:Package" href="org/model.auml#d818c778-b0c0-4c54-8e99-26b779d52477"/>
+  <profileApplication xmi:type="uml:ProfileApplication" xmi:id="bf9c2cad-6f5a-444e-90f9-f71e6b0c7400">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="88df9269-ec15-4765-bcee-6ac88cd6593a" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+    </eAnnotations>
+    <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+  </profileApplication>
+</uml:Model>

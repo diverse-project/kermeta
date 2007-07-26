@@ -1,4 +1,4 @@
-/* $Id: Ecore2Flora.kmt,v 1.4 2006-12-13 14:23:49 rodrigotex Exp $
+/* $Id: Ecore2Flora.kmt,v 1.5 2007-07-26 12:40:07 bmorin Exp $
  * Creation date: October 4, 2006
  * License:
  * Copyright:
@@ -10,14 +10,14 @@ package kermeta::flora2;
 
 require kermeta
 
-require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
-require "./Ecore2FloraBasicElements.kmt"
-require "../../flora2/Flora2wVisitor.ecore"   
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Ecore2FloraBasicElements.kmt"
+//require "../../flora2/Flora2wVisitor.kmt"    
 using kermeta::standard 
-
+   
 using ecore 
 //using flora2::visitors  
- 
+  
 
 class Ecore2Flora inherits Ecore2FloraBasicElements {
 
@@ -30,6 +30,7 @@ class Ecore2Flora inherits Ecore2FloraBasicElements {
       var clauses : oset flora2::Clause[0..*] init OrderedSet<flora2::Clause>.new
       
       // FIXME : Deal with namespace while are creating clauses of the packages 
+        
       epackages.each{ p | clauses.addAll (createClausesForPack(p))}  
       result := clauses    
    end
@@ -37,10 +38,11 @@ class Ecore2Flora inherits Ecore2FloraBasicElements {
    operation createClausesForPack(epack: EPackage) : flora2::Clause[0..*] is do  
        var clauses : oset flora2::Clause[0..*] init OrderedSet<flora2::Clause>.new     
        var eclassifiers : EClassifier[0..*] init epack.eClassifiers
+        //stdio.writeln("...creating facts related to the metamodel1")       
               
        eclassifiers.select{ e | EClass.isInstance(e)}.collect{ c| var eclass : EClass eclass ?=c}.
          each{c | clauses.add( createClauseForClassDeclaration(c))} 
-         
+      
        epack.eSubpackages.each{ p | clauses.addAll (createClausesForPack(p))}  
        result := clauses      
    end

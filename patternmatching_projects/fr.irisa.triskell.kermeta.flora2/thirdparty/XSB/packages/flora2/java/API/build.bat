@@ -31,11 +31,12 @@ echo Building javaInterfaceCode
 CALL ..\windowsVariables.bat
 CALL ..\flora_settings.bat
 
-del net\sourceforge\flora\javaAPI\util\*.class
+REM del net\sourceforge\flora\javaAPI\util\*.class
 
-del net\sourceforge\flora\javaAPI\src\*.class
+REM del net\sourceforge\flora\javaAPI\src\*.class
 
 echo Compiling files
+echo %JAVA_BIN%
 %JAVA_BIN%\javac -Xlint  -classpath ..;..\interprolog.jar net\sourceforge\flora\javaAPI\util\*.java net\sourceforge\flora\javaAPI\src\*.java 
 
 

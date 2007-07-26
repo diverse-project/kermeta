@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:java_profile="http:///schemas/java_profile/0" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xsi:schemaLocation="http:///schemas/java_profile/0 pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA">
+  <uml:Package xmi:id="dd2644e6-db0d-4a1b-a41c-152e5133c5ec" name="flora2">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="9753ecdb-3da4-4e83-9589-c0ad6de8dbd0" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="c548b717-dc5d-4363-9cc4-4504f77c95d7" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/src/java/fr/irisa/triskell/kermeta/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="6a18a44c-24bd-40fb-97a3-89c4960e4381" key="parentId" value="8e0d16a6-7979-4d4a-a96f-e284875b31d0"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Class" xmi:id="9b2c521d-39fc-458b-8d19-a73b768ad886" name="Activator">
+      <generalization xmi:type="uml:Generalization" xmi:id="b72c3e33-b8ea-4dc5-a138-2ea870793d36">
+        <general xmi:type="uml:Class" href="../../../../../../../.model/org.eclipse.core.runtime_3.2.0.v20060603/org/eclipse/core/runtime/model.auml#bcb1fb2d-aa38-4f5c-96b6-136849c6e1f1"/>
+      </generalization>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="e6032dbf-5b78-4c95-bbe3-cd5b4848c05a" name="PLUGIN_ID" visibility="public" isLeaf="true" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="9649eed6-88b8-4488-96db-9ca5ed3dce77" name="plugin" visibility="private" isStatic="true" type="9b2c521d-39fc-458b-8d19-a73b768ad886" association="e9d7ab31-46be-4378-b372-07c8c2df448e"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="d9aaf50e-a804-4dae-8ea8-f8037e64d2b5" name="Activator" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="2e0da7c3-f6c9-4dd1-94e6-d2ac65e401e0" name="return" type="9b2c521d-39fc-458b-8d19-a73b768ad886" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="9c704377-5b1b-4a89-9bdd-9be5879c8349" name="start" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="a42f88f1-2781-4855-8bad-2b90a1f673ae" name="context">
+          <type xmi:type="uml:Interface" href="../../../../../../../.model/org.eclipse.osgi_3.2.2.R32x_v20070118/org/osgi/framework/model.auml#02e26d4b-f746-4847-8524-49eb8cfa2a47"/>
+        </ownedParameter>
+        <raisedException xmi:type="uml:Class" href="../../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Exception"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="973ffc92-db58-4171-89e3-095807e66ba2" name="stop" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="265b477d-3d64-43dc-b422-41f48b45202f" name="context">
+          <type xmi:type="uml:Interface" href="../../../../../../../.model/org.eclipse.osgi_3.2.2.R32x_v20070118/org/osgi/framework/model.auml#02e26d4b-f746-4847-8524-49eb8cfa2a47"/>
+        </ownedParameter>
+        <raisedException xmi:type="uml:Class" href="../../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Exception"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="9c38b359-feb7-4a79-b284-ba958284ef39" name="getDefault" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c28cde47-ca49-48a8-9817-0ed8d3d2427a" name="return" type="9b2c521d-39fc-458b-8d19-a73b768ad886" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="e9d7ab31-46be-4378-b372-07c8c2df448e" name="Activator.plugin_Ass" memberEnd="2e2a33c6-68ea-4f0e-b95c-1eb18d1d9bbb 9649eed6-88b8-4488-96db-9ca5ed3dce77">
+      <ownedEnd xmi:type="uml:Property" xmi:id="2e2a33c6-68ea-4f0e-b95c-1eb18d1d9bbb" name="plugin;default" type="9b2c521d-39fc-458b-8d19-a73b768ad886" association="e9d7ab31-46be-4378-b372-07c8c2df448e"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="722b13cf-edc2-4e09-b662-4ed858da677f" name="Flora2XSBEngine">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="cdf79266-60f8-4643-8b5a-80fac59b0814" name="getSession" visibility="private" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="21352135-8e69-4d85-ad0c-374f80b0b1b1" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../API/net/sourceforge/flora/javaAPI/src/model.auml#484c9d2b-eb77-4180-bb7b-a0c2f4c0229d"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="428e7060-838e-43a7-84a5-d2d49e93c698" name="executeCommand" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="3dc1c8fe-2182-4530-929d-be7a771d2b07" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="7d614052-796d-48d6-bd44-7fbb3f324327" name="command">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="6ca8e168-b760-4187-9f8d-698b44666139" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="aeed3cfb-fb5c-42cb-8d2b-24347c07d0c1" name="executeQueryCommand" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="2257e49b-3027-44cd-b29e-016f008b7d54" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="4f633e3f-0f64-427f-9a23-fddc6f2a7e4b" name="command">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="419d2790-cf88-48b6-b230-2a335350d03a" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="058f7965-ccdd-4556-8e27-d987b37545ca" name="executeQueryCommand" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="7b68ca2e-7c02-43ad-b8b9-b4b3aa83591c" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="88922ce8-47bb-4ce1-baba-6d273492438b" name="command">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="1dacddd3-dd6b-480e-901a-ad2b693bafca" name="vars">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="91ce2851-0e50-40f2-9bc5-2f09262a6467" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="93e13a1b-3631-457e-a5d9-019653468050" name="close" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="3c4ff965-682f-4ff8-aeb5-66c160c99208" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="a09d393a-3b47-4c53-8682-4eb7ef831094" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="7dff69af-7083-410a-ab3a-3f0760e4d8c5" name="close" visibility="private" isStatic="true"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="a30d015d-f1b5-4dea-935a-4524ef9e229f" name="createRuntimeObject" visibility="private" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="7a4ef9ec-d263-4840-a97d-ea8bcc13ad4b" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="3bfcb769-ac9b-4bb1-b61a-415ed8d42770" name="classOfObject">
+          <type xmi:type="uml:Interface" href="../../../../../../../../fr.irisa.triskell.kermeta.model/build/java/fr/irisa/triskell/kermeta/language/structure/model.auml#68ac0767-bdf8-4405-8120-38dc6a004955"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="8f37f2b5-e4b8-4049-9942-e4d1aeda9d18" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="bca124d0-efe9-4ea2-a422-fbc0ef39a045" name="createParametrizedClass" visibility="private" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="dc51efa1-e457-402e-919a-5613755e8f69" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="bafde55b-0390-4516-afd0-c119d9878b5f" name="className">
+          <type xmi:type="uml:Class" href="../../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c8cfcf69-f599-44a3-b8fc-af9404bdf5f1" name="return" direction="return">
+          <type xmi:type="uml:Interface" href="../../../../../../../../fr.irisa.triskell.kermeta.model/build/java/fr/irisa/triskell/kermeta/language/structure/model.auml#68ac0767-bdf8-4405-8120-38dc6a004955"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="cffd7b90-f788-4696-bb27-7fa640d3aeba" name="createParametrizedClass" visibility="private" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="64421f18-8101-44ea-b5ca-568632fb39b5" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="f55ad894-1053-41fa-9c93-e8b6c6d827be" name="className">
+          <type xmi:type="uml:Class" href="../../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="ba494f90-386a-476d-a154-7c7fff00b208" name="variableTypes">
+          <type xmi:type="uml:Interface" href="../../../../../../../../fr.irisa.triskell.kermeta.model/build/java/fr/irisa/triskell/kermeta/language/structure/model.auml#68ac0767-bdf8-4405-8120-38dc6a004955"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="31c0c0db-d998-4189-b4dc-05f4f88a11e1" name="return" direction="return">
+          <type xmi:type="uml:Interface" href="../../../../../../../../fr.irisa.triskell.kermeta.model/build/java/fr/irisa/triskell/kermeta/language/structure/model.auml#68ac0767-bdf8-4405-8120-38dc6a004955"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="401a1b9b-6173-4abc-88de-6a8363f99da9" name="main" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="c40d2b70-1246-4197-aac1-dfc6ef526c8c" name="args">
+          <type xmi:type="uml:Class" href="../../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="c05ce1ad-c0e0-4057-b50f-864fd08ec18b">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="b5a4368f-c14f-4e4d-afa3-f0a68e681f03" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <java_profile:create xmi:id="248d504e-1347-4a69-a029-89a64abcd566" base_Operation="d9aaf50e-a804-4dae-8ea8-f8037e64d2b5"/>
+  <uml:Package xmi:id="dd2644e6-db0d-4a1b-a41c-152e5133c5ec" name="flora2">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="a490f192-e183-4a10-8980-f4557bde1978" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="a9655284-bdf3-4193-bac8-d994e8d52421" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/src/java/fr/irisa/triskell/kermeta/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="39b21be9-030e-4425-ac81-5203295898c5" key="parentId" value="8e0d16a6-7979-4d4a-a96f-e284875b31d0"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Class" xmi:id="9b2c521d-39fc-458b-8d19-a73b768ad886" name="Activator">
+      <generalization xmi:type="uml:Generalization" xmi:id="39f7a9aa-a892-4584-b2e9-505f5686729b">
+        <general xmi:type="uml:Class" href="../../../../../../../.model/org.eclipse.core.runtime_3.2.0.v20060603/org/eclipse/core/runtime/model.auml#bcb1fb2d-aa38-4f5c-96b6-136849c6e1f1"/>
+      </generalization>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="b43d3c7b-f3e8-4dd4-9f37-f8bc6e17616a" name="PLUGIN_ID" visibility="public" isLeaf="true" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="712e56fb-da13-47d3-8a39-ab3ff7fa934b" name="plugin" visibility="private" isStatic="true" type="9b2c521d-39fc-458b-8d19-a73b768ad886" association="e5d12fdb-da29-444e-834a-8d32981b2fec"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="25336d28-1f87-4ea5-98e6-3fff953d3fb3" name="Activator" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="57d65b1f-a94d-442b-beba-473aa2dbe0ab" name="return" type="9b2c521d-39fc-458b-8d19-a73b768ad886" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="612eee78-72e2-4653-a0d8-88b4ef57d0fb" name="start" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="f59e6441-08e0-4bd4-9d83-118cd6f74cff" name="context">
+          <type xmi:type="uml:Interface" href="../../../../../../../.model/org.eclipse.osgi_3.2.2.R32x_v20070118/org/osgi/framework/model.auml#02e26d4b-f746-4847-8524-49eb8cfa2a47"/>
+        </ownedParameter>
+        <raisedException xmi:type="uml:Class" href="../../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Exception"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="c25b4fee-d683-4dea-ac7f-b5dffab124d9" name="stop" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="86aa03d6-54e9-4422-a100-140c54ae1353" name="context">
+          <type xmi:type="uml:Interface" href="../../../../../../../.model/org.eclipse.osgi_3.2.2.R32x_v20070118/org/osgi/framework/model.auml#02e26d4b-f746-4847-8524-49eb8cfa2a47"/>
+        </ownedParameter>
+        <raisedException xmi:type="uml:Class" href="../../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]Exception"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="4acbd40c-d465-46ae-a27b-41b11c185473" name="getDefault" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="eab73ff2-17fc-4e97-9603-ba3d7b0d69a0" name="return" type="9b2c521d-39fc-458b-8d19-a73b768ad886" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="e5d12fdb-da29-444e-834a-8d32981b2fec" name="Activator.plugin_Ass" memberEnd="d10e53b3-03dd-4c7e-939a-a05dc1ee1fad 712e56fb-da13-47d3-8a39-ab3ff7fa934b">
+      <ownedEnd xmi:type="uml:Property" xmi:id="d10e53b3-03dd-4c7e-939a-a05dc1ee1fad" name="plugin;default" type="9b2c521d-39fc-458b-8d19-a73b768ad886" association="e5d12fdb-da29-444e-834a-8d32981b2fec"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="722b13cf-edc2-4e09-b662-4ed858da677f" name="Flora2XSBEngine">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="d06fbd80-9e2f-4882-a2be-e1cf5d0fa868" name="getSession" visibility="private" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="4b8427e2-0455-47df-a219-df24d0a4f880" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../API/net/sourceforge/flora/javaAPI/src/model.auml#484c9d2b-eb77-4180-bb7b-a0c2f4c0229d"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="bb99b5f9-ca06-4b10-8c3b-40e2c4965920" name="executeCommand" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="b2e758fe-b905-4e83-85e5-c9ab8b6b6358" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="0dd5e8e2-fa77-467d-9738-cc9b0bfad020" name="command">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="2e79850c-cbd0-4aa1-a61a-9153d6a3ce48" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="aac5b22d-80dc-48cf-953a-c081ab65bdaa" name="executeQueryCommand" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="126587bf-1681-4daf-8c5d-0ec463ba05fa" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="f92217e0-db98-4be4-ac94-1df94ca6f8af" name="command">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="db532f3a-cfa9-4f03-80f2-c2ee51745f72" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="9ce6b74e-84f2-45d2-94b4-f68710bba303" name="executeQueryCommand" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="40177474-3b70-4df7-b65a-b437d5a2e16c" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="f384a2df-f906-440e-b613-0879de6e8423" name="command">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="0769f066-3d05-4191-9803-8160e9931e1c" name="vars">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="5ece5e0b-db70-4cb9-b881-300722326822" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="32a43576-2d4e-4a7a-a5db-0d5a49b5d6da" name="close" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="beacb4bd-ead3-4aac-a47e-0cc6e0be6fc1" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="3ee731f8-eca2-4756-8db7-b36079eaced4" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="ecd3f3e8-c026-43cb-8bde-1b15b9b26846" name="close" visibility="private" isStatic="true"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="2c934481-9edc-4c89-adc0-0b92fbf60b0b" name="createRuntimeObject" visibility="private" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="24a01bc9-aa67-4b99-b285-45f408d7fa7b" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="75529473-79e8-4909-a4c8-74a7384d2687" name="classOfObject">
+          <type xmi:type="uml:Interface" href="../../../../../../../../fr.irisa.triskell.kermeta.model/build/java/fr/irisa/triskell/kermeta/language/structure/model.auml#68ac0767-bdf8-4405-8120-38dc6a004955"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="f42a5957-1837-45c4-b1a1-2ca770b38a6f" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="b4343f39-b086-4c61-96f8-7782c98880dd" name="createParametrizedClass" visibility="private" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="83851687-4115-4645-a09a-0ded02d8ee62" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="5eefddc1-5153-4451-a291-b14fd6ad679e" name="className">
+          <type xmi:type="uml:Class" href="../../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="853b29c5-c30f-4fb7-84a3-39151ce4f81c" name="return" direction="return">
+          <type xmi:type="uml:Interface" href="../../../../../../../../fr.irisa.triskell.kermeta.model/build/java/fr/irisa/triskell/kermeta/language/structure/model.auml#68ac0767-bdf8-4405-8120-38dc6a004955"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="3e319060-0417-4ea4-972f-c3e9bd41d6e6" name="createParametrizedClass" visibility="private" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="8a9f8d5d-cffe-4f65-b4c8-67699ef57969" name="self">
+          <type xmi:type="uml:Class" href="../../../../../../../../fr.irisa.triskell.kermeta.interpreter/src/java/fr/irisa/triskell/kermeta/runtime/model.auml#fe506ebf-c4ab-46fe-b900-c020527eca69"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="e011d01c-9e71-4d04-b00b-31822e1ce4ad" name="className">
+          <type xmi:type="uml:Class" href="../../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="b12fafa8-de0e-4ed2-9e93-58ffe7a79b0a" name="variableTypes">
+          <type xmi:type="uml:Interface" href="../../../../../../../../fr.irisa.triskell.kermeta.model/build/java/fr/irisa/triskell/kermeta/language/structure/model.auml#68ac0767-bdf8-4405-8120-38dc6a004955"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="6f5b236f-d99e-415d-8c58-22756f53d9f9" name="return" direction="return">
+          <type xmi:type="uml:Interface" href="../../../../../../../../fr.irisa.triskell.kermeta.model/build/java/fr/irisa/triskell/kermeta/language/structure/model.auml#68ac0767-bdf8-4405-8120-38dc6a004955"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="5972a9b6-bc28-4818-b69a-23ca6c280793" name="main" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="78f92fb8-c206-4add-9c9a-2692e94b242c" name="args">
+          <type xmi:type="uml:Class" href="../../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="0e50dc95-6e65-455b-88da-088028b29da9">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="c9dc13c6-7b02-4d21-8dcd-d3b8f7724479" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <java_profile:create xmi:id="6bde5113-c12f-41b0-9aba-f0518aa7d724" base_Operation="25336d28-1f87-4ea5-98e6-3fff953d3fb3"/>
+</xmi:XMI>

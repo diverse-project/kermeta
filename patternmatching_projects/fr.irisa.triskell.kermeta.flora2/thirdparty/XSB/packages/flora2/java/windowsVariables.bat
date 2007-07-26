@@ -26,7 +26,7 @@ REM
 REM
 
 REM Change JAVA_BIN, ENGINE, and PROTEGE_DIR, if necessary
-set JAVA_BIN="C:\Program Files\Java\jdk1.5.0_06\bin"
+set JAVA_BIN="C:\Program Files\Java\jdk1.5.0_07\bin"
 REM Valid values: Native or Subprocess
 REM set ENGINE=Subprocess
 set ENGINE=Native

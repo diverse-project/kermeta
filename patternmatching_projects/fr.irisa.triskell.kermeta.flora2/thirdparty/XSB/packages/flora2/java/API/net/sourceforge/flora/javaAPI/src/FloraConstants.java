@@ -34,7 +34,7 @@ import net.sourceforge.flora.javaAPI.util.*;
 */
 public class FloraConstants
 {
-    public final static boolean debug = false;
+    public final static boolean debug = true;
 
     public final static String ISA_SYMBOL       = ":";
     public final static String SUBCLASS_SYMBOL  = "::";

@@ -1,0 +1,17 @@
+_$_$_flora'dyn_newoid5948[$order->0].  // @utf81
+_$_$_flora'dyn_newoid5948[utf8->>_$_$_flora'dyn_newoid5951].  // @utf81
+_$_$_flora'dyn_newoid5951[$order->1].  // @utf81
+_$_$_flora'dyn_newoid5951[name->>_$_$_flora'dyn_newoid5952].  // @utf81
+_$_$_flora'dyn_newoid5952[$order->2].  // @utf81
+_$_$_flora'dyn_newoid5952[$text->>_$_$_flora'dyn_newoid5953].  // @utf81
+_$_$_flora'dyn_newoid5953[$order->3].  // @utf81
+_$_$_flora'dyn_newoid5953[$string->Dürst].  // @utf81
+_$_$_flora'dyn_newoid5952[$child(0)->_$_$_flora'dyn_newoid5953].  // @utf81
+_$_$_flora'dyn_newoid5951[$child(0)->_$_$_flora'dyn_newoid5952].  // @utf81
+_$_$_flora'dyn_newoid5951[name->>_$_$_flora'dyn_newoid5954].  // @utf81
+_$_$_flora'dyn_newoid5954[$order->4].  // @utf81
+_$_$_flora'dyn_newoid5954[name->Dürst].  // @utf81
+_$_$_flora'dyn_newoid5951[$child(1)->_$_$_flora'dyn_newoid5954].  // @utf81
+_$_$_flora'dyn_newoid5952[$rightsibling->_$_$_flora'dyn_newoid5954].  // @utf81
+_$_$_flora'dyn_newoid5954[$leftsibling->_$_$_flora'dyn_newoid5952].  // @utf81
+_$_$_flora'dyn_newoid5948[$child(0)->_$_$_flora'dyn_newoid5951].  // @utf81

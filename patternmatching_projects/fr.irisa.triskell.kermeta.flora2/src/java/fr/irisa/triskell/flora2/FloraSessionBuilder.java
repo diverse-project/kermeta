@@ -1,4 +1,4 @@
-/* $Id: FloraSessionBuilder.java,v 1.4 2006-12-19 14:26:38 rodrigotex Exp $
+/* $Id: FloraSessionBuilder.java,v 1.5 2007-07-26 12:40:13 bmorin Exp $
  * Project: fr.irisa.triskell.kermeta.flora2
  * File: FloraSessionBuilder.java
  * License: EPL
@@ -34,7 +34,11 @@ public class FloraSessionBuilder {
     public static FloraSession getSession() {
         if (session == null ){ 
             initializeFloraProperties();
+            System.err.println("starting  flora session");
+            
             session = new FloraSession();             
+            System.err.println("end starting  flora session");
+            
         }    
         return session;
     }
@@ -50,14 +54,17 @@ public class FloraSessionBuilder {
 		   Properties flora2pro = new Properties();
 		   flora2pro.load(fileURL.openStream());
 		   
-		   boolean useAbsPath = Boolean.getBoolean( flora2pro.getProperty(PluginConstants.USE_ABS_PATH));
+		   boolean useAbsPath = Boolean.parseBoolean( flora2pro.getProperty(PluginConstants.USE_ABS_PATH));
+		   System.err.println( flora2pro.getProperty(PluginConstants.USE_ABS_PATH) + " " + useAbsPath);
 		   String xsbPath = flora2pro.getProperty(PluginConstants.XSB_PATH); 
 		   String flora2Path = flora2pro.getProperty(PluginConstants.FLORA2_PATH);
 		   
-		   java.io.File fil = new java.io.File ("c:\\temp\\rodrigoteste.txt");
+		   java.io.File fil = new java.io.File ("z:\\rodrigoteste.txt");
 		   java.io.PrintWriter pq = new java.io.PrintWriter(fil); 
            pq.println("XSB: "+xsbPath); 
            pq.println("FLORA2: "+flora2Path);          
+         
+           
            pq.flush();
 		   if ( !useAbsPath){
 			   xsbPath = getResolvedPath(bundle, xsbPath);			   
@@ -68,7 +75,9 @@ public class FloraSessionBuilder {
 		   // The XSBPath will e used for calling a process in the command line
 		   // So, we guarantee that the correct File.separator is used
 		   // Obs.: URL usually uses '/', which is not accetable in windows 
-		   xsbPath = getXSBConfig(xsbPath).replace('/', File.separatorChar);
+		   xsbPath =  flora2pro.getProperty(PluginConstants.XSB_PATH_BIN); 
+			   
+			   ///getXSBConfig(xsbPath).replace('/', File.separatorChar);
 		   
 		   pq.println("XSB: "+xsbPath);
 		   pq.println("FLORA2: "+flora2Path);
@@ -85,6 +94,7 @@ public class FloraSessionBuilder {
         	    
 	 	   // initialize properties required for the Flora2 Session		   
 		   System.setProperty("FLORADIR", flora2Patch);
+		   System.err.println("set the floradir to " + xsbPath);
            System.setProperty("PROLOGDIR", xsbPath);
            System.setProperty("ENGINE", "Subprocess");
            java.lang.String javaLibPath = System.getProperty("java.library.path");           

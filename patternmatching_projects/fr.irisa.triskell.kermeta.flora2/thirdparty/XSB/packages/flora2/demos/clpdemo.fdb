@@ -1,6 +1,0 @@
-#include "flrheader.flh"
-
-FLORA_THIS_WORKSPACE(t_flapply)('p',1.0000,[_CallerModuleVar,_CallerModuleArgsVar]).
-FLORA_THIS_WORKSPACE(t_flapply)('p',2.0000,[_CallerModuleVar,_CallerModuleArgsVar]).
-FLORA_THIS_WORKSPACE(t_flapply)('p',3.0000,[_CallerModuleVar,_CallerModuleArgsVar]).
-FLORA_THIS_WORKSPACE(t_flapply)('p',5.0000,[_CallerModuleVar,_CallerModuleArgsVar]).

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:java_profile="http:///schemas/java_profile/0" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xsi:schemaLocation="http:///schemas/java_profile/0 pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA">
+  <uml:Package xmi:id="8af75a74-78ba-4aa3-8654-ef2271026b78" name="runtime">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="489ef0c4-b040-4b19-bfc2-f80408c10f20" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="8d9554f7-4846-4c11-a65e-5940fda1df22" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/.model/org.eclipse.core.runtime_3.2.0.v20060603/org/eclipse/core/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="cb4aa77a-1388-4fe1-bf3d-b2d167c590b9" key="parentId" value="0cefac59-04e3-45ef-9e38-6f2efbcc39ee"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Interface" xmi:id="bc187d19-c716-4cdf-9731-2947540c9337" name="ILibrary" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="2859aac8-529b-4f41-b94c-927686699f5a" name="ILog" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="1d9385ac-95c0-4619-8646-480d576e082b" name="IPlatformRunnable" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="68f93604-2620-4bc6-81d5-ba56fef9cd16" name="IPluginDescriptor" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="fd5cae69-560a-48e8-b9e5-8f2b0db60599" name="IPluginPrerequisite" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="45eced99-59b5-4cc0-8ff6-3702d47f48b1" name="IPluginRegistry" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="6cf2e8ee-affb-43e2-a16f-fe6affa1174f" name="IProduct" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="81bdee2b-c846-483f-8baa-0a07ad7f051a" name="IProductProvider" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="4e48dc86-8cd3-4108-9fdd-73f4272b1ed7" name="PerformanceStats">
+      <nestedClassifier xmi:type="uml:Class" xmi:id="786fd457-322f-42c4-ba83-15c6478c4fe9" name="PerformanceListener" isAbstract="true"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="25cd7edf-5b9b-4cad-bb11-618f97f5b2b6" name="Platform" isLeaf="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="bcb1fb2d-aa38-4f5c-96b6-136849c6e1f1" name="Plugin" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="17dfd496-272d-4d13-9426-8d9c852b4514" name="Preferences">
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="4dccf781-4030-4bef-b37f-d9788f4b954e" name="IPropertyChangeListener" isAbstract="true"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="61c5e16a-8753-4575-a95b-f6215223f22e" name="PropertyChangeEvent"/>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="7c99f65a-dcc5-4d5a-a8b7-4f88320457a8">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="61f52049-ed7b-45d8-b779-22ecfa5b89e2" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <java_profile:static xmi:id="af2f6934-24eb-40fb-8365-466ca35ba0ff" base_Classifier="786fd457-322f-42c4-ba83-15c6478c4fe9"/>
+  <java_profile:static xmi:id="100c0a7a-2127-4877-bff6-56e068857199" base_Classifier="4dccf781-4030-4bef-b37f-d9788f4b954e"/>
+  <java_profile:static xmi:id="ed6f83df-d3d2-43d2-8e12-5adcff04950c" base_Classifier="61c5e16a-8753-4575-a95b-f6215223f22e"/>
+</xmi:XMI>

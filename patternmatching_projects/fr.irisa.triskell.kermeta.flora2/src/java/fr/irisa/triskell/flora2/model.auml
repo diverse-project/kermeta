@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML">
+  <uml:Package xmi:id="95a6c703-5ecd-4fdf-a399-73fd6b94116e" name="flora2">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="9a8f542a-ac81-4998-aad4-bc4087e547d0" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="b6d74fb3-0be0-457b-938d-02e3241e155a" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/src/java/fr/irisa/triskell/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="c21e881c-a0f6-4b03-a700-fef151fdb000" key="parentId" value="84d6cc6e-e336-4e46-a56b-5ba5039eb1bf"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Class" xmi:id="33b51d82-ec23-4c5d-8616-e356e85d0175" name="PluginConstants">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="60e47b65-b978-4354-b9d1-13e5a0585131" name="PluginID" visibility="public" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="16e7903a-954a-4961-94fd-d07fac394c4c" name="PROPERTY_FILE" visibility="public" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="684bffc9-e699-47c2-b81d-722e648bd429" name="USE_ABS_PATH" visibility="public" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="848e3982-c0c6-4536-8e4d-9ca0fbf65e5b" name="XSB_PATH" visibility="public" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="3284c794-5eeb-4d4e-b867-32cb86664e44" name="XSB_PATH_BIN" visibility="public" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="8de786a2-cc54-4ae6-9f75-7cc11803df7e" name="FLORA2_PATH" visibility="public" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="066f0d81-d501-48d6-8d93-3939f05be67f" name="FloraSessionBuilder">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="41f2cfb2-2e92-4459-88d0-db096df0bb68" name="session" visibility="private" isStatic="true" association="a4f3fda7-75ee-46a8-b2c6-982ed02dc572">
+        <type xmi:type="uml:Class" href="../../../../../../API/net/sourceforge/flora/javaAPI/src/model.auml#484c9d2b-eb77-4180-bb7b-a0c2f4c0229d"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="10f65b73-a314-45ea-b80c-c13453c73186" name="getSession" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="d6796264-35d1-495c-b987-7d314d849c6d" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../API/net/sourceforge/flora/javaAPI/src/model.auml#484c9d2b-eb77-4180-bb7b-a0c2f4c0229d"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="9b19aebc-9e82-4c2b-ace1-51081a4cc688" name="initializeFloraProperties" visibility="private" isStatic="true"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="41cfd14d-72f5-4c63-b978-f80c54b19c65" name="getResolvedPath" visibility="private" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="64c9c8fd-6ba8-4c97-b688-3ac7865160d7" name="bundle">
+          <type xmi:type="uml:Interface" href="../../../../../../.model/org.eclipse.osgi_3.2.2.R32x_v20070118/org/osgi/framework/model.auml#fa9e5ba8-043d-41a5-897c-4421a3e01114"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="126deaf7-df6e-4672-8d48-87ffa6fa67f0" name="path">
+          <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="e3ce08c7-e3db-4b73-bbf4-e3ab74a4f06a" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <raisedException xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]IOException"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="411813f5-179d-4253-9d32-cbda00201704" name="getXSBConfig" visibility="private" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="feac8e49-2e82-48ee-8f0b-c690e7a56b27" name="path">
+          <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="b5088493-d8f5-4be8-a6c5-646b4a62cdbb" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <raisedException xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]IOException"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="a4f3fda7-75ee-46a8-b2c6-982ed02dc572" name="FloraSessionBuilder.session_Ass" memberEnd="e16e797a-4687-41fb-aaf5-da8fc3f4e65a 41f2cfb2-2e92-4459-88d0-db096df0bb68">
+      <ownedEnd xmi:type="uml:Property" xmi:id="e16e797a-4687-41fb-aaf5-da8fc3f4e65a" name="session;default" type="066f0d81-d501-48d6-8d93-3939f05be67f" association="a4f3fda7-75ee-46a8-b2c6-982ed02dc572"/>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="302a3a51-1580-48fe-8585-601c8b1ee856">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="c33b13d8-ade5-4242-b2ad-dbb7739b67a9" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <uml:Package xmi:id="95a6c703-5ecd-4fdf-a399-73fd6b94116e" name="flora2">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="fce326c3-23d7-4cd0-b3e8-6a952093593e" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="61dfa728-0874-4438-b48c-9a7972374be2" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/src/java/fr/irisa/triskell/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="03d1f150-8f22-4a93-bd70-35e500838c6b" key="parentId" value="84d6cc6e-e336-4e46-a56b-5ba5039eb1bf"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Class" xmi:id="33b51d82-ec23-4c5d-8616-e356e85d0175" name="PluginConstants">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="53f6a416-05f3-48c5-9f12-ff9739147069" name="PluginID" visibility="public" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="e7b064ed-a05e-4b8c-8475-913bee4c663c" name="PROPERTY_FILE" visibility="public" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="116ae929-bad9-45e4-89ff-54494953f85f" name="USE_ABS_PATH" visibility="public" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="0aeca28a-0b48-4bc7-90b4-9bcf9a54dcf6" name="XSB_PATH" visibility="public" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="c9d8312f-0717-4f10-bbcd-090f0003c1ff" name="XSB_PATH_BIN" visibility="public" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="92edcb99-c8d8-43e1-82a6-66a2084395bd" name="FLORA2_PATH" visibility="public" isStatic="true">
+        <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="066f0d81-d501-48d6-8d93-3939f05be67f" name="FloraSessionBuilder">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="8830921a-3b7a-4107-a0b0-04f9a864ea39" name="session" visibility="private" isStatic="true" association="9572e256-e350-4d24-8fbc-4bca073a1945">
+        <type xmi:type="uml:Class" href="../../../../../../API/net/sourceforge/flora/javaAPI/src/model.auml#484c9d2b-eb77-4180-bb7b-a0c2f4c0229d"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="94c3b9fb-24a1-410d-a317-4534a9b41631" name="getSession" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="3bfb03d2-794f-4b30-b3a3-0bd1c68107fc" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../API/net/sourceforge/flora/javaAPI/src/model.auml#484c9d2b-eb77-4180-bb7b-a0c2f4c0229d"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="e05db834-a28d-48ab-9db0-7a47b5a02cbf" name="initializeFloraProperties" visibility="private" isStatic="true"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="b23abd30-252b-48de-84f0-532fda3b9880" name="getResolvedPath" visibility="private" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="fc5d132e-3020-4d35-aae6-0a122e67685c" name="bundle">
+          <type xmi:type="uml:Interface" href="../../../../../../.model/org.eclipse.osgi_3.2.2.R32x_v20070118/org/osgi/framework/model.auml#fa9e5ba8-043d-41a5-897c-4421a3e01114"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="509af3bf-9d1c-4e07-bf7a-58e5532800a0" name="path">
+          <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="800b80bc-936a-40b8-a6b1-8623c89348d7" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <raisedException xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]IOException"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="93082bc9-7a3f-4731-bbd9-ee28aaba93b2" name="getXSBConfig" visibility="private" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="27ae7600-c800-433b-a410-32d73f6e9b7a" name="path">
+          <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="6d62be1a-93c2-4ae5-93a7-121c09348f80" name="return" direction="return">
+          <type xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/lang/model.auml#lang.[C]String"/>
+        </ownedParameter>
+        <raisedException xmi:type="uml:Class" href="../../../../../../../../plugin/com.gentleware.uml2.jre50/model/allJarsFlat/java/io/model.auml#io.[C]IOException"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="9572e256-e350-4d24-8fbc-4bca073a1945" name="FloraSessionBuilder.session_Ass" memberEnd="9db93a98-4a12-4c57-809f-f9d56d5428e7 8830921a-3b7a-4107-a0b0-04f9a864ea39">
+      <ownedEnd xmi:type="uml:Property" xmi:id="9db93a98-4a12-4c57-809f-f9d56d5428e7" name="session;default" type="066f0d81-d501-48d6-8d93-3939f05be67f" association="9572e256-e350-4d24-8fbc-4bca073a1945"/>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="9e4ffad5-d341-4ac0-a672-54b85d857aa6">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="89d0cc88-8a8d-423c-9d2c-ed6802de44e6" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+</xmi:XMI>

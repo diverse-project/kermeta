@@ -26,17 +26,16 @@
 
 package net.sourceforge.flora.javaAPI.src;
 
+import java.io.File;
+import java.util.Vector;
+
+import net.sourceforge.flora.javaAPI.util.FlrException;
+
 import com.declarativa.interprolog.PrologEngine;
 import com.declarativa.interprolog.TermModel;
+import com.declarativa.interprolog.XSBSubprocessEngine;
 import com.declarativa.interprolog.util.IPException;
 import com.xsb.interprolog.NativeEngine;
-import com.declarativa.interprolog.XSBSubprocessEngine;
-
-import net.sourceforge.flora.javaAPI.util.*;
-
-import java.io.File;
-import java.util.*;
-import java.lang.*;
 
 /** This class is used to call FLORA-2 commands 
     at a low level from JAVA using Interprolog libraries */

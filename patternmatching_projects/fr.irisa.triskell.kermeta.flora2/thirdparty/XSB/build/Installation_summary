@@ -6,161 +6,31 @@
 XSB Version:	   3.0.1
 Code name:	   Sagres
 Release date:	   2006-08-07
-Configuration:	   i686-pc-cygwin
-Installation date: Mon Aug  7 09:18:07 EST 2006
+Configuration:	   i686-pc-linux-gnu
+Installation date: Thu Apr 12 15:00:04 CEST 2007
 
-  Build process is looking for XSB sources in:	  /c/dev/sandbox/xsb_patch/XSB
-  XSB should be installed in:			  /c/dev/sandbox/xsb_patch/XSB
-  Configuration-specific executables go in:	  /c/dev/sandbox/xsb_patch/XSB/config/i686-pc-cygwin/bin
-  Configuration-specific libraries go in:	  /c/dev/sandbox/xsb_patch/XSB/config/i686-pc-cygwin/lib
-  Object code goes in:				  /c/dev/sandbox/xsb_patch/XSB/config/i686-pc-cygwin/saved.o
-  Site-specific code goes in:			  /c/dev/sandbox/xsb_patch/XSB/site
-  Site configuration-specific code goes in:	  /c/dev/sandbox/xsb_patch/XSB/site/config/i686-pc-cygwin
-  XSB will be built with:			  gcc -mno-cygwin  -IC:\dev\lang\java/include -IC:\dev\lang\java/include/win32 -O3 -march=pentium4 -fno-strict-aliasing  -Wall -pipe 
-  builtin.c will be built with: 		  gcc -mno-cygwin  -IC:\dev\lang\java/include -IC:\dev\lang\java/include/win32 -O3 -march=pentium4 -fno-strict-aliasing  -Wall -pipe 
-  loader_xsb.c will be built with: 		  gcc -mno-cygwin  -IC:\dev\lang\java/include -IC:\dev\lang\java/include/win32 -O3 -march=pentium4 -fno-strict-aliasing  -Wall -pipe 
-  emuloop.c will be built with: 		  gcc -mno-cygwin  -IC:\dev\lang\java/include -IC:\dev\lang\java/include/win32 -O3 -march=pentium4 -fno-strict-aliasing  -Wall -pipe 
-  tr_utils.c will be built with:		  gcc -mno-cygwin  -IC:\dev\lang\java/include -IC:\dev\lang\java/include/win32 -O3 -march=pentium4 -fno-strict-aliasing  -Wall -pipe 
-  Loader flags: 				 -lodbc32  -lwsock32 -luser32
+  Build process is looking for XSB sources in:	  /home/barais/workspaces/workspace_kermeta/fr.irisa.triskell.kermeta.flora2/thirdparty/XSB
+  XSB should be installed in:			  /home/barais/workspaces/workspace_kermeta/fr.irisa.triskell.kermeta.flora2/thirdparty/XSB
+  Configuration-specific executables go in:	  /home/barais/workspaces/workspace_kermeta/fr.irisa.triskell.kermeta.flora2/thirdparty/XSB/config/i686-pc-linux-gnu/bin
+  Configuration-specific libraries go in:	  /home/barais/workspaces/workspace_kermeta/fr.irisa.triskell.kermeta.flora2/thirdparty/XSB/config/i686-pc-linux-gnu/lib
+  Object code goes in:				  /home/barais/workspaces/workspace_kermeta/fr.irisa.triskell.kermeta.flora2/thirdparty/XSB/config/i686-pc-linux-gnu/saved.o
+  Site-specific code goes in:			  /home/barais/workspaces/workspace_kermeta/fr.irisa.triskell.kermeta.flora2/thirdparty/XSB/site
+  Site configuration-specific code goes in:	  /home/barais/workspaces/workspace_kermeta/fr.irisa.triskell.kermeta.flora2/thirdparty/XSB/site/config/i686-pc-linux-gnu
+  XSB will be built with:			  gcc  -O3 -fno-strict-aliasing  -Wall -pipe 
+  builtin.c will be built with: 		  gcc  -O3 -fno-strict-aliasing  -Wall -pipe 
+  loader_xsb.c will be built with: 		  gcc  -O3 -fno-strict-aliasing  -Wall -pipe 
+  emuloop.c will be built with: 		  gcc  -O3 -fno-strict-aliasing  -Wall -pipe 
+  tr_utils.c will be built with:		  gcc  -O3 -fno-strict-aliasing  -Wall -pipe 
+  Loader flags: 				  -lm -ldl -Wl,-export-dynamic -lpthread
   Compilation mode:				  optimal
   XSB abstract machine: 			  slg-wam
   XSB scheduling strategy:			  local
   Garbage Collection Stress-Test:		  no
   Jumptable-based emulator loop:		  yes
   Demand support:                                 no
-  Building with support for ODBC:		  yes
-  Building with support for InterProlog:	  yes
   POSIX regexp matching libraries:                yes
   POSIX wildcard matching libraries:              yes
-  Perl support:                                   yes
-  Perl archlib:                                   /usr/lib/perl5/5.8/cygwin/CORE
-  Perl C compiler:                                gcc
-  Perl C flags:                                   -DPERL_USE_SAFE_PUTENV -fno-strict-aliasing -pipe -I/usr/local/include
-  Perl loader flags:                              -lgdbm -ldb -lcrypt -lgdbm_compat
-  Java compiler:                                  /c/dev/lang/java/bin/javac
+  Perl support:                                   no
+  Java compiler:                                  /opt/jdk1.6.0/bin/javac
 
 
-make[1]: Entering directory `/c/dev/sandbox/xsb_patch/XSB/emu'
-
-Compiling XSB with gcc -mno-cygwin using -IC:\dev\lang\java/include -IC:\dev\lang\java/include/win32 -O3 -march=pentium4 -fno-strict-aliasing  -Wall -pipe 
-
-	[gcc -mno-cygwin] main_xsb.c
-In file included from main_xsb.c:43:
-wind2unix.h:59:1: warning: "fileno" redefined
-In file included from main_xsb.c:37:
-/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdio.h:395:1: warning: this is the location of the previous definition
-	[gcc -mno-cygwin] auxlry.c
-	[gcc -mno-cygwin] biassert.c
-	[gcc -mno-cygwin] builtin.c using -IC:\dev\lang\java/include -IC:\dev\lang\java/include/win32 -O3 -march=pentium4 -fno-strict-aliasing  -Wall -pipe 
-In file included from builtin.c:115:
-wind2unix.h:59:1: warning: "fileno" redefined
-In file included from builtin.c:33:
-/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdio.h:395:1: warning: this is the location of the previous definition
-	[gcc -mno-cygwin] cinterf.c
-	[gcc -mno-cygwin] conc_compl.c
-	[gcc -mno-cygwin] debug_xsb.c
-debug_xsb.c:286:8: warning: extra tokens at end of #endif directive
-	[gcc -mno-cygwin] dis.c
-	[gcc -mno-cygwin] dynload.c
-In file included from dynwin32_xsb_i.h:31,
-                 from dynload.c:40:
-wind2unix.h:59:1: warning: "fileno" redefined
-In file included from dynwin32_xsb_i.h:26,
-                 from dynload.c:40:
-/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdio.h:395:1: warning: this is the location of the previous definition
-	[gcc -mno-cygwin] dynamic_stack.c
-	[gcc -mno-cygwin] deadlock.c
-	[gcc -mno-cygwin] emuloop.c using -IC:\dev\lang\java/include -IC:\dev\lang\java/include/win32 -O3 -march=pentium4 -fno-strict-aliasing  -Wall -pipe 
-	[gcc -mno-cygwin] error_xsb.c
-	[gcc -mno-cygwin] findall.c
-	[gcc -mno-cygwin] function.c
-	[gcc -mno-cygwin] hash_xsb.c
-	[gcc -mno-cygwin] hashtable_xsb.c
-	[gcc -mno-cygwin] heap_xsb.c
-	[gcc -mno-cygwin] init_xsb.c
-	[gcc -mno-cygwin] inst_xsb.c
-	[gcc -mno-cygwin] io_builtins_xsb.c
-In file included from io_builtins_xsb.c:56:
-wind2unix.h:59:1: warning: "fileno" redefined
-In file included from io_builtins_xsb.c:28:
-/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdio.h:395:1: warning: this is the location of the previous definition
-	[gcc -mno-cygwin] loader_xsb.c using -IC:\dev\lang\java/include -IC:\dev\lang\java/include/win32 -O3 -march=pentium4 -fno-strict-aliasing  -Wall -pipe 
-	[gcc -mno-cygwin] memory_xsb.c
-	[gcc -mno-cygwin] orient_xsb.c
-In file included from orient_xsb.c:44:
-wind2unix.h:59:1: warning: "fileno" redefined
-In file included from orient_xsb.c:37:
-/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdio.h:395:1: warning: this is the location of the previous definition
-	[gcc -mno-cygwin] pathname_xsb.c
-In file included from pathname_xsb.c:43:
-wind2unix.h:59:1: warning: "fileno" redefined
-In file included from pathname_xsb.c:35:
-/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdio.h:395:1: warning: this is the location of the previous definition
-	[gcc -mno-cygwin] psc_xsb.c
-	[gcc -mno-cygwin] random_xsb.c
-	[gcc -mno-cygwin] remove_unf.c
-	[gcc -mno-cygwin] residual.c
-	[gcc -mno-cygwin] rw_lock.c
-	[gcc -mno-cygwin] scc_xsb.c
-	[gcc -mno-cygwin] slgdelay.c
-	[gcc -mno-cygwin] socket_xsb.c
-	[gcc -mno-cygwin] string_xsb.c
-	[gcc -mno-cygwin] storage_xsb.c
-	[gcc -mno-cygwin] struct_manager.c
-	[gcc -mno-cygwin] sub_delete.c
-	[gcc -mno-cygwin] subp.c
-	[gcc -mno-cygwin] system_xsb.c
-In file included from system_xsb.c:59:
-wind2unix.h:59:1: warning: "fileno" redefined
-In file included from system_xsb.c:28:
-/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdio.h:395:1: warning: this is the location of the previous definition
-	[gcc -mno-cygwin] table_stats.c
-	[gcc -mno-cygwin] tables.c
-	[gcc -mno-cygwin] thread_xsb.c
-	[gcc -mno-cygwin] timer_xsb.c
-timer_xsb.c: In function `make_timed_call':
-timer_xsb.c:291: warning: passing arg 1 of `_beginthread' from incompatible pointer type
-	[gcc -mno-cygwin] token_xsb.c
-	[gcc -mno-cygwin] tr_utils.c using -IC:\dev\lang\java/include -IC:\dev\lang\java/include/win32 -O3 -march=pentium4 -fno-strict-aliasing  -Wall -pipe 
-	[gcc -mno-cygwin] trace_xsb.c
-	[gcc -mno-cygwin] trie_lookup.c
-	[gcc -mno-cygwin] trie_search.c
-	[gcc -mno-cygwin] tries.c
-	[gcc -mno-cygwin] tst_insert.c
-	[gcc -mno-cygwin] tst_retrv.c
-	[gcc -mno-cygwin] tst_unify.c
-	[gcc -mno-cygwin] tst_utils.c
-	[gcc -mno-cygwin] varstring.c
-In file included from varstring.c:64:
-wind2unix.h:59:1: warning: "fileno" redefined
-In file included from varstring.c:58:
-/usr/lib/gcc/i686-pc-mingw32/3.4.4/../../../../i686-pc-mingw32/include/stdio.h:395:1: warning: this is the location of the previous definition
-	[gcc -mno-cygwin] ubi_BinTree.c
-	[gcc -mno-cygwin] ubi_SplayTree.c
-	[gcc -mno-cygwin] odbc_xsb.c
-	[gcc -mno-cygwin] interprolog_callback.c
-
-Making XSB executable /c/dev/sandbox/xsb_patch/XSB/config/i686-pc-cygwin/bin/xsb 
-
-	[gcc -mno-cygwin] -o /c/dev/sandbox/xsb_patch/XSB/config/i686-pc-cygwin/bin/xsb
-make[1]: Leaving directory `/c/dev/sandbox/xsb_patch/XSB/emu'
-make[1]: Entering directory `/c/dev/sandbox/xsb_patch/XSB/gpp'
-
-	[gcc -mno-cygwin] gpp.c using  -D WIN_NT
-	[gcc -mno-cygwin] -o gpp
-
-make[1]: Leaving directory `/c/dev/sandbox/xsb_patch/XSB/gpp'
-
-
------------------ Warnings ------------------------
-While compiling XSB/cmplib:
--------------------- End --------------------------
------------------ Warnings ------------------------
-While compiling XSB/lib:
-
-++Warning[XSB]: [Runtime/C] Extra-long token. Runaway string?
--------------------- End --------------------------
------------------ Warnings ------------------------
-While compiling XSB/syslib:
--------------------- End --------------------------
-

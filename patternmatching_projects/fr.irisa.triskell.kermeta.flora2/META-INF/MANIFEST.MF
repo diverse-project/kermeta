@@ -8,3 +8,14 @@ Bundle-Vendor: IRISA Triskell
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime
 Eclipse-LazyStart: true
+Export-Package: com.declarativa.interprolog,
+ com.declarativa.interprolog.examples,
+ com.declarativa.interprolog.gui,
+ com.declarativa.interprolog.util,
+ com.xsb.interprolog,
+ fr.irisa.triskell.flora2,
+ fr.irisa.triskell.kermeta.flora2,
+ net.sourceforge.flora.javaAPI.src,
+ net.sourceforge.flora.javaAPI.util
+Bundle-ClassPath: dist/kermeta_flora2.jar,
+ .

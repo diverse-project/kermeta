@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xmi:id="93d695ff-1961-4f36-b86e-d97f4f4f07b1" name="osgi">
+  <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="c0106f66-811d-4869-8933-b6c2340aa5a6" source="crossContainmentOwner">
+    <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="d3450d39-c188-4d4c-bf6d-c7b77ce2b15e" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/.model/org.eclipse.osgi_3.2.2.R32x_v20070118/org/model.auml"/>
+    <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="02555f0c-7d4b-4830-808e-9925716c9449" key="parentId" value="74555536-25ef-4cbd-a8de-06100bb0dd73"/>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Package" href="framework/model.auml#0e557fbf-985d-436a-ab8f-0b3502e44ce0"/>
+  <profileApplication xmi:type="uml:ProfileApplication" xmi:id="4cfbe3cc-8cc1-4c52-be91-997af3cd30b8">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="8c34b14f-71fa-43e2-9c92-55c574060e3f" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+    </eAnnotations>
+    <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+  </profileApplication>
+</uml:Package>

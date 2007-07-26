@@ -3,8 +3,8 @@
 
 package pattern_macros;
 
-require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
-require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/Patterns4Ecore.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/Patterns4Ecore.kmt"
  
 
 using kermeta 

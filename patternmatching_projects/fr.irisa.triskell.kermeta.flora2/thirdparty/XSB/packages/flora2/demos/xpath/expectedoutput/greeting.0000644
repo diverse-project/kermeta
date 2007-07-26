@@ -1,0 +1,33 @@
+_$_$_flora'dyn_newoid4676[$order->0].  // @greeting
+_$_$_flora'dyn_newoid4676[greeting->>_$_$_flora'dyn_newoid4679].  // @greeting
+_$_$_flora'dyn_newoid4679[$order->1].  // @greeting
+_$_$_flora'dyn_newoid4679[$text->>_$_$_flora'dyn_newoid4680].  // @greeting
+_$_$_flora'dyn_newoid4680[$order->2].  // @greeting
+_$_$_flora'dyn_newoid4680[$string->Hi! My name is
+	].  // @greeting
+_$_$_flora'dyn_newoid4679[$child(0)->_$_$_flora'dyn_newoid4680].  // @greeting
+_$_$_flora'dyn_newoid4679[first->>_$_$_flora'dyn_newoid4681].  // @greeting
+_$_$_flora'dyn_newoid4681[$order->3].  // @greeting
+_$_$_flora'dyn_newoid4681[$text->>_$_$_flora'dyn_newoid4682].  // @greeting
+_$_$_flora'dyn_newoid4682[$order->4].  // @greeting
+_$_$_flora'dyn_newoid4682[$string->John].  // @greeting
+_$_$_flora'dyn_newoid4681[$child(0)->_$_$_flora'dyn_newoid4682].  // @greeting
+_$_$_flora'dyn_newoid4679[$child(1)->_$_$_flora'dyn_newoid4681].  // @greeting
+_$_$_flora'dyn_newoid4680[$rightsibling->_$_$_flora'dyn_newoid4681].  // @greeting
+_$_$_flora'dyn_newoid4681[$leftsibling->_$_$_flora'dyn_newoid4680].  // @greeting
+_$_$_flora'dyn_newoid4679[last->>_$_$_flora'dyn_newoid4683].  // @greeting
+_$_$_flora'dyn_newoid4683[$order->5].  // @greeting
+_$_$_flora'dyn_newoid4683[$text->>_$_$_flora'dyn_newoid4684].  // @greeting
+_$_$_flora'dyn_newoid4684[$order->6].  // @greeting
+_$_$_flora'dyn_newoid4684[$string->Smith].  // @greeting
+_$_$_flora'dyn_newoid4683[$child(0)->_$_$_flora'dyn_newoid4684].  // @greeting
+_$_$_flora'dyn_newoid4679[$child(2)->_$_$_flora'dyn_newoid4683].  // @greeting
+_$_$_flora'dyn_newoid4681[$rightsibling->_$_$_flora'dyn_newoid4683].  // @greeting
+_$_$_flora'dyn_newoid4683[$leftsibling->_$_$_flora'dyn_newoid4681].  // @greeting
+_$_$_flora'dyn_newoid4679[$text->>_$_$_flora'dyn_newoid4685].  // @greeting
+_$_$_flora'dyn_newoid4685[$order->7].  // @greeting
+_$_$_flora'dyn_newoid4685[$string->.].  // @greeting
+_$_$_flora'dyn_newoid4679[$child(3)->_$_$_flora'dyn_newoid4685].  // @greeting
+_$_$_flora'dyn_newoid4683[$rightsibling->_$_$_flora'dyn_newoid4685].  // @greeting
+_$_$_flora'dyn_newoid4685[$leftsibling->_$_$_flora'dyn_newoid4683].  // @greeting
+_$_$_flora'dyn_newoid4676[$child(0)->_$_$_flora'dyn_newoid4679].  // @greeting

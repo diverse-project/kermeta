@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml2.notation.style:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.0/notation" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xmlns:uml2.notation.style="http://www.gentleware.com/uml2.notation.style" xmi:id="_-SVAoewYEdunRII0Wz0-iQ" type="UML" measurementUnit="Pixel">
+  <styles xmi:type="notation:PageStyle" xmi:id="_-SVnsOwYEdunRII0Wz0-iQ"/>
+  <styles xmi:type="notation:GuideStyle" xmi:id="_-SVnsewYEdunRII0Wz0-iQ"/>
+  <styles xmi:type="notation:DescriptionStyle" xmi:id="_-SVnsuwYEdunRII0Wz0-iQ"/>
+  <styles xmi:type="uml2.notation.style:ParameterStyle" xmi:id="_-SVns-wYEdunRII0Wz0-iQ"/>
+  <element xmi:type="uml:Model" href="model.auml#35e59d63-95cd-408f-b8c2-e8a791ea5178"/>
+  <attributeFilteringStyle xmi:type="notation:FilteringStyle" xmi:id="_-SVntOwYEdunRII0Wz0-iQ" filtering="Automatic"/>
+  <operationFilteringStyle xmi:type="notation:FilteringStyle" xmi:id="_-SVntewYEdunRII0Wz0-iQ" filtering="Automatic" filteringKeys="package,private,protected"/>
+</uml2.notation.style:ClassDiagram>

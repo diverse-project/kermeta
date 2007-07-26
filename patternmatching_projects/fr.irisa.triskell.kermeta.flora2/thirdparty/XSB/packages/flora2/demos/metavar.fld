@@ -1,6 +1,0 @@
-#include "flrheader.flh"
-
-FLORA_THIS_WORKSPACE(mvd)(__newvar1,'m3',__newvar2,__newvar3).
-FLORA_THIS_WORKSPACE(mvd)(__newvar1,'flapply'('m1',__newvar4),__newvar2,__newvar3).
-FLORA_THIS_WORKSPACE(mvd)(__newvar1,'flapply'('m2',__newvar4,__newvar5),__newvar2,__newvar3).
-FLORA_THIS_WORKSPACE(mvd)(__newvar1,'flapply'('m4',__newvar4,__newvar5,__newvar6),__newvar2,__newvar3).

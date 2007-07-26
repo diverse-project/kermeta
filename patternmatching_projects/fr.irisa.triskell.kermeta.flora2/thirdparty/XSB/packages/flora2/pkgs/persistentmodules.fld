@@ -1,7 +1,0 @@
-#include "flrheader.flh"
-
-FLORA_THIS_WORKSPACE(t_flapply)('checkModule',__newvar1,__newvar2,__newvar3).
-FLORA_THIS_WORKSPACE(tran)(__newvar1,'detach',__newvar2).
-FLORA_THIS_WORKSPACE(tran)(__newvar1,'loadDB',__newvar2).
-FLORA_THIS_WORKSPACE(tran)(__newvar1,'flapply'('attach',__newvar3,__newvar4,__newvar5,__newvar6),__newvar2).
-FLORA_THIS_WORKSPACE(tran)(__newvar1,'flapply'('attachNew',__newvar3,__newvar4,__newvar5,__newvar6),__newvar2).

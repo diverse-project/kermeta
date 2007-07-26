@@ -1,4 +1,4 @@
-/* $Id: PatternMatchingFlora2.kmt,v 1.1 2006-11-09 15:18:51 rodrigotex Exp $
+/* $Id: PatternMatchingFlora2.kmt,v 1.2 2007-07-26 12:40:07 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -64,13 +64,13 @@ class PatternMatchingFlora2 inherits PatternMatching
       from itBindings until itBindings.isOff loop  
 	    var hash : Hashtable<String, String> init itBindings.next
         var hashObj : Hashtable<Object, Object> init Hashtable<Object, Object>.new	    
-	       stdio.writeln("#--- Bindings in the flora side (Identifier into Identifier)")
+	       //stdio.writeln("#--- Bindings in the flora side (Identifier into Identifier)")
 	    hash.keys.each{ k | 
-	       stdio.writeln(k.toString + " => " + hash.getValue(k).toString)
+	       //stdio.writeln(k.toString + " => " + hash.getValue(k).toString)
 	       hashObj.put(
               tranfoPattern2Flora.objTable.getObj( k),
               tranfoMode2Flora.objTable.getObj( hash.getValue(k)))
-	       stdio.writeln(tranfoPattern2Flora.objTable.getObj( k).toString + " => " + tranfoMode2Flora.objTable.getObj( hash.getValue(k)).toString)              
+	       //stdio.writeln(tranfoPattern2Flora.objTable.getObj( k).toString + " => " + tranfoMode2Flora.objTable.getObj( hash.getValue(k)).toString)              
 	    }   
 	    resultBindings.add( hashObj)
 	  end

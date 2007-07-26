@@ -1,4 +1,0 @@
-#include "flrheader.flh"
-
-FLORA_THIS_WORKSPACE(sub)(__newvar1,'employee',__newvar2).
-FLORA_THIS_WORKSPACE(mvd)(__newvar1,'flapply'('salary',__newvar4),__newvar2,__newvar3).

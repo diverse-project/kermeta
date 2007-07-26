@@ -67,8 +67,8 @@ if test "$force_devel" = "yes"; then
     makeargs="$makeargs devel"
 fi
 
-config=`/c/dev/sandbox/xsb_patch/XSB/build/config.guess`
-dir=/c/dev/sandbox/xsb_patch/XSB/config/`/c/dev/sandbox/xsb_patch/XSB/build/config.sub $config`${suffix}
+config=`/home/barais/workspaces/workspace_kermeta/fr.irisa.triskell.kermeta.flora2/thirdparty/XSB/build/config.guess`
+dir=/home/barais/workspaces/workspace_kermeta/fr.irisa.triskell.kermeta.flora2/thirdparty/XSB/config/`/home/barais/workspaces/workspace_kermeta/fr.irisa.triskell.kermeta.flora2/thirdparty/XSB/build/config.sub $config`${suffix}
 makefile=${dir}/topMakefile
 
 

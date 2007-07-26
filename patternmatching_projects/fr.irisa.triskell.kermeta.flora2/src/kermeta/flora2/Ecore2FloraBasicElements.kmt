@@ -1,4 +1,4 @@
-/* $Id: Ecore2FloraBasicElements.kmt,v 1.4 2006-12-13 14:23:49 rodrigotex Exp $
+/* $Id: Ecore2FloraBasicElements.kmt,v 1.5 2007-07-26 12:40:07 bmorin Exp $
  * Creation date: October 12, 2006
  * License:
  * Copyright:
@@ -7,9 +7,9 @@
 
 package kermeta::flora2;
 
-require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
-require "../../flora2/Flora2wVisitor.ecore"
-
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.kmt"
+ 
 require kermeta
 
 using ecore  
@@ -17,7 +17,7 @@ using kermeta::standard
 
 class Ecore2FloraBasicElements
 { 
- 
+   
 	operation createClauseForClassDeclaration(eclass : EClass) : flora2::Clause is do 
 	  var formulas : flora2::CompoundedFormula init flora2::CompoundedFormula.new
 	  formulas.operator := flora2::ConnectiveOp.conjunctionOp
@@ -25,12 +25,16 @@ class Ecore2FloraBasicElements
 	      eclass.eSuperTypes.collect{ ec | createsSubclassClause(eclass, ec)}.
 	           each{e | formulas.elements.add (e)}
 	  end 	  
-	  stdio.writeln("Clause of the declartion of "+eclass.name)    
+	  //stdio.writeln("Clause of the declartion of "+eclass.name)    
 	  // FIX: Correct later a problem with ENUM
 //      eclass.eAttributes.collect{ ec | createsSignatureForAttr(eclass, ec)}.
 //               each{e | formulas.elements.add (e)}	  
-      eclass.eReferences.collect{ ec | createsSignatureForRef(eclass, ec)}.
-               each{e | formulas.elements.add (e)}	       
+      eclass.eStructuralFeatures.select{ec|  /*stdio.writeln("test1")*/    EReference.isInstance(ec)}.collect{ ec1 | 
+      var ec2 : EReference
+      ec2?=ec1
+      createsSignatureForRef(eclass, ec2)}.
+               each{e | formulas.elements.add (e)}	 
+                /*stdio.writeln("test")*/       
 	  
 	  var clause : flora2::Fact init flora2::Fact.new
 	  clause.expression := formulas
@@ -48,21 +52,31 @@ class Ecore2FloraBasicElements
           var sigfeature : flora2::SignatureAtom init flora2::SignatureAtom.new 
           sigfeature.host := createConstantTerm(eclass)
           sigfeature.feature := createConstantTerm( eattr)
-          sigfeature.~class := createConstantTerm(eattr.eReferenceType)
+          /*stdio.writeln("test2")*/
+          
+          sigfeature.~class := createConstantTerm(eattr.eType)
+            /*stdio.writeln("test3")*/
+         
           result := sigfeature          
 	end	
 		
 	operation createsSignatureForAttr (eclass : EClass, eattr : EAttribute) : flora2::SignatureAtom is do
           var sigfeature : flora2::SignatureAtom init flora2::SignatureAtom.new 
           sigfeature.host := createConstantTerm(eclass)
+          
           sigfeature.feature := createConstantTerm( eattr)
           sigfeature.~class := createConstantTerm(eattr.eAttributeType)
+          
+          
           result := sigfeature          
 	end	
 	
 	operation createConstantTerm (elementName: ENamedElement) : flora2::Term is do	
           var oid : flora2::Constant init flora2::Constant.new
+          
           oid.symbolName := elementName.name
+           
+          
           result := oid
 	end	  
 	

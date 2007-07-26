@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML">
+  <uml:Package xmi:id="84d6cc6e-e336-4e46-a56b-5ba5039eb1bf" name="triskell">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="83f865e1-8324-4162-80bf-6e1e1158b000" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="43f65f65-8474-44f9-9f67-e9fd872dc990" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/src/java/fr/irisa/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="1237241c-c8dd-4baa-aa6c-f8d3f98d23be" key="parentId" value="d58e26b3-873b-4945-9bfd-96a783895f19"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Package" href="flora2/model.auml#95a6c703-5ecd-4fdf-a399-73fd6b94116e"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="cad80d3a-7524-4021-986f-12aa9f0b3071">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="bb59fe42-0f23-45fa-a3c4-f457bddf4bad" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <uml:Package xmi:id="84d6cc6e-e336-4e46-a56b-5ba5039eb1bf" name="triskell">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="dd6c9efd-ea21-4783-bb6d-919a9ddba4b2" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="685bf88f-9f9f-4800-a033-f3e111cecb8e" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/src/java/fr/irisa/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="c5ab437a-9260-483a-a9ed-74cda44a9d29" key="parentId" value="d58e26b3-873b-4945-9bfd-96a783895f19"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Package" href="kermeta/model.auml#8e0d16a6-7979-4d4a-a96f-e284875b31d0"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="0dfbe0a6-0f6d-4e2e-a214-af158cd3a620">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="cc6e435f-3886-4736-98fa-a816f3f78bb3" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <uml:Package xmi:id="84d6cc6e-e336-4e46-a56b-5ba5039eb1bf" name="triskell">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="fbc63abd-7eb8-4d65-9f9f-67398c2ef87a" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="47f74613-0a43-4b83-8dd2-652efd2a407e" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/src/java/fr/irisa/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="03c9497a-503e-4ead-8222-427d0d16135a" key="parentId" value="d58e26b3-873b-4945-9bfd-96a783895f19"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Package" href="kermeta/model.auml#8e0d16a6-7979-4d4a-a96f-e284875b31d0"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="d131a2cb-ae7c-4ac8-b65f-4d350b236b0d">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="a9edeeed-9c0d-4510-9eff-d46a51f5231f" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <uml:Package xmi:id="84d6cc6e-e336-4e46-a56b-5ba5039eb1bf" name="triskell">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="563c2b33-78aa-4f03-823a-d10f161865aa" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="6ce3a96a-d1c9-49e9-a03c-b7d902178b27" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/src/java/fr/irisa/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="8716892d-50c0-4cdb-b5a8-8a04465dcd0c" key="parentId" value="d58e26b3-873b-4945-9bfd-96a783895f19"/>
+    </eAnnotations>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="d09a409e-d6b8-4254-ac17-ce1c03cc3c20">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="83dc7b16-8cad-4cb7-aeac-73e0f075bf6c" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <uml:Package xmi:id="84d6cc6e-e336-4e46-a56b-5ba5039eb1bf" name="triskell">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="ae47dfbf-da10-4349-ad3a-beb22665543e" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="8eace679-2f23-4724-9599-9a195ac2cd19" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/src/java/fr/irisa/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="838e823e-c6f4-462c-b59b-2cd6cc7bff41" key="parentId" value="d58e26b3-873b-4945-9bfd-96a783895f19"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Package" href="flora2/model.auml#95a6c703-5ecd-4fdf-a399-73fd6b94116e"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="07867f6b-bce5-448c-beae-4da91bf5c7fa">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="ace800c2-4c13-4932-b8ef-4f2ebccd4942" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <uml:Package xmi:id="84d6cc6e-e336-4e46-a56b-5ba5039eb1bf" name="triskell">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="aea3ec5b-53cc-43eb-9b6c-3a328525a4ed" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="caab0274-ede4-48b9-ac13-1d83bdb7efb5" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/src/java/fr/irisa/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="e0519057-0009-4448-adb9-fb09a50b8107" key="parentId" value="d58e26b3-873b-4945-9bfd-96a783895f19"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Package" href="kermeta/model.auml#8e0d16a6-7979-4d4a-a96f-e284875b31d0"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="c5cf1fbf-49d3-4600-8718-0b5d35caa1ac">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="0540b7ca-e5de-4740-b579-6ec593185882" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <uml:Package xmi:id="84d6cc6e-e336-4e46-a56b-5ba5039eb1bf" name="triskell">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="c802c562-8f50-4bc1-b71f-6b34a87b5d65" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="3386c572-cc5a-461d-aac6-5791e1d3d93a" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/src/java/fr/irisa/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="3c69cafc-297d-44b3-8533-1a39e5897ed7" key="parentId" value="d58e26b3-873b-4945-9bfd-96a783895f19"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Package" href="kermeta/model.auml#8e0d16a6-7979-4d4a-a96f-e284875b31d0"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="9683d86b-0dfd-45f0-b8ad-697ceaeaff02">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="cd9ead9f-889a-41d6-af6a-a81a1cf537e1" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <uml:Package xmi:id="84d6cc6e-e336-4e46-a56b-5ba5039eb1bf" name="triskell">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="18d21235-f13b-4783-8956-09dba0d63f54" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="d2660987-211f-4c39-af06-235314c35efd" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/src/java/fr/irisa/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="7073f96c-b34c-4f05-ab9f-550aa40495b0" key="parentId" value="d58e26b3-873b-4945-9bfd-96a783895f19"/>
+    </eAnnotations>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="763647f2-1698-4daa-a1bb-3c0ea012d7d0">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="84e05ac5-7548-4abe-ac2d-ccc490726bf4" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+</xmi:XMI>

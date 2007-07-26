@@ -1,4 +1,4 @@
-/* $Id: PluginConstants.java,v 1.2 2006-12-19 14:26:38 rodrigotex Exp $
+/* $Id: PluginConstants.java,v 1.3 2007-07-26 12:40:13 bmorin Exp $
  * Project: fr.irisa.triskell.kermeta.flora2
  * File: PluginConstants.java
  * License: EPL
@@ -14,6 +14,7 @@ public class PluginConstants {
   public static String PROPERTY_FILE = "flora2.properties";  
   public static String USE_ABS_PATH = "USE_ABSOLUTE_PATH";
   public static String XSB_PATH = "XSBDIR";
-  public static String FLORA2_PATH = "FLORADIR";  
+  public static String XSB_PATH_BIN = "XSBDIR_BIN";
+  public static String FLORA2_PATH = "FLORADIR"; 	 	
 }
  

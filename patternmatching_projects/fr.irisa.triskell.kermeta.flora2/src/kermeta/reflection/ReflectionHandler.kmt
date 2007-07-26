@@ -1,11 +1,11 @@
-/* $Id: ReflectionHandler.kmt,v 1.2 2006-12-13 14:24:11 rodrigotex Exp $
+/* $Id: ReflectionHandler.kmt,v 1.3 2007-07-26 12:40:14 bmorin Exp $
  * Creation date: October 17, 2006
  * License:
  * Copyright:
  * Authors:
  */
 
-package kermeta::reflection;
+package kermeta::pattern::reflection;
 
 
 require kermeta
@@ -14,9 +14,9 @@ using kermeta::standard
 using kermeta::reflection
 using kermeta::interpreter
 using kermeta::utils
-
+ 
 class ReflectionHandler
-{
+{ 
    attribute debug : Boolean 
 	/* operation create was created because of problems with the basic method Object.get(Property)	
    with attribute with type Sequence.
@@ -28,13 +28,18 @@ class ReflectionHandler
 	*/ 
 	operation getSequenceProperties ( obj : kermeta::standard::Object, pro : Property) : Sequence<kermeta::standard::Object> is do
         // ### ------------------
-        debug := false
+        debug := true
         // ### ------------------	
-       if debug then stdio.writeln("...ReflectionHandler.getSequenceProperties("+pro.name+")")  end      	         
+       if debug then 
+       		stdio.writeln("ReflectionHandler.getSequenceProperties("+pro.name+")")  
+       end      	         
 
   	   var seqpro : Sequence<kermeta::standard::Object> init Sequence<kermeta::standard::Object>.new
        if (pro.upper != 1) then       
-          if debug then stdio.writeln("...ReflectionHandler with upper != 1")  end      	        
+          if debug then 
+          	stdio.writeln("   ReflectionHandler with upper != 1")  
+          	stdio.writeln("      do var target : "+obj.getMetaClass.typeDefinition.qualifiedName+" target ?= obj  target."+pro.name+".each{s| seqpro.add(s)} end")
+          end      	        
           
 	      var de : DynamicExpression init DynamicExpression.new
 	      de.initializeDefaults
@@ -46,13 +51,26 @@ class ReflectionHandler
           params.put("seqpro", seqpro)       
           de.execute(void, params)	          
        else 
-        if debug then stdio.writeln("...ReflectionHandler with upper = 1")  end      	               
+        if debug then 
+        		stdio.writeln("   ReflectionHandler with upper = 1")
+	          	stdio.writeln("      "+obj.getMetaClass.typeDefinition.qualifiedName+".get("+pro.name+")!=void ?")
+        end    	               
           if (not obj.get(pro).isVoid) then
+          	if debug then
+	          	stdio.writeln("      ->true")
+	        end
             seqpro.add(obj.get(pro))
+          else
+          	if debug then
+	          	stdio.writeln("      ->false")
+	        end
           end
 //        de.parse("do var target : "+obj.getMetaClass.typeDefinition.qualifiedName+" target ?= obj  seqpro.add(target."+pro.name+") end")        
        end          
-        if debug then stdio.writeln("...ReflectionHandler.getSequenceProperties END")  end      	        
+        if debug then 
+        	stdio.writeln("ReflectionHandler.getSequenceProperties END")
+        	stdio.writeln("-------------------------------------------")  
+        end      	        
        result := seqpro
 	end
 	

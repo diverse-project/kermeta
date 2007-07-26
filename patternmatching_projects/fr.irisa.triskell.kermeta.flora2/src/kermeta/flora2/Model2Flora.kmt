@@ -1,4 +1,4 @@
-/* $Id: Model2Flora.kmt,v 1.4 2006-12-13 14:23:49 rodrigotex Exp $
+/* $Id: Model2Flora.kmt,v 1.5 2007-07-26 12:40:07 bmorin Exp $
  * Creation date: November 9, 2006
  * License:
  * Copyright:
@@ -9,11 +9,11 @@
   
 package kermeta::flora2;
 
-require "../../flora2/Flora2wVisitor.ecore"
-require "./Ecore2FloraBasicElements.kmt"
-require "../reflection/ReflectionHandler.kmt"
-require kermeta
-
+//require "../../flora2/Flora2wVisitor.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Ecore2FloraBasicElements.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/reflection/ReflectionHandler.kmt"
+require kermeta  
+      
 using kermeta::standard 
 using kermeta::reflection 
 using kermeta::persistence 
@@ -24,17 +24,17 @@ using kermeta::utils
 class Model2Flora inherits Ecore2FloraBasicElements { 	
    attribute objTable : IDTable
    attribute packageName : String 
-   attribute handler : ReflectionHandler 
+   attribute handler : kermeta::pattern::reflection::ReflectionHandler 
    	
    operation initialize() is do
-      objTable := IDTable.new
-      handler := ReflectionHandler.new
+      objTable := IDTable.new 
+      handler := kermeta::pattern::reflection::ReflectionHandler.new
       objTable.initialize()
    end	
    
    operation initializeTable(table : IDTable) is do
       objTable := table
-      handler := ReflectionHandler.new
+      handler := kermeta::pattern::reflection::ReflectionHandler.new
    end	   
    	
    operation transformModel(objects: Set<Object>) : flora2::Clause[0..*] is do 
@@ -59,20 +59,48 @@ class Model2Flora inherits Ecore2FloraBasicElements {
 	  var pros : OrderedSet<Property> init OrderedSet<Property>.new
 	  pros.addAll( obj.getMetaClass.ownedAttribute)	  
       handler.getAllSuperClasses(obj.getMetaClass).each{c | pros.addAll(c.ownedAttribute)} 
-
+		
+        
       from var it2 : Iterator<Property> init pros.iterator
       until it2.isOff loop             
         var pro : Property init it2.next
-        var propertyInstances : Sequence<Object> init handler.getSequenceProperties(obj, pro)
+        //var propertyInstances : Sequence<Object> init handler.getSequenceProperties(obj, pro)
+        
+        //modif brice
+		var propertyInstances : Collection<kermeta::reflection::Object>
+        propertyInstances:=Set<kermeta::reflection::Object>.new
+        
+        //modif brice
+        if(not(pro.isDerived)) then
+        if(pro.upper==1) then
+        	var temp:kermeta::reflection::Object
+        	temp?=obj.get(pro)
+        	//stdio.writeln("adding: "+pro.name+"("+pro.type.toString+")")
+        	if (temp!=void) then
+		        propertyInstances.add(temp)
+		    end
+	    else
+	    	var tempColl:Collection<kermeta::reflection::Object>
+	    	tempColl?=obj.get(pro)
+	    	propertyInstances.addAll(tempColl)
+	    end
+	    end
+        
+	   	/*stdio.writeln("___")
+	   	stdio.writeln(propertyInstances.size.toString)
+	   	stdio.writeln(obj.toString+": "+pro.name+"("+pro.type.toString+")")
+    	propertyInstances.each{o | stdio.writeln(o.toString)}
+    	stdio.writeln("___")*/
         
         // Each instance of a property has it own expression
         //for example Obj[name -> "toto"], ..., Obj[address -> "Rennes"]
-        from var it3 : Iterator<Object> init propertyInstances.iterator      
+        from var it3 : Iterator<kermeta::reflection::Object/*Object*/> init propertyInstances.iterator      
         until it3.isOff loop        
-          var inst : Object init it3.next
+          var inst : kermeta::reflection::Object init it3.next
           var proType : Type init  pro.type
-          
-          // already exists a clause for the instance?
+		  /*stdio.writeln("   ***")          
+          stdio.writeln("   inst:"+inst.toString+" pro.upper="+pro.upper.toString+" "+pro.name+"("+pro.type.toString+")")
+          */// already exists a clause for the instance?
           var term : flora2::Term           
           if ( Class.isInstance( proType)) then
              if (not objTable.hasAnId(inst) ) then
@@ -88,8 +116,9 @@ class Model2Flora inherits Ecore2FloraBasicElements {
           end
 
           if ( term != void) then formula.elements.add(createsDataClause(objTable.getTermId(obj), pro.name, term)) end
-        end   
-      end  
+        end 
+        //stdio.writeln("---------------")  
+      end   
       
       pendingClauses.each{ auxClause | 
          if not isToCompoundClauses then
@@ -163,13 +192,13 @@ class IDTable {
 
    attribute  forwardTable : Hashtable<Object, String>
    attribute  reverseTable : Hashtable<String, Object>   
-   attribute handler : ReflectionHandler 
+   attribute handler : kermeta::pattern::reflection::ReflectionHandler 
    	
    operation initialize() is do
       forwardTable := Hashtable<Object, String>.new
       reverseTable := Hashtable<String, Object>.new      
-      handler := ReflectionHandler.new
-   end	
+      handler := kermeta::pattern::reflection::ReflectionHandler.new
+   end	 
    
   /* This method controls a hashtable of Obj-> Id in order to give a unique Id 
      for each object */	   

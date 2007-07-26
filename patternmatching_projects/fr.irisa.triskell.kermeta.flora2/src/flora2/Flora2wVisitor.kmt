@@ -12,7 +12,7 @@ class Clause inherits visitors::Visitable
 {
 	method accept(visitor : visitors::Visitor) : DTString from flora2::visitors::Visitable is
 		result := visitor.visitClause(self)
- 
+  
 }
 class Rule inherits Clause
 {

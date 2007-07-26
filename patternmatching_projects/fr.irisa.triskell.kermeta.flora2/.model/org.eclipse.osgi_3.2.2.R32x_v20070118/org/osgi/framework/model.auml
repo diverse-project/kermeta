@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:java_profile="http:///schemas/java_profile/0" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xsi:schemaLocation="http:///schemas/java_profile/0 pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA">
+  <uml:Package xmi:id="0e557fbf-985d-436a-ab8f-0b3502e44ce0" name="framework">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="ab21959e-3786-4a91-b5ed-5dccc878bf62" source="crossContainmentOwner">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="bd618c63-227e-4f8a-bc62-2e2de70768f3" key="parentResourceUri" value="platform:/resource/fr.irisa.triskell.kermeta.flora2/.model/org.eclipse.osgi_3.2.2.R32x_v20070118/org/osgi/model.auml"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="fb218aaa-5b76-42fe-9443-0ea3f746540b" key="parentId" value="93d695ff-1961-4f36-b86e-d97f4f4f07b1"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Class" xmi:id="15f705a4-cca1-4159-9cd6-50cf377a4b89" name="AdminPermission" isLeaf="true">
+      <nestedClassifier xmi:type="uml:Class" xmi:id="54a2d335-1851-4465-9b83-e78de77928f0" name="SignerWrapper" visibility="private"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="d49a3e7d-a77d-4ad3-a2af-865fdc461fcc" name="AdminPermissionCollection" visibility="package" isLeaf="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="2f09c368-424c-4d40-b9c5-7eb2fa159de1" name="AllServiceListener" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="fa9e5ba8-043d-41a5-897c-4421a3e01114" name="Bundle" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="460e7184-444d-4946-be9e-ccdf70c20cec" name="BundleActivator" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="02e26d4b-f746-4847-8524-49eb8cfa2a47" name="BundleContext" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="b41b36f4-6867-48a3-8e7d-c8a44b4adaea" name="BundleEvent"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="53866b57-6316-452f-8874-78d0b7c39cdc" name="BundleException"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="ed08f3f7-0c1e-402c-80e6-92ff14bda13a" name="BundleListener" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="3f038296-7c69-4020-8319-413978c15fed" name="BundlePermission" isLeaf="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="96ba1958-85ab-4f40-9803-3634349e47f1" name="BundlePermissionCollection" visibility="package" isLeaf="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="a7177bca-1d50-4043-bb3d-a6fbfd638da1" name="Configurable" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="90386483-e533-4b73-a2b0-a6652bb5701d" name="Constants" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="2c68e961-557e-46cc-9049-9499da167642" name="Filter" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="0289e30d-26fc-4c41-84b2-7b5e0bea7cb2" name="FrameworkEvent"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="84b08f1f-83d5-4d6c-a820-b2afe2a4da22" name="FrameworkListener" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="b823f78b-3e1d-44e5-94db-8a93f004634b" name="FrameworkUtil"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="78b80c84-cab9-49a2-acc0-d20bb6cf3350" name="InvalidSyntaxException"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="ea24ff62-47c9-4d18-bb86-12099580d275" name="PackagePermission" isLeaf="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="afdc99d4-bacc-4b16-af59-e2d0c3d185dd" name="PackagePermissionCollection" visibility="package" isLeaf="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="3d1761b6-9ef2-4599-a98b-d9a9f9b074b4" name="ServiceEvent"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="2c1753c1-58c4-4b6a-a435-ce8ebf096bdf" name="ServiceFactory" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="2d26f6e7-b241-4c7a-8fec-a49f80982ba5" name="ServiceListener" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="374b765b-e6c2-40d6-8aec-52c3edece07d" name="ServicePermission" isLeaf="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="a88e376d-3850-4dac-884c-12b2e6cd699a" name="ServicePermissionCollection" visibility="package" isLeaf="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="d8154bb0-0ef8-420b-a779-fef81889736d" name="ServiceReference" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="b53036da-429e-47ec-928f-3b4532dee3f5" name="ServiceRegistration" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="864f8f8a-0704-48ec-9904-769759c40fd4" name="SynchronousBundleListener" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="051eadfc-eb98-4d93-9280-a9c5286ece80" name="Version"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="071b0cd5-ae01-43d8-bf21-e9772a5f75f1">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="3038a180-2b55-4aa9-bad6-8d4e084a37dd" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_H_ZGcB5CEduWqeK3CXfnzA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://GW_JAVA_PROFILES/Java.profile.uml#_3xRZYR4-EduWqeK3CXfnzA"/>
+    </profileApplication>
+  </uml:Package>
+  <java_profile:static xmi:id="3a24a522-21c5-479d-b6b1-de518ed602f1" base_Classifier="54a2d335-1851-4465-9b83-e78de77928f0"/>
+</xmi:XMI>

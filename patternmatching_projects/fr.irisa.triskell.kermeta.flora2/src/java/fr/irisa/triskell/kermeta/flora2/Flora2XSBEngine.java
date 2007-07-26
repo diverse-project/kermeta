@@ -1,4 +1,4 @@
-/* $Id: Flora2XSBEngine.java,v 1.4 2006-12-19 14:26:38 rodrigotex Exp $
+/* $Id: Flora2XSBEngine.java,v 1.5 2007-07-26 12:40:08 bmorin Exp $
  * Project : Kermeta (First iteration)
  * License : GPL
  * Copyright : IRISA / Universite de Rennes 1
@@ -12,19 +12,15 @@
  */
 package fr.irisa.triskell.kermeta.flora2;
 
-import net.sourceforge.flora.javaAPI.src.FloraSession;
 import net.sourceforge.flora.javaAPI.src.FloraObject;
+import net.sourceforge.flora.javaAPI.src.FloraSession;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Iterator;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Map;
- 
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
- 
-import java.io.FileNotFoundException;
-import java.lang.String;
 /** 
  * Implementation of input and output methods (see io.kmt)
  */
@@ -37,8 +33,7 @@ public class Flora2XSBEngine {
 
     public static RuntimeObject executeCommand (RuntimeObject self, RuntimeObject command) {
             java.lang.String strCommand = java.lang.String.valueOf( command.getData().get("StringValue"));
-           
-            getSession().ExecuteCommand(strCommand);
+            	   getSession().ExecuteCommand(strCommand);
             return self.getFactory().getMemory().voidINSTANCE;
     } 
 
