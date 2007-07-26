@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.42 2007-07-20 15:08:40 ftanguy Exp $
+/* $Id: structure.kmt,v 1.43 2007-07-26 09:35:15 ftanguy Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -141,6 +141,7 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 }
 alias Boolean : kermeta::standard::Boolean;
 alias Integer : kermeta::standard::Integer;
+alias Real 	: kermeta::standard::Real;
 
 
 abstract class ParameterizedType inherits Type, kermeta::reflection::ParameterizedType, KMStructureVisitable

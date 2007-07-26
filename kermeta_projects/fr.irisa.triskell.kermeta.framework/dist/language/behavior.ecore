@@ -949,6 +949,7 @@
     <references href="../standard/java.ecore#/2"/>
     <references href="structure.ecore#/0"/>
     <references href="structure.ecore#/1"/>
+    <references href="structure.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="reflective_collections.ecore#/0"/>

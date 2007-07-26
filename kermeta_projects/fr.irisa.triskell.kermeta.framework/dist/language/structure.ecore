@@ -189,6 +189,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
         <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+        <eClassifiers xsi:type="ecore:EDataType" name="Real" instanceClassName="java.lang.Real"/>
         <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" abstract="true">
           <eSuperTypes href="#/1/language/structure/Type"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/ParameterizedType"/>
@@ -1538,17 +1539,14 @@
     <references href="../kunit/kunit.ecore#/1"/>
     <references href="behavior.ecore#/0"/>
     <references href="behavior.ecore#/1"/>
-    <references href="behavior.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
     <references href="../standard/collections.ecore#/0"/>
@@ -1562,7 +1560,6 @@
     <references href="../io/file_io.ecore#/1"/>
     <references href="reflective_collections.ecore#/0"/>
     <references href="reflective_collections.ecore#/1"/>
-    <references href="reflective_collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
@@ -1571,6 +1568,5 @@
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

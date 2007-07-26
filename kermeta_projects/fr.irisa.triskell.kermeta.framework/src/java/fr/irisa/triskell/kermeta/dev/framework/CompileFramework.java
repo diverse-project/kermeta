@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.8 2007-07-24 13:47:05 ftanguy Exp $
+/* $Id: CompileFramework.java,v 1.9 2007-07-26 09:35:15 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : CompileFramework.java
 * License : GPL
@@ -84,7 +84,7 @@ public class CompileFramework {
 
         	System.out.println("SAVING IN ECORE...");
         	EcoreExporter exporter2 = new EcoreExporter();
-        	exporter2.export(kermetaUnit, "platform:/plugin/fr.irisa.triskell.kermeta.framework/dist");
+        	exporter2.export(kermetaUnit, "platform:/plugin/fr.irisa.triskell.kermeta.framework/dist", false);
         	System.out.println("DONE");
         }
     }

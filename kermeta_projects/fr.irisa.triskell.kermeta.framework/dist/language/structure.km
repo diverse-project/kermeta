@@ -677,6 +677,11 @@
         <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Integer">
           <instanceType href="../standard/collections.km#//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@target/@containedType.0"/>
         </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Real" instanceType="//@packages.0/language/structure/Real/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Real"/>
+          </containedType>
+        </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ParameterizedType" isAbstract="true" superType="//@packages.0/language/structure/ParameterizedType/@containedType.0 //@packages.0/language/structure/ParameterizedType/@containedType.1 //@packages.0/language/structure/ParameterizedType/@containedType.2">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
           <containedType xsi:type="kermeta_language_structure:Class">
