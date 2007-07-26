@@ -1,4 +1,4 @@
-/* $Id: EcoreWrapper.java,v 1.3 2006-03-09 12:26:50 jsteel Exp $
+/* $Id: EcoreWrapper.java,v 1.4 2007-07-26 13:34:09 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.ecore (First iteration)
  * File      : EcoreWrapper.java
  * License   : EPL
@@ -12,6 +12,7 @@ package fr.irisa.triskell.kermeta.ecore.wrapper;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
@@ -19,7 +20,6 @@ import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
@@ -56,7 +56,7 @@ public class EcoreWrapper {
 	    	String errmsg = "EMF Loading error : could not find a class (" +
 	    	metaclass_name + ") in loaded libraries. Please check your require statements";
 	    	System.err.println(errmsg);
-	    	kunit.messages.addError(errmsg, null );
+	    	kunit.error(errmsg, null );
 	    	ftype = null;
 	    	// stop after the first error: throw a Kermeta Exception ...
 	    	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();        	
