@@ -37,21 +37,4 @@
 		<nature>com.gentleware.uml2.reveng.RoundtripProject</nature>
 		<nature>com.gentleware.uml2.resource.xmi.indexedXmiNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>API</name>
-			<type>2</type>
-			<location>/home/paco/C::/app/flora2/java/API</location>
-		</link>
-		<link>
-			<name>iprolog</name>
-			<type>2</type>
-			<location>/home/paco/C::/home/barais/tmp/XSB/packages/iprolog</location>
-		</link>
-		<link>
-			<name>interprolog212</name>
-			<type>2</type>
-			<location>/home/paco/C::/app/interprolog212</location>
-		</link>
-	</linkedResources>
 </projectDescription>
