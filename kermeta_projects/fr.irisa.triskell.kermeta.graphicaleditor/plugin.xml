@@ -83,4 +83,19 @@
 			</propertySection>
 		</propertySections>
 	</extension>
+	<extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.km"
+            id="fr.irisa.triskell.kermeta.contribution1">
+        <action
+              class="fr.irisa.triskell.kermeta.graphicaleditor.actions.OpenKmInKmdiAction"
+              enablesFor="1"
+              icon="icons/Km.png"
+              id="fr.irisa.triskell.kermeta.OpenKmFileAction"
+              label="Open with the Kermeta class diagram"
+              menubarPath="group.open"/>
+      </objectContribution>
+	</extension>	
 </plugin>
