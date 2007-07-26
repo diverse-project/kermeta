@@ -1,4 +1,4 @@
-/* $Id: KmtPrinterWizard.java,v 1.13 2007-07-24 13:46:39 ftanguy Exp $
+/* $Id: KmtPrinterWizard.java,v 1.14 2007-07-26 16:29:17 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -64,14 +64,18 @@ public class KmtPrinterWizard extends UnitExporterWizard{
 	 */
 	public void writeUnit(KermetaUnit builder, IFile ifile) throws Exception  {	    
 	    
-		String fileName = "platform:/resource" + ifile.getFullPath().toString();
-		int index = fileName.lastIndexOf("/");
-		String rep = fileName.substring(0, index);
+		try {
 		
-		KMTOutputBuilder exporter = new KMTOutputBuilder();
-		exporter.print(builder, rep, fileName);
-		exporter.flush();
+			String fileName = "platform:/resource" + ifile.getFullPath().toString();
+			int index = fileName.lastIndexOf("/");
+			String rep = fileName.substring(0, index);
 		
+			KMTOutputBuilder exporter = new KMTOutputBuilder();
+			exporter.print(builder, rep, fileName);
+			exporter.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 /*		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter( );
 		
 		BufferedWriter w = new BufferedWriter(new FileWriter(ifile.getLocation().toFile()));
