@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.45 2007-07-20 15:07:49 ftanguy Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.46 2007-07-26 09:51:34 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -162,7 +162,6 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     	URI u = createURI(p_metamodel_uri);
         // Load resource
     	logEMFRegistryContent();
-    	Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
     	ResourceSet resource_set = new ResourceSetImpl();
     	Resource resource = resource_set.getResource(u, true);
     	try {

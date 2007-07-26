@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreWizard.java,v 1.9 2007-07-26 09:36:47 ftanguy Exp $
+/* $Id: Kermeta2EcoreWizard.java,v 1.10 2007-07-26 09:51:37 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -114,9 +114,6 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 	 * @throws Exception
 	 */
 	public void writeUnit(KermetaUnit builder, IFile ifile) throws Exception  {	    
-	    
-		// create Ecore structure
-	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 	    //ResourceSet resource_set = new ResourceSetImpl();
 	    String fileURI = "platform:/resource" + ifile.getFullPath().toString();
 	    //URI u = URI.createURI( fileURI );

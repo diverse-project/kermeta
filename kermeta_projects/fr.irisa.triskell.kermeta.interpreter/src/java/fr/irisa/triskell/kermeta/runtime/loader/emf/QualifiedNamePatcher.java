@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.14 2007-07-24 13:47:38 ftanguy Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.15 2007-07-26 09:51:34 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -212,7 +212,6 @@ public class QualifiedNamePatcher {
 				EMFRuntimeUnit.internalLog.debug("loading Metamodel from physical location : " + fileURI.toString());
 				
 		        // Load resource
-		    	Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
 		    	ResourceSet resource_set = new ResourceSetImpl();
 		    	Resource resource = resource_set.getResource(fileURI, true);
 		    	
