@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.10 2007-07-24 13:46:46 ftanguy Exp $
+/* $Id: Ecore2KMPass4.java,v 1.11 2007-07-27 13:27:10 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -205,7 +205,7 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 		// User indeed naturally doesn't set it if he doesn't need a return type
 		// FIXME : WE HAVE TO FIX A STRICT PHILOSOPHY ABOUT EXPLICIT OR IMPLICIT RETURN TYPE!!!
 		currentOperation = datas.getOperation(node);
-		
+
 		if (isTypeSettingMode == true)
 		{
 			// Deprecated since EMF2.3
@@ -345,6 +345,10 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 	 */
 	public Object visit(EReference node) { return visitEStructuralFeature(node); }
 	
+	@Override
+	public Object visit(EAnnotation node) {
+		return null;
+	}
 
 	/**
 	 * @param node
