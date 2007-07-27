@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.28 2007-07-24 13:46:45 ftanguy Exp $
+/* $Id: KMT2KMPass7.java,v 1.29 2007-07-27 07:46:06 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -21,6 +21,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -30,8 +31,14 @@ import org.kermeta.loader.LoadingContext;
 import fr.irisa.triskell.kermeta.ast.ContextMultiLineComment;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.Tag;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Object;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 
 
@@ -51,6 +58,8 @@ public class KMT2KMPass7 extends KMT2KMPass {
     protected static Pattern pattern = Pattern.compile("[\t\\s]*[\r\n][\r\n\t\\s]*");
     public final static String KERMETA_DOCUMENTATION = "documentation";
     
+    private Hashtable <fr.irisa.triskell.kermeta.language.structure.Tag, Tag> km2ecore = new Hashtable <fr.irisa.triskell.kermeta.language.structure.Tag, Tag> ();
+    
 	/**
 	 * 
 	 */
@@ -64,9 +73,19 @@ public class KMT2KMPass7 extends KMT2KMPass {
 		Object object = builder.getModelElementByNode(node);
 		if ( (object != null) && ! currentTags.isEmpty() ) {
 			for ( fr.irisa.triskell.kermeta.language.structure.Tag tag : currentTags ) {
-				if ( containsEntrypoint() )
+				if ( containsEntrypoint() ) {
 					builder.getModelingUnit().getOwnedTags().addAll( currentTags );
-				else if ( tag.getName() != null ) {
+					fr.irisa.triskell.kermeta.language.structure.Tag mainClassTag = ModelingUnitHelper.getMainClass(builder);
+					TypeDefinition mainClass = builder.getTypeDefinitionByName( mainClassTag.getValue() );
+					if ( mainClass == null )
+						builder.error("Main Class nof found.", km2ecore.get( mainClassTag));
+					else {
+						fr.irisa.triskell.kermeta.language.structure.Tag mainOperationTag = ModelingUnitHelper.getMainOperation(builder);
+						Operation op = ClassDefinitionHelper.findOperationByName( (ClassDefinition) mainClass, mainOperationTag.getValue() );
+						if ( op == null )
+							builder.error("Main Operation not found.", km2ecore.get(mainOperationTag));
+					}
+				} else if ( tag.getName() != null ) {
 					if ( TagHelper.findTagFromName(object, tag.getName()) == null )
 							object.getOwnedTag().add( tag );
 				} else
@@ -74,6 +93,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 			
 			}
 			currentTags.clear();
+			km2ecore.clear();
 		}
 		
 		return true;
@@ -103,6 +123,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 		t.setValue( value );
 
 		currentTags.add( t );
+		km2ecore.put( t, tag );
 		
 		return false;
 	}
