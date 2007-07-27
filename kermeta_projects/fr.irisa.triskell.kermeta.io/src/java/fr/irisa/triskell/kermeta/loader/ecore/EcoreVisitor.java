@@ -55,30 +55,33 @@ public class EcoreVisitor {
 			public Object accept(EObject node) {
 				Object result = null;
 				String cname="";
+				cname = node.getClass().getName();
+				
 				try {
-					Class[] ptypes = new Class[1];
-					cname = node.getClass().getName();
-					
-					
+									
 					// consider EcorePackageImpl and XMLTypePackageImpl as EPackageImpl
-					if ( cname.equals("org.eclipse.emf.ecore.impl.EcorePackageImpl") ||
-						 cname.equals("org.eclipse.emf.ecore.xml.type.impl.XMLTypePackageImpl")	) {
+					/*if ( cname.equals("org.eclipse.emf.ecore.impl.EcorePackageImpl") ||
+						 cname.equals("org.eclipse.emf.ecore.xml.type.impl.XMLTypePackageImpl")) {
 						cname = "org.eclipse.emf.ecore.impl.EPackageImpl";
-					}
-
-					// Special case for EStringToStringMapEntry which does not have an EMF interface.
-					if ( ! cname.equals("org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl") )
-						cname = cname.substring(0, cname.length()-4).replaceAll(".impl", "");
+					} */
 					
-					ptypes[0] = Class.forName(cname);
-					Method m = this.getClass().getMethod("visit", ptypes);
+//					|| 
+//					 cname.equals("org.eclipse.uml2.uml.internal.impl.UMLPackageImpl")
+					
+					//if ( ! cname.equals("org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl") )
+						// Special case for EStringToStringMapEntry which does not have an EMF interface.
+						//cname = cname.substring(0, cname.length()-4).replaceAll(".impl", "").replaceAll(".internal", "");					
+					
+					Class c = Class.forName(cname, true, node.getClass().getClassLoader());
+					Method m =  getMethod( c );
+					if ( m == null )
+						throw new NoSuchMethodException("No method visit found for " + c.toString() );
+					
 					Object[] params = new Object[1];
 					params[0] = node;
 					result = m.invoke(this, params);
 				}
 				catch (NoSuchMethodException e) {
-					//KermetaUnit.internalLog.error("NoSuchMethodException during accept");
-					//KermetaUnit.internalLog.error("Class of the node : " + node.getClass().getName(), e);
 					throw new Error(e);
 				}
 				catch (Exception e) {
@@ -97,6 +100,25 @@ public class EcoreVisitor {
 				}
 			}
 
+			
+			private Method getMethod(Class cl) throws NoSuchMethodException {
+				Method m = null;
+				Class[] ptypes = new Class[1];
+				try {
+					ptypes[0] = cl;
+					m = this.getClass().getMethod("visit", ptypes);
+				} catch (NoSuchMethodException e) {}
+				
+				Class[] interfaces = cl.getInterfaces();
+				int index = 0;
+				while ( m == null ) {
+					m = getMethod( interfaces[index++] );
+				}
+				
+				return m;
+			}
+			
+			
 	public Object visit(EAttribute node) {
 	return genericVisitChildren(node);
 	}
@@ -136,7 +158,7 @@ public class EcoreVisitor {
 	public Object visit(EPackage node) {
 	return genericVisitChildren(node);
 	}
-
+	
 	public Object visit(EParameter node) {
 	return genericVisitChildren(node);
 	}
