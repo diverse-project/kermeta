@@ -1,4 +1,4 @@
-/* $Id: 023_mt_att_ref_valid_tests.kmt,v 1.2 2007-05-30 11:28:44 jsteel Exp $
+/* $Id: 023_mt_att_ref_valid_tests.kmt,v 1.3 2007-07-27 13:28:53 ftanguy Exp $
  * Creation date: November 10, 2006
  * License: EPL
  * Authors:
@@ -6,8 +6,6 @@
  * Description:
  *		This verifies the various possibilities about reference multiplicities
  */
-@mainClass "mt_att_ref::Tester"
-@mainOperation "test"
 
 
 package mt_att_ref;

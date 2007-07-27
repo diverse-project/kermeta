@@ -1,12 +1,10 @@
-/* $Id: 027_weaving_in_kermeta_base.kmt,v 1.1 2007-04-24 12:45:38 dvojtise Exp $
+/* $Id: 027_weaving_in_kermeta_base.kmt,v 1.2 2007-07-27 13:28:53 ftanguy Exp $
  * Creation date: February 8, 2007
  * License:
  * Copyright:
  * Authors:
  * checks that the order of declaraion of base and aspect classes doesn't really matter if there is no conflict
  */
-@mainClass "mixed_kermeta_weaving::Main"
-@mainOperation "main"
 
 
 package root_package;
