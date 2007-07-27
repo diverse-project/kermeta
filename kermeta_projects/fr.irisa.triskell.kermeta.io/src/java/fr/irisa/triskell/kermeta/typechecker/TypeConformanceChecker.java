@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.14 2007-07-24 13:46:45 ftanguy Exp $
+/* $Id: TypeConformanceChecker.java,v 1.15 2007-07-27 14:25:14 ftanguy Exp $
 * Project : Kermeta (io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -64,6 +64,10 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 
 			Class cProvided = (Class) provided;
 			Class cRequired = (Class) required;
+			
+			if ( cProvided.getTypeDefinition() == cRequired.getTypeDefinition() )
+				return true;
+			
 			Set <TypeDefinition> providedBaseClasses = ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) cProvided.getTypeDefinition());
 			Set <TypeDefinition> requiredAspectClasses = ClassDefinitionHelper.getAllAspectClasses( (ClassDefinition) cRequired.getTypeDefinition());
 			
