@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.44 2007-07-26 13:49:59 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.45 2007-07-27 07:12:18 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -637,8 +637,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	public Object visitCallFeature(CallFeature expression) {
 		// visit target expression
-		if (expression.getTarget() != null) this.accept(expression.getTarget());
-		
+		if (expression.getTarget() != null) 
+			this.accept(expression.getTarget());
 		preVisit();
 		
 		//The enumeration if it is a enum literal call

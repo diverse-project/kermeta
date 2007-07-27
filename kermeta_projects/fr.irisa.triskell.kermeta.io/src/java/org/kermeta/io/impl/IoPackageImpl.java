@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.4 2007-07-24 13:46:46 ftanguy Exp $
+ * $Id: IoPackageImpl.java,v 1.5 2007-07-27 07:12:17 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -788,6 +788,8 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		op = addEOperation(kermetaUnitEClass, null, "warning");
 		addEParameter(op, ecorePackage.getEString(), "message", 0, 1);
 		addEParameter(op, ecorePackage.getEJavaObject(), "target", 0, 1);
+
+		addEOperation(kermetaUnitEClass, null, "finalize");
 
 		initEClass(iBuildingStateEClass, IBuildingState.class, "IBuildingState", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

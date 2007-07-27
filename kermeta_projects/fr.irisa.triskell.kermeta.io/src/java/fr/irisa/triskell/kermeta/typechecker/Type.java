@@ -1,4 +1,4 @@
-/* $Id: Type.java,v 1.5 2007-07-20 15:08:04 ftanguy Exp $
+/* $Id: Type.java,v 1.6 2007-07-27 07:12:17 ftanguy Exp $
 * Project : Kermeta io
 * File : Type.java
 * License : EPL
@@ -125,7 +125,8 @@ public abstract class Type {
 		java.util.Iterator it = props.iterator();
 		while(it.hasNext()) {
 		    CallableProperty prop = (CallableProperty)it.next();
-			if (prop.property.getName().equals(name)) return prop;
+			if (prop.property.getName().equals(name)) 
+				return prop;
 		}
 		return null;
 	}

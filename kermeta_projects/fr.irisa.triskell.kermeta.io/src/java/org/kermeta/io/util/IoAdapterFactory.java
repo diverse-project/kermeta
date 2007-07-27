@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoAdapterFactory.java,v 1.3 2007-07-24 13:46:47 ftanguy Exp $
+ * $Id: IoAdapterFactory.java,v 1.4 2007-07-27 07:12:17 ftanguy Exp $
  */
 package org.kermeta.io.util;
 
@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.io.*;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.IBuildingState;
 import org.kermeta.io.IoPackage;

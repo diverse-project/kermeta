@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.14 2007-07-24 13:46:45 ftanguy Exp $
+/* $Id: SimpleType.java,v 1.15 2007-07-27 07:12:17 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import org.kermeta.io.KermetaUnit;
+
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
@@ -32,6 +34,7 @@ import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.language.structure.impl.PrimitiveTypeImpl;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 /**
  * @author Franck Fleurey
@@ -138,8 +141,20 @@ public class SimpleType extends Type {
 		}
 		if (resolved instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
 			Class c = (Class) resolved;
-
 			ArrayList <CallableOperation> list = InheritanceSearch.callableOperations(c);
+			list.addAll( InheritanceSearch.callableOperations(c) );
+			Iterator <TypeDefinition> iterator = c.getTypeDefinition().getBaseAspects().iterator();
+			while ( iterator.hasNext() ) {
+				Class tempClass = StructureFactory.eINSTANCE.createClass();
+				tempClass.setTypeDefinition( (ClassDefinition) iterator.next() );
+				list.addAll( InheritanceSearch.callableOperations( tempClass ) );
+			}
+			iterator = c.getTypeDefinition().getAspects().iterator();
+			while ( iterator.hasNext() ) {
+				Class tempClass = StructureFactory.eINSTANCE.createClass();
+				tempClass.setTypeDefinition( (ClassDefinition) iterator.next() );
+				list.addAll( InheritanceSearch.callableOperations( tempClass ) );
+			}
 			return list;
 		} else if (resolved instanceof ModelType) {
 			ArrayList<CallableOperation> result = new ArrayList<CallableOperation>();
@@ -181,6 +196,12 @@ public class SimpleType extends Type {
 			ArrayList <CallableProperty> list = InheritanceSearch.callableProperties(c);
 			list.addAll( InheritanceSearch.callableProperties(c) );
 			Iterator <TypeDefinition> iterator = c.getTypeDefinition().getBaseAspects().iterator();
+			while ( iterator.hasNext() ) {
+				Class tempClass = StructureFactory.eINSTANCE.createClass();
+				tempClass.setTypeDefinition( (ClassDefinition) iterator.next() );
+				list.addAll( InheritanceSearch.callableProperties( tempClass ) );
+			}
+			iterator = c.getTypeDefinition().getAspects().iterator();	
 			while ( iterator.hasNext() ) {
 				Class tempClass = StructureFactory.eINSTANCE.createClass();
 				tempClass.setTypeDefinition( (ClassDefinition) iterator.next() );

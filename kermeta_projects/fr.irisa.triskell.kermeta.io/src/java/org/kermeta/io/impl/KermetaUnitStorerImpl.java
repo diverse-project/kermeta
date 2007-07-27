@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.4 2007-07-26 13:49:59 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.5 2007-07-27 07:12:17 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -153,11 +153,13 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 				kermetaUnit.setBuildingState( new JavaBuildingState() );
 			else if ( ! EMFRegistryHelper.isRegistered( kermetaUnitURI ) )
 				kermetaUnit.error("Unknown Format. It is impossible to load this file.");
-		}
-		
-    	WeakReference reference = new WeakReference( kermetaUnit );
-        return (KermetaUnit) reference.get();
-	}
+
+			WeakReference reference = new WeakReference( kermetaUnit );
+	        return (KermetaUnit) reference.get();
+
+		} else
+			return kermetaUnit;
+			}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -168,8 +170,10 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 		Iterator <KermetaUnit> iterator = getKermetaUnits().iterator();
 		while ( iterator.hasNext() ) {
 			KermetaUnit current = iterator.next();
-			if ( current.getUri().equals(uri) )
-				return current;
+			if ( current.getUri().equals(uri) ) {
+				WeakReference reference = new WeakReference( current );
+		        return (KermetaUnit) reference.get();
+			}
 		}
 		return null;
 	}

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.17 2007-07-20 15:08:06 ftanguy Exp $
+/* $Id: KMT2KMPass6.java,v 1.18 2007-07-27 07:12:17 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -37,6 +37,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
@@ -102,7 +103,13 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		while (itOp.hasNext()) 
 			context.addSymbol(new KMSymbolOperation(itOp.next()));
 		
-		for (TypeDefinition typeDefinition : context.current_class.getBaseAspects() ) {
+		for ( fr.irisa.triskell.kermeta.language.structure.Operation op : ClassDefinitionHelper.getAllOperations(context.current_class) )
+			context.addSymbol( new KMSymbolOperation(op) );
+		
+		for ( Property prop : ClassDefinitionHelper.getAllProperties(context.current_class) )
+			context.addSymbol( new KMSymbolProperty(prop) );
+		
+/*		for (TypeDefinition typeDefinition : context.current_class.getBaseAspects() ) {
 	
 			if ( typeDefinition instanceof ClassDefinition ) {
 				ClassDefinition current = (ClassDefinition) typeDefinition;
@@ -110,7 +117,7 @@ public class KMT2KMPass6 extends KMT2KMPass {
 				while ( itOp.hasNext() )
 					context.addSymbol( new KMSymbolOperation(itOp.next()) );
 			}
-		}
+		}*/
 		
 		/*
 		 * 

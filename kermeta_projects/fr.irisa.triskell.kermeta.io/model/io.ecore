@@ -75,6 +75,7 @@
       <eParameters name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="target" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     </eOperations>
+    <eOperations name="finalize"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="storer" lowerBound="1"
         eType="#//KermetaUnitStorer" eOpposite="#//KermetaUnitStorer/kermetaUnits"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

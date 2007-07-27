@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.4 2007-07-24 13:46:46 ftanguy Exp $
+ * $Id: IoFactoryImpl.java,v 1.5 2007-07-27 07:12:17 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.kermeta.io.*;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.IoPackage;

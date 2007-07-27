@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.4 2007-07-24 13:46:46 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.5 2007-07-27 07:12:17 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -1229,6 +1229,25 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		warning.setValue( message );
 		warning.setTarget( target );
 		getMessages().add( warning );
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	protected void finalize() throws Throwable {
+		System.out.println( "finalize" );
+		for ( TypeDefinition typeDefinition : KermetaUnitHelper.getTypeDefinitions( this ) ) {
+			typeDefinition.getAspects().clear();
+			typeDefinition.getBaseAspects().clear();
+			typeDefinition.getOwnedTag().clear();
+			typeDefinition.getTag().clear();
+		}
+		for ( Package p : (List<Package>) getInternalPackages() ) {
+			p.getOwnedTag().clear();
+			p.getOwnedTypeDefinition().clear();
+		}
 	}
 
 	/**
