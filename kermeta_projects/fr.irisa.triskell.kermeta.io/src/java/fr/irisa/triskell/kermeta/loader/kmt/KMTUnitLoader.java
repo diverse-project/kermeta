@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.4 2007-07-24 13:46:45 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.5 2007-07-27 13:28:27 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.kermeta.io.IBuildingState;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.AbstractKermetaUnitLoader;
@@ -29,8 +30,11 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KMLoader;
+import fr.irisa.triskell.kermeta.loader.ecore.EcoreBuildingState;
+import fr.irisa.triskell.kermeta.loader.java.JavaBuildingState;
 import fr.irisa.triskell.kermeta.loader.java.JavaKermetaUnitLoader;
 import fr.irisa.triskell.kermeta.loader.km.KMUnitLoader;
+import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
 import fr.irisa.triskell.kermeta.modelhelper.ASTHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
@@ -140,7 +144,27 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		while ( iterator.hasNext() ) {
 			KermetaUnit currentUnit = iterator.next();
 			
-			if ( currentUnit.getUri().matches(".+\\.km") ) {
+			IBuildingState currentState = currentUnit.getBuildingState();
+			
+			if ( currentState instanceof KmBuildingState ) {
+				KMUnitLoader loader = new KMUnitLoader();
+				loader.load( currentUnit.getUri() );
+			} else if ( currentState instanceof KMTBuildingState ) {
+				KMTBuildingState currentKMTState = (KMTBuildingState) currentState;
+				if ( ! currentKMTState.loading ) {
+					for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits( IOPlugin.getDefault().getFramework() ) )
+						currentUnit.importKermetaUnit( unitToImport, true );
+					loadAllImportedUnits( currentUnit );
+				}
+			} else if ( currentState instanceof EcoreBuildingState ) {
+				Ecore2KMLoader loader = new Ecore2KMLoader();
+				loader.load( currentUnit.getUri(), true );
+			} else if ( currentState instanceof JavaBuildingState ) {
+				JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader();
+				loader.load( currentUnit.getUri() );	
+			}
+			
+		/*	if ( currentUnit.getUri().matches(".+\\.km") ) {
 				KMUnitLoader loader = new KMUnitLoader();
 				loader.load( currentUnit.getUri() );
 			} else if ( currentUnit.getUri().matches(".+\\.ecore") ){
@@ -156,7 +180,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 						currentUnit.importKermetaUnit( unitToImport, true );
 					loadAllImportedUnits( currentUnit );
 				}
-			}
+			}*/
 		}
 	
 		state.loading = false;

@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.3 2007-07-24 13:46:46 ftanguy Exp $
+/*$Id: Ecore2KMLoader.java,v 1.4 2007-07-27 13:28:27 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -22,8 +22,10 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -78,7 +80,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	
 	private boolean isQuickFixEnabled = false;
 	
-	private KermetaUnit getKermetaUnit(String uri) throws IOException {
+	private KermetaUnit getKermetaUnit(String uri) {
 		KermetaUnit kermetaUnit = null;
 		
 		try {
@@ -91,13 +93,14 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 				
 				/*
 				 * 
-				 * Special case for Ecore.ecore because the creation of the resource 
+				 * Special case for Registered Ecore files because the creation of the resource 
 				 * with the URI http://www.eclipse.org/emf/2002/Ecore
 				 * seams forbidden.
 				 * 
 				 */
-				if ( uri.equals(IOPlugin.ECORE_URI) )
-					resources.put(kermetaUnit, EcorePackage.eINSTANCE.eResource() );
+				EPackage p = (EPackage) Registry.INSTANCE.get(uri);
+				if ( p != null )
+					resources.put(kermetaUnit, p.eResource());
 				else {
 					URI emfURI = URI.createURI( uri );
 					Resource resource = resourceSet.createResource( emfURI );
@@ -116,19 +119,26 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			}
 		} catch ( URIMalformedException exception ) {
 			exception.printStackTrace();
+			kermetaUnit.error( exception.getLocalizedMessage() );
+		} catch (IOException e ) {
+			kermetaUnit.error( e.getLocalizedMessage() );
 		}
 		return kermetaUnit;
 	}
 	
-	public KermetaUnit load(String uri) {
+/*	public KermetaUnit load(String uri) {
 		return load(uri, false);
 	}
-	
+	*/
 	public KermetaUnit load(String uri, boolean isQuickFixEnabled) {
 		this.isQuickFixEnabled = isQuickFixEnabled;
 		KermetaUnit kermetaUnit = null;
 		try {
 			kermetaUnit = getKermetaUnit(uri);
+
+			if ( kermetaUnit.isErrored() )
+				return kermetaUnit;
+			
 			applyPass1ToAll( kermetaUnit );
 			
 			if ( kermetaUnit.isErrored() )
@@ -160,10 +170,13 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 				applyPass6ToAll(kermetaUnit);
 		} catch (IOException e) {
 			e.printStackTrace();
+			kermetaUnit.error( e.getLocalizedMessage() );
 		} catch (KermetaIOFileNotFoundException e) {
 			e.printStackTrace();
+			kermetaUnit.error( e.getLocalizedMessage() );
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
+			kermetaUnit.error( e.getLocalizedMessage() );
 		}
 		
 		return kermetaUnit;

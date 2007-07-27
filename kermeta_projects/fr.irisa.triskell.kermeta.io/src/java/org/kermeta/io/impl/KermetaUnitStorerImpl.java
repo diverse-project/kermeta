@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.5 2007-07-27 07:12:17 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.6 2007-07-27 13:28:27 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -11,11 +11,16 @@ import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.plugin.RegistryReader;
+import org.eclipse.emf.ecore.plugin.RegistryReader.PluginClassDescriptor;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xml.type.internal.DataValue.URI.MalformedURIException;
@@ -27,6 +32,7 @@ import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KMLoader;
 import fr.irisa.triskell.kermeta.loader.ecore.EcoreBuildingState;
 import fr.irisa.triskell.kermeta.loader.java.JavaBuildingState;
@@ -153,6 +159,18 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 				kermetaUnit.setBuildingState( new JavaBuildingState() );
 			else if ( ! EMFRegistryHelper.isRegistered( kermetaUnitURI ) )
 				kermetaUnit.error("Unknown Format. It is impossible to load this file.");
+			else {
+				Object o = Registry.INSTANCE.get( kermetaUnitURI );
+				if ( o instanceof Package )
+					kermetaUnit.setBuildingState( new KmBuildingState() );
+				else if ( o instanceof EPackage.Descriptor ) {
+					EPackage p = ((EPackage.Descriptor) o).getEPackage();
+					if ( p instanceof Package )
+						kermetaUnit.setBuildingState( new KmBuildingState() );
+					else
+						kermetaUnit.setBuildingState( new EcoreBuildingState() );
+				} 
+			}
 
 			WeakReference reference = new WeakReference( kermetaUnit );
 	        return (KermetaUnit) reference.get();
@@ -229,8 +247,9 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			loader.load(uri);
 		
 		} else if ( uri.matches("http://.+") ) {
-	
+	System.out.println();
 			if ( EMFRegistryHelper.isDynamicallyRegistered(uri) ) {
+				System.out.println();
 				// TODO
 				// Looking for the factory and see if the file can be translated into kermeta.
 			}
