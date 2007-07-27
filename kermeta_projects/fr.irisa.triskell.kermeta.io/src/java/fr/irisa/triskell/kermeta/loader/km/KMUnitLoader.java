@@ -1,6 +1,6 @@
 
 
-/*$Id: KMUnitLoader.java,v 1.3 2007-07-24 13:46:47 ftanguy Exp $
+/*$Id: KMUnitLoader.java,v 1.4 2007-07-27 13:27:41 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL
@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.DiagnosticException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -73,8 +74,13 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 			
 			internalLog.info("Creating and loading the resource for " + kermetaUnit.getUri());
 			
-			Resource resource = resourceSet.getResource(u, true);
-							
+			Resource resource = null;
+			try {
+				resource = resourceSet.getResource(u, true);
+			} catch (Exception e) {
+				kermetaUnit.error( e.getLocalizedMessage() );
+				return kermetaUnit;
+			}
 			/*
 			 * 
 			 * Keeping compatibility with old km files
