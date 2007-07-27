@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.11 2007-07-27 13:27:10 ftanguy Exp $
+/* $Id: Ecore2KMPass4.java,v 1.12 2007-07-27 14:57:50 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -205,7 +205,9 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 		// User indeed naturally doesn't set it if he doesn't need a return type
 		// FIXME : WE HAVE TO FIX A STRICT PHILOSOPHY ABOUT EXPLICIT OR IMPLICIT RETURN TYPE!!!
 		currentOperation = datas.getOperation(node);
-
+		if ( currentOperation == null )
+			return null;
+		
 		if (isTypeSettingMode == true)
 		{
 			// Deprecated since EMF2.3
@@ -224,6 +226,16 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 				if(eAnnot != null) {
 					buildTypeVariableBindings((fr.irisa.triskell.kermeta.language.structure.Class) t, eAnnot.getDetails(), getVisibleTypeVariables(node));
 				}
+			} else {
+				
+				Type t = StructureFactory.eINSTANCE.createVoidType();
+				currentOperation.setType(t);
+				
+				EAnnotation eAnnot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEVARIABLE_BINDINGS);
+				if(eAnnot != null) {
+					buildTypeVariableBindings((fr.irisa.triskell.kermeta.language.structure.Class) t, eAnnot.getDetails(), getVisibleTypeVariables(node));
+				}
+				
 			}
 
 			// Set the parameters
@@ -344,11 +356,6 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EReference)
 	 */
 	public Object visit(EReference node) { return visitEStructuralFeature(node); }
-	
-	@Override
-	public Object visit(EAnnotation node) {
-		return null;
-	}
 
 	/**
 	 * @param node
@@ -358,7 +365,7 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 		
 		currentProperty = (Property) datas.getProperty(EcoreHelper.getQualifiedName(node));
 		if ( currentProperty == null )
-			System.out.println();
+			return null;
 		
 		// Set the type of this property
 		Type t = createTypeForEClassifier(node.getEType(), node);
