@@ -49,14 +49,14 @@
 
 package com.touchgraph.graphlayout;
 
-import  java.awt.*;
-import  java.util.EventListener;
+import java.awt.Graphics;
+import java.util.EventListener;
 
 /** TGPaintListener.  Implemented by any plugin that needs to do its own
   * painting.
   *   
   * @author   Alexander Shapiro                                        
-  * @version  1.21  $Id: TGPaintListener.java,v 1.1 2005-10-24 20:30:00 dvojtise Exp $
+  * @version  1.21  $Id: TGPaintListener.java,v 1.2 2007-07-30 14:33:16 ftanguy Exp $
   */
 public interface TGPaintListener extends EventListener{
 

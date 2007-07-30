@@ -49,11 +49,19 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
+import java.awt.Point;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
+import java.awt.event.MouseEvent;
 
-import  java.awt.event.*;
-import  java.awt.Point;
-import  javax.swing.*;
+import javax.swing.JScrollBar;
+
+import com.touchgraph.graphlayout.GraphListener;
+import com.touchgraph.graphlayout.Node;
+import com.touchgraph.graphlayout.TGAbstractLens;
+import com.touchgraph.graphlayout.TGLensSet;
+import com.touchgraph.graphlayout.TGPanel;
+import com.touchgraph.graphlayout.TGPoint2D;
 
 /** HVScroll:  Allows for scrolling horizontaly+vertically.  This can be
   * done in all sorts of ways, for instance by using the scrollbars, or by
@@ -66,7 +74,7 @@ import  javax.swing.*;
   * the user interacts with the drawn coordinates.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: HVScroll.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
+  * @version  1.21  $Id: HVScroll.java,v 1.3 2007-07-30 14:33:15 ftanguy Exp $
   */
 public class HVScroll implements GraphListener {
 

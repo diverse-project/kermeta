@@ -49,13 +49,32 @@
 
 package com.touchgraph.graphlayout;
 
-import  com.touchgraph.graphlayout.interaction.*;
-import  com.touchgraph.graphlayout.graphelements.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Collection;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Vector;
 
-import  java.awt.*;
-import  java.awt.event.*;
-import  javax.swing.*;
-import  java.util.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import com.touchgraph.graphlayout.graphelements.GESUtils;
+import com.touchgraph.graphlayout.graphelements.GraphEltSet;
+import com.touchgraph.graphlayout.graphelements.ImmutableGraphEltSet;
+import com.touchgraph.graphlayout.graphelements.TGForEachEdge;
+import com.touchgraph.graphlayout.graphelements.TGForEachNode;
+import com.touchgraph.graphlayout.graphelements.VisibleLocality;
+import com.touchgraph.graphlayout.interaction.GLEditUI;
+import com.touchgraph.graphlayout.interaction.TGAbstractClickUI;
 
 /** TGPanel contains code for drawing the graph, and storing which nodes
   * are selected, and which ones the mouse is over.
@@ -71,7 +90,7 @@ import  java.util.*;
   *
   * @author   Alexander Shapiro
   * @author   Murray Altheim  (2001-11-06; 2002-01-14 cleanup)
-  * @version  1.21  $Id: TGPanel.java,v 1.7 2007-06-18 09:21:15 dvojtise Exp $
+  * @version  1.21  $Id: TGPanel.java,v 1.8 2007-07-30 14:33:16 ftanguy Exp $
   */
 public class TGPanel extends JPanel {
 

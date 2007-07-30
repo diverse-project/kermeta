@@ -49,15 +49,17 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
-import  java.awt.*;
-import  java.awt.event.*;
+import com.touchgraph.graphlayout.TGPanel;
 
 /** TGAbstractMousePausedUI allows one to handle MousePaused events.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: TGAbstractMousePausedUI.java,v 1.2 2006-01-03 22:42:43 dvojtise Exp $
+  * @version  1.21  $Id: TGAbstractMousePausedUI.java,v 1.3 2007-07-30 14:33:15 ftanguy Exp $
   */
 public abstract class TGAbstractMousePausedUI extends TGUserInterface {
 

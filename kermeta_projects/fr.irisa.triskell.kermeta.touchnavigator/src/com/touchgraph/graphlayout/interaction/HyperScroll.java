@@ -49,10 +49,15 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
- 
-import  java.awt.event.*;
-import  javax.swing.*;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
+
+import javax.swing.JScrollBar;
+
+import com.touchgraph.graphlayout.GraphListener;
+import com.touchgraph.graphlayout.TGAbstractLens;
+import com.touchgraph.graphlayout.TGPanel;
+import com.touchgraph.graphlayout.TGPoint2D;
 
 /** HyperScroll.  Responsible for producing that neat hyperbolic effect.
   * (Which isn't really hyperbolic, but just non-linear).

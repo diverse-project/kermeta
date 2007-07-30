@@ -1,4 +1,4 @@
-/* $Id: EMFModelGLPanel.java,v 1.3 2007-04-27 17:51:10 dvojtise Exp $
+/* $Id: EMFModelGLPanel.java,v 1.4 2007-07-30 14:33:15 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -12,27 +12,14 @@
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EventObject;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
 
-import org.eclipse.emf.common.command.BasicCommandStack;
-import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.common.command.CommandStack;
-import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
-import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.swt.graphics.RGB;
-import org.eclipse.ui.IEditorPart;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import com.touchgraph.graphlayout.GLPanel;
 import com.touchgraph.graphlayout.Node;
@@ -40,22 +27,9 @@ import com.touchgraph.graphlayout.TGException;
 import com.touchgraph.graphlayout.interaction.GLNavigateUI;
 import com.touchgraph.graphlayout.interaction.TGUIManager;
 
-import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
-import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-//import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
-import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
-import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.interaction.KermetaGLNavigateUI;
 import fr.irisa.triskell.kermeta.touchnavigator.textPresentation.KTNHintHTMLPrettyPrinter;
-import fr.irisa.triskell.kermeta.touchnavigator.views.TouchClassView;
 import fr.irisa.triskell.kermeta.touchnavigator.views.TouchEMFModelView;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.utils.BooleanLock;
 
 /** KermetaGLPanel contains code for adding scrollbars and interfaces to the TGPanel

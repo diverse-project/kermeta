@@ -1,4 +1,4 @@
-/* $Id: ClassNode.java,v 1.5 2006-04-05 21:36:35 dvojtise Exp $
+/* $Id: ClassNode.java,v 1.6 2007-07-30 14:33:15 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : ClassNode.java
  * License : EPL
@@ -16,8 +16,6 @@ import java.awt.Graphics;
 
 import com.touchgraph.graphlayout.Node;
 import com.touchgraph.graphlayout.TGPanel;
-
-import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 
 public class ClassNode extends Node {
 

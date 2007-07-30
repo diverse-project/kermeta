@@ -1,8 +1,8 @@
 package fr.irisa.triskell.kermeta.touchnavigator;
 
 import org.apache.log4j.Logger;
-import org.eclipse.ui.plugin.*;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;

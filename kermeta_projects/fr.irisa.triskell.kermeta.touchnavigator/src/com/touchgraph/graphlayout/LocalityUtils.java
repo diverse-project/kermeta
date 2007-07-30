@@ -49,15 +49,20 @@
 
 package com.touchgraph.graphlayout;
 
-import  com.touchgraph.graphlayout.graphelements.*;
+import java.util.Collection;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Vector;
 
-import  java.util.*;
+import com.touchgraph.graphlayout.graphelements.GESUtils;
+import com.touchgraph.graphlayout.graphelements.Locality;
+import com.touchgraph.graphlayout.graphelements.TGForEachNode;
  
 /** LocalityUtils:  Utilities for switching locality.  Animation effects
   * require a reference to TGPanel.
   *     
   * @author   Alexander Shapiro                                        
-  * @version  1.21  $Id: LocalityUtils.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
+  * @version  1.21  $Id: LocalityUtils.java,v 1.3 2007-07-30 14:33:16 ftanguy Exp $
   */
 public class LocalityUtils {
 

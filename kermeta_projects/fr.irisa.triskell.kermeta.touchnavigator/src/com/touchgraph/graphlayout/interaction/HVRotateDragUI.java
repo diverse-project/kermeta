@@ -49,10 +49,14 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 
-import  java.awt.*;
-import  java.awt.event.*;
+import com.touchgraph.graphlayout.Node;
+import com.touchgraph.graphlayout.TGPaintListener;
+import com.touchgraph.graphlayout.TGPanel;
+import com.touchgraph.graphlayout.TGPoint2D;
 
 /** HVRotateDragUI.  A combination of HVScrolling + rotating.
   * The graph is rotated, but the mouse is always kept on the same point

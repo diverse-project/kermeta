@@ -49,7 +49,9 @@
 
 package com.touchgraph.graphlayout;
 
-import  com.touchgraph.graphlayout.graphelements.*;
+import com.touchgraph.graphlayout.graphelements.TGForEachEdge;
+import com.touchgraph.graphlayout.graphelements.TGForEachNode;
+import com.touchgraph.graphlayout.graphelements.TGForEachNodePair;
 
 /**  TGLayout is the thread responsible for graph layout.  It updates
   *  the real coordinates of the nodes in the graphEltSet object.
@@ -70,7 +72,7 @@ import  com.touchgraph.graphlayout.graphelements.*;
   * </b></p>
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: TGLayout.java,v 1.3 2006-01-27 19:41:22 dvojtise Exp $
+  * @version  1.21  $Id: TGLayout.java,v 1.4 2007-07-30 14:33:16 ftanguy Exp $
   */
 public class TGLayout implements Runnable {
 

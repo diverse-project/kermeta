@@ -49,18 +49,28 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
- 
-import  java.awt.event.*;
-import  javax.swing.*;
-import  javax.swing.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+
+import com.touchgraph.graphlayout.Edge;
+import com.touchgraph.graphlayout.GLPanel;
+import com.touchgraph.graphlayout.Node;
+import com.touchgraph.graphlayout.TGException;
+import com.touchgraph.graphlayout.TGPanel;
 
 /** GLNavigateUI. User interface for moving around the graph, as opposed
   * to editing.
   *   
   * @author   Alexander Shapiro                                        
   * @author   Murray Altheim (abstracted KermetaGLPanel to TGScrollPane interface)
-  * @version  1.21  $Id: GLNavigateUI.java,v 1.3 2005-12-05 19:14:30 dvojtise Exp $
+  * @version  1.21  $Id: GLNavigateUI.java,v 1.4 2007-07-30 14:33:15 ftanguy Exp $
   */
 public class GLNavigateUI extends TGUserInterface {
     

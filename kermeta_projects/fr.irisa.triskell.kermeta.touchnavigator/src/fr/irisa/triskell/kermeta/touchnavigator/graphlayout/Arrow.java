@@ -1,4 +1,4 @@
-/* $Id: Arrow.java,v 1.3 2006-01-27 19:41:22 dvojtise Exp $
+/* $Id: Arrow.java,v 1.4 2007-07-30 14:33:15 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : Arrow.java
  * License : EPL
@@ -12,7 +12,9 @@ package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 
 
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Polygon;
 
 /**************************************************************************
 * File: Arrows.java               Class: Arrows

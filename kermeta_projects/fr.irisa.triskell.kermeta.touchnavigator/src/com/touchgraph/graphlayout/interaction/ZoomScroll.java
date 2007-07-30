@@ -49,15 +49,20 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 
-import  java.awt.event.*;
-import  javax.swing.*;
+import javax.swing.JScrollBar;
+
+import com.touchgraph.graphlayout.GraphListener;
+import com.touchgraph.graphlayout.TGAbstractLens;
+import com.touchgraph.graphlayout.TGPanel;
+import com.touchgraph.graphlayout.TGPoint2D;
 
 /** ZoomScroll:  Contains code for enlarging the graph by zooming in.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: ZoomScroll.java,v 1.1 2005-10-24 20:29:56 dvojtise Exp $
+  * @version  1.21  $Id: ZoomScroll.java,v 1.2 2007-07-30 14:33:15 ftanguy Exp $
   */
 public class ZoomScroll implements GraphListener {
 

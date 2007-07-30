@@ -1,4 +1,4 @@
-/* $Id: EMFModelGraphBuilder.java,v 1.3 2007-06-15 16:22:34 dvojtise Exp $
+/* $Id: EMFModelGraphBuilder.java,v 1.4 2007-07-30 14:33:15 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -11,10 +11,7 @@
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 
 import java.io.IOException;
-import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
-import java.util.TreeSet;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
@@ -23,8 +20,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -32,15 +27,9 @@ import com.touchgraph.graphlayout.Edge;
 import com.touchgraph.graphlayout.Node;
 import com.touchgraph.graphlayout.TGException;
 import com.touchgraph.graphlayout.TGPanel;
-import com.touchgraph.graphlayout.graphelements.VisibleLocality;
 
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 public class EMFModelGraphBuilder extends KermetaOptimizedVisitor{

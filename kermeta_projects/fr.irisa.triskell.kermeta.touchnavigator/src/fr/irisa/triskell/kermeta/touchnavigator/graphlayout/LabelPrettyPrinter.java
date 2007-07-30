@@ -1,4 +1,4 @@
-/* $Id: LabelPrettyPrinter.java,v 1.3 2006-10-27 08:50:38 dvojtise Exp $
+/* $Id: LabelPrettyPrinter.java,v 1.4 2007-07-30 14:33:15 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : LabelPrettyPrinter.java
  * License : EPL
@@ -10,7 +10,7 @@
  */
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 
-import fr.irisa.triskell.kermeta.language.behavior.*;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;

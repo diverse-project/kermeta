@@ -49,10 +49,16 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
+import java.awt.event.MouseEvent;
 
-import  java.awt.event.*;
-import  javax.swing.*;
+import javax.swing.JScrollBar;
+
+import com.touchgraph.graphlayout.GraphListener;
+import com.touchgraph.graphlayout.TGAbstractLens;
+import com.touchgraph.graphlayout.TGPanel;
+import com.touchgraph.graphlayout.TGPoint2D;
 
 /** RotateScroll.  Allows one to rotate the graph by clicking+dragging
   * The rotate lens won't work properly unless it's the top lens, because it
@@ -60,7 +66,7 @@ import  javax.swing.*;
   * lenses above the current one need to be added to TGLensSet to solve this problem.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: RotateScroll.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
+  * @version  1.21  $Id: RotateScroll.java,v 1.3 2007-07-30 14:33:15 ftanguy Exp $
   */
 public class RotateScroll implements GraphListener {
 

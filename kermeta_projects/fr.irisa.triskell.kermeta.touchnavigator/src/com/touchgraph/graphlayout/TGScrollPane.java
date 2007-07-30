@@ -49,9 +49,13 @@
 
 package com.touchgraph.graphlayout;
 
-import  com.touchgraph.graphlayout.interaction.*;
+import java.awt.Point;
 
-import  java.awt.Point;
+import com.touchgraph.graphlayout.interaction.HVScroll;
+import com.touchgraph.graphlayout.interaction.HyperScroll;
+import com.touchgraph.graphlayout.interaction.LocalityScroll;
+import com.touchgraph.graphlayout.interaction.RotateScroll;
+import com.touchgraph.graphlayout.interaction.ZoomScroll;
 
 /** TGScrollPane is a Java interface for a user interface using scrollbars
   * to set TouchGraph navigation and editing properties such as zoom, rotate
@@ -60,7 +64,7 @@ import  java.awt.Point;
   *
   * @author   Murray Altheim  
   * @author   Alex Shapiro
-  * @version  1.21  $Id: TGScrollPane.java,v 1.1 2005-10-24 20:29:59 dvojtise Exp $
+  * @version  1.21  $Id: TGScrollPane.java,v 1.2 2007-07-30 14:33:16 ftanguy Exp $
   */
 public interface TGScrollPane {
 

@@ -1,4 +1,4 @@
-/* $Id: KermetaClassGraphBuilder.java,v 1.11 2006-10-27 08:50:38 dvojtise Exp $
+/* $Id: KermetaClassGraphBuilder.java,v 1.12 2007-07-30 14:33:15 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -17,14 +17,13 @@ import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.io.KermetaUnit;
 
 import com.touchgraph.graphlayout.Edge;
 import com.touchgraph.graphlayout.Node;
 import com.touchgraph.graphlayout.TGException;
 import com.touchgraph.graphlayout.TGPanel;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -70,7 +69,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 		tgPanel.setSelect(dispendableNode);
 		tgPanel.setLocale(dispendableNode,1);
 		*/
-		acceptCollection(kunit.packages.values());
+		acceptCollection(kunit.getPackages());
 
 		tgPanel.setSelect(tgPanel.getGES().getFirstNode());
 

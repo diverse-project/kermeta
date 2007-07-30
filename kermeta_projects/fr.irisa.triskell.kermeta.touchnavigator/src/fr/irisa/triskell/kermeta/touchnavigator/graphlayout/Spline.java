@@ -1,4 +1,4 @@
-/* $Id: Spline.java,v 1.1 2005-12-05 19:14:30 dvojtise Exp $
+/* $Id: Spline.java,v 1.2 2007-07-30 14:33:15 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : Spline.java
  * License : EPL
@@ -19,7 +19,9 @@ package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 //This class implements interpolation using relaxed cubic splines
 //The user can click on six points and move them around and the
 //spline will be redrawn in real time
-import java.awt.*;
+import java.awt.Button;
+import java.awt.Graphics;
+import java.awt.Point;
 public class Spline  {
 	Point[] points;	//points to be interpolated
 	Point[] control;	//control points

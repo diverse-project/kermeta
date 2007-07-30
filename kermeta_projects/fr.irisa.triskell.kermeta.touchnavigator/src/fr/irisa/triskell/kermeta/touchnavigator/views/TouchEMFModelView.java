@@ -1,4 +1,4 @@
-/* $Id: TouchEMFModelView.java,v 1.2 2007-04-27 17:51:09 dvojtise Exp $
+/* $Id: TouchEMFModelView.java,v 1.3 2007-07-30 14:33:16 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TouchClassView.java
  * License : GPL
@@ -18,8 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.common.command.BasicCommandStack;
-import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -34,23 +32,16 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.IStructuredContentProvider;
-import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
-//import fr.irisa.triskell.kermeta.touchnavigator.actions.ConfigureAction;
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.EMFModelGLPanel;
 import fr.irisa.triskell.utils.BooleanLock;

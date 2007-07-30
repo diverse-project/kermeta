@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.16 2007-01-23 16:35:11 dvojtise Exp $
+/* $Id: KermetaGLPanel.java,v 1.17 2007-07-30 14:33:15 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -18,6 +18,8 @@ import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.swt.graphics.RGB;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import com.touchgraph.graphlayout.GLPanel;
 import com.touchgraph.graphlayout.Node;
@@ -26,13 +28,10 @@ import com.touchgraph.graphlayout.interaction.GLNavigateUI;
 import com.touchgraph.graphlayout.interaction.TGUIManager;
 
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
@@ -269,7 +268,7 @@ public class KermetaGLPanel extends GLPanel
 			try {
 				KermetaUnit k = currentEditor.getMcunit();
 				int nbtry = 0;
-				while(nbtry <15 && !(/*k.isConstraint_checked() &&*/ k.isType_checked()) /*&& !k.isCycle_constraint_checked()*/){
+				while(nbtry <15 && !(/*k.isConstraint_checked() &&*/ k.isTypeChecked()) /*&& !k.isCycle_constraint_checked()*/){
 					Thread.sleep(10);
 					nbtry++;
 				}
@@ -392,17 +391,17 @@ public class KermetaGLPanel extends GLPanel
 		ClassDefinition result = null;
 		
 		
-		Iterator it = kunit.typeDefs.entrySet().iterator();
+		Iterator it = KermetaUnitHelper.getTypeDefinitions(kunit).iterator();
 		while(it.hasNext() && result == null){
-			Entry entry = (Entry)it.next();
-			if(entry.getValue() instanceof ClassDefinition)
+			TypeDefinition entry = (TypeDefinition)it.next();
+			if(entry instanceof ClassDefinition)
 			{
-				result = (ClassDefinition)entry.getValue();
+				result = (ClassDefinition)entry;
 			}
 		}
         //result = findAClassInUnitPackage(kunit.rootPackage);
 		//result = findAClassInResource(kunit.rootPackage.eResource());
-        if (result == null) result = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();
+        //if (result == null) result = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();
 		return result;
 	}
 	
@@ -416,7 +415,7 @@ public class KermetaGLPanel extends GLPanel
         		result = (ClassDefinition)obj;
         	}
         }
-        if (result == null) result = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();		
+        //if (result == null) result = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();		
         return result;
 	}
 	
