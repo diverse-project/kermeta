@@ -1,10 +1,10 @@
-/*$Id: OpenKmInKmdiAction.java,v 1.1 2007-07-26 16:07:01 cfaucher Exp $
-* Project : fr.irisa.triskell.kermeta
-* File : 	Ecore2KmAction.java
+/*$Id: OpenKmInKmdiAction.java,v 1.2 2007-07-30 13:54:51 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.graphicaleditor
+* File : 	OpenKmInKmdiAction.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 11 janv. 07
+* Creation date : 26 jul. 07
 * Authors : cfaucher
 */
 
@@ -27,10 +27,8 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
-import org.topcased.modeler.editor.Modeler;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.graphicaleditor.editor.KmEditor;
 import fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams;;
 
 public class OpenKmInKmdiAction implements IObjectActionDelegate {
