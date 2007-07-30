@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.8 2007-02-09 09:02:22 dvojtise Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.9 2007-07-30 15:08:13 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
  * License    : GPL
@@ -36,7 +36,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
@@ -48,11 +49,11 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.km.KMUnit;
+import org.kermeta.io.KermetaUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
+import fr.irisa.triskell.kermeta.ast.helper.KMTHelper;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 
 /**
  * This pretty printer visits a Kermeta model and prints in a basic layout the documentation
@@ -123,7 +124,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	 *  of the object, false in the "html" representation case */
 	protected boolean _as_signature;
 	
-	public KM2HTMLPrettyPrinter(String inputfile)
+	public KM2HTMLPrettyPrinter(String inputfile) throws KermetaIOFileNotFoundException, URIMalformedException
 	{
 		// init
 		_contents = new Hashtable<String, StringBuffer>();
@@ -131,8 +132,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		inputFile = inputfile;
 		// Load the KermetaUnit for the given file (only needed to get the rootPackage :} of the km(t) file and
 		// the list of its nested packages) 
-		kmunit = (KMUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(inputFile);
-		kmunit.load();
+		kmunit = IOPlugin.getDefault().loadKermetaUnit(inputFile);
 	}
 	
 	/** Pretty prints the file given as input in KM2HTMLPrettyPrinter constructor and
@@ -261,7 +261,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	/** Prints the content of all the packages contained in the Kermeta source */
 	public void ppNestedPackages()
 	{
-		Iterator<Package> it = kmunit.getAllPackages().iterator();//node.getNestedPackage().iterator();
+		Iterator<Package> it = kmunit.getPackages().iterator();//node.getNestedPackage().iterator();
 		// For each package
 		while (it.hasNext())
 		{

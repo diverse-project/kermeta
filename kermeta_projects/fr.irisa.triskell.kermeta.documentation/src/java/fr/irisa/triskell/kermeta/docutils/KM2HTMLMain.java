@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLMain.java,v 1.4 2006-08-03 15:42:14 zdrey Exp $
+/* $Id: KM2HTMLMain.java,v 1.5 2007-07-30 15:08:13 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLMain.java
  * License    : EPL
@@ -11,13 +11,16 @@
  */
 package fr.irisa.triskell.kermeta.docutils;
 
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
+
 /**
  * This class generated the HTML documentation for kermeta API
  *
  */
 public class KM2HTMLMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws KermetaIOFileNotFoundException, URIMalformedException {
 /*		System.setProperty("javax.xml.parsers.DocumentBuilderFactory", "org.apache.xerces.jaxp.DocumentBuilderFactoryImpl");
 		System.setProperty("javax.xml.parsers.SAXParserFactory", "org.apache.xerces.jaxp.SAXParserFactoryImpl");*/
 
