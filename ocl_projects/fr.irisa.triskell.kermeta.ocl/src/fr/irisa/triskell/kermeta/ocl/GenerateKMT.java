@@ -14,12 +14,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.ocl.ParserException;
 
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.ocl.console.DevOCLConsole;
 import fr.irisa.triskell.kermeta.ocl.kmtactions.GenerateOCL;
 public class GenerateKMT {
-
-
+	
 	private static String frameworkkm = "/opt/eclipse/plugins/fr.irisa.triskell.kermeta_0.4.1/lib/framework.km";
 	private static String ecore_ecore =  "/home/mskipper/runtime-EclipseApplication/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/Ecore.ecore";
 	private static String oclcst_ecore =  "/home/mskipper/runtime-EclipseApplication/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/OCLCST.ecore";
@@ -44,16 +42,11 @@ public class GenerateKMT {
 				return;
 			}
 			String URIxmiOutputFileName = "file:///" + xmiOutputFileName;
-			
-			
-			registerPackages(EcorePackage.eINSTANCE);
-			URIConverter.URI_MAP.put(URI.createURI("http://www.eclipse.org/emf/2002/Ecore"), URI.createURI(ecore_ecore));
-			
+
 			Resource res = rs.getResource(URI.createFileURI(oclcst_ecore), true);
 			EPackage ePack = (EPackage) res.getContents().get(0);
 			registerPackages(ePack); 
 			
-			StdLibKermetaUnitHelper.STD_LIB_URI= frameworkkm;
 			GenerateOCL.run(URIxmiOutputFileName,ecoreFileName,  outputKMTFileName, new DevOCLConsole(),kmtprinter );
 	}
 	/**

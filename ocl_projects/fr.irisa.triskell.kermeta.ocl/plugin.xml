@@ -10,7 +10,7 @@
             nameFilter="*.ocl"
             id="fr.irisa.triskell.ocl.contribution">
          <menu
-               label="KerMeta"
+               label="Kermeta"
                path="additions"
                id="org.eclipse.ui.articles.action.contribution.navigator.subMenu">
             <separator name="additions"/>

@@ -3,21 +3,36 @@ package fr.irisa.triskell.kermeta.ocl.kmtactions;
 
 import java.util.ArrayList;
 
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
+
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
-import fr.irisa.triskell.kermeta.ocl.console.OCLConsole;
+
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 public class GenerateOCL {
 
 	public static void run(String in, String inmeta, String out, KermetaIOStream console, String KermetaTransfoPath) {
 		System.out.println("run OCL2KMT Transformation");
-		KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(KermetaTransfoPath);
-		unit.load();
-		unit.typeCheckAllUnits();
+		
+		KermetaUnit unit = null;
+		try {
+			unit = IOPlugin.getDefault().loadKermetaUnit(KermetaTransfoPath);
+		} catch (KermetaIOFileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URIMalformedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		KermetaTypeChecker typechecker = new KermetaTypeChecker(unit);
+		typechecker.checkUnit();
+		
 		KermetaInterpreter inter = new KermetaInterpreter(unit);
 		inter.setKStream(console);
 		// This is the operation to call

@@ -25,3 +25,5 @@ Export-Package: fr.irisa.triskell.kermeta.ocl,
  fr.irisa.triskell.kermeta.ocl.kmtactions,
  fr.irisa.triskell.kermeta.ocl.ui,
  fr.irisa.triskell.kermeta.ocl.ui.popup.actions
+Eclipse-LazyStart: true
+Bundle-Activator: fr.irisa.triskell.kermeta.ocl.ui.Activator
