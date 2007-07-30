@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.15 2007-07-27 14:25:14 ftanguy Exp $
+/* $Id: TypeConformanceChecker.java,v 1.16 2007-07-30 14:47:38 ftanguy Exp $
 * Project : Kermeta (io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -70,6 +70,7 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 			
 			Set <TypeDefinition> providedBaseClasses = ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) cProvided.getTypeDefinition());
 			Set <TypeDefinition> requiredAspectClasses = ClassDefinitionHelper.getAllAspectClasses( (ClassDefinition) cRequired.getTypeDefinition());
+			Set<TypeDefinition> requiredBaseClasses = ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) cRequired.getTypeDefinition());
 			
 			for ( TypeDefinition aspectClass : requiredAspectClasses ) {
 				for ( TypeDefinition baseClass : providedBaseClasses ) {
@@ -82,6 +83,27 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 				}
 				
 			}
+			
+			for ( TypeDefinition baseClass : requiredBaseClasses ) {
+				for ( TypeDefinition baseClass2 : providedBaseClasses ) {
+					Class p = StructureFactory.eINSTANCE.createClass();
+					Class r = StructureFactory.eINSTANCE.createClass();
+					p.setTypeDefinition( (ClassDefinition) baseClass);
+					r.setTypeDefinition( (ClassDefinition) baseClass2 );
+					if ( TypeConformanceChecker.conforms(p, r) )
+							return true;
+					
+				/*	Iterator it = ((ClassDefinition) cRequired.getTypeDefinition()).getSuperType().iterator();
+					while (it.hasNext()) {
+						fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
+					    if (TypeEqualityChecker.equals(c, provided)) 
+					    	return true;
+					}*/
+					
+				}
+							
+			}
+			
 		}
 		
 		/*
