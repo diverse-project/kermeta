@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.5 2007-07-27 13:28:27 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.6 2007-07-30 14:49:37 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -43,7 +43,7 @@ import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionSearcher;
 
 public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 
-	private Hashtable<KermetaUnit, CompUnit> ast = new Hashtable<KermetaUnit, CompUnit> ();
+	static private Hashtable<KermetaUnit, CompUnit> ast = new Hashtable<KermetaUnit, CompUnit> ();
 	
 	private String content = null;
 
@@ -118,7 +118,9 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			loadAllAnnotations(kermetaUnit);
 				
 		} catch ( URIMalformedException exception) {
-			
+		} catch (RecognitionException e) {
+		} catch (TokenStreamException e) {
+		} catch (IOException e) {
 		}
 		return kermetaUnit;
 	}
@@ -225,7 +227,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	//////////////////
 	//		2		//
 	//////////////////
-	private void loadAllTypeDefinitions(KermetaUnit kermetaUnit) {
+	private void loadAllTypeDefinitions(KermetaUnit kermetaUnit) throws RecognitionException, TokenStreamException, IOException {
 		KMTBuildingState state = (KMTBuildingState) kermetaUnit.getBuildingState();
 
 		//		System.out.println("loadAllTypeDefinitions " + uri);
@@ -250,17 +252,14 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		state.loading = false;
 	}
 	
-	private void loadTypeDefinitions(KermetaUnit kermetaUnit) {
+	private void loadTypeDefinitions(KermetaUnit kermetaUnit) throws RecognitionException, TokenStreamException, IOException {
 		
 		if ( kermetaUnit.isErrored() )
 			return;
 		
 		KMT2KMPass pass = new KMT2KMPass2(kermetaUnit, getLoadingContext(kermetaUnit)); 
 		CompUnit compUnit = ast.get(kermetaUnit);
-		/*if ( compUnit == null ) {
-			compUnit = ASTHelper.parse( kermetaUnit.getUri() );
-			ast.put(kermetaUnit, compUnit);
-		}*/
+		
 		compUnit.accept(pass);
 	}
 	
@@ -383,7 +382,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	//////////////////
 	//		5		//
 	//////////////////
-	private void replaceObjectTypeVariablesForAll(KermetaUnit kermetaUnit)  {
+	private void replaceObjectTypeVariablesForAll(KermetaUnit kermetaUnit) throws RecognitionException, TokenStreamException, IOException  {
 		KMTBuildingState state = (KMTBuildingState) kermetaUnit.getBuildingState();
 			
 		if ( state.replacingObjecTypeVariablesDone ) return;
@@ -407,18 +406,13 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		
 	}
 	
-	public void replaceObjectTypeVariables(KermetaUnit kermetaUnit) {
+	public void replaceObjectTypeVariables(KermetaUnit kermetaUnit) throws RecognitionException, TokenStreamException, IOException {
 		
 		if ( kermetaUnit.isErrored() )
 			return;
 		
 		CompUnit compUnit = ast.get(kermetaUnit);
-		if ( compUnit == null )
-			System.out.println();
-		/*if ( compUnit == null ) {
-			compUnit = ASTHelper.parse( kermetaUnit.getUri() );
-			ast.put(kermetaUnit, compUnit);
-		}*/
+		
 		KMT2KMPass pass = new KMT2KMPass2_1(kermetaUnit, getLoadingContext(kermetaUnit));
 		compUnit.accept(pass);
 	}
@@ -426,7 +420,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	//////////////////
 	//		6		//
 	//////////////////
-	private void loadAllStructuralFeatures(KermetaUnit kermetaUnit) {
+	private void loadAllStructuralFeatures(KermetaUnit kermetaUnit) throws RecognitionException, TokenStreamException, IOException {
 		KMTBuildingState state = (KMTBuildingState) kermetaUnit.getBuildingState();
 		if ( state.doneLoadStructuralFeatures )
 			return;
@@ -453,17 +447,13 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		
 	}
 	
-	public void loadStructuralFeatures(KermetaUnit kermetaUnit) {
+	public void loadStructuralFeatures(KermetaUnit kermetaUnit) throws RecognitionException, TokenStreamException, IOException {
 		
 		if ( kermetaUnit.isErrored() )
 			return;
 		
 		CompUnit compUnit = ast.get(kermetaUnit);
-		/*if ( compUnit == null ) {
-			compUnit = ASTHelper.parse( kermetaUnit.getUri() );
-			ast.put(kermetaUnit, compUnit);
-		}*/
-	
+		
 		KMT2KMPass pass = new KMT2KMPass3(kermetaUnit, getLoadingContext(kermetaUnit)); 
 		compUnit.accept(pass);
 	}
@@ -471,7 +461,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	//////////////////
 	//		7		//
 	//////////////////
-	private void loadAllOppositeProperties(KermetaUnit kermetaUnit) {
+	private void loadAllOppositeProperties(KermetaUnit kermetaUnit) throws RecognitionException, TokenStreamException, IOException {
 		KMTBuildingState state = (KMTBuildingState) kermetaUnit.getBuildingState();
 		if ( state.doneLoadOppositeProperties )
 			return;
@@ -496,16 +486,13 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		state.loading = false;
 	}
 	
-	public void loadOppositeProperties(KermetaUnit kermetaUnit) {
+	public void loadOppositeProperties(KermetaUnit kermetaUnit) throws RecognitionException, TokenStreamException, IOException {
 		
 		if ( kermetaUnit.isErrored() )
 			return;
 		
 		CompUnit compUnit = ast.get(kermetaUnit);
-		/*if ( compUnit == null ) {
-			compUnit = ASTHelper.parse( kermetaUnit.getUri() );
-			ast.put(kermetaUnit, compUnit);
-		}*/
+		
 		System.out.println("Pass 4 for " + kermetaUnit.getUri());
 		KMT2KMPass pass = new KMT2KMPass4(kermetaUnit, getLoadingContext(kermetaUnit)); 
 		compUnit.accept(pass); 
@@ -518,7 +505,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	//////////////////
 	//		8		//
 	//////////////////
-	private void loadAllBodies(KermetaUnit kermetaUnit) {
+	private void loadAllBodies(KermetaUnit kermetaUnit) throws RecognitionException, TokenStreamException, IOException {
 		KMTBuildingState state = (KMTBuildingState) kermetaUnit.getBuildingState();
 		if ( state.doneLoadBodies )
 			return;
@@ -543,16 +530,13 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		state.loading = false;
 	}
 	
-	public void loadBodies(KermetaUnit kermetaUnit) {
+	public void loadBodies(KermetaUnit kermetaUnit) throws RecognitionException, TokenStreamException, IOException {
 		
 		if ( kermetaUnit.isErrored() )
 			return;
 		
 		CompUnit compUnit = ast.get(kermetaUnit);
-		/*if ( compUnit == null ) {
-			compUnit = ASTHelper.parse( kermetaUnit.getUri() );
-			ast.put(kermetaUnit, compUnit);
-		}*/
+
 		System.out.println("Pass 6 for " + kermetaUnit.getUri());
 		KMT2KMPass pass = new KMT2KMPass6(kermetaUnit, getLoadingContext(kermetaUnit)); 
 		compUnit.accept(pass);
@@ -561,7 +545,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	//////////////////
 	//		9		//
 	//////////////////
-	private void loadAllAnnotations(KermetaUnit kermetaUnit) {
+	private void loadAllAnnotations(KermetaUnit kermetaUnit) throws RecognitionException, TokenStreamException, IOException {
 		KMTBuildingState state = (KMTBuildingState) kermetaUnit.getBuildingState();
 		if ( state.doneLoadAnnotations )
 			return;
@@ -588,19 +572,19 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		state.loaded = true;
 	}
 	
-    public void loadAnnotations(KermetaUnit kermetaUnit) {
+    public void loadAnnotations(KermetaUnit kermetaUnit) throws RecognitionException, TokenStreamException, IOException {
     	
 		if ( kermetaUnit.isErrored() )
 			return;
     	
     	CompUnit compUnit = ast.get(kermetaUnit);
-		/*if ( compUnit == null ) {
-			compUnit = ASTHelper.parse( kermetaUnit.getUri() );
-			ast.put(kermetaUnit, compUnit);
-		}*/
+		
 		KMT2KMPass7 pass = new KMT2KMPass7(kermetaUnit, getLoadingContext(kermetaUnit));
        	compUnit.accept(pass);
       
+       	ast.remove(kermetaUnit);
+       	context.remove(kermetaUnit);
+       	
     }
 	
 }

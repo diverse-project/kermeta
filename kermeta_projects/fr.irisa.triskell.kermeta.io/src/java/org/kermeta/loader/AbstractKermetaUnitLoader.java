@@ -1,6 +1,6 @@
 
 
-/*$Id: AbstractKermetaUnitLoader.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
+/*$Id: AbstractKermetaUnitLoader.java,v 1.4 2007-07-30 14:49:37 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitLoader.java
 * License : EPL
@@ -31,7 +31,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 
 public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 
-	private Hashtable <KermetaUnit, LoadingContext> context = new Hashtable <KermetaUnit, LoadingContext> ();
+	static protected Hashtable <KermetaUnit, LoadingContext> context = new Hashtable <KermetaUnit, LoadingContext> ();
 	
 	public LoadingContext getLoadingContext(KermetaUnit kermetaUnit) {
 		LoadingContext result = context.get( kermetaUnit );
