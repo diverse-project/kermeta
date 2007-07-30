@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.17 2007-07-24 13:46:45 ftanguy Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.18 2007-07-30 08:58:13 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -106,7 +106,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			
 			if (result != null && basictype.getParams() != null) {
 				//builder.messages.addMessage(new KMTUnitLoadError("Unexpected type parameters for type variable '" + qname + "'.",basictype));
-				builder.error("Unexpected type parameters for type variable '" + qname + "'.");
+				builder.error("Unexpected type parameters for type variable '" + qname + "'.", basictype);
 				return false;
 			}
 			
@@ -164,7 +164,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			result = (fr.irisa.triskell.kermeta.language.structure.Type)def;
 			if (basictype.getParams() != null) {
 				//builder.messages.addMessage(new KMTUnitLoadError("Unexpected type parameters for enumeration or primitive type'" + qname + "'.",basictype));
-				builder.error("Unexpected type parameters for enumeration or primitive type'" + qname + "'.");
+				builder.error("Unexpected type parameters for enumeration or primitive type'" + qname + "'.", basictype);
 				return false;
 			}
 		}
@@ -172,7 +172,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			result = (fr.irisa.triskell.kermeta.language.structure.Type)def;
 			if (basictype.getParams() != null) {
 				//builder.messages.addMessage(new KMTUnitLoadError("Unexpected type parameters for model type'" + qname + "'.",basictype));
-				builder.error("Unexpected type parameters for model type'" + qname + "'.");
+				builder.error("Unexpected type parameters for model type'" + qname + "'.", basictype);
 				return false;
 			}
 		}
