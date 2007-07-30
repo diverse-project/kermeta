@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.32 2007-07-30 15:56:32 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.33 2007-07-30 15:59:05 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -46,7 +46,7 @@
 	<property name="core.resources.jar" location="${eclipse.home}/plugins/org.eclipse.core.resources_3.3.0.v20070604.jar"/>
 	<property name="ui.workbench.jar" location="${eclipse.home}/plugins/org.eclipse.ui.workbench_3.3.0.I20070608-1100.jar"/>
 	<property name="jface.jar" location="${eclipse.home}/plugins/org.eclipse.jface_3.3.0.I20070606-0010.jar"/>
-	<property name="swt.jar" location="${eclipse.home}/plugins/org.eclipse.swt_3.3.0.v3346.jar"/>
+	<property name="swt.jar" location="${eclipse.home}/plugins/org.eclipse.swt.gtk.linux.x86_3.3.0.v3346.jar"/>
 	<path id="interpreter.class.path">
 	    <pathelement location="${kermeta.model.jar}"/>
 	    <pathelement location="${kermeta.io.jar}"/>
