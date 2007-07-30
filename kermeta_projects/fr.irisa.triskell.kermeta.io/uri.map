@@ -1,4 +1,4 @@
-# $Id: uri.map,v 1.4 2007-07-30 16:07:13 dvojtise Exp $
+# $Id: uri.map,v 1.5 2007-07-30 16:12:39 dvojtise Exp $
 #
 #"platform:/plugin/fr.irisa.triskell.kermeta/"		"file:/C:/eclipse3.1.1/eclipse/plugins/fr.irisa.triskell.kermeta_0.1.1/"
 
@@ -10,6 +10,8 @@
 # but, please do not commit them it into the CVS
 #"platform:/plugin/"		"/home/paco/Desktop/KermetaCVS/"
 #"platform:/resource/"		"/home/paco/Desktop/KermetaCVS/"
-"platform:/plugin/"			"file://tmp/kermeta_build/src/plugins/"
-"platform:/resource/"		"file://tmp/kermeta_build/src/plugins/"
+"platform:/plugin/"			"/tmp/kermeta_build/src/plugins/"
+"platform:/resource/"		"/tmp/kermeta_build/src/plugins/"
+#"platform:/plugin/"			"C:/eclipse3.3/eclipse/workspace/"
+#"platform:/resource/"		"C:/eclipse3.3/eclipse/workspace/"
 
