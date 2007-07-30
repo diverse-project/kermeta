@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.4 2007-07-27 07:12:17 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.5 2007-07-30 08:58:31 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -13,7 +13,9 @@
 package org.kermeta.io.plugin;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -185,14 +187,12 @@ public class IOPlugin extends AbstractUIPlugin {
 		
 		if ( Runtime.getRuntime().freeMemory() < 1000000 ) {
 			KermetaUnit.internalLog.info("Unloading all Kermeta Unit but the framework.km.");
-			storer.getKermetaUnits().clear();
-			storer.getKermetaUnits().add( framework );
-			for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(framework) )
-				storer.getKermetaUnits().add( unit );
-			storer.getKermetaUnits().add( ecore );
-			for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(ecore) )
-				storer.getKermetaUnits().add( unit );
-			Runtime.getRuntime().gc();
+			List<KermetaUnit> list = new ArrayList <KermetaUnit> ( (List<KermetaUnit>) storer.getKermetaUnits() );
+			for ( KermetaUnit unit : list ) {
+				if ( ! unit.isFramework() && (unit != ecore) )
+					storer.unload( unit.getUri() );
+			}
+
 		}
 		
 		KermetaUnit kermetaUnit = kermetaUnitHelper.loadFile(uri, content);
@@ -226,7 +226,9 @@ public class IOPlugin extends AbstractUIPlugin {
 	public void unload(IFile file) {
 		String uri = "platform:/resource" + file.getFullPath().toString();
 		unload( uri );
+		internalLog.info("Available Memory before running garbage collection : " + Runtime.getRuntime().freeMemory() + " (unloading " + file + ")");
 		Runtime.getRuntime().gc();
+		internalLog.info("Available Memory after running garbage collection : " + Runtime.getRuntime().freeMemory() + " (unloading " + file + ")");
 	}
 	
 	public KermetaUnit getFramework() {
