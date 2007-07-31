@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.6 2007-07-24 13:46:46 ftanguy Exp $
+/* $Id: PropertyChecker.java,v 1.7 2007-07-31 09:08:28 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -93,10 +93,11 @@ public class PropertyChecker extends AbstractChecker {
 	{
 		// An property cannot be defined twice in the same class
 		boolean result = true;
-		int number_of_duplicate = 0;
+		int number_of_duplicate = 1;
 		List <Property> props = ClassDefinitionHelper.getAllProperties(classDefinition);
 		for (Property p : props) {
 			if ( (p != property) && (p.getName().equals(property.getName())) ) {
+					
 				ClassDefinition possibleBaseClass = (ClassDefinition) p.eContainer();
 				if ( classDefinition.isIsAspect() && (possibleBaseClass != classDefinition) ) {
 					boolean error = false;

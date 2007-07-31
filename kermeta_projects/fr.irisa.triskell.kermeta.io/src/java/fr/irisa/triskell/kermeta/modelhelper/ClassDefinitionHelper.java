@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.java,v 1.4 2007-07-20 15:08:10 ftanguy Exp $
+/* $Id: ClassDefinitionHelper.java,v 1.5 2007-07-31 09:08:28 ftanguy Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL
@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
@@ -69,22 +70,25 @@ public class ClassDefinitionHelper {
 	 * and the implicitly inherited from Object
 	 */
 	public static ArrayList<Property> getAllProperties(ClassDefinition cls) {
-		ArrayList<Property> result = new ArrayList<Property>();
-				
+		ArrayList<Property> properties = new ArrayList<Property>();
+		ArrayList<ClassDefinition> classDefinitionProcessed = new ArrayList<ClassDefinition> ();
+		internGetAllProperties(cls, properties, classDefinitionProcessed);
+		return properties;
+		
 		// ensures that each property is added only once.
-		for (Object prop : cls.getOwnedAttribute()) {
+	/*	for (Object prop : cls.getOwnedAttribute()) {
 			if(!result.contains(prop)) result.add( (Property) prop);
 		}
 		for (Object stnext : cls.getSuperType()) {
 			//ensures that each property is added only once.
-			for (Object prop : getAllExplicitProperties((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stnext).getTypeDefinition()))
+//			for (Object prop : getAllExplicitProperties((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stnext).getTypeDefinition()))
+			for (Object prop : getAllProperties((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stnext).getTypeDefinition()))
 			{
 				if(!result.contains(prop)) result.add( (Property) prop);
 			}
 		}
 		
-		for (Object stnext : cls.getSuperType()) {
-			//ensures that each property is added only once.
+		for (Object stnext : cls.getSuperType()) {		//ensures that each property is added only once.
 			ClassDefinition superClass =  (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) stnext).getTypeDefinition();
 			result.addAll( getAllProperties(superClass) );
 		}
@@ -98,7 +102,49 @@ public class ClassDefinitionHelper {
 			
 		}
 		
-		return result;
+		for ( TypeDefinition aspectTypeDefinition : (List<TypeDefinition>) cls.getAspects() ) {
+			
+			if ( aspectTypeDefinition instanceof ClassDefinition ) {
+				ClassDefinition aspectClass = (ClassDefinition) aspectTypeDefinition;
+				result.addAll( getAllProperties(aspectClass) );
+			}
+			
+		}
+		
+		return result;*/
+	}
+	
+	static private void internGetAllProperties(ClassDefinition currentClassDefinition, List<Property> properties, List<ClassDefinition> classDefinitionProcessed) {
+		
+		if ( classDefinitionProcessed.contains( currentClassDefinition ) )
+			return;
+		
+		classDefinitionProcessed.add( currentClassDefinition );
+		
+		for (Property prop : currentClassDefinition.getOwnedAttribute()) {
+			if ( ! properties.contains(prop) ) 
+				properties.add( prop );
+		}
+		
+		for ( Type stnext : currentClassDefinition.getSuperType() ) {
+			ClassDefinition superClassDefinition = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stnext).getTypeDefinition();
+			internGetAllProperties(superClassDefinition, properties, classDefinitionProcessed);
+		}
+		
+		for ( TypeDefinition baseTypeDefinition : (List<TypeDefinition>) currentClassDefinition.getBaseAspects() ) {
+			if ( baseTypeDefinition instanceof ClassDefinition ) {
+				ClassDefinition baseClass = (ClassDefinition) baseTypeDefinition;
+				internGetAllProperties(baseClass, properties, classDefinitionProcessed);
+			}
+		}
+		
+		for ( TypeDefinition aspectTypeDefinition : (List<TypeDefinition>) currentClassDefinition.getAspects() ) {
+			if ( aspectTypeDefinition instanceof ClassDefinition ) {
+				ClassDefinition aspectClass = (ClassDefinition) aspectTypeDefinition;
+				internGetAllProperties(aspectClass, properties, classDefinitionProcessed);
+			}
+		}
+		
 	}
 	
 	/**
@@ -149,9 +195,12 @@ public class ClassDefinitionHelper {
 	/** Returns a list of all operations for this classdefinition including inherited operations and
 	 * implicit operations inherited from kermeta::standard::Object
 	 */
-	public static Set<Operation> getAllOperations(ClassDefinition cls) {
-		
-		Set<Operation> result = new HashSet<Operation>();
+	public static List<Operation> getAllOperations(ClassDefinition cls) {
+		ArrayList<Operation> operations = new ArrayList<Operation>();
+		ArrayList<ClassDefinition> classDefinitionProcessed = new ArrayList<ClassDefinition> ();
+		internGetAllOperations(cls, operations, classDefinitionProcessed);
+		return operations;
+		/*Set<Operation> result = new HashSet<Operation>();
 				
 		for (Object next : cls.getOwnedOperation()) {
 			Operation op = (Operation)next;
@@ -161,7 +210,7 @@ public class ClassDefinitionHelper {
 		// search recursively in super classes
 		/*for (Object next : cls.getSuperType()) {
 			result.addAll(getAllOperations((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)next).getTypeDefinition()));
-		}*/
+		}
 		
 		for (Object stnext : cls.getSuperType()) {
 			//ensures that each property is added only once.
@@ -178,7 +227,40 @@ public class ClassDefinitionHelper {
 			
 		}
 		
-		return result;
+		return result;*/
+	}
+	
+	static private void internGetAllOperations(ClassDefinition currentClassDefinition, List<Operation> operations, List<ClassDefinition> classDefinitionProcessed) {
+		
+		if ( classDefinitionProcessed.contains( currentClassDefinition ) )
+			return;
+		
+		classDefinitionProcessed.add( currentClassDefinition );
+		
+		for (Operation operation : currentClassDefinition.getOwnedOperation()) {
+			if ( ! operations.contains(operation) ) 
+				operations.add( operation);
+		}
+		
+		for ( Type stnext : currentClassDefinition.getSuperType() ) {
+			ClassDefinition superClassDefinition = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stnext).getTypeDefinition();
+			internGetAllOperations(superClassDefinition, operations, classDefinitionProcessed);
+		}
+		
+		for ( TypeDefinition baseTypeDefinition : (List<TypeDefinition>) currentClassDefinition.getBaseAspects() ) {
+			if ( baseTypeDefinition instanceof ClassDefinition ) {
+				ClassDefinition baseClass = (ClassDefinition) baseTypeDefinition;
+				internGetAllOperations(baseClass, operations, classDefinitionProcessed);
+			}
+		}
+		
+		for ( TypeDefinition aspectTypeDefinition : (List<TypeDefinition>) currentClassDefinition.getAspects() ) {
+			if ( aspectTypeDefinition instanceof ClassDefinition ) {
+				ClassDefinition aspectClass = (ClassDefinition) aspectTypeDefinition;
+				internGetAllOperations(aspectClass, operations, classDefinitionProcessed);
+			}
+		}
+		
 	}
 	
 	/** returns a list of all the operation for this ClassDefintion including inherited operations 

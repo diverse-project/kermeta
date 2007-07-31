@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.14 2007-07-24 13:46:46 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.15 2007-07-31 09:08:28 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -142,7 +142,7 @@ public class OperationChecker extends AbstractChecker {
 	 */
 	private boolean checkOperationIsUnique(Operation operation)
 	{
-		Set <Operation> ops = ClassDefinitionHelper.getAllOperations(classDefinition);
+		List <Operation> ops = ClassDefinitionHelper.getAllOperations(classDefinition);
 		for (Operation op : ops) {
 
 			if ( op != operation ) { 

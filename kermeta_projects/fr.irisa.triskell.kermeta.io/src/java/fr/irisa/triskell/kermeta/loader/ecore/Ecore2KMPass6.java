@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass6.java,v 1.3 2007-07-24 13:46:46 ftanguy Exp $
+/* $Id: Ecore2KMPass6.java,v 1.4 2007-07-31 09:08:28 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -157,7 +157,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 				// Quickfix to avoid 2 operations with the same name but different parameters in a single inheritance tree
 				EList refParams = currentOperation.getOwnedParameter();
 
-				Set opList = ClassDefinitionHelper.getAllOperations(currentClassDefinition);
+				List opList = ClassDefinitionHelper.getAllOperations(currentClassDefinition);
 				Iterator it = opList.iterator();
 				
 				boolean match = true;
