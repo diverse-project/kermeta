@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreHelper.java,v 1.3 2007-07-20 15:08:44 ftanguy Exp $
+/*$Id: EcoreHelper.java,v 1.4 2007-07-31 08:24:37 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	EcoreHelper.java
 * License : EPL
@@ -143,7 +143,7 @@ public class EcoreHelper {
 	}
 	
 	static public URI getPlatformPluginURI(String fileURI) {
-		fileURI = fileURI.replaceFirst("file:", "");
+		//fileURI = fileURI.replaceFirst("file:", "");
 		URI uri = (URI) URIConverterImpl.URI_MAP.get( URI.createURI("platform:/plugin/") );
 		if ( uri != null ) {
 			fileURI = fileURI.replace( uri.toString(), "platform:/plugin/" );
@@ -152,7 +152,7 @@ public class EcoreHelper {
 	}
 	
 	static public URI getPlatformResourceURI(String fileURI) {
-		fileURI = fileURI.replaceFirst("file:", "");
+		//fileURI = fileURI.replaceFirst("file:", "");
 		URI uri = (URI) URIConverterImpl.URI_MAP.get( URI.createURI("platform:/resource/") );
 		if ( uri != null ) {
 			fileURI = fileURI.replace( uri.toString(), "platform:/resource/" );
