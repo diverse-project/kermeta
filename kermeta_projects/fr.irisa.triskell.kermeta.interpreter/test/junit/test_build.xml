@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.33 2007-07-30 15:59:05 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.34 2007-07-31 12:35:15 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -187,6 +187,9 @@
 			<formatter type="xml"/>
 		  </test>
 		  <test name="kermeta_interpreter.constraint_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-constraint-result">
+			<formatter type="xml"/>
+		  </test>
+		  <test name="kermeta_interpreter.jar_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-jar-result">
 			<formatter type="xml"/>
 		  </test>
 		  <!--<batchtest todir="${reports.xml.dir}" unless="testcase">
