@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.45 2007-07-27 07:12:18 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.46 2007-07-31 13:36:55 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -956,34 +956,39 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    preVisit();
 		Type result;
 	    fr.irisa.triskell.kermeta.language.structure.Type type = getTypeFromTypeLiteral(expression).type;
-	    ParameterizedTypeChecker.checkType(type, unit, context, expression);
-		
-	    if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
-	    	result = TypeCheckerContext.ClassType;
-	    }
-	    else if (type instanceof Enumeration){
-	    	result = TypeCheckerContext.EnumType;
-	    }
-	    else if (type instanceof ModelType) {
-	    	result = TypeCheckerContext.ModelTypeType;
-	    }
-	    else if (type instanceof ObjectTypeVariable) {
-	    	//result = TypeCheckerContext.ObjectTypeVariableType;
-	    	result = TypeCheckerContext.ClassType;
-	    }
-	    else if (type instanceof ModelTypeVariable) {
-	    	//result = TypeCheckerContext.ModelTypeVariableType;
-	    	result = TypeCheckerContext.ModelTypeType;
-	    }
-	    else if (type instanceof VirtualType) {
-	    	//result = TypeCheckerContext.VirtualTypeType;
-	    	result = TypeCheckerContext.ClassType;
-	    }
-	    else {
-	    	unit.error("TYPE-CHECKER : Type literal should only refer to classes, enumerations, model types or type variables.", expression);
+	    if(type == null){
+	    	unit.error("TYPE-CHECKER : unable to retreive type from expression", expression);
 		    result = TypeCheckerContext.VoidType;
 	    }
-		
+	    else {
+		    ParameterizedTypeChecker.checkType(type, unit, context, expression);
+			
+		    if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
+		    	result = TypeCheckerContext.ClassType;
+		    }
+		    else if (type instanceof Enumeration){
+		    	result = TypeCheckerContext.EnumType;
+		    }
+		    else if (type instanceof ModelType) {
+		    	result = TypeCheckerContext.ModelTypeType;
+		    }
+		    else if (type instanceof ObjectTypeVariable) {
+		    	//result = TypeCheckerContext.ObjectTypeVariableType;
+		    	result = TypeCheckerContext.ClassType;
+		    }
+		    else if (type instanceof ModelTypeVariable) {
+		    	//result = TypeCheckerContext.ModelTypeVariableType;
+		    	result = TypeCheckerContext.ModelTypeType;
+		    }
+		    else if (type instanceof VirtualType) {
+		    	//result = TypeCheckerContext.VirtualTypeType;
+		    	result = TypeCheckerContext.ClassType;
+		    }
+		    else {
+		    	unit.error("TYPE-CHECKER : Type literal should only refer to classes, enumerations, model types or type variables.", expression);
+			    result = TypeCheckerContext.VoidType;
+		    }
+	    }
 		expressionTypes.put(expression, result);
 		expression.setStaticType(result.getFType());
 		return result;
