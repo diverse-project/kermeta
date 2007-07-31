@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.3 2007-07-24 13:47:38 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.4 2007-07-31 12:29:51 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -9,7 +9,7 @@
  * 		Franck FLEUREY (ffleurey@irisa.fr)
  *      Didier Vojtisek	 
  */
-package kermeta_interpreter.constraint_testcases;
+package kermeta_interpreter.constraint_test;
 
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;

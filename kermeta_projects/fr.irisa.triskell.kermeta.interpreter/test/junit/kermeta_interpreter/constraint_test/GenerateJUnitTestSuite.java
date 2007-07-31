@@ -1,4 +1,4 @@
-/* $Id: GenerateJUnitTestSuite.java,v 1.2 2007-07-20 15:07:49 ftanguy Exp $
+/* $Id: GenerateJUnitTestSuite.java,v 1.3 2007-07-31 12:29:51 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : GenerateJUnitTestSuite.java
  * License : GPL
@@ -10,7 +10,7 @@
  * Description :  	
  * 	see class javadoc.	 
  */
-package kermeta_interpreter.constraint_testcases;
+package kermeta_interpreter.constraint_test;
 
 
 
