@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleVariableImpl.java,v 1.1 2007-06-05 09:55:10 dtouzet Exp $
+ * $Id: RuleVariableImpl.java,v 1.2 2007-07-31 13:19:20 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr.impl;
 
@@ -86,7 +86,7 @@ public class RuleVariableImpl extends EObjectImpl implements RuleVariable {
 	 * @generated
 	 * @ordered
 	 */
-	protected EClass varType = null;
+	protected EClass varType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -102,6 +102,7 @@ public class RuleVariableImpl extends EObjectImpl implements RuleVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KtrPackage.Literals.RULE_VARIABLE;
 	}
@@ -232,6 +233,7 @@ public class RuleVariableImpl extends EObjectImpl implements RuleVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KtrPackage.RULE_VARIABLE__OWNING_RULE:
@@ -247,6 +249,7 @@ public class RuleVariableImpl extends EObjectImpl implements RuleVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KtrPackage.RULE_VARIABLE__OWNING_RULE:
@@ -260,6 +263,7 @@ public class RuleVariableImpl extends EObjectImpl implements RuleVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case KtrPackage.RULE_VARIABLE__OWNING_RULE:
@@ -273,6 +277,7 @@ public class RuleVariableImpl extends EObjectImpl implements RuleVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KtrPackage.RULE_VARIABLE__NAME:
@@ -293,6 +298,7 @@ public class RuleVariableImpl extends EObjectImpl implements RuleVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KtrPackage.RULE_VARIABLE__NAME:
@@ -316,6 +322,7 @@ public class RuleVariableImpl extends EObjectImpl implements RuleVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KtrPackage.RULE_VARIABLE__NAME:
@@ -339,6 +346,7 @@ public class RuleVariableImpl extends EObjectImpl implements RuleVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KtrPackage.RULE_VARIABLE__NAME:
@@ -358,6 +366,7 @@ public class RuleVariableImpl extends EObjectImpl implements RuleVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

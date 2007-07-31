@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleProductionImpl.java,v 1.1 2007-06-05 09:55:10 dtouzet Exp $
+ * $Id: RuleProductionImpl.java,v 1.2 2007-07-31 13:19:20 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr.impl;
 
@@ -67,7 +67,7 @@ public class RuleProductionImpl extends EObjectImpl implements RuleProduction {
 	 * @generated
 	 * @ordered
 	 */
-	protected EClass targetElement = null;
+	protected EClass targetElement;
 
 	/**
 	 * The default value of the '{@link #getTargetModel() <em>Target Model</em>}' attribute.
@@ -123,6 +123,7 @@ public class RuleProductionImpl extends EObjectImpl implements RuleProduction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KtrPackage.Literals.RULE_PRODUCTION;
 	}
@@ -274,6 +275,7 @@ public class RuleProductionImpl extends EObjectImpl implements RuleProduction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KtrPackage.RULE_PRODUCTION__OWNING_RULE:
@@ -289,6 +291,7 @@ public class RuleProductionImpl extends EObjectImpl implements RuleProduction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KtrPackage.RULE_PRODUCTION__OWNING_RULE:
@@ -302,6 +305,7 @@ public class RuleProductionImpl extends EObjectImpl implements RuleProduction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case KtrPackage.RULE_PRODUCTION__OWNING_RULE:
@@ -315,6 +319,7 @@ public class RuleProductionImpl extends EObjectImpl implements RuleProduction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KtrPackage.RULE_PRODUCTION__NAME:
@@ -337,6 +342,7 @@ public class RuleProductionImpl extends EObjectImpl implements RuleProduction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KtrPackage.RULE_PRODUCTION__NAME:
@@ -363,6 +369,7 @@ public class RuleProductionImpl extends EObjectImpl implements RuleProduction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KtrPackage.RULE_PRODUCTION__NAME:
@@ -389,6 +396,7 @@ public class RuleProductionImpl extends EObjectImpl implements RuleProduction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KtrPackage.RULE_PRODUCTION__NAME:
@@ -410,6 +418,7 @@ public class RuleProductionImpl extends EObjectImpl implements RuleProduction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

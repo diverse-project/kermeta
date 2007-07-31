@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KtrFactoryImpl.java,v 1.1 2007-06-05 09:55:10 dtouzet Exp $
+ * $Id: KtrFactoryImpl.java,v 1.2 2007-07-31 13:19:20 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr.impl;
 
@@ -58,6 +58,7 @@ public class KtrFactoryImpl extends EFactoryImpl implements KtrFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case KtrPackage.INTERPRETATION_PATTERN_MODEL: return createInterpretationPatternModel();
@@ -76,6 +77,7 @@ public class KtrFactoryImpl extends EFactoryImpl implements KtrFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
 			case KtrPackage.STRING:
@@ -90,6 +92,7 @@ public class KtrFactoryImpl extends EFactoryImpl implements KtrFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case KtrPackage.STRING:
@@ -192,6 +195,7 @@ public class KtrFactoryImpl extends EFactoryImpl implements KtrFactory {
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static KtrPackage getPackage() {
 		return KtrPackage.eINSTANCE;
 	}

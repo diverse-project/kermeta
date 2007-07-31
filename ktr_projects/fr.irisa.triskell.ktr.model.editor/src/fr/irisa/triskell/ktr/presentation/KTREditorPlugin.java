@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KTREditorPlugin.java,v 1.1 2007-06-05 13:47:02 dtouzet Exp $
+ * $Id: KTREditorPlugin.java,v 1.2 2007-07-31 13:19:17 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr.presentation;
 
@@ -43,8 +43,8 @@ public final class KTREditorPlugin extends EMFPlugin {
 	 */
 	public KTREditorPlugin() {
 		super
-		  (new ResourceLocator [] {
-		   });
+			(new ResourceLocator [] {
+			});
 	}
 
 	/**
@@ -54,6 +54,7 @@ public final class KTREditorPlugin extends EMFPlugin {
 	 * @return the singleton instance.
 	 * @generated
 	 */
+	@Override
 	public ResourceLocator getPluginResourceLocator() {
 		return plugin;
 	}
@@ -84,7 +85,7 @@ public final class KTREditorPlugin extends EMFPlugin {
 		 */
 		public Implementation() {
 			super();
-
+	
 			// Remember the static instance.
 			//
 			plugin = this;

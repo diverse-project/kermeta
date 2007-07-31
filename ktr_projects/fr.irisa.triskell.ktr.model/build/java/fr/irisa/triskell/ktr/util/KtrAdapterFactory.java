@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KtrAdapterFactory.java,v 1.1 2007-06-05 09:55:10 dtouzet Exp $
+ * $Id: KtrAdapterFactory.java,v 1.2 2007-07-31 13:19:21 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr.util;
 
@@ -52,6 +52,7 @@ public class KtrAdapterFactory extends AdapterFactoryImpl {
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object object) {
 		if (object == modelPackage) {
 			return true;
@@ -68,27 +69,34 @@ public class KtrAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected KtrSwitch modelSwitch =
-		new KtrSwitch() {
-			public Object caseInterpretationPatternModel(InterpretationPatternModel object) {
+	protected KtrSwitch<Adapter> modelSwitch =
+		new KtrSwitch<Adapter>() {
+			@Override
+			public Adapter caseInterpretationPatternModel(InterpretationPatternModel object) {
 				return createInterpretationPatternModelAdapter();
 			}
-			public Object caseInterpretationRule(InterpretationRule object) {
+			@Override
+			public Adapter caseInterpretationRule(InterpretationRule object) {
 				return createInterpretationRuleAdapter();
 			}
-			public Object caseRuleVariable(RuleVariable object) {
+			@Override
+			public Adapter caseRuleVariable(RuleVariable object) {
 				return createRuleVariableAdapter();
 			}
-			public Object caseRulePattern(RulePattern object) {
+			@Override
+			public Adapter caseRulePattern(RulePattern object) {
 				return createRulePatternAdapter();
 			}
-			public Object caseRuleProduction(RuleProduction object) {
+			@Override
+			public Adapter caseRuleProduction(RuleProduction object) {
 				return createRuleProductionAdapter();
 			}
-			public Object caseSingletonRuleProduction(SingletonRuleProduction object) {
+			@Override
+			public Adapter caseSingletonRuleProduction(SingletonRuleProduction object) {
 				return createSingletonRuleProductionAdapter();
 			}
-			public Object defaultCase(EObject object) {
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -101,8 +109,9 @@ public class KtrAdapterFactory extends AdapterFactoryImpl {
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
+	@Override
 	public Adapter createAdapter(Notifier target) {
-		return (Adapter)modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 

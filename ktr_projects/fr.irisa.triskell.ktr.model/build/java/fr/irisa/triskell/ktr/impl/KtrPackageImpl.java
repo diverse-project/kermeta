@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KtrPackageImpl.java,v 1.1 2007-06-05 09:55:10 dtouzet Exp $
+ * $Id: KtrPackageImpl.java,v 1.2 2007-07-31 13:19:20 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr.impl;
 
@@ -506,6 +506,10 @@ public class KtrPackageImpl extends EPackageImpl implements KtrPackage {
 		setName(eNAME);
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
+
+		// Create type parameters
+
+		// Set bounds for type parameters
 
 		// Add supertypes to classes
 		singletonRuleProductionEClass.getESuperTypes().add(this.getRuleProduction());

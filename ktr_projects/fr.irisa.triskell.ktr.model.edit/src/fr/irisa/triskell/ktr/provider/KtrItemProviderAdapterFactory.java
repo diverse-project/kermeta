@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KtrItemProviderAdapterFactory.java,v 1.1 2007-06-05 13:43:52 dtouzet Exp $
+ * $Id: KtrItemProviderAdapterFactory.java,v 1.2 2007-07-31 13:19:14 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr.provider;
 
@@ -59,7 +59,7 @@ public class KtrItemProviderAdapterFactory extends KtrAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection supportedTypes = new ArrayList();
+	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
 	 * This constructs an instance.
@@ -72,7 +72,7 @@ public class KtrItemProviderAdapterFactory extends KtrAdapterFactory implements 
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);		
+		supportedTypes.add(IItemPropertySource.class);
 	}
 
 	/**
@@ -89,6 +89,7 @@ public class KtrItemProviderAdapterFactory extends KtrAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createInterpretationPatternModelAdapter() {
 		if (interpretationPatternModelItemProvider == null) {
 			interpretationPatternModelItemProvider = new InterpretationPatternModelItemProvider(this);
@@ -111,6 +112,7 @@ public class KtrItemProviderAdapterFactory extends KtrAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createInterpretationRuleAdapter() {
 		if (interpretationRuleItemProvider == null) {
 			interpretationRuleItemProvider = new InterpretationRuleItemProvider(this);
@@ -133,6 +135,7 @@ public class KtrItemProviderAdapterFactory extends KtrAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createRuleVariableAdapter() {
 		if (ruleVariableItemProvider == null) {
 			ruleVariableItemProvider = new RuleVariableItemProvider(this);
@@ -155,6 +158,7 @@ public class KtrItemProviderAdapterFactory extends KtrAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createRulePatternAdapter() {
 		if (rulePatternItemProvider == null) {
 			rulePatternItemProvider = new RulePatternItemProvider(this);
@@ -177,6 +181,7 @@ public class KtrItemProviderAdapterFactory extends KtrAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createRuleProductionAdapter() {
 		if (ruleProductionItemProvider == null) {
 			ruleProductionItemProvider = new RuleProductionItemProvider(this);
@@ -199,6 +204,7 @@ public class KtrItemProviderAdapterFactory extends KtrAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createSingletonRuleProductionAdapter() {
 		if (singletonRuleProductionItemProvider == null) {
 			singletonRuleProductionItemProvider = new SingletonRuleProductionItemProvider(this);
@@ -232,6 +238,7 @@ public class KtrItemProviderAdapterFactory extends KtrAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object type) {
 		return supportedTypes.contains(type) || super.isFactoryForType(type);
 	}
@@ -242,6 +249,7 @@ public class KtrItemProviderAdapterFactory extends KtrAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
 		return super.adapt(notifier, this);
 	}
@@ -251,10 +259,11 @@ public class KtrItemProviderAdapterFactory extends KtrAdapterFactory implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class)type).isInstance(adapter))) {
+			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}

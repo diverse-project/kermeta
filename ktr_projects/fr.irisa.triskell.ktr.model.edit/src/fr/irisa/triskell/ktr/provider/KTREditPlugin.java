@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KTREditPlugin.java,v 1.1 2007-06-05 13:43:52 dtouzet Exp $
+ * $Id: KTREditPlugin.java,v 1.2 2007-07-31 13:19:14 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr.provider;
 
@@ -52,6 +52,7 @@ public final class KTREditPlugin extends EMFPlugin {
 	 * @return the singleton instance.
 	 * @generated
 	 */
+	@Override
 	public ResourceLocator getPluginResourceLocator() {
 		return plugin;
 	}

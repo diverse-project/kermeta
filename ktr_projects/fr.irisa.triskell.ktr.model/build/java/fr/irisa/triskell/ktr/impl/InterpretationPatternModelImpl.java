@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterpretationPatternModelImpl.java,v 1.1 2007-06-05 09:55:10 dtouzet Exp $
+ * $Id: InterpretationPatternModelImpl.java,v 1.2 2007-07-31 13:19:20 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr.impl;
 
@@ -69,7 +69,7 @@ public class InterpretationPatternModelImpl extends EObjectImpl implements Inter
 	 * @generated
 	 * @ordered
 	 */
-	protected EList rules = null;
+	protected EList<InterpretationRule> rules;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -85,6 +85,7 @@ public class InterpretationPatternModelImpl extends EObjectImpl implements Inter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KtrPackage.Literals.INTERPRETATION_PATTERN_MODEL;
 	}
@@ -115,9 +116,9 @@ public class InterpretationPatternModelImpl extends EObjectImpl implements Inter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getRules() {
+	public EList<InterpretationRule> getRules() {
 		if (rules == null) {
-			rules = new EObjectContainmentWithInverseEList(InterpretationRule.class, this, KtrPackage.INTERPRETATION_PATTERN_MODEL__RULES, KtrPackage.INTERPRETATION_RULE__OWNING_MODEL);
+			rules = new EObjectContainmentWithInverseEList<InterpretationRule>(InterpretationRule.class, this, KtrPackage.INTERPRETATION_PATTERN_MODEL__RULES, KtrPackage.INTERPRETATION_RULE__OWNING_MODEL);
 		}
 		return rules;
 	}
@@ -127,10 +128,12 @@ public class InterpretationPatternModelImpl extends EObjectImpl implements Inter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KtrPackage.INTERPRETATION_PATTERN_MODEL__RULES:
-				return ((InternalEList)getRules()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRules()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -140,10 +143,11 @@ public class InterpretationPatternModelImpl extends EObjectImpl implements Inter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KtrPackage.INTERPRETATION_PATTERN_MODEL__RULES:
-				return ((InternalEList)getRules()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -153,6 +157,7 @@ public class InterpretationPatternModelImpl extends EObjectImpl implements Inter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KtrPackage.INTERPRETATION_PATTERN_MODEL__NAME:
@@ -168,6 +173,8 @@ public class InterpretationPatternModelImpl extends EObjectImpl implements Inter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KtrPackage.INTERPRETATION_PATTERN_MODEL__NAME:
@@ -175,7 +182,7 @@ public class InterpretationPatternModelImpl extends EObjectImpl implements Inter
 				return;
 			case KtrPackage.INTERPRETATION_PATTERN_MODEL__RULES:
 				getRules().clear();
-				getRules().addAll((Collection)newValue);
+				getRules().addAll((Collection<? extends InterpretationRule>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -186,6 +193,7 @@ public class InterpretationPatternModelImpl extends EObjectImpl implements Inter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KtrPackage.INTERPRETATION_PATTERN_MODEL__NAME:
@@ -203,6 +211,7 @@ public class InterpretationPatternModelImpl extends EObjectImpl implements Inter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KtrPackage.INTERPRETATION_PATTERN_MODEL__NAME:
@@ -218,6 +227,7 @@ public class InterpretationPatternModelImpl extends EObjectImpl implements Inter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

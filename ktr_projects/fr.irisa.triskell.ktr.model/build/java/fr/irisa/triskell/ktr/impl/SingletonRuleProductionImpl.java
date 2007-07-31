@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SingletonRuleProductionImpl.java,v 1.1 2007-06-05 09:55:10 dtouzet Exp $
+ * $Id: SingletonRuleProductionImpl.java,v 1.2 2007-07-31 13:19:20 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr.impl;
 
@@ -63,6 +63,7 @@ public class SingletonRuleProductionImpl extends RuleProductionImpl implements S
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KtrPackage.Literals.SINGLETON_RULE_PRODUCTION;
 	}
@@ -93,6 +94,7 @@ public class SingletonRuleProductionImpl extends RuleProductionImpl implements S
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KtrPackage.SINGLETON_RULE_PRODUCTION__ID_EXPR:
@@ -106,6 +108,7 @@ public class SingletonRuleProductionImpl extends RuleProductionImpl implements S
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KtrPackage.SINGLETON_RULE_PRODUCTION__ID_EXPR:
@@ -120,6 +123,7 @@ public class SingletonRuleProductionImpl extends RuleProductionImpl implements S
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KtrPackage.SINGLETON_RULE_PRODUCTION__ID_EXPR:
@@ -134,6 +138,7 @@ public class SingletonRuleProductionImpl extends RuleProductionImpl implements S
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KtrPackage.SINGLETON_RULE_PRODUCTION__ID_EXPR:
@@ -147,6 +152,7 @@ public class SingletonRuleProductionImpl extends RuleProductionImpl implements S
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

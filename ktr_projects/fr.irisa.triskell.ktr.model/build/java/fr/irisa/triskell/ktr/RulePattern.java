@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RulePattern.java,v 1.1 2007-06-05 09:55:10 dtouzet Exp $
+ * $Id: RulePattern.java,v 1.2 2007-07-31 13:19:21 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr;
 
@@ -151,7 +151,7 @@ public interface RulePattern extends EObject {
 	 * @see #setOwningRule(InterpretationRule)
 	 * @see fr.irisa.triskell.ktr.KtrPackage#getRulePattern_OwningRule()
 	 * @see fr.irisa.triskell.ktr.InterpretationRule#getSource
-	 * @model opposite="source" required="true"
+	 * @model opposite="source" required="true" transient="false"
 	 *        annotation="kermeta documentation='/** Reference to the InterpretationRule \052/'"
 	 * @generated
 	 */

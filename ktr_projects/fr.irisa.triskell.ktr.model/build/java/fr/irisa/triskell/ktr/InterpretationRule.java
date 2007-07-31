@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterpretationRule.java,v 1.1 2007-06-05 09:55:10 dtouzet Exp $
+ * $Id: InterpretationRule.java,v 1.2 2007-07-31 13:19:21 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr;
 
@@ -101,11 +101,11 @@ public interface InterpretationRule extends EObject {
 	 * @return the value of the '<em>Productions</em>' containment reference list.
 	 * @see fr.irisa.triskell.ktr.KtrPackage#getInterpretationRule_Productions()
 	 * @see fr.irisa.triskell.ktr.RuleProduction#getOwningRule
-	 * @model type="fr.irisa.triskell.ktr.RuleProduction" opposite="owningRule" containment="true"
+	 * @model opposite="owningRule" containment="true"
 	 *        annotation="kermeta documentation='/** Set of production of the InterpretationRule \052/'"
 	 * @generated
 	 */
-	EList getProductions();
+	EList<RuleProduction> getProductions();
 
 	/**
 	 * Returns the value of the '<em><b>Variables</b></em>' containment reference list.
@@ -120,11 +120,11 @@ public interface InterpretationRule extends EObject {
 	 * @return the value of the '<em>Variables</em>' containment reference list.
 	 * @see fr.irisa.triskell.ktr.KtrPackage#getInterpretationRule_Variables()
 	 * @see fr.irisa.triskell.ktr.RuleVariable#getOwningRule
-	 * @model type="fr.irisa.triskell.ktr.RuleVariable" opposite="owningRule" containment="true"
+	 * @model opposite="owningRule" containment="true"
 	 *        annotation="kermeta documentation='/** Set of variables of the InterpretationRule \052/'"
 	 * @generated
 	 */
-	EList getVariables();
+	EList<RuleVariable> getVariables();
 
 	/**
 	 * Returns the value of the '<em><b>Super Rule</b></em>' reference.
@@ -165,7 +165,7 @@ public interface InterpretationRule extends EObject {
 	 * @see #setOwningModel(InterpretationPatternModel)
 	 * @see fr.irisa.triskell.ktr.KtrPackage#getInterpretationRule_OwningModel()
 	 * @see fr.irisa.triskell.ktr.InterpretationPatternModel#getRules
-	 * @model opposite="rules" required="true"
+	 * @model opposite="rules" required="true" transient="false"
 	 *        annotation="kermeta documentation='/** Reference to the InterpretationPatternModel \052/'"
 	 * @generated
 	 */

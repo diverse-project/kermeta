@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KtrSwitch.java,v 1.1 2007-06-05 09:55:10 dtouzet Exp $
+ * $Id: KtrSwitch.java,v 1.2 2007-07-31 13:19:21 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr.util;
 
@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @see fr.irisa.triskell.ktr.KtrPackage
  * @generated
  */
-public class KtrSwitch {
+public class KtrSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -54,7 +54,7 @@ public class KtrSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	public Object doSwitch(EObject theEObject) {
+	public T doSwitch(EObject theEObject) {
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
@@ -65,16 +65,16 @@ public class KtrSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(EClass theEClass, EObject theEObject) {
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
 		else {
-			List eSuperTypes = theEClass.getESuperTypes();
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
 					defaultCase(theEObject) :
-					doSwitch((EClass)eSuperTypes.get(0), theEObject);
+					doSwitch(eSuperTypes.get(0), theEObject);
 		}
 	}
 
@@ -85,41 +85,41 @@ public class KtrSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(int classifierID, EObject theEObject) {
+	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case KtrPackage.INTERPRETATION_PATTERN_MODEL: {
 				InterpretationPatternModel interpretationPatternModel = (InterpretationPatternModel)theEObject;
-				Object result = caseInterpretationPatternModel(interpretationPatternModel);
+				T result = caseInterpretationPatternModel(interpretationPatternModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KtrPackage.INTERPRETATION_RULE: {
 				InterpretationRule interpretationRule = (InterpretationRule)theEObject;
-				Object result = caseInterpretationRule(interpretationRule);
+				T result = caseInterpretationRule(interpretationRule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KtrPackage.RULE_VARIABLE: {
 				RuleVariable ruleVariable = (RuleVariable)theEObject;
-				Object result = caseRuleVariable(ruleVariable);
+				T result = caseRuleVariable(ruleVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KtrPackage.RULE_PATTERN: {
 				RulePattern rulePattern = (RulePattern)theEObject;
-				Object result = caseRulePattern(rulePattern);
+				T result = caseRulePattern(rulePattern);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KtrPackage.RULE_PRODUCTION: {
 				RuleProduction ruleProduction = (RuleProduction)theEObject;
-				Object result = caseRuleProduction(ruleProduction);
+				T result = caseRuleProduction(ruleProduction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KtrPackage.SINGLETON_RULE_PRODUCTION: {
 				SingletonRuleProduction singletonRuleProduction = (SingletonRuleProduction)theEObject;
-				Object result = caseSingletonRuleProduction(singletonRuleProduction);
+				T result = caseSingletonRuleProduction(singletonRuleProduction);
 				if (result == null) result = caseRuleProduction(singletonRuleProduction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -129,107 +129,107 @@ public class KtrSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Interpretation Pattern Model</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Interpretation Pattern Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Interpretation Pattern Model</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Interpretation Pattern Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseInterpretationPatternModel(InterpretationPatternModel object) {
+	public T caseInterpretationPatternModel(InterpretationPatternModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Interpretation Rule</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Interpretation Rule</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Interpretation Rule</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Interpretation Rule</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseInterpretationRule(InterpretationRule object) {
+	public T caseInterpretationRule(InterpretationRule object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Rule Variable</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Rule Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Rule Variable</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Rule Variable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseRuleVariable(RuleVariable object) {
+	public T caseRuleVariable(RuleVariable object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Rule Pattern</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Rule Pattern</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Rule Pattern</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Rule Pattern</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseRulePattern(RulePattern object) {
+	public T caseRulePattern(RulePattern object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Rule Production</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Rule Production</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Rule Production</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Rule Production</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseRuleProduction(RuleProduction object) {
+	public T caseRuleProduction(RuleProduction object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Singleton Rule Production</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Singleton Rule Production</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Singleton Rule Production</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Singleton Rule Production</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseSingletonRuleProduction(SingletonRuleProduction object) {
+	public T caseSingletonRuleProduction(SingletonRuleProduction object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	public Object defaultCase(EObject object) {
+	public T defaultCase(EObject object) {
 		return null;
 	}
 

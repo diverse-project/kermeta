@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleVariable.java,v 1.1 2007-06-05 09:55:10 dtouzet Exp $
+ * $Id: RuleVariable.java,v 1.2 2007-07-31 13:19:21 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr;
 
@@ -123,7 +123,7 @@ public interface RuleVariable extends EObject {
 	 * @see #setOwningRule(InterpretationRule)
 	 * @see fr.irisa.triskell.ktr.KtrPackage#getRuleVariable_OwningRule()
 	 * @see fr.irisa.triskell.ktr.InterpretationRule#getVariables
-	 * @model opposite="variables" required="true"
+	 * @model opposite="variables" required="true" transient="false"
 	 *        annotation="kermeta documentation='/** Reference to the InterpretationRule \052/'"
 	 * @generated
 	 */

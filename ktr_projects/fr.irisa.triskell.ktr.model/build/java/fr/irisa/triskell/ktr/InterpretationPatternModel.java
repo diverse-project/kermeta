@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterpretationPatternModel.java,v 1.1 2007-06-05 09:55:10 dtouzet Exp $
+ * $Id: InterpretationPatternModel.java,v 1.2 2007-07-31 13:19:21 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr;
 
@@ -70,10 +70,10 @@ public interface InterpretationPatternModel extends EObject {
 	 * @return the value of the '<em>Rules</em>' containment reference list.
 	 * @see fr.irisa.triskell.ktr.KtrPackage#getInterpretationPatternModel_Rules()
 	 * @see fr.irisa.triskell.ktr.InterpretationRule#getOwningModel
-	 * @model type="fr.irisa.triskell.ktr.InterpretationRule" opposite="owningModel" containment="true"
+	 * @model opposite="owningModel" containment="true"
 	 *        annotation="kermeta documentation='/** Interpretation rules defined by the interpretation model \052/'"
 	 * @generated
 	 */
-	EList getRules();
+	EList<InterpretationRule> getRules();
 
 } // InterpretationPatternModel

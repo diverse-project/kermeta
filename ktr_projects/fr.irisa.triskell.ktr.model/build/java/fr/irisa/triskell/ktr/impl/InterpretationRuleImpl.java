@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterpretationRuleImpl.java,v 1.1 2007-06-05 09:55:10 dtouzet Exp $
+ * $Id: InterpretationRuleImpl.java,v 1.2 2007-07-31 13:19:20 dtouzet Exp $
  */
 package fr.irisa.triskell.ktr.impl;
 
@@ -77,7 +77,7 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * @generated
 	 * @ordered
 	 */
-	protected RulePattern source = null;
+	protected RulePattern source;
 
 	/**
 	 * The cached value of the '{@link #getProductions() <em>Productions</em>}' containment reference list.
@@ -87,7 +87,7 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * @generated
 	 * @ordered
 	 */
-	protected EList productions = null;
+	protected EList<RuleProduction> productions;
 
 	/**
 	 * The cached value of the '{@link #getVariables() <em>Variables</em>}' containment reference list.
@@ -97,7 +97,7 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * @generated
 	 * @ordered
 	 */
-	protected EList variables = null;
+	protected EList<RuleVariable> variables;
 
 	/**
 	 * The cached value of the '{@link #getSuperRule() <em>Super Rule</em>}' reference.
@@ -107,7 +107,7 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * @generated
 	 * @ordered
 	 */
-	protected InterpretationRule superRule = null;
+	protected InterpretationRule superRule;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,6 +123,7 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KtrPackage.Literals.INTERPRETATION_RULE;
 	}
@@ -196,9 +197,9 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getProductions() {
+	public EList<RuleProduction> getProductions() {
 		if (productions == null) {
-			productions = new EObjectContainmentWithInverseEList(RuleProduction.class, this, KtrPackage.INTERPRETATION_RULE__PRODUCTIONS, KtrPackage.RULE_PRODUCTION__OWNING_RULE);
+			productions = new EObjectContainmentWithInverseEList<RuleProduction>(RuleProduction.class, this, KtrPackage.INTERPRETATION_RULE__PRODUCTIONS, KtrPackage.RULE_PRODUCTION__OWNING_RULE);
 		}
 		return productions;
 	}
@@ -208,9 +209,9 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getVariables() {
+	public EList<RuleVariable> getVariables() {
 		if (variables == null) {
-			variables = new EObjectContainmentWithInverseEList(RuleVariable.class, this, KtrPackage.INTERPRETATION_RULE__VARIABLES, KtrPackage.RULE_VARIABLE__OWNING_RULE);
+			variables = new EObjectContainmentWithInverseEList<RuleVariable>(RuleVariable.class, this, KtrPackage.INTERPRETATION_RULE__VARIABLES, KtrPackage.RULE_VARIABLE__OWNING_RULE);
 		}
 		return variables;
 	}
@@ -299,6 +300,8 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KtrPackage.INTERPRETATION_RULE__SOURCE:
@@ -306,9 +309,9 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 					msgs = ((InternalEObject)source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KtrPackage.INTERPRETATION_RULE__SOURCE, null, msgs);
 				return basicSetSource((RulePattern)otherEnd, msgs);
 			case KtrPackage.INTERPRETATION_RULE__PRODUCTIONS:
-				return ((InternalEList)getProductions()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getProductions()).basicAdd(otherEnd, msgs);
 			case KtrPackage.INTERPRETATION_RULE__VARIABLES:
-				return ((InternalEList)getVariables()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getVariables()).basicAdd(otherEnd, msgs);
 			case KtrPackage.INTERPRETATION_RULE__OWNING_MODEL:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -322,14 +325,15 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KtrPackage.INTERPRETATION_RULE__SOURCE:
 				return basicSetSource(null, msgs);
 			case KtrPackage.INTERPRETATION_RULE__PRODUCTIONS:
-				return ((InternalEList)getProductions()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getProductions()).basicRemove(otherEnd, msgs);
 			case KtrPackage.INTERPRETATION_RULE__VARIABLES:
-				return ((InternalEList)getVariables()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
 			case KtrPackage.INTERPRETATION_RULE__OWNING_MODEL:
 				return basicSetOwningModel(null, msgs);
 		}
@@ -341,6 +345,7 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case KtrPackage.INTERPRETATION_RULE__OWNING_MODEL:
@@ -354,6 +359,7 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KtrPackage.INTERPRETATION_RULE__NAME:
@@ -378,6 +384,8 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KtrPackage.INTERPRETATION_RULE__NAME:
@@ -388,11 +396,11 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 				return;
 			case KtrPackage.INTERPRETATION_RULE__PRODUCTIONS:
 				getProductions().clear();
-				getProductions().addAll((Collection)newValue);
+				getProductions().addAll((Collection<? extends RuleProduction>)newValue);
 				return;
 			case KtrPackage.INTERPRETATION_RULE__VARIABLES:
 				getVariables().clear();
-				getVariables().addAll((Collection)newValue);
+				getVariables().addAll((Collection<? extends RuleVariable>)newValue);
 				return;
 			case KtrPackage.INTERPRETATION_RULE__SUPER_RULE:
 				setSuperRule((InterpretationRule)newValue);
@@ -409,6 +417,7 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KtrPackage.INTERPRETATION_RULE__NAME:
@@ -438,6 +447,7 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KtrPackage.INTERPRETATION_RULE__NAME:
@@ -461,6 +471,7 @@ public class InterpretationRuleImpl extends EObjectImpl implements Interpretatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
