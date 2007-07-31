@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.15 2007-07-24 13:47:10 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.16 2007-07-31 09:07:26 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -392,11 +393,17 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	public Dependency findUnitIDependOn(RuleType type, Unit unit) {
 		Dependency dependency = null;
 		Iterator <Dependency> iterator = getDependencies().iterator();
+		List<Dependency> ghostDependencies = new ArrayList<Dependency> ();
 		while ( (dependency == null) && (iterator.hasNext()) ) {
 			Dependency currentDependency = iterator.next();
-			if ( currentDependency.getType().equals(type) && currentDependency.getTo().equals(unit) )
-				dependency = currentDependency;
+			if ( currentDependency.getTo() != null ) {
+				if ( currentDependency.getType().equals(type) && currentDependency.getTo().equals(unit) )
+					dependency = currentDependency;
+			} else
+				ghostDependencies.add(currentDependency);
 		}
+		if ( ! ghostDependencies.isEmpty() )
+			getDependencies().removeAll( ghostDependencies );
 		return dependency;
 	}
 
