@@ -1,6 +1,6 @@
 
 
-/*$Id: KMUnitLoader.java,v 1.4 2007-07-27 13:27:41 ftanguy Exp $
+/*$Id: KMUnitLoader.java,v 1.5 2007-07-31 08:25:28 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL
@@ -102,7 +102,7 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 				
 				String fileURI = r.getURI().toString();
 
-				if ( ! kermetaUnit.getUri().startsWith("platform:/plugin") || kermetaUnit.isFramework() )
+				if ( ! kermetaUnit.getUri().startsWith("platform:/plugin") )
 					fileURI = EcoreHelper.getPlatformPluginURI(fileURI).toString();
 				else if ( ! kermetaUnit.getUri().startsWith("platform:/resource") )
 					fileURI = EcoreHelper.getPlatformResourceURI(fileURI).toString();
