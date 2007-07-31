@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.29 2007-07-27 07:46:06 ftanguy Exp $
+/* $Id: KMT2KMPass7.java,v 1.30 2007-07-31 08:25:44 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -76,14 +76,18 @@ public class KMT2KMPass7 extends KMT2KMPass {
 				if ( containsEntrypoint() ) {
 					builder.getModelingUnit().getOwnedTags().addAll( currentTags );
 					fr.irisa.triskell.kermeta.language.structure.Tag mainClassTag = ModelingUnitHelper.getMainClass(builder);
-					TypeDefinition mainClass = builder.getTypeDefinitionByName( mainClassTag.getValue() );
-					if ( mainClass == null )
-						builder.error("Main Class nof found.", km2ecore.get( mainClassTag));
-					else {
-						fr.irisa.triskell.kermeta.language.structure.Tag mainOperationTag = ModelingUnitHelper.getMainOperation(builder);
-						Operation op = ClassDefinitionHelper.findOperationByName( (ClassDefinition) mainClass, mainOperationTag.getValue() );
-						if ( op == null )
-							builder.error("Main Operation not found.", km2ecore.get(mainOperationTag));
+					if ( mainClassTag != null ) {
+						TypeDefinition mainClass = builder.getTypeDefinitionByName( mainClassTag.getValue() );
+						if ( mainClass == null )
+							builder.error("Main Class nof found.", km2ecore.get( mainClassTag));
+						else {
+							fr.irisa.triskell.kermeta.language.structure.Tag mainOperationTag = ModelingUnitHelper.getMainOperation(builder);
+							if ( mainOperationTag != null ) {
+								Operation op = ClassDefinitionHelper.findOperationByName( (ClassDefinition) mainClass, mainOperationTag.getValue() );
+								if ( op == null )
+									builder.error("Main Operation not found.", km2ecore.get(mainOperationTag));
+							}
+						}
 					}
 				} else if ( tag.getName() != null ) {
 					if ( TagHelper.findTagFromName(object, tag.getName()) == null )
