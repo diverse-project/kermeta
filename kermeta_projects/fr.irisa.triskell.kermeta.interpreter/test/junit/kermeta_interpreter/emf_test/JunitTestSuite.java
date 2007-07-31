@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.15 2007-07-24 13:47:38 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.16 2007-07-31 12:34:54 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -71,7 +71,7 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/emf_testcases/kermeta","048_testLoadEcoreSplittedModel_withCyclicref.main.kmt" );
 
-/*		testWithFile("test/emf_testcases/kermeta","049_testSplittedMetaModel.main.kmt" );
+		testWithFile("test/emf_testcases/kermeta","049_testSplittedMetaModel.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","050_testChunkedModel.main.kmt" );
 
@@ -81,7 +81,7 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/emf_testcases/kermeta","053_savingKM.main.kmt" );
 
-//		testWithFile("test/emf_testcases/kermeta","053_savingKM_2.main.kmt" );
+		testWithFile("test/emf_testcases/kermeta","053_savingKM_2.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","054_pb_olivier1213.main.kmt" );
 
@@ -91,12 +91,15 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/emf_testcases/kermeta","057_saveDependentModels.main.kmt" );
 
+		testWithFile("test/emf_testcases/kermeta","058_IndirectLoadSaveEnum.main.kmt" );
+
 		testWithFile("test/emf_testcases/kermeta","058_loadSaveEnum.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","061_multipleIndirectLoad.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","062_resourceTests.main.kmt" );
-		*/
+
+		testWithFile("test/emf_testcases/kermeta","067_testHasSubTypeLoadingModel.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
