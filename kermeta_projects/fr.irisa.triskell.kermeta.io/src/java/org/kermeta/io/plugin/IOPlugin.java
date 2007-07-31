@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.5 2007-07-30 08:58:31 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.6 2007-07-31 08:26:35 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -70,6 +70,12 @@ public class IOPlugin extends AbstractUIPlugin {
 
 	private KermetaUnit ecore;
 	
+	/**
+	 * 
+	 * If local use is set to true, then a specific uri mapping file is used to map platform:/plugin and platform:/resource path.
+	 * If set to false, it means that the plugin is used the usual way in a workbench.
+	 * 
+	 */
 	static public boolean LOCAL_USE = false;
 	
 	static public boolean FRAMEWORK_GENERATION = false;
