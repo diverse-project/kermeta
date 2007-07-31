@@ -2,13 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceItemProvider.java,v 1.3 2007-04-24 12:39:52 dtouzet Exp $
+ * $Id: TraceItemProvider.java,v 1.4 2007-07-31 12:34:23 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
 
 import fr.irisa.triskell.traceability.ModelReference;
-import fr.irisa.triskell.traceability.TraceModel;
 import fr.irisa.triskell.traceability.Reference;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.Trace;
@@ -23,10 +22,10 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
+import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
@@ -62,7 +61,8 @@ public class TraceItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List getPropertyDescriptors(Object object) {
+	@Override
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -145,6 +145,7 @@ public class TraceItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object getImage(Object object) {
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/Trace"));
 	}
@@ -159,7 +160,7 @@ public class TraceItemProvider
 		StringBuffer msg = new StringBuffer(getString("_UI_Trace_type"));
 		Trace t = (Trace)object;
 		
-		Iterator it = t.getSourceReferences().iterator();
+		Iterator<Reference> it = t.getSourceReferences().iterator();
 		while(it.hasNext()){
 			Object o = it.next();
 			if (o instanceof ModelReference){
@@ -192,19 +193,21 @@ public class TraceItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
 
 	/**
-	 * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-	 * describing all of the children that can be created under this object.
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
+	@Override
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -214,6 +217,7 @@ public class TraceItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResourceLocator getResourceLocator() {
 		return TraceabilityEditPlugin.INSTANCE;
 	}

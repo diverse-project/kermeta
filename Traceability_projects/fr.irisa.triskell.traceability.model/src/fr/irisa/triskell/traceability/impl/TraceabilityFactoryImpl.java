@@ -2,25 +2,20 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityFactoryImpl.java,v 1.2 2007-07-24 13:45:40 ftanguy Exp $
+ * $Id: TraceabilityFactoryImpl.java,v 1.3 2007-07-31 12:34:30 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.impl;
+
+import fr.irisa.triskell.traceability.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import fr.irisa.triskell.traceability.Message;
-import fr.irisa.triskell.traceability.ModelReference;
-import fr.irisa.triskell.traceability.TextReference;
-import fr.irisa.triskell.traceability.Trace;
-import fr.irisa.triskell.traceability.TraceModel;
-import fr.irisa.triskell.traceability.TraceabilityFactory;
-import fr.irisa.triskell.traceability.TraceabilityPackage;
-import fr.irisa.triskell.traceability.XMLReference;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -63,6 +58,7 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case TraceabilityPackage.TRACE_MODEL: return createTraceModel();
@@ -81,6 +77,7 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
 			case TraceabilityPackage.STRING:
@@ -99,6 +96,7 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements Traceabilit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case TraceabilityPackage.STRING:
@@ -214,7 +212,7 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements Traceabilit
 	 * @generated
 	 */
 	public Object createObjectFromString(EDataType eDataType, String initialValue) {
-		return (Object)super.createFromString(eDataType, initialValue);
+		return super.createFromString(eDataType, initialValue);
 	}
 
 	/**
@@ -241,6 +239,7 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements Traceabilit
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static TraceabilityPackage getPackage() {
 		return TraceabilityPackage.eINSTANCE;
 	}

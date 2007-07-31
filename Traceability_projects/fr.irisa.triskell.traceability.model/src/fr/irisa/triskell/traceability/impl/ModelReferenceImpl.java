@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelReferenceImpl.java,v 1.1 2007-05-04 15:58:27 dtouzet Exp $
+ * $Id: ModelReferenceImpl.java,v 1.2 2007-07-31 12:34:30 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.impl;
 
@@ -39,7 +39,7 @@ public class ModelReferenceImpl extends ReferenceImpl implements ModelReference 
 	 * @generated
 	 * @ordered
 	 */
-	protected EObject refObject = null;
+	protected EObject refObject;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -55,6 +55,7 @@ public class ModelReferenceImpl extends ReferenceImpl implements ModelReference 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TraceabilityPackage.Literals.MODEL_REFERENCE;
 	}
@@ -102,6 +103,7 @@ public class ModelReferenceImpl extends ReferenceImpl implements ModelReference 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TraceabilityPackage.MODEL_REFERENCE__REF_OBJECT:
@@ -116,6 +118,7 @@ public class ModelReferenceImpl extends ReferenceImpl implements ModelReference 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TraceabilityPackage.MODEL_REFERENCE__REF_OBJECT:
@@ -130,6 +133,7 @@ public class ModelReferenceImpl extends ReferenceImpl implements ModelReference 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TraceabilityPackage.MODEL_REFERENCE__REF_OBJECT:
@@ -144,6 +148,7 @@ public class ModelReferenceImpl extends ReferenceImpl implements ModelReference 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TraceabilityPackage.MODEL_REFERENCE__REF_OBJECT:

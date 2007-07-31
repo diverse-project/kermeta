@@ -1,4 +1,4 @@
-/* $Id: Tracer.java,v 1.5 2007-07-01 09:26:05 ftanguy Exp $
+/* $Id: Tracer.java,v 1.6 2007-07-31 12:34:32 dtouzet Exp $
  * Project    : fr.irisa.triskell.traceability.model
  * File       : Tracer.java
  * License    : EPL
@@ -55,7 +55,7 @@ public class Tracer {
 		traceResource = newTraceResource;
 
 		// try to retreive the model in this ressource 
-		Iterator it = traceResource.getContents().iterator();
+		Iterator<EObject> it = traceResource.getContents().iterator();
 		while (it.hasNext())
 		{
 			Object o = it.next();
@@ -140,21 +140,21 @@ public class Tracer {
 	 * @note : not tested yet!
 	 * @return an EList of TextReference
 	 */
-	protected ArrayList getRecursiveSourceTextReferences(Reference eref, ArrayList result)
+	protected ArrayList<Reference> getRecursiveSourceTextReferences(Reference eref, ArrayList<Reference> result)
 	{	
 		// get the list sourceTrace
-		EList sourceTraces = eref.getSourceTraces();
-		Iterator sourceIt = sourceTraces.iterator();
+		EList<Trace> sourceTraces = eref.getSourceTraces();
+		Iterator<Trace> sourceIt = sourceTraces.iterator();
 		// get, for each sourceTrace, the list of sourceReferences
 		while (sourceIt.hasNext())
 		{
-			Trace t = (Trace)sourceIt.next();
-			EList refs = t.getSourceReferences();
-			Iterator refsIt = refs.iterator();
+			Trace t = sourceIt.next();
+			EList<Reference> refs = t.getSourceReferences();
+			Iterator<Reference> refsIt = refs.iterator();
 			while (refsIt.hasNext())
 			{
 				// for each sourceReference, add it if it is a TextReference
-				Reference r = (Reference)refsIt.next();
+				Reference r = refsIt.next();
 				if (r instanceof TextReference)
 				{
 					result.add(r);
@@ -175,9 +175,9 @@ public class Tracer {
 	 * @note : not tested yet!!!
 	 * @return the list of source text references for the given target.
 	 */
-	public ArrayList getAllSourceTextReferences(EObject target)
+	public ArrayList<Reference> getAllSourceTextReferences(EObject target)
 	{
-		ArrayList result = new ArrayList();
+		ArrayList<Reference> result = new ArrayList<Reference>();
 		ModelReference eref = getModelReference(target);
 		result.addAll(getRecursiveSourceTextReferences(eref, result));
 		return result;
@@ -190,9 +190,7 @@ public class Tracer {
 	 * */
 	public TextReference getFirstTextReference(EObject target)
 	{
-		TextReference result = null;
 		ModelReference eref = getModelReference(target);
-		
 		return ModelReferenceHelper.getFirstTextReference(eref);
 	}
 	
@@ -238,7 +236,7 @@ public class Tracer {
 		{
 			return null;
 		}
-		Iterator it = modelTrace.getReferences().iterator();
+		Iterator<Reference> it = modelTrace.getReferences().iterator();
 		while (it.hasNext())
 		{
 			Object o = it.next();
@@ -274,18 +272,18 @@ public class Tracer {
 		if (modelTrace ==  null) return;
 		
 		// construct a list of Reference that have both input and output trace
-		EList refToRemove = new BasicEList();
-		Iterator itRef1 = modelTrace.getReferences().iterator();
+		EList<Reference> refToRemove = new BasicEList<Reference>();
+		Iterator<Reference> itRef1 = modelTrace.getReferences().iterator();
 		while (itRef1.hasNext())
 		{
-			Reference ref1 = (Reference)itRef1.next();
+			Reference ref1 = itRef1.next();
 			if((ref1.getSourceTraces().size() != 0 ) && (ref1.getTargetTraces().size() != 0))
 			{
 				unlinkIntermediateReference(ref1);
 				refToRemove.add(ref1);
 			}
 		}
-		Iterator it = refToRemove.iterator();
+		Iterator<Reference> it = refToRemove.iterator();
 		while (it.hasNext())
 		{
 			Object o = it.next();
@@ -297,20 +295,20 @@ public class Tracer {
 	/** don't work ...!!! */
 	private void unlinkIntermediateReference(Reference ref)
 	{
-		EList sourceTraces = new BasicEList(ref.getSourceTraces());
-		EList targetTraces = new BasicEList(ref.getTargetTraces());
+		EList<Trace> sourceTraces = new BasicEList<Trace>(ref.getSourceTraces());
+		EList<Trace> targetTraces = new BasicEList<Trace>(ref.getTargetTraces());
 		
-		Iterator it = ref.getSourceTraces().iterator();
+		Iterator<Trace> it = ref.getSourceTraces().iterator();
 		while(it.hasNext())
 		{
-			Trace t = (Trace)it.next();
+			/*Trace t =*/ it.next();
 			//t.getTargetReferences().remove(ref);
 			
 		}
 		it = ref.getTargetTraces().iterator();
 		while(it.hasNext())
 		{
-			Trace t = (Trace)it.next();
+			/*Trace t =*/ it.next();
 			//t.getSourceReferences().remove(ref);
 		}
 		ref.getTargetTraces().clear();
@@ -321,10 +319,10 @@ public class Tracer {
 		while(it.hasNext())
 		{
 			Trace tt = (Trace)it.next();
-			Iterator it2 = sourceTraces.iterator();
+			Iterator<Trace> it2 = sourceTraces.iterator();
 			while (it2.hasNext())
 			{
-				Trace st = (Trace)it2.next();
+				Trace st = it2.next();
 				tt.getSourceReferences().addAll(st.getTargetReferences());
 			}						
 		}

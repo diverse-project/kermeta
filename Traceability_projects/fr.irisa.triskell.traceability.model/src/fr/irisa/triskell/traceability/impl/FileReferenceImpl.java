@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileReferenceImpl.java,v 1.1 2007-05-04 15:58:27 dtouzet Exp $
+ * $Id: FileReferenceImpl.java,v 1.2 2007-07-31 12:34:30 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.impl;
 
@@ -63,6 +63,7 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TraceabilityPackage.Literals.FILE_REFERENCE;
 	}
@@ -93,6 +94,7 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TraceabilityPackage.FILE_REFERENCE__FILE_URI:
@@ -106,6 +108,7 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TraceabilityPackage.FILE_REFERENCE__FILE_URI:
@@ -120,6 +123,7 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TraceabilityPackage.FILE_REFERENCE__FILE_URI:
@@ -134,6 +138,7 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TraceabilityPackage.FILE_REFERENCE__FILE_URI:
@@ -147,6 +152,7 @@ public abstract class FileReferenceImpl extends ReferenceImpl implements FileRef
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

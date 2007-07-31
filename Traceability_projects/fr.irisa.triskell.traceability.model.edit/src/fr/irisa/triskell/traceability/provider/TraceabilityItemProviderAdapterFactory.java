@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityItemProviderAdapterFactory.java,v 1.3 2007-04-24 12:39:52 dtouzet Exp $
+ * $Id: TraceabilityItemProviderAdapterFactory.java,v 1.4 2007-07-31 12:34:23 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
@@ -59,7 +59,7 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection supportedTypes = new ArrayList();
+	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
 	 * This constructs an instance.
@@ -72,7 +72,7 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);		
+		supportedTypes.add(IItemPropertySource.class);
 	}
 
 	/**
@@ -89,6 +89,7 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTraceModelAdapter() {
 		if (traceModelItemProvider == null) {
 			traceModelItemProvider = new TraceModelItemProvider(this);
@@ -111,6 +112,7 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTraceAdapter() {
 		if (traceItemProvider == null) {
 			traceItemProvider = new TraceItemProvider(this);
@@ -133,6 +135,7 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTextReferenceAdapter() {
 		if (textReferenceItemProvider == null) {
 			textReferenceItemProvider = new TextReferenceItemProvider(this);
@@ -155,6 +158,7 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createXMLReferenceAdapter() {
 		if (xmlReferenceItemProvider == null) {
 			xmlReferenceItemProvider = new XMLReferenceItemProvider(this);
@@ -177,6 +181,7 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createModelReferenceAdapter() {
 		if (modelReferenceItemProvider == null) {
 			modelReferenceItemProvider = new ModelReferenceItemProvider(this);
@@ -199,6 +204,7 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createMessageAdapter() {
 		if (messageItemProvider == null) {
 			messageItemProvider = new MessageItemProvider(this);
@@ -232,6 +238,7 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object type) {
 		return supportedTypes.contains(type) || super.isFactoryForType(type);
 	}
@@ -242,6 +249,7 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
 		return super.adapt(notifier, this);
 	}
@@ -251,10 +259,11 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class)type).isInstance(adapter))) {
+			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}

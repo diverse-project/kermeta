@@ -2,24 +2,18 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityAdapterFactory.java,v 1.2 2007-07-24 13:45:40 ftanguy Exp $
+ * $Id: TraceabilityAdapterFactory.java,v 1.3 2007-07-31 12:34:32 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.util;
 
+import fr.irisa.triskell.traceability.*;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-import org.eclipse.emf.ecore.EObject;
 
-import fr.irisa.triskell.traceability.FileReference;
-import fr.irisa.triskell.traceability.Message;
-import fr.irisa.triskell.traceability.ModelReference;
-import fr.irisa.triskell.traceability.Reference;
-import fr.irisa.triskell.traceability.TextReference;
-import fr.irisa.triskell.traceability.Trace;
-import fr.irisa.triskell.traceability.TraceModel;
-import fr.irisa.triskell.traceability.TraceabilityPackage;
-import fr.irisa.triskell.traceability.XMLReference;
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,6 +52,7 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object object) {
 		if (object == modelPackage) {
 			return true;
@@ -74,33 +69,42 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TraceabilitySwitch modelSwitch =
-		new TraceabilitySwitch() {
-			public Object caseTraceModel(TraceModel object) {
+	protected TraceabilitySwitch<Adapter> modelSwitch =
+		new TraceabilitySwitch<Adapter>() {
+			@Override
+			public Adapter caseTraceModel(TraceModel object) {
 				return createTraceModelAdapter();
 			}
-			public Object caseMessage(Message object) {
+			@Override
+			public Adapter caseMessage(Message object) {
 				return createMessageAdapter();
 			}
-			public Object caseTrace(Trace object) {
+			@Override
+			public Adapter caseTrace(Trace object) {
 				return createTraceAdapter();
 			}
-			public Object caseReference(Reference object) {
+			@Override
+			public Adapter caseReference(Reference object) {
 				return createReferenceAdapter();
 			}
-			public Object caseFileReference(FileReference object) {
+			@Override
+			public Adapter caseFileReference(FileReference object) {
 				return createFileReferenceAdapter();
 			}
-			public Object caseTextReference(TextReference object) {
+			@Override
+			public Adapter caseTextReference(TextReference object) {
 				return createTextReferenceAdapter();
 			}
-			public Object caseXMLReference(XMLReference object) {
+			@Override
+			public Adapter caseXMLReference(XMLReference object) {
 				return createXMLReferenceAdapter();
 			}
-			public Object caseModelReference(ModelReference object) {
+			@Override
+			public Adapter caseModelReference(ModelReference object) {
 				return createModelReferenceAdapter();
 			}
-			public Object defaultCase(EObject object) {
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -113,8 +117,9 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
+	@Override
 	public Adapter createAdapter(Notifier target) {
-		return (Adapter)modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 

@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TextReferenceImpl.java,v 1.3 2007-05-24 13:45:00 dvojtise Exp $
+ * $Id: TextReferenceImpl.java,v 1.4 2007-07-31 12:34:30 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.impl;
 
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.TraceabilityPackage;
 
@@ -127,30 +126,17 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TraceabilityPackage.Literals.TEXT_REFERENCE;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * use a lazy way to calculate the value
-	 * it is calculated only on demand
-	 * if it is -1, this means that it was not calculated yet
-	 * if it is -2, this means that it failed to calculate it 
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public Integer getLineBeginAt() {
-		if(lineBeginAt == -1){
-			try{
-				lineBeginAt = ResourceHelper.calculateLineNumber(this.charBeginAt,this.fileURI);
-				if(lineBeginAt == -1) lineBeginAt = -2; // still to -1, goes to error mode do not try again
-			}catch(Throwable e){
-				// it must be fail safe
-				lineBeginAt = -2;
-			}
-		}
-		//else if(lineBeginAt == -2) // cannot be calculated
 		return lineBeginAt;
 	}
 
@@ -234,6 +220,7 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TraceabilityPackage.TEXT_REFERENCE__LINE_BEGIN_AT:
@@ -253,6 +240,7 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TraceabilityPackage.TEXT_REFERENCE__LINE_BEGIN_AT:
@@ -276,6 +264,7 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TraceabilityPackage.TEXT_REFERENCE__LINE_BEGIN_AT:
@@ -299,6 +288,7 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TraceabilityPackage.TEXT_REFERENCE__LINE_BEGIN_AT:
@@ -318,6 +308,7 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

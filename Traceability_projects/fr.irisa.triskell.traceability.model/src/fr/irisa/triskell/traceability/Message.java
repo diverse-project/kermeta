@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Message.java,v 1.1 2007-05-04 15:58:26 dtouzet Exp $
+ * $Id: Message.java,v 1.2 2007-07-31 12:34:31 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability;
 
@@ -125,11 +125,11 @@ public interface Message extends EObject {
 	 * @return the value of the '<em>Traces</em>' reference list.
 	 * @see fr.irisa.triskell.traceability.TraceabilityPackage#getMessage_Traces()
 	 * @see fr.irisa.triskell.traceability.Trace#getDescription
-	 * @model type="fr.irisa.triskell.traceability.Trace" opposite="description"
+	 * @model opposite="description"
 	 *        annotation="kermeta documentation='/** Link to the traces the message is associated with \052/'"
 	 * @generated
 	 */
-	EList getTraces();
+	EList<Trace> getTraces();
 
 	/**
 	 * Returns the value of the '<em><b>Trace Mdl</b></em>' container reference.
@@ -144,7 +144,7 @@ public interface Message extends EObject {
 	 * @see #setTraceMdl(TraceModel)
 	 * @see fr.irisa.triskell.traceability.TraceabilityPackage#getMessage_TraceMdl()
 	 * @see fr.irisa.triskell.traceability.TraceModel#getMessages
-	 * @model opposite="messages" required="true"
+	 * @model opposite="messages" required="true" transient="false"
 	 *        annotation="kermeta documentation='/** Link to the containing trace model \052/'"
 	 * @generated
 	 */

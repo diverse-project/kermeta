@@ -2,24 +2,16 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilitySwitch.java,v 1.2 2007-07-24 13:45:40 ftanguy Exp $
+ * $Id: TraceabilitySwitch.java,v 1.3 2007-07-31 12:34:32 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.util;
+
+import fr.irisa.triskell.traceability.*;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import fr.irisa.triskell.traceability.FileReference;
-import fr.irisa.triskell.traceability.Message;
-import fr.irisa.triskell.traceability.ModelReference;
-import fr.irisa.triskell.traceability.Reference;
-import fr.irisa.triskell.traceability.TextReference;
-import fr.irisa.triskell.traceability.Trace;
-import fr.irisa.triskell.traceability.TraceModel;
-import fr.irisa.triskell.traceability.TraceabilityPackage;
-import fr.irisa.triskell.traceability.XMLReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,7 +26,7 @@ import fr.irisa.triskell.traceability.XMLReference;
  * @see fr.irisa.triskell.traceability.TraceabilityPackage
  * @generated
  */
-public class TraceabilitySwitch {
+public class TraceabilitySwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -62,7 +54,7 @@ public class TraceabilitySwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	public Object doSwitch(EObject theEObject) {
+	public T doSwitch(EObject theEObject) {
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
@@ -73,16 +65,16 @@ public class TraceabilitySwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(EClass theEClass, EObject theEObject) {
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
 		else {
-			List eSuperTypes = theEClass.getESuperTypes();
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
 					defaultCase(theEObject) :
-					doSwitch((EClass)eSuperTypes.get(0), theEObject);
+					doSwitch(eSuperTypes.get(0), theEObject);
 		}
 	}
 
@@ -93,42 +85,42 @@ public class TraceabilitySwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(int classifierID, EObject theEObject) {
+	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case TraceabilityPackage.TRACE_MODEL: {
 				TraceModel traceModel = (TraceModel)theEObject;
-				Object result = caseTraceModel(traceModel);
+				T result = caseTraceModel(traceModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TraceabilityPackage.MESSAGE: {
 				Message message = (Message)theEObject;
-				Object result = caseMessage(message);
+				T result = caseMessage(message);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TraceabilityPackage.TRACE: {
 				Trace trace = (Trace)theEObject;
-				Object result = caseTrace(trace);
+				T result = caseTrace(trace);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TraceabilityPackage.REFERENCE: {
 				Reference reference = (Reference)theEObject;
-				Object result = caseReference(reference);
+				T result = caseReference(reference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TraceabilityPackage.FILE_REFERENCE: {
 				FileReference fileReference = (FileReference)theEObject;
-				Object result = caseFileReference(fileReference);
+				T result = caseFileReference(fileReference);
 				if (result == null) result = caseReference(fileReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TraceabilityPackage.TEXT_REFERENCE: {
 				TextReference textReference = (TextReference)theEObject;
-				Object result = caseTextReference(textReference);
+				T result = caseTextReference(textReference);
 				if (result == null) result = caseFileReference(textReference);
 				if (result == null) result = caseReference(textReference);
 				if (result == null) result = defaultCase(theEObject);
@@ -136,7 +128,7 @@ public class TraceabilitySwitch {
 			}
 			case TraceabilityPackage.XML_REFERENCE: {
 				XMLReference xmlReference = (XMLReference)theEObject;
-				Object result = caseXMLReference(xmlReference);
+				T result = caseXMLReference(xmlReference);
 				if (result == null) result = caseFileReference(xmlReference);
 				if (result == null) result = caseReference(xmlReference);
 				if (result == null) result = defaultCase(theEObject);
@@ -144,7 +136,7 @@ public class TraceabilitySwitch {
 			}
 			case TraceabilityPackage.MODEL_REFERENCE: {
 				ModelReference modelReference = (ModelReference)theEObject;
-				Object result = caseModelReference(modelReference);
+				T result = caseModelReference(modelReference);
 				if (result == null) result = caseReference(modelReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -154,137 +146,137 @@ public class TraceabilitySwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Trace Model</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Trace Model</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseTraceModel(TraceModel object) {
+	public T caseTraceModel(TraceModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Message</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Message</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Message</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Message</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseMessage(Message object) {
+	public T caseMessage(Message object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Trace</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Trace</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Trace</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Trace</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseTrace(Trace object) {
+	public T caseTrace(Trace object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseReference(Reference object) {
+	public T caseReference(Reference object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>File Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>File Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>File Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>File Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseFileReference(FileReference object) {
+	public T caseFileReference(FileReference object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Text Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Text Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Text Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Text Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseTextReference(TextReference object) {
+	public T caseTextReference(TextReference object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>XML Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XML Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>XML Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XML Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseXMLReference(XMLReference object) {
+	public T caseXMLReference(XMLReference object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Model Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Model Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Model Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Model Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseModelReference(ModelReference object) {
+	public T caseModelReference(ModelReference object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	public Object defaultCase(EObject object) {
+	public T defaultCase(EObject object) {
 		return null;
 	}
 

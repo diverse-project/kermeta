@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceModel.java,v 1.1 2007-05-04 15:58:26 dtouzet Exp $
+ * $Id: TraceModel.java,v 1.2 2007-07-31 12:34:31 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability;
 
@@ -42,11 +42,11 @@ public interface TraceModel extends EObject {
 	 * @return the value of the '<em>Traces</em>' containment reference list.
 	 * @see fr.irisa.triskell.traceability.TraceabilityPackage#getTraceModel_Traces()
 	 * @see fr.irisa.triskell.traceability.Trace#getTraceMdl
-	 * @model type="fr.irisa.triskell.traceability.Trace" opposite="traceMdl" containment="true" ordered="false"
+	 * @model opposite="traceMdl" containment="true" ordered="false"
 	 *        annotation="kermeta documentation='/** Set of traces contained by the trace model \052/'"
 	 * @generated
 	 */
-	EList getTraces();
+	EList<Trace> getTraces();
 
 	/**
 	 * Returns the value of the '<em><b>References</b></em>' containment reference list.
@@ -61,11 +61,11 @@ public interface TraceModel extends EObject {
 	 * @return the value of the '<em>References</em>' containment reference list.
 	 * @see fr.irisa.triskell.traceability.TraceabilityPackage#getTraceModel_References()
 	 * @see fr.irisa.triskell.traceability.Reference#getTraceMdl
-	 * @model type="fr.irisa.triskell.traceability.Reference" opposite="traceMdl" containment="true" ordered="false"
+	 * @model opposite="traceMdl" containment="true" ordered="false"
 	 *        annotation="kermeta documentation='/** Set of references to the traced objects of the trace model \052/'"
 	 * @generated
 	 */
-	EList getReferences();
+	EList<Reference> getReferences();
 
 	/**
 	 * Returns the value of the '<em><b>Messages</b></em>' containment reference list.
@@ -80,10 +80,10 @@ public interface TraceModel extends EObject {
 	 * @return the value of the '<em>Messages</em>' containment reference list.
 	 * @see fr.irisa.triskell.traceability.TraceabilityPackage#getTraceModel_Messages()
 	 * @see fr.irisa.triskell.traceability.Message#getTraceMdl
-	 * @model type="fr.irisa.triskell.traceability.Message" opposite="traceMdl" containment="true" ordered="false"
+	 * @model opposite="traceMdl" containment="true" ordered="false"
 	 *        annotation="kermeta documentation='/** Set of messages contained by the trace model \052/'"
 	 * @generated
 	 */
-	EList getMessages();
+	EList<Message> getMessages();
 
 } // TraceModel

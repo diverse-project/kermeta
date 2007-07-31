@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MessageImpl.java,v 1.1 2007-05-04 15:58:27 dtouzet Exp $
+ * $Id: MessageImpl.java,v 1.2 2007-07-31 12:34:30 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.impl;
 
@@ -114,7 +114,7 @@ public class MessageImpl extends EObjectImpl implements Message {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList traces = null;
+	protected EList<Trace> traces;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -130,6 +130,7 @@ public class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TraceabilityPackage.Literals.MESSAGE;
 	}
@@ -202,9 +203,9 @@ public class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getTraces() {
+	public EList<Trace> getTraces() {
 		if (traces == null) {
-			traces = new EObjectWithInverseResolvingEList.ManyInverse(Trace.class, this, TraceabilityPackage.MESSAGE__TRACES, TraceabilityPackage.TRACE__DESCRIPTION);
+			traces = new EObjectWithInverseResolvingEList.ManyInverse<Trace>(Trace.class, this, TraceabilityPackage.MESSAGE__TRACES, TraceabilityPackage.TRACE__DESCRIPTION);
 		}
 		return traces;
 	}
@@ -255,10 +256,12 @@ public class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TraceabilityPackage.MESSAGE__TRACES:
-				return ((InternalEList)getTraces()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTraces()).basicAdd(otherEnd, msgs);
 			case TraceabilityPackage.MESSAGE__TRACE_MDL:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -272,10 +275,11 @@ public class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TraceabilityPackage.MESSAGE__TRACES:
-				return ((InternalEList)getTraces()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getTraces()).basicRemove(otherEnd, msgs);
 			case TraceabilityPackage.MESSAGE__TRACE_MDL:
 				return basicSetTraceMdl(null, msgs);
 		}
@@ -287,6 +291,7 @@ public class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case TraceabilityPackage.MESSAGE__TRACE_MDL:
@@ -300,6 +305,7 @@ public class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TraceabilityPackage.MESSAGE__LANGUAGE:
@@ -321,6 +327,8 @@ public class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TraceabilityPackage.MESSAGE__LANGUAGE:
@@ -334,7 +342,7 @@ public class MessageImpl extends EObjectImpl implements Message {
 				return;
 			case TraceabilityPackage.MESSAGE__TRACES:
 				getTraces().clear();
-				getTraces().addAll((Collection)newValue);
+				getTraces().addAll((Collection<? extends Trace>)newValue);
 				return;
 			case TraceabilityPackage.MESSAGE__TRACE_MDL:
 				setTraceMdl((TraceModel)newValue);
@@ -348,6 +356,7 @@ public class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TraceabilityPackage.MESSAGE__LANGUAGE:
@@ -374,6 +383,7 @@ public class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TraceabilityPackage.MESSAGE__LANGUAGE:
@@ -395,6 +405,7 @@ public class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

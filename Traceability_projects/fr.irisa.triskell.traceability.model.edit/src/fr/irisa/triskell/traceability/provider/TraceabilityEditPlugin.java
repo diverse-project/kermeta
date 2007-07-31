@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityEditPlugin.java,v 1.1 2006-10-06 13:00:14 dvojtise Exp $
+ * $Id: TraceabilityEditPlugin.java,v 1.2 2007-07-31 12:34:23 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
@@ -52,6 +52,7 @@ public final class TraceabilityEditPlugin extends EMFPlugin {
 	 * @return the singleton instance.
 	 * @generated
 	 */
+	@Override
 	public ResourceLocator getPluginResourceLocator() {
 		return plugin;
 	}

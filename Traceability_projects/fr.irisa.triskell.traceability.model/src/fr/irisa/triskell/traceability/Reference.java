@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Reference.java,v 1.1 2007-05-04 15:58:26 dtouzet Exp $
+ * $Id: Reference.java,v 1.2 2007-07-31 12:34:31 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability;
 
@@ -43,11 +43,11 @@ public interface Reference extends EObject {
 	 * @return the value of the '<em>Target Traces</em>' reference list.
 	 * @see fr.irisa.triskell.traceability.TraceabilityPackage#getReference_TargetTraces()
 	 * @see fr.irisa.triskell.traceability.Trace#getSourceReferences
-	 * @model type="fr.irisa.triskell.traceability.Trace" opposite="sourceReferences"
+	 * @model opposite="sourceReferences"
 	 *        annotation="kermeta documentation='/** Link to the reference target traces \052/'"
 	 * @generated
 	 */
-	EList getTargetTraces();
+	EList<Trace> getTargetTraces();
 
 	/**
 	 * Returns the value of the '<em><b>Source Traces</b></em>' reference list.
@@ -62,11 +62,11 @@ public interface Reference extends EObject {
 	 * @return the value of the '<em>Source Traces</em>' reference list.
 	 * @see fr.irisa.triskell.traceability.TraceabilityPackage#getReference_SourceTraces()
 	 * @see fr.irisa.triskell.traceability.Trace#getTargetReferences
-	 * @model type="fr.irisa.triskell.traceability.Trace" opposite="targetReferences"
+	 * @model opposite="targetReferences"
 	 *        annotation="kermeta documentation='/** Link to the reference source traces \052/'"
 	 * @generated
 	 */
-	EList getSourceTraces();
+	EList<Trace> getSourceTraces();
 
 	/**
 	 * Returns the value of the '<em><b>Trace Mdl</b></em>' container reference.
@@ -81,7 +81,7 @@ public interface Reference extends EObject {
 	 * @see #setTraceMdl(TraceModel)
 	 * @see fr.irisa.triskell.traceability.TraceabilityPackage#getReference_TraceMdl()
 	 * @see fr.irisa.triskell.traceability.TraceModel#getReferences
-	 * @model opposite="references" required="true"
+	 * @model opposite="references" required="true" transient="false"
 	 *        annotation="kermeta documentation='/** Link to the containing trace model \052/'"
 	 * @generated
 	 */

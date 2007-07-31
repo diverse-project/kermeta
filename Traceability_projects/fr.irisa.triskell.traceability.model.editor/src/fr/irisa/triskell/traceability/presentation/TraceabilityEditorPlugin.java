@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityEditorPlugin.java,v 1.2 2007-04-24 12:39:45 dtouzet Exp $
+ * $Id: TraceabilityEditorPlugin.java,v 1.3 2007-07-31 12:34:18 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.presentation;
 
@@ -43,8 +43,8 @@ public final class TraceabilityEditorPlugin extends EMFPlugin {
 	 */
 	public TraceabilityEditorPlugin() {
 		super
-		  (new ResourceLocator [] {
-		   });
+			(new ResourceLocator [] {
+			});
 	}
 
 	/**
@@ -54,6 +54,7 @@ public final class TraceabilityEditorPlugin extends EMFPlugin {
 	 * @return the singleton instance.
 	 * @generated
 	 */
+	@Override
 	public ResourceLocator getPluginResourceLocator() {
 		return plugin;
 	}
@@ -84,7 +85,7 @@ public final class TraceabilityEditorPlugin extends EMFPlugin {
 		 */
 		public Implementation() {
 			super();
-
+	
 			// Remember the static instance.
 			//
 			plugin = this;

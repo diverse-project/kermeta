@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileReference.java,v 1.1 2007-05-04 15:58:26 dtouzet Exp $
+ * $Id: FileReference.java,v 1.2 2007-07-31 12:34:31 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability;
 

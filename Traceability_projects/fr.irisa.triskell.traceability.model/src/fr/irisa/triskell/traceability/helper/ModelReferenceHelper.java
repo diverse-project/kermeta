@@ -1,4 +1,4 @@
-/*$Id: ModelReferenceHelper.java,v 1.2 2007-06-05 15:37:24 dtouzet Exp $
+/*$Id: ModelReferenceHelper.java,v 1.3 2007-07-31 12:34:32 dtouzet Exp $
 * Project : fr.irisa.triskell.traceability.model
 * File : 	ModelReferenceHelper.java
 * License : EPL
@@ -37,14 +37,14 @@ public class ModelReferenceHelper {
 		TextReference result = null;
 		if (eref != null)
 		{
-			EList sourceTraces = eref.getSourceTraces();
-			Iterator sourceIt = sourceTraces.iterator();
+			EList<Trace> sourceTraces = eref.getSourceTraces();
+			Iterator<Trace> sourceIt = sourceTraces.iterator();
 			// get, for each sourceTrace, the list of sourceReferences
 			while (sourceIt.hasNext())
 			{
 				Trace t = (Trace)sourceIt.next();
-				EList refs = t.getSourceReferences();
-				Iterator refsIt = refs.iterator();
+				EList<Reference> refs = t.getSourceReferences();
+				Iterator<Reference> refsIt = refs.iterator();
 				while (refsIt.hasNext())
 				{
 					Reference r = (Reference)refsIt.next();

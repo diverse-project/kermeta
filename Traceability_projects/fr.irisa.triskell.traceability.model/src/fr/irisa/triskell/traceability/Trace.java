@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Trace.java,v 1.1 2007-05-04 15:58:26 dtouzet Exp $
+ * $Id: Trace.java,v 1.2 2007-07-31 12:34:31 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability;
 
@@ -43,11 +43,11 @@ public interface Trace extends EObject {
 	 * @return the value of the '<em>Source References</em>' reference list.
 	 * @see fr.irisa.triskell.traceability.TraceabilityPackage#getTrace_SourceReferences()
 	 * @see fr.irisa.triskell.traceability.Reference#getTargetTraces
-	 * @model type="fr.irisa.triskell.traceability.Reference" opposite="targetTraces"
+	 * @model opposite="targetTraces"
 	 *        annotation="kermeta documentation='/** Link to the references to the trace incoming elements \052/'"
 	 * @generated
 	 */
-	EList getSourceReferences();
+	EList<Reference> getSourceReferences();
 
 	/**
 	 * Returns the value of the '<em><b>Target References</b></em>' reference list.
@@ -62,11 +62,11 @@ public interface Trace extends EObject {
 	 * @return the value of the '<em>Target References</em>' reference list.
 	 * @see fr.irisa.triskell.traceability.TraceabilityPackage#getTrace_TargetReferences()
 	 * @see fr.irisa.triskell.traceability.Reference#getSourceTraces
-	 * @model type="fr.irisa.triskell.traceability.Reference" opposite="sourceTraces"
+	 * @model opposite="sourceTraces"
 	 *        annotation="kermeta documentation='/** Link to the references to the trace outgoing elements \052/'"
 	 * @generated
 	 */
-	EList getTargetReferences();
+	EList<Reference> getTargetReferences();
 
 	/**
 	 * Returns the value of the '<em><b>Description</b></em>' reference list.
@@ -81,11 +81,11 @@ public interface Trace extends EObject {
 	 * @return the value of the '<em>Description</em>' reference list.
 	 * @see fr.irisa.triskell.traceability.TraceabilityPackage#getTrace_Description()
 	 * @see fr.irisa.triskell.traceability.Message#getTraces
-	 * @model type="fr.irisa.triskell.traceability.Message" opposite="traces"
+	 * @model opposite="traces"
 	 *        annotation="kermeta documentation='/** Link to the messages describing the trace \052/'"
 	 * @generated
 	 */
-	EList getDescription();
+	EList<Message> getDescription();
 
 	/**
 	 * Returns the value of the '<em><b>Trace Mdl</b></em>' container reference.
@@ -100,7 +100,7 @@ public interface Trace extends EObject {
 	 * @see #setTraceMdl(TraceModel)
 	 * @see fr.irisa.triskell.traceability.TraceabilityPackage#getTrace_TraceMdl()
 	 * @see fr.irisa.triskell.traceability.TraceModel#getTraces
-	 * @model opposite="traces" required="true"
+	 * @model opposite="traces" required="true" transient="false"
 	 *        annotation="kermeta documentation='/** Link to the containing trace model \052/'"
 	 * @generated
 	 */

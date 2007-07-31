@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityPackageImpl.java,v 1.1 2007-05-04 15:58:27 dtouzet Exp $
+ * $Id: TraceabilityPackageImpl.java,v 1.2 2007-07-31 12:34:30 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.impl;
 
@@ -568,6 +568,10 @@ public class TraceabilityPackageImpl extends EPackageImpl implements Traceabilit
 		setName(eNAME);
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
+
+		// Create type parameters
+
+		// Set bounds for type parameters
 
 		// Add supertypes to classes
 		fileReferenceEClass.getESuperTypes().add(this.getReference());
