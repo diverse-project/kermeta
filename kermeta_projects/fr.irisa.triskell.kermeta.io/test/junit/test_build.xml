@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.21 2007-07-31 13:09:26 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.22 2007-07-31 14:52:27 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -34,6 +34,7 @@
 	<property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.3.0.v200706262000.jar"/>
 	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.3.0.v200706262000.jar"/>
 	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.3.0.v200706262000.jar"/>
+	<property name="osgi.jar" location="${eclipse.home}/plugins/org.eclipse.osgi_3.3.0.v20070530.jar"/>	
 	<property name="core.runtime.jar" location="${eclipse.home}/plugins/org.eclipse.core.runtime_3.3.100.v20070530.jar"/>
 	<property name="ui.workbench.jar" location="${eclipse.home}/plugins/org.eclipse.ui.workbench_3.3.0.I20070608-1100.jar"/>
 	<property name="jface.jar" location="${eclipse.home}/plugins/org.eclipse.jface_3.3.0.I20070606-0010.jar"/>
@@ -47,7 +48,8 @@
 	    <pathelement location="${emf.common.jar}"/>
 	    <pathelement location="${emf.ecore.jar}"/>
 	    <pathelement location="${emf.ecore.xmi.jar}"/>
-		<pathelement location="${core.runtime.jar}"/>
+		<pathelement location="${osgi.jar}"/>
+	    <pathelement location="${core.runtime.jar}"/>
 		<pathelement location="${ui.workbench.jar}"/>
 		<pathelement location="${jface.jar}"/>
 		<pathelement location="${swt.jar}"/>
