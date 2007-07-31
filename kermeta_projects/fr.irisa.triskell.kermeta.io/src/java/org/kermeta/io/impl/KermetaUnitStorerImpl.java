@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.6 2007-07-27 13:28:27 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.7 2007-07-31 08:26:16 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -212,8 +212,14 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 */
 	public void unload(String uri) {
 		KermetaUnit kermetaUnit = find(uri);
-		if ( kermetaUnit != null )
+		if ( kermetaUnit != null ) {
 			getKermetaUnits().remove( kermetaUnit );
+			kermetaUnit.getImportedKermetaUnits().clear();
+			kermetaUnit.getImporters().clear();
+			//kermetaUnit.getMessages().clear();
+			//kermetaUnit.getExternalPackageEntries().clear();
+			//kermetaUnit.getInternalPackageEntries().clear();
+		}
 	}
 	
 	/**
