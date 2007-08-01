@@ -206,7 +206,7 @@ abstract class Reference {
  * This class represents a reference to a concrete object contained by a file
  */
 @aspect "true"
-abstract class FileReference /*inherits Reference*/ {
+abstract class FileReference inherits Reference {
 	/**
 	 * This operation defines equivalency between FileReference elements
 	 */
@@ -225,7 +225,7 @@ abstract class FileReference /*inherits Reference*/ {
  * This class represents a reference to a textual file concrete object
  */
 @aspect "true"
-class TextReference /*inherits FileReference*/ {
+class TextReference inherits FileReference {
 	/**
 	 * This operation defines equivalency between TextReference elements
 	 */
@@ -256,7 +256,7 @@ class TextReference /*inherits FileReference*/ {
  * This class represents a reference to a XML concrete object
  */
 @aspect "true"
-class XMLReference /*inherits FileReference*/ {
+class XMLReference inherits FileReference {
 	/**
 	 * This operation defines equivalency between XMLReference elements
 	 */
@@ -280,7 +280,7 @@ class XMLReference /*inherits FileReference*/ {
  * This class represents a reference to a model element
  */
 @aspect "true"
-class ModelReference /*inherits Reference*/ {
+class ModelReference inherits Reference {
 	/**
 	 * This operation defines equivalency between ModelReference elements
 	 */
