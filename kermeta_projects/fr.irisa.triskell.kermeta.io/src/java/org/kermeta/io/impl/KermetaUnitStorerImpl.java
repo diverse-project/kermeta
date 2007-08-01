@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.7 2007-07-31 08:26:16 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.8 2007-08-01 07:23:14 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -33,6 +33,7 @@ import org.kermeta.io.plugin.IOPlugin;
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KMLoader;
 import fr.irisa.triskell.kermeta.loader.ecore.EcoreBuildingState;
 import fr.irisa.triskell.kermeta.loader.java.JavaBuildingState;
@@ -41,6 +42,7 @@ import fr.irisa.triskell.kermeta.loader.km.KMUnitLoader;
 import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoader;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 /**
  * <!-- begin-user-doc -->
@@ -216,6 +218,14 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			getKermetaUnits().remove( kermetaUnit );
 			kermetaUnit.getImportedKermetaUnits().clear();
 			kermetaUnit.getImporters().clear();
+			
+			for ( TypeDefinition typeDefinition : KermetaUnitHelper.getInternalTypeDefinitions( kermetaUnit ) ) {
+				typeDefinition.getAspects().clear();
+				typeDefinition.getBaseAspects().clear();
+				typeDefinition.getOwnedTag().clear();
+				typeDefinition.getTag().clear();
+			}
+			
 			//kermetaUnit.getMessages().clear();
 			//kermetaUnit.getExternalPackageEntries().clear();
 			//kermetaUnit.getInternalPackageEntries().clear();
@@ -253,9 +263,7 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			loader.load(uri);
 		
 		} else if ( uri.matches("http://.+") ) {
-	System.out.println();
 			if ( EMFRegistryHelper.isDynamicallyRegistered(uri) ) {
-				System.out.println();
 				// TODO
 				// Looking for the factory and see if the file can be translated into kermeta.
 			}

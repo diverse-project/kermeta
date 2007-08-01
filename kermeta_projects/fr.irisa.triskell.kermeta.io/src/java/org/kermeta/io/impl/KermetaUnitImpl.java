@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.5 2007-07-27 07:12:17 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.6 2007-08-01 07:23:14 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -700,8 +700,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 */
 	public Require addRequire(String uri) {
 		assert ( modelingUnit != null );
-		if ( uri.equals("") )
-			System.out.println();
 		for ( Require r : modelingUnit.getRequires() )
 			if ( r.getUri().equals(uri) )
 				return r;
@@ -1078,7 +1076,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public boolean isErrored() {
-		return KermetaUnitHelper.isErrored(this);
+		return KermetaUnitHelper.isIndirectlyErrored(this);
 	}
 
 	/**
@@ -1238,16 +1236,16 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 */
 	protected void finalize() throws Throwable {
 		System.out.println( "finalize" );
-		for ( TypeDefinition typeDefinition : KermetaUnitHelper.getTypeDefinitions( this ) ) {
-			typeDefinition.getAspects().clear();
-			typeDefinition.getBaseAspects().clear();
-			typeDefinition.getOwnedTag().clear();
-			typeDefinition.getTag().clear();
-		}
 		for ( Package p : (List<Package>) getInternalPackages() ) {
 			p.getOwnedTag().clear();
 			p.getOwnedTypeDefinition().clear();
 		}
+		getInternalPackageEntries().clear();
+		getExternalPackageEntries().clear();
+		getMessages().clear();
+		setTracer(null);
+		setModelingUnit(null);
+		setStorer(null);
 	}
 
 	/**

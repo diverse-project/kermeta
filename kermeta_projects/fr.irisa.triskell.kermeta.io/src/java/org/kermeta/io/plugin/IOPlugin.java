@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.6 2007-07-31 08:26:35 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.7 2007-08-01 07:23:14 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -117,17 +117,29 @@ public class IOPlugin extends AbstractUIPlugin {
 					framework = loadFramework( FRAMEWORK_KM_URI );
 					for ( KermetaUnit kermetaUnit : KermetaUnitHelper.getAllImportedKermetaUnits(framework) )
 						kermetaUnit.setFramework( true );
-					ecore = loadEcore( ECORE_URI );
 					
-					KermetaTypeChecker typechecker = new KermetaTypeChecker( ecore );
+					KermetaTypeChecker typechecker = new KermetaTypeChecker( framework );
 					typechecker.checkUnit();
+
+					if ( ! framework.isErrored() ) {
+						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( framework );
+						constraintchecker.checkUnit();
+					}				
 					
+					
+					ecore = loadEcore( ECORE_URI );
+										
+					typechecker = new KermetaTypeChecker( ecore );
+					typechecker.checkUnit();
+
 					if ( ! ecore.isErrored() ) {
 						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( ecore );
 						constraintchecker.checkUnit();
 					}
 
 				} catch (URIMalformedException e) {
+					e.printStackTrace();
+				} catch (Throwable e) {
 					e.printStackTrace();
 				}
 			
