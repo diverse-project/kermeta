@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.22 2007-07-20 15:07:49 ftanguy Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.23 2007-08-01 07:18:13 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -38,6 +38,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 import fr.irisa.triskell.kermeta.typechecker.FTypePrettyPrinter;
@@ -338,18 +339,18 @@ public class RuntimeObjectFactory {
 	 * If not found, look in the supertypes
 	 */
 	private Property getProperty(ClassDefinition metaclass,String propertyName) {
-		Iterator it = metaclass.getOwnedAttribute().iterator();
+		Iterator it = ClassDefinitionHelper.getAllProperties(metaclass).iterator();//metaclass.getOwnedAttribute().iterator();
 		while(it.hasNext()) {
 			Property property = (Property)it.next();
 			if(property.getName().equals(propertyName))
 				return property;
 		}
-		it = metaclass.getSuperType().iterator();
+		/*it = metaclass.getSuperType().iterator();
 		while(it.hasNext()) {
 			Property property = getProperty((ClassDefinition)((fr.irisa.triskell.kermeta.language.structure.Class)it.next()).getTypeDefinition(),propertyName);
 			if(property!=null)
 				return property;
-		}
+		}*/
 		return null;
 	}
 
