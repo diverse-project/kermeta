@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass2.java,v 1.7 2007-07-24 13:46:48 ftanguy Exp $
+/* $Id: Jar2KMPass2.java,v 1.8 2007-08-01 07:22:40 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass2.java
  * License : EPL
@@ -69,9 +69,6 @@ public class Jar2KMPass2 extends Jar2KMPass {
 	    				if(!cname.contains("$")){ // ignore inner class
 		    				String qname = pqname + "::" + cname;
 		    				// apply exclusion /inclusion rules
-		    				
-		    				if ( qname.matches(".+lang.+") )
-		    					System.out.println();
 		    					
 		    				if( builder.getModelingUnit().getExcludeFilters().size()==0){
 			    				if( builder.getModelingUnit().getIncludeFilters().size() == 0){
