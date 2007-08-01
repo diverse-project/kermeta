@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.7 2007-08-01 07:23:14 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.8 2007-08-01 14:41:50 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -203,14 +203,18 @@ public class IOPlugin extends AbstractUIPlugin {
 	
 	public KermetaUnit loadKermetaUnit( String uri, String content ) throws KermetaIOFileNotFoundException, URIMalformedException {
 		
-		if ( Runtime.getRuntime().freeMemory() < 1000000 ) {
-			KermetaUnit.internalLog.info("Unloading all Kermeta Unit but the framework.km.");
-			List<KermetaUnit> list = new ArrayList <KermetaUnit> ( (List<KermetaUnit>) storer.getKermetaUnits() );
-			for ( KermetaUnit unit : list ) {
-				if ( ! unit.isFramework() && (unit != ecore) )
-					storer.unload( unit.getUri() );
+		if ( ! LOCAL_USE ) {
+		
+			if ( Runtime.getRuntime().freeMemory() < 1000000 ) {
+				KermetaUnit.internalLog.info("Unloading all Kermeta Unit but the framework.km.");
+				List<KermetaUnit> list = new ArrayList <KermetaUnit> ( (List<KermetaUnit>) storer.getKermetaUnits() );
+				for ( KermetaUnit unit : list ) {
+					if ( ! unit.isFramework() && (unit != ecore) )
+						storer.unload( unit.getUri() );
+				}
+	
 			}
-
+		
 		}
 		
 		KermetaUnit kermetaUnit = kermetaUnitHelper.loadFile(uri, content);
