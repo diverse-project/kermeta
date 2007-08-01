@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.33 2007-07-24 13:46:52 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.34 2007-08-01 07:23:39 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -374,7 +374,7 @@ public void testWithFile(String dir, String file) throws Exception {
 	KermetaUnit builder = ioPlugin.loadKermetaUnit( fileURI );
 	
 	if ( builder.isErrored() )
-		assertTrue( KermetaUnitHelper.getAllErrorsAsString(builder), false);
+		assertTrue( KermetaUnitHelper.getErrorsAsString(builder), false);
 	
 	else {	
 		
@@ -409,7 +409,7 @@ public void testWithFile(String dir, String file) throws Exception {
 			// try to re-parse the pretty-printed version
 			KermetaUnit builder2 = ioPlugin.loadKermetaUnit(ppfile);
 			if ( builder2.isErrored() )
-				assertTrue("RE-PARSE : " + KermetaUnitHelper.getAllErrorsAsString(builder2), false);
+				assertTrue("RE-PARSE : " + KermetaUnitHelper.getErrorsAsString(builder2), false);
 
 		} else
 			System.out.println("Ignoring phase 3bis of " + builder.getUri() + ", due to a cycle in its require statements. \n (in this case a per file basis test cannot be applied)");

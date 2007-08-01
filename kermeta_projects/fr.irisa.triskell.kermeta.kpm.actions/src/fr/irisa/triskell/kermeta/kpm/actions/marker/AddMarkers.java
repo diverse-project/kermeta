@@ -1,4 +1,4 @@
-/*$Id: AddMarkers.java,v 1.10 2007-07-24 13:46:35 ftanguy Exp $
+/*$Id: AddMarkers.java,v 1.11 2007-08-01 07:24:09 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
@@ -174,7 +174,7 @@ public class AddMarkers implements IAction, Interest {
 		
 		String message = "File " + first.getFullPath().toString() + " contains error(s).\n";
 		KermetaUnit kermetaUnit = IOPlugin.getDefault().getKermetaUnit( "platform:/resource" + first.getFullPath().toString());
-		message += KermetaUnitHelper.getAllErrorsAsString(kermetaUnit);
+		message += KermetaUnitHelper.getErrorsAsString(kermetaUnit);
 		
 		if ( top != unit ) {
 		

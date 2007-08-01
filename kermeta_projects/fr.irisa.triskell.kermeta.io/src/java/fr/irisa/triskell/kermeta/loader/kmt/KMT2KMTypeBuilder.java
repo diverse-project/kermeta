@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.19 2007-07-30 14:47:13 ftanguy Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.20 2007-08-01 07:20:18 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -189,7 +189,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			fr.irisa.triskell.kermeta.language.structure.Type[] actual_params = getTypeFromLst(basictype.getParams());
 			if (actual_params.length != gtdef.getTypeParameter().size()) {
 				//builder.messages.addMessage(new KMTUnitLoadError("Wrong number of type parameters for generic type '" + qname + "'.",basictype));
-				builder.error("Wrong number of type parameters for generic type '" + qname + "'.");
+				builder.error("Wrong number of type parameters for generic type '" + qname + "'.", basictype);
 			}
 			else {
 				for(int i=0; i<actual_params.length; i++) {

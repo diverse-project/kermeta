@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.16 2007-07-26 12:30:42 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.17 2007-08-01 07:23:39 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -200,7 +200,7 @@ testkmtFile("test/roundtrip_testcases/kmt","012_testCommentAnnotations.main.kmt"
 				constraintchecker.checkUnit();
 		}
 		if ( baseEcoreUnit.isErrored() )
-			assertTrue( KermetaUnitHelper.getAllErrorsAsString(baseEcoreUnit), false );
+			assertTrue( KermetaUnitHelper.getErrorsAsString(baseEcoreUnit), false );
 		
 
 		// Save the kmt generated file
@@ -219,7 +219,7 @@ testkmtFile("test/roundtrip_testcases/kmt","012_testCommentAnnotations.main.kmt"
 				constraintchecker.checkUnit();
 		}
 		if ( kmtUnit.isErrored() )
-			assertTrue( KermetaUnitHelper.getAllErrorsAsString(kmtUnit), false );
+			assertTrue( KermetaUnitHelper.getErrorsAsString(kmtUnit), false );
 		
 		
 		EcoreExporter exporter = new EcoreExporter();
@@ -254,7 +254,7 @@ testkmtFile("test/roundtrip_testcases/kmt","012_testCommentAnnotations.main.kmt"
 				constraintchecker.checkUnit();
 		}
 		if ( baseKMTUnit.isErrored() )
-			assertTrue( KermetaUnitHelper.getAllErrorsAsString(baseKMTUnit), false );
+			assertTrue( KermetaUnitHelper.getErrorsAsString(baseKMTUnit), false );
 		
 		// Export to ecore
 		EcoreExporter exporter = new EcoreExporter();
@@ -271,7 +271,7 @@ testkmtFile("test/roundtrip_testcases/kmt","012_testCommentAnnotations.main.kmt"
 				constraintchecker.checkUnit();
 		}
 		if ( ecoreUnit.isErrored() )
-			assertTrue( KermetaUnitHelper.getAllErrorsAsString(ecoreUnit), false );
+			assertTrue( KermetaUnitHelper.getErrorsAsString(ecoreUnit), false );
 		
 		KMTOutputBuilder printer = new KMTOutputBuilder();
 		printer.print( ecoreUnit, outputDir );

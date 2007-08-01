@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.29 2007-07-24 13:46:49 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.30 2007-08-01 07:23:39 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -323,14 +323,14 @@ testinvalidFile("test/typechecher_tests/invalid","SimpleFunctions.kmt" );
 		
 		if ( kermetaUnit.isErrored() )
 			//assertTrue("kermeta unit has errors during loading", false);
-			assertTrue( KermetaUnitHelper.getAllErrorsAsString(kermetaUnit), false );
+			assertTrue( KermetaUnitHelper.getErrorsAsString(kermetaUnit), false );
 			
 		KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit );
 		typeChecker.checkUnit();
 	
 		if ( kermetaUnit.isErrored() )
 			//assertTrue("kermeta unit has errors during type checking", false);
-			assertTrue( KermetaUnitHelper.getAllErrorsAsString(kermetaUnit), false );
+			assertTrue( KermetaUnitHelper.getErrorsAsString(kermetaUnit), false );
 			
 		IOPlugin.getDefault().unload( path );
 		
