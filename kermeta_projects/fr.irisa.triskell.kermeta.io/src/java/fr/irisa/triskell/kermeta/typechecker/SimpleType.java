@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.15 2007-07-27 07:12:17 ftanguy Exp $
+/* $Id: SimpleType.java,v 1.16 2007-08-01 07:22:03 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -17,6 +17,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 
 import org.kermeta.io.KermetaUnit;
 
@@ -24,6 +25,7 @@ import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
@@ -118,6 +120,7 @@ public class SimpleType extends Type {
 	}
 	
 	public ArrayList<CallableOperation> callableOperations() {
+	
 		// Try to get a FClass
 		fr.irisa.triskell.kermeta.language.structure.Type resolved = PrimitiveTypeResolver.getResolvedType(type);
 		if (resolved instanceof VirtualType) {
@@ -141,9 +144,19 @@ public class SimpleType extends Type {
 		}
 		if (resolved instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
 			Class c = (Class) resolved;
+			
+			/*List<Operation> operations = ClassDefinitionHelper.getAllOperations( (ClassDefinition) c.getTypeDefinition() );
+			ArrayList<CallableOperation> list = new ArrayList<CallableOperation> ();
+			
+			for ( Operation op : operations ) {
+				Class cl = StructureFactory.eINSTANCE.createClass();
+				cl.setTypeDefinition( op.getOwningClass() );
+				list.add( new CallableOperation(op, cl) );
+			}*/
 			ArrayList <CallableOperation> list = InheritanceSearch.callableOperations(c);
-			list.addAll( InheritanceSearch.callableOperations(c) );
-			Iterator <TypeDefinition> iterator = c.getTypeDefinition().getBaseAspects().iterator();
+			
+			//list.addAll( InheritanceSearch.callableOperations(c) );
+			/*Iterator <TypeDefinition> iterator = c.getTypeDefinition().getBaseAspects().iterator();
 			while ( iterator.hasNext() ) {
 				Class tempClass = StructureFactory.eINSTANCE.createClass();
 				tempClass.setTypeDefinition( (ClassDefinition) iterator.next() );
@@ -154,7 +167,7 @@ public class SimpleType extends Type {
 				Class tempClass = StructureFactory.eINSTANCE.createClass();
 				tempClass.setTypeDefinition( (ClassDefinition) iterator.next() );
 				list.addAll( InheritanceSearch.callableOperations( tempClass ) );
-			}
+			}*/
 			return list;
 		} else if (resolved instanceof ModelType) {
 			ArrayList<CallableOperation> result = new ArrayList<CallableOperation>();
