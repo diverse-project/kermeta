@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.24 2007-07-26 16:30:18 cfaucher Exp $
+/* $Id: UnitExporterWizard.java,v 1.25 2007-08-01 07:16:16 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -139,7 +139,7 @@ public class UnitExporterWizard extends Wizard {
 		if (this instanceof Kermeta2EcoreWizard) {
 			resolvePage = new Kermeta2EcoreResolveWizardPage(
 					OUTPUTFILE_PAGENAME, selection);
-			addPage(resolvePage);
+			addPage(resolvePage);			
 		}
 
 		tracePage = new ActivableDestFileWizardPage(TRACEFILE_PAGENAME,
@@ -249,7 +249,7 @@ public class UnitExporterWizard extends Wizard {
 		
 		// display eventual warnings
 		if ( KermetaUnitHelper.isWarned(unit) ) {
-			WarningMessage message = new WarningMessage( KermetaUnitHelper.getAllWarningsAsString(unit) );
+			WarningMessage message = new WarningMessage( KermetaUnitHelper.getWarningsAsString(unit) );
 			KermetaPlugin.getDefault().getConsole().println(message);
 		}
 		
@@ -258,7 +258,7 @@ public class UnitExporterWizard extends Wizard {
 			MessageDialog.openError(theShell, "Error loading file",
 					"The source file contains errors. Please have look to the Console view for the details");
 			
-			ErrorMessage errmessage = new ErrorMessage( KermetaUnitHelper.getAllErrorsAsString(unit) );
+			ErrorMessage errmessage = new ErrorMessage( KermetaUnitHelper.getErrorsAsString(unit) );
 			KermetaPlugin.getDefault().getConsole().println(errmessage);
 
 		} 

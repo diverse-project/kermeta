@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.9 2007-07-26 09:35:15 ftanguy Exp $
+/* $Id: CompileFramework.java,v 1.10 2007-08-01 07:16:31 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : CompileFramework.java
 * License : GPL
@@ -51,7 +51,7 @@ public class CompileFramework {
         System.out.println("LOADING STANDARD LIBRARY...");
         if ( kermetaUnit.isErrored() ) {
         	System.err.println("Standard library contains errors:");
-        	System.err.println( KermetaUnitHelper.getAllErrorsAsString(kermetaUnit) );
+        	System.err.println( KermetaUnitHelper.getErrorsAsString(kermetaUnit) );
         	//System.exit(0);
         }
         

@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.22 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: RunJunitFactory.java,v 1.23 2007-08-01 07:16:52 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -82,8 +82,8 @@ public class RunJunitFactory implements Test {
 
             if ( unit.isErrored() ) {
             	System.err.println("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)");
-            	System.out.println( KermetaUnitHelper.getAllWarningsAsString(unit));            	
-            	System.err.println(KermetaUnitHelper.getAllErrorsAsString(unit));
+            	System.out.println( KermetaUnitHelper.getWarningsAsString(unit));            	
+            	System.err.println(KermetaUnitHelper.getErrorsAsString(unit));
             	theTestCase = new FailedTestCase("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)", 
             		new Exception(KermetaUnitHelper.getAllErrorsAsString(unit)));
                 return theTestCase;
@@ -133,7 +133,7 @@ public class RunJunitFactory implements Test {
             if ( unit.isErrored() )
             {
                 System.err.println("*** There are errors in the TestSuite of <"+ unit_uri + "> :" );
-                System.out.println( KermetaUnitHelper.getAllErrorsAsString(unit) );
+                System.out.println( KermetaUnitHelper.getErrorsAsString(unit) );
             }
             else
             {

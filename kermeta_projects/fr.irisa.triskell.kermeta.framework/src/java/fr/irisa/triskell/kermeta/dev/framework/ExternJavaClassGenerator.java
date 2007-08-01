@@ -1,4 +1,4 @@
-/* $Id: ExternJavaClassGenerator.java,v 1.12 2007-07-24 13:47:05 ftanguy Exp $
+/* $Id: ExternJavaClassGenerator.java,v 1.13 2007-08-01 07:16:31 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : ExternJavaClassGenerator.java
  * License : GPL
@@ -68,7 +68,7 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 //	    unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(kmt_filename);
 		unit.load();
 		if ( unit.isErrored() ) {
-			System.out.println( KermetaUnitHelper.getErrors(unit).size() + " Load error : " + KermetaUnitHelper.getAllErrorsAsString(unit));
+			System.out.println( KermetaUnitHelper.getErrors(unit).size() + " Load error : " + KermetaUnitHelper.getErrorsAsString(unit));
 		}
 		
 		accept( unit.getModelingUnit() );
