@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitHelper.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
+/*$Id: KermetaUnitHelper.java,v 1.4 2007-08-01 07:20:46 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitHelper.java
 * License : EPL
@@ -68,7 +68,7 @@ public class KermetaUnitHelper {
 		return list;
 	} */
 	
-	static public String getAllErrorsAsString(KermetaUnit kermetaUnit) {
+	static public String getErrorsAsString(KermetaUnit kermetaUnit) {
 		String result = "";
 		
 		for ( Message message : (List <Message>) kermetaUnit.getMessages() ) {
@@ -77,6 +77,32 @@ public class KermetaUnitHelper {
 				result += message.getValue() + "\n";
 			
 		}
+		
+		return result;
+	}
+	
+	
+	static public List <ErrorMessage> getAllErrors(KermetaUnit kermetaUnit) {
+		List<ErrorMessage> errors = new ArrayList<ErrorMessage> ();
+		List<KermetaUnit> kermetaUnitsProcessed = new ArrayList<KermetaUnit> ();
+		getAllErrors(kermetaUnit, errors, kermetaUnitsProcessed);
+		return errors;
+	}
+	
+	static private void getAllErrors(KermetaUnit kermetaUnit, List<ErrorMessage> errors, List<KermetaUnit> kermetaUnitsProcessed) {
+		if ( kermetaUnitsProcessed.contains(kermetaUnit) )
+			return;
+		kermetaUnitsProcessed.add( kermetaUnit );
+		errors.addAll( getErrors(kermetaUnit) );
+		for ( KermetaUnit importedUnit : (List<KermetaUnit>) kermetaUnit.getImportedKermetaUnits() )
+			getAllErrors(importedUnit, errors, kermetaUnitsProcessed);
+	}
+	
+	static public String getAllErrorsAsString(KermetaUnit kermetaUnit) {
+		String result = "";
+		
+		for ( ErrorMessage message : KermetaUnitHelper.getAllErrors(kermetaUnit) )
+			result += message.getValue() + "\n";
 		
 		return result;
 	}
@@ -90,7 +116,7 @@ public class KermetaUnitHelper {
 		return list;
 	}
 	
-	static public String getAllWarningsAsString(KermetaUnit kermetaUnit) {
+	static public String getWarningsAsString(KermetaUnit kermetaUnit) {
 		String result = "";
 		
 		for ( Message message : (List <Message>) kermetaUnit.getMessages() ) {
@@ -99,6 +125,31 @@ public class KermetaUnitHelper {
 				result += "Error : " + message.getValue() + "\n";
 			
 		}
+		
+		return result;
+	}
+	
+	static public List <WarningMessage> getAllWarnings(KermetaUnit kermetaUnit) {
+		List<WarningMessage> warnings = new ArrayList<WarningMessage> ();
+		List<KermetaUnit> kermetaUnitsProcessed = new ArrayList<KermetaUnit> ();
+		getAllWarnings(kermetaUnit, warnings, kermetaUnitsProcessed);
+		return warnings;
+	}
+	
+	static private void getAllWarnings(KermetaUnit kermetaUnit, List<WarningMessage> warnings, List<KermetaUnit> kermetaUnitsProcessed) {
+		if ( kermetaUnitsProcessed.contains(kermetaUnit) )
+			return;
+		kermetaUnitsProcessed.add( kermetaUnit );
+		warnings.addAll( getWarnings(kermetaUnit) );
+		for ( KermetaUnit importedUnit : (List<KermetaUnit>) kermetaUnit.getImportedKermetaUnits() )
+			getAllWarnings(importedUnit, warnings, kermetaUnitsProcessed);
+	}
+	
+	
+	static public String getAllWarningsAsString(KermetaUnit kermetaUnit) {
+		String result = "";
+		for ( WarningMessage message : KermetaUnitHelper.getAllWarnings(kermetaUnit) )
+			result += message.getValue() + "\n";
 		
 		return result;
 	}
@@ -115,6 +166,10 @@ public class KermetaUnitHelper {
 	
 	static public boolean isErrored(KermetaUnit kermetaUnit) {
 		return ! getErrors(kermetaUnit).isEmpty();
+	}
+	
+	static public boolean isIndirectlyErrored(KermetaUnit kermetaUnit) {
+		return ! getAllErrors(kermetaUnit).isEmpty();
 	}
 	
 	static public boolean isWarned(KermetaUnit kermetaUnit) {
