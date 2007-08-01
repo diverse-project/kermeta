@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.6 2007-08-01 07:23:14 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.7 2007-08-01 14:42:11 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -1235,17 +1235,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	protected void finalize() throws Throwable {
-		System.out.println( "finalize" );
-		for ( Package p : (List<Package>) getInternalPackages() ) {
-			p.getOwnedTag().clear();
-			p.getOwnedTypeDefinition().clear();
-		}
-		getInternalPackageEntries().clear();
-		getExternalPackageEntries().clear();
-		getMessages().clear();
-		setTracer(null);
-		setModelingUnit(null);
-		setStorer(null);
+		System.out.println( "finalize " + getUri() );
+
 	}
 
 	/**

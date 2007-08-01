@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.8 2007-08-01 07:23:14 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.9 2007-08-01 14:42:11 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -10,6 +10,7 @@ package org.kermeta.io.impl;
 import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -226,6 +227,18 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 				typeDefinition.getTag().clear();
 			}
 			
+			for ( Package p : (List<Package>) kermetaUnit.getInternalPackages() ) {
+				p.getOwnedTag().clear();
+				p.getOwnedTypeDefinition().clear();
+			}
+			kermetaUnit.getInternalPackageEntries().clear();
+			kermetaUnit.getExternalPackageEntries().clear();
+			kermetaUnit.getMessages().clear();
+			kermetaUnit.setTracer(null);
+			kermetaUnit.setModelingUnit(null);
+			kermetaUnit.setStorer(null);
+			
+			System.out.println();
 			//kermetaUnit.getMessages().clear();
 			//kermetaUnit.getExternalPackageEntries().clear();
 			//kermetaUnit.getInternalPackageEntries().clear();
