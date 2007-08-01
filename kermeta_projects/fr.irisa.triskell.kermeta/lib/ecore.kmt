@@ -1,4 +1,4 @@
-/* $Id: ecore.kmt,v 1.11 2007-07-20 15:09:18 ftanguy Exp $
+/* $Id: ecore.kmt,v 1.12 2007-08-01 07:15:55 ftanguy Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -180,7 +180,7 @@ abstract class EClassifier
 			//TODO: implement getter for derived property defaultValue
 			raise kermeta::exceptions::NotImplementedException.new 
 		end
-	reference ePackage : EPackage#eClassifiers
+	//reference ePackage : EPackage#eClassifiers
 	operation isInstance(object : EJavaObject) : EBoolean is do
 		raise kermeta::exceptions::NotImplementedException.new
 	end
