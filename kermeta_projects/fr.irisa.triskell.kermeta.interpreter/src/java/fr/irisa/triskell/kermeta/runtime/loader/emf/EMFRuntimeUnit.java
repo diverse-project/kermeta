@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.46 2007-07-26 09:51:34 ftanguy Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.47 2007-08-01 12:48:32 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -179,14 +179,22 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     /** print the content of the EMF Registry */
 	public String logEMFRegistryContent() {
 		String msg = "";
-		Boolean isFirst = true;
-    	Iterator it = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().iterator();
-    	while(it.hasNext()) {
-    		if(!isFirst) msg += " | ";
-    		else isFirst = false;
-    		msg += it.next().toString();
-    	}
-    	internalLog.debug("Factory.Registry known extensions are : " + msg);
+		try {
+				
+			Boolean isFirst = true;
+	    	Iterator it = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().iterator();
+	    	while(it.hasNext()) {
+	    		if(!isFirst) msg += " | ";
+	    		else isFirst = false;
+	    		// weird sometime it crashes here with a null pointer !
+	    		msg += it.next().toString();
+	    	}
+	    	internalLog.debug("Factory.Registry known extensions are : " + msg);
+		}
+	    catch(Exception e){
+	    	
+	    	e.printStackTrace();
+	    }
     	return msg;
 	}
     
@@ -315,8 +323,10 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		String ext = kunit_uri.substring(kunit_uri.lastIndexOf(".")+1);
 		
 		if (! Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().contains(ext)){
-			internalLog.debug("registering extension: " + ext);		
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ext,new XMIResourceFactoryImpl());
+			if(ext != null){
+				internalLog.debug("registering extension: " + ext);					
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ext,new XMIResourceFactoryImpl());
+			}
 		}
 		else internalLog.debug(" extension " + ext + " is already registered ");
 		if (! Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().contains("ecore")){
@@ -484,7 +494,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		if(res == null){
 			// the extension wasn't registered; register it by default as a xmi
 			// this typically occurs when running kermeta as a standalone application outside of Eclipse
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(uri.fileExtension(),new XMIResourceFactoryImpl());
+			if(uri.fileExtension() != null)
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(uri.fileExtension(),new XMIResourceFactoryImpl());
 			res = resource_set.createResource(uri); 
 			if(res == null){
 				// DVK: still doesn't work, need more investigation ...
