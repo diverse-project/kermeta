@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.4 2007-07-26 09:36:45 ftanguy Exp $
+/*$Id: EcoreExporter.java,v 1.5 2007-08-01 14:40:30 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -104,7 +104,7 @@ public class EcoreExporter {
 		 * Initalizing the loadings.
 		 * 
 		 */
-		Set <KermetaUnit> units = KermetaUnitHelper.getAllImportedKermetaUnits( kermetaUnit );
+		List <KermetaUnit> units = KermetaUnitHelper.getAllImportedKermetaUnits( kermetaUnit );
 		for ( KermetaUnit unit : units )
 			loadings.put( unit, false );
 				

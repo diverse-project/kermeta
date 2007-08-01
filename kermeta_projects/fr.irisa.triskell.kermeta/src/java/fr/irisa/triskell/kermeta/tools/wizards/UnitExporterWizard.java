@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.25 2007-08-01 07:16:16 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.26 2007-08-01 14:38:10 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -15,6 +15,7 @@ package fr.irisa.triskell.kermeta.tools.wizards;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
@@ -239,7 +240,7 @@ public class UnitExporterWizard extends Wizard {
 			constraintchecker.checkUnit();
 		}
 		
-		Set<KermetaUnit> kuList = KermetaUnitHelper.getAllImportedKermetaUnits(unit);
+		List<KermetaUnit> kuList = KermetaUnitHelper.getAllImportedKermetaUnits(unit);
 		if(kuList.size() != 0){
 			KermetaPlugin.getDefault().getConsole().println("Files or resources indirectly loaded :");
 			for( KermetaUnit ku :  kuList){

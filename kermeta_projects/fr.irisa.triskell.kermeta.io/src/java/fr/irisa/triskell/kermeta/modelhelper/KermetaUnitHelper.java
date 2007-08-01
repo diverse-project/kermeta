@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitHelper.java,v 1.4 2007-08-01 07:20:46 ftanguy Exp $
+/*$Id: KermetaUnitHelper.java,v 1.5 2007-08-01 14:41:13 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitHelper.java
 * License : EPL
@@ -32,14 +32,14 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 public class KermetaUnitHelper {
 
-	static public Set <KermetaUnit> getAllImportedKermetaUnits(KermetaUnit value) {
-		Set <KermetaUnit> units = new HashSet <KermetaUnit> ();
+	static public List <KermetaUnit> getAllImportedKermetaUnits(KermetaUnit value) {
+		List <KermetaUnit> units = new ArrayList <KermetaUnit> ();
 		if ( value != null )
 			getAllImportedKermetaUnits(value, units);
 		return units;
 	}
 
-	static private void getAllImportedKermetaUnits(KermetaUnit value, Set <KermetaUnit> units) {
+	static private void getAllImportedKermetaUnits(KermetaUnit value, List <KermetaUnit> units) {
 		Iterator <KermetaUnit> iterator = value.getImportedKermetaUnits().iterator();
 		while ( iterator.hasNext() ) {
 			KermetaUnit current = iterator.next();
@@ -99,12 +99,23 @@ public class KermetaUnitHelper {
 	}
 	
 	static public String getAllErrorsAsString(KermetaUnit kermetaUnit) {
+		List<String> errors = new ArrayList<String> ();
+		List<KermetaUnit> kermetaUnitsProcessed = new ArrayList<KermetaUnit> ();
+		getAllErrorsAsString(kermetaUnit, errors, kermetaUnitsProcessed);
 		String result = "";
-		
-		for ( ErrorMessage message : KermetaUnitHelper.getAllErrors(kermetaUnit) )
-			result += message.getValue() + "\n";
-		
+		for (String s : errors)
+			result += s + "\n";
 		return result;
+	}
+	
+	static private void getAllErrorsAsString(KermetaUnit kermetaUnit, List<String> errors, List<KermetaUnit> kermetaUnitsProcessed) {
+		if ( kermetaUnitsProcessed.contains(kermetaUnit) )
+			return;
+		kermetaUnitsProcessed.add( kermetaUnit );
+		for ( ErrorMessage error : getErrors(kermetaUnit) )
+			errors.add( "In " + kermetaUnit.getUri() + " : " + error.getValue() );
+		for ( KermetaUnit importedUnit : (List<KermetaUnit>) kermetaUnit.getImportedKermetaUnits() )
+			getAllErrorsAsString(importedUnit, errors, kermetaUnitsProcessed);
 	}
 	
 	static public List <WarningMessage> getWarnings(KermetaUnit kermetaUnit) {
