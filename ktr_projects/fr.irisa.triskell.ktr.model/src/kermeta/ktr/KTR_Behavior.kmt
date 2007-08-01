@@ -838,7 +838,7 @@ class RuleProduction {
  * This class defines a singleton output of an InterpretationRule.
  */
 @aspect "true"
-class SingletonRuleProduction /*inherits RuleProduction*/ {
+class SingletonRuleProduction inherits RuleProduction {
 	/** Dynamic expression for model element identification */
 	attribute idDynExpr : DynamicExpression[0..1]
 
