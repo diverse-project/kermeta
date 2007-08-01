@@ -1,4 +1,4 @@
-/* $Id: EditorCompletion.java,v 1.21 2007-07-20 15:09:22 ftanguy Exp $
+/* $Id: EditorCompletion.java,v 1.22 2007-08-01 07:25:04 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorCompletion.java
 * License : EPL
@@ -138,13 +138,15 @@ public class EditorCompletion implements IContentAssistProcessor {
 						 */
 						text = text.substring(0, text.length()-1);
 						
-						Set <ModelReference> references = kermetaUnit.getTracer().getModelReferences(trueOffset, length, uri);  
-						for ( ModelReference reference : references ) {
-							boolean stop = false;
-							EObject container = reference.getRefObject();
-							while ( ! stop && (container != null) ) {
-								stop = addCompletionProposalsForCalls(container, text, offset);
-								container = container.eContainer();
+						if ( kermetaUnit.getTracer() != null ) {
+							Set <ModelReference> references = kermetaUnit.getTracer().getModelReferences(trueOffset, length, uri);  
+							for ( ModelReference reference : references ) {
+								boolean stop = false;
+								EObject container = reference.getRefObject();
+								while ( ! stop && (container != null) ) {
+									stop = addCompletionProposalsForCalls(container, text, offset);
+									container = container.eContainer();
+								}
 							}
 						}
 					
