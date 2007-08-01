@@ -1,4 +1,4 @@
-/* $Id: KMTEditor.java,v 1.18 2007-07-24 13:46:56 ftanguy Exp $
+/* $Id: KMTEditor.java,v 1.19 2007-08-01 07:26:06 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KMTEditor.java
 * License : EPL
@@ -260,19 +260,19 @@ public class KMTEditor extends TextEditor implements Interest {
 			if ( ! savedContent.equals( currentContent ) ) {
 				KermetaMarkersHelper.clearMarkers(getFile());
 				KermetaUnit kermetaUnit = null;
-				IOPlugin.getDefault().unload( getFile() );
 /*				if ( ! savedContent.equals("") )
 					kermetaUnit = KermetaUnitHelper.typecheckFile( getFile(), savedContent );
 				else
 					kermetaUnit = KermetaUnitHelper.typecheckFile( getFile() );*/
 				KermetaMarkersHelper.createMarkers(getFile(), kermetaUnit);
+				//IOPlugin.getDefault().unload( getFile() );
 			}
+			
 		} else {
 			KermetaUnitHost.getInstance().undeclareInterest(this, unit);
 			mcunit = null;
-			if ( savedContent.equals( currentContent ) ) {
-				IOPlugin.getDefault().unload( getFile() );
-			} else {
+			if ( ! savedContent.equals( currentContent ) ) {
+				
 				final Interest interest = this;
 				Job job = new Job("Building Workspace") {
 					
@@ -293,7 +293,7 @@ public class KMTEditor extends TextEditor implements Interest {
 						unit.receiveSynchroneEvent("update", args, monitor);
 	
 						KermetaUnitHost.getInstance().undeclareInterest(interest, unit);
-						IOPlugin.getDefault().unload( getFile() );
+						//IOPlugin.getDefault().unload( getFile() );
 						return Status.OK_STATUS;
 					}
 					
