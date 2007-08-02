@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.5 2007-08-02 16:09:47 dvojtise Exp $
+/*$Id: Ecore2KMLoader.java,v 1.6 2007-08-02 16:19:04 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -13,10 +13,10 @@
 package fr.irisa.triskell.kermeta.loader.ecore;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -37,6 +37,7 @@ import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.loader.km.KMUnitLoader;
 import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTBuildingState;
@@ -315,9 +316,9 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	private void applyPass2(KermetaUnit kermetaUnit) {
 		Resource resource = resources.get(kermetaUnit);
 		Ecore2KMPass2 pass = new Ecore2KMPass2( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled );
-		Iterator iterator = resource.getContents().iterator();
+		Iterator<EObject> iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
-			EObject node = (EObject) iterator.next();
+			EObject node = iterator.next();
 			pass.accept( node );
 		}
 	}
@@ -396,9 +397,9 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	private void applyPass3(KermetaUnit kermetaUnit) {
 		Resource resource = resources.get(kermetaUnit);
 		Ecore2KMPass3 pass = new Ecore2KMPass3( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled );
-		Iterator iterator = resource.getContents().iterator();
+		Iterator<EObject> iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
-			EObject node = (EObject) iterator.next();
+			EObject node = iterator.next();
 			pass.accept( node );
 		}
 	}
@@ -437,10 +438,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		state.loaded = true;
 	}
 	
-	private Hashtable <KermetaUnit, Hashtable> opTables = new Hashtable <KermetaUnit, Hashtable> ();
+	private Hashtable <KermetaUnit, Hashtable<Operation, ArrayList<Operation>>> opTables = 
+			new Hashtable <KermetaUnit, Hashtable<Operation, ArrayList<Operation>>> ();
 	
 	private void applyPass4(KermetaUnit kermetaUnit) {
-		Resource resource = resources.get(kermetaUnit);
 		Ecore2KMPass4 pass = new Ecore2KMPass4( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, getLoadingContext(kermetaUnit) );
 		pass.convertUnit();
 		/*Iterator iterator = resource.getContents().iterator();
@@ -489,9 +490,9 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	private void applyPass5(KermetaUnit kermetaUnit) {
 		Resource resource = resources.get(kermetaUnit);
 		Ecore2KMPass5 pass = new Ecore2KMPass5( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, getLoadingContext(kermetaUnit) );
-		Iterator iterator = resource.getContents().iterator();
+		Iterator<EObject> iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
-			EObject node = (EObject) iterator.next();
+			EObject node = iterator.next();
 			pass.accept( node );
 		}
 	}
@@ -534,9 +535,9 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	private void applyPass6(KermetaUnit kermetaUnit) {
 		Resource resource = resources.get(kermetaUnit);
 		Ecore2KMPass6 pass = new Ecore2KMPass6( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, opTables.get(kermetaUnit) );
-		Iterator iterator = resource.getContents().iterator();
+		Iterator<EObject> iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
-			EObject node = (EObject) iterator.next();
+			EObject node = iterator.next();
 			pass.accept( node );
 		}
 	}

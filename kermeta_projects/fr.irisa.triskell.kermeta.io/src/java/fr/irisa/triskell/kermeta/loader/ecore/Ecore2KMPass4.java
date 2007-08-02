@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.12 2007-07-27 14:57:50 ftanguy Exp $
+/* $Id: Ecore2KMPass4.java,v 1.13 2007-08-02 16:19:04 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -71,7 +71,7 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 	 * Hashtable that is dedicated to encode links between a method and the set of
 	 * methods that overload it (in subclasses) when the QuickFix option is activated.
 	 */
-	protected Hashtable opTable = new Hashtable();
+	protected Hashtable<Operation, ArrayList<Operation>> opTable = new Hashtable<Operation, ArrayList<Operation>>();
 
 	private LoadingContext context = null;
 
@@ -91,7 +91,7 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 	/**
 	 * @return
 	 */
-	public Hashtable convertUnit() {
+	public Hashtable<Operation, ArrayList<Operation>> convertUnit() {
 		// Visit all the EClasses (their substructure, i.e operations and properties)
 		isTypeSettingMode = true;
 		for ( EObject node : datas.getEClassifiers() ) { // do not visit again datatypes?
@@ -290,12 +290,12 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 				// method that is overloaded
 				if(superop != null) {
 					if( opTable.containsKey(superop) ) {
-						ArrayList ar = (ArrayList) opTable.get(superop);
+						ArrayList<Operation> ar = opTable.get(superop);
 						ar.add( currentOperation );
 						opTable.put(superop, ar);
 					}
 					else {
-						ArrayList ar = new ArrayList();
+						ArrayList<Operation> ar = new ArrayList<Operation>();
 						ar.add( currentOperation );
 						opTable.put(superop, ar);
 					}
