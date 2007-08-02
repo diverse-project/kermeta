@@ -1,4 +1,4 @@
-/* $Id: LambdaCallFrame.java,v 1.11 2007-03-08 14:16:36 cfaucher Exp $
+/* $Id: LambdaCallFrame.java,v 1.12 2007-08-02 17:03:01 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : LambdaCallFrame.java
 * License : EPL
@@ -84,15 +84,15 @@ public class LambdaCallFrame extends CallFrame {
      * formal parameters of the lambda expression
      * @param pParameters
      */
-    public void bindActualParameter(ArrayList pParameters) {
+    public void bindActualParameter(ArrayList<RuntimeObject> pParameters) {
         block_stack.clear();
         block_stack.addAll(nestingExpressionContext);
         pushExpressionContext();
-        Iterator it = lambdaExp.getParameters().iterator();
+        Iterator<LambdaParameter> it = lambdaExp.getParameters().iterator();
         int i=0;
         while (it.hasNext()) {
-            LambdaParameter fparam = (LambdaParameter)it.next();
-            peekExpressionContext().defineVariable(fparam.getName(), (RuntimeObject)pParameters.get(i));
+            LambdaParameter fparam = it.next();
+            peekExpressionContext().defineVariable(fparam.getName(), pParameters.get(i));
             i++;
         }
     } 

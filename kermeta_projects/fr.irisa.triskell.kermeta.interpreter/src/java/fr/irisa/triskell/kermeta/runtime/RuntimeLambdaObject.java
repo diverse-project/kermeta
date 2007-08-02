@@ -1,4 +1,4 @@
-/* $Id: RuntimeLambdaObject.java,v 1.7 2007-03-08 14:16:37 cfaucher Exp $
+/* $Id: RuntimeLambdaObject.java,v 1.8 2007-08-02 17:03:01 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeLambdaObject.java
  * License: EPL
@@ -53,7 +53,7 @@ public class RuntimeLambdaObject extends RuntimeObject {
      * @param actual_params
      * @return
      */
-    public RuntimeObject call(ExpressionInterpreter interpreter, ArrayList actual_params) {
+    public RuntimeObject call(ExpressionInterpreter interpreter, ArrayList<RuntimeObject> actual_params) {
         LambdaCallFrame frame = this.frame.cloneLambdaCallFrame();
         frame.bindActualParameter(actual_params);
         RuntimeObject result = interpreter.getMemory().voidINSTANCE;

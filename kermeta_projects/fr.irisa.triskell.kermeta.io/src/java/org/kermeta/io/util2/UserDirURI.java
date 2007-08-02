@@ -1,4 +1,4 @@
-/* $Id: UserDirURI.java,v 1.2 2007-07-20 15:08:14 ftanguy Exp $
+/* $Id: UserDirURI.java,v 1.3 2007-08-02 16:56:09 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : UserDirURI.java
  * License : GPL
@@ -104,9 +104,9 @@ public class UserDirURI
     public static URI createURI(URI uri)
     {
     	String absolutePath=userDir;
-    	Iterator it=uri.segmentsList().iterator();
+    	Iterator<String> it=uri.segmentsList().iterator();
     	while (it.hasNext()) {
-    		absolutePath=absolutePath.concat((String)it.next());
+    		absolutePath=absolutePath.concat(it.next());
     		if (it.hasNext())
     			absolutePath=absolutePath+'/';
     	}

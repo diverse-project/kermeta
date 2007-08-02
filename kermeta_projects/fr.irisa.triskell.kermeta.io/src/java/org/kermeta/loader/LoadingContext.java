@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadingContext.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
+/*$Id: LoadingContext.java,v 1.4 2007-08-02 16:55:32 dvojtise Exp $
 * Project : io
 * File : 	KMTLoadingContext.java
 * License : EPL
@@ -85,7 +85,7 @@ public class LoadingContext {
 	public KMSymbol symbolLookup(String symbol) {
 		KMSymbol result = null;
 		for (int i=symbols.size()-1; i >-1; i--) {
-			Hashtable table = (Hashtable)symbols.get(i);
+			Hashtable<String, KMSymbol> table = symbols.get(i);
 			result = (KMSymbol)table.get(symbol);
 			if (result != null) break;
 		}
@@ -107,7 +107,7 @@ public class LoadingContext {
 	public TypeVariable typeVariableLookup(String name) {
 		TypeVariable result = null;
 		for (int i=typeVars.size()-1; i >-1; i--) {
-			Hashtable table = (Hashtable)typeVars.get(i);
+			Hashtable<String, TypeVariable> table = typeVars.get(i);
 			result = (TypeVariable)table.get(name);
 			if (result != null) break;
 		}
