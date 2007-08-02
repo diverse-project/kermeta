@@ -1,11 +1,11 @@
-/* $Id: KermetaUtils.java,v 1.8 2007-08-02 15:22:11 cfaucher Exp $
+/* $Id: KermetaUtils.java,v 1.9 2007-08-02 16:34:33 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Feb 20, 2006
- * Authors       : zdrey
+ * Authors       : zdrey, cfaucher
  * Contributors : David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
@@ -26,16 +26,11 @@ import org.kermeta.loader.kmt.fixer.TypeContainementFixer;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.DataType;
-import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 /**
@@ -132,8 +127,8 @@ public class KermetaUtils {
 		List<TypeDefinition> result = new ArrayList<TypeDefinition>();
 		// By definition, a TypeDefinition container is always of type Package
 		Package pkg = getRootPackage((Package) typedef.eContainer());
-		for (Iterator it = pkg.getNestedPackage().iterator(); it.hasNext();)
-			result.addAll(((Package) it.next()).getOwnedTypeDefinition());
+		for (Package it : pkg.getNestedPackage())
+			result.addAll(it.getOwnedTypeDefinition());
 		result.addAll(pkg.getOwnedTypeDefinition());
 		// Now add the Kermeta standard library classifiers
 		result.addAll(getStdLibTypeDefinitions());
@@ -148,7 +143,7 @@ public class KermetaUtils {
 		List<Type> result = new ArrayList<Type>();
 		if (classdef.getSuperType() != null
 				|| !classdef.getSuperType().isEmpty()) {
-			Iterator it = classdef.getSuperType().iterator();
+			Iterator<Type> it = classdef.getSuperType().iterator();
 			while (it.hasNext()) {
 				Type next = (Type) it.next();
 				if (next instanceof Class) {

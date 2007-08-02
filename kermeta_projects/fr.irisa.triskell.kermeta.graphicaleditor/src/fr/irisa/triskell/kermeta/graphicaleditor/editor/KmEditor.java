@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditor.java,v 1.8 2007-07-23 09:21:25 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.9 2007-08-02 16:34:33 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -8,6 +8,7 @@ package fr.irisa.triskell.kermeta.graphicaleditor.editor;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.topcased.modeler.documentation.EAnnotationDocPage;
 import org.topcased.modeler.documentation.IDocPage;
@@ -26,8 +27,8 @@ public class KmEditor extends Modeler {
 	 * @see org.topcased.modeler.editor.Modeler#getAdapterFactories()
 	 * @generated
 	 */
-	protected List getAdapterFactories() {
-		List factories = new ArrayList();
+	protected List<AdapterFactory> getAdapterFactories() {
+		List<AdapterFactory> factories = new ArrayList<AdapterFactory>();
 		factories
 				.add(new fr.irisa.triskell.kermeta.provider.KmItemProviderAdapterFactory());
 		factories
