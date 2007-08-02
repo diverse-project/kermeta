@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
+/* $Id: OperationHelper.java,v 1.4 2007-08-02 15:19:03 cfaucher Exp $
  * Project   : Kermeta 
  * File      : OperationHelper.java
  * License   : EPL
@@ -22,10 +22,11 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
 
 /**
- * this class proposes various helper functions that applies to ClassDefinition in the Kermeta model
+ * this class proposes various helper functions that applies to Operation in the Kermeta model
  *
  */
 public class OperationHelper {
@@ -40,9 +41,9 @@ public class OperationHelper {
 	 * @return
 	 */
 	public static Constraint getPreConditionByName(Operation op, String name) {
-		EList preConds = op.getPre();
+		EList<Constraint> preConds = op.getPre();
 		for (int i=0; i<preConds.size(); i++) {
-			Constraint pre = (Constraint) preConds.get(i);
+			Constraint pre = preConds.get(i);
 			if(pre.getName().equals(name))
 				return pre;
 		}
@@ -57,9 +58,9 @@ public class OperationHelper {
 	 * @return
 	 */
 	public static Constraint getPostConditionByName(Operation op, String name) {
-		EList postConds = op.getPost();
+		EList<Constraint> postConds = op.getPost();
 		for (int i=0; i<postConds.size(); i++) {
-			Constraint post = (Constraint) postConds.get(i);
+			Constraint post = postConds.get(i);
 			if(post.getName().equals(name))
 				return post;
 		}
@@ -238,4 +239,50 @@ public class OperationHelper {
 		return postConditions;
 	}
 	
+	/**
+	 * Returns a extended "printable name" for the given operation
+	 * 
+	 * @param operation
+	 * @return
+	 */
+	static public String getExtendedLabel(Operation operation) {
+		
+		String text = "";
+		
+		if (operation.getName() != null	&& !"".equals(operation.getName())) {
+			text = operation.getName();
+		} else {
+			text = "null";
+		}
+		Boolean first = true;
+		// The type parameters
+		if (operation.getTypeParameter().size() > 0) {
+			text += "<";
+			for (TypeVariable var : operation.getTypeParameter()) {
+				if (first)
+					first = false;
+				else
+					text += ",";
+				text += TypeVariableHelper.getLabelForTypeVariable(var);
+			}
+			text += ">";
+		}
+		// Now the parameters
+		text += "(";
+		first = true;
+		for (Parameter param : operation.getOwnedParameter()) {
+			if (first)
+				first = false;
+			else
+				text += ", ";
+			text += /*param.getName()	+ ":" +*/ TypeHelper.getLabelForType(param.getType());
+		}
+		text += ")";
+		// The return type
+		if (operation.getType() != null) {
+			text += " : " + TypeHelper.getLabelForType(operation.getType());
+		}
+		
+		return text;
+	}
 }

@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.java,v 1.4 2007-07-20 15:08:10 ftanguy Exp $
+/* $Id: TypeHelper.java,v 1.5 2007-08-02 15:19:03 cfaucher Exp $
  * Project   : Kermeta 
  * File      : TypeHelper.java
  * License   : EPL
@@ -15,15 +15,20 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.DataType;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 
 /**
- * this class proposes various helper functions that applies to NamedElement in the Kermeta model
+ * this class proposes various helper functions that applies to Type in the Kermeta model
  *
  */
 public class TypeHelper {
@@ -152,5 +157,50 @@ public class TypeHelper {
 			}
 		}
 		return typeDef;
+	}
+
+	/**
+	 * Returns a "printable name" for the given type
+	 * 
+	 * @param type
+	 * @return
+	 */
+	 static public String getLabelForType(Type type) {
+		String type_name = "";
+		if (type instanceof Class){
+			type_name = ((Class) type).getTypeDefinition().getName();
+			//String type_name2 = KMTHelper.getQualifiedName(((Class)type).getTypeDefinition());
+		}
+		else if (type instanceof TypeVariable){
+			type_name = ((TypeVariable)type).getName();
+		}
+		else if (type instanceof FunctionType) {
+			type_name = "<" + getLabelForType(((FunctionType) type).getLeft()) + "->" +getLabelForType(((FunctionType) type).getRight())+ ">";
+		}
+		else if (type instanceof ProductType) {
+			type_name = "[";
+			boolean first_pt = true;
+			for(Object pt_type : ((ProductType) type).getType()) {
+				if(first_pt) {
+					first_pt = false;
+				} else {
+					type_name += ",";
+				}
+				type_name += getLabelForType((Type) pt_type);
+			}
+			type_name += "]";	
+		}
+		else if (type instanceof DataType)
+			type_name = ((DataType) type).getName();
+		else if (type instanceof VoidType)
+			type_name = "Void";
+		else {
+			type_name = type == null ? "<Null>" : type.toString();
+			// throw new Error("FTYPE : Not implemented error :
+			// createTypeForTypeDefinition -- Enumeration type is not handled
+			// yet. (" + type + ")");
+		}
+		// FIXME : getName return sometimes null, which is unconsistent
+		return (type_name != null) ? type_name : "<Unset>";
 	}
 }
