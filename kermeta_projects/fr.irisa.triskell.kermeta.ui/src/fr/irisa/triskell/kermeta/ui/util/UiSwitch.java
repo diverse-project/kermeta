@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UiSwitch.java,v 1.2 2007-07-24 13:46:59 ftanguy Exp $
+ * $Id: UiSwitch.java,v 1.3 2007-08-02 14:52:11 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.ui.util;
 
@@ -73,7 +73,7 @@ public class UiSwitch {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
 		else {
-			List eSuperTypes = theEClass.getESuperTypes();
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
 					defaultCase(theEObject) :
