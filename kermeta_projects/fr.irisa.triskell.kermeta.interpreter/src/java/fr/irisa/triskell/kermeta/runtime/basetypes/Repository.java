@@ -1,4 +1,4 @@
-/* $Id: Repository.java,v 1.4 2007-08-01 12:41:08 dvojtise Exp $
+/* $Id: Repository.java,v 1.5 2007-08-02 13:03:53 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : Repository.java
  * License   : EPL
@@ -56,10 +56,11 @@ public class Repository {
     	}
     	
     	if(u.fileExtension() != null){
-    		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				u.fileExtension(),
-				new XMIResourceFactoryImpl()
-    		);
+    		if ( ! u.fileExtension().equals("ecore") && ! u.fileExtension().equals("km") )
+    			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+    					u.fileExtension(),
+    					new XMIResourceFactoryImpl()
+    			);
     	}
     	
     	ResourceSet rSet = (ResourceSet) selfRO.getData().get("r2e.emfResourceset");
