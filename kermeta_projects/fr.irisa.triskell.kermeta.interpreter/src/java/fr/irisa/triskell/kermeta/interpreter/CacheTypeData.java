@@ -1,4 +1,4 @@
-/* $Id: CacheTypeData.java,v 1.5 2007-07-24 13:47:38 ftanguy Exp $
+/* $Id: CacheTypeData.java,v 1.6 2007-08-02 09:57:03 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : CacheTypeData.java
  * License    : EPL
@@ -40,10 +40,10 @@ public class CacheTypeData {
 		
 		
 		// build callableOperations table
-		ArrayList ops = aType.callableOperations();
+		ArrayList<CallableOperation> ops = aType.callableOperations();
 		if (ops != null) 
 		{
-			Iterator it = ops.iterator();
+			Iterator<CallableOperation> it = ops.iterator();
 			while(it.hasNext()) {
 			    CallableOperation op = (CallableOperation)it.next();
 			    CallableOperation savedOp = callableOperationsCached.get( op.getOperation().getName() );
@@ -68,10 +68,10 @@ public class CacheTypeData {
 			}
 		}
 		//		 build callableProperties table
-		ArrayList props = aType.callableProperties();
+		ArrayList<CallableProperty> props = aType.callableProperties();
 		if (props != null) 
 		{
-			Iterator it = props.iterator();
+			Iterator<CallableProperty> it = props.iterator();
 			while(it.hasNext()) {
 			    CallableProperty prop = (CallableProperty)it.next();
 			    callablePropertiesCached.put(prop.getProperty().getName(), prop);
