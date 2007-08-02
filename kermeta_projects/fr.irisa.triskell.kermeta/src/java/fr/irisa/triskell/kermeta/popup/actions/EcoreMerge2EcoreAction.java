@@ -1,4 +1,4 @@
-/* $Id: EcoreMerge2EcoreAction.java,v 1.1 2006-01-17 08:46:04 barais Exp $
+/* $Id: EcoreMerge2EcoreAction.java,v 1.2 2007-08-02 12:26:10 cfaucher Exp $
  * Project : Kermeta
  * File : Kermeta2EcoreAction.java
  * License : EPL
@@ -78,7 +78,7 @@ public class EcoreMerge2EcoreAction implements IObjectActionDelegate {
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
 		if (selection instanceof StructuredSelection) {
-			// the selection should be a single *.kmt (or a *.km ?) file
+			// the selection should be less 2 ecore files
 			currentSelection = (StructuredSelection) selection;
 			ecorefiles.clear();
 			Iterator it = currentSelection.iterator();
