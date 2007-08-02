@@ -1,4 +1,4 @@
-/*$Id: PrimitiveTypeHelper.java,v 1.2 2007-07-20 15:08:10 ftanguy Exp $
+/*$Id: PrimitiveTypeHelper.java,v 1.3 2007-08-02 15:15:12 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	PrimitiveTypeHelper.java
 * License : EPL
@@ -14,6 +14,10 @@ package fr.irisa.triskell.kermeta.modelhelper;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 
+/**
+ * this class proposes various helper functions that applies to PrimitiveType in the Kermeta model
+ *
+ */
 public class PrimitiveTypeHelper {
 
 	/**

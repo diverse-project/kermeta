@@ -1,4 +1,4 @@
-/* $Id: TagHelper.java,v 1.2 2007-07-20 15:08:10 ftanguy Exp $
+/* $Id: TagHelper.java,v 1.3 2007-08-02 15:15:13 cfaucher Exp $
  * Project   : Kermeta 
  * File      : TagHelper.java
  * License   : EPL
@@ -14,6 +14,10 @@ import java.util.Iterator;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 
+/**
+ * this class proposes various helper functions that applies to Tag in the Kermeta model
+ *
+ */
 public class TagHelper {
 	/** create a tag if it doesn't already exist
 	 * 
