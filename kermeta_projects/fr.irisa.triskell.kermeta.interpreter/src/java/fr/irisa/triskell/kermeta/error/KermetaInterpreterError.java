@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreterError.java,v 1.2 2007-03-08 14:16:37 cfaucher Exp $
+/* $Id: KermetaInterpreterError.java,v 1.3 2007-08-02 09:50:23 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : KermetaInterpreterError.java
  * License    : EPL
@@ -16,6 +16,7 @@ package fr.irisa.triskell.kermeta.error;
  * Internal error/exception that occurs while interpreting a Kermeta model
  * @author dvojtise
  */
+@SuppressWarnings("serial")
 public class KermetaInterpreterError extends KermetaError {
 
     /**
