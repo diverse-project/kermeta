@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmDiagramEditPart.java,v 1.3 2007-07-23 09:21:25 cfaucher Exp $
+ * $Id: KmDiagramEditPart.java,v 1.4 2007-08-02 16:39:28 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -52,10 +52,7 @@ public class KmDiagramEditPart extends DiagramEditPart {
 	protected void handleModelChanged(Notification msg) {
 		super.handleModelChanged(msg);
 
-		for (java.util.Iterator aIt = this.getChildren().iterator(); aIt
-				.hasNext();) {
-			Object tmp = aIt.next();
-
+		for (Object tmp : this.getChildren()) {
 			if (tmp instanceof ClassDefinitionEditPart) {
 				((ClassDefinitionEditPart) tmp).refreshHeaderLabel();
 			}
