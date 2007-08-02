@@ -1,4 +1,4 @@
-/* $Id: ParameterizedTypeChecker.java,v 1.5 2007-07-20 15:08:03 ftanguy Exp $
+/* $Id: ParameterizedTypeChecker.java,v 1.6 2007-08-02 13:46:22 dvojtise Exp $
  * Project : Kermeta io
  * File : ParametrizedTypeChecker.java
  * License : EPL
@@ -45,7 +45,6 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 	}
 	
 	private KermetaUnit unit;
-	private TypeCheckerContext context;
 	private StructureFactory struct_factory;
 	private fr.irisa.triskell.kermeta.language.structure.Object codeContext; // this one is usefull in order to retreive the expression that use this type. allows to report the error at the right place
 	
@@ -53,7 +52,6 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 		super();
 		this.struct_factory = StructurePackageImpl.init().getStructureFactory();
 		this.unit = unit;
-		this.context = context;
 		this.codeContext = codeContext;
 	}
 
@@ -61,7 +59,7 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 		if (arg0.getTypeParamBinding().isEmpty()) {
 			return new Boolean(false);
 		}
-		Iterator tvb_iter = arg0.getTypeParamBinding().iterator();
+		Iterator<TypeVariableBinding> tvb_iter = arg0.getTypeParamBinding().iterator();
 		while (tvb_iter.hasNext()) {
 			TypeVariableBinding current_tvb = (TypeVariableBinding) tvb_iter.next();
 			fr.irisa.triskell.kermeta.language.structure.Type provided = current_tvb.getType();

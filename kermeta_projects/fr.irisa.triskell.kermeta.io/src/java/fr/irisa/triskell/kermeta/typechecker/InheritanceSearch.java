@@ -1,7 +1,7 @@
-/* $Id: InheritanceSearch.java,v 1.14 2007-08-01 07:21:41 ftanguy Exp $
+/* $Id: InheritanceSearch.java,v 1.15 2007-08-02 13:40:40 dvojtise Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 15 avr. 2005
@@ -24,8 +24,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 
 /**
  * @author Franck Fleurey
@@ -40,8 +39,8 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */
-	public static ArrayList allSuperTypes(fr.irisa.triskell.kermeta.language.structure.Class c) {
-		ArrayList result = new ArrayList();
+	public static ArrayList<Type> allSuperTypes(fr.irisa.triskell.kermeta.language.structure.Class c) {
+		ArrayList<Type> result = new ArrayList<Type>();
 		result.add(c);
 		
 		// get all super types of direct supertypes
@@ -50,7 +49,7 @@ public class InheritanceSearch {
 			fr.irisa.triskell.kermeta.language.structure.Class direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)super_type;
 			// propagate type variables
 			direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)TypeVariableEnforcer.getBoundType(direct_st, TypeVariableEnforcer.getTypeVariableBinding(c));
-			ArrayList sts = allSuperTypes(direct_st);
+			ArrayList<Type> sts = allSuperTypes(direct_st);
 			for(int i=0; i<sts.size(); i++) {
 				if (!result.contains(sts.get(i))) result.add(sts.get(i));
 			}
@@ -69,9 +68,9 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */
-	public static ArrayList getDirectSuperTypes(fr.irisa.triskell.kermeta.language.structure.Class c) {
+	public static ArrayList<Type> getDirectSuperTypes(fr.irisa.triskell.kermeta.language.structure.Class c) {
 		fr.irisa.triskell.kermeta.language.structure.Class object = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).type;
-	    ArrayList result = new ArrayList();
+	    ArrayList<Type> result = new ArrayList<Type>();
 	    // The class Object is the Root Class
 	    if (TypeEqualityChecker.equals(c, object)) return result;
 	    
@@ -248,7 +247,7 @@ public class InheritanceSearch {
 	 * @return
 	 */
 	public static ArrayList<CallableProperty> callableProperties(fr.irisa.triskell.kermeta.language.structure.Class c) {
-	    ArrayList allTypes = allSuperTypes(c);
+	    ArrayList<Type> allTypes = allSuperTypes(c);
 		ArrayList<CallableProperty> result = new ArrayList<CallableProperty>();
 		Hashtable<Property, Property> found_properties = new Hashtable<Property, Property>();
 		

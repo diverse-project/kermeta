@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.16 2007-07-24 13:46:45 ftanguy Exp $
+/* $Id: KermetaTypeChecker.java,v 1.17 2007-08-02 13:44:46 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -55,8 +55,8 @@ public class KermetaTypeChecker {
     
     
     // Some information used by testing
-    public ArrayList correctOperation = new ArrayList();
-    public ArrayList wrongOperations = new ArrayList();
+    public ArrayList<String> correctOperation = new ArrayList<String>();
+    public ArrayList<String> wrongOperations = new ArrayList<String>();
     
     /**
      * @param unit
@@ -173,7 +173,7 @@ public class KermetaTypeChecker {
 	{
 		boolean foundSAbstractTag = false;
 		if (typedef.isIsAbstract()) return true;
-		Iterator it = InheritanceSearch.callableOperations(InheritanceSearch.getFClassForClassDefinition((ClassDefinition)typedef)).iterator();
+		Iterator<CallableOperation> it = InheritanceSearch.callableOperations(InheritanceSearch.getFClassForClassDefinition((ClassDefinition)typedef)).iterator();
 		while (it.hasNext() && !foundSAbstractTag && !ClassDefinitionHelper.isSemanticallyAbstract(typedef))
 		{
 			Operation op = ((CallableOperation)it.next()).getOperation();
@@ -209,21 +209,21 @@ public class KermetaTypeChecker {
      */
     public void checkClassDefinition(ClassDefinition clsdef) {
 		
-        Iterator it = clsdef.getOwnedOperation().iterator();
-        while(it.hasNext()) {
-            Operation op = (Operation)it.next();
+        Iterator<Operation> itOp = clsdef.getOwnedOperation().iterator();
+        while(itOp.hasNext()) {
+            Operation op = (Operation)itOp.next();
             checkOperation(op);
         }
         
-        it = clsdef.getOwnedAttribute().iterator();
-        while(it.hasNext()) {
-            Property prop = (Property)it.next();
+        Iterator<Property> itProp = clsdef.getOwnedAttribute().iterator();
+        while(itProp.hasNext()) {
+            Property prop = (Property)itProp.next();
             checkDerivedProperty(prop);
         }
         
-        it = clsdef.getInv().iterator();
-        while(it.hasNext()) {
-            Constraint c = (Constraint)it.next();
+        Iterator<Constraint> itConstraint = clsdef.getInv().iterator();
+        while(itConstraint.hasNext()) {
+            Constraint c = (Constraint)itConstraint.next();
             checkConstraint(c);
         }
     }
@@ -257,7 +257,7 @@ public class KermetaTypeChecker {
         if (op.getBody() != null)
             ExpressionChecker.typeCheckExpression(op.getBody(), unit, context);
         
-        Iterator it = op.getPre().iterator();
+        Iterator<Constraint> it = op.getPre().iterator();
         while(it.hasNext()) {
             Constraint c = (Constraint)it.next();
             checkConstraint(c);
