@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.2 2007-07-24 13:46:22 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.3 2007-08-02 07:01:09 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -277,7 +277,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		if ( kermetaUnit.isErrored() )
 			return;
 		
-		Set <KermetaUnit> importedKermetaUnits = KermetaUnitHelper.getAllImportedKermetaUnits( kermetaUnit );
+		List <KermetaUnit> importedKermetaUnits = KermetaUnitHelper.getAllImportedKermetaUnits( kermetaUnit );
 		for ( KermetaUnit unit : importedKermetaUnits ) {
 			
 			if ( unit != kermetaUnit ) {
