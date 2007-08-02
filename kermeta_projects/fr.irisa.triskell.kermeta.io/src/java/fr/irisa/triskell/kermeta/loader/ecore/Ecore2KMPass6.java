@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass6.java,v 1.4 2007-07-31 09:08:28 ftanguy Exp $
+/* $Id: Ecore2KMPass6.java,v 1.5 2007-08-02 16:41:10 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -45,14 +44,17 @@ import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
  */
 public class Ecore2KMPass6 extends Ecore2KMPass {
 	
-	private Hashtable opTable;
+	private Hashtable<Operation, ArrayList<Operation>> opTable;
 	
 	/**
 	 * @param visitor
 	 * @param t
 	 * @param exporter
 	 */
-	public Ecore2KMPass6(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, Hashtable opTable) {
+	public Ecore2KMPass6(KermetaUnit kermetaUnit, 
+			             Ecore2KMDatas datas, 
+						 boolean isQuickFixEnabled, 
+						 Hashtable<Operation, ArrayList<Operation>> opTable) {
 		super(kermetaUnit, datas, isQuickFixEnabled);
 		this.opTable = opTable;
 	}
@@ -94,7 +96,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 		//  - class invariants
 		//  - operation pre and post conditions
 		if (node.getSource().equals(KM2Ecore.ANNOTATION_NESTED_DOC)) {
-			EList refs = node.getReferences();
+			EList<EObject> refs = node.getReferences();
 			
 			if(! refs.isEmpty()) {
 				EAnnotation tgtAnnot = (EAnnotation) refs.get(0);
@@ -155,17 +157,17 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 				
 				
 				// Quickfix to avoid 2 operations with the same name but different parameters in a single inheritance tree
-				EList refParams = currentOperation.getOwnedParameter();
+				EList<Parameter> refParams = currentOperation.getOwnedParameter();
 
-				List opList = ClassDefinitionHelper.getAllOperations(currentClassDefinition);
-				Iterator it = opList.iterator();
+				List<Operation> opList = ClassDefinitionHelper.getAllOperations(currentClassDefinition);
+				Iterator<Operation> it = opList.iterator();
 				
 				boolean match = true;
 				while(it.hasNext() && match) {
-					Operation crtOp = (Operation) it.next();
+					Operation crtOp = it.next();
 					
 					if((crtOp.getName().equals(currentOperation.getName())) && (crtOp != currentOperation)) {
-						EList crtParams = crtOp.getOwnedParameter();
+						EList<Parameter> crtParams = crtOp.getOwnedParameter();
 						
 						// Check the nb of parameters of the respective methods 
 						if(refParams.size() != crtParams.size()) {
@@ -174,11 +176,11 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 						else {
 							// Same number of parameters:
 							// Check whether parameters of both methods have the same type
-							Iterator refIt = refParams.iterator();
-							Iterator crtIt = crtParams.iterator();
+							Iterator<Parameter> refIt = refParams.iterator();
+							Iterator<Parameter> crtIt = crtParams.iterator();
 							while(crtIt.hasNext() && match) {
-								Parameter p1 = (Parameter) crtIt.next();
-								Parameter p2 = (Parameter) refIt.next();
+								Parameter p1 = crtIt.next();
+								Parameter p2 = refIt.next();
 								match = (p1.getType() == p2.getType());
 							}
 						}
@@ -220,10 +222,10 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 	 */
 	protected void topDownPropagation(String opName, Operation op) {
 		if( opTable.containsKey(op) ) {
-			ArrayList ar = (ArrayList) opTable.get(op);
-			Iterator it = ar.iterator();
+			ArrayList<Operation> ar = opTable.get(op);
+			Iterator<Operation> it = ar.iterator();
 			while(it.hasNext()) {
-				Operation subOp = (Operation) it.next();
+				Operation subOp = it.next();
 				subOp.setName(opName);
 				topDownPropagation(opName, subOp);
 			}
@@ -294,15 +296,15 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 	 * @param node
 	 * @return
 	 */
-	protected EOperation findOperationInSuperTypes(List supertypes, EOperation node)
+	protected EOperation findOperationInSuperTypes(List<EClass> supertypes, EOperation node)
 	{
 		EOperation result = null;
-		Iterator it = supertypes.iterator();
+		Iterator<EClass> it = supertypes.iterator();
 		while (it.hasNext() && result == null)
 		{
-			EClass next = (EClass)it.next();
+			EClass next = it.next();
 			// Get all the operations, find the one that has the same signature as the given operation
-			EList eoperations = next.getEOperations();
+			EList<EOperation> eoperations = next.getEOperations();
 			Iterator<EOperation> itop = eoperations.iterator(); 
 			while (itop.hasNext() && result == null)
 			{
@@ -314,7 +316,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 		if (result == null)
 		{
 			for (Object type : supertypes) {
-				List next = ((EClass)type).getESuperTypes();
+				List<EClass> next = ((EClass)type).getESuperTypes();
 				result =  findOperationInSuperTypes(next, node);
 			}
 		}
