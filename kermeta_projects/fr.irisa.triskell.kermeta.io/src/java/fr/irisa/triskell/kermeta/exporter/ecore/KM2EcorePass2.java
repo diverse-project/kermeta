@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.39 2007-07-24 13:46:51 ftanguy Exp $
+/* $Id: KM2EcorePass2.java,v 1.40 2007-08-02 16:01:15 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -53,6 +53,7 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
@@ -118,9 +119,9 @@ public class KM2EcorePass2 extends KM2Ecore {
 		 * Visiting the type definitions.
 		 * 
 		 */
-		Iterator iterator = node.getOwnedTypeDefinition().iterator();
+		Iterator<TypeDefinition> iterator = node.getOwnedTypeDefinition().iterator();
 		while ( iterator.hasNext() )
-			accept( (EObject) iterator.next() );
+			accept( iterator.next() );
 		
 		/*
 		 * 

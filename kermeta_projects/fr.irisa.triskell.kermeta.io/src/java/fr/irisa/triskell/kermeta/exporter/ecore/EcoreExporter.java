@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.6 2007-08-02 09:04:45 cfaucher Exp $
+/*$Id: EcoreExporter.java,v 1.7 2007-08-02 16:02:07 dvojtise Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -163,7 +163,7 @@ public class EcoreExporter {
 			frameworkResources.addAll( resourceSet.getResources() );
 			for ( Resource resource : (List<Resource>) resourceSet.getResources() ) {
 				
-				for ( TreeIterator iterator = resource.getAllContents(); iterator.hasNext(); ) {
+				for ( TreeIterator<EObject> iterator = resource.getAllContents(); iterator.hasNext(); ) {
 					
 					Object o = iterator.next();
 
