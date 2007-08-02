@@ -1,4 +1,4 @@
-/*$Id: PropertyNotFoundException.java,v 1.1 2007-04-24 11:32:06 ftanguy Exp $
+/*$Id: PropertyNotFoundException.java,v 1.2 2007-08-02 17:12:46 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -11,6 +11,7 @@ package fr.irisa.triskell.eclipse.resources;
 
 import org.eclipse.core.resources.IResource;
 
+@SuppressWarnings("serial")
 public class PropertyNotFoundException extends Exception {
 
 	private String qualifiedNameProperty = "";

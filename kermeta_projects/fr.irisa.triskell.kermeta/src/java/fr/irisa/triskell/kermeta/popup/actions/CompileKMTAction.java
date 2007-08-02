@@ -140,7 +140,7 @@ public class CompileKMTAction implements IObjectActionDelegate {
 		{
 			// the se=lection should be a single *.ecore file
 			currentSelection = (StructuredSelection)selection;
-			Iterator it = currentSelection.iterator();
+			Iterator<?> it = currentSelection.iterator();
 
 			while(it.hasNext()) {
 				kmtfile = (IFile)it.next();
