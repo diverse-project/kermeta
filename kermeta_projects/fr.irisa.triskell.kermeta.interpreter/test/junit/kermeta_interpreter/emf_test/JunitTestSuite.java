@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.17 2007-08-02 09:39:57 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.18 2007-08-02 13:05:34 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -61,46 +61,48 @@ public class JunitTestSuite extends TestSuite {
 
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
-/*		testWithFile("test/emf_testcases/kermeta","027_testRuntimeModelImport.main.kmt" );
+		testWithFile("test/emf_testcases/kermeta","057_saveDependentModels.main.kmt" );
 
-		testWithFile("test/emf_testcases/kermeta","028_testLoadEcoreFile.main.kmt" );
+		testWithFile("test/emf_testcases/kermeta","067_testHasSubTypeLoadingModel.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","053_savingKM.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","044_testFrameworkModelConformance.main.kmt" );
 
-		testWithFile("test/emf_testcases/kermeta","047_testLoadEcoreSplittedModel.main.kmt" );
-
-		testWithFile("test/emf_testcases/kermeta","048_testLoadEcoreSplittedModel_withCyclicref.main.kmt" );
-
-		testWithFile("test/emf_testcases/kermeta","049_testSplittedMetaModel.main.kmt" );
-
-		testWithFile("test/emf_testcases/kermeta","050_testChunkedModel.main.kmt" );
-
-		testWithFile("test/emf_testcases/kermeta","051_testSaveEcoreSplittedXRefModel.main.kmt" );
-
-		testWithFile("test/emf_testcases/kermeta","052_testSaveEcoreSplittedModel.main.kmt" );
-*/
-		testWithFile("test/emf_testcases/kermeta","053_savingKM.main.kmt" );
-
-		testWithFile("test/emf_testcases/kermeta","053_savingKM_2.main.kmt" );
-/*
-		testWithFile("test/emf_testcases/kermeta","054_pb_olivier1213.main.kmt" );
-
-		testWithFile("test/emf_testcases/kermeta","055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt" );
-
-		testWithFile("test/emf_testcases/kermeta","056_load_and_save_in_another_location.main.kmt" );
-
-		testWithFile("test/emf_testcases/kermeta","057_saveDependentModels.main.kmt" );
+		testWithFile("test/emf_testcases/kermeta","028_testLoadEcoreFile.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","058_IndirectLoadSaveEnum.main.kmt" );
 
+		testWithFile("test/emf_testcases/kermeta","053_savingKM_2.main.kmt" );
+
 		testWithFile("test/emf_testcases/kermeta","058_loadSaveEnum.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","054_pb_olivier1213.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","027_testRuntimeModelImport.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","068_saveEcoreLinkedToTheFramework.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","052_testSaveEcoreSplittedModel.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","048_testLoadEcoreSplittedModel_withCyclicref.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","047_testLoadEcoreSplittedModel.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","049_testSplittedMetaModel.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","061_multipleIndirectLoad.main.kmt" );
 
+		testWithFile("test/emf_testcases/kermeta","051_testSaveEcoreSplittedXRefModel.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","056_load_and_save_in_another_location.main.kmt" );
+
 		testWithFile("test/emf_testcases/kermeta","062_resourceTests.main.kmt" );
 
-		testWithFile("test/emf_testcases/kermeta","067_testHasSubTypeLoadingModel.main.kmt" );
-*/
+		testWithFile("test/emf_testcases/kermeta","055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","050_testChunkedModel.main.kmt" );
+
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
 		//addTest(runfactory.getTest());
