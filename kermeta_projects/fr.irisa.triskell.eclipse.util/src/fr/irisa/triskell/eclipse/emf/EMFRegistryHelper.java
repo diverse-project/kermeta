@@ -1,4 +1,4 @@
-/* $Id: EMFRegistryHelper.java,v 1.5 2007-06-26 14:29:40 dvojtise Exp $
+/* $Id: EMFRegistryHelper.java,v 1.6 2007-08-02 17:12:25 dvojtise Exp $
  * Project   : Kermeta 
  * File      : EMFRegistryHelper.java
  * License   : EPL
@@ -40,9 +40,9 @@ public class EMFRegistryHelper {
 	 * @return
 	 */
 	public static boolean isRegistered(String uri){
-		Iterator it = Registry.INSTANCE.keySet().iterator();
+		Iterator<String> it = Registry.INSTANCE.keySet().iterator();
 		while(it.hasNext()){
-			String regentry = (String)it.next();
+			String regentry = it.next();
 			if(regentry.equals(uri.toString()) )
 					return true;
 		}
@@ -74,9 +74,9 @@ public class EMFRegistryHelper {
 		// get only valid children , ie. registered children
 		if(obj instanceof EPackage) {
 			EPackage p = (EPackage) obj;
-			Iterator subPackageIt = p.getESubpackages().iterator();
+			Iterator<EPackage> subPackageIt = p.getESubpackages().iterator();
 			while(subPackageIt.hasNext()){
-				EPackage subPackage = (EPackage)subPackageIt.next();
+				EPackage subPackage = subPackageIt.next();
 				if(EMFRegistryHelper.isRegistered(subPackage.getNsURI())){
 					result.add(subPackage.getNsURI());
 				}
@@ -96,9 +96,9 @@ public class EMFRegistryHelper {
 		// get only valid children , ie. registered children
 		if(obj instanceof EPackage) {
 			EPackage p = (EPackage) obj;
-			Iterator subPackageIt = p.getESubpackages().iterator();
+			Iterator<EPackage> subPackageIt = p.getESubpackages().iterator();
 			while(subPackageIt.hasNext()){
-				EPackage subPackage = (EPackage)subPackageIt.next();
+				EPackage subPackage = subPackageIt.next();
 				if(EMFRegistryHelper.isRegistered(subPackage.getNsURI())){
 					result.add(subPackage.getNsURI());
 					// also add the granchildreen ...
@@ -119,12 +119,12 @@ public class EMFRegistryHelper {
 			// only if not already registered in main Registry
 			registry.put(pack.getNsURI(), pack);
 			
-			EList l = pack.getESubpackages();
+			EList<EPackage> l = pack.getESubpackages();
 			
 			if(l != null) {
-				Iterator it = l.iterator();
+				Iterator<EPackage> it = l.iterator();
 				while(it.hasNext()) {
-					safeRegisterPackages(registry,(EPackage) it.next());
+					safeRegisterPackages(registry, it.next());
 				}
 			}
 		}
