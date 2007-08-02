@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.5 2007-08-01 14:40:30 ftanguy Exp $
+/*$Id: EcoreExporter.java,v 1.6 2007-08-02 09:04:45 cfaucher Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -12,13 +12,12 @@
 
 package fr.irisa.triskell.kermeta.exporter.ecore;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -225,15 +224,63 @@ public class EcoreExporter {
 		setUri(kermetaUnit, rep + "/", fileName);
 	}
 	
-	
+	/**
+	 * 
+	 * @param kermetaUnit
+	 * @param rep
+	 * @param fileName
+	 */
 	public void export(KermetaUnit kermetaUnit, String rep, String fileName, boolean independency) {
+		exportInMemory(kermetaUnit, rep, fileName, independency);
+		save();
+	}
+	
+	
+	public void save() {
+		try {
+			for (KermetaUnit currentUnit : resources.keySet()) {
+				Resource resource = resources.get(currentUnit);
+
+				if (!resourcesNotToSave.containsKey(resource)
+						&& !frameworkResources.contains(resource)) {
+					EAnnotation annotation = EcoreFactory.eINSTANCE
+							.createEAnnotation();
+					annotation.setSource("dependentResource");
+					for (KermetaUnit importedUnit : KermetaUnitHelper
+							.getAllImportedKermetaUnits(currentUnit))
+						if (resources.get(importedUnit) != null)
+							annotation.getReferences().addAll(
+									resources.get(importedUnit).getContents());
+
+					resource.getContents().add(annotation);
+
+					resource.save(null);
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public ResourceSet exportInMemory(KermetaUnit kermetaUnit, String rep, boolean independency) {
+		return exportInMemory(kermetaUnit, rep, null, independency);
+	}
+	
+	/**
+	 * 
+	 * @param kermetaUnit
+	 * @param rep
+	 * @param fileName
+	 * @return
+	 */
+	public ResourceSet exportInMemory(KermetaUnit kermetaUnit, String rep, String fileName, boolean independency) {
 		initialize(kermetaUnit, rep, fileName);
 
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 		fillResourceSet(kermetaUnit);
-		//addEcoreFrameworkInResourceSet();
 		
 		applyPass1ToAll(kermetaUnit);
-		//initializeLoadings(kermetaUnit);
 		applyPass2ToAll(kermetaUnit);
 		
 		if ( independency )
@@ -251,36 +298,27 @@ public class EcoreExporter {
 			
 			p.getEClassifiers().add( getKermetaTypesAlias() );
 						
-			for ( KermetaUnit currentUnit : resources.keySet() ) {
-				Resource resource = resources.get(currentUnit);
-				
-				if ( ! resourcesNotToSave.containsKey(resource) && ! frameworkResources.contains(resource) ) {
-					EAnnotation annotation = EcoreFactory.eINSTANCE.createEAnnotation();
-					annotation.setSource("dependentResource");
-					for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits( currentUnit ) )
-						if ( resources.get(importedUnit) != null )
-							annotation.getReferences().addAll( resources.get(importedUnit).getContents() );
-						
-					/*for ( Resource frameworkResource : frameworkResources )
-						annotation.getReferences().addAll( resource.getContents() );*/
-					
-					resource.getContents().add( annotation );
-									
-					resource.save( null );
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+
 		} catch(Exception e ) {
 			e.printStackTrace();
-		}	
+		}
+		
+		return resourceSet;
 	}
 	
+	/**
+	 * 
+	 * @param kermetaUnit
+	 * @param rep
+	 */
 	public void export(KermetaUnit kermetaUnit, String rep, boolean independency) {
 		export(kermetaUnit, rep, null, independency);
 	}
 	
-	
+	/**
+	 * 
+	 * @param kermetaUnit
+	 */
 	private void applyPass1ToAll(KermetaUnit kermetaUnit) {
 		
 		if ( pass1done.get(kermetaUnit) )
@@ -307,6 +345,10 @@ public class EcoreExporter {
 		
 	}
 	
+	/**
+	 * 
+	 * @param kermetaUnit
+	 */
 	private void applyPass2ToAll(KermetaUnit kermetaUnit) {
 		
 		if ( pass2done.get(kermetaUnit) )
@@ -356,7 +398,6 @@ public class EcoreExporter {
 		loadings.put( kermetaUnit, false );
 		pass3done.put(kermetaUnit, true);
 	}
-	
 	
 	private void fillResourceSet(KermetaUnit kermetaUnit) {
 		/*
