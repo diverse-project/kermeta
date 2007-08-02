@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutImpl.java,v 1.5 2007-07-24 13:47:10 ftanguy Exp $
+ * $Id: OutImpl.java,v 1.6 2007-08-02 13:07:40 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -223,8 +223,8 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 						String relativePath = elements[0].getAttribute("File");
 						String filePath = "platform:/plugin/" + extension.getContributor().getName() + "/" + relativePath;
 						String[] arguments = new String[1];
-						arguments[0] = filePath;
-						KermetaLauncher.execute( arguments );
+						arguments[0] = unit.getValue();
+						KermetaLauncher.execute( filePath, arguments );
 						
 					}
 					
