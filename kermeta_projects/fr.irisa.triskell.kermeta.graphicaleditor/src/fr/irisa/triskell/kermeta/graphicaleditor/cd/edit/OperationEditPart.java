@@ -1,11 +1,9 @@
 /*******************************************************************************
- * $Id: OperationEditPart.java,v 1.5 2007-08-02 15:22:11 cfaucher Exp $
+ * $Id: OperationEditPart.java,v 1.6 2007-08-02 16:35:51 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
 package fr.irisa.triskell.kermeta.graphicaleditor.cd.edit;
-
-import java.util.Iterator;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
@@ -32,10 +30,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.commands.OperationUpdateComm
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.dialogs.OperationEditDialog;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.utils.EditPartUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.figures.OperationFigure;
-import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.Parameter;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
 
 /**
