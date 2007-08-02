@@ -19,14 +19,14 @@ public class SimpleKWList {
 		return instance;
 	}
 
-	protected Hashtable keywords;
+	protected Hashtable<String,String> keywords;
 	
 	/**
 	 * 
 	 */
 	protected SimpleKWList() {
 		super();
-		keywords = new Hashtable();
+		keywords = new Hashtable<String,String>();
 		addKeyword("package");
 		addKeyword("require");
 		addKeyword("includeFilter");
@@ -95,7 +95,7 @@ public class SimpleKWList {
 	/**
 	 * @return Returns the keywords.
 	 */
-	public Hashtable getKeywords() {
+	public Hashtable<String,String> getKeywords() {
 		return keywords;
 	}
 }

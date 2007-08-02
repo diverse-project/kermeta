@@ -1,4 +1,4 @@
-/* $Id: KermetaASTHelper.java,v 1.2 2007-07-20 15:08:04 ftanguy Exp $
+/* $Id: KermetaASTHelper.java,v 1.3 2007-08-02 11:52:01 dvojtise Exp $
  * Project   : Kermeta 
  * File      : KermetaASTHelper.java
  * License   : EPL
@@ -16,7 +16,6 @@ import fr.irisa.triskell.kermeta.ast.AnnotableClassMemberDecl;
 import fr.irisa.triskell.kermeta.ast.Annotation;
 import fr.irisa.triskell.kermeta.ast.Annotations;
 import fr.irisa.triskell.kermeta.ast.ClassDecl;
-import fr.irisa.triskell.kermeta.ast.Operation;
 import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
 import fr.irisa.triskell.kermeta.ast.Tag;
 import fr.irisa.triskell.kermeta.ast.TopLevelDecl;
@@ -47,11 +46,10 @@ public class KermetaASTHelper {
 	}
 
 	public static boolean isOverloadable(OperationExpressionBody node) {
-		Operation op = (Operation)node.getParent();
 		ASTNode ast = node.getParent().getParent();
-		if(node.getParent().getParent() instanceof AnnotableClassMemberDecl)
+		if(ast instanceof AnnotableClassMemberDecl)
 		{
-			AnnotableClassMemberDecl parent = (AnnotableClassMemberDecl)node.getParent().getParent();
+			AnnotableClassMemberDecl parent = (AnnotableClassMemberDecl)ast;
 			return isTagPresent(parent.getAnnotations(), TAGNAME_OVERLOADABLE,"true");
 		}
 		return false;
