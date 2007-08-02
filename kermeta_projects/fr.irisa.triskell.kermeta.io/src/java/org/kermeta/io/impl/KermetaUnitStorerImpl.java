@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.9 2007-08-01 14:42:11 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.10 2007-08-02 13:09:01 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -67,7 +67,7 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * @generated
 	 * @ordered
 	 */
-	protected EList kermetaUnits;
+	protected EList<KermetaUnit> kermetaUnits;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,6 +83,7 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return IoPackage.Literals.KERMETA_UNIT_STORER;
 	}
@@ -92,9 +93,9 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getKermetaUnits() {
+	public EList<KermetaUnit> getKermetaUnits() {
 		if (kermetaUnits == null) {
-			kermetaUnits = new EObjectContainmentWithInverseEList(KermetaUnit.class, this, IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS, IoPackage.KERMETA_UNIT__STORER);
+			kermetaUnits = new EObjectContainmentWithInverseEList<KermetaUnit>(KermetaUnit.class, this, IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS, IoPackage.KERMETA_UNIT__STORER);
 		}
 		return kermetaUnits;
 	}
@@ -288,10 +289,12 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS:
-				return ((InternalEList)getKermetaUnits()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getKermetaUnits()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -301,10 +304,11 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS:
-				return ((InternalEList)getKermetaUnits()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getKermetaUnits()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -314,6 +318,7 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS:
@@ -327,11 +332,13 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS:
 				getKermetaUnits().clear();
-				getKermetaUnits().addAll((Collection)newValue);
+				getKermetaUnits().addAll((Collection<? extends KermetaUnit>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -342,6 +349,7 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS:
@@ -356,6 +364,7 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS:

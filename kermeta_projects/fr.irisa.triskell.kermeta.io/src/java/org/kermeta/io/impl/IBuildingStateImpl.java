@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBuildingStateImpl.java,v 1.2 2007-07-20 15:08:05 ftanguy Exp $
+ * $Id: IBuildingStateImpl.java,v 1.3 2007-08-02 13:09:01 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -37,6 +37,7 @@ public abstract class IBuildingStateImpl extends EObjectImpl implements IBuildin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return IoPackage.Literals.IBUILDING_STATE;
 	}

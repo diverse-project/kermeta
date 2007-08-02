@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.5 2007-07-27 07:12:17 ftanguy Exp $
+ * $Id: IoPackageImpl.java,v 1.6 2007-08-02 13:09:01 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -685,6 +685,10 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		// Obtain other dependent packages
 		StructurePackage theStructurePackage = (StructurePackage)EPackage.Registry.INSTANCE.getEPackage(StructurePackage.eNS_URI);
 
+		// Create type parameters
+
+		// Set bounds for type parameters
+
 		// Add supertypes to classes
 		errorMessageEClass.getESuperTypes().add(this.getMessage());
 		warningMessageEClass.getESuperTypes().add(this.getMessage());
@@ -708,109 +712,109 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		initEAttribute(getKermetaUnit_Tracer(), this.getTracer(), "tracer", null, 0, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKermetaUnit_ConstraintChecked(), ecorePackage.getEBoolean(), "constraintChecked", null, 1, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, null, "load");
+		addEOperation(kermetaUnitEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		EOperation op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "addInternalPackage", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1);
+		EOperation op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "addInternalPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "findInternalpackage", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1);
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "findInternalpackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, theStructurePackage.getRequire(), "addRequire", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1);
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getRequire(), "addRequire", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, theStructurePackage.getUsing(), "addUsing", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1);
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getUsing(), "addUsing", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, this.getSet(), "getRequires", 0, 1);
+		addEOperation(kermetaUnitEClass, this.getSet(), "getRequires", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, null, "importKermetaUnit");
-		addEParameter(op, this.getKermetaUnit(), "value", 0, 1);
-		addEParameter(op, ecorePackage.getEBoolean(), "force", 0, 1);
+		op = addEOperation(kermetaUnitEClass, null, "importKermetaUnit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getKermetaUnit(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "force", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, null, "addExternalPackage");
-		addEParameter(op, theStructurePackage.getPackage(), "p", 0, 1);
+		op = addEOperation(kermetaUnitEClass, null, "addExternalPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStructurePackage.getPackage(), "p", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, this.getList(), "getPackages", 0, 1);
+		addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "getPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, this.getList(), "getInternalPackages", 0, 1);
+		addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "getInternalPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, this.getList(), "getExternalPackages", 0, 1);
+		addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "getExternalPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByName", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "name", 0, 1);
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByQualifiedName", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1);
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, this.getList(), "getPackages", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1);
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "getPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "getInternalPackage", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1);
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "getInternalPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, this.getList(), "getExternalPackage", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1);
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "getExternalPackage", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, ecorePackage.getEString(), "print", 0, 1);
+		addEOperation(kermetaUnitEClass, ecorePackage.getEString(), "print", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, ecorePackage.getEBoolean(), "isLoading", 0, 1);
+		addEOperation(kermetaUnitEClass, ecorePackage.getEBoolean(), "isLoading", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, null, "error");
-		addEParameter(op, ecorePackage.getEString(), "message", 0, 1);
+		op = addEOperation(kermetaUnitEClass, null, "error", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "message", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, null, "warning");
-		addEParameter(op, ecorePackage.getEString(), "message", 0, 1);
+		op = addEOperation(kermetaUnitEClass, null, "warning", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "message", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, ecorePackage.getEBoolean(), "isErrored", 0, 1);
+		addEOperation(kermetaUnitEClass, ecorePackage.getEBoolean(), "isErrored", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, null, "storeTrace");
-		addEParameter(op, theStructurePackage.getObject(), "modelElement", 0, 1);
-		addEParameter(op, ecorePackage.getEJavaObject(), "node", 0, 1);
+		op = addEOperation(kermetaUnitEClass, null, "storeTrace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStructurePackage.getObject(), "modelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEJavaObject(), "node", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, theStructurePackage.getObject(), "getModelElementByNode", 0, 1);
-		addEParameter(op, ecorePackage.getEJavaObject(), "node", 0, 1);
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getObject(), "getModelElementByNode", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEJavaObject(), "node", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, ecorePackage.getEJavaObject(), "getNodeByModelElement", 0, 1);
-		addEParameter(op, theStructurePackage.getObject(), "modelElement", 0, 1);
+		op = addEOperation(kermetaUnitEClass, ecorePackage.getEJavaObject(), "getNodeByModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStructurePackage.getObject(), "modelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, this.getSet(), "getUsings", 0, 1);
+		addEOperation(kermetaUnitEClass, this.getSet(), "getUsings", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, null, "error");
-		addEParameter(op, ecorePackage.getEString(), "message", 0, 1);
-		addEParameter(op, ecorePackage.getEJavaObject(), "target", 0, 1);
+		op = addEOperation(kermetaUnitEClass, null, "error", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "message", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEJavaObject(), "target", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, ecorePackage.getEBoolean(), "isWarned", 0, 1);
+		addEOperation(kermetaUnitEClass, ecorePackage.getEBoolean(), "isWarned", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, null, "parsingError");
-		addEParameter(op, this.getANTLRException(), "exception", 0, 1);
+		op = addEOperation(kermetaUnitEClass, null, "parsingError", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getANTLRException(), "exception", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitEClass, null, "warning");
-		addEParameter(op, ecorePackage.getEString(), "message", 0, 1);
-		addEParameter(op, ecorePackage.getEJavaObject(), "target", 0, 1);
+		op = addEOperation(kermetaUnitEClass, null, "warning", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "message", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEJavaObject(), "target", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, null, "finalize");
+		addEOperation(kermetaUnitEClass, null, "finalize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(iBuildingStateEClass, IBuildingState.class, "IBuildingState", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(kermetaUnitStorerEClass, KermetaUnitStorer.class, "KermetaUnitStorer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKermetaUnitStorer_KermetaUnits(), this.getKermetaUnit(), this.getKermetaUnit_Storer(), "kermetaUnits", null, 0, -1, KermetaUnitStorer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitStorerEClass, this.getKermetaUnit(), "get", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1);
+		op = addEOperation(kermetaUnitStorerEClass, this.getKermetaUnit(), "get", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitStorerEClass, this.getKermetaUnit(), "find", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1);
+		op = addEOperation(kermetaUnitStorerEClass, this.getKermetaUnit(), "find", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitStorerEClass, null, "load");
-		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1);
+		op = addEOperation(kermetaUnitStorerEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitStorerEClass, null, "unload");
-		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1);
+		op = addEOperation(kermetaUnitStorerEClass, null, "unload", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitStorerEClass, null, "load");
-		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "content", 0, 1);
+		op = addEOperation(kermetaUnitStorerEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "content", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(packageEntryEClass, PackageEntry.class, "PackageEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPackageEntry_QualifiedName(), ecorePackage.getEString(), "qualifiedName", null, 1, 1, PackageEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -819,8 +823,8 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		initEClass(kermetaUnitLoaderEClass, KermetaUnitLoader.class, "KermetaUnitLoader", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKermetaUnitLoader_KermetaUnits(), this.getKermetaUnit(), null, "kermetaUnits", null, 0, -1, KermetaUnitLoader.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(kermetaUnitLoaderEClass, this.getKermetaUnit(), "load", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1);
+		op = addEOperation(kermetaUnitLoaderEClass, this.getKermetaUnit(), "load", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(messageEClass, Message.class, "Message", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMessage_Value(), ecorePackage.getEString(), "value", null, 1, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

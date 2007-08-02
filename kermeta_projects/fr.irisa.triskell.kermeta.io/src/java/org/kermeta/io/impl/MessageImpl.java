@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MessageImpl.java,v 1.3 2007-07-24 13:46:46 ftanguy Exp $
+ * $Id: MessageImpl.java,v 1.4 2007-08-02 13:09:01 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -83,6 +83,7 @@ public abstract class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return IoPackage.Literals.MESSAGE;
 	}
@@ -134,6 +135,7 @@ public abstract class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case IoPackage.MESSAGE__VALUE:
@@ -149,6 +151,7 @@ public abstract class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case IoPackage.MESSAGE__VALUE:
@@ -166,6 +169,7 @@ public abstract class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case IoPackage.MESSAGE__VALUE:
@@ -183,6 +187,7 @@ public abstract class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case IoPackage.MESSAGE__VALUE:
@@ -198,6 +203,7 @@ public abstract class MessageImpl extends EObjectImpl implements Message {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

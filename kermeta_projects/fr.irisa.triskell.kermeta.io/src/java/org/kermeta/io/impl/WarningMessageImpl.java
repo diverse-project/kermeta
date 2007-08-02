@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: WarningMessageImpl.java,v 1.2 2007-07-20 15:08:06 ftanguy Exp $
+ * $Id: WarningMessageImpl.java,v 1.3 2007-08-02 13:09:01 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -35,6 +35,7 @@ public class WarningMessageImpl extends MessageImpl implements WarningMessage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return IoPackage.Literals.WARNING_MESSAGE;
 	}

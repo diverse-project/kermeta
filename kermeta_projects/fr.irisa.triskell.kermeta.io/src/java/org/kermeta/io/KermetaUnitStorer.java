@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorer.java,v 1.3 2007-07-24 13:46:47 ftanguy Exp $
+ * $Id: KermetaUnitStorer.java,v 1.4 2007-08-02 13:09:01 dvojtise Exp $
  */
 package org.kermeta.io;
 
@@ -42,10 +42,10 @@ public interface KermetaUnitStorer extends EObject {
 	 * @return the value of the '<em>Kermeta Units</em>' containment reference list.
 	 * @see org.kermeta.io.IoPackage#getKermetaUnitStorer_KermetaUnits()
 	 * @see org.kermeta.io.KermetaUnit#getStorer
-	 * @model type="org.kermeta.io.KermetaUnit" opposite="storer" containment="true"
+	 * @model opposite="storer" containment="true"
 	 * @generated
 	 */
-	EList getKermetaUnits();
+	EList<KermetaUnit> getKermetaUnits();
 
 	/**
 	 * <!-- begin-user-doc -->

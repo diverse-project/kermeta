@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/fr.irisa.triskell.kermeta.io/src/java"
     modelPluginID="fr.irisa.triskell.kermeta.io" modelName="fr.irisa.triskell.kermeta.io"
-    importerID="org.eclipse.emf.importer.ecore" usedGenPackages="../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta">
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" usedGenPackages="../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta">
   <foreignModel>io.ecore</foreignModel>
   <genPackages prefix="Io" basePackage="org.kermeta" disposableProviderFactory="true"
       ecorePackage="io.ecore#/">
@@ -11,12 +11,12 @@
     <genDataTypes ecoreDataType="io.ecore#//List"/>
     <genDataTypes ecoreDataType="io.ecore#//Tracer"/>
     <genDataTypes ecoreDataType="io.ecore#//ASTNode"/>
-    <genDataTypes ecoreDataType="io.ecore#//RecognitionException"/>
+    <genDataTypes ecoreDataType="io.ecore#//ANTLRException"/>
     <genDataTypes ecoreDataType="io.ecore#//IOPlugin"/>
     <genClasses ecoreClass="io.ecore#//KermetaUnit">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/storer"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/uri"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/compilationUnit"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/modelingUnit"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/internalPackageEntries"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/externalPackageEntries"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/importedKermetaUnits"/>
@@ -99,6 +99,7 @@
         <genParameters ecoreParameter="io.ecore#//KermetaUnit/warning.1/message"/>
         <genParameters ecoreParameter="io.ecore#//KermetaUnit/warning.1/target"/>
       </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/finalize"/>
     </genClasses>
     <genClasses image="false" ecoreClass="io.ecore#//IBuildingState"/>
     <genClasses ecoreClass="io.ecore#//KermetaUnitStorer">

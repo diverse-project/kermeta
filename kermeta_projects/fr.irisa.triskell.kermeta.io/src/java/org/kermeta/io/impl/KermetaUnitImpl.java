@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.7 2007-08-01 14:42:11 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.8 2007-08-02 13:09:01 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -16,6 +16,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -121,7 +122,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList internalPackageEntries;
+	protected EList<PackageEntry> internalPackageEntries;
 
 	/**
 	 * The cached value of the '{@link #getExternalPackageEntries() <em>External Package Entries</em>}' reference list.
@@ -131,7 +132,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList externalPackageEntries;
+	protected EList<PackageEntry> externalPackageEntries;
 
 	/**
 	 * The cached value of the '{@link #getImportedKermetaUnits() <em>Imported Kermeta Units</em>}' reference list.
@@ -141,7 +142,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList importedKermetaUnits;
+	protected EList<KermetaUnit> importedKermetaUnits;
 
 	/**
 	 * The cached value of the '{@link #getImporters() <em>Importers</em>}' reference list.
@@ -151,7 +152,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList importers;
+	protected EList<KermetaUnit> importers;
 
 	/**
 	 * The cached value of the '{@link #getBuildingState() <em>Building State</em>}' reference.
@@ -171,7 +172,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList messages;
+	protected EList<Message> messages;
 
 	/**
 	 * The default value of the '{@link #isNeedASTTraces() <em>Need AST Traces</em>}' attribute.
@@ -288,6 +289,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return IoPackage.Literals.KERMETA_UNIT;
 	}
@@ -397,9 +399,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getInternalPackageEntries() {
+	public EList<PackageEntry> getInternalPackageEntries() {
 		if (internalPackageEntries == null) {
-			internalPackageEntries = new EObjectResolvingEList(PackageEntry.class, this, IoPackage.KERMETA_UNIT__INTERNAL_PACKAGE_ENTRIES);
+			internalPackageEntries = new EObjectResolvingEList<PackageEntry>(PackageEntry.class, this, IoPackage.KERMETA_UNIT__INTERNAL_PACKAGE_ENTRIES);
 		}
 		return internalPackageEntries;
 	}
@@ -409,9 +411,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getExternalPackageEntries() {
+	public EList<PackageEntry> getExternalPackageEntries() {
 		if (externalPackageEntries == null) {
-			externalPackageEntries = new EObjectResolvingEList(PackageEntry.class, this, IoPackage.KERMETA_UNIT__EXTERNAL_PACKAGE_ENTRIES);
+			externalPackageEntries = new EObjectResolvingEList<PackageEntry>(PackageEntry.class, this, IoPackage.KERMETA_UNIT__EXTERNAL_PACKAGE_ENTRIES);
 		}
 		return externalPackageEntries;
 	}
@@ -421,9 +423,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getImportedKermetaUnits() {
+	public EList<KermetaUnit> getImportedKermetaUnits() {
 		if (importedKermetaUnits == null) {
-			importedKermetaUnits = new EObjectWithInverseResolvingEList.ManyInverse(KermetaUnit.class, this, IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS, IoPackage.KERMETA_UNIT__IMPORTERS);
+			importedKermetaUnits = new EObjectWithInverseResolvingEList.ManyInverse<KermetaUnit>(KermetaUnit.class, this, IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS, IoPackage.KERMETA_UNIT__IMPORTERS);
 		}
 		return importedKermetaUnits;
 	}
@@ -433,9 +435,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getImporters() {
+	public EList<KermetaUnit> getImporters() {
 		if (importers == null) {
-			importers = new EObjectWithInverseResolvingEList.ManyInverse(KermetaUnit.class, this, IoPackage.KERMETA_UNIT__IMPORTERS, IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS);
+			importers = new EObjectWithInverseResolvingEList.ManyInverse<KermetaUnit>(KermetaUnit.class, this, IoPackage.KERMETA_UNIT__IMPORTERS, IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS);
 		}
 		return importers;
 	}
@@ -483,9 +485,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getMessages() {
+	public EList<Message> getMessages() {
 		if (messages == null) {
-			messages = new EObjectResolvingEList(Message.class, this, IoPackage.KERMETA_UNIT__MESSAGES);
+			messages = new EObjectResolvingEList<Message>(Message.class, this, IoPackage.KERMETA_UNIT__MESSAGES);
 		}
 		return messages;
 	}
@@ -728,7 +730,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public Set getRequires() {
-		Set <String> requires = new HashSet <String> ();
+		Set  requires = new HashSet <String> ();
 		Iterator <Require> iterator = modelingUnit.getRequires().iterator();
 		while ( iterator.hasNext() )
 			requires.add( iterator.next().getUri() );
@@ -808,8 +810,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public List getPackages() {
-		List <Package> packages = new ArrayList <Package> ();
+	public EList<Package> getPackages() {
+		EList <Package> packages = new BasicEList<Package> ();
 		packages.addAll( getInternalPackages() );
 		packages.addAll( getExternalPackages() );
 		return packages;	}
@@ -819,8 +821,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public List getInternalPackages() {
-		List <Package> packages = new ArrayList <Package> ();
+	public EList<Package> getInternalPackages() {
+		EList <Package> packages = new BasicEList<Package> ();
 		Iterator <PackageEntry> iterator = getInternalPackageEntries().iterator();
 		while ( iterator.hasNext() )
 			packages.add( iterator.next().getPackage() );
@@ -831,8 +833,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public List getExternalPackages() {
-		List <Package> packages = new ArrayList <Package> ();
+	public EList<Package> getExternalPackages() {
+		EList <Package> packages = new BasicEList<Package> ();
 		Iterator <PackageEntry> iterator = getExternalPackageEntries().iterator();
 		while ( iterator.hasNext() )
 			packages.add( iterator.next().getPackage() );
@@ -967,8 +969,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public List getPackages(String qualifiedName) {
-		List <Package> packages = new ArrayList <Package> ();
+	public EList<Package> getPackages(String qualifiedName) {
+		EList <Package> packages = new BasicEList<Package> ();
 		/*
 		 * 
 		 * Look into the internal packages.
@@ -1014,8 +1016,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public List getExternalPackage(String qualifiedName) {
-		List <Package> packages = new ArrayList <Package> ();
+	public EList<Package> getExternalPackage(String qualifiedName) {
+		EList <Package> packages = new BasicEList<Package> ();
 		Iterator <PackageEntry> iterator = getExternalPackageEntries().iterator();
 		while ( iterator.hasNext() ) {
 			PackageEntry current = iterator.next();
@@ -1234,7 +1236,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	protected void finalize() throws Throwable {
+	public void finalize() {
 		System.out.println( "finalize " + getUri() );
 
 	}
@@ -1282,6 +1284,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT__STORER:
@@ -1289,9 +1293,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetStorer((KermetaUnitStorer)otherEnd, msgs);
 			case IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS:
-				return ((InternalEList)getImportedKermetaUnits()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getImportedKermetaUnits()).basicAdd(otherEnd, msgs);
 			case IoPackage.KERMETA_UNIT__IMPORTERS:
-				return ((InternalEList)getImporters()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getImporters()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -1301,14 +1305,15 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT__STORER:
 				return basicSetStorer(null, msgs);
 			case IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS:
-				return ((InternalEList)getImportedKermetaUnits()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getImportedKermetaUnits()).basicRemove(otherEnd, msgs);
 			case IoPackage.KERMETA_UNIT__IMPORTERS:
-				return ((InternalEList)getImporters()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getImporters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -1318,6 +1323,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case IoPackage.KERMETA_UNIT__STORER:
@@ -1331,6 +1337,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT__STORER:
@@ -1372,6 +1379,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT__STORER:
@@ -1385,26 +1394,26 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return;
 			case IoPackage.KERMETA_UNIT__INTERNAL_PACKAGE_ENTRIES:
 				getInternalPackageEntries().clear();
-				getInternalPackageEntries().addAll((Collection)newValue);
+				getInternalPackageEntries().addAll((Collection<? extends PackageEntry>)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__EXTERNAL_PACKAGE_ENTRIES:
 				getExternalPackageEntries().clear();
-				getExternalPackageEntries().addAll((Collection)newValue);
+				getExternalPackageEntries().addAll((Collection<? extends PackageEntry>)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__IMPORTED_KERMETA_UNITS:
 				getImportedKermetaUnits().clear();
-				getImportedKermetaUnits().addAll((Collection)newValue);
+				getImportedKermetaUnits().addAll((Collection<? extends KermetaUnit>)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__IMPORTERS:
 				getImporters().clear();
-				getImporters().addAll((Collection)newValue);
+				getImporters().addAll((Collection<? extends KermetaUnit>)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__BUILDING_STATE:
 				setBuildingState((IBuildingState)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__MESSAGES:
 				getMessages().clear();
-				getMessages().addAll((Collection)newValue);
+				getMessages().addAll((Collection<? extends Message>)newValue);
 				return;
 			case IoPackage.KERMETA_UNIT__NEED_AST_TRACES:
 				setNeedASTTraces(((Boolean)newValue).booleanValue());
@@ -1430,6 +1439,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT__STORER:
@@ -1483,6 +1493,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT__STORER:
@@ -1522,6 +1533,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

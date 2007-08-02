@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageEntryImpl.java,v 1.2 2007-07-20 15:08:06 ftanguy Exp $
+ * $Id: PackageEntryImpl.java,v 1.3 2007-08-02 13:09:01 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -76,6 +76,7 @@ public class PackageEntryImpl extends EObjectImpl implements PackageEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return IoPackage.Literals.PACKAGE_ENTRY;
 	}
@@ -144,6 +145,7 @@ public class PackageEntryImpl extends EObjectImpl implements PackageEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case IoPackage.PACKAGE_ENTRY__QUALIFIED_NAME:
@@ -160,6 +162,7 @@ public class PackageEntryImpl extends EObjectImpl implements PackageEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case IoPackage.PACKAGE_ENTRY__QUALIFIED_NAME:
@@ -177,6 +180,7 @@ public class PackageEntryImpl extends EObjectImpl implements PackageEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case IoPackage.PACKAGE_ENTRY__QUALIFIED_NAME:
@@ -194,6 +198,7 @@ public class PackageEntryImpl extends EObjectImpl implements PackageEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case IoPackage.PACKAGE_ENTRY__QUALIFIED_NAME:
@@ -209,6 +214,7 @@ public class PackageEntryImpl extends EObjectImpl implements PackageEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

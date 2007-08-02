@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.5 2007-07-27 07:12:17 ftanguy Exp $
+ * $Id: IoFactoryImpl.java,v 1.6 2007-08-02 13:09:01 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -74,6 +74,7 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case IoPackage.KERMETA_UNIT: return createKermetaUnit();
@@ -93,6 +94,7 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
 			case IoPackage.SET:
@@ -117,6 +119,7 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case IoPackage.SET:
@@ -329,6 +332,7 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static IoPackage getPackage() {
 		return IoPackage.eINSTANCE;
 	}

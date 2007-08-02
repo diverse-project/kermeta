@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitLoader.java,v 1.3 2007-07-24 13:46:47 ftanguy Exp $
+ * $Id: KermetaUnitLoader.java,v 1.4 2007-08-02 13:09:01 dvojtise Exp $
  */
 package org.kermeta.io;
 
@@ -37,10 +37,10 @@ public interface KermetaUnitLoader extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Kermeta Units</em>' reference list.
 	 * @see org.kermeta.io.IoPackage#getKermetaUnitLoader_KermetaUnits()
-	 * @model type="org.kermeta.io.KermetaUnit"
+	 * @model
 	 * @generated
 	 */
-	EList getKermetaUnits();
+	EList<KermetaUnit> getKermetaUnits();
 
 	/**
 	 * <!-- begin-user-doc -->

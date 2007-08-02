@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.4 2007-07-24 13:46:47 ftanguy Exp $
+ * $Id: KermetaUnit.java,v 1.5 2007-08-02 13:09:01 dvojtise Exp $
  */
 package org.kermeta.io;
 
@@ -154,10 +154,10 @@ public interface KermetaUnit extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Internal Package Entries</em>' reference list.
 	 * @see org.kermeta.io.IoPackage#getKermetaUnit_InternalPackageEntries()
-	 * @model type="org.kermeta.io.PackageEntry"
+	 * @model
 	 * @generated
 	 */
-	EList getInternalPackageEntries();
+	EList<PackageEntry> getInternalPackageEntries();
 
 	/**
 	 * Returns the value of the '<em><b>External Package Entries</b></em>' reference list.
@@ -170,10 +170,10 @@ public interface KermetaUnit extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>External Package Entries</em>' reference list.
 	 * @see org.kermeta.io.IoPackage#getKermetaUnit_ExternalPackageEntries()
-	 * @model type="org.kermeta.io.PackageEntry"
+	 * @model
 	 * @generated
 	 */
-	EList getExternalPackageEntries();
+	EList<PackageEntry> getExternalPackageEntries();
 
 	/**
 	 * Returns the value of the '<em><b>Imported Kermeta Units</b></em>' reference list.
@@ -188,10 +188,10 @@ public interface KermetaUnit extends EObject {
 	 * @return the value of the '<em>Imported Kermeta Units</em>' reference list.
 	 * @see org.kermeta.io.IoPackage#getKermetaUnit_ImportedKermetaUnits()
 	 * @see org.kermeta.io.KermetaUnit#getImporters
-	 * @model type="org.kermeta.io.KermetaUnit" opposite="importers"
+	 * @model opposite="importers"
 	 * @generated
 	 */
-	EList getImportedKermetaUnits();
+	EList<KermetaUnit> getImportedKermetaUnits();
 
 	/**
 	 * Returns the value of the '<em><b>Importers</b></em>' reference list.
@@ -206,10 +206,10 @@ public interface KermetaUnit extends EObject {
 	 * @return the value of the '<em>Importers</em>' reference list.
 	 * @see org.kermeta.io.IoPackage#getKermetaUnit_Importers()
 	 * @see org.kermeta.io.KermetaUnit#getImportedKermetaUnits
-	 * @model type="org.kermeta.io.KermetaUnit" opposite="importedKermetaUnits"
+	 * @model opposite="importedKermetaUnits"
 	 * @generated
 	 */
-	EList getImporters();
+	EList<KermetaUnit> getImporters();
 
 	/**
 	 * Returns the value of the '<em><b>Building State</b></em>' reference.
@@ -248,10 +248,10 @@ public interface KermetaUnit extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Messages</em>' reference list.
 	 * @see org.kermeta.io.IoPackage#getKermetaUnit_Messages()
-	 * @model type="org.kermeta.io.Message"
+	 * @model
 	 * @generated
 	 */
-	EList getMessages();
+	EList<Message> getMessages();
 
 	/**
 	 * Returns the value of the '<em><b>Need AST Traces</b></em>' attribute.
@@ -450,26 +450,26 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="org.kermeta.io.List" many="false"
+	 * @model kind="operation"
 	 * @generated
 	 */
-	List getPackages();
+	EList<fr.irisa.triskell.kermeta.language.structure.Package> getPackages();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="org.kermeta.io.List" many="false"
+	 * @model kind="operation"
 	 * @generated
 	 */
-	List getInternalPackages();
+	EList<fr.irisa.triskell.kermeta.language.structure.Package> getInternalPackages();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="org.kermeta.io.List" many="false"
+	 * @model kind="operation"
 	 * @generated
 	 */
-	List getExternalPackages();
+	EList<fr.irisa.triskell.kermeta.language.structure.Package> getExternalPackages();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -490,10 +490,10 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="org.kermeta.io.List" many="false"
+	 * @model
 	 * @generated
 	 */
-	List getPackages(String qualifiedName);
+	EList<fr.irisa.triskell.kermeta.language.structure.Package> getPackages(String qualifiedName);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -506,10 +506,10 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="org.kermeta.io.List" many="false"
+	 * @model
 	 * @generated
 	 */
-	List getExternalPackage(String qualifiedName);
+	EList<fr.irisa.triskell.kermeta.language.structure.Package> getExternalPackage(String qualifiedName);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -614,5 +614,13 @@ public interface KermetaUnit extends EObject {
 	 * @generated
 	 */
 	void warning(String message, Object target);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void finalize();
 
 } // KermetaUnit
