@@ -1,7 +1,7 @@
-/* $Id: CallableProperty.java,v 1.4 2007-07-20 15:08:03 ftanguy Exp $
+/* $Id: CallableProperty.java,v 1.5 2007-08-02 13:27:30 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : CallableProperty.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 15 avr. 2005
@@ -14,6 +14,7 @@ import java.util.Hashtable;
 
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 //import fr.irisa.triskell.kermeta.language.structure.FType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
@@ -56,14 +57,14 @@ public class CallableProperty extends CallableElement {
         // The type of the property
     	fr.irisa.triskell.kermeta.language.structure.Type t = ((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(property)).type;
         // subtitute varables :
-        Hashtable bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
+        Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
         return new SimpleType(TypeVariableEnforcer.getBoundType(t, bindings));
     }
     
     public Property getTypeBoundedProperty() {
         StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
         Property result = struct_factory.createProperty();
-        Hashtable bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
+        Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
         
         result.setName(property.getName());
         
