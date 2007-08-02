@@ -1,4 +1,4 @@
-/* $Id: URIMapUtil.java,v 1.2 2007-07-20 15:08:10 ftanguy Exp $
+/* $Id: URIMapUtil.java,v 1.3 2007-08-02 13:18:54 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : XMLMap.java
  * License    : EPL
@@ -40,9 +40,9 @@ public class URIMapUtil {
 	 * @param file
 	 * @return
 	 */
-	public static Map readMapFile(File file)
+	public static Map<URI,URI> readMapFile(File file)
 	{
-		Map resultMap = new HashMap();
+		Map<URI,URI> resultMap = new HashMap<URI,URI>();
 	    
 		try {
 			int tokenType = 0;
@@ -107,7 +107,7 @@ public class URIMapUtil {
 		sTokenizer.eolIsSignificant(true);
 		
 	}
-	public static void addMapEntry(Map map, String key, String value)
+	public static void addMapEntry(Map<URI,URI> map, String key, String value)
 	{
 		map.put(URI.createURI(key),
     			URI.createURI(value));
