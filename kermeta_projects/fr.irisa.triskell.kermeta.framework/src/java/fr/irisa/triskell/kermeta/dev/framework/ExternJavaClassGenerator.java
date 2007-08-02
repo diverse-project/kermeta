@@ -1,7 +1,7 @@
-/* $Id: ExternJavaClassGenerator.java,v 1.13 2007-08-01 07:16:31 ftanguy Exp $
+/* $Id: ExternJavaClassGenerator.java,v 1.14 2007-08-02 09:22:03 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExternJavaClassGenerator.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Feb 17, 2005
@@ -43,7 +43,7 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 
 	private KermetaUnit unit;
 	
-	private IOPlugin ioPlugin = null;
+	protected IOPlugin ioPlugin = null;
 	
 	private void initialize() {
 		IOPlugin.LOCAL_USE = true;
@@ -76,9 +76,9 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 		for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits( unit ) )
 			accept( importedUnit.getModelingUnit() );
 		
-		Enumeration e = classes.keys();
+		Enumeration<String> e = classes.keys();
 		while(e.hasMoreElements()) {
-			String code = generateclass((String)e.nextElement());
+			/*String code =*/ generateclass((String)e.nextElement());
 			//	System.out.println(code);
 		}
 	}
@@ -93,7 +93,7 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 		result = result.replaceAll("CLASSNAME", cname);
 		result = result.replaceAll("PACKAGENAME", pname);
 		String methods = "";
-		ArrayList mths = (ArrayList)classes.get(qname);
+		ArrayList<JavaStaticCall> mths = (ArrayList<JavaStaticCall>)classes.get(qname);
 		for(int i=0; i<mths.size(); i++) {
 			JavaStaticCall node = (JavaStaticCall)mths.get(i);
 			String method = getMTemplate();
@@ -127,7 +127,7 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 	}
 	
 	
-	protected Hashtable classes = new Hashtable();
+	protected Hashtable<String,ArrayList<JavaStaticCall>> classes = new Hashtable<String,ArrayList<JavaStaticCall>>();
 	
 	
 	
@@ -139,9 +139,9 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 		//System.out.println("node : " + node);
 		String cname = node.getJclass();
 		cname = cname.replaceAll("::", ".");
-		ArrayList listmeth = (ArrayList)classes.get(cname);
+		ArrayList<JavaStaticCall> listmeth = (ArrayList<JavaStaticCall>)classes.get(cname);
 		if (listmeth == null) {
-			listmeth = new ArrayList();
+			listmeth = new ArrayList<JavaStaticCall>();
 			classes.put(cname, listmeth);
 		}
 		listmeth.add(node);
