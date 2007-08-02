@@ -1,7 +1,7 @@
-/* $Id: CompileFramework.java,v 1.10 2007-08-01 07:16:31 ftanguy Exp $
+/* $Id: CompileFramework.java,v 1.11 2007-08-02 09:25:27 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : CompileFramework.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 18 avr. 2005
@@ -37,7 +37,8 @@ public class CompileFramework {
 
     	IOPlugin.LOCAL_USE = true;
     	IOPlugin.FRAMEWORK_GENERATION = true;
-    	IOPlugin ioPlugin = new IOPlugin();
+    	@SuppressWarnings("unused")
+		IOPlugin ioPlugin = new IOPlugin();
     	
     	KermetaUnit kermetaUnit = null;
 		try {

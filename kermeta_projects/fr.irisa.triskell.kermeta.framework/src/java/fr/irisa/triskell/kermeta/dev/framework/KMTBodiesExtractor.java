@@ -1,10 +1,9 @@
-/* $Id: KMTBodiesExtractor.java,v 1.10 2007-07-20 15:08:39 ftanguy Exp $
+/* $Id: KMTBodiesExtractor.java,v 1.11 2007-08-02 09:25:27 dvojtise Exp $
  * Created on Feb 17, 2005
  * Author : zdrey@irisa.fr
- * License : GPL
+ * License : EPL
  * Description : contains the BodyExtractor which extracts the operations/properties
  * and their body and write them into an external file
- * Todo : put TODO actions here
  */
 package fr.irisa.triskell.kermeta.dev.framework;
 
@@ -68,13 +67,13 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 		String setter = opHeader + "::setter";
 		// prettyprint setter content
 		Expression sbody = property.getSetterBody();
-		if (property.getSetterBody()!=null)
-			setter += "\n"+(String)pprinter.accept(property.getSetterBody());
+		if (sbody !=null)
+			setter += "\n"+(String)pprinter.accept(sbody);
 		
 		String getter = opHeader + "::getter";
 		// prettyprint getter content
 		if (property.getGetterBody()!=null)
-			getter += "\n"+(String)pprinter.accept(property.getGetterBody());
+			getter += "\n"+(String)pprinter.accept(sbody);
 		
 		System.out.println(setter+"\n"+getter);
 		
@@ -86,7 +85,6 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 			w.write(ops);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -114,7 +112,6 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 		    {
 		        w.write(op+"\n");
 		    } catch (IOException e) {
-		        // TODO Auto-generated catch block
 		        e.printStackTrace();
 		    }
 		}
