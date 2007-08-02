@@ -1,4 +1,4 @@
-/*$Id: ToggleNatureAction.java,v 1.4 2007-07-24 13:46:59 ftanguy Exp $
+/*$Id: ToggleNatureAction.java,v 1.5 2007-08-02 14:51:09 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -40,7 +40,7 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 	 */
 	public void run(IAction action) {
 		if (selection instanceof IStructuredSelection) {
-			for (Iterator it = ((IStructuredSelection) selection).iterator(); it
+			for (Iterator<?> it = ((IStructuredSelection) selection).iterator(); it
 					.hasNext();) {
 				Object element = it.next();
 				IProject project = null;
