@@ -1,4 +1,4 @@
-/* $Id: AtPreVisitor.java,v 1.9 2007-07-24 13:47:38 ftanguy Exp $
+/* $Id: AtPreVisitor.java,v 1.10 2007-08-02 17:36:57 jmottu Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -15,6 +15,7 @@ import java.util.Vector;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -69,8 +70,14 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 			}
 			else {
 				//ro_target = (RuntimeObject)this.accept(node.getTarget());
-				if(node.getTarget() instanceof CallFeature && !((CallFeature)node.getTarget()).isIsAtpre()){
-					memory.getROFactory().getKermetaIOStream().print("WARNING : before running the method '" +getContainerOperation(node).getName()+ "' it is not possible to know the future value of '"+((CallFeature)node.getTarget()).getName()+ "' in the post condition '"+getContainerPostCondition(node).getName()+"'\n");
+				boolean nodetargetatpre = false;
+				if (node.getTarget() instanceof CallFeature){
+					nodetargetatpre = ((CallFeature)node.getTarget()).isIsAtpre();
+				}else if (node.getTarget() instanceof CallVariable){
+					nodetargetatpre = ((CallVariable)node.getTarget()).isIsAtpre();
+				}
+				if(!nodetargetatpre){
+					memory.getROFactory().getKermetaIOStream().print("WARNING : before running the method '" +getContainerOperation(node).getName()+ "' it is not possible to know the future value of '"+((CallExpression)node.getTarget()).getName()+ "' in the post condition '"+getContainerPostCondition(node).getName()+"'\n");
 				}
 				ro_target = (RuntimeObject)expInterp.accept(node.getTarget());
 
