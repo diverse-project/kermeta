@@ -1,4 +1,4 @@
-/* $Id: NonUniqueEObjectResolvingEList.java,v 1.1 2006-09-05 07:20:01 dvojtise Exp $
+/* $Id: NonUniqueEObjectResolvingEList.java,v 1.2 2007-08-02 12:08:15 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : NonUniqueEObjectResolvingEList.java
  * License    : EPL
@@ -15,6 +15,8 @@ package fr.irisa.triskell.kermeta.util;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
+import fr.irisa.triskell.kermeta.language.structure.Type;
+
 /**
  * This class is used to help to workaround bug #108 which is related to 
  * EMF bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=89325
@@ -22,14 +24,14 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * 
  *
  */
-public class NonUniqueEObjectResolvingEList extends EObjectResolvingEList {
+public class NonUniqueEObjectResolvingEList extends EObjectResolvingEList<Type> {
 
 	/**
 	 * added so Eclipse doesn't complain ...
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public NonUniqueEObjectResolvingEList(Class dataClass, InternalEObject owner, int featureID)
+	public NonUniqueEObjectResolvingEList(Class<?> dataClass, InternalEObject owner, int featureID)
 	{
 		super(dataClass, owner, featureID);
 	}

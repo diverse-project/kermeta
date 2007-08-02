@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProductTypeImpl.java,v 1.9 2007-07-24 13:47:32 ftanguy Exp $
+ * $Id: ProductTypeImpl.java,v 1.10 2007-08-02 12:08:15 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -97,7 +97,7 @@ public class ProductTypeImpl extends TypeImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EList getType() {
+	public EList<Type> getType() {
 		if (type == null) {
 			type = new NonUniqueEObjectResolvingEList(Type.class, this, StructurePackage.PRODUCT_TYPE__TYPE);
 		}
