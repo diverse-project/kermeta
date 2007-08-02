@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.4 2007-07-27 13:28:27 ftanguy Exp $
+/*$Id: Ecore2KMLoader.java,v 1.5 2007-08-02 16:09:47 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -233,7 +232,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		 * Or Imported units can have been added via the require tags at the root.
 		 * 
 		 */
-		for ( String s : (Set<String>) kermetaUnit.getRequires() ) {
+		for ( String s : kermetaUnit.getRequires() ) {
 			int index = kermetaUnit.getUri().lastIndexOf("/");
 			String currentURI = "";
 			

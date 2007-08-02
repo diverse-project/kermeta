@@ -17,7 +17,7 @@
     <eOperations name="addUsing" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/Using">
       <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="getRequires" eType="#//Set"/>
+    <eOperations name="getRequires" upperBound="-1" eType="ecore:EDataType ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/String"/>
     <eOperations name="importKermetaUnit">
       <eParameters name="value" eType="#//KermetaUnit"/>
       <eParameters name="force" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

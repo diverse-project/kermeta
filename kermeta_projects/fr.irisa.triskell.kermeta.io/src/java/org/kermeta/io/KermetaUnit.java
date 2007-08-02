@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.5 2007-08-02 13:09:01 dvojtise Exp $
+ * $Id: KermetaUnit.java,v 1.6 2007-08-02 16:09:47 dvojtise Exp $
  */
 package org.kermeta.io;
 
@@ -426,10 +426,10 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="org.kermeta.io.Set"
+	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.language.structure.String"
 	 * @generated
 	 */
-	Set getRequires();
+	EList<String> getRequires();
 
 	/**
 	 * <!-- begin-user-doc -->
