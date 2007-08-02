@@ -1,11 +1,11 @@
-/* $Id: CompileFramework.java,v 1.11 2007-08-02 09:25:27 dvojtise Exp $
-* Project : Kermeta (First iteration)
+/* $Id: CompileFramework.java,v 1.12 2007-08-02 16:29:30 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.framework
 * File : CompileFramework.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 18 avr. 2005
-* Author : Franck Fleurey
+* Creation date : 18 apr. 2005
+* Author : Franck Fleurey <ffleurey@irisa.fr>
 */ 
 package fr.irisa.triskell.kermeta.dev.framework;
 
@@ -22,16 +22,10 @@ import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 
 /**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
- * 
- * this class is suposed to compile the standard library
- * into a big kcore model
+ * this class is supposed to compile the standard library
+ * into several km and ecore models
  */
 public class CompileFramework {
-
-
 
     public static void main(String[] args) {
 
@@ -78,14 +72,17 @@ public class CompileFramework {
         		System.err.println("Standard library contains type warnings:");
             	System.err.println( KermetaUnitHelper.getAllWarningsAsString(kermetaUnit) );
         	}
+        	
+        	final String dist_folder = "platform:/plugin/fr.irisa.triskell.kermeta.framework/dist";
+        	
         	System.out.println("SAVING IN KM...");
         	KmExporter exporter = new KmExporter();
-        	exporter.export(kermetaUnit, "platform:/plugin/fr.irisa.triskell.kermeta.framework/dist");
+        	exporter.export(kermetaUnit, dist_folder);
         	System.out.println("DONE");
 
         	System.out.println("SAVING IN ECORE...");
         	EcoreExporter exporter2 = new EcoreExporter();
-        	exporter2.export(kermetaUnit, "platform:/plugin/fr.irisa.triskell.kermeta.framework/dist", false);
+        	exporter2.export(kermetaUnit, dist_folder, false);
         	System.out.println("DONE");
         }
     }
