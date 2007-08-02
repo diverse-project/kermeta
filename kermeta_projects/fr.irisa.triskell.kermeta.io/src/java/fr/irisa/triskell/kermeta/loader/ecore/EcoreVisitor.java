@@ -44,7 +44,7 @@ public class EcoreVisitor {
 			// This is a generic visit method.
 			public Object genericVisitChildren(EObject node) {
 				Object result = null;
-				Iterator children = node.eContents().iterator();
+				Iterator<EObject> children = node.eContents().iterator();
 				while (children.hasNext()) {
 					EObject child = (EObject)children.next();
 					accept(child);
@@ -72,7 +72,7 @@ public class EcoreVisitor {
 						// Special case for EStringToStringMapEntry which does not have an EMF interface.
 						//cname = cname.substring(0, cname.length()-4).replaceAll(".impl", "").replaceAll(".internal", "");					
 					
-					Class c = Class.forName(cname, true, node.getClass().getClassLoader());
+					Class<?> c = Class.forName(cname, true, node.getClass().getClassLoader());
 					Method m =  getMethod( c );
 					if ( m == null )
 						throw new NoSuchMethodException("No method visit found for " + c.toString() );
@@ -92,8 +92,8 @@ public class EcoreVisitor {
 			
 			
 			/** Call visitor on a list of elements */
-			protected void acceptList(EList l) {
-				Iterator it = l.iterator();
+			protected void acceptList(EList<?> l) {
+				Iterator<?> it = l.iterator();
 				while (it.hasNext()) {
 					EObject o = (EObject)it.next();
 					this.accept(o);
@@ -101,15 +101,15 @@ public class EcoreVisitor {
 			}
 
 			
-			private Method getMethod(Class cl) throws NoSuchMethodException {
+			private Method getMethod(Class<?> cl) throws NoSuchMethodException {
 				Method m = null;
-				Class[] ptypes = new Class[1];
+				Class<?>[] ptypes = new Class[1];
 				try {
 					ptypes[0] = cl;
 					m = this.getClass().getMethod("visit", ptypes);
 				} catch (NoSuchMethodException e) {}
 				
-				Class[] interfaces = cl.getInterfaces();
+				Class<?>[] interfaces = cl.getInterfaces();
 				int index = 0;
 				while ( m == null ) {
 					m = getMethod( interfaces[index++] );

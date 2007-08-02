@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoSwitch.java,v 1.4 2007-07-27 07:12:17 ftanguy Exp $
+ * $Id: IoSwitch.java,v 1.5 2007-08-02 16:43:24 dvojtise Exp $
  */
 package org.kermeta.io.util;
 
@@ -37,7 +37,7 @@ import org.kermeta.io.WarningMessage;
  * @see org.kermeta.io.IoPackage
  * @generated
  */
-public class IoSwitch {
+public class IoSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -65,7 +65,7 @@ public class IoSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	public Object doSwitch(EObject theEObject) {
+	public T doSwitch(EObject theEObject) {
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
@@ -76,16 +76,16 @@ public class IoSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(EClass theEClass, EObject theEObject) {
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
 		else {
-			List eSuperTypes = theEClass.getESuperTypes();
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
 					defaultCase(theEObject) :
-					doSwitch((EClass)eSuperTypes.get(0), theEObject);
+					doSwitch(eSuperTypes.get(0), theEObject);
 		}
 	}
 
@@ -96,61 +96,61 @@ public class IoSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(int classifierID, EObject theEObject) {
+	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case IoPackage.KERMETA_UNIT: {
 				KermetaUnit kermetaUnit = (KermetaUnit)theEObject;
-				Object result = caseKermetaUnit(kermetaUnit);
+				T result = caseKermetaUnit(kermetaUnit);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case IoPackage.IBUILDING_STATE: {
 				IBuildingState iBuildingState = (IBuildingState)theEObject;
-				Object result = caseIBuildingState(iBuildingState);
+				T result = caseIBuildingState(iBuildingState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case IoPackage.KERMETA_UNIT_STORER: {
 				KermetaUnitStorer kermetaUnitStorer = (KermetaUnitStorer)theEObject;
-				Object result = caseKermetaUnitStorer(kermetaUnitStorer);
+				T result = caseKermetaUnitStorer(kermetaUnitStorer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case IoPackage.PACKAGE_ENTRY: {
 				PackageEntry packageEntry = (PackageEntry)theEObject;
-				Object result = casePackageEntry(packageEntry);
+				T result = casePackageEntry(packageEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case IoPackage.KERMETA_UNIT_LOADER: {
 				KermetaUnitLoader kermetaUnitLoader = (KermetaUnitLoader)theEObject;
-				Object result = caseKermetaUnitLoader(kermetaUnitLoader);
+				T result = caseKermetaUnitLoader(kermetaUnitLoader);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case IoPackage.MESSAGE: {
 				Message message = (Message)theEObject;
-				Object result = caseMessage(message);
+				T result = caseMessage(message);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case IoPackage.ERROR_MESSAGE: {
 				ErrorMessage errorMessage = (ErrorMessage)theEObject;
-				Object result = caseErrorMessage(errorMessage);
+				T result = caseErrorMessage(errorMessage);
 				if (result == null) result = caseMessage(errorMessage);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case IoPackage.WARNING_MESSAGE: {
 				WarningMessage warningMessage = (WarningMessage)theEObject;
-				Object result = caseWarningMessage(warningMessage);
+				T result = caseWarningMessage(warningMessage);
 				if (result == null) result = caseMessage(warningMessage);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case IoPackage.PARSE_ERROR_MESSAGE: {
 				ParseErrorMessage parseErrorMessage = (ParseErrorMessage)theEObject;
-				Object result = caseParseErrorMessage(parseErrorMessage);
+				T result = caseParseErrorMessage(parseErrorMessage);
 				if (result == null) result = caseErrorMessage(parseErrorMessage);
 				if (result == null) result = caseMessage(parseErrorMessage);
 				if (result == null) result = defaultCase(theEObject);
@@ -158,7 +158,7 @@ public class IoSwitch {
 			}
 			case IoPackage.PARSING_ERROR: {
 				ParsingError parsingError = (ParsingError)theEObject;
-				Object result = caseParsingError(parsingError);
+				T result = caseParsingError(parsingError);
 				if (result == null) result = caseErrorMessage(parsingError);
 				if (result == null) result = caseMessage(parsingError);
 				if (result == null) result = defaultCase(theEObject);
@@ -179,7 +179,7 @@ public class IoSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseKermetaUnit(KermetaUnit object) {
+	public T caseKermetaUnit(KermetaUnit object) {
 		return null;
 	}
 
@@ -194,7 +194,7 @@ public class IoSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseKermetaUnitStorer(KermetaUnitStorer object) {
+	public T caseKermetaUnitStorer(KermetaUnitStorer object) {
 		return null;
 	}
 
@@ -209,7 +209,7 @@ public class IoSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object casePackageEntry(PackageEntry object) {
+	public T casePackageEntry(PackageEntry object) {
 		return null;
 	}
 
@@ -224,7 +224,7 @@ public class IoSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseIBuildingState(IBuildingState object) {
+	public T caseIBuildingState(IBuildingState object) {
 		return null;
 	}
 
@@ -239,7 +239,7 @@ public class IoSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseKermetaUnitLoader(KermetaUnitLoader object) {
+	public T caseKermetaUnitLoader(KermetaUnitLoader object) {
 		return null;
 	}
 
@@ -254,7 +254,7 @@ public class IoSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseMessage(Message object) {
+	public T caseMessage(Message object) {
 		return null;
 	}
 
@@ -269,7 +269,7 @@ public class IoSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseErrorMessage(ErrorMessage object) {
+	public T caseErrorMessage(ErrorMessage object) {
 		return null;
 	}
 
@@ -284,7 +284,7 @@ public class IoSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseWarningMessage(WarningMessage object) {
+	public T caseWarningMessage(WarningMessage object) {
 		return null;
 	}
 
@@ -299,7 +299,7 @@ public class IoSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseParseErrorMessage(ParseErrorMessage object) {
+	public T caseParseErrorMessage(ParseErrorMessage object) {
 		return null;
 	}
 
@@ -314,7 +314,7 @@ public class IoSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseParsingError(ParsingError object) {
+	public T caseParsingError(ParsingError object) {
 		return null;
 	}
 
@@ -329,7 +329,7 @@ public class IoSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	public Object defaultCase(EObject object) {
+	public T defaultCase(EObject object) {
 		return null;
 	}
 

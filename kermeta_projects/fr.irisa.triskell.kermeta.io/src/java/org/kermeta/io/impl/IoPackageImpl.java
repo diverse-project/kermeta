@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.6 2007-08-02 13:09:01 dvojtise Exp $
+ * $Id: IoPackageImpl.java,v 1.7 2007-08-02 16:43:13 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -726,7 +726,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		op = addEOperation(kermetaUnitEClass, theStructurePackage.getUsing(), "addUsing", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, this.getSet(), "getRequires", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(kermetaUnitEClass, theStructurePackage.getString(), "getRequires", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitEClass, null, "importKermetaUnit", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getKermetaUnit(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);

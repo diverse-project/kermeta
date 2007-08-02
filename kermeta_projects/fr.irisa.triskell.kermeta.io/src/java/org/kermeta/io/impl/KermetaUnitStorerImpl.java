@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.10 2007-08-02 13:09:01 dvojtise Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.11 2007-08-02 16:43:13 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -20,8 +19,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.plugin.RegistryReader;
-import org.eclipse.emf.ecore.plugin.RegistryReader.PluginClassDescriptor;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xml.type.internal.DataValue.URI.MalformedURIException;

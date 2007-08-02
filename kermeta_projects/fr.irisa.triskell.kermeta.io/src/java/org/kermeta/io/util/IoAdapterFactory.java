@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoAdapterFactory.java,v 1.4 2007-07-27 07:12:17 ftanguy Exp $
+ * $Id: IoAdapterFactory.java,v 1.5 2007-08-02 16:43:24 dvojtise Exp $
  */
 package org.kermeta.io.util;
 
@@ -61,6 +61,7 @@ public class IoAdapterFactory extends AdapterFactoryImpl {
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object object) {
 		if (object == modelPackage) {
 			return true;
@@ -77,39 +78,50 @@ public class IoAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected IoSwitch modelSwitch =
-		new IoSwitch() {
-			public Object caseKermetaUnit(KermetaUnit object) {
+	protected IoSwitch<Adapter> modelSwitch =
+		new IoSwitch<Adapter>() {
+			@Override
+			public Adapter caseKermetaUnit(KermetaUnit object) {
 				return createKermetaUnitAdapter();
 			}
-			public Object caseIBuildingState(IBuildingState object) {
+			@Override
+			public Adapter caseIBuildingState(IBuildingState object) {
 				return createIBuildingStateAdapter();
 			}
-			public Object caseKermetaUnitStorer(KermetaUnitStorer object) {
+			@Override
+			public Adapter caseKermetaUnitStorer(KermetaUnitStorer object) {
 				return createKermetaUnitStorerAdapter();
 			}
-			public Object casePackageEntry(PackageEntry object) {
+			@Override
+			public Adapter casePackageEntry(PackageEntry object) {
 				return createPackageEntryAdapter();
 			}
-			public Object caseKermetaUnitLoader(KermetaUnitLoader object) {
+			@Override
+			public Adapter caseKermetaUnitLoader(KermetaUnitLoader object) {
 				return createKermetaUnitLoaderAdapter();
 			}
-			public Object caseMessage(Message object) {
+			@Override
+			public Adapter caseMessage(Message object) {
 				return createMessageAdapter();
 			}
-			public Object caseErrorMessage(ErrorMessage object) {
+			@Override
+			public Adapter caseErrorMessage(ErrorMessage object) {
 				return createErrorMessageAdapter();
 			}
-			public Object caseWarningMessage(WarningMessage object) {
+			@Override
+			public Adapter caseWarningMessage(WarningMessage object) {
 				return createWarningMessageAdapter();
 			}
-			public Object caseParseErrorMessage(ParseErrorMessage object) {
+			@Override
+			public Adapter caseParseErrorMessage(ParseErrorMessage object) {
 				return createParseErrorMessageAdapter();
 			}
-			public Object caseParsingError(ParsingError object) {
+			@Override
+			public Adapter caseParsingError(ParsingError object) {
 				return createParsingErrorAdapter();
 			}
-			public Object defaultCase(EObject object) {
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -122,8 +134,9 @@ public class IoAdapterFactory extends AdapterFactoryImpl {
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
+	@Override
 	public Adapter createAdapter(Notifier target) {
-		return (Adapter)modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 
