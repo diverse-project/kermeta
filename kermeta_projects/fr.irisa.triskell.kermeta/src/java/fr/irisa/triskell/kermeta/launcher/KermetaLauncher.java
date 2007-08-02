@@ -1,5 +1,5 @@
 
-/*$Id: KermetaLauncher.java,v 1.3 2007-07-24 13:46:39 ftanguy Exp $
+/*$Id: KermetaLauncher.java,v 1.4 2007-08-02 12:59:50 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta
  * File : 	KermetaLauncher.java
  * License : EPL
@@ -16,28 +16,30 @@ import java.util.ArrayList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 public class KermetaLauncher {
 
-	public static boolean execute(String[] args) {
+	public static boolean execute(String filePath, String[] args) {
 
 		if (args.length == 0)
 			return false;
 
-		String file = args[0];
 		String arguments = "";
-		for (int i = 0; i < args.length - 1; i++)
-			arguments += args[i + 1] + " ";
+		for (int i = 0; i < args.length; i++)
+			arguments += args[i] + " ";
 
 		KermetaInterpreter interpreter;
 		try {
-			interpreter = typeCheckTranfo(file);
+			interpreter = typeCheckTranfo(filePath);
 		} catch (KermetaIOFileNotFoundException e1) {
 			e1.printStackTrace();
 			return false;
@@ -55,7 +57,7 @@ public class KermetaLauncher {
 		interpreter.setEntryParameters(params);
 
 		// And we launch the interpreter
-		try {
+		try {   
 			interpreter.launch();
 		} catch (KermetaRaisedException e) {
 			e.printStackTrace();
@@ -68,15 +70,29 @@ public class KermetaLauncher {
 
 		KermetaUnit unit = IOPlugin.getDefault().loadKermetaUnit( file );
 
-		KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
-		typechecker.checkUnit();
-		
-		try {
-			KermetaInterpreter interpreter = new KermetaInterpreter(unit);
-			return interpreter;
-		} catch (KermetaInterpreterError exception) {
+		if ( ! unit.isErrored() ) {
+			KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
+			typechecker.checkUnit();
 		}
-
+		
+		if ( ! unit.isErrored() ) {
+			KermetaConstraintChecker constraintcheker = new KermetaConstraintChecker(unit);
+			constraintcheker.checkUnit();
+		}
+		
+		if ( ! unit.isErrored() ) {
+		
+			try {
+				KermetaInterpreter interpreter = new KermetaInterpreter(unit);
+				return interpreter;
+			} catch (KermetaInterpreterError exception) {
+			}
+		
+		} else
+			System.out.println( KermetaUnitHelper.getAllErrorsAsString(unit) );
+		
+		IOPlugin.getDefault().unload( file );
+		
 		return null;
 
 	}
