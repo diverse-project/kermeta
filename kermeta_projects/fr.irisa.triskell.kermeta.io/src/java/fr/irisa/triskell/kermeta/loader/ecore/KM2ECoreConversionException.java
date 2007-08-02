@@ -1,4 +1,4 @@
-/* $Id: KM2ECoreConversionException.java,v 1.2 2007-07-20 15:08:11 ftanguy Exp $
+/* $Id: KM2ECoreConversionException.java,v 1.3 2007-08-02 16:47:27 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2ECoreConversionException.java
  * License    : EPL
@@ -18,6 +18,7 @@ package fr.irisa.triskell.kermeta.loader.ecore;
  * @author zdrey
  *
  */
+@SuppressWarnings("serial")
 public class KM2ECoreConversionException extends Error {
 
 	public KM2ECoreConversionException() {

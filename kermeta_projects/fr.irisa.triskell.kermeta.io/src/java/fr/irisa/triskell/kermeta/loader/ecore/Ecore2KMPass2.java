@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.20 2007-07-26 15:07:07 ftanguy Exp $
+/* $Id: Ecore2KMPass2.java,v 1.21 2007-08-02 16:47:27 dvojtise Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -34,7 +34,6 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 /**
  * @author Franck Fleurey
  */
@@ -70,7 +69,7 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 		isClassTypeOwner = true;
 		currentClassDefinition = createClassDefinitionForEClass(node);
 		
-		TypeDefinition td = kermetaUnit.getTypeDefinitionByQualifiedName(EcoreHelper.getQualifiedName(node));
+		//TypeDefinition td = kermetaUnit.getTypeDefinitionByQualifiedName(EcoreHelper.getQualifiedName(node));
 		
 /*		// Return a typedef if the element is not contained in ecore metamodel.
 		isEcoreType = ((ENamedElement)node.eContainer()).getName().equals("ecore");

@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass.java,v 1.3 2007-07-24 13:46:46 ftanguy Exp $
+/*$Id: Ecore2KMPass.java,v 1.4 2007-08-02 16:47:27 dvojtise Exp $
 * Project : io
 * File : 	Ecore2KMPass.java
 * License : EPL
@@ -484,7 +484,7 @@ public class Ecore2KMPass extends EcoreVisitor {
 			else if(node.getEAnnotation(KM2Ecore.ANNOTATION_FUNCTIONTYPE) != null) {
 				// Get FunctionType annotation
 				EAnnotation eAnnot = node.getEAnnotation(KM2Ecore.ANNOTATION_FUNCTIONTYPE);
-				EMap map = eAnnot.getDetails();
+				EMap<String, String> map = eAnnot.getDetails();
 				
 				// Allocate a new FunctionType model element
 				FunctionType fctType = StructureFactory.eINSTANCE.createFunctionType();
@@ -641,7 +641,7 @@ public class Ecore2KMPass extends EcoreVisitor {
 	 * @param tVars - list of visible type variables
 	 * @return      - type element corresponding to the provided qualified name
 	 */
-	protected Type getTypeHierarchyFromQualifiedName(String qName, ArrayList tVars) {
+	protected Type getTypeHierarchyFromQualifiedName(String qName, ArrayList<TypeVariable> tVars) {
 		Type result = null;
 		
 		qName = qName.replaceAll("alias Object : ", "");

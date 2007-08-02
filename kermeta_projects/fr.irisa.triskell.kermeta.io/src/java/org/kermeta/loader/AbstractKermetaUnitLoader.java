@@ -1,6 +1,6 @@
 
 
-/*$Id: AbstractKermetaUnitLoader.java,v 1.4 2007-07-30 14:49:37 ftanguy Exp $
+/*$Id: AbstractKermetaUnitLoader.java,v 1.5 2007-08-02 16:53:32 dvojtise Exp $
 * Project : io
 * File : 	KermetaUnitLoader.java
 * License : EPL
@@ -14,6 +14,7 @@ package org.kermeta.loader;
 
 import java.util.Hashtable;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -80,13 +81,13 @@ public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 	
 	
 	
-	public EList getKermetaUnits() {
+	public EList<KermetaUnit> getKermetaUnits() {
 		return null;
 	}
 
 	public KermetaUnit load(String uri) {return null;}
 
-	public TreeIterator eAllContents() {
+	public TreeIterator<EObject> eAllContents() {
 		return null;
 	}
 
@@ -106,11 +107,11 @@ public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 		return null;
 	}
 
-	public EList eContents() {
+	public EList<EObject> eContents() {
 		return null;
 	}
 
-	public EList eCrossReferences() {
+	public EList<EObject> eCrossReferences() {
 		return null;
 	}
 
@@ -138,7 +139,7 @@ public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 
 	public void eUnset(EStructuralFeature arg0) {}
 
-	public EList eAdapters() {
+	public EList<Adapter> eAdapters() {
 		return null;
 	}
 

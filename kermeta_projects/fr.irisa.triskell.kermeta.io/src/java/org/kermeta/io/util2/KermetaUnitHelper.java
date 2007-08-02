@@ -9,10 +9,8 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.plugin.IOPlugin;
 
-import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 
 

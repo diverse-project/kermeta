@@ -1,6 +1,6 @@
 
 
-/*$Id: KmExporter.java,v 1.3 2007-07-24 13:46:50 ftanguy Exp $
+/*$Id: KmExporter.java,v 1.4 2007-08-02 16:49:09 dvojtise Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -18,6 +18,7 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -102,7 +103,7 @@ public class KmExporter {
 	 * Define a container for each element of the root package.
 	 */
 	public void fixTypeContainement(Package p) {
-		TreeIterator it = p.eAllContents();
+		TreeIterator<EObject> it = p.eAllContents();
 		TypeContainementFixer fixer = new TypeContainementFixer();
 		while(it.hasNext()) {
 			fr.irisa.triskell.kermeta.language.structure.Object o = (fr.irisa.triskell.kermeta.language.structure.Object)it.next();
