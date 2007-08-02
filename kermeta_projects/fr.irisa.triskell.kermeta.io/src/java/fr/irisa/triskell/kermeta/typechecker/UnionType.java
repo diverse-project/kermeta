@@ -1,4 +1,4 @@
-/* $Id: UnionType.java,v 1.6 2007-07-20 15:08:03 ftanguy Exp $
+/* $Id: UnionType.java,v 1.7 2007-08-02 15:53:30 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : UnionType.java
 * License : EPL
@@ -17,6 +17,8 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
 //import fr.irisa.triskell.kermeta.language.structure.FType;
 
@@ -90,8 +92,8 @@ public class UnionType extends Type {
 	/**
 	 * @see fr.irisa.triskell.kermeta.typechecker.Type#callableProperties()
 	 */
-	public ArrayList callableProperties() {
-		ArrayList result = null;
+	public ArrayList<CallableProperty> callableProperties() {
+		ArrayList<CallableProperty> result = null;
 		for(int i=0; i<types.size();i++) {
 			Type t = (Type)types.get(i);
 			if (result == null) result = t.callableProperties();
@@ -103,8 +105,8 @@ public class UnionType extends Type {
 	/**
 	 * @see fr.irisa.triskell.kermeta.typechecker.Type#callableOperations()
 	 */
-	public ArrayList callableOperations() {
-		ArrayList result = null;
+	public ArrayList<CallableOperation> callableOperations() {
+		ArrayList<CallableOperation> result = null;
 		// Get intersection of valid operation
 		for(int i=0; i<types.size();i++) {
 			Type t = (Type)types.get(i);
@@ -114,8 +116,15 @@ public class UnionType extends Type {
 		return result;
 	}
 	
-	protected ArrayList inter(ArrayList l1, ArrayList l2) {
-		ArrayList result = new ArrayList();
+	/**
+	 * Intersection between two ArrayList
+	 * @param <T>
+	 * @param l1
+	 * @param l2
+	 * @return
+	 */
+	protected <T> ArrayList<T> inter(ArrayList<T> l1, ArrayList<T> l2) {
+		ArrayList<T> result = new ArrayList<T>();
 		for(int i=0; i<l1.size(); i++) {
 			if (l2.contains(l1.get(i))) {
 				result.add(l1.get(i));
@@ -175,11 +184,12 @@ public class UnionType extends Type {
 	 * @param generic 
 	 * @return null if this type does not match the generic type
 	 */
-	public Hashtable inferTypeVariableBinding(Type generic) {
+	public Hashtable<TypeVariable, fr.irisa.triskell.kermeta.language.structure.Type> inferTypeVariableBinding(Type generic) {
 	    if (!(generic instanceof SimpleType)) {
 	        return null;
 	    }
-	    Hashtable result = new Hashtable();
+	    Hashtable<TypeVariable, fr.irisa.triskell.kermeta.language.structure.Type> result = 
+	    	new Hashtable<TypeVariable, fr.irisa.triskell.kermeta.language.structure.Type>();
 	    try {
 	        this.inferTypeVariableBinding(((SimpleType)generic).type, result);
 	    }
@@ -189,7 +199,8 @@ public class UnionType extends Type {
 	    return result;
 	}
 	
-	protected void inferTypeVariableBinding(fr.irisa.triskell.kermeta.language.structure.Type generic, Hashtable binding) {
+	protected void inferTypeVariableBinding(fr.irisa.triskell.kermeta.language.structure.Type generic, 
+			Hashtable<TypeVariable, fr.irisa.triskell.kermeta.language.structure.Type> binding) {
         for(int i=0; i<types.size();i++) {
 			Type t = (Type)types.get(i);
 			t.inferTypeVariableBinding(generic, binding);
@@ -200,9 +211,9 @@ public class UnionType extends Type {
 	public SimpleType transformAsSimpleType() {
 	    SimpleType result = (SimpleType)TypeCheckerContext.ObjectType;
 	    
-	    Iterator it = types.iterator();
+	    Iterator<Type> it = types.iterator(); 
 	    while(it.hasNext()) {
-	        Type t = (Type)it.next();
+	        Type t = it.next();
 	        if (t instanceof SimpleType) {
 	            if (isSuperTypeOfOthers((SimpleType)t)) return (SimpleType)t;
 	        }
@@ -219,9 +230,9 @@ public class UnionType extends Type {
 	
 	private boolean isSuperTypeOfOthers(SimpleType sup) {
 	    boolean result = true;
-	    Iterator it = types.iterator();
+	    Iterator<Type> it = types.iterator();
 	    while(it.hasNext()) {
-	        Type t = (Type)it.next();
+	        Type t = it.next();
 	        if (t instanceof SimpleType) {
 	            result = TypeConformanceChecker.conforms(sup.type, ((SimpleType)t).type);
 	        }

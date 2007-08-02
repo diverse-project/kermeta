@@ -1,4 +1,4 @@
-/* $Id: Type.java,v 1.6 2007-07-27 07:12:17 ftanguy Exp $
+/* $Id: Type.java,v 1.7 2007-08-02 15:53:30 dvojtise Exp $
 * Project : Kermeta io
 * File : Type.java
 * License : EPL
@@ -14,6 +14,8 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
 //import fr.irisa.triskell.kermeta.language.structure.FType;
 
@@ -71,28 +73,29 @@ public abstract class Type {
 	 * called on this type
 	 * @return
 	 */
-	public abstract ArrayList callableProperties();
+	public abstract ArrayList<CallableProperty> callableProperties();
 	
 	/**
 	 * returns a list of CallableOperation that corresponds to the operations that can be
 	 * called on this type
 	 * @return
 	 */
-	public abstract ArrayList callableOperations();
+	public abstract ArrayList<CallableOperation> callableOperations();
 	
 	/**
 	 * inferTypeVariableBinding
 	 * @param generic
 	 * @return
 	 */
-	public abstract Hashtable inferTypeVariableBinding(Type generic);
+	public abstract Hashtable<TypeVariable, fr.irisa.triskell.kermeta.language.structure.Type> inferTypeVariableBinding(Type generic);
 	
 	/**
 	 * inferTypeVariableBinding
 	 * @param generic
 	 * @param binding
 	 */
-	protected abstract void inferTypeVariableBinding(fr.irisa.triskell.kermeta.language.structure.Type generic, Hashtable binding);
+	protected abstract void inferTypeVariableBinding(fr.irisa.triskell.kermeta.language.structure.Type generic, 
+													Hashtable<TypeVariable, fr.irisa.triskell.kermeta.language.structure.Type> binding);
 	
 	/**
 	 * Get a callable operation by its name.
@@ -102,9 +105,9 @@ public abstract class Type {
 	 * @return
 	 */
 	public CallableOperation getOperationByName(String name) {
-		ArrayList ops = callableOperations();
+		ArrayList<CallableOperation> ops = callableOperations();
 		if (ops == null) return null;
-		java.util.Iterator it = ops.iterator();
+		java.util.Iterator<CallableOperation> it = ops.iterator();
 		while(it.hasNext()) {
 		    CallableOperation op = (CallableOperation)it.next();
 			if (op.operation.getName().equals(name)) return op;
@@ -120,9 +123,9 @@ public abstract class Type {
 	 * @return
 	 */
 	public CallableProperty getPropertyByName(String name) {
-		ArrayList props = callableProperties();
+		ArrayList<CallableProperty> props = callableProperties();
 		if (props == null) return null;
-		java.util.Iterator it = props.iterator();
+		java.util.Iterator<CallableProperty> it = props.iterator();
 		while(it.hasNext()) {
 		    CallableProperty prop = (CallableProperty)it.next();
 			if (prop.property.getName().equals(name)) 

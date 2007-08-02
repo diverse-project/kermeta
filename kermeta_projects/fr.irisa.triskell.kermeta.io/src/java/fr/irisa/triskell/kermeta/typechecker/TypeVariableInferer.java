@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.15 2007-07-20 15:08:03 ftanguy Exp $
+/* $Id: TypeVariableInferer.java,v 1.16 2007-08-02 15:53:30 dvojtise Exp $
 * Project : Kermeta io
 * File : TypeVariableInferer.java
 * License : EPL
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -44,8 +45,9 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 	 * @param unit The conpilation unit
 	 * @return A hashtable <Variable : ObjectTypeVariable, ActualType : fr.irisa.triskell.kermeta.language.structure.Type> or null if the provided does not match the generic type
 	 */
-	public static Hashtable inferTypeVariableTypes(fr.irisa.triskell.kermeta.language.structure.Type generic, fr.irisa.triskell.kermeta.language.structure.Type provided) {
-		Hashtable<fr.irisa.triskell.kermeta.language.structure.Type,fr.irisa.triskell.kermeta.language.structure.Type> result = new Hashtable<fr.irisa.triskell.kermeta.language.structure.Type,fr.irisa.triskell.kermeta.language.structure.Type>();
+	public static Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> 
+				  inferTypeVariableTypes(fr.irisa.triskell.kermeta.language.structure.Type generic, fr.irisa.triskell.kermeta.language.structure.Type provided) {
+		Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> result = new Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type>();
 		
 		// Get rid of primitive types
 		provided = TypeCheckerContext.getCanonicalType(provided);
@@ -65,11 +67,11 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 	
 	public static void inferTypeVariableTypes(fr.irisa.triskell.kermeta.language.structure.Type generic, 
 			fr.irisa.triskell.kermeta.language.structure.Type provided, 
-			Hashtable<fr.irisa.triskell.kermeta.language.structure.Type,fr.irisa.triskell.kermeta.language.structure.Type> result) {
+			Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> result) {
 	    provided = TypeCheckerContext.getCanonicalType(provided);
 		generic = TypeCheckerContext.getCanonicalType(generic);
 		TypeVariableInferer visitor = new TypeVariableInferer(provided, result);
-		result = (Hashtable<fr.irisa.triskell.kermeta.language.structure.Type,fr.irisa.triskell.kermeta.language.structure.Type>)visitor.accept(generic);
+		result = (Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type>)visitor.accept(generic);
 	}
 	
 	
@@ -78,13 +80,13 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 	 */
 	protected fr.irisa.triskell.kermeta.language.structure.Type provided;
 	
-	protected Hashtable<fr.irisa.triskell.kermeta.language.structure.Type,fr.irisa.triskell.kermeta.language.structure.Type> result;
+	protected Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> result;
 	
 	/**
 	 * Constructor
 	 */
 	public TypeVariableInferer(fr.irisa.triskell.kermeta.language.structure.Type provided, 
-			Hashtable<fr.irisa.triskell.kermeta.language.structure.Type,fr.irisa.triskell.kermeta.language.structure.Type> result) {
+			Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> result) {
 		super();
 		this.provided = provided;
 		this.result = result;
@@ -117,9 +119,9 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 	    	if (TypeConformanceChecker.conforms(TypeCheckerContext.ModelType.getFType(), arg0)) {
 	    		return null;
 	    	}
-	    	Iterator msupers =  InheritanceSearch.allSuperTypes((fr.irisa.triskell.kermeta.language.structure.Class) TypeCheckerContext.ModelType.getFType()).iterator();
+	    	Iterator<fr.irisa.triskell.kermeta.language.structure.Type> msupers =  InheritanceSearch.allSuperTypes((fr.irisa.triskell.kermeta.language.structure.Class) TypeCheckerContext.ModelType.getFType()).iterator();
 	    	while (msupers.hasNext()) {
-	    		fr.irisa.triskell.kermeta.language.structure.Class msuper = (fr.irisa.triskell.kermeta.language.structure.Class) msupers.next();
+	    		fr.irisa.triskell.kermeta.language.structure.Type msuper = msupers.next();
 	    		if (TypeConformanceChecker.conforms(msuper, arg0)) 
 	    		{
 	    			return null;
@@ -133,7 +135,7 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 		//if (arg0.getFTypeParamBinding().size() != ((FClass)provided).getFTypeParamBinding().size())
 		    //throw new TypeDoesNotMatchError();
 		
-		Iterator it = InheritanceSearch.allSuperTypes((fr.irisa.triskell.kermeta.language.structure.Class)provided).iterator();
+		Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = InheritanceSearch.allSuperTypes((fr.irisa.triskell.kermeta.language.structure.Class)provided).iterator();
 		
 		while(it.hasNext()) {
 			fr.irisa.triskell.kermeta.language.structure.Class sp = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
