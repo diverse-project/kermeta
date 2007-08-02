@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: OperationEditPart.java,v 1.4 2007-07-23 09:21:25 cfaucher Exp $
+ * $Id: OperationEditPart.java,v 1.5 2007-08-02 15:22:11 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -36,6 +36,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
 
 /**
  * The Operation object controller
@@ -128,52 +129,7 @@ public class OperationEditPart extends EMFGraphNodeEditPart {
 	 * @generated NOT
 	 */
 	protected void updateLabel(EditableLabel label) {
-		String text = "";
-		if (getModelOperation().getName() != null
-				&& !"".equals(getModelOperation().getName())) {
-			text = getModelOperation().getName();
-		} else {
-			text = "null";
-		}
-		Boolean first = true;
-		// The type parameters
-		if (getModelOperation().getTypeParameter().size() > 0) {
-			text += "<";
-			for (Iterator it = getModelOperation().getTypeParameter()
-					.iterator(); it.hasNext();) {
-				TypeVariable var = (TypeVariable) it.next();
-				if (first)
-					first = false;
-				else
-					text += ",";
-				text += KermetaUtils.getDefault().getLabelForTypeVariable(var);
-			}
-			text += ">";
-		}
-		// Now the parameters
-		text += "(";
-		first = true;
-		for (Iterator it = getModelOperation().getOwnedParameter().iterator(); it
-				.hasNext();) {
-			Parameter param = (Parameter) it.next();
-			if (first)
-				first = false;
-			else
-				text += ",";
-			text += param.getName()
-					+ ":"
-					+ KermetaUtils.getDefault()
-							.getLabelForType(param.getType());
-		}
-		text += ")";
-		// The return type
-		if (getModelOperation().getType() != null) {
-			text += " : "
-					+ KermetaUtils.getDefault().getLabelForType(
-							getModelOperation().getType());
-		}
-
-		label.setText(text);
+		label.setText(OperationHelper.getExtendedLabel(getModelOperation()));
 	}
 
 	/**

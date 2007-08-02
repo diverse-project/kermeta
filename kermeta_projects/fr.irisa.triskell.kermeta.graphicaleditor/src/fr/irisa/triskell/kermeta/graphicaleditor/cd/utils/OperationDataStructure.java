@@ -1,4 +1,4 @@
-/* $Id: OperationDataStructure.java,v 1.1 2007-02-06 17:45:47 cfaucher Exp $
+/* $Id: OperationDataStructure.java,v 1.2 2007-08-02 15:22:11 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : OperationDataStructure.java
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Feb 20, 2006
  * Authors       : zdrey
  */
-/* $Id: OperationDataStructure.java,v 1.1 2007-02-06 17:45:47 cfaucher Exp $
+/* $Id: OperationDataStructure.java,v 1.2 2007-08-02 15:22:11 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : OperationDataStructure.java
  * License   : EPL
@@ -29,6 +29,7 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 
 /**
  * Provide a structure for handling some of the Operation datas, that is, the
@@ -183,7 +184,7 @@ public class OperationDataStructure
         {
             return null;
         }
-        return KermetaUtils.getDefault().getLabelForType(type);
+        return TypeHelper.getLabelForType(type);
     }
 
     /**

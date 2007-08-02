@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.7 2007-07-20 15:34:04 cfaucher Exp $
+/* $Id: KermetaUtils.java,v 1.8 2007-08-02 15:22:11 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -258,53 +258,7 @@ public class KermetaUtils {
 		return result;
 	}
 
-	/** Returns a "printable name" for the given type */
-	public String getLabelForType(Type type) {
-		String type_name = "";
-		if (type instanceof Class){
-			type_name = ((Class) type).getTypeDefinition().getName();
-			//String type_name2 = KMTHelper.getQualifiedName(((Class)type).getTypeDefinition());
-		}
-		else if (type instanceof TypeVariable){
-			type_name = ((TypeVariable)type).getName();
-		}
-		else if (type instanceof FunctionType) {
-			type_name = "<" + getLabelForType(((FunctionType) type).getLeft()) + "->" +getLabelForType(((FunctionType) type).getRight())+ ">";
-		}
-		else if (type instanceof ProductType) {
-			type_name = "[";
-			boolean first_pt = true;
-			for(Object pt_type : ((ProductType) type).getType()) {
-				if(first_pt) {
-					first_pt = false;
-				} else {
-					type_name += ",";
-				}
-				type_name += getLabelForType((Type) pt_type);
-			}
-			type_name += "]";	
-		}
-		else if (type instanceof DataType)
-			type_name = ((DataType) type).getName();
-		else if (type instanceof VoidType)
-			type_name = "Void";
-		else {
-			type_name = type == null ? "<Null>" : type.toString();
-			// throw new Error("FTYPE : Not implemented error :
-			// createTypeForTypeDefinition -- Enumeration type is not handled
-			// yet. (" + type + ")");
-		}
-		// FIXME : getName return sometimes null, which is unconsistent
-		return (type_name != null) ? type_name : "<Unset>";
-	}
-
-	public String getLabelForTypeVariable(TypeVariable var) {
-		String supertype = var.getSupertype() != null ? (":" + getLabelForType(var
-				.getSupertype()))
-				: "";
-		return var.getName() + supertype;
-	}
-
+	
 	public Type createTypeForTypeDefinition(TypeDefinition typedef) {
 		Type type = null;
 		if (typedef instanceof ClassDefinition) {

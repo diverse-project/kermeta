@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: ClassDefinitionEditPart.java,v 1.5 2007-07-23 09:21:25 cfaucher Exp $
+ * $Id: ClassDefinitionEditPart.java,v 1.6 2007-08-02 15:22:11 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -40,6 +40,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 
 /**
  * The ClassDefinition object controller
@@ -140,8 +141,7 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 				typeParameterString = "<";
 				Iterator it = cd.getTypeParameter().iterator();
 				while (it.hasNext()) {
-					typeParameterString += KermetaUtils.getDefault()
-							.getLabelForType((Type) it.next());
+					typeParameterString += TypeHelper.getLabelForType((Type) it.next());
 					if (it.hasNext())
 						typeParameterString += ", ";
 				}

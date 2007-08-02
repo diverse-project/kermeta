@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: PropertyNodeEditPart.java,v 1.3 2007-07-23 09:21:25 cfaucher Exp $
+ * $Id: PropertyNodeEditPart.java,v 1.4 2007-08-02 15:22:11 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -36,6 +36,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.figures.PropertyNodeFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 
 /**
  * The PropertyNode object controller
@@ -171,14 +172,14 @@ public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 				text = "/" + text;
 			}
 			text += getProperty().getName();
-		} else
+		} else {
 			text = "null";
-		Boolean first = true;
+		}
 
 		// The property type
 		if (getProperty().getType() != null) {
 			text += " : "
-					+ KermetaUtils.getDefault().getLabelForType(
+					+ TypeHelper.getLabelForType(
 							getProperty().getType());
 		}
 

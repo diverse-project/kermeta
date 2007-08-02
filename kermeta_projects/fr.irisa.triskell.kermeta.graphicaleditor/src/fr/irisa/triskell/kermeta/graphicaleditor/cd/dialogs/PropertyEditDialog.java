@@ -1,4 +1,4 @@
-/* $Id: PropertyEditDialog.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+/* $Id: PropertyEditDialog.java,v 1.2 2007-08-02 15:22:11 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : ClassDefinitionEditDialog.java
  * License   : EPL
@@ -36,6 +36,7 @@ import org.eclipse.swt.widgets.Text;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 
 /**
  * Popup dialog associated to the Operation graphical object, used for the 
@@ -184,7 +185,7 @@ public class PropertyEditDialog extends Dialog
 		// Set the type params field
 		if (_property.getType() != null)
 		{
-			String type_name = KermetaUtils.getDefault().getLabelForType(_property.getType());
+			String type_name = TypeHelper.getLabelForType(_property.getType());
 			_typeComboBox.select(_typeNames.indexOf(type_name) + 1);
 		}
 		else

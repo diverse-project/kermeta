@@ -1,4 +1,4 @@
-/* $Id: OperationEditDialog.java,v 1.3 2007-07-23 09:21:25 cfaucher Exp $
+/* $Id: OperationEditDialog.java,v 1.4 2007-08-02 15:22:11 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : ClassDefinitionEditDialog.java
  * License   : EPL
@@ -48,6 +48,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorStyleListener;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.SyntaxManager;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 
 /**
  * Popup dialog associated to the Operation graphical object, used for the 
@@ -179,7 +180,7 @@ public class OperationEditDialog extends Dialog
 		{
 			Type next = iterator.next();
 			// Display a proper name
-			String name = KermetaUtils.getDefault().getLabelForType(next);
+			String name = TypeHelper.getLabelForType(next);
 			name = (name==null)?"":name;
 			_superTypeNames.add(name);
 		}
@@ -235,7 +236,7 @@ public class OperationEditDialog extends Dialog
 		{
 			// Items are Strings -> this was 
 			//_returnTypeComboBox.select(_types.indexOf(_operation.getType()) + 1);
-			String type_name = KermetaUtils.getDefault().getLabelForType(_operation.getType());
+			String type_name = TypeHelper.getLabelForType(_operation.getType());
 			_returnTypeComboBox.select(_typeNames.indexOf(type_name) + 1);
 		}
 		else

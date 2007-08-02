@@ -1,4 +1,4 @@
-/* $Id: EditDialogHelper.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+/* $Id: EditDialogHelper.java,v 1.2 2007-08-02 15:22:11 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : EditDialogHelper.java
  * License    : EPL
@@ -19,6 +19,7 @@ import java.util.List;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 
 /**
  * This class contains userful common methods for the edit dialogs, so that they can share them from here.
@@ -47,7 +48,7 @@ public class EditDialogHelper {
 		Hashtable<String, Type> result = new Hashtable<String, Type>();
 		// Construct a hashtable
 		for (Type type : typelist) {
-			result.put(KermetaUtils.getDefault().getLabelForType(type), type);
+			result.put(TypeHelper.getLabelForType(type), type);
 		}
 		//return getNamesOfTypes(initializeTypes(classdef));
 		String[] keyArray = result.keySet().toArray(new String[result.size()]); 
