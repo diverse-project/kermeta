@@ -1,16 +1,17 @@
 package fr.irisa.triskell.kermeta.modelhelper;
 
-import java.util.Iterator;
-
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
+/**
+ * this class proposes various helper functions that applies to ModelType in the Kermeta model
+ *
+ */
 public class ModelTypeHelper {
 
 	public static TypeDefinition getTypeDefinitionByName(ModelType mt, String typeName) {
-		Iterator included = mt.getIncludedTypeDefinition().iterator();
-		while (included.hasNext()) {
-			TypeDefinition tdef = (TypeDefinition) included.next();
+		
+		for(TypeDefinition tdef : mt.getIncludedTypeDefinition()) {
 			if (typeName.equals(tdef.getName())) {
 				return tdef;
 			}
