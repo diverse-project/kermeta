@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.31 2007-04-02 17:15:25 jmottu Exp $
+// $Id: primitive_types.kmt,v 1.32 2007-08-02 08:45:51 cfaucher Exp $
 package kermeta::standard; 
 
 require "../Standard.kmt"
@@ -527,9 +527,9 @@ class String inherits ValueType, Comparable, Summable<String>
 	/**
 	 * Appends other at the end of self
 	 */
-	operation append(other : String) : Void is do
+	operation append(other : String) : String is do
 		if other.isVoid then raise CallOnVoidTarget.new else
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::String.append(self,other)
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.append(self,other)
 		end
 	end
 	
