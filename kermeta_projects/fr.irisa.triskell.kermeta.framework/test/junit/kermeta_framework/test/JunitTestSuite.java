@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.2 2006-07-20 11:34:52 zdrey Exp $
+/* $Id: JunitTestSuite.java,v 1.3 2007-08-02 09:38:15 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -21,11 +21,11 @@ import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
  */
 public class JunitTestSuite extends TestSuite {
 
-    public JunitTestSuite(java.lang.Class theClass)
+    public JunitTestSuite(java.lang.Class<?> theClass)
     {
         super();
     }
-    public JunitTestSuite(java.lang.Class theClass, String bla)
+    public JunitTestSuite(java.lang.Class<?> theClass, String bla)
     {
         super();
     }    

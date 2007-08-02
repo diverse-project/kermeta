@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.34 2007-08-01 07:23:39 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.35 2007-08-02 09:44:46 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -419,11 +419,11 @@ public void testWithFile(String dir, String file) throws Exception {
 	protected boolean hasDependencyCycle(KermetaUnit ku){
 		List<KermetaUnit> kuList = ku.getImportedKermetaUnits();
 		boolean hasDependencyCycle = false;
-		Iterator it = kuList.iterator();
+		Iterator<KermetaUnit> it = kuList.iterator();
 		while(!hasDependencyCycle && it.hasNext()){
 			KermetaUnit importedKU = (KermetaUnit)it.next();
 			List<KermetaUnit> kuSubList = importedKU.getImportedKermetaUnits();
-			Iterator subIt = kuSubList.iterator();
+			Iterator<KermetaUnit> subIt = kuSubList.iterator();
 			while(!hasDependencyCycle && subIt.hasNext()){
 				if(subIt.next() == ku) hasDependencyCycle = true; 
 		

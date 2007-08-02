@@ -9,7 +9,6 @@ Bundle-ClassPath: framework.jar,
  lib/thirdparty/ldt-core.jar,
  lib/thirdparty/log4j.jar,
  lib/thirdparty/junit.jar
-Bundle-Localization: plugin
 Export-Package: .,
  antlr,
  antlr.actions,

@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.16 2007-07-31 12:34:54 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.17 2007-08-02 09:39:57 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -42,12 +42,12 @@ public class JunitTestSuite extends TestSuite {
 
     }
     
-    public JunitTestSuite(java.lang.Class theClass)
+    public JunitTestSuite(java.lang.Class<?> theClass)
     {
         super();
         initialize();
     }
-    public JunitTestSuite(java.lang.Class theClass, String bla)
+    public JunitTestSuite(java.lang.Class<?> theClass, String bla)
     {
         super();
         initialize();
@@ -61,7 +61,7 @@ public class JunitTestSuite extends TestSuite {
 
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
-		testWithFile("test/emf_testcases/kermeta","027_testRuntimeModelImport.main.kmt" );
+/*		testWithFile("test/emf_testcases/kermeta","027_testRuntimeModelImport.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","028_testLoadEcoreFile.main.kmt" );
 
@@ -78,11 +78,11 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/emf_testcases/kermeta","051_testSaveEcoreSplittedXRefModel.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","052_testSaveEcoreSplittedModel.main.kmt" );
-
+*/
 		testWithFile("test/emf_testcases/kermeta","053_savingKM.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","053_savingKM_2.main.kmt" );
-
+/*
 		testWithFile("test/emf_testcases/kermeta","054_pb_olivier1213.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt" );
@@ -100,7 +100,7 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/emf_testcases/kermeta","062_resourceTests.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","067_testHasSubTypeLoadingModel.main.kmt" );
-
+*/
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
 		//addTest(runfactory.getTest());

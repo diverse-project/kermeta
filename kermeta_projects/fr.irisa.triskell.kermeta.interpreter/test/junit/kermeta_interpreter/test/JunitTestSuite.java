@@ -1,7 +1,7 @@
-/* $Id: JunitTestSuite.java,v 1.37 2007-07-24 13:47:37 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.38 2007-08-02 09:39:57 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : 27 janv. 2005
@@ -32,12 +32,12 @@ public class JunitTestSuite extends TestSuite {
     
     static private IOPlugin ioPlugin;
     
-    public JunitTestSuite(java.lang.Class theClass)
+    public JunitTestSuite(java.lang.Class<?> theClass)
     {
         super();
         initialize();
     }
-    public JunitTestSuite(java.lang.Class theClass, String bla)
+    public JunitTestSuite(java.lang.Class<?> theClass, String bla)
     {
         super();
         initialize();

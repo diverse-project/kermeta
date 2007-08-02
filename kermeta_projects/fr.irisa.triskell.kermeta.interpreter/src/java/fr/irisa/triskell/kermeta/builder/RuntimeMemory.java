@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.15 2007-07-20 15:07:49 ftanguy Exp $
+/* $Id: RuntimeMemory.java,v 1.16 2007-08-02 09:42:21 dvojtise Exp $
  * Project: Kermeta.interpreter
  * File: RuntimeMemory.java
  * License: EPL
@@ -81,7 +81,7 @@ public class RuntimeMemory {
     
     public RuntimeObject getRuntimeObjectByOID(long oid)
     {
-    	Iterator it = getRuntimeObjects().values().iterator();
+    	Iterator<RuntimeObject> it = getRuntimeObjects().values().iterator();
     	RuntimeObject result = null;
     	while (it.hasNext() && result == null)
     	{
