@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.34 2007-07-31 12:35:15 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.35 2007-08-02 09:04:11 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -7,7 +7,7 @@
 	
     <property name="report.dir" location="./reports"/>		
 	<property name="eclipse.home" location="c:/eclipse3.1.1/eclipse"/>
-	<property name="cobertura.dir" location="\\jersey\triskell\bin\multiplatform\cobertura-1.7"/>
+	<property name="cobertura.dir" location="\\nas1a\triskell\bin\multiplatform\cobertura-1.7"/>
 	
 
 
