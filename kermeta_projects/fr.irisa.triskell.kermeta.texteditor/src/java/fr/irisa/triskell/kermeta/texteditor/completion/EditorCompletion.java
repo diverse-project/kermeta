@@ -1,4 +1,4 @@
-/* $Id: EditorCompletion.java,v 1.22 2007-08-01 07:25:04 ftanguy Exp $
+/* $Id: EditorCompletion.java,v 1.23 2007-08-02 15:17:44 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorCompletion.java
 * License : EPL
@@ -38,6 +38,7 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.CathegorizedKWList;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
@@ -561,6 +562,7 @@ public class EditorCompletion implements IContentAssistProcessor {
     		short_name = begining.substring(begining.lastIndexOf("::")+2);
     	
     	List<Package> packages = kermetaUnit.getPackages(pkg_name);
+    	List<String> listedQualifiedName = new ArrayList<String> ();
     	// Get classdefinitions inside pkg
     	
     	for ( Package p : packages ) {
@@ -576,18 +578,27 @@ public class EditorCompletion implements IContentAssistProcessor {
     			}
             	 
     		}
-    		
+    	
+    		// Get sub packages of this pkg
+            for (Package subPackage : p.getNestedPackage()) {
+            	
+            	String qualifiedName = NamedElementHelper.getQualifiedName(subPackage);
+            	if ( ! listedQualifiedName.contains(qualifiedName) ) {
+            	
+            		listedQualifiedName.add(qualifiedName);
+            	         	
+	            	CompletionItem ci = new NamedElementCompletionItem(subPackage);
+	            	if (short_name.length() == 0) 
+	            		proposals.add(ci.getCompletionProposal(offset,0));
+	            	else if (ci.getCompletionText().toLowerCase().startsWith(short_name.toLowerCase()))
+	            		proposals.add(ci.getCompletionProposal(offset - short_name.length(), short_name.length()));
+	          
+            	}
+
+            }
     	}
     	
-    	// Get sub packages of this pkg
-      /*  for (Object next : pkg.getNestedPackage()) {
-        	Package p = (Package)next;
-        	CompletionItem ci = new NamedElementCompletionItem(p);
-        	if (short_name.length() == 0) 
-        		proposals.add(ci.getCompletionProposal(offset,0));
-        	else if (ci.getCompletionText().toLowerCase().startsWith(short_name.toLowerCase()))
-        		proposals.add(ci.getCompletionProposal(offset - short_name.length(), short_name.length()));
-        }*/
+    	
         Collections.sort(proposals, cpCmp);
     }
 
