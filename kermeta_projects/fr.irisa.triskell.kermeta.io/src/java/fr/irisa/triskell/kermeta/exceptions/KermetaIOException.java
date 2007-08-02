@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaIOException.java,v 1.2 2007-07-20 15:08:19 ftanguy Exp $
+/*$Id: KermetaIOException.java,v 1.3 2007-08-02 15:56:04 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	KermetaIOException.java
 * License : EPL
@@ -12,6 +12,7 @@
 
 package fr.irisa.triskell.kermeta.exceptions;
 
+@SuppressWarnings("serial")
 public class KermetaIOException extends Exception {
 
 	public KermetaIOException(String message) {

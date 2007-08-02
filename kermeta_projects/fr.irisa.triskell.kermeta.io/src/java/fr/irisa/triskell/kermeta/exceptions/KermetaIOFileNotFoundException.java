@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaIOFileNotFoundException.java,v 1.2 2007-07-20 15:08:19 ftanguy Exp $
+/*$Id: KermetaIOFileNotFoundException.java,v 1.3 2007-08-02 15:56:04 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	KermetaIOFileNotFound.java
 * License : EPL
@@ -12,6 +12,7 @@
 
 package fr.irisa.triskell.kermeta.exceptions;
 
+@SuppressWarnings("serial")
 public class KermetaIOFileNotFoundException extends KermetaIOLoadingException {
 	
 	public KermetaIOFileNotFoundException(String uri) {
