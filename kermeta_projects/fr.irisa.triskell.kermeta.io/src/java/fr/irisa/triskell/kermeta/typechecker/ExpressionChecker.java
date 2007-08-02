@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.46 2007-07-31 13:36:55 dvojtise Exp $
+/* $Id: ExpressionChecker.java,v 1.47 2007-08-02 13:34:56 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -77,7 +77,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	
-    public static Hashtable typeCheckExpression(Expression expression, KermetaUnit unit, TypeCheckerContext context) {
+    public static Hashtable<Expression, Type> typeCheckExpression(Expression expression, KermetaUnit unit, TypeCheckerContext context) {
         ExpressionChecker visitor = new ExpressionChecker(unit, context);
         visitor.accept(expression);
         return visitor.expressionTypes;
@@ -96,7 +96,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	public ExpressionChecker(KermetaUnit unit, TypeCheckerContext context) {
 		this.unit = unit;
-		expressionTypes = new Hashtable();
+		expressionTypes = new Hashtable<Expression, Type>();
 		this.context = context;
 	}
 	
@@ -106,7 +106,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	// The result of type computation
 	// < Expression, fr.irisa.triskell.kermeta.language.structure.Type >
-	protected Hashtable expressionTypes;
+	protected Hashtable<Expression, Type> expressionTypes;
 	
 	/**
 	 * Get the type of an expression
@@ -210,7 +210,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		    Type[] required_params = operation_type.getFunctionTypeLeft().getProductType();
 		    
 		    // Try to infer actual types of type variables
-		    Hashtable binding = new Hashtable();
+		    Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> binding = 
+		    	new Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type>();
 	    	if(required_params.length != exp.getParameters().size()){
 	    		unit.error("TYPE-CHECKER : problem with the number of parameters passed to the operation; passed " + exp.getParameters().size() + "; expecting "+required_params.length + "; maybe due to bug #108 ");
 	    		//unit.messages.addError("TYPE-CHECKER : problem with the number of parameters passed to the operation; passed " + exp.getParameters().size() + "; expecting "+required_params.length + "; maybe due to bug #108 ", exp);
@@ -463,9 +464,9 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	 * Visit an Elist of expression and returns the type
 	 * of the last expression
 	 */
-	protected Type visitExpressionList(EList expressions) {
+	protected Type visitExpressionList(EList<Expression> expressions) {
 		Type result = TypeCheckerContext.VoidType;
-		Iterator it = expressions.iterator();
+		Iterator<Expression> it = expressions.iterator();
 		while(it.hasNext()) {
 			Expression exp = (Expression)it.next();
 			result = (Type) this.accept(exp);
@@ -664,7 +665,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		// It is a call to an enum literal
 		if(e != null) {
 			EnumerationLiteral lit = null;
-			Iterator it = e.getOwnedLiteral().iterator();
+			Iterator<EnumerationLiteral> it = e.getOwnedLiteral().iterator();
 			while (it.hasNext() && lit == null) {
 				EnumerationLiteral l = (EnumerationLiteral)it.next();
 				if (l.getName().equals(expression.getName())) lit = l;
