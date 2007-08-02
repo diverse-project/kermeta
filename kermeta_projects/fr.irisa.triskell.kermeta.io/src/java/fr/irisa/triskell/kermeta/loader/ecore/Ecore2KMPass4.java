@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.13 2007-08-02 16:19:04 dvojtise Exp $
+/* $Id: Ecore2KMPass4.java,v 1.14 2007-08-02 16:34:02 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -161,31 +161,31 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 	 */
 	protected void addSymbolContext(ClassDefinition cDef) {
 		// Adding the attribute names to the symbols table
-		EList l = cDef.getOwnedAttribute();
-		Iterator it = l.iterator();
-		while(it.hasNext()) {
-			Property p = (Property) it.next();
+		EList<Property> lProp = cDef.getOwnedAttribute();
+		Iterator<Property> itProp = lProp.iterator();
+		while(itProp.hasNext()) {
+			Property p = itProp.next();
 			context.addSymbol( new KMSymbolProperty(p) );
 		}
 		// Adding the operation names to the symbols table
-		l = cDef.getOwnedOperation();
-		it = l.iterator();
-		while(it.hasNext()) {
-			Operation p = (Operation) it.next();
+		EList<Operation> lOp = cDef.getOwnedOperation();
+		Iterator<Operation>itOp = lOp.iterator();
+		while(itOp.hasNext()) {
+			Operation p = itOp.next();
 			context.addSymbol( new KMSymbolOperation(p) );
 		}
 
 		// Adding the type variable names to the symbol table
-		l = cDef.getTypeParameter();
-		it = l.iterator();
-		while(it.hasNext()) {
-			TypeVariable tv = (TypeVariable) it.next();
+		EList<TypeVariable> lTVar = cDef.getTypeParameter();
+		Iterator<TypeVariable> itTVar = lTVar.iterator();
+		while(itTVar.hasNext()) {
+			TypeVariable tv = itTVar.next();
 			context.addTypeVar(tv);
 		}
 		
 		// Adding context inherited from superclasses
-		l = cDef.getSuperType();
-		it = l.iterator();
+		EList<Type> l = cDef.getSuperType();
+		Iterator<Type> it = l.iterator();
 		while(it.hasNext()) {
 			fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class) it.next();
 			addSymbolContext( (ClassDefinition) c.getTypeDefinition() );
@@ -501,15 +501,15 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 	 * @param node
 	 * @return
 	 */
-	protected EOperation findOperationInSuperTypes(List supertypes, EOperation node)
+	protected EOperation findOperationInSuperTypes(List<EClass> supertypes, EOperation node)
 	{
 		EOperation result = null;
-		Iterator it = supertypes.iterator();
+		Iterator<EClass> it = supertypes.iterator();
 		while (it.hasNext() && result == null)
 		{
-			EClass next = (EClass)it.next();
+			EClass next = it.next();
 			// Get all the operations, find the one that has the same signature as the given operation
-			EList eoperations = next.getEOperations();
+			EList<EOperation> eoperations = next.getEOperations();
 			Iterator<EOperation> itop = eoperations.iterator(); 
 			while (itop.hasNext() && result == null)
 			{
@@ -521,7 +521,7 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 		if (result == null)
 		{
 			for (Object type : supertypes) {
-				List next = ((EClass)type).getESuperTypes();
+				List<EClass> next = ((EClass)type).getESuperTypes();
 				result =  findOperationInSuperTypes(next, node);
 			}
 		}
@@ -885,8 +885,8 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 	 */
 	protected void buildTypeVariableBindings(
 			fr.irisa.triskell.kermeta.language.structure.Class cl,
-			EMap map,
-			ArrayList tVars) {
+			EMap<String,String> map,
+			ArrayList<TypeVariable> tVars) {
 
 		TypeVariableBinding tvBinding = null;
 		int i = 0;
@@ -917,7 +917,7 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 	 * @param map        - map containing all parameterized supertypes of the class
 	 * @param tVars      - list of visible type variables
 	 */
-	protected void buildSuperTypeBindings(Type supertype, EMap map, ArrayList<TypeVariable> tVars) {
+	protected void buildSuperTypeBindings(Type supertype, EMap<String, String> map, ArrayList<TypeVariable> tVars) {
 		// Iterate over all annotation entries - each entry corresponds to a parameterized
 		// supertype of currently visited class
 		for(Object nextEntry : map) {

@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass5.java,v 1.6 2007-07-26 14:04:09 ftanguy Exp $
+/* $Id: Ecore2KMPass5.java,v 1.7 2007-08-02 16:35:42 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -62,8 +62,6 @@ import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
  */
 public class Ecore2KMPass5 extends Ecore2KMPass {
 	
-	private boolean isClassTypeOwner = false;
-	
 	private LoadingContext context = null;
 	
 	public Ecore2KMPass5(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, LoadingContext context) {
@@ -77,7 +75,6 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 	 */
 	public Object visit(EClass node) {
 		currentClassDefinition = (ClassDefinition) datas.getTypeDefinition(node);
-		isClassTypeOwner = true;
 		
 		context.pushContext();
 		
@@ -459,12 +456,12 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 					// this property belong to a specific group
 					// retreive it and use it for this feature
 					EClass containerClass =(EClass)prop.eContainer();
-					Iterator attIt = containerClass.getEAttributes().iterator();
+					Iterator<EAttribute> attIt = containerClass.getEAttributes().iterator();
 					while(attIt.hasNext()){
-						EAttribute att = (EAttribute)attIt.next();
-						Iterator annIt = att.getEAnnotations().iterator();						
+						EAttribute att = attIt.next();
+						Iterator<EAnnotation> annIt = att.getEAnnotations().iterator();						
 						while(annIt.hasNext()){
-							EAnnotation currAnn = (EAnnotation)annIt.next();
+							EAnnotation currAnn = annIt.next();
 							if(currAnn.getSource().equals(KM2Ecore.ANNOTATION_EXTENDEDMETADATA)){
 								String attIsGroup = (String)currAnn.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_KIND);
 								if(attIsGroup != null && attIsGroup.equals("group")) {
@@ -528,7 +525,7 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 	 * @param map        - map containing all parameterized supertypes of the class
 	 * @param tVars      - list of visible type variables
 	 */
-	protected void buildSuperTypeBindings(Type supertype, EMap map, ArrayList<TypeVariable> tVars) {
+	protected void buildSuperTypeBindings(Type supertype, EMap<String, String> map, ArrayList<TypeVariable> tVars) {
 		// Iterate over all annotation entries - each entry corresponds to a parameterized
 		// supertype of currently visited class
 		for(Object nextEntry : map) {
