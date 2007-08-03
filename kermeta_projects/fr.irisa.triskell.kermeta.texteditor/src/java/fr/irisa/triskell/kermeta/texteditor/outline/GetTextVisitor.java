@@ -1,4 +1,4 @@
-/* $Id: GetTextVisitor.java,v 1.9 2007-06-27 13:19:39 cfaucher Exp $
+/* $Id: GetTextVisitor.java,v 1.10 2007-08-03 08:36:39 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetTextVisitor.java
 * License : EPL
@@ -61,6 +61,7 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 			result += ppTypeVariableDeclaration(node.getTypeParameter());
 			result += ">";
 		}
+		
 		if (node.getSuperType().size() > 0) {
 			result += " -> ";
 			result += ppComaSeparatedNodes(node.getSuperType());
@@ -182,6 +183,10 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 	public Object visitTypeVariableBinding(TypeVariableBinding node) {
 	    if (node.getType() == null) return "!NULL!";
 		return this.accept(node.getType());
+	}
+	
+	public Object visitObjectTypeVariable(fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable node) {
+		return node.getName();
 	}
 	
 	/**
