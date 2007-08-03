@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.24 2007-07-24 13:47:38 ftanguy Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.25 2007-08-03 11:53:03 dvojtise Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -195,8 +195,6 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 		// set the container
 		if ( ! (kcoreObject.eContainer() instanceof ModelingUnit) ) 
 			run_obj.setContainer( getOrCreateRuntimeObject((fr.irisa.triskell.kermeta.language.structure.Object)kcoreObject.eContainer()) );
-		
-		EClass cl = kcoreObject.eClass();
 		
 		// set properties
 		for (Object next : kcoreObject.eClass().getEAllAttributes())

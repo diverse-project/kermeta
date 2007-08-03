@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.28 2007-07-24 13:47:37 ftanguy Exp $
+/* $Id: RuntimeObject.java,v 1.29 2007-08-03 11:51:57 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -69,8 +69,9 @@ public class RuntimeObject {
 	
 	/**
 	 * Data contained in the object
+	 * The key is a String, it can contains any object
 	 */
-	private Hashtable data;
+	private Hashtable<String,?> data;
 	
 	/**
 	 * Is the object modifiable
