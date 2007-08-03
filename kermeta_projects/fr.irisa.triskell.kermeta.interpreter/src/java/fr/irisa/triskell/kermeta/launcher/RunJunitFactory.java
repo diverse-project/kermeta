@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.23 2007-08-01 07:16:52 ftanguy Exp $
+/* $Id: RunJunitFactory.java,v 1.24 2007-08-03 07:35:49 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -69,10 +69,12 @@ public class RunJunitFactory implements Test {
 			unit = IOPlugin.getDefault().loadKermetaUnit( unit_uri );
 		} catch (KermetaIOFileNotFoundException e1) {
 			e1.printStackTrace();
-			return null;
+			theTestCase = new FailedTestCase(unit_uri, e1);
+            return theTestCase;
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
-			return null;
+			theTestCase = new FailedTestCase(unit_uri, e);
+            return theTestCase;
 		}
     	
         try {
@@ -105,9 +107,9 @@ public class RunJunitFactory implements Test {
             isTestSuite = false;
             String main_class = null;
             String main_operation = null;
-            Iterator it = unit.getModelingUnit().getOwnedTags().iterator();
+            Iterator<Tag> it = unit.getModelingUnit().getOwnedTags().iterator();
             while(it.hasNext()) {
-                Tag tag = (Tag)it.next();
+                Tag tag = it.next();
                 if ( tag.getName() != null ) {
                 	if (tag.getName().equals("mainClass")) 
                 		main_class = tag.getValue(); 
@@ -211,14 +213,14 @@ public class RunJunitFactory implements Test {
         
         
         
-       Iterator it = ((ClassDefinition)unit.getTypeDefinitionByName(main_class)).getOwnedOperation().iterator();
+       Iterator<Operation> it = ((ClassDefinition)unit.getTypeDefinitionByName(main_class)).getOwnedOperation().iterator();
 
         // Get each operation which name begins by "test",
         // and run it.
         while (it.hasNext()) {
             //	      We can now launch the operation found in mainOperation through
             // the BaseInterpreter
-            Operation mainOp = (Operation) it.next();
+            Operation mainOp = it.next();
             if (mainOp.getName().startsWith("test")) {
                 theTestSuite.addTest(new RunTestCase(main_class, mainOp.getName(), this, constraintExecution));
             }
