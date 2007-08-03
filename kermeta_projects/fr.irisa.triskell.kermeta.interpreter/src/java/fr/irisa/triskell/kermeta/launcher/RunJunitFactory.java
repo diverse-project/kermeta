@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.24 2007-08-03 07:35:49 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.25 2007-08-03 09:23:14 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -42,7 +42,7 @@ public class RunJunitFactory implements Test {
     private TestSuite theTestSuite = null;
     private TestCase theTestCase = null;
     
-    public boolean isTestSuite = false; // this part of a KermetaTestSuite
+    public boolean isTestCase = false; // this part of a KermetaTestSuite
     
    // private String unit_uri;
     
@@ -104,7 +104,7 @@ public class RunJunitFactory implements Test {
             }
             
             // get the main class to see if it inherits from class kermeta::kunit::Test
-            isTestSuite = false;
+            isTestCase = false;
             String main_class = null;
             String main_operation = null;
             Iterator<Tag> it = unit.getModelingUnit().getOwnedTags().iterator();
@@ -121,13 +121,13 @@ public class RunJunitFactory implements Test {
             	
                 ClassDefinition cd = (ClassDefinition)unit.getTypeDefinitionByName(main_class);                
                 if(cd != null){
-                	ClassDefinition class_test = (ClassDefinition)unit.getTypeDefinitionByQualifiedName("kermeta::kunit::Test");
+                	ClassDefinition class_test = (ClassDefinition)unit.getTypeDefinitionByQualifiedName("kermeta::kunit::TestCase");
             
 	                SimpleType kunit_test_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(class_test));
 	                SimpleType main_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(cd));
 	                
 	                if (main_type.isSubTypeOf(kunit_test_type)) 
-	                	isTestSuite = true;
+	                	isTestCase = true;
                 }
             }
             
@@ -144,7 +144,7 @@ public class RunJunitFactory implements Test {
             
             
             // It is a test suite
-            if (isTestSuite) {
+            if (isTestCase) {
                 theTestSuite = new TestSuite();
                 theTestSuite.setName(unit_uri);
                 

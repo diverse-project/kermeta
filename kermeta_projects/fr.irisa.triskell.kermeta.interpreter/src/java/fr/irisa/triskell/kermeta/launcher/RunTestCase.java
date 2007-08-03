@@ -1,4 +1,4 @@
-/* $Id: RunTestCase.java,v 1.14 2007-07-24 13:47:37 ftanguy Exp $
+/* $Id: RunTestCase.java,v 1.15 2007-08-03 09:23:14 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -108,7 +108,7 @@ public class RunTestCase extends TestCase {
     	try{    		
     			
     		interpreter.setEntryPoint(mainClassValue, mainOperationValue);
-    		interpreter.isTestSuite = containerTestSuite.isTestSuite;
+    		interpreter.isTestCase = containerTestSuite.isTestCase;
     		if ( constraintExecution )
     			interpreter.launchConstraint();
     		else

@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.31 2007-07-24 13:47:37 ftanguy Exp $
+/* $Id: KermetaInterpreter.java,v 1.32 2007-08-03 09:23:14 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -72,7 +72,7 @@ public class KermetaInterpreter {
 	RuntimeMemory memory;
 	
 	/** If true, the launch will be preceded by a call to setUp, and followed by tearDown operationnif they exist */
-	public boolean isTestSuite = false;
+	public boolean isTestCase = false;
 	
 	/**
 	 * Constructor for a kermeta unit
@@ -121,7 +121,7 @@ public class KermetaInterpreter {
 		}
 		
 		if ( unit.isErrored() )
-	        throw new KermetaInterpreterError( KermetaUnitHelper.getAllMessagesAsString(unit) );
+	        throw new KermetaInterpreterError( KermetaUnitHelper.getAllErrorsAsString(unit) );
 	    	    
 	    initializeMemory();
 	    initializeEntryPoint();
@@ -270,7 +270,7 @@ public class KermetaInterpreter {
 	    // FIXME : this should be corrected to allow generic types as entre type
 	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getTypeDefinition()));
 	    
-	    if(isTestSuite){
+	    if(isTestCase){
 	    	callOperation(exp_interpreter, entryObject, "initLog");
 	    	callOperation(exp_interpreter, entryObject, "setUp");
 	    }
@@ -278,7 +278,7 @@ public class KermetaInterpreter {
 	    // Execute the operation
 	    RuntimeObject result = (RuntimeObject) exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
 	    
-	    if(isTestSuite){ 
+	    if(isTestCase){ 
 	    	callOperation(exp_interpreter, entryObject, "tearDown");
 	    	// retreives the failures
 	    	callOperation(exp_interpreter, entryObject, "raiseIfHasFailures");
@@ -307,8 +307,24 @@ public class KermetaInterpreter {
 		ExpressionInterpreter exp_interpreter = new ConstraintInterpreter(memory);// Instanciate the first object
 	    // FIXME : this should be corrected to allow generic types as entre type
 	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getTypeDefinition()));
+	    
+	    if(isTestCase){
+	    	callOperation(exp_interpreter, entryObject, "initLog");
+	    	callOperation(exp_interpreter, entryObject, "setUp");
+	    }    
+	    
 	    // Execute the operation
-	    return (RuntimeObject) exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
+	    RuntimeObject result = (RuntimeObject) exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
+	
+
+	    if(isTestCase){ 
+	    	callOperation(exp_interpreter, entryObject, "tearDown");
+	    	// retreives the failures
+	    	callOperation(exp_interpreter, entryObject, "raiseIfHasFailures");
+	    }
+	    
+	    return result;
+	
 	}
 	
 	public void launch_debug() {
