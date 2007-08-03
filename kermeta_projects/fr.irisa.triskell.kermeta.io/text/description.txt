@@ -27,17 +27,17 @@ Package io <http://io>
     Operation findInternalpackage(EString) : Package
     Operation addRequire(EString) : Require
     Operation addUsing(EString) : Using
-    Operation getRequires() : Set
+    Operation getRequires() : String<<0..*>>
     Operation importKermetaUnit(KermetaUnit, EBoolean) : void
     Operation addExternalPackage(Package) : void
-    Operation getPackages() : List
-    Operation getInternalPackages() : List
-    Operation getExternalPackages() : List
+    Operation getPackages() : Package<<0..*>>
+    Operation getInternalPackages() : Package<<0..*>>
+    Operation getExternalPackages() : Package<<0..*>>
     Operation getTypeDefinitionByName(EString) : TypeDefinition
     Operation getTypeDefinitionByQualifiedName(EString) : TypeDefinition
-    Operation getPackages(EString) : List
+    Operation getPackages(EString) : Package<<0..*>>
     Operation getInternalPackage(EString) : Package
-    Operation getExternalPackage(EString) : List
+    Operation getExternalPackage(EString) : Package<<0..*>>
     Operation print() : EString
     Operation isLoading() : EBoolean
     Operation error(EString) : void
@@ -51,6 +51,7 @@ Package io <http://io>
     Operation isWarned() : EBoolean
     Operation parsingError(ANTLRException) : void
     Operation warning(EString, EJavaObject) : void
+    Operation finalize() : void
 
   Class IBuildingState
 
