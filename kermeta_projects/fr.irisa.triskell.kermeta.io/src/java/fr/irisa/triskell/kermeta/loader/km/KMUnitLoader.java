@@ -1,6 +1,6 @@
 
 
-/*$Id: KMUnitLoader.java,v 1.5 2007-07-31 08:25:28 ftanguy Exp $
+/*$Id: KMUnitLoader.java,v 1.6 2007-08-03 07:14:39 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL
@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.DiagnosticException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -226,7 +225,7 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 	
 	private void getKermetaUnitToImport(KermetaUnit kermetaUnit, Set <KermetaUnit> list) {
 		
-		for ( String s : (Set <String>) kermetaUnit.getRequires() ) {
+		for ( String s : kermetaUnit.getRequires() ) {
 			
 			int i = s.lastIndexOf(".");
 			if ( i != -1 ) {
