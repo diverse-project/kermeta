@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.19 2007-07-27 07:12:17 ftanguy Exp $
+/* $Id: KMT2KMPass3.java,v 1.20 2007-08-03 07:30:17 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -27,6 +27,7 @@ import fr.irisa.triskell.kermeta.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.ast.DataTypeDecl;
 import fr.irisa.triskell.kermeta.ast.EnumDecl;
 import fr.irisa.triskell.kermeta.ast.EnumLiteral;
+import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor;
 import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
 import fr.irisa.triskell.kermeta.ast.Operation;
@@ -131,7 +132,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 					if (!(supertype instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
 						if  (!(supertype instanceof VirtualType)) {
 							//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' - A class can only inherit from classes and/or virtual types ("+supertype+" is neither).",(KermetaASTNode)supertypes[i]));
-							builder.error("PASS 3 : Class '"+ context.current_class.getName()+"' - A class can only inherit from classes and/or virtual types ("+supertype+" is neither).");
+							builder.error("PASS 3 : Class '"+ context.current_class.getName()+"' - A class can only inherit from classes and/or virtual types ("+supertype+" is neither).", (KermetaASTNode)supertypes[i]);
 							return false;
 						}
 					}
@@ -140,7 +141,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 						if (((fr.irisa.triskell.kermeta.language.structure.Class)tmpsts.get(a)).getTypeDefinition() 
 								== ((fr.irisa.triskell.kermeta.language.structure.Class)supertype).getTypeDefinition()) {
 							//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' - A class can only inherit once from another.",(KermetaASTNode)supertypes[i]));
-							builder.error("PASS 3 : Class '"+context.current_class.getName()+"' - A class can only inherit once from another.");
+							builder.error("PASS 3 : Class '"+context.current_class.getName()+"' - A class can only inherit once from another.", (KermetaASTNode)supertypes[i]);
 							return false;
 						}
 					}
