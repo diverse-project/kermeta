@@ -1,4 +1,4 @@
-/* $Id: GenerateJUnitTestSuite.java,v 1.3 2007-07-31 12:29:51 dvojtise Exp $
+/* $Id: GenerateJUnitTestSuite.java,v 1.4 2007-08-03 07:21:42 jmottu Exp $
  * Project : Kermeta.interpreter
  * File : GenerateJUnitTestSuite.java
  * License : GPL
@@ -25,7 +25,7 @@ public class GenerateJUnitTestSuite extends kermeta_interpreter.jutils.GenerateJ
 		String[] newfiletypes = {"kmt"};
 		folders = newfolders;
 		filetypes = newfiletypes;
-		junitfile = "test/junit/kermeta_interpreter/constraint_testcases/JunitTestSuite.java";
+		junitfile = "test/junit/kermeta_interpreter/constraint_test/JunitTestSuite.java";
 		genericmain(args);
 	}	
 }
