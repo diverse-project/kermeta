@@ -1,4 +1,4 @@
-/* $Id: ConstraintInterpreter.java,v 1.10 2007-07-24 13:47:38 ftanguy Exp $
+/* $Id: ConstraintInterpreter.java,v 1.11 2007-08-03 14:37:54 jmottu Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -68,7 +68,7 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 				
 			}
 
-			// Check the post conditions
+			// Check the pre conditions
 			for (Object next : node.getPre())
 				this.accept((Constraint)next);
 

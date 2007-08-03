@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.4 2007-08-03 14:37:51 jmottu Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -1106,6 +1106,15 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 				result += this.accept(tgt);
 				result += "." + KMTHelper.getMangledIdentifier(node.getName());
 				
+				// handle when the feature is postfixed with @pre
+				if (node.isIsAtpre()){
+					if(node.getStaticProperty() != null){
+						result += "@pre";
+					}else{
+						result += " /* only properties can be postfixed with @pre */";
+					}
+				}
+				
 				// handle the special case where there is 1 parameter, and when This
 				// parameter is a lambdaPostFix
 				//	TODO : throw an exception if type is not a LambdaExpression
@@ -1120,6 +1129,15 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 		else {
 			result += KMTHelper.getMangledIdentifier(node.getName());
+			
+			// handle when the feature is postfixed with @pre
+			if (node.isIsAtpre()){
+				if(node.getStaticProperty() != null){
+					result += "@pre";
+				}else{
+					result += " /* only properties can be postfixed with @pre */";
+				}
+			}
 			
 			// handle the special case where there is 1 parameter, and when This
 			// parameter is a lambdaPostFix
@@ -1149,6 +1167,12 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitCallVariable(CallVariable node) {
 		String result = KMTHelper.getMangledIdentifier(node.getName());
+		
+		// handle when the variable is postfixed with @pre
+		if(node.isIsAtpre()){
+			result+="@pre";
+		}
+		
 		if (node.getParameters().size()> 0) {
 			result += "(" + ppComaSeparatedNodes(node.getParameters()) + ")";
 		}

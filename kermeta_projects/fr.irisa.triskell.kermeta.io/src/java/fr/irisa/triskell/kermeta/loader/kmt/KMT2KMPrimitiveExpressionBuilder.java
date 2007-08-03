@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.18 2007-07-24 15:08:35 cfaucher Exp $
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.19 2007-08-03 14:37:51 jmottu Exp $
  * Project : Kermeta io
  * File : KMT2KMExpressionBuilder.java
  * License : EPL
@@ -46,6 +46,7 @@ import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.CallResult;
 import fr.irisa.triskell.kermeta.language.behavior.CallSuperOperation;
 import fr.irisa.triskell.kermeta.language.behavior.CallValue;
+import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 import fr.irisa.triskell.kermeta.language.behavior.Conditional;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.LambdaParameter;
@@ -297,7 +298,10 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 						boolean b = fTypeOrVarLiteral.getAtp()!=null;
 						((CallFeature)result).setIsAtpre(b);
 					}
-						
+					if (result instanceof CallVariable){
+						boolean b = fTypeOrVarLiteral.getAtp()!=null;
+						((CallVariable)result).setIsAtpre(b);
+					}	
 					builder.storeTrace(result, fTypeOrVarLiteral.getLiteral());
 					return false;
 				}
