@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.25 2007-08-03 09:23:14 ftanguy Exp $
+/* $Id: RunJunitFactory.java,v 1.26 2007-08-03 11:50:50 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -65,15 +65,18 @@ public class RunJunitFactory implements Test {
      */
     public Test addTestsForUnit(String unit_uri, boolean constraintExecution) {
 
+    	// precalculate the name of the test in the eventuality it fails before having loaded it
+    	int index  = unit_uri.lastIndexOf("/");
+    	String failedTestName = unit_uri.substring(index+1);
         try {
 			unit = IOPlugin.getDefault().loadKermetaUnit( unit_uri );
 		} catch (KermetaIOFileNotFoundException e1) {
 			e1.printStackTrace();
-			theTestCase = new FailedTestCase(unit_uri, e1);
+			theTestCase = new FailedTestCase(failedTestName, e1);
             return theTestCase;
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
-			theTestCase = new FailedTestCase(unit_uri, e);
+			theTestCase = new FailedTestCase(failedTestName, e);
             return theTestCase;
 		}
     	
@@ -86,8 +89,9 @@ public class RunJunitFactory implements Test {
             	System.err.println("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)");
             	System.out.println( KermetaUnitHelper.getWarningsAsString(unit));            	
             	System.err.println(KermetaUnitHelper.getErrorsAsString(unit));
-            	theTestCase = new FailedTestCase("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)", 
-            		new Exception(KermetaUnitHelper.getAllErrorsAsString(unit)));
+            	theTestCase = new FailedTestCase(failedTestName, 
+            		new Exception("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)" +
+            					  KermetaUnitHelper.getAllErrorsAsString(unit)));
                 return theTestCase;
             }
             
@@ -98,8 +102,9 @@ public class RunJunitFactory implements Test {
             	System.err.println("Unit " + unit.getUri() + " contains errors (ie. didn't load or constraintcheck correctly)");
             	System.out.println( KermetaUnitHelper.getAllWarningsAsString(unit));            	
             	System.err.println(KermetaUnitHelper.getAllErrorsAsString(unit));
-            	theTestCase = new FailedTestCase("Unit " + unit.getUri() + " contains errors (ie. didn't load or constraintcheck correctly)", 
-            		new Exception(KermetaUnitHelper.getAllErrorsAsString(unit)));
+            	theTestCase = new FailedTestCase(failedTestName, 
+            		new Exception("Unit " + unit.getUri() + " contains errors (ie. didn't load or constraintcheck correctly)"+
+            				KermetaUnitHelper.getAllErrorsAsString(unit)));
                 return theTestCase;
             }
             
@@ -153,7 +158,7 @@ public class RunJunitFactory implements Test {
                 if(theTestSuite.countTestCases() == 0){
                 	// No valid test in the testsuite ! => fails
                 	Exception e = new Exception("Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')");
-                	return new FailedTestCase(unit_uri, e);
+                	return new FailedTestCase(failedTestName, e);
                 }
                 return theTestSuite;
                 
@@ -169,7 +174,7 @@ public class RunJunitFactory implements Test {
             // this test will fail since we haven't succeeded to load the files
             // construct a "fake" test that simply fails and return this
             // exception
-            theTestCase = new FailedTestCase(unit_uri, e);
+            theTestCase = new FailedTestCase(failedTestName, e);
             return theTestCase;
         }
     }
