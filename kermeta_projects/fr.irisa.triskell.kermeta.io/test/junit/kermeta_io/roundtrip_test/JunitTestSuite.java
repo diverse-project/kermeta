@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.17 2007-08-01 07:23:39 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.18 2007-08-03 07:55:38 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -13,9 +13,6 @@
  * 			Do not manually modify the generated part. 
  */
 package kermeta_io.roundtrip_test; 
-
-import java.io.File;
-import java.io.FileOutputStream;
 
 import junit.framework.TestCase;
 
@@ -293,10 +290,6 @@ testkmtFile("test/roundtrip_testcases/kmt","012_testCommentAnnotations.main.kmt"
 		p.ppCompilationUnit( output.getModelingUnit() );
 		String outputContent = p.getContent();
 		
-		File file = new File("/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.io/test/roundtrip_testcases/ecore/paco.kmt");
-		FileOutputStream fos = new FileOutputStream(file);
-		fos.write(outputContent.getBytes());
-		fos.close();
 		
 		System.out.println("INPUT : ");
 	    System.out.println(inputContent);
