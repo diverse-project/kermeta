@@ -1,0 +1,24 @@
+/* $Id: $
+ * Creation date: August 2, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+
+using kermeta::standard
+
+class Main
+{
+	
+	operation main(fileName : String) : Void is do 
+		stdio.writeln("Hello world " + fileName)
+	end
+}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="kpm/actions/TypecheckDependentFile.java|kpm/actions/Typecheck.java|kpm/actions/OpenProject.java|kpm/actions/OpenKMTFile.java|kpm/actions/KMT2KM.java|kpm/actions/KMT2Ecore.java|kpm/actions/CloseProject.java|kpm/actions/AddRequireDependencies.java|kpm/actions/AddMarkers.java" kind="src" path="src"/>
+	<classpathentry kind="src" path="java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>

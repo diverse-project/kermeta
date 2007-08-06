@@ -1,0 +1,39 @@
+@mainClass "ptpr::Main" 
+@mainOperation "main"
+
+package ptpr;
+
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/Patterns4Ecore.kmt"
+
+using kermeta::utils
+using kermeta::standard
+using kermeta::persistence
+
+using ecore
+using EcoreTransformations
+
+class Main
+{
+
+    operation main(fileName : String) : Void is do 
+
+		var repository : EMFRepository init EMFRepository.new
+		var resource : Resource init repository.createResource( "platform:/resource" + fileName, "Ecore.ecore" )
+		resource.load
+
+		var p : EPackage
+		p ?= resource.detect{ elem | elem.isInstanceOf(EPackage) }
+
+		var p4e : Patterns4Ecore init Patterns4Ecore.new
+		p4e.initialize
+		
+		p4e.addVisitor( p, void )
+
+		var resourceToSave : Resource init repository.createResource( "platform:/resource" + fileName + ".visitor.ecore", "Ecore.ecore" )
+		resourceToSave.add ( p )
+		resourceToSave.save
+		
+
+    end
+    
+}
