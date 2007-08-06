@@ -1,4 +1,4 @@
-/*$Id: AddMarkers.java,v 1.11 2007-08-01 07:24:09 ftanguy Exp $
+/*$Id: AddMarkers.java,v 1.1 2007-08-06 14:32:51 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
@@ -144,7 +144,7 @@ public class AddMarkers implements IAction, Interest {
 			 * 
 			 * 
 			 */
-			else {
+			if ( kermetaUnit.isErrored() || kermetaUnit.isWarned() ) {
 				KermetaMarkersHelper.createMarkers(file, kermetaUnit);
 				markedUnits.clear();
 				try {

@@ -41,5 +41,12 @@
          point="fr.irisa.triskell.kermeta.kpm.javaAction">
       <Action class="fr.irisa.triskell.kermeta.kpm.actions.transformation.Ecore2KMT"/>
    </extension>
+   <extension
+         id="kermeta.helloWorld"
+         point="fr.irisa.triskell.kermeta.kpm.kermetaAction">
+      <Action
+            File="src/kermeta/printerApplication.kmt">
+      </Action>
+   </extension>
 
 </plugin>

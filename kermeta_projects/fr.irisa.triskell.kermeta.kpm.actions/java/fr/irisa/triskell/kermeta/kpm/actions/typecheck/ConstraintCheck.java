@@ -1,6 +1,6 @@
 
 
-/*$Id: ConstraintCheck.java,v 1.5 2007-07-24 13:46:35 ftanguy Exp $
+/*$Id: ConstraintCheck.java,v 1.1 2007-08-06 14:32:51 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	ConstraintCheck.java
 * License : EPL

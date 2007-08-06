@@ -1,4 +1,4 @@
-/*$Id: KMT2KM.java,v 1.5 2007-07-20 15:09:26 ftanguy Exp $
+/*$Id: KMT2KM.java,v 1.1 2007-08-06 14:32:51 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL

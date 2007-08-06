@@ -1,4 +1,4 @@
-/*$Id: RemoveDependentDependencies.java,v 1.6 2007-07-20 15:09:26 ftanguy Exp $
+/*$Id: RemoveDependentDependencies.java,v 1.1 2007-08-06 14:32:51 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	RemoveDependentDependencies.java
 * License : EPL

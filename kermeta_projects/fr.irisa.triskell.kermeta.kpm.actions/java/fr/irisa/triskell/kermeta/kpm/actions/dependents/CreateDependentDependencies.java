@@ -1,4 +1,4 @@
-/*$Id: CreateDependentDependencies.java,v 1.10 2007-07-24 13:46:35 ftanguy Exp $
+/*$Id: CreateDependentDependencies.java,v 1.1 2007-08-06 14:32:51 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	CreateDependentDependencies.java
 * License : EPL
