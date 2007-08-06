@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.11 2007-08-06 15:37:59 jmottu Exp $
+/* $Id: JunitTestSuite.java,v 1.12 2007-08-06 16:16:35 jmottu Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -76,6 +76,11 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
+
+
+
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_003_associations() throws Exception {
 testvalidFile("test/constraintchecker_tests/valid","003_associations.kmt" );
@@ -87,6 +92,18 @@ testvalidFile("test/constraintchecker_tests/valid","005_operations.kmt" );
 
 public void testvalid_005_operations_dep() throws Exception {
 testvalidFile("test/constraintchecker_tests/valid","005_operations_dep.kmt" );
+}
+
+public void testvalid_006_constraint_type_boolean_valid1() throws Exception {
+testvalidFile("test/constraintchecker_tests/valid","006_constraint_type_boolean_valid1.kmt" );
+}
+
+public void testvalid_006_constraint_type_boolean_valid2() throws Exception {
+testvalidFile("test/constraintchecker_tests/valid","006_constraint_type_boolean_valid2.kmt" );
+}
+
+public void testvalid_006_constraint_type_boolean_valid3() throws Exception {
+testvalidFile("test/constraintchecker_tests/valid","006_constraint_type_boolean_valid3.kmt" );
 }
 
 public void testinvalid_001_cyclicinheritance_01() throws Exception {
@@ -235,6 +252,42 @@ testinvalidFile("test/constraintchecker_tests/invalid","026_atpre_feature_comple
 
 public void testinvalid_026_atpre_feature_complex_test_invalid5() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","026_atpre_feature_complex_test_invalid5.kmt" );
+}
+
+public void testinvalid_027_constraint_type_boolean1() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","027_constraint_type_boolean1.kmt" );
+}
+
+public void testinvalid_027_constraint_type_boolean2() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","027_constraint_type_boolean2.kmt" );
+}
+
+public void testinvalid_027_constraint_type_boolean3() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","027_constraint_type_boolean3.kmt" );
+}
+
+public void testinvalid_027_constraint_type_boolean4() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","027_constraint_type_boolean4.kmt" );
+}
+
+public void testinvalid_027_constraint_type_boolean5() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","027_constraint_type_boolean5.kmt" );
+}
+
+public void testinvalid_027_constraint_type_boolean6() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","027_constraint_type_boolean6.kmt" );
+}
+
+public void testinvalid_027_constraint_type_boolean7() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","027_constraint_type_boolean7.kmt" );
+}
+
+public void testinvalid_027_constraint_type_boolean8() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","027_constraint_type_boolean8.kmt" );
+}
+
+public void testinvalid_027_constraint_type_boolean9() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","027_constraint_type_boolean9.kmt" );
 }
 
 /*** END GENERATED TESTS ***/

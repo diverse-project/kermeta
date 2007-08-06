@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.17 2007-08-02 13:44:46 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.18 2007-08-06 16:16:35 jmottu Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -236,7 +236,7 @@ public class KermetaTypeChecker {
     		context.init(((Operation)c.eContainer()).getOwningClass(),(Operation) c.eContainer());
     	
            ExpressionChecker.typeCheckExpression(c.getBody(), unit, context);
-           if(!getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.BooleanType)) {
+           if(getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.VoidType) || !(getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.BooleanType))) {
    				unit.error("TYPE-CHECKER : The type of a constraint should be Boolean", c.getBody());
    		    }
            
