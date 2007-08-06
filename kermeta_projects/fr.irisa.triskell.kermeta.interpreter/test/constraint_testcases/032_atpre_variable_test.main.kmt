@@ -48,9 +48,11 @@ class Main inherits TestCase
 	post lapost1 is do		stdio.writeln("1, should be 'apres' :" + variable.name)
 		assert(variable.name == "apres")
 		true	end
+	/* test can not be done since variable.name@pre is not allowed by the constraint checker
 	post lapost2 is do		stdio.writeln("2, should be in theory 'avant' but kermeta can only insure that it is 'avant', note that it is ok because 'variable' has not been affected with an other object:" + variable.name@pre)
 		assert(variable.name@pre == "avant")
 		true	end
+	*/
 	post lapost3 is do		stdio.writeln("3, should be 'apres' :" + variable@pre.name)
 		assert(variable@pre.name == "apres")
 		true	end
@@ -60,9 +62,11 @@ class Main inherits TestCase
 	post lapost5 is do		stdio.writeln("5, should be 'apres' :" + variable2.name)
 		assert(variable2.name == "apres")
 		true	end
+	/* test can not be done since variable2.name@pre is not allowed by the constraint checker
 	post lapost6 is do		stdio.writeln("6, should be in theory 'avant' but kermeta can only insure that it is 'before' :" + variable2.name@pre)
 		assert(variable2.name@pre == "before")
 		true	end
+	*/
 	post lapost7 is do		stdio.writeln("7, should be 'after' :" + variable2@pre.name)
 		assert(variable2@pre.name == "after")
 		true	end
@@ -77,8 +81,11 @@ class Main inherits TestCase
 		true	end
 	is do
 		stdio.writeln("a, should be 'avant' :" + variable.name)
+		assert(variable.name == "avant")
 		stdio.writeln("b, should be 'before' :" + variable2.name)		
+		assert(variable2.name == "before")
 		stdio.writeln("c, should be 'antes' :" + variablename)
+		assert(variablename == "antes")
 		
 		variable.name := "apres"
 		variable2.name := "after"
@@ -86,8 +93,11 @@ class Main inherits TestCase
 		variablename := "despues"
 		
 		stdio.writeln("e, should be 'apres' :" + variable.name)
+		assert(variable.name == "apres")
 		stdio.writeln("f, should be 'apres' :" + variable2.name)		
+		assert(variable2.name == "apres")
 		stdio.writeln("g, should be 'despues' :" + variablename)
+		assert(variablename == "despues")
 	end
 	
 }

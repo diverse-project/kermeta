@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.6 2007-08-03 14:37:54 jmottu Exp $
+/* $Id: JunitTestSuite.java,v 1.7 2007-08-06 15:38:02 jmottu Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -120,9 +120,11 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/constraint_testcases","031_testInvWithAspects.main.kmt" );
 
-		testWithFile("test/constraint_testcases","032_atpre_feature_test.main.kmt" );
+		testWithFile("test/constraint_testcases","032_atpre_variable_test.main.kmt" );
 
-		testWithFile("test/constraint_testcases","033_atpre_variable_test.main.kmt" );
+		testWithFile("test/constraint_testcases","033_atpre_feature_test.main.kmt" );
+
+		testWithFile("test/constraint_testcases","034_atpre_feature_complex_test.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment

@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.10 2007-07-24 13:46:47 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.11 2007-08-06 15:37:59 jmottu Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -75,6 +75,7 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_003_associations() throws Exception {
 testvalidFile("test/constraintchecker_tests/valid","003_associations.kmt" );
@@ -88,10 +89,6 @@ public void testvalid_005_operations_dep() throws Exception {
 testvalidFile("test/constraintchecker_tests/valid","005_operations_dep.kmt" );
 }
 
-public void testinvalid_005_superoperations_parammismatch1_inv() throws Exception {
-testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch1_inv.kmt" );
-}
-
 public void testinvalid_001_cyclicinheritance_01() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","001_cyclicinheritance_01.kmt" );
 }
@@ -102,42 +99,6 @@ testinvalidFile("test/constraintchecker_tests/invalid","001_cyclicinheritance_02
 
 public void testinvalid_001_cyclicinheritance_03() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","001_cyclicinheritance_03.kmt" );
-}
-
-public void testinvalid_004_cyclicCompositions_01() throws Exception {
-testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_01.kmt" );
-}
-
-public void testinvalid_004_cyclicCompositions_02() throws Exception {
-testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_02.kmt" );
-}
-
-public void testinvalid_004_cyclicCompositions_03() throws Exception {
-testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_03.kmt" );
-}
-
-public void testinvalid_004_cyclicCompositions_04() throws Exception {
-testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_04.kmt" );
-}
-
-public void testinvalid_004_cyclicCompositions_05() throws Exception {
-testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_05.kmt" );
-}
-
-public void testinvalid_005_superoperations_parammismatch3_inv() throws Exception {
-testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch3_inv.kmt" );
-}
-
-public void testinvalid_006_inheritedproperty2_inv() throws Exception {
-testinvalidFile("test/constraintchecker_tests/invalid","006_inheritedproperty2_inv.kmt" );
-}
-
-public void testinvalid_005_superoperations_parammismatch5_inv() throws Exception {
-testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch5_inv.kmt" );
-}
-
-public void testinvalid_006_inheritedproperty4_inv() throws Exception {
-testinvalidFile("test/constraintchecker_tests/invalid","006_inheritedproperty4_inv.kmt" );
 }
 
 public void testinvalid_003_associations_01() throws Exception {
@@ -168,16 +129,60 @@ public void testinvalid_003_associations_07() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","003_associations_07.kmt" );
 }
 
+public void testinvalid_004_cyclicCompositions_01() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_01.kmt" );
+}
+
+public void testinvalid_004_cyclicCompositions_02() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_02.kmt" );
+}
+
+public void testinvalid_004_cyclicCompositions_03() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_03.kmt" );
+}
+
+public void testinvalid_004_cyclicCompositions_04() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_04.kmt" );
+}
+
+public void testinvalid_004_cyclicCompositions_05() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_05.kmt" );
+}
+
+public void testinvalid_005_superoperations_parammismatch1_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch1_inv.kmt" );
+}
+
 public void testinvalid_005_superoperations_parammismatch2_inv() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch2_inv.kmt" );
+}
+
+public void testinvalid_005_superoperations_parammismatch3_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch3_inv.kmt" );
+}
+
+public void testinvalid_005_superoperations_parammismatch4_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch4_inv.kmt" );
+}
+
+public void testinvalid_005_superoperations_parammismatch5_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch5_inv.kmt" );
 }
 
 public void testinvalid_006_inheritedproperty1_inv() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","006_inheritedproperty1_inv.kmt" );
 }
 
-public void testinvalid_005_superoperations_parammismatch4_inv() throws Exception {
-testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch4_inv.kmt" );
+public void testinvalid_006_inheritedproperty2_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","006_inheritedproperty2_inv.kmt" );
+}
+
+public void testinvalid_006_inheritedproperty3_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","006_inheritedproperty3_inv.kmt" );
+}
+
+public void testinvalid_006_inheritedproperty4_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","006_inheritedproperty4_inv.kmt" );
 }
 
 public void testinvalid_025_weaving_in_kermeta_aspect1() throws Exception {
@@ -212,8 +217,24 @@ public void testinvalid_025_weaving_in_kermeta_aspect8() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","025_weaving_in_kermeta_aspect8.kmt" );
 }
 
-public void testinvalid_006_inheritedproperty3_inv() throws Exception {
-testinvalidFile("test/constraintchecker_tests/invalid","006_inheritedproperty3_inv.kmt" );
+public void testinvalid_026_atpre_feature_complex_test_invalid1() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","026_atpre_feature_complex_test_invalid1.kmt" );
+}
+
+public void testinvalid_026_atpre_feature_complex_test_invalid2() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","026_atpre_feature_complex_test_invalid2.kmt" );
+}
+
+public void testinvalid_026_atpre_feature_complex_test_invalid3() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","026_atpre_feature_complex_test_invalid3.kmt" );
+}
+
+public void testinvalid_026_atpre_feature_complex_test_invalid4() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","026_atpre_feature_complex_test_invalid4.kmt" );
+}
+
+public void testinvalid_026_atpre_feature_complex_test_invalid5() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","026_atpre_feature_complex_test_invalid5.kmt" );
 }
 
 /*** END GENERATED TESTS ***/

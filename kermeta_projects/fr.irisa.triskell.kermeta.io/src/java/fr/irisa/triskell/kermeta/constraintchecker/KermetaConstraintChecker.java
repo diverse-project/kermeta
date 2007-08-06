@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.10 2007-07-24 13:46:46 ftanguy Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.11 2007-08-06 15:37:59 jmottu Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -19,7 +19,9 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.KermetaUnit;
 
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
@@ -187,7 +189,19 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 		if (node.isIsAtpre() && !isContainerPost(node))
 			addProblem(ATPRE_IN_POST_ERROR, node);
 		if (node.isIsAtpre() && node.getStaticProperty() == null)
-			addProblem(ATPRE_PROPERTY_ERROR, node);	
+			addProblem(ATPRE_PROPERTY_ERROR, node);
+		
+		if (node.isIsAtpre()){
+			boolean nodetargetatpre_or_null = true;
+			if (node.getTarget() instanceof CallFeature){
+				nodetargetatpre_or_null = ((CallFeature)node.getTarget()).isIsAtpre();
+			}else if (node.getTarget() instanceof CallVariable){
+				nodetargetatpre_or_null = ((CallVariable)node.getTarget()).isIsAtpre();
+			}
+			if(!nodetargetatpre_or_null){
+				addProblem("It is not possible to anticipate the value of '"+((CallExpression)node.getTarget()).getName()+"', you must postfix '"+((CallExpression)node.getTarget()).getName()+"' with @pre, or change your expression.",node);
+			}
+		}
 		return super.visitCallFeature(node);
 	}
 	
@@ -237,6 +251,13 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	public void addProblem(String msg, fr.irisa.triskell.kermeta.language.structure.Object node)
 	{// have to make a choice
 		if (builder!=null)	builder.error(AbstractChecker.ERROR_TYPE + ": " + msg, node);
+		else messages.add(AbstractChecker.ERROR_TYPE + ": " + msg);
+	}
+	
+	/** A shortcut to add messages on the builder kermeta unit */
+	public void addWarning(String msg, fr.irisa.triskell.kermeta.language.structure.Object node)
+	{// have to make a choice
+		if (builder!=null)	builder.warning(AbstractChecker.ERROR_TYPE + ": " + msg, node);
 		else messages.add(AbstractChecker.ERROR_TYPE + ": " + msg);
 	}
 	
