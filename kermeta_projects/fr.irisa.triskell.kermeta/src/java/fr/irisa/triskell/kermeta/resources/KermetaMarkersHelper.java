@@ -1,4 +1,4 @@
-/*$Id: KermetaMarkersHelper.java,v 1.6 2007-07-24 13:46:39 ftanguy Exp $
+/*$Id: KermetaMarkersHelper.java,v 1.7 2007-08-07 13:29:06 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	KermetaMarkersHelper.java
 * License : EPL
@@ -261,7 +261,7 @@ public class KermetaMarkersHelper {
     	
         try
         {	
-        	if ( findMarker(file, message) == null ) {
+        	if ( (file != null) && findMarker(file, message) == null ) {
         		MarkerUtilities.createMarker(file, map, getMarkerType());
         	}
         }
@@ -285,7 +285,7 @@ public class KermetaMarkersHelper {
 
     static public void removeMarker( IResource resource, String message ) {
 		try {
-			if ( resource.exists() ) {
+			if ( (resource != null) && resource.exists() ) {
 				IMarker marker = findMarker(resource, message);
 				if ( marker != null )
 					marker.delete();
