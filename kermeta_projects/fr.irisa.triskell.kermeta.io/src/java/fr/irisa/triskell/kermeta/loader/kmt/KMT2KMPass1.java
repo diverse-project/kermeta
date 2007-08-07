@@ -1,7 +1,7 @@
-/* $Id: KMT2KMPass1.java,v 1.13 2007-07-26 13:49:59 ftanguy Exp $
+/* $Id: KMT2KMPass1.java,v 1.14 2007-08-07 12:16:19 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Feb 2, 2005
@@ -147,14 +147,14 @@ public class KMT2KMPass1 extends KMT2KMPass {
 				try {
 					currentImportedUnit = IOPlugin.getDefault().getKermetaUnit( fileURI );
 					if ( currentImportedUnit.isErrored() )
-						builder.error("The file " + fileURI + " is errored : " + KermetaUnitHelper.getAllErrorsAsString(currentImportedUnit), importStmt);
+						builder.error("The file " + fileURI + " contains error(s) : " + KermetaUnitHelper.getAllErrorsAsString(currentImportedUnit), importStmt);
 					currentImportedUnit.setNeedASTTraces(true);
 				} catch ( URIMalformedException exception ) {
 					builder.error( exception.getMessage() );
 				}
 			} else
 				if ( error )
-					builder.error("The file " + fileURI + " does not exist", importStmt);
+					builder.error("The file " + fileURI + " doesn't exist", importStmt);
 
 		}
 		
