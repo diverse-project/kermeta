@@ -1,4 +1,4 @@
-/* $Id: ecore.kmt,v 1.11 2007-05-28 20:33:43 barais Exp $
+/* $Id: ecore.kmt,v 1.12 2007-08-07 13:29:41 ftanguy Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -122,7 +122,7 @@ class EClass
 			//TODO: implement setter for derived property eAllSuperTypes
 			raise kermeta::exceptions::NotImplementedException.new 
 		end
-	property eIDAttribute : EAttribute
+	/*property eIDAttribute : EAttribute
 		getter is do
 			//TODO: implement getter for derived property eIDAttribute
 			raise kermeta::exceptions::NotImplementedException.new 
@@ -130,7 +130,7 @@ class EClass
 		setter is do
 			//TODO: implement setter for derived property eIDAttribute
 			raise kermeta::exceptions::NotImplementedException.new 
-		end
+		end*/
 
 	operation isSuperTypeOf(someClass : EClass) : EBoolean is do
 		result := someClass.eAllSuperTypes.detect { t | t == self } != void
@@ -139,7 +139,7 @@ class EClass
 	operation getFeatureCount() : EInt is do
 		result := self.eAllStructuralFeatures.size
 	end
-	
+	 
 	/** Get a structural feature among AllStructuralFeatures */
 	/*operation getEStructuralFeature(featureID : EInt) : EStructuralFeature is do
 		result := self.eAllStructuralFeatures.detect{ e | e.getFeatureID() == featureID }
@@ -180,7 +180,7 @@ abstract class EClassifier
 			//TODO: implement getter for derived property defaultValue
 			raise kermeta::exceptions::NotImplementedException.new 
 		end
-	reference ePackage : EPackage#eClassifiers
+	
 	operation isInstance(object : EJavaObject) : EBoolean is do
 		raise kermeta::exceptions::NotImplementedException.new
 	end
