@@ -1,4 +1,4 @@
-/* $Id: GenerateJUnitTestSuite.java,v 1.2 2007-07-20 15:07:49 ftanguy Exp $
+/* $Id: GenerateJUnitTestSuite.java,v 1.3 2007-08-07 12:00:58 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : GenerateJUnitTestSuite.java
  * License : GPL
@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 
 /**
@@ -90,6 +91,8 @@ public class GenerateJUnitTestSuite {
 	public static String generateForDirectory(File dir) {
 		String result = "";
 		File[] files = dir.listFiles();
+		// Sort with help of Collections API.
+	    Arrays.sort(files);
 		for (int i=0; i<files.length; i++) {
 			//System.out.println("Processing file " +files[i].getName() );
 			if (files[i].isFile() && files[i].getName().indexOf('.') > 0

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 /*
  * Created on 16 f�vr. 2005
@@ -81,6 +82,8 @@ public class GenerateJUnitTestSuite {
 	public static String generateForDirectory(File dir) {
 		String result = "";
 		File[] files = dir.listFiles();
+		// Sort with help of Collections API.
+	    Arrays.sort(files);
 		for (int i=0; i<files.length; i++) {
 			//System.out.println("Processing file " +files[i].getName() );
 			if (files[i].isFile() && files[i].getName().indexOf('.') > 0) {
