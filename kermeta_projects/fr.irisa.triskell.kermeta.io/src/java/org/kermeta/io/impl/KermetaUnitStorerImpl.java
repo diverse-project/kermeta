@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.12 2007-08-07 13:35:21 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.13 2007-08-07 15:05:46 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -38,6 +38,7 @@ import fr.irisa.triskell.kermeta.loader.java.JavaBuildingState;
 import fr.irisa.triskell.kermeta.loader.java.JavaKermetaUnitLoader;
 import fr.irisa.triskell.kermeta.loader.km.KMUnitLoader;
 import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
+import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoader;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
@@ -230,6 +231,8 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 						if ( qualifiedName1.equals(qualifiedName2) )
 							importer.getAspects().get(baseClass).remove( typeDefinition );
 					}
+					AbstractBuildingState state = (AbstractBuildingState) importer.getBuildingState();
+					state.aspectsDone = false;
 				}
 			
 			}

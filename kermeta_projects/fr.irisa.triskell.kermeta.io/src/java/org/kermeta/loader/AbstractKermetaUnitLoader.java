@@ -1,6 +1,6 @@
 
 
-/*$Id: AbstractKermetaUnitLoader.java,v 1.6 2007-08-07 13:35:21 ftanguy Exp $
+/*$Id: AbstractKermetaUnitLoader.java,v 1.7 2007-08-07 15:05:46 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitLoader.java
 * License : EPL
@@ -74,8 +74,7 @@ public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 		
 	}
 	
-	public void constructAspectsLists(KermetaUnit kermetaUnit) {
-		
+	public void constructAspectsLists(KermetaUnit kermetaUnit) {	
 		for ( TypeDefinition t : KermetaUnitHelper.getInternalTypeDefinitions(kermetaUnit) ) {
 			EList<TypeDefinition> l = KermetaUnitHelper.getAspects(kermetaUnit, t);
 			if ( ! l.isEmpty() )

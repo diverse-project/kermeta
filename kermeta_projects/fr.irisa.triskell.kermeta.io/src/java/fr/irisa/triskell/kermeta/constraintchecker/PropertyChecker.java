@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.8 2007-08-07 13:35:22 ftanguy Exp $
+/* $Id: PropertyChecker.java,v 1.9 2007-08-07 15:05:46 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -95,6 +95,7 @@ public class PropertyChecker extends AbstractChecker {
 		boolean result = true;
 		int number_of_duplicate = 1;
 		
+		KermetaUnitHelper.getKermetaUnitFromObject( classDefinition );
 		List <Property> props = ClassDefinitionHelper.getAllProperties(classDefinition);
 		for (Property p : props) {
 			if ( (p != property) && (p.getName().equals(property.getName())) ) {
@@ -110,10 +111,6 @@ public class PropertyChecker extends AbstractChecker {
 						ClassDefinition cd1 = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) property.getType()).getTypeDefinition();
 						ClassDefinition cd2 = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) p.getType()).getTypeDefinition();
 						
-					/*	KermetaUnitHelper.getKermetaUnitFromObject(cd2)
-						KermetaUnitHelper.getKermetaUnitFromObject(cd1.getBaseAspects().get(0))*/
-						
-						
 						if ( ! ClassDefinitionHelper.getAllBaseClasses(cd1).contains(cd2) )
 							error = true;
 					} 
@@ -128,7 +125,9 @@ public class PropertyChecker extends AbstractChecker {
 						addProblem(ERROR, message, property);
 
 					}
-				} else if (p.getName().equals(property.getName())) {
+				} else if ( ! ClassDefinitionHelper.getAllBaseClasses(possibleBaseClass).contains(classDefinition) 
+						&& p.getName().equals(property.getName())) {
+				
 					number_of_duplicate += 1;
 				}
 			

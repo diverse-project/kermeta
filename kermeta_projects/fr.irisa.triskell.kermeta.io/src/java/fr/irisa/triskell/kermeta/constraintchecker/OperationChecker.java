@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.15 2007-07-31 09:08:28 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.16 2007-08-07 15:05:46 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -211,7 +211,8 @@ public class OperationChecker extends AbstractChecker {
 											
 					// if superOperation is null, perhaps it however exists in the implicit inherited Object?
 					// ex: Boolean does not inherit explicitely Object.
-					if (!NamedElementHelper.getQualifiedName(op.getOwningClass()).equals("kermeta::reflection::Object")) {
+					if ( ! ClassDefinitionHelper.getAllBaseClasses(possibleBaseClass).contains(classDefinition) 
+							&& !NamedElementHelper.getQualifiedName(op.getOwningClass()).equals("kermeta::reflection::Object")) {
 						addProblem(ERROR, "Class '"+classDefinition.getName()+"' " +
 								"duplicate definition of operation '"+operation.getName()+"'.",operation);
 						return false;
