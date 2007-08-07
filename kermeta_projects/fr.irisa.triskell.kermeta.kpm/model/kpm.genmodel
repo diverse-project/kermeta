@@ -160,7 +160,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Unit/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Unit/lastTimeModified"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Unit/value"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Unit/dependencies"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference kpm.ecore#//Unit/dependencies"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Unit/dependents"/>
       <genOperations ecoreOperation="kpm.ecore#//Unit/changed"/>
       <genOperations ecoreOperation="kpm.ecore#//Unit/receiveEvent">

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutImpl.java,v 1.6 2007-08-02 13:07:40 ftanguy Exp $
+ * $Id: OutImpl.java,v 1.7 2007-08-07 13:31:49 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -201,10 +201,10 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 */
 	public void process(Unit unit, IProgressMonitor monitor, Map<String, Object> args) {
 		
-		if ( evaluate(unit) ) {
-		
+		if ( evaluate(unit) && (getAction() != null) ) {
+			
 			IExtension extension = Platform.getExtensionRegistry().getExtension(getAction().getExtensionPoint());
-
+			
 			if ( extension != null ) {
 			
 				String extensionPointName = extension.getExtensionPointUniqueIdentifier();
