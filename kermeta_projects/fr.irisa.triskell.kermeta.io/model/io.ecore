@@ -100,6 +100,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tracer" eType="#//Tracer"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="constraintChecked" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aspects" transient="true">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+        <eTypeArguments eClassifier="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition"/>
+        <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+          <eTypeArguments eClassifier="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition"/>
+        </eTypeArguments>
+      </eGenericType>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IBuildingState" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="KermetaUnitStorer">
