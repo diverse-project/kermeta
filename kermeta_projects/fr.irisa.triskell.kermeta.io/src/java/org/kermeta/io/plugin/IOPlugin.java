@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.9 2007-08-07 13:35:22 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.10 2007-08-07 15:47:06 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -99,7 +99,7 @@ public class IOPlugin extends AbstractUIPlugin {
 		
 		if ( ! INITIALIZED ) {
 			
-			kermetaUnitHelper = new org.kermeta.io.util2.KermetaUnitHelper( storer );
+			//kermetaUnitHelper = new org.kermeta.io.util2.KermetaUnitHelper( storer );
 			KmPackageImpl.init();
 			
 			if ( LOCAL_USE ) {
@@ -127,7 +127,6 @@ public class IOPlugin extends AbstractUIPlugin {
 						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( framework );
 						constraintchecker.checkUnit();
 					}				
-					
 					
 					ecore = loadEcore( ECORE_URI );
 										
@@ -224,24 +223,28 @@ public class IOPlugin extends AbstractUIPlugin {
 	 * @throws URIMalformedException
 	 */
 	public KermetaUnit loadKermetaUnit( String uri, String content ) throws KermetaIOFileNotFoundException, URIMalformedException {
+		KermetaUnit kermetaUnit = null;
+		synchronized ( IOPlugin.class ) {
+			System.err.println( "loading " + uri);
+			if ( ! LOCAL_USE ) {
+			
+				if ( Runtime.getRuntime().freeMemory() < 1000000 ) {
+					KermetaUnit.internalLog.info("Unloading all Kermeta Unit but the framework.km.");
+					List<KermetaUnit> list = new ArrayList <KermetaUnit> ( (List<KermetaUnit>) storer.getKermetaUnits() );
+					for ( KermetaUnit unit : list ) {
+						if ( ! unit.isFramework() && (unit != ecore) )
+							storer.unload( unit.getUri() );
+					}
 		
-		if ( ! LOCAL_USE ) {
-		
-			if ( Runtime.getRuntime().freeMemory() < 1000000 ) {
-				KermetaUnit.internalLog.info("Unloading all Kermeta Unit but the framework.km.");
-				List<KermetaUnit> list = new ArrayList <KermetaUnit> ( (List<KermetaUnit>) storer.getKermetaUnits() );
-				for ( KermetaUnit unit : list ) {
-					if ( ! unit.isFramework() && (unit != ecore) )
-						storer.unload( unit.getUri() );
 				}
-	
+			
 			}
-		
+			
+			//KermetaUnit kermetaUnit = kermetaUnitHelper.loadFile(uri, content);
+			kermetaUnit = getKermetaUnit( uri );
+			storer.load( uri, content );
+			System.err.println( "loading " + uri + " done");
 		}
-		
-		KermetaUnit kermetaUnit = kermetaUnitHelper.loadFile(uri, content);
-		//KermetaUnit kermetaUnit = getKermetaUnit( uri );
-		//storer.load( uri, content );
 		return kermetaUnit;
 
 	}
@@ -264,7 +267,11 @@ public class IOPlugin extends AbstractUIPlugin {
 	}
 	
 	public void unload( String uri ) {
-		storer.unload(uri);
+		synchronized ( IOPlugin.class ) {
+			System.err.println( "unloading " + uri);
+			storer.unload(uri);
+			System.err.println( "unloading " + uri + " done");
+		}
 	}
 	
 	public void unload(IFile file) {
@@ -289,7 +296,7 @@ public class IOPlugin extends AbstractUIPlugin {
 		return s;
 	}
 	
-	private org.kermeta.io.util2.KermetaUnitHelper kermetaUnitHelper;
+	//private org.kermeta.io.util2.KermetaUnitHelper kermetaUnitHelper;
 	
 }
 

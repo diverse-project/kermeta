@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.19 2007-08-07 13:35:21 ftanguy Exp $
+/* $Id: KermetaTypeChecker.java,v 1.20 2007-08-07 15:47:06 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -131,22 +131,23 @@ public class KermetaTypeChecker {
      * of a kermeta unit
      */
     public void checkUnit() {		
-    	
-    	internalLog.info("Typechecking " + unit.getUri());
-    	if ( ! unit.isTypeChecked() && ! unit.isErrored() ) {
-    		internalOperation = true;
-    		checkPackages( unit.getInternalPackages() );
-    		/*internalOperation = false;
-    		checkPackages( unit.getExternalPackages() );*/
-    		unit.setTypeChecked( true );
-    	}
-    	
-    	for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(unit) ) {
-    		if ( ! importedUnit.isTypeChecked() ) {
-    			KermetaTypeChecker t = new KermetaTypeChecker(importedUnit);
-    			t.checkUnit();
-    		}
-    	}
+    	synchronized ( KermetaTypeChecker.class ) {
+    		internalLog.info("Typechecking " + unit.getUri());
+    		if ( ! unit.isTypeChecked() && ! unit.isErrored() ) {
+    			internalOperation = true;
+	    		checkPackages( unit.getInternalPackages() );
+	    		/*internalOperation = false;
+	    		checkPackages( unit.getExternalPackages() );*/
+	    		unit.setTypeChecked( true );
+	    	}
+	    	
+	    	for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(unit) ) {
+	    		if ( ! importedUnit.isTypeChecked() ) {
+	    			KermetaTypeChecker t = new KermetaTypeChecker(importedUnit);
+	    			t.checkUnit();
+	    		}
+	    	}
+	    }
     }
     
 	/** 

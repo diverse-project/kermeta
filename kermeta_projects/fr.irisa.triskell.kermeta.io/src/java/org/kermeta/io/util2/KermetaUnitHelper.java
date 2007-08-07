@@ -29,6 +29,7 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
  * @author paco
  *
  */
+@Deprecated
 public class KermetaUnitHelper {
 	
 	
