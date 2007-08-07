@@ -1,4 +1,4 @@
-/* $Id: EditorCompletion.java,v 1.23 2007-08-02 15:17:44 ftanguy Exp $
+/* $Id: EditorCompletion.java,v 1.24 2007-08-07 13:30:49 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorCompletion.java
 * License : EPL
@@ -162,16 +162,24 @@ public class EditorCompletion implements IContentAssistProcessor {
 							}
 						}
 						
-				        for ( Package p : (List<Package>) kermetaUnit.getPackages() ) {
-				            for (Object next: p.getOwnedTypeDefinition()) {
-				                TypeDefinition td = (TypeDefinition)next;
-				                CompletionItem ci = new NamedElementCompletionItem(td);
-				                if (ci.getCompletionText().toLowerCase().startsWith( text.toLowerCase()) )
-				                    proposals.add(ci.getCompletionProposal(trueOffset, text.length() ));
+						List<String> qualifiedNames = new ArrayList<String> ();
+				        for ( Package p : kermetaUnit.getPackages() ) {
+				            for (TypeDefinition td: p.getOwnedTypeDefinition()) {
+				                String qualifiedName = NamedElementHelper.getQualifiedName(td);
+				                if ( ! qualifiedNames.contains(qualifiedName) ) {
+				                	qualifiedNames.add(qualifiedName);
+				                	CompletionItem ci = new NamedElementCompletionItem(td);
+				                	if (ci.getCompletionText().toLowerCase().startsWith( text.toLowerCase()) )
+				                		proposals.add(ci.getCompletionProposal(trueOffset, text.length() ));
+				                }
 				            }
-				            CompletionItem ci = new NamedElementCompletionItem(p);
-				            if (ci.getCompletionText().toLowerCase().startsWith(text.toLowerCase()))
-				                 proposals.add(ci.getCompletionProposal(trueOffset, text.length() ));
+			                String qualifiedName = NamedElementHelper.getQualifiedName(p);
+			                if ( ! qualifiedNames.contains(qualifiedName) ) {
+			                	qualifiedNames.add(qualifiedName);
+			                	CompletionItem ci = new NamedElementCompletionItem(p);
+			                	if (ci.getCompletionText().toLowerCase().startsWith(text.toLowerCase()))
+			                		proposals.add(ci.getCompletionProposal(trueOffset, text.length() ));
+			                }
 				        }
 				    	Collections.sort(proposals, cpCmp);
 						
