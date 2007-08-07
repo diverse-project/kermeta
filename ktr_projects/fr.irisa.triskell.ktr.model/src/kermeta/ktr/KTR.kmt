@@ -26,8 +26,8 @@ using ecore
 class InterpretationPatternModel {
 	/** All InterpretationRules must have a distinct name */
 	inv rulesName is
-		rules.each{r1 |
-			not rules.exists{r2 | r1 != r2 and r1.name == r2.name}
+		not rules.exists{r1 |
+			rules.exists{r2 | r1 != r2 and r1.name == r2.name}
 		}
 
 	/** Name of the Interpretation model */
