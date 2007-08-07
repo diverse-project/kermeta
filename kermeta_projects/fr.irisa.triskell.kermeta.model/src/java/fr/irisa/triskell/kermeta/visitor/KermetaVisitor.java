@@ -1,19 +1,16 @@
 /*
  * This code has been generated to visit an ecore model
- * Creation date: Tue Jul 17 11:27:16 CEST 2007
+ * Creation date: Tue Aug 07 10:28:02 CEST 2007
  * Template Created on 7 f�vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 package fr.irisa.triskell.kermeta.visitor;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 import java.util.Iterator;
-
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
-
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
+import org.apache.log4j.Logger;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**

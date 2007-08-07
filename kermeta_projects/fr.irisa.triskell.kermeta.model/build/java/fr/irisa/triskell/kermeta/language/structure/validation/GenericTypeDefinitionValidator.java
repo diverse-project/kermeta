@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinitionValidator.java,v 1.3 2007-07-24 13:47:31 ftanguy Exp $
+ * $Id: GenericTypeDefinitionValidator.java,v 1.4 2007-08-07 13:35:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.validation;
 
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import org.eclipse.emf.common.util.EList;
 
 /**

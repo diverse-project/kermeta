@@ -1,6 +1,6 @@
 
 
-/*$Id: KMUnitLoader.java,v 1.6 2007-08-03 07:14:39 dvojtise Exp $
+/*$Id: KMUnitLoader.java,v 1.7 2007-08-07 13:35:21 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL
@@ -129,6 +129,8 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 			
 			importAllKermetaUnits();
 			
+			constructAspectsListsForAll(kermetaUnit);
+						
 		} catch ( URIMalformedException exception ) {
 			exception.printStackTrace();
 		}

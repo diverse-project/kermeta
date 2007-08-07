@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackageImpl.java,v 1.18 2007-07-20 15:09:01 ftanguy Exp $
+ * $Id: StructurePackageImpl.java,v 1.19 2007-08-07 13:35:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -1096,15 +1096,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTypeDefinition_Aspects() {
-		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getVoidType() {
 		return voidTypeEClass;
 	}
@@ -1720,7 +1711,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
 		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__IS_ASPECT);
 		createEReference(typeDefinitionEClass, TYPE_DEFINITION__BASE_ASPECTS);
-		createEReference(typeDefinitionEClass, TYPE_DEFINITION__ASPECTS);
 
 		voidTypeEClass = createEClass(VOID_TYPE);
 
@@ -2009,8 +1999,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTypeDefinition_IsAspect(), this.getBoolean(), "isAspect", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTypeDefinition_BaseAspects(), this.getTypeDefinition(), this.getTypeDefinition_Aspects(), "baseAspects", null, 0, -1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTypeDefinition_Aspects(), this.getTypeDefinition(), this.getTypeDefinition_BaseAspects(), "aspects", null, 0, -1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeDefinition_BaseAspects(), this.getTypeDefinition(), null, "baseAspects", null, 0, -1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(voidTypeEClass, VoidType.class, "VoidType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

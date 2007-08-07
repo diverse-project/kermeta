@@ -463,9 +463,9 @@
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/String"/>
         </eOperations>
-        <eOperations name="append">
+        <eOperations name="append" eType="/1/standard/String">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::String.append(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.append(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Appends other at the end of self&#xA;  */"/>
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/String"/>
@@ -541,48 +541,46 @@
     </eSubpackages>
   </ecore:EPackage>
   <ecore:EAnnotation source="dependentResource">
-    <references href="../language/dynamic_expression.ecore#/0"/>
-    <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/0"/>
-    <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../Standard.ecore#/0"/>
+    <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
+    <references href="collections.ecore#/0"/>
+    <references href="collections.ecore#/1"/>
+    <references href="#/0"/>
+    <references href="#/1"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
     <references href="../language/behavior.ecore#/2"/>
+    <references href="../language/structure.ecore#/0"/>
+    <references href="../language/structure.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/0"/>
+    <references href="../reflection/reflection.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
+    <references href="../language/reflective_collections.ecore#/0"/>
+    <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/0"/>
+    <references href="../kunit/kunit.ecore#/1"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/0"/>
+    <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>
-    <references href="../Standard.ecore#/0"/>
-    <references href="../Standard.ecore#/1"/>
-    <references href="collections.ecore#/0"/>
-    <references href="collections.ecore#/1"/>
-    <references href="java.ecore#/0"/>
-    <references href="java.ecore#/1"/>
-    <references href="java.ecore#/2"/>
-    <references href="../language/structure.ecore#/0"/>
-    <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
-    <references href="../language/reflective_collections.ecore#/0"/>
-    <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
-    <references href="#/0"/>
-    <references href="#/1"/>
-    <references href="../utils/hashtable.ecore#/0"/>
-    <references href="../utils/hashtable.ecore#/1"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/0"/>
-    <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
+    <references href="../language/dynamic_expression.ecore#/0"/>
+    <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
+    <references href="java.ecore#/0"/>
+    <references href="java.ecore#/1"/>
   </ecore:EAnnotation>
 </xmi:XMI>

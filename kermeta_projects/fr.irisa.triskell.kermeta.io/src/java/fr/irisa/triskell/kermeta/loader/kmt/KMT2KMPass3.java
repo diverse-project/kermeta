@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.20 2007-08-03 07:30:17 ftanguy Exp $
+/* $Id: KMT2KMPass3.java,v 1.21 2007-08-07 13:35:22 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -467,6 +467,9 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		// lower :
 		context.current_property.setLower(getLower(property.getTypeRef()));
 		// type :
+			
+		if ( context.current_property.getName().equals("grounded") )
+			System.out.println();
 			
 		context.current_property.setType(getFType(property.getTypeRef()));
 		// is readonly, false by default

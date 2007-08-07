@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.14 2007-08-02 16:34:02 dvojtise Exp $
+/* $Id: Ecore2KMPass4.java,v 1.15 2007-08-07 13:35:22 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -368,8 +368,14 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 			return null;
 		
 		// Set the type of this property
-		Type t = createTypeForEClassifier(node.getEType(), node);
-		currentProperty.setType(t);
+		Type t = null;
+		if ( node.getEType() == null ) {
+			String message = "Ecore Loader : the type of structural feature " + EcoreHelper.getQualifiedName(node) + " is null.";
+			kermetaUnit.error(message, node);
+		} else {
+			t = createTypeForEClassifier(node.getEType(), node);
+			currentProperty.setType(t);
+		}
 		
 		EAnnotation eAnnot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEVARIABLE_BINDINGS);
 		if(eAnnot != null) {

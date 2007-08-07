@@ -1,6 +1,6 @@
 
 
-/*$Id: AbstractKermetaUnitLoader.java,v 1.5 2007-08-02 16:53:32 dvojtise Exp $
+/*$Id: AbstractKermetaUnitLoader.java,v 1.6 2007-08-07 13:35:21 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitLoader.java
 * License : EPL
@@ -13,6 +13,7 @@
 package org.kermeta.loader;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -23,15 +24,68 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.kermeta.io.IBuildingState;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitLoader;
+import org.kermeta.io.plugin.IOPlugin;
 
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KMLoader;
+import fr.irisa.triskell.kermeta.loader.ecore.EcoreBuildingState;
+import fr.irisa.triskell.kermeta.loader.java.JavaBuildingState;
+import fr.irisa.triskell.kermeta.loader.java.JavaKermetaUnitLoader;
+import fr.irisa.triskell.kermeta.loader.km.KMUnitLoader;
+import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
+import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTBuildingState;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 
 public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 
+	
+	public void constructAspectsListsForAll(KermetaUnit kermetaUnit) {
+		
+		AbstractBuildingState state = (AbstractBuildingState) kermetaUnit.getBuildingState();
+		
+		if ( state.aspectsDone ) return;
+		state.loading = true;
+		
+		constructAspectsLists(kermetaUnit);
+		state.aspectsDone = true;
+		
+		/*
+		 * 
+		 * Loading the structure for the imported units.
+		 * 
+		 */
+		Iterator <KermetaUnit> iterator = kermetaUnit.getImportedKermetaUnits().iterator();
+		while ( iterator.hasNext() ) {
+			KermetaUnit currentUnit = iterator.next();
+			
+			AbstractBuildingState currentState = (AbstractBuildingState) currentUnit.getBuildingState();
+			if ( ! currentState.loading )
+				constructAspectsListsForAll( currentUnit );
+		}
+	
+		state.loading = false;
+		
+	}
+	
+	public void constructAspectsLists(KermetaUnit kermetaUnit) {
+		
+		for ( TypeDefinition t : KermetaUnitHelper.getInternalTypeDefinitions(kermetaUnit) ) {
+			EList<TypeDefinition> l = KermetaUnitHelper.getAspects(kermetaUnit, t);
+			if ( ! l.isEmpty() )
+				kermetaUnit.getAspects().put( t, l);
+		}
+		
+	}
+	
+	
+	
 	static protected Hashtable <KermetaUnit, LoadingContext> context = new Hashtable <KermetaUnit, LoadingContext> ();
 	
 	public LoadingContext getLoadingContext(KermetaUnit kermetaUnit) {

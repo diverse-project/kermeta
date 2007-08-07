@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorSwitch.java,v 1.6 2007-07-24 13:47:33 ftanguy Exp $
+ * $Id: BehaviorSwitch.java,v 1.7 2007-08-07 13:35:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.util;
 
+import fr.irisa.triskell.kermeta.language.behavior.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;

@@ -223,8 +223,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" eSuperTypes="//language/structure/NamedElement">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAspect" eType="//language/structure/Boolean"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="baseAspects" upperBound="-1" eType="//language/structure/TypeDefinition" eOpposite="//language/structure/TypeDefinition/aspects"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="aspects" upperBound="-1" eType="//language/structure/TypeDefinition" eOpposite="//language/structure/TypeDefinition/baseAspects"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="baseAspects" upperBound="-1" eType="//language/structure/TypeDefinition"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="VoidType" eSuperTypes="//language/structure/Type"/>
       <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="//language/structure/TypeDefinition //language/structure/Type"/>

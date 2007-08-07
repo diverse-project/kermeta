@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.16 2007-07-30 14:47:38 ftanguy Exp $
+/* $Id: TypeConformanceChecker.java,v 1.17 2007-08-07 13:35:21 ftanguy Exp $
 * Project : Kermeta (io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -15,6 +15,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
@@ -32,6 +33,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -69,8 +71,15 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 				return true;
 			
 			Set <TypeDefinition> providedBaseClasses = ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) cProvided.getTypeDefinition());
-			Set <TypeDefinition> requiredAspectClasses = ClassDefinitionHelper.getAllAspectClasses( (ClassDefinition) cRequired.getTypeDefinition());
+			List <TypeDefinition> requiredAspectClasses = TypeDefinitionHelper.getAspects( (ClassDefinition) cRequired.getTypeDefinition());
 			Set<TypeDefinition> requiredBaseClasses = ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) cRequired.getTypeDefinition());
+			
+			for ( TypeDefinition baseClass : providedBaseClasses ) {
+				Class p = StructureFactory.eINSTANCE.createClass();
+				p.setTypeDefinition( (ClassDefinition) baseClass);
+				if ( TypeConformanceChecker.conforms(required, p) )
+					return true;
+			}
 			
 			for ( TypeDefinition aspectClass : requiredAspectClasses ) {
 				for ( TypeDefinition baseClass : providedBaseClasses ) {

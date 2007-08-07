@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProductTypeImpl.java,v 1.10 2007-08-02 12:08:15 cfaucher Exp $
+ * $Id: ProductTypeImpl.java,v 1.11 2007-08-07 13:35:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import fr.irisa.triskell.kermeta.language.structure.ProductType;

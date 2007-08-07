@@ -2,12 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.9 2007-08-02 16:43:13 dvojtise Exp $
+ * $Id: KermetaUnitImpl.java,v 1.10 2007-08-07 13:35:21 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -17,6 +19,7 @@ import java.util.Set;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -76,6 +79,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isFramework <em>Framework</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getTracer <em>Tracer</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isConstraintChecked <em>Constraint Checked</em>}</li>
+ *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getAspects <em>Aspects</em>}</li>
  * </ul>
  * </p>
  *
@@ -275,6 +279,16 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	protected boolean constraintChecked = CONSTRAINT_CHECKED_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getAspects() <em>Aspects</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAspects()
+	 * @generated
+	 * @ordered
+	 */
+	protected Map<TypeDefinition, EList<TypeDefinition>> aspects;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
@@ -282,6 +296,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	protected KermetaUnitImpl() {
 		super();
 		setModelingUnit( StructureFactory.eINSTANCE.createModelingUnit() );
+		aspects = new HashMap <TypeDefinition, EList<TypeDefinition> > ();
 	}
 
 	/**
@@ -595,6 +610,27 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		constraintChecked = newConstraintChecked;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__CONSTRAINT_CHECKED, oldConstraintChecked, constraintChecked));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map<TypeDefinition, EList<TypeDefinition>> getAspects() {
+		return aspects;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAspects(Map<TypeDefinition, EList<TypeDefinition>> newAspects) {
+		Map<TypeDefinition, EList<TypeDefinition>> oldAspects = aspects;
+		aspects = newAspects;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__ASPECTS, oldAspects, aspects));
 	}
 
 	/**
@@ -1370,6 +1406,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return getTracer();
 			case IoPackage.KERMETA_UNIT__CONSTRAINT_CHECKED:
 				return isConstraintChecked() ? Boolean.TRUE : Boolean.FALSE;
+			case IoPackage.KERMETA_UNIT__ASPECTS:
+				return getAspects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1430,6 +1468,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__CONSTRAINT_CHECKED:
 				setConstraintChecked(((Boolean)newValue).booleanValue());
 				return;
+			case IoPackage.KERMETA_UNIT__ASPECTS:
+				setAspects((Map<TypeDefinition, EList<TypeDefinition>>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1484,6 +1525,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__CONSTRAINT_CHECKED:
 				setConstraintChecked(CONSTRAINT_CHECKED_EDEFAULT);
 				return;
+			case IoPackage.KERMETA_UNIT__ASPECTS:
+				setAspects((Map<TypeDefinition, EList<TypeDefinition>>)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1524,6 +1568,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return TRACER_EDEFAULT == null ? tracer != null : !TRACER_EDEFAULT.equals(tracer);
 			case IoPackage.KERMETA_UNIT__CONSTRAINT_CHECKED:
 				return constraintChecked != CONSTRAINT_CHECKED_EDEFAULT;
+			case IoPackage.KERMETA_UNIT__ASPECTS:
+				return aspects != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1550,6 +1596,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		result.append(tracer);
 		result.append(", constraintChecked: ");
 		result.append(constraintChecked);
+		result.append(", aspects: ");
+		result.append(aspects);
 		result.append(')');
 		return result.toString();
 	}

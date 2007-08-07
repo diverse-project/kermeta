@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreBuildingState.java,v 1.2 2007-07-20 15:08:11 ftanguy Exp $
+/*$Id: EcoreBuildingState.java,v 1.3 2007-08-07 13:35:22 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	EcoreBuildingState.java
 * License : EPL
@@ -15,8 +15,6 @@ package fr.irisa.triskell.kermeta.loader.ecore;
 import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
 
 public class EcoreBuildingState extends AbstractBuildingState {
-
-	public boolean loading = false;
 	
 	public boolean pass1done = false;
 	

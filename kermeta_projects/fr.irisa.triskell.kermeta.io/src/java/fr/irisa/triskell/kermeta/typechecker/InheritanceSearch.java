@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.15 2007-08-02 13:40:40 dvojtise Exp $
+/* $Id: InheritanceSearch.java,v 1.16 2007-08-07 13:35:21 ftanguy Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -25,6 +25,9 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 
 /**
  * @author Franck Fleurey
@@ -109,17 +112,18 @@ public class InheritanceSearch {
 			
 			if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
 				classDefinitionProcessed.add( (ClassDefinition) current.getTypeDefinition() );
-			    
+			 				
 			    // Add all operations of current parsed class
 			    for (Object next_op : ((ClassDefinition) current.getTypeDefinition()).getOwnedOperation()) {
 			    	Operation op = (Operation)next_op;
+			    	
 			    	if ( ! found_ops.containsKey(op.getName()) ) {
 			    		CallableOperation callableOperation = new CallableOperation(op, current);
 			    		found_ops.put(op.getName(), callableOperation);
 			    		result.add( callableOperation );
 			    	} else {
 			    		CallableOperation currentCallableOperation = found_ops.get( op.getName() );
-			    		if ( currentCallableOperation.getOperation().isIsAbstract() ) {
+			    		if ( currentCallableOperation.getOperation().isIsAbstract() || OperationHelper.isOverloadable(currentCallableOperation.operation) ) {
 			    			CallableOperation callableOperation = new CallableOperation(op, current);
 			    			found_ops.put(op.getName(), callableOperation);
 			    			result.remove( currentCallableOperation );
@@ -143,7 +147,7 @@ public class InheritanceSearch {
 		    		}
 		    	}
 		    
-				for ( TypeDefinition aspectClass : current.getTypeDefinition().getAspects() ) {
+				for ( TypeDefinition aspectClass : TypeDefinitionHelper.getAspects( (ClassDefinition) current.getTypeDefinition()) ) {
 					if ( aspectClass instanceof ClassDefinition ) {
 						Class aspectClassType = StructureFactory.eINSTANCE.createClass();
 						aspectClassType.setTypeDefinition( (ClassDefinition) aspectClass );
@@ -151,21 +155,6 @@ public class InheritanceSearch {
 					}
 				}
 			}		    
-		    /*for ( TypeDefinition baseClass : ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) current.getTypeDefinition() ) ) {
-		    	if ( baseClass instanceof ClassDefinition ) {
-		    		Class baseClassType = StructureFactory.eINSTANCE.createClass();
-		    		baseClassType.setTypeDefinition( (ClassDefinition) baseClass );
-		    		toVisit.add(baseClassType);
-		    	}
-		    }
-		    
-			for ( TypeDefinition aspectClass : ClassDefinitionHelper.getAllAspectClasses( (ClassDefinition) current.getTypeDefinition() ) ) {
-				if ( aspectClass instanceof ClassDefinition ) {
-					Class aspectClassType = StructureFactory.eINSTANCE.createClass();
-					aspectClassType.setTypeDefinition( (ClassDefinition) aspectClass );
-		    		toVisit.add(aspectClassType);
-				}
-			}*/
 
 		}
 		// TODO And only finally, handle the object kind -> consequently, remove

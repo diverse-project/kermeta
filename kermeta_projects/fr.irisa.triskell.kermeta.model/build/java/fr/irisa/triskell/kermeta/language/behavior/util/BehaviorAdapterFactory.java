@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorAdapterFactory.java,v 1.5 2007-07-24 13:47:33 ftanguy Exp $
+ * $Id: BehaviorAdapterFactory.java,v 1.6 2007-08-07 13:35:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.util;
 
+import fr.irisa.triskell.kermeta.language.behavior.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;

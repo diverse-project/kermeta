@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.6 2007-08-02 16:09:47 dvojtise Exp $
+ * $Id: KermetaUnit.java,v 1.7 2007-08-07 13:35:22 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -20,6 +20,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Using;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.traceability.helper.Tracer;
+import java.util.Map;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,6 +44,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  *   <li>{@link org.kermeta.io.KermetaUnit#isFramework <em>Framework</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getTracer <em>Tracer</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#isConstraintChecked <em>Constraint Checked</em>}</li>
+ *   <li>{@link org.kermeta.io.KermetaUnit#getAspects <em>Aspects</em>}</li>
  * </ul>
  * </p>
  *
@@ -382,6 +384,32 @@ public interface KermetaUnit extends EObject {
 	 * @generated
 	 */
 	void setConstraintChecked(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Aspects</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Aspects</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Aspects</em>' attribute.
+	 * @see #setAspects(Map)
+	 * @see org.kermeta.io.IoPackage#getKermetaUnit_Aspects()
+	 * @model transient="true"
+	 * @generated
+	 */
+	Map<TypeDefinition, EList<TypeDefinition>> getAspects();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.io.KermetaUnit#getAspects <em>Aspects</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Aspects</em>' attribute.
+	 * @see #getAspects()
+	 * @generated
+	 */
+	void setAspects(Map<TypeDefinition, EList<TypeDefinition>> value);
 
 	/**
 	 * <!-- begin-user-doc -->

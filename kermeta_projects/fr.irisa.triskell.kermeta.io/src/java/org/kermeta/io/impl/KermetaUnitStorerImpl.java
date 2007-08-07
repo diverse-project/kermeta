@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.11 2007-08-02 16:43:13 dvojtise Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.12 2007-08-07 13:35:21 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -41,6 +41,7 @@ import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoader;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
  * <!-- begin-user-doc -->
@@ -215,31 +216,43 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 		KermetaUnit kermetaUnit = find(uri);
 		if ( kermetaUnit != null ) {
 			getKermetaUnits().remove( kermetaUnit );
-			kermetaUnit.getImportedKermetaUnits().clear();
-			kermetaUnit.getImporters().clear();
-			
+		
 			for ( TypeDefinition typeDefinition : KermetaUnitHelper.getInternalTypeDefinitions( kermetaUnit ) ) {
-				typeDefinition.getAspects().clear();
+				//typeDefinition.getAspects().clear();
 				typeDefinition.getBaseAspects().clear();
 				typeDefinition.getOwnedTag().clear();
 				typeDefinition.getTag().clear();
+
+				for ( KermetaUnit importer : kermetaUnit.getImportedKermetaUnits() ) {
+					String qualifiedName1 = NamedElementHelper.getQualifiedName(typeDefinition);
+					for ( TypeDefinition baseClass : importer.getAspects().keySet() ) {
+						String qualifiedName2 = NamedElementHelper.getQualifiedName(baseClass);
+						if ( qualifiedName1.equals(qualifiedName2) )
+							importer.getAspects().get(baseClass).remove( typeDefinition );
+					}
+				}
+			
 			}
+			
+			kermetaUnit.getImportedKermetaUnits().clear();			
+			kermetaUnit.getImporters().clear();		
 			
 			for ( Package p : (List<Package>) kermetaUnit.getInternalPackages() ) {
 				p.getOwnedTag().clear();
 				p.getOwnedTypeDefinition().clear();
 			}
+			
+			for ( List<TypeDefinition> l : kermetaUnit.getAspects().values() ) {
+				l.clear();
+			}
+			
+			kermetaUnit.getAspects().clear();
 			kermetaUnit.getInternalPackageEntries().clear();
 			kermetaUnit.getExternalPackageEntries().clear();
 			kermetaUnit.getMessages().clear();
 			kermetaUnit.setTracer(null);
 			kermetaUnit.setModelingUnit(null);
 			kermetaUnit.setStorer(null);
-			
-			System.out.println();
-			//kermetaUnit.getMessages().clear();
-			//kermetaUnit.getExternalPackageEntries().clear();
-			//kermetaUnit.getInternalPackageEntries().clear();
 		}
 	}
 	

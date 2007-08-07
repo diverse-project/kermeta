@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.18 2007-08-06 16:16:35 jmottu Exp $
+/* $Id: KermetaTypeChecker.java,v 1.19 2007-08-07 13:35:21 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -133,7 +133,7 @@ public class KermetaTypeChecker {
     public void checkUnit() {		
     	
     	internalLog.info("Typechecking " + unit.getUri());
-    	if ( ! unit.isTypeChecked() ) {
+    	if ( ! unit.isTypeChecked() && ! unit.isErrored() ) {
     		internalOperation = true;
     		checkPackages( unit.getInternalPackages() );
     		/*internalOperation = false;

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OperationValidator.java,v 1.3 2007-07-24 13:47:31 ftanguy Exp $
+ * $Id: OperationValidator.java,v 1.4 2007-08-07 13:35:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.validation;
 
@@ -10,7 +10,11 @@ import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
 /**
  * A sample validator interface for {@link fr.irisa.triskell.kermeta.language.structure.Operation}.

@@ -1,6 +1,6 @@
 
 
-/*$Id: AbstractBuildingState.java,v 1.2 2007-07-20 15:08:06 ftanguy Exp $
+/*$Id: AbstractBuildingState.java,v 1.3 2007-08-07 13:35:22 ftanguy Exp $
 * Project : io
 * File : 	AbstractBuildingState.java
 * License : EPL
@@ -26,6 +26,10 @@ import org.kermeta.io.IBuildingState;
 public class AbstractBuildingState implements IBuildingState {
 	
 	public boolean loaded = false;
+	
+	public boolean loading = false;
+	
+	public boolean aspectsDone = false;
 	
 	public TreeIterator eAllContents() {
 		return null;

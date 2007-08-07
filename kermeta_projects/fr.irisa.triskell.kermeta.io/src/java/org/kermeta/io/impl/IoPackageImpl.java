@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.7 2007-08-02 16:43:13 dvojtise Exp $
+ * $Id: IoPackageImpl.java,v 1.8 2007-08-07 13:35:21 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -12,6 +12,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -368,6 +369,15 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getKermetaUnit_Aspects() {
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getKermetaUnitStorer() {
 		return kermetaUnitStorerEClass;
 	}
@@ -622,6 +632,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__FRAMEWORK);
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__TRACER);
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__CONSTRAINT_CHECKED);
+		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__ASPECTS);
 
 		iBuildingStateEClass = createEClass(IBUILDING_STATE);
 
@@ -711,6 +722,14 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		initEAttribute(getKermetaUnit_Framework(), ecorePackage.getEBoolean(), "framework", null, 0, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKermetaUnit_Tracer(), this.getTracer(), "tracer", null, 0, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKermetaUnit_ConstraintChecked(), ecorePackage.getEBoolean(), "constraintChecked", null, 1, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
+		EGenericType g2 = createEGenericType(theStructurePackage.getTypeDefinition());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEEList());
+		g1.getETypeArguments().add(g2);
+		EGenericType g3 = createEGenericType(theStructurePackage.getTypeDefinition());
+		g2.getETypeArguments().add(g3);
+		initEAttribute(getKermetaUnit_Aspects(), g1, "aspects", null, 0, 1, KermetaUnit.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(kermetaUnitEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 

@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitHelper.java,v 1.5 2007-08-01 14:41:13 ftanguy Exp $
+/*$Id: KermetaUnitHelper.java,v 1.6 2007-08-07 13:35:22 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitHelper.java
 * License : EPL
@@ -19,6 +19,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.KermetaUnit;
@@ -202,6 +204,32 @@ public class KermetaUnitHelper {
 		}
 		return result;
 	}
+	
+	public static EList<TypeDefinition> getAspects(KermetaUnit kermetaUnit, TypeDefinition typeDefinition) {
+		EList<TypeDefinition> result = new BasicEList<TypeDefinition> ();
+		if ( kermetaUnit != null ) {
+			List<KermetaUnit> processedUnits = new ArrayList<KermetaUnit> ();
+			getAspects(kermetaUnit, typeDefinition, processedUnits, result);
+		}
+		return result;
+	}
+	
+	private static void getAspects(KermetaUnit kermetaUnit, TypeDefinition typeDefinition, List<KermetaUnit> processedUnits, List<TypeDefinition> result) {
+		
+		if ( processedUnits.contains(kermetaUnit) )
+			return;
+		processedUnits.add( kermetaUnit );
+		Set<TypeDefinition> typeDefinitions = getTypeDefinitions(kermetaUnit);
+		for ( TypeDefinition t : typeDefinitions ) {
+			if ( (t != typeDefinition) && (t.getBaseAspects().contains(typeDefinition)) )
+				result.add(t);
+		}
+			
+		for ( KermetaUnit importedUnit : kermetaUnit.getImporters() )
+			getAspects(importedUnit, typeDefinition, processedUnits, result);
+	}
+	
+
 	
 	static public KermetaUnit getKermetaUnitFromObject(EObject o) {
 		Set<KermetaUnit> s = IOPlugin.getDefault().getKermetaUnits();

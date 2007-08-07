@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.java,v 1.4 2007-08-02 15:19:03 cfaucher Exp $
+/* $Id: OperationHelper.java,v 1.5 2007-08-07 13:35:22 ftanguy Exp $
  * Project   : Kermeta 
  * File      : OperationHelper.java
  * License   : EPL
@@ -175,19 +175,17 @@ public class OperationHelper {
 		 * Looking in the aspects classes.
 		 * 
 		 */
-		if ( ! classDefinition.getAspects().isEmpty() ) {
-			Set <TypeDefinition> aspectClasses = ClassDefinitionHelper.getAllAspectClasses( classDefinition );
-			for ( TypeDefinition typeDefinition : aspectClasses ) {
-				if ( typeDefinition instanceof ClassDefinition ) {
-					ClassDefinition aspectClass = (ClassDefinition) typeDefinition;
-					if ( aspectClass != classDefinition ) {
-						Operation matchedOperation = ClassDefinitionHelper.getLocalMatchingOperation(aspectClass, operation);
-						if ( matchedOperation != null )
-							preConditions.addAll( matchedOperation.getPre() );
-					}
+		List <TypeDefinition> aspectClasses = TypeDefinitionHelper.getAspects( classDefinition );
+		for ( TypeDefinition typeDefinition : aspectClasses ) {
+			if ( typeDefinition instanceof ClassDefinition ) {
+				ClassDefinition aspectClass = (ClassDefinition) typeDefinition;
+				if ( aspectClass != classDefinition ) {
+					Operation matchedOperation = ClassDefinitionHelper.getLocalMatchingOperation(aspectClass, operation);
+					if ( matchedOperation != null )
+						preConditions.addAll( matchedOperation.getPre() );
 				}
 			}
-		}	
+		}
 		return preConditions;
 	}
 	
@@ -225,15 +223,13 @@ public class OperationHelper {
 		 * Looking in the aspects classes.
 		 * 
 		 */
-		if ( ! classDefinition.getAspects().isEmpty() ) {
-			Set <TypeDefinition> aspectClasses = ClassDefinitionHelper.getAllAspectClasses( classDefinition );
-			for ( TypeDefinition typeDefinition : aspectClasses ) {
-				if ( typeDefinition instanceof ClassDefinition ) {
-					ClassDefinition aspectClass = (ClassDefinition) typeDefinition;
-					Operation matchedOperation = ClassDefinitionHelper.getLocalMatchingOperation(aspectClass, operation);
-					if ( matchedOperation != null )
-						postConditions.addAll( matchedOperation.getPre() );
-				}
+		List <TypeDefinition> aspectClasses = TypeDefinitionHelper.getAspects( classDefinition );
+		for ( TypeDefinition typeDefinition : aspectClasses ) {
+			if ( typeDefinition instanceof ClassDefinition ) {
+				ClassDefinition aspectClass = (ClassDefinition) typeDefinition;
+				Operation matchedOperation = ClassDefinitionHelper.getLocalMatchingOperation(aspectClass, operation);
+				if ( matchedOperation != null )
+					postConditions.addAll( matchedOperation.getPre() );
 			}
 		}	
 		return postConditions;

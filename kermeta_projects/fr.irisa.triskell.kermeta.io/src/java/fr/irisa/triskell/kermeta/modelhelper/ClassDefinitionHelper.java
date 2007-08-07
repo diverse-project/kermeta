@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.java,v 1.5 2007-07-31 09:08:28 ftanguy Exp $
+/* $Id: ClassDefinitionHelper.java,v 1.6 2007-08-07 13:35:22 ftanguy Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL
@@ -10,12 +10,16 @@
 package fr.irisa.triskell.kermeta.modelhelper;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -135,10 +139,12 @@ public class ClassDefinitionHelper {
 			if ( baseTypeDefinition instanceof ClassDefinition ) {
 				ClassDefinition baseClass = (ClassDefinition) baseTypeDefinition;
 				internGetAllProperties(baseClass, properties, classDefinitionProcessed);
+				//KermetaUnitHelper.getKermetaUnitFromObject( TypeDefinitionHelper.getAspects(baseTypeDefinition).get(0) )
 			}
 		}
 		
-		for ( TypeDefinition aspectTypeDefinition : (List<TypeDefinition>) currentClassDefinition.getAspects() ) {
+		for ( TypeDefinition aspectTypeDefinition : TypeDefinitionHelper.getAspects(currentClassDefinition) ) {
+//		for ( TypeDefinition aspectTypeDefinition : (List<TypeDefinition>) currentClassDefinition.getAspects() ) {
 			if ( aspectTypeDefinition instanceof ClassDefinition ) {
 				ClassDefinition aspectClass = (ClassDefinition) aspectTypeDefinition;
 				internGetAllProperties(aspectClass, properties, classDefinitionProcessed);
@@ -254,7 +260,8 @@ public class ClassDefinitionHelper {
 			}
 		}
 		
-		for ( TypeDefinition aspectTypeDefinition : (List<TypeDefinition>) currentClassDefinition.getAspects() ) {
+		for ( TypeDefinition aspectTypeDefinition : TypeDefinitionHelper.getAspects(currentClassDefinition) ) {
+//		for ( TypeDefinition aspectTypeDefinition : (List<TypeDefinition>) currentClassDefinition.getAspects() ) {
 			if ( aspectTypeDefinition instanceof ClassDefinition ) {
 				ClassDefinition aspectClass = (ClassDefinition) aspectTypeDefinition;
 				internGetAllOperations(aspectClass, operations, classDefinitionProcessed);
@@ -459,9 +466,9 @@ public class ClassDefinitionHelper {
 		
 	}
 	
-	static private void getAllAspectClasses(ClassDefinition cl, Set<TypeDefinition> aspectClasses) {
+/*	static private void getAllAspectClasses(ClassDefinition cl, Set<TypeDefinition> aspectClasses) {
 		
-		for ( TypeDefinition typeDefinition : (List<TypeDefinition>) cl.getAspects() ) {
+		for ( TypeDefinition typeDefinition : TypeDefinitionHelper.getAspects(cl) ) {
 			
 			if ( typeDefinition instanceof ClassDefinition ) {
 				
@@ -475,13 +482,13 @@ public class ClassDefinitionHelper {
 			
 		}
 		
-	}
+	}*/
 	
-	static public Set <TypeDefinition> getAllAspectClasses(ClassDefinition cl) {
+/*	static public Set <TypeDefinition> getAllAspectClasses(ClassDefinition cl) {
 		Set<TypeDefinition> baseClasses = new HashSet<TypeDefinition> ();
 		getAllAspectClasses(cl, baseClasses);
 		return baseClasses;
-	}
+	}*/
 
 	
 	static public Operation getLocalMatchingOperation(ClassDefinition cl, Operation operation) {
@@ -522,4 +529,11 @@ public class ClassDefinitionHelper {
 		}
 		
 	}
+	
+/*	static public List<TypeDefinition> getAspects(ClassDefinition cd) {
+//		Calendar c1 = Calendar.getInstance( Locale.FRENCH );
+		KermetaUnit kermetaUnit = KermetaUnitHelper.getKermetaUnitFromObject(cd);
+		return KermetaUnitHelper.getAspects(kermetaUnit, cd);
+	}*/
+	
 }

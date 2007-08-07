@@ -6,6 +6,7 @@
  */
 package fr.irisa.triskell.kermeta.impl;
 
+import fr.irisa.triskell.kermeta.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;

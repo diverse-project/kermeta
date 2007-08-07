@@ -6,6 +6,7 @@
  */
 package fr.irisa.triskell.kermeta.util;
 
+import fr.irisa.triskell.kermeta.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;

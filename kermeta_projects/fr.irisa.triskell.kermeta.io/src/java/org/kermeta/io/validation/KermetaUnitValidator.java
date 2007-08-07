@@ -2,18 +2,23 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitValidator.java,v 1.2 2007-07-20 15:08:04 ftanguy Exp $
+ * $Id: KermetaUnitValidator.java,v 1.3 2007-08-07 13:35:21 ftanguy Exp $
  */
 package org.kermeta.io.validation;
 
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
+import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 
 import org.kermeta.io.IBuildingState;
+import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitStorer;
+import org.kermeta.io.Message;
+import org.kermeta.io.PackageEntry;
 
 /**
  * A sample validator interface for {@link org.kermeta.io.KermetaUnit}.
@@ -39,4 +44,6 @@ public interface KermetaUnitValidator {
 	boolean validateFramework(boolean value);
 	boolean validateTracer(Tracer value);
 	boolean validateConstraintChecked(boolean value);
+
+	boolean validateAspects(Map<TypeDefinition, TypeDefinition> value);
 }

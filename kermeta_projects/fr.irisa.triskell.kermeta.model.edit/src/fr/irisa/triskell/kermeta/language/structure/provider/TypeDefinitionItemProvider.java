@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionItemProvider.java,v 1.10 2007-07-20 15:08:27 ftanguy Exp $
+ * $Id: TypeDefinitionItemProvider.java,v 1.11 2007-08-07 13:34:53 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -75,7 +75,6 @@ public class TypeDefinitionItemProvider
 
 			addIsAspectPropertyDescriptor(object);
 			addBaseAspectsPropertyDescriptor(object);
-			addAspectsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -116,28 +115,6 @@ public class TypeDefinitionItemProvider
 				 getString("_UI_TypeDefinition_baseAspects_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TypeDefinition_baseAspects_feature", "_UI_TypeDefinition_type"),
 				 StructurePackage.Literals.TYPE_DEFINITION__BASE_ASPECTS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Aspects feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAspectsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TypeDefinition_aspects_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypeDefinition_aspects_feature", "_UI_TypeDefinition_type"),
-				 StructurePackage.Literals.TYPE_DEFINITION__ASPECTS,
 				 true,
 				 false,
 				 true,

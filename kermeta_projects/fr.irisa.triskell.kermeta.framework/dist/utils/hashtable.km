@@ -298,21 +298,21 @@
     <ownedTag value="/** &#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xA; * metamodel&#xA; * &#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;>&#xA; */"/>
   </requires>
   <usings qualifiedName="kermeta::standard"/>
-  <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
-  <referencedModelingUnits href="../kunit/kunit.km#/"/>
-  <referencedModelingUnits href="../language/behavior.km#/"/>
-  <referencedModelingUnits href="../persistence/resource.km#/"/>
-  <referencedModelingUnits href="../kunit/assert.km#/"/>
-  <referencedModelingUnits href="stack.km#/"/>
-  <referencedModelingUnits href="../io/std_io.km#/"/>
   <referencedModelingUnits href="../Standard.km#/"/>
   <referencedModelingUnits href="../standard/collections.km#/"/>
-  <referencedModelingUnits href="../standard/java.km#/"/>
-  <referencedModelingUnits href="../language/structure.km#/"/>
-  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
-  <referencedModelingUnits href="../io/file_io.km#/"/>
   <referencedModelingUnits href="../standard/primitive_types.km#/"/>
-  <referencedModelingUnits href="#/"/>
-  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="../language/behavior.km#/"/>
+  <referencedModelingUnits href="../language/structure.km#/"/>
   <referencedModelingUnits href="../reflection/reflection.km#/"/>
+  <referencedModelingUnits href="../persistence/resource.km#/"/>
+  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
+  <referencedModelingUnits href="../kunit/kunit.km#/"/>
+  <referencedModelingUnits href="../kunit/assert.km#/"/>
+  <referencedModelingUnits href="#/"/>
+  <referencedModelingUnits href="stack.km#/"/>
+  <referencedModelingUnits href="../io/std_io.km#/"/>
+  <referencedModelingUnits href="../io/file_io.km#/"/>
+  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
+  <referencedModelingUnits href="../standard/java.km#/"/>
 </kermeta_language_structure:ModelingUnit>

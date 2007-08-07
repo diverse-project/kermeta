@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionImpl.java,v 1.7 2007-07-24 13:47:32 ftanguy Exp $
+ * $Id: TypeDefinitionImpl.java,v 1.8 2007-08-07 13:35:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -29,7 +30,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl#isIsAspect <em>Is Aspect</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl#getBaseAspects <em>Base Aspects</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl#getAspects <em>Aspects</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,16 +72,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * @ordered
 	 */
 	protected EList<TypeDefinition> baseAspects;
-
-	/**
-	 * The cached value of the '{@link #getAspects() <em>Aspects</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAspects()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TypeDefinition> aspects;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -130,54 +120,9 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 */
 	public EList<TypeDefinition> getBaseAspects() {
 		if (baseAspects == null) {
-			baseAspects = new EObjectWithInverseResolvingEList.ManyInverse<TypeDefinition>(TypeDefinition.class, this, StructurePackage.TYPE_DEFINITION__BASE_ASPECTS, StructurePackage.TYPE_DEFINITION__ASPECTS);
+			baseAspects = new EObjectResolvingEList<TypeDefinition>(TypeDefinition.class, this, StructurePackage.TYPE_DEFINITION__BASE_ASPECTS);
 		}
 		return baseAspects;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<TypeDefinition> getAspects() {
-		if (aspects == null) {
-			aspects = new EObjectWithInverseResolvingEList.ManyInverse<TypeDefinition>(TypeDefinition.class, this, StructurePackage.TYPE_DEFINITION__ASPECTS, StructurePackage.TYPE_DEFINITION__BASE_ASPECTS);
-		}
-		return aspects;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-		@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getBaseAspects()).basicAdd(otherEnd, msgs);
-			case StructurePackage.TYPE_DEFINITION__ASPECTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAspects()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
-				return ((InternalEList<?>)getBaseAspects()).basicRemove(otherEnd, msgs);
-			case StructurePackage.TYPE_DEFINITION__ASPECTS:
-				return ((InternalEList<?>)getAspects()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -192,8 +137,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 				return isIsAspect() ? Boolean.TRUE : Boolean.FALSE;
 			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
 				return getBaseAspects();
-			case StructurePackage.TYPE_DEFINITION__ASPECTS:
-				return getAspects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -214,10 +157,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 				getBaseAspects().clear();
 				getBaseAspects().addAll((Collection<? extends TypeDefinition>)newValue);
 				return;
-			case StructurePackage.TYPE_DEFINITION__ASPECTS:
-				getAspects().clear();
-				getAspects().addAll((Collection<? extends TypeDefinition>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -236,9 +175,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
 				getBaseAspects().clear();
 				return;
-			case StructurePackage.TYPE_DEFINITION__ASPECTS:
-				getAspects().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -255,8 +191,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 				return isAspect != IS_ASPECT_EDEFAULT;
 			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
 				return baseAspects != null && !baseAspects.isEmpty();
-			case StructurePackage.TYPE_DEFINITION__ASPECTS:
-				return aspects != null && !aspects.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

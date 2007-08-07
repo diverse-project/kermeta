@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.8 2007-08-01 14:41:50 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.9 2007-08-07 13:35:22 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -41,11 +41,13 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 public class IOPlugin extends AbstractUIPlugin {
 
-	public static String FRAMEWORK_KM_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km";
+	final public static String FRAMEWORK_KM_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km";
 	
-	private static String FRAMEWORK_ECORE_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.ecore";
+	final public static String ECORE_URI = "http://www.eclipse.org/emf/2002/Ecore";
 	
-	private static String FRAMEWORK_ECORE_LOCAL_URI = "platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.ecore";
+	final private static String FRAMEWORK_ECORE_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.ecore";
+	
+	final private static String FRAMEWORK_ECORE_LOCAL_URI = "platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.ecore";
 	
 	static public String getFrameWorkEcoreURI() {
 		if ( LOCAL_USE )
@@ -54,11 +56,11 @@ public class IOPlugin extends AbstractUIPlugin {
 			return FRAMEWORK_ECORE_URI;
 	}
 	
-	final public static String ECORE_URI = "http://www.eclipse.org/emf/2002/Ecore";
 	
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.kermeta.io";
 	
+	// The logger for this plugin
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("IO");
 
 	// The shared instance
@@ -176,6 +178,15 @@ public class IOPlugin extends AbstractUIPlugin {
 		return plugin;
 	}
 
+	/**
+	 * 
+	 * This method is used to get a kermeta unit that imports the kermeta framework and the ecore.ecore wether the
+	 * file's extension is ecore.
+	 * 
+	 * @param uri
+	 * @return
+	 * @throws URIMalformedException
+	 */
 	public KermetaUnit getKermetaUnit( String uri ) throws URIMalformedException {
 		KermetaUnit kermetaUnit = storer.find(uri);
 		if ( kermetaUnit == null ) {
@@ -201,6 +212,17 @@ public class IOPlugin extends AbstractUIPlugin {
 		return loadKermetaUnit( uri );
 	}
 	
+	/**
+	 * 
+	 * Loads a kermeta unit with the contents if not null. It first gets the corresponding kermeta unit.
+	 * When running in a workbench, it also checks the free memory before doing the load to avoid out of memory.
+	 * 
+	 * @param uri
+	 * @param content
+	 * @return
+	 * @throws KermetaIOFileNotFoundException
+	 * @throws URIMalformedException
+	 */
 	public KermetaUnit loadKermetaUnit( String uri, String content ) throws KermetaIOFileNotFoundException, URIMalformedException {
 		
 		if ( ! LOCAL_USE ) {

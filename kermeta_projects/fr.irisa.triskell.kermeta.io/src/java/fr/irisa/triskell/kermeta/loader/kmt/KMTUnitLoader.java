@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.7 2007-08-01 14:41:01 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.8 2007-08-07 13:35:22 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -93,7 +93,11 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			// 3 - Importing the type definitions from the imported kermeta units in the current one.
 			importAllKermetaUnits(kermetaUnit);
 			// 4 - Set the aspect staff
-			setBaseAspectsForAll(kermetaUnit);			
+			setBaseAspectsForAll(kermetaUnit);
+
+			// 10, finally create the aspects lists to improve performances.
+			constructAspectsListsForAll(kermetaUnit);
+			
 			// 5
 			replaceObjectTypeVariablesForAll(kermetaUnit);
 			// 6
@@ -116,7 +120,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			
 			// 9
 			loadAllAnnotations(kermetaUnit);
-				
+			
 		} catch ( URIMalformedException exception) {
 		} catch (RecognitionException e) {
 		} catch (TokenStreamException e) {

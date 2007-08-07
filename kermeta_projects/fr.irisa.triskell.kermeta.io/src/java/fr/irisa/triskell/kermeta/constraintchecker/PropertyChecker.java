@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.7 2007-07-31 09:08:28 ftanguy Exp $
+/* $Id: PropertyChecker.java,v 1.8 2007-08-07 13:35:22 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -94,6 +94,7 @@ public class PropertyChecker extends AbstractChecker {
 		// An property cannot be defined twice in the same class
 		boolean result = true;
 		int number_of_duplicate = 1;
+		
 		List <Property> props = ClassDefinitionHelper.getAllProperties(classDefinition);
 		for (Property p : props) {
 			if ( (p != property) && (p.getName().equals(property.getName())) ) {
@@ -101,13 +102,18 @@ public class PropertyChecker extends AbstractChecker {
 				ClassDefinition possibleBaseClass = (ClassDefinition) p.eContainer();
 				if ( classDefinition.isIsAspect() && (possibleBaseClass != classDefinition) ) {
 					boolean error = false;
-					
+
 					if ( property.isIsComposite() != p.isIsComposite() )
 						error = true;
 					
 					if ( !error && ! TypeEqualityChecker.equals(property.getType(), p.getType()) ) {
 						ClassDefinition cd1 = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) property.getType()).getTypeDefinition();
 						ClassDefinition cd2 = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) p.getType()).getTypeDefinition();
+						
+					/*	KermetaUnitHelper.getKermetaUnitFromObject(cd2)
+						KermetaUnitHelper.getKermetaUnitFromObject(cd1.getBaseAspects().get(0))*/
+						
+						
 						if ( ! ClassDefinitionHelper.getAllBaseClasses(cd1).contains(cd2) )
 							error = true;
 					} 

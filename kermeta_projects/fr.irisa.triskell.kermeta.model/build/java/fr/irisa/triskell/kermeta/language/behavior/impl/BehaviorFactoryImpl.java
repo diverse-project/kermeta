@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactoryImpl.java,v 1.7 2007-07-24 13:47:32 ftanguy Exp $
+ * $Id: BehaviorFactoryImpl.java,v 1.8 2007-08-07 13:35:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
+import fr.irisa.triskell.kermeta.language.behavior.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;

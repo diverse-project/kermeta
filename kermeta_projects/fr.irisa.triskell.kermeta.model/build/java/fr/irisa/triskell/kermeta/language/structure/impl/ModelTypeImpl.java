@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeImpl.java,v 1.8 2007-07-20 15:09:01 ftanguy Exp $
+ * $Id: ModelTypeImpl.java,v 1.9 2007-08-07 13:35:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -38,7 +38,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl#isIsAspect <em>Is Aspect</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl#getBaseAspects <em>Base Aspects</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl#getAspects <em>Aspects</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl#getIncludedTypeDefinition <em>Included Type Definition</em>}</li>
  * </ul>
  * </p>
@@ -102,16 +101,6 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * @ordered
 	 */
 	protected EList<TypeDefinition> baseAspects;
-
-	/**
-	 * The cached value of the '{@link #getAspects() <em>Aspects</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAspects()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TypeDefinition> aspects;
 
 	/**
 	 * The cached value of the '{@link #getIncludedTypeDefinition() <em>Included Type Definition</em>}' reference list.
@@ -191,21 +180,9 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 */
 	public EList<TypeDefinition> getBaseAspects() {
 		if (baseAspects == null) {
-			baseAspects = new EObjectWithInverseResolvingEList.ManyInverse<TypeDefinition>(TypeDefinition.class, this, StructurePackage.MODEL_TYPE__BASE_ASPECTS, StructurePackage.TYPE_DEFINITION__ASPECTS);
+			baseAspects = new EObjectResolvingEList<TypeDefinition>(TypeDefinition.class, this, StructurePackage.MODEL_TYPE__BASE_ASPECTS);
 		}
 		return baseAspects;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<TypeDefinition> getAspects() {
-		if (aspects == null) {
-			aspects = new EObjectWithInverseResolvingEList.ManyInverse<TypeDefinition>(TypeDefinition.class, this, StructurePackage.MODEL_TYPE__ASPECTS, StructurePackage.TYPE_DEFINITION__BASE_ASPECTS);
-		}
-		return aspects;
 	}
 
 	/**
@@ -247,39 +224,6 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-		@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case StructurePackage.MODEL_TYPE__BASE_ASPECTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getBaseAspects()).basicAdd(otherEnd, msgs);
-			case StructurePackage.MODEL_TYPE__ASPECTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAspects()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case StructurePackage.MODEL_TYPE__BASE_ASPECTS:
-				return ((InternalEList<?>)getBaseAspects()).basicRemove(otherEnd, msgs);
-			case StructurePackage.MODEL_TYPE__ASPECTS:
-				return ((InternalEList<?>)getAspects()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -289,8 +233,6 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 				return isIsAspect() ? Boolean.TRUE : Boolean.FALSE;
 			case StructurePackage.MODEL_TYPE__BASE_ASPECTS:
 				return getBaseAspects();
-			case StructurePackage.MODEL_TYPE__ASPECTS:
-				return getAspects();
 			case StructurePackage.MODEL_TYPE__INCLUDED_TYPE_DEFINITION:
 				return getIncludedTypeDefinition();
 		}
@@ -315,10 +257,6 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 			case StructurePackage.MODEL_TYPE__BASE_ASPECTS:
 				getBaseAspects().clear();
 				getBaseAspects().addAll((Collection<? extends TypeDefinition>)newValue);
-				return;
-			case StructurePackage.MODEL_TYPE__ASPECTS:
-				getAspects().clear();
-				getAspects().addAll((Collection<? extends TypeDefinition>)newValue);
 				return;
 			case StructurePackage.MODEL_TYPE__INCLUDED_TYPE_DEFINITION:
 				getIncludedTypeDefinition().clear();
@@ -345,9 +283,6 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 			case StructurePackage.MODEL_TYPE__BASE_ASPECTS:
 				getBaseAspects().clear();
 				return;
-			case StructurePackage.MODEL_TYPE__ASPECTS:
-				getAspects().clear();
-				return;
 			case StructurePackage.MODEL_TYPE__INCLUDED_TYPE_DEFINITION:
 				getIncludedTypeDefinition().clear();
 				return;
@@ -369,8 +304,6 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 				return isAspect != IS_ASPECT_EDEFAULT;
 			case StructurePackage.MODEL_TYPE__BASE_ASPECTS:
 				return baseAspects != null && !baseAspects.isEmpty();
-			case StructurePackage.MODEL_TYPE__ASPECTS:
-				return aspects != null && !aspects.isEmpty();
 			case StructurePackage.MODEL_TYPE__INCLUDED_TYPE_DEFINITION:
 				return includedTypeDefinition != null && !includedTypeDefinition.isEmpty();
 		}
@@ -394,7 +327,6 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 			switch (derivedFeatureID) {
 				case StructurePackage.MODEL_TYPE__IS_ASPECT: return StructurePackage.TYPE_DEFINITION__IS_ASPECT;
 				case StructurePackage.MODEL_TYPE__BASE_ASPECTS: return StructurePackage.TYPE_DEFINITION__BASE_ASPECTS;
-				case StructurePackage.MODEL_TYPE__ASPECTS: return StructurePackage.TYPE_DEFINITION__ASPECTS;
 				default: return -1;
 			}
 		}
@@ -418,7 +350,6 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 			switch (baseFeatureID) {
 				case StructurePackage.TYPE_DEFINITION__IS_ASPECT: return StructurePackage.MODEL_TYPE__IS_ASPECT;
 				case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS: return StructurePackage.MODEL_TYPE__BASE_ASPECTS;
-				case StructurePackage.TYPE_DEFINITION__ASPECTS: return StructurePackage.MODEL_TYPE__ASPECTS;
 				default: return -1;
 			}
 		}

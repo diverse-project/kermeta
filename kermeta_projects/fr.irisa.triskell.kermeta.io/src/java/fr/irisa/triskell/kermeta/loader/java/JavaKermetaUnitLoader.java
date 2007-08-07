@@ -1,6 +1,6 @@
 
 
-/*$Id: JavaKermetaUnitLoader.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
+/*$Id: JavaKermetaUnitLoader.java,v 1.4 2007-08-07 13:35:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	JavaKermetaUnitLoader.java
 * License : EPL
@@ -58,6 +58,8 @@ public class JavaKermetaUnitLoader extends AbstractKermetaUnitLoader {
 			
 			AbstractBuildingState state = (AbstractBuildingState) unit.getBuildingState();
 			state.loaded = true;
+			
+			constructAspectsListsForAll(unit);
 			
 			return unit;
 		} catch (URIMalformedException e) {

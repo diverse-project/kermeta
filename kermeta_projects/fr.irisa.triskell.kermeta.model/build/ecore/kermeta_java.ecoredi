@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
-<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_A5LAABQ6Edya8YD8Vgb7-g" activeDiagram="_A5xdFxQ6Edya8YD8Vgb7-g">
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_A5LAABQ6Edya8YD8Vgb7-g" activeDiagram="_A5UxARQ6Edya8YD8Vgb7-g">
   <model href="kermeta_java.ecore#/"/>
   <subdiagrams xmi:id="_A5UxABQ6Edya8YD8Vgb7-g">
     <model href="kermeta_java.ecore#//language/structure"/>
-    <diagrams xmi:id="_A5UxARQ6Edya8YD8Vgb7-g" position="0,0" size="100,100" name="Kermeta structure" viewport="80,80">
+    <diagrams xmi:id="_A5UxARQ6Edya8YD8Vgb7-g" position="0,0" size="100,100" name="Kermeta structure" zoom="1.5" viewport="1274,528">
       <property xmi:id="_A5UxAhQ6Edya8YD8Vgb7-g" key="pageFormatName" value="A3"/>
       <property xmi:id="_A5UxAxQ6Edya8YD8Vgb7-g" key="diagramWidth" value="1188"/>
       <property xmi:id="_A5UxBBQ6Edya8YD8Vgb7-g" key="diagramHeight" value="1680"/>
@@ -397,8 +397,8 @@
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5nsXRQ6Edya8YD8Vgb7-g" anchor="_A5nsURQ6Edya8YD8Vgb7-g _A5nsIBQ6Edya8YD8Vgb7-g">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5nsXhQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -136, 93, 68]</waypoints>
-        <waypoints>[-93, -136, 0, 68]</waypoints>
+        <waypoints>[0, -148, 94, 56]</waypoints>
+        <waypoints>[-94, -148, 0, 56]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5nsXxQ6Edya8YD8Vgb7-g" anchor="_A5nsURQ6Edya8YD8Vgb7-g _A5nsUhQ6Edya8YD8Vgb7-g">
         <property xmi:id="_A5nsYBQ6Edya8YD8Vgb7-g" key="font" value="-regular-8"/>
@@ -443,8 +443,8 @@
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5nscxQ6Edya8YD8Vgb7-g" anchor="_A5nsaxQ6Edya8YD8Vgb7-g _A5nsCxQ6Edya8YD8Vgb7-g">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5nsdBQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -80, -920, 179]</waypoints>
-        <waypoints>[920, -80, 0, 179]</waypoints>
+        <waypoints>[0, -80, -920, 178]</waypoints>
+        <waypoints>[920, -80, 0, 178]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5nsdRQ6Edya8YD8Vgb7-g" anchor="_A5nsaxQ6Edya8YD8Vgb7-g _A5nsKxQ6Edya8YD8Vgb7-g">
         <property xmi:id="_A5nsdhQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
@@ -520,8 +520,8 @@
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5nsmxQ6Edya8YD8Vgb7-g" anchor="_A5nskxQ6Edya8YD8Vgb7-g _A5nr9xQ6Edya8YD8Vgb7-g">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5nsnBQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -38, -114, 46]</waypoints>
-        <waypoints>[114, -38, 0, 46]</waypoints>
+        <waypoints>[0, -40, -114, 46]</waypoints>
+        <waypoints>[114, -40, 0, 46]</waypoints>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_A5nsnRQ6Edya8YD8Vgb7-g" position="920,883" size="140,-1">
         <anchorage xmi:id="_A5nsnhQ6Edya8YD8Vgb7-g" graphEdge="_A5nsthQ6Edya8YD8Vgb7-g _A5nsvBQ6Edya8YD8Vgb7-g _A5nswhQ6Edya8YD8Vgb7-g _A5nsyBQ6Edya8YD8Vgb7-g _A5nsyhQ6Edya8YD8Vgb7-g"/>
@@ -604,9 +604,10 @@
         <waypoints>[782, 233, -39, 144]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5nsyBQ6Edya8YD8Vgb7-g" anchor="_A5nsnhQ6Edya8YD8Vgb7-g _A5nsCxQ6Edya8YD8Vgb7-g">
+        <property xmi:id="_1bflMEG_EdyHTuqCoVfwgw" key="router" value="Forest"/>
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5nsyRQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -102, -285, 179]</waypoints>
-        <waypoints>[285, -102, 0, 179]</waypoints>
+        <waypoints>[0, -104, -286, 178]</waypoints>
+        <waypoints>[286, -104, 0, 178]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5nsyhQ6Edya8YD8Vgb7-g" anchor="_A5nsnhQ6Edya8YD8Vgb7-g _A5nsnxQ6Edya8YD8Vgb7-g">
         <property xmi:id="_A5nsyxQ6Edya8YD8Vgb7-g" key="font" value="-regular-8"/>
@@ -657,8 +658,8 @@
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5ns4RQ6Edya8YD8Vgb7-g" anchor="_A5nr9xQ6Edya8YD8Vgb7-g _A5ns0BQ6Edya8YD8Vgb7-g">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5ns4hQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -96, -157, 269]</waypoints>
-        <waypoints>[157, -96, 0, 269]</waypoints>
+        <waypoints>[0, -96, -156, 268]</waypoints>
+        <waypoints>[156, -96, 0, 268]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5ns4xQ6Edya8YD8Vgb7-g" anchor="_A5nsKxQ6Edya8YD8Vgb7-g _A5ns0BQ6Edya8YD8Vgb7-g">
         <property xmi:id="_A5ns5BQ6Edya8YD8Vgb7-g" key="font" value="-regular-8"/>
@@ -738,6 +739,11 @@
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A5ntDhQ6Edya8YD8Vgb7-g" presentation="default">
             <element href="kermeta_java.ecore#//language/structure/TypeDefinition"/>
           </semanticModel>
+          <contained xsi:type="di:GraphNode" xmi:id="_cvgzoEG_EdyHTuqCoVfwgw" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_cvgzoUG_EdyHTuqCoVfwgw" presentation="default">
+              <element href="kermeta_java.ecore#//language/structure/TypeDefinition/isAspect"/>
+            </semanticModel>
+          </contained>
         </contained>
         <contained xsi:type="di:GraphNode" xmi:id="_A5ntDxQ6Edya8YD8Vgb7-g">
           <property xmi:id="_A5ntEBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
@@ -759,8 +765,8 @@
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5ntFxQ6Edya8YD8Vgb7-g" anchor="_A5ntChQ6Edya8YD8Vgb7-g _A5nsIBQ6Edya8YD8Vgb7-g">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5ntGBQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -60, -232, 58]</waypoints>
-        <waypoints>[232, -60, 0, 58]</waypoints>
+        <waypoints>[0, -68, -232, 56]</waypoints>
+        <waypoints>[232, -68, 0, 56]</waypoints>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_A5ntGRQ6Edya8YD8Vgb7-g" position="529,414" size="149,-1">
         <anchorage xmi:id="_A5ntGhQ6Edya8YD8Vgb7-g" graphEdge="_A5ntIhQ6Edya8YD8Vgb7-g _A5ntJBQ6Edya8YD8Vgb7-g _A5ntJhQ6Edya8YD8Vgb7-g"/>
@@ -782,8 +788,8 @@
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5ntIhQ6Edya8YD8Vgb7-g" anchor="_A5ntGhQ6Edya8YD8Vgb7-g _A5nsIBQ6Edya8YD8Vgb7-g">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5ntIxQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -56, 12, 66]</waypoints>
-        <waypoints>[-12, -56, 0, 66]</waypoints>
+        <waypoints>[0, -52, 0, 56]</waypoints>
+        <waypoints>[0, -52, 0, 56]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5ntJBQ6Edya8YD8Vgb7-g" anchor="_A5nsURQ6Edya8YD8Vgb7-g _A5ntGhQ6Edya8YD8Vgb7-g">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5ntJRQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
@@ -838,9 +844,10 @@
         <waypoints>[71, -195, 133, 21]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5ntQBQ6Edya8YD8Vgb7-g" anchor="_A5ntLRQ6Edya8YD8Vgb7-g _A5ns8BQ6Edya8YD8Vgb7-g">
+        <property xmi:id="_RhltMEHAEdyHTuqCoVfwgw" key="router" value="Forest"/>
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5ntQRQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -73, 363, 143]</waypoints>
-        <waypoints>[-363, -73, 0, 143]</waypoints>
+        <waypoints>[1, -74, 363, 142]</waypoints>
+        <waypoints>[-362, -74, 0, 142]</waypoints>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_A5ntQhQ6Edya8YD8Vgb7-g" position="469,726" size="115,-1">
         <anchorage xmi:id="_A5ntQxQ6Edya8YD8Vgb7-g" graphEdge="_A5ntSxQ6Edya8YD8Vgb7-g _A5ntURQ6Edya8YD8Vgb7-g _A5ntVBQ6Edya8YD8Vgb7-g _A5ntWhQ6Edya8YD8Vgb7-g _A5ntYBQ6Edya8YD8Vgb7-g _A5ntYxQ6Edya8YD8Vgb7-g _A5ntfBQ6Edya8YD8Vgb7-g"/>
@@ -871,10 +878,10 @@
         <waypoints>[47, 209, -310, 17]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5ntURQ6Edya8YD8Vgb7-g" anchor="_A5ntQxQ6Edya8YD8Vgb7-g _A5nsIBQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A5ntUhQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
+        <property xmi:id="_A5ntUhQ6Edya8YD8Vgb7-g" key="router" value="Forest"/>
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5ntUxQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[-26, -363, -103, 58]</waypoints>
-        <waypoints>[77, -363, 0, 58]</waypoints>
+        <waypoints>[1, -364, -77, 56]</waypoints>
+        <waypoints>[78, -364, 0, 56]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5ntVBQ6Edya8YD8Vgb7-g" anchor="_A5nsKxQ6Edya8YD8Vgb7-g _A5ntQxQ6Edya8YD8Vgb7-g">
         <property xmi:id="_A5ntVRQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
@@ -901,13 +908,13 @@
       <contained xsi:type="di:GraphEdge" xmi:id="_A5ntYBQ6Edya8YD8Vgb7-g" anchor="_A5ntQxQ6Edya8YD8Vgb7-g _A5ns0BQ6Edya8YD8Vgb7-g">
         <property xmi:id="_A5ntYRQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5ntYhQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[28, -159, -676, 269]</waypoints>
-        <waypoints>[704, -159, 0, 269]</waypoints>
+        <waypoints>[0, -428, -704, 0]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5ntYxQ6Edya8YD8Vgb7-g" anchor="_A5ntQxQ6Edya8YD8Vgb7-g _A5ns8BQ6Edya8YD8Vgb7-g">
+        <property xmi:id="_I1s7IEHAEdyHTuqCoVfwgw" key="router" value="Forest"/>
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5ntZBQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -92, -433, 336]</waypoints>
-        <waypoints>[433, -92, 0, 336]</waypoints>
+        <waypoints>[1, -88, -433, 340]</waypoints>
+        <waypoints>[434, -88, 0, 340]</waypoints>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_A5ntZRQ6Edya8YD8Vgb7-g" position="1471,792" size="129,-1">
         <anchorage xmi:id="_A5ntZhQ6Edya8YD8Vgb7-g" graphEdge="_A5ntbhQ6Edya8YD8Vgb7-g _A5ntdBQ6Edya8YD8Vgb7-g _A5ntehQ6Edya8YD8Vgb7-g _A5ntfBQ6Edya8YD8Vgb7-g _A5xdDxQ6Edya8YD8Vgb7-g _A5xdERQ6Edya8YD8Vgb7-g"/>
@@ -948,9 +955,10 @@
         <waypoints>[78, -508, 383, -14]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5ntehQ6Edya8YD8Vgb7-g" anchor="_A5ntZhQ6Edya8YD8Vgb7-g _A5ns8BQ6Edya8YD8Vgb7-g">
+        <property xmi:id="_OY5d8EHAEdyHTuqCoVfwgw" key="router" value="Forest"/>
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5ntexQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -351, 576, 143]</waypoints>
-        <waypoints>[-576, -351, 0, 143]</waypoints>
+        <waypoints>[0, -352, 576, 142]</waypoints>
+        <waypoints>[-576, -352, 0, 142]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5ntfBQ6Edya8YD8Vgb7-g" anchor="_A5ntZhQ6Edya8YD8Vgb7-g _A5ntQxQ6Edya8YD8Vgb7-g">
         <property xmi:id="_A5ntfRQ6Edya8YD8Vgb7-g" key="font" value="-regular-8"/>
@@ -964,9 +972,10 @@
         <waypoints>[-915, -44, 94, 22]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5ntghQ6Edya8YD8Vgb7-g" anchor="_A5nsghQ6Edya8YD8Vgb7-g _A5ns0BQ6Edya8YD8Vgb7-g">
+        <property xmi:id="_-HXJIEG_EdyHTuqCoVfwgw" key="router" value="Rectilinear"/>
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5ntgxQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -233, 195, 80]</waypoints>
-        <waypoints>[-196, -233, -1, 80]</waypoints>
+        <waypoints>[0, -209, 196, 103]</waypoints>
+        <waypoints>[-196, -209, 0, 103]</waypoints>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_A5xc8BQ6Edya8YD8Vgb7-g" position="1095,748" size="93,-1">
         <anchorage xmi:id="_A5xc8RQ6Edya8YD8Vgb7-g" graphEdge="_A5xc-RQ6Edya8YD8Vgb7-g"/>
@@ -988,6 +997,8 @@
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5xc-RQ6Edya8YD8Vgb7-g" anchor="_A5xc8RQ6Edya8YD8Vgb7-g _A5nr9xQ6Edya8YD8Vgb7-g">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5xc-hQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -39, 68, 47]</waypoints>
+        <waypoints>[-68, -39, 0, 47]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5xc-xQ6Edya8YD8Vgb7-g" anchor="_A5d7FBQ6Edya8YD8Vgb7-g _A5d68BQ6Edya8YD8Vgb7-g">
         <property xmi:id="_A5xc_BQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
@@ -1032,10 +1043,9 @@
         </semanticModel>
         <contained xsi:type="di:EdgeObjectUV" xmi:id="_A5xdFRQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="27" vDistance="3"/>
         <contained xsi:type="di:EdgeObjectUV" xmi:id="_A5xdFhQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="14" vDistance="-36"/>
-        <waypoints>[86, 0, -24, -181]</waypoints>
       </contained>
     </diagrams>
-    <diagrams xmi:id="_A5xdFxQ6Edya8YD8Vgb7-g" position="0,0" size="100,100" name="TypeSystem" viewport="689,150">
+    <diagrams xmi:id="_A5xdFxQ6Edya8YD8Vgb7-g" position="0,0" size="100,100" name="TypeSystem" zoom="0.75" viewport="547,107">
       <property xmi:id="_A5xdGBQ6Edya8YD8Vgb7-g" key="pageFormatName" value="A2"/>
       <property xmi:id="_A5xdGRQ6Edya8YD8Vgb7-g" key="diagramWidth" value="1680"/>
       <property xmi:id="_A5xdGhQ6Edya8YD8Vgb7-g" key="diagramHeight" value="2376"/>
@@ -1280,6 +1290,11 @@
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A5xdohQ6Edya8YD8Vgb7-g" presentation="default">
             <element href="kermeta_java.ecore#//language/structure/TypeDefinition"/>
           </semanticModel>
+          <contained xsi:type="di:GraphNode" xmi:id="_P89HIEG_EdyHTuqCoVfwgw" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_P89HIUG_EdyHTuqCoVfwgw" presentation="default">
+              <element href="kermeta_java.ecore#//language/structure/TypeDefinition/isAspect"/>
+            </semanticModel>
+          </contained>
         </contained>
         <contained xsi:type="di:GraphNode" xmi:id="_A5xdoxQ6Edya8YD8Vgb7-g">
           <property xmi:id="_A5xdpBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>

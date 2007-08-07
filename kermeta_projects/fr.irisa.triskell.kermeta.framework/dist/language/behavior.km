@@ -1032,21 +1032,21 @@
   <requires uri="structure.kmt">
     <ownedTag value="/**&#xA; * Contains all the classes that define the behavior of Kermeta (i.e the model representation&#xA; * of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta &#xA; * metamodel, viewed as a model.&#xA; * You can also find some information about the behavior package here : &lt;a href=&quot;http://www.kermeta.org/documents/manual/html.single&quot;>KermetaManual&lt;/a>&#xA; */"/>
   </requires>
-  <referencedModelingUnits href="dynamic_expression.km#/"/>
-  <referencedModelingUnits href="../kunit/kunit.km#/"/>
-  <referencedModelingUnits href="#/"/>
-  <referencedModelingUnits href="../persistence/resource.km#/"/>
-  <referencedModelingUnits href="../kunit/assert.km#/"/>
-  <referencedModelingUnits href="../utils/stack.km#/"/>
-  <referencedModelingUnits href="../io/std_io.km#/"/>
+  <referencedModelingUnits href="structure.km#/"/>
   <referencedModelingUnits href="../Standard.km#/"/>
   <referencedModelingUnits href="../standard/collections.km#/"/>
-  <referencedModelingUnits href="../standard/java.km#/"/>
-  <referencedModelingUnits href="structure.km#/"/>
-  <referencedModelingUnits href="../io/file_io.km#/"/>
-  <referencedModelingUnits href="reflective_collections.km#/"/>
   <referencedModelingUnits href="../standard/primitive_types.km#/"/>
-  <referencedModelingUnits href="../utils/hashtable.km#/"/>
-  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="#/"/>
   <referencedModelingUnits href="../reflection/reflection.km#/"/>
+  <referencedModelingUnits href="../persistence/resource.km#/"/>
+  <referencedModelingUnits href="reflective_collections.km#/"/>
+  <referencedModelingUnits href="../kunit/kunit.km#/"/>
+  <referencedModelingUnits href="../kunit/assert.km#/"/>
+  <referencedModelingUnits href="../utils/hashtable.km#/"/>
+  <referencedModelingUnits href="../utils/stack.km#/"/>
+  <referencedModelingUnits href="../io/std_io.km#/"/>
+  <referencedModelingUnits href="../io/file_io.km#/"/>
+  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="dynamic_expression.km#/"/>
+  <referencedModelingUnits href="../standard/java.km#/"/>
 </kermeta_language_structure:ModelingUnit>

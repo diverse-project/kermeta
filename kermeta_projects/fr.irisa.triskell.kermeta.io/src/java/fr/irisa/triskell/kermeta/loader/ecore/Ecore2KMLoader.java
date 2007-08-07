@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.6 2007-08-02 16:19:04 dvojtise Exp $
+/*$Id: Ecore2KMLoader.java,v 1.7 2007-08-07 13:35:22 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -154,6 +154,8 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			if ( kermetaUnit.isErrored() )
 				return kermetaUnit;
 			
+			constructAspectsListsForAll(kermetaUnit);
+						
 			applyPass3ToAll(kermetaUnit);
 			
 			if ( kermetaUnit.isErrored() )
@@ -168,6 +170,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			
 			if ( isQuickFixEnabled && ! kermetaUnit.isErrored() )
 				applyPass6ToAll(kermetaUnit);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			kermetaUnit.error( e.getLocalizedMessage() );

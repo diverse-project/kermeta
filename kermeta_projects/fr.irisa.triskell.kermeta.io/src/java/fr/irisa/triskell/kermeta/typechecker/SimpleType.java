@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.16 2007-08-01 07:22:03 ftanguy Exp $
+/* $Id: SimpleType.java,v 1.17 2007-08-07 13:35:21 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -37,6 +37,7 @@ import fr.irisa.triskell.kermeta.language.structure.impl.PrimitiveTypeImpl;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 
 /**
  * @author Franck Fleurey
@@ -214,7 +215,7 @@ public class SimpleType extends Type {
 				tempClass.setTypeDefinition( (ClassDefinition) iterator.next() );
 				list.addAll( InheritanceSearch.callableProperties( tempClass ) );
 			}
-			iterator = c.getTypeDefinition().getAspects().iterator();	
+			iterator = TypeDefinitionHelper.getAspects( (ClassDefinition) c.getTypeDefinition()).iterator();	
 			while ( iterator.hasNext() ) {
 				Class tempClass = StructureFactory.eINSTANCE.createClass();
 				tempClass.setTypeDefinition( (ClassDefinition) iterator.next() );

@@ -1,6 +1,6 @@
 
 
-/*$Id: KmBuildingState.java,v 1.2 2007-07-20 15:08:17 ftanguy Exp $
+/*$Id: KmBuildingState.java,v 1.3 2007-08-07 13:35:21 ftanguy Exp $
 * Project : io
 * File : 	KMTloader.java
 * License : EPL
@@ -18,8 +18,6 @@ import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
 public class KmBuildingState extends AbstractBuildingState {
 	
 	public boolean importDone = false;
-	
-	public boolean loading = true;
 	
 }
 

@@ -289,7 +289,7 @@
                 <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
               </containedType>
               <target xsi:type="kermeta_language_behavior:CallFeature" name="message">
-                <staticType href="../language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@target/@containedType.0"/>
+                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/set/@body/@statement.0/@elseBody/@statement.1/@target/@containedType.0"/>
                 <staticProperty href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/kunit/Assert/fail/@body/@statement.0/@containedType.0" name="exception"/>
               </target>
@@ -359,21 +359,21 @@
   </packages>
   <requires uri="../Standard.kmt"/>
   <usings qualifiedName="kermeta::standard"/>
-  <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
-  <referencedModelingUnits href="kunit.km#/"/>
-  <referencedModelingUnits href="../language/behavior.km#/"/>
-  <referencedModelingUnits href="../persistence/resource.km#/"/>
-  <referencedModelingUnits href="#/"/>
-  <referencedModelingUnits href="../utils/stack.km#/"/>
-  <referencedModelingUnits href="../io/std_io.km#/"/>
   <referencedModelingUnits href="../Standard.km#/"/>
   <referencedModelingUnits href="../standard/collections.km#/"/>
-  <referencedModelingUnits href="../standard/java.km#/"/>
-  <referencedModelingUnits href="../language/structure.km#/"/>
-  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
-  <referencedModelingUnits href="../io/file_io.km#/"/>
   <referencedModelingUnits href="../standard/primitive_types.km#/"/>
-  <referencedModelingUnits href="../utils/hashtable.km#/"/>
-  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="../language/behavior.km#/"/>
+  <referencedModelingUnits href="../language/structure.km#/"/>
   <referencedModelingUnits href="../reflection/reflection.km#/"/>
+  <referencedModelingUnits href="../persistence/resource.km#/"/>
+  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
+  <referencedModelingUnits href="kunit.km#/"/>
+  <referencedModelingUnits href="#/"/>
+  <referencedModelingUnits href="../utils/hashtable.km#/"/>
+  <referencedModelingUnits href="../utils/stack.km#/"/>
+  <referencedModelingUnits href="../io/std_io.km#/"/>
+  <referencedModelingUnits href="../io/file_io.km#/"/>
+  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
+  <referencedModelingUnits href="../standard/java.km#/"/>
 </kermeta_language_structure:ModelingUnit>

@@ -26,24 +26,24 @@
     </nestedPackage>
   </packages>
   <requires uri="primitive_types.kmt">
-    <ownedTag value="/**&#xA; * $Id: java.km,v 1.4 2007-07-24 13:46:51 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */"/>
+    <ownedTag value="/**&#xA; * $Id: java.km,v 1.5 2007-08-07 13:35:20 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */"/>
   </requires>
   <usings qualifiedName="kermeta::exceptions"/>
-  <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
-  <referencedModelingUnits href="../kunit/kunit.km#/"/>
-  <referencedModelingUnits href="../language/behavior.km#/"/>
-  <referencedModelingUnits href="../persistence/resource.km#/"/>
-  <referencedModelingUnits href="../kunit/assert.km#/"/>
-  <referencedModelingUnits href="../utils/stack.km#/"/>
-  <referencedModelingUnits href="../io/std_io.km#/"/>
+  <referencedModelingUnits href="primitive_types.km#/"/>
   <referencedModelingUnits href="../Standard.km#/"/>
   <referencedModelingUnits href="collections.km#/"/>
-  <referencedModelingUnits href="#/"/>
+  <referencedModelingUnits href="../language/behavior.km#/"/>
   <referencedModelingUnits href="../language/structure.km#/"/>
-  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
-  <referencedModelingUnits href="../io/file_io.km#/"/>
-  <referencedModelingUnits href="primitive_types.km#/"/>
-  <referencedModelingUnits href="../utils/hashtable.km#/"/>
-  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
   <referencedModelingUnits href="../reflection/reflection.km#/"/>
+  <referencedModelingUnits href="../persistence/resource.km#/"/>
+  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
+  <referencedModelingUnits href="../kunit/kunit.km#/"/>
+  <referencedModelingUnits href="../kunit/assert.km#/"/>
+  <referencedModelingUnits href="../utils/hashtable.km#/"/>
+  <referencedModelingUnits href="../utils/stack.km#/"/>
+  <referencedModelingUnits href="../io/std_io.km#/"/>
+  <referencedModelingUnits href="../io/file_io.km#/"/>
+  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
+  <referencedModelingUnits href="#/"/>
 </kermeta_language_structure:ModelingUnit>

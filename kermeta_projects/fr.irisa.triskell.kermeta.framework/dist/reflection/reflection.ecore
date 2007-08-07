@@ -145,7 +145,7 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean">
+      <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/** Alias for kermeta::standard::Boolean */"/>
         </eAnnotations>
@@ -641,12 +641,11 @@
             <details key="documentation" value="/** this boolean allows to tell if this Type definition is an aspect or not&#xA;  * If it is an aspect, then at runtime, its definition will be merged with the definition of another&#xA;  * TypeDefinition that has exactly the same qualified name&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="baseAspects" upperBound="-1" eType="/1/reflection/TypeDefinition" eOpposite="/1/reflection/TypeDefinition/aspects">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="baseAspects" upperBound="-1" eType="/1/reflection/TypeDefinition">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/** References to the base classes */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="aspects" upperBound="-1" eType="/1/reflection/TypeDefinition" eOpposite="/1/reflection/TypeDefinition/baseAspects"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="VoidType" abstract="true" eSuperTypes="/1/reflection/Type">
         <eAnnotations source="kermeta">
@@ -692,42 +691,49 @@
     </eSubpackages>
   </ecore:EPackage>
   <ecore:EAnnotation source="dependentResource">
-    <references href="../language/dynamic_expression.ecore#/0"/>
-    <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/0"/>
-    <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../standard/collections.ecore#/0"/>
+    <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/0"/>
+    <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/2"/>
+    <references href="../Standard.ecore#/0"/>
+    <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
     <references href="../language/behavior.ecore#/2"/>
-    <references href="../persistence/resource.ecore#/0"/>
-    <references href="../persistence/resource.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/0"/>
-    <references href="../kunit/assert.ecore#/1"/>
-    <references href="../utils/stack.ecore#/0"/>
-    <references href="../utils/stack.ecore#/1"/>
-    <references href="../io/std_io.ecore#/0"/>
-    <references href="../io/std_io.ecore#/1"/>
-    <references href="../Standard.ecore#/0"/>
-    <references href="../Standard.ecore#/1"/>
-    <references href="../standard/collections.ecore#/0"/>
-    <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/java.ecore#/0"/>
-    <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
     <references href="../language/structure.ecore#/2"/>
-    <references href="../io/file_io.ecore#/0"/>
-    <references href="../io/file_io.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/0"/>
-    <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/0"/>
-    <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/0"/>
-    <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/0"/>
-    <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="#/0"/>
     <references href="#/1"/>
+    <references href="../persistence/resource.ecore#/0"/>
+    <references href="../persistence/resource.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/0"/>
+    <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/0"/>
+    <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/assert.ecore#/0"/>
+    <references href="../kunit/assert.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/0"/>
+    <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/stack.ecore#/0"/>
+    <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
+    <references href="../io/std_io.ecore#/0"/>
+    <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
+    <references href="../io/file_io.ecore#/0"/>
+    <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
+    <references href="../exceptions/exceptions.ecore#/0"/>
+    <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
+    <references href="../language/dynamic_expression.ecore#/0"/>
+    <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
+    <references href="../standard/java.ecore#/0"/>
+    <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

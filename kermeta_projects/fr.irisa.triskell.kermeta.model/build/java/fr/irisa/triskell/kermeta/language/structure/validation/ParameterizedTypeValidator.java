@@ -2,13 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedTypeValidator.java,v 1.3 2007-07-24 13:47:31 ftanguy Exp $
+ * $Id: ParameterizedTypeValidator.java,v 1.4 2007-08-07 13:35:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.validation;
 
 import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 
 /**
  * A sample validator interface for {@link fr.irisa.triskell.kermeta.language.structure.ParameterizedType}.

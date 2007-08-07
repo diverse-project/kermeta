@@ -2,13 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaExpressionValidator.java,v 1.3 2007-07-24 13:47:32 ftanguy Exp $
+ * $Id: LambdaExpressionValidator.java,v 1.4 2007-08-07 13:35:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.validation;
 
 import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaParameter;
 
 /**
  * A sample validator interface for {@link fr.irisa.triskell.kermeta.language.behavior.LambdaExpression}.
