@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.16 2007-08-07 13:35:21 ftanguy Exp $
+/* $Id: InheritanceSearch.java,v 1.17 2007-08-08 12:54:04 dvojtise Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -25,7 +25,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 
