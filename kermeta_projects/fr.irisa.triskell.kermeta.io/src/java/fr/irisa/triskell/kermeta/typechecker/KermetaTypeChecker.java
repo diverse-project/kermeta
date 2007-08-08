@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.20 2007-08-07 15:47:06 ftanguy Exp $
+/* $Id: KermetaTypeChecker.java,v 1.21 2007-08-08 13:36:10 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -141,13 +141,16 @@ public class KermetaTypeChecker {
 	    		unit.setTypeChecked( true );
 	    	}
 	    	
-	    	for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(unit) ) {
-	    		if ( ! importedUnit.isTypeChecked() ) {
-	    			KermetaTypeChecker t = new KermetaTypeChecker(importedUnit);
-	    			t.checkUnit();
-	    		}
-	    	}
-	    }
+    		if ( ! unit.isErrored() ) {
+		    	for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(unit) ) {
+		    		if ( ! importedUnit.isTypeChecked() ) {
+		    			KermetaTypeChecker t = new KermetaTypeChecker(importedUnit);
+		    			System.out.println( importedUnit.getUri() );
+		    			t.checkUnit();
+		    		}
+		    	}
+    		}
+    	}
     }
     
 	/** 
