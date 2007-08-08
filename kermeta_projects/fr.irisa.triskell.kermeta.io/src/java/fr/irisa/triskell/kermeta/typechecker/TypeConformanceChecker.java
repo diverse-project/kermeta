@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.17 2007-08-07 13:35:21 ftanguy Exp $
+/* $Id: TypeConformanceChecker.java,v 1.18 2007-08-08 08:28:11 dvojtise Exp $
 * Project : Kermeta (io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -47,8 +47,8 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 		// resolve primitive types
 	    provided = TypeCheckerContext.getCanonicalType(provided);
 	    required = TypeCheckerContext.getCanonicalType(required);
-		// The type void is a sub-type of everything
-		
+	    
+		// The type void is a sub-type of everything		
 		if (provided instanceof VoidType || provided == ((SimpleType)TypeCheckerContext.VoidType).type) return true;
 		
 		
@@ -67,7 +67,11 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 			Class cProvided = (Class) provided;
 			Class cRequired = (Class) required;
 			
-			if ( cProvided.getTypeDefinition() == cRequired.getTypeDefinition() )
+			// optimisation, if this is not a parametrized class and the typedefinition are equals doesn't need to 
+			// create the typeequalitychecker ...
+			if ( cRequired.getTypeDefinition().getTypeParameter().isEmpty()	&&
+				 cProvided.getTypeDefinition().getTypeParameter().isEmpty()	&&
+			     cProvided.getTypeDefinition() == cRequired.getTypeDefinition() )
 				return true;
 			
 			Set <TypeDefinition> providedBaseClasses = ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) cProvided.getTypeDefinition());
