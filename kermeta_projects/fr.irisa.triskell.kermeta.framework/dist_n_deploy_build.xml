@@ -1,17 +1,17 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.22 2007-07-26 08:33:53 cfaucher Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.23 2007-08-08 15:46:24 dvojtise Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="eclipse_dir" location="C:/eclipse3.3_1"/>
-	
+	<property name="eclipse.home" location="C:/eclipse3.3/eclipse"/>
+
 	<path id="project.class.path">
 		
 		<pathelement location="build/class"/>
 
-	  	<pathelement location="../fr.irisa.triskell.eclipse.util/build/class"/>
+	  	<pathelement location="../fr.irisa.triskell.eclipse.util/bin"/>
 	  	<pathelement location="../fr.irisa.triskell.kermeta.io/build/class"/>
 	  	<pathelement location="../fr.irisa.triskell.kermeta.model/build/class"/>
 	  	<pathelement location="../fr.irisa.triskell.kermeta.interpreter/build/class"/>
@@ -22,20 +22,27 @@
 	  	<pathelement location="lib/thirdparty/ldt-core.jar"/>
 	  	<pathelement location="lib/thirdparty/emfatic-core.jar"/>
   		
-		<pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.common_2.3.0.v200706200000.jar"/>
-	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore_2.3.0.v200706200000.jar"/>
-	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore.xmi_2.3.0.v200706200000.jar"/>
-	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf_2.3.0.v200706200000.jar"/>
-		
-		<pathelement location="${eclipse_dir}/plugins/org.eclipse.ui_3.3.0.I20070614-0800.jar"/>
-		<pathelement location="${eclipse_dir}/plugins/org.eclipse.core.runtime_3.3.100.v20070530.jar"/>
-		<pathelement location="${eclipse_dir}/plugins/org.eclipse.core.resources_3.3.0.v20070604.jar"/>
-		
+		<fileset dir="${eclipse.home}/plugins">
+		    <include name="**/org.eclipse.emf.common_*.jar"/>
+			<include name="**/org.eclipse.emf.ecore_*.jar"/>
+			<include name="**/org.eclipse.emf.ecore.xmi_*.jar"/>
+			<include name="**/org.eclipse.emf.validation_*.jar"/>
+			<include name="**/org.eclipse.equinox.common_*.jar"/>
+			<include name="**/org.eclipse.equinox.registry_*.jar"/>
+			<include name="**/org.eclipse.equinox.preferences_*.jar"/>
+			<include name="**/org.eclipse.osgi_*.jar"/>
+			<include name="**/org.eclipse.core.runtime_*.jar"/>
+			<include name="**/org.eclipse.core.jobs_*.jar"/>
+			<include name="**/org.eclipse.core.resources_*.jar"/>
+			<include name="**/org.eclipse.ui.workbench_*.jar"/>
+			<include name="**/org.eclipse.jface_*.jar"/>
+			<include name="**/org.eclipse.swt.*.jar"/>
+		</fileset>		
 	</path>
 
 	<target name="all"
 		description="create and deploy the jar file and the km file">
-		<!--<antcall target="create_framework"/>-->
+		<antcall target="create_framework"/>
 		<antcall target="deploy"/>	
 	</target>
 	<target name="deploy" 
