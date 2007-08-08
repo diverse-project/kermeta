@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.32 2007-08-02 08:45:51 cfaucher Exp $
+// $Id: primitive_types.kmt,v 1.33 2007-08-08 12:20:57 dtouzet Exp $
 package kermeta::standard; 
 
 require "../Standard.kmt"
@@ -21,14 +21,23 @@ using kermeta::exceptions
  */
 class ~Void {
 
+	/**
+	 * 
+	 */
 	method isVoid() : Boolean is do
 		result := true
 	end
 
+	/**
+	 *
+	 */
 	method toString() : String is do
 		result := "<void>"
 	end
 	
+	/**
+	 *
+	 */
 	method isInstanceOf(type : kermeta::reflection::Type) : Boolean is do
 		result := true
 	end
@@ -38,10 +47,9 @@ class ~Void {
 /**
  * Used for PrimitiveTypes like Integer,String, boolean
  */
-
 abstract class PrimitiveType {
-
 }
+
 
 /**
  * The abstract class ValueType does not contain any feature
@@ -51,8 +59,8 @@ abstract class PrimitiveType {
  * 
  */
 abstract class  ValueType inherits PrimitiveType {
-	
 }
+
 
 /**
  * The abstract class Comparable defines a set of operation
@@ -98,7 +106,7 @@ abstract class Comparable {
 	operation isGreaterOrEqual(other : Object) : Boolean is do
 		result := self.compareTo(other) >= 0
 	end
-} // Comparable
+}
 
 
 /**
@@ -108,23 +116,28 @@ abstract class Comparable {
   */
 abstract class Summable<G> {
 	
-
+	/**
+	 *
+	 */
 	operation plus(other : G) : G is abstract
-	
-	
-} // Summable
-
-
-class NotComparableException inherits kermeta::exceptions::Exception {
-	// raized when two objects are not comparable  
 }
+
+
+/**
+ * raized when two objects are not comparable
+ */
+class NotComparableException inherits kermeta::exceptions::Exception {
+}
+
 
 /**
  * The Boolean type
  */
 class Boolean inherits PrimitiveType
 {
-
+	/**
+	 *
+	 */
 	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Boolean then  
 			result := false 
@@ -176,28 +189,28 @@ class Boolean inherits PrimitiveType
 		result := not ( self and other)
 	end
 	
+	/**
+	 *
+	 */
 	method toString() : String is do
 		result := if self then "true" else "false" end
 	end
-	
-} // Boolean
+}
+
 
 /**
  * The abstract class Numeric is the root class for all
  * numeric types
  */
-abstract class Numeric inherits Comparable, ValueType
-{ 
-	
-	
+abstract class Numeric inherits Comparable, ValueType { 
 }
+
 
 /**
  * The class Integer
  */
 class Integer inherits Numeric, Summable<Integer>
 {
-
 	/**
 	 * Iteration
 	 */ 
@@ -225,7 +238,10 @@ class Integer inherits Numeric, Summable<Integer>
 			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.compareTo(self,other)
 		end
 	end
-	
+
+	/**
+	 *
+	 */	
 	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Integer then
 			// allow comparing with reals
@@ -364,22 +380,24 @@ class Integer inherits Numeric, Summable<Integer>
 		end
 	end
 	
+	/**
+	 *
+	 */
 	method toString() : String is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.toString(self)
 	end
-	
 }
+
 
 /**
  * class Real
  */
 class Real inherits Numeric, Summable<Real>
 {
-
 	/**
 	 * returns self + other
 	 */
-		method plus(other : Real) : Real is do
+	method plus(other : Real) : Real is do
 		if other.isVoid then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.plus(self, other)
         end
@@ -435,7 +453,10 @@ class Real inherits Numeric, Summable<Real>
 			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.compareTo(self,other)
 		end
 	end
-	
+
+	/**
+	 *
+	 */	
 	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Real then
 			// allow comparing with integers
@@ -456,17 +477,20 @@ class Real inherits Numeric, Summable<Real>
 		result := 0.toReal - self
 	end
 	
+	/**
+	 *
+	 */
 	method toString() : String is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.toString(self)
 	end
 }
+
 
 /**
  * The class Character
  */
 class Character inherits ValueType, Comparable
 {
-
 	/**
 	 * Comparaison
 	 */
@@ -476,6 +500,9 @@ class Character inherits ValueType, Comparable
         end
 	end
 
+	/**
+	 *
+	 */
 	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Character then
 			result := false
@@ -484,17 +511,20 @@ class Character inherits ValueType, Comparable
 		end
 	end
 	
+	/**
+	 *
+	 */
 	method toString() : String is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.toString(self)
 	end
-	
-	}
+}
+
+
 /**
  * The class String
  */
 class String inherits ValueType, Comparable, Summable<String>
 {
-
 	/**
 	 * Comparaison
 	 */
@@ -503,7 +533,10 @@ class String inherits ValueType, Comparable, Summable<String>
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.compareTo(self,other)
         end
 	end
-	
+
+	/**
+	 *
+	 */
 	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != String then
 			result := false
@@ -551,7 +584,6 @@ class String inherits ValueType, Comparable, Summable<String>
 	operation indexOf(str : String) : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.indexOf(self,str)
 	end
-	
 	
 	/**
 	 * returns a new string that is a substring of this string
@@ -611,15 +643,15 @@ class String inherits ValueType, Comparable, Summable<String>
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toReal(self)
 		if result.isVoid then raise StringFormatException.new end
 	end
-	
 }
+
 
 /**
  * Unlimited natural is used for reflection.
  * It is mapped to integer.equals().
  * Any negative number is interpreted as '*'
  */
-alias UnlimitedNatural : Integer ;
+alias UnlimitedNatural : Integer;
 
 /***************************************************
  *                  END OF FILE

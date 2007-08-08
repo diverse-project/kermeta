@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.43 2007-07-26 09:35:15 ftanguy Exp $
+/* $Id: structure.kmt,v 1.44 2007-08-08 12:20:56 dtouzet Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -23,22 +23,44 @@ package kermeta::language::structure;
 require "../Standard.kmt"
 require "behavior.kmt" 
 
-alias String : kermeta::standard::String;
 
+alias String : kermeta::standard::String;
+alias Boolean : kermeta::standard::Boolean;
+alias Integer : kermeta::standard::Integer;
+alias Real 	: kermeta::standard::Real;
+/** Alias to kermeta::standard::UnlimitedNatural */
+alias UnlimitedNatural : kermeta::standard::UnlimitedNatural;
+
+
+/**
+ * To be written
+ */
 class Object inherits kermeta::reflection::Object, KMStructureVisitable
 {
+	/**
+ 	 * Implements kermeta::reflection::Object.getMetaClass()
+ 	 */
 	method getMetaClass() : kermeta::reflection::Class from kermeta::reflection::Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getMetaClass(self)
 	end
-	
+
+	/**
+ 	 * Implements kermeta::reflection::Object.container()
+ 	 */
 	method container() : kermeta::reflection::Object from kermeta::reflection::Object is do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)
 	end
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.checkInvariants()
+ 	 */
 	method checkInvariants() : Void from kermeta::reflection::Object is do
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)
 	end
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.checkAllInvariants()
+ 	 */
 	method checkAllInvariants() : Void from kermeta::reflection::Object is do
 		if(self!=void) then
 			// Call the invariant verification
@@ -60,22 +82,37 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 		end
 	end
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.equals()
+ 	 */
 	method equals(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(self, element)
 	end
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.isNotEqual()
+ 	 */
 	method isNotEqual(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
 		result := not equals(element)
 	end		
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.isKindOf(Class)
+ 	 */
 	method isKindOf(cl : kermeta::reflection::Class) : Boolean is do
 		result := (self.getMetaClass.equals(cl))
 	end
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.get(Property)
+ 	 */
 	method get(~property : kermeta::reflection::Property) : kermeta::reflection::Object from kermeta::reflection::Object is do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.get(self, ~property)
 	end
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.set(Property)
+ 	 */
 	method ~set(~property : kermeta::reflection::Property, element : kermeta::reflection::Object) : Void from kermeta::reflection::Object is do
 		if element.isInstanceOf(~property.type) then
 			extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, element)
@@ -86,101 +123,161 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 		end
 	end
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.isSet(Property)
+ 	 */
 	method isSet(~property : kermeta::reflection::Property) : Boolean from kermeta::reflection::Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(self, ~property)
 	end
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.unset(Property)
+ 	 */
 	method unset(~property : kermeta::reflection::Property) : Void from kermeta::reflection::Object is do
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(self, ~property)
 	end
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.oid()
+ 	 */
 	method oid() : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.oid(self)
 	end
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.toString()
+ 	 * Returns a String of form [qn:oid] where 'qn' is the qualified name of
+ 	 * the object type, and oid the unique ID of the object
+ 	 */
 	method toString() : String is do
 		result := "[" + self.getMetaClass.typeDefinition.qualifiedName + ":" + oid.toString + "]"
 	end
-	
+
+	/**
+ 	 * Implements kermeta::reflection::Object.isFrozen()
+ 	 */	
 	method isFrozen() : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isFrozen(self)
 	end
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.isVoid()
+ 	 */
 	method isVoid() : Boolean is do
 		result := false
 	end
-	
+
+	/**
+ 	 * Implements kermeta::reflection::Object.hashcode()
+ 	 */	
 	method hashcode() : Integer is do		
 		// usually this method is not called when using hashtable because it directly tries the method hashcode in the RuntimeObject.java
 		// which fall back here only if the method is not redefined
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.hashcode(self)
 	end
-	
+
+	/**
+ 	 * Implements kermeta::reflection::Object.freeze()
+ 	 */	
 	method freeze() : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.freeze(self)
 	end
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.asType(Class)
+ 	 */
 	method asType(type : kermeta::reflection::Class) : kermeta::reflection::Object is do
 		if isInstanceOf(type) then result := self
 		else raise kermeta::exceptions::TypeCastError.new
 		end
 	end
 	
+	/**
+ 	 * Implements kermeta::reflection::Object.isInstanceOf(Type)
+ 	 */
 	method isInstanceOf(type : kermeta::reflection::Type) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isInstanceOf(self, type)
 	end
 	
 	/**
-	 * Returns the Resource currently containing (directly or indirectly) the object 
-	 * or void if the object belongs to ne resource
+	 * Implements kermeta::reflection::Object.containingResource()
 	 */
 	method containingResource() : kermeta::persistence::Resource is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getContainingResource(self)
 	end
-	
 }
-alias Boolean : kermeta::standard::Boolean;
-alias Integer : kermeta::standard::Integer;
-alias Real 	: kermeta::standard::Real;
 
 
+/**
+ * To be written
+ */
 abstract class ParameterizedType inherits Type, kermeta::reflection::ParameterizedType, KMStructureVisitable
 {
+	/**
+ 	 * To be written
+ 	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitParameterizedType(self, context)
 		end
-
 }
+
+
+/**
+ * To be written
+ */
 class ModelType inherits Type, TypeDefinition, kermeta::reflection::ModelType, KMStructureVisitable
 {
+	/**
+ 	 * To be written
+ 	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitModelType(self, context)
 		end
 
+	/**
+ 	 * Implements kermeta::reflection::ModelType.new()
+ 	 */
 	method new() : kermeta::reflection::Model is
 		do
 			result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.newObject(self)
 		end
+
+	/**
+ 	 * Implements kermeta::reflection::ModelType.isModelTypeOf(Model)
+ 	 */
 	method isModelTypeOf(m : kermeta::reflection::Model) : Boolean is
 		do
 			result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.isModelTypeOf(self, m)
 		end
 }
 
+
+/**
+ * To be written
+ */
 class Class inherits ParameterizedType, kermeta::reflection::Class, KMStructureVisitable
 {
+	/**
+ 	 * Implements kermeta::reflection::Class.new()
+ 	 */
 	method new() : kermeta::reflection::Object from kermeta::reflection::Class is 
 	do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)
 	end
 
+	/**
+ 	 * Implements kermeta::language::structure::Type.clone(Object)
+ 	 */
 	method clone(objectToClone : Object) : Object is
 	do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.cloneObject(self, objectToClone)
 	end
-	
+
+	/**
+ 	 * Implements kermeta::language::structure::Type.deepClone(Object)
+ 	 */	
 	method deepClone(objectToClone : Object) : Object is
 	do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.deepCloneObject(self, objectToClone)
@@ -190,14 +287,24 @@ class Class inherits ParameterizedType, kermeta::reflection::Class, KMStructureV
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.isInstance(self, object)
 	end 
 	*/
+
+	/**
+ 	 * To be written
+ 	 */
 	method hasSubType(object : kermeta::reflection::Type) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.hasSubType(self, object)
 	end
-	
+
+	/**
+ 	 * Implements kermeta::language::structure::Object.equals(Object)
+ 	 */	
 	method equals(other : kermeta::reflection::Object) : Boolean from Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.equals(self, other)
 	end
-	
+
+	/**
+ 	 * To be written
+ 	 */	
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 	do
 		result := visitor.visitClass(self, context)
@@ -205,119 +312,268 @@ class Class inherits ParameterizedType, kermeta::reflection::Class, KMStructureV
 }
 
 
+/**
+ * To be written
+ */
 class MultiplicityElement inherits TypedElement, kermeta::reflection::MultiplicityElement, KMStructureVisitable
 {
+	/**
+ 	 * To be written
+ 	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitMultiplicityElement(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 class Constraint inherits kermeta::reflection::Constraint,NamedElement,kermeta::reflection::Operation, KMStructureVisitable
 {
+	/**
+ 	 * Language in which the constraint is expressed
+ 	 */
 	attribute language : ConstraintLanguage
+
+	/**
+ 	 * Type of the Constraint (precond/postcond/inv)
+ 	 */
 	attribute stereotype : ConstraintType
 	
+	/**
+ 	 * Body of the constraint, expressed as a KerMeta expression
+ 	 */
 	attribute body : kermeta::language::behavior::Expression
-	
+
+	/**
+ 	 * To be written
+ 	 */	
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitConstraint(self, context)
 		end
 }
+
+
+/**
+ * Enumeration listing supported constraint languages
+ */
 enumeration ConstraintLanguage {
 	kermeta;
 	ocl;
 }
+
+
+/**
+ * Enumeration liting the different kinds of constraints
+ */
 enumeration ConstraintType {
 	~pre;
     ~post;
     ~inv;
 }
+
+
+/**
+ * To be written
+ */
 class Operation inherits MultiplicityElement, kermeta::reflection::Operation, KMStructureVisitable
 {
+	/**
+ 	 * Body of the Operation, expressed as a KerMeta expression
+ 	 */
 	attribute body : kermeta::language::behavior::Expression
 
+	/**
+ 	 * To be written
+ 	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitOperation(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 class Tag inherits Object, kermeta::reflection::Tag, KMStructureVisitable
 {
+	/**
+ 	 * To be written
+ 	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitTag(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 class Property inherits MultiplicityElement, kermeta::reflection::Property, KMStructureVisitable
 {
-
+	/**
+ 	 * To be written
+ 	 */
 	attribute getterBody : kermeta::language::behavior::Expression
+
+	/**
+ 	 * To be written
+ 	 */
 	attribute setterBody : kermeta::language::behavior::Expression
 	
+	/**
+ 	 * To be written
+ 	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitProperty(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 abstract class TypeContainer inherits Object, kermeta::reflection::TypeContainer
 {
 }
+
+
+/**
+ * To be written
+ */
 abstract class VirtualTypeContainer inherits Object, kermeta::reflection::VirtualTypeContainer
 {
 }
+
+
+/**
+ * To be written
+ */
 class GenericTypeDefinition inherits TypeDefinition, kermeta::reflection::GenericTypeDefinition, KMStructureVisitable
 {
+	/**
+ 	 * To be written
+ 	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitGenericTypeDefinition(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 class ClassDefinition inherits TypeContainer, GenericTypeDefinition, kermeta::reflection::ClassDefinition, KMStructureVisitable
 {
+	/**
+ 	 * To be written
+ 	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitClassDefinition(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 class TypedElement inherits TypeContainer, NamedElement, kermeta::reflection::TypedElement, KMStructureVisitable
 {
+	/**
+ 	 * To be written
+ 	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitTypedElement(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 abstract class TypeVariable inherits Type, NamedElement, kermeta::reflection::TypeVariable, KMStructureVisitable
 {
 }
+
+
+/**
+ * To be written
+ */
 class ObjectTypeVariable inherits TypeContainer, TypeVariable, kermeta::reflection::ObjectTypeVariable, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitObjectTypeVariable(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 class VirtualType inherits ObjectTypeVariable, kermeta::reflection::VirtualType, KMStructureVisitable {
+
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitVirtualType(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 class ModelTypeVariable inherits TypeVariable, TypeContainer, VirtualTypeContainer, kermeta::reflection::ModelTypeVariable {
+
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitModelTypeVariable(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 class Model inherits Object, kermeta::reflection::Model {
+
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitModel(self, context)
 		end
+
+	/**
+	 * Implements kermeta::reflection::Model.filter(Type)
+	 */
 	method filter(typeName : kermeta::reflection::Type) : set kermeta::reflection::Object[0..*] is
 		do
 			result := contents.select { o | typeName.isInstance(o) }.asSet
 		end
+
+	/**
+	 * Implements kermeta::reflection::Model.add(Object)
+	 */
 	method add(obj : kermeta::reflection::Object) : Void is
 		do
 			// This is only implemented as an extern so that at some point in the future, a runtime
@@ -327,11 +583,21 @@ class Model inherits Object, kermeta::reflection::Model {
 			contents
 			extern fr::irisa::triskell::kermeta::runtime::language::Model.add(self, obj)
 		end
+
+
+	/**
+	 * Implements kermeta::reflection::Model.remove(Object)
+	 */
 	method remove(obj : kermeta::reflection::Object) : Void is
 		do
 			// This is not really a hack.
 			extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(contents, obj)
 		end
+
+
+	/**
+	 * Implements kermeta::reflection::Model.addAllCompatible(Collection<Object>)
+	 */
 	method addAllCompatible(objectsToAdd : kermeta::standard::Collection<Object>) : kermeta::standard::Collection<Object> is do
 		// version writen in java: don't know if this is faster enough to worth it ...
 		// Cute hack. The java code for add is hard if contents hasn't already been accessed. So...
@@ -347,43 +613,75 @@ class Model inherits Object, kermeta::reflection::Model {
 			end
 		} 
 	end
-	
+
+	/**
+	 * Implements kermeta::reflection::Model.addCompatible(Object)
+	 */	
 	method addCompatible(objectToAdd : kermeta::reflection::Object) : kermeta::reflection::Object is do
 		// Cute hack. The java code for addCompatible is hard if contents hasn't already been accessed. So...
 		contents
 		extern fr::irisa::triskell::kermeta::runtime::language::Model.addCompatible(self, objectToAdd)
 	end
 }
+
+
+/**
+ * To be written
+ */
 class ProductType inherits TypeContainer, Type, kermeta::reflection::ProductType, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitProductType(self, context)
 		end
 }
 
+
+/**
+ * To be written
+ */
 class FunctionType inherits TypeContainer, Type, kermeta::reflection::FunctionType, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitFunctionType(self, context)
 		end
 }
 
+
+/**
+ * To be written
+ */
 class Type inherits Object, kermeta::reflection::Type, KMStructureVisitable
 {
-	
+	/**
+	 * Returns a copy of passed Object built by recursively copying attribute
+	 * properties, and referencing original reference properties values
+	 */
 	operation clone (objectToClone : Object) : Object is abstract
 
-
+	/**
+	 * Returns a copy of passed Object built by recursively copying values of
+	 * all properties, no matter the property kind
+	 */
 	operation deepClone (objectToClone : Object) : Object is abstract
 
-
+	/**
+	 * Implements kermeta::reflection::Type.isInstance(Object)
+	 */
 	method isInstance(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Type is do
 		result := element.isInstanceOf(self)
 	end
 
-
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitType(self, context)
@@ -391,33 +689,56 @@ class Type inherits Object, kermeta::reflection::Type, KMStructureVisitable
 }
 
 
+/**
+ * To be written
+ */
 class TypeVariableBinding inherits TypeContainer, Object, kermeta::reflection::TypeVariableBinding, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitTypeVariableBinding(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 class PrimitiveType inherits TypeContainer, DataType, kermeta::reflection::PrimitiveType, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 	do
 		result := visitor.visitPrimitiveType(self, context)
 	end
-			
-	method clone(objectToClone : Object) : Object is abstract		
 
+	/**
+	 * Implements kermeta::language::structure::Type.clone(Object)
+	 */	
+	method clone(objectToClone : Object) : Object is abstract		
 }
 
+
+/**
+ * To be written
+ */
 class NamedElement inherits Object, kermeta::reflection::NamedElement, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitNamedElement(self, context)
 		end
 }
 
-/**
+/*
 class SelfType inherits Type, kermeta::reflection::SelfType, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
@@ -425,138 +746,362 @@ class SelfType inherits Type, kermeta::reflection::SelfType, KMStructureVisitabl
 			result := visitor.visitSelfType(self, context)
 		end
 } */
+
+
+/**
+ * To be written
+ */
 class TypeDefinitionContainer inherits NamedElement, kermeta::reflection::TypeDefinitionContainer, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitTypeDefinitionContainer(self, context)
 		end
 }
 
+
+/**
+ * To be written
+ */
 class Package inherits TypeDefinitionContainer, kermeta::reflection::Package, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitPackage(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 class ModelingUnit inherits kermeta::reflection::ModelingUnit, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitModelingUnit(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 abstract class Require inherits kermeta::reflection::Require, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitRequire(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 abstract class Using inherits kermeta::reflection::Using, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitUsing(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 class TypeDefinition inherits NamedElement, kermeta::reflection::TypeDefinition, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitTypeDefinition(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 class VoidType inherits Type, kermeta::reflection::VoidType, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitVoidType(self, context)
 		end
 }
+
+
+/**
+ * To be written
+ */
 class DataType inherits TypeDefinition, Type, kermeta::reflection::DataType, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitDataType(self, context)
 		end
-	
+
+	/**
+	 * Implements kermeta::language::structure::Type.clone(Object)
+	 */	
 	method clone(objectToClone : Object) : Object is abstract
-	
 }
+
+
+/**
+ * To be written
+ */
 class Enumeration inherits DataType, kermeta::reflection::Enumeration, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitEnumeration(self, context)
 		end
 
+	/**
+	 * Implements kermeta::language::structure::Type.clone(Object)
+	 */
 	method clone(objectToClone : Object) : Object is
 	do
 		raise "NOT IMPLEMENTED"
 	end
 }
 
+
+/**
+ * To be written
+ */
 class EnumerationLiteral inherits NamedElement, kermeta::reflection::EnumerationLiteral, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitEnumerationLiteral(self, context)
 		end
 }
 
+
+/**
+ * To be written
+ */
 class Parameter inherits MultiplicityElement, kermeta::reflection::Parameter, KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitParameter(self, context)
 		end
 }
-/** Alias to kermeta::standard::UnlimitedNatural */
-alias UnlimitedNatural : kermeta::standard::UnlimitedNatural;
 
-/** Implementation of the Visitor pattern for the model elements contained in structure package */
+
+/**
+ * Implementation of the Visitor pattern for the model elements contained in structure package
+ */
 abstract class KMStructureVisitor<ContextType, ResultType>
 {
+	/**
+	 * To be written
+	 */
 	operation visitClass(node : Class, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitMultiplicityElement(node : MultiplicityElement, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitOperation(node : Operation, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitTag(node : Tag, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitProperty(node : Property, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitClassDefinition(node : ClassDefinition, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitTypedElement(node : TypedElement, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitObjectTypeVariable(node : ObjectTypeVariable, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitVirtualType(node : VirtualType, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitModelTypeVariable(node : ModelTypeVariable, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitModel(node : Model, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitProductType(node : ProductType, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitFunctionType(node : FunctionType, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitType(node : Type, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitTypeVariableBinding(node : TypeVariableBinding, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitPrimitiveType(node : PrimitiveType, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitNamedElement(node : NamedElement, context : ContextType) : ResultType is do end
 	//operation visitSelfType(node : SelfType, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitPackage(node : Package, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitTypeDefinition(node : TypeDefinition, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
 	operation visitVoidType(node : VoidType, context : ContextType) : ResultType is do end
-	operation visitDataType(node : DataType, context : ContextType) : ResultType is do end
-	operation visitEnumeration(node : Enumeration, context : ContextType) : ResultType is do end
-	operation visitEnumerationLiteral(node : EnumerationLiteral, context : ContextType) : ResultType is do end
-	operation visitParameter(node : Parameter, context : ContextType) : ResultType is do end
-	operation visitGenericTypeDefinition(node : GenericTypeDefinition, context : ContextType) : ResultType is do end
-	operation visitParameterizedType(node : ParameterizedType, context : ContextType) : ResultType is do end
-	operation visitModelType(node : ModelType, context : ContextType) : ResultType is do end
-	operation visitTypeDefinitionContainer(node : TypeDefinitionContainer, context : ContextType) : ResultType is do end
-	operation visitConstraint(node : Constraint, context : ContextType) : ResultType is do end
-	operation visitModelingUnit(node : ModelingUnit, context : ContextType) : ResultType is do end
-	operation visitRequire(node : Require, context : ContextType) : ResultType is do end
-	operation visitUsing(node : Using, context : ContextType) : ResultType is do end
 	
+	/**
+	 * To be written
+	 */
+	operation visitDataType(node : DataType, context : ContextType) : ResultType is do end
+	
+	/**
+	 * To be written
+	 */	
+	operation visitEnumeration(node : Enumeration, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
+	operation visitEnumerationLiteral(node : EnumerationLiteral, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
+	operation visitParameter(node : Parameter, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
+	operation visitGenericTypeDefinition(node : GenericTypeDefinition, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
+	operation visitParameterizedType(node : ParameterizedType, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
+	operation visitModelType(node : ModelType, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
+	operation visitTypeDefinitionContainer(node : TypeDefinitionContainer, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
+	operation visitConstraint(node : Constraint, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
+	operation visitModelingUnit(node : ModelingUnit, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
+	operation visitRequire(node : Require, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
+	operation visitUsing(node : Using, context : ContextType) : ResultType is do end
 }
-/** All the classes defined in this <code>kermeta::language::structure</code> package 
- * inherit this class. Part of Visitor pattern implementation. */
+
+
+/**
+ * All the classes defined in this <code>kermeta::language::structure</code> package 
+ * inherit this class. Part of Visitor pattern implementation.
+ */
 abstract class KMStructureVisitable
 {
+	/**
+	 * To be written
+	 */
 	operation acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType is abstract
 }

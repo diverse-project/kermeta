@@ -8,7 +8,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.32 2007-07-20 15:08:39 ftanguy Exp $
+ * $Id: resource.kmt,v 1.33 2007-08-08 12:20:57 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -43,14 +43,19 @@ using kermeta::standard
  */
 abstract class Resource inherits kermeta::standard::Set<Object>
 {
-	/** The uri of the model-instance to load */
+	/**
+	 * Uri of the Resource to load
+	 */
 	attribute uri : String
 	
-	/** The uri of the meta-model of the model-instance to load */
+	/**
+	 * Uri of the meta-model of the Resource to load
+	 */
 	attribute metaModelURI : String
 	
-	/** The entities contained in the model-instance, that are provided when user loads a resource 
-	 *  instances == rootContents
+	/**
+	 * The entities contained in the model-instance, that are provided when user loads a resource 
+	 * instances == rootContents
 	 * this is a loop on Resource itself in order to get backward compatibility
 	 * user should use the resource directly since this is a collection
 	 */
@@ -58,32 +63,34 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 		result := self
 	end
 	
-	/** The repository used to create this resource 
+	/**
+	 * Repository used to create the Resource
 	 * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only 
 	 * one Resource of a given Repository
 	 */
 	reference repository : Repository#resources
 	
-	/** Save a model instance, in the file specified by the initial uri 
-	 * Overrides the old version.
+	/**
+	 * Save a Resource in the file specified by the current value of uri 
 	 */
 	operation save() : Void is abstract
 	
-	/** Save a resource in a file referenced by this new uri. 
-	    This allows to save the result of a transformation without changing the original file. */
+	/**
+	 * Save a Resource in a file referenced by the new uri. 
+	 */
 	operation saveWithNewURI(new_uri : String) : Void is do end
 	
-	/** Loads a resource. Once loaded, you'll be able to query the resource for its content.  */	
+	/**
+	 * Loads the Resource, thus making content of the Resource browsable.
+	 * Raises a ResourceLoadException in case loaded Resource is empty
+	 */	
 	operation load() : Void is abstract
 	
-/*	operation setInstances(p_instances : Set<Object>) : kermeta::standard::~Void is do
-		instances := p_instances
-	end*/
-
 	/**
-	 * Returns set of Resources on which current Resource depends, empty set if current
-	 * Resource has no dependency
+	 * Returns the set of Resources the current Resource, which must have been loaded,
+	 * depends on, an empty set if current Resource has no dependency
 	 */
+	//TODO: should raises an exception if the Resource is not already loaded
 	property readonly dependentResources : set Resource[0..*] getter is do
 		result ?=
 			extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.getDependentResources(
@@ -108,6 +115,7 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	end
 }
 
+
 /**
  * Extension of the Resource class definition that is specific to EMF Repository.
  * User is not supposed to directly create it. Otherwise it will not be correctly initialized
@@ -115,25 +123,29 @@ abstract class Resource inherits kermeta::standard::Set<Object>
  */
 class EMFResource inherits Resource
 {
-	/** Save a resource in a file referenced by this new uri. 
-	    This allows to save the result of a transformation without changing the original file. */
+	/**
+	 * Overrides Resource.saveWithNewURI(String)
+	 */
 	method saveWithNewURI(new_uri : String) : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			self, new_uri, metaModelURI, "EMF", self, false
 		)
 	end
 	
-	/** Save a resource in a file referenced by the uri associated to the resource */
+	/**
+	 * Overrides Resource.save()
+	 */
 	method save() : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			self, self.uri, metaModelURI, "EMF", self, false
 		)
 	end
 
-	/** save and check the resource using the EMF validation function
-	 * apply the validate on all the object in the root of this resource
-	 * returns true if the validation reports no error
-	 * otherwise raises exceptions
+	/**
+	 * Checks the Resource using the EMF validation function, and saves it if
+	 * validation succeeds
+	 * Applies validation to all root objects of the Resource
+	 * Returns true if the validation reports no error, raises exceptions otherwise
 	 */
 	operation saveAndValidateWithEMF() : Boolean is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
@@ -141,9 +153,11 @@ class EMFResource inherits Resource
 		)
 	end
 	
-	/** Loads a resource. Once loaded, you'll be able to query the resource for its instances.  
-	 * even if the metamodelURI was not set, (for example the registered packages are enough) after a succesful load
-	 * the attribute metamodelURI will be filled with the nsuri of the root package of the metamodel used to load this resource
+	/**
+	 * Overrides Resource.save()
+	 * In case the metamodelURI was not previoulsy set, metamodelURI is filled with
+	 * the nsuri of the root package of the metamodel used to load the Resource after
+	 * a successful load
 	 */
 	method load() : Void is do
 		self.clear
@@ -153,14 +167,16 @@ class EMFResource inherits Resource
 		// If load failed
 		if(self.size == 0) then
 			stdio.writeln("Resource load failed!")
-			var e : ResourceLoadException init ResourceLoadException.new
+			var e : kermeta::exceptions::ResourceLoadException init kermeta::exceptions::ResourceLoadException.new
 			raise e
 		end
 	end
 	
-
-	/** Add an instance to the Resource 
-	 * It ensures that the instance is referenced by one and only one Resource of the same Repository
+	/**
+	 * Overrides Set<Object>.add(Object)
+	 * Add an instance to the Resource 
+	 * Ensures that the instance is referenced by a one and only one Resource of the same Repository
+	 * Ensures that the instance does not appear more than once in the Resource
 	 */
 	method add(instance : Object) : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.setContainingResource(instance, self)
@@ -172,7 +188,10 @@ class EMFResource inherits Resource
 		}
 	end
 	
-	/** Remove an instance from the Resource */
+	/**
+	 * Overrides Set<Object>.remove(Object)
+	 * Remove the instance from the Resource
+	 */
 	method remove(instance : Object) : Object is do
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.setContainingResource(instance, void)
 		if self.contains(instance) then 
@@ -182,69 +201,76 @@ class EMFResource inherits Resource
 			result := void
 		end
 	end
-	
-	/**
-	 * Helper that returns true if new_instance type is in the tparam Set, false otherwise
-	 * FIXME : Loop-and-cast done in order to temporarily get round the type 
-	 * system limits for reflection
-	*/
-	operation isInTypeDefSet(tparams : Set<kermeta::reflection::TypeDefinition>, new_instance : Object) : Boolean is do
-		result := false
-		from var it : Iterator<kermeta::reflection::TypeDefinition> init tparams.iterator
-		until (it.isOff or result == true)
-		loop
-			var next : kermeta::language::structure::TypeDefinition
-			next ?= it.next 
-			// Note :  test with  "qualifiedName" is easier. is it a proper way?
-			if (next.qualifiedName.equals(new_instance.getMetaClass.typeDefinition.qualifiedName)) then
-				result := true
-			end
-		end
-	end
-
 }
 
+
+/**
+ * To be written
+ */
 class KMResource inherits Resource
 {
+	/**
+ 	 * To be written
+ 	 */
 	method save() : Void is do
 		//TODO: implement operation save
 	end
+	
+	/**
+ 	 * To be written
+ 	 */
 	method load() : Void is do
 		//TODO: implement operation load
 	end
+
+	/**
+ 	 * To be written
+ 	 */
 	method add(instance : Object) : Void is do
 		//TODO: implement operation load
 	end
+
+	/**
+ 	 * To be written
+ 	 */
 	method remove(instance : Object) : Object is do
 		//TODO: implement operation load
 		result := void
 	end
 }
 
-/** Abstract resource container, that contains a list of available loaded resources, 
+
+/**
+ * Abstract resource container, that contains a list of available loaded resources, 
  * and methods to create or get a resource given an URI.
  */
 abstract class Repository
 {
-	/** The resources created by this repository 
+	/**
+	 * Resources created by this Repository 
 	 * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only 
 	 * one Resource of a given Repository
 	 */
 	attribute resources : set Resource [*]#repository
+
 	/**
-	 * Create a resource with given uri. 
-	 * params : 
-	 *    - uri : the uri where to save the model handled by the resource
-	 *    - mm_uri : the uri of the metamodel of which model is an instance
-	 * User must provide the mm_uri if he creates a new model from scratch.
+	 * Creates a new Resource with given uri, and an optional mm_uri
+	 * mm_uri is required when creating a new model from scratch.
+	 * Raises a ResourceCreate exception in case the Repository already
+	 * contains a Resource with the given uri
+	 * If uri does not points to an existing model file (in the case of
+	 * a model creation), calls to load() operation will fail as long as
+	 * the model has not been saved once
 	 */
 	operation createResource(uri : String, mm_uri : String) : Resource is abstract
 
 	/**
-	 * Get the resource of model that is stored in the given uri. 
-	 * This suppose that this URI resource was already created in this Repository.
-	 * If this resource wasn't already created it will silently create
-	 * and load a new one.  
+	 * Returns the Resource associated with the given uri if this uri is associated with
+	 * an already created Resource of the Repository.
+	 * If the Repository contains no Resource associated with the given uri, creates
+	 * a new Resource and loads it.
+	 * Raises a ResourceCreate exception if the given uri does not point to an existing
+	 * model file 
 	 */
 	operation getResource(uri : String) : Resource is do
 		var nUri : String
@@ -275,12 +301,14 @@ abstract class Repository
 	end
 }
 
+
 /**
  * Repository that stores and manages resources that come from EMF
  */
 class EMFRepository inherits Repository
 {
 	/**
+	 * Overrides Repository.createResource(String, String)
 	 * Create a new resource for a model given by its uri, 
 	 * which meta-model is stored in file given by mm_uri
 	 * If file already exists, you'll be able to call the load method to concretly load the model
@@ -293,20 +321,11 @@ class EMFRepository inherits Repository
 		if(not resources.collect{r | extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(r.uri)}.contains(nUri)) then
 			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)
 		else
-			var e : ResourceCreateException init ResourceCreateException.new
+			var e : kermeta::exceptions::ResourceCreateException init kermeta::exceptions::ResourceCreateException.new
 			e.message := "Trying to create a resource already existing at " + uri + ".\n"
 					+ "Remove existing resource from repository first, or use \"getResource\" operation."
 			raise e
 		end
-	end
-	
-	// Override so that specialized types are fixed ...hum cast is not excellent
-	/**
-	 * Get the resource of model that is stored in the given uri. Silently create
-	 * and load a new one if a resource with this uri was not found.
-	 */
-	method getResource(uri : String) : Resource is do
-		result := super(uri)
 	end
 	
 	/** 
@@ -315,26 +334,28 @@ class EMFRepository inherits Repository
 	 * by default, not setting this is considered as false.
 	 */
 	attribute useInterpreterInternalResources : Boolean
-	
 }
+
 
 /**
  * Repository that stores and manages XMI files representing Kermeta models
  */
 class KMRepository inherits Repository
 {
+	/**
+ 	 * To be written
+ 	 */
 	method createResource(uri : String, mm_uri : String) : Resource is do
 		//TODO: implement operation createResource
-	end
-	method getResource(uri : String) : Resource is do
-		//TODO: implement operation getResource
 	end 
 }
 
-/** Specialized exceptions */
-class ResourceLoadException inherits kermeta::exceptions::Exception { }
-class ResourceSaveException inherits kermeta::exceptions::Exception { }
-class ResourceCreateException inherits kermeta::exceptions::Exception { }
-/** Raised when user tries to add an object that is not conform to the metamodel */
-class ResourceUnconformityException inherits kermeta::exceptions::Exception { }
+
+// MOVED TO PACKAGE kermeta::exceptions
+///* Specialized exceptions */
+//class ResourceLoadException inherits kermeta::exceptions::Exception { }
+//class ResourceSaveException inherits kermeta::exceptions::Exception { }
+//class ResourceCreateException inherits kermeta::exceptions::Exception { }
+///* Raised when user tries to add an object that is not conform to the metamodel */
+//class ResourceUnconformityException inherits kermeta::exceptions::Exception { }
 

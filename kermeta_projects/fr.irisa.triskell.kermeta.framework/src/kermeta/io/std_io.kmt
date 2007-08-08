@@ -1,5 +1,5 @@
 /**
- * Contains Input/Output related classes. 
+ * Contains standard input/output related classes. 
  */
 package kermeta::io;
 
@@ -24,7 +24,7 @@ using kermeta::language::structure
 class StdIO
 {
 	/**
-	 * write the object to standard output
+	 * Writes the object to standard output
 	 */ 
 	operation write(object : String) : Void is do
 		if object == void then object := "<void>" end
@@ -32,7 +32,7 @@ class StdIO
 	end
 	
 	/**
-	 * writeln the object to standard output
+	 * Writeln the object to standard output
 	 */ 
 	operation writeln(object : String) : Void is do
 		if object == void then object := "<void>" end
@@ -40,7 +40,7 @@ class StdIO
 	end
 	
 	/**
-	 * read an object from standard input
+	 * Reads a String from standard input
 	 */ 
 	operation read(prompt : String) : String is do
 		if prompt == void then prompt := "" end

@@ -1,6 +1,5 @@
 /**
- * Contains Collections and primitive types, i.e the base types like String, 
- * Integer, etc.
+ * Defines Collection types 
  */
 package kermeta::standard;
 
@@ -9,7 +8,7 @@ require "primitive_types.kmt"
 using kermeta::exceptions
 
 /* *************************************************
- * $Id: collections.kmt,v 1.34 2007-06-14 12:34:12 dtouzet Exp $
+ * $Id: collections.kmt,v 1.35 2007-08-08 12:20:57 dtouzet Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -17,7 +16,7 @@ using kermeta::exceptions
  *
  * Implementation of Kermeta collection types.
  *************************************************** */
- alias Object : kermeta::language::structure::Object ;
+alias Object : kermeta::language::structure::Object;
  
  
 /**
@@ -26,34 +25,50 @@ using kermeta::exceptions
  */
 abstract class Collection<G> 
 {
+	/**
+	 * Returns a new Bag built from the Collection
+	 */
 	operation asBag() : Bag<G> is abstract
+	
+	/**
+	 * Returns a new Set built from the Collection
+	 */
 	operation asSet() : Set<G> is abstract
+
+	/**
+	 * Returns a new OrderedSet built from the Collection
+	 */
 	operation asOrderedSet() : OrderedSet<G> is abstract
+
+	/**
+	 * Returns a new Sequence built from the Collection
+	 */
 	operation asSequence() : Sequence<G> is abstract
 	
+	/**
+	 * ?!?
+	 */
 	operation forAllCpl(f : < [G, G] -> Boolean> ) : Boolean is do
    		result := self.forAll{x | self.forAll {y | f(x,y)}}
 	end 
-	
+
+	/**
+	 * ?!?
+	 */
 	operation existsCpl(f : < [G, G] -> Boolean> ) : Boolean is do
    		result := self.exists{x | self.exists {y | f(x,y)}}
 	end 
 	
-	
-	
 	/**
-	 * Add an element in the collection
-	 * default implementation : no check for duplicates
+	 * Adds an element in the Collection (default implementation)
 	 */
 	operation add(element : G) : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.add(self, element)
 	end
 	
 	/**
-	 * Removes element from the collection
-	 * default implementation : 
-	 * if the collection contains more than one object that is equals to element, they are all removed
-	 * Do nothing if the element is not in the collection
+	 * Removes all instances of element from the Collection, based on
+	 * G.equals(Object) definition
 	 */
 	operation remove(element : G) : Void 
 		post doesntContainsElementAnymore is not contains(element)
@@ -68,26 +83,24 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * Remove all elements from the collection
+	 * Removes all elements from the Collection
 	 */
 	operation clear() : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.clear(self)
 	end
 	
 	/**
-	 * Add all elements from the collection elements in the collection
+	 * Adds all elements from the Collection elements in the current Collection
 	 */
 	operation addAll(elements : Collection<G>) : Void is do
 		elements.each { element | add(element) } 
 	end
 	
 	/**
-	 * returns true if the collection contains element
-	 * note that it is based on G equals() (semantic equals), which means that it will check  
-	 * mycollection.exists{ e | e.equals(myValue) }
-	 * Depending on the concrete type of the collection, it may contain duplicates.
-	 * If you wish to check if a physical element is contained by the collection you must use the oid()
-	 * ex:  mycollection.exists{e | e.oid == myvalue.oid }
+	 * Returns a Boolean stating whether the Collection contains at least one
+	 * instance of element, based on G.equals(elt : Object) definition
+	 * Note: for checking whethera physical element is contained by the collection,
+	 * make use of G.oid()
 	 */
 	operation contains(element : G) : Boolean is do
 		result := false
@@ -99,14 +112,16 @@ abstract class Collection<G>
 	end
 	
 	/**
-	* OCL API alignement
-	*/
+	 * OCL API alignement
+	 * See Collection<G>.contains(Object)
+	 */
 	operation includes(element :G): Boolean is do
 		result := self.contains(element)
 	end
 	
 	/**
-	 * returns true if the collection contains all elements
+	 * Returns true if current Collection contains all elements of Collection elements
+	 * See Collection<G>.contains(Object)
 	 */
 	operation containsAll(elements : Collection<G>) : Boolean is do
 		result := true
@@ -118,23 +133,22 @@ abstract class Collection<G>
 	end
 	
 	/**
-	* OCL API alignement
-	*/
+	 * OCL API alignement
+	 * See Collection<G>.containsAll(Collection<G>)
+	 */
 	operation includesAll(elements : Collection<G>) : Boolean is do
 		result := self.containsAll(elements)
 	end
 	
-	
-	
 	/**
-	 * Returns true if the collection does not contain element
+	 * Returns true if the Collection does not contain element
 	 */
 	operation excludes(element : G) : Boolean is do
 		result := not self.contains(element)
 	end
 	
 	/**
-	 * Returns true if the collection contains none of elements
+	 * Returns true if the Collection contains no element of Collection elements
 	 */
 	operation excludesAll(elements : Collection<G>) : Boolean is do
 		result := true
@@ -146,14 +160,14 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * returns the number of elements in the collection
+	 * Returns the number of elements in the Collection
 	 */
 	operation size() : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.size(self)
 	end
 	
 	/**
-	 * returns true if the collection is empty
+	 * Returns a Boolean stating whether the Collection is empty
 	 */
 	operation empty() : Boolean is do
 		result := size == 0
@@ -161,6 +175,7 @@ abstract class Collection<G>
 	
 	/**
 	 * OCL alignement API
+	 * See Collection<G>.empty()
 	 */
 	operation isEmpty() : Boolean is do
 		result := self.empty
@@ -168,13 +183,16 @@ abstract class Collection<G>
 	
 	/**
 	 * OCL alignement API
+	 * Returns a Boolean stating whether the Collection contains at least
+	 * one element 
+	 * See also Collection<G>.contains(Object)
 	 */
 	operation isNotEmpty() : Boolean is do
 		result := not self.empty
 	end
 	
 	/**
-	 * returns an iterator on the collection
+	 * Returns an Iterator on the Collection
 	 */
 	operation iterator() : Iterator<G> is do
 		result := Iterator<G>.new
@@ -182,8 +200,7 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * returns an element from the collection or void
-	 * if the collection is empty
+	 * Returns an element from the Collection or void if the Collection is empty
 	 */
 	operation one() : G is do
 		if size == 0 then
@@ -194,15 +211,20 @@ abstract class Collection<G>
 		end
 	end
 
+	/**
+	 * Returns an element from the Collection
+	 * Raises an EmptyCollection exception if the Collection is empty
+	 */
 	operation any() : G is do
-		if size == 0 then raise EmptyCollection.new end
+		if size == 0 then
+			raise EmptyCollection.new
+		end
 		var it : Iterator<G> init iterator
 		result := it.next
 	end
-
 	
 	/**
-	 * runs func on each element of the collection
+	 * Runs function func on each element of the Collection
 	 */
 	operation each(func : <G -> Object>) : Void is do
 		from var it : Iterator<G> init iterator
@@ -213,8 +235,8 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * checks that the condition is true on all the element of the collection
-	 * returns true if the collection is empty
+	 * Returns a Boolean stating whether no element of the Collection invalidates
+	 * the condition specified by function func
 	 */
 	operation forAll(func : <G -> Boolean>) : Boolean is do
     	var test : Boolean init true
@@ -227,8 +249,8 @@ abstract class Collection<G>
     end
      
     /**
-	 * checks that the condition is true for at least one element of the collection
-	 * returns false if the collection is empty
+	 * Returns a Boolean stating whether at least one element of the Collection
+	 * validates the condition specified by function func
 	 */
 	operation exists(func : <G -> Boolean>) : Boolean is do
     	var test : Boolean init false
@@ -241,9 +263,8 @@ abstract class Collection<G>
     end
 	
 	/**
-	 * returns a new Collection with the results of running collector function 
-	 * once for every element in self.
-	 * 
+	 * Returns a new Sequence which content corresponds to the result
+	 * of running the collector function for each element of the Collection
 	 */
 	operation collect<T> (collector : <G -> T>) : Sequence<T> is do
 		result := Sequence<T>.new
@@ -255,7 +276,8 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * Results in true if body evaluates to a different value for each element in the source collection; otherwise, result is false.	 * 
+	 * Returns a Boolean stating whether the the collector function evaluates to a
+	 * different value for each element of the Collection
 	 */
 	operation isUnique<T> (collector : <G -> T>) : Boolean is do
 		result := true
@@ -273,9 +295,9 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * Passes each element of the collection to detector function. 
-	 * Returns the first element for which detector is not false. 
-	 * Returns void if no object matches.
+	 * Returns the first element of the Collection for which the detector function
+	 * is not false
+	 * Returns void if no elements is validated by the detector function
 	 */
 	operation detect(detector : <G -> Boolean>) : G is do
 		var elem : G
@@ -289,8 +311,8 @@ abstract class Collection<G>
 	end
 		
 	/**
-	 * Passes each element of the collection to selector function. 
-	 * returns a Collection for all elements for which selector is true
+	 * Returns a new Sequence composed of elements of the Collection that
+	 * validate the selector function
 	 */
 	operation select(selector : <G -> Boolean>) : Sequence<G>  is do
 		var elem : G
@@ -304,23 +326,23 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * Passes each element of the collection to rejector function. 
-	 * returns a Collection for all elements for which rejector is false
+	 * Returns a new Sequence composed of elements of the Collection that
+	 * do not validate the rejector function
 	 */
 	operation reject(rejector : <G -> Boolean>) : Sequence<G>  is do
 		result := self.select { elem | not rejector(elem) } 
 	end
 	
 	/**
-	 * Returns the nb of instances of 'element' in the collection
+	 * Returns the number of instances of element in the Collection
 	 */
 	operation count(element : G) : Integer is do
 		result := self.select{e | e == element}.size()
 	end
 	
 	/**
-	* sum the element if they are summable
-	*/
+	 * Sum the element if they are summable (ie implement '+' operator)
+	 */
 	operation sum(): G is do
 		var res : G 
 		var tmp : Summable<G>
@@ -339,24 +361,19 @@ abstract class Collection<G>
 		end
 		result := res		
 	end
-	
-//	operation product(c2: Collection<T2>)) : Set( Tuple( first: T, second: T2) ) is do
-//end
 }
 
 
-
 /**
- * A Set is a collection that contains distinct elements
- * The notion of "distinct" element is based on the equals operation. Be careful if your overwrite it for your type G.
- * A set is not ordered
+ * A Set is a non-ordered collection that contains distinct elements
+ * (with regards to the G.equals(Object) operation)
  */
 class Set<G> inherits Collection<G>
 {
 	/**
-	 * The method 'add' adds the element in the Set
-	 * only if it is not yet in the set
-	 * if the element is already in the set it simply does nothing
+	 * Overrides Collection<G>.add(G)
+	 * Adds elt to the Set if it is not already contained by the
+	 * Set, does nothing otherwise
 	 */
 	method add(element : G) : Void is do
 		if not self.contains(element) then
@@ -365,9 +382,8 @@ class Set<G> inherits Collection<G>
 	end
 
 	/**
-	 * remove the element
-	 * 
-	 * This method redefines the operation from Collection in order to improve performances since there is no duplicates in Set
+	 * Overrides Collection<G>.remove(G)
+	 * Removes the element from the Set if it is contained by the Set
 	 */
 	method remove(element : G) : Void is do
 		var elem : G init self.detect { e | e == element }
@@ -376,7 +392,11 @@ class Set<G> inherits Collection<G>
 		end
 	end
 
-	// DVK: weird implementation of equals !?
+	/**
+	 * Overrides Object.equals(Object)
+	 * Returns a Boolean stating whether the provided element is equal to
+	 * current Set
+	 */
 	method equals(element : Object) : Boolean is do
 		var isEqual : Boolean init false
 		if(not element.isVoid) then
@@ -400,21 +420,30 @@ class Set<G> inherits Collection<G>
 		result := isEqual
 	end
 	
-	/** returns the union of a set of elements  and the Set */
+	/**
+	 * Returns a new Set corresponding to the union of the Set elements
+	 * with the current Set
+	 */
 	operation union(elements : Set<G>) : Set<G> is do
 		result := Set<G>.new
 		result.addAll(self)
 		result.addAll(elements)
 	end
 	
-	/** returns the union of a bag of elements and the Set */
+	/**
+	 * Returns a new Bag corresponding to the union of the Bag elements
+	 * with the current Set
+	 */
 	operation unionWithBag(elements : Bag<G>) : Bag<G> is do
 		result := Bag<G>.new				
 		result := addAll(self)
 		result := addAll(elements)
 	end
 	
-	/** returns the intersection of elements and the Set */
+	/**
+	 * Returns a new Set corresponding to the intersection of the Set elements
+	 * with the current Set
+	 */
 	operation intersection(elements : Collection<G>) : Set<G> is do
 		result := Set<G>.new
 		var elem : G
@@ -428,8 +457,10 @@ class Set<G> inherits Collection<G>
 		end
 	end
 	
-	/** returns the difference of elements and the Set: the elements of the Set 
-	 *  that are not in elements
+	/**
+	 * Returns a new Set corresponding to the difference between the
+	 * current Set and the Set elements, ie all elements contained by 
+	 * the current Set that do not appear in the elements Set 
 	 */
 	operation minus(elements : Set<G>) : Set<G> is do
 		result := Set<G>.new
@@ -445,8 +476,9 @@ class Set<G> inherits Collection<G>
 	end
 	
 	/**
-	* 
-	*/
+	 * Overrides Collection<G>.asSet()
+	 * Returns a new Set composed of all elements of current Set
+	 */
 	method asSet() : Set<G> is do
 		var s : Set<G> init Set<G>.new
 		s.addAll(self)
@@ -454,8 +486,9 @@ class Set<G> inherits Collection<G>
 	end
 	
 	/**
-	* 
-	*/
+	 * Overrides Collection<G>.asOrderedSet()
+	 * Returns a new OrderedSet that contains all elements of current Set
+	 */
 	method asOrderedSet() : OrderedSet<G> is do
 		var s : OrderedSet<G> init OrderedSet<G>.new
 		s.addAll(self)
@@ -463,8 +496,9 @@ class Set<G> inherits Collection<G>
 	end
 
 	/**
-	* 
-	*/
+	 * Overrides Collection<G>.asBag()
+	 * Returns a new Bag composed of all elements of current Set
+	 */
 	method asBag() : Bag<G> is do
 		var s : Bag<G> init Bag<G>.new
 		s.addAll(self)
@@ -472,21 +506,30 @@ class Set<G> inherits Collection<G>
 	end
 
 	/**
-	* 
-	*/
+	 * Overrides Collection<G>.asSequence()
+	 * Returns a new Sequence composed of all elements of current Set
+	 */
 	method asSequence() : Sequence<G> is do
 		var s : Sequence<G> init Sequence<G>.new
 		s.addAll(self)
 		result := s
 	end
 	
+	/**
+	 * Returns a new Set which contents corresponds to the symmetric
+	 * difference between current Set and Set s, ie all elements of
+	 * each Set that do not appear in the other one
+	 */
 	operation symmetricDifference(s : Set<G>) : Set<G> is do
 		var res : Set<G> init s.minus(self)
 		result := self.minus(s).addAll(res)
 	end
 	
-	/*
-	 *
+	/**
+	 * Returns a new Set which content includes all non-Collection elements
+	 * of the current Set, and, for each Collection element of the current
+	 * Set, as many elements as the Collection contains
+	 * Duplicates are removed
 	 */
 	operation flatten() : Set<Object> is do
 		var res: Set<Object> init Set<Object>.new
@@ -502,10 +545,16 @@ class Set<G> inherits Collection<G>
 		result :=  res
 	end
 	
+	/**
+	 * To be written
+	 */
 	operation sortedBy(comparator : <[G, G] -> Integer>) : OrderedSet<G>  is do
 		result := quickSort(self.asOrderedSet, comparator) 
 	end
 	
+	/**
+	 * To be written
+	 */
 	operation quickSort(q :OrderedSet<G>, comparator : <[G, G] -> Integer>) : OrderedSet<G> is do
 		 var less : OrderedSet<G> init OrderedSet<G>.new
 		 var pivotList : OrderedSet<G> init OrderedSet<G>.new
@@ -530,6 +579,9 @@ class Set<G> inherits Collection<G>
 		end	
 	end
 	
+	/**
+	 * To be written ?!?
+	 */
 	operation concatenate(less : OrderedSet<G>, pivot : OrderedSet<G>, greater : OrderedSet<G>): OrderedSet<G> is do
 		result := OrderedSet<G>.new
 		result.addAll(less)
@@ -538,13 +590,17 @@ class Set<G> inherits Collection<G>
 	end
 }
 
+
 /**
- * A Bag is a concrete implementation of a Collection
- * A bag can contains duplicates.
- * A bag is not ordered
+ * Bag is a concrete non-ordered Collection allowing duplicates
  */
 class Bag<G> inherits Collection<G>
 {
+	/**
+	 * Overrides Object.equals(elt : Object)
+	 * Returns a Boolean stating whether the provided element is equal to
+	 * current Bag
+	 */
 	method equals(element : Object) : Boolean is do
 		var isEqual : Boolean init false
 		if(not element.isVoid) then
@@ -558,14 +614,20 @@ class Bag<G> inherits Collection<G>
 		result := isEqual
 	end
 
-	/** returns the union of elements and the Bag */
+	/**
+	 * Returns a new Bag corresponding to the union of elements and
+	 * current Bag
+	 */
 	operation union(elements : Collection<G>) : Bag<G> is do
 		result := Bag<G>.new
 		result := addAll(self)
 		result := addAll(elements)
 	end
 	
-	/** returns the intersection of elements and the Bag */
+	/**
+	 * Returns a new Bag corresponding to the intersection of elements
+	 * and the Bag
+	 */
 	operation intersection(elements : Bag<G>) : Bag<G> is do
 		result := Bag<G>.new
 		var elem : G
@@ -591,7 +653,10 @@ class Bag<G> inherits Collection<G>
 		end
 	end
 	
-	/** returns the intersection of a set of elements and the Bag */
+	/**
+	 * Returns a new Set corresponding to the intersection of a Set of
+	 * elements and the Bag
+	 */
 	operation intersectionWithSet(elements : Set<G>) : Set<G> is do
 		result := Set<G>.new
 		var elem : G
@@ -606,9 +671,7 @@ class Bag<G> inherits Collection<G>
 	end
 	
 	/**
-	 * Removes an element from the collection using the oid
-	 * This method is provided because the standard remove operation is based on the equals operation 
-	 * and removes all occurences equal to the parameter
+	 * Removes the element identified by the provided Oid from the Bag
 	 */
 	operation removeFromOid(elementOid : Integer) : Void 
 		post doesntContainsElementAnymore is not exists{e | e.oid == elementOid}
@@ -620,12 +683,9 @@ class Bag<G> inherits Collection<G>
 	end
 	
 	/**
-	 * Removes one element from the bag
-	 * This method is provided because the standard remove operation is based on the equals operation 
-	 * and removes all occurences equal to the parameter. This one, will remove only the one of them.
+	 * Removes one instance of element from the Bag
 	 */
-	operation removeOne(element : G) : Void 
-	is do
+	operation removeOne(element : G) : Void is do
 		var elem : G init self.detect { e | e == element }
 		if (elem != void) then
 			extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
@@ -633,8 +693,9 @@ class Bag<G> inherits Collection<G>
 	end
 	
 	/**
-	* 
-	*/
+	 * Overrides Collection<G>.asSet()
+	 * Returns a new Set containing elements of the Bag without duplicates
+	 */
 	method asSet() : Set<G> is do
 		var s : Set<G> init Set<G>.new
 		s.addAll(self)
@@ -642,8 +703,9 @@ class Bag<G> inherits Collection<G>
 	end
 	
 	/**
-	* 
-	*/
+	 * Overrides Collection<G>.asOrderedSet()
+	 * Returns a new OrderedSet containing elements of the Bag without duplicates
+	 */
 	method asOrderedSet() : OrderedSet<G> is do
 		var s : OrderedSet<G> init OrderedSet<G>.new
 		s.addAll(self)
@@ -651,8 +713,9 @@ class Bag<G> inherits Collection<G>
 	end
 
 	/**
-	* 
-	*/
+	 * Overrides Collection<G>.asBag()
+	 * Returns a new Bag containing all elements of current Bag	
+	 */
 	method asBag() : Bag<G> is do
 		var s : Bag<G> init Bag<G>.new
 		s.addAll(self)
@@ -660,14 +723,19 @@ class Bag<G> inherits Collection<G>
 	end
 
 	/**
-	* 
-	*/
+	 * Overrides Collection<G>.asSequence()
+	 * Returns a new Sequence containing all elements of current Bag
+	 */
 	method asSequence() : Sequence<G> is do
 		var s : Sequence<G> init Sequence<G>.new
 		s.addAll(self)
 		result := s
 	end
 	
+	/**
+	 * Returns a new Bag which content includes the content of the
+	 * current Bag and the element object
+	 */
 	operation including(object :G) : Bag<G> is do
 		var s : Bag<G> init Bag<G>.new
 		s.addAll(self)
@@ -675,6 +743,11 @@ class Bag<G> inherits Collection<G>
 		result := s	
 	end
 
+ 	/**
+	 * Returns a new Bag which content includes the content of the
+	 * current Bag from which all instances of object have been
+	 * removed
+ 	 */
 	operation excluding(object :G) : Bag<G> is do
 		var s : Bag<G> init Bag<G>.new
 		s.addAll(self)
@@ -682,6 +755,11 @@ class Bag<G> inherits Collection<G>
 		result := s	
 	end
 	
+	/**
+	 * Returns a new Bag which content includes all non-Collection elements
+	 * of the current Set, and, for each Collection element of the current
+	 * Bag, as many elements as the Collection contains
+	 */
 	operation flatten() : Bag<Object> is do
 		var res: Bag<Object> init Bag<Object>.new
 		if (G.isKindOf(Collection<Object>)) then
@@ -696,10 +774,16 @@ class Bag<G> inherits Collection<G>
 		result := res
 	end
 	
+	/**
+	 * To be written
+	 */
 	operation sortedBy(comparator : <[G, G] -> Integer>) : Sequence<G>  is do
 		result := quickSort(self.asSequence, comparator) 
 	end
 	
+	/**
+	 * To be written
+	 */
 	operation quickSort(q :Sequence<G>, comparator : <[G, G] -> Integer>) : Sequence<G> is do
 		 var less : Sequence<G> init Sequence<G>.new
 		 var pivotList : Sequence<G> init Sequence<G>.new
@@ -724,6 +808,9 @@ class Bag<G> inherits Collection<G>
 		end	
 	end
 	
+	/**
+	 * To be written
+	 */
 	operation concatenate(less : Sequence<G>, pivot : Sequence<G>, greater : Sequence<G>): Sequence<G> is do
 		result := Sequence<G>.new
 		result.addAll(less)
@@ -739,7 +826,9 @@ class Bag<G> inherits Collection<G>
 abstract class OrderedCollection<G> inherits Collection<G> {
 	
 	/**
-	 * adds element in the OrderedCollection at index
+	 * Adds element in the OrderedCollection at rank index
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedCollection
 	 */
 	operation addAt(index : Integer, element : G) : Void is do
 		if index < 0 or index > size then
@@ -749,7 +838,9 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 	end
 	
 	/**
-	 * removes the element at index of the OrderedCollection
+	 * Removes the element at rank index from the OrderedCollection
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedCollection
 	 */
 	operation removeAt(index : Integer) : Void is do
 		if index < 0 or index > size-1 then
@@ -759,7 +850,9 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 	end
 	
 	/**
-	 * returns the element at index in the OrderedCollection
+	 * Returns the element at rank index in the OrderedCollection
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedCollection
 	 */
 	operation elementAt(index : Integer) : G is do
 		if index < 0 or index > size-1 then
@@ -768,7 +861,10 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.elementAt(self, index)
 	end
 	
-	/** returns the first element in the OrderedCollection */
+	/** 
+	 * Returns the first element in the OrderedCollection
+	 * Raises an EmptyCollection exception if the OrderedCollection is empty
+	 */
 	operation first() : G is do
 		if size == 0 then
 			raise EmptyCollection.new
@@ -776,7 +872,10 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 		result := elementAt(0)
 	end
 	
-	/** returns the last element in the OrderedCollection */
+	/**
+	 * Returns the last element in the OrderedCollection
+	 * Raises an EmptyCollection exception if the OrderedCollection is empty
+	 */
 	operation last() : G is do
 		if size == 0 then
 			raise EmptyCollection.new
@@ -784,10 +883,15 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 		result := elementAt(size - 1)
 	end
 
+	/**
+	 * Overrides Object.equals(Object)
+	 * Returns a Boolean stating whether the provided element is equal to
+	 * current OrderedCollection
+	 */
 	method equals(element : Object) : Boolean is do
 		var isEqual : Boolean init false
 		if (not element.isVoid) then
-			if (OrderedCollection<G>.isInstance(element) ) then
+			if(OrderedCollection<G>.isInstance(element)) then
 				var collection : Collection<G>
 				collection ?= element
 				if(self.size() == collection.size()) then
@@ -808,11 +912,16 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 		result := isEqual
 	end
 	
-	/** returns the index of the first element instance in the OrderedCollection */
+	/** 
+	 * Returns the index of the first instance of element in the OrderedCollection
+	 * or -1 if the element is not contained by the OrderedCollection
+	 * Raises an EmptyCollection exception if the OrderedCollection is empty
+	 */
 	operation indexOf(element : G) : Integer is do
 		if size == 0 then
 			raise EmptyCollection.new
 		end
+		/*
 		if not self.contains(element) then
 			result := -1
 		else
@@ -828,22 +937,44 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 			end
 			result := i
 		end
+		*/
+		var i : Integer init 0
+		var it : Iterator<G> init iterator()
+		var found : Boolean init false
+		from found
+		until (found or it.isOff)
+		loop
+			if(element == it.next) then
+				found := true
+			else
+				i := i + 1
+			end
+		end
+		if(found) then
+			result := i
+		else
+			result := -1
+		end
 	end
 }
 
+
 /**
- * an OrderedSet is a Set that contained ordered distinct elements
- * As it is ordered it is accessible by their index. (see AddAt method)
+ * An OrderedSet is a Set that contained ordered distinct elements
  */
 class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 {
 	/**
-	 * Select the method add from Set
+	 * See Set<G>.add(G)
 	 */
-	method add(element : G) from Set is do super(element) end
+	method add(element : G) from Set is do
+		super(element)
+	end
 
 	/**
-	 * Overrides addAt to ensure element uniqueness
+	 * Overrides OrderedCollection<G>.addAt(Integer, G)
+	 * Adds element in the OrderedSet at rank index if the ordered set does
+	 * not already contain the element, does nothing otherwise
 	 */
 	method addAt(index : Integer, element : G) : Void is do
 		if not self.contains(element) then
@@ -852,40 +983,76 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 		// TODO : should it raise an exception otherwise ?
 	end
 	
+	/**
+	 * See OrderedCollection<G>.equals(Object) 
+	 */
 	method equals(element : Object) : Boolean from OrderedCollection is do
 		result := super(element)
 	end
 	
+	/**
+	 * Builds and returns a new OrderedSet composed of elements of current ordered
+	 * set from rank min to rank max (order is respected)
+	 * Raises IndexOutOfBound exception if min is negative, max is larger than 
+	 * the size of the ordered set or min is larger than max
+	 */
 	operation subSet(min : Integer, max : Integer) : OrderedSet<G> is do
 		result := OrderedSet<G>.new
-		if(min >= 0 and max <= self.size) then
+		if(min >= 0 and max <= self.size and min <= max) then
+			var it : Iterator<G> init iterator()
+			var i : Integer init 0
+			from i until (i == min) loop
+				it.next
+				i := i + 1
+			end
+			from i until (i == max + 1) loop
+				result.add(it.next)
+				i := i + 1
+			end
+			/*
 			self.each{e |
 				var i : Integer init self.indexOf(e)
 				if(i >= min and i <= max) then
 					result.add(e)
 				end
 			}
+			*/
+		else
+			raise IndexOutOfBound.new
 		end
 	end
 
-	operation append(subject : G ) : OrderedSet<G> is do
+	/**
+	 * Builds and returns a new OrderedSet from current one with element
+	 * inserted in head
+	 */
+	operation append(element : G ) : OrderedSet<G> is do
 		result := OrderedSet<G>.new
 		result.addAll(self)
-		result.add(subject)
+		result.add(element)
 	end
 	
-	operation preppend(subject : G ) : OrderedSet<G> is do
+	/**
+	 * Builds and returns a new OrderedSet from current one with element
+	 * inserted in tail
+	 */
+	operation preppend(element : G ) : OrderedSet<G> is do
 		result := OrderedSet<G>.new
-		result.add(subject)
+		result.add(element)
 		result.addAll(self)
 	end
 	
+	/**
+	 * Builds and returns a new OrderedSet from current one with element
+	 * inserted at rank index
+	 */
 	operation insertAt(index : Integer, subject : G ) : OrderedSet<G> is do
 		result := OrderedSet<G>.new
 		result.addAll(self)
 		result.addAt(index, subject)
 	end
 	
+	/*
 	operation subOrderedSet(lower : Integer, upper : Integer ) : OrderedSet<G> is do
 		result := OrderedSet<G>.new
 		
@@ -894,69 +1061,135 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 			result.add(self.at(i))
 		end
 	end
+	*/
 
+	/**
+	 * Returns element at rank index in the sequence
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the OrderedSet
+	 */
 	operation at(index : Integer) : G is do
 		if(index >= 0 and index <= self.size) then
+			/*
 			self.each{e |
 				var i : Integer init self.indexOf(e)
 				if (i == index) then 
 					result := e
 				end				
 			}
+			*/
+			var it : Iterator<G> init iterator()
+			from var i : Integer init -1
+			until (i == index) loop
+				result := it.next
+				i := i + 1
+			end
+		else
+			raise IndexOutOfBound.new
 		end
 	end
 }
 
+
 /**
- * A Sequence is an ordered collection of elements
- * It allows duplicates
+ * A Sequence is an OrderedCollection of elements allowing duplicates
  */
 class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 {
+	/**
+	 * Overrides OrderedCollection<G>.equals(Object)
+	 * Returns a Boolean stating whether the provided element is equal to
+	 * current Sequence	
+	 */
 	method equals(element : Object) : Boolean from OrderedCollection is do
 		result := super(element)
 	end
 	
+	/**
+	 * Builds and returns a new Sequence composed of elements of current sequence
+	 * from rank min to rank max (order is respected)
+	 * Raises IndexOutOfBound exception if min is negative, max is larger than 
+	 * the size of the sequence or min is larger than max
+	 */
 	operation subSequence(min : Integer, max : Integer) : Sequence<G> is do
 		result := Sequence<G>.new
-		if(min >= 0 and max <= self.size) then
+		if(min >= 0 and max <= self.size and min <= max) then
+			var it : Iterator<G> init iterator()
+			var i : Integer init 0
+			from i until (i == min) loop
+				it.next
+				i := i + 1
+			end
+			from i until (i == max + 1) loop
+				result.add(it.next)
+				i := i + 1
+			end
+			/*
 			self.each{e |
 				var i : Integer init self.indexOf(e)
 				if(i >= min and i <= max) then
 					result.add(e)
 				end
 			}
+			*/
+		else
+			raise IndexOutOfBound.new
 		end
 	end
 	
-	operation append(subject : G ) : Sequence<G> is do
+	/**
+	 * Builds and returns a new Sequence from current one with element
+	 * inserted in head
+	 */
+	operation append(element : G ) : Sequence<G> is do
 		result := Sequence<G>.new
 		result.addAll(self)
-		result.add(subject)
+		result.add(element)
 	end
 	
-	operation preppend(subject : G ) : Sequence<G> is do
+	/**
+	 * Builds and returns a new Sequence from current one with element
+	 * inserted in tail
+	 */
+	operation preppend(element : G ) : Sequence<G> is do
 		result := Sequence<G>.new
-		result.add(subject)
+		result.add(element)
 		result.addAll(self)
-		
 	end
-	
-	operation insertAt(index : Integer, subject : G ) : Sequence<G> is do
+
+	/**
+	 * Builds and returns a new Sequence from current one with element
+	 * inserted at rank index
+	 */	
+	operation insertAt(index : Integer, element : G) : Sequence<G> is do
 		result := Sequence<G>.new
 		result.addAll(self)
-		result.addAt(index, subject)
+		result.addAt(index, element)
 	end
 	
-	
+	/**
+	 * Returns element at rank index in the sequence
+	 * Raises IndexOutOfBound exception if provided index is lower than 0 or
+	 * larger than the size of the Sequence
+	 */
 	operation at(index : Integer) : G is do
 		if(index >= 0 and index <= self.size) then
+			var it : Iterator<G> init iterator()
+			from var i : Integer init -1
+			until (i == index) loop
+				result := it.next
+				i := i + 1
+			end
+			/*
 			self.each{e |
 				var i : Integer init self.indexOf(e)
 				if (i == index) then 
 					result := e
 				end				
 			}
+			*/
+		else
+			raise IndexOutOfBound.new
 		end
 	end
 }
@@ -964,7 +1197,7 @@ class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 
 /**
  * Iterator to be used with Collection
- * see also getIterator() on Collection
+ * See also Collection<G>.getIterator()
  */
 class Iterator<G>
 {
@@ -977,14 +1210,15 @@ class Iterator<G>
 	end
 	
 	/**
-	 * returns true if the iterator has a next element
+	 * Returns true if the iterator has a next element
 	 */
 	operation hasNext() : Boolean is do
 	 	result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.hasNext(self)
 	end
 	
 	/**
-	 * returns the next element of the iterator
+	 * Returns the next element of the iterator
+	 * Raises IteratorIsOff exception in case the iterator is on the last element 
 	 */
 	operation next() : G is do
 		if not hasNext then

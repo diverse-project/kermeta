@@ -27,28 +27,28 @@ using kermeta::standard
 class Hashtable<K, V>
 {
 	/**
-	 * returns size of the map
+	 * Returns size of the Map
 	 */
 	operation size() : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.size(self)
 	end
 
 	/**
-	 * returns an iterator on the keys of the map
+	 * Returns an iterator on the keys of the Map
 	 */
 	operation keyIterator() : Iterator<K> is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.keysIterator(self)
 	end
 	
 	/**
-	 * returns an iterator on the keys of the map
+	 * Returns an iterator on the values of the Map
 	 */
 	operation valueIterator() : Iterator<V> is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.valueIterator(self)
 	end
 	
 	/**
-	 * returns the value for key 'key'
+	 * Returns the value for key 'key'
 	 */
 	operation getValue(key : K) : V is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.get(self,key)
@@ -69,13 +69,15 @@ class Hashtable<K, V>
 	end
 	
 	/**
-	 * Remove all elements from the Hashtable
+	 * Removes all elements from the Hashtable
 	 */
 	operation clear() : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.clear(self)
 	end
 	
-	/** Return the keys of the Hashtable */
+	/**
+	 * Returns the keys of the Hashtable
+	 */
 	operation keys() : Set<K> is do
 		result := Set<K>.new
 		from var it : Iterator<K> init keyIterator until it.isOff
@@ -84,18 +86,21 @@ class Hashtable<K, V>
 		end
 	end
 	
-		/** Return the keys of the Hashtable */
+	/**
+	 * Returns the keys of the Hashtable
+	 */
 	operation values() : Collection<V> is do
 		result := Bag<V>.new
 		keys.each { k | result.add(self.getValue(k)) }
 	end
 	
-	/** Tests if a key is present in the table */
+	/**	
+	 * Returns a Boolean stating whether a key is present in the Map
+	 */
 	operation containsKey(key : K) : Boolean is do
 		result := getValue(key) != void
 	end
 	
 	// TODO: complete this class
 	// The rest might be writable in metacore directly
-	
 }

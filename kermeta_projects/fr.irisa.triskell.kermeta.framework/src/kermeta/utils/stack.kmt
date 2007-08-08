@@ -19,26 +19,25 @@ using kermeta::standard
 class Stack<G> inherits Sequence<G>
 {
 	/**
-	 * Push an element in the stack
+	 * Pushes an element in the stack
 	 */
 	operation push(element : G) : Void is do
 		self.addAt(0, element)
 	end
 	
 	/**
-	 * Get the element at the top of the stack
+	 * Gets the element at the top of the stack
 	 */
 	operation peek() : G is do
 		result := self.first
 	end
 	
 	/**
-	 * Get the element at the top of the stack and 
+	 * Gets the element at the top of the stack and 
 	 * removes it from the stack
 	 */
 	operation pop() : G is do
 		result := peek
 		self.removeAt(0)
 	end
-	
 }

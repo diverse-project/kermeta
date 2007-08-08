@@ -8,12 +8,29 @@
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
         </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Boolean">
+          <instanceType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Integer">
+          <instanceType href="../standard/collections.km#//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@target/@containedType.0"/>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Real" instanceType="//@packages.0/language/structure/Real/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Real"/>
+          </containedType>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="UnlimitedNatural">
+          <ownedTag value="/** Alias to kermeta::standard::UnlimitedNatural */"/>
+          <instanceType href="../standard/primitive_types.km#//@packages.0/standard/UnlimitedNatural"/>
+        </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Object" superType="//@packages.0/language/structure/Object/@containedType.0 //@packages.0/language/structure/Object/@containedType.1">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Object"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="getMetaClass" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.getMetaClass()&#xD;&#xA;   */"/>
             <type href="../standard/primitive_types.km#//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/primitive_types.km#//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0"/>
@@ -33,6 +50,7 @@
             <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/getMetaClass"/>
           </ownedOperation>
           <ownedOperation name="container" type="//@packages.0/language/structure/Object/container/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.container()&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Object"/>
             </containedType>
@@ -49,6 +67,7 @@
             <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/container"/>
           </ownedOperation>
           <ownedOperation name="checkInvariants" type="//@packages.0/language/structure/Object/checkInvariants/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.checkInvariants()&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:VoidType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::language::Object" jmethod="checkInvariants">
@@ -60,6 +79,7 @@
             <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/checkInvariants"/>
           </ownedOperation>
           <ownedOperation name="checkAllInvariants" type="//@packages.0/language/structure/Object/checkAllInvariants/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.checkAllInvariants()&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:VoidType"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
@@ -228,6 +248,7 @@
             <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/checkAllInvariants"/>
           </ownedOperation>
           <ownedOperation name="equals" type="//@packages.0/language/structure/Boolean" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.equals()&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
               <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
@@ -251,6 +272,7 @@
             <ownedParameter name="element" type="//@packages.0/language/structure/Object/equals/@body/@statement.0/@value/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="isNotEqual" type="//@packages.0/language/structure/Boolean" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isNotEqual()&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
               <statement xsi:type="kermeta_language_behavior:Assignment">
@@ -276,6 +298,7 @@
             <ownedParameter name="element" type="//@packages.0/language/structure/Object/isNotEqual/@body/@statement.0/@value/@target/@parameters.0/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="isKindOf" type="//@packages.0/language/structure/Boolean" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isKindOf(Class)&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
               <statement xsi:type="kermeta_language_behavior:Assignment">
@@ -303,6 +326,7 @@
             <ownedParameter name="cl" type="//@packages.0/language/structure/Object/isKindOf/@body/@statement.0/@value/@parameters.0/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="get" type="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@thenBody/@statement.1/@value/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.get(Property)&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@thenBody/@statement.1/@value/@containedType.0" name="result"/>
@@ -322,6 +346,7 @@
             <ownedParameter name="property" type="//@packages.0/language/structure/Object/get/@body/@statement.0/@value/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="set" type="//@packages.0/language/structure/Object/set/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.set(Property)&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:VoidType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
@@ -428,6 +453,7 @@
             <ownedParameter name="element" type="//@packages.0/language/structure/Object/set/@body/@statement.0/@thenBody/@statement.0/@parameters.2/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="isSet" type="//@packages.0/language/structure/Boolean" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isSet(Property)&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
               <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
@@ -451,6 +477,7 @@
             <ownedParameter name="property" type="//@packages.0/language/structure/Object/isSet/@body/@statement.0/@value/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="unset" type="//@packages.0/language/structure/Object/unset/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.unset(Property)&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:VoidType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::language::Object" jmethod="unSet">
@@ -468,6 +495,7 @@
             <ownedParameter name="property" type="//@packages.0/language/structure/Object/unset/@body/@statement.0/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="oid" type="//@packages.0/language/structure/Integer" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.oid()&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/collections.km#//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@target/@containedType.0"/>
               <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
@@ -485,6 +513,7 @@
             <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/oid"/>
           </ownedOperation>
           <ownedOperation name="toString" type="//@packages.0/language/structure/String" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.toString()&#xD;&#xA;   * Returns a String of form [qn:oid] where 'qn' is the qualified name of&#xD;&#xA;   * the object type, and oid the unique ID of the object&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
               <statement xsi:type="kermeta_language_behavior:Assignment">
@@ -533,6 +562,7 @@
             <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/toString"/>
           </ownedOperation>
           <ownedOperation name="isFrozen" type="//@packages.0/language/structure/Boolean" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isFrozen()&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
               <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
@@ -550,6 +580,7 @@
             <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isFrozen"/>
           </ownedOperation>
           <ownedOperation name="isVoid" type="//@packages.0/language/structure/Boolean" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isVoid()&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/isVoid/@body/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class">
                 <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
@@ -564,6 +595,7 @@
             <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isVoid"/>
           </ownedOperation>
           <ownedOperation name="hashcode" type="//@packages.0/language/structure/Integer" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.hashcode()&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/collections.km#//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@target/@containedType.0"/>
               <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
@@ -581,6 +613,7 @@
             <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/hashcode"/>
           </ownedOperation>
           <ownedOperation name="freeze" type="//@packages.0/language/structure/Object/freeze/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.freeze()&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:VoidType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::language::Object" jmethod="freeze">
@@ -592,6 +625,7 @@
             <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/freeze"/>
           </ownedOperation>
           <ownedOperation name="asType" type="//@packages.0/language/structure/Object/asType/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.asType(Class)&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Object"/>
             </containedType>
@@ -630,6 +664,7 @@
             <ownedParameter name="type" type="//@packages.0/language/structure/Object/asType/@body/@statement.0/@condition/@parameters.0/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="isInstanceOf" type="//@packages.0/language/structure/Boolean" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isInstanceOf(Type)&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
               <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
@@ -653,7 +688,7 @@
             <ownedParameter name="type" type="//@packages.0/language/structure/Object/isInstanceOf/@body/@statement.0/@value/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="containingResource" type="//@packages.0/language/structure/Object/containingResource/@containedType.0" isOrdered="true" upper="1">
-            <ownedTag value="/**&#xA;  * Returns the Resource currently containing (directly or indirectly) the object &#xA;  * or void if the object belongs to ne resource&#xA;  */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Implements kermeta::reflection::Object.containingResource()&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../persistence/resource.km#//@packages.0/persistence/Resource"/>
             </containedType>
@@ -670,24 +705,15 @@
             <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/containingResource"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Boolean">
-          <instanceType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
-        </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Integer">
-          <instanceType href="../standard/collections.km#//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@target/@containedType.0"/>
-        </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Real" instanceType="//@packages.0/language/structure/Real/@containedType.0">
-          <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Real"/>
-          </containedType>
-        </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ParameterizedType" isAbstract="true" superType="//@packages.0/language/structure/ParameterizedType/@containedType.0 //@packages.0/language/structure/ParameterizedType/@containedType.1 //@packages.0/language/structure/ParameterizedType/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/ParameterizedType"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/ParameterizedType/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/ParameterizedType/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/ParameterizedType/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/ParameterizedType/acceptKMStructureVisitor/@containedType.0">
@@ -712,6 +738,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ModelType" superType="//@packages.0/language/structure/ModelType/@containedType.0 //@packages.0/language/structure/ModelType/@containedType.1 //@packages.0/language/structure/ModelType/@containedType.2 //@packages.0/language/structure/ModelType/@containedType.3">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <ownedTag name="isSemanticallyAbstract" value="clone"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeDefinition"/>
@@ -720,6 +747,7 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/ModelType/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/ModelType/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/ModelType/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/ModelType/acceptKMStructureVisitor/@containedType.0">
@@ -743,6 +771,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/ModelType/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="new" type="//@packages.0/language/structure/ModelType/new/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::ModelType.new()&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Model"/>
             </containedType>
@@ -759,6 +788,7 @@
             <superOperation href="../reflection/reflection.km#//@packages.0/reflection/ModelType/new"/>
           </ownedOperation>
           <ownedOperation name="isModelTypeOf" type="//@packages.0/language/structure/Boolean" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::ModelType.isModelTypeOf(Model)&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
               <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
@@ -783,12 +813,14 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Class" superType="//@packages.0/language/structure/Class/@containedType.0 //@packages.0/language/structure/Class/@containedType.1 //@packages.0/language/structure/Class/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/ParameterizedType"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Class"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="new" type="//@packages.0/language/structure/Class/new/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::reflection::Class.new()&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Object"/>
             </containedType>
@@ -805,6 +837,7 @@
             <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Class/new"/>
           </ownedOperation>
           <ownedOperation name="clone" type="//@packages.0/language/structure/Class/clone/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/Type/clone">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::language::structure::Type.clone(Object)&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
@@ -822,6 +855,7 @@
             <ownedParameter name="objectToClone" type="//@packages.0/language/structure/Class/clone/@body/@statement.0/@value/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="deepClone" type="//@packages.0/language/structure/Class/deepClone/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/Type/deepClone">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::language::structure::Type.deepClone(Object)&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
@@ -839,6 +873,7 @@
             <ownedParameter name="objectToClone" type="//@packages.0/language/structure/Class/deepClone/@body/@statement.0/@value/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="hasSubType" type="//@packages.0/language/structure/Boolean" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
               <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
@@ -862,6 +897,7 @@
             <ownedParameter name="object" type="//@packages.0/language/structure/Class/hasSubType/@body/@statement.0/@value/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="equals" type="//@packages.0/language/structure/Boolean" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/Object/equals">
+            <ownedTag value="/**&#xD;&#xA;   * Implements kermeta::language::structure::Object.equals(Object)&#xD;&#xA;   */"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
               <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
@@ -884,6 +920,7 @@
             <ownedParameter name="other" type="//@packages.0/language/structure/Class/equals/@body/@statement.0/@value/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/Class/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/Class/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/Class/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Class/acceptKMStructureVisitor/@containedType.0">
@@ -908,12 +945,14 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="MultiplicityElement" superType="//@packages.0/language/structure/MultiplicityElement/@containedType.0 //@packages.0/language/structure/MultiplicityElement/@containedType.1 //@packages.0/language/structure/MultiplicityElement/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypedElement"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/MultiplicityElement"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/MultiplicityElement/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/MultiplicityElement/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/MultiplicityElement/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/MultiplicityElement/acceptKMStructureVisitor/@containedType.0">
@@ -938,6 +977,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Constraint" superType="//@packages.0/language/structure/Constraint/@containedType.0 //@packages.0/language/structure/Constraint/@containedType.1 //@packages.0/language/structure/Constraint/@containedType.2 //@packages.0/language/structure/Constraint/@containedType.3">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Constraint"/>
           </containedType>
@@ -946,14 +986,20 @@
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Operation"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
-          <ownedAttribute name="language" type="//@packages.0/language/structure/ConstraintLanguage" isOrdered="true" upper="1" isComposite="true"/>
-          <ownedAttribute name="stereotype" type="//@packages.0/language/structure/ConstraintType" isOrdered="true" upper="1" isComposite="true"/>
+          <ownedAttribute name="language" type="//@packages.0/language/structure/ConstraintLanguage" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;   * Language in which the constraint is expressed&#xD;&#xA;   */"/>
+          </ownedAttribute>
+          <ownedAttribute name="stereotype" type="//@packages.0/language/structure/ConstraintType" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;   * Type of the Constraint (precond/postcond/inv)&#xD;&#xA;   */"/>
+          </ownedAttribute>
           <ownedAttribute name="body" type="//@packages.0/language/structure/Constraint/body/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;   * Body of the constraint, expressed as a KerMeta expression&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="behavior.km#//@packages.0/language/behavior/Expression"/>
             </containedType>
           </ownedAttribute>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/Constraint/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/Constraint/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/Constraint/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Constraint/acceptKMStructureVisitor/@containedType.0">
@@ -978,26 +1024,31 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:Enumeration" name="ConstraintLanguage">
+          <ownedTag value="/**&#xD;&#xA; * Enumeration listing supported constraint languages&#xD;&#xA; */"/>
           <ownedLiteral name="kermeta"/>
           <ownedLiteral name="ocl"/>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:Enumeration" name="ConstraintType">
+          <ownedTag value="/**&#xD;&#xA; * Enumeration liting the different kinds of constraints&#xD;&#xA; */"/>
           <ownedLiteral name="pre"/>
           <ownedLiteral name="post"/>
           <ownedLiteral name="inv"/>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Operation" superType="//@packages.0/language/structure/Operation/@containedType.0 //@packages.0/language/structure/Operation/@containedType.1 //@packages.0/language/structure/Operation/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/MultiplicityElement"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Operation"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedAttribute name="body" type="//@packages.0/language/structure/Operation/body/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;   * Body of the Operation, expressed as a KerMeta expression&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="behavior.km#//@packages.0/language/behavior/Expression"/>
             </containedType>
           </ownedAttribute>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/Operation/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/Operation/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/Operation/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Operation/acceptKMStructureVisitor/@containedType.0">
@@ -1022,12 +1073,14 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Tag" superType="//@packages.0/language/structure/Tag/@containedType.0 //@packages.0/language/structure/Tag/@containedType.1 //@packages.0/language/structure/Tag/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Tag"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/Tag/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/Tag/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/Tag/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Tag/acceptKMStructureVisitor/@containedType.0">
@@ -1052,22 +1105,26 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Property" superType="//@packages.0/language/structure/Property/@containedType.0 //@packages.0/language/structure/Property/@containedType.1 //@packages.0/language/structure/Property/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/MultiplicityElement"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Property"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedAttribute name="getterBody" type="//@packages.0/language/structure/Property/getterBody/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="behavior.km#//@packages.0/language/behavior/Expression"/>
             </containedType>
           </ownedAttribute>
           <ownedAttribute name="setterBody" type="//@packages.0/language/structure/Property/setterBody/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="behavior.km#//@packages.0/language/behavior/Expression"/>
             </containedType>
           </ownedAttribute>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/Property/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/Property/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/Property/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Property/acceptKMStructureVisitor/@containedType.0">
@@ -1092,24 +1149,28 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TypeContainer" isAbstract="true" superType="//@packages.0/language/structure/TypeContainer/@containedType.0 //@packages.0/language/structure/TypeContainer/@containedType.1">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/TypeContainer"/>
           </containedType>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="VirtualTypeContainer" isAbstract="true" superType="//@packages.0/language/structure/VirtualTypeContainer/@containedType.0 //@packages.0/language/structure/VirtualTypeContainer/@containedType.1">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/VirtualTypeContainer"/>
           </containedType>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="GenericTypeDefinition" superType="//@packages.0/language/structure/GenericTypeDefinition/@containedType.0 //@packages.0/language/structure/GenericTypeDefinition/@containedType.1 //@packages.0/language/structure/GenericTypeDefinition/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeDefinition"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/GenericTypeDefinition"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/GenericTypeDefinition/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/GenericTypeDefinition/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/GenericTypeDefinition/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/GenericTypeDefinition/acceptKMStructureVisitor/@containedType.0">
@@ -1134,6 +1195,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ClassDefinition" superType="//@packages.0/language/structure/ClassDefinition/@containedType.0 //@packages.0/language/structure/ClassDefinition/@containedType.1 //@packages.0/language/structure/ClassDefinition/@containedType.2 //@packages.0/language/structure/ClassDefinition/@containedType.3">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/GenericTypeDefinition"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -1141,6 +1203,7 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/ClassDefinition/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/ClassDefinition/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/ClassDefinition/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/ClassDefinition/acceptKMStructureVisitor/@containedType.0">
@@ -1165,6 +1228,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TypedElement" superType="//@packages.0/language/structure/TypedElement/@containedType.0 //@packages.0/language/structure/TypedElement/@containedType.1 //@packages.0/language/structure/TypedElement/@containedType.2 //@packages.0/language/structure/TypedElement/@containedType.3">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/NamedElement"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -1172,6 +1236,7 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/TypedElement/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/TypedElement/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/TypedElement/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/TypedElement/acceptKMStructureVisitor/@containedType.0">
@@ -1196,6 +1261,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TypeVariable" isAbstract="true" superType="//@packages.0/language/structure/TypeVariable/@containedType.0 //@packages.0/language/structure/TypeVariable/@containedType.1 //@packages.0/language/structure/TypeVariable/@containedType.2 //@packages.0/language/structure/TypeVariable/@containedType.3">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/NamedElement"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -1204,6 +1270,7 @@
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ObjectTypeVariable" superType="//@packages.0/language/structure/ObjectTypeVariable/@containedType.0 //@packages.0/language/structure/ObjectTypeVariable/@containedType.1 //@packages.0/language/structure/ObjectTypeVariable/@containedType.2 //@packages.0/language/structure/ObjectTypeVariable/@containedType.3">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <ownedTag name="isSemanticallyAbstract" value="clone"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeVariable"/>
@@ -1212,6 +1279,7 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/ObjectTypeVariable/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/ObjectTypeVariable/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/ObjectTypeVariable/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/ObjectTypeVariable/acceptKMStructureVisitor/@containedType.0">
@@ -1236,6 +1304,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="VirtualType" superType="//@packages.0/language/structure/VirtualType/@containedType.0 //@packages.0/language/structure/VirtualType/@containedType.1 //@packages.0/language/structure/VirtualType/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <ownedTag name="isSemanticallyAbstract" value="clone"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/ObjectTypeVariable"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -1243,6 +1312,7 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/VirtualType/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/VirtualType/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/VirtualType/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/VirtualType/acceptKMStructureVisitor/@containedType.0">
@@ -1267,6 +1337,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ModelTypeVariable" superType="//@packages.0/language/structure/ModelTypeVariable/@containedType.0 //@packages.0/language/structure/ModelTypeVariable/@containedType.1 //@packages.0/language/structure/ModelTypeVariable/@containedType.2 //@packages.0/language/structure/ModelTypeVariable/@containedType.3">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <ownedTag name="isSemanticallyAbstract" value="clone"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeVariable"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
@@ -1275,6 +1346,7 @@
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/ModelTypeVariable"/>
           </containedType>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/ModelTypeVariable/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/ModelTypeVariable/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/ModelTypeVariable/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/ModelTypeVariable/acceptKMStructureVisitor/@containedType.0">
@@ -1299,11 +1371,13 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Model" superType="//@packages.0/language/structure/Model/@containedType.0 //@packages.0/language/structure/Model/@containedType.1">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Model"/>
           </containedType>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/Model/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/Model/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/Model/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Model/acceptKMStructureVisitor/@containedType.0">
@@ -1327,6 +1401,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/Model/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="filter" type="//@packages.0/language/structure/Model/filter/@containedType.0" upper="-1">
+            <ownedTag value="/**&#xD;&#xA;  * Implements kermeta::reflection::Model.filter(Type)&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Object"/>
             </containedType>
@@ -1388,6 +1463,7 @@
             <ownedParameter name="typeName" type="//@packages.0/language/structure/Model/filter/@body/@statement.0/@value/@target/@parameters.0/@body/@target/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="add" type="//@packages.0/language/structure/Model/add/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * Implements kermeta::reflection::Model.add(Object)&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:VoidType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/language/structure/Model/add/@body/@statement.0/@containedType.0" name="contents">
@@ -1414,6 +1490,7 @@
             <ownedParameter name="obj" type="//@packages.0/language/structure/Model/add/@body/@statement.1/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="remove" type="//@packages.0/language/structure/Model/remove/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * Implements kermeta::reflection::Model.remove(Object)&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:VoidType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection" jmethod="remove">
@@ -1437,6 +1514,7 @@
             <ownedParameter name="obj" type="//@packages.0/language/structure/Model/remove/@body/@statement.0/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="addAllCompatible" type="//@packages.0/language/structure/Model/addAllCompatible/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * Implements kermeta::reflection::Model.addAllCompatible(Collection&lt;Object>)&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeParamBinding type="//@packages.0/language/structure/Model/addAllCompatible/@containedType.0/@typeParamBinding.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
@@ -1522,6 +1600,7 @@
             <ownedParameter name="objectsToAdd" type="//@packages.0/language/structure/Model/addAllCompatible/@body/@statement.1/@target/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="addCompatible" type="//@packages.0/language/structure/Model/addAllCompatible/@body/@statement.1/@parameters.0/@body/@statement.0/@initialization/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * Implements kermeta::reflection::Model.addCompatible(Object)&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/getMetaClass/@body/@statement.0/@value/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/language/structure/Model/addCompatible/@body/@statement.0/@containedType.0" name="contents">
                 <containedType xsi:type="kermeta_language_structure:Class">
@@ -1548,6 +1627,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ProductType" superType="//@packages.0/language/structure/ProductType/@containedType.0 //@packages.0/language/structure/ProductType/@containedType.1 //@packages.0/language/structure/ProductType/@containedType.2 //@packages.0/language/structure/ProductType/@containedType.3">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <ownedTag name="isSemanticallyAbstract" value="clone"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
@@ -1556,6 +1636,7 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/ProductType/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/ProductType/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/ProductType/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/ProductType/acceptKMStructureVisitor/@containedType.0">
@@ -1580,6 +1661,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="FunctionType" superType="//@packages.0/language/structure/FunctionType/@containedType.0 //@packages.0/language/structure/FunctionType/@containedType.1 //@packages.0/language/structure/FunctionType/@containedType.2 //@packages.0/language/structure/FunctionType/@containedType.3">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <ownedTag name="isSemanticallyAbstract" value="clone"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
@@ -1588,6 +1670,7 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/FunctionType/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/FunctionType/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/FunctionType/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/FunctionType/acceptKMStructureVisitor/@containedType.0">
@@ -1612,6 +1695,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Type" superType="//@packages.0/language/structure/Type/@containedType.0 //@packages.0/language/structure/Type/@containedType.1 //@packages.0/language/structure/Type/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <ownedTag name="isSemanticallyAbstract" value="clone"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -1619,18 +1703,21 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="clone" type="//@packages.0/language/structure/Type/clone/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+            <ownedTag value="/**&#xD;&#xA;  * Returns a copy of passed Object built by recursively copying attribute&#xD;&#xA;  * properties, and referencing original reference properties values&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
             <ownedParameter name="objectToClone" type="//@packages.0/language/structure/Type/clone/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
             </ownedParameter>
           </ownedOperation>
           <ownedOperation name="deepClone" type="//@packages.0/language/structure/Type/deepClone/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+            <ownedTag value="/**&#xD;&#xA;  * Returns a copy of passed Object built by recursively copying values of&#xD;&#xA;  * all properties, no matter the property kind&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
             <ownedParameter name="objectToClone" type="//@packages.0/language/structure/Type/deepClone/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
             </ownedParameter>
           </ownedOperation>
           <ownedOperation name="isInstance" type="//@packages.0/language/structure/Boolean" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * Implements kermeta::reflection::Type.isInstance(Object)&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
               <statement xsi:type="kermeta_language_behavior:Assignment">
@@ -1655,6 +1742,7 @@
             <ownedParameter name="element" type="//@packages.0/language/structure/Type/isInstance/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/Type/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/Type/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/Type/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Type/acceptKMStructureVisitor/@containedType.0">
@@ -1679,6 +1767,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TypeVariableBinding" superType="//@packages.0/language/structure/TypeVariableBinding/@containedType.0 //@packages.0/language/structure/TypeVariableBinding/@containedType.1 //@packages.0/language/structure/TypeVariableBinding/@containedType.2 //@packages.0/language/structure/TypeVariableBinding/@containedType.3">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -1686,6 +1775,7 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/TypeVariableBinding/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/TypeVariableBinding/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/TypeVariableBinding/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/TypeVariableBinding/acceptKMStructureVisitor/@containedType.0">
@@ -1710,6 +1800,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="PrimitiveType" superType="//@packages.0/language/structure/PrimitiveType/@containedType.0 //@packages.0/language/structure/PrimitiveType/@containedType.1 //@packages.0/language/structure/PrimitiveType/@containedType.2 //@packages.0/language/structure/PrimitiveType/@containedType.3">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <ownedTag name="isSemanticallyAbstract" value="clone"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/DataType"/>
@@ -1718,6 +1809,7 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/PrimitiveType/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/PrimitiveType/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/PrimitiveType/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/PrimitiveType/acceptKMStructureVisitor/@containedType.0">
@@ -1741,6 +1833,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/PrimitiveType/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="clone" type="//@packages.0/language/structure/PrimitiveType/clone/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/DataType/clone" isAbstract="true">
+            <ownedTag value="/**&#xD;&#xA;  * Implements kermeta::language::structure::Type.clone(Object)&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
             <ownedParameter name="objectToClone" type="//@packages.0/language/structure/PrimitiveType/clone/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
@@ -1748,12 +1841,14 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="NamedElement" superType="//@packages.0/language/structure/NamedElement/@containedType.0 //@packages.0/language/structure/NamedElement/@containedType.1 //@packages.0/language/structure/NamedElement/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/NamedElement"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/NamedElement/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/NamedElement/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/NamedElement/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/NamedElement/acceptKMStructureVisitor/@containedType.0">
@@ -1778,13 +1873,14 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TypeDefinitionContainer" superType="//@packages.0/language/structure/TypeDefinitionContainer/@containedType.0 //@packages.0/language/structure/TypeDefinitionContainer/@containedType.1 //@packages.0/language/structure/TypeDefinitionContainer/@containedType.2">
-          <ownedTag value="/**&#xA;class SelfType inherits Type, kermeta::reflection::SelfType, KMStructureVisitable&#xA;{&#xA; method acceptKMStructureVisitor&lt;ContextType, ResultType>(visitor : KMStructureVisitor&lt;ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is&#xA;  do&#xA;   result := visitor.visitSelfType(self, context)&#xA;  end&#xA;} */"/>
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/NamedElement"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/TypeDefinitionContainer"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/TypeDefinitionContainer/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/TypeDefinitionContainer/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/TypeDefinitionContainer/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/TypeDefinitionContainer/acceptKMStructureVisitor/@containedType.0">
@@ -1809,12 +1905,14 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Package" superType="//@packages.0/language/structure/Package/@containedType.0 //@packages.0/language/structure/Package/@containedType.1 //@packages.0/language/structure/Package/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeDefinitionContainer"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Package"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/Package/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/Package/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/Package/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Package/acceptKMStructureVisitor/@containedType.0">
@@ -1839,11 +1937,13 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ModelingUnit" superType="//@packages.0/language/structure/ModelingUnit/@containedType.0 //@packages.0/language/structure/ModelingUnit/@containedType.1">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/ModelingUnit"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/ModelingUnit/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/ModelingUnit/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/ModelingUnit/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/ModelingUnit/acceptKMStructureVisitor/@containedType.0">
@@ -1868,11 +1968,13 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Require" isAbstract="true" superType="//@packages.0/language/structure/Require/@containedType.0 //@packages.0/language/structure/Require/@containedType.1">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Require"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/Require/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/Require/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/Require/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Require/acceptKMStructureVisitor/@containedType.0">
@@ -1897,11 +1999,13 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Using" isAbstract="true" superType="//@packages.0/language/structure/Using/@containedType.0 //@packages.0/language/structure/Using/@containedType.1">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Using"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/Using/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/Using/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/Using/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Using/acceptKMStructureVisitor/@containedType.0">
@@ -1926,12 +2030,14 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TypeDefinition" superType="//@packages.0/language/structure/TypeDefinition/@containedType.0 //@packages.0/language/structure/TypeDefinition/@containedType.1 //@packages.0/language/structure/TypeDefinition/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/NamedElement"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/TypeDefinition"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/TypeDefinition/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/TypeDefinition/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/TypeDefinition/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/TypeDefinition/acceptKMStructureVisitor/@containedType.0">
@@ -1956,6 +2062,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="VoidType" superType="//@packages.0/language/structure/VoidType/@containedType.0 //@packages.0/language/structure/VoidType/@containedType.1 //@packages.0/language/structure/VoidType/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <ownedTag name="isSemanticallyAbstract" value="clone"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -1963,6 +2070,7 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/VoidType/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/VoidType/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/VoidType/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/VoidType/acceptKMStructureVisitor/@containedType.0">
@@ -1987,6 +2095,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="DataType" superType="//@packages.0/language/structure/DataType/@containedType.0 //@packages.0/language/structure/DataType/@containedType.1 //@packages.0/language/structure/DataType/@containedType.2 //@packages.0/language/structure/DataType/@containedType.3">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <ownedTag name="isSemanticallyAbstract" value="clone"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeDefinition"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
@@ -1995,6 +2104,7 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/DataType/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/DataType/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/DataType/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/DataType/acceptKMStructureVisitor/@containedType.0">
@@ -2018,6 +2128,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/DataType/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="clone" type="//@packages.0/language/structure/DataType/clone/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/Type/clone" isAbstract="true">
+            <ownedTag value="/**&#xD;&#xA;  * Implements kermeta::language::structure::Type.clone(Object)&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
             <ownedParameter name="objectToClone" type="//@packages.0/language/structure/DataType/clone/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
@@ -2025,6 +2136,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Enumeration" superType="//@packages.0/language/structure/Enumeration/@containedType.0 //@packages.0/language/structure/Enumeration/@containedType.1 //@packages.0/language/structure/Enumeration/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <ownedTag name="isSemanticallyAbstract" value="deepClone"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/DataType"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -2032,6 +2144,7 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/Enumeration/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/Enumeration/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/Enumeration/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Enumeration/acceptKMStructureVisitor/@containedType.0">
@@ -2055,6 +2168,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/Enumeration/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="clone" type="//@packages.0/language/structure/Enumeration/clone/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/DataType/clone">
+            <ownedTag value="/**&#xD;&#xA;  * Implements kermeta::language::structure::Type.clone(Object)&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0">
@@ -2067,12 +2181,14 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EnumerationLiteral" superType="//@packages.0/language/structure/EnumerationLiteral/@containedType.0 //@packages.0/language/structure/EnumerationLiteral/@containedType.1 //@packages.0/language/structure/EnumerationLiteral/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/NamedElement"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/EnumerationLiteral"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/EnumerationLiteral/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/EnumerationLiteral/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/EnumerationLiteral/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/EnumerationLiteral/acceptKMStructureVisitor/@containedType.0">
@@ -2097,12 +2213,14 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Parameter" superType="//@packages.0/language/structure/Parameter/@containedType.0 //@packages.0/language/structure/Parameter/@containedType.1 //@packages.0/language/structure/Parameter/@containedType.2">
+          <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/MultiplicityElement"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Parameter"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/Parameter/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor" typeParameter="//@packages.0/language/structure/Parameter/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/Parameter/acceptKMStructureVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Parameter/acceptKMStructureVisitor/@containedType.0">
@@ -2126,16 +2244,13 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/Parameter/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="UnlimitedNatural">
-          <ownedTag value="/** Alias to kermeta::standard::UnlimitedNatural */"/>
-          <instanceType href="../standard/primitive_types.km#//@packages.0/standard/UnlimitedNatural"/>
-        </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="KMStructureVisitor" isAbstract="true" superType="//@packages.0/language/structure/KMStructureVisitor/@containedType.0">
-          <ownedTag value="/** Implementation of the Visitor pattern for the model elements contained in structure package */"/>
+          <ownedTag value="/**&#xD;&#xA; * Implementation of the Visitor pattern for the model elements contained in structure package&#xD;&#xA; */"/>
           <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
           <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <ownedOperation name="visitClass" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitClass/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Class"/>
@@ -2143,6 +2258,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitMultiplicityElement" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitMultiplicityElement/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/MultiplicityElement"/>
@@ -2150,6 +2266,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitOperation" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitOperation/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Operation"/>
@@ -2157,6 +2274,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitTag" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitTag/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Tag"/>
@@ -2164,6 +2282,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitProperty" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitProperty/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Property"/>
@@ -2171,6 +2290,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitClassDefinition" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitClassDefinition/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/ClassDefinition"/>
@@ -2178,6 +2298,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitTypedElement" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitTypedElement/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypedElement"/>
@@ -2185,6 +2306,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitObjectTypeVariable" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitObjectTypeVariable/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/ObjectTypeVariable"/>
@@ -2192,6 +2314,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitVirtualType" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitVirtualType/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/VirtualType"/>
@@ -2199,6 +2322,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitModelTypeVariable" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitModelTypeVariable/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/ModelTypeVariable"/>
@@ -2206,6 +2330,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitModel" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitModel/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Model"/>
@@ -2213,6 +2338,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitProductType" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitProductType/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/ProductType"/>
@@ -2220,6 +2346,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitFunctionType" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitFunctionType/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/FunctionType"/>
@@ -2227,6 +2354,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitType" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitType/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
@@ -2234,6 +2362,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitTypeVariableBinding" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitTypeVariableBinding/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeVariableBinding"/>
@@ -2241,6 +2370,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitPrimitiveType" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitPrimitiveType/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/PrimitiveType"/>
@@ -2248,6 +2378,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitNamedElement" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitNamedElement/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/NamedElement"/>
@@ -2255,6 +2386,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitPackage" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitPackage/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Package"/>
@@ -2262,6 +2394,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitTypeDefinition" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitTypeDefinition/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeDefinition"/>
@@ -2269,6 +2402,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitVoidType" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitVoidType/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/VoidType"/>
@@ -2276,6 +2410,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitDataType" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitDataType/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/DataType"/>
@@ -2283,6 +2418,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitEnumeration" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitEnumeration/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Enumeration"/>
@@ -2290,6 +2426,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitEnumerationLiteral" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitEnumerationLiteral/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/EnumerationLiteral"/>
@@ -2297,6 +2434,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitParameter" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitParameter/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Parameter"/>
@@ -2304,6 +2442,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitGenericTypeDefinition" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitGenericTypeDefinition/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/GenericTypeDefinition"/>
@@ -2311,6 +2450,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitParameterizedType" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitParameterizedType/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/ParameterizedType"/>
@@ -2318,6 +2458,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitModelType" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitModelType/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/ModelType"/>
@@ -2325,6 +2466,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitTypeDefinitionContainer" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitTypeDefinitionContainer/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeDefinitionContainer"/>
@@ -2332,6 +2474,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitConstraint" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitConstraint/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Constraint"/>
@@ -2339,6 +2482,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitModelingUnit" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitModelingUnit/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/ModelingUnit"/>
@@ -2346,6 +2490,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitRequire" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitRequire/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Require"/>
@@ -2353,6 +2498,7 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/KMStructureVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitUsing" type="//@packages.0/language/structure/KMStructureVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/structure/KMStructureVisitor/visitUsing/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Using"/>
@@ -2361,8 +2507,9 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="KMStructureVisitable" isAbstract="true">
-          <ownedTag value="/** All the classes defined in this &lt;code>kermeta::language::structure&lt;/code> package &#xA; * inherit this class. Part of Visitor pattern implementation. */"/>
+          <ownedTag value="/**&#xD;&#xA; * All the classes defined in this &lt;code>kermeta::language::structure&lt;/code> package &#xD;&#xA; * inherit this class. Part of Visitor pattern implementation.&#xD;&#xA; */"/>
           <ownedOperation name="acceptKMStructureVisitor" type="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor/@containedType.0" isOrdered="true" upper="1" typeParameter="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor/@containedType.1 //@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor/@containedType.0" isAbstract="true">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <ownedParameter name="visitor" type="//@packages.0/language/structure/KMStructureVisitable/acceptKMStructureVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
@@ -2378,7 +2525,7 @@
     </nestedPackage>
   </packages>
   <requires uri="../Standard.kmt">
-    <ownedTag value="/**&#xA; * Contains the concrete implementation (including the operation bodies) &#xA; * of the classes of the &lt;code>kermeta::reflection&lt;/code> package. If you need&#xA; * documentation for elements marked as &quot;Undocumented&quot;, please take a look&#xA; * at the &lt;code>kermeta::reflection&lt;/code> package which is more complete.&#xA; */"/>
+    <ownedTag value="/**&#xD;&#xA; * Contains the concrete implementation (including the operation bodies) &#xD;&#xA; * of the classes of the &lt;code>kermeta::reflection&lt;/code> package. If you need&#xD;&#xA; * documentation for elements marked as &quot;Undocumented&quot;, please take a look&#xD;&#xA; * at the &lt;code>kermeta::reflection&lt;/code> package which is more complete.&#xD;&#xA; */"/>
   </requires>
   <requires uri="behavior.kmt"/>
   <referencedModelingUnits href="../Standard.km#/"/>

@@ -8,7 +8,7 @@ using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id: exceptions.kmt,v 1.15 2007-03-02 15:45:58 ffleurey Exp $
+ * $Id: exceptions.kmt,v 1.16 2007-08-08 12:20:57 dtouzet Exp $
  * Project : Kermeta framework
  * Creation date :  
  * File : exception.kmt
@@ -114,21 +114,28 @@ class VoidOperandError inherits Exception {}
  * String errors
  */
 class StringIndexOutOfBound inherits Exception {}
-
 class StringFormatException inherits Exception {}
   
 /*
  * Collection related errors
  */  
+/**
+ * Occurs when trying to access out of bounds elements
+ */
 class IndexOutOfBound inherits Exception {}
+/**
+ * Occurs when trying to access element on an empty collection
+ */
 class EmptyCollection inherits Exception {}
-
+/**
+ * Occurs when calling next() operation while iterator is already
+ * positioned on the last element of a collection
+ */
 class IteratorIsOff inherits Exception {}
 
 /*
  * File Related Errors
  */
-
 class IOException inherits Exception {}
 class FileNotFoundException inherits IOException {}
 
@@ -139,3 +146,26 @@ class ConstraintViolatedPre inherits Exception {}
 class ConstraintViolatedPost inherits Exception {}
 class ConstraintViolatedInv inherits Exception {}
 
+
+/* ****************************************************************************
+ * 5-Resource related errors 
+ * ****************************************************************************/
+
+/**
+ * Occurs when Resource loading fails for some reasons
+ */
+class ResourceLoadException inherits Exception { }
+class ResourceSaveException inherits Exception { }
+
+/**
+ * Occurs when trying to crate a Resource already existing in the Repository
+ */
+class ResourceCreateException inherits Exception { }
+/** Raised when user tries to add an object that is not conform to the metamodel */
+class ResourceUnconformityException inherits Exception { }
+
+
+/* ****************************************************************************
+ * 6-Dynamic expressions related errors 
+ * ****************************************************************************/
+class DynamicExpressionException inherits Exception { }

@@ -1,4 +1,4 @@
-/* $Id: OptionalEMFValidator.java,v 1.1 2006-12-01 10:13:51 dvojtise Exp $
+/* $Id: OptionalEMFValidator.java,v 1.2 2007-08-08 12:21:17 dtouzet Exp $
  * Project   : Kermeta 
  * File      : OptionalEMFValidator.java
  * License   : EPL
@@ -48,7 +48,7 @@ public class OptionalEMFValidator {
 					internalLog.debug("Validating EObject with EMF validator");
 					// do something if this is not valid ...
 					if(!status.isOK()){
-						throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
+						throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ResourceSaveException",
 				    			"EMF validation failed : " + status.getMessage(),
 				    			runtimeMemory.getCurrentInterpreter(),
 				    			runtimeMemory,

@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.47 2007-08-01 12:48:32 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.48 2007-08-08 12:21:17 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -752,7 +752,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
      * @return a KermetaRaisedException telling that save process failed */
     protected void throwKermetaRaisedExceptionOnSave(String message, Throwable javacause)
     {
-    	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
+    	throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ResourceSaveException",
     			message,
     			getRuntimeMemory().getCurrentInterpreter(),
     			getRuntimeMemory(),
@@ -763,7 +763,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
      * @return a KermetaRaisedException telling that load process failed */
     protected void throwKermetaRaisedExceptionOnLoad(String message, Throwable javacause)
     {
-    	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
+    	throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ResourceLoadException",
     			message,
     			getRuntimeMemory().getCurrentInterpreter(),
     			getRuntimeMemory(),

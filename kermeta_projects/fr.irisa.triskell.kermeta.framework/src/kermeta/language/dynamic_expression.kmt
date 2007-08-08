@@ -44,12 +44,12 @@ class DynamicExpression
 	reference selfClass : kermeta::reflection::ClassDefinition
 
 	/**
-	 * Formal parameters of the expression
+	 * Formal parameters of the expression (bindings between parameters' names and types)
 	 */
 	reference formalParameters : Hashtable<String, kermeta::reflection::Type>
 
 	/**
-	 * initialise the formalParameters with an empty set of parameters
+	 * Initializes the formalParameters with an empty set of parameters
 	 * and the self type with void
 	 */
 	operation initializeDefaults() is do
@@ -60,19 +60,19 @@ class DynamicExpression
 	/**
 	 * Parse the expression as a string
 	 * and updates the expression field and errors
-	 * Returns true if the expression was parssed sucessfuly
+	 * Returns true if the expression was parsed sucessfuly
 	 */
     operation parse(expression : String) : Boolean is do
     	errors.clear
     	if formalParameters == void or selfClass == void then
-    		var e : DynamicExpressionException init DynamicExpressionException.new
+    		var e : kermeta::exceptions::DynamicExpressionException init kermeta::exceptions::DynamicExpressionException.new
     		e.message := "parse precondition - formalParameters or selfType is void"
     		raise e
     	end
         result ?= extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.parse(self, expression)
         
     	if errors.size != 0 then
-    		var e : DynamicExpressionException init DynamicExpressionException.new
+    		var e : kermeta::exceptions::DynamicExpressionException init kermeta::exceptions::DynamicExpressionException.new
     		e.message := "parse result - expression contains errors"
     		errors.each{ error |
     			e.message.append("\n"+error.message)
@@ -86,12 +86,12 @@ class DynamicExpression
      */
     operation execute(selfObj : Object, actualParams : Hashtable<String, Object>) : Object is do
     	if expression == void then
-    		var e : DynamicExpressionException init DynamicExpressionException.new
+    		var e : kermeta::exceptions::DynamicExpressionException init kermeta::exceptions::DynamicExpressionException.new
     		e.message := "execute precondition - expression is void"
     		raise e
     	end
     	if errors.size != 0 then
-    		var e : DynamicExpressionException init DynamicExpressionException.new
+    		var e : kermeta::exceptions::DynamicExpressionException init kermeta::exceptions::DynamicExpressionException.new
     		e.message := "execute precondition - expression contains errors"
     		raise e
     	end
@@ -105,23 +105,37 @@ class DynamicExpression
      */
     operation evalString(body : String, selfObj : Object, actualParams : Hashtable<String, Object>) : Object is do
     	if not parse(body) then
-    		var e : DynamicExpressionException init DynamicExpressionException.new
+    		var e : kermeta::exceptions::DynamicExpressionException init kermeta::exceptions::DynamicExpressionException.new
     		e.message := "evalString - expression contains errors"
     		raise e
     	end
     	result := execute(selfObj, actualParams)
     end
-    
 }
 
-class DynamicExpressionException inherits kermeta::exceptions::Exception {
 
-}
+// MOVED TO PACKAGE kermeta::exceptions
+//class DynamicExpressionException inherits kermeta::exceptions::Exception {}
 
+
+/**
+ * To be written
+ */
 abstract class KermetaError {
+	/**
+	 * Error message
+	 */
 	attribute message : String
 }
 
+
+/**
+ * To be written
+ */
 class ParseError inherits KermetaError {}
 
+
+/**
+ * To be written
+ */
 class TypeError inherits KermetaError {}

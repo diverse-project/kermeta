@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.48 2007-08-07 13:34:57 ftanguy Exp $
+/* $Id: reflection.kmt,v 1.49 2007-08-08 12:20:57 dtouzet Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -10,7 +10,8 @@
  *		Zo� Drey <zdrey@irisa.fr>
  * 		Didier Vojtisek <dvojtise@irisa.fr>
  */
- 
+
+
 /**
  * Contains all the abstract classes used in the reflection mechanism. Implements the <b>derived
  * properties</b> contained in the classes; declares the abstract operations.
@@ -24,21 +25,44 @@ require "../persistence/resource.kmt"
 alias String : kermeta::standard::String;
 
 /** 
- * Object type : all entities of Kermeta metamodel explicitely inherit Object.
+ * Object definition: all entities of Kermeta metamodel explicitely inherit from Object
  */
 abstract class Object
 {
-	
+	/**
+	 * To be written
+	 */
 	property ownedTag : set Tag[0..*]
-	
 
-	/** Tags are used to put comments/documentation */
+	/**
+	 * Tags are used to put comments/documentation
+	 */
 	reference tag : set Tag[0..*]#object
+	
+	/**
+	 * Returns the Class object that is the metaclass of current Object
+	 */
 	operation getMetaClass() : Class is abstract
+	
+	/**
+	 * Returns the Object that contains current Object, void if the Object has
+	 * no container
+	 */
 	operation container() : Object is abstract
+	
+	/**
+	 * Runs checking of invariants defined for the metaclass of the Object
+	 */
 	operation checkInvariants() : Void is abstract
+	
+	/**
+	 * Recursively runs checking of invariants defined for the metaclass of the Object
+	 * and its supertypes
+	 */
 	operation checkAllInvariants() : Void is abstract
-	/** semantic equality,
+
+	/**
+	 * semantic equality,
 	 * if you wish to test for object identity you need to use the method oid
 	 * ex: x.oid == y.oid
 	 * by default, (ie. if not overloaded), the equals method for class Object implements 
@@ -50,16 +74,27 @@ abstract class Object
 	 * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it
 	 */
 	operation equals(element : Object) : Boolean is abstract
+
+	/**
+	 * See kermeta::reflection::Object.equals(Object)
+	 */
 	operation isNotEqual(element : Object) : Boolean is abstract	
 	
-	/** Check if the current object is an instance of the given class.*/
+	/**
+	 * Returns a Boolean stating whether the current Object is an instance of the given Class
+	 */
 	operation isKindOf(cl : Class) : Boolean is abstract
 	
-	/** Check if the current object conforms to the given type */
+	/**
+	 * Returns a Boolean stating whether the current Object conforms to given Type
+	 */
 	operation isInstanceOf(type : Type) : Boolean is abstract
 	
-	/** Implementation of OCL like cast. It returns self if the object object conforms to the type givent as parameter. */
+	/**
+	 * Implementation of OCL like cast. It returns self if the object object conforms to the type givent as parameter.
+	 */
 	operation asType(type : Class) : Object is abstract
+
 	/** 
 	 * Returns the instances of the given property for this Object.
 	 *
@@ -83,14 +118,48 @@ abstract class Object
 	 * the name of the given Property (i.e the type of the property instance).
 	 */
 	operation get(~property : Property) : Object is abstract
+
+	/**
+	 * To be written
+	 */
 	operation ~set(~property : Property, element : Object) : Void is abstract
+
+	/**
+	 * To be written
+	 */
 	operation isSet(~property : Property) : Boolean is abstract
+
+	/**
+	 * To be written
+	 */
 	operation unset(~property : Property) : Void is abstract
+
+	/**
+	 * Returns the unique Oid of the Object
+	 */
 	operation oid() : Integer is abstract
+
+	/**
+	 * Returns the String representation of the Object
+	 */
 	operation toString() : String is abstract
+
+	/**
+	 * Returns a Boolean stating whether the Object is currently in a
+	 * frozen state
+	 */
 	operation isFrozen() : Boolean is abstract
+
+	/**
+	 * Freeze the Object
+	 */
 	operation freeze() : Void is abstract
+
+	/**
+	 * Returns a Boolean stating whether the Object is Void
+	 */
 	operation isVoid() : Boolean is abstract
+
 	/**
 	 * code used in hashtable in order to identify an object in the hashtable keys
 	 * This system is similar to the hashcode used in java. Please refer to java documentation
@@ -104,30 +173,51 @@ abstract class Object
 	* end*/
 	
 	/**
-	 * Returns the Resource currently containing (directly or indirectly) the object 
-	 * or void if the object belongs to ne resource
+	 * Returns the Resource currently containing (directly or indirectly) the Object 
+	 * or void if the object belongs to no Resource
 	 */
 	operation containingResource() : kermeta::persistence::Resource is abstract
 }
+
 
 /** Alias for kermeta::standard::Boolean */
 alias Boolean : kermeta::standard::Boolean;
 /** Alias for kermeta::standard::Integer */
 alias Integer : kermeta::standard::Integer;
+/** Alias for kermeta::standard::UnlimitedNatural */
+alias UnlimitedNatural : kermeta::standard::UnlimitedNatural;
 
-/** Abstraction for Parameterized types, namely, Class and ModelType*/
+
+/**
+ * Abstraction for Parameterized types, namely, Class and ModelType
+ */
 abstract class ParameterizedType inherits Type
 {
+	/**
+	 * Definition of the Type
+	 */
 	reference typeDefinition : GenericTypeDefinition[1..1]
+
+	/**
+	 * Bindings between type variables and provided types 
+	 */
 	attribute typeParamBinding : set TypeVariableBinding[0..*]
+
+	/**
+	 * To be written
+	 */
 	attribute virtualTypeBinding : set TypeVariableBinding[0..*]
 }
-/** Type corresponding to the <b>use</b> of a ClassDefinition (see ClassDefinition)
+
+
+/**
+ * Type corresponding to the <b>use</b> of a ClassDefinition (see ClassDefinition)
  */
 abstract class Class inherits ParameterizedType
 {
-	/** Returns the attributes, references, and derived properties owned by
-	 *  the classDefinition of this class.
+	/**
+	 * Returns the Attributes, References, and derived Properties owned by
+	 * the ClassDefinition of this Class.
 	 */
 	property readonly ownedAttribute : set Property[0..*]
 		getter is do
@@ -136,7 +226,8 @@ abstract class Class inherits ParameterizedType
 			result := cDef.ownedAttribute
 		end
 		
-	/** Returns the operations owned by the classDefinition of this class.
+	/**
+	 * Returns the Operations owned by the ClassDefinition of this Class.
 	 */
 	property readonly ownedOperation : set Operation[0..*]
 		getter is do
@@ -145,7 +236,8 @@ abstract class Class inherits ParameterizedType
 			result := cDef.ownedOperation
 		end
 		
-	/** Returns the Classes of which the classDefinition of this class inherits.
+	/**
+	 * Returns the Classes of which the ClassDefinition of this Class inherits.
 	 */
 	property readonly superClass : set Class[0..*]
 		getter is do
@@ -154,7 +246,8 @@ abstract class Class inherits ParameterizedType
 			result := cDef.superType
 		end
 		
-	/** Returns true if the classDefinition of this class is abstract.
+	/**
+	 * Returns a Boolean stating whether ClassDefinition of this Class is abstract.
 	 */ 
 	property readonly isAbstract : Boolean
 		getter is do
@@ -163,15 +256,21 @@ abstract class Class inherits ParameterizedType
 			result := cDef.isAbstract
 		end
 	
-	/** Returns the name of the classDefinition of this class
+	/**
+	 * Returns the name of the ClassDefinition of this Class
 	 */
 	property readonly name : String
 		getter is do
 			result := typeDefinition.name
 		end
+	
+	/**
+	 * Instantiates a new occurence for this Class
+	 */
 	operation new() : Object is abstract
 	
-	/** Returns the String representation of this class. 
+	/**
+	 * Returns the String representation of this class. 
 	 *  Note : throws an exception if this class has no classDefinition
 	 *  or if the classDefinition is not well constructed.
 	 */
@@ -179,108 +278,261 @@ abstract class Class inherits ParameterizedType
 		result := self.typeDefinition.name
 	end
 }
-/** Type of a model, consisting of a set of included type definitions */
+
+
+/**
+ * Type of a model, consisting of a set of included type definitions
+ */
 abstract class ModelType inherits Type, TypeDefinition
 {
+	/**
+	 * To be written
+	 */
 	reference includedTypeDefinition : set TypeDefinition[0..*]
+
+	/**
+	 * To be written
+	 */
 	operation new() : Model is abstract
+
+	/**
+	 * To be written
+	 */
 	operation isModelTypeOf(model : Model) : Boolean is abstract
 }
 
-/** Is the holder of a set of model elements (Object) that are compatible with the ModelType that has 
+
+/**
+ * Is the holder of a set of model elements (Object) that are compatible with the ModelType that has 
  * instanciated this Model.
  */
 abstract class Model inherits Object
 {
-	/** Contents of this model ... */
+	/**
+	 * Contents of this model ...
+	 */
  	reference readonly contents : set Object[0..*]
  	
- 	/** returns a set of all the elements of the model that are instance of the given Type */
+ 	/**
+ 	 * Returns a set of all the elements of the model that are instance of the given Type
+ 	 */
  	operation filter(vtype : Type) : set Object[0..*] is abstract
  	
- 	/** add an object to the model. According to the ModelType, the typechecker will statically verify if the object can be added or not */ 
+ 	/**
+ 	 * Add an object to the model. According to the ModelType, the typechecker will statically verify if the object can be added or not
+ 	 */ 
  	operation add(obj : Object) : Void is abstract
  	
- 	/** remove an object from the model */
+ 	/**
+ 	 * Remove an object from the model
+ 	 */
  	operation remove(obj : Object) : Void is abstract
  	
- 	/** add all the Object of the collection that are copmpatible with the ModelDefinition. Other objects are ignored.
+ 	/**
+ 	 * Add all the Object of the collection that are copmpatible with the ModelDefinition. Other objects are ignored.
  	 * Returns the list of Object that have been added (One can check that some element have been ignored or not)
  	 */
  	operation addAllCompatible(objectsToAdd : kermeta::standard::Collection<Object>) : kermeta::standard::Collection<Object> is abstract
  	
- 	/** add the Object if it is copmpatible with the ModelDefinition. Other objects are ignored.
+ 	/**
+ 	 * Add the Object if it is copmpatible with the ModelDefinition. Other objects are ignored.
  	 * Returns the object if it has been added (One can check that some element have been ignored or not)
- 	 *   return Void if not added
+ 	 * return Void if not added
  	 */
  	operation addCompatible(objectsToAdd : Object) : Object is abstract
 }
-/** Model elements with a multiplicity [lower..upper] inherit this class*/
+
+
+/**
+ *  Model elements with a multiplicity [lower..upper] inherit this class
+ */
 abstract class MultiplicityElement inherits TypedElement
 {
+	/**
+	 * Boolean stating whether the element is ordered
+	 */
 	attribute isOrdered : Boolean
+
+	/**
+	 * Boolean stating whether duplicated elements are allowed
+	 */
 	attribute isUnique : Boolean
+
+	/**
+	 * Min cardinality of the element
+	 */
 	attribute lower : Integer
+
+	/**
+	 * Max cardinality of the element, '-1' for '*'
+	 */
 	attribute upper : UnlimitedNatural
 }
-/** Constraint is part of a contract implementation in a Class definition or an operation.
+
+
+/**
+ * Constraint is part of a contract implementation in a Class definition or an operation.
  * Three kinds of constraints are available : pre, post, and inv (invariant constraint)
  */
 abstract class Constraint inherits NamedElement
 {
+	/**
+	 * Owning ClassDefinition if Constraint corresponds to invariant
+	 */
 	reference invOwner : ClassDefinition[0..1]#~inv
+
+	/**
+	 * Owning Operation if Constraint corresponds to pre-condition
+	 */
 	reference preOwner : Operation[0..1]#~pre
+
+	/**
+	 * Owning Operation if Constraint corresponds to post-condition
+	 */
 	reference postOwner : Operation[0..1]#~post
 }
-/** Every one knows what an operation is. */
+
+
+/**
+ * Every one knows what an operation is.
+ */
 abstract class Operation inherits MultiplicityElement
 {
+	/**
+	 * Boolean stating whether the Operation is abstract
+	 */
 	attribute isAbstract : Boolean
+
+	/**
+	 * Pre-conditions of the Operation
+	 */
 	attribute ~pre : set Constraint[0..*]#preOwner
+
+	/**
+	 * Post-conditions of the Operation
+	 */
 	attribute ~post : set Constraint[0..*]#postOwner
-	
+
+	/**
+	 * Super-operation of the Operation, if any
+	 */	
 	reference superOperation : Operation
-	reference owningClass : ClassDefinition#ownedOperation
+
+	/**
+	 * ClassDefinition owning the Operation
+	 */
+	reference owningClass : ClassDefinition[1]#ownedOperation
+
+	/**
+	 * TypeParameters of the Operation
+	 */
 	reference typeParameter : set TypeVariable[0..*]
+
+	/**
+	 * Exceptions raised by the Operation
+	 */
 	reference raisedException : set Type[0..*]
+
+	/**
+	 * Parameters of the Operation
+	 */
 	attribute ownedParameter : oset Parameter[0..*]#~operation
 }
-/** Tag is intended to be used to add documentation on a 
- * model element, or add some textual information that cannot be expressed
- * with any model element definition.
+
+
+/**
+ * Tag is intended to be used to add documentation on a  model element,
+ * or add some textual information that cannot be expressed with any
+ * model element definition.
  */
 abstract class Tag inherits Object
 {
+	/**
+	 * Objects to which the Tag is attached to
+	 */
 	reference object : set Object[1..*]#tag
+
+	/**
+	 * Name of the Tag
+	 */
 	attribute name : String
+
+	/**
+	 * String value of the Tag
+	 */
 	attribute ~value : String
 }
-/** Class representing the property definition. Kermeta<->Ecore equivalence:
+
+
+/**
+ * Class representing the property definition. Kermeta<->Ecore equivalence:
  *  - Property with isComposite == true or with type is a base type (String, Integer, Boolean)  : EAttribute
  *  - Property with isComposite == false : EReference
  */
 abstract class Property inherits MultiplicityElement
 {
+	/**
+	 * ClassDefinition that owns the Property
+	 */
 	reference owningClass : ClassDefinition#ownedAttribute
+
+	/**
+	 * Opposite Property of the Property, void if the Property has no opposite
+	 */
 	reference opposite : Property
+
+	/**
+	 * Boolean stating whether the Property is read-only
+	 */
 	attribute isReadOnly : Boolean
+
+	/**
+	 * To be written
+	 */
 	attribute default : String
+
+	/**
+	 * To be written
+	 */
 	attribute isComposite : Boolean
+
+	/**
+	 * To be written
+	 */
 	attribute isDerived : Boolean
+
+	/**
+	 * Boolean stating whether the property allows to identify its containing Object
+	 */
 	attribute isID : Boolean
 }
-/** Phantom class : EMF reflexive editors need that any element of a metamodel 
+
+
+/**
+ * Phantom class : EMF reflexive editors need that any element of a metamodel 
  * has a direct or indirect containment relationship with the root model element of
  * the metamodel. This class resolves this technical requirement.
  */
 abstract class TypeContainer inherits Object
 {
+	/**
+	 * Contained types
+	 */
 	attribute containedType : set Type[0..*]#typeContainer
 }
+
+
+/**
+ * To be written
+ */
 abstract class VirtualTypeContainer inherits Object
 {
+	/**
+	 * To be written
+	 */
 	attribute virtualType : set VirtualType[0..*]#modelType
 }
+
 
 /** 
  * Abstracts the definition of generic type definitions (i.e. type definitions that
@@ -288,9 +540,15 @@ abstract class VirtualTypeContainer inherits Object
  */
 abstract class GenericTypeDefinition inherits TypeDefinition
 {
+	/**
+	 * Type variables defined for the GenericTypeDefinition
+	 */
 	attribute typeParameter : set TypeVariable[0..*]
 }
-/** The definition of a class definition :)
+
+
+/**
+ * The definition of a class definition :)
  *  <pre>class A
  *{ 
  *   attribute s : String
@@ -303,24 +561,35 @@ abstract class GenericTypeDefinition inherits TypeDefinition
  */
 abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 {
+	/**
+	 * Boolean stating whether the ClassDefinition is abstract (which means that
+	 * no instance can be allocated)
+	 */
 	attribute isAbstract : Boolean
 	
-	/** Returns the attributes, references, and derived properties owned by
-	 *  this class definition.
+	/**
+	 * Attributes, References, and derived Properties owned by this ClassDefinition.
 	 */
 	attribute ownedAttribute : set Property[0..*]#owningClass
 	
-	/** Returns the operations owned by this class definition.
+	/**
+	 * Operations owned by this ClassDefinition.
 	 */
 	attribute ownedOperation : set Operation[0..*]#owningClass
+
+	/**
+	 * Invariants defined for this ClassDefinition
+	 */
 	attribute ~inv : set Constraint[0..*]#invOwner
 	
-	/** Returns the Classes of which this class definition inherits.
+	/**
+	 * Classes from which this ClassDefinition inherits.
 	 */
 	reference superType : set Class[0..*]
 
-	/** Returns all the attributes, references, derived properties of this 
-	 *  class definition including the inherited ones
+	/**
+	 * Returns all the Attributes, References, derived Properties of this 
+	 * ClassDefinition including the inherited ones
 	 */
 	property readonly allAttribute : set Property[0..*]
 		getter is do
@@ -335,8 +604,9 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 			}
 		end
 		
-	/** Returns only the attributes (isComposite and not isDerived)
-	 *  class definition
+	/**
+	 * Returns only the Attributes (isComposite and not isDerived) owned by
+	 * the ClassDefinition
 	 */
 	property readonly ownedCompositeAttribute : set Property[0..*]
 		getter is do
@@ -348,8 +618,9 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
  		    }
 		end
 	
-	/** Returns only all the attributes (isComposite and not isDerived)
-	 *  class definition including the inherited ones
+	/**
+	 * Returns only all the Attributes (isComposite and not isDerived) of
+	 * this ClassDefinition including the inherited ones
 	 */
 	property readonly allCompositeAttribute : set Property[0..*]
 		getter is do
@@ -361,8 +632,9 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
  		    }
 		end
 	
-	/** Returns only the references (not isComposite and not isDerived)
-	 *  class definition
+	/**
+	 * Returns only the References (not isComposite and not isDerived) owned by
+	 * this ClassDefinition
 	 */
 	property readonly ownedAttributeAsReference : set Property[0..*]
 		getter is do
@@ -374,8 +646,9 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
  		    }
 		end
 	
-	/** Returns only all the references (not isComposite and not isDerived)
-	 *  class definition including the inherited ones
+	/**
+	 * Returns only all the References (not isComposite and not isDerived) of
+	 * this ClassDefinition including the inherited ones
 	 */
 	property readonly allAttributeAsReference : set Property[0..*]
 		getter is do
@@ -387,8 +660,9 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
  		    }
 		end
 
-	/** Returns only the properties (not isComposite and isDerived)
-	 *  class definition
+	/**
+	 * Returns only the Properties (not isComposite and isDerived) owned by
+	 * this ClassDefinition
 	 */
 	property readonly ownedAttributeAsProperty : set Property[0..*]
 		getter is do
@@ -400,8 +674,9 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
  		    }
 		end
 	
-	/** Returns only all the properties (not isComposite and isDerived)
-	 *  class definition including the inherited ones
+	/**
+	 * Returns only all the Properties (not isComposite and isDerived) of
+	 * this ClassDefinition including the inherited ones
 	 */
 	property readonly allAttributeAsProperty : set Property[0..*]
 		getter is do
@@ -413,8 +688,9 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
  		    }
 		end
 
-	/** Returns all the operations of this 
-	 *  class definition including the inherited ones
+	/**
+	 * Returns all the Operations of this ClassDefinition
+	 * including the inherited ones
 	 */
 	property readonly allOperation : set Operation[0..*]
 		getter is do
@@ -430,35 +706,82 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 		end
 }
 
-/** Abstraction of the notion of typed element : each element 
- * that is typed inherits this class. */
+
+/**
+ * Abstraction of the notion of typed element : each element 
+ * that is typed inherits this class.
+ */
 abstract class TypedElement inherits TypeContainer, NamedElement
 {   
-    /** The type of this model element */
-	reference type : Type
+    /**
+     * Type of the model element
+     */
+	reference type : Type[1]
 }
 
-/** Definition of a type variable for generic types :  
+/**
+ * Definition of a type variable for generic types :  
  * in class definition <pre>class AClass<X,Y> {}</pre>, X and Y are type variables.
  */
 abstract class TypeVariable inherits TypeContainer, Type, NamedElement
 {
+	/**
+	 * Reference to the supertype, if any
+	 */
 	reference supertype : Type
 }
+
+
+/**
+ * To be written
+ */
 abstract class ObjectTypeVariable inherits TypeContainer, TypeVariable
 {
 }
+
+
+/**
+ * To be written
+ */
 abstract class VirtualType inherits ObjectTypeVariable {
+
+	/**
+	 * To be written
+	 */
 	reference classDefinition : ClassDefinition[1]
+
+	/**
+	 * To be written
+	 */
 	reference modelType : VirtualTypeContainer[1]#virtualType
+
+	/**
+	 * To be written
+	 */
 	reference typeParamBinding : TypeVariableBinding[0..*]
 }
+
+
+/**
+ * To be written
+ */
 abstract class ModelTypeVariable inherits TypeVariable, VirtualTypeContainer {
 }
+
+
+/**
+ * Type corresponding to a set of Types
+ * Only used in the context of FunctionType
+ */
 abstract class ProductType inherits TypeContainer, Type
 {
+	/**
+	 * Types 
+	 */
 	reference type : set Type[1..*]
 }
+
+
 /**
  * Type used to define the use of lambda expressions.
  *  Uses :
@@ -479,40 +802,85 @@ abstract class ProductType inherits TypeContainer, Type
  */
 abstract class FunctionType inherits TypeContainer, Type
 {
-	reference left : Type
+	inv resultType is not right.isKindOf(ProductType)
+
+	/**
+	 * Parameters of the function (a ProductType for multiple parameters)
+	 */
+	reference left : Type[1]
+
+	/**
+	 * Result type of the function
+	 */
 	reference right : Type
 }
 
-/** Base class definition for the <b>use</b> of a type.
+/**
+ * Base class definition for the <b>use</b> of a type.
  */
 abstract class Type inherits Object
 {
+	/**
+	 * Owning TypeContainer, if any
+	 */
 	reference typeContainer : TypeContainer[0..1]#containedType
+
+	/**
+	 * To be written
+	 */
 	operation isInstance(element : Object) : Boolean is abstract
+
+	/**
+	 * To be written
+	 */
 	operation hasSubType(element : Type) : Boolean is abstract
 }
+
+
+/**
+ * Definition of a binding between a TypeVariable and a Type
+ */
 abstract class TypeVariableBinding inherits TypeContainer, Object
 {
+	/**
+	 * TypeVariable
+	 */
 	reference variable : TypeVariable[1..1]
+
+	/**
+	 * Assigned Type
+	 */
 	reference type : Type[1..1]
 }
-/** The class definition for kermeta aliases. Above statement defines a primitive
+
+
+/**
+ * The class definition for kermeta aliases. Above statement defines a primitive
  * type called MyString, which instanceType is <code>kermeta::standard::String</code>
  * <pre>alias MyString : kermeta::standard::String</pre>
  */
 abstract class PrimitiveType inherits TypeContainer, DataType
 {
+	/**
+	 * To be written
+	 */
 	reference instanceType : Type
 }
-/** Any element that contain a  name (example : Operation, Property) inherit this
-* class.
+
+
+/**
+ * Any element that contain a  name (example : Operation, Property) inherit this
+ * class.
  */
 abstract class NamedElement inherits Object
 {   
-    /** Name of this named element */
+    /**
+     * Name of this named element
+     */
 	attribute name : String[1..1]
 	
-	/** Returns the qualified name of this named element. Qualified name is 
+	/**
+	 * Returns the qualified name of this named element. Qualified name is 
 	 * the list of the names of the packages hierarchically ordered, delimited by
 	 * a "::", followed by the name of this named element.
 	 */
@@ -526,7 +894,6 @@ abstract class NamedElement inherits Object
 			elem ?= elem.container
 		end
 	end
-	
 }
 
 /**
@@ -535,6 +902,8 @@ abstract class NamedElement inherits Object
 abstract class SelfType inherits Type
 {
 }
+
+
 /** 
  * Abstraction of the notion of containment for type definitions. Now, kermeta metamodel contains one container
  * element, that is Package. In a later release, ModelTypeDefinition will be the main container for type and
@@ -542,37 +911,91 @@ abstract class SelfType inherits Type
  */
 abstract class TypeDefinitionContainer inherits NamedElement
 {
+	/**
+	 * Contained TypeDefinitions
+	 */
 	attribute ownedTypeDefinition : set TypeDefinition[0..*]
 }
+
+
 /**
  * Package in kermeta. Each kermeta model must have a root package. 
  */
 abstract class Package inherits TypeDefinitionContainer
 {
+	/**
+	 * Nested Packages contained by the Package
+	 */
 	attribute nestedPackage : set Package[0..*]#nestingPackage
+
+	/**
+	 * Owning Package, if any
+	 */
 	reference nestingPackage : Package#nestedPackage
+
+	/**
+	 * Uri of the Package
+	 */
 	attribute uri : String
 }
-/*
+
+
+/**
  * The modeling unit is the root of any kermeta model. It contains packages, requires and usings.
  * It also reference others modeling unit.
  */
 abstract class ModelingUnit
 {
+	/**
+	 * Contained root Packages
+	 */
 	attribute packages : set Package[0..*]
+
+	/**
+	 * To be written
+	 */
 	attribute requires : set Require[0..*]
+
+	/**
+	 * To be written
+	 */
 	attribute usings : set Using[0..*]
+
+	/**
+	 * To be written
+	 */
 	reference referencedModelingUnits : set ModelingUnit[0..*]
+
+	/**
+	 * To be written
+	 */
 	attribute ownedTags : set Tag[0..*]
 }
+
+
+/**
+ * To be written
+ */
 abstract class Require inherits Object
 {
+	/**
+	 * To be written
+	 */
 	attribute uri : String
 }
+
+
+/**
+ * To be written
+ */
 abstract class Using inherits Object
 {
+	/**
+	 * To be written
+	 */
 	attribute qualifiedName : String
 }
+
 
 /**
  * Abstraction for type definitions (ClassDefinition, ModelTypeDefinition, DataType inherit
@@ -580,38 +1003,68 @@ abstract class Using inherits Object
  */
 abstract class TypeDefinition inherits NamedElement
 {
-	/** this boolean allows to tell if this Type definition is an aspect or not
+	/**
+	 * This boolean allows to tell if this Type definition is an aspect or not
 	 * If it is an aspect, then at runtime, its definition will be merged with the definition of another
 	 * TypeDefinition that has exactly the same qualified name
 	 */
 	attribute isAspect : Boolean
 	
-	/** References to the base classes */
-	reference baseAspects : TypeDefinition[0..*]
+	/**
+	 * References to the base classes
+	 */
+	reference baseAspects : TypeDefinition[0..*]#aspects
 }
-/** Class definition for the <pre>Void</pre> type */
+
+
+/**
+ * Class definition for the <pre>Void</pre> type
+ */
 abstract class VoidType inherits Type
 {
 }
-/** Special type definition for Enumeration, PrimitiveType  */
+
+
+/**
+ * Special type definition for Enumeration, PrimitiveType
+ */
 abstract class DataType inherits TypeDefinition, Type
 {
 }
-/** Definition for enumeration */
+
+
+/**
+ * Definition for Enumeration
+ */
 abstract class Enumeration inherits DataType
-{   /** Owned item in an enumeration */
+{
+	/**
+	 * Owned items in an Enumeration
+	 */
 	attribute ownedLiteral : set EnumerationLiteral[0..*]#~enumeration
 }
-/** Item definition for enumeration */
+
+
+/**
+ * Item definition for enumeration
+ */
 abstract class EnumerationLiteral inherits NamedElement
-{   /* Owning enumeration */
-	reference ~enumeration : Enumeration#ownedLiteral
+{   
+	/**
+	 * Owning Enumeration
+	 */
+	reference ~enumeration : Enumeration[1]#ownedLiteral
 }
-/** Definition for operation parameter */
+
+
+/**
+ * Definition for operation parameter
+ */
 abstract class Parameter inherits MultiplicityElement
-{   /** Owning operation */
+{
+	/**
+	 * Owning operation
+	 */
 	reference ~operation : Operation#ownedParameter
 }
-/** Alias for kermeta::standard::UnlimitedNatural */
-alias UnlimitedNatural : kermeta::standard::UnlimitedNatural;
 

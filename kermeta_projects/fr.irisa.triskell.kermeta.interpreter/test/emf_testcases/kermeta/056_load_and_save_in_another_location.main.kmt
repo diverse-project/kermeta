@@ -1,4 +1,4 @@
-/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.10 2007-08-01 14:40:15 ftanguy Exp $
+/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.11 2007-08-08 12:21:17 dtouzet Exp $
  * Creation date: November 14, 2006
  * License: EPL
  * Authors: dvojtise
@@ -146,7 +146,8 @@ class Main inherits kermeta::kunit::TestCase
     	// check the number of element in the resource
     	var nbInstances : Integer init resource.instances.size
     	assertTrueWithMsg(nbInstances == numberOfInstances, testName + " didn't save the expected number of element in the target model")
-    rescue (e : kermeta::persistence::ResourceLoadException)
+    //rescue (e : kermeta::persistence::ResourceLoadException)
+    rescue (e : kermeta::exceptions::ResourceLoadException)
     	assertTrueWithMsg(false, testName + " didn't correctly save the file, was not able to load it " + e.toString)
     	    
     end
@@ -185,7 +186,8 @@ class Main inherits kermeta::kunit::TestCase
 	    	
 	    	res3.load
 	    	assertTrueWithMsg(res3.instances.size >=1, "testLoadSaveFileUsingAnotherResource didn't save the expected number of element in the target model")
-    	rescue (e : kermeta::persistence::ResourceLoadException)
+    	//rescue (e : kermeta::persistence::ResourceLoadException)
+    	rescue (e : kermeta::exceptions::ResourceLoadException)
     		assertTrueWithMsg(false, "testLoadSaveFileUsingAnotherResource didn't correctly save the file, was not able to load it. " + e.toString + e.message)    
     	end    
 	end

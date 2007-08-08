@@ -3,7 +3,7 @@
   <packages name="kermeta">
     <nestedPackage name="utils">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Stack" superType="//@packages.0/utils/Stack/@containedType.0">
-        <ownedTag value="/**&#xA; * An implementation of stack&#xA; */"/>
+        <ownedTag value="/**&#xD;&#xA; * An implementation of stack&#xD;&#xA; */"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeParamBinding type="//@packages.0/utils/Stack/G">
@@ -12,7 +12,7 @@
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Sequence"/>
         </containedType>
         <ownedOperation name="push" type="//@packages.0/utils/Stack/push/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xA;  * Push an element in the stack&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Pushes an element in the stack&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block">
             <staticType href="../standard/collections.km#//@packages.0/standard/OrderedCollection/addAt/@containedType.0"/>
@@ -35,7 +35,7 @@
           <ownedParameter name="element" type="//@packages.0/utils/Stack/G" isOrdered="true" upper="1"/>
         </ownedOperation>
         <ownedOperation name="peek" type="//@packages.0/utils/Stack/G" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xA;  * Get the element at the top of the stack&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Gets the element at the top of the stack&#xD;&#xA;  */"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/Stack/G">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Stack/G">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Stack/G" name="result"/>
@@ -51,7 +51,7 @@
           </body>
         </ownedOperation>
         <ownedOperation name="pop" type="//@packages.0/utils/Stack/G" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xA;  * Get the element at the top of the stack and &#xA;  * removes it from the stack&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Gets the element at the top of the stack and &#xD;&#xA;  * removes it from the stack&#xD;&#xA;  */"/>
           <body xsi:type="kermeta_language_behavior:Block">
             <staticType href="../standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@containedType.0"/>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Stack/G">
