@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.49 2007-08-08 12:20:57 dtouzet Exp $
+/* $Id: reflection.kmt,v 1.50 2007-08-08 13:36:36 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -972,6 +972,13 @@ abstract class ModelingUnit
 	attribute ownedTags : set Tag[0..*]
 }
 
+/**
+ * To be written
+ */
+abstract class Filter
+{
+	attribute qualifiedName : String
+}
 
 /**
  * To be written
@@ -1013,7 +1020,7 @@ abstract class TypeDefinition inherits NamedElement
 	/**
 	 * References to the base classes
 	 */
-	reference baseAspects : TypeDefinition[0..*]#aspects
+	reference baseAspects : TypeDefinition[0..*]
 }
 
 

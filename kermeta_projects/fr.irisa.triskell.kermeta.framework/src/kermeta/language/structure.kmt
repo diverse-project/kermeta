@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.44 2007-08-08 12:20:56 dtouzet Exp $
+/* $Id: structure.kmt,v 1.45 2007-08-08 13:36:36 ftanguy Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -792,6 +792,17 @@ class ModelingUnit inherits kermeta::reflection::ModelingUnit, KMStructureVisita
 		end
 }
 
+/**
+ * To be written
+ */
+class Filter inherits kermeta::reflection::Filter, KMStructureVisitable
+{
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+		do
+			result := visitor.visitFilter(self, context)
+		end
+}
+
 
 /**
  * To be written
@@ -1091,6 +1102,12 @@ abstract class KMStructureVisitor<ContextType, ResultType>
 	 * To be written
 	 */
 	operation visitUsing(node : Using, context : ContextType) : ResultType is do end
+
+	/**
+	 * To be written
+	 */
+	operation visitFilter(node : Filter, context : ContextType) : ResultType is do end
+
 }
 
 
