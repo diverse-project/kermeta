@@ -22,6 +22,7 @@ Package io <http://io>
     Attribute framework : EBoolean
     Attribute tracer : Tracer
     Attribute constraintChecked : EBoolean<<1..1>>
+    Attribute aspects : EMap
     Operation load() : void
     Operation addInternalPackage(EString) : Package
     Operation findInternalpackage(EString) : Package
@@ -46,7 +47,7 @@ Package io <http://io>
     Operation storeTrace(Object, EJavaObject) : void
     Operation getModelElementByNode(EJavaObject) : Object
     Operation getNodeByModelElement(Object) : EJavaObject
-    Operation getUsings() : Set
+    Operation getUsings() : String<<0..*>>
     Operation error(EString, EJavaObject) : void
     Operation isWarned() : EBoolean
     Operation parsingError(ANTLRException) : void

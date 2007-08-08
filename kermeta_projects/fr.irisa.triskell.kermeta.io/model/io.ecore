@@ -4,6 +4,9 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="io"
     nsURI="http://io" nsPrefix="io">
   <eClassifiers xsi:type="ecore:EClass" name="KermetaUnit">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="a KermetaUnit is a representation of a file that can be loaded as kermeta code.&#xD;&#xA;It can be kmt (kermeta textual syntax), km (kermeta mode), ecore, or java jar&#xD;&#xA;It deals with various concerns like : file requirement (dependencies), syntax shortcut (using),&#xD;&#xA;   traces, &#xD;&#xA;and provides some useful functions"/>
+    </eAnnotations>
     <eOperations name="load"/>
     <eOperations name="addInternalPackage" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/Package">
       <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -12,12 +15,22 @@
       <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="addRequire" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/Require">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Creates a new &quot;Require&quot; object from a simple String URI and adds it to the model"/>
+      </eAnnotations>
       <eParameters name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="addUsing" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/Using">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Creates a new &quot;Using&quot; object from a simple String and adds it to the model"/>
+      </eAnnotations>
       <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="getRequires" upperBound="-1" eType="ecore:EDataType ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/String"/>
+    <eOperations name="getRequires" upperBound="-1" eType="ecore:EDataType ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/String">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns a list of the &quot;Requires&quot; object as a list of String. &#xD;&#xA;If you need the real &quot;Requires&quot; object, please navigate the model."/>
+      </eAnnotations>
+    </eOperations>
     <eOperations name="importKermetaUnit">
       <eParameters name="value" eType="#//KermetaUnit"/>
       <eParameters name="force" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -51,7 +64,11 @@
     <eOperations name="warning">
       <eParameters name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="isErrored" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isErrored" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns true if the unit contains error(s)"/>
+      </eAnnotations>
+    </eOperations>
     <eOperations name="storeTrace">
       <eParameters name="modelElement" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/Object"/>
       <eParameters name="node" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
@@ -62,7 +79,11 @@
     <eOperations name="getNodeByModelElement" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
       <eParameters name="modelElement" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/Object"/>
     </eOperations>
-    <eOperations name="getUsings" eType="#//Set"/>
+    <eOperations name="getUsings" upperBound="-1" eType="ecore:EDataType ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/String">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns a list of the &quot;Usings&quot; object as a list of String. &#xD;&#xA;If you need the real &quot;Usings&quot; object, please navigate the model."/>
+      </eAnnotations>
+    </eOperations>
     <eOperations name="error">
       <eParameters name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="target" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
@@ -78,7 +99,11 @@
     <eOperations name="finalize"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="storer" lowerBound="1"
         eType="#//KermetaUnitStorer" eOpposite="#//KermetaUnitStorer/kermetaUnits"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="URI of the unit. Ie. name of the file that was loaded"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelingUnit" lowerBound="1"
         eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/ModelingUnit"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="internalPackageEntries"

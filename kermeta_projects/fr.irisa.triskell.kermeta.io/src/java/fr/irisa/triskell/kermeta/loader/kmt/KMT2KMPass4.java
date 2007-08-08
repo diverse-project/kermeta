@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.23 2007-08-07 14:22:16 dvojtise Exp $
+/* $Id: KMT2KMPass4.java,v 1.24 2007-08-08 12:55:37 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -180,7 +180,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 					
 					if (superop == null) {
 						
-						for ( String qualifiedName : (Set<String>) builder.getUsings() ) {
+						for ( String qualifiedName : builder.getUsings() ) {
 							superop = (fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(qualifiedName + "::" + provided_name);
 							if (superop != null) break;
 						}

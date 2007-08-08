@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.10 2007-08-07 13:35:21 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.11 2007-08-08 12:55:37 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -1190,8 +1190,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public Set getUsings() {
-		Set <String> usings = new HashSet <String> ();
+	public EList<String> getUsings() {
+		EList<String> usings = new BasicEList<String> ();
 		Iterator <Using> iterator = modelingUnit.getUsings().iterator();
 		while ( iterator.hasNext() )
 			usings.add( iterator.next().getQualifiedName() );

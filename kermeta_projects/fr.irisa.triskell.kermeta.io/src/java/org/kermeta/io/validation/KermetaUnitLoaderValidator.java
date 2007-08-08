@@ -2,11 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitLoaderValidator.java,v 1.2 2007-07-20 15:08:05 ftanguy Exp $
+ * $Id: KermetaUnitLoaderValidator.java,v 1.3 2007-08-08 12:55:47 dvojtise Exp $
  */
 package org.kermeta.io.validation;
 
 import org.eclipse.emf.common.util.EList;
+import org.kermeta.io.KermetaUnit;
 
 /**
  * A sample validator interface for {@link org.kermeta.io.KermetaUnitLoader}.

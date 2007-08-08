@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.7 2007-08-07 13:35:22 ftanguy Exp $
+ * $Id: KermetaUnit.java,v 1.8 2007-08-08 12:55:37 dvojtise Exp $
  */
 package org.kermeta.io;
 
-import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -26,6 +25,14 @@ import java.util.Map;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Kermeta Unit</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * a KermetaUnit is a representation of a file that can be loaded as kermeta code.
+ * It can be kmt (kermeta textual syntax), km (kermeta mode), ecore, or java jar
+ * It deals with various concerns like : file requirement (dependencies), syntax shortcut (using),
+ *    traces, 
+ * and provides some useful functions
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -101,6 +108,9 @@ public interface KermetaUnit extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * URI of the unit. Ie. name of the file that was loaded
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Uri</em>' attribute.
 	 * @see #setUri(String)
 	 * @see org.kermeta.io.IoPackage#getKermetaUnit_Uri()
@@ -438,6 +448,9 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Creates a new "Require" object from a simple String URI and adds it to the model
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -446,6 +459,9 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Creates a new "Using" object from a simple String and adds it to the model
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -454,6 +470,10 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns a list of the "Requires" object as a list of String. 
+	 * If you need the real "Requires" object, please navigate the model.
+	 * <!-- end-model-doc -->
 	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.language.structure.String"
 	 * @generated
 	 */
@@ -574,6 +594,9 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns true if the unit contains error(s)
+	 * <!-- end-model-doc -->
 	 * @model kind="operation"
 	 * @generated
 	 */
@@ -606,10 +629,14 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="org.kermeta.io.Set"
+	 * <!-- begin-model-doc -->
+	 * Returns a list of the "Usings" object as a list of String. 
+	 * If you need the real "Usings" object, please navigate the model.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.language.structure.String"
 	 * @generated
 	 */
-	Set getUsings();
+	EList<String> getUsings();
 
 	/**
 	 * <!-- begin-user-doc -->
