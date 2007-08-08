@@ -2,19 +2,20 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UiSwitch.java,v 1.3 2007-08-02 14:52:11 dvojtise Exp $
+ * $Id: UiSwitch.java,v 1.4 2007-08-08 12:58:23 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.ui.util;
 
+import fr.irisa.triskell.kermeta.ui.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import fr.irisa.triskell.kermeta.ui.DependentFileTreeItem;
-import fr.irisa.triskell.kermeta.ui.FileDependencyTreeItem;
-import fr.irisa.triskell.kermeta.ui.TreeItem;
-import fr.irisa.triskell.kermeta.ui.UiPackage;
+//import fr.irisa.triskell.kermeta.ui.DependentFileTreeItem;
+//import fr.irisa.triskell.kermeta.ui.FileDependencyTreeItem;
+//import fr.irisa.triskell.kermeta.ui.TreeItem;
+//import fr.irisa.triskell.kermeta.ui.UiPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +30,7 @@ import fr.irisa.triskell.kermeta.ui.UiPackage;
  * @see fr.irisa.triskell.kermeta.ui.UiPackage
  * @generated
  */
-public class UiSwitch {
+public class UiSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -57,7 +58,7 @@ public class UiSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	public Object doSwitch(EObject theEObject) {
+	public T doSwitch(EObject theEObject) {
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
@@ -68,7 +69,7 @@ public class UiSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(EClass theEClass, EObject theEObject) {
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
@@ -77,7 +78,7 @@ public class UiSwitch {
 			return
 				eSuperTypes.isEmpty() ?
 					defaultCase(theEObject) :
-					doSwitch((EClass)eSuperTypes.get(0), theEObject);
+					doSwitch(eSuperTypes.get(0), theEObject);
 		}
 	}
 
@@ -88,24 +89,24 @@ public class UiSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(int classifierID, EObject theEObject) {
+	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case UiPackage.TREE_ITEM: {
 				TreeItem treeItem = (TreeItem)theEObject;
-				Object result = caseTreeItem(treeItem);
+				T result = caseTreeItem(treeItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case UiPackage.FILE_DEPENDENCY_TREE_ITEM: {
 				FileDependencyTreeItem fileDependencyTreeItem = (FileDependencyTreeItem)theEObject;
-				Object result = caseFileDependencyTreeItem(fileDependencyTreeItem);
+				T result = caseFileDependencyTreeItem(fileDependencyTreeItem);
 				if (result == null) result = caseTreeItem(fileDependencyTreeItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case UiPackage.DEPENDENT_FILE_TREE_ITEM: {
 				DependentFileTreeItem dependentFileTreeItem = (DependentFileTreeItem)theEObject;
-				Object result = caseDependentFileTreeItem(dependentFileTreeItem);
+				T result = caseDependentFileTreeItem(dependentFileTreeItem);
 				if (result == null) result = caseTreeItem(dependentFileTreeItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -115,62 +116,62 @@ public class UiSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Tree Item</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tree Item</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Tree Item</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tree Item</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseTreeItem(TreeItem object) {
+	public T caseTreeItem(TreeItem object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>File Dependency Tree Item</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>File Dependency Tree Item</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>File Dependency Tree Item</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>File Dependency Tree Item</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseFileDependencyTreeItem(FileDependencyTreeItem object) {
+	public T caseFileDependencyTreeItem(FileDependencyTreeItem object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Dependent File Tree Item</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Dependent File Tree Item</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Dependent File Tree Item</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Dependent File Tree Item</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseDependentFileTreeItem(DependentFileTreeItem object) {
+	public T caseDependentFileTreeItem(DependentFileTreeItem object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	public Object defaultCase(EObject object) {
+	public T defaultCase(EObject object) {
 		return null;
 	}
 

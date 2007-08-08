@@ -1,4 +1,4 @@
-/* $Id: CheckOption.java,v 1.2 2005-12-06 08:40:18 dvojtise Exp $
+/* $Id: CheckOption.java,v 1.3 2007-08-08 13:00:20 dvojtise Exp $
  * Created on 11 mai 2004
  *
  */
@@ -147,7 +147,7 @@ public class CheckOption
 			{
 
 				/* This is a recognized option. So we try to retrieve the args that should follow. */
-			    Vector option_args = GetOptionArgs (option_match);
+			    Vector<String> option_args = GetOptionArgs (option_match);
 				if (option_args.size() == option_match.getNbArgs())
 				{
 					/* We first look if this option has not already been met. */
@@ -184,10 +184,10 @@ public class CheckOption
 	/** Display errors (if there are some). */
 	public void DisplayErrors (PrintStream fp)
 	{
-		Iterator it = errors.iterator();
+		Iterator<String> it = errors.iterator();
 		while (it.hasNext())
 		{
-			String item = (String)it.next();
+			String item = it.next();
 			fp.println ("Warning : " + item);
 		}
 	}
@@ -195,10 +195,10 @@ public class CheckOption
 	/** Display warnings (if there are some). */
 	public void DisplayWarnings (PrintStream fp)
 	{
-		Iterator it = warnings.iterator();
+		Iterator<String> it = warnings.iterator();
 		while (it.hasNext())
 		{
-			String item = (String)it.next();
+			String item = it.next();
 			fp.println ("Warning : " + item);
 		}
 	}
@@ -206,10 +206,10 @@ public class CheckOption
 	/** Display the help of each options recorded. */
 	public void DisplayHelp (PrintStream fp)
 	{
-		Iterator it = options.iterator();
+		Iterator<Option> it = options.iterator();
 		while (it.hasNext())
 		{
-			Option item = (Option)it.next();
+			Option item = it.next();
 			if (! item.getName().equals(""))
 			{
 				String s = (item.getNbArgs() > 1) ? "s":"";
@@ -222,10 +222,10 @@ public class CheckOption
 	public boolean Saw (String name)
 	{
 		boolean found = false;
-		Iterator it = seen_options.iterator();
+		Iterator<Option> it = seen_options.iterator();
 		while (it.hasNext())
 		{
-			Option item = (Option)it.next();
+			Option item = it.next();
 			if (item.getName().equals(name))
 			{
 				found = true;
@@ -240,10 +240,10 @@ public class CheckOption
 	{
 		Option result = null;
 
-		Iterator it = options.iterator(); 
+		Iterator<Option> it = options.iterator(); 
 		while (result==null && it.hasNext())
 		{
-			Option item = (Option)it.next();
+			Option item = it.next();
 			if (item.getName().equals(name))
 			{
 				result = item;
@@ -258,19 +258,16 @@ public class CheckOption
 	////////////////////////////////////////////////////////////	
 	
 	/** List of Options*. */
-	private Vector options = new Vector ();
+	private Vector<Option> options = new Vector<Option> ();
 
 	/** List of Text* of errors. */
-	private Vector errors = new Vector ();
+	private Vector<String> errors = new Vector<String> ();
 
 	/** List of Text* of warnings. */
-	private Vector warnings = new Vector ();
+	private Vector<String> warnings = new Vector<String> ();
 
 	/** List of seen options. */
-	private Vector seen_options = new Vector ();
-
-	/** */
-	private char proceed;
+	private Vector<Option> seen_options = new Vector<Option> ();
 
 	/** */
 	private String[] args;
@@ -283,10 +280,10 @@ public class CheckOption
 	private Option LookForOption (String txt)
 	{
 		Option result = null;
-		Iterator it = options.iterator();
+		Iterator<Option> it = options.iterator();
 		while (result==null && it.hasNext())
 		{
-			Option item = (Option)it.next();
+			Option item = it.next();
 			if (item.getName().equals(txt))
 			{
 				result = item;
@@ -303,9 +300,9 @@ public class CheckOption
 	}
 
 	/** */
-	private Vector GetOptionArgs (Option opt)
+	private Vector<String> GetOptionArgs (Option opt)
 	{
-	    Vector result = new Vector();
+	    Vector<String> result = new Vector<String>();
   
 		String txt;
 		int i=1;
@@ -330,10 +327,10 @@ public class CheckOption
 	{
 		boolean found = false;
 		Option item = null;		
-		Iterator it = options.iterator();
+		Iterator<Option> it = options.iterator();
 		while (found==false && it.hasNext())
 		{
-			item = (Option)it.next();
+			item = it.next();
 			if (item.getName().equals(""))
 			{
 				found = true;
@@ -342,7 +339,7 @@ public class CheckOption
 	
 		if (found)
 		{
-		    Vector tmp = new Vector ();
+		    Vector<String> tmp = new Vector<String> ();
 			tmp.add (txt);
 			item.Proceed (tmp);
 		}
@@ -358,10 +355,10 @@ public class CheckOption
 
 		boolean found = false;
 		Option item = null;
-		Iterator it = seen_options.iterator();
+		Iterator<Option> it = seen_options.iterator();
 		while (it.hasNext())
 		{
-			item = (Option)it.next();
+			item = it.next();
 
 			if (option.getExclude().indexOf (item.getName()) != -1)
 			{
@@ -376,18 +373,18 @@ public class CheckOption
 	/** */
 	private void CheckIncludingOptions ()
 	{
-		Iterator it = seen_options.iterator();
+		Iterator<Option> it = seen_options.iterator();
 		while (it.hasNext())
 		{
-			Option item = (Option)it.next();
+			Option item = it.next();
 			String include = item.getInclude();	
 			if (! include.equals(""))
 			{
 				boolean inner_found = false;
-				Iterator it2 = seen_options.iterator();
+				Iterator<Option> it2 = seen_options.iterator();
 				while (it2.hasNext())
 				{
-					Option item2 = (Option)it2.next();
+					Option item2 = it2.next();
 					if (include.indexOf(item2.getName()) != -1)
 					{
 						inner_found = true;

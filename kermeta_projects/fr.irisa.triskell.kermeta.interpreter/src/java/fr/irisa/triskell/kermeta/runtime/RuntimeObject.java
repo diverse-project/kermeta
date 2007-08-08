@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.29 2007-08-03 11:51:57 dvojtise Exp $
+/* $Id: RuntimeObject.java,v 1.30 2007-08-08 13:00:01 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -71,7 +71,7 @@ public class RuntimeObject {
 	 * Data contained in the object
 	 * The key is a String, it can contains any object
 	 */
-	private Hashtable<String,?> data;
+	private Hashtable<String,Object> data;
 	
 	/**
 	 * Is the object modifiable
@@ -90,7 +90,7 @@ public class RuntimeObject {
 		super();
 		this.metaclass = metaclass;
 		this.factory = factory;
-		data = new Hashtable();
+		data = new Hashtable<String,Object>();
 	}
 	
 	/**
@@ -139,7 +139,7 @@ public class RuntimeObject {
     		return ecf.eval(interp) == getFactory().getMemory().trueINSTANCE;
     		*/
         	// Create a context for this operation call, setting self object to ro_target
-        	ArrayList parameters = new ArrayList();
+        	ArrayList<RuntimeObject> parameters = new ArrayList<RuntimeObject>();
         	interpretercontext.pushOperationCallFrame(this, op, parameters, null);
         	int result = 0;
 			try {
@@ -299,13 +299,13 @@ public class RuntimeObject {
 	 *   - <b>r2e.emfObject</b> : used when serializing RuntimeObject to EObject: As far as I know it is used only in Runtime2EMF class, but I am not able to explain its full purpose :-(
 	 * @return Returns the data represented by this runtime object.
 	 */
-	public Hashtable getData() {
+	public Hashtable<String,Object> getData() {
 		return data;
 	}
 	/**
 	 * @param data The data to set.
 	 */
-	public void setData(Hashtable data) {
+	public void setData(Hashtable<String,Object> data) {
 		this.data = data;
 	}
 	/**

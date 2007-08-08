@@ -1,4 +1,4 @@
-/* $Id: TypeVirtualizer.java,v 1.5 2007-07-20 15:08:03 ftanguy Exp $
+/* $Id: TypeVirtualizer.java,v 1.6 2007-08-08 12:54:38 dvojtise Exp $
 * Project : Kermeta io
 * File : TypeVirtualizer.java
 * License : EPL
@@ -66,9 +66,9 @@ public class TypeVirtualizer extends KermetaOptimizedVisitor {
 		//modeltypedef, then leave it as a class
 		fr.irisa.triskell.kermeta.language.structure.Type res = null;
 		ClassDefinition cdef = (ClassDefinition) cls.getTypeDefinition();
-		Iterator iter = modeltype_context.getVirtualType().iterator();
-		while (iter.hasNext()) {
-			VirtualType virt = (VirtualType) iter.next();
+		Iterator<VirtualType> iterVT = modeltype_context.getVirtualType().iterator();
+		while (iterVT.hasNext()) {
+			VirtualType virt = iterVT.next();
 			if (virt.getClassDefinition().equals(cdef)) {
 				res = virt;
 			}
@@ -88,9 +88,9 @@ public class TypeVirtualizer extends KermetaOptimizedVisitor {
 				newVirt.setClassDefinition(cdef);
 				modeltype_context.getVirtualType().add(newVirt);
 				//parameterized virtual types
-				iter = cls.getTypeParamBinding().iterator();
+				Iterator<TypeVariableBinding> iter = cls.getTypeParamBinding().iterator();
 				while (iter.hasNext()) {
-					TypeVariableBinding old_tvb = (TypeVariableBinding) iter.next();
+					TypeVariableBinding old_tvb = iter.next();
 					TypeVariableBinding new_tvb = struct_factory.createTypeVariableBinding();
 					new_tvb.setVariable(old_tvb.getVariable());
 					new_tvb.setType((fr.irisa.triskell.kermeta.language.structure.Type) this.accept(old_tvb.getType()));
@@ -106,9 +106,9 @@ public class TypeVirtualizer extends KermetaOptimizedVisitor {
 					// e.g. Set<Class> -> Set<VirtualType>
 					fr.irisa.triskell.kermeta.language.structure.Class newcls = struct_factory.createClass();
 					newcls.setTypeDefinition(cls.getTypeDefinition());
-					iter = cls.getTypeParamBinding().iterator();
+					Iterator<TypeVariableBinding> iter = cls.getTypeParamBinding().iterator();
 					while (iter.hasNext()) {
-						TypeVariableBinding old_tvb = (TypeVariableBinding) iter.next();
+						TypeVariableBinding old_tvb = iter.next();
 						TypeVariableBinding new_tvb = struct_factory.createTypeVariableBinding();
 						new_tvb.setVariable(old_tvb.getVariable());
 						new_tvb.setType((fr.irisa.triskell.kermeta.language.structure.Type) this.accept(old_tvb.getType()));
@@ -174,9 +174,9 @@ public class TypeVirtualizer extends KermetaOptimizedVisitor {
 	@Override
 	public Object visitProductType(ProductType node) {
 		ProductType new_pt = struct_factory.createProductType();
-		Iterator iter = node.getType().iterator();
+		Iterator<fr.irisa.triskell.kermeta.language.structure.Type> iter = node.getType().iterator();
 		while (iter.hasNext()) {
-			fr.irisa.triskell.kermeta.language.structure.Type arg = (fr.irisa.triskell.kermeta.language.structure.Type) iter.next();
+			fr.irisa.triskell.kermeta.language.structure.Type arg = iter.next();
 			new_pt.getType().add((fr.irisa.triskell.kermeta.language.structure.Type) this.accept(arg));
 		}
 		return new_pt;

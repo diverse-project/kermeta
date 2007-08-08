@@ -2,19 +2,20 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UiAdapterFactory.java,v 1.2 2007-07-24 13:46:59 ftanguy Exp $
+ * $Id: UiAdapterFactory.java,v 1.3 2007-08-08 12:58:23 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.ui.util;
 
+import fr.irisa.triskell.kermeta.ui.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
-import fr.irisa.triskell.kermeta.ui.DependentFileTreeItem;
-import fr.irisa.triskell.kermeta.ui.FileDependencyTreeItem;
-import fr.irisa.triskell.kermeta.ui.TreeItem;
-import fr.irisa.triskell.kermeta.ui.UiPackage;
+//import fr.irisa.triskell.kermeta.ui.DependentFileTreeItem;
+//import fr.irisa.triskell.kermeta.ui.FileDependencyTreeItem;
+//import fr.irisa.triskell.kermeta.ui.TreeItem;
+//import fr.irisa.triskell.kermeta.ui.UiPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -53,6 +54,7 @@ public class UiAdapterFactory extends AdapterFactoryImpl {
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object object) {
 		if (object == modelPackage) {
 			return true;
@@ -69,18 +71,22 @@ public class UiAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UiSwitch modelSwitch =
-		new UiSwitch() {
-			public Object caseTreeItem(TreeItem object) {
+	protected UiSwitch<Adapter> modelSwitch =
+		new UiSwitch<Adapter>() {
+			@Override
+			public Adapter caseTreeItem(TreeItem object) {
 				return createTreeItemAdapter();
 			}
-			public Object caseFileDependencyTreeItem(FileDependencyTreeItem object) {
+			@Override
+			public Adapter caseFileDependencyTreeItem(FileDependencyTreeItem object) {
 				return createFileDependencyTreeItemAdapter();
 			}
-			public Object caseDependentFileTreeItem(DependentFileTreeItem object) {
+			@Override
+			public Adapter caseDependentFileTreeItem(DependentFileTreeItem object) {
 				return createDependentFileTreeItemAdapter();
 			}
-			public Object defaultCase(EObject object) {
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -93,8 +99,9 @@ public class UiAdapterFactory extends AdapterFactoryImpl {
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
+	@Override
 	public Adapter createAdapter(Notifier target) {
-		return (Adapter)modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 

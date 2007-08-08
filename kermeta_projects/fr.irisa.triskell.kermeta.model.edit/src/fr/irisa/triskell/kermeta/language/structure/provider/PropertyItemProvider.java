@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.18 2007-07-24 08:46:48 cfaucher Exp $
+ * $Id: PropertyItemProvider.java,v 1.19 2007-08-08 12:53:20 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -107,7 +107,7 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 						"_UI_Property_opposite_feature", "_UI_Property_type"),
 				StructurePackage.eINSTANCE.getProperty_Opposite(), true, false,
 				true, null, null, null) {
-			public Collection getChoiceOfValues(Object object) {
+			public Collection<Property> getChoiceOfValues(Object object) {
 				Property eReference = (Property) object;
 				// Get the owner of this property, thus a ClassDefinition
 				ClassDefinition eContainingClass = eReference.getOwningClass();
@@ -117,10 +117,10 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 				if (eContainingClass == null || eReferenceType == null) {
 					return Collections.EMPTY_LIST;
 				}
-				Collection result = new ArrayList(super
+				Collection<Property> result = new ArrayList(super
 						.getChoiceOfValues(object));
-				for (Iterator i = result.iterator(); i.hasNext();) {
-					Property eOpposite = (Property) i.next();
+				for (Iterator<Property> i = result.iterator(); i.hasNext();) {
+					Property eOpposite = i.next();
 					if (eOpposite != null) {
 						if (eOpposite == eReference) {
 							i.remove();

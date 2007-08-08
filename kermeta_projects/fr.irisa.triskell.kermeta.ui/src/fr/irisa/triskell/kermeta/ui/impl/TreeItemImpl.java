@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TreeItemImpl.java,v 1.2 2007-07-24 13:46:59 ftanguy Exp $
+ * $Id: TreeItemImpl.java,v 1.3 2007-08-08 12:58:23 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.ui.impl;
 
@@ -43,7 +43,7 @@ public abstract class TreeItemImpl extends EObjectImpl implements TreeItem {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList children = null;
+	protected EList<TreeItem> children;
 
 	/**
 	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
@@ -53,7 +53,7 @@ public abstract class TreeItemImpl extends EObjectImpl implements TreeItem {
 	 * @generated
 	 * @ordered
 	 */
-	protected TreeItem parent = null;
+	protected TreeItem parent;
 
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -89,6 +89,7 @@ public abstract class TreeItemImpl extends EObjectImpl implements TreeItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return UiPackage.Literals.TREE_ITEM;
 	}
@@ -98,9 +99,9 @@ public abstract class TreeItemImpl extends EObjectImpl implements TreeItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getChildren() {
+	public EList<TreeItem> getChildren() {
 		if (children == null) {
-			children = new EObjectResolvingEList(TreeItem.class, this, UiPackage.TREE_ITEM__CHILDREN);
+			children = new EObjectResolvingEList<TreeItem>(TreeItem.class, this, UiPackage.TREE_ITEM__CHILDREN);
 		}
 		return children;
 	}
@@ -189,6 +190,7 @@ public abstract class TreeItemImpl extends EObjectImpl implements TreeItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case UiPackage.TREE_ITEM__CHILDREN:
@@ -207,17 +209,19 @@ public abstract class TreeItemImpl extends EObjectImpl implements TreeItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case UiPackage.TREE_ITEM__CHILDREN:
 				getChildren().clear();
-				getChildren().addAll((Collection)newValue);
+				getChildren().addAll((Collection<? extends TreeItem>)newValue);
 				return;
 			case UiPackage.TREE_ITEM__PARENT:
 				setParent((TreeItem)newValue);
 				return;
 			case UiPackage.TREE_ITEM__VALUE:
-				setValue((Object)newValue);
+				setValue(newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -228,6 +232,7 @@ public abstract class TreeItemImpl extends EObjectImpl implements TreeItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case UiPackage.TREE_ITEM__CHILDREN:
@@ -248,6 +253,7 @@ public abstract class TreeItemImpl extends EObjectImpl implements TreeItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case UiPackage.TREE_ITEM__CHILDREN:
@@ -265,6 +271,7 @@ public abstract class TreeItemImpl extends EObjectImpl implements TreeItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

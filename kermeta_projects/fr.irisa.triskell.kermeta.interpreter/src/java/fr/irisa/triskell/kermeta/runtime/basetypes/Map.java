@@ -1,4 +1,4 @@
-/* $Id: Map.java,v 1.9 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: Map.java,v 1.10 2007-08-08 13:00:01 dvojtise Exp $
  * Project : Kermeta interpreter
  * File : Map.java
  * License : EPL
@@ -133,9 +133,9 @@ public class Map {
 	}
 
 
-	public static Hashtable getHashtable(RuntimeObject map) {
-		if (!map.getData().containsKey("Hashtable")) map.getData().put("Hashtable", new Hashtable());
-		return (Hashtable)map.getData().get("Hashtable");
+	public static Hashtable<RuntimeObject,RuntimeObject> getHashtable(RuntimeObject map) {
+		if (!map.getData().containsKey("Hashtable")) map.getData().put("Hashtable", new Hashtable<RuntimeObject,RuntimeObject>());
+		return (Hashtable<RuntimeObject,RuntimeObject>)map.getData().get("Hashtable");
 	}
 
 }

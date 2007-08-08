@@ -2,20 +2,21 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UiFactoryImpl.java,v 1.2 2007-07-24 13:46:59 ftanguy Exp $
+ * $Id: UiFactoryImpl.java,v 1.3 2007-08-08 12:58:23 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.ui.impl;
 
+import fr.irisa.triskell.kermeta.ui.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import fr.irisa.triskell.kermeta.ui.DependentFileTreeItem;
-import fr.irisa.triskell.kermeta.ui.FileDependencyTreeItem;
-import fr.irisa.triskell.kermeta.ui.UiFactory;
-import fr.irisa.triskell.kermeta.ui.UiPackage;
+//import fr.irisa.triskell.kermeta.ui.DependentFileTreeItem;
+//import fr.irisa.triskell.kermeta.ui.FileDependencyTreeItem;
+//import fr.irisa.triskell.kermeta.ui.UiFactory;
+//import fr.irisa.triskell.kermeta.ui.UiPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,6 +59,7 @@ public class UiFactoryImpl extends EFactoryImpl implements UiFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case UiPackage.FILE_DEPENDENCY_TREE_ITEM: return createFileDependencyTreeItem();
@@ -102,6 +104,7 @@ public class UiFactoryImpl extends EFactoryImpl implements UiFactory {
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static UiPackage getPackage() {
 		return UiPackage.eINSTANCE;
 	}

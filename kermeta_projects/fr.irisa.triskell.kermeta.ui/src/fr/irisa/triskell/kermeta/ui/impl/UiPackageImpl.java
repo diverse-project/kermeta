@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UiPackageImpl.java,v 1.1 2007-04-04 13:25:29 ftanguy Exp $
+ * $Id: UiPackageImpl.java,v 1.2 2007-08-08 12:58:23 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.ui.impl;
 
@@ -230,6 +230,10 @@ public class UiPackageImpl extends EPackageImpl implements UiPackage {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Create type parameters
+
+		// Set bounds for type parameters
+
 		// Add supertypes to classes
 		fileDependencyTreeItemEClass.getESuperTypes().add(this.getTreeItem());
 		dependentFileTreeItemEClass.getESuperTypes().add(this.getTreeItem());
@@ -240,9 +244,9 @@ public class UiPackageImpl extends EPackageImpl implements UiPackage {
 		initEReference(getTreeItem_Parent(), this.getTreeItem(), null, "parent", null, 0, 1, TreeItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTreeItem_Value(), ecorePackage.getEJavaObject(), "value", null, 1, 1, TreeItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(treeItemEClass, ecorePackage.getEString(), "toText", 0, 1);
+		addEOperation(treeItemEClass, ecorePackage.getEString(), "toText", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(treeItemEClass, null, "calculateChildren");
+		addEOperation(treeItemEClass, null, "calculateChildren", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(fileDependencyTreeItemEClass, FileDependencyTreeItem.class, "FileDependencyTreeItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

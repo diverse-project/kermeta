@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.18 2007-08-08 08:28:11 dvojtise Exp $
+/* $Id: TypeConformanceChecker.java,v 1.19 2007-08-08 12:54:19 dvojtise Exp $
 * Project : Kermeta (io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -124,7 +124,7 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 		 * Supertype checking.
 		 * 
 		 */
-		Iterator it = ((ClassDefinition) cobject.getTypeDefinition()).getSuperType().iterator();
+		Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = ((ClassDefinition) cobject.getTypeDefinition()).getSuperType().iterator();
 		while (it.hasNext()) {
 			fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
 		    if (TypeEqualityChecker.equals(c, required)) return true;
@@ -194,7 +194,7 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 		else {
 			if (provided instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
 				fr.irisa.triskell.kermeta.language.structure.Class p = (fr.irisa.triskell.kermeta.language.structure.Class)provided;
-				java.util.Iterator it = ((ClassDefinition) p.getTypeDefinition()).getSuperType().iterator();
+				Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = ((ClassDefinition) p.getTypeDefinition()).getSuperType().iterator();
 				while(it.hasNext()) {
 					// get the super type
 					fr.irisa.triskell.kermeta.language.structure.Class t_provided = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();

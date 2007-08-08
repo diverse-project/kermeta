@@ -16,7 +16,7 @@ abstract public class Option
 	private boolean multiple;
 	private String include;
 	private String exclude;
-	private java.util.Vector parameters = new java.util.Vector();
+	private java.util.Vector<String> parameters = new java.util.Vector<String>();
 	
 
 	/** When an option is recognized in the argumenst list, we look the number of waited args and put
@@ -24,7 +24,7 @@ abstract public class Option
 		that mainly will affect the given args to the variable given to the instanciation of the 
 		(derived class) Option.
 	*/
-	abstract public void Proceed (java.util.Vector list); 
+	abstract public void Proceed (java.util.Vector<String> list); 
 
 	/** */
     public String getExclude() 
@@ -99,13 +99,13 @@ abstract public class Option
     }
 
 	/** */
-	public java.util.Vector getParameters() 
+	public java.util.Vector<String> getParameters() 
 	{
 		return parameters;
 	}
 
 	/** */
-	protected void setParameters(java.util.Vector parameters) 
+	protected void setParameters(java.util.Vector<String> parameters) 
 	{
 		this.parameters = parameters;
 	}

@@ -1,4 +1,4 @@
-/* $Id: TypeVariableLeastDerivedEnforcer.java,v 1.8 2007-07-20 15:08:03 ftanguy Exp $
+/* $Id: TypeVariableLeastDerivedEnforcer.java,v 1.9 2007-08-08 12:54:38 dvojtise Exp $
 * Project : Kermeta io
 * File : GenericTypeSubstitution.java
 * License : EPL
@@ -29,10 +29,10 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
-/**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+/*** 
+ * ransforms a fr.irisa.triskell.kermeta.language.structure.Type that contains type variables into an 
+ * actual Ftype by replacing type variables by their least derived
+ * admissible type
  */
 public class TypeVariableLeastDerivedEnforcer extends KermetaOptimizedVisitor {
 	
@@ -65,9 +65,9 @@ public class TypeVariableLeastDerivedEnforcer extends KermetaOptimizedVisitor {
 		else {
 			result = struct_factory.createClass();
 			result.setTypeDefinition(arg0.getTypeDefinition());
-			Iterator it = arg0.getTypeParamBinding().iterator();
+			Iterator<TypeVariableBinding> it = arg0.getTypeParamBinding().iterator();
 			while(it.hasNext()) {
-				TypeVariableBinding provided = (TypeVariableBinding)it.next();
+				TypeVariableBinding provided = it.next();
 				TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
 				bind.setVariable(provided.getVariable());
 				bind.setType(getBoundType(provided.getType()));
@@ -87,9 +87,9 @@ public class TypeVariableLeastDerivedEnforcer extends KermetaOptimizedVisitor {
 	
 	public Object visitProductType(ProductType arg0) {
 		ProductType result = struct_factory.createProductType();
-		Iterator it = arg0.getType().iterator();
+		Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = arg0.getType().iterator();
 		while(it.hasNext()) {
-			fr.irisa.triskell.kermeta.language.structure.Type t = (fr.irisa.triskell.kermeta.language.structure.Type)it.next();
+			fr.irisa.triskell.kermeta.language.structure.Type t = it.next();
 			result.getType().add(getBoundType(t));
 		}
 		return result;

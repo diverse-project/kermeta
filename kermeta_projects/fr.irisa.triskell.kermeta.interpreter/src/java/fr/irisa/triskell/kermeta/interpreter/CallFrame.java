@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.21 2007-03-08 14:16:36 cfaucher Exp $
+/* $Id: CallFrame.java,v 1.22 2007-08-08 13:00:01 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : EPL
@@ -17,6 +17,7 @@ import java.util.Stack;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
 /**
  * CallFrame is the context for an operation call
@@ -124,7 +125,7 @@ public abstract class CallFrame {
     public abstract void setSelf(RuntimeObject self);    
     public abstract Operation getOperation();
     
-    public abstract Hashtable getTypeParameters();
+    public abstract Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> getTypeParameters();
 
     /**
      * @return the called expression to which is associated this CallFrame 

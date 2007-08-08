@@ -1,4 +1,4 @@
-/* $Id: ExpressionCallFrame.java,v 1.10 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: ExpressionCallFrame.java,v 1.11 2007-08-08 13:00:01 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionCallFrame.java
 * License : EPL
@@ -20,6 +20,7 @@ import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 
 /**
@@ -63,7 +64,7 @@ public class ExpressionCallFrame extends CallFrame {
      * 
      * @param actualParam is supposed to be an ArrayList of RuntimeObjects
      */
-    public void bindActualParameter(Hashtable actualParam) {
+    public void bindActualParameter(Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> actualParam) {
         
         if (actualParam.size() != unit.getVariables().size())
             throw new Error("The number of actual parameters provided does not match the number of formal parameters");
@@ -127,8 +128,8 @@ public class ExpressionCallFrame extends CallFrame {
     /* (non-Javadoc)
      * @see fr.irisa.triskell.kermeta.interpreter.CallFrame#getTypeParameters()
      */
-    public Hashtable getTypeParameters() {
-       return new Hashtable();
+    public Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> getTypeParameters() {
+       return new Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type>();
     }
 
     /**

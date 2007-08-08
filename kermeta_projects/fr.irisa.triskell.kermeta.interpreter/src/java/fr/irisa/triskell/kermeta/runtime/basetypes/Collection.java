@@ -1,4 +1,4 @@
-/* $Id: Collection.java,v 1.10 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: Collection.java,v 1.11 2007-08-08 13:00:01 dvojtise Exp $
  * Project : Kermeta interpreter
  * File : Collection.java
  * License : EPL
@@ -82,12 +82,12 @@ public class Collection {
 		return result;
 	}
 
-	public static ArrayList getArrayList(RuntimeObject collection) {
+	public static ArrayList<RuntimeObject> getArrayList(RuntimeObject collection) {
 		if (!collection.getData().containsKey("CollectionArrayList"))
 		{
-		    collection.getData().put("CollectionArrayList", new ArrayList());
+		    collection.getData().put("CollectionArrayList", new ArrayList<RuntimeObject>());
 		}
-		return (ArrayList)collection.getData().get("CollectionArrayList");
+		return (ArrayList<RuntimeObject>)collection.getData().get("CollectionArrayList");
 	}
 	
 	

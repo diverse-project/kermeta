@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependentFileTreeItemImpl.java,v 1.3 2007-07-24 13:46:59 ftanguy Exp $
+ * $Id: DependentFileTreeItemImpl.java,v 1.4 2007-08-08 12:58:23 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.ui.impl;
 
@@ -40,6 +40,7 @@ public class DependentFileTreeItemImpl extends TreeItemImpl implements Dependent
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return UiPackage.Literals.DEPENDENT_FILE_TREE_ITEM;
 	}

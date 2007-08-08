@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.60 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: ExpressionInterpreter.java,v 1.61 2007-08-08 13:00:01 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -186,7 +186,8 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         	fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)t;
 	        // FIXME : Type variables should be handled here (substitutions of variables) done ?
 	        if (c.getTypeParamBinding().size() != 0) {
-	        	fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)interpreterContext.peekCallFrame().getSelf().getMetaclass().getData().get("kcoreObject");
+	        	@SuppressWarnings("unused")
+				fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)interpreterContext.peekCallFrame().getSelf().getMetaclass().getData().get("kcoreObject");
 	            c = (fr.irisa.triskell.kermeta.language.structure.Class)TypeVariableEnforcer.getBoundType(c, interpreterContext.peekCallFrame().getTypeParameters());
 	            
 	        }    

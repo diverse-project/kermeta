@@ -10,7 +10,7 @@ package fr.irisa.triskell.utils.argumentsreader;
 public class NoOption extends Option 
 {
 	/** */
-	public NoOption (java.util.Vector args)
+	public NoOption (java.util.Vector<String> args)
 	{
 		setName ("");
 		setNbArgs (0);
@@ -22,7 +22,7 @@ public class NoOption extends Option
 	}
 
 	/** */
-	public void Proceed (java.util.Vector list) 
+	public void Proceed (java.util.Vector<String> list) 
 	{
 		getParameters().addAll (list);
 	}

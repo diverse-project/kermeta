@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TreeItem.java,v 1.1 2007-04-04 13:25:29 ftanguy Exp $
+ * $Id: TreeItem.java,v 1.2 2007-08-08 12:58:23 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.ui;
 
@@ -40,10 +40,10 @@ public interface TreeItem extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Children</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.ui.UiPackage#getTreeItem_Children()
-	 * @model type="fr.irisa.triskell.kermeta.ui.TreeItem"
+	 * @model
 	 * @generated
 	 */
-	EList getChildren();
+	EList<TreeItem> getChildren();
 
 	/**
 	 * Returns the value of the '<em><b>Parent</b></em>' reference.

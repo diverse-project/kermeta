@@ -1,4 +1,4 @@
-/* $Id: TypeVariableEnforcer.java,v 1.9 2007-07-20 15:08:03 ftanguy Exp $
+/* $Id: TypeVariableEnforcer.java,v 1.10 2007-08-08 12:54:38 dvojtise Exp $
 * Project : Kermeta io
 * File : GenericTypeSubstitution.java
 * License : EPL
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
@@ -37,27 +38,29 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
  */
 public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 	
-	public static fr.irisa.triskell.kermeta.language.structure.Type getBoundType(fr.irisa.triskell.kermeta.language.structure.Type generic, Hashtable bindings) {
+	public static fr.irisa.triskell.kermeta.language.structure.Type getBoundType(fr.irisa.triskell.kermeta.language.structure.Type generic, 
+			Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> bindings) {
 		TypeVariableEnforcer visitor = new TypeVariableEnforcer(bindings);
 		return (fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(generic);
 	}
 	
-	public static Hashtable getTypeVariableBinding(ParameterizedType c) {
-		Hashtable result = new Hashtable();
-		Iterator it = c.getTypeParamBinding().iterator();
+	public static Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> getTypeVariableBinding(ParameterizedType c) {
+		Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> result = 
+			new Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type>();
+		Iterator<TypeVariableBinding> it = c.getTypeParamBinding().iterator();
 		while(it.hasNext()) {
-			TypeVariableBinding bind = (TypeVariableBinding)it.next();
+			TypeVariableBinding bind = it.next();
 			result.put(bind.getVariable(), bind.getType());
 		}
 		it = c.getVirtualTypeBinding().iterator();
 		while (it.hasNext()) {
-			TypeVariableBinding bind = (TypeVariableBinding) it.next();
+			TypeVariableBinding bind =  it.next();
 			result.put(bind.getVariable(), bind.getType());
 		}
 		return result;
 	}
 	
-	protected Hashtable bindings;
+	protected Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> bindings;
 	protected StructureFactory struct_factory;
 
 	
@@ -82,9 +85,9 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 		else {
 			result = struct_factory.createClass();
 			result.setTypeDefinition(arg0.getTypeDefinition());
-			Iterator it = arg0.getTypeParamBinding().iterator();
+			Iterator<TypeVariableBinding> it = arg0.getTypeParamBinding().iterator();
 			while(it.hasNext()) {
-				TypeVariableBinding provided = (TypeVariableBinding)it.next();
+				TypeVariableBinding provided = it.next();
 				TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
 				bind.setVariable(provided.getVariable());
 				
@@ -93,7 +96,7 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 			}
 			it = arg0.getVirtualTypeBinding().iterator();
 			while (it.hasNext()) {
-				TypeVariableBinding provided = (TypeVariableBinding) it.next();
+				TypeVariableBinding provided =  it.next();
 				TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
 				bind.setVariable(provided.getVariable());
 				bind.setType(getBoundType(provided.getType(), bindings));
@@ -155,9 +158,9 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 	
 	public Object visitProductType(ProductType arg0) {
 		ProductType result = struct_factory.createProductType();
-		Iterator it = arg0.getType().iterator();
+		Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = arg0.getType().iterator();
 		while(it.hasNext()) {
-			fr.irisa.triskell.kermeta.language.structure.Type t = (fr.irisa.triskell.kermeta.language.structure.Type)it.next();
+			fr.irisa.triskell.kermeta.language.structure.Type t = it.next();
 			result.getType().add(getBoundType(t, bindings));
 		}
 		return result;
@@ -186,7 +189,7 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 	/**
 	 * Constructor 
 	 */
-	public TypeVariableEnforcer(Hashtable bindings) {
+	public TypeVariableEnforcer(Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> bindings) {
 		super();
 		this.bindings = bindings;
 		struct_factory = StructurePackageImpl.init().getStructureFactory();
