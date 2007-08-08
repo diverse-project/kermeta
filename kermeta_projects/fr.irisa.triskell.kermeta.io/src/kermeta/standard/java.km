@@ -3,11 +3,12 @@
   <packages name="kermeta">
     <nestedPackage name="standard">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="UnknownJavaObject" superType="//@packages.0/standard/UnknownJavaObject/@containedType.0">
-        <ownedTag value="/** &#xA;  * This special object is used to represent java object that cannot be concretly used with kermeta&#xA;  * the only actions possible on these objects are : assignment and passing them as parameter&#xA;  */"/>
+        <ownedTag value="/** &#xD;&#xA;  * This special object is used to represent java object that cannot be concretly used with kermeta&#xD;&#xA;  * the only actions possible on these objects are : assignment and passing them as parameter&#xD;&#xA;  */"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation name="toString" type="//@packages.0/standard/UnknownJavaObject/toString/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xD;&#xA;   *&#xD;&#xA;   */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
@@ -26,7 +27,7 @@
     </nestedPackage>
   </packages>
   <requires uri="primitive_types.kmt">
-    <ownedTag value="/**&#xA; * $Id: java.km,v 1.5 2007-08-07 13:35:20 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */"/>
+    <ownedTag value="/**&#xD;&#xA; * $Id: java.km,v 1.6 2007-08-08 12:26:29 dtouzet Exp $&#xD;&#xA; * Contains types dedicated to dealing with java objects&#xD;&#xA; */"/>
   </requires>
   <usings qualifiedName="kermeta::exceptions"/>
   <referencedModelingUnits href="primitive_types.km#/"/>

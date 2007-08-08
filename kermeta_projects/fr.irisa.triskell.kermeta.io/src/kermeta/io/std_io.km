@@ -3,12 +3,12 @@
   <packages name="kermeta">
     <nestedPackage name="io">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="StdIO" superType="//@packages.0/io/StdIO/@containedType.0">
-        <ownedTag value="/**&#xA; * An implementation of StdIO : standard input/output&#xA; * &lt;img src=&quot;./figures/io_package.png&quot;>&#xA; */"/>
+        <ownedTag value="/**&#xD;&#xA; * An implementation of StdIO : standard input/output&#xD;&#xA; * &lt;img src=&quot;./figures/io_package.png&quot;>&#xD;&#xA; */"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation name="write" type="//@packages.0/io/StdIO/write/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xA;  * write the object to standard output&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Writes the object to standard output&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/io/StdIO/write/@body/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -46,7 +46,7 @@
           <ownedParameter name="object" type="//@packages.0/io/StdIO/write/@body/@statement.0/@thenBody/@statement.0/@target/@containedType.0" isOrdered="true" upper="1"/>
         </ownedOperation>
         <ownedOperation name="writeln" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xA;  * writeln the object to standard output&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Writeln the object to standard output&#xD;&#xA;  */"/>
           <type href="../persistence/resource.km#//@packages.0/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.0/@containedType.0"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/io/StdIO/write/@body/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/io/StdIO/write/@body/@statement.0/@containedType.0">
@@ -74,7 +74,7 @@
           <ownedParameter name="object" type="//@packages.0/io/StdIO/writeln/@body/@statement.0/@thenBody/@statement.0/@target/@containedType.0" isOrdered="true" upper="1"/>
         </ownedOperation>
         <ownedOperation name="read" type="//@packages.0/io/StdIO/read/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xA;  * read an object from standard input&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Reads a String from standard input&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
@@ -110,7 +110,7 @@
     </nestedPackage>
   </packages>
   <requires uri="../Standard.kmt">
-    <ownedTag value="/**&#xA; * Contains Input/Output related classes. &#xA; */"/>
+    <ownedTag value="/**&#xD;&#xA; * Contains standard input/output related classes. &#xD;&#xA; */"/>
   </requires>
   <usings qualifiedName="kermeta::standard"/>
   <usings qualifiedName="kermeta::language::structure"/>

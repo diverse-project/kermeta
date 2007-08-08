@@ -3,7 +3,7 @@
   <packages name="kermeta">
     <nestedPackage name="persistence">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Resource" isAbstract="true" superType="//@packages.0/persistence/Resource/@containedType.0">
-        <ownedTag value="/**&#xA; * The main class that handle a loaded/saved model.&#xA; * There are a few important things to note for the developer :&#xA; * &#xA; * - load a Resource : this loads a Collection of instances corresponding to the&#xA; *   objects in the loaded model. If the Collection of instances is empty, than &#xA; *  a ResourceLoadException is raised&#xA; *&#xA; * - save a Resource : this saves the collection of instances in a new file. This can&#xA; *   be correctly done if and only if the instances saved are conform to the metamodel&#xA; *   linked to this resource (this link does not need to be explicit. It is normally retrieved&#xA; *   through the EMF model -- see Java wrapping &quot;Resource.java&quot;).&#xA; * &#xA; * - add/remove an instance to the Resource : this adds an element in the resource. It cannot&#xA; *   be &quot;simply&quot; added because of the following potential errors :&#xA; *&#xA; *   - The object added is not conform to the metamodel -> Error&#xA; *   - The object was already added in the resource -> Not a real error : we do nothing&#xA; *   - The object to remove does not exist -> redirect to a collection-specific error&#xA; *   - The object to remove is attached to an object in the collection -> &quot;dependency-violation&quot; exception?&#xA;&#xA; */"/>
+        <ownedTag value="/**&#xD;&#xA; * The main class that handle a loaded/saved model.&#xD;&#xA; * There are a few important things to note for the developer :&#xD;&#xA; * &#xD;&#xA; * - load a Resource : this loads a Collection of instances corresponding to the&#xD;&#xA; *   objects in the loaded model. If the Collection of instances is empty, than &#xD;&#xA; *  a ResourceLoadException is raised&#xD;&#xA; *&#xD;&#xA; * - save a Resource : this saves the collection of instances in a new file. This can&#xD;&#xA; *   be correctly done if and only if the instances saved are conform to the metamodel&#xD;&#xA; *   linked to this resource (this link does not need to be explicit. It is normally retrieved&#xD;&#xA; *   through the EMF model -- see Java wrapping &quot;Resource.java&quot;).&#xD;&#xA; * &#xD;&#xA; * - add/remove an instance to the Resource : this adds an element in the resource. It cannot&#xD;&#xA; *   be &quot;simply&quot; added because of the following potential errors :&#xD;&#xA; *&#xD;&#xA; *   - The object added is not conform to the metamodel -> Error&#xD;&#xA; *   - The object was already added in the resource -> Not a real error : we do nothing&#xD;&#xA; *   - The object to remove does not exist -> redirect to a collection-specific error&#xD;&#xA; *   - The object to remove is attached to an object in the collection -> &quot;dependency-violation&quot; exception?&#xD;&#xA;&#xD;&#xA; */"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeParamBinding>
             <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
@@ -12,23 +12,23 @@
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
         </containedType>
         <ownedAttribute name="uri" type="//@packages.0/persistence/Resource/uri/@containedType.0" isOrdered="true" upper="1" isComposite="true">
-          <ownedTag value="/** The uri of the model-instance to load */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Uri of the Resource to load&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
         </ownedAttribute>
         <ownedAttribute name="metaModelURI" type="//@packages.0/persistence/Resource/metaModelURI/@containedType.0" isOrdered="true" upper="1" isComposite="true">
-          <ownedTag value="/** The uri of the meta-model of the model-instance to load */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Uri of the meta-model of the Resource to load&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
         </ownedAttribute>
         <ownedAttribute name="repository" type="//@packages.0/persistence/Resource/repository/@containedType.0" isOrdered="true" upper="1" opposite="//@packages.0/persistence/Repository/resources">
-          <ownedTag value="/** The repository used to create this resource &#xA;  * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only &#xA;  * one Resource of a given Repository&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Repository used to create the Resource&#xD;&#xA;  * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only &#xD;&#xA;  * one Resource of a given Repository&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Repository"/>
         </ownedAttribute>
         <ownedAttribute name="dependentResources" type="//@packages.0/persistence/Resource/dependentResources/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
-          <ownedTag value="/**&#xA;  * Returns set of Resources on which current Resource depends, empty set if current&#xA;  * Resource has no dependency&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Returns the set of Resources the current Resource, which must have been loaded,&#xD;&#xA;  * depends on, an empty set if current Resource has no dependency&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <getterBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -58,7 +58,7 @@
           </getterBody>
         </ownedAttribute>
         <ownedAttribute name="contents" upper="-1" isReadOnly="true" isDerived="true">
-          <ownedTag value="/** &#xA;  * Returns the set of all Objects directly or indirectly contained by the Resource,&#xA;  * or an empty set if the Resource is empty&#xA;  */"/>
+          <ownedTag value="/** &#xD;&#xA;  * Returns the set of all Objects directly or indirectly contained by the Resource,&#xD;&#xA;  * or an empty set if the Resource is empty&#xD;&#xA;  */"/>
           <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           <getterBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/contents/@getterBody/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -153,7 +153,7 @@
           </getterBody>
         </ownedAttribute>
         <ownedOperation name="instances" type="//@packages.0/persistence/Resource/instances/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/** The entities contained in the model-instance, that are provided when user loads a resource &#xA;  *  instances == rootContents&#xA;  * this is a loop on Resource itself in order to get backward compatibility&#xA;  * user should use the resource directly since this is a collection&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * The entities contained in the model-instance, that are provided when user loads a resource &#xD;&#xA;  * instances == rootContents&#xD;&#xA;  * this is a loop on Resource itself in order to get backward compatibility&#xD;&#xA;  * user should use the resource directly since this is a collection&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/instances/@body/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
@@ -164,11 +164,11 @@
           </body>
         </ownedOperation>
         <ownedOperation name="save" type="//@packages.0/persistence/Resource/save/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/** Save a model instance, in the file specified by the initial uri &#xA;  * Overrides the old version.&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Save a Resource in the file specified by the current value of uri &#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
         </ownedOperation>
         <ownedOperation name="saveWithNewURI" type="//@packages.0/persistence/Resource/saveWithNewURI/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/** Save a resource in a file referenced by this new uri. &#xA;     This allows to save the result of a transformation without changing the original file. */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Save a Resource in a file referenced by the new uri. &#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -182,15 +182,15 @@
           </ownedParameter>
         </ownedOperation>
         <ownedOperation name="load" type="//@packages.0/persistence/Resource/load/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/** Loads a resource. Once loaded, you'll be able to query the resource for its content.  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Loads the Resource, thus making content of the Resource browsable.&#xD;&#xA;  * Raises a ResourceLoadException in case loaded Resource is empty&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EMFResource" superType="//@packages.0/persistence/EMFResource/@containedType.0">
-        <ownedTag value="/**&#xA; * Extension of the Resource class definition that is specific to EMF Repository.&#xA; * User is not supposed to directly create it. Otherwise it will not be correctly initialized&#xA; * You must To create one &#xA; */"/>
+        <ownedTag value="/**&#xD;&#xA; * Extension of the Resource class definition that is specific to EMF Repository.&#xD;&#xA; * User is not supposed to directly create it. Otherwise it will not be correctly initialized&#xD;&#xA; * You must To create one &#xD;&#xA; */"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
         <ownedOperation name="saveWithNewURI" type="//@packages.0/persistence/EMFResource/saveWithNewURI/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/saveWithNewURI">
-          <ownedTag value="/** Save a resource in a file referenced by this new uri. &#xA;     This allows to save the result of a transformation without changing the original file. */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Overrides Resource.saveWithNewURI(String)&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Resource" jmethod="save">
@@ -215,7 +215,7 @@
           <ownedParameter name="new_uri" type="//@packages.0/persistence/EMFResource/saveWithNewURI/@body/@statement.0/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
         </ownedOperation>
         <ownedOperation name="save" type="//@packages.0/persistence/EMFResource/save/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/save">
-          <ownedTag value="/** Save a resource in a file referenced by the uri associated to the resource */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Overrides Resource.save()&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Resource" jmethod="save">
@@ -233,7 +233,7 @@
           </body>
         </ownedOperation>
         <ownedOperation name="saveAndValidateWithEMF" type="//@packages.0/persistence/EMFResource/saveAndValidateWithEMF/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/** save and check the resource using the EMF validation function&#xA;  * apply the validate on all the object in the root of this resource&#xA;  * returns true if the validation reports no error&#xA;  * otherwise raises exceptions&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Checks the Resource using the EMF validation function, and saves it if&#xD;&#xA;  * validation succeeds&#xD;&#xA;  * Applies validation to all root objects of the Resource&#xD;&#xA;  * Returns true if the validation reports no error, raises exceptions otherwise&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
@@ -253,7 +253,7 @@
           </body>
         </ownedOperation>
         <ownedOperation name="load" type="//@packages.0/persistence/EMFResource/load/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/load">
-          <ownedTag value="/** Loads a resource. Once loaded, you'll be able to query the resource for its instances.  &#xA;  * even if the metamodelURI was not set, (for example the registered packages are enough) after a succesful load&#xA;  * the attribute metamodelURI will be filled with the nsuri of the root package of the metamodel used to load this resource&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Overrides Resource.save()&#xD;&#xA;  * In case the metamodelURI was not previoulsy set, metamodelURI is filled with&#xD;&#xA;  * the nsuri of the root package of the metamodel used to load the Resource after&#xD;&#xA;  * a successful load&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:CallFeature" name="clear">
@@ -282,9 +282,13 @@
                   </target>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.1/@containedType.0" identifier="e">
-                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/ResourceLoadException"/>
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/ResourceLoadException"/>
+                  </containedType>
                   <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.1/@initialization/@containedType.0" name="new">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/ResourceLoadException"/>
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/ResourceLoadException"/>
+                    </containedType>
                     <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
                     <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/persistence/Resource/contents/@getterBody/@statement.0/@initialization/@target/@containedType.0">
                       <typeref type="//@packages.0/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.1/@initialization/@containedType.0" upper="1"/>
@@ -314,7 +318,7 @@
           </body>
         </ownedOperation>
         <ownedOperation name="add" type="//@packages.0/persistence/EMFResource/add/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/** Add an instance to the Resource &#xA;  * It ensures that the instance is referenced by one and only one Resource of the same Repository&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Overrides Set&lt;Object>.add(Object)&#xD;&#xA;  * Add an instance to the Resource &#xD;&#xA;  * Ensures that the instance is referenced by a one and only one Resource of the same Repository&#xD;&#xA;  * Ensures that the instance does not appear more than once in the Resource&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block">
             <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
@@ -409,7 +413,7 @@
           </ownedParameter>
         </ownedOperation>
         <ownedOperation name="remove" isOrdered="true" upper="1">
-          <ownedTag value="/** Remove an instance from the Resource */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Overrides Set&lt;Object>.remove(Object)&#xD;&#xA;  * Remove the instance from the Resource&#xD;&#xA;  */"/>
           <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           <body xsi:type="kermeta_language_behavior:Block">
             <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
@@ -464,130 +468,22 @@
             <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="isInTypeDefSet" type="//@packages.0/persistence/EMFResource/isInTypeDefSet/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xA;  * Helper that returns true if new_instance type is in the tparam Set, false otherwise&#xA;  * FIXME : Loop-and-cast done in order to temporarily get round the type &#xA;  * system limits for reflection&#xA; */"/>
-          <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
-          </containedType>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/EMFResource/saveWithNewURI/@body/@statement.0/@parameters.5/@containedType.0">
-              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/EMFResource/isInTypeDefSet/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="//@packages.0/persistence/EMFResource/saveWithNewURI/@body/@statement.0/@parameters.5/@containedType.0"/>
-            </statement>
-            <statement xsi:type="kermeta_language_behavior:Loop" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
-              <initialization xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@initialization/@containedType.0" identifier="it">
-                <containedType xsi:type="kermeta_language_structure:Class">
-                  <typeParamBinding type="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@initialization/@containedType.0/@typeParamBinding.0/@containedType.0">
-                    <containedType xsi:type="kermeta_language_structure:Class">
-                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/TypeDefinition"/>
-                    </containedType>
-                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Iterator/G"/>
-                  </typeParamBinding>
-                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Iterator"/>
-                </containedType>
-                <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@initialization/@initialization/@containedType.0" name="iterator">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeParamBinding type="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@initialization/@initialization/@containedType.0/@typeParamBinding.0/@containedType.0">
-                      <containedType xsi:type="kermeta_language_structure:Class">
-                        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/TypeDefinition"/>
-                      </containedType>
-                      <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Iterator/G"/>
-                    </typeParamBinding>
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Iterator"/>
-                  </containedType>
-                  <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/iterator"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@initialization/@initialization/@target/@containedType.0" name="tparams">
-                    <containedType xsi:type="kermeta_language_structure:Class">
-                      <typeParamBinding type="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@initialization/@initialization/@containedType.0/@typeParamBinding.0/@containedType.0">
-                        <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
-                      </typeParamBinding>
-                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
-                    </containedType>
-                  </target>
-                </initialization>
-                <type type="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@initialization/@containedType.0" isOrdered="true" upper="1"/>
-              </initialization>
-              <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/EMFResource/saveWithNewURI/@body/@statement.0/@parameters.5/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.0/@containedType.0" identifier="next">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/TypeDefinition"/>
-                  </containedType>
-                  <type type="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
-                </statement>
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.0/@containedType.0" isCast="true">
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.0/@containedType.0" name="next"/>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@initialization/@containedType.0/@typeParamBinding.0/@containedType.0" name="next">
-                    <staticOperation href="../standard/collections.km#//@packages.0/standard/Iterator/next"/>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@initialization/@containedType.0" name="it"/>
-                  </value>
-                </statement>
-                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/persistence/EMFResource/saveWithNewURI/@body/@statement.0/@parameters.5/@containedType.0">
-                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/EMFResource/saveWithNewURI/@body/@statement.0/@parameters.5/@containedType.0">
-                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/EMFResource/saveWithNewURI/@body/@statement.0/@parameters.5/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/EMFResource/isInTypeDefSet/@containedType.0" name="result"/>
-                      <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="//@packages.0/persistence/EMFResource/saveWithNewURI/@body/@statement.0/@parameters.5/@containedType.0" value="true"/>
-                    </statement>
-                  </thenBody>
-                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                    <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="qualifiedName">
-                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
-                      <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/NamedElement/qualifiedName"/>
-                      <target xsi:type="kermeta_language_behavior:CallFeature" name="typeDefinition">
-                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
-                        <staticProperty href="../reflection/reflection.km#//@packages.0/reflection/ParameterizedType/typeDefinition"/>
-                        <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
-                          <staticType href="../standard/primitive_types.km#//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0"/>
-                          <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass"/>
-                          <target xsi:type="kermeta_language_behavior:CallVariable" name="new_instance">
-                            <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
-                          </target>
-                        </target>
-                      </target>
-                    </parameters>
-                    <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/equals"/>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" name="qualifiedName">
-                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
-                      <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/NamedElement/qualifiedName"/>
-                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.0/@containedType.0" name="next"/>
-                    </target>
-                  </condition>
-                </statement>
-              </body>
-              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="or">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@containedType.0"/>
-                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                  <staticType href="../standard/primitive_types.km#//@packages.0/standard/Boolean/equals/@containedType.0"/>
-                  <parameters xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="//@packages.0/persistence/EMFResource/saveWithNewURI/@body/@statement.0/@parameters.5/@containedType.0" value="true"/>
-                  <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/equals"/>
-                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/EMFResource/isInTypeDefSet/@containedType.0" name="result"/>
-                </parameters>
-                <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/or"/>
-                <target xsi:type="kermeta_language_behavior:CallFeature" name="isOff">
-                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@target/@containedType.0"/>
-                  <staticOperation href="../standard/collections.km#//@packages.0/standard/Iterator/isOff"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@initialization/@containedType.0" name="it"/>
-                </target>
-              </stopCondition>
-            </statement>
-          </body>
-          <ownedParameter name="tparams" type="//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@initialization/@initialization/@target/@containedType.0" isOrdered="true" upper="1"/>
-          <ownedParameter name="new_instance" isOrdered="true" upper="1">
-            <type href="../standard/collections.km#//@packages.0/standard/Object"/>
-          </ownedParameter>
-        </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="KMResource" superType="//@packages.0/persistence/KMResource/@containedType.0">
+        <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
         <ownedOperation name="save" type="//@packages.0/persistence/KMResource/save/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/save">
+          <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0"/>
         </ownedOperation>
         <ownedOperation name="load" type="//@packages.0/persistence/KMResource/load/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/load">
+          <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0"/>
         </ownedOperation>
         <ownedOperation name="add" type="//@packages.0/persistence/KMResource/add/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0"/>
           <superOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
@@ -596,6 +492,7 @@
           </ownedParameter>
         </ownedOperation>
         <ownedOperation name="remove" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
           <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
@@ -612,16 +509,16 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Repository" isAbstract="true" superType="//@packages.0/persistence/Repository/@containedType.0">
-        <ownedTag value="/** Abstract resource container, that contains a list of available loaded resources, &#xA; * and methods to create or get a resource given an URI.&#xA; */"/>
+        <ownedTag value="/**&#xD;&#xA; * Abstract resource container, that contains a list of available loaded resources, &#xD;&#xA; * and methods to create or get a resource given an URI.&#xD;&#xA; */"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedAttribute name="resources" type="//@packages.0/persistence/Repository/resources/@containedType.0" upper="-1" opposite="//@packages.0/persistence/Resource/repository" isComposite="true">
-          <ownedTag value="/** The resources created by this repository &#xA;  * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only &#xA;  * one Resource of a given Repository&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Resources created by this Repository &#xD;&#xA;  * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only &#xD;&#xA;  * one Resource of a given Repository&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
         </ownedAttribute>
         <ownedOperation name="createResource" type="//@packages.0/persistence/Repository/createResource/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/**&#xA;  * Create a resource with given uri. &#xA;  * params : &#xA;  *    - uri : the uri where to save the model handled by the resource&#xA;  *    - mm_uri : the uri of the metamodel of which model is an instance&#xA;  * User must provide the mm_uri if he creates a new model from scratch.&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Creates a new Resource with given uri, and an optional mm_uri&#xD;&#xA;  * mm_uri is required when creating a new model from scratch.&#xD;&#xA;  * Raises a ResourceCreate exception in case the Repository already&#xD;&#xA;  * contains a Resource with the given uri&#xD;&#xA;  * If uri does not points to an existing model file (in the case of&#xD;&#xA;  * a model creation), calls to load() operation will fail as long as&#xD;&#xA;  * the model has not been saved once&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <ownedParameter name="uri" type="//@packages.0/persistence/Repository/createResource/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -635,7 +532,7 @@
           </ownedParameter>
         </ownedOperation>
         <ownedOperation name="getResource" type="//@packages.0/persistence/Repository/getResource/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xA;  * Get the resource of model that is stored in the given uri. &#xA;  * This suppose that this URI resource was already created in this Repository.&#xA;  * If this resource wasn't already created it will silently create&#xA;  * and load a new one.  &#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Returns the Resource associated with the given uri if this uri is associated with&#xD;&#xA;  * an already created Resource of the Repository.&#xD;&#xA;  * If the Repository contains no Resource associated with the given uri, creates&#xD;&#xA;  * a new Resource and loads it.&#xD;&#xA;  * Raises a ResourceCreate exception if the given uri does not point to an existing&#xD;&#xA;  * model file &#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/load/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/Repository/getResource/@body/@statement.0/@containedType.0" identifier="nUri">
@@ -757,16 +654,16 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EMFRepository" superType="//@packages.0/persistence/EMFRepository/@containedType.0">
-        <ownedTag value="/**&#xA; * Repository that stores and manages resources that come from EMF&#xA; */"/>
+        <ownedTag value="/**&#xD;&#xA; * Repository that stores and manages resources that come from EMF&#xD;&#xA; */"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Repository"/>
         <ownedAttribute name="useInterpreterInternalResources" type="//@packages.0/persistence/EMFRepository/useInterpreterInternalResources/@containedType.0" isOrdered="true" upper="1" isComposite="true">
-          <ownedTag value="/** &#xA;  * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself&#xA;  * this is usefull for example to make a dependency to framework.km&#xA;  * by default, not setting this is considered as false.&#xA;  */"/>
+          <ownedTag value="/** &#xD;&#xA;  * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself&#xD;&#xA;  * this is usefull for example to make a dependency to framework.km&#xD;&#xA;  * by default, not setting this is considered as false.&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
         </ownedAttribute>
         <ownedOperation name="createResource" type="//@packages.0/persistence/EMFRepository/createResource/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Repository/createResource">
-          <ownedTag value="/**&#xA;  * Create a new resource for a model given by its uri, &#xA;  * which meta-model is stored in file given by mm_uri&#xA;  * If file already exists, you'll be able to call the load method to concretly load the model&#xA;  * otherwise, you can only call the save method&#xA;  */"/>
+          <ownedTag value="/**&#xD;&#xA;  * Overrides Repository.createResource(String, String)&#xD;&#xA;  * Create a new resource for a model given by its uri, &#xD;&#xA;  * which meta-model is stored in file given by mm_uri&#xD;&#xA;  * If file already exists, you'll be able to call the load method to concretly load the model&#xD;&#xA;  * otherwise, you can only call the save method&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/EMFRepository/createResource/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/EMFRepository/createResource/@body/@statement.0/@containedType.0" identifier="nUri">
@@ -804,9 +701,13 @@
               </thenBody>
               <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/EMFRepository/createResource/@body/@statement.2/@elseBody/@statement.0/@containedType.0" identifier="e">
-                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/ResourceCreateException"/>
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/ResourceCreateException"/>
+                  </containedType>
                   <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/EMFRepository/createResource/@body/@statement.2/@elseBody/@statement.0/@initialization/@containedType.0" name="new">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/ResourceCreateException"/>
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/ResourceCreateException"/>
+                    </containedType>
                     <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
                     <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/persistence/Resource/contents/@getterBody/@statement.0/@initialization/@target/@containedType.0">
                       <typeref type="//@packages.0/persistence/EMFRepository/createResource/@body/@statement.2/@elseBody/@statement.0/@initialization/@containedType.0" upper="1"/>
@@ -884,28 +785,12 @@
           <ownedParameter name="uri" type="//@packages.0/persistence/EMFRepository/createResource/@body/@statement.1/@value/@parameters.0/@containedType.0" isOrdered="true" upper="1"/>
           <ownedParameter name="mm_uri" type="//@packages.0/persistence/EMFRepository/createResource/@body/@statement.2/@thenBody/@statement.0/@value/@parameters.2/@containedType.0" isOrdered="true" upper="1"/>
         </ownedOperation>
-        <ownedOperation name="getResource" type="//@packages.0/persistence/EMFRepository/getResource/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Repository/getResource">
-          <ownedTag value="/**&#xA;  * Get the resource of model that is stored in the given uri. Silently create&#xA;  * and load a new one if a resource with this uri was not found.&#xA;  */"/>
-          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Repository/getResource/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Repository/getResource/@containedType.0">
-              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/EMFRepository/getResource/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallSuperOperation" staticType="//@packages.0/persistence/Repository/getResource/@containedType.0" name="super">
-                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFRepository/getResource/@body/@statement.0/@value/@parameters.0/@containedType.0" name="uri">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
-                  </containedType>
-                </parameters>
-              </value>
-            </statement>
-          </body>
-          <ownedParameter name="uri" type="//@packages.0/persistence/EMFRepository/getResource/@body/@statement.0/@value/@parameters.0/@containedType.0" isOrdered="true" upper="1"/>
-        </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="KMRepository" superType="//@packages.0/persistence/KMRepository/@containedType.0">
-        <ownedTag value="/**&#xA; * Repository that stores and manages XMI files representing Kermeta models&#xA; */"/>
+        <ownedTag value="/**&#xD;&#xA; * Repository that stores and manages XMI files representing Kermeta models&#xD;&#xA; */"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Repository"/>
         <ownedOperation name="createResource" type="//@packages.0/persistence/KMRepository/createResource/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Repository/createResource">
+          <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0"/>
           <ownedParameter name="uri" type="//@packages.0/persistence/KMRepository/createResource/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
@@ -919,42 +804,11 @@
             </containedType>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation name="getResource" type="//@packages.0/persistence/KMRepository/getResource/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Repository/getResource">
-          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0"/>
-          <ownedParameter name="uri" type="//@packages.0/persistence/KMRepository/getResource/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
-            <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
-            </containedType>
-          </ownedParameter>
-        </ownedOperation>
-      </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ResourceLoadException" superType="//@packages.0/persistence/ResourceLoadException/@containedType.0">
-        <ownedTag value="/** Specialized exceptions */"/>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
-        </containedType>
-      </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ResourceSaveException" superType="//@packages.0/persistence/ResourceSaveException/@containedType.0">
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
-        </containedType>
-      </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ResourceCreateException" superType="//@packages.0/persistence/ResourceCreateException/@containedType.0">
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
-        </containedType>
-      </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ResourceUnconformityException" superType="//@packages.0/persistence/ResourceUnconformityException/@containedType.0">
-        <ownedTag value="/** Raised when user tries to add an object that is not conform to the metamodel */"/>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
-        </containedType>
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>
   <requires uri="../Standard.kmt">
-    <ownedTag value="/**&#xA; * Contains the classes that handle the serialization of models, in particular&#xA; * EMF models.&#xA; * &lt;img src=&quot;./figures/persistence_package.png&quot;>&#xA; */"/>
+    <ownedTag value="/**&#xD;&#xA; * Contains the classes that handle the serialization of models, in particular&#xD;&#xA; * EMF models.&#xD;&#xA; * &lt;img src=&quot;./figures/persistence_package.png&quot;>&#xD;&#xA; */"/>
   </requires>
   <usings qualifiedName="kermeta::standard"/>
   <referencedModelingUnits href="../Standard.km#/"/>

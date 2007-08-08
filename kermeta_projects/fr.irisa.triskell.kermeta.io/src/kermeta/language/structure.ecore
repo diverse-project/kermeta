@@ -3,16 +3,28 @@
   <ecore:EAnnotation source="CompilationUnit">
     <details key="require" value="../Standard.kmt|behavior.kmt|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="language" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#//language" nsPrefix="language">
-      <eSubpackages name="structure" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#//language/structure" nsPrefix="structure">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="language" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#//language" nsPrefix="language">
+      <eSubpackages name="structure" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#//language/structure" nsPrefix="structure">
         <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+        <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
+        <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+        <eClassifiers xsi:type="ecore:EDataType" name="Real" instanceClassName="java.lang.Real"/>
+        <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Integer">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/** Alias to kermeta::standard::UnlimitedNatural */"/>
+          </eAnnotations>
+        </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Object">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Object"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="getMetaClass">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getMetaClass(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.getMetaClass()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/getMetaClass"/>
             </eAnnotations>
@@ -21,6 +33,7 @@
           <eOperations name="container">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.container()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/container"/>
             </eAnnotations>
@@ -29,6 +42,7 @@
           <eOperations name="checkInvariants">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.checkInvariants()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/checkInvariants"/>
             </eAnnotations>
@@ -36,6 +50,7 @@
           <eOperations name="checkAllInvariants">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;if self.isNotEqual(void) then&#xA;&#x9;&#x9;self.checkInvariants&#xA;&#x9;&#x9;self.getMetaClass.ownedAttribute.each{subObj | if subObj.isComposite then&#xA;&#x9;&#x9;&#x9;&#x9;if (self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveSequence&quot;)) or (self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveCollection&quot;)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var subObjInstances : kermeta::standard::Collection&lt;kermeta::reflection::Object>&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances ?= self.get(subObj)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances.each{aSubObjInstances | aSubObjInstances.checkAllInvariants}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.get(subObj).checkAllInvariants&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.checkAllInvariants()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/checkAllInvariants"/>
             </eAnnotations>
@@ -43,6 +58,7 @@
           <eOperations name="equals" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(self, element)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.equals()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/equals"/>
             </eAnnotations>
@@ -53,6 +69,7 @@
           <eOperations name="isNotEqual" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := not (equals(element))&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isNotEqual()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/isNotEqual"/>
             </eAnnotations>
@@ -63,6 +80,7 @@
           <eOperations name="isKindOf" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := self.getMetaClass.equals(cl)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isKindOf(Class)&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/isKindOf"/>
             </eAnnotations>
@@ -73,6 +91,7 @@
           <eOperations name="get">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Object.get(self, ~property)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.get(Property)&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/get"/>
             </eAnnotations>
@@ -84,6 +103,7 @@
           <eOperations name="set">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;if element.isInstanceOf(~property.type) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, element)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var e : kermeta::exceptions::IncompatibleTypeError init kermeta::exceptions::IncompatibleTypeError.new&#xA;&#x9;&#x9;e.message := &quot;IncompatibleTypeError : Cannot set property &quot;.plus(~property.name).plus(&quot; of object &quot;).plus(self.toString).plus(&quot; to &quot;).plus(element.toString).plus(&quot;.&quot;)&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.set(Property)&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/set"/>
             </eAnnotations>
@@ -97,6 +117,7 @@
           <eOperations name="isSet" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(self, ~property)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isSet(Property)&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/isSet"/>
             </eAnnotations>
@@ -107,6 +128,7 @@
           <eOperations name="unset">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(self, ~property)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.unset(Property)&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/unset"/>
             </eAnnotations>
@@ -117,6 +139,7 @@
           <eOperations name="oid" eType="/1/language/structure/Integer">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.oid(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.oid()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/oid"/>
             </eAnnotations>
@@ -124,6 +147,7 @@
           <eOperations name="toString" eType="/1/language/structure/String">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := &quot;[&quot;.plus(self.getMetaClass.typeDefinition.qualifiedName).plus(&quot;:&quot;).plus(oid.toString).plus(&quot;]&quot;)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.toString()&#xD;&#xA;   * Returns a String of form [qn:oid] where 'qn' is the qualified name of&#xD;&#xA;   * the object type, and oid the unique ID of the object&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/toString"/>
             </eAnnotations>
@@ -131,6 +155,7 @@
           <eOperations name="isFrozen" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isFrozen(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isFrozen()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/isFrozen"/>
             </eAnnotations>
@@ -138,6 +163,7 @@
           <eOperations name="isVoid" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := false&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isVoid()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/isVoid"/>
             </eAnnotations>
@@ -145,6 +171,7 @@
           <eOperations name="hashcode" eType="/1/language/structure/Integer">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.hashcode(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.hashcode()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/hashcode"/>
             </eAnnotations>
@@ -152,6 +179,7 @@
           <eOperations name="freeze">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.freeze(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.freeze()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/freeze"/>
             </eAnnotations>
@@ -159,6 +187,7 @@
           <eOperations name="asType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;if isInstanceOf(type) then&#xA;&#x9;&#x9;result := self&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;raise kermeta::exceptions::TypeCastError.new&#xA;&#xA;&#x9;end&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.asType(Class)&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/asType"/>
             </eAnnotations>
@@ -170,6 +199,7 @@
           <eOperations name="isInstanceOf" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isInstanceOf(self, type)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isInstanceOf(Type)&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/isInstanceOf"/>
             </eAnnotations>
@@ -180,23 +210,24 @@
           <eOperations name="containingResource">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getContainingResource(self)&#xA;end"/>
-              <details key="documentation" value="/**&#xA;  * Returns the Resource currently containing (directly or indirectly) the object &#xA;  * or void if the object belongs to ne resource&#xA;  */"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * Implements kermeta::reflection::Object.containingResource()&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/containingResource"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../persistence/resource.ecore#/1/persistence/Resource"/>
           </eOperations>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
-        <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
-        <eClassifiers xsi:type="ecore:EDataType" name="Real" instanceClassName="java.lang.Real"/>
         <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" abstract="true">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Type"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/ParameterizedType"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitParameterizedType(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/ParameterizedType/acceptKMStructureVisitor/ResultType"/>
@@ -215,6 +246,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ModelType">
           <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
             <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Type"/>
@@ -224,6 +256,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitModelType(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/ModelType/acceptKMStructureVisitor/ResultType"/>
@@ -242,6 +275,7 @@
           <eOperations name="new">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.newObject(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::ModelType.new()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::ModelType"/>
               <references href="../reflection/reflection.ecore#/1/reflection/ModelType/new"/>
             </eAnnotations>
@@ -250,6 +284,7 @@
           <eOperations name="isModelTypeOf" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.isModelTypeOf(self, m)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::ModelType.isModelTypeOf(Model)&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::ModelType"/>
               <references href="../reflection/reflection.ecore#/1/reflection/ModelType/isModelTypeOf"/>
             </eAnnotations>
@@ -259,12 +294,16 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Class">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/ParameterizedType"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Class"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="new">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Class.new()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Class"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Class/new"/>
             </eAnnotations>
@@ -273,6 +312,7 @@
           <eOperations name="clone" eType="/1/language/structure/Object">
             <eAnnotations source="kermeta" references="/1/language/structure/Type/clone">
               <details key="body" value="do&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Class.cloneObject(self, objectToClone)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::language::structure::Type.clone(Object)&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::Type"/>
             </eAnnotations>
             <eParameters name="objectToClone" eType="/1/language/structure/Object"/>
@@ -280,6 +320,7 @@
           <eOperations name="deepClone" eType="/1/language/structure/Object">
             <eAnnotations source="kermeta" references="/1/language/structure/Type/deepClone">
               <details key="body" value="do&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Class.deepCloneObject(self, objectToClone)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::language::structure::Type.deepClone(Object)&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::Type"/>
             </eAnnotations>
             <eParameters name="objectToClone" eType="/1/language/structure/Object"/>
@@ -287,6 +328,7 @@
           <eOperations name="hasSubType" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.hasSubType(self, object)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Type"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Type/hasSubType"/>
             </eAnnotations>
@@ -297,6 +339,7 @@
           <eOperations name="equals" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta" references="/1/language/structure/Object/equals">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.equals(self, other)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::language::structure::Object.equals(Object)&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::Object"/>
             </eAnnotations>
             <eParameters name="other">
@@ -306,6 +349,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitClass(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/Class/acceptKMStructureVisitor/ResultType"/>
@@ -323,12 +367,16 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypedElement"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/MultiplicityElement"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitMultiplicityElement(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/MultiplicityElement/acceptKMStructureVisitor/ResultType"/>
@@ -346,6 +394,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Constraint">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Constraint"/>
           <eSuperTypes href="#/1/language/structure/NamedElement"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Operation"/>
@@ -353,6 +404,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitConstraint(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/Constraint/acceptKMStructureVisitor/ResultType"/>
@@ -371,33 +423,48 @@
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="/1/language/structure/ConstraintLanguage">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="true"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Language in which the constraint is expressed&#xD;&#xA;   */"/>
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="stereotype" eType="/1/language/structure/ConstraintType">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="true"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * Type of the Constraint (precond/postcond/inv)&#xD;&#xA;   */"/>
             </eAnnotations>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="body" containment="true">
+            <eAnnotations source="kermeta">
+              <details key="documentation" value="/**&#xD;&#xA;   * Body of the constraint, expressed as a KerMeta expression&#xD;&#xA;   */"/>
+            </eAnnotations>
             <eType xsi:type="ecore:EClass" href="behavior.ecore#/1/language/behavior/Expression"/>
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EEnum" name="ConstraintLanguage">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * Enumeration listing supported constraint languages&#xD;&#xA; */"/>
+          </eAnnotations>
           <eLiterals name="kermeta" literal="kermeta"/>
           <eLiterals name="ocl" value="1" literal="ocl"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EEnum" name="ConstraintType">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * Enumeration liting the different kinds of constraints&#xD;&#xA; */"/>
+          </eAnnotations>
           <eLiterals name="pre" literal="pre"/>
           <eLiterals name="post" value="1" literal="post"/>
           <eLiterals name="inv" value="2" literal="inv"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Operation">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/MultiplicityElement"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Operation"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitOperation(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/Operation/acceptKMStructureVisitor/ResultType"/>
@@ -414,16 +481,23 @@
             </eParameters>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="body" containment="true">
+            <eAnnotations source="kermeta">
+              <details key="documentation" value="/**&#xD;&#xA;   * Body of the Operation, expressed as a KerMeta expression&#xD;&#xA;   */"/>
+            </eAnnotations>
             <eType xsi:type="ecore:EClass" href="behavior.ecore#/1/language/behavior/Expression"/>
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Tag">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Object"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Tag"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitTag(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/Tag/acceptKMStructureVisitor/ResultType"/>
@@ -441,12 +515,16 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Property">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/MultiplicityElement"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Property"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitProperty(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/Property/acceptKMStructureVisitor/ResultType"/>
@@ -463,27 +541,43 @@
             </eParameters>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="getterBody" containment="true">
+            <eAnnotations source="kermeta">
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
+            </eAnnotations>
             <eType xsi:type="ecore:EClass" href="behavior.ecore#/1/language/behavior/Expression"/>
           </eStructuralFeatures>
           <eStructuralFeatures xsi:type="ecore:EReference" name="setterBody" containment="true">
+            <eAnnotations source="kermeta">
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
+            </eAnnotations>
             <eType xsi:type="ecore:EClass" href="behavior.ecore#/1/language/behavior/Expression"/>
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Object"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/TypeContainer"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="VirtualTypeContainer" abstract="true">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Object"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/VirtualTypeContainer"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="GenericTypeDefinition">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeDefinition"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/GenericTypeDefinition"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitGenericTypeDefinition(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/GenericTypeDefinition/acceptKMStructureVisitor/ResultType"/>
@@ -501,6 +595,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
           <eSuperTypes href="#/1/language/structure/GenericTypeDefinition"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/ClassDefinition"/>
@@ -508,6 +605,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitClassDefinition(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/ClassDefinition/acceptKMStructureVisitor/ResultType"/>
@@ -525,6 +623,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="TypedElement">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
           <eSuperTypes href="#/1/language/structure/NamedElement"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/TypedElement"/>
@@ -532,6 +633,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitTypedElement(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/TypedElement/acceptKMStructureVisitor/ResultType"/>
@@ -549,6 +651,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" abstract="true">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Type"/>
           <eSuperTypes href="#/1/language/structure/NamedElement"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/TypeVariable"/>
@@ -556,6 +661,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeVariable">
           <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
             <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
@@ -565,6 +671,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitObjectTypeVariable(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/ObjectTypeVariable/acceptKMStructureVisitor/ResultType"/>
@@ -583,6 +690,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="VirtualType">
           <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
             <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/ObjectTypeVariable"/>
@@ -591,6 +699,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitVirtualType(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/VirtualType/acceptKMStructureVisitor/ResultType"/>
@@ -609,6 +718,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ModelTypeVariable">
           <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
             <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeVariable"/>
@@ -618,6 +728,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitModelTypeVariable(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/ModelTypeVariable/acceptKMStructureVisitor/ResultType"/>
@@ -635,11 +746,15 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Model">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Object"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Model"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitModel(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/Model/acceptKMStructureVisitor/ResultType"/>
@@ -658,6 +773,7 @@
           <eOperations name="filter" ordered="false" upperBound="-1">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := contents.~select{o | typeName.isInstance(o)}.asSet&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * Implements kermeta::reflection::Model.filter(Type)&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::reflection::Model"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Model/filter"/>
             </eAnnotations>
@@ -669,6 +785,7 @@
           <eOperations name="add">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;contents&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Model.add(self, obj)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * Implements kermeta::reflection::Model.add(Object)&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::reflection::Model"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Model/add"/>
             </eAnnotations>
@@ -679,6 +796,7 @@
           <eOperations name="remove">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(contents, obj)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * Implements kermeta::reflection::Model.remove(Object)&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::reflection::Model"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Model/remove"/>
             </eAnnotations>
@@ -689,6 +807,7 @@
           <eOperations name="addAllCompatible">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::language::structure::Object>.new&#xA;&#x9;objectsToAdd.each{obj | do&#xA;&#x9;&#x9;&#x9;var addedObject : kermeta::reflection::Object init addCompatible(obj)&#xA;&#x9;&#x9;&#x9;if not (addedObject.isVoid) then&#xA;&#x9;&#x9;&#x9;&#x9;result.add(obj)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * Implements kermeta::reflection::Model.addAllCompatible(Collection&lt;Object>)&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::reflection::Model"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Model/addAllCompatible"/>
             </eAnnotations>
@@ -706,6 +825,7 @@
           <eOperations name="addCompatible">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;contents&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Model.addCompatible(self, objectToAdd)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * Implements kermeta::reflection::Model.addCompatible(Object)&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::reflection::Model"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Model/addCompatible"/>
             </eAnnotations>
@@ -717,6 +837,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ProductType">
           <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
             <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
@@ -726,6 +847,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitProductType(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/ProductType/acceptKMStructureVisitor/ResultType"/>
@@ -744,6 +866,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="FunctionType">
           <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
             <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
@@ -753,6 +876,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitFunctionType(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/FunctionType/acceptKMStructureVisitor/ResultType"/>
@@ -771,6 +895,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Type">
           <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
             <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Object"/>
@@ -779,18 +904,21 @@
           <eOperations name="clone" eType="/1/language/structure/Object">
             <eAnnotations source="kermeta">
               <details key="isAbstract" value="true"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * Returns a copy of passed Object built by recursively copying attribute&#xD;&#xA;  * properties, and referencing original reference properties values&#xD;&#xA;  */"/>
             </eAnnotations>
             <eParameters name="objectToClone" eType="/1/language/structure/Object"/>
           </eOperations>
           <eOperations name="deepClone" eType="/1/language/structure/Object">
             <eAnnotations source="kermeta">
               <details key="isAbstract" value="true"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * Returns a copy of passed Object built by recursively copying values of&#xD;&#xA;  * all properties, no matter the property kind&#xD;&#xA;  */"/>
             </eAnnotations>
             <eParameters name="objectToClone" eType="/1/language/structure/Object"/>
           </eOperations>
           <eOperations name="isInstance" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := element.isInstanceOf(self)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * Implements kermeta::reflection::Type.isInstance(Object)&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::reflection::Type"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Type/isInstance"/>
             </eAnnotations>
@@ -801,6 +929,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitType(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/Type/acceptKMStructureVisitor/ResultType"/>
@@ -818,6 +947,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="TypeVariableBinding">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
           <eSuperTypes href="#/1/language/structure/Object"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/TypeVariableBinding"/>
@@ -825,6 +957,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitTypeVariableBinding(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/TypeVariableBinding/acceptKMStructureVisitor/ResultType"/>
@@ -843,6 +976,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType">
           <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
             <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
@@ -852,6 +986,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitPrimitiveType(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/PrimitiveType/acceptKMStructureVisitor/ResultType"/>
@@ -870,18 +1005,23 @@
           <eOperations name="clone" eType="/1/language/structure/Object">
             <eAnnotations source="kermeta" references="/1/language/structure/DataType/clone">
               <details key="isAbstract" value="true"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * Implements kermeta::language::structure::Type.clone(Object)&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::DataType"/>
             </eAnnotations>
             <eParameters name="objectToClone" eType="/1/language/structure/Object"/>
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Object"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/NamedElement"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitNamedElement(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/NamedElement/acceptKMStructureVisitor/ResultType"/>
@@ -900,7 +1040,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionContainer">
           <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xA;class SelfType inherits Type, kermeta::reflection::SelfType, KMStructureVisitable&#xA;{&#xA; method acceptKMStructureVisitor&lt;ContextType, ResultType>(visitor : KMStructureVisitor&lt;ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is&#xA;  do&#xA;   result := visitor.visitSelfType(self, context)&#xA;  end&#xA;} */"/>
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/NamedElement"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/TypeDefinitionContainer"/>
@@ -908,6 +1048,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitTypeDefinitionContainer(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/TypeDefinitionContainer/acceptKMStructureVisitor/ResultType"/>
@@ -925,12 +1066,16 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Package">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeDefinitionContainer"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Package"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitPackage(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/Package/acceptKMStructureVisitor/ResultType"/>
@@ -948,11 +1093,15 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ModelingUnit">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/ModelingUnit"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitModelingUnit(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/ModelingUnit/acceptKMStructureVisitor/ResultType"/>
@@ -970,11 +1119,15 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Require" abstract="true">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Require"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitRequire(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/Require/acceptKMStructureVisitor/ResultType"/>
@@ -992,11 +1145,15 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Using" abstract="true">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Using"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitUsing(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/Using/acceptKMStructureVisitor/ResultType"/>
@@ -1014,12 +1171,16 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/NamedElement"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/TypeDefinition"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitTypeDefinition(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/TypeDefinition/acceptKMStructureVisitor/ResultType"/>
@@ -1038,6 +1199,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="VoidType">
           <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
             <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Type"/>
@@ -1046,6 +1208,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitVoidType(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/VoidType/acceptKMStructureVisitor/ResultType"/>
@@ -1064,6 +1227,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="DataType">
           <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
             <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeDefinition"/>
@@ -1073,6 +1237,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitDataType(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/DataType/acceptKMStructureVisitor/ResultType"/>
@@ -1091,6 +1256,7 @@
           <eOperations name="clone" eType="/1/language/structure/Object">
             <eAnnotations source="kermeta" references="/1/language/structure/Type/clone">
               <details key="isAbstract" value="true"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * Implements kermeta::language::structure::Type.clone(Object)&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::Type"/>
             </eAnnotations>
             <eParameters name="objectToClone" eType="/1/language/structure/Object"/>
@@ -1098,6 +1264,7 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Enumeration">
           <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
             <details key="isSemanticallyAbstract" value="deepClone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/DataType"/>
@@ -1106,6 +1273,7 @@
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitEnumeration(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/Enumeration/acceptKMStructureVisitor/ResultType"/>
@@ -1124,18 +1292,23 @@
           <eOperations name="clone" eType="/1/language/structure/Object">
             <eAnnotations source="kermeta" references="/1/language/structure/DataType/clone">
               <details key="body" value="do&#xA;&#x9;raise &quot;NOT IMPLEMENTED&quot;&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * Implements kermeta::language::structure::Type.clone(Object)&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::DataType"/>
             </eAnnotations>
             <eParameters name="objectToClone" eType="/1/language/structure/Object"/>
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/NamedElement"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/EnumerationLiteral"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitEnumerationLiteral(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/EnumerationLiteral/acceptKMStructureVisitor/ResultType"/>
@@ -1153,12 +1326,16 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/MultiplicityElement"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Parameter"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
               <details key="body" value="do&#xA;&#x9;result := visitor.visitParameter(self, context)&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/Parameter/acceptKMStructureVisitor/ResultType"/>
@@ -1175,20 +1352,16 @@
             </eParameters>
           </eOperations>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Integer">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/** Alias to kermeta::standard::UnlimitedNatural */"/>
-          </eAnnotations>
-        </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="KMStructureVisitor" abstract="true" eSuperTypes="/1/language/structure/Object">
           <eAnnotations source="kermeta">
-            <details key="documentation" value="/** Implementation of the Visitor pattern for the model elements contained in structure package */"/>
+            <details key="documentation" value="/**&#xD;&#xA; * Implementation of the Visitor pattern for the model elements contained in structure package&#xD;&#xA; */"/>
           </eAnnotations>
           <eTypeParameters name="ContextType"/>
           <eTypeParameters name="ResultType"/>
           <eOperations name="visitClass">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Class"/>
@@ -1199,6 +1372,7 @@
           <eOperations name="visitMultiplicityElement">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/MultiplicityElement"/>
@@ -1209,6 +1383,7 @@
           <eOperations name="visitOperation">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Operation"/>
@@ -1219,6 +1394,7 @@
           <eOperations name="visitTag">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Tag"/>
@@ -1229,6 +1405,7 @@
           <eOperations name="visitProperty">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Property"/>
@@ -1239,6 +1416,7 @@
           <eOperations name="visitClassDefinition">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ClassDefinition"/>
@@ -1249,6 +1427,7 @@
           <eOperations name="visitTypedElement">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/TypedElement"/>
@@ -1259,6 +1438,7 @@
           <eOperations name="visitObjectTypeVariable">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ObjectTypeVariable"/>
@@ -1269,6 +1449,7 @@
           <eOperations name="visitVirtualType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/VirtualType"/>
@@ -1279,6 +1460,7 @@
           <eOperations name="visitModelTypeVariable">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ModelTypeVariable"/>
@@ -1289,6 +1471,7 @@
           <eOperations name="visitModel">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Model"/>
@@ -1299,6 +1482,7 @@
           <eOperations name="visitProductType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ProductType"/>
@@ -1309,6 +1493,7 @@
           <eOperations name="visitFunctionType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/FunctionType"/>
@@ -1319,6 +1504,7 @@
           <eOperations name="visitType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Type"/>
@@ -1329,6 +1515,7 @@
           <eOperations name="visitTypeVariableBinding">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/TypeVariableBinding"/>
@@ -1339,6 +1526,7 @@
           <eOperations name="visitPrimitiveType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/PrimitiveType"/>
@@ -1349,6 +1537,7 @@
           <eOperations name="visitNamedElement">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/NamedElement"/>
@@ -1359,6 +1548,7 @@
           <eOperations name="visitPackage">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Package"/>
@@ -1369,6 +1559,7 @@
           <eOperations name="visitTypeDefinition">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/TypeDefinition"/>
@@ -1379,6 +1570,7 @@
           <eOperations name="visitVoidType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/VoidType"/>
@@ -1389,6 +1581,7 @@
           <eOperations name="visitDataType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/DataType"/>
@@ -1399,6 +1592,7 @@
           <eOperations name="visitEnumeration">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Enumeration"/>
@@ -1409,6 +1603,7 @@
           <eOperations name="visitEnumerationLiteral">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/EnumerationLiteral"/>
@@ -1419,6 +1614,7 @@
           <eOperations name="visitParameter">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Parameter"/>
@@ -1429,6 +1625,7 @@
           <eOperations name="visitGenericTypeDefinition">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/GenericTypeDefinition"/>
@@ -1439,6 +1636,7 @@
           <eOperations name="visitParameterizedType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ParameterizedType"/>
@@ -1449,6 +1647,7 @@
           <eOperations name="visitModelType">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ModelType"/>
@@ -1459,6 +1658,7 @@
           <eOperations name="visitTypeDefinitionContainer">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/TypeDefinitionContainer"/>
@@ -1469,6 +1669,7 @@
           <eOperations name="visitConstraint">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Constraint"/>
@@ -1479,6 +1680,7 @@
           <eOperations name="visitModelingUnit">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/ModelingUnit"/>
@@ -1489,6 +1691,7 @@
           <eOperations name="visitRequire">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Require"/>
@@ -1499,6 +1702,7 @@
           <eOperations name="visitUsing">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
             <eParameters name="node" eType="/1/language/structure/Using"/>
@@ -1509,11 +1713,12 @@
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="KMStructureVisitable" abstract="true">
           <eAnnotations source="kermeta">
-            <details key="documentation" value="/** All the classes defined in this &lt;code>kermeta::language::structure&lt;/code> package &#xA; * inherit this class. Part of Visitor pattern implementation. */"/>
+            <details key="documentation" value="/**&#xD;&#xA; * All the classes defined in this &lt;code>kermeta::language::structure&lt;/code> package &#xD;&#xA; * inherit this class. Part of Visitor pattern implementation.&#xD;&#xA; */"/>
           </eAnnotations>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta">
               <details key="isAbstract" value="true"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             </eAnnotations>
             <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor/ResultType"/>
             <eTypeParameters name="ContextType"/>
@@ -1538,6 +1743,7 @@
     <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../standard/primitive_types.ecore#/2"/>
@@ -1548,16 +1754,20 @@
     <references href="#/1"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="reflective_collections.ecore#/0"/>
     <references href="reflective_collections.ecore#/1"/>
+    <references href="reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../utils/stack.ecore#/2"/>
@@ -1572,8 +1782,8 @@
     <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="dynamic_expression.ecore#/0"/>
     <references href="dynamic_expression.ecore#/1"/>
-    <references href="dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

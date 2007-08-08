@@ -4,24 +4,27 @@
     <nestedPackage name="language">
       <nestedPackage name="behavior">
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="CallExpression" isAbstract="true" superType="//@packages.0/language/behavior/CallExpression/@containedType.0">
-          <ownedTag value="/**&#xA; * Any callable expression inherits this class, e.g : &#xA; *   - variable call&#xA; *   - feature call ( &lt;code>a.b&lt;/code> : b is a feature call)&#xA; *&#xA; * &lt;img alt=&quot;&quot;  height=&quot;90%&quot; width=&quot;90%&quot;  src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png&quot; />&#xA; *&#xA;*/"/>
+          <ownedTag value="/**&#xD;&#xA; * Any callable expression inherits this class, e.g : &#xD;&#xA; *   - variable call&#xD;&#xA; *   - feature call ( &lt;code>a.b&lt;/code> : b is a feature call)&#xD;&#xA; *&#xD;&#xA; * &lt;img alt=&quot;&quot;  height=&quot;90%&quot; width=&quot;90%&quot;  src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png&quot; />&#xD;&#xA; *&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           <ownedAttribute name="parameters" type="//@packages.0/language/behavior/CallExpression/parameters/@containedType.0" upper="-1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedAttribute name="name" type="//@packages.0/language/behavior/CallExpression/name/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
             </containedType>
           </ownedAttribute>
           <ownedAttribute name="staticTypeVariableBindings" type="//@packages.0/language/behavior/CallExpression/staticTypeVariableBindings/@containedType.0" isOrdered="true" upper="-1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Type"/>
             </containedType>
           </ownedAttribute>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Expression" isAbstract="true" superType="//@packages.0/language/behavior/Expression/@containedType.0 //@packages.0/language/behavior/Expression/@containedType.1">
-          <ownedTag value="/**&#xA; * The base class for every entity used to define a behavior in operation body.&#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * The base class for every entity used to define a behavior in operation body.&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
           </containedType>
@@ -29,23 +32,24 @@
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/TypeContainer"/>
           </containedType>
           <ownedAttribute name="staticType" type="//@packages.0/language/behavior/Expression/staticType/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * Type of the Expression (set by type checking)&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Type"/>
             </containedType>
           </ownedAttribute>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="CallVariable" superType="//@packages.0/language/behavior/CallVariable/@containedType.0 //@packages.0/language/behavior/CallVariable/@containedType.1">
-          <ownedTag value="/**&#xA; * We call &quot;CallVariable&quot; the use of a variable in a statement.&#xA; * in &lt;code>i := j + 1&lt;/code>, i and j are 2 CallVariables.&#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * We call &quot;CallVariable&quot; the use of a variable in a statement.&#xD;&#xA; * in &lt;code>i := j + 1&lt;/code>, i and j are 2 CallVariables.&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallExpression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="isAtpre" type="//@packages.0/language/behavior/CallVariable/isAtpre/@containedType.0" isOrdered="true" upper="1" isComposite="true">
-            <ownedTag value="/** Tells wether this CallVariable represents a call to @pre in a postcondition */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Tells wether this CallVariable represents a call to @pre in a postcondition&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
             </containedType>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.0">
-            <ownedTag value="/** Implementation of the visitor design pattern on CallFeature objects */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on CallFeature objects&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.0">
@@ -70,35 +74,39 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="CallFeature" superType="//@packages.0/language/behavior/CallFeature/@containedType.0 //@packages.0/language/behavior/CallFeature/@containedType.1">
-          <ownedTag value="/**&#xA; * CallFeature is the model element that refers to the use of a feature, i.e either &#xA; * a property or an operation in a statement. In &lt;code>stdio.writeln(&quot;hello&quot;)&lt;/code>, &#xA; * &lt;code>writeln&lt;/code> is a CallFeature.&#xA;*/"/>
+          <ownedTag value="/**&#xD;&#xA; * CallFeature is the model element that refers to the use of a feature, i.e either &#xD;&#xA; * a property or an operation in a statement. In &lt;code>stdio.writeln(&quot;hello&quot;)&lt;/code>, &#xD;&#xA; * &lt;code>writeln&lt;/code> is a CallFeature.&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallExpression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="staticOperation" type="//@packages.0/language/behavior/CallFeature/staticOperation/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Operation"/>
             </containedType>
           </ownedAttribute>
           <ownedAttribute name="staticEnumLiteral" type="//@packages.0/language/behavior/CallFeature/staticEnumLiteral/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/EnumerationLiteral"/>
             </containedType>
           </ownedAttribute>
           <ownedAttribute name="staticProperty" type="//@packages.0/language/behavior/CallFeature/staticProperty/@containedType.0" isOrdered="true" upper="1">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Property"/>
             </containedType>
           </ownedAttribute>
           <ownedAttribute name="isAtpre" type="//@packages.0/language/behavior/CallFeature/isAtpre/@containedType.0" isOrdered="true" upper="1" isComposite="true">
-            <ownedTag value="/** Tells wether this CallFeature represents a call to @pre in a postcondition */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Tells whether this CallFeature represents a call to @pre in a postcondition&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
             </containedType>
           </ownedAttribute>
           <ownedAttribute name="target" type="//@packages.0/language/behavior/CallFeature/target/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Target Expression&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.0">
-            <ownedTag value="/** Implementation of the visitor design pattern on CallFeature objects */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on CallFeature objects&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.0">
@@ -123,10 +131,11 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="CallSuperOperation" superType="//@packages.0/language/behavior/CallSuperOperation/@containedType.0 //@packages.0/language/behavior/CallSuperOperation/@containedType.1">
-          <ownedTag value="/** This class represents a call to the operataion in the parent class&#xA; * In the following example, the type of super(element) is CallSuperOperation:&#xA; *&#xA; * class ParentClass {&#xA; *   operation op(element : Integer) : Integer is do&#xA; *       result := element + 1&#xA; *   end&#xA; * }&#xA; *&#xA; * class ChildClass {&#xA; *   method op(element : Integer) : Integer is do&#xA; *       result := super(element)&#xA; *   end&#xA; * }&#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * This class represents a call to the operataion in the parent class&#xD;&#xA; * In the following example, the type of super(element) is CallSuperOperation:&#xD;&#xA; *&#xD;&#xA; * class ParentClass {&#xD;&#xA; *   operation op(element : Integer) : Integer is do&#xD;&#xA; *       result := element + 1&#xD;&#xA; *   end&#xD;&#xA; * }&#xD;&#xA; *&#xD;&#xA; * class ChildClass {&#xD;&#xA; *   method op(element : Integer) : Integer is do&#xD;&#xA; *       result := super(element)&#xD;&#xA; *   end&#xD;&#xA; * }&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallExpression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.0">
@@ -151,10 +160,11 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="CallResult" superType="//@packages.0/language/behavior/CallResult/@containedType.0 //@packages.0/language/behavior/CallResult/@containedType.1">
-          <ownedTag value="/** This class represents a call to the special internal variable &quot;result&quot; that is used to store the return value of any operation &#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * This class represents a call to the special internal variable &quot;result&quot; that is used to store the return value of any operation &#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallVariable"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.0">
@@ -179,10 +189,11 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="CallValue" superType="//@packages.0/language/behavior/CallValue/@containedType.0 //@packages.0/language/behavior/CallValue/@containedType.1">
-          <ownedTag value="/**&#xA; * CallValue refers to the use of the &lt;code>value&lt;/code> reserved keyword. This keyword is&#xA; * only used in the body of the &lt;code>setter&lt;/code> part of derived properties.&#xA;*/"/>
+          <ownedTag value="/**&#xD;&#xA; * CallValue refers to the use of the &lt;code>value&lt;/code> reserved keyword. This keyword is&#xD;&#xA; * only used in the body of the &lt;code>setter&lt;/code> part of derived properties.&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallExpression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.0">
@@ -207,22 +218,25 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Assignment" superType="//@packages.0/language/behavior/Assignment/@containedType.0 //@packages.0/language/behavior/Assignment/@containedType.1">
-          <ownedTag value="/**&#xA; * Assignment is the model-element representation of the assignment statement &lt;code>x := y&lt;/code>&#xA; * &lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png&quot;/>&#xA;*/"/>
+          <ownedTag value="/**&#xD;&#xA; * Assignment is the model-element representation of the assignment statement &lt;code>x := y&lt;/code>&#xD;&#xA; * &lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png&quot;/>&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="target" type="//@packages.0/language/behavior/Assignment/target/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Target of the assignment, as a CallExpression&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallExpression"/>
           </ownedAttribute>
           <ownedAttribute name="value" type="//@packages.0/language/behavior/Assignment/value/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Value to be assigned, as a KerMeta expression&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedAttribute name="isCast" type="//@packages.0/language/behavior/Assignment/isCast/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Boolean stating whether current assignment corresponds to a cast operation &#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
             </containedType>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.0">
-            <ownedTag value="/** Implementation of the visitor design pattern on Assignment objects */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on Assignment objects&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.0">
@@ -247,17 +261,19 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Block" superType="//@packages.0/language/behavior/Block/@containedType.0 //@packages.0/language/behavior/Block/@containedType.1">
-          <ownedTag value="/**&#xA; * Block is the model-element representation for the &lt;code>do...end&lt;/code> block.&#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * Block is the model-element representation for the &lt;code>do...end&lt;/code> block.&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="statement" type="//@packages.0/language/behavior/Block/statement/@containedType.0" upper="-1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * List of statements composing the block&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedAttribute name="rescueBlock" type="//@packages.0/language/behavior/Block/rescueBlock/@containedType.0" upper="-1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * List of rescues defined for the block&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Rescue"/>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.0">
-            <ownedTag value="/** Implementation of the visitor design pattern on Block objects */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on Block objects&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.0">
@@ -282,20 +298,23 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Conditional" superType="//@packages.0/language/behavior/Conditional/@containedType.0 //@packages.0/language/behavior/Conditional/@containedType.1">
-          <ownedTag value="/**&#xA; * Condition is the model-element representation for the &lt;code>&lt;/code> &#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * Condition is the model-element representation for the &lt;code>&lt;/code> &#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="thenBody" type="//@packages.0/language/behavior/Conditional/thenBody/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Then part of the conditional statement&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedAttribute name="elseBody" type="//@packages.0/language/behavior/Conditional/elseBody/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Optional else part of the conditional statement&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedAttribute name="condition" type="//@packages.0/language/behavior/Conditional/condition/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Condition expression of conditional statement&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.0">
-            <ownedTag value="/** Implementation of the visitor design pattern on Conditional objects */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on Conditional objects&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.0">
@@ -320,15 +339,15 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Literal" isAbstract="true" superType="//@packages.0/language/behavior/Literal/@containedType.0">
-          <ownedTag value="/**&#xA; * Literal refers to String values, Integer values, etc.&#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * Literal refers to String values, Integer values, etc.&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EmptyExpression" superType="//@packages.0/language/behavior/EmptyExpression/@containedType.0 //@packages.0/language/behavior/EmptyExpression/@containedType.1">
-          <ownedTag value="/** As suggested by its name, this class represents an expression that do nothing. Like a &quot;nop&quot;&#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * As suggested by its name, this class represents an expression that do nothing. Like a &quot;nop&quot;&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.0">
-            <ownedTag value="/** Implementation of the visitor design pattern on EmptyExpression objects */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on EmptyExpression objects&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.0">
@@ -353,17 +372,17 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="IntegerLiteral" superType="//@packages.0/language/behavior/IntegerLiteral/@containedType.0 //@packages.0/language/behavior/IntegerLiteral/@containedType.1">
-          <ownedTag value="/** This expression is a literal representing an Integer value */"/>
+          <ownedTag value="/**&#xD;&#xA; * This expression is a literal representing an Integer value&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Literal"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="value" type="//@packages.0/language/behavior/IntegerLiteral/value/@containedType.0" isOrdered="true" upper="1" isComposite="true">
-            <ownedTag value="/** The concrete value represented by this literal */"/>
+            <ownedTag value="/**&#xD;&#xA;  * The concrete value represented by this literal&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Integer"/>
             </containedType>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.0">
-            <ownedTag value="/** Implementation of the visitor design pattern on IntegerLiteral objects */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on IntegerLiteral objects&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.0">
@@ -388,17 +407,17 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="StringLiteral" superType="//@packages.0/language/behavior/StringLiteral/@containedType.0 //@packages.0/language/behavior/StringLiteral/@containedType.1">
-          <ownedTag value="/** This expression is a literal representing a String value, typically : &quot;my string&quot;  */"/>
+          <ownedTag value="/**&#xD;&#xA; * This expression is a literal representing a String value, typically : &quot;my string&quot;&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Literal"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="value" type="//@packages.0/language/behavior/StringLiteral/value/@containedType.0" isOrdered="true" upper="1" isComposite="true">
-            <ownedTag value="/** The concrete value represented by this literal */"/>
+            <ownedTag value="/**&#xD;&#xA;  * The concrete value represented by this literal&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
             </containedType>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.0">
-            <ownedTag value="/** Implementation of the visitor design pattern on StringLiteral objects */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on StringLiteral objects&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.0">
@@ -423,17 +442,17 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="BooleanLiteral" superType="//@packages.0/language/behavior/BooleanLiteral/@containedType.0 //@packages.0/language/behavior/BooleanLiteral/@containedType.1">
-          <ownedTag value="/** This expression is a literal representing a Boolean value, typically : true or false keyword*/"/>
+          <ownedTag value="/**&#xD;&#xA; * This expression is a literal representing a Boolean value, typically : true or false keyword&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Literal"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="value" type="//@packages.0/language/behavior/BooleanLiteral/value/@containedType.0" isOrdered="true" upper="1" isComposite="true">
-            <ownedTag value="/** The concrete value represented by this literal */"/>
+            <ownedTag value="/**&#xD;&#xA;  * The concrete value represented by this literal&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
             </containedType>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.0">
-            <ownedTag value="/** Implementation of the visitor design pattern on BooleanLiteral objects */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on BooleanLiteral objects&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.0">
@@ -458,15 +477,15 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TypeLiteral" superType="//@packages.0/language/behavior/TypeLiteral/@containedType.0 //@packages.0/language/behavior/TypeLiteral/@containedType.1">
-          <ownedTag value="/** This expression is a literal representing a Type.&#xA; * for example, in &#xA; *    Integer.new&#xA; * Integer is a type literal representing the type kermeta::standard::Integer&#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * This expression is a literal representing a Type.&#xD;&#xA; * for example, in &#xD;&#xA; *    Integer.new&#xD;&#xA; * Integer is a type literal representing the type kermeta::standard::Integer&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Literal"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="typeref" type="//@packages.0/language/behavior/TypeLiteral/typeref/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
-            <ownedTag value="/** The type refered by this literal */"/>
+            <ownedTag value="/**&#xD;&#xA;  * The type refered by this literal&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/TypeReference"/>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.0">
-            <ownedTag value="/** Implementation of the visitor design pattern on TypeLiteral objects */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on TypeLiteral objects&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.0">
@@ -491,13 +510,13 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TypeReference" superType="//@packages.0/language/behavior/TypeReference/@containedType.0 //@packages.0/language/behavior/TypeReference/@containedType.1">
-          <ownedTag value="/**&#xA; * TypeReference refers to the type used in a variable declaration&#xA;*/"/>
+          <ownedTag value="/**&#xD;&#xA; * TypeReference refers to the type used in a variable declaration&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/MultiplicityElement"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.0">
-            <ownedTag value="/** Implementation of the visitor design pattern on BooleanLiteral objects */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on BooleanLiteral objects&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.0">
@@ -522,11 +541,11 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="VoidLiteral" superType="//@packages.0/language/behavior/VoidLiteral/@containedType.0 //@packages.0/language/behavior/VoidLiteral/@containedType.1">
-          <ownedTag value="/** This class is used to represent the special expression void */"/>
+          <ownedTag value="/**&#xD;&#xA; * This class is used to represent the special expression void&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Literal"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.0">
-            <ownedTag value="/** Implementation of the visitor design pattern on VoidLiteral objects */"/>
+            <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on VoidLiteral objects&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.0">
@@ -551,19 +570,23 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Loop" superType="//@packages.0/language/behavior/Loop/@containedType.0 //@packages.0/language/behavior/Loop/@containedType.1">
-          <ownedTag value="/**&#xA; * Loop refers to &lt;code>from var x : X init a until booleanCondition loop ... end&lt;/code>&#xA;*/"/>
+          <ownedTag value="/**&#xD;&#xA; * Loop refers to &lt;code>from var x : X init a until booleanCondition loop ... end&lt;/code>&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="initialization" type="//@packages.0/language/behavior/Loop/initialization/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Initialization expression for the loop&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedAttribute name="body" type="//@packages.0/language/behavior/Loop/body/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Body of the loop&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedAttribute name="stopCondition" type="//@packages.0/language/behavior/Loop/stopCondition/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Stop condition of the loop, is interpreted as a Bollean value&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.0">
@@ -588,7 +611,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="SelfExpression" superType="//@packages.0/language/behavior/SelfExpression/@containedType.0 //@packages.0/language/behavior/SelfExpression/@containedType.1">
-          <ownedTag value="/**&#xA; * refers to &lt;code>self&lt;/code> use&#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * Refers to &lt;code>self&lt;/code> use&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.0">
@@ -616,21 +639,25 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="VariableDecl" superType="//@packages.0/language/behavior/VariableDecl/@containedType.0 //@packages.0/language/behavior/VariableDecl/@containedType.1">
-          <ownedTag value="/**&#xA; * refers to variable declaration &lt;code>var x : X init a&lt;/code>&#xA; * &lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png&quot;/>&#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * refers to variable declaration &lt;code>var x : X init a&lt;/code>&#xD;&#xA; * &lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png&quot;/>&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="initialization" type="//@packages.0/language/behavior/VariableDecl/initialization/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Initialization expression for the variable&#xD;&#xA;  * Default value is &lt;code>void&lt;/code> ????&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedAttribute name="identifier" type="//@packages.0/language/behavior/VariableDecl/identifier/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Name of the declared variable&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
             </containedType>
           </ownedAttribute>
           <ownedAttribute name="type" type="//@packages.0/language/behavior/VariableDecl/type/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Type of the declared variable&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/TypeReference"/>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.0">
@@ -655,13 +682,15 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Raise" superType="//@packages.0/language/behavior/Raise/@containedType.0 //@packages.0/language/behavior/Raise/@containedType.1">
-          <ownedTag value="/**&#xA; * refers to raise exception block&#xA;*/"/>
+          <ownedTag value="/**&#xD;&#xA; * Refers to raise exception block&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="expression" type="//@packages.0/language/behavior/Raise/expression/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.0">
@@ -686,23 +715,27 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Rescue" superType="//@packages.0/language/behavior/Rescue/@containedType.0 //@packages.0/language/behavior/Rescue/@containedType.1">
-          <ownedTag value="/**&#xA; * refers to rescue exception block&#xA;*/"/>
+          <ownedTag value="/**&#xD;&#xA; * Refers to rescue exception block&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="body" type="//@packages.0/language/behavior/Rescue/body/@containedType.0" lower="1" upper="-1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Body of the rescue block, specified as a KerMeta expression&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedAttribute name="exceptionType" type="//@packages.0/language/behavior/Rescue/exceptionType/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Type of the cathed exception&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/TypeReference"/>
           </ownedAttribute>
           <ownedAttribute name="exceptionName" type="//@packages.0/language/behavior/Rescue/exceptionName/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Name of the catched exception&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
             </containedType>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.0">
@@ -727,23 +760,27 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="JavaStaticCall" superType="//@packages.0/language/behavior/JavaStaticCall/@containedType.0 //@packages.0/language/behavior/JavaStaticCall/@containedType.1">
-          <ownedTag value="/** This class represent a call to an extern Java operation. &#xA; * This Java operation must be static and have at least one RuntimeO&#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * This class represent a call to an extern Java operation. &#xD;&#xA; * This Java operation must be static and have at least one RuntimeO&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="parameters" type="//@packages.0/language/behavior/JavaStaticCall/parameters/@containedType.0" upper="-1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Parameters of the Java static call provided as KerMeta expressions&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedAttribute name="jclass" type="//@packages.0/language/behavior/JavaStaticCall/jclass/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Qualified name of the targeted Java class&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
             </containedType>
           </ownedAttribute>
           <ownedAttribute name="jmethod" type="//@packages.0/language/behavior/JavaStaticCall/jmethod/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Name of the Java method to be launched in the identified Java class&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
             </containedType>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.0">
@@ -768,16 +805,19 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="LambdaExpression" superType="//@packages.0/language/behavior/LambdaExpression/@containedType.0 //@packages.0/language/behavior/LambdaExpression/@containedType.1">
-          <ownedTag value="/**&#xA; * Refers to lambda expression definition (&lt;code>function { e | stdio.writeln(e.toString) }&lt;/code>)&#xA; * &lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_lambda_expressions.png&quot;/>&#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * Refers to lambda expression definition (&lt;code>function { e | stdio.writeln(e.toString) }&lt;/code>)&#xD;&#xA; * &lt;img alt=&quot;&quot; src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_lambda_expressions.png&quot;/>&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="parameters" type="//@packages.0/language/behavior/LambdaExpression/parameters/@containedType.0" upper="-1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Parameters of the lambda expression&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/LambdaParameter"/>
           </ownedAttribute>
           <ownedAttribute name="body" type="//@packages.0/language/behavior/LambdaExpression/body/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Body of the lambda expression providede as a KerMeta expression&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  *&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.0">
@@ -802,20 +842,23 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="LambdaParameter" superType="//@packages.0/language/behavior/LambdaParameter/@containedType.0 //@packages.0/language/behavior/LambdaParameter/@containedType.1">
-          <ownedTag value="/**&#xA; * Refers to parameter definition in lambda expression&#xA; */"/>
+          <ownedTag value="/**&#xD;&#xA; * Refers to parameter definition in lambda expression&#xD;&#xA; */"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
           <ownedAttribute name="name" type="//@packages.0/language/behavior/LambdaParameter/name/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * Name of the lambda parameter&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
             </containedType>
           </ownedAttribute>
           <ownedAttribute name="type" type="//@packages.0/language/behavior/LambdaParameter/type/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/TypeReference"/>
           </ownedAttribute>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.0">
+            <ownedTag value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.0">
@@ -840,7 +883,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="KMExpressionVisitor" isAbstract="true" superType="//@packages.0/language/behavior/KMExpressionVisitor/@containedType.0">
-          <ownedTag value="/** This class implements the visitor design pattern for all the classes of this Behavior package, in particular the classes that inherits from kermeta::behavior::Expression */"/>
+          <ownedTag value="/**&#xD;&#xA; * This class implements the visitor design pattern for all the classes of this Behavior package,&#xD;&#xA; * in particular the classes that inherits from kermeta::behavior::Expression&#xD;&#xA; */"/>
           <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
           <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -1013,7 +1056,7 @@
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="KMExpressionVisitable" isAbstract="true">
-          <ownedTag value="/** All classes that can be visited using kermeta::behavior::KMExpressionVisitor must implement this class */"/>
+          <ownedTag value="/**&#xD;&#xA; * All classes that can be visited using kermeta::behavior::KMExpressionVisitor must implement this class&#xD;&#xA; */"/>
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" typeParameter="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor/@containedType.0" isAbstract="true">
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
@@ -1030,7 +1073,7 @@
     </nestedPackage>
   </packages>
   <requires uri="structure.kmt">
-    <ownedTag value="/**&#xA; * Contains all the classes that define the behavior of Kermeta (i.e the model representation&#xA; * of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta &#xA; * metamodel, viewed as a model.&#xA; * You can also find some information about the behavior package here : &lt;a href=&quot;http://www.kermeta.org/documents/manual/html.single&quot;>KermetaManual&lt;/a>&#xA; */"/>
+    <ownedTag value="/**&#xD;&#xA; * Contains all the classes that define the behavior of Kermeta (i.e the model representation&#xD;&#xA; * of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta &#xD;&#xA; * metamodel, viewed as a model.&#xD;&#xA; * You can also find some information about the behavior package here : &lt;a href=&quot;http://www.kermeta.org/documents/manual/html.single&quot;>KermetaManual&lt;/a>&#xD;&#xA; */"/>
   </requires>
   <referencedModelingUnits href="structure.km#/"/>
   <referencedModelingUnits href="../Standard.km#/"/>
