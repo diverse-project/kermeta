@@ -3,47 +3,62 @@
 	
 	<!-- project configuration -->
 	<property name="project.base.dir" location=".."/>
+	<property name="eclipse.home" location="../../.."/>
 	<property name="project.name" value="KermetaFramework"/>
 	<property name="build.dir" location="${project.base.dir}/build"/>
 	<!--<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\docs"/>-->
 	<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\kermeta.org\\docs"/>
 	
+	
+	<path id="project.class.path">
+		<fileset dir="${eclipse.home}/plugins">
+		    <include name="**/org.eclipse.emf.common_*.jar"/>
+			<include name="**/org.eclipse.emf.ecore_*.jar"/>
+			<include name="**/org.eclipse.emf.ecore.xmi_*.jar"/>
+			<include name="**/org.eclipse.emf.validation_*.jar"/>
+			<include name="**/org.eclipse.equinox.common_*.jar"/>
+			<include name="**/org.eclipse.equinox.registry_*.jar"/>
+			<include name="**/org.eclipse.equinox.preferences_*.jar"/>
+			<include name="**/org.eclipse.osgi_*.jar"/>
+			<include name="**/org.eclipse.core.runtime_*.jar"/>
+			<include name="**/org.eclipse.core.jobs_*.jar"/>
+			<include name="**/org.eclipse.core.resources_*.jar"/>
+			<include name="**/org.eclipse.ui.workbench_*.jar"/>
+			<include name="**/org.eclipse.jface_*.jar"/>
+			<include name="**/org.eclipse.swt.*.jar"/>
+		</fileset>	
+		<pathelement location="../lib/xercesImpl.jar"/>
+		<pathelement location="../../fr.irisa.triskell.eclipse.util/bin"/>
+		<pathelement location="../../fr.irisa.triskell.kermeta.io/build/class"/>
+		<pathelement location="../../fr.irisa.triskell.kermeta.io/lib/thirdparty/antlr.jar"/>
+		<pathelement location="../../fr.irisa.triskell.kermeta.model/build/class"/>
+		<pathelement location="../../fr.irisa.triskell.kermeta.interpreter/build/class"/>
+		<pathelement location="../../fr.irisa.triskell.kermeta/lib/thirdparty/emfatic-core.jar"/>
+		<pathelement location="../../fr.irisa.triskell.kermeta/lib/thirdparty/ldt-core.jar"/>
+		<pathelement location="../../fr.irisa.triskell.kermeta.model/lib/thirdparty/log4j.jar"/>
+
+	</path>
 	<target name="all" depends="compile,kdoc">
 	</target>
 	
 	<target name="compile">
 		<javac srcdir="java"
-			 destdir="${build.dir}/class"
-			classpath="../../fr.irisa.triskell.kermeta.io/build/class;
-        				../../fr.irisa.triskell.kermeta.model/build/class;
- 	       				../../fr.irisa.triskell.kermeta/lib/thirdparty/emfatic-core.jar;
-        				../../fr.irisa.triskell.kermeta/lib/thirdparty/ldt-core.jar;
-			        	../../../plugins/org.eclipse.emf.common_2.2.0.v200606271057.jar;
-			        	../../../plugins/org.eclipse.emf.ecore_2.2.0.v200606271057.jar;
-			        	../../../plugins/org.eclipse.emf.ecore.xmi_2.2.0.v200606271057.jar;
-						../../fr.irisa.triskell.kermeta.model/lib/thirdparty/log4j.jar" 
-			>
+			 destdir="${build.dir}/class">
+			<classpath refid="project.class.path"/>
 		</javac>
 	</target>
 	
 	<target name="kdoc">
 		<property name="KermetaFramework.output" value="${build.dir}/html/KermetaFramework/"/>
 		<mkdir dir="${KermetaFramework.output}"/>
-        <java
-        	classpath="
-        	../lib/xercesImpl.jar;
-        	../../fr.irisa.triskell.kermeta.io/build/class;
-        	../../fr.irisa.triskell.kermeta.model/build/class;
-        	../../fr.irisa.triskell.kermeta/lib/thirdparty/emfatic-core.jar;
-        	../../fr.irisa.triskell.kermeta/lib/thirdparty/ldt-core.jar;
-        	../../../plugins/org.eclipse.emf.common_2.2.0.v200606271057.jar;
-        	../../../plugins/org.eclipse.emf.ecore_2.2.0.v200606271057.jar;
-        	../../../plugins/org.eclipse.emf.ecore.xmi_2.2.0.v200606271057.jar;
-			../../fr.irisa.triskell.kermeta.model/lib/thirdparty/log4j.jar;
-        	../build/class/" 
+        <java 
         	classname="fr.irisa.triskell.kermeta.docutils.KM2HTMLMain"
         	dir=".."
         	fork="yes">
+        	<classpath>
+			   	<pathelement location="../build/class/"/> 
+				<path refid="project.class.path"/> 
+			</classpath>
         	<arg value="${KermetaFramework.output}" />
 		</java>
        	<copy todir="${KermetaFramework.output}" >
