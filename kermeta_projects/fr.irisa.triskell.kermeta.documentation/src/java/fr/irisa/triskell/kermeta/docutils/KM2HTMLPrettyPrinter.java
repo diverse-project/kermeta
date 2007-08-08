@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.9 2007-07-30 15:08:13 dvojtise Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.10 2007-08-08 16:19:01 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
  * License    : GPL
@@ -127,6 +127,11 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	public KM2HTMLPrettyPrinter(String inputfile) throws KermetaIOFileNotFoundException, URIMalformedException
 	{
 		// init
+		IOPlugin.LOCAL_USE = true;
+    	IOPlugin.FRAMEWORK_GENERATION = true;
+    	@SuppressWarnings("unused")
+		IOPlugin ioPlugin = new IOPlugin();
+    	
 		_contents = new Hashtable<String, StringBuffer>();
 		_descriptions = new ArrayList<StringBuffer>();
 		inputFile = inputfile;
@@ -413,10 +418,10 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 			sortedNodes = sortNamedElements(nodes);
 		else sortedNodes = nodes;
 		// Then, document them
-		Iterator it = sortedNodes.iterator();
+		Iterator<NamedElement> it = sortedNodes.iterator();
 		while (it.hasNext())
 		{
-			EObject next = (EObject)it.next();
+			EObject next = it.next();
 			result += this.accept(next);
 		//	if (this.accept(next)==null) System.out.println("ELIST : " + next);
 		}
@@ -639,7 +644,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	
 	/** Sorts the given list of elements. Their type should always be NamedElement. Otherwise,
 	 * raises a ClassCastException ... */
-	public List<NamedElement> sortNamedElements(List nodes)
+	public List<NamedElement> sortNamedElements(List<NamedElement> nodes)
 	{
 		// EList is not easily modifiable
 		List<NamedElement> result = new ArrayList<NamedElement>();
