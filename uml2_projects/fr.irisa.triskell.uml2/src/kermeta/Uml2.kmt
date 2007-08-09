@@ -2561,7 +2561,7 @@ package visitors
 {
 	abstract class Visitable
 	{
-		method accept(visitor : Visitor) : kermeta::standard::~Void is do
+		operation accept(visitor : Visitor) : kermeta::standard::~Void is do
 			//TODO: implement operation accept
 			raise kermeta::exceptions::NotImplementedException.new 
 		end
