@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.11 2007-08-09 06:53:53 dvojtise Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.12 2007-08-09 08:59:13 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
  * License    : GPL
@@ -76,6 +76,11 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	 * Contains the list of all the packages. Each of them is a href-link to its package content.
 	 */
 	protected String _packagesNavigation;
+	
+	/**
+	 * contains the correspondance between the package, it points to the main package with the same name
+	 */
+	protected Hashtable<Integer,Integer> namedElementMainHashcode =  new Hashtable<Integer,Integer>();
 	
 	public static final String KEY_MODULE    = "Packages";
 	public static final String KEY_CLASS     = "Classes";
@@ -266,27 +271,38 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	/** Prints the content of all the packages contained in the Kermeta source */
 	public void ppNestedPackages()
 	{
-		Iterator<Package> it = kmunit.getPackages().iterator();//node.getNestedPackage().iterator();
-		// For each package
-		while (it.hasNext())
+		// get a list of all packages qualified name (this is because it may be split into several files
+		Iterator<String> itQN = kmunit.getUniquePackageQualifiedNames().iterator();//node.getNestedPackage().iterator();
+		while (itQN.hasNext())
 		{
-			Package node = it.next();
-			String qname = NamedElementHelper.getMangledQualifiedName(node); 
-			// Visit the packages in order to document their children
-			this.accept(node);
+			String qname = itQN.next();
+		
+			// first package with this name
+			Package firstPackage = kmunit.getPackages(qname).get(0);
+			this.accept(firstPackage);		
+		
+		/*	Iterator<Package> it = kmunit.getPackages(qname).iterator();
+			// For each package with the same qualified name
+			while (it.hasNext())
+			{
+				Package node = it.next();
+				namedElementMainHashcode.put(node.hashCode(), firstPackage.hashCode());
+				// Visit the packages in order to document their children								
+				this.accept(node);
+				
+			}*/
 			// Construct the list of package names from which user will browse the code documentation
 			if (this._packagesNavigation!=null) this._packagesNavigation += " &bull; ";
 			else this._packagesNavigation = "API : ";
 			// Get the path of the package (bla::foo)
 			String path ="";
 			if (qname.contains("::"))
-				path = qname.substring(0, (qname.length()-node.getName().length()));
+				path = qname.substring(0, (qname.length()-firstPackage.getName().length()));
 			// Get the id of this package
-			String this_id = String.valueOf(node.hashCode());
+			String this_id = String.valueOf(firstPackage.hashCode());
 			this._packagesNavigation +=
-			path + "<a href='javascript:documentElement(\"" + this_id + "\");'>" + node.getName() + "</a>\n";
+			path + "<a href='javascript:documentElement(\"" + this_id + "\");'>" + firstPackage.getName() + "</a>\n";
 		}
-		
 	}
 		
 	/** Gives the Java-representation of the given object. Every "documentable"
@@ -308,9 +324,9 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	public StringBuffer describe(NamedElement node)
 	{
 		StringBuffer result = new StringBuffer();
-		String this_id = "d_" + String.valueOf(node.hashCode());
+		String this_id = "d_" + String.valueOf(getNamedElementMainHashcode(node));
 		if (this._contents.containsKey(this_id)) return this._contents.get(this_id);
-		result.append( "<div id='" + this_id + "' class='description'>" );
+		result.append( "\n<div id='" + this_id + "' class='description'>" );
 		result.append( "<h1>" + this.describeType(node) + "</h1>" );
 		result.append( "<div class='representation'>" );
 		result.append( this.representation(node) );
@@ -360,17 +376,17 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		StringBuffer result = new StringBuffer();
 		int hash_code = 0;
 		// Get the id of the feature
-		if (node instanceof Operation) hash_code = ((Operation)node).getOwningClass().hashCode();
-		else if (node instanceof Property) hash_code = ((Property)node).getOwningClass().hashCode();
+		if (node instanceof Operation) hash_code = getNamedElementMainHashcode(((Operation)node).getOwningClass());
+		else if (node instanceof Property) hash_code = getNamedElementMainHashcode(((Property)node).getOwningClass());
 		// classdefinition -> container should be of type Package
 		else if (node instanceof TypeDefinition)
-			hash_code = ((TypeDefinition)node).eContainer().hashCode();
+			hash_code = getNamedElementMainHashcode((NamedElement)((TypeDefinition)node).eContainer());
 			//System.err.println("Help:" + ((ClassDefinition)node).eContainer() );
 		else 
 			hash_code = node.hashCode();
 		
 		String this_id = String.valueOf(hash_code); // fixme : parent_id is a better name
-		String child_id = String.valueOf(node.hashCode());
+		String child_id = String.valueOf(getNamedElementMainHashcode(node));
 		
 		// Set the html display of the feature as in a list
 		String link = "href='javascript:documentElement(\""+ this_id + "\",\"" + child_id + "\");'";
@@ -550,14 +566,22 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 
 		if (_as_signature == true) return NamedElementHelper.getMangledQualifiedName(node);
 		this.document(node);
-		String this_id = String.valueOf(node.hashCode());
+		String this_id = String.valueOf(getNamedElementMainHashcode(node)); // use the main package hashcode
 		// Construct the list of class definitions that belong to this package
-		StringBuffer result = new StringBuffer( "<div id='" + this_id + "' class='" + "root" + "'>" );
+		StringBuffer result = new StringBuffer( "\n<div id='" + this_id + "' class='" + "root" + "'>" );
 		result.append( "<div class='name'><a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>" );
 		_as_signature = false; 
 		// use this because visitor of operation can be used for two purposes : one to print the signature, one to print the documentation
 		// class definition visit return the hyper-linked-name of a class, and fills its contents
-		result.append( this.visitEList(node.getOwnedTypeDefinition(), KEY_CLASS) );
+		Iterator<Package> it = kmunit.getPackages(NamedElementHelper.getMangledQualifiedName(node)).iterator();
+		// For each package with the same qualified name
+		while (it.hasNext())
+		{
+			Package pack = it.next();
+			// Visit the packages in order to document their children								
+			result.append( this.visitEList(pack.getOwnedTypeDefinition(), KEY_CLASS) );			
+			
+		}
 		result.append( "</div>" );
 		this._contents.put(this_id, result);
 		return result;
@@ -629,6 +653,12 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		return ((qname.contains("::"))?qname.substring(0, (qname.length()-node.getName().length())):"");
 	}
 	
+	protected int getNamedElementMainHashcode(NamedElement node)
+	{
+		Integer result = namedElementMainHashcode.get(node.hashCode());
+		if(result == null) return node.hashCode();
+		return result;
+	}
 	/**
 	 * Helper - join the strings of list l, delimited by delimiter
 	 * @param l the list to join in a single string
