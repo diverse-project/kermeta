@@ -6,6 +6,9 @@ package testUML2km;
 require "input_test_models/Uml2.km"
 using uml2
 
+// DVK: this test is quite stupid, because every tymes we change kermeta MM we have to regenerate
+// the uml2.km and we are not sure about the original uml2.kmt file ..., 
+// we should think to improve it ... 
 class Main inherits kermeta::kunit::TestCase {
 
 
@@ -28,7 +31,7 @@ class Main inherits kermeta::kunit::TestCase {
 		stdio.writeln("done")
 		
 		stdio.writeln("There are " + i.toString + " types in UML2")
-		assert(i==246)
+		assertTrueWithMsg(i==243,"looking for 243 types in UML2 found " + i.toString)
 	end
 	
 	operation test () is do
