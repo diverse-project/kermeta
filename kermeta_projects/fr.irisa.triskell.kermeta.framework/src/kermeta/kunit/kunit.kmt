@@ -1,10 +1,19 @@
-/* $Id: kunit.kmt,v 1.28 2007-07-20 15:08:39 ftanguy Exp $
+/* $Id: kunit.kmt,v 1.29 2007-08-09 15:01:19 dvojtise Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
  * Authors:  Franck Chauvel, Mark Skipper, Harry Lime
  */
  
+/**
+ * Contains the implementation of a unit test tool. This is a clone of
+ * JUnit architecture.
+ * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm
+ *
+ * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.
+ *
+ * <img src="./figures/kunit_package.png">
+ */
 package kermeta::kunit;
 
 require "../Standard.kmt"
