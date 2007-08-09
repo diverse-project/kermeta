@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass3.java,v 1.14 2007-07-24 13:46:48 ftanguy Exp $
+/* $Id: Jar2KMPass3.java,v 1.15 2007-08-09 14:58:03 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass3.java
  * License : EPL
@@ -236,9 +236,9 @@ public class Jar2KMPass3 extends Jar2KMPass {
 	}
 
 	private String getUnderlyingJavaTypeName(fr.irisa.triskell.kermeta.language.structure.Class p) {
-		Iterator it = p.getOwnedTag().iterator();
+		Iterator<Tag> it = p.getTag().iterator();
 		while(it.hasNext()){
-			Tag tag = (Tag)it.next();
+			Tag tag = it.next();
 			if (tag.getName().equals(Jar2KMPass.IS_PROXY_FOR_JAVA_TYPE)) 
 				return tag.getValue();
 		}

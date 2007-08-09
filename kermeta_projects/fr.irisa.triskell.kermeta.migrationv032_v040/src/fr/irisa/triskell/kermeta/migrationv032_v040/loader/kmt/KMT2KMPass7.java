@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.3 2007-07-24 13:46:21 ftanguy Exp $
+/* $Id: KMT2KMPass7.java,v 1.4 2007-08-09 14:57:31 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -67,10 +67,14 @@ public class KMT2KMPass7 extends KMT2KMPass {
 				if ( containsEntrypoint() )
 					builder.getModelingUnit().getOwnedTags().addAll( currentTags );
 				else if ( tag.getName() != null ) {
-					if ( TagHelper.findTagFromName(object, tag.getName()) == null )
-							object.getOwnedTag().add( tag );
-				} else
-					object.getOwnedTag().add( tag );
+					if ( TagHelper.findTagFromName(object, tag.getName()) == null ){
+							object.getOwnedTag().add( tag ); // tag is owned by the object
+							object.getTag().add( tag ); // object is tagged
+					}
+				} else{
+					object.getOwnedTag().add( tag ); // tag is owned by the object
+					object.getTag().add( tag ); // object is tagged
+				}
 			
 			}
 			currentTags.clear();

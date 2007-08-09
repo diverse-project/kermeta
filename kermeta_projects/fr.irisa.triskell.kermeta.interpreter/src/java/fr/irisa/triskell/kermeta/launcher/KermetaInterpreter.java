@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.32 2007-08-03 09:23:14 ftanguy Exp $
+/* $Id: KermetaInterpreter.java,v 1.33 2007-08-09 14:59:43 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -172,9 +172,9 @@ public class KermetaInterpreter {
 	{
 	    String main_class = null;
 	    String main_operation = null;
-	    Iterator it = unit.getModelingUnit().getOwnedTags().iterator();
+	    Iterator<Tag> it = unit.getModelingUnit().getOwnedTags().iterator();
 	    while (it.hasNext()) {
-	        Tag tag = (Tag)it.next();
+	        Tag tag = it.next();
 	        if ( tag.getName() != null ) {
 	        	if (tag.getName().equals("mainClass")) 
 	        		main_class = tag.getValue(); //remove the " to memorize value

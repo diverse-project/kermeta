@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass2.java,v 1.8 2007-08-01 07:22:40 ftanguy Exp $
+/* $Id: Jar2KMPass2.java,v 1.9 2007-08-09 14:58:03 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass2.java
  * License : EPL
@@ -149,7 +149,8 @@ public class Jar2KMPass2 extends Jar2KMPass {
 			Tag tag = StructureFactory.eINSTANCE.createTag();
 			tag.setName(JARUNIT_TAG_NAME);
 			tag.setValue(builder.getUri());
-			c.getOwnedTag().add(tag);
+			c.getOwnedTag().add(tag); // owned by this class
+			c.getTag().add(tag); // the class is tagged
 		}
 	}
 	

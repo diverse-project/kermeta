@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.47 2007-07-24 13:46:51 ftanguy Exp $
+/* $Id: KM2EcorePass1.java,v 1.48 2007-08-09 14:57:48 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -308,7 +308,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 
 				// Dealing with the annotations of the current invariant
 				// (=> saved as annotations referring the invariant annotation)
-				for (Object nextTag : inv.getOwnedTag()) {
+				for (Object nextTag : inv.getTag()) {
 					Tag t = (Tag) nextTag;
 					String tagKey = t.getName();
 					String tagValue = t.getValue();
@@ -389,7 +389,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 				null);
 		}*/
 		
-		for (Tag t : node.getOwnedTag()) {
+		for (Tag t : node.getTag()) {
 			addAnnotation( 
 				newEModelElement,
 				KM2Ecore.ANNOTATION,
@@ -467,7 +467,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 			
 			// Dealing with the annotations of the current precond
 			// (=> saved as annotations referring the precond annotation)
-			for (Object nextTag : preCond.getOwnedTag()) {
+			for (Object nextTag : preCond.getTag()) {
 				Tag t = (Tag) nextTag;
 				String tagKey = t.getName();
 				String tagValue = t.getValue();
@@ -495,7 +495,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 
 			// Dealing with the annotations of the current postcond
 			// (=> saved as annotations referring the postcond annotation)
-			for (Object nextTag : postCond.getOwnedTag()) {
+			for (Object nextTag : postCond.getTag()) {
 				Tag t = (Tag) nextTag;
 				String tagKey = t.getName();
 				String tagValue = t.getValue();

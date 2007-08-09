@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.21 2007-08-08 13:36:10 ftanguy Exp $
+/* $Id: KermetaTypeChecker.java,v 1.22 2007-08-09 14:58:32 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -198,7 +198,8 @@ public class KermetaTypeChecker {
 				Tag tag = StructureFactory.eINSTANCE.createTag(); 
 				tag.setName(IS_SEMANTICALLY_ABSTRACT); tag.setValue(op.getName());
 				//typedef.getTag().add(tag);
-				typedef.getOwnedTag().add(tag);
+				typedef.getOwnedTag().add(tag); // tag is owned by the typedef
+				typedef.getTag().add(tag); // typedef is tagged
 			}
 		}
 		return foundSAbstractTag;

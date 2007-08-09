@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.java,v 1.6 2007-08-07 13:35:22 ftanguy Exp $
+/* $Id: ClassDefinitionHelper.java,v 1.7 2007-08-09 14:58:15 dvojtise Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL
@@ -413,7 +413,7 @@ public class ClassDefinitionHelper {
 		boolean isSemanticallyAbstract = false;
 		if ( cdef.isIsAbstract() ) 
 			return true;
-		Iterator <Tag> it = cdef.getOwnedTag().iterator();
+		Iterator <Tag> it = cdef.getTag().iterator();
 		while(it.hasNext() && ! isSemanticallyAbstract) {
 			Tag tag = it.next();
 			if ( tag.getName() != null )
@@ -429,10 +429,10 @@ public class ClassDefinitionHelper {
 	public static String getSemanticallyAbstractCause(ClassDefinition cdef) {
 		String semanticallyAbstractCause = "(at least) one operation ";
 		if (cdef.isIsAbstract()) return "The ClassDefinition is declared abstract";
-		Iterator it = cdef.getOwnedTag().iterator();
+		Iterator<Tag> it = cdef.getTag().iterator();
 		while(it.hasNext() )
 		{
-			Tag t =(Tag)it.next();
+			Tag t =it.next();
 			if(t.getName().equals(KermetaTypeChecker.IS_SEMANTICALLY_ABSTRACT)){
 				semanticallyAbstractCause += t.getValue() + " ";
 			}

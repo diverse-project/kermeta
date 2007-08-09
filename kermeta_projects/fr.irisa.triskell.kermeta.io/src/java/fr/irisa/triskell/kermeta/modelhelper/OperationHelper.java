@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.java,v 1.5 2007-08-07 13:35:22 ftanguy Exp $
+/* $Id: OperationHelper.java,v 1.6 2007-08-09 14:58:15 dvojtise Exp $
  * Project   : Kermeta 
  * File      : OperationHelper.java
  * License   : EPL
@@ -113,8 +113,8 @@ public class OperationHelper {
 	}
 
 	static public boolean isOverloadable(Operation operation) {
-		if ( operation.getOwnedTag() != null ) {
-			for ( Tag tag : (List<Tag>) operation.getOwnedTag() ) {
+		if ( operation.getTag() != null ) {
+			for ( Tag tag : (List<Tag>) operation.getTag() ) {
 				if ( tag.getName() != null )
 					if ( tag.getName().equals("overloadable") && tag.getValue().equals("true") )
 						return true;

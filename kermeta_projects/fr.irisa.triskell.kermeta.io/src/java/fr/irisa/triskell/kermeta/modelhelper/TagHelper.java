@@ -1,4 +1,4 @@
-/* $Id: TagHelper.java,v 1.3 2007-08-02 15:15:13 cfaucher Exp $
+/* $Id: TagHelper.java,v 1.4 2007-08-09 14:58:15 dvojtise Exp $
  * Project   : Kermeta 
  * File      : TagHelper.java
  * License   : EPL
@@ -30,7 +30,8 @@ public class TagHelper {
 			Tag newTag =  StructurePackageImpl.init().getStructureFactory().createTag();
 			newTag.setName(tagname);
 			newTag.setValue(tagvalue);
-			element.getOwnedTag().add(newTag);
+			element.getOwnedTag().add(newTag); // tag owned by the element
+			element.getTag().add(newTag); // the element is tagged
 			return newTag;
 		}
 		else return null;
@@ -45,9 +46,9 @@ public class TagHelper {
 	public static Tag findTagFromName(fr.irisa.triskell.kermeta.language.structure.Object element, String tagname){
 		Tag result = null;
 		boolean found = false;
-		Iterator it = element.getOwnedTag().iterator();
+		Iterator<Tag> it = element.getTag().iterator();
 		while(it.hasNext() && !found){
-			Tag retreivedTag = (Tag)it.next();
+			Tag retreivedTag = it.next();
 			if( (retreivedTag.getName() != null) && retreivedTag.getName().equals(tagname)){
 				found = true;
 				result = retreivedTag;
@@ -65,11 +66,11 @@ public class TagHelper {
 	public static Tag findTagFromNameAndValue(fr.irisa.triskell.kermeta.language.structure.Object element, String tagname, String tagvalue){
 		Tag result = null;
 		boolean found = false;
-		Iterator it = element.getOwnedTag().iterator();
+		Iterator<Tag> it = element.getTag().iterator();
 		// Note: cannot reuse findTagFromName because we cannot garantee that the first tag with 
 		// this name will have this value in the case of several tags
 		while(it.hasNext() && !found){
-			Tag retreivedTag = (Tag)it.next();
+			Tag retreivedTag = it.next();
 			if ( retreivedTag.getName() != null ) {
 				if(retreivedTag.getName().equals(tagname) && retreivedTag.getValue().equals(tagvalue)){
 					found = true;

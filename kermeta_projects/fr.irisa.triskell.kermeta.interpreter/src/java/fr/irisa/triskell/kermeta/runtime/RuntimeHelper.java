@@ -1,4 +1,4 @@
-/* $Id: RuntimeHelper.java,v 1.3 2007-08-02 17:00:11 dvojtise Exp $
+/* $Id: RuntimeHelper.java,v 1.4 2007-08-09 14:59:43 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -29,7 +29,7 @@ public class RuntimeHelper {
      * @return
      */
     public static boolean isJarProxy(TypeDefinition definition) {
-    	Iterator<Tag> it = definition.getOwnedTag().iterator();
+    	Iterator<Tag> it = definition.getTag().iterator();
     	while (it.hasNext()){
     		Tag t = it.next();
     		if(Jar2KMPass.JARUNIT_TAG_NAME.equals(t.getName())) 
@@ -43,7 +43,7 @@ public class RuntimeHelper {
      * @return
      */
     public static boolean isInitOperation(Operation operation) {
-    	Iterator<Tag> it = operation.getOwnedTag().iterator();
+    	Iterator<Tag> it = operation.getTag().iterator();
     	while (it.hasNext()){
     		Tag t = it.next();
     		if(Jar2KMPass.INITOPERATION_TAG_NAME.equals(t.getName())) 
