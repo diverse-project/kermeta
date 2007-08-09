@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.8 2007-08-08 12:55:37 dvojtise Exp $
+ * $Id: KermetaUnit.java,v 1.9 2007-08-09 14:59:05 dvojtise Exp $
  */
 package org.kermeta.io;
 
@@ -677,5 +677,16 @@ public interface KermetaUnit extends EObject {
 	 * @generated
 	 */
 	void finalize();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Return a list of all the Packages qualified names (internal and external), usefull in order to use getPackage(String)
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 * @generated
+	 */
+	EList<String> getUniquePackageQualifiedNames();
 
 } // KermetaUnit

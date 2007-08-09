@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.13 2007-08-07 15:05:46 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.14 2007-08-09 14:59:16 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -242,6 +242,7 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			
 			for ( Package p : (List<Package>) kermetaUnit.getInternalPackages() ) {
 				p.getOwnedTag().clear();
+				p.getTag().clear();
 				p.getOwnedTypeDefinition().clear();
 			}
 			

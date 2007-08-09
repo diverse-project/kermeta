@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.11 2007-08-08 12:55:37 dvojtise Exp $
+ * $Id: KermetaUnitImpl.java,v 1.12 2007-08-09 14:59:16 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -1275,6 +1275,24 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	public void finalize() {
 		System.out.println( "finalize " + getUri() );
 
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EList<String> getUniquePackageQualifiedNames() {
+		EList<String> result = new BasicEList<String>();
+		Iterator<Package> it = getPackages().iterator();
+		while (it.hasNext())
+		{
+			Package p = it.next();
+			String qualifiedName = NamedElementHelper.getQualifiedName(p);
+			if (!result.contains(qualifiedName)) 
+				result.add(qualifiedName);
+		}
+		return result;
 	}
 
 	/**

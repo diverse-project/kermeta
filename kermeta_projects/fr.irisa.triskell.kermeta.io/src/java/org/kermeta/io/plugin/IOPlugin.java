@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.10 2007-08-07 15:47:06 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.11 2007-08-09 14:59:16 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -102,10 +102,15 @@ public class IOPlugin extends AbstractUIPlugin {
 			//kermetaUnitHelper = new org.kermeta.io.util2.KermetaUnitHelper( storer );
 			KmPackageImpl.init();
 			
-			if ( LOCAL_USE ) {
+			if ( LOCAL_USE ) {				
 				File file = new File("../fr.irisa.triskell.kermeta.io/uri.map");
-				if (file.exists())
+				if (file.exists()){
 					URIConverterImpl.URI_MAP.putAll(URIMapUtil.readMapFile(file));
+					System.out.println("URIMap read from " + file.toString());
+				}
+				else {
+					System.out.println("not able to read URIMap from " + file.toString());
+				}
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl());	
 			} else {

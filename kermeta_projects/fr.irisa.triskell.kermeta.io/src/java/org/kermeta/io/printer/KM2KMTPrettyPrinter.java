@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.4 2007-08-03 14:37:51 jmottu Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.5 2007-08-09 14:59:16 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -522,11 +522,11 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		while ( iterator.hasNext() ) {
 			result += accept( iterator.next() ) + "\n";
 		}
-		iterator = node.getOwnedTag().iterator();
+		/*iterator = node.getOwnedTag().iterator();
 		while ( iterator.hasNext() ) {
 			result += accept( iterator.next() ) + "\n";
-		}
-		if ( (node.getTag().size() > 0) || (node.getOwnedTag().size() > 0) )
+		}*/
+		if ( (node.getTag().size() > 0) /*|| (node.getOwnedTag().size() > 0)*/ )
 			alreadyPrefixed = false;
 		return result;
 	}
