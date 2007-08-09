@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.13 2007-08-09 15:15:32 dvojtise Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.14 2007-08-09 15:55:16 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
  * License    : GPL
@@ -351,7 +351,21 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 			if (node.getTag().size()>0)
 				result.append( visitEList(node.getTag(),"") );
 			else if (node instanceof ClassDefinition && ((ClassDefinition)node).getSuperType().size()>0)
-				result.append( "<span class='undocumented'>See inherited classes.</span>" );
+				result.append( "<span class='undocumented'>Undocumented. See also inherited classes.</span>" );
+			else if (node instanceof Operation){
+				boolean undocumented = true;
+				Operation superOp = ((Operation)node).getSuperOperation();
+				while(superOp != null){
+					if(superOp.getTag().size()>0){
+						result.append( "Inherited documentation from " + NamedElementHelper.getMangledQualifiedName(superOp.getOwningClass())) ;
+						result.append( visitEList(superOp.getTag(),"") );
+						undocumented = false;
+					}
+					superOp = superOp.getSuperOperation();
+				}
+				if(undocumented)
+					result.append( "<span class='undocumented'>Undocumented</span>" );
+			}
 			else
 				result.append( "<span class='undocumented'>Undocumented</span>" );
 		}
@@ -360,6 +374,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		this._contents.put(this_id, result);
 		return result;
 	}	
+	
 	
 	/** 
 	 * Document the given element, which has the given name. This method simply
