@@ -4,8 +4,11 @@
     <details key="require" value="primitive_types.kmt|"/>
     <details key="using" value="kermeta::exceptions|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="standard" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#//standard" nsPrefix="standard">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="standard" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#//standard" nsPrefix="standard">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/**&#xD;&#xA; * $Id: java.ecore,v 1.7 2007-08-09 14:56:51 dvojtise Exp $&#xD;&#xA; * Contains types dedicated to dealing with java objects&#xD;&#xA; */"/>
+      </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="UnknownJavaObject">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/** &#xD;&#xA;  * This special object is used to represent java object that cannot be concretly used with kermeta&#xD;&#xA;  * the only actions possible on these objects are : assignment and passing them as parameter&#xD;&#xA;  */"/>
@@ -29,7 +32,6 @@
     <references href="primitive_types.ecore#/2"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="collections.ecore#/0"/>
     <references href="collections.ecore#/1"/>
     <references href="../language/behavior.ecore#/0"/>
@@ -37,11 +39,12 @@
     <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/2"/>
@@ -52,18 +55,21 @@
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="#/0"/>
     <references href="#/1"/>
   </ecore:EAnnotation>

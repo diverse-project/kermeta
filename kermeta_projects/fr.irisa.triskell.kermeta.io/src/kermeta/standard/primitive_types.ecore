@@ -4,8 +4,8 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::language::structure|kermeta::exceptions|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/standard/primitive_types.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="standard" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/standard/primitive_types.ecore#//standard" nsPrefix="standard">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/primitive_types.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="standard" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/primitive_types.ecore#//standard" nsPrefix="standard">
       <eClassifiers xsi:type="ecore:EClass" name="Void">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * The class Void &#xD;&#xA; * By convention it is a sub-type of everything&#xD;&#xA; */"/>
@@ -559,7 +559,6 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="collections.ecore#/0"/>
     <references href="collections.ecore#/1"/>
     <references href="#/0"/>
@@ -569,10 +568,12 @@
     <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/2"/>
@@ -585,16 +586,17 @@
     <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="java.ecore#/0"/>
     <references href="java.ecore#/1"/>
   </ecore:EAnnotation>

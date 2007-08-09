@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
-    <nestedPackage name="interpreter">
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="DynamicExpression" superType="//@packages.0/interpreter/DynamicExpression/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * DynamicExpression is a class used to make dynamic calls, i.e dynamic evaluation&#xD;&#xA; * of Kermeta statements represented in a string.&#xD;&#xA; * &#xD;&#xA; * An example :&#xD;&#xA; *   var de : DynamicExpression init DynamicExpression.new&#xD;&#xA; *   de.initializeDefaults&#xD;&#xA; *   de.formalParameters.put(&quot;a&quot;, String)&#xD;&#xA; *   de.parse(&quot;stdio.writeln(a)&quot;) // note: to execute a list of statements, you have to surround them with do..end&#xD;&#xA; *   var params : Hashtable&lt;String, Object> init Hashtable&lt;String, Object>.new&#xD;&#xA; *   params.put(&quot;a&quot;, &quot;hello world!&quot;)&#xD;&#xA; *   de.execute(void, params)&#xD;&#xA; */"/>
+    <nestedPackage tag="//@packages.0/interpreter/@ownedTag.0" name="interpreter">
+      <ownedTag value="/**&#xD;&#xA; * Contains a set of classes whose function is to evaluate a kermeta &#xD;&#xA; * expression written as a string.&#xD;&#xA; * &lt;img src=&quot;./figures/interpreter_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/interpreter"/>
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/interpreter/DynamicExpression/@ownedTag.0" name="DynamicExpression" superType="//@packages.0/interpreter/DynamicExpression/@containedType.0">
+        <ownedTag value="/**&#xD;&#xA; * DynamicExpression is a class used to make dynamic calls, i.e dynamic evaluation&#xD;&#xA; * of Kermeta statements represented in a string.&#xD;&#xA; * &#xD;&#xA; * An example :&#xD;&#xA; *   var de : DynamicExpression init DynamicExpression.new&#xD;&#xA; *   de.initializeDefaults&#xD;&#xA; *   de.formalParameters.put(&quot;a&quot;, String)&#xD;&#xA; *   de.parse(&quot;stdio.writeln(a)&quot;) // note: to execute a list of statements, you have to surround them with do..end&#xD;&#xA; *   var params : Hashtable&lt;String, Object> init Hashtable&lt;String, Object>.new&#xD;&#xA; *   params.put(&quot;a&quot;, &quot;hello world!&quot;)&#xD;&#xA; *   de.execute(void, params)&#xD;&#xA; */" object="//@packages.0/interpreter/DynamicExpression"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute name="errors" type="//@packages.0/interpreter/DynamicExpression/errors/@containedType.0" isOrdered="true" upper="-1">
-          <ownedTag value="/**&#xD;&#xA;  * Parse errors and type errors&#xD;&#xA;  */"/>
+        <ownedAttribute tag="//@packages.0/interpreter/DynamicExpression/errors/@ownedTag.0" name="errors" type="//@packages.0/interpreter/DynamicExpression/errors/@containedType.0" isOrdered="true" upper="-1">
+          <ownedTag value="/**&#xD;&#xA;  * Parse errors and type errors&#xD;&#xA;  */" object="//@packages.0/interpreter/DynamicExpression/errors"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/interpreter/KermetaError"/>
         </ownedAttribute>
-        <ownedAttribute name="expression" type="//@packages.0/interpreter/DynamicExpression/expression/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * the expression&#xD;&#xA;  */"/>
+        <ownedAttribute tag="//@packages.0/interpreter/DynamicExpression/expression/@ownedTag.0" name="expression" type="//@packages.0/interpreter/DynamicExpression/expression/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xD;&#xA;  * the expression&#xD;&#xA;  */" object="//@packages.0/interpreter/DynamicExpression/expression"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="behavior.km#//@packages.0/language/behavior/Expression"/>
           </containedType>
         </ownedAttribute>
-        <ownedAttribute name="selfClass" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * The type of the self object&#xD;&#xA;  * or void if the expression is not to be executed&#xD;&#xA;  * in the context of an object&#xD;&#xA;  */"/>
+        <ownedAttribute tag="//@packages.0/interpreter/DynamicExpression/selfClass/@ownedTag.0" name="selfClass" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xD;&#xA;  * The type of the self object&#xD;&#xA;  * or void if the expression is not to be executed&#xD;&#xA;  * in the context of an object&#xD;&#xA;  */" object="//@packages.0/interpreter/DynamicExpression/selfClass"/>
           <type href="../kunit/kunit.km#//@packages.0/kunit/TestCase/run/@body/@statement.1/@statement.1/@statement.2/@containedType.0"/>
         </ownedAttribute>
-        <ownedAttribute name="formalParameters" type="//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Formal parameters of the expression (bindings between parameters' names and types)&#xD;&#xA;  */"/>
+        <ownedAttribute tag="//@packages.0/interpreter/DynamicExpression/formalParameters/@ownedTag.0" name="formalParameters" type="//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xD;&#xA;  * Formal parameters of the expression (bindings between parameters' names and types)&#xD;&#xA;  */" object="//@packages.0/interpreter/DynamicExpression/formalParameters"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeParamBinding type="//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0/@typeParamBinding.0/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class">
@@ -39,8 +40,8 @@
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../utils/hashtable.km#//@packages.0/utils/Hashtable"/>
           </containedType>
         </ownedAttribute>
-        <ownedOperation name="initializeDefaults">
-          <ownedTag value="/**&#xD;&#xA;  * Initializes the formalParameters with an empty set of parameters&#xD;&#xA;  * and the self type with void&#xD;&#xA;  */"/>
+        <ownedOperation tag="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@ownedTag.0" name="initializeDefaults">
+          <ownedTag value="/**&#xD;&#xA;  * Initializes the formalParameters with an empty set of parameters&#xD;&#xA;  * and the self type with void&#xD;&#xA;  */" object="//@packages.0/interpreter/DynamicExpression/initializeDefaults"/>
           <body xsi:type="kermeta_language_behavior:Block">
             <staticType href="../kunit/kunit.km#//@packages.0/kunit/TestCase/run/@body/@statement.1/@statement.1/@statement.2/@containedType.0"/>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@containedType.0">
@@ -99,8 +100,8 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation name="parse" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Parse the expression as a string&#xD;&#xA;  * and updates the expression field and errors&#xD;&#xA;  * Returns true if the expression was parsed sucessfuly&#xD;&#xA;  */"/>
+        <ownedOperation tag="//@packages.0/interpreter/DynamicExpression/parse/@ownedTag.0" name="parse" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xD;&#xA;  * Parse the expression as a string&#xD;&#xA;  * and updates the expression field and errors&#xD;&#xA;  * Returns true if the expression was parsed sucessfuly&#xD;&#xA;  */" object="//@packages.0/interpreter/DynamicExpression/parse"/>
           <type href="../kunit/kunit.km#//@packages.0/kunit/TestCase/run/@body/@statement.1/@statement.1/@statement.3/@containedType.0"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -291,8 +292,8 @@
           </body>
           <ownedParameter name="expression" type="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2/@value/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
         </ownedOperation>
-        <ownedOperation name="execute" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;     * Execute the expression in the given context&#xD;&#xA;     */"/>
+        <ownedOperation tag="//@packages.0/interpreter/DynamicExpression/execute/@ownedTag.0" name="execute" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xD;&#xA;     * Execute the expression in the given context&#xD;&#xA;     */" object="//@packages.0/interpreter/DynamicExpression/execute"/>
           <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.2/@value/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0">
@@ -412,8 +413,8 @@
           </ownedParameter>
           <ownedParameter name="actualParams" type="//@packages.0/interpreter/DynamicExpression/execute/@body/@statement.2/@value/@parameters.2/@containedType.0" isOrdered="true" upper="1"/>
         </ownedOperation>
-        <ownedOperation name="evalString" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;     * Execute the expression given as a string.&#xD;&#xA;     * the self type and formal parameters are supposed to be set&#xD;&#xA;     * before calling this operation&#xD;&#xA;     */"/>
+        <ownedOperation tag="//@packages.0/interpreter/DynamicExpression/evalString/@ownedTag.0" name="evalString" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xD;&#xA;     * Execute the expression given as a string.&#xD;&#xA;     * the self type and formal parameters are supposed to be set&#xD;&#xA;     * before calling this operation&#xD;&#xA;     */" object="//@packages.0/interpreter/DynamicExpression/evalString"/>
           <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           <body xsi:type="kermeta_language_behavior:Block">
             <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
@@ -494,27 +495,27 @@
           <ownedParameter name="actualParams" type="//@packages.0/interpreter/DynamicExpression/evalString/@body/@statement.1/@value/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="KermetaError" isAbstract="true" superType="//@packages.0/interpreter/KermetaError/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/interpreter/KermetaError/@ownedTag.0" name="KermetaError" isAbstract="true" superType="//@packages.0/interpreter/KermetaError/@containedType.0">
+        <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */" object="//@packages.0/interpreter/KermetaError"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute name="message" type="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@parameters.0/@parameters.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
-          <ownedTag value="/**&#xD;&#xA;  * Error message&#xD;&#xA;  */"/>
+        <ownedAttribute tag="//@packages.0/interpreter/KermetaError/message/@ownedTag.0" name="message" type="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@parameters.0/@parameters.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+          <ownedTag value="/**&#xD;&#xA;  * Error message&#xD;&#xA;  */" object="//@packages.0/interpreter/KermetaError/message"/>
         </ownedAttribute>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ParseError" superType="//@packages.0/interpreter/ParseError/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/interpreter/ParseError/@ownedTag.0" name="ParseError" superType="//@packages.0/interpreter/ParseError/@containedType.0">
+        <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */" object="//@packages.0/interpreter/ParseError"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/interpreter/KermetaError"/>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TypeError" superType="//@packages.0/interpreter/TypeError/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/interpreter/TypeError/@ownedTag.0" name="TypeError" superType="//@packages.0/interpreter/TypeError/@containedType.0">
+        <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */" object="//@packages.0/interpreter/TypeError"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/interpreter/KermetaError"/>
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>
-  <requires uri="../Standard.kmt">
-    <ownedTag value="/**&#xD;&#xA; * Contains a set of classes whose function is to evaluate a kermeta &#xD;&#xA; * expression written as a string.&#xD;&#xA; * &lt;img src=&quot;./figures/interpreter_package.png&quot;>&#xD;&#xA; */"/>
+  <requires tag="//@requires.0/@ownedTag.0" uri="../Standard.kmt">
+    <ownedTag value="/**&#xD;&#xA; * Contains a set of classes whose function is to evaluate a kermeta &#xD;&#xA; * expression written as a string.&#xD;&#xA; * &lt;img src=&quot;./figures/interpreter_package.png&quot;>&#xD;&#xA; */" object="//@requires.0"/>
   </requires>
   <usings qualifiedName="kermeta::standard"/>
   <usings qualifiedName="kermeta::reflection"/>

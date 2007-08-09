@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.31 2007-08-01 07:20:00 ftanguy Exp $
+/* $Id: KMT2KMPass7.java,v 1.32 2007-08-09 14:52:35 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -30,6 +30,7 @@ import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.kermeta.ast.ContextMultiLineComment;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.ast.PackageDecl;
 import fr.irisa.triskell.kermeta.ast.Tag;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Object;
@@ -37,7 +38,6 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 
@@ -73,8 +73,9 @@ public class KMT2KMPass7 extends KMT2KMPass {
 		Object object = builder.getModelElementByNode(node);
 		if ( (object != null) && ! currentTags.isEmpty() ) {
 			for ( fr.irisa.triskell.kermeta.language.structure.Tag tag : currentTags ) {
-				if ( containsEntrypoint() ) {
-					builder.getModelingUnit().getOwnedTags().addAll( currentTags );
+				if ( isEntrypoint(tag) ) {
+					// entryPoint tag should go to the modeling unit
+					builder.getModelingUnit().getOwnedTags().add( tag );
 					fr.irisa.triskell.kermeta.language.structure.Tag mainClassTag = ModelingUnitHelper.getMainClass(builder);
 					if ( mainClassTag != null ) {
 						TypeDefinition mainClass = builder.getTypeDefinitionByName( mainClassTag.getValue() );
@@ -90,23 +91,27 @@ public class KMT2KMPass7 extends KMT2KMPass {
 						}
 					}
 				} else if ( tag.getName() != null ) {
-					if ( TagHelper.findTagFromName(object, tag.getName()) == null )
-							object.getOwnedTag().add( tag );
-				} else
-					object.getOwnedTag().add( tag );
-			
+					if ( TagHelper.findTagFromName(object, tag.getName()) == null ){
+							object.getOwnedTag().add( tag ); // tag is owned by this object
+							object.getTag().add( tag ); // this object is tagged
+					}
+				} else{
+					object.getOwnedTag().add( tag ); // tag is owned by this object
+					object.getTag().add( tag ); // this object is tagged
+				}
 			}
 			currentTags.clear();
 			km2ecore.clear();
+			return true;
 		}
-		
-		return true;
+		else {	
+			return super.beginVisit(node);
+		}
 	}
 	
 
-	private boolean containsEntrypoint() {
-		for ( fr.irisa.triskell.kermeta.language.structure.Tag tag : currentTags )
-			if ( (tag.getName() != null) 
+	private boolean isEntrypoint(fr.irisa.triskell.kermeta.language.structure.Tag tag) {
+		if ( (tag.getName() != null) 
 				&& (
 					tag.getName().equals("mainOperation") 
 					|| tag.getName().equals("mainClass") )
@@ -115,6 +120,13 @@ public class KMT2KMPass7 extends KMT2KMPass {
 		return false;
 	}
 	
+	public boolean beginVisit(PackageDecl packageDecl) {
+		// force to read the annotation and fill the "currentTags" property
+		packageDecl.getAnnotations().accept(this);
+		// let's go and add this to the packagedecl  ie. go to beginVisit(KermetaASTNode node) {
+	    return super.beginVisit(packageDecl);
+	        
+	}
 	
 	@Override
 	public boolean beginVisit(Tag tag) {

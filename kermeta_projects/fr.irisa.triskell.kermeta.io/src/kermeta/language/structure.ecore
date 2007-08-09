@@ -3,9 +3,12 @@
   <ecore:EAnnotation source="CompilationUnit">
     <details key="require" value="../Standard.kmt|behavior.kmt|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="language" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#//language" nsPrefix="language">
-      <eSubpackages name="structure" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#//language/structure" nsPrefix="structure">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="language" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#//language" nsPrefix="language">
+      <eSubpackages name="structure" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#//language/structure" nsPrefix="structure">
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xD;&#xA; * Contains the concrete implementation (including the operation bodies) &#xD;&#xA; * of the classes of the &lt;code>kermeta::reflection&lt;/code> package. If you need&#xD;&#xA; * documentation for elements marked as &quot;Undocumented&quot;, please take a look&#xD;&#xA; * at the &lt;code>kermeta::reflection&lt;/code> package which is more complete.&#xD;&#xA; */"/>
+        </eAnnotations>
         <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
         <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
         <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
@@ -1118,6 +1121,31 @@
             </eParameters>
           </eOperations>
         </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Filter">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+          </eAnnotations>
+          <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Filter"/>
+          <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
+          <eOperations name="acceptKMStructureVisitor">
+            <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitFilter(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
+            </eAnnotations>
+            <eGenericType eTypeParameter="/1/language/structure/Filter/acceptKMStructureVisitor/ResultType"/>
+            <eTypeParameters name="ContextType"/>
+            <eTypeParameters name="ResultType"/>
+            <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eGenericType eTypeParameter="/1/language/structure/Filter/acceptKMStructureVisitor/ContextType"/>
+            </eParameters>
+          </eOperations>
+        </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Require" abstract="true">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
@@ -1710,6 +1738,17 @@
               <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
+          <eOperations name="visitFilter">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+              <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
+            </eAnnotations>
+            <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ResultType"/>
+            <eParameters name="node" eType="/1/language/structure/Filter"/>
+            <eParameters name="context">
+              <eGenericType eTypeParameter="/1/language/structure/KMStructureVisitor/ContextType"/>
+            </eParameters>
+          </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="KMStructureVisitable" abstract="true">
           <eAnnotations source="kermeta">
@@ -1740,13 +1779,10 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="behavior.ecore#/0"/>
     <references href="behavior.ecore#/1"/>
     <references href="behavior.ecore#/2"/>
@@ -1754,7 +1790,6 @@
     <references href="#/1"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="reflective_collections.ecore#/0"/>
@@ -1767,7 +1802,6 @@
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../utils/stack.ecore#/2"/>
@@ -1776,14 +1810,12 @@
     <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="dynamic_expression.ecore#/0"/>
     <references href="dynamic_expression.ecore#/1"/>
+    <references href="dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

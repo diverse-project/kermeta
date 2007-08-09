@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
-    <nestedPackage name="io">
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="FileIO" superType="//@packages.0/io/FileIO/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * Implementation of simple helpers to read ans write text files&#xD;&#xA; */"/>
+    <nestedPackage tag="//@packages.0/io/@ownedTag.0" name="io">
+      <ownedTag value="/**&#xD;&#xA; * Contains file input/output related classes. &#xD;&#xA; */" object="//@packages.0/io"/>
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/io/FileIO/@ownedTag.0" name="FileIO" superType="//@packages.0/io/FileIO/@containedType.0">
+        <ownedTag value="/**&#xD;&#xA; * Implementation of simple helpers to read ans write text files&#xD;&#xA; */" object="//@packages.0/io/FileIO"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedOperation name="writeTextFile" type="//@packages.0/io/FileIO/writeTextFile/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Writes a String in a text file&#xD;&#xA;  */"/>
+        <ownedOperation tag="//@packages.0/io/FileIO/writeTextFile/@ownedTag.0" name="writeTextFile" type="//@packages.0/io/FileIO/writeTextFile/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xD;&#xA;  * Writes a String in a text file&#xD;&#xA;  */" object="//@packages.0/io/FileIO/writeTextFile"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/io/FileIO/writeTextFile/@body/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -57,8 +58,8 @@
           <ownedParameter name="filename" type="//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@condition/@target/@containedType.0" isOrdered="true" upper="1"/>
           <ownedParameter name="text" type="//@packages.0/io/FileIO/writeTextFile/@body/@statement.1/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
         </ownedOperation>
-        <ownedOperation name="readTextFile" type="//@packages.0/io/FileIO/readTextFile/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Reads a text file&#xD;&#xA;  */"/>
+        <ownedOperation tag="//@packages.0/io/FileIO/readTextFile/@ownedTag.0" name="readTextFile" type="//@packages.0/io/FileIO/readTextFile/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xD;&#xA;  * Reads a text file&#xD;&#xA;  */" object="//@packages.0/io/FileIO/readTextFile"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
@@ -146,8 +147,8 @@
           </body>
           <ownedParameter name="filename" type="//@packages.0/io/FileIO/readTextFile/@body/@statement.0/@condition/@target/@containedType.0" isOrdered="true" upper="1"/>
         </ownedOperation>
-        <ownedOperation name="getAbsolutePathFolder" type="//@packages.0/io/FileIO/getAbsolutePathFolder/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Gets the path of a folder from the folder of the current kermeta file&#xD;&#xA;  */"/>
+        <ownedOperation tag="//@packages.0/io/FileIO/getAbsolutePathFolder/@ownedTag.0" name="getAbsolutePathFolder" type="//@packages.0/io/FileIO/getAbsolutePathFolder/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xD;&#xA;  * Gets the path of a folder from the folder of the current kermeta file&#xD;&#xA;  */" object="//@packages.0/io/FileIO/getAbsolutePathFolder"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
@@ -224,8 +225,8 @@
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>
-  <requires uri="../Standard.kmt">
-    <ownedTag value="/**&#xD;&#xA; * Contains file input/output related classes. &#xD;&#xA; */"/>
+  <requires tag="//@requires.0/@ownedTag.0" uri="../Standard.kmt">
+    <ownedTag value="/**&#xD;&#xA; * Contains file input/output related classes. &#xD;&#xA; */" object="//@requires.0"/>
   </requires>
   <usings qualifiedName="kermeta::standard"/>
   <usings qualifiedName="kermeta::language::structure"/>

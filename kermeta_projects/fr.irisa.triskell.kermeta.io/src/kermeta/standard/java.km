@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
-    <nestedPackage name="standard">
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="UnknownJavaObject" superType="//@packages.0/standard/UnknownJavaObject/@containedType.0">
-        <ownedTag value="/** &#xD;&#xA;  * This special object is used to represent java object that cannot be concretly used with kermeta&#xD;&#xA;  * the only actions possible on these objects are : assignment and passing them as parameter&#xD;&#xA;  */"/>
+    <nestedPackage tag="//@packages.0/standard/@ownedTag.0" name="standard">
+      <ownedTag value="/**&#xD;&#xA; * $Id: java.km,v 1.7 2007-08-09 14:56:51 dvojtise Exp $&#xD;&#xA; * Contains types dedicated to dealing with java objects&#xD;&#xA; */" object="//@packages.0/standard"/>
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/UnknownJavaObject/@ownedTag.0" name="UnknownJavaObject" superType="//@packages.0/standard/UnknownJavaObject/@containedType.0">
+        <ownedTag value="/** &#xD;&#xA;  * This special object is used to represent java object that cannot be concretly used with kermeta&#xD;&#xA;  * the only actions possible on these objects are : assignment and passing them as parameter&#xD;&#xA;  */" object="//@packages.0/standard/UnknownJavaObject"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedOperation name="toString" type="//@packages.0/standard/UnknownJavaObject/toString/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;   *&#xD;&#xA;   */"/>
+        <ownedOperation tag="//@packages.0/standard/UnknownJavaObject/toString/@ownedTag.0" name="toString" type="//@packages.0/standard/UnknownJavaObject/toString/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xD;&#xA;   *&#xD;&#xA;   */" object="//@packages.0/standard/UnknownJavaObject/toString"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
@@ -26,8 +27,8 @@
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>
-  <requires uri="primitive_types.kmt">
-    <ownedTag value="/**&#xD;&#xA; * $Id: java.km,v 1.6 2007-08-08 12:26:29 dtouzet Exp $&#xD;&#xA; * Contains types dedicated to dealing with java objects&#xD;&#xA; */"/>
+  <requires tag="//@requires.0/@ownedTag.0" uri="primitive_types.kmt">
+    <ownedTag value="/**&#xD;&#xA; * $Id: java.km,v 1.7 2007-08-09 14:56:51 dvojtise Exp $&#xD;&#xA; * Contains types dedicated to dealing with java objects&#xD;&#xA; */" object="//@requires.0"/>
   </requires>
   <usings qualifiedName="kermeta::exceptions"/>
   <referencedModelingUnits href="primitive_types.km#/"/>
