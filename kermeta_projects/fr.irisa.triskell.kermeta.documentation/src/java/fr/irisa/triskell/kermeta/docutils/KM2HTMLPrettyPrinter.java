@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.10 2007-08-08 16:19:01 dvojtise Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.11 2007-08-09 06:53:53 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
  * License    : GPL
@@ -654,10 +654,10 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	}
 	
 	/** Comparator for NamedElement sorting. */
-	static final Comparator neCmp = new Comparator() {
-	     public int compare(Object o1, Object o2) {
-	         String s1 = ((NamedElement)o1).getName();
-	         String s2 = ((NamedElement)o2).getName();
+	static final Comparator<NamedElement> neCmp = new Comparator<NamedElement>() {
+	     public int compare(NamedElement o1, NamedElement o2) {
+	         String s1 = o1.getName();
+	         String s2 = o2.getName();
 	         int len1 = s1.length();
 	         int len2 = s2.length();
 	         for (int i=0, n=Math.min(len1, len2); i<n; i++) {
