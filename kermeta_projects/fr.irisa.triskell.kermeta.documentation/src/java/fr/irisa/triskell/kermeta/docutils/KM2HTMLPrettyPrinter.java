@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.12 2007-08-09 08:59:13 dvojtise Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.13 2007-08-09 15:15:32 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
  * License    : GPL
@@ -332,18 +332,34 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		result.append( this.representation(node) );
 		result.append( "</div>" );
 		result.append( "<div class='docstring'>" );
-		// Does this node contains annotation?
-		if (node.getTag().size()>0)
-			result.append( visitEList(node.getTag(),"") );
-		else if (node instanceof ClassDefinition && ((ClassDefinition)node).getSuperType().size()>0)
-			result.append( "<span class='undocumented'>See inherited classes.</span>" );
-		else
-			result.append( "<span class='undocumented'>Undocumented</span>" );
+		// Does this node contains annotation documentation ?
+		if (node instanceof Package){
+			// check in the different loaded files
+			boolean undocumented = true;
+			Iterator<Package> itPack = kmunit.getPackages(NamedElementHelper.getQualifiedName(node)).iterator();
+			while(itPack.hasNext()){
+				Package weavedPack = itPack.next();
+				if (weavedPack.getTag().size()>0){
+					result.append( visitEList(weavedPack.getTag(),"") );
+					undocumented = false;
+				}				
+			}
+			if(undocumented)
+				result.append( "<span class='undocumented'>Undocumented</span>" );
+		}
+		else {
+			if (node.getTag().size()>0)
+				result.append( visitEList(node.getTag(),"") );
+			else if (node instanceof ClassDefinition && ((ClassDefinition)node).getSuperType().size()>0)
+				result.append( "<span class='undocumented'>See inherited classes.</span>" );
+			else
+				result.append( "<span class='undocumented'>Undocumented</span>" );
+		}
 		result.append( "</div></div>" );
 		_as_signature = false;
 		this._contents.put(this_id, result);
 		return result;
-	}
+	}	
 	
 	/** 
 	 * Document the given element, which has the given name. This method simply
@@ -425,8 +441,10 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public String visitEList(List nodes, String node_type)
 	{	
+		if(nodes.isEmpty()) return "";
 		String result = "<div class='title'>" + node_type + "</div><div class='group'>" ;
 		// First, sort the nodes, provided they are named elements. (which should always be the case in this code context)
 		List<NamedElement> sortedNodes;
