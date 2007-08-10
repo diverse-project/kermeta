@@ -1,4 +1,4 @@
-/* $Id: 001_requireJava_rt_io.main.kmt,v 1.4 2007-05-11 07:44:16 dvojtise Exp $
+/* $Id: 001_requireJava_rt_io.main.kmt,v 1.5 2007-08-10 06:46:32 dvojtise Exp $
  * Creation date: April 24, 2006
  * License:
  * Copyright:
@@ -30,7 +30,8 @@ class testRequireJava inherits kermeta::kunit::TestCase
 	
     operation testmain() : Void is do 
     	//stdio.writeln("Begin")
-        var f : File init File.new.initialize_String("c:/temp/test.txt")
+        // var f : File init File.new.initialize_String("c:/temp/test.txt")
+        var f : File init File.new.initialize_String("/tmp/test.txt")
         var f2 : File
         var fwriter : FileWriter init FileWriter.new.initialize_File(f)
         if (f.exists) then 
