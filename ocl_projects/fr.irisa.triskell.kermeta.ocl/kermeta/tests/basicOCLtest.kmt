@@ -1,0 +1,49 @@
+/* $Id: basicOCLtest.kmt,v 1.1 2007-08-10 09:45:57 bitterjug Exp $
+ * Creation date: July 26, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "tests::Main"
+@mainOperation "main"
+
+package tests;
+require kermeta
+require "../../../someUnit/src/newUnit.kmt" 
+require "../transformations-dev/ocl2kmtVisitor.kmt"  
+require "../helpers/OCLHelper.kmt"   
+
+using kermeta::standard
+   
+using newUnit
+using kermeta::standard
+using kermeta::persistence
+using kermeta::interpreter 
+using ocl2kmt
+
+
+class Main
+{
+    attribute repository: EMFRepository
+    attribute helper : OCLHelpers::OCLHelper
+    attribute visitor :Ocl2kmtVisitor 
+    attribute model : Set<Object> 
+    
+	operation main() : Void is do 
+            repository := EMFRepository.new        
+            helper := OCLHelpers::OCLHelper.new
+            visitor := Ocl2kmtVisitor.new
+          
+            var filename: String init "68"
+            //filename:=  "67"
+            //filename:=  "69"
+            var sourceFileName : String init "../../model/" + filename + ".xmi"
+            var io : StringWriter init StringWriter.new
+            visitor.setIo(io)
+            visitor.setMetamodelURI("../../ocl/sample.ecore") 
+            model  := helper.loadOCLModel(repository, sourceFileName)
+            helper.getPackageDeclaration(model).accept(visitor)
+            stdio.writeln("\n--------------------------------------------------------------------------------------")
+            stdio.writeln(io.s)
+	end
+}

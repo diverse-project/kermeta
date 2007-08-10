@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.15 2007-07-23 15:20:41 barais Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.16 2007-08-10 09:45:57 bitterjug Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -11,7 +11,7 @@ package oclTests;
 
 require kermeta
 require "../../../someUnit/src/newUnit.kmt" 
-require "../transformations/ocl2kmtVisitor.kmt"  
+require "../transformations-dev/ocl2kmtVisitor.kmt"  
 require "../helpers/OCLHelper.kmt"   
 
 //require "http://sample"
@@ -28,6 +28,7 @@ class  BiteSizeOclTests  inherits TestCase
     attribute helper : OCLHelpers::OCLHelper
     attribute visitor :Ocl2kmtVisitor 
     attribute model : Set<Object> 
+    attribute ecoreFile: String
     //attribute de : DynamicExpression 
                     
     method setUp() is
@@ -35,7 +36,7 @@ class  BiteSizeOclTests  inherits TestCase
             repository := EMFRepository.new        
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
-            visitor.initialize
+            ecoreFile := "../../ocl/sample.ecore"
             //de := DynamicExpression.new
             //de.initializeDefaults
         end
@@ -54,7 +55,7 @@ class  BiteSizeOclTests  inherits TestCase
         
     operation expect(expression : String):String is
         do
-            result := expectedCode("sample", "sample.ecore", "A", expression)
+            result := expectedCode("sample", ecoreFile, "A", expression)
         end
         
     operation visitOclXmi(filename: String): String is
@@ -62,13 +63,13 @@ class  BiteSizeOclTests  inherits TestCase
             var sourceFileName : String init "../../model/" + filename + ".xmi"
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
-            visitor.setMetamodelURI("../../ocl/sample.ecore") 
+            visitor.setMetamodelURI(ecoreFile) 
             model  := helper.loadOCLModel(repository, sourceFileName)
             helper.getPackageDeclaration(model).accept(visitor)
             result := io.s
         end
 
-  /*  operation assertEqual(expected: String, actual: String): Void is
+  /*  operation assertSimilar(expected: String, actual: String): Void is
         do
             assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual\t:[" + actual + "]")
         end
@@ -76,178 +77,178 @@ class  BiteSizeOclTests  inherits TestCase
   // boolean literal true
     operation test01(): Void is
         do
-            assertEqual( expect("true"), visitOclXmi("01-booleanLiteralTrue") )
+            assertSimilar( expect("true"), visitOclXmi("01-booleanLiteralTrue") )
         end
 
   // boolean literal false
     operation test02(): Void is
         do
-             assertEqual( expect("false"), visitOclXmi("02-booleanLiteralFalse"))
+             assertSimilar( expect("false"), visitOclXmi("02-booleanLiteralFalse"))
         end
         
   // logical and
     operation test03(): Void is
         do
-             assertEqual( expect("true.~and(true)"), visitOclXmi("03-logicalConjunction"))
+             assertSimilar( expect("true.~and(true)"), visitOclXmi("03-logicalConjunction"))
         end
       
 
   // logical or
     operation test04(): Void is
         do
-            assertEqual( expect("true.~or(true)"), visitOclXmi("04-logicalDisjunction"))
+            assertSimilar( expect("true.~or(true)"), visitOclXmi("04-logicalDisjunction"))
         end
         
   // euqality
     operation test05(): Void is
         do
-            assertEqual( expect("true.equals(true)"), visitOclXmi("05-equality"))
+            assertSimilar( expect("true.equals(true)"), visitOclXmi("05-equality"))
         end
 
   // unary minus, integer literal
     operation test06(): Void is
         do
-            assertEqual( expect( "5.uminus"), visitOclXmi( "06-integerLiteral"))
+            assertSimilar( expect( "5.uminus"), visitOclXmi( "06-integerLiteral"))
         end
 
   // addition
     operation test07(): Void is
         do
-            assertEqual( expect( "3.plus(4)"), visitOclXmi( "07-integerAddition"))
+            assertSimilar( expect( "3.plus(4)"), visitOclXmi( "07-integerAddition"))
         end
 
   // subtraction
     operation test08(): Void is
         do
-            assertEqual( expect( "3.minus(4)"), visitOclXmi( "08-integerSubtraction"))
+            assertSimilar( expect( "3.minus(4)"), visitOclXmi( "08-integerSubtraction"))
         end
 
   // xor
     operation test09(): Void is
         // xor
         do
-            assertEqual( expect( "true.xor(true)"), visitOclXmi( "09"))
+            assertSimilar( expect( "true.xor(true)"), visitOclXmi( "09"))
         end
 
   // implies
     operation test10(): Void is
         do
-            assertEqual( expect( "true.~not.~or(true) "), visitOclXmi( "10"))
+            assertSimilar( expect( "true.~not.~or(true) "), visitOclXmi( "10"))
         end
         
   // not
     operation test11(): Void is
         do
-            assertEqual( expect( "true.~not"), visitOclXmi( "11"))
+            assertSimilar( expect( "true.~not"), visitOclXmi( "11"))
         end
 
   // >
     operation test12(): Void is
         do
-            assertEqual( expect( "3.isGreater(4)"), visitOclXmi( "12"))
+            assertSimilar( expect( "3.isGreater(4)"), visitOclXmi( "12"))
         end
 
   // >=
     operation test13(): Void is
         do
-            assertEqual( expect( "3.isGreaterOrEqual(4)"), visitOclXmi( "13"))
+            assertSimilar( expect( "3.isGreaterOrEqual(4)"), visitOclXmi( "13"))
         end
 
   // <
     operation test14(): Void is
         do
-            assertEqual( expect( "3.isLower(4)"), visitOclXmi( "14"))
+            assertSimilar( expect( "3.isLower(4)"), visitOclXmi( "14"))
         end
 
   // <=
     operation test15(): Void is
         do
-            assertEqual( expect( "3.isLowerOrEqual(4)"), visitOclXmi( "15"))
+            assertSimilar( expect( "3.isLowerOrEqual(4)"), visitOclXmi( "15"))
         end
         
   // <>,not equals
     operation test16(): Void is
         do
-            assertEqual( expect( "3.equals(4).~not"), visitOclXmi( "16"))
+            assertSimilar( expect( "3.equals(4).~not"), visitOclXmi( "16"))
         end
 
 
   // exists
     operation test17(): Void is
         do
-            assertEqual( expect( "b.forAll{ a | true}"), visitOclXmi( "17"))
+            assertSimilar( expect( "b.forAll{ a | true}"), visitOclXmi( "17"))
         end
 
   // any
     operation test18(): Void is
         do
-            assertEqual( expect( "b.detect{ o | true}"), visitOclXmi( "18"))
+            assertSimilar( expect( "b.detect{ o | true}"), visitOclXmi( "18"))
         end
 
   // one
     operation test19(): Void is
         do
-            assertEqual( expect( "b.select{ o | true}.size.equals(1)"), visitOclXmi( "19"))
+            assertSimilar( expect( "b.select{ o | true}.size.equals(1)"), visitOclXmi( "19"))
         end
 
   // select
     operation test20(): Void is
         do
-            assertEqual( expect( "b.select{ o | true}"), visitOclXmi( "20"))
+            assertSimilar( expect( "b.select{ o | true}"), visitOclXmi( "20"))
         end
 
   // reject
     operation test21(): Void is
         do
-            assertEqual( expect( "b.reject{ o | true}"), visitOclXmi( "21"))
+            assertSimilar( expect( "b.reject{ o | true}"), visitOclXmi( "21"))
         end
 
   // collect
     operation test22(): Void is
         do
-            assertEqual( expect( "b.collect{ o | true}"), visitOclXmi( "22"))
+            assertSimilar( expect( "b.collect{ o | true}"), visitOclXmi( "22"))
         end
 
   // isUnique
     operation test23(): Void is
         do
-            assertEqual( expect( "b.select{ o | true}.asSet.size.equals(b.size)"), visitOclXmi( "23"))
+            assertSimilar( expect( "b.select{ o | true}.asSet.size.equals(b.size)"), visitOclXmi( "23"))
         end
 
   // let expressions
      operation test24(): Void is
         do
-            assertEqual( expect( "do var v : Integer init 1 v end"), visitOclXmi( "24"))
+            assertSimilar( expect( "do var v : Integer init 1 v end"), visitOclXmi( "24"))
         end
 
   // null literal
      operation test25(): Void is
         do
-            assertEqual( expect( "void"), visitOclXmi( "25"))
+            assertSimilar( expect( "void"), visitOclXmi( "25"))
         end
 
   // real literals
      operation test26(): Void is
         do
-            assertEqual( expect( "3.14"), visitOclXmi( "26"))
+            assertSimilar( expect( "3.14"), visitOclXmi( "26"))
         end
 
   // string literals
      operation test27(): Void is
         do
-            assertEqual( expect( "\"string literal\""), visitOclXmi( "27"))
+            assertSimilar( expect( "\"foo\".equals(\"bar\")"), visitOclXmi( "27"))
         end
 
   // enum literal
      operation test28(): Void is
         do
-            assertEqual( expect( "Foo.bar"), visitOclXmi( "28"))
+            assertSimilar( expect( "Foo.bar"), visitOclXmi( "28"))
         end
 
   // operation call with arguments
      operation test29(): Void is
         do
-            assertEqual( expect( "self.getB(2, true)"), visitOclXmi( "29"))
+            assertSimilar( expect( "self.getB(2, true)"), visitOclXmi( "29"))
         end
 
   // collection literal 
@@ -255,32 +256,32 @@ class  BiteSizeOclTests  inherits TestCase
         do
             var kmt : String  init  visitOclXmi("30") 
             var expected : String init expect( "do var var1 init Bag.new var1.add(1) var1.add(1) var1 end")
-            assertEqual( expected, kmt)
+            assertSimilar( expected, kmt)
         end
 
   // last
      operation test31(): Void is
         do
-            assertEqual( expect( "b.last"), visitOclXmi( "31"))
+            assertSimilar( expect( "b.last"), visitOclXmi( "31"))
         end
 
   // first
      operation test32(): Void is
         do
-            assertEqual( expect( "b.first"), visitOclXmi( "32"))
+            assertSimilar( expect( "b.first"), visitOclXmi( "32"))
         end
 
   // at
      operation test33(): Void is
         do
-            assertEqual( expect( "b.elementAt(1)"), visitOclXmi( "33"))
+            assertSimilar( expect( "b.elementAt(1)"), visitOclXmi( "33"))
         end
 
   // indexOf
      operation test34(): Void is
         do
             var kmt : String  init  visitOclXmi("34") 
-            assertEqual(expect("b.indexOf(b.first)"), kmt)
+            assertSimilar(expect("b.indexOf(b.first)"), kmt)
             //de.formalParameters.put("s", Sequence<Integer>)
             //de.selfClass  :=   sample::A.typeDefinition.asType(kermeta::reflection::ClassDefinition)
             // de.parse(kmt)
@@ -292,7 +293,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test35(): Void is
         do
             var kmt : String  init  visitOclXmi("35") 
-            assertEqual( expect("b.asSequence"), kmt)
+            assertSimilar( expect("b.asSequence"), kmt)
             //de.formalParameters.put("s", Set<Integer>)
             //de.parse(kmt)
         rescue (e: DynamicExpressionException)
@@ -303,7 +304,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test36(): Void is
         do
             var kmt : String  init  visitOclXmi("36") 
-            assertEqual(expect("b.asBag"), kmt)
+            assertSimilar(expect("b.asBag"), kmt)
             //de.formalParameters.put("s", Sequence<Integer>)
             //de.parse(kmt)
         rescue (e: DynamicExpressionException)
@@ -314,7 +315,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test37(): Void is
         do
             var kmt : String  init  visitOclXmi("37") 
-            assertEqual( expect("b.asOrderedSet"), kmt)
+            assertSimilar( expect("b.asOrderedSet"), kmt)
             //de.formalParameters.put("s", Sequence<Integer>)
             // de.parse(kmt)
         rescue (e: DynamicExpressionException)
@@ -325,7 +326,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test38(): Void is
         do
             var kmt : String  init  visitOclXmi("38") 
-            assertEqual( expect("b.empty.~not"), kmt)
+            assertSimilar( expect("b.empty.~not"), kmt)
             //de.formalParameters.put("s", Sequence<Integer>)
             // de.parse(kmt)
         rescue (e: DynamicExpressionException)
@@ -336,14 +337,14 @@ class  BiteSizeOclTests  inherits TestCase
      operation test39(): Void is
         do
             var kmt : String  init  visitOclXmi("39") 
-            assertEqual( expect("b.empty"), kmt)
+            assertSimilar( expect("b.empty"), kmt)
         end
 
   // includesAll
      operation test40(): Void is
         do
             var kmt : String  init  visitOclXmi("40") 
-            assertEqual(expect("b.includesAll(b)"), kmt)
+            assertSimilar(expect("b.includesAll(b)"), kmt)
             //de.formalParameters.put("s1", Set<Integer>)
             //de.formalParameters.put("s2", Set<Integer>)
             // de.parse(kmt)
@@ -355,7 +356,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test41(): Void is
         do
             var kmt : String  init  visitOclXmi("41") 
-            assertEqual( expect("b.excludesAll(b)"), kmt)
+            assertSimilar( expect("b.excludesAll(b)"), kmt)
             //de.formalParameters.put("s1", Set<Integer>)
             //de.formalParameters.put("s2", Set<Integer>)
             //de.parse(kmt)
@@ -367,21 +368,21 @@ class  BiteSizeOclTests  inherits TestCase
      operation test42(): Void is
         do
             var kmt : String  init  visitOclXmi("42") 
-            assertEqual( expect("b.union(b)"), kmt)
+            assertSimilar( expect("b.union(b)"), kmt)
         end
 
   // intersection
      operation test43(): Void is
         do
             var kmt : String  init  visitOclXmi("43") 
-            assertEqual( expect("b.intersection(b)"), kmt)
+            assertSimilar( expect("b.intersection(b)"), kmt)
         end
 
   // subtract (-) (not currently defined on sets in Kermeta)
      operation test44(): Void is
         do
             var kmt : String  init  visitOclXmi("44") 
-            assertEqual( expect("b.minus(b)"), kmt)
+            assertSimilar( expect("b.minus(b)"), kmt)
             //de.formalParameters.put("s1", Set<Integer>)
             //de.formalParameters.put("s2", Set<Integer>)
             //de.parse(kmt)
@@ -393,7 +394,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test45(): Void is
         do
             var kmt : String  init  visitOclXmi("45") 
-            assertEqual( expect("b.includes(ab)"), kmt)
+            assertSimilar( expect("b.includes(ab)"), kmt)
             //de.formalParameters.put("s", Set<Integer>)
             //de.formalParameters.put("e", Integer)
             //de.parse(kmt)
@@ -405,7 +406,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test46(): Void is
         do
             var kmt : String  init  visitOclXmi("46") 
-            assertEqual( expect("b.excludes(ab)"), kmt)
+            assertSimilar( expect("b.excludes(ab)"), kmt)
             //de.formalParameters.put("s", Set<Integer>)
             //de.formalParameters.put("e", Integer)
             //de.parse(kmt)
@@ -417,14 +418,14 @@ class  BiteSizeOclTests  inherits TestCase
      operation test47(): Void is
         do
             var kmt : String  init  visitOclXmi("47") 
-            assertEqual( expect("self"), kmt)
+            assertSimilar( expect("self"), kmt)
         end
 
   // sortedBy
      operation test48(): Void is
         do
             var kmt : String  init  visitOclXmi("48") 
-            assertEqual( expect("b.sortedBy{ o | o.y}"), kmt)
+            assertSimilar( expect("b.sortedBy{ o | o.y}"), kmt)
             //de.formalParameters.put("s", Sequence<Integer>)
             //de.parse(kmt)
         rescue (e: DynamicExpressionException)
@@ -436,7 +437,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test49(): Void is
         do
             var kmt : String  init  visitOclXmi("49") 
-            assertEqual( expect("b.including(ab)"), kmt)
+            assertSimilar( expect("b.including(ab)"), kmt)
             //de.formalParameters.put("s1", Set<Integer>)
             //de.formalParameters.put("s2", Set<Integer>)
             //de.parse(kmt)
@@ -448,7 +449,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test50(): Void is
         do
             var kmt : String  init  visitOclXmi("50") 
-            assertEqual( expect("b.excluding(ab)"), kmt)
+            assertSimilar( expect("b.excluding(ab)"), kmt)
             //de.formalParameters.put("s1", Set<Integer>)
             //de.formalParameters.put("s2", Set<Integer>)
             //de.parse(kmt)
@@ -460,7 +461,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test51(): Void is
         do
             var kmt : String  init  visitOclXmi("51") 
-            assertEqual(expect("b.subSequence(1,2)"), kmt)
+            assertSimilar(expect("b.subSequence(1,2)"), kmt)
             //de.formalParameters.put("s", Set<Integer>)
             //de.formalParameters.put("lower", Integer)
             //de.formalParameters.put("upper", Integer)
@@ -473,7 +474,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test52(): Void is
         do
             var kmt : String  init  visitOclXmi("52") 
-            assertEqual( expect("b.prepend(ab)"), kmt)
+            assertSimilar( expect("b.prepend(ab)"), kmt)
             //de.formalParameters.put("s", Set<Integer>)
             //de.formalParameters.put("o", Integer)
             //de.parse(kmt)
@@ -485,7 +486,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test53(): Void is
         do
             var kmt : String  init  visitOclXmi("53") 
-            assertEqual( expect("b.insertAt(1,ab)"), kmt)
+            assertSimilar( expect("b.insertAt(1,ab)"), kmt)
             //de.formalParameters.put("s", Set<Boolean>)
             //de.parse(kmt)
         rescue (e: DynamicExpressionException)
@@ -496,7 +497,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test54(): Void is
         do
             var kmt : String  init  visitOclXmi("54") 
-            assertEqual( expect("b.append(ab)"), kmt)
+            assertSimilar( expect("b.append(ab)"), kmt)
             //de.formalParameters.put("s", Set<Integer>)
             //de.parse(kmt)
         rescue (e: DynamicExpressionException)
@@ -507,7 +508,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test55(): Void is
         do
             var kmt : String  init  visitOclXmi("55") 
-            assertEqual( expect("b.count(ab)"), kmt)
+            assertSimilar( expect("b.count(ab)"), kmt)
             //de.formalParameters.put("s", Set<Integer>)
             //de.parse(kmt)
         rescue (e: DynamicExpressionException)
@@ -518,7 +519,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test56(): Void is
         do
             var kmt : String  init  visitOclXmi("56") 
-            assertEqual(expect("b.flatten"), kmt)
+            assertSimilar(expect("b.flatten"), kmt)
             //de.formalParameters.put("s", Set<Integer>)
             //de.parse(kmt)
         rescue (e: DynamicExpressionException)
@@ -529,7 +530,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test57(): Void is
         do
             var kmt : String  init  visitOclXmi("57") 
-            assertEqual( expect("b.symmetricDifference(b)"), kmt)
+            assertSimilar( expect("b.symmetricDifference(b)"), kmt)
             // de.formalParameters.put("s1", Set<Integer>)
             //de.formalParameters.put("s2", Set<Integer>)
             //de.parse(kmt)
@@ -541,7 +542,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test58(): Void is
         do
             var kmt : String  init  visitOclXmi("58") 
-            assertEqual( expect("\"10\".toInteger"), kmt)
+            assertSimilar( expect("\"10\".toInteger"), kmt)
             // de.parse(kmt)
         rescue (e: DynamicExpressionException)
             fail(e.message) 
@@ -551,7 +552,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test59(): Void is
         do
             var kmt : String  init  visitOclXmi("59") 
-            assertEqual( expect("\"3.14\".toReal"), kmt)
+            assertSimilar( expect("\"3.14\".toReal"), kmt)
              //de.parse(kmt)
         rescue (e: DynamicExpressionException)
             fail(e.message) 
@@ -561,7 +562,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test60(): Void is
         do
             var kmt : String  init  visitOclXmi("60") 
-            assertEqual( expect("\"foobar\".substring(4, 8)"), kmt)
+            assertSimilar( expect("\"foobar\".substring(4, 8)"), kmt)
              //de.parse(kmt)
         rescue (e: DynamicExpressionException)
             fail(e.message) 
@@ -571,7 +572,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test61(): Void is
         do
             var kmt : String  init  visitOclXmi("61") 
-            assertEqual( expect("\"foo\".concatenate(\"bar\")"), kmt)
+            assertSimilar( expect("\"foo\".plus(\"bar\")"), kmt)
             //de.parse(kmt)
         rescue (e: DynamicExpressionException)
             fail(e.message) 
@@ -581,7 +582,7 @@ class  BiteSizeOclTests  inherits TestCase
      operation test62(): Void is
         do
             var kmt : String  init  visitOclXmi("62") 
-            assertEqual( expect("\"foo\".size"), kmt)
+            assertSimilar( expect("\"foo\".size"), kmt)
              //de.parse(kmt)
         rescue (e: DynamicExpressionException)
             fail(e.message) 
@@ -591,14 +592,14 @@ class  BiteSizeOclTests  inherits TestCase
      operation test63(): Void is
         do
             var kmt : String  init  visitOclXmi("63") 
-            assertEqual(expect( "b.collect{ variable2 | variable2.y}"), kmt)
+            assertSimilar(expect( "b.collect{ variable2 | variable2.y }"), kmt)
         end
 
   // simple if
      operation test64(): Void is
         do
             var kmt : String  init  visitOclXmi("64") 
-            assertEqual( expect("if true then true else true end"), kmt)
+            assertSimilar( expect("if true then true else true end"), kmt)
         end
 
 
@@ -606,42 +607,42 @@ class  BiteSizeOclTests  inherits TestCase
      operation test65(): Void is
         do
             var kmt : String  init  visitOclXmi("65") 
-            assertEqual( expect("if 1.isGreater(2) then 3 else 4 end"), kmt)
+            assertSimilar( expect("if 1.isGreater(2) then 3 else 4 end"), kmt)
         end
 
   // nested if
      operation test66(): Void is
         do
             var kmt : String  init  visitOclXmi("66") 
-            assertEqual( expect("if if false then false else false end then true else true end"), kmt)
+            assertSimilar( expect("if if false then false else false end then true else true end"), kmt)
         end
         
     // long implicit collect
     operation test67():Void is
         do
             var kmt : String  init  visitOclXmi("67") 
-            assertEqual( expect ("b.collect{ variable2 | variable2.c}.collect{ variable3 | variable3.z}"), kmt)
+            assertSimilar( expect ("b.collect{ variable2 | variable2.c }.collect{ variable3 | variable3.z }"), kmt)
         end
         
     //  no implicit collect
     operation test68():Void is
         do
             var kmt : String  init  visitOclXmi("68") 
-            assertEqual( expect("d.w"), kmt)
+            assertSimilar( expect("w"), kmt)
         end
 
 	// collect starting from a variable in a block
 	operation test69(): Void is
 		do
             var kmt : String  init  visitOclXmi("69") 
-            assertEqual( expect("b.collect{ e | e.c.collect{ variable2 | variable2.z}}"), kmt)
+            assertSimilar( expect("b.collect{ e | e.c.collect{ variable2 | variable2.z }}"), kmt)
 		end
 
     // no implicit collect
     operation test70():Void is
         do
             var kmt : String  init  visitOclXmi("70") 
-            assertEqual( expect("ab.y"), kmt)
+            assertSimilar( expect("ab.c"), kmt)
         end
         
   // forAll,  implicit variable
@@ -672,26 +673,24 @@ class  BiteSizeOclTests  inherits TestCase
   // oclIsInvalid
   // oclIsUndefined
   // oclIsNew
-  // OCLAny
   
   
   
-
       
       operation runOneTest(testRunner: TestRunner, nn:String) is
-      do
-          var oneOff : Boolean init false
-          if testRunner == void then
-              testRunner : =TestRunner.new
-              oneOff := true 
+          do
+              var oneOff : Boolean init false
+              if testRunner == void then
+                  testRunner : =TestRunner.new
+                  oneOff := true 
+              end
+              stdio.writeln("testing no " + nn)
+              self.setTestMethodName("test" +nn)
+              testRunner.runTest(self)
+              if oneOff then
+                 testRunner.printLogs
+              end
           end
-          stdio.writeln("testing no " + nn)
-        self.setTestMethodName("test" +nn)
-        testRunner.runTest(self)
-        if oneOff then
-                testRunner.printLogs
-        end
-      end
       
     operation oneAtATime() : Void is 
       do
@@ -711,13 +710,17 @@ class  BiteSizeOclTests  inherits TestCase
         testRunner.printLogs
       end
       
+      operation oldmain() : Void is 
+      	do
+            runOneTest(void,"67")
+      	end
+      	
       operation main() : Void is 
-      do
-            var testRunner : TestRunner init TestRunner.new
-		    var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(BiteSizeOclTests)
-    		testRunner.runTest(suite)
-            testRunner.printLogs
-//        runOneTest(void,"58")
-      end    
+          do
+                var testRunner : TestRunner init TestRunner.new
+    		    var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(BiteSizeOclTests)
+        		testRunner.runTest(suite)
+                testRunner.printLogs
+          end    
       
 }

@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.1 2007-07-23 15:20:41 barais Exp $
+/* $Id: EcoreHelper.kmt,v 1.2 2007-08-10 09:45:57 bitterjug Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -14,15 +14,12 @@
  
 
 package EcoreHelpers;
-
 require kermeta
- 
 require "./ecore.kmt" 
 //require "http://www.eclipse.org/emf/2002/Ecore"
- 
+
 using kermeta::standard 
 using kermeta::exceptions
-
 using kermeta::persistence
 using ecore
 
@@ -32,14 +29,14 @@ using ecore
 class EcoreHelper
 {
 	attribute ecoreMetamodel : String
+	attribute metamodelFileName : String
 
-	operation initialize() is do
-//		ecoreMetamodel := "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/ecore/Ecore.ecore"
-		ecoreMetamodel := "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
+	operation initialize() is
+    	do
+    //		ecoreMetamodel := "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/ecore/Ecore.ecore"
+    		ecoreMetamodel := "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
+    	end
 
-	end
-
-	/** load an ECore model */
     operation loadEcoreModel(repository : EMFRepository, modelUri : String) : Sequence<EPackage> is do
     	var resource : Resource init repository.createResource(modelUri , ecoreMetamodel)
     	resource.load
@@ -47,67 +44,60 @@ class EcoreHelper
     	// retreives only the packages
     	var pack : EPackage
     	result := instances.select { e | EPackage.isInstance(e) }.collect{p | pack ?= p}
-    	
     end
 
 	attribute packages : Sequence<EPackage>
 
-	/** load an ECore model */
-    operation loadMetamodel(modelUri : String) : Void is do
-    	var repository : EMFRepository init EMFRepository.new 
-    	var resource : Resource init repository.createResource(modelUri , ecoreMetamodel)
-    	resource.load
-    	var instances : Set<Object> init resource.instances
-    	// retreives only the packages
-    	packages := instances.select { e | EPackage.isInstance(e) }.collect{p | var pack : EPackage
-    	pack ?= p}
-    end
+    operation loadMetamodel(modelUri : String) : Void is
+        do
+        	var repository : EMFRepository init EMFRepository.new 
+        	metamodelFileName := modelUri
+        	var resource : Resource init repository.createResource(modelUri , ecoreMetamodel)
+        	resource.load
+        	var instances : Set<Object> init resource.instances
+        	// retreives only the packages
+        	packages := instances.select { e | EPackage.isInstance(e) }.collect{p | var pack : EPackage pack ?= p}
+        end
 
-
-
-	/** load an ECore model */
-    operation loadEcoreAsModel() : Void is do
-		var repository : EMFRepository init EMFRepository.new 
-    	var resource : Resource init repository.createResource(ecoreMetamodel , ecoreMetamodel)
-    	resource.load
-    	var instances : Set<Object> init resource.instances
-    	// retreives only the packages
-    	packages := instances.select { e | EPackage.isInstance(e) }.collect{p | var pack : EPackage
-    	pack ?= p}
-    end
-
+    operation loadEcoreAsModel() : Void is 
+        do
+    		var repository : EMFRepository init EMFRepository.new 
+        	var resource : Resource init repository.createResource(ecoreMetamodel , ecoreMetamodel)
+        	resource.load
+        	var instances : Set<Object> init resource.instances
+        	// retreives only the packages
+        	packages := instances.select { e | EPackage.isInstance(e) }.collect{p | var pack : EPackage
+        	pack ?= p}
+        end
+    
 	
 	/** retreives the qualified name of a class */
-	operation getClassifierQualifiedName(c : EClassifier) : String is do
-		if (c.ePackage != void) then
-			result := getPackageQualifiedName(c.ePackage) + "::" + c.name			
-		else
-			result := c.name
-		end
-	end
-	
+	operation getClassifierQualifiedName(c : EClassifier) : String is 
+    	do
+    		if (c.ePackage != void) then
+    			result := getPackageQualifiedName(c.ePackage) + "::" + c.name			
+    		else
+    			result := c.name
+    		end
+    	end
+    	
 	/*operation isMultiple(contextQualifiedName : String, path : String, token : String) : Boolean raises InvalidPathName,MetaModelNotLoaded is do
 		
 		 var context : EClass 
 		 context ?= self.getEcoreClassifierByQualifiedName(contextQualifiedName)
 		 if (context != void) then
-		 
 			 var splitpath: OrderedSet<String> init self.splitString(path,token)
 			 var feature : ETypedElement
-		 
 			 from var it : Iterator<String> init splitpath.iterator
 		 		until (it.isOff) loop
 		 		var s : String init it.next
-		 
 			 	feature := context.eAllStructuralFeatures.detect{e|e.name == s}
-			 	
 			if (feature == void) then
 				feature := context.eAllOperations.detect{e|e.name == s}
 				if (feature == void) then
 			 		raise InvalidPathName.new
 				end
 		 	end
-			 	
 			 	context ?= feature.eType
 		 	end
 		 	if (feature != void) then
@@ -124,33 +114,40 @@ class EcoreHelper
 		 end
 	end*/
 	
-		operation getETypedElementFromPath(contextQualifiedName : String, path : String, token : String) : ETypedElement raises InvalidPathName,MetaModelNotLoaded is do
+	operation getETypedElementFromPath(contextQualifiedName : String, path : String ) : ETypedElement raises InvalidPathName,MetaModelNotLoaded is 
+		do
+			 var context : EClass 
+			 context ?= self.getEcoreClassifierByQualifiedName(contextQualifiedName)
+			result := getETypedElement(context, path )
+		end
 		
-		 var context : EClass 
-		 context ?= self.getEcoreClassifierByQualifiedName(contextQualifiedName)
-		 if (context != void) then
-		 
-			 var splitpath: OrderedSet<String> init self.splitString(path,token)
+	operation getETypedElement(context: EClass, path : String) : ETypedElement raises InvalidPathName,MetaModelNotLoaded is 
+		do
+			 var splitpath: OrderedSet<String> init self.splitString(path,".")
 			 var feature : ETypedElement 
-			 from var it : Iterator<String> init splitpath.iterator
-		 		until (it.isOff) loop
+			 from 
+			    var it : Iterator<String> init splitpath.iterator
+		 	 until 
+                it.isOff 
+		 	 loop
 		 		var s : String init it.next
-		 		//stdio.writeln("s = " +s)
 			 	feature := context.eAllStructuralFeatures.detect{e|e.name == s}
-				
 				if (feature == void) then
 					feature := context.eAllOperations.detect{e|e.name == s}
 					if (feature == void) then
-			 			raise InvalidPathName.new
+			 			var e : Exception init InvalidPathName.new
+			 			e.message := "The name '" + s + "' does not mach any feature of: " + context.name
+			 			raise e
 					end
 				end			 	
 				result := feature
-			 	context?= feature.eType
 		 	end
-		 else
-		 	raise InvalidContextName.new
-		 end
-	end
+		 	if result == void then
+		 		var e : Exception init InvalidPathName.new
+		 		e.message := "Cant find feature: " + path + " in type " + context.name
+		 		raise e
+		 	end
+		end	
 	
 
 
@@ -191,19 +188,22 @@ class EcoreHelper
 		var splitpath: OrderedSet<String> init self.splitString(classifierName,"::")
 		var ClassifierName :String init splitpath.last
 		splitpath.remove(splitpath.last)
-
 		var pack : EPackage init packages.detect{e|e.name==(splitpath.first)}
 		splitpath.remove(splitpath.first)
-			
 		 from var it : Iterator<String> init splitpath.iterator
 		 until (it.isOff) loop	
 		 	var s : String init it.next
 			pack := pack.eSubpackages.detect{e|e.name == s}
 		end
 		if (pack== void) then
-			stdio.writeln("ERROR")
-			end
+			stdio.writeln("ERROR, can't find package:" + classifierName)
+		end
 		result := pack.eClassifiers.detect{e|e.name == ClassifierName}
+		if result == void then
+		 	var e : InvalidContextName init  InvalidContextName.new
+		 	e.message := classifierName
+		 	raise e
+		end
 	end
 
 	operation getEcoreClassifierNameByQualifiedName(classifierName : String) : String is do
@@ -272,6 +272,10 @@ class EcoreHelper
 		theAnnotation.details.add(detail)
     end
 	
+	operation getEcoreFileName() : String is
+		do
+			result :=  metamodelFileName 
+		end
         
 }
 

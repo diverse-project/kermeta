@@ -1,0 +1,176 @@
+/* $Id: IteratorPolicies.kmt,v 1.1 2007-08-10 09:45:57 bitterjug Exp $
+ * Creation date: July 25, 2007
+ * License:
+ * Copyright:
+ * Authors: Mark Skipper
+ */
+  
+
+package ocl2kmt;
+require kermeta
+require "ocl2kmtVisitor.kmt"
+require "oclcstvisitor.kmt"
+
+     
+using kermeta::standard
+using kermeta::exceptions
+using kermeta::utils
+
+/** Superclass for the iterator that removes knowledge of how to deal with 
+ **  ocl iterators and their translation.
+ **/
+class IteratorPolicies {
+
+       attribute __iterators : Hashtable<String, IteratorPolicy>
+        
+        operation addIterator(oclIteratorName: String, policy: IteratorPolicy) : Void is 
+        do
+        	__iterators.put(oclIteratorName, policy)
+        end
+        
+        property readonly iterators : Hashtable<String, IteratorPolicy>
+        	getter is
+        		do
+        			if __iterators == void then
+        				__iterators := Hashtable<String, IteratorPolicy>.new
+        				var doNothing : IteratorPolicy init IteratorPolicy.new
+        				var sameName: IteratorPolicy init SimpleIteratorIP.new
+        				var functionWithSameName : IteratorPolicy init FunctionIP.new
+        				addIterator("exists", sameName)
+        				addIterator("forAll", sameName)
+        				addIterator("isUnique", UniqueIP.new)
+        				addIterator("any", SimpleIteratorIP.new.withName("detect"))
+        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".size.equals(1)"))
+        				addIterator("select", SimpleIteratorIP.new.withName("select")) 
+        				addIterator("collect", sameName)
+        				addIterator("collectNested", doNothing)
+        				addIterator("sortedBy", sameName)
+        				addIterator("reject", sameName)
+        			end
+        			result := __iterators
+        		end
+
+}
+
+ 
+ /** Abstract superclass for iterator policies
+  **/
+ class IteratorPolicy {
+	attribute name: String
+	
+    operation withName(functionName: String): IteratorPolicy is
+	    do
+	    	name := functionName
+	    	result := self
+	    end
+	    
+   	attribute suffix: String
+	
+    operation withSuffix(theSuffix: String): IteratorPolicy is
+	    do
+	    	suffix := theSuffix
+	    	result := self
+	    end
+	    
+	operation generate(oclIterator: ocl::cst::IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
+		 do
+		 	var e : Exception init Exception.new
+		 	e.message := " Unimplemented policy: " + oclIterator.simpleNameCS.~value.toString
+		 	raise e
+		 end
+}
+
+/**
+ **
+ **/
+class SimpleIteratorIP inherits IteratorPolicy {
+
+	operation processIteratorVariable(visitable : ocl::cst:: VariableCS, visitor: Ocl2kmtVisitor) : Void is
+		do
+			var variableName: String init visitable.name.toString
+			var implicitTypeName : String init visitor.getLocalFeatureTypeName
+			stdio.writeln("Processing iterator variable [" + variableName + "]")
+			visitor.write(visitor.escape(variableName))
+			if visitable.typeCS != void then // type specified?
+				visitor.write(" : ")
+				visitable.typeCS.accept(visitor)
+				stdio.writeln("Iterator variable [" + variableName + "] has explicit type ["+visitor.expandedTypeName+"] and implicit type["+ implicitTypeName +"].")
+				visitor.addLocalVariable(variableName, visitor.expandedTypeName, 0, 1, false)
+			else
+				stdio.writeln("Iterator variable [" + variableName + "] will have inferred type ["+implicitTypeName+"].")
+				visitor.addLocalTypedVariable(variableName, visitor.getLocalFeatureType , 0, 1, false)
+			end
+			if visitable.initExpression != void then
+				stdio.writeln("Unexpected initial value for iterator variable ["+variableName+"]")
+				visitor.write(" init ")
+				visitable.initExpression.accept(visitor)
+			end
+		end
+			
+	operation generate(oclIterator: ocl::cst::IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
+		 do
+		 	visitor.pushNewStackFrame()
+			oclIterator.source.accept(visitor)
+			visitor.write(".")
+			if name == void then
+				visitor.write(oclIterator.simpleNameCS.~value.toString )
+			else
+				visitor.write(name )
+			end 
+			if oclIterator.variable2 != void then
+				visitor.write("Cpl" ) // TODO: is this a mistake?
+				stdio.writeln("TODO: Iterator variable2 is defined, is this a for all?")
+			end
+			visitor.write("{ ")
+			var variableName : String 
+			if (oclIterator.variable1 != void) then
+				processIteratorVariable( oclIterator.variable1, visitor)
+			else
+			 	variableName := visitor.nextName("variable")
+				visitor.write(variableName)
+				//TODO Check that mark
+			end
+			if (oclIterator.variable2 != void) then
+				visitor.write(", ")
+				oclIterator.variable2.accept(visitor)
+				visitor.context.lookup(oclIterator.variable2.name).upperBound := 1
+				//TODO Check that mark
+			end
+			visitor.write(" | ")
+			oclIterator.body.accept(visitor)
+			visitor.write("}")
+			if suffix != void then
+				visitor.write(suffix)
+			end
+			visitor.popStackFrame() 
+		 end
+}
+
+class UniqueIP inherits SimpleIteratorIP {
+
+	method generate(oclIterator: ocl::cst::IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
+		 do
+			name := "select"
+			super(oclIterator, visitor)
+			visitor.write(".asSet.size.equals(")
+			oclIterator.source.accept(visitor)
+			visitor.write(".size)")			
+		 end
+}
+
+class FunctionIP inherits IteratorPolicy {
+    
+	operation generate(oclIterator: ocl::cst::IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
+		 do
+		 	if name == void then
+				visitor.write(oclIterator.simpleNameCS.~value.toString )
+			else
+				visitor.writeln(name)
+			end
+			visitor.write("( ")
+			oclIterator.source.accept(visitor)
+			visitor.write(", \"")
+			oclIterator.body.accept(visitor)
+			visitor.write("\")")
+		 end
+}					

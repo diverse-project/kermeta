@@ -1,4 +1,4 @@
-/* $Id: StructuralOclTests.kmt,v 1.7 2007-05-30 16:55:42 bitterjug Exp $
+/* $Id: StructuralOclTests.kmt,v 1.8 2007-08-10 09:45:57 bitterjug Exp $
  * Creation date: March 6, 2007
  * License:
  * Copyright:
@@ -12,7 +12,7 @@ package oclTests;
 
 require kermeta
 require "../../../someUnit/src/newUnit.kmt"
-require "../transformations/ocl2kmtVisitor.kmt" 
+require "../transformations-dev/ocl2kmtVisitor.kmt" 
 require "../helpers/OCLHelper.kmt" 
     
 using newUnit
