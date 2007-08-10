@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@subdiagrams.0/@diagrams.0">
+  <model href="exceptions.km#/"/>
+  <diagrams position="0,0" size="100,100" name="No name" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
+      <element href="exceptions.km#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="89,69" size="256,248">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="exceptions.km#//@packages.0"/>
+      </semanticModel>
+    </contained>
+  </diagrams>
+  <subdiagrams>
+    <model href="exceptions.km#//@packages.0"/>
+    <diagrams position="0,0" size="100,100" name="exceptions" zoom="0.75" viewport="0,0">
+      <property key="pageFormatName" value="A3"/>
+      <property key="diagramWidth" value="1188"/>
+      <property key="diagramHeight" value="1680"/>
+      <property key="pageMarginName" value="Small Margin"/>
+      <property key="diagramTopMargin" value="20"/>
+      <property key="diagramBottomMargin" value="20"/>
+      <property key="diagramLeftMargin" value="20"/>
+      <property key="diagramRightMargin" value="20"/>
+      <property key="orientation" value="portrait"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
+        <element href="exceptions.km#//@packages.0"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" position="200,44" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.1 //@subdiagrams.0/@diagrams.0/@contained.3 //@subdiagrams.0/@diagrams.0/@contained.17 //@subdiagrams.0/@diagrams.0/@contained.19 //@subdiagrams.0/@diagrams.0/@contained.21 //@subdiagrams.0/@diagrams.0/@contained.23 //@subdiagrams.0/@diagrams.0/@contained.25 //@subdiagrams.0/@diagrams.0/@contained.27 //@subdiagrams.0/@diagrams.0/@contained.29 //@subdiagrams.0/@diagrams.0/@contained.31 //@subdiagrams.0/@diagrams.0/@contained.33 //@subdiagrams.0/@diagrams.0/@contained.37 //@subdiagrams.0/@diagrams.0/@contained.39 //@subdiagrams.0/@diagrams.0/@contained.41 //@subdiagrams.0/@diagrams.0/@contained.43 //@subdiagrams.0/@diagrams.0/@contained.45 //@subdiagrams.0/@diagrams.0/@contained.47 //@subdiagrams.0/@diagrams.0/@contained.49 //@subdiagrams.0/@diagrams.0/@contained.51"/>
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.1"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/Exception"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/Exception"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="propertyNode">
+              <element href="exceptions.km#//@packages.0/exceptions/Exception/message"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="propertyNode">
+              <element href="exceptions.km#//@packages.0/exceptions/Exception/stackTrace"/>
+            </semanticModel>
+          </contained>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/Exception"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.1">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/Exception/nestedException"/>
+        </semanticModel>
+        <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="8" vDistance="8"/>
+        <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
+        <waypoints>[0, -72, 0, -72]</waypoints>
+        <waypoints>[148, -72, 148, -72]</waypoints>
+        <waypoints>[148, 2, 148, 2]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="588,218" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.3 //@subdiagrams.0/@diagrams.0/@contained.5 //@subdiagrams.0/@diagrams.0/@contained.7 //@subdiagrams.0/@diagrams.0/@contained.9 //@subdiagrams.0/@diagrams.0/@contained.11 //@subdiagrams.0/@diagrams.0/@contained.13 //@subdiagrams.0/@diagrams.0/@contained.15"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/RuntimeError"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/RuntimeError"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/RuntimeError"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.2/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -49, 387, 109]</waypoints>
+        <waypoints>[-386, -49, 1, 109]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="715,382" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.5"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/CallOnVoidTarget"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/CallOnVoidTarget"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/CallOnVoidTarget"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.4/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.2/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[1, -44, 128, 120]</waypoints>
+        <waypoints>[-126, -44, 1, 120]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="715,463" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.7"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/TypeCastError"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/TypeCastError"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/TypeCastError"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.6/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.2/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[1, -44, 128, 202]</waypoints>
+        <waypoints>[-126, -44, 1, 202]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="708,541" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/NotImplementedException"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/NotImplementedException"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/NotImplementedException"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.8/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.2/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[1, -39, 128, 284]</waypoints>
+        <waypoints>[-126, -39, 1, 284]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="709,623" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/UpperBoundReachedError"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/UpperBoundReachedError"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/UpperBoundReachedError"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.10/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.2/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -43, 127, 363]</waypoints>
+        <waypoints>[-126, -43, 1, 363]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="694,711" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.13"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/AbstractClassInstantiationError"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/AbstractClassInstantiationError"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/AbstractClassInstantiationError"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.12/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.2/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[1, -46, 128, 448]</waypoints>
+        <waypoints>[-126, -46, 1, 448]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="715,796" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.15"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/IncompatibleTypeError"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/IncompatibleTypeError"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/IncompatibleTypeError"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.14/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.2/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[1, -43, 128, 535]</waypoints>
+        <waypoints>[-126, -43, 1, 535]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="72,218" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.17"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/DivisionByZero"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/DivisionByZero"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/DivisionByZero"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.16/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -48, -129, 110]</waypoints>
+        <waypoints>[130, -48, 1, 110]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="72,301" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/OverflowError"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/OverflowError"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/OverflowError"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.18/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -40, -129, 201]</waypoints>
+        <waypoints>[130, -40, 1, 201]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="333,218" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/VoidOperandError"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/VoidOperandError"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/VoidOperandError"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.20/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -50, 132, 108]</waypoints>
+        <waypoints>[-131, -50, 1, 108]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="333,301" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.23"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/StringIndexOutOfBound"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/StringIndexOutOfBound"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/StringIndexOutOfBound"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.22/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -41, 132, 200]</waypoints>
+        <waypoints>[-131, -41, 1, 200]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="333,382" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.25"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/StringFormatException"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/StringFormatException"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/StringFormatException"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.24/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -41, 132, 281]</waypoints>
+        <waypoints>[-132, -41, 0, 281]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="72,382" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.27"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/IndexOutOfBound"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/IndexOutOfBound"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/IndexOutOfBound"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.26/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -41, -129, 281]</waypoints>
+        <waypoints>[130, -41, 1, 281]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="72,463" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.29"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/EmptyCollection"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/EmptyCollection"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/EmptyCollection"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.28/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -44, -129, 360]</waypoints>
+        <waypoints>[130, -44, 1, 360]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="72,541" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.31"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/IteratorIsOff"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/IteratorIsOff"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/IteratorIsOff"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.30/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -41, -129, 440]</waypoints>
+        <waypoints>[130, -41, 1, 440]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="333,796" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.33 //@subdiagrams.0/@diagrams.0/@contained.35"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/IOException"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/IOException"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/IOException"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.32/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -43, 132, 693]</waypoints>
+        <waypoints>[-132, -43, 0, 693]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="333,879" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.35"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/FileNotFoundException"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/FileNotFoundException"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/FileNotFoundException"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.34/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.32/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="333,463" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.37"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedPre"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedPre"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedPre"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.36/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -43, 132, 361]</waypoints>
+        <waypoints>[-131, -43, 1, 361]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="333,541" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.39"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedPost"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedPost"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedPost"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.38/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -40, 132, 441]</waypoints>
+        <waypoints>[-131, -40, 1, 441]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="333,623" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.41"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedInv"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedInv"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ConstraintViolatedInv"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.40/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -43, 132, 521]</waypoints>
+        <waypoints>[-131, -43, 1, 521]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="72,623" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.43"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/ResourceLoadException"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ResourceLoadException"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ResourceLoadException"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.42/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -42, -129, 522]</waypoints>
+        <waypoints>[130, -42, 1, 522]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="71,711" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/ResourceSaveException"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ResourceSaveException"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ResourceSaveException"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.44/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -43, -129, 609]</waypoints>
+        <waypoints>[130, -43, 1, 609]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="66,796" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.47"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/ResourceCreateException"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ResourceCreateException"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ResourceCreateException"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.46/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[1, -42, -128, 694]</waypoints>
+        <waypoints>[130, -42, 1, 694]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="44,879" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.49"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/ResourceUnconformityException"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ResourceUnconformityException"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/ResourceUnconformityException"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.48/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -42, -129, 778]</waypoints>
+        <waypoints>[130, -42, 1, 778]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="314,711" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.51"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="exceptions.km#//@packages.0/exceptions/DynamicExpressionException"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/DynamicExpressionException"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="exceptions.km#//@packages.0/exceptions/DynamicExpressionException"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.50/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -43, 132, 609]</waypoints>
+        <waypoints>[-131, -43, 1, 609]</waypoints>
+      </contained>
+    </diagrams>
+  </subdiagrams>
+</diagrams:Diagrams>
