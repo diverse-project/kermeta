@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.16 2007-08-10 09:45:57 bitterjug Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.17 2007-08-13 17:32:43 bitterjug Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -60,7 +60,7 @@ class  BiteSizeOclTests  inherits TestCase
         
     operation visitOclXmi(filename: String): String is
         do
-            var sourceFileName : String init "../../model/" + filename + ".xmi"
+            var sourceFileName : String init "../../ocl/" + filename + ".xmi"
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
             visitor.setMetamodelURI(ecoreFile) 
@@ -645,35 +645,32 @@ class  BiteSizeOclTests  inherits TestCase
             assertSimilar( expect("ab.c"), kmt)
         end
         
-  // forAll,  implicit variable
-  // implicit collect
-  // OclInvalid and invalid literal
-  // product -- requires tuples
-  // tuple literals ()
-
-  // definition
-  // if exp with non trivial condition
-
-  // absolutec}
-  // Integer operations:
-  // div
-  // mod
-  // max
-  // min
-  // covert to real
-  // / 
-  // * + - (infix) 
-  // floor (real)
-  // round (real)
-  // allInstances
-  // oclIsInState
-  // oclIsKindOf
-  // oclIsTypeOf
-  // oclAsType
-  // oclIsInvalid
-  // oclIsUndefined
-  // oclIsNew
+    //  type context on local variable
+    operation test71():Void is
+        do
+            var kmt : String  init  visitOclXmi("71") 
+            assertSimilar( expect("do var x: B init self.ab in x.c end"), kmt)
+        end
+        
+     // is kind of takes type as parameter
+    operation test72():Void is
+        do
+            var kmt : String  init  visitOclXmi("72") 
+            assertSimilar( expect("self.ab.isKindOf(B)"), kmt)
+        end
+        
+     // is kind of with qualified type as parameter
+    operation test73():Void is
+        do
+            var kmt : String  init  visitOclXmi("73") 
+            assertSimilar( expect("self.ab.isKindOf(sample::B)"), kmt)
+        end
   
+    operation test74():Void is
+        do
+            var kmt : String  init  visitOclXmi("74") 
+            assertSimilar( expect("self.ab.isKindOf(sample::B)"), kmt)
+        end
   
   
       

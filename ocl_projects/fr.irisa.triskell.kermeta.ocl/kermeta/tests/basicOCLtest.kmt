@@ -1,4 +1,4 @@
-/* $Id: basicOCLtest.kmt,v 1.1 2007-08-10 09:45:57 bitterjug Exp $
+/* $Id: basicOCLtest.kmt,v 1.2 2007-08-13 17:32:43 bitterjug Exp $
  * Creation date: July 26, 2007
  * License:
  * Copyright:
@@ -34,10 +34,8 @@ class Main
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
           
-            var filename: String init "68"
-            //filename:=  "67"
-            //filename:=  "69"
-            var sourceFileName : String init "../../model/" + filename + ".xmi"
+            var filename: String init "74"
+            var sourceFileName : String init "../../ocl/" + filename + ".xmi"
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
             visitor.setMetamodelURI("../../ocl/sample.ecore") 
