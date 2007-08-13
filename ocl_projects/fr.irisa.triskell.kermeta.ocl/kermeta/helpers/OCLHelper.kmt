@@ -1,4 +1,4 @@
-/* $Id: OCLHelper.kmt,v 1.12 2007-08-10 09:45:57 bitterjug Exp $
+/* $Id: OCLHelper.kmt,v 1.13 2007-08-13 17:32:24 bitterjug Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -18,7 +18,6 @@ package OCLHelpers;
 require kermeta
 require "../transformations-dev/oclcstvisitor.kmt" 
 //require "../../mmodel/oclcstvisitor.kmt" 
- //require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
   
 using ocl::cst
 using kermeta::standard
