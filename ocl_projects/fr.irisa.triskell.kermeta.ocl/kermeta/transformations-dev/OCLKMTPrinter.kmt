@@ -1,4 +1,4 @@
-/* $Id: OCLKMTPrinter.kmt,v 1.5 2007-08-10 09:45:57 bitterjug Exp $
+/* $Id: OCLKMTPrinter.kmt,v 1.6 2007-08-13 17:21:25 bitterjug Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -48,7 +48,7 @@ class OCLKMTPrinter
 			repository := EMFRepository.new
 			helper := OCLHelpers::OCLHelper.new
 	    	visitor := Ocl2kmtVisitor.new
-	     	visitor.initialize
+	     	//visitor.initialize
 
 	     	model  := helper.loadOCLModel(repository, modelURI)
 		    visitor.setMetamodelURI(metamodelURI) 

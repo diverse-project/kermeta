@@ -1,4 +1,4 @@
-/* $Id: OperatorPolicies.kmt,v 1.5 2007-08-10 09:45:57 bitterjug Exp $
+/* $Id: OperatorPolicies.kmt,v 1.6 2007-08-13 17:21:25 bitterjug Exp $
  * License:
  * Copyright:
  * Authors: Mark Skipper
@@ -51,9 +51,9 @@ using ocl::cst::visitors
           				__operators.put("oclIsUndefined", NotNullOp.new)          				
           				__operators.put("allInstances", NotSupported.new.withName("allInstances")) 
           				__operators.put("not", functionCall)  
-          				__operators.put("oclIsTypeOf", FunctionCallOp.new.withName("isKindOf"))
-           				__operators.put("oclIsKindOf", FunctionCallOp.new.withName("isInstanceOf"))
-          				__operators.put("oclAsType", CastOp.new)   
+          				__operators.put("oclIsTypeOf", TypeTest.new.withName("isKindOf"))
+           				__operators.put("oclIsKindOf", TypeTest.new.withName("isInstanceOf"))
+          				__operators.put("oclAsType", CastOp.new.withName("asType"))
            				__operators.put("=", FunctionCallOp.new.withName("equals"))
            				__operators.put("concatenate", FunctionCallOp.new.withName("plus"))
           			end
@@ -113,6 +113,11 @@ using ocl::cst::visitors
 		operation isOperator(operationName: String) : Boolean is
 			do
 				result := operators.containsKey(operationName)
+				if result then
+    				stdio.writeln("["+operationName+"] *IS* a  standard OCL operation")
+				else
+    				stdio.writeln("["+operationName+"] is *NOT* a  standard OCL operation")
+				end
 			end
 			
 		operation getOperatorPolicy(operationName: String): OperatorPolicy is
@@ -239,29 +244,6 @@ class UnimplementedOp inherits OperatorPolicy {
 		 end
 }
 
-class CastOp inherits OperatorPolicy {
-
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
-		 do
-			visitor.write("do")
-			visitor.write(" var ")
-			var localVarName : String init visitor.nextName("variable")
-			visitor.write(localVarName)			
-			visitor.write(" : ")
-			// TODO: assert: visitable.arguments.size == 1 ??? 
-			// TODO: assert: the unique parameter is a type name ??? 
-			oclOp.arguments.each{ arg |
-				arg.accept(visitor)
-		  	}
-		  	visitor.write(" init ")
-			oclOp.source.accept(visitor)			
-			visitor.write( "  ")
-			visitor.write(localVarName)			
-  			visitor.write( " end ")
-		 end
-	
-}
-
 class NotNullOp inherits OperatorPolicy {
 
 	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
@@ -329,7 +311,6 @@ class NotSupported inherits OperatorPolicy {
 			resultIsOrdered := false
 			returnType := type
 		end
-		
 		  
 	operation checkRequirements(operationName: String, visitor: Ocl2kmtVisitor): Void is
 		abstract
@@ -348,8 +329,6 @@ class NotSupported inherits OperatorPolicy {
 				else
             		visitor.setLocalFeature(visitor.simpleValue(returnType))
 				end
-			else
-        		
 			end
 			visitor.write(".")
 			if name != void then
@@ -387,8 +366,6 @@ class FunctionCallOp inherits OperatorPolicy {
 
 	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
-		 // TODO: only if the accessor type is 'arrow', 
-		// if its not arrow, should treat is as a normal operation call if thats possible from here
 		    visitor.write(getPrefix)
 			oclOp.source.accept(visitor)
 			visitor.write(".")
@@ -421,4 +398,37 @@ class FunctionCallOp inherits OperatorPolicy {
 
 }
 
+class TypeTest inherits FunctionCallOp {
+
+	reference parameterType: ecore::EClassifier
+	
+	operation addActuals(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is 
+		do
+			stdio.writeln("Adding actual parameter for type test operation")
+			// there should be only one and it should be a valid type
+			if not oclOp.arguments.size.equals(1) then
+				raise TypeError.new.setMessage("type-test ["+ name+"] must have single type as parameter, param count ["+oclOp.arguments.size.toString+"]")
+			end
+			var typeID : VariableExpCS
+			typeID ?= oclOp.arguments.any
+			if typeID == void then
+				raise TypeError.new.setMessage("parameter of type-test operation must be a type (variable exp )")
+			end
+			// TODO: check that the type is a genuine type in the model?
+			// TODO: this is different if there is a package name on the given type
+			var typeName : String init  typeID.simpleNameCS.~value
+			parameterType := visitor.findTypeInMetamodel(typeName)
+			visitor.write( "(" + typeName +")")
+		end
+}
+
+class CastOp inherits TypeTest {
+
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+		do
+			super(oclOp, visitor)
+			stdio.writeln("CastOp: Setting local context to [" + parameterType.name +"]")
+			visitor.setLocalFeature(visitor.createAttribute("castreturn", parameterType, 0, 1 , false))
+		end
+}
 

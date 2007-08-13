@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.kmt,v 1.1 2007-08-10 09:45:57 bitterjug Exp $
+/* $Id: TypeHelper.kmt,v 1.2 2007-08-13 17:21:25 bitterjug Exp $
  * Creation date: July 25, 2007
  * License:
  * Copyright:
@@ -11,6 +11,7 @@ package ocl2kmt;
 require kermeta
 require "EcoreHelper.kmt" 
 require "oclcstvisitor.kmt"
+require "../helpers/QualifiedName.kmt"
 
 
 using kermeta::standard
@@ -18,6 +19,7 @@ using ocl::cst
 using kermeta::standard
 using kermeta::utils
 using kermeta::exceptions
+using qualifiedNames
 
 class StackFrame {
 
@@ -135,7 +137,6 @@ class TypeHelper
 				__ecoreHelper := EcoreHelpers::EcoreHelper.new
 				__ecoreHelper.initialize
 				__ecoreHelper.loadMetamodel(metamodelURI)  
-				stdio.writeln(__ecoreHelper.getETypedElementFromPath("sample::D", "w").eType.toString)
 			end
 			
 		operation ecoreHelper(): EcoreHelpers::EcoreHelper is
@@ -301,12 +302,19 @@ class TypeHelper
 			context.pop()
 		end
 		
-		
 	operation findTypeInMetamodel(typeName: String) : ecore::EClassifier is
 		do
-			var qualifiedName : String init contextPackageName + "::" + typeName
-			stdio.writeln("Looking for: ["+ qualifiedName + "] in the metamodel...")
-			result := ecoreHelper.getEcoreClassifierByQualifiedName(qualifiedName)
+			stdio.writeln("Looking for type [" + typeName + "] in metamodel")
+			from
+    			var prefix : QualifiedName init QualifiedName.new.appendString( contextPackageName).appendString( contextClassifierName).packageName
+			until
+				result != void 
+			loop
+				var qualifiedName : QualifiedName init prefix.appendString(typeName)
+    			stdio.writeln("   Trying:  ["+ qualifiedName.toString + "] in the metamodel...")
+				result := ecoreHelper.getClassifierByFQN(prefix.appendString(typeName))
+				prefix := prefix.packageName
+			end
 			if result == void then
     			raise TypeError.new.setMessage("FindTypeInMetamodel: Unknown type: " +  typeName)
 		    end

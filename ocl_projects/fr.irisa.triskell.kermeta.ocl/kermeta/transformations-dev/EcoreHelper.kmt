@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.2 2007-08-10 09:45:57 bitterjug Exp $
+/* $Id: EcoreHelper.kmt,v 1.3 2007-08-13 17:21:25 bitterjug Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -17,10 +17,12 @@ package EcoreHelpers;
 require kermeta
 require "./ecore.kmt" 
 //require "http://www.eclipse.org/emf/2002/Ecore"
+require "../helpers/QualifiedName.kmt"
 
 using kermeta::standard 
 using kermeta::exceptions
 using kermeta::persistence
+using qualifiedNames
 using ecore
 
 /** This class provides some helper methods to load/save Ecore models
@@ -33,8 +35,7 @@ class EcoreHelper
 
 	operation initialize() is
     	do
-    //		ecoreMetamodel := "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/ecore/Ecore.ecore"
-    		ecoreMetamodel := "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
+//    		ecoreMetamodel := "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/ecore/Ecore.ecore"
     	end
 
     operation loadEcoreModel(repository : EMFRepository, modelUri : String) : Sequence<EPackage> is do
@@ -81,39 +82,6 @@ class EcoreHelper
     		end
     	end
     	
-	/*operation isMultiple(contextQualifiedName : String, path : String, token : String) : Boolean raises InvalidPathName,MetaModelNotLoaded is do
-		
-		 var context : EClass 
-		 context ?= self.getEcoreClassifierByQualifiedName(contextQualifiedName)
-		 if (context != void) then
-			 var splitpath: OrderedSet<String> init self.splitString(path,token)
-			 var feature : ETypedElement
-			 from var it : Iterator<String> init splitpath.iterator
-		 		until (it.isOff) loop
-		 		var s : String init it.next
-			 	feature := context.eAllStructuralFeatures.detect{e|e.name == s}
-			if (feature == void) then
-				feature := context.eAllOperations.detect{e|e.name == s}
-				if (feature == void) then
-			 		raise InvalidPathName.new
-				end
-		 	end
-			 	context ?= feature.eType
-		 	end
-		 	if (feature != void) then
-		 		if (feature.upperBound >1 or feature.upperBound == -1 ) then
-		 			result := true
-		 		else
-		 			result:= false
-			 	end	
-			else
-		 		raise InvalidPathName.new
-		 	end
-		 else
-		 	raise InvalidContextName.new
-		 end
-	end*/
-	
 	operation getETypedElementFromPath(contextQualifiedName : String, path : String ) : ETypedElement raises InvalidPathName,MetaModelNotLoaded is 
 		do
 			 var context : EClass 
@@ -149,8 +117,6 @@ class EcoreHelper
 		 	end
 		end	
 	
-
-
 	operation test():Void is do
 		self.splitString("essai.essai1.essai2.essai3", ".").each{e|stdio.writeln(e)}
 		self.splitString("essai::essai1::essai2::essai3", "::").each{e|stdio.writeln(e)}
@@ -159,56 +125,57 @@ class EcoreHelper
 		stdio.writeln(self.getEcoreClassifierByQualifiedName("ecore::EPackage").name)		
 		//stdio.writeln(self.isMultiple("ecore::EPackage", "eSubpackages.eClassifiers",".").toString)
 		//stdio.writeln(self.isMultiple("ecore::EClass", "ePackage",".").toString)
-
 	end
 
-	operation splitString(source : String, token:String) :OrderedSet<String> is do 
-		var stringToSplit : String init source
-		var res: OrderedSet<String>  init OrderedSet<String>.new
-
-		var pos : Integer
-
-		from pos:=stringToSplit.indexOf(token)
-		until (pos==-1)
-		loop
-			var firstElement : String
-			firstElement := stringToSplit.substring(0,pos)
-			res.add(firstElement)
-			stringToSplit := stringToSplit.substring(pos + token.size, stringToSplit.size)
-			//stdio.writeln(firstElement + "  " + stringToSplit + " " + pos.toString)
-			pos := stringToSplit.indexOf(token)
-			
+	operation splitString(source : String, token:String) :OrderedSet<String> is 
+    	do 
+    		var stringToSplit : String init source
+    		result := OrderedSet<String>.new
+    		var pos : Integer
+    		from pos:=stringToSplit.indexOf(token)
+    		until (pos==-1)
+    		loop
+    			var firstElement : String
+    			firstElement := stringToSplit.substring(0,pos)
+    			result.add(firstElement)
+    			stringToSplit := stringToSplit.substring(pos + token.size, stringToSplit.size)
+    			pos := stringToSplit.indexOf(token)
+    		end
+    		result.add(stringToSplit)
+    	end
+    
+	operation getEcoreClassifierByQualifiedName(classifierName : String) : EClassifier is 
+		do
+			result := getClassifierByFQN(QualifiedName.new.appendString(classifierName))
+    		if result == void then
+    		 	var e : InvalidContextName init  InvalidContextName.new
+    		 	e.message := "Can't find type in packae: "+ classifierName.toString
+    		 	raise e
+    		end
 		end
-		res.add(stringToSplit)
-		result := res
 		
-	end
+	operation getClassifierByFQN(name : QualifiedName) : EClassifier is 
+    	do
+    	  	var packagePath  : QualifiedName init name.packageName
+    		var classifierName :String init name.typeName
+    		var pack : EPackage init packages.detect{p|p.name==(packagePath.first)}
+    		packagePath.remove(packagePath.first)
+    		 from var it : Iterator<String> init packagePath.iterator
+    		 until (it.isOff) loop	
+    		 	var s : String init it.next
+    			pack := pack.eSubpackages.detect{e|e.name == s}
+    		end
+    		if (pack== void) then
+    		 	stdio.writeln("can't find package: " + name.toString)
+    		end
+    		result := pack.eClassifiers.detect{e|e.name == classifierName}
+    	end
 
-	operation getEcoreClassifierByQualifiedName(classifierName : String) : EClassifier is do
-		var splitpath: OrderedSet<String> init self.splitString(classifierName,"::")
-		var ClassifierName :String init splitpath.last
-		splitpath.remove(splitpath.last)
-		var pack : EPackage init packages.detect{e|e.name==(splitpath.first)}
-		splitpath.remove(splitpath.first)
-		 from var it : Iterator<String> init splitpath.iterator
-		 until (it.isOff) loop	
-		 	var s : String init it.next
-			pack := pack.eSubpackages.detect{e|e.name == s}
-		end
-		if (pack== void) then
-			stdio.writeln("ERROR, can't find package:" + classifierName)
-		end
-		result := pack.eClassifiers.detect{e|e.name == ClassifierName}
-		if result == void then
-		 	var e : InvalidContextName init  InvalidContextName.new
-		 	e.message := classifierName
-		 	raise e
-		end
-	end
-
-	operation getEcoreClassifierNameByQualifiedName(classifierName : String) : String is do
-		result := self.getEcoreClassifierByQualifiedName(classifierName).name
-	end
+	operation getEcoreClassifierNameByQualifiedName(classifierName : String) : String is 
+    	do
+    		result := self.getEcoreClassifierByQualifiedName(classifierName).name
+    	end
+	
 	/** retreives the qualified name of a Package */
 	operation getPackageQualifiedName(p : EPackage) : String is do
 		if (p.eSuperPackage != void) then
