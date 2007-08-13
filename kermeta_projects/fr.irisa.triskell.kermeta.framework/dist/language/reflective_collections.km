@@ -1,169 +1,197 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure" referencedModelingUnits="../Standard.km#/ ../standard/collections.km#/ ../standard/primitive_types.km#/ behavior.km#/ structure.km#/ ../reflection/reflection.km#/ ../persistence/resource.km#/ #/ ../kunit/kunit.km#/ ../kunit/assert.km#/ ../utils/hashtable.km#/ ../utils/stack.km#/ ../io/std_io.km#/ ../io/file_io.km#/ ../exceptions/exceptions.km#/ dynamic_expression.km#/ ../standard/java.km#/">
   <packages name="kermeta">
     <nestedPackage name="language">
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ReflectiveCollection" superType="//@packages.0/language/ReflectiveCollection/@containedType.0">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ReflectiveCollection"
+          superType="#//@packages.0/language/ReflectiveCollection/@containedType.0">
         <ownedTag value="/**&#xD;&#xA; * ReflectiveCollection is a special collection that is used to define the type &#xD;&#xA; * of attributes that have an upper multiplicity > 1 in a class. It indeed handles&#xD;&#xA; * the update of opposite property if such an attribute has got one.&#xD;&#xA; */"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeParamBinding type="//@packages.0/language/ReflectiveCollection/G">
-            <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
-          </typeParamBinding>
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition ../standard/collections.km#//@packages.0/standard/Set">
+          <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable ../standard/collections.km#//@packages.0/standard/Set/G"
+              type="#//@packages.0/language/ReflectiveCollection/G"/>
         </containedType>
-        <ownedOperation name="add" type="//@packages.0/language/ReflectiveCollection/add/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation name="add" type="#//@packages.0/language/ReflectiveCollection/add/@containedType.0"
+            isOrdered="true" upper="1" superOperation="../standard/collections.km#//@packages.0/standard/Set/add">
           <ownedTag value="/**&#xD;&#xA;  * Overrides kermeta::standard::Set&lt;G>.add(G)&#xD;&#xA;  * Add an element to this collection and update its opposite property if it exists.&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
-            </containedType>
-            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection" jmethod="add">
-              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/language/ReflectiveCollection/add/@body/@statement.0/@parameters.0/@containedType.0">
-                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/ReflectiveCollection">
-                  <typeParamBinding variable="//@packages.0/language/ReflectiveCollection/G" type="//@packages.0/language/ReflectiveCollection/G"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition structure.km#//@packages.0/language/structure/Object"/>
+            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="#//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0"
+                jclass="fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection"
+                jmethod="add">
+              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/ReflectiveCollection/add/@body/@statement.0/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/ReflectiveCollection">
+                  <typeParamBinding variable="#//@packages.0/language/ReflectiveCollection/G"
+                      type="#//@packages.0/language/ReflectiveCollection/G"/>
                 </containedType>
               </parameters>
-              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/ReflectiveCollection/G" name="element"/>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/ReflectiveCollection/G"
+                  name="element"/>
             </statement>
           </body>
-          <superOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
-          <ownedParameter name="element" type="//@packages.0/language/ReflectiveCollection/G" isOrdered="true" upper="1"/>
+          <ownedParameter name="element" type="#//@packages.0/language/ReflectiveCollection/G"
+              isOrdered="true" upper="1"/>
         </ownedOperation>
-        <ownedOperation name="remove" type="//@packages.0/language/ReflectiveCollection/remove/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation name="remove" type="#//@packages.0/language/ReflectiveCollection/remove/@containedType.0"
+            isOrdered="true" upper="1" superOperation="../standard/collections.km#//@packages.0/standard/Set/remove">
           <ownedTag value="/**&#xD;&#xA;  * Overrides kermeta::standard::Set&lt;G>.remove(G)&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection" jmethod="remove">
-              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/language/ReflectiveCollection/remove/@body/@statement.0/@parameters.0/@containedType.0">
-                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/ReflectiveCollection">
-                  <typeParamBinding variable="//@packages.0/language/ReflectiveCollection/G" type="//@packages.0/language/ReflectiveCollection/G"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="#//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0"
+                jclass="fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection"
+                jmethod="remove">
+              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/ReflectiveCollection/remove/@body/@statement.0/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/ReflectiveCollection">
+                  <typeParamBinding variable="#//@packages.0/language/ReflectiveCollection/G"
+                      type="#//@packages.0/language/ReflectiveCollection/G"/>
                 </containedType>
               </parameters>
-              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/ReflectiveCollection/G" name="element"/>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/ReflectiveCollection/G"
+                  name="element"/>
             </statement>
           </body>
-          <superOperation href="../standard/collections.km#//@packages.0/standard/Set/remove"/>
-          <ownedParameter name="element" type="//@packages.0/language/ReflectiveCollection/G" isOrdered="true" upper="1"/>
+          <ownedParameter name="element" type="#//@packages.0/language/ReflectiveCollection/G"
+              isOrdered="true" upper="1"/>
         </ownedOperation>
-        <ownedOperation name="clear" type="//@packages.0/language/ReflectiveCollection/clear/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation name="clear" type="#//@packages.0/language/ReflectiveCollection/clear/@containedType.0"
+            isOrdered="true" upper="1" superOperation="../standard/collections.km#//@packages.0/standard/Collection/clear">
           <ownedTag value="/**&#xD;&#xA;  * Overrides kermeta::standard::Collection&lt;G>.clear(G)&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection" jmethod="clear">
-              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/language/ReflectiveCollection/clear/@body/@statement.0/@parameters.0/@containedType.0">
-                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/ReflectiveCollection">
-                  <typeParamBinding variable="//@packages.0/language/ReflectiveCollection/G" type="//@packages.0/language/ReflectiveCollection/G"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="#//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0"
+                jclass="fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection"
+                jmethod="clear">
+              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/ReflectiveCollection/clear/@body/@statement.0/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/ReflectiveCollection">
+                  <typeParamBinding variable="#//@packages.0/language/ReflectiveCollection/G"
+                      type="#//@packages.0/language/ReflectiveCollection/G"/>
                 </containedType>
               </parameters>
             </statement>
           </body>
-          <superOperation href="../standard/collections.km#//@packages.0/standard/Collection/clear"/>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ReflectiveSequence" superType="//@packages.0/language/ReflectiveSequence/@containedType.0 //@packages.0/language/ReflectiveSequence/@containedType.1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ReflectiveSequence"
+          superType="#//@packages.0/language/ReflectiveSequence/@containedType.0 #//@packages.0/language/ReflectiveSequence/@containedType.1">
         <ownedTag value="/**&#xD;&#xA; * ReflectiveSequence is an ordered ReflectiveCollection.&#xD;&#xA; */"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeParamBinding type="//@packages.0/language/ReflectiveSequence/G">
-            <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/OrderedSet/G"/>
-          </typeParamBinding>
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/OrderedSet"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition ../standard/collections.km#//@packages.0/standard/OrderedSet">
+          <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable ../standard/collections.km#//@packages.0/standard/OrderedSet/G"
+              type="#//@packages.0/language/ReflectiveSequence/G"/>
         </containedType>
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/ReflectiveCollection">
-          <typeParamBinding variable="//@packages.0/language/ReflectiveCollection/G" type="//@packages.0/language/ReflectiveSequence/G"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/ReflectiveCollection">
+          <typeParamBinding variable="#//@packages.0/language/ReflectiveCollection/G"
+              type="#//@packages.0/language/ReflectiveSequence/G"/>
         </containedType>
-        <ownedOperation name="add" type="//@packages.0/language/ReflectiveSequence/add/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/ReflectiveCollection/add">
+        <ownedOperation name="add" type="#//@packages.0/language/ReflectiveSequence/add/@containedType.0"
+            isOrdered="true" upper="1" superOperation="#//@packages.0/language/ReflectiveCollection/add">
           <ownedTag value="/**&#xD;&#xA;  * Overrides kermeta::language::ReflectiveCollection&lt;G>.add(G)&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/ReflectiveCollection/add/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:CallSuperOperation" staticType="//@packages.0/language/ReflectiveCollection/add/@containedType.0" name="super">
-              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/ReflectiveSequence/G" name="element"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/ReflectiveCollection/add/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallSuperOperation" staticType="#//@packages.0/language/ReflectiveCollection/add/@containedType.0"
+                name="super">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/ReflectiveSequence/G"
+                  name="element"/>
             </statement>
           </body>
-          <ownedParameter name="element" type="//@packages.0/language/ReflectiveSequence/G" isOrdered="true" upper="1"/>
+          <ownedParameter name="element" type="#//@packages.0/language/ReflectiveSequence/G"
+              isOrdered="true" upper="1"/>
         </ownedOperation>
-        <ownedOperation name="remove" type="//@packages.0/language/ReflectiveSequence/remove/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/ReflectiveCollection/remove">
+        <ownedOperation name="remove" type="#//@packages.0/language/ReflectiveSequence/remove/@containedType.0"
+            isOrdered="true" upper="1" superOperation="#//@packages.0/language/ReflectiveCollection/remove">
           <ownedTag value="/**&#xD;&#xA;  * Overrides kermeta::language::ReflectiveCollection&lt;G>.remove(G)&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/ReflectiveCollection/remove/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:CallSuperOperation" staticType="//@packages.0/language/ReflectiveCollection/remove/@containedType.0" name="super">
-              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/ReflectiveSequence/G" name="element"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/ReflectiveCollection/remove/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallSuperOperation" staticType="#//@packages.0/language/ReflectiveCollection/remove/@containedType.0"
+                name="super">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/ReflectiveSequence/G"
+                  name="element"/>
             </statement>
           </body>
-          <ownedParameter name="element" type="//@packages.0/language/ReflectiveSequence/G" isOrdered="true" upper="1"/>
+          <ownedParameter name="element" type="#//@packages.0/language/ReflectiveSequence/G"
+              isOrdered="true" upper="1"/>
         </ownedOperation>
-        <ownedOperation name="clear" type="//@packages.0/language/ReflectiveSequence/clear/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/ReflectiveCollection/clear">
+        <ownedOperation name="clear" type="#//@packages.0/language/ReflectiveSequence/clear/@containedType.0"
+            isOrdered="true" upper="1" superOperation="#//@packages.0/language/ReflectiveCollection/clear">
           <ownedTag value="/**&#xD;&#xA;  * Overrides kermeta::language::ReflectiveCollection&lt;G>.clear()&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/ReflectiveCollection/clear/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:CallSuperOperation" staticType="//@packages.0/language/ReflectiveCollection/clear/@containedType.0" name="super"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/ReflectiveCollection/clear/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:CallSuperOperation" staticType="#//@packages.0/language/ReflectiveCollection/clear/@containedType.0"
+                name="super"/>
           </body>
         </ownedOperation>
-        <ownedOperation name="addAt" type="//@packages.0/language/ReflectiveSequence/addAt/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation name="addAt" type="#//@packages.0/language/ReflectiveSequence/addAt/@containedType.0"
+            isOrdered="true" upper="1" superOperation="../standard/collections.km#//@packages.0/standard/OrderedSet/addAt">
           <ownedTag value="/**&#xD;&#xA;  * Overrides kermeta::standard::OrderedSet.addAt(Integer)&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence" jmethod="addAt">
-              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0/@parameters.0/@containedType.0">
-                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/ReflectiveSequence">
-                  <typeParamBinding variable="//@packages.0/language/ReflectiveSequence/G" type="//@packages.0/language/ReflectiveSequence/G"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="#//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0"
+                jclass="fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence"
+                jmethod="addAt">
+              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/ReflectiveSequence">
+                  <typeParamBinding variable="#//@packages.0/language/ReflectiveSequence/G"
+                      type="#//@packages.0/language/ReflectiveSequence/G"/>
                 </containedType>
               </parameters>
-              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0/@parameters.1/@containedType.0" name="index">
-                <containedType xsi:type="kermeta_language_structure:Class">
-                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Integer"/>
-                </containedType>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0/@parameters.1/@containedType.0"
+                  name="index">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition ../standard/primitive_types.km#//@packages.0/standard/Integer"/>
               </parameters>
-              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/ReflectiveSequence/G" name="element"/>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/ReflectiveSequence/G"
+                  name="element"/>
             </statement>
           </body>
-          <superOperation href="../standard/collections.km#//@packages.0/standard/OrderedSet/addAt"/>
-          <ownedParameter name="index" type="//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
-          <ownedParameter name="element" type="//@packages.0/language/ReflectiveSequence/G" isOrdered="true" upper="1"/>
+          <ownedParameter name="index" type="#//@packages.0/language/ReflectiveSequence/addAt/@body/@statement.0/@parameters.1/@containedType.0"
+              isOrdered="true" upper="1"/>
+          <ownedParameter name="element" type="#//@packages.0/language/ReflectiveSequence/G"
+              isOrdered="true" upper="1"/>
         </ownedOperation>
-        <ownedOperation name="removeAt" type="//@packages.0/language/ReflectiveSequence/removeAt/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation name="removeAt" type="#//@packages.0/language/ReflectiveSequence/removeAt/@containedType.0"
+            isOrdered="true" upper="1" superOperation="../standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt">
           <ownedTag value="/**&#xD;&#xA;  * Overrides kermeta::standard::OrderedSet.removeAt(Integer)&#xD;&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence" jmethod="removeAt">
-              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/language/ReflectiveSequence/removeAt/@body/@statement.0/@parameters.0/@containedType.0">
-                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/ReflectiveSequence">
-                  <typeParamBinding variable="//@packages.0/language/ReflectiveSequence/G" type="//@packages.0/language/ReflectiveSequence/G"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="#//@packages.0/language/ReflectiveCollection/add/@body/@containedType.0"
+                jclass="fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence"
+                jmethod="removeAt">
+              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/ReflectiveSequence/removeAt/@body/@statement.0/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/ReflectiveSequence">
+                  <typeParamBinding variable="#//@packages.0/language/ReflectiveSequence/G"
+                      type="#//@packages.0/language/ReflectiveSequence/G"/>
                 </containedType>
               </parameters>
-              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/ReflectiveSequence/removeAt/@body/@statement.0/@parameters.1/@containedType.0" name="index">
-                <containedType xsi:type="kermeta_language_structure:Class">
-                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Integer"/>
-                </containedType>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/ReflectiveSequence/removeAt/@body/@statement.0/@parameters.1/@containedType.0"
+                  name="index">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition ../standard/primitive_types.km#//@packages.0/standard/Integer"/>
               </parameters>
             </statement>
           </body>
-          <superOperation href="../standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt"/>
-          <ownedParameter name="index" type="//@packages.0/language/ReflectiveSequence/removeAt/@body/@statement.0/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
+          <ownedParameter name="index" type="#//@packages.0/language/ReflectiveSequence/removeAt/@body/@statement.0/@parameters.1/@containedType.0"
+              isOrdered="true" upper="1"/>
         </ownedOperation>
-        <ownedOperation name="equals" type="//@packages.0/language/ReflectiveSequence/equals/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation name="equals" type="#//@packages.0/language/ReflectiveSequence/equals/@containedType.0"
+            isOrdered="true" upper="1" superOperation="../standard/collections.km#//@packages.0/standard/OrderedSet/equals">
           <ownedTag value="/**&#xD;&#xA;  * Overrides kermeta::standard::OrderedSet.equals(Object)&#xD;&#xA;  */"/>
-          <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
-          </containedType>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="../standard/collections.km#//@packages.0/standard/OrderedSet/equals/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="../standard/collections.km#//@packages.0/standard/OrderedSet/equals/@containedType.0"/>
-              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/ReflectiveSequence/equals/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallSuperOperation" name="super">
-                <staticType href="../standard/collections.km#//@packages.0/standard/OrderedSet/equals/@containedType.0"/>
-                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/ReflectiveSequence/equals/@body/@statement.0/@value/@parameters.0/@containedType.0" name="element">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Object"/>
-                  </containedType>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition ../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="../standard/collections.km#//@packages.0/standard/OrderedSet/equals/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="../standard/collections.km#//@packages.0/standard/OrderedSet/equals/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/language/ReflectiveSequence/equals/@containedType.0"
+                  name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallSuperOperation" staticType="../standard/collections.km#//@packages.0/standard/OrderedSet/equals/@containedType.0"
+                  name="super">
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/ReflectiveSequence/equals/@body/@statement.0/@value/@parameters.0/@containedType.0"
+                    name="element">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition ../reflection/reflection.km#//@packages.0/reflection/Object"/>
                 </parameters>
               </value>
             </statement>
           </body>
-          <superOperation href="../standard/collections.km#//@packages.0/standard/OrderedSet/equals"/>
-          <ownedParameter name="element" type="//@packages.0/language/ReflectiveSequence/equals/@body/@statement.0/@value/@parameters.0/@containedType.0" isOrdered="true" upper="1"/>
+          <ownedParameter name="element" type="#//@packages.0/language/ReflectiveSequence/equals/@body/@statement.0/@value/@parameters.0/@containedType.0"
+              isOrdered="true" upper="1"/>
         </ownedOperation>
       </ownedTypeDefinition>
     </nestedPackage>
@@ -173,21 +201,4 @@
   </requires>
   <requires uri="structure.kmt"/>
   <usings qualifiedName="kermeta::standard"/>
-  <referencedModelingUnits href="../Standard.km#/"/>
-  <referencedModelingUnits href="../standard/collections.km#/"/>
-  <referencedModelingUnits href="../standard/primitive_types.km#/"/>
-  <referencedModelingUnits href="behavior.km#/"/>
-  <referencedModelingUnits href="structure.km#/"/>
-  <referencedModelingUnits href="../reflection/reflection.km#/"/>
-  <referencedModelingUnits href="../persistence/resource.km#/"/>
-  <referencedModelingUnits href="#/"/>
-  <referencedModelingUnits href="../kunit/kunit.km#/"/>
-  <referencedModelingUnits href="../kunit/assert.km#/"/>
-  <referencedModelingUnits href="../utils/hashtable.km#/"/>
-  <referencedModelingUnits href="../utils/stack.km#/"/>
-  <referencedModelingUnits href="../io/std_io.km#/"/>
-  <referencedModelingUnits href="../io/file_io.km#/"/>
-  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
-  <referencedModelingUnits href="dynamic_expression.km#/"/>
-  <referencedModelingUnits href="../standard/java.km#/"/>
 </kermeta_language_structure:ModelingUnit>

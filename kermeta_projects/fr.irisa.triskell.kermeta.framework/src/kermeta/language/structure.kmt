@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.45 2007-08-08 13:36:36 ftanguy Exp $
+/* $Id: structure.kmt,v 1.46 2007-08-13 09:25:16 vmahe Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -16,6 +16,7 @@
  * of the classes of the <code>kermeta::reflection</code> package. If you need
  * documentation for elements marked as "Undocumented", please take a look
  * at the <code>kermeta::reflection</code> package which is more complete.
+ * <img src="./figures/language_structure_package.png">
  */
 package kermeta::language::structure; 
 

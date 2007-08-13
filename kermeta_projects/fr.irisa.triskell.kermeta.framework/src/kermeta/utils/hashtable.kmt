@@ -23,6 +23,7 @@ using kermeta::standard
  * An implementation of hashtable
  * This implementation is for speed optimisation it cannot be serialized. 
  * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)
+ * <img src="./figures/hashtable_view.png">
  */
 class Hashtable<K, V>
 {

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@subdiagrams.0/@diagrams.0">
+  <model href="dynamic_expression.km#/"/>
+  <subdiagrams>
+    <model href="dynamic_expression.km#//@packages.0/interpreter"/>
+    <diagrams position="0,0" size="100,100" name="dynamic_expression_view" zoom="0.75" viewport="0,0">
+      <property key="pageFormatName" value="A4"/>
+      <property key="diagramWidth" value="840"/>
+      <property key="diagramHeight" value="1188"/>
+      <property key="pageMarginName" value="Small Margin"/>
+      <property key="diagramTopMargin" value="20"/>
+      <property key="diagramBottomMargin" value="20"/>
+      <property key="diagramLeftMargin" value="20"/>
+      <property key="diagramRightMargin" value="20"/>
+      <property key="orientation" value="portrait"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
+        <element href="dynamic_expression.km#//@packages.0/interpreter"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" position="13,144" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.4"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="propertyNode">
+              <element href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/formalParameters"/>
+            </semanticModel>
+          </contained>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/execute"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/evalString"/>
+            </semanticModel>
+          </contained>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="348,22" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.4 //@subdiagrams.0/@diagrams.0/@contained.5 //@subdiagrams.0/@diagrams.0/@contained.6"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="dynamic_expression.km#//@packages.0/interpreter/KermetaError"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="dynamic_expression.km#//@packages.0/interpreter/KermetaError"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="propertyNode">
+              <element href="dynamic_expression.km#//@packages.0/interpreter/KermetaError/message"/>
+            </semanticModel>
+          </contained>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="dynamic_expression.km#//@packages.0/interpreter/KermetaError"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="388,144" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.5"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="dynamic_expression.km#//@packages.0/interpreter/ParseError"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="dynamic_expression.km#//@packages.0/interpreter/ParseError"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="dynamic_expression.km#//@packages.0/interpreter/ParseError"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="540,144" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.6"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="dynamic_expression.km#//@packages.0/interpreter/TypeError"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="dynamic_expression.km#//@packages.0/interpreter/TypeError"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="dynamic_expression.km#//@packages.0/interpreter/TypeError"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.1/@anchorage.0">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/errors"/>
+        </semanticModel>
+        <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="8" vDistance="8"/>
+        <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.2/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.1/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.3/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.1/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      </contained>
+    </diagrams>
+  </subdiagrams>
+</diagrams:Diagrams>

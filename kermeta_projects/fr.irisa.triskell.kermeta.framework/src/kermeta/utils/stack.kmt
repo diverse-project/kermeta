@@ -15,6 +15,7 @@ using kermeta::standard
  
 /**
  * An implementation of stack
+ * <img src="./figures/stack_view.png">
  */
 class Stack<G> inherits Sequence<G>
 {

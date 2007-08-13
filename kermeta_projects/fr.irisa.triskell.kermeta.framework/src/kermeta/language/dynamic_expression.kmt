@@ -23,6 +23,7 @@ using kermeta::utils
  *   var params : Hashtable<String, Object> init Hashtable<String, Object>.new
  *   params.put("a", "hello world!")
  *   de.execute(void, params)
+ * <img src="./figures/dynamic_expression_view.png">
  */
 class DynamicExpression
 {

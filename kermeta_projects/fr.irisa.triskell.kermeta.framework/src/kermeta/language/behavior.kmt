@@ -1,4 +1,4 @@
-/* $Id: behavior.kmt,v 1.19 2007-08-08 12:20:56 dtouzet Exp $
+/* $Id: behavior.kmt,v 1.20 2007-08-13 09:25:16 vmahe Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : behavior.kmt
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Mar 14, 2006
  * Authors   : 
  *		Franck Fleurey <ffleurey@irisa.fr>
- *		Zoé Drey <zdrey@irisa.fr>
+ *		Zoï¿½ Drey <zdrey@irisa.fr>
  * 		Didier Vojtisek <dvojtise@irisa.fr>
  *
  */
@@ -27,7 +27,7 @@ require "structure.kmt"
  *   - variable call
  *   - feature call ( <code>a.b</code> : b is a feature call)
  *
- * <img alt=""  height="90%" width="90%"  src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png" />
+ * <img src="./figures/language_behavior_package.png">
  *
  */
 abstract class CallExpression inherits Expression
