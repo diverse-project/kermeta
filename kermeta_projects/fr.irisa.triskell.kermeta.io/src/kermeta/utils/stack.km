@@ -3,7 +3,7 @@
   <packages name="kermeta">
     <nestedPackage name="utils">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/utils/Stack/@ownedTag.0" name="Stack" superType="//@packages.0/utils/Stack/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * An implementation of stack&#xD;&#xA; */" object="//@packages.0/utils/Stack"/>
+        <ownedTag value="/**&#xD;&#xA; * An implementation of stack&#xD;&#xA; * &lt;img src=&quot;./figures/stack_view.png&quot;>&#xD;&#xA; */" object="//@packages.0/utils/Stack"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeParamBinding type="//@packages.0/utils/Stack/G">

@@ -265,11 +265,11 @@
           <ownedTag value="/**&#xD;&#xA; * Block is the model-element representation for the &lt;code>do...end&lt;/code> block.&#xD;&#xA; */" object="//@packages.0/language/behavior/Block"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitable"/>
-          <ownedAttribute tag="//@packages.0/language/behavior/Block/statement/@ownedTag.0" name="statement" type="//@packages.0/language/behavior/Block/statement/@containedType.0" upper="-1" isComposite="true">
+          <ownedAttribute tag="//@packages.0/language/behavior/Block/statement/@ownedTag.0" name="statement" type="//@packages.0/language/behavior/Block/statement/@containedType.0" isOrdered="true" upper="-1" isComposite="true">
             <ownedTag value="/**&#xD;&#xA;  * List of statements composing the block&#xD;&#xA;  */" object="//@packages.0/language/behavior/Block/statement"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
           </ownedAttribute>
-          <ownedAttribute tag="//@packages.0/language/behavior/Block/rescueBlock/@ownedTag.0" name="rescueBlock" type="//@packages.0/language/behavior/Block/rescueBlock/@containedType.0" upper="-1" isComposite="true">
+          <ownedAttribute tag="//@packages.0/language/behavior/Block/rescueBlock/@ownedTag.0" name="rescueBlock" type="//@packages.0/language/behavior/Block/rescueBlock/@containedType.0" isOrdered="true" upper="-1" isComposite="true">
             <ownedTag value="/**&#xD;&#xA;  * List of rescues defined for the block&#xD;&#xA;  */" object="//@packages.0/language/behavior/Block/rescueBlock"/>
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Rescue"/>
           </ownedAttribute>

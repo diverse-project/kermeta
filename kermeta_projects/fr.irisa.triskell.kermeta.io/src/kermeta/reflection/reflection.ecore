@@ -3,10 +3,10 @@
   <ecore:EAnnotation source="CompilationUnit">
     <details key="require" value="../standard/collections.kmt|../persistence/resource.kmt|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/reflection/reflection.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="reflection" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/reflection/reflection.ecore#//reflection" nsPrefix="reflection">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/reflection/reflection.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="reflection" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/reflection/reflection.ecore#//reflection" nsPrefix="reflection">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xD;&#xA; * Contains all the abstract classes used in the reflection mechanism. Implements the &lt;b>derived&#xD;&#xA; * properties&lt;/b> contained in the classes; declares the abstract operations.&#xD;&#xA; * Concrete implementation is in kermeta.language.structure.&#xD;&#xA; */"/>
+        <details key="documentation" value="/**&#xD;&#xA; * Contains all the abstract classes used in the reflection mechanism. Implements the &lt;b>derived&#xD;&#xA; * properties&lt;/b> contained in the classes; declares the abstract operations.&#xD;&#xA; * Concrete implementation is in kermeta.language.structure.&#xD;&#xA; * &lt;img src=&quot;./figures/reflection_package.png&quot;>&#xD;&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
       <eClassifiers xsi:type="ecore:EClass" name="Object" abstract="true">
@@ -937,6 +937,7 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../standard/primitive_types.ecore#/2"/>
@@ -948,7 +949,6 @@
     <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="#/0"/>
     <references href="#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
@@ -962,15 +962,14 @@
     <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
+    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
@@ -979,7 +978,6 @@
     <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
     <references href="../standard/java.ecore#/2"/>

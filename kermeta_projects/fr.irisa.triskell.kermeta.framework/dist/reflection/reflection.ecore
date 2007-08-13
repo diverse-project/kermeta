@@ -5,6 +5,9 @@
   </ecore:EAnnotation>
   <ecore:EPackage name="kermeta" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/reflection/reflection.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="reflection" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/reflection/reflection.ecore#//reflection" nsPrefix="reflection">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/**&#xD;&#xA; * Contains all the abstract classes used in the reflection mechanism. Implements the &lt;b>derived&#xD;&#xA; * properties&lt;/b> contained in the classes; declares the abstract operations.&#xD;&#xA; * Concrete implementation is in kermeta.language.structure.&#xD;&#xA; * &lt;img src=&quot;./figures/reflection_package.png&quot;>&#xD;&#xA; */"/>
+      </eAnnotations>
       <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
       <eClassifiers xsi:type="ecore:EClass" name="Object" abstract="true">
         <eAnnotations source="kermeta">
@@ -841,6 +844,16 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Filter" abstract="true">
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="/1/reflection/String">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Require" abstract="true" eSuperTypes="/1/reflection/Object">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
@@ -873,14 +886,9 @@
             <details key="documentation" value="/**&#xD;&#xA;  * This boolean allows to tell if this Type definition is an aspect or not&#xD;&#xA;  * If it is an aspect, then at runtime, its definition will be merged with the definition of another&#xD;&#xA;  * TypeDefinition that has exactly the same qualified name&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="baseAspects" upperBound="-1" eType="/1/reflection/TypeDefinition" eOpposite="/1/reflection/TypeDefinition/aspects">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="baseAspects" upperBound="-1" eType="/1/reflection/TypeDefinition">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;  * References to the base classes&#xD;&#xA;  */"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="aspects" upperBound="-1" eType="/1/reflection/TypeDefinition" eOpposite="/1/reflection/TypeDefinition/baseAspects">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
@@ -929,6 +937,7 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../standard/primitive_types.ecore#/2"/>
@@ -944,6 +953,7 @@
     <references href="#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/2"/>
@@ -952,21 +962,24 @@
     <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
+    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

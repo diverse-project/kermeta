@@ -3,7 +3,7 @@
   <packages name="kermeta">
     <nestedPackage name="standard">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/Void/@ownedTag.0" name="Void" superType="//@packages.0/standard/Void/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * The class Void &#xD;&#xA; * By convention it is a sub-type of everything&#xD;&#xA; */" object="//@packages.0/standard/Void"/>
+        <ownedTag value="/**&#xD;&#xA; * The class Void &#xD;&#xA; * By convention it is a sub-type of everything&#xD;&#xA; * &lt;img src=&quot;./figures/primitive_types_view.png&quot;>&#xD;&#xA; */" object="//@packages.0/standard/Void"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>

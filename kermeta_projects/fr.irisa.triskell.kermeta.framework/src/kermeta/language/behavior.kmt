@@ -1,4 +1,4 @@
-/* $Id: behavior.kmt,v 1.20 2007-08-13 09:25:16 vmahe Exp $
+/* $Id: behavior.kmt,v 1.21 2007-08-13 10:01:39 dtouzet Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : behavior.kmt
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Mar 14, 2006
  * Authors   : 
  *		Franck Fleurey <ffleurey@irisa.fr>
- *		Zoï¿½ Drey <zdrey@irisa.fr>
+ *		Zoé Drey <zdrey@irisa.fr>
  * 		Didier Vojtisek <dvojtise@irisa.fr>
  *
  */
@@ -27,7 +27,7 @@ require "structure.kmt"
  *   - variable call
  *   - feature call ( <code>a.b</code> : b is a feature call)
  *
- * <img src="./figures/language_behavior_package.png">
+ * <img alt=""  height="90%" width="90%"  src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png" />
  *
  */
 abstract class CallExpression inherits Expression
@@ -222,12 +222,12 @@ class Block inherits Expression, KMExpressionVisitable
 	/**
 	 * List of statements composing the block
 	 */
-	attribute statement : set Expression[0..*]
+	attribute statement : oset Expression[0..*]
 
 	/**
 	 * List of rescues defined for the block
 	 */
-	attribute rescueBlock : set Rescue[0..*]
+	attribute rescueBlock : oset Rescue[0..*]
 	
 	/**
 	 * Implementation of the visitor design pattern on Block objects

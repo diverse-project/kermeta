@@ -6,6 +6,9 @@
   <ecore:EPackage name="kermeta" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/language/behavior.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="language" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/language/behavior.ecore#//language" nsPrefix="language">
       <eSubpackages name="behavior" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/language/behavior.ecore#//language/behavior" nsPrefix="behavior">
+        <eAnnotations source="kermeta">
+          <details key="documentation" value="/**&#xD;&#xA; * Contains all the classes that define the behavior of Kermeta (i.e the model representation&#xD;&#xA; * of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta &#xD;&#xA; * metamodel, viewed as a model.&#xD;&#xA; * You can also find some information about the behavior package here : &lt;a href=&quot;http://www.kermeta.org/documents/manual/html.single&quot;>KermetaManual&lt;/a>&#xD;&#xA; */"/>
+        </eAnnotations>
         <eClassifiers xsi:type="ecore:EClass" name="CallExpression" abstract="true" eSuperTypes="/1/language/behavior/Expression">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA; * Any callable expression inherits this class, e.g : &#xD;&#xA; *   - variable call&#xD;&#xA; *   - feature call ( &lt;code>a.b&lt;/code> : b is a feature call)&#xD;&#xA; *&#xD;&#xA; * &lt;img alt=&quot;&quot;  height=&quot;90%&quot; width=&quot;90%&quot;  src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png&quot; />&#xD;&#xA; *&#xD;&#xA; */"/>
@@ -259,12 +262,12 @@
               <eGenericType eTypeParameter="/1/language/behavior/Block/acceptKMExpressionVisitor/ContextType"/>
             </eParameters>
           </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="statement" ordered="false" upperBound="-1" eType="/1/language/behavior/Expression" containment="true">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="statement" upperBound="-1" eType="/1/language/behavior/Expression" containment="true">
             <eAnnotations source="kermeta">
               <details key="documentation" value="/**&#xD;&#xA;  * List of statements composing the block&#xD;&#xA;  */"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EReference" name="rescueBlock" ordered="false" upperBound="-1" eType="/1/language/behavior/Rescue" containment="true">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="rescueBlock" upperBound="-1" eType="/1/language/behavior/Rescue" containment="true">
             <eAnnotations source="kermeta">
               <details key="documentation" value="/**&#xD;&#xA;  * List of rescues defined for the block&#xD;&#xA;  */"/>
             </eAnnotations>
@@ -1071,25 +1074,26 @@
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
     <references href="reflective_collections.ecore#/0"/>
     <references href="reflective_collections.ecore#/1"/>
-    <references href="reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="dynamic_expression.ecore#/0"/>
     <references href="dynamic_expression.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>

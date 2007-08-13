@@ -4,6 +4,9 @@
     <details key="require" value="standard/collections.kmt|language/behavior.kmt|reflection/reflection.kmt|language/reflective_collections.kmt|kunit/kunit.kmt|utils/hashtable.kmt|utils/stack.kmt|io/std_io.kmt|io/file_io.kmt|exceptions/exceptions.kmt|language/dynamic_expression.kmt|persistence/resource.kmt|standard/java.kmt|"/>
   </ecore:EAnnotation>
   <ecore:EPackage name="kermeta" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/Standard.ecore#/" nsPrefix="kermeta">
+    <eAnnotations source="kermeta">
+      <details key="documentation" value="/**&#xD;&#xA; * The root package. See the other packages if you want to browse the classes of Kermeta api.&#xD;&#xA; * &lt;img src=&quot;./figures/kermeta_packages.png&quot;>&#xD;&#xA; */"/>
+    </eAnnotations>
     <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
   </ecore:EPackage>
   <ecore:EAnnotation source="dependentResource">
@@ -23,21 +26,20 @@
     <references href="persistence/resource.ecore#/1"/>
     <references href="language/reflective_collections.ecore#/0"/>
     <references href="language/reflective_collections.ecore#/1"/>
-    <references href="language/reflective_collections.ecore#/2"/>
     <references href="kunit/kunit.ecore#/0"/>
     <references href="kunit/kunit.ecore#/1"/>
-    <references href="kunit/kunit.ecore#/2"/>
     <references href="kunit/assert.ecore#/0"/>
     <references href="kunit/assert.ecore#/1"/>
     <references href="utils/hashtable.ecore#/0"/>
     <references href="utils/hashtable.ecore#/1"/>
+    <references href="utils/hashtable.ecore#/2"/>
     <references href="utils/stack.ecore#/0"/>
     <references href="utils/stack.ecore#/1"/>
     <references href="io/std_io.ecore#/0"/>
     <references href="io/std_io.ecore#/1"/>
-    <references href="io/std_io.ecore#/2"/>
     <references href="io/file_io.ecore#/0"/>
     <references href="io/file_io.ecore#/1"/>
+    <references href="io/file_io.ecore#/2"/>
     <references href="exceptions/exceptions.ecore#/0"/>
     <references href="exceptions/exceptions.ecore#/1"/>
     <references href="language/dynamic_expression.ecore#/0"/>
