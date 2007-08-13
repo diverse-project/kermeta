@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="111">
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="106">
   <pathNameCS startOffset="8" endOffset="13">
     <sequenceOfNames>sample</sequenceOfNames>
   </pathNameCS>
-  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="75" endOffset="97">
-    <pathNameCS startOffset="83" endOffset="83">
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="73" endOffset="94">
+    <pathNameCS startOffset="81" endOffset="81">
       <sequenceOfNames>A</sequenceOfNames>
     </pathNameCS>
-    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="85" endOffset="97">
-      <expressionCS xsi:type="ocl.cst:FeatureCallExpCS" startOffset="94" endOffset="97" accessor="dot">
-        <source xsi:type="ocl.cst:VariableExpCS" startOffset="94" endOffset="95">
-          <simpleNameCS startOffset="94" endOffset="95" value="ab"/>
-          <isMarkedPreCS startOffset="96" endOffset="96"/>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="83" endOffset="94">
+      <expressionCS xsi:type="ocl.cst:FeatureCallExpCS" startOffset="91" endOffset="94" accessor="dot">
+        <source xsi:type="ocl.cst:VariableExpCS" startOffset="91" endOffset="92">
+          <simpleNameCS startOffset="91" endOffset="92" value="ab"/>
+          <isMarkedPreCS startOffset="93" endOffset="93"/>
         </source>
-        <simpleNameCS startOffset="97" endOffset="97" value="y"/>
-        <isMarkedPreCS startOffset="102" endOffset="111"/>
+        <simpleNameCS startOffset="94" endOffset="94" value="c"/>
+        <isMarkedPreCS startOffset="97" endOffset="106"/>
       </expressionCS>
     </invOrDefCS>
   </contextDecls>

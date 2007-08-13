@@ -9,6 +9,9 @@
         <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       </eParameters>
     </eOperations>
+    <eOperations name="w">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="x">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eStructuralFeatures>
@@ -35,5 +38,8 @@
   <eClassifiers xsi:type="ecore:EEnum" name="Foo">
     <eLiterals name="bar"/>
     <eLiterals name="bash" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubB" eSuperTypes="//B">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ac" eType="//C"/>
   </eClassifiers>
 </ecore:EPackage>

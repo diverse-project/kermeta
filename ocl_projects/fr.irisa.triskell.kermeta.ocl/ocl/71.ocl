@@ -1,6 +1,6 @@
 package sample
  -- no collect (relative to the 'sample.ecore' metamodel)
 context A inv:
-   ab.c
+   let x: B = self.ab in x.c
 
 endpackage

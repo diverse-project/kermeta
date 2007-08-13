@@ -1,6 +1,6 @@
 package sample
--- 27: String literals
+
 context A inv:
-	"foo"="bar"
+  self.ab.oclIsKindOf(sample::B)
 
 endpackage
