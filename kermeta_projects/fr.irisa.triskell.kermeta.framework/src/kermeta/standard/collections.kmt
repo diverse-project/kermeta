@@ -1,14 +1,5 @@
-/**
- * Defines Collection types 
- */
-package kermeta::standard;
-
-require "primitive_types.kmt"
-
-using kermeta::exceptions
-
 /* *************************************************
- * $Id: collections.kmt,v 1.35 2007-08-08 12:20:57 dtouzet Exp $
+ * $Id: collections.kmt,v 1.36 2007-08-14 12:19:40 vmahe Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -16,12 +7,22 @@ using kermeta::exceptions
  *
  * Implementation of Kermeta collection types.
  *************************************************** */
+
+/**
+ * Defines Collection types 
+ * <img src="./figures/collections_view.png">
+ */
+package kermeta::standard;
+
+require "primitive_types.kmt"
+
+using kermeta::exceptions
+
 alias Object : kermeta::language::structure::Object;
  
  
 /**
  * Collection is the root abstract class for all kermeta collections
- * <img src="./figures/collections_view.png">
  */
 abstract class Collection<G> 
 {
@@ -46,14 +47,14 @@ abstract class Collection<G>
 	operation asSequence() : Sequence<G> is abstract
 	
 	/**
-	 * ?!?
+	 * To be written #####################################
 	 */
 	operation forAllCpl(f : < [G, G] -> Boolean> ) : Boolean is do
    		result := self.forAll{x | self.forAll {y | f(x,y)}}
 	end 
 
 	/**
-	 * ?!?
+	 * To be written #####################################
 	 */
 	operation existsCpl(f : < [G, G] -> Boolean> ) : Boolean is do
    		result := self.exists{x | self.exists {y | f(x,y)}}
@@ -546,14 +547,22 @@ class Set<G> inherits Collection<G>
 	end
 	
 	/**
-	 * To be written
+	 * Returns a ordered set of the bag elements sorted using the given comparator.
+	 * The comparator must return :<ul>
+	 *   <li>+1 if the second <G> element is greater than the first</li> 
+	 *   <li>0 if the second <G> element equals the first</li> 
+	 *   <li>-1 if the second <G> element is lower than the first</li> 
 	 */
 	operation sortedBy(comparator : <[G, G] -> Integer>) : OrderedSet<G>  is do
 		result := quickSort(self.asOrderedSet, comparator) 
 	end
 	
 	/**
-	 * To be written
+	 * Recursive sort of the given (ordered) set using the given comparator.
+	 * The comparator must return :<ul>
+	 *   <li>+1 if the second <G> element is greater than the first</li> 
+	 *   <li>0 if the second <G> element equals the first</li> 
+	 *   <li>-1 if the second <G> element is lower than the first</li> 
 	 */
 	operation quickSort(q :OrderedSet<G>, comparator : <[G, G] -> Integer>) : OrderedSet<G> is do
 		 var less : OrderedSet<G> init OrderedSet<G>.new
@@ -580,7 +589,7 @@ class Set<G> inherits Collection<G>
 	end
 	
 	/**
-	 * To be written ?!?
+	 * Internal concatenation tool for recursive 'quickSort()' method
 	 */
 	operation concatenate(less : OrderedSet<G>, pivot : OrderedSet<G>, greater : OrderedSet<G>): OrderedSet<G> is do
 		result := OrderedSet<G>.new
@@ -775,14 +784,22 @@ class Bag<G> inherits Collection<G>
 	end
 	
 	/**
-	 * To be written
+	 * Returns a sequence of the bag elements sorted using the given comparator.
+	 * The comparator must return :<ul>
+	 *   <li>+1 if the second <G> element is greater than the first</li> 
+	 *   <li>0 if the second <G> element equals the first</li> 
+	 *   <li>-1 if the second <G> element is lower than the first</li> 
 	 */
 	operation sortedBy(comparator : <[G, G] -> Integer>) : Sequence<G>  is do
 		result := quickSort(self.asSequence, comparator) 
 	end
 	
 	/**
-	 * To be written
+	 * Recursive sort of the given sequence using the given comparator.
+	 * The comparator must return :<ul>
+	 *   <li>+1 if the second <G> element is greater than the first</li> 
+	 *   <li>0 if the second <G> element equals the first</li> 
+	 *   <li>-1 if the second <G> element is lower than the first</li> 
 	 */
 	operation quickSort(q :Sequence<G>, comparator : <[G, G] -> Integer>) : Sequence<G> is do
 		 var less : Sequence<G> init Sequence<G>.new
@@ -809,7 +826,7 @@ class Bag<G> inherits Collection<G>
 	end
 	
 	/**
-	 * To be written
+	 * Internal concatenation tool for recursive 'quickSort()' method
 	 */
 	operation concatenate(less : Sequence<G>, pivot : Sequence<G>, greater : Sequence<G>): Sequence<G> is do
 		result := Sequence<G>.new

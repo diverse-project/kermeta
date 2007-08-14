@@ -3,12 +3,14 @@
  * <img src="./figures/exceptions_package.png">
  */
 package kermeta::exceptions;
+
 require "../Standard.kmt"
+
 using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id: exceptions.kmt,v 1.16 2007-08-08 12:20:57 dtouzet Exp $
+ * $Id: exceptions.kmt,v 1.17 2007-08-14 12:19:40 vmahe Exp $
  * Project : Kermeta framework
  * Creation date :  
  * File : exception.kmt
@@ -32,14 +34,10 @@ using kermeta::utils
 class Exception
 {
 
-    /**
-     * The message attached to the exception
-     */
+    /** The message attached to the exception     */
     attribute message : String
     
-    /**
-     * Any nested exception
-     */
+    /** Any nested exception     */
     attribute nestedException : Exception
     
     /**
@@ -53,20 +51,14 @@ class Exception
  * 2-Runtime errors
  * ****************************************************************************/ 
 
-/**
- * Exception for interpreter exceptions
- */
+/** Exception for interpreter exceptions */
 class RuntimeError inherits Exception {
 	
-	/**
-	 * The code that raised the exception
-	 */
+	/** The code that raised the exception */
 	attribute expression : kermeta::language::behavior::Expression
 }
 
-/**
- * Occurs when a feature is called on void
- */
+/** Occurs when a feature is called on void */
 class CallOnVoidTarget inherits RuntimeError {}
 
 /**
@@ -106,27 +98,35 @@ class IncompatibleTypeError inherits RuntimeError {}
 /*
  * Arithmetic errors
  */
+/** well-known attempt to divide with a zero valued divider */
 class DivisionByZero inherits Exception {}
+
+/** the figure oversteps the capacity of the numeric variable */
 class OverflowError inherits Exception {}
+
+/** one of the required operands is void */
 class VoidOperandError inherits Exception {}
  
 /*
  * String errors
  */
+/** the data overstep the size of the string variable */
 class StringIndexOutOfBound inherits Exception {}
+
+/**
+ * to be written #########################################
+ */
 class StringFormatException inherits Exception {}
   
 /*
  * Collection related errors
  */  
-/**
- * Occurs when trying to access out of bounds elements
- */
+/** Occurs when trying to access out of bounds elements */
 class IndexOutOfBound inherits Exception {}
-/**
- * Occurs when trying to access element on an empty collection
- */
+
+/** Occurs when trying to access element on an empty collection */
 class EmptyCollection inherits Exception {}
+
 /**
  * Occurs when calling next() operation while iterator is already
  * positioned on the last element of a collection
@@ -136,14 +136,22 @@ class IteratorIsOff inherits Exception {}
 /*
  * File Related Errors
  */
+/** an interaction with the underlying system failed */
 class IOException inherits Exception {}
+
+/** the file has not be found on the underlying system */
 class FileNotFoundException inherits IOException {}
 
 /* ****************************************************************************
  * 4-Constraints related errors 
  * ****************************************************************************/ 
+/** the pre-condition is not satisfied */
 class ConstraintViolatedPre inherits Exception {}
+
+/** the post-condition is not satisfied */
 class ConstraintViolatedPost inherits Exception {}
+
+/** some fixes declared in the invariant condition ave been changed */
 class ConstraintViolatedInv inherits Exception {}
 
 
@@ -151,16 +159,15 @@ class ConstraintViolatedInv inherits Exception {}
  * 5-Resource related errors 
  * ****************************************************************************/
 
-/**
- * Occurs when Resource loading fails for some reasons
- */
+/** Occurs when Resource loading fails for some reasons */
 class ResourceLoadException inherits Exception { }
+
+/** Occurs when Resource saving fails for some reasons */
 class ResourceSaveException inherits Exception { }
 
-/**
- * Occurs when trying to crate a Resource already existing in the Repository
- */
+/** Occurs when trying to crate a Resource already existing in the Repository */
 class ResourceCreateException inherits Exception { }
+
 /** Raised when user tries to add an object that is not conform to the metamodel */
 class ResourceUnconformityException inherits Exception { }
 
@@ -168,4 +175,8 @@ class ResourceUnconformityException inherits Exception { }
 /* ****************************************************************************
  * 6-Dynamic expressions related errors 
  * ****************************************************************************/
+
+/**
+ * to be written #########################################
+ */
 class DynamicExpressionException inherits Exception { }

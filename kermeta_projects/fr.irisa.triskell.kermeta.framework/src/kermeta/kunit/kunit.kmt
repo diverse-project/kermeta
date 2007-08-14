@@ -1,4 +1,4 @@
-/* $Id: kunit.kmt,v 1.29 2007-08-09 15:01:19 dvojtise Exp $
+/* $Id: kunit.kmt,v 1.30 2007-08-14 12:19:40 vmahe Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -27,7 +27,7 @@ using kermeta::kunit
 
 
 /**
- * See if you can guess what this is for
+ * This exception is rose if there is a problem on the name of the test method
  */
 class InvalidTestCaseNameException inherits exceptions::Exception{}
 
@@ -45,12 +45,21 @@ class InvalidParameterException inherits exceptions::Exception{}
 abstract class Fallible inherits AbstractFallible 
 {
 
+  /**
+   * counter of assertions in the test method
+   */
   attribute rank : Integer
   
+  /**
+   * where failures will be put 
+   */
   operation  getLog(): Log  
   	post logDefined is result != void 
   	is abstract
-    
+  
+  /**
+   * current order position of counter of assertions
+   */
   operation number(): Integer is
 	  	do
 		 	if rank.isVoid then 
@@ -137,16 +146,29 @@ abstract class Fallible inherits AbstractFallible
  */
 class Log
 {
-	/** number of test that were run */
+	/**
+	 * number of test that were run
+	 */
 	attribute runtests : Integer
-	/**  list of detected assertion failures */
+	
+	/** 
+	 * list of detected assertion failures
+	 */
 	reference failures : Failure[*]
-	/** list of detected test errors */
+	
+	/**
+	 * list of detected test errors
+	 */
 	reference errors : Error[*]
-	/** list of detected errors with the test harness */
+	
+	/**
+	* list of detected errors with the test harness
+	*/
 	reference harnessErrors :  Error[*]
 		
-	/** Increments the runtests counter */
+	/**
+	 * Increments the runtests counter
+	 */
 	operation newAttempt() : Void is 
 		do
 			if runtests == void then
@@ -155,21 +177,32 @@ class Log
 			runtests := 1 + runtests
 		end
 	
-	/** Adds a failed test to the list of failed tests */
+	/**
+	 * Adds a failed test to the list of failed tests
+	 */
 	operation addFailure(test : Fallible, msg: String) : Void is do
 		failures.add(Failure.new.initFrom(test, msg)) 
 	end
 	
+	/**
+	 * Adds an error to the list of errors
+	 */
 	operation addTestError(test : Fallible, e : kermeta::exceptions::Exception) : Void is 
 		do
 			errors.add(Error.new.initFrom(test,e))
 		end
 
+	/**
+	 * Adds errors which occur durint the SetUp phase
+	 */
 	operation addSetUpError(test : Fallible, e : kermeta::exceptions::Exception) : Void is 
 		do
 			harnessErrors.add(Error.new.initFrom(test,e).makeSetUp)
 		end
 
+	/**
+	 * Adds errors which occur durint the TearDown phase
+	 */
 	operation addTearDownError(test : Fallible, e : kermeta::exceptions::Exception) : Void is 
 		do
 			harnessErrors.add(Error.new.initFrom(test,e).makeTearDown)
@@ -182,16 +215,29 @@ class Log
  */
 class Failure
 {
+	/**
+	 * the stored failure
+	 */
 	reference failure : Fallible
+
+	/**
+	 * the stored message (given or generated one)
+	 */
 	reference message : String
 	
+	/**
+	 * initialization of the failure
+	 */
 	operation initFrom(fallible: Fallible, msg: String): Failure is
 	 	do
 	 		failure := fallible
 	 		message := msg
 	 		result :=  self
 	 	end
-	 	
+	
+	/**
+	 * overwrite the default method, in order to add the message
+	 */
 	method toString(): String is 
 		do 
 			result := failure.toString + " " + message
@@ -200,7 +246,9 @@ class Failure
 		end
 }
 
-
+/**
+ * all kinds of error we can meet
+ */
 enumeration ErrorKind
 {
 	setUpError;
@@ -214,8 +262,19 @@ enumeration ErrorKind
  */
 class Error
 {
+	/**
+	 * the stored error
+	 */
 	reference error : Fallible
+	
+	/**
+	 * the Kermeta exception corresponding to the error
+	 */
 	reference exception : kermeta::exceptions::Exception
+	
+	/**
+	 * the nature of the stored error
+	 */
 	attribute kind : ErrorKind
 	
 	/**
@@ -253,6 +312,12 @@ class Error
 			result := self
 		end
 		
+	/**
+	 * overwrite the default method, in order to add :
+	 *   - the type
+	 *   - the message
+	 *   - the stack trace
+	 */
 	method toString(): String is 
 		do 
 			if kind.equals(ErrorKind.testError) then
@@ -287,6 +352,9 @@ class Error
  */
 abstract class Test 
 {
+    /**
+     * where failures and errors will be put 
+     */
 	reference log: Log 
 	
 	/**
@@ -296,14 +364,20 @@ abstract class Test
 		do
 			self.log := Log.new
 		end
-		
+	
+	/**
+	 * Initializes the log where failures and errors will be put
+	 */
 	operation setLog(log: Log): Void 
 		pre paramNotVoid is log != void
 		post logNotVoid is self.log != void
 		is do
 			self.log := log
 		end
-		
+	
+	/**
+	 * Execute the test and verify its assertions
+	 */
 	operation run():Void 
 		pre logNotVoid is self.log != void
 		is  abstract
@@ -322,14 +396,16 @@ abstract class Test
  *  suite.tests.add(t1)
  *
  *  Alternatively you can populate a suite automatically from
- *  a class that inherits TestCase and whic has several methods
+ *  a class that inherits TestCase and which has several methods
  *  called test:
  *
  *  var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)
  */
 class TestSuite inherits Test
 {
-
+	/**
+	 * The collection of tests which will be ran as the suite
+	 */
 	reference tests: Test[*]
 	
 	/** 
@@ -391,6 +467,9 @@ class TestSuite inherits Test
 			result := self
  		end
 	   
+	 /**
+	  * to be written #####################################################
+	  */
 	   operation addAllTestCasesFromAspects( testCaseClass: Class, aspect : ClassDefinition ) : Void is do
 	   		
 	   		aspect.ownedOperation.select { o |  
@@ -431,8 +510,14 @@ class TestSuite inherits Test
 abstract class TestCase inherits Test, Fallible
 {
 
+	/**
+	 * the name of the method which corresponds to the test case in the test class
+	 */
 	attribute __testMethodName : String
 	
+	/**
+	 * accessor on the method name
+	 */
 	operation getTestMethodName(): String is
 		do
 			result := __testMethodName
@@ -443,7 +528,7 @@ abstract class TestCase inherits Test, Fallible
 	 *  TestCase that should be executed when this TestCase instance
 	 * is run as a test.
 	 * Throws invalidTestCaseNameException if the given string is not
-	 * the name of a  method in the test case
+	 * the name of a method in the test case
 	 */
 	operation setTestMethodName(name: String): TestCase is 
 		do
@@ -457,20 +542,33 @@ abstract class TestCase inherits Test, Fallible
 			end*/
 			result := self
 		end
+		
+	/**
+	 * accessor on the log
+	 */
 	method getLog(): Log is
 		do
 			result := self.log
 		end
-		
+	
+	/**
+	 * the things to be done before execution of the test method
+	 * (designed to be overwritten in real TestCase classes) 
+	 */
 	operation setUp():Void  is 
 		do
 		end
 	
+	/**
+	 * the things to be done after execution of the test method
+	 * (designed to be overwritten in real TestCase classes) 
+	 */
 	operation tearDown():Void is 
 		do
 		end
+	
 	/**
-	 * operation used when the TestrCase is run from a java test runner, encapsulates the failures results
+	 * operation used when the TestCase is run from a java test runner, encapsulates the failures results
 	 * into an AssertionFailedError so the TestRunner can detect it
 	 */
 	operation raiseIfHasFailures() : Void is 
@@ -494,6 +592,11 @@ abstract class TestCase inherits Test, Fallible
 			
 		end
 	end
+	
+	/**
+	 * Execute the whole test case : SetUp, test method, TearDown
+	 * The assertions of the test method are computed
+	 */
 	method run() is
 		do
 			getLog.newAttempt
@@ -525,6 +628,9 @@ abstract class TestCase inherits Test, Fallible
 			end
 		end
 
+	/**
+	 * overwrites the default method for more informative output
+	 */
 	method toString(): String is
 		do
 			result := self.getMetaClass.name + "." + getTestMethodName + "()"
@@ -545,6 +651,9 @@ abstract class TestCase inherits Test, Fallible
  */
 class TestRunner
 {
+	/**
+	 * Where to register the failures and errors
+	 */
 	attribute log : Log
 
 	/**

@@ -1,5 +1,6 @@
 /**
  * Contains the implementation of Kermeta reflective collections.
+ * <img src="./figures/language_package.png">
  */
 package kermeta::language;
 
@@ -9,7 +10,7 @@ require "structure.kmt"
 using kermeta::standard
 
 /* *************************************************
- * $Id: reflective_collections.kmt,v 1.10 2007-08-13 09:25:16 vmahe Exp $
+ * $Id: reflective_collections.kmt,v 1.11 2007-08-14 12:19:40 vmahe Exp $
  * Franck FLEUREY - 17/02/2005
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -20,7 +21,6 @@ using kermeta::standard
  * ReflectiveCollection is a special collection that is used to define the type 
  * of attributes that have an upper multiplicity > 1 in a class. It indeed handles
  * the update of opposite property if such an attribute has got one.
- * <img src="./figures/language_package.png">
  */
 class ReflectiveCollection<G> inherits Set<G>
 {

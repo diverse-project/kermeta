@@ -1,11 +1,4 @@
-// $Id: primitive_types.kmt,v 1.34 2007-08-13 09:25:16 vmahe Exp $
-package kermeta::standard; 
-
-require "../Standard.kmt"
-
-using kermeta::language::structure
-using kermeta::exceptions
-
+// $Id: primitive_types.kmt,v 1.35 2007-08-14 12:19:40 vmahe Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -16,28 +9,38 @@ using kermeta::exceptions
  *************************************************** */
 
 /**
+ * Defines primitive types 
+ * <img src="./figures/primitive_types_view.png">
+ */
+package kermeta::standard; 
+
+require "../Standard.kmt"
+
+using kermeta::language::structure
+using kermeta::exceptions
+
+/**
  * The class Void 
  * By convention it is a sub-type of everything
- * <img src="./figures/primitive_types_view.png">
  */
 class ~Void {
 
 	/**
-	 * 
+	 * Always true
 	 */
 	method isVoid() : Boolean is do
 		result := true
 	end
 
 	/**
-	 *
+	 * overwritten, in order to return a default informative string value
 	 */
 	method toString() : String is do
 		result := "<void>"
 	end
 	
 	/**
-	 *
+	 * Returns always true
 	 */
 	method isInstanceOf(type : kermeta::reflection::Type) : Boolean is do
 		result := true
@@ -118,7 +121,9 @@ abstract class Comparable {
 abstract class Summable<G> {
 	
 	/**
-	 *
+	 * Summarization method to be implemented by any summable class.
+	 * The parameter must have the same type (or one of its subtypes)
+	 *  than the current object .
 	 */
 	operation plus(other : G) : G is abstract
 }
@@ -137,7 +142,8 @@ class NotComparableException inherits kermeta::exceptions::Exception {
 class Boolean inherits PrimitiveType
 {
 	/**
-	 *
+	 * Returns true if <code>other</code> type is Boolean
+	 * and has the same boolean value than current object.
 	 */
 	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Boolean then  
@@ -191,7 +197,7 @@ class Boolean inherits PrimitiveType
 	end
 	
 	/**
-	 *
+	 * Returns 'true' or 'false', depending on self  value
 	 */
 	method toString() : String is do
 		result := if self then "true" else "false" end
@@ -241,7 +247,8 @@ class Integer inherits Numeric, Summable<Integer>
 	end
 
 	/**
-	 *
+	 * Returns true if <code>other</code> type is Integer or Real
+	 * and has the same numeric value than current object.
 	 */	
 	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Integer then
@@ -382,7 +389,7 @@ class Integer inherits Numeric, Summable<Integer>
 	end
 	
 	/**
-	 *
+	 * Numeric value in string format
 	 */
 	method toString() : String is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.toString(self)
@@ -456,7 +463,8 @@ class Real inherits Numeric, Summable<Real>
 	end
 
 	/**
-	 *
+	 * Returns true if <code>other</code> type is Integer or Real
+	 * and has the same numeric value than current object.
 	 */	
 	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Real then
@@ -479,7 +487,7 @@ class Real inherits Numeric, Summable<Real>
 	end
 	
 	/**
-	 *
+	 * Returns numeric value in string format
 	 */
 	method toString() : String is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.toString(self)
@@ -502,8 +510,9 @@ class Character inherits ValueType, Comparable
 	end
 
 	/**
-	 *
-	 */
+	 * Returns true if <code>other</code> type is Character
+	 * and has the same letter value than current object.
+	 */	
 	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Character then
 			result := false
@@ -513,7 +522,7 @@ class Character inherits ValueType, Comparable
 	end
 	
 	/**
-	 *
+	 * Conversion from Character to String
 	 */
 	method toString() : String is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.toString(self)
@@ -536,8 +545,9 @@ class String inherits ValueType, Comparable, Summable<String>
 	end
 
 	/**
-	 *
-	 */
+	 * Returns true if <code>other</code> type is String
+	 * and has the same string value than current object.
+	 */	
 	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != String then
 			result := false

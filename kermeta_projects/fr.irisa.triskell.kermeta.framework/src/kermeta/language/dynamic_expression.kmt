@@ -120,7 +120,7 @@ class DynamicExpression
 
 
 /**
- * To be written
+ * Kermeta language error in a code written in Kermeta
  */
 abstract class KermetaError {
 	/**
@@ -131,12 +131,12 @@ abstract class KermetaError {
 
 
 /**
- * To be written
+ * Kermeta error for parsing problems
  */
 class ParseError inherits KermetaError {}
 
 
 /**
- * To be written
+ * Type errors in a code written in Kermeta
  */
 class TypeError inherits KermetaError {}

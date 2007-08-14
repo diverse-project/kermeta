@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.51 2007-08-13 09:25:16 vmahe Exp $
+/* $Id: reflection.kmt,v 1.52 2007-08-14 12:19:40 vmahe Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Mar 14, 2006
  * Authors   : 
  *		Franck Fleurey <ffleurey@irisa.fr>
- *		Zo� Drey <zdrey@irisa.fr>
+ *		Zoe Drey <zdrey@irisa.fr>
  * 		Didier Vojtisek <dvojtise@irisa.fr>
  */
 
@@ -31,7 +31,7 @@ alias String : kermeta::standard::String;
 abstract class Object
 {
 	/**
-	 * To be written
+	 * Tags linked to the object
 	 */
 	property ownedTag : set Tag[0..*]
 
@@ -92,7 +92,7 @@ abstract class Object
 	operation isInstanceOf(type : Type) : Boolean is abstract
 	
 	/**
-	 * Implementation of OCL like cast. It returns self if the object object conforms to the type givent as parameter.
+	 * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.
 	 */
 	operation asType(type : Class) : Object is abstract
 
@@ -121,17 +121,18 @@ abstract class Object
 	operation get(~property : Property) : Object is abstract
 
 	/**
-	 * To be written
+	 * Sets the <code>element</code> to the <code>~property</code> of the object 
 	 */
 	operation ~set(~property : Property, element : Object) : Void is abstract
 
 	/**
-	 * To be written
+	 * True if the <code>~property</code> of the object has been set
 	 */
 	operation isSet(~property : Property) : Boolean is abstract
 
 	/**
-	 * To be written
+	 * Remove the element set as the <code>~property</code> of the object.
+	 * The <code>isSet(~property)</code> method will then return False
 	 */
 	operation unset(~property : Property) : Void is abstract
 
@@ -205,7 +206,7 @@ abstract class ParameterizedType inherits Type
 	attribute typeParamBinding : set TypeVariableBinding[0..*]
 
 	/**
-	 * To be written
+	 * To be written #################################
 	 */
 	attribute virtualTypeBinding : set TypeVariableBinding[0..*]
 }
@@ -287,17 +288,17 @@ abstract class Class inherits ParameterizedType
 abstract class ModelType inherits Type, TypeDefinition
 {
 	/**
-	 * To be written
+	 * To be written #######################################
 	 */
 	reference includedTypeDefinition : set TypeDefinition[0..*]
 
 	/**
-	 * To be written
+	 * To be written ##########################################
 	 */
 	operation new() : Model is abstract
 
 	/**
-	 * To be written
+	 * To be written ############################################
 	 */
 	operation isModelTypeOf(model : Model) : Boolean is abstract
 }
@@ -488,17 +489,17 @@ abstract class Property inherits MultiplicityElement
 	attribute isReadOnly : Boolean
 
 	/**
-	 * To be written
+	 * To be written #######################################
 	 */
 	attribute default : String
 
 	/**
-	 * To be written
+	 * Boolean stating whether the Property has a containment role
 	 */
 	attribute isComposite : Boolean
 
 	/**
-	 * To be written
+	 * If True, the value of the property is not stored but computed from other properties
 	 */
 	attribute isDerived : Boolean
 
@@ -524,12 +525,12 @@ abstract class TypeContainer inherits Object
 
 
 /**
- * To be written
+ * To be written #################################
  */
 abstract class VirtualTypeContainer inherits Object
 {
 	/**
-	 * To be written
+	 * To be written ##########################################
 	 */
 	attribute virtualType : set VirtualType[0..*]#modelType
 }
@@ -734,7 +735,7 @@ abstract class TypeVariable inherits TypeContainer, Type, NamedElement
 
 
 /**
- * To be written
+ * To be written ######################################
  */
 abstract class ObjectTypeVariable inherits TypeContainer, TypeVariable
 {
@@ -742,29 +743,29 @@ abstract class ObjectTypeVariable inherits TypeContainer, TypeVariable
 
 
 /**
- * To be written
+ * To be written ######################################
  */
 abstract class VirtualType inherits ObjectTypeVariable {
 
 	/**
-	 * To be written
+	 * To be written ######################################
 	 */
 	reference classDefinition : ClassDefinition[1]
 
 	/**
-	 * To be written
+	 * To be written ######################################
 	 */
 	reference modelType : VirtualTypeContainer[1]#virtualType
 
 	/**
-	 * To be written
+	 * To be written ######################################
 	 */
 	reference typeParamBinding : TypeVariableBinding[0..*]
 }
 
 
 /**
- * To be written
+ * To be written ######################################
  */
 abstract class ModelTypeVariable inherits TypeVariable, VirtualTypeContainer {
 }
@@ -827,12 +828,12 @@ abstract class Type inherits Object
 	reference typeContainer : TypeContainer[0..1]#containedType
 
 	/**
-	 * To be written
+	 * Returns a boolean stating if <code>element</code> is an instance of the type
 	 */
 	operation isInstance(element : Object) : Boolean is abstract
 
 	/**
-	 * To be written
+	 * Returns a boolean stating if the type is inherited by sub types
 	 */
 	operation hasSubType(element : Type) : Boolean is abstract
 }
@@ -863,7 +864,7 @@ abstract class TypeVariableBinding inherits TypeContainer, Object
 abstract class PrimitiveType inherits TypeContainer, DataType
 {
 	/**
-	 * To be written
+	 * The type the primitive type is linked with
 	 */
 	reference instanceType : Type
 }
@@ -953,53 +954,56 @@ abstract class ModelingUnit
 	attribute packages : set Package[0..*]
 
 	/**
-	 * To be written
+	 * Other packages the model is relied upon
 	 */
 	attribute requires : set Require[0..*]
 
 	/**
-	 * To be written
+	 * Shortcut references to packages
 	 */
 	attribute usings : set Using[0..*]
 
 	/**
-	 * To be written
+	 * To be written ####################################
 	 */
 	reference referencedModelingUnits : set ModelingUnit[0..*]
 
 	/**
-	 * To be written
+	 * Tags relied to the model
 	 */
 	attribute ownedTags : set Tag[0..*]
 }
 
 /**
- * To be written
+ * To be written ###############################
  */
 abstract class Filter
 {
+	/**
+	 * Full value of the filter, in qualified format
+	 */
 	attribute qualifiedName : String
 }
 
 /**
- * To be written
+ * Path to an outside needed model
  */
 abstract class Require inherits Object
 {
 	/**
-	 * To be written
+	 * The full pathname to the required model
 	 */
 	attribute uri : String
 }
 
 
 /**
- * To be written
+ * Abstraction for storage of syntactic shortcuts
  */
 abstract class Using inherits Object
 {
 	/**
-	 * To be written
+	 * Full value of the shortcut, in qualified format
 	 */
 	attribute qualifiedName : String
 }

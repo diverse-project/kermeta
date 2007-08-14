@@ -1,9 +1,3 @@
-package kermeta::utils;
-
-require "../Standard.kmt"
-
-using kermeta::standard
-
 /* *************************************************
  * Franck FLEUREY - 23/02/2005
  * Triskell Research Group
@@ -12,7 +6,17 @@ using kermeta::standard
  *
  * Implementation of Metacore stack types.
  *************************************************** */
- 
+
+/** 
+ * Contains special classes (Hashtable, Stack) that are not contained in Kermeta
+ * metamodel
+ */
+package kermeta::utils;
+
+require "../Standard.kmt"
+
+using kermeta::standard
+
 /**
  * An implementation of stack
  * <img src="./figures/stack_view.png">

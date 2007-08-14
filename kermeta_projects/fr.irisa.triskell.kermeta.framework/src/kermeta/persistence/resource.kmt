@@ -8,7 +8,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.33 2007-08-08 12:20:57 dtouzet Exp $
+ * $Id: resource.kmt,v 1.34 2007-08-14 12:19:40 vmahe Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -205,33 +205,33 @@ class EMFResource inherits Resource
 
 
 /**
- * To be written
+ * NOT IMPLEMENTED
  */
 class KMResource inherits Resource
 {
 	/**
- 	 * To be written
+ 	 * NOT IMPLEMENTED
  	 */
 	method save() : Void is do
 		//TODO: implement operation save
 	end
 	
 	/**
- 	 * To be written
+ 	 * NOT IMPLEMENTED
  	 */
 	method load() : Void is do
 		//TODO: implement operation load
 	end
 
 	/**
- 	 * To be written
+ 	 * NOT IMPLEMENTED
  	 */
 	method add(instance : Object) : Void is do
 		//TODO: implement operation load
 	end
 
 	/**
- 	 * To be written
+ 	 * NOT IMPLEMENTED
  	 */
 	method remove(instance : Object) : Object is do
 		//TODO: implement operation load
@@ -343,7 +343,7 @@ class EMFRepository inherits Repository
 class KMRepository inherits Repository
 {
 	/**
- 	 * To be written
+ 	 * NOT IMPLEMENTED
  	 */
 	method createResource(uri : String, mm_uri : String) : Resource is do
 		//TODO: implement operation createResource

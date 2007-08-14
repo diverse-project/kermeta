@@ -1,58 +1,77 @@
-/* $Id: assert.kmt,v 1.2 2007-07-20 15:08:39 ftanguy Exp $
+/* $Id: assert.kmt,v 1.3 2007-08-14 12:19:40 vmahe Exp $
  * Creation date: May 29, 2007
  * License:
  * Copyright:
  * Authors: Harry Lime (abstract) 
  */
 
-
+/**
+ * main features of the famous *Unit tool for Kermeta language
+ * <img src="./figures/assert_view.png">
+ */
 package kermeta::kunit;
 
 require "../Standard.kmt"
 
 using kermeta::standard
 
+/**
+ * to be written ############################
+ */
 abstract class AbstractFallible
 {
 
+    /** process the given condition and react if it is not satisfied */
     operation assert(condition: Boolean):Void is
 	  	abstract
   	
+    /**
+     * process the given condition and react with the given message
+     * if it is not satisfied
+     */
     operation assertWithMsg(condition: Boolean, msg: String):Void 	is
 	  	abstract
 
+    /** to be used if a failure reaction is needed */
 	operation fail(msg: String): Void is
 		 abstract
 		 
+    /** process the given condition and react if it is not satisfied */
 	operation assertTrue(condition: Boolean): Void is
 		abstract
 		
+    /**
+     * process the given condition and react with the given message
+     * if it is not satisfied
+     */
 	operation assertTrueWithMsg(condition: Boolean, message: String): Void is
 		abstract
 	
+    /** process the given condition and react if it is satisfied */
 	operation assertFalse(condition: Boolean): Void is
 		abstract
 		
+    /**
+     * process the given condition and react with the given message
+     * if it is satisfied
+     */
 	operation assertFalseWithMsg(condition: Boolean, message: String): Void is
 		abstract
-		 
+	
+	/** process the two given string and react if they are not equal */ 
  	operation assertEqual(expected: String, actual: String): Void is
 		abstract
 
 }
 
 
-/**
- * AssertionViolatedException are raised when assertions are violated
- */
+/** AssertionViolatedException are raised when assertions are violated */
 class AssertionFailedError inherits kermeta::exceptions::Exception { }
 
 class Assert inherits AbstractFallible
 {
 
-	/**
-	 * Fails if condition is false
-	 */
+	/** Fails if condition is false */
 	method assert(condition : Boolean) : Void is 
         do
             if not condition then 
@@ -60,9 +79,7 @@ class Assert inherits AbstractFallible
             end
         end
 	
-	/**
-	 * will fail if condition is false
-	 */
+	/** will fail if condition is false */
 	method assertTrue(condition : Boolean) : Void is 
         do
             if not condition then 
@@ -70,9 +87,7 @@ class Assert inherits AbstractFallible
             end
         end
 	
-	/**
-	 * will fail if condition is false
-	 */
+	/** will fail if condition is false */
 	method assertTrueWithMsg(condition : Boolean, msg : String) : Void is 
         do
             if not condition then 
@@ -80,9 +95,7 @@ class Assert inherits AbstractFallible
             end 
         end
 	
-	/**
-	 * will fail if condition is true
-	 */
+	/** will fail if condition is true */
 	method assertFalse(condition : Boolean) : Void is
         do
             if condition then 
@@ -90,9 +103,7 @@ class Assert inherits AbstractFallible
             end
         end
 	
-	/**
-	 * will fail if condition is true
-	 */
+	/** will fail if condition is true */
 	method assertFalseWithMsg(condition : Boolean, msg : String) : Void is
         do
             if condition then 
@@ -100,9 +111,7 @@ class Assert inherits AbstractFallible
             end 
         end
 	
-	/**
-	 * will fail if condition is false
-	 */
+	/** will fail if condition is false */
     method assertWithMsg(condition: Boolean, msg: String):Void 	is
 	  	do
             if not condition then 
@@ -110,9 +119,7 @@ class Assert inherits AbstractFallible
             end 
 		end
 
-	/**
-	 * raise a AssertionViolatedException with the provided message
-	 */
+	/** raise a AssertionViolatedException with the provided message */
 	method fail(msg: String): Void is
 		do
             var exception : AssertionFailedError init AssertionFailedError.new
@@ -120,9 +127,7 @@ class Assert inherits AbstractFallible
             raise exception
 		end
 		 
- 	/**
- 	 * Will fail if the two strings are not identical
- 	 */
+ 	/** Will fail if the two strings are not identical */
  	method assertEqual(expected: String, actual: String): Void is
 		do
 			if not expected.equals(actual) then

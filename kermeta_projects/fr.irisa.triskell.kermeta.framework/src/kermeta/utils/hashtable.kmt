@@ -1,3 +1,12 @@
+/* *************************************************
+ * Franck FLEUREY - 14/02/2005
+ * Triskell Research Group
+ * IRISA / University of Rennes 1 (France)
+ * Distributed under the terms of the EPL licence
+ *
+ * Implementation of Metacore hashtable types.
+ *************************************************** */
+ 
 /** 
  * Contains special classes (Hashtable, Stack) that are not contained in Kermeta
  * metamodel
@@ -10,15 +19,6 @@ require "../Standard.kmt"
 
 using kermeta::standard
 
-/* *************************************************
- * Franck FLEUREY - 14/02/2005
- * Triskell Research Group
- * IRISA / University of Rennes 1 (France)
- * Distributed under the terms of the EPL licence
- *
- * Implementation of Metacore hashtable types.
- *************************************************** */
- 
 /**
  * An implementation of hashtable
  * This implementation is for speed optimisation it cannot be serialized. 

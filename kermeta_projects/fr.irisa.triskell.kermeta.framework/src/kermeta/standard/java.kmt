@@ -1,5 +1,5 @@
 /**
- * $Id: java.kmt,v 1.2 2007-08-08 12:20:57 dtouzet Exp $
+ * $Id: java.kmt,v 1.3 2007-08-14 12:19:40 vmahe Exp $
  * Contains types dedicated to dealing with java objects
  */
 package kermeta::standard;
@@ -16,7 +16,7 @@ using kermeta::exceptions
 class UnknownJavaObject {
  
  	/**
- 	 *
+ 	 * NOT IMPLEMENTED
  	 */
 	method toString() : String is do
 		result := "toString of  UnknownJavaObject not implemented yet"
