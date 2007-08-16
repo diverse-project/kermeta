@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kpm:KPM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpm="http://kpm">
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.openProject"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.addMarkers"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.typecheck"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.constraintCheck"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.kmt2km"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.ecore2kmt"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.kmt"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.km"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.ecore"/>
+  <rules event="//@events.0" name="Open Project" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:NullExpression"/>
+    </in>
+    <outs action="//@actions.0">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update KMT File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
+    </in>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.6">
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.1"/>
+    </outs>
+    <outs action="//@actions.4">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.5">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.2" name="Close KMT File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
+    </in>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <events name="open"/>
+  <events name="update"/>
+  <events name="close"/>
+  <units rules="//@rules.0" value="/ModelMerging"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/org/kermeta/modelmerging/rules/ClassMatchRules.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/org/kermeta/modelmerging/rules/ClassMatchRules.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/org/kermeta/modelmerging/rules/ClassMergeRules.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/org/kermeta/modelmerging/rules/ClassMergeRules.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/org/kermeta/modelmerging/rules/OperationMatchRules.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/org/kermeta/modelmerging/rules/OperationMatchRules.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/org/kermeta/modelmerging/rules/OperationMergeRules.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/org/kermeta/modelmerging/rules/OperationMergeRules.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/org/kermeta/modelmerging/rules/PropertyMatchRules.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/org/kermeta/modelmerging/rules/PropertyMatchRules.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/org/kermeta/modelmerging/rules/PropertyMergeRules.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/org/kermeta/modelmerging/rules/PropertyMergeRules.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/org/kermeta/modelmerging/rules/debug.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/LeftInputModel.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-08-16T10:32:03.398+0200" value="/ModelMerging/kermeta/modelmerging/Matcher.kmt" dependents="//@units.16/@dependencies.2">
+    <dependencies type="//@ruleTypes.0" from="//@units.15" to="//@units.18"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.15" to="//@units.24"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.15" to="//@units.18"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.15" to="//@units.24"/>
+  </units>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-08-14T15:07:14.695+0200" value="/ModelMerging/kermeta/modelmerging/Merger.kmt" dependents="//@units.21/@dependencies.1">
+    <dependencies type="//@ruleTypes.0" from="//@units.16" to="//@units.15"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.16" to="//@units.26"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.16" to="//@units.15"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.16" to="//@units.26"/>
+  </units>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/RightInputModel.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-08-16T10:32:14.445+0200" value="/ModelMerging/kermeta/modelmerging/RuleLoader.kmt" dependents="//@units.15/@dependencies.2">
+    <dependencies type="//@ruleTypes.0" from="//@units.18" to="//@units.24"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.18" to="//@units.26"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.18" to="//@units.24"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.18" to="//@units.26"/>
+  </units>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-08-14T11:08:42.317+0200" value="/ModelMerging/kermeta/modelmerging/Utils.kmt" dependents="//@units.22/@dependencies.0 //@units.24/@dependencies.0 //@units.26/@dependencies.1"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/issues.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-08-14T11:12:29.287+0200" value="/ModelMerging/kermeta/modelmerging/loadKM.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.21" to="//@units.16"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.21" to="//@units.16"/>
+  </units>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-08-14T11:21:39.931+0200" value="/ModelMerging/kermeta/modelmerging/metamodel/GenericMatchRulesMetaModel.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.22" to="//@units.19"/>
+  </units>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/metamodel/MatchRules.sts"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-08-16T09:38:54.203+0200" value="/ModelMerging/kermeta/modelmerging/metamodel/MatchRulesMetaModel.kmt" dependents="//@units.18/@dependencies.2 //@units.15/@dependencies.3">
+    <dependencies type="//@ruleTypes.0" from="//@units.24" to="//@units.19"/>
+  </units>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/metamodel/MergeRules.sts"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-08-14T11:08:23.816+0200" value="/ModelMerging/kermeta/modelmerging/metamodel/MergeRulesMetaModel.kmt" dependents="//@units.18/@dependencies.3 //@units.16/@dependencies.3">
+    <dependencies type="//@ruleTypes.0" from="//@units.26" to="//@units.19"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.26" to="//@units.19"/>
+  </units>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/metamodel/kermeta_java.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/ClassMatchRules.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/ClassMergeRules.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/OperationMatchRules.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/OperationMatchRules.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/OperationMergeRules.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/OperationMergeRules.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/PropertyMatchRules.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/PropertyMatchRules.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/PropertyMergeRules.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/metamodel/MatchRulesMetaModel.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/metamodel/MergeRulesMetaModel.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/Merger.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/loadKM.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/MergedPackage.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/debug.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/metamodel/MergeRulesMetaModel.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/LeftInputModel.km"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/RightInputModel.km"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/ClassMergeRules.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/PropertyMergeRules.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/metamodel/MatchRulesMetaModel.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/ClassMatchRules.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/ModelMerging/kermeta/modelmerging/rules/.cvsignore"/>
+  <ruleTypes name="require"/>
+  <ruleTypes name="normal"/>
+</kpm:KPM>
