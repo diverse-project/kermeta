@@ -1,0 +1,575 @@
+package modelmerging::metamodel;
+
+require "../Utils.kmt"
+require kermeta
+
+using kermeta::reflection
+using kermeta::standard
+using modelmerging
+using kermeta::exceptions
+using kermeta::language::behavior
+
+class MergeRuleFile 
+{
+	attribute rule:MergeRule
+}
+
+
+abstract class MergeRule
+{
+
+}
+
+abstract class ClassMergeRule inherits MergeRule
+{
+	operation mergeClass(left:ClassDefinition, right:ClassDefinition) : ClassDefinition is abstract
+}
+
+abstract class PropertyMergeRule inherits MergeRule
+{
+	operation mergeProperty(left:Property, right:Property) : Property is abstract
+}
+
+abstract class OperationMergeRule inherits MergeRule
+{
+	operation mergeOperation(left:Operation, right:Operation) : Operation is abstract
+}
+
+class KeepLeftClassMergeRule inherits ClassMergeRule
+{
+	method mergeClass(left:ClassDefinition, right:ClassDefinition) : ClassDefinition is do
+		var cAux : kermeta::language::structure::ClassDefinition
+		//left.ownedAttribute.clear()
+		//left.ownedOperation.clear()
+
+		//cAux ?= left
+		stdio.writeln("+++++++++ keepLeft")
+		//result := kermeta::language::structure::ClassDefinition.clone(cAux)
+		result := Utils.new.cloneClassDefinition(left)
+		// properties and operations will be defined by their own merging rules
+	end
+}
+
+class KeepRightClassMergeRule inherits ClassMergeRule
+{
+	method mergeClass(left:ClassDefinition, right:ClassDefinition) : ClassDefinition is do
+		//var cAux : kermeta::language::structure::ClassDefinition
+		//cAux ?= right
+		//result := kermeta::language::structure::ClassDefinition.clone(cAux)
+		result := Utils.new.cloneClassDefinition(right)
+		// properties and operations will be defined by their own merging rules
+		//result.ownedAttribute.clear()
+		//result.ownedOperation.clear()
+	end
+}
+
+class CustomClassMergeRule inherits ClassMergeRule
+{
+	attribute customRules : set CustomClassRule[1..*]
+
+	method mergeClass(left:ClassDefinition, right:ClassDefinition) : ClassDefinition is do
+		var mergedClass : ClassDefinition init kermeta::language::structure::ClassDefinition.new
+		mergedClass.name := left.name // doesn't matter, both have the same name
+		// apply custom rules to define the value of each property, beware to
+		// not forget to set any property. the best should be enforce it somehow.
+		customRules.each{cr | cr.applyRule(left, right, mergedClass)}
+		result := mergedClass
+	end
+}
+
+class KeepLeftPropertyMergeRule inherits PropertyMergeRule
+{
+	method mergeProperty(left:Property, right:Property) : Property is do
+		var prop : kermeta::language::structure::Property
+		prop ?= left		
+		result := kermeta::language::structure::Property.clone(prop)
+	end
+}
+
+class KeepRightPropertyMergeRule inherits PropertyMergeRule
+{
+	method mergeProperty(left:Property, right:Property) : Property is do
+		var prop : kermeta::language::structure::Property
+		prop ?= right		
+		result := kermeta::language::structure::Property.clone(prop)
+	end
+}
+
+class CustomPropertyMergeRule inherits PropertyMergeRule
+{
+	attribute customRules : set CustomPropertyRule[1..*]
+
+	method mergeProperty(left:Property, right:Property) : Property is do
+		var mergedProperty : Property init kermeta::language::structure::Property.new
+		mergedProperty.name := left.name // doesn't matter, both have the same name
+		// apply custom rules to define the value of each property, beware to
+		// not forget to set any property. the best should be enforce it somehow.
+		customRules.each{cr | cr.applyRule(left, right, mergedProperty)}
+		result := mergedProperty
+	end
+}
+
+class KeepLeftOperationMergeRule inherits OperationMergeRule
+{
+	method mergeOperation(left:Operation, right:Operation) : Operation is do
+		var op : kermeta::language::structure::Operation
+		op ?= left		
+		result := kermeta::language::structure::Operation.clone(op)
+	end
+}
+
+class KeepRightOperationMergeRule inherits OperationMergeRule
+{
+	method mergeOperation(left:Operation, right:Operation) : Operation is do
+		var op : kermeta::language::structure::Operation
+		op ?= left		
+		result := kermeta::language::structure::Operation.clone(op)
+	end
+}
+
+class CustomOperationMergeRule inherits OperationMergeRule
+{
+	attribute customRules : set CustomOperationRule[1..*]
+
+	method mergeOperation(left:Operation, right:Operation) : Operation is do
+		var mergedOperation : Operation init kermeta::language::structure::Operation.new
+		mergedOperation.name := left.name // doesn't matter, both have the same name
+		// apply custom rules to define the value of each property, beware to
+		// not forget to set any property. the best should be enforce it somehow.
+		customRules.each{cr | cr.applyRule(left, right, mergedOperation)}
+		result := mergedOperation
+	end
+}
+
+abstract class CustomClassRule 
+{
+	attribute utils : Utils
+	operation applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is abstract
+}
+
+
+abstract class CustomPropertyRule 
+{
+	attribute utils : Utils
+	operation applyRule(left:Property, right:Property, merged:Property) is abstract
+}
+
+abstract class CustomOperationRule 
+{
+	attribute utils : Utils
+	operation applyRule(left:Operation, right:Operation, merged:Operation) is abstract
+}
+
+class KeepAbstractClass inherits CustomClassRule
+{
+	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
+		if (not left.isAbstract) and (not right.isAbstract) then
+			// if both are concrete
+			merged.isAbstract := false
+		else
+			// in the other situations, the resulting class should be abstract
+			merged.isAbstract := true		
+		end
+	end
+}
+
+class KeepConcreteClass inherits CustomClassRule
+{
+	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
+		if left.isAbstract and right.isAbstract then
+			// if both are abstract
+			merged.isAbstract := true
+		else
+			// in the other situations, the resulting class should be concrete
+			merged.isAbstract := false		
+		end
+	
+	end
+}
+
+class KeepSuperClassUnion inherits CustomClassRule
+{
+	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
+		self.utils := Utils.new
+		var c1Aux : Sequence<Class> init Sequence<Class>.new
+		c1Aux := left.superType.reject{c | right.superType.exists{d | utils.equalsType(c,d)}}
+		merged.superType.addAll(c1Aux)
+		merged.superType.addAll(right.superType)
+	end
+}
+
+class KeepSmallerSuperClassSet inherits CustomClassRule
+{
+	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
+		if left.superType.size <= right.superType.size then
+			merged.superType.addAll(left.superType)
+		else 
+			merged.superType.addAll(right.superType)
+		end
+	end
+}
+
+class KeepBiggerSuperClassSet inherits CustomClassRule
+{
+	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
+		if left.superType.size >= right.superType.size then
+			merged.superType.addAll(left.superType)
+		else 
+			merged.superType.addAll(right.superType)
+		end
+	end
+}
+
+class KeepInvariantsConjunction inherits CustomClassRule
+{
+	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
+		// AndInv policy
+		merged.~inv.addAll(Set<Constraint>.clone(left.~inv))
+		merged.~inv.addAll(Set<Constraint>.clone(left.~inv))
+	end
+}
+
+class KeepInvariantsDisjunction inherits CustomClassRule
+{
+	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
+		self.utils := Utils.new
+		if left.~inv.size > 0 and right.~inv.size > 0 then
+			var cons : kermeta::language::structure::Constraint
+			var consL : kermeta::language::structure::Constraint
+			var consR : kermeta::language::structure::Constraint
+
+			// create the or between invariants form c1 and c2
+			consL ?= utils.composeConstraintsSequence(left.~inv.asSequence, "and")
+			consR ?= utils.composeConstraintsSequence(right.~inv.asSequence, "and")
+			cons ?= utils.composeConstraints(consL, consR, "or")
+			// don't know what name to put in here...
+			cons.name := "mergedInv"
+			cons.stereotype := kermeta::language::structure::ConstraintType.~inv
+			merged.~inv.add(cons)
+		else
+			merged.~inv.addAll(Set<Constraint>.clone(left.~inv))
+			merged.~inv.addAll(Set<Constraint>.clone(right.~inv))
+		end
+	end
+}
+
+class KeepMoreSpecificType inherits CustomPropertyRule
+{
+	method applyRule(left:Property, right:Property, merged:Property) is do
+		self.utils := Utils.new
+		if utils.isSubType(left.type,right.type) then
+			// TODO check whether is needed to clone or create new type object
+			merged.type := left.type
+		else 
+			// TODO check whether is needed to clone or create new type object
+			merged.type := right.type
+		end
+	end
+}
+
+class KeepMoreGenericType inherits CustomPropertyRule
+{
+	method applyRule(left:Property, right:Property, merged:Property) is do
+		self.utils := Utils.new
+		if utils.isSubType(left.type,right.type) then
+			// TODO check whether is needed to clone or create new type object
+			merged.type := right.type
+		else 
+			// TODO check whether is needed to clone or create new type object
+			merged.type := left.type
+		end
+	end
+}
+
+class KeepSmallerMultiplicity inherits CustomPropertyRule
+{
+	method applyRule(left:Property, right:Property, merged:Property) is do
+		if left.lower >= right.lower then 
+			merged.lower := left.lower
+		else
+			merged.lower := right.lower
+		end
+		if left.upper <= right.upper then 
+			merged.upper := left.upper
+		else
+			merged.upper := right.upper
+		end
+	end
+}
+
+class KeepBiggerMultiplicity inherits CustomPropertyRule
+{
+	method applyRule(left:Property, right:Property, merged:Property) is do
+		if left.lower >= right.lower then 
+			merged.lower := right.lower
+		else
+			merged.lower := left.lower
+		end
+		if left.upper <= right.upper then 
+			merged.upper := right.upper
+		else
+			merged.upper := left.upper
+		end
+	end
+}
+
+class KeepAttribute inherits CustomPropertyRule
+{
+	method applyRule(left:Property, right:Property, merged:Property) is do
+		if (not left.isComposite) and (not right.isComposite) then
+			// if both are references, set as reference
+			merged.isComposite := false
+		else
+			// all other cases, set as attribute
+			merged.isComposite := true		
+		end
+	end
+}
+
+class KeepReference inherits CustomPropertyRule
+{
+	method applyRule(left:Property, right:Property, merged:Property) is do
+		if left.isComposite and right.isComposite then
+			// if both are attributes, set as attribute
+			merged.isComposite := true
+		else
+			// all other cases, set as reference
+			merged.isComposite := false		
+		end
+	end
+}
+
+class KeepConcreteOperation inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		if (not left.isAbstract) and (not right.isAbstract) then
+			// if both are concrete
+			merged.isAbstract := false
+		else
+			// in the other situations, the resulting operation should be abstract
+			merged.isAbstract := true		
+		end
+	end
+}
+
+class KeepAbstractOperation inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		if left.isAbstract and right.isAbstract then
+			// if both are abstract
+			merged.isAbstract := true
+		else
+			// in the other situations, the resulting operation should be concrete
+			merged.isAbstract := false		
+		end
+	end
+}
+
+class KeepMoreSpecificReturnType inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		self.utils := Utils.new
+		if utils.isSubType(left.type,right.type) then
+			// TODO check whether is needed to clone or create new type object
+			merged.type := utils.cloneType(left.type)
+		else 
+			// TODO check whether is needed to clone or create new type object
+			merged.type := utils.cloneType(right.type)
+		end	
+	end
+}
+
+class KeepMoreGenericReturnType inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		self.utils := Utils.new
+		if utils.isSubType(left.type,right.type) then
+			// TODO check whether is needed to clone or create new type object
+			merged.type := utils.cloneType(right.type)
+			merged.lower := right.lower
+			merged.upper := right.upper
+		else 
+			// TODO check whether is needed to clone or create new type object
+			merged.type := utils.cloneType(left.type)
+			merged.lower := left.lower
+			merged.upper := left.upper
+		end	
+	end
+}
+
+class KeepMoreSpecificParameters inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		// TODO devise a way to decide which parameters will be in the resulting set
+	end
+}
+
+class KeepMoreGenericParameters inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		// TODO devise a way to decide which parameters will be in the resulting set
+	end
+}
+
+class KeepBiggerParameterList inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		if  left.ownedParameter.size >=  right.ownedParameter.size then
+			merged.ownedParameter.addAll(left.ownedParameter)
+		else
+			merged.ownedParameter.addAll(right.ownedParameter)
+		end
+	end
+}
+
+class KeepSmallerParameterList inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		if  left.ownedParameter.size <=  right.ownedParameter.size then
+			merged.ownedParameter.addAll(left.ownedParameter)
+		else
+			merged.ownedParameter.addAll(right.ownedParameter)
+		end						
+	end
+}
+
+class KeepMethod inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		if left.superOperation != void then
+			if right.superOperation != void then
+				// TODO how to decide which superOperation will be kept?
+				// for now, keep the left
+				merged.superOperation := left.superOperation
+			else
+				merged.superOperation := left.superOperation
+			end
+		else
+			if right.superOperation != void then
+				merged.superOperation := right.superOperation
+			end
+		end
+	end
+}
+
+class KeepOperation inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		// TODO what to do in this case
+	end
+}
+
+class KeepExceptionsUnion inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		self.utils := Utils.new
+		var c1Aux : Sequence<Type> init Sequence<Type>.new
+		c1Aux := left.raisedException.reject{c | right.raisedException.exists{d | utils.equalsType(c,d)}}
+		merged.raisedException.addAll(c1Aux)
+		merged.raisedException.addAll(right.raisedException)
+	end
+}
+
+class KeepMoreSpecificExceptions inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		// TODO devise a way to decide which exceptions will be in the resulting set
+	end
+}
+
+class KeepMoreGenericExceptions inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		// TODO devise a way to decide which exceptions will be in the resulting set
+	end
+}
+
+class KeepPreconditionsConjunction inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		self.utils := Utils.new
+		left.~pre.each{p | merged.~pre.add(utils.cloneConstraint(p))}
+		right.~pre.each{p | merged.~pre.add(utils.cloneConstraint(p))}
+	end
+}
+
+class KeepPostconditionsConjunction inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		self.utils := Utils.new
+		left.~post.each{p | merged.~post.add(utils.cloneConstraint(p))}
+		right.~post.each{p | merged.~post.add(utils.cloneConstraint(p))}
+	end
+}
+
+class KeepPreconditionsDisjunction inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		self.utils := Utils.new
+		if left.~pre.size > 0 and right.~pre.size > 0 then
+			var cons : kermeta::language::structure::Constraint
+			var consL : kermeta::language::structure::Constraint
+			var consR : kermeta::language::structure::Constraint
+
+			// create the or between preconditions form op1 and op2
+			consL ?= utils.composeConstraintsSequence(left.~pre.asSequence, "and")
+			consR ?= utils.composeConstraintsSequence(right.~pre.asSequence, "and")
+			cons ?= utils.composeConstraints(consL, consR, "or")
+			// don't know what name to put in here...
+			cons.name := "mergedPre"
+			cons.stereotype := kermeta::language::structure::ConstraintType.~pre
+			merged.~pre.add(cons)
+		else
+			left.~pre.each{p | merged.~pre.add(utils.cloneConstraint(p))}
+			right.~pre.each{p | merged.~pre.add(utils.cloneConstraint(p))}
+		end		
+		
+	end
+}
+
+class KeepPostconditionsDisjunction inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		self.utils := Utils.new
+		// almost the same code used for preconditions, maybe there is a way to reuse it
+		if left.~post.size > 0 and right.~post.size > 0 then
+			var cons : kermeta::language::structure::Constraint
+			var consL : kermeta::language::structure::Constraint
+			var consR : kermeta::language::structure::Constraint
+
+			// create the or between preconditions form op1 and op2
+			consL ?= utils.composeConstraintsSequence(left.~post.asSequence, "and")
+			consR ?= utils.composeConstraintsSequence(right.~post.asSequence, "and")
+			cons ?= utils.composeConstraints(consL, consR, "or")
+			// don't know what name to put in here...
+			cons.name := "mergedPost"
+			cons.stereotype := kermeta::language::structure::ConstraintType.~post
+			merged.~post.add(cons)
+		else 
+			// AndPost policy: default policy
+			merged.~post.addAll(Set<Constraint>.clone(left.~post))
+			merged.~post.addAll(Set<Constraint>.clone(right.~post))
+		end
+	end
+}
+
+class KeepBodySequentialComposition inherits CustomOperationRule
+{
+	method applyRule(left:Operation, right:Operation, merged:Operation) is do
+		// merged body is the sequential composition of both operations
+		var mergedBody : Block init Block.new
+		var tmpOp : kermeta::language::structure::Operation
+		
+		tmpOp ?= left
+		if tmpOp.body != void then
+			mergedBody.statement.add(tmpOp.body)
+		end
+		tmpOp ?= right
+		if tmpOp.body != void then
+			mergedBody.statement.add(tmpOp.body)
+		end
+		var mergedOperation : kermeta::language::structure::Operation
+		mergedOperation ?= merged
+		mergedOperation.body := mergedBody
+	end
+}

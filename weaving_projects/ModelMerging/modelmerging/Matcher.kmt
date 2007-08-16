@@ -1,0 +1,132 @@
+/* $Id: Matcher.kmt,v 1.1 2007-08-16 14:54:07 rmachado Exp $
+ * Creation date: May 29, 2007
+ * License:
+ * Copyright:
+ * Authors: rafael duarte
+ */
+
+package modelmerging;
+
+require kermeta
+require "RuleLoader.kmt"
+require "metamodel/MatchRulesMetaModel.kmt"
+
+using kermeta::reflection
+using kermeta::standard
+using modelmerging::metamodel
+
+/*
+ *  Abstract class that contains the operations that every matcher 
+ *  should implement.
+ */
+abstract class AbstractMatcher
+{
+	operation initialize() is abstract
+	operation matchPackage(p1 : Package, p2: Package) : Boolean is abstract
+	operation matchClass(c1 : ClassDefinition, c2: ClassDefinition) : Boolean is abstract
+	operation matchOperation(o1 : Operation, o2: Operation) : Boolean is abstract
+	operation matchProperty(p1 : Property, p2: Property) : Boolean is abstract
+}
+
+/*
+ *  Class that implements the operations in AbstractMatcher using 
+ *  user defined rules. before using its methods, the attributes containing
+ *  the rules must me initialized
+ */
+class RuleMatcher inherits AbstractMatcher
+{
+	attribute classRules : Set<MatchRule>
+	attribute propertyRules : Set<MatchRule>
+	attribute operationRules : Set<MatchRule>
+	
+	method initialize() is do
+		var loader : RuleLoader init RuleLoader.new
+		classRules := loader.loadClassMatchRules
+		propertyRules := loader.loadPropertyMatchRules
+		operationRules := loader.loadOperationMatchRules
+	end
+	
+	/*
+	 *  returns a boolean telling whether the packages match or not
+	 */
+	method matchPackage(p1 : Package, p2: Package) : Boolean is do
+		// leave the package match fixed?
+		result := p1.name.equals(p2.name) 
+	end
+
+	/* 
+	 *  checks if two classes match
+	 */
+	method matchClass(c1 : ClassDefinition, c2: ClassDefinition) : Boolean is do
+		var matchName : Boolean init c1.name.equals(c2.name)
+		var match : Boolean init true
+		
+		if matchName then
+			self.classRules.each{r|
+				r.expression.context := Sequence<Object>.new
+				r.expression.context.add(c1)
+				r.expression.context.add(c2)
+				match := match and r.expression.evaluate()
+			}
+		end
+		
+		if matchName and not match then
+			// invalid merge, may result in 2 classes with the same name in the package
+			raise "Invalid Class Merge: " + c1.name
+		end
+		
+		result := matchName and match
+	end
+
+	/*
+	 *  checks if two operations match
+	 */
+	method matchOperation(o1 : Operation, o2: Operation) : Boolean is do
+		var matchName : Boolean init o1.name.equals(o2.name)
+		var match : Boolean init true
+		
+		if matchName then
+			self.operationRules.each{r|
+				r.expression.context := Sequence<Object>.new
+				r.expression.context.add(o1)
+				r.expression.context.add(o2)
+				stdio.writeln(">>>> before evaluation")
+				match := match and r.expression.evaluate()
+				stdio.writeln(">>>> after evaluation")
+			}
+		end
+		
+		if matchName and not match then
+			// invalid merge, may result in 2 operations with the same name in the class
+			// kermeta doesn't allow overloading
+			raise "Invalid Operation Merge: " + o1.name 
+		end
+
+		result := matchName and match
+	end
+	
+	/*
+	 *  checks if two properties match
+	 */
+	method matchProperty(p1 : Property, p2: Property) : Boolean is do
+		var matchName : Boolean init p1.name.equals(p2.name)
+		var match : Boolean init true
+		
+		if matchName then
+			self.propertyRules.each{r|
+				r.expression.context := Sequence<Object>.new
+				r.expression.context.add(p1)
+				r.expression.context.add(p2)
+				match := match and r.expression.evaluate()
+			}
+		end
+		
+		if matchName and not match then
+			// invalid merge, may result in 2 properties with the same name in the class
+			raise "Invalid Property Merge: " + p1.name 
+		end
+		
+		result := matchName and match
+	end
+
+}

@@ -1,0 +1,5 @@
+propertyRule 
+custom 
+keepMoreSpecificType 
+keepReference 
+keepSmallerMultiplicity 

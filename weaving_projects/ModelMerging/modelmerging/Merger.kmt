@@ -1,0 +1,407 @@
+/* $Id: Merger.kmt,v 1.1 2007-08-16 14:54:07 rmachado Exp $
+ * Creation date: May 29, 2007
+ * License:
+ * Copyright:
+ * Authors: rafael duarte
+ */
+
+
+package modelmerging;
+
+require kermeta
+require "Matcher.kmt"
+require "metamodel/MergeRulesMetaModel.kmt"
+
+using kermeta::reflection
+using kermeta::standard
+using kermeta::utils
+using kermeta::exceptions
+using kermeta::language::behavior
+using modelmerging::metamodel
+
+
+/*
+ *  abstract class that contains tha basic operations provided by the merger
+ *  * not sure about the necessity of this class
+ */
+abstract class AbstractMerger {
+	
+	// merge a matching pair of pacckages into one
+	operation mergePackage(pack1:Package, pack2:Package) : Package is abstract 
+	// merge a matching pair of classes into one
+	operation mergeClass(c1:ClassDefinition, c2:ClassDefinition) : ClassDefinition is abstract
+	// merge a matching pair of operations into one
+	operation mergeOperation(o1:Operation, o2:Operation) : Operation is abstract
+	// merge a matching pair of properties into one
+	operation mergeProperty(p1:Property, p2:Property) : Property is abstract
+}
+
+/*
+ *  Merger implementation based on user defined merge policies
+ */
+class DefaultMerger inherits AbstractMerger
+{
+
+	reference matcher : AbstractMatcher 
+	
+	reference classRule : ClassMergeRule
+	reference propertyRule : PropertyMergeRule
+	reference operationRule : OperationMergeRule
+	
+	// keeps record of the correspondence between previous and merged classes
+	attribute correspondingClasses : Hashtable<ClassDefinition,ClassDefinition>
+	
+	reference utils : Utils
+	
+	/* 
+	 * merges two packages recursively, creates a new package with the same name
+	 * of the matched packages and merges their sets of classes
+	 */
+	method mergePackage(pack1:Package, pack2:Package) : Package is do 
+		matcher := RuleMatcher.new
+		matcher.initialize
+		
+		utils := Utils.new
+			
+		correspondingClasses := Hashtable<ClassDefinition,ClassDefinition>.new
+		
+		/****************************************************************/
+		/************* Policies definition ******************************/
+		/****************************************************************/
+		var loader : RuleLoader init RuleLoader.new
+		self.classRule := loader.loadClassMergeRule
+		self.propertyRule := loader.loadPropertyMergeRule
+		self.operationRule := loader.loadOperationMergeRule
+
+		/****************************************************************/
+		/****************************************************************/
+
+		// creates merged package with the same name as the merging packages
+		var merged : Package init kermeta::language::structure::Package.new
+		merged.name := pack1.name
+		
+		//merged.uri := "platform:/resource/ModelMerging/MergedPackageTest.km"
+		
+		if(matcher.matchPackage(pack1,pack2)) then
+			stdio.writeln("packages have matched")
+			// merge should deal with all type definitions, not only classes
+			var classes1 : Sequence<TypeDefinition> 
+			classes1 := pack1.ownedTypeDefinition.select{c |
+				ClassDefinition.isInstance(c)
+			}
+			var classes2 : Sequence<TypeDefinition> 
+			classes2 := pack2.ownedTypeDefinition.select{c |
+				ClassDefinition.isInstance(c)
+			}
+			
+			var cAux1 : ClassDefinition
+			var cAux2 : ClassDefinition
+			
+			// takes each set of classes and if they match, include their merge
+			// in the resulting set; otherwise copy them to the resulting set (merge by union)
+			var resultingClasses : Set<ClassDefinition> init Set<ClassDefinition>.new
+			
+			classes1.each{c1 |
+				cAux1 ?= c1
+				classes2.each{c2 |
+					cAux2 ?= c2
+					if(matcher.matchClass(cAux1, cAux2)) then 
+						stdio.writeln(c1.name + "," + c2.name + " match")
+						// call merge class, match -> merge
+						var c : ClassDefinition
+						c := mergeClass(cAux1,cAux2)
+						resultingClasses.add(c)
+						
+						correspondingClasses.put(cAux1,c)
+						correspondingClasses.put(cAux2,c)
+						
+						// remove c1 and c2 from the sets
+						classes2.remove(cAux2)
+						classes1.remove(cAux1)
+						// what if more than one matching pair exists??
+						// impossible to have classes with the same name in the same package
+					else
+						stdio.writeln(c1.name + "," + c2.name + " don't match")
+					end
+					/*rescue (invalidMerge : String) 
+						stdio.writeln("**** invalid class merge detected: "
+							+ c1.name + ", " + c2.name + " ****")
+						stdio.writeln("**** left overrides ****")
+						classes2.remove(cAux2)
+						stdio.writeln("#### invalid merge, size: c1 = " + classes1.size.toString 
+								+ ", c2 = " + classes2.size.toString)
+					end*/
+				}
+			}
+
+			// there must be a better way to do this...
+			classes1.each{c |
+				cAux1 ?= c
+				resultingClasses.add(cAux1)
+			}
+			classes2.each{c |
+				cAux1 ?= c
+				resultingClasses.add(cAux1)
+			}		
+			resultingClasses.each{c |
+				merged.ownedTypeDefinition.add(c)
+			}
+		else 
+			raise "can't merge: packages don't match"
+		end
+		// review types: change references to merged types
+		//reviewTypes(merged)
+		// check conflicts involving inherited elements
+		//checkInheritanceConflicts(merged)
+		result := merged
+	
+	end
+	
+	/*
+	 * merges a pair of classes into one, following the defined policies and adds
+	 * the merge of properties and operations into the resulting class
+	 */
+	method mergeClass(c1:ClassDefinition, c2:ClassDefinition) : ClassDefinition is do
+		var mergedClass : ClassDefinition		
+		// TODO call loaded rules to perform the merging
+		mergedClass := classRule.mergeClass(c1,c2)
+		//mergedClass.ownedAttribute.clear()
+		//mergedClass.ownedOperation.clear()
+		// merge properties and operations recursively
+		mergedClass.ownedAttribute.addAll(mergePropertySet(c1.ownedAttribute,c2.ownedAttribute))
+		mergedClass.ownedOperation.addAll(mergeOperationSet(c1.ownedOperation,c2.ownedOperation))
+		// result = new class with resulting properties and operations
+		result := mergedClass
+	end
+
+	/* 
+	 * takes each set of properties and, if they match, include their merge in 
+	 * the resulting set; otherwise copy them to the resulting set (merge by union)
+	 */
+	operation mergePropertySet(properties1:Set<Property>, 
+			properties2:Set<Property>) : Set<Property> is do
+		var resultingProperties : Set<Property> init Set<Property>.new
+		// this implementation is VERY inefficient, because elements are not 
+		// removed while iterating over the collection
+		
+		properties1.each{p1|
+			properties2.each{p2|
+				if matcher.matchProperty(p1,p2) then
+					stdio.writeln(p1.name + "," + p2.name + " match")
+					resultingProperties.add(mergeProperty(p1,p2))
+					// it doesn't remove the elements from p1
+					//properties1.remove(p1)					
+					properties2.remove(p2)					
+				else
+					stdio.writeln(p1.name + "," + p2.name + " don't match")
+				end
+				/*rescue (invalidMerge : String) 
+					stdio.writeln("**** invalid property merge detected: "
+						+ p1.name + " ****")
+					stdio.writeln("**** left overrides ****")
+					properties2.remove(p2)
+				end*/
+			}
+		}
+
+		// remove merged properties from original sets, only needed for 
+		// properties1, because they weren't removed before
+		properties1 := (properties1.reject{p | 
+			resultingProperties.exists{q | matcher.matchProperty(p,q)}}).asSet
+		//properties2 := (properties2.reject{p | resultingProperties.exists{q | matcher.matchProperty(p,q)}}).asSet
+		// copy remaining (non merged) properties to the resulting property set
+		properties1.each{p | resultingProperties.add(utils.cloneProperty(p))}
+		properties2.each{p | resultingProperties.add(utils.cloneProperty(p))}
+		result := resultingProperties
+	end
+
+	/*
+	 * takes each set of operations and if they match, include their merge in 
+	 * the resulting set; otherwise copy them to the resulting set (merge by union)
+	 */
+	operation mergeOperationSet(operations1:Set<Operation>,
+			operations2:Set<Operation>) : Set<Operation> is do
+		var resultingOperations : Set<Operation> init Set<Operation>.new
+
+		operations1.each{o1 |
+			operations2.each{o2 |
+				if matcher.matchOperation(o1, o2) then
+					stdio.writeln(o1.name + "," + o2.name + " match")
+					resultingOperations.add(mergeOperation(o1,o2))
+					operations1.remove(o1)
+					operations2.remove(o2)
+				else
+					stdio.writeln(o1.name + "," + o2.name + " don't match")
+				end
+				/*rescue (invalidMerge : String) 
+					stdio.writeln("**** invalid operation merge detected " 
+						+ o1.name + "," + o2.name + "****")
+					stdio.writeln("**** left overrides ****")
+					operations2.remove(o2)
+				end*/
+			}
+		}
+		
+		// may have repeated operations?
+		operations1.each{o | 
+			resultingOperations.add(utils.cloneOperation(o))
+		}
+		operations2.each{o | 
+			resultingOperations.add(utils.cloneOperation(o))
+		}
+		result := resultingOperations
+	end
+	
+	/*
+	 * merge a matching pair of properties into one
+	 */
+	method mergeProperty(p1:Property, p2:Property) : Property is do
+		result := propertyRule.mergeProperty(p1,p2)
+	end
+	
+	/*
+	 * merge a matching pair of operations into one
+	 */
+	method mergeOperation(op1:Operation, op2:Operation) : Operation is do
+		result := operationRule.mergeOperation(op1,op2)
+	end
+
+
+	/*
+	 *  reviews types which correspond to merged classes. update pointers to
+	 *  previous classDefinitions to their new version in the merged model
+	 *  types reviewed: superclasses, property types, return types, parameter types
+	 */
+    operation reviewTypes(p : Package) is do
+    	var types : Set<TypeDefinition> init p.ownedTypeDefinition
+		var classes : Sequence<TypeDefinition> 
+		
+		classes := types.select{c |
+			ClassDefinition.isInstance(c)
+		}
+		var cAux : ClassDefinition
+		classes.each{c |
+			cAux ?= c
+			// review types from superclasses
+			cAux.superType.each{s | 
+				var cd : ClassDefinition
+				cd ?= s.typeDefinition
+				if correspondingClasses.containsKey(cd) then
+					// changes old typeDefinition, update it with reference to the merged type
+					s.typeDefinition := correspondingClasses.getValue(cd)
+				end
+			}
+			// review types from properties
+			var atts : Sequence<Property> init cAux.ownedAttribute.asSequence
+			atts.each{a | 
+				var cd : ClassDefinition
+				var c : Class
+				if Class.isInstance(a.type) and a.type != void then
+					c ?= a.type
+					cd ?= c.typeDefinition
+					if correspondingClasses.containsKey(cd) then
+						// changes reference to merged type
+						stdio.writeln("------- inside properties review if " + a.name)
+						// creates new type object (Class) and sets typeDefinition
+						// and typeContainer properties
+						// virtualTypeBinding and typeParamBinding ignored
+						var ctemp : Class init kermeta::language::structure::Class.new
+						ctemp.typeDefinition := correspondingClasses.getValue(cd)
+						ctemp.typeContainer := a
+						a.type := ctemp
+						stdio.writeln("previous = " + cd.toString)
+						stdio.writeln("new = " + ctemp.typeDefinition.toString)
+					end
+				end
+			}
+			// review return types of operations
+			var ops : Sequence<Operation> init cAux.ownedOperation.asSequence
+			ops.each{o |
+				var cd : ClassDefinition
+				var c : Class
+				if Class.isInstance(o.type) and o.type != void then
+					c ?= o.type
+					cd ?= c.typeDefinition
+					if correspondingClasses.containsKey(cd) then
+						stdio.writeln("------- inside operation review if " + o.name)
+						// changes reference to merged type
+						// virtualTypeBinding and typeParamBinding ignored
+						var ctemp : Class init kermeta::language::structure::Class.new
+						ctemp.typeDefinition := correspondingClasses.getValue(cd)
+						//ctemp.typeContainer ?= o
+						ctemp.typeContainer := c.typeContainer
+						o.type := ctemp
+						
+						//c.typeDefinition := correspondingClasses.getValue(cd)
+						stdio.writeln("previous = " + cd.toString)
+						stdio.writeln("new = " + ctemp.typeDefinition.toString)
+					end
+				end
+				// review the types of parameters
+				var params : Sequence<Parameter> init o.ownedParameter.asSequence
+				params.each{p |
+					var cdp : ClassDefinition
+					var cp : Class
+					if Class.isInstance(p.type) and p.type != void then
+						cp ?= p.type
+						cdp ?= cp.typeDefinition
+						if correspondingClasses.containsKey(cdp) then
+							stdio.writeln("------- inside parameter review if " + o.name)
+							// changes reference to merged type
+							// virtualTypeBinding and typeParamBinding ignored
+							//var ctemp : Class init kermeta::language::structure::Class.new
+							//ctemp.typeDefinition := correspondingClasses.getValue(cd)
+							//ctemp.typeContainer ?= p
+							//p.type := ctemp
+							cp.typeDefinition := correspondingClasses.getValue(cdp)
+							stdio.writeln("previous = " + cdp.toString)
+							stdio.writeln("new = " + cp.typeDefinition.toString)
+						end
+					end
+				}
+				
+			}
+		}
+    end
+
+	/*
+	 *  checks if the model composition has introduced conflicts with inherited
+	 *  members. e.g. attributes and operations with the same name in super and
+	 *  subclasses. if a conflict is detected, an exception is thrown
+	 */
+	operation checkInheritanceConflicts(p : Package) is do
+		var types : Set<TypeDefinition> init p.ownedTypeDefinition
+		var classes : Sequence<TypeDefinition> 
+		
+		classes := types.select{c |
+			ClassDefinition.isInstance(c)
+		}
+		var cAux : ClassDefinition
+		classes.each{c |
+			cAux ?= c
+			var inheritedAtt : Set<Property> init cAux.allOwnedAttribute.reject{prop | cAux.ownedAttribute.contains(prop)}.asSet
+			if cAux.ownedAttribute.exists{prop1 | inheritedAtt.exists{prop2 | prop1.name == prop2.name}} then
+				// how could this conflict be solved? 
+				// - remove property from sub or superclass
+				// - rename them
+				
+				raise "Invalid Merge - conflicts with inherited properties, inside class: " + c.name
+			end
+			
+			/*var inheritedOps : Set<Operation> init cAux.allOperation.reject{op | cAux.allOperation.contains(op)}.asSet
+			if cAux.ownedOperation.exists{op1 | 
+					inheritedOps.exists{op2 | op1.name == op2.name and op1.superOperation != void}} then
+				cAux.allOperation.each{op | stdio.writeln(op.name)}
+				// how could this conflict be solved? 
+				// - change subclass operation into a method
+				// - remove operation from sub or superclass
+				// - rename them
+				raise "Invalid Merge - conflicts with inherited operation, inside class: " + c.name
+			end*/
+
+			
+		}
+	end
+	
+	
+}

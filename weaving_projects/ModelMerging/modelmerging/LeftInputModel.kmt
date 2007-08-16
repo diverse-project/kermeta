@@ -1,0 +1,92 @@
+/* $Id: LeftInputModel.kmt,v 1.1 2007-08-16 14:54:07 rmachado Exp $
+ * Creation date: May 25, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+package Test;
+
+require kermeta
+using kermeta::standard
+using kermeta::exceptions
+
+class Class1 inherits Test2
+{
+	inv i is do att1String != "" end
+
+	attribute att1String : String
+	attribute att2Integer : Integer
+	reference propTest2: Test2
+	reference att3Test2 : Class1
+	
+	operation op1String(s : String, i : Integer) : String raises Exception
+		pre validInput1 is do s != void end
+		pre validInput2 is do i > 0 end
+		post post1 is do result != "" end
+	is do
+		if s == "" then
+//			var ex : TestException init TestException.new
+//			ex.cause := "empty String"
+			raise Exception.new
+		end
+		var i : Integer
+		i := 1 + 20 * 5
+	end
+
+	operation op2Integer(c2 : Class2) : Integer is do 
+		result := 0
+	end
+	
+}
+
+class Class2
+{
+	reference refMain : Main
+	attribute attBoolean : Boolean
+	
+	operation op1Test2(i : Integer, s : String) : Test2 is do 
+		// TODO: implement 'main' operation
+	end
+
+	operation op2Test2() : Test2 is do 
+		
+	end
+}
+
+class Main
+{
+	operation mainClass1() : Class1 is do 
+		// TODO: implement 'main' operation
+	end
+}
+
+class Test2
+{
+
+	inv inv1 is do prop1Class1 != void end
+	
+	reference prop1Class1: Class1
+	reference PropertyReal : Real
+	
+	operation opVoid() is do 
+		// TODO: implement 'main' operation
+	end
+	
+	operation opTest2() : Class1 is abstract
+		
+	operation test1Void(r : Real) 
+		pre p1 is do r > 0 end
+		post post1 is do true end
+	is do
+	end
+	
+}
+
+class TestException inherits Exception {
+	
+	attribute cause : String
+
+}

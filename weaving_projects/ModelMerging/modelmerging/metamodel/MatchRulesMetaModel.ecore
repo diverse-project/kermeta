@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="modelmerging"
+    nsURI="platform:/resource/ModelMerging/modelmerging/metamodel/MatchRulesMetaModel.ecore#/"
+    nsPrefix="modelmerging">
+  <eAnnotations source="kermeta.req">
+    <details key="platform:/resource/ModelMerging/modelmerging/Utils.kmt" value="platform:/resource/ModelMerging/modelmerging/Utils.kmt"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Utils">
+    <eOperations name="conformingClasses" eType="ecore:EDataType ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean&#xA;&#x9;if (s1.size) &lt; (s2.size) then&#xA;&#x9;&#x9;res := s1.forAll{s | s2.exists{t | conformingType(t, s)}}&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;res := s2.forAll{s | s1.exists{t | conformingType(t, s)}}&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="s1" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Class"/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="s2" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Class"/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="conformingTypes" eType="ecore:EDataType ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init true&#xA;&#x9;if (s1.size) == (s2.size) then&#xA;&#x9;&#x9;from var i : kermeta::reflection::Integer init 0&#xA;&#x9;&#x9;until ((i) &lt; (s1.size)) and (res)&#xA;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;res := conformingType(s1.elementAt(i), s2.elementAt(i))&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;res := false&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="s1" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Sequence">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Type"/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="s2" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Sequence">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Type"/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="conformingType" eType="ecore:EDataType ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init (isSubType(t1, t2)) or (isSubType(t2, t1))&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="t1" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+      <eParameters name="t2" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+    </eOperations>
+    <eOperations name="equalsClassSet" eType="ecore:EDataType ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init false&#xA;&#x9;if (s1.size) == (s2.size) then&#xA;&#x9;&#x9;res := s1.forAll{c1 | s2.exists{c2 | equalsType(c1, c2)}}&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="s1" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Class"/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="s2" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Class"/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="equalsParameters" eType="ecore:EDataType ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init true&#xA;&#x9;var ps1 : kermeta::standard::Sequence&lt;kermeta::reflection::Parameter> init p1.asSequence&#xA;&#x9;var ps2 : kermeta::standard::Sequence&lt;kermeta::reflection::Parameter> init p2.asSequence&#xA;&#x9;if ((p1.size) == (p2.size)) and ((p1.size) != (0)) then&#xA;&#x9;&#x9;from var i : kermeta::reflection::Integer init 0&#xA;&#x9;&#x9;until ((i) == ((p1.size) - (1))) and (res)&#xA;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;res := equalsParameter(ps1.elementAt(i), ps2.elementAt(i))&#xA;&#x9;&#x9;&#x9;i := (i) + (1)&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="p1" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Parameter"/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="p2" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Parameter"/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="equalsParameter" eType="ecore:EDataType ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := (p1.name.equals(p2.name)) and (equalsType(p1.type, p2.type))&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="p1" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Parameter"/>
+      <eParameters name="p2" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Parameter"/>
+    </eOperations>
+    <eOperations name="equalsType" eType="ecore:EDataType ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init false&#xA;&#x9;if (kermeta::reflection::DataType.isInstance(t1)) and (kermeta::reflection::DataType.isInstance(t2)) then&#xA;&#x9;&#x9;var d1 : kermeta::reflection::DataType&#xA;&#x9;&#x9;d1 ?= t1&#xA;&#x9;&#x9;var d2 : kermeta::reflection::DataType&#xA;&#x9;&#x9;d2 ?= t2&#xA;&#x9;&#x9;res := d1.name.equals(d2.name)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;if (kermeta::reflection::Class.isInstance(t1)) and (kermeta::reflection::Class.isInstance(t2)) then&#xA;&#x9;&#x9;&#x9;var c1 : kermeta::reflection::Class&#xA;&#x9;&#x9;&#x9;c1 ?= t1&#xA;&#x9;&#x9;&#x9;var c2 : kermeta::reflection::Class&#xA;&#x9;&#x9;&#x9;c2 ?= t2&#xA;&#x9;&#x9;&#x9;res := c1.name.equals(c2.name)&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;if (kermeta::reflection::VoidType.isInstance(t1)) and (kermeta::reflection::VoidType.isInstance(t2)) then&#xA;&#x9;&#x9;&#x9;&#x9;res := true&#xA;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;stdio.writeln(&quot;can't compare types other than Void, DataType and Class&quot;)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="t1" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+      <eParameters name="t2" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+    </eOperations>
+    <eOperations name="isSubType" eType="ecore:EDataType ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init false&#xA;&#x9;if equalsType(t1, t2) then&#xA;&#x9;&#x9;res := true&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;if (kermeta::reflection::Class.isInstance(t1)) and (kermeta::reflection::Class.isInstance(t2)) then&#xA;&#x9;&#x9;&#x9;var c1 : kermeta::reflection::Class&#xA;&#x9;&#x9;&#x9;c1 ?= t1&#xA;&#x9;&#x9;&#x9;var c2 : kermeta::reflection::Class&#xA;&#x9;&#x9;&#x9;c2 ?= t2&#xA;&#x9;&#x9;&#x9;var super1 : kermeta::standard::Set&lt;kermeta::reflection::Class> init c1.superClass&#xA;&#x9;&#x9;&#x9;res := isSuperclass(c2, super1)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="t1" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+      <eParameters name="t2" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+    </eOperations>
+    <eOperations name="isSuperclass" eType="ecore:EDataType ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init false&#xA;&#x9;if (s.isNotEqual(void)) and ((s.size) > (0)) then&#xA;&#x9;&#x9;res := s.exists{cl | cl.name.equals(c.name)}&#xA;&#x9;&#x9;if (res) == (false) then&#xA;&#x9;&#x9;&#x9;var newSuperclassSet : kermeta::standard::Set&lt;kermeta::reflection::Class> init kermeta::standard::Set&lt;kermeta::reflection::Class>.new&#xA;&#x9;&#x9;&#x9;s.each{cl | if (cl.isNotEqual(void)) and (cl.superClass.isNotEqual(void)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;newSuperclassSet.addAll(cl.superClass)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;&#x9;res := isSuperclass(c, newSuperclassSet)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="c" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Class"/>
+      <eParameters name="s" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Class"/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="cloneProperty" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var prop : kermeta::language::structure::Property&#xA;&#x9;prop ?= source&#xA;&#x9;result := kermeta::language::structure::Property.clone(prop)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="source" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+    </eOperations>
+    <eOperations name="cloneClassDefinition" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var cd : kermeta::language::structure::ClassDefinition init kermeta::language::structure::ClassDefinition.new&#xA;&#x9;cd.name := source.name&#xA;&#x9;cd.isAbstract := source.isAbstract&#xA;&#x9;cd.~inv.addAll(kermeta::standard::Set&lt;kermeta::reflection::Constraint>.clone(source.~inv))&#xA;&#x9;cd.superType.addAll(source.superType)&#xA;&#x9;result := cd&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="source" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+    </eOperations>
+    <eOperations name="cloneOperation" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Operation init kermeta::language::structure::Operation.new&#xA;&#x9;res.isAbstract := op.isAbstract&#xA;&#x9;op.ownedParameter.each{param | res.ownedParameter.add(cloneParameter(param))}&#xA;&#x9;res.name := op.name&#xA;&#x9;res.type := op.type&#xA;&#x9;res.isOrdered := op.isOrdered&#xA;&#x9;res.isUnique := op.isUnique&#xA;&#x9;res.lower := op.lower&#xA;&#x9;res.upper := op.upper&#xA;&#x9;op.~pre.each{p | res.~pre.add(cloneConstraint(p))}&#xA;&#x9;op.~post.each{p | res.~post.add(cloneConstraint(p))}&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="op" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+    </eOperations>
+    <eOperations name="cloneParameter" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Parameter">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var param : kermeta::language::structure::Parameter&#xA;&#x9;param ?= p&#xA;&#x9;result := kermeta::language::structure::Parameter.clone(param)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="p" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Parameter"/>
+    </eOperations>
+    <eOperations name="cloneConstraint" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Constraint">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var cons : kermeta::language::structure::Constraint&#xA;&#x9;cons ?= c&#xA;&#x9;result := kermeta::language::structure::Constraint.clone(cons)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="c" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Constraint"/>
+    </eOperations>
+    <eOperations name="cloneType" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Type&#xA;&#x9;if kermeta::reflection::Class.isInstance(t) then&#xA;&#x9;&#x9;var c : kermeta::language::structure::Class init kermeta::language::structure::Class.new&#xA;&#x9;&#x9;var cTemp : kermeta::language::structure::Class&#xA;&#x9;&#x9;cTemp ?= t&#xA;&#x9;&#x9;c.typeDefinition := cTemp.typeDefinition&#xA;&#x9;&#x9;c.typeContainer := cTemp.typeContainer&#xA;&#x9;&#x9;res := c&#xA;&#x9;&#x9;stdio.writeln(&quot;cloning class&quot;)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;raise &quot;Cloning doesn't support type: &quot;.plus(t.toString)&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="t" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+    </eOperations>
+    <eOperations name="composeConstraintsSequence" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Constraint">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var andExp1 : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new&#xA;&#x9;andExp1.name := operator&#xA;&#x9;var tmpExp1 : kermeta::language::behavior::Expression&#xA;&#x9;var cons : kermeta::language::structure::Constraint&#xA;&#x9;cons ?= seq1.elementAt(0)&#xA;&#x9;tmpExp1 := cons.body&#xA;&#x9;from var i : kermeta::reflection::Integer init 1&#xA;&#x9;until (i) == (seq1.size)&#xA;&#x9;loop&#xA;&#x9;&#x9;andExp1.target := tmpExp1&#xA;&#x9;&#x9;cons ?= seq1.elementAt(i)&#xA;&#x9;&#x9;andExp1.parameters.add(cons.body)&#xA;&#x9;&#x9;tmpExp1 := andExp1&#xA;&#x9;&#x9;andExp1 := kermeta::language::behavior::CallFeature.new&#xA;&#x9;&#x9;andExp1.name := operator&#xA;&#x9;&#x9;i := (i) + (1)&#xA;&#x9;end&#xA;&#x9;cons.body := tmpExp1&#xA;&#x9;result := cloneConstraint(cons)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="seq1" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Sequence">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Constraint"/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="operator" eType="ecore:EDataType ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/String"/>
+    </eOperations>
+    <eOperations name="composeConstraints" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Constraint">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var exp : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new&#xA;&#x9;exp.name := operator&#xA;&#x9;var cons : kermeta::language::structure::Constraint&#xA;&#x9;cons ?= c1&#xA;&#x9;exp.target := cons.body&#xA;&#x9;cons ?= c2&#xA;&#x9;exp.parameters.add(cons.body)&#xA;&#x9;cons := kermeta::language::structure::Constraint.new&#xA;&#x9;cons.body := exp&#xA;&#x9;result := cons&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="c1" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Constraint"/>
+      <eParameters name="c2" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Constraint"/>
+      <eParameters name="operator" eType="ecore:EDataType ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/String"/>
+    </eOperations>
+  </eClassifiers>
+  <eSubpackages name="metamodel" nsURI="platform:/resource/ModelMerging/modelmerging/metamodel/MatchRulesMetaModel.ecore/metamodel"
+      nsPrefix="metamodel">
+    <eClassifiers xsi:type="ecore:EClass" name="MatchRuleFile">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rules" ordered="false"
+          upperBound="-1" eType="#//metamodel/MatchRule" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MatchRule">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//metamodel/BooleanExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="#//metamodel/String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BooleanExpression" abstract="true">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="utils" eType="#//Utils"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="ecore:EClass ../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Sequence">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Object"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" eSuperTypes="#//metamodel/BooleanExpression">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;operand.context := self.context&#xA;&#x9;if operator.equals(&quot;not&quot;) then&#xA;&#x9;&#x9;result := not (operand.evaluate)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;raise &quot;unary operator not supported&quot;&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="1"
+          eType="#//metamodel/BooleanExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+          eType="#//metamodel/String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Predicate" abstract="true" eSuperTypes="#//metamodel/BooleanExpression">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="#//metamodel/String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ClassPredicate" abstract="true" eSuperTypes="#//metamodel/Predicate"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PropertyPredicate" abstract="true"
+        eSuperTypes="#//metamodel/Predicate"/>
+    <eClassifiers xsi:type="ecore:EClass" name="OperationPredicate" abstract="true"
+        eSuperTypes="#//metamodel/Predicate"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BinaryExpression" abstract="true"
+        eSuperTypes="#//metamodel/BooleanExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1"
+          eType="#//metamodel/BooleanExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1"
+          eType="#//metamodel/BooleanExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AndExpression" eSuperTypes="#//metamodel/BinaryExpression">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;left.context := self.context&#xA;&#x9;right.context := self.context&#xA;&#x9;result := (left.evaluate) and (right.evaluate)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OrExpression" eSuperTypes="#//metamodel/BinaryExpression">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;left.context := self.context&#xA;&#x9;right.context := self.context&#xA;&#x9;result := (left.evaluate) or (right.evaluate)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BothAbstractClasses" eSuperTypes="#//metamodel/ClassPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;var e1 : kermeta::reflection::ClassDefinition&#xA;&#x9;e1 ?= context.elementAt(0)&#xA;&#x9;var e2 : kermeta::reflection::ClassDefinition&#xA;&#x9;e2 ?= context.elementAt(1)&#xA;&#x9;result := ((e1.isAbstract) and (e2.isAbstract)) or ((not (e1.isAbstract)) and (not (e2.isAbstract)))&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SameSuperclasses" eSuperTypes="#//metamodel/ClassPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;var e1 : kermeta::reflection::ClassDefinition&#xA;&#x9;e1 ?= context.elementAt(0)&#xA;&#x9;var e2 : kermeta::reflection::ClassDefinition&#xA;&#x9;e2 ?= context.elementAt(1)&#xA;&#x9;var u : modelmerging::Utils init self.utils&#xA;&#x9;result := utils.equalsClassSet(e1.superType, e2.superType)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConformingSuperclasses" eSuperTypes="#//metamodel/ClassPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;var e1 : kermeta::reflection::ClassDefinition&#xA;&#x9;e1 ?= context.elementAt(0)&#xA;&#x9;var e2 : kermeta::reflection::ClassDefinition&#xA;&#x9;e2 ?= context.elementAt(1)&#xA;&#x9;result := utils.conformingClasses(e1.superType, e2.superType)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SameType" eSuperTypes="#//metamodel/PropertyPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;var e1 : kermeta::reflection::Property&#xA;&#x9;e1 ?= context.elementAt(0)&#xA;&#x9;var e2 : kermeta::reflection::Property&#xA;&#x9;e2 ?= context.elementAt(1)&#xA;&#x9;result := utils.equalsType(e1.type, e2.type)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConformingType" eSuperTypes="#//metamodel/PropertyPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;var e1 : kermeta::reflection::Property&#xA;&#x9;e1 ?= context.elementAt(0)&#xA;&#x9;var e2 : kermeta::reflection::Property&#xA;&#x9;e2 ?= context.elementAt(1)&#xA;&#x9;result := utils.conformingType(e1.type, e2.type)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SameMultiplicity" eSuperTypes="#//metamodel/PropertyPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;var e1 : kermeta::reflection::Property&#xA;&#x9;e1 ?= context.elementAt(0)&#xA;&#x9;var e2 : kermeta::reflection::Property&#xA;&#x9;e2 ?= context.elementAt(1)&#xA;&#x9;result := ((e1.lower) == (e2.lower)) and (e1.upper.equals(e2.upper))&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SameContainment" eSuperTypes="#//metamodel/PropertyPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;var e1 : kermeta::reflection::Property&#xA;&#x9;e1 ?= context.elementAt(0)&#xA;&#x9;var e2 : kermeta::reflection::Property&#xA;&#x9;e2 ?= context.elementAt(1)&#xA;&#x9;result := ((e1.isComposite) and (e2.isComposite)) or ((not (e1.isComposite)) and (not (e2.isComposite)))&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ContainedMultiplicity" eSuperTypes="#//metamodel/PropertyPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;var e1 : kermeta::reflection::Property&#xA;&#x9;e1 ?= context.elementAt(0)&#xA;&#x9;var e2 : kermeta::reflection::Property&#xA;&#x9;e2 ?= context.elementAt(1)&#xA;&#x9;result := (((e1.lower) >= (e2.lower)) and (e1.upper.isLowerOrEqual(e2.upper))) or (((e1.lower) &lt;= (e2.lower)) and (e1.upper.isGreaterOrEqual(e2.upper)))&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BothAbstractOperations" eSuperTypes="#//metamodel/OperationPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;var o1 : kermeta::reflection::Operation&#xA;&#x9;o1 ?= context.elementAt(0)&#xA;&#x9;var o2 : kermeta::reflection::Operation&#xA;&#x9;o2 ?= context.elementAt(1)&#xA;&#x9;result := ((o1.isAbstract) and (o2.isAbstract)) or ((not (o1.isAbstract)) and (not (o2.isAbstract)))&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SameReturnType" eSuperTypes="#//metamodel/OperationPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;var o1 : kermeta::reflection::Operation&#xA;&#x9;o1 ?= context.elementAt(0)&#xA;&#x9;var o2 : kermeta::reflection::Operation&#xA;&#x9;o2 ?= context.elementAt(1)&#xA;&#x9;result := utils.equalsType(o1.type, o2.type)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConformingReturnType" eSuperTypes="#//metamodel/OperationPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;var o1 : kermeta::reflection::Operation&#xA;&#x9;o1 ?= context.elementAt(0)&#xA;&#x9;var o2 : kermeta::reflection::Operation&#xA;&#x9;o2 ?= context.elementAt(1)&#xA;&#x9;result := utils.conformingType(o1.type, o2.type)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SameParameters" eSuperTypes="#//metamodel/OperationPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;var o1 : kermeta::reflection::Operation&#xA;&#x9;o1 ?= context.elementAt(0)&#xA;&#x9;var o2 : kermeta::reflection::Operation&#xA;&#x9;o2 ?= context.elementAt(1)&#xA;&#x9;result := utils.equalsParameters(o1.ownedParameter, o2.ownedParameter)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConformingParameters" eSuperTypes="#//metamodel/OperationPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;var o1 : kermeta::reflection::Operation&#xA;&#x9;o1 ?= context.elementAt(0)&#xA;&#x9;var o2 : kermeta::reflection::Operation&#xA;&#x9;o2 ?= context.elementAt(1)&#xA;&#x9;var paramsNames1 : kermeta::standard::Sequence&lt;kermeta::reflection::String> init o1.ownedParameter.collect{p | p.name}&#xA;&#x9;var paramsNames2 : kermeta::standard::Sequence&lt;kermeta::reflection::String> init o2.ownedParameter.collect{p | p.name}&#xA;&#x9;if paramsNames1.equals(paramsNames2) then&#xA;&#x9;&#x9;var params1 : kermeta::standard::Sequence&lt;kermeta::reflection::Type> init o1.ownedParameter.collect{p | p.type}&#xA;&#x9;&#x9;var params2 : kermeta::standard::Sequence&lt;kermeta::reflection::Type> init o2.ownedParameter.collect{p | p.type}&#xA;&#x9;&#x9;result := utils.conformingTypes(params1, params2)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := false&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ContainedParameters" eSuperTypes="#//metamodel/OperationPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;var o1 : kermeta::reflection::Operation&#xA;&#x9;o1 ?= context.elementAt(0)&#xA;&#x9;var o2 : kermeta::reflection::Operation&#xA;&#x9;o2 ?= context.elementAt(1)&#xA;&#x9;if (o1.ownedParameter.size) >= (o2.ownedParameter.size) then&#xA;&#x9;&#x9;result := o2.ownedParameter.forAll{p2 | o1.ownedParameter.exists{p1 | utils.equalsParameter(p1, p2)}}&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := o1.ownedParameter.forAll{p1 | o2.ownedParameter.exists{p2 | utils.equalsParameter(p1, p2)}}&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SameTypeOfOperation" eSuperTypes="#//metamodel/OperationPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;var o1 : kermeta::reflection::Operation&#xA;&#x9;o1 ?= context.elementAt(0)&#xA;&#x9;var o2 : kermeta::reflection::Operation&#xA;&#x9;o2 ?= context.elementAt(1)&#xA;&#x9;result := ((o1.superOperation.isNotEqual(void)) and (o2.superOperation.isNotEqual(void))) or ((o1.superOperation.equals(void)) and (o2.superOperation.equals(void)))&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SameExceptions" eSuperTypes="#//metamodel/OperationPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init false&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;var o1 : kermeta::reflection::Operation&#xA;&#x9;o1 ?= context.elementAt(0)&#xA;&#x9;var o2 : kermeta::reflection::Operation&#xA;&#x9;o2 ?= context.elementAt(1)&#xA;&#x9;if (o1.raisedException.size) == (o2.raisedException.size) then&#xA;&#x9;&#x9;if (o1.raisedException.size) == (0) then&#xA;&#x9;&#x9;&#x9;res := true&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;res := o1.raisedException.forAll{e1 | o2.raisedException.exists{e2 | self.utils.equalsType(e1, e2)}}&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConformingExceptions" eSuperTypes="#//metamodel/OperationPredicate">
+      <eOperations name="evaluate" eType="#//metamodel/Boolean">
+        <eAnnotations source="kermeta" references="#//metamodel/BooleanExpression/evaluate">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;var o1 : kermeta::reflection::Operation&#xA;&#x9;o1 ?= context.elementAt(0)&#xA;&#x9;var o2 : kermeta::reflection::Operation&#xA;&#x9;o2 ?= context.elementAt(1)&#xA;&#x9;result := utils.conformingTypes(o1.raisedException.asSequence, o2.raisedException.asSequence)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::BooleanExpression"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  </eSubpackages>
+</ecore:EPackage>

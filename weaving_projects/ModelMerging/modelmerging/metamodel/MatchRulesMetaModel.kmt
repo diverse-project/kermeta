@@ -1,0 +1,343 @@
+package modelmerging::metamodel;
+
+require "../Utils.kmt"
+
+using kermeta::reflection
+using kermeta::standard
+using modelmerging
+
+class MatchRuleFile
+{
+	attribute rules : set MatchRule[0..*]
+
+}
+
+class MatchRule
+{
+	attribute expression : BooleanExpression
+
+	reference name : kermeta::standard::String[1..1]
+	
+}
+abstract class BooleanExpression
+{
+	reference utils : Utils 
+	
+	// not type safe, had to do this way due to the lack of generics support in sintaks
+	reference context : Sequence<Object> 
+	
+	operation evaluate() : kermeta::standard::Boolean is
+		abstract
+	
+}
+class UnaryExpression inherits BooleanExpression
+{
+	attribute operand : BooleanExpression[1..1]
+
+	reference operator : kermeta::standard::String[1..1]
+	
+	method evaluate() : kermeta::standard::Boolean is do
+		operand.context := self.context
+		if operator == "not" then 
+			result := not operand.evaluate()
+		else
+			raise "unary operator not supported"
+		end
+	end
+		
+
+}
+abstract class Predicate inherits BooleanExpression
+{
+
+	reference name : kermeta::standard::String[1..1]
+
+}
+
+abstract class ClassPredicate inherits Predicate
+{
+
+}
+
+abstract class PropertyPredicate inherits Predicate
+{
+
+}
+
+abstract class OperationPredicate inherits Predicate
+{
+
+}
+
+abstract class BinaryExpression inherits BooleanExpression
+{
+	attribute left : BooleanExpression[1..1]
+
+	attribute right : BooleanExpression[1..1]
+	
+}
+class AndExpression inherits BinaryExpression
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		left.context := self.context
+		right.context := self.context
+		result := left.evaluate() and right.evaluate()
+	end
+}
+class OrExpression inherits BinaryExpression
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		left.context := self.context
+		right.context := self.context
+		result := left.evaluate() or right.evaluate()
+	end
+}
+
+
+class BothAbstractClasses inherits ClassPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		var e1:ClassDefinition
+		e1 ?= context.elementAt(0)
+		var e2:ClassDefinition
+		e2 ?= context.elementAt(1)
+		result := (e1.isAbstract() and e2.isAbstract) 
+						or (not e1.isAbstract() and not e2.isAbstract)
+	end
+}
+class SameSuperclasses inherits ClassPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		self.utils := Utils.new
+		var e1:ClassDefinition
+		e1 ?= context.elementAt(0)
+		var e2:ClassDefinition
+		e2 ?= context.elementAt(1)
+		var u : Utils init self.utils
+		result := utils.equalsClassSet(e1.superType,e2.superType)
+	end
+}
+class ConformingSuperclasses inherits ClassPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		self.utils := Utils.new
+		var e1:ClassDefinition
+		e1 ?= context.elementAt(0)
+		var e2:ClassDefinition
+		e2 ?= context.elementAt(1)
+		result := utils.conformingClasses(e1.superType, e2.superType)
+	end
+}
+/*
+2. Properties
+ - sameType
+ - conformingType*
+ - sameMultiplicity
+ - containedMultiplicity
+ - sameContainment (i.e. ref X att)
+*/
+
+class SameType inherits PropertyPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		self.utils := Utils.new
+		var e1:Property
+		e1 ?= context.elementAt(0)
+		var e2:Property
+		e2 ?= context.elementAt(1)
+		result := utils.equalsType(e1.type, e2.type)
+	end
+}
+
+
+class ConformingType inherits PropertyPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		self.utils := Utils.new
+		var e1:Property
+		e1 ?= context.elementAt(0)
+		var e2:Property
+		e2 ?= context.elementAt(1)
+		result := utils.conformingType(e1.type,e2.type)
+	end
+}
+
+
+class SameMultiplicity inherits PropertyPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		var e1:Property
+		e1 ?= context.elementAt(0)
+		var e2:Property
+		e2 ?= context.elementAt(1)
+		result := (e1.lower == e2.lower) and (e1.upper == e2.upper) 
+	end
+}
+
+class SameContainment inherits PropertyPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		var e1:Property
+		e1 ?= context.elementAt(0)
+		var e2:Property
+		e2 ?= context.elementAt(1)
+		result := (e1.isComposite and e2.isComposite) 
+							or ((not e1.isComposite) and (not e2.isComposite))
+	end
+}
+
+class ContainedMultiplicity inherits PropertyPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		var e1:Property
+		e1 ?= context.elementAt(0)
+		var e2:Property
+		e2 ?= context.elementAt(1)
+		result := (e1.lower >= e2.lower and e1.upper <= e2.upper)
+						or (e1.lower <= e2.lower and e1.upper >= e2.upper)
+	end
+}
+
+/*
+3. Operations
+ - bothAbstract
+ - sameReturnType
+ - conformingReturnType*
+ - sameParameters
+ - conformingParameters*
+ - containedParameters 
+ - sameType
+ - sameExceptions
+ - conformingExceptions
+*/
+
+class BothAbstractOperations inherits OperationPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		var o1:Operation
+		o1 ?= context.elementAt(0)
+		var o2:Operation
+		o2 ?= context.elementAt(1)
+		result := (o1.isAbstract() and o2.isAbstract) 
+						or (not o1.isAbstract() and not o2.isAbstract)
+	end
+}
+
+class SameReturnType inherits OperationPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		self.utils := Utils.new
+		var o1:Operation
+		o1 ?= context.elementAt(0)
+		var o2:Operation
+		o2 ?= context.elementAt(1)
+		result := utils.equalsType(o1.type, o2.type)
+	end
+}
+
+class ConformingReturnType inherits OperationPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		self.utils := Utils.new
+		var o1:Operation
+		o1 ?= context.elementAt(0)
+		var o2:Operation
+		o2 ?= context.elementAt(1)
+		result := utils.conformingType(o1.type, o2.type)
+	end
+}
+
+class SameParameters inherits OperationPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		self.utils := Utils.new
+		var o1:Operation
+		o1 ?= context.elementAt(0)
+		var o2:Operation
+		o2 ?= context.elementAt(1)
+		result := utils.equalsParameters(o1.ownedParameter, o2.ownedParameter)
+	end
+}
+
+class ConformingParameters inherits OperationPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		self.utils := Utils.new
+		var o1:Operation
+		o1 ?= context.elementAt(0)
+		var o2:Operation
+		o2 ?= context.elementAt(1)
+		var paramsNames1 : Sequence<String> init o1.ownedParameter.collect{p| p.name}
+		var paramsNames2 : Sequence<String> init o2.ownedParameter.collect{p| p.name}
+		if paramsNames1.equals(paramsNames2) then
+			var params1 : Sequence<Type> init o1.ownedParameter.collect{p| p.type}
+			var params2 : Sequence<Type> init o2.ownedParameter.collect{p| p.type}
+			result := utils.conformingTypes(params1, params2)
+		else
+			result := false
+		end
+	end
+}
+
+class ContainedParameters inherits OperationPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		self.utils := Utils.new
+		var o1:Operation
+		o1 ?= context.elementAt(0)
+		var o2:Operation
+		o2 ?= context.elementAt(1)
+		if o1.ownedParameter.size >= o2.ownedParameter.size then
+			// op1 contains op2 parameters
+			result := o2.ownedParameter.forAll{p2 | o1.ownedParameter.exists{p1 | utils.equalsParameter(p1,p2)}}
+		else
+			// op2 contains op1 parameters
+			result := o1.ownedParameter.forAll{p1 | o2.ownedParameter.exists{p2 | utils.equalsParameter(p1,p2)}}
+		end
+	end
+}
+
+class SameTypeOfOperation inherits OperationPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		var o1:Operation
+		o1 ?= context.elementAt(0)
+		var o2:Operation
+		o2 ?= context.elementAt(1)
+		result := (o1.superOperation != void and o2.superOperation != void)
+				    or (o1.superOperation == void and o2.superOperation == void)
+	end
+}
+
+class SameExceptions inherits OperationPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		var res : Boolean init false
+		self.utils := Utils.new
+		var o1:Operation
+		o1 ?= context.elementAt(0)
+		var o2:Operation
+		o2 ?= context.elementAt(1)
+		if o1.raisedException.size == o2.raisedException.size then
+			if o1.raisedException.size == 0 then
+				res := true
+			else
+				res := o1.raisedException.forAll{e1 | o2.raisedException.exists{e2 | self.utils.equalsType(e1,e2)}}
+			end
+		end
+		result := res
+	end
+}
+
+class ConformingExceptions inherits OperationPredicate
+{
+	method evaluate() : kermeta::standard::Boolean is do
+		self.utils := Utils.new
+		var o1:Operation
+		o1 ?= context.elementAt(0)
+		var o2:Operation
+		o2 ?= context.elementAt(1)
+		result := utils.conformingTypes(o1.raisedException.asSequence, o2.raisedException.asSequence)
+	end
+}
+

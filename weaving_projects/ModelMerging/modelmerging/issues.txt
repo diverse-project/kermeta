@@ -1,0 +1,227 @@
++----------+
+|  Issues  |
++----------+
+
+Kermeta Version 0.4.2 build 20070711, eclipse 3.2.2
+
+-> organize package hierarchy, conform to projects standard
+
+-> problems when merging classes
+   - removing properties and operations in cloned classes (because they will be 
+     defined by their specific merge operations) results in an invalid .km file
+   - a custom clone which ignores both properties and operations was implemented,
+     but it causes a strange behaviour. sometimes a valid .km is generated, sometimes
+     it is not.
+
+-> prior references to merged types are lost in the merged elements
+   - e.g. merged prop with a merged class as type
+   - happens with superclasses too
+	- keep a table with corresponding classes in merged and left and right models
+	  - reviewTypes method implemented, but doesn't work in all cases, no idea why
+	  - currently working with superclasses, properties and return types and parameters types
+	  - try to recreate Type objects -> ok, but typeContainer still poses some problems
+      - problem situated in classes that are merged, 
+	  - one of the two errors are shown as the cause of the corrupted file
+	    >> java.lang.IllegalArgumentException: The feature 'ownedParameter' is not a valid feature
+	    >> java.lang.IllegalArgumentException: The feature 'containedType' is not a valid feature
+	  
+-> reviewTypes operation corrupts the model sometimes (resulting model can't be opened)
+   - probably some problem regarding references to non existing classes 
+   
+-> check whether custom merge policies sets all metaclasses properties
+
+-> how to merge elements which matched with the conforming rule?
+   - keepMoreSpecific/MoreGeneric doesn't work well for sets
+
+-> merging classes properties and operations may introduce conflicts with elements
+   from superclasses present in only one of the classes being merged
+   - must find a way to solve it, maybe using allAttributes and allOperations
+   - OK, implemented, currently working with attributes, implemented for operations 
+     too but requires the version 0.5 of kermeta (needs "allOperations" property).
+     i'm not using it because the saving of models crashed when i tried it in this version
+     
+   - some kind of conflict solving should be defined in the future
+
+-> consider the following variations when matching & merging
+   - attribute X reference - OK
+   - operation X method - OK
+     -onlyKeepMethod works. keepOperation causes 
+       compilation error -> doesn't make sense to have this merge policy
+     - how to merge superOperations?? if two methods are going to be merged, which
+       superoperation should be kept? must be careful to be consistent with superclasses
+
+-> problem when generating .kmt from merged model .km . post conditions are inserted
+   inside the method body 
+   - i really don't know why. i've tested loading/saving a model without changing
+     it and it worked fine. i believe it must be somehow caused by a faulty .km model
+   - send it to david
+   
+-> sometimes return type information is not well saved even with framework and non merged types
+
+-> talk to didier, try to imagine a way to integrate the merging in kermeta
+
+-> add project to the cvs -> mode weaving ->
+
++-------------------------------+
+| Match predicates implemented: |
++-------------------------------+
+
+1. Classes
+ - bothAbstractClasses
+ - sameSuperclasses
+ - conformingSuperclasses
+ 
+2. Properties
+ - sameType
+ - conformingType
+ - sameMultiplicity
+ - containedMultiplicity
+ - sameContainment (i.e. reference X attribute)
+
+3. Operations
+ - bothAbstractOperations
+ - sameReturnType
+ - conformingReturnType
+ - sameParameters
+ - conformingParameters
+ - containedParameters 
+ - sameTypeOfOperation
+ - sameExceptions
+ - conformingExceptions
+
++-------------------------------+
+|    Merge rules implemented:   |
++-------------------------------+
+
+1. Classes
+ - keepConcrete
+ - keepAbstract
+ - keepSuperClassUnion
+ - keepSmallerSuperclassSet
+ - keepBiggerSuperclaaSet
+ - keepInvariantsConjunction
+ - keepInvariantsDisjunction
+ 
+ 2. Properties
+ - keepMoreSpecificType
+ - keepMoreGenericType
+ - keepSmallerMultiplicity
+ - keepBiggerMultiplicity
+ - keepAttribute
+ - keepReference
+ 
+ 3. Operations
+ - keepConcrete
+ - keepAbstract
+ - keepMoreSpecificReturnType
+ - keepMoreGenericReturnType
+ - keepMoreSpecificParameters*
+ - keepMoreGenericParameters*
+ - keepBiggerParameterList
+ - keepSmallerParameterList
+ - keepOperation
+ - keepMethod
+ - keepExceptionsUnion
+ - keepMoreSpecificExceptions*
+ - keepMoreGenericExceptions*
+ - keepPreconditionsConjunction
+ - keepPreconditionsDisjunction
+ - keepPostconditionsConjunction
+ - keepPostconditionsDisjunction
+ - keepBodySequentialComposition
+
+* still not clear how they could be implemented, more generic and specific notions
+  do not apply well to sets of types.
+
+------------------------------------------------------------------------
+--- features to consider when performing matching/merging in kermeta ---
+------------------------------------------------------------------------
++ = property taken into account when performing the matching and merging
+- = property ignored
+
+
+@ Classes
+  + abstract
+  + superclasses
+  + invariants
+  + ownedAttribute
+  + ownedOperation
+  - typeParameter
+
+@ Properties
+  + type
+  + multiplicity
+  - default
+  + isComposite
+  - isDerived
+  - isID
+  - isReadOnly
+  - opposite
+  - owningClass
+  - isOrdered
+  - isUnique
+
+@ Operations
+  + abstract
+  + returnType
+  + parameters
+  + pre
+  + post
+  + exceptions
+  + superOperation (only in the merge)
+  - typeParameters
+  - isOrdered?
+  - isUnique?
+  - multiplicity?
+  
+=========================================
+implemented/solved
+ 
+-> sintaks: could make it work only with the prefixed notation 
+
+-> granularity of merge rules, rules for each metaclass or general rules?
+  - e.g. left, right, custom for each type of metaclass 
+
+-> type comparison: how user defined types in each package are going to match? : OK 
+  +- method equalsType implemented, but works only with classes, datatypes and void
+
+-> implement different merge policies for constraints - ok
+
+-> merge operation behaviour, implement simple compositions
+   - sequential composition of operations bodies implemented
+ 
+ -> set of policies contains strings instead of elements of the enumeration 
+   - test with cvs version to see if it works now : OK
+ 
+ -> implement some kind of merge validity verification : OK
+  - if elements have the same name but don't match, throw exception. the merger then
+    must adopt some policy to deal with the conflict, for instance left model element overrides
+    - throw exception for this moment OK
+    - leave the possibility of chosing different policies to the merged element
+    
+-> does it make sense to have a match rule for contained parameters? 
+   - makes sense, add to the match and merge rules - OK, implemented
+
+-> in the merge process, elements aren't removed from their sets when they match
+  - works fine even with this issue
+
+-> type information isn't well saved in the .km file => fixed
+ 
+-> prepare presentation for 17/07 - OK
+
+-> remove predicate evaluation from the matcher code
+   - place it in different classes to facilitate extensions
+   - implemented. evaluation performed in the evaluate method, present in each
+     different predicate class.
+
+-> include exceptions in operations match/merge
+   - implemented, but raisedException property isn't loaded -> bug submitted
+   - problem solved -> must declare exceptions in the operation signature
+
+-> method isSubType doesn't work with loaded models => bug submitted
+   - implemented own version, works fine, but ignores primitive types
+   
+-> merger should also load rules. avoid hard-coding merge policies
+   - ok, implemented mergeRuleFiles
+
+   

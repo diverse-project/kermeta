@@ -1,0 +1,109 @@
+/* $Id: loadKM.kmt,v 1.1 2007-08-16 14:54:07 rmachado Exp $
+ * Creation date: May 24, 2007
+ * License:
+ * Copyright:
+ * Authors: rafael duarte (rmachado@irisa.fr)
+ */
+@mainClass "kermeta::modelmerging::ModelLoader"
+@mainOperation "main"
+
+package modelmerging;
+
+require kermeta
+
+require "Merger.kmt"
+
+//require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+using kermeta::standard
+using kermeta::persistence
+using kermeta::reflection
+
+class ModelLoader
+{
+	attribute repository : kermeta::persistence::EMFRepository 
+	
+	operation initialize() is do
+		repository := kermeta::persistence::EMFRepository.new
+	end
+	
+	operation main() : Void is do 
+		initialize
+		var pack1 : Package init loadModel("LeftInputModel.km")
+		var pack2 : Package init loadModel("RightInputModel.km")
+		//printPackage(pack1)
+		//printPackage(pack2)
+		var merger : AbstractMerger init DefaultMerger.new
+		var mergedPack : Package init merger.mergePackage(pack1, pack2)
+		stdio.writeln("### printing merged package ###")
+		printPackage(mergedPack)
+		saveModel(mergedPack, "MergedPackage.km")
+		//saveModel(pack1, "LeftInputModelAfter.km")
+		//saveModel(pack2, "RightInputModelAfter.km")
+	end
+
+	/*
+	 * loads a model (package) given its path, using kermeta as metamodel
+	 */
+    operation loadModel(path : String) : Package 
+   		pre notVoid is do not path.equals("") end
+       	pre notVoid is do path != void end
+    is do
+    	var resource : kermeta::persistence::Resource             
+       	//resource ?= repository.createResource(path, "./metamodel/kermeta_java.ecore")
+        resource := repository.getResource(path)
+        resource.load()
+        // models should only contain one package
+		result ?= resource.instances.detect{p | Package.isInstance(p)}
+   	end
+   
+   	/*
+   	 * saves a merged package as a .km file given its path
+   	 */
+	operation saveModel(p : Package, path : String) is do
+    	var resource : kermeta::persistence::Resource             
+		resource := repository.createResource(path,
+			"./metamodel/kermeta_java.ecore")
+     	resource.instances.add(p)
+     	stdio.writeln("Saving model... " + path)
+     	resource.save()
+     	stdio.writeln("Model successfully saved")
+	end
+   
+	/*
+	 * prints the contents of a package
+	 */
+   	operation printPackage(p : Package) 
+   		is do
+		stdio.writeln("### Printing package " + p.name)
+		var types : Set<TypeDefinition> init p.ownedTypeDefinition
+		var classes : Sequence<TypeDefinition> 
+		classes := types.select{c |
+			ClassDefinition.isInstance(c)
+		}
+		var cAux : ClassDefinition
+		classes.each{c |
+			stdio.writeln("-----------------------------")
+			cAux ?= c
+			stdio.writeln("  Class: " + c.name +" - abstract: " + cAux.isAbstract.toString)
+			stdio.write("   superclasses: ")
+			cAux.superType.each{c | stdio.write(c.name + " ")}
+			stdio.writeln("")
+			var atts : Sequence<Property> init cAux.ownedAttribute.asSequence
+			atts.each{a |
+				stdio.writeln("    prop: " + a.name + " : " + a.type.toString)
+			}
+			var ops : Sequence<Operation> init cAux.ownedOperation.asSequence
+			ops.each{o |
+				stdio.writeln("    oper: " + o.name + " : " + o.type.toString)
+				stdio.writeln("     num. of exceptions: " + o.raisedException.size.toString)
+				var params : Sequence<Parameter> init o.ownedParameter.asSequence
+				params.each{p |
+					stdio.writeln("      param: " + p.name + " : " + p.type.toString)
+				}
+				
+			}
+		}
+		stdio.writeln("-----------------------------")
+	end
+}
+

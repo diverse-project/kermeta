@@ -1,0 +1,80 @@
+/* $Id: RuleLoader.kmt,v 1.1 2007-08-16 14:54:07 rmachado Exp $
+ * Creation date: June 4, 2007
+ * License:
+ * Copyright:
+ * Authors: rafael duarte
+ */
+  
+package modelmerging;
+
+require kermeta
+require "metamodel/MatchRulesMetaModel.kmt"
+require "metamodel/MergeRulesMetaModel.kmt"
+
+using kermeta::standard
+using kermeta::language::structure
+using modelmerging::metamodel
+
+/*
+ *  Class that loads match rules from its xmi files
+ */
+class RuleLoader
+{
+
+	// file names should be read from configuration files
+	
+	operation loadClassMatchRules() : Set<MatchRule> is do 
+		result := loadMatchRules("rules/ClassMatchRules.xmi")
+	end
+	
+	operation loadOperationMatchRules() : Set<MatchRule> is do 
+		result := loadMatchRules("rules/OperationMatchRules.xmi")
+	end
+
+	operation loadPropertyMatchRules() : Set<MatchRule> is do 
+		result := loadMatchRules("rules/PropertyMatchRules.xmi")
+	end
+	
+	operation loadClassMergeRule() : ClassMergeRule is do 
+		// not type-safe, must be careful
+		result ?= loadMergeRules("rules/ClassMergeRules.xmi")
+	end
+	
+	operation loadPropertyMergeRule() : PropertyMergeRule is do 
+		// not type-safe, must be careful
+		result ?= loadMergeRules("rules/PropertyMergeRules.xmi")
+	end
+
+	operation loadOperationMergeRule() : OperationMergeRule is do 
+		// not type-safe, must be careful
+		result ?= loadMergeRules("rules/OperationMergeRules.xmi")
+	end
+
+	/*
+	 *  loads xmi file containig match rules and returns a MatchRuleFile object
+	 */
+	operation loadMatchRules(file : String) : Set<MatchRule> is do 
+		var resource : kermeta::persistence::Resource
+		var repository : kermeta::persistence::EMFRepository
+		init kermeta::persistence::EMFRepository.new
+        resource := repository.getResource(file)
+        resource.load()
+        var ruleFile : MatchRuleFile
+        ruleFile ?= resource.instances.detect{f | MatchRuleFile.isInstance(f)}
+        
+        result := ruleFile.rules
+	end
+
+	operation loadMergeRules(file : String) : MergeRule is do 
+		var resource : kermeta::persistence::Resource
+		var repository : kermeta::persistence::EMFRepository
+		init kermeta::persistence::EMFRepository.new
+        resource := repository.getResource(file)
+        resource.load()
+        var ruleFile : MergeRuleFile
+        ruleFile ?= resource.instances.detect{f | MergeRuleFile.isInstance(f)}
+        
+        result := ruleFile.rule
+	end
+	
+}

@@ -1,0 +1,71 @@
+package Test;
+
+require kermeta
+using kermeta::standard
+using kermeta::exceptions
+
+class Class1 inherits Test2
+{
+
+	inv i1 is do
+		true
+	end
+	
+	inv i2 is do
+		true or true
+	end
+
+	reference prop1Boolean : set Boolean[0..5]
+
+	reference prop2Integer : set Integer[0..3]
+
+	attribute att1String : String
+
+	reference att3Test2 : Test2
+
+	operation op1String(s : String, i : Integer) : String raises Exception
+		pre validInput is do s != void end
+		pre validInput is do i >= 0 end
+		post validOutput is do result != void end
+	is do
+		stdio.writeln("")
+		if s == "" then
+			raise Exception.new
+		end
+	end
+
+	operation op2SetReal(param : Test2) : set Real[0..*] is do
+	end
+
+	operation op3SetString() : Set<String> 
+		pre pre1 is do true end
+		post post1 is do result.size > 0 end
+	is do
+	end
+
+}
+class Test2
+{
+	reference refTest2: Test2
+	reference propertyReal : Real
+	
+	operation testReal(r : Real, t : Test3) : Real
+		pre notZero is do r != 0 end
+		post post1 is do false end
+	is do
+	end
+	
+	operation opTest2() : Test2 is abstract
+
+}
+class Test3 inherits Class1
+{
+
+	reference refString : String
+	reference refClass1 : Class1
+	reference referenceTest2 : Test2
+	operation Operation1(c1 : Class1) : Test3 is
+		do
+		end
+
+}

@@ -1,0 +1,97 @@
+/*
+ *  Generic metamodel for the match rules. it is not being used because sintaks
+ *  doesn't support generics. an other metamodel without it is currently being
+ *  used. i've kept this one in the case a future version of sintaks is released
+ *  with the suppot for generics.
+ */
+package modelmerging::metamodel::old;
+
+require "../Utils.kmt"
+
+using kermeta::reflection
+using kermeta::standard
+using kermeta::modelmerging
+
+class MatchRuleFile<T>
+{
+	attribute rules : set MatchRule<T>[0..*]
+
+}
+
+class MatchRule<T>
+{
+	attribute expression : BooleanExpression<T>
+
+	reference name : kermeta::standard::String[1..1]
+	
+}
+abstract class BooleanExpression<T>
+{
+	reference utils : Utils
+	
+	operation evaluate(e1:T, e2:T) : kermeta::standard::Boolean is
+		abstract
+
+}
+class UnaryExpression<T> inherits BooleanExpression<T>
+{
+	attribute operand : BooleanExpression<T>[1..1]
+
+	reference operator : kermeta::standard::String[1..1]
+	
+	method evaluate(e1:T, e2:T) : kermeta::standard::Boolean is do
+		if operator == "not" then 
+			result := not operand.evaluate(e1,e2)
+		else
+			raise "unary operator not supported"
+		end
+	end
+		
+
+}
+class Predicate<T> inherits BooleanExpression<T>
+{
+	attribute parameters : set Property[0..2]
+
+	reference name : kermeta::standard::String[1..1]
+
+}
+abstract class BinaryExpression<T> inherits BooleanExpression<T>
+{
+	attribute left : BooleanExpression<T>[1..1]
+
+	attribute right : BooleanExpression<T>[1..1]
+	
+}
+class AndExpression<T> inherits BinaryExpression<T>
+{
+	method evaluate(e1:T, e2:T) : kermeta::standard::Boolean is do
+		result := left.evaluate(e1,e2) and right.evaluate(e1,e2)
+	end
+}
+class OrExpression<T> inherits BinaryExpression<T>
+{
+	method evaluate(e1:T, e2:T) : kermeta::standard::Boolean is do
+		result := left.evaluate(e1,e2) or right.evaluate(e1,e2)
+	end
+}
+class BothAbstract inherits Predicate<ClassDefinition>
+{
+	method evaluate(e1:ClassDefinition, e2:ClassDefinition) : kermeta::standard::Boolean is do
+		result := (e1.isAbstract() and e2.isAbstract) 
+						or (not e1.isAbstract() and not e2.isAbstract)
+	end
+}
+class SameSuperclasses inherits Predicate<ClassDefinition>
+{
+	method evaluate(e1:ClassDefinition, e2:ClassDefinition) : kermeta::standard::Boolean is do
+		result := utils.equalsClassSet(e1.superType,e2.superType)
+	end
+}
+class ConformingSuperclasses inherits Predicate<ClassDefinition>
+{
+	method evaluate(e1:ClassDefinition, e2:ClassDefinition) : kermeta::standard::Boolean is do
+		result := utils.conformingClasses(e1.superType, e2.superType)
+	end
+}
+

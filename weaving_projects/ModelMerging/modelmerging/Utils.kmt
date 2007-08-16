@@ -1,0 +1,339 @@
+/* $Id: Utils.kmt,v 1.1 2007-08-16 14:54:07 rmachado Exp $
+ * Creation date: July 25, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+package modelmerging;
+
+
+require kermeta
+
+using kermeta::reflection
+using kermeta::standard
+using kermeta::language::behavior
+
+/*
+ *  contains useful methods to the matching and merging proccess
+ *
+ */
+class Utils
+{
+/*
+	 *  checks the conformance between two sets of classes 
+	 *  for each class in the smaller set,  there is at least one conforming type
+	 *  in the bigger set of classes
+	 *  TODO not sure about the correctness of this method.
+	 */
+	operation conformingClasses(s1 : Set<Class>, s2 : Set<Class>) : Boolean is do
+		var res : Boolean 
+		if s1.size < s2.size then
+			res := 
+				s1.forAll{s |
+					s2.exists{t |
+						conformingType(t,s)
+					}
+				}
+		else
+			res := 
+				s2.forAll{s |
+					s1.exists{t |
+						conformingType(t,s)
+					}
+				}
+		end
+		
+		result := res
+	end
+	
+	/*
+	 *  checks conformance between types in the order they are in the sequence
+	 */
+	operation conformingTypes(s1 : Sequence<Type>, s2 : Sequence<Type>) : Boolean is do
+		var res : Boolean init true
+		if s1.size == s2.size then
+			from var i:Integer init 0
+			until i < s1.size and res
+			loop
+				res := conformingType(s1.elementAt(i), s2.elementAt(i))
+			end
+		else
+			res := false
+		end
+		
+		result := res
+	end
+
+	/*
+	 * checks if two types are conforming, i.e. one is a superclass of the other
+	 */
+	operation conformingType(t1 : Type, t2 : Type) : Boolean is do
+		var res : Boolean init isSubType(t1,t2) or isSubType(t2,t1)
+		result := res
+	end
+	
+	/*
+	 * equals method for sets of classes
+	 */
+	operation equalsClassSet(s1 : Set<Class>, s2 : Set<Class>) : Boolean is do
+		var res : Boolean init false
+		
+		if s1.size == s2.size then
+			res := s1.forAll{c1 | s2.exists{c2 | equalsType(c1,c2)}}
+		end
+		
+		result := res
+	end
+	
+	/* 
+	 * equals method for parameters list. equals = true when they have the same
+	 * elements in the same order or when both don't have any parameters.
+	 * ** why the parameter list is a set instead of a sequence?
+	 */
+	operation equalsParameters(p1 : Set<Parameter>, p2 : Set<Parameter>) : Boolean is do
+		var res : Boolean init true
+		
+		var ps1 : Sequence<Parameter> init p1.asSequence
+		var ps2 : Sequence<Parameter> init p2.asSequence
+		
+		if p1.size == p2.size and p1.size != 0 then
+			from var i : Integer init 0
+			until i == (p1.size - 1) and res
+			loop
+				res := equalsParameter(ps1.elementAt(i),ps2.elementAt(i))
+			    i := i + 1
+			end
+		end
+		
+		result := res
+	end
+	
+	operation equalsParameter(p1 : Parameter, p2 : Parameter ) : Boolean is do
+		result := p1.name.equals(p2.name) and equalsType(p1.type, p2.type)
+	end
+	
+	/*
+	 * equals method for types, t1.equals(t2) if they have the same name or if
+	 * both are void
+	 */
+	operation equalsType(t1 : Type, t2 : Type) : Boolean is do
+		var res : Boolean init false
+		if ( DataType.isInstance(t1) and DataType.isInstance(t2) ) then
+			var d1 : DataType
+			d1 ?= t1
+			
+			var d2 : DataType
+			d2 ?= t2
+			
+			res := d1.name.equals(d2.name)
+		else 
+			if ( Class.isInstance(t1) and Class.isInstance(t2) ) then
+				var c1 : Class
+				c1 ?= t1
+				
+				var c2 : Class
+				c2 ?= t2
+				
+				res := c1.name.equals(c2.name)
+			else 
+				if VoidType.isInstance(t1) and VoidType.isInstance(t2) then
+					res := true
+				else
+					stdio.writeln("can't compare types other than Void, DataType and Class")					
+				end
+			end
+		end
+		result := res
+	end
+	
+	/*
+	 *  tells whether t1 is a subtype of t2. there are two possible cases when
+	 *  the result is true: t1 is the same type as t2 or t2 belongs to the 
+	 *  supertypes of t1.
+	 */
+	operation isSubType(t1:Type, t2:Type) : Boolean is do
+		var res : Boolean init false
+		if equalsType(t1,t2) then
+			res := true
+		else
+			if ( Class.isInstance(t1) and Class.isInstance(t2) ) then
+				var c1 : Class
+				c1 ?= t1
+				
+				var c2 : Class
+				c2 ?= t2
+				
+				var super1 : Set<Class> init c1.superClass
+				// can only discover direct subtypes. method isSuperclass isn't working fine
+				//res := super1.exists{cl | cl.name.equals(c2.name)}
+				res := isSuperclass(c2, super1)
+			/*else 
+				if ( DataType.isInstance(t1) and DataType.isInstance(t2) ) then
+					var d1 : DataType
+					d1 ?= t1
+					
+					var d2 : DataType
+					d2 ?= t2
+					
+					// in the kermeta metamodel, integer isn't a superclass of Real 
+					stdio.writeln("<><><><><> Datatypes " + d1.name + ", " + d2.name + " isSubType? " + res.toString)
+					res := d1.name.equals("Integer") and d2.name.equals("Real")
+					// character should be considered a subtype of string?
+				end*/
+			end
+		end
+		result := res
+	end
+	
+	/*
+	 *  tells if a class belongs to any of the direct ot indirect superclasses
+	 *  given by a set of classes. the method searches recursively the 
+	 *  superclasses until it is found or there are no more superclasses to 
+	 *  search
+	 */
+	operation isSuperclass(c:Class, s:Set<Class>) : Boolean is do
+		var res : Boolean init false
+		if s != void and s.size > 0 then
+			res := s.exists{cl | cl.name.equals(c.name)}
+			if res == false then
+				var newSuperclassSet : Set<Class> init Set<Class>.new
+				s.each{cl | 
+					if cl != void and cl.superClass != void then
+						newSuperclassSet.addAll(cl.superClass)
+					end
+				}
+				// recursive call with new set of superclasses
+				res := isSuperclass(c, newSuperclassSet)
+			end
+		end
+		result := res
+	end
+	
+		// had to implement some clone methods because existing ones didn't work 
+	// for all needed metaclasses, these are rather simple implementations of
+	// clone. i do believe that a more elaborated clone is needed
+	operation cloneProperty(source : Property) : Property is do
+		var prop : kermeta::language::structure::Property
+		prop ?= source		
+		result := kermeta::language::structure::Property.clone(prop)
+	end
+	/*
+	 *	selective clone, suitable for the merge once the properties and operations
+	 *  will be defined by their own merge operations
+	 */
+	operation cloneClassDefinition(source : ClassDefinition) : ClassDefinition is do
+		var cd : kermeta::language::structure::ClassDefinition 
+			init kermeta::language::structure::ClassDefinition.new
+		cd.name := source.name
+		cd.isAbstract := source.isAbstract
+		cd.~inv.addAll(Set<Constraint>.clone(source.~inv))
+		cd.superType.addAll(source.superType)
+		result := cd
+	end
+	
+	operation cloneOperation(op : Operation) : Operation is do 
+		var res : Operation init kermeta::language::structure::Operation.new
+		res.isAbstract := op.isAbstract
+		op.ownedParameter.each{param | res.ownedParameter.add(cloneParameter(param))}
+		res.name := op.name
+		res.type := op.type
+		res.isOrdered := op.isOrdered
+		res.isUnique := op.isUnique
+		res.lower := op.lower
+		res.upper := op.upper
+		op.~pre.each{p |
+			res.~pre.add(cloneConstraint(p))
+		}
+		op.~post.each{p |
+			res.~post.add(cloneConstraint(p))
+		}
+		// built-in cloning operations still don't work
+		//var oper : kermeta::language::structure::Operation
+		//oper ?= op
+		//result := kermeta::language::structure::Operation.clone(oper)
+		result := res
+	end
+	
+	operation cloneParameter(p : Parameter) : Parameter is do
+		var param : kermeta::language::structure::Parameter
+		param ?= p
+		result := kermeta::language::structure::Parameter.clone(param)
+	end
+	
+	
+	operation cloneConstraint(c : Constraint) : Constraint is do
+		var cons : kermeta::language::structure::Constraint
+		cons ?= c
+		result := kermeta::language::structure::Constraint.clone(cons)
+	end
+	
+	operation cloneType(t : Type) : Type is do
+		var res : Type
+		
+		if Class.isInstance(t) then
+			var c : kermeta::language::structure::Class 
+				init kermeta::language::structure::Class.new
+			var cTemp : kermeta::language::structure::Class 
+			cTemp ?= t
+			c.typeDefinition := cTemp.typeDefinition
+			c.typeContainer := cTemp.typeContainer 
+			res := c
+			stdio.writeln("cloning class")
+		else
+			raise "Cloning doesn't support type: " + t.toString
+		end
+		
+		result := res
+	end
+	
+	/*
+	 * compose a set of constraints using the given operator
+	 * ex. compose(<c1,c2,c3>, "and") = c1 and c2 and c3
+	 */
+	operation composeConstraintsSequence(seq1 : Sequence<Constraint>, 
+			operator : String) : Constraint is do
+		var andExp1 : CallFeature init CallFeature.new
+		andExp1.name := operator
+		var tmpExp1 : Expression
+		var cons : kermeta::language::structure::Constraint 
+
+		cons ?= seq1.elementAt(0)
+		tmpExp1 := cons.body
+
+		from var i : Integer init 1
+		until i == seq1.size
+		loop
+			andExp1.target := tmpExp1
+			cons ?= seq1.elementAt(i)
+			andExp1.parameters.add(cons.body)
+			tmpExp1 := andExp1
+			andExp1 := CallFeature.new
+			andExp1.name := operator
+		    i := i + 1
+		end 
+
+		cons.body := tmpExp1
+		result := cloneConstraint(cons)
+	end
+	
+	/*
+	 * compose two constraints using the given operator
+	 * ex. compose(c1,c2, "and") = c1 and c2
+	 */
+	operation composeConstraints(c1 : Constraint, c2 : Constraint,
+			operator : String) : Constraint is do
+		var exp : CallFeature init CallFeature.new
+		exp.name := operator
+		var cons : kermeta::language::structure::Constraint 
+		cons ?= c1
+		exp.target := cons.body
+		cons ?= c2
+		exp.parameters.add(cons.body)
+		
+		cons := kermeta::language::structure::Constraint.new
+		cons.body := exp
+		result := cons
+	end
+	
+	
+}

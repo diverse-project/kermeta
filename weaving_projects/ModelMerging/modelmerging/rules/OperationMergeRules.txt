@@ -1,0 +1,7 @@
+operationRule 
+custom 
+keepMoreGenericReturnType 
+keepConcrete 
+keepExceptionsUnion 
+keepBiggerParameterList 
+keepMethod 

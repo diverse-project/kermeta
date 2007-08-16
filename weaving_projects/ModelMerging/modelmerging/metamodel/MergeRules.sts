@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sts:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:sts="http://www.kermeta.org/Sts" start="//@fragments.0">
+  <fragments xsi:type="sts:Template" id="MergeRuleFile">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/MergeRuleFile"/>
+    <rule xsi:type="sts:RuleRef" ref="//@fragments.1">
+      <features xsi:type="ecore:EReference" href="MergeRulesMetaModel.ecore#//metamodel/MergeRuleFile/rule"/>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="MergeRule">
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" id="" ref="//@fragments.42"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/ClassMergeRule"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" id="" ref="//@fragments.43"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/PropertyMergeRule"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" id="" ref="//@fragments.44"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/OperationMergeRule"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepLeftClassMergeRule">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepLeftClassMergeRule"/>
+    <rule xsi:type="sts:Terminal" terminal="keepLeft"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepRightClassMergeRule">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepRightClassMergeRule"/>
+    <rule xsi:type="sts:Terminal" terminal="keepRight"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="CustomClassMergeRule">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/CustomClassMergeRule"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="" terminal="custom"/>
+      <subRules xsi:type="sts:Iteration">
+        <subRule xsi:type="sts:Sequence">
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.48"/>
+          <subRules xsi:type="sts:Adornment" terminal="eoln"/>
+        </subRule>
+        <container xsi:type="ecore:EReference" href="MergeRulesMetaModel.ecore#//metamodel/CustomClassMergeRule/customRules"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepAbstractClass">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepAbstractClass"/>
+    <rule xsi:type="sts:Terminal" terminal="keepAbstract"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepConcreteClass">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepConcreteClass"/>
+    <rule xsi:type="sts:Terminal" terminal="keepConcrete"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepSuperClassUnion">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepSuperClassUnion"/>
+    <rule xsi:type="sts:Terminal" terminal="keepSuperClassUnion"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepSmallerSuperClassSet">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepSmallerSuperClassSet"/>
+    <rule xsi:type="sts:Terminal" terminal="keepSmallerSuperClassSet"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepBiggerSuperClassSet">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepBiggerSuperClassSet"/>
+    <rule xsi:type="sts:Terminal" terminal="keepBiggerSuperClassSet"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepInvariantsConjunction">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepInvariantsConjunction"/>
+    <rule xsi:type="sts:Terminal" terminal="keepInvariantsConjunction"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepInvariantsDisjunction">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepInvariantsDisjunction"/>
+    <rule xsi:type="sts:Terminal" terminal="keepInvariantsDisjunction"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepLeftPropertyMergeRule">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepLeftPropertyMergeRule"/>
+    <rule xsi:type="sts:Terminal" terminal="keepLeft"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepRightPropertyMergeRule">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepRightPropertyMergeRule"/>
+    <rule xsi:type="sts:Terminal" terminal="keepRight"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="CustomPropertyMergeRule">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/CustomPropertyMergeRule"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="" terminal="custom"/>
+      <subRules xsi:type="sts:Iteration">
+        <subRule xsi:type="sts:Sequence">
+          <subRules xsi:type="sts:RuleRef" ref="//@fragments.49"/>
+          <subRules xsi:type="sts:Adornment" terminal="eoln"/>
+        </subRule>
+        <container xsi:type="ecore:EReference" href="MergeRulesMetaModel.ecore#//metamodel/CustomPropertyMergeRule/customRules"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepMoreSpecificType">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreSpecificType"/>
+    <rule xsi:type="sts:Terminal" terminal="keepMoreSpecificType"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepMoreGenericType">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreGenericType"/>
+    <rule xsi:type="sts:Terminal" terminal="keepMoreGenericType"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepSmallerMultiplicity">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepSmallerMultiplicity"/>
+    <rule xsi:type="sts:Terminal" terminal="keepSmallerMultiplicity"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepBiggerMultiplicity">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepBiggerMultiplicity"/>
+    <rule xsi:type="sts:Terminal" terminal="keepBiggerMultiplicity"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepAttribute">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepAttribute"/>
+    <rule xsi:type="sts:Terminal" terminal="keepAttribute"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepReference">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepReference"/>
+    <rule xsi:type="sts:Terminal" terminal="keepReference"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepLeftOperationMergeRule">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepLeftOperationMergeRule"/>
+    <rule xsi:type="sts:Terminal" terminal="keepLeft"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepRightOperationMergeRule">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepRightOperationMergeRule"/>
+    <rule xsi:type="sts:Terminal" terminal="keepRight"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="CustomOperationMergeRule">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/CustomOperationMergeRule"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="" terminal="custom"/>
+      <subRules xsi:type="sts:Iteration">
+        <subRule xsi:type="sts:RuleRef" ref="//@fragments.50"/>
+        <container xsi:type="ecore:EReference" href="MergeRulesMetaModel.ecore#//metamodel/CustomOperationMergeRule/customRules"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepConcreteOperation">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepConcreteOperation"/>
+    <rule xsi:type="sts:Terminal" terminal="keepConcrete"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepAbstractOperation">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepAbstractOperation"/>
+    <rule xsi:type="sts:Terminal" terminal="keepAbstract"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepMoreSpecificReturnType">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreSpecificReturnType"/>
+    <rule xsi:type="sts:Terminal" terminal="keepMoreSpecificReturnType"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepMoreGenericReturnType">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreGenericReturnType"/>
+    <rule xsi:type="sts:Terminal" terminal="keepMoreGenericReturnType"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepMoreSpecificParameters">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreSpecificParameters"/>
+    <rule xsi:type="sts:Terminal" terminal="keepMoreSpecificParameters"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepMoreGenericParameters">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreGenericParameters"/>
+    <rule xsi:type="sts:Terminal" terminal="keepMoreGenericParameters"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepBiggerParameterList">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepBiggerParameterList"/>
+    <rule xsi:type="sts:Terminal" terminal="keepBiggerParameterList"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepSmallerParameterList">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepSmallerParameterList"/>
+    <rule xsi:type="sts:Terminal" terminal="keepSmallerParameterList"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepMethod">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMethod"/>
+    <rule xsi:type="sts:Terminal" terminal="keepMethod"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepOperation">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepOperation"/>
+    <rule xsi:type="sts:Terminal" terminal="keepOperation"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepExceptionsUnion">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepExceptionsUnion"/>
+    <rule xsi:type="sts:Terminal" terminal="keepExceptionsUnion"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepMoreSpecificExceptions">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreSpecificExceptions"/>
+    <rule xsi:type="sts:Terminal" terminal="keepMoreSpecificExceptions"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepMoreGenericExceptions">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreGenericExceptions"/>
+    <rule xsi:type="sts:Terminal" terminal="keepMoreGenericExceptions"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepPostConditionsDisjunction">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepPostconditionsDisjunction"/>
+    <rule xsi:type="sts:Terminal" terminal="keepPostconditionsDisjunction"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepPostconditionsConjunction">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepPostconditionsConjunction"/>
+    <rule xsi:type="sts:Terminal" terminal="keepPostconditionsConjunction"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepPreconditionsConjunction">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepPreconditionsConjunction"/>
+    <rule xsi:type="sts:Terminal" terminal="keepPreconditionsConjunction"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepPreconditionsDisjunction">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepPreconditionsDisjunction"/>
+    <rule xsi:type="sts:Terminal" terminal="keepPreconditionsDisjunction"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="KeepBodySequentialComposition">
+    <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepBodySequentialComposition"/>
+    <rule xsi:type="sts:Terminal" terminal="keepBodySequentialComposition"/>
+  </fragments>
+  <fragments xsi:type="sts:Sequence" id="ClassMergeRule">
+    <subRules xsi:type="sts:Terminal" terminal="classRule"/>
+    <subRules xsi:type="sts:Adornment" terminal="eoln"/>
+    <subRules xsi:type="sts:RuleRef" ref="//@fragments.45"/>
+  </fragments>
+  <fragments xsi:type="sts:Sequence" id="PropertyMergeRule">
+    <subRules xsi:type="sts:Terminal" terminal="propertyRule"/>
+    <subRules xsi:type="sts:Adornment" terminal="eoln"/>
+    <subRules xsi:type="sts:RuleRef" ref="//@fragments.46"/>
+  </fragments>
+  <fragments xsi:type="sts:Sequence" id="OperationMergeRule">
+    <subRules xsi:type="sts:Terminal" terminal="operationRule"/>
+    <subRules xsi:type="sts:Adornment" terminal="eoln"/>
+    <subRules xsi:type="sts:RuleRef" ref="//@fragments.47"/>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="ClassMergeRules">
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.2"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepLeftClassMergeRule"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.3"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepRightClassMergeRule"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.4"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/CustomClassMergeRule"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="PropertyMergeRules">
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.12"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepLeftPropertyMergeRule"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.13"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepRightPropertyMergeRule"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.14"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/CustomPropertyMergeRule"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="OperationMergeRules">
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.21"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepLeftOperationMergeRule"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.22"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepRightOperationMergeRule"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.23"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/CustomOperationMergeRule"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="CustomClassRules">
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.5"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepAbstractClass"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.6"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepConcreteClass"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.7"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepSuperClassUnion"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.8"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepSmallerSuperClassSet"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.9"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepBiggerSuperClassSet"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.10"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepInvariantsConjunction"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.11"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepInvariantsDisjunction"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="CustomPropertyRules">
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.15"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreSpecificType"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.16"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreGenericType"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.17"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepSmallerMultiplicity"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.18"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepBiggerMultiplicity"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.19"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepAttribute"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.20"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepReference"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="CustomOperationRules">
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.24"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepConcreteOperation"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.25"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepAbstractOperation"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.26"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreSpecificReturnType"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.27"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreGenericReturnType"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.28"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreSpecificParameters"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.29"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreGenericParameters"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.30"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepBiggerParameterList"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.32"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMethod"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.33"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepOperation"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.34"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepExceptionsUnion"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.35"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreSpecificExceptions"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.36"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepMoreGenericExceptions"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.38"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepPostconditionsConjunction"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.37"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepPostconditionsDisjunction"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.39"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepPreconditionsConjunction"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.40"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepPreconditionsDisjunction"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.41"/>
+      <metaclass href="MergeRulesMetaModel.ecore#//metamodel/KeepBodySequentialComposition"/>
+    </conditions>
+  </fragments>
+</sts:Root>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sts:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:sts="http://www.kermeta.org/Sts" start="//@fragments.0">
+  <fragments xsi:type="sts:Template" id="file">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/MatchRuleFile"/>
+    <rule xsi:type="sts:Iteration" id="">
+      <subRule xsi:type="sts:RuleRef" id="@ MatchRule" ref="//@fragments.1"/>
+      <container xsi:type="ecore:EReference" href="MatchRulesMetaModel.ecore#//metamodel/MatchRuleFile/rules"/>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="MatchRule">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/MatchRule"/>
+    <rule xsi:type="sts:Sequence" id="">
+      <subRules xsi:type="sts:Terminal" terminal="rule"/>
+      <subRules xsi:type="sts:PrimitiveValue" id="">
+        <features xsi:type="ecore:EAttribute" href="MatchRulesMetaModel.ecore#//metamodel/MatchRule/name"/>
+      </subRules>
+      <subRules xsi:type="sts:RuleRef" id="@ bExpression" ref="//@fragments.2">
+        <features xsi:type="ecore:EReference" href="MatchRulesMetaModel.ecore#//metamodel/MatchRule/expression"/>
+      </subRules>
+      <subRules xsi:type="sts:Adornment" id="" terminal="eoln" lexicalSeparator="true"/>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="bExpression">
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" id="@ UnaryExpression" ref="//@fragments.4"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/UnaryExpression"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" id="@ Predicate" ref="//@fragments.6"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/Predicate"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="AndExpression">
+      <subRule xsi:type="sts:RuleRef" id="@ AndExpression" ref="//@fragments.3"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/AndExpression"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="OrExpression">
+      <subRule xsi:type="sts:RuleRef" id="@ OrExpression" ref="//@fragments.5"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/OrExpression"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="AndExpression">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/AndExpression"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="and" terminal="and"/>
+      <subRules xsi:type="sts:Terminal" id="(" terminal="("/>
+      <subRules xsi:type="sts:RuleRef" id="@ left" ref="//@fragments.2">
+        <features xsi:type="ecore:EReference" href="MatchRulesMetaModel.ecore#//metamodel/BinaryExpression/left"/>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" id="," terminal=","/>
+      <subRules xsi:type="sts:RuleRef" id="@ right" ref="//@fragments.2">
+        <features xsi:type="ecore:EReference" href="MatchRulesMetaModel.ecore#//metamodel/BinaryExpression/right"/>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" id="(" terminal=")"/>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="UnaryExpression">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/UnaryExpression"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="not" terminal="not"/>
+      <subRules xsi:type="sts:Terminal" id="(" terminal="("/>
+      <subRules xsi:type="sts:RuleRef" id="@ bExpression" ref="//@fragments.2">
+        <features xsi:type="ecore:EReference" href="MatchRulesMetaModel.ecore#//metamodel/UnaryExpression/operand"/>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" id=")" terminal=")"/>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="OrExpression">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/OrExpression"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="or" terminal="or"/>
+      <subRules xsi:type="sts:Terminal" id="(" terminal="("/>
+      <subRules xsi:type="sts:RuleRef" id="@ left" ref="//@fragments.2">
+        <features xsi:type="ecore:EReference" href="MatchRulesMetaModel.ecore#//metamodel/BinaryExpression/left"/>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" id="," terminal=","/>
+      <subRules xsi:type="sts:RuleRef" id="@ right" ref="//@fragments.2">
+        <features xsi:type="ecore:EReference" href="MatchRulesMetaModel.ecore#//metamodel/BinaryExpression/right"/>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" id="(" terminal=")"/>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="Predicate">
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.7"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ClassPredicate"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.8"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/PropertyPredicate"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.9"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/OperationPredicate"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="ClassPredicate">
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.11"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/BothAbstractClasses"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.12"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ConformingSuperclasses"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.10"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameSuperclasses"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="PropertyPredicate">
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.13"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameType"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.14"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ConformingType"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.15"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameMultiplicity"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.16"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ContainedMultiplicity"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.17"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameContainment"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="OperationPredicate">
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" id="" ref="//@fragments.18"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/BothAbstractOperations"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.19"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameReturnType"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.20"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ConformingReturnType"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.21"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameParameters"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.22"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ConformingParameters"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.23"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ContainedParameters"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.24"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameTypeOfOperation"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" id="" ref="//@fragments.25"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameExceptions"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.26"/>
+      <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ConformingExceptions"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="SameSuperclasses">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameSuperclasses"/>
+    <rule xsi:type="sts:Terminal" id="" terminal="sameSuperclasses"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="BothAbstractClasses">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/BothAbstractClasses"/>
+    <rule xsi:type="sts:Terminal" terminal="bothAbstractClasses"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="ConformingSuperclasses">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ConformingSuperclasses"/>
+    <rule xsi:type="sts:Terminal" terminal="conformingSuperclasses"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="SameType">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameType"/>
+    <rule xsi:type="sts:Terminal" terminal="sameType"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="ConformingType">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ConformingType"/>
+    <rule xsi:type="sts:Terminal" terminal="conformingType"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="SameMultiplicity">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameMultiplicity"/>
+    <rule xsi:type="sts:Terminal" terminal="sameMultiplicity"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="ContainedMultiplicity">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ContainedMultiplicity"/>
+    <rule xsi:type="sts:Terminal" terminal="containedMultiplicity"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="SameContainment">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameContainment"/>
+    <rule xsi:type="sts:Terminal" terminal="sameContainment"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="BothAbstractOperations">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/BothAbstractOperations"/>
+    <rule xsi:type="sts:Terminal" terminal="bothAbstractOperations"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="SameReturnType">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameReturnType"/>
+    <rule xsi:type="sts:Terminal" terminal="sameReturnType"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="ConformingReturnType">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ConformingReturnType"/>
+    <rule xsi:type="sts:Terminal" terminal="conformingReturnType"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="SameParameters">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameParameters"/>
+    <rule xsi:type="sts:Terminal" terminal="sameParameters"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="ConformingParameters">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ConformingParameters"/>
+    <rule xsi:type="sts:Terminal" terminal="conformingParameters"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="ContainedParameters">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ContainedParameters"/>
+    <rule xsi:type="sts:Terminal" terminal="containedParameters"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="SameTypeOfOperation">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameTypeOfOperation"/>
+    <rule xsi:type="sts:Terminal" terminal="sameTypeOfOperation"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="SameExceptions">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/SameExceptions"/>
+    <rule xsi:type="sts:Terminal" terminal="sameExceptions"/>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="ConformingExceptions">
+    <metaclass href="MatchRulesMetaModel.ecore#//metamodel/ConformingExceptions"/>
+    <rule xsi:type="sts:Terminal" terminal="conformingExceptions"/>
+  </fragments>
+</sts:Root>

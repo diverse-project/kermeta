@@ -1,0 +1,2 @@
+rule r1 sameContainment 
+rule r2 conformingType 

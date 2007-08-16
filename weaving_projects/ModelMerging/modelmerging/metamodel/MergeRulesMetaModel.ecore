@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="modelmerging" nsURI="platform:/resource/ModelMerging/modelmerging/metamodel/MergeRulesMetaModel.ecore#/" nsPrefix="modelmerging">
+  <eAnnotations source="kermeta.req">
+    <details key="platform:/resource/ModelMerging/modelmerging/Utils.kmt" value="platform:/resource/ModelMerging/modelmerging/Utils.kmt"/>
+    <details key="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km" value="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Utils">
+    <eOperations name="conformingClasses">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean&#xA;&#x9;if (s1.size) &lt; (s2.size) then&#xA;&#x9;&#x9;res := s1.forAll{s | s2.exists{t | conformingType(t, s)}}&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;res := s2.forAll{s | s1.exists{t | conformingType(t, s)}}&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean"/>
+      <eParameters name="s1">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Class"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set"/>
+      </eParameters>
+      <eParameters name="s2">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Class"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="conformingTypes">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init true&#xA;&#x9;if (s1.size) == (s2.size) then&#xA;&#x9;&#x9;from var i : kermeta::reflection::Integer init 0&#xA;&#x9;&#x9;until ((i) &lt; (s1.size)) and (res)&#xA;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;res := conformingType(s1.elementAt(i), s2.elementAt(i))&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;res := false&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean"/>
+      <eParameters name="s1">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Type"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Sequence"/>
+      </eParameters>
+      <eParameters name="s2">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Type"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Sequence"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="conformingType">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init (isSubType(t1, t2)) or (isSubType(t2, t1))&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean"/>
+      <eParameters name="t1">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+      </eParameters>
+      <eParameters name="t2">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="equalsClassSet">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init false&#xA;&#x9;if (s1.size) == (s2.size) then&#xA;&#x9;&#x9;res := s1.forAll{c1 | s2.exists{c2 | equalsType(c1, c2)}}&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean"/>
+      <eParameters name="s1">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Class"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set"/>
+      </eParameters>
+      <eParameters name="s2">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Class"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="equalsParameters">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init true&#xA;&#x9;var ps1 : kermeta::standard::Sequence&lt;kermeta::reflection::Parameter> init p1.asSequence&#xA;&#x9;var ps2 : kermeta::standard::Sequence&lt;kermeta::reflection::Parameter> init p2.asSequence&#xA;&#x9;if ((p1.size) == (p2.size)) and ((p1.size) != (0)) then&#xA;&#x9;&#x9;from var i : kermeta::reflection::Integer init 0&#xA;&#x9;&#x9;until ((i) == ((p1.size) - (1))) and (res)&#xA;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;res := equalsParameter(ps1.elementAt(i), ps2.elementAt(i))&#xA;&#x9;&#x9;&#x9;i := (i) + (1)&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean"/>
+      <eParameters name="p1">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Parameter"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set"/>
+      </eParameters>
+      <eParameters name="p2">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Parameter"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="equalsParameter">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := (p1.name.equals(p2.name)) and (equalsType(p1.type, p2.type))&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean"/>
+      <eParameters name="p1">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Parameter"/>
+      </eParameters>
+      <eParameters name="p2">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Parameter"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="equalsType">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init false&#xA;&#x9;if (kermeta::reflection::DataType.isInstance(t1)) and (kermeta::reflection::DataType.isInstance(t2)) then&#xA;&#x9;&#x9;var d1 : kermeta::reflection::DataType&#xA;&#x9;&#x9;d1 ?= t1&#xA;&#x9;&#x9;var d2 : kermeta::reflection::DataType&#xA;&#x9;&#x9;d2 ?= t2&#xA;&#x9;&#x9;res := d1.name.equals(d2.name)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;if (kermeta::reflection::Class.isInstance(t1)) and (kermeta::reflection::Class.isInstance(t2)) then&#xA;&#x9;&#x9;&#x9;var c1 : kermeta::reflection::Class&#xA;&#x9;&#x9;&#x9;c1 ?= t1&#xA;&#x9;&#x9;&#x9;var c2 : kermeta::reflection::Class&#xA;&#x9;&#x9;&#x9;c2 ?= t2&#xA;&#x9;&#x9;&#x9;res := c1.name.equals(c2.name)&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;if (kermeta::reflection::VoidType.isInstance(t1)) and (kermeta::reflection::VoidType.isInstance(t2)) then&#xA;&#x9;&#x9;&#x9;&#x9;res := true&#xA;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;stdio.writeln(&quot;can't compare types other than Void, DataType and Class&quot;)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean"/>
+      <eParameters name="t1">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+      </eParameters>
+      <eParameters name="t2">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="isSubType">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init false&#xA;&#x9;if equalsType(t1, t2) then&#xA;&#x9;&#x9;res := true&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;if (kermeta::reflection::Class.isInstance(t1)) and (kermeta::reflection::Class.isInstance(t2)) then&#xA;&#x9;&#x9;&#x9;var c1 : kermeta::reflection::Class&#xA;&#x9;&#x9;&#x9;c1 ?= t1&#xA;&#x9;&#x9;&#x9;var c2 : kermeta::reflection::Class&#xA;&#x9;&#x9;&#x9;c2 ?= t2&#xA;&#x9;&#x9;&#x9;var super1 : kermeta::standard::Set&lt;kermeta::reflection::Class> init c1.superClass&#xA;&#x9;&#x9;&#x9;res := isSuperclass(c2, super1)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean"/>
+      <eParameters name="t1">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+      </eParameters>
+      <eParameters name="t2">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="isSuperclass">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Boolean init false&#xA;&#x9;if (s.isNotEqual(void)) and ((s.size) > (0)) then&#xA;&#x9;&#x9;res := s.exists{cl | cl.name.equals(c.name)}&#xA;&#x9;&#x9;if (res) == (false) then&#xA;&#x9;&#x9;&#x9;var newSuperclassSet : kermeta::standard::Set&lt;kermeta::reflection::Class> init kermeta::standard::Set&lt;kermeta::reflection::Class>.new&#xA;&#x9;&#x9;&#x9;s.each{cl | if (cl.isNotEqual(void)) and (cl.superClass.isNotEqual(void)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;newSuperclassSet.addAll(cl.superClass)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;&#x9;res := isSuperclass(c, newSuperclassSet)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EDataType" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Boolean"/>
+      <eParameters name="c">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Class"/>
+      </eParameters>
+      <eParameters name="s">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Class"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Set"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="cloneProperty">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var prop : kermeta::language::structure::Property&#xA;&#x9;prop ?= source&#xA;&#x9;result := kermeta::language::structure::Property.clone(prop)&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+      <eParameters name="source">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="cloneClassDefinition">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var cd : kermeta::language::structure::ClassDefinition init kermeta::language::structure::ClassDefinition.new&#xA;&#x9;cd.name := source.name&#xA;&#x9;cd.isAbstract := source.isAbstract&#xA;&#x9;cd.~inv.addAll(kermeta::standard::Set&lt;kermeta::reflection::Constraint>.clone(source.~inv))&#xA;&#x9;cd.superType.addAll(source.superType)&#xA;&#x9;result := cd&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+      <eParameters name="source">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="cloneOperation">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Operation init kermeta::language::structure::Operation.new&#xA;&#x9;res.isAbstract := op.isAbstract&#xA;&#x9;op.ownedParameter.each{param | res.ownedParameter.add(cloneParameter(param))}&#xA;&#x9;res.name := op.name&#xA;&#x9;res.type := op.type&#xA;&#x9;res.isOrdered := op.isOrdered&#xA;&#x9;res.isUnique := op.isUnique&#xA;&#x9;res.lower := op.lower&#xA;&#x9;res.upper := op.upper&#xA;&#x9;op.~pre.each{p | res.~pre.add(cloneConstraint(p))}&#xA;&#x9;op.~post.each{p | res.~post.add(cloneConstraint(p))}&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+      <eParameters name="op">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="cloneParameter">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var param : kermeta::language::structure::Parameter&#xA;&#x9;param ?= p&#xA;&#x9;result := kermeta::language::structure::Parameter.clone(param)&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Parameter"/>
+      <eParameters name="p">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Parameter"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="cloneConstraint">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var cons : kermeta::language::structure::Constraint&#xA;&#x9;cons ?= c&#xA;&#x9;result := kermeta::language::structure::Constraint.clone(cons)&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Constraint"/>
+      <eParameters name="c">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Constraint"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="cloneType">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::reflection::Type&#xA;&#x9;if kermeta::reflection::Class.isInstance(t) then&#xA;&#x9;&#x9;var c : kermeta::language::structure::Class init kermeta::language::structure::Class.new&#xA;&#x9;&#x9;var cTemp : kermeta::language::structure::Class&#xA;&#x9;&#x9;cTemp ?= t&#xA;&#x9;&#x9;c.typeDefinition := cTemp.typeDefinition&#xA;&#x9;&#x9;c.typeContainer := cTemp.typeContainer&#xA;&#x9;&#x9;res := c&#xA;&#x9;&#x9;stdio.writeln(&quot;cloning class&quot;)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;raise &quot;Cloning doesn't support type: &quot;.plus(t.toString)&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+      <eParameters name="t">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Type"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="composeConstraintsSequence">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var andExp1 : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new&#xA;&#x9;andExp1.name := operator&#xA;&#x9;var tmpExp1 : kermeta::language::behavior::Expression&#xA;&#x9;var cons : kermeta::language::structure::Constraint&#xA;&#x9;cons ?= seq1.elementAt(0)&#xA;&#x9;tmpExp1 := cons.body&#xA;&#x9;from var i : kermeta::reflection::Integer init 1&#xA;&#x9;until (i) == (seq1.size)&#xA;&#x9;loop&#xA;&#x9;&#x9;andExp1.target := tmpExp1&#xA;&#x9;&#x9;cons ?= seq1.elementAt(i)&#xA;&#x9;&#x9;andExp1.parameters.add(cons.body)&#xA;&#x9;&#x9;tmpExp1 := andExp1&#xA;&#x9;&#x9;andExp1 := kermeta::language::behavior::CallFeature.new&#xA;&#x9;&#x9;andExp1.name := operator&#xA;&#x9;&#x9;i := (i) + (1)&#xA;&#x9;end&#xA;&#x9;cons.body := tmpExp1&#xA;&#x9;result := cloneConstraint(cons)&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Constraint"/>
+      <eParameters name="seq1">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="0" value="kermeta::reflection::Constraint"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Sequence"/>
+      </eParameters>
+      <eParameters name="operator">
+        <eType xsi:type="ecore:EDataType" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/String"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="composeConstraints">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var exp : kermeta::language::behavior::CallFeature init kermeta::language::behavior::CallFeature.new&#xA;&#x9;exp.name := operator&#xA;&#x9;var cons : kermeta::language::structure::Constraint&#xA;&#x9;cons ?= c1&#xA;&#x9;exp.target := cons.body&#xA;&#x9;cons ?= c2&#xA;&#x9;exp.parameters.add(cons.body)&#xA;&#x9;cons := kermeta::language::structure::Constraint.new&#xA;&#x9;cons.body := exp&#xA;&#x9;result := cons&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Constraint"/>
+      <eParameters name="c1">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Constraint"/>
+      </eParameters>
+      <eParameters name="c2">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Constraint"/>
+      </eParameters>
+      <eParameters name="operator">
+        <eType xsi:type="ecore:EDataType" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/String"/>
+      </eParameters>
+    </eOperations>
+  </eClassifiers>
+  <eSubpackages name="metamodel" nsURI="platform:/resource/ModelMerging/modelmerging/metamodel/MergeRulesMetaModel.ecore/metamodel" nsPrefix="metamodel">
+    <eClassifiers xsi:type="ecore:EClass" name="MergeRuleFile">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="//metamodel/MergeRule" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MergeRule" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ClassMergeRule" abstract="true" eSuperTypes="//metamodel/MergeRule">
+      <eOperations name="mergeClass">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PropertyMergeRule" abstract="true" eSuperTypes="//metamodel/MergeRule">
+      <eOperations name="mergeProperty">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OperationMergeRule" abstract="true" eSuperTypes="//metamodel/MergeRule">
+      <eOperations name="mergeOperation">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepLeftClassMergeRule" eSuperTypes="//metamodel/ClassMergeRule">
+      <eOperations name="mergeClass">
+        <eAnnotations source="kermeta" references="//metamodel/ClassMergeRule/mergeClass">
+          <details key="body" value="do&#xA;&#x9;var cAux : kermeta::language::structure::ClassDefinition&#xA;&#x9;stdio.writeln(&quot;+++++++++ keepLeft&quot;)&#xA;&#x9;result := modelmerging::Utils.new.cloneClassDefinition(left)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::ClassMergeRule"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepRightClassMergeRule" eSuperTypes="//metamodel/ClassMergeRule">
+      <eOperations name="mergeClass">
+        <eAnnotations source="kermeta" references="//metamodel/ClassMergeRule/mergeClass">
+          <details key="body" value="do&#xA;&#x9;result := modelmerging::Utils.new.cloneClassDefinition(right)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::ClassMergeRule"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomClassMergeRule" eSuperTypes="//metamodel/ClassMergeRule">
+      <eOperations name="mergeClass">
+        <eAnnotations source="kermeta" references="//metamodel/ClassMergeRule/mergeClass">
+          <details key="body" value="do&#xA;&#x9;var mergedClass : kermeta::reflection::ClassDefinition init kermeta::language::structure::ClassDefinition.new&#xA;&#x9;mergedClass.name := left.name&#xA;&#x9;customRules.each{cr | cr.applyRule(left, right, mergedClass)}&#xA;&#x9;result := mergedClass&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::ClassMergeRule"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="customRules" ordered="false" lowerBound="1" upperBound="-1" eType="//metamodel/CustomClassRule" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepLeftPropertyMergeRule" eSuperTypes="//metamodel/PropertyMergeRule">
+      <eOperations name="mergeProperty">
+        <eAnnotations source="kermeta" references="//metamodel/PropertyMergeRule/mergeProperty">
+          <details key="body" value="do&#xA;&#x9;var prop : kermeta::language::structure::Property&#xA;&#x9;prop ?= left&#xA;&#x9;result := kermeta::language::structure::Property.clone(prop)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::PropertyMergeRule"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepRightPropertyMergeRule" eSuperTypes="//metamodel/PropertyMergeRule">
+      <eOperations name="mergeProperty">
+        <eAnnotations source="kermeta" references="//metamodel/PropertyMergeRule/mergeProperty">
+          <details key="body" value="do&#xA;&#x9;var prop : kermeta::language::structure::Property&#xA;&#x9;prop ?= right&#xA;&#x9;result := kermeta::language::structure::Property.clone(prop)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::PropertyMergeRule"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomPropertyMergeRule" eSuperTypes="//metamodel/PropertyMergeRule">
+      <eOperations name="mergeProperty">
+        <eAnnotations source="kermeta" references="//metamodel/PropertyMergeRule/mergeProperty">
+          <details key="body" value="do&#xA;&#x9;var mergedProperty : kermeta::reflection::Property init kermeta::language::structure::Property.new&#xA;&#x9;mergedProperty.name := left.name&#xA;&#x9;customRules.each{cr | cr.applyRule(left, right, mergedProperty)}&#xA;&#x9;result := mergedProperty&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::PropertyMergeRule"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="customRules" ordered="false" lowerBound="1" upperBound="-1" eType="//metamodel/CustomPropertyRule" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepLeftOperationMergeRule" eSuperTypes="//metamodel/OperationMergeRule">
+      <eOperations name="mergeOperation">
+        <eAnnotations source="kermeta" references="//metamodel/OperationMergeRule/mergeOperation">
+          <details key="body" value="do&#xA;&#x9;var op : kermeta::language::structure::Operation&#xA;&#x9;op ?= left&#xA;&#x9;result := kermeta::language::structure::Operation.clone(op)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::OperationMergeRule"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepRightOperationMergeRule" eSuperTypes="//metamodel/OperationMergeRule">
+      <eOperations name="mergeOperation">
+        <eAnnotations source="kermeta" references="//metamodel/OperationMergeRule/mergeOperation">
+          <details key="body" value="do&#xA;&#x9;var op : kermeta::language::structure::Operation&#xA;&#x9;op ?= left&#xA;&#x9;result := kermeta::language::structure::Operation.clone(op)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::OperationMergeRule"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomOperationMergeRule" eSuperTypes="//metamodel/OperationMergeRule">
+      <eOperations name="mergeOperation">
+        <eAnnotations source="kermeta" references="//metamodel/OperationMergeRule/mergeOperation">
+          <details key="body" value="do&#xA;&#x9;var mergedOperation : kermeta::reflection::Operation init kermeta::language::structure::Operation.new&#xA;&#x9;mergedOperation.name := left.name&#xA;&#x9;customRules.each{cr | cr.applyRule(left, right, mergedOperation)}&#xA;&#x9;result := mergedOperation&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::OperationMergeRule"/>
+        </eAnnotations>
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="customRules" ordered="false" lowerBound="1" upperBound="-1" eType="//metamodel/CustomOperationRule" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomClassRule" abstract="true">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="utils" eType="//Utils" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomPropertyRule" abstract="true">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="utils" eType="//Utils" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomOperationRule" abstract="true">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="utils" eType="//Utils" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepAbstractClass" eSuperTypes="//metamodel/CustomClassRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomClassRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;if (not (left.isAbstract)) and (not (right.isAbstract)) then&#xA;&#x9;&#x9;merged.isAbstract := false&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.isAbstract := true&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomClassRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepConcreteClass" eSuperTypes="//metamodel/CustomClassRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomClassRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;if (left.isAbstract) and (right.isAbstract) then&#xA;&#x9;&#x9;merged.isAbstract := true&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.isAbstract := false&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomClassRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepSuperClassUnion" eSuperTypes="//metamodel/CustomClassRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomClassRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;var c1Aux : kermeta::standard::Sequence&lt;kermeta::reflection::Class> init kermeta::standard::Sequence&lt;kermeta::reflection::Class>.new&#xA;&#x9;c1Aux := left.superType.reject{c | right.superType.exists{d | utils.equalsType(c, d)}}&#xA;&#x9;merged.superType.addAll(c1Aux)&#xA;&#x9;merged.superType.addAll(right.superType)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomClassRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepSmallerSuperClassSet" eSuperTypes="//metamodel/CustomClassRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomClassRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;if (left.superType.size) &lt;= (right.superType.size) then&#xA;&#x9;&#x9;merged.superType.addAll(left.superType)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.superType.addAll(right.superType)&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomClassRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepBiggerSuperClassSet" eSuperTypes="//metamodel/CustomClassRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomClassRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;if (left.superType.size) >= (right.superType.size) then&#xA;&#x9;&#x9;merged.superType.addAll(left.superType)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.superType.addAll(right.superType)&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomClassRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepInvariantsConjunction" eSuperTypes="//metamodel/CustomClassRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomClassRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;merged.~inv.addAll(kermeta::standard::Set&lt;kermeta::reflection::Constraint>.clone(left.~inv))&#xA;&#x9;merged.~inv.addAll(kermeta::standard::Set&lt;kermeta::reflection::Constraint>.clone(left.~inv))&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomClassRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepInvariantsDisjunction" eSuperTypes="//metamodel/CustomClassRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomClassRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;if ((left.~inv.size) > (0)) and ((right.~inv.size) > (0)) then&#xA;&#x9;&#x9;var cons : kermeta::language::structure::Constraint&#xA;&#x9;&#x9;var consL : kermeta::language::structure::Constraint&#xA;&#x9;&#x9;var consR : kermeta::language::structure::Constraint&#xA;&#x9;&#x9;consL ?= utils.composeConstraintsSequence(left.~inv.asSequence, &quot;and&quot;)&#xA;&#x9;&#x9;consR ?= utils.composeConstraintsSequence(right.~inv.asSequence, &quot;and&quot;)&#xA;&#x9;&#x9;cons ?= utils.composeConstraints(consL, consR, &quot;or&quot;)&#xA;&#x9;&#x9;cons.name := &quot;mergedInv&quot;&#xA;&#x9;&#x9;cons.stereotype := kermeta::language::structure::ConstraintType.~inv&#xA;&#x9;&#x9;merged.~inv.add(cons)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.~inv.addAll(kermeta::standard::Set&lt;kermeta::reflection::Constraint>.clone(left.~inv))&#xA;&#x9;&#x9;merged.~inv.addAll(kermeta::standard::Set&lt;kermeta::reflection::Constraint>.clone(right.~inv))&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomClassRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/ClassDefinition"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepMoreSpecificType" eSuperTypes="//metamodel/CustomPropertyRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomPropertyRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;if utils.isSubType(left.type, right.type) then&#xA;&#x9;&#x9;merged.type := left.type&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.type := right.type&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomPropertyRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepMoreGenericType" eSuperTypes="//metamodel/CustomPropertyRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomPropertyRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;if utils.isSubType(left.type, right.type) then&#xA;&#x9;&#x9;merged.type := right.type&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.type := left.type&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomPropertyRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepSmallerMultiplicity" eSuperTypes="//metamodel/CustomPropertyRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomPropertyRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;if (left.lower) >= (right.lower) then&#xA;&#x9;&#x9;merged.lower := left.lower&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.lower := right.lower&#xA;&#xA;&#x9;end&#xA;&#x9;if left.upper.isLowerOrEqual(right.upper) then&#xA;&#x9;&#x9;merged.upper := left.upper&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.upper := right.upper&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomPropertyRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepBiggerMultiplicity" eSuperTypes="//metamodel/CustomPropertyRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomPropertyRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;if (left.lower) >= (right.lower) then&#xA;&#x9;&#x9;merged.lower := right.lower&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.lower := left.lower&#xA;&#xA;&#x9;end&#xA;&#x9;if left.upper.isLowerOrEqual(right.upper) then&#xA;&#x9;&#x9;merged.upper := right.upper&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.upper := left.upper&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomPropertyRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepAttribute" eSuperTypes="//metamodel/CustomPropertyRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomPropertyRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;if (not (left.isComposite)) and (not (right.isComposite)) then&#xA;&#x9;&#x9;merged.isComposite := false&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.isComposite := true&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomPropertyRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepReference" eSuperTypes="//metamodel/CustomPropertyRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomPropertyRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;if (left.isComposite) and (right.isComposite) then&#xA;&#x9;&#x9;merged.isComposite := true&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.isComposite := false&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomPropertyRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Property"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepConcreteOperation" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;if (not (left.isAbstract)) and (not (right.isAbstract)) then&#xA;&#x9;&#x9;merged.isAbstract := false&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.isAbstract := true&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepAbstractOperation" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;if (left.isAbstract) and (right.isAbstract) then&#xA;&#x9;&#x9;merged.isAbstract := true&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.isAbstract := false&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepMoreSpecificReturnType" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;if utils.isSubType(left.type, right.type) then&#xA;&#x9;&#x9;merged.type := utils.cloneType(left.type)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.type := utils.cloneType(right.type)&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepMoreGenericReturnType" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;if utils.isSubType(left.type, right.type) then&#xA;&#x9;&#x9;merged.type := utils.cloneType(right.type)&#xA;&#x9;&#x9;merged.lower := right.lower&#xA;&#x9;&#x9;merged.upper := right.upper&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.type := utils.cloneType(left.type)&#xA;&#x9;&#x9;merged.lower := left.lower&#xA;&#x9;&#x9;merged.upper := left.upper&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepMoreSpecificParameters" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepMoreGenericParameters" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepBiggerParameterList" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;if (left.ownedParameter.size) >= (right.ownedParameter.size) then&#xA;&#x9;&#x9;merged.ownedParameter.addAll(left.ownedParameter)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.ownedParameter.addAll(right.ownedParameter)&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepSmallerParameterList" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;if (left.ownedParameter.size) &lt;= (right.ownedParameter.size) then&#xA;&#x9;&#x9;merged.ownedParameter.addAll(left.ownedParameter)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.ownedParameter.addAll(right.ownedParameter)&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepMethod" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;if left.superOperation.isNotEqual(void) then&#xA;&#x9;&#x9;if right.superOperation.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;merged.superOperation := left.superOperation&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;merged.superOperation := left.superOperation&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;if right.superOperation.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;merged.superOperation := right.superOperation&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepOperation" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepExceptionsUnion" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;var c1Aux : kermeta::standard::Sequence&lt;kermeta::reflection::Type> init kermeta::standard::Sequence&lt;kermeta::reflection::Type>.new&#xA;&#x9;c1Aux := left.raisedException.reject{c | right.raisedException.exists{d | utils.equalsType(c, d)}}&#xA;&#x9;merged.raisedException.addAll(c1Aux)&#xA;&#x9;merged.raisedException.addAll(right.raisedException)&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepMoreSpecificExceptions" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepMoreGenericExceptions" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepPreconditionsConjunction" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;left.~pre.each{p | merged.~pre.add(utils.cloneConstraint(p))}&#xA;&#x9;right.~pre.each{p | merged.~pre.add(utils.cloneConstraint(p))}&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepPostconditionsConjunction" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;left.~post.each{p | merged.~post.add(utils.cloneConstraint(p))}&#xA;&#x9;right.~post.each{p | merged.~post.add(utils.cloneConstraint(p))}&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepPreconditionsDisjunction" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;if ((left.~pre.size) > (0)) and ((right.~pre.size) > (0)) then&#xA;&#x9;&#x9;var cons : kermeta::language::structure::Constraint&#xA;&#x9;&#x9;var consL : kermeta::language::structure::Constraint&#xA;&#x9;&#x9;var consR : kermeta::language::structure::Constraint&#xA;&#x9;&#x9;consL ?= utils.composeConstraintsSequence(left.~pre.asSequence, &quot;and&quot;)&#xA;&#x9;&#x9;consR ?= utils.composeConstraintsSequence(right.~pre.asSequence, &quot;and&quot;)&#xA;&#x9;&#x9;cons ?= utils.composeConstraints(consL, consR, &quot;or&quot;)&#xA;&#x9;&#x9;cons.name := &quot;mergedPre&quot;&#xA;&#x9;&#x9;cons.stereotype := kermeta::language::structure::ConstraintType.~pre&#xA;&#x9;&#x9;merged.~pre.add(cons)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;left.~pre.each{p | merged.~pre.add(utils.cloneConstraint(p))}&#xA;&#x9;&#x9;right.~pre.each{p | merged.~pre.add(utils.cloneConstraint(p))}&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepPostconditionsDisjunction" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;self.utils := modelmerging::Utils.new&#xA;&#x9;if ((left.~post.size) > (0)) and ((right.~post.size) > (0)) then&#xA;&#x9;&#x9;var cons : kermeta::language::structure::Constraint&#xA;&#x9;&#x9;var consL : kermeta::language::structure::Constraint&#xA;&#x9;&#x9;var consR : kermeta::language::structure::Constraint&#xA;&#x9;&#x9;consL ?= utils.composeConstraintsSequence(left.~post.asSequence, &quot;and&quot;)&#xA;&#x9;&#x9;consR ?= utils.composeConstraintsSequence(right.~post.asSequence, &quot;and&quot;)&#xA;&#x9;&#x9;cons ?= utils.composeConstraints(consL, consR, &quot;or&quot;)&#xA;&#x9;&#x9;cons.name := &quot;mergedPost&quot;&#xA;&#x9;&#x9;cons.stereotype := kermeta::language::structure::ConstraintType.~post&#xA;&#x9;&#x9;merged.~post.add(cons)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;merged.~post.addAll(kermeta::standard::Set&lt;kermeta::reflection::Constraint>.clone(left.~post))&#xA;&#x9;&#x9;merged.~post.addAll(kermeta::standard::Set&lt;kermeta::reflection::Constraint>.clone(right.~post))&#xA;&#xA;&#x9;end&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="KeepBodySequentialComposition" eSuperTypes="//metamodel/CustomOperationRule">
+      <eOperations name="applyRule" ordered="false">
+        <eAnnotations source="kermeta" references="//metamodel/CustomOperationRule/applyRule">
+          <details key="body" value="do&#xA;&#x9;var mergedBody : kermeta::language::behavior::Block init kermeta::language::behavior::Block.new&#xA;&#x9;var tmpOp : kermeta::language::structure::Operation&#xA;&#x9;tmpOp ?= left&#xA;&#x9;if tmpOp.body.isNotEqual(void) then&#xA;&#x9;&#x9;mergedBody.statement.add(tmpOp.body)&#xA;&#xA;&#x9;end&#xA;&#x9;tmpOp ?= right&#xA;&#x9;if tmpOp.body.isNotEqual(void) then&#xA;&#x9;&#x9;mergedBody.statement.add(tmpOp.body)&#xA;&#xA;&#x9;end&#xA;&#x9;var mergedOperation : kermeta::language::structure::Operation&#xA;&#x9;mergedOperation ?= merged&#xA;&#x9;mergedOperation.body := mergedBody&#xA;end"/>
+          <details key="superOperation" value="modelmerging::metamodel::CustomOperationRule"/>
+        </eAnnotations>
+        <eParameters name="left">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="right">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+        <eParameters name="merged">
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Operation"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>
