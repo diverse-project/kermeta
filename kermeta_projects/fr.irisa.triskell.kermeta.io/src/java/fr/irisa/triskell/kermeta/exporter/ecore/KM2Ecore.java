@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.38 2007-07-26 09:36:45 ftanguy Exp $
+/* $Id: KM2Ecore.java,v 1.39 2007-08-17 09:38:18 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -328,8 +328,12 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
 	/** tells wether the type of this property can be used in an ecore Attribute */
 	public boolean isPropertyValidForEAttribute(Property property){
 		Type type = property.getType();
-		//return (isPrimitiveEcoreType(type)||Enumeration.class.isInstance(type)||PrimitiveType.class.isInstance(type));
-		return ( Enumeration.class.isInstance(type)||PrimitiveType.class.isInstance(type) );
+		// FIXME CF 2007-08-17
+		// The second line below has been added during the Modeling Unit refactoring,
+		// but it seems that "isPrimitiveEcoreType(type)" is required to do translate rightly
+		// a Property to an EAttribute. Thus, the old line has been restored.
+		return (isPrimitiveEcoreType(type)||Enumeration.class.isInstance(type)||PrimitiveType.class.isInstance(type));
+		//return ( Enumeration.class.isInstance(type)||PrimitiveType.class.isInstance(type) );
 	}
 	
 	/**
