@@ -1,4 +1,4 @@
-/* $Id: Matcher.kmt,v 1.1 2007-08-16 14:54:07 rmachado Exp $
+/* $Id: Matcher.kmt,v 1.2 2007-08-17 15:44:13 rmachado Exp $
  * Creation date: May 29, 2007
  * License:
  * Copyright:
@@ -90,9 +90,7 @@ class RuleMatcher inherits AbstractMatcher
 				r.expression.context := Sequence<Object>.new
 				r.expression.context.add(o1)
 				r.expression.context.add(o2)
-				stdio.writeln(">>>> before evaluation")
 				match := match and r.expression.evaluate()
-				stdio.writeln(">>>> after evaluation")
 			}
 		end
 		

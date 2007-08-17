@@ -1,4 +1,4 @@
-/* $Id: Merger.kmt,v 1.1 2007-08-16 14:54:07 rmachado Exp $
+/* $Id: Merger.kmt,v 1.2 2007-08-17 15:44:13 rmachado Exp $
  * Creation date: May 29, 2007
  * License:
  * Copyright:
@@ -150,7 +150,7 @@ class DefaultMerger inherits AbstractMerger
 			raise "can't merge: packages don't match"
 		end
 		// review types: change references to merged types
-		//reviewTypes(merged)
+		reviewTypes(merged)
 		// check conflicts involving inherited elements
 		//checkInheritanceConflicts(merged)
 		result := merged
@@ -165,8 +165,6 @@ class DefaultMerger inherits AbstractMerger
 		var mergedClass : ClassDefinition		
 		// TODO call loaded rules to perform the merging
 		mergedClass := classRule.mergeClass(c1,c2)
-		//mergedClass.ownedAttribute.clear()
-		//mergedClass.ownedOperation.clear()
 		// merge properties and operations recursively
 		mergedClass.ownedAttribute.addAll(mergePropertySet(c1.ownedAttribute,c2.ownedAttribute))
 		mergedClass.ownedOperation.addAll(mergeOperationSet(c1.ownedOperation,c2.ownedOperation))
@@ -181,7 +179,7 @@ class DefaultMerger inherits AbstractMerger
 	operation mergePropertySet(properties1:Set<Property>, 
 			properties2:Set<Property>) : Set<Property> is do
 		var resultingProperties : Set<Property> init Set<Property>.new
-		// this implementation is VERY inefficient, because elements are not 
+		// this implementation is rather inefficient, because elements are not 
 		// removed while iterating over the collection
 		
 		properties1.each{p1|
@@ -301,7 +299,7 @@ class DefaultMerger inherits AbstractMerger
 					cd ?= c.typeDefinition
 					if correspondingClasses.containsKey(cd) then
 						// changes reference to merged type
-						stdio.writeln("------- inside properties review if " + a.name)
+						//stdio.writeln("------- inside properties review if " + a.name)
 						// creates new type object (Class) and sets typeDefinition
 						// and typeContainer properties
 						// virtualTypeBinding and typeParamBinding ignored
@@ -309,8 +307,8 @@ class DefaultMerger inherits AbstractMerger
 						ctemp.typeDefinition := correspondingClasses.getValue(cd)
 						ctemp.typeContainer := a
 						a.type := ctemp
-						stdio.writeln("previous = " + cd.toString)
-						stdio.writeln("new = " + ctemp.typeDefinition.toString)
+						//stdio.writeln("previous = " + cd.toString)
+						//stdio.writeln("new = " + ctemp.typeDefinition.toString)
 					end
 				end
 			}
@@ -323,7 +321,7 @@ class DefaultMerger inherits AbstractMerger
 					c ?= o.type
 					cd ?= c.typeDefinition
 					if correspondingClasses.containsKey(cd) then
-						stdio.writeln("------- inside operation review if " + o.name)
+						//stdio.writeln("------- inside operation review if " + o.name)
 						// changes reference to merged type
 						// virtualTypeBinding and typeParamBinding ignored
 						var ctemp : Class init kermeta::language::structure::Class.new
@@ -333,8 +331,8 @@ class DefaultMerger inherits AbstractMerger
 						o.type := ctemp
 						
 						//c.typeDefinition := correspondingClasses.getValue(cd)
-						stdio.writeln("previous = " + cd.toString)
-						stdio.writeln("new = " + ctemp.typeDefinition.toString)
+						//stdio.writeln("previous = " + cd.toString)
+						//stdio.writeln("new = " + ctemp.typeDefinition.toString)
 					end
 				end
 				// review the types of parameters
@@ -346,7 +344,7 @@ class DefaultMerger inherits AbstractMerger
 						cp ?= p.type
 						cdp ?= cp.typeDefinition
 						if correspondingClasses.containsKey(cdp) then
-							stdio.writeln("------- inside parameter review if " + o.name)
+							//stdio.writeln("------- inside parameter review if " + o.name)
 							// changes reference to merged type
 							// virtualTypeBinding and typeParamBinding ignored
 							//var ctemp : Class init kermeta::language::structure::Class.new
@@ -354,8 +352,8 @@ class DefaultMerger inherits AbstractMerger
 							//ctemp.typeContainer ?= p
 							//p.type := ctemp
 							cp.typeDefinition := correspondingClasses.getValue(cdp)
-							stdio.writeln("previous = " + cdp.toString)
-							stdio.writeln("new = " + cp.typeDefinition.toString)
+							//stdio.writeln("previous = " + cdp.toString)
+							//stdio.writeln("new = " + cp.typeDefinition.toString)
 						end
 					end
 				}

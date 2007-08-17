@@ -1,10 +1,10 @@
-/* $Id: loadKM.kmt,v 1.1 2007-08-16 14:54:07 rmachado Exp $
+/* $Id: loadKM.kmt,v 1.2 2007-08-17 15:44:13 rmachado Exp $
  * Creation date: May 24, 2007
  * License:
  * Copyright:
  * Authors: rafael duarte (rmachado@irisa.fr)
  */
-@mainClass "kermeta::modelmerging::ModelLoader"
+@mainClass "modelmerging::ModelLoader"
 @mainOperation "main"
 
 package modelmerging;

@@ -29,16 +29,18 @@ Kermeta Version 0.4.2 build 20070711, eclipse 3.2.2
    - probably some problem regarding references to non existing classes 
    
 -> check whether custom merge policies sets all metaclasses properties
+   - no, they don't. details can be seen afterwards in this file
 
 -> how to merge elements which matched with the conforming rule?
    - keepMoreSpecific/MoreGeneric doesn't work well for sets
+   - no, it works. match rules assure that they have the same size. must be implemented
 
 -> merging classes properties and operations may introduce conflicts with elements
    from superclasses present in only one of the classes being merged
    - must find a way to solve it, maybe using allAttributes and allOperations
    - OK, implemented, currently working with attributes, implemented for operations 
      too but requires the version 0.5 of kermeta (needs "allOperations" property).
-     i'm not using it because the saving of models crashed when i tried it in this version
+     i'm not using it because the saving of models crashed when i tried it in the version 0.5 
      
    - some kind of conflict solving should be defined in the future
 
@@ -53,18 +55,18 @@ Kermeta Version 0.4.2 build 20070711, eclipse 3.2.2
 -> problem when generating .kmt from merged model .km . post conditions are inserted
    inside the method body 
    - i really don't know why. i've tested loading/saving a model without changing
-     it and it worked fine. i believe it must be somehow caused by a faulty .km model
-   - send it to david
-   
+     it and it worked fine. i believe it must be somehow caused by a faulty .km model 
+     because when i try to validate the .km model, it tells me that it is not valid.
+
 -> sometimes return type information is not well saved even with framework and non merged types
 
 -> talk to didier, try to imagine a way to integrate the merging in kermeta
 
--> add project to the cvs -> mode weaving ->
-
 +-------------------------------+
 | Match predicates implemented: |
 +-------------------------------+
+
+These are the same strings used in the rule files
 
 1. Classes
  - bothAbstractClasses
@@ -94,15 +96,21 @@ Kermeta Version 0.4.2 build 20070711, eclipse 3.2.2
 +-------------------------------+
 
 1. Classes
+ - keepLeft
+ - keepRight
+ - custom
  - keepConcrete
  - keepAbstract
  - keepSuperClassUnion
- - keepSmallerSuperclassSet
- - keepBiggerSuperclaaSet
+ - keepSmallerSuperClassSet
+ - keepBiggerSuperClassSet
  - keepInvariantsConjunction
  - keepInvariantsDisjunction
  
  2. Properties
+ - keepLeft
+ - keepRight
+ - custom
  - keepMoreSpecificType
  - keepMoreGenericType
  - keepSmallerMultiplicity
@@ -111,6 +119,9 @@ Kermeta Version 0.4.2 build 20070711, eclipse 3.2.2
  - keepReference
  
  3. Operations
+ - keepLeft
+ - keepRight
+ - custom
  - keepConcrete
  - keepAbstract
  - keepMoreSpecificReturnType

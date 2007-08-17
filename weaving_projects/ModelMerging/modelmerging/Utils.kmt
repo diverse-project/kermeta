@@ -1,8 +1,8 @@
-/* $Id: Utils.kmt,v 1.1 2007-08-16 14:54:07 rmachado Exp $
+/* $Id: Utils.kmt,v 1.2 2007-08-17 15:44:13 rmachado Exp $
  * Creation date: July 25, 2007
  * License:
  * Copyright:
- * Authors:
+ * Authors: rafael duarte
  */
 package modelmerging;
 
@@ -19,7 +19,7 @@ using kermeta::language::behavior
  */
 class Utils
 {
-/*
+	/*
 	 *  checks the conformance between two sets of classes 
 	 *  for each class in the smaller set,  there is at least one conforming type
 	 *  in the bigger set of classes
@@ -209,9 +209,6 @@ class Utils
 		result := res
 	end
 	
-		// had to implement some clone methods because existing ones didn't work 
-	// for all needed metaclasses, these are rather simple implementations of
-	// clone. i do believe that a more elaborated clone is needed
 	operation cloneProperty(source : Property) : Property is do
 		var prop : kermeta::language::structure::Property
 		prop ?= source		
@@ -231,6 +228,9 @@ class Utils
 		result := cd
 	end
 	
+	// had to implement some clone methods because existing ones didn't work 
+	// for all needed metaclasses, these are rather simple implementations of
+	// clone. i do believe that a more elaborated clone is needed
 	operation cloneOperation(op : Operation) : Operation is do 
 		var res : Operation init kermeta::language::structure::Operation.new
 		res.isAbstract := op.isAbstract
