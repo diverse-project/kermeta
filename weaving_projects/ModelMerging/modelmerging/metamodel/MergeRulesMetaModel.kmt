@@ -35,6 +35,9 @@ abstract class OperationMergeRule inherits MergeRule
 	operation mergeOperation(left:Operation, right:Operation) : Operation is abstract
 }
 
+/*
+ *  clones the left element and returns it as the merge result
+ */
 class KeepLeftClassMergeRule inherits ClassMergeRule
 {
 	method mergeClass(left:ClassDefinition, right:ClassDefinition) : ClassDefinition is do
@@ -43,13 +46,15 @@ class KeepLeftClassMergeRule inherits ClassMergeRule
 		//left.ownedOperation.clear()
 
 		//cAux ?= left
-		stdio.writeln("+++++++++ keepLeft")
 		//result := kermeta::language::structure::ClassDefinition.clone(cAux)
 		result := Utils.new.cloneClassDefinition(left)
 		// properties and operations will be defined by their own merging rules
 	end
 }
 
+/*
+ *  clones the right element and returns it as the merge result
+ */
 class KeepRightClassMergeRule inherits ClassMergeRule
 {
 	method mergeClass(left:ClassDefinition, right:ClassDefinition) : ClassDefinition is do
@@ -63,6 +68,10 @@ class KeepRightClassMergeRule inherits ClassMergeRule
 	end
 }
 
+/*
+ *  custom rule, a new class is created and the value of each of its properties 
+ *  is defined by specific custom rules.
+ */
 class CustomClassMergeRule inherits ClassMergeRule
 {
 	attribute customRules : set CustomClassRule[1..*]
@@ -77,6 +86,9 @@ class CustomClassMergeRule inherits ClassMergeRule
 	end
 }
 
+/*
+ *  clones the left element and returns it as the merge result
+ */
 class KeepLeftPropertyMergeRule inherits PropertyMergeRule
 {
 	method mergeProperty(left:Property, right:Property) : Property is do
@@ -86,6 +98,9 @@ class KeepLeftPropertyMergeRule inherits PropertyMergeRule
 	end
 }
 
+/*
+ *  clones the right element and returns it as the merge result
+ */
 class KeepRightPropertyMergeRule inherits PropertyMergeRule
 {
 	method mergeProperty(left:Property, right:Property) : Property is do
@@ -95,6 +110,10 @@ class KeepRightPropertyMergeRule inherits PropertyMergeRule
 	end
 }
 
+/*
+ *  custom rule, a new property is created and the value of each of its properties 
+ *  is defined by specific custom rules.
+ */
 class CustomPropertyMergeRule inherits PropertyMergeRule
 {
 	attribute customRules : set CustomPropertyRule[1..*]
@@ -109,6 +128,9 @@ class CustomPropertyMergeRule inherits PropertyMergeRule
 	end
 }
 
+/*
+ *  clones the left element and returns it as the merge result
+ */
 class KeepLeftOperationMergeRule inherits OperationMergeRule
 {
 	method mergeOperation(left:Operation, right:Operation) : Operation is do
@@ -118,6 +140,9 @@ class KeepLeftOperationMergeRule inherits OperationMergeRule
 	end
 }
 
+/*
+ *  clones the right element and returns it as the merge result
+ */
 class KeepRightOperationMergeRule inherits OperationMergeRule
 {
 	method mergeOperation(left:Operation, right:Operation) : Operation is do
@@ -127,6 +152,10 @@ class KeepRightOperationMergeRule inherits OperationMergeRule
 	end
 }
 
+/*
+ *  custom rule, a new operation is created and the value of each of its properties 
+ *  is defined by specific custom rules.
+ */
 class CustomOperationMergeRule inherits OperationMergeRule
 {
 	attribute customRules : set CustomOperationRule[1..*]
@@ -160,6 +189,9 @@ abstract class CustomOperationRule
 	operation applyRule(left:Operation, right:Operation, merged:Operation) is abstract
 }
 
+/*
+ *  rule that choses whether the merged class will be abstract 
+ */
 class KeepAbstractClass inherits CustomClassRule
 {
 	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
@@ -173,6 +205,9 @@ class KeepAbstractClass inherits CustomClassRule
 	end
 }
 
+/*
+ *  rule that choses whether the merged class will be concrete 
+ */
 class KeepConcreteClass inherits CustomClassRule
 {
 	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
@@ -187,6 +222,10 @@ class KeepConcreteClass inherits CustomClassRule
 	end
 }
 
+/*
+ *  rule that defines the merged class superclasses as the union of the 
+ *  superclasses from the left and right model.
+ */
 class KeepSuperClassUnion inherits CustomClassRule
 {
 	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
@@ -198,6 +237,10 @@ class KeepSuperClassUnion inherits CustomClassRule
 	end
 }
 
+/*
+ *  rule that defines the merged class superclasses as the choice of the smaller
+ *  set from left and right models.
+ */
 class KeepSmallerSuperClassSet inherits CustomClassRule
 {
 	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
@@ -209,6 +252,10 @@ class KeepSmallerSuperClassSet inherits CustomClassRule
 	end
 }
 
+/*
+ *  rule that defines the merged class superclasses as the choice of the bigger
+ *  set from left and right models.
+ */
 class KeepBiggerSuperClassSet inherits CustomClassRule
 {
 	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
@@ -220,6 +267,10 @@ class KeepBiggerSuperClassSet inherits CustomClassRule
 	end
 }
 
+/*
+ *  rule that defines the merged class invariants as the logical and of the 
+ *  invariants from the left and right model
+ */
 class KeepInvariantsConjunction inherits CustomClassRule
 {
 	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
@@ -229,6 +280,10 @@ class KeepInvariantsConjunction inherits CustomClassRule
 	end
 }
 
+/*
+ *  rule that defines the merged class invariants as the logical or of the 
+ *  invariants from the left and right model
+ */
 class KeepInvariantsDisjunction inherits CustomClassRule
 {
 	method applyRule(left:ClassDefinition, right:ClassDefinition, merged:ClassDefinition) is do
@@ -253,6 +308,9 @@ class KeepInvariantsDisjunction inherits CustomClassRule
 	end
 }
 
+/*
+ *  merged property type is the most specific one. i.e. the subtype.
+ */
 class KeepMoreSpecificType inherits CustomPropertyRule
 {
 	method applyRule(left:Property, right:Property, merged:Property) is do
@@ -267,6 +325,9 @@ class KeepMoreSpecificType inherits CustomPropertyRule
 	end
 }
 
+/*
+ *  merged property type is the most generic one. i.e. the supertype.
+ */
 class KeepMoreGenericType inherits CustomPropertyRule
 {
 	method applyRule(left:Property, right:Property, merged:Property) is do
@@ -280,7 +341,9 @@ class KeepMoreGenericType inherits CustomPropertyRule
 		end
 	end
 }
-
+/*
+ *  the smaller multiplicity interval is kept as the merged property multiplicity
+ */
 class KeepSmallerMultiplicity inherits CustomPropertyRule
 {
 	method applyRule(left:Property, right:Property, merged:Property) is do
@@ -297,6 +360,9 @@ class KeepSmallerMultiplicity inherits CustomPropertyRule
 	end
 }
 
+/*
+ *  the bigger multiplicity interval is kept as the merged property multiplicity
+ */
 class KeepBiggerMultiplicity inherits CustomPropertyRule
 {
 	method applyRule(left:Property, right:Property, merged:Property) is do
@@ -313,6 +379,9 @@ class KeepBiggerMultiplicity inherits CustomPropertyRule
 	end
 }
 
+/*
+ *  the merged property is defined as an attribute
+ */
 class KeepAttribute inherits CustomPropertyRule
 {
 	method applyRule(left:Property, right:Property, merged:Property) is do
@@ -326,6 +395,9 @@ class KeepAttribute inherits CustomPropertyRule
 	end
 }
 
+/*
+ *  the merged property is defined as an reference
+ */
 class KeepReference inherits CustomPropertyRule
 {
 	method applyRule(left:Property, right:Property, merged:Property) is do
@@ -339,6 +411,9 @@ class KeepReference inherits CustomPropertyRule
 	end
 }
 
+/*
+ *  rule that choses whether the merged operation will be concrete 
+ */
 class KeepConcreteOperation inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -352,6 +427,9 @@ class KeepConcreteOperation inherits CustomOperationRule
 	end
 }
 
+/*
+ *  rule that choses whether the merged class will be abstract 
+ */
 class KeepAbstractOperation inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -365,6 +443,9 @@ class KeepAbstractOperation inherits CustomOperationRule
 	end
 }
 
+/*
+ *  merged operation return type is the most specific one. i.e. the subtype.
+ */
 class KeepMoreSpecificReturnType inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -379,6 +460,9 @@ class KeepMoreSpecificReturnType inherits CustomOperationRule
 	end
 }
 
+/*
+ *  merged operation return type is the most generic one. i.e. the supertype.
+ */
 class KeepMoreGenericReturnType inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -397,6 +481,9 @@ class KeepMoreGenericReturnType inherits CustomOperationRule
 	end
 }
 
+/*
+ *  merged operation parameters are the most specific ones.
+ */
 class KeepMoreSpecificParameters inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -404,6 +491,9 @@ class KeepMoreSpecificParameters inherits CustomOperationRule
 	end
 }
 
+/*
+ *  merged operation parameters are the most generic ones.
+ */
 class KeepMoreGenericParameters inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -411,6 +501,9 @@ class KeepMoreGenericParameters inherits CustomOperationRule
 	end
 }
 
+/*
+ *  the biggest parameter list is kept in the merged operation.
+ */
 class KeepBiggerParameterList inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -422,6 +515,9 @@ class KeepBiggerParameterList inherits CustomOperationRule
 	end
 }
 
+/*
+ *  the smallest parameter list is kept in the merged operation.
+ */
 class KeepSmallerParameterList inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -433,6 +529,9 @@ class KeepSmallerParameterList inherits CustomOperationRule
 	end
 }
 
+/*
+ *  the merged operation is defined as a method
+ */
 class KeepMethod inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -452,6 +551,9 @@ class KeepMethod inherits CustomOperationRule
 	end
 }
 
+/*
+ *  the merged operation is defined as an operation
+ */
 class KeepOperation inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -459,6 +561,10 @@ class KeepOperation inherits CustomOperationRule
 	end
 }
 
+/*
+ *  the merged operation declares the union of the exceptions from both models
+ *  as its exceptions
+ */
 class KeepExceptionsUnion inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -470,6 +576,9 @@ class KeepExceptionsUnion inherits CustomOperationRule
 	end
 }
 
+/*
+ *  the merged operation keeps the most specific exceptions 
+ */
 class KeepMoreSpecificExceptions inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -477,6 +586,9 @@ class KeepMoreSpecificExceptions inherits CustomOperationRule
 	end
 }
 
+/*
+ *  the merged operation keeps the most generic exceptions 
+ */
 class KeepMoreGenericExceptions inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -484,6 +596,10 @@ class KeepMoreGenericExceptions inherits CustomOperationRule
 	end
 }
 
+/*
+ *  the merged operation keeps the logical AND of the preconditions form both
+ *  right and left models.
+ */
 class KeepPreconditionsConjunction inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -493,6 +609,10 @@ class KeepPreconditionsConjunction inherits CustomOperationRule
 	end
 }
 
+/*
+ *  the merged operation keeps the logical AND of the postconditions form both
+ *  right and left models.
+ */
 class KeepPostconditionsConjunction inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -502,6 +622,10 @@ class KeepPostconditionsConjunction inherits CustomOperationRule
 	end
 }
 
+/*
+ *  the merged operation keeps the logical OR of the preconditions form both
+ *  right and left models.
+ */
 class KeepPreconditionsDisjunction inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -527,6 +651,10 @@ class KeepPreconditionsDisjunction inherits CustomOperationRule
 	end
 }
 
+/*
+ *  the merged operation keeps the logical OR of the postconditions form both
+ *  right and left models.
+ */
 class KeepPostconditionsDisjunction inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do
@@ -553,6 +681,10 @@ class KeepPostconditionsDisjunction inherits CustomOperationRule
 	end
 }
 
+/*
+ *  the body of the merged operation is defined as the sequential composition of
+ *  the left and right operation bodies
+ */
 class KeepBodySequentialComposition inherits CustomOperationRule
 {
 	method applyRule(left:Operation, right:Operation, merged:Operation) is do

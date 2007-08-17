@@ -93,7 +93,9 @@ class OrExpression inherits BinaryExpression
 	end
 }
 
-
+/*
+ *	matches if both classes are abstract or if both are concrete
+ */
 class BothAbstractClasses inherits ClassPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -105,6 +107,10 @@ class BothAbstractClasses inherits ClassPredicate
 						or (not e1.isAbstract() and not e2.isAbstract)
 	end
 }
+
+/*
+ *	matches if both classes have the same superclasses
+ */
 class SameSuperclasses inherits ClassPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -117,6 +123,11 @@ class SameSuperclasses inherits ClassPredicate
 		result := utils.equalsClassSet(e1.superType,e2.superType)
 	end
 }
+
+/*
+ *	matches if the superclasses are conforming, i.e. there is a conforming class
+ *  for each class present in one of the sets.
+ */
 class ConformingSuperclasses inherits ClassPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -137,6 +148,9 @@ class ConformingSuperclasses inherits ClassPredicate
  - sameContainment (i.e. ref X att)
 */
 
+/*
+ *	matches if the types are the same (if they have the same name)
+ */
 class SameType inherits PropertyPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -150,6 +164,9 @@ class SameType inherits PropertyPredicate
 }
 
 
+/*
+ *	matches if the types are conforming (one is a subclass of the other)
+ */
 class ConformingType inherits PropertyPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -163,6 +180,9 @@ class ConformingType inherits PropertyPredicate
 }
 
 
+/*
+ *	matches if the properties have exactly the same multiplicity
+ */
 class SameMultiplicity inherits PropertyPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -174,6 +194,10 @@ class SameMultiplicity inherits PropertyPredicate
 	end
 }
 
+/*
+ *	matches if the properties have the same type of containment, i.e. both 
+ *  attributes or both references
+ */
 class SameContainment inherits PropertyPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -186,6 +210,10 @@ class SameContainment inherits PropertyPredicate
 	end
 }
 
+/*
+ *	matches if the multiplicity of one property is contained in the other.
+ *  e.g: 2..4 and 0..6
+ */
 class ContainedMultiplicity inherits PropertyPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -211,6 +239,9 @@ class ContainedMultiplicity inherits PropertyPredicate
  - conformingExceptions
 */
 
+/*
+ *	matches if both operations are abstract or if both are concrete
+ */
 class BothAbstractOperations inherits OperationPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -223,6 +254,9 @@ class BothAbstractOperations inherits OperationPredicate
 	end
 }
 
+/*
+ *	matches if both operations have the same return type
+ */
 class SameReturnType inherits OperationPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -235,6 +269,9 @@ class SameReturnType inherits OperationPredicate
 	end
 }
 
+/*
+ *	matches if operations have a conforming return type
+ */
 class ConformingReturnType inherits OperationPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -247,6 +284,9 @@ class ConformingReturnType inherits OperationPredicate
 	end
 }
 
+/*
+ *	matches if both operations have exactly the same parameters
+ */
 class SameParameters inherits OperationPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -259,6 +299,10 @@ class SameParameters inherits OperationPredicate
 	end
 }
 
+/*
+ *	matches if operations have conforming parameters, i.e. every parameter in 
+ *  the the defined order has a conforming counterpart in the other operation
+ */
 class ConformingParameters inherits OperationPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -279,6 +323,9 @@ class ConformingParameters inherits OperationPredicate
 	end
 }
 
+/*
+ *	matches if the parameters of one operation are contained by the other
+ */
 class ContainedParameters inherits OperationPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -297,6 +344,9 @@ class ContainedParameters inherits OperationPredicate
 	end
 }
 
+/*
+ *	matches if both are operations or if both are methods
+ */
 class SameTypeOfOperation inherits OperationPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -309,6 +359,9 @@ class SameTypeOfOperation inherits OperationPredicate
 	end
 }
 
+/*
+ *	matches if both operations declare the same exceptions
+ */
 class SameExceptions inherits OperationPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
@@ -329,6 +382,9 @@ class SameExceptions inherits OperationPredicate
 	end
 }
 
+/*
+ *	matches if operations declare conforming exceptions
+ */
 class ConformingExceptions inherits OperationPredicate
 {
 	method evaluate() : kermeta::standard::Boolean is do
