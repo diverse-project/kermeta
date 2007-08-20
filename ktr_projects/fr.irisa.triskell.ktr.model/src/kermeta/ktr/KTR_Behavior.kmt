@@ -125,7 +125,7 @@ class InterpretationPatternModel {
 		// output model elements).
 
 		// Iterate over all uninitialized output model elements for initialization
-		// Conceret context for output elements initialization
+		// Concrete context for output elements initialization
 		var context : set ConcreteContextItem[0..*] init Set<ConcreteContextItem>.new
 		unresolvedBKeys.each{k |
 			// Get concrete context (variables + productions) for production initialization
