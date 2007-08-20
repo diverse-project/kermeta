@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.20 2007-07-20 15:07:47 ftanguy Exp $
+/* $Id: Object.java,v 1.21 2007-08-20 12:47:36 dtouzet Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -558,8 +558,7 @@ public class Object {
 	    RuntimeObject mcRO = selfRO.getMetaclass();
 	    fr.irisa.triskell.kermeta.language.structure.Class cl = (fr.irisa.triskell.kermeta.language.structure.Class) mcRO.getData().get("kcoreObject");
 	    ClassDefinition cDef = (ClassDefinition) cl.getTypeDefinition();
-	    EList props = cDef.getOwnedAttribute();
-	    
+	    ArrayList<Property> props = ClassDefinitionHelper.getAllProperties(cDef);
 	    
 	    // !!!!!! Begin Pure hack dans ta face !!!!!!
 	    // Required for handling the specific case of "ecore::EEnumLiteral" type which recursively
