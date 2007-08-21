@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.11 2007-08-09 14:59:16 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.12 2007-08-21 12:58:19 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -230,7 +230,7 @@ public class IOPlugin extends AbstractUIPlugin {
 	public KermetaUnit loadKermetaUnit( String uri, String content ) throws KermetaIOFileNotFoundException, URIMalformedException {
 		KermetaUnit kermetaUnit = null;
 		synchronized ( IOPlugin.class ) {
-			System.err.println( "loading " + uri);
+			IOPlugin.internalLog.debug( "loading " + uri);
 			if ( ! LOCAL_USE ) {
 			
 				if ( Runtime.getRuntime().freeMemory() < 1000000 ) {
@@ -248,7 +248,7 @@ public class IOPlugin extends AbstractUIPlugin {
 			//KermetaUnit kermetaUnit = kermetaUnitHelper.loadFile(uri, content);
 			kermetaUnit = getKermetaUnit( uri );
 			storer.load( uri, content );
-			System.err.println( "loading " + uri + " done");
+			IOPlugin.internalLog.debug( "loading " + uri + " done");
 		}
 		return kermetaUnit;
 
@@ -273,9 +273,9 @@ public class IOPlugin extends AbstractUIPlugin {
 	
 	public void unload( String uri ) {
 		synchronized ( IOPlugin.class ) {
-			System.err.println( "unloading " + uri);
+			IOPlugin.internalLog.debug( "unloading " + uri);
 			storer.unload(uri);
-			System.err.println( "unloading " + uri + " done");
+			IOPlugin.internalLog.debug( "unloading " + uri + " done");
 		}
 	}
 	
