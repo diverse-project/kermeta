@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.12 2007-08-09 14:59:16 dvojtise Exp $
+ * $Id: KermetaUnitImpl.java,v 1.13 2007-08-21 12:55:36 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -39,6 +39,7 @@ import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.ParsingError;
 import org.kermeta.io.WarningMessage;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import antlr.ANTLRException;
@@ -962,6 +963,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		 * Look into the external packages thanks to the usings.
 		 * 
 		 */
+		if(getModelingUnit() == null){
+			IOPlugin.internalLog.error("Problem ! modelingUnit is null, ... maybe a problem of concurrent thread ??? ");
+		}
 		Iterator <Using> itOnUsings = modelingUnit.getUsings().iterator();
 		while ( itOnUsings.hasNext() ) {
 			Using using = itOnUsings.next();
