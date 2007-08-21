@@ -1,4 +1,4 @@
-/* $Id: ecore.kmt,v 1.12 2007-08-01 07:15:55 ftanguy Exp $
+/* $Id: ecore.kmt,v 1.13 2007-08-21 09:26:28 dvojtise Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -192,7 +192,6 @@ abstract class EClassifier
 @aspect "true"
 class EEnum 
 {
-	attribute eLiterals : EEnumLiteral[0..*]#eEnum
 	/** returns the enum literal which name is name */
 /*	operation getEEnumLiteral(name : EString) : EEnumLiteral is do
 		result := eLiterals.detect { e | e.name == name }
@@ -207,7 +206,6 @@ class EEnum
 @aspect "true"
 class EFactory 
 {
-	reference ePackage : EPackage[1..1]#eFactoryInstance
 	operation create(eClass : EClass) : EObject is do
 		raise kermeta::exceptions::NotImplementedException.new
 	end
