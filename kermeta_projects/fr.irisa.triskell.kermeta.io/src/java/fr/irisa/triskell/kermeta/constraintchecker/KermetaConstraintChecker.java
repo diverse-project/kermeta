@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.11 2007-08-06 15:37:59 jmottu Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.12 2007-08-21 12:54:36 dvojtise Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -80,10 +80,10 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
     public void checkUnit() {
     	  	
     	if ( ! builder.isConstraintChecked() ) {
-    		Iterator it = TypeDefinitionSearcher.getInternalTypesDefinition(builder).iterator();
+    		Iterator<TypeDefinition> it = TypeDefinitionSearcher.getInternalTypesDefinition(builder).iterator();
     		// Call the check constraint visitor on it!
     		while(it.hasNext()) {
-    			TypeDefinition td = (TypeDefinition)it.next();
+    			TypeDefinition td = it.next();
     			this.accept(td);
     		}
     		builder.setConstraintChecked(true);
@@ -132,12 +132,12 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 		return super.visitConstraint(node);
 	}
 /**
-	 * @param node
+	 * @param Constraint node
 	 * @return true if the constrained class is an operation and if the node is one pre of this last 
 	 */
 	private boolean isPre(Constraint node){
 		if(node.eContainer() instanceof Operation){
-			Iterator it = ((Operation)node.eContainer()).getPre().iterator();
+			Iterator<Constraint> it = ((Operation)node.eContainer()).getPre().iterator();
 			while(it.hasNext()){
 				if(node == it.next())
 					return true;
@@ -151,7 +151,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	 */
 	private boolean isPost(Constraint node){
 		if(node.eContainer() instanceof Operation){
-			Iterator it = ((Operation)node.eContainer()).getPost().iterator();
+			Iterator<Constraint> it = ((Operation)node.eContainer()).getPost().iterator();
 			while(it.hasNext()){
 				if(node == it.next())
 					return true;
