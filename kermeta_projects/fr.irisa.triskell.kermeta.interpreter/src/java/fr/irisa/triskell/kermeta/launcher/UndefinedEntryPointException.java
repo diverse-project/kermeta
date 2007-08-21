@@ -1,6 +1,6 @@
 
 
-/*$Id: UndefinedEntryPointException.java,v 1.1 2007-05-30 11:29:49 ftanguy Exp $
+/*$Id: UndefinedEntryPointException.java,v 1.2 2007-08-21 14:30:44 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	UndefinedEntryPointException.java
 * License : EPL
@@ -12,6 +12,7 @@
 
 package fr.irisa.triskell.kermeta.launcher;
 
+@SuppressWarnings("serial")
 public class UndefinedEntryPointException extends Throwable {
 	
 	public UndefinedEntryPointException(String message) {
