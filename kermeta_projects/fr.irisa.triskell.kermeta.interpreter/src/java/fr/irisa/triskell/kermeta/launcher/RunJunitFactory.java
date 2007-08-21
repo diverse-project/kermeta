@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.26 2007-08-03 11:50:50 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.27 2007-08-21 14:29:31 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -37,6 +37,10 @@ import fr.irisa.triskell.kermeta.typechecker.SimpleType;
  * TestSuite
  *  
  */
+/**
+ * @author dvojtise
+ *
+ */
 public class RunJunitFactory implements Test {
 
     private TestSuite theTestSuite = null;
@@ -44,15 +48,29 @@ public class RunJunitFactory implements Test {
     
     public boolean isTestCase = false; // this part of a KermetaTestSuite
     
-   // private String unit_uri;
+    private String unit_uri;
     
-    public KermetaUnit unit;
+    private KermetaUnit unit = null;
     
     /**
+     * enabling this option will optimize the loading, so it will load it only once : one for the identification 
+     * of the internal tests (if this test is a testsuite), one when it will run it
+     * By default this is false since it is memory consumming and this prevent side effect from one testsuite to another
+     * Note than even set to false, all the internal tests will run using the same loaded unit
      * 
+     */
+    public boolean optimizeLoading = false;
+    /**
+     * Default constructor
      */
     public RunJunitFactory() {
         
+    }
+    /**
+     * constructor allowing to change some default setting
+     */
+    public RunJunitFactory(boolean optimizeLoading) {
+        this.optimizeLoading = optimizeLoading;
     }
    // public KermetaInterpreter kminterpreter = null;
     
@@ -61,10 +79,15 @@ public class RunJunitFactory implements Test {
     }
     
     /**
-     * @param args
+     * Main method of this class, it is used to create the junit test(s) for this unit/file
+     * @param unit_uri
+     * @param constraintExecution
+     * @return
      */
     public Test addTestsForUnit(String unit_uri, boolean constraintExecution) {
-
+    	// needed in case of non optimizedLoading
+    	this.unit_uri = unit_uri;
+    	
     	// precalculate the name of the test in the eventuality it fails before having loaded it
     	int index  = unit_uri.lastIndexOf("/");
     	String failedTestName = unit_uri.substring(index+1);
@@ -92,6 +115,7 @@ public class RunJunitFactory implements Test {
             	theTestCase = new FailedTestCase(failedTestName, 
             		new Exception("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)" +
             					  KermetaUnitHelper.getAllErrorsAsString(unit)));
+            	if(!optimizeLoading) unit = null; // reset the unit to free some memory
                 return theTestCase;
             }
             
@@ -105,7 +129,8 @@ public class RunJunitFactory implements Test {
             	theTestCase = new FailedTestCase(failedTestName, 
             		new Exception("Unit " + unit.getUri() + " contains errors (ie. didn't load or constraintcheck correctly)"+
             				KermetaUnitHelper.getAllErrorsAsString(unit)));
-                return theTestCase;
+            	if(!optimizeLoading) unit = null; // reset the unit to free some memory
+            	return theTestCase;
             }
             
             // get the main class to see if it inherits from class kermeta::kunit::Test
@@ -154,7 +179,7 @@ public class RunJunitFactory implements Test {
                 theTestSuite.setName(unit_uri);
                 
                 includeTestSuite(main_class, unit, constraintExecution);
-
+                if(!optimizeLoading) unit = null; // reset the unit to free some memory
                 if(theTestSuite.countTestCases() == 0){
                 	// No valid test in the testsuite ! => fails
                 	Exception e = new Exception("Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')");
@@ -165,7 +190,8 @@ public class RunJunitFactory implements Test {
             }
             else // it is not a test suite
             {
-                theTestCase = new RunTestCase(main_class, main_operation, this, constraintExecution);
+                theTestCase = new RunTestCase(main_class, main_operation, this, constraintExecution, true);
+                if(!optimizeLoading) unit = null; // reset the unit to free some memory
                 return theTestCase;
             }
 
@@ -175,6 +201,7 @@ public class RunJunitFactory implements Test {
             // construct a "fake" test that simply fails and return this
             // exception
             theTestCase = new FailedTestCase(failedTestName, e);
+            if(!optimizeLoading) unit = null; // reset the unit to free some memory
             return theTestCase;
         }
     }
@@ -227,7 +254,7 @@ public class RunJunitFactory implements Test {
             // the BaseInterpreter
             Operation mainOp = it.next();
             if (mainOp.getName().startsWith("test")) {
-                theTestSuite.addTest(new RunTestCase(main_class, mainOp.getName(), this, constraintExecution));
+                theTestSuite.addTest(new RunTestCase(main_class, mainOp.getName(), this, constraintExecution, it.hasNext()));
             }
         }
     }
@@ -267,4 +294,29 @@ public class RunJunitFactory implements Test {
             theTestCase.run(arg0);
 
     }
+    
+    
+    public void resetUnit(){
+    	unit = null;
+    }
+    /**
+     * return the unit, take care of optimization
+     * may reload it if necessary
+     * @return
+     */
+	public KermetaUnit getUnit() {
+		if(unit == null){
+			try {
+				unit = IOPlugin.getDefault().loadKermetaUnit( unit_uri );
+			} catch (KermetaIOFileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (URIMalformedException e) {
+				e.printStackTrace();
+			}
+			KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
+        	typechecker.checkUnit(); // make sure the types are correctly set
+        	// we don't care about constraint checking since it has already be done before
+		}
+		return unit;
+	}
 }

@@ -1,4 +1,4 @@
-/* $Id: RunTestCase.java,v 1.15 2007-08-03 09:23:14 ftanguy Exp $
+/* $Id: RunTestCase.java,v 1.16 2007-08-21 14:29:31 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -43,7 +43,17 @@ public class RunTestCase extends TestCase {
 
     private boolean constraintExecution = false;
     
-    public RunTestCase(String themainClassValue, String themainOperationValue, RunJunitFactory thecontainerTestSuite, boolean constraintExecution)
+    private boolean isLastOfSerie =  false;
+    
+    /**
+     * 
+     * @param themainClassValue
+     * @param themainOperationValue
+     * @param thecontainerTestSuite 
+     * @param constraintExecution true if the interpreter much run with pre/post checking
+     * @param isLastOfSerie true if this is the last of the test suite
+     */
+    public RunTestCase(String themainClassValue, String themainOperationValue, RunJunitFactory thecontainerTestSuite, boolean constraintExecution, boolean isLastOfSerie)
 
     {
         super(themainClassValue + "." + themainOperationValue);
@@ -51,6 +61,7 @@ public class RunTestCase extends TestCase {
         mainOperationValue = themainOperationValue;
         containerTestSuite = thecontainerTestSuite;
         this.constraintExecution = constraintExecution;
+        this.isLastOfSerie = isLastOfSerie;
     }
 
     protected void setUp() throws java.lang.Exception {
@@ -61,7 +72,7 @@ public class RunTestCase extends TestCase {
         
         if (interpreter == null) {
             System.err.println("Memory before interpreter : " + Runtime.getRuntime().totalMemory());
-           	interpreter = new KermetaInterpreter(containerTestSuite.unit);
+           	interpreter = new KermetaInterpreter(containerTestSuite.getUnit());
             System.err.println("Memory after interpreter : " + Runtime.getRuntime().totalMemory());
         }
         
@@ -73,6 +84,10 @@ public class RunTestCase extends TestCase {
     protected long time;
 
     protected void tearDown() throws java.lang.Exception {
+    	if(isLastOfSerie){
+    		containerTestSuite.resetUnit();  // ask to free the memory of the unit
+    	}
+    	
         // not needed anymore now
         containerTestSuite = null;
        
