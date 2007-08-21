@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.12 2007-08-06 16:16:35 jmottu Exp $
+/* $Id: JunitTestSuite.java,v 1.13 2007-08-21 09:18:59 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -81,6 +81,8 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_003_associations() throws Exception {
 testvalidFile("test/constraintchecker_tests/valid","003_associations.kmt" );
@@ -104,6 +106,10 @@ testvalidFile("test/constraintchecker_tests/valid","006_constraint_type_boolean_
 
 public void testvalid_006_constraint_type_boolean_valid3() throws Exception {
 testvalidFile("test/constraintchecker_tests/valid","006_constraint_type_boolean_valid3.kmt" );
+}
+
+public void testvalid_028_weaving_in_kermeta_aspect9() throws Exception {
+testvalidFile("test/constraintchecker_tests/valid","028_weaving_in_kermeta_aspect9.kmt" );
 }
 
 public void testinvalid_001_cyclicinheritance_01() throws Exception {
@@ -144,6 +150,14 @@ testinvalidFile("test/constraintchecker_tests/invalid","003_associations_06.kmt"
 
 public void testinvalid_003_associations_07() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","003_associations_07.kmt" );
+}
+
+public void testinvalid_003_associations_08() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","003_associations_08.kmt" );
+}
+
+public void testinvalid_003_associations_09() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","003_associations_09.kmt" );
 }
 
 public void testinvalid_004_cyclicCompositions_01() throws Exception {
