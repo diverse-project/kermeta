@@ -6,14 +6,16 @@
 
 	<!-- CLASSPATH AND LIBRARY : Change that to fit your config -->
 	<!--<property name="eclipse_dir" location="/home/apps/eclipse3"/>-->
-	<property name="eclipse_dir" location="/opt/eclipse/"/>
+	<property name="eclipse.home" location="C:/eclipse3.3/eclipse"/>
 	
 	<property name="libdir" location="./lib"/>
 	
 	<path id="full.classpath">
-			<pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.common_2.3.0.v200706262000.jar"/>
-		    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore_2.3.0.v200706262000.jar"/>
-		    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore.xmi_2.3.0.v200706262000.jar"/>
+			<fileset dir="${eclipse.home}/plugins">
+				    <include name="**/org.eclipse.emf.common_*.jar"/>
+					<include name="**/org.eclipse.emf.ecore_*.jar"/>
+					<include name="**/org.eclipse.emf.ecore.xmi_*.jar"/>
+			</fileset>
 			<pathelement location="../EcoreMerge/runtime/"/>
 		    <pathelement path="${classpath}"/>
 			<pathelement path="./build/class/"/>
