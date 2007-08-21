@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.9 2007-08-07 15:05:46 ftanguy Exp $
+/* $Id: PropertyChecker.java,v 1.10 2007-08-21 12:59:57 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -42,9 +42,11 @@ public class PropertyChecker extends AbstractChecker {
 	// String messages
 	/** The opposite prop. of the opposite prop. *b* of a property *a* must be equals to the property *a* */
 	public static final String OPPOSITE_ERROR = "Opposite mismatch  : the association is illformed. ";
-	/** A composite property cannot have at its opposite property a multiplicity different than [1..1] */
+	public static final String UPPERNOTZERO_ERROR = "the upperbound multiplicity cannot be 0";
+	public static final String LOWERGREATERTHANUPPER_ERROR = "the upperbound must be greater than the lowerbound";
 	public static final String MULTIPLICITY_ERROR = 
-		"Composition multiplicity problem : change the multiplicity or do not use composition"+
+		"A composite property cannot have at its opposite property a multiplicity  greater than 1 : " +
+		"change the multiplicity or do not use composition"+
 		" on the other end of the association. ";
 	public static final String ISCOMPOSITE_ERROR = "Double composition problem (container contained by its content)";
 	public static final String ISDERIVED_ERROR = "If property.isDerived is false than property.getterBody and property.setterBody must be void ";
@@ -163,7 +165,17 @@ public class PropertyChecker extends AbstractChecker {
 	 */
 	protected boolean checkPropertyMultiplicity()
 	{
-		return (property.getUpper()!=0 && property.getUpper()>property.getLower());
+		boolean result = true;
+		if(property.getUpper()==0){
+			result = false;
+			addProblem(ERROR, UPPERNOTZERO_ERROR ,property);
+		}
+		if(property.getUpper() != -1)
+			if(property.getUpper()<property.getLower()){
+				result = false;
+				addProblem(ERROR, LOWERGREATERTHANUPPER_ERROR, property);
+			}
+		return result;
 	}
 	
 	/**
