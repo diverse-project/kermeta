@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.52 2007-08-14 12:19:40 vmahe Exp $
+/* $Id: reflection.kmt,v 1.53 2007-08-22 09:56:37 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -959,7 +959,7 @@ abstract class ModelingUnit
 	attribute requires : set Require[0..*]
 
 	/**
-	 * Shortcut references to packages
+	 * Shortcut references to specify the use of packages
 	 */
 	attribute usings : set Using[0..*]
 
