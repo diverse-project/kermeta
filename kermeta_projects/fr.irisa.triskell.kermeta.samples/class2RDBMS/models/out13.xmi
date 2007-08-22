@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<RDBMSMM:RDBMSModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:RDBMSMM="platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore">
-  <table name="Toto">
-    <fkeys references="//@table.1"/>
-  </table>
-  <table name="Blah"/>
-</RDBMSMM:RDBMSModel>
