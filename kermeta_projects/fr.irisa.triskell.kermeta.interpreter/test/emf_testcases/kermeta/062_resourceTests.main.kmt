@@ -35,16 +35,12 @@ class Main inherits TestCase {
 	 */
 	operation main() is do
 		stdio.writeln("start tests")
-		/*
+		
 		var tr : TestRunner init TestRunner.new
 		tr.run(Main)
 		tr.printTestResult
 		stdio.writeln("--- resourceTests END ---")
-		*/
-		setUp
-		testLoadDependentResources
-		testContainingResource
-		stdio.writeln("tests completed")
+		
 		
 	end
 
@@ -128,5 +124,47 @@ class Main inherits TestCase {
 		traceRes.load
 	end
 	
+	/**
+	 *  check that if a resource is loaded several times it will contains only necessary objects
+	 */
+	operation testMultipleResourceLoad() is do
+		emfRep := EMFRepository.new
+		var res : Resource
+		res := emfRep.createResource(inMdlUri, inMMdlUri)
+		res.load
+		var firstLoadSize : Integer init res.size
+		stdio.writeln("nb element in res: " + firstLoadSize.toString)
+		stdio.writeln("nb resources in repository: " + emfRep.resources.size.toString)
+		// load it a second times
+		res.load
+		stdio.writeln("nb element in res: " + firstLoadSize.toString)
+		stdio.writeln("nb resources in repository: " + emfRep.resources.size.toString)
+		assert(res.size == firstLoadSize)
+	end
+	/**
+	 *  check that if a resource is indirectly loaded several times it will contains only necessary objects
+	 */
+	operation testMultipleResourceIndirectLoad() is do
+		
+		emfRep := EMFRepository.new
+		traceRes ?= emfRep.createResource(traceMdlUri, traceMMdlUri)
+		traceRes.load
+		var firstLoadNbResources : Integer init emfRep.resources.size
+		stdio.writeln("nb resources in repository: " + firstLoadNbResources.toString)
+		/* emfRep.resources.each{ r | 
+			stdio.writeln("nb element in res " + r.uri + " : " + r.size.toString)
+		}*/
+		// load it a second times
+		traceRes.load
+		//assert(firstLoadNbResources.toString == emfRep.resources.size.toString)
+		 assertTrueWithMsg(emfRep.resources.size == firstLoadNbResources, "2 successive load of dependent resources has created too much resources. first load = " +
+			firstLoadNbResources.toString + " resources, second load = " + emfRep.resources.size.toString + " resources" 
+		)
+		 stdio.writeln("nb resources in repository: " + emfRep.resources.size.toString)
+		/* emfRep.resources.each{ r | 
+			stdio.writeln("nb element in res " + r.uri + " : " + r.size.toString)
+		}*/
+		
+	end
 }
 
