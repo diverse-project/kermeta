@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.66 2007-07-20 15:07:49 ftanguy Exp $
+/* $Id: EMF2Runtime.java,v 1.67 2007-08-22 06:49:59 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -244,13 +244,14 @@ public class EMF2Runtime {
 	//public void loadunit()
 	public void loadunit(RuntimeObject mainResRO)
 	{
+		int processedElements = 0;
 		try {
 			// Compute list of inter-dependent resources
 			dependentResources = unit.findDependentResources(resource);
 			
 			// Pass 1 : pre-create the runtime objects
 			createEmptyRuntimeObjects();
-			
+			internalLog.debug("Loading " + runtime_objects_map.keySet().size() + " objects from " + resource.getURI().toString() +  " and its dependencies ");
 			// If the meta-model uri was not provided in the constructor of EMFRuntimeUnit, we try
 			// to find one
 			if (unit.getMetaModelUri()==null || unit.getMetaModelUri().length()==0)
@@ -264,6 +265,7 @@ public class EMF2Runtime {
 			for (Object next : runtime_objects_map.keySet()) {
 			    RuntimeObject rObject = (RuntimeObject)this.runtime_objects_map.get((EObject)next);
 			    this.populateRuntimeObject(rObject);
+			    processedElements++;
 			}
 
 			// Set the container RO property for populated ROs
@@ -289,6 +291,16 @@ public class EMF2Runtime {
 		    		"Error loading EMF model at '" + unit.getUriAsString() +
 		    		"' :\n   " + e.getMessage()!=null?e.getMessage():e + "  at '"  + e.getStackTrace()[0] + "'", e);
 		}
+		catch(java.lang.OutOfMemoryError e){
+    		//packages.clear();
+    		String msg = e + ": Not enough memory to load your " 
+    				+ " model (processed " + processedElements + " elements ot of " 
+    				+ runtime_objects_map.keySet().size() + " from " + resource.getURI().toString() +  " and its dependencies); ";
+    		msg += "\nplease consider increasing the memory allocated to your jvm";
+    		
+    		internalLog.error(msg,e);
+    		unit.throwKermetaRaisedExceptionOnLoad(msg,e);
+    	}
 		
 	}
 	
