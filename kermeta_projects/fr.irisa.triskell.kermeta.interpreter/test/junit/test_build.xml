@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.35 2007-08-02 09:04:11 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.36 2007-08-23 06:59:01 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -163,7 +163,9 @@
 		description="run interpreter tests" depends="compile_java">
 	    <mkdir dir="${report.dir}"/> 
 	    <mkdir dir="${report.dir}/html"/>
-		<junit printsummary="yes" haltonfailure="no" showoutput="no">
+		<junit printsummary="yes" haltonfailure="no" showoutput="no" fork="yes">
+		  <jvmarg value="-Xms40m"/>
+		  <jvmarg value="-Xmx512m"/>
 		  <!--<classpath location="${instrumented.dir}" />-->
 		  <classpath>
 			  	<pathelement location="${instrumented.dir}"/>
