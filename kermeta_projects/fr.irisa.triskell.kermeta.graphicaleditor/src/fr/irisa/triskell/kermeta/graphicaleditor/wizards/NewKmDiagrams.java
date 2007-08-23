@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: NewKmDiagrams.java,v 1.4 2007-07-23 09:21:25 cfaucher Exp $
+ * $Id: NewKmDiagrams.java,v 1.5 2007-08-23 07:48:27 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -92,7 +92,12 @@ public class NewKmDiagrams extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
+	 * FIXME CF 2007-08-22 This method should be fully generated,
+	 * but there is a bug from a Topcased javajet template
+	 * diagPage.getRootEObject() instead of diagPage.getDiagramEObject()
+	 * Bug detected in Topcased 1.0.0, so we are waiting a future release
+	 * to remove the "NOT" annotation
 	 */
 	private boolean createDiagramFromExistingModel() {
 		WorkspaceModifyOperation op = new WorkspaceModifyOperation() {
@@ -104,7 +109,8 @@ public class NewKmDiagrams extends Wizard implements INewWizard {
 					InterruptedException {
 				DiagramFileInitializer initializer = new DiagramFileInitializer();
 				try {
-					initializer.createDiagram(diagPage.getRootEObject(),
+					// Modification: diagPage.getRootEObject() to diagPage.getDiagramEObject()
+					initializer.createDiagram(diagPage.getDiagramEObject(),
 							diagPage.getDiagramId(), diagPage.isInitialized(),
 							monitor);
 				} catch (IOException ioe) {
