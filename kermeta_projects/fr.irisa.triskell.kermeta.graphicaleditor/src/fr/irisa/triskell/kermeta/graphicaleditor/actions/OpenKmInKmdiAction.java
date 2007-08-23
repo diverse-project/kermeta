@@ -1,4 +1,4 @@
-/*$Id: OpenKmInKmdiAction.java,v 1.2 2007-07-30 13:54:51 cfaucher Exp $
+/*$Id: OpenKmInKmdiAction.java,v 1.3 2007-08-23 07:56:33 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.graphicaleditor
 * File : 	OpenKmInKmdiAction.java
 * License : EPL
@@ -85,13 +85,10 @@ public class OpenKmInKmdiAction implements IObjectActionDelegate {
 	public void selectionChanged(IAction action, ISelection selection) {
 		if (selection instanceof StructuredSelection)
 		{
-			// the se=lection should be a single *.ecore file
 			currentSelection = (StructuredSelection)selection;
-			Iterator it = currentSelection.iterator();
-
-			while(it.hasNext()) {
-				kmfile = (IFile)it.next();
-			}
+			
+			// the selection should be a single *.km file and we choose the first one
+			kmfile = (IFile) currentSelection.getFirstElement();
 		}
 	}
 
