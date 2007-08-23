@@ -1,8 +1,10 @@
-/* $Id: loadKM.kmt,v 1.2 2007-08-17 15:44:13 rmachado Exp $
+/* $Id: loadKM.kmt,v 1.3 2007-08-23 09:56:18 dvojtise Exp $
  * Creation date: May 24, 2007
- * License:
- * Copyright:
- * Authors: rafael duarte (rmachado@irisa.fr)
+ * License: EPL
+ * Copyright: 
+ * Authors: 
+ *		Rafael Duarte
+ *		Didier Vojtisek
  */
 @mainClass "modelmerging::ModelLoader"
 @mainOperation "main"
@@ -28,15 +30,17 @@ class ModelLoader
 	
 	operation main() : Void is do 
 		initialize
-		var pack1 : Package init loadModel("LeftInputModel.km")
-		var pack2 : Package init loadModel("RightInputModel.km")
+		var mu1 : ModelingUnit init loadModel("LeftInputModel.km")
+		var mu2 : ModelingUnit init loadModel("RightInputModel.km")
 		//printPackage(pack1)
 		//printPackage(pack2)
-		var merger : AbstractMerger init DefaultMerger.new
-		var mergedPack : Package init merger.mergePackage(pack1, pack2)
+		stdio.writeln("### initializing merger ###")
+		var merger : AbstractMerger init DefaultMerger.new.initialize
+		//merger.initialize
+		var mergedMU : ModelingUnit init merger.mergeModelingUnit(mu1, mu2)
 		stdio.writeln("### printing merged package ###")
-		printPackage(mergedPack)
-		saveModel(mergedPack, "MergedPackage.km")
+		//printPackage(mergedPack)
+		saveModel(mergedMU, "MergedPackage.km")
 		//saveModel(pack1, "LeftInputModelAfter.km")
 		//saveModel(pack2, "RightInputModelAfter.km")
 	end
@@ -44,26 +48,27 @@ class ModelLoader
 	/*
 	 * loads a model (package) given its path, using kermeta as metamodel
 	 */
-    operation loadModel(path : String) : Package 
+    operation loadModel(path : String) : ModelingUnit 
    		pre notVoid is do not path.equals("") end
        	pre notVoid is do path != void end
     is do
     	var resource : kermeta::persistence::Resource             
        	//resource ?= repository.createResource(path, "./metamodel/kermeta_java.ecore")
         resource := repository.getResource(path)
-        resource.load()
-        // models should only contain one package
-		result ?= resource.instances.detect{p | Package.isInstance(p)}
+        stdio.writeln(path + " loaded")
+        // resource.load() // not necessary since a getresource already load the model
+        // since v0.6.0 models should only contain one ModelingUnit
+		result ?= resource.detect{m | ModelingUnit.isInstance(m)}
    	end
    
    	/*
    	 * saves a merged package as a .km file given its path
    	 */
-	operation saveModel(p : Package, path : String) is do
+	operation saveModel(m : ModelingUnit, path : String) is do
     	var resource : kermeta::persistence::Resource             
 		resource := repository.createResource(path,
 			"./metamodel/kermeta_java.ecore")
-     	resource.instances.add(p)
+     	resource.add(m)
      	stdio.writeln("Saving model... " + path)
      	resource.save()
      	stdio.writeln("Model successfully saved")

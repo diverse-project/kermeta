@@ -1,8 +1,10 @@
-/* $Id: Merger.kmt,v 1.2 2007-08-17 15:44:13 rmachado Exp $
+/* $Id: Merger.kmt,v 1.3 2007-08-23 09:56:18 dvojtise Exp $
  * Creation date: May 29, 2007
- * License:
- * Copyright:
- * Authors: rafael duarte
+ * License: EPL
+ * Copyright: 
+ * Authors: 
+ *		Rafael Duarte
+ *		Didier Vojtisek
  */
 
 
@@ -21,11 +23,13 @@ using modelmerging::metamodel
 
 
 /*
- *  abstract class that contains tha basic operations provided by the merger
+ *  abstract class that contains the basic operations provided by the merger
  *  * not sure about the necessity of this class
  */
 abstract class AbstractMerger {
-	
+	operation initialize() : AbstractMerger is abstract
+	// merge a matching pair of modelingunits into one
+	operation mergeModelingUnit(mu1:ModelingUnit, mu2:ModelingUnit) : ModelingUnit is abstract 
 	// merge a matching pair of pacckages into one
 	operation mergePackage(pack1:Package, pack2:Package) : Package is abstract 
 	// merge a matching pair of classes into one
@@ -53,17 +57,69 @@ class DefaultMerger inherits AbstractMerger
 	
 	reference utils : Utils
 	
+	/**
+	 * this must be called to initialize the merger ...
+	 */
+	method initialize() : AbstractMerger is do
+		stdio.writeln("### DefaultMerger.initialize ###")
+		
+		matcher := RuleMatcher.new
+		matcher.initialize
+		
+		utils := Utils.new
+		
+		correspondingClasses := Hashtable<ClassDefinition,ClassDefinition>.new
+		
+		result := self
+	end
+	
+	/* 
+	 * merges two ModelingUnit and their content, creates a new ModelingUnit with 
+	 * the matched packages and merges their sets of classes
+	 */
+	method mergeModelingUnit(mu1:ModelingUnit, mu2:ModelingUnit) : ModelingUnit is do 
+		
+		
+		var mergedMU : ModelingUnit init kermeta::language::structure::ModelingUnit.new
+		
+		stdio.writeln("### merging ModelingUnit ###")
+		
+		// packages that are still not matched
+		var unmatchedMU1Packages : Set<Package> init Set<Package>.new
+		var unmatchedMU2Packages : Set<Package> init Set<Package>.new
+		unmatchedMU1Packages.addAll(mu1.packages)
+		unmatchedMU2Packages.addAll(mu2.packages)
+		mu1.packages.each{p1 |
+			mu2.packages.each{p2 |
+				if(matcher.matchPackage(p1,p2)) then
+					
+					mergedMU.packages.add(mergePackage(p1, p2))
+					// remove these packages from the unmatched one
+					unmatchedMU1Packages.remove(p1)
+					unmatchedMU2Packages.remove(p2)
+				end
+			}
+		}
+		// now also add the packages that don't match
+			// simply move them from the original file to the new one since we won't save 
+			// maybe a clone is better ?
+		mergedMU.packages.addAll(unmatchedMU1Packages)
+		mergedMU.packages.addAll(unmatchedMU2Packages)
+		// TODO deal with tags
+		// TODO deal with using
+		// TODO deal with require
+		// TODO deal with include and exclude filter
+		
+		result := mergedMU
+	end
+	
+	
 	/* 
 	 * merges two packages recursively, creates a new package with the same name
 	 * of the matched packages and merges their sets of classes
 	 */
 	method mergePackage(pack1:Package, pack2:Package) : Package is do 
-		matcher := RuleMatcher.new
-		matcher.initialize
-		
-		utils := Utils.new
 			
-		correspondingClasses := Hashtable<ClassDefinition,ClassDefinition>.new
 		
 		/****************************************************************/
 		/************* Policies definition ******************************/
@@ -116,7 +172,7 @@ class DefaultMerger inherits AbstractMerger
 						correspondingClasses.put(cAux2,c)
 						
 						// remove c1 and c2 from the sets
-						classes2.remove(cAux2)
+						classes2.remove(cAux2) /// DVK  modify the collection while iterating on it !?
 						classes1.remove(cAux1)
 						// what if more than one matching pair exists??
 						// impossible to have classes with the same name in the same package
@@ -377,7 +433,7 @@ class DefaultMerger inherits AbstractMerger
 		var cAux : ClassDefinition
 		classes.each{c |
 			cAux ?= c
-			var inheritedAtt : Set<Property> init cAux.allOwnedAttribute.reject{prop | cAux.ownedAttribute.contains(prop)}.asSet
+			var inheritedAtt : Set<Property> init cAux.allAttribute.reject{prop | cAux.ownedAttribute.contains(prop)}.asSet
 			if cAux.ownedAttribute.exists{prop1 | inheritedAtt.exists{prop2 | prop1.name == prop2.name}} then
 				// how could this conflict be solved? 
 				// - remove property from sub or superclass
