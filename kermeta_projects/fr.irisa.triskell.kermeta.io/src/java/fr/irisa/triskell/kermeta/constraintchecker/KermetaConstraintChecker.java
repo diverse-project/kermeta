@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.12 2007-08-21 12:54:36 dvojtise Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.13 2007-08-23 07:19:08 jmottu Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -181,6 +181,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	/**
 	 * Checked constraints :
 	 *   - Only CallFeature contained in postcondition can have isIsAtPre == true.
+	 *   - Sometimes it is not possible to anticipate the value of a callfeature
 	 * 
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitConstraint(fr.irisa.triskell.kermeta.language.structure.Constraint)
 	 */
@@ -246,7 +247,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 		return result;
 		//return super.visitProperty(node);
 	}
-
+	
 	/** A shortcut to add messages on the builder kermeta unit */
 	public void addProblem(String msg, fr.irisa.triskell.kermeta.language.structure.Object node)
 	{// have to make a choice
