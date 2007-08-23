@@ -1,1 +1,0 @@
-%name%.km added in the element "kermeta_language_structure:Package": name="%name%" uri="http://%name%"
