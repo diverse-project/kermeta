@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="_piiX0Rp7Edyx1YiRXapfag" projectName="fr.irisa.triskell.kermeta.graphicaleditor" name="Kermeta class diagram" package="cd" prefix="Km" forceOverwrite="true" copyrightText="$Id: $&#xD;&#xA;License: EPL&#xD;&#xA;Copyright: IRISA / INRIA / Universite de Rennes 1" pluginVersion="0.5.0" provider="IRISA/INRIA" samePluginAsEditor="true">
+<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="_piiX0Rp7Edyx1YiRXapfag" projectName="fr.irisa.triskell.kermeta.graphicaleditor2" name="Kermeta class diagram" package="cd" prefix="Km" forceOverwrite="true" copyrightText="$Id: $&#xD;&#xA;License: EPL&#xD;&#xA;Copyright: IRISA / INRIA / Universite de Rennes 1" pluginVersion="0.5.0" provider="IRISA/INRIA" samePluginAsEditor="true">
   <palette xmi:id="_piiX0hp7Edyx1YiRXapfag" name="Palette">
     <paletteCategories xmi:id="_piiX0xp7Edyx1YiRXapfag" name="Node">
       <items xmi:id="_piiX1Bp7Edyx1YiRXapfag" name="Package" part="_pisI0Bp7Edyx1YiRXapfag"/>
@@ -60,6 +60,6 @@
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_pi_DyRp7Edyx1YiRXapfag" name="Inheritance"/>
   <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_xJVu4B2hEdyYPoyw7qeztQ" name="PropertyBiDirec"/>
   <genModel href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#/"/>
-  <templateRootObject href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/Package"/>
+  <templateRootObject href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/ModelingUnit"/>
   <editorConfigurator href="kermeta.editorconfigurator#_zoDPQBp7Edyx1YiRXapfag"/>
 </diagramconfigurator:DiagramConfiguration>
