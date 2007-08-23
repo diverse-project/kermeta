@@ -1,4 +1,4 @@
-/* $Id: basicOCLtest.kmt,v 1.2 2007-08-13 17:32:43 bitterjug Exp $
+/* $Id: basicOCLtest.kmt,v 1.3 2007-08-23 15:05:24 bitterjug Exp $
  * Creation date: July 26, 2007
  * License:
  * Copyright:
@@ -10,6 +10,7 @@
 package tests;
 require kermeta
 require "../../../someUnit/src/newUnit.kmt" 
+require "../transformations-dev/EcoreHelper.kmt"
 require "../transformations-dev/ocl2kmtVisitor.kmt"  
 require "../helpers/OCLHelper.kmt"   
 
@@ -20,6 +21,7 @@ using kermeta::standard
 using kermeta::persistence
 using kermeta::interpreter 
 using ocl2kmt
+using EcoreHelpers
 
 
 class Main
@@ -27,20 +29,24 @@ class Main
     attribute repository: EMFRepository
     attribute helper : OCLHelpers::OCLHelper
     attribute visitor :Ocl2kmtVisitor 
-    attribute model : Set<Object> 
+    attribute parsedOCL : Set<Object>
+    reference ecoreHelper: EcoreHelper 
+    
     
 	operation main() : Void is do 
+            var filename: String init "74"
+            var sourceFileName : String init "../../ocl/" + filename + ".xmi"
             repository := EMFRepository.new        
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
+            ecoreHelper := EcoreHelper.new
+            parsedOCL  := helper.loadOCLModel(repository, sourceFileName)
+            ecoreHelper.setModel( repository.getResource("../../ocl/sample.ecore") )
           
-            var filename: String init "74"
-            var sourceFileName : String init "../../ocl/" + filename + ".xmi"
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
-            visitor.setMetamodelURI("../../ocl/sample.ecore") 
-            model  := helper.loadOCLModel(repository, sourceFileName)
-            helper.getPackageDeclaration(model).accept(visitor)
+            visitor.setEcoreHelper(ecoreHelper)
+            helper.getPackageDeclaration(parsedOCL).accept(visitor)
             stdio.writeln("\n--------------------------------------------------------------------------------------")
             stdio.writeln(io.s)
 	end

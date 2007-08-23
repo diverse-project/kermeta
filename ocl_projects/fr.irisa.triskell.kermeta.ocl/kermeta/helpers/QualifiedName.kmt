@@ -1,4 +1,4 @@
-/* $Id: QualifiedName.kmt,v 1.1 2007-08-13 17:32:24 bitterjug Exp $
+/* $Id: QualifiedName.kmt,v 1.2 2007-08-23 15:05:24 bitterjug Exp $
  * Creation date: August 13, 2007
  * License:
  * Copyright:
@@ -13,6 +13,7 @@ using kermeta::standard
 class QualifiedName inherits Sequence<String>
 {
 	attribute __separator: String
+	attribute displayCache: String
 	
 	operation separator(): String is
 		do
@@ -23,6 +24,18 @@ class QualifiedName inherits Sequence<String>
 			end
 		end
 	
+	operation fromSequence(stringSeq: Sequence<String>): QualifiedName is
+		do
+			self.addAll(stringSeq)
+			result := self
+		end
+		
+	operation fromString(name: String) : QualifiedName is
+		do
+			self.add(name)
+			result := self
+		end
+		
 	operation setSeparator(sep: String): QualifiedName is
 		do
 			self.__separator := sep
@@ -30,7 +43,15 @@ class QualifiedName inherits Sequence<String>
 		
 	method toString():String is
 		do
-			var it : Iterator<String> init self.iterator
+			if displayCache == void then
+				displayCache := join(self)
+			end
+			result := displayCache
+		end
+		
+	operation join(qn: QualifiedName): String is
+		do
+			var it : Iterator<String> init qn.iterator
 			from
         		result := it.next
     		until
@@ -40,6 +61,9 @@ class QualifiedName inherits Sequence<String>
     		end
 		end
 		
+	/**
+	 ** Returns a new qualified name composed of self :: names
+	 **/
 	operation appendString(names: String): QualifiedName is
 		do
     		result := QualifiedName.new
@@ -56,6 +80,9 @@ class QualifiedName inherits Sequence<String>
     		result.add(names)
 		end
 		
+	/**
+	 ** Returns a new qualified name composed of self :: names
+	 **/
 	operation prependString(names: String): QualifiedName is
 		do
     		result := QualifiedName.new
@@ -72,11 +99,17 @@ class QualifiedName inherits Sequence<String>
     		self.each{ n | result.add(n) }
 		end
 		
+	/**
+	 ** Projects the last name
+	 **/
 	operation typeName(): String is
 		do
 			result := self.last
 		end
 		
+	/** 
+	 ** Projects all but the last name
+	 **/
 	operation packageName(): QualifiedName is
 		do
 			result := QualifiedName.new
@@ -89,5 +122,14 @@ class QualifiedName inherits Sequence<String>
 			var qn : QualifiedName init QualifiedName.new.appendString("This::that::theother")
 			stdio.writeln(qn.toString)
 			stdio.writeln( qn.prependString("here::and::now").toString)
+		end
+		
+	/**
+	 ** Returns a new qualified name composed of self:: other
+	 **/
+	operation concat(other: QualifiedName): QualifiedName is
+		do
+			result := QualifiedName.new.fromSequence(self)
+			result.addAll(other)
 		end
 }

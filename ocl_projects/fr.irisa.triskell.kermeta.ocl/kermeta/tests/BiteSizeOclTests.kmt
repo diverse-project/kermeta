@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.17 2007-08-13 17:32:43 bitterjug Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.18 2007-08-23 15:05:24 bitterjug Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -10,6 +10,7 @@
 package oclTests;
 
 require kermeta
+require "../transformations-dev/EcoreHelper.kmt"
 require "../../../someUnit/src/newUnit.kmt" 
 require "../transformations-dev/ocl2kmtVisitor.kmt"  
 require "../helpers/OCLHelper.kmt"   
@@ -20,6 +21,7 @@ using newUnit
 using kermeta::standard
 using kermeta::persistence
 using kermeta::interpreter 
+using EcoreHelpers
 using ocl2kmt
 
 class  BiteSizeOclTests  inherits TestCase
@@ -27,7 +29,7 @@ class  BiteSizeOclTests  inherits TestCase
     attribute repository: EMFRepository
     attribute helper : OCLHelpers::OCLHelper
     attribute visitor :Ocl2kmtVisitor 
-    attribute model : Set<Object> 
+    attribute parsedOCL : Set<Object> 
     attribute ecoreFile: String
     //attribute de : DynamicExpression 
                     
@@ -63,17 +65,12 @@ class  BiteSizeOclTests  inherits TestCase
             var sourceFileName : String init "../../ocl/" + filename + ".xmi"
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
-            visitor.setMetamodelURI(ecoreFile) 
-            model  := helper.loadOCLModel(repository, sourceFileName)
-            helper.getPackageDeclaration(model).accept(visitor)
+            visitor.setEcoreHelper(EcoreHelper.new.loadMetamodel(ecoreFile))
+            parsedOCL  := helper.loadOCLModel(repository, sourceFileName)
+            helper.getPackageDeclaration(parsedOCL).accept(visitor)
             result := io.s
         end
 
-  /*  operation assertSimilar(expected: String, actual: String): Void is
-        do
-            assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual\t:[" + actual + "]")
-        end
-     */   
   // boolean literal true
     operation test01(): Void is
         do
@@ -649,31 +646,35 @@ class  BiteSizeOclTests  inherits TestCase
     operation test71():Void is
         do
             var kmt : String  init  visitOclXmi("71") 
-            assertSimilar( expect("do var x: B init self.ab in x.c end"), kmt)
+            assertSimilar( expect("do var x : B init self.ab x.c end"), kmt)
         end
         
      // is kind of takes type as parameter
     operation test72():Void is
         do
             var kmt : String  init  visitOclXmi("72") 
-            assertSimilar( expect("self.ab.isKindOf(B)"), kmt)
+            assertSimilar( expect("self.ab.isInstanceOf(B)"), kmt)
         end
         
      // is kind of with qualified type as parameter
     operation test73():Void is
         do
             var kmt : String  init  visitOclXmi("73") 
-            assertSimilar( expect("self.ab.isKindOf(sample::B)"), kmt)
+            assertSimilar( expect("self.ab.isInstanceOf(sample::B)"), kmt)
         end
   
     operation test74():Void is
         do
             var kmt : String  init  visitOclXmi("74") 
-            assertSimilar( expect("self.ab.isKindOf(sample::B)"), kmt)
+            assertSimilar( expect("self.ab.isInstanceOf(SubB).~not.~or(self.ab.asType(SubB).ac)"), kmt)
+        end
+            
+    operation test75():Void is
+        do
+            var kmt : String  init  visitOclXmi("75") 
+            assertSimilar( expect("self.ab.isInstanceOf(sample::SubB).~not.~or(self.ab.asType(sample::SubB).ac)"), kmt)
         end
   
-  
-      
       operation runOneTest(testRunner: TestRunner, nn:String) is
           do
               var oneOff : Boolean init false

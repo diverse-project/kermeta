@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.8 2007-08-10 09:45:57 bitterjug Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.8 2007-08-10 09:45:57 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.9 2007-08-23 15:05:21 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.9 2007-08-23 15:05:21 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -13,8 +13,8 @@ package ocl2kmt;
 require kermeta
 require "TypeHelper.kmt"
 require "IOHelper.kmt"
-require "EcoreHelper.kmt"
 require "./oclcstvisitor.kmt"
+require "../helpers/QualifiedName.kmt"
 require "OperatorPolicies.kmt" 
 require "IteratorPolicies.kmt" 
 require "KermetaHelper.kmt"
@@ -24,6 +24,8 @@ using kermeta::exceptions
 using ocl::cst
 using ocl::cst::visitors 
 using kermeta::utils
+using qualifiedNames
+
 
  class Ocl2kmtVisitor inherits ocl::cst::visitors::Visitor, KermetaHelper, IOHelper, IteratorPolicies, OperatorPolicies, TypeHelper {
 
@@ -37,6 +39,24 @@ using kermeta::utils
 				__name := __name + 1
 				result := root + __name.toString
 			end     
+			
+		attribute __expectingType: Boolean
+		
+		operation expectingType(): Boolean is
+			do
+				result := __expectingType == true
+				// void or false --> false
+			end
+		
+		operation expectType(): Void is
+			do
+				__expectingType := true
+			end
+			
+		operation expectExpression(): Void is
+			do
+				__expectingType := false
+			end
 
 	    operation visit(visitable : Visitable) : Void is
 			do
@@ -53,9 +73,7 @@ using kermeta::utils
 			 ** Sets global context package name and generates enclosing package
 			 **/
 			do
-			// set type context:
-  			    setContextPackageName(joinNames(visitable.pathNameCS.sequenceOfNames))
-			// generate code:
+  			    setContextPackageName(visitable.pathNameCS.sequenceOfNames)
 				write("package ")
 				visitable.pathNameCS.accept(self)
 				writeln(";")
@@ -79,10 +97,7 @@ using kermeta::utils
 
 		method visitClassifierContextDeclCS(visitable : ClassifierContextDeclCS) : Void is
 			do
-			// set type context
-				setContextClassifierName(joinNames(visitable.pathNameCS.sequenceOfNames))
-				//setContextForCurrentClassifier()
-			// generate code
+				setContextClassifierName(visitable.pathNameCS.sequenceOfNames)
 				var packsName : Stack<String> init  Stack<String>.new // for package names in reverse order
 				visitable.pathNameCS.sequenceOfNames.each{ e | packsName.push(e)}
 				packsName.pop // not counting the default one for the file
@@ -90,7 +105,6 @@ using kermeta::utils
 				writeln("@aspect \"true\"")
 				write("class ")
 				write(getContextClassifier.name)
-				//visitable.pathNameCS.accept(self)
 				writeln("{")
 				visitable.invOrDefCS.accept(self)
 	      		writeln("}")
@@ -104,7 +118,7 @@ using kermeta::utils
 		 ** where it isays something like: context C::foo(x:X, y:Y):Z pre: ....
 		 **/
 			do
-				setContextClassifierName(joinNames(visitable.operationCS.pathNameCS.sequenceOfNames))
+				setContextClassifierName(visitable.operationCS.pathNameCS.sequenceOfNames)
 				var packageNames : Stack<String> init  Stack<String>.new
 				visitable.operationCS.pathNameCS.sequenceOfNames.each{ e | packageNames.push(e)}
 				var className: String init packageNames.pop
@@ -232,8 +246,8 @@ using kermeta::utils
 
 		method visitPathNameCS(visitable : PathNameCS) : Void is
 			do
-				expandedTypeName := joinNames(visitable.sequenceOfNames)
-				write(expandedTypeName)
+				qualifiedTypeName := QualifiedName.new.fromSequence(visitable.sequenceOfNames)
+				write(qualifiedTypeName.toString)
 			end
           
 		method visitSimpleNameCS(visitable : SimpleNameCS) : Void is
@@ -241,22 +255,16 @@ using kermeta::utils
 		    	write(escape(visitable.~value.toString))
 			end
 
-		reference expandedTypeName: String
+		reference qualifiedTypeName: QualifiedName
 		
-		/* abstract class
-		method visitTypeCS(visitable : TypeCS) : Void is
-			do
-				visit(visitable)
-			end */
-
 		method visitPrimitiveTypeCS(visitable : PrimitiveTypeCS) : Void is
 			do
 				if visitable.~value.toString.equals("OclAny") then
-					expandedTypeName := "Object"
+					qualifiedTypeName := QualifiedName.new.fromString("Object")
 				else
-    		    	expandedTypeName :=escape(visitable.~value.toString)
+					qualifiedTypeName := QualifiedName.new.fromString( escape(visitable.~value.toString))
 				end
-				write(expandedTypeName)
+				write(qualifiedTypeName.toString)
 			end
 
 		method visitTupleTypeCS(visitable : TupleTypeCS) : Void is
@@ -287,7 +295,7 @@ using kermeta::utils
 				if visitable.typeCS != void then // type specified?
 					write(" : ")
 					visitable.typeCS.accept(self)
-					addLocalVariable(variableName, expandedTypeName, 0, 1, false)
+					addLocalVariable(variableName, qualifiedTypeName, 0, 1, false)
 				else
 					stdio.writeln("Warning: Can't handle variables implicit types: ["+variableName+"]")
 				end
@@ -339,11 +347,28 @@ using kermeta::utils
 				visit(visitable)			
 			end
 
+		operation visitEnumLiteral(visitable : EnumLiteralExpCS) : Void is
+			do
+    			visitable.pathNameCS.accept(self)
+    			write(".")
+    			visitable.simpleNameCS.accept(self)
+			end
+			
+		operation visitEnumLiteralAsType(visitable : EnumLiteralExpCS) : Void is
+			do
+				qualifiedTypeName := QualifiedName.new.fromSequence( visitable.pathNameCS.sequenceOfNames)
+				qualifiedTypeName.add(visitable.simpleNameCS.~value.toString)
+				write(qualifiedTypeName.toString)
+			end
+			
 		method visitEnumLiteralExpCS(visitable : EnumLiteralExpCS) : Void is
 			do
-				visitable.pathNameCS.accept(self)
-				write(".")
-				visitable.simpleNameCS.accept(self)
+				if expectingType then
+					// We are being called from a context where a type has been parsed as a enumeration such as a.asType(sample::B)
+					visitEnumLiteralAsType(visitable)
+				else
+    				visitEnumLiteral(visitable)
+				end
 			end
 
 		method visitCollectionLiteralExpCS(visitable : CollectionLiteralExpCS) : Void is
@@ -473,17 +498,20 @@ using kermeta::utils
 			
 		method visitVariableExpCS(visitable : VariableExpCS) : Void is
 			do
-				// OCL Missing strin quote hack:
 				var  content: String init visitable.simpleNameCS.~value
-				stdio.write("[" + content +"].size=" +content.size.toString)
-				stdio.write( "   end =" + visitable.simpleNameCS.endOffset.toString)
-				stdio.writeln( "  start= "+ visitable.simpleNameCS.startOffset.toString)
-				if (content.size == visitable.simpleNameCS.endOffset - visitable.simpleNameCS.startOffset +1 ) then
-					stdio.writeln("[" + content+ "] is a variable expression")
-					handleVariableExpression(content)
+				if expectingType then
+					// we were called from a place where a type was expected as a parameter, such as b.oclAsType(A)
+					qualifiedTypeName := QualifiedName.new.fromString(content)
+					write(qualifiedTypeName.toString)
 				else
-					stdio.writeln("[" + content+ "] is a string literal")
-					handleStringLiteral(content)
+    				if (content.size == visitable.simpleNameCS.endOffset - visitable.simpleNameCS.startOffset +1 ) then
+    				// OCL Missing string-quote hack:
+    					stdio.writeln("[" + content+ "] is a variable expression")
+    					handleVariableExpression(content)
+    				else
+    					stdio.writeln("[" + content+ "] is a string literal")
+    					handleStringLiteral(content)
+    				end
 				end
 			end
 		

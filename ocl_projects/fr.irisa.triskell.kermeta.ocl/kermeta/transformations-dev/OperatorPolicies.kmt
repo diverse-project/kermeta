@@ -1,4 +1,4 @@
-/* $Id: OperatorPolicies.kmt,v 1.6 2007-08-13 17:21:25 bitterjug Exp $
+/* $Id: OperatorPolicies.kmt,v 1.7 2007-08-23 15:05:21 bitterjug Exp $
  * License:
  * Copyright:
  * Authors: Mark Skipper
@@ -8,12 +8,14 @@ require kermeta
 require "ocl2kmtVisitor.kmt"
 require "oclcstvisitor.kmt"
 require "TypeHelper.kmt"
+require "../helpers/QualifiedName.kmt"
  
 using kermeta::standard
 using kermeta::exceptions
 using kermeta::utils
 using ocl::cst
 using ocl::cst::visitors
+using qualifiedNames
  
  /** Superclass for the visitor that abstracts out its knowledge of 
   ** how to deal with OCL operators
@@ -405,20 +407,15 @@ class TypeTest inherits FunctionCallOp {
 	operation addActuals(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is 
 		do
 			stdio.writeln("Adding actual parameter for type test operation")
-			// there should be only one and it should be a valid type
 			if not oclOp.arguments.size.equals(1) then
 				raise TypeError.new.setMessage("type-test ["+ name+"] must have single type as parameter, param count ["+oclOp.arguments.size.toString+"]")
 			end
-			var typeID : VariableExpCS
-			typeID ?= oclOp.arguments.any
-			if typeID == void then
-				raise TypeError.new.setMessage("parameter of type-test operation must be a type (variable exp )")
-			end
-			// TODO: check that the type is a genuine type in the model?
-			// TODO: this is different if there is a package name on the given type
-			var typeName : String init  typeID.simpleNameCS.~value
-			parameterType := visitor.findTypeInMetamodel(typeName)
-			visitor.write( "(" + typeName +")")
+			visitor.expectType
+			visitor.write( "(" )
+			oclOp.arguments.any.accept(visitor)
+			visitor.write( ")" )
+			visitor.expectExpression
+			parameterType := visitor.findType( visitor.qualifiedTypeName)
 		end
 }
 

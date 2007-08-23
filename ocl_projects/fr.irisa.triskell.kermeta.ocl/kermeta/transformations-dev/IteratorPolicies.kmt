@@ -1,4 +1,4 @@
-/* $Id: IteratorPolicies.kmt,v 1.1 2007-08-10 09:45:57 bitterjug Exp $
+/* $Id: IteratorPolicies.kmt,v 1.2 2007-08-23 15:05:21 bitterjug Exp $
  * Creation date: July 25, 2007
  * License:
  * Copyright:
@@ -94,8 +94,8 @@ class SimpleIteratorIP inherits IteratorPolicy {
 			if visitable.typeCS != void then // type specified?
 				visitor.write(" : ")
 				visitable.typeCS.accept(visitor)
-				stdio.writeln("Iterator variable [" + variableName + "] has explicit type ["+visitor.expandedTypeName+"] and implicit type["+ implicitTypeName +"].")
-				visitor.addLocalVariable(variableName, visitor.expandedTypeName, 0, 1, false)
+				stdio.writeln("Iterator variable [" + variableName + "] has explicit type ["+visitor.qualifiedTypeName.toString+"] and implicit type["+ implicitTypeName +"].")
+				visitor.addLocalVariable(variableName, visitor.qualifiedTypeName, 0, 1, false)
 			else
 				stdio.writeln("Iterator variable [" + variableName + "] will have inferred type ["+implicitTypeName+"].")
 				visitor.addLocalTypedVariable(variableName, visitor.getLocalFeatureType , 0, 1, false)
