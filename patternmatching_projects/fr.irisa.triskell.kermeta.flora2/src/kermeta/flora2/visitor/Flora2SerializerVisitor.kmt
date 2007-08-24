@@ -1,4 +1,4 @@
-/* $Id: Flora2SerializerVisitor.kmt,v 1.2 2007-07-26 12:40:12 bmorin Exp $
+/* $Id: Flora2SerializerVisitor.kmt,v 1.3 2007-08-24 12:09:18 bmorin Exp $
  * Creation date: October 5, 2006
  * License:
  * Copyright:
@@ -21,7 +21,7 @@ class Flora2SerializerVisitor inherits Visitor
 {
 
 	method visit(visitable : Visitable) : flora2::DTString is do
-       var clsName : String init self.getMetaClass.typeDefinition.name
+       var clsName : kermeta::standard::String init self.getMetaClass.typeDefinition.name   
           
        if (clsName.equals("Variable")) then 
            var t : flora2::Variable 
@@ -104,7 +104,7 @@ class Flora2SerializerVisitor inherits Visitor
 	   result := visitable.symbolName	
 	end	
 	method visitFunctionalTerm(visitable : flora2::FunctionalTerm) : flora2::DTString is do 
-	   var strparameters : String init String.new
+	   var strparameters : kermeta::standard::String init kermeta::standard::String.new
 	   var it : Iterator<flora2::Term> init visitable.parameters.iterator
        if it.hasNext then 
           strparameters.append("(") 
@@ -143,7 +143,7 @@ class Flora2SerializerVisitor inherits Visitor
 	
 	method visitCompoundedFormula(visitable : flora2::CompoundedFormula) : flora2::DTString is do 
 	   var it : Iterator<flora2::Expression> init visitable.elements.iterator
-	   var strelements: String
+	   var strelements: kermeta::standard::String
        strelements := ""
        if it.hasNext then  
           strelements.append( it.next.accept (self) )
