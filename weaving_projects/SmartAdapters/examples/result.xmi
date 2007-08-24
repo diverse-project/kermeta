@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simpleRDBMS_MM:Schema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:simpleRDBMS_MM="http://simpleRDBMS_MM.ecore">
+  <table name="A">
+    <cols name="id" type="String"/>
+    <cols name="name" type="String"/>
+    <cols name="id" type="Itn"/>
+    <cols name="id" type=""/>
+  </table>
+  <table name="B">
+    <cols name="id" type="String"/>
+    <cols name="value"/>
+  </table>
+  <table name="C">
+    <cols name="name"/>
+  </table>
+</simpleRDBMS_MM:Schema>

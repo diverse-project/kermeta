@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<core:Adapter xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="platform:/resource/SmartAdapters/metamodel/specific/RDBM_AOM_Framework.ecore#//smartadapters/core" xsi:schemaLocation="platform:/resource/SmartAdapters/metamodel/specific/RDBM_AOM_Framework.ecore#//smartadapters/core ../../metamodel/specific/RDBM_AOM_Framework.ecore#//smartadapters/core">
+  <aspect>
+    <template>
+      <pattern>
+        <content href="SchemaTemplate.xmi#/"/>
+        <content href="SchemaTemplate.xmi#//@table.0"/>
+        <content href="SchemaTemplate.xmi#//@table.0/@cols.0"/>
+      </pattern>
+    </template>
+  </aspect>
+</core:Adapter>

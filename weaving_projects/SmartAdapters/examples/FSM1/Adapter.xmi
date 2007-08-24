@@ -35,10 +35,10 @@
     <asource href="FsmTemplate.xmi#//@states.0"/>
     <atarget href="FsmAspect.xmi#//@states.0"/>
   </adapt>
-  <adapt xsi:type="adaptations:createState" name="" isUnique="false">
+  <adapt xsi:type="adaptations:createState" name="" isUnique="non_unique">
     <newState name="newState"/>
   </adapt>
-  <adapt xsi:type="adaptations:cloneState" isUnique="false">
+  <adapt xsi:type="adaptations:cloneState" isUnique="non_unique">
     <newState href="FsmTemplate.xmi#//@states.0"/>
     <realState name="clonedState"/>
   </adapt>

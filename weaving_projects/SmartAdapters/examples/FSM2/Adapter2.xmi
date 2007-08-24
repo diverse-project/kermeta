@@ -23,7 +23,7 @@
       <featureIdentifier>name</featureIdentifier>
     </template>
   </aspect>
-  <adapt xsi:type="adaptations:cloneState" name="" isUnique="unique">
+  <adapt xsi:type="adaptations:cloneState" name="">
     <newState href="templateFsm.xmi#//@states.0"/>
     <realState name="clonedState"/>
   </adapt>

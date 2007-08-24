@@ -12,86 +12,88 @@ package org;
    using ecore
 
    package smartadapters
-   {
+   { 
     	package core
     	{ 
      		@aspect "true"
      		class Adapter{
 				operation initConvert() : Void is do
-stdio.write("Mapping MM' to MM...")
-convert:=Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new
-	convert.put(pattern::FSM::State,FSM::State)
-	convert.put(pattern::FSM::Transition,FSM::Transition)
-	convert.put(pattern::FSM::Fsm,FSM::Fsm)
-end
-}
+					stdio.writeln("Mapping MM' to MM...")
+					convert:=Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new
+					convert.put(pattern::FSM::State,FSM::State)
+					convert.put(pattern::FSM::Transition,FSM::Transition)
+					convert.put(pattern::FSM::Fsm,FSM::Fsm)
+				end
+		}
 	package adaptations{
-				class createState inherits Adaptation{
-	attribute isUnique:Boolean
+class createState inherits createAdaptation{
 	attribute newState:pattern::FSM::State
 
-	operation check() : Boolean is do
+	method check() : Boolean is do
 		result:=(newState!=void)
 	end
 
-	operation execute() is do
-		if(adapter.created.getValue(newState)==void or not(isUnique)) then
+	method execute() is do
 			var realState:FSM::State
-			realState?=adapter.converter.convert(Object.clone(newState), adapter.convert)
+		if(adapter.created.getValue(newState)==void or not(isUnique==uniqueType.unique)) then
+			realState?=Object.clone(newState)//adapter.converter.convert(Object.clone(newState), adapter.convert)
 			adapter.created.put(newState,realState)
+			else
+			var clone:Boolean init false
+			if(isUnique==uniqueType.non_unique) then
+				var input:String init stdio.read("clone "+newState.toString+" (true/false) :")
+				clone:=input.toBoolean
+			end
+			if(isUnique==uniqueType.non_unique or clone) then
+				realState?=adapter.converter.convert(Object.clone(newState), adapter.convert)
+				adapter.created.put(newState,realState)
+			end
 		end
 	end
 }
 
 class cloneState inherits cloneAdaptation{
-	//attribute isUnique:Boolean
 	reference newState:pattern::FSM::State
 	attribute realState:pattern::FSM::State
 
-	operation check() : Boolean is do
+	method check() : Boolean is do
 		result:=(newState!=void)
 	end
 
-	operation execute() is do
+	method execute() is do
 		var clonedState:FSM::State
 		var temp:FSM::State
 		temp?=adapter.getRealObject(newState,false)
-		stdio.writeln(isUnique.name.toString)
 		if(isUnique==uniqueType.unique) then
-			stdio.writeln("isUnique==uniqueType.unique")
 			if(not(adapter.cloned.exists{o | o==temp})) then
 				clonedState?=Object.clone(temp)
 				adapter.clone.put(realState,clonedState)
 				adapter.cloned.add(temp)
 			end
 		else
-			stdio.writeln("else")
-			stdio.writeln(isUnique.name.toString)
 			var clone:Boolean init false
 			if(isUnique==uniqueType.non_unique) then
-				stdio.writeln("isUnique==uniqueType.onDemand")
-				var input:String init stdio.read("clone "+newState.toString+" (true/false) :")//user interaction
+				var input:String init stdio.read("clone "+newState.toString+" (true/false) :")
 				clone:=input.toBoolean
 			end
 			if(isUnique==uniqueType.non_unique or clone) then
-					stdio.writeln("isUnique==uniqueType.non_unique or clone")
-					clonedState?=Object.clone(temp)
-					adapter.clone.put(realState,clonedState)
-					adapter.cloned.add(temp)
+				clonedState?=Object.clone(temp)
+				adapter.clone.put(realState,clonedState)
+				adapter.cloned.add(temp)
 			end
 		end
 	end
 }
 
-class setState inherits Adaptation{
+class setState inherits setAdaptation{
 	reference aState:pattern::FSM::State
 	reference aname:ecore::EString
 
-	operation check() : Boolean is do
+	method check() : Boolean is do
 		result:=(aState!=void)
 	end
 
-	operation execute() is do
+	method execute() is do
 		var tempState:FSM::State
 		tempState?=adapter.getRealObject(aState,false)
 		var tempname:ecore::EString
@@ -102,15 +104,15 @@ class setState inherits Adaptation{
 	end
 }
 
-class unsetState inherits Adaptation{
+class unsetState inherits unsetAdaptation{
 	reference aState:pattern::FSM::State
 	reference aname:ecore::EString
 
-	operation check() : Boolean is do
+	method check() : Boolean is do
 		result:=(aState!=void)
 	end
 
-	operation execute() is do
+	method execute() is do
 		var tempState:FSM::State
 		tempState?=adapter.getRealObject(aState,false)
 		var tempname:ecore::EString
@@ -121,59 +123,75 @@ class unsetState inherits Adaptation{
 	end
 }
 
-class createTransition inherits Adaptation{
-	attribute isUnique:Boolean
+class createTransition inherits createAdaptation{
 	attribute newTransition:pattern::FSM::Transition
 
-	operation check() : Boolean is do
+	method check() : Boolean is do
 		result:=(newTransition!=void)
 	end
 
-	operation execute() is do
-		if(adapter.created.getValue(newTransition)==void or not(isUnique)) then
+	method execute() is do
 			var realTransition:FSM::Transition
-			realTransition?=adapter.converter.convert(Object.clone(newTransition), adapter.convert)
+		if(adapter.created.getValue(newTransition)==void or not(isUnique==uniqueType.unique)) then
+			realTransition?=Object.clone(newTransition)//adapter.converter.convert(Object.clone(newTransition), adapter.convert)
 			adapter.created.put(newTransition,realTransition)
+			else
+			var clone:Boolean init false
+			if(isUnique==uniqueType.non_unique) then
+				var input:String init stdio.read("clone "+newTransition.toString+" (true/false) :")
+				clone:=input.toBoolean
+			end
+			if(isUnique==uniqueType.non_unique or clone) then
+				realTransition?=adapter.converter.convert(Object.clone(newTransition), adapter.convert)
+				adapter.created.put(newTransition,realTransition)
+			end
 		end
 	end
 }
 
-class cloneTransition inherits Adaptation{
-	attribute isUnique:Boolean
+class cloneTransition inherits cloneAdaptation{
 	reference newTransition:pattern::FSM::Transition
 	attribute realTransition:pattern::FSM::Transition
 
-	operation check() : Boolean is do
+	method check() : Boolean is do
 		result:=(newTransition!=void)
 	end
 
-	operation execute() is do
+	method execute() is do
 		var clonedTransition:FSM::Transition
 		var temp:FSM::Transition
 		temp?=adapter.getRealObject(newTransition,false)
-		if(isUnique) then
+		if(isUnique==uniqueType.unique) then
 			if(not(adapter.cloned.exists{o | o==temp})) then
 				clonedTransition?=Object.clone(temp)
 				adapter.clone.put(realTransition,clonedTransition)
 				adapter.cloned.add(temp)
 			end
 		else
-			clonedTransition?=Object.clone(temp)
-			adapter.clone.put(realTransition,clonedTransition)
+			var clone:Boolean init false
+			if(isUnique==uniqueType.non_unique) then
+				var input:String init stdio.read("clone "+newTransition.toString+" (true/false) :")
+				clone:=input.toBoolean
+			end
+			if(isUnique==uniqueType.non_unique or clone) then
+				clonedTransition?=Object.clone(temp)
+				adapter.clone.put(realTransition,clonedTransition)
+				adapter.cloned.add(temp)
+			end
 		end
 	end
 }
 
-class setTransition inherits Adaptation{
+class setTransition inherits setAdaptation{
 	reference aTransition:pattern::FSM::Transition
 	reference asource:pattern::FSM::State
 	reference atarget:pattern::FSM::State
 
-	operation check() : Boolean is do
+	method check() : Boolean is do
 		result:=(aTransition!=void)
 	end
 
-	operation execute() is do
+	method execute() is do
 		var tempTransition:FSM::Transition
 		tempTransition?=adapter.getRealObject(aTransition,false)
 		var tempsource:FSM::State
@@ -189,16 +207,16 @@ class setTransition inherits Adaptation{
 	end
 }
 
-class unsetTransition inherits Adaptation{
+class unsetTransition inherits unsetAdaptation{
 	reference aTransition:pattern::FSM::Transition
 	reference asource:pattern::FSM::State
 	reference atarget:pattern::FSM::State
 
-	operation check() : Boolean is do
+	method check() : Boolean is do
 		result:=(aTransition!=void)
 	end
 
-	operation execute() is do
+	method execute() is do
 		var tempTransition:FSM::Transition
 		tempTransition?=adapter.getRealObject(aTransition,false)
 		var tempsource:FSM::State
@@ -214,59 +232,16 @@ class unsetTransition inherits Adaptation{
 	end
 }
 
-class createFsm inherits Adaptation{
-	attribute isUnique:Boolean
-	attribute newFsm:pattern::FSM::Fsm
-
-	operation check() : Boolean is do
-		result:=(newFsm!=void)
-	end
-
-	operation execute() is do
-		if(adapter.created.getValue(newFsm)==void or not(isUnique)) then
-			var realFsm:FSM::Fsm
-			realFsm?=adapter.converter.convert(Object.clone(newFsm), adapter.convert)
-			adapter.created.put(newFsm,realFsm)
-		end
-	end
-}
-
-class cloneFsm inherits Adaptation{
-	attribute isUnique:Boolean
-	reference newFsm:pattern::FSM::Fsm
-	attribute realFsm:pattern::FSM::Fsm
-
-	operation check() : Boolean is do
-		result:=(newFsm!=void)
-	end
-
-	operation execute() is do
-		var clonedFsm:FSM::Fsm
-		var temp:FSM::Fsm
-		temp?=adapter.getRealObject(newFsm,false)
-		if(isUnique) then
-			if(not(adapter.cloned.exists{o | o==temp})) then
-				clonedFsm?=Object.clone(temp)
-				adapter.clone.put(realFsm,clonedFsm)
-				adapter.cloned.add(temp)
-			end
-		else
-			clonedFsm?=Object.clone(temp)
-			adapter.clone.put(realFsm,clonedFsm)
-		end
-	end
-}
-
-class setFsm inherits Adaptation{
+class setFsm inherits setAdaptation{
 	reference aFsm:pattern::FSM::Fsm
 	reference astates:pattern::FSM::State[0..*]
 	reference atransitions:pattern::FSM::Transition[0..*]
 
-	operation check() : Boolean is do
+	method check() : Boolean is do
 		result:=(aFsm!=void)
 	end
 
-	operation execute() is do
+	method execute() is do
 		var tempFsm:FSM::Fsm
 		tempFsm?=adapter.getRealObject(aFsm,false)
 		var tempstates:Collection<kermeta::reflection::Object>
@@ -277,7 +252,6 @@ class setFsm inherits Adaptation{
 				temp?=o
 				if(temp!=void) then
 					tempFsm.states.add(temp)
-					stdio.writeln("  "+temp.toString+" added into "+tempFsm.toString)
 				end}
 		end
 		var temptransitions:Collection<kermeta::reflection::Object>
@@ -293,16 +267,16 @@ class setFsm inherits Adaptation{
 	end
 }
 
-class unsetFsm inherits Adaptation{
+class unsetFsm inherits unsetAdaptation{
 	reference aFsm:pattern::FSM::Fsm
 	reference astates:pattern::FSM::State[0..*]
 	reference atransitions:pattern::FSM::Transition[0..*]
 
-	operation check() : Boolean is do
+	method check() : Boolean is do
 		result:=(aFsm!=void)
 	end
 
-	operation execute() is do
+	method execute() is do
 		var tempFsm:FSM::Fsm
 		tempFsm?=adapter.getRealObject(aFsm,false)
 		var tempstates:Collection<kermeta::reflection::Object>

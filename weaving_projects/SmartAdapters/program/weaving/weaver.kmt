@@ -1,18 +1,19 @@
-/* $Id: weaver.kmt,v 1.2 2007-07-26 07:15:51 bmorin Exp $
+/* $Id: weaver.kmt,v 1.3 2007-08-24 14:38:31 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
  * Authors: bmorin
  */
-@mainClass "root_package::Weaver"
-@mainOperation "weaving"
+//@mainClass "root_package::Weaver"
+//@mainOperation "weaving"
 
 package weaver;
-
+ 
 require kermeta
 
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+//require "platform:/resource/SmartAdapters/examples/EcoreHelper.kmt"
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/PatternMatchingFlora2.kmt"
 
 using ecore
@@ -34,8 +35,14 @@ class Weaver
 		var repository:EMFRepository init EMFRepository.new
 
 		//stdio.writeln("Loading meta-model "+domainMMUri+" ...")
-		var inputMetamodel:Sequence<EPackage> init handler.loadEcoreModel(EMFRepository.new, domainMMUri)
-		var inputPatternMetamodel:Sequence<EPackage> init handler.loadEcoreModel(EMFRepository.new, domainMMPatternUri)
+		//bug Kermeta collection + @aspect
+		var inputMetamodel:Sequence<EPackage> init Sequence<EPackage>.new 
+		handler.loadEcoreModel(EMFRepository.new, domainMMUri).each{p | inputMetamodel.add(p)}
+		var inputPatternMetamodel:Sequence<EPackage> init Sequence<EPackage>.new 
+		handler.loadEcoreModel(EMFRepository.new, domainMMPatternUri).each{p | inputPatternMetamodel.add(p)}
+		
+		stdio.writeln(domainMMUri+": "+inputMetamodel.toString)
+		stdio.writeln(domainMMPatternUri+": "+inputPatternMetamodel.toString)
 		//stdio.writeln("Loading meta-models... OK!")
 
 		//stdio.writeln("Weaving...")
@@ -51,9 +58,9 @@ class Weaver
 		var isChecked:EBoolean init true
 		adapter.adapt.each{a | isChecked:=(isChecked and a.check)}
 		
-		if (adapter.adapt.size>0 and isChecked) then
+		//if (adapter.adapt.size>0 and isChecked) then
 			stdio.writeln(" OK!")
-			adapter.initConvert
+			//adapter.initConvert
 			adapter.initClone		
 			if (adapter.aspect.template!=void) then
 				/*---Pattern matching---*/
@@ -106,11 +113,11 @@ class Weaver
 			*/
 			stdio.writeln("Saving Result")
 			saveModel(inputModel, resultUri, domainMMUri)		
-		else
+		/*else
 			var e:WeaverException init WeaverException.new
 			e.display
 			raise e
-		end		
+		end*/		
 	end
 
     operation loadModel(repository : EMFRepository, modelPath : String, metamodelPath : String) : Set<kermeta::standard::Object> is do                   

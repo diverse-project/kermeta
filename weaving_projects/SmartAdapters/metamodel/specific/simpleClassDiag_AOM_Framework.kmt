@@ -11,6 +11,7 @@ package org;
    using org::smartadapters::extension
    using ecore
 
+
    package smartadapters
    {
     	package core

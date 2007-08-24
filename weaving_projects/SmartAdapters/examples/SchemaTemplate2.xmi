@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simpleRDBMS_MM:Schema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simpleRDBMS_MM="platform:/resource/SmartAdapters/metamodel/domain/simpleRDBMS_MMPattern.ecore/simpleRDBMS_MM" xsi:schemaLocation="platform:/resource/SmartAdapters/metamodel/domain/simpleRDBMS_MMPattern.ecore/simpleRDBMS_MM ../metamodel/domain/simpleRDBMS_MMPattern.ecore#//simpleRDBMS_MM">
+  <table/>
+</simpleRDBMS_MM:Schema>

@@ -1,4 +1,4 @@
-/* $Id: AdaptationBuilder.kmt,v 1.3 2007-07-26 07:15:51 bmorin Exp $
+/* $Id: AdaptationBuilder.kmt,v 1.4 2007-08-24 14:38:31 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -95,25 +95,45 @@ class AdaptationBuilder
 									bodyCreate:=bodyCreate+"\toperation execute() is do\n"
 									bodyClone:=bodyCreate
 									
-									bodyCreate:=bodyCreate+"\t\tif(adapter.created.getValue(new"+c.name+")==void or not(isUnique)) then\n"
 									bodyCreate:=bodyCreate+"\t\t\tvar real"+c.name+":"+getQualifiedName(c,c.ePackage,"")+"\n"
+									bodyCreate:=bodyCreate+"\t\tif(adapter.created.getValue(new"+c.name+")==void or not(isUnique==uniqueType.unique)) then\n"
 									bodyCreate:=bodyCreate+"\t\t\treal"+c.name+"?=adapter.converter.convert(Object.clone(new"+c.name+"), adapter.convert)\n"
 									bodyCreate:=bodyCreate+"\t\t\tadapter.created.put(new"+c.name+",real"+c.name+")\n"
+									bodyCreate:=bodyCreate+"\t\t\telse\n"
+									bodyCreate:=bodyCreate+"\t\t\tvar clone:Boolean init false\n"
+									bodyCreate:=bodyCreate+"\t\t\tif(isUnique==uniqueType.non_unique) then\n"
+									bodyCreate:=bodyCreate+"\t\t\t\tvar input:String init stdio.read(\"create \"+new"+c.name+".toString+\" (true/false) :\")\n"
+				                    bodyCreate:=bodyCreate+"\t\t\t\tclone:=input.toBoolean\n"
+									bodyCreate:=bodyCreate+"\t\t\tend\n"									
+									bodyCreate:=bodyCreate+"\t\t\tif(isUnique==uniqueType.non_unique or clone) then\n"
+									bodyCreate:=bodyCreate+"\t\t\t\treal"+c.name+"?=adapter.converter.convert(Object.clone(new"+c.name+"), adapter.convert)\n"
+									bodyCreate:=bodyCreate+"\t\t\t\tadapter.created.put(new"+c.name+",real"+c.name+")\n"
+									bodyCreate:=bodyCreate+"\t\t\tend\n"
 									bodyCreate:=bodyCreate+"\t\tend\n"
 									bodyCreate:=bodyCreate+"\tend\n"
 										
 									bodyClone:=bodyClone+"\t\tvar cloned"+c.name+":"+getQualifiedName(c,c.ePackage,"")+"\n"
 									bodyClone:=bodyClone+"\t\tvar temp:"+getQualifiedName(c,c.ePackage,"")+"\n"
 									bodyClone:=bodyClone+"\t\ttemp?=adapter.getRealObject(new"+c.name+",false)\n"
-									bodyClone:=bodyClone+"\t\tif(isUnique) then\n"
+									bodyClone:=bodyClone+"\t\tif(isUnique==uniqueType.unique) then\n"
 									bodyClone:=bodyClone+"\t\t\tif(not(adapter.cloned.exists{o | o==temp})) then\n"
 									bodyClone:=bodyClone+"\t\t\t\tcloned"+c.name+"?=Object.clone(temp)\n"
 									bodyClone:=bodyClone+"\t\t\t\tadapter.clone.put(real"+c.name+",cloned"+c.name+")\n"
 									bodyClone:=bodyClone+"\t\t\t\tadapter.cloned.add(temp)\n"
 									bodyClone:=bodyClone+"\t\t\tend\n"
 									bodyClone:=bodyClone+"\t\telse\n"
-									bodyClone:=bodyClone+"\t\t\tcloned"+c.name+"?=Object.clone(temp)\n"
-									bodyClone:=bodyClone+"\t\t\tadapter.clone.put(real"+c.name+",cloned"+c.name+")\n"
+									bodyClone:=bodyClone+"\t\t\tvar clone:Boolean init false\n"
+									bodyClone:=bodyClone+"\t\t\tif(isUnique==uniqueType.non_unique) then\n"
+									bodyClone:=bodyClone+"\t\t\t\tvar input:String init stdio.read(\"clone \"+new"+c.name+".toString+\" (true/false) :\")\n"
+				                    bodyClone:=bodyClone+"\t\t\t\tclone:=input.toBoolean\n"
+									bodyClone:=bodyClone+"\t\t\tend\n"
+									bodyClone:=bodyClone+"\t\t\tif(isUnique==uniqueType.non_unique or clone) then\n"
+									bodyClone:=bodyClone+"\t\t\t\tcloned"+c.name+"?=Object.clone(temp)\n"
+									bodyClone:=bodyClone+"\t\t\t\tadapter.clone.put(real"+c.name+",cloned"+c.name+")\n"
+									bodyClone:=bodyClone+"\t\t\t\tadapter.cloned.add(temp)\n"
+									bodyClone:=bodyClone+"\t\t\tend\n"
+									/*bodyClone:=bodyClone+"\t\t\tcloned"+c.name+"?=Object.clone(temp)\n"
+									bodyClone:=bodyClone+"\t\t\tadapter.clone.put(real"+c.name+",cloned"+c.name+")\n"*/
 									bodyClone:=bodyClone+"\t\tend\n"
 									bodyClone:=bodyClone+"\tend\n"
 								end						  

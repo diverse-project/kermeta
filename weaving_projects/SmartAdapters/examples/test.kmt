@@ -1,4 +1,4 @@
-/* $Id: test.kmt,v 1.2 2007-08-24 14:38:31 bmorin Exp $
+/* $Id: test.kmt,v 1.1 2007-08-24 14:38:31 bmorin Exp $
  * Creation date: April 24, 2007
  * License:
  * Copyright:
@@ -22,7 +22,7 @@ class RDBMTest
 		var weaver:Weaver init Weaver.new
 		//Uri complètes !
 		var baseModelUri:String init "platform:/resource/SmartAdapters/examples/Schema.xmi"
-		var adapterUri:String init "platform:/resource/SmartAdapters/examples/Adapter.xmi"
+		var adapterUri:String init "platform:/resource/SmartAdapters/examples/rdbms/Adapter.xmi"
 		var adaptMMUri:String init "platform:/resource/SmartAdapters/metamodel/specific/RDBM_AOM_Framework.ecore"
 		var domainMMUri:String init "platform:/resource/SmartAdapters/metamodel/domain/simpleRDBMS_MM.ecore"
 		var domainMMPatternUri:String init "platform:/resource/SmartAdapters/metamodel/domain/simpleRDBMS_MMPattern.ecore"

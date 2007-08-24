@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pattern"
+    nsURI="platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern2.ecore"
+    nsPrefix="pattern">
+  <eSubpackages name="FSM" nsURI="platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern2.ecore/FSM"
+      nsPrefix="FSM">
+    <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="" eGenericSuperTypes="">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Fsm" eSuperTypes="" eGenericSuperTypes="">
+      <eAnnotations source="kermeta">
+        <details key="inv" value="templateConstraint is&#xD;&#xA;&#x9;do&#xD;&#xA;&#x9;&#x9;self.states.forAll{s | do&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;self.transitions.exists{t | do&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;t.target.equals(s)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xD;&#xA;&#x9;&#x9;&#x9;end}&#xD;&#xA;&#x9;end"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+          eType="#//@eSubpackages.0/@eClassifiers.0" containment="true">
+        <eGenericType eClassifier="#//@eSubpackages.0/@eClassifiers.0"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
+          eType="#//@eSubpackages.0/@eClassifiers.2" containment="true">
+        <eGenericType eClassifier="#//@eSubpackages.0/@eClassifiers.2"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="" eGenericSuperTypes="">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//@eSubpackages.0/@eClassifiers.0">
+        <eGenericType eClassifier="#//@eSubpackages.0/@eClassifiers.0"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//@eSubpackages.0/@eClassifiers.0">
+        <eGenericType eClassifier="#//@eSubpackages.0/@eClassifiers.0"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

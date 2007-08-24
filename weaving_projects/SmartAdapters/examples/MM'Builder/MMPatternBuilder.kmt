@@ -1,4 +1,4 @@
-/* $Id: MMPatternBuilder.kmt,v 1.2 2007-07-18 15:43:47 bmorin Exp $
+/* $Id: MMPatternBuilder.kmt,v 1.3 2007-08-24 14:38:32 bmorin Exp $
  * Creation date: October 18, 2006
  * License:
  * Copyright:
@@ -12,7 +12,7 @@ package root_package;
 
 
 require kermeta
-require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/PatternMetamodelBuilder.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/PatternMetamodelBuilder2.kmt"
 
 // require statement to workaround a problem in kermeta
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/persistence/EMFHandler.kmt"
@@ -25,28 +25,42 @@ using kermeta::pattern
 class EcorePatternMetamodelBuilder {
 
   operation main() is do 
-      var sourceMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/ClassDiagUML.ecore"
-      var targetMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/ClassDiagUMLPattern.ecore"
+      var sourceMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/simpleUML_MM.ecore"
+      var targetMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/simpleUML_MMPattern.ecore"
 
-   	  var repository : EMFRepository init EMFRepository.new
+   	  var repository : EMFRepository
+   	  var repository2 : EMFRepository init EMFRepository.new 
       var handler : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new   	  
       handler.initialize()        	 
+      repository:=handler.loadMetamodel(sourceMetamodelUri)    
+      //var seqPack:Sequence<EPackage> init handler.loadEcoreModel(repository,sourceMetamodelUri)
               	 
-      var packagesModelModel : Sequence<EPackage> init handler.loadEcoreModel (repository, sourceMetamodelUri)    
-
+      var seqPack : Sequence<EPackage> init handler.packages
+ 
       // Link packages to the framework of patterns (the content of the packages are changed 
       var patternCreator : PatternMetamodelBuilder init PatternMetamodelBuilder.new       
-      patternCreator.initialize (repository)       
-      var patternPack : EPackage init patternCreator.addPatternFramework(packagesModelModel, targetMetamodelUri) 
+      patternCreator.initialize(repository2)       
+      var patternPack : EPackage init patternCreator.addPatternFramework(seqPack, targetMetamodelUri) 
       
       // remove the source packages from their previours container
-      packagesModelModel.each{p | repository.getResource(sourceMetamodelUri).remove(p)} 
+      //packagesModelModel.each{p | repository.getResource(sourceMetamodelUri).remove(p)} 
       
       // problem in Kermeta: we have to clea instance class name
-      var emfhandler : kermeta::pattern::persistence::EMFHandler init kermeta::pattern::persistence::EMFHandler.new 
-      emfhandler.cleanInstanceClassNames(patternPack)
-        
-      handler.saveEcoreModel(repository, patternPack, targetMetamodelUri) 
-
+      //var emfhandler : kermeta::pattern::persistence::EMFHandler init kermeta::pattern::persistence::EMFHandler.new 
+      //emfhandler.cleanInstanceClassNames(patternPack)
+      
+      patternPack.eSubpackages.each{p | 
+			p.eClassifiers.each{c |
+				var cl:EClass
+				cl?=c
+				if(cl!=void) then
+					cl.eSuperTypes.each{s | stdio.writeln(s.name)}
+				end 
+		}}
+      
+      stdio.write("Saving...")
+      repository2.resources.each{r | stdio.writeln(r.uri)}
+      handler.saveEcoreModel(repository2,patternPack,targetMetamodelUri)
+      stdio.writeln("OK!") 
   end
 }

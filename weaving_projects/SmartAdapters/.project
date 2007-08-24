@@ -7,6 +7,5 @@
 	<buildSpec>
 	</buildSpec>
 	<natures>
-		<nature>fr.irisa.triskell.kermeta.KermetaNature</nature>
 	</natures>
 </projectDescription>

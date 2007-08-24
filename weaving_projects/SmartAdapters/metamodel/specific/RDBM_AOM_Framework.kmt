@@ -1,0 +1,38 @@
+package RDBM_AOM;
+   require kermeta
+   require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
+   require "platform:/resource/SmartAdapters/metamodel/domain/simpleRDBMS_MM.ecore"
+   require "platform:/resource/SmartAdapters/metamodel/domain/simpleRDBMS_MMPattern.ecore"
+
+   using kermeta::standard
+   using kermeta::utils
+   using patternframework
+   using org::smartadapters::core
+   using org::smartadapters::extension
+   using ecore
+
+   package smartadapters
+   { 
+    	package core
+    	{ 
+     		@aspect "true"
+     		class Adapter{
+				operation initConvert() : Void is do
+					stdio.writeln("...")
+				end
+			}
+		}
+		
+		package adaptations{
+			class voidAdaptation inherits Adaptation{
+	
+				method check() : Boolean is do
+					result:=true
+				end
+
+				method execute() is do
+					stdio.writeln("...")
+				end
+			}		
+		}
+	}
