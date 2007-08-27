@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.39 2007-08-17 09:38:18 cfaucher Exp $
+/* $Id: KM2Ecore.java,v 1.40 2007-08-27 09:30:05 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -75,8 +75,8 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
 	// the depending resources informations
 	/** The directory where to save the depending files */
 	protected String ecoreGenDirectory = null;
-	/** The list of available ecore resources provided by the user */
-	//protected List<String> ecoreFileList;
+	
+	protected ExporterOptions exporterOptions = null;
 
 	/**
 	 * <code>kmt2ecoremapping</code> is a trace mapping. 
@@ -152,17 +152,40 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
 	/**
 	 * @param resource : the resource to populate
 	 */
-	public KM2Ecore(Resource resource, KermetaUnit kunit, EDataType kermetaTypesAlias) {
+	public KM2Ecore(Resource resource, KermetaUnit kunit, EDataType kermetaTypesAlias, ExporterOptions exporterOptions) {
 		this.kermetaTypesAlias = kermetaTypesAlias;
 		ecoreResource = resource;
 		kermetaUnit   = kunit;
 		ecoreGenDirectory = kunit.getUri().substring(0, kunit.getUri().lastIndexOf("/")+1);
+		this.exporterOptions = exporterOptions;
 		//ecoreFileList = new ArrayList<String>();
 		internalLog.info("Directory for ecore generation : " + ecoreGenDirectory);
 	}
 	
-	public KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit, EDataType kermetaTypesAlias) {
-		this(resource, kunit, kermetaTypesAlias);
+	/**
+	 * Never not used for the moment
+	 * @param resource
+	 * @param traceresource
+	 * @param kunit
+	 * @param kermetaTypesAlias
+	 */
+	private KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit, EDataType kermetaTypesAlias, ExporterOptions exporterOptions) {
+		this(resource, kunit, kermetaTypesAlias, exporterOptions);
+		traceResource = traceresource;
+		tracer = new Tracer(traceResource);
+	}
+	
+	/**
+	 * Never not used for the moment
+	 * @param resource
+	 * @param traceresource
+	 * @param kunit
+	 * @param edir
+	 * @param elist
+	 * @param kermetaTypesAlias
+	 */
+	private KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit, String edir, List<String> elist, EDataType kermetaTypesAlias, ExporterOptions exporterOptions) {
+		this(resource, kunit, edir, elist, kermetaTypesAlias, exporterOptions);
 		traceResource = traceresource;
 		tracer = new Tracer(traceResource);
 	}
@@ -170,17 +193,8 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
 	/**
 	 * @param ecoregendir The directory where to generate ecore dependencies
 	 */
-	public KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit, String edir, List<String> elist, EDataType kermetaTypesAlias) {
-		this(resource, kunit, edir, elist, kermetaTypesAlias);
-		traceResource = traceresource;
-		tracer = new Tracer(traceResource);
-	}
-	
-	/**
-	 * @param ecoregendir The directory where to generate ecore dependencies
-	 */
-	public KM2Ecore(Resource resource, KermetaUnit kunit, String edir, List<String> elist, EDataType kermetaTypesAlias) {
-		this(resource, kunit, kermetaTypesAlias);
+	private KM2Ecore(Resource resource, KermetaUnit kunit, String edir, List<String> elist, EDataType kermetaTypesAlias, ExporterOptions exporterOptions) {
+		this(resource, kunit, kermetaTypesAlias, exporterOptions);
 		ecoreGenDirectory = (edir==null)?null:edir+"/";
 		//ecoreFileList = (elist==null)?new ArrayList<String>():elist;
 		//if (ecoreFileList.size() == 0 && edir == null)
@@ -188,8 +202,13 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
 		internalLog.info("Directory for ecore generation : " + ecoreGenDirectory);
 	}
 	
-	public KM2Ecore(KermetaUnit unit, EDataType kermetaTypesAlias) {
-		this(null, unit, kermetaTypesAlias);
+	/**
+	 * Never not used for the moment
+	 * @param unit
+	 * @param kermetaTypesAlias
+	 */
+	private KM2Ecore(KermetaUnit unit, EDataType kermetaTypesAlias, ExporterOptions exporterOptions) {
+		this(null, unit, kermetaTypesAlias, exporterOptions);
 	}
 	
 	/**
@@ -328,12 +347,8 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
 	/** tells wether the type of this property can be used in an ecore Attribute */
 	public boolean isPropertyValidForEAttribute(Property property){
 		Type type = property.getType();
-		// FIXME CF 2007-08-17
-		// The second line below has been added during the Modeling Unit refactoring,
-		// but it seems that "isPrimitiveEcoreType(type)" is required to do translate rightly
-		// a Property to an EAttribute. Thus, the old line has been restored.
+		// translate rightly a Property to an EAttribute. Thus, the old line has been restored.
 		return (isPrimitiveEcoreType(type)||Enumeration.class.isInstance(type)||PrimitiveType.class.isInstance(type));
-		//return ( Enumeration.class.isInstance(type)||PrimitiveType.class.isInstance(type) );
 	}
 	
 	/**

@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.40 2007-08-02 16:01:15 dvojtise Exp $
+/* $Id: KM2EcorePass2.java,v 1.41 2007-08-27 09:30:05 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -94,8 +94,8 @@ public class KM2EcorePass2 extends KM2Ecore {
 	 * @param anExporter : the km2ecore exporter; it contains a reference to the KermetaUnit of the Kmt file to
 	 * convert.
 	 */
-	public KM2EcorePass2(Resource resource, Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> mapping, KermetaUnit kermetaUnit, EDataType kermetaTypesAlias) {
-		super(resource, kermetaUnit, kermetaTypesAlias);
+	public KM2EcorePass2(Resource resource, Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> mapping, KermetaUnit kermetaUnit, EDataType kermetaTypesAlias, ExporterOptions exporterOptions) {
+		super(resource, kermetaUnit, kermetaTypesAlias, exporterOptions);
 		ecoreResource = resource;
 		km2ecoremapping = mapping;
 		savedFiles = new Hashtable<String, Resource>();
@@ -170,7 +170,9 @@ public class KM2EcorePass2 extends KM2Ecore {
 		// Visit owned attributes
 		for(Object next : node.getOwnedAttribute()) { accept((EObject)next); }
 		// Visit owned operations
-		for(Object next : node.getOwnedOperation()) { accept((EObject)next); }
+		if( !super.exporterOptions.isOnlyStructural ) {
+			for(Object next : node.getOwnedOperation()) { accept((EObject)next); }
+		}
 		
 		// Visit type parameters in order to fix the type parameter's super type
 		for(TypeVariable next : node.getTypeParameter()) {
@@ -212,6 +214,12 @@ public class KM2EcorePass2 extends KM2Ecore {
 				newEOperation.setEGenericType((EGenericType) accept(opType));
 			}
 			else {
+				// Set the right part as the operation's type
+				// FIXME CF newEOperation.setEGenericType((EGenericType) accept(((FunctionType) opType).getRight()));
+				// If type of operation is a kermeta special type, set its type to the "_KermataSpecialTypesAlias_" 
+				// datatype created during first pass
+				newEOperation.setEType(kermetaTypesAlias);
+				// Store all informations about the function type into an annotation
 				setFunctionTypeAnnotation((FunctionType) opType, newEOperation);
 			}
 		}
@@ -263,16 +271,19 @@ public class KM2EcorePass2 extends KM2Ecore {
 		///////////////////////////////////////////////////////////////////////////////////
 		// Return type (it can NOT be null)
 		Type paramType = node.getType(); 
-		if(paramType instanceof TypeVariable || paramType instanceof FunctionType) {
-			// If type of parameter is a kermeta special type, set its type to the "_KermataSpecialTypesAlias_" 
-			// datatype created during first pass
-			//type = kermetaTypesAlias; 
+		if(paramType instanceof TypeVariable || paramType instanceof FunctionType) { 
 
 			// Add ObjectTypeVariable to EParameter
 			if(paramType instanceof ObjectTypeVariable) {
 				newEParameter.setEGenericType((EGenericType) accept(paramType));
 			}
 			else {
+				// FIXME Set the right part as the parameter's type
+				//newEParameter.setEGenericType((EGenericType) accept(((FunctionType) paramType).getRight()));
+				// If type of parameter is a kermeta special type, set its type to the "_KermataSpecialTypesAlias_" 
+				// datatype created during first pass
+				newEParameter.setEType(kermetaTypesAlias);
+				// Store all informations about the function type into an annotation
 				setFunctionTypeAnnotation((FunctionType) paramType , newEParameter);
 			}
 		}
@@ -387,9 +398,6 @@ public class KM2EcorePass2 extends KM2Ecore {
 		// Return type (it can NOT be null)
 		Type propType = node.getType();
 		if(propType instanceof TypeVariable || propType instanceof FunctionType) {
-			// If type of property is a kermeta special type, set its type to the "_KermataSpecialTypesAlias_" 
-			// datatype created during first pass
-			//type = kermetaTypesAlias; 
 
 			// Add ObjectTypeVariable to EStructuralFeature
 			if(propType instanceof ObjectTypeVariable) {
@@ -398,6 +406,19 @@ public class KM2EcorePass2 extends KM2Ecore {
 				//newEStructuralFeature.getEGenericType().setETypeParameter((ETypeParameter) km2ecoremapping.get(propType));
 			}
 			else {
+				// Set the right part as the operation's type
+				
+				Type currentType = ((FunctionType) propType).getRight();
+				
+//				if(currentType instanceof C)
+				
+				//newEStructuralFeature.setEGenericType((EGenericType) accept(currentType));
+				
+				// If type of property is a kermeta special type, set its type to the "_KermataSpecialTypesAlias_" 
+				// datatype created during first pass
+				newEStructuralFeature.setEType(kermetaTypesAlias);
+				
+				// Store all informations about the function type into an annotation
 				setFunctionTypeAnnotation((FunctionType) propType, newEStructuralFeature);
 			}
 		}

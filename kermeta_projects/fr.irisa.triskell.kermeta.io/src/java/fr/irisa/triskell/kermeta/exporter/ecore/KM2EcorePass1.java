@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.48 2007-08-09 14:57:48 dvojtise Exp $
+/* $Id: KM2EcorePass1.java,v 1.49 2007-08-27 09:30:05 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -89,8 +89,8 @@ public class KM2EcorePass1 extends KM2Ecore {
 	 * @param resource : the resource to populate
 	 * @param mapping : Hastable containing the newly created object mapping
 	 */
-	public KM2EcorePass1(Resource resource, Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> mapping, KermetaUnit kermetaUnit, EDataType kermetaTypesAlias) {
-		super(resource, kermetaUnit, kermetaTypesAlias);
+	public KM2EcorePass1(Resource resource, Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> mapping, KermetaUnit kermetaUnit, EDataType kermetaTypesAlias, ExporterOptions exporterOptions) {
+		super(resource, kermetaUnit, kermetaTypesAlias, exporterOptions);
 		km2ecoremapping = mapping;
 		// PrettyPrinter that will convert the operation body into a String that will be stored as an Ecore
 		// annotation since ecore metamodel does not contains a behavior.
@@ -283,12 +283,14 @@ public class KM2EcorePass1 extends KM2Ecore {
 			}
 			
 			// Owned operations
-			for (Object next : node.getOwnedOperation()) {
-				Object o = accept((EObject)next);
-				if (o != null)
-					newEClass.getEOperations().add((EOperation) o);
-				else
-					throw new KM2ECoreConversionException("An operation in package '"+node.getName() + "' could not be resolved");				
+			if( !super.exporterOptions.isOnlyStructural ) {
+				for (Object next : node.getOwnedOperation()) {
+					Object o = accept((EObject)next);
+					if (o != null)
+						newEClass.getEOperations().add((EOperation) o);
+					else
+						throw new KM2ECoreConversionException("An operation in package '"+node.getName() + "' could not be resolved");				
+				}
 			}
 			
 			// Create an annotation to hold the class inv	

@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.7 2007-08-02 16:02:07 dvojtise Exp $
+/*$Id: EcoreExporter.java,v 1.8 2007-08-27 09:30:05 cfaucher Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -70,7 +70,7 @@ public class EcoreExporter {
 	
 	private Hashtable <KermetaUnit, Boolean> pass3done = new Hashtable <KermetaUnit, Boolean> ();
 
-	
+	private ExporterOptions exporterOptions = ExporterOptions.getDefault();
 
 	/**
 	 * This datatype is used as an extra datatype to represent (in the built Ecore file)
@@ -230,8 +230,8 @@ public class EcoreExporter {
 	 * @param rep
 	 * @param fileName
 	 */
-	public void export(KermetaUnit kermetaUnit, String rep, String fileName, boolean independency) {
-		exportInMemory(kermetaUnit, rep, fileName, independency);
+	public void export(KermetaUnit kermetaUnit, String rep, String fileName, ExporterOptions exporterOptions) {
+		exportInMemory(kermetaUnit, rep, fileName, exporterOptions);
 		save();
 	}
 	
@@ -263,8 +263,8 @@ public class EcoreExporter {
 		}
 	}
 	
-	public ResourceSet exportInMemory(KermetaUnit kermetaUnit, String rep, boolean independency) {
-		return exportInMemory(kermetaUnit, rep, null, independency);
+	public ResourceSet exportInMemory(KermetaUnit kermetaUnit, String rep, ExporterOptions exporterOptions) {
+		return exportInMemory(kermetaUnit, rep, null, exporterOptions);
 	}
 	
 	/**
@@ -274,8 +274,10 @@ public class EcoreExporter {
 	 * @param fileName
 	 * @return
 	 */
-	public ResourceSet exportInMemory(KermetaUnit kermetaUnit, String rep, String fileName, boolean independency) {
+	public ResourceSet exportInMemory(KermetaUnit kermetaUnit, String rep, String fileName, ExporterOptions exporterOptions) {
 		initialize(kermetaUnit, rep, fileName);
+		
+		this.exporterOptions = exporterOptions;
 
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 		fillResourceSet(kermetaUnit);
@@ -283,7 +285,7 @@ public class EcoreExporter {
 		applyPass1ToAll(kermetaUnit);
 		applyPass2ToAll(kermetaUnit);
 		
-		if ( independency )
+		if ( exporterOptions.isIndependent )
 			applyPass3ToAll(kermetaUnit);
 		
 		try {
@@ -311,8 +313,8 @@ public class EcoreExporter {
 	 * @param kermetaUnit
 	 * @param rep
 	 */
-	public void export(KermetaUnit kermetaUnit, String rep, boolean independency) {
-		export(kermetaUnit, rep, null, independency);
+	public void export(KermetaUnit kermetaUnit, String rep, ExporterOptions exporterOptions) {
+		export(kermetaUnit, rep, null, exporterOptions);
 	}
 	
 	/**
@@ -336,7 +338,7 @@ public class EcoreExporter {
 		}
 		
 		if ( resources.get(kermetaUnit) != null ) {
-			KM2EcorePass1 pass1 = new KM2EcorePass1( resources.get(kermetaUnit), km2ecoremapping, kermetaUnit, getKermetaTypesAlias() );
+			KM2EcorePass1 pass1 = new KM2EcorePass1( resources.get(kermetaUnit), km2ecoremapping, kermetaUnit, getKermetaTypesAlias(), exporterOptions );
 			pass1.accept( kermetaUnit.getModelingUnit() );	
 		}
 		
@@ -366,7 +368,7 @@ public class EcoreExporter {
 		}
 		
 		if ( resources.get(kermetaUnit) != null ) {
-			KM2EcorePass2 pass2 = new KM2EcorePass2( resources.get(kermetaUnit), km2ecoremapping, kermetaUnit, getKermetaTypesAlias() );
+			KM2EcorePass2 pass2 = new KM2EcorePass2( resources.get(kermetaUnit), km2ecoremapping, kermetaUnit, getKermetaTypesAlias(), exporterOptions );
 			pass2.accept( kermetaUnit.getModelingUnit() );
 		}
 		
@@ -391,7 +393,7 @@ public class EcoreExporter {
 		}
 		
 		if ( resources.get(kermetaUnit) != null ) {
-			KM2EcorePass3 pass3 = new KM2EcorePass3( resources.get(kermetaUnit), km2ecoremapping, kermetaUnit, getKermetaTypesAlias() );
+			KM2EcorePass3 pass3 = new KM2EcorePass3( resources.get(kermetaUnit), km2ecoremapping, kermetaUnit, getKermetaTypesAlias(), exporterOptions );
 			pass3.accept( kermetaUnit.getModelingUnit() );
 		}
 		

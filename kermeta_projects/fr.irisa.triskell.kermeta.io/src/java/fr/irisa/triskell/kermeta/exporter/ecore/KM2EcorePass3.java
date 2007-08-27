@@ -29,8 +29,8 @@ public class KM2EcorePass3 extends KM2Ecore {
 
 	private Hashtable<String, EDataType> datatypes = new Hashtable<String, EDataType> ();
 	
-	public KM2EcorePass3(Resource resource, Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> mapping, KermetaUnit kermetaUnit, EDataType kermetaTypesAlias) {
-		super(resource, kermetaUnit, kermetaTypesAlias);
+	public KM2EcorePass3(Resource resource, Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> mapping, KermetaUnit kermetaUnit, EDataType kermetaTypesAlias, ExporterOptions exporterOptions) {
+		super(resource, kermetaUnit, kermetaTypesAlias, exporterOptions);
 		km2ecoremapping = mapping;
 	}
 
