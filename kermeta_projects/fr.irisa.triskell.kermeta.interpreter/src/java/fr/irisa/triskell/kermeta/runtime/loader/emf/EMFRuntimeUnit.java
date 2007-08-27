@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.48 2007-08-08 12:21:17 dtouzet Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.49 2007-08-27 09:37:50 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -666,9 +666,9 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 * result includes the input resources
 	 * @return EList of Resource
 	 */
-	public EList findDependentResources(Resource resource)
+	public EList<Resource> findDependentResources(Resource resource)
 	{
-		EList result = new BasicEList();
+		EList<Resource> result = new BasicEList<Resource>();
 		result.add(resource);
 		findDependentResources(result, resource);
 		return result;
@@ -679,7 +679,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 * @param list The list&lt;Resource&gt;
 	 * @param obj The object for which we are looking the hosting Resource
 	 */
-	protected void addObjectResourceToList(EList list, EObject obj)
+	protected void addObjectResourceToList(EList<Resource> list, EObject obj)
 	{
 		if((obj.eResource() != null) && (!list.contains(obj.eResource())))
     	{
@@ -696,54 +696,51 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 * the given <code>resource</code> depends.
 	 * @param resource The emf resource that EMF2Runtime has to load. 
 	 */
-	protected void findDependentResources(EList list, Resource resource)
+	protected void findDependentResources(EList<Resource> list, Resource resource)
 	{
-		TreeIterator treeIt = resource.getAllContents();
+		TreeIterator<EObject> treeIt = resource.getAllContents();
 		while(treeIt.hasNext())
 		{
-			Object obj = treeIt.next();
-			if(obj instanceof EObject)
-			{
-				EObject eobj = (EObject)obj;
-				EClass eClass = eobj.eClass();
-			    // Get the structural features
-			    EList features = eClass.getEAllStructuralFeatures(); 
-			    // For each feature, get the value and and check if its resource is in the list
-			    for (Object next : features)
-			    {
-			        EStructuralFeature feature = (EStructuralFeature)next;
-			        // Workaround for an EMF bug
-			        // -------------------------------------------------------------------------
-			        // Handle the particular case of an EObject which type is EClassifier : 
-			        // If an EClass has (accidentally) an instanceClassName value, set it to null
-			        // Indeed, such a case (which leads to a malformed model) can appear when user 
-			        // loads an ecore model created with EMF reflexive editor, which sometimes 
-			        // creates EClass elements with an instanceClassName that equals "". 
-			        // An instanceClassName=="" leads to a ClassNotFoundException since EMF underlying code looks
-			        // for a java class which name is thus "" -> unconsistent!
-			        if (eobj instanceof EClassifier)
-			        {
-			        	 String instance_class_name = ((EClassifier)eobj).getInstanceClassName();
-			        	 if (instance_class_name != null && instance_class_name.length() == 0)
-			        		 ((EClassifier)eobj).setInstanceClassName(null);
-			        }
-			        Object fvalue = eobj.eGet(feature);
-			        // If this feature is an EList,
-			        if (fvalue instanceof EList)
-			        {   // Then, for each object of this EList-feature, add its hosting resource 
-			        	// into the list of dependent resources
-			    	    for (Object sfeature : ((EList)fvalue)) 
-			    	    {
-			    	    	// Ignore values which type is a base type (String,...) : we don't need to 
-			    	    	// precreate a runtime object for them. (will be created "on the fly")
-			    	    	if (sfeature instanceof EObject)
-			    	    		addObjectResourceToList(list,(EObject)sfeature); 
-			    	    }
-			        }
-			        //If this feature is an EObject, add its hosting resource into the list of dependent resources.
-			        else if (fvalue instanceof EObject)   
-			        	addObjectResourceToList(list,(EObject)fvalue);
-			    }
+			
+			EObject eobj = treeIt.next();
+			EClass eClass = eobj.eClass();
+		    // Get the structural features
+		    EList<EStructuralFeature> features = eClass.getEAllStructuralFeatures(); 
+		    // For each feature, get the value and and check if its resource is in the list
+		    for (EStructuralFeature feature : features)
+		    {
+		        // Workaround for an EMF bug
+		        // -------------------------------------------------------------------------
+		        // Handle the particular case of an EObject which type is EClassifier : 
+		        // If an EClass has (accidentally) an instanceClassName value, set it to null
+		        // Indeed, such a case (which leads to a malformed model) can appear when user 
+		        // loads an ecore model created with EMF reflexive editor, which sometimes 
+		        // creates EClass elements with an instanceClassName that equals "". 
+		        // An instanceClassName=="" leads to a ClassNotFoundException since EMF underlying code looks
+		        // for a java class which name is thus "" -> unconsistent!
+		        if (eobj instanceof EClassifier)
+		        {
+		        	 String instance_class_name = ((EClassifier)eobj).getInstanceClassName();
+		        	 if (instance_class_name != null && instance_class_name.length() == 0)
+		        		 ((EClassifier)eobj).setInstanceClassName(null);
+		        }
+		        Object fvalue = eobj.eGet(feature);
+		        // If this feature is an EList,
+		        if (fvalue instanceof EList)
+		        {   // Then, for each object of this EList-feature, add its hosting resource 
+		        	// into the list of dependent resources
+		    	    for (Object sfeature : ((EList)fvalue)) 
+		    	    {
+		    	    	// Ignore values which type is a base type (String,...) : we don't need to 
+		    	    	// precreate a runtime object for them. (will be created "on the fly")
+		    	    	if (sfeature instanceof EObject)
+		    	    		addObjectResourceToList(list,(EObject)sfeature); 
+		    	    }
+		        }
+		        //If this feature is an EObject, add its hosting resource into the list of dependent resources.
+		        else if (fvalue instanceof EObject)   
+		        	addObjectResourceToList(list,(EObject)fvalue);
+			    
 			}
 		}
 	}
