@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.67 2007-08-22 06:49:59 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.68 2007-08-27 09:37:36 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -109,7 +109,7 @@ public class EMF2Runtime {
     public EMFRuntimeUnit unit;
     
     /** List of inter-dependent resources (including the main resource) */
-    public EList dependentResources;
+    public EList<Resource> dependentResources;
     	
     /**
      * Constructor
@@ -132,7 +132,7 @@ public class EMF2Runtime {
 	 * @param list The list&lt;Resource&gt;
 	 * @param obj The object for which we are looking the hosting Resource
 	 */
-	protected void addObjectResourceToList(EList list, EObject obj)
+	protected void addObjectResourceToList(EList<Resource> list, EObject obj)
 	{
 		if((obj.eResource() != null) && (!list.contains(obj.eResource())))
     	{
@@ -154,22 +154,16 @@ public class EMF2Runtime {
 	protected void createEmptyRuntimeObjects() {
 		
 		// For each resource, create the ROs for its hosted EObjects.
-		for (Object resObj : dependentResources) {
-			Resource res = (Resource) resObj;
+		for (Resource resObj : dependentResources) {
 			
-			TreeIterator contentsIt = res.getAllContents();
+			
+			TreeIterator<EObject> contentsIt = resObj.getAllContents();
 			while(contentsIt.hasNext()) {
-				Object obj = contentsIt.next();
-				if(obj instanceof EObject) {
-					// Create RO for current EObject
-					EObject eObj = (EObject) obj;
-					RuntimeObject rootRO = this.createEmptyRuntimeObjectForEObject(eObj);
-					this.runtime_objects_map.put(eObj, rootRO);
-				}
-				else {
-					unit.throwKermetaRaisedExceptionOnLoad(
-					"Found unknown object in Resource '"+ ((Resource)res).getURI().toString() + "' : "+ obj, null);
-				}
+				// Create RO for current EObject
+				EObject eObj = contentsIt.next();
+				RuntimeObject rootRO = this.createEmptyRuntimeObjectForEObject(eObj);
+				this.runtime_objects_map.put(eObj, rootRO);
+				
 			}
 
 		}
@@ -458,10 +452,9 @@ public class EMF2Runtime {
 	    	kclass = (fr.irisa.triskell.kermeta.language.structure.Class)getTypeFromEClassifier(eclass);
 	    }
 	    // For each feature, get the value and add it to the properties hashtable
-	    EList allStructuralFeature = eclass.getEAllStructuralFeatures();
-	    for (Object next : allStructuralFeature)
+	    EList<EStructuralFeature> allStructuralFeature = eclass.getEAllStructuralFeatures();
+	    for (EStructuralFeature feature : allStructuralFeature)
 	    {	
-	    	EStructuralFeature feature = (EStructuralFeature)next;
 	    	EClassifier feature_type = feature.getEType();
 	    	Type ftype = getTypeFromEClassifier(feature_type);
 	    	// Find the property corresponding to the given feature
@@ -497,6 +490,12 @@ public class EMF2Runtime {
 	    				}
 	    				else if (fvalue instanceof EEnumLiteral)
 	    					litValue = ((EEnumLiteral)fvalue).getLiteral();
+	    				else if (fvalue instanceof org.eclipse.emf.common.util.Enumerator){
+	    					litValue = ((org.eclipse.emf.common.util.Enumerator)fvalue).getLiteral();
+	    				}
+	    				else {
+	    					internalLog.warn("not able to retreive literal value for " + fvalue + ", unable to reconnect to the kermeta definition ...");
+	    				}
 	    				RuntimeObject roEnumLit = fr.irisa.triskell.kermeta.runtime.rohelper.EnumerationHelper.getLiteral(roEnum, litValue);
 	    				rObject.getProperties().put(prop.getName(), roEnumLit);
 	    			}
@@ -814,7 +813,7 @@ public class EMF2Runtime {
 	    	else
 	    	{	
 	    		Type ftype = this.getTypeFromName(kermeta_metaclass_name);
-	    		fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;
+	    		// fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;
 	    		result = unit.getRuntimeMemory().getRuntimeObjectForFObject(ftype);
 	    		this.type_cache.put(metaclass_name, result);
 	    	}
