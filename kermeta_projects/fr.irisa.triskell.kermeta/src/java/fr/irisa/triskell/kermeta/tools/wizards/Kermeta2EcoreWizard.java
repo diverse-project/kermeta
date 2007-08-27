@@ -1,6 +1,6 @@
-/* $Id: Kermeta2EcoreWizard.java,v 1.10 2007-07-26 09:51:37 ftanguy Exp $
+/* $Id: Kermeta2EcoreWizard.java,v 1.11 2007-08-27 12:27:12 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta
- * File       : KmtPrinter.java
+ * File       : Kermeta2EcoreWizard.java
  * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
@@ -8,7 +8,7 @@
  * Authors : 
  *        	dvojtise <dvojtise@irisa.fr>
  * Description : 
- * 		Pretty print of kmt files from a KermetaUnit.
+ * 		Generate Ecore files from Kmt or Km.
  * 		It may be subclassed in order to add new pages or customize the messages.
  */
 package fr.irisa.triskell.kermeta.tools.wizards;
@@ -26,6 +26,7 @@ import org.eclipse.swt.widgets.Label;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
+import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
 
 /**
  * Pretty print of kmt files from a KermetaUnit.
@@ -41,6 +42,8 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 	
 	
 	protected Button independentButton;
+	
+	protected Button structuralButton;
 	
 /*	protected ResourceSet trace_resource_set;
 	protected Resource trace_resource = null;
@@ -104,6 +107,17 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 		label.setText("yes / no : ");
 		independentButton = new Button(group, SWT.CHECK);
 		independentButton.setSelection(false);
+		
+		group = new Group(outputPage.linkedResourceParent, SWT.NONE);
+		layout = new GridLayout(2, false);
+		group.setLayout(layout);
+		group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		group.setFont( outputPage.linkedResourceParent.getFont() );
+		group.setText("Generate without the behavioral part (operations)");
+		label = new Label(group, SWT.NULL);
+		label.setText("yes / no : ");
+		structuralButton = new Button(group, SWT.CHECK);
+		structuralButton.setSelection(false);
 	}
 	
 	/**
@@ -136,11 +150,13 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
     	String targetDir = fileURI.substring(0, i);
     	EcoreExporter exporter = new EcoreExporter();
 	    
-	    if (  independentButton.getSelection() ) {
-	    	exporter.export(builder, targetDir,null, true);
-	    } else {
-	    	exporter.export(builder, targetDir,null, false);
-	    }
+    	ExporterOptions exporterOptions = ExporterOptions.getDefault();
+    	
+    	exporterOptions.isIndependent = independentButton.getSelection();
+    	exporterOptions.isOnlyStructural = structuralButton.getSelection();
+    	
+	    exporter.export(builder, targetDir, null, exporterOptions);
+
 	    
 	  /*  if(this.tracePage.enableFileDestinationButton.getSelection())
 	    {

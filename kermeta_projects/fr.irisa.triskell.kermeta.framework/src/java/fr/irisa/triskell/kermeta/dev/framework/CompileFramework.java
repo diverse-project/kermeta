@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.12 2007-08-02 16:29:30 cfaucher Exp $
+/* $Id: CompileFramework.java,v 1.13 2007-08-27 12:27:33 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.framework
 * File : CompileFramework.java
 * License : EPL
@@ -16,6 +16,7 @@ import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
+import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
@@ -82,7 +83,7 @@ public class CompileFramework {
 
         	System.out.println("SAVING IN ECORE...");
         	EcoreExporter exporter2 = new EcoreExporter();
-        	exporter2.export(kermetaUnit, dist_folder, false);
+        	exporter2.export(kermetaUnit, dist_folder, ExporterOptions.getDefault());
         	System.out.println("DONE");
         }
     }

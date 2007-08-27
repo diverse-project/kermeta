@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.18 2007-08-03 07:55:38 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.19 2007-08-27 12:23:44 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -23,6 +23,7 @@ import org.kermeta.io.printer.KMTOutputBuilder;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
+import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
@@ -220,7 +221,7 @@ testkmtFile("test/roundtrip_testcases/kmt","012_testCommentAnnotations.main.kmt"
 		
 		
 		EcoreExporter exporter = new EcoreExporter();
-		exporter.export(kmtUnit, outputDir, false );
+		exporter.export(kmtUnit, outputDir, ExporterOptions.getDefault() );
 		
 		KermetaUnit ecoreUnit = IOPlugin.getDefault().loadKermetaUnit( ecoreFile );
 		
@@ -255,7 +256,7 @@ testkmtFile("test/roundtrip_testcases/kmt","012_testCommentAnnotations.main.kmt"
 		
 		// Export to ecore
 		EcoreExporter exporter = new EcoreExporter();
-		exporter.export(baseKMTUnit, outputDir, false);
+		exporter.export(baseKMTUnit, outputDir, ExporterOptions.getDefault());
 	
 		// Regenerate the kmt from the previous ecore
 		KermetaUnit ecoreUnit = IOPlugin.getDefault().loadKermetaUnit( ecoreFile );
