@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension-point id="kermetaModelingUnit" name="Kermeta Modeling Unit registration" schema="schema/kermetaModelingUnit.exsd"/>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Kermeta"
+            id="fr.irisa.triskell.kermeta.view">
+      </category>
+      <view
+            allowMultiple="false"
+            category="fr.irisa.triskell.kermeta.view"
+            class="org.kermeta.registration.view.ModelingUnitView"
+            icon="platform:/plugin/fr.irisa.triskell.kermeta/images/kermeta.png"
+            id="org.kermeta.registration.modelingunitview"
+            name="Available Kermeta Modeling Unit"/>
+   </extension>
+</plugin>

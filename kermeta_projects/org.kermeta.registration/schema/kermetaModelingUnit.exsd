@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.kermeta.registration">
+<annotation>
+      <appInfo>
+         <meta.schema plugin="org.kermeta.registration" id="kermetaModelingUnit" name="Kermeta Modeling Unit registration"/>
+      </appInfo>
+      <documentation>
+         This extension point allow the registration of files, uris corresponding to Kermeta Modeling Units. This gives the ability to list available kmt/km files stored in plugins at runtime (in the workbench).
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <complexType>
+         <sequence>
+            <element ref="kermetaModelingUnit" minOccurs="1" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="kermetaModelingUnit">
+      <complexType>
+         <sequence minOccurs="0" maxOccurs="unbounded">
+            <element ref="related-Kermeta-resource"/>
+         </sequence>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  Name of the diagram to give a more readable name of the registered diagram file.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="kmt-or-km-as-Modeling-Unit-root" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The EMF diagram file you want to register.
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="resource"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="uri" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="description" type="string">
+            <annotation>
+               <documentation>
+                  ID of the graphical editor used to open this file.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="DSL-in-ecore-file" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="resource"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="category">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="model simulation">
+                  </enumeration>
+                  <enumeration value="model transformation">
+                  </enumeration>
+                  <enumeration value="model checking">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="related-Kermeta-resource">
+      <complexType>
+         <attribute name="kmt-or-km-file" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="resource"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="description" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="since"/>
+      </appInfo>
+      <documentation>
+         0.5.1
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="examples"/>
+      </appInfo>
+      <documentation>
+         &lt;plugin&gt;
+  &lt;extension
+        point=&quot;org.kermeta.registration.kermetaModelingUnit&quot;&gt;
+     &lt;kermetaModelingUnit
+           DSL-in-ecore-file=&quot;dist/kermeta/Standard.ecore&quot;
+           category=&quot;model simulation&quot;
+           description=&quot;Standard package of Kermeta&quot;
+           kmt-or-km-as-Modeling-Unit-root=&quot;dist/kermeta/Standard.km&quot;
+           name=&quot;Kermeta Standard&quot;&gt;
+        &lt;related-Kermeta-resource
+              description=&quot;io resource&quot;
+              kmt-or-km-file=&quot;dist/kermeta/io/file_io.km&quot;&gt;
+        &lt;/related-Kermeta-resource&gt;
+        &lt;related-Kermeta-resource
+              description=&quot;collections definition&quot;
+              kmt-or-km-file=&quot;dist/kermeta/standard/collections.km&quot;&gt;
+        &lt;/related-Kermeta-resource&gt;
+        &lt;related-Kermeta-resource
+              description=&quot;primitive types definition&quot;
+              kmt-or-km-file=&quot;dist/kermeta/standard/primitive_types.km&quot;&gt;
+        &lt;/related-Kermeta-resource&gt;
+     &lt;/kermetaModelingUnit&gt;&lt;kermetaModelingUnit
+                                 DSL-in-ecore-file=&quot;dist/kermeta/Standard.ecore&quot;
+                                 category=&quot;model checking&quot;
+                                 description=&quot;Standard package of Kermeta&quot;
+                                 kmt-or-km-as-Modeling-Unit-root=&quot;dist/kermeta/Standard.km&quot;
+                                 name=&quot;Standard 2&quot;&gt;
+        &lt;related-Kermeta-resource
+              description=&quot;collections definition&quot;
+              kmt-or-km-file=&quot;dist/kermeta/standard/collections.km&quot;&gt;
+        &lt;/related-Kermeta-resource&gt;
+        &lt;related-Kermeta-resource
+              description=&quot;primitive types definition&quot;
+              kmt-or-km-file=&quot;dist/kermeta/standard/primitive_types.km&quot;&gt;
+        &lt;/related-Kermeta-resource&gt;
+     &lt;/kermetaModelingUnit&gt;
+  &lt;/extension&gt;
+&lt;/plugin&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="apiInfo"/>
+      </appInfo>
+      <documentation>
+         [Enter API information here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="implementation"/>
+      </appInfo>
+      <documentation>
+         [Enter information about supplied implementation of this extension point.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="copyright"/>
+      </appInfo>
+      <documentation>
+         IRISA / INRIA / Universite de Rennes 1
+Under the terms of the EPL license
+      </documentation>
+   </annotation>
+
+</schema>
