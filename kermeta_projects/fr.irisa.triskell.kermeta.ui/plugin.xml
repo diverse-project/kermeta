@@ -27,6 +27,7 @@
            objectClass="org.eclipse.core.resources.IFile">
         <action
               class="fr.irisa.triskell.kermeta.actions.ShowFileDependencies"
+              enablesFor="1"
               icon="images/down.png"
               id="fr.irisa.triskell.kermeta.ui.action2"
               label="See File Dependencies"
@@ -39,6 +40,7 @@
            objectClass="org.eclipse.core.resources.IFile">
         <action
               class="fr.irisa.triskell.kermeta.actions.ShowDependentFiles"
+              enablesFor="1"
               icon="images/up.png"
               id="fr.irisa.triskell.kermeta.ui.action3"
               label="See Dependent Files"
