@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.21 2007-08-20 12:47:36 dtouzet Exp $
+/* $Id: Object.java,v 1.22 2007-08-28 09:49:22 dtouzet Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
@@ -33,6 +32,7 @@ import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructureFactoryImpl;
@@ -130,7 +130,7 @@ public class Object {
 	 * @return
 	 */
 	protected static RuntimeObject checkInheritedInvariants(ClassDefinition classDef , RuntimeObject self) {
-		 Iterator itParents = classDef.getSuperType().iterator();
+		 Iterator<Type> itParents = classDef.getSuperType().iterator();
 	     while(itParents.hasNext()) {
 	    	 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)itParents.next();
 		     ClassDefinition parent = (ClassDefinition)metaClass.getTypeDefinition();
@@ -148,7 +148,7 @@ public class Object {
 	 */
 	private static void checkConstraintAndPrintMes(ClassDefinition classDef, RuntimeObject self) {
 		java.lang.String message = "";
-	     for(Iterator it = classDef.getInv().iterator(); it.hasNext();) {
+	     for(Iterator<Constraint> it = classDef.getInv().iterator(); it.hasNext();) {
 	    	 Constraint c = (Constraint)it.next();
 	    	 if (!checkConstraint(c.getBody(), classDef, self)) {
    			 message += "Inv " + c.getName() + " of class " + classDef.getName() + " violated";
@@ -266,7 +266,7 @@ public class Object {
         // Find the property in which the object is stoted
         fr.irisa.triskell.kermeta.language.structure.Class containerClass = (fr.irisa.triskell.kermeta.language.structure.Class)container.getMetaclass().getData().get("kcoreObject");
         
-        Iterator it = InheritanceSearch.callableProperties(containerClass).iterator();
+        Iterator<CallableProperty> it = InheritanceSearch.callableProperties(containerClass).iterator();
         while (it.hasNext()) {
             CallableProperty cp = (CallableProperty)it.next();
             if (cp.getProperty().isIsComposite()) {
@@ -328,7 +328,8 @@ public class Object {
 					// Set TypeVariableBinding
 					RuntimeObject bindings_ro = self.getProperties().get("typeParamBinding");
 					if(bindings_ro != null) {
-						ArrayList<RuntimeObject> bindings = (ArrayList<RuntimeObject>) bindings_ro.getData().get("CollectionArrayList");
+						//ArrayList<RuntimeObject> bindings = (ArrayList<RuntimeObject>) bindings_ro.getData().get("CollectionArrayList");
+						ArrayList<RuntimeObject> bindings = Collection.getArrayList(bindings_ro);
 						if(bindings != null) {
 							RuntimeObject crtBinding_ro = null;
 							TypeVariableBinding typeVB = null;

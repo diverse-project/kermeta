@@ -1,4 +1,4 @@
-/* $Id: Collection.java,v 1.11 2007-08-08 13:00:01 dvojtise Exp $
+/* $Id: Collection.java,v 1.12 2007-08-28 09:49:23 dtouzet Exp $
  * Project : Kermeta interpreter
  * File : Collection.java
  * License : EPL
@@ -78,7 +78,7 @@ public class Collection {
 	    
 	    RuntimeObject result = self.getFactory().createRuntimeObjectFromClass(self.getFactory().createMetaClass(it_class));
 		*/
-		Iterator.setValue(result, ((ArrayList)getArrayList(self).clone()).iterator());
+		Iterator.setValue(result, ((ArrayList<RuntimeObject>)getArrayList(self).clone()).iterator());
 		return result;
 	}
 
@@ -87,7 +87,7 @@ public class Collection {
 		{
 		    collection.getData().put("CollectionArrayList", new ArrayList<RuntimeObject>());
 		}
-		return (ArrayList<RuntimeObject>)collection.getData().get("CollectionArrayList");
+		return (ArrayList<RuntimeObject>) collection.getData().get("CollectionArrayList");
 	}
 	
 	

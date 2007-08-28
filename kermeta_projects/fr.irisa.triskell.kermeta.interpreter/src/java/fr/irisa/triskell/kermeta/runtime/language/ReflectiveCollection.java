@@ -1,4 +1,4 @@
-/* $Id: ReflectiveCollection.java,v 1.12 2007-07-20 15:07:47 ftanguy Exp $
+/* $Id: ReflectiveCollection.java,v 1.13 2007-08-28 09:49:22 dtouzet Exp $
  * Project   : Kermeta interpreter
  * File      : ReflectiveCollection.java
  * License   : EPL
@@ -144,7 +144,7 @@ public class ReflectiveCollection {
 	 * @param handle_opposite if true, also clear the content of opposite property.
 	 */
 	public static void clear(RuntimeObject self, boolean handle_opposite) {
-		Iterator it = ((ArrayList)Collection.getArrayList(self).clone()).iterator();
+		Iterator<RuntimeObject> it = ((ArrayList<RuntimeObject>)Collection.getArrayList(self).clone()).iterator();
 		while(it.hasNext()) {
 			ReflectiveCollection.remove(self, (RuntimeObject)it.next(), handle_opposite);
 		}

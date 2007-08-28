@@ -1,13 +1,11 @@
-/* $Id: Boolean.java,v 1.7 2007-07-20 15:07:48 ftanguy Exp $ 
+/* $Id: Boolean.java,v 1.8 2007-08-28 09:49:23 dtouzet Exp $ 
  * Implementation of Kermeta base type Boolean 
  */
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
-//import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 
@@ -55,17 +53,7 @@ public class Boolean {
 	}
 
 	public static boolean getValue(RuntimeObject bool) {
-	    boolean result = false;
 	    return ((java.lang.Boolean)bool.getData().get("BooleanValue")).booleanValue();
-	    /* deprecated
-	    if (b == null)
-	    { 
-	        RuntimeObject ex = bool.getFactory().createObjectFromClassName("kermeta::exceptions::CallOnVoidTarget");
-	        ExpressionInterpreter interpreter = bool.getFactory().getMemory().getCurrentInterpreter();
-	        interpreter.raiseKermetaException(ex, interpreter.getInterpreterContext().peekCallFrame().getOperation());
-	    }
-	    else result = b.booleanValue();
-		return result;*/ 
 	}
 	
 	public static void setValue(RuntimeObject bool, boolean value) {
