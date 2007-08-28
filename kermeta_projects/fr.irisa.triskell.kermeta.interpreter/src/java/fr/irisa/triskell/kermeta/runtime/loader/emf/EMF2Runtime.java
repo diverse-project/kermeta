@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.68 2007-08-27 09:37:36 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.69 2007-08-28 09:16:56 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -13,6 +13,7 @@
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -205,18 +206,15 @@ public class EMF2Runtime {
 			// Second step: set the containing resource information for the root model elements
 			// of the current resource RO, and add these model elements into the contents of 
 			// the resourde RO
-			EList contents = res.getContents();
-			Iterator<Object> rootsIt = contents.iterator();
+			EList<EObject> contents = res.getContents();
+			Iterator<EObject> rootsIt = contents.iterator();
 			while(rootsIt.hasNext()) {
-				Object rootObj = rootsIt.next();
-				if(rootObj instanceof EObject) {
-					EObject rootEObj = (EObject) rootObj;
-					RuntimeObject rootRO = this.runtime_objects_map.get(rootEObj);
-					fr.irisa.triskell.kermeta.runtime.language.Object.setContainingResource(rootRO, crtResRO);
-					
-					ArrayList<RuntimeObject> resContents = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(crtResRO);
-					resContents.add(rootRO);
-				}
+				EObject rootEObj = rootsIt.next();
+				RuntimeObject rootRO = this.runtime_objects_map.get(rootEObj);
+				fr.irisa.triskell.kermeta.runtime.language.Object.setContainingResource(rootRO, crtResRO);
+				
+				ArrayList<RuntimeObject> resContents = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(crtResRO);
+				resContents.add(rootRO);
 			}
 		}
 	}
@@ -279,11 +277,34 @@ public class EMF2Runtime {
 			//   2- Associate resources to their root model elements
 			createResourceRuntimeObjects(mainResRO);
 		}
+		/*catch (DiagnosticWrappedException e){
+			e.
+		}*/
 		catch (Exception e) {
-			internalLog.error("loadUnit failed due to " + e.getMessage()!=null?e.getMessage():"" + " : exception: " + e + " )", e);
-		    unit.throwKermetaRaisedExceptionOnLoad(
+			if(e.getCause() instanceof InvocationTargetException){
+				InvocationTargetException ite = (InvocationTargetException)e.getCause();
+				if(ite.getCause() != null){
+					Throwable cause = ite.getCause();
+					internalLog.error("loadUnit failed due to " + (cause.getMessage()!=null?cause.getMessage():"") + " : exception: " + cause + 
+							" ) \n maybe you forgot to register your metamodel ?", e);
+					unit.throwKermetaRaisedExceptionOnLoad(
+							"Error loading EMF model at '" + unit.getUriAsString() +
+							"' :\n   " + (cause.getMessage()!=null?cause.getMessage():cause) + "  at '"  + cause.getStackTrace()[0] + "'" +
+							"\n maybe you forgot to register your metamodel ?", e);
+				}
+				else{
+					internalLog.error("loadUnit failed due to " + (ite.getMessage()!=null?ite.getMessage():"") + " : exception: " + ite + " )", e);
+					unit.throwKermetaRaisedExceptionOnLoad(
+							"Error loading EMF model at '" + unit.getUriAsString() +
+							"' :\n   " + (ite.getMessage()!=null?ite.getMessage():ite) + "  at '"  + ite.getStackTrace()[0] + "'", e);
+				}
+			}
+			else{
+				internalLog.error("loadUnit failed due to " + e.getMessage()!=null?e.getMessage():"" + " : exception: " + e + " )", e);
+				unit.throwKermetaRaisedExceptionOnLoad(
 		    		"Error loading EMF model at '" + unit.getUriAsString() +
-		    		"' :\n   " + e.getMessage()!=null?e.getMessage():e + "  at '"  + e.getStackTrace()[0] + "'", e);
+		    		"' :\n   " + (e.getMessage()!=null?e.getMessage():e) + "  at '"  + e.getStackTrace()[0] + "'", e);
+			}
 		}
 		catch(java.lang.OutOfMemoryError e){
     		//packages.clear();
