@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.61 2007-07-24 13:47:38 ftanguy Exp $
+/* $Id: Runtime2EMF.java,v 1.62 2007-08-28 09:18:34 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
+import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
@@ -119,19 +120,28 @@ public class Runtime2EMF {
 		// "instances" collection (which equals contentMap entry "rootContents").
 		if (unit.getContentMap() == null) return; //there is nothing to update here, the resource was created but never loaded 
 			// and nothing added to it. this is still useful in some case since it may help emf to save dependent files 
+		internalLog.info("updateEMFModel : updating " + unit.getUriAsString());
+		
 		ArrayList<RuntimeObject> instances = Collection.getArrayList(unit.getContentMap());
 		// Get each instance and convert it in an EObject
 		// (Instances only contain the root elements of the resource to save)
 		internalLog.debug("updateEMFModel phase 1 : create a list of all RuntimeObject that are involved ");
+		int processedElements = 0;
+		
 		for (RuntimeObject ro : instances)
 		{ fillRuntimeObjectList(ro); }
+		internalLog.info("Saving " + instances.size()+"/"+ runtimeObjects.size()+ " objects from " + resource.getURI().toString() +  " and its dependencies ");
+		
 		// Now that we have the complete list of runtime objects, we can update
 		// the properties of each of those runtime objects. The mapping between
 		// RuntimeObject and EObject to update is done through the
 		// entry { "r2e.emfObject" : EObject } in RuntimeObject.data hashtable.
 		internalLog.debug("updateEMFModel phase 2 : get/create the associated EObject, update the properties ");
 		for (RuntimeObject ro : runtimeObjects)
-		{	setEObjectPropertiesFromRuntimeObject(ro); }
+		{	
+			setEObjectPropertiesFromRuntimeObject(ro); 
+			processedElements++;
+		}
 
 		
 		
@@ -144,6 +154,25 @@ public class Runtime2EMF {
 		}	
 	}
 
+	/**
+	 * Update the EMFModel from the attribute RuntimeUnit <code>unit</code>.
+	 * This is the main method called for the EMF model update.
+	 * 
+	 * @param resource
+	 */
+	public void updateEMFModelResourceContainment() {
+		if (unit.getContentMap() == null) return; //there is nothing to update here, the resource was created but never loaded 
+		// and nothing added to it. this is still useful in some case since it may help emf to save dependent files 
+		
+		ArrayList<RuntimeObject> instances = Collection.getArrayList(unit.getContentMap());
+		// Add the root elements to the XMI resource
+		// Note: r2e.emfObject entry is only used for eObject retrieval during the
+		// save process!
+		for (RuntimeObject o : instances)
+		{	
+			resource.getContents().add((EObject) o.getData().get("r2e.emfObject"));
+		}
+	}
 	/**
 	 * Get or create the EMFObjects recursively, from the root element ("root
 	 * element" is by opposition to property element). Method for the 1st pass
@@ -161,7 +190,7 @@ public class Runtime2EMF {
 			EObject kcoreObject = (EObject)rObject.getData().get("kcoreObject");
 			if(kcoreObject != null){
 				// ignore objects from the kermeta program itself but only if it comes from a model				
-				// ie. that where loaded and typechecked => they should not be changed dynamicaly
+				// ie. that where loaded and typechecked => they should not be changed dynamically
 				// this greatly improve the performance of the save ...
 				if (kcoreObject.eResource() != null){
 					internalLog.info("     Ignoring update of Kermeta interpreter internal ClassDefinition EObject : "+((EObject)rObject.getData().get("kcoreObject")).eClass().getName());
@@ -294,6 +323,8 @@ public class Runtime2EMF {
 				else // EObject, EClass, EDataType
 				{
 					Object p_o = getOrCreatePropertyFromRuntimeObject(property, feature);
+					if(p_o instanceof EnumerationLiteral)
+						p_o = getOrCreatePropertyFromRuntimeObject(property, feature);
 					eObject.eSet(feature, p_o);					
 					if (p_o == null) {
 						internalLog.warn("    setting null to "+ eObject.eClass().getName() + "."  + feature.getName() + "");}
@@ -317,15 +348,15 @@ public class Runtime2EMF {
 		else if (RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rProperty) != null)
 			result = RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rProperty);
 		else if (RuntimeObjectHelper.isanEnumerationLiteral(rProperty) == true){
-			if(feature.getEType().eResource().getURI().toString().equals("http://www.kermeta.org/kermeta")){
-				// this is a special case of writing a km file, so we need to find the enum in the km and not a EEnum
-				result = createEObjectFromRuntimeObjectWithResource(rProperty,
-						feature.getEType().eResource());
-			}
-			else if(feature.getEType().getInstanceClass() !=  null){			
+			if(feature.getEType().getInstanceClass() !=  null){			
 				// this enumeration has its own implementation must use it ...
 				result = createGeneratedClassLiteralFromEnumRuntimeObject(rProperty,
 						feature.getEType());
+			}
+			else if(feature.getEType().eResource().getURI().toString().equals("http://www.kermeta.org/kermeta")){
+				// this is a special case of writing a km file, so we need to find the enum in the km and not a EEnum
+				result = createEObjectFromRuntimeObjectWithResource(rProperty,
+						feature.getEType().eResource());
 			}
 			else {
 				 // DVK: maybe we can improve this by retreiving the EEnum directly in the feature.getEType() rather than looking for it in the resource ?
@@ -518,18 +549,29 @@ public class Runtime2EMF {
 	protected Object createGeneratedClassLiteralFromEnumRuntimeObject(
 			RuntimeObject rObject, EClassifier type) {
 		Object result = null;
+		String enum_literal_name = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) rObject
+				.getProperties().get("name"));
 		try {
 			Class c = type.getInstanceClass();
 			// we suppose this is an abstract enumerator ... and that it has a method getByName
 			Method m = c.getMethod("getByName", String.class);
 			// Get the name of the enumeration literal element
-			String enum_literal_name = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) rObject
-					.getProperties().get("name"));
+			
 			result = m.invoke(c, (enum_literal_name));
 		} catch (Exception e) {
-			internalLog.warn("not able to create the enumeration literal concrete object for instanceClass "+type.getInstanceClassName()+
-					", let's try as an EEnumLiteral", e);
-			result = createEEnumLiteralFromRuntimeObjectWithResource(rObject, type.eResource());
+			
+			if(type.eResource().getURI().toString().equals("http://www.kermeta.org/kermeta")){
+				internalLog.debug("not able to create the enumeration literal concrete object for instanceClass "+type.getInstanceClassName()+ " for " +
+						enum_literal_name	+
+						", let's try as an EObject", null);
+				// this is a special case of writing a km file, so we need to find the enum in the km and not a EEnum
+				result = createEObjectFromRuntimeObjectWithResource(rObject, type.eResource());
+			}
+			else {
+				internalLog.debug("not able to create the enumeration literal concrete object for instanceClass "+type.getInstanceClassName()+ " " + enum_literal_name +
+						", let's try as an EEnumLiteral", e);
+				result = createEEnumLiteralFromRuntimeObjectWithResource(rObject, type.eResource());
+			}
 		}
 		return result;
 	}
