@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.23 2007-08-01 07:18:13 ftanguy Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.24 2007-08-28 09:12:20 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -176,7 +176,7 @@ public class RuntimeObjectFactory {
 	}
 	
 	private Hashtable non_parametric_metaclass_cache = new Hashtable();
-	private Hashtable<TypeDefinition, RuntimeObject> modeltype_cache = new Hashtable();
+	private Hashtable<TypeDefinition, RuntimeObject> modeltype_cache = new Hashtable<TypeDefinition, RuntimeObject>();
 
 	public RuntimeObject createMetaClass(fr.irisa.triskell.kermeta.language.structure.Class fclass) {
 	    
@@ -339,18 +339,12 @@ public class RuntimeObjectFactory {
 	 * If not found, look in the supertypes
 	 */
 	private Property getProperty(ClassDefinition metaclass,String propertyName) {
-		Iterator it = ClassDefinitionHelper.getAllProperties(metaclass).iterator();//metaclass.getOwnedAttribute().iterator();
+		Iterator<Property> it = ClassDefinitionHelper.getAllProperties(metaclass).iterator();
 		while(it.hasNext()) {
 			Property property = (Property)it.next();
 			if(property.getName().equals(propertyName))
 				return property;
 		}
-		/*it = metaclass.getSuperType().iterator();
-		while(it.hasNext()) {
-			Property property = getProperty((ClassDefinition)((fr.irisa.triskell.kermeta.language.structure.Class)it.next()).getTypeDefinition(),propertyName);
-			if(property!=null)
-				return property;
-		}*/
 		return null;
 	}
 
@@ -405,11 +399,11 @@ public class RuntimeObjectFactory {
 		
 		// Handles collections
 		if (objectToClone.getData().containsKey("CollectionArrayList")) {
-			ArrayList objectToCloneContents = (ArrayList) objectToClone.getData().get("CollectionArrayList");
-			ArrayList resultContents = new ArrayList();
+			ArrayList<RuntimeObject> objectToCloneContents = Collection.getArrayList(objectToClone);
+			ArrayList<RuntimeObject> resultContents = new ArrayList<RuntimeObject>();
 
             // Clones each value in the collection
-			Iterator elementIterator = objectToCloneContents.iterator();
+			Iterator<RuntimeObject> elementIterator = objectToCloneContents.iterator();
 			while ( elementIterator.hasNext() ){
 				RuntimeObject element = (RuntimeObject) elementIterator.next();
 				resultContents.add(cloneAttributesFromRuntimeObject(element));
@@ -432,7 +426,7 @@ public class RuntimeObjectFactory {
 					RuntimeObject resultProperty = fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence.createReflectiveSequence(result,roProperty);
 
 					// Handles each object in the reflective sequence
-					Iterator elementIterator = ((ArrayList) propertyValue.getData().get("CollectionArrayList")).iterator();
+					Iterator<RuntimeObject> elementIterator = Collection.getArrayList(propertyValue).iterator();
 					for(int i=0;elementIterator.hasNext();i++) {
 						RuntimeObject cloneElement = cloneAttributesFromRuntimeObject((RuntimeObject)elementIterator.next());
 						ReflectiveSequence.addAt(resultProperty, fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i,this), cloneElement);
@@ -443,7 +437,7 @@ public class RuntimeObjectFactory {
 					RuntimeObject resultProperty = fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection.createReflectiveCollection(result,roProperty);
 
 					// Handles each object in the reflective collection
-					Iterator elementIterator = ((ArrayList) propertyValue.getData().get("CollectionArrayList")).iterator();
+					Iterator<RuntimeObject> elementIterator = Collection.getArrayList(propertyValue).iterator();
 					while(elementIterator.hasNext()) {
 						RuntimeObject cloneElement = cloneAttributesFromRuntimeObject((RuntimeObject) elementIterator.next());
 						ReflectiveCollection.add(resultProperty, cloneElement, true);
@@ -480,7 +474,7 @@ public class RuntimeObjectFactory {
 					RuntimeObject resultProperty = fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence.createReflectiveSequence(result,roProperty);
 
 					// Handles each object in the reflective sequence
-					Iterator elementIterator = ((ArrayList) propertyValue.getData().get("CollectionArrayList")).iterator();
+					Iterator<RuntimeObject> elementIterator = Collection.getArrayList(propertyValue).iterator();
 					for(int i=0;elementIterator.hasNext();i++) {
 						RuntimeObject element = (RuntimeObject) elementIterator.next();
 						if(cloneObjectTable.containsKey(element))
@@ -494,7 +488,7 @@ public class RuntimeObjectFactory {
 					RuntimeObject resultProperty = fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection.createReflectiveCollection(result, roProperty);
 
 					// Handles each object in the reflective collection
-					Iterator elementIterator = ((ArrayList) propertyValue.getData().get("CollectionArrayList")).iterator();
+					Iterator<RuntimeObject> elementIterator = Collection.getArrayList(propertyValue).iterator();
 					while(elementIterator.hasNext()) {
 						RuntimeObject element = (RuntimeObject) elementIterator.next();
 						if(cloneObjectTable.containsKey(element))
@@ -561,7 +555,7 @@ public class RuntimeObjectFactory {
 			ArrayList<RuntimeObject> resultContents = new ArrayList<RuntimeObject>();
 
             // Clones each value in the collection
-			Iterator elementIterator = ((ArrayList) objectToClone.getData().get("CollectionArrayList")).iterator();
+			Iterator<RuntimeObject> elementIterator = Collection.getArrayList(objectToClone).iterator();
 			while ( elementIterator.hasNext() ){
 				RuntimeObject element = (RuntimeObject) elementIterator.next();
 				resultContents.add(deepCloneRuntimeObjectFromObject(element.getMetaclass(), element));
@@ -582,7 +576,7 @@ public class RuntimeObjectFactory {
 				RuntimeObject resultProperty = fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence.createReflectiveSequence(result,roProperty);
 
 				// Handles each object in the reflective sequence
-				Iterator elementIterator = ((ArrayList) propertyValue.getData().get("CollectionArrayList")).iterator();
+				Iterator<RuntimeObject> elementIterator = Collection.getArrayList(propertyValue).iterator();
 				for(int i=0;elementIterator.hasNext();i++) {
 					RuntimeObject element = (RuntimeObject) elementIterator.next();
 					ReflectiveSequence.addAt(resultProperty, fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i, this), deepCloneRuntimeObjectFromObject(element.getMetaclass(), element));
@@ -593,7 +587,7 @@ public class RuntimeObjectFactory {
 				RuntimeObject resultProperty = fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection.createReflectiveCollection(result, roProperty);
 
 				// Handles each object in the reflective collection
-				Iterator elementIterator = ((ArrayList) propertyValue.getData().get("CollectionArrayList")).iterator();
+				Iterator<RuntimeObject> elementIterator = Collection.getArrayList(propertyValue).iterator();
 				while(elementIterator.hasNext()) {
 					RuntimeObject element = (RuntimeObject) elementIterator.next();
 					ReflectiveCollection.add(resultProperty, deepCloneRuntimeObjectFromObject(element.getMetaclass(), element), true);
