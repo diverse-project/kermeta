@@ -1,4 +1,4 @@
-/* $Id: EditorTextHover.java,v 1.23 2007-07-24 13:46:56 ftanguy Exp $
+/* $Id: EditorTextHover.java,v 1.24 2007-08-29 12:24:30 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorTextHover.java
 * License : EPL
@@ -12,10 +12,12 @@ package fr.irisa.triskell.kermeta.texteditor.editors;
 
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IRegion;
@@ -28,9 +30,14 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+import fr.irisa.triskell.kermeta.typechecker.Type;
+import fr.irisa.triskell.traceability.ModelReference;
 
 
 /**
@@ -85,9 +92,37 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 			TexteditorPlugin.pluginLog.warn("error computing hover info", e);
 		}
 		
+		Set<ModelReference> references = editor.getMcunit().getTracer().getModelReferences(hoverRegion.getOffset(), hoverRegion.getLength(), editor.getMcunit().getUri());
+		for ( ModelReference reference : references ) {
+			EObject o = reference.getRefObject();
+	        if (o instanceof Expression)
+	        {
+	            Expression fexp = (Expression)o;
+	            // Find the tag of the CallFeature definition!
+	            if (fexp instanceof CallFeature)
+	            {
+
+	                return ppDefinitionForCallFeature((CallFeature)fexp);
+	            }
+	            else if (fexp.getStaticType() != null) {
+	                Type t = new SimpleType(fexp.getStaticType());
+	                //TexteditorPlugin.pluginLog.info(" * Type -> " + t);
+	                // return the source code representation or the signature
+	                // of the element pointed by the cursor
+	                return pp.accept(o) + " : " + t + "\n";
+	            }
+	        }
+	        else if(o instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+	        	fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class)o;
+				String ftags = kdocPrettyPrint(aClass.getTypeDefinition().getTag());
+				return NamedElementHelper.getMangledQualifiedName(aClass.getTypeDefinition())+ "\n" + ftags;
+	        }
+		}
+		
+		
 		/*if (editor.mcunit != null && ((KMTUnit)editor.mcunit).getMctAST() != null) {
 		    CompUnit unit = ((KMTUnit)editor.mcunit).getMctAST();
-		    KermetaASTNode astnode = (KermetaASTNode)unit.getNodeAt(hoverRegion.getOffset(), hoverRegion.getLength());
+		    KermetaASTNode astnode = (KermetaASTNode)unit.getNodeAt(, hoverRegion.getLength());
 		    // TexteditorPlugin.pluginLog.info(" * unit -> " + unit);
 		    if (astnode != null) {
 		        //TexteditorPlugin.pluginLog.info(" * astnode -> " + astnode);
