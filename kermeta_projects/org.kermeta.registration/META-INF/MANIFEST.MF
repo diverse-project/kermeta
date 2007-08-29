@@ -5,7 +5,5 @@ Bundle-SymbolicName: org.kermeta.registration;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.ui.ide,
- fr.irisa.triskell.kermeta
+ org.eclipse.core.runtime
 Export-Package: org.kermeta.registration.view
