@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreWizard.java,v 1.11 2007-08-27 12:27:12 cfaucher Exp $
+/* $Id: Kermeta2EcoreWizard.java,v 1.12 2007-08-29 11:50:29 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : Kermeta2EcoreWizard.java
  * License    : EPL
@@ -155,7 +155,8 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
     	exporterOptions.isIndependent = independentButton.getSelection();
     	exporterOptions.isOnlyStructural = structuralButton.getSelection();
     	
-	    exporter.export(builder, targetDir, null, exporterOptions);
+    	// Fixed bug #3813 null to fileURI
+	    exporter.export(builder, targetDir, fileURI, exporterOptions);
 
 	    
 	  /*  if(this.tracePage.enableFileDestinationButton.getSelection())
