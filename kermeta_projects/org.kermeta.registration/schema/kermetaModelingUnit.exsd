@@ -6,7 +6,7 @@
          <meta.schema plugin="org.kermeta.registration" id="kermetaModelingUnit" name="Kermeta Modeling Unit registration"/>
       </appInfo>
       <documentation>
-         This extension point allow the registration of files, uris corresponding to Kermeta Modeling Units. This gives the ability to list available kmt/km files stored in plugins at runtime (in the workbench).
+         This extension point allows the registration of files, uris corresponding to Kermeta Modeling Units. This gives the ability to list available kmt/km files stored in plugins at runtime (in the workbench).
       </documentation>
    </annotation>
 
@@ -43,9 +43,14 @@
    </element>
 
    <element name="kermetaModelingUnit">
+      <annotation>
+         <appInfo>
+            <meta.element icon="kmt-or-km-as-Modeling-Unit-root"/>
+         </appInfo>
+      </annotation>
       <complexType>
          <sequence minOccurs="0" maxOccurs="unbounded">
-            <element ref="related-Kermeta-resource"/>
+            <element ref="related-resource"/>
          </sequence>
          <attribute name="name" type="string">
             <annotation>
@@ -78,7 +83,7 @@
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="doc-href" type="string">
+         <attribute name="doc-url" type="string">
             <annotation>
                <documentation>
                   
@@ -115,9 +120,14 @@
       </complexType>
    </element>
 
-   <element name="related-Kermeta-resource">
+   <element name="related-resource">
+      <annotation>
+         <appInfo>
+            <meta.element icon="file"/>
+         </appInfo>
+      </annotation>
       <complexType>
-         <attribute name="kmt-or-km-file" type="string" use="required">
+         <attribute name="file" type="string" use="required">
             <annotation>
                <documentation>
                   
@@ -151,8 +161,7 @@
          <meta.section type="examples"/>
       </appInfo>
       <documentation>
-         &lt;plugin&gt;
-  &lt;extension
+           &lt;extension
         point=&quot;org.kermeta.registration.kermetaModelingUnit&quot;&gt;
      &lt;kermetaModelingUnit
            DSL-in-ecore-file=&quot;dist/kermeta/Standard.ecore&quot;
@@ -160,35 +169,34 @@
            description=&quot;Standard package of Kermeta&quot;
            kmt-or-km-as-Modeling-Unit-root=&quot;dist/kermeta/Standard.km&quot;
            name=&quot;Kermeta Standard&quot;&gt;
-        &lt;related-Kermeta-resource
+        &lt;related-resource
               description=&quot;io resource&quot;
-              kmt-or-km-file=&quot;dist/kermeta/io/file_io.km&quot;&gt;
-        &lt;/related-Kermeta-resource&gt;
-        &lt;related-Kermeta-resource
+              file=&quot;dist/kermeta/io/file_io.km&quot;&gt;
+        &lt;/related-resource&gt;
+        &lt;related-resource
               description=&quot;collections definition&quot;
-              kmt-or-km-file=&quot;dist/kermeta/standard/collections.km&quot;&gt;
-        &lt;/related-Kermeta-resource&gt;
-        &lt;related-Kermeta-resource
+              file=&quot;dist/kermeta/standard/collections.km&quot;&gt;
+        &lt;/related-resource&gt;
+        &lt;related-resource
               description=&quot;primitive types definition&quot;
-              kmt-or-km-file=&quot;dist/kermeta/standard/primitive_types.km&quot;&gt;
-        &lt;/related-Kermeta-resource&gt;
+              file=&quot;dist/kermeta/standard/primitive_types.km&quot;&gt;
+        &lt;/related-resource&gt;
      &lt;/kermetaModelingUnit&gt;&lt;kermetaModelingUnit
                                  DSL-in-ecore-file=&quot;dist/kermeta/Standard.ecore&quot;
                                  category=&quot;model checking&quot;
                                  description=&quot;Standard package of Kermeta&quot;
                                  kmt-or-km-as-Modeling-Unit-root=&quot;dist/kermeta/Standard.km&quot;
                                  name=&quot;Standard 2&quot;&gt;
-        &lt;related-Kermeta-resource
+        &lt;related-resource
               description=&quot;collections definition&quot;
-              kmt-or-km-file=&quot;dist/kermeta/standard/collections.km&quot;&gt;
-        &lt;/related-Kermeta-resource&gt;
-        &lt;related-Kermeta-resource
+              file=&quot;dist/kermeta/standard/collections.km&quot;&gt;
+        &lt;/related-resource&gt;
+        &lt;related-resource
               description=&quot;primitive types definition&quot;
-              kmt-or-km-file=&quot;dist/kermeta/standard/primitive_types.km&quot;&gt;
-        &lt;/related-Kermeta-resource&gt;
+              file=&quot;dist/kermeta/standard/primitive_types.km&quot;&gt;
+        &lt;/related-resource&gt;
      &lt;/kermetaModelingUnit&gt;
   &lt;/extension&gt;
-&lt;/plugin&gt;
       </documentation>
    </annotation>
 

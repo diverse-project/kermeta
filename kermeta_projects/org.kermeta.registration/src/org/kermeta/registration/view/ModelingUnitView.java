@@ -1,10 +1,10 @@
-/*$Id: ModelingUnitView.java,v 1.1 2007-08-28 13:30:23 cfaucher Exp $
+/*$Id: ModelingUnitView.java,v 1.2 2007-08-29 08:14:33 cfaucher Exp $
 * Project : org.kermeta.diagramregistration
 * File : 	ModelingUnitView.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 20 june 07
+* Creation date : 28 July 07
 * Authors : cfaucher
 */
 
@@ -31,13 +31,22 @@ import org.eclipse.ui.part.ViewPart;
 
 public class ModelingUnitView extends ViewPart {
 	
-	private ListViewer lv;
-	
-	//private StructuredSelection selection;
-	
+	// ID of the view
 	public static final String ID = "org.kermeta.registration.modelingunitview";
 	
+	public static final String KERMETA_MODELING_UNIT = "kermetaModelingUnit";
+	public static final String CATEGORY_ATTRIBUTE = "category";
+	public static final String DESCRIPTION_ATTRIBUTE = "description";
+	public static final String NAME_ATTRIBUTE = "name";
+	public static final String URI_ATTRIBUTE = "uri";
+	public static final String DOC_URL_ATTRIBUTE = "doc-url";
+	public static final String[] CATEGORY_TAB = new String[]{"model simulation", "model transformation", "model checking"};
 	public static final String ROOT_RESOURCE_ATTRIBUTE = "kmt-or-km-as-Modeling-Unit-root";
+	public static final String RELATED_RESOURCE_CHILD = "related-resource";
+	
+	public static final String RELATED_RESOURCE_ATTRIBUTE = "file";
+	
+	private ListViewer lv;
 	
 	/**
 	 * 
@@ -91,14 +100,17 @@ public class ModelingUnitView extends ViewPart {
 				
 				if(element instanceof IConfigurationElement) {
 					IConfigurationElement elt = (IConfigurationElement) element;
-					if(elt.getName().equals("kermetaModelingUnit")) {
-						label = getTextElementAttribute(elt, "name") 
+					
+					if(elt.getName().equals(KERMETA_MODELING_UNIT)) {
+						label = getTextElementAttribute(elt, NAME_ATTRIBUTE) 
 						+ " (" + getTextPathElement(elt, ROOT_RESOURCE_ATTRIBUTE) + ")" 
-						+ ": " + getTextElementAttribute(elt, "uri")
-						+ ": " + getTextElementAttribute(elt, "description");
-					} else if(elt.getName().equals("related-Kermeta-resource")) {
-						label = " - " + getTextPathElement(elt, "kmt-or-km-file") 
-						+ ": " + getTextElementAttribute(elt, "description");
+						+ " " + getTextElementAttribute(elt, URI_ATTRIBUTE)
+						+ " - " + getTextElementAttribute(elt, DESCRIPTION_ATTRIBUTE)
+						+ " - see at " + getTextElementAttribute(elt, DOC_URL_ATTRIBUTE);
+					}
+					else if(elt.getName().equals(RELATED_RESOURCE_CHILD)) {
+						label = " - " + getTextPathElement(elt, RELATED_RESOURCE_ATTRIBUTE) 
+						+ ": " + getTextElementAttribute(elt, DESCRIPTION_ATTRIBUTE);
 					}
 				}
 				
@@ -148,13 +160,14 @@ public class ModelingUnitView extends ViewPart {
 	 */
 	protected List fillListViewer() {
 
-		ArrayList pList = new ArrayList();
+		List pList = new ArrayList();
 		
 		IExtensionRegistry registry = RegistryFactory.getRegistry();
-		
+				
 		IExtensionPoint extensionPoint = registry.getExtensionPoint("org.kermeta.registration.kermetaModelingUnit");
 		IExtension[] extensions = extensionPoint.getExtensions();
 		
+		// Each category has got its list of elements
 		List<IConfigurationElement> simuList = new ArrayList<IConfigurationElement>();
 		List<IConfigurationElement> transfoList = new ArrayList<IConfigurationElement>();
 		List<IConfigurationElement> checkingList = new ArrayList<IConfigurationElement>();
@@ -167,18 +180,19 @@ public class ModelingUnitView extends ViewPart {
 			for ( int j = 0; j < elements.length; j++ ) {
 				List<IConfigurationElement> tmpList = new ArrayList<IConfigurationElement>();
 				tmpList.add(elements[j]);
-				if(elements[j].getChildren("related-Kermeta-resource")!=null) {
-					
-					for ( int k = 0; k < elements[j].getChildren("related-Kermeta-resource").length; k++ ) {
-						tmpList.add(elements[j].getChildren("related-Kermeta-resource")[k]);
+				
+				IConfigurationElement[] childrenResources = elements[j].getChildren(RELATED_RESOURCE_CHILD);
+				if(childrenResources != null) {
+					for ( int k = 0; k < childrenResources.length; k++ ) {
+						tmpList.add(childrenResources[k]);
 					}
 				}
-				String category = elements[j].getAttribute("category");
-				if(category.equals("model simulation")) {
+				String categoryLbl = elements[j].getAttribute(CATEGORY_ATTRIBUTE);
+				if(categoryLbl.equals(CATEGORY_TAB[0])) {
 					simuList.addAll(tmpList);
-				} else if(category.equals("model transformation")) {
+				} else if(categoryLbl.equals(CATEGORY_TAB[1])) {
 					transfoList.addAll(tmpList);
-				} else if(category.equals("model checking")) {
+				} else if(categoryLbl.equals(CATEGORY_TAB[2])) {
 					checkingList.addAll(tmpList);
 				}
 			}
@@ -188,12 +202,12 @@ public class ModelingUnitView extends ViewPart {
 		if(simuList.size()>0) {
 			pList.add(" *** Model Simulation ***");
 			pList.addAll(simuList);
-			pList.add("");
+			pList.add(""); // empty line
 		}
 		if(transfoList.size()>0) {
 			pList.add(" *** Model Transformation ***");
 			pList.addAll(transfoList);
-			pList.add("");
+			pList.add(""); // empty line
 		}
 		if(checkingList.size()>0) {
 			pList.add(" *** Model Checking ***");
@@ -206,6 +220,7 @@ public class ModelingUnitView extends ViewPart {
 	/**
 	 * 
 	 * @param element
+	 * @param attributeId
 	 * @return
 	 */
 	private String getTextPathElement(IConfigurationElement element, String attributeId) {
