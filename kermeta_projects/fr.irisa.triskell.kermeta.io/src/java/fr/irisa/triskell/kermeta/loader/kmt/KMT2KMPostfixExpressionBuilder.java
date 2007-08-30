@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.13 2007-08-03 14:37:51 jmottu Exp $
+/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.14 2007-08-30 11:30:37 dvojtise Exp $
  * Project : Kermeta io
  * File : KMT2KMPostfixExpressionBuilder.java
  * License : EPL
@@ -116,7 +116,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 				}
 			} else {
 				//builder.messages.addMessage(new KMTUnitLoadError("A lambda expression should have at least one expression in its body.", lambdaPostfix));
-				builder.error("A lambda expression should have at least one expression in its body.");
+				builder.error("A lambda expression should have at least one expression in its body.", lambdaPostfix);
 				return false;						
 			}
 						
@@ -125,7 +125,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 		}
 		else {
 			//builder.messages.addMessage(new KMTUnitLoadError("A lambda postfix can only be applied as the unique parameter of a call expression.", lambdaPostfix));
-			builder.error("A lambda postfix can only be applied as the unique parameter of a call expression.");
+			builder.error("A lambda postfix can only be applied as the unique parameter of a call expression.", lambdaPostfix);
 			return false;
 		}
 		
@@ -164,7 +164,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 		}
 		else {
 			//builder.messages.addMessage(new KMTUnitLoadError("Parameters can only be associated to a call expression.", paramPostfix));
-			builder.error("Parameters can only be associated to a call expression.");
+			builder.error("Parameters can only be associated to a call expression.", paramPostfix);
 			return false;
 		}
 		return super.beginVisit(paramPostfix);
