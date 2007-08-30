@@ -8,7 +8,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.34 2007-08-14 12:19:40 vmahe Exp $
+ * $Id: resource.kmt,v 1.35 2007-08-30 12:24:35 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -113,6 +113,7 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 		}
 		result := res
 	end
+	
 }
 
 
@@ -299,8 +300,95 @@ abstract class Repository
 			result.load()
 		end
 	end
+	
+	
+	/**
+	 * Search for elements referenced by one element contained by this repository  that are not contained by this repository
+	 * ie. element that EMF would claim as "not contained in a resource"
+	 * example of use :
+	 *  var report : Set<DanglingDiagnostic>
+     *	report := repository.findDanglingModelElements()
+     *	report.each{ diag | stdio.writeln(diag.toString ) }
+	 */
+	operation findDanglingModelElements() : Set<DanglingDiagnostic> is do
+		result := Set<DanglingDiagnostic>.new
+		// for all elements contained by one of the Resource of this repository
+		self.resources.each{ res |
+			res.contents.each{containedObj |
+				// for all references and attribute
+				var classDef : kermeta::language::structure::ClassDefinition
+				classDef ?= containedObj.getMetaClass().typeDefinition
+				if(not classDef.isVoid) then
+     				//stdio.writeln("checking a " + classDef.name)
+					classDef.allAttribute.each{prop |
+     					//stdio.writeln("   trying property " + prop.name)
+						if( prop.upper > 1 or prop.upper == -1) then
+							// this is a collection
+							var referencedObjs : Collection<kermeta::reflection::Object> 
+							referencedObjs ?= containedObj.get(prop)
+							if(not referencedObjs.isVoid) then
+								// check if this referenced objects are part of one of the resource of this repository
+								referencedObjs.each{referencedObj |
+									if(not self.resources.exists{ res2 |
+										res2.contents.contains(referencedObj)} )
+									then
+										var diagnostic : DanglingDiagnostic init DanglingDiagnostic.new
+										diagnostic.danglingElement := referencedObj
+										diagnostic.referencingElement := containedObj
+										diagnostic.referencingProperty ?= prop
+										result.add(diagnostic)								
+									end	
+								}
+							end
+						else
+							var referencedObj : Object 
+							referencedObj := containedObj.get(prop)
+							if(not referencedObj.isVoid) then
+								// check if this referenced object is part of one of the resource of this repository
+								if(not self.resources.exists{ res2 |
+									res2.contents.contains(referencedObj)} )
+								then
+									var diagnostic : DanglingDiagnostic init DanglingDiagnostic.new
+									diagnostic.danglingElement := referencedObj
+									diagnostic.referencingElement := containedObj
+									diagnostic.referencingProperty ?= prop
+									result.add(diagnostic)								
+								end	
+							end
+						end
+					}
+				//else
+					// not a classDefinition, should try with primitiveType and Enumetation ?					
+				end
+			}
+		}		
+	end
 }
 
+/**
+ * class used to gather the information required to make a user friendly report about a dangling element
+ * (see. findDanglingModelElements())
+ */
+class DanglingDiagnostic {
+	/**
+	 * Element that is not contained by a resource in the repository  
+	 */
+	reference danglingElement : Object
+	/**
+	 * Element that has a reference to the dangling element  
+	 */
+	reference referencingElement : Object
+	/**
+	 * Property used to reference the dangling element  
+	 */
+	reference referencingProperty : kermeta::language::structure::Property
+	/**
+	 * user friendly message build with those informations
+	 */
+	method toString() : String is do
+		result := danglingElement.toString + " referenced by " + referencingElement.toString +"."+referencingProperty.name + " is dangling"
+	end
+}
 
 /**
  * Repository that stores and manages resources that come from EMF
