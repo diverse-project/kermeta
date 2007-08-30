@@ -79,6 +79,22 @@ class TestReflection inherits kermeta::kunit::TestCase
 		var a : AClass init AClass.new.create
 		var p1 : Property init AClass.typeDefinition.asType(ClassDefinition).ownedAttribute.select{ p | p.name == "derived_b"  }.one
 		assert(a.get(p1) == a.b.one)
+		
+	end
+	
+	/** check that we can get a value from all property (including those inherited from Object) 
+	 */
+	operation testGetObjectProperties() is do
+		var a : AClass init AClass.new.create
+		var classDef : ClassDefinition
+		classDef ?= a.getMetaClass().typeDefinition
+		classDef.allAttribute.each{prop |
+     					stdio.writeln("   trying property " + prop.name)
+						
+						var referencedObj : Object 
+						referencedObj := a.get(prop)
+						// there is no assert but we just want to check that it doesn't fail (we had a trouble in some kermeta version with property ownedTag inherited from object
+		}
 	end
 	
 	operation testSet1() is do
