@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.53 2007-08-22 09:56:37 cfaucher Exp $
+/* $Id: reflection.kmt,v 1.54 2007-08-30 12:19:10 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -26,17 +26,20 @@ require "../persistence/resource.kmt"
 alias String : kermeta::standard::String;
 
 /** 
- * Object definition: all entities of Kermeta metamodel explicitely inherit from Object
+ * Object definition: all entities of Kermeta metamodel explicitly inherit from Object
  */
 abstract class Object
 {
 	/**
-	 * Tags linked to the object
+	 * An object can contains a Tag.  
+	 * Be careful, owning a tag doesn't means that the tag applies to the Object
+	 * To know which Tags apply to the object use the "tag" reference
 	 */
-	property ownedTag : set Tag[0..*]
+	attribute ownedTag : set Tag[0..*]
 
 	/**
-	 * Tags are used to put comments/documentation
+	 * An Object can be tagged by a Tag. 
+	 * They are typically used to put comments/documentation on the object
 	 */
 	reference tag : set Tag[0..*]#object
 	
@@ -949,61 +952,75 @@ abstract class Package inherits TypeDefinitionContainer
 abstract class ModelingUnit
 {
 	/**
-	 * Contained root Packages
+	 * root packages contained by this ModelingUnit
 	 */
 	attribute packages : set Package[0..*]
 
 	/**
-	 * Other packages the model is relied upon
+	 * Set of "require" statements associated with this ModelingUnit. Ie. list of the other
+	 * files required to run this unit
 	 */
 	attribute requires : set Require[0..*]
 
 	/**
-	 * Shortcut references to specify the use of packages
+	 * Set of "using" statement associated with this ModelingUnit. Ie. list of "syntatic shortcut"
+	 * that can be used within this unit.
 	 */
 	attribute usings : set Using[0..*]
 
 	/**
-	 * To be written ####################################
+	 * To be written
 	 */
 	reference referencedModelingUnits : set ModelingUnit[0..*]
 
 	/**
-	 * Tags relied to the model
+	 * Tag directly owned by this ModelingUnit.  (typically the mainClass and mainOperation tags)
 	 */
 	attribute ownedTags : set Tag[0..*]
+	
+	/**
+	 * list of filters that apply to this modeling unit.
+	 * This means that if the same unit was loaded without this filters, it would have loaded more content
+	 * only element whose qualified name begins with one of these filter will be loaded in the unit
+	 */
+	attribute includeFilters : Filter[0..*]
+	
+	/**
+	 * list of filters that apply to this modeling unit.
+	 * This means that if the same unit was loaded without this filters, it would have loaded more content
+	 * element whose qualified name begins with one of these filter will NOT be loaded in the unit
+	 */
+	attribute excludeFilters : Filter[0..*]
 }
 
 /**
- * To be written ###############################
+ * Filter is the class that represent a filter on a ModelingUnit.
+ * the qualifiedName represent the beginning of the matched names
  */
 abstract class Filter
 {
-	/**
-	 * Full value of the filter, in qualified format
-	 */
 	attribute qualifiedName : String
 }
 
 /**
- * Path to an outside needed model
+ * To be written
  */
 abstract class Require inherits Object
 {
 	/**
-	 * The full pathname to the required model
+	 * To be written
 	 */
 	attribute uri : String
 }
 
 
 /**
- * Abstraction for storage of syntactic shortcuts
+ * To be written
  */
 abstract class Using inherits Object
 {
 	/**
-	 * Full value of the shortcut, in qualified format
+	 * To be written
 	 */
 	attribute qualifiedName : String
 }
