@@ -1,4 +1,4 @@
-/* $Id: KMTEditor.java,v 1.19 2007-08-01 07:26:06 ftanguy Exp $
+/* $Id: KMTEditor.java,v 1.20 2007-08-31 11:51:57 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KMTEditor.java
 * License : EPL
@@ -35,7 +35,6 @@ import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.io.util2.KermetaUnitHelper;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
@@ -148,7 +147,8 @@ public class KMTEditor extends TextEditor implements Interest {
         }
     }
     
-    public Object getAdapter(Class type) {
+    @SuppressWarnings("unchecked")
+	public Object getAdapter(Class type) {
     	   if (type == IContentOutlinePage.class) {
     	     // Installing Outline
     	     if (outline == null) outline = new KermetaOutline(this);
@@ -188,10 +188,10 @@ public class KMTEditor extends TextEditor implements Interest {
 	public void setFocus() {
 		super.setFocus();
 		
-		Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
+		Iterator<KermetaEditorEventListener> it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
 		while(it.hasNext())
 		{
-			KermetaEditorEventListener listener = (KermetaEditorEventListener)it.next();
+			KermetaEditorEventListener listener = it.next();
 			listener.unitGotFocus(this);
 		}
 	}
