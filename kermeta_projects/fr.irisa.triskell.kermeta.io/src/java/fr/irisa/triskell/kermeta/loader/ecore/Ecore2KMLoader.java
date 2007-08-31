@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.9 2007-08-31 11:23:28 dvojtise Exp $
+/*$Id: Ecore2KMLoader.java,v 1.10 2007-08-31 16:36:03 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -14,9 +14,12 @@ package fr.irisa.triskell.kermeta.loader.ecore;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -25,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -100,9 +104,19 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 				 * 
 				 */
 				EPackage p = (EPackage) Registry.INSTANCE.get(uri);
-				if ( p != null )
+				if ( p != null ){
 					resources.put(kermetaUnit, p.eResource());
+					// find all dependencies from this registered EPackage
+					Map<EObject,Collection<Setting>> m = EcoreUtil.ExternalCrossReferencer.find(p.eResource());
+					for(EObject eobj : m.keySet()){
+						if(eobj.eResource()!= null){
+							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( eobj.eResource().getURI().toString() );
+							resources.put(unit, eobj.eResource());
+						}
+					}
+				}
 				else {
+					// find all dependencies from this file EPackage
 					URI emfURI = URI.createURI( uri );
 					Resource resource = resourceSet.createResource( emfURI );
 					resource.load(null);
@@ -114,8 +128,13 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( r.getURI().toString() );
 							resources.put(unit, r);
 						}
-					}
-					
+					}					
+				}
+				// update the ImportedKermetaUnit property from the computed resource dependencies
+				for(Entry<KermetaUnit,Resource> e : resources.entrySet()){
+					if(!e.getKey().getUri().equals(uri))
+						kermetaUnit.getImportedKermetaUnits().add(e.getKey());
+						kermetaUnit.addRequire( e.getKey().getUri() );
 				}
 			}
 		} catch ( URIMalformedException exception ) {
