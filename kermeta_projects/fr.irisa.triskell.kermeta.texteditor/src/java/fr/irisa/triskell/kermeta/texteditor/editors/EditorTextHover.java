@@ -1,4 +1,4 @@
-/* $Id: EditorTextHover.java,v 1.25 2007-08-31 11:44:45 dvojtise Exp $
+/* $Id: EditorTextHover.java,v 1.26 2007-08-31 11:48:04 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorTextHover.java
 * License : EPL
@@ -175,15 +175,15 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	 * @param ftags
 	 * @return
 	 */
-	private String kdocPrettyPrint(EList taglist)
+	private String kdocPrettyPrint(EList<Tag> taglist)
 	{
 	    // FIXME : totally ugly patch, until duplicate tags are removed from the 
 	    // KM model itself..(bad "inheritance" handling of tags?)
-	    Iterator it = taglist.iterator();
-	    Hashtable tagdict = new Hashtable();
+	    Iterator<Tag> it = taglist.iterator();
+	    Hashtable<String, String> tagdict = new Hashtable<String, String>();
 	    String pptags = "";
 	    while (it.hasNext())
-	    {	Tag tag = (Tag)it.next();
+	    {	Tag tag = it.next();
 	    	pptags += tagdict.containsKey(tag.getValue())?"":pp.accept(tag);
 	        tagdict.put(tag.getValue(), "");
 	    }
@@ -193,31 +193,6 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	    return pptags;
 	}
 
-	
-	/**
-	 * Get the definition of the CallFEature :
-	 * - FEnumeration
-	 * - FClass <- FTypeLiteral ?
-	 * - FOperation
-	 * - Property
-	 */
-	private fr.irisa.triskell.kermeta.language.structure.Object getDefinitionForCallFeature(CallFeature feature)
-	{
-	    if (feature.getStaticOperation() != null)
-	    {
-	        return feature.getStaticOperation();
-	    }
-	    if (feature.getStaticProperty() != null)
-	    {
-	        return feature.getStaticProperty();
-	    }
-	    else // return the CallFeature itself
-	    {
-	        System.err.println("the definition : " + feature.getName() + feature);
-	        return feature;
-	    }
-	}
-	
 	public String ppDefinitionForCallFeature(CallFeature feature)
 	{
 	    if (feature.getStaticOperation() != null)
