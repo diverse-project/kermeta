@@ -1,0 +1,23 @@
+/* $Id: ecore_compatibility.kmt,v 1.1 2007-08-31 07:13:00 dvojtise Exp $
+ * Creation date: Aug, 2007
+ * License: EPL
+ * Copyright: INRIA
+ * Authors: 
+ *		Didier Vojtisek
+ */
+
+/** 
+ * Contains the definition of a Kermeta classes used for compatibility with Ecore 
+ */
+package kermeta::ecore;
+require "../Standard.kmt"
+
+/**
+ * Kermeta representation of EMF EFeatureMapEntry
+ * it contains the name of the required feature and the actual value
+ */
+class EFeatureMapEntry
+{
+	attribute eStructuralFeatureName : kermeta::standard::String
+	attribute ~value : kermeta::language::structure::Object
+}
