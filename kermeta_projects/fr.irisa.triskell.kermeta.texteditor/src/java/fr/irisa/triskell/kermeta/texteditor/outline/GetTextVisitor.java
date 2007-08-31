@@ -1,11 +1,14 @@
-/* $Id: GetTextVisitor.java,v 1.10 2007-08-03 08:36:39 ftanguy Exp $
+/* $Id: GetTextVisitor.java,v 1.11 2007-08-31 13:13:42 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetTextVisitor.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 13 feb. 2005
-* Author : Franck Fleurey (ffleurey@irisa.fr)
+* Authors : 
+* 		Franck Fleurey (ffleurey@irisa.fr)
+* 		Francois Tanguy
+* 		Didier Vojtisek
 */
 
 package fr.irisa.triskell.kermeta.texteditor.outline;
@@ -70,11 +73,11 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 		return result;
 	}
 	
-	public String ppTypeVariableDeclaration(EList tparams) {
+	public String ppTypeVariableDeclaration(EList<TypeVariable> tparams) {
 		String result = "";
-		Iterator it = tparams.iterator();
+		Iterator<TypeVariable> it = tparams.iterator();
 		while (it.hasNext()) {
-			TypeVariable node = (TypeVariable)it.next();
+			TypeVariable node = it.next();
 			result += node.getName();
 			if (node.getSupertype() != null) result += " : " + ((fr.irisa.triskell.kermeta.language.structure.Class)node.getSupertype()).getTypeDefinition().getName();
 			if (it.hasNext()) result +=  ", ";
@@ -202,11 +205,11 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 		else return element.getName();
 	}
 	
-	public String ppComaSeparatedNodes(EList expressions) {
+	public String ppComaSeparatedNodes(EList<? extends EObject> expressions) {
 		String result = "";
-		Iterator it = expressions.iterator();
+		Iterator<? extends EObject> it = expressions.iterator();
 		while(it.hasNext()) {
-			EObject o = (EObject)it.next();
+			EObject o = it.next();
 			 result += this.accept(o);
 			if (it.hasNext()) result +=  ", ";
 		}
@@ -224,8 +227,10 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 				else result +="bag ";
 			}
 		}
-		result += this.accept(elem.getType());
-			if (elem.getLower() != 0 || elem.getUpper() != 1) {
+		if(elem.getType() == null) result+= "<undefined>";
+		else
+			result += this.accept(elem.getType());
+		if (elem.getLower() != 0 || elem.getUpper() != 1) {
 			result += "[" + elem.getLower() + "..";
 			result += (elem.getUpper()<0)?"*":""+elem.getUpper();
 			result += "]";
