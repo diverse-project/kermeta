@@ -1,4 +1,4 @@
-/* $Id: GetChildrenVisitor.java,v 1.9 2007-07-20 15:09:22 ftanguy Exp $
+/* $Id: GetChildrenVisitor.java,v 1.10 2007-08-31 13:24:22 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetChildrenVisitor.java
 * License : EPL
@@ -66,7 +66,7 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
 	public Object visitClassDefinition(ClassDefinition arg0) {
-		ArrayList result = new ArrayList();
+		ArrayList<OutlineItem> result = new ArrayList<OutlineItem>();
 		if (outline.prefInheritanceFlattening()) {
 		    for (Object next : InheritanceSearch.callableProperties(InheritanceSearch.getFClassForClassDefinition(arg0)))
 		    {
@@ -178,7 +178,7 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)
 	 */
 	public Object visitEnumeration(Enumeration arg0) {
-		ArrayList result = new ArrayList();
+		ArrayList<OutlineItem> result = new ArrayList<OutlineItem>();
 		
 		for (Object lit : arg0.getOwnedLiteral())
 	        result.add(new OutlineItem((EnumerationLiteral)lit, item, outline));
@@ -199,7 +199,7 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visitOperation(Operation arg0) {
-		ArrayList result = new ArrayList();
+		ArrayList<OutlineItem> result = new ArrayList<OutlineItem>();
 
 		if (outline.prefInheritanceFlattening() && arg0.getSuperOperation() != null) {
 			for (Object ci : arg0.getSuperOperation().getPre())
@@ -225,7 +225,7 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Package)
 	 */
 	public Object visitPackage(Package arg0) {
-		ArrayList result = new ArrayList();
+		ArrayList<OutlineItem> result = new ArrayList<OutlineItem>();
 		
 		if (outline.prefPackageTree()) {
 			for (Object next : arg0.getNestedPackage())

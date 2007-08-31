@@ -1,4 +1,4 @@
-/* $Id: OutlineItem.java,v 1.8 2007-07-20 15:09:22 ftanguy Exp $
+/* $Id: OutlineItem.java,v 1.9 2007-08-31 13:22:55 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineItem.java
 * License : EPL
@@ -25,7 +25,7 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 /**
  * @author Franck Fleurey
  */
-public class OutlineItem implements Comparable {
+public class OutlineItem implements Comparable<OutlineItem> {
 
     protected fr.irisa.triskell.kermeta.language.structure.Object modelElement;
     protected Object parent;
@@ -76,7 +76,7 @@ public class OutlineItem implements Comparable {
         return children;
     }
     
-    public int compareTo(Object other) {
+    public int compareTo(OutlineItem other) {
         if (other instanceof OutlineItem) {
             return getLabel().compareTo(((OutlineItem)other).getLabel());
         }
