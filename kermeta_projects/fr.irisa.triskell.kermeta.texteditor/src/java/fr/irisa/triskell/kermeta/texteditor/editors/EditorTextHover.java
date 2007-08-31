@@ -1,4 +1,4 @@
-/* $Id: EditorTextHover.java,v 1.24 2007-08-29 12:24:30 ftanguy Exp $
+/* $Id: EditorTextHover.java,v 1.25 2007-08-31 11:44:45 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorTextHover.java
 * License : EPL
@@ -38,6 +38,7 @@ import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
 import fr.irisa.triskell.traceability.ModelReference;
+import fr.irisa.triskell.traceability.helper.Tracer;
 
 
 /**
@@ -91,8 +92,10 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		} catch (CoreException e) {
 			TexteditorPlugin.pluginLog.warn("error computing hover info", e);
 		}
-		
-		Set<ModelReference> references = editor.getMcunit().getTracer().getModelReferences(hoverRegion.getOffset(), hoverRegion.getLength(), editor.getMcunit().getUri());
+		Tracer tracer = editor.getMcunit().getTracer();
+		if(tracer == null) 
+			return null; // ignore hover if there is no tracer (this may occur if the load of the unit failed due to an internal error)
+		Set<ModelReference> references = tracer.getModelReferences(hoverRegion.getOffset(), hoverRegion.getLength(), editor.getMcunit().getUri());
 		for ( ModelReference reference : references ) {
 			EObject o = reference.getRefObject();
 	        if (o instanceof Expression)
