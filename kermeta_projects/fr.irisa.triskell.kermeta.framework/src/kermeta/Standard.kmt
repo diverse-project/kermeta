@@ -1,3 +1,4 @@
+/* $Id: Standard.kmt,v 1.12 2007-08-31 07:12:18 dvojtise Exp $ */
 /**
  * The root package. See the other packages if you want to browse the classes of Kermeta api.
  * <img src="./figures/kermeta_packages.png">
@@ -36,4 +37,6 @@ require "language/dynamic_expression.kmt"
 require "persistence/resource.kmt"
 
 require "standard/java.kmt"
+
+require "ecore/ecore_compatibility.kmt"
  
