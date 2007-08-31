@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.13 2007-07-24 13:46:46 ftanguy Exp $
+/* $Id: Ecore2KM.java,v 1.14 2007-08-31 13:07:52 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL
@@ -39,19 +39,6 @@ public class Ecore2KM {
 	protected ClassDefinition current_classdef;
 	protected Operation current_op;
 
-
-	protected static Hashtable<String, String> primitive_types_mapping;
-	
-	static {
-		primitive_types_mapping = new Hashtable<String, String>();
-		primitive_types_mapping.put("int", 					"kermeta::standard::Integer");
-		primitive_types_mapping.put("java.lang.Integer", 	"kermeta::standard::Integer"); // Fixme : UnlimiteNatural not handled
-		primitive_types_mapping.put("boolean", 				"kermeta::standard::Boolean");
-		primitive_types_mapping.put("java.lang.Boolean", 	"kermeta::standard::Boolean");
-		primitive_types_mapping.put("java.lang.String", 	"kermeta::standard::String");
-		primitive_types_mapping.put("Object", 				"kermeta::standard::Object");
-		primitive_types_mapping.put("java.lang.Object", 	"kermeta::standard::Object");
-	}
 	
 	/**
 	 * Hashtable used to manage the invariants annotations that are encoded in Ecore as annotations
