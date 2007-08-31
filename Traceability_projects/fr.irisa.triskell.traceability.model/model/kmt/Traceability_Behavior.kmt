@@ -79,8 +79,8 @@ class TraceModel {
 
 		trc.sourceReferences.clear
 		trc.targetReferences.clear
-		trc.sourceReferences.addAll(srcRefs)
-		trc.targetReferences.addAll(tgtRefs)
+		srcRefs.each{r | trc.sourceReferences.add(r)}
+		tgtRefs.each{r | trc.targetReferences.add(r)}
 
 		traces.add(trc)
 	end
@@ -166,7 +166,7 @@ class TraceModel {
 			refs := Set<Reference>.new
 			t.sourceReferences.each{r1 |
 				refs.add(
-					newRefs.select{r2 | r2.toString == r1.toString}.one
+					newRefs.detect{r2 | r2.toString == r1.toString}
 				)
 			}
 			t.sourceReferences.clear
@@ -176,7 +176,7 @@ class TraceModel {
 			refs := Set<Reference>.new
 			t.targetReferences.each{r1 |
 				refs.add(
-					newRefs.select{r2 | r2.toString == r1.toString}.one
+					newRefs.detect{r2 | r2.toString == r1.toString}
 				)
 			}
 			t.targetReferences.clear
