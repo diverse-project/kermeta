@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.12 2007-08-21 12:58:19 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.13 2007-08-31 16:39:12 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -14,12 +14,11 @@ package org.kermeta.io.plugin;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
@@ -295,10 +294,13 @@ public class IOPlugin extends AbstractUIPlugin {
 		return ecore;
 	}
 	
-	public Set<KermetaUnit> getKermetaUnits() {
-		Set<KermetaUnit> s = new HashSet<KermetaUnit> ();
-		s.addAll( storer.getKermetaUnits() );
-		return s;
+	/**
+	 * list of unique units
+	 * @return
+	 */
+	public EList<KermetaUnit> getKermetaUnits() {
+		// can return directly the units from the storer since it already doesn't contains duplicates  
+		return storer.getKermetaUnits();
 	}
 	
 	//private org.kermeta.io.util2.KermetaUnitHelper kermetaUnitHelper;
