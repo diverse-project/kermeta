@@ -1,4 +1,4 @@
-/* $Id: GetTextVisitor.java,v 1.11 2007-08-31 13:13:42 dvojtise Exp $
+/* $Id: GetTextVisitor.java,v 1.12 2007-08-31 14:15:16 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetTextVisitor.java
 * License : EPL
@@ -136,6 +136,9 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.PrimitiveType)
 	 */
 	public Object visitPrimitiveType(PrimitiveType arg0) {
+		if(arg0.getInstanceType() != null){
+			return arg0.getName() + " => " +accept(arg0.getInstanceType()).toString();
+		}
 		return arg0.getName();
 	}
 	/**
