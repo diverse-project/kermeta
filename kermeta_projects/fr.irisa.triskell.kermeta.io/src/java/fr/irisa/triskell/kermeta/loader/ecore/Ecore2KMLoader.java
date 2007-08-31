@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.7 2007-08-07 13:35:22 ftanguy Exp $
+/*$Id: Ecore2KMLoader.java,v 1.8 2007-08-31 11:07:36 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -38,6 +38,7 @@ import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.loader.km.KMUnitLoader;
 import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTBuildingState;
@@ -208,6 +209,16 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 					resources.put(unit, r);
 				}
 			}
+			else {
+				Object o = Registry.INSTANCE.get( unit.getUri() );
+				if ( o instanceof EPackage.Descriptor ) {
+					EPackage p = ((EPackage.Descriptor) o).getEPackage();
+					resources.put(unit, p.eResource());
+				}
+				else if ( o instanceof EPackage ) {
+					resources.put(unit, ((EPackage)o).eResource());
+				} 
+			}
 		}
 		
 		/*
@@ -228,6 +239,9 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
 				if ( ! currentState.loading )
 					applyPass1ToAll(currentUnit);
+			}
+			else {
+				
 			}
 		}
 		
