@@ -1,6 +1,6 @@
 
 
-/*$Id: PackageItem.java,v 1.3 2007-07-24 13:46:55 ftanguy Exp $
+/*$Id: PackageItem.java,v 1.4 2007-08-31 13:30:23 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	PackageItem.java
 * License : EPL
@@ -25,7 +25,7 @@ import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.texteditor.icons.blue.KermetaIconsBlue;
 import fr.irisa.triskell.kermeta.texteditor.icons.red.KermetaIconsRed;
 
-public class PackageItem  implements Comparable {
+public class PackageItem  implements Comparable<PackageItem> {
 
 	private String name = "";
 	
@@ -84,7 +84,7 @@ public class PackageItem  implements Comparable {
 		return typeDefinitions.values();
 	}
 
-	public int compareTo(java.lang.Object o) {
+	public int compareTo(PackageItem o) {
 		if ( o instanceof PackageItem )
 			return getName().compareTo( ((PackageItem) o).getName() );
 		return 0;

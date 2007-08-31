@@ -1,4 +1,4 @@
-/* $Id: EditorScanner.java,v 1.10 2007-06-27 14:43:04 cfaucher Exp $
+/* $Id: EditorScanner.java,v 1.11 2007-08-31 13:32:07 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorScanner.java
 * License : EPL
@@ -69,14 +69,14 @@ public class EditorScanner extends RuleBasedScanner {
 		IToken defaultToken = new Token(new TextAttribute(EditorConfiguration.DEFAULT_TAG_COLOR));
 		//KWDetector detector = new KWDetector();
 		WordRule wr = new WordRule(new IDDetector(), defaultToken);
-		Iterator e = CathegorizedKWList.getInstance().getNonSpecialKW().iterator();
+		Iterator<String> e = CathegorizedKWList.getInstance().getNonSpecialKW().iterator();
 		while (e.hasNext()) {
-			String kw = e.next().toString().trim();
+			String kw = e.next().trim();
 			wr.addWord(kw, kwToken);
 		}
 		e = CathegorizedKWList.getInstance().specialKW.iterator();
 		while (e.hasNext()) {
-			String kw = e.next().toString().trim();
+			String kw = e.next().trim();
 			wr.addWord(kw, skwToken);
 		}
 		rules.add(wr);
