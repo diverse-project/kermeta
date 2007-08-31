@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.14 2007-08-07 12:16:19 dvojtise Exp $
+/* $Id: KMT2KMPass1.java,v 1.15 2007-08-31 09:14:42 jmottu Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : EPL
@@ -112,7 +112,7 @@ public class KMT2KMPass1 extends KMT2KMPass {
 				fileURI = s;
 			else {
 				
-				if ( ! s.startsWith("platform:/") && ! s.startsWith("http://") ) {
+				if ( ! s.startsWith("platform:/") && ! s.startsWith("http://") && ! s.startsWith("file:") ) {
 					int index = builder.getUri().lastIndexOf("/");
 					String path = builder.getUri().substring(0, index);
 					fileURI = path + "/" + s;
