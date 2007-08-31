@@ -1,4 +1,4 @@
-/* $Id: GetImageVisitor.java,v 1.8 2007-07-20 15:09:22 ftanguy Exp $
+/* $Id: GetImageVisitor.java,v 1.9 2007-08-31 13:14:17 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetImageVisitor.java
 * License : EPL
@@ -136,8 +136,6 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Package)
 	 */
 	public Object visitPackage(Package arg0) {
-	    boolean one = false;
-	    boolean all = true;
 	    
 	    if (arg0.getOwnedTypeDefinition().size() == 0) {
 	        return KermetaSpecialIcons.PACKAGE_GRAY;
