@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.8 2007-08-31 11:07:36 dvojtise Exp $
+/*$Id: Ecore2KMLoader.java,v 1.9 2007-08-31 11:23:28 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -212,10 +212,14 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			else {
 				Object o = Registry.INSTANCE.get( unit.getUri() );
 				if ( o instanceof EPackage.Descriptor ) {
+					if  ( ! passDatas.contains(unit) ) 
+						passDatas.put(unit, new Ecore2KMDatas() );
 					EPackage p = ((EPackage.Descriptor) o).getEPackage();
 					resources.put(unit, p.eResource());
 				}
 				else if ( o instanceof EPackage ) {
+					if  ( ! passDatas.contains(unit) ) 
+						passDatas.put(unit, new Ecore2KMDatas() );
 					resources.put(unit, ((EPackage)o).eResource());
 				} 
 			}
