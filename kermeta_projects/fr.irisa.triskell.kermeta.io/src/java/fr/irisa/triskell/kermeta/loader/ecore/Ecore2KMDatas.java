@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMDatas.java,v 1.3 2007-07-24 13:46:46 ftanguy Exp $
+/*$Id: Ecore2KMDatas.java,v 1.4 2007-08-31 13:08:24 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMHelper.java
 * License : EPL
@@ -181,7 +181,7 @@ public class Ecore2KMDatas {
 	//////////////////////////////////////////////////
 	
 	
-	public String getTypeName(String shortType) {
+	public String getTypeName(String shortType) {		
 		return primitive_types_mapping.get(shortType);
 	}
 	
@@ -191,6 +191,9 @@ public class Ecore2KMDatas {
 	
 	protected Hashtable<String, String> primitive_types_mapping;
 	
+	/**
+	 * this map is used to know which java class can be casted as a kermeta class 
+	 */
 	public Ecore2KMDatas() {
 		primitive_types_mapping = new Hashtable<String, String>();
 		primitive_types_mapping.put("int", 					"kermeta::standard::Integer");
@@ -200,6 +203,7 @@ public class Ecore2KMDatas {
 		primitive_types_mapping.put("java.lang.String", 	"kermeta::standard::String");
 		primitive_types_mapping.put("Object", 				"kermeta::standard::Object");
 		primitive_types_mapping.put("java.lang.Object", 	"kermeta::standard::Object");
+		primitive_types_mapping.put("org.eclipse.emf.ecore.util.FeatureMap$Entry", 	"kermeta::ecore::EFeatureMapEntry");		
 	}
 
 }
