@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.14 2007-08-09 14:59:16 dvojtise Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.15 2007-08-31 08:02:20 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -172,7 +172,12 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 						kermetaUnit.setBuildingState( new KmBuildingState() );
 					else
 						kermetaUnit.setBuildingState( new EcoreBuildingState() );
-				} 
+				}
+				else if ( o instanceof EPackage ) {
+					kermetaUnit.setBuildingState( new EcoreBuildingState() );
+				} else
+					kermetaUnit.error("Unknown Format. It is impossible to load this registered resource.");
+				
 			}
 
 			WeakReference reference = new WeakReference( kermetaUnit );
