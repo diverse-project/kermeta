@@ -1,4 +1,4 @@
-/* $Id: String.java,v 1.9 2007-03-01 13:25:42 ffleurey Exp $
+/* $Id: String.java,v 1.10 2007-09-03 16:11:16 fmunoz Exp $
 * Project : Kermeta interpreter
 * File : String.java
 * License : EPL
@@ -53,13 +53,15 @@ public class String {
 		return result;
 	}
 
-	/** Implementation of method append called as :
+	/** 
+	 * MOVED TO kermeta::utils::StringBuffer
+	 * Implementation of method append called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::String::append(other)
 	 */
-	public static RuntimeObject append(RuntimeObject self, RuntimeObject param0) {
+	/*public static RuntimeObject append(RuntimeObject self, RuntimeObject param0) {
 		setValue(self, getValue(self) + getValue(param0));
 		return self.getFactory().getMemory().voidINSTANCE;
-	}
+	}*/
 
 	/** Implementation of method elementAt called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::String::elementAt(index)
