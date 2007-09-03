@@ -1,4 +1,4 @@
-/* $Id: Standard.kmt,v 1.12 2007-08-31 07:12:18 dvojtise Exp $ */
+/* $Id: Standard.kmt,v 1.13 2007-09-03 16:08:28 fmunoz Exp $ */
 /**
  * The root package. See the other packages if you want to browse the classes of Kermeta api.
  * <img src="./figures/kermeta_packages.png">
@@ -39,4 +39,7 @@ require "persistence/resource.kmt"
 require "standard/java.kmt"
 
 require "ecore/ecore_compatibility.kmt"
+
+// new StringBuffer data Type
+require "utils/StringBuffer.kmt"
  
