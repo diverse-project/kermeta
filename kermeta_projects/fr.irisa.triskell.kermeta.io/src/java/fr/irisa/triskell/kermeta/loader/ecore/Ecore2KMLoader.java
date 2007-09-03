@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.10 2007-08-31 16:36:03 dvojtise Exp $
+/*$Id: Ecore2KMLoader.java,v 1.11 2007-09-03 07:50:08 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -132,9 +132,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 				}
 				// update the ImportedKermetaUnit property from the computed resource dependencies
 				for(Entry<KermetaUnit,Resource> e : resources.entrySet()){
-					if(!e.getKey().getUri().equals(uri))
+					if(!e.getKey().getUri().equals(uri)){
 						kermetaUnit.getImportedKermetaUnits().add(e.getKey());
 						kermetaUnit.addRequire( e.getKey().getUri() );
+					}
 				}
 			}
 		} catch ( URIMalformedException exception ) {
