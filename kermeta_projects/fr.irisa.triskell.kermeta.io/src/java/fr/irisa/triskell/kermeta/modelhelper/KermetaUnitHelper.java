@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitHelper.java,v 1.6 2007-08-07 13:35:22 ftanguy Exp $
+/*$Id: KermetaUnitHelper.java,v 1.7 2007-09-03 06:16:44 dvojtise Exp $
 * Project : io
 * File : 	KermetaUnitHelper.java
 * License : EPL
@@ -232,7 +232,7 @@ public class KermetaUnitHelper {
 
 	
 	static public KermetaUnit getKermetaUnitFromObject(EObject o) {
-		Set<KermetaUnit> s = IOPlugin.getDefault().getKermetaUnits();
+		EList<KermetaUnit> s = IOPlugin.getDefault().getKermetaUnits();
 		ModelingUnit cu = getModelingUnit(o);
 		for ( KermetaUnit unit : s ) {
 			if ( unit.getModelingUnit() == cu )
