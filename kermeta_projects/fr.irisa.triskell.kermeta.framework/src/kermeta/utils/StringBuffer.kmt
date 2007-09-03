@@ -1,0 +1,43 @@
+/*
+ *
+ * @autor Freddy Munoz (frmunoz(at)irisa.fr)
+ * Triskell Research Group
+ * IRISA / University of Rennes 1 (France)
+ * 
+ * Implementation of a kermeta wrapper for java.lang.StringBuffer
+ *
+ */
+
+package kermeta::utils;
+
+require "../Standard.kmt"
+
+using kermeta::standard
+/**
+ * This class mimic the behavior of the StringBuffer class in java, enabling better performance in log
+ * strings
+ */
+class StringBuffer{
+	/**
+	 * Append a given string at the end of the given StringBuffer
+	 * @param arg0 A string to append at the end of this StringBuffer
+	 * @return A reference to this object
+	 */
+	operation append(arg0: String): StringBuffer is do
+		result?=extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.append(self,arg0)
+	end
+	/**
+	 *Convert this StringBuffer to String and return its value
+	 *@return The string value of this StringBuffer
+	 */
+	method toString(): String is do
+		var stringValue: String
+		stringValue?=extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.toString(self)
+		result:=stringValue
+	end
+	
+	operation create(arg0: Interger):StringBuffer is do
+		
+	end
+	
+}
