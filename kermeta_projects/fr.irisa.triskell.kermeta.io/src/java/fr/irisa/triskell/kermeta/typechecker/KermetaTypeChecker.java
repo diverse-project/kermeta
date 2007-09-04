@@ -1,11 +1,13 @@
-/* $Id: KermetaTypeChecker.java,v 1.22 2007-08-09 14:58:32 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.23 2007-09-04 08:47:06 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 18 avr. 2005
-* Author : Franck Fleurey
+* Authors : 
+* 		Franck Fleurey
+* 		Didier Vojtisek
 */ 
 
 package fr.irisa.triskell.kermeta.typechecker;
@@ -92,7 +94,10 @@ public class KermetaTypeChecker {
         			}
         			// Check property types
         			for (Object prop : cdef.getOwnedAttribute()) {
-        				ParameterizedTypeChecker.checkType(((Property) prop).getType(), unit, context, (Property)prop);
+        				if(((Property) prop).getType() != null)
+        					ParameterizedTypeChecker.checkType(((Property) prop).getType(), unit, context, (Property)prop);
+        				else
+        					unit.error("TYPE-CHECKER : property " + td.getName() + "." + ((Property)prop).getName() + " has no type", prop);
         			}
         			// Check operation signatures
         			for (Object opObj : cdef.getOwnedOperation()) {
