@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.5 2007-08-09 14:59:16 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.6 2007-09-04 08:17:41 ftanguy Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -142,8 +142,14 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		Iterator <Using> iterator = modelingUnit.getUsings().iterator();
 		while ( iterator.hasNext() ) {
 			Using using = iterator.next();
-			String tags = ppTags( using );
-			print( "using " + using.getQualifiedName() + "\n" );		
+			boolean print = true;
+			for ( Package p : modelingUnit.getPackages() )
+				if ( NamedElementHelper.getQualifiedName(p).equals( using.getQualifiedName() ) )
+					print = false;
+			if ( print ) {
+				String tags = ppTags( using );
+				print( "using " + using.getQualifiedName() + "\n" );		
+			}
 		}
 	}
 	
