@@ -85,7 +85,7 @@ public class PackageMerge {
 						}	
 					}
 					for(int i = 0; i<to_replace.size();i++) {
-						((EList)o.eGet(ref)).remove(to_replace.get(i));
+						((EList<?>)o.eGet(ref)).remove(to_replace.get(i));
 						((EList<EObject>)o.eGet(ref)).add(types_copied.get(getQualifiedName((ENamedElement)to_replace.get(i))));
 						//System.out.println("REPLACE");
 					}
@@ -339,7 +339,7 @@ public class PackageMerge {
 				EReference ref = itcr.next();
 				Object val = o.eGet(ref);
 				if (ref.getUpperBound() != 1) {
-					EList vals = (EList)val;
+					EList<EObject> vals = (EList<EObject>)val;
 					for(int i=0; i<vals.size(); i++) {
 						EObject v = (EObject)vals.get(i);
 						if (v != null && v.eResource() == null) {
