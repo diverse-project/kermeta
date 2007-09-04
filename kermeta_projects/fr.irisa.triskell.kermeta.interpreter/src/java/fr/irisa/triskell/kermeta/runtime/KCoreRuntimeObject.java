@@ -1,4 +1,4 @@
-/* $Id: KCoreRuntimeObject.java,v 1.5 2007-08-02 16:59:36 dvojtise Exp $
+/* $Id: KCoreRuntimeObject.java,v 1.6 2007-09-04 12:24:33 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KCoreRuntimeObject.java
 * License : EPL
@@ -48,7 +48,7 @@ public class KCoreRuntimeObject extends RuntimeObject {
         if (!loaded) load();
         return super.getContainer();
     }
-    public Hashtable getData() {
+    public Hashtable<String,Object> getData() {
         if (!loaded) load();
         return super.getData();
     }
