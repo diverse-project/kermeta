@@ -1,4 +1,4 @@
-/* $Id: KermetaOutline.java,v 1.10 2007-08-31 13:30:23 dvojtise Exp $
+/* $Id: KermetaOutline.java,v 1.11 2007-09-04 08:15:13 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
@@ -135,7 +135,7 @@ public class KermetaOutline extends ContentOutlinePage {
     public void selectionChanged(SelectionChangedEvent event)
     {
         super.selectionChanged(event);
-        if (editor.getMcunit()==null || editor.getMcunit().getInternalPackages().get(0) == null) return;
+        if (editor.getMcunit()==null || (! editor.getMcunit().getInternalPackages().isEmpty() && editor.getMcunit().getInternalPackages().get(0) == null)) return;
         ISelection selection = event.getSelection();
         if(selection.isEmpty())
         	editor.resetHighlightRange();
