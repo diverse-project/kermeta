@@ -1,4 +1,4 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.23 2007-08-08 15:46:24 dvojtise Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.24 2007-09-04 08:23:55 dvojtise Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
@@ -47,7 +47,10 @@
 	</target>
 	<target name="deploy" 
 		description="deploy the framework file">
-		<delete dir="../fr.irisa.triskell.kermeta.io/src/kermeta"/>
+		<delete>
+			<fileset dir="../fr.irisa.triskell.kermeta.io/src/kermeta" includes="**/*.ecore"/>
+			<fileset dir="../fr.irisa.triskell.kermeta.io/src/kermeta" includes="**/*.km"/>
+		</delete>
 		<copy todir="../fr.irisa.triskell.kermeta.io/src/kermeta">
 		  <fileset dir="dist"
 		  />
@@ -56,7 +59,10 @@
 	
 	<target name="create_framework" 
 			description="create the km file">
-		<delete dir="dist"/>
+		<delete>
+			<fileset dir="dist" includes="**/*.ecore"/>
+			<fileset dir="dist" includes="**/*.km"/>
+		</delete>
 		<mkdir dir="dist"/>
 		<java classname="fr.irisa.triskell.kermeta.dev.framework.CompileFramework">
 			<classpath refid="project.class.path"/>
