@@ -1,4 +1,4 @@
-/* $Id: FixPackageNSUri.java,v 1.8 2007-07-20 15:09:04 ftanguy Exp $
+/* $Id: FixPackageNSUri.java,v 1.9 2007-09-04 16:25:06 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : FixPackageNSUri.java
  * License    : EPL
@@ -118,16 +118,16 @@ public class FixPackageNSUri {
 
 		// move all packages to this new one 
 		// must be done in two pass because I cannot change le list while iterating on it
-		Iterator it = p.getESubpackages().iterator();
+		Iterator<EPackage> it = p.getESubpackages().iterator();
 		System.out.println(p.getESubpackages().size() + " subpackages in " + p.getName());
-		BasicEList toMove = new BasicEList();
+		BasicEList<EPackage> toMove = new BasicEList<EPackage>();
 		while(it.hasNext()) {
-			EPackage next = (EPackage)it.next();
+			EPackage next = it.next();
 			toMove.add(next);
 		}
 		it = toMove.iterator();
 		while(it.hasNext()) {
-			EPackage next = (EPackage)it.next();
+			EPackage next = it.next();
 			System.out.println("moving package "+next.getName());
 			newEPackage.getESubpackages().add(next);
 		}
@@ -143,7 +143,7 @@ public class FixPackageNSUri {
 		FixPackageNSUri cn = new FixPackageNSUri();
 		Resource model1 = cn.load(args[0]);
 		
-		TreeIterator it = ((EPackage)model1.getContents().get(0)).eAllContents();
+		TreeIterator<EObject> it = ((EPackage)model1.getContents().get(0)).eAllContents();
 		EPackage root = (EPackage)model1.getContents().get(0);
 		root.setName("kermeta");
 		insertPackage(root, "language");

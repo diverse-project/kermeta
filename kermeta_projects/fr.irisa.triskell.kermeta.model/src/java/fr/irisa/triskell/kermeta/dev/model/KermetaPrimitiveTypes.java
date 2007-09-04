@@ -1,5 +1,5 @@
 /*
- * Created on 21 d�c. 2004
+ * Created on 21 dec. 2004
  *
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
@@ -21,8 +21,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 /**
  * @author franck
  *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 public class KermetaPrimitiveTypes {
 	
@@ -78,10 +76,10 @@ public class KermetaPrimitiveTypes {
 		KermetaPrimitiveTypes cn = new KermetaPrimitiveTypes();
 		Resource model1 = cn.load(args[0]);
 		
-		TreeIterator it = ((EPackage)model1.getContents().get(0)).eAllContents();
+		TreeIterator<EObject> it = ((EPackage)model1.getContents().get(0)).eAllContents();
 
 		while(it.hasNext()) {
-			EObject o = (EObject)it.next();
+			EObject o = it.next();
 			if (o instanceof EDataType) {
 				EDataType dt = (EDataType)o;
 				dt.setInstanceClassName("kermeta::standard::" + dt.getName());

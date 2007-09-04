@@ -1,8 +1,6 @@
 /*
  * Created on 8 janv. 2005
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package fr.irisa.triskell.kermeta.dev.model;
 
@@ -27,18 +25,16 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 /**
  * @author franck
  *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 public class ApplyVisitor {
 
-	private Hashtable types;
-	private Hashtable packs;
+	private Hashtable<String,EClassifier> types;
+	private Hashtable<String, EPackage> packs;
 	private EcoreFactory factory;
 	
 	public ApplyVisitor(Resource model) {
-		types = new Hashtable();
-		packs = new Hashtable();
+		types = new Hashtable<String, EClassifier>();
+		packs = new Hashtable<String, EPackage>();
 		collectTypes(model);
 		factory = new EcoreFactoryImpl();
 	}
@@ -50,7 +46,7 @@ public class ApplyVisitor {
 		EClass result = factory.createEClass();
 		result.setAbstract(true);
 		result.setName(rootClass.getName() + "Visitor");
-		ArrayList subtypes = getAllSubTypes(rootClass);
+		ArrayList<EClassifier> subtypes = getAllSubTypes(rootClass);
 		subtypes.add(0, rootClass);
 		for(int i=0; i<subtypes.size(); i++) {
 			EClass subtype = (EClass)subtypes.get(i);
@@ -88,9 +84,9 @@ public class ApplyVisitor {
 		return result;
 	}
 	
-	public ArrayList getAllSubTypes(EClass rootClass) {
-		ArrayList result = new ArrayList();
-		Iterator it = types.values().iterator();
+	public ArrayList<EClassifier> getAllSubTypes(EClass rootClass) {
+		ArrayList<EClassifier> result = new ArrayList<EClassifier>();
+		Iterator<EClassifier> it = types.values().iterator();
 		while(it.hasNext()) {
 			EClassifier classifier = (EClassifier)it.next();
 			if (classifier instanceof EClass) {
@@ -124,15 +120,15 @@ public class ApplyVisitor {
 		
 		prefix = prefix + pack.getName() + "::";
 		packs.put(prefix, pack);
-		Iterator it = pack.getEClassifiers().iterator();
-		while(it.hasNext()) {
-			EClassifier c = (EClassifier)it.next();
+		Iterator<EClassifier> itc = pack.getEClassifiers().iterator();
+		while(itc.hasNext()) {
+			EClassifier c = itc.next();
 			System.out.println("Found type : " + prefix + c.getName());
 			types.put(prefix + c.getName(), c);
 		}
-		it = pack.getESubpackages().iterator();
-		while(it.hasNext()) {
-			EPackage p = (EPackage)it.next();
+		Iterator<EPackage> itp = pack.getESubpackages().iterator();
+		while(itp.hasNext()) {
+			EPackage p = itp.next();
 			collectTypes(p, prefix);
 		}
 		

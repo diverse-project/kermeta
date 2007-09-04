@@ -49,44 +49,44 @@ public class PackageMerge {
 		EPackage result = merge(p1, p2, true);
 		
 		// update references
-		Hashtable types_copied = new Hashtable();
+		Hashtable<String,EObject> types_copied = new Hashtable<String,EObject>();
 		
-		TreeIterator itr = result.eAllContents();
+		TreeIterator<EObject> itr = result.eAllContents();
 		while (itr.hasNext()) {
-			EObject o = (EObject)itr.next();
+			EObject o = itr.next();
 			//System.out.println("REMPLISSAGE " + getQualifiedName((ENamedElement)o));
 			if (o instanceof ENamedElement) types_copied.put(getQualifiedName((ENamedElement)o), o);
 		}
 		
-		TreeIterator it = result.eAllContents();
+		TreeIterator<EObject> it = result.eAllContents();
 		while (it.hasNext()) {
-			EObject o = (EObject)it.next();
+			EObject o = it.next();
 			// Iterate all objects refered by o
-			Iterator itcr = o.eClass().getEAllReferences().iterator();
+			Iterator<EReference> itcr = o.eClass().getEAllReferences().iterator();
 			while (itcr.hasNext()) {
-				EReference ref =  (EReference)itcr.next();
+				EReference ref =  itcr.next();
 				Object val = o.eGet(ref);
 				//System.out.println(o + " -> " + ref.getName());
 				if (ref.getUpperBound() != 1) {
-					EList vals = (EList)val;
-					ArrayList to_replace = new ArrayList();
+					EList<EObject> vals = (EList<EObject>)val;
+					ArrayList<EObject> to_replace = new ArrayList<EObject>();
 					
 					for(int i=0; i<vals.size(); i++) {
-						EObject v = (EObject)vals.get(i);
+						EObject v = vals.get(i);
 						
 						if (v instanceof ENamedElement) {
 							ENamedElement cls = (ENamedElement) v;
 							//System.out.println(o.getClass().getName() + "." + ref.getName() + " de type = " + getQualifiedName(cls));
 							ENamedElement the_copy = (ENamedElement)types_copied.get(getQualifiedName(cls));
 							//if (the_copy == null) System.out.println("     -> PAS DE COPIE");
-							if (the_copy != null && !((EList)o.eGet(ref)).contains(the_copy) && ref.isChangeable()) {
+							if (the_copy != null && !((EList<EObject>)o.eGet(ref)).contains(the_copy) && ref.isChangeable()) {
 								to_replace.add(cls);
 							}
 						}	
 					}
 					for(int i = 0; i<to_replace.size();i++) {
 						((EList)o.eGet(ref)).remove(to_replace.get(i));
-						((EList)o.eGet(ref)).add(types_copied.get(getQualifiedName((ENamedElement)to_replace.get(i))));
+						((EList<EObject>)o.eGet(ref)).add(types_copied.get(getQualifiedName((ENamedElement)to_replace.get(i))));
 						//System.out.println("REPLACE");
 					}
 				}
@@ -120,11 +120,11 @@ public class PackageMerge {
 		
 		EPackage result = p1;
 		
-		EList classes = p2.getEClassifiers();
+		EList<EClassifier> classes = p2.getEClassifiers();
 		EClassifier other, mine;
 		
 		for (int i=0; i<classes.size(); i++) {
-			other = (EClassifier)classes.get(i);
+			other = classes.get(i);
 			mine = (EClassifier)findbyName(result.getEClassifiers(), other.getName());
 			if ( mine == null || !mine.eClass().getName().equals(other.eClass().getName())) {
 				result.getEClassifiers().add((EClassifier) EcoreUtil.copy(other));
@@ -134,10 +134,10 @@ public class PackageMerge {
 			}
 		}
 		
-		EList packs = p2.getESubpackages();
+		EList<EPackage> packs = p2.getESubpackages();
 		EPackage mps, ops;
 		for (int i=0; i<packs.size(); i++) {
-			ops = (EPackage)packs.get(i);
+			ops = packs.get(i);
 			mps = (EPackage)findbyName(result.getESubpackages(), ops.getName());
 			if (mps == null) {
 				result.getESubpackages().add((EPackage) EcoreUtil.copy(ops));
@@ -161,10 +161,10 @@ public class PackageMerge {
 	protected void mergeClass(EClass result, EClass other) {
 		
 		// Merge inheritance
-		EList supers = other.getESuperTypes();
+		EList<EClass> supers = other.getESuperTypes();
 		EClass mss, oss;
 		for (int i=0; i<supers.size(); i++) {
-			oss = (EClass)supers.get(i);
+			oss = supers.get(i);
 			mss = (EClass)findbyName(result.getESuperTypes(), oss.getName());
 			if (mss == null) {
 				result.getESuperTypes().add(oss);
@@ -176,10 +176,10 @@ public class PackageMerge {
 		}
 		
 		// Merge Attributes
-		EList atts = other.getEStructuralFeatures();
+		EList<EStructuralFeature> atts = other.getEStructuralFeatures();
 		EStructuralFeature mas, oas;
 		for (int i=0; i<atts.size(); i++) {
-			oas = (EStructuralFeature)atts.get(i);
+			oas = atts.get(i);
 			mas = (EStructuralFeature)findbyName(result.getEStructuralFeatures(), oas.getName());
 			if (mas == null) {
 				result.getEStructuralFeatures().add((EStructuralFeature) EcoreUtil.copy(oas));
@@ -191,10 +191,10 @@ public class PackageMerge {
 		}
 	
 		// Merge Operations
-		EList ops = other.getEOperations();
+		EList<EOperation> ops = other.getEOperations();
 		EOperation mop, oop;
 		for (int i=0; i<ops.size(); i++) {
-			oop = (EOperation)ops.get(i);
+			oop = ops.get(i);
 			mop = (EOperation)findbyName(result.getEOperations(), oop.getName());
 			if (mop == null) {
 				result.getEOperations().add((EOperation) EcoreUtil.copy(oop));
@@ -209,10 +209,10 @@ public class PackageMerge {
 	
 	protected void mergeEnum(EEnum result, EEnum other) {
 		// Merge Literals
-		EList lits = other.getELiterals();
+		EList<EEnumLiteral> lits = other.getELiterals();
 		EEnumLiteral mls, ols;
 		for (int i=0; i<lits.size(); i++) {
-			ols = (EEnumLiteral)lits.get(i);
+			ols = lits.get(i);
 			mls = (EEnumLiteral)findbyName(result.getELiterals(), ols.getName());
 			if (mls == null) {
 				result.getELiterals().add((EEnumLiteral) EcoreUtil.copy(ols));
@@ -225,10 +225,10 @@ public class PackageMerge {
 	}
 	
 	
-	private ENamedElement findbyName(EList list, String name) {
+	private ENamedElement findbyName(EList<? extends ENamedElement> list, String name) {
 		for (int i=0; i<list.size(); i++) {
-			if (((ENamedElement)list.get(i)).getName().equals(name)) {
-				return (ENamedElement)list.get(i);
+			if (list.get(i).getName().equals(name)) {
+				return list.get(i);
 			}
 		}
 		return null;
@@ -277,23 +277,23 @@ public class PackageMerge {
 		EPackage merged = merge((EPackage)model1.getContents().get(0), (EPackage)model2.getContents().get(0));
 		result.getContents().add(merged);
 		
-		TreeIterator it = merged.eAllContents();
+		TreeIterator<EObject> it = merged.eAllContents();
 		
 		// Check if there is no references to the old models
 		// This is useless but is a post-condition of the merge
 		while(it.hasNext()) {
-			EObject o = (EObject)it.next();
+			EObject o = it.next();
 			if (o.eResource() == null) {
 				System.err.println("ERROR : Contained object (" + o + ") is not in ressource");
 			}
-			Iterator itcr = o.eClass().getEAllReferences().iterator();
+			Iterator<EReference> itcr = o.eClass().getEAllReferences().iterator();
 			while (itcr.hasNext()) {
-				EReference ref =  (EReference)itcr.next();
+				EReference ref =  itcr.next();
 				Object val = o.eGet(ref);
 				if (ref.getUpperBound() != 1) {
-					EList vals = (EList)val;
+					EList<EObject> vals = (EList<EObject>)val;
 					for(int i=0; i<vals.size(); i++) {
-						EObject v = (EObject)vals.get(i);
+						EObject v = vals.get(i);
 						if (v != null && v.eResource() == null) {
 							System.err.println("INTERNAL WARNING : Referenced Object not in ressource : " + v);
 							System.err.println("        for reference " + ref.getName() + " of object " + o);
@@ -326,17 +326,17 @@ public class PackageMerge {
 		
 		model12.getContents().add(merged);
 		
-		TreeIterator it = merged.eAllContents();
+		TreeIterator<EObject> it = merged.eAllContents();
 		
 		// Check if there is no references to the old models
 		while(it.hasNext()) {
-			EObject o = (EObject)it.next();
+			EObject o = it.next();
 			if (o.eResource() == null) {
 				System.err.println("ERROR : Contained object (" + o + ") is not in ressource");
 			}
-			Iterator itcr = o.eClass().getEAllReferences().iterator();
+			Iterator<EReference> itcr = o.eClass().getEAllReferences().iterator();
 			while (itcr.hasNext()) {
-				EReference ref =  (EReference)itcr.next();
+				EReference ref = itcr.next();
 				Object val = o.eGet(ref);
 				if (ref.getUpperBound() != 1) {
 					EList vals = (EList)val;
@@ -413,17 +413,6 @@ public class PackageMerge {
 		}
 		else {
 			System.err.println("Usage : PackageMerge <output_model> ( <input_model.ecore> | <input_folder> )* ");
-		}
-		
-		/*
-		merge("/home/franck/eclipse-3-workspace/EcoreMerge/models/model1.ecore", 
-				"/home/franck/eclipse-3-workspace/EcoreMerge/models/model2.ecore", 
-				"/home/franck/eclipse-3-workspace/EcoreMerge/models/model12.ecore");
-		
-		merge("/home/franck/eclipse-3-workspace/EcoreMerge/models/model2.ecore", 
-				"/home/franck/eclipse-3-workspace/EcoreMerge/models/model1.ecore", 
-				"/home/franck/eclipse-3-workspace/EcoreMerge/models/model21.ecore");
-		
-		*/
+		}		
 	}
 }

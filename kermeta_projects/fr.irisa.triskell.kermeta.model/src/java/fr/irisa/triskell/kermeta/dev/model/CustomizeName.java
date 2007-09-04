@@ -67,10 +67,10 @@ public class CustomizeName {
 		CustomizeName cn = new CustomizeName();
 		Resource model1 = cn.load(args[0]);
 		
-		TreeIterator it = ((EPackage)model1.getContents().get(0)).eAllContents();
+		TreeIterator<EObject> it = ((EPackage)model1.getContents().get(0)).eAllContents();
 		
 		while(it.hasNext()) {
-			EObject o = (EObject)it.next();
+			EObject o = it.next();
 			if (o instanceof EClassifier) {
 				EClassifier c = (EClassifier)o;
 				c.setName("F" + c.getName());
