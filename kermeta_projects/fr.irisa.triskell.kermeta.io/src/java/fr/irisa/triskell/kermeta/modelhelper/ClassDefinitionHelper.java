@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.java,v 1.7 2007-08-09 14:58:15 dvojtise Exp $
+/* $Id: ClassDefinitionHelper.java,v 1.8 2007-09-04 08:29:33 ftanguy Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL
@@ -185,6 +185,19 @@ public class ClassDefinitionHelper {
 	        if (op.getName().equals(name)) return op;
 	    }
 	    return null;
+	}
+	
+	/**
+	 * Get an operation by its name. search in the inheritance tree (including implicit inheritance of Object)
+	 */
+	public static List<Operation> findOperationsByName(ClassDefinition c, String name) {
+		List<Operation> operations = new ArrayList<Operation>();
+		for (Object next : getAllOperations(c)) {
+	        Operation op = (Operation)next;
+	        if (op.getName().equals(name)) 
+	        	operations.add( op );
+	    }
+	    return operations;
 	}
 	
 	/**

@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.11 2007-09-03 07:50:08 dvojtise Exp $
+/*$Id: Ecore2KMLoader.java,v 1.12 2007-09-04 08:29:32 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -42,7 +42,6 @@ import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.loader.km.KMUnitLoader;
 import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTBuildingState;
@@ -104,7 +103,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 				 * 
 				 */
 				EPackage p = (EPackage) Registry.INSTANCE.get(uri);
-				if ( p != null ){
+				if ( p != null ) {
 					resources.put(kermetaUnit, p.eResource());
 					// find all dependencies from this registered EPackage
 					Map<EObject,Collection<Setting>> m = EcoreUtil.ExternalCrossReferencer.find(p.eResource());
@@ -114,27 +113,34 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 							resources.put(unit, eobj.eResource());
 						}
 					}
-				}
-				else {
-					// find all dependencies from this file EPackage
+				} else {
 					URI emfURI = URI.createURI( uri );
 					Resource resource = resourceSet.createResource( emfURI );
 					resource.load(null);
 					resources.put(kermetaUnit, resource);
 					EcoreUtil.resolveAll( resourceSet );
-					
+										
 					for ( Resource r : resourceSet.getResources() ) {
 						if ( r != resource ) {
 							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( r.getURI().toString() );
 							resources.put(unit, r);
 						}
-					}					
-				}
-				// update the ImportedKermetaUnit property from the computed resource dependencies
-				for(Entry<KermetaUnit,Resource> e : resources.entrySet()){
-					if(!e.getKey().getUri().equals(uri)){
-						kermetaUnit.getImportedKermetaUnits().add(e.getKey());
-						kermetaUnit.addRequire( e.getKey().getUri() );
+					}
+					
+					Map<EObject,Collection<Setting>> m = EcoreUtil.ExternalCrossReferencer.find(resource);
+					for(EObject eobj : m.keySet()){
+						if(eobj.eResource()!= null) {
+							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( eobj.eResource().getURI().toString() );
+							resources.put(unit, eobj.eResource());
+						}
+					}
+					
+					// update the ImportedKermetaUnit property from the computed resource dependencies
+					for(Entry<KermetaUnit,Resource> e : resources.entrySet()){
+						if(!e.getKey().getUri().equals(uri)){
+							kermetaUnit.getImportedKermetaUnits().add(e.getKey());
+							kermetaUnit.addRequire( e.getKey().getUri() );
+						}
 					}
 				}
 			}
@@ -155,6 +161,9 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		this.isQuickFixEnabled = isQuickFixEnabled;
 		KermetaUnit kermetaUnit = null;
 		try {
+			if ( uri.equals("platform:/resource/testAspect/Docbook.ecore") )
+				System.out.println();
+			
 			kermetaUnit = getKermetaUnit(uri);
 
 			if ( kermetaUnit.isErrored() )
@@ -222,26 +231,15 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits( kermetaUnit ) ) {
 			if ( unit.getUri().matches(".+\\.ecore") ) {
 				if  ( ! passDatas.contains(unit) ) 
-					passDatas.put(unit, new Ecore2KMDatas() );
+					passDatas.put(unit, new Ecore2KMDatas() );				
 				if ( ! resources.containsKey(unit) ) {
 					URI u = URI.createURI( unit.getUri() );
 					Resource r = resourceSet.getResource(u, false);
 					resources.put(unit, r);
 				}
-			}
-			else {
-				Object o = Registry.INSTANCE.get( unit.getUri() );
-				if ( o instanceof EPackage.Descriptor ) {
-					if  ( ! passDatas.contains(unit) ) 
-						passDatas.put(unit, new Ecore2KMDatas() );
-					EPackage p = ((EPackage.Descriptor) o).getEPackage();
-					resources.put(unit, p.eResource());
-				}
-				else if ( o instanceof EPackage ) {
-					if  ( ! passDatas.contains(unit) ) 
-						passDatas.put(unit, new Ecore2KMDatas() );
-					resources.put(unit, ((EPackage)o).eResource());
-				} 
+			} else if ( unit.getUri().matches("http:.+") ) {
+				 if (  Registry.INSTANCE.get( unit.getUri() ) instanceof EPackage )
+					 passDatas.put(unit, new Ecore2KMDatas() );
 			}
 		}
 		
@@ -264,9 +262,6 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 				if ( ! currentState.loading )
 					applyPass1ToAll(currentUnit);
 			}
-			else {
-				
-			}
 		}
 		
 		/*
@@ -282,6 +277,8 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 				currentURI = s;
 			else if ( s.equals("kermeta") ) 
 				currentURI = IOPlugin.FRAMEWORK_KM_URI;
+			else if ( s.matches("platform:/plugin.+") || s.matches("platform:/resource.+") )
+				currentURI = s;
 			else if ( index != -1 ) {
 				currentURI = kermetaUnit.getUri().substring(0, index) + "/" + s;
 				currentURI = StringHelper.replaceExtension(currentURI, ".ecore");
@@ -289,7 +286,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 				uri = EcoreHelper.getCanonicalURI(uri);
 				currentURI = uri.toString();
 			}
-			KermetaUnit currentUnit = getKermetaUnit(currentURI);
+			
+			KermetaUnit currentUnit = IOPlugin.getDefault().getKermetaUnit( currentURI );
+			if ( ! resources.containsKey(currentUnit) )
+				IOPlugin.getDefault().loadKermetaUnit( currentURI );
 			
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
 				KMTBuildingState currentState = (KMTBuildingState) currentUnit.getBuildingState();
@@ -356,6 +356,8 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	
 	private void applyPass2(KermetaUnit kermetaUnit) {
 		Resource resource = resources.get(kermetaUnit);
+		if ( resource == null )
+			System.out.println();
 		Ecore2KMPass2 pass = new Ecore2KMPass2( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled );
 		Iterator<EObject> iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
@@ -534,6 +536,8 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		Iterator<EObject> iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
 			EObject node = iterator.next();
+			if ( node == null )
+				System.out.println();
 			pass.accept( node );
 		}
 	}

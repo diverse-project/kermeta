@@ -1,4 +1,4 @@
-/* $Id: ParameterizedTypeChecker.java,v 1.6 2007-08-02 13:46:22 dvojtise Exp $
+/* $Id: ParameterizedTypeChecker.java,v 1.7 2007-09-04 08:29:31 ftanguy Exp $
  * Project : Kermeta io
  * File : ParametrizedTypeChecker.java
  * License : EPL
@@ -64,6 +64,8 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 			TypeVariableBinding current_tvb = (TypeVariableBinding) tvb_iter.next();
 			fr.irisa.triskell.kermeta.language.structure.Type provided = current_tvb.getType();
 			//First descend into the actual type parameters to see whether they might have any problems
+			if ( provided == null )
+				System.out.println();
 			this.accept(provided);
 			//Check whether actual type params conform to any supertype constraints on the type variable declaration
 			TypeVariable var = current_tvb.getVariable();
@@ -80,6 +82,7 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 						TypeMatchChecker matcher = new TypeMatchChecker((ModelType) required, (ModelType) provided);
 						boolean match = matcher.matches(new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
 						if (!match) {
+							matcher.matches(new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
 							String msg = "Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".";
 							if(matcher.getErrors().size() > 0){
 								msg += "\n   " + matcher.getErrors().get(0).getMessage();

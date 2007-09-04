@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.8 2007-08-07 13:35:22 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.9 2007-09-04 08:29:33 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -13,11 +13,13 @@
 package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.IBuildingState;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
@@ -26,6 +28,7 @@ import org.kermeta.loader.AbstractKermetaUnitLoader;
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
 import fr.irisa.triskell.kermeta.ast.CompUnit;
+import fr.irisa.triskell.kermeta.ast.ImportStmt;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
@@ -39,6 +42,7 @@ import fr.irisa.triskell.kermeta.modelhelper.ASTHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionSearcher;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 
 
 public class KMTUnitLoader extends AbstractKermetaUnitLoader {
@@ -106,6 +110,8 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			if ( kermetaUnit.isErrored() )
 				return kermetaUnit;
 			
+			TypeCheckerContext.initializeTypeChecker( kermetaUnit );
+			
 			// 7
 			loadAllOppositeProperties(kermetaUnit);
 			
@@ -120,6 +126,9 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			
 			// 9
 			loadAllAnnotations(kermetaUnit);
+			
+			// 10
+			markErrorsFromImportedUnits(kermetaUnit);
 			
 		} catch ( URIMalformedException exception) {
 		} catch (RecognitionException e) {
@@ -164,7 +173,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 				}
 			} else if ( currentState instanceof EcoreBuildingState ) {
 				Ecore2KMLoader loader = new Ecore2KMLoader();
-				loader.load( currentUnit.getUri(), true );
+				loader.load( currentUnit.getUri(), false );
 			} else if ( currentState instanceof JavaBuildingState ) {
 				JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader();
 				loader.load( currentUnit.getUri() );	
@@ -222,7 +231,8 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		}
 		
 		if ( compUnit != null ) {
-			KMT2KMPass pass = new KMT2KMPass1(kermetaUnit, getLoadingContext(kermetaUnit)); 
+			requireEntries.put( kermetaUnit, new ArrayList<RequireEntry>());
+			KMT2KMPass pass = new KMT2KMPass1(kermetaUnit, getLoadingContext(kermetaUnit), requireEntries.get(kermetaUnit)); 
 			compUnit.accept(pass);
 		}
 	}
@@ -376,6 +386,8 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			
 				for ( TypeDefinition current : externalTypesDefinition ) {
 					typeDefinition.getBaseAspects().add( current );
+					KermetaUnit importedUnit = KermetaUnitHelper.getKermetaUnitFromObject( current );
+					importedUnit.getAspects().put( current, KermetaUnitHelper.getAspects(importedUnit, current) );
 				}
 			
 			}
@@ -590,6 +602,73 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
        	
     }
 	
+	//////////////////
+	//		10		//
+	//////////////////
+	private void markErrorsFromImportedUnits(KermetaUnit kermetaUnit) {
+		KMTBuildingState state = (KMTBuildingState) kermetaUnit.getBuildingState();
+		if ( state.doneMarkError )
+			return;
+		
+		state.loading = true;
+		// load imported units
+
+		Iterator<KermetaUnit> iterator = kermetaUnit.getImportedKermetaUnits().iterator();
+		while ( iterator.hasNext() ) {
+			KermetaUnit currentUnit = iterator.next();
+			
+			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
+			
+				KMTBuildingState currentState = (KMTBuildingState) currentUnit.getBuildingState();
+				if ( ! currentState.loading )
+					markErrorsFromImportedUnits(currentUnit);
+			}
+			
+		}
+
+		markErrors(kermetaUnit);
+		state.doneMarkError = true;
+		state.loading = false;
+		state.loaded = true;
+	}
+	
+    public void markErrors(KermetaUnit kermetaUnit) {
+    	
+    	List<RequireEntry> entries = requireEntries.get(kermetaUnit);
+    	for ( RequireEntry entry : entries ) {
+    		if ( entry.getImportedUnit().isErrored() )
+    			kermetaUnit.error("The file " + entry.getFileURI() + " contains error(s) : " + KermetaUnitHelper.getAllErrorsAsString(entry.getImportedUnit()), entry.getImportStmt());
+    	}
+       	
+    }
+    
+    private Hashtable<KermetaUnit, List<RequireEntry>> requireEntries = new Hashtable<KermetaUnit, List<RequireEntry>> ();
+    
+
+    
 }
 
-
+class RequireEntry {
+	
+	private ImportStmt stms;
+	private KermetaUnit importedUnit;
+	private String fileURI;
+	
+	public ImportStmt getImportStmt() {
+		return stms;
+	}
+	
+	public KermetaUnit getImportedUnit() {
+		return importedUnit;
+	}
+	
+	public String getFileURI() {
+		return fileURI;
+	}
+	
+	public RequireEntry(ImportStmt stms, KermetaUnit importedUnit, String fileURI) {
+		this.stms = stms;
+		this.importedUnit = importedUnit;
+		this.fileURI = fileURI;
+	}
+}

@@ -2,9 +2,9 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/persistence/@ownedTag.0" name="persistence">
-      <ownedTag value="/**&#xD;&#xA; * Contains the classes that handle the serialization of models, in particular&#xD;&#xA; * EMF models.&#xD;&#xA; * &lt;img src=&quot;./figures/persistence_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/persistence"/>
+      <ownedTag value="/**&#xA; * Contains the classes that handle the serialization of models, in particular&#xA; * EMF models.&#xA; * &lt;img src=&quot;./figures/persistence_package.png&quot;>&#xA; */" object="//@packages.0/persistence"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/persistence/Resource/@ownedTag.0" name="Resource" isAbstract="true" superType="//@packages.0/persistence/Resource/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * The main class that handle a loaded/saved model.&#xD;&#xA; * There are a few important things to note for the developer :&#xD;&#xA; * &#xD;&#xA; * - load a Resource : this loads a Collection of instances corresponding to the&#xD;&#xA; *   objects in the loaded model. If the Collection of instances is empty, than &#xD;&#xA; *  a ResourceLoadException is raised&#xD;&#xA; *&#xD;&#xA; * - save a Resource : this saves the collection of instances in a new file. This can&#xD;&#xA; *   be correctly done if and only if the instances saved are conform to the metamodel&#xD;&#xA; *   linked to this resource (this link does not need to be explicit. It is normally retrieved&#xD;&#xA; *   through the EMF model -- see Java wrapping &quot;Resource.java&quot;).&#xD;&#xA; * &#xD;&#xA; * - add/remove an instance to the Resource : this adds an element in the resource. It cannot&#xD;&#xA; *   be &quot;simply&quot; added because of the following potential errors :&#xD;&#xA; *&#xD;&#xA; *   - The object added is not conform to the metamodel -> Error&#xD;&#xA; *   - The object was already added in the resource -> Not a real error : we do nothing&#xD;&#xA; *   - The object to remove does not exist -> redirect to a collection-specific error&#xD;&#xA; *   - The object to remove is attached to an object in the collection -> &quot;dependency-violation&quot; exception?&#xD;&#xA;&#xD;&#xA; */" object="//@packages.0/persistence/Resource"/>
+        <ownedTag value="/**&#xA; * The main class that handle a loaded/saved model.&#xA; * There are a few important things to note for the developer :&#xA; * &#xA; * - load a Resource : this loads a Collection of instances corresponding to the&#xA; *   objects in the loaded model. If the Collection of instances is empty, than &#xA; *  a ResourceLoadException is raised&#xA; *&#xA; * - save a Resource : this saves the collection of instances in a new file. This can&#xA; *   be correctly done if and only if the instances saved are conform to the metamodel&#xA; *   linked to this resource (this link does not need to be explicit. It is normally retrieved&#xA; *   through the EMF model -- see Java wrapping &quot;Resource.java&quot;).&#xA; * &#xA; * - add/remove an instance to the Resource : this adds an element in the resource. It cannot&#xA; *   be &quot;simply&quot; added because of the following potential errors :&#xA; *&#xA; *   - The object added is not conform to the metamodel -> Error&#xA; *   - The object was already added in the resource -> Not a real error : we do nothing&#xA; *   - The object to remove does not exist -> redirect to a collection-specific error&#xA; *   - The object to remove is attached to an object in the collection -> &quot;dependency-violation&quot; exception?&#xA;&#xA; */" object="//@packages.0/persistence/Resource"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeParamBinding>
             <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
@@ -13,23 +13,23 @@
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
         </containedType>
         <ownedAttribute tag="//@packages.0/persistence/Resource/uri/@ownedTag.0" name="uri" type="//@packages.0/persistence/Resource/uri/@containedType.0" isOrdered="true" upper="1" isComposite="true">
-          <ownedTag value="/**&#xD;&#xA;  * Uri of the Resource to load&#xD;&#xA;  */" object="//@packages.0/persistence/Resource/uri"/>
+          <ownedTag value="/**&#xA;  * Uri of the Resource to load&#xA;  */" object="//@packages.0/persistence/Resource/uri"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
         </ownedAttribute>
         <ownedAttribute tag="//@packages.0/persistence/Resource/metaModelURI/@ownedTag.0" name="metaModelURI" type="//@packages.0/persistence/Resource/metaModelURI/@containedType.0" isOrdered="true" upper="1" isComposite="true">
-          <ownedTag value="/**&#xD;&#xA;  * Uri of the meta-model of the Resource to load&#xD;&#xA;  */" object="//@packages.0/persistence/Resource/metaModelURI"/>
+          <ownedTag value="/**&#xA;  * Uri of the meta-model of the Resource to load&#xA;  */" object="//@packages.0/persistence/Resource/metaModelURI"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
         </ownedAttribute>
         <ownedAttribute tag="//@packages.0/persistence/Resource/repository/@ownedTag.0" name="repository" type="//@packages.0/persistence/Resource/repository/@containedType.0" isOrdered="true" upper="1" opposite="//@packages.0/persistence/Repository/resources">
-          <ownedTag value="/**&#xD;&#xA;  * Repository used to create the Resource&#xD;&#xA;  * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only &#xD;&#xA;  * one Resource of a given Repository&#xD;&#xA;  */" object="//@packages.0/persistence/Resource/repository"/>
+          <ownedTag value="/**&#xA;  * Repository used to create the Resource&#xA;  * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only &#xA;  * one Resource of a given Repository&#xA;  */" object="//@packages.0/persistence/Resource/repository"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Repository"/>
         </ownedAttribute>
         <ownedAttribute tag="//@packages.0/persistence/Resource/dependentResources/@ownedTag.0" name="dependentResources" type="//@packages.0/persistence/Resource/dependentResources/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
-          <ownedTag value="/**&#xD;&#xA;  * Returns the set of Resources the current Resource, which must have been loaded,&#xD;&#xA;  * depends on, an empty set if current Resource has no dependency&#xD;&#xA;  */" object="//@packages.0/persistence/Resource/dependentResources"/>
+          <ownedTag value="/**&#xA;  * Returns the set of Resources the current Resource, which must have been loaded,&#xA;  * depends on, an empty set if current Resource has no dependency&#xA;  */" object="//@packages.0/persistence/Resource/dependentResources"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <getterBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -59,22 +59,26 @@
           </getterBody>
         </ownedAttribute>
         <ownedAttribute tag="//@packages.0/persistence/Resource/contents/@ownedTag.0" name="contents" upper="-1" isReadOnly="true" isDerived="true">
-          <ownedTag value="/** &#xD;&#xA;  * Returns the set of all Objects directly or indirectly contained by the Resource,&#xD;&#xA;  * or an empty set if the Resource is empty&#xD;&#xA;  */" object="//@packages.0/persistence/Resource/contents"/>
+          <ownedTag value="/** &#xA;  * Returns the set of all Objects directly or indirectly contained by the Resource,&#xA;  * or an empty set if the Resource is empty&#xA;  */" object="//@packages.0/persistence/Resource/contents"/>
           <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           <getterBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/contents/@getterBody/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class">
-              <typeParamBinding>
+              <typeParamBinding type="//@packages.0/persistence/Resource/contents/@getterBody/@containedType.0/@typeParamBinding.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
+                </containedType>
                 <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
-                <type href="../standard/collections.km#//@packages.0/standard/Object"/>
               </typeParamBinding>
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
             </containedType>
             <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/Resource/contents/@getterBody/@containedType.0" identifier="res">
               <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Resource/contents/@getterBody/@statement.0/@initialization/@containedType.0" name="new">
                 <containedType xsi:type="kermeta_language_structure:Class">
-                  <typeParamBinding>
+                  <typeParamBinding type="//@packages.0/persistence/Resource/contents/@getterBody/@statement.0/@initialization/@containedType.0/@typeParamBinding.0/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
+                    </containedType>
                     <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
-                    <type href="../standard/collections.km#//@packages.0/standard/Object"/>
                   </typeParamBinding>
                   <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
                 </containedType>
@@ -154,7 +158,7 @@
           </getterBody>
         </ownedAttribute>
         <ownedOperation tag="//@packages.0/persistence/Resource/instances/@ownedTag.0" name="instances" type="//@packages.0/persistence/Resource/instances/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * The entities contained in the model-instance, that are provided when user loads a resource &#xD;&#xA;  * instances == rootContents&#xD;&#xA;  * this is a loop on Resource itself in order to get backward compatibility&#xD;&#xA;  * user should use the resource directly since this is a collection&#xD;&#xA;  */" object="//@packages.0/persistence/Resource/instances"/>
+          <ownedTag value="/**&#xA;  * The entities contained in the model-instance, that are provided when user loads a resource &#xA;  * instances == rootContents&#xA;  * this is a loop on Resource itself in order to get backward compatibility&#xA;  * user should use the resource directly since this is a collection&#xA;  */" object="//@packages.0/persistence/Resource/instances"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/instances/@body/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
@@ -165,11 +169,11 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/persistence/Resource/save/@ownedTag.0" name="save" type="//@packages.0/persistence/Resource/save/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/**&#xD;&#xA;  * Save a Resource in the file specified by the current value of uri &#xD;&#xA;  */" object="//@packages.0/persistence/Resource/save"/>
+          <ownedTag value="/**&#xA;  * Save a Resource in the file specified by the current value of uri &#xA;  */" object="//@packages.0/persistence/Resource/save"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/persistence/Resource/saveWithNewURI/@ownedTag.0" name="saveWithNewURI" type="//@packages.0/persistence/Resource/saveWithNewURI/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Save a Resource in a file referenced by the new uri. &#xD;&#xA;  */" object="//@packages.0/persistence/Resource/saveWithNewURI"/>
+          <ownedTag value="/**&#xA;  * Save a Resource in a file referenced by the new uri. &#xA;  */" object="//@packages.0/persistence/Resource/saveWithNewURI"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -183,15 +187,15 @@
           </ownedParameter>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/persistence/Resource/load/@ownedTag.0" name="load" type="//@packages.0/persistence/Resource/load/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/**&#xD;&#xA;  * Loads the Resource, thus making content of the Resource browsable.&#xD;&#xA;  * Raises a ResourceLoadException in case loaded Resource is empty&#xD;&#xA;  */" object="//@packages.0/persistence/Resource/load"/>
+          <ownedTag value="/**&#xA;  * Loads the Resource, thus making content of the Resource browsable.&#xA;  * Raises a ResourceLoadException in case loaded Resource is empty&#xA;  */" object="//@packages.0/persistence/Resource/load"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/persistence/EMFResource/@ownedTag.0" name="EMFResource" superType="//@packages.0/persistence/EMFResource/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * Extension of the Resource class definition that is specific to EMF Repository.&#xD;&#xA; * User is not supposed to directly create it. Otherwise it will not be correctly initialized&#xD;&#xA; * You must To create one &#xD;&#xA; */" object="//@packages.0/persistence/EMFResource"/>
+        <ownedTag value="/**&#xA; * Extension of the Resource class definition that is specific to EMF Repository.&#xA; * User is not supposed to directly create it. Otherwise it will not be correctly initialized&#xA; * You must To create one &#xA; */" object="//@packages.0/persistence/EMFResource"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
         <ownedOperation tag="//@packages.0/persistence/EMFResource/saveWithNewURI/@ownedTag.0" name="saveWithNewURI" type="//@packages.0/persistence/EMFResource/saveWithNewURI/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/saveWithNewURI">
-          <ownedTag value="/**&#xD;&#xA;  * Overrides Resource.saveWithNewURI(String)&#xD;&#xA;  */" object="//@packages.0/persistence/EMFResource/saveWithNewURI"/>
+          <ownedTag value="/**&#xA;  * Overrides Resource.saveWithNewURI(String)&#xA;  */" object="//@packages.0/persistence/EMFResource/saveWithNewURI"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Resource" jmethod="save">
@@ -216,7 +220,7 @@
           <ownedParameter name="new_uri" type="//@packages.0/persistence/EMFResource/saveWithNewURI/@body/@statement.0/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/persistence/EMFResource/save/@ownedTag.0" name="save" type="//@packages.0/persistence/EMFResource/save/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/save">
-          <ownedTag value="/**&#xD;&#xA;  * Overrides Resource.save()&#xD;&#xA;  */" object="//@packages.0/persistence/EMFResource/save"/>
+          <ownedTag value="/**&#xA;  * Overrides Resource.save()&#xA;  */" object="//@packages.0/persistence/EMFResource/save"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Resource" jmethod="save">
@@ -234,7 +238,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/persistence/EMFResource/saveAndValidateWithEMF/@ownedTag.0" name="saveAndValidateWithEMF" type="//@packages.0/persistence/EMFResource/saveAndValidateWithEMF/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Checks the Resource using the EMF validation function, and saves it if&#xD;&#xA;  * validation succeeds&#xD;&#xA;  * Applies validation to all root objects of the Resource&#xD;&#xA;  * Returns true if the validation reports no error, raises exceptions otherwise&#xD;&#xA;  */" object="//@packages.0/persistence/EMFResource/saveAndValidateWithEMF"/>
+          <ownedTag value="/**&#xA;  * Checks the Resource using the EMF validation function, and saves it if&#xA;  * validation succeeds&#xA;  * Applies validation to all root objects of the Resource&#xA;  * Returns true if the validation reports no error, raises exceptions otherwise&#xA;  */" object="//@packages.0/persistence/EMFResource/saveAndValidateWithEMF"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
@@ -254,7 +258,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/persistence/EMFResource/load/@ownedTag.0" name="load" type="//@packages.0/persistence/EMFResource/load/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/load">
-          <ownedTag value="/**&#xD;&#xA;  * Overrides Resource.save()&#xD;&#xA;  * In case the metamodelURI was not previoulsy set, metamodelURI is filled with&#xD;&#xA;  * the nsuri of the root package of the metamodel used to load the Resource after&#xD;&#xA;  * a successful load&#xD;&#xA;  */" object="//@packages.0/persistence/EMFResource/load"/>
+          <ownedTag value="/**&#xA;  * Overrides Resource.save()&#xA;  * In case the metamodelURI was not previoulsy set, metamodelURI is filled with&#xA;  * the nsuri of the root package of the metamodel used to load the Resource after&#xA;  * a successful load&#xA;  */" object="//@packages.0/persistence/EMFResource/load"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:CallFeature" name="clear">
@@ -319,7 +323,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/persistence/EMFResource/add/@ownedTag.0" name="add" type="//@packages.0/persistence/EMFResource/add/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Overrides Set&lt;Object>.add(Object)&#xD;&#xA;  * Add an instance to the Resource &#xD;&#xA;  * Ensures that the instance is referenced by a one and only one Resource of the same Repository&#xD;&#xA;  * Ensures that the instance does not appear more than once in the Resource&#xD;&#xA;  */" object="//@packages.0/persistence/EMFResource/add"/>
+          <ownedTag value="/**&#xA;  * Overrides Set&lt;Object>.add(Object)&#xA;  * Add an instance to the Resource &#xA;  * Ensures that the instance is referenced by a one and only one Resource of the same Repository&#xA;  * Ensures that the instance does not appear more than once in the Resource&#xA;  */" object="//@packages.0/persistence/EMFResource/add"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block">
             <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
@@ -414,7 +418,7 @@
           </ownedParameter>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/persistence/EMFResource/remove/@ownedTag.0" name="remove" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Overrides Set&lt;Object>.remove(Object)&#xD;&#xA;  * Remove the instance from the Resource&#xD;&#xA;  */" object="//@packages.0/persistence/EMFResource/remove"/>
+          <ownedTag value="/**&#xA;  * Overrides Set&lt;Object>.remove(Object)&#xA;  * Remove the instance from the Resource&#xA;  */" object="//@packages.0/persistence/EMFResource/remove"/>
           <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           <body xsi:type="kermeta_language_behavior:Block">
             <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
@@ -471,20 +475,20 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/persistence/KMResource/@ownedTag.0" name="KMResource" superType="//@packages.0/persistence/KMResource/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * To be written&#xD;&#xA; */" object="//@packages.0/persistence/KMResource"/>
+        <ownedTag value="/**&#xA; * NOT IMPLEMENTED&#xA; */" object="//@packages.0/persistence/KMResource"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
         <ownedOperation tag="//@packages.0/persistence/KMResource/save/@ownedTag.0" name="save" type="//@packages.0/persistence/KMResource/save/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/save">
-          <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */" object="//@packages.0/persistence/KMResource/save"/>
+          <ownedTag value="/**&#xA;   * NOT IMPLEMENTED&#xA;   */" object="//@packages.0/persistence/KMResource/save"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0"/>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/persistence/KMResource/load/@ownedTag.0" name="load" type="//@packages.0/persistence/KMResource/load/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/load">
-          <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */" object="//@packages.0/persistence/KMResource/load"/>
+          <ownedTag value="/**&#xA;   * NOT IMPLEMENTED&#xA;   */" object="//@packages.0/persistence/KMResource/load"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0"/>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/persistence/KMResource/add/@ownedTag.0" name="add" type="//@packages.0/persistence/KMResource/add/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */" object="//@packages.0/persistence/KMResource/add"/>
+          <ownedTag value="/**&#xA;   * NOT IMPLEMENTED&#xA;   */" object="//@packages.0/persistence/KMResource/add"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0"/>
           <superOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
@@ -493,7 +497,7 @@
           </ownedParameter>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/persistence/KMResource/remove/@ownedTag.0" name="remove" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */" object="//@packages.0/persistence/KMResource/remove"/>
+          <ownedTag value="/**&#xA;   * NOT IMPLEMENTED&#xA;   */" object="//@packages.0/persistence/KMResource/remove"/>
           <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
@@ -510,16 +514,16 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/persistence/Repository/@ownedTag.0" name="Repository" isAbstract="true" superType="//@packages.0/persistence/Repository/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * Abstract resource container, that contains a list of available loaded resources, &#xD;&#xA; * and methods to create or get a resource given an URI.&#xD;&#xA; */" object="//@packages.0/persistence/Repository"/>
+        <ownedTag value="/**&#xA; * Abstract resource container, that contains a list of available loaded resources, &#xA; * and methods to create or get a resource given an URI.&#xA; */" object="//@packages.0/persistence/Repository"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedAttribute tag="//@packages.0/persistence/Repository/resources/@ownedTag.0" name="resources" type="//@packages.0/persistence/Repository/resources/@containedType.0" upper="-1" opposite="//@packages.0/persistence/Resource/repository" isComposite="true">
-          <ownedTag value="/**&#xD;&#xA;  * Resources created by this Repository &#xD;&#xA;  * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only &#xD;&#xA;  * one Resource of a given Repository&#xD;&#xA;  */" object="//@packages.0/persistence/Repository/resources"/>
+          <ownedTag value="/**&#xA;  * Resources created by this Repository &#xA;  * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only &#xA;  * one Resource of a given Repository&#xA;  */" object="//@packages.0/persistence/Repository/resources"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
         </ownedAttribute>
         <ownedOperation tag="//@packages.0/persistence/Repository/createResource/@ownedTag.0" name="createResource" type="//@packages.0/persistence/Repository/createResource/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/**&#xD;&#xA;  * Creates a new Resource with given uri, and an optional mm_uri&#xD;&#xA;  * mm_uri is required when creating a new model from scratch.&#xD;&#xA;  * Raises a ResourceCreate exception in case the Repository already&#xD;&#xA;  * contains a Resource with the given uri&#xD;&#xA;  * If uri does not points to an existing model file (in the case of&#xD;&#xA;  * a model creation), calls to load() operation will fail as long as&#xD;&#xA;  * the model has not been saved once&#xD;&#xA;  */" object="//@packages.0/persistence/Repository/createResource"/>
+          <ownedTag value="/**&#xA;  * Creates a new Resource with given uri, and an optional mm_uri&#xA;  * mm_uri is required when creating a new model from scratch.&#xA;  * Raises a ResourceCreate exception in case the Repository already&#xA;  * contains a Resource with the given uri&#xA;  * If uri does not points to an existing model file (in the case of&#xA;  * a model creation), calls to load() operation will fail as long as&#xA;  * the model has not been saved once&#xA;  */" object="//@packages.0/persistence/Repository/createResource"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <ownedParameter name="uri" type="//@packages.0/persistence/Repository/createResource/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -533,7 +537,7 @@
           </ownedParameter>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/persistence/Repository/getResource/@ownedTag.0" name="getResource" type="//@packages.0/persistence/Repository/getResource/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Returns the Resource associated with the given uri if this uri is associated with&#xD;&#xA;  * an already created Resource of the Repository.&#xD;&#xA;  * If the Repository contains no Resource associated with the given uri, creates&#xD;&#xA;  * a new Resource and loads it.&#xD;&#xA;  * Raises a ResourceCreate exception if the given uri does not point to an existing&#xD;&#xA;  * model file &#xD;&#xA;  */" object="//@packages.0/persistence/Repository/getResource"/>
+          <ownedTag value="/**&#xA;  * Returns the Resource associated with the given uri if this uri is associated with&#xA;  * an already created Resource of the Repository.&#xA;  * If the Repository contains no Resource associated with the given uri, creates&#xA;  * a new Resource and loads it.&#xA;  * Raises a ResourceCreate exception if the given uri does not point to an existing&#xA;  * model file &#xA;  */" object="//@packages.0/persistence/Repository/getResource"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/load/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/Repository/getResource/@body/@statement.0/@containedType.0" identifier="nUri">
@@ -653,18 +657,541 @@
           </body>
           <ownedParameter name="uri" type="//@packages.0/persistence/Repository/getResource/@body/@statement.2/@value/@parameters.0/@containedType.0" isOrdered="true" upper="1"/>
         </ownedOperation>
+        <ownedOperation tag="//@packages.0/persistence/Repository/findDanglingModelElements/@ownedTag.0" name="findDanglingModelElements" type="//@packages.0/persistence/Repository/findDanglingModelElements/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xA;  * Search for elements referenced by one element contained by this repository  that are not contained by this repository&#xA;  * ie. element that EMF would claim as &quot;not contained in a resource&quot;&#xA;  * example of use :&#xA;  *  var report : Set&lt;DanglingDiagnostic>&#xA;     * report := repository.findDanglingModelElements()&#xA;     * report.each{ diag | stdio.writeln(diag.toString ) }&#xA;  */" object="//@packages.0/persistence/Repository/findDanglingModelElements"/>
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeParamBinding type="//@packages.0/persistence/Repository/findDanglingModelElements/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/DanglingDiagnostic"/>
+              <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+            </typeParamBinding>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+          </containedType>
+          <body xsi:type="kermeta_language_behavior:Block">
+            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/DanglingDiagnostic"/>
+                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+              </containedType>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.0/@containedType.0" name="new">
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/persistence/Resource/contents/@getterBody/@statement.0/@initialization/@target/@containedType.0">
+                  <typeref type="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.0/@containedType.0" upper="1"/>
+                </target>
+              </value>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/persistence/Resource/dependentResources/@containedType.0"/>
+                  <right href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                </containedType>
+                <parameters name="res"/>
+                <body xsi:type="kermeta_language_behavior:CallFeature" name="each">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                  <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@containedType.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType">
+                        <type href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                      </containedType>
+                      <right href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                    </containedType>
+                    <parameters name="containedObj"/>
+                    <body xsi:type="kermeta_language_behavior:Block">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                      <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.0/@containedType.0" identifier="classDef">
+                        <containedType xsi:type="kermeta_language_structure:Class">
+                          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/ClassDefinition"/>
+                        </containedType>
+                        <type type="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
+                      </statement>
+                      <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.0/@containedType.0" isCast="true">
+                        <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.0/@containedType.0" name="classDef"/>
+                        <value xsi:type="kermeta_language_behavior:CallFeature" name="typeDefinition">
+                          <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
+                          <staticProperty href="../reflection/reflection.km#//@packages.0/reflection/ParameterizedType/typeDefinition"/>
+                          <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass">
+                            <staticType href="../standard/primitive_types.km#//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0"/>
+                            <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass"/>
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="containedObj">
+                              <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                            </target>
+                          </target>
+                        </value>
+                      </statement>
+                      <statement xsi:type="kermeta_language_behavior:Conditional">
+                        <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                        <thenBody xsi:type="kermeta_language_behavior:Block">
+                          <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                          <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+                            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                            <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@containedType.0">
+                              <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@containedType.0/@containedType.0">
+                                <containedType xsi:type="kermeta_language_structure:ProductType">
+                                  <type href="../reflection/reflection.km#//@packages.0/reflection/ClassDefinition/allAttribute/@containedType.0"/>
+                                </containedType>
+                                <right href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                              </containedType>
+                              <parameters name="prop"/>
+                              <body xsi:type="kermeta_language_behavior:Conditional">
+                                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                                <thenBody xsi:type="kermeta_language_behavior:Block">
+                                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                                  <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0" identifier="referencedObjs">
+                                    <containedType xsi:type="kermeta_language_structure:Class">
+                                      <typeParamBinding type="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                                        <containedType xsi:type="kermeta_language_structure:Class">
+                                          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Object"/>
+                                        </containedType>
+                                        <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Collection/G"/>
+                                      </typeParamBinding>
+                                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Collection"/>
+                                    </containedType>
+                                    <type type="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
+                                  </statement>
+                                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0" isCast="true">
+                                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0" name="referencedObjs"/>
+                                    <value xsi:type="kermeta_language_behavior:CallFeature" name="get">
+                                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@thenBody/@statement.1/@value/@containedType.0"/>
+                                      <parameters xsi:type="kermeta_language_behavior:CallVariable" name="prop">
+                                        <staticType href="../reflection/reflection.km#//@packages.0/reflection/ClassDefinition/allAttribute/@containedType.0"/>
+                                      </parameters>
+                                      <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/get"/>
+                                      <target xsi:type="kermeta_language_behavior:CallVariable" name="containedObj">
+                                        <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                      </target>
+                                    </value>
+                                  </statement>
+                                  <statement xsi:type="kermeta_language_behavior:Conditional">
+                                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                                    <thenBody xsi:type="kermeta_language_behavior:Block">
+                                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                                      <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+                                        <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                                        <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@containedType.0">
+                                          <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@containedType.0/@containedType.0">
+                                            <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+                                            <right href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                                          </containedType>
+                                          <parameters name="referencedObj"/>
+                                          <body xsi:type="kermeta_language_behavior:Conditional">
+                                            <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                                            <thenBody xsi:type="kermeta_language_behavior:Block">
+                                              <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                                              <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0" identifier="diagnostic">
+                                                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/DanglingDiagnostic"/>
+                                                <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@initialization/@containedType.0" name="new">
+                                                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/DanglingDiagnostic"/>
+                                                  <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                                                  <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/persistence/Resource/contents/@getterBody/@statement.0/@initialization/@target/@containedType.0">
+                                                    <typeref type="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@initialization/@containedType.0" upper="1"/>
+                                                  </target>
+                                                </initialization>
+                                                <type type="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
+                                              </statement>
+                                              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                                                <target xsi:type="kermeta_language_behavior:CallFeature" name="danglingElement" staticProperty="//@packages.0/persistence/DanglingDiagnostic/danglingElement">
+                                                  <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0" name="diagnostic"/>
+                                                </target>
+                                                <value xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0" name="referencedObj"/>
+                                              </statement>
+                                              <statement xsi:type="kermeta_language_behavior:Assignment">
+                                                <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                                <target xsi:type="kermeta_language_behavior:CallFeature" name="referencingElement" staticProperty="//@packages.0/persistence/DanglingDiagnostic/referencingElement">
+                                                  <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0" name="diagnostic"/>
+                                                </target>
+                                                <value xsi:type="kermeta_language_behavior:CallVariable" name="containedObj">
+                                                  <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                                </value>
+                                              </statement>
+                                              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.3/@containedType.0" isCast="true">
+                                                <containedType xsi:type="kermeta_language_structure:Class">
+                                                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Property"/>
+                                                </containedType>
+                                                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.3/@containedType.0" name="referencingProperty" staticProperty="//@packages.0/persistence/DanglingDiagnostic/referencingProperty">
+                                                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0" name="diagnostic"/>
+                                                </target>
+                                                <value xsi:type="kermeta_language_behavior:CallVariable" name="prop">
+                                                  <staticType href="../reflection/reflection.km#//@packages.0/reflection/ClassDefinition/allAttribute/@containedType.0"/>
+                                                </value>
+                                              </statement>
+                                              <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                                                <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                                                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0" name="diagnostic"/>
+                                                <staticOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
+                                                <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@containedType.0" name="result"/>
+                                              </statement>
+                                            </thenBody>
+                                            <condition xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                                              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                                              <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                                              <target xsi:type="kermeta_language_behavior:CallFeature" name="exists">
+                                                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/existsCpl/@body/@containedType.0"/>
+                                                <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@condition/@target/@parameters.0/@containedType.0">
+                                                  <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@condition/@target/@parameters.0/@containedType.0/@containedType.0">
+                                                    <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/persistence/Resource/dependentResources/@containedType.0"/>
+                                                    <right href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@target/@containedType.0"/>
+                                                  </containedType>
+                                                  <parameters name="res2"/>
+                                                  <body xsi:type="kermeta_language_behavior:CallFeature" name="contains">
+                                                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@target/@containedType.0"/>
+                                                    <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0" name="referencedObj"/>
+                                                    <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/contains"/>
+                                                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@condition/@target/@parameters.0/@body/@target/@containedType.0" name="contents" staticProperty="//@packages.0/persistence/Resource/contents">
+                                                      <containedType xsi:type="kermeta_language_structure:Class">
+                                                        <typeParamBinding>
+                                                          <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                                                          <type href="../standard/collections.km#//@packages.0/standard/Object"/>
+                                                        </typeParamBinding>
+                                                        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                                                      </containedType>
+                                                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Resource/dependentResources/@containedType.0" name="res2"/>
+                                                    </target>
+                                                  </body>
+                                                </parameters>
+                                                <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/exists"/>
+                                                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@condition/@target/@target/@containedType.0" name="resources" staticProperty="//@packages.0/persistence/Repository/resources">
+                                                  <containedType xsi:type="kermeta_language_structure:Class">
+                                                    <typeParamBinding type="//@packages.0/persistence/Resource/dependentResources/@containedType.0">
+                                                      <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                                                    </typeParamBinding>
+                                                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                                                  </containedType>
+                                                  <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@condition/@target/@target/@target/@containedType.0">
+                                                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Repository"/>
+                                                  </target>
+                                                </target>
+                                              </target>
+                                            </condition>
+                                          </body>
+                                        </parameters>
+                                        <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+                                        <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0" name="referencedObjs"/>
+                                      </statement>
+                                    </thenBody>
+                                    <condition xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isVoid">
+                                        <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                                        <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isVoid"/>
+                                        <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@containedType.0" name="referencedObjs"/>
+                                      </target>
+                                    </condition>
+                                  </statement>
+                                </thenBody>
+                                <elseBody xsi:type="kermeta_language_behavior:Block">
+                                  <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                                  <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="referencedObj">
+                                    <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                    <type isOrdered="true" upper="1">
+                                      <type href="../standard/collections.km#//@packages.0/standard/Object"/>
+                                    </type>
+                                  </statement>
+                                  <statement xsi:type="kermeta_language_behavior:Assignment">
+                                    <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@thenBody/@statement.1/@value/@containedType.0"/>
+                                    <target xsi:type="kermeta_language_behavior:CallVariable" name="referencedObj">
+                                      <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                    </target>
+                                    <value xsi:type="kermeta_language_behavior:CallFeature" name="get">
+                                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@thenBody/@statement.1/@value/@containedType.0"/>
+                                      <parameters xsi:type="kermeta_language_behavior:CallVariable" name="prop">
+                                        <staticType href="../reflection/reflection.km#//@packages.0/reflection/ClassDefinition/allAttribute/@containedType.0"/>
+                                      </parameters>
+                                      <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/get"/>
+                                      <target xsi:type="kermeta_language_behavior:CallVariable" name="containedObj">
+                                        <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                      </target>
+                                    </value>
+                                  </statement>
+                                  <statement xsi:type="kermeta_language_behavior:Conditional">
+                                    <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                                    <thenBody xsi:type="kermeta_language_behavior:Block">
+                                      <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                                      <statement xsi:type="kermeta_language_behavior:Conditional">
+                                        <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                                        <thenBody xsi:type="kermeta_language_behavior:Block">
+                                          <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                                          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@elseBody/@statement.2/@thenBody/@statement.0/@thenBody/@statement.0/@containedType.0" identifier="diagnostic">
+                                            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/DanglingDiagnostic"/>
+                                            <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@elseBody/@statement.2/@thenBody/@statement.0/@thenBody/@statement.0/@initialization/@containedType.0" name="new">
+                                              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/DanglingDiagnostic"/>
+                                              <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                                              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/persistence/Resource/contents/@getterBody/@statement.0/@initialization/@target/@containedType.0">
+                                                <typeref type="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@elseBody/@statement.2/@thenBody/@statement.0/@thenBody/@statement.0/@initialization/@containedType.0" upper="1"/>
+                                              </target>
+                                            </initialization>
+                                            <type type="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@elseBody/@statement.2/@thenBody/@statement.0/@thenBody/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
+                                          </statement>
+                                          <statement xsi:type="kermeta_language_behavior:Assignment">
+                                            <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                            <target xsi:type="kermeta_language_behavior:CallFeature" name="danglingElement" staticProperty="//@packages.0/persistence/DanglingDiagnostic/danglingElement">
+                                              <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@elseBody/@statement.2/@thenBody/@statement.0/@thenBody/@statement.0/@containedType.0" name="diagnostic"/>
+                                            </target>
+                                            <value xsi:type="kermeta_language_behavior:CallVariable" name="referencedObj">
+                                              <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                            </value>
+                                          </statement>
+                                          <statement xsi:type="kermeta_language_behavior:Assignment">
+                                            <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                            <target xsi:type="kermeta_language_behavior:CallFeature" name="referencingElement" staticProperty="//@packages.0/persistence/DanglingDiagnostic/referencingElement">
+                                              <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@elseBody/@statement.2/@thenBody/@statement.0/@thenBody/@statement.0/@containedType.0" name="diagnostic"/>
+                                            </target>
+                                            <value xsi:type="kermeta_language_behavior:CallVariable" name="containedObj">
+                                              <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                            </value>
+                                          </statement>
+                                          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.3/@containedType.0" isCast="true">
+                                            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.3/@containedType.0" name="referencingProperty" staticProperty="//@packages.0/persistence/DanglingDiagnostic/referencingProperty">
+                                              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@elseBody/@statement.2/@thenBody/@statement.0/@thenBody/@statement.0/@containedType.0" name="diagnostic"/>
+                                            </target>
+                                            <value xsi:type="kermeta_language_behavior:CallVariable" name="prop">
+                                              <staticType href="../reflection/reflection.km#//@packages.0/reflection/ClassDefinition/allAttribute/@containedType.0"/>
+                                            </value>
+                                          </statement>
+                                          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                                            <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                                            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@elseBody/@statement.2/@thenBody/@statement.0/@thenBody/@statement.0/@containedType.0" name="diagnostic"/>
+                                            <staticOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
+                                            <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@containedType.0" name="result"/>
+                                          </statement>
+                                        </thenBody>
+                                        <condition xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                                          <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                                          <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                                          <target xsi:type="kermeta_language_behavior:CallFeature" name="exists">
+                                            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/existsCpl/@body/@containedType.0"/>
+                                            <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@elseBody/@statement.2/@thenBody/@statement.0/@condition/@target/@parameters.0/@containedType.0">
+                                              <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@elseBody/@statement.2/@thenBody/@statement.0/@condition/@target/@parameters.0/@containedType.0/@containedType.0">
+                                                <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/persistence/Resource/dependentResources/@containedType.0"/>
+                                                <right href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@target/@containedType.0"/>
+                                              </containedType>
+                                              <parameters name="res2"/>
+                                              <body xsi:type="kermeta_language_behavior:CallFeature" name="contains">
+                                                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@target/@containedType.0"/>
+                                                <parameters xsi:type="kermeta_language_behavior:CallVariable" name="referencedObj">
+                                                  <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                                </parameters>
+                                                <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/contains"/>
+                                                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@elseBody/@statement.2/@thenBody/@statement.0/@condition/@target/@parameters.0/@body/@target/@containedType.0" name="contents" staticProperty="//@packages.0/persistence/Resource/contents">
+                                                  <containedType xsi:type="kermeta_language_structure:Class">
+                                                    <typeParamBinding>
+                                                      <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                                                      <type href="../standard/collections.km#//@packages.0/standard/Object"/>
+                                                    </typeParamBinding>
+                                                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                                                  </containedType>
+                                                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Resource/dependentResources/@containedType.0" name="res2"/>
+                                                </target>
+                                              </body>
+                                            </parameters>
+                                            <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/exists"/>
+                                            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@elseBody/@statement.2/@thenBody/@statement.0/@condition/@target/@target/@containedType.0" name="resources" staticProperty="//@packages.0/persistence/Repository/resources">
+                                              <containedType xsi:type="kermeta_language_structure:Class">
+                                                <typeParamBinding type="//@packages.0/persistence/Resource/dependentResources/@containedType.0">
+                                                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                                                </typeParamBinding>
+                                                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                                              </containedType>
+                                              <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@condition/@target/@target/@target/@containedType.0"/>
+                                            </target>
+                                          </target>
+                                        </condition>
+                                      </statement>
+                                    </thenBody>
+                                    <condition xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isVoid">
+                                        <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                                        <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isVoid"/>
+                                        <target xsi:type="kermeta_language_behavior:CallVariable" name="referencedObj">
+                                          <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                                        </target>
+                                      </target>
+                                    </condition>
+                                  </statement>
+                                </elseBody>
+                                <condition xsi:type="kermeta_language_behavior:CallFeature" name="or">
+                                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@containedType.0"/>
+                                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/empty/@body/@containedType.0"/>
+                                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="uminus">
+                                      <staticType href="../standard/collections.km#//@packages.0/standard/Set/quickSort/@body/@statement.3/@elseBody/@statement.1/@parameters.0/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
+                                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Integer/uminus"/>
+                                      <target xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/persistence/EMFResource/load/@body/@statement.2/@condition/@parameters.0/@containedType.0" value="1"/>
+                                    </parameters>
+                                    <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Integer/equals"/>
+                                    <target xsi:type="kermeta_language_behavior:CallFeature" name="upper">
+                                      <staticType href="../reflection/reflection.km#//@packages.0/reflection/UnlimitedNatural"/>
+                                      <staticProperty href="../reflection/reflection.km#//@packages.0/reflection/MultiplicityElement/upper"/>
+                                      <target xsi:type="kermeta_language_behavior:CallVariable" name="prop">
+                                        <staticType href="../reflection/reflection.km#//@packages.0/reflection/ClassDefinition/allAttribute/@containedType.0"/>
+                                      </target>
+                                    </target>
+                                  </parameters>
+                                  <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/or"/>
+                                  <target xsi:type="kermeta_language_behavior:CallFeature" name="isGreater">
+                                    <staticType href="../standard/collections.km#//@packages.0/standard/OrderedCollection/addAt/@body/@statement.0/@condition/@parameters.0/@containedType.0"/>
+                                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/persistence/EMFResource/load/@body/@statement.2/@condition/@parameters.0/@containedType.0" value="1"/>
+                                    <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Integer/isGreater"/>
+                                    <target xsi:type="kermeta_language_behavior:CallFeature" name="upper">
+                                      <staticType href="../reflection/reflection.km#//@packages.0/reflection/UnlimitedNatural"/>
+                                      <staticProperty href="../reflection/reflection.km#//@packages.0/reflection/MultiplicityElement/upper"/>
+                                      <target xsi:type="kermeta_language_behavior:CallVariable" name="prop">
+                                        <staticType href="../reflection/reflection.km#//@packages.0/reflection/ClassDefinition/allAttribute/@containedType.0"/>
+                                      </target>
+                                    </target>
+                                  </target>
+                                </condition>
+                              </body>
+                            </parameters>
+                            <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+                            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@target/@containedType.0" name="allAttribute">
+                              <containedType xsi:type="kermeta_language_structure:Class">
+                                <typeParamBinding>
+                                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                                  <type href="../reflection/reflection.km#//@packages.0/reflection/ClassDefinition/allAttribute/@containedType.0"/>
+                                </typeParamBinding>
+                                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                              </containedType>
+                              <staticProperty href="../reflection/reflection.km#//@packages.0/reflection/ClassDefinition/allAttribute"/>
+                              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.0/@containedType.0" name="classDef"/>
+                            </target>
+                          </statement>
+                        </thenBody>
+                        <condition xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                          <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                          <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                          <target xsi:type="kermeta_language_behavior:CallFeature" name="isVoid">
+                            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                            <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isVoid"/>
+                            <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.0/@containedType.0" name="classDef"/>
+                          </target>
+                        </condition>
+                      </statement>
+                    </body>
+                  </parameters>
+                  <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@target/@containedType.0" name="contents" staticProperty="//@packages.0/persistence/Resource/contents">
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeParamBinding>
+                        <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                        <type href="../standard/collections.km#//@packages.0/standard/Object"/>
+                      </typeParamBinding>
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                    </containedType>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Resource/dependentResources/@containedType.0" name="res"/>
+                  </target>
+                </body>
+              </parameters>
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@target/@containedType.0" name="resources" staticProperty="//@packages.0/persistence/Repository/resources">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeParamBinding type="//@packages.0/persistence/Resource/dependentResources/@containedType.0">
+                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                  </typeParamBinding>
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                </containedType>
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@condition/@target/@target/@target/@containedType.0"/>
+              </target>
+            </statement>
+          </body>
+        </ownedOperation>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/persistence/DanglingDiagnostic/@ownedTag.0" name="DanglingDiagnostic" superType="//@packages.0/persistence/DanglingDiagnostic/@containedType.0">
+        <ownedTag value="/**&#xA; * class used to gather the information required to make a user friendly report about a dangling element&#xA; * (see. findDanglingModelElements())&#xA; */" object="//@packages.0/persistence/DanglingDiagnostic"/>
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
+        </containedType>
+        <ownedAttribute tag="//@packages.0/persistence/DanglingDiagnostic/danglingElement/@ownedTag.0" name="danglingElement" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xA;  * Element that is not contained by a resource in the repository  &#xA;  */" object="//@packages.0/persistence/DanglingDiagnostic/danglingElement"/>
+          <type href="../standard/collections.km#//@packages.0/standard/Object"/>
+        </ownedAttribute>
+        <ownedAttribute tag="//@packages.0/persistence/DanglingDiagnostic/referencingElement/@ownedTag.0" name="referencingElement" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xA;  * Element that has a reference to the dangling element  &#xA;  */" object="//@packages.0/persistence/DanglingDiagnostic/referencingElement"/>
+          <type href="../standard/collections.km#//@packages.0/standard/Object"/>
+        </ownedAttribute>
+        <ownedAttribute tag="//@packages.0/persistence/DanglingDiagnostic/referencingProperty/@ownedTag.0" name="referencingProperty" type="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.3/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xA;  * Property used to reference the dangling element  &#xA;  */" object="//@packages.0/persistence/DanglingDiagnostic/referencingProperty"/>
+        </ownedAttribute>
+        <ownedOperation tag="//@packages.0/persistence/DanglingDiagnostic/toString/@ownedTag.0" name="toString" type="//@packages.0/persistence/DanglingDiagnostic/toString/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xA;  * user friendly message build with those informations&#xA;  */" object="//@packages.0/persistence/DanglingDiagnostic/toString"/>
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+          </containedType>
+          <body xsi:type="kermeta_language_behavior:Block">
+            <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Assignment">
+              <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/DanglingDiagnostic/toString/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@parameters.3/@containedType.0" value=" is dangling"/>
+                <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                  <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name">
+                    <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                    <staticProperty href="../reflection/reflection.km#//@packages.0/reflection/NamedElement/name"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.3/@containedType.0" name="referencingProperty" staticProperty="//@packages.0/persistence/DanglingDiagnostic/referencingProperty"/>
+                  </parameters>
+                  <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                    <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
+                    <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@parameters.3/@containedType.0" value="."/>
+                    <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                      <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/String/@containedType.0"/>
+                        <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/toString"/>
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="referencingElement" staticProperty="//@packages.0/persistence/DanglingDiagnostic/referencingElement">
+                          <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                        </target>
+                      </parameters>
+                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                        <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
+                        <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@parameters.3/@containedType.0" value=" referenced by "/>
+                        <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                          <staticType href="../language/structure.km#//@packages.0/language/structure/String/@containedType.0"/>
+                          <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/toString"/>
+                          <target xsi:type="kermeta_language_behavior:CallFeature" name="danglingElement" staticProperty="//@packages.0/persistence/DanglingDiagnostic/danglingElement">
+                            <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                          </target>
+                        </target>
+                      </target>
+                    </target>
+                  </target>
+                </target>
+              </value>
+            </statement>
+          </body>
+          <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/toString"/>
+        </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/persistence/EMFRepository/@ownedTag.0" name="EMFRepository" superType="//@packages.0/persistence/EMFRepository/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * Repository that stores and manages resources that come from EMF&#xD;&#xA; */" object="//@packages.0/persistence/EMFRepository"/>
+        <ownedTag value="/**&#xA; * Repository that stores and manages resources that come from EMF&#xA; */" object="//@packages.0/persistence/EMFRepository"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Repository"/>
         <ownedAttribute tag="//@packages.0/persistence/EMFRepository/useInterpreterInternalResources/@ownedTag.0" name="useInterpreterInternalResources" type="//@packages.0/persistence/EMFRepository/useInterpreterInternalResources/@containedType.0" isOrdered="true" upper="1" isComposite="true">
-          <ownedTag value="/** &#xD;&#xA;  * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself&#xD;&#xA;  * this is usefull for example to make a dependency to framework.km&#xD;&#xA;  * by default, not setting this is considered as false.&#xD;&#xA;  */" object="//@packages.0/persistence/EMFRepository/useInterpreterInternalResources"/>
+          <ownedTag value="/** &#xA;  * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself&#xA;  * this is usefull for example to make a dependency to framework.km&#xA;  * by default, not setting this is considered as false.&#xA;  */" object="//@packages.0/persistence/EMFRepository/useInterpreterInternalResources"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
         </ownedAttribute>
         <ownedOperation tag="//@packages.0/persistence/EMFRepository/createResource/@ownedTag.0" name="createResource" type="//@packages.0/persistence/EMFRepository/createResource/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Repository/createResource">
-          <ownedTag value="/**&#xD;&#xA;  * Overrides Repository.createResource(String, String)&#xD;&#xA;  * Create a new resource for a model given by its uri, &#xD;&#xA;  * which meta-model is stored in file given by mm_uri&#xD;&#xA;  * If file already exists, you'll be able to call the load method to concretly load the model&#xD;&#xA;  * otherwise, you can only call the save method&#xD;&#xA;  */" object="//@packages.0/persistence/EMFRepository/createResource"/>
+          <ownedTag value="/**&#xA;  * Overrides Repository.createResource(String, String)&#xA;  * Create a new resource for a model given by its uri, &#xA;  * which meta-model is stored in file given by mm_uri&#xA;  * If file already exists, you'll be able to call the load method to concretly load the model&#xA;  * otherwise, you can only call the save method&#xA;  */" object="//@packages.0/persistence/EMFRepository/createResource"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/EMFRepository/createResource/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/EMFRepository/createResource/@body/@statement.0/@containedType.0" identifier="nUri">
@@ -788,10 +1315,10 @@
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/persistence/KMRepository/@ownedTag.0" name="KMRepository" superType="//@packages.0/persistence/KMRepository/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * Repository that stores and manages XMI files representing Kermeta models&#xD;&#xA; */" object="//@packages.0/persistence/KMRepository"/>
+        <ownedTag value="/**&#xA; * Repository that stores and manages XMI files representing Kermeta models&#xA; */" object="//@packages.0/persistence/KMRepository"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Repository"/>
         <ownedOperation tag="//@packages.0/persistence/KMRepository/createResource/@ownedTag.0" name="createResource" type="//@packages.0/persistence/KMRepository/createResource/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Repository/createResource">
-          <ownedTag value="/**&#xD;&#xA;   * To be written&#xD;&#xA;   */" object="//@packages.0/persistence/KMRepository/createResource"/>
+          <ownedTag value="/**&#xA;   * NOT IMPLEMENTED&#xA;   */" object="//@packages.0/persistence/KMRepository/createResource"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0"/>
           <ownedParameter name="uri" type="//@packages.0/persistence/KMRepository/createResource/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
@@ -809,9 +1336,10 @@
     </nestedPackage>
   </packages>
   <requires tag="//@requires.0/@ownedTag.0" uri="../Standard.kmt">
-    <ownedTag value="/**&#xD;&#xA; * Contains the classes that handle the serialization of models, in particular&#xD;&#xA; * EMF models.&#xD;&#xA; * &lt;img src=&quot;./figures/persistence_package.png&quot;>&#xD;&#xA; */" object="//@requires.0"/>
+    <ownedTag value="/**&#xA; * Contains the classes that handle the serialization of models, in particular&#xA; * EMF models.&#xA; * &lt;img src=&quot;./figures/persistence_package.png&quot;>&#xA; */" object="//@requires.0"/>
   </requires>
   <usings qualifiedName="kermeta::standard"/>
+  <usings qualifiedName="kermeta::persistence"/>
   <referencedModelingUnits href="../Standard.km#/"/>
   <referencedModelingUnits href="../standard/collections.km#/"/>
   <referencedModelingUnits href="../standard/primitive_types.km#/"/>
@@ -829,4 +1357,6 @@
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
   <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
   <referencedModelingUnits href="../standard/java.km#/"/>
+  <referencedModelingUnits href="../ecore/ecore_compatibility.km#/"/>
+  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
 </kermeta_language_structure:ModelingUnit>

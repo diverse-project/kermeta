@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.18 2007-07-27 07:12:17 ftanguy Exp $
+/* $Id: KMT2KMPass6.java,v 1.19 2007-09-04 08:29:33 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -237,6 +237,8 @@ public class KMT2KMPass6 extends KMT2KMPass {
 					" from " +builder.getUri());
 		// normal behavior
 		String qname = NamedElementHelper.getQualifiedName(context.current_operation);
+		if ( qname.equals("update") )
+			System.out.println();
 		if (operation_bodies.containsKey(qname)) {
 			context.current_operation.setBody(ExpressionParser.parse(context, builder, (String)operation_bodies.get(qname)));
 		}

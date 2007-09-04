@@ -3,7 +3,7 @@
   <model href="kunit.km#/"/>
   <subdiagrams>
     <model href="kunit.km#//@packages.0/kunit"/>
-    <diagrams position="0,0" size="100,100" name="kunit_package" zoom="0.5" viewport="0,0">
+    <diagrams position="0,0" size="100,100" name="kunit_package" zoom="0.75" viewport="0,0">
       <property key="pageFormatName" value="A3"/>
       <property key="diagramWidth" value="1188"/>
       <property key="diagramHeight" value="1680"/>
@@ -413,8 +413,8 @@
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="kunit.km#//@packages.0/kunit/Failure/failure"/>
         </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="32" vDistance="-32"/>
-        <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
+        <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="14" vDistance="-16"/>
+        <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="15" vDistance="4"/>
         <waypoints>[526, -2, -82, -150]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.5/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.2/@anchorage.0">
@@ -441,15 +441,17 @@
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="kunit.km#//@packages.0/kunit/Log/errors"/>
         </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="8" vDistance="8"/>
-        <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
+        <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="9" vDistance="-5"/>
+        <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="10" vDistance="6"/>
       </contained>
       <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.3/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.5/@anchorage.0">
+        <property key="router" value="Oblique"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="kunit.km#//@packages.0/kunit/Log/harnessErrors"/>
         </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="8" vDistance="8"/>
-        <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
+        <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="22" vDistance="7"/>
+        <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="18" vDistance="-3"/>
+        <waypoints>[32, -73, -1, 126]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.6/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.3/@anchorage.0">
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
@@ -624,6 +626,8 @@
       </contained>
       <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.23/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.21/@anchorage.0">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -396, 142, 134]</waypoints>
+        <waypoints>[-141, -396, 1, 134]</waypoints>
       </contained>
     </diagrams>
   </subdiagrams>

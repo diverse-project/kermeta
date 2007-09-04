@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.15 2007-08-31 09:14:42 jmottu Exp $
+/* $Id: KMT2KMPass1.java,v 1.16 2007-09-04 08:29:33 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : EPL
@@ -17,6 +17,8 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage.Registry;
@@ -66,11 +68,14 @@ public class KMT2KMPass1 extends KMT2KMPass {
 	protected KermetaUnit currentImportedUnit;
 	protected boolean isExcludeFilter;
 	
+	private List<RequireEntry> requireEntries;
+	
 	/**
 	 * @param builder
 	 */
-	public KMT2KMPass1(KermetaUnit builder, LoadingContext context) {
+	public KMT2KMPass1(KermetaUnit builder, LoadingContext context, List<RequireEntry> requireEntries) {
 		super(builder, context);
+		this.requireEntries = requireEntries;
 	}
 	
 	
@@ -97,7 +102,7 @@ public class KMT2KMPass1 extends KMT2KMPass {
 					builder.error( exception.getMessage() );
 				}
 			else
-				builder.error("PASS 1 : invalid require was found : 'require " + uriRequire + "'" );
+				builder.error("PASS 1 : invalid require was found : 'require " + uriRequire + "'", importStmt );
 		
 		} else {
 		
@@ -146,9 +151,20 @@ public class KMT2KMPass1 extends KMT2KMPass {
 			if ( ! error ) {
 				try {
 					currentImportedUnit = IOPlugin.getDefault().getKermetaUnit( fileURI );
-					if ( currentImportedUnit.isErrored() )
-						builder.error("The file " + fileURI + " contains error(s) : " + KermetaUnitHelper.getAllErrorsAsString(currentImportedUnit), importStmt);
-					currentImportedUnit.setNeedASTTraces(true);
+					/*
+					 * 
+					 * If some errors in the imported unit, we must signal them but we take care about cycling.
+					 * 
+					 */
+				/*	if ( currentImportedUnit.isErrored() ) {
+						boolean markError = true;
+						Iterator <KermetaUnit> it = currentImportedUnit.getImportedKermetaUnits().iterator();
+						while ( markError && it.hasNext() )
+							if ( it.next().getUri().eq)! .contains(builder) )
+					}
+						builder.error("The file " + fileURI + " contains error(s) : " + KermetaUnitHelper.getAllErrorsAsString(currentImportedUnit)"The file " + fileURI + " contains error(s) : " + KermetaUnitHelper.getAllErrorsAsString(currentImportedUnit), importStmt);
+					*/currentImportedUnit.setNeedASTTraces(true);
+					requireEntries.add( new RequireEntry(importStmt, currentImportedUnit, fileURI));
 				} catch ( URIMalformedException exception ) {
 					builder.error( exception.getMessage() );
 				}

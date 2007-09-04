@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.13 2007-08-31 16:39:12 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.14 2007-09-04 08:29:33 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -69,7 +69,11 @@ public class IOPlugin extends AbstractUIPlugin {
 	
 	private KermetaUnit framework;
 
+	private KermetaUnit frameworkAsEcore;
+	
 	private KermetaUnit ecore;
+	
+	static public String URI_MAP = "../fr.irisa.triskell.kermeta.io/uri.map";
 	
 	/**
 	 * 
@@ -102,7 +106,7 @@ public class IOPlugin extends AbstractUIPlugin {
 			KmPackageImpl.init();
 			
 			if ( LOCAL_USE ) {				
-				File file = new File("../fr.irisa.triskell.kermeta.io/uri.map");
+				File file = new File(URI_MAP);
 				if (file.exists()){
 					URIConverterImpl.URI_MAP.putAll(URIMapUtil.readMapFile(file));
 					System.out.println("URIMap read from " + file.toString());
@@ -120,6 +124,7 @@ public class IOPlugin extends AbstractUIPlugin {
 			if ( ! FRAMEWORK_GENERATION ) {
 			
 				try {
+					// Loading the framework
 					framework = loadFramework( FRAMEWORK_KM_URI );
 					for ( KermetaUnit kermetaUnit : KermetaUnitHelper.getAllImportedKermetaUnits(framework) )
 						kermetaUnit.setFramework( true );
@@ -131,7 +136,8 @@ public class IOPlugin extends AbstractUIPlugin {
 						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( framework );
 						constraintchecker.checkUnit();
 					}				
-					
+
+					// Loading Ecore
 					ecore = loadEcore( ECORE_URI );
 										
 					typechecker = new KermetaTypeChecker( ecore );
@@ -142,6 +148,17 @@ public class IOPlugin extends AbstractUIPlugin {
 						constraintchecker.checkUnit();
 					}
 
+					// Loading the framework as ecore
+					frameworkAsEcore = loadKermetaUnit( FRAMEWORK_ECORE_URI );
+					
+					typechecker = new KermetaTypeChecker( frameworkAsEcore );
+					typechecker.checkUnit();
+
+					if ( ! frameworkAsEcore.isErrored() ) {
+						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( frameworkAsEcore );
+						constraintchecker.checkUnit();
+					}
+					
 				} catch (URIMalformedException e) {
 					e.printStackTrace();
 				} catch (Throwable e) {
@@ -191,6 +208,10 @@ public class IOPlugin extends AbstractUIPlugin {
 	 * @throws URIMalformedException
 	 */
 	public KermetaUnit getKermetaUnit( String uri ) throws URIMalformedException {
+		if ( uri.matches("http://www.eclipse.org/emf/2003/XMLType") )
+			System.out.println();
+		
+		
 		KermetaUnit kermetaUnit = storer.find(uri);
 		if ( kermetaUnit == null ) {
 			kermetaUnit = storer.get( uri );
@@ -272,9 +293,22 @@ public class IOPlugin extends AbstractUIPlugin {
 	
 	public void unload( String uri ) {
 		synchronized ( IOPlugin.class ) {
+			List <KermetaUnit> unitToUnload = new ArrayList <KermetaUnit> ();
 			IOPlugin.internalLog.debug( "unloading " + uri);
+			KermetaUnit kermetaUnit;
+			try {
+				kermetaUnit = getKermetaUnit(uri);
+				for ( KermetaUnit importedUnit : new ArrayList<KermetaUnit>(kermetaUnit.getImportedKermetaUnits()) )
+					if ( importedUnit.getImportedKermetaUnits().contains( kermetaUnit ) )
+						unitToUnload.add( importedUnit );
+			} catch (URIMalformedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			storer.unload(uri);
 			IOPlugin.internalLog.debug( "unloading " + uri + " done");
+			for ( KermetaUnit unit : unitToUnload )
+				unload( unit.getUri() );
 		}
 	}
 	

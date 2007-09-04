@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.24 2007-08-08 12:55:37 dvojtise Exp $
+/* $Id: KMT2KMPass4.java,v 1.25 2007-09-04 08:29:33 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -32,9 +33,15 @@ import fr.irisa.triskell.kermeta.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.ast.Operation;
 import fr.irisa.triskell.kermeta.ast.Property;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 
@@ -135,6 +142,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 			Hashtable superops = getSupersForMethod(context.current_class, context.current_operation.getName());
 			if (superops.size() == 0) { // Error, no super operation
 //				builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :No super operation found for method '"+builder.current_operation.getName()+"'.", operation));
+				superops = getSupersForMethod(context.current_class, context.current_operation.getName());
 				builder.error("No super operation found for method '"+context.current_operation.getName()+"'.", context.current_operation);
 				return false;
 			}
@@ -143,9 +151,22 @@ public class KMT2KMPass4 extends KMT2KMPass {
 				context.current_operation.setSuperOperation((fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(scname));
 				if (operation.getSuperSelection() != null) {
 					String provided_name = qualifiedIDAsString(operation.getSuperSelection());
+					boolean error = false;
 					if (!provided_name.equals(scname)) {
-						//builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Wrong super operation selection directive '"+provided_name+"', super operation selected from class '"+scname+"'.", operation));
-						builder.error("Wrong super operation selection directive '"+provided_name+"', super operation selected from class '"+scname+"'.");
+						error = true;
+						for ( String s : builder.getUsings() ) {
+							String name = s + "::" + provided_name;
+							if ( name.equals(scname) ) {
+								error = false;
+								break;
+							}
+						}
+					
+						if ( error ) {
+							getSupersForMethod(context.current_class, context.current_operation.getName());
+							//builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Wrong super operation selection directive '"+provided_name+"', super operation selected from class '"+scname+"'.", operation));
+							builder.error("Wrong super operation selection directive '"+provided_name+"', super operation selected from class '"+scname+"'.", context.current_operation);
+						}
 					}
 				}
 			}
@@ -245,27 +266,43 @@ public class KMT2KMPass4 extends KMT2KMPass {
 	 */
 	public Hashtable<String, fr.irisa.triskell.kermeta.language.structure.Operation> getSupersForMethod(ClassDefinition cls, String methname) {
 		Hashtable<String, fr.irisa.triskell.kermeta.language.structure.Operation> result = new Hashtable<String, fr.irisa.triskell.kermeta.language.structure.Operation>();
-		ArrayList<ClassDefinition> supers = ClassDefinitionHelper.getDirectSuperClasses(cls);
-		
-		for(int i=0; i<supers.size(); i++) {
-			fr.irisa.triskell.kermeta.language.structure.Operation superop = ClassDefinitionHelper.getOperationByName(supers.get(i), methname);
-			if (superop != null)
-			{
-				result.put(NamedElementHelper.getQualifiedName(supers.get(i)), superop);
-			}
-			else 
-			{ // search in supertypes of supers[i]
-				result.putAll(getSupersForMethod(supers.get(i), methname));
+		/*
+		 * 
+		 * Getting all operations for the class definition.
+		 * 
+		 */
+		List<fr.irisa.triskell.kermeta.language.structure.Operation> ops = ClassDefinitionHelper.findOperationsByName(cls, methname);
+		for ( fr.irisa.triskell.kermeta.language.structure.Operation op : ops ) {
+			/*
+			 * 
+			 * We do not take the operations contained in the class definition.
+			 * 
+			 */
+			if ( op.eContainer() != cls ) {
+				/*
+				 * 
+				 * Due to successive inheritance, only the last operation must be added. (A <- B <- C, C being the given class def, the method from B is taken.)
+				 * 
+				 */
+				boolean add = true;
+				for ( String s : result.keySet() ) {
+					fr.irisa.triskell.kermeta.language.structure.Class c1 = StructureFactory.eINSTANCE.createClass();
+					c1.setTypeDefinition( (GenericTypeDefinition) op.eContainer() );
+					fr.irisa.triskell.kermeta.language.structure.Class c2 = StructureFactory.eINSTANCE.createClass();
+					c2.setTypeDefinition( (GenericTypeDefinition) result.get(s).eContainer() );
+					
+					SimpleType t1 = new SimpleType( c1 );
+					SimpleType t2 = new SimpleType( c2 );
+					
+					if ( t1.isSubTypeOf(t2) )
+						result.remove( s );
+					else if ( t2.isSubTypeOf(t1) )
+						add = false;
+				}
+				if ( add )
+					result.put( NamedElementHelper.getQualifiedName( (NamedElement) op.eContainer() ), op);
 			}
 		}
-		
-		ClassDefinition objectClass = (ClassDefinition) builder.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object");//StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();
-		if ( objectClass != null) {
-		    result.putAll(getSupersForMethodOnObject(objectClass, methname));
-		}
-		else 
-			internalLog.warn("Not able to retreive Object ClassDefinition for operation/method check");
-		
 		return result;
 	}
 	

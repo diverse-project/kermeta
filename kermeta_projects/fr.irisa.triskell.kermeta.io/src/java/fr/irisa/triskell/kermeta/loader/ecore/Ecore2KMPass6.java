@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass6.java,v 1.6 2007-08-09 14:57:48 dvojtise Exp $
+/* $Id: Ecore2KMPass6.java,v 1.7 2007-09-04 08:29:32 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -78,6 +78,8 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EClass)
 	 */
 	public Object visit(EClass node) {
+		if ( datas == null )
+			System.out.println();
 		currentClassDefinition = (ClassDefinition) datas.getTypeDefinition(node);
 		isClassTypeOwner = true;
 		

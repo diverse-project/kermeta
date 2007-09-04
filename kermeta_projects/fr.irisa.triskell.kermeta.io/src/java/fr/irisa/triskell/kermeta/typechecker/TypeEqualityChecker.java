@@ -1,4 +1,4 @@
-/* $Id: TypeEqualityChecker.java,v 1.11 2007-07-24 13:46:45 ftanguy Exp $
+/* $Id: TypeEqualityChecker.java,v 1.12 2007-09-04 08:29:31 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -28,6 +28,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**

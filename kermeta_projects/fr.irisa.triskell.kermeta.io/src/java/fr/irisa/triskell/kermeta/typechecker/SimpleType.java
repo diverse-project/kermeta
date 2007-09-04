@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.17 2007-08-07 13:35:21 ftanguy Exp $
+/* $Id: SimpleType.java,v 1.18 2007-09-04 08:29:31 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.kermeta.io.KermetaUnit;
 

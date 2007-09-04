@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.19 2007-08-08 12:54:19 dvojtise Exp $
+/* $Id: TypeConformanceChecker.java,v 1.20 2007-09-04 08:29:31 ftanguy Exp $
 * Project : Kermeta (io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -49,19 +49,26 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 	    required = TypeCheckerContext.getCanonicalType(required);
 	    
 		// The type void is a sub-type of everything		
-		if (provided instanceof VoidType || provided == ((SimpleType)TypeCheckerContext.VoidType).type) return true;
-		
+	    try {
+	    	if (provided instanceof VoidType || 
+	    			provided == ((SimpleType)TypeCheckerContext.VoidType).type) 
+			return true;
+	    } catch (Exception e) {
+	    	System.out.println();
+	    }
 		
 		// RETURN TRUE IF THE REQUIRED TYPE IS OBJECT OR ANY OF IT SUPERTYPE
-		fr.irisa.triskell.kermeta.language.structure.Class cobject = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).getType();
-		if (TypeEqualityChecker.equals(cobject, required)) return true;
-		
+		try {
+			fr.irisa.triskell.kermeta.language.structure.Class cobject = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).getType();
+			if (TypeEqualityChecker.equals(cobject, required)) return true;
+
+			
 		/*
 		 * 
 		 * Base classes checking.
 		 * 
 		 */
-		if ( provided instanceof Class 
+		/*if ( provided instanceof Class 
 			&& required instanceof Class ) {
 
 			Class cProvided = (Class) provided;
@@ -106,19 +113,14 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 					if ( TypeConformanceChecker.conforms(p, r) )
 							return true;
 					
-				/*	Iterator it = ((ClassDefinition) cRequired.getTypeDefinition()).getSuperType().iterator();
-					while (it.hasNext()) {
-						fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
-					    if (TypeEqualityChecker.equals(c, provided)) 
-					    	return true;
-					}*/
+
 					
 				}
 							
 			}
 			
 		}
-		
+		*/
 		/*
 		 * 
 		 * Supertype checking.
@@ -144,7 +146,9 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 			    if (TypeEqualityChecker.equals(c, required)) return true;
 			}
 		}
-		
+		} catch (Exception e) {
+			System.out.println();
+		}
 		// Transformation if provided is a type variable to the least derived type admissible
 		// for the variable.
 		
@@ -192,7 +196,13 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 			result = new Boolean(true);
 		}
 		else {
+			
 			if (provided instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
+				//ClassDefinition requiredDefinition = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)  provided).getTypeDefinition();
+				ClassConformanceChecker checker = new ClassConformanceChecker( (fr.irisa.triskell.kermeta.language.structure.Class)  provided );
+				result = checker.conforms( arg0 );
+			}
+			/*if (provided instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
 				fr.irisa.triskell.kermeta.language.structure.Class p = (fr.irisa.triskell.kermeta.language.structure.Class)provided;
 				Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = ((ClassDefinition) p.getTypeDefinition()).getSuperType().iterator();
 				while(it.hasNext()) {
@@ -207,7 +217,7 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 					}
 				}
 				
-			}
+			}*/
 		}
 		if ((arg0 == TypeCheckerContext.ObjectType) && (provided instanceof VirtualType)) {
 			result = new Boolean(true);

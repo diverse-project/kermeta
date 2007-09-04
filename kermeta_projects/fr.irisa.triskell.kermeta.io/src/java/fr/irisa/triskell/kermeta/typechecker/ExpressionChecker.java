@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.48 2007-08-07 13:35:21 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.49 2007-09-04 08:29:31 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -62,6 +62,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -246,8 +247,11 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 					Type expected = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)required_params[i]).type, binding));
 					
 					if (!provided.isSubTypeOf(expected)) {
-						provided.isSubTypeOf(expected);
-					    unit.error("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+expected+", found "+provided+".",(Expression)exp.getParameters().get(i));
+						//provided.isSubTypeOf(expected);
+						//new ClassConformanceChecker( (ClassDefinition) ((Class) provided.getFType()).getTypeDefinition() );
+						//KermetaUnitHelper.getKermetaUnitFromObject( ((Class)((Class) expected.getFType()).getTypeParamBinding().get(0).getType()).getTypeDefinition() );
+						//KermetaUnitHelper.getKermetaUnitFromObject( ((Class)((Class) provided.getFType()).getTypeParamBinding().get(0).getType()).getTypeDefinition() );
+						unit.error("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+expected+", found "+provided+".",(Expression)exp.getParameters().get(i));
 					    error = true;
 					}
 			    }
@@ -480,6 +484,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 
 	public Object visitAssignment(Assignment expression) {
 	    preVisit();
+
 	    // Visit contained expressions
 	    this.accept(expression.getTarget());
 	    this.accept(expression.getValue());
@@ -576,6 +581,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        }
 	    }
 	    else {
+	    	if ( provided_type == null )
+	    		System.out.println();
 	        if (!provided_type.isSubTypeOf(targetType)) {
 	        	provided_type.isSubTypeOf(targetType);
 	            unit.error("TYPE-CHECKER : Type mismatch, "+provided_type+" does not conform to required type : "+targetType+".", expression);
@@ -637,8 +644,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    return result;
 	}
 	
-	public Object visitCallFeature(CallFeature expression) {
-		// visit target expression
+	public Object visitCallFeature(CallFeature expression) {	
+		// visit target expression	
 		if (expression.getTarget() != null) 
 			this.accept(expression.getTarget());
 		preVisit();
@@ -693,6 +700,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			else {
 				// Is it a property call
 				CallableProperty prop = target.getPropertyByName(expression.getName());
+				//KermetaUnitHelper.getKermetaUnitFromObject( ((Class) prop.getProperty().getType()).getTypeDefinition() )
 				if (prop != null) { 
 					result = checkPropertyCall(prop, expression);
 					expression.setStaticProperty(prop.getProperty());
@@ -704,8 +712,14 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			    // The feature was not found
 			    if (e != null)
 			        unit.error("TYPE-CHECKER : cannot resolve enumeration literal " + expression.getName() + " in enumetation " + e.getName() + ".",expression);
-			    else
-			        unit.error("TYPE-CHECKER : cannot resolve feature " + expression.getName() + " in type " + target.toString() + ".",expression);
+			    else {
+			    	unit.error("TYPE-CHECKER : cannot resolve feature " + expression.getName() + " in type " + target.toString() + ".",expression);
+			        op = target.getOperationByName(expression.getName());
+					if (op != null) {
+						result = checkOperationCall(op, expression);
+						expression.setStaticOperation(op.getOperation());
+					}
+			    }
 			    result = TypeCheckerContext.VoidType;
 			}
 		}

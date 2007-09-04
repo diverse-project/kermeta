@@ -2,16 +2,16 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
   <ecore:EAnnotation source="CompilationUnit">
     <details key="require" value="../Standard.kmt|structure.kmt|"/>
-    <details key="using" value="kermeta::standard|"/>
+    <details key="using" value="kermeta::standard|kermeta::language|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="language" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.ecore#//language" nsPrefix="language">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="language" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/language/reflective_collections.ecore#//language" nsPrefix="language">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xD;&#xA; * Contains the implementation of Kermeta reflective collections.&#xD;&#xA; */"/>
+        <details key="documentation" value="/**&#xA; * Contains the implementation of Kermeta reflective collections.&#xA; * &lt;img src=&quot;./figures/language_package.png&quot;>&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="ReflectiveCollection">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * ReflectiveCollection is a special collection that is used to define the type &#xD;&#xA; * of attributes that have an upper multiplicity > 1 in a class. It indeed handles&#xD;&#xA; * the update of opposite property if such an attribute has got one.&#xD;&#xA; * &lt;img src=&quot;./figures/language_package.png&quot;>&#xD;&#xA; */"/>
+          <details key="documentation" value="/**&#xA; * ReflectiveCollection is a special collection that is used to define the type &#xA; * of attributes that have an upper multiplicity > 1 in a class. It indeed handles&#xA; * the update of opposite property if such an attribute has got one.&#xA; */"/>
         </eAnnotations>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Set&lt;G>" value="kermeta::standard::Set&lt;G>"/>
@@ -21,10 +21,11 @@
         <eOperations name="add">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.add(self, element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::standard::Set&lt;G>.add(G)&#xD;&#xA;  * Add an element to this collection and update its opposite property if it exists.&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides kermeta::standard::Set&lt;G>.add(G)&#xA;  * Add an element to this collection and update its opposite property if it exists.&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Set"/>
             <references href="../standard/collections.ecore#/1/standard/Set/add"/>
           </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/language/ReflectiveCollection/G"/>
           </eParameters>
@@ -32,10 +33,11 @@
         <eOperations name="remove">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(self, element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::standard::Set&lt;G>.remove(G)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides kermeta::standard::Set&lt;G>.remove(G)&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Set"/>
             <references href="../standard/collections.ecore#/1/standard/Set/remove"/>
           </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/language/ReflectiveCollection/G"/>
           </eParameters>
@@ -43,15 +45,16 @@
         <eOperations name="clear">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.clear(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::standard::Collection&lt;G>.clear(G)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides kermeta::standard::Collection&lt;G>.clear(G)&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
             <references href="../standard/collections.ecore#/1/standard/Collection/clear"/>
           </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ReflectiveSequence">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * ReflectiveSequence is an ordered ReflectiveCollection.&#xD;&#xA; */"/>
+          <details key="documentation" value="/**&#xA; * ReflectiveSequence is an ordered ReflectiveCollection.&#xA; */"/>
         </eAnnotations>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::OrderedSet&lt;G>" value="kermeta::standard::OrderedSet&lt;G>"/>
@@ -63,9 +66,10 @@
         <eOperations name="add">
           <eAnnotations source="kermeta" references="/1/language/ReflectiveCollection/add">
             <details key="body" value="do&#xA;&#x9;super(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::language::ReflectiveCollection&lt;G>.add(G)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides kermeta::language::ReflectiveCollection&lt;G>.add(G)&#xA;  */"/>
             <details key="superOperation" value="kermeta::language::ReflectiveCollection"/>
           </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/language/ReflectiveSequence/G"/>
           </eParameters>
@@ -73,9 +77,10 @@
         <eOperations name="remove">
           <eAnnotations source="kermeta" references="/1/language/ReflectiveCollection/remove">
             <details key="body" value="do&#xA;&#x9;super(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::language::ReflectiveCollection&lt;G>.remove(G)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides kermeta::language::ReflectiveCollection&lt;G>.remove(G)&#xA;  */"/>
             <details key="superOperation" value="kermeta::language::ReflectiveCollection"/>
           </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/language/ReflectiveSequence/G"/>
           </eParameters>
@@ -83,17 +88,19 @@
         <eOperations name="clear">
           <eAnnotations source="kermeta" references="/1/language/ReflectiveCollection/clear">
             <details key="body" value="do&#xA;&#x9;super()&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::language::ReflectiveCollection&lt;G>.clear()&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides kermeta::language::ReflectiveCollection&lt;G>.clear()&#xA;  */"/>
             <details key="superOperation" value="kermeta::language::ReflectiveCollection"/>
           </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="addAt">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.addAt(self, index, element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::standard::OrderedSet.addAt(Integer)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides kermeta::standard::OrderedSet.addAt(Integer)&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::OrderedSet"/>
             <references href="../standard/collections.ecore#/1/standard/OrderedSet/addAt"/>
           </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="index">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
           </eParameters>
@@ -104,10 +111,11 @@
         <eOperations name="removeAt">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.removeAt(self, index)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::standard::OrderedSet.removeAt(Integer)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides kermeta::standard::OrderedSet.removeAt(Integer)&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
             <references href="../standard/collections.ecore#/1/standard/OrderedCollection/removeAt"/>
           </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="index">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
           </eParameters>
@@ -115,7 +123,7 @@
         <eOperations name="equals">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := super(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides kermeta::standard::OrderedSet.equals(Object)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides kermeta::standard::OrderedSet.equals(Object)&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::OrderedSet"/>
             <references href="../standard/collections.ecore#/1/standard/OrderedSet/equals"/>
           </eAnnotations>
@@ -133,23 +141,24 @@
     <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="behavior.ecore#/0"/>
     <references href="behavior.ecore#/1"/>
     <references href="behavior.ecore#/2"/>
     <references href="structure.ecore#/0"/>
     <references href="structure.ecore#/1"/>
+    <references href="structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="#/0"/>
     <references href="#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
@@ -161,13 +170,17 @@
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="dynamic_expression.ecore#/0"/>
     <references href="dynamic_expression.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
+    <references href="../ecore/ecore_compatibility.ecore#/0"/>
+    <references href="../ecore/ecore_compatibility.ecore#/1"/>
+    <references href="../utils/StringBuffer.ecore#/0"/>
+    <references href="../utils/StringBuffer.ecore#/1"/>
+    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

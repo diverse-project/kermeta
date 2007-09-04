@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.13 2007-08-21 12:55:36 dvojtise Exp $
+ * $Id: KermetaUnitImpl.java,v 1.14 2007-09-04 08:29:33 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -1118,7 +1118,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public boolean isErrored() {
-		return KermetaUnitHelper.isIndirectlyErrored(this);
+		//return KermetaUnitHelper.isIndirectlyErrored(this);
+		return KermetaUnitHelper.isErrored(this);
 	}
 
 	/**

@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTBuildingState.java,v 1.2 2007-07-20 15:08:06 ftanguy Exp $
+/*$Id: KMTBuildingState.java,v 1.3 2007-09-04 08:29:33 ftanguy Exp $
 * Project : io
 * File : 	KMTloader.java
 * License : EPL
@@ -32,6 +32,8 @@ public class KMTBuildingState extends AbstractBuildingState {
 	public boolean doneLoadBodies = false;
 	
 	public boolean doneLoadAnnotations = false;
+	
+	public boolean doneMarkError = false;
 	
 	public boolean loading = false;
 	

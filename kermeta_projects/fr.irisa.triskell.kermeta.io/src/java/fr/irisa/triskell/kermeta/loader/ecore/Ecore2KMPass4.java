@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.15 2007-08-07 13:35:22 ftanguy Exp $
+/* $Id: Ecore2KMPass4.java,v 1.16 2007-09-04 08:29:32 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -140,10 +140,10 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 				accept(annot);
 			}
 		}
+		acceptList(node.getETypeParameters());
 		// 2- Visit StructuralFeatures / Operations
 		acceptList(node.getEStructuralFeatures());
 		acceptList(node.getEOperations());
-		acceptList(node.getETypeParameters());
 		
 		// Pop previously pushed context
 		context.popContext();
@@ -218,26 +218,23 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 			}*/
 
 			// Set the type of the operation
+			Type t = null;
 			if (node.getEType() != null) {
-				Type t = createTypeForEClassifier(node.getEType(), node);
+				t = createTypeForEClassifier(node.getEType(), node);
 				currentOperation.setType(t);
-				
-				EAnnotation eAnnot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEVARIABLE_BINDINGS);
-				if(eAnnot != null) {
-					buildTypeVariableBindings((fr.irisa.triskell.kermeta.language.structure.Class) t, eAnnot.getDetails(), getVisibleTypeVariables(node));
-				}
 			} else {
-				
-				Type t = StructureFactory.eINSTANCE.createVoidType();
-				currentOperation.setType(t);
-				
-				EAnnotation eAnnot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEVARIABLE_BINDINGS);
-				if(eAnnot != null) {
-					buildTypeVariableBindings((fr.irisa.triskell.kermeta.language.structure.Class) t, eAnnot.getDetails(), getVisibleTypeVariables(node));
-				}
-				
+				t = StructureFactory.eINSTANCE.createVoidType();
+				currentOperation.setType(t);				
 			}
-
+			
+			EAnnotation eAnnot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEVARIABLE_BINDINGS);
+			if(eAnnot != null) {
+				buildTypeVariableBindings((fr.irisa.triskell.kermeta.language.structure.Class) t, eAnnot.getDetails(), getVisibleTypeVariables(node));
+			}
+			if ( ! node.getETypeParameters().isEmpty() )
+				System.out.println();
+			acceptList(node.getETypeParameters());
+			
 			// Set the parameters
 			acceptList(node.getEParameters());
 			
@@ -246,7 +243,7 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 			context.pushContext();
 			
 			// add type variable
-			for (TypeVariable next : currentOperation.getTypeParameter()) 
+			for (TypeVariable next : currentOperation.getTypeParameter())
 				context.addTypeVar(next);
 
 			// add parameters
@@ -903,6 +900,11 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 			tvBinding = StructureFactory.eINSTANCE.createTypeVariableBinding();
 			
 			// Set binding variable
+			if ( i > cl.getTypeDefinition().getTypeParameter().size() )
+				System.out.println();
+			if ( cl.getTypeDefinition().getTypeParameter().size() == 0 )
+				System.out.println();
+			
 			TypeVariable tVar = (TypeVariable) cl.getTypeDefinition().getTypeParameter().get(i);
 			tvBinding.setVariable(tVar);
 			
@@ -915,7 +917,26 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 		}
 	}
 
+	/*protected boolean buildTypeVariableBindings(
+			Operation operation,
+			EMap<String,String> map,
+			ArrayList<TypeVariable> tVars) {
 
+		boolean result = true;
+		TypeVariable tv = null;
+		int i = 0;
+		for(Object next : map) {
+			EStringToStringMapEntryImpl entry = (EStringToStringMapEntryImpl) next;
+			String qName = entry.getTypedValue();
+			
+			tv = StructureFactory.eINSTANCE.createObjectTypeVariable();
+			tv.setName( qName );
+			operation.getTypeParameter().add( tv );
+			
+		}
+		return result;
+	}
+	*/
 	/**
 	 * This method completes the description of a supertype of currently visited class by
 	 * adding type variable bindings structure if the supertype is parameterized.  

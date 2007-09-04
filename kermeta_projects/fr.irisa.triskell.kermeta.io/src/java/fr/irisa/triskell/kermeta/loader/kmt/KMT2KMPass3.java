@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.21 2007-08-07 13:35:22 ftanguy Exp $
+/* $Id: KMT2KMPass3.java,v 1.22 2007-09-04 08:29:33 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -416,9 +416,9 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		parameter.setUpper(getUpper(param.getTypeRef()));
 		// lower :
 		parameter.setLower(getLower(param.getTypeRef()));
-		// type :
-		if ( getFType( param.getTypeRef() ) == null )
-			getFType( param.getTypeRef() );
+		// type :		
+		if ( context.current_class.getName().equals("CallResult") )
+			System.out.println();
 		parameter.setType(getFType(param.getTypeRef()));
 		
 		// check that another param with the same name does not exist yet

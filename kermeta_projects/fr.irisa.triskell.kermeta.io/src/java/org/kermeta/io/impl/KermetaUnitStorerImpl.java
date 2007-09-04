@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.15 2007-08-31 08:02:20 dvojtise Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.16 2007-09-04 08:29:33 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -288,7 +288,7 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 		} else if ( extension.equals("ecore") || uri.equals(IOPlugin.ECORE_URI) ) {
 			
 			Ecore2KMLoader loader = new Ecore2KMLoader();
-			loader.load(uri, true);
+			loader.load(uri, false);
 			
 		} else if ( extension.equals("jar") ) {
 		

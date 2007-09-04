@@ -2,14 +2,14 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/standard/@ownedTag.0" name="standard">
-      <ownedTag value="/**&#xD;&#xA; * $Id: java.km,v 1.8 2007-08-13 10:01:37 dtouzet Exp $&#xD;&#xA; * Contains types dedicated to dealing with java objects&#xD;&#xA; */" object="//@packages.0/standard"/>
+      <ownedTag value="/**&#xA; * $Id: java.km,v 1.9 2007-09-04 08:29:40 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */" object="//@packages.0/standard"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/UnknownJavaObject/@ownedTag.0" name="UnknownJavaObject" superType="//@packages.0/standard/UnknownJavaObject/@containedType.0">
-        <ownedTag value="/** &#xD;&#xA;  * This special object is used to represent java object that cannot be concretly used with kermeta&#xD;&#xA;  * the only actions possible on these objects are : assignment and passing them as parameter&#xD;&#xA;  */" object="//@packages.0/standard/UnknownJavaObject"/>
+        <ownedTag value="/** &#xA;  * This special object is used to represent java object that cannot be concretly used with kermeta&#xA;  * the only actions possible on these objects are : assignment and passing them as parameter&#xA;  */" object="//@packages.0/standard/UnknownJavaObject"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/standard/UnknownJavaObject/toString/@ownedTag.0" name="toString" type="//@packages.0/standard/UnknownJavaObject/toString/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;   *&#xD;&#xA;   */" object="//@packages.0/standard/UnknownJavaObject/toString"/>
+          <ownedTag value="/**&#xA;   * NOT IMPLEMENTED&#xA;   */" object="//@packages.0/standard/UnknownJavaObject/toString"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
@@ -22,15 +22,16 @@
               <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/standard/UnknownJavaObject/toString/@body/@containedType.0" value="toString of  UnknownJavaObject not implemented yet"/>
             </statement>
           </body>
-          <superOperation href="../language/structure.km#//@packages.0/language/structure/Object/toString"/>
+          <superOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/toString"/>
         </ownedOperation>
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>
   <requires tag="//@requires.0/@ownedTag.0" uri="primitive_types.kmt">
-    <ownedTag value="/**&#xD;&#xA; * $Id: java.km,v 1.8 2007-08-13 10:01:37 dtouzet Exp $&#xD;&#xA; * Contains types dedicated to dealing with java objects&#xD;&#xA; */" object="//@requires.0"/>
+    <ownedTag value="/**&#xA; * $Id: java.km,v 1.9 2007-09-04 08:29:40 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */" object="//@requires.0"/>
   </requires>
   <usings qualifiedName="kermeta::exceptions"/>
+  <usings qualifiedName="kermeta::standard"/>
   <referencedModelingUnits href="primitive_types.km#/"/>
   <referencedModelingUnits href="../Standard.km#/"/>
   <referencedModelingUnits href="collections.km#/"/>
@@ -48,4 +49,6 @@
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
   <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
   <referencedModelingUnits href="#/"/>
+  <referencedModelingUnits href="../ecore/ecore_compatibility.km#/"/>
+  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
 </kermeta_language_structure:ModelingUnit>

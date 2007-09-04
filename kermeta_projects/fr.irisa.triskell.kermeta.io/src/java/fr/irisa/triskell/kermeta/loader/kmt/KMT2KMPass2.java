@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.14 2007-07-20 15:08:06 ftanguy Exp $
+/* $Id: KMT2KMPass2.java,v 1.15 2007-09-04 08:29:33 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -72,7 +72,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		fr.irisa.triskell.kermeta.language.structure.Package p = builder.addInternalPackage( qualifiedIDAsString(node.getName()) );
 		builder.storeTrace(p, node);
 		pkgs.push( p );
-		//builder.addUsing( p.getName() );
+		builder.addUsing( NamedElementHelper.getQualifiedName(p) );
 		return true;
 	}
 	
