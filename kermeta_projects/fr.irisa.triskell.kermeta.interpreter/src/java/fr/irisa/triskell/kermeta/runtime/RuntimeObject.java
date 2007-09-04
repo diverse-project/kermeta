@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.31 2007-09-04 13:01:29 cfaucher Exp $
+/* $Id: RuntimeObject.java,v 1.32 2007-09-04 13:47:53 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -174,8 +174,8 @@ public class RuntimeObject {
             RuntimeObject other = (RuntimeObject)arg0;
             
             // optimisation : do not use the kermeta version of equals on some types ...
-            RuntimeObject selfString = (RuntimeObject) getData().get(STRING_VALUE);
-            RuntimeObject otherString = (RuntimeObject) other.getData().get(STRING_VALUE);
+            String selfString = (String) getData().get(STRING_VALUE);
+            String otherString = (String) other.getData().get(STRING_VALUE);
             if (selfString != null || otherString != null) {
             	if (selfString != null && otherString != null) {
                     return selfString.equals(otherString);
@@ -183,8 +183,8 @@ public class RuntimeObject {
             	else return false;
             }
             
-            RuntimeObject selfStringBuffer = (RuntimeObject) getData().get(STRING_BUFFER_VALUE);
-            RuntimeObject otherStringBuffer = (RuntimeObject) other.getData().get(STRING_BUFFER_VALUE);
+            StringBuffer selfStringBuffer = (StringBuffer) getData().get(STRING_BUFFER_VALUE);
+            StringBuffer otherStringBuffer = (StringBuffer) other.getData().get(STRING_BUFFER_VALUE);
             if (selfStringBuffer != null || otherStringBuffer != null) {
             	if (selfStringBuffer != null && otherStringBuffer != null) {
                     return selfStringBuffer.equals(otherStringBuffer);
@@ -192,8 +192,8 @@ public class RuntimeObject {
             	else return false;
             }
             
-            RuntimeObject selfNumeric = (RuntimeObject) getData().get(NUMERIC_VALUE);
-            RuntimeObject otherNumeric = (RuntimeObject) other.getData().get(NUMERIC_VALUE);
+            Object selfNumeric = (Object) getData().get(NUMERIC_VALUE);
+            Object otherNumeric = (Object) other.getData().get(NUMERIC_VALUE);
             if (selfNumeric != null || otherNumeric != null) {
             	if (selfNumeric != null && otherNumeric != null) {
                     return selfNumeric.equals(otherNumeric);
@@ -201,8 +201,8 @@ public class RuntimeObject {
             	else return false;
             }
             
-            RuntimeObject selfBoolean = (RuntimeObject) getData().get(BOOLEAN_VALUE);
-            RuntimeObject otherBoolean = (RuntimeObject) other.getData().get(BOOLEAN_VALUE);
+            Boolean selfBoolean = (Boolean) getData().get(BOOLEAN_VALUE);
+            Boolean otherBoolean = (Boolean) other.getData().get(BOOLEAN_VALUE);
             if (selfBoolean != null || otherBoolean != null) {
             	if (selfBoolean != null && otherBoolean != null) {
                     return selfBoolean.equals(otherBoolean);
