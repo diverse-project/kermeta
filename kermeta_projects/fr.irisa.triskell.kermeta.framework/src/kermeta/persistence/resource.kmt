@@ -8,7 +8,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.36 2007-09-04 08:08:53 ftanguy Exp $
+ * $Id: resource.kmt,v 1.37 2007-09-04 11:40:02 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -321,16 +321,37 @@ abstract class Repository
 				if(not classDef.isVoid) then
      				//stdio.writeln("checking a " + classDef.name)
 					classDef.allAttribute.each{prop |
-     					//stdio.writeln("   trying property " + prop.name)
-						if( prop.upper > 1 or prop.upper == -1) then
-							// this is a collection
-							var referencedObjs : Collection<kermeta::reflection::Object> 
-							referencedObjs ?= containedObj.get(prop)
-							if(not referencedObjs.isVoid) then
-								// check if this referenced objects are part of one of the resource of this repository
-								referencedObjs.each{referencedObj |
-									if(not self.resources.exists{ res2 |
-										res2.contents.contains(referencedObj)} )
+						if( not prop.isDerived) then // This is weird to have a derived attribute but I don't want to crash for that
+	     					//stdio.writeln("   trying property " + prop.name)
+							if( prop.upper > 1 or prop.upper == -1) then
+								// this is a collection
+								var referencedObjs : Collection<kermeta::reflection::Object> 
+								referencedObjs ?= containedObj.get(prop)
+								if(not referencedObjs.isVoid) then
+									// check if this referenced objects are part of one of the resource of this repository
+									referencedObjs.each{referencedObj |
+										if(not self.resources.exists{ res2 | res2.contents.contains(referencedObj) } and 
+										   not (referencedObj.isKindOf(String) or
+											    referencedObj.isKindOf(Integer) or
+											 	referencedObj.isKindOf(Boolean))  )
+										then
+											var diagnostic : DanglingDiagnostic init DanglingDiagnostic.new
+											diagnostic.danglingElement := referencedObj
+											diagnostic.referencingElement := containedObj
+											diagnostic.referencingProperty ?= prop
+											result.add(diagnostic)								
+										end	
+									}
+								end
+							else
+								var referencedObj : Object 
+								referencedObj := containedObj.get(prop)
+								if(not referencedObj.isVoid) then
+									// check if this referenced object is part of one of the resource of this repository
+									if(not self.resources.exists{ res2 | res2.contents.contains(referencedObj) } and  
+									   not	(referencedObj.isKindOf(String) or
+										 	 referencedObj.isKindOf(Integer) or
+										     referencedObj.isKindOf(Boolean)) )
 									then
 										var diagnostic : DanglingDiagnostic init DanglingDiagnostic.new
 										diagnostic.danglingElement := referencedObj
@@ -338,22 +359,7 @@ abstract class Repository
 										diagnostic.referencingProperty ?= prop
 										result.add(diagnostic)								
 									end	
-								}
-							end
-						else
-							var referencedObj : Object 
-							referencedObj := containedObj.get(prop)
-							if(not referencedObj.isVoid) then
-								// check if this referenced object is part of one of the resource of this repository
-								if(not self.resources.exists{ res2 |
-									res2.contents.contains(referencedObj)} )
-								then
-									var diagnostic : DanglingDiagnostic init DanglingDiagnostic.new
-									diagnostic.danglingElement := referencedObj
-									diagnostic.referencingElement := containedObj
-									diagnostic.referencingProperty ?= prop
-									result.add(diagnostic)								
-								end	
+								end
 							end
 						end
 					}
