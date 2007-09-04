@@ -1,3 +1,13 @@
+/* $Id: ClassConformanceChecker.java,v 1.3 2007-09-04 16:46:17 dvojtise Exp $
+* Project : Kermeta (First iteration)
+* File : ClassConformanceChecker.java
+* License : EPL
+* Copyright : IRISA / INRIA
+* ----------------------------------------------------------------------------
+* Creation date : sep 2007
+* Authors : 
+* 	Francois Tanguy
+*/ 
 package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.HashSet;
@@ -7,7 +17,6 @@ import java.util.Stack;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
