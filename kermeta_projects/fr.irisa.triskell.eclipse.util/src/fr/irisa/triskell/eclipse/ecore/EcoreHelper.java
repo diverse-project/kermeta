@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreHelper.java,v 1.4 2007-07-31 08:24:37 ftanguy Exp $
+/*$Id: EcoreHelper.java,v 1.5 2007-09-04 07:59:41 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	EcoreHelper.java
 * License : EPL
@@ -90,33 +90,47 @@ public class EcoreHelper {
     	return mmURI;
 	}
 	
-	static public URI getCanonicalURI(URI uri) {
-		
-		if ( ! uri.toString().contains("..") )
-			return uri;
-		
-		List <String> usefullSegments = new ArrayList <String> ();
-		int cpt = 0;
-		String[] segments = uri.segments();
-		for ( int i = segments.length -1; i > -1; i-- ) {
-			
-			if ( segments[i].equals("..") )
-				cpt++;
-			else if ( cpt > 0 )
-				cpt--;
-			else
-				usefullSegments.add( segments[i] );
-			
-		}
-		Collections.reverse( usefullSegments );
-		String canonicalURIString = "platform:";
-		for ( String s : usefullSegments )
-			canonicalURIString += "/" + s;
-		
-		URI canonicalURI = URI.createURI(canonicalURIString);
-		return canonicalURI;
-		
-	}
+	/**
+	 * 
+	 * Transforming a uri containing substring like ../../ into a canonical uri.
+	 * 
+	 * @param uri
+	 * @return
+	 */
+    static public URI getCanonicalURI(URI uri) {
+        
+    	/*
+    	 * 
+    	 * Keeping the scheme : file or platform.
+    	 * 
+    	 */
+        String canonicalURIString = uri.scheme() + ":";
+       
+        if ( ! uri.toString().contains("..") )
+            return uri;
+       
+        List <String> usefullSegments = new ArrayList <String> ();
+        int cpt = 0;
+        String[] segments = uri.segments();
+        for ( int i = segments.length -1; i > -1; i-- ) {
+           
+            if ( segments[i].equals("..") )
+                cpt++;
+            else if ( cpt > 0 )
+                cpt--;
+            else
+                usefullSegments.add( segments[i] );
+           
+        }
+        Collections.reverse( usefullSegments );
+        //String canonicalURIString = "platform:";
+        for ( String s : usefullSegments )
+            canonicalURIString += "/" + s;
+       
+        URI canonicalURI = URI.createURI(canonicalURIString);
+        return canonicalURI;
+       
+    }
 	
 	/**
 	 * 
