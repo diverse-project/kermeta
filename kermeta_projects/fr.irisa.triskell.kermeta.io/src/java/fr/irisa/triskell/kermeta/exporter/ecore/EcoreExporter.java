@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.8 2007-08-27 09:30:05 cfaucher Exp $
+/*$Id: EcoreExporter.java,v 1.9 2007-09-04 13:15:08 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -498,8 +498,9 @@ public class EcoreExporter {
 				uri = rep + uri.substring(index+1);
 			}
 		} else {
-			uri = uri.replace(pathToRemove + "/", "");
-			uri = rep + uri;
+			String temp = uri.replace(pathToRemove + "/", "");
+			if ( ! uri.equals(temp) )
+				uri = rep + temp;
 		}
 
 		if ( fileName != null )
