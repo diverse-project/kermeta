@@ -1,4 +1,4 @@
-/*$Id: KMT2KM.java,v 1.1 2007-08-06 14:32:51 ftanguy Exp $
+/*$Id: KMT2KM.java,v 1.2 2007-09-04 08:14:03 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -42,7 +42,6 @@ public class KMT2KM implements IAction {
 			 * 
 			 */
 			String outputString = NameFilterHelper.getOuputString(unit, out);
-			IFile outputFile = ResourceHelper.getIFile( outputString );
 			
 			/*
 			 * 
@@ -79,9 +78,9 @@ public class KMT2KM implements IAction {
 			 * 
 			 * Display information to the user.
 			 * 
-			 */
+			 */		
 			monitor.beginTask("", 1);
-			monitor.subTask(inputFile.getName().toString() + " converted to " + outputFile.getName().toString());
+			monitor.subTask(inputFile.getName().toString() + " converted to " + outputString);
 			
 			
 			/*
@@ -104,15 +103,20 @@ public class KMT2KM implements IAction {
 			 * 
 			 */
 			if ( ! kermetaUnit.isErrored() ) {
+				int index = outputString.lastIndexOf("/");
+				String rep = "platform:/resource" + outputString.substring(0, index);
+				String fileName = "platform:/resource" + outputString;
 				KmExporter exporter = new KmExporter();
-				exporter.export(kermetaUnit, "");
+				exporter.export(kermetaUnit, rep, fileName);
 				/*
 				 * 
 				 * Refereshing the workspace to display the new file.
 				 * 
 				 */
 				try {
-					outputFile.refreshLocal(0, monitor);
+					IFile outputFile = ResourceHelper.getIFile( outputString );
+					if ( outputFile != null )
+						outputFile.refreshLocal(0, monitor);
 				} catch (CoreException e) {
 					e.printStackTrace();
 				}
