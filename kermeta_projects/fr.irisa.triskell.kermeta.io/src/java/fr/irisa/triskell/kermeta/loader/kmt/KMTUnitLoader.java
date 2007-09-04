@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.9 2007-09-04 08:29:33 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.10 2007-09-04 08:42:21 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -173,7 +173,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 				}
 			} else if ( currentState instanceof EcoreBuildingState ) {
 				Ecore2KMLoader loader = new Ecore2KMLoader();
-				loader.load( currentUnit.getUri(), false );
+				loader.load( currentUnit.getUri(), true );
 			} else if ( currentState instanceof JavaBuildingState ) {
 				JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader();
 				loader.load( currentUnit.getUri() );	
