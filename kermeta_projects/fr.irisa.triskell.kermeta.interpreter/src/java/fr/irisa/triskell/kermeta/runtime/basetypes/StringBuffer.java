@@ -1,3 +1,12 @@
+/* $Id: StringBuffer.java,v 1.2 2007-09-04 08:27:39 fmunoz Exp $
+* Project : fr.irisa.triskell.kermeta.interpreter
+* File : StringBuffer.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 03 September 2007
+* Author : Freddy Munoz
+*/ 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -5,9 +14,6 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
  * Basically this is a kermeta wrapper for java.lang.StringBuffer.
  * Just the operation append over String is supported
  * 
- * @author Freddy Munoz  (frmunoz(at)irisa.fr)
- * Triskell Research Group
- * IRISA / University of Rennes 1 (France)
  *
  */
 public class StringBuffer {
