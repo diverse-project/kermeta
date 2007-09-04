@@ -1,4 +1,4 @@
-/*$Id: WorkspaceDeltaVisitor.java,v 1.11 2007-07-24 13:47:12 ftanguy Exp $
+/*$Id: WorkspaceDeltaVisitor.java,v 1.12 2007-09-04 08:13:05 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -164,31 +164,39 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, Interest {
 			
 			/*
 			 * 
-			 * If the file is the kpm file of the project, we reload it.
+			 * We must be in a kermeta project.
 			 * 
 			 */
-			if ( file.equals(currentProject.getKpmIFile()) ) {
+			if ( currentProject != null ) {
 				
-				currentProject.reinitialize();
-				KPMHelper.addRulesForAll( currentProject.getKpm() );
-				
-			} else {
-			
-				Unit unit = currentProject.getKpm().findUnit( file.getFullPath().toString() );
-			
 				/*
 				 * 
-				 * Must unit be updated ?
-				 * 
+				 * If the file is the kpm file of the project, we reload it.
 				 * 
 				 */
-				boolean mustBeUpdated = false;
-				if ( file.getLocalTimeStamp() != unit.getLastTimeModified().getTime() )
-					mustBeUpdated = true;
+				if ( file.equals(currentProject.getKpmIFile()) ) {
+					
+					currentProject.reinitialize();
+					KPMHelper.addRulesForAll( currentProject.getKpm() );
+					
+				} else {
 				
-				if ( mustBeUpdated )
-					events.add( new EventToDispatch(unit, "update") );
-		//			unit.receiveAsynchroneEvent("update", null, null);
+					Unit unit = currentProject.getKpm().findUnit( file.getFullPath().toString() );
+				
+					/*
+					 * 
+					 * Must unit be updated ?
+					 * 
+					 * 
+					 */
+					boolean mustBeUpdated = false;
+					if ( file.getLocalTimeStamp() != unit.getLastTimeModified().getTime() )
+						mustBeUpdated = true;
+					
+					if ( mustBeUpdated )
+						events.add( new EventToDispatch(unit, "update") );
+			//			unit.receiveAsynchroneEvent("update", null, null);
+				}
 			}
 			break;
 			
