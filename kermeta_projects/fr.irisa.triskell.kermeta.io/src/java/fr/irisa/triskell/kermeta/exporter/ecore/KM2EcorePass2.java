@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.41 2007-08-27 09:30:05 cfaucher Exp $
+/* $Id: KM2EcorePass2.java,v 1.42 2007-09-04 08:23:30 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -15,6 +15,8 @@ package fr.irisa.triskell.kermeta.exporter.ecore;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+
+import javax.lang.model.element.TypeParameterElement;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EAttribute;
@@ -39,6 +41,7 @@ import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.behavior.StringLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
@@ -58,6 +61,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.loader.ecore.KM2ECoreConversionException;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TextTabs;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
@@ -225,11 +229,48 @@ public class KM2EcorePass2 extends KM2Ecore {
 		}
 		else {
 			if(opType != null) {
-				newEOperation.setEType((EClassifier) this.accept((EObject) opType));
+				EGenericType genericType = EcoreFactory.eINSTANCE.createEGenericType();
+				genericType.setEClassifier( (EClassifier) this.accept((EObject) opType) );
+				newEOperation.setEGenericType( genericType );
 				
-				if(opType instanceof ParameterizedType) {
-					setTypeVariableBindingsAnnotation((ParameterizedType) opType, newEOperation);
+				if ( opType instanceof Class ) {
+				
+					for ( TypeVariableBinding tvb : ((Class) opType).getTypeParamBinding() ) {
+					
+						TypeVariable tv = null;
+						TypeDefinition tdef = null;
+						if ( tvb.getType() instanceof Class ) {
+							tdef = ((Class) tvb.getType()).getTypeDefinition();
+						} else if ( tvb.getType() instanceof PrimitiveType ) {
+							tdef = (PrimitiveType) tvb.getType();
+						} else {
+							
+							Iterator<TypeVariable> it = ((ClassDefinition) node.eContainer()).getTypeParameter().iterator();
+							while ( (tv == null) && it.hasNext() ) {
+								TypeVariable temp = it.next();
+								if ( temp.getName().equals( ((ObjectTypeVariable) tvb.getType()).getName() ) )
+									tv = temp;
+							}
+
+						}
+
+						EGenericType type = EcoreFactory.eINSTANCE.createEGenericType();
+
+						if ( tv != null ) {
+							type.setETypeParameter( (ETypeParameter) km2ecoremapping.get(tv) );
+						} else if ( tdef != null ) {
+							type.setEClassifier( (EClassifier) km2ecoremapping.get(tdef) );
+						}
+						
+						genericType.getETypeArguments().add( type );
+						
+					}
+					
 				}
+				
+/*				if(opType instanceof ParameterizedType) {
+					setTypeVariableBindingsAnnotation((ParameterizedType) opType, newEOperation);
+				}*/
 			}
 		}
 
@@ -930,13 +971,15 @@ public class KM2EcorePass2 extends KM2Ecore {
 				qName = ((TypeVariable) bindingType).getName();
 			}
 			
+			
 			// Add annotation for current binding
-			addAnnotation(
+			//EGenericType
+			/*addAnnotation(
 					newElt,
 					KM2Ecore.ANNOTATION_TYPEVARIABLE_BINDINGS,
 					String.valueOf(i),
 					qName,
-					null);
+					null);*/
 			
 			// Increment counter
 			i++;
