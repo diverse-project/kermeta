@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.10 2007-09-04 08:42:21 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.11 2007-09-04 13:14:23 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -635,9 +635,11 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
     public void markErrors(KermetaUnit kermetaUnit) {
     	
     	List<RequireEntry> entries = requireEntries.get(kermetaUnit);
-    	for ( RequireEntry entry : entries ) {
-    		if ( entry.getImportedUnit().isErrored() )
-    			kermetaUnit.error("The file " + entry.getFileURI() + " contains error(s) : " + KermetaUnitHelper.getAllErrorsAsString(entry.getImportedUnit()), entry.getImportStmt());
+    	if ( entries != null ) {
+    		for ( RequireEntry entry : entries ) {
+    			if ( entry.getImportedUnit().isErrored() )
+    				kermetaUnit.error("The file " + entry.getFileURI() + " contains error(s) : " + KermetaUnitHelper.getAllErrorsAsString(entry.getImportedUnit()), entry.getImportStmt());
+    		}
     	}
        	
     }
