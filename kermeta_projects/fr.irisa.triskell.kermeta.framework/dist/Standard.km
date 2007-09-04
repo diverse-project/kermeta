@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages tag="//@packages.0/@ownedTag.0" name="kermeta">
-    <ownedTag value="/**&#xA; * The root package. See the other packages if you want to browse the classes of Kermeta api.&#xA; * &lt;img src=&quot;./figures/kermeta_packages.png&quot;>&#xA; */" object="//@packages.0"/>
+    <ownedTag value="/**&#xD;&#xA; * The root package. See the other packages if you want to browse the classes of Kermeta api.&#xD;&#xA; * &lt;img src=&quot;./figures/kermeta_packages.png&quot;>&#xD;&#xA; */" object="//@packages.0"/>
   </packages>
   <requires tag="//@requires.0/@ownedTag.0" uri="standard/collections.kmt">
-    <ownedTag value="/**&#xA; * The root package. See the other packages if you want to browse the classes of Kermeta api.&#xA; * &lt;img src=&quot;./figures/kermeta_packages.png&quot;>&#xA; */" object="//@requires.0"/>
+    <ownedTag value="/**&#xD;&#xA; * The root package. See the other packages if you want to browse the classes of Kermeta api.&#xD;&#xA; * &lt;img src=&quot;./figures/kermeta_packages.png&quot;>&#xD;&#xA; */" object="//@requires.0"/>
   </requires>
   <requires uri="language/behavior.kmt"/>
   <requires uri="reflection/reflection.kmt"/>

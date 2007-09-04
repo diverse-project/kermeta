@@ -2,9 +2,9 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/ecore/@ownedTag.0" name="ecore">
-      <ownedTag value="/** &#xA; * Contains the definition of a Kermeta classes used for compatibility with Ecore &#xA; */" object="//@packages.0/ecore"/>
+      <ownedTag value="/** &#xD;&#xA; * Contains the definition of a Kermeta classes used for compatibility with Ecore &#xD;&#xA; */" object="//@packages.0/ecore"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/ecore/EFeatureMapEntry/@ownedTag.0" name="EFeatureMapEntry" superType="//@packages.0/ecore/EFeatureMapEntry/@containedType.0">
-        <ownedTag value="/**&#xA; * Kermeta representation of EMF EFeatureMapEntry&#xA; * it contains the name of the required feature and the actual value&#xA; */" object="//@packages.0/ecore/EFeatureMapEntry"/>
+        <ownedTag value="/**&#xD;&#xA; * Kermeta representation of EMF EFeatureMapEntry&#xD;&#xA; * it contains the name of the required feature and the actual value&#xD;&#xA; */" object="//@packages.0/ecore/EFeatureMapEntry"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
@@ -22,7 +22,7 @@
     </nestedPackage>
   </packages>
   <requires tag="//@requires.0/@ownedTag.0" uri="../Standard.kmt">
-    <ownedTag value="/** &#xA; * Contains the definition of a Kermeta classes used for compatibility with Ecore &#xA; */" object="//@requires.0"/>
+    <ownedTag value="/** &#xD;&#xA; * Contains the definition of a Kermeta classes used for compatibility with Ecore &#xD;&#xA; */" object="//@requires.0"/>
   </requires>
   <usings qualifiedName="kermeta::ecore"/>
   <referencedModelingUnits href="../Standard.km#/"/>
