@@ -55,14 +55,14 @@
          <attribute name="name" type="string">
             <annotation>
                <documentation>
-                  Name of the diagram to give a more readable name of the registered diagram file.
+                  
                </documentation>
             </annotation>
          </attribute>
          <attribute name="kmt-or-km-as-Modeling-Unit-root" type="string" use="required">
             <annotation>
                <documentation>
-                  The EMF diagram file you want to register.
+                  
                </documentation>
                <appInfo>
                   <meta.attribute kind="resource"/>
@@ -79,7 +79,7 @@
          <attribute name="description" type="string">
             <annotation>
                <documentation>
-                  ID of the graphical editor used to open this file.
+                  
                </documentation>
             </annotation>
          </attribute>
@@ -161,7 +161,7 @@
          <meta.section type="examples"/>
       </appInfo>
       <documentation>
-           &lt;extension
+         &lt;extension
         point=&quot;org.kermeta.registration.kermetaModelingUnit&quot;&gt;
      &lt;kermetaModelingUnit
            DSL-in-ecore-file=&quot;dist/kermeta/Standard.ecore&quot;
