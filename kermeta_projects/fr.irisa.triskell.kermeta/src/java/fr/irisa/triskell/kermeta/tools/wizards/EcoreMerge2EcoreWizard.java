@@ -1,4 +1,4 @@
-/* $Id: EcoreMerge2EcoreWizard.java,v 1.5 2007-07-20 15:09:18 ftanguy Exp $
+/* $Id: EcoreMerge2EcoreWizard.java,v 1.6 2007-09-04 13:21:41 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -144,10 +145,13 @@ public class EcoreMerge2EcoreWizard extends Wizard {
 			u = URI.createURI(file.getFullPath().toString());
 			u = new URIConverterImpl().normalize(u);
 
-			EPackage model = (EPackage) resource_set.getResource(u, true)
-					.getContents().get(0);
-
-			result = PackageMerge.addModel(result, model);
+			Resource resource = resource_set.getResource(u, true);
+			for ( EObject o : resource.getContents() ) {
+				
+				if ( o instanceof EPackage )
+					result = PackageMerge.addModel( result, (EPackage) o );
+			}
+			
 		}
 		u = URI.createURI(ifile.getFullPath().toString());
 		u = new URIConverterImpl().normalize(u);
