@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.11 2007-07-24 13:46:46 ftanguy Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.12 2007-09-04 17:02:23 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -27,6 +27,7 @@ import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
@@ -42,7 +43,7 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
     
     Expression expression;
     ClassDefinition context;
-    ArrayList variables;
+    ArrayList<VariableDecl> variables;
 
     private LoadingContext loadingContext = new LoadingContext();
     
@@ -77,20 +78,20 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
     }
     
     
-    public void parse(String stringExpression, ClassDefinition context, Hashtable formalParams) throws Exception {
+    public void parse(String stringExpression, ClassDefinition context, Hashtable<String,Type> formalParams) throws Exception {
         
    		FExpression  ast_exp = parseString(stringExpression);
 
    		this.context = context;
-        variables = new ArrayList();
+        variables = new ArrayList<VariableDecl>();
         
         loadingContext.current_class = context;
         loadingContext.pushContext();
         
-        Enumeration e = formalParams.keys();
+        Enumeration<String> e = formalParams.keys();
         while(e.hasMoreElements()) {
-            String var_name = (String)e.nextElement();
-            Type var_type = (Type)formalParams.get(var_name);
+            String var_name = e.nextElement();
+            Type var_type = formalParams.get(var_name);
             VariableDecl var = BehaviorFactory.eINSTANCE.createVariableDecl();
             var.setIdentifier(var_name);
             
@@ -118,9 +119,9 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
        }
        checker.getContext().init(this);
        
-       Hashtable symbs = loadingContext.peekSymbols();
+       Hashtable<String, KMSymbol> symbs = loadingContext.peekSymbols();
        KMSymbolVariable var;
-       Iterator it = symbs.values().iterator();
+       Iterator<KMSymbol> it = symbs.values().iterator();
        
        while(it.hasNext()){
        		var = (KMSymbolVariable)it.next();
@@ -195,7 +196,7 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
         return expression;
     }
  
-    public ArrayList getVariables() {
+    public ArrayList<VariableDecl> getVariables() {
         return variables;
     }
 }
