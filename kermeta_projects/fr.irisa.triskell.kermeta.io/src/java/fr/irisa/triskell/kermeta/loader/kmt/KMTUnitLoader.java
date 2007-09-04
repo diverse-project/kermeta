@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.11 2007-09-04 13:14:23 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.12 2007-09-04 17:03:01 dvojtise Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.IBuildingState;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
