@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitHelper.java,v 1.7 2007-09-03 06:16:44 dvojtise Exp $
+/*$Id: KermetaUnitHelper.java,v 1.8 2007-09-04 08:40:28 dvojtise Exp $
 * Project : io
 * File : 	KermetaUnitHelper.java
 * License : EPL
@@ -34,13 +34,26 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 public class KermetaUnitHelper {
 
+	/**
+	 * returns a list of the KermetaUnit required units(directly or indirectly from this unit) doesn't contains 
+	 * the unit even if it is indirectly required
+	 * @param value
+	 * @return
+	 */
 	static public List <KermetaUnit> getAllImportedKermetaUnits(KermetaUnit value) {
 		List <KermetaUnit> units = new ArrayList <KermetaUnit> ();
 		if ( value != null )
 			getAllImportedKermetaUnits(value, units);
+		units.remove(value);  // if contains the value, remove it
 		return units;
 	}
 
+	/**
+	 * completes the list of KermetaUnit required units(directly or indirectly from this unit)
+	 * it may contains itself if it is indirectly required
+	 * @param value
+	 * @param units
+	 */
 	static private void getAllImportedKermetaUnits(KermetaUnit value, List <KermetaUnit> units) {
 		Iterator <KermetaUnit> iterator = value.getImportedKermetaUnits().iterator();
 		while ( iterator.hasNext() ) {
