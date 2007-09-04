@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.13 2007-08-21 09:18:59 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.14 2007-09-04 08:16:00 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -83,7 +83,13 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
+
 /*** BEGIN GENERATED TESTS ***/
+public void testvalid_001_oclcstvisitor() throws Exception {
+testvalidFile("test/constraintchecker_tests/valid","001_oclcstvisitor.kmt" );
+}
+
 public void testvalid_003_associations() throws Exception {
 testvalidFile("test/constraintchecker_tests/valid","003_associations.kmt" );
 }
@@ -122,6 +128,10 @@ testinvalidFile("test/constraintchecker_tests/invalid","001_cyclicinheritance_02
 
 public void testinvalid_001_cyclicinheritance_03() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","001_cyclicinheritance_03.kmt" );
+}
+
+public void testinvalid_002_oclcstvisitor() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","002_oclcstvisitor.kmt" );
 }
 
 public void testinvalid_003_associations_01() throws Exception {

@@ -34,7 +34,7 @@ public class GenerateJUnitTestSuite {
 		return template;
 	}
 
-	protected static String junitfile = "junit/kermeta_io/typechecker_test/JunitTestSuite.java";
+	protected static String junitfile = "test/junit/kermeta_io/typechecker_test/JunitTestSuite.java";
 
 	public static void main(String[] args) {
 		String tcs = "";
