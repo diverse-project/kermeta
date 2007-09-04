@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.63 2007-09-04 13:02:36 dtouzet Exp $
+/* $Id: Runtime2EMF.java,v 1.64 2007-09-04 16:44:07 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -179,6 +179,9 @@ public class Runtime2EMF {
 	 * of conversion from RuntimeObjects to EObjects : we don't yet update
 	 * completely each object. A second pass is done for this purpose in the
 	 * method simpleUpdateProperty
+	 * 
+	 * Ignore RO that belong to another Resource, as the save call the updateEMFModel on each of the other resources
+	 * they are already updated by themselve
 	 */
 	protected void fillRuntimeObjectList(RuntimeObject rObject)
 	{
@@ -222,8 +225,19 @@ public class Runtime2EMF {
 						return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
 					}*/
 				}
+				if(this.unit.associatedResource != fr.irisa.triskell.kermeta.runtime.language.Object.getContainingResource(rObject) ){
+					if(fr.irisa.triskell.kermeta.runtime.language.Object.getContainingResource(rObject) != rObject.getFactory().getMemory().voidINSTANCE){			
+						// Ignore RO that belong to another Resource, as the save call the updateEMFModel on each of the other resources
+						//  they are already updated by themselve 
+						RuntimeObject nameString = rObject.getProperties().get("name");
+						if(nameString != null) {
+							internalLog.info(" ignore update of Ecore internal object named : " + fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(nameString));
+						}
+						else internalLog.info(" ignore update of Ecore internal object : ");
+						return;
+					}				
+				}
 			}
-			
 			////////////////////////////////////////////////////////
 			// BEGIN PATCH dealing with unsynchronized containing
 			// resource between RO and associated emf object(s)
@@ -251,7 +265,10 @@ public class Runtime2EMF {
 			// END PATCH
 			////////////////////////////////////////////////////////
 			
+			
 			runtimeObjects.add(rObject);
+				
+				
 			// Now, get the RO repr. of the properties of this object
 			for (String prop_name : rObject.getProperties().keySet())
 			{
@@ -275,8 +292,8 @@ public class Runtime2EMF {
 		if (property.getData().containsKey("CollectionArrayList")
 				&& property.getData().get("CollectionArrayList") != null)
 		{   // For each feature of the collection of features
-			for (Object next : ((ArrayList) property.getData().get("CollectionArrayList")))
-				fillRuntimeObjectList((RuntimeObject) next);
+			for (RuntimeObject next : ((ArrayList<RuntimeObject>) property.getData().get("CollectionArrayList")))
+				fillRuntimeObjectList( next);
 		}
 		// If property is not an EList
 		else fillRuntimeObjectList(property);
@@ -336,12 +353,12 @@ public class Runtime2EMF {
 				if (property.getData().get("CollectionArrayList")!=null)
 				{
 					// For each feature of the collection of features
-					ArrayList colArr = (ArrayList) property.getData().get("CollectionArrayList");
+					ArrayList<RuntimeObject> colArr = (ArrayList<RuntimeObject>) property.getData().get("CollectionArrayList");
 					for(int i = colArr.size()-1; i >= 0 ; i--)
 					{
-						Object rcoll = colArr.get(i);
-						Object p_o = getOrCreatePropertyFromRuntimeObject((RuntimeObject) rcoll, feature);
-						if (p_o != null) { ((EList) eObject.eGet(feature)).add(0,p_o); }
+						RuntimeObject rcoll = colArr.get(i);
+						Object p_o = getOrCreatePropertyFromRuntimeObject( rcoll, feature);
+						if (p_o != null) { ((EList<Object>) eObject.eGet(feature)).add(0,p_o); }
 					}
 					internalLog.debug("     "+ rObject + "; \n\t" +
 							eObject + "; \n\t" +
@@ -438,9 +455,9 @@ public class Runtime2EMF {
 	 * @param property
 	 * @return
 	 */
-	private EList createEListFromRuntimeObject(RuntimeObject property) {
-		java.util.Collection arraylist = Collection.getArrayList(property);
-		return new BasicEList(arraylist);
+	private EList<?> createEListFromRuntimeObject(RuntimeObject property) {
+		java.util.Collection<?> arraylist = Collection.getArrayList(property);
+		return new BasicEList<Object>(arraylist);
 	}
 
 	/**
@@ -467,9 +484,9 @@ public class Runtime2EMF {
 			// retreives the repository
 		RuntimeObject roRepository = (RuntimeObject) unit.associatedResource.getProperties().get("repository");
 		RuntimeObject roResources = (RuntimeObject) roRepository.getProperties().get("resources");
-		for (Object next : ((ArrayList) roResources.getData().get("CollectionArrayList"))) 
+		for (RuntimeObject next : ((ArrayList<RuntimeObject>) roResources.getData().get("CollectionArrayList"))) 
 		{
-			RuntimeObject roResource = (RuntimeObject) next;
+			RuntimeObject roResource =  next;
 			if (roResource != unit.associatedResource){ // ignore the main resource metamodel
 				String res_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("metaModelURI"));						
 				res = unit.loadMetaModelAsEcore(res_uri);
@@ -580,7 +597,7 @@ public class Runtime2EMF {
 		String enum_literal_name = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) rObject
 				.getProperties().get("name"));
 		try {
-			Class c = type.getInstanceClass();
+			Class<?> c = type.getInstanceClass();
 			// we suppose this is an abstract enumerator ... and that it has a method getByName
 			Method m = c.getMethod("getByName", String.class);
 			// Get the name of the enumeration literal element
@@ -649,7 +666,7 @@ public class Runtime2EMF {
 	 */
 	protected EClass getEClassFromFQualifiedName(String kqname, Resource res) {
 		EClass result = null;
-		TreeIterator it = res.getAllContents();
+		TreeIterator<?> it = res.getAllContents();
 		// Is it a special converted kermeta type (which metamodel is NOT kermeta)
 		while (it.hasNext() && result == null) {
 			EObject obj = (EObject) it.next();
@@ -682,7 +699,7 @@ public class Runtime2EMF {
 		if (eenum_map.containsKey(enum_name))
 			result = eenum_map.get(enum_name);
 		else {
-			TreeIterator it = res.getAllContents();
+			TreeIterator<?> it = res.getAllContents();
 			// Is the enum literal available in the metamodel?
 			while (it.hasNext() && result == null) {
 				EObject obj = (EObject) it.next();

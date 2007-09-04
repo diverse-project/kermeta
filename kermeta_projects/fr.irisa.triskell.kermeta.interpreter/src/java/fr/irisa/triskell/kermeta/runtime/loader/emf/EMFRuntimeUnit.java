@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.50 2007-08-31 07:17:10 jmottu Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.51 2007-09-04 16:44:07 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -41,7 +41,6 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.util2.ResourceSetManager;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
@@ -182,7 +181,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		try {
 				
 			Boolean isFirst = true;
-	    	Iterator it = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().iterator();
+	    	Iterator<String> it = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().iterator();
 	    	while(it.hasNext()) {
 	    		if(!isFirst) msg += " | ";
 	    		else isFirst = false;
@@ -208,7 +207,6 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     	String emf_msg = "";
     	EMFRuntimeUnit unit = this;
     	XMLResource resource=null;
-	    KermetaUnit kunit =  unit.getContentMap().getFactory().getMemory().getUnit();
 		try {
 			
 			// Get URI of the unit correpsonding to the model to be loaded
@@ -217,8 +215,9 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			// register the extension of this uri into EMF
 			registerEMFextensionToFactoryMap(unit.getUriAsString());
 			// Special options for uri.map -> mapping platform:/... uris to os-dependent urls.
-			HashMap options = new HashMap();
-			ResourceSet resourceset = new ResourceSetImpl();
+			HashMap<String, Boolean> options = new HashMap<String, Boolean>();
+			// reuse the ResourceSet from the repository
+			ResourceSet resourceset = getOrCreateRepositoryResourceSetForResource(resRO);
 			
 			if(!metamodel_uri.equals("")){
 				// add the metamodel in the resourcesetregistry in order to make it load correctly
@@ -226,9 +225,9 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 				
 				Resource res = getMetaModelResource();
 				internalLog.debug("nb res for MM = "+findDependentResources(res).size());
-				Iterator resListIt = findDependentResources(res).listIterator();
+				Iterator<Resource> resListIt = findDependentResources(res).listIterator();
 				while(resListIt.hasNext()){
-					Resource mmRes = (Resource) resListIt.next();
+					Resource mmRes = resListIt.next();
 					for ( EObject o : mmRes.getContents() ) {
 						if ( o instanceof EPackage )
 							EMFRegistryHelper.safeRegisterPackages(reg, (EPackage) o);							
@@ -299,7 +298,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 					internalLog.error("EMF error diagnostic: "+((Resource.Diagnostic)errorDiag).getMessage());
 				for (Object errorDiag : resource.getWarnings())
 					internalLog.error("EMF warning diagnostic: "+((Resource.Diagnostic)errorDiag).getMessage());
-				Map extensionmap = resource.getEObjectToExtensionMap();
+				Map<EObject, ?> extensionmap = resource.getEObjectToExtensionMap();
 				for (Object o : extensionmap.entrySet())			
 					internalLog.error("EMF reports unknown feature: "+o + "; " + extensionmap.get(o));
 			}
@@ -391,20 +390,25 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			RuntimeObject rouseInterpreterInternalResources = (RuntimeObject) roRepository.getProperties().get("useInterpreterInternalResources");
 			useInterpreterInternalResources = rouseInterpreterInternalResources != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(rouseInterpreterInternalResources) : false;		
 			//	for each of the resources in the repository (other than the current one)
-        	for (Object next : ((ArrayList) roResources.getData().get("CollectionArrayList"))) 
+        	for (RuntimeObject next : ((ArrayList<RuntimeObject>) roResources.getData().get("CollectionArrayList"))) 
 			{
-				RuntimeObject roResource = (RuntimeObject) next;
+				RuntimeObject roResource = next;
 				if (roResource != associatedResource){
 					// get orcreate an emf resource for this Resource
 					String res_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("uri"));						
-					Resource res2 = updateEMFResource(roResource, createURI(res_uri));
-					
-					String mm_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("metaModelURI"));
-					RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
-	        			getConcreteFactory("EMF").createRuntimeUnit("", mm_uri, roResource) ;
-					runtime_unit.associatedResource = roResource;
-					Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
-					r2emf.updateEMFModel();					
+					/*if(res_uri.startsWith("platform:/plugin/")){ DVK doesn't work in some situations, sometimes the main upadte modify/update one of these object !? 
+						internalLog.info("ignoring update of readonly resource  "+ res_uri +" (ie. platform:/plugin/ )");
+					}
+					else{*/
+						Resource res2 = updateEMFResource(roResource, createURI(res_uri));
+						
+						String mm_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("metaModelURI"));
+						RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
+		        			getConcreteFactory("EMF").createRuntimeUnit("", mm_uri, roResource) ;
+						runtime_unit.associatedResource = roResource;
+						Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
+						r2emf.updateEMFModel();
+					//}
 				}
 			}
 
@@ -414,20 +418,25 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     		
         	// for each of the resources in the repository (other than the current one)    		
 			// update the models
-			for (Object next : ((ArrayList) roResources.getData().get("CollectionArrayList"))) 
+			for (RuntimeObject next : ((ArrayList<RuntimeObject>) roResources.getData().get("CollectionArrayList"))) 
 			{
-				RuntimeObject roResource = (RuntimeObject) next;
+				RuntimeObject roResource = next;
 				if (roResource != associatedResource){
 					// get orcreate an emf resource for this Resource
 					String res_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("uri"));						
-					Resource res2 = updateEMFResource(roResource, createURI(res_uri));
-					
-					String mm_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("metaModelURI"));
-					RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
-	        			getConcreteFactory("EMF").createRuntimeUnit("", mm_uri, roResource) ;
-					runtime_unit.associatedResource = roResource;
-					Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
-					r2emf.updateEMFModel();					
+					/*if(res_uri.startsWith("platform:/plugin/")){
+						internalLog.info("ignoring update of readonly resource "+ res_uri +"(ie. platform:/plugin/ cannot be changed)");
+					}
+					else{*/
+						Resource res2 = updateEMFResource(roResource, createURI(res_uri));
+										
+						String mm_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("metaModelURI"));
+						RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
+		        			getConcreteFactory("EMF").createRuntimeUnit("", mm_uri, roResource) ;
+						runtime_unit.associatedResource = roResource;
+						Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
+						r2emf.updateEMFModel();
+					//}
 				}
 			}
 	        
@@ -446,6 +455,11 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         catch (IOException e) {
         	// "t" can be of type Resource.IOWrappedException or DanglingHREFException
 		    Throwable t = e.getCause();
+	/*	    if(t instanceof org.eclipse.emf.ecore.xmi.DanglingHREFException){
+		    	String additionalInfo = "";
+		    	org.eclipse.emf.ecore.xmi.DanglingHREFException dhe = (org.eclipse.emf.ecore.xmi.DanglingHREFException)t;
+		    	
+		    }*/
 		    String msg = "Error saving EMF model '" + this.getUriAsString() + "'" +
 		    " :\n Error : \n    " + e.getMessage() + ((t!=null)?"\n Cause : \n    "+ t.getMessage():"");
 		    e.printStackTrace();
@@ -518,7 +532,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		RuntimeObject roRepository = (RuntimeObject) roResource.getProperties().get("repository");
 		resource_set = (ResourceSet)roRepository.getData().get("r2e.emfResourceset");
 		if(resource_set == null){
-			// need to create the resourceset too
+			// need to create the resourceSet
 			resource_set = new ResourceSetImpl();
 			roRepository.getData().put("r2e.emfResourceset", resource_set);
 		}
@@ -615,14 +629,14 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 */
 	public RuntimeObject getContentMapEntryFromString(String str)
 	{
-		Hashtable content_table = (Hashtable)this.getContentMap().getData().get("Hashtable");
+		Hashtable<RuntimeObject, RuntimeObject> content_table = (Hashtable<RuntimeObject,RuntimeObject>)this.getContentMap().getData().get("Hashtable");
 		RuntimeObject entry = null;
-		Iterator it = content_table.keySet().iterator();
+		Iterator<RuntimeObject> it = content_table.keySet().iterator();
 		while (it.hasNext() && entry == null)
 		{
-			RuntimeObject next = (RuntimeObject)it.next();
+			RuntimeObject next = it.next();
 			if (fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(next).equals(str))
-			{	entry = (RuntimeObject)content_table.get(next); }
+			{	entry = content_table.get(next); }
 		}
 		return entry;
 	}
@@ -733,7 +747,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		        if (fvalue instanceof EList)
 		        {   // Then, for each object of this EList-feature, add its hosting resource 
 		        	// into the list of dependent resources
-		    	    for (Object sfeature : ((EList)fvalue)) 
+		    	    for (Object sfeature : ((EList<?>)fvalue)) 
 		    	    {
 		    	    	// Ignore values which type is a base type (String,...) : we don't need to 
 		    	    	// precreate a runtime object for them. (will be created "on the fly")
@@ -779,7 +793,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	public boolean isFromEcoreMetaModel()
 	{
 		boolean result = false;
-		Iterator mmroots_iterator = this.getMetaModelResource().getContents().iterator();
+		Iterator<EObject> mmroots_iterator = this.getMetaModelResource().getContents().iterator();
 		while (mmroots_iterator.hasNext() && result == false)
 		{
 			Object mmroot = mmroots_iterator.next();
