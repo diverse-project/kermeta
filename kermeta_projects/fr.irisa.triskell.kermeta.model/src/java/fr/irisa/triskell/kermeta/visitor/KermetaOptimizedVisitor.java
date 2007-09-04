@@ -11,7 +11,7 @@ public class KermetaOptimizedVisitor {
 			.getLogger("KMT.model");
   /** The parent of the node currently visited. */
   protected fr.irisa.triskell.kermeta.language.structure.Object parent;
-	private static Hashtable acceptCmds = null;
+	private static Hashtable<String,AcceptCommand> acceptCmds = null;
  
   public void setParent(fr.irisa.triskell.kermeta.language.structure.Object parent) {
     this.parent = parent; }
@@ -20,7 +20,7 @@ public class KermetaOptimizedVisitor {
     return parent; }
 	private static AcceptCommand getAcceptCmd(EObject node) {
 		if (acceptCmds == null) {
-			acceptCmds = new Hashtable();
+			acceptCmds = new Hashtable<String,AcceptCommand>();
 			acceptCmds.put("Assignment",
 					new AssignmentAcceptCommand());
 			acceptCmds.put("Block",
@@ -125,39 +125,43 @@ public class KermetaOptimizedVisitor {
 					new VoidTypeAcceptCommand());
 
 		}
-		return (AcceptCommand) acceptCmds.get(node.eClass().getName());
+		return acceptCmds.get(node.eClass().getName());
 	}
 	// This is a generic visit method.
 	public Object genericVisitChildren(EObject node) {
 		Object result = null;
-		Iterator children = node.eContents().iterator();
+		Iterator<EObject> children = node.eContents().iterator();
 		while (children.hasNext()) {
-			EObject child = (EObject) children.next();
+			EObject child = children.next();
 			accept(child);
 		}
 		return result;
 	}
 	public Object accept(EObject node) {
 		// Throw an error if the node is null
-		if (node == null) {
-          String msg = "Error in visitor: ";          if (parent!=null) {
-              msg += "   (when visiting parent\n    '" + parent.getClass().getName() + "'";
-	            if (parent instanceof NamedElement) msg += "\n    parent's name: '" + ((NamedElement)parent).getName() + "')\n";
-              else if (parent instanceof VariableDecl) msg += "\n    parent's name (it's a variable): '" + ((VariableDecl)parent).getIdentifier() + "')\n";
- }
-			throw new Error(msg);
+      if (node == null) {
+          String msg = "Error in visitor: visited node is null";
+          if (parent!=null) {
+             msg += "   (when visiting parent\n    '" + parent.getClass().getName() + "'";
+             if (parent instanceof NamedElement) 
+                msg += "\n    parent's name: '" + ((NamedElement)parent).getName() + "')\n";
+             else if (parent instanceof VariableDecl) 
+                msg += "\n    parent's name (it's a variable): '" + ((VariableDecl)parent).getIdentifier() + "')\n";
+          }
+          throw new Error(msg);
 		}
 		// Get the accept command
 		AcceptCommand cmd = getAcceptCmd(node);
 		// Throw an error is the command is null
 		if (cmd == null) {
          String msg = "Error in visitor : no strategy to handle node of type "
-							+ node.getClass().getName();         if (parent!=null) {
+                 + node.getClass().getName();
+         if (parent!=null) {
              msg += "   (when visiting parent '" + parent.getClass().getName() + "'";
-	           if (parent instanceof NamedElement) msg += " named: '" + ((NamedElement)parent).getName() + "')";
+             if (parent instanceof NamedElement) msg += " named: '" + ((NamedElement)parent).getName() + "')";
              else if (parent instanceof VariableDecl) msg += " named: '" + ((VariableDecl)parent).getIdentifier() + "')";
- }
-		   throw new Error(msg);
+          }
+         throw new Error(msg);
 		}
 		// accept the node
 		return cmd.accept(node, this);

@@ -1,4 +1,4 @@
-/* $Id: CreateOptimizedVisitor.java,v 1.6 2007-07-20 15:09:04 ftanguy Exp $
+/* $Id: CreateOptimizedVisitor.java,v 1.7 2007-09-04 15:29:46 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : GPL
@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+
 //import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 //import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 
@@ -50,7 +51,7 @@ public class CreateOptimizedVisitor {
 	 */
 	public static void main(String[] args) {
 		
-		String ecorefile = args[0];
+		//String ecorefile = args[0];
 		String packagename = args[1];
 		String outdir = args[2];		
 		String className = args[3];
@@ -67,9 +68,9 @@ public class CreateOptimizedVisitor {
 		
 		String methods = "";
 		// add a method per concrete class
-		TreeIterator it = resource.getAllContents();
+		TreeIterator<EObject> it = resource.getAllContents();
 		while(it.hasNext()) {
-			EObject o = (EObject)it.next();
+			EObject o = it.next();
 			if (o instanceof EClass) {
 				EClass c = (EClass)o;
 				if (!c.isAbstract()) {
@@ -185,22 +186,22 @@ public class CreateOptimizedVisitor {
 
 			classTemplate += "  /** The parent of the node currently visited. */\n";
 			classTemplate += "  protected fr.irisa.triskell.kermeta.language.structure.Object parent;\n";
-			classTemplate += "	private static Hashtable acceptCmds = null;\n";
+			classTemplate += "	private static Hashtable<String,AcceptCommand> acceptCmds = null;\n";
 			classTemplate += getParentAttributeAccessors();
 			classTemplate += "	private static AcceptCommand getAcceptCmd(EObject node) {\n";
 			classTemplate += "		if (acceptCmds == null) {\n";
-			classTemplate += "			acceptCmds = new Hashtable();\n";
+			classTemplate += "			acceptCmds = new Hashtable<String,AcceptCommand>();\n";
 			classTemplate += "XinitCmdsX\n";
 			classTemplate += "		}\n";
-			classTemplate += "		return (AcceptCommand) acceptCmds.get(node.eClass().getName());\n";
+			classTemplate += "		return acceptCmds.get(node.eClass().getName());\n";
 			classTemplate += "	}\n";
 
 			classTemplate += "	// This is a generic visit method.\n";
 			classTemplate += "	public Object genericVisitChildren(EObject node) {\n";
 			classTemplate += "		Object result = null;\n";
-			classTemplate += "		Iterator children = node.eContents().iterator();\n";
+			classTemplate += "		Iterator<EObject> children = node.eContents().iterator();\n";
 			classTemplate += "		while (children.hasNext()) {\n";
-			classTemplate += "			EObject child = (EObject) children.next();\n";
+			classTemplate += "			EObject child = children.next();\n";
 			classTemplate += "			accept(child);\n";
 			classTemplate += "		}\n";
 			classTemplate += "		return result;\n";
@@ -209,13 +210,15 @@ public class CreateOptimizedVisitor {
 			classTemplate += "	public Object accept(EObject node) {\n";
 
 			classTemplate += "		// Throw an error if the node is null\n";
-			classTemplate += "		if (node == null) {\n";
-			classTemplate += "          String msg = \"Error in visitor: \";";
+			classTemplate += "      if (node == null) {\n";
+			classTemplate += "          String msg = \"Error in visitor: visited node is null\";\n";
 			classTemplate += "          if (parent!=null) {\n";
-			classTemplate += "              msg += \"   (when visiting parent\\n    '\" + parent.getClass().getName() + \"'\";\n";
-			classTemplate += "	            if (parent instanceof NamedElement) msg += \"\\n    parent's name: '\" + ((NamedElement)parent).getName() + \"')\\n\";\n";
-			classTemplate += "              else if (parent instanceof VariableDecl) msg += \"\\n    parent's name (it's a variable): '\" + ((VariableDecl)parent).getIdentifier() + \"')\\n\";\n }\n";
-			classTemplate += "			throw new Error(msg);\n";
+			classTemplate += "             msg += \"   (when visiting parent\\n    '\" + parent.getClass().getName() + \"'\";\n";
+			classTemplate += "             if (parent instanceof NamedElement) \n";
+			classTemplate += "                msg += \"\\n    parent's name: '\" + ((NamedElement)parent).getName() + \"')\\n\";\n";
+			classTemplate += "             else if (parent instanceof VariableDecl) \n";
+			classTemplate += "                msg += \"\\n    parent's name (it's a variable): '\" + ((VariableDecl)parent).getIdentifier() + \"')\\n\";\n          }\n";
+			classTemplate += "          throw new Error(msg);\n";
 			classTemplate += "		}\n";
 
 			classTemplate += "		// Get the accept command\n";
@@ -224,12 +227,12 @@ public class CreateOptimizedVisitor {
 			classTemplate += "		// Throw an error is the command is null\n";
 			classTemplate += "		if (cmd == null) {\n";
 			classTemplate += "         String msg = \"Error in visitor : no strategy to handle node of type \"\n";
-			classTemplate += "							+ node.getClass().getName();";
+			classTemplate += "                 + node.getClass().getName();\n";
 			classTemplate += "         if (parent!=null) {\n";
 			classTemplate += "             msg += \"   (when visiting parent '\" + parent.getClass().getName() + \"'\";\n";
-			classTemplate += "	           if (parent instanceof NamedElement) msg += \" named: '\" + ((NamedElement)parent).getName() + \"')\";\n";
-			classTemplate += "             else if (parent instanceof VariableDecl) msg += \" named: '\" + ((VariableDecl)parent).getIdentifier() + \"')\";\n }\n";
-			classTemplate += "		   throw new Error(msg);\n";
+			classTemplate += "             if (parent instanceof NamedElement) msg += \" named: '\" + ((NamedElement)parent).getName() + \"')\";\n";
+			classTemplate += "             else if (parent instanceof VariableDecl) msg += \" named: '\" + ((VariableDecl)parent).getIdentifier() + \"')\";\n          }\n";
+			classTemplate += "         throw new Error(msg);\n";
 			classTemplate += "		}\n";
 
 			classTemplate += "		// accept the node\n";
