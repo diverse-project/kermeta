@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.30 2007-08-08 13:00:01 dvojtise Exp $
+/* $Id: RuntimeObject.java,v 1.31 2007-09-04 13:01:29 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -83,6 +83,11 @@ public class RuntimeObject {
 	 */
 	private RuntimeObjectFactory factory;
 	
+	public static final String STRING_VALUE = "StringValue";
+	public static final String STRING_BUFFER_VALUE = "StringBufferValue";
+	public static final String BOOLEAN_VALUE = "BooleanValue";
+		public static final String NUMERIC_VALUE = "NumericValue";
+	
 	/**
 	 * The constructor
 	 */
@@ -119,10 +124,10 @@ public class RuntimeObject {
 	 */
     public int hashCode() {
     	// try with a StringValue
-    	Object val = getData().get("StringValue");
+    	Object val = getData().get(STRING_VALUE);
         if (val != null) return val.hashCode();
         // try with a numericValue
-        val = getData().get("NumericValue");
+        val = getData().get(NUMERIC_VALUE);
         if (val != null) return val.hashCode();
         // if the object defines a hashcode method (other than the default one deined on object), use it
         fr.irisa.triskell.kermeta.language.structure.Class t_target =(fr.irisa.triskell.kermeta.language.structure.Class)(getMetaclass()).getData().get("kcoreObject");
@@ -169,21 +174,38 @@ public class RuntimeObject {
             RuntimeObject other = (RuntimeObject)arg0;
             
             // optimisation : do not use the kermeta version of equals on some types ...
-            if (getData().containsKey("StringValue") || other.getData().containsKey("StringValue")) {
-            	if (getData().containsKey("StringValue") && other.getData().containsKey("StringValue")) {
-                    return getData().get("StringValue").equals(other.getData().get("StringValue"));
+            RuntimeObject selfString = (RuntimeObject) getData().get(STRING_VALUE);
+            RuntimeObject otherString = (RuntimeObject) other.getData().get(STRING_VALUE);
+            if (selfString != null || otherString != null) {
+            	if (selfString != null && otherString != null) {
+                    return selfString.equals(otherString);
                 }
             	else return false;
             }
-            if (getData().containsKey("NumericValue") || other.getData().containsKey("NumericValue")) {
-            	if (getData().containsKey("NumericValue") && other.getData().containsKey("NumericValue")) {
-                    return getData().get("NumericValue").equals(other.getData().get("NumericValue"));
+            
+            RuntimeObject selfStringBuffer = (RuntimeObject) getData().get(STRING_BUFFER_VALUE);
+            RuntimeObject otherStringBuffer = (RuntimeObject) other.getData().get(STRING_BUFFER_VALUE);
+            if (selfStringBuffer != null || otherStringBuffer != null) {
+            	if (selfStringBuffer != null && otherStringBuffer != null) {
+                    return selfStringBuffer.equals(otherStringBuffer);
                 }
             	else return false;
             }
-            if (getData().containsKey("BooleanValue") || other.getData().containsKey("BooleanValue")) {
-            	if (getData().containsKey("BooleanValue") && other.getData().containsKey("BooleanValue")) {
-                    return getData().get("BooleanValue").equals(other.getData().get("BooleanValue"));
+            
+            RuntimeObject selfNumeric = (RuntimeObject) getData().get(NUMERIC_VALUE);
+            RuntimeObject otherNumeric = (RuntimeObject) other.getData().get(NUMERIC_VALUE);
+            if (selfNumeric != null || otherNumeric != null) {
+            	if (selfNumeric != null && otherNumeric != null) {
+                    return selfNumeric.equals(otherNumeric);
+                }
+            	else return false;
+            }
+            
+            RuntimeObject selfBoolean = (RuntimeObject) getData().get(BOOLEAN_VALUE);
+            RuntimeObject otherBoolean = (RuntimeObject) other.getData().get(BOOLEAN_VALUE);
+            if (selfBoolean != null || otherBoolean != null) {
+            	if (selfBoolean != null && otherBoolean != null) {
+                    return selfBoolean.equals(otherBoolean);
                 }
             	else return false;
             }
@@ -368,15 +390,19 @@ public class RuntimeObject {
 	    String class_name = "< No Metaclass ! >";
 	    try {
 	        class_name = NamedElementHelper.getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)metaclass.getData().get("kcoreObject")).getTypeDefinition());
-		    String sValue = (String)getData().get("StringValue");
+		    String sValue = (String)getData().get(STRING_VALUE);
 		    if(sValue != null)
 		    	return "[" + class_name + " : "+ oId +" = \"" +sValue+"\"]";
 		    
-		    Boolean bValue = (Boolean)getData().get("BooleanValue");
+		    String sbValue = ((fr.irisa.triskell.kermeta.runtime.basetypes.StringBuffer)getData().get(STRING_BUFFER_VALUE)).toString();
+		    if(sbValue != null)
+		    	return "[" + class_name + " : "+ oId +" = \"" +sbValue+"\"]";
+		    
+		    Boolean bValue = (Boolean)getData().get(BOOLEAN_VALUE);
 		    if(bValue != null)
 		    	return "[" + class_name + " : "+ oId +" = " +bValue+"]";
 		    
-		    Object nValue = getData().get("NumericValue");
+		    Object nValue = getData().get(NUMERIC_VALUE);
 		    if(nValue != null)
 		    	return "[" + class_name + " : "+ oId +" = " +nValue+"]";
 	    }
@@ -395,15 +421,19 @@ public class RuntimeObject {
 	    String class_name = "< No Metaclass ! >";
 	    try {
 	        class_name = NamedElementHelper.getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)metaclass.getData().get("kcoreObject")).getTypeDefinition());
-		    String sValue = (String)getData().get("StringValue");
+		    String sValue = (String)getData().get(STRING_VALUE);
 		    if(sValue != null)
 		    	return "\"" +sValue+"\"";
 		    
-		    Boolean bValue = (Boolean)getData().get("BooleanValue");
+		    String sbValue = ((fr.irisa.triskell.kermeta.runtime.basetypes.StringBuffer)getData().get(STRING_BUFFER_VALUE)).toString();
+		    if(sbValue != null)
+		    	return "\"" +sbValue+"\"";
+		    
+		    Boolean bValue = (Boolean)getData().get(BOOLEAN_VALUE);
 		    if(bValue != null)
 		    	return "" + bValue;
 		    
-		    Object nValue = getData().get("NumericValue");
+		    Object nValue = getData().get(NUMERIC_VALUE);
 		    if(nValue != null)
 		    	return "" +nValue;
 	    }
