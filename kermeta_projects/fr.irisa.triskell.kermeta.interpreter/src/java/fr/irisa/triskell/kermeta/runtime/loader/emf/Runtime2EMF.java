@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.62 2007-08-28 09:18:34 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.63 2007-09-04 13:02:36 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -223,6 +223,34 @@ public class Runtime2EMF {
 					}*/
 				}
 			}
+			
+			////////////////////////////////////////////////////////
+			// BEGIN PATCH dealing with unsynchronized containing
+			// resource between RO and associated emf object(s)
+			RuntimeObject resRO = fr.irisa.triskell.kermeta.runtime.language.Object.getContainingResource(rObject);
+			Resource refRes = fr.irisa.triskell.kermeta.runtime.basetypes.Resource.getEmfResource(resRO);
+			
+			EObject eObj = (EObject) rObject.getData().get("emfObject");
+			if(eObj != null){
+				Resource res = eObj.eResource();
+				if(res != null) {
+					if(res != refRes) {
+						res.getContents().remove(eObj);
+					}
+				}
+			}
+			eObj = (EObject) rObject.getData().get("r2e.emfObject");
+			if(eObj != null){
+				Resource res = eObj.eResource();
+				if(res != null) {
+					if(res != refRes) {
+						res.getContents().remove(eObj);
+					}
+				}
+			}
+			// END PATCH
+			////////////////////////////////////////////////////////
+			
 			runtimeObjects.add(rObject);
 			// Now, get the RO repr. of the properties of this object
 			for (String prop_name : rObject.getProperties().keySet())
