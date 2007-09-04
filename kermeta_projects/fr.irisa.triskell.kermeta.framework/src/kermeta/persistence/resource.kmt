@@ -8,7 +8,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.35 2007-08-30 12:24:35 dvojtise Exp $
+ * $Id: resource.kmt,v 1.36 2007-09-04 08:08:53 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -103,7 +103,7 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	 * or an empty set if the Resource is empty
 	 */
 	property readonly contents : set Object[0..*] getter is do
-		var res : Set<Object> init Set<Object>.new
+		var res : Set<kermeta::language::structure::Object> init Set<kermeta::language::structure::Object>.new
 		res.addAll(self)
 		
 		var coll : Set<kermeta::language::structure::Object>

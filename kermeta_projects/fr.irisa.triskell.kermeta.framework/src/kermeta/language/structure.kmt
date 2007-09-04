@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.47 2007-08-14 12:19:40 vmahe Exp $
+/* $Id: structure.kmt,v 1.48 2007-09-04 08:08:53 ftanguy Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -224,7 +224,7 @@ abstract class ParameterizedType inherits Type, kermeta::reflection::Parameteriz
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
 		do
 			result := visitor.visitParameterizedType(self, context)
 		end
@@ -239,7 +239,7 @@ class ModelType inherits Type, TypeDefinition, kermeta::reflection::ModelType, K
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
 		do
 			result := visitor.visitModelType(self, context)
 		end
@@ -306,14 +306,14 @@ class Class inherits ParameterizedType, kermeta::reflection::Class, KMStructureV
 	/**
  	 * Implements kermeta::language::structure::Object.equals(Object)
  	 */	
-	method equals(other : kermeta::reflection::Object) : Boolean from Object is do
+	method equals(other : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.equals(self, other)
 	end
 
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::ParameterizedType is
 	do
 		result := visitor.visitClass(self, context)
 	end
@@ -328,7 +328,7 @@ class MultiplicityElement inherits TypedElement, kermeta::reflection::Multiplici
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::TypedElement is
 		do
 			result := visitor.visitMultiplicityElement(self, context)
 		end
@@ -358,7 +358,7 @@ class Constraint inherits kermeta::reflection::Constraint,NamedElement,kermeta::
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::NamedElement is
 		do
 			result := visitor.visitConstraint(self, context)
 		end
@@ -397,7 +397,7 @@ class Operation inherits MultiplicityElement, kermeta::reflection::Operation, KM
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::MultiplicityElement is
 		do
 			result := visitor.visitOperation(self, context)
 		end
@@ -437,7 +437,7 @@ class Property inherits MultiplicityElement, kermeta::reflection::Property, KMSt
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::MultiplicityElement is
 		do
 			result := visitor.visitProperty(self, context)
 		end
@@ -468,7 +468,7 @@ class GenericTypeDefinition inherits TypeDefinition, kermeta::reflection::Generi
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::TypeDefinition is
 		do
 			result := visitor.visitGenericTypeDefinition(self, context)
 		end
@@ -483,7 +483,7 @@ class ClassDefinition inherits TypeContainer, GenericTypeDefinition, kermeta::re
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::GenericTypeDefinition is
 		do
 			result := visitor.visitClassDefinition(self, context)
 		end
@@ -498,7 +498,7 @@ class TypedElement inherits TypeContainer, NamedElement, kermeta::reflection::Ty
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::NamedElement is
 		do
 			result := visitor.visitTypedElement(self, context)
 		end
@@ -521,7 +521,7 @@ class ObjectTypeVariable inherits TypeContainer, TypeVariable, kermeta::reflecti
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
 		do
 			result := visitor.visitObjectTypeVariable(self, context)
 		end
@@ -536,7 +536,7 @@ class VirtualType inherits ObjectTypeVariable, kermeta::reflection::VirtualType,
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::ObjectTypeVariable is
 		do
 			result := visitor.visitVirtualType(self, context)
 		end
@@ -551,7 +551,7 @@ class ModelTypeVariable inherits TypeVariable, TypeContainer, VirtualTypeContain
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
 		do
 			result := visitor.visitModelTypeVariable(self, context)
 		end
@@ -641,7 +641,7 @@ class ProductType inherits TypeContainer, Type, kermeta::reflection::ProductType
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
 		do
 			result := visitor.visitProductType(self, context)
 		end
@@ -656,7 +656,7 @@ class FunctionType inherits TypeContainer, Type, kermeta::reflection::FunctionTy
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
 		do
 			result := visitor.visitFunctionType(self, context)
 		end
@@ -720,7 +720,7 @@ class PrimitiveType inherits TypeContainer, DataType, kermeta::reflection::Primi
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::DataType is
 	do
 		result := visitor.visitPrimitiveType(self, context)
 	end
@@ -764,7 +764,7 @@ class TypeDefinitionContainer inherits NamedElement, kermeta::reflection::TypeDe
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::NamedElement is
 		do
 			result := visitor.visitTypeDefinitionContainer(self, context)
 		end
@@ -779,7 +779,7 @@ class Package inherits TypeDefinitionContainer, kermeta::reflection::Package, KM
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::TypeDefinitionContainer is
 		do
 			result := visitor.visitPackage(self, context)
 		end
@@ -853,7 +853,7 @@ class TypeDefinition inherits NamedElement, kermeta::reflection::TypeDefinition,
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::NamedElement is
 		do
 			result := visitor.visitTypeDefinition(self, context)
 		end
@@ -868,7 +868,7 @@ class VoidType inherits Type, kermeta::reflection::VoidType, KMStructureVisitabl
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
 		do
 			result := visitor.visitVoidType(self, context)
 		end
@@ -883,7 +883,7 @@ class DataType inherits TypeDefinition, Type, kermeta::reflection::DataType, KMS
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::Type is
 		do
 			result := visitor.visitDataType(self, context)
 		end
@@ -903,7 +903,7 @@ class Enumeration inherits DataType, kermeta::reflection::Enumeration, KMStructu
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::DataType is
 		do
 			result := visitor.visitEnumeration(self, context)
 		end
@@ -926,7 +926,7 @@ class EnumerationLiteral inherits NamedElement, kermeta::reflection::Enumeration
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::NamedElement is
 		do
 			result := visitor.visitEnumerationLiteral(self, context)
 		end
@@ -941,7 +941,7 @@ class Parameter inherits MultiplicityElement, kermeta::reflection::Parameter, KM
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::MultiplicityElement is
 		do
 			result := visitor.visitParameter(self, context)
 		end

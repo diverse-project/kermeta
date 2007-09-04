@@ -1,4 +1,4 @@
-/* $Id: behavior.kmt,v 1.22 2007-08-14 12:19:40 vmahe Exp $
+/* $Id: behavior.kmt,v 1.23 2007-09-04 08:08:53 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : behavior.kmt
  * License   : EPL
@@ -162,7 +162,7 @@ class CallResult inherits CallVariable, KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on CallFeature objects
 	 */
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::CallVariable is
 		do
 			result := visitor.visitCallResult(self, context)
 		end
