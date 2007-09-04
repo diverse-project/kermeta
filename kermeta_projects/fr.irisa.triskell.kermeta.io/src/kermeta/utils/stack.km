@@ -15,6 +15,7 @@
         <ownedOperation tag="//@packages.0/utils/Stack/push/@ownedTag.0" name="push" type="//@packages.0/utils/Stack/push/@containedType.0" isOrdered="true" upper="1">
           <ownedTag value="/**&#xD;&#xA;  * Pushes an element in the stack&#xD;&#xA;  */" object="//@packages.0/utils/Stack/push"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
+          <ownedParameter name="element" type="//@packages.0/utils/Stack/G" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block">
             <staticType href="../standard/collections.km#//@packages.0/standard/OrderedCollection/addAt/@containedType.0"/>
             <statement xsi:type="kermeta_language_behavior:CallFeature" name="addAt">
@@ -25,15 +26,14 @@
                 </containedType>
               </parameters>
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/Stack/G" name="element"/>
-              <staticOperation href="../standard/collections.km#//@packages.0/standard/OrderedCollection/addAt"/>
               <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/utils/Stack/push/@body/@statement.0/@target/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/utils/Stack">
                   <typeParamBinding variable="//@packages.0/utils/Stack/G" type="//@packages.0/utils/Stack/G"/>
                 </containedType>
               </target>
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/OrderedCollection/addAt"/>
             </statement>
           </body>
-          <ownedParameter name="element" type="//@packages.0/utils/Stack/G" isOrdered="true" upper="1"/>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/Stack/peek/@ownedTag.0" name="peek" type="//@packages.0/utils/Stack/G" isOrdered="true" upper="1">
           <ownedTag value="/**&#xD;&#xA;  * Gets the element at the top of the stack&#xD;&#xA;  */" object="//@packages.0/utils/Stack/peek"/>
@@ -41,12 +41,12 @@
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Stack/G">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Stack/G" name="result"/>
               <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Stack/G" name="first">
-                <staticOperation href="../standard/collections.km#//@packages.0/standard/OrderedCollection/first"/>
                 <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/utils/Stack/peek/@body/@statement.0/@value/@target/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/utils/Stack">
                     <typeParamBinding variable="//@packages.0/utils/Stack/G" type="//@packages.0/utils/Stack/G"/>
                   </containedType>
                 </target>
+                <staticOperation href="../standard/collections.km#//@packages.0/standard/OrderedCollection/first"/>
               </value>
             </statement>
           </body>
@@ -62,12 +62,12 @@
             <statement xsi:type="kermeta_language_behavior:CallFeature" name="removeAt">
               <staticType href="../standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@containedType.0"/>
               <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/utils/Stack/push/@body/@statement.0/@parameters.0/@containedType.0"/>
-              <staticOperation href="../standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt"/>
               <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/utils/Stack/pop/@body/@statement.1/@target/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/utils/Stack">
                   <typeParamBinding variable="//@packages.0/utils/Stack/G" type="//@packages.0/utils/Stack/G"/>
                 </containedType>
               </target>
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt"/>
             </statement>
           </body>
         </ownedOperation>

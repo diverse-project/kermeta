@@ -4,8 +4,8 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::utils|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/utils/hashtable.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="utils" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/utils/hashtable.ecore#//utils" nsPrefix="utils">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/hashtable.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="utils" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/hashtable.ecore#//utils" nsPrefix="utils">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/** &#xD;&#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xD;&#xA; * metamodel&#xD;&#xA; * &#xD;&#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;>&#xD;&#xA; */"/>
       </eAnnotations>
@@ -125,7 +125,6 @@
     <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
     <references href="../language/behavior.ecore#/2"/>
@@ -155,6 +154,7 @@
     <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../exceptions/exceptions.ecore#/2"/>
@@ -169,6 +169,5 @@
     <references href="../ecore/ecore_compatibility.ecore#/2"/>
     <references href="StringBuffer.ecore#/0"/>
     <references href="StringBuffer.ecore#/1"/>
-    <references href="StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

@@ -4,8 +4,8 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::language::structure|kermeta::exceptions|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/standard/primitive_types.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="standard" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/standard/primitive_types.ecore#//standard" nsPrefix="standard">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/primitive_types.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="standard" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/primitive_types.ecore#//standard" nsPrefix="standard">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xD;&#xA; * Defines primitive types &#xD;&#xA; * &lt;img src=&quot;./figures/primitive_types_view.png&quot;>&#xD;&#xA; */"/>
       </eAnnotations>
@@ -484,6 +484,14 @@
           </eAnnotations>
           <eParameters name="other" eType="/1/standard/String"/>
         </eOperations>
+        <eOperations name="append">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::String.append(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Appends other at the end of self&#xD;&#xA;  * A more efficient method is kermeta::utils::StringBuffer::append(other)&#xD;&#xA;  */"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eParameters name="other" eType="/1/standard/String"/>
+        </eOperations>
         <eOperations name="elementAt" eType="/1/standard/Character">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if ((index) &lt; (0)) or ((index) > ((size) - (1))) then&#xA;&#x9;&#x9;raise kermeta::exceptions::StringIndexOutOfBound.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.elementAt(self, index)&#xA;&#xA;&#x9;end&#xA;end"/>
@@ -584,6 +592,7 @@
     <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../utils/stack.ecore#/2"/>
@@ -592,6 +601,7 @@
     <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../exceptions/exceptions.ecore#/2"/>

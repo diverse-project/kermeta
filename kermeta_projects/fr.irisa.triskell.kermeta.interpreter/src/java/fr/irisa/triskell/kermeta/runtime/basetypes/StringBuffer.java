@@ -1,4 +1,4 @@
-/* $Id: StringBuffer.java,v 1.3 2007-09-04 13:01:29 cfaucher Exp $
+/* $Id: StringBuffer.java,v 1.4 2007-09-04 13:28:09 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : StringBuffer.java
 * License : EPL
@@ -72,8 +72,7 @@ public class StringBuffer {
 	 * @return
 	 */
 	private static java.lang.StringBuffer createStringBuffer(RuntimeObject self,int size){
-	
-	return null;
+		return null;
 	}
 	
 	/**
@@ -83,7 +82,6 @@ public class StringBuffer {
 	 * @return
 	 */
 	private static RuntimeObject createStringBuffer(RuntimeObject self, RuntimeObject arg0){
-		
 		return null;
 	}
 }

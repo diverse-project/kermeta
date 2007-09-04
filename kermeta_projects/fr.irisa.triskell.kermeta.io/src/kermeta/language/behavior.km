@@ -53,6 +53,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on CallFeature objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -61,17 +68,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallVariable"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/CallVariable/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/CallFeature/@ownedTag.0" name="CallFeature" superType="//@packages.0/language/behavior/CallFeature/@containedType.0 //@packages.0/language/behavior/CallFeature/@containedType.1">
@@ -110,6 +110,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on CallFeature objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -118,17 +125,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallFeature"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/CallFeature/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/CallSuperOperation/@ownedTag.0" name="CallSuperOperation" superType="//@packages.0/language/behavior/CallSuperOperation/@containedType.0 //@packages.0/language/behavior/CallSuperOperation/@containedType.1">
@@ -139,6 +139,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on CallFeature objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -147,17 +154,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallSuperOperation"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/CallSuperOperation/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/CallResult/@ownedTag.0" name="CallResult" superType="//@packages.0/language/behavior/CallResult/@containedType.0 //@packages.0/language/behavior/CallResult/@containedType.1">
@@ -168,6 +168,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on CallFeature objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -176,17 +183,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallResult"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/CallResult/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/CallValue/@ownedTag.0" name="CallValue" superType="//@packages.0/language/behavior/CallValue/@containedType.0 //@packages.0/language/behavior/CallValue/@containedType.1">
@@ -197,6 +197,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on CallFeature objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -205,17 +212,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallValue"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/CallValue/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/Assignment/@ownedTag.0" name="Assignment" superType="//@packages.0/language/behavior/Assignment/@containedType.0 //@packages.0/language/behavior/Assignment/@containedType.1">
@@ -240,6 +240,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on Assignment objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -248,17 +255,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Assignment"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/Assignment/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/Block/@ownedTag.0" name="Block" superType="//@packages.0/language/behavior/Block/@containedType.0 //@packages.0/language/behavior/Block/@containedType.1">
@@ -277,6 +277,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on Block objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -285,17 +292,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Block"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/Block/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/Conditional/@ownedTag.0" name="Conditional" superType="//@packages.0/language/behavior/Conditional/@containedType.0 //@packages.0/language/behavior/Conditional/@containedType.1">
@@ -318,6 +318,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on Conditional objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -326,17 +333,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Conditional"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/Conditional/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/Literal/@ownedTag.0" name="Literal" isAbstract="true" superType="//@packages.0/language/behavior/Literal/@containedType.0">
@@ -351,6 +351,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on EmptyExpression objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -359,17 +366,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/EmptyExpression"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/EmptyExpression/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/IntegerLiteral/@ownedTag.0" name="IntegerLiteral" superType="//@packages.0/language/behavior/IntegerLiteral/@containedType.0 //@packages.0/language/behavior/IntegerLiteral/@containedType.1">
@@ -386,6 +386,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on IntegerLiteral objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -394,17 +401,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/IntegerLiteral"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/StringLiteral/@ownedTag.0" name="StringLiteral" superType="//@packages.0/language/behavior/StringLiteral/@containedType.0 //@packages.0/language/behavior/StringLiteral/@containedType.1">
@@ -421,6 +421,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on StringLiteral objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -429,17 +436,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/StringLiteral"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/StringLiteral/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/BooleanLiteral/@ownedTag.0" name="BooleanLiteral" superType="//@packages.0/language/behavior/BooleanLiteral/@containedType.0 //@packages.0/language/behavior/BooleanLiteral/@containedType.1">
@@ -456,6 +456,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on BooleanLiteral objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -464,17 +471,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/BooleanLiteral"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/TypeLiteral/@ownedTag.0" name="TypeLiteral" superType="//@packages.0/language/behavior/TypeLiteral/@containedType.0 //@packages.0/language/behavior/TypeLiteral/@containedType.1">
@@ -489,6 +489,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on TypeLiteral objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -497,17 +504,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/TypeLiteral"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/TypeLiteral/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/TypeReference/@ownedTag.0" name="TypeReference" superType="//@packages.0/language/behavior/TypeReference/@containedType.0 //@packages.0/language/behavior/TypeReference/@containedType.1">
@@ -520,6 +520,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on BooleanLiteral objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -528,17 +535,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/TypeReference"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/TypeReference/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/VoidLiteral/@ownedTag.0" name="VoidLiteral" superType="//@packages.0/language/behavior/VoidLiteral/@containedType.0 //@packages.0/language/behavior/VoidLiteral/@containedType.1">
@@ -549,6 +549,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on VoidLiteral objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -557,17 +564,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/VoidLiteral"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/VoidLiteral/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/Loop/@ownedTag.0" name="Loop" superType="//@packages.0/language/behavior/Loop/@containedType.0 //@packages.0/language/behavior/Loop/@containedType.1">
@@ -590,6 +590,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on Loop objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -598,17 +605,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Loop"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/Loop/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/SelfExpression/@ownedTag.0" name="SelfExpression" superType="//@packages.0/language/behavior/SelfExpression/@containedType.0 //@packages.0/language/behavior/SelfExpression/@containedType.1">
@@ -618,6 +618,13 @@
           <ownedOperation name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor" typeParameter="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -626,17 +633,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/SelfExpression"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/SelfExpression/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/VariableDecl/@ownedTag.0" name="VariableDecl" superType="//@packages.0/language/behavior/VariableDecl/@containedType.0 //@packages.0/language/behavior/VariableDecl/@containedType.1">
@@ -661,6 +661,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on Variable objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -669,17 +676,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/VariableDecl"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/VariableDecl/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/Raise/@ownedTag.0" name="Raise" superType="//@packages.0/language/behavior/Raise/@containedType.0 //@packages.0/language/behavior/Raise/@containedType.1">
@@ -694,6 +694,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on Raise objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -702,17 +709,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Raise"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/Raise/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/Rescue/@ownedTag.0" name="Rescue" superType="//@packages.0/language/behavior/Rescue/@containedType.0 //@packages.0/language/behavior/Rescue/@containedType.1">
@@ -739,6 +739,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on Rescue objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -747,17 +754,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Rescue"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/Rescue/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/JavaStaticCall/@ownedTag.0" name="JavaStaticCall" superType="//@packages.0/language/behavior/JavaStaticCall/@containedType.0 //@packages.0/language/behavior/JavaStaticCall/@containedType.1">
@@ -784,6 +784,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on JavaStaticCall objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -792,17 +799,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/JavaStaticCall"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/JavaStaticCall/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/LambdaExpression/@ownedTag.0" name="LambdaExpression" superType="//@packages.0/language/behavior/LambdaExpression/@containedType.0 //@packages.0/language/behavior/LambdaExpression/@containedType.1">
@@ -821,6 +821,13 @@
             <ownedTag value="/**&#xD;&#xA;  *&#xD;&#xA;  */" object="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -829,17 +836,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/LambdaExpression"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/LambdaExpression/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/LambdaParameter/@ownedTag.0" name="LambdaParameter" superType="//@packages.0/language/behavior/LambdaParameter/@containedType.0 //@packages.0/language/behavior/LambdaParameter/@containedType.1">
@@ -862,6 +862,13 @@
             <ownedTag value="/**&#xD;&#xA;  * Implementation of the visitor design pattern on LambdaParameter objects&#xD;&#xA;  */" object="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
+            <ownedParameter name="visitor" type="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.1"/>
+                <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.0"/>
+              </containedType>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.0">
               <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.0">
                 <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.0" name="result"/>
@@ -870,17 +877,10 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/LambdaParameter"/>
                   </parameters>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.1" name="context"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" name="visitor">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/KMExpressionVisitor">
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" type="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.1"/>
-                      <typeParamBinding variable="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" type="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.0"/>
-                    </containedType>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@ownedParameter.0/@containedType.0" name="visitor"/>
                 </value>
               </statement>
             </body>
-            <ownedParameter name="visitor" type="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@body/@statement.0/@value/@target/@containedType.0" isOrdered="true" upper="1"/>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/LambdaParameter/acceptKMExpressionVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/KMExpressionVisitor/@ownedTag.0" name="KMExpressionVisitor" isAbstract="true" superType="//@packages.0/language/behavior/KMExpressionVisitor/@containedType.0">
@@ -891,174 +891,174 @@
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
           </containedType>
           <ownedOperation name="visitCallVariable" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
+            <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallVariable"/>
+            </ownedParameter>
+            <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
             <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class">
                 <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Void"/>
               </containedType>
             </body>
-            <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
-              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallVariable"/>
-            </ownedParameter>
-            <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
           </ownedOperation>
           <ownedOperation name="visitCallFeature" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitCallFeature/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallFeature"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitCallSuperOperation" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitCallSuperOperation/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallSuperOperation"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitCallResult" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitCallResult/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallResult"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitCallValue" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitCallValue/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/CallValue"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitAssignment" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitAssignment/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Assignment"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitBlock" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitBlock/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Block"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitConditional" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitConditional/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Conditional"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitEmptyExpression" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitEmptyExpression/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/EmptyExpression"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitIntegerLiteral" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitIntegerLiteral/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/IntegerLiteral"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitStringLiteral" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitStringLiteral/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/StringLiteral"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitBooleanLiteral" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitBooleanLiteral/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/BooleanLiteral"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitTypeLiteral" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitTypeLiteral/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/TypeLiteral"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitTypeReference" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitTypeReference/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/TypeReference"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitVoidLiteral" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitVoidLiteral/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/VoidLiteral"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitLoop" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitLoop/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Loop"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitSelfExpression" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitSelfExpression/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/SelfExpression"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitVariableDecl" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitVariableDecl/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/VariableDecl"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitRaise" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitRaise/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Raise"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitRescue" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitRescue/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Rescue"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitJavaStaticCall" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitJavaStaticCall/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/JavaStaticCall"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitLambdaExpression" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitLambdaExpression/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/LambdaExpression"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
           <ownedOperation name="visitLambdaParameter" type="//@packages.0/language/behavior/KMExpressionVisitor/ResultType" isOrdered="true" upper="1">
-            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
             <ownedParameter name="node" type="//@packages.0/language/behavior/KMExpressionVisitor/visitLambdaParameter/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/LambdaParameter"/>
             </ownedParameter>
             <ownedParameter name="context" type="//@packages.0/language/behavior/KMExpressionVisitor/ContextType" isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/language/behavior/KMExpressionVisitor/visitCallVariable/@body/@containedType.0"/>
           </ownedOperation>
         </ownedTypeDefinition>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/KMExpressionVisitable/@ownedTag.0" name="KMExpressionVisitable" isAbstract="true">
           <ownedTag value="/**&#xD;&#xA; * All classes that can be visited using kermeta::behavior::KMExpressionVisitor must implement this class&#xD;&#xA; */" object="//@packages.0/language/behavior/KMExpressionVisitable"/>
-          <ownedOperation tag="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor/@ownedTag.0" name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" typeParameter="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor/@containedType.0" isAbstract="true">
+          <ownedOperation tag="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor/@ownedTag.0" name="acceptKMExpressionVisitor" type="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor/@containedType.0" isOrdered="true" upper="1" isAbstract="true" typeParameter="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor/@containedType.1 //@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor/@containedType.0">
             <ownedTag value="/**&#xD;&#xA;  * accept method of the visitor design pattern&#xD;&#xA;  */" object="//@packages.0/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ResultType"/>
             <containedType xsi:type="kermeta_language_structure:ObjectTypeVariable" name="ContextType"/>
