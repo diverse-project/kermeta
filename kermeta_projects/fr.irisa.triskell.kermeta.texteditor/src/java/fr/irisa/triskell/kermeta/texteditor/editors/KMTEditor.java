@@ -1,4 +1,4 @@
-/* $Id: KMTEditor.java,v 1.20 2007-08-31 11:51:57 dvojtise Exp $
+/* $Id: KMTEditor.java,v 1.21 2007-09-04 08:14:32 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KMTEditor.java
 * License : EPL
@@ -37,6 +37,7 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.extension.Interest;
@@ -47,6 +48,7 @@ import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.completion.EditorCompletion;
 import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
@@ -120,6 +122,19 @@ public class KMTEditor extends TextEditor implements Interest {
 		
 		KermetaUnitHost.getInstance().declareInterest(this, unit);
 		mcunit = IOPlugin.getDefault().loadKermetaUnit( getFile() );
+		
+		if ( ! mcunit.isErrored() ) {
+			KermetaTypeChecker typechecker = new KermetaTypeChecker(mcunit);
+			typechecker.checkUnit();
+		}
+		
+		if ( ! mcunit.isErrored() ) {
+			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(mcunit);
+			constraintchecker.checkUnit();
+		}
+		
+		KermetaMarkersHelper.clearMarkers(getFile());
+		KermetaMarkersHelper.createMarkers(getFile(), mcunit);
 		
 		if ( completion != null )
 			completion.setkermetaUnit( mcunit );
@@ -340,6 +355,18 @@ public class KMTEditor extends TextEditor implements Interest {
 						//KermetaUnit kermetaUnit = KermetaUnitHelper.typecheckFile( getFile() );
 						//mcunit = KermetaUnitHelper.typecheckFile( getFile() );
 						mcunit = IOPlugin.getDefault().loadKermetaUnit( getFile() );
+						if ( ! mcunit.isErrored() ) {
+							KermetaTypeChecker typechecker = new KermetaTypeChecker(mcunit);
+							typechecker.checkUnit();
+						}
+						
+						if ( ! mcunit.isErrored() ) {
+							KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(mcunit);
+							constraintchecker.checkUnit();
+						}
+						
+						KermetaMarkersHelper.clearMarkers(getFile());
+						KermetaMarkersHelper.createMarkers(getFile(), mcunit);
 						
 						if ( completion != null )
 							completion.setkermetaUnit( mcunit );
