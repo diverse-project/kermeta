@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.61 2007-08-08 13:00:01 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.62 2007-09-04 14:32:31 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -442,7 +442,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         // Current call frame is uniquely a LambdaCallFrame, or an OperationCallFrame. Other types are forbidden!
         Operation current_op = this.interpreterContext.peekCallFrame().getOperation();
         RuntimeObject ro_target = this.interpreterContext.peekCallFrame().getSelf();
-        ClassDefinition foclass = current_op.getOwningClass();
+        //ClassDefinition foclass = current_op.getOwningClass();
         //internalLog.info("Visiting a super operation of : "+current_op.getFName());
         
         fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)interpreterContext.peekCallFrame().getSelf().getMetaclass().getData().get("kcoreObject");
@@ -771,10 +771,16 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         interpreterContext.pushOperationCallFrame(ro_target, property, null, expression);
         // Would a special DerivedPropertyCallFrame be better instead of that?
 	    try {	        // Interpret body
-	        this.accept(property.getProperty().getGetterBody());
-	        // Getter is an operation which returns an element of type Property.getFType
-	        // Set the result 
-	        result = interpreterContext.peekCallFrame().getOperationResult();
+	    	if(property.getProperty().getGetterBody() !=  null){
+	    		this.accept(property.getProperty().getGetterBody());
+	    		// Getter is an operation which returns an element of type Property.getFType
+	    		// 	Set the result 
+	    		result = interpreterContext.peekCallFrame().getOperationResult();
+	    	}
+	    	else{
+	    		internalLog.error("INTERPRETER INTERNAL ERROR : derived property  " + property.getName() + " has no getter body");
+		        throw new Error("INTERPRETER INTERNAL ERROR : derived property  " + property.getName() + " has no getter body");
+	    	}
 	    }
 	    finally {
 		    interpreterContext.popCallFrame();
@@ -1491,15 +1497,6 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 				node,
 				null);
     }
-
-    protected void displayHashtable(Hashtable hash)
-    {
-        Set keys = hash.keySet();
-        System.out.print("[ ");
-        for (Object key : keys) { System.out.print(key+": "+hash.get(key)); }
-        System.out.print(" ]");
-    }
-    
     
     public InterpreterContext getInterpreterContext() {
     	return this.interpreterContext;
