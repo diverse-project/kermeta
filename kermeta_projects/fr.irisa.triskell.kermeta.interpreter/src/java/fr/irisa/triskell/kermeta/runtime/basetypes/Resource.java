@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.14 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: Resource.java,v 1.15 2007-09-04 13:01:29 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : EPL
@@ -180,7 +180,7 @@ public class Resource {
         	// Compute list of EMF dependent resources (include self emf resource) 
         	EList emfDependentResources =
         		emfUnit.findDependentResources(
-        			(org.eclipse.emf.ecore.resource.Resource) selfRO.getData().get("r2e.emfResource")
+        			getEmfResource(selfRO)
  				);
         	
         	// Allocate a new RO of type Set<Resource>
@@ -211,7 +211,7 @@ public class Resource {
     	    // Iterate over resources contained by the Repository
     	    for(Object next : roList) {
     	    	RuntimeObject crtRO = (RuntimeObject) next;
-    	    	org.eclipse.emf.ecore.resource.Resource crtRes = (org.eclipse.emf.ecore.resource.Resource) crtRO.getData().get("r2e.emfResource");
+    	    	org.eclipse.emf.ecore.resource.Resource crtRes = getEmfResource(crtRO);
     	    	
     	    	// Test whether current resource belongs to the set computed set of dependent resources
     	    	// and is different from contextual resource
@@ -222,5 +222,16 @@ public class Resource {
         }
         
     	return result;
-    }   
+    }
+
+    
+    /**
+     * This method provides access to the emf Resource associated with the provided
+     * resource RO
+     * @param selfRO - Resource runtime object
+     * @return       - emf Resource associated with the provided resource RO, or null
+     */
+    public static org.eclipse.emf.ecore.resource.Resource getEmfResource(RuntimeObject selfRO) {
+    	return (org.eclipse.emf.ecore.resource.Resource) selfRO.getData().get("r2e.emfResource");
+    }
 }

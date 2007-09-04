@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.22 2007-08-28 09:49:22 dtouzet Exp $
+/* $Id: Object.java,v 1.23 2007-09-04 13:01:29 dtouzet Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
@@ -243,7 +245,6 @@ public class Object {
 			    if (param1.getContainer() != null) {
 			        removeObjectFromItsContainer(param1);
 			    }
-			    
 			    param1.setContainer(self);
 			}
 			// handle opposite
@@ -498,9 +499,13 @@ public class Object {
 		// Default return value
 		RuntimeObject result = selfRO.getFactory().getMemory().voidINSTANCE;
 		
-		if(selfRO.getData().containsKey("resourceRO")) {
-			result = (RuntimeObject) selfRO.getData().get("resourceRO");
+		RuntimeObject crtRO = selfRO;
+		while(crtRO.getContainer() != null) crtRO = crtRO.getContainer();
+		
+		if(crtRO.getData().containsKey("resourceRO")) {
+			result = (RuntimeObject) crtRO.getData().get("resourceRO");
 		}
+		
 		return result;
 	}
 	
@@ -508,22 +513,24 @@ public class Object {
 	/**
 	 * This method sets the containing Resource of the object passed as a parameter
 	 * to the provided Resource.
-	 * This modification is propagated to all objects directly or indirectly contained
-	 * by the targeted object. 
 	 * @param selfRO - RO for the object
 	 * @param resRO  - RO for the Resource the object, and all the objects it contains,
 	 *                 are assigned to
 	 */
 	public static RuntimeObject setContainingResource(RuntimeObject selfRO, RuntimeObject resRO) {
 		selfRO.getData().put("resourceRO", resRO);
-		
-		RuntimeObject objListRO = Object.getAllContainedObjects(selfRO);
-		ArrayList<RuntimeObject> roList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(objListRO);
-		for(java.lang.Object next : roList) {
-			RuntimeObject crtRO = (RuntimeObject) next;
-			Object.setContainingResource(crtRO, resRO);
-		}
-		
+		return selfRO.getFactory().getMemory().voidINSTANCE;
+	}
+
+
+	/**
+	 * @param selfRO
+	 * @param resRO
+	 * @return
+	 */
+	public static RuntimeObject unSetContainingResource(RuntimeObject selfRO) {
+		if(selfRO.getData().containsKey("resourceRO"))
+			selfRO.getData().remove("resourceRO");
 		return selfRO.getFactory().getMemory().voidINSTANCE;
 	}
 
