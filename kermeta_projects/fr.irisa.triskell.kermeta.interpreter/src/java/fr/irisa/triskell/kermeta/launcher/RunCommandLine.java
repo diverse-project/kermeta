@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.15 2007-07-24 13:47:37 ftanguy Exp $
+/* $Id: RunCommandLine.java,v 1.16 2007-09-04 16:52:17 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : EPL
@@ -51,7 +51,7 @@ public class RunCommandLine {
     protected String operationName = null;
     protected String kermetaStandardURI = null;
     protected boolean isTestSuite = false;
-    protected ArrayList interpreterParameters;
+    protected ArrayList<RuntimeObject> interpreterParameters;
     protected boolean initialized = false;
     
     protected boolean logExecutionTime = false;
@@ -70,22 +70,22 @@ public class RunCommandLine {
 	    //	  We build the object that will check the arguments with the wanted options.
 		checkOption = new CheckOption (
 			new Option[] {
-				new NoOption (new Vector()),
-				new Option_C (new Vector()),
+				new NoOption (new Vector<String>()),
+				new Option_C (new Vector<Object>()),
 				new Option_H (),
 				new Option_T (),
 				new Option_P (),
-				new Option_K (new Vector()),
-				new Option_O (new Vector()),
-				new Option_U (new Vector()),
-				new Option_M (new Vector())
+				new Option_K (new Vector<Object>()),
+				new Option_O (new Vector<Object>()),
+				new Option_U (new Vector<Object>()),
+				new Option_M (new Vector<Object>())
 			} 
 		);
 	    nbOptionErrors = checkOption.Proceed(args);
 	    if (checkOption.Saw ("-C"))
 		{
 	        internalLog.debug ("option -C was seen with arguments: ");
-			Iterator it = checkOption.getOption("-C").getParameters().iterator();			
+			Iterator<?> it = checkOption.getOption("-C").getParameters().iterator();			
 			if (it.hasNext())
 			{
 			    className = it.next().toString();
@@ -95,7 +95,7 @@ public class RunCommandLine {
 	    if (checkOption.Saw ("-K"))
 		{
 	        internalLog.debug ("option -K was seen with arguments: ");
-			Iterator it = checkOption.getOption("-K").getParameters().iterator();						
+			Iterator<?> it = checkOption.getOption("-K").getParameters().iterator();						
 			if (it.hasNext())
 			{
 			    kermetaStandardURI = it.next().toString();
@@ -105,7 +105,7 @@ public class RunCommandLine {
 	    if (checkOption.Saw ("-O"))
 		{
 	        internalLog.debug ("option -O was seen with arguments: ");
-			Iterator it = checkOption.getOption("-O").getParameters().iterator();						
+			Iterator<?> it = checkOption.getOption("-O").getParameters().iterator();						
 			if (it.hasNext())
 			{
 			    operationName = it.next().toString();
@@ -115,7 +115,7 @@ public class RunCommandLine {
 	    if (checkOption.Saw ("-U"))
 		{
 	        internalLog.debug ("option -U was seen with arguments: ");
-			Iterator it = checkOption.getOption("-U").getParameters().iterator();			
+			Iterator<?> it = checkOption.getOption("-U").getParameters().iterator();			
 			if (it.hasNext())
 			{
 			    unitURI = it.next().toString();
@@ -125,7 +125,7 @@ public class RunCommandLine {
 	    if (checkOption.Saw ("-T"))
 		{
 	        internalLog.debug ("option -T was seen: ");
-			Iterator it = checkOption.getOption("-T").getParameters().iterator();						
+			Iterator<?> it = checkOption.getOption("-T").getParameters().iterator();						
 			if (it.hasNext())
 			{
 			    kermetaStandardURI = it.next().toString();
@@ -139,7 +139,7 @@ public class RunCommandLine {
 	    if (checkOption.Saw ("-M"))
 		{
 	        internalLog.debug ("option -M was seen with arguments: ");
-			Iterator it = checkOption.getOption("-M").getParameters().iterator();			
+			Iterator<?> it = checkOption.getOption("-M").getParameters().iterator();			
 			if (it.hasNext())
 			{
 				File file = new File(it.next().toString());
@@ -185,8 +185,8 @@ public class RunCommandLine {
 	    theInterpreter = new KermetaInterpreter(unitURI);
 	    internalLog.debug("init2");
 	    internalLog.debug ("The arguments not linked to an option are: (will be passed to the interpreter)");
-	    interpreterParameters =  new ArrayList();
-	    Iterator it = checkOption.getOption("").getParameters().iterator();			
+	    interpreterParameters =  new ArrayList<RuntimeObject>();
+	    Iterator<?> it = checkOption.getOption("").getParameters().iterator();			
 		while (it.hasNext())
 		{		
 		    String arg = it.next().toString();
@@ -249,7 +249,7 @@ public class RunCommandLine {
 	public void runMainOperation(
 	        String mainClassValue, 
 	        String mainOperationValue,
-	        ArrayList parameters)
+	        ArrayList<RuntimeObject> parameters)
 	{	
 		long time = System.currentTimeMillis();
         

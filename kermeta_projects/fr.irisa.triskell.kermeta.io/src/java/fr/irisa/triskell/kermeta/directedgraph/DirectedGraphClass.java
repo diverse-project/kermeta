@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+//import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -16,7 +16,7 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 public class DirectedGraphClass implements DirectedGraphInterface {
 	protected KermetaUnit unit;
-	ArrayList nodes;
+	ArrayList<TypeDefinition> nodes;
 	    
     final static public Logger internalLog = LogConfigurationHelper.getLogger("CycleConstraintChecker");
    
@@ -27,23 +27,23 @@ public class DirectedGraphClass implements DirectedGraphInterface {
 	public DirectedGraphClass(KermetaUnit unit) {
         super();
         this.unit = unit;
-        nodes=new ArrayList();
+        nodes=new ArrayList<TypeDefinition>();
         //construction de l'ensemble des noeuds
         buildNode();
-        List iulist = unit.getImportedKermetaUnits();
+        List<KermetaUnit> iulist = unit.getImportedKermetaUnits();
 	    for (int i=0; i<iulist.size(); i++) {	      
-	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
+	        KermetaUnit iu = iulist.get(i);
 	        if ( ! iu.isFramework() )
 	        	buildNode(iu);
 	    }
     }
 	
-	public ArrayList getAllNodes() {
+	public ArrayList<TypeDefinition> getAllNodes() {
 		// On retourne une liste de toutes les classes
 		return nodes;
 	}
 
-	public ArrayList getTargetsforNode(Object node) {
+	public ArrayList<TypeDefinition> getTargetsforNode(Object node) {
 		return visitClassDefinition((ClassDefinition) node);
 	}
     
@@ -51,9 +51,9 @@ public class DirectedGraphClass implements DirectedGraphInterface {
      * cycle detection need a clean list of all nodes
      */
     public void buildNode() {        
-        Iterator it = TypeDefinitionSearcher.getInternalTypesDefinition(unit).iterator();
+        Iterator<TypeDefinition> it = TypeDefinitionSearcher.getInternalTypesDefinition(unit).iterator();
         while(it.hasNext()) {
-            TypeDefinition td = (TypeDefinition)it.next();
+            TypeDefinition td = it.next();
             if (td instanceof ClassDefinition) {
             	nodes.add(td);
             }
@@ -62,9 +62,9 @@ public class DirectedGraphClass implements DirectedGraphInterface {
     public void buildNode(KermetaUnit u) {
         
         
-        Iterator it = TypeDefinitionSearcher.getInternalTypesDefinition(unit).iterator();
+        Iterator<TypeDefinition> it = TypeDefinitionSearcher.getInternalTypesDefinition(unit).iterator();
         while(it.hasNext()) {
-            TypeDefinition td = (TypeDefinition)it.next();
+            TypeDefinition td = it.next();
             if (td instanceof ClassDefinition) {
             	nodes.add(td);
             	
@@ -77,11 +77,11 @@ public class DirectedGraphClass implements DirectedGraphInterface {
      * of a class definition
      * @param clsdef
      */
-    public ArrayList visitClassDefinition(ClassDefinition clsdef) {
-        ArrayList classlist=new ArrayList();
-    	Iterator it = clsdef.getOwnedAttribute().iterator();
+    public ArrayList<TypeDefinition> visitClassDefinition(ClassDefinition clsdef) {
+        ArrayList<TypeDefinition> classlist=new ArrayList<TypeDefinition>();
+    	Iterator<Property> it = clsdef.getOwnedAttribute().iterator();
         while(it.hasNext()) {
-            Property prop = (Property)it.next();
+            Property prop = it.next();
             if (isStrictCompositionProperties(prop)){
             	if (prop.getType() instanceof fr.irisa.triskell.kermeta.language.structure.Class){
             		fr.irisa.triskell.kermeta.language.structure.Class fclass=(fr.irisa.triskell.kermeta.language.structure.Class) prop.getType();
@@ -103,11 +103,11 @@ public class DirectedGraphClass implements DirectedGraphInterface {
     public boolean isStrictCompositionProperties(Property prop){    	
     	
     		    		
-    		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
-			
+    		
 	    	// Composition with multiplicity == 1
     		if(prop.isIsComposite()){
     			if( prop.getLower() >= 1){
+    				// KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
     				//unit.messages.addError("CONSTRAINT-CHECKER : Composition multiplicity problem : change the multiplicity or do not use composition on the other end of the association. " + pp.ppSimplifiedPropertyInContext(prop), prop);
     				return true;  
     			}
