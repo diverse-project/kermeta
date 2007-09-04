@@ -46,7 +46,17 @@ public class ClassConformanceChecker {
 						Type t_required = it_required.next().getType();
 						SimpleType providedType = new SimpleType( t_provided );
 						SimpleType requiredType = new SimpleType( t_required );
+						/*
+						 * 
+						 * We do not use voluntarily the isSubType because of the genericity.
+						 * So we use the basic comparison and the aspects.
+						 * 
+						 */
 						result = providedType.getTypeDefinition() == requiredType.getTypeDefinition();
+						if ( ! result )
+							result = TypeDefinitionHelper.getAspects( providedType.getTypeDefinition() ).contains(requiredType.getTypeDefinition());
+						if ( !result )
+							result = TypeDefinitionHelper.getAspects( requiredType.getTypeDefinition() ).contains(providedType.getTypeDefinition());	
 					}
 				}
 				
