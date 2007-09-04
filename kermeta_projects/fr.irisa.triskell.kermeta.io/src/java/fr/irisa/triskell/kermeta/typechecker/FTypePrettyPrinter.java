@@ -1,4 +1,4 @@
-/* $Id: FTypePrettyPrinter.java,v 1.12 2007-09-04 08:29:31 ftanguy Exp $
+/* $Id: FTypePrettyPrinter.java,v 1.13 2007-09-04 15:12:27 dvojtise Exp $
 * Project : Kermeta io
 * File : FTypePrettyPrinter.java
 * License : EPL
@@ -130,8 +130,15 @@ public class FTypePrettyPrinter extends KermetaOptimizedVisitor {
 
     //public Object visit(FunctionType node) {
     public Object visitFunctionType(FunctionType node) {
-    	if ( node.getLeft() == null || node.getRight() == null )
-    		System.out.println();
-        return "< " + this.accept(node.getLeft()) + " -> " + this.accept(node.getRight()) + " >";
+    	String leftString;
+    	String rightString;
+    	if ( node.getLeft() != null)
+    		leftString = (String) this.accept(node.getLeft());
+    	else leftString = "undefined";
+    	if (node.getRight() != null )
+    		rightString = (String) this.accept(node.getRight());
+    	else
+    		rightString = "undefined";
+        return "< " + leftString + " -> " + rightString + " >";
     }
 }
