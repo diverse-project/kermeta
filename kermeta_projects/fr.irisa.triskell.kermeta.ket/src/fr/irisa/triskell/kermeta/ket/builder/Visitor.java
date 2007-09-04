@@ -1,4 +1,4 @@
-/* $Id: Visitor.java,v 1.2 2007-07-26 12:25:21 cfaucher Exp $
+/* $Id: Visitor.java,v 1.3 2007-09-04 08:00:07 fmunoz Exp $
  * Project    : fr.irisa.triskell.kermeta.ket
  * File       : Visitor.java
  * License    : EPL
@@ -126,13 +126,14 @@ public class Visitor extends JETASTVisitor {
 		
 		//out.println("require \"" + directive.getAttributes().get("require") + "\"");
 		out.println("using kermeta::standard" );
+		out.println("using kermeta::utils");
 		while (utk.hasMoreTokens()){
 			out.println("using " +  utk.nextToken());
 		}
 		out.println("class " +  directive.getAttributes().get("class") + "{");
 
-		out.println("operation generate("+directive.getAttributes().get("parameters")  +"):String is do");
-		out.println("var _res: String init String.new");
+		out.println("operation generate("+directive.getAttributes().get("parameters")  +"):StringBuffer is do");
+		out.println("var _res: StringBuffer init StringBuffer.new");
 		begin=true;
 		
 
