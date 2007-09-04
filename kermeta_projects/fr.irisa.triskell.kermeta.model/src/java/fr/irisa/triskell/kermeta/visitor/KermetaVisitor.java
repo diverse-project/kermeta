@@ -1,8 +1,10 @@
 /*
- * This code has been generated to visit an ecore model
- * Creation date: Wed Aug 22 11:05:24 CEST 2007
- * Template Created on 7 f�vr. 2005
+ * This code has been generated to visit a kermeta model
+ * Creation date: Tue Sep 04 17:43:41 CEST 2007
+ * Template Created on feb. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
+ * IRISA / INRIA / University of rennes 1
+ * Distributed under the terms of the EPL license
  */
 package fr.irisa.triskell.kermeta.visitor;
 
@@ -16,7 +18,7 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 /**
  * @author Franck Fleurey
  * IRISA / INRIA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class KermetaVisitor {
 
@@ -24,9 +26,9 @@ public class KermetaVisitor {
 			// This is a generic visit method.
 			public Object genericVisitChildren(EObject node) {
 				Object result = null;
-				Iterator children = node.eContents().iterator();
+				Iterator<EObject> children = node.eContents().iterator();
 				while (children.hasNext()) {
-					EObject child = (EObject)children.next();
+					EObject child = children.next();
 					accept(child);
 				}
 				return result;
@@ -37,7 +39,7 @@ public class KermetaVisitor {
 				String cname="";
 				String methodName="";
 				try {
-					Class[] ptypes = new Class[1];
+					Class<?>[] ptypes = new Class[1];
 					cname = node.getClass().getName();
 					cname = cname.substring(0, cname.length()-4).replaceAll(".impl", "");
 					ptypes[0] = Class.forName(cname);

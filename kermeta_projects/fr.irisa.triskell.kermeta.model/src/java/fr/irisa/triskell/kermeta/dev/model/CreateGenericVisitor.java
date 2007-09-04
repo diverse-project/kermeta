@@ -1,4 +1,4 @@
-/* $Id: CreateGenericVisitor.java,v 1.7 2007-07-24 13:47:31 ftanguy Exp $
+/* $Id: CreateGenericVisitor.java,v 1.8 2007-09-04 15:44:32 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : GPL
@@ -46,7 +46,7 @@ public class CreateGenericVisitor {
 	 */
 	public static void main(String[] args) {
 		
-		String ecorefile = args[0];
+		//String ecorefile = args[0];
 		String packagename = args[1];
 		String outdir = args[2];		
 		String className = args[3];
@@ -62,9 +62,9 @@ public class CreateGenericVisitor {
 		
 		String methods = "";
 		// add a method per concrete class
-		TreeIterator it = resource.getAllContents();
+		TreeIterator<EObject> it = resource.getAllContents();
 		while(it.hasNext()) {
-			EObject o = (EObject)it.next();
+			EObject o = it.next();
 			if (o instanceof EClass) {
 				EClass c = (EClass)o;
 				if (!c.isAbstract()) {
@@ -108,11 +108,15 @@ public class CreateGenericVisitor {
 	protected static String classTemplate;
 	protected static String getClassTemplate() {
 		if (classTemplate == null) {
+			classTemplate += "//$Id:"+
+								   "$\n";
 			classTemplate = "/*\n";
-			classTemplate += " * This code has been generated to visit an ecore model\n";
+			classTemplate += " * This code has been generated to visit a kermeta model\n";
 			classTemplate += " * Creation date: " + new java.util.Date().toString() + "\n" ;
-			classTemplate += " * Template Created on 7 f�vr. 2005\n";
+			classTemplate += " * Template Created on feb. 2005\n";
 			classTemplate += " * By Franck FLEUREY (ffleurey@irisa.fr)\n";
+			classTemplate += " * IRISA / INRIA / University of rennes 1\n";
+			classTemplate += " * Distributed under the terms of the EPL license\n";
 			classTemplate += " */\n";
 			classTemplate += "package XpackageNameX;\n";
 			classTemplate += "\n";
@@ -126,7 +130,7 @@ public class CreateGenericVisitor {
 			classTemplate += "/**\n";
 			classTemplate += " * @author Franck Fleurey\n";
 			classTemplate += " * IRISA / INRIA / University of rennes 1\n";
-			classTemplate += " * Distributed under the terms of the GPL license\n";
+			classTemplate += " * Distributed under the terms of the EPL license\n";
 			classTemplate += " */\n";
 			classTemplate += "public class XclassNameX {\n";
 			classTemplate += "\n";
@@ -134,9 +138,9 @@ public class CreateGenericVisitor {
 			classTemplate +="			// This is a generic visit method.\n";
 			classTemplate +="			public Object genericVisitChildren(EObject node) {\n";
 			classTemplate +="				Object result = null;\n";
-			classTemplate +="				Iterator children = node.eContents().iterator();\n";
+			classTemplate +="				Iterator<EObject> children = node.eContents().iterator();\n";
 			classTemplate +="				while (children.hasNext()) {\n";
-			classTemplate +="					EObject child = (EObject)children.next();\n";
+			classTemplate +="					EObject child = children.next();\n";
 			classTemplate +="					accept(child);\n";
 			classTemplate +="				}\n";
 			classTemplate +="				return result;\n";
@@ -147,7 +151,7 @@ public class CreateGenericVisitor {
 			classTemplate +="				String cname=\"\";\n";
 			classTemplate +="				String methodName=\"\";\n";
 			classTemplate +="				try {\n";
-			classTemplate +="					Class[] ptypes = new Class[1];\n";
+			classTemplate +="					Class<?>[] ptypes = new Class[1];\n";
 			classTemplate +="					cname = node.getClass().getName();\n";
 			classTemplate +="					cname = cname.substring(0, cname.length()-4).replaceAll(\".impl\", \"\");\n";
 			classTemplate +="					ptypes[0] = Class.forName(cname);\n";

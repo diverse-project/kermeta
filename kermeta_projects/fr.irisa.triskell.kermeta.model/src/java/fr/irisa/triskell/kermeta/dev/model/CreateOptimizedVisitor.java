@@ -1,4 +1,4 @@
-/* $Id: CreateOptimizedVisitor.java,v 1.7 2007-09-04 15:29:46 dvojtise Exp $
+/* $Id: CreateOptimizedVisitor.java,v 1.8 2007-09-04 15:44:32 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : GPL
@@ -168,7 +168,16 @@ public class CreateOptimizedVisitor {
 		if (classTemplate == null) {
 			classTemplate = "";
 			
-
+			classTemplate += "//$Id:"+
+								   "$\n";
+			classTemplate += "/*\n";
+			classTemplate += " * This code has been generated to visit a kermeta model\n";
+			classTemplate += " * Creation date: " + new java.util.Date().toString() + "\n" ;
+			classTemplate += " * Template Created on feb. 2005\n";
+			classTemplate += " * By Franck FLEUREY (ffleurey@irisa.fr)\n";
+			classTemplate += " * IRISA / INRIA / University of rennes 1\n";
+			classTemplate += " * Distributed under the terms of the EPL license\n";
+			classTemplate += " */\n";
 			classTemplate += "package XpackageNameX;\n";
 
 			classTemplate += "import java.util.Hashtable;\n";

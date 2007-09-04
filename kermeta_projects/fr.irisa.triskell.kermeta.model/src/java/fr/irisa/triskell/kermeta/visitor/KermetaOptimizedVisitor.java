@@ -1,3 +1,12 @@
+//$Id: KermetaOptimizedVisitor.java,v 1.9 2007-09-04 15:44:32 dvojtise Exp $
+/*
+ * This code has been generated to visit a kermeta model
+ * Creation date: Tue Sep 04 17:43:43 CEST 2007
+ * Template Created on feb. 2005
+ * By Franck FLEUREY (ffleurey@irisa.fr)
+ * IRISA / INRIA / University of rennes 1
+ * Distributed under the terms of the EPL license
+ */
 package fr.irisa.triskell.kermeta.visitor;
 import java.util.Hashtable;
 import java.util.Iterator;
