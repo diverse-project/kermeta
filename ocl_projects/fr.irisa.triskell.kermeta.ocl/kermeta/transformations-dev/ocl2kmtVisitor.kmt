@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.9 2007-08-23 15:05:21 bitterjug Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.9 2007-08-23 15:05:21 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.10 2007-09-05 17:40:24 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.10 2007-09-05 17:40:24 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -8,17 +8,16 @@
 @mainClass "::"
 @mainOperation ""
 
- 
 package ocl2kmt;
 require kermeta
-require "TypeHelper.kmt"
-require "IOHelper.kmt"
+require "TypeSystemMixin.kmt"
+require "IOMixin.kmt"
 require "./oclcstvisitor.kmt"
 require "../helpers/QualifiedName.kmt"
 require "OperatorPolicies.kmt" 
 require "IteratorPolicies.kmt" 
 require "KermetaHelper.kmt"
-  
+
 using kermeta::standard
 using kermeta::exceptions
 using ocl::cst
@@ -27,8 +26,52 @@ using kermeta::utils
 using qualifiedNames
 
 
- class Ocl2kmtVisitor inherits ocl::cst::visitors::Visitor, KermetaHelper, IOHelper, IteratorPolicies, OperatorPolicies, TypeHelper {
+/** This started out life as a pretty-printer from the parsed OCL Concrete Syntax Tree
+ ** to Kermeta source code. Of course this is not a simple case ore pretty-printing
+ ** because OCL has some oddities like the meaning of a.b.c depends on whether
+ ** a.b refers to a single object or a collection (or "association", it's helpful to think
+ ** about these as multiple associations, not as the collections that implement them
+ ** in a programming language like kermeta). So the TypeSystemMixin adds facilities
+ ** to keep track of the features (attributes and associations) and operations that
+ ** appear in these expressions, and what their returned types are. These are
+ ** called from within the visit methods here to set and, where necessary, obtain
+ ** the necessary additional type information.
+ **/
+ class Ocl2kmtVisitor inherits ocl::cst::visitors::Visitor,  IOMixin,  TypeSystemMixin {
 
+		attribute __kermeta : KermetaHelper // I should be able to put [1] after this and have it initialised
+		
+		property readonly kermeta : KermetaHelper 
+			getter is
+				do
+					if __kermeta == void then
+						__kermeta := KermetaHelper.new
+					end
+					result := __kermeta
+				end
+
+		attribute __iterators: Iterators
+		
+		property readonly iteratorList: Iterators 
+			getter is
+				do
+					if __iterators == void then
+						__iterators := Iterators.new
+					end
+					result := __iterators
+				end
+				
+		attribute __operators: Operators
+		
+		property readonly operatorList: Operators 
+			getter is
+				do
+					if __operators == void then
+						__operators := Operators.new
+					end
+					result := __operators
+				end
+				
   		attribute __name : Integer
   		
 		operation nextName(root: String) : String is
@@ -48,11 +91,16 @@ using qualifiedNames
 				// void or false --> false
 			end
 		
+		/** called when the operation being executed is something like
+		 ** .oclAsType(Type) where the parameter is expected to be the
+		 ** the name of a type rather than a normal expression
+		 **/
 		operation expectType(): Void is
 			do
 				__expectingType := true
 			end
 			
+		/** undoes the effect of expectType() **/
 		operation expectExpression(): Void is
 			do
 				__expectingType := false
@@ -67,11 +115,13 @@ using qualifiedNames
 			do
 				visit(visitable)
 			end
-		
+			
+		method visitTypeCS(visitable : TypeCS) : kermeta::standard::~Void is
+			do
+    			visit(visitable)
+			end
+		 
 		method visitPackageDeclarationCS(visitable : PackageDeclarationCS) : Void is
-			/**
-			 ** Sets global context package name and generates enclosing package
-			 **/
 			do
   			    setContextPackageName(visitable.pathNameCS.sequenceOfNames)
 				write("package ")
@@ -114,9 +164,6 @@ using qualifiedNames
 		attribute currentContextClassifier : ecore::EClassifier
 
 		method visitOperationContextDeclCS(visitable : OperationContextDeclCS) : Void is
-		/**
-		 ** where it isays something like: context C::foo(x:X, y:Y):Z pre: ....
-		 **/
 			do
 				setContextClassifierName(visitable.operationCS.pathNameCS.sequenceOfNames)
 				var packageNames : Stack<String> init  Stack<String>.new
@@ -154,9 +201,7 @@ using qualifiedNames
 			end
   
 		method visitPrePostOrBodyDeclCS(visitable : PrePostOrBodyDeclCS) : Void is
-    		/**
-    		 ** a precondition or postcondition.
-    		 **/
+
 			do
 				write(visitable.kind.name.toString)
 				writeln(" " + nextName(visitable.kind.name.toString ))
@@ -166,9 +211,7 @@ using qualifiedNames
 			end
 
 		
-	 	/**
-	 	 ** Just the method header
-	 	 **/
+
 		method visitOperationCS(visitable : OperationCS) : Void is
 			do
 				write("operation ")
@@ -252,7 +295,7 @@ using qualifiedNames
           
 		method visitSimpleNameCS(visitable : SimpleNameCS) : Void is
 			do
-		    	write(escape(visitable.~value.toString))
+		    	write(kermeta.escape(visitable.~value.toString))
 			end
 
 		reference qualifiedTypeName: QualifiedName
@@ -262,7 +305,7 @@ using qualifiedNames
 				if visitable.~value.toString.equals("OclAny") then
 					qualifiedTypeName := QualifiedName.new.fromString("Object")
 				else
-					qualifiedTypeName := QualifiedName.new.fromString( escape(visitable.~value.toString))
+					qualifiedTypeName := QualifiedName.new.fromString( kermeta.escape(visitable.~value.toString))
 				end
 				write(qualifiedTypeName.toString)
 			end
@@ -291,7 +334,7 @@ using qualifiedNames
 			do
     			var variableName: String init visitable.name.toString
     			stdio.writeln("Processing Variable [" + variableName + "]")
-				write(escape(variableName))
+				write(kermeta.escape(variableName))
 				if visitable.typeCS != void then // type specified?
 					write(" : ")
 					visitable.typeCS.accept(self)
@@ -447,7 +490,7 @@ using qualifiedNames
 			do
 				visit(visitable)			
 			end
-
+ 
 		operation isKeywordIterator(visitable:   IteratorExpCS): Boolean is
 			do
 				result:= visitable.simpleNameCS.~type.name.equals(SimpleTypeEnum.keyword.name)
@@ -459,7 +502,7 @@ using qualifiedNames
 				var operationName : String init visitable.simpleNameCS.~value.toString 
 				if isKeywordIterator(visitable) then
 				    // check which keyword type and act accordingly
-					var policy: IteratorPolicy init iterators.getValue(visitable.simpleNameCS.~value.toString)
+					var policy: IteratorPolicy init iteratorList.iterators.getValue(visitable.simpleNameCS.~value.toString)
 					if policy != void then
 						policy.generate(visitable, self)
 					else
@@ -477,7 +520,7 @@ using qualifiedNames
 			
 		operation handleVariableExpression(featureName: String): Void is
 			do
-				write(escape( featureName))
+				write(kermeta.escape( featureName))
 				if featureIsLocalVariable(featureName) then
 					stdio.writeln("[" + featureName + "] is a local variable")
     				setLocalFeature(getLocalVariable(featureName))
@@ -496,6 +539,12 @@ using qualifiedNames
         		setLocalFeature(stringLiteral)
 			end
 			
+		/**  You have thee choices here:
+		 ** - could be a string literal (there seems to be a bug in the parser that makes them look like this
+		 ** - it could be a variable expression, call the handler above
+		 ** - it coul dbe the name of a type, but only if we are expecting one because the function
+		 ** is one of those special ones that takes a type name as a parameter such as oclAsType(...)
+		 **/
 		method visitVariableExpCS(visitable : VariableExpCS) : Void is
 			do
 				var  content: String init visitable.simpleNameCS.~value
@@ -504,11 +553,11 @@ using qualifiedNames
 					qualifiedTypeName := QualifiedName.new.fromString(content)
 					write(qualifiedTypeName.toString)
 				else
-    				if (content.size == visitable.simpleNameCS.endOffset - visitable.simpleNameCS.startOffset +1 ) then
     				// OCL Missing string-quote hack:
+    				if (content.size == visitable.simpleNameCS.endOffset - visitable.simpleNameCS.startOffset +1 ) then
     					stdio.writeln("[" + content+ "] is a variable expression")
     					handleVariableExpression(content)
-    				else
+    				else // It's a string, d'oh!
     					stdio.writeln("[" + content+ "] is a string literal")
     					handleStringLiteral(content)
     				end
@@ -543,6 +592,7 @@ using qualifiedNames
 				stdio.writeln("Visiting feature call [" + featureName+"]")
 				if visitable.source != void then
 					visitable.source.accept(self)		
+					// This is where we decide whether or not to use an explicit collect
     				if getLocalFeatureIsMultiple() then
     			    	implicitCollect(featureName)
     				else
@@ -568,10 +618,10 @@ using qualifiedNames
 				var accessor: String init visitable.accessor.name
 				stdio.writeln("Visiting operation call [" + accessor+"][" +operationName+ "]")
 				if accessor.equals(DotOrArrowEnum.arrow.name) then // collection operation
-					getCollectionOperationPolicy(operationName).generate(visitable, self)
+					operatorList.getCollectionOperationPolicy(operationName).generate(visitable, self)
 				else
-					if isOperator(operationName) then //  operator or OCL operation
-    					getOperatorPolicy(operationName).generate(visitable, self)
+					if operatorList.isOperator(operationName) then //  operator or OCL operation
+    					operatorList.getOperatorPolicy(operationName).generate(visitable, self)
     				else
     					visitFeatureCallExpCS(visitable) // model operation
     				end

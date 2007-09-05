@@ -1,4 +1,4 @@
-/* $Id: IteratorPolicies.kmt,v 1.2 2007-08-23 15:05:21 bitterjug Exp $
+/* $Id: IteratorPolicies.kmt,v 1.3 2007-09-05 17:40:24 bitterjug Exp $
  * Creation date: July 25, 2007
  * License:
  * Copyright:
@@ -11,7 +11,6 @@ require kermeta
 require "ocl2kmtVisitor.kmt"
 require "oclcstvisitor.kmt"
 
-     
 using kermeta::standard
 using kermeta::exceptions
 using kermeta::utils
@@ -19,7 +18,7 @@ using kermeta::utils
 /** Superclass for the iterator that removes knowledge of how to deal with 
  **  ocl iterators and their translation.
  **/
-class IteratorPolicies {
+class Iterators {
 
        attribute __iterators : Hashtable<String, IteratorPolicy>
         
@@ -49,7 +48,6 @@ class IteratorPolicies {
         			end
         			result := __iterators
         		end
-
 }
 
  
@@ -85,12 +83,23 @@ class IteratorPolicies {
  **/
 class SimpleIteratorIP inherits IteratorPolicy {
 
+	attribute __kermeta : KermetaHelper // I should be able to write [1:KermetaHelper] here and have this initialized
+	
+	property readonly kermeta : KermetaHelper 
+		getter is
+			do
+				if __kermeta == void then
+					__kermeta := KermetaHelper.new
+				end
+				result := __kermeta
+			end
+			
 	operation processIteratorVariable(visitable : ocl::cst:: VariableCS, visitor: Ocl2kmtVisitor) : Void is
 		do
 			var variableName: String init visitable.name.toString
 			var implicitTypeName : String init visitor.getLocalFeatureTypeName
 			stdio.writeln("Processing iterator variable [" + variableName + "]")
-			visitor.write(visitor.escape(variableName))
+			visitor.write(kermeta.escape(variableName))
 			if visitable.typeCS != void then // type specified?
 				visitor.write(" : ")
 				visitable.typeCS.accept(visitor)
@@ -107,7 +116,7 @@ class SimpleIteratorIP inherits IteratorPolicy {
 			end
 		end
 			
-	operation generate(oclIterator: ocl::cst::IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
+	method generate(oclIterator: ocl::cst::IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
 		 	visitor.pushNewStackFrame()
 			oclIterator.source.accept(visitor)
@@ -160,7 +169,7 @@ class UniqueIP inherits SimpleIteratorIP {
 
 class FunctionIP inherits IteratorPolicy {
     
-	operation generate(oclIterator: ocl::cst::IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
+	method generate(oclIterator: ocl::cst::IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
 		 	if name == void then
 				visitor.write(oclIterator.simpleNameCS.~value.toString )

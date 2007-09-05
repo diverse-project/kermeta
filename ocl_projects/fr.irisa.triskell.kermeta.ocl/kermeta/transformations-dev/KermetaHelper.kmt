@@ -1,4 +1,4 @@
-/* $Id: KermetaHelper.kmt,v 1.1 2007-08-10 09:45:57 bitterjug Exp $
+/* $Id: KermetaHelper.kmt,v 1.2 2007-09-05 17:40:24 bitterjug Exp $
  * Creation date: July 25, 2007
  * License:
  * Copyright:
@@ -79,7 +79,7 @@ class KermetaHelper
 		    	else
 			    	result := ""
 			    end
-			    result.append(s)
+			    result := result + s
 		end
 
 }

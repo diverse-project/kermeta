@@ -1,4 +1,4 @@
-/* $Id: OperatorPolicies.kmt,v 1.7 2007-08-23 15:05:21 bitterjug Exp $
+/* $Id: OperatorPolicies.kmt,v 1.8 2007-09-05 17:40:24 bitterjug Exp $
  * License:
  * Copyright:
  * Authors: Mark Skipper
@@ -6,10 +6,8 @@
 package ocl2kmt;
 require kermeta
 require "ocl2kmtVisitor.kmt"
-require "oclcstvisitor.kmt"
-require "TypeHelper.kmt"
 require "../helpers/QualifiedName.kmt"
- 
+
 using kermeta::standard
 using kermeta::exceptions
 using kermeta::utils
@@ -20,12 +18,12 @@ using qualifiedNames
  /** Superclass for the visitor that abstracts out its knowledge of 
   ** how to deal with OCL operators
   **/
- class OperatorPolicies {
+ class Operators{
  
  	   attribute __operators: Hashtable<String, OperatorPolicy>
  	   attribute __collectionOperations: Hashtable<String, OperatorPolicy>
  	   
- 	   property element: String 
+ 	   property readonly element: String 
  	   	getter is
  	   		do
  	   			result := "element"
@@ -173,9 +171,9 @@ class OperatorPolicy  {
 class SimpleOP inherits OperatorPolicy {
 
 	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
-		 do
+		 do 
 		 		visitor.write("(")
-				oclOp.source.accept(visitor)		
+				oclOp.source.accept(visitor)	
 				visitor.write(" ")
 				if name != void then
 					visitor.write(name)
@@ -200,7 +198,7 @@ class MinusSignOp inherits OperatorPolicy {
 	 *  - numeric subtraction
 	 *  - set subtraction
 	 */ 
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
 			if oclOp.arguments.empty  then
 				// unary minus
@@ -224,7 +222,7 @@ class MinusSignOp inherits OperatorPolicy {
 
 class ImpliesOP inherits OperatorPolicy {
 
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
 			oclOp.source.accept(visitor)
 			visitor.write(".~not.~or(")
@@ -238,7 +236,7 @@ class ImpliesOP inherits OperatorPolicy {
 
 class UnimplementedOp inherits OperatorPolicy {
 
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
 			var e: Exception init Exception.new
 			e.message := "Unimplemented Operation type: " + oclOp.simpleNameCS.~value.toString
@@ -248,7 +246,7 @@ class UnimplementedOp inherits OperatorPolicy {
 
 class NotNullOp inherits OperatorPolicy {
 
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		do
 			oclOp.source.accept(visitor)
 			visitor.write (" == void")
@@ -258,7 +256,7 @@ class NotNullOp inherits OperatorPolicy {
 
 class PrefixOp inherits OperatorPolicy {
 
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		do
 			visitor.write(name)
 			visitor.write(" (")
@@ -270,7 +268,7 @@ class PrefixOp inherits OperatorPolicy {
 
 class NotSupported inherits OperatorPolicy {
 
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		do
 			var message: String init "Unsupported operation [" + oclOp.simpleNameCS.~value.toString + "]"
 			stdio.writeln("***** WARNING " + message)
@@ -326,7 +324,7 @@ class NotSupported inherits OperatorPolicy {
 			// visitor.setLocalFeature(....somethingresulting from this operation...)
 			// the return type of each kind of operation is specific.:e
 			if visitor.isDefined(returnType ) then
-				if returnType.equals(visitor.element) then
+				if returnType.equals("element") then
 					visitor.setLocalFeature(visitor.createAttribute("functionreturn", visitor.getLocalFeatureType, 0, resultUpperBound , resultIsOrdered))
 				else
             		visitor.setLocalFeature(visitor.simpleValue(returnType))
@@ -366,7 +364,7 @@ class functionOrderedCollectionCall inherits CollectionOperation {
 
 class FunctionCallOp inherits OperatorPolicy {
 
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
 		    visitor.write(getPrefix)
 			oclOp.source.accept(visitor)
@@ -404,7 +402,7 @@ class TypeTest inherits FunctionCallOp {
 
 	reference parameterType: ecore::EClassifier
 	
-	operation addActuals(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is 
+	method addActuals(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is 
 		do
 			stdio.writeln("Adding actual parameter for type test operation")
 			if not oclOp.arguments.size.equals(1) then
@@ -414,7 +412,7 @@ class TypeTest inherits FunctionCallOp {
 			visitor.write( "(" )
 			oclOp.arguments.any.accept(visitor)
 			visitor.write( ")" )
-			visitor.expectExpression
+			visitor.expectExpression 
 			parameterType := visitor.findType( visitor.qualifiedTypeName)
 		end
 }
