@@ -1,12 +1,17 @@
-/**
- * 
+/* $Id: EcoreRegisteringAction.java,v 1.4 2007-09-05 09:28:51 cfaucher Exp $
+ * Project : fr.irisa.triskell.kermeta
+ * File : EcoreRegisteringAction.java
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 24 juil. 2006
+ * Authors : 
+ * 		David Touzet <dtouzet@irisa.fr>
+ * Description :
  */
 package fr.irisa.triskell.kermeta.popup.actions;
 
-import java.util.Iterator;
-
 import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -35,17 +40,12 @@ public class EcoreRegisteringAction extends EMFRegisterAction {
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
 	public void run(IAction action) {
-		IFile ecoreFile = null;
 		String strURI = null;
 		URI mmURI = null;
 		Resource res = null;
-		EPackage ePack = null;
 		
 		ResourceSet rs = new ResourceSetImpl();
-		Iterator it = ecoreFiles.iterator();
-		while(it.hasNext()) {
-			ecoreFile = (IFile) it.next();
-			
+		for(IFile ecoreFile : ecoreFiles) {	
 			strURI = "platform:/resource" + ecoreFile.getFullPath().toString(); 
 			mmURI = URI.createURI(strURI);
 			res = rs.getResource(mmURI, true);
@@ -61,18 +61,14 @@ public class EcoreRegisteringAction extends EMFRegisterAction {
 	}
 	
 	/**
-	 * @param p
+	 * 
+	 * @param pack
 	 */
 	private void registerPackages(EPackage pack) {
 		Registry.INSTANCE.put(pack.getNsURI(), pack);
 		
-		EList l = pack.getESubpackages();
-		
-		if(l != null) {
-			Iterator it = l.iterator();
-			while(it.hasNext()) {
-				registerPackages((EPackage) it.next());
-			}
+		for(EPackage subPack : pack.getESubpackages()) {
+			registerPackages(subPack);
 		}
 	}
 
