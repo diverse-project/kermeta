@@ -1,4 +1,4 @@
-/* $Id: Visitor.java,v 1.3 2007-09-04 08:00:07 fmunoz Exp $
+/* $Id: Visitor.java,v 1.4 2007-09-05 15:16:18 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.ket
  * File       : Visitor.java
  * License    : EPL
@@ -96,7 +96,7 @@ public class Visitor extends JETASTVisitor {
 			
 			element.accept(this);
 		}
-		out.println("result := _res");
+		out.println("result := _res.toString");
 		out.println("end");
 		out.println("}");
 		
@@ -132,7 +132,7 @@ public class Visitor extends JETASTVisitor {
 		}
 		out.println("class " +  directive.getAttributes().get("class") + "{");
 
-		out.println("operation generate("+directive.getAttributes().get("parameters")  +"):StringBuffer is do");
+		out.println("operation generate("+directive.getAttributes().get("parameters")  +"):String is do");
 		out.println("var _res: StringBuffer init StringBuffer.new");
 		begin=true;
 		
