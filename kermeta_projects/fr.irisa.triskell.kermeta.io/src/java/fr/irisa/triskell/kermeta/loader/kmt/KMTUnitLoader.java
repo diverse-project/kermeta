@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.12 2007-09-04 17:03:01 dvojtise Exp $
+/*$Id: KMTUnitLoader.java,v 1.13 2007-09-05 11:12:53 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.IBuildingState;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
@@ -384,9 +385,16 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 				Set <TypeDefinition> externalTypesDefinition = TypeDefinitionSearcher.getExternalTypesDefinition(kermetaUnit, qualifiedName);
 			
 				for ( TypeDefinition current : externalTypesDefinition ) {
-					typeDefinition.getBaseAspects().add( current );
-					KermetaUnit importedUnit = KermetaUnitHelper.getKermetaUnitFromObject( current );
-					importedUnit.getAspects().put( current, KermetaUnitHelper.getAspects(importedUnit, current) );
+					/*
+					 * 
+					 * Taking care about not aspectizing itself.
+					 * 
+					 */
+					if ( current != typeDefinition ) {
+						typeDefinition.getBaseAspects().add( current );
+						KermetaUnit importedUnit = KermetaUnitHelper.getKermetaUnitFromObject( current );
+						importedUnit.getAspects().put( current, KermetaUnitHelper.getAspects(importedUnit, current) );
+					}
 				}
 			
 			}
