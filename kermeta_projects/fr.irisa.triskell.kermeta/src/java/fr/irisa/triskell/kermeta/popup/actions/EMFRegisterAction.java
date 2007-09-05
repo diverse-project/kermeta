@@ -61,6 +61,7 @@ public class EMFRegisterAction implements IObjectActionDelegate {
 			currentSelection = (StructuredSelection) selection;
 			Iterator it = currentSelection.iterator();
 
+			ecoreFiles.clear(); // remove the previous selection, else the old selected packages will be re-registered
 			while(it.hasNext()) {
 				ecoreFiles.add( (IFile) it.next() );
 			}
