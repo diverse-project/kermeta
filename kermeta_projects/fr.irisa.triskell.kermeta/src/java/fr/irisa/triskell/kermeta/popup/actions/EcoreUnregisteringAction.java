@@ -8,6 +8,7 @@ import java.util.Iterator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -52,9 +53,12 @@ public class EcoreUnregisteringAction extends EMFRegisterAction {
 			KermetaPlugin.getLogger().debug("Unregistering file : " +strURI);
 			mmURI = URI.createURI(strURI);
 			res = rs.getResource(mmURI, true);
-			
-			ePack = (EPackage) res.getContents().get(0);
-			unregisterPackages(ePack);
+
+			for(EObject eobj : res.getContents()) {
+				if( eobj instanceof EPackage) {
+					unregisterPackages((EPackage) eobj);
+				}
+			}
 		}
 		
 		displayRegisteredPackages();

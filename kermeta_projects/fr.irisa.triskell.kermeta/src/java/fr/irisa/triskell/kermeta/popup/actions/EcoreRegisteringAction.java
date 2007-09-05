@@ -8,6 +8,7 @@ import java.util.Iterator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -48,9 +49,12 @@ public class EcoreRegisteringAction extends EMFRegisterAction {
 			strURI = "platform:/resource" + ecoreFile.getFullPath().toString(); 
 			mmURI = URI.createURI(strURI);
 			res = rs.getResource(mmURI, true);
-			
-			ePack = (EPackage) res.getContents().get(0);
-			registerPackages(ePack);
+
+			for(EObject eobj : res.getContents()) {
+				if( eobj instanceof EPackage) {
+					registerPackages((EPackage) eobj);
+				}
+			}
 		}
 		
 		displayRegisteredPackages();
