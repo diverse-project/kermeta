@@ -7,6 +7,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl.URIMap;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ocl.parser.EnvironmentFactory;
 import org.eclipse.emf.ocl.parser.EvaluationEnvironment;
@@ -19,7 +21,9 @@ import org.eclipse.emf.ocl.parser.EvaluationEnvironment;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.internal.parser.OCLLexer;
+import org.kermeta.io.plugin.IOPlugin;
 
+import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 
@@ -47,8 +51,11 @@ public class TestOCLParser {
 		new TestOCLParser().run(sourcePath, targetPath);
 	}
 	
-	public static void run(String ocltextfile, String uri) throws ParserException {
-		File oclSourceFile = new File(ocltextfile);
+	public static void run(String ocltextfileUri, String uri) throws ParserException {
+		// URI to file path
+		URI oclfileURI = URI.createURI(ocltextfileUri);
+		
+		File oclSourceFile = new File(oclfileURI.toFileString());//new File(ocltextfile);
 		String oclSource =  getContents(oclSourceFile);
 		
 		MyOCLParser parser = new MyOCLParser(oclSource);
@@ -60,7 +67,7 @@ public class TestOCLParser {
 		
 
 		if (constraint != null) {
-			URI fileURI = URI.createFileURI(uri);
+			URI fileURI = URI.createURI(uri);
 			resource = new XMIResourceFactoryImpl().createResource(fileURI);
 			resource.getContents().add(constraint);
 			saveList(constraint.eCrossReferences());

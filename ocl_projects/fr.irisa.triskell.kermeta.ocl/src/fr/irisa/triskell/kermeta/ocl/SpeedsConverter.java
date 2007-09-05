@@ -1,3 +1,10 @@
+/**
+ *  Mark Skipper September 2007
+ *  I was using this to test the ocl from the speeds project. 
+ *  I know this is not the right place to put it, but I was having trouble
+ *  understanding how to do cross-package dependencies in Eclipse and
+ *  this, meanwhile, allowed me to get on with my work.
+ */
 package fr.irisa.triskell.kermeta.ocl;
 import java.io.File;
 import java.io.BufferedWriter;
@@ -5,20 +12,24 @@ import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 
+import org.eclipse.emf.common.util.URI;
+
 import fr.irisa.triskell.kermeta.ocl.GenerateKMT;
 
 public class SpeedsConverter {
 	
-	static String workbench_path = GenerateKMT.workbench_path;
-	static String speeds = "speedsImplementation";
-	static String speedsEcore = workbench_path + speeds + "/hrc/ecore/speedsL1.ecore";
-	static String oclpath = workbench_path + speeds + "/hrc/constraints/ocl/";
-	static String kmtpath = workbench_path + speeds + "/hrc/constraints/kmt/ocl/";
-	
+	static final String workbench_path = "platform:/resource/";
+	static final String speeds = "speedsImplementation";
+	static final String speedsEcore = workbench_path + speeds + "/hrc/ecore/speedsL1.ecore";
+	static final String oclDirPath = workbench_path + speeds + "/hrc/constraints/ocl/";
+	static final String kmtDirPath = workbench_path + speeds + "/hrc/constraints/kmt/ocl/";
+	static final URI speedsEcoreURI = URI.createURI(speedsEcore);
+	static final GenerateKMT generator = new GenerateKMT();
 	
 	public static void convertOcl(String oclPath, String kmtPath){
-		GenerateKMT generator = new GenerateKMT();
-		generator.generate(speedsEcore , oclPath, kmtPath);
+    	URI oclURI = URI.createURI(oclPath);
+    	URI kmtURI = URI.createURI(kmtPath);
+		generator.generate(speedsEcoreURI , oclURI, kmtURI);
 	}
 	
 	static class oclFilter implements FilenameFilter {
@@ -36,17 +47,23 @@ public class SpeedsConverter {
 		    }
 	}
 	
-	public static void listFiles() throws Exception{
-		File dir = new File(oclpath);
+	/**
+	 * At first the speeds ocl constraints were all in separate files and I was using
+	 * this to process them all. But the dependencies mean its more practical to
+	 * process everything in one file and split afterwards. That file is speedsAllOcl
+	 * @throws Exception
+	 */
+	public static void processAllFiles() throws Exception{
+		File dir = new File(oclDirPath);
 		if (!dir.isDirectory()) {
-			throw new Exception( "Unrecognised path: " + oclpath);
+			throw new Exception( "Unrecognised directory path: " + oclDirPath);
 		}
 		String[] list = dir.list(new oclFilter());
 		for (int i = 0; i < list.length; i++)  {
 			String oclfile =  list[i];
 			String kmtfile = oclfile.substring(0, oclfile.lastIndexOf(".")) +".kmt";
-			oclfile = oclpath + oclfile;
-			kmtfile =kmtpath + kmtfile;
+			oclfile = oclDirPath + oclfile;
+			kmtfile =kmtDirPath + kmtfile;
 			System.out.println("\n\n" + i + ") " + oclfile + " --> " + kmtfile);
 			try {
 				convertOcl(oclfile, kmtfile);
@@ -58,26 +75,9 @@ public class SpeedsConverter {
 		}
 	}
 	
-	public static void oldmain(String[] args) {
-		try {
-    		new SpeedsConverter().listFiles();
-		} catch(Exception e){
-			System.out.println(e.getMessage());
-		}
-	}
-
-	
-	public static void test(){
-		String project = "fr.irisa.triskell.kermeta.ocl";
-		new GenerateKMT().generate( 
-				workbench_path + project+  "/ocl/sample.ecore", 
-				workbench_path + project + "/ocl/70.ocl",
-				workbench_path + project + "/ocl/70.kmt");
-	}
-
 	public static void main(String[] args) {
 		try {
-    		listFiles();
+    		processAllFiles();
 		} catch(Exception e){
 			System.out.println(e.getMessage());
 		}

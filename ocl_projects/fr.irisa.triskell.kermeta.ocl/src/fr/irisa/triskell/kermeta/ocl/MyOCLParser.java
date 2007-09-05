@@ -15,11 +15,20 @@ public class MyOCLParser extends OCLParser {
 	
 	private int errorReportLineOffset = 0;
 	
+	/**
+	 * Creates an OCL parser ready to parse the given OCL source code.
+	 * @param oclTextToParse
+	 */
 	public MyOCLParser(String oclTextToParse) {
 		super ( new OCLLexer((oclTextToParse).toCharArray()),
 				new MyEnvironement<Object, Object, Object, Object, Object, Object, Object, Object,Object,Object,Object,Object>());
 	}
 	
+	/**
+	 * Performs the actual parse
+	 * @return the root of the CST
+	 * @throws org.eclipse.ocl.ParserException
+	 */
 	public EObject parse() throws  org.eclipse.ocl.ParserException {
 		EObject cstNode = parser();
 		this.setTraceFlag(true);
