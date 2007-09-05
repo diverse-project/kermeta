@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.49 2007-08-27 09:30:05 cfaucher Exp $
+/* $Id: KM2EcorePass1.java,v 1.50 2007-09-05 09:35:17 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -529,7 +529,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 
 		// In case type of the operation has a kermeta special type, create the KermetaSpecialTypes
 		// alias to handle the operation type in the Ecore file
-		if(node.getType() instanceof TypeVariable || node.getType() instanceof FunctionType) {
+		if(/*node.getType() instanceof TypeVariable ||*/ node.getType() instanceof FunctionType) {
 			// KermetaSpecialTypes alias is created only once for all properties/parameters/operations
 			// that have a kermeta special type as type
 			if(kermetaTypesAlias == null) {
@@ -569,7 +569,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 
 		// In case type of the parameter has a kermeta special type, create the KermetaSpecialTypes
 		// alias to handle the parameter type in the Ecore file
-		if(node.getType() instanceof TypeVariable  || node.getType() instanceof FunctionType) {
+		if(/*node.getType() instanceof TypeVariable  ||*/ node.getType() instanceof FunctionType) {
 			// KermetaSpecialTypes alias is created only once for all properties/parameters/operations
 			// that have a kermeta special type as type
 			if(kermetaTypesAlias == null) {
@@ -656,7 +656,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 		
 		// In case type of the property has a kermeta special type, create the KermetaSpecialTypes
 		// alias to handle the property type in the Ecore file
-		if(node.getType() instanceof TypeVariable  || node.getType() instanceof FunctionType) {
+		if(/*node.getType() instanceof TypeVariable  ||*/ node.getType() instanceof FunctionType) {
 			// KermetaSpecialTypes alias is created only once for all properties/parameters/operations
 			// that have a kermeta special type as type
 			if(kermetaTypesAlias == null) {
