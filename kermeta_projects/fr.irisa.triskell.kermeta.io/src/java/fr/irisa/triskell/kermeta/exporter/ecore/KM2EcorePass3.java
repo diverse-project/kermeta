@@ -22,6 +22,7 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 public class KM2EcorePass3 extends KM2Ecore {
@@ -93,6 +94,9 @@ public class KM2EcorePass3 extends KM2Ecore {
 				operation.setEType( type );
 			}
 		
+		} else if(node.getType() instanceof VoidType) {
+			// Set to null the return type of an Operation instead of EJavaObject (maybe the EMF default)
+			operation.setEType(null);
 		}
 		return super.visitOperation(node);
 	}
