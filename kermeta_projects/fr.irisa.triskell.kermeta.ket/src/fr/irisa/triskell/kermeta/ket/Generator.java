@@ -1,4 +1,4 @@
-/* $Id: Generator.java,v 1.2 2007-07-26 12:25:39 cfaucher Exp $
+/* $Id: Generator.java,v 1.3 2007-09-05 15:16:01 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.ket
  * File       : Generator.java
  * License    : EPL
@@ -141,7 +141,7 @@ public class Generator implements IObjectActionDelegate{
 	public void selectionChanged(IAction action, ISelection selection) {
 		if (selection instanceof StructuredSelection)
 		{
-			// the se=lection should be a single *.ecore file
+			// the selection should be a single *.kmtt file
 			currentSelection = (StructuredSelection)selection;
 			Iterator it = currentSelection.iterator();
 
