@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<eenum:A xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eenum="platform:/resource/fr.irisa.triskell.kermeta.tests/ecore/EEnum.ecore">
-  <refenum name="a">
-    <eLiterals name="a1" value="1"/>
-  </refenum>
-</eenum:A>
