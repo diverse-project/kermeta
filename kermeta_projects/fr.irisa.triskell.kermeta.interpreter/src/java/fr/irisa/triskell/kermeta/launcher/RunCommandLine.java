@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.16 2007-09-04 16:52:17 dvojtise Exp $
+/* $Id: RunCommandLine.java,v 1.17 2007-09-07 09:12:34 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : EPL
@@ -28,7 +28,6 @@ import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_K;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_M;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_O;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_P;
-import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_T;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_U;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -50,7 +49,6 @@ public class RunCommandLine {
     protected String className = null;
     protected String operationName = null;
     protected String kermetaStandardURI = null;
-    protected boolean isTestSuite = false;
     protected ArrayList<RuntimeObject> interpreterParameters;
     protected boolean initialized = false;
     
@@ -73,7 +71,6 @@ public class RunCommandLine {
 				new NoOption (new Vector<String>()),
 				new Option_C (new Vector<Object>()),
 				new Option_H (),
-				new Option_T (),
 				new Option_P (),
 				new Option_K (new Vector<Object>()),
 				new Option_O (new Vector<Object>()),
@@ -120,16 +117,6 @@ public class RunCommandLine {
 			{
 			    unitURI = it.next().toString();
 			    internalLog.debug ("\t" + unitURI);
-			}
-		}
-	    if (checkOption.Saw ("-T"))
-		{
-	        internalLog.debug ("option -T was seen: ");
-			Iterator<?> it = checkOption.getOption("-T").getParameters().iterator();						
-			if (it.hasNext())
-			{
-			    kermetaStandardURI = it.next().toString();
-			    internalLog.debug ("\t" + kermetaStandardURI);
 			}
 		}
 	    if (checkOption.Saw ("-P"))
@@ -207,38 +194,10 @@ public class RunCommandLine {
 	        return;
 	    }
 	        
-		if (isTestSuite)
-		{
-		    runTestSuite(className);
-		}
-		else
-		{
-			runMainOperation(className,operationName, interpreterParameters);
-		    
-		}
-	
+		runMainOperation(className,operationName, interpreterParameters);
+
 	}  
 	
-	/**
-	 * Run a test suite : all operations that begin by "test" inside the class
-	 * specified by mainClassValue are executed
-	 * TODO (bis but important) : create a test suite handler, but in Kermeta!! 
-	 * @param mainClassValue
-	 * @param builder
-	 * @param stdioFClass
-	 * @param args
-	 */
-	public void runTestSuite(
-	        String mainClassValue)
-	{
-	    RunJunitFactory testJunit = new RunJunitFactory();
-	    testJunit.addTestsForUnit(mainClassValue);
-	    junit.framework.TestResult tr = new TestResult();
-	    testJunit.run(tr);
-	    internalLog.info("Runs: "+tr.runCount());
-	    internalLog.info("Errors: "+tr.errorCount());
-	    internalLog.info("Failures: "+tr.failureCount());
-	}
 	/**
 	 * 
 	 * @param mainClassValue the value of the mainClass tag
