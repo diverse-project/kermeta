@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.15 2007-07-26 09:51:34 ftanguy Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.16 2007-09-07 11:15:30 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 
 /**
@@ -145,12 +144,12 @@ public class QualifiedNamePatcher {
     private EPackage getEPackageFromNsUri(String nsuri)
     {
     	EPackage result = null;
-        TreeIterator it = null; 
+        TreeIterator<EObject> it = null; 
         if(metaModelResource ==  null) return result;
         it = metaModelResource.getAllContents();            
         while (it.hasNext() && result == null)
         {
-            EObject obj = (EObject)it.next();
+            EObject obj = it.next();
 			if (obj instanceof EPackage)
 			{
 				if (((EPackage)obj).getNsURI().equals(nsuri))
