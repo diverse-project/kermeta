@@ -1,25 +1,89 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kpm:KPM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpm="plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/Kpm.ecore">
-  <events name="update"/>
+<kpm:KPM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpm="http://kpm">
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.openProject"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.addMarkers"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.typecheck"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.constraintCheck"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.kmt2km"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.ecore2kmt"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.kmt"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.km"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.ecore"/>
+  <rules event="//@events.0" name="Open Project" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:NullExpression"/>
+    </in>
+    <outs action="//@actions.0">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update KMT File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
+    </in>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.6">
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.1"/>
+    </outs>
+    <outs action="//@actions.4">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.5">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update KM File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.1"/>
+    </in>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update Ecore File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.2"/>
+    </in>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.2" name="Close KMT File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
+    </in>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
   <events name="open"/>
-  <dependencies type="//@types.1" event="//@events.0" actions="//@actions.0 //@actions.2 //@actions.1 //@actions.3" in="//@expressions.0" outs="//@expressions.1 //@expressions.2" name="d1"/>
-  <dependencies event="//@events.1" actions="//@actions.0" in="//@expressions.0" name="d2"/>
-  <dependencies type="//@types.1" event="//@events.0" actions="//@actions.0" in="//@expressions.0" name="updateEditor"/>
-  <actions name="fr.irisa.triskell.kermeta.kpm.actions.typecheck"/>
-  <actions name="fr.irisa.triskell.kermeta.kpm.actions.kmt2km"/>
-  <actions name="fr.irisa.triskell.kermeta.kpm.actions.kmt2ecore"/>
-  <actions name="fr.irisa.triskell.kermeta.kpm.actions.markdependents"/>
-  <filters xsi:type="kpm:NameFilter" regexIn=".+\.kmt" regexOut="*.kmt"/>
-  <filters xsi:type="kpm:NameFilter" regexIn=".+\.km" regexOut="*.km"/>
-  <filters xsi:type="kpm:NameFilter" regexIn=".+\.ecore" regexOut="*.ecore"/>
-  <filters xsi:type="kpm:ExistFilter"/>
-  <types name="translation"/>
-  <types name="synchro"/>
-  <expressions filter="//@filters.0" id="KMT expr"/>
-  <expressions filter="//@filters.1" id="KM expr"/>
-  <expressions filter="//@filters.2" id="Ecore expr">
-    <subExpressions xsi:type="kpm:And" filter="//@filters.3"/>
-  </expressions>
-  <units xsi:type="kpm:File" typeName="File" dependencies="//@dependencies.1 //@dependencies.2" name="newUnit.kmt" path="/someUnit/src/newUnit.kmt" lastTimeModified="2007-03-21T17:59:38.000+0100"/>
-  <units xsi:type="kpm:File" typeName="File" dependencies="//@dependencies.1 //@dependencies.2" name="Test_TestCase.kmt" path="/someUnit/test/Test_TestCase.kmt" lastTimeModified="2007-03-21T18:04:48.000+0100"/>
+  <events name="update"/>
+  <events name="close"/>
+  <units rules="//@rules.0" value="/someUnit"/>
+  <units rules="//@rules.1 //@rules.4 //@rules.0" lastTimeModified="2007-07-27T12:12:44.000+0200" value="/someUnit/src/newUnit.kmt"/>
+  <units rules="//@rules.1 //@rules.4 //@rules.0" lastTimeModified="2007-05-29T11:03:58.000+0200" value="/someUnit/src/Assert.kmt"/>
+  <ruleTypes name="require"/>
+  <ruleTypes name="normal"/>
 </kpm:KPM>
