@@ -42,10 +42,10 @@ public class EcoreUnregisteringAction extends EMFRegisterAction {
 		String strURI = null;
 		URI mmURI = null;
 		Resource res = null;
-		EPackage ePack = null;
+		//EPackage ePack = null;
 		
 		ResourceSet rs = new ResourceSetImpl();
-		Iterator it = ecoreFiles.iterator();
+		Iterator<IFile> it = ecoreFiles.iterator();
 		while(it.hasNext()) {
 			ecoreFile = (IFile) it.next();
 			
@@ -70,10 +70,10 @@ public class EcoreUnregisteringAction extends EMFRegisterAction {
 	 * @param p
 	 */
 	private void unregisterPackages(EPackage pack) {
-		EList l = pack.getESubpackages();
+		EList<EPackage> l = pack.getESubpackages();
 		
 		if(l != null) {
-			Iterator it = l.iterator();
+			Iterator<EPackage> it = l.iterator();
 			while(it.hasNext()) {
 				unregisterPackages((EPackage) it.next());
 			}

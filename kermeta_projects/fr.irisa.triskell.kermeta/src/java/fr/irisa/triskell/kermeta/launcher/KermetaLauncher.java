@@ -1,5 +1,5 @@
 
-/*$Id: KermetaLauncher.java,v 1.4 2007-08-02 12:59:50 ftanguy Exp $
+/*$Id: KermetaLauncher.java,v 1.5 2007-09-07 14:13:46 dtouzet Exp $
  * Project : fr.irisa.triskell.kermeta
  * File : 	KermetaLauncher.java
  * License : EPL
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
-import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;

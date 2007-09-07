@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.51 2007-09-04 16:44:07 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.52 2007-09-07 14:13:43 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -50,6 +50,7 @@ import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -390,7 +391,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			RuntimeObject rouseInterpreterInternalResources = (RuntimeObject) roRepository.getProperties().get("useInterpreterInternalResources");
 			useInterpreterInternalResources = rouseInterpreterInternalResources != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(rouseInterpreterInternalResources) : false;		
 			//	for each of the resources in the repository (other than the current one)
-        	for (RuntimeObject next : ((ArrayList<RuntimeObject>) roResources.getData().get("CollectionArrayList"))) 
+        	//for (RuntimeObject next : ((ArrayList<RuntimeObject>) roResources.getData().get("CollectionArrayList"))) 
+        	for (RuntimeObject next : Collection.getArrayList(roResources))
 			{
 				RuntimeObject roResource = next;
 				if (roResource != associatedResource){
@@ -418,7 +420,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     		
         	// for each of the resources in the repository (other than the current one)    		
 			// update the models
-			for (RuntimeObject next : ((ArrayList<RuntimeObject>) roResources.getData().get("CollectionArrayList"))) 
+			//for (RuntimeObject next : ((ArrayList<RuntimeObject>) roResources.getData().get("CollectionArrayList"))) 
+			for (RuntimeObject next : Collection.getArrayList(roResources))
 			{
 				RuntimeObject roResource = next;
 				if (roResource != associatedResource){

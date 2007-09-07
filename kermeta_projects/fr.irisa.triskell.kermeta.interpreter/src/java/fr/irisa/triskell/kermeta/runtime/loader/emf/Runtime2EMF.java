@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.64 2007-09-04 16:44:07 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.65 2007-09-07 14:13:43 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -292,7 +292,8 @@ public class Runtime2EMF {
 		if (property.getData().containsKey("CollectionArrayList")
 				&& property.getData().get("CollectionArrayList") != null)
 		{   // For each feature of the collection of features
-			for (RuntimeObject next : ((ArrayList<RuntimeObject>) property.getData().get("CollectionArrayList")))
+			//for (RuntimeObject next : ((ArrayList<RuntimeObject>) property.getData().get("CollectionArrayList")))
+			for (RuntimeObject next : Collection.getArrayList(property))
 				fillRuntimeObjectList( next);
 		}
 		// If property is not an EList
@@ -484,7 +485,8 @@ public class Runtime2EMF {
 			// retreives the repository
 		RuntimeObject roRepository = (RuntimeObject) unit.associatedResource.getProperties().get("repository");
 		RuntimeObject roResources = (RuntimeObject) roRepository.getProperties().get("resources");
-		for (RuntimeObject next : ((ArrayList<RuntimeObject>) roResources.getData().get("CollectionArrayList"))) 
+		//for (RuntimeObject next : ((ArrayList<RuntimeObject>) roResources.getData().get("CollectionArrayList"))) 
+		for (RuntimeObject next : Collection.getArrayList(roResources))
 		{
 			RuntimeObject roResource =  next;
 			if (roResource != unit.associatedResource){ // ignore the main resource metamodel

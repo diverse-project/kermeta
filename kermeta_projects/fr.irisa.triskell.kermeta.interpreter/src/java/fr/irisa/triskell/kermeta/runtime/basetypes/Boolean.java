@@ -1,4 +1,4 @@
-/* $Id: Boolean.java,v 1.8 2007-08-28 09:49:23 dtouzet Exp $ 
+/* $Id: Boolean.java,v 1.9 2007-09-07 14:13:43 dtouzet Exp $ 
  * Implementation of Kermeta base type Boolean 
  */
 
@@ -81,10 +81,12 @@ public class Boolean {
 	    setValue(result, false);
 	}
 	
+	/*
 	private static RuntimeObject create(boolean value, RuntimeObjectFactory factory) {
 	    RuntimeObject result = factory.createObjectFromClassName("kermeta::standard::Boolean");
 	    setValue(result, value);
 	    return result;
 	}
+	*/
 }
 /* END OF FILE */

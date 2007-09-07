@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.15 2007-09-04 13:01:29 dtouzet Exp $
+/* $Id: Resource.java,v 1.16 2007-09-07 14:13:43 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : EPL
@@ -178,7 +178,7 @@ public class Resource {
         	EMFRuntimeUnit emfUnit = (EMFRuntimeUnit) runtime_unit;
  
         	// Compute list of EMF dependent resources (include self emf resource) 
-        	EList emfDependentResources =
+        	EList<org.eclipse.emf.ecore.resource.Resource> emfDependentResources =
         		emfUnit.findDependentResources(
         			getEmfResource(selfRO)
  				);
