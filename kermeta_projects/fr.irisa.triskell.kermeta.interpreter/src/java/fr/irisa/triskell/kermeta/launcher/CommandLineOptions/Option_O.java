@@ -13,7 +13,7 @@ import fr.irisa.triskell.utils.argumentsreader.Option;
 public class Option_O extends Option 
 {
 	/** */
-	public Option_O (Vector args)
+	public Option_O (Vector<String> args)
 	{
 		setName ("-O");
 		setNbArgs (1);
@@ -25,7 +25,7 @@ public class Option_O extends Option
 	}
 	
     /** */
-    public void Proceed (Vector list) 
+    public void Proceed (Vector<String> list) 
     {
 		getParameters().addAll (list);
     }

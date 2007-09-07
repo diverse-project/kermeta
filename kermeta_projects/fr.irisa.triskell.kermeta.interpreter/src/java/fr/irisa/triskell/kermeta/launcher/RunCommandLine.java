@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.17 2007-09-07 09:12:34 cfaucher Exp $
+/* $Id: RunCommandLine.java,v 1.18 2007-09-07 11:12:00 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : EPL
@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
 
-import junit.framework.TestResult;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
@@ -69,13 +68,13 @@ public class RunCommandLine {
 		checkOption = new CheckOption (
 			new Option[] {
 				new NoOption (new Vector<String>()),
-				new Option_C (new Vector<Object>()),
+				new Option_C (new Vector<String>()),
 				new Option_H (),
 				new Option_P (),
-				new Option_K (new Vector<Object>()),
-				new Option_O (new Vector<Object>()),
-				new Option_U (new Vector<Object>()),
-				new Option_M (new Vector<Object>())
+				new Option_K (new Vector<String>()),
+				new Option_O (new Vector<String>()),
+				new Option_U (new Vector<String>()),
+				new Option_M (new Vector<String>())
 			} 
 		);
 	    nbOptionErrors = checkOption.Proceed(args);

@@ -24,7 +24,7 @@ public class Option_P extends Option
 	}
 	
     /** */
-    public void Proceed (Vector list) 
+    public void Proceed (Vector<String> list) 
     {
 		getParameters().addAll (list);
     }
