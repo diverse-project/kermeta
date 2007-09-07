@@ -1,0 +1,20 @@
+package speedsL1::kernel
+
+context NamedElement inv:
+	-- names are not empty
+	self.getName <> '' 
+
+context NamedElement def:
+	getName(): String = self.name
+	
+context Function def:
+	firstParam(): Parameter = self.parameter->first()
+	
+context Function inv:
+	self.parameter->notEmpty() implies self.firstParam() = self.parameter->first()
+	
+context Function def:
+    allParams(): Sequence(Parameter) = self.parameter
+
+
+endpackage 
