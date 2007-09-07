@@ -1,4 +1,4 @@
-/* $Id: basicOCLtest.kmt,v 1.3 2007-08-23 15:05:24 bitterjug Exp $
+/* $Id: basicOCLtest.kmt,v 1.4 2007-09-07 10:08:38 bitterjug Exp $
  * Creation date: July 26, 2007
  * License:
  * Copyright:
@@ -9,7 +9,7 @@
 
 package tests;
 require kermeta
-require "../../../someUnit/src/newUnit.kmt" 
+require "../../../someUnit/src/newUnit.kmt" // some unit was the development version of the new kunit, shoudl work with Kunit now.
 require "../transformations-dev/EcoreHelper.kmt"
 require "../transformations-dev/ocl2kmtVisitor.kmt"  
 require "../helpers/OCLHelper.kmt"   
