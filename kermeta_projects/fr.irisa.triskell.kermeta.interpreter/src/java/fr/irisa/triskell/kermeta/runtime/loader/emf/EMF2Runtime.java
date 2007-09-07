@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.70 2007-09-04 16:44:07 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.71 2007-09-07 11:26:56 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -73,8 +73,14 @@ public class EMF2Runtime {
     
     /**
      * The list of runtimeObjects that represent the EMF instances
+     * it may contain EObject and RO that were loaded in a previous load
      */
     protected Hashtable<EObject, RuntimeObject> runtime_objects_map; // { eobject : robject }
+    
+    /**
+     * The list of new runtimeObjects that represent the EMF instances
+     */
+    protected Hashtable<EObject, RuntimeObject> newlycreated_runtime_objects_map; // { eobject : robject }
     
     /**
      * { qualified name of ecore type : qualified name of kermeta type }
@@ -122,6 +128,7 @@ public class EMF2Runtime {
         super();
         type_cache = new Hashtable<String, RuntimeObject>();
         runtime_objects_map = new Hashtable<EObject, RuntimeObject>();
+        newlycreated_runtime_objects_map = new Hashtable<EObject, RuntimeObject>();
         special_primitive_types = new Hashtable<String, RuntimeObject>();
         resource = newroot_resource;
         unit = newunit;
@@ -166,6 +173,7 @@ public class EMF2Runtime {
 				if(!runtime_objects_map.containsKey(eObj)){
 					RuntimeObject rootRO = this.createEmptyRuntimeObjectForEObject(eObj);
 					this.runtime_objects_map.put(eObj, rootRO);
+					this.newlycreated_runtime_objects_map.put(eObj, rootRO );
 				}
 				/*else{
 					internalLog.debug("skipped because already loaded" + eObj);
@@ -293,7 +301,8 @@ public class EMF2Runtime {
 			// Pass 1 : pre-create the runtime objects
 			createEmptyRuntimeObjects();
 			
-			internalLog.debug("Loading " + runtime_objects_map.keySet().size() + " objects (update only : "+nbPreExistingObjects + " ) from " + resource.getURI().toString() +  " and its dependencies ");
+			internalLog.debug("Loading " + runtime_objects_map.keySet().size() + " objects (new : " +
+					newlycreated_runtime_objects_map.keySet().size()+ ", update only : "+nbPreExistingObjects + " ) from " + resource.getURI().toString() +  " and its dependencies ");
 			
 			// If the meta-model uri was not provided in the constructor of EMFRuntimeUnit, we try
 			// to find one
@@ -304,19 +313,19 @@ public class EMF2Runtime {
 			    unit.setMetaModelUri(mmUri);
 			}
 			
-			// Fill in the properties of the runtime objects that we created
-			for (Object next : runtime_objects_map.keySet()) {
-			    RuntimeObject rObject = (RuntimeObject)this.runtime_objects_map.get((EObject)next);
+			// Fill in the properties of the new runtime objects that we created
+			for (Object next : newlycreated_runtime_objects_map.keySet()) {
+			    RuntimeObject rObject = (RuntimeObject)newlycreated_runtime_objects_map.get((EObject)next);
 			    this.populateRuntimeObject(rObject);
 			    processedElements++;
 			}
 
 			// Set the container RO property for populated ROs
-			for (EObject eObject : runtime_objects_map.keySet()) { 	
-			    RuntimeObject rObject = this.runtime_objects_map.get(eObject);
+			for (EObject eObject : newlycreated_runtime_objects_map.keySet()) { 	
+			    RuntimeObject rObject = newlycreated_runtime_objects_map.get(eObject);
 			    // Set the container if needed 
 			    if (eObject.eContainer() != null) {
-			    	rObject.setContainer(runtime_objects_map.get(eObject.eContainer()));
+			    	rObject.setContainer(newlycreated_runtime_objects_map.get(eObject.eContainer()));
 			    }
 			    else {
 			        rObject.setContainer(null);
