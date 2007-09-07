@@ -1,4 +1,4 @@
-/* $Id: newUnit.kmt,v 1.4 2007-05-29 12:23:59 bitterjug Exp $
+/* $Id: newUnit.kmt,v 1.5 2007-09-07 14:27:16 bitterjug Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -9,7 +9,6 @@ package newUnit;
 
 require kermeta
 require "Assert.kmt"
-
 using kermeta::standard
 using kermeta::utils
 using kermeta
@@ -53,7 +52,7 @@ abstract class Fallible inherits AbstractFallible
   /**
    * Log a failure if condition is false
    */
-  operation assert(condition: Boolean):Void is
+  method assert(condition: Boolean):Void is
 	  	do
 		  	var number : Integer init self.number()
 	  		if not condition then
@@ -64,7 +63,7 @@ abstract class Fallible inherits AbstractFallible
   /**
    * Log a failure if condition is false
    */
-  operation assertWithMsg(condition: Boolean, msg: String):Void 	is
+  method assertWithMsg(condition: Boolean, msg: String):Void 	is
 	  	do
 		  	var number : Integer init self.number()
 	  		if not condition then
@@ -75,7 +74,7 @@ abstract class Fallible inherits AbstractFallible
   /**
    * Log a failure 
    */
-	operation fail(msg: String): Void is
+	method fail(msg: String): Void is
 		 do
 			getLog.addFailure(self, "explicit failure: " + msg)
 		 end
@@ -83,7 +82,7 @@ abstract class Fallible inherits AbstractFallible
   /**
    * Log a failure if condition is false
    */
-	operation assertTrue(condition: Boolean): Void is
+	method assertTrue(condition: Boolean): Void is
 		do
 			assert(condition)
 		end
@@ -91,7 +90,7 @@ abstract class Fallible inherits AbstractFallible
   /**
    * Log a failure if condition is false
    */
-	operation assertTrueWithMsg(condition: Boolean, message: String): Void is
+	method assertTrueWithMsg(condition: Boolean, message: String): Void is
 		do
 			assertWithMsg(condition, message)
 		end
@@ -99,7 +98,7 @@ abstract class Fallible inherits AbstractFallible
   /**
    * Log a failure if condition is true
    */
-	operation assertFalse(condition: Boolean): Void is
+	method assertFalse(condition: Boolean): Void is
 		do	
 			assert(not condition)
 		end
@@ -107,7 +106,7 @@ abstract class Fallible inherits AbstractFallible
   /**
    * Log a failure if condition is true
    */
-	operation assertFalseWithMsg(condition: Boolean, message: String): Void is
+	method assertFalseWithMsg(condition: Boolean, message: String): Void is
 		do
 			assertWithMsg(not condition, message)
 		end
@@ -115,9 +114,47 @@ abstract class Fallible inherits AbstractFallible
   /**
    * Log a failure if the two strings are not identical
    */
- 	operation assertEqual(expected: String, actual: String): Void is
+ 	method assertEqual(expected: String, actual: String): Void is
 		do	
 			assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual\t:[" + actual + "]")
+		end
+		
+  /**
+   * Log a failure if the two strings are not identical modulo-white-space
+   */
+ 	operation assertSimilar(expected: String, actual: String): Void is
+		do	
+			expected := distil(expected)
+			actual := distil(actual)
+			assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual\t:[" + actual + "]")
+		end
+		
+	/** 
+	 ** reduces all runs of white-space to a single space character
+	 **/
+	operation distil(s: String): String is
+		do
+			result := ""
+			var white: Boolean init false
+			from
+				var i : Integer init 0
+			until
+				i == s.size
+			loop
+				var c: String init s.elementAt(i).toString
+				if " \n\t".indexOf(c) >= 0 then
+					if not white then
+						white : = true
+						result := result +" "
+					end
+				else
+					result := result + c
+					if white then
+						white : = false
+					end
+				end
+				i := i + 1
+			end
 		end
 }
 
