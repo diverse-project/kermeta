@@ -1,9 +1,0 @@
-package testCycle;
-
-require "testCycleE.kmt"
-
-class A {
-
-	attribute e : E
- 
-}

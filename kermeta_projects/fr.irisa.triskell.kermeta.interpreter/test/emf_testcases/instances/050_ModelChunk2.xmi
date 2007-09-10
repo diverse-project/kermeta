@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<test_MM_with_no_containment_tree:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:test_MM_with_no_containment_tree="050_MM_with_no_containment_tree.ecore" xsi:schemaLocation="050_MM_with_no_containment_tree.ecore ../metamodels/050_MM_with_no_containment_tree.ecore" name="Chunk2">
-  <C2s name="C2">
-    <aC3 href="050_C3_alone.xmi#/"/>
-  </C2s>
-</test_MM_with_no_containment_tree:Model>
