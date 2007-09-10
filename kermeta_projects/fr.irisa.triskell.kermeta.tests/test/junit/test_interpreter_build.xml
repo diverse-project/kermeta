@@ -1,4 +1,4 @@
-<!-- $Id: test_interpreter_build.xml,v 1.2 2007-09-10 14:32:08 dvojtise Exp $ -->
+<!-- $Id: test_interpreter_build.xml,v 1.3 2007-09-10 14:35:05 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
@@ -25,6 +25,7 @@
 	<property name="kermeta.interpreter.class" location="..\..\build\class" />
 	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\interpreter_kermeta.jar" />
 	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\@dot" />
+	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta.interpreter\@dot" />
 	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\@dot" />
 	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\@dot" />
 	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.traceability.model\@dot" />
@@ -49,6 +50,7 @@
 	<property name="swt.jar" location="${eclipse.home}/plugins/org.eclipse.swt.gtk.linux.x86_3.3.0.v3346.jar" />
 	<path id="interpreter.class.path">
 		<pathelement location="${kermeta.model.jar}" />
+		<pathelement location="${kermeta.interpreter.jar}" />
 		<pathelement location="${kermeta.io.jar}" />
 		<pathelement location="${kermeta.model.jar}" />
 		<pathelement location="${triskell.eclipse.util.jar}" />
