@@ -1,4 +1,4 @@
-<!-- $Id: test_io_build.xml,v 1.2 2007-09-10 14:32:08 dvojtise Exp $ -->
+<!-- $Id: test_io_build.xml,v 1.3 2007-09-10 14:35:16 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -22,6 +22,7 @@
 	
 	<property name="kermeta.io.class" location="..\..\@dot"/>
 	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\@dot"/>
+	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\@dot" />
 	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\@dot"/>	
 	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.traceability.model\@dot"/>
 	
@@ -45,6 +46,7 @@
 			
 	<path id="io.class.path">
 	    <pathelement location="${kermeta.model.jar}"/>
+	    <pathelement location="${kermeta.io.jar}"/>
 		<pathelement location="${triskell.eclipse.util.jar}"/>
 	    <pathelement location="${traceability.jar}"/>
 	    <!-- <pathelement location="${cu_kermeta.jar}"/> -->
