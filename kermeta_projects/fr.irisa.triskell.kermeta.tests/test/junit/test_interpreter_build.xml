@@ -1,4 +1,4 @@
-<!-- $Id: test_interpreter_build.xml,v 1.3 2007-09-10 14:35:05 dvojtise Exp $ -->
+<!-- $Id: test_interpreter_build.xml,v 1.4 2007-09-10 15:12:50 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
@@ -22,8 +22,7 @@
 	<property name="cobertura.lib.dir" location="${cobertura.dir}/lib" />
 
 
-	<property name="kermeta.interpreter.class" location="..\..\build\class" />
-	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\interpreter_kermeta.jar" />
+	<property name="kermeta.t.class" location="..\..\build\class" />
 	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\@dot" />
 	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta.interpreter\@dot" />
 	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\@dot" />
@@ -98,6 +97,7 @@
 	<target name="compile_java">
 		<mkdir dir="${build.bin}" />
 		<echo>${eclipse.home}</echo>
+		<echo>${kermeta.interpreter.jar}</echo>
 		<javac srcdir="${src}:${test.src}" destdir="${build.bin}" debug="true">
 			<classpath>
 				<!--<pathelement path="${MTLcompiler.path}/bin"/>-->
