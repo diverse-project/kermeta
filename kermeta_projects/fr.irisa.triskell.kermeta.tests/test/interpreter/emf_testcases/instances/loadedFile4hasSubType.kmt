@@ -10,13 +10,13 @@ class Class2
 
 class Class1
 {
-	reference prop1 : set kermeta::standard::Boolean[0..0]
+	reference prop1 : set kermeta::standard::Boolean[0..*]
 
-	reference prop2 : set kermeta::reflection::Integer[0..0]
+	reference prop2 : set kermeta::reflection::Integer[0..*]
 
 	reference att1 : kermeta::reflection::String
 
-	reference att3 : set kermeta::standard::Bag<kermeta::reflection::String>[0..0]
+	reference att3 : set kermeta::standard::Bag<kermeta::reflection::String>[0..*]
 
 	operation op1() : set kermeta::standard::Real[0..0] is
 		do
@@ -39,9 +39,9 @@ class Class1
 }
 class Test2 inherits Class1
 {
-	reference prop1: Void
+	attribute prop3: kermeta::standard::String
 
-	reference Property1 : Void
+	reference Property1 : kermeta::standard::String
 
 }
 class Test3 inherits Test2
