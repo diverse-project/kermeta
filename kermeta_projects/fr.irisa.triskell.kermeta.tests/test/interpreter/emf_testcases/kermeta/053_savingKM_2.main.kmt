@@ -1,0 +1,66 @@
+/* $Id: 053_savingKM_2.main.kmt,v 1.1 2007-09-10 08:35:05 cfaucher Exp $
+ * Creation date: June 14, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ *		vmahe
+ *		dvojtise
+ * This test is related to bug931
+ * variant 2 :
+ * it creates a km model dependent to a class defined as a definition in the current program
+ * the class we point to is defined in a km file
+ */
+@mainClass "savingKM2::Main"
+@mainOperation "testmain"
+
+
+package savingKM2;
+
+
+require kermeta
+require "../instances/053_input_definition.km"
+
+using kermeta::interpreter
+using kermeta::standard
+using kermeta::persistence
+
+class Main inherits kermeta::kunit::TestCase
+{
+    operation testmain() : Void is do 
+        // prog expressing the KM saving bug
+        var ope : kermeta::language::structure::Operation init kermeta::language::structure::Operation.new
+        var sclass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+        var sclass2 : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+        
+        
+        // make a link to framework.km : reuse typedefinition of InputDef which is defined in a km model file
+        sclass.typeDefinition := input_definition::InputDef.typeDefinition        
+        ope.type := sclass
+        ope.containedType.add(sclass)
+        
+        ope.name := "Op1"
+        var cl : kermeta::language::structure::ClassDefinition init kermeta::language::structure::ClassDefinition.new
+        var pack : kermeta::language::structure::Package init kermeta::language::structure::Package.new
+        pack.name := "P1"
+        pack.uri := "http://P1"
+        cl.name := "C1"
+        cl.ownedOperation.add(ope)
+        pack.ownedTypeDefinition.add(cl)
+        
+        pack.checkAllInvariants
+        
+		var resRepository : EMFRepository init EMFRepository.new
+		
+		stdio.writeln("Creating pb_EnregKM2.km...")
+		var resResource : kermeta::persistence::EMFResource
+		resResource ?= resRepository.createResource("pb_EnregKM2.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+		resResource.instances.add(pack)
+
+		stdio.writeln("Saving pb_EnregKM2.km...")		
+		resResource.saveAndValidateWithEMF()
+        
+        // no assertion needed, if there were an error we would have got an exception
+        stdio.writeln("done")
+    end
+}
+

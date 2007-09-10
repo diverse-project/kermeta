@@ -1,0 +1,74 @@
+/* $Id: 003_requireJava_rt_math.main.kmt,v 1.1 2007-09-10 08:35:11 cfaucher Exp $
+ * Creation date: April 24, 2006
+ * License:
+ * Copyright:
+ * Authors: 
+ */
+@mainClass "testRequireJavaRT_math::testRequireJava"
+@mainOperation "main"
+
+
+package testRequireJavaRT_math;
+
+
+require kermeta
+//require "new_file.kmt" 
+//require "test.jar"
+
+//require "file:/C:/Program Files/Java/jdk1.5.0_08/jre/lib/rt.jar" includeFilter ("java::io") 
+require java_rt_jar includeFilter ("java::lang::Math")
+
+using java::lang
+using kermeta::kunit
+class testRequireJava inherits kermeta::kunit::TestCase
+{
+	operation main() : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(testRequireJava)
+		tr.printTestResult
+	end	
+	
+    operation testmain() : Void is do 
+    	stdio.writeln("Begin")
+        
+        
+        
+        
+        
+        
+        
+        
+        /*
+        var f : File init File.new.initialize_String("c:/temp/test.txt")
+        var f2 : File
+        var fwriter : FileWriter init FileWriter.new.initialize_File(f)
+        if (f.exists) then 
+        	stdio.writeln(f.toString + " already exists")
+        else
+	        stdio.writeln(f.createNewFile.toString)
+	    end
+	    fwriter.write_String("Hello world") 
+	    fwriter.close
+	    stdio.writeln("file written")
+	    stdio.writeln(fwriter.toString)
+	    	    
+        stdio.writeln(f.getPath)
+        stdio.writeln(f.separator)
+        f2 := f
+        stdio.writeln(f2.createNewFile.toString)
+        stdio.writeln((f2.equals(f)).toString)
+	    assert( f2.equals(f))
+	    
+	    var fwriter2 : FileWriter
+	    fwriter2 :=  fwriter
+	    stdio.writeln((fwriter2.equals(fwriter)).toString)
+	    assert( fwriter2.equals(fwriter))
+	    
+        stdio.writeln(f.getPath)
+//        stdio.writeln(f2.getPath)
+        stdio.writeln(f.toString)
+        */
+    	stdio.writeln("End")
+    end
+    
+}

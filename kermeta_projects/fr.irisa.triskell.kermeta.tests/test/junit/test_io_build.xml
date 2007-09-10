@@ -1,0 +1,202 @@
+<!-- $Id: test_io_build.xml,v 1.1 2007-09-10 08:35:18 cfaucher Exp $ -->
+<project name="run interpreter tests" default="all" basedir=".">
+	
+	<description>
+        Run interpreter tests
+    </description>
+	
+    <property name="report.dir" location="./reports"/>
+	<property name="eclipse.home" location="c:/eclipse3.1.1/eclipse"/>
+	<property name="cobertura.dir" location="\\jersey\triskell\bin\multiplatform\cobertura-1.7"/>
+		
+	<property name="build.bin" location="../../@dot"/>
+	<property name="src" location="../../src/java"/>
+	<property name="test.src" location="../../test/junit"/>
+    <property name="coverage.dir" location="${report.dir}/coverage"/>
+    <property name="coverage.xml.dir" location="${report.dir}/coverage/xml"/>
+    <property name="coverage.html.dir" location="${report.dir}/coverage/html"/>	
+
+	<property name="instrumented.dir" location="instrumented"/>
+	<property name="cobertura.lib.dir" location="${cobertura.dir}/lib"/>
+	
+	
+	<property name="kermeta.io.class" location="..\..\@dot"/>
+	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\@dot"/>
+	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\@dot"/>	
+	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.traceability.model\@dot"/>
+	
+	<property name="log4j.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\log4j.jar"/>
+	<property name="antlr.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\lib\thirdparty\antlr.jar"/>
+	<property name="ldt-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\ldt-core.jar"/>
+	<property name="emfatic-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\emfatic-core.jar"/>
+	<!-- <property name="cu_kermeta.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\cu_kermeta.jar"/> -->
+	
+	<property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.3.0.v200706262000.jar"/>
+	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.3.0.v200706262000.jar"/>
+	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.3.0.v200706262000.jar"/>
+	<property name="equinox.common.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.common_3.3.0.v20070426.jar"/>
+	<property name="equinox.registry.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.registry_3.3.0.v20070522.jar"/>
+	<property name="equinox.preferences.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.preferences_3.2.100.v20070522.jar"/>
+	<property name="osgi.jar" location="${eclipse.home}/plugins/org.eclipse.osgi_3.3.0.v20070530.jar"/>	
+	<property name="core.runtime.jar" location="${eclipse.home}/plugins/org.eclipse.core.runtime_3.3.100.v20070530.jar"/>
+	<property name="ui.workbench.jar" location="${eclipse.home}/plugins/org.eclipse.ui.workbench_3.3.0.I20070608-1100.jar"/>
+	<property name="jface.jar" location="${eclipse.home}/plugins/org.eclipse.jface_3.3.0.I20070606-0010.jar"/>
+	<property name="swt.jar" location="${eclipse.home}/plugins/org.eclipse.swt.gtk.linux.x86_3.3.0.v3346.jar"/>
+			
+	<path id="io.class.path">
+	    <pathelement location="${kermeta.model.jar}"/>
+		<pathelement location="${triskell.eclipse.util.jar}"/>
+	    <pathelement location="${traceability.jar}"/>
+	    <!-- <pathelement location="${cu_kermeta.jar}"/> -->
+	    <pathelement location="${emf.common.jar}"/>
+	    <pathelement location="${emf.ecore.jar}"/>
+	    <pathelement location="${emf.ecore.xmi.jar}"/>
+		<pathelement location="${equinox.common.jar}"/>
+	    <pathelement location="${equinox.registry.jar}"/>
+		<pathelement location="${equinox.preferences.jar}"/>
+	    <pathelement location="${osgi.jar}"/>
+	    <pathelement location="${core.runtime.jar}"/>
+		<pathelement location="${ui.workbench.jar}"/>
+		<pathelement location="${jface.jar}"/>
+		<pathelement location="${swt.jar}"/>
+	    <pathelement location="${log4j.jar}"/>
+	    <pathelement location="${antlr.jar}"/>
+	    <pathelement location="${ldt-core.jar}"/>
+	    <pathelement location="${emfatic-core.jar}"/>
+	    <pathelement path="${java.class.path}"/>
+	</path>
+	<path id="cobertura_classpath">
+		<fileset dir="${cobertura.dir}">
+			<include name="cobertura.jar" />
+		</fileset>
+		<fileset dir="${cobertura.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<!--<taskdef classpathref="cobertura_classpath" resource="tasks.properties"/>-->
+		
+<!--	<target name="all" depends="compile_java,instrument,test,coverage-report" description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports."/>-->
+	<target name="all" depends="compile_java,test" description="Compile and run the tests."/>
+
+	<target name="init">
+			<mkdir dir="${instrumented.dir}" />
+			<mkdir dir="${coverage.xml.dir}" />
+			<mkdir dir="${coverage.html.dir}" />
+		</target>
+	
+	<target name="compile_java">
+	    <mkdir dir="${build.bin}"/> 
+		<javac srcdir="${src}:${test.src}" 
+    	    destdir="${build.bin}"
+   			debug="true">
+   			<classpath >
+   				<!--<pathelement path="${MTLcompiler.path}/bin"/>-->
+   				<path refid="io.class.path"/> 
+   			</classpath>
+   		</javac>
+	</target>
+	
+	<!--<target name="instrument" depends="init, compile_java">-->
+		<!--
+			Remove the coverage data file and any old instrumentation.
+		-->
+<!--		<delete file="coverage.ser"/>
+		<delete dir="${instrumented.dir}" />
+-->
+		<!--
+			Instrument the application classes, writing the
+			instrumented classes into ${build.instrumented.dir}.
+		-->
+	<!--	<cobertura-instrument datafile="coverage.ser" todir="${instrumented.dir}">
+-->
+			<!--
+				The following line causes instrument to ignore any
+				source line containing a reference to log4j, for the
+				purposes of coverage reporting.
+			-->
+	<!--		<ignore regex="org.apache.log4j.*" />
+
+			<fileset dir="${build.bin}">
+		-->		<!--
+					Instrument all the application classes, but
+					don't instrument the test classes.
+				-->
+		<!--		<include name="**/*.class" />
+				<exclude name="**/*Test.class" />
+			</fileset>
+		</cobertura-instrument>
+	</target>
+	<target name="coverage-check">
+		<cobertura-check branchrate="34" totallinerate="100" />
+	</target>
+
+	<target name="coverage-report">
+-->		<!--
+			Generate an XML file containing the coverage data using
+			the "srcdir" attribute.
+		-->
+<!--		<cobertura-report datafile="coverage.ser" 
+			srcdir="${src}" destdir="${coverage.xml.dir}" format="xml" />
+		<cobertura-report datafile="coverage.ser" destdir="${coverage.html.dir}">
+			<fileset dir="${src}">
+				<include name="**/*.java"/>
+			</fileset>
+		</cobertura-report>
+	</target>
+-->
+	<target name="test" 
+		description="run io tests" depends="init, compile_java">
+	    <mkdir dir="${report.dir}"/> 
+	    <mkdir dir="${report.dir}/html"/>
+		<junit printsummary="yes" haltonfailure="no">
+			<sysproperty key="net.sourceforge.cobertura.datafile" file="coverage.ser" />
+		  	<classpath>
+		  		<pathelement location="${instrumented.dir}"/>
+		  		<pathelement location="${kermeta.io.class}"/>
+				<path refid="io.class.path"/> 
+		  	</classpath>
+		  	<classpath refid="cobertura_classpath" />
+
+		  	<formatter type="plain"/>
+
+		  	<test name="kermeta_io.typechecker_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-io-typechecker-result">
+		    	<formatter type="xml"/>
+		  	</test>
+			<test name="kermeta_io.constraintchecker_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-io-constraintchecker-result">
+		    	<formatter type="xml"/>
+		  	</test>
+			<test name="kermeta_io.roundtrip_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-io-roundtrip-result">
+			   	<formatter type="xml"/>
+			</test>
+			<test name="kermeta_io.test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-io-result">
+		    	<formatter type="xml"/>
+		  	</test>
+  
+		</junit>
+		<antcall target="genreport"/>
+	</target>
+	<target name="genreport" >
+		<junitreport todir="${report.dir}">
+		  <fileset dir="${report.dir}">
+		    <include name="TEST-*.xml"/>
+		  </fileset>
+		  <!--<report format="frames" todir="${report.dir}/html" styledir="./report_stylesheet"/>-->
+		  <report format="frames" todir="${report.dir}/html"  styledir="/udd/triskell/bin/multiplatform/apache-ant-1.5.4/etc"/>
+		</junitreport>
+		<!-- generate the Build date -->
+		<tstamp>
+			<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+		</tstamp>
+		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+		<copy file="${report.dir}/html/overview-summary.html" 
+					tofile="${report.dir}/html/overview-summary_tmp.html"
+					filtering="true"
+					overwrite="true"/>
+
+		<copy file="${report.dir}/html/overview-summary_tmp.html" 
+					tofile="${report.dir}/html/overview-summary.html"
+					filtering="true"
+					overwrite="true"/>
+	</target>
+</project>

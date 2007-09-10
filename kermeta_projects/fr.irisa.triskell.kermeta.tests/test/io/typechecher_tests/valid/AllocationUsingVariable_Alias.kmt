@@ -1,0 +1,41 @@
+/* $Id: AllocationUsingVariable_Alias.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $ */
+
+// Some lambda expressions and primitive types
+
+package testAllocation;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::language::structure
+
+alias String : kermeta::standard::String;
+alias aClassAlias : testAllocation::AClass;
+
+
+class Test {
+
+	// Test on an alias for a Kermeta primitive datatype
+    operation test1() is do
+     	var myClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+     	myClass.typeDefinition := kermeta::standard::String.typeDefinition
+     	myClass.typeDefinition := String.typeDefinition
+    end
+    
+    // Test on an alias for a defined class
+    operation test2() is do
+     	var myClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+     	myClass.typeDefinition := testAllocation::AClass.typeDefinition
+     	myClass.typeDefinition := aClassAlias.typeDefinition
+    end
+}
+
+
+class AClass {
+	reference aReference : kermeta::standard::String
+	
+	operation anOperation() is do
+	end
+}
+
+/* END OF FILE */

@@ -1,0 +1,82 @@
+/* $Id: 024_mt_property_order_invalid_tests.kmt,v 1.1 2007-09-10 08:35:08 cfaucher Exp $
+ * Creation date: November 10, 2006
+ * License: EPL
+ * Authors:
+ * 	Didier Vojtisek
+ * Description:
+ *		This verifies the various possibilities about reference multiplicities
+ */
+
+
+package mt_property_order;
+
+
+require kermeta
+require "../valid/024_mt_property_order.kmt"
+using kermeta::standard
+
+class Tester{
+	operation testNeedsMStandard_a() : Void is do
+		NeedsMStandard<mStandardT>.new
+		NeedsMStandard<mSetT>.new	// must fail here
+	end	
+	operation testNeedsMStandard_b() : Void is do
+		NeedsMStandard<mOSetT>.new	
+		NeedsMStandard<mSeqT>.new	// must fail here
+	end	
+	operation testNeedsMStandard_c() : Void is do
+		NeedsMStandard<mBagT>.new	// must fail here
+	end
+	
+	//----------------------
+	operation testNeedsMSet_a() : Void is do		
+		NeedsMSet<mStandardT>.new	// ordered set should be a valid non ordered set  (it inherits from it)
+		NeedsMSet<mSetT>.new
+		NeedsMSet<mOSetT>.new	// ordered set should be a valid non ordered set  (it inherits from it)
+		NeedsMSet<mSeqT>.new		// must fail here
+	end
+	operation testNeedsMSet_b() : Void is do
+		NeedsMSet<mBagT>.new		// must fail here
+	end
+	
+	
+	operation testNeedsMOSet_a() : Void is do		
+		NeedsMOSet<mStandardT>.new
+		NeedsMOSet<mSetT>.new	// must fail here
+	end
+	operation testNeedsMOSet_b() : Void is do	
+		NeedsMOSet<mOSetT>.new
+		NeedsMOSet<mSeqT>.new	// must fail here
+	end
+	operation testNeedsMOSet_c() : Void is do	
+		NeedsMOSet<mBagT>.new	// must fail here
+	end
+	
+	operation testNeedsMSeq_a() : Void is do		
+		NeedsMSeq<mStandardT>.new	// must fail here
+	end
+	operation testNeedsMSeq_b() : Void is do	
+		NeedsMSeq<mSetT>.new	// must fail here
+	end
+	operation testNeedsMSeq_c() : Void is do	
+		NeedsMSeq<mOSetT>.new	// must fail here
+	end
+	operation testNeedsMSeq_d() : Void is do	
+		NeedsMSeq<mSeqT>.new
+		NeedsMSeq<mBagT>.new	// must fail here
+	end
+	
+	operation testNeedsMBag_a() : Void is do		
+		NeedsMBag<mStandardT>.new	// must fail here
+	end
+	operation testNeedsMBag_b() : Void is do		
+		NeedsMBag<mSetT>.new	// must fail here
+	end
+	operation testNeedsMBag_c() : Void is do		
+		NeedsMBag<mOSetT>.new	// must fail here		
+		NeedsMBag<mSeqT>.new		// a sequence should be a valid Bag (it inherits from it)
+		NeedsMBag<mBagT>.new
+	end
+
+}
+  

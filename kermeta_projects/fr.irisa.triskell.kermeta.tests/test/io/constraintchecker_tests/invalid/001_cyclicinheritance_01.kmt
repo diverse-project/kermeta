@@ -1,0 +1,14 @@
+/* $Id: 001_cyclicinheritance_01.kmt,v 1.1 2007-09-10 08:35:12 cfaucher Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+
+/* cycle inheritance*/
+class A inherits B{
+    
+}
+class B inherits A {
+    
+}

@@ -1,0 +1,60 @@
+package testEnum;
+
+require kermeta
+
+using kermeta::standard
+
+enumeration Couleur {
+	jaune;
+	bleu;
+	vert;
+	rouge;
+}
+
+enumeration Jour {
+	lundi;
+	mardi;
+	mercredi;
+	jeudi;
+}
+
+
+class Test {
+
+	attribute color : Couleur
+	
+	attribute colors : Couleur[*]
+	
+	
+	operation test1() : Jour is
+	do
+		result := Couleur.jaune
+	end
+	
+	operation test2() is do
+		var o : Couleur
+		o := Jour.lundi
+	end
+	
+	operation test3() is do
+		var c : Jour
+		c := Couleur.jaune
+		c := c
+	end
+	
+	operation test4() : Set<Jour> is do
+		result := Set<Couleur>.new
+        colors.each{ col | 
+        	result.add(col)
+        	color := col
+        }
+	end
+
+	operation test5() is do
+		var o : Object
+		o := Couleur.jaune
+		color := o
+	end
+   
+}
+

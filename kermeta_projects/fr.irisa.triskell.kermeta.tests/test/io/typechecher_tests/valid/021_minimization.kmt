@@ -1,0 +1,288 @@
+/* $Id: 021_minimization.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+ * Creation date: June 27, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "fsm::Minimizer"
+@mainOperation "minimizeAll"
+
+
+package fsm;
+
+require "021_basic_fsm_type.kmt"
+
+require kermeta
+
+//using fsm
+using kermeta::standard
+using kermeta::utils
+//using help
+
+class Minimizer<MT : basic_fsmT>
+{
+	reference equivalent_pairs : set Pair<MT::State>[0..*]  // The initial pairSet of the equivalence relation { F \ Q }²^ F²
+	reference all_input_pairs : set Pair<MT::State>[0..*]       // The QxQ set of possible pairs, where Q is the stateSet
+	reference helper : Helper
+	reference automatonHelper : AutomatonHelper<MT>
+	
+	reference combinations : Hashtable<MT::State, Set<MT::State>>
+	
+    operation minimizeAll(input : MT) : MT is do 
+        // Find the machines and call minimize on each one
+        var machines : Set<MT::FSM>
+        machines := input.filter(MT::FSM)
+        result := MT.new
+        machines.each { m | result.add(minimize(m)) }
+    end
+    
+    operation minimize(input : MT::FSM) : MT::FSM is do
+    	input.ownedState.each { p | input.ownedState.each { b | 
+	   		// Check : (p,q) is in Eo, i.e either both are final states or both are NOT final states
+	   		var isFinalLeft : Boolean init input.finalState.detect { e | p.name == e.name }!=void
+	   		var isFinalB    : Boolean init input.finalState.detect { e | b.name == e.name }!=void
+	   		// Also fill the all input pairs
+	   		if find_one(all_input_pairs, p, b) == void then all_input_pairs.add(createPair(p, b)) end
+	   		if ((isFinalLeft and isFinalB) or (not isFinalLeft and not isFinalB)) 
+		    		and find_one(equivalent_pairs, p, b) == void
+			then 
+		   		stdio.writeln("{"+p.name + ","+b.name+"} ,")
+				equivalent_pairs.add(createPair(p, b))
+	   		end
+	   	} } 
+		stdio.writeln("Eo = {F-Q}²^F² is initialized")
+		
+		// Remove not accessible states
+    	remove_unavailable_states(input)
+    	// final_equivalent_pairs : the smallest equivalent pair set
+		var final_equivalent_pairs : Set<Pair<MT::State>> init Set<Pair<MT::State>>.new
+		final_equivalent_pairs.addAll(equivalent_pairs)
+		
+		var old_equivalent_pairs : Set<Pair<MT::State>> init all_input_pairs
+    	from var it : Iterator<Pair<MT::State>> init old_equivalent_pairs.iterator
+    	until old_equivalent_pairs == final_equivalent_pairs
+    	loop
+    		old_equivalent_pairs := final_equivalent_pairs
+    		// For each pair
+    		old_equivalent_pairs.each { eqPair |
+    			// For all letters of input, if eqPair is not valid, remove it
+	    		if (isNotOwnedTransition(input, eqPair, old_equivalent_pairs) == true) then 
+	    			// remove this pair from final eq. pairs (H)
+	    			final_equivalent_pairs := old_equivalent_pairs
+	    			var fp : Pair<MT::State> init find_one(final_equivalent_pairs, eqPair.left, eqPair.right)
+	    			if (fp!=void) then
+	    				if (fp.left.name!=fp.right.name) then // the twin pairs are always valid!
+		    				final_equivalent_pairs.remove(fp)
+		    			end 
+	    			end
+	    		end
+    		}
+    	end
+    	stdio.writeln("Minimalize succeeded")
+    	// Create the equivalent classes, which become the new states
+    	result := MT::FSM.new
+    	createEquivalenceClasses(result, input.ownedState, old_equivalent_pairs)
+    	stdio.writeln("Equivalence classes creation succeeded : " + result.ownedState.size.toString)
+		result.ownedState.each { s | s.name := String.clone(helper.join(combinations.getValue(s).collect{ a | a.name }))  }
+		// Create the transition between the new states -- inputStates contains the links to their eq.class
+    	createEquivalentTransitions(result.ownedState, input.ownedState, input.ownedTransition)
+    	stdio.writeln("Transition set creation succeeded")
+    	// Set the initial and the final states
+    	result.initialState := combinations.getValue(input.initialState).one
+		result.finalState.addAll(combinations.getValue(input.finalState.one)) 
+		
+    end
+
+	operation createPair(l : MT::State, r : MT::State) : Pair<MT::State> is do
+		result := Pair<MT::State>.new
+		result.left := copyState(l)
+		result.right := copyState(r)
+	end
+
+	operation copyState(old : MT::State) : MT::State is do
+		result := MT::State.new
+		result.name := String.clone(old.name)
+		combinations.put(result, combinations.getValue(old))
+	end
+
+    operation find_one(pairSet : Set<Pair<MT::State>>, left : MT::State, right : MT::State) : Pair<MT::State> is do
+    	result := pairSet.detect { p | 
+   			(p.left.name == left.name and p.right.name == right.name) or
+   			(p.right.name == left.name and p.left.name == right.name)
+   		}
+    end
+    
+    /** Remove the states to which no transition leads */
+    operation remove_unavailable_states(a : MT::FSM) is do
+    
+    var tmpState : MT::State init MT::State.new
+    
+		var as_seq : Sequence<MT::State> init a.ownedState.reject { s | not a.ownedTransition.collect { t | t.target}.contains(s) and s != a.initialState}
+		var at_seq : Sequence<MT::Transition> init a.ownedTransition.reject { t | not as_seq.contains(t.target) }
+		a.ownedTransition.clear
+		a.ownedTransition.addAll(at_seq)
+		a.ownedState.clear
+		a.ownedState.addAll(as_seq)
+    end
+         
+    /** 
+     *  If the result state-pair ( T(pair.left), T(pair.right) ) does not belong to equivalent pairs then
+     *  return true otherwise false
+     *  params : 
+     *    - automaton : the automaton in which we test the validity of the result state-pair
+     *    - pair : the pair on which we apply each transition of automaton
+     *    - equivalent_pairs : the equivalent_pairs in which we search the result state-pair
+     */
+    operation isNotOwnedTransition(automaton : MT::FSM, pair : Pair<MT::State>, equivalent_pairs : Set<Pair<MT::State>>) : Boolean is do 
+    	//  if there exists a letter a in the automaton such as T(pair.left, a), T(pair.right, a) belongs to distinct_pairs
+    	//  "void" pair is allowed!
+    	result := false
+    	from var it : Iterator<String> init automaton.alphabet.iterator
+    	until it.isOff or result == true
+    	loop
+    		var letter : String init it.next
+    		var tleft : MT::Transition init automaton.ownedTransition.detect { t | t.source.name==pair.left.name and t.input == letter }
+    		var tright : MT::Transition init automaton.ownedTransition.detect { t | t.source.name==pair.right.name and t.input == letter }    		
+    		if (tleft!=void and tright!=void) then // empty word belongs to accepted words
+    			if find_one(equivalent_pairs, tleft.target, tright.target) == void then
+	    			result := true	    		
+	    		end
+	    	else if (tleft==void and tright!=void) or (tleft!=void and tright==void) then result:=true end
+	    	end
+    	end
+    end
+    
+    /**
+     * Principle of the creation of the equivalent classes :
+     *     for each state of the initial automaton do :
+     *           select all the pairs which first element is this state
+     *                for each of these pairs, if right element is not "classed" yet, do :
+     *                    * if a class does not exist for the left element, create one
+     *                    * add the right element to the class of the left one
+     *                end
+     *     end
+     */
+    operation createEquivalenceClasses(output : MT::FSM, stateSet : Set<MT::State>, equivalent_pairs : Set<Pair<MT::State>>) is do
+    	var eqClass : Set<MT::State> init Set<MT::State>.new
+    	from var it : Iterator<MT::State> init stateSet.iterator
+    	until it.isOff
+    	loop
+    		var state : MT::State init it.next
+    		var news : MT::State init MT::State.new// eqClass as new state of output
+	    	equivalent_pairs.select
+	    	{ pair | pair.left.name == state.name }.each
+	    	{ pair |
+	    		// combination becomes an improvised "marker"
+	    		// if it is void, it means that it does not belong to a eqclass yet
+    			if (combinations.getValue(state) == void) then 
+    				// create the eq. class and the state
+	    			combinations.put(news, Set<MT::State>.new)
+	    			combinations.getValue(news).add(pair.left)
+	    			output.ownedState.add(news)
+	    			// Mark state that is already added // we use combination to ease the transition computation
+	    			combinations.put(state, Set<MT::State>.new) 
+	    			combinations.getValue(state).add(news)
+	    		end
+	    		// Process the right element of the pair : add it to the eq.class of the left element!
+	    		var sright : MT::State init stateSet.detect { s | pair.right.name == s.name and combinations.getValue(s) == void }
+    			if (sright != void) then
+    				// Complete the eq. class
+    				var found_eq : MT::State init output.ownedState.detect{ c | combinations.getValue(c).detect{ s| s.name==state.name }!=void }
+    				combinations.getValue(found_eq).add(pair.right) 
+    				if (combinations.getValue(sright) == void) then
+	    				combinations.put(sright, Set<MT::State>.new) 
+	    				combinations.getValue(sright).add(found_eq)
+	    			end
+    			end
+    		}
+    	end
+    end
+    
+    /** 
+     * Create the transitions of the minimal automaton
+     * params :
+     *     - eqClassStateSet : the minimal automaton set of states
+     *     - ownedState : the input automaton set of states
+     *     - ownedTransition : the intput automaton set of transitions
+     */
+    operation createEquivalentTransitions(
+    	eqClassStateSet : Set<MT::State>, ownedState : Set<MT::State>, ownedTransition : Set<MT::Transition>) : Void is do
+    	var aResult : Set<MT::Transition> init Set<MT::Transition>.new
+    	
+    	// for each eq-class
+    	ownedState.each { nextInputState |
+    		
+    		// Get the eq.class to which the current state belongs
+    		var nextEqClassState : MT::State init combinations.getValue(nextInputState).one 
+    		
+			// For each letter, Get the transition for which the current state is a source
+			var nextTransitionSet : Sequence<MT::Transition> init ownedTransition.select { t | t.source == nextInputState }
+			
+			// The target combination is the eq. class target of the new transition!
+			nextTransitionSet.each { t |
+				// Add this transition
+				if aResult.detect {  rt | rt.source == nextEqClassState and rt.input == t.input } == void then
+					var nextEqClassStateTarget : MT::State init eqClassStateSet.detect { s | combinations.getValue(s).detect{ cs | cs.name==t.target.name }!=void }
+					var newTransition : MT::Transition init automatonHelper.createTransition(nextEqClassState, nextEqClassStateTarget, t.input)
+					aResult.add(newTransition)
+				end
+			}
+    	}
+    end
+
+
+}
+
+class Pair<T> {
+	reference left : T
+	reference right : T
+}
+
+/** 
+ * A set of helper methods to ease the determinisation/minimization
+ * From Automata
+ */
+class Helper
+{	
+	/** Quick transformation of a Set into a Sequence */
+	operation seqToSet<G>( iseq : Sequence<G> ) : Set<G> is do
+    	result := Set<G>.new
+    	iseq.each { n | if n != void and not result.contains(n) then result.add(n) end	}
+    end
+    
+    operation seq1ToSet<G>( iseq : Sequence<Set<G>> ) : OrderedSet<G> is do
+    	result := OrderedSet<G>.new
+    	iseq.each{ a | 
+    		a.each { n | if n != void and not result.contains(n) then result.add(n) end	}
+    	}
+    end
+    
+    operation seq2ToSet<G>( iseq : Sequence<Sequence<G>> ) : Set<G> is do
+    	result := Set<G>.new
+    	iseq.each{ a | 
+    		a.each { n | if n != void and not result.contains(n) then result.add(n) end	}
+    	}
+    end
+    
+    operation join( str_seq : Collection<String>) : String is do
+    	result := ""
+    	str_seq.each { str | result.append(str) }
+    end
+    
+    operation join_with( str_seq : Collection<String>, sep : String) : String is do
+    	result := ""
+    	str_seq.each { str | result.append(str + sep) }
+    	result :=  result.substring(0, result.size-sep.size)
+    end
+    
+}
+
+class AutomatonHelper<T : basic_fsmT> {
+
+    operation createTransition( s : T::State, t : T::State, l : String) : T::Transition is do
+    	result := T::Transition.new
+		result.source := s
+		result.target := t 
+		result.input := l
+	end
+}

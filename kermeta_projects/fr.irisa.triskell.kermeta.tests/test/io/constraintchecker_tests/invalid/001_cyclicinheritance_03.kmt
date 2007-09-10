@@ -1,0 +1,18 @@
+/* $Id: 001_cyclicinheritance_03.kmt,v 1.1 2007-09-10 08:35:13 cfaucher Exp $ */
+
+// Test of a invalid inheritance
+
+package root_package;
+
+
+/* cycle inheritance*/
+class A inherits B{
+    
+}
+class B inherits C{
+    
+}
+
+class C inherits A{
+    
+}

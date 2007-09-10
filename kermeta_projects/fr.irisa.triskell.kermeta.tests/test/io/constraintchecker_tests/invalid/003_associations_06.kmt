@@ -1,0 +1,20 @@
+/* $Id: 003_associations_06.kmt,v 1.1 2007-09-10 08:35:12 cfaucher Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+
+/* not usable link : the atribute a in class C cannot be 
+	used without raising a constraint exception on A.b*/
+class A {
+    reference b : B[1]#a
+}
+class B {
+	attribute a : A#b
+	
+}
+
+class C {
+	attribute a : A // a warning should occur here
+}

@@ -1,0 +1,9 @@
+package testRequireFramework;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::language::structure
+
+class MyClassDefinition inherits ClassDefinition
+{
+}

@@ -1,0 +1,42 @@
+/* $Id: 054_pb_olivier1213.main.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+ * Creation date: November 7, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ * This test verify that we can load and save back a km model that has some dependencies to the framework (framework.km)
+ */
+@mainClass "pb_olivier::Test"
+@mainOperation "testmain"
+
+
+package pb_olivier;
+
+
+require kermeta
+using kermeta::persistence
+using kermeta::standard
+class Test
+{
+
+	reference firstModel : EMFResource
+
+	operation testmain() : Void is do 
+		loadKM
+	end
+	
+    operation loadKM() : Void is do 
+    	var kermetaMeta : String init "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore"
+    
+	    var _repository : EMFRepository
+	    _repository:= EMFRepository.new
+		
+		stdio.writeln("loading km user model...")
+		firstModel ?= _repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/054_pb_olivier.km", kermetaMeta)
+		firstModel.load
+		stdio.writeln("saving km user model...")
+		// save to another location
+		firstModel.uri:= "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/054_pb_olivier_out.km"
+		firstModel.saveAndValidateWithEMF()
+		stdio.writeln("done")
+    end
+}

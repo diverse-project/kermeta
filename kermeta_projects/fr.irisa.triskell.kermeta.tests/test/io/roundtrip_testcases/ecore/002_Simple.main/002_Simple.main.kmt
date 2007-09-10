@@ -1,0 +1,21 @@
+package aPackage;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "kermeta"
+class aClass
+{
+	attribute anAttribute : ecore::EBoolean
+
+	reference aReference : aClass[0..*]
+
+	@overloadable "true"
+	operation anOperation(aParameter : ecore::EIntegerObject) : anEnum is
+		raise kermeta::exceptions::NotImplementedException.new
+
+}
+alias aDataType : kermeta::standard::Object;
+enumeration anEnum
+{
+	aEnemLiteral;
+	anotherEnumLiteral;
+}

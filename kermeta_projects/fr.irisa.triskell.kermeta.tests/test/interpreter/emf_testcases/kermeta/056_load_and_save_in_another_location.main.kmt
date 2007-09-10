@@ -1,0 +1,263 @@
+/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+ * Creation date: November 14, 2006
+ * License: EPL
+ * Authors: dvojtise
+ */
+@mainClass "load_and_save_in_another_location::Main"
+@mainOperation "main"
+
+
+package load_and_save_in_another_location;
+
+require kermeta
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/056_test_MdlSave.ecore"
+
+using kermeta::kunit
+using kermeta::standard
+using kermeta::persistence
+using tester
+
+
+class Main inherits kermeta::kunit::TestCase
+{
+	attribute ecoreMetamodel : String
+	reference repository : EMFRepository
+	
+	operation main () : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+		/*
+		var testClass : Main init Main.new
+		testClass.setUp
+		//testClass.testLoadSaveEcoreFileUsingAnotherResource 
+		testClass.testLoadSaveFileUsingAnotherResource */
+		stdio.writeln("--- load_and_save_in_another_location END ---")
+	end
+	
+	method setUp() : Void is do
+    	ecoreMetamodel := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/Ecore.ecore"
+    	repository := EMFRepository.new
+	end
+	
+	/** 
+	 * load and save in another location just reusing the same resource but using the SaveAsNewURI function
+	 */
+    operation testLoadSaveEcoreFileUsingSaveAsNewURI() : Void is do 
+		var repository : EMFRepository init EMFRepository.new
+		// load
+		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/fsm.ecore" , ecoreMetamodel)
+    	resource.load
+    	var nbInstances : Integer init resource.instances.size
+    	assertTrueWithMsg(nbInstances >= 1, "testLoadSaveEcoreFileUsingSaveAsNewURI didn't find at least one element in the model")
+        
+		// save
+	    resource.saveWithNewURI("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/fsm.testLoadSaveEcoreFileUsingSaveAsNewURI.ecore")
+	    // check the saved file
+	    checkEcoreSavedFile("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/fsm.testLoadSaveEcoreFileUsingSaveAsNewURI.ecore",
+	    					nbInstances,
+	    					"testLoadSaveEcoreFileUsingSaveAsNewURI")
+    end
+    
+    
+	/** 
+	 * load and save in another location just reusing the same resource but changing the URI of the resource
+	 */
+    operation testLoadSaveEcoreFileChangingTheURI() : Void is do 
+		var repository : EMFRepository init EMFRepository.new
+		// load
+		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/fsm.ecore" , ecoreMetamodel)
+    	resource.load
+    	var nbInstances : Integer init resource.instances.size
+    	assertTrueWithMsg(nbInstances >= 1, "testLoadSaveEcoreFileChangingTheURI didn't find at least one element in the model")
+        
+		// save
+	    resource.uri := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/fsm.testLoadSaveEcoreFileChangingTheURI.ecore"
+	    resource.save
+	    // check the saved file
+	    checkEcoreSavedFile("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/fsm.testLoadSaveEcoreFileChangingTheURI.ecore",
+	    					nbInstances,
+	    					"testLoadSaveEcoreFileChangingTheURI")
+    end
+    
+    /** 
+   	 * load and save in another location by moving the model element to another resource
+   	 * bug #2256
+	 */
+    operation testLoadSaveEcoreFileUsingAnotherResource() : Void is do 
+    	var repository : EMFRepository init EMFRepository.new
+    	
+		// load
+		var resource1 : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/fsm.ecore" ,
+																 ecoreMetamodel)
+    	resource1.load
+    	
+    	// check the number of element in the resource
+    	var nbInstances : Integer init resource1.instances.size
+    	assertTrueWithMsg(nbInstances >= 1, "testLoadSaveEcoreFileUsingAnotherResource didn't find at least one element in the model")
+        
+		// save
+		var resource2 : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/fsm.testLoadSaveEcoreFileUsingAnotherResource.ecore" , ecoreMetamodel)
+		// move model elements from resource1 to resource2
+	    resource2.instances.addAll(resource1.instances)
+	    resource2.save
+	    // check the saved file
+	    checkEcoreSavedFile("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/fsm.testLoadSaveEcoreFileUsingAnotherResource.ecore",
+	    	nbInstances,
+	    	"testLoadSaveEcoreFileUsingAnotherResource")
+    end
+    
+    /** 
+   	 * load and save in another location by moving the model element to another resource
+   	 * bug #2256
+	 */
+    operation testLoadSaveEcoreFileUsingAnotherResourceSeparateRepository() : Void is do 
+    	
+		// load
+		var resource1 : Resource init EMFRepository.new.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/fsm.ecore" ,
+																 ecoreMetamodel)
+    	resource1.load
+    	
+    	// check the number of element in the resource
+    	var nbInstances : Integer init resource1.instances.size
+    	assertTrueWithMsg(nbInstances >= 1, "testLoadSaveEcoreFileUsingAnotherResourceSeparateRepository didn't find at least one element in the model")
+        
+		// save
+		var resource2 : Resource init EMFRepository.new.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/fsm.testLoadSaveEcoreFileUsingAnotherResource.ecore" , ecoreMetamodel)
+		// move model elements from resource1 to resource2
+	    resource2.instances.addAll(resource1.instances)
+	    resource2.save
+	    // check the saved file
+	    checkEcoreSavedFile("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/fsm.testLoadSaveEcoreFileUsingAnotherResource.ecore",
+	    	nbInstances,
+	    	"testLoadSaveEcoreFileUsingAnotherResourceSeparateRepository")
+    end
+    
+    /**
+     *
+     */
+    operation checkEcoreSavedFile(fileName : String, numberOfInstances : Integer, testName : String) : Void is do
+    	var repository : EMFRepository init EMFRepository.new
+    	
+    	var resource : Resource init repository.createResource(fileName, ecoreMetamodel)
+    	resource.load
+    	    	
+    	// check the number of element in the resource
+    	var nbInstances : Integer init resource.instances.size
+    	assertTrueWithMsg(nbInstances == numberOfInstances, testName + " didn't save the expected number of element in the target model")
+    //rescue (e : kermeta::persistence::ResourceLoadException)
+    rescue (e : kermeta::exceptions::ResourceLoadException)
+    	assertTrueWithMsg(false, testName + " didn't correctly save the file, was not able to load it " + e.toString)
+    	    
+    end
+    
+    
+    /*---------------*/
+    /* same test but using another metamodel */
+    
+    operation testLoadSaveFileUsingAnotherResource() is do
+		var rep : EMFRepository init EMFRepository.new
+		var res1 : EMFResource
+		var res2 : EMFResource
+		var res3 : EMFResource
+        var inputMdlUri : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/056_test.xmi"
+        var outputMdlUri : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/056_test.gen.xmi"
+        var inputMMMdlUri : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/056_test_MdlSave.ecore"
+
+   		stdio.writeln("Loading model at " + inputMdlUri + " using " + inputMMMdlUri)
+    	res1 ?= rep.createResource(inputMdlUri, inputMMMdlUri)
+    	res1.load
+    	//stdio.writeln("Model loaded")
+    	
+    	var root : A
+    	root ?= res1.instances.one
+    	//stdio.writeln("Get root mdl elt: " + root.toString)
+    	
+    	//stdio.writeln("Saving model at " + outputMdlUri)
+    	res2 ?= rep.createResource(outputMdlUri, inputMMMdlUri)
+    	res2.instances.add(root)
+    	res2.save
+    	//stdio.writeln("Model saved")
+    	rep.resources.clear
+    	do 
+	    	//res3 ?= EMFRepository.new.createResource(outputMdlUri, inputMMMdlUri)
+	    	res3 ?= rep.createResource(outputMdlUri, inputMMMdlUri)
+	    	
+	    	res3.load
+	    	assertTrueWithMsg(res3.instances.size >=1, "testLoadSaveFileUsingAnotherResource didn't save the expected number of element in the target model")
+    	//rescue (e : kermeta::persistence::ResourceLoadException)
+    	rescue (e : kermeta::exceptions::ResourceLoadException)
+    		assertTrueWithMsg(false, "testLoadSaveFileUsingAnotherResource didn't correctly save the file, was not able to load it. " + e.toString + e.message)    
+    	end    
+	end
+	
+	
+	/** pb of load without MM and then save it */
+	operation testLoadWithoutMMThenSaveFile() is do
+		var rep : EMFRepository init EMFRepository.new
+		var res1 : EMFResource
+		var res2 : EMFResource
+		var res3 : EMFResource
+        var inputMdlUri : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/056_test2.xmi"
+        var outputMdlUri : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/056_test.gen.xmi"
+        var inputMMMdlUri : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/056_test_MdlSave.ecore"
+
+   		stdio.writeln("Loading model at " + inputMdlUri + " using " + inputMMMdlUri)
+    	res1 ?= rep.getResource(inputMdlUri)
+    	res1.load // note : this load is useless since getResource silently load it ...
+    	assertTrueWithMsg(res1.metaModelURI != "", "resource created using a getResource must have metamodelUri after a succesfull load")
+    	//stdio.writeln("Model loaded")
+    	
+    	var root : A
+    	root ?= res1.instances.one
+    	//stdio.writeln("Get root mdl elt: " + root.toString)
+    	
+    	//stdio.writeln("Saving model at " + outputMdlUri)
+    	//res1 ?= rep.createResource(outputMdlUri, inputMMMdlUri)
+    	//res1.instances.add(root)
+    	res1.saveWithNewURI("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/056_test2.gen.xmi")
+    	stdio.writeln("Model saved")
+    	   
+	end
+	
+	/** pb of load without MM and then save another model but that use a repository that 
+	 * contains the loaded resource
+	 *(indirect update for save !)
+	 */
+	operation testLoadWithoutMMThenIndirectlySaveFile() is do
+		var rep : EMFRepository init EMFRepository.new
+		
+		var res1 : EMFResource
+		var res2 : EMFResource
+		var res3 : EMFResource
+        var inputMdlUri : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/056_test2.xmi"
+        var input2MdlUri : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/056_test3.xmi"
+        var outputMdlUri : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/056_test.gen.xmi"
+        var inputMMMdlUri : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/056_test_MdlSave.ecore"
+
+		
+   		stdio.writeln("Loading model at " + input2MdlUri + " using " + inputMMMdlUri)
+    	res2 ?= rep.getResource(input2MdlUri)
+    	res2.load
+    	//stdio.writeln("Model loaded")
+    	
+    	
+    	stdio.writeln("Loading model at " + inputMdlUri + " using " + inputMMMdlUri)
+    	res1 ?= rep.createResource(inputMdlUri, inputMMMdlUri)
+    	res1.load
+    	
+    	var root : A
+    	root ?= res1.instances.one
+    	//stdio.writeln("Get root mdl elt: " + root.toString)
+    	
+    	
+    	// will save res1 but will also try to update res2 for save
+    	res1.saveWithNewURI("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/056_test2.gen.xmi")
+    	stdio.writeln("Model saved")
+    	   
+	end
+ 
+}
+
+

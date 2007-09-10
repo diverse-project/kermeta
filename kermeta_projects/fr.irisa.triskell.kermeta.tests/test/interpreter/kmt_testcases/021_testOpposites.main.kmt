@@ -1,0 +1,246 @@
+@mainClass "testOpposites::TestOpposites"
+@mainOperation "test1_1Opposites"
+package testOpposites;
+
+require kermeta
+
+// Test that the kermeta runtime handles opposites of properties
+
+class A {
+	reference b11 : B#a11
+	reference b1star : B[*]#a1star
+	reference bss : B[*]#ass
+}
+
+class B {
+	reference a11 : A#b11
+	reference a1star : A#b1star
+	reference ass : A[*]#bss
+}
+
+class TestOpposites inherits kermeta::kunit::TestCase {
+
+	operation test1_1Opposites1() is do
+		var a : A init A.new
+		var b : B init B.new
+		
+		assert(a.b11 == void)
+		assert(b.a11 == void)
+		
+		a.b11 := b
+		
+		assert(a.b11 == b)
+		assert(b.a11 == a)
+	end
+	
+	operation test1_1Opposites2() is do
+		var a : A init A.new
+		var b : B init B.new
+		
+		a.b11 := b
+		a.b11 := void
+		
+		assert(a.b11 == void)
+		assert(b.a11 == void)
+	end
+	
+	operation test1_1Opposites3() is do
+		var a : A init A.new
+		var b1 : B init B.new
+		var b2 : B init B.new
+		
+		a.b11 := b1
+		a.b11 := b2
+		
+		assert(a.b11 == b2)
+		assert(b1.a11 == void)
+		assert(b2.a11 == a)
+	end
+	
+	operation test1_1Opposites4() is do
+		var a : A init A.new
+		var b1 : B init B.new
+		var b2 : B init B.new
+		
+		a.b11 := b1
+		b2.a11 := a
+		
+		assert(a.b11 == b2)
+		assert(b1.a11 == void)
+		assert(b2.a11 == a)
+	end
+	
+	operation test1_starOpposites1() is do
+		var a : A init A.new
+		var b : B init B.new
+		
+		assert(a.b1star.size == 0)
+		assert(b.a1star == void)
+		
+		a.b1star.add(b)
+		
+		assert(a.b1star.size == 1)
+		assert(a.b1star.contains(b))
+		assert(b.a1star == a)
+	end
+	
+	operation test1_starOpposites2() is do
+		var a : A init A.new
+		var b1 : B init B.new
+		var b2 : B init B.new
+	
+		a.b1star.add(b1)
+		a.b1star.add(b2)
+		
+		assert(a.b1star.size == 2)
+		assert(a.b1star.contains(b1))
+		assert(a.b1star.contains(b2))
+		assert(b1.a1star == a)
+		assert(b2.a1star == a)
+	end
+	
+	operation test1_starOpposites3() is do
+		var a : A init A.new
+		var b1 : B init B.new
+		var b2 : B init B.new
+	
+		a.b1star.add(b1)
+		a.b1star.add(b2)
+		a.b1star.remove()(b2)
+		
+		assert(a.b1star.size == 1)
+		assert(a.b1star.contains(b1))
+		assert(b1.a1star == a)
+		assert(b2.a1star == void)
+	end
+	
+	operation test1_starOpposites4() is do
+		var a1 : A init A.new
+		var a2 : A init A.new
+		var b1 : B init B.new
+		var b2 : B init B.new
+	
+		a1.b1star.add(b1)
+		a1.b1star.add(b2)
+		a2.b1star.add(b2)
+		
+		assert(a1.b1star.size == 1)
+		assert(a1.b1star.contains(b1))
+		assert(b1.a1star == a1)
+		assert(a2.b1star.size == 1)
+		assert(a2.b1star.contains(b2))
+		assert(b2.a1star == a2)
+	end
+	
+	operation test1_starOpposites5() is do
+		var a : A init A.new
+		var b1 : B init B.new
+		var b2 : B init B.new
+	
+		b1.a1star := a
+		b2.a1star := a
+		
+		assert(a.b1star.size == 2)
+		assert(a.b1star.contains(b1))
+		assert(a.b1star.contains(b2))
+		assert(b1.a1star == a)
+		assert(b2.a1star == a)
+	end
+	
+	operation test1_starOpposites6() is do
+		var a : A init A.new
+		var b1 : B init B.new
+		var b2 : B init B.new
+	
+		b1.a1star := a
+		b2.a1star := a
+		
+		b2.a1star := void
+		
+		assert(a.b1star.size == 1)
+		//assert(a.b1star.contains(b1))
+		//assert(b1.a1star == a)
+		//assert(b2.a1star == void)
+	end
+	
+	operation test1_starOpposites7() is do
+		var a1 : A init A.new
+		var a2 : A init A.new
+		var b1 : B init B.new
+		var b2 : B init B.new
+	
+		b1.a1star := a1
+		b2.a1star := a1
+		
+		b2.a1star := a2
+		
+		assert(a1.b1star.size == 1)
+		assert(a1.b1star.contains(b1))
+		assert(b1.a1star == a1)
+		assert(a2.b1star.size == 1)
+		assert(a2.b1star.contains(b2))
+		assert(b2.a1star == a2)
+	end
+	
+	operation teststar_starOpposites1() is do
+		var a1 : A init A.new
+		var b1 : B init B.new
+	
+		assert(a1.bss.size == 0)
+		assert(b1.ass.size == 0)
+		
+		a1.bss.add(b1)
+		
+		assert(a1.bss.size == 1)
+		assert(a1.bss.contains(b1))
+		assert(b1.ass.size == 1)
+		assert(b1.ass.contains(a1))
+		
+	end
+	
+	operation teststar_starOpposites2() is do
+		var a1 : A init A.new
+		var b1 : B init B.new
+		var b2 : B init B.new
+		
+		a1.bss.add(b1)
+		b2.ass.add(a1)
+		
+		assert(a1.bss.size == 2)
+		assert(a1.bss.contains(b1))
+		assert(a1.bss.contains(b2))
+		assert(b1.ass.size == 1)
+		assert(b1.ass.contains(a1))
+		assert(b2.ass.size == 1)
+		assert(b2.ass.contains(a1))
+		
+	end
+	
+	operation teststar_starOpposites3() is do
+		var a1 : A init A.new
+		var a2 : A init A.new
+		var b1 : B init B.new
+		var b2 : B init B.new
+		
+		a1.bss.add(b1)
+		a1.bss.add(b2)
+		
+		b2.ass.add(a2)
+		
+		assert(a1.bss.size == 2)
+		assert(a1.bss.contains(b1))
+		
+		assert(a2.bss.size == 1)
+		assert(a2.bss.contains(b2))
+		
+		assert(b1.ass.size == 1)
+		assert(b1.ass.contains(a1))
+		
+		assert(b2.ass.size == 2)
+		assert(b2.ass.contains(a2))
+		
+	end
+	
+	
+	
+}

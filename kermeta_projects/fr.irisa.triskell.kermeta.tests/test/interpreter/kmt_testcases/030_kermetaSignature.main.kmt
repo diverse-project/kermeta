@@ -1,0 +1,113 @@
+@mainClass "opsignature::Main"
+@mainOperation "testSignature"
+
+package opsignature;
+
+using kermeta::standard
+using kermeta::io
+
+class Main inherits kermeta::kunit::TestCase
+{
+    operation testSignature() : Void is do
+        var t : Top
+        var m : Middle
+        var b : Bottom
+        var u : Up
+        var d : Down
+        var ud : Up
+        t := Top.new
+        m := Middle.new
+        b := Bottom.new
+        u := Up.new
+        d := Down.new
+        ud := Down.new
+        stdio.writeln("*** First column (u) ***")
+        stdio.writeln(u.cv(t))  
+        assert(u.cv(t) == "Up") 
+        stdio.writeln(u.cv(m)) 
+        assert(u.cv(m) == "Up")
+        stdio.writeln(u.cv(b)) 
+        assert(u.cv(b) == "Up")
+        stdio.writeln("Compilation error")//u.inv(t)
+        stdio.writeln(u.~inv(m))        
+        assert(u.~inv(m) == "Up")
+        stdio.writeln(u.~inv(b))
+        assert(u.~inv(b) == "Up")
+        stdio.writeln("Compilation error: u.ctv(t)")//u.ctv(t)
+        stdio.writeln("Compilation error: u.ctv(m)")//u.ctv(m)
+        stdio.writeln(u.ctv(b))
+        assert(u.ctv(b) == "Up")
+        
+        stdio.writeln("*** Second column (d) ***")
+        stdio.writeln("Compilation error: d.cv(t)")//d.cv(t) // comme C++
+        stdio.writeln(d.cv(t))
+        assertTrueWithMsg(d.cv(t)=="Down","d.cv(t)")
+        stdio.writeln(d.cv(m))
+        assert(d.cv(m) == "Down")
+        stdio.writeln(d.cv(b))
+        assert(d.cv(b) == "Down")
+        stdio.writeln("Compilation error: d.inv(t)")//d.inv(t)
+        stdio.writeln(d.~inv(m))
+        assert(d.~inv(m) == "Down")
+        stdio.writeln(d.~inv(b))
+        assert(d.~inv(b) == "Down")
+        stdio.writeln("Compilation error: d.ctv(t)")//d.ctv(t)
+        stdio.writeln("Compilation error: d.ctv(m)")//d.ctv(m)
+        stdio.writeln(d.ctv(b))
+        assert(d.ctv(b) == "Down")
+        
+        stdio.writeln("*** Third column (ud) ***")
+        stdio.writeln(ud.cv(t))
+        assert(ud.cv(t) == "Down")
+        stdio.writeln(ud.cv(m))
+        assert(ud.cv(m) == "Down")
+        stdio.writeln(ud.cv(b))
+        assert(ud.cv(b) == "Down")
+        stdio.writeln("Compilation error")//ud.inv(t)
+        stdio.writeln(ud.~inv(m))
+        assert(ud.~inv(m) == "Down")
+        stdio.writeln(ud.~inv(b))
+        assert(ud.~inv(b) == "Down")
+        stdio.writeln("Compilation error")//ud.ctv(t)
+        stdio.writeln("Compilation error")//ud.ctv(m)
+        stdio.writeln(ud.ctv(b))
+        assert(ud.ctv(b) == "Down")
+    end
+}
+
+class Top {}
+
+class Middle inherits  Top {
+        operation triggerError() is do
+end
+}
+
+class Bottom inherits  Middle {}
+
+class Up
+{
+	operation cv(t : Top) : String is do
+		result := "Up"
+	end
+	operation ~inv(m : Middle) : String is do
+		result := "Up"
+	end
+	operation ctv(b : Bottom) : String is do
+	 	result := "Up"
+	end
+}
+
+class Down inherits Up
+{
+	method cv(m : Top) : String is do // parameter cannot be of type Middle due to invariance
+	// m.triggerError() // pour déclencher l'erreur de type
+		result := "Down"
+	end
+	method ~inv(m : Middle) : String is do
+		result := "Down"
+	end
+	method ctv(m : Bottom) : String is do // parameter cannot be of type Middle due to invariance
+		result := "Down"
+	end
+}
+

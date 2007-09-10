@@ -1,0 +1,13 @@
+package aPackage;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "kermeta"
+class A
+{
+	attribute aString : ecore::EString
+
+	reference BnotContained : ecore::EParameter
+
+	attribute BContained : ecore::EClass
+
+}

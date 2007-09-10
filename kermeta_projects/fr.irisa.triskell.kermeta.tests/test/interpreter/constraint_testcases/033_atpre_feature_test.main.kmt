@@ -1,0 +1,118 @@
+/* $Id: 033_atpre_feature_test.main.kmt,v 1.1 2007-09-10 08:35:13 cfaucher Exp $
+ * Creation date: June 22, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::kunit
+
+class Main inherits TestCase
+{
+	reference feature : Toto
+	reference feature2 : Toto
+	reference featurename : String
+	
+	operation main() : Void
+	is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+	end
+	
+	operation test0() : Void is do  
+		stdio.writeln("Feature:")
+		
+		feature := Toto.new
+		feature.name := "avant"
+		
+		feature2 := Toto.new
+		feature2.name := "before"
+		
+		featurename := "antes"
+		changetoto(featurename)
+	end
+	
+	operation changetoto(param : String) : Void
+	post lapost1 is do		stdio.writeln("1, should be 'apres' :" + feature.name)
+		assert(feature.name == "apres")
+		true	end
+	/* test can not be done since feature.name@pre is not allowed by the constraint checker
+	post lapost2 is do		stdio.writeln("2, should be in theory 'avant' but kermeta can only insure that it is 'avant', note that it is ok because 'feature' has not been affected with an other object:" + feature.name@pre)
+		assert(feature.name@pre == "avant" )
+		true	end
+	*/
+	post lapost3 is do		stdio.writeln("3, should be 'apres' :" + feature@pre.name)
+		assert(feature@pre.name == "apres")
+		true	end
+	post lapost4 is do		stdio.writeln("4, should be 'avant' :" + feature@pre.name@pre)
+		assert(feature@pre.name@pre == "avant")
+		true	end
+	post lapost5 is do		stdio.writeln("5, should be 'apres' :" + feature2.name)
+		assert(feature2.name == "apres")
+		true	end
+	/* test can not be done since feature2.name@pre is not allowed by the constraint checker
+	post lapost6 is do		stdio.writeln("6, should be in theory 'avant' but kermeta can only insure that it is 'before' :" + feature2.name@pre)
+		assert(feature2.name@pre == "before")
+		true	end
+	*/
+	post lapost7 is do		stdio.writeln("7, should be 'after' :" + feature2@pre.name)
+		assert(feature2@pre.name == "after")
+		true	end
+	post lapost8 is do		stdio.writeln("8, should be 'before' :" + feature2@pre.name@pre)
+		assert(feature2@pre.name@pre == "before")
+		true	end
+	post lapost9 is do		stdio.writeln("9, should be 'antes' :" + featurename@pre)
+		assert(featurename@pre == "antes")
+		true	end
+	post lapost10 is do		stdio.writeln("10, should be 'despues' :" + featurename)
+		assert(featurename == "despues")
+		true	end
+	post lapost11 is do		stdio.writeln("11, should be 'antes' :" + param@pre )
+		assert(param@pre == "antes")
+		true	end
+	post lapost12 is do		stdio.writeln("12, should be 'despues param' :" + param )
+		assert(param == "despues param")
+		true	end
+	is do
+		stdio.writeln("a, should be 'avant' :" + feature.name)
+		assert(feature.name == "avant")
+		stdio.writeln("b, should be 'before' :" + feature2.name)		
+		assert(feature2.name == "before")
+		stdio.writeln("c, should be 'antes' :" + featurename)
+		assert(featurename == "antes")
+		stdio.writeln("d, should be 'antes' :" + param)
+		assert(param == "antes")
+		
+		feature.name := "apres"
+		feature2.name := "after"
+		feature2 := feature
+		featurename := "despues"
+		param:="despues param"
+		
+		stdio.writeln("e, should be 'apres' :" + feature.name)
+		assert(feature.name == "apres")
+		stdio.writeln("f, should be 'apres' :" + feature2.name)		
+		assert(feature2.name == "apres")
+		stdio.writeln("g, should be 'despues' :" + featurename)
+		assert(featurename == "despues")
+		stdio.writeln("h, should be 'despues param' :" + param)
+		assert(param == "despues param")
+		
+	end
+	
+}
+
+class Toto
+{
+	reference name : String
+}

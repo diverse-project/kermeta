@@ -1,0 +1,57 @@
+/* $Id: AliasAndFunctions.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $ */
+
+// Some lambda expressions and primitive types
+
+package kermeta;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::language::structure
+
+alias Integer : kermeta::standard::Integer;
+alias String : kermeta::standard::String;
+alias Character : kermeta::standard::Character;
+alias Hashtable : kermeta::utils::Hashtable<String,String>;
+
+class Test {
+
+	operation test1() : Void is do
+		var i : Integer
+		i := 12
+	end
+
+	operation test2() : Void is do
+		var fact : < String -> Integer >
+		// ...
+		var i : Integer init fact("toto")
+	end
+	
+	operation test3() : Void is do
+		var fact : < [Integer, Integer] -> Integer >
+		fact := function { j:Integer,  k : Integer | if k == 1 then j * fact(k-1, 2) 3 else 1 end }
+		fact(12, 3)
+	end
+
+	operation test4() : Void is do
+		// I know, a new on integer is stupid, but here I want to verify that the same operation will work on the alias
+		kermeta::standard::Integer.new
+		Integer.new		
+		kermeta::standard::Integer.toString
+		Integer.toString
+		Integer.getMetaClass
+		
+		kermeta::utils::Hashtable<String,String>.new
+		Hashtable.new	
+		kermeta::utils::Hashtable<String,String>.toString
+		Hashtable.toString	
+	end
+	
+	operation test5() : Void is do
+		var fact : < [Integer, Integer] -> Integer >
+		fact.toString
+		fact.getMetaClass
+	end
+}
+
+/* END OF FILE */

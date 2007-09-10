@@ -1,0 +1,10 @@
+package testCommentAnnotations;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+/** This is an annotation for 'class A' */
+class A
+{
+	/** This is an annotation for 'reference s'*/
+	reference s : kermeta::standard::String
+}

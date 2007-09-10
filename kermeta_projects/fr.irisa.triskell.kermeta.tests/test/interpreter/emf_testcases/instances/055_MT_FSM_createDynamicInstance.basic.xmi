@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<basic_fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic_fsm="platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/055_MT_FSM_basic_fsm_type.ecore#/" xsi:schemaLocation="platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/055_MT_FSM_basic_fsm_type.ecore#/ ../metamodels/055_MT_FSM_basic_fsm_type.ecore#//basic_fsm">
+  <ownedState name="A" incomingTransition="//@ownedTransition.2" outgoingTransition="//@ownedTransition.0"/>
+  <ownedState name="B" incomingTransition="//@ownedTransition.0" outgoingTransition="//@ownedTransition.1"/>
+  <ownedState name="C" incomingTransition="//@ownedTransition.1" outgoingTransition="//@ownedTransition.2"/>
+  <ownedTransition input="b" output="b" source="//@ownedState.0" target="//@ownedState.1"/>
+  <ownedTransition input="c" output="c" source="//@ownedState.1" target="//@ownedState.2"/>
+  <ownedTransition input="a" output="a" source="//@ownedState.2" target="//@ownedState.0"/>
+</basic_fsm:FSM>

@@ -1,0 +1,30 @@
+/* $Id: 027_weaving_in_kermeta_base.kmt,v 1.1 2007-09-10 08:35:20 cfaucher Exp $
+ * Creation date: February 8, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ * checks that the order of declaraion of base and aspect classes doesn't really matter if there is no conflict
+ */
+@mainClass "mixed_kermeta_weaving::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+
+
+
+class Main inherits A
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+}
+
+class A
+{
+	operation main2() : Void is do 
+	end
+}

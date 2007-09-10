@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<P2:C2 xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:P2="049_simple_splittedMM_P2" xsi:schemaLocation="049_simple_splittedMM_P2 platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/049_simple_splittedMM2.ecore"/>

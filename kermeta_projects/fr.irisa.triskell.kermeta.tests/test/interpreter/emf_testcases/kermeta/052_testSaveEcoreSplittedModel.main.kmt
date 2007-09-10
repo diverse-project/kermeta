@@ -1,0 +1,159 @@
+@mainClass "testSaveEcoreSplittedModel::Main"
+@mainOperation "main"
+
+/** test that we can save a model containing simple dependencies into several resources
+ * in first test the file are saved using a logical order : ie. the independent resource first
+ * in the second test, the file are saved in reverse order 
+ */
+package testSaveEcoreSplittedModel;
+
+
+require kermeta
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+using kermeta::persistence
+using kermeta::standard
+using kermeta::utils
+using ecore
+
+class Main inherits kermeta::kunit::TestCase
+{
+	attribute filename1 : String
+	attribute filename2 : String
+	attribute metamodelname : String
+	
+	operation main() is do
+		testLogicalOrder
+		testReverseOrder
+	end
+	
+    operation testLogicalOrder() : Void is do 
+        
+        stdio.write("Begin\n")
+        filename1 :="platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/052_file1a_out.ecore"
+        filename2 := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/052_file2a_out.ecore"
+        metamodelname := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/Ecore.ecore"
+		saveLogicalOrder(createModel)
+        stdio.write("   model saved\n")
+		
+        checkSavedModel
+        stdio.write("   reloaded model checked\n")
+        
+        
+        stdio.write("End\n")
+        
+      
+    end
+    
+    operation testReverseOrder() : Void is do 
+        
+        filename1 :="platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/052_file1b_out.ecore"
+        filename2 := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/052_file2b_out.ecore"
+        metamodelname := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/Ecore.ecore"
+		saveReverseOrder(createModel)
+        stdio.write("   model saved\n")
+		
+        checkSavedModel
+        stdio.write("   reloaded model checked\n")
+        
+        
+        
+      
+    end
+    operation createModel() : Sequence<EPackage>  is do
+    	// create 2 packages
+        var aPackage1 : EPackage init EPackage.new
+        var aPackage2 : EPackage init EPackage.new
+        aPackage1.name := "P1"
+        aPackage2.name := "P2"
+
+        // create a class in each of them
+        var aClass1 : EClass init EClass.new
+        var aClass2 : EClass init EClass.new
+        aClass1.name := "C1"
+        aClass2.name := "C2"
+        aPackage1.eClassifiers.add(aClass1)
+        aPackage2.eClassifiers.add(aClass2)
+        
+        
+        // put attributes in each of them that point to the second
+        var eReference1 : EReference init EReference.new
+        var eReference2 : EReference init EReference.new
+        eReference1.name := "ref1"
+        eReference2.name := "ref2"
+        aClass1.eStructuralFeatures.add(eReference1) 
+        aClass2.eStructuralFeatures.add(eReference2)
+        
+        eReference1.eType := aClass2
+        eReference2.eType := aClass1
+        result := Sequence<EPackage>.new 
+        result.add(aPackage1)
+        result.add(aPackage2)
+    end
+    operation saveLogicalOrder(packages : Sequence<EPackage>) is do
+	    var repository : EMFRepository init EMFRepository.new
+                                       
+        // each of the package is saved in different ressource
+        var res1 : Resource init repository.createResource(
+   			filename1,
+   			metamodelname)
+        var res2 : Resource init repository.createResource(
+   			filename2,
+   			metamodelname)
+        
+        var it : Iterator<EPackage> init packages.iterator
+        
+        res1.instances.add(it.next)
+        res2.instances.add(it.next)
+        
+        // last resource fisrt because it has no dependencies
+        res2.save
+        res1.save
+    end
+    
+    operation saveReverseOrder(packages : Sequence<EPackage>) is do
+	    var repository : EMFRepository init EMFRepository.new
+                                       
+        // each of the package is saved in different ressource
+        var res1 : Resource init repository.createResource(
+   			filename1,
+   			metamodelname)
+        var res2 : Resource init repository.createResource(
+   			filename2,
+   			metamodelname)
+        
+        var it : Iterator<EPackage> init packages.iterator
+        
+        res1.instances.add(it.next)
+        res2.instances.add(it.next)
+        
+        res1.save
+        res2.save
+    end
+    
+    operation checkSavedModel() is do
+    
+        // reload the file that was saved verify
+        // that the types of the references are correctly loaded
+        
+    	var repository : EMFRepository init EMFRepository.new
+    	// we can reload everything just from this resource because there is a crossdependency
+    	var res1 : Resource init repository.createResource(
+   			filename1,
+   			metamodelname)
+   		res1.load
+   		var aPackage1 : EPackage 
+   		aPackage1 ?= res1.instances.one
+   		assertTrueWithMsg(aPackage1.name == "P1", "aPackage1.name == \"P1\"")
+   		var aClass1 : EClass
+   		aClass1 ?= aPackage1.eClassifiers.one
+   		assertTrueWithMsg(aClass1.name == "C1", "aClass1.name == \"C1\"")
+   		
+   		var eReference1 : EReference
+   		eReference1 ?= aClass1.eStructuralFeatures.one
+   		assertTrueWithMsg(eReference1.name == "ref1", "eReference1.name == \"ref1\"")
+   		assertTrueWithMsg(not (eReference1.eType.isVoid) , "not (eReference1.eType.isVoid)")
+   		assertTrueWithMsg(eReference1.eType.name == "C2", "eReference1.eType.name == \"C2\"")
+   		
+    end
+}
+

@@ -1,0 +1,43 @@
+@testOperation " "
+@mainClass "testReferences::TestMyObjectCreation"
+@mainOperation "testCreateMyObjects"
+package testReferences;
+
+require kermeta
+//require "../../lib/framework.km"
+// Creation of an object
+// TODO : test in a real unit test attribute, and reference...
+class MyObject {
+
+	attribute objects : set RefObject[0..*]
+
+}
+
+class RefObject {
+
+	attribute entier : kermeta::standard::Integer
+	operation set_entier() is do
+		entier := 4245
+	end
+	operation get_entier() : kermeta::standard::Integer is do
+		result := entier
+	end
+}
+
+
+class TestMyObjectCreation inherits kermeta::kunit::TestCase {
+
+	operation testCreateMyObject() : Void is do
+		var o : MyObject
+		var refo : RefObject
+		var res : kermeta::standard::Integer
+		refo := RefObject.new
+		refo.set_entier()
+		o := MyObject.new
+		o.objects.add(refo)
+		assert(o.objects.size==1)
+	end
+
+	
+	
+}

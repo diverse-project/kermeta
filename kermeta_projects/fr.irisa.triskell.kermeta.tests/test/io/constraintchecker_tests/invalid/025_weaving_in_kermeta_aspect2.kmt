@@ -1,0 +1,43 @@
+/* $Id: 025_weaving_in_kermeta_aspect2.kmt,v 1.1 2007-09-10 08:35:12 cfaucher Exp $ */
+
+package weavinginvalidtest2;
+
+require kermeta
+require "025_weaving_in_kermeta_aspect2/025_weaving_in_kermeta_aspect2_baseClass.kmt"
+
+using kermeta::standard
+
+@aspect "true"
+@anothertag "othertagvalue"
+class A {
+
+
+}
+
+@aspect "true"
+class B {}
+
+
+@aspect "true"
+class C {
+
+	operation test1(param : A) : Void is do
+		a == b
+		a == d
+	end
+	
+	operation test0(param : A) : Void 
+	pre mypre is true
+	post mypost is true
+	is abstract
+		
+	attribute a : C // invalid because this is not of the same type as the original
+	attribute c : A
+	attribute d : B
+
+}
+
+@aspect "false"
+class D{
+}
+/* END OF FILE */

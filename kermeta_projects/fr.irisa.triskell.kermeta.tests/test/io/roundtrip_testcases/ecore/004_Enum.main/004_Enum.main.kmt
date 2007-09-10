@@ -1,0 +1,9 @@
+package aPackage;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "kermeta"
+enumeration anEnum
+{
+	aEnemLiteral;
+	anotherEnumLiteral;
+}

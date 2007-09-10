@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tester"
+    nsURI="platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/056_test_MdlSave.ecore"
+    nsPrefix="tester">
+  <eAnnotations source="kermeta.req">
+    <details key="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km" value="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="tester">
+    <eOperations name="main" ordered="false">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var rep : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new&#xA;&#x9;var res : kermeta::persistence::EMFResource&#xA;&#x9;var inputMdlUri : kermeta::standard::String init &quot;test.xmi&quot;&#xA;&#x9;var inputMMdlUri : kermeta::standard::String init &quot;testMM.ecore&quot;&#xA;&#x9;stdio.writeln(&quot;Loading model at &quot;.plus(inputMdlUri).plus(&quot; using &quot;).plus(inputMMdlUri))&#xA;&#x9;res ?= rep.createResource(inputMdlUri, inputMMdlUri)&#xA;&#x9;res.load&#xA;&#x9;stdio.writeln(&quot;Saving model at &quot;.plus(inputMdlUri))&#xA;&#x9;res.saveWithNewURI(&quot;test.gen.xmi&quot;)&#xA;&#x9;stdio.writeln(&quot;Model saved&quot;)&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="A">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+</ecore:EPackage>

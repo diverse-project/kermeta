@@ -1,0 +1,14 @@
+/* $Id: 003_associations_08.kmt,v 1.1 2007-09-10 08:35:13 cfaucher Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+
+/* upper bound cannot be 0*/
+class A {
+    
+}
+class B {
+    reference x : A[2..1] //  must fail here
+}

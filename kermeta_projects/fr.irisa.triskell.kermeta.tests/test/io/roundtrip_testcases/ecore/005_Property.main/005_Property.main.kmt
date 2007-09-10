@@ -1,0 +1,14 @@
+package aPackage;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "kermeta"
+class A
+{
+	reference BnotContained : B
+
+	attribute BContained : A
+
+}
+class B
+{
+}

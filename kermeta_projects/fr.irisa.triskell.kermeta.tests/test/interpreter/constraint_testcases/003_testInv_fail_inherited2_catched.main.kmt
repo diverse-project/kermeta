@@ -1,0 +1,74 @@
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+using kermeta::standard
+using kermeta::exceptions
+using kermeta::kunit
+
+class Main inherits superMain, superMain2, TestCase
+{
+    inv titi is  do str == "titi" end
+    inv toto is do true end
+
+	reference str : String 
+
+    operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+    end
+
+    operation test0() : Void is 
+     do
+        str := "titi"
+        superstr := "supertiti"
+        superstr2 := "supertiti2"
+		do
+        	self.checkInvariants
+        	assert(true)
+        rescue (err : ConstraintViolatedInv)
+        	stdio.writeln(err.toString)
+        	stdio.writeln(err.message)
+        	assert(false)
+        end
+        
+        // to make the invariant failed
+        superstr2 := "not supertiti2"
+        do
+        	self.checkInvariants
+        	assert(false)
+        rescue (err : ConstraintViolatedInv)
+        	stdio.writeln(err.toString)
+        	stdio.writeln(err.message)
+        	assert(true)
+        end
+        
+         // previous invariant failed
+        superstr2 := "supertiti2"     
+		do
+        	self.checkInvariants
+        	assert(true)
+        rescue (err : ConstraintViolatedInv)
+        	stdio.writeln(err.toString)
+        	stdio.writeln(err.message)
+        	assert(false)
+        end
+    end
+}
+
+class superMain
+{
+	reference superstr : String
+	
+	inv superMainInv is superstr == "supertiti"
+}
+
+class superMain2
+{
+	reference superstr2 : String
+	
+	inv superMain2Inv is do superstr2 == "supertiti2" end
+}

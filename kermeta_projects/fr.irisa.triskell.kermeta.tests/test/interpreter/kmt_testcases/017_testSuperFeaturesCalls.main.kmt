@@ -1,0 +1,84 @@
+@mainClass "testPackageTestSuperFeatures::TestSuperFeatures"
+@mainOperation "testMain_operation"
+
+package testPackageTestSuperFeatures;
+
+require kermeta
+
+alias Integer : kermeta::standard::Integer;
+alias String : kermeta::standard::String;
+ 
+ class A
+ {
+ 	attribute ai : Integer
+ 	attribute as : String
+ 	
+ 	operation setAttribute(elt : Integer) is do
+ 		ai := elt
+ 	end
+
+ 	operation getAttribute() : Integer is do
+ 		result := ai
+ 	end
+ }
+ 
+class B inherits A
+{
+ 	attribute bi : Integer
+ 	
+ 	method setAttribute(elt : Integer) is do
+ 		bi := elt
+ 	end
+
+ 	method getAttribute() : Integer is do
+ 		result := bi
+ 	end
+}
+
+class C inherits A
+{
+ 	attribute ci : Integer	
+}
+
+class D inherits B,C
+{
+ 	method setAttribute(elt : Integer) from B is do
+ 		ai := elt
+ 	end
+}
+
+class TestSuperFeatures inherits kermeta::kunit::TestCase
+{    
+     operation testMain_operation() is do
+     	var a : A
+     	var b : B
+     	var c : C
+     	var d : D
+     	
+     	d := D.new
+     	
+     	d.setAttribute(3)
+     	assert(d.ai==3)
+     	d.bi := 2
+     	assert(d.getAttribute()==2)
+     	d.ci := 1
+     	assert(d.ci==1)
+     	c := d
+     	assert (c.ci==1)
+     	assert (c.ai==3)
+     	stdio.writeln("c.getAttribute()=="+c.getAttribute().toString)
+     	assertTrueWithMsg(c.getAttribute()==2,"c.getAttribute()==2 failed") // should be 2 !!?
+     	c.setAttribute(7)
+     	assertTrueWithMsg(c.getAttribute()==2,"c.getAttribute()==2")
+     	assertTrueWithMsg (d.ai==7,"d.ai==7")
+     	b := d
+     	assertTrueWithMsg(b.getAttribute()==2,"b.getAttribute()==2")
+     	b.setAttribute(9)
+     	assertTrueWithMsg(d.ai==9,"d.ai==9")
+     	b.ai := 11
+     	a := d
+     	assertTrueWithMsg(a.getAttribute()==2,"a.getAttribute()==2") 
+
+     end
+     
+}    

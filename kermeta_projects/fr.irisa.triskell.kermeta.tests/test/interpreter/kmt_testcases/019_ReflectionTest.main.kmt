@@ -1,0 +1,178 @@
+@mainClass "testPackageTestReflection::TestReflection"
+@mainOperation "main"
+
+package testPackageTestReflection;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::reflection
+using kermeta::kunit
+
+
+/** Definition of dummy types used in the test */
+alias aClassAlias : testPackageTestReflection::AClass;
+class AClass {
+
+	reference aReference : String
+	
+	attribute b : BClass[0..*]#a
+	
+	operation anOperation()  : String is do
+		result := "hello"
+	end
+	
+	operation create() : AClass is do
+		aReference := "world"
+		b.add(BClass.new)
+		b.add(BClass.new)
+		result := self
+	end
+	
+	property derived_b : BClass
+		getter is do
+			result := b.one
+		end
+		setter is do
+			b.add(value)
+		end
+	
+}
+class BClass {
+	reference a : AClass#b
+}
+
+/** The test class */
+class TestReflection inherits kermeta::kunit::TestCase
+{    
+
+	operation main() : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(TestReflection)
+		tr.printTestResult
+		stdio.writeln(void.getMetaClass.toString)
+	end
+
+	operation testMetaClass() is do
+		assert(String.getMetaClass == Integer.getMetaClass)
+	end
+	
+	operation testMetaClass2() is do
+		assert(String.getMetaClass.typeDefinition.name == "Class")
+	end
+	
+	operation testGet1() is do
+		var a : AClass init AClass.new.create
+		var p1 : Property init AClass.typeDefinition.asType(ClassDefinition).ownedAttribute.select{ p | p.name == "aReference"  }.one
+		assert(a.get(p1) == "world")
+	end
+	
+	operation testGet2() is do
+		var a : AClass init AClass.new.create
+		var p1 : Property init BClass.typeDefinition.asType(ClassDefinition).ownedAttribute.select{ p | p.name == "a"  }.one
+		assert(a.b.one.get(p1) == a)
+	end
+	
+	// Test get for a derived property
+	operation testGet3() is do
+		var a : AClass init AClass.new.create
+		var p1 : Property init AClass.typeDefinition.asType(ClassDefinition).ownedAttribute.select{ p | p.name == "derived_b"  }.one
+		assert(a.get(p1) == a.b.one)
+		
+	end
+	
+	/** check that we can get a value from all property (including those inherited from Object) 
+	 */
+	operation testGetObjectProperties() is do
+		var a : AClass init AClass.new.create
+		var classDef : ClassDefinition
+		classDef ?= a.getMetaClass().typeDefinition
+		classDef.allAttribute.each{prop |
+     					stdio.writeln("   trying property " + prop.name)
+						
+						var referencedObj : Object 
+						referencedObj := a.get(prop)
+						// there is no assert but we just want to check that it doesn't fail (we had a trouble in some kermeta version with property ownedTag inherited from object
+		}
+	end
+	
+	operation testSet1() is do
+		var a : AClass init AClass.new.create
+		var p1 : Property init AClass.typeDefinition.asType(ClassDefinition).ownedAttribute.select{ p | p.name == "aReference"  }.one
+		a.~set(p1, "toto")
+		assert(a.aReference == "toto")
+	end
+	
+	operation testSet2() is do
+		var a : AClass init AClass.new.create
+		var p1 : Property init BClass.typeDefinition.asType(ClassDefinition).ownedAttribute.select{ p | p.name == "a"  }.one
+		var b : BClass init BClass.new
+		b.~set(p1, a)
+		assert(a.b.size == 3)
+		assert(a.b.contains(b))
+	end
+	
+	// Test set for a derived property
+	operation testSet3() is do
+		var a : AClass init AClass.new.create
+		var p1 : Property init AClass.typeDefinition.asType(ClassDefinition).ownedAttribute.select{ p | p.name == "derived_b"  }.one
+		var b : BClass init BClass.new
+		a.~set(p1, b)
+		assert(a.b.size == 3)
+		assert(a.b.contains(b))
+	end
+	
+    operation testGetMetaClass1() is do
+     	assert(self.getMetaClass.typeDefinition.name == "TestReflection")
+    end
+     
+    operation testGetMetaClassNew() is do
+     	assert(self.getMetaClass.new.getMetaClass.typeDefinition.name == "TestReflection")
+    end
+     /*
+	// Test on a Kermeta primitive datatype
+	operation testAllocationUsingClassVariable1() is do
+	    var myClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+     	myClass.typeDefinition := kermeta::standard::String.typeDefinition
+     	var anInstance : Object init myClass.new
+     	assert(anInstance.getMetaClass == myClass)
+    end
+    
+    // Test on a defined class - direct access
+    operation testAllocationUsingClassVariable2() is do
+     	var myClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+     	myClass.typeDefinition := AClass.typeDefinition
+     	var anInstance : Object init myClass.new
+     	assert(anInstance.getMetaClass == myClass)
+    end
+
+	// Test on a class accessed through the metaclass operation
+    operation testAllocationUsingClassVariable3() is do
+     	var myClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+     	myClass.typeDefinition := AClass.getMetaClass.typeDefinition
+     	var anInstance : Object init myClass.new
+     	assert(anInstance.getMetaClass == myClass)
+    end
+
+	/*
+	// Test on an alias for a Kermeta primitive datatype
+    operation testAllocationUsingClassVariable4() is do
+     	var myClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+     	myClass.typeDefinition := String.typeDefinition
+     	var anInstance : Object init myClass.new
+     	assert(anInstance.getMetaClass == myClass)
+    end
+    
+    // Test on an alias for a defined class
+    operation testAllocationUsingClassVariable5() is do
+     	var myClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+     	myClass.typeDefinition := aClassAlias.typeDefinition
+     	var anInstance : Object init myClass.new
+     	assert(anInstance.getMetaClass == myClass)
+    end
+    */
+}    
+
+
+

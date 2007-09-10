@@ -1,0 +1,22 @@
+@mainClass "MDK::X"
+@mainOperation "e"
+package MDK;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+enumeration AccesVariableEnumeration
+{
+	accPublic;
+	accPrivate;
+}
+class Test
+{
+	attribute a : AccesVariableEnumeration
+	reference x : X
+}
+class X
+{
+	operation e() is do
+		stdio.writeln(AccesVariableEnumeration.accPublic.~enumeration.toString)
+	end
+}

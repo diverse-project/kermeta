@@ -1,0 +1,12 @@
+package testExternPackage;
+
+require "6_testExternPackageCall2.kmt"
+
+alias Integer : kermeta::standard::Integer;
+//alias Test_opcall2 : testExternPackage2::Test_opcall;
+// operation called in another package
+class Test_opcall {
+    operation operation_asg() : Integer is do
+       testExternPackage2::Test_opcall2.new.operation_asg()
+    end
+}

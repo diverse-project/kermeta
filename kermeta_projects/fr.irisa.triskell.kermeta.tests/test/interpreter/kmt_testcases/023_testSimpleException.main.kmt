@@ -1,0 +1,88 @@
+
+@mainClass "testSimpleExceptions::TestEx"
+@mainOperation "test1"
+
+package testSimpleExceptions;
+
+require kermeta
+
+using kermeta::standard
+
+
+class TestEx inherits kermeta::kunit::TestCase {
+
+	operation test1() is do
+		
+		raise "toto"
+		assert(false)
+	
+	rescue(s : String)
+		
+		assert(s == "toto")
+		
+	end	
+	
+	operation test2() is do
+		var str : String init "str1"				
+		
+		do
+			titi
+			str := "str2"
+			assert(str == "str2")
+			assertTrueWithMsg(false, "should have not passed here because of the raised exception")
+		rescue (raisedstr : String)
+			assertTrueWithMsg(str == "str1","the str value was changed to " + str)
+			str := "str3"
+		end
+		assertTrueWithMsg(str == "str3","was not rescued")
+	end		
+	
+	operation test3() is do
+		var o : Object 
+		do
+			raise "toto"
+			assert(false)
+		rescue(str : String)
+			o := str
+		rescue(i : Integer)
+			o := i
+		end
+		assert(o == "toto")
+	end	
+	
+	operation test4() is do
+		var o : Object 
+		do
+			raise 5
+			assert(false)
+		rescue(str : String)
+			o := str
+		rescue(i : Integer)
+			o := i
+		end
+		assert(o == 5)
+	end	
+	
+	operation test5() is do
+		var o : Object 
+		do
+			raise true
+			assert(false)
+		rescue(str : String)
+			o := str
+		rescue(i : Integer)
+			o := i
+		end
+		assert(false)
+	
+	rescue(o : Object)
+		assert(o == true)
+	end	
+	
+	
+	operation titi() is do
+		raise "titi"
+	end
+	
+	
+}

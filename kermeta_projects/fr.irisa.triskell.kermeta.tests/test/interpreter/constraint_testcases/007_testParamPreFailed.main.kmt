@@ -1,0 +1,50 @@
+/* $Id: 007_testParamPreFailed.main.kmt,v 1.1 2007-09-10 08:35:13 cfaucher Exp $
+ * Creation date: January 23, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::exceptions
+using kermeta::kunit
+
+class Main inherits TestCase
+{
+	reference str : String
+	
+	operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+    end
+	
+    operation test0() : Void is do 
+   		// to make the execution fail:
+ 			truc("machin")
+ 			assert(false)
+ 		 rescue (err : ConstraintViolatedPre)
+        	stdio.writeln(err.toString)
+        	stdio.writeln(err.message)
+        	assert(true)
+    end
+    
+    
+    operation truc(param : String)  : String
+    pre lapre is param != "machin"
+    post lapost is do str == param end
+    is
+     do   	
+        stdio.writeln("test")
+        str := param
+     end
+     
+}

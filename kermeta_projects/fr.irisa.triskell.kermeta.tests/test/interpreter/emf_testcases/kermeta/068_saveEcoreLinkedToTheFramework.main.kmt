@@ -1,0 +1,43 @@
+/* $Id: 068_saveEcoreLinkedToTheFramework.main.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+ * Creation date: August 2, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::kunit
+using kermeta::persistence
+using ecore
+
+class Main inherits TestCase
+{
+	operation main() : Void is do 
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+	end
+	
+	operation testSave() is do
+	
+		var repository : EMFRepository init EMFRepository.new
+		var resource : Resource init repository.createResource( "../instances/068_ecoreLinkedToTheFramework.ecore", "http://www.eclipse.org/emf/2002/Ecore" )
+		resource.load
+
+		var p : EPackage
+		p ?= resource.detect{ elem | elem.isInstanceOf(EPackage) }
+
+		resource.saveWithNewURI( "../instances/out/068_ecoreLinkedToTheFramework.ecore" )
+	
+		assert(true)
+	
+	end
+}

@@ -1,0 +1,12 @@
+package testAlias;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::standard
+
+alias String : kermeta::language::structure::String;
+
+class A
+{
+	reference s : String
+}

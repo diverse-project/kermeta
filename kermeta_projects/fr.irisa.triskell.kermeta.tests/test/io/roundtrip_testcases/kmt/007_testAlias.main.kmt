@@ -1,0 +1,9 @@
+package testAlias;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+alias Alias : kermeta::language::structure::Object;
+class A
+{
+	attribute s : Alias
+}

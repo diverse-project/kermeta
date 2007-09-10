@@ -1,0 +1,26 @@
+/* $Id: 028_weaving_in_kermeta_base9.kmt,v 1.1 2007-09-10 08:35:19 cfaucher Exp $
+ * Creation date: February 8, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ * checks that the order of declaraion of base and aspect classes doesn't really matter if there is no conflict
+ */
+
+
+package root_package;
+
+
+require kermeta
+
+
+
+class A
+{
+	reference aB : B#aA
+	reference aB2 : B
+}
+class B
+{
+	reference aA : A#aB
+}
+

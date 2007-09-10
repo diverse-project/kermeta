@@ -1,0 +1,25 @@
+/* $Id: 005_superoperations_parammismatch4_inv.kmt,v 1.1 2007-09-10 08:35:13 cfaucher Exp $ */
+
+// Test of constraints on operations
+// This test must make specific errors to appear. 
+
+package root_package;
+using kermeta::standard
+
+
+
+class A
+{
+   operation m(x : Object) : String is do
+
+   end
+}
+
+
+
+class E inherits A
+{
+   method m() : String is do
+
+   end
+} 

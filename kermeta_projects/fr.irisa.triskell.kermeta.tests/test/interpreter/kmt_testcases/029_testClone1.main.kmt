@@ -1,0 +1,221 @@
+@mainClass "test::Main"
+@mainOperation "testmain"
+
+
+package test;
+
+
+require kermeta
+
+using kermeta::standard
+
+
+enumeration PriorityKind { low; medium; high; }
+
+
+
+/**
+ * Describe a message
+ * Each message can be contained in a Message Pool
+ * Each message is adressed to one or more user which are the receivers
+ */
+class Message
+{
+	attribute body : String
+	attribute size : Integer
+	attribute isRead : Boolean
+	attribute priority : PriorityKind
+	
+	reference owner : MessagePool#content
+	reference receiver : User[0..*]#messagebox
+		
+	operation initialize(body : String, size : Integer, priority : PriorityKind,  isRead : Boolean) is
+	do
+		self.body := body
+		self.size := size
+		self.priority := priority
+		self.isRead := isRead
+	end
+
+	operation accept(visitor : Visitor) is
+	do
+		visitor.visitMessage(self)
+	end
+	
+}
+
+
+/**
+ * Describe a pool of message
+ * Messages are contained in the message pool
+ */
+class MessagePool
+{
+	attribute content : Message [0..*]#owner
+	 
+	operation accept(visitor : Visitor) is
+	do
+		visitor.visitMessagePool(self)	
+	end
+	 	
+}
+
+
+/** 
+ * Describe a simple user with  lastname and firstname
+ */ 
+class User 
+{
+	attribute firstname : String
+	attribute lastname : String
+	
+	reference messagebox : Message[0..*]#receiver
+	
+	operation accept(visitor : Visitor) is
+	do
+		visitor.visitUser(self)	
+	end
+}
+	
+
+// ******* Visitor to print properly on console *********
+
+
+abstract class Visitor
+{
+	operation visitMessage(target : Message) is abstract
+	
+	operation visitMessagePool(target : MessagePool) is abstract
+	
+	operation visitUser(target : User) is abstract
+}
+
+
+class Printer inherits Visitor 
+{
+	/** 
+	 * Print a Message
+	 */ 
+	method visitMessage(target : Message) is
+	do
+		stdio.writeln("Message OID : " + target.oid.toString )
+		stdio.writeln(" - body : " + target.body)
+		stdio.writeln(" - size : " + target.size.toString)
+		stdio.writeln(" - isRead : " + target.isRead.toString)
+		stdio.writeln(" - priority : " + target.priority.toString)
+		stdio.write(" - receivers : [")
+		target.receiver.each{u|stdio.write(u.oid.toString + " ")}
+		stdio.writeln("]")
+
+		stdio.writeln(" - owner : " + target.owner.oid.toString )
+		
+	end
+	
+
+	/** 
+	 * Print a MessagePool
+	 */ 	
+	method visitMessagePool(target : MessagePool) is
+	do
+		stdio.writeln("Message Pool OID : " + target.oid.toString)
+		target.content.each{m | m.accept(self) }
+	end
+
+
+	/** 
+	 * Print a User
+	 */ 	
+	method visitUser(target : User) is
+	do
+		stdio.writeln("User OID : " + target.oid.toString)
+		stdio.writeln(" - firstname : " + target.firstname)
+		stdio.writeln(" - lastname : " + target.lastname)
+		stdio.write(" - message box : [")
+		target.messagebox.each{m|stdio.write(m.oid.toString + " ")}
+		stdio.writeln("]")
+	end
+
+}
+
+
+
+class Main inherits kermeta::kunit::TestCase
+{
+	operation testmain() is 
+	do 
+		var myPrinter : Printer init Printer.new
+
+		stdio.writeln("-----------------------------------------------------------")
+		stdio.writeln("TEST SIMPLE CLONE")
+		
+		stdio.writeln("Construction d'un message m1 ")
+		var m1 : Message init Message.new
+		m1.initialize("Bonjour les amis", 10, PriorityKind.medium, true)
+		m1.accept(myPrinter)
+		
+		stdio.writeln("Clonage du message m1 (-> m2)")
+		var m2 : Message init Message.clone(m1)
+		m2.accept(myPrinter)
+		
+		// Check that m1 and m2 contain the same values
+		assert(m1.oid != m2.oid)
+		assert(m1.size == m2.size)
+		assert(m1.body.size.equals(m2.body.size))
+		assert(m1.isRead.equals(m2.isRead))
+		
+		stdio.writeln("-----------------------------------------------------------")
+		stdio.writeln("TEST CLONE ON REFERENCE [0..*]")
+	
+		stdio.writeln("Construction d'un message m3 ")
+		var m3 : Message init Message.new
+		m3.initialize("Damn right, I've got the Blues", 10, PriorityKind.medium, true)
+		m3.accept(myPrinter)
+		
+		stdio.writeln("Construction d'un utilisateur u1")
+		var u1 : User init User.new
+		u1.firstname := "Franck"
+		u1.lastname := "Chauvel"
+		u1.messagebox.add(m1)
+		// u1.messagebox.add(m2)
+		u1.messagebox.add(m3)
+		u1.accept(myPrinter)
+		
+		stdio.writeln("Construction d'un utilisateur u2")
+		var u2 : User init User.new
+		u2.firstname := "Robert"
+		u2.lastname := "Johnson"
+		u2.messagebox.add(m1)
+		u2.messagebox.add(m3)
+		u2.accept(myPrinter)
+
+		stdio.writeln("Construction d'un utilisateur u3, clone de u1")
+		var u3 : User init User.clone(u1)
+		u3.accept(myPrinter)
+	
+		// Check that u1 and u3 reference the same object
+		u3.messagebox.each{m|assert(u1.messagebox.contains(m))}
+				
+		stdio.writeln("-----------------------------------------------------------")
+		stdio.writeln("TEST CLONE ON ATTRIBUTE [0..*]")
+	
+		stdio.writeln("Construction d'un pool de messages mp1 ")
+		var mp1 : MessagePool init MessagePool.new
+		mp1.content.add(m1)
+		mp1.content.add(m3)
+		mp1.accept(myPrinter)
+
+		stdio.writeln("Construction d'un pool de messages mp2 clone de mp1 ")		
+		var mp2 : MessagePool init MessagePool.clone(mp1)
+		mp2.accept(myPrinter)
+
+		stdio.writeln("-----------------------------------------------------------")
+		stdio.writeln("TEST UPDATE OPPOSITE REFERENCE")
+		stdio.writeln("Have u1, a new message in its messagebox ?")						 
+		u1.accept(myPrinter)
+		
+		stdio.writeln("-----------------------------------------------------------")
+		
+		stdio.writeln("That's all folks ! ")
+	
+	end
+}

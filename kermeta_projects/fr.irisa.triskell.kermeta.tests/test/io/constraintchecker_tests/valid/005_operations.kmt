@@ -1,0 +1,25 @@
+/* $Id: 005_operations.kmt,v 1.1 2007-09-10 08:35:07 cfaucher Exp $ */
+
+// Test of constraints on operations
+// This test must make specific errors to appear. 
+
+package root_package;
+
+
+class C1
+{
+	operation op1() is do
+	end
+
+	operation op2() is do
+	end
+
+}
+
+
+class C1bis 
+{
+	operation op2() is do
+	end
+}
+

@@ -1,0 +1,24 @@
+/* $Id: 058_kmModelWithEnum.kmt,v 1.1 2007-09-10 08:35:07 cfaucher Exp $
+ * Creation date: August 23, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+class Main
+{
+	inv truc is true 
+	operation main() : Void   
+		pre mypre is true
+		post mypost is true
+	is do
+		// TODO: implement 'main' operation
+	end
+}

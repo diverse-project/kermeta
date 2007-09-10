@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<finalstates_fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:finalstates_fsm="platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/055_MT_FSM_finalstates_fsm_type.ecore#/" xsi:schemaLocation="platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/055_MT_FSM_finalstates_fsm_type.ecore#/ ../metamodels/055_MT_FSM_finalstates_fsm_type.ecore#//finalstates_fsm">
+  <ownedState name="A" incomingTransition="//@ownedTransition.2" outgoingTransition="//@ownedTransition.0"/>
+  <ownedState name="B" incomingTransition="//@ownedTransition.0" outgoingTransition="//@ownedTransition.1 //@ownedTransition.2"/>
+  <ownedState xsi:type="finalstates_fsm:FinalState" name="End" incomingTransition="//@ownedTransition.1"/>
+  <ownedTransition input="b" output="a->b" source="//@ownedState.0" target="//@ownedState.1"/>
+  <ownedTransition input="End" output="b->End" source="//@ownedState.1" target="//@ownedState.2"/>
+  <ownedTransition input="a" output="b->a" source="//@ownedState.1" target="//@ownedState.0"/>
+</finalstates_fsm:FSM>

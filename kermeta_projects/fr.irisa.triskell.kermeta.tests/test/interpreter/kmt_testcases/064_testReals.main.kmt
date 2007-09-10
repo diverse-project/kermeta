@@ -1,0 +1,124 @@
+@mainClass "test::TestReal"
+@mainOperation "main"
+
+package test;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::language::structure
+using kermeta::kunit
+
+class TestReal inherits kermeta::kunit::TestCase {
+
+	operation main() : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(TestReal)
+		tr.printTestResult
+	end
+	
+	operation testRealInstanciation() : Boolean is do
+		var x : Real init "10".toReal
+		var y : Real init 10.toReal
+		var z : Real init Real.new
+		assert(x.toInteger == 10)
+		assert(y.toInteger == 10)
+		assert(z.toInteger == 0)
+	end
+	
+	operation testRealCompare() : Boolean is do
+		var x1 : Real init "1.5".toReal
+		var x2 : Real init "1.5".toReal
+		var y : Real init "1.1".toReal
+		var z : Real init "2".toReal
+		// between reals
+		assert(x1 >= x1)
+		assert(x1 >= x2)
+		assert(x1 <= x1)
+		assert(x1 <= x2)
+		assert(x1 >= y)
+		assert(x1 > y)
+		assert(not (x1 < y))
+		assert(not (x1 <= y))
+		assert(y < x1)
+		assert(y <= x1)
+		// with integers
+		assert(z >= 2)
+		assert(z <= 2)
+		assert(not (z < 2))
+		assert(not (z > 2))
+		assert(2 >= z)
+		assert(2 <= z)
+		assert(not (2 < z))
+		assert(not (2 > z))
+		assert(x1 < 2)
+		assert(x1 <= 2)
+		assert(not (x1 > 2))
+		assert(not (x1 >= 2))
+		assert(2 > x1)
+		assert(2 >= x1)
+		assert(not (2 < x1))
+		assert(not (2 <= x1))
+		assert(not (1 >= y))
+	end
+	
+	operation testEquals() : Boolean is do
+		var x1 : Real init "1.5".toReal
+		var x2 : Real init "1.5".toReal
+		var y : Real init "1.1".toReal
+		var z : Real init "2".toReal
+		assert(x1 == x1)
+		assert(x1 == x2)
+		assert(not (x1 == y))
+		assert(not (x1 != x2))
+		assert(x1 != y)
+		// with integers
+		assert( y != 1)
+		assert( z == 2)
+		assert( 1 != y)
+		assert( 2 == z)
+	end
+	
+	operation testRealPlus() : Boolean is do
+		assert("5.999".toReal + "0.001".toReal == "6".toReal)
+		assert("5.999".toReal + "0.001".toReal == 6)
+		assert("-5.999".toReal + "5.999".toReal == 0)
+		assert("-5.999".toReal + "6".toReal > 0)
+	end
+	
+	operation testRealMinus() : Boolean is do
+		assert("5.999".toReal - "-0.001".toReal == "6".toReal)
+		assert("6.001".toReal - "0.001".toReal == 6)
+		assert("5.999".toReal - "5.999".toReal == 0)
+		assert("5.999".toReal - "6".toReal < 0)
+	end
+	
+	operation testRealMult() : Boolean is do
+		assert("6".toReal * "5".toReal == "30".toReal)
+		assert("20".toReal * "0.1".toReal == 2)
+		assert("2".toReal * "-1".toReal == -2)
+	end
+	
+	operation testRealDiv() : Boolean is do
+		assert("30".toReal / "5".toReal == "6".toReal)
+		assert("2".toReal / "0.1".toReal == 20)
+		assert("2".toReal / "-1".toReal == -2)
+	end
+	
+	operation testToString() : Boolean is do
+		assert("30".toReal.toString.toReal == 30)
+		assert("30".toInteger.toString.toReal == 30)
+		assert("-0.1".toReal.toString.toReal == "-0.1".toReal)
+		assert("12.5".toReal.toInteger.toString == "12")
+	end
+	
+	// maybe this should no be in this test...
+	operation testStringConvertions() : Boolean is do
+		assert("30".toReal.toString.toReal == 30)
+		assert("30".toInteger.toString.toReal == 30)
+		assert("False".toBoolean == false)
+		assert("true".toBoolean == true)
+	end
+	
+}

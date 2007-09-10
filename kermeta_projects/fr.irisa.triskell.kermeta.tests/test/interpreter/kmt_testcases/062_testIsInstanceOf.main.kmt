@@ -1,0 +1,69 @@
+@mainClass "Object::TestIsInstance"
+@mainOperation "main"
+
+package Object;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::language::structure
+
+abstract class A<G> {}
+
+class B<G> inherits A<G> {}
+
+class C {}
+
+class D<G> inherits C {}
+
+class E inherits D<String>, B<Integer> {}
+
+class TestIsInstance inherits kermeta::kunit::TestCase {
+
+	operation main() : Void is do
+	end
+	
+	operation testIsInstanceOf1() : Boolean is do
+		var b : B<Integer> init B<Integer>.new
+		assert(b.isInstanceOf(B<Integer>))
+		assert(b.isInstanceOf(A<Integer>))
+		assert(b.isInstanceOf(Object))
+		
+	end
+	
+	operation testIsInstanceOf2() : Boolean is do
+		var b : B<Integer> init B<Integer>.new
+		assert(not b.isInstanceOf(B<String>))
+		assert(not b.isInstanceOf(A<String>))
+		assert(not b.isInstanceOf(C))
+		assert(not b.isInstanceOf(E))
+	end
+	
+	operation testIsInstanceOf3() : Boolean is do
+		var e : E init E.new
+		assert(e.isInstanceOf(D<String>))
+		assert(e.isInstanceOf(B<Integer>))
+		assert(e.isInstanceOf(C))
+		assert(e.isInstanceOf(A<Integer>))
+		assert(e.isInstanceOf(Object))
+	end
+	
+	operation testIsInstanceOf4() : Boolean is do
+		var e : E init E.new
+		assert(not e.isInstanceOf(Integer))
+		assert(not e.isInstanceOf(A<String>))
+	end
+	
+	operation testIsInstanceOf5() : Boolean is do
+		assert("String".isInstanceOf("toto".getMetaClass))
+		assert("String".isInstanceOf(Object))
+		assert("String".isInstanceOf(ValueType))
+	end 
+	
+	operation testIsInstanceOf6() : Boolean is do
+		assert(not "String".isInstanceOf(18.getMetaClass))
+	end 
+
+
+}

@@ -1,0 +1,63 @@
+package puzzle;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "kermeta"
+abstract class Service
+{
+	attribute name : ecore::EString[1..1]
+
+	@overloadable "true"
+	operation call() : Void is
+		raise kermeta::exceptions::NotImplementedException.new
+
+}
+class RequiredService inherits Service
+{
+	reference provider : Connector[0..*]#source
+
+	reference customer : Component[1..1]#requiredService
+
+}
+class ProvidedService inherits Service
+{
+	reference customer : Connector[0..*]#target
+
+	reference provider : Component[1..1]#providedService
+
+}
+class Connector
+{
+	reference target : ProvidedService#customer
+
+	reference source : RequiredService#provider
+
+	attribute name : ecore::EString[1..1]
+
+	@overloadable "true"
+	operation deleguate() : Void is
+		raise kermeta::exceptions::NotImplementedException.new
+
+}
+abstract class Component
+{
+	attribute name : ecore::EString[1..1]
+
+	attribute providedService : ProvidedService[1..*]#provider
+
+	attribute requiredService : RequiredService[0..*]#customer
+
+	reference owner : CompositeComponent#subComponent
+
+	@overloadable "true"
+	operation execute(service : ecore::EString) : Void is
+		raise kermeta::exceptions::NotImplementedException.new
+
+}
+class PrimtiveComponent inherits Component
+{
+}
+class CompositeComponent inherits Component
+{
+	attribute subComponent : Component[1..*]#owner
+
+}

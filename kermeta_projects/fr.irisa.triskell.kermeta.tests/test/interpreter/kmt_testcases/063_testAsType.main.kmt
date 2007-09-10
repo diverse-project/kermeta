@@ -1,0 +1,84 @@
+@mainClass "Object::TestAsType"
+@mainOperation "main"
+
+package Object;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::language::structure
+using kermeta::kunit
+
+class A {}
+
+class B inherits A {}
+
+class C<G> {}
+
+class D<G> inherits C<G> {}
+
+class E inherits D<String>, B {}
+
+class TestAsType inherits kermeta::kunit::TestCase {
+
+	operation main() : Void is do	
+		var tr : TestRunner init TestRunner.new
+		tr.run(TestAsType)
+		tr.printTestResult
+	end
+	
+	operation testAsType1() : Boolean is do
+		var a : A init B.new
+		var b : B
+		b := a.asType(B)
+		assert(a == b)
+		C<String>.new
+	end
+	
+	operation testAsType2() : Boolean is do
+		var a : A init A.new
+		var b : B
+		b := a.asType(B) // this should throw an exception
+		assert(false)
+	rescue(e : kermeta::exceptions::TypeCastError)
+		// we should go in here
+	rescue
+		// not here
+		assert(false)
+	end
+
+	operation testAsType3() : Boolean is do
+		var a : A init E.new
+		var c : C<String>
+		assert(a.asType(B) == a)
+		c := a.asType(C<String>)
+		assert( c == a)
+		assert(a.asType(E) == a)
+	end
+	
+	operation testAsType4() : Boolean is do
+		var a : A init E.new
+		var c : C<Integer>
+		c := a.asType(C<Integer>) // this should throw an exception
+		assert(false)
+	rescue(e : kermeta::exceptions::TypeCastError)
+		// we should go in here
+	rescue
+		// not here
+		assert(false)
+	end
+	
+	operation testAsType5() : Boolean is do
+		var o : Object init "toto"
+		o.asType(String) + "titi"
+	end
+	
+	operation testAsType6() : Boolean is do
+		var c : ClassDefinition
+		c := "toto".getMetaClass.typeDefinition.asType(ClassDefinition)
+		var p : Package
+		p := c.container.asType(Package)
+	end
+	
+}

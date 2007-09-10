@@ -1,0 +1,52 @@
+@testOperation "yes"
+@mainClass "root::testPackage::TestClass"
+@mainOperation "testopsub"
+
+
+package root;
+require kermeta
+
+// Main package containing the operation to be executed
+package testPackage 
+{
+
+	class TestClass inherits kermeta::kunit::TestCase 
+	{
+		@testopsub "test operation for a 1 level 'sub'"
+		operation testopsub() : kermeta::standard::Integer is do
+			result := subPackage::Class2.new.testop2()
+			assert(result==13)
+		end
+		
+		@testopsub "test operation for a 2 level 'sub'"
+		operation testopsubsub() : kermeta::standard::Integer is do
+			result := subSubPackage::Class3.new.testop3()
+			assert(result==13)
+		end
+			
+	}
+
+}
+
+
+package subPackage {
+	
+	@Class2 "Contains an operation with a very simple instruction"
+	class Class2
+	{
+		operation testop2() : kermeta::standard::Integer is do
+			result := 13
+		end
+	}
+}
+
+@subSubPackage "A package that use an operation from another package"
+package subSubPackage {
+	
+	class Class3
+	{
+		operation testop3() : kermeta::standard::Integer is do
+			result := subPackage::Class2.new.testop2()
+		end
+	}
+}

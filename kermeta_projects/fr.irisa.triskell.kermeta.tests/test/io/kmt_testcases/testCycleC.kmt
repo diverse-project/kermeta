@@ -1,0 +1,10 @@
+package testCycle;
+
+require "testCycleA.kmt"
+
+class C {
+
+	attribute a : A
+	attribute e : E
+ 
+}

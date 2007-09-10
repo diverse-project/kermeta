@@ -1,0 +1,170 @@
+@mainClass "resourceTests::Main"
+@mainOperation "main"
+
+package resourceTests;
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/062_Input.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/062_Output.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/062_Traceability.ecore"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+using input
+using output
+using traceability
+
+
+class Main inherits TestCase {
+
+	attribute inMMdlUri : String
+	attribute outMMdlUri : String
+	attribute traceMMdlUri : String
+
+	attribute traceMdlUri : String
+	attribute inMdlUri : String
+	attribute outMdlUri : String
+	
+	reference emfRep : EMFRepository
+	reference traceRes : EMFResource
+
+
+	/**
+	 *
+	 */
+	operation main() is do
+		stdio.writeln("start tests")
+		
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+		stdio.writeln("--- resourceTests END ---")
+		
+		
+	end
+
+
+	/**
+	 *
+	 */
+	method setUp() is do
+		inMMdlUri    := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/062_Input.ecore"
+		outMMdlUri   := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/062_Output.ecore"
+		traceMMdlUri := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/062_Traceability.ecore"
+		inMdlUri     := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/062_in.xmi"
+		outMdlUri    := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/062_out.xmi"
+		traceMdlUri  := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/062_trace.xmi"
+	end
+
+
+	/**
+	 *
+	 */
+	operation testLoadDependentResources() is do
+		loadTrace
+
+		// Test trace resource loading
+		assert(traceRes.size == 1)
+		assert(traceRes.contents.size == 8)
+		assert(traceRes.repository == emfRep)
+
+		// Test implicit load of in resource
+		var traceMdl : TraceModel
+		traceMdl ?= traceRes.instances.one
+		var inRes : EMFResource
+		inRes ?= emfRep.getResource(inMdlUri)
+		assert(inRes.repository != void)
+		assert(inRes.repository == traceRes.repository)
+		assert(inRes.size == 1)
+		assert(inRes.contents.size == 1)
+		var inMdl : InputModel
+		inMdl ?= inRes.instances.one
+		assert(inMdl.containingResource == inRes)
+
+		// ...
+		var outRes : EMFResource
+		outRes ?= emfRep.getResource(outMdlUri)
+		
+		var depRes : Set<Resource> init traceRes.dependentResources
+		assert(depRes.size == 2 and depRes.contains(inRes) and depRes.contains(outRes))
+	end
+	
+
+	/**
+	 *
+	 */
+	operation testContainingResource() is do
+		loadTrace
+		
+		var traceMdl : TraceModel
+		traceMdl ?= traceRes.instances.one
+		assert(traceMdl.containingResource == traceRes)
+		var traceElt : Trace init traceMdl.traces.one
+		assert(traceElt.containingResource == traceRes)
+
+		var newTraceMdl : TraceModel init TraceModel.new
+		assert(newTraceMdl.containingResource == void)
+		var newMsg : Message init Message.new
+		newTraceMdl.messages.add(newMsg)
+		traceRes.add(newTraceMdl)
+		assert(traceRes.size == 2)
+		assert(traceRes.contents.size == 10)	
+		assert(newTraceMdl.containingResource == traceRes)
+		assert(newMsg.containingResource == traceRes)
+	end
+
+
+	/**
+	 *
+	 */
+	operation loadTrace() is do
+		emfRep := EMFRepository.new
+		traceRes ?= emfRep.createResource(traceMdlUri, traceMMdlUri)
+		traceRes.load
+	end
+	
+	/**
+	 *  check that if a resource is loaded several times it will contains only necessary objects
+	 */
+	operation testMultipleResourceLoad() is do
+		emfRep := EMFRepository.new
+		var res : Resource
+		res := emfRep.createResource(inMdlUri, inMMdlUri)
+		res.load
+		var firstLoadSize : Integer init res.size
+		stdio.writeln("nb element in res: " + firstLoadSize.toString)
+		stdio.writeln("nb resources in repository: " + emfRep.resources.size.toString)
+		// load it a second times
+		res.load
+		stdio.writeln("nb element in res: " + firstLoadSize.toString)
+		stdio.writeln("nb resources in repository: " + emfRep.resources.size.toString)
+		assert(res.size == firstLoadSize)
+	end
+	/**
+	 *  check that if a resource is indirectly loaded several times it will contains only necessary objects
+	 */
+	operation testMultipleResourceIndirectLoad() is do
+		
+		emfRep := EMFRepository.new
+		traceRes ?= emfRep.createResource(traceMdlUri, traceMMdlUri)
+		traceRes.load
+		var firstLoadNbResources : Integer init emfRep.resources.size
+		stdio.writeln("nb resources in repository: " + firstLoadNbResources.toString)
+		/* emfRep.resources.each{ r | 
+			stdio.writeln("nb element in res " + r.uri + " : " + r.size.toString)
+		}*/
+		// load it a second times
+		traceRes.load
+		//assert(firstLoadNbResources.toString == emfRep.resources.size.toString)
+		 assertTrueWithMsg(emfRep.resources.size == firstLoadNbResources, "2 successive load of dependent resources has created too much resources. first load = " +
+			firstLoadNbResources.toString + " resources, second load = " + emfRep.resources.size.toString + " resources" 
+		)
+		 stdio.writeln("nb resources in repository: " + emfRep.resources.size.toString)
+		/* emfRep.resources.each{ r | 
+			stdio.writeln("nb element in res " + r.uri + " : " + r.size.toString)
+		}*/
+		
+	end
+}
+

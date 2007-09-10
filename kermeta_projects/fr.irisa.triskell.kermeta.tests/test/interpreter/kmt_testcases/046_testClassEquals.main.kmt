@@ -1,0 +1,35 @@
+/* $Id: 046_testClassEquals.main.kmt,v 1.1 2007-09-10 08:35:04 cfaucher Exp $
+ * Project   : fr.irisa.triskell.kermeta.interpreter
+ * File      : 046_testClassEquals.main.kmt
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Mar 14, 2006
+ * Authors       : 
+ * 		
+ */
+@mainClass "testClassEquals::TestClassEquals"
+@mainOperation "operation1"
+
+package testClassEquals;
+
+require kermeta
+
+using kermeta::language::structure
+
+class TestClassEquals inherits kermeta::kunit::TestCase {
+
+    operation testStringEquals() : Void is do
+        assertTrue("toto".getMetaClass == "titi".getMetaClass)
+    end
+
+    operation testStringEquals2() : Void is do
+    	var c : Class init Class.new
+    	c.typeDefinition ?= "titi".getMetaClass.typeDefinition
+    	c.freeze
+        assertTrue("toto".getMetaClass.equals(c))
+    end
+
+
+}
+

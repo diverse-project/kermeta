@@ -1,0 +1,46 @@
+@mainClass "testUML2km::Main"
+@mainOperation "main"
+
+package testUML2km;
+
+require "input_test_models/Uml2.km"
+using uml2
+
+// DVK: this test is quite stupid, because every tymes we change kermeta MM we have to regenerate
+// the uml2.km and we are not sure about the original uml2.kmt file ..., 
+// we should think to improve it ... 
+class Main inherits kermeta::kunit::TestCase {
+
+
+	operation main () is do
+		stdio.writeln("This program counts types in UML2")
+		
+		stdio.write("getting UML2 package...")
+		
+		var p : kermeta::reflection::Package
+		p ?= Class.typeDefinition.container
+		
+		stdio.writeln("got "+ p.name + " package")
+		
+		var i : kermeta::standard::Integer init 0
+		stdio.write("counting...")
+		p.ownedTypeDefinition.each{ t | 
+			//stdio.write(".")
+			i := i + 1
+		}
+		stdio.writeln("done")
+		
+		stdio.writeln("There are " + i.toString + " types in UML2")
+		assertTrueWithMsg(i==243,"looking for 243 types in UML2 found " + i.toString)
+	end
+	
+	operation test () is do
+		main
+	end
+	
+	operation printDoc() is do
+		"".toString.size
+			
+	end
+
+}

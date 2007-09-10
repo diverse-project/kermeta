@@ -1,0 +1,136 @@
+/*****************************************************************************
+ * $Id: 035_testHashtableIntegerKey.main.kmt,v 1.1 2007-09-10 08:35:04 cfaucher Exp $
+ * Project : Kermeta (First iteration)
+ * Creation date :  
+ * File : testHashtable.kmt
+ * 		
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * Creation date : Apr 18 11:13:24 2005
+ * Author : zdrey
+ * Description : 
+ *		test for Hashtable
+ ***************************************************************************
+ */
+
+@testOperation "yes"
+@mainClass "testHashtableIntegerKey::TestHashtable"
+@mainOperation "mainTest"
+
+package testHashtableIntegerKey;
+
+require kermeta
+
+using kermeta::kunit
+alias Integer : kermeta::standard::Integer;
+alias String : kermeta::standard::String;
+
+
+class TestHashtable inherits kermeta::kunit::TestCase
+{
+	
+	reference hashtable : kermeta::utils::Hashtable<Integer, String>
+	
+	/** used to manually start the test
+	 */
+	operation mainTest() is do
+        var testRunner : TestRunner init TestRunner.new
+		testRunner.run(TestHashtable)
+		testRunner.printTestResult()
+	end
+	
+	/** initialize things 
+	 * automatically called by the test runner
+	 */
+	method setUp() : Void is do
+		hashtable := kermeta::utils::Hashtable<Integer, String>.new
+		hashtable.put(1,"one")
+		hashtable.put(2,"two")
+		hashtable.put(3,"three")
+	end
+	
+	/**
+	 * returns an iterator on the keys of the map
+	 */
+	operation testKeyIterator() : Void is do
+		var it : kermeta::standard::Iterator<Integer>
+		setUp
+		stdio.writeln("hashtable coucou")
+		it := hashtable.keyIterator()
+		stdio.writeln(it.next.toString)
+		stdio.writeln(it.next.toString)
+		stdio.writeln(it.next.toString)
+	end
+
+	
+	/**
+	 * returns an iterator on the keys of the map
+	 */
+	operation testValueIterator() : Void is do
+		var it : kermeta::standard::Iterator<String>
+		setUp
+		it := hashtable.valueIterator()
+		stdio.writeln(it.next.toString)
+		stdio.writeln(it.next.toString)
+		stdio.writeln(it.next.toString)
+	end
+	
+	/**
+	 * returns an iterator on the keys of the map
+	 */
+	operation testGet() : Void is do
+  	    setUp
+		assert(hashtable.getValue(1) == "one")
+		assert(hashtable.getValue(2) == "two")
+		assert(hashtable.getValue(3) == "three")
+	end
+	
+	/**
+	 * Adds a entry in the Hashtable
+	 */
+	operation testPut() : Void is do
+	    setUp
+		hashtable.put(1, "ONE")
+		assert(hashtable.getValue(1) == "ONE")
+		assert(hashtable.getValue(2) == "two")
+		assert(hashtable.size == 3)
+	end
+	
+	/**
+	 * Removes the entry which key equals 'key'
+	 */
+	operation testRemove() : Void is do
+	    setUp
+		hashtable.remove(2)
+		assert(hashtable.size == 2)
+//		fail(hashtable.keyIterator.next == 1)
+	end
+	
+	/**
+	 * Remove all elements from the Hashtable
+	 */
+	operation testClear() : Void is do
+	    setUp
+		hashtable.clear()
+		assert(hashtable.size == 0)
+		assert(hashtable.getValue(1).isVoid)
+	end
+	
+//	/** test that the values() method contains the values of the hashtable */ 
+	operation testValues() : Void is do 
+	    setUp
+		assert(hashtable.values.size == hashtable.size) 
+		assert(hashtable.values.contains("one"))
+		assert(hashtable.values.contains("two"))
+		assert(hashtable.values.contains("three"))
+	end
+	/** test that the keys() method contains the values of the hashtable */
+	operation testKeys() : Void is do
+	    setUp
+		assert(hashtable.keys.size == hashtable.size)
+		assert(hashtable.keys.contains(1))
+		assert(hashtable.keys.contains(2))
+		assert(hashtable.keys.contains(3))
+	end
+
+}
