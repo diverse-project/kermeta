@@ -1,4 +1,4 @@
-<!-- $Id: test_io_build.xml,v 1.1 2007-09-10 08:35:18 cfaucher Exp $ -->
+<!-- $Id: test_io_build.xml,v 1.2 2007-09-10 14:32:08 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -9,8 +9,8 @@
 	<property name="eclipse.home" location="c:/eclipse3.1.1/eclipse"/>
 	<property name="cobertura.dir" location="\\jersey\triskell\bin\multiplatform\cobertura-1.7"/>
 		
-	<property name="build.bin" location="../../@dot"/>
-	<property name="src" location="../../src/java"/>
+	<property name="build.bin" location="../../bin"/>
+	<property name="src" location="../../src"/>
 	<property name="test.src" location="../../test/junit"/>
     <property name="coverage.dir" location="${report.dir}/coverage"/>
     <property name="coverage.xml.dir" location="${report.dir}/coverage/xml"/>
