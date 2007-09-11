@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.17 2007-08-08 12:54:04 dvojtise Exp $
+/* $Id: InheritanceSearch.java,v 1.18 2007-09-11 15:21:11 ftanguy Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -12,6 +12,7 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -119,6 +120,12 @@ public class InheritanceSearch {
 			    	if ( ! found_ops.containsKey(op.getName()) ) {
 			    		CallableOperation callableOperation = new CallableOperation(op, current);
 			    		found_ops.put(op.getName(), callableOperation);
+			    		result.add( callableOperation );
+			    	} else if (found_ops.get(op.getName()).getOperation() == op.getSuperOperation() ) {
+			    		CallableOperation callableOperation = new CallableOperation(op, current);
+			    		found_ops.put(op.getName(), callableOperation);
+			    		CallableOperation currentCallableOperation = found_ops.get( op.getName() );
+			    		result.remove( currentCallableOperation );
 			    		result.add( callableOperation );
 			    	} else {
 			    		CallableOperation currentCallableOperation = found_ops.get( op.getName() );
