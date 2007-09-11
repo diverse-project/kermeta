@@ -1,6 +1,6 @@
 
 
-/*$Id: PackageItem.java,v 1.4 2007-08-31 13:30:23 dvojtise Exp $
+/*$Id: PackageItem.java,v 1.5 2007-09-11 12:32:18 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	PackageItem.java
 * License : EPL
@@ -16,10 +16,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.swt.graphics.Image;
 
+import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.texteditor.icons.blue.KermetaIconsBlue;
@@ -39,10 +42,18 @@ public class PackageItem  implements Comparable<PackageItem> {
 	
 	private KermetaOutline outline = null;
 	
-	public PackageItem(String name, boolean isLoacal, KermetaOutline outline) {
+	/**
+	 * Set of the Model elemnt package that constitute this PackageItem in the outline
+	 */
+	protected Set<Package> packageParts = new HashSet<Package>();
+	public Package initialPackage = null;
+	
+	public PackageItem(String name, boolean isLocal, KermetaOutline outline, Package initialPackage) {
 		this.name = name;
-		this.isLocal = isLoacal;
+		this.isLocal = isLocal;
 		this.outline = outline;
+		packageParts.add(initialPackage);
+		this.initialPackage = initialPackage;
 	}
 	
 	public String getName() {
@@ -88,6 +99,10 @@ public class PackageItem  implements Comparable<PackageItem> {
 		if ( o instanceof PackageItem )
 			return getName().compareTo( ((PackageItem) o).getName() );
 		return 0;
+	}
+
+	public Set<Package> getPackageParts() {
+		return packageParts;
 	}
 
 }

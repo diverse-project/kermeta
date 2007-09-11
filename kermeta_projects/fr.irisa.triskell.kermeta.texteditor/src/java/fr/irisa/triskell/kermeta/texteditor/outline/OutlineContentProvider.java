@@ -1,4 +1,4 @@
-/* $Id: OutlineContentProvider.java,v 1.6 2007-07-24 13:46:55 ftanguy Exp $
+/* $Id: OutlineContentProvider.java,v 1.7 2007-09-11 12:32:19 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineContentProvider.java
 * License : EPL
@@ -96,12 +96,13 @@ public class OutlineContentProvider implements ITreeContentProvider {
 				String qualifiedName = NamedElementHelper.getQualifiedName(p);
 				PackageItem item = packages.get( qualifiedName );
 				if ( item == null ) {
-					item = new PackageItem( qualifiedName, false, outline );
+					item = new PackageItem( qualifiedName, false, outline, p );
 					item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
 					packages.put( qualifiedName, item );
 					result.add( item );
 				} else {
 					item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
+					item.getPackageParts().add(p);	// the item must know about all its parts
 				}
 			}	
 		}
@@ -110,12 +111,13 @@ public class OutlineContentProvider implements ITreeContentProvider {
 			String qualifiedName = NamedElementHelper.getQualifiedName(p);
 			PackageItem item = packages.get( qualifiedName );
 			if ( item == null ) {
-				item = new PackageItem( qualifiedName, true, outline );
+				item = new PackageItem( qualifiedName, true, outline, p );
 				item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
 				 result.add( item );
 				 packages.put( qualifiedName, item );
 			} else {
 				item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
+				item.getPackageParts().add(p);	// the item must know about all its parts
 			}
 		}	
 	

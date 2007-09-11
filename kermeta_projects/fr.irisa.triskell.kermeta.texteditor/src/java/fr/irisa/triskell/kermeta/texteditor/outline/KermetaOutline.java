@@ -1,4 +1,4 @@
-/* $Id: KermetaOutline.java,v 1.11 2007-09-04 08:15:13 ftanguy Exp $
+/* $Id: KermetaOutline.java,v 1.12 2007-09-11 12:32:18 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
@@ -143,19 +143,27 @@ public class KermetaOutline extends ContentOutlinePage {
             try
             {
                 IStructuredSelection ssel = (IStructuredSelection)selection;
-                ModelReference mr = editor.getMcunit().getTracer().getModelReference((EObject)(((OutlineItem)ssel.getFirstElement()).modelElement));
+                // try to get one kermeta model element  (DVK with aspect this may be not precise ...)
+                fr.irisa.triskell.kermeta.language.structure.Object modelElement = null;
+                if(ssel.getFirstElement() instanceof OutlineItem)
+                	modelElement =((OutlineItem)ssel.getFirstElement()).modelElement;
+                else if (ssel.getFirstElement() instanceof PackageItem){
+                	// get first package part 
+                	modelElement = ((PackageItem)ssel.getFirstElement()).initialPackage;
+                }
+                ModelReference mr = editor.getMcunit().getTracer().getModelReference(modelElement);
+                
                 TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
                 if(tr != null)
                 	editor.setHighlightRange(tr.getCharBeginAt()-1,0 ,true);
                 
                 //              Now notify other plugins
-                fr.irisa.triskell.kermeta.language.structure.Object fobj = (fr.irisa.triskell.kermeta.language.structure.Object)(((OutlineItem)ssel.getFirstElement()).modelElement);
-                if(fobj != null){
+                if(modelElement != null){
 	                Iterator<KermetaEditorEventListener> it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
 	    			while(it.hasNext())
 	    			{
 	    				KermetaEditorEventListener listener = it.next();
-	    				listener.outlineSelectionChanged(fobj);
+	    				listener.outlineSelectionChanged(modelElement);
 	    			}
                 }
             }
