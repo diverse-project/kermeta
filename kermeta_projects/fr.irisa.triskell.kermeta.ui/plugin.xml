@@ -124,6 +124,13 @@
              icon="images/up.png"
              id="fr.irisa.triskell.kermeta.ui.view.dependentFiles"
              name="Dependent Files"/>
+       <view
+             category="fr.irisa.triskell.kermeta.view"
+             class="fr.irisa.triskell.kermeta.ui.views.KermetadocView"
+             icon="images/kermetadoc.gif"
+             id="fr.irisa.triskell.kermeta.ui.views.kermetadoc"
+             name="KermetaDoc">
+       </view>
     </extension>
 
 </plugin>
