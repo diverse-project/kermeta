@@ -1,4 +1,4 @@
-/* $Id: KermetaOutline.java,v 1.12 2007-09-11 12:32:18 dvojtise Exp $
+/* $Id: KermetaOutline.java,v 1.13 2007-09-11 12:32:51 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
@@ -12,7 +12,6 @@ package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import java.util.Iterator;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.BooleanPropertyAction;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceStore;
