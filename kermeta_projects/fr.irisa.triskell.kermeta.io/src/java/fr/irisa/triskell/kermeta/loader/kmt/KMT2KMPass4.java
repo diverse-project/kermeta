@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.25 2007-09-04 08:29:33 ftanguy Exp $
+/* $Id: KMT2KMPass4.java,v 1.26 2007-09-11 15:20:30 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -140,6 +140,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 			// the op should be defined in a superclass
 			// potential super ops
 			Hashtable superops = getSupersForMethod(context.current_class, context.current_operation.getName());
+			System.out.println();
 			if (superops.size() == 0) { // Error, no super operation
 //				builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :No super operation found for method '"+builder.current_operation.getName()+"'.", operation));
 				superops = getSupersForMethod(context.current_class, context.current_operation.getName());
@@ -286,17 +287,23 @@ public class KMT2KMPass4 extends KMT2KMPass {
 				 */
 				boolean add = true;
 				for ( String s : result.keySet() ) {
-					fr.irisa.triskell.kermeta.language.structure.Class c1 = StructureFactory.eINSTANCE.createClass();
-					c1.setTypeDefinition( (GenericTypeDefinition) op.eContainer() );
-					fr.irisa.triskell.kermeta.language.structure.Class c2 = StructureFactory.eINSTANCE.createClass();
-					c2.setTypeDefinition( (GenericTypeDefinition) result.get(s).eContainer() );
 					
-					SimpleType t1 = new SimpleType( c1 );
-					SimpleType t2 = new SimpleType( c2 );
+					String qualifiedName = NamedElementHelper.getQualifiedName( (NamedElement) op.eContainer() );
+					if ( ! qualifiedName.equals("kermeta::reflection::Object") ) {
 					
-					if ( t1.isSubTypeOf(t2) )
-						result.remove( s );
-					else if ( t2.isSubTypeOf(t1) )
+						fr.irisa.triskell.kermeta.language.structure.Class c1 = StructureFactory.eINSTANCE.createClass();
+						c1.setTypeDefinition( (GenericTypeDefinition) op.eContainer() );
+						fr.irisa.triskell.kermeta.language.structure.Class c2 = StructureFactory.eINSTANCE.createClass();
+						c2.setTypeDefinition( (GenericTypeDefinition) result.get(s).eContainer() );
+						
+						SimpleType t1 = new SimpleType( c1 );
+						SimpleType t2 = new SimpleType( c2 );
+					
+						if ( t1.isSubTypeOf(t2) )
+							result.remove( s );
+						else if ( t2.isSubTypeOf(t1) )
+							add = false;
+					} else 
 						add = false;
 				}
 				if ( add )
