@@ -1,4 +1,4 @@
-/* $Id: TexteditorPlugin.java,v 1.12 2007-06-27 14:43:05 cfaucher Exp $
+/* $Id: TexteditorPlugin.java,v 1.13 2007-09-11 12:31:00 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : TexteditorPlugin.java
  * License : EPL
@@ -11,7 +11,8 @@
  */
 package fr.irisa.triskell.kermeta.texteditor;
 
-import java.util.Vector;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -44,7 +45,7 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	/**
 	 * List of KermetaEditorEventListener that must be notified
 	 */
-	public Vector<KermetaEditorEventListener> kermetaEditorEventListeners = new Vector <KermetaEditorEventListener> (); 
+	public Set<KermetaEditorEventListener> kermetaEditorEventListeners = new HashSet <KermetaEditorEventListener> (); 
 	
 	final static public Logger pluginLog = LogConfigurationHelper.getLogger("KermetaEditor");
 	
