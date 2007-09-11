@@ -4,6 +4,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Hashtable;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -86,4 +88,10 @@ public class KermetaUIPlugin extends AbstractUIPlugin {
 		return id;
 	}
 
+	public static void log(IStatus status) {
+		getDefault().getLog().log(status);
+	}
+	public static void log(Throwable e) {
+		log(new Status(IStatus.ERROR, PLUGIN_ID, 0, "kermeta ui internal error", e)); 
+	}
 }
