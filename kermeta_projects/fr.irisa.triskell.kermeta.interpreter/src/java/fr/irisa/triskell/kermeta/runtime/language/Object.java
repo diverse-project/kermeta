@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.23 2007-09-04 13:01:29 dtouzet Exp $
+/* $Id: Object.java,v 1.24 2007-09-12 13:32:53 dvojtise Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -500,11 +500,21 @@ public class Object {
 		RuntimeObject result = selfRO.getFactory().getMemory().voidINSTANCE;
 		
 		RuntimeObject crtRO = selfRO;
-		while(crtRO.getContainer() != null) crtRO = crtRO.getContainer();
-		
+		boolean found = false;
 		if(crtRO.getData().containsKey("resourceRO")) {
+			found = true;
 			result = (RuntimeObject) crtRO.getData().get("resourceRO");
 		}
+		while(crtRO.getContainer() != null && !found) {
+			
+			crtRO = crtRO.getContainer();
+			if(crtRO.getData().containsKey("resourceRO")) {
+				found = true;
+				result = (RuntimeObject) crtRO.getData().get("resourceRO");
+			}
+		}
+		
+		
 		
 		return result;
 	}
