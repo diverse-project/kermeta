@@ -1,4 +1,4 @@
-# $Id: uri.map,v 1.5 2007-07-30 16:12:39 dvojtise Exp $
+# $Id: uri.map,v 1.6 2007-09-13 09:04:51 ftanguy Exp $
 #
 #"platform:/plugin/fr.irisa.triskell.kermeta/"		"file:/C:/eclipse3.1.1/eclipse/plugins/fr.irisa.triskell.kermeta_0.1.1/"
 
@@ -8,10 +8,6 @@
 # This is the values that are correct for daily build
 # You probably have to change it to match your configuration
 # but, please do not commit them it into the CVS
-#"platform:/plugin/"		"/home/paco/Desktop/KermetaCVS/"
-#"platform:/resource/"		"/home/paco/Desktop/KermetaCVS/"
-"platform:/plugin/"			"/tmp/kermeta_build/src/plugins/"
-"platform:/resource/"		"/tmp/kermeta_build/src/plugins/"
-#"platform:/plugin/"			"C:/eclipse3.3/eclipse/workspace/"
-#"platform:/resource/"		"C:/eclipse3.3/eclipse/workspace/"
+"platform:/plugin/"		"file:/home/paco/Desktop/KermetaCVS/"
+"platform:/resource/"		"file:/home/paco/Desktop/KermetaCVS/"
 

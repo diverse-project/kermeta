@@ -4,6 +4,7 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -18,9 +19,9 @@ import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
  */
 public class KMT2KMTypeReferenceBuilder extends KMT2KMPass {
 
-	public static TypeReference process(LoadingContext context, TypeRef node, KermetaUnit builder) {
+	public static TypeReference process(LoadingContext context, TypeRef node, KermetaUnit builder, IProgressMonitor monitor) {
 		if (node == null) return null;
-		KMT2KMTypeReferenceBuilder visitor = new KMT2KMTypeReferenceBuilder(builder, context);
+		KMT2KMTypeReferenceBuilder visitor = new KMT2KMTypeReferenceBuilder(builder, context, monitor);
 		node.accept(visitor);
 		return visitor.result;
 	}
@@ -30,8 +31,8 @@ public class KMT2KMTypeReferenceBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMTypeReferenceBuilder(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMTypeReferenceBuilder(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 	}
 	
 	/**
@@ -44,7 +45,7 @@ public class KMT2KMTypeReferenceBuilder extends KMT2KMPass {
 		result.setIsUnique(isUnique(typeRef));
 		result.setLower(getLower(typeRef));
 		result.setUpper(getUpper(typeRef));
-		result.setType(KMT2KMTypeBuilder.process(context, typeRef.getReftype(), builder));
+		result.setType(KMT2KMTypeBuilder.process(context, typeRef.getReftype(), builder, monitor));
 		return false;
 	}
 }

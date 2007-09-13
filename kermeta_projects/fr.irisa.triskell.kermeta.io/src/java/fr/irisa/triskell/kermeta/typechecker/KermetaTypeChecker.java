@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.23 2007-09-04 08:47:06 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.24 2007-09-13 09:04:51 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -60,14 +61,17 @@ public class KermetaTypeChecker {
     public ArrayList<String> correctOperation = new ArrayList<String>();
     public ArrayList<String> wrongOperations = new ArrayList<String>();
     
+    private IProgressMonitor monitor;
+    
     /**
      * @param unit
      */
-    public KermetaTypeChecker(KermetaUnit unit) {
+    public KermetaTypeChecker(KermetaUnit unit, IProgressMonitor monitor) {
         super();
+        this.monitor = monitor;
         this.unit = unit;
         if (unit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object") != null)
-        	TypeCheckerContext.initializeTypeChecker(unit);
+        	TypeCheckerContext.initializeTypeChecker(unit, monitor);
         context = new TypeCheckerContext(unit);
     }
        
@@ -76,13 +80,16 @@ public class KermetaTypeChecker {
     	Iterator <Package> iterator = packages.iterator();
     	while ( iterator.hasNext() ) {
     		
+    		if ( monitor.isCanceled() )
+    			return;
+    		
     		Package current = iterator.next();
         	
         	Iterator <TypeDefinition> it = current.getOwnedTypeDefinition().iterator();
             // First, annotate semantically abstract class definitions
         	// Lets call this the structural-only pass, and check type parameterizations, too
         	while ( it.hasNext() ) {
-
+        		
         		TypeDefinition td = it.next();
         		
         		if (td instanceof ClassDefinition) {
@@ -90,29 +97,30 @@ public class KermetaTypeChecker {
         			annotateSemanticallyAbstractClassDefinition(cdef);
            			// Check any parameterized supertypes
         			for (Object sup : cdef.getSuperType()) {
-        				ParameterizedTypeChecker.checkType((fr.irisa.triskell.kermeta.language.structure.Type) sup, unit, context, cdef);
+        				ParameterizedTypeChecker.checkType((fr.irisa.triskell.kermeta.language.structure.Type) sup, unit, context, cdef, monitor);
         			}
         			// Check property types
         			for (Object prop : cdef.getOwnedAttribute()) {
         				if(((Property) prop).getType() != null)
-        					ParameterizedTypeChecker.checkType(((Property) prop).getType(), unit, context, (Property)prop);
+        					ParameterizedTypeChecker.checkType(((Property) prop).getType(), unit, context, (Property)prop, monitor);
         				else
         					unit.error("TYPE-CHECKER : property " + td.getName() + "." + ((Property)prop).getName() + " has no type", prop);
         			}
         			// Check operation signatures
         			for (Object opObj : cdef.getOwnedOperation()) {
+        				
         				Operation op = (Operation) opObj;
         				if (null != op.getType()) {
-        					ParameterizedTypeChecker.checkType(op.getType(), unit, context, op);
+        					ParameterizedTypeChecker.checkType(op.getType(), unit, context, op, monitor);
         				}
         				//Check parameter types
         				for (Object param : op.getOwnedParameter()) {
-        					ParameterizedTypeChecker.checkType(((Parameter)param).getType(), unit, context, (Parameter)param);
+        					ParameterizedTypeChecker.checkType(((Parameter)param).getType(), unit, context, (Parameter)param, monitor);
         				}
         			}
         		} else if (td instanceof PrimitiveType) {
         			// Check aliased types
-        			ParameterizedTypeChecker.checkType(((PrimitiveType)td).getInstanceType(), unit, context, (PrimitiveType)td);
+        			ParameterizedTypeChecker.checkType(((PrimitiveType)td).getInstanceType(), unit, context, (PrimitiveType)td, monitor);
         		}
         	}
             // Second, check for each class def, its operation (inc. bodies) and properties
@@ -147,9 +155,13 @@ public class KermetaTypeChecker {
 	    	}
 	    	
     		if ( ! unit.isErrored() ) {
-		    	for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(unit) ) {
-		    		if ( ! importedUnit.isTypeChecked() ) {
-		    			KermetaTypeChecker t = new KermetaTypeChecker(importedUnit);
+    			
+				if ( monitor.isCanceled() )
+					return;
+    			
+    			for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(unit) ) {
+    				if ( ! importedUnit.isTypeChecked() ) {
+		    			KermetaTypeChecker t = new KermetaTypeChecker(importedUnit, monitor);
 		    			System.out.println( importedUnit.getUri() );
 		    			t.checkUnit();
 		    		}
@@ -219,6 +231,9 @@ public class KermetaTypeChecker {
      */
     public void checkClassDefinition(ClassDefinition clsdef) {
 		
+		if ( monitor.isCanceled() )
+			return;
+    	
         Iterator<Operation> itOp = clsdef.getOwnedOperation().iterator();
         while(itOp.hasNext()) {
             Operation op = (Operation)itOp.next();
@@ -240,6 +255,9 @@ public class KermetaTypeChecker {
     
     public void checkConstraint(Constraint c)
     { 
+		if ( monitor.isCanceled() )
+			return;
+    	
     	if (c.eContainer() instanceof ClassDefinition)
            context.init((ClassDefinition)c.eContainer());
     	else
@@ -258,6 +276,9 @@ public class KermetaTypeChecker {
      */
     public void checkOperation(Operation op) {
         
+		if ( monitor.isCanceled() )
+			return;
+    	
         // THIS IS JUST FOR TESTING PURPOSES
         int error_count = unit.getMessages().size();
         

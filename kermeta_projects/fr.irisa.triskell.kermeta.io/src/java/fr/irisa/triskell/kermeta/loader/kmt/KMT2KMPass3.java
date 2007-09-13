@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.22 2007-09-04 08:29:33 ftanguy Exp $
+/* $Id: KMT2KMPass3.java,v 1.23 2007-09-13 09:04:49 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -16,6 +16,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
@@ -84,8 +85,8 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMPass3(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMPass3(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 	}
 		
 	
@@ -99,6 +100,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.AbstractModifier)
 	 */
 	public boolean beginVisit(AbstractModifier abstractModifier) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		context.current_class.setIsAbstract(true);
 		return super.beginVisit(abstractModifier);
 	}
@@ -106,6 +111,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ClassDecl)
 	 */
 	public boolean beginVisit(ClassDecl classDecl) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		context.pushContext();
 		try {
 			context.current_class = (ClassDefinition)builder.getModelElementByNode(classDecl);
@@ -127,7 +136,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 			for(int i=0; i<supertypes.length; i++) {
 				//System.out.println(builder.current_class.getFName() +" Node in super type : " + supertypes[i].getClass().getName());
 				if (supertypes[i] instanceof Type) {
-					fr.irisa.triskell.kermeta.language.structure.Type supertype = KMT2KMTypeBuilder.process(context, (Type)supertypes[i], builder);
+					fr.irisa.triskell.kermeta.language.structure.Type supertype = KMT2KMTypeBuilder.process(context, (Type)supertypes[i], builder, monitor);
 					//System.out.println(builder.current_class.getFName() + " Found a super type : " + supertype.getFName() + " : " + supertype.getClass().getName());
 					if (!(supertype instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
 						if  (!(supertype instanceof VirtualType)) {
@@ -170,6 +179,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#endVisit(metacore.ast.ClassDecl)
 	 */
 	public void endVisit(ClassDecl classDecl) {
+		
+		if ( monitor.isCanceled() )
+			return;
+		
 		context.popContext();
 		super.endVisit(classDecl);
 	}
@@ -181,6 +194,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * *******************************************************
 	 */
 	public boolean beginVisit(ModelTypeDecl modelTypeDecl) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		ModelType thisMT = (ModelType) builder.getModelElementByNode(modelTypeDecl);
 		ASTNode[] included = modelTypeDecl.getIncluded().getChildren();
 		for (int i=0; i < included.length ; i++) {
@@ -210,6 +227,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	}
 	
 	public void endVisit(ModelTypeDecl modelTypeDecl) {
+		
+		if ( monitor.isCanceled() )
+			return;
+		
 		//loader.popContext(builder);
 		super.endVisit(modelTypeDecl);
 	}
@@ -224,6 +245,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Operation)
 	 */
 	public boolean beginVisit(Operation operation) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		context.pushContext();
 		// Create the operation:
 
@@ -324,6 +349,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#endVisit(metacore.ast.Operation)
 	 */
 	public void endVisit(Operation operation) {
+		
+		if ( monitor.isCanceled() )
+			return;
+		
 		if (operation.getTypeRef() != null) {
 			// type :
 			context.current_operation.setType(getFType(operation.getTypeRef()));
@@ -333,7 +362,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 			ASTNode[] exceptions = operation.getExceptions().getChildren();
 			for(int i=0; i<exceptions.length; i++) {
 				if (exceptions[i] instanceof Type) {
-					context.current_operation.getRaisedException().add(KMT2KMTypeBuilder.process(context, (Type)exceptions[i], builder));
+					context.current_operation.getRaisedException().add(KMT2KMTypeBuilder.process(context, (Type)exceptions[i], builder, monitor));
 				}
 			}
 		}
@@ -347,6 +376,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.TypeVarDecl)
 	 */
 	public boolean beginVisit(TypeVarDecl typeVarDecl) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		TypeVariable tv;
 		
 		if (context.current_operation == null) {
@@ -361,7 +394,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 			String name = getTextForID(typeVarDecl.getName());
 			// If it has a supertype that is a model type, then we need to create a modeltypeVar.
 			// Otherwise create an ObjectTypeVariable
-			if (KMT2KMTypeBuilder.process(context, typeVarDecl.getSupertype(), builder) instanceof ModelType) {
+			if (KMT2KMTypeBuilder.process(context, typeVarDecl.getSupertype(), builder, monitor) instanceof ModelType) {
 				//tv = builder.struct_factory.createModelTypeVariable();
 			//	builder.messages.addMessage(new KMTUnitLoadError("Unable to create type variable '" + name + "': no model-type variables on operations", typeVarDecl));
 				builder.error("Unable to create type variable '" + name + "': no model-type variables on operations");
@@ -388,7 +421,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		}
 		
 		if (!(tv instanceof ModelTypeVariable)) {
-			tv.setSupertype(KMT2KMTypeBuilder.process(context, typeVarDecl.getSupertype(), builder));
+			tv.setSupertype(KMT2KMTypeBuilder.process(context, typeVarDecl.getSupertype(), builder, monitor));
 		}
 		// in both cases the variable should be added to the context
 		context.addTypeVar(tv);
@@ -398,6 +431,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Param)
 	 */
 	public boolean beginVisit(Param param) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		if(aspectNodes.contains(param.getParent().getParent())){
 			// the operation defining these parameters is an aspect
 			// simply ignore these param
@@ -453,6 +490,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Property)
 	 */
 	public boolean beginVisit(Property property) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		// Create the parameter and adds it to the current op
 		context.current_property = StructureFactory.eINSTANCE.createProperty();
 		builder.storeTrace(context.current_property, property);
@@ -523,6 +564,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#endVisit(metacore.ast.Property)
 	 */
 	public void endVisit(Property property) {
+		
+		if ( monitor.isCanceled() )
+			return;
+		
 		context.current_property = null;
 		super.endVisit(property);
 	}
@@ -530,6 +575,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.PropertyKind)
 	 */
 	public boolean beginVisit(PropertyKind propertyKind) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		if (propertyKind.getText().equals("attribute")) {
 			context.current_property.setIsDerived(false);
 			context.current_property.setIsComposite(true);
@@ -549,6 +598,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ReadOnlyModifier)
 	 */
 	public boolean beginVisit(ReadOnlyModifier readOnlyModifier) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		context.current_property.setIsReadOnly(true);
 		return super.beginVisit(readOnlyModifier);
 	}
@@ -570,6 +623,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.EnumDecl)
 	 */
 	public boolean beginVisit(EnumDecl enumDecl) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		context.current_enum = (Enumeration)builder.getModelElementByNode(enumDecl);
 		return super.beginVisit(enumDecl);
 	}
@@ -577,6 +634,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.EnumLiteral)
 	 */
 	public boolean beginVisit(EnumLiteral enumLiteral) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		EnumerationLiteral lit = StructureFactory.eINSTANCE.createEnumerationLiteral();
 		lit.setName(getTextForID(enumLiteral.getName()));
 		builder.storeTrace(lit, enumLiteral);
@@ -589,8 +650,12 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.DataTypeDecl)
 	 */
 	public boolean beginVisit(DataTypeDecl node) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		PrimitiveType pt = (PrimitiveType)builder.getModelElementByNode(node);
-		pt.setInstanceType(KMT2KMTypeBuilder.process(context, node.getInstanceClass(), builder));
+		pt.setInstanceType(KMT2KMTypeBuilder.process(context, node.getInstanceClass(), builder, monitor));
 		return false;
 	}
 
@@ -598,6 +663,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see KermetaASTNodeVisitor#beginVisit(UsingStmt)
 	 */
 	public boolean beginVisit(UsingStmt usingStmt) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		String u = qualifiedIDAsString(usingStmt.getName());
 		if (builder.getPackages(u).size() == 0) {
 			//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Wrong using - package '"+u+"' does not exist", usingStmt));

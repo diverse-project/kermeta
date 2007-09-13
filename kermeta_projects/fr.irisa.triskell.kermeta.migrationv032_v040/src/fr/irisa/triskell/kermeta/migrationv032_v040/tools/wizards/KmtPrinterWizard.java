@@ -1,4 +1,4 @@
-/* $Id: KmtPrinterWizard.java,v 1.4 2007-07-24 13:46:22 ftanguy Exp $
+/* $Id: KmtPrinterWizard.java,v 1.5 2007-09-13 09:04:44 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -14,6 +14,7 @@
 package fr.irisa.triskell.kermeta.migrationv032_v040.tools.wizards;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
@@ -69,7 +70,7 @@ public class KmtPrinterWizard extends UnitExporterWizard{
 		kermetaUnit.importKermetaUnit( IOPlugin.getDefault().getFramework(), false);
 		
 		kermetaUnit.setBuildingState( new KMTBuildingState() );
-		KMTUnitLoader loader = new KMTUnitLoader();
+		KMTUnitLoader loader = new KMTUnitLoader( new NullProgressMonitor() );
 		loader.load( kermetaUnit );
 		
 		return kermetaUnit;

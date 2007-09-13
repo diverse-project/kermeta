@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.3 2007-07-24 13:46:21 ftanguy Exp $
+/* $Id: KMT2KMPass6.java,v 1.4 2007-09-13 09:04:44 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -18,6 +18,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -233,7 +234,7 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		// normal behavior
 		String qname = NamedElementHelper.getQualifiedName(context.current_operation);
 		if (operation_bodies.containsKey(qname)) {
-			context.current_operation.setBody(ExpressionParser.parse(context, builder, (String)operation_bodies.get(qname)));
+			context.current_operation.setBody(ExpressionParser.parse(context, builder, (String)operation_bodies.get(qname), new NullProgressMonitor()));
 		}
 		else {
 			context.current_operation.setBody(KMT2KMExperessionBuilder.process(context, operationExpressionBody.getFExpression(), builder));

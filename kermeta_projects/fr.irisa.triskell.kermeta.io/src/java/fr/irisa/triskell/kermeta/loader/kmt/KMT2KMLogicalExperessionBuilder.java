@@ -7,6 +7,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.util.Hashtable;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -38,9 +39,9 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
 public class KMT2KMLogicalExperessionBuilder extends KMT2KMPass {
 
 	
-	public static Expression process(LoadingContext context, LogicalExpression node, KermetaUnit builder) {
+	public static Expression process(LoadingContext context, LogicalExpression node, KermetaUnit builder, IProgressMonitor monitor) {
 		if (node == null) return null;
-		KMT2KMLogicalExperessionBuilder visitor = new KMT2KMLogicalExperessionBuilder(builder, context);
+		KMT2KMLogicalExperessionBuilder visitor = new KMT2KMLogicalExperessionBuilder(builder, context, monitor);
 		node.accept(visitor);
 		return visitor.result;
 	}
@@ -58,8 +59,8 @@ public class KMT2KMLogicalExperessionBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMLogicalExperessionBuilder(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMLogicalExperessionBuilder(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 	}
 
 	/**
@@ -70,14 +71,14 @@ public class KMT2KMLogicalExperessionBuilder extends KMT2KMPass {
 		for(int i=0; i< children.length; i++) {
 			if (children[i] instanceof RelationalExpression) {
 				if (operator == null) {
-					result = KMT2KMRelationalExpressionBuilder.process(context, (RelationalExpression)children[i], builder);
+					result = KMT2KMRelationalExpressionBuilder.process(context, (RelationalExpression)children[i], builder, monitor);
 				}
 				else {
 					CallFeature call = BehaviorFactory.eINSTANCE.createCallFeature();
 					builder.storeTrace(call,operator);
 					call.setName((String)operators.get(operator.getText()));
 					call.setTarget(result);
-					call.getParameters().add(KMT2KMRelationalExpressionBuilder.process(context, (RelationalExpression)children[i], builder));
+					call.getParameters().add(KMT2KMRelationalExpressionBuilder.process(context, (RelationalExpression)children[i], builder, monitor));
 					result = call;
 				}
 			}

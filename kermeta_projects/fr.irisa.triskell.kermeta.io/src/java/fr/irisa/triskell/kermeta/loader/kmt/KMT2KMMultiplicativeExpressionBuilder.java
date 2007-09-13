@@ -7,6 +7,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.util.Hashtable;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -31,9 +32,9 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
  */
 public class KMT2KMMultiplicativeExpressionBuilder extends KMT2KMPass {
 
-	public static Expression process(LoadingContext context, MultiplicativeExpression node, KermetaUnit builder) {
+	public static Expression process(LoadingContext context, MultiplicativeExpression node, KermetaUnit builder, IProgressMonitor monitor) {
 		if (node == null) return null;
-		KMT2KMMultiplicativeExpressionBuilder visitor = new KMT2KMMultiplicativeExpressionBuilder(builder, context);
+		KMT2KMMultiplicativeExpressionBuilder visitor = new KMT2KMMultiplicativeExpressionBuilder(builder, context, monitor);
 		node.accept(visitor);
 		return visitor.result;
 	}
@@ -53,8 +54,8 @@ public class KMT2KMMultiplicativeExpressionBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMMultiplicativeExpressionBuilder(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMMultiplicativeExpressionBuilder(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -66,14 +67,14 @@ public class KMT2KMMultiplicativeExpressionBuilder extends KMT2KMPass {
 		for(int i=0; i< children.length; i++) {
 			if (children[i] instanceof UnaryExpression) {
 				if (operator == null) {
-					result = KMT2KMUnaryExpressionBuilder.process(context, (UnaryExpression)children[i], builder);
+					result = KMT2KMUnaryExpressionBuilder.process(context, (UnaryExpression)children[i], builder, monitor);
 				}
 				else {
 					CallFeature call = BehaviorFactory.eINSTANCE.createCallFeature();
 					builder.storeTrace(call,operator);
 					call.setName((String)operators.get(operator.getText()));
 					call.setTarget(result);
-					call.getParameters().add(KMT2KMUnaryExpressionBuilder.process(context, (UnaryExpression)children[i], builder));
+					call.getParameters().add(KMT2KMUnaryExpressionBuilder.process(context, (UnaryExpression)children[i], builder, monitor));
 					result = call;
 				}
 			}

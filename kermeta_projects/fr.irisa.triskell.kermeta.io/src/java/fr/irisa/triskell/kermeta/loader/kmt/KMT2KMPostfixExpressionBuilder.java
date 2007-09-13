@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.14 2007-08-30 11:30:37 dvojtise Exp $
+/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.15 2007-09-13 09:04:49 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMPostfixExpressionBuilder.java
  * License : EPL
@@ -9,6 +9,7 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -46,9 +47,9 @@ import fr.irisa.triskell.kermeta.language.behavior.LambdaParameter;
  */
 public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 
-	public static Expression process(LoadingContext context, PostfixExp node, KermetaUnit builder) {
+	public static Expression process(LoadingContext context, PostfixExp node, KermetaUnit builder, IProgressMonitor monitor) {
 		if (node == null) return null;
-		KMT2KMPostfixExpressionBuilder visitor = new KMT2KMPostfixExpressionBuilder(builder, context);
+		KMT2KMPostfixExpressionBuilder visitor = new KMT2KMPostfixExpressionBuilder(builder, context, monitor);
 		node.accept(visitor);
 		return visitor.result;
 	}
@@ -58,8 +59,8 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMPostfixExpressionBuilder(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMPostfixExpressionBuilder(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -67,7 +68,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.PostfixExp)
 	 */
 	public boolean beginVisit(PostfixExp postfixExp) {
-		result = KMT2KMPrimitiveExpressionBuilder.process(context, postfixExp.getTarget(), builder);
+		result = KMT2KMPrimitiveExpressionBuilder.process(context, postfixExp.getTarget(), builder, monitor);
 		postfixExp.getPostfixlst().accept(this);
 		return false;
 	}
@@ -112,7 +113,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 					FExpression fExp = (FExpression) lambdaPostfix.getExpression().getChild(0);
 					fr.irisa.triskell.kermeta.language.behavior.Expression expr =  BehaviorFactory.eINSTANCE.createEmptyExpression();
 					builder.storeTrace(expr, fExp);
-					current_le.setBody( KMT2KMExperessionBuilder.process(context, fExp, builder) );
+					current_le.setBody( KMT2KMExperessionBuilder.process(context, fExp, builder, monitor) );
 				}
 			} else {
 				//builder.messages.addMessage(new KMTUnitLoadError("A lambda expression should have at least one expression in its body.", lambdaPostfix));
@@ -136,7 +137,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 		fr.irisa.triskell.kermeta.language.behavior.Block block =  BehaviorFactory.eINSTANCE.createBlock();
 		if (explst != null) {
 			builder.storeTrace(block,explst);
-			block.getStatement().addAll(KMT2KMExperessionListBuilder.process(context, explst, builder));
+			block.getStatement().addAll(KMT2KMExperessionListBuilder.process(context, explst, builder, monitor));
 		}
 		return block;
 	}
@@ -175,7 +176,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 	 */
 	public boolean beginVisit(ActualParameter actualParameter) {
 		CallExpression res = (CallExpression)result;
-		Expression param = KMT2KMExperessionBuilder.process(context, actualParameter.getExpression(), builder);
+		Expression param = KMT2KMExperessionBuilder.process(context, actualParameter.getExpression(), builder, monitor);
 		res.getParameters().add(param);
 		return false;
 	}

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.15 2007-09-04 08:29:33 ftanguy Exp $
+/* $Id: KMT2KMPass2.java,v 1.16 2007-09-13 09:04:49 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -16,6 +16,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import java.util.Stack;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
@@ -58,8 +59,8 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMPass2(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMPass2(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 		pkgs = new Stack();
 	}
 	
@@ -68,6 +69,10 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	}
 	
 	public boolean beginVisit(PackageDecl node) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		//fr.irisa.triskell.kermeta.language.structure.Package p = getOrCreatePackage(qualifiedIDAsString(node.getName()), node);
 		fr.irisa.triskell.kermeta.language.structure.Package p = builder.addInternalPackage( qualifiedIDAsString(node.getName()) );
 		builder.storeTrace(p, node);
@@ -77,6 +82,10 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	}
 	
 	public boolean beginVisit(SubPackageDecl node) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		fr.irisa.triskell.kermeta.language.structure.Package p = builder.addInternalPackage( qname );
 		//pkgs.push(getOrCreatePackage(qname, node));
@@ -84,11 +93,19 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		return super.beginVisit(node);
 	}
 	public void endVisit(SubPackageDecl arg0) {
+		
+		if ( monitor.isCanceled() )
+			return;
+		
 		pkgs.pop();
 		super.endVisit(arg0);
 	}
 	
 	public boolean beginVisit(ClassDecl node) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		String qualifiedName = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		TypeDefinition typeDef = builder.getTypeDefinitionByQualifiedName(qualifiedName);
 		if (typeDef != null) {
@@ -141,6 +158,10 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.TypeVarDecl)
 	 */
 	public boolean beginVisit(TypeVarDecl typeVarDecl) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		//if (builder.current_class == null) return false;
 		// create the parameter
 		String name = getTextForID(typeVarDecl.getName());
@@ -178,6 +199,10 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		return false;
 	}
 	public boolean beginVisit(EnumDecl node) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		String qualifiedName = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		if (builder.getTypeDefinitionByName(qualifiedName) != null) {
 			// This is an error : the type already exists
@@ -199,6 +224,10 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.DataTypeDecl)
 	 */
 	public boolean beginVisit(DataTypeDecl node) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		String qualifiedName = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		if (builder.getTypeDefinitionByName(qualifiedName) != null) {
 			// This is an error : the type already exists
@@ -217,6 +246,10 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	
 	
 	public boolean beginVisit(ModelTypeDecl node) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		String qualifiedName = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		if (builder.getTypeDefinitionByName(qualifiedName) != null) {
 			// This is an error : the type already exists
@@ -241,6 +274,10 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	}
 	
 	public void endVisit(ModelTypeDecl arg0) {
+		
+		if ( monitor.isCanceled() )
+			return;
+		
 		pkgs.pop();
 		super.endVisit(arg0);
 	}

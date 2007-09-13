@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.20 2007-08-01 07:20:18 ftanguy Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.21 2007-09-13 09:04:49 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -14,6 +14,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -47,9 +48,9 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
  */
 public class KMT2KMTypeBuilder extends KMT2KMPass {
 	
-	public static fr.irisa.triskell.kermeta.language.structure.Type process(LoadingContext context, Type node, KermetaUnit builder) {
+	public static fr.irisa.triskell.kermeta.language.structure.Type process(LoadingContext context, Type node, KermetaUnit builder, IProgressMonitor monitor) {
 		if (node == null) return null;
-		KMT2KMTypeBuilder visitor = new KMT2KMTypeBuilder(builder, context);
+		KMT2KMTypeBuilder visitor = new KMT2KMTypeBuilder(builder, context, monitor);
 		int nb_err = builder.getMessages().size();
 		node.accept(visitor);
 		if (visitor.result == null && builder.getMessages().size() == nb_err) {
@@ -64,8 +65,8 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMTypeBuilder(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMTypeBuilder(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 	}
 	
 	
@@ -76,7 +77,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 		ASTNode[] children = node.getChildren();
 		for(int i=0; i< children.length; i++) {
 			if (children[i] instanceof Type && children[i] != null) {
-				result.add(KMT2KMTypeBuilder.process(context, (Type)children[i], builder));
+				result.add(KMT2KMTypeBuilder.process(context, (Type)children[i], builder, monitor));
 			}
 		}
 		fr.irisa.triskell.kermeta.language.structure.Type[] res = new fr.irisa.triskell.kermeta.language.structure.Type[result.size()];
@@ -280,8 +281,8 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 	public boolean beginVisit(Functype functype) {
 		fr.irisa.triskell.kermeta.language.structure.FunctionType res = StructureFactory.eINSTANCE.createFunctionType();
 		builder.storeTrace(res, functype);
-		res.setLeft(KMT2KMTypeBuilder.process(context, functype.getLeft(), builder));
-		res.setRight(KMT2KMTypeBuilder.process(context, functype.getRight(), builder));
+		res.setLeft(KMT2KMTypeBuilder.process(context, functype.getLeft(), builder, monitor));
+		res.setRight(KMT2KMTypeBuilder.process(context, functype.getRight(), builder, monitor));
 		if (res.getLeft() == null || res.getRight() == null) return false;
 		result = res;
 		return false;

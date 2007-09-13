@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.26 2007-08-01 14:38:10 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.27 2007-09-13 09:04:36 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -232,11 +233,11 @@ public class UnitExporterWizard extends Wizard {
 						tracePage.getFileName()));
 		unit = createUnit();
 		
-		KermetaTypeChecker typechecker = new KermetaTypeChecker(unit);
+		KermetaTypeChecker typechecker = new KermetaTypeChecker(unit, new NullProgressMonitor());
 		typechecker.checkUnit();
 
 		if ( ! unit.isErrored() ) {
-			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(unit);
+			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(unit, new NullProgressMonitor());
 			constraintchecker.checkUnit();
 		}
 		
@@ -307,7 +308,7 @@ public class UnitExporterWizard extends Wizard {
 			// init the tracer (needed in order to get error messages and for an eventual save of the trace file)
 			initTraces();
 			unit.setTracer(tracer);
-			IOPlugin.getDefault().loadKermetaUnit( inputFile_uri );
+			IOPlugin.getDefault().loadKermetaUnit( inputFile_uri, new NullProgressMonitor() );
 						
 		} catch (KermetaIOFileNotFoundException e) {
 			e.printStackTrace();

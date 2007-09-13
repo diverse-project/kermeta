@@ -1,4 +1,4 @@
-/* $Id: OperationUpdateCommand.java,v 1.2 2007-07-20 15:34:04 cfaucher Exp $
+/* $Id: OperationUpdateCommand.java,v 1.3 2007-09-13 09:04:41 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -17,6 +17,7 @@ package fr.irisa.triskell.kermeta.graphicaleditor.cd.commands;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.gef.commands.Command;
 import org.kermeta.loader.LoadingContext;
 
@@ -159,7 +160,7 @@ public class OperationUpdateCommand extends Command {
 		if (_dataStructure.getOperationBody() != null) {
 			_operation.setBody(ExpressionParser.parse_operation2body( new LoadingContext(),
 					EditorReconcilingStrategy.parse(_operation.eResource()),
-					_dataStructure.getOperationBody()));
+					_dataStructure.getOperationBody(), new NullProgressMonitor()));
 		}
 
 		// FIXME Fix to 1 (default in Kermeta) the upper bound of the operation multiplicity if it was at 0

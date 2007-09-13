@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.13 2007-09-05 11:12:53 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.14 2007-09-13 09:04:49 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -19,6 +19,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.IBuildingState;
 import org.kermeta.io.KermetaUnit;
@@ -50,11 +52,13 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	static private Hashtable<KermetaUnit, CompUnit> ast = new Hashtable<KermetaUnit, CompUnit> ();
 	
 	private String content = null;
-
-	public KMTUnitLoader() {
+	
+	public KMTUnitLoader(IProgressMonitor monitor) {
+		super(monitor);
 	}
 	
-	public KMTUnitLoader(String content) {
+	public KMTUnitLoader(String content, IProgressMonitor monitor) {
+		super(monitor);
 		this.content = content;
 	}
 	
@@ -110,7 +114,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			if ( kermetaUnit.isErrored() )
 				return kermetaUnit;
 			
-			TypeCheckerContext.initializeTypeChecker( kermetaUnit );
+			TypeCheckerContext.initializeTypeChecker( kermetaUnit, new NullProgressMonitor() );
 			
 			// 7
 			loadAllOppositeProperties(kermetaUnit);
@@ -162,7 +166,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			IBuildingState currentState = currentUnit.getBuildingState();
 			
 			if ( currentState instanceof KmBuildingState ) {
-				KMUnitLoader loader = new KMUnitLoader();
+				KMUnitLoader loader = new KMUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else if ( currentState instanceof KMTBuildingState ) {
 				KMTBuildingState currentKMTState = (KMTBuildingState) currentState;
@@ -172,10 +176,10 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 					loadAllImportedUnits( currentUnit );
 				}
 			} else if ( currentState instanceof EcoreBuildingState ) {
-				Ecore2KMLoader loader = new Ecore2KMLoader();
+				Ecore2KMLoader loader = new Ecore2KMLoader(monitor);
 				loader.load( currentUnit.getUri(), true );
 			} else if ( currentState instanceof JavaBuildingState ) {
-				JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader();
+				JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );	
 			}
 			
@@ -232,7 +236,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		
 		if ( compUnit != null ) {
 			requireEntries.put( kermetaUnit, new ArrayList<RequireEntry>());
-			KMT2KMPass pass = new KMT2KMPass1(kermetaUnit, getLoadingContext(kermetaUnit), requireEntries.get(kermetaUnit)); 
+			KMT2KMPass pass = new KMT2KMPass1(kermetaUnit, getLoadingContext(kermetaUnit), requireEntries.get(kermetaUnit), monitor); 
 			compUnit.accept(pass);
 		}
 	}
@@ -271,7 +275,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		if ( kermetaUnit.isErrored() )
 			return;
 		
-		KMT2KMPass pass = new KMT2KMPass2(kermetaUnit, getLoadingContext(kermetaUnit)); 
+		KMT2KMPass pass = new KMT2KMPass2(kermetaUnit, getLoadingContext(kermetaUnit), monitor); 
 		CompUnit compUnit = ast.get(kermetaUnit);
 		
 		compUnit.accept(pass);
@@ -435,7 +439,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		
 		CompUnit compUnit = ast.get(kermetaUnit);
 		
-		KMT2KMPass pass = new KMT2KMPass2_1(kermetaUnit, getLoadingContext(kermetaUnit));
+		KMT2KMPass pass = new KMT2KMPass2_1(kermetaUnit, getLoadingContext(kermetaUnit), monitor);
 		compUnit.accept(pass);
 	}
 	
@@ -476,7 +480,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		
 		CompUnit compUnit = ast.get(kermetaUnit);
 		
-		KMT2KMPass pass = new KMT2KMPass3(kermetaUnit, getLoadingContext(kermetaUnit)); 
+		KMT2KMPass pass = new KMT2KMPass3(kermetaUnit, getLoadingContext(kermetaUnit), monitor); 
 		compUnit.accept(pass);
 	}
 	
@@ -516,12 +520,12 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		CompUnit compUnit = ast.get(kermetaUnit);
 		
 		System.out.println("Pass 4 for " + kermetaUnit.getUri());
-		KMT2KMPass pass = new KMT2KMPass4(kermetaUnit, getLoadingContext(kermetaUnit)); 
+		KMT2KMPass pass = new KMT2KMPass4(kermetaUnit, getLoadingContext(kermetaUnit), monitor); 
 		compUnit.accept(pass); 
 		System.out.println("Pass 5 for " + kermetaUnit.getUri());
 		if (kermetaUnit.isErrored()) return;
-		pass = new KMT2KMPass5(kermetaUnit, getLoadingContext(kermetaUnit)); compUnit.accept(pass);
-
+		pass = new KMT2KMPass5(kermetaUnit, getLoadingContext(kermetaUnit), monitor); 
+		compUnit.accept(pass);
 	}
 	
 	//////////////////
@@ -560,7 +564,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		CompUnit compUnit = ast.get(kermetaUnit);
 
 		System.out.println("Pass 6 for " + kermetaUnit.getUri());
-		KMT2KMPass pass = new KMT2KMPass6(kermetaUnit, getLoadingContext(kermetaUnit)); 
+		KMT2KMPass pass = new KMT2KMPass6(kermetaUnit, getLoadingContext(kermetaUnit), monitor); 
 		compUnit.accept(pass);
 	}
 	
@@ -601,7 +605,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
     	
     	CompUnit compUnit = ast.get(kermetaUnit);
 		
-		KMT2KMPass7 pass = new KMT2KMPass7(kermetaUnit, getLoadingContext(kermetaUnit));
+		KMT2KMPass7 pass = new KMT2KMPass7(kermetaUnit, getLoadingContext(kermetaUnit), monitor);
        	compUnit.accept(pass);
       
        	ast.remove(kermetaUnit);

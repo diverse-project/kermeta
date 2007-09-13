@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.33 2007-08-09 14:59:43 dvojtise Exp $
+/* $Id: KermetaInterpreter.java,v 1.34 2007-09-13 09:05:28 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
@@ -99,7 +101,8 @@ public class KermetaInterpreter {
 	    //	  we need to set the tracer before loading the unit ;P
 	   	    
 	    try {
-			unit = IOPlugin.getDefault().loadKermetaUnit( uri_unit );
+	    	unit = KermetaUnitChecker.check( uri_unit );
+//			unit = IOPlugin.getDefault().loadKermetaUnit( uri_unit );
 			// Why to erase the previous tracer ???
 			// If we erase the previous one, the debugger can not retrieve locations where to stop...
 			// if ( tracer != null ) 
@@ -112,13 +115,13 @@ public class KermetaInterpreter {
 			return;
 		}
 	    
-		KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
+	/*	KermetaTypeChecker typechecker = new KermetaTypeChecker( unit, new NullProgressMonitor() );
 		typechecker.checkUnit();
 		
 		if ( ! unit.isErrored() ) {
 			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( unit );
 			constraintchecker.checkUnit();
-		}
+		}*/
 		
 		if ( unit.isErrored() )
 	        throw new KermetaInterpreterError( KermetaUnitHelper.getAllErrorsAsString(unit) );
@@ -154,7 +157,7 @@ public class KermetaInterpreter {
 	 */
 	private void initializeMemory() {
 	    //unit.typeCheck();
-	    TypeCheckerContext.initializeTypeChecker(unit);
+	    TypeCheckerContext.initializeTypeChecker(unit, new NullProgressMonitor());
 	    if ( unit.isErrored() ) {
 	        String message = "INTERPRETER INITIALIZATION ERROR : The program contains errors:\n" + KermetaUnitHelper.getAllMessagesAsString(unit);
 	        internalLog.error(message);

@@ -7,6 +7,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.util.ArrayList;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -22,9 +23,9 @@ import fr.irisa.triskell.kermeta.ast.FExpressionLst;
  */
 public class KMT2KMExperessionListBuilder extends KMT2KMPass {
 
-	public static ArrayList process(LoadingContext context, FExpressionLst node, KermetaUnit builder) {
+	public static ArrayList process(LoadingContext context, FExpressionLst node, KermetaUnit builder, IProgressMonitor monitor) {
 		if (node == null) return new ArrayList();
-		KMT2KMExperessionListBuilder visitor = new KMT2KMExperessionListBuilder(builder, context);
+		KMT2KMExperessionListBuilder visitor = new KMT2KMExperessionListBuilder(builder, context, monitor);
 		context.pushContext();
 		node.accept(visitor);
 		context.popContext();
@@ -36,8 +37,8 @@ public class KMT2KMExperessionListBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMExperessionListBuilder(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMExperessionListBuilder(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 		result = new ArrayList();
 	}
 	
@@ -45,7 +46,7 @@ public class KMT2KMExperessionListBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FExpression)
 	 */
 	public boolean beginVisit(FExpression fExpression) {
-		fr.irisa.triskell.kermeta.language.behavior.Expression exp = KMT2KMExperessionBuilder.process(context, fExpression, builder);
+		fr.irisa.triskell.kermeta.language.behavior.Expression exp = KMT2KMExperessionBuilder.process(context, fExpression, builder, monitor);
 		if (exp != null) result.add(exp);
 		return false;
 	}

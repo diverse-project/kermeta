@@ -7,6 +7,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.util.Hashtable;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -31,9 +32,10 @@ import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 public class KMT2KMAdditiveExpressionBuilder extends KMT2KMPass {
 
 	
-	public static fr.irisa.triskell.kermeta.language.behavior.Expression process(LoadingContext context, AdditiveExpression node, KermetaUnit builder) {
-		if (node == null) return null;
-		KMT2KMAdditiveExpressionBuilder visitor = new KMT2KMAdditiveExpressionBuilder(builder, context);
+	public static fr.irisa.triskell.kermeta.language.behavior.Expression process(LoadingContext context, AdditiveExpression node, KermetaUnit builder, IProgressMonitor monitor) {
+		if (node == null) 
+			return null;
+		KMT2KMAdditiveExpressionBuilder visitor = new KMT2KMAdditiveExpressionBuilder(builder, context, monitor);
 		node.accept(visitor);
 		return visitor.result;
 	}
@@ -52,8 +54,8 @@ public class KMT2KMAdditiveExpressionBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMAdditiveExpressionBuilder(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMAdditiveExpressionBuilder(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 	}
 
 	/**
@@ -64,14 +66,14 @@ public class KMT2KMAdditiveExpressionBuilder extends KMT2KMPass {
 		for(int i=0; i< children.length; i++) {
 			if (children[i] instanceof MultiplicativeExpression) {
 				if (operator == null) {
-					result = KMT2KMMultiplicativeExpressionBuilder.process(context, (MultiplicativeExpression)children[i], builder);
+					result = KMT2KMMultiplicativeExpressionBuilder.process(context, (MultiplicativeExpression)children[i], builder, monitor);
 				}
 				else {
 					CallFeature call = BehaviorFactory.eINSTANCE.createCallFeature();
 					builder.storeTrace(call,operator);
 					call.setName((String)operators.get(operator.getText()));
 					call.setTarget(result);
-					call.getParameters().add(KMT2KMMultiplicativeExpressionBuilder.process(context, (MultiplicativeExpression)children[i], builder));
+					call.getParameters().add(KMT2KMMultiplicativeExpressionBuilder.process(context, (MultiplicativeExpression)children[i], builder, monitor));
 					result = call;
 				}
 			}

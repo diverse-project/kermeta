@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.9 2007-08-09 14:59:05 dvojtise Exp $
+ * $Id: KermetaUnit.java,v 1.10 2007-09-13 09:04:50 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -52,6 +52,7 @@ import java.util.Map;
  *   <li>{@link org.kermeta.io.KermetaUnit#getTracer <em>Tracer</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#isConstraintChecked <em>Constraint Checked</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getAspects <em>Aspects</em>}</li>
+ *   <li>{@link org.kermeta.io.KermetaUnit#isIsBeingTypechecked <em>Is Being Typechecked</em>}</li>
  * </ul>
  * </p>
  *
@@ -420,6 +421,32 @@ public interface KermetaUnit extends EObject {
 	 * @generated
 	 */
 	void setAspects(Map<TypeDefinition, EList<TypeDefinition>> value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Being Typechecked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Being Typechecked</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Being Typechecked</em>' attribute.
+	 * @see #setIsBeingTypechecked(boolean)
+	 * @see org.kermeta.io.IoPackage#getKermetaUnit_IsBeingTypechecked()
+	 * @model
+	 * @generated
+	 */
+	boolean isIsBeingTypechecked();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.io.KermetaUnit#isIsBeingTypechecked <em>Is Being Typechecked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Being Typechecked</em>' attribute.
+	 * @see #isIsBeingTypechecked()
+	 * @generated
+	 */
+	void setIsBeingTypechecked(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.16 2007-07-31 09:07:26 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.17 2007-09-13 09:04:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import fr.irisa.triskell.kermeta.kpm.Dependency;
+import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
@@ -35,6 +36,7 @@ import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.RuleType;
 import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.helpers.EventMonitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -336,10 +338,14 @@ public class UnitImpl extends EObjectImpl implements Unit {
 		try {
 			monitor.beginTask("Processing Rules", getRules().size());
 		
-			for ( Rule currentRule : (List <Rule>) getRules() )
-				if ( currentRule.getEvent().equals(event) )
+			for ( Rule currentRule : (List <Rule>) getRules() ) {
+				Event currentEvent = currentRule.getEvent();
+				if ( currentEvent.equals(event) ) {
+					EventMonitor.monitor(this, currentEvent, monitor);
 					currentRule.process(this, synchrone, args, new SubProgressMonitor(monitor, 1) );
-				
+					EventMonitor.stopMonitor(this, currentEvent);
+				}
+			}
 		} finally {
 			monitor.done();
 		}

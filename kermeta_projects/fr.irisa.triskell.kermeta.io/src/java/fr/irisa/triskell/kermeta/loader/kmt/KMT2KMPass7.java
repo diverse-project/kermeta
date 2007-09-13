@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.32 2007-08-09 14:52:35 dvojtise Exp $
+/* $Id: KMT2KMPass7.java,v 1.33 2007-09-13 09:04:49 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -25,6 +25,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -63,13 +64,17 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	/**
 	 * 
 	 */
-	public KMT2KMPass7(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMPass7(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 	}
 
 
 	@Override
 	public boolean beginVisit(KermetaASTNode node) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		Object object = builder.getModelElementByNode(node);
 		if ( (object != null) && ! currentTags.isEmpty() ) {
 			for ( fr.irisa.triskell.kermeta.language.structure.Tag tag : currentTags ) {
@@ -121,6 +126,10 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	}
 	
 	public boolean beginVisit(PackageDecl packageDecl) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		// force to read the annotation and fill the "currentTags" property
 		packageDecl.getAnnotations().accept(this);
 		// let's go and add this to the packagedecl  ie. go to beginVisit(KermetaASTNode node) {
@@ -130,6 +139,10 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	
 	@Override
 	public boolean beginVisit(Tag tag) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		fr.irisa.triskell.kermeta.language.structure.Tag t = StructureFactory.eINSTANCE.createTag();
 		
 		String name = qualifiedIDAsString(tag.getName());
@@ -146,6 +159,10 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	
 	@Override
 	public boolean beginVisit(ContextMultiLineComment contextMultiLineComment) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		fr.irisa.triskell.kermeta.language.structure.Tag tag = StructureFactory.eINSTANCE.createTag();
 		String text = contextMultiLineComment.getContext_multi_line_comment().getText();
 		tag.setValue( text );

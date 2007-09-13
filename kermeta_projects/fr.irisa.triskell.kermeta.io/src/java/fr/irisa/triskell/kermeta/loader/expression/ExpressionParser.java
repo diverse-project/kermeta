@@ -1,4 +1,4 @@
-/* $Id: ExpressionParser.java,v 1.11 2007-07-24 13:46:46 ftanguy Exp $
+/* $Id: ExpressionParser.java,v 1.12 2007-09-13 09:04:50 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -12,6 +12,7 @@ package fr.irisa.triskell.kermeta.loader.expression;
 
 import java.io.StringReader;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -37,7 +38,7 @@ public class ExpressionParser {
 	 * @param str A string that is supposed to be a Kermeta expression 
 	 * @return the model element representing an Expression.
 	 */
-	public static Expression parse(LoadingContext context, KermetaUnit unit, String str) {
+	public static Expression parse(LoadingContext context, KermetaUnit unit, String str, IProgressMonitor monitor) {
 		KermetaParser parser = new KermetaParser(new KermetaLexer(new StringReader(str.replace('\t', ' '))));
 		FExpression  ast_exp = null;
 		try {
@@ -54,7 +55,7 @@ public class ExpressionParser {
 		}
 		Expression result;
 		if (ast_exp != null)
-			result = KMT2KMExperessionBuilder.process(context, ast_exp, unit);
+			result = KMT2KMExperessionBuilder.process(context, ast_exp, unit, monitor);
 		else 
 			result = null;
 		return result;
@@ -67,7 +68,7 @@ public class ExpressionParser {
 	 * @param str The string supposed to represent an operation. (a "firstKeyword" visitor?)
 	 * @return the model element representing an Expression.
 	 */
-	public static Expression parse_operation2body(LoadingContext context, KermetaUnit unit, String str) {
+	public static Expression parse_operation2body(LoadingContext context, KermetaUnit unit, String str, IProgressMonitor monitor) {
 		KermetaParser parser = new KermetaParser(new KermetaLexer(new StringReader(str.replace('\t', ' '))));
 		OperationBody  ast_op = null;
 		FExpression  ast_exp = null;
@@ -90,7 +91,7 @@ public class ExpressionParser {
 		}
 		Expression result;
 		if (ast_exp != null)
-			result = KMT2KMExperessionBuilder.process(context, ast_exp, unit);
+			result = KMT2KMExperessionBuilder.process(context, ast_exp, unit, monitor);
 		else 
 			result = null;
 		return result;
@@ -103,7 +104,7 @@ public class ExpressionParser {
 	 * @param str The string supposed to represent an operation. (a "firstKeyword" visitor?)
 	 * @return the model element representing an Expression.
 	 */
-	public static Expression parse_operationbody(LoadingContext context, KermetaUnit unit, String str) {
+	public static Expression parse_operationbody(LoadingContext context, KermetaUnit unit, String str, IProgressMonitor monitor) {
 		KermetaParser parser = new KermetaParser(new KermetaLexer(new StringReader(str.replace('\t', ' '))));
 		OperationBody  ast_op = null;
 		FExpression  ast_exp = null;
@@ -127,7 +128,7 @@ public class ExpressionParser {
 		Expression result;
 		if (ast_exp != null)
 		{
-			result = KMT2KMExperessionBuilder.process(context, ast_exp, unit);
+			result = KMT2KMExperessionBuilder.process(context, ast_exp, unit, monitor);
 		}
 		else 
 			result = null;

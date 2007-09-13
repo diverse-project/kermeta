@@ -54,4 +54,5 @@ Export-Package: .,
  org.apache.log4j.varia,
  org.apache.log4j.xml
 Require-Bundle: fr.irisa.triskell.kermeta.interpreter,
- fr.irisa.triskell.kermeta.io
+ fr.irisa.triskell.kermeta.io,
+ org.eclipse.core.runtime

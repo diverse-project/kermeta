@@ -148,7 +148,7 @@ public class KermetaUnitHelper {
 		KermetaUnit unit = null;
 		try {
 			unit = IOPlugin.getDefault().getKermetaUnit(absoluteFileName);
-			storer.load(absoluteFileName, content);
+			storer.load(absoluteFileName, content, monitor);
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
 		}

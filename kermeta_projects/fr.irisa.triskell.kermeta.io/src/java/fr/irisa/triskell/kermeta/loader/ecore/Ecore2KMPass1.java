@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.14 2007-07-24 13:46:46 ftanguy Exp $
+/*$Id: Ecore2KMPass1.java,v 1.15 2007-09-13 09:04:49 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -12,6 +12,7 @@
 
 package fr.irisa.triskell.kermeta.loader.ecore;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EDataType;
@@ -38,8 +39,8 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 
 	private Resource resource = null; 
 	
-	public Ecore2KMPass1(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, Resource resource) {
-		super(kermetaUnit, datas, isQuickFixEnabled);
+	public Ecore2KMPass1(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, Resource resource, IProgressMonitor monitor) {
+		super(kermetaUnit, datas, isQuickFixEnabled, monitor);
 		this.resource = resource;
 	}
 	

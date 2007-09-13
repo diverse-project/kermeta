@@ -1,4 +1,4 @@
-/* $Id: ParameterizedTypeChecker.java,v 1.7 2007-09-04 08:29:31 ftanguy Exp $
+/* $Id: ParameterizedTypeChecker.java,v 1.8 2007-09-13 09:04:51 ftanguy Exp $
  * Project : Kermeta io
  * File : ParametrizedTypeChecker.java
  * License : EPL
@@ -14,6 +14,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
@@ -39,7 +40,22 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
  */
 public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 	
+	/**
+	 * 
+	 * @param t
+	 * @param unit
+	 * @param context
+	 * @param codeContext
+	 * @deprecated
+	 */
 	public static void checkType(fr.irisa.triskell.kermeta.language.structure.Type t, KermetaUnit unit, TypeCheckerContext context, fr.irisa.triskell.kermeta.language.structure.Object codeContext) {
+		ParameterizedTypeChecker checker = new ParameterizedTypeChecker(unit, context, codeContext);
+		checker.accept(t);
+	}
+	
+	public static void checkType(fr.irisa.triskell.kermeta.language.structure.Type t, KermetaUnit unit, TypeCheckerContext context, fr.irisa.triskell.kermeta.language.structure.Object codeContext, IProgressMonitor monitor) {
+		if ( monitor.isCanceled() )
+			return;
 		ParameterizedTypeChecker checker = new ParameterizedTypeChecker(unit, context, codeContext);
 		checker.accept(t);
 	}

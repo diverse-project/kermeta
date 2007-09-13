@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass.java,v 1.12 2007-07-24 13:46:45 ftanguy Exp $
+/* $Id: KMT2KMPass.java,v 1.13 2007-09-13 09:04:49 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
  * License : GPL
@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -52,6 +53,11 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
  */
 public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	
+	/**
+	 * If used that monitor can stop the execution of the load.
+	 * Usefull when working with concurrent thread or to save time.
+	 */
+	protected IProgressMonitor monitor;
     
     /**
      * Define the tag names of the tags to attach to the KMElements  */
@@ -75,9 +81,10 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 //	protected Collection<fr.irisa.triskell.kermeta.language.structure.Operation> overloadableOperations = new HashSet<fr.irisa.triskell.kermeta.language.structure.Operation>();
 	
 	// the constructor
-	public KMT2KMPass(KermetaUnit builder, LoadingContext context) {
+	public KMT2KMPass(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
 		this.builder = builder;
 		this.context = context;
+		this.monitor = monitor;
 	}
 	
 	
@@ -215,7 +222,7 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	 * @return the kcore type (FType) corresponding to the type reference <code>ref</code>.
 	 */
 	protected Type getFType(TypeRef ref) {
-		Type result = KMT2KMTypeBuilder.process(context, ref.getReftype(), builder);
+		Type result = KMT2KMTypeBuilder.process(context, ref.getReftype(), builder, monitor);
 		return result;
 	}
 	

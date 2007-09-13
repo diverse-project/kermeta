@@ -1,4 +1,4 @@
-/*$Id: Typecheck.java,v 1.1 2007-08-06 14:32:51 ftanguy Exp $
+/*$Id: Typecheck.java,v 1.2 2007-09-13 09:03:45 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.util2.KermetaUnitHelper;
@@ -99,10 +100,7 @@ public class Typecheck implements IAction {
 			if ( args != null ) {
 				content = (String) args.get("content");
 			}
-			
-			//KermetaUnitFactory.getDefaultLoader().unload( "file:" + file.getLocation().toString() );
-
-			
+		
 			/*
 			 * 
 			 * Getting the Kermeta Unit
@@ -112,12 +110,17 @@ public class Typecheck implements IAction {
 			//KermetaUnit kermetaUnit = KermetaUnitHelper.typecheckFile(file, content, monitor);
 			KermetaUnit kermetaUnit;
 			try {
-				kermetaUnit = IOPlugin.getDefault().loadKermetaUnit(file, content);
-				if ( ! kermetaUnit.isErrored() ) {
-					KermetaTypeChecker typechecker = new KermetaTypeChecker( kermetaUnit );
-					typechecker.checkUnit();			
-				}
-
+				kermetaUnit = KermetaUnitChecker.check(file, content, this, monitor);
+				
+				/*
+				 * 
+				 * If the kermeta unit is null, it means that the process has been cancelled.
+				 * So we just stop right here.
+				 * 
+				 */
+				if ( kermetaUnit == null )
+					return;
+				
 				/*
 				 * 
 				 * Typechecking is done. Update the lastTimeModified field.

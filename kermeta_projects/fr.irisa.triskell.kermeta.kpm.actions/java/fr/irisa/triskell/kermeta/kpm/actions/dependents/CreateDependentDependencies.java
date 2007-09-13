@@ -1,4 +1,4 @@
-/*$Id: CreateDependentDependencies.java,v 1.1 2007-08-06 14:32:51 ftanguy Exp $
+/*$Id: CreateDependentDependencies.java,v 1.2 2007-09-13 09:03:45 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	CreateDependentDependencies.java
 * License : EPL
@@ -27,11 +27,12 @@ import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 public class CreateDependentDependencies implements IAction {
 
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
-		if ( monitor.isCanceled() )
-			return;
 			
 		try {
-		
+
+			if ( monitor.isCanceled() )
+				return;
+			
 			monitor.beginTask("", 1);
 			monitor.subTask("Creating Dependent Dependencies for " + unit.getValue());
 			
@@ -109,6 +110,5 @@ public class CreateDependentDependencies implements IAction {
 		unit.beDependentOf(importedUnit, rule.getType());		*/
 		unit.beDependentOf(importedUnit, kpm.getRuleType("require") );
 	}
-
 	
 }

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2_1.java,v 1.5 2007-07-24 13:46:45 ftanguy Exp $
+/* $Id: KMT2KMPass2_1.java,v 1.6 2007-09-13 09:04:49 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMPass2_1.java
  * License : EPL
@@ -14,6 +14,7 @@
 package fr.irisa.triskell.kermeta.loader.kmt;
 
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -41,8 +42,8 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 	 * 
 	 * @param builder
 	 */
-	public KMT2KMPass2_1(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMPass2_1(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 	}
 
 	/**
@@ -58,6 +59,10 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 	 * of the type variables
 	 */
 	public boolean beginVisit(ModelTypeDecl mtdef) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 //		mtdefs.push((ModelTypeDefinition) builder.getModelElementByNode(mtdef));
 		return super.beginVisit(mtdef);
 	}
@@ -66,7 +71,11 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 	 * Pop the mtdef from the namespace stack
 	 */
 	public void endVisit(ModelTypeDecl mtdef) {
-//		mtdefs.pop();
+		//		mtdefs.pop();
+		
+		if ( monitor.isCanceled() )
+			return;
+		
 		super.endVisit(mtdef);
 	}
 	
@@ -75,6 +84,10 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 	 * then replace the old ObjectTypeVariable with a ModelTypeVariable.
 	 */
 	public boolean beginVisit(TypeVarDecl typeVarDecl) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		// Pass 2 has already created an ObjectTypeVariable.
 		TypeVariable tv = (TypeVariable)builder.getModelElementByNode(typeVarDecl);
 		// If its supertype is a ModelType, we need to dissociate it and replace it with a ModelTypeVariable
@@ -97,7 +110,7 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 			
 			typeDefinition.getTypeParameter().set(typeDefinition.getTypeParameter().indexOf(tv), mtv);
 			builder.storeTrace(mtv, typeVarDecl);
-			fr.irisa.triskell.kermeta.language.structure.Type supertype = KMT2KMTypeBuilder.process(context, bsuper, builder);
+			fr.irisa.triskell.kermeta.language.structure.Type supertype = KMT2KMTypeBuilder.process(context, bsuper, builder, monitor);
 			mtv.setSupertype(supertype);
 			// this supertype is contained by the ModeltypeVariable
 			//mtv.getContainedType().add(supertype);

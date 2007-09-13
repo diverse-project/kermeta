@@ -17,8 +17,10 @@ class Main
 
     operation main(fileName : String) : Void is do 
 
+		stdio.writeln( "platform:/resource" + fileName )
+
 		var repository : EMFRepository init EMFRepository.new
-		var resource : Resource init repository.createResource( "platform:/resource" + fileName, "Ecore.ecore" )
+		var resource : Resource init repository.createResource( "platform:/resource" + fileName, "http://www.eclipse.org/emf/2002/Ecore" )
 		resource.load
 
 		var p : EPackage
@@ -29,10 +31,11 @@ class Main
 		
 		p4e.addVisitor( p, void )
 
-		var resourceToSave : Resource init repository.createResource( "platform:/resource" + fileName + ".visitor.ecore", "Ecore.ecore" )
+		var rep2 : EMFRepository init EMFRepository.new
+		var resourceToSave : Resource init rep2.createResource( "platform:/resource" + fileName + ".visitor.ecore", "http://www.eclipse.org/emf/2002/Ecore" )
 		resourceToSave.add ( p )
 		resourceToSave.save
-		
+		stdio.writeln("DONE...")
 
     end
     

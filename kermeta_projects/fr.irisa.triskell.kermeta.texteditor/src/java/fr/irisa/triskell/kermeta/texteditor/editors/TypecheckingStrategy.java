@@ -1,4 +1,4 @@
-/* $Id: TypecheckingStrategy.java,v 1.7 2007-07-24 13:46:56 ftanguy Exp $
+/* $Id: TypecheckingStrategy.java,v 1.8 2007-09-13 09:02:41 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : TypecheckingStrategy.java
 * License : EPL
@@ -14,12 +14,14 @@ import java.util.HashMap;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
+import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.util2.KermetaUnitHelper;
@@ -79,14 +81,16 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 						
 						KermetaUnit kermetaUnit;
 						try {
-							kermetaUnit = IOPlugin.getDefault().loadKermetaUnit( editor.getFile(), editor.getFileContent() );
-							KermetaTypeChecker typechecker = new KermetaTypeChecker( kermetaUnit );
+							kermetaUnit = KermetaUnitChecker.check( editor.getFile(), editor.getFileContent() );
+							
+							/*kermetaUnit = IOPlugin.getDefault().loadKermetaUnit( editor.getFile(), editor.getFileContent() );
+							KermetaTypeChecker typechecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
 							typechecker.checkUnit();
 							
 							if ( ! kermetaUnit.isErrored() ) {
 								KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( kermetaUnit );
 								constraintchecker.checkUnit();
-							}
+							}*/
 							
 							if (monitor.isCanceled())
 								return Status.CANCEL_STATUS;

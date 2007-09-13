@@ -1,5 +1,5 @@
 
-/*$Id: KermetaLauncher.java,v 1.5 2007-09-07 14:13:46 dtouzet Exp $
+/*$Id: KermetaLauncher.java,v 1.6 2007-09-13 09:04:35 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta
  * File : 	KermetaLauncher.java
  * License : EPL
@@ -13,9 +13,12 @@ package fr.irisa.triskell.kermeta.launcher;
 
 import java.util.ArrayList;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
+import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
@@ -60,6 +63,7 @@ public class KermetaLauncher {
 			interpreter.launch();
 		} catch (KermetaRaisedException e) {
 			e.printStackTrace();
+			IOPlugin.getDefault().unload( filePath );
 			return false;
 		}
 		return true;
@@ -67,17 +71,19 @@ public class KermetaLauncher {
 
 	private static KermetaInterpreter typeCheckTranfo(String file) throws KermetaIOFileNotFoundException, URIMalformedException {
 
-		KermetaUnit unit = IOPlugin.getDefault().loadKermetaUnit( file );
+		KermetaUnit unit = KermetaUnitChecker.check( file );
+			
+/*			IOPlugin.getDefault().loadKermetaUnit( file );
 
 		if ( ! unit.isErrored() ) {
-			KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
+			KermetaTypeChecker typechecker = new KermetaTypeChecker( unit, new NullProgressMonitor() );
 			typechecker.checkUnit();
 		}
 		
 		if ( ! unit.isErrored() ) {
 			KermetaConstraintChecker constraintcheker = new KermetaConstraintChecker(unit);
 			constraintcheker.checkUnit();
-		}
+		}*/
 		
 		if ( ! unit.isErrored() ) {
 		

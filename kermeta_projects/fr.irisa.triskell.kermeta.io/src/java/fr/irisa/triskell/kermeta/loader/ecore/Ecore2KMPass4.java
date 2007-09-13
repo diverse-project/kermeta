@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.16 2007-09-04 08:29:32 ftanguy Exp $
+/* $Id: Ecore2KMPass4.java,v 1.17 2007-09-13 09:04:49 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -16,6 +16,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -81,8 +82,8 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 	 * @param resource
 	 * @param visitor
 	 */
-	public Ecore2KMPass4(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, LoadingContext context) {
-		super(kermetaUnit, datas, isQuickFixEnabled);
+	public Ecore2KMPass4(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, LoadingContext context, IProgressMonitor monitor) {
+		super(kermetaUnit, datas, isQuickFixEnabled, monitor);
 		this.context= context;
 		isTypeSettingMode = true;
 	}
@@ -253,7 +254,7 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 			// If the given operation contain no abstract or body annotation or overloadable tag then we must create a body with a raise of NotImplemented Exception
 			// and add the overloadable tag to the operation
 			if(!isBodySpecified(node)){
-				currentOperation.setBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new"));
+				currentOperation.setBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new", monitor));
 				TagHelper.createNonExistingTagFromNameAndValue(currentOperation, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
 			}
 			

@@ -1,16 +1,17 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.12 2007-07-23 09:21:25 cfaucher Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.13 2007-09-13 09:04:41 ftanguy Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
- * Creation date : 12 févr. 2005
+ * Creation date : 12 fï¿½vr. 2005
  * Author : ffleurey, zdrey
  */
 package fr.irisa.triskell.kermeta.graphicaleditor.editor;
 
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
@@ -51,7 +52,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         EditorReconcilingStrategy.clearMarkers(file);
        
         try {
-			result = IOPlugin.getDefault().loadKermetaUnit( uri );
+			result = IOPlugin.getDefault().loadKermetaUnit( uri, new NullProgressMonitor() );
 		} catch (KermetaIOFileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,11 +72,11 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     {
     	KermetaUnit result = parse(resource);
         // Set type_check boolean to false so that we can check again 
-		KermetaTypeChecker typechecker = new KermetaTypeChecker( result );
+		KermetaTypeChecker typechecker = new KermetaTypeChecker( result, new NullProgressMonitor() );
 		typechecker.checkUnit();
 		
 		if ( ! result.isErrored() ) {
-			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( result );
+			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( result, new NullProgressMonitor() );
 			constraintchecker.checkUnit();
 		}
         return result;

@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.1 2007-09-10 08:35:20 cfaucher Exp $
+/* $Id: JunitTestSuite.java,v 1.2 2007-09-13 09:03:04 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -19,6 +19,7 @@ package kermeta_io.constraintchecker_test;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
@@ -327,18 +328,18 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 		
 		String path = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
 		
-		KermetaUnit kermetaUnit = ioPlugin.loadKermetaUnit(path);
+		KermetaUnit kermetaUnit = ioPlugin.loadKermetaUnit(path, new NullProgressMonitor());
 		
 		if ( kermetaUnit.isErrored() )
 			assertTrue("kermeta unit has errors during loading", false);
 		
-		KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit );
+		KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
 		typeChecker.checkUnit();
 		
 		if ( kermetaUnit.isErrored() )
 			assertTrue("Kermeta Unit has errors when type checking.", false);
 		
-		KermetaConstraintChecker constraintChecker = new KermetaConstraintChecker( kermetaUnit );
+		KermetaConstraintChecker constraintChecker = new KermetaConstraintChecker( kermetaUnit, new NullProgressMonitor() );
 		constraintChecker.checkUnit();
 		
 		if ( kermetaUnit.isErrored() )
@@ -357,7 +358,7 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 	    
 		String path = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
 		
-		KermetaUnit kermetaUnit = ioPlugin.loadKermetaUnit(path);
+		KermetaUnit kermetaUnit = ioPlugin.loadKermetaUnit(path, new NullProgressMonitor());
 
 		boolean inheritanceCycleDetected = false;
 		if ( kermetaUnit.isErrored() ) {
@@ -377,12 +378,12 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 			cycleConstraintChecker.check();
 			
 			if ( ! kermetaUnit.isErrored() ) {
-				KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit );
+				KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
 				typeChecker.checkUnit();
 			}
 			
 			if ( ! kermetaUnit.isErrored() ) {
-				KermetaConstraintChecker constraintChecker = new KermetaConstraintChecker( kermetaUnit );
+				KermetaConstraintChecker constraintChecker = new KermetaConstraintChecker( kermetaUnit, new NullProgressMonitor() );
 				constraintChecker.checkUnit();
 			}
 			

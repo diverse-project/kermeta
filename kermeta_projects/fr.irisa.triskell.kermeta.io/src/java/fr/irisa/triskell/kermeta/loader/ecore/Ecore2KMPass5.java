@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass5.java,v 1.9 2007-09-04 08:29:32 ftanguy Exp $
+/* $Id: Ecore2KMPass5.java,v 1.10 2007-09-13 09:04:49 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -18,6 +18,7 @@ package fr.irisa.triskell.kermeta.loader.ecore;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
@@ -64,8 +65,8 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 	
 	private LoadingContext context = null;
 	
-	public Ecore2KMPass5(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, LoadingContext context) {
-		super(kermetaUnit, datas, isQuickFixEnabled);
+	public Ecore2KMPass5(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, LoadingContext context, IProgressMonitor monitor) {
+		super(kermetaUnit, datas, isQuickFixEnabled, monitor);
 		this.context= context;
 	}
 	
@@ -146,12 +147,12 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 		//TODO, add the getter and setter
 		if (node.isDerived() && ! currentProperty.isIsReadOnly() && currentProperty.getSetterBody() == null){
 			
-			currentProperty.setSetterBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new"));
+			currentProperty.setSetterBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new", monitor));
 				TagHelper.createNonExistingTagFromNameAndValue(currentProperty, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
 			}
 		if (node.isDerived() && currentProperty.getGetterBody() == null){
 			
-			currentProperty.setGetterBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new"));
+			currentProperty.setGetterBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new", monitor));
 			TagHelper.createNonExistingTagFromNameAndValue(currentProperty, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
 		}
 		
@@ -252,7 +253,7 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 			for ( Object cond_name : node.getDetails().keySet() ) { 
 				Constraint cond = StructureFactory.eINSTANCE.createConstraint();
 				cond.setName((String)cond_name);
-				cond.setBody(ExpressionParser.parse(context, kermetaUnit, (String)node.getDetails().get(cond_name)));
+				cond.setBody(ExpressionParser.parse(context, kermetaUnit, (String)node.getDetails().get(cond_name), monitor));
 				cond.setStereotype(ConstraintType.PRE_LITERAL);
 				cond.setPreOwner(currentOperation);
 
@@ -266,7 +267,7 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 			for ( Object cond_name : node.getDetails().keySet() ) { 
 				Constraint cond = StructureFactory.eINSTANCE.createConstraint();
 				cond.setName((String)cond_name);
-				cond.setBody(ExpressionParser.parse(context, kermetaUnit, (String)node.getDetails().get(cond_name)));
+				cond.setBody(ExpressionParser.parse(context, kermetaUnit, (String)node.getDetails().get(cond_name), monitor));
 				cond.setStereotype(ConstraintType.POST_LITERAL);
 				cond.setPostOwner(currentOperation);
 
@@ -310,7 +311,7 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 				result = (String)node.getDetails().get(key);
 				// Parse and inject 
 				// FIXME parse method call is not sufficient at all -> type variable binding are omitted.
-				currentOperation.setBody(ExpressionParser.parse(context, kermetaUnit, result));
+				currentOperation.setBody(ExpressionParser.parse(context, kermetaUnit, result, monitor));
 			}
 			// node.getDetails().get(key) == "isAbstract"
 			// => EAnnotation for EOperation
@@ -372,7 +373,7 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 				Constraint inv = StructureFactory.eINSTANCE.createConstraint();
 				inv.setStereotype(ConstraintType.INV_LITERAL);
 				inv.setName((String)inv_name);
-				inv.setBody(ExpressionParser.parse(context, kermetaUnit, (String)node.getDetails().get(inv_name)));
+				inv.setBody(ExpressionParser.parse(context, kermetaUnit, (String)node.getDetails().get(inv_name), monitor));
 				inv.setInvOwner(currentClassDefinition);
 				
 				currentClassDefinition.getInv().add(inv);
@@ -431,7 +432,7 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 		else if (node.getSource().equals(KM2Ecore.ANNOTATION_DERIVEDPROPERTY_GETTER)) {
 			String getter = (String) node.getDetails().get(KM2Ecore.ANNOTATION_BODY_DETAILS);
 			if (getter != null) {
-				Expression exp = ExpressionParser.parse(context, kermetaUnit, getter);
+				Expression exp = ExpressionParser.parse(context, kermetaUnit, getter, monitor);
 				currentProperty.setGetterBody(exp);
 			}
 		}
@@ -439,7 +440,7 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 		else if (node.getSource().equals(KM2Ecore.ANNOTATION_DERIVEDPROPERTY_SETTER)) {
 			String setter = (String) node.getDetails().get(KM2Ecore.ANNOTATION_BODY_DETAILS);
 			if (setter != null) {
-				Expression exp = ExpressionParser.parse(context, kermetaUnit, setter);
+				Expression exp = ExpressionParser.parse(context, kermetaUnit, setter, monitor);
 				currentProperty.setSetterBody(exp);
 			}
 		}
@@ -494,7 +495,7 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 "				end"+
 "			} end";
 				//body = "raise kermeta::exceptions::NotImplementedException.new ";
-				Expression exp = ExpressionParser.parse(context, kermetaUnit, body);
+				Expression exp = ExpressionParser.parse(context, kermetaUnit, body, monitor);
 				currentProperty.setGetterBody(exp);
 					// it seem that in this case the setter is a nonsense
 				currentProperty.setIsReadOnly( Boolean.valueOf(true));

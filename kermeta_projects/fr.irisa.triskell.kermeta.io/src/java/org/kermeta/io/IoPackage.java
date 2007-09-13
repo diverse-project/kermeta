@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackage.java,v 1.4 2007-08-07 13:35:22 ftanguy Exp $
+ * $Id: IoPackage.java,v 1.5 2007-09-13 09:04:50 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -206,13 +206,22 @@ public interface IoPackage extends EPackage {
 	int KERMETA_UNIT__ASPECTS = 14;
 
 	/**
+	 * The feature id for the '<em><b>Is Being Typechecked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_UNIT__IS_BEING_TYPECHECKED = 15;
+
+	/**
 	 * The number of structural features of the '<em>Kermeta Unit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT_FEATURE_COUNT = 15;
+	int KERMETA_UNIT_FEATURE_COUNT = 16;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.io.impl.KermetaUnitStorerImpl <em>Kermeta Unit Storer</em>}' class.
@@ -604,6 +613,17 @@ public interface IoPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>IProgress Monitor</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.core.runtime.IProgressMonitor
+	 * @see org.kermeta.io.impl.IoPackageImpl#getIProgressMonitor()
+	 * @generated
+	 */
+	int IPROGRESS_MONITOR = 16;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.io.KermetaUnit <em>Kermeta Unit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -777,6 +797,17 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getKermetaUnit_Aspects();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.io.KermetaUnit#isIsBeingTypechecked <em>Is Being Typechecked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Being Typechecked</em>'.
+	 * @see org.kermeta.io.KermetaUnit#isIsBeingTypechecked()
+	 * @see #getKermetaUnit()
+	 * @generated
+	 */
+	EAttribute getKermetaUnit_IsBeingTypechecked();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.io.KermetaUnitStorer <em>Kermeta Unit Storer</em>}'.
@@ -1034,6 +1065,17 @@ public interface IoPackage extends EPackage {
 	EDataType getIOPlugin();
 
 	/**
+	 * Returns the meta object for data type '{@link org.eclipse.core.runtime.IProgressMonitor <em>IProgress Monitor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>IProgress Monitor</em>'.
+	 * @see org.eclipse.core.runtime.IProgressMonitor
+	 * @model instanceClass="org.eclipse.core.runtime.IProgressMonitor"
+	 * @generated
+	 */
+	EDataType getIProgressMonitor();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1184,6 +1226,14 @@ public interface IoPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute KERMETA_UNIT__ASPECTS = eINSTANCE.getKermetaUnit_Aspects();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Being Typechecked</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KERMETA_UNIT__IS_BEING_TYPECHECKED = eINSTANCE.getKermetaUnit_IsBeingTypechecked();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.io.impl.KermetaUnitStorerImpl <em>Kermeta Unit Storer</em>}' class.
@@ -1406,6 +1456,16 @@ public interface IoPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType IO_PLUGIN = eINSTANCE.getIOPlugin();
+
+		/**
+		 * The meta object literal for the '<em>IProgress Monitor</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.core.runtime.IProgressMonitor
+		 * @see org.kermeta.io.impl.IoPackageImpl#getIProgressMonitor()
+		 * @generated
+		 */
+		EDataType IPROGRESS_MONITOR = eINSTANCE.getIProgressMonitor();
 
 	}
 

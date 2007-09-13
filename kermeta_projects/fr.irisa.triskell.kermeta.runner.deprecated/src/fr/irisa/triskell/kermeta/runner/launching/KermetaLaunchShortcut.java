@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.20 2007-07-24 13:47:19 ftanguy Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.21 2007-09-13 09:03:14 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
@@ -30,6 +31,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.util2.KermetaUnitHelper;
@@ -253,19 +255,20 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 		selectedFile = ifile;
 		
 		try {
-			unit = IOPlugin.getDefault().loadKermetaUnit(selectedFile);
+			unit = KermetaUnitChecker.check(ifile);
+			unit = IOPlugin.getDefault().loadKermetaUnit(selectedFile, new NullProgressMonitor());
 		} catch (KermetaIOFileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (URIMalformedException e1) {
 			e1.printStackTrace();
 		}
-		KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
+		/*KermetaTypeChecker typechecker = new KermetaTypeChecker( unit, new NullProgressMonitor() );
 		typechecker.checkUnit();
 		
 		if ( ! unit.isErrored() ) {
 			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( unit );
 			constraintchecker.checkUnit();
-		}
+		}*/
 		
 		if ( unit.isErrored() ) {
 			MessageDialog.openError(new Shell(), "The file is not correctly typechecked.", fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper.getAllErrorsAsString(unit));

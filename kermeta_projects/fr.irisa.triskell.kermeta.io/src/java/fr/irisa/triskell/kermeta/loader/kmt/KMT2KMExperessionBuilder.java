@@ -4,6 +4,7 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -25,10 +26,10 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
  */
 public class KMT2KMExperessionBuilder extends KMT2KMPass {
 
-	public static Expression process(LoadingContext context, FExpression node, KermetaUnit builder) {
+	public static Expression process(LoadingContext context, FExpression node, KermetaUnit builder, IProgressMonitor monitor) {
 	    
 		if (node == null) return null;
-		KMT2KMExperessionBuilder visitor = new KMT2KMExperessionBuilder(builder, context);
+		KMT2KMExperessionBuilder visitor = new KMT2KMExperessionBuilder(builder, context, monitor);
 		int old_errs = builder.getMessages().size();
 		try {
 			node.accept(visitor);
@@ -46,8 +47,8 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 	/**
 	 * 
 	 */
-	public KMT2KMExperessionBuilder(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMExperessionBuilder(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 
 	}
 	
@@ -56,8 +57,8 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 	 */
 	public boolean beginVisit(FAssignement fAssignement) {
 		if (fAssignement.getAssignementOp() != null) {
-			Expression left = KMT2KMLogicalExperessionBuilder.process(context, fAssignement.getExpression(), builder);
-			Expression right = KMT2KMLogicalExperessionBuilder.process(context, fAssignement.getNewvalue(), builder);
+			Expression left = KMT2KMLogicalExperessionBuilder.process(context, fAssignement.getExpression(), builder, monitor);
+			Expression right = KMT2KMLogicalExperessionBuilder.process(context, fAssignement.getNewvalue(), builder, monitor);
 			// left should be a call expr without params
 			if (left instanceof CallExpression && ((CallExpression)left).getParameters().size() == 0)  {
 				fr.irisa.triskell.kermeta.language.behavior.Assignment assign = BehaviorFactory.eINSTANCE.createAssignment();
@@ -76,7 +77,7 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 			}
 		}
 		else {
-			result = KMT2KMLogicalExperessionBuilder.process(context, fAssignement.getExpression(), builder);
+			result = KMT2KMLogicalExperessionBuilder.process(context, fAssignement.getExpression(), builder, monitor);
 		}
 		return false;
 	}

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.26 2007-09-11 15:20:30 ftanguy Exp $
+/* $Id: KMT2KMPass4.java,v 1.27 2007-09-13 09:04:49 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
@@ -59,8 +60,8 @@ public class KMT2KMPass4 extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMPass4(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMPass4(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 	}
 	
 	/*
@@ -73,6 +74,10 @@ public class KMT2KMPass4 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ClassDecl)
 	 */
 	public boolean beginVisit(ClassDecl classDecl) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		context.current_class = (ClassDefinition)builder.getModelElementByNode(classDecl);
 		// check for inheritance cycles
 		if (ClassDefinitionHelper.isSuperClassOf(context.current_class, context.current_class)) {
@@ -98,6 +103,10 @@ public class KMT2KMPass4 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Operation)
 	 */
 	public boolean beginVisit(Operation operation) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		context.current_operation = (fr.irisa.triskell.kermeta.language.structure.Operation)builder.getModelElementByNode(operation);
 		
 		if (ClassDefinitionHelper.getPropertyByName(context.current_class, context.current_operation.getName()) != null) {
@@ -238,6 +247,10 @@ public class KMT2KMPass4 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Property)
 	 */
 	public boolean beginVisit(Property property) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		context.current_property = (fr.irisa.triskell.kermeta.language.structure.Property)builder.getModelElementByNode(property);
 		if (property.getOppositeName() != null) {
 			String opname = getTextForID(property.getOppositeName());

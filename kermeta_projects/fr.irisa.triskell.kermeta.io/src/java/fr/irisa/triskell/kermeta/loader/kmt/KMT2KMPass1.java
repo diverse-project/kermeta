@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.16 2007-09-04 08:29:33 ftanguy Exp $
+/* $Id: KMT2KMPass1.java,v 1.17 2007-09-13 09:04:49 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : EPL
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -73,8 +74,8 @@ public class KMT2KMPass1 extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMPass1(KermetaUnit builder, LoadingContext context, List<RequireEntry> requireEntries) {
-		super(builder, context);
+	public KMT2KMPass1(KermetaUnit builder, LoadingContext context, List<RequireEntry> requireEntries, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 		this.requireEntries = requireEntries;
 	}
 	
@@ -87,6 +88,10 @@ public class KMT2KMPass1 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ImportStmt)
 	 */
 	public boolean beginVisit(ImportStmt importStmt) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		StringLiteralOrQualifiedID node = importStmt.getUri();
 		String uriRequire = "";
 		boolean error = false;
@@ -194,6 +199,10 @@ public class KMT2KMPass1 extends KMT2KMPass {
 	}
 	
 	public boolean beginVisit(Filter filter) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		String filterText = filter.getString_literal().getText();
 		// trim leading and trailing "
 		if ( filterText.length() > 2)
@@ -217,6 +226,10 @@ public class KMT2KMPass1 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.UsingStmt)
 	 */
 	public boolean beginVisit(UsingStmt usingStmt) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		Using using = builder.addUsing(qualifiedIDAsString(usingStmt.getName()));
 		builder.storeTrace(using, usingStmt);
 		existUsing = true;
@@ -228,6 +241,10 @@ public class KMT2KMPass1 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(TopLevelDecls decls)
 	{
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		if (decls.getChildCount()== 0 && existUsing == true)
 			builder.error(
 			"PASS 1 : Either 'using' declaration is misplaced (should be put after 'require'), " +

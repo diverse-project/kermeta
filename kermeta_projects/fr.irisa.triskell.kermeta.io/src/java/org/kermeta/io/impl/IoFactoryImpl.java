@@ -2,13 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.6 2007-08-02 13:09:01 dvojtise Exp $
+ * $Id: IoFactoryImpl.java,v 1.7 2007-09-13 09:04:50 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -109,6 +110,8 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 				return createANTLRExceptionFromString(eDataType, initialValue);
 			case IoPackage.IO_PLUGIN:
 				return createIOPluginFromString(eDataType, initialValue);
+			case IoPackage.IPROGRESS_MONITOR:
+				return createIProgressMonitorFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -134,6 +137,8 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 				return convertANTLRExceptionToString(eDataType, instanceValue);
 			case IoPackage.IO_PLUGIN:
 				return convertIOPluginToString(eDataType, instanceValue);
+			case IoPackage.IPROGRESS_MONITOR:
+				return convertIProgressMonitorToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -314,6 +319,24 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	 * @generated
 	 */
 	public String convertIOPluginToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IProgressMonitor createIProgressMonitorFromString(EDataType eDataType, String initialValue) {
+		return (IProgressMonitor)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertIProgressMonitorToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

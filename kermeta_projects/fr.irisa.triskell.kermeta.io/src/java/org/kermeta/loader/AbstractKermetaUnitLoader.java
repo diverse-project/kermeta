@@ -1,6 +1,6 @@
 
 
-/*$Id: AbstractKermetaUnitLoader.java,v 1.7 2007-08-07 15:05:46 ftanguy Exp $
+/*$Id: AbstractKermetaUnitLoader.java,v 1.8 2007-09-13 09:04:50 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitLoader.java
 * License : EPL
@@ -15,6 +15,7 @@ package org.kermeta.loader;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
@@ -45,6 +46,11 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 
+	protected IProgressMonitor monitor;
+	
+	protected AbstractKermetaUnitLoader(IProgressMonitor monitor) {
+		this.monitor = monitor;
+	}
 	
 	public void constructAspectsListsForAll(KermetaUnit kermetaUnit) {
 		

@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.14 2007-08-09 15:55:16 dvojtise Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.15 2007-09-13 09:04:33 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
  * License    : GPL
@@ -31,6 +31,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -142,7 +143,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		inputFile = inputfile;
 		// Load the KermetaUnit for the given file (only needed to get the rootPackage :} of the km(t) file and
 		// the list of its nested packages) 
-		kmunit = IOPlugin.getDefault().loadKermetaUnit(inputFile);
+		kmunit = IOPlugin.getDefault().loadKermetaUnit(inputFile, new NullProgressMonitor());
 	}
 	
 	/** Pretty prints the file given as input in KM2HTMLPrettyPrinter constructor and

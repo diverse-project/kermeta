@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass.java,v 1.4 2007-08-02 16:47:27 dvojtise Exp $
+/*$Id: Ecore2KMPass.java,v 1.5 2007-09-13 09:04:49 ftanguy Exp $
 * Project : io
 * File : 	Ecore2KMPass.java
 * License : EPL
@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -73,10 +74,13 @@ public class Ecore2KMPass extends EcoreVisitor {
 	
 	protected Ecore2KMDatas datas = null;
 	
-	public Ecore2KMPass(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled) {
+	protected IProgressMonitor monitor;
+	
+	public Ecore2KMPass(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, IProgressMonitor monitor) {
 		this.kermetaUnit = kermetaUnit;
 		this.datas = datas;
 		this.isQuickFixEnabled = isQuickFixEnabled;
+		this.monitor = monitor;
 	}
 
 	protected boolean isQuickFixEnabled = false;

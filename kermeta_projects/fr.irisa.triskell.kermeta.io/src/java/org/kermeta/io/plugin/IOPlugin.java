@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.14 2007-09-04 08:29:33 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.15 2007-09-13 09:04:52 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -18,6 +18,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
@@ -129,27 +131,27 @@ public class IOPlugin extends AbstractUIPlugin {
 					for ( KermetaUnit kermetaUnit : KermetaUnitHelper.getAllImportedKermetaUnits(framework) )
 						kermetaUnit.setFramework( true );
 					
-					KermetaTypeChecker typechecker = new KermetaTypeChecker( framework );
+					KermetaTypeChecker typechecker = new KermetaTypeChecker( framework, new NullProgressMonitor() );
 					typechecker.checkUnit();
 
 					if ( ! framework.isErrored() ) {
-						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( framework );
+						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( framework, new NullProgressMonitor() );
 						constraintchecker.checkUnit();
 					}				
 
 					// Loading Ecore
 					ecore = loadEcore( ECORE_URI );
 										
-					typechecker = new KermetaTypeChecker( ecore );
+					typechecker = new KermetaTypeChecker( ecore, new NullProgressMonitor() );
 					typechecker.checkUnit();
 
 					if ( ! ecore.isErrored() ) {
-						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( ecore );
+						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( ecore, new NullProgressMonitor() );
 						constraintchecker.checkUnit();
 					}
 
 					// Loading the framework as ecore
-					frameworkAsEcore = loadKermetaUnit( FRAMEWORK_ECORE_URI );
+					/*frameworkAsEcore = loadKermetaUnit( FRAMEWORK_ECORE_URI );
 					
 					typechecker = new KermetaTypeChecker( frameworkAsEcore );
 					typechecker.checkUnit();
@@ -157,7 +159,7 @@ public class IOPlugin extends AbstractUIPlugin {
 					if ( ! frameworkAsEcore.isErrored() ) {
 						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( frameworkAsEcore );
 						constraintchecker.checkUnit();
-					}
+					}*/
 					
 				} catch (URIMalformedException e) {
 					e.printStackTrace();
@@ -227,13 +229,13 @@ public class IOPlugin extends AbstractUIPlugin {
 		return kermetaUnit;
 	}
 	
-	public KermetaUnit loadKermetaUnit( String uri ) throws KermetaIOFileNotFoundException, URIMalformedException {
-		return loadKermetaUnit(uri, null);
+	public KermetaUnit loadKermetaUnit( String uri, IProgressMonitor monitor ) throws KermetaIOFileNotFoundException, URIMalformedException {
+		return loadKermetaUnit(uri, null, monitor);
 	}
 	
-	public KermetaUnit loadKermetaUnit(IFile file) throws KermetaIOFileNotFoundException, URIMalformedException {
+	public KermetaUnit loadKermetaUnit(IFile file, IProgressMonitor monitor) throws KermetaIOFileNotFoundException, URIMalformedException {
 		String uri = "platform:/resource" + file.getFullPath().toString();
-		return loadKermetaUnit( uri );
+		return loadKermetaUnit( uri, monitor );
 	}
 	
 	/**
@@ -247,7 +249,7 @@ public class IOPlugin extends AbstractUIPlugin {
 	 * @throws KermetaIOFileNotFoundException
 	 * @throws URIMalformedException
 	 */
-	public KermetaUnit loadKermetaUnit( String uri, String content ) throws KermetaIOFileNotFoundException, URIMalformedException {
+	public KermetaUnit loadKermetaUnit( String uri, String content, IProgressMonitor monitor ) throws KermetaIOFileNotFoundException, URIMalformedException {
 		KermetaUnit kermetaUnit = null;
 		synchronized ( IOPlugin.class ) {
 			IOPlugin.internalLog.debug( "loading " + uri);
@@ -267,27 +269,27 @@ public class IOPlugin extends AbstractUIPlugin {
 			
 			//KermetaUnit kermetaUnit = kermetaUnitHelper.loadFile(uri, content);
 			kermetaUnit = getKermetaUnit( uri );
-			storer.load( uri, content );
+			storer.load( uri, content, monitor );
 			IOPlugin.internalLog.debug( "loading " + uri + " done");
 		}
 		return kermetaUnit;
 
 	}
 	
-	public KermetaUnit loadKermetaUnit(IFile file, String content) throws KermetaIOFileNotFoundException, URIMalformedException {
+	public KermetaUnit loadKermetaUnit(IFile file, String content, IProgressMonitor monitor) throws KermetaIOFileNotFoundException, URIMalformedException {
 		String uri = "platform:/resource" + file.getFullPath().toString();
-		return loadKermetaUnit( uri, content );
+		return loadKermetaUnit( uri, content, monitor );
 	}
 	
 	private KermetaUnit loadFramework( String uri ) throws URIMalformedException {
 		KermetaUnit kermetaUnit = getKermetaUnit( uri );
-		storer.load( uri );
+		storer.load( uri, new NullProgressMonitor() );
 		return kermetaUnit;
 	}
 	
 	private KermetaUnit loadEcore( String uri ) throws URIMalformedException {
 		KermetaUnit kermetaUnit = getKermetaUnit( uri );
-		storer.load( uri );
+		storer.load( uri, new NullProgressMonitor() );
 		return kermetaUnit;
 	}
 	

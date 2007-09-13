@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.3 2007-08-02 07:01:09 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.4 2007-09-13 09:04:44 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.AbstractKermetaUnitLoader;
@@ -44,10 +45,12 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	
 	private String content = null;
 
-	public KMTUnitLoader() {
+	public KMTUnitLoader(IProgressMonitor monitor) {
+		super(monitor);
 	}
 	
-	public KMTUnitLoader(String content) {
+	public KMTUnitLoader(String content, IProgressMonitor monitor) {
+		super(monitor);
 		this.content = content;
 	}
 	
@@ -144,13 +147,13 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			KermetaUnit currentUnit = iterator.next();
 			
 			if ( currentUnit.getUri().matches(".+\\.km") ) {
-				KMUnitLoader loader = new KMUnitLoader();
+				KMUnitLoader loader = new KMUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else if ( currentUnit.getUri().matches(".+\\.ecore") ){
-				Ecore2KMLoader loader = new Ecore2KMLoader();
+				Ecore2KMLoader loader = new Ecore2KMLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else if ( currentUnit.getUri().matches(".+\\.jar") ) {
-				JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader();
+				JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );	
 			} else if ( currentUnit.getUri().matches(".+\\.kmt") ) {
 				KMTBuildingState currentState = (KMTBuildingState) currentUnit.getBuildingState();

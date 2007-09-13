@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass6.java,v 1.7 2007-09-04 08:29:32 ftanguy Exp $
+/* $Id: Ecore2KMPass6.java,v 1.8 2007-09-13 09:04:49 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -20,6 +20,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
@@ -54,8 +55,8 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 	public Ecore2KMPass6(KermetaUnit kermetaUnit, 
 			             Ecore2KMDatas datas, 
 						 boolean isQuickFixEnabled, 
-						 Hashtable<Operation, ArrayList<Operation>> opTable) {
-		super(kermetaUnit, datas, isQuickFixEnabled);
+						 Hashtable<Operation, ArrayList<Operation>> opTable, IProgressMonitor monitor) {
+		super(kermetaUnit, datas, isQuickFixEnabled, monitor);
 		this.opTable = opTable;
 	}
 	
@@ -78,8 +79,6 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EClass)
 	 */
 	public Object visit(EClass node) {
-		if ( datas == null )
-			System.out.println();
 		currentClassDefinition = (ClassDefinition) datas.getTypeDefinition(node);
 		isClassTypeOwner = true;
 		

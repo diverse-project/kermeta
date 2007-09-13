@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitValidator.java,v 1.3 2007-08-07 13:35:21 ftanguy Exp $
+ * $Id: KermetaUnitValidator.java,v 1.4 2007-09-13 09:04:49 ftanguy Exp $
  */
 package org.kermeta.io.validation;
 
@@ -46,4 +46,6 @@ public interface KermetaUnitValidator {
 	boolean validateConstraintChecked(boolean value);
 
 	boolean validateAspects(Map<TypeDefinition, TypeDefinition> value);
+
+	boolean validateIsBeingTypechecked(boolean value);
 }

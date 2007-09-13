@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.22 2007-08-09 14:57:48 dvojtise Exp $
+/* $Id: Ecore2KMPass2.java,v 1.23 2007-09-13 09:04:49 ftanguy Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -10,6 +10,7 @@
 
 package fr.irisa.triskell.kermeta.loader.ecore;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -39,8 +40,8 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
  */
 public class Ecore2KMPass2 extends Ecore2KMPass {
 
-	public Ecore2KMPass2(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled) {
-		super(kermetaUnit, datas, isQuickFixEnabled);
+	public Ecore2KMPass2(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, IProgressMonitor monitor) {
+		super(kermetaUnit, datas, isQuickFixEnabled, monitor);
 	}
 	
 	/** Visit EPackage : visit the owned classifiers and the sub packages */

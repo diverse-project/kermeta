@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.17 2007-09-04 08:42:21 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.18 2007-09-13 09:04:50 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -209,8 +210,8 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void load(String uri) {
-		load(uri, null);
+	public void load(String uri, IProgressMonitor monitor) {
+		load(uri, null, monitor);
 	}
 
 	/**
@@ -270,29 +271,29 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void load(String uri, String content) {
+	public void load(String uri, String content, IProgressMonitor monitor) {
 		
 		int index = uri.lastIndexOf(".");
 		String extension = uri.substring(index+1);
 		
 		if ( extension.equals("kmt") ) {
 		
-			KMTUnitLoader loader = new KMTUnitLoader(content);
+			KMTUnitLoader loader = new KMTUnitLoader(content, monitor);
 			loader.load(uri);
 		
 		} else if ( extension.equals("km") ) {
 			
-			KMUnitLoader loader = new KMUnitLoader();
+			KMUnitLoader loader = new KMUnitLoader(monitor);
 			loader.load(uri);
 			
 		} else if ( extension.equals("ecore") || uri.equals(IOPlugin.ECORE_URI) ) {
 			
-			Ecore2KMLoader loader = new Ecore2KMLoader();
+			Ecore2KMLoader loader = new Ecore2KMLoader(monitor);
 			loader.load(uri, true);
 			
 		} else if ( extension.equals("jar") ) {
 		
-			JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader();
+			JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader(monitor);
 			loader.load(uri);
 		
 		} else if ( uri.matches("http://.+") ) {

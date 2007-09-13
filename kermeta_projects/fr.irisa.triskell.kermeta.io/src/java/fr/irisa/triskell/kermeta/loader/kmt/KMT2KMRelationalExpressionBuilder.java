@@ -1,4 +1,4 @@
-/* $Id: KMT2KMRelationalExpressionBuilder.java,v 1.7 2007-07-24 13:46:45 ftanguy Exp $
+/* $Id: KMT2KMRelationalExpressionBuilder.java,v 1.8 2007-09-13 09:04:49 ftanguy Exp $
  * Licence : EPL
  * Copyright : IRISA / INRIA / University of rennes 1
  * Created on 6 f�vr. 2005
@@ -9,6 +9,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.util.Hashtable;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -31,9 +32,10 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
 public class KMT2KMRelationalExpressionBuilder extends KMT2KMPass {
 
 	
-	public static Expression process(LoadingContext context, RelationalExpression node, KermetaUnit builder) {
-		if (node == null) return null;
-		KMT2KMRelationalExpressionBuilder visitor = new KMT2KMRelationalExpressionBuilder(builder, context);
+	public static Expression process(LoadingContext context, RelationalExpression node, KermetaUnit builder, IProgressMonitor monitor) {
+		if (node == null) 
+			return null;
+		KMT2KMRelationalExpressionBuilder visitor = new KMT2KMRelationalExpressionBuilder(builder, context, monitor);
 		node.accept(visitor);
 		return visitor.result;
 	}
@@ -56,8 +58,8 @@ public class KMT2KMRelationalExpressionBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMRelationalExpressionBuilder(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMRelationalExpressionBuilder(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 	}
 	
 	public boolean beginVisit(RelationalExpression node) {
@@ -65,14 +67,14 @@ public class KMT2KMRelationalExpressionBuilder extends KMT2KMPass {
 		for(int i=0; i< children.length; i++) {
 			if (children[i] instanceof AdditiveExpression) {
 				if (operator == null) {
-					result = KMT2KMAdditiveExpressionBuilder.process(context, (AdditiveExpression)children[i], builder);
+					result = KMT2KMAdditiveExpressionBuilder.process(context, (AdditiveExpression)children[i], builder, monitor);
 				}
 				else {
 					CallFeature call = BehaviorFactory.eINSTANCE.createCallFeature();
 					builder.storeTrace(call,operator);
 					call.setName((String)operators.get(operator.getText()));
 					call.setTarget(result);
-					call.getParameters().add(KMT2KMAdditiveExpressionBuilder.process(context, (AdditiveExpression)children[i], builder));
+					call.getParameters().add(KMT2KMAdditiveExpressionBuilder.process(context, (AdditiveExpression)children[i], builder, monitor));
 					result = call;
 				}
 			}

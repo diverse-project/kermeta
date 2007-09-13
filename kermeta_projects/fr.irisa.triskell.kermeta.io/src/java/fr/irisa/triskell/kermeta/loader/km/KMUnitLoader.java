@@ -1,6 +1,6 @@
 
 
-/*$Id: KMUnitLoader.java,v 1.7 2007-08-07 13:35:21 ftanguy Exp $
+/*$Id: KMUnitLoader.java,v 1.8 2007-09-13 09:04:51 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL
@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -44,6 +45,10 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMUnitLoader");
 	
 	private Hashtable <String, KermetaUnit> kermetaUnits = new Hashtable <String, KermetaUnit> ();
+	
+	public KMUnitLoader(IProgressMonitor monitor) {
+		super(monitor);
+	}
 	
 	@Override
 	public KermetaUnit load(String uri) {

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.19 2007-09-04 08:29:33 ftanguy Exp $
+/* $Id: KMT2KMPass6.java,v 1.20 2007-09-13 09:04:49 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -19,6 +19,7 @@ import java.util.Iterator;
 
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -75,8 +76,8 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	/**
 	 * 
 	 */
-	public KMT2KMPass6(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMPass6(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 		//System.out.println("Pass 6");
 		// TODO Auto-generated constructor stub
 	}
@@ -85,6 +86,10 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ClassDecl)
 	 */
 	public boolean beginVisit(ClassDecl classDecl) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		context.current_class = (ClassDefinition)builder.getModelElementByNode(classDecl);
 		currentClassIsAnAspect = KermetaASTHelper.isAnAspect(classDecl);
 		
@@ -144,6 +149,10 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Operation)
 	 */
 	public boolean beginVisit(Operation operation) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		context.current_operation = (fr.irisa.triskell.kermeta.language.structure.Operation)builder.getModelElementByNode(operation);
 		context.pushContext();
 		// add type variable
@@ -163,6 +172,10 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#endVisit(metacore.ast.ClassDecl)
 	 */
 	public void endVisit(ClassDecl classDecl) {
+		
+		if ( monitor.isCanceled() )
+			return;
+		
 		context.popContext();
 		super.endVisit(classDecl);
 	}
@@ -171,6 +184,10 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#endVisit(metacore.ast.Operation)
 	 */
 	public void endVisit(Operation operation) {
+		
+		if ( monitor.isCanceled() )
+			return;
+		
 		context.popContext();
 		super.endVisit(operation);
 	}
@@ -195,6 +212,10 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.OperationExpressionBody)
 	 */
 	public boolean beginVisit(OperationExpressionBody operationExpressionBody) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		internalLog.debug("checking operation " +context.current_class.getName()+"." + context.current_operation.getName() +
 				" from " +builder.getUri());
 		if(currentClassIsAnAspect){
@@ -240,10 +261,10 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		if ( qname.equals("update") )
 			System.out.println();
 		if (operation_bodies.containsKey(qname)) {
-			context.current_operation.setBody(ExpressionParser.parse(context, builder, (String)operation_bodies.get(qname)));
+			context.current_operation.setBody(ExpressionParser.parse(context, builder, (String)operation_bodies.get(qname), monitor));
 		}
 		else {
-			context.current_operation.setBody(KMT2KMExperessionBuilder.process(context, operationExpressionBody.getFExpression(), builder));
+			context.current_operation.setBody(KMT2KMExperessionBuilder.process(context, operationExpressionBody.getFExpression(), builder, monitor));
 		}
 		context.current_operation.setIsAbstract(false);
 		// if the operation has a tag overloadble true, then add the info in the annotation
@@ -261,9 +282,12 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(Invariant invariant) {
 		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		Constraint c = StructureFactory.eINSTANCE.createConstraint();
 		c.setStereotype(ConstraintType.INV_LITERAL);
-		c.setBody(KMT2KMExperessionBuilder.process(context, invariant.getBody(), builder));
+		c.setBody(KMT2KMExperessionBuilder.process(context, invariant.getBody(), builder, monitor));
 		c.setName(getTextForID(invariant.getName()));
 		
 		builder.storeTrace(c, invariant);
@@ -278,9 +302,12 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(Precondition pre) {
 		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		Constraint c = StructureFactory.eINSTANCE.createConstraint();
 		c.setStereotype(ConstraintType.PRE_LITERAL);
-		c.setBody(KMT2KMExperessionBuilder.process(context, pre.getBody(), builder));
+		c.setBody(KMT2KMExperessionBuilder.process(context, pre.getBody(), builder, monitor));
 		c.setName(getTextForID(pre.getName()));
 		
 		builder.storeTrace(c, pre);
@@ -295,9 +322,12 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(Postcondition post) {
 		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		Constraint c = StructureFactory.eINSTANCE.createConstraint();
 		c.setStereotype(ConstraintType.POST_LITERAL);
-		c.setBody(KMT2KMExperessionBuilder.process(context, post.getBody(), builder));
+		c.setBody(KMT2KMExperessionBuilder.process(context, post.getBody(), builder, monitor));
 		c.setName(getTextForID(post.getName()));
 		
 		builder.storeTrace(c, post);
@@ -311,13 +341,17 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.GetterBody)
 	 */
 	public boolean beginVisit(GetterBody getterBody) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		if(TagHelper.findTagFromNameAndValue(context.current_property, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true") != null) {			
 			// if the previous operation is tagged with overloadable = true then we can replace it by this one
 			internalLog.debug("overloading derived property " +context.current_class.getName()+"." + context.current_property.getName() +
 					" with version from " +builder.getUri());
 		}
 		if (context.current_property.isIsDerived()) {
-			Expression e =KMT2KMExperessionBuilder.process(context, getterBody.getGetterbody(), builder);
+			Expression e =KMT2KMExperessionBuilder.process(context, getterBody.getGetterbody(), builder, monitor);
 			//builder.current_property.setGetterBody();
 			ClassDefinitionHelper.getPropertyByName(context.current_class, context.current_property.getName()).setGetterBody(e);
 		}
@@ -332,10 +366,14 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.SetterBody)
 	 */
 	public boolean beginVisit(SetterBody setterBody) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+		
 		if (context.current_property.isIsDerived() && !context.current_property.isIsReadOnly()) {
 			context.pushContext();
 			//builder.current_property.setSetterBody(KMT2KMExperessionBuilder.process(setterBody.getSetterbody(), builder));
-		    Expression e =KMT2KMExperessionBuilder.process(context, setterBody.getSetterbody(), builder);
+		    Expression e =KMT2KMExperessionBuilder.process(context, setterBody.getSetterbody(), builder, monitor);
 			ClassDefinitionHelper.getPropertyByName(context.current_class, context.current_property.getName()).setSetterBody(e);
 
 			context.popContext();

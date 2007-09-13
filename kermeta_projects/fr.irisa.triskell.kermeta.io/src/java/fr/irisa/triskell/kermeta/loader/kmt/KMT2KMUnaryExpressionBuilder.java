@@ -7,6 +7,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.util.Hashtable;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -26,9 +27,9 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
 public class KMT2KMUnaryExpressionBuilder extends KMT2KMPass {
 
 	
-	public static Expression process(LoadingContext context, UnaryExpression node, KermetaUnit builder) {
+	public static Expression process(LoadingContext context, UnaryExpression node, KermetaUnit builder, IProgressMonitor monitor) {
 		if (node == null) return null;
-		KMT2KMUnaryExpressionBuilder visitor = new KMT2KMUnaryExpressionBuilder(builder, context);
+		KMT2KMUnaryExpressionBuilder visitor = new KMT2KMUnaryExpressionBuilder(builder, context, monitor);
 		node.accept(visitor);
 		return visitor.result;
 	}
@@ -46,8 +47,8 @@ public class KMT2KMUnaryExpressionBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMUnaryExpressionBuilder(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMUnaryExpressionBuilder(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -55,7 +56,7 @@ public class KMT2KMUnaryExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.UnaryExpression)
 	 */
 	public boolean beginVisit(UnaryExpression unaryExpression) {
-		result = KMT2KMPostfixExpressionBuilder.process(context, unaryExpression.getPostfixExp(), builder);
+		result = KMT2KMPostfixExpressionBuilder.process(context, unaryExpression.getPostfixExp(), builder, monitor);
 		if (unaryExpression.getUnaryOp() != null) {
 			CallFeature call = BehaviorFactory.eINSTANCE.createCallFeature();
 			builder.storeTrace(call,unaryExpression.getUnaryOp());

@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.1 2007-09-10 08:35:10 cfaucher Exp $
+/* $Id: JunitTestSuite.java,v 1.2 2007-09-13 09:03:04 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -20,6 +20,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KMTOutputBuilder;
@@ -374,7 +375,7 @@ public void testWithFile(String dir, String file) throws Exception {
 	
 	String fileURI = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
 	// phase 1 : test that it load correctly
-	KermetaUnit builder = ioPlugin.loadKermetaUnit( fileURI );
+	KermetaUnit builder = ioPlugin.loadKermetaUnit( fileURI, new NullProgressMonitor() );
 	
 	if ( builder.isErrored() )
 		assertTrue( KermetaUnitHelper.getErrorsAsString(builder), false);
@@ -410,7 +411,7 @@ public void testWithFile(String dir, String file) throws Exception {
 			ioPlugin.unload(TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file);
 			// phase 3 bis, check that the prettyprinted version can be parsed 
 			// try to re-parse the pretty-printed version
-			KermetaUnit builder2 = ioPlugin.loadKermetaUnit(ppfile);
+			KermetaUnit builder2 = ioPlugin.loadKermetaUnit(ppfile, new NullProgressMonitor());
 			if ( builder2.isErrored() )
 				assertTrue("RE-PARSE : " + KermetaUnitHelper.getErrorsAsString(builder2), false);
 

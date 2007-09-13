@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.49 2007-09-04 08:29:31 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.50 2007-09-13 09:04:51 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -247,7 +247,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 					Type expected = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)required_params[i]).type, binding));
 					
 					if (!provided.isSubTypeOf(expected)) {
-						//provided.isSubTypeOf(expected);
+						provided.isSubTypeOf(expected);
 						//new ClassConformanceChecker( (ClassDefinition) ((Class) provided.getFType()).getTypeDefinition() );
 						//KermetaUnitHelper.getKermetaUnitFromObject( ((Class)((Class) expected.getFType()).getTypeParamBinding().get(0).getType()).getTypeDefinition() );
 						//KermetaUnitHelper.getKermetaUnitFromObject( ((Class)((Class) provided.getFType()).getTypeParamBinding().get(0).getType()).getTypeDefinition() );
@@ -645,6 +645,9 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	}
 	
 	public Object visitCallFeature(CallFeature expression) {	
+		if ( expression.getName().equals("and") )
+			System.out.println();
+		
 		// visit target expression	
 		if (expression.getTarget() != null) 
 			this.accept(expression.getTarget());
@@ -685,7 +688,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		}
 		
 		if (result == null) {
-		    
+		    if ( target == null )
+		    	System.out.println();
 		    // It the target type is an enumeration, the object should be an enumeration literal
 		    if (expression.getTarget() != null && target.getFType() instanceof Enumeration) {
 		        target = TypeCheckerContext.EnumLitType;

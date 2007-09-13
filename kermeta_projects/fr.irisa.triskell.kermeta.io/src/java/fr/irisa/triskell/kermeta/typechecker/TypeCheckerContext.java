@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.21 2007-07-20 15:08:03 ftanguy Exp $
+/* $Id: TypeCheckerContext.java,v 1.22 2007-09-13 09:04:51 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -19,6 +19,7 @@ import java.util.Stack;
 
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
@@ -50,7 +51,11 @@ public class TypeCheckerContext {
 
 	final static private Logger internalLog = LogConfigurationHelper.getLogger("TypeCheckerContext");
 	
-	public static void initializeTypeChecker(KermetaUnit std_lib) {
+	public static void initializeTypeChecker(KermetaUnit std_lib, IProgressMonitor monitor) {
+	
+		if ( monitor.isCanceled() )
+			return;
+		
 	    objectAsType = null;
 	    robjectAsType = null;
 		classNew = null;

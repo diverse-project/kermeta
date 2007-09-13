@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.21 2007-07-24 13:47:19 ftanguy Exp $
+/* $Id: KermetaRunHelper.java,v 1.22 2007-09-13 09:03:14 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: EPL
@@ -12,6 +12,7 @@ package fr.irisa.triskell.kermeta.runner.launching;
 import java.util.ArrayList;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
@@ -50,7 +51,7 @@ public class KermetaRunHelper {
     	//KermetaUnitFactory.getDefaultLoader().unloadAll();
         KermetaUnit result = null;
     	try {
-        	result = IOPlugin.getDefault().loadKermetaUnit( uri );
+        	result = IOPlugin.getDefault().loadKermetaUnit( uri, new NullProgressMonitor() );
 	        result.load();	        
         }
         catch(Throwable e) {

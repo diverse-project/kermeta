@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.1 2007-09-10 08:35:20 cfaucher Exp $
+/* $Id: JunitTestSuite.java,v 1.2 2007-09-13 09:03:04 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -19,6 +19,7 @@ package kermeta_io.typechecker_test;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
@@ -324,13 +325,13 @@ testinvalidFile("test/io/typechecher_tests/invalid","test_clone.kmt" );
 				
 		String path = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
 		
-		KermetaUnit kermetaUnit = IOPlugin.getDefault().loadKermetaUnit(path);
+		KermetaUnit kermetaUnit = IOPlugin.getDefault().loadKermetaUnit(path, new NullProgressMonitor());
 		
 		if ( kermetaUnit.isErrored() )
 			//assertTrue("kermeta unit has errors during loading", false);
 			assertTrue( KermetaUnitHelper.getErrorsAsString(kermetaUnit), false );
 			
-		KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit );
+		KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
 		typeChecker.checkUnit();
 	
 		if ( kermetaUnit.isErrored() )
@@ -344,10 +345,10 @@ testinvalidFile("test/io/typechecher_tests/invalid","test_clone.kmt" );
 	/** Testing invalid file means that we are looking for one error per operation of the given file */
 	public void testinvalidFile(String dir, String file) throws Exception {
 
-		KermetaUnit kermetaUnit = IOPlugin.getDefault().loadKermetaUnit( TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file);
+		KermetaUnit kermetaUnit = IOPlugin.getDefault().loadKermetaUnit( TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file, new NullProgressMonitor());
 		
 		if ( ! kermetaUnit.isErrored() ) {
-			KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit );
+			KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
 			typeChecker.checkUnit();
 
 			/*if ( ! kermetaUnit.isErrored() )

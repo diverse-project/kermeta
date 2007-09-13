@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.13 2007-08-23 07:19:08 jmottu Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.14 2007-09-13 09:04:52 ftanguy Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.KermetaUnit;
 
@@ -62,14 +63,17 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	
 	protected List messages; 
 
-	public KermetaConstraintChecker()
+	private IProgressMonitor monitor;
+	
+	/*public KermetaConstraintChecker()
 	{
 		messages = new ArrayList();
-	}
+	}*/
 	
-	public KermetaConstraintChecker(KermetaUnit kunit)
+	public KermetaConstraintChecker(KermetaUnit kunit, IProgressMonitor monitor)
 	{
 		builder = kunit;
+		this.monitor = monitor;
 	}
 	
 
@@ -83,15 +87,22 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
     		Iterator<TypeDefinition> it = TypeDefinitionSearcher.getInternalTypesDefinition(builder).iterator();
     		// Call the check constraint visitor on it!
     		while(it.hasNext()) {
+	    			
+    			if ( monitor.isCanceled() )
+    				return;
+    			
     			TypeDefinition td = it.next();
     			this.accept(td);
     		}
     		builder.setConstraintChecked(true);
     	}
+
+    	if ( monitor.isCanceled() )
+    		return;
     	
     	for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(builder) ) {
     		if ( ! importedUnit.isConstraintChecked() ) {
-    			KermetaConstraintChecker t = new KermetaConstraintChecker(importedUnit);
+    			KermetaConstraintChecker t = new KermetaConstraintChecker(importedUnit, monitor);
     			t.checkUnit();
     		}
     	}

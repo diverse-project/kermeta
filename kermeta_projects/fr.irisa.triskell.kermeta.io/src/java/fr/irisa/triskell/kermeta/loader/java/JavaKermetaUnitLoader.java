@@ -1,6 +1,6 @@
 
 
-/*$Id: JavaKermetaUnitLoader.java,v 1.4 2007-08-07 13:35:22 ftanguy Exp $
+/*$Id: JavaKermetaUnitLoader.java,v 1.5 2007-09-13 09:04:51 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	JavaKermetaUnitLoader.java
 * License : EPL
@@ -17,6 +17,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.kermeta.io.KermetaUnit;
@@ -39,6 +40,12 @@ public class JavaKermetaUnitLoader extends AbstractKermetaUnitLoader {
 	
     final static public Logger internalLog = LogConfigurationHelper.getLogger("JarKermetaUnitLoader");
 
+    
+    public JavaKermetaUnitLoader(IProgressMonitor monitor) {
+    	super(monitor);
+    }
+    
+    
 	public KermetaUnit load(String uri) {
 		try {
 			

@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.1 2007-09-10 08:35:10 cfaucher Exp $
+/* $Id: RunJunitFactory.java,v 1.2 2007-09-13 09:03:03 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -14,6 +14,7 @@ package fr.irisa.triskell.kermeta.launcher;
 
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
@@ -94,7 +95,7 @@ public class RunJunitFactory implements Test {
     	int index  = unit_uri.lastIndexOf("/");
     	String failedTestName = unit_uri.substring(index+1);
         try {
-			unit = IOPlugin.getDefault().loadKermetaUnit( unit_uri );
+			unit = IOPlugin.getDefault().loadKermetaUnit( unit_uri, new NullProgressMonitor() );
 		} catch (KermetaIOFileNotFoundException e1) {
 			e1.printStackTrace();
 			theTestCase = new FailedTestCase(failedTestName, e1);
@@ -107,7 +108,7 @@ public class RunJunitFactory implements Test {
     	
         try {
             
-        	KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
+        	KermetaTypeChecker typechecker = new KermetaTypeChecker( unit, new NullProgressMonitor() );
         	typechecker.checkUnit();
 
             if ( unit.isErrored() ) {
@@ -121,7 +122,7 @@ public class RunJunitFactory implements Test {
                 return theTestCase;
             }
             
-        	KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( unit );
+        	KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( unit, new NullProgressMonitor() );
         	constraintchecker.checkUnit();
         
             if ( unit.isErrored() ) {
@@ -319,13 +320,13 @@ public class RunJunitFactory implements Test {
 	public KermetaUnit getUnit() {
 		if(unit == null){
 			try {
-				unit = IOPlugin.getDefault().loadKermetaUnit( unit_uri );
+				unit = IOPlugin.getDefault().loadKermetaUnit( unit_uri, new NullProgressMonitor() );
 			} catch (KermetaIOFileNotFoundException e1) {
 				e1.printStackTrace();
 			} catch (URIMalformedException e) {
 				e.printStackTrace();
 			}
-			KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
+			KermetaTypeChecker typechecker = new KermetaTypeChecker( unit, new NullProgressMonitor() );
         	typechecker.checkUnit(); // make sure the types are correctly set
         	// we don't care about constraint checking since it has already be done before
 		}

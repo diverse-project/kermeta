@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.13 2007-08-27 12:27:33 cfaucher Exp $
+/* $Id: CompileFramework.java,v 1.14 2007-09-13 09:04:38 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.framework
 * File : CompileFramework.java
 * License : EPL
@@ -9,6 +9,8 @@
 */ 
 package fr.irisa.triskell.kermeta.dev.framework;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
@@ -36,6 +38,18 @@ public class CompileFramework {
 		IOPlugin ioPlugin = new IOPlugin();
     	
     	KermetaUnit kermetaUnit = null;
+    	try {
+			kermetaUnit = KermetaUnitChecker.check("platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt");
+		} catch (KermetaIOFileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (URIMalformedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	
+    	
+    /*	KermetaUnit kermetaUnit = null;
 		try {
 			kermetaUnit = IOPlugin.getDefault().loadKermetaUnit( "platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt" );
 		} catch (KermetaIOFileNotFoundException e) {
@@ -52,14 +66,14 @@ public class CompileFramework {
         }
         
         System.out.println("TYPE CHECKING...");
-        KermetaTypeChecker typechecker = new KermetaTypeChecker( kermetaUnit );
+        KermetaTypeChecker typechecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
         typechecker.checkUnit();
         
         if ( ! kermetaUnit.isErrored() ) {
         	System.out.println("Constraint CHECKING...");
         	KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( kermetaUnit );
         	constraintchecker.checkUnit();
-        }
+        }*/
         
         if ( kermetaUnit.isErrored() ) {
         	System.err.println("Standard library contains type errors:");

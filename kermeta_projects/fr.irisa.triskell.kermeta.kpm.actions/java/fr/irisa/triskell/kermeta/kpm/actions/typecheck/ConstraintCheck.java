@@ -1,6 +1,6 @@
 
 
-/*$Id: ConstraintCheck.java,v 1.1 2007-08-06 14:32:51 ftanguy Exp $
+/*$Id: ConstraintCheck.java,v 1.2 2007-09-13 09:03:45 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	ConstraintCheck.java
 * License : EPL
@@ -15,6 +15,7 @@ package fr.irisa.triskell.kermeta.kpm.actions.typecheck;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
@@ -60,7 +61,7 @@ public class ConstraintCheck implements IAction {
 			 * Checking the unit.
 			 * 
 			 */
-			KermetaConstraintChecker checker = new KermetaConstraintChecker(kermetaUnit);
+			KermetaConstraintChecker checker = new KermetaConstraintChecker(kermetaUnit, new NullProgressMonitor());
 			checker.checkUnit();
 			
 			/*

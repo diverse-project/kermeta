@@ -23,6 +23,7 @@ Package io <http://io>
     Attribute tracer : Tracer
     Attribute constraintChecked : EBoolean<<1..1>>
     Attribute aspects : EMap
+    Attribute isBeingTypechecked : EBoolean
     Operation load() : void
     Operation addInternalPackage(EString) : Package
     Operation findInternalpackage(EString) : Package
@@ -53,6 +54,7 @@ Package io <http://io>
     Operation parsingError(ANTLRException) : void
     Operation warning(EString, EJavaObject) : void
     Operation finalize() : void
+    Operation getUniquePackageQualifiedNames() : String<<0..*>>
 
   Class IBuildingState
 
@@ -60,9 +62,9 @@ Package io <http://io>
     Reference kermetaUnits : KermetaUnit<<0..*>>
     Operation get(EString) : KermetaUnit
     Operation find(EString) : KermetaUnit
-    Operation load(EString) : void
+    Operation load(EString, IProgressMonitor) : void
     Operation unload(EString) : void
-    Operation load(EString, EString) : void
+    Operation load(EString, EString, IProgressMonitor) : void
 
   Class PackageEntry
     Attribute qualifiedName : EString<<1..1>>
@@ -98,3 +100,5 @@ Package io <http://io>
   DataType ANTLRException <antlr.ANTLRException>
 
   DataType IOPlugin <org.kermeta.io.plugin.IOPlugin>
+
+  DataType IProgressMonitor <org.eclipse.core.runtime.IProgressMonitor>

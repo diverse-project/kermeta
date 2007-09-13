@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.12 2007-09-04 17:02:23 dvojtise Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.13 2007-09-13 09:04:50 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -16,6 +16,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.impl.KermetaUnitImpl;
 import org.kermeta.loader.LoadingContext;
@@ -105,7 +106,7 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
         }
 		
 		if (ast_exp != null)
-		    expression = KMT2KMExperessionBuilder.process(loadingContext, ast_exp, this);
+		    expression = KMT2KMExperessionBuilder.process(loadingContext, ast_exp, this, new NullProgressMonitor());
 		else {
 			error( "Expression Parse error." );
 		}
@@ -115,7 +116,7 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
        if ( expression == null || isErrored() )
            throw new Error("Internal error : cannot type check the expression to eval");
        if (checker == null) {
-           checker = new KermetaTypeChecker(this);
+           checker = new KermetaTypeChecker(this, new NullProgressMonitor() );
        }
        checker.getContext().init(this);
        

@@ -1,4 +1,4 @@
-/*$Id: RemoveDependentDependencies.java,v 1.1 2007-08-06 14:32:51 ftanguy Exp $
+/*$Id: RemoveDependentDependencies.java,v 1.2 2007-09-13 09:03:45 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	RemoveDependentDependencies.java
 * License : EPL
@@ -68,7 +68,7 @@ public class RemoveDependentDependencies implements IAction {
 			Iterator<Dependency> iterator = unit.getDependencies().iterator();
 			while ( iterator.hasNext() ) {
 				Dependency currentDependency = iterator.next();
-				if ( ! findImportedUnit(kermetaUnit, currentDependency.getTo()) )
+				if ( ! findImportedUnit(kermetaUnit, currentDependency.getTo(), monitor) )
 					entriesToRemove.add(currentDependency);
 			}
 			
@@ -94,7 +94,11 @@ public class RemoveDependentDependencies implements IAction {
 
 	}
 
-	private boolean findImportedUnit(KermetaUnit kermetaUnit, Unit unitToFind) {
+	private boolean findImportedUnit(KermetaUnit kermetaUnit, Unit unitToFind,IProgressMonitor monitor) {
+		
+		if ( monitor.isCanceled() )
+			return false;
+			
 		for ( KermetaUnit currentKermetaUnit : (List<KermetaUnit>) kermetaUnit.getImportedKermetaUnits() ) {
 			IFile currentFile = ResourceHelper.getIFile(currentKermetaUnit.getUri());
 			if ( (currentFile != null) && currentFile.getFullPath().toString().equals(unitToFind.getValue()) )

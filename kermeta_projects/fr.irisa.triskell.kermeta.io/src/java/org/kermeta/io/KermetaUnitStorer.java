@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorer.java,v 1.4 2007-08-02 13:09:01 dvojtise Exp $
+ * $Id: KermetaUnitStorer.java,v 1.5 2007-09-13 09:04:50 ftanguy Exp $
  */
 package org.kermeta.io;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -67,10 +68,10 @@ public interface KermetaUnitStorer extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model monitorDataType="org.kermeta.io.IProgressMonitor"
 	 * @generated
 	 */
-	void load(String uri);
+	void load(String uri, IProgressMonitor monitor);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,9 +84,9 @@ public interface KermetaUnitStorer extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model monitorDataType="org.kermeta.io.IProgressMonitor"
 	 * @generated
 	 */
-	void load(String uri, String content);
+	void load(String uri, String content, IProgressMonitor monitor);
 
 } // KermetaUnitStorer

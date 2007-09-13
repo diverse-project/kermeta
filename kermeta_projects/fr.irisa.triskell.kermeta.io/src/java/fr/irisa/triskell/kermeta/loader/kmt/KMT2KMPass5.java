@@ -4,6 +4,7 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
@@ -26,8 +27,8 @@ public class KMT2KMPass5 extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMPass5(KermetaUnit builder, LoadingContext context) {
-		super(builder, context);
+	public KMT2KMPass5(KermetaUnit builder, LoadingContext context, IProgressMonitor monitor) {
+		super(builder, context, monitor);
 	}
 	
 	/**

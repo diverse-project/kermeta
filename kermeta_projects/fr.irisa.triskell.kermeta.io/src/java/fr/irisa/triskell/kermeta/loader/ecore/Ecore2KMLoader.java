@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.12 2007-09-04 08:29:32 ftanguy Exp $
+/*$Id: Ecore2KMLoader.java,v 1.13 2007-09-13 09:04:49 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -53,6 +54,12 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 
+	
+	public Ecore2KMLoader(IProgressMonitor monitor) {
+		super(monitor);
+	}
+	
+	
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("EcoreLoader");
 	
 	/**
@@ -252,10 +259,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		while ( iterator.hasNext() ) {
 			KermetaUnit currentUnit = iterator.next();
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
-				KMTUnitLoader loader = new KMTUnitLoader();
+				KMTUnitLoader loader = new KMTUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} if ( currentUnit.getUri().matches(".+\\.km") ) {
-				KMUnitLoader loader = new KMUnitLoader();
+				KMUnitLoader loader = new KMUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else if (currentUnit.getUri().matches(".+\\.ecore") ) {	
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
@@ -289,16 +296,16 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			
 			KermetaUnit currentUnit = IOPlugin.getDefault().getKermetaUnit( currentURI );
 			if ( ! resources.containsKey(currentUnit) )
-				IOPlugin.getDefault().loadKermetaUnit( currentURI );
+				IOPlugin.getDefault().loadKermetaUnit( currentURI, monitor );
 			
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
 				KMTBuildingState currentState = (KMTBuildingState) currentUnit.getBuildingState();
 				if ( ! currentState.loaded )
-					IOPlugin.getDefault().loadKermetaUnit( currentUnit.getUri() );
+					IOPlugin.getDefault().loadKermetaUnit( currentUnit.getUri(), monitor );
 			} else if ( currentUnit.getUri().matches(".+\\.km") ) {
 				KmBuildingState currentState = (KmBuildingState) currentUnit.getBuildingState();
 				if ( ! currentState.loaded )
-					IOPlugin.getDefault().loadKermetaUnit( currentUnit.getUri() );
+					IOPlugin.getDefault().loadKermetaUnit( currentUnit.getUri(), monitor );
 			} else if (currentUnit.getUri().matches(".+\\.ecore") ) {
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
 				if ( ! currentState.loading )
@@ -316,7 +323,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	private void applyPass1(KermetaUnit kermetaUnit) {
 		Resource resource = resources.get(kermetaUnit);
 		EObject node = (EObject) resource.getContents().get(0);
-		Ecore2KMPass1 pass = new Ecore2KMPass1( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, resources.get(kermetaUnit) );
+		Ecore2KMPass1 pass = new Ecore2KMPass1( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, resources.get(kermetaUnit), monitor );
 		pass.accept( node );
 	}
 
@@ -335,10 +342,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			KermetaUnit currentUnit = iterator.next();
 			
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
-				KMTUnitLoader loader = new KMTUnitLoader();
+				KMTUnitLoader loader = new KMTUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else if ( currentUnit.getUri().matches(".+\\.km") ) {
-				KMUnitLoader loader = new KMUnitLoader();
+				KMUnitLoader loader = new KMUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else {
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
@@ -358,7 +365,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		Resource resource = resources.get(kermetaUnit);
 		if ( resource == null )
 			System.out.println();
-		Ecore2KMPass2 pass = new Ecore2KMPass2( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled );
+		Ecore2KMPass2 pass = new Ecore2KMPass2( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, monitor );
 		Iterator<EObject> iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
 			EObject node = iterator.next();
@@ -378,10 +385,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		while ( iterator.hasNext() ) {
 			KermetaUnit currentUnit = iterator.next();
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
-				KMTUnitLoader loader = new KMTUnitLoader();
+				KMTUnitLoader loader = new KMTUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else if ( currentUnit.getUri().matches(".+\\.km") ) {
-				KMUnitLoader loader = new KMUnitLoader();
+				KMUnitLoader loader = new KMUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else {	
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
@@ -418,10 +425,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		while ( iterator.hasNext() ) {
 			KermetaUnit currentUnit = iterator.next();
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
-				KMTUnitLoader loader = new KMTUnitLoader();
+				KMTUnitLoader loader = new KMTUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else if ( currentUnit.getUri().matches(".+\\.km") ) {
-				KMUnitLoader loader = new KMUnitLoader();
+				KMUnitLoader loader = new KMUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else {
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
@@ -439,7 +446,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	
 	private void applyPass3(KermetaUnit kermetaUnit) {
 		Resource resource = resources.get(kermetaUnit);
-		Ecore2KMPass3 pass = new Ecore2KMPass3( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled );
+		Ecore2KMPass3 pass = new Ecore2KMPass3( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, monitor );
 		Iterator<EObject> iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
 			EObject node = iterator.next();
@@ -461,10 +468,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		while ( iterator.hasNext() ) {
 			KermetaUnit currentUnit = iterator.next();
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
-				KMTUnitLoader loader = new KMTUnitLoader();
+				KMTUnitLoader loader = new KMTUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else if ( currentUnit.getUri().matches(".+\\.km") ) {
-				KMUnitLoader loader = new KMUnitLoader();
+				KMUnitLoader loader = new KMUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else  if ( currentUnit.getUri().matches(".+\\.ecore") ) {	
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
@@ -485,7 +492,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			new Hashtable <KermetaUnit, Hashtable<Operation, ArrayList<Operation>>> ();
 	
 	private void applyPass4(KermetaUnit kermetaUnit) {
-		Ecore2KMPass4 pass = new Ecore2KMPass4( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, getLoadingContext(kermetaUnit) );
+		Ecore2KMPass4 pass = new Ecore2KMPass4( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, getLoadingContext(kermetaUnit), monitor );
 		pass.convertUnit();
 		/*Iterator iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
@@ -510,10 +517,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			
 			KermetaUnit currentUnit = iterator.next();
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
-				KMTUnitLoader loader = new KMTUnitLoader();
+				KMTUnitLoader loader = new KMTUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else if ( currentUnit.getUri().matches(".+\\.km") ) {
-				KMUnitLoader loader = new KMUnitLoader();
+				KMUnitLoader loader = new KMUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else  if ( currentUnit.getUri().matches(".+\\.ecore") ) {	
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
@@ -532,7 +539,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	
 	private void applyPass5(KermetaUnit kermetaUnit) {
 		Resource resource = resources.get(kermetaUnit);
-		Ecore2KMPass5 pass = new Ecore2KMPass5( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, getLoadingContext(kermetaUnit) );
+		Ecore2KMPass5 pass = new Ecore2KMPass5( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, getLoadingContext(kermetaUnit), monitor );
 		Iterator<EObject> iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
 			EObject node = iterator.next();
@@ -557,10 +564,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			
 			KermetaUnit currentUnit = iterator.next();
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
-				KMTUnitLoader loader = new KMTUnitLoader();
+				KMTUnitLoader loader = new KMTUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else if ( currentUnit.getUri().matches(".+\\.km") ) {
-				KMUnitLoader loader = new KMUnitLoader();
+				KMUnitLoader loader = new KMUnitLoader(monitor);
 				loader.load( currentUnit.getUri() );
 			} else  if ( currentUnit.getUri().matches(".+\\.ecore") ) {	
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
@@ -579,7 +586,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	
 	private void applyPass6(KermetaUnit kermetaUnit) {
 		Resource resource = resources.get(kermetaUnit);
-		Ecore2KMPass6 pass = new Ecore2KMPass6( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, opTables.get(kermetaUnit) );
+		Ecore2KMPass6 pass = new Ecore2KMPass6( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, opTables.get(kermetaUnit), monitor );
 		Iterator<EObject> iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
 			EObject node = iterator.next();

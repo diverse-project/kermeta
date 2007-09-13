@@ -2,13 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.10 2007-08-09 14:59:16 dvojtise Exp $
+ * $Id: IoPackageImpl.java,v 1.11 2007-09-13 09:04:50 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -157,6 +158,13 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	private EDataType ioPluginEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType iProgressMonitorEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -371,6 +379,15 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 */
 	public EAttribute getKermetaUnit_Aspects() {
 		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKermetaUnit_IsBeingTypechecked() {
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -594,6 +611,15 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getIProgressMonitor() {
+		return iProgressMonitorEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public IoFactory getIoFactory() {
 		return (IoFactory)getEFactoryInstance();
 	}
@@ -633,6 +659,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__TRACER);
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__CONSTRAINT_CHECKED);
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__ASPECTS);
+		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__IS_BEING_TYPECHECKED);
 
 		iBuildingStateEClass = createEClass(IBUILDING_STATE);
 
@@ -668,6 +695,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		astNodeEDataType = createEDataType(AST_NODE);
 		antlrExceptionEDataType = createEDataType(ANTLR_EXCEPTION);
 		ioPluginEDataType = createEDataType(IO_PLUGIN);
+		iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
 	}
 
 	/**
@@ -730,6 +758,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		EGenericType g3 = createEGenericType(theStructurePackage.getTypeDefinition());
 		g2.getETypeArguments().add(g3);
 		initEAttribute(getKermetaUnit_Aspects(), g1, "aspects", null, 0, 1, KermetaUnit.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKermetaUnit_IsBeingTypechecked(), ecorePackage.getEBoolean(), "isBeingTypechecked", null, 0, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(kermetaUnitEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -829,6 +858,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		op = addEOperation(kermetaUnitStorerEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitStorerEClass, null, "unload", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -836,6 +866,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		op = addEOperation(kermetaUnitStorerEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "content", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(packageEntryEClass, PackageEntry.class, "PackageEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPackageEntry_QualifiedName(), ecorePackage.getEString(), "qualifiedName", null, 1, 1, PackageEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -869,6 +900,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		initEDataType(astNodeEDataType, ASTNode.class, "ASTNode", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(antlrExceptionEDataType, ANTLRException.class, "ANTLRException", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(ioPluginEDataType, IOPlugin.class, "IOPlugin", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

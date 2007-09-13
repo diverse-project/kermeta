@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.14 2007-09-04 08:29:33 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.15 2007-09-13 09:04:50 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -81,6 +81,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getTracer <em>Tracer</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isConstraintChecked <em>Constraint Checked</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getAspects <em>Aspects</em>}</li>
+ *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isIsBeingTypechecked <em>Is Being Typechecked</em>}</li>
  * </ul>
  * </p>
  *
@@ -288,6 +289,26 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @ordered
 	 */
 	protected Map<TypeDefinition, EList<TypeDefinition>> aspects;
+
+	/**
+	 * The default value of the '{@link #isIsBeingTypechecked() <em>Is Being Typechecked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsBeingTypechecked()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_BEING_TYPECHECKED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsBeingTypechecked() <em>Is Being Typechecked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsBeingTypechecked()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isBeingTypechecked = IS_BEING_TYPECHECKED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -632,6 +653,27 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		aspects = newAspects;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__ASPECTS, oldAspects, aspects));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isIsBeingTypechecked() {
+		return isBeingTypechecked;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsBeingTypechecked(boolean newIsBeingTypechecked) {
+		boolean oldIsBeingTypechecked = isBeingTypechecked;
+		isBeingTypechecked = newIsBeingTypechecked;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED, oldIsBeingTypechecked, isBeingTypechecked));
 	}
 
 	/**
@@ -1431,6 +1473,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return isConstraintChecked() ? Boolean.TRUE : Boolean.FALSE;
 			case IoPackage.KERMETA_UNIT__ASPECTS:
 				return getAspects();
+			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
+				return isIsBeingTypechecked() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1494,6 +1538,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__ASPECTS:
 				setAspects((Map<TypeDefinition, EList<TypeDefinition>>)newValue);
 				return;
+			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
+				setIsBeingTypechecked(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1551,6 +1598,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__ASPECTS:
 				setAspects((Map<TypeDefinition, EList<TypeDefinition>>)null);
 				return;
+			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
+				setIsBeingTypechecked(IS_BEING_TYPECHECKED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1593,6 +1643,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return constraintChecked != CONSTRAINT_CHECKED_EDEFAULT;
 			case IoPackage.KERMETA_UNIT__ASPECTS:
 				return aspects != null;
+			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
+				return isBeingTypechecked != IS_BEING_TYPECHECKED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1621,6 +1673,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		result.append(constraintChecked);
 		result.append(", aspects: ");
 		result.append(aspects);
+		result.append(", isBeingTypechecked: ");
+		result.append(isBeingTypechecked);
 		result.append(')');
 		return result.toString();
 	}
