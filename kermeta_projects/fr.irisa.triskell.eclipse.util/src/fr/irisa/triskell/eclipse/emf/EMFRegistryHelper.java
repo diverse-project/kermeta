@@ -1,4 +1,4 @@
-/* $Id: EMFRegistryHelper.java,v 1.6 2007-08-02 17:12:25 dvojtise Exp $
+/* $Id: EMFRegistryHelper.java,v 1.7 2007-09-13 16:25:33 dvojtise Exp $
  * Project   : Kermeta 
  * File      : EMFRegistryHelper.java
  * License   : EPL
@@ -16,6 +16,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 
@@ -128,6 +129,27 @@ public class EMFRegistryHelper {
 				}
 			}
 		}
+	}
+	
+    /** print the content of the EMF Registry */
+	public static String logEMFRegistryContent() {
+		String msg = "";
+		try {
+				
+			Boolean isFirst = true;
+	    	Iterator<String> it = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().iterator();
+	    	while(it.hasNext()) {
+	    		if(!isFirst) msg += " | ";
+	    		else isFirst = false;
+	    		// weird sometime it crashes here with a null pointer !
+	    		msg += it.next().toString();
+	    	}
+		}
+	    catch(Exception e){
+	    	
+	    	e.printStackTrace();
+	    }
+    	return msg;
 	}
 	
 }
