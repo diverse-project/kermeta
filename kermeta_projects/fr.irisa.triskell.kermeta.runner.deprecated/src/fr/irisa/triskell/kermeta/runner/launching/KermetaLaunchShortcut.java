@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.21 2007-09-13 09:03:14 ftanguy Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.22 2007-09-14 08:43:21 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -12,6 +12,7 @@ package fr.irisa.triskell.kermeta.runner.launching;
 import org.eclipse.jface.viewers.StructuredSelection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -102,7 +103,7 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
     		
 			while	(	index < tab.length	) 	{
 				// getting the launch configuration's attributes
-				java.util.Map attributes	=	tab[index].getAttributes();	
+				Map<?,?> attributes	=	tab[index].getAttributes();	
 				
 				// compatibility windows / linux
 				String comparedFileName = fileName.replace('\\', '/');
@@ -130,6 +131,19 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
     	
     	return existingLaunchConfigurations;
   
+    }
+    
+    private List<ILaunchConfiguration> findLaunchConfigurations(String projectName) throws CoreException {
+    	List<ILaunchConfiguration> existingLaunchConfigurations = new ArrayList<ILaunchConfiguration>();
+    	ILaunchConfiguration[]	tab	=	launchManager.getLaunchConfigurations(configurationType);
+    	for ( int i = 0; i < tab.length; i++ ) {
+			// getting the launch configuration's attributes
+			Map<?,?> attributes	=	tab[i].getAttributes();	
+			if( (attributes.get(KermetaLaunchConfiguration.KM_FILENAME)!= null)
+					&& (attributes.get(KermetaLaunchConfiguration.KM_PROJECTNAME).toString().equals(projectName)) )
+				existingLaunchConfigurations.add( tab[i] );
+    	}
+    	return existingLaunchConfigurations;
     }
     
     
@@ -256,7 +270,6 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 		
 		try {
 			unit = KermetaUnitChecker.check(ifile);
-			unit = IOPlugin.getDefault().loadKermetaUnit(selectedFile, new NullProgressMonitor());
 		} catch (KermetaIOFileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (URIMalformedException e1) {
@@ -293,45 +306,47 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 			String fileName = ifile.getFullPath().makeAbsolute().toOSString();
 			String projectName = ifile.getProject().getName();
 
-			if (className.equals("") || operationName.equals("")) {
-				// If there is no className or operationName, the
-				// launchConfiguration window is displayed
-				DebugUITools.openLaunchConfigurationDialogOnGroup(new Shell(),
-						new StructuredSelection(),
-						"org.eclipse.debug.ui.launchGroup.run");
-			} else {
+			List<ILaunchConfiguration> launchConfigurations = findLaunchConfigurations(projectName, fileName, className, operationName);
+			
+			if ( launchConfigurations.isEmpty() )
+				launchConfigurations = findLaunchConfigurations(projectName);
 
-				List<ILaunchConfiguration> launchConfigurations = findLaunchConfigurations(
-						projectName, fileName, className, operationName);
-				ILaunchConfiguration launchConfiguration = null;
-				
-				switch (launchConfigurations.size()) {
+			ILaunchConfiguration launchConfiguration = null;
+			
+			switch (launchConfigurations.size()) {
 
-				case 0:
+			case 0:
+					
+				if (className.equals("") || operationName.equals(""))
+					// If there is no className or operationName, the
+					// launchConfiguration window is displayed
+					DebugUITools.openLaunchConfigurationDialogOnGroup(new Shell(),
+							new StructuredSelection(),
+							"org.eclipse.debug.ui.launchGroup.run");
+				else {	
 					// If no launch configuration found, let us use a new one.
 					launchConfiguration = createConfiguration(projectName,
-							fileName, className, operationName);
+						fileName, className, operationName);
 					launchConfiguration(mode, launchConfiguration);
-					break;
-				case 1:
-					// If one launch configuration found, let us use it.
-					launchConfiguration = launchConfigurations.get(0);
-					launchConfiguration(mode, launchConfiguration);
-					break;
-				default:
-					// If more than one launch configuration found, let us ask the
-					// user which one to use.
-					// openLaunchConfigurationDialogOnGroup requires a string used
-					// as a group identifier.
-					// Here we use "org.eclipse.debug.ui.launchGroup.run" because
-					// ID_GROUP = "KermetaLaunchGroup" does not work.
-					DebugUITools.openLaunchConfigurationDialogOnGroup(
-							new Shell(), new StructuredSelection(
-									launchConfigurations.get(0)),
-							"org.eclipse.debug.ui.launchGroup.run");
-					break;
 				}
-
+				break;
+			case 1:
+				// If one launch configuration found, let us use it.
+				launchConfiguration = launchConfigurations.get(0);
+				launchConfiguration(mode, launchConfiguration);
+				break;
+			default:
+				// If more than one launch configuration found, let us ask the
+				// user which one to use.
+				// openLaunchConfigurationDialogOnGroup requires a string used
+				// as a group identifier.
+				// Here we use "org.eclipse.debug.ui.launchGroup.run" because
+				// ID_GROUP = "KermetaLaunchGroup" does not work.
+				DebugUITools.openLaunchConfigurationDialogOnGroup(
+						new Shell(), new StructuredSelection(
+								launchConfigurations.get(0)),
+						"org.eclipse.debug.ui.launchGroup.run");
+				break;
 			}
 			// Thrown by findEntryPoint
 		} catch (Exception e) {
