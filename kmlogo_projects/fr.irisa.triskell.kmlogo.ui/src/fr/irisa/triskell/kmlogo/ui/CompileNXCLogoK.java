@@ -6,24 +6,22 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
-import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
 
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 
 public class CompileNXCLogoK {
 
-	public static void run(String file, String out, KermetaIOStream console) throws KermetaIOFileNotFoundException, URIMalformedException {
+	public static void run(String file, String out, KermetaIOStream console) {
 		System.out.println("run FixModel");
-		KermetaUnit unit = IOPlugin.getDefault().loadKermetaUnit("platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoNXCCompiler.kmt", new NullProgressMonitor());
-		//unit.load();
-		//unit.typeCheckAllUnits();
+		//KermetaUnit unit = IOPlugin.getDefault().loadKermetaUnit("platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoNXCCompiler.kmt", new NullProgressMonitor());
+		KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoNXCCompiler.kmt");
+		unit.load();
+		unit.typeCheckAllUnits();
 		KermetaInterpreter inter = new KermetaInterpreter(unit);
 		inter.setKStream(console);
 		// This is the operation to call
