@@ -1,4 +1,4 @@
-/* $Id: CheckInputModels.kmt,v 1.1 2007-09-14 13:08:06 ffleurey Exp $
+/* $Id: CheckInputModels.kmt,v 1.2 2007-09-14 13:21:26 ffleurey Exp $
  * Creation date: January 12, 2006
  * Author: Benoit Baudry
  * 
@@ -62,7 +62,7 @@ class CheckInputModels{
     	Returns the instance of Fragments that contains all the model fragments*/
     operation loadFragments(fragmentsModelName : String) : FragmentsMM::Fragments is do
   		var fragmentsModel : EMFResource    
-  		fragmentsModel ?= repository.createResource(fragmentsModelName, "./ciMM.ecore")
+  		fragmentsModel ?= repository.createResource(fragmentsModelName, "http://www.kermeta.org/testing/mmcc/ciMM.ecore")
  		fragmentsModel.load   	
  		result := FragmentsMM::Fragments.new
 		// There should be two objects in the instances set and only one of type Fragments

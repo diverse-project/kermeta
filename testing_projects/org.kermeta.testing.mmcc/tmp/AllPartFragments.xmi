@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:FragmentsMM="http://www.kermeta.org/testing/mmcc/ciMM.ecore">
   <FragmentsMM:PartitionModel>
-    <propertyPartitions featureName="isFinal" className="State">
+    <propertyPartitions featureName="statechart" className="AbstractState">
+      <multiplicityPartition>
+        <ranges lower="1" upper="1"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="states" className="Statechart">
+      <multiplicityPartition>
+        <ranges lower="0" upper="0"/>
+        <ranges lower="1" upper="1"/>
+        <ranges lower="2" upper="20000"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="ownedState" className="Composite">
+      <multiplicityPartition>
+        <ranges lower="1" upper="1"/>
+        <ranges lower="2" upper="20000"/>
+        <ranges lower="0" upper="0"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="label" className="AbstractState">
       <valuePartition>
-        <ranges xsi:type="FragmentsMM:BooleanRange" boolValue="true"/>
-        <ranges xsi:type="FragmentsMM:BooleanRange" boolValue="false"/>
+        <ranges xsi:type="FragmentsMM:IntegerRange" lower="1" upper="1"/>
+        <ranges xsi:type="FragmentsMM:IntegerRange" lower="2" upper="20000"/>
+        <ranges xsi:type="FragmentsMM:IntegerRange" lower="0" upper="0"/>
       </valuePartition>
     </propertyPartitions>
-    <propertyPartitions featureName="isInitial" className="State">
+    <propertyPartitions featureName="isFinal" className="State">
       <valuePartition>
         <ranges xsi:type="FragmentsMM:BooleanRange" boolValue="true"/>
         <ranges xsi:type="FragmentsMM:BooleanRange" boolValue="false"/>
@@ -19,63 +39,7 @@
         <ranges lower="1" upper="1"/>
       </multiplicityPartition>
     </propertyPartitions>
-    <propertyPartitions featureName="statechart" className="AbstractState">
-      <multiplicityPartition>
-        <ranges lower="1" upper="1"/>
-      </multiplicityPartition>
-    </propertyPartitions>
-    <propertyPartitions featureName="event" className="Transition">
-      <valuePartition>
-        <ranges xsi:type="FragmentsMM:StringRange" regexp=""/>
-        <ranges xsi:type="FragmentsMM:StringRange" regexp="+"/>
-      </valuePartition>
-    </propertyPartitions>
-    <propertyPartitions featureName="source" className="Transition">
-      <multiplicityPartition>
-        <ranges lower="1" upper="1"/>
-      </multiplicityPartition>
-    </propertyPartitions>
-    <propertyPartitions featureName="transitions" className="Statechart">
-      <multiplicityPartition>
-        <ranges lower="1" upper="1"/>
-        <ranges lower="2" upper="20000"/>
-        <ranges lower="0" upper="0"/>
-      </multiplicityPartition>
-    </propertyPartitions>
     <propertyPartitions featureName="incomingTransition" className="AbstractState">
-      <multiplicityPartition>
-        <ranges lower="1" upper="1"/>
-        <ranges lower="2" upper="20000"/>
-        <ranges lower="0" upper="0"/>
-      </multiplicityPartition>
-    </propertyPartitions>
-    <propertyPartitions featureName="outgoingTransition" className="AbstractState">
-      <multiplicityPartition>
-        <ranges lower="0" upper="0"/>
-        <ranges lower="1" upper="1"/>
-        <ranges lower="2" upper="20000"/>
-      </multiplicityPartition>
-    </propertyPartitions>
-    <propertyPartitions featureName="statechart" className="Transition">
-      <multiplicityPartition>
-        <ranges lower="1" upper="1"/>
-      </multiplicityPartition>
-    </propertyPartitions>
-    <propertyPartitions featureName="label" className="AbstractState">
-      <valuePartition>
-        <ranges xsi:type="FragmentsMM:IntegerRange" lower="2" upper="20000"/>
-        <ranges xsi:type="FragmentsMM:IntegerRange" lower="1" upper="1"/>
-        <ranges xsi:type="FragmentsMM:IntegerRange" lower="0" upper="0"/>
-      </valuePartition>
-    </propertyPartitions>
-    <propertyPartitions featureName="ownedState" className="Composite">
-      <multiplicityPartition>
-        <ranges lower="0" upper="0"/>
-        <ranges lower="1" upper="1"/>
-        <ranges lower="2" upper="20000"/>
-      </multiplicityPartition>
-    </propertyPartitions>
-    <propertyPartitions featureName="states" className="Statechart">
       <multiplicityPartition>
         <ranges lower="1" upper="1"/>
         <ranges lower="0" upper="0"/>
@@ -87,124 +51,160 @@
         <ranges lower="1" upper="1"/>
       </multiplicityPartition>
     </propertyPartitions>
+    <propertyPartitions featureName="statechart" className="Transition">
+      <multiplicityPartition>
+        <ranges lower="1" upper="1"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="event" className="Transition">
+      <valuePartition>
+        <ranges xsi:type="FragmentsMM:StringRange" regexp=""/>
+        <ranges xsi:type="FragmentsMM:StringRange" regexp="+"/>
+      </valuePartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="isInitial" className="State">
+      <valuePartition>
+        <ranges xsi:type="FragmentsMM:BooleanRange" boolValue="false"/>
+        <ranges xsi:type="FragmentsMM:BooleanRange" boolValue="true"/>
+      </valuePartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="outgoingTransition" className="AbstractState">
+      <multiplicityPartition>
+        <ranges lower="0" upper="0"/>
+        <ranges lower="1" upper="1"/>
+        <ranges lower="2" upper="20000"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="transitions" className="Statechart">
+      <multiplicityPartition>
+        <ranges lower="0" upper="0"/>
+        <ranges lower="1" upper="1"/>
+        <ranges lower="2" upper="20000"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="source" className="Transition">
+      <multiplicityPartition>
+        <ranges lower="1" upper="1"/>
+      </multiplicityPartition>
+    </propertyPartitions>
   </FragmentsMM:PartitionModel>
   <FragmentsMM:Fragments>
     <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.0/@valuePartition/@ranges.0" featureName="isFinal" className="State"/>
+        <constraints range="/0/@propertyPartitions.4/@valuePartition/@ranges.0" featureName="isFinal" className="State"/>
       </objectFragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.0/@valuePartition/@ranges.1" featureName="isFinal" className="State"/>
-      </objectFragments>
-    </fragments>
-    <fragments>
-      <objectFragments>
-        <constraints range="/0/@propertyPartitions.10/@valuePartition/@ranges.1" featureName="label" className="AbstractState"/>
-      </objectFragments>
-      <objectFragments>
-        <constraints range="/0/@propertyPartitions.10/@valuePartition/@ranges.0" featureName="label" className="AbstractState"/>
-      </objectFragments>
-      <objectFragments>
-        <constraints range="/0/@propertyPartitions.10/@valuePartition/@ranges.2" featureName="label" className="AbstractState"/>
+        <constraints range="/0/@propertyPartitions.4/@valuePartition/@ranges.1" featureName="isFinal" className="State"/>
       </objectFragments>
     </fragments>
     <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.7/@multiplicityPartition/@ranges.2" featureName="incomingTransition" className="AbstractState"/>
+        <constraints range="/0/@propertyPartitions.6/@multiplicityPartition/@ranges.2" featureName="incomingTransition" className="AbstractState"/>
       </objectFragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.7/@multiplicityPartition/@ranges.1" featureName="incomingTransition" className="AbstractState"/>
+        <constraints range="/0/@propertyPartitions.6/@multiplicityPartition/@ranges.0" featureName="incomingTransition" className="AbstractState"/>
       </objectFragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.7/@multiplicityPartition/@ranges.0" featureName="incomingTransition" className="AbstractState"/>
-      </objectFragments>
-    </fragments>
-    <fragments>
-      <objectFragments>
-        <constraints range="/0/@propertyPartitions.5/@multiplicityPartition/@ranges.0" featureName="source" className="Transition"/>
+        <constraints range="/0/@propertyPartitions.6/@multiplicityPartition/@ranges.1" featureName="incomingTransition" className="AbstractState"/>
       </objectFragments>
     </fragments>
     <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.13/@multiplicityPartition/@ranges.0" featureName="target" className="Transition"/>
+        <constraints range="/0/@propertyPartitions.7/@multiplicityPartition/@ranges.0" featureName="target" className="Transition"/>
       </objectFragments>
     </fragments>
     <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.9/@multiplicityPartition/@ranges.0" featureName="statechart" className="Transition"/>
+        <constraints range="/0/@propertyPartitions.12/@multiplicityPartition/@ranges.2" featureName="transitions" className="Statechart"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.12/@multiplicityPartition/@ranges.0" featureName="transitions" className="Statechart"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.12/@multiplicityPartition/@ranges.1" featureName="transitions" className="Statechart"/>
       </objectFragments>
     </fragments>
     <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.6/@multiplicityPartition/@ranges.2" featureName="transitions" className="Statechart"/>
+        <constraints range="/0/@propertyPartitions.5/@multiplicityPartition/@ranges.0" featureName="container" className="AbstractState"/>
       </objectFragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.6/@multiplicityPartition/@ranges.1" featureName="transitions" className="Statechart"/>
-      </objectFragments>
-      <objectFragments>
-        <constraints range="/0/@propertyPartitions.6/@multiplicityPartition/@ranges.0" featureName="transitions" className="Statechart"/>
+        <constraints range="/0/@propertyPartitions.5/@multiplicityPartition/@ranges.1" featureName="container" className="AbstractState"/>
       </objectFragments>
     </fragments>
     <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.12/@multiplicityPartition/@ranges.1" featureName="states" className="Statechart"/>
+        <constraints range="/0/@propertyPartitions.1/@multiplicityPartition/@ranges.0" featureName="states" className="Statechart"/>
       </objectFragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.12/@multiplicityPartition/@ranges.2" featureName="states" className="Statechart"/>
+        <constraints range="/0/@propertyPartitions.1/@multiplicityPartition/@ranges.1" featureName="states" className="Statechart"/>
       </objectFragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.12/@multiplicityPartition/@ranges.0" featureName="states" className="Statechart"/>
-      </objectFragments>
-    </fragments>
-    <fragments>
-      <objectFragments>
-        <constraints range="/0/@propertyPartitions.4/@valuePartition/@ranges.0" featureName="event" className="Transition"/>
-      </objectFragments>
-      <objectFragments>
-        <constraints range="/0/@propertyPartitions.4/@valuePartition/@ranges.1" featureName="event" className="Transition"/>
+        <constraints range="/0/@propertyPartitions.1/@multiplicityPartition/@ranges.2" featureName="states" className="Statechart"/>
       </objectFragments>
     </fragments>
     <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.8/@multiplicityPartition/@ranges.0" featureName="outgoingTransition" className="AbstractState"/>
-      </objectFragments>
-      <objectFragments>
-        <constraints range="/0/@propertyPartitions.8/@multiplicityPartition/@ranges.1" featureName="outgoingTransition" className="AbstractState"/>
-      </objectFragments>
-      <objectFragments>
-        <constraints range="/0/@propertyPartitions.8/@multiplicityPartition/@ranges.2" featureName="outgoingTransition" className="AbstractState"/>
+        <constraints range="/0/@propertyPartitions.0/@multiplicityPartition/@ranges.0" featureName="statechart" className="AbstractState"/>
       </objectFragments>
     </fragments>
     <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.3/@multiplicityPartition/@ranges.0" featureName="statechart" className="AbstractState"/>
+        <constraints range="/0/@propertyPartitions.10/@valuePartition/@ranges.1" featureName="isInitial" className="State"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.10/@valuePartition/@ranges.0" featureName="isInitial" className="State"/>
       </objectFragments>
     </fragments>
     <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.2/@multiplicityPartition/@ranges.0" featureName="container" className="AbstractState"/>
+        <constraints range="/0/@propertyPartitions.11/@multiplicityPartition/@ranges.2" featureName="outgoingTransition" className="AbstractState"/>
       </objectFragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.2/@multiplicityPartition/@ranges.1" featureName="container" className="AbstractState"/>
-      </objectFragments>
-    </fragments>
-    <fragments>
-      <objectFragments>
-        <constraints range="/0/@propertyPartitions.1/@valuePartition/@ranges.0" featureName="isInitial" className="State"/>
+        <constraints range="/0/@propertyPartitions.11/@multiplicityPartition/@ranges.1" featureName="outgoingTransition" className="AbstractState"/>
       </objectFragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.1/@valuePartition/@ranges.1" featureName="isInitial" className="State"/>
+        <constraints range="/0/@propertyPartitions.11/@multiplicityPartition/@ranges.0" featureName="outgoingTransition" className="AbstractState"/>
       </objectFragments>
     </fragments>
     <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.11/@multiplicityPartition/@ranges.0" featureName="ownedState" className="Composite"/>
+        <constraints range="/0/@propertyPartitions.13/@multiplicityPartition/@ranges.0" featureName="source" className="Transition"/>
+      </objectFragments>
+    </fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.2/@multiplicityPartition/@ranges.2" featureName="ownedState" className="Composite"/>
       </objectFragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.11/@multiplicityPartition/@ranges.1" featureName="ownedState" className="Composite"/>
+        <constraints range="/0/@propertyPartitions.2/@multiplicityPartition/@ranges.0" featureName="ownedState" className="Composite"/>
       </objectFragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.11/@multiplicityPartition/@ranges.2" featureName="ownedState" className="Composite"/>
+        <constraints range="/0/@propertyPartitions.2/@multiplicityPartition/@ranges.1" featureName="ownedState" className="Composite"/>
+      </objectFragments>
+    </fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.8/@multiplicityPartition/@ranges.0" featureName="statechart" className="Transition"/>
+      </objectFragments>
+    </fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.3/@valuePartition/@ranges.2" featureName="label" className="AbstractState"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.3/@valuePartition/@ranges.0" featureName="label" className="AbstractState"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.3/@valuePartition/@ranges.1" featureName="label" className="AbstractState"/>
+      </objectFragments>
+    </fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.9/@valuePartition/@ranges.0" featureName="event" className="Transition"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.9/@valuePartition/@ranges.1" featureName="event" className="Transition"/>
       </objectFragments>
     </fragments>
   </FragmentsMM:Fragments>

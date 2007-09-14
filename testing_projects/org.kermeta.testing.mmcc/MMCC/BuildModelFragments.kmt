@@ -1,4 +1,4 @@
-/* $Id: BuildModelFragments.kmt,v 1.1 2007-09-14 13:08:06 ffleurey Exp $
+/* $Id: BuildModelFragments.kmt,v 1.2 2007-09-14 13:21:26 ffleurey Exp $
  * Creation date: January 9, 2007
  * Authors: Benoit Baudry
  *
@@ -38,7 +38,7 @@ class BuildModelFragments
     	/*This is the absolute path where tmp file ModelsCoverageChecker will be generated*/
     	//var tmpPath : String init "E:\\eclipseK\\workspaceMMCC\\ModelTransfoTestData\\tmp\\"
     	
-    	var tmpPath : String init "/home/franck/eclipse-workspaces/workspace-MetaModelCoverage/org.kermeta.testing.mmcc/tmp/"
+    	var tmpPath : String init "/home/franck/eclipse-workspaces/LogoDemoWorkspace/org.kermeta.testing.mmcc/tmp/"
     	
     	/*This is the absolute name of the model that will contain the partitions and the fragments*/
     	var fragmentsModelName : String init "platform:/resource/org.kermeta.testing.mmcc/tmp/"+testCriterion+"Fragments.xmi"
