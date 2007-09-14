@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests
+Bundle-SymbolicName: fr.irisa.triskell.kermeta.samples.fsm.tests;singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle: org.junit4,
+ org.openembedd.tests,
+ org.eclipse.ui.editors,
+ org.eclipse.debug.core,
+ org.eclipse.core.filesystem,
+ org.eclipse.core.runtime,
+ org.eclipse.ui,
+ fr.irisa.triskell.kermeta,
+ fr.irisa.triskell.kermeta.tests
+Export-Package: fr.irisa.triskell.kermeta.samples.fsm.tests
