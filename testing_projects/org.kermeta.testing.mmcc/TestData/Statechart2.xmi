@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Statechart xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.kermeta.org/testing/mmcc/statechat.ecore">
+  <transitions event="a" source="//@states.0" target="//@states.1"/>
+  <transitions event="b" source="//@states.1/@ownedState.0" target="//@states.1/@ownedState.1"/>
+  <transitions event="c" source="//@states.1" target="//@states.0"/>
+  <states xsi:type="State" label="1" outgoingTransition="//@transitions.0" incomingTransition="//@transitions.2" isFinal="true" isInitial="true"/>
+  <states xsi:type="Composite" label="4" outgoingTransition="//@transitions.2" incomingTransition="//@transitions.0">
+    <ownedState xsi:type="State" label="5" outgoingTransition="//@transitions.1" isInitial="true"/>
+    <ownedState xsi:type="State" label="6" incomingTransition="//@transitions.1"/>
+  </states>
+</Statechart>

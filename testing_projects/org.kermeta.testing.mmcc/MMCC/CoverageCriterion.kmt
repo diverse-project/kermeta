@@ -1,0 +1,140 @@
+/* 	$Id: CoverageCriterion.kmt,v 1.1 2007-09-14 13:08:06 ffleurey Exp $
+ * 	Creation date: January 12, 2006
+ * 	Author: Benoit Baudry
+ * 
+ * 	The classes in this file implement different strategies for model fragments 
+ *	generation according to the different test criteria defined in the paper
+ */
+
+
+package mmcc;
+
+require kermeta
+//require "ecore.kmt"
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.kmt" 
+ 
+using ecore
+using kermeta::persistence
+using kermeta::standard
+using FragmentsMM
+
+abstract class CoverageCriterion 
+{
+    reference setOfFragments : FragmentsMM::Fragments 
+
+	operation generateFragments (partitionModel : FragmentsMM::PartitionModel) : FragmentsMM::Fragments is abstract 
+	
+}
+
+/*
+ * 	This class builds model fragments according to the AllPart criterion 
+ * 	There are two strategies implemented in oneModelFragmentPerPropertyPartition and in oneModelFragmentPerPartition
+ * 		oneModelFragmentPerPropertyPartition builds one model fragment for each property. In that case if there are two partitions
+ * 	for one property (one value and multiplicity partition) they are all put in the same model fragment
+ *		oneModelFragmentPerPartition builds one model fragment for each partition.
+*/
+
+class AllPart inherits CoverageCriterion
+{
+    //Builds one model fragment for each partition or each property in the partitionModel
+    //The choice is made by commenting one of the result lines
+    method generateFragments(partitionModel : FragmentsMM::PartitionModel) : FragmentsMM::Fragments is do
+    	stdio.writeln("Starting building fragments with AllPart criterion")
+    	oneModelFragmentPerPropertyPartition(partitionModel)
+//    	oneModelFragmentPerPartition(partitionModel)
+    	result:= setOfFragments
+    	stdio.writeln("Fragments with AllPart criterion have been build")
+    end
+    
+    //builds one model fragment for each property
+    operation oneModelFragmentPerPropertyPartition(partitionModel : FragmentsMM::PartitionModel) is do
+    	setOfFragments := FragmentsMM::Fragments.new
+    	partitionModel.propertyPartitions.each{ propPart|
+      		var modFragment : FragmentsMM::ModelFragment init FragmentsMM::ModelFragment.new
+    		buildForOnePropPart(propPart, modFragment)
+    		setOfFragments.fragments.add(modFragment)    		
+    	}
+    end
+    
+    //builds one model fragment for each partition
+    operation oneModelFragmentPerPartition(partitionModel : FragmentsMM::PartitionModel) is do
+    	setOfFragments := FragmentsMM::Fragments.new
+     	partitionModel.partitions.each{ part |
+    		var modFragment : FragmentsMM::ModelFragment init FragmentsMM::ModelFragment.new
+    		buildForOnePart(part, modFragment)
+    		setOfFragments.fragments.add(modFragment)
+    	}
+    end
+    
+    //Builds one object fragment with one property constraint for each range in the partition
+    operation buildForOnePart(partition : FragmentsMM::Partition, modFragment : FragmentsMM::ModelFragment) is do
+    	partition.getRanges().each{range | 
+    		var of : FragmentsMM::ObjectFragment init buildForOneRange(range, partition.getFeatureName, partition.getClassName)
+    		modFragment.objectFragments.add(of)
+    	}
+    end
+    
+    //Builds one object fragment with one property constraint for each range in the valuePartition and the multiplicityPartition
+    operation buildForOnePropPart(propPart : FragmentsMM::PropertyPartition, modFragment : FragmentsMM::ModelFragment) is do
+    	if propPart.valuePartition!=void then
+    		propPart.valuePartition.ranges.each{range | 
+    			var of : FragmentsMM::ObjectFragment init buildForOneRange(range, propPart.featureName, propPart.className)
+    			modFragment.objectFragments.add(of)
+    		}
+    	end
+    	if propPart.multiplicityPartition!=void then
+    		propPart.multiplicityPartition.ranges.each{range | 
+    			var of : FragmentsMM::ObjectFragment init buildForOneRange(range, propPart.featureName, propPart.className)
+    			modFragment.objectFragments.add(of)
+    		}
+    	end
+    end
+    
+    //Builds an object fragment with one property constraint for the feature and the range
+    operation buildForOneRange(range : FragmentsMM::Range, featureName : String, className : String) : FragmentsMM::ObjectFragment is do
+    	result := FragmentsMM::ObjectFragment.new
+    	var constraint : FragmentsMM::PropertyConstraint init FragmentsMM::PropertyConstraint.new
+    	constraint.range := range
+    	constraint.featureName := featureName
+    	constraint.className := className
+    	result.constraints.add(constraint)    	
+    end
+    
+}
+
+/*	This class implements the AllRange criterion
+*/
+class AllRanges inherits CoverageCriterion
+{
+    //Builds a set of fragments according to the AllRange criterion
+    method generateFragments(partitionModel : FragmentsMM::PartitionModel) : FragmentsMM::Fragments is do
+    	stdio.writeln("Starting building fragments with AllRange criterion")
+    	oneModelFragmentPerRange(partitionModel)
+    	result:= setOfFragments
+    	stdio.writeln("Fragments with AllRange criterion have been build")		
+	end
+
+	operation oneModelFragmentPerRange(partitionModel : FragmentsMM::PartitionModel) is do
+ 	  	setOfFragments := FragmentsMM::Fragments.new
+ 		partitionModel.partitions.each{ part |
+			part.getRanges.each{ range |
+	    		var modFragment : FragmentsMM::ModelFragment init FragmentsMM::ModelFragment.new
+				var of : FragmentsMM::ObjectFragment init buildForOneRange(range, part.getFeatureName, part.getClassName)
+				modFragment.objectFragments.add(of)
+				setOfFragments.fragments.add(modFragment)
+			}
+		}
+	end
+    
+    //Builds an object fragment with one property constraint for the feature and the range
+    operation buildForOneRange(range : FragmentsMM::Range, featureName : String, className : String) : FragmentsMM::ObjectFragment is do
+    	result := FragmentsMM::ObjectFragment.new
+    	var constraint : FragmentsMM::PropertyConstraint init FragmentsMM::PropertyConstraint.new
+    	constraint.range := range
+    	constraint.featureName := featureName
+    	constraint.className := className
+    	result.constraints.add(constraint)    	
+    end
+    
+}

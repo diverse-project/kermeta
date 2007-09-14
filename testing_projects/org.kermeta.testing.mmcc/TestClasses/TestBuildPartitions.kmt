@@ -1,0 +1,522 @@
+/* $Id: TestBuildPartitions.kmt,v 1.1 2007-09-14 13:08:06 ffleurey Exp $
+ * Creation date: January 12, 2007
+ * License:
+ * Copyright:
+ * Authors: Benoit Baudry
+ *
+ *	This class contains test cases for the generation of partitions and model fragments
+ *	There are test cases of the generation of model fragments with AllPart and AllRanges criteria
+ */
+@mainClass "mmcc::Main"
+@mainOperation "main"
+
+
+package mmcc;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.testing.mmcc/MMCC/BuildPartitions.kmt"  
+require "platform:/resource/org.kermeta.testing.mmcc/MMCC/CoverageCriterion.kmt"
+require "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.kmt"    
+
+
+using kermeta::persistence
+using kermeta::standard
+using kermeta::reflection 
+using FragmentsMM
+
+class Main
+{
+	
+	attribute testDataDir : String //Name of the directory containing the test data (input metamodels)
+	attribute testResultsDir : String //Name of the directory where test results are produced
+	
+	operation main() : Void is do
+		testDataDir := "platform:/resource/org.kermeta.testing.mmcc/TestData/"
+		testResultsDir := "platform:/resource/org.kermeta.testing.mmcc/TestResults/"
+		
+		//A series of test cases to test the generation of partitions and fragments with the AllPart criterion
+		testSimpleMMIntFeaturewAllPart 
+		testSimpleMMOneAssowAllPart
+		testSimpleMMBoolFeaturewAllPart
+		testSimpleMMIntFeatureMultiplewAllPart
+		testSimpleMMBoolFeatureMultiplewAllPart
+		testSimpleMMStringFeaturewAllPart
+		testSimpleMMStringFeatureSinglewAllPart
+		teststatechartwAllPart
+		
+		//A series of test cases to test the generation of partitions and fragments with the AllRanges criterion
+		testSimpleMMIntFeaturewAllRanges
+		testSimpleMMOneAssowAllRanges
+		testSimpleMMBoolFeaturewAllRanges
+		testSimpleMMIntFeatureMultiplewAllRanges
+		testSimpleMMBoolFeatureMultiplewAllRanges
+		testSimpleMMStringFeaturewAllRanges
+		testSimpleMMStringFeatureSinglewAllRanges
+		teststatechartwAllRanges
+	end
+	
+	//test the construction of partitions according to the AllPart criterion 
+	//with a simple MM : one class with one integer attribute with a multiplicity 0..1
+	operation testSimpleMMIntFeaturewAllPart() : Void is do 
+		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMIntFeature.xmi",testDataDir+"SimpleMMIntFeature.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMIntFeature.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 1, "valueParts testSimpleMMIntFeaturewAllPart") 
+		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMIntFeaturewAllPart") 
+		assertEqual(intRanges(model), 3, "intRanges testSimpleMMIntFeaturewAllPart") 
+		assertEqual(boolRanges(model), 0, "boolRanges testSimpleMMIntFeaturewAllPart") 
+		assertEqual(strRanges(model), 0, "strRanges testSimpleMMIntFeaturewAllPart") 
+		assertEqual(modFragments(model), 1, "modFragments testSimpleMMIntFeaturewAllPart") 
+		assertEqual(objFragments(model), 3, "objFragments testSimpleMMIntFeaturewAllPart") 
+		assertEqual(propConstraints(model), 3, "propConstraints testSimpleMMIntFeaturewAllPart") 
+	end
+	
+	//test the construction of partitions according to the AllPart criterion 
+	//with a simple MM : two classes A and B, A contains 0..* B
+	operation testSimpleMMOneAssowAllPart() : Void is do 
+		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMOneAsso.xmi",testDataDir+"SimpleMMOneAsso.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMOneAsso.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 0, "valueParts testSimpleMMOneAssowAllPart") 
+		assertEqual(multiplicityParts(model), 2, "multiplicityParts testSimpleMMOneAssowAllPart") 
+		assertEqual(intRanges(model), 4, "intRanges testSimpleMMOneAssowAllPart") 
+		assertEqual(boolRanges(model), 0, "boolRanges testSimpleMMOneAssowAllPart") 
+		assertEqual(strRanges(model), 0, "strRanges testSimpleMMOneAssowAllPart") 
+		assertEqual(modFragments(model), 2, "modFragments testSimpleMMOneAssowAllPart") 
+		assertEqual(objFragments(model), 4, "objFragments testSimpleMMOneAssowAllPart") 
+		assertEqual(propConstraints(model), 4, "propConstraints testSimpleMMOneAssowAllPart") 
+	end
+
+	//test the construction of partitions according to the AllPart criterion 
+	//with a simple MM : one class with one boolean attribute with a multiplicity 0..1
+	operation testSimpleMMBoolFeaturewAllPart() : Void is do 
+		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMBoolFeature.xmi",testDataDir+"SimpleMMBoolFeature.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMBoolFeature.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 1, "valueParts testSimpleMMBoolFeaturewAllPart") 
+		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMBoolFeaturewAllPart") 
+		assertEqual(intRanges(model), 0, "intRanges testSimpleMMBoolFeaturewAllPart") 
+		assertEqual(boolRanges(model), 2, "boolRanges testSimpleMMBoolFeaturewAllPart") 
+		assertEqual(strRanges(model), 0, "strRanges testSimpleMMBoolFeaturewAllPart") 
+		assertEqual(modFragments(model), 1, "modFragments testSimpleMMBoolFeaturewAllPart") 
+		assertEqual(objFragments(model), 2, "objFragments testSimpleMMBoolFeaturewAllPart") 
+		assertEqual(propConstraints(model), 2, "propConstraints testSimpleMMBoolFeaturewAllPart") 
+	end
+
+	//test the construction of partitions according to the AllPart criterion 
+	//with a simple MM : one class with one integer attribute with a multiplicity 1..3
+	operation testSimpleMMIntFeatureMultiplewAllPart() : Void is do 
+		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMIntFeatureMultiple.xmi",testDataDir+"SimpleMMIntFeatureMultiple.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMIntFeatureMultiple.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 1, "valueParts testSimpleMMIntFeatureMultiplewAllPart") 
+		assertEqual(multiplicityParts(model), 1, "multiplicityParts testSimpleMMIntFeatureMultiplewAllPart") 
+		assertEqual(intRanges(model), 6, "intRanges testSimpleMMIntFeatureMultiplewAllPart") 
+		assertEqual(boolRanges(model), 0, "boolRanges testSimpleMMIntFeatureMultiplewAllPart") 
+		assertEqual(strRanges(model), 0, "strRanges testSimpleMMIntFeatureMultiplewAllPart") 
+		assertEqual(modFragments(model), 1, "modFragments testSimpleMMIntFeatureMultiplewAllPart") 
+		assertEqual(objFragments(model), 6, "objFragments testSimpleMMIntFeatureMultiplewAllPart") 
+		assertEqual(propConstraints(model), 6, "propConstraints testSimpleMMIntFeatureMultiplewAllPart") 
+	end
+	
+	//test the construction of partitions according to the AllPart criterion 
+	//with a simple MM : one class with one boolean attribute with a multiplicity 0..*
+	operation testSimpleMMBoolFeatureMultiplewAllPart() : Void is do 
+		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMBoolFeatureMultiple.xmi",testDataDir+"SimpleMMBoolFeatureMultiple.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMBoolFeatureMultiple.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 1, "valueParts testSimpleMMBoolFeatureMultiplewAllPart") 
+		assertEqual(multiplicityParts(model), 1, "multiplicityParts testSimpleMMBoolFeatureMultiplewAllPart") 
+		assertEqual(intRanges(model), 3, "intRanges testSimpleMMBoolFeatureMultiplewAllPart") 
+		assertEqual(boolRanges(model), 2, "boolRanges testSimpleMMBoolFeatureMultiplewAllPart") 
+		assertEqual(strRanges(model), 0, "strRanges testSimpleMMBoolFeatureMultiplewAllPart") 
+		assertEqual(modFragments(model), 1, "modFragments testSimpleMMBoolFeatureMultiplewAllPart") 
+		assertEqual(objFragments(model), 5, "objFragments testSimpleMMBoolFeatureMultiplewAllPart") 
+		assertEqual(propConstraints(model), 5, "propConstraints testSimpleMMBoolFeatureMultiplewAllPart") 
+	end
+	
+	//test the construction of partitions according to the AllPart criterion 
+	//with a simple MM : one class with one string attribute with a multiplicity 0..1
+	operation testSimpleMMStringFeaturewAllPart() : Void is do 
+		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMStringFeature.xmi",testDataDir+"SimpleMMStringFeature.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMStringFeature.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 1, "valueParts testSimpleMMStringFeaturewAllPart") 
+		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMStringFeaturewAllPart") 
+		assertEqual(intRanges(model), 0, "intRanges testSimpleMMStringFeaturewAllPart") 
+		assertEqual(boolRanges(model), 0, "boolRanges testSimpleMMStringFeaturewAllPart") 
+		assertEqual(strRanges(model), 2, "strRanges testSimpleMMStringFeaturewAllPart") 
+		assertEqual(modFragments(model), 1, "modFragments testSimpleMMStringFeaturewAllPart") 
+		assertEqual(objFragments(model), 2, "objFragments testSimpleMMStringFeaturewAllPart") 
+		assertEqual(propConstraints(model), 2, "propConstraints testSimpleMMStringFeaturewAllPart") 
+	end
+
+	//test the construction of partitions according to the AllPart criterion 
+	//with a simple MM : one class with one string attribute with a multiplicity 1..1
+	operation testSimpleMMStringFeatureSinglewAllPart() : Void is do 
+		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMStringFeatureSingle.xmi",testDataDir+"SimpleMMStringFeatureSingle.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMStringFeatureSingle.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 1, "valueParts testSimpleMMStringFeatureSinglewAllPart") 
+		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMStringFeatureSinglewAllPart") 
+		assertEqual(intRanges(model), 0, "intRanges testSimpleMMStringFeatureSinglewAllPart") 
+		assertEqual(boolRanges(model), 0, "boolRanges testSimpleMMStringFeatureSinglewAllPart") 
+		assertEqual(strRanges(model), 2, "strRanges testSimpleMMStringFeatureSinglewAllPart") 
+		assertEqual(modFragments(model), 1, "modFragments testSimpleMMStringFeatureSinglewAllPart") 
+		assertEqual(objFragments(model), 2, "objFragments testSimpleMMStringFeatureSinglewAllPart") 
+		assertEqual(propConstraints(model), 2, "propConstraints testSimpleMMStringFeatureSinglewAllPart") 
+	end
+
+	//test the construction of partitions according to the AllPart criterion 
+	//with the statechart metemodel that has 14 properties
+	operation teststatechartwAllPart() : Void is do 
+		buildFragmentswAllPart(testResultsDir+"AllPartStatechart.xmi",testDataDir+"statechart.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllPartStatechart.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 4, "valueParts teststatechartwAllPart") 
+		assertEqual(multiplicityParts(model), 10, "multiplicityParts teststatechartwAllPart") 
+		assertEqual(intRanges(model), 24, "intRanges teststatechartwAllPart")
+		assertEqual(boolRanges(model), 4, "boolRanges teststatechartwAllPart") 
+		assertEqual(strRanges(model), 2, "strRanges teststatechartwAllPart") 
+		assertEqual(modFragments(model), 14, "modFragments teststatechartwAllPart") 
+		assertEqual(objFragments(model), 30, "objFragments teststatechartwAllPart") 
+		assertEqual(propConstraints(model), 30, "propConstraints teststatechartwAllPart") 
+	end
+	
+	//test the construction of partitions according to the AllRanges criterion 
+	//with a simple MM : one class with one integer attribute with a multiplicity 0..1
+	operation testSimpleMMIntFeaturewAllRanges() : Void is do 
+		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMIntFeature.xmi",testDataDir+"SimpleMMIntFeature.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMIntFeature.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 1, "valueParts testSimpleMMIntFeaturewAllRanges") 
+		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMIntFeaturewAllRanges") 
+		assertEqual(intRanges(model), 3, "intRanges testSimpleMMIntFeaturewAllRanges") 
+		assertEqual(boolRanges(model), 0, "boolRanges testSimpleMMIntFeaturewAllRanges") 
+		assertEqual(strRanges(model), 0, "strRanges testSimpleMMIntFeaturewAllRanges") 
+		assertEqual(modFragments(model), 3, "modFragments testSimpleMMIntFeaturewAllRanges") 
+		assertEqual(objFragments(model), 3, "objFragments testSimpleMMIntFeaturewAllRanges") 
+		assertEqual(propConstraints(model), 3, "propConstraints testSimpleMMIntFeaturewAllRanges") 
+	end
+
+	//test the construction of partitions according to the AllRanges criterion 
+	//with a simple MM : two classes A and B, A contains 0..* B
+	operation testSimpleMMOneAssowAllRanges() : Void is do 
+		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMOneAsso.xmi",testDataDir+"SimpleMMOneAsso.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMOneAsso.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 0, "valueParts testSimpleMMOneAssowAllRanges") 
+		assertEqual(multiplicityParts(model), 2, "multiplicityParts testSimpleMMOneAssowAllRanges") 
+		assertEqual(intRanges(model), 4, "intRanges testSimpleMMOneAssowAllRanges") 
+		assertEqual(boolRanges(model), 0, "boolRanges testSimpleMMOneAssowAllRanges") 
+		assertEqual(strRanges(model), 0, "strRanges testSimpleMMOneAssowAllRanges") 
+		assertEqual(modFragments(model), 4, "modFragments testSimpleMMOneAssowAllRanges") 
+		assertEqual(objFragments(model), 4, "objFragments testSimpleMMOneAssowAllRanges") 
+		assertEqual(propConstraints(model), 4, "propConstraints testSimpleMMOneAssowAllRanges") 
+	end
+
+	//test the construction of partitions according to the AllRanges criterion 
+	//with a simple MM : one class with one boolean attribute with a multiplicity 0..1
+	operation testSimpleMMBoolFeaturewAllRanges() : Void is do 
+		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMBoolFeature.xmi",testDataDir+"SimpleMMBoolFeature.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMBoolFeature.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 1, "valueParts testSimpleMMBoolFeaturewAllRanges") 
+		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMBoolFeaturewAllRanges") 
+		assertEqual(intRanges(model), 0, "intRanges testSimpleMMBoolFeaturewAllRanges") 
+		assertEqual(boolRanges(model), 2, "boolRanges testSimpleMMBoolFeaturewAllRanges") 
+		assertEqual(strRanges(model), 0, "strRanges testSimpleMMBoolFeaturewAllRanges") 
+		assertEqual(modFragments(model), 2, "modFragments testSimpleMMBoolFeaturewAllRanges") 
+		assertEqual(objFragments(model), 2, "objFragments testSimpleMMBoolFeaturewAllRanges") 
+		assertEqual(propConstraints(model), 2, "propConstraints testSimpleMMBoolFeaturewAllRanges") 
+	end
+
+	//test the construction of partitions according to the AllRanges criterion 
+	//with a simple MM : one class with one integer attribute with a multiplicity 1..3
+	operation testSimpleMMIntFeatureMultiplewAllRanges() : Void is do 
+		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMIntFeatureMultiple.xmi",testDataDir+"SimpleMMIntFeatureMultiple.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMIntFeatureMultiple.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 1, "valueParts testSimpleMMIntFeatureMultiplewAllRanges") 
+		assertEqual(multiplicityParts(model), 1, "multiplicityParts testSimpleMMIntFeatureMultiplewAllRanges") 
+		assertEqual(intRanges(model), 6, "intRanges testSimpleMMIntFeatureMultiplewAllRanges") 
+		assertEqual(boolRanges(model), 0, "boolRanges testSimpleMMIntFeatureMultiplewAllRanges") 
+		assertEqual(strRanges(model), 0, "strRanges testSimpleMMIntFeatureMultiplewAllRanges") 
+		assertEqual(modFragments(model), 6, "modFragments testSimpleMMIntFeatureMultiplewAllRanges") 
+		assertEqual(objFragments(model), 6, "objFragments testSimpleMMIntFeatureMultiplewAllRanges") 
+		assertEqual(propConstraints(model), 6, "propConstraints testSimpleMMIntFeatureMultiplewAllRanges") 
+	end
+	
+	//test the construction of partitions according to the AllRanges criterion 
+	//with a simple MM : one class with one boolean attribute with a multiplicity 0..*
+	operation testSimpleMMBoolFeatureMultiplewAllRanges() : Void is do 
+		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMBoolFeatureMultiple.xmi",testDataDir+"SimpleMMBoolFeatureMultiple.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMBoolFeatureMultiple.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 1, "valueParts testSimpleMMBoolFeatureMultiplewAllRanges") 
+		assertEqual(multiplicityParts(model), 1, "multiplicityParts testSimpleMMBoolFeatureMultiplewAllRanges") 
+		assertEqual(intRanges(model), 3, "intRanges testSimpleMMBoolFeatureMultiplewAllRanges") 
+		assertEqual(boolRanges(model), 2, "boolRanges testSimpleMMBoolFeatureMultiplewAllRanges") 
+		assertEqual(strRanges(model), 0, "strRanges testSimpleMMBoolFeatureMultiplewAllRanges") 
+		assertEqual(modFragments(model), 5, "modFragments testSimpleMMBoolFeatureMultiplewAllRanges") 
+		assertEqual(objFragments(model), 5, "objFragments testSimpleMMBoolFeatureMultiplewAllRanges") 
+		assertEqual(propConstraints(model), 5, "propConstraints testSimpleMMBoolFeatureMultiplewAllRanges") 
+	end
+	
+	//test the construction of partitions according to the AllRanges criterion 
+	//with a simple MM : one class with one string attribute with a multiplicity 0..1
+	operation testSimpleMMStringFeaturewAllRanges() : Void is do 
+		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMStringFeature.xmi",testDataDir+"SimpleMMStringFeature.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMStringFeature.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 1, "valueParts testSimpleMMStringFeaturewAllRanges") 
+		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMStringFeaturewAllRanges") 
+		assertEqual(intRanges(model), 0, "intRanges testSimpleMMStringFeaturewAllRanges") 
+		assertEqual(boolRanges(model), 0, "boolRanges testSimpleMMStringFeaturewAllRanges") 
+		assertEqual(strRanges(model), 2, "strRanges testSimpleMMStringFeaturewAllRanges") 
+		assertEqual(modFragments(model), 2, "modFragments testSimpleMMStringFeaturewAllRanges") 
+		assertEqual(objFragments(model), 2, "objFragments testSimpleMMStringFeaturewAllRanges") 
+		assertEqual(propConstraints(model), 2, "propConstraints testSimpleMMStringFeaturewAllRanges") 
+	end
+
+	//test the construction of partitions according to the AllRanges criterion 
+	//with a simple MM : one class with one string attribute with a multiplicity 1..1
+	operation testSimpleMMStringFeatureSinglewAllRanges() : Void is do 
+		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMStringFeatureSingle.xmi",testDataDir+"SimpleMMStringFeatureSingle.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMStringFeatureSingle.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 1, "valueParts testSimpleMMStringFeatureSinglewAllRanges") 
+		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMStringFeatureSinglewAllRanges") 
+		assertEqual(intRanges(model), 0, "intRanges testSimpleMMStringFeatureSinglewAllRanges") 
+		assertEqual(boolRanges(model), 0, "boolRanges testSimpleMMStringFeatureSinglewAllRanges") 
+		assertEqual(strRanges(model), 2, "strRanges testSimpleMMStringFeatureSinglewAllRanges") 
+		assertEqual(modFragments(model), 2, "modFragments testSimpleMMStringFeatureSinglewAllRanges") 
+		assertEqual(objFragments(model), 2, "objFragments testSimpleMMStringFeatureSinglewAllRanges") 
+		assertEqual(propConstraints(model), 2, "propConstraints testSimpleMMStringFeatureSinglewAllRanges") 
+	end
+
+	//test the construction of partitions according to the AllRanges criterion 
+	//with the statechart metemodel that has 14 properties
+	operation teststatechartwAllRanges() : Void is do 
+		buildFragmentswAllRanges(testResultsDir+"AllRangesStatechart.xmi",testDataDir+"statechart.ecore")
+		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
+		model := objectsInModel(testResultsDir+"AllRangesStatechart.xmi", "./ciMM.ecore")
+		assertEqual(valueParts(model), 4, "valueParts teststatechartwAllRanges") 
+		assertEqual(multiplicityParts(model), 10, "multiplicityParts teststatechartwAllRanges") 
+		assertEqual(intRanges(model), 24, "intRanges teststatechartwAllRanges")
+		assertEqual(boolRanges(model), 4, "boolRanges teststatechartwAllRanges") 
+		assertEqual(strRanges(model), 2, "strRanges teststatechartwAllRanges") 
+		assertEqual(modFragments(model), 30, "modFragments teststatechartwAllRanges") 
+		assertEqual(objFragments(model), 30, "objFragments teststatechartwAllRanges") 
+		assertEqual(propConstraints(model), 30, "propConstraints teststatechartwAllRanges") 
+	end
+	
+	/* Generates Fragments according to the AllPart criterion
+		ciModelName: name of the model in which the fragments are generated
+		sourceMMName: name of the source MM for which the fragments are generated*/
+	operation buildFragmentswAllPart(ciModelName : String, sourceMMName : String) is do
+   		//initialize the resource that will contain the partitions 
+    	var repository : EMFRepository init EMFRepository.new
+    	var targetModel : EMFResource 
+		targetModel ?= repository.createResource(ciModelName, "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
+		
+		//load the source metamodel for which the partitions and then the model fragments are build
+ 		var sourceMM : EMFResource 
+ 		sourceMM ?= repository.createResource(sourceMMName, "platform:/resource/org.kermeta.testing.mmcc/metamodels/Ecore.ecore") 
+ 		sourceMM.load 
+		
+		//build the partitions
+		var buildPart : BuildPartitions init BuildPartitions.new
+		var partitions : FragmentsMM::PartitionModel init buildPart.build(sourceMM) 
+		
+		//build the model fragments
+    	var criterion : AllPart init AllPart.new
+ 		var setFragments : FragmentsMM::Fragments init criterion.generateFragments(partitions) 		
+		 		
+ 		//save the target model 
+ 		targetModel.instances.add(partitions)
+		targetModel.instances.add(setFragments)
+		targetModel.save()   				
+	end
+	
+	/* Generates Fragments according to the AllRanges criterion
+		ciModelName: name of the model in which the fragments are generated
+		sourceMMName: name of the source MM for which the fragments are generated*/
+	operation buildFragmentswAllRanges(ciModelName : String, sourceMMName : String) is do
+   		//initialize the resource that will contain the partitions 
+    	var repository : EMFRepository init EMFRepository.new
+    	var targetModel : EMFResource 
+		targetModel ?= repository.createResource(ciModelName, "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
+		
+		//load the source metamodel for which the partitions and then the model fragments are build
+ 		var sourceMM : EMFResource 
+ 		sourceMM ?= repository.createResource(sourceMMName, "platform:/resource/org.kermeta.testing.mmcc/metamodels/Ecore.ecore") 
+ 		sourceMM.load 
+		
+		//build the partitions
+		var buildPart : BuildPartitions init BuildPartitions.new
+		var partitions : FragmentsMM::PartitionModel init buildPart.build(sourceMM)
+		
+		//build the model fragments
+    	var criterion : AllRanges init AllRanges.new
+ 		var setFragments : FragmentsMM::Fragments init criterion.generateFragments(partitions) 		
+		 		
+ 		//save the target model
+ 		targetModel.instances.add(partitions)
+		targetModel.instances.add(setFragments)
+		targetModel.save()   				
+	end
+	
+	//This operation returns the set of objects in the model that is an instance if the metamodel
+	operation objectsInModel(model:String, metamodel:String) : Sequence<kermeta::reflection::Object> is do
+    	var repository : EMFRepository init EMFRepository.new
+    	var fragmentsModel : EMFResource 
+		fragmentsModel ?= repository.createResource(model, metamodel)
+		fragmentsModel.load 
+		var objectsInModel : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
+    	//for all root nodes add the composite objects in the result
+    	fragmentsModel.instances.each{ t |
+    		objectsInModel.add(t)
+    		objectsInModel.addAll(getObjects(t))
+    	}
+		result:=objectsInModel
+	end
+	  
+    //returns all the objects that compose the object o
+    //it is recursively called on all the composed objects
+    operation getObjects(o : Object) : Sequence<kermeta::reflection::Object> is do
+    	result := Sequence<kermeta::reflection::Object>.new 
+    	result.addAll(getChildren(o))
+//		printChildren(o, result)
+    	result.each{ k |  
+    		result.addAll(getObjects(k))
+    	}
+    end
+    
+    //returns the sequence of children objects of one object
+    //a child object is an instance of a composite property of the metaclass of the object
+    operation getChildren(o : Object) : Sequence<kermeta::reflection::Object> is do
+    	var children : Sequence <Property>
+    	result := Sequence<kermeta::reflection::Object>.new
+		//select among all the properties of the object the ones that are composite
+		//and that are of type class (we only want to select composite references and not the attributes)
+		var classdef : ClassDefinition 
+		classdef ?= o.getMetaClass.typeDefinition
+    	children := getAllPropertiesOfClass(classdef).select{ attr |
+    		attr.isComposite and Class.isInstance(attr.type)
+    	}
+    	//add all the instances of the composite references in the result
+    	children.each{ k |  
+    		//if the reference has a multiplicity != 1, get returns a collection of objects
+    		if (k.upper != 1) then
+    			var s : Collection<kermeta::reflection::Object>
+    			s ?= o.get(k)
+    			result.addAll(s)
+       		else 
+       			result.add(o.get(k))
+    		end
+    	} 
+    end
+    
+    //this method returns all the properties of a class 
+    //(its own properties and the ones it has inherits)
+    operation getAllPropertiesOfClass(cd : ClassDefinition) : Collection<Property> is do
+    	result := Set<Property>.new
+        result.addAll(cd.ownedAttribute)
+        //add to the result the properties of all the super classes
+        cd.superType.each{ t |
+        	var sc : Class        
+        	sc := t
+            //add the properties of a super class. 
+            //since there might "diamonds" in the inheritance tree, we must check that the property is not already on the result
+			var classdef : ClassDefinition 
+			classdef ?= sc.typeDefinition
+      		getAllPropertiesOfClass(classdef).each{ p |
+            	if not result.contains(p) then
+                	result.add(p)
+                end
+            }
+        }
+        result := result.select{ k | not k.isDerived }
+	end
+       
+    operation printChildren(o : Object, children : Sequence<kermeta::reflection::Object>) is do
+    	stdio.write("The object " + o.oid.toString + " of type "+o.getMetaClass.name)
+    	stdio.writeln(" has " + children.size.toString + " children : ")
+    	children.each{ o |
+    		stdio.writeln("   " + o.oid.toString + " of type " + o.getMetaClass.name)
+    	}
+    end
+    
+    //returns the number of ValuePartition in the model
+    operation valueParts (model : Sequence<kermeta::reflection::Object>) : Integer is do
+    	var valueParts: Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
+		valueParts:=instancesOfClass(model, "ValuePartition")
+		result := valueParts.size
+    end
+    
+    //returns the number of MultiplicityPartition in the model
+    operation multiplicityParts (model : Sequence<kermeta::reflection::Object>) : Integer is do
+		var multParts: Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
+		multParts:=instancesOfClass(model, "MultiplicityPartition")
+		result := multParts.size
+    end
+    
+    //returns the number of BooleanRange in the model
+    operation boolRanges (model : Sequence<kermeta::reflection::Object>) : Integer is do
+		var boolRange: Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
+		boolRange:=instancesOfClass(model, "BooleanRange")
+		result := boolRange.size
+    end
+    
+    //returns the number of IntegerRange in the model
+    operation intRanges (model : Sequence<kermeta::reflection::Object>) : Integer is do
+		var intRange: Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
+		intRange:=instancesOfClass(model, "IntegerRange")
+		result := intRange.size
+    end
+    
+    //returns the number of StringRange in the model
+    operation strRanges (model : Sequence<kermeta::reflection::Object>) : Integer is do
+		var strRange: Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
+		strRange:=instancesOfClass(model, "StringRange")
+		result := strRange.size
+    end
+    
+    //returns the number of ModelFragment in the model
+    operation modFragments (model : Sequence<kermeta::reflection::Object>) : Integer is do
+		var modFrag: Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
+		modFrag:=instancesOfClass(model, "ModelFragment")
+		result := modFrag.size
+    end
+    
+    //returns the number of ObjectFragment in the model
+    operation objFragments (model : Sequence<kermeta::reflection::Object>) : Integer is do
+		var objFrag: Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
+		objFrag:=instancesOfClass(model, "ObjectFragment")
+		result := objFrag.size
+    end
+    
+     //returns the number of PropertyConstraint in the model
+    operation propConstraints (model : Sequence<kermeta::reflection::Object>) : Integer is do
+		var propCons: Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
+		propCons:=instancesOfClass(model, "PropertyConstraint")
+		result := propCons.size
+    end
+    
+    //This operation returns the set of objects in the model that are instance of className
+    operation instancesOfClass(model : Sequence<kermeta::reflection::Object>, className:String) : Sequence<kermeta::reflection::Object> is do
+    	result := model.select{ obj | obj.getMetaClass.name.equals(className)}
+//    	stdio.writeln("there are "+result.size.toString+" objects of type "+className)
+    end
+    
+	operation assertEqual (a:Integer, b:Integer, testName:String) is do
+    	 if (a != b) then
+    	 	stdio.writeln(testName + " failed")
+    	 else
+    	 	stdio.writeln(testName + " passed")
+    	 end
+    end
+	
+}

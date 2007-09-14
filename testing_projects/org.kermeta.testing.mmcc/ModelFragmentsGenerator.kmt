@@ -1,0 +1,42 @@
+/* $Id: ModelFragmentsGenerator.kmt,v 1.1 2007-09-14 13:08:05 ffleurey Exp $
+ * Creation date: July 10, 2007
+ * License:
+ * Copyright:
+ * Authors: Benoit Baudry
+ *
+ * This class defines the buildFragments operation that generates a set of model fragments for a metamodels according
+ * to a coverage criterion.
+ * This program MUST be called before CoverageChecker.
+ */
+@mainClass "mmcc::ModelFragmentsGenerator"
+@mainOperation "main"
+
+
+package mmcc;
+
+require "platform:/resource/org.kermeta.testing.mmcc/MMCC/BuildModelFragments.kmt"
+require kermeta 
+
+using kermeta::standard
+
+class ModelFragmentsGenerator
+{
+	/*This operation builds a set of model fragments for the metamodel mmName according to the criterion  
+	*	mmName : name of the metamodel to cover
+	*	criterion : name of a coverage criterion (currently it can be AllPart or AllRanges)
+	*/
+	operation buildFragments(mmName : String, criterion : String) is do 
+		var builder : BuildModelFragments init BuildModelFragments.new		
+		builder.buildFragments(mmName,criterion)	
+	end
+
+	/*This oepration defines different configuration for model fragments generation.*/
+	operation main() : Void is do 
+		buildFragments("platform:/resource/org.kermeta.testing.mmcc/TestData/statechart.ecore","AllPart")
+//		buildFragments("platform:/resource/org.kermeta.testing.mmcc/TestData/statechart.ecore","AllRanges")
+//		buildFragments("platform:/resource/org.kermeta.testing.mmcc/TestData/SimpleMMIntFeature.ecore","AllPart")
+//		buildFragments("platform:/resource/org.kermeta.testing.mmcc/TestData/classModel.ecore","AllRanges")
+//		buildFragments("platform:/resource/org.kermeta.testing.mmcc/TestData/classModel.ecore","AllPart")
+	end
+	
+}

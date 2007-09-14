@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:FragmentsMM="http://www.kermeta.org/testing/mmcc/ciMM.ecore">
+  <FragmentsMM:PartitionModel>
+    <propertyPartitions featureName="bObjects" className="classA">
+      <multiplicityPartition>
+        <ranges lower="0" upper="0"/>
+        <ranges lower="1" upper="1"/>
+        <ranges lower="2" upper="20000"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="aObject" className="classB">
+      <multiplicityPartition>
+        <ranges lower="1" upper="1"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+  </FragmentsMM:PartitionModel>
+  <FragmentsMM:Fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.0/@multiplicityPartition/@ranges.0" featureName="bObjects" className="classA"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.0/@multiplicityPartition/@ranges.1" featureName="bObjects" className="classA"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.0/@multiplicityPartition/@ranges.2" featureName="bObjects" className="classA"/>
+      </objectFragments>
+    </fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.1/@multiplicityPartition/@ranges.0" featureName="aObject" className="classB"/>
+      </objectFragments>
+    </fragments>
+  </FragmentsMM:Fragments>
+</xmi:XMI>

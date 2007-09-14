@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simpleUML_MM:ClassModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simpleUML_MM="http://simpleUML_MM.ecore">
+  <classifier xsi:type="simpleUML_MM:Class" name="Toto" is_persistent="true">
+    <attrs type="//@classifier.1" name="titi" is_primary="true"/>
+  </classifier>
+  <classifier xsi:type="simpleUML_MM:PrimitiveDataType" name="string"/>
+  <classifier xsi:type="simpleUML_MM:Class" name="Blah" is_persistent="true">
+    <attrs type="//@classifier.1" name="blahAtt" is_primary="true"/>
+  </classifier>
+  <association name="blah" src="//@classifier.0" dest="//@classifier.2"/>
+</simpleUML_MM:ClassModel>

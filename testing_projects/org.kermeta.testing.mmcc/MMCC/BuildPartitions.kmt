@@ -1,0 +1,275 @@
+/* $Id: BuildPartitions.kmt,v 1.1 2007-09-14 13:08:06 ffleurey Exp $
+ * Creation date: January 12, 2006
+ * Author: Benoit Baudry
+ */
+
+
+package mmcc; 
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.kmt" 
+
+using ecore 
+using kermeta::persistence 
+using kermeta::standard  
+using FragmentsMM
+
+
+class BuildPartitions
+{
+	//the partition model under construction
+	reference target : FragmentsMM::PartitionModel     
+    
+    /* 	Builds partitions for all references and attributes of the classes in the resource.
+     	The resource is expected to be an instance of ecore
+     	It generates ranges and partitions also for abstract classes. This means that whne checking if an object covers
+     	these partitions, it is necessary to check among the instances of the concrete subclasses if 
+     	there exists one that covers these partitions.*/
+    operation build(resource : EMFResource) : FragmentsMM::PartitionModel is do
+       	stdio.writeln("Starting building partitions")
+    	target := FragmentsMM::PartitionModel.new
+       	resource.instances.each{ o | 
+       		var pack : EPackage
+       		pack ?= o
+       		//collect all the classes in the package
+       		var classes : Sequence<EClass> init getClasses(pack)
+       		//build partitions for all features of the classes
+       		classes.each{ c |
+       			buildAttributesPartitions(getAttributes(c))
+       			buildReferencesPartitions(getReferences(c))
+       		}
+       	} 		 
+       	result := target  	
+     	stdio.writeln("Building partitions finished")		    	
+    end
+    
+    
+    
+    //returns the set of instances of EClass of the package pack
+    operation getClasses(pack : EPackage) : Sequence<EClass> is do
+    	//selects the classes among the classifiers
+    	var classClassifier : Sequence<EClassifier>
+    	classClassifier := pack.eClassifiers.select{ e | e.getMetaClass==EClass } 
+	
+		//transforms the sequence of classifiers in a sequence of classes
+    	var classes : Sequence<EClass>
+    	classes := classClassifier.collect{ e | 
+    		var c : EClass 
+    		c ?= e
+    	}
+    	result := classes
+    end
+
+    //returns the sequence of all instances of EAttributes in the class    
+    operation getAttributes(eclass : EClass) : Sequence<EAttribute> is do
+       	var features : Sequence<EStructuralFeature>
+    	features := eclass.eStructuralFeatures.select{ e | e.getMetaClass == EAttribute }
+
+ 		//transforms the sequence of structural features in a sequence of attributes
+    	var attributes : Sequence<EAttribute>
+    	attributes := features.collect{ e | 
+    		var a : EAttribute 
+    		a ?= e
+    	}   
+    	result := attributes
+    end
+
+    //returns the sequence of all instances of EReference in the class
+    operation getReferences(eclass : EClass) : Sequence<EReference> is do
+       	var features : Sequence<EStructuralFeature>
+    	features := eclass.eStructuralFeatures.select{ e | e.getMetaClass == EReference }
+
+ 		//transforms the sequence of structural features in a sequence of references
+    	var references : Sequence<EReference>
+    	references := features.collect{ e | 
+    		var r : EReference 
+    		r ?= e
+    	}   	
+    	result := references
+    end
+
+	//Build the default partitions for each attributes value and multiplicity in the sequence of attributes and adds them in the target
+	//the attributes must be of type Integer, Boolean or String
+	operation buildAttributesPartitions(attributes : Sequence<EAttribute>) is do
+		attributes.each{ attr |
+			var propPart : FragmentsMM::PropertyPartition init FragmentsMM::PropertyPartition.new
+			//buid the partition with the correct type of ranges depending on the type of the attribute 
+			if (attr.eType.instanceClassName.equals("java.lang.Integer")) then
+				var intRange : OrderedSet<FragmentsMM::IntegerRange> init buildDefaultIntegerRanges
+				var Iranges : OrderedSet<FragmentsMM::Range> init OrderedSet<FragmentsMM::Range>.new
+				intRange.each{ intR | Iranges.add(intR)}
+				addValuePartitionInPropPart(attr, Iranges, propPart)			
+			else if (attr.eType.instanceClassName.equals("java.lang.Boolean")) then
+					var boolRange : OrderedSet<FragmentsMM::BooleanRange> init buildDefaultBooleanRanges
+					var Branges : OrderedSet<FragmentsMM::Range> init OrderedSet<FragmentsMM::Range>.new
+					boolRange.each{ boolR | Branges.add(boolR)}
+					addValuePartitionInPropPart(attr, Branges, propPart)
+				else if (attr.eType.instanceClassName.equals("java.lang.String")) then
+						var strRange : OrderedSet<FragmentsMM::StringRange> init buildDefaultStringRanges
+						var Sranges : OrderedSet<FragmentsMM::Range> init OrderedSet<FragmentsMM::Range>.new
+						strRange.each{ strR | Sranges.add(strR)}
+						addValuePartitionInPropPart(attr, Sranges, propPart)
+					else stdio.writeln("Unknown type for the attribute " + attr.name +". Can not build default partition")
+					end
+				end
+			end
+			//if the upperBound for the attr is different than 1 (if the multiplicity is different thatn 0..1 or 1..1)
+			//then build a partition for the cardinality
+			if (attr.upperBound != 1) then
+				var multiplicityRanges : OrderedSet<FragmentsMM::IntegerRange> init buildIntegerRanges(attr.lowerBound, attr.upperBound)
+				addMultiplicityPartitionInPropPart(attr, multiplicityRanges, propPart)
+			end
+			target.propertyPartitions.add(propPart)
+		}
+	end
+	
+	//builds the default partitions for the multiplicity of all the references in the sequence of references 
+	//and adds them in the target
+	operation buildReferencesPartitions(references : Sequence<EReference>) is do
+		references.each{ ref |
+			var propPart : FragmentsMM::PropertyPartition init FragmentsMM::PropertyPartition.new
+			//for each reference, build a integerRange with lower and upper bounds of the ref
+			var intRanges : OrderedSet<FragmentsMM::IntegerRange>
+			intRanges := buildIntegerRanges(ref.lowerBound, ref.upperBound)
+			addMultiplicityPartitionInPropPart(ref, intRanges, propPart)
+			target.propertyPartitions.add(propPart)
+		}
+	end
+	
+	//adds a ValuePartition in the propertyPartition with the feature and the set of ranges
+	operation addValuePartitionInPropPart(feature : EStructuralFeature, ranges : OrderedSet<FragmentsMM::Range>, propPart : FragmentsMM::PropertyPartition) is do
+		var valuePart : FragmentsMM::ValuePartition init FragmentsMM::ValuePartition.new
+//		part.ranges := ranges
+		ranges.each{ r| valuePart.ranges.add(r)}
+		propPart.featureName := feature.name
+		propPart.className := feature.eContainingClass.name
+		propPart.valuePartition := valuePart
+	end
+	 
+	//adds a MultiplicityPartition in the propertyPartition with the feature and the set of ranges
+	operation addMultiplicityPartitionInPropPart(feature : EStructuralFeature, ranges : OrderedSet<FragmentsMM::IntegerRange>, propPart : FragmentsMM::PropertyPartition) is do
+		var mulPart : FragmentsMM::MultiplicityPartition init FragmentsMM::MultiplicityPartition.new
+		ranges.each{ r| mulPart.ranges.add(r)}
+		propPart.featureName := feature.name
+		propPart.className := feature.eContainingClass.name
+		propPart.multiplicityPartition := mulPart		
+	end	
+		
+	//builds a set of 3 IntegerRanges with default values : [0,0][1,1][2,20000]
+	operation buildDefaultIntegerRanges() : OrderedSet<FragmentsMM::IntegerRange> is do
+		result := OrderedSet<FragmentsMM::IntegerRange>.new
+		var zero : FragmentsMM::IntegerRange init FragmentsMM::IntegerRange.new
+		zero.lower := 0
+		zero.upper:= 0
+		result.add(zero)
+		var one : FragmentsMM::IntegerRange init FragmentsMM::IntegerRange.new
+		one.lower := 1
+		one.upper:= 1
+		result.add(one)
+		var moreThanZero : FragmentsMM::IntegerRange init FragmentsMM::IntegerRange.new
+		moreThanZero.lower := 2
+		moreThanZero.upper:= 20000
+		result.add(moreThanZero)
+	end
+
+	/*there are 4 possible cases
+		upper == -1 then it builds a default integer partition
+		upper == lower+1 then it builds two IntegerRanges : [lower,lower][upper,upper]
+		upper - lower > 1 then it builds 3 IntegerRanges : [lower,lower][lower+1,upper-1][upper,upper]
+		lower == upper then there is only one IntegerRange*/
+	operation buildIntegerRanges(lower : Integer, upper : Integer) : OrderedSet<FragmentsMM::IntegerRange> is do
+		result := OrderedSet<FragmentsMM::IntegerRange>.new
+		if (lower != upper) then
+			if (upper == -1) then
+				result := buildDefaultIntegerRanges()
+			else
+				if (upper-lower == 1) then
+					var lowerBound : FragmentsMM::IntegerRange init FragmentsMM::IntegerRange.new
+					lowerBound.lower := lower
+					lowerBound.upper:= lower
+					result.add(lowerBound)
+					var upperBound : FragmentsMM::IntegerRange init FragmentsMM::IntegerRange.new
+					upperBound.lower := upper
+					upperBound.upper:= upper 
+					result.add(upperBound)						
+				else
+					var lowerBound : FragmentsMM::IntegerRange init FragmentsMM::IntegerRange.new
+					lowerBound.lower := lower
+					lowerBound.upper:= lower
+//					stdio.writeln("add range [" + lower.toString + "," + lower.toString + "]")
+					result.add(lowerBound)
+					var between : FragmentsMM::IntegerRange init FragmentsMM::IntegerRange.new
+					between.lower := lower+1
+					between.upper:= upper-1
+//					stdio.writeln("add range [" + lower.toString + "," + upper.toString + "]")
+					result.add(between)
+					var upperBound : FragmentsMM::IntegerRange init FragmentsMM::IntegerRange.new
+					upperBound.lower := upper
+					upperBound.upper:= upper
+//					stdio.writeln("add range [" + upper.toString + "," + upper.toString + "]")
+					result.add(upperBound)	
+				end
+			end		
+		else
+			var multiplicity : FragmentsMM::IntegerRange init FragmentsMM::IntegerRange.new
+			multiplicity.lower := lower
+			multiplicity.upper := upper
+			result.add(multiplicity)			
+		end
+	end
+
+	//builds 2 BooleanRanges with default values : [true,true][false,false]
+	operation buildDefaultBooleanRanges() : OrderedSet<FragmentsMM::BooleanRange> is do
+		result := OrderedSet<FragmentsMM::BooleanRange>.new
+		var trueVal : FragmentsMM::BooleanRange init FragmentsMM::BooleanRange.new	
+		trueVal.boolValue := true
+		var falseVal : FragmentsMM::BooleanRange init FragmentsMM::BooleanRange.new	
+		falseVal.boolValue := false
+		result.add(trueVal)
+		result.add(falseVal)
+	end
+	
+	//builds 2 StringRanges with default values : [""]["+"]
+	operation buildDefaultStringRanges() : OrderedSet<FragmentsMM::StringRange> is do
+		result := OrderedSet<FragmentsMM::StringRange>.new
+		var emptyString : FragmentsMM::StringRange init FragmentsMM::StringRange.new
+		emptyString.regexp := ""
+		var nonEmptyString : FragmentsMM::StringRange init FragmentsMM::StringRange.new
+		nonEmptyString.regexp := "+"
+		result.add(emptyString)
+		result.add(nonEmptyString)
+	end
+
+	//prints the number of features, attributes and references in each class of pack
+	operation printClasses(pack : EPackage) is do
+	   	var classes : Sequence<EClass> init getClasses(pack)
+       	classes.each{ e | 
+       		stdio.writeln(getFeaturesNumber(e).toString + " features in " + e.name + " : ")
+       		stdio.writeln(getAttributesNumber(e).toString + " attributes ")
+       		var attributes : Sequence<EAttribute> init getAttributes(e)
+       		attributes.each{ e | stdio.writeln("	" + e.name) } 
+       		stdio.writeln(getReferencesNumber(e).toString + " references ")
+       		var references : Sequence<EReference> init getReferences(e)
+       		references.each{ e | stdio.writeln("	" + e.name) }
+       		stdio.writeln("")
+       	}
+	end
+	
+	operation getFeaturesNumber(eclass : EClass) : Integer is do
+    	result := eclass.eStructuralFeatures.size
+    end
+   
+    operation getAttributesNumber(eclass : EClass) : Integer is do
+    	var attributes : Sequence<EStructuralFeature>
+    	attributes := eclass.eStructuralFeatures.select{ e | e.getMetaClass == EAttribute }
+    	result := attributes.size
+    end
+    
+    operation getReferencesNumber(eclass : EClass) : Integer is do
+    	var references : Sequence<EStructuralFeature>
+    	references := eclass.eStructuralFeatures.select{ e | e.getMetaClass == EReference }
+    	result := references.size 
+    end   
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Statechart xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.kermeta.org/testing/mmcc/statechat.ecore">
+  <transitions source="//@states.0" target="//@states.1"/>
+  <states xsi:type="State" label="1" outgoingTransition="//@transitions.0" isInitial="true"/>
+  <states xsi:type="State" label="2" incomingTransition="//@transitions.0" isFinal="true"/>
+</Statechart>

@@ -1,0 +1,103 @@
+@mainClass "mmcc::TestCheckInputModels"
+@mainOperation "main"
+
+package mmcc;
+
+require kermeta
+require "platform:/resource/org.kermeta.testing.mmcc/MMCC/CheckInputModels.kmt"
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/org.kermeta.testing.mmcc/TestData/statechart.ecore" 
+require "platform:/resource/org.kermeta.testing.mmcc/TestData/MMwInheritance.ecore"
+require "platform:/resource/org.kermeta.testing.mmcc/TestData/MMwCardinalityOne.ecore" 
+
+using ecore
+using kermeta::persistence
+using kermeta::standard
+using kermeta::reflection
+ 
+class TestCheckInputModels
+{
+	reference check : CheckInputModels 
+	reference repository : EMFRepository 
+	attribute testDataDir : String //Name of the directory containing the test data
+
+    operation main() : Void is do 
+        check := CheckInputModels.new
+        repository := EMFRepository.new
+        testDataDir := "platform:/resource/org.kermeta.testing.mmcc/TestData/"
+        test1
+        test2
+        test3
+        test4
+        //test5
+        //test6 
+    end
+    
+    //tests with a simple model that has one root object and only one level of composition (the composition tree is of depth 1)
+    operation test1() is do
+    	var resource : EMFResource 
+    	resource ?= repository.createResource(testDataDir+"Statechart1.xmi", testDataDir+"statechart.ecore") 
+ 		var model : Sequence<kermeta::reflection::Object>
+ 		resource.load
+ 		model:=check.getObjectsInModel(resource)
+ 		assertEqual(5, model.size, "test1")	  	
+    end
+
+    //tests with a model that has two root objects
+    operation test2() is do
+    	var resource : EMFResource    
+    	resource ?= repository.createResource(testDataDir+"Statechart2.xmi", testDataDir+"statechart.ecore") 
+ 		var model : Sequence<kermeta::reflection::Object>
+ 		resource.load
+ 		model:=check.getObjectsInModel(resource)
+ 		assertEqual(8, model.size, "test2")	  	
+    end
+        
+    //tests with a model that has two levels of composition
+    operation test3() is do
+    	var resource : EMFResource    
+    	resource ?= repository.createResource(testDataDir+"Statechart3.xmi", testDataDir+"statechart.ecore") 
+ 		var model : Sequence<kermeta::reflection::Object>
+ 		resource.load
+ 		model:=check.getObjectsInModel(resource)
+ 		assertEqual(12, model.size, "test3")	  	
+    end
+
+    //tests with a model that has thrre levels of composition
+    operation test4() is do
+    	var resource : EMFResource    
+    	resource ?= repository.createResource(testDataDir+"Statechart4.xmi", testDataDir+"statechart.ecore") 
+ 		var model : Sequence<kermeta::reflection::Object>
+ 		resource.load
+ 		model:=check.getObjectsInModel(resource)
+ 		assertEqual(7, model.size, "test4")	  	
+    end
+/*
+    //tests with an instance of a metamodel where a class inherits from a composite reference
+    operation test5() is do
+    	var resource : EMFResource    
+    	resource ?= repository.createResource(testDataDir+"Root.xmi", testDataDir+"MMwInheritance.ecore") 
+ 		var model : Sequence<kermeta::reflection::Object>
+ 		resource.load
+ 		model:=check.getObjectsInModel(resource)
+ 		assertEqual(3, model.size, "test5")	  	
+    end
+
+    //tests with an instance of a metamodel where a class has a composite ref with cardinality one
+    operation test6() is do
+    	var resource : EMFResource    resource ?= repository.createResource("./Root1.xmi", "./MMwCardinalityOne.ecore") 
+ 		var model : Sequence<kermeta::reflection::Object>
+ 		resource.load
+ 		model:=check.getObjectsInModel(resource)
+ 		assertEqual(2, model.size, "test6")	  	
+    end
+*/
+    operation assertEqual (a:Integer, b:Integer, testName:String) is do
+    	 if (a != b) then
+    	 	stdio.writeln(testName + " failed")
+    	 else
+    	 	stdio.writeln(testName + " passed")
+    	 end
+    end
+    
+}

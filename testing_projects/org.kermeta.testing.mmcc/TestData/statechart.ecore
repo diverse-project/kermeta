@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="statechart"
+    nsURI="http://www.kermeta.org/testing/mmcc/statechat.ecore">
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//AbstractState">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isFinal" eType="#//BooleanState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInitial" eType="#//BooleanState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractState" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="#//IntegerState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="#//Composite"
+        eOpposite="#//Composite/ownedState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransition" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransition" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statechart" lowerBound="1"
+        eType="#//Statechart" eOpposite="#//Statechart/states"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Composite" eSuperTypes="#//AbstractState">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedState" upperBound="-1"
+        eType="#//AbstractState" containment="true" eOpposite="#//AbstractState/container"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="event" eType="#//StringState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//AbstractState" eOpposite="#//AbstractState/outgoingTransition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//AbstractState" eOpposite="#//AbstractState/incomingTransition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statechart" lowerBound="1"
+        eType="#//Statechart" eOpposite="#//Statechart/transitions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="StringState" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IntegerState" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="BooleanState" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Statechart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
+        eType="#//Transition" containment="true" eOpposite="#//Transition/statechart"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+        eType="#//AbstractState" containment="true" eOpposite="#//AbstractState/statechart"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,98 @@
+/* $Id: CoverageChecker.kmt,v 1.1 2007-09-14 13:08:05 ffleurey Exp $
+ * Creation date: July 10, 2007
+ * License:
+ * Copyright:
+ * Authors: Benoit Baudry
+ * 
+ * This class defines the operation checkCoverageOfModels that checks that a set of models satisfies a coverage criterion.
+ * This program MUST be called after ModelFragmentsGenerator that will generate the model fragments for a particular metamodel.
+ */
+@mainClass "mmcc::CoverageChecker"
+@mainOperation "main"
+
+
+package mmcc;
+
+
+require "platform:/resource/org.kermeta.testing.mmcc/tmp/ModelsCoverageChecker.kmt"
+require kermeta
+
+using kermeta::standard
+using kermeta::persistence
+
+class CoverageChecker
+{
+	/* This operation checks that the set of models satisfies the criterion
+	*This operation assumes that model fragments have been generated for a metamodel, and that
+	*the strings passed as parameter are names of models that are instances of this metamodel
+	*	
+	*	models : set of strings which are names of models that conform to the metamodel for which the fragments were generated		
+	*/
+	operation checkCoverageOfModels (models : OrderedSet<String>) is do
+		var mcc : ModelsCoverageChecker init ModelsCoverageChecker.new
+		mcc.checkModelsCoverage(models)				
+	end
+	
+
+	/* This operation calls the coverage check for different sets of models */
+	operation main() : Void is do 
+		/*To run these checks, ModelsCoverageChecker must have been generated with statechart.ecore as the input metamodel*/
+		checkCoverageOfModels(buildStatechartsSet1)
+//		checkCoverageOfModels(buildStatechartsSet2)
+
+		/*To run these checks, ModelsCoverageChecker must have been generated with SimpleMMIntFeature.ecore as the input metamodel*/
+//		checkCoverageOfModels(buildSimpleMMIntFeatureSet)		
+		
+		/*To run these checks, ModelsCoverageChecker must have been generated with classModel.ecore as the input metamodel*/
+//		checkCoverageOfModels(buildClassModelSet)
+	end
+	
+	/* This set of models satisfies the AllPart criterion.	Two model fragments are not covered, but they cannot be covered :
+	*	It is not possible to have a statechart with 0 AND more than 2 transitions
+	*	It is not possible to have a statechart with 0 AND more than 2 states
+	*/
+	operation buildStatechartsSet1() : OrderedSet<String> is do
+		var testDataDir : String init "platform:/resource/org.kermeta.testing.mmcc/TestData/"
+		var models : OrderedSet<String>
+		models := OrderedSet<String>.new
+		models.add(testDataDir+"Statechart.xmi")
+		models.add(testDataDir+"Statechart1.xmi")
+		models.add(testDataDir+"Statechart2.xmi")
+		models.add(testDataDir+"Statechart3.xmi")
+		models.add(testDataDir+"Statechart4.xmi")
+		result := models
+	end
+
+	/*This set of models satisfies the AllRanges criterion. There should be no uncovered fragment.*/
+	operation buildStatechartsSet2() : OrderedSet<String> is do
+		var testDataDir : String init "platform:/resource/org.kermeta.testing.mmcc/TestData/"
+		var models : OrderedSet<String>
+		models := OrderedSet<String>.new
+		models.add(testDataDir+"Statechart.xmi")
+		models.add(testDataDir+"Statechart1.xmi")
+		models.add(testDataDir+"Statechart2.xmi")
+		models.add(testDataDir+"Statechart3.xmi")
+		models.add(testDataDir+"Statechart5.xmi")
+		models.add(testDataDir+"Statechart6.xmi")	
+		result := models
+	end
+	
+	operation buildSimpleMMIntFeatureSet() : OrderedSet<String> is do
+		var testDataDir : String init "platform:/resource/org.kermeta.testing.mmcc/TestData/"
+		var models : OrderedSet<String>
+		models := OrderedSet<String>.new
+		models.add(testDataDir+"oneClassA.xmi")
+		models.add(testDataDir+"oneClassA3.xmi")
+		models.add(testDataDir+"oneClassA0.xmi")
+		result := models
+	end
+	
+	operation buildClassModelSet() : OrderedSet<String> is do
+		var testDataDir : String init "platform:/resource/org.kermeta.testing.mmcc/TestData/"
+		var models : OrderedSet<String>
+		models := OrderedSet<String>.new
+		models.add(testDataDir+"classModel.xmi")
+		result := models
+	end
+	
+}

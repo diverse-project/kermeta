@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="FragmentsMM" nsURI="http://www.kermeta.org/testing/mmcc/ciMM.ecore" nsPrefix="FragmentsMM">
+  <eClassifiers xsi:type="ecore:EClass" name="Range" abstract="true">
+    <eOperations name="isContained" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+      <eParameters name="actualInt" eType="//Object"/>
+    </eOperations>
+    <eOperations name="getPartition" eType="//Partition">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valuePartition" eType="//ValuePartition" eOpposite="//ValuePartition/ranges"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerRange" eSuperTypes="//Range">
+    <eOperations name="isContained" eType="//Boolean">
+      <eAnnotations source="kermeta" references="//Range/isContained">
+        <details key="body" value="do&#xA;&#x9;var actualInt : kermeta::standard::Integer&#xA;&#x9;actualInt ?= actualInt1&#xA;&#x9;if actualInt.isNotSameAs(void) then&#xA;&#x9;&#x9;result := actualInt.isGreaterOrEqual(lower).~and(actualInt.isLowerOrEqual(upper))&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := false&#xA;&#xA;&#x9;end&#xA;end"/>
+        <details key="superOperation" value="FragmentsMM::Range"/>
+      </eAnnotations>
+      <eParameters name="actualInt1" eType="//Object"/>
+    </eOperations>
+    <eOperations name="toString" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := &quot;The integer range from &quot;.plus(lower.toString).plus(&quot; to &quot;).plus(upper.toString)&#xA;end"/>
+        <details key="superOperation" value="kermeta::reflection::Object"/>
+        <references href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Object/toString"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getPartition" eType="//Partition">
+      <eAnnotations source="kermeta" references="//Range/getPartition">
+        <details key="body" value="do&#xA;&#x9;if multiplicityPartition.isNotSameAs(void) then&#xA;&#x9;&#x9;result := multiplicityPartition&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := valuePartition&#xA;&#xA;&#x9;end&#xA;end"/>
+        <details key="superOperation" value="FragmentsMM::Range"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="//Integer">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="//Integer">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicityPartition" eType="//MultiplicityPartition" eOpposite="//MultiplicityPartition/ranges"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanRange" eSuperTypes="//Range">
+    <eOperations name="isContained" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := actualBool.isSameAs(boolValue)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="actualBool" eType="//Object"/>
+    </eOperations>
+    <eOperations name="toString" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := &quot;The boolean range : &quot;.plus(boolValue.toString)&#xA;end"/>
+        <details key="superOperation" value="kermeta::reflection::Object"/>
+        <references href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Object/toString"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getPartition" eType="//Partition">
+      <eAnnotations source="kermeta" references="//Range/getPartition">
+        <details key="body" value="do&#xA;&#x9;result := valuePartition&#xA;end"/>
+        <details key="superOperation" value="FragmentsMM::Range"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolValue" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringRange" eSuperTypes="//Range">
+    <eOperations name="isContained" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;if regexp.isSameAs(&quot;+&quot;).~and(actualString.isNotSameAs(&quot;&quot;)) then&#xA;&#x9;&#x9;result := true&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := actualString.isSameAs(regexp)&#xA;&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="actualString" eType="//String"/>
+    </eOperations>
+    <eOperations name="toString" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := &quot;The string range &quot;.plus(regexp)&#xA;end"/>
+        <details key="superOperation" value="kermeta::reflection::Object"/>
+        <references href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Object/toString"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getPartition" eType="//Partition">
+      <eAnnotations source="kermeta" references="//Range/getPartition">
+        <details key="body" value="do&#xA;&#x9;result := valuePartition&#xA;end"/>
+        <details key="superOperation" value="FragmentsMM::Range"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="regexp" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PartitionModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyPartitions" upperBound="-1" eType="//PropertyPartition" containment="true" eOpposite="//PropertyPartition/partitionModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="partitions" upperBound="-1" eType="//Partition" volatile="true" transient="true" derived="true">
+      <eAnnotations source="kermetaderivedProp.setter">
+        <details key="body" value="do&#xA;   //TODO: implement setterfor derived property partitions&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="kermetaderivedProp.getter">
+        <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;FragmentsMM::Partition>.new&#xA;&#x9;propertyPartitions.each{pPart | do&#xA;&#x9;&#x9;&#x9;if pPart.valuePartition.isNotSameAs(void) then&#xA;&#x9;&#x9;&#x9;&#x9;result.add(pPart.valuePartition)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;if pPart.multiplicityPartition.isNotSameAs(void) then&#xA;&#x9;&#x9;&#x9;&#x9;result.add(pPart.multiplicityPartition)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="isReadOnly" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyPartition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valuePartition" eType="//ValuePartition" containment="true" eOpposite="//ValuePartition/propertyPartition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicityPartition" eType="//MultiplicityPartition" containment="true" eOpposite="//MultiplicityPartition/propertyPartition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="partitionModel" eType="//PartitionModel" eOpposite="//PartitionModel/propertyPartitions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Partition">
+    <eOperations name="getRanges" upperBound="-1" eType="//Range">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getFeatureName" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getClassName" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isObjectInRange" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+      <eParameters name="oToCheck" eType="//Object"/>
+      <eParameters name="range" eType="//Range"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValuePartition" eSuperTypes="//Partition">
+    <eOperations name="getRanges" upperBound="-1" eType="//Range">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : FragmentsMM::Range[0..*] init kermeta::standard::OrderedSet&lt;FragmentsMM::Range>.new&#xA;&#x9;ranges.each{r | res.add(r)}&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getFeatureName" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := propertyPartition.featureName&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getClassName" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := propertyPartition.className&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isObjectInRange" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var feature : kermeta::reflection::Property&#xA;&#x9;feature := oToCheck.getMetaClass.ownedAttribute.detect{attr | attr.name.equals(getFeatureName)}&#xA;&#x9;if feature.upper.isNotSameAs(1) then&#xA;&#x9;&#x9;stdio.writeln(&quot;ERROR : the feature &quot;.plus(feature.name).plus(&quot; is a set. There is no value partition for this feature&quot;))&#xA;&#x9;&#x9;result := false&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := range.isContained(oToCheck.get(feature))&#xA;&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="oToCheck" eType="//Object"/>
+      <eParameters name="range" eType="//Range"/>
+    </eOperations>
+    <eOperations name="toString" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := &quot;The value partition for the property &quot;.plus(getFeatureName).plus(&quot; of class &quot;).plus(getClassName)&#xA;end"/>
+        <details key="superOperation" value="kermeta::reflection::Object"/>
+        <references href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Object/toString"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyPartition" eType="//PropertyPartition" eOpposite="//PropertyPartition/valuePartition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ranges" upperBound="-1" eType="//Range" containment="true" eOpposite="//Range/valuePartition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiplicityPartition" eSuperTypes="//Partition">
+    <eOperations name="getRanges" upperBound="-1" eType="//Range">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : FragmentsMM::Range[0..*] init kermeta::standard::OrderedSet&lt;FragmentsMM::Range>.new&#xA;&#x9;ranges.each{r | res.add(r)}&#xA;&#x9;result := res&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getFeatureName" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := propertyPartition.featureName&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getClassName" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := propertyPartition.className&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isObjectInRange" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var feature : kermeta::reflection::Property&#xA;&#x9;feature := oToCheck.getMetaClass.ownedAttribute.detect{attr | attr.name.equals(getFeatureName)}&#xA;&#x9;if feature.upper.isNotSameAs(1) then&#xA;&#x9;&#x9;var setOfObjects : kermeta::standard::Collection&lt;kermeta::reflection::Object>&#xA;&#x9;&#x9;setOfObjects ?= oToCheck.get(feature)&#xA;&#x9;&#x9;result := range.isContained(setOfObjects.size)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;stdio.writeln(&quot;ERROR : the feature &quot;.plus(feature.name).plus(&quot; is not a set. There is no multiplicity partition for this feature&quot;))&#xA;&#x9;&#x9;result := false&#xA;&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="oToCheck" eType="//Object"/>
+      <eParameters name="range" eType="//Range"/>
+    </eOperations>
+    <eOperations name="toString" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := &quot;The multiplicity partition for the property &quot;.plus(getFeatureName).plus(&quot; of class &quot;).plus(getClassName)&#xA;end"/>
+        <details key="superOperation" value="kermeta::reflection::Object"/>
+        <references href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Object/toString"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyPartition" eType="//PropertyPartition" eOpposite="//PropertyPartition/multiplicityPartition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ranges" upperBound="-1" eType="//IntegerRange" containment="true" eOpposite="//IntegerRange/multiplicityPartition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fragments">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fragments" upperBound="-1" eType="//ModelFragment" containment="true" eOpposite="//ModelFragment/set"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelFragment">
+    <eOperations name="toString" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::String&#xA;&#x9;res := &quot;The model fragment with the following object fragments&quot;&#xA;&#x9;objectFragments.each{of | res := res.plus(&quot;&#x9;&quot;).plus(of.toString)}&#xA;&#x9;result := res&#xA;end"/>
+        <details key="superOperation" value="kermeta::reflection::Object"/>
+        <references href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Object/toString"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectFragments" upperBound="-1" eType="//ObjectFragment" containment="true" eOpposite="//ObjectFragment/modelFragment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="set" eType="//Fragments" eOpposite="//Fragments/fragments"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectFragment">
+    <eOperations name="toString" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::String&#xA;&#x9;var className : kermeta::standard::String&#xA;&#x9;className := constraints.one.className&#xA;&#x9;res := &quot;The object fragment for the class &quot;.plus(className).plus(&quot; and the following constraints &#xA;&quot;)&#xA;&#x9;constraints.each{c | res := res.plus(&quot;&#x9;&quot;).plus(c.range.toString).plus(&quot; for the &quot;).plus(c.featureName).plus(&quot; property &#xA;&quot;)}&#xA;&#x9;result := res&#xA;end"/>
+        <details key="superOperation" value="kermeta::reflection::Object"/>
+        <references href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Object/toString"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1" eType="//PropertyConstraint" containment="true" eOpposite="//PropertyConstraint/object"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelFragment" eType="//ModelFragment" eOpposite="//ModelFragment/objectFragments"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyConstraint">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="range" lowerBound="1" eType="//Range"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="object" lowerBound="1" eType="//ObjectFragment" eOpposite="//ObjectFragment/constraints"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+</ecore:EPackage>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:FragmentsMM="platform:/resource/org.kermeta.testing.mmcc/ModelCoverageCheckerv0.2/ciMM.ecore">
+  <FragmentsMM:PartitionModel>
+    <propertyPartitions featureName="src" className="Association">
+      <multiplicityPartition>
+        <ranges lower="1" upper="1"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="name" className="Attribute">
+      <valuePartition>
+        <ranges xsi:type="FragmentsMM:StringRange" regexp="+"/>
+        <ranges xsi:type="FragmentsMM:StringRange" regexp=""/>
+      </valuePartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="type" className="Attribute">
+      <multiplicityPartition>
+        <ranges lower="1" upper="1"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions/>
+    <propertyPartitions featureName="attrs" className="Class">
+      <multiplicityPartition>
+        <ranges lower="0" upper="0"/>
+        <ranges lower="1" upper="1"/>
+        <ranges lower="2" upper="20000"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="classifier" className="ClassModel">
+      <multiplicityPartition>
+        <ranges lower="2" upper="20000"/>
+        <ranges lower="0" upper="0"/>
+        <ranges lower="1" upper="1"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="association" className="ClassModel">
+      <multiplicityPartition>
+        <ranges lower="0" upper="0"/>
+        <ranges lower="1" upper="1"/>
+        <ranges lower="2" upper="20000"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="parent" className="Class">
+      <multiplicityPartition>
+        <ranges lower="1" upper="1"/>
+        <ranges lower="0" upper="0"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions/>
+    <propertyPartitions featureName="name" className="Association">
+      <valuePartition>
+        <ranges xsi:type="FragmentsMM:StringRange" regexp=""/>
+        <ranges xsi:type="FragmentsMM:StringRange" regexp="+"/>
+      </valuePartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="dest" className="Association">
+      <multiplicityPartition>
+        <ranges lower="1" upper="1"/>
+      </multiplicityPartition>
+    </propertyPartitions>
+    <propertyPartitions featureName="name" className="Classifier">
+      <valuePartition>
+        <ranges xsi:type="FragmentsMM:StringRange" regexp=""/>
+        <ranges xsi:type="FragmentsMM:StringRange" regexp="+"/>
+      </valuePartition>
+    </propertyPartitions>
+  </FragmentsMM:PartitionModel>
+  <FragmentsMM:Fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.11/@valuePartition/@ranges.1" featureName="name" className="Classifier"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.11/@valuePartition/@ranges.0" featureName="name" className="Classifier"/>
+      </objectFragments>
+    </fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.9/@valuePartition/@ranges.0" featureName="name" className="Association"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.9/@valuePartition/@ranges.1" featureName="name" className="Association"/>
+      </objectFragments>
+    </fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.0/@multiplicityPartition/@ranges.0" featureName="src" className="Association"/>
+      </objectFragments>
+    </fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.10/@multiplicityPartition/@ranges.0" featureName="dest" className="Association"/>
+      </objectFragments>
+    </fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.1/@valuePartition/@ranges.1" featureName="name" className="Attribute"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.1/@valuePartition/@ranges.0" featureName="name" className="Attribute"/>
+      </objectFragments>
+    </fragments>
+    <fragments/>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.2/@multiplicityPartition/@ranges.0" featureName="type" className="Attribute"/>
+      </objectFragments>
+    </fragments>
+    <fragments/>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.4/@multiplicityPartition/@ranges.1" featureName="attrs" className="Class"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.4/@multiplicityPartition/@ranges.2" featureName="attrs" className="Class"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.4/@multiplicityPartition/@ranges.0" featureName="attrs" className="Class"/>
+      </objectFragments>
+    </fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.7/@multiplicityPartition/@ranges.1" featureName="parent" className="Class"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.7/@multiplicityPartition/@ranges.0" featureName="parent" className="Class"/>
+      </objectFragments>
+    </fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.5/@multiplicityPartition/@ranges.1" featureName="classifier" className="ClassModel"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.5/@multiplicityPartition/@ranges.0" featureName="classifier" className="ClassModel"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.5/@multiplicityPartition/@ranges.2" featureName="classifier" className="ClassModel"/>
+      </objectFragments>
+    </fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.6/@multiplicityPartition/@ranges.0" featureName="association" className="ClassModel"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.6/@multiplicityPartition/@ranges.1" featureName="association" className="ClassModel"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.6/@multiplicityPartition/@ranges.2" featureName="association" className="ClassModel"/>
+      </objectFragments>
+    </fragments>
+  </FragmentsMM:Fragments>
+</xmi:XMI>

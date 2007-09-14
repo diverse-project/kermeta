@@ -1,0 +1,341 @@
+/* $Id: ciMM.kmt,v 1.1 2007-09-14 13:08:06 ffleurey Exp $
+ * Creation date: January 12, 2006
+ * Author: Benoit Baudry
+ * This package contains the metamodel for partitions, model and object fragments
+ *
+ * In this version of the metamodel, the Partition and PropertyConstraint classes don't have
+ * a direct relationship to the EStructuralFeature of ecore. Instead those classes have
+ * two attributes featureName and className. They correspond to the names of the feature and
+ * its containing classes for which the partition and constraint are defined.
+ * It was necessary to decouple this metamodel from ecore (by removing the association to EStructuralFeature) 
+ * in order to avoid the minpulation of three modelling levels when checking the constraints : the models to check,
+ * the source metamodel and the metametamodel (that would be present if EStructuralFeature was in ciMM and metamodel
+ * fo the sourece metamodel at the same time)
+ */
+
+package FragmentsMM;
+
+using kermeta::standard 
+using kermeta::reflection
+
+
+abstract class Range 
+{
+	reference valuePartition : ValuePartition#ranges
+
+	/*For each type of range, checks if the object is included in the range*/
+	operation isContained (actualInt: Object) : Boolean is abstract 
+	
+	/*Returns the partition that contains to the range. 
+	  In the case of an IntegerRange it can be a value or multiplicity partition.*/
+	operation getPartition() : Partition is abstract 
+	
+}
+
+class IntegerRange inherits Range
+{
+	attribute lower : kermeta::standard::Integer
+
+	attribute upper : kermeta::standard::Integer
+	
+	reference multiplicityPartition : MultiplicityPartition#ranges
+
+	//checks that lower =< actualInteger <= upper 
+	method isContained (actualInt1: Object) : kermeta::standard::Boolean is do
+		var actualInt : Integer
+		actualInt ?= actualInt1
+		if (actualInt != void ) then 
+			result := (actualInt>=lower and actualInt<=upper)
+		else 
+			result := false
+		end
+	end 
+	
+	/*An IntegerRange is contained by a multiplicity or value partition. 
+	  But it can be contained only by one partition.
+	  Thus when returning the containing partition, it is necessary to check which one is valid.*/
+	method  getPartition() : Partition is do 
+		if (multiplicityPartition != void) then result:=multiplicityPartition
+		else result:=valuePartition
+		end
+	end
+	
+	method toString() : String is do
+		result := "The integer range from "+lower.toString+" to "+upper.toString
+	end
+}
+
+class BooleanRange inherits Range
+{
+	attribute boolValue : kermeta::standard::Boolean
+	
+	//checks that the actualBool is equal to the boolValue
+	operation isContained (actualBool: Object) : kermeta::standard::Boolean is do
+		result := (actualBool==boolValue)
+	end
+
+	method  getPartition() : Partition is do 
+		result:=valuePartition
+	end
+
+	method toString() : String is do
+		result := "The boolean range : "+boolValue.toString
+	end
+}
+
+class StringRange inherits Range
+{
+	attribute regexp : kermeta::standard::String
+
+	//This operation checks that the actualString is included in the regular expression regexp
+	//Since there is no easy way to manipulate regular expression in kermeta, there is only one regexp possible "+"
+	//So there are 3 possible cases:
+	//	if regexp="+" the actualString can be any string that is different from ""
+	//	if regexp="" the actualString can be only ""
+	//	if regexp is any string the actualString must be equal to this string
+	operation isContained (actualString: kermeta::standard::String) : kermeta::standard::Boolean is do
+		if (regexp=="+" and actualString != "") then	
+			result := true
+		else 
+			result := (actualString==regexp)
+		end
+	end
+
+	method  getPartition() : Partition is do 
+		result:=valuePartition
+	end
+
+	method toString() : String is do
+		if regexp.equals("") then result := "The string range \"\" "
+		else result := "The string range "+regexp
+		end
+	end
+}
+
+class PartitionModel
+{
+	attribute propertyPartitions : PropertyPartition[0..*]#partitionModel
+	
+	/*This derived property return the set of partitions defined in the partitionModel.*/
+	property partitions : Partition[0..*]
+    getter is do
+    	result := kermeta::standard::OrderedSet<Partition>.new
+        propertyPartitions.each{ pPart | 
+        	if pPart.valuePartition!=void then result.add(pPart.valuePartition) end
+        	if pPart.multiplicityPartition!=void then result.add(pPart.multiplicityPartition) end
+        }
+   	end
+
+	
+}
+
+/*This class contains both value and mutltiplcity partitions that are defined for a feature
+  One of the partitions can be void: valuePartition*/
+class PropertyPartition
+{
+	attribute featureName : kermeta::standard::String
+	
+	attribute className : kermeta::standard::String
+
+	attribute valuePartition : ValuePartition[0..1]#propertyPartition
+	
+	attribute multiplicityPartition : MultiplicityPartition[0..1]#propertyPartition
+	
+	reference partitionModel : PartitionModel#propertyPartitions
+	
+	
+}
+class Partition
+{
+	/*These operation are defined to allow getting the ranges, className and featureName 
+	of a partition independtly from its type*/
+	operation getRanges () : Range[0..*] is abstract
+	operation getFeatureName () : kermeta::standard::String is abstract
+	operation getClassName () : kermeta::standard::String is abstract
+	
+	/*This operation is defined here because the way we check if an object is in a range depends on the type of Partition:
+	*	if it is a valuePartition, it checks that the value of the property is in the range
+	*	if it is a multiplicityPartition, it checks that the multiplicity of the property is in the range
+	*Pre condition : the range must be in the set of ranges of the Partition 
+	*/
+	operation isObjectInRange (oToCheck: Object, range:Range) : Boolean 
+	pre correctRange is do getRanges.includes(range) end
+	is abstract 
+	
+	/* Returns all the properties of a class (its own properties and the ones it has inherits) 
+	This method is used in the sub-classes when checking of an object is contained in a range.*/
+    operation getAllPropertiesOfClass(cd : ClassDefinition) : Collection<Property> is do
+    	result := Set<Property>.new
+        result.addAll(cd.ownedAttribute)
+        //add to the result the properties of all the super classes
+        cd.superType.each{ t |
+        	var sc : Class        
+        	sc := t
+            //add the properties of a super class. 
+            //since there might "diamonds" in the inheritance tree, we must check that the property is not already on the result
+			var classdef : ClassDefinition 
+			classdef ?= sc.typeDefinition
+      		getAllPropertiesOfClass(classdef).each{ p |
+            	if not result.contains(p) then
+                	result.add(p)
+                end
+            }
+        }
+        result := result.select{ k | not k.isDerived }
+	end	
+}
+
+class ValuePartition inherits Partition
+{
+	reference propertyPartition : PropertyPartition#valuePartition
+
+	attribute ranges : Range[0..*]#valuePartition
+	
+	operation getRanges () : Range[0..*] is do
+		var res : Range[0..*] init OrderedSet<Range>.new
+		ranges.each{ r | res.add(r)}
+		result:=res
+	end
+	
+	operation getFeatureName () : kermeta::standard::String is do
+		result := propertyPartition.featureName
+	end
+	
+	operation getClassName () : kermeta::standard::String is do
+		result := propertyPartition.className
+	end
+	
+	/* pre-condition : range included in ranges*/
+	operation isObjectInRange (oToCheck: Object, range:Range) : Boolean is do
+		// properties collects all the properties of the object and the inherited properties
+		var properties : Collection<Property> init getAllPropertiesOfClass(oToCheck.getMetaClass.typeDefinition.asType(ClassDefinition))
+		var feature : Property  
+		//feature gets the feature in the object o which name is equal to the featureName of the constraint
+		feature:= properties.detect{ attr |
+			attr.name.equals(getFeatureName)
+		}
+		//If the feature is a set then there is an error: we have not defined ranges on multiple attrs
+		//else check if the value is in the range
+		if (feature.upper != 1) then
+			stdio.writeln("ERROR : the feature "+feature.name+" is a set. There is no value partition for this feature")
+			result := false
+		else
+			result := range.isContained(oToCheck.get(feature))
+		end
+	end
+	
+	method toString() : String is do
+		result := "The value partition for the property "+getFeatureName+" of class "+getClassName
+	end
+}
+
+class MultiplicityPartition inherits Partition
+{
+	reference propertyPartition : PropertyPartition#multiplicityPartition
+
+	attribute ranges : IntegerRange [0..*]#multiplicityPartition
+	
+	operation getRanges () : Range[0..*] is do
+		var res : Range[0..*] init OrderedSet<Range>.new
+		ranges.each{ r | res.add(r)}
+		result:=res
+	end
+	
+	operation getFeatureName () : kermeta::standard::String is do
+		result := propertyPartition.featureName
+	end
+	
+	operation getClassName () : kermeta::standard::String is do
+		result := propertyPartition.className
+	end
+
+	/* pre-condition : range included in ranges*/
+	operation isObjectInRange (oToCheck: Object, range:Range) : Boolean is do
+		// properties collects all the properties of the object and the inherited properties
+		var properties : Collection<Property> init getAllPropertiesOfClass(oToCheck.getMetaClass.typeDefinition.asType(ClassDefinition))
+		var feature : Property  
+		//feature gets the feature in the object o which name is equal to the featureName of the constraint
+		feature:= properties.detect{ attr |
+			attr.name.equals(getFeatureName)
+		}
+		//If the feature is a set then check if its size is included in the range
+		//else there is an error, there can not be a multiplicity part on a single object
+		if (feature.upper != 1) then
+			var setOfObjects : Collection<kermeta::reflection::Object>
+    		setOfObjects ?= oToCheck.get(feature)
+			result := range.isContained(setOfObjects.size)
+		//if the feature is not a set but there is still a multiplicityPartition defined for it
+		//it must be a reference with multiplicity 1..1 or 0..1
+		//if this fails because the feature is not a reference, there is an error when building the partitions
+		//there should be no multiplicityPartition for an attribute with multiplicity 1..1 or 0..1
+		else
+			var numberOfFeature : Integer init Integer.new
+			if oToCheck.get(feature) != void then 
+				numberOfFeature := 1
+				result := range.isContained(numberOfFeature)
+			else 
+				numberOfFeature := 0
+				result := range.isContained(numberOfFeature)
+			end
+		end
+	end
+
+	method toString() : String is do
+		result := "The multiplicity partition for the property "+getFeatureName+" of class "+getClassName
+	end
+	
+}
+
+class Fragments
+{
+	attribute fragments : ModelFragment[0..*]#~set
+
+}
+
+class ModelFragment
+{
+	attribute objectFragments : ObjectFragment[0..*]#modelFragment
+
+	reference ~set : Fragments#fragments
+
+	method toString() : String is do
+		var res : String
+		res := "The model fragment with the following object fragments \n"
+		objectFragments.each{ of |
+			res := res+"\t"+of.toString
+		}
+		result := res
+	end
+	
+}
+
+class ObjectFragment
+{
+	attribute constraints : PropertyConstraint[0..*]#object
+
+	reference modelFragment : ModelFragment#objectFragments
+	
+	method toString() : String is do
+		var res : String
+		var className : String
+		className := constraints.one.className
+		res := "The object fragment for the class "+className+" and the following constraints \n"
+		constraints.each{ c |
+			res := res+"\t"+c.range.toString+" for the "+c.featureName+" property \n"
+		}
+		result:=res
+	end
+
+}
+
+class PropertyConstraint
+{
+	reference range : Range[1..1]
+
+	reference object : ObjectFragment[1..1]#constraints
+
+	attribute featureName : kermeta::standard::String
+	
+	attribute className : kermeta::standard::String
+
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<classModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="platform:/resource/ModelTransfoTestData/TestData/classModel.ecore">
+  <classifiers xsi:type="Class" name="Order" isPersistent="true">
+    <attrs isPrimary="true" name="orderNo" type="//@classifiers.3"/>
+  </classifiers>
+  <classifiers xsi:type="Class" name="Customer" isPersistent="true">
+    <attrs isPrimary="true" name="order" type="//@classifiers.4"/>
+  </classifiers>
+  <classifiers xsi:type="Class" name="Address" isPersistent="true">
+    <attrs isPrimary="true" name="address" type="//@classifiers.4"/>
+  </classifiers>
+  <classifiers xsi:type="PrimitiveDataType" name="int"/>
+  <classifiers xsi:type="PrimitiveDataType" name="string"/>
+  <associations name="customer" destination="//@classifiers.1" source="//@classifiers.0"/>
+  <associations name="address" destination="//@classifiers.1" source="//@classifiers.2"/>
+</classModel>

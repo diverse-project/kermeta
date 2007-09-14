@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simpleUML_MM:ClassModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simpleUML_MM="http://simpleUML_MM.ecore">
+  <classifier xsi:type="simpleUML_MM:Class" name="aClass">
+    <attrs type="//@classifier.2" name="aAtt" is_primary="true"/>
+  </classifier>
+  <classifier xsi:type="simpleUML_MM:Class" name="bClass" is_persistent="true" parent="//@classifier.0">
+    <attrs type="//@classifier.2" name="bAtt"/>
+  </classifier>
+  <classifier xsi:type="simpleUML_MM:PrimitiveDataType" name="String"/>
+  <classifier xsi:type="simpleUML_MM:Class" name="cClass" is_persistent="true"/>
+  <association name="a" src="//@classifier.1" dest="//@classifier.3"/>
+  <association name="b" src="//@classifier.1" dest="//@classifier.3"/>
+  <association name="b" src="//@classifier.0" dest="//@classifier.3"/>
+</simpleUML_MM:ClassModel>

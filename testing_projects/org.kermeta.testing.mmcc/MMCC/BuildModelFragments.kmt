@@ -1,0 +1,166 @@
+/* $Id: BuildModelFragments.kmt,v 1.1 2007-09-14 13:08:06 ffleurey Exp $
+ * Creation date: January 9, 2007
+ * Authors: Benoit Baudry
+ *
+ * There are two main methods in this class 
+ *	one that sequentially runs the genratoin of partitions and of model model fragments (according to a test criterion)
+ *	one that generates a file that will be used to check that a set of models satisfies the set of model fragments
+ */
+
+package mmcc;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore" 
+require "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.kmt" 
+require "CoverageCriterion.kmt"
+require "BuildPartitions.kmt" 
+ 
+using ecore 
+using kermeta::persistence
+using kermeta::standard
+using kermeta::io 
+using FragmentsMM
+ 
+class BuildModelFragments
+{
+	
+	//Used to collect the qualified names of the classes of the source metamodel. These name are necessary to generate the ModelsCoverageChecker
+	reference classesQualifiedNames : Sequence<String>
+	
+    /* This method builds model fragments for the metamodel sourceMMName according to the testCriterion
+    *	The model fragments are generate in the tmp directory
+    *	This operation also calls for the creation of the ModelsCoverageChecker tmp file
+    *
+    *	sourceMMName : name of the source metamodel to be covered
+    *	testCriterion : name of the coverage criterion 
+    */
+    operation buildFragments(sourceMMName : String, testCriterion : String) is do
+    	/*This is the absolute path where tmp file ModelsCoverageChecker will be generated*/
+    	//var tmpPath : String init "E:\\eclipseK\\workspaceMMCC\\ModelTransfoTestData\\tmp\\"
+    	
+    	var tmpPath : String init "/home/franck/eclipse-workspaces/workspace-MetaModelCoverage/org.kermeta.testing.mmcc/tmp/"
+    	
+    	/*This is the absolute name of the model that will contain the partitions and the fragments*/
+    	var fragmentsModelName : String init "platform:/resource/org.kermeta.testing.mmcc/tmp/"+testCriterion+"Fragments.xmi"
+    	
+    	//initialize the resource that will contain the partitions and the model fragments
+    	var repository : EMFRepository init EMFRepository.new
+    	var targetModel : EMFResource 
+		targetModel ?= repository.createResource(fragmentsModelName, "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
+		
+		//load the source metamodel for which the fragments are build
+ 		var sourceMM : EMFResource 
+ 		sourceMM ?= repository.createResource(sourceMMName, "platform:/resource/org.kermeta.testing.mmcc/metamodels/Ecore.ecore") 
+ 		sourceMM.load 
+
+ 		//Build the partitions
+		var buildPart : BuildPartitions init BuildPartitions.new
+		var partitions : FragmentsMM::PartitionModel init buildPart.build(sourceMM)
+		
+		//Generate the fragments for the sourceMM in the targetModel according to the testCriterion
+		var setFragments : FragmentsMM::Fragments init generateFragments(sourceMM, partitions, testCriterion)
+		
+		//save the target model
+ 		targetModel.instances.add(partitions)
+		if (setFragments!=void) then targetModel.instances.add(setFragments) end
+		targetModel.save()
+		
+		//Collect the names of the classes of the source metamodel and then build the set of qualified names
+		var pack : EPackage init sourceMM.instances.one.asType(EPackage)
+		var classesSet : Sequence<EClass> init buildPart.getClasses(pack)
+		classesQualifiedNames := classesSet.collect{ c | getQualifiedName(c)}
+		
+		//Build the tmp file ModelsCoverageChecker
+		buidCheckerFile(fragmentsModelName, sourceMMName, tmpPath)
+    end
+    
+    /* This operation generates fragment models for the sourceMM with the partitions according to testCriterion
+    *	sourceMM : an EMF resource containing the source metamodel for which fragments must be generated
+    *	partitions : a model with partitions for all properties of the source metamodel
+    *	testCriterion : the name of a licit coverage criterion	
+    */
+    operation generateFragments(sourceMM : EMFResource, partitions : FragmentsMM::PartitionModel, testCriterion : String) : FragmentsMM::Fragments is do		
+		//If the criterion is correct, generate the fragments
+    	var criterion : CoverageCriterion init buildCriterion(testCriterion)
+		var setFragments : FragmentsMM::Fragments    	
+		if (criterion != void) then
+ 			setFragments := criterion.generateFragments(partitions) 
+ 			stdio.writeln("There are "+setFragments.fragments.size.toString+" model fragments.")
+ //			setFragments.fragments.each{ fragment | stdio.writeln(fragment.toString+"\n")} 	
+ 		//If the crietrion is not correct nothing is generated
+		else
+			stdio.writeln("In the absence of a valid test criterion, no model fragment could be generated.")
+			setFragments := void
+		end	
+		result := setFragments	
+    end
+    
+	/* Builds the correct CoverageCriterion object according to the name of the criterion
+		Returns void if the testCriterion is not a valid name for a test criterion
+		For the momet only two test criteria are implemented: AllPart and AllRanges*/
+    operation buildCriterion(testCriterion : String) : CoverageCriterion is do
+    	if testCriterion.equals("AllPart") then result := AllPart.new
+    	else if testCriterion.equals("AllRanges") then result := AllRanges.new
+    		else stdio.writeln("ERROR: "+testCriterion+" is not a correct test criterion.\n")
+    			result := void
+    		end
+    	end    	
+    end
+    
+    /*Build the qualified name of a ENamedElement*/    
+    operation getQualifiedName (element : ENamedElement) : String is do
+    	if element.container != void and element.container.isInstanceOf(ENamedElement) then
+    		var e : ENamedElement
+       		e ?= element.container
+    		result := getQualifiedName(e)+"::"+element.name
+    	else
+    		result := element.name
+    	end
+    end
+    
+    /* Generates a file that is used to launch the check for a set of models against a set of model fragment
+    	The kermeta class, that checks the coverage of a set of models must contain a require clause to 
+    	the source metamodel of the transformation under test. Thus, it is not possible to implement 
+    	a generic class for all source metamodels: it must be generated.
+    	The generated file is called ModelsCoverageChecker.kmt and is generated in the location fised in the local variable path.*/
+    operation buidCheckerFile(fragmentsModelName : String, sourceMMName : String, path : String) is do
+    	var fileio : FileIO init FileIO.new 
+    	
+    	var s : String init "/*THIS CLASS IS GENERATED BY BuildModelFragments.kmt*/ \n\n"
+    	s := s+"\n"
+    	s := s+"package mmcc; \n"
+    	s := s+"\n"
+		s := s+"require kermeta \n"
+		s := s+"require \""+sourceMMName+"\"\n"    	
+		s := s+"require \"platform:/resource/org.kermeta.testing.mmcc/MMCC/CheckInputModels.kmt\" \n" 
+		s := s+"using kermeta::persistence \n"
+		s := s+"using kermeta::standard \n"
+		s := s+"using kermeta::reflection \n"
+		s := s+"\n"
+		s := s+"class ModelsCoverageChecker{ \n"
+		s := s+"\n"	
+		s := s+"\t"+"operation checkModelsCoverage(models : OrderedSet<String>) : Void is do \n"
+		s := s+"\t"+"\t"+"var modelsToCheck : OrderedSet<EMFResource> init OrderedSet<EMFResource>.new\n"
+		s := s+"\t"+"\t"+"var repository : EMFRepository init EMFRepository.new \n"
+		s := s+"\t"+"\t"+"models.each{model | \n"
+		s := s+"\t"+"\t"+"\t"+"var resource : EMFResource    resource ?= repository.createResource(model, \""+sourceMMName+"\") \n"
+		s := s+"\t"+"\t"+"\t"+"resource.load \n"
+		s := s+"\t"+"\t"+"\t"+"modelsToCheck.add(resource) \n"
+	 	s := s+"\t"+"\t"+"} \n"
+	 	s := s+"\n"
+	 	s := s+"\t"+"\t"+"var mmClasses : Class[*] init OrderedSet<Class>.new \n"
+	 	classesQualifiedNames.each{ qn | 
+	 		s := s+"\t"+"\t"+"mmClasses.add("+qn+")"+"\n"
+	 	}
+	 	s := s+"\n"
+	 	s := s+"\t"+"\t"+"var c: CheckInputModels init CheckInputModels.new \n"
+		s := s+"\t"+"\t"+"c.checkInputModels(repository,modelsToCheck, \""+fragmentsModelName+"\",\""+sourceMMName+"\", mmClasses) \n"
+	 	s := s+"\t"+"end \n"
+	 	s := s+"} \n"
+		
+		stdio.writeln("Writing Checker file : " + path+"ModelsCoverageChecker.kmt")
+		
+    	fileio.writeTextFile(path+"ModelsCoverageChecker.kmt",s)
+    end
+    
+}

@@ -1,0 +1,286 @@
+/* $Id: TestciMM.kmt,v 1.1 2007-09-14 13:08:06 ffleurey Exp $
+ * Creation date: January 5, 2007
+ * License:
+ * Copyright:
+ * Authors: Benoit Baudry
+ * 
+ * This class tests the three isContained() operations that are implemented in the 
+ * BooleanRange, IntegerRange, StringRange classes 
+ */
+@mainClass "mmcc::TestciMM"
+@mainOperation "main"
+
+
+package mmcc;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.kmt"
+ 
+using kermeta::standard
+
+class TestciMM
+{
+	
+	reference bR : FragmentsMM::BooleanRange
+	reference iR : FragmentsMM::IntegerRange
+	reference sR : FragmentsMM::StringRange
+	
+    operation main() : Void is do 
+    	bR := FragmentsMM::BooleanRange.new
+    	iR := FragmentsMM::IntegerRange.new
+    	sR := FragmentsMM::StringRange.new
+        test1
+        test2
+        test3
+        test4
+        test5
+        test6
+        test7
+        test8
+        test9
+        test10
+        test11
+        test12
+        test13
+        test14
+        test15
+        test16
+        test17
+        test18
+        test19
+        test20
+        test21
+        test22
+        test23
+        test24
+        test25
+        test26
+        test27
+    end
+    
+	//
+	//Tests from 1 to 4 test the isContained method of the BooleanRange class
+	//
+    operation test1() is do
+    	bR.boolValue := true
+    	assertTrue(bR.isContained(true), "test1") 
+    end
+    
+    operation test2() is do
+    	bR.boolValue := true
+    	assertFalse(bR.isContained(false), "test2")	
+    end
+    
+    operation test3() is do
+    	bR.boolValue := false
+    	assertTrue(bR.isContained(false), "test3")	
+    end
+    
+    operation test4() is do
+    	bR.boolValue := false
+    	assertFalse(bR.isContained(true), "test4")	
+    end
+    
+	//sets the lower and upper bounds of the iR object
+    operation setIR (low: Integer, up: Integer) is do
+     	iR.lower:=low
+    	iR.upper:=up 	
+    end
+        
+	//
+	//Tests from 5 to 15 test the isContained method of the IntegerRange class
+	//
+    operation test5() is do
+    	setIR(0,5)
+    	assertTrue(iR.isContained(3), "test5")
+    end
+       
+    operation test6() is do
+    	setIR(0,5)
+    	assertTrue(iR.isContained(0), "test6")
+    end
+       
+    operation test7() is do
+    	setIR(0,5)
+    	assertTrue(iR.isContained(5), "test7")
+    end
+       
+    operation test8() is do
+    	setIR(0,5)
+    	assertFalse(iR.isContained(6), "test8")
+    end
+       
+    operation test9() is do
+    	setIR(0,0)
+    	assertTrue(iR.isContained(0), "test9")
+    end
+       
+    operation test10() is do
+    	setIR(0,0)
+    	assertFalse(iR.isContained(1), "test10")
+    end
+       
+    operation test11() is do
+    	setIR(0,0)
+    	assertFalse(iR.isContained(-1), "test11")
+    end
+       
+    operation test12() is do
+    	setIR(-2,2)
+    	assertTrue(iR.isContained(-1), "test12")
+    end
+       
+    operation test13() is do
+    	setIR(-2,2)
+    	assertTrue(iR.isContained(-2), "test13")
+    end
+
+    operation test14() is do
+    	setIR(-2,2)
+    	assertFalse(iR.isContained(-3), "test14")
+    end
+
+    operation test15() is do
+    	setIR(-2,2)
+    	assertFalse(iR.isContained(3), "test15")
+    end
+
+	//
+	//Tests from 16 to 23 test the isContained method of the StringRange class
+	//
+	operation test16() is do
+		sR.regexp:=""
+		assertTrue(sR.isContained(""), "test16")
+	end
+
+	operation test17() is do
+		sR.regexp:=""
+		assertFalse(sR.isContained("FragmentsMM"), "test17")
+	end
+
+	operation test18() is do
+		sR.regexp:="+"
+		assertTrue(sR.isContained("FragmentsMM"), "test18")
+	end
+
+	operation test19() is do
+		sR.regexp:="+"
+		assertTrue(sR.isContained("+"), "test19")
+	end
+
+	operation test20() is do
+		sR.regexp:="+"
+		assertFalse(sR.isContained(""), "test20")
+	end
+
+	operation test21() is do
+		sR.regexp:="FragmentsMM"
+		assertTrue(sR.isContained("FragmentsMM"), "test21")
+	end
+
+	operation test22() is do
+		sR.regexp:="FragmentsMM"
+		assertFalse(sR.isContained("+"), "test22")
+	end
+
+	operation test23() is do
+		sR.regexp:="FragmentsMM"
+		assertFalse(sR.isContained(""), "test23")
+	end
+	
+	operation test24() is do
+		var partModel : FragmentsMM::PartitionModel init FragmentsMM::PartitionModel.new
+		var propPart : FragmentsMM::PropertyPartition init FragmentsMM::PropertyPartition.new
+		var valPart : FragmentsMM::ValuePartition init FragmentsMM::ValuePartition.new
+		var mulPart : FragmentsMM::MultiplicityPartition init FragmentsMM::MultiplicityPartition.new
+		partModel.propertyPartitions.add(propPart)
+		propPart.className:="classA"
+		propPart.featureName:="attrA"
+		propPart.valuePartition:=valPart
+		propPart.multiplicityPartition:=mulPart
+		var numberVal : Integer
+		numberVal:=partModel.partitions.select{p | p.getMetaClass.name.equals("ValuePartition")}.size
+		assertEquals(numberVal, 1, "test24")
+		var numberMul : Integer
+		numberMul:=partModel.partitions.select{p | p.getMetaClass.name.equals("MultiplicityPartition")}.size
+		assertEquals(numberMul, 1, "test24")
+	end
+
+	//The tests 25 to 27 aims at testing the partitions derived property defined in PartitionModel
+	operation test25() is do
+		var partModel : FragmentsMM::PartitionModel init FragmentsMM::PartitionModel.new
+		var propPart : FragmentsMM::PropertyPartition init FragmentsMM::PropertyPartition.new
+		var valPart : FragmentsMM::ValuePartition init FragmentsMM::ValuePartition.new
+		var mulPart : FragmentsMM::MultiplicityPartition init FragmentsMM::MultiplicityPartition.new
+		partModel.propertyPartitions.add(propPart)
+		propPart.className:="classA"
+		propPart.featureName:="attrA"
+		propPart.valuePartition:=valPart
+		var numberVal : Integer
+		numberVal:=partModel.partitions.select{p | p.getMetaClass.name.equals("ValuePartition")}.size
+		assertEquals(numberVal, 1, "test25")
+		var numberMul : Integer
+		numberMul:=partModel.partitions.select{p | p.getMetaClass.name.equals("MultiplicityPartition")}.size
+		assertEquals(numberMul, 0, "test25")
+	end
+
+	operation test26() is do
+		var partModel : FragmentsMM::PartitionModel init FragmentsMM::PartitionModel.new
+		var propPart : FragmentsMM::PropertyPartition init FragmentsMM::PropertyPartition.new
+		var valPart : FragmentsMM::ValuePartition init FragmentsMM::ValuePartition.new
+		var mulPart : FragmentsMM::MultiplicityPartition init FragmentsMM::MultiplicityPartition.new
+		partModel.propertyPartitions.add(propPart)
+		propPart.className:="classA"
+		propPart.featureName:="attrA"
+		propPart.multiplicityPartition:=mulPart
+		var numberVal : Integer
+		numberVal:=partModel.partitions.select{p | p.getMetaClass.name.equals("ValuePartition")}.size
+		assertEquals(numberVal, 0, "test26")
+		var numberMul : Integer
+		numberMul:=partModel.partitions.select{p | p.getMetaClass.name.equals("MultiplicityPartition")}.size
+		assertEquals(numberMul, 1, "test26")
+	end
+
+	operation test27() is do
+		var partModel : FragmentsMM::PartitionModel init FragmentsMM::PartitionModel.new
+		var propPart : FragmentsMM::PropertyPartition init FragmentsMM::PropertyPartition.new
+		var valPart : FragmentsMM::ValuePartition init FragmentsMM::ValuePartition.new
+		var mulPart : FragmentsMM::MultiplicityPartition init FragmentsMM::MultiplicityPartition.new
+		partModel.propertyPartitions.add(propPart)
+		propPart.className:="classA"
+		propPart.featureName:="attrA"
+		var numberVal : Integer
+		numberVal:=partModel.partitions.select{p | p.getMetaClass.name.equals("ValuePartition")}.size
+		assertEquals(numberVal, 0, "test27")
+		var numberMul : Integer
+		numberMul:=partModel.partitions.select{p | p.getMetaClass.name.equals("MultiplicityPartition")}.size
+		assertEquals(numberMul, 0, "test27")
+	end
+
+    operation assertTrue (a:Boolean, testName:String) is do
+    	 if (a) then
+    	 	stdio.writeln(testName + " passed")
+    	 else
+    	 	stdio.writeln(testName + " failed")
+    	 end
+    end
+    
+    operation assertFalse (a:Boolean, testName:String) is do
+    	 if (not a) then
+    	 	stdio.writeln(testName + " passed")
+    	 else
+    	 	stdio.writeln(testName + " failed")
+    	 end
+    end
+    
+    operation assertEquals (a:Integer, b:Integer, testName:String) is do
+    	 if (a==b) then
+    	 	stdio.writeln(testName + " passed")
+    	 else
+    	 	stdio.writeln(testName + " failed")
+    	 end
+    end
+    
+    
+}

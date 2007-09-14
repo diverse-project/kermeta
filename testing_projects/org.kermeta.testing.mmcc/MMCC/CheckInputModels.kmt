@@ -1,0 +1,220 @@
+/* $Id: CheckInputModels.kmt,v 1.1 2007-09-14 13:08:06 ffleurey Exp $
+ * Creation date: January 12, 2006
+ * Author: Benoit Baudry
+ * 
+ * This class contains all the necessary mechanisms to check if a set of models 
+ * covers a set of model fragments.
+ * This check is called through the ModelsCoverageChecker class which is generated 
+ * for one source metamodel and the associated set of model fragments.
+ * Checking the coverage of a set of models consists in calling the checkInputModels operation.
+ */
+
+package mmcc;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.kmt"
+require "CoverageCriterion.kmt" 
+require "BuildPartitions.kmt" 
+ 
+using ecore
+using kermeta::persistence
+using kermeta::standard
+using kermeta::reflection
+
+class CheckInputModels{
+ 	reference setOfFragments : FragmentsMM::Fragments
+ 	reference setOfCoveredFragments : OrderedSet<FragmentsMM::ModelFragment>
+ 	reference setOfUncoveredFragments : OrderedSet<FragmentsMM::ModelFragment>
+    reference repository : EMFRepository 
+    reference mmClasses : OrderedSet<Class>
+        
+	/* fragmentsModelName : name of the model that contains the model fragments extracted form the source metamodel
+     sourceMMName : name of one metamodel (instance of ecore)
+     modelsToCheck : a set of resources, each one containing one instance of the metamodel
+     This operation checks, for each model fragment, if there in one model, in the set modelsToCheck, that contains 
+     a set of objects that satisfies the model fragment */
+    operation checkInputModels(rep :  EMFRepository, modelsToCheck : OrderedSet<EMFResource>, fragmentsModelName : String, sourceMMName : String, mmCls : Class[*]) : Void is do
+    	repository := rep
+    	mmClasses := mmCls
+      	//load the set of model fragments
+      	setOfFragments := loadFragments(fragmentsModelName)
+      	setOfCoveredFragments := OrderedSet<FragmentsMM::ModelFragment>.new
+      	setOfUncoveredFragments := OrderedSet<FragmentsMM::ModelFragment>.new
+	    check(modelsToCheck)  
+	    printVerdict(fragmentsModelName)  
+    end
+    
+    /* 	This operation prints the verdict of the analysis of the fragmentsModelName
+    	the setOfCoveredFragments and setOfUncoveredFragments must have been filled by the check method*/    
+    operation printVerdict(fragmentsModelName : String) is do
+ 		stdio.writeln("There are "+setOfFragments.fragments.size.toString+" model fragments in "+fragmentsModelName)
+    	stdio.writeln(setOfCoveredFragments.size.toString+" model fragments are covered.")
+     	stdio.writeln(setOfUncoveredFragments.size.toString+" model fragments are not covered.")
+     	stdio.writeln("The following model fragments should still be covered: \n")
+     	setOfUncoveredFragments.each{ fragment | 
+     		stdio.writeln(fragment.toString+"\n")
+     	}
+    end
+    
+    /* 	fragmentsModelName : name of the model that contains all the model fragments
+    	Loads the model that contains the model fragments. This model has to be an instance of ciMM.ecore 
+    	Returns the instance of Fragments that contains all the model fragments*/
+    operation loadFragments(fragmentsModelName : String) : FragmentsMM::Fragments is do
+  		var fragmentsModel : EMFResource    
+  		fragmentsModel ?= repository.createResource(fragmentsModelName, "./ciMM.ecore")
+ 		fragmentsModel.load   	
+ 		result := FragmentsMM::Fragments.new
+		// There should be two objects in the instances set and only one of type Fragments
+ 		result ?= fragmentsModel.instances.detect{ o | o.getMetaClass.name.equals("Fragments")}
+    end
+    
+	/* 	modelsToCheck : set of models that should cover all the model fragments
+		This method checks that there is one model is modelsToCheck that satisifies each model fragment
+		For each model fragment, it goes through all the models to find one that satisfies the fragment
+		If the model fragment is not covered by any model it is added to the setOfUncoveredFragments
+		If the model fragment is covered by one model it is added to the setOfCoveredFragments */
+    operation check(modelsToCheck : OrderedSet<EMFResource>) is do
+    	setOfFragments.fragments.each{ fragment |
+    		//stdio.writeln("Looking for a model that satisfies model fragment number "+fragment.toString)
+	 		if fragmentIsCovered(fragment,modelsToCheck) then setOfCoveredFragments.add(fragment)
+	 		else setOfUncoveredFragments.add(fragment)
+	 		end
+    	}
+    end
+    
+    /*	fragment: the model fragment that is being checked
+    	modelsToCheck: the set of models that must cover the fragment
+    	This method returns true if the set of models covers the model fragment */
+    operation fragmentIsCovered(fragment : FragmentsMM::ModelFragment, modelsToCheck : OrderedSet<EMFResource>) : Boolean is do
+		var modelNumber : Integer modelNumber := 1
+    	var fragmentIsCovered : Boolean init false
+    	modelsToCheck.each{ resource |
+//    		stdio.writeln("trying model number : "+modelNumber.toString)
+    		modelNumber := modelNumber+1
+ 			var objectsOfOneModel : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
+	 		objectsOfOneModel := getObjectsInModel(resource)
+	 		var modelCoversFragment : Boolean init fragmentIsCoveredByModel(fragment, objectsOfOneModel)
+	 		//if one model covers the fragment fragmentIsCovered becomes true
+	 		if modelCoversFragment then fragmentIsCovered := true end
+      	}
+      	result := fragmentIsCovered
+    end
+    
+    /* 	fragment : a model fragment
+    	objectOfOneModel : the set of objects contained in one model
+    	The operation returns true if there is a set of objects in the model that satisfies all 
+    	the object fragments of the model fragment*/
+    operation fragmentIsCoveredByModel(fragment : FragmentsMM::ModelFragment, objectsOfOneModel : Sequence<kermeta::reflection::Object>) : Boolean is do
+    	result := fragment.objectFragments.forAll{ of |
+	    	existsOneObject(of, objectsOfOneModel)
+    	}		
+    end
+    
+    /*	of : one object fragment
+    	objectOfOneModel : the set of objects contained in one model
+    	The operation returns true if there is one object in the model that satisfies to the object fragment
+    	To check this
+    	1 we collect all the objects instance of the class on which is defined the object fragment 
+    	and the instances of subclasses.
+    	2 we check if there one object that has its attributes values that satisfy the property constraints*/
+    operation existsOneObject(of : FragmentsMM::ObjectFragment, objectsOfOneModel : Sequence<kermeta::reflection::Object>) : Boolean is do
+    	var objs : Sequence<kermeta::reflection::Object>
+	  	var cls : Class init getMMClassFromName(of.constraints.one.className)
+	  	objs:=objectsOfOneModel.select{ obj |  
+    		obj.isInstanceOf(cls)
+    	}
+    	/* 	Check if there exists one of the selected objects which values for the properties
+    	 	constrained in the fragment are in the range defined by fragment.*/
+    	result := objs.exists{ o |  
+    		of.constraints.forAll{ constraint |  
+    			var range : FragmentsMM::Range init constraint.range
+    			range.getPartition.isObjectInRange(o,range)
+    		}
+    	}
+    	/*if (not result) then stdio.writeln(of.toString+"is not satisfied.") 
+    	else stdio.writeln(of.toString+"is satisfied.")
+    	end*/
+     end
+     
+     /*Returns the class from the source metamodel called name*/
+     operation getMMClassFromName(name : String) : Class is do
+     	result := mmClasses.select{ c | c.typeDefinition.name == name }.one
+     end
+        
+    /* Returns the set of all objects contained in the resource, including the root objects*/
+    operation getObjectsInModel(resource : EMFResource) : Sequence<kermeta::reflection::Object> is do
+    	result := Sequence<kermeta::reflection::Object>.new 
+    	//for all root nodes add the composite objects in the result
+    	resource.instances.each{ t |
+    		result.add(t)
+    		result.addAll(getObjects(t))
+    	}
+    end
+    
+    /* Returns all the objects that compose the object o. 
+       It is recursively called on all the composed objects.*/
+    operation getObjects(o : Object) : Sequence<kermeta::reflection::Object> is do
+    	result := Sequence<kermeta::reflection::Object>.new 
+    	result.addAll(getChildren(o))
+//		printChildren(o, result)
+    	result.each{ k |  
+    		result.addAll(getObjects(k))
+    	}
+    end
+    
+    /* Returns the sequence of children objects of object o
+   	   A child object is an instance of a composite property of the metaclass of the object. */
+    operation getChildren(o : Object) : Sequence<kermeta::reflection::Object> is do
+    	var children : Sequence <Property>
+    	result := Sequence<kermeta::reflection::Object>.new
+		//Among all the properties of the object select the ones that are composite
+		//and that are of type class (we only want to select composite references and not the attributes)
+		var classdef : ClassDefinition 
+		classdef ?= o.getMetaClass.typeDefinition
+    	children := getAllPropertiesOfClass(classdef).select{ attr |
+    		attr.isComposite and Class.isInstance(attr.type)
+    	}
+    	//add all the instances of the composite references in the result
+    	children.each{ k |  
+    		//if the reference has a multiplicity != 1, get returns a collection of objects
+    		if (k.upper != 1) then
+    			var s : Collection<kermeta::reflection::Object>
+    			s ?= o.get(k)
+    			result.addAll(s)
+       		else 
+       			result.add(o.get(k))
+    		end
+    	} 
+    end
+    
+    /* Returns all the properties of a class (its own properties and the ones it has inherits) */
+    operation getAllPropertiesOfClass(cd : ClassDefinition) : Collection<Property> is do
+    	result := Set<Property>.new
+        result.addAll(cd.ownedAttribute)
+        //add to the result the properties of all the super classes
+        cd.superType.each{ t |
+        	var sc : Class        
+        	sc := t
+            //add the properties of a super class. 
+            //since there might "diamonds" in the inheritance tree, we must check that the property is not already on the result
+			var classdef : ClassDefinition 
+			classdef ?= sc.typeDefinition
+      		getAllPropertiesOfClass(classdef).each{ p |
+            	if not result.contains(p) then
+                	result.add(p)
+                end
+            }
+        }
+        result := result.select{ k | not k.isDerived }
+	end
+    
+    operation printChildren(o : Object, children : Sequence<kermeta::reflection::Object>) is do
+    	stdio.write("The object " + o.oid.toString + " of type "+o.getMetaClass.name)
+    	stdio.writeln(" has " + children.size.toString + " children : ")
+    	children.each{ o |
+    		stdio.writeln("   " + o.oid.toString + " of type " + o.getMetaClass.name)
+    	}
+    end
+    
+}
