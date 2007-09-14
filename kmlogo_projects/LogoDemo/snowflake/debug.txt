@@ -1,0 +1,4 @@
+Loading snowflake.txt
+Writing snowflake.xmi
+State	Parser=atend	Lexer=atend
+Acceptable : true

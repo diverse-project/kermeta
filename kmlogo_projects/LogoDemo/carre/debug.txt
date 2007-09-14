@@ -1,0 +1,4 @@
+Loading carre.txt
+Writing carre.xmi
+State	Parser=atend	Lexer=atend
+Acceptable : true

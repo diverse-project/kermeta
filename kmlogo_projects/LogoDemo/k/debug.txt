@@ -1,0 +1,4 @@
+Loading k.txt
+Writing k.xmi
+State	Parser=atend	Lexer=atend
+Acceptable : true
