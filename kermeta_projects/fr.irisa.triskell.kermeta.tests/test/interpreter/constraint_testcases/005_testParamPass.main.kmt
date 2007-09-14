@@ -1,4 +1,4 @@
-/* $Id: 005_testParamPass.main.kmt,v 1.1 2007-09-10 08:35:13 cfaucher Exp $
+/* $Id: 005_testParamPass.main.kmt,v 1.2 2007-09-14 13:40:30 ftanguy Exp $
  * Creation date: January 23, 2007
  * License:
  * Copyright:
@@ -49,7 +49,7 @@ class Main inherits TestCase
     	do   	
         	stdio.writeln("test")
 	        str := param
-
+			result := void
         end
      
 }

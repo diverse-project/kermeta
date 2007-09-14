@@ -1,4 +1,4 @@
-/* $Id: GenericVisitor.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $ */
+/* $Id: GenericVisitor.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $ */
 
 // A generic implementation of the Visitor DP
 // Test genericity features
@@ -33,12 +33,14 @@ class Visitable {
 class A inherits Visitable {
 	method accept <TCtx, TRes> (visitor : Visitor <TCtx, TRes>, ctx : TCtx )	: TRes is do
 		visitor.visitA(self, ctx)
+		result := void
 	end
 }
 
 class B inherits A {
 	method accept <TCtx, TRes> (visitor : Visitor <TCtx, TRes>, ctx : TCtx )	: TRes is do
 		visitor.visitB(self, ctx)
+		result := void
 	end
 }
 
@@ -51,6 +53,7 @@ class Test inherits Visitor <Integer, String> {
 	
 	method visitB(node : B, ctx : Integer) : String is do
 		ctx := ctx + 1
+		result := ""
 	end
 	
 	operation test1() is do

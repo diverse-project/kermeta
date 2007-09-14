@@ -6,7 +6,7 @@ package root;
 require kermeta
 
 /*****************************************************************************
- * $Id: 033_testBooleanResults.main.kmt,v 1.1 2007-09-10 08:35:05 cfaucher Exp $
+ * $Id: 033_testBooleanResults.main.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testBooleanResults.kmt
@@ -52,6 +52,7 @@ class TestBooleanResults inherits kermeta::kunit::TestCase
      /** Test the identity, as a .equals, for Int */
      operation testop3i() : kermeta::standard::Boolean is do
      	assert(534.equals(534))
+     	result := void
      end
 
 }

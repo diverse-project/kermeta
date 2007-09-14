@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.1 2007-09-10 08:35:03 cfaucher Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -32,6 +32,7 @@ class TestLambda inherits kermeta::kunit::TestCase
 
 	operation testNoLambda() : kermeta::standard::Integer is do
 		stdio.write("toto")
+		result := void
 	end
 	/** test a simple lambda expression call with one argument 
 	 *  A call of a lambda expression is "interpreted" as a callvariable with parameters

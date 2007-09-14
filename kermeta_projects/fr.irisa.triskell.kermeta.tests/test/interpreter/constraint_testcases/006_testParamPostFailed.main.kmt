@@ -1,4 +1,4 @@
-/* $Id: 006_testParamPostFailed.main.kmt,v 1.1 2007-09-10 08:35:13 cfaucher Exp $
+/* $Id: 006_testParamPostFailed.main.kmt,v 1.2 2007-09-14 13:40:30 ftanguy Exp $
  * Creation date: January 23, 2007
  * License:
  * Copyright:
@@ -52,7 +52,7 @@ class Main inherits TestCase
         	stdio.writeln("test")
 	        // to make the execution fail:
         	str := "not param's value"
-
+			result := void
 
 	end
      

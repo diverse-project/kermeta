@@ -1,4 +1,4 @@
-/* $Id: ObjectAndVoid.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $ */
+/* $Id: ObjectAndVoid.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $ */
 
 //Test special types Object and Void
 
@@ -17,7 +17,9 @@ class A {
 	
 	operation op2() is do end
 	
-	operation op3() : Object is do end
+	operation op3() : Object is do 
+		result := void
+	end
 	
 	operation op4( o : Object) is do end 
 

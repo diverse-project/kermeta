@@ -13,6 +13,7 @@ class TestString inherits kermeta::kunit::TestCase {
     // Main operation that calls all the below ones
     operation main_operation() : kermeta::standard::String is do
 		stdio.write("toto")
+		result := void
     end
     
     // throws an exception : == does not seem to work
@@ -111,19 +112,23 @@ class TestString inherits kermeta::kunit::TestCase {
 	
 	operation testsize() : kermeta::standard::Integer is do
 		assert("BlaBleBli".size == 9)
+		result := void
 	end
 	
 	operation testIntegerToStr() : kermeta::standard::Integer is do
 		assert(334.toString.size == 3)
+		result := void
 	end
 	
 	operation testIntegerToStr2() : kermeta::standard::Integer is do
 		assert((334 + 2).toString == "336")
+		result := void
 	end
 	
 	operation testIntegerToStr3() : kermeta::standard::Integer is do
 		stdio.writeln(3.toString)
 		assert(3.toString == "3")
+		result := void
 	end
 	
 	operation testBackslashes() : Void is do

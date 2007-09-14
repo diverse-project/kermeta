@@ -29,7 +29,7 @@ class TestIsInstance inherits kermeta::kunit::TestCase {
 		assert(b.isInstanceOf(B<Integer>))
 		assert(b.isInstanceOf(A<Integer>))
 		assert(b.isInstanceOf(Object))
-		
+		result := void
 	end
 	
 	operation testIsInstanceOf2() : Boolean is do
@@ -38,6 +38,7 @@ class TestIsInstance inherits kermeta::kunit::TestCase {
 		assert(not b.isInstanceOf(A<String>))
 		assert(not b.isInstanceOf(C))
 		assert(not b.isInstanceOf(E))
+		result := void
 	end
 	
 	operation testIsInstanceOf3() : Boolean is do
@@ -47,22 +48,26 @@ class TestIsInstance inherits kermeta::kunit::TestCase {
 		assert(e.isInstanceOf(C))
 		assert(e.isInstanceOf(A<Integer>))
 		assert(e.isInstanceOf(Object))
+		result := void
 	end
 	
 	operation testIsInstanceOf4() : Boolean is do
 		var e : E init E.new
 		assert(not e.isInstanceOf(Integer))
 		assert(not e.isInstanceOf(A<String>))
+		result := void
 	end
 	
 	operation testIsInstanceOf5() : Boolean is do
 		assert("String".isInstanceOf("toto".getMetaClass))
 		assert("String".isInstanceOf(Object))
 		assert("String".isInstanceOf(ValueType))
+		result := void
 	end 
 	
 	operation testIsInstanceOf6() : Boolean is do
 		assert(not "String".isInstanceOf(18.getMetaClass))
+		result := void
 	end 
 
 

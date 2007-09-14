@@ -35,6 +35,7 @@ using kermeta::standard
 	/** Clone an instance of a type variable */
 	operation callCloneOnTypeParameter(param : T) : T is do
 		//result := T.clone(param)
+		result := void
 	end
  }
 

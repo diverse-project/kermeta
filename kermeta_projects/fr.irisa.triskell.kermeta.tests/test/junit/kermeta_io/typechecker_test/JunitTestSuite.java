@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.2 2007-09-13 09:03:04 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.3 2007-09-14 13:40:30 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -155,16 +155,12 @@ public void testvalid_AllocationUsingVariable_Alias() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","AllocationUsingVariable_Alias.kmt" );
 }
 
-public void testvalid_basic_fsm_modeltype() throws Exception {
-testvalidFile("test/io/typechecher_tests/valid","basic_fsm_modeltype.kmt" );
+public void testvalid_ClassSubTypingWithGenericOperations() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","ClassSubTypingWithGenericOperations.kmt" );
 }
 
 public void testvalid_Class_new() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","Class_new.kmt" );
-}
-
-public void testvalid_ClassSubTypingWithGenericOperations() throws Exception {
-testvalidFile("test/io/typechecher_tests/valid","ClassSubTypingWithGenericOperations.kmt" );
 }
 
 public void testvalid_Enum() throws Exception {
@@ -175,16 +171,16 @@ public void testvalid_GenericOperationCall() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","GenericOperationCall.kmt" );
 }
 
+public void testvalid_GenericVisitor() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","GenericVisitor.kmt" );
+}
+
 public void testvalid_GenericsAndFunctions() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","GenericsAndFunctions.kmt" );
 }
 
 public void testvalid_GenericsWithSupertypes() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","GenericsWithSupertypes.kmt" );
-}
-
-public void testvalid_GenericVisitor() throws Exception {
-testvalidFile("test/io/typechecher_tests/valid","GenericVisitor.kmt" );
 }
 
 public void testvalid_ModelTypeOperations() throws Exception {
@@ -211,16 +207,20 @@ public void testvalid_SimpleOperationCall() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","SimpleOperationCall.kmt" );
 }
 
-public void testvalid_test_clone() throws Exception {
-testvalidFile("test/io/typechecher_tests/valid","test_clone.kmt" );
+public void testvalid_VirtualTypeInheritance() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","VirtualTypeInheritance.kmt" );
+}
+
+public void testvalid_basic_fsm_modeltype() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","basic_fsm_modeltype.kmt" );
 }
 
 public void testvalid_testModelTypesStateMachines() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","testModelTypesStateMachines.kmt" );
 }
 
-public void testvalid_VirtualTypeInheritance() throws Exception {
-testvalidFile("test/io/typechecher_tests/valid","VirtualTypeInheritance.kmt" );
+public void testvalid_test_clone() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","test_clone.kmt" );
 }
 
 public void testinvalid_005_several_superoperations() throws Exception {
@@ -263,12 +263,12 @@ public void testinvalid_5_failtestExternPackageCall() throws Exception {
 testinvalidFile("test/io/typechecher_tests/invalid","5_failtestExternPackageCall.kmt" );
 }
 
-public void testinvalid_Class_new() throws Exception {
-testinvalidFile("test/io/typechecher_tests/invalid","Class_new.kmt" );
-}
-
 public void testinvalid_ClassSubTypingWithGenericOperations() throws Exception {
 testinvalidFile("test/io/typechecher_tests/invalid","ClassSubTypingWithGenericOperations.kmt" );
+}
+
+public void testinvalid_Class_new() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","Class_new.kmt" );
 }
 
 public void testinvalid_CollectionsAttributeReferenceAssignment() throws Exception {

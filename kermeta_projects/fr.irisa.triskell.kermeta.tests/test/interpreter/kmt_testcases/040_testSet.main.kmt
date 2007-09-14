@@ -8,7 +8,7 @@ require kermeta
 using kermeta::standard
 
 /*****************************************************************************
- * $Id: 040_testSet.main.kmt,v 1.1 2007-09-10 08:35:04 cfaucher Exp $
+ * $Id: 040_testSet.main.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
@@ -121,6 +121,7 @@ class TestSet inherits kermeta::kunit::TestCase
 		init_set.add(32)
 		init_set.add(23)
 		assert(init_set.size == 4)
+		result := void
 	end
 	
 	

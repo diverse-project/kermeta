@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.16 2007-08-07 15:05:46 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.17 2007-09-14 13:40:53 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -75,6 +75,7 @@ public class OperationChecker extends AbstractChecker {
 		if (operation.getName()!=null) {
 			result =
 				result = checkOperationIsUnique(operation) &&
+				checkReturnType(operation) &&
 				checkOperationSignature(operation) &&
 				checkOperationIsAbstract(operation);
 		}
@@ -221,6 +222,13 @@ public class OperationChecker extends AbstractChecker {
 			}
 		}
 		return true;
+	}
+	
+	private boolean checkReturnType(Operation operation) {
+		boolean result = ReturnTypeChecker.typeCheckExpression(operation);
+		if ( ! result )
+			builder.error("The result variable has not been correctly set in " + operation.getName(), operation);
+		return result; 
 	}
 	
 	/**

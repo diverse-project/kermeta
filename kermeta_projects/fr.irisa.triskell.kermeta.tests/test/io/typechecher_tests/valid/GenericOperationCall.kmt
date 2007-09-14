@@ -1,4 +1,4 @@
-/* $Id: GenericOperationCall.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $ */
+/* $Id: GenericOperationCall.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $ */
 
 // Some operation calls involving generics
 
@@ -11,7 +11,9 @@ using kermeta::language::structure
 
 
 class List<T> {
-	operation one() : T is do end
+	operation one() : T is do 
+		result := void
+	end
 	operation add(element : T) is do end
 	
 	operation op() is do
@@ -20,9 +22,15 @@ class List<T> {
 }
 
 class Util {
-	operation clone<T>(element : T) : T is do end
-	operation first<T>(lst : List<T>) : T is do end
-	operation asList<T>(element : T) : List<T> is do end
+	operation clone<T>(element : T) : T is do 
+		result := element
+	end
+	operation first<T>(lst : List<T>) : T is do 
+		result := void
+	end
+	operation asList<T>(element : T) : List<T> is do 
+		result := void
+	end
 }
 
 class A {}

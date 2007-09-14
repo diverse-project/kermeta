@@ -1,4 +1,4 @@
-/* $Id: 001_requireJava_rt_io.main.kmt,v 1.1 2007-09-10 08:35:11 cfaucher Exp $
+/* $Id: 001_requireJava_rt_io.main.kmt,v 1.2 2007-09-14 13:40:30 ftanguy Exp $
  * Creation date: April 24, 2006
  * License:
  * Copyright:
@@ -62,5 +62,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
     	stdio.writeln("End")
     end
     
-    operation truc() : kermeta::standard::Boolean is true
+    operation truc() : kermeta::standard::Boolean is do
+    	result := true
+    end
 }

@@ -49,6 +49,7 @@ class TestHasSubtypeLoadingModel inherits kermeta::kunit::TestCase {
 		assert(typeTest2.hasSubType(typeClass1))
 		assert(typeTest3.hasSubType(typeTest2))
 		assert(typeTest3.hasSubType(typeClass1))
+		result := void
 	end
 
 	operation loadModel(path : String) : Package is do

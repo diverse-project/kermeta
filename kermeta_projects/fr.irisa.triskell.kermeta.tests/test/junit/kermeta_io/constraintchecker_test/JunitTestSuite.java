@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.2 2007-09-13 09:03:04 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.3 2007-09-14 13:40:30 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -88,9 +88,15 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_001_oclcstvisitor() throws Exception {
 testvalidFile("test/io/constraintchecker_tests/valid","001_oclcstvisitor.kmt" );
+}
+
+public void testvalid_002_operationReturnType() throws Exception {
+testvalidFile("test/io/constraintchecker_tests/valid","002_operationReturnType.kmt" );
 }
 
 public void testvalid_003_associations() throws Exception {
@@ -227,6 +233,10 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","006_inheritedproperty
 
 public void testinvalid_006_inheritedproperty4_inv() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","006_inheritedproperty4_inv.kmt" );
+}
+
+public void testinvalid_007_resultNotSet() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","007_resultNotSet.kmt" );
 }
 
 public void testinvalid_025_weaving_in_kermeta_aspect1() throws Exception {

@@ -1,4 +1,4 @@
-/* $Id: 1_ClassSubTyping_1.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $ */
+/* $Id: 1_ClassSubTyping_1.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $ */
 
 // Simple subtyping test for simple 
 // inheritance between two classes
@@ -31,6 +31,7 @@ class Test {
 	
 	operation test5(a : A) : B is do
 		var aa : B init test5(B.new)
+		result := void
 	end
 
 }

@@ -1,4 +1,4 @@
-/* $Id: 005_superoperations_parammismatch5_inv.kmt,v 1.1 2007-09-10 08:35:13 cfaucher Exp $ */
+/* $Id: 005_superoperations_parammismatch5_inv.kmt,v 1.2 2007-09-14 13:40:30 ftanguy Exp $ */
 
 // Test of constraints on operations
 // This test must make specific errors to appear. 
@@ -10,9 +10,11 @@ using kermeta::standard
 class C1
 {
 	operation op1(a:Integer,b:String) is do
+			result := void
 	end
 
 	operation op2() is do
+		result := void
 	end
 
 }
@@ -26,6 +28,7 @@ class C2 inherits C1
 	 * This is an ERROR
 	 */
 	method op1(a:kermeta::standard::String,b:Integer) is do 
+		result := void
 	end
 }
 

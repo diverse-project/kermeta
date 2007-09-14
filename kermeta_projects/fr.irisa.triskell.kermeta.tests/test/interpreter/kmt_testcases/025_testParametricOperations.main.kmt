@@ -1,4 +1,4 @@
-/* $Id: 025_testParametricOperations.main.kmt,v 1.1 2007-09-10 08:35:04 cfaucher Exp $*/
+/* $Id: 025_testParametricOperations.main.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $*/
 @mainClass "root_package::TestParametricOperations"
 //@mainOperation "main"
 /**
@@ -165,6 +165,7 @@ class ParametricOperationTester
 	/** Clone an instance of a type variable */
 	operation callParamCloneInstance<P>(param : P) : P is do
 		//result := P.clone(param)
+		result := void
 	end
 	
 

@@ -1,4 +1,4 @@
-/* $Id: SimpleOperationCall.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $ */
+/* $Id: SimpleOperationCall.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $ */
 
 // Simple operation Call
 
@@ -6,13 +6,17 @@ package tctest;
 
 class A {
 
-	operation opa(a : A) : A is do end
+	operation opa(a : A) : A is do 
+		result := void
+	end
 
 }
 
 class B inherits A {
 
-	operation opb(b : B) : B is do end
+	operation opb(b : B) : B is do 
+		result := void
+	end
  
 }
 

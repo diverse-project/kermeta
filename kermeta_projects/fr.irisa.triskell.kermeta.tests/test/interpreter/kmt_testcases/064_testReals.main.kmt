@@ -25,6 +25,7 @@ class TestReal inherits kermeta::kunit::TestCase {
 		assert(x.toInteger == 10)
 		assert(y.toInteger == 10)
 		assert(z.toInteger == 0)
+		result := void
 	end
 	
 	operation testRealCompare() : Boolean is do
@@ -61,6 +62,7 @@ class TestReal inherits kermeta::kunit::TestCase {
 		assert(not (2 < x1))
 		assert(not (2 <= x1))
 		assert(not (1 >= y))
+		result := void
 	end
 	
 	operation testEquals() : Boolean is do
@@ -78,6 +80,7 @@ class TestReal inherits kermeta::kunit::TestCase {
 		assert( z == 2)
 		assert( 1 != y)
 		assert( 2 == z)
+		result := void
 	end
 	
 	operation testRealPlus() : Boolean is do
@@ -85,6 +88,7 @@ class TestReal inherits kermeta::kunit::TestCase {
 		assert("5.999".toReal + "0.001".toReal == 6)
 		assert("-5.999".toReal + "5.999".toReal == 0)
 		assert("-5.999".toReal + "6".toReal > 0)
+		result := void
 	end
 	
 	operation testRealMinus() : Boolean is do
@@ -92,18 +96,21 @@ class TestReal inherits kermeta::kunit::TestCase {
 		assert("6.001".toReal - "0.001".toReal == 6)
 		assert("5.999".toReal - "5.999".toReal == 0)
 		assert("5.999".toReal - "6".toReal < 0)
+		result := void
 	end
 	
 	operation testRealMult() : Boolean is do
 		assert("6".toReal * "5".toReal == "30".toReal)
 		assert("20".toReal * "0.1".toReal == 2)
 		assert("2".toReal * "-1".toReal == -2)
+		result := void
 	end
 	
 	operation testRealDiv() : Boolean is do
 		assert("30".toReal / "5".toReal == "6".toReal)
 		assert("2".toReal / "0.1".toReal == 20)
 		assert("2".toReal / "-1".toReal == -2)
+		result := void
 	end
 	
 	operation testToString() : Boolean is do
@@ -111,6 +118,7 @@ class TestReal inherits kermeta::kunit::TestCase {
 		assert("30".toInteger.toString.toReal == 30)
 		assert("-0.1".toReal.toString.toReal == "-0.1".toReal)
 		assert("12.5".toReal.toInteger.toString == "12")
+		result := void
 	end
 	
 	// maybe this should no be in this test...
@@ -119,6 +127,7 @@ class TestReal inherits kermeta::kunit::TestCase {
 		assert("30".toInteger.toString.toReal == 30)
 		assert("False".toBoolean == false)
 		assert("true".toBoolean == true)
+		result := void
 	end
 	
 }

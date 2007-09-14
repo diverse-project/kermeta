@@ -1,4 +1,4 @@
-/* $Id: 068_testVariableInit.main.kmt,v 1.1 2007-09-10 08:35:04 cfaucher Exp $
+/* $Id: 068_testVariableInit.main.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $
  * Creation date: August 23, 2007
  * License:	EPL
  * Copyright:
@@ -49,6 +49,7 @@ class TestVariableInitialization inherits kermeta::kunit::TestCase {
 		
 		// var aB1 : B init B.new.initialize //  not legal since the init doesn't accept ?=
 		// assert(not aB1.initialized.isVoid)
+		result := void
 	end
 }
 

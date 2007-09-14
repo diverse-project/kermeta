@@ -36,6 +36,7 @@ class TestHasSubtype inherits kermeta::kunit::TestCase {
 		assert(not D<C>.hasSubType(C))
 		assert(D<String>.hasSubType(E))
 		assert(not E.hasSubType(D<String>))
+		result := void
 	end
 	
 	
