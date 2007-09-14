@@ -1,4 +1,4 @@
-/* $Id: IteratorPolicies.kmt,v 1.3 2007-09-05 17:40:24 bitterjug Exp $
+/* $Id: IteratorPolicies.kmt,v 1.4 2007-09-14 09:46:11 ffleurey Exp $
  * Creation date: July 25, 2007
  * License:
  * Copyright:
@@ -10,11 +10,11 @@ package ocl2kmt;
 require kermeta
 require "ocl2kmtVisitor.kmt"
 require "oclcstvisitor.kmt"
-
+ 
 using kermeta::standard
 using kermeta::exceptions
 using kermeta::utils
-
+ 
 /** Superclass for the iterator that removes knowledge of how to deal with 
  **  ocl iterators and their translation.
  **/

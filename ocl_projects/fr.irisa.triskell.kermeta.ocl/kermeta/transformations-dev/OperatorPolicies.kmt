@@ -1,4 +1,4 @@
-/* $Id: OperatorPolicies.kmt,v 1.8 2007-09-05 17:40:24 bitterjug Exp $
+/* $Id: OperatorPolicies.kmt,v 1.9 2007-09-14 09:46:11 ffleurey Exp $
  * License:
  * Copyright:
  * Authors: Mark Skipper
@@ -12,7 +12,7 @@ using kermeta::standard
 using kermeta::exceptions
 using kermeta::utils
 using ocl::cst
-using ocl::cst::visitors
+using ocl::cst::visitors 
 using qualifiedNames
  
  /** Superclass for the visitor that abstracts out its knowledge of 
@@ -25,7 +25,7 @@ using qualifiedNames
  	   
  	   property readonly element: String 
  	   	getter is
- 	   		do
+ 	   		do 
  	   			result := "element"
  	   		end
  	   
@@ -323,14 +323,14 @@ class NotSupported inherits OperatorPolicy {
 			checkRequirements(opName, visitor)
 			// visitor.setLocalFeature(....somethingresulting from this operation...)
 			// the return type of each kind of operation is specific.:e
-			if visitor.isDefined(returnType ) then
+			//if visitor.isDefined(returnType ) then
 				if returnType.equals("element") then
 					visitor.setLocalFeature(visitor.createAttribute("functionreturn", visitor.getLocalFeatureType, 0, resultUpperBound , resultIsOrdered))
 				else
             		visitor.setLocalFeature(visitor.simpleValue(returnType))
-				end
-			end
-			visitor.write(".")
+				end 
+			//end 
+			visitor.write(".") 
 			if name != void then
 				visitor.write(name)
 			else

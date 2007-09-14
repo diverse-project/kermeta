@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.10 2007-09-05 17:40:24 bitterjug Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.10 2007-09-05 17:40:24 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.11 2007-09-14 09:46:11 ffleurey Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.11 2007-09-14 09:46:11 ffleurey Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -13,14 +13,15 @@ require kermeta
 require "TypeSystemMixin.kmt"
 require "IOMixin.kmt"
 require "./oclcstvisitor.kmt"
-require "../helpers/QualifiedName.kmt"
-require "OperatorPolicies.kmt" 
-require "IteratorPolicies.kmt" 
-require "KermetaHelper.kmt"
 
+require "../helpers/QualifiedName.kmt"
+require "OperatorPolicies.kmt"  
+require "IteratorPolicies.kmt" 
+require "KermetaHelper.kmt" 
+    
 using kermeta::standard
 using kermeta::exceptions
-using ocl::cst
+using ocl::cst 
 using ocl::cst::visitors 
 using kermeta::utils
 using qualifiedNames
@@ -123,7 +124,7 @@ using qualifiedNames
 		 
 		method visitPackageDeclarationCS(visitable : PackageDeclarationCS) : Void is
 			do
-  			    setContextPackageName(visitable.pathNameCS.sequenceOfNames)
+  			   setContextPackageName(visitable.pathNameCS.sequenceOfNames)
 				write("package ")
 				visitable.pathNameCS.accept(self)
 				writeln(";")

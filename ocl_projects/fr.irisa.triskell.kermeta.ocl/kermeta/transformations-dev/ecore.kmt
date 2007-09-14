@@ -1,4 +1,4 @@
-/* $Id: ecore.kmt,v 1.1 2007-07-23 15:20:41 barais Exp $
+/* $Id: ecore.kmt,v 1.2 2007-09-14 09:46:11 ffleurey Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -10,9 +10,9 @@ package ecore;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-
+ 
 using kermeta::standard
-
+ 
 /** This class refers to any EDataType feature*/
 @aspect "true" 
 class EAttribute 
@@ -158,7 +158,7 @@ class EClass
 	operation getEStructuralFeature2(featureName : EString) : EStructuralFeature is do
 		result := self.eAllStructuralFeatures.detect{ e | e.name == featureName }
 	end
-}
+} 
 @aspect "true"
 abstract class EClassifier
 {
@@ -187,7 +187,7 @@ abstract class EClassifier
 	operation getClassifierID() : EInt is do
 		raise kermeta::exceptions::NotImplementedException.new
 	end
-}
+} 
 
 @aspect "true"
 class EEnum 

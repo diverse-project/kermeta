@@ -1,4 +1,4 @@
-/* $Id: TypeSystemMixin.kmt,v 1.1 2007-09-05 17:40:24 bitterjug Exp $
+/* $Id: TypeSystemMixin.kmt,v 1.2 2007-09-14 09:46:11 ffleurey Exp $
  * Creation date: July 25, 2007
  * License:
  * Copyright:
@@ -12,14 +12,14 @@ require kermeta
 require "EcoreHelper.kmt" 
 require "oclcstvisitor.kmt"
 require "../helpers/QualifiedName.kmt"
-
+ 
 
 using kermeta::standard
 using ocl::cst
 using kermeta::standard
 using kermeta::utils
 using kermeta::exceptions
-using qualifiedNames
+using qualifiedNames 
 
 /** A stack frame is used to hold the mappings of local variables to their 
  ** type information -- expressed as a Ecore ETypedElement.
@@ -390,7 +390,7 @@ class TypeSystemMixin {
 		do
 			result := ecoreHelper.getEcoreFileName().replace("\\", "\\\\")  
 		end
-}
+} 
 
 
 class TypeError inherits Exception {

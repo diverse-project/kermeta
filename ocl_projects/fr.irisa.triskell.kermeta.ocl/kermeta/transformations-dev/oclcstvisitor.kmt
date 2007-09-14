@@ -5,20 +5,20 @@ require "OCLCST.ecore"
 package cst
 {
 	@aspect "true"
-	abstract class CSTNode inherits cst::visitors::Visitable
+	abstract class CSTNode inherits visitors::Visitable
 	{
 
-		operation accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void is
+		operation accept(visitor : visitors::Visitor) : kermeta::standard::~Void is
 			result := visitor.visitCSTNode(self)
  
 	}
 	@aspect "true"
 	class PackageDeclarationCS 
-	{
+	{ 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
+		method accept(visitor : visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitPackageDeclarationCS(self)
-
+ 
 	} 
 	@aspect "true"
 	abstract class ContextDeclCS

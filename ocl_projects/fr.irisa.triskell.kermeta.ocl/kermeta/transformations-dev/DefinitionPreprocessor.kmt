@@ -1,4 +1,4 @@
-/* $Id: DefinitionPreprocessor.kmt,v 1.1 2007-08-23 15:05:21 bitterjug Exp $
+ /* $Id: DefinitionPreprocessor.kmt,v 1.2 2007-09-14 09:46:11 ffleurey Exp $
  * Creation date: August 20, 2007
  * License:
  * Copyright:
@@ -9,9 +9,9 @@
 
 
 package ocl2kmt;
-require "TypeHelper.kmt"
 require "EcoreHelper.kmt"
-require "./oclcstvisitor.kmt"
+require "TypeSystemMixin.kmt"
+require "./oclcstvisitor.kmt" 
 require "../helpers/QualifiedName.kmt"
 using EcoreHelpers
 using ocl::cst
@@ -19,7 +19,7 @@ using kermeta::standard
 using qualifiedNames
 using kermeta::persistence
 using kermeta::exceptions
-
+ 
 class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor  
 {
 
@@ -33,7 +33,7 @@ class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor
 			result := ecore::EDataType.new
 			result.name := name
 		end
-		
+		 
 	attribute helper: EcoreHelper
 	
 	operation setEcoreHelper(eh: EcoreHelper) : Void is
@@ -41,12 +41,12 @@ class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor
 			helper := eh
 		end
 	
-	operation visitCSTNode(visitable : CSTNode) : kermeta::standard::~Void is
+	method visitCSTNode(visitable : CSTNode) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting CSTNode")
 		end
 
-	operation visitPackageDeclarationCS(visitable : PackageDeclarationCS) : kermeta::standard::~Void is
+	method visitPackageDeclarationCS(visitable : PackageDeclarationCS) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting Package Delcaration")
 			packageFQN := QualifiedName.new.fromSequence( visitable.pathNameCS.sequenceOfNames)
@@ -54,77 +54,77 @@ class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor
 			visitable.contextDecls.each{ cd | cd.accept(self) }
         end
 
-	operation visitPropertyContextCS(visitable : PropertyContextCS) : kermeta::standard::~Void is
+	method visitPropertyContextCS(visitable : PropertyContextCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitClassifierContextDeclCS(visitable : ClassifierContextDeclCS) : kermeta::standard::~Void is
+	method visitClassifierContextDeclCS(visitable : ClassifierContextDeclCS) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting classifier context")
 			classifierQN := QualifiedName.new.fromSequence( visitable.pathNameCS.sequenceOfNames)
 			var fqn:QualifiedName init packageFQN.concat(classifierQN)
 			classifier ?= helper.getClassifierByFQN(fqn)
 			if classifier == void then
-				raise TypeError.new.setMessage("Can only define operation for classes [" + fqn.toString+ "]")
+				raise TypeError.new.setMessage("Can only define method for classes [" + fqn.toString+ "]")
 			else
     			stdio.writeln("   classifier set to : "+ classifier.name)
 			end
 			visitable.invOrDefCS.accept(self)
     	end
 
-	operation visitOperationContextDeclCS(visitable : OperationContextDeclCS) : kermeta::standard::~Void is
+	method visitOperationContextDeclCS(visitable : OperationContextDeclCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitPrePostOrBodyDeclCS(visitable : PrePostOrBodyDeclCS) : kermeta::standard::~Void is
+	method visitPrePostOrBodyDeclCS(visitable : PrePostOrBodyDeclCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitOperationCS(visitable : OperationCS) : kermeta::standard::~Void is
+	method visitOperationCS(visitable : OperationCS) : kermeta::standard::~Void is
 		do
-			stdio.writeln("Visiting operation ")
+			stdio.writeln("Visiting method ")
 			newOperation := ecore::EOperation.new
 			newOperation.name := visitable.simpleNameCS.~value
 			visitable.typeCS.accept(self)
 			if newOperation.eType == void then
 				var e : Exception init Exception.new
-				e.message := "Can't find type for operation: " + newOperation.name
+				e.message := "Can't find type for method: " + newOperation.name
 				raise e
 			end
 			classifier.eOperations.add(newOperation)
-			stdio.writeln("    Added new operation : " + newOperation.name + " : " + newOperation.eType.name)
+			stdio.writeln("    Added new method : " + newOperation.name + " : " + newOperation.eType.name)
 		end
 
-	operation visitInitOrDerValueCS(visitable : InitOrDerValueCS) : kermeta::standard::~Void is
+	method visitInitOrDerValueCS(visitable : InitOrDerValueCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitDerValueCS(visitable : DerValueCS) : kermeta::standard::~Void is
+	method visitDerValueCS(visitable : DerValueCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitInitValueCS(visitable : InitValueCS) : kermeta::standard::~Void is
+	method visitInitValueCS(visitable : InitValueCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitInvCS(visitable : InvCS) : kermeta::standard::~Void is
+	method visitInvCS(visitable : InvCS) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting invariant ")
 		end
 
-	operation visitDefCS(visitable : DefCS) : kermeta::standard::~Void is
+	method visitDefCS(visitable : DefCS) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting definition ")
 			visitable.defExpressionCS.accept(self)
 		end
 
-	operation visitDefExpressionCS(visitable : DefExpressionCS) : kermeta::standard::~Void is
+	method visitDefExpressionCS(visitable : DefExpressionCS) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting definition expression")
 			visitable.operationCS.accept(self)
 		end
 
-	operation visitPathNameCS(visitable : PathNameCS) : kermeta::standard::~Void is
+	method visitPathNameCS(visitable : PathNameCS) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting path name (type)")
 			var typeName: QualifiedName init QualifiedName.new.fromSequence(visitable.sequenceOfNames)
@@ -132,140 +132,140 @@ class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor
 			newOperation.eType := helper.findClassifierRelativeOrAbsolute(packageFQN, typeName)
 		end
 
-	operation visitVariableExpCS(visitable : VariableExpCS) : kermeta::standard::~Void is
+	method visitVariableExpCS(visitable : VariableExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitSimpleNameCS(visitable : SimpleNameCS) : kermeta::standard::~Void is
+	method visitSimpleNameCS(visitable : SimpleNameCS) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting simpleName ")
 		end
 
-	operation visitTypeCS(visitable : TypeCS) : kermeta::standard::~Void is
+	method visitTypeCS(visitable : TypeCS) : kermeta::standard::~Void is
 		do
 		end
-
-	operation visitPrimitiveTypeCS(visitable : PrimitiveTypeCS) : kermeta::standard::~Void is
+ 
+	method visitPrimitiveTypeCS(visitable : PrimitiveTypeCS) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting primitive type ")
 			stdio.writeln("   got: " +visitable.~value.toString)
 			newOperation.eType := getPrimitiveType(visitable.~value)
 		end
 
-	operation visitTupleTypeCS(visitable : TupleTypeCS) : kermeta::standard::~Void is
+	method visitTupleTypeCS(visitable : TupleTypeCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitCollectionTypeCS(visitable : CollectionTypeCS) : kermeta::standard::~Void is
+	method visitCollectionTypeCS(visitable : CollectionTypeCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitOCLExpressionCS(visitable : OCLExpressionCS) : kermeta::standard::~Void is
+	method visitOCLExpressionCS(visitable : OCLExpressionCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitLetExpCS(visitable : LetExpCS) : kermeta::standard::~Void is
+	method visitLetExpCS(visitable : LetExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitIfExpCS(visitable : IfExpCS) : kermeta::standard::~Void is
+	method visitIfExpCS(visitable : IfExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitMessageExpCS(visitable : MessageExpCS) : kermeta::standard::~Void is
+	method visitMessageExpCS(visitable : MessageExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitOCLMessageArgCS(visitable : OCLMessageArgCS) : kermeta::standard::~Void is
+	method visitOCLMessageArgCS(visitable : OCLMessageArgCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitVariableCS(visitable : VariableCS) : kermeta::standard::~Void is
+	method visitVariableCS(visitable : VariableCS) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting variable ")
 		end
 
-	operation visitLiteralExpCS(visitable : LiteralExpCS) : kermeta::standard::~Void is
+	method visitLiteralExpCS(visitable : LiteralExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitEnumLiteralExpCS(visitable : EnumLiteralExpCS) : kermeta::standard::~Void is
+	method visitEnumLiteralExpCS(visitable : EnumLiteralExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitCollectionLiteralExpCS(visitable : CollectionLiteralExpCS) : kermeta::standard::~Void is
+	method visitCollectionLiteralExpCS(visitable : CollectionLiteralExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitTupleLiteralExpCS(visitable : TupleLiteralExpCS) : kermeta::standard::~Void is
+	method visitTupleLiteralExpCS(visitable : TupleLiteralExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitPrimitiveLiteralExpCS(visitable : PrimitiveLiteralExpCS) : kermeta::standard::~Void is
+	method visitPrimitiveLiteralExpCS(visitable : PrimitiveLiteralExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitIntegerLiteralExpCS(visitable : IntegerLiteralExpCS) : kermeta::standard::~Void is
+	method visitIntegerLiteralExpCS(visitable : IntegerLiteralExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitRealLiteralExpCS(visitable : RealLiteralExpCS) : kermeta::standard::~Void is
+	method visitRealLiteralExpCS(visitable : RealLiteralExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitStringLiteralExpCS(visitable : StringLiteralExpCS) : kermeta::standard::~Void is
+	method visitStringLiteralExpCS(visitable : StringLiteralExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitBooleanLiteralExpCS(visitable : BooleanLiteralExpCS) : kermeta::standard::~Void is
+	method visitBooleanLiteralExpCS(visitable : BooleanLiteralExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitNullLiteralExpCS(visitable : NullLiteralExpCS) : kermeta::standard::~Void is
+	method visitNullLiteralExpCS(visitable : NullLiteralExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitInvalidLiteralExpCS(visitable : InvalidLiteralExpCS) : kermeta::standard::~Void is
+	method visitInvalidLiteralExpCS(visitable : InvalidLiteralExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitCollectionLiteralPartCS(visitable : CollectionLiteralPartCS) : kermeta::standard::~Void is
+	method visitCollectionLiteralPartCS(visitable : CollectionLiteralPartCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitCollectionRangeCS(visitable : CollectionRangeCS) : kermeta::standard::~Void is
+	method visitCollectionRangeCS(visitable : CollectionRangeCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitCallExpCS(visitable : CallExpCS) : kermeta::standard::~Void is
+	method visitCallExpCS(visitable : CallExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitLoopExpCS(visitable : LoopExpCS) : kermeta::standard::~Void is
+	method visitLoopExpCS(visitable : LoopExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitIteratorExpCS(visitable : IteratorExpCS) : kermeta::standard::~Void is
+	method visitIteratorExpCS(visitable : IteratorExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitIterateExpCS(visitable : IterateExpCS) : kermeta::standard::~Void is
+	method visitIterateExpCS(visitable : IterateExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitFeatureCallExpCS(visitable : FeatureCallExpCS) : kermeta::standard::~Void is
+	method visitFeatureCallExpCS(visitable : FeatureCallExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitOperationCallExpCS(visitable : OperationCallExpCS) : kermeta::standard::~Void is
+	method visitOperationCallExpCS(visitable : OperationCallExpCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitIsMarkedPreCS(visitable : IsMarkedPreCS) : kermeta::standard::~Void is
+	method visitIsMarkedPreCS(visitable : IsMarkedPreCS) : kermeta::standard::~Void is
 		do
 		end
 
-	operation visitStateExpCS(visitable : StateExpCS) : kermeta::standard::~Void is
+	method visitStateExpCS(visitable : StateExpCS) : kermeta::standard::~Void is
 		do
 		end
 

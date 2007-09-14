@@ -1,4 +1,4 @@
-/* $Id: IOHelper.kmt,v 1.1 2007-08-10 09:45:57 bitterjug Exp $
+/* $Id: IOHelper.kmt,v 1.2 2007-09-14 09:46:11 ffleurey Exp $
  * Creation date: July 25, 2007
  * License:
  * Copyright:
@@ -13,12 +13,12 @@ using kermeta::exceptions
 
 class StringWriter inherits StdIO
 {
-
+ 
 	reference s: String
 
 	method write(object: String) is
 		do
-			if s == void then
+			if s == void then 
 				s := object
 			else
 				s.append(object)
