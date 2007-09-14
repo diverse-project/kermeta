@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.1 2007-09-14 08:20:42 ffleurey Exp $
+-->
+
+<plugin>
+
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "fr.irisa.triskell.kmLogo.ASM.presentation.ASMModelWizardID"
+      name = "%_UI_ASMModelWizard_label"
+      class = "fr.irisa.triskell.kmLogo.ASM.presentation.ASMModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/ASMModelFile.gif">
+      <description>%_UI_ASMModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "fr.irisa.triskell.kmLogo.ASM.presentation.ASMEditorID"
+        name = "%_UI_ASMEditor_label"
+        icon = "icons/full/obj16/ASMModelFile.gif"
+        extensions = "asm"
+        class = "fr.irisa.triskell.kmLogo.ASM.presentation.ASMEditor" 
+        contributorClass="fr.irisa.triskell.kmLogo.ASM.presentation.ASMActionBarContributor" >
+    </editor>
+  </extension>    
+</plugin>

@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Triskell Logo Ui Plug-in
+Bundle-SymbolicName: fr.irisa.triskell.kmlogo.ui; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: fr.irisa.triskell.kmlogo.ui.Activator
+Bundle-Vendor: Triskell
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.ui.console,
+ fr.irisa.triskell.kmlogo.model
+Eclipse-LazyStart: true
+Export-Package: fr.irisa.triskell.kmlogo.ui,
+ fr.irisa.triskell.kmlogo.ui.popup.actions
+Bundle-ClassPath: META-INF/interpreter.jar,
+ .,
+ META-INF/io.jar,
+ META-INF/model.jar

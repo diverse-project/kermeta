@@ -1,5 +1,5 @@
-/* $Id: LogoNXCCompiler.kmt,v 1.1 2007-06-05 22:28:50 ffleurey Exp $
- * Creation date: May 30, 2007
+/* $Id: LogoNXCCompiler.kmt,v 1.2 2007-09-14 08:18:28 ffleurey Exp $
+ * Creation datresult.append("e: May 30, 2007
  * License:
  * Copyright:
  * Authors:
@@ -19,46 +19,6 @@ using kermeta::persistence
 using kermeta::io
 
 
-class NXCCompiler 
-{	
-	reference root : ASM::Instruction
-	
-	reference subs : String[*]
-	reference depth : Integer
-	property readonly prefix : String 
-		getter is do
-			result := ""
-			depth.times{i | result.append("\t")}
-		end 
-	operation incDepth() is do depth := depth + 1 end
-	operation decDepth() is do depth := depth - 1 end
-	
-	operation main() is
-	do
-		compile("tests/snowflake.xmi", "tests/test2.nxc")
-	end
-	
-	operation compile(uri : String, out : String) is
-	do
-		depth := 0
-		root := loadProgram(uri)
-		var nxc : String init root.compileToNXC(self)
-		subs.each{ s |
-			stdio.writeln(s + "\n")
-		}
-		stdio.writeln("task main()")
-		stdio.writeln(nxc)
-	end
-	
-	operation loadProgram(uri : String) : ASM::Instruction is do
-		var res : EMFRepository init EMFRepository.new
-        var resource : Resource init res.createResource(uri, "http://kmLogo.ecore/ASM")
-        resource.load()
-        result ?= resource.instances.one  
-	end
-}
-
-
 /**
  * Implementation of the Abstract Syntactic Model
  */
@@ -75,7 +35,7 @@ package ASM {
 	@aspect "true"
 	class ProcDeclaration
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := "// Declaration of " + name + " function"
 			var proc : String init "sub " + name + "("
 			from var i : Integer init 0
@@ -97,7 +57,7 @@ package ASM {
 	@aspect "true"
 	class Constant
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			if integerValue >= 0 then
 				result := integerValue.toString
 			else 
@@ -109,7 +69,7 @@ package ASM {
 	@aspect "true"
 	class ParameterCall
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := parameter.name
 		end 
 	}
@@ -117,7 +77,7 @@ package ASM {
 	@aspect "true"
 	class Plus
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := lhs.compileToNXC(context) + " + " + rhs.compileToNXC(context)
 		end
 	}
@@ -125,7 +85,7 @@ package ASM {
 	@aspect "true"
 	class Minus
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := lhs.compileToNXC(context) + " - " + rhs.compileToNXC(context)
 		end
 	}
@@ -133,7 +93,7 @@ package ASM {
 	@aspect "true"
 	class Mult
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := lhs.compileToNXC(context) + " * " + rhs.compileToNXC(context)
 		end
 	}
@@ -141,7 +101,7 @@ package ASM {
 	@aspect "true"
 	class Div
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := lhs.compileToNXC(context) + " / " + rhs.compileToNXC(context)
 		end
 	}
@@ -149,7 +109,7 @@ package ASM {
 	@aspect "true"
 	class Equals
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := lhs.compileToNXC(context) + " == " + rhs.compileToNXC(context)
 		end
 	}
@@ -157,7 +117,7 @@ package ASM {
 	@aspect "true"
 	class Greater
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := lhs.compileToNXC(context) + " > " + rhs.compileToNXC(context)
 		end
 	}
@@ -165,7 +125,7 @@ package ASM {
 	@aspect "true"
 	class Lower
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := lhs.compileToNXC(context) + " < " + rhs.compileToNXC(context)
 		end
 	}
@@ -173,7 +133,7 @@ package ASM {
 	@aspect "true"
 	class Block
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := context.prefix + "{\n"
 			context.incDepth
 			instructions.each{ instruction  | 
@@ -188,7 +148,7 @@ package ASM {
 	@aspect "true"
 	class ProcCall
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := declaration.name + "("
 			from var i : Integer init 0
 			until i >= actualArgs.size
@@ -206,7 +166,7 @@ package ASM {
 	@aspect "true"
 	class If
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := "if (" + condition.compileToNXC(context) + ")\n"
 			result.append(thenPart.compileToNXC(context))
 			result.append("\n" + context.prefix + "else\n")
@@ -217,7 +177,7 @@ package ASM {
 	@aspect "true"
 	class While
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := context.prefix + "while (" + condition.compileToNXC(context) + ")\n"
 			result.append(block.compileToNXC(context))	
 		end 
@@ -225,7 +185,7 @@ package ASM {
 	@aspect "true"
 	class Repeat
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := "repeat (" + condition.compileToNXC(context) + ")\n"
 			result.append(block.compileToNXC(context))	
 		end 
@@ -237,42 +197,42 @@ package ASM {
 	@aspect "true"
 	class Back
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := "forward(-(" + steps.compileToNXC(context) + "));"
 		end
 	}
 	@aspect "true"
 	class Forward
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := "forward(" + steps.compileToNXC(context) + ");"
 		end
 	}
 	@aspect "true"
 	class Left
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := "turn(" + angle.compileToNXC(context) + ");"
 		end
 	}
 	@aspect "true"
 	class Right
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := "turn(-(" + angle.compileToNXC(context) + "));"
 		end
 	}
 	@aspect "true"
 	class PenDown
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := "penDown();"
 		end
 	}
 	@aspect "true"
 	class PenUp
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := "penUp();"
 		end
 	}
@@ -280,9 +240,144 @@ package ASM {
 	@aspect "true"
 	class Clear
 	{
-		operation compileToNXC(context : NXCCompiler) : String is do
+		method compileToNXC(context : NXCCompiler) : String is do
 			result := "// RESET NOT IMPLEMENTED"
 		end
 	}
 	
 }
+
+class NXCCompiler 
+{	
+	reference root : ASM::Instruction
+	
+	reference subs : String[*]
+	reference depth : Integer
+	property readonly prefix : String 
+		getter is do
+			result := ""
+			depth.times{i | result.append("\t")}
+		end 
+	operation incDepth() is do depth := depth + 1 end
+	operation decDepth() is do depth := depth - 1 end
+	
+	operation main() is
+	do
+		compile("tests/snowflake.xmi", "tests/test2.nxc", void)
+	end
+	
+	operation compile(uri : String, out : String, api : String) : String is
+	do
+		
+		var io : FileIO init FileIO.new
+		depth := 0
+		root := loadProgram(uri)
+		var nxc : String init root.compileToNXC(self)
+		// We shoudl read API from the file but right now it is hard codded
+		result := getAPI
+		subs.each{ s |
+			result.append(s + "\n")
+		}
+		result.append("task main()")
+		result.append(nxc)
+		io.writeTextFile(out, result)
+	end
+	
+	operation loadProgram(uri : String) : ASM::Instruction is do
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://kmLogo.ecore/ASM")
+        resource.load()
+        result ?= resource.instances.one  
+	end
+	
+	operation getAPI() : String is do
+		result := ""
+		result.append("/**\n")
+		result.append(" * This is the implementation of a LOGO Turtle for NXT\n")
+		result.append(" * Author : Franck FLEUREY\n")
+		result.append(" * License : GPL\n")
+		result.append(" *\n")
+		result.append(" * The robot is suposed to have two wheels controled \n")
+		result.append(" * by two separate motors. The distance between the two\n")
+		result.append(" * wheels is D and the diameter of the wheel is d.\n")
+		result.append(" * For this implementation to work D/d must be an integer.\n")
+		result.append(" * A third motor controls a pen up and down. The Pen should\n")
+		result.append(" * touch the paper right in the middle of the two wheels.\n")
+		result.append(" *\n")
+		result.append(" */\n")
+		result.append("\n")
+		result.append("#include \"NXCDefs.h\"\n")
+		result.append("\n")
+		result.append("// Correponds to D/d\n")
+		result.append("#define ANGLE_FACTOR 18\n")
+		result.append("\n")
+		result.append("// The Motors connections\n")
+		result.append("#define PEN_MOTOR OUT_A\n")
+		result.append("#define RIGHT_MOTOR OUT_B\n")
+		result.append("#define LEFT_MOTOR OUT_C\n")
+		result.append("#define MOVE_MOTORS OUT_BC\n")
+		result.append("\n")
+		result.append("// define step lenght in wheel rotation (degree)\n")
+		result.append("#define STEP 10\n")
+		result.append("\n")
+		result.append("// define the angle of which the pen motor has to move\n")
+		result.append("#define PEN_ANGLE 45\n")
+		result.append("\n")
+		result.append("// The motor spped to use (not two fast to avoid drifting)\n")
+		result.append("#define SPEED 50\n")
+		result.append("\n")
+		result.append("/**\n")
+		result.append(" * The Robot will move straight forward for d steps\n")
+		result.append(" */\n")
+		result.append("sub forward(int d)\n")
+		result.append("{\n")
+		result.append("	int angle = d * STEP;\n")
+		result.append("	//ResetTachoCount(MOVE_MOTORS)\n")
+		result.append("	// RotateMotorEx(ports, pwr, angle, turnpct, bSync, bStop)\n")
+		result.append("	RotateMotorEx(MOVE_MOTORS, SPEED, angle, 0, true, false);\n")
+		result.append("	Off(MOVE_MOTORS);\n")
+		result.append("}\n")
+		result.append("\n")
+		result.append("/**\n")
+		result.append(" * The Robot will turn by n degree around the pen (hopefuly)\n")
+		result.append(" */\n")
+		result.append("sub turn(int n)\n")
+		result.append("{\n")
+		result.append("	//RotateMotorEx(MOVE_MOTORS, SPEED, n * ANGLE_FACTOR, -100, false, false);\n")
+		result.append("	\n")
+		result.append("	\n")
+		result.append("	if (n>0) {\n")
+		result.append("		OnRev(LEFT_MOTOR, SPEED);\n")
+		result.append("		OnFwd(RIGHT_MOTOR, SPEED);\n")
+		result.append("		Wait(n*ANGLE_FACTOR);\n")
+		result.append("	}\n")
+		result.append("	else {\n")
+		result.append("		OnRev(RIGHT_MOTOR, SPEED);\n")
+		result.append("		OnFwd(LEFT_MOTOR, SPEED);\n")
+		result.append("		Wait((-n)*ANGLE_FACTOR);\n")
+		result.append("	}\n")
+		result.append("}\n")
+		result.append("\n")
+		result.append("/**\n")
+		result.append(" * The Pen goes up\n")
+		result.append(" */\n")
+		result.append("sub penUp()\n")
+		result.append("{\n")
+		result.append("	RotateMotor(PEN_MOTOR, SPEED, -PEN_ANGLE);\n")
+		result.append("	// SetSensorType(IN_1, IN_TYPE_LIGHT_INACTIVE);\n")
+		result.append("}\n")
+		result.append("\n")
+		result.append("/**\n")
+		result.append(" * The Pen goes down\n")
+		result.append(" */\n")
+		result.append("sub penDown()\n")
+		result.append("{\n")
+		result.append("	RotateMotor(PEN_MOTOR, SPEED, PEN_ANGLE);\n")
+		result.append("	// SetSensorType(IN_1, IN_TYPE_LIGHT_ACTIVE);\n")
+		result.append("}\n")
+		result.append("/************************************************************/\n")
+		result.append("/*  END OF THE API, THE COMPILED CODE GOES BELOW THIS LINE  */\n")
+		result.append("/************************************************************/\n")
+	end
+}
+

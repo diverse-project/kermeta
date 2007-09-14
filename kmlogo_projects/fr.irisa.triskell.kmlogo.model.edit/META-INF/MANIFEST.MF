@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: fr.irisa.triskell.kmlogo.model.edit; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Activator: fr.irisa.triskell.kmLogo.provider.ASMLogoEditPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: fr.irisa.triskell.kmLogo.ASM.provider,
+ fr.irisa.triskell.kmLogo.provider
+Require-Bundle: org.eclipse.core.runtime,
+ fr.irisa.triskell.kmlogo.model;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport
+Eclipse-LazyStart: true

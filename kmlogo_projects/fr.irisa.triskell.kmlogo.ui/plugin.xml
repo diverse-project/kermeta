@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.xmi"
+            id="fr.irisa.triskell.kmlogo.ui.contribution1">
+         <menu
+               label="Logo"
+               path="additions"
+               id="fr.irisa.triskell.kmlogo.ui.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Run Logo Interpreter"
+               class="fr.irisa.triskell.kmlogo.ui.popup.actions.RunLogo"
+               menubarPath="fr.irisa.triskell.kmlogo.ui.menu1/group1"
+               enablesFor="1"
+               id="fr.irisa.triskell.kmlogo.ui.newAction">
+         </action>
+         <action
+               class="fr.irisa.triskell.kmlogo.ui.popup.actions.CompileLogoNXC"
+               id="fr.irisa.triskell.kmlogo.ui.action1"
+               label="Compile to NXC"
+               menubarPath="fr.irisa.triskell.kmlogo.ui.menu1/group1"/>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.nxc"
+            id="fr.irisa.triskell.kmlogo.ui.contribution2">
+         <menu
+               label="Logo"
+               path="additions"
+               id="fr.irisa.triskell.kmlogo.ui.menu2">
+            <separator
+                  name="group2">
+            </separator>
+         </menu>
+         <action
+               label="Compile to NXT Binary"
+               class="fr.irisa.triskell.kmlogo.ui.popup.actions.NXC2RXE"
+               menubarPath="fr.irisa.triskell.kmlogo.ui.menu2/group2"
+               enablesFor="1"
+               id="fr.irisa.triskell.kmlogo.ui.newAction2">
+         </action>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.rxe"
+            id="fr.irisa.triskell.kmlogo.ui.contribution3">
+         <menu
+               label="Logo"
+               path="additions"
+               id="fr.irisa.triskell.kmlogo.ui.menu3">
+            <separator
+                  name="group3">
+            </separator>
+         </menu>
+         <action
+               label="Upload to NXT"
+               class="fr.irisa.triskell.kmlogo.ui.popup.actions.UploadRXE"
+               menubarPath="fr.irisa.triskell.kmlogo.ui.menu3/group3"
+               enablesFor="1"
+               id="fr.irisa.triskell.kmlogo.ui.newAction3">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
