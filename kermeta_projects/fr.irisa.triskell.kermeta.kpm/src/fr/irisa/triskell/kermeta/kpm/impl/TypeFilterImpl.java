@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeFilterImpl.java,v 1.4 2007-07-24 13:47:10 ftanguy Exp $
+ * $Id: TypeFilterImpl.java,v 1.5 2007-09-17 15:18:45 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -172,7 +172,7 @@ public class TypeFilterImpl extends FilterImpl implements TypeFilter {
 		
 		try {
 			IResource resource = null;
-			Class type = Class.forName( getType().getValue() );
+			Class<?> type = Class.forName( getType().getValue() );
 			IFile file = ResourceHelper.getIFile( unit.getValue() );
 			if ( (file != null) && file.exists() )
 				resource = file;
