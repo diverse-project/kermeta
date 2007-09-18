@@ -1,10 +1,8 @@
 
 package test;
 
-
-require "http://www.eclipse.org/emf/2002/Ecore"
+require kermeta
 using kermeta::standard
-
 
 class Main<G> {
 	attribute parametrizedAttr : G
@@ -12,7 +10,7 @@ class Main<G> {
 	operation test_op1(elt : G) is do
 	end
 
-	operation test_op2<F>(elt: F) is do
+	operation test_op2<F>(elt : F) is do
 	end
 
 	operation test_op3() : G is do
@@ -21,6 +19,9 @@ class Main<G> {
 	operation test_op4<F>() : F is do
 	end
 	
-	operation test_op5<F : G>(elt: String) is do
+	operation test_op5<F : G>(elt: AClass) is do
 	end
+}
+
+class AClass {
 }
