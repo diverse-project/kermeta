@@ -8,7 +8,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.osgi,
  fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.interpreter,
- fr.irisa.triskell.kermeta.io
+ fr.irisa.triskell.kermeta.io,
+ org.eclipse.core.resources
 Export-Package: fr.irisa.triskell.kermeta.interpreter.test,
  fr.irisa.triskell.kermeta.launcher,
  fr.irisa.triskell.kermeta.tests.plugin,
