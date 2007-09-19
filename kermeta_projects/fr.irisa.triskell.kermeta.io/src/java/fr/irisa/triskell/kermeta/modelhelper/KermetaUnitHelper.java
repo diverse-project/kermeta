@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitHelper.java,v 1.8 2007-09-04 08:40:28 dvojtise Exp $
+/*$Id: KermetaUnitHelper.java,v 1.9 2007-09-19 13:08:23 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitHelper.java
 * License : EPL
@@ -236,10 +236,19 @@ public class KermetaUnitHelper {
 		for ( TypeDefinition t : typeDefinitions ) {
 			if ( (t != typeDefinition) && (t.getBaseAspects().contains(typeDefinition)) )
 				result.add(t);
+			else if ( typeDefinition.getBaseAspects().contains(t) ) {
+				KermetaUnit u = KermetaUnitHelper.getKermetaUnitFromObject(t);
+				EList<TypeDefinition> l = u.getAspects().get(t);
+				if ( l == null )
+					l = new BasicEList<TypeDefinition> ();
+				l.add(typeDefinition);
+				u.getAspects().put(t, l);
+			}
+				
 		}
 			
-		for ( KermetaUnit importedUnit : kermetaUnit.getImporters() )
-			getAspects(importedUnit, typeDefinition, processedUnits, result);
+		//for ( KermetaUnit importedUnit : kermetaUnit.getImporters() )
+		//	getAspects(importedUnit, typeDefinition, processedUnits, result);
 	}
 	
 
