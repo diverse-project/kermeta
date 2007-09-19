@@ -1,4 +1,4 @@
-/* $Id: DynamicExpression.java,v 1.9 2007-07-24 13:47:37 ftanguy Exp $
+/* $Id: DynamicExpression.java,v 1.10 2007-09-19 12:17:49 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpression.java
 * License : EPL
@@ -83,12 +83,12 @@ public class DynamicExpression {
         self.getProperties().put("expression", parsed_expression);
 		
 		// the expression's creation process in the parse method of DynamicExpressionUnit may have find errors
-		if ( ! dynamicExpressionUnit.isErrored() ) 
+		if ( ! dynamicExpressionUnit.isErroneous() ) 
 			dynamicExpressionUnit.typeCheck(null);
 
 //	    if (!deu.messages.hasError()) deu.typeCheck(null);
 	    
-	    if ( ! dynamicExpressionUnit.isErrored() ) {
+	    if ( ! dynamicExpressionUnit.isErroneous() ) {
 	       // RuntimeObject parsed_expression = self.getFactory().getMemory().getRuntimeObjectForFObject(dynamicExpressionUnit.getExpression());
 	        self.getProperties().put("expression", parsed_expression);
 	        return self.getFactory().getMemory().trueINSTANCE;

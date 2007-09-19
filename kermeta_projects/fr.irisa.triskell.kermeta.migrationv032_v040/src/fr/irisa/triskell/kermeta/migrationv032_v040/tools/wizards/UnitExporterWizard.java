@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.2 2007-07-23 09:16:19 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.3 2007-09-19 12:17:52 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -185,7 +185,7 @@ public class UnitExporterWizard extends Wizard {
 						outputPage.getFileName()));
 		unit = createUnit();
 
-		if ( unit.isErrored() ) {
+		if ( unit.isIndirectlyErroneous() ) {
 			Shell theShell = this.getContainer().getShell();
 			MessageDialog.openError(theShell, "Error loading file",
 					"The source file contains errors: "

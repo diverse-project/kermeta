@@ -64,7 +64,7 @@
     <eOperations name="warning">
       <eParameters name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="isErrored" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eOperations name="isErroneous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Returns true if the unit contains error(s)"/>
       </eAnnotations>
@@ -100,6 +100,23 @@
     <eOperations name="getUniquePackageQualifiedNames" upperBound="-1" eType="ecore:EDataType ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/String">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Return a list of all the Packages qualified names (internal and external), usefull in order to use getPackage(String)"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="addTypeDefinition">
+      <eParameters name="typeDefinition" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition"/>
+      <eParameters name="container" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinitionContainer"/>
+    </eOperations>
+    <eOperations name="getTypeDefinitionByName" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="getTypeDefinitionByQualifiedName" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition">
+      <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="isIndirectlyErroneous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns true if the unit contains error(s)"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="storer" lowerBound="1"
@@ -139,6 +156,8 @@
       </eGenericType>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isBeingTypechecked" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeDefinitionCache" lowerBound="1"
+        eType="#//TypeDefinitionCache" eOpposite="#//TypeDefinitionCache/kermetaUnit"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IBuildingState" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="KermetaUnitStorer">
@@ -196,4 +215,41 @@
   <eClassifiers xsi:type="ecore:EDataType" name="ANTLRException" instanceClassName="antlr.ANTLRException"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IOPlugin" instanceClassName="org.kermeta.io.plugin.IOPlugin"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionCache">
+    <eOperations name="getTypeDefinitionByName" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getTypeDefinitionByQualifiedName" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition">
+      <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="addTypeDefinition">
+      <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="typeDefinition" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition"/>
+    </eOperations>
+    <eOperations name="getTypeDefinitionByName" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="getTypeDefinitionByQualifiedName" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition">
+      <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="kermetaUnit" lowerBound="1"
+        eType="#//KermetaUnit" eOpposite="#//KermetaUnit/typeDefinitionCache"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="entries" lowerBound="1"
+        transient="true">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+        <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eTypeArguments eClassifier="#//TypeDefinitionCacheEntry"/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalSearchAuthorized"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionCacheEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeDefinition" lowerBound="1"
+        eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition"/>
+  </eClassifiers>
 </ecore:EPackage>

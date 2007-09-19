@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.13 2007-09-13 09:04:41 ftanguy Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.14 2007-09-19 12:19:38 ftanguy Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -75,7 +75,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 		KermetaTypeChecker typechecker = new KermetaTypeChecker( result, new NullProgressMonitor() );
 		typechecker.checkUnit();
 		
-		if ( ! result.isErrored() ) {
+		if ( ! result.isIndirectlyErroneous() ) {
 			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( result, new NullProgressMonitor() );
 			constraintchecker.checkUnit();
 		}

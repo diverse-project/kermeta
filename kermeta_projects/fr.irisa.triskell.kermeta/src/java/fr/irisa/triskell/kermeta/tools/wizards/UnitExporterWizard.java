@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.27 2007-09-13 09:04:36 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.28 2007-09-19 12:19:31 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -236,7 +236,7 @@ public class UnitExporterWizard extends Wizard {
 		KermetaTypeChecker typechecker = new KermetaTypeChecker(unit, new NullProgressMonitor());
 		typechecker.checkUnit();
 
-		if ( ! unit.isErrored() ) {
+		if ( ! unit.isErroneous() ) {
 			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(unit, new NullProgressMonitor());
 			constraintchecker.checkUnit();
 		}
@@ -265,7 +265,7 @@ public class UnitExporterWizard extends Wizard {
 
 		} 
 		
-		if(! unit.isErrored() || outputPage.forceWriteEvenIfErrorCheck.getSelection()){
+		if(! unit.isIndirectlyErroneous() || outputPage.forceWriteEvenIfErrorCheck.getSelection()){
 			try {
 
 				KermetaPlugin.getDefault().getConsole().println("Writing " + outputFile.getName());

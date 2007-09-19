@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.22 2007-09-13 09:03:14 ftanguy Exp $
+/* $Id: KermetaRunHelper.java,v 1.23 2007-09-19 12:17:44 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: EPL
@@ -60,7 +60,7 @@ public class KermetaRunHelper {
         		e.printStackTrace();
         		return null;
         	}
-        	else if ( ! result.isErrored() )
+        	else if ( ! result.isIndirectlyErroneous() )
         		result.error("INTERNAL ERROR : " + e, null);
         }
         return result;

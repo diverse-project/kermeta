@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.34 2007-09-13 09:05:28 ftanguy Exp $
+/* $Id: KermetaInterpreter.java,v 1.35 2007-09-19 12:17:49 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -123,7 +123,7 @@ public class KermetaInterpreter {
 			constraintchecker.checkUnit();
 		}*/
 		
-		if ( unit.isErrored() )
+		if ( unit.isIndirectlyErroneous() )
 	        throw new KermetaInterpreterError( KermetaUnitHelper.getAllErrorsAsString(unit) );
 	    	    
 	    initializeMemory();
@@ -158,7 +158,7 @@ public class KermetaInterpreter {
 	private void initializeMemory() {
 	    //unit.typeCheck();
 	    TypeCheckerContext.initializeTypeChecker(unit, new NullProgressMonitor());
-	    if ( unit.isErrored() ) {
+	    if ( unit.isIndirectlyErroneous() ) {
 	        String message = "INTERPRETER INITIALIZATION ERROR : The program contains errors:\n" + KermetaUnitHelper.getAllMessagesAsString(unit);
 	        internalLog.error(message);
 	        

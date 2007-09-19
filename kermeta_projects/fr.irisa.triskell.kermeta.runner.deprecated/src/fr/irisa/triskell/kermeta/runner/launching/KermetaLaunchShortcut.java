@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.22 2007-09-14 08:43:21 ftanguy Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.23 2007-09-19 12:17:44 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -283,7 +283,7 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 			constraintchecker.checkUnit();
 		}*/
 		
-		if ( unit.isErrored() ) {
+		if ( unit.isIndirectlyErroneous() ) {
 			MessageDialog.openError(new Shell(), "The file is not correctly typechecked.", fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper.getAllErrorsAsString(unit));
 			return;
 		}

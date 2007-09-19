@@ -1,6 +1,6 @@
 
 
-/*$Id: ConstraintCheck.java,v 1.2 2007-09-13 09:03:45 ftanguy Exp $
+/*$Id: ConstraintCheck.java,v 1.3 2007-09-19 12:17:41 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	ConstraintCheck.java
 * License : EPL
@@ -53,7 +53,7 @@ public class ConstraintCheck implements IAction {
 			if ( kermetaUnit == null )
 				return;
 			
-			if ( kermetaUnit.isErrored() )
+			if ( kermetaUnit.isErroneous() )
 				return;
 			
 			/*

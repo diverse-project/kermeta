@@ -1,4 +1,4 @@
-/*$Id: KMT2KM.java,v 1.2 2007-09-04 08:14:03 ftanguy Exp $
+/*$Id: KMT2KM.java,v 1.3 2007-09-19 12:17:41 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -102,7 +102,7 @@ public class KMT2KM implements IAction {
 			 * 
 			 * 
 			 */
-			if ( ! kermetaUnit.isErrored() ) {
+			if ( ! kermetaUnit.isIndirectlyErroneous() ) {
 				int index = outputString.lastIndexOf("/");
 				String rep = "platform:/resource" + outputString.substring(0, index);
 				String fileName = "platform:/resource" + outputString;

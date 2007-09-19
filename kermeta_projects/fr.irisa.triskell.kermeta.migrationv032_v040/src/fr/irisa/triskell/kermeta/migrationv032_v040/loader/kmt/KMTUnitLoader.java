@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.4 2007-09-13 09:04:44 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.5 2007-09-19 12:17:52 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -77,12 +77,12 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		// 1 - Creating the imported kermeta units.
 		loadAllImportedUnits(kermetaUnit);
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isErroneous() )
 			return kermetaUnit;
 		
 		// 2 - Creating the structure like class definitions, packages.
 		loadAllTypeDefinitions(kermetaUnit);
-			if ( kermetaUnit.isErrored() )
+			if ( kermetaUnit.isErroneous() )
 			return kermetaUnit;			
 		
 		/*
@@ -104,19 +104,19 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		// 6
 		loadAllStructuralFeatures(kermetaUnit);
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isErroneous() )
 			return kermetaUnit;
 		
 		// 7
 		loadAllOppositeProperties(kermetaUnit);
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isErroneous() )
 			return kermetaUnit;
 		
 		// 8
 		loadAllBodies(kermetaUnit);
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isErroneous() )
 			return kermetaUnit;
 		
 		// 9
@@ -171,7 +171,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	
 	public void loadImportedUnits(KermetaUnit kermetaUnit) {
 
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isErroneous() )
 			return;
 		
 		CompUnit compUnit = ast.get(kermetaUnit);
@@ -234,7 +234,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	
 	private void loadTypeDefinitions(KermetaUnit kermetaUnit) {
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isErroneous() )
 			return;
 		
 		KMT2KMPass pass = new KMT2KMPass2(kermetaUnit, getLoadingContext(kermetaUnit)); 
@@ -277,7 +277,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	
 	private void importKermetaUnits(KermetaUnit kermetaUnit) {
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isErroneous() )
 			return;
 		
 		List <KermetaUnit> importedKermetaUnits = KermetaUnitHelper.getAllImportedKermetaUnits( kermetaUnit );
@@ -343,7 +343,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	
 	private void setBaseAspects(KermetaUnit kermetaUnit) {
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isErroneous() )
 			return;
 		
 		Set <TypeDefinition> internalTypesDefinition = TypeDefinitionSearcher.getInternalTypesDefinition(kermetaUnit);
@@ -391,7 +391,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	
 	public void replaceObjectTypeVariables(KermetaUnit kermetaUnit) {
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isErroneous() )
 			return;
 		
 		CompUnit compUnit = ast.get(kermetaUnit);
@@ -435,7 +435,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	
 	public void loadStructuralFeatures(KermetaUnit kermetaUnit) {
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isErroneous() )
 			return;
 		
 		CompUnit compUnit = ast.get(kermetaUnit);
@@ -478,7 +478,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	
 	public void loadOppositeProperties(KermetaUnit kermetaUnit) {
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isErroneous() )
 			return;
 		
 		CompUnit compUnit = ast.get(kermetaUnit);
@@ -490,7 +490,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		KMT2KMPass pass = new KMT2KMPass4(kermetaUnit, getLoadingContext(kermetaUnit)); 
 		compUnit.accept(pass); 
 		System.out.println("Pass 5 for " + kermetaUnit.getUri());
-		if (kermetaUnit.isErrored()) return;
+		if (kermetaUnit.isErroneous()) return;
 		pass = new KMT2KMPass5(kermetaUnit, getLoadingContext(kermetaUnit)); compUnit.accept(pass);
 
 	}
@@ -525,7 +525,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	
 	public void loadBodies(KermetaUnit kermetaUnit) {
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isErroneous() )
 			return;
 		
 		CompUnit compUnit = ast.get(kermetaUnit);
@@ -570,7 +570,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	
     public void loadAnnotations(KermetaUnit kermetaUnit) {
     	
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isErroneous() )
 			return;
     	
     	CompUnit compUnit = ast.get(kermetaUnit);

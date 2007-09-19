@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMT.java,v 1.1 2007-08-06 14:32:51 ftanguy Exp $
+/*$Id: Ecore2KMT.java,v 1.2 2007-09-19 12:17:41 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	Ecore2KMT.java
 * License : EPL
@@ -106,7 +106,7 @@ public class Ecore2KMT implements IAction {
 			 * 
 			 * 
 			 */
-			if ( kermetaUnit.isErrored() ) {
+			if ( kermetaUnit.isIndirectlyErroneous() ) {
 				
 				String msg = outputFile.getFullPath().toString() + " may contain errors because " + inputFile.getFullPath().toString() + " has been incorrectly typechecked.";
 				KPMPlugin.getDefault().getLog().log(
