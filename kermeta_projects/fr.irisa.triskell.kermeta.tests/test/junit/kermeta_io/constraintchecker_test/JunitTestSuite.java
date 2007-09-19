@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.3 2007-09-14 13:40:30 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.4 2007-09-19 13:07:40 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -340,25 +340,25 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 		
 		KermetaUnit kermetaUnit = ioPlugin.loadKermetaUnit(path, new NullProgressMonitor());
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isIndirectlyErroneous() )
 			assertTrue("kermeta unit has errors during loading", false);
 		
 		KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
 		typeChecker.checkUnit();
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isIndirectlyErroneous() )
 			assertTrue("Kermeta Unit has errors when type checking.", false);
 		
 		KermetaConstraintChecker constraintChecker = new KermetaConstraintChecker( kermetaUnit, new NullProgressMonitor() );
 		constraintChecker.checkUnit();
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isIndirectlyErroneous() )
 			assertTrue("Kermeta Unit has errors when constraint checking.", false);
 		
 		KermetaCycleConstraintChecker cycleConstraintChecker = new KermetaCycleConstraintChecker( kermetaUnit );
 		cycleConstraintChecker.check();
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isIndirectlyErroneous() )
 			assertTrue("Kermeta Unit has errors when cycle constraint checking.", false);
 
 		ioPlugin.unload( kermetaUnit.getUri() );
@@ -371,7 +371,7 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 		KermetaUnit kermetaUnit = ioPlugin.loadKermetaUnit(path, new NullProgressMonitor());
 
 		boolean inheritanceCycleDetected = false;
-		if ( kermetaUnit.isErrored() ) {
+		if ( kermetaUnit.isIndirectlyErroneous() ) {
 			
 			// Patch: the inheritance cycle detection is done in the loader...
 	/*		String msg = builder.messages.getMessagesAsString();
@@ -387,17 +387,17 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 			KermetaCycleConstraintChecker cycleConstraintChecker = new KermetaCycleConstraintChecker( kermetaUnit );
 			cycleConstraintChecker.check();
 			
-			if ( ! kermetaUnit.isErrored() ) {
+			if ( ! kermetaUnit.isIndirectlyErroneous() ) {
 				KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
 				typeChecker.checkUnit();
 			}
 			
-			if ( ! kermetaUnit.isErrored() ) {
+			if ( ! kermetaUnit.isIndirectlyErroneous() ) {
 				KermetaConstraintChecker constraintChecker = new KermetaConstraintChecker( kermetaUnit, new NullProgressMonitor() );
 				constraintChecker.checkUnit();
 			}
 			
-			if ( ! kermetaUnit.isErrored() ) {
+			if ( ! kermetaUnit.isIndirectlyErroneous() ) {
 				assertTrue("Looking for a constraint error but none found", false);
 			}
 			else {

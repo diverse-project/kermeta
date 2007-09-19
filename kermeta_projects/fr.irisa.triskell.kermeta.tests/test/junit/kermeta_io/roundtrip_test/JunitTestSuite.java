@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.2 2007-09-13 09:03:03 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.3 2007-09-19 13:07:40 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -191,15 +191,15 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 				
 		
 		KermetaUnit baseEcoreUnit = IOPlugin.getDefault().loadKermetaUnit( ecoreBaseFile, new NullProgressMonitor() );		
-		if ( ! baseEcoreUnit.isErrored() ) {
+		if ( ! baseEcoreUnit.isIndirectlyErroneous() ) {
 			KermetaTypeChecker typechecker = new KermetaTypeChecker( baseEcoreUnit, new NullProgressMonitor() );
 			typechecker.checkUnit();
 		}
-		if ( ! baseEcoreUnit.isErrored() ) {
+		if ( ! baseEcoreUnit.isIndirectlyErroneous() ) {
 				KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( baseEcoreUnit, new NullProgressMonitor() );
 				constraintchecker.checkUnit();
 		}
-		if ( baseEcoreUnit.isErrored() )
+		if ( baseEcoreUnit.isIndirectlyErroneous() )
 			assertTrue( KermetaUnitHelper.getErrorsAsString(baseEcoreUnit), false );
 		
 
@@ -210,15 +210,15 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		
 		// Regenerate the ecore from the kmt
 		KermetaUnit kmtUnit = IOPlugin.getDefault().loadKermetaUnit( kmtFile, new NullProgressMonitor() );
-		if ( ! kmtUnit.isErrored() ) {
+		if ( ! kmtUnit.isIndirectlyErroneous() ) {
 			KermetaTypeChecker typechecker = new KermetaTypeChecker( kmtUnit, new NullProgressMonitor() );
 			typechecker.checkUnit();
 		}
-		if ( ! kmtUnit.isErrored() ) {
+		if ( ! kmtUnit.isIndirectlyErroneous() ) {
 				KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( kmtUnit, new NullProgressMonitor() );
 				constraintchecker.checkUnit();
 		}
-		if ( kmtUnit.isErrored() )
+		if ( kmtUnit.isIndirectlyErroneous() )
 			assertTrue( KermetaUnitHelper.getErrorsAsString(kmtUnit), false );
 		
 		
@@ -245,15 +245,15 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		String kmtFile = outputDir + "/" + fileName + ".kmt";
 		
 		KermetaUnit baseKMTUnit = IOPlugin.getDefault().loadKermetaUnit( kmtBaseFile, new NullProgressMonitor() );		
-		if ( ! baseKMTUnit.isErrored() ) {
+		if ( ! baseKMTUnit.isIndirectlyErroneous() ) {
 			KermetaTypeChecker typechecker = new KermetaTypeChecker( baseKMTUnit, new NullProgressMonitor() );
 			typechecker.checkUnit();
 		}
-		if ( ! baseKMTUnit.isErrored() ) {
+		if ( ! baseKMTUnit.isIndirectlyErroneous() ) {
 				KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( baseKMTUnit, new NullProgressMonitor() );
 				constraintchecker.checkUnit();
 		}
-		if ( baseKMTUnit.isErrored() )
+		if ( baseKMTUnit.isIndirectlyErroneous() )
 			assertTrue( KermetaUnitHelper.getErrorsAsString(baseKMTUnit), false );
 		
 		// Export to ecore
@@ -262,15 +262,15 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 	
 		// Regenerate the kmt from the previous ecore
 		KermetaUnit ecoreUnit = IOPlugin.getDefault().loadKermetaUnit( ecoreFile, new NullProgressMonitor() );
-		if ( ! ecoreUnit.isErrored() ) {
+		if ( ! ecoreUnit.isIndirectlyErroneous() ) {
 			KermetaTypeChecker typechecker = new KermetaTypeChecker( ecoreUnit, new NullProgressMonitor() );
 			typechecker.checkUnit();
 		}
-		if ( ! ecoreUnit.isErrored() ) {
+		if ( ! ecoreUnit.isIndirectlyErroneous() ) {
 				KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( ecoreUnit, new NullProgressMonitor() );
 				constraintchecker.checkUnit();
 		}
-		if ( ecoreUnit.isErrored() )
+		if ( ecoreUnit.isIndirectlyErroneous() )
 			assertTrue( KermetaUnitHelper.getErrorsAsString(ecoreUnit), false );
 		
 		KMTOutputBuilder printer = new KMTOutputBuilder();

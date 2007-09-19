@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.3 2007-09-14 13:40:30 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.4 2007-09-19 13:07:40 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -327,14 +327,14 @@ testinvalidFile("test/io/typechecher_tests/invalid","test_clone.kmt" );
 		
 		KermetaUnit kermetaUnit = IOPlugin.getDefault().loadKermetaUnit(path, new NullProgressMonitor());
 		
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isIndirectlyErroneous() )
 			//assertTrue("kermeta unit has errors during loading", false);
 			assertTrue( KermetaUnitHelper.getErrorsAsString(kermetaUnit), false );
 			
 		KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
 		typeChecker.checkUnit();
 	
-		if ( kermetaUnit.isErrored() )
+		if ( kermetaUnit.isIndirectlyErroneous() )
 			//assertTrue("kermeta unit has errors during type checking", false);
 			assertTrue( KermetaUnitHelper.getErrorsAsString(kermetaUnit), false );
 			
@@ -347,7 +347,7 @@ testinvalidFile("test/io/typechecher_tests/invalid","test_clone.kmt" );
 
 		KermetaUnit kermetaUnit = IOPlugin.getDefault().loadKermetaUnit( TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file, new NullProgressMonitor());
 		
-		if ( ! kermetaUnit.isErrored() ) {
+		if ( ! kermetaUnit.isIndirectlyErroneous() ) {
 			KermetaTypeChecker typeChecker = new KermetaTypeChecker( kermetaUnit, new NullProgressMonitor() );
 			typeChecker.checkUnit();
 

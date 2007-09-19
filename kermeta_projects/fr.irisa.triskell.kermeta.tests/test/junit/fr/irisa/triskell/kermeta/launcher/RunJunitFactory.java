@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.2 2007-09-13 09:03:03 ftanguy Exp $
+/* $Id: RunJunitFactory.java,v 1.3 2007-09-19 13:07:40 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -111,7 +111,7 @@ public class RunJunitFactory implements Test {
         	KermetaTypeChecker typechecker = new KermetaTypeChecker( unit, new NullProgressMonitor() );
         	typechecker.checkUnit();
 
-            if ( unit.isErrored() ) {
+            if ( unit.isIndirectlyErroneous() ) {
             	System.err.println("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)");
             	System.out.println( KermetaUnitHelper.getWarningsAsString(unit));            	
             	System.err.println(KermetaUnitHelper.getErrorsAsString(unit));
@@ -125,7 +125,7 @@ public class RunJunitFactory implements Test {
         	KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( unit, new NullProgressMonitor() );
         	constraintchecker.checkUnit();
         
-            if ( unit.isErrored() ) {
+            if ( unit.isIndirectlyErroneous()) {
             	System.err.println("Unit " + unit.getUri() + " contains errors (ie. didn't load or constraintcheck correctly)");
             	System.out.println( KermetaUnitHelper.getAllWarningsAsString(unit));            	
             	System.err.println(KermetaUnitHelper.getAllErrorsAsString(unit));
@@ -165,7 +165,7 @@ public class RunJunitFactory implements Test {
             }
             
             // Display the errors stored in the unit that is checked
-            if ( unit.isErrored() )
+            if ( unit.isIndirectlyErroneous() )
             {
                 System.err.println("*** There are errors in the TestSuite of <"+ unit_uri + "> :" );
                 System.out.println( KermetaUnitHelper.getErrorsAsString(unit) );
