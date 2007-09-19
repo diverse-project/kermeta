@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass6.java,v 1.8 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: Ecore2KMPass6.java,v 1.9 2007-09-19 12:14:58 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -264,7 +264,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 			// Is there an annotation for SuperOperation? "superOperation -> apackage::AClass"
 			String str_result = (String)ann.getDetails().get(KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS);
 			// Find the class definition owning this operation
-			ClassDefinition cdef = (ClassDefinition) kermetaUnit.getTypeDefinitionByName(str_result);
+			ClassDefinition cdef = (ClassDefinition) kermetaUnit.getTypeDefinitionByName(str_result, monitor);
 			// We never know...
 			if (cdef == null)
 			{

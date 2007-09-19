@@ -37,7 +37,7 @@ class StringBuffer{
 	end
 	
 	operation create(arg0: Integer):StringBuffer is do
-		
+		result := void
 	end
 	
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackage.java,v 1.5 2007-09-13 09:04:50 ftanguy Exp $
+ * $Id: IoPackage.java,v 1.6 2007-09-19 12:15:04 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -215,13 +215,22 @@ public interface IoPackage extends EPackage {
 	int KERMETA_UNIT__IS_BEING_TYPECHECKED = 15;
 
 	/**
+	 * The feature id for the '<em><b>Type Definition Cache</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_UNIT__TYPE_DEFINITION_CACHE = 16;
+
+	/**
 	 * The number of structural features of the '<em>Kermeta Unit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT_FEATURE_COUNT = 16;
+	int KERMETA_UNIT_FEATURE_COUNT = 17;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.io.impl.KermetaUnitStorerImpl <em>Kermeta Unit Storer</em>}' class.
@@ -548,6 +557,89 @@ public interface IoPackage extends EPackage {
 	int PARSING_ERROR_FEATURE_COUNT = ERROR_MESSAGE_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.io.impl.TypeDefinitionCacheImpl <em>Type Definition Cache</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.io.impl.TypeDefinitionCacheImpl
+	 * @see org.kermeta.io.impl.IoPackageImpl#getTypeDefinitionCache()
+	 * @generated
+	 */
+	int TYPE_DEFINITION_CACHE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Kermeta Unit</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CACHE__KERMETA_UNIT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Entries</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CACHE__ENTRIES = 1;
+
+	/**
+	 * The feature id for the '<em><b>External Search Authorized</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CACHE__EXTERNAL_SEARCH_AUTHORIZED = 2;
+
+	/**
+	 * The number of structural features of the '<em>Type Definition Cache</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CACHE_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.io.impl.TypeDefinitionCacheEntryImpl <em>Type Definition Cache Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.io.impl.TypeDefinitionCacheEntryImpl
+	 * @see org.kermeta.io.impl.IoPackageImpl#getTypeDefinitionCacheEntry()
+	 * @generated
+	 */
+	int TYPE_DEFINITION_CACHE_ENTRY = 11;
+
+	/**
+	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CACHE_ENTRY__QUALIFIED_NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Type Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CACHE_ENTRY__TYPE_DEFINITION = 1;
+
+	/**
+	 * The number of structural features of the '<em>Type Definition Cache Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CACHE_ENTRY_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '<em>Set</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -555,7 +647,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 10;
+	int SET = 12;
 
 
 	/**
@@ -566,7 +658,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 11;
+	int LIST = 13;
 
 
 	/**
@@ -577,7 +669,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getTracer()
 	 * @generated
 	 */
-	int TRACER = 12;
+	int TRACER = 14;
 
 
 	/**
@@ -588,7 +680,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getASTNode()
 	 * @generated
 	 */
-	int AST_NODE = 13;
+	int AST_NODE = 15;
 
 
 	/**
@@ -599,7 +691,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getANTLRException()
 	 * @generated
 	 */
-	int ANTLR_EXCEPTION = 14;
+	int ANTLR_EXCEPTION = 16;
 
 	/**
 	 * The meta object id for the '<em>IO Plugin</em>' data type.
@@ -609,7 +701,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getIOPlugin()
 	 * @generated
 	 */
-	int IO_PLUGIN = 15;
+	int IO_PLUGIN = 17;
 
 
 	/**
@@ -620,7 +712,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 16;
+	int IPROGRESS_MONITOR = 18;
 
 
 	/**
@@ -810,6 +902,17 @@ public interface IoPackage extends EPackage {
 	EAttribute getKermetaUnit_IsBeingTypechecked();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.io.KermetaUnit#getTypeDefinitionCache <em>Type Definition Cache</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type Definition Cache</em>'.
+	 * @see org.kermeta.io.KermetaUnit#getTypeDefinitionCache()
+	 * @see #getKermetaUnit()
+	 * @generated
+	 */
+	EReference getKermetaUnit_TypeDefinitionCache();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.io.KermetaUnitStorer <em>Kermeta Unit Storer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -997,6 +1100,81 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getParsingError_Length();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.io.TypeDefinitionCache <em>Type Definition Cache</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Definition Cache</em>'.
+	 * @see org.kermeta.io.TypeDefinitionCache
+	 * @generated
+	 */
+	EClass getTypeDefinitionCache();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.io.TypeDefinitionCache#getEntries <em>Entries</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Entries</em>'.
+	 * @see org.kermeta.io.TypeDefinitionCache#getEntries()
+	 * @see #getTypeDefinitionCache()
+	 * @generated
+	 */
+	EAttribute getTypeDefinitionCache_Entries();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.io.TypeDefinitionCache#isExternalSearchAuthorized <em>External Search Authorized</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>External Search Authorized</em>'.
+	 * @see org.kermeta.io.TypeDefinitionCache#isExternalSearchAuthorized()
+	 * @see #getTypeDefinitionCache()
+	 * @generated
+	 */
+	EAttribute getTypeDefinitionCache_ExternalSearchAuthorized();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.io.TypeDefinitionCache#getKermetaUnit <em>Kermeta Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Kermeta Unit</em>'.
+	 * @see org.kermeta.io.TypeDefinitionCache#getKermetaUnit()
+	 * @see #getTypeDefinitionCache()
+	 * @generated
+	 */
+	EReference getTypeDefinitionCache_KermetaUnit();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.io.TypeDefinitionCacheEntry <em>Type Definition Cache Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Definition Cache Entry</em>'.
+	 * @see org.kermeta.io.TypeDefinitionCacheEntry
+	 * @generated
+	 */
+	EClass getTypeDefinitionCacheEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.io.TypeDefinitionCacheEntry#getQualifiedName <em>Qualified Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Qualified Name</em>'.
+	 * @see org.kermeta.io.TypeDefinitionCacheEntry#getQualifiedName()
+	 * @see #getTypeDefinitionCacheEntry()
+	 * @generated
+	 */
+	EAttribute getTypeDefinitionCacheEntry_QualifiedName();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.io.TypeDefinitionCacheEntry#getTypeDefinition <em>Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type Definition</em>'.
+	 * @see org.kermeta.io.TypeDefinitionCacheEntry#getTypeDefinition()
+	 * @see #getTypeDefinitionCacheEntry()
+	 * @generated
+	 */
+	EReference getTypeDefinitionCacheEntry_TypeDefinition();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Set <em>Set</em>}'.
@@ -1236,6 +1414,14 @@ public interface IoPackage extends EPackage {
 		EAttribute KERMETA_UNIT__IS_BEING_TYPECHECKED = eINSTANCE.getKermetaUnit_IsBeingTypechecked();
 
 		/**
+		 * The meta object literal for the '<em><b>Type Definition Cache</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KERMETA_UNIT__TYPE_DEFINITION_CACHE = eINSTANCE.getKermetaUnit_TypeDefinitionCache();
+
+		/**
 		 * The meta object literal for the '{@link org.kermeta.io.impl.KermetaUnitStorerImpl <em>Kermeta Unit Storer</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1396,6 +1582,66 @@ public interface IoPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARSING_ERROR__LENGTH = eINSTANCE.getParsingError_Length();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.io.impl.TypeDefinitionCacheImpl <em>Type Definition Cache</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.io.impl.TypeDefinitionCacheImpl
+		 * @see org.kermeta.io.impl.IoPackageImpl#getTypeDefinitionCache()
+		 * @generated
+		 */
+		EClass TYPE_DEFINITION_CACHE = eINSTANCE.getTypeDefinitionCache();
+
+		/**
+		 * The meta object literal for the '<em><b>Entries</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPE_DEFINITION_CACHE__ENTRIES = eINSTANCE.getTypeDefinitionCache_Entries();
+
+		/**
+		 * The meta object literal for the '<em><b>External Search Authorized</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPE_DEFINITION_CACHE__EXTERNAL_SEARCH_AUTHORIZED = eINSTANCE.getTypeDefinitionCache_ExternalSearchAuthorized();
+
+		/**
+		 * The meta object literal for the '<em><b>Kermeta Unit</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_DEFINITION_CACHE__KERMETA_UNIT = eINSTANCE.getTypeDefinitionCache_KermetaUnit();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.io.impl.TypeDefinitionCacheEntryImpl <em>Type Definition Cache Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.io.impl.TypeDefinitionCacheEntryImpl
+		 * @see org.kermeta.io.impl.IoPackageImpl#getTypeDefinitionCacheEntry()
+		 * @generated
+		 */
+		EClass TYPE_DEFINITION_CACHE_ENTRY = eINSTANCE.getTypeDefinitionCacheEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Qualified Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPE_DEFINITION_CACHE_ENTRY__QUALIFIED_NAME = eINSTANCE.getTypeDefinitionCacheEntry_QualifiedName();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_DEFINITION_CACHE_ENTRY__TYPE_DEFINITION = eINSTANCE.getTypeDefinitionCacheEntry_TypeDefinition();
 
 		/**
 		 * The meta object literal for the '<em>Set</em>' data type.

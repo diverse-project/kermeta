@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.13 2007-09-13 09:04:49 ftanguy Exp $
+/*$Id: Ecore2KMLoader.java,v 1.14 2007-09-19 12:14:58 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -168,44 +168,42 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		this.isQuickFixEnabled = isQuickFixEnabled;
 		KermetaUnit kermetaUnit = null;
 		try {
-			if ( uri.equals("platform:/resource/testAspect/Docbook.ecore") )
-				System.out.println();
 			
 			kermetaUnit = getKermetaUnit(uri);
 
-			if ( kermetaUnit.isErrored() )
+			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
 			
 			applyPass1ToAll( kermetaUnit );
 			
-			if ( kermetaUnit.isErrored() )
+			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
 			
 			applyPass2ToAll(kermetaUnit);
 
-			if ( kermetaUnit.isErrored() )
+			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
 			
 			doImportForAllUnits( kermetaUnit );
 			
-			if ( kermetaUnit.isErrored() )
+			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
 			
 			constructAspectsListsForAll(kermetaUnit);
 						
 			applyPass3ToAll(kermetaUnit);
 			
-			if ( kermetaUnit.isErrored() )
+			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
 			
 			applyPass4ToAll(kermetaUnit);
 			
-			if ( kermetaUnit.isErrored() )
+			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
 			
 			applyPass5ToAll(kermetaUnit);
 			
-			if ( isQuickFixEnabled && ! kermetaUnit.isErrored() )
+			if ( isQuickFixEnabled && ! kermetaUnit.isErroneous() )
 				applyPass6ToAll(kermetaUnit);
 			
 		} catch (IOException e) {
@@ -363,8 +361,6 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	
 	private void applyPass2(KermetaUnit kermetaUnit) {
 		Resource resource = resources.get(kermetaUnit);
-		if ( resource == null )
-			System.out.println();
 		Ecore2KMPass2 pass = new Ecore2KMPass2( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, monitor );
 		Iterator<EObject> iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
@@ -399,7 +395,8 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		
 		internalLog.info( "Importing units for " + kermetaUnit.getUri() );
 		doImport( kermetaUnit );
-			
+		kermetaUnit.getTypeDefinitionCache().setExternalSearchAuthorized( true );	
+		
 		state.loading = false;
 		state.importDone = true;
 	}
@@ -543,8 +540,6 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		Iterator<EObject> iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
 			EObject node = iterator.next();
-			if ( node == null )
-				System.out.println();
 			pass.accept( node );
 		}
 	}

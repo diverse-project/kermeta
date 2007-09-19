@@ -1,4 +1,4 @@
-/* $Id: ParameterizedTypeChecker.java,v 1.8 2007-09-13 09:04:51 ftanguy Exp $
+/* $Id: ParameterizedTypeChecker.java,v 1.9 2007-09-19 12:15:03 ftanguy Exp $
  * Project : Kermeta io
  * File : ParametrizedTypeChecker.java
  * License : EPL
@@ -80,8 +80,6 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 			TypeVariableBinding current_tvb = (TypeVariableBinding) tvb_iter.next();
 			fr.irisa.triskell.kermeta.language.structure.Type provided = current_tvb.getType();
 			//First descend into the actual type parameters to see whether they might have any problems
-			if ( provided == null )
-				System.out.println();
 			this.accept(provided);
 			//Check whether actual type params conform to any supertype constraints on the type variable declaration
 			TypeVariable var = current_tvb.getVariable();

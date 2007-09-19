@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.48 2007-09-04 08:08:53 ftanguy Exp $
+/* $Id: structure.kmt,v 1.49 2007-09-19 12:14:49 ftanguy Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -306,7 +306,7 @@ class Class inherits ParameterizedType, kermeta::reflection::Class, KMStructureV
 	/**
  	 * Implements kermeta::language::structure::Object.equals(Object)
  	 */	
-	method equals(other : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
+	method equals(other : kermeta::reflection::Object) : Boolean from kermeta::language::structure::Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.equals(self, other)
 	end
 
@@ -628,7 +628,7 @@ class Model inherits Object, kermeta::reflection::Model {
 	method addCompatible(objectToAdd : kermeta::reflection::Object) : kermeta::reflection::Object is do
 		// Cute hack. The java code for addCompatible is hard if contents hasn't already been accessed. So...
 		contents
-		extern fr::irisa::triskell::kermeta::runtime::language::Model.addCompatible(self, objectToAdd)
+		result := extern fr::irisa::triskell::kermeta::runtime::language::Model.addCompatible(self, objectToAdd)
 	end
 }
 
@@ -954,105 +954,173 @@ class Parameter inherits MultiplicityElement, kermeta::reflection::Parameter, KM
 abstract class KMStructureVisitor<ContextType, ResultType>
 {
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitClass(node : Class, context : ContextType) : ResultType is do end
+	operation visitClass(node : Class, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitMultiplicityElement(node : MultiplicityElement, context : ContextType) : ResultType is do end
+	operation visitMultiplicityElement(node : MultiplicityElement, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitOperation(node : Operation, context : ContextType) : ResultType is do end
+	operation visitOperation(node : Operation, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTag(node : Tag, context : ContextType) : ResultType is do end
+	operation visitTag(node : Tag, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitProperty(node : Property, context : ContextType) : ResultType is do end
+	operation visitProperty(node : Property, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitClassDefinition(node : ClassDefinition, context : ContextType) : ResultType is do end
+	operation visitClassDefinition(node : ClassDefinition, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTypedElement(node : TypedElement, context : ContextType) : ResultType is do end
+	operation visitTypedElement(node : TypedElement, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitObjectTypeVariable(node : ObjectTypeVariable, context : ContextType) : ResultType is do end
+	operation visitObjectTypeVariable(node : ObjectTypeVariable, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitVirtualType(node : VirtualType, context : ContextType) : ResultType is do end
+	operation visitVirtualType(node : VirtualType, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitModelTypeVariable(node : ModelTypeVariable, context : ContextType) : ResultType is do end
+	operation visitModelTypeVariable(node : ModelTypeVariable, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitModel(node : Model, context : ContextType) : ResultType is do end
+	operation visitModel(node : Model, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitProductType(node : ProductType, context : ContextType) : ResultType is do end
+	operation visitProductType(node : ProductType, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitFunctionType(node : FunctionType, context : ContextType) : ResultType is do end
+	operation visitFunctionType(node : FunctionType, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitType(node : Type, context : ContextType) : ResultType is do end
+	operation visitType(node : Type, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTypeVariableBinding(node : TypeVariableBinding, context : ContextType) : ResultType is do end
+	operation visitTypeVariableBinding(node : TypeVariableBinding, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitPrimitiveType(node : PrimitiveType, context : ContextType) : ResultType is do end
+	operation visitPrimitiveType(node : PrimitiveType, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitNamedElement(node : NamedElement, context : ContextType) : ResultType is do end
+	operation visitNamedElement(node : NamedElement, context : ContextType) : ResultType is do 
+		result := void
+	end
 
-	//operation visitSelfType(node : SelfType, context : ContextType) : ResultType is do end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitPackage(node : Package, context : ContextType) : ResultType is do end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTypeDefinition(node : TypeDefinition, context : ContextType) : ResultType is do end
+	/*operation visitSelfType(node : SelfType, context : ContextType) : ResultType is do 
+		result := void
+	end*/
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitVoidType(node : VoidType, context : ContextType) : ResultType is do end
+	operation visitPackage(node : Package, context : ContextType) : ResultType is do 
+		result := void
+	end
+
+	/** Implementation of the Visitor pattern : 'visit(node)' method */
+	operation visitTypeDefinition(node : TypeDefinition, context : ContextType) : ResultType is do 
+		result := void
+	end
+
+	/** Implementation of the Visitor pattern : 'visit(node)' method */
+	operation visitVoidType(node : VoidType, context : ContextType) : ResultType is do 
+		result := void
+	end
 	
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitDataType(node : DataType, context : ContextType) : ResultType is do end
+	operation visitDataType(node : DataType, context : ContextType) : ResultType is do 
+		result := void
+	end
 	
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitEnumeration(node : Enumeration, context : ContextType) : ResultType is do end
+	operation visitEnumeration(node : Enumeration, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitEnumerationLiteral(node : EnumerationLiteral, context : ContextType) : ResultType is do end
+	operation visitEnumerationLiteral(node : EnumerationLiteral, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitParameter(node : Parameter, context : ContextType) : ResultType is do end
+	operation visitParameter(node : Parameter, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitGenericTypeDefinition(node : GenericTypeDefinition, context : ContextType) : ResultType is do end
+	operation visitGenericTypeDefinition(node : GenericTypeDefinition, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitParameterizedType(node : ParameterizedType, context : ContextType) : ResultType is do end
+	operation visitParameterizedType(node : ParameterizedType, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitModelType(node : ModelType, context : ContextType) : ResultType is do end
+	operation visitModelType(node : ModelType, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTypeDefinitionContainer(node : TypeDefinitionContainer, context : ContextType) : ResultType is do end
+	operation visitTypeDefinitionContainer(node : TypeDefinitionContainer, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitConstraint(node : Constraint, context : ContextType) : ResultType is do end
+	operation visitConstraint(node : Constraint, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitModelingUnit(node : ModelingUnit, context : ContextType) : ResultType is do end
+	operation visitModelingUnit(node : ModelingUnit, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitRequire(node : Require, context : ContextType) : ResultType is do end
+	operation visitRequire(node : Require, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitUsing(node : Using, context : ContextType) : ResultType is do end
+	operation visitUsing(node : Using, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitFilter(node : Filter, context : ContextType) : ResultType is do end
+	operation visitFilter(node : Filter, context : ContextType) : ResultType is do 
+		result := void
+	end
 
 }
 

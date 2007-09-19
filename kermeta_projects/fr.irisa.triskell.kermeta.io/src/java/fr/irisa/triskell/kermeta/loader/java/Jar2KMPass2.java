@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass2.java,v 1.9 2007-08-09 14:58:03 dvojtise Exp $
+/* $Id: Jar2KMPass2.java,v 1.10 2007-09-19 12:15:05 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass2.java
  * License : EPL
@@ -143,7 +143,8 @@ public class Jar2KMPass2 extends Jar2KMPass {
 			ClassDefinition c = StructureFactory.eINSTANCE.createClassDefinition();
 			//this.storeTrace(c, node);
 			c.setName(getClassName(jentry));
-			theEnclosingPackage.getOwnedTypeDefinition().add(c);
+			builder.addTypeDefinition(c, theEnclosingPackage);
+//			theEnclosingPackage.getOwnedTypeDefinition().add(c);
 			
 			// this is a java definition add a tag so the interpreter can recognize it and work with it
 			Tag tag = StructureFactory.eINSTANCE.createTag();

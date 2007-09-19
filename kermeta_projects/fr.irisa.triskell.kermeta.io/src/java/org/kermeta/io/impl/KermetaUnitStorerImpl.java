@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.18 2007-09-13 09:04:50 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.19 2007-09-19 12:15:02 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -263,6 +263,7 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			kermetaUnit.setTracer(null);
 			kermetaUnit.setModelingUnit(null);
 			kermetaUnit.setStorer(null);
+			kermetaUnit.setTypeDefinitionCache(null);
 		}
 	}
 	

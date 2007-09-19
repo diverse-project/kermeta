@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.24 2007-09-13 09:04:51 ftanguy Exp $
+/* $Id: KermetaTypeChecker.java,v 1.25 2007-09-19 12:15:03 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -70,7 +70,7 @@ public class KermetaTypeChecker {
         super();
         this.monitor = monitor;
         this.unit = unit;
-        if (unit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object") != null)
+        if (unit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object", monitor) != null)
         	TypeCheckerContext.initializeTypeChecker(unit, monitor);
         context = new TypeCheckerContext(unit);
     }
@@ -146,7 +146,7 @@ public class KermetaTypeChecker {
     public void checkUnit() {		
     	synchronized ( KermetaTypeChecker.class ) {
     		internalLog.info("Typechecking " + unit.getUri());
-    		if ( ! unit.isTypeChecked() && ! unit.isErrored() ) {
+    		if ( ! unit.isTypeChecked() && ! unit.isErroneous() ) {
     			internalOperation = true;
 	    		checkPackages( unit.getInternalPackages() );
 	    		/*internalOperation = false;
@@ -154,7 +154,7 @@ public class KermetaTypeChecker {
 	    		unit.setTypeChecked( true );
 	    	}
 	    	
-    		if ( ! unit.isErrored() ) {
+    		if ( ! unit.isErroneous() ) {
     			
 				if ( monitor.isCanceled() )
 					return;

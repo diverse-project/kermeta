@@ -1,4 +1,4 @@
-/* $Id: behavior.kmt,v 1.23 2007-09-04 08:08:53 ftanguy Exp $
+/* $Id: behavior.kmt,v 1.24 2007-09-19 12:14:49 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : behavior.kmt
  * License   : EPL
@@ -617,29 +617,98 @@ class LambdaParameter inherits kermeta::language::structure::Object, KMExpressio
  */
 abstract class KMExpressionVisitor<ContextType, ResultType>
 {
-	operation visitCallVariable(node : CallVariable, context : ContextType) : ResultType is do end
-	operation visitCallFeature(node : CallFeature, context : ContextType) : ResultType is do end
-	operation visitCallSuperOperation(node : CallSuperOperation, context : ContextType) : ResultType is do end
-	operation visitCallResult(node : CallResult, context : ContextType) : ResultType is do end
-	operation visitCallValue(node : CallValue, context : ContextType) : ResultType is do end
-	operation visitAssignment(node : Assignment, context : ContextType) : ResultType is do end
-	operation visitBlock(node : Block, context : ContextType) : ResultType is do end
-	operation visitConditional(node : Conditional, context : ContextType) : ResultType is do end
-	operation visitEmptyExpression(node : EmptyExpression, context : ContextType) : ResultType is do end
-	operation visitIntegerLiteral(node : IntegerLiteral, context : ContextType) : ResultType is do end
-	operation visitStringLiteral(node : StringLiteral, context : ContextType) : ResultType is do end
-	operation visitBooleanLiteral(node : BooleanLiteral, context : ContextType) : ResultType is do end
-	operation visitTypeLiteral(node : TypeLiteral, context : ContextType) : ResultType is do end
-	operation visitTypeReference(node : TypeReference, context : ContextType) : ResultType is do end
-	operation visitVoidLiteral(node : VoidLiteral, context : ContextType) : ResultType is do end
-	operation visitLoop(node : Loop, context : ContextType) : ResultType is do end
-	operation visitSelfExpression(node : SelfExpression, context : ContextType) : ResultType is do end
-	operation visitVariableDecl(node : VariableDecl, context : ContextType) : ResultType is do end
-	operation visitRaise(node : Raise, context : ContextType) : ResultType is do end
-	operation visitRescue(node : Rescue, context : ContextType) : ResultType is do end
-	operation visitJavaStaticCall(node : JavaStaticCall, context : ContextType) : ResultType is do end
-	operation visitLambdaExpression(node : LambdaExpression, context : ContextType) : ResultType is do end
-	operation visitLambdaParameter(node : LambdaParameter, context : ContextType) : ResultType is do end
+	operation visitCallVariable(node : CallVariable, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitCallFeature(node : CallFeature, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitCallSuperOperation(node : CallSuperOperation, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitCallResult(node : CallResult, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitCallValue(node : CallValue, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitAssignment(node : Assignment, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitBlock(node : Block, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitConditional(node : Conditional, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitEmptyExpression(node : EmptyExpression, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitIntegerLiteral(node : IntegerLiteral, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitStringLiteral(node : StringLiteral, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitBooleanLiteral(node : BooleanLiteral, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitTypeLiteral(node : TypeLiteral, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitTypeReference(node : TypeReference, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitVoidLiteral(node : VoidLiteral, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitLoop(node : Loop, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitSelfExpression(node : SelfExpression, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitVariableDecl(node : VariableDecl, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitRaise(node : Raise, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitRescue(node : Rescue, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitJavaStaticCall(node : JavaStaticCall, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitLambdaExpression(node : LambdaExpression, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
+	operation visitLambdaParameter(node : LambdaParameter, context : ContextType) : ResultType is do 
+		result := void
+	end
+	
 }
 
 

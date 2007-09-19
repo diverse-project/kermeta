@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.23 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: KMT2KMPass3.java,v 1.24 2007-09-19 12:14:58 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -111,7 +111,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ClassDecl)
 	 */
 	public boolean beginVisit(ClassDecl classDecl) {
-		
+		System.out.println();
 		if ( monitor.isCanceled() )
 			return false;
 		
@@ -164,7 +164,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 					&& ! qualifiedName.equals("kermeta::language::structure::Object")
 					&& ! qualifiedName.equals("kermeta::language::structure::KMStructureVisitable")
 					&& ! qualifiedName.equals("kermeta::language::behavior::KMExpressionVisitable")) {
-				ClassDefinition supertypeDefinition = (ClassDefinition) builder.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object");
+				ClassDefinition supertypeDefinition = (ClassDefinition) builder.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object", monitor);
 				if ( supertypeDefinition == null )
 					builder.error("Missing the statement : require kermeta");
 				fr.irisa.triskell.kermeta.language.structure.Class superclass = StructureFactory.eINSTANCE.createClass();
@@ -203,7 +203,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		for (int i=0; i < included.length ; i++) {
 			if (included[i] instanceof QualifiedID) {
 				String qid = this.qualifiedIDAsString((QualifiedID) included[i]);
-				TypeDefinition referredTD = builder.getTypeDefinitionByName(qid);
+				TypeDefinition referredTD = builder.getTypeDefinitionByName(qid, monitor);
 				if (null == referredTD) {
 					//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Type definition not found : " + qid, (KermetaASTNode) included[i]));
 					builder.error("PASS 3 : Type definition not found : " + qid);
@@ -272,6 +272,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		if (existingOperation != null) {
 			//if the operation is from an aspect class and its signature is the same, we need to continue 
 			if(currentClassIsAspect){
+				ClassDefinitionHelper.getOperationByName(context.current_class, context.current_operation.getName());
 				// if they have the same signature
 				if(haveSameTypeSignature(operation, existingOperation)){
 					// register the existing operation with this astnode
@@ -326,10 +327,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	private boolean haveSameTypeSignature(Operation astOperation, fr.irisa.triskell.kermeta.language.structure.Operation modelOperation) {
 		// check return type
 		// DVK: maybe I should use the type equality checker insead of a simple name comparison ...
-		if(!TypeHelper.getName(getFType(astOperation.getTypeRef())).equals(TypeHelper.getName(modelOperation.getType())))
-		{
-			return false;
-		}
+		if ( astOperation.getTypeRef() != null )
+			if(!TypeHelper.getName(getFType(astOperation.getTypeRef())).equals(TypeHelper.getName(modelOperation.getType())))
+				return false;
+
 		// check parameters
 		int nbParameters = astOperation.getParams() != null ? astOperation.getParams().getChildCount() : 0;
 		if(nbParameters != modelOperation.getOwnedParameter().size()) return false;
@@ -454,8 +455,6 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		// lower :
 		parameter.setLower(getLower(param.getTypeRef()));
 		// type :		
-		if ( context.current_class.getName().equals("CallResult") )
-			System.out.println();
 		parameter.setType(getFType(param.getTypeRef()));
 		
 		// check that another param with the same name does not exist yet
@@ -507,11 +506,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		context.current_property.setUpper(getUpper(property.getTypeRef()));
 		// lower :
 		context.current_property.setLower(getLower(property.getTypeRef()));
-		// type :
-			
-		if ( context.current_property.getName().equals("grounded") )
-			System.out.println();
-			
+		// type :			
 		context.current_property.setType(getFType(property.getTypeRef()));
 		// is readonly, false by default
 		context.current_property.setIsReadOnly(false);

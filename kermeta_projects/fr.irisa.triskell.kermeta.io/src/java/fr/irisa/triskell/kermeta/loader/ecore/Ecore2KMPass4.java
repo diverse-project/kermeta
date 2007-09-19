@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.17 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: Ecore2KMPass4.java,v 1.18 2007-09-19 12:14:58 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -232,8 +232,6 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 			if(eAnnot != null) {
 				buildTypeVariableBindings((fr.irisa.triskell.kermeta.language.structure.Class) t, eAnnot.getDetails(), getVisibleTypeVariables(node));
 			}
-			if ( ! node.getETypeParameters().isEmpty() )
-				System.out.println();
 			acceptList(node.getETypeParameters());
 			
 			// Set the parameters
@@ -470,7 +468,7 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 			// Is there an annotation for SuperOperation? "superOperation -> apackage::AClass"
 			String str_result = (String)ann.getDetails().get(KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS);
 			// Find the class definition owning this operation
-			ClassDefinition cdef = (ClassDefinition) kermetaUnit.getTypeDefinitionByName(str_result);
+			ClassDefinition cdef = (ClassDefinition) kermetaUnit.getTypeDefinitionByName(str_result, monitor);
 			// We never know...
 			if (cdef == null)
 			{
@@ -900,12 +898,7 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 			
 			tvBinding = StructureFactory.eINSTANCE.createTypeVariableBinding();
 			
-			// Set binding variable
-			if ( i > cl.getTypeDefinition().getTypeParameter().size() )
-				System.out.println();
-			if ( cl.getTypeDefinition().getTypeParameter().size() == 0 )
-				System.out.println();
-			
+			// Set binding variable			
 			TypeVariable tVar = (TypeVariable) cl.getTypeDefinition().getTypeParameter().get(i);
 			tvBinding.setVariable(tVar);
 			

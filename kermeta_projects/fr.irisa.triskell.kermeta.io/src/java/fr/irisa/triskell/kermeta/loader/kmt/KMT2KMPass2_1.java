@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2_1.java,v 1.6 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: KMT2KMPass2_1.java,v 1.7 2007-09-19 12:14:58 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMPass2_1.java
  * License : EPL
@@ -98,7 +98,7 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 		String qname = qualifiedIDAsString(bsuper.getName());
 		
 		// this can be a class, and enum or a type variable.
-		TypeDefinition superdef = builder.getTypeDefinitionByName(qname);
+		TypeDefinition superdef = builder.getTypeDefinitionByName(qname, monitor);
 		//Type supertype = KMT2KMTypeBuilder.process(typeVarDecl.getSupertype(), builder);
 		if (superdef instanceof ModelType) {
 			ModelTypeVariable mtv = StructureFactory.eINSTANCE.createModelTypeVariable();

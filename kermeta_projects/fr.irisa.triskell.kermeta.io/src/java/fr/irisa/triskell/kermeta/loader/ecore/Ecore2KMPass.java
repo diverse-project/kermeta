@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass.java,v 1.5 2007-09-13 09:04:49 ftanguy Exp $
+/*$Id: Ecore2KMPass.java,v 1.6 2007-09-19 12:14:58 ftanguy Exp $
 * Project : io
 * File : 	Ecore2KMPass.java
 * License : EPL
@@ -113,7 +113,7 @@ public class Ecore2KMPass extends EcoreVisitor {
 			if (detail.indexOf(":")>0) {
 				detail = detail.replaceAll(" ", ""); // strip spaces
 				String str_cdef = detail.substring(detail.indexOf(":")+1);
-				ClassDefinition cdef = (ClassDefinition) kermetaUnit.getTypeDefinitionByQualifiedName(str_cdef);
+				ClassDefinition cdef = (ClassDefinition) kermetaUnit.getTypeDefinitionByQualifiedName(str_cdef, monitor);
 				fr.irisa.triskell.kermeta.language.structure.Class type = 
 					StructureFactory.eINSTANCE.createClass();
 		        type.setTypeDefinition((ClassDefinition)cdef);
@@ -427,7 +427,7 @@ public class Ecore2KMPass extends EcoreVisitor {
 		
 		if (etype == null) { 
 			//def = StdLibKermetaUnitHelper.getKermetaUnit().typeDefinitionLookup("kermeta::standard::Void");
-			def = kermetaUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Void");
+			def = kermetaUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Void", monitor);
 		}
 		
 		else if ( etype.getName() == null ) {
@@ -522,7 +522,7 @@ public class Ecore2KMPass extends EcoreVisitor {
 			}
 		}
 		else {
-			def = kermetaUnit.getTypeDefinitionByQualifiedName(EcoreHelper.getQualifiedName(etype));
+			def = kermetaUnit.getTypeDefinitionByQualifiedName(EcoreHelper.getQualifiedName(etype), monitor);
 		}
 		
 		/*if (def == null) {

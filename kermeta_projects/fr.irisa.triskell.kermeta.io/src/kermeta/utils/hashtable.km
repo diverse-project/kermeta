@@ -2,16 +2,16 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/utils/@ownedTag.0" name="utils">
-      <ownedTag value="/** &#xD;&#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xD;&#xA; * metamodel&#xD;&#xA; * &#xD;&#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/utils"/>
+      <ownedTag value="/** &#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xA; * metamodel&#xA; * &#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;>&#xA; */" object="//@packages.0/utils"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/utils/Hashtable/@ownedTag.0" name="Hashtable" superType="//@packages.0/utils/Hashtable/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * An implementation of hashtable&#xD;&#xA; * This implementation is for speed optimisation it cannot be serialized. &#xD;&#xA; * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)&#xD;&#xA; * &lt;img src=&quot;./figures/hashtable_view.png&quot;>&#xD;&#xA; */" object="//@packages.0/utils/Hashtable"/>
+        <ownedTag value="/**&#xA; * An implementation of hashtable&#xA; * This implementation is for speed optimisation it cannot be serialized. &#xA; * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)&#xA; * &lt;img src=&quot;./figures/hashtable_view.png&quot;>&#xA; */" object="//@packages.0/utils/Hashtable"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="K"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="V"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/utils/Hashtable/size/@ownedTag.0" name="size" type="//@packages.0/utils/Hashtable/size/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Returns size of the Map&#xD;&#xA;  */" object="//@packages.0/utils/Hashtable/size"/>
+          <ownedTag value="/**&#xA;  * Returns size of the Map&#xA;  */" object="//@packages.0/utils/Hashtable/size"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Integer"/>
           </containedType>
@@ -33,7 +33,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/Hashtable/keyIterator/@ownedTag.0" name="keyIterator" type="//@packages.0/utils/Hashtable/keyIterator/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Returns an iterator on the keys of the Map&#xD;&#xA;  */" object="//@packages.0/utils/Hashtable/keyIterator"/>
+          <ownedTag value="/**&#xA;  * Returns an iterator on the keys of the Map&#xA;  */" object="//@packages.0/utils/Hashtable/keyIterator"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeParamBinding type="//@packages.0/utils/Hashtable/K">
               <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Iterator/G"/>
@@ -55,7 +55,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/Hashtable/valueIterator/@ownedTag.0" name="valueIterator" type="//@packages.0/utils/Hashtable/valueIterator/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Returns an iterator on the values of the Map&#xD;&#xA;  */" object="//@packages.0/utils/Hashtable/valueIterator"/>
+          <ownedTag value="/**&#xA;  * Returns an iterator on the values of the Map&#xA;  */" object="//@packages.0/utils/Hashtable/valueIterator"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeParamBinding type="//@packages.0/utils/Hashtable/V">
               <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Iterator/G"/>
@@ -77,8 +77,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/Hashtable/getValue/@ownedTag.0" name="getValue" type="//@packages.0/utils/Hashtable/V" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Returns the value for key 'key'&#xD;&#xA;  */" object="//@packages.0/utils/Hashtable/getValue"/>
-          <ownedParameter name="key" type="//@packages.0/utils/Hashtable/K" isOrdered="true" upper="1"/>
+          <ownedTag value="/**&#xA;  * Returns the value for key 'key'&#xA;  */" object="//@packages.0/utils/Hashtable/getValue"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/Hashtable/V">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Hashtable/V" isCast="true">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Hashtable/V" name="result"/>
@@ -93,12 +92,11 @@
               </value>
             </statement>
           </body>
+          <ownedParameter name="key" type="//@packages.0/utils/Hashtable/K" isOrdered="true" upper="1"/>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/Hashtable/put/@ownedTag.0" name="put" type="//@packages.0/utils/Hashtable/put/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Adds a entry in the Hashtable&#xD;&#xA;  */" object="//@packages.0/utils/Hashtable/put"/>
+          <ownedTag value="/**&#xA;  * Adds a entry in the Hashtable&#xA;  */" object="//@packages.0/utils/Hashtable/put"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
-          <ownedParameter name="key" type="//@packages.0/utils/Hashtable/K" isOrdered="true" upper="1"/>
-          <ownedParameter name="value" type="//@packages.0/utils/Hashtable/V" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/Hashtable/size/@body/@statement.0/@value/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/utils/Hashtable/size/@body/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Map" jmethod="put">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/utils/Hashtable/put/@body/@statement.0/@parameters.0/@containedType.0">
@@ -111,11 +109,12 @@
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/Hashtable/V" name="value"/>
             </statement>
           </body>
+          <ownedParameter name="key" type="//@packages.0/utils/Hashtable/K" isOrdered="true" upper="1"/>
+          <ownedParameter name="value" type="//@packages.0/utils/Hashtable/V" isOrdered="true" upper="1"/>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/Hashtable/remove/@ownedTag.0" name="remove" type="//@packages.0/utils/Hashtable/remove/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Removes the entry which key equals 'key'&#xD;&#xA;  */" object="//@packages.0/utils/Hashtable/remove"/>
+          <ownedTag value="/**&#xA;  * Removes the entry which key equals 'key'&#xA;  */" object="//@packages.0/utils/Hashtable/remove"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
-          <ownedParameter name="key" type="//@packages.0/utils/Hashtable/K" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/Hashtable/size/@body/@statement.0/@value/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/utils/Hashtable/size/@body/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Map" jmethod="remove">
               <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/utils/Hashtable/remove/@body/@statement.0/@parameters.0/@containedType.0">
@@ -127,9 +126,10 @@
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/Hashtable/K" name="key"/>
             </statement>
           </body>
+          <ownedParameter name="key" type="//@packages.0/utils/Hashtable/K" isOrdered="true" upper="1"/>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/Hashtable/clear/@ownedTag.0" name="clear" type="//@packages.0/utils/Hashtable/clear/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Removes all elements from the Hashtable&#xD;&#xA;  */" object="//@packages.0/utils/Hashtable/clear"/>
+          <ownedTag value="/**&#xA;  * Removes all elements from the Hashtable&#xA;  */" object="//@packages.0/utils/Hashtable/clear"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/Hashtable/size/@body/@statement.0/@value/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/utils/Hashtable/size/@body/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Map" jmethod="clear">
@@ -143,7 +143,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/Hashtable/keys/@ownedTag.0" name="keys" type="//@packages.0/utils/Hashtable/keys/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Returns the keys of the Hashtable&#xD;&#xA;  */" object="//@packages.0/utils/Hashtable/keys"/>
+          <ownedTag value="/**&#xA;  * Returns the keys of the Hashtable&#xA;  */" object="//@packages.0/utils/Hashtable/keys"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeParamBinding type="//@packages.0/utils/Hashtable/K">
               <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
@@ -163,13 +163,13 @@
               </containedType>
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Hashtable/keys/@containedType.0" name="result"/>
               <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.0/@containedType.0" name="new">
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
                 <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.0/@value/@target/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Class"/>
                   </containedType>
                   <typeref type="//@packages.0/utils/Hashtable/keys/@body/@statement.0/@containedType.0" upper="1"/>
                 </target>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
               </value>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Loop" staticType="//@packages.0/utils/Hashtable/keys/@body/@containedType.0">
@@ -195,23 +195,23 @@
                 <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
                   <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
                   <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/K" name="next">
-                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.1/@initialization/@containedType.0" name="it"/>
                     <staticOperation href="../standard/collections.km#//@packages.0/standard/Iterator/next"/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.1/@initialization/@containedType.0" name="it"/>
                   </parameters>
-                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Hashtable/keys/@containedType.0" name="result"/>
                   <staticOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Hashtable/keys/@containedType.0" name="result"/>
                 </statement>
               </body>
               <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="isOff">
                 <staticType href="../standard/collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@target/@containedType.0"/>
-                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.1/@initialization/@containedType.0" name="it"/>
                 <staticOperation href="../standard/collections.km#//@packages.0/standard/Iterator/isOff"/>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.1/@initialization/@containedType.0" name="it"/>
               </stopCondition>
             </statement>
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/Hashtable/values/@ownedTag.0" name="values" type="//@packages.0/utils/Hashtable/values/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;  * Returns the keys of the Hashtable&#xD;&#xA;  */" object="//@packages.0/utils/Hashtable/values"/>
+          <ownedTag value="/**&#xA;  * Returns the keys of the Hashtable&#xA;  */" object="//@packages.0/utils/Hashtable/values"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeParamBinding type="//@packages.0/utils/Hashtable/V">
               <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Collection/G"/>
@@ -229,10 +229,10 @@
               </containedType>
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Hashtable/values/@containedType.0" name="result"/>
               <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/values/@body/@statement.0/@containedType.0" name="new">
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
                 <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/utils/Hashtable/keys/@body/@statement.0/@value/@target/@containedType.0">
                   <typeref type="//@packages.0/utils/Hashtable/values/@body/@statement.0/@containedType.0" upper="1"/>
                 </target>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
               </value>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
@@ -254,10 +254,11 @@
                       </containedType>
                     </target>
                   </parameters>
-                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Hashtable/values/@containedType.0" name="result"/>
                   <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/add"/>
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Hashtable/values/@containedType.0" name="result"/>
                 </body>
               </parameters>
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/values/@body/@statement.1/@target/@containedType.0" name="keys" staticOperation="//@packages.0/utils/Hashtable/keys">
                 <containedType xsi:type="kermeta_language_structure:Class">
                   <typeParamBinding type="//@packages.0/utils/Hashtable/K">
@@ -266,16 +267,14 @@
                   <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
                 </containedType>
               </target>
-              <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
             </statement>
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/utils/Hashtable/containsKey/@ownedTag.0" name="containsKey" type="//@packages.0/utils/Hashtable/containsKey/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/** &#xD;&#xA;  * Returns a Boolean stating whether a key is present in the Map&#xD;&#xA;  */" object="//@packages.0/utils/Hashtable/containsKey"/>
+          <ownedTag value="/** &#xA;  * Returns a Boolean stating whether a key is present in the Map&#xA;  */" object="//@packages.0/utils/Hashtable/containsKey"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
-          <ownedParameter name="key" type="//@packages.0/utils/Hashtable/K" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block">
             <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
             <statement xsi:type="kermeta_language_behavior:Assignment">
@@ -284,19 +283,20 @@
               <value xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
                 <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
                 <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/utils/Hashtable/keys/@body/@containedType.0"/>
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isNotEqual"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/V" name="getValue" staticOperation="//@packages.0/utils/Hashtable/getValue">
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/Hashtable/K" name="key"/>
                 </target>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isNotEqual"/>
               </value>
             </statement>
           </body>
+          <ownedParameter name="key" type="//@packages.0/utils/Hashtable/K" isOrdered="true" upper="1"/>
         </ownedOperation>
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>
   <requires tag="//@requires.0/@ownedTag.0" uri="../Standard.kmt">
-    <ownedTag value="/** &#xD;&#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xD;&#xA; * metamodel&#xD;&#xA; * &#xD;&#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;>&#xD;&#xA; */" object="//@requires.0"/>
+    <ownedTag value="/** &#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xA; * metamodel&#xA; * &#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;>&#xA; */" object="//@requires.0"/>
   </requires>
   <usings qualifiedName="kermeta::standard"/>
   <usings qualifiedName="kermeta::utils"/>

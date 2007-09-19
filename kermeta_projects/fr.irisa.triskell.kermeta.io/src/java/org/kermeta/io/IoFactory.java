@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactory.java,v 1.2 2007-07-20 15:08:08 ftanguy Exp $
+ * $Id: IoFactory.java,v 1.3 2007-09-19 12:15:04 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -87,6 +87,24 @@ public interface IoFactory extends EFactory {
 	 * @generated
 	 */
 	ParsingError createParsingError();
+
+	/**
+	 * Returns a new object of class '<em>Type Definition Cache</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Definition Cache</em>'.
+	 * @generated
+	 */
+	TypeDefinitionCache createTypeDefinitionCache();
+
+	/**
+	 * Returns a new object of class '<em>Type Definition Cache Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Definition Cache Entry</em>'.
+	 * @generated
+	 */
+	TypeDefinitionCacheEntry createTypeDefinitionCacheEntry();
 
 	/**
 	 * Returns the package supported by this factory.

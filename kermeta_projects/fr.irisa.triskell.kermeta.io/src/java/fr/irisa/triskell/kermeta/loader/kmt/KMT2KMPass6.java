@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.20 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: KMT2KMPass6.java,v 1.21 2007-09-19 12:14:58 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -246,7 +246,7 @@ public class KMT2KMPass6 extends KMT2KMPass {
 			else {
 				// this is an error !
 				builder.error("PASS 6 : Operation '"+context.current_class.getName()+"." + context.current_operation.getName() +
-						"' - Operations can be weaved using aspects if only one of those operation is concrete, all other operations must be abstract or tagged as overloadable.");
+						"' - Operations can be weaved using aspects if only one of those operation is concrete, all other operations must be abstract or tagged as overloadable.", operationExpressionBody);
 				/*builder.messages.addMessage(new KMTUnitLoadError("PASS 6 : Operation '"+builder.current_class.getName()+"." + builder.current_operation.getName() +
 						"' - Operations can be weaved using aspects if only one of those operation is concrete, all other operations must be abstract or tagged as overloadable.",operationExpressionBody));
 				*/
@@ -258,8 +258,6 @@ public class KMT2KMPass6 extends KMT2KMPass {
 					" from " +builder.getUri());
 		// normal behavior
 		String qname = NamedElementHelper.getQualifiedName(context.current_operation);
-		if ( qname.equals("update") )
-			System.out.println();
 		if (operation_bodies.containsKey(qname)) {
 			context.current_operation.setBody(ExpressionParser.parse(context, builder, (String)operation_bodies.get(qname), monitor));
 		}

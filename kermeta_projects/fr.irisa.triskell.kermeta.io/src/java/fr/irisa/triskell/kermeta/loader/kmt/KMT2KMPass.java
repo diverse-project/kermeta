@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass.java,v 1.13 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: KMT2KMPass.java,v 1.14 2007-09-19 12:14:58 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
  * License : GPL
@@ -222,6 +222,8 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	 * @return the kcore type (FType) corresponding to the type reference <code>ref</code>.
 	 */
 	protected Type getFType(TypeRef ref) {
+		if ( ref == null )
+			System.out.println();
 		Type result = KMT2KMTypeBuilder.process(context, ref.getReftype(), builder, monitor);
 		return result;
 	}

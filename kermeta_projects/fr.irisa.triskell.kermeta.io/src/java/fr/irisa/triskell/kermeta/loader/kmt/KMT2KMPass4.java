@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.27 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: KMT2KMPass4.java,v 1.28 2007-09-19 12:14:58 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -121,7 +121,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 		EList superclasses = context.current_class.getSuperType();
 		if (operation.getOperationKind().getText().equals("operation")) {
 			// If not, is there already an operation in the common *implicit* super type object?
-			ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::reflection::Object"));
+			ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::reflection::Object", monitor));
 			if (object_classdef != null) // robustness useless test -> Object type should already have been parsed!
 			{
 				if (ClassDefinitionHelper.getOperationByName(object_classdef, context.current_operation.getName())!=null && 
@@ -149,7 +149,6 @@ public class KMT2KMPass4 extends KMT2KMPass {
 			// the op should be defined in a superclass
 			// potential super ops
 			Hashtable superops = getSupersForMethod(context.current_class, context.current_operation.getName());
-			System.out.println();
 			if (superops.size() == 0) { // Error, no super operation
 //				builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :No super operation found for method '"+builder.current_operation.getName()+"'.", operation));
 				superops = getSupersForMethod(context.current_class, context.current_operation.getName());

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoSwitch.java,v 1.5 2007-08-02 16:43:24 dvojtise Exp $
+ * $Id: IoSwitch.java,v 1.6 2007-09-19 12:15:04 ftanguy Exp $
  */
 package org.kermeta.io.util;
 
@@ -164,6 +164,18 @@ public class IoSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case IoPackage.TYPE_DEFINITION_CACHE: {
+				TypeDefinitionCache typeDefinitionCache = (TypeDefinitionCache)theEObject;
+				T result = caseTypeDefinitionCache(typeDefinitionCache);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case IoPackage.TYPE_DEFINITION_CACHE_ENTRY: {
+				TypeDefinitionCacheEntry typeDefinitionCacheEntry = (TypeDefinitionCacheEntry)theEObject;
+				T result = caseTypeDefinitionCacheEntry(typeDefinitionCacheEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -315,6 +327,36 @@ public class IoSwitch<T> {
 	 * @generated
 	 */
 	public T caseParsingError(ParsingError object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Definition Cache</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Definition Cache</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeDefinitionCache(TypeDefinitionCache object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Definition Cache Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Definition Cache Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeDefinitionCacheEntry(TypeDefinitionCacheEntry object) {
 		return null;
 	}
 

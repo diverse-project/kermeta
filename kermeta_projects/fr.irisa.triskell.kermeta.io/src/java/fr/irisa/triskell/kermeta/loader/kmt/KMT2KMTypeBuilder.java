@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.21 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.22 2007-09-19 12:14:58 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -39,6 +39,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ModelTypeHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
@@ -93,12 +94,15 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 		TypeDefinition def = null;
 		
 		if ( context.current_class != null ) {
+		System.out.println();
 			String qualifiedName = NamedElementHelper.getQualifiedName( (NamedElement) context.current_class.eContainer() ) + "::" + qname;
-			def = builder.getTypeDefinitionByQualifiedName(qualifiedName);
+			def = builder.getTypeDefinitionByQualifiedName(qualifiedName, monitor);
+			if ( def != null )
+				KermetaUnitHelper.getKermetaUnitFromObject( def );
 		}
 		
 		if ( def == null )
-			def = builder.getTypeDefinitionByName(qname);
+			def = builder.getTypeDefinitionByName(qname, monitor);
 		
 		// this can be a class, and enum or a type variable.
 		

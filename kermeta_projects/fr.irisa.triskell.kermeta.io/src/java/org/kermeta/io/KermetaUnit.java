@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.10 2007-09-13 09:04:50 ftanguy Exp $
+ * $Id: KermetaUnit.java,v 1.11 2007-09-19 12:15:04 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -16,10 +16,12 @@ import antlr.ANTLRException;
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.language.structure.Using;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.traceability.helper.Tracer;
 import java.util.Map;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -53,6 +55,7 @@ import java.util.Map;
  *   <li>{@link org.kermeta.io.KermetaUnit#isConstraintChecked <em>Constraint Checked</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getAspects <em>Aspects</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#isIsBeingTypechecked <em>Is Being Typechecked</em>}</li>
+ *   <li>{@link org.kermeta.io.KermetaUnit#getTypeDefinitionCache <em>Type Definition Cache</em>}</li>
  * </ul>
  * </p>
  *
@@ -449,6 +452,34 @@ public interface KermetaUnit extends EObject {
 	void setIsBeingTypechecked(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Type Definition Cache</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.kermeta.io.TypeDefinitionCache#getKermetaUnit <em>Kermeta Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Definition Cache</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Definition Cache</em>' reference.
+	 * @see #setTypeDefinitionCache(TypeDefinitionCache)
+	 * @see org.kermeta.io.IoPackage#getKermetaUnit_TypeDefinitionCache()
+	 * @see org.kermeta.io.TypeDefinitionCache#getKermetaUnit
+	 * @model opposite="kermetaUnit" required="true"
+	 * @generated
+	 */
+	TypeDefinitionCache getTypeDefinitionCache();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.io.KermetaUnit#getTypeDefinitionCache <em>Type Definition Cache</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type Definition Cache</em>' reference.
+	 * @see #getTypeDefinitionCache()
+	 * @generated
+	 */
+	void setTypeDefinitionCache(TypeDefinitionCache value);
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model
@@ -621,17 +652,6 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Returns true if the unit contains error(s)
-	 * <!-- end-model-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	boolean isErrored();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -709,11 +729,57 @@ public interface KermetaUnit extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
+	 * Returns true if the unit contains error(s)
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isErroneous();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
 	 * Return a list of all the Packages qualified names (internal and external), usefull in order to use getPackage(String)
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.language.structure.String"
 	 * @generated
 	 */
 	EList<String> getUniquePackageQualifiedNames();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addTypeDefinition(TypeDefinition typeDefinition, TypeDefinitionContainer container);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model monitorDataType="org.kermeta.io.IProgressMonitor"
+	 * @generated
+	 */
+	TypeDefinition getTypeDefinitionByName(String name, IProgressMonitor monitor);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model monitorDataType="org.kermeta.io.IProgressMonitor"
+	 * @generated
+	 */
+	TypeDefinition getTypeDefinitionByQualifiedName(String qualifiedName, IProgressMonitor monitor);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Returns true if the unit contains error(s)
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isIndirectlyErroneous();
 
 } // KermetaUnit

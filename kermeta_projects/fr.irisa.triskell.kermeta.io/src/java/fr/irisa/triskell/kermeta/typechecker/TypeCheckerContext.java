@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.22 2007-09-13 09:04:51 ftanguy Exp $
+/* $Id: TypeCheckerContext.java,v 1.23 2007-09-19 12:15:03 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -87,10 +87,10 @@ public class TypeCheckerContext {
 	    BooleanType = createTypeForClassDefinition("kermeta::standard::Boolean", std_lib);
 	    StdIOType = createTypeForClassDefinition("kermeta::io::StdIO", std_lib);
 	    
-	    SetClassDef = (ClassDefinition)std_lib.getTypeDefinitionByName("kermeta::standard::Set");
-	    OSetClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::OrderedSet");
-	    SeqClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::Sequence");
-	    BagClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::Bag");
+	    SetClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::Set", monitor);
+	    OSetClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::OrderedSet", monitor);
+	    SeqClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::Sequence", monitor);
+	    BagClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::Bag", monitor);
 	    
 		bag_type_cache = new Hashtable();
 		set_type_cache = new Hashtable();

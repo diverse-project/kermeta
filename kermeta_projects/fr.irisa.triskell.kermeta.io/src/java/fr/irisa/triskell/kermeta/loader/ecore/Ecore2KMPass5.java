@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass5.java,v 1.10 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: Ecore2KMPass5.java,v 1.11 2007-09-19 12:14:58 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -191,9 +191,6 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 	 */
 	public Object visit(ETypeParameter node) {
 		ObjectTypeVariable anObjectTypeVariable = datas.getObjectTypeVariable(node);
-		
-		if ( anObjectTypeVariable == null )
-			System.out.println();	
 		
 		if(anObjectTypeVariable.getSupertype() == null) {
 			Type type = null;

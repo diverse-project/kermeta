@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.15 2007-09-13 09:04:50 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.16 2007-09-19 12:15:02 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import org.eclipse.core.runtime.IProgressMonitor;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -37,6 +38,7 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
+import org.kermeta.io.TypeDefinitionCache;
 import org.kermeta.io.ParsingError;
 import org.kermeta.io.WarningMessage;
 import org.kermeta.io.plugin.IOPlugin;
@@ -54,6 +56,7 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.language.structure.Using;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
@@ -82,6 +85,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isConstraintChecked <em>Constraint Checked</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getAspects <em>Aspects</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isIsBeingTypechecked <em>Is Being Typechecked</em>}</li>
+ *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getTypeDefinitionCache <em>Type Definition Cache</em>}</li>
  * </ul>
  * </p>
  *
@@ -311,6 +315,16 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	protected boolean isBeingTypechecked = IS_BEING_TYPECHECKED_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getTypeDefinitionCache() <em>Type Definition Cache</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeDefinitionCache()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypeDefinitionCache typeDefinitionCache;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
@@ -319,6 +333,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		super();
 		setModelingUnit( StructureFactory.eINSTANCE.createModelingUnit() );
 		aspects = new HashMap <TypeDefinition, EList<TypeDefinition> > ();
+		setTypeDefinitionCache( IoFactory.eINSTANCE.createTypeDefinitionCache() );
 	}
 
 	/**
@@ -679,6 +694,66 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeDefinitionCache getTypeDefinitionCache() {
+		if (typeDefinitionCache != null && typeDefinitionCache.eIsProxy()) {
+			InternalEObject oldTypeDefinitionCache = (InternalEObject)typeDefinitionCache;
+			typeDefinitionCache = (TypeDefinitionCache)eResolveProxy(oldTypeDefinitionCache);
+			if (typeDefinitionCache != oldTypeDefinitionCache) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE, oldTypeDefinitionCache, typeDefinitionCache));
+			}
+		}
+		return typeDefinitionCache;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeDefinitionCache basicGetTypeDefinitionCache() {
+		return typeDefinitionCache;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTypeDefinitionCache(TypeDefinitionCache newTypeDefinitionCache, NotificationChain msgs) {
+		TypeDefinitionCache oldTypeDefinitionCache = typeDefinitionCache;
+		typeDefinitionCache = newTypeDefinitionCache;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE, oldTypeDefinitionCache, newTypeDefinitionCache);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeDefinitionCache(TypeDefinitionCache newTypeDefinitionCache) {
+		if (newTypeDefinitionCache != typeDefinitionCache) {
+			NotificationChain msgs = null;
+			if (typeDefinitionCache != null)
+				msgs = ((InternalEObject)typeDefinitionCache).eInverseRemove(this, IoPackage.TYPE_DEFINITION_CACHE__KERMETA_UNIT, TypeDefinitionCache.class, msgs);
+			if (newTypeDefinitionCache != null)
+				msgs = ((InternalEObject)newTypeDefinitionCache).eInverseAdd(this, IoPackage.TYPE_DEFINITION_CACHE__KERMETA_UNIT, TypeDefinitionCache.class, msgs);
+			msgs = basicSetTypeDefinitionCache(newTypeDefinitionCache, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE, newTypeDefinitionCache, newTypeDefinitionCache));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public void load() {
@@ -731,32 +806,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		}
 		
 		return currentPackage;		
-		
-		/*Package p = findInternalpackage(qualifiedName);
-		if ( p == null ) {
-			/*
-			 * 
-			 * Creation of the package.
-			 * 
-			 */
-			/*p = StructureFactory.eINSTANCE.createPackage();
-			int index = qualifiedName.lastIndexOf("::");
-			String name = qualifiedName;
-			if ( index != -1 )
-				name = qualifiedName.substring(index+2);
-			p.setName( name );
-			/*
-			 * 
-			 * Creation of the package entry.
-			 * 
-			 */
-			/*PackageEntry entry = IoFactory.eINSTANCE.createPackageEntry();
-			entry.setQualifiedName( qualifiedName );
-			entry.setPackage( p );
-			getInternalPackageEntries().add( entry );
-			getCompilationUnit().getPackages().add( p );
-		}
-		return p;*/
 	}
 
 	/**
@@ -925,98 +974,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public TypeDefinition getTypeDefinitionByName(String name) {
-		/*
-		 * 
-		 * Maybe it is a qualified name.
-		 * 
-		 */
-		if ( name.contains("::") ) {
-			TypeDefinition typeDefinition = getTypeDefinitionByQualifiedName( name );
-			if ( typeDefinition != null )
-				return typeDefinition;
-			
-		}
-		/*
-		 * 
-		 * Look into the internal packages.
-		 * 
-		 */
-		List <Package> internalPackages = getInternalPackages();
-		Iterator <Package> iterator = internalPackages.iterator();
-		while ( iterator.hasNext() ) {
-			Package p = iterator.next();
-			String qualifiedName = NamedElementHelper.getQualifiedName(p) + "::" + name;
-			int index = qualifiedName.lastIndexOf("::");
-			String packageQualifedName = qualifiedName.substring(0, index);
-			Package currentPackage = getInternalPackage( packageQualifedName );
-			
-			if ( currentPackage != null ) {
-			
-				Iterator <TypeDefinition> iterator2 = currentPackage.getOwnedTypeDefinition().iterator();
-				while ( iterator2.hasNext() ) {
-					TypeDefinition typeDefinition = iterator2.next();
-					if ( NamedElementHelper.getQualifiedName(typeDefinition).equals(qualifiedName) )
-						return typeDefinition;
-				}
-				
-			}
-		}
-		/*
-		 * 
-		 * Look into the internal packages.
-		 * 
-		 */
-		/*List <Package> internalPackages = getInternalPackages();
-		Iterator <Package> iterator = internalPackages.iterator();
-		while ( iterator.hasNext() ) {
-			Package p = iterator.next();
-			String qualifiedName = NamedElementHelper.getQualifiedName(p) + "::" + name;
-			Iterator <TypeDefinition> iterator2 = p.getOwnedTypeDefinition().iterator();
-			while ( iterator2.hasNext() ) {
-				TypeDefinition typeDefinition = iterator2.next();
-				if ( NamedElementHelper.getQualifiedName(typeDefinition).equals(qualifiedName) )
-					return typeDefinition;
-			}
-		}*/
-		/*
-		 * 
-		 * Look into the external packages which has the same name that an internal package.
-		 * 
-		 */
-		iterator = getInternalPackages().iterator();
-		while ( iterator.hasNext() ) {
-			Package p = iterator.next();
-			String packageQualifiedName = NamedElementHelper.getQualifiedName(p);
-			String typeDefinitionQualifiedName = packageQualifiedName + "::" + name;
-			Iterator <Package> it = getExternalPackage(packageQualifiedName).iterator();
-			while ( it.hasNext() ) {
-				Package externalPackage = it.next();
-				Iterator <TypeDefinition> iterator2 = externalPackage.getOwnedTypeDefinition().iterator();
-				while ( iterator2.hasNext() ) {
-					TypeDefinition typeDefinition = iterator2.next();
-					if ( NamedElementHelper.getQualifiedName(typeDefinition).equals(typeDefinitionQualifiedName) )
-						return typeDefinition;
-				}
-			}
-		}
-		
-		/*
-		 * 
-		 * Look into the external packages thanks to the usings.
-		 * 
-		 */
-		if(getModelingUnit() == null){
-			IOPlugin.internalLog.error("Problem ! modelingUnit is null, ... maybe a problem of concurrent thread ??? ");
-		}
-		Iterator <Using> itOnUsings = modelingUnit.getUsings().iterator();
-		while ( itOnUsings.hasNext() ) {
-			Using using = itOnUsings.next();
-			String qualifiedName = using.getQualifiedName() + "::" + name;
-			TypeDefinition typeDefinition = getTypeDefinitionByQualifiedName(qualifiedName);
-			if ( typeDefinition != null )
-				return typeDefinition;
-		}
-		return null;
+		return typeDefinitionCache.getTypeDefinitionByName(name);
 	}
 
 	/**
@@ -1025,25 +983,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public TypeDefinition getTypeDefinitionByQualifiedName(String qualifiedName) {
-		String packageQualifiedName = "";
-		String typeDefinitionName = "";
-		int index = qualifiedName.lastIndexOf("::");
-		if ( index != -1 ) {
-			packageQualifiedName = qualifiedName.substring(0, index);
-			typeDefinitionName = qualifiedName.substring(index+2);
-		}
-		List <Package> packages = getPackages(packageQualifiedName);
-		Iterator <Package> iterator = packages.iterator();
-		while ( iterator.hasNext() ) {
-			Package p = iterator.next();
-			Iterator <TypeDefinition> iterator2 = p.getOwnedTypeDefinition().iterator();
-			while ( iterator2.hasNext() ) {
-				TypeDefinition typeDefinition = iterator2.next();
-				if ( typeDefinition.getName().equals(typeDefinitionName) )
-					return typeDefinition;
-			}
-		}
-		return null;
+		return typeDefinitionCache.getTypeDefinitionByQualifiedName(qualifiedName);
 	}
 
 	/**
@@ -1115,9 +1055,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public String print() {
-		/*KMTPrettyPrinter printer = new KMTPrettyPrinter( compilationUnit );
-		printer.accept( compilationUnit );
-		return printer.getText();*/
 		KM2KMTPrettyPrinter printer = new KM2KMTPrettyPrinter();
 		printer.ppCompilationUnit( modelingUnit );
 		return printer.getContent();
@@ -1152,16 +1089,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		WarningMessage warning = IoFactory.eINSTANCE.createWarningMessage();
 		warning.setValue( message );
 		getMessages().add( warning );
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean isErrored() {
-		//return KermetaUnitHelper.isIndirectlyErrored(this);
-		return KermetaUnitHelper.isErrored(this);
 	}
 
 	/**
@@ -1329,6 +1256,15 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public boolean isErroneous() {
+		return KermetaUnitHelper.isErrored(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public EList<String> getUniquePackageQualifiedNames() {
 		EList<String> result = new BasicEList<String>();
 		Iterator<Package> it = getPackages().iterator();
@@ -1340,6 +1276,44 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				result.add(qualifiedName);
 		}
 		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void addTypeDefinition(TypeDefinition typeDefinition, TypeDefinitionContainer container) {
+		container.getOwnedTypeDefinition().add( typeDefinition );
+		String qualifiedname = NamedElementHelper.getQualifiedName(typeDefinition);
+		getTypeDefinitionCache().addTypeDefinition(qualifiedname, typeDefinition);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public TypeDefinition getTypeDefinitionByName(String name, IProgressMonitor monitor) {
+		return getTypeDefinitionCache().getTypeDefinitionByName(name, monitor);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public TypeDefinition getTypeDefinitionByQualifiedName(String qualifiedName, IProgressMonitor monitor) {
+		return getTypeDefinitionCache().getTypeDefinitionByQualifiedName(qualifiedName, monitor);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isIndirectlyErroneous() {
+		return KermetaUnitHelper.isIndirectlyErrored(this);
 	}
 
 	/**
@@ -1397,6 +1371,10 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getImportedKermetaUnits()).basicAdd(otherEnd, msgs);
 			case IoPackage.KERMETA_UNIT__IMPORTERS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getImporters()).basicAdd(otherEnd, msgs);
+			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
+				if (typeDefinitionCache != null)
+					msgs = ((InternalEObject)typeDefinitionCache).eInverseRemove(this, IoPackage.TYPE_DEFINITION_CACHE__KERMETA_UNIT, TypeDefinitionCache.class, msgs);
+				return basicSetTypeDefinitionCache((TypeDefinitionCache)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -1415,6 +1393,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return ((InternalEList<?>)getImportedKermetaUnits()).basicRemove(otherEnd, msgs);
 			case IoPackage.KERMETA_UNIT__IMPORTERS:
 				return ((InternalEList<?>)getImporters()).basicRemove(otherEnd, msgs);
+			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
+				return basicSetTypeDefinitionCache(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -1475,6 +1455,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return getAspects();
 			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
 				return isIsBeingTypechecked() ? Boolean.TRUE : Boolean.FALSE;
+			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
+				if (resolve) return getTypeDefinitionCache();
+				return basicGetTypeDefinitionCache();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1541,6 +1524,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
 				setIsBeingTypechecked(((Boolean)newValue).booleanValue());
 				return;
+			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
+				setTypeDefinitionCache((TypeDefinitionCache)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1601,6 +1587,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
 				setIsBeingTypechecked(IS_BEING_TYPECHECKED_EDEFAULT);
 				return;
+			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
+				setTypeDefinitionCache((TypeDefinitionCache)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1645,6 +1634,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return aspects != null;
 			case IoPackage.KERMETA_UNIT__IS_BEING_TYPECHECKED:
 				return isBeingTypechecked != IS_BEING_TYPECHECKED_EDEFAULT;
+			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
+				return typeDefinitionCache != null;
 		}
 		return super.eIsSet(featureID);
 	}

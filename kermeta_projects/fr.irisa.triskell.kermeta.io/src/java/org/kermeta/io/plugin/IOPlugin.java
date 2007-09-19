@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.15 2007-09-13 09:04:52 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.16 2007-09-19 12:15:05 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -25,6 +25,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
@@ -134,18 +136,21 @@ public class IOPlugin extends AbstractUIPlugin {
 					KermetaTypeChecker typechecker = new KermetaTypeChecker( framework, new NullProgressMonitor() );
 					typechecker.checkUnit();
 
-					if ( ! framework.isErrored() ) {
+					if ( ! framework.isIndirectlyErroneous() ) {
 						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( framework, new NullProgressMonitor() );
 						constraintchecker.checkUnit();
 					}				
 
+					if ( framework.isIndirectlyErroneous() )
+			            MessageDialog.openInformation(new Shell(), "Invalid Kermeta Framework", "The Kermeta Framework contains errors. " + KermetaUnitHelper.getAllErrorsAsString(framework));
+					
 					// Loading Ecore
 					ecore = loadEcore( ECORE_URI );
 										
 					typechecker = new KermetaTypeChecker( ecore, new NullProgressMonitor() );
 					typechecker.checkUnit();
 
-					if ( ! ecore.isErrored() ) {
+					if ( ! ecore.isIndirectlyErroneous() ) {
 						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( ecore, new NullProgressMonitor() );
 						constraintchecker.checkUnit();
 					}
@@ -210,10 +215,6 @@ public class IOPlugin extends AbstractUIPlugin {
 	 * @throws URIMalformedException
 	 */
 	public KermetaUnit getKermetaUnit( String uri ) throws URIMalformedException {
-		if ( uri.matches("http://www.eclipse.org/emf/2003/XMLType") )
-			System.out.println();
-		
-		
 		KermetaUnit kermetaUnit = storer.find(uri);
 		if ( kermetaUnit == null ) {
 			kermetaUnit = storer.get( uri );
@@ -224,7 +225,8 @@ public class IOPlugin extends AbstractUIPlugin {
 				kermetaUnit.importKermetaUnit( framework, false );
 				kermetaUnit.addRequire( "kermeta" );
 			} else if ( framework != null )
-				kermetaUnit.importKermetaUnit( framework, false );
+				kermetaUnit.getImportedKermetaUnits().add( framework );
+				//kermetaUnit.importKermetaUnit( framework, false );
 		}
 		return kermetaUnit;
 	}
@@ -252,7 +254,6 @@ public class IOPlugin extends AbstractUIPlugin {
 	public KermetaUnit loadKermetaUnit( String uri, String content, IProgressMonitor monitor ) throws KermetaIOFileNotFoundException, URIMalformedException {
 		KermetaUnit kermetaUnit = null;
 		synchronized ( IOPlugin.class ) {
-			IOPlugin.internalLog.debug( "loading " + uri);
 			if ( ! LOCAL_USE ) {
 			
 				if ( Runtime.getRuntime().freeMemory() < 1000000 ) {
@@ -270,7 +271,6 @@ public class IOPlugin extends AbstractUIPlugin {
 			//KermetaUnit kermetaUnit = kermetaUnitHelper.loadFile(uri, content);
 			kermetaUnit = getKermetaUnit( uri );
 			storer.load( uri, content, monitor );
-			IOPlugin.internalLog.debug( "loading " + uri + " done");
 		}
 		return kermetaUnit;
 
@@ -312,14 +312,15 @@ public class IOPlugin extends AbstractUIPlugin {
 			for ( KermetaUnit unit : unitToUnload )
 				unload( unit.getUri() );
 		}
+		internalLog.info("Available Memory before running garbage collection : " + Runtime.getRuntime().freeMemory() + " (unloading " + uri + ")");
+		Runtime.getRuntime().gc();
+		internalLog.info("Available Memory after running garbage collection : " + Runtime.getRuntime().freeMemory() + " (unloading " + uri + ")");
+
 	}
 	
 	public void unload(IFile file) {
 		String uri = "platform:/resource" + file.getFullPath().toString();
 		unload( uri );
-		internalLog.info("Available Memory before running garbage collection : " + Runtime.getRuntime().freeMemory() + " (unloading " + file + ")");
-		Runtime.getRuntime().gc();
-		internalLog.info("Available Memory after running garbage collection : " + Runtime.getRuntime().freeMemory() + " (unloading " + file + ")");
 	}
 	
 	public KermetaUnit getFramework() {

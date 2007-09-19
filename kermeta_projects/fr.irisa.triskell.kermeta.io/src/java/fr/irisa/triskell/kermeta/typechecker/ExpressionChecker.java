@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.50 2007-09-13 09:04:51 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.51 2007-09-19 12:15:03 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -581,8 +581,6 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        }
 	    }
 	    else {
-	    	if ( provided_type == null )
-	    		System.out.println();
 	        if (!provided_type.isSubTypeOf(targetType)) {
 	        	provided_type.isSubTypeOf(targetType);
 	            unit.error("TYPE-CHECKER : Type mismatch, "+provided_type+" does not conform to required type : "+targetType+".", expression);
@@ -645,9 +643,6 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	}
 	
 	public Object visitCallFeature(CallFeature expression) {	
-		if ( expression.getName().equals("and") )
-			System.out.println();
-		
 		// visit target expression	
 		if (expression.getTarget() != null) 
 			this.accept(expression.getTarget());

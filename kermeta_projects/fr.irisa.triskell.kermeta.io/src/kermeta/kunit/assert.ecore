@@ -4,14 +4,14 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::kunit|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/kunit/assert.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="kunit" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/kunit/assert.ecore#//kunit" nsPrefix="kunit">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/kunit/assert.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="kunit" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/kunit/assert.ecore#//kunit" nsPrefix="kunit">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xD;&#xA; * main features of the famous *Unit tool for Kermeta language&#xD;&#xA; * &lt;img src=&quot;./figures/assert_view.png&quot;>&#xD;&#xA; */"/>
+        <details key="documentation" value="/**&#xA; * main features of the famous *Unit tool for Kermeta language&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/assert_view.png&quot;>&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="AbstractFallible" abstract="true">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * to be written ############################&#xD;&#xA; */"/>
+          <details key="documentation" value="/**&#xA; * to be written ############################&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="assert">
@@ -27,7 +27,7 @@
         <eOperations name="assertWithMsg">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xD;&#xA;     * process the given condition and react with the given message&#xD;&#xA;     * if it is not satisfied&#xD;&#xA;     */"/>
+            <details key="documentation" value="/**&#xA;     * process the given condition and react with the given message&#xA;     * if it is not satisfied&#xA;     */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
@@ -60,7 +60,7 @@
         <eOperations name="assertTrueWithMsg">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xD;&#xA;     * process the given condition and react with the given message&#xD;&#xA;     * if it is not satisfied&#xD;&#xA;     */"/>
+            <details key="documentation" value="/**&#xA;     * process the given condition and react with the given message&#xA;     * if it is not satisfied&#xA;     */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
@@ -83,7 +83,7 @@
         <eOperations name="assertFalseWithMsg">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xD;&#xA;     * process the given condition and react with the given message&#xD;&#xA;     * if it is satisfied&#xD;&#xA;     */"/>
+            <details key="documentation" value="/**&#xA;     * process the given condition and react with the given message&#xA;     * if it is satisfied&#xA;     */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
@@ -220,42 +220,56 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
+    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="kunit.ecore#/0"/>
     <references href="kunit.ecore#/1"/>
     <references href="kunit.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../ecore/ecore_compatibility.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
+    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

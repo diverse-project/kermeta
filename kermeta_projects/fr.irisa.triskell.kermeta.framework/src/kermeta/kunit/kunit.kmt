@@ -1,4 +1,4 @@
-/* $Id: kunit.kmt,v 1.31 2007-09-11 12:26:16 dvojtise Exp $
+/* $Id: kunit.kmt,v 1.32 2007-09-19 12:14:50 ftanguy Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -363,6 +363,7 @@ abstract class Test
 	operation initLog(): Log is
 		do
 			self.log := Log.new
+			result := self.log
 		end
 	
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoAdapterFactory.java,v 1.5 2007-08-02 16:43:24 dvojtise Exp $
+ * $Id: IoAdapterFactory.java,v 1.6 2007-09-19 12:15:04 ftanguy Exp $
  */
 package org.kermeta.io.util;
 
@@ -119,6 +119,14 @@ public class IoAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseParsingError(ParsingError object) {
 				return createParsingErrorAdapter();
+			}
+			@Override
+			public Adapter caseTypeDefinitionCache(TypeDefinitionCache object) {
+				return createTypeDefinitionCacheAdapter();
+			}
+			@Override
+			public Adapter caseTypeDefinitionCacheEntry(TypeDefinitionCacheEntry object) {
+				return createTypeDefinitionCacheEntryAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -277,6 +285,34 @@ public class IoAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParsingErrorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.io.TypeDefinitionCache <em>Type Definition Cache</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.io.TypeDefinitionCache
+	 * @generated
+	 */
+	public Adapter createTypeDefinitionCacheAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.io.TypeDefinitionCacheEntry <em>Type Definition Cache Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.io.TypeDefinitionCacheEntry
+	 * @generated
+	 */
+	public Adapter createTypeDefinitionCacheEntryAdapter() {
 		return null;
 	}
 

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.20 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.21 2007-09-19 12:14:58 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMExpressionBuilder.java
  * License : EPL
@@ -309,7 +309,7 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 				}
 				else {
 					// it is either a type or a type variable. we check here if it exists to give an appropriate error if it does not...
-					if ((builder.getTypeDefinitionByName(name) == null) && (context.typeVariableLookup(name) == null)) {
+					if ((builder.getTypeDefinitionByName(name, monitor) == null) && (context.typeVariableLookup(name) == null)) {
 						//builder.messages.addMessage(new KMTUnitLoadError("Cannot resolve symbol : '"+name+"'.", btype));
 						builder.error("Cannot resolve symbol : '"+name+"'.", fTypeOrVarLiteral);
 						return false;

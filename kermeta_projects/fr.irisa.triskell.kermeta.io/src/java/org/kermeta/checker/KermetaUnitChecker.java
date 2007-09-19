@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitChecker.java,v 1.1 2007-09-13 09:04:51 ftanguy Exp $
+/*$Id: KermetaUnitChecker.java,v 1.2 2007-09-19 12:15:05 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	KermetaUnitChecker.java
 * License : EPL
@@ -13,9 +13,11 @@
 package org.kermeta.checker;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -26,9 +28,12 @@ import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 public class KermetaUnitChecker {
 
+	final static private Logger logger = LogConfigurationHelper.getLogger("KermetaUnitChecker");
+	
 	static private HashMap<String, List<Object>> callers = new HashMap<String, List<Object>> ();
 	
 	/**
@@ -41,7 +46,13 @@ public class KermetaUnitChecker {
 	 * @throws URIMalformedException
 	 */
 	static public KermetaUnit check(String uri, String content, Object caller, IProgressMonitor monitor) throws KermetaIOFileNotFoundException, URIMalformedException {
+		if ( monitor.isCanceled() )
+			return null;
+		
+		Date beforeLoading = new Date();
 		KermetaUnit unit = IOPlugin.getDefault().loadKermetaUnit(uri, content, monitor);
+		Date afterLoading = new Date();
+		logger.info("Loading " + uri + " (time consuming : " + (afterLoading.getTime() - beforeLoading.getTime()) + "ms).");
 		initializeCallersList( unit.getUri() );
 		check(unit, caller, monitor);
 		return unit;
@@ -97,7 +108,10 @@ public class KermetaUnitChecker {
 	static public KermetaUnit check(IFile file, String content, Object caller, IProgressMonitor monitor) throws KermetaIOFileNotFoundException, URIMalformedException {
 		if ( monitor.isCanceled() )
 			return null;
+		Date beforeLoading = new Date();
 		KermetaUnit unit = IOPlugin.getDefault().loadKermetaUnit(file, content, monitor);
+		Date afterLoading = new Date();
+		logger.info("Loading " + file + " (time consuming : " + (afterLoading.getTime() - beforeLoading.getTime()) + "ms).");
 		initializeCallersList( unit.getUri() );
 		check(unit, caller, monitor);
 		return unit;		
@@ -136,9 +150,12 @@ public class KermetaUnitChecker {
 			 * Typechecking the unit if the loading has passed.
 			 * 
 			 */
-			if ( ! unit.isErrored() ) {
+			if ( ! unit.isErroneous() ) {
+				Date beforeTypechecking = new Date();
 				KermetaTypeChecker typechecker = new KermetaTypeChecker(unit, monitor);
 				typechecker.checkUnit();
+				Date afterTypechDate = new Date();
+				logger.info("Typechecking " + unit.getUri() + " (time consuming : " + (afterTypechDate.getTime() - beforeTypechecking.getTime()) + " ms)");
 			}
 			
 			/*
@@ -146,9 +163,13 @@ public class KermetaUnitChecker {
 			 * Constraint checking the unit if the typechecking has passed.
 			 * 
 			 */
-			if ( ! unit.isErrored() ) {
+			if ( ! unit.isErroneous() ) {
+				Date beforeConstraintchecking = new Date();
 				KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(unit, monitor);
 				constraintchecker.checkUnit();
+				Date afterConstraintchecking = new Date();
+				logger.info("Typechecking " + unit.getUri() + " (time consuming : " + (afterConstraintchecking.getTime() - beforeConstraintchecking.getTime()) + " ms)");
+
 			}
 
 			unit.setIsBeingTypechecked( false );

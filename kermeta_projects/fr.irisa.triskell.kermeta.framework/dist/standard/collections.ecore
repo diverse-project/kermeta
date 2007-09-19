@@ -4,10 +4,10 @@
     <details key="require" value="primitive_types.kmt|"/>
     <details key="using" value="kermeta::exceptions|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="standard" nsURI="file:/C:/David/workspaceRDL/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#//standard" nsPrefix="standard">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="standard" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#//standard" nsPrefix="standard">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xD;&#xA; * Defines Collection types &#xD;&#xA; * &lt;img src=&quot;./figures/collections_view.png&quot;>&#xD;&#xA; */"/>
+        <details key="documentation" value="/**&#xA; * Defines Collection types &#xA; * &lt;img src=&quot;./figures/collections_view.png&quot;>&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object">
         <eAnnotations source="kermeta">
@@ -16,14 +16,14 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Collection" abstract="true">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * Collection is the root abstract class for all kermeta collections&#xD;&#xA; */"/>
+          <details key="documentation" value="/**&#xA; * Collection is the root abstract class for all kermeta collections&#xA; */"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="asBag">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Bag built from the Collection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Bag built from the Collection&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Bag">
             <eTypeArguments eTypeParameter="/1/standard/Collection/G"/>
@@ -32,7 +32,7 @@
         <eOperations name="asSet">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Set built from the Collection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Set built from the Collection&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Set">
             <eTypeArguments eTypeParameter="/1/standard/Collection/G"/>
@@ -41,7 +41,7 @@
         <eOperations name="asOrderedSet">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new OrderedSet built from the Collection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new OrderedSet built from the Collection&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/OrderedSet">
             <eTypeArguments eTypeParameter="/1/standard/Collection/G"/>
@@ -50,7 +50,7 @@
         <eOperations name="asSequence">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Sequence built from the Collection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Sequence built from the Collection&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
             <eTypeArguments eTypeParameter="/1/standard/Collection/G"/>
@@ -59,7 +59,7 @@
         <eOperations name="forAllCpl">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := self.forAll{x | self.forAll{y | f(x, y)}}&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * To be written #####################################&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * To be written #####################################&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="f">
@@ -74,7 +74,7 @@
         <eOperations name="existsCpl">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := self.exists{x | self.exists{y | f(x, y)}}&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * To be written #####################################&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * To be written #####################################&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="f">
@@ -89,7 +89,7 @@
         <eOperations name="add">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.add(self, element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Adds an element in the Collection (default implementation)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Adds an element in the Collection (default implementation)&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="element">
@@ -99,7 +99,7 @@
         <eOperations name="remove">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var elem : G&#xA;&#x9;from elem := self.detect{e | e.equals(element)}&#xA;&#x9;until elem.equals(void)&#xA;&#x9;loop&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#x9;&#x9;elem := self.detect{e | e.equals(element)}&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Removes all instances of element from the Collection, based on&#xD;&#xA;  * G.equals(Object) definition&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Removes all instances of element from the Collection, based on&#xA;  * G.equals(Object) definition&#xA;  */"/>
           </eAnnotations>
           <eAnnotations source="kermeta.post">
             <details key="doesntContainsElementAnymore" value="not (contains(element))"/>
@@ -112,14 +112,14 @@
         <eOperations name="clear">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.clear(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Removes all elements from the Collection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Removes all elements from the Collection&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="addAll">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;elements.each{element | add(element)}&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Adds all elements from the Collection elements in the current Collection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Adds all elements from the Collection elements in the current Collection&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="elements" eType="/1/standard/Collection"/>
@@ -127,7 +127,7 @@
         <eOperations name="contains">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := false&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until (it.isOff) or (result)&#xA;&#x9;loop&#xA;&#x9;&#x9;result := it.next.equals(element)&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether the Collection contains at least one&#xD;&#xA;  * instance of element, based on G.equals(elt : Object) definition&#xD;&#xA;  * Note: for checking whethera physical element is contained by the collection,&#xD;&#xA;  * make use of G.oid()&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a Boolean stating whether the Collection contains at least one&#xA;  * instance of element, based on G.equals(elt : Object) definition&#xA;  * Note: for checking whethera physical element is contained by the collection,&#xA;  * make use of G.oid()&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="element">
@@ -137,7 +137,7 @@
         <eOperations name="includes">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := self.contains(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * OCL API alignement&#xD;&#xA;  * See Collection&lt;G>.contains(Object)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * OCL API alignement&#xA;  * See Collection&lt;G>.contains(Object)&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="element">
@@ -147,7 +147,7 @@
         <eOperations name="containsAll">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := true&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init elements.iterator&#xA;&#x9;until (it.isOff) or (not (result))&#xA;&#x9;loop&#xA;&#x9;&#x9;result := self.contains(it.next)&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns true if current Collection contains all elements of Collection elements&#xD;&#xA;  * See Collection&lt;G>.contains(Object)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns true if current Collection contains all elements of Collection elements&#xA;  * See Collection&lt;G>.contains(Object)&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="elements" eType="/1/standard/Collection"/>
@@ -155,7 +155,7 @@
         <eOperations name="includesAll">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := self.containsAll(elements)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * OCL API alignement&#xD;&#xA;  * See Collection&lt;G>.containsAll(Collection&lt;G>)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * OCL API alignement&#xA;  * See Collection&lt;G>.containsAll(Collection&lt;G>)&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="elements" eType="/1/standard/Collection"/>
@@ -163,7 +163,7 @@
         <eOperations name="excludes">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := not (self.contains(element))&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns true if the Collection does not contain element&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns true if the Collection does not contain element&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="element">
@@ -173,7 +173,7 @@
         <eOperations name="excludesAll">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := true&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init elements.iterator&#xA;&#x9;until (it.isOff) or (not (result))&#xA;&#x9;loop&#xA;&#x9;&#x9;result := not (self.contains(it.next))&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns true if the Collection contains no element of Collection elements&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns true if the Collection contains no element of Collection elements&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="elements" eType="/1/standard/Collection"/>
@@ -181,35 +181,35 @@
         <eOperations name="size">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.size(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns the number of elements in the Collection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns the number of elements in the Collection&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
         </eOperations>
         <eOperations name="empty">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := (size) == (0)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether the Collection is empty&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a Boolean stating whether the Collection is empty&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
         </eOperations>
         <eOperations name="isEmpty">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := self.empty&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * OCL alignement API&#xD;&#xA;  * See Collection&lt;G>.empty()&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * OCL alignement API&#xA;  * See Collection&lt;G>.empty()&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
         </eOperations>
         <eOperations name="isNotEmpty">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := not (self.empty)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * OCL alignement API&#xD;&#xA;  * Returns a Boolean stating whether the Collection contains at least&#xD;&#xA;  * one element &#xD;&#xA;  * See also Collection&lt;G>.contains(Object)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * OCL alignement API&#xA;  * Returns a Boolean stating whether the Collection contains at least&#xA;  * one element &#xA;  * See also Collection&lt;G>.contains(Object)&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
         </eOperations>
         <eOperations name="iterator">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Iterator&lt;G>.new&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.iterator(self, result)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns an Iterator on the Collection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns an Iterator on the Collection&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Iterator">
             <eTypeArguments eTypeParameter="/1/standard/Collection/G"/>
@@ -218,21 +218,21 @@
         <eOperations name="one">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if (size) == (0) then&#xA;&#x9;&#x9;result := void&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;&#x9;result := it.next&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns an element from the Collection or void if the Collection is empty&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns an element from the Collection or void if the Collection is empty&#xA;  */"/>
           </eAnnotations>
           <eGenericType eTypeParameter="/1/standard/Collection/G"/>
         </eOperations>
         <eOperations name="any">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if (size) == (0) then&#xA;&#x9;&#x9;raise kermeta::exceptions::EmptyCollection.new&#xA;&#xA;&#x9;end&#xA;&#x9;var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;result := it.next&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns an element from the Collection&#xD;&#xA;  * Raises an EmptyCollection exception if the Collection is empty&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns an element from the Collection&#xA;  * Raises an EmptyCollection exception if the Collection is empty&#xA;  */"/>
           </eAnnotations>
           <eGenericType eTypeParameter="/1/standard/Collection/G"/>
         </eOperations>
         <eOperations name="each">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;func(it.next)&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Runs function func on each element of the Collection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Runs function func on each element of the Collection&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="func">
@@ -246,7 +246,7 @@
         <eOperations name="forAll">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var test : kermeta::standard::Boolean init true&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;test := (test) and (func(it.next))&#xA;&#x9;end&#xA;&#x9;result := test&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether no element of the Collection invalidates&#xD;&#xA;  * the condition specified by function func&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a Boolean stating whether no element of the Collection invalidates&#xA;  * the condition specified by function func&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="func">
@@ -260,7 +260,7 @@
         <eOperations name="exists">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var test : kermeta::standard::Boolean init false&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until (it.isOff) or ((test) != (false))&#xA;&#x9;loop&#xA;&#x9;&#x9;test := (test) or (func(it.next))&#xA;&#x9;end&#xA;&#x9;result := test&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether at least one element of the Collection&#xD;&#xA;  * validates the condition specified by function func&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a Boolean stating whether at least one element of the Collection&#xA;  * validates the condition specified by function func&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="func">
@@ -274,7 +274,7 @@
         <eOperations name="collect">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;T>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;result.add(collector(it.next))&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Sequence which content corresponds to the result&#xD;&#xA;  * of running the collector function for each element of the Collection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Sequence which content corresponds to the result&#xA;  * of running the collector function for each element of the Collection&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
             <eTypeArguments/>
@@ -291,7 +291,7 @@
         <eOperations name="isUnique">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := true&#xA;&#x9;var s : kermeta::standard::Sequence&lt;T> init kermeta::standard::Sequence&lt;T>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until (it.isOff) or (not (result))&#xA;&#x9;loop&#xA;&#x9;&#x9;var t : T init collector(it.next)&#xA;&#x9;&#x9;if s.contains(t) then&#xA;&#x9;&#x9;&#x9;result := false&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;s.add(t)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether the the collector function evaluates to a&#xD;&#xA;  * different value for each element of the Collection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a Boolean stating whether the the collector function evaluates to a&#xA;  * different value for each element of the Collection&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eTypeParameters name="T"/>
@@ -306,7 +306,7 @@
         <eOperations name="detect">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var elem : G&#xA;&#x9;result := void&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until (it.isOff) or (result.isNotEqual(void))&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if detector(elem) then&#xA;&#x9;&#x9;&#x9;result := elem&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns the first element of the Collection for which the detector function&#xD;&#xA;  * is not false&#xD;&#xA;  * Returns void if no elements is validated by the detector function&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns the first element of the Collection for which the detector function&#xA;  * is not false&#xA;  * Returns void if no elements is validated by the detector function&#xA;  */"/>
           </eAnnotations>
           <eGenericType eTypeParameter="/1/standard/Collection/G"/>
           <eParameters name="detector">
@@ -320,7 +320,7 @@
         <eOperations name="select">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var elem : G&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if selector(elem) then&#xA;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Sequence composed of elements of the Collection that&#xD;&#xA;  * validate the selector function&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Sequence composed of elements of the Collection that&#xA;  * validate the selector function&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
             <eTypeArguments eTypeParameter="/1/standard/Collection/G"/>
@@ -336,7 +336,7 @@
         <eOperations name="reject">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := self.~select{elem | not (rejector(elem))}&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Sequence composed of elements of the Collection that&#xD;&#xA;  * do not validate the rejector function&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Sequence composed of elements of the Collection that&#xA;  * do not validate the rejector function&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
             <eTypeArguments eTypeParameter="/1/standard/Collection/G"/>
@@ -352,7 +352,7 @@
         <eOperations name="count">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := self.~select{e | e.equals(element)}.size&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns the number of instances of element in the Collection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns the number of instances of element in the Collection&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
           <eParameters name="element">
@@ -362,14 +362,14 @@
         <eOperations name="sum">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var res : G&#xA;&#x9;var tmp : kermeta::standard::Summable&lt;G>&#xA;&#x9;var o : kermeta::standard::Object&#xA;&#x9;o := self.one&#xA;&#x9;tmp ?= o&#xA;&#x9;result := void&#xA;&#x9;if tmp.isNotEqual(void) then&#xA;&#x9;&#x9;self.each{elem | do&#xA;&#x9;&#x9;&#x9;&#x9;o := elem&#xA;&#x9;&#x9;&#x9;&#x9;tmp ?= o&#xA;&#x9;&#x9;&#x9;&#x9;if tmp.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;res := tmp.plus(res)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Sum the element if they are summable (ie implement '+' operator)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Sum the element if they are summable (ie implement '+' operator)&#xA;  */"/>
           </eAnnotations>
           <eGenericType eTypeParameter="/1/standard/Collection/G"/>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Set" eSuperTypes="/1/standard/Collection">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * A Set is a non-ordered collection that contains distinct elements&#xD;&#xA; * (with regards to the G.equals(Object) operation)&#xD;&#xA; */"/>
+          <details key="documentation" value="/**&#xA; * A Set is a non-ordered collection that contains distinct elements&#xA; * (with regards to the G.equals(Object) operation)&#xA; */"/>
         </eAnnotations>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Collection&lt;G>" value="kermeta::standard::Collection&lt;G>"/>
@@ -378,7 +378,7 @@
         <eOperations name="add">
           <eAnnotations source="kermeta" references="/1/standard/Collection/add">
             <details key="body" value="do&#xA;&#x9;if not (self.contains(element)) then&#xA;&#x9;&#x9;super(element)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Collection&lt;G>.add(G)&#xD;&#xA;  * Adds elt to the Set if it is not already contained by the&#xD;&#xA;  * Set, does nothing otherwise&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Collection&lt;G>.add(G)&#xA;  * Adds elt to the Set if it is not already contained by the&#xA;  * Set, does nothing otherwise&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
           </eAnnotations>
           <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
@@ -389,7 +389,7 @@
         <eOperations name="remove">
           <eAnnotations source="kermeta" references="/1/standard/Collection/remove">
             <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | e.equals(element)}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Collection&lt;G>.remove(G)&#xD;&#xA;  * Removes the element from the Set if it is contained by the Set&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Collection&lt;G>.remove(G)&#xA;  * Removes the element from the Set if it is contained by the Set&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
           </eAnnotations>
           <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
@@ -400,9 +400,9 @@
         <eOperations name="equals">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if not (element.isVoid) then&#xA;&#x9;&#x9;if kermeta::standard::Collection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Collection&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;if (self.size) == (collection.size) then&#xA;&#x9;&#x9;&#x9;&#x9;var elem : G&#xA;&#x9;&#x9;&#x9;&#x9;var ok : kermeta::standard::Boolean init true&#xA;&#x9;&#x9;&#x9;&#x9;from var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;&#x9;&#x9;&#x9;until (it.isOff) or (not (ok))&#xA;&#x9;&#x9;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if not (collection.contains(elem)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ok := false&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;isEqual := ok&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Object.equals(Object)&#xD;&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xD;&#xA;  * current Set&#xD;&#xA;  */"/>
-            <details key="superOperation" value="kermeta::reflection::Object"/>
-            <references href="../reflection/reflection.ecore#/1/reflection/Object/equals"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Object.equals(Object)&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xA;  * current Set&#xA;  */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="element" eType="/1/standard/Object"/>
@@ -410,7 +410,7 @@
         <eOperations name="union">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;G>.new&#xA;&#x9;result.addAll(self)&#xA;&#x9;result.addAll(elements)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Set corresponding to the union of the Set elements&#xD;&#xA;  * with the current Set&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Set corresponding to the union of the Set elements&#xA;  * with the current Set&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Set">
             <eTypeArguments eTypeParameter="/1/standard/Set/G"/>
@@ -420,7 +420,7 @@
         <eOperations name="unionWithBag">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Bag&lt;G>.new&#xA;&#x9;result := addAll(self)&#xA;&#x9;result := addAll(elements)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Bag corresponding to the union of the Bag elements&#xD;&#xA;  * with the current Set&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Bag corresponding to the union of the Bag elements&#xA;  * with the current Set&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Bag">
             <eTypeArguments eTypeParameter="/1/standard/Set/G"/>
@@ -430,7 +430,7 @@
         <eOperations name="intersection">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;G>.new&#xA;&#x9;var elem : G&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if elements.contains(elem) then&#xA;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Set corresponding to the intersection of the Set elements&#xD;&#xA;  * with the current Set&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Set corresponding to the intersection of the Set elements&#xA;  * with the current Set&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Set">
             <eTypeArguments eTypeParameter="/1/standard/Set/G"/>
@@ -440,7 +440,7 @@
         <eOperations name="minus">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;G>.new&#xA;&#x9;var elem : G&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if not (elements.contains(elem)) then&#xA;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Set corresponding to the difference between the&#xD;&#xA;  * current Set and the Set elements, ie all elements contained by &#xD;&#xA;  * the current Set that do not appear in the elements Set &#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Set corresponding to the difference between the&#xA;  * current Set and the Set elements, ie all elements contained by &#xA;  * the current Set that do not appear in the elements Set &#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Set">
             <eTypeArguments eTypeParameter="/1/standard/Set/G"/>
@@ -450,7 +450,7 @@
         <eOperations name="asSet">
           <eAnnotations source="kermeta" references="/1/standard/Collection/asSet">
             <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Set&lt;G> init kermeta::standard::Set&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Collection&lt;G>.asSet()&#xD;&#xA;  * Returns a new Set composed of all elements of current Set&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Collection&lt;G>.asSet()&#xA;  * Returns a new Set composed of all elements of current Set&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Set">
@@ -460,7 +460,7 @@
         <eOperations name="asOrderedSet">
           <eAnnotations source="kermeta" references="/1/standard/Collection/asOrderedSet">
             <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::OrderedSet&lt;G> init kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Collection&lt;G>.asOrderedSet()&#xD;&#xA;  * Returns a new OrderedSet that contains all elements of current Set&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Collection&lt;G>.asOrderedSet()&#xA;  * Returns a new OrderedSet that contains all elements of current Set&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/OrderedSet">
@@ -470,7 +470,7 @@
         <eOperations name="asBag">
           <eAnnotations source="kermeta" references="/1/standard/Collection/asBag">
             <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Bag&lt;G> init kermeta::standard::Bag&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Collection&lt;G>.asBag()&#xD;&#xA;  * Returns a new Bag composed of all elements of current Set&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Collection&lt;G>.asBag()&#xA;  * Returns a new Bag composed of all elements of current Set&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Bag">
@@ -480,7 +480,7 @@
         <eOperations name="asSequence">
           <eAnnotations source="kermeta" references="/1/standard/Collection/asSequence">
             <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Sequence&lt;G> init kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Collection&lt;G>.asSequence()&#xD;&#xA;  * Returns a new Sequence composed of all elements of current Set&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Collection&lt;G>.asSequence()&#xA;  * Returns a new Sequence composed of all elements of current Set&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
@@ -490,7 +490,7 @@
         <eOperations name="symmetricDifference">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Set&lt;G> init s.minus(self)&#xA;&#x9;result := self.minus(s).addAll(res)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Set which contents corresponds to the symmetric&#xD;&#xA;  * difference between current Set and Set s, ie all elements of&#xD;&#xA;  * each Set that do not appear in the other one&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Set which contents corresponds to the symmetric&#xA;  * difference between current Set and Set s, ie all elements of&#xA;  * each Set that do not appear in the other one&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Set">
             <eTypeArguments eTypeParameter="/1/standard/Set/G"/>
@@ -500,7 +500,7 @@
         <eOperations name="flatten">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Set&lt;kermeta::standard::Object> init kermeta::standard::Set&lt;kermeta::standard::Object>.new&#xA;&#x9;if G.isKindOf(kermeta::standard::Collection&lt;kermeta::standard::Object>) then&#xA;&#x9;&#x9;var col : kermeta::standard::Collection&lt;kermeta::standard::Object>&#xA;&#x9;&#x9;var o : kermeta::standard::Object&#xA;&#x9;&#x9;self.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;o := e&#xA;&#x9;&#x9;&#x9;&#x9;col ?= o&#xA;&#x9;&#x9;&#x9;&#x9;res.addAll(col)&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Set which content includes all non-Collection elements&#xD;&#xA;  * of the current Set, and, for each Collection element of the current&#xD;&#xA;  * Set, as many elements as the Collection contains&#xD;&#xA;  * Duplicates are removed&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Set which content includes all non-Collection elements&#xA;  * of the current Set, and, for each Collection element of the current&#xA;  * Set, as many elements as the Collection contains&#xA;  * Duplicates are removed&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Set">
             <eTypeArguments eClassifier="/1/standard/Object"/>
@@ -509,7 +509,7 @@
         <eOperations name="sortedBy">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := quickSort(self.asOrderedSet, comparator)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a ordered set of the bag elements sorted using the given comparator.&#xD;&#xA;  * The comparator must return :&lt;ul>&#xD;&#xA;  *   &lt;li>+1 if the second &lt;G> element is greater than the first&lt;/li> &#xD;&#xA;  *   &lt;li>0 if the second &lt;G> element equals the first&lt;/li> &#xD;&#xA;  *   &lt;li>-1 if the second &lt;G> element is lower than the first&lt;/li> &#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a ordered set of the bag elements sorted using the given comparator.&#xA;  * The comparator must return :&lt;ul>&#xA;  *   &lt;li>+1 if the second &lt;G> element is greater than the first&lt;/li> &#xA;  *   &lt;li>0 if the second &lt;G> element equals the first&lt;/li> &#xA;  *   &lt;li>-1 if the second &lt;G> element is lower than the first&lt;/li> &#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/OrderedSet">
             <eTypeArguments eTypeParameter="/1/standard/Set/G"/>
@@ -526,7 +526,7 @@
         <eOperations name="quickSort">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var less : kermeta::standard::OrderedSet&lt;G> init kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;var pivotList : kermeta::standard::OrderedSet&lt;G> init kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;var greater : kermeta::standard::OrderedSet&lt;G> init kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;if (q.size) &lt;= (1) then&#xA;&#x9;&#x9;result := q&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var pivot : G init q.one&#xA;&#x9;&#x9;q.each{x | do&#xA;&#x9;&#x9;&#x9;&#x9;if (comparator(x, pivot)) == (1) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;less.add(x)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;if (comparator(x, pivot)) == (0) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;pivotList.add(x)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;if (comparator(x, pivot)) == (1.uminus) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;greater.add(x)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Recursive sort of the given (ordered) set using the given comparator.&#xD;&#xA;  * The comparator must return :&lt;ul>&#xD;&#xA;  *   &lt;li>+1 if the second &lt;G> element is greater than the first&lt;/li> &#xD;&#xA;  *   &lt;li>0 if the second &lt;G> element equals the first&lt;/li> &#xD;&#xA;  *   &lt;li>-1 if the second &lt;G> element is lower than the first&lt;/li> &#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Recursive sort of the given (ordered) set using the given comparator.&#xA;  * The comparator must return :&lt;ul>&#xA;  *   &lt;li>+1 if the second &lt;G> element is greater than the first&lt;/li> &#xA;  *   &lt;li>0 if the second &lt;G> element equals the first&lt;/li> &#xA;  *   &lt;li>-1 if the second &lt;G> element is lower than the first&lt;/li> &#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/OrderedSet">
             <eTypeArguments eTypeParameter="/1/standard/Set/G"/>
@@ -544,7 +544,7 @@
         <eOperations name="concatenate">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;result.addAll(less)&#xA;&#x9;result.addAll(pivot)&#xA;&#x9;result.addAll(greater)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Internal concatenation tool for recursive 'quickSort()' method&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Internal concatenation tool for recursive 'quickSort()' method&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/OrderedSet">
             <eTypeArguments eTypeParameter="/1/standard/Set/G"/>
@@ -556,7 +556,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Bag" eSuperTypes="/1/standard/Collection">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * Bag is a concrete non-ordered Collection allowing duplicates&#xD;&#xA; */"/>
+          <details key="documentation" value="/**&#xA; * Bag is a concrete non-ordered Collection allowing duplicates&#xA; */"/>
         </eAnnotations>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Collection&lt;G>" value="kermeta::standard::Collection&lt;G>"/>
@@ -565,9 +565,9 @@
         <eOperations name="equals">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if not (element.isVoid) then&#xA;&#x9;&#x9;if kermeta::standard::Collection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Bag&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;var selfAsSet : kermeta::standard::Set&lt;G> init self.asSet&#xA;&#x9;&#x9;&#x9;result := selfAsSet.equals(collection.asSet)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Object.equals(elt : Object)&#xD;&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xD;&#xA;  * current Bag&#xD;&#xA;  */"/>
-            <details key="superOperation" value="kermeta::reflection::Object"/>
-            <references href="../reflection/reflection.ecore#/1/reflection/Object/equals"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Object.equals(elt : Object)&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xA;  * current Bag&#xA;  */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="element" eType="/1/standard/Object"/>
@@ -575,7 +575,7 @@
         <eOperations name="union">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Bag&lt;G>.new&#xA;&#x9;result := addAll(self)&#xA;&#x9;result := addAll(elements)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Bag corresponding to the union of elements and&#xD;&#xA;  * current Bag&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Bag corresponding to the union of elements and&#xA;  * current Bag&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Bag">
             <eTypeArguments eTypeParameter="/1/standard/Bag/G"/>
@@ -585,7 +585,7 @@
         <eOperations name="intersection">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Bag&lt;G>.new&#xA;&#x9;var elem : G&#xA;&#x9;var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;from it&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if elements.contains(elem) then&#xA;&#x9;&#x9;&#x9;if (self.count(elem)) &lt;= (elements.count(elem)) then&#xA;&#x9;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;it := elements.iterator&#xA;&#x9;from it&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if self.contains(elem) then&#xA;&#x9;&#x9;&#x9;if (elements.count(elem)) &lt; (self.count(elem)) then&#xA;&#x9;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Bag corresponding to the intersection of elements&#xD;&#xA;  * and the Bag&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Bag corresponding to the intersection of elements&#xA;  * and the Bag&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Bag">
             <eTypeArguments eTypeParameter="/1/standard/Bag/G"/>
@@ -595,7 +595,7 @@
         <eOperations name="intersectionWithSet">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;G>.new&#xA;&#x9;var elem : G&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init elements.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if self.contains(elem) then&#xA;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Set corresponding to the intersection of a Set of&#xD;&#xA;  * elements and the Bag&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Set corresponding to the intersection of a Set of&#xA;  * elements and the Bag&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Set">
             <eTypeArguments eTypeParameter="/1/standard/Bag/G"/>
@@ -605,7 +605,7 @@
         <eOperations name="removeFromOid">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | (e.oid) == (elementOid)}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Removes the element identified by the provided Oid from the Bag&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Removes the element identified by the provided Oid from the Bag&#xA;  */"/>
           </eAnnotations>
           <eAnnotations source="kermeta.post">
             <details key="doesntContainsElementAnymore" value="not (exists{e | (e.oid) == (elementOid)})"/>
@@ -618,7 +618,7 @@
         <eOperations name="removeOne">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | e.equals(element)}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Removes one instance of element from the Bag&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Removes one instance of element from the Bag&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="element">
@@ -628,7 +628,7 @@
         <eOperations name="asSet">
           <eAnnotations source="kermeta" references="/1/standard/Collection/asSet">
             <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Set&lt;G> init kermeta::standard::Set&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Collection&lt;G>.asSet()&#xD;&#xA;  * Returns a new Set containing elements of the Bag without duplicates&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Collection&lt;G>.asSet()&#xA;  * Returns a new Set containing elements of the Bag without duplicates&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Set">
@@ -638,7 +638,7 @@
         <eOperations name="asOrderedSet">
           <eAnnotations source="kermeta" references="/1/standard/Collection/asOrderedSet">
             <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::OrderedSet&lt;G> init kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Collection&lt;G>.asOrderedSet()&#xD;&#xA;  * Returns a new OrderedSet containing elements of the Bag without duplicates&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Collection&lt;G>.asOrderedSet()&#xA;  * Returns a new OrderedSet containing elements of the Bag without duplicates&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/OrderedSet">
@@ -648,7 +648,7 @@
         <eOperations name="asBag">
           <eAnnotations source="kermeta" references="/1/standard/Collection/asBag">
             <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Bag&lt;G> init kermeta::standard::Bag&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Collection&lt;G>.asBag()&#xD;&#xA;  * Returns a new Bag containing all elements of current Bag &#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Collection&lt;G>.asBag()&#xA;  * Returns a new Bag containing all elements of current Bag &#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Bag">
@@ -658,7 +658,7 @@
         <eOperations name="asSequence">
           <eAnnotations source="kermeta" references="/1/standard/Collection/asSequence">
             <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Sequence&lt;G> init kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Collection&lt;G>.asSequence()&#xD;&#xA;  * Returns a new Sequence containing all elements of current Bag&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Collection&lt;G>.asSequence()&#xA;  * Returns a new Sequence containing all elements of current Bag&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
@@ -668,7 +668,7 @@
         <eOperations name="including">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Bag&lt;G> init kermeta::standard::Bag&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;s.add(object)&#xA;&#x9;result := s&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Bag which content includes the content of the&#xD;&#xA;  * current Bag and the element object&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Bag which content includes the content of the&#xA;  * current Bag and the element object&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Bag">
             <eTypeArguments eTypeParameter="/1/standard/Bag/G"/>
@@ -680,7 +680,7 @@
         <eOperations name="excluding">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Bag&lt;G> init kermeta::standard::Bag&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;s.remove(object)&#xA;&#x9;result := s&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Bag which content includes the content of the&#xD;&#xA;  * current Bag from which all instances of object have been&#xD;&#xA;  * removed&#xD;&#xA;   */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Bag which content includes the content of the&#xA;  * current Bag from which all instances of object have been&#xA;  * removed&#xA;   */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Bag">
             <eTypeArguments eTypeParameter="/1/standard/Bag/G"/>
@@ -692,7 +692,7 @@
         <eOperations name="flatten">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Bag&lt;kermeta::standard::Object> init kermeta::standard::Bag&lt;kermeta::standard::Object>.new&#xA;&#x9;if G.isKindOf(kermeta::standard::Collection&lt;kermeta::standard::Object>) then&#xA;&#x9;&#x9;var col : kermeta::standard::Collection&lt;kermeta::standard::Object>&#xA;&#x9;&#x9;var o : kermeta::standard::Object&#xA;&#x9;&#x9;self.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;o := e&#xA;&#x9;&#x9;&#x9;&#x9;col ?= o&#xA;&#x9;&#x9;&#x9;&#x9;res.addAll(col)&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Bag which content includes all non-Collection elements&#xD;&#xA;  * of the current Set, and, for each Collection element of the current&#xD;&#xA;  * Bag, as many elements as the Collection contains&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a new Bag which content includes all non-Collection elements&#xA;  * of the current Set, and, for each Collection element of the current&#xA;  * Bag, as many elements as the Collection contains&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Bag">
             <eTypeArguments eClassifier="/1/standard/Object"/>
@@ -701,7 +701,7 @@
         <eOperations name="sortedBy">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := quickSort(self.asSequence, comparator)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns a sequence of the bag elements sorted using the given comparator.&#xD;&#xA;  * The comparator must return :&lt;ul>&#xD;&#xA;  *   &lt;li>+1 if the second &lt;G> element is greater than the first&lt;/li> &#xD;&#xA;  *   &lt;li>0 if the second &lt;G> element equals the first&lt;/li> &#xD;&#xA;  *   &lt;li>-1 if the second &lt;G> element is lower than the first&lt;/li> &#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns a sequence of the bag elements sorted using the given comparator.&#xA;  * The comparator must return :&lt;ul>&#xA;  *   &lt;li>+1 if the second &lt;G> element is greater than the first&lt;/li> &#xA;  *   &lt;li>0 if the second &lt;G> element equals the first&lt;/li> &#xA;  *   &lt;li>-1 if the second &lt;G> element is lower than the first&lt;/li> &#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
             <eTypeArguments eTypeParameter="/1/standard/Bag/G"/>
@@ -718,7 +718,7 @@
         <eOperations name="quickSort">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var less : kermeta::standard::Sequence&lt;G> init kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;var pivotList : kermeta::standard::Sequence&lt;G> init kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;var greater : kermeta::standard::Sequence&lt;G> init kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;if (q.size) &lt;= (1) then&#xA;&#x9;&#x9;result := q&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var pivot : G init q.one&#xA;&#x9;&#x9;q.each{x | do&#xA;&#x9;&#x9;&#x9;&#x9;if (comparator(x, pivot)) == (1) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;less.add(x)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;if (comparator(x, pivot)) == (0) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;pivotList.add(x)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;if (comparator(x, pivot)) == (1.uminus) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;greater.add(x)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Recursive sort of the given sequence using the given comparator.&#xD;&#xA;  * The comparator must return :&lt;ul>&#xD;&#xA;  *   &lt;li>+1 if the second &lt;G> element is greater than the first&lt;/li> &#xD;&#xA;  *   &lt;li>0 if the second &lt;G> element equals the first&lt;/li> &#xD;&#xA;  *   &lt;li>-1 if the second &lt;G> element is lower than the first&lt;/li> &#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Recursive sort of the given sequence using the given comparator.&#xA;  * The comparator must return :&lt;ul>&#xA;  *   &lt;li>+1 if the second &lt;G> element is greater than the first&lt;/li> &#xA;  *   &lt;li>0 if the second &lt;G> element equals the first&lt;/li> &#xA;  *   &lt;li>-1 if the second &lt;G> element is lower than the first&lt;/li> &#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
             <eTypeArguments eTypeParameter="/1/standard/Bag/G"/>
@@ -736,7 +736,7 @@
         <eOperations name="concatenate">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;result.addAll(less)&#xA;&#x9;result.addAll(pivot)&#xA;&#x9;result.addAll(greater)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Internal concatenation tool for recursive 'quickSort()' method&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Internal concatenation tool for recursive 'quickSort()' method&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
             <eTypeArguments eTypeParameter="/1/standard/Bag/G"/>
@@ -748,7 +748,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="OrderedCollection" abstract="true" eSuperTypes="/1/standard/Collection">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * An OrderedCollection is the root abstract class for all ordered Collections.&#xD;&#xA; */"/>
+          <details key="documentation" value="/**&#xA; * An OrderedCollection is the root abstract class for all ordered Collections.&#xA; */"/>
         </eAnnotations>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Collection&lt;G>" value="kermeta::standard::Collection&lt;G>"/>
@@ -757,7 +757,7 @@
         <eOperations name="addAt">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if ((index) &lt; (0)) or ((index) > (size)) then&#xA;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.addAt(self, index, element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Adds element in the OrderedCollection at rank index&#xD;&#xA;  * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xD;&#xA;  * larger than the size of the OrderedCollection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Adds element in the OrderedCollection at rank index&#xA;  * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xA;  * larger than the size of the OrderedCollection&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="index">
@@ -770,7 +770,7 @@
         <eOperations name="removeAt">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if ((index) &lt; (0)) or ((index) > ((size) - (1))) then&#xA;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.removeAt(self, index)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Removes the element at rank index from the OrderedCollection&#xD;&#xA;  * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xD;&#xA;  * larger than the size of the OrderedCollection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Removes the element at rank index from the OrderedCollection&#xA;  * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xA;  * larger than the size of the OrderedCollection&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="index">
@@ -780,7 +780,7 @@
         <eOperations name="elementAt">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if ((index) &lt; (0)) or ((index) > ((size) - (1))) then&#xA;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.elementAt(self, index)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns the element at rank index in the OrderedCollection&#xD;&#xA;  * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xD;&#xA;  * larger than the size of the OrderedCollection&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns the element at rank index in the OrderedCollection&#xA;  * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xA;  * larger than the size of the OrderedCollection&#xA;  */"/>
           </eAnnotations>
           <eGenericType eTypeParameter="/1/standard/OrderedCollection/G"/>
           <eParameters name="index">
@@ -790,23 +790,23 @@
         <eOperations name="first">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if (size) == (0) then&#xA;&#x9;&#x9;raise kermeta::exceptions::EmptyCollection.new&#xA;&#xA;&#x9;end&#xA;&#x9;result := elementAt(0)&#xA;end"/>
-            <details key="documentation" value="/** &#xD;&#xA;  * Returns the first element in the OrderedCollection&#xD;&#xA;  * Raises an EmptyCollection exception if the OrderedCollection is empty&#xD;&#xA;  */"/>
+            <details key="documentation" value="/** &#xA;  * Returns the first element in the OrderedCollection&#xA;  * Raises an EmptyCollection exception if the OrderedCollection is empty&#xA;  */"/>
           </eAnnotations>
           <eGenericType eTypeParameter="/1/standard/OrderedCollection/G"/>
         </eOperations>
         <eOperations name="last">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if (size) == (0) then&#xA;&#x9;&#x9;raise kermeta::exceptions::EmptyCollection.new&#xA;&#xA;&#x9;end&#xA;&#x9;result := elementAt((size) - (1))&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns the last element in the OrderedCollection&#xD;&#xA;  * Raises an EmptyCollection exception if the OrderedCollection is empty&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns the last element in the OrderedCollection&#xA;  * Raises an EmptyCollection exception if the OrderedCollection is empty&#xA;  */"/>
           </eAnnotations>
           <eGenericType eTypeParameter="/1/standard/OrderedCollection/G"/>
         </eOperations>
         <eOperations name="equals">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if not (element.isVoid) then&#xA;&#x9;&#x9;if kermeta::standard::OrderedCollection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Collection&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;if (self.size) == (collection.size) then&#xA;&#x9;&#x9;&#x9;&#x9;var selfIterator : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;&#x9;&#x9;&#x9;var collectionIterator : kermeta::standard::Iterator&lt;G> init collection.iterator&#xA;&#x9;&#x9;&#x9;&#x9;var difference : kermeta::standard::Boolean init false&#xA;&#x9;&#x9;&#x9;&#x9;from void&#xA;&#x9;&#x9;&#x9;&#x9;until ((selfIterator.isOff) or (collectionIterator.isOff)) or (difference)&#xA;&#x9;&#x9;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if not (selfIterator.next.equals(collectionIterator.next)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;difference := true&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;isEqual := not (difference)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Object.equals(Object)&#xD;&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xD;&#xA;  * current OrderedCollection&#xD;&#xA;  */"/>
-            <details key="superOperation" value="kermeta::reflection::Object"/>
-            <references href="../reflection/reflection.ecore#/1/reflection/Object/equals"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Object.equals(Object)&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xA;  * current OrderedCollection&#xA;  */"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="element" eType="/1/standard/Object"/>
@@ -814,7 +814,7 @@
         <eOperations name="indexOf">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if (size) == (0) then&#xA;&#x9;&#x9;raise kermeta::exceptions::EmptyCollection.new&#xA;&#xA;&#x9;end&#xA;&#x9;var i : kermeta::standard::Integer init 0&#xA;&#x9;var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;var found : kermeta::standard::Boolean init false&#xA;&#x9;from found&#xA;&#x9;until (found) or (it.isOff)&#xA;&#x9;loop&#xA;&#x9;&#x9;if element.equals(it.next) then&#xA;&#x9;&#x9;&#x9;found := true&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;i := (i) + (1)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if found then&#xA;&#x9;&#x9;result := i&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := 1.uminus&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/** &#xD;&#xA;  * Returns the index of the first instance of element in the OrderedCollection&#xD;&#xA;  * or -1 if the element is not contained by the OrderedCollection&#xD;&#xA;  * Raises an EmptyCollection exception if the OrderedCollection is empty&#xD;&#xA;  */"/>
+            <details key="documentation" value="/** &#xA;  * Returns the index of the first instance of element in the OrderedCollection&#xA;  * or -1 if the element is not contained by the OrderedCollection&#xA;  * Raises an EmptyCollection exception if the OrderedCollection is empty&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
           <eParameters name="element">
@@ -824,7 +824,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="OrderedSet" eSuperTypes="/1/standard/Set /1/standard/OrderedCollection">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * An OrderedSet is a Set that contained ordered distinct elements&#xD;&#xA; */"/>
+          <details key="documentation" value="/**&#xA; * An OrderedSet is a Set that contained ordered distinct elements&#xA; */"/>
         </eAnnotations>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Set&lt;G>" value="kermeta::standard::Set&lt;G>"/>
@@ -834,7 +834,7 @@
         <eOperations name="add" ordered="false">
           <eAnnotations source="kermeta" references="/1/standard/Set/add">
             <details key="body" value="do&#xA;&#x9;super(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * See Set&lt;G>.add(G)&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * See Set&lt;G>.add(G)&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Set"/>
           </eAnnotations>
           <eParameters name="element">
@@ -844,7 +844,7 @@
         <eOperations name="addAt">
           <eAnnotations source="kermeta" references="/1/standard/OrderedCollection/addAt">
             <details key="body" value="do&#xA;&#x9;if not (self.contains(element)) then&#xA;&#x9;&#x9;super(index, element)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides OrderedCollection&lt;G>.addAt(Integer, G)&#xD;&#xA;  * Adds element in the OrderedSet at rank index if the ordered set does&#xD;&#xA;  * not already contain the element, does nothing otherwise&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides OrderedCollection&lt;G>.addAt(Integer, G)&#xA;  * Adds element in the OrderedSet at rank index if the ordered set does&#xA;  * not already contain the element, does nothing otherwise&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
           </eAnnotations>
           <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
@@ -858,7 +858,7 @@
         <eOperations name="equals">
           <eAnnotations source="kermeta" references="/1/standard/OrderedCollection/equals">
             <details key="body" value="do&#xA;&#x9;result := super(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * See OrderedCollection&lt;G>.equals(Object) &#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * See OrderedCollection&lt;G>.equals(Object) &#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
@@ -867,7 +867,7 @@
         <eOperations name="subSet">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;if (((min) >= (0)) and ((max) &lt;= (self.size))) and ((min) &lt;= (max)) then&#xA;&#x9;&#x9;var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;&#x9;var i : kermeta::standard::Integer init 0&#xA;&#x9;&#x9;from i&#xA;&#x9;&#x9;until (i) == (min)&#xA;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;it.next&#xA;&#x9;&#x9;&#x9;i := (i) + (1)&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;from i&#xA;&#x9;&#x9;until (i) == ((max) + (1))&#xA;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;result.add(it.next)&#xA;&#x9;&#x9;&#x9;i := (i) + (1)&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Builds and returns a new OrderedSet composed of elements of current ordered&#xD;&#xA;  * set from rank min to rank max (order is respected)&#xD;&#xA;  * Raises IndexOutOfBound exception if min is negative, max is larger than &#xD;&#xA;  * the size of the ordered set or min is larger than max&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Builds and returns a new OrderedSet composed of elements of current ordered&#xA;  * set from rank min to rank max (order is respected)&#xA;  * Raises IndexOutOfBound exception if min is negative, max is larger than &#xA;  * the size of the ordered set or min is larger than max&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/OrderedSet">
             <eTypeArguments eTypeParameter="/1/standard/OrderedSet/G"/>
@@ -882,7 +882,7 @@
         <eOperations name="append">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;result.addAll(self)&#xA;&#x9;result.add(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Builds and returns a new OrderedSet from current one with element&#xD;&#xA;  * inserted in head&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Builds and returns a new OrderedSet from current one with element&#xA;  * inserted in head&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/OrderedSet">
             <eTypeArguments eTypeParameter="/1/standard/OrderedSet/G"/>
@@ -894,7 +894,7 @@
         <eOperations name="preppend">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;result.add(element)&#xA;&#x9;result.addAll(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Builds and returns a new OrderedSet from current one with element&#xD;&#xA;  * inserted in tail&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Builds and returns a new OrderedSet from current one with element&#xA;  * inserted in tail&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/OrderedSet">
             <eTypeArguments eTypeParameter="/1/standard/OrderedSet/G"/>
@@ -906,7 +906,7 @@
         <eOperations name="insertAt">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;result.addAll(self)&#xA;&#x9;result.addAt(index, subject)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Builds and returns a new OrderedSet from current one with element&#xD;&#xA;  * inserted at rank index&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Builds and returns a new OrderedSet from current one with element&#xA;  * inserted at rank index&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/OrderedSet">
             <eTypeArguments eTypeParameter="/1/standard/OrderedSet/G"/>
@@ -921,7 +921,7 @@
         <eOperations name="at">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if ((index) >= (0)) and ((index) &lt;= (self.size)) then&#xA;&#x9;&#x9;var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;&#x9;from var i : kermeta::standard::Integer init 1.uminus&#xA;&#x9;&#x9;until (i) == (index)&#xA;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;result := it.next&#xA;&#x9;&#x9;&#x9;i := (i) + (1)&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns element at rank index in the sequence&#xD;&#xA;  * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xD;&#xA;  * larger than the size of the OrderedSet&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns element at rank index in the sequence&#xA;  * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xA;  * larger than the size of the OrderedSet&#xA;  */"/>
           </eAnnotations>
           <eGenericType eTypeParameter="/1/standard/OrderedSet/G"/>
           <eParameters name="index">
@@ -931,7 +931,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Sequence" eSuperTypes="/1/standard/Bag /1/standard/OrderedCollection">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * A Sequence is an OrderedCollection of elements allowing duplicates&#xD;&#xA; */"/>
+          <details key="documentation" value="/**&#xA; * A Sequence is an OrderedCollection of elements allowing duplicates&#xA; */"/>
         </eAnnotations>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Bag&lt;G>" value="kermeta::standard::Bag&lt;G>"/>
@@ -941,7 +941,7 @@
         <eOperations name="equals">
           <eAnnotations source="kermeta" references="/1/standard/OrderedCollection/equals">
             <details key="body" value="do&#xA;&#x9;result := super(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides OrderedCollection&lt;G>.equals(Object)&#xD;&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xD;&#xA;  * current Sequence &#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Overrides OrderedCollection&lt;G>.equals(Object)&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xA;  * current Sequence &#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
@@ -950,7 +950,7 @@
         <eOperations name="subSequence">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;if (((min) >= (0)) and ((max) &lt;= (self.size))) and ((min) &lt;= (max)) then&#xA;&#x9;&#x9;var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;&#x9;var i : kermeta::standard::Integer init 0&#xA;&#x9;&#x9;from i&#xA;&#x9;&#x9;until (i) == (min)&#xA;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;it.next&#xA;&#x9;&#x9;&#x9;i := (i) + (1)&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;from i&#xA;&#x9;&#x9;until (i) == ((max) + (1))&#xA;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;result.add(it.next)&#xA;&#x9;&#x9;&#x9;i := (i) + (1)&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Builds and returns a new Sequence composed of elements of current sequence&#xD;&#xA;  * from rank min to rank max (order is respected)&#xD;&#xA;  * Raises IndexOutOfBound exception if min is negative, max is larger than &#xD;&#xA;  * the size of the sequence or min is larger than max&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Builds and returns a new Sequence composed of elements of current sequence&#xA;  * from rank min to rank max (order is respected)&#xA;  * Raises IndexOutOfBound exception if min is negative, max is larger than &#xA;  * the size of the sequence or min is larger than max&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
             <eTypeArguments eTypeParameter="/1/standard/Sequence/G"/>
@@ -965,7 +965,7 @@
         <eOperations name="append">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;result.addAll(self)&#xA;&#x9;result.add(element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Builds and returns a new Sequence from current one with element&#xD;&#xA;  * inserted in head&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Builds and returns a new Sequence from current one with element&#xA;  * inserted in head&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
             <eTypeArguments eTypeParameter="/1/standard/Sequence/G"/>
@@ -977,7 +977,7 @@
         <eOperations name="preppend">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;result.add(element)&#xA;&#x9;result.addAll(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Builds and returns a new Sequence from current one with element&#xD;&#xA;  * inserted in tail&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Builds and returns a new Sequence from current one with element&#xA;  * inserted in tail&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
             <eTypeArguments eTypeParameter="/1/standard/Sequence/G"/>
@@ -989,7 +989,7 @@
         <eOperations name="insertAt">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;result.addAll(self)&#xA;&#x9;result.addAt(index, element)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Builds and returns a new Sequence from current one with element&#xD;&#xA;  * inserted at rank index&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Builds and returns a new Sequence from current one with element&#xA;  * inserted at rank index&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
             <eTypeArguments eTypeParameter="/1/standard/Sequence/G"/>
@@ -1004,7 +1004,7 @@
         <eOperations name="at">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if ((index) >= (0)) and ((index) &lt;= (self.size)) then&#xA;&#x9;&#x9;var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;&#x9;from var i : kermeta::standard::Integer init 1.uminus&#xA;&#x9;&#x9;until (i) == (index)&#xA;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;result := it.next&#xA;&#x9;&#x9;&#x9;i := (i) + (1)&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns element at rank index in the sequence&#xD;&#xA;  * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xD;&#xA;  * larger than the size of the Sequence&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns element at rank index in the sequence&#xA;  * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xA;  * larger than the size of the Sequence&#xA;  */"/>
           </eAnnotations>
           <eGenericType eTypeParameter="/1/standard/Sequence/G"/>
           <eParameters name="index">
@@ -1014,28 +1014,28 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Iterator">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * Iterator to be used with Collection&#xD;&#xA; * See also Collection&lt;G>.getIterator()&#xD;&#xA; */"/>
+          <details key="documentation" value="/**&#xA; * Iterator to be used with Collection&#xA; * See also Collection&lt;G>.getIterator()&#xA; */"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="isOff">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := not (hasNext)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns true if the iterator is on the last element&#xD;&#xA;  * i.e. returns not self.hasNext()&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns true if the iterator is on the last element&#xA;  * i.e. returns not self.hasNext()&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
         </eOperations>
         <eOperations name="hasNext">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.hasNext(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns true if the iterator has a next element&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns true if the iterator has a next element&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
         </eOperations>
         <eOperations name="next">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if not (hasNext) then&#xA;&#x9;&#x9;raise kermeta::exceptions::IteratorIsOff.new&#xA;&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.next(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns the next element of the iterator&#xD;&#xA;  * Raises IteratorIsOff exception in case the iterator is on the last element &#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns the next element of the iterator&#xA;  * Raises IteratorIsOff exception in case the iterator is on the last element &#xA;  */"/>
           </eAnnotations>
           <eGenericType eTypeParameter="/1/standard/Iterator/G"/>
         </eOperations>
@@ -1045,54 +1045,42 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="primitive_types.ecore#/0"/>
     <references href="primitive_types.ecore#/1"/>
+    <references href="primitive_types.ecore#/2"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
-    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="java.ecore#/0"/>
     <references href="java.ecore#/1"/>
-    <references href="java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

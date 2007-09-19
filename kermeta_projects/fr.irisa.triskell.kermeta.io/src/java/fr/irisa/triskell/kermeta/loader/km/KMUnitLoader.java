@@ -1,6 +1,6 @@
 
 
-/*$Id: KMUnitLoader.java,v 1.8 2007-09-13 09:04:51 ftanguy Exp $
+/*$Id: KMUnitLoader.java,v 1.9 2007-09-19 12:15:04 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL
@@ -35,6 +35,7 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
@@ -132,6 +133,8 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 						
 			createInternalPackageEntries();
 			
+			createTypeDefinitionCache();
+			
 			importAllKermetaUnits();
 			
 			constructAspectsListsForAll(kermetaUnit);
@@ -168,15 +171,38 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 		
 	}
 	
+	private void createTypeDefinitionCache() {
+		for ( KermetaUnit kermetaUnit : kermetaUnits.values() ) {
+			
+			for ( Package p : (List<Package>) kermetaUnit.getModelingUnit().getPackages() )
+				createTypeDefinitionCache(kermetaUnit, p);
+			
+		}
+	}
+	
+	private void createTypeDefinitionCache(KermetaUnit unit, Package p) {
+		for ( TypeDefinition typeDefinition : p.getOwnedTypeDefinition() ) {
+			String qualifiedName = NamedElementHelper.getQualifiedName(typeDefinition);
+			unit.getTypeDefinitionCache().addTypeDefinition(qualifiedName, typeDefinition);
+		}
+		
+		for( Package nestedPackage : (List<Package>) p.getNestedPackage() )
+			createTypeDefinitionCache(unit, nestedPackage);
+		
+	}
+	
 	private void importAllKermetaUnits() {
 		
 		for ( KermetaUnit kermetaUnit : kermetaUnits.values() ) {
 			
 			Set <KermetaUnit> kermetaUnitToImports = getKermetaUnitToImport(kermetaUnit);
-			for ( KermetaUnit unitToImport : kermetaUnitToImports )
+			for ( KermetaUnit unitToImport : kermetaUnitToImports ) {
 				kermetaUnit.importKermetaUnit( unitToImport, true );
+				kermetaUnit.getTypeDefinitionCache().setExternalSearchAuthorized( true );
+			}
 			
 		}
+		
 		
 	}
 	

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.7 2007-09-13 09:04:50 ftanguy Exp $
+ * $Id: IoFactoryImpl.java,v 1.8 2007-09-19 12:15:02 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -85,6 +85,8 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 			case IoPackage.WARNING_MESSAGE: return createWarningMessage();
 			case IoPackage.PARSE_ERROR_MESSAGE: return createParseErrorMessage();
 			case IoPackage.PARSING_ERROR: return createParsingError();
+			case IoPackage.TYPE_DEFINITION_CACHE: return createTypeDefinitionCache();
+			case IoPackage.TYPE_DEFINITION_CACHE_ENTRY: return createTypeDefinitionCacheEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -212,6 +214,26 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	public ParsingError createParsingError() {
 		ParsingErrorImpl parsingError = new ParsingErrorImpl();
 		return parsingError;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeDefinitionCache createTypeDefinitionCache() {
+		TypeDefinitionCacheImpl typeDefinitionCache = new TypeDefinitionCacheImpl();
+		return typeDefinitionCache;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeDefinitionCacheEntry createTypeDefinitionCacheEntry() {
+		TypeDefinitionCacheEntryImpl typeDefinitionCacheEntry = new TypeDefinitionCacheEntryImpl();
+		return typeDefinitionCacheEntry;
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.11 2007-09-13 09:04:50 ftanguy Exp $
+ * $Id: IoPackageImpl.java,v 1.12 2007-09-19 12:15:02 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -29,6 +29,8 @@ import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.ParseErrorMessage;
 import org.kermeta.io.ParsingError;
+import org.kermeta.io.TypeDefinitionCache;
+import org.kermeta.io.TypeDefinitionCacheEntry;
 import org.kermeta.io.WarningMessage;
 import org.kermeta.io.plugin.IOPlugin;
 
@@ -116,6 +118,20 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	private EClass parsingErrorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeDefinitionCacheEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeDefinitionCacheEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -395,6 +411,15 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getKermetaUnit_TypeDefinitionCache() {
+		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(16);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getKermetaUnitStorer() {
 		return kermetaUnitStorerEClass;
 	}
@@ -557,6 +582,69 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTypeDefinitionCache() {
+		return typeDefinitionCacheEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTypeDefinitionCache_Entries() {
+		return (EAttribute)typeDefinitionCacheEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTypeDefinitionCache_ExternalSearchAuthorized() {
+		return (EAttribute)typeDefinitionCacheEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypeDefinitionCache_KermetaUnit() {
+		return (EReference)typeDefinitionCacheEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTypeDefinitionCacheEntry() {
+		return typeDefinitionCacheEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTypeDefinitionCacheEntry_QualifiedName() {
+		return (EAttribute)typeDefinitionCacheEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypeDefinitionCacheEntry_TypeDefinition() {
+		return (EReference)typeDefinitionCacheEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getSet() {
 		return setEDataType;
 	}
@@ -660,6 +748,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__CONSTRAINT_CHECKED);
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__ASPECTS);
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__IS_BEING_TYPECHECKED);
+		createEReference(kermetaUnitEClass, KERMETA_UNIT__TYPE_DEFINITION_CACHE);
 
 		iBuildingStateEClass = createEClass(IBUILDING_STATE);
 
@@ -687,6 +776,15 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		parsingErrorEClass = createEClass(PARSING_ERROR);
 		createEAttribute(parsingErrorEClass, PARSING_ERROR__OFFSET);
 		createEAttribute(parsingErrorEClass, PARSING_ERROR__LENGTH);
+
+		typeDefinitionCacheEClass = createEClass(TYPE_DEFINITION_CACHE);
+		createEReference(typeDefinitionCacheEClass, TYPE_DEFINITION_CACHE__KERMETA_UNIT);
+		createEAttribute(typeDefinitionCacheEClass, TYPE_DEFINITION_CACHE__ENTRIES);
+		createEAttribute(typeDefinitionCacheEClass, TYPE_DEFINITION_CACHE__EXTERNAL_SEARCH_AUTHORIZED);
+
+		typeDefinitionCacheEntryEClass = createEClass(TYPE_DEFINITION_CACHE_ENTRY);
+		createEAttribute(typeDefinitionCacheEntryEClass, TYPE_DEFINITION_CACHE_ENTRY__QUALIFIED_NAME);
+		createEReference(typeDefinitionCacheEntryEClass, TYPE_DEFINITION_CACHE_ENTRY__TYPE_DEFINITION);
 
 		// Create data types
 		setEDataType = createEDataType(SET);
@@ -759,6 +857,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		g2.getETypeArguments().add(g3);
 		initEAttribute(getKermetaUnit_Aspects(), g1, "aspects", null, 0, 1, KermetaUnit.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKermetaUnit_IsBeingTypechecked(), ecorePackage.getEBoolean(), "isBeingTypechecked", null, 0, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKermetaUnit_TypeDefinitionCache(), this.getTypeDefinitionCache(), this.getTypeDefinitionCache_KermetaUnit(), "typeDefinitionCache", null, 1, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(kermetaUnitEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -814,8 +913,6 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		op = addEOperation(kermetaUnitEClass, null, "warning", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "message", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(kermetaUnitEClass, ecorePackage.getEBoolean(), "isErrored", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		op = addEOperation(kermetaUnitEClass, null, "storeTrace", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theStructurePackage.getObject(), "modelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEJavaObject(), "node", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -843,7 +940,23 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		addEOperation(kermetaUnitEClass, null, "finalize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(kermetaUnitEClass, ecorePackage.getEBoolean(), "isErroneous", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		addEOperation(kermetaUnitEClass, theStructurePackage.getString(), "getUniquePackageQualifiedNames", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(kermetaUnitEClass, null, "addTypeDefinition", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStructurePackage.getTypeDefinition(), "typeDefinition", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStructurePackage.getTypeDefinitionContainer(), "container", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(kermetaUnitEClass, ecorePackage.getEBoolean(), "isIndirectlyErroneous", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(iBuildingStateEClass, IBuildingState.class, "IBuildingState", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -892,6 +1005,38 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		initEClass(parsingErrorEClass, ParsingError.class, "ParsingError", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParsingError_Offset(), ecorePackage.getEInt(), "offset", null, 0, 1, ParsingError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParsingError_Length(), ecorePackage.getEInt(), "length", null, 0, 1, ParsingError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typeDefinitionCacheEClass, TypeDefinitionCache.class, "TypeDefinitionCache", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeDefinitionCache_KermetaUnit(), this.getKermetaUnit(), this.getKermetaUnit_TypeDefinitionCache(), "kermetaUnit", null, 1, 1, TypeDefinitionCache.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(this.getTypeDefinitionCacheEntry());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getTypeDefinitionCache_Entries(), g1, "entries", null, 1, 1, TypeDefinitionCache.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTypeDefinitionCache_ExternalSearchAuthorized(), ecorePackage.getEBoolean(), "externalSearchAuthorized", null, 1, 1, TypeDefinitionCache.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(typeDefinitionCacheEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(typeDefinitionCacheEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(typeDefinitionCacheEClass, null, "addTypeDefinition", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStructurePackage.getTypeDefinition(), "typeDefinition", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(typeDefinitionCacheEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(typeDefinitionCacheEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(typeDefinitionCacheEntryEClass, TypeDefinitionCacheEntry.class, "TypeDefinitionCacheEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTypeDefinitionCacheEntry_QualifiedName(), ecorePackage.getEString(), "qualifiedName", null, 1, 1, TypeDefinitionCacheEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeDefinitionCacheEntry_TypeDefinition(), theStructurePackage.getTypeDefinition(), null, "typeDefinition", null, 1, 1, TypeDefinitionCacheEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(setEDataType, Set.class, "Set", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

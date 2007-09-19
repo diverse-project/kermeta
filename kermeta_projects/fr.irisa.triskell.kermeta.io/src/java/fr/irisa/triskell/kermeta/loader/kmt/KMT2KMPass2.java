@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.16 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: KMT2KMPass2.java,v 1.17 2007-09-19 12:14:58 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -107,7 +107,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			return false;
 		
 		String qualifiedName = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
-		TypeDefinition typeDef = builder.getTypeDefinitionByQualifiedName(qualifiedName);
+		TypeDefinition typeDef = builder.getTypeDefinitionByQualifiedName(qualifiedName, monitor);
 		if (typeDef != null) {
 			// special case of the weaving: if the new class has a decorator tag set to true then we can reopen the class
 			// this will weave the classes directly at parsing time
@@ -141,7 +141,8 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			
 			context.current_class = StructureFactory.eINSTANCE.createClassDefinition();
 			context.current_class.setName(getTextForID(node.getName()));
-			current_package().getOwnedTypeDefinition().add(context.current_class);
+			builder.addTypeDefinition(context.current_class, current_package());
+//			current_package().getOwnedTypeDefinition().add(context.current_class);
 			builder.storeTrace(context.current_class, node);
 			if(KermetaASTHelper.isAnAspect(node))
 			{
@@ -204,7 +205,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			return false;
 		
 		String qualifiedName = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
-		if (builder.getTypeDefinitionByName(qualifiedName) != null) {
+		if (builder.getTypeDefinitionByName(qualifiedName, monitor) != null) {
 			// This is an error : the type already exists
 			//builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qualifiedName + "' already exists.",node));
 			builder.error("PASS 2 : A type definition for '" + qualifiedName + "' already exists.");
@@ -212,7 +213,8 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		else {
 			Enumeration c = StructureFactory.eINSTANCE.createEnumeration();
 			c.setName(getTextForID(node.getName()));
-			current_package().getOwnedTypeDefinition().add(c);
+			builder.addTypeDefinition(c, current_package());
+			//current_package().getOwnedTypeDefinition().add(c);
 			//builder.typeDefs.put(NamedElementHelper.getQualifiedName(c), c);
 			builder.storeTrace(c, node);
 		}
@@ -229,7 +231,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			return false;
 		
 		String qualifiedName = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
-		if (builder.getTypeDefinitionByName(qualifiedName) != null) {
+		if (builder.getTypeDefinitionByName(qualifiedName, monitor) != null) {
 			// This is an error : the type already exists
 			//builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qualifiedName + "' already exists.",node));
 			builder.error("PASS 2 : A type definition for '" + qualifiedName + "' already exists.");
@@ -237,7 +239,8 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		else {
 			PrimitiveType c = StructureFactory.eINSTANCE.createPrimitiveType();
 			c.setName(getTextForID(node.getName()));
-			current_package().getOwnedTypeDefinition().add(c);
+			builder.addTypeDefinition(c, current_package());
+//			current_package().getOwnedTypeDefinition().add(c);
 			//builder.typeDefs.put(NamedElementHelper.getQualifiedName(c), c);
 			builder.storeTrace(c, node);
 		}
@@ -251,7 +254,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			return false;
 		
 		String qualifiedName = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
-		if (builder.getTypeDefinitionByName(qualifiedName) != null) {
+		if (builder.getTypeDefinitionByName(qualifiedName, monitor) != null) {
 			// This is an error : the type already exists
 			//builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qualifiedName + "' already exists.",node));
 			builder.error("PASS 2 : A type definition for '" + qualifiedName + "' already exists.");
@@ -260,7 +263,8 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		else {
 			ModelType newMT = StructureFactory.eINSTANCE.createModelType();
 			newMT.setName(getTextForID(node.getName()));
-			current_package().getOwnedTypeDefinition().add(newMT);
+			builder.addTypeDefinition(newMT, current_package());
+			//current_package().getOwnedTypeDefinition().add(newMT);
 			//builder.typeDefs.put(qualifiedName, newMT);
 			builder.storeTrace(newMT, node);
 //			ModelTypeDefinition newMTypeDef = builder.struct_factory.createModelTypeDefinition();

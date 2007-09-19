@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.17 2007-09-14 13:40:53 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.18 2007-09-19 12:14:59 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -227,7 +227,7 @@ public class OperationChecker extends AbstractChecker {
 	private boolean checkReturnType(Operation operation) {
 		boolean result = ReturnTypeChecker.typeCheckExpression(operation);
 		if ( ! result )
-			builder.error("The result variable has not been correctly set in " + operation.getName(), operation);
+			builder.error("In class definition " + NamedElementHelper.getQualifiedName(classDefinition) + ", the result variable has not been correctly set in operation " + operation.getName() + ".", operation);
 		return result; 
 	}
 	

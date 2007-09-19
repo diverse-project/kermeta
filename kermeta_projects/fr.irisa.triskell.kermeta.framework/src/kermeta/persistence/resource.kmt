@@ -8,7 +8,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.38 2007-09-04 12:52:17 dtouzet Exp $
+ * $Id: resource.kmt,v 1.39 2007-09-19 12:14:49 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -149,7 +149,7 @@ class EMFResource inherits Resource
 	 * Returns true if the validation reports no error, raises exceptions otherwise
 	 */
 	operation saveAndValidateWithEMF() : Boolean is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			self, self.uri, metaModelURI, "EMF", self, true
 		)
 	end
@@ -441,6 +441,7 @@ class KMRepository inherits Repository
  	 */
 	method createResource(uri : String, mm_uri : String) : Resource is do
 		//TODO: implement operation createResource
+		result := void
 	end 
 }
 

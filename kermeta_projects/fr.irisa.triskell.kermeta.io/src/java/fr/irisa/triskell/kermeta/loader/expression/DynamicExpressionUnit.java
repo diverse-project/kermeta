@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.13 2007-09-13 09:04:50 ftanguy Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.14 2007-09-19 12:15:04 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -113,7 +113,7 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
     }
     
     public KermetaTypeChecker typeCheck(KermetaTypeChecker checker) {
-       if ( expression == null || isErrored() )
+       if ( expression == null || isErroneous() )
            throw new Error("Internal error : cannot type check the expression to eval");
        if (checker == null) {
            checker = new KermetaTypeChecker(this, new NullProgressMonitor() );

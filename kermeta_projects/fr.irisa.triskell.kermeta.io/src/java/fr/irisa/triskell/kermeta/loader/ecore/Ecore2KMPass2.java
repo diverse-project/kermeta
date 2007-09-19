@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.23 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: Ecore2KMPass2.java,v 1.24 2007-09-19 12:14:58 ftanguy Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -100,7 +100,8 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 		}*/
 		
 		// Should we ignore the ecore metamodel types?
-		getTopPackage().getOwnedTypeDefinition().add(currentClassDefinition);
+		kermetaUnit.addTypeDefinition(currentClassDefinition, getTopPackage());
+//		getTopPackage().getOwnedTypeDefinition().add(currentClassDefinition);
 
 		acceptList(((EClass)node).getEStructuralFeatures());
 		acceptList(((EClass)node).getEOperations());
@@ -202,7 +203,8 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 		
 		currentEnumeration.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
 		
-		getTopPackage().getOwnedTypeDefinition().add(currentEnumeration);
+		kermetaUnit.addTypeDefinition(currentEnumeration, getTopPackage());
+		//getTopPackage().getOwnedTypeDefinition().add(currentEnumeration);
 		acceptList(node.getELiterals());
 		return currentEnumeration;
 	}
@@ -231,7 +233,8 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
         // This condition is used because we use the visitor for the definition of the type of model
         // elements, and sometimes, current package is null
         if (getTopPackage()!=null) {
-        	getTopPackage().getOwnedTypeDefinition().add(result);
+        	kermetaUnit.addTypeDefinition(result, getTopPackage());
+        	//getTopPackage().getOwnedTypeDefinition().add(result);
         }
     	 // END HORRIBLE TEMPORARY PATCH
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitValidator.java,v 1.4 2007-09-13 09:04:49 ftanguy Exp $
+ * $Id: KermetaUnitValidator.java,v 1.5 2007-09-19 12:14:58 ftanguy Exp $
  */
 package org.kermeta.io.validation;
 
@@ -19,6 +19,7 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
+import org.kermeta.io.TypeDefinitionCache;
 
 /**
  * A sample validator interface for {@link org.kermeta.io.KermetaUnit}.
@@ -48,4 +49,6 @@ public interface KermetaUnitValidator {
 	boolean validateAspects(Map<TypeDefinition, TypeDefinition> value);
 
 	boolean validateIsBeingTypechecked(boolean value);
+
+	boolean validateTypeDefinitionCache(TypeDefinitionCache value);
 }

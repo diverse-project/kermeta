@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.27 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: Ecore2KMPass3.java,v 1.28 2007-09-19 12:14:58 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -85,13 +85,13 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 		{
 			kermetaUnit.warning("Instance class seems to be unset for EDatatype '" + 
 					EcoreHelper.getQualifiedName((EDataType)node) + "' : replaced by Object", null);
-			type = kermetaUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Object");
+			type = kermetaUnit.getTypeDefinitionByQualifiedName("kermeta::standard::Object", monitor);
 				
 //				StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();// get kermeta::language::structure::Object 
 		}
 		else
 		{
-			type = kermetaUnit.getTypeDefinitionByName(type_name);
+			type = kermetaUnit.getTypeDefinitionByName(type_name, monitor);
 			// FIXME : standard library is not browsable anymore?
 			//if (type == null) type = StdLibKermetaUnitHelper.getKermetaUnit().typeDefinitionLookup(type_name);
 			// FIXME : If type is still null, replacing by the basic Object type of Kermeta. 
@@ -105,7 +105,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 		
 		if ( type == null ) {
 			kermetaUnit.warning("The type " + type_name + "is not handled by Kermeta. It has been mapped to Object");
-			type = kermetaUnit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object");
+			type = kermetaUnit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object", monitor);
 			Type t = createInstanceTypeForTypeDefinition(type);
 			result.setInstanceType(t);			
 		} else {
@@ -182,7 +182,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 			if (detail.indexOf(":")>0) {
 				detail = detail.replaceAll(" ", ""); // strip spaces
 				String str_cdef = detail.substring(detail.indexOf(":")+1);
-				ClassDefinition cdef = (ClassDefinition) kermetaUnit.getTypeDefinitionByQualifiedName(str_cdef);
+				ClassDefinition cdef = (ClassDefinition) kermetaUnit.getTypeDefinitionByQualifiedName(str_cdef, monitor);
 				fr.irisa.triskell.kermeta.language.structure.Class type = 
 					StructureFactory.eINSTANCE.createClass();
 		        type.setTypeDefinition((ClassDefinition)cdef);
