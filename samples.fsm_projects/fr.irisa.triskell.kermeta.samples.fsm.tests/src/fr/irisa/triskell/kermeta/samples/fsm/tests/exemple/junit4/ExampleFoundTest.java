@@ -1,6 +1,6 @@
 package fr.irisa.triskell.kermeta.samples.fsm.tests.exemple.junit4;
 
-import org.eclipse.core.runtime.Path;
+//import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.PlatformUI;
 import org.junit.*;
@@ -12,23 +12,20 @@ import org.osgi.framework.Bundle;
 
 public class ExampleFoundTest {
 
-	@Before
-	public void resetExampleProject() {
+	@Before public void resetExampleProject() {
 		/* 
 		 * clean up the workspace before testing creation of the example
 		 */
 		Utils.cleanProject();
 	}
 	
-	@Test
-	public void pluginExists() {
+	@Test public void pluginExists() {
 		Bundle  basicDemoPlugin = Platform.getBundle(Utils.PLUGIN_NAME);
 		
 		Assert.assertTrue("The basic demo plug-in must be in the OpenEmbeDD bundle.", basicDemoPlugin != null);
 	}
 	
-	@Test
-	public void exampleExists() {
+	@Test public void exampleExists() {
 		
 		/*
 		 * try to open the "New" wizard, which should offer an "Example" sub-menu 
@@ -38,8 +35,7 @@ public class ExampleFoundTest {
 				PlatformUI.getWorkbench().getNewWizardRegistry().findWizard(Utils.WIZARD_ID) != null);
 	}
 	
-	@Test
-	public void projectCanBeCreated() throws Exception {
+	@Test public void projectCanBeCreated() throws Exception {
 		Utils.createProject();
 		
 		Assert.assertTrue("the project "+Utils.PROJECT_NAME+" must have been created in workspace.",
@@ -48,11 +44,20 @@ public class ExampleFoundTest {
 				UiTools.getProject(Utils.PROJECT_NAME).isOpen());
 	}
 	
-//	@Test
-//	public void modelExist() throws Exception {
-//		Utils.createProject();
-//		
-//		Assert.assertTrue("the model "+Utils.MODEL_NAME+" must be present in workspace.", 
-//				UiTools.getProject(Utils.PROJECT_NAME).exists(new Path("model/"+Utils.MODEL_NAME)));
-//	}
+/*	@Test
+	public void modelExist() throws Exception {
+		Utils.createProject();
+		
+		Assert.assertTrue("the model "+Utils.MODEL_NAME+" must be present in workspace.", 
+				UiTools.getProject(Utils.PROJECT_NAME).exists(new Path("model/"+Utils.MODEL_NAME)));
+	}
+*/
+	@Test public void failingTest() {
+		Assert.assertTrue("Sample of a JUnit4 assert failure", false);
+	}
+	
+	@Ignore
+	@Test public void ignoredTest() {
+		Assert.assertTrue("Not tested", false);
+	}
 }

@@ -7,6 +7,6 @@ public class JUnit3SimpleTestCase extends TestCase {
 	    Assert.assertTrue("Successful JUnit3 true assert", true);
 	}
 	public void testSimple2() {
-	    Assert.assertTrue("Failed JUnit3 true assert", false);
+	    Assert.assertTrue("Sample of JUnit3 true assert failure", false);
 	}
 }

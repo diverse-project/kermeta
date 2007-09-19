@@ -1,11 +1,11 @@
-/* $Id: 000_testBidon.main.kmt,v 1.1 2007-09-14 07:28:10 vmahe Exp $
+/* $Id: 000_testBidon.main.kmt,v 1.2 2007-09-19 11:21:31 vmahe Exp $
  * Creation date: September 12, 2007
  * License:
  * Copyright:
  * Authors:
  */
 @mainClass "testBidon::TestBidon"
-@mainOperation "testOperation1"
+@mainOperation "main"
 
 
 package testBidon;
@@ -17,14 +17,35 @@ using kermeta::standard
 
 class TestBidon inherits kermeta::kunit::TestCase
 {
-    
-    operation testKermetaSimple1() is do
-    	var i : Integer init 0
-    	assertTrueWithMsg( i == 0, "xxxxxxx") 
+    operation main() : Void is do
+//    	stdio.writeln("Why such a 'main()' method ???")
+//    	var i : Integer init 0
     end
     
-    operation testKermetaSimple2() is do
+    method setUp() : Void is do
+        stdio.writeln("The setUp() has been executed")
+    end
+    
+    operation testKermetaOK() is do
+    	stdio.writeln("DEBUG - The testKermetaOK() is executed")
+    	var i : Integer init 0
+    	assertTrueWithMsg( i == 0, "example of KUnit succeeded true assertion") 
+    end
+    
+    operation testKermetaFailure() is do
+    	stdio.writeln("DEBUG - The testKermetaFailure() is executed")
     	var i : Integer init 5
-    	assertTrueWithMsg( i == 0, "KUnit failed true assertion") 
+    	assertTrueWithMsg( i == 0, "example of KUnit failed true assertion") 
+    end
+    
+    operation testKermetaError() is do
+    	stdio.writeln("DEBUG - The testKermetaError() is executed")
+    	var i : Integer
+    	i := 5/0
+    	assertTrueWithMsg( i == 0, "example of KUnit failed true assertion") 
+    end
+    
+    method tearDown() : Void is do
+        stdio.writeln("The tearDown() has been executed")
     end
 }

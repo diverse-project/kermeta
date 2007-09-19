@@ -1,16 +1,16 @@
 package fr.irisa.triskell.kermeta.samples.fsm.tests;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
+//import java.io.File;
+//import java.io.IOException;
+//import java.net.URL;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.FileLocator;
+//import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
+//import org.eclipse.core.runtime.Path;
+//import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IWorkbenchWizard;
@@ -28,7 +28,7 @@ import org.openembedd.tests.utils.UiTools;
 public class Utils {
 	
 	public static String PROJECT_NAME = "fr.irisa.triskell.kermeta.samples.fsm.demo";
-	public static String PLUGIN_NAME = "fr.irisa.triskell.kermeta.samples.fsm";
+	public static String PLUGIN_NAME = "fr.irisa.triskell.kermeta.samples.fsm.tests";
 	public static String WIZARD_ID = "fr.irisa.triskell.kermeta.samples.fsm.wizard";
 	
 	public static String FSM_EDITOR_ID = "fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmEditor";
