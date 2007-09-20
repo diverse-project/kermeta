@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="EcoreWithEnum" nsURI="http://EcoreWithEnum" nsPrefix="EcoreWithEnum">
+  <eClassifiers xsi:type="ecore:EEnum" name="MyEnum1">
+    <eLiterals name="label1_1" value="1"/>
+    <eLiterals name="label1_2" value="2"/>
+    <eLiterals name="label1_3" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MyEnum2">
+    <eLiterals name="label2_1" value="1"/>
+    <eLiterals name="label2_2" value="2"/>
+    <eLiterals name="label2_3" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MyClass">
+    <eOperations name="myOperation" eType="//MyEnum1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="myAttribute" eType="//MyEnum2"/>
+  </eClassifiers>
+</ecore:EPackage>

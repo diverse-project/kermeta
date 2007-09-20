@@ -1,0 +1,73 @@
+/* $Id: 060_checkModelWithEcoreEnum.kmt,v 1.1 2007-09-20 12:49:24 cfaucher Exp $
+ * Creation date: Sep 20, 2007
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package checkModelWithEcoreEnum;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+using ecore
+
+/**
+ * Be careful ! This ClassDefinition is shared by 2 tests: 060_loadSaveEcoreEnum.main.kmt and 060_createSaveEcoreEnum.main.kmt
+*/
+class CheckModelWithEcoreEnum inherits TestCase
+{
+	/**
+	 * The Ecore model is reloaded to check its content
+	*/
+	operation check( modelPath : String ) is do
+	
+		// Reload it in a new repository and check it
+		var emfRep2 : EMFRepository init EMFRepository.new
+		var res2 : EMFResource
+		res2 ?= emfRep2.getResource(modelPath)
+		res2.load()
+		stdio.writeln("after load")
+		
+		var modelelement2 : EPackage init EPackage.new
+		// that's the first element ...
+		modelelement2 ?= res2.instances.one
+		
+		// Traverse the Ecore model
+		modelelement2.eClassifiers.each{ c |
+			if(EClass.isInstance(c)) then
+				var c_class : EClass
+				c_class ?= c
+				// Check if the MyClass EClass is there, if so checking of the type of its operation and its attribute
+				if(c_class.name.equals("MyClass")) then
+					assert(c_class.eOperations.one.eType.name.equals("MyEnum1") and
+					c_class.eStructuralFeatures.one.eType.name.equals("MyEnum2"))
+				else
+					assert(false)
+				end
+			end
+			
+			// Check if the two enumerations are there, if so checking of its content: EEnumLiteral
+			if(EEnum.isInstance(c)) then
+				var c_enum : EEnum
+				c_enum ?= c
+				if(c_enum.name.equals("MyEnum1")) then
+					assert(c_enum.eLiterals.detect{ l | l.name.equals("label1_1")} != void and
+							c_enum.eLiterals.detect{ l | l.name.equals("label1_2")} != void and
+							c_enum.eLiterals.detect{ l | l.name.equals("label1_3")} != void )
+				end
+				
+				if(c_enum.name.equals("MyEnum2")) then
+					assert(c_enum.eLiterals.detect{ l | l.name.equals("label2_1")} != void and
+							c_enum.eLiterals.detect{ l | l.name.equals("label2_2")} != void and
+							c_enum.eLiterals.detect{ l | l.name.equals("label2_3")} != void )
+				end
+			end
+		}
+		
+	end
+	
+}

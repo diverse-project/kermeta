@@ -1,0 +1,73 @@
+/* $Id: 060_loadSaveEcoreEnum.main.kmt,v 1.1 2007-09-20 12:49:24 cfaucher Exp $
+ * Creation date: Sep 20, 2007
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+@mainClass "loadSaveEcoreEnum::Main"
+@mainOperation "main"
+
+
+package loadSaveEcoreEnum;
+
+
+require kermeta 
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "060_checkModelWithEcoreEnum.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+using ecore
+using checkModelWithEcoreEnum
+
+class Main inherits TestCase
+{
+	attribute modelUriBase : String
+	attribute outputmodelUriBase : String
+	
+	operation main() : Void is do 
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult 
+	end
+	
+	method setUp() is do
+		modelUriBase := "../instances/060_"
+		outputmodelUriBase  := "../instances/out/060_"
+	end
+	
+	/**
+	 * Load and save an Ecore model with two enumerations
+	 * An EClass is there to refer these enumerations via an EOperation
+	 * and an EAttribute
+	 * After the loading and the saving, the new Ecore model is reloaded to check its content
+	*/
+	operation testLoadSaveEcoreEnum() is do
+		var emfRep : EMFRepository init EMFRepository.new
+		var res : EMFResource
+		res ?= emfRep.getResource(modelUriBase + "loadSaveEcoreEnum.ecore")
+		
+		res.load
+		
+		var modelelement : EPackage init EPackage.new
+		// that's the first element ...
+		modelelement ?= res.instances.one
+		var opClass : EClass init EClass.new
+		opClass ?= modelelement.eClassifiers.one
+
+		// Traverse and check the Ecore model
+		CheckModelWithEcoreEnum.new.check(modelUriBase + "loadSaveEcoreEnum.ecore")
+
+		var emfRep1 : EMFRepository init EMFRepository.new
+		var res1 : EMFResource
+		res1 ?= emfRep1.createResource(outputmodelUriBase + "loadSaveEcoreEnum.ecore", "http://www.eclipse.org/emf/2002/Ecore")
+		res1.add(modelelement)
+		res1.save()
+		
+		// Traverse and check the Ecore model
+		CheckModelWithEcoreEnum.new.check(outputmodelUriBase + "loadSaveEcoreEnum.ecore")
+		
+	end
+	
+}
