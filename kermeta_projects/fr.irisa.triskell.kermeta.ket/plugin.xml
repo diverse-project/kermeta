@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.3"?>
-<plugin
-   id="fr.irisa.triskell.kermeta.ket"
-   name="Kermeta Template Plug-in"
-   version="1.0.0"
-   provider-name="IRISA/Triskell"
-   class="fr.irisa.triskell.kermeta.ecore.KermetaEcorePlugin">
-
-   <runtime>
-      <library name="fr.irisa.triskell.kermeta.ket.jar">
-         <export name="*"/>
-      </library>
-   </runtime>
-
-   <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="fr.irisa.triskell.kermeta"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="fr.irisa.triskell.kermeta.io"/>
-      <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
-   </requires>
-
+<plugin>
    <extension
          id="kmtt"
          point="org.eclipse.ui.popupMenus">

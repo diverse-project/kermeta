@@ -2,11 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: fr.irisa.triskell.kermeta.ket
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.ket; singleton:=true
-Bundle-Version: 1.0.0
-Bundle-ClassPath: jet.jar,
- barais.COREFF/Bureau/eclipse_kermeta_0.4.1_windows/plugins/org.eclipse.text_3.2.0.v20060605-1400.jar
+Bundle-Version: 0.1.0
 Bundle-Localization: plugin
-Bundle-Vendor: triskell / IRISA
+Bundle-Vendor: IRISA / INRIA
 Require-Bundle: org.eclipse.text,
  org.eclipse.osgi,
  org.eclipse.ui,
@@ -16,3 +14,6 @@ Require-Bundle: org.eclipse.text,
  org.eclipse.core.filesystem,
  org.eclipse.jet.core,
  fr.irisa.triskell.kermeta
+Export-Package: fr.irisa.triskell.kermeta.ket,
+ fr.irisa.triskell.kermeta.ket.builder,
+ fr.irisa.triskell.kermeta.ket.parser
