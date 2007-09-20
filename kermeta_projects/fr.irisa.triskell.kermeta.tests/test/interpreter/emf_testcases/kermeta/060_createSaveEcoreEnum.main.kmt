@@ -1,0 +1,163 @@
+/* $Id: 060_createSaveEcoreEnum.main.kmt,v 1.1 2007-09-20 11:30:51 cfaucher Exp $
+ * Creation date: Sep 20, 2007
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+@mainClass "createSaveEcoreEnum::Main"
+@mainOperation "main"
+
+
+package createSaveEcoreEnum;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+using ecore
+
+class Main inherits TestCase
+{
+	attribute modelUriBase : String
+	attribute outputmodelUriBase : String
+	
+	operation main() : Void is do 
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult 
+	end
+	
+	method setUp() is do
+		outputmodelUriBase  := "../instances/out/060_"	
+	end
+	
+	/**
+	 * Create and save an Ecore model with two enumerations
+	 * An EClass is added to refer these enumerations via an EOperation
+	 * and an EAttribute
+	 * After the saving, the new Ecore model is reloaded to check its content
+	*/
+	operation testCreateSaveEcoreEnum() is do
+	
+		var emfRep1 : EMFRepository init EMFRepository.new
+		var res1 : EMFResource
+		res1 ?= emfRep1.createResource(outputmodelUriBase + "createSaveEcoreEnum.ecore", "http://www.eclipse.org/emf/2002/Ecore")
+		
+		// START Create the model
+		var modelelement1 : ecore::EPackage init ecore::EPackage.new
+		modelelement1.name := "CreationEnum"
+		
+		var theEEnum : EEnum init EEnum.new
+		theEEnum.name := "MyEnum1"
+
+		var eEnumL1 : EEnumLiteral init EEnumLiteral.new
+		eEnumL1.name := "label1_1"
+		eEnumL1.~value := 1
+		
+		var eEnumL2 : EEnumLiteral init EEnumLiteral.new
+		eEnumL2.name := "label1_2"
+		eEnumL2.~value := 2
+		
+		var eEnumL3 : EEnumLiteral init EEnumLiteral.new
+		eEnumL3.name := "label1_3"
+		eEnumL3.~value := 3
+		
+		theEEnum.eLiterals.add(eEnumL1)
+		theEEnum.eLiterals.add(eEnumL2)
+		theEEnum.eLiterals.add(eEnumL3)
+		
+		modelelement1.eClassifiers.add(theEEnum)
+		
+		var theEEnum2 : EEnum init EEnum.new
+		theEEnum2.name := "MyEnum2"
+
+		var eEnumL2_1 : EEnumLiteral init EEnumLiteral.new
+		eEnumL2_1.name := "label2_1"
+		eEnumL2_1.~value := 1
+		
+		var eEnumL2_2 : EEnumLiteral init EEnumLiteral.new
+		eEnumL2_2.name := "label2_2"
+		eEnumL2_2.~value := 2
+		
+		var eEnumL2_3 : EEnumLiteral init EEnumLiteral.new
+		eEnumL2_3.name := "label2_3"
+		eEnumL2_3.~value := 3
+		
+		theEEnum2.eLiterals.add(eEnumL2_1)
+		theEEnum2.eLiterals.add(eEnumL2_2)
+		theEEnum2.eLiterals.add(eEnumL2_3)
+		
+		modelelement1.eClassifiers.add(theEEnum2)
+		
+		var eClass : EClass init EClass.new
+		eClass.name := "MyClass"
+		modelelement1.eClassifiers.add(eClass)
+		
+		var eOperation : EOperation init EOperation.new
+		eOperation.name := "myOperation"
+		eOperation.eType := theEEnum
+		
+		eClass.eOperations.add(eOperation)
+		
+		var eAttribute : EAttribute init EAttribute.new
+		eAttribute.name := "myAttribute"
+		eAttribute.eType := theEEnum2
+		
+		eClass.eStructuralFeatures.add(eAttribute)
+		// END Create the model
+		
+		// Adding to the resource and saving
+		res1.add(modelelement1)
+		stdio.writeln("before save1")
+		res1.save()
+		stdio.writeln("after save1")
+		
+		
+		// Reload it in a new repository and check it
+		
+		var emfRep2 : EMFRepository init EMFRepository.new
+		var res2 : EMFResource
+		res2 ?= emfRep2.getResource(outputmodelUriBase + "createSaveEcoreEnum.ecore")
+		res2.load()
+		stdio.writeln("after load1")
+		
+		var modelelement2 : EPackage init EPackage.new
+		// that's the first element ...
+		modelelement2 ?= res2.instances.one
+		
+		modelelement2.eClassifiers.each{ c |
+			if(EClass.isInstance(c)) then
+				var c_class : EClass
+				c_class ?= c
+				// Check if the MyClass EClass is there, if so checking of the type of its operation and its attribute
+				if(c_class.name.equals("MyClass")) then
+					assert(c_class.eOperations.one.eType.name.equals("MyEnum1") and
+					c_class.eStructuralFeatures.one.eType.name.equals("MyEnum2"))
+				else
+					assert(false)
+				end
+			end
+			
+			// Check if the two enumerations are there, if so checking of its content: EEnumLiteral
+			if(EEnum.isInstance(c)) then
+				var c_enum : EEnum
+				c_enum ?= c
+				if(c_enum.name.equals("MyEnum1")) then
+					assert(c_enum.eLiterals.detect{ l | l.name.equals("label1_1")} != void and
+							c_enum.eLiterals.detect{ l | l.name.equals("label1_2")} != void and
+							c_enum.eLiterals.detect{ l | l.name.equals("label1_3")} != void )
+				end
+				
+				if(c_enum.name.equals("MyEnum2")) then
+					assert(c_enum.eLiterals.detect{ l | l.name.equals("label2_1")} != void and
+							c_enum.eLiterals.detect{ l | l.name.equals("label2_2")} != void and
+							c_enum.eLiterals.detect{ l | l.name.equals("label2_3")} != void )
+				end
+			end
+		}
+		
+	end
+	
+}
