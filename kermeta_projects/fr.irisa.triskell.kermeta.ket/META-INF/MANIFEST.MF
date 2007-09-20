@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: fr.irisa.triskell.kermeta.ket
+Bundle-Name: Kermeta Emitter Template Plugin
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.ket; singleton:=true
 Bundle-Version: 0.1.0
 Bundle-Localization: plugin
