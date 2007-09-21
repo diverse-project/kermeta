@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbench;
@@ -19,9 +18,7 @@ import org.eclipse.ui.IWorkbenchWizard;
 
 import fr.irisa.triskell.kermeta.ocl.TestOCLParser;
 import fr.irisa.triskell.kermeta.ocl.console.OCLConsole;
-import fr.irisa.triskell.kermeta.ocl.kmtactions.OclKmtPrinter;
-import fr.irisa.triskell.kermeta.ocl.kmtactions.KermetaConfig;
-import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
+import fr.irisa.triskell.kermeta.ocl.kmtactions.GenerateOCL;
 
 
 public class OCLParseWizard extends Wizard {
@@ -182,7 +179,8 @@ public class OCLParseWizard extends Wizard {
 			
 			// Here I need to redirect Kermeta Console !
 			
-			OclKmtPrinter.run(ipath, imetapath, opath, new OCLConsole(), KermetaConfig.KM_DIR + "/OCLKMTPrinter.kmt");
+			//GenerateOCL.run(ipath, imetapath, opath, new OCLConsole(), KermetaConfig.KM_DIR + "/OCLKMTPrinter.kmt");
+			GenerateOCL.run(ipath, imetapath, opath, new OCLConsole());
 			
 			
 			 File f = new File(inputFile.getLocation().removeFileExtension().addFileExtension("mocl").toString());

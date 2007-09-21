@@ -3,17 +3,13 @@ package fr.irisa.triskell.kermeta.ocl.kmtactions;
 
 import java.util.ArrayList;
 
-import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
-
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.ocl.console.DevOCLConsole;
-
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 public class GenerateOCL {
 
@@ -41,7 +37,7 @@ public class GenerateOCL {
 	 */
 	public static void run(String inCstXmiPath, String modelEcorePath, String outKmtPath, KermetaIOStream console ) {
 		System.out.println("running OCL2KMT Transformation \n from " + inCstXmiPath + "\n to " + outKmtPath + "\n against: " + modelEcorePath);
-		KermetaUnit unit = null;
+		/*KermetaUnit unit = null;
 		try {
 			unit = IOPlugin.getDefault().loadKermetaUnit(oclKmtPrinterKmtPath);
 		} catch (KermetaIOFileNotFoundException e) {
@@ -50,7 +46,11 @@ public class GenerateOCL {
 			e.printStackTrace();
 		}
 		KermetaTypeChecker typechecker = new KermetaTypeChecker(unit);
-		typechecker.checkUnit();
+		typechecker.checkUnit();*/
+		StdLibKermetaUnitHelper.STD_LIB_URI = KermetaConfig.STD_LIB_URI;
+		KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(oclKmtPrinterKmtPath);
+		unit.load();
+		
 		KermetaInterpreter inter = new KermetaInterpreter(unit);
 		inter.setKStream(console);
 		// This is the operation to call

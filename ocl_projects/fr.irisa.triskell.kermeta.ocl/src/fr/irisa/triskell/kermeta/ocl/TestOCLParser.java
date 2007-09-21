@@ -1,33 +1,22 @@
 package fr.irisa.triskell.kermeta.ocl;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl.URIMap;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.emf.ocl.parser.EnvironmentFactory;
-import org.eclipse.emf.ocl.parser.EvaluationEnvironment;
-//import org.eclipse.emf.ocl.expressions.ExpressionsFactory;
-//import org.eclipse.emf.ocl.expressions.OCLExpression;
-//import org.eclipse.emf.ocl.expressions.impl.ExpressionsFactoryImpl;
-//import org.eclipse.emf.ocl.internal.parser.OCLLexer;
-//import org.eclipse.emf.ocl.parser.EcoreEnvironmentFactory;
-//import org.eclipse.emf.ocl.parser.EnvironmentFactory;
-import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.internal.parser.OCLLexer;
-import org.kermeta.io.plugin.IOPlugin;
 
-import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-
-
-import java.io.*;
 
 public class TestOCLParser {
 	static Resource resource;

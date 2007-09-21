@@ -1,7 +1,12 @@
 package fr.irisa.triskell.kermeta.ocl;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Collections;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -9,23 +14,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.internal.parser.OCLLexer;
 
-import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-//import org.eclipse.emf.ocl.parser.EnvironmentFactory;
-//import org.eclipse.emf.ocl.parser.EvaluationEnvironment;
-//import org.eclipse.emf.ocl.expressions.ExpressionsFactory;
-//import org.eclipse.emf.ocl.expressions.OCLExpression;
-//import org.eclipse.emf.ocl.expressions.impl.ExpressionsFactoryImpl;
-//import org.eclipse.emf.ocl.internal.parser.OCLLexer;
-//import org.eclipse.emf.ocl.parser.EcoreEnvironmentFactory;
-//import org.eclipse.emf.ocl.parser.EnvironmentFactory;
-
-
-import java.io.*;
+import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 
 /**
  * An OCL File Parser parses the contents of a file of OCL source text.
