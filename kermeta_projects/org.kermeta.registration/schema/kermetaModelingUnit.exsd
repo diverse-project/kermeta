@@ -43,11 +43,6 @@
    </element>
 
    <element name="kermetaModelingUnit">
-      <annotation>
-         <appInfo>
-            <meta.element icon="kmt-or-km-as-Modeling-Unit-root"/>
-         </appInfo>
-      </annotation>
       <complexType>
          <sequence minOccurs="0" maxOccurs="unbounded">
             <element ref="related-resource"/>
@@ -121,11 +116,6 @@
    </element>
 
    <element name="related-resource">
-      <annotation>
-         <appInfo>
-            <meta.element icon="file"/>
-         </appInfo>
-      </annotation>
       <complexType>
          <attribute name="file" type="string" use="required">
             <annotation>
