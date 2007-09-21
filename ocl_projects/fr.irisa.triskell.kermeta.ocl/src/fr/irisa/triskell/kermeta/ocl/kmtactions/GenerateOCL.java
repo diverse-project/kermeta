@@ -15,8 +15,10 @@ import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 public class GenerateOCL {
 
 	public static String workbench_path = "platform:/plugin/";
+	//public static String workbench_path = "/udd/barais/workspace2/";
+
 	private static String project_path = workbench_path + "fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/";
-	private static String oclKmtPrinterKmtPath = project_path + "OCLKMTPrinter.kmt";
+	private static String oclKmtPrinterKmtPath = project_path + "OCLKMTPrinter.km";
 	
 	/**
 	 * Runs the Kermeta OCL CST -> KMT pretty-printer and stores the resulting Kermeta code

@@ -21,7 +21,7 @@ public class GenerateKMT {
 
 	private static String workbench_path = "platform:/resource/";
 	private static String project_path = workbench_path + "fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/";
-	private static String frameworkkm = "/opt/eclipse/plugins/fr.irisa.triskell.kermeta_0.4.1/lib/framework.km";
+	private static String frameworkkm = "/opt/eclipse/plugins/fr.irisa.triskell.kermeta_0.5.0.qualifier/lib/framework.km";
 	private static String ecore_ecore =  project_path + "Ecore.ecore";
 	private static String oclcst_ecore =  project_path + "OCLCST.ecore";
 	
@@ -74,6 +74,7 @@ public class GenerateKMT {
 	
 	public static void setUpURIMappings() {
 		URIConverter.URI_MAP.put(URI.createURI("http://www.eclipse.org/emf/2002/Ecore"), URI.createURI(ecore_ecore));
+		
 	}
 	
 }

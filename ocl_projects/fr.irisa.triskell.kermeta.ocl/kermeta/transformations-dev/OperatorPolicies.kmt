@@ -1,4 +1,4 @@
-/* $Id: OperatorPolicies.kmt,v 1.9 2007-09-14 09:46:11 ffleurey Exp $
+/* $Id: OperatorPolicies.kmt,v 1.10 2007-09-21 14:09:56 barais Exp $
  * License:
  * Copyright:
  * Authors: Mark Skipper
@@ -6,6 +6,7 @@
 package ocl2kmt;
 require kermeta
 require "ocl2kmtVisitor.kmt"
+require "TypeSystemMixin.kmt"
 require "../helpers/QualifiedName.kmt"
 
 using kermeta::standard

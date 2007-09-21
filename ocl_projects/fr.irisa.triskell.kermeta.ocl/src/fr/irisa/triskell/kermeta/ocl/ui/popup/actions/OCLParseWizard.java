@@ -16,9 +16,9 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 
+import fr.irisa.triskell.kermeta.ocl.GenerateKMT;
 import fr.irisa.triskell.kermeta.ocl.TestOCLParser;
 import fr.irisa.triskell.kermeta.ocl.console.OCLConsole;
-import fr.irisa.triskell.kermeta.ocl.kmtactions.GenerateOCL;
 
 
 public class OCLParseWizard extends Wizard {
@@ -180,7 +180,8 @@ public class OCLParseWizard extends Wizard {
 			// Here I need to redirect Kermeta Console !
 			
 			//GenerateOCL.run(ipath, imetapath, opath, new OCLConsole(), KermetaConfig.KM_DIR + "/OCLKMTPrinter.kmt");
-			//GenerateOCL.run(ipath, imetapath, opath, new OCLConsole());
+			GenerateKMT generator = new GenerateKMT();
+			generator.generate(URI.createURI(ipath), URI.createURI(imetapath), URI.createURI(opath));
 			
 			
 			 File f = new File(inputFile.getLocation().removeFileExtension().addFileExtension("mocl").toString());

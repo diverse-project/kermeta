@@ -59,7 +59,7 @@ public class RunStandaloneKM {
 			//registerPackages(ePack1);
 			registerPackages(EcorePackage.eINSTANCE);
 			//URIConverter.URI_MAP.
-			URIConverter.URI_MAP.put(URI.createURI("http://www.eclipse.org/emf/2002/Ecore"), URI.createURI("file:///udd/barais/workspace2/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/Ecore.ecore"));
+			//URIConverter.URI_MAP.put(URI.createURI("http://www.eclipse.org/emf/2002/Ecore"), URI.createURI("file:///udd/barais/Ecore.ecore"));
 			URIConverter.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI("file:///udd/barais/workspace2/"));
 			
 			Resource res = rs.getResource(URI.createFileURI("kermeta/transformations-dev/OCLCST.ecore"), true);

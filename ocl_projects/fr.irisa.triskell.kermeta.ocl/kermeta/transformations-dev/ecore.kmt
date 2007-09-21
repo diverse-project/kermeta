@@ -1,4 +1,4 @@
-/* $Id: ecore.kmt,v 1.3 2007-09-21 07:43:30 barais Exp $
+/* $Id: ecore.kmt,v 1.4 2007-09-21 14:09:56 barais Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -9,7 +9,7 @@
 package ecore;
 
 require kermeta
-require "http://www.eclipse.org/emf/2002/Ecore"
+require "Ecore.ecore"
   
 using kermeta::standard 
  
