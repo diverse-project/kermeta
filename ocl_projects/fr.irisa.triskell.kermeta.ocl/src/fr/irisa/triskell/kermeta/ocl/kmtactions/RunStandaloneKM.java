@@ -1,9 +1,23 @@
 package fr.irisa.triskell.kermeta.ocl.kmtactions;
 
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+
+import java.util.Iterator;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.ocl.ParserException;
+
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
+import fr.irisa.triskell.kermeta.ocl.TestOCLParser;
+import fr.irisa.triskell.kermeta.ocl.console.DevOCLConsole;
 
 public class RunStandaloneKM {
 
@@ -11,32 +25,65 @@ public class RunStandaloneKM {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				  "ecore", new EcoreResourceFactoryImpl());
+
+
 		
-		/*
+		ResourceSet rs = new ResourceSetImpl();
+		rs.setResourceFactoryRegistry(Resource.Factory.Registry.INSTANCE);
+		//String strURI = "platform:/plugin/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore"; 
+		//mmURI = URI.createURI(strURI);
+		String baseDir1 = "/udd/barais/workspace2/fr.irisa.triskell.kermeta.ocl/";
 		
-		KermetaUnit unit = null;
-		try {
-			unit = IOPlugin.getDefault().loadKermetaUnit("platform:/resource/ksrc/hello.km");
-		} catch (KermetaIOFileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (URIMalformedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		
+			String fn = "70";
+			String ecoreFileNameFileName = baseDir1 +"ocl/sample.ecore";
+			
+			String oclSourceFileName = baseDir1 + "ocl/" + fn + ".ocl";
+			String xmiOutputFileName = baseDir1 +"ocl/" + fn + ".xmi";
+			String outputKMTFileName = baseDir1 +"ocl/" + fn + ".kmt";
+			
+			System.out.println("Processing: " + oclSourceFileName + " --> " + xmiOutputFileName  );
+			try {
+				TestOCLParser.run(oclSourceFileName, xmiOutputFileName);
+			} catch (ParserException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			//Resource res1 = rs.getResource(URI.createFileURI("kermeta/transformations-dev/Ecore.ecore"), true);
+			//EPackage ePack1 = (EPackage) res1.getContents().get(0);
+			//registerPackages(ePack1);
+			registerPackages(EcorePackage.eINSTANCE);
+			//URIConverter.URI_MAP.
+			URIConverter.URI_MAP.put(URI.createURI("http://www.eclipse.org/emf/2002/Ecore"), URI.createURI("file:///udd/barais/workspace2/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/Ecore.ecore"));
+			URIConverter.URI_MAP.put(URI.createURI("platform:/plugin/"), URI.createURI("file:///udd/barais/workspace2/"));
+			
+			Resource res = rs.getResource(URI.createFileURI("kermeta/transformations-dev/OCLCST.ecore"), true);
+			EPackage ePack = (EPackage) res.getContents().get(0);
+			registerPackages(ePack);
+			
+			StdLibKermetaUnitHelper.STD_LIB_URI= "/udd/barais/workspace2/fr.irisa.triskell.kermeta/lib/framework.km";
+			GenerateOCL.run(xmiOutputFileName,ecoreFileNameFileName,  outputKMTFileName, new DevOCLConsole());
+
+			
+		
+	}
+	
+	private static void registerPackages(EPackage pack) {
+		Registry.INSTANCE.put(pack.getNsURI(), pack);
+		
+		EList l = pack.getESubpackages();
+		
+		if(l != null) {
+			Iterator it = l.iterator();
+			while(it.hasNext()) {
+				registerPackages((EPackage) it.next());
+			}
 		}
-		*/
-		//unit.typeCheckAllUnits();
-		//unit.saveAsXMIModel("ksrc/hello.km");
-		StdLibKermetaUnitHelper.STD_LIB_URI = KermetaConfig.STD_LIB_URI;
-		KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("ksrc/hello.km");
-		unit.load();
-		//unit.typeCheckAllUnits();
-		//unit.saveAsXMIModel("ksrc/hello.km");
-		
-		
-		KermetaInterpreter inter = new KermetaInterpreter(unit);
-		inter.setEntryPoint("hello::Main", "main");
-		inter.launch();
 	}
 
 }

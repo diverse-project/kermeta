@@ -180,7 +180,7 @@ public class OCLParseWizard extends Wizard {
 			// Here I need to redirect Kermeta Console !
 			
 			//GenerateOCL.run(ipath, imetapath, opath, new OCLConsole(), KermetaConfig.KM_DIR + "/OCLKMTPrinter.kmt");
-			GenerateOCL.run(ipath, imetapath, opath, new OCLConsole());
+			//GenerateOCL.run(ipath, imetapath, opath, new OCLConsole());
 			
 			
 			 File f = new File(inputFile.getLocation().removeFileExtension().addFileExtension("mocl").toString());

@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.7 2007-09-21 07:43:30 barais Exp $
+/* $Id: EcoreHelper.kmt,v 1.8 2007-09-21 11:26:13 barais Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -17,7 +17,7 @@ package EcoreHelpers;
 require "./ecore.kmt"   
 //require "http://www.eclipse.org/emf/2002/Ecore"
 require "../helpers/QualifiedName.kmt"
-require "platform:/plugin/fr.irisa.triskell.traceability/model/kmt/Traceability.kmt"
+require "platform:/plugin/fr.irisa.triskell.traceability.model/model/kmt/Traceability.kmt"
   
 using kermeta::standard 
 using kermeta::exceptions

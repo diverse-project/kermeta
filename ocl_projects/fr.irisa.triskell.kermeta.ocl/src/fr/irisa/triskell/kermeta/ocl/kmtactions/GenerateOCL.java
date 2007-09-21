@@ -10,10 +10,11 @@ import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.ocl.console.DevOCLConsole;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 public class GenerateOCL {
 
-	public static String workbench_path = "platform:/resource/";
+	public static String workbench_path = "platform:/plugin/";
 	private static String project_path = workbench_path + "fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/";
 	private static String oclKmtPrinterKmtPath = project_path + "OCLKMTPrinter.kmt";
 	
@@ -49,6 +50,9 @@ public class GenerateOCL {
 		typechecker.checkUnit();*/
 		StdLibKermetaUnitHelper.STD_LIB_URI = KermetaConfig.STD_LIB_URI;
 		KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(oclKmtPrinterKmtPath);
+		
+		KermetaTypeChecker typechecker = new KermetaTypeChecker(unit);
+		typechecker.checkUnit();
 		unit.load();
 		
 		KermetaInterpreter inter = new KermetaInterpreter(unit);
