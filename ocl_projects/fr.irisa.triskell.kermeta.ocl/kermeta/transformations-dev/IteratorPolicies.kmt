@@ -1,4 +1,4 @@
-/* $Id: IteratorPolicies.kmt,v 1.4 2007-09-14 09:46:11 ffleurey Exp $
+/* $Id: IteratorPolicies.kmt,v 1.5 2007-09-21 07:43:30 barais Exp $
  * Creation date: July 25, 2007
  * License:
  * Copyright:
@@ -23,7 +23,7 @@ class Iterators {
        attribute __iterators : Hashtable<String, IteratorPolicy>
         
         operation addIterator(oclIteratorName: String, policy: IteratorPolicy) : Void is 
-        do
+        do 
         	__iterators.put(oclIteratorName, policy)
         end
         

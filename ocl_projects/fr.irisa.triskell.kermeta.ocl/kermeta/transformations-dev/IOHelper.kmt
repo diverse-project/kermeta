@@ -1,4 +1,4 @@
-/* $Id: IOHelper.kmt,v 1.2 2007-09-14 09:46:11 ffleurey Exp $
+/* $Id: IOHelper.kmt,v 1.3 2007-09-21 07:43:30 barais Exp $
  * Creation date: July 25, 2007
  * License:
  * Copyright:
@@ -23,7 +23,7 @@ class StringWriter inherits StdIO
 			else
 				s.append(object)
 			end
-		end
+		end 
 		
 	method writeln(object: String) is
 		do

@@ -1,4 +1,4 @@
-/* $Id: ecore.kmt,v 1.2 2007-09-14 09:46:11 ffleurey Exp $
+/* $Id: ecore.kmt,v 1.3 2007-09-21 07:43:30 barais Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -10,11 +10,11 @@ package ecore;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
- 
-using kermeta::standard
+  
+using kermeta::standard 
  
 /** This class refers to any EDataType feature*/
-@aspect "true" 
+@aspect "true"  
 class EAttribute 
 {
 	property eAttributeType : EDataType[1..1]
@@ -321,14 +321,14 @@ class EReference
     // 'container' property can only be accessed through a getter
 	operation getContainerValue() : EBoolean is do
 		var cls : kermeta::reflection::ClassDefinition
-		cls ?= self.getMetaClass.typeDefinition
+		cls ?= self.getMetaClass.typeDefinition 
 		result ?= self.get(cls.ownedAttribute.detect{p | p.name == "container"})
-	end
+	end 
 	operation setContainerValue(booleanValue  : EBoolean) is do
 		var cls : kermeta::reflection::ClassDefinition
 		cls ?= self.getMetaClass.typeDefinition
 		self.~set(cls.ownedAttribute.detect{p | p.name == "container"}, booleanValue)
-	end
+	end 
 }
 
 @aspect "true"
@@ -359,7 +359,7 @@ abstract class ETypedElement
 			//TODO: implement getter for derived property many
 			if (self.upperBound >1 or self.upperBound == -1 ) then
 		 			result := true
-		 		else
+		 		else 
 		 			result:= false
 			 	end	
 		end

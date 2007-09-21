@@ -18,7 +18,7 @@ package cst
 
 		method accept(visitor : visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitPackageDeclarationCS(self)
- 
+  
 	} 
 	@aspect "true"
 	abstract class ContextDeclCS

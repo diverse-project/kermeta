@@ -1,4 +1,4 @@
- /* $Id: OCLKMTPrinter.kmt,v 1.8 2007-09-14 09:46:11 ffleurey Exp $
+ /* $Id: OCLKMTPrinter.kmt,v 1.9 2007-09-21 07:43:30 barais Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -16,12 +16,12 @@ require "DefinitionPreprocessor.kmt"
  
 require "ocl2kmtVisitor.kmt"   
 require "EcoreHelper.kmt"
-require "./OCLHelper.kmt"
+require "./OCLHelper.kmt" 
 require "./oclcstvisitor.kmt" 
 
 //require "Tools.kmt"    
 //require "../../../fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
-  
+   
   
 using kermeta::standard
 using kermeta::persistence  
