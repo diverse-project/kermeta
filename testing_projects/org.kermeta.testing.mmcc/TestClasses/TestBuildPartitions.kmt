@@ -1,4 +1,4 @@
-/* $Id: TestBuildPartitions.kmt,v 1.1 2007-09-14 13:08:06 ffleurey Exp $
+/* $Id: TestBuildPartitions.kmt,v 1.2 2007-09-24 14:55:05 cfaucher Exp $
  * Creation date: January 12, 2007
  * License:
  * Copyright:
@@ -323,7 +323,7 @@ class Main
 		
 		//load the source metamodel for which the partitions and then the model fragments are build
  		var sourceMM : EMFResource 
- 		sourceMM ?= repository.createResource(sourceMMName, "platform:/resource/org.kermeta.testing.mmcc/metamodels/Ecore.ecore") 
+ 		sourceMM ?= repository.getResource(sourceMMName) 
  		sourceMM.load 
 		
 		//build the partitions
@@ -351,7 +351,7 @@ class Main
 		
 		//load the source metamodel for which the partitions and then the model fragments are build
  		var sourceMM : EMFResource 
- 		sourceMM ?= repository.createResource(sourceMMName, "platform:/resource/org.kermeta.testing.mmcc/metamodels/Ecore.ecore") 
+ 		sourceMM ?= repository.getResource(sourceMMName) 
  		sourceMM.load 
 		
 		//build the partitions
