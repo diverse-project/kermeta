@@ -1,4 +1,4 @@
-/*$Id: RegisteredPackageView.java,v 1.4 2007-05-30 07:28:36 dvojtise Exp $
+/*$Id: RegisteredPackageView.java,v 1.5 2007-09-24 20:14:19 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	RegisteredPackageView.java
 * License : EPL
@@ -30,20 +30,25 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableTreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.ViewPart;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.kermeta.KermetaConstants;
 import fr.irisa.triskell.kermeta.KermetaIcons;
+import fr.irisa.triskell.kermeta.popup.actions.CopyNSURIAction;
 import fr.irisa.triskell.kermeta.popup.actions.EcoreUnregisterPackageAction;
 
 /**
@@ -54,6 +59,12 @@ import fr.irisa.triskell.kermeta.popup.actions.EcoreUnregisterPackageAction;
 public class RegisteredPackageView extends ViewPart {
 
 	private TableTreeViewer viewer;
+	
+	// note about the deprecated TableTreeViewer :
+	/* TableTreeViewer uses the deprecated SWT TableTree custom widget.
+	Instead users should use TreeViewer with a TableLabelProvider to get the best
+	native platform widget experience.
+	*/
 
 	// structure of the TableViewer
 	//private TableColumn typeColumn; // for the image
@@ -62,6 +73,9 @@ public class RegisteredPackageView extends ViewPart {
 	private TableColumn originColumn; // for the origin of the package
 	
 	private EcoreUnregisterPackageAction unregisterPackageAction;
+	
+	Clipboard clipboard;
+	private CopyNSURIAction copyNSURIAction;
 	
 	public static final String ID = "fr.irisa.triskell.kermeta.viewregisteredpackages";
 
@@ -207,6 +221,10 @@ public class RegisteredPackageView extends ViewPart {
 		viewer = new TableTreeViewer(
 				parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		
+
+		Display display =  PlatformUI.getWorkbench().getDisplay();
+		clipboard = new Clipboard(display);
+		
 		// set up the table
 		final Table table = viewer.getTableTree().getTable();
 
@@ -236,6 +254,14 @@ public class RegisteredPackageView extends ViewPart {
 	    
 		createActions();
 		createContextMenu();
+		
+		// connect action keys
+		// enable ctrl + C copy action
+		IActionBars bars = getViewSite().getActionBars();
+	    bars.setGlobalActionHandler(
+	    		ActionFactory.COPY.getId(), 
+	    		this.copyNSURIAction);
+	         
 	}
 
 	/**
@@ -252,6 +278,10 @@ public class RegisteredPackageView extends ViewPart {
 		unregisterPackageAction.setDisabledImageDescriptor(platformImages
 				.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE_DISABLED));
 		unregisterPackageAction.setToolTipText("unregister the selected packages");
+		copyNSURIAction  = new CopyNSURIAction(this, clipboard, "Copy NsURI");
+		copyNSURIAction.setImageDescriptor(platformImages
+				.getImageDescriptor(ISharedImages.IMG_TOOL_COPY));
+		copyNSURIAction.setToolTipText("Copy NsURI");
 	}
 	/**
 	 * used by createPartControl
@@ -281,6 +311,9 @@ public class RegisteredPackageView extends ViewPart {
 		// filter only dynamically registered packages
 		unregisterPackageAction.setEnabled(isSelectionDynamicallyRegistered((IStructuredSelection)viewer.getSelection()));
 		menuMgr.add(unregisterPackageAction);
+		menuMgr.add(new Separator(
+				IWorkbenchActionConstants.MB_ADDITIONS));
+		menuMgr.add(copyNSURIAction);
 		menuMgr.add(new Separator(
 				IWorkbenchActionConstants.MB_ADDITIONS));
 	}
