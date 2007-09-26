@@ -1,4 +1,4 @@
-/* $Id: EcoreRegisteringAction.java,v 1.4 2007-09-05 09:28:51 cfaucher Exp $
+/* $Id: EcoreRegisteringAction.java,v 1.5 2007-09-26 15:09:42 cfaucher Exp $
  * Project : fr.irisa.triskell.kermeta
  * File : EcoreRegisteringAction.java
  * License : EPL
@@ -65,7 +65,10 @@ public class EcoreRegisteringAction extends EMFRegisterAction {
 	 * @param pack
 	 */
 	private void registerPackages(EPackage pack) {
-		Registry.INSTANCE.put(pack.getNsURI(), pack);
+		// Fixing bug #4033
+		if( pack.getNsURI() != null && !pack.getNsURI().equals("") ) {
+			Registry.INSTANCE.put(pack.getNsURI(), pack);
+		}
 		
 		for(EPackage subPack : pack.getESubpackages()) {
 			registerPackages(subPack);
