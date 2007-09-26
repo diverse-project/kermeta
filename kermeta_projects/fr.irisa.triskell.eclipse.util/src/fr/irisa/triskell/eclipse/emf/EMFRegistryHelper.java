@@ -1,4 +1,4 @@
-/* $Id: EMFRegistryHelper.java,v 1.7 2007-09-13 16:25:33 dvojtise Exp $
+/* $Id: EMFRegistryHelper.java,v 1.8 2007-09-26 15:31:28 cfaucher Exp $
  * Project   : Kermeta 
  * File      : EMFRegistryHelper.java
  * License   : EPL
@@ -116,7 +116,7 @@ public class EMFRegistryHelper {
 	 * @param pack
 	 */
 	public static void safeRegisterPackages(Registry registry, EPackage pack) {
-		if(!Registry.INSTANCE.containsKey(pack.getNsURI()) && !registry.containsKey(pack.getNsURI())){
+		if(pack.getNsURI() != null && !pack.getNsURI().equals("") && !Registry.INSTANCE.containsKey(pack.getNsURI()) && !registry.containsKey(pack.getNsURI())){
 			// only if not already registered in main Registry
 			registry.put(pack.getNsURI(), pack);
 			
