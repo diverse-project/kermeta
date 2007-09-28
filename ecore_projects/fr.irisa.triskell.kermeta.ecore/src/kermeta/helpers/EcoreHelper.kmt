@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.8 2007-05-28 20:33:43 barais Exp $
+/* $Id: EcoreHelper.kmt,v 1.9 2007-09-28 09:57:33 jmottu Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -17,7 +17,7 @@ package EcoreHelpers;
 
 require kermeta
 
-require "../ecore.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 //require "http://www.eclipse.org/emf/2002/Ecore"
  
 using kermeta::standard
@@ -270,6 +270,7 @@ class EcoreHelper
 		detail.key := detailKey
 		detail.~value := detailValue
 		theAnnotation.details.add(detail)
+		result := void
     end
 	
         
