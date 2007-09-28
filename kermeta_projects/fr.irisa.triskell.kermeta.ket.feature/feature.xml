@@ -21,6 +21,18 @@
       <update url="http://www.kermeta.org/update"/>
    </url>
 
+   <requires>
+      <import plugin="org.eclipse.text"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.filebuffers"/>
+      <import plugin="org.eclipse.core.filesystem"/>
+      <import plugin="org.eclipse.jet.core"/>
+      <import plugin="fr.irisa.triskell.kermeta"/>
+   </requires>
+
    <plugin
          id="fr.irisa.triskell.kermeta.ket"
          download-size="0"
