@@ -15,6 +15,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Shell;
 
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 
@@ -38,17 +40,13 @@ public class EcoreUnregisteringAction extends EMFRegisterAction {
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
 	public void run(IAction action) {
-		IFile ecoreFile = null;
 		String strURI = null;
 		URI mmURI = null;
 		Resource res = null;
-		//EPackage ePack = null;
 		
 		ResourceSet rs = new ResourceSetImpl();
-		Iterator<IFile> it = ecoreFiles.iterator();
-		while(it.hasNext()) {
-			ecoreFile = (IFile) it.next();
-			
+		
+		for(IFile ecoreFile : ecoreFiles) {
 			strURI = "platform:/resource" + ecoreFile.getFullPath().toString(); 
 			KermetaPlugin.getLogger().debug("Unregistering file : " +strURI);
 			mmURI = URI.createURI(strURI);
@@ -70,17 +68,22 @@ public class EcoreUnregisteringAction extends EMFRegisterAction {
 	 * @param p
 	 */
 	private void unregisterPackages(EPackage pack) {
-		EList<EPackage> l = pack.getESubpackages();
-		
-		if(l != null) {
-			Iterator<EPackage> it = l.iterator();
-			while(it.hasNext()) {
-				unregisterPackages((EPackage) it.next());
+		// Fixing bug #4033
+		if( pack.getNsURI() != null && !pack.getNsURI().equals("") ) {
+			
+			for(EPackage subpack : pack.getESubpackages()) {
+				unregisterPackages(subpack);
 			}
+			
+			Registry.INSTANCE.remove(pack.getNsURI());
+			KermetaPlugin.getLogger().debug("   Unregistering NsURI : " +pack.getNsURI());
+		} else {
+			Shell shell = new Shell();
+			MessageDialog.openWarning(
+				shell,
+				"Kermeta EPackage registration",
+				"The EPackage: " + pack.getName() + " cannot be unregistered, because its nsUri is not defined, all its subpackages have not been unregistered.");
 		}
-		
-		Registry.INSTANCE.remove(pack.getNsURI());
-		KermetaPlugin.getLogger().debug("   Unregistering NsURI : " +pack.getNsURI());
 	}
 
 }

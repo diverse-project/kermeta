@@ -1,4 +1,4 @@
-/* $Id: EcoreRegisteringAction.java,v 1.5 2007-09-26 15:09:42 cfaucher Exp $
+/* $Id: EcoreRegisteringAction.java,v 1.6 2007-10-01 08:19:08 cfaucher Exp $
  * Project : fr.irisa.triskell.kermeta
  * File : EcoreRegisteringAction.java
  * License : EPL
@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Shell;
 
 
 /**
@@ -68,10 +70,17 @@ public class EcoreRegisteringAction extends EMFRegisterAction {
 		// Fixing bug #4033
 		if( pack.getNsURI() != null && !pack.getNsURI().equals("") ) {
 			Registry.INSTANCE.put(pack.getNsURI(), pack);
-		}
-		
-		for(EPackage subPack : pack.getESubpackages()) {
-			registerPackages(subPack);
+
+			for(EPackage subPack : pack.getESubpackages()) {
+				registerPackages(subPack);
+			}
+
+		} else {
+			Shell shell = new Shell();
+			MessageDialog.openWarning(
+				shell,
+				"Kermeta EPackage registration",
+				"The EPackage: " + pack.getName() + " cannot be registered, because its nsUri is not defined, all its subpackages have not been registered.");
 		}
 	}
 
