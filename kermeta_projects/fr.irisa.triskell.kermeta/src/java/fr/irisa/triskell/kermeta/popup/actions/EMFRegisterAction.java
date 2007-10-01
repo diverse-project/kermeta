@@ -57,7 +57,7 @@ public class EMFRegisterAction implements IObjectActionDelegate {
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
 		if (selection instanceof StructuredSelection) {
-			// The selection should be a single  file
+			// The selection could be a set of Ecore files
 			currentSelection = (StructuredSelection) selection;
 			Iterator it = currentSelection.iterator();
 
