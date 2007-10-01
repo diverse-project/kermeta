@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.java,v 1.8 2007-09-04 08:29:33 ftanguy Exp $
+/* $Id: ClassDefinitionHelper.java,v 1.9 2007-10-01 15:14:45 ftanguy Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL
@@ -29,6 +29,7 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 /**
@@ -549,4 +550,10 @@ public class ClassDefinitionHelper {
 		return KermetaUnitHelper.getAspects(kermetaUnit, cd);
 	}*/
 	
+	static public TypeVariable getTypeVariable(ClassDefinition cd, String name) {
+		for ( TypeVariable tv : cd.getTypeParameter() )
+			if ( tv.getName().equals(name) )
+				return tv;
+		return null;
+	}
 }

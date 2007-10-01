@@ -1196,7 +1196,6 @@
   <referencedModelingUnits href="../Standard.km#/"/>
   <referencedModelingUnits href="../standard/collections.km#/"/>
   <referencedModelingUnits href="../standard/primitive_types.km#/"/>
-  <referencedModelingUnits href="#/"/>
   <referencedModelingUnits href="../reflection/reflection.km#/"/>
   <referencedModelingUnits href="../persistence/resource.km#/"/>
   <referencedModelingUnits href="reflective_collections.km#/"/>

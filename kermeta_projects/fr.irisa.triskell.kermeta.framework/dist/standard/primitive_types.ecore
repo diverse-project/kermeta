@@ -139,7 +139,7 @@
             <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
           </eAnnotations>
           <eParameters name="other">
-            <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
+            <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Object"/>
           </eParameters>
         </eOperations>
         <eOperations name="and" eType="/1/standard/Boolean">
@@ -213,7 +213,7 @@
           <eParameters name="body">
             <eAnnotations source="kermeta.functionType">
               <details key="0" value="kermeta::standard::Integer"/>
-              <details key="1" value="alias Object : kermeta::language::structure::Object;"/>
+              <details key="1" value="kermeta::language::structure::Object"/>
             </eAnnotations>
             <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
           </eParameters>
@@ -236,7 +236,7 @@
             <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
           </eAnnotations>
           <eParameters name="other">
-            <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
+            <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Object"/>
           </eParameters>
         </eOperations>
         <eOperations name="plus" eType="/1/standard/Integer">
@@ -396,7 +396,7 @@
             <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
           </eAnnotations>
           <eParameters name="other">
-            <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
+            <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Object"/>
           </eParameters>
         </eOperations>
         <eOperations name="uminus" eType="/1/standard/Real">
@@ -436,7 +436,7 @@
             <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
           </eAnnotations>
           <eParameters name="other">
-            <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
+            <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Object"/>
           </eParameters>
         </eOperations>
         <eOperations name="toString" eType="/1/standard/String">
@@ -473,7 +473,7 @@
             <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
           </eAnnotations>
           <eParameters name="other">
-            <eType xsi:type="ecore:EDataType" href="collections.ecore#/1/standard/Object"/>
+            <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Object"/>
           </eParameters>
         </eOperations>
         <eOperations name="plus" eType="/1/standard/String">
@@ -566,39 +566,52 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="collections.ecore#/0"/>
     <references href="collections.ecore#/1"/>
+    <references href="collections.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
+    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="java.ecore#/0"/>
     <references href="java.ecore#/1"/>
+    <references href="java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
+    <references href="../ecore/ecore_compatibility.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
+    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

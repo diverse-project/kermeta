@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.22 2007-09-19 12:14:58 ftanguy Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.23 2007-10-01 15:14:42 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -94,7 +94,6 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 		TypeDefinition def = null;
 		
 		if ( context.current_class != null ) {
-		System.out.println();
 			String qualifiedName = NamedElementHelper.getQualifiedName( (NamedElement) context.current_class.eContainer() ) + "::" + qname;
 			def = builder.getTypeDefinitionByQualifiedName(qualifiedName, monitor);
 			if ( def != null )

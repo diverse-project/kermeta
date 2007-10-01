@@ -34,10 +34,10 @@ public class KMT2KMUnaryExpressionBuilder extends KMT2KMPass {
 		return visitor.result;
 	}
 	
-	protected static Hashtable operators;
+	protected static Hashtable<String, String> operators;
 	static {
 		// Maping operator -> method
-		operators = new Hashtable();
+		operators = new Hashtable<String, String>();
 		operators.put("-", "uminus");
 		operators.put("not", "not");
 	}

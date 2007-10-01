@@ -128,7 +128,6 @@
   <referencedModelingUnits href="../kunit/assert.km#/"/>
   <referencedModelingUnits href="../utils/hashtable.km#/"/>
   <referencedModelingUnits href="../utils/stack.km#/"/>
-  <referencedModelingUnits href="#/"/>
   <referencedModelingUnits href="file_io.km#/"/>
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
   <referencedModelingUnits href="../language/dynamic_expression.km#/"/>

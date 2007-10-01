@@ -182,7 +182,6 @@
   <referencedModelingUnits href="structure.km#/"/>
   <referencedModelingUnits href="../reflection/reflection.km#/"/>
   <referencedModelingUnits href="../persistence/resource.km#/"/>
-  <referencedModelingUnits href="#/"/>
   <referencedModelingUnits href="../kunit/kunit.km#/"/>
   <referencedModelingUnits href="../kunit/assert.km#/"/>
   <referencedModelingUnits href="../utils/hashtable.km#/"/>

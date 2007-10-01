@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.10 2007-08-21 12:59:57 dvojtise Exp $
+/* $Id: PropertyChecker.java,v 1.11 2007-10-01 15:14:43 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -102,6 +102,12 @@ public class PropertyChecker extends AbstractChecker {
 		for (Property p : props) {
 			if ( (p != property) && (p.getName().equals(property.getName())) ) {
 					
+				if ( p.isIsDerived() )
+					System.out.println();
+				
+				if ( p.getName().equals("paco") )
+					System.out.println();
+				
 				ClassDefinition possibleBaseClass = (ClassDefinition) p.eContainer();
 				if ( classDefinition.isIsAspect() && (possibleBaseClass != classDefinition) ) {
 					boolean error = false;

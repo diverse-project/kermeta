@@ -1,4 +1,4 @@
-/* $Id: CallableOperation.java,v 1.8 2007-08-02 13:26:41 dvojtise Exp $
+/* $Id: CallableOperation.java,v 1.9 2007-10-01 15:14:43 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : CallableOperation.java
  * License : EPL
@@ -67,8 +67,6 @@ public class CallableOperation extends CallableElement {
 	 * @return null if the operation was not found
 	 */
     public Type getType() {
-        StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
-
         Type result = null;
 
         Hashtable<TypeVariable,fr.irisa.triskell.kermeta.language.structure.Type> bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
@@ -80,10 +78,10 @@ public class CallableOperation extends CallableElement {
             // The type parameter of the target class should be bound
             result = new SimpleType(TypeVariableEnforcer.getBoundType(rt, bindings));
         } else {
-            FunctionType ft = struct_factory.createFunctionType();
-            ProductType pt = struct_factory.createProductType();
-            for (Object param : operation.getOwnedParameter()) {
-                pt.getType().add(((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement((Parameter)param)).getType());
+            FunctionType ft = StructureFactory.eINSTANCE.createFunctionType();
+            ProductType pt = StructureFactory.eINSTANCE.createProductType();
+            for (Parameter param : operation.getOwnedParameter()) {
+                pt.getType().add(((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement(param)).getType());
             }
             ft.setRight(rt);
             ft.setLeft(pt);

@@ -18,7 +18,7 @@
         </ownedAttribute>
         <ownedOperation tag="//@packages.0/reflection/Object/getMetaClass/@ownedTag.0" name="getMetaClass" isOrdered="true" upper="1" isAbstract="true">
           <ownedTag value="/**&#xA;  * Returns the Class object that is the metaclass of current Object&#xA;  */" object="//@packages.0/reflection/Object/getMetaClass"/>
-          <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@target/@containedType.0"/>
+          <type href="../standard/primitive_types.km#//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0"/>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/reflection/Object/container/@ownedTag.0" name="container" type="//@packages.0/reflection/Object/container/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
           <ownedTag value="/**&#xA;  * Returns the Object that contains current Object, void if the Object has&#xA;  * no container&#xA;  */" object="//@packages.0/reflection/Object/container"/>
@@ -121,7 +121,7 @@
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" tag="//@packages.0/reflection/Boolean/@ownedTag.0" name="Boolean">
         <ownedTag value="/** Alias for kermeta::standard::Boolean */" object="//@packages.0/reflection/Boolean"/>
-        <instanceType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+        <instanceType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" tag="//@packages.0/reflection/Integer/@ownedTag.0" name="Integer" instanceType="//@packages.0/reflection/Integer/@containedType.0">
         <ownedTag value="/** Alias for kermeta::standard::Integer */" object="//@packages.0/reflection/Integer"/>
@@ -262,7 +262,7 @@
         <ownedAttribute tag="//@packages.0/reflection/Class/isAbstract/@ownedTag.0" name="isAbstract" type="//@packages.0/reflection/Boolean" isOrdered="true" upper="1" isReadOnly="true" isDerived="true">
           <ownedTag value="/**&#xA;  * Returns a Boolean stating whether ClassDefinition of this Class is abstract.&#xA;  */" object="//@packages.0/reflection/Class/isAbstract"/>
           <getterBody xsi:type="kermeta_language_behavior:Block">
-            <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+            <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
             <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/reflection/Class/isAbstract/@getterBody/@statement.0/@containedType.0" identifier="cDef">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/ClassDefinition"/>
               <type type="//@packages.0/reflection/Class/isAbstract/@getterBody/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
@@ -274,12 +274,12 @@
               </value>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+              <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
               <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
               </target>
               <value xsi:type="kermeta_language_behavior:CallFeature" name="isAbstract" staticProperty="//@packages.0/reflection/ClassDefinition/isAbstract">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/Class/isAbstract/@getterBody/@statement.0/@containedType.0" name="cDef"/>
               </value>
             </statement>
@@ -716,7 +716,7 @@
                       <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
                       <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
                       <target xsi:type="kermeta_language_behavior:CallFeature" name="isDerived" staticProperty="//@packages.0/reflection/Property/isDerived">
-                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                         <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
                           <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                         </target>
@@ -724,7 +724,7 @@
                     </parameters>
                     <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/and"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" name="isComposite" staticProperty="//@packages.0/reflection/Property/isComposite">
-                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
                         <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                       </target>
@@ -798,7 +798,7 @@
                       <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
                       <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
                       <target xsi:type="kermeta_language_behavior:CallFeature" name="isDerived" staticProperty="//@packages.0/reflection/Property/isDerived">
-                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                         <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
                           <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                         </target>
@@ -806,7 +806,7 @@
                     </parameters>
                     <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/and"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" name="isComposite" staticProperty="//@packages.0/reflection/Property/isComposite">
-                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
                         <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                       </target>
@@ -880,7 +880,7 @@
                       <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
                       <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
                       <target xsi:type="kermeta_language_behavior:CallFeature" name="isDerived" staticProperty="//@packages.0/reflection/Property/isDerived">
-                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                         <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
                           <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                         </target>
@@ -891,7 +891,7 @@
                       <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
                       <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
                       <target xsi:type="kermeta_language_behavior:CallFeature" name="isComposite" staticProperty="//@packages.0/reflection/Property/isComposite">
-                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                         <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
                           <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                         </target>
@@ -966,7 +966,7 @@
                       <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
                       <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
                       <target xsi:type="kermeta_language_behavior:CallFeature" name="isDerived" staticProperty="//@packages.0/reflection/Property/isDerived">
-                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                         <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
                           <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                         </target>
@@ -977,7 +977,7 @@
                       <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
                       <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
                       <target xsi:type="kermeta_language_behavior:CallFeature" name="isComposite" staticProperty="//@packages.0/reflection/Property/isComposite">
-                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                         <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
                           <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                         </target>
@@ -1049,7 +1049,7 @@
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="and">
                     <staticType href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallFeature" name="isDerived" staticProperty="//@packages.0/reflection/Property/isDerived">
-                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
                         <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                       </target>
@@ -1059,7 +1059,7 @@
                       <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
                       <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
                       <target xsi:type="kermeta_language_behavior:CallFeature" name="isComposite" staticProperty="//@packages.0/reflection/Property/isComposite">
-                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                         <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
                           <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                         </target>
@@ -1131,7 +1131,7 @@
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="and">
                     <staticType href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallFeature" name="isDerived" staticProperty="//@packages.0/reflection/Property/isDerived">
-                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
                         <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                       </target>
@@ -1141,7 +1141,7 @@
                       <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
                       <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
                       <target xsi:type="kermeta_language_behavior:CallFeature" name="isComposite" staticProperty="//@packages.0/reflection/Property/isComposite">
-                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                         <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
                           <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                         </target>
@@ -1337,7 +1337,7 @@
             <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
             <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
             <target xsi:type="kermeta_language_behavior:CallFeature" name="isKindOf" staticOperation="//@packages.0/reflection/Object/isKindOf">
-              <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+              <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
               <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.0/@value/@target/@containedType.0">
                 <typeref type="//@packages.0/reflection/FunctionType/resultType/@body/@target/@parameters.0/@typeref/@containedType.0" upper="1">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/ProductType"/>
@@ -1461,7 +1461,7 @@
                 </statement>
               </body>
               <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="equals" staticOperation="//@packages.0/reflection/Object/equals">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.0/@containedType.0" name="elem"/>
               </stopCondition>
@@ -1601,7 +1601,6 @@
   <referencedModelingUnits href="../Standard.km#/"/>
   <referencedModelingUnits href="../language/behavior.km#/"/>
   <referencedModelingUnits href="../language/structure.km#/"/>
-  <referencedModelingUnits href="#/"/>
   <referencedModelingUnits href="../persistence/resource.km#/"/>
   <referencedModelingUnits href="../language/reflective_collections.km#/"/>
   <referencedModelingUnits href="../kunit/kunit.km#/"/>

@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.6 2007-09-04 08:17:41 ftanguy Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.7 2007-10-01 15:14:45 ftanguy Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -102,6 +102,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KM2KMT");
 	
 	private String content = "";
+	private boolean operationPrinting = false;
 	
 	private void print(String text) {
 		content += text;
@@ -116,6 +117,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * Use a new one whenever you whish to make sure that several prettyprint doesn't conflict with each other
 	 */
 	public KM2KMTPrettyPrinter() {
+	}
+	
+	public KM2KMTPrettyPrinter(boolean operationPrinting) {
+		this.operationPrinting  = operationPrinting;
 	}
 	
 	private ModelingUnit modelingUnit = null;
@@ -265,6 +270,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	public Object visitAssignment(Assignment node) {
 		String result = "";
 		String left = this.accept(node.getTarget()).toString();
+		
 		String right = this.accept(node.getValue()).toString();
 		
 		// Patch that adds the 'function' keyword in case the assigned value is a function
@@ -496,10 +502,14 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	public Object visitPrimitiveType(PrimitiveType node) {
 		setParent(node);
 		if (typedef == true) {
-			typedef = false;
-			String result = "alias " + node.getName() + " : " + this.accept(node.getInstanceType()) + ";";
-			typedef = true;
-			return result;
+			if ( ! operationPrinting ) {
+				typedef = false;
+				String result = "alias " + node.getName() + " : " + this.accept(node.getInstanceType()) + ";";
+				typedef = true;
+				return result;
+			} else {
+				return this.accept(node.getInstanceType());
+			}
 		}
 		else {
 			String qname = NamedElementHelper.getMangledQualifiedName(node);
@@ -586,7 +596,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)
 	 */
 	public Object visitEnumeration(Enumeration node) {
-		if (typedef == true) {
+		if (typedef == true && ! operationPrinting) {
 			typedef = false;
 			String result = "enumeration " + KMTHelper.getMangledIdentifier(node.getName()) + "\n";
 			result += getPrefix() + "{\n";

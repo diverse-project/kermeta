@@ -23,7 +23,6 @@
   <usings qualifiedName="kermeta"/>
   <referencedModelingUnits href="standard/collections.km#/"/>
   <referencedModelingUnits href="standard/primitive_types.km#/"/>
-  <referencedModelingUnits href="#/"/>
   <referencedModelingUnits href="language/behavior.km#/"/>
   <referencedModelingUnits href="language/structure.km#/"/>
   <referencedModelingUnits href="reflection/reflection.km#/"/>

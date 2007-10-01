@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.16 2007-09-19 12:15:02 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.17 2007-10-01 15:14:44 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -334,6 +334,10 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		setModelingUnit( StructureFactory.eINSTANCE.createModelingUnit() );
 		aspects = new HashMap <TypeDefinition, EList<TypeDefinition> > ();
 		setTypeDefinitionCache( IoFactory.eINSTANCE.createTypeDefinitionCache() );
+		// if there is no tracer defined create a memory tracer
+		// useful because at the end of the build the AST will be discarded to free the memory
+		// only the tracer will remain (but it has a smaller memory footprint
+		tracer = new Tracer();
 	}
 
 	/**
@@ -846,9 +850,15 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 */
 	public Using addUsing(String qualifiedName) {
 		assert ( modelingUnit != null );
-		Using using = StructureFactory.eINSTANCE.createUsing();
-		using.setQualifiedName( qualifiedName );
-		modelingUnit.getUsings().add( using );
+		Using using = null;
+		for (Using current : getModelingUnit().getUsings() ) 
+			if ( current.getQualifiedName().equals(qualifiedName) )
+				using = current;
+		if ( using == null ) {
+			using = StructureFactory.eINSTANCE.createUsing();
+			using.setQualifiedName( qualifiedName );
+			modelingUnit.getUsings().add( using );
+		}
 		return using;
 	}
 
@@ -886,7 +896,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 					
 				getImportedKermetaUnits().add( value );
 				modelingUnit.getReferencedModelingUnits().add( value.getModelingUnit() );
-				Iterator <Package> iterator = value.getPackages().iterator();
+				//Iterator <Package> iterator = value.getPackages().iterator();
+				Iterator <Package> iterator = value.getInternalPackages().iterator();
 				while ( iterator.hasNext() ) {
 					Package p = iterator.next();
 					addExternalPackage( p );
@@ -895,7 +906,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits( value ) ) {
 					getImportedKermetaUnits().add( unitToImport );
 					modelingUnit.getReferencedModelingUnits().add( unitToImport.getModelingUnit() );
-					iterator = unitToImport.getPackages().iterator();
+					iterator = unitToImport.getInternalPackages().iterator();
 					while ( iterator.hasNext() ) {
 						Package p = iterator.next();
 						addExternalPackage( p );
@@ -1122,12 +1133,12 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			traceM2T.put(model_element, node);
 			traceT2M.put(node, model_element);
 		
-			if(tracer ==  null)			
+			/*if(tracer ==  null)			
 			{	// if there is no tracer defined create a memory tracer
 				// useful because at the end of the build the AST will be discarded to free the memory
 				// only the tracer will remain (but it has a smaller memory footprint
 				tracer = new Tracer();
-			}
+			}*/
 		   
 			ASTNode astNode = (ASTNode)node;
 			tracer.addTextInputTrace(this.uri, 

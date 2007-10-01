@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.15 2007-09-19 12:14:58 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.16 2007-10-01 15:14:42 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -14,6 +14,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -77,14 +78,20 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			kermetaUnit.setNeedASTTraces(true);
 			
 			// 1 - Creating the imported kermeta units.
+			Date t1 = new Date();
 			loadAllImportedUnits(kermetaUnit);
+			Date t2 = new Date();
+			System.err.println("Load All Imported Units : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
 			
 			// 2 - Creating the structure like class definitions, packages.
+			t1 = new Date();
 			loadAllTypeDefinitions(kermetaUnit);
-
+			t2 = new Date();
+			System.err.println("Load All typeDefinitiosn : " + (t2.getTime() - t1.getTime()) + "ms");
+			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;			
 			
@@ -99,17 +106,33 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			}
 			
 			// 3 - Importing the type definitions from the imported kermeta units in the current one.
+			t1 = new Date();
 			importAllKermetaUnits(kermetaUnit);
+			t2 = new Date();
+			System.err.println("Import All Kermeta Units : " + (t2.getTime() - t1.getTime()) + "ms");
+						
 			// 4 - Set the aspect staff
+			t1 = new Date();
 			setBaseAspectsForAll(kermetaUnit);
-
+			t2 = new Date();
+			System.err.println("Set Base Aspects : " + (t2.getTime() - t1.getTime()) + "ms");
+			
 			// 10, finally create the aspects lists to improve performances.
+			t1 = new Date();
 			constructAspectsListsForAll(kermetaUnit);
+			t2 = new Date();
+			System.err.println("Construct Aspects : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			// 5
+			t1 = new Date();
 			replaceObjectTypeVariablesForAll(kermetaUnit);
+			t2 = new Date();
+			System.err.println("Replace Object Type Variables : " + (t2.getTime() - t1.getTime()) + "ms");
 			// 6
+			t1 = new Date();
 			loadAllStructuralFeatures(kermetaUnit);
+			t2 = new Date();
+			System.err.println("Load Structural Features : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
@@ -117,22 +140,34 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			TypeCheckerContext.initializeTypeChecker( kermetaUnit, new NullProgressMonitor() );
 			
 			// 7
+			t1 = new Date();
 			loadAllOppositeProperties(kermetaUnit);
+			t2 = new Date();
+			System.err.println("Load Opposite Properties : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
 			
 			// 8
+			t1 = new Date();
 			loadAllBodies(kermetaUnit);
+			t2 = new Date();
+			System.err.println("Load All Bodies : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
 			
 			// 9
+			t1 = new Date();
 			loadAllAnnotations(kermetaUnit);
+			t2 = new Date();
+			System.err.println("Load All Annotations : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			// 10
+			t1 = new Date();
 			markErrorsFromImportedUnits(kermetaUnit);
+			t2 = new Date();
+			System.err.println("Mark Errors : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 		} catch ( URIMalformedException exception) {
 		} catch (RecognitionException e) {
@@ -163,26 +198,28 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		while ( iterator.hasNext() ) {
 			KermetaUnit currentUnit = iterator.next();
 			
-			IBuildingState currentState = currentUnit.getBuildingState();
-			
-			if ( currentState instanceof KmBuildingState ) {
-				KMUnitLoader loader = new KMUnitLoader(monitor);
-				loader.load( currentUnit.getUri() );
-			} else if ( currentState instanceof KMTBuildingState ) {
-				KMTBuildingState currentKMTState = (KMTBuildingState) currentState;
-				if ( ! currentKMTState.loading ) {
-					for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits( IOPlugin.getDefault().getFramework() ) )
-						currentUnit.importKermetaUnit( unitToImport, true );
-					loadAllImportedUnits( currentUnit );
+			AbstractBuildingState currentState = (AbstractBuildingState) currentUnit.getBuildingState();
+			if ( ! currentState.loaded ) {
+				
+				if ( currentState instanceof KmBuildingState ) {
+					KMUnitLoader loader = new KMUnitLoader(monitor);
+					loader.load( currentUnit.getUri() );
+				} else if ( currentState instanceof KMTBuildingState ) {
+					KMTBuildingState currentKMTState = (KMTBuildingState) currentState;
+					if ( ! currentKMTState.loading ) {
+						for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits( IOPlugin.getDefault().getFramework() ) )
+							currentUnit.importKermetaUnit( unitToImport, true );
+						loadAllImportedUnits( currentUnit );
+					}
+				} else if ( currentState instanceof EcoreBuildingState ) {
+					Ecore2KMLoader loader = new Ecore2KMLoader(monitor);
+					loader.load( currentUnit.getUri(), true );
+				} else if ( currentState instanceof JavaBuildingState ) {
+					JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader(monitor);
+					loader.load( currentUnit.getUri() );	
 				}
-			} else if ( currentState instanceof EcoreBuildingState ) {
-				Ecore2KMLoader loader = new Ecore2KMLoader(monitor);
-				loader.load( currentUnit.getUri(), true );
-			} else if ( currentState instanceof JavaBuildingState ) {
-				JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader(monitor);
-				loader.load( currentUnit.getUri() );	
+
 			}
-			
 		/*	if ( currentUnit.getUri().matches(".+\\.km") ) {
 				KMUnitLoader loader = new KMUnitLoader();
 				loader.load( currentUnit.getUri() );
@@ -311,6 +348,10 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		
 	}
 	
+	/**
+	 * 
+	 * @param kermetaUnit
+	 */
 	private void importKermetaUnits(KermetaUnit kermetaUnit) {
 		
 		if ( kermetaUnit.isErroneous() )
@@ -320,6 +361,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		for ( KermetaUnit unit : importedKermetaUnits ) {
 			
 			if ( unit != kermetaUnit ) {
+				//for ( TypeDefinition typeDefinition : TypeDefinitionSearcher.getInternalTypesDefinition(unit) ) {
 				for ( Package p : (List<Package>) unit.getInternalPackages() ) {
 					for ( TypeDefinition typeDefinition : (List<TypeDefinition>) p.getOwnedTypeDefinition() ) {
 						
@@ -343,7 +385,17 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 						}
 					}
 				}
-				kermetaUnit.importKermetaUnit( unit, true );
+				
+				kermetaUnit.getImportedKermetaUnits().add( unit );
+				kermetaUnit.getModelingUnit().getReferencedModelingUnits().add( unit.getModelingUnit() );
+				//Iterator <Package> iterator = value.getPackages().iterator();
+				Iterator <Package> iterator = unit.getInternalPackages().iterator();
+				while ( iterator.hasNext() ) {
+					Package p = iterator.next();
+					kermetaUnit.addExternalPackage( p );
+				}			
+				
+//				kermetaUnit.importKermetaUnit( unit, true );
 			}
 		}
 	}

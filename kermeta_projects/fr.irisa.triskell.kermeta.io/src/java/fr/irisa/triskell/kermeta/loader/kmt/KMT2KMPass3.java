@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.24 2007-09-19 12:14:58 ftanguy Exp $
+/* $Id: KMT2KMPass3.java,v 1.25 2007-10-01 15:14:42 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -111,7 +111,6 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ClassDecl)
 	 */
 	public boolean beginVisit(ClassDecl classDecl) {
-		System.out.println();
 		if ( monitor.isCanceled() )
 			return false;
 		

@@ -381,7 +381,6 @@
   <referencedModelingUnits href="../persistence/resource.km#/"/>
   <referencedModelingUnits href="../language/reflective_collections.km#/"/>
   <referencedModelingUnits href="kunit.km#/"/>
-  <referencedModelingUnits href="#/"/>
   <referencedModelingUnits href="../utils/hashtable.km#/"/>
   <referencedModelingUnits href="../utils/stack.km#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>

@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.51 2007-09-19 12:15:03 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.52 2007-10-01 15:14:43 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -683,8 +683,6 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		}
 		
 		if (result == null) {
-		    if ( target == null )
-		    	System.out.println();
 		    // It the target type is an enumeration, the object should be an enumeration literal
 		    if (expression.getTarget() != null && target.getFType() instanceof Enumeration) {
 		        target = TypeCheckerContext.EnumLitType;

@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitHelper.java,v 1.9 2007-09-19 13:08:23 ftanguy Exp $
+/*$Id: KermetaUnitHelper.java,v 1.10 2007-10-01 15:14:45 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitHelper.java
 * License : EPL
@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.KermetaUnit;
@@ -219,7 +220,7 @@ public class KermetaUnitHelper {
 	}
 	
 	public static EList<TypeDefinition> getAspects(KermetaUnit kermetaUnit, TypeDefinition typeDefinition) {
-		EList<TypeDefinition> result = new BasicEList<TypeDefinition> ();
+		EList<TypeDefinition> result = new UniqueEList<TypeDefinition> ();
 		if ( kermetaUnit != null ) {
 			List<KermetaUnit> processedUnits = new ArrayList<KermetaUnit> ();
 			getAspects(kermetaUnit, typeDefinition, processedUnits, result);
@@ -240,7 +241,7 @@ public class KermetaUnitHelper {
 				KermetaUnit u = KermetaUnitHelper.getKermetaUnitFromObject(t);
 				EList<TypeDefinition> l = u.getAspects().get(t);
 				if ( l == null )
-					l = new BasicEList<TypeDefinition> ();
+					l = new UniqueEList<TypeDefinition> ();
 				l.add(typeDefinition);
 				u.getAspects().put(t, l);
 			}
@@ -263,7 +264,7 @@ public class KermetaUnitHelper {
 		return null;
 	}
 	
-	static private ModelingUnit getModelingUnit(EObject o) {
+	static private ModelingUnit getModelingUnit(EObject o) {		
 		if ( o instanceof ModelingUnit )
 			return (ModelingUnit) o;
 		else if ( o.eContainer() != null )

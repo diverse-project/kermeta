@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 035_testHashtableObjectEqualsKey.main.kmt,v 1.1 2007-09-10 08:35:04 cfaucher Exp $
+ * $Id: 035_testHashtableObjectEqualsKey.main.kmt,v 1.2 2007-10-01 15:17:49 ftanguy Exp $
  * Project : Kermeta interpreter
  * 		
  * License : EPL
@@ -32,7 +32,7 @@ class MyKeyType inherits kermeta::standard::ValueType
 		result := name.hashcode
 		stdio.writeln("hashcode on MyKeytype = " + result.toString)
 	end
-	method equals(other : kermeta::standard::Object) : kermeta::standard::Boolean is do		
+	method equals(other : kermeta::reflection::Object) : kermeta::standard::Boolean is do		
 		var otherKey : MyKeyType
 		otherKey ?= other
 		if(not otherKey.isVoid) then	

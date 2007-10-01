@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.17 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: KMT2KMPass1.java,v 1.18 2007-10-01 15:14:42 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : EPL
@@ -249,7 +249,7 @@ public class KMT2KMPass1 extends KMT2KMPass {
 			builder.error(
 			"PASS 1 : Either 'using' declaration is misplaced (should be put after 'require'), " +
 			"or there is a 'using' declaration, but no element defined in your file.");
-		return super.beginVisit(decls);
+		return false;
 	}
 	
 }

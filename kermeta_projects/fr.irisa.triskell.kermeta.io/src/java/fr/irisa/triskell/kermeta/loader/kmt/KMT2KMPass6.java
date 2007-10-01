@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.21 2007-09-19 12:14:58 ftanguy Exp $
+/* $Id: KMT2KMPass6.java,v 1.22 2007-10-01 15:14:42 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -14,6 +14,7 @@
 package fr.irisa.triskell.kermeta.loader.kmt;
 
 
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
 
@@ -104,9 +105,12 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		 * Self Operations and those from the base classes.
 		 * 
 		 */
+	/*	Date t1 = new Date();
 		Iterator<fr.irisa.triskell.kermeta.language.structure.Operation> itOp = ClassDefinitionHelper.getAllOperations(context.current_class).iterator(); 
 		while (itOp.hasNext()) 
 			context.addSymbol(new KMSymbolOperation(itOp.next()));
+		Date t2 = new Date();
+		System.err.println(t2.getTime() - t1.getTime());*/
 		
 		for ( fr.irisa.triskell.kermeta.language.structure.Operation op : ClassDefinitionHelper.getAllOperations(context.current_class) )
 			context.addSymbol( new KMSymbolOperation(op) );
@@ -133,14 +137,14 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		while (itProp.hasNext()) 
 			context.addSymbol(new KMSymbolProperty(itProp.next()));
 		
-		for ( TypeDefinition typeDefinition : context.current_class.getBaseAspects() ) {
+		/*for ( TypeDefinition typeDefinition : context.current_class.getBaseAspects() ) {
 			if ( typeDefinition instanceof ClassDefinition ) {
 				ClassDefinition current = (ClassDefinition) typeDefinition;
 				itProp = ClassDefinitionHelper.getAllProperties(current).iterator();
 				while ( itProp.hasNext() )
 					context.addSymbol( new KMSymbolProperty(itProp.next()) );
 			}
-		}
+		}*/
 		
 		return super.beginVisit(classDecl);
 	}
@@ -156,11 +160,13 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		context.current_operation = (fr.irisa.triskell.kermeta.language.structure.Operation)builder.getModelElementByNode(operation);
 		context.pushContext();
 		// add type variable
-		Iterator tvs = context.current_operation.getTypeParameter().iterator();
-		while(tvs.hasNext()) context.addTypeVar((TypeVariable)tvs.next());
+		Iterator<TypeVariable> tvs = context.current_operation.getTypeParameter().iterator();
+		while( tvs.hasNext() ) 
+			context.addTypeVar( tvs.next() );
 		// add parameters
-		Iterator params = context.current_operation.getOwnedParameter().iterator();
-		while(params.hasNext()) context.addSymbol(new KMSymbolParameter((Parameter)params.next()));
+		Iterator<Parameter> params = context.current_operation.getOwnedParameter().iterator();
+		while( params.hasNext() ) 
+			context.addSymbol(new KMSymbolParameter( params.next() ) );
 		//if (builder.current_operation.getFType() != null && !(builder.current_operation.getFType() instanceof FVoidType)) {
 		//	builder.addSymbol(new MCSymbolParameter((Parameter)params.next()));
 		//}
@@ -215,6 +221,8 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		
 		if ( monitor.isCanceled() )
 			return false;
+		
+		Date t1 = new Date();
 		
 		internalLog.debug("checking operation " +context.current_class.getName()+"." + context.current_operation.getName() +
 				" from " +builder.getUri());
@@ -272,6 +280,10 @@ public class KMT2KMPass6 extends KMT2KMPass {
 				TagHelper.findTagFromName(context.current_operation, KermetaASTHelper.TAGNAME_OVERLOADABLE) == null) {
 			TagHelper.createNonExistingTagFromNameAndValue(context.current_operation, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
 		}
+		
+		Date t2 = new Date();
+		System.err.println(context.current_operation.getName() + " time consuming : " + (t2.getTime() - t1.getTime()) + "ms.");
+		
 		return false;
 	}
 	

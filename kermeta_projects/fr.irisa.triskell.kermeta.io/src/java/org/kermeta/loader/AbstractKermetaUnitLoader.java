@@ -1,6 +1,6 @@
 
 
-/*$Id: AbstractKermetaUnitLoader.java,v 1.8 2007-09-13 09:04:50 ftanguy Exp $
+/*$Id: AbstractKermetaUnitLoader.java,v 1.9 2007-10-01 15:14:43 ftanguy Exp $
 * Project : io
 * File : 	KermetaUnitLoader.java
 * License : EPL
@@ -12,6 +12,7 @@
 
 package org.kermeta.loader;
 
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
 
@@ -86,7 +87,6 @@ public class AbstractKermetaUnitLoader implements KermetaUnitLoader {
 			if ( ! l.isEmpty() )
 				kermetaUnit.getAspects().put( t, l);
 		}
-		
 	}
 	
 	

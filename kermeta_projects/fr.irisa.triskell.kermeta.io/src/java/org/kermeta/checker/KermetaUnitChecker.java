@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitChecker.java,v 1.2 2007-09-19 12:15:05 ftanguy Exp $
+/*$Id: KermetaUnitChecker.java,v 1.3 2007-10-01 15:14:45 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	KermetaUnitChecker.java
 * License : EPL
@@ -115,6 +115,18 @@ public class KermetaUnitChecker {
 		initializeCallersList( unit.getUri() );
 		check(unit, caller, monitor);
 		return unit;		
+	}
+	
+	static public KermetaUnit basicCheck(String uri, Object caller, IProgressMonitor monitor) throws URIMalformedException {
+		if ( monitor.isCanceled() )
+			return null;
+		Date beforeLoading = new Date();
+		KermetaUnit unit = IOPlugin.getDefault().basicLoadKermetaUnit(uri, monitor);
+		Date afterLoading = new Date();
+		logger.info("Loading " + uri + " (time consuming : " + (afterLoading.getTime() - beforeLoading.getTime()) + "ms).");
+		initializeCallersList( unit.getUri() );
+		check(unit, caller, monitor);
+		return unit;
 	}
 	
 	/**

@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.16 2007-09-19 12:15:05 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.17 2007-10-01 15:14:46 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -228,6 +228,16 @@ public class IOPlugin extends AbstractUIPlugin {
 				kermetaUnit.getImportedKermetaUnits().add( framework );
 				//kermetaUnit.importKermetaUnit( framework, false );
 		}
+		return kermetaUnit;
+	}
+	
+	public KermetaUnit basicGetKermetaUnit( String uri ) throws URIMalformedException {
+		return storer.get( uri );
+	}
+	
+	public KermetaUnit basicLoadKermetaUnit( String uri, IProgressMonitor monitor ) throws URIMalformedException {
+		KermetaUnit kermetaUnit = basicGetKermetaUnit( uri );
+		storer.load( uri, null, monitor );
 		return kermetaUnit;
 	}
 	

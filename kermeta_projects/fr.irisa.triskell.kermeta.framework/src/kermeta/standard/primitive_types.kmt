@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.38 2007-09-04 13:28:11 cfaucher Exp $
+// $Id: primitive_types.kmt,v 1.39 2007-10-01 15:12:55 ftanguy Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -145,7 +145,7 @@ class Boolean inherits PrimitiveType
 	 * Returns true if <code>other</code> type is Boolean
 	 * and has the same boolean value than current object.
 	 */
-	method equals(other : Object) : Boolean is do
+	method equals(other : kermeta::reflection::Object) : Boolean is do
 		if other.getMetaClass != Boolean then  
 			result := false 
 		else
@@ -250,7 +250,7 @@ class Integer inherits Numeric, Summable<Integer>
 	 * Returns true if <code>other</code> type is Integer or Real
 	 * and has the same numeric value than current object.
 	 */	
-	method equals(other : Object) : Boolean is do
+	method equals(other : kermeta::reflection::Object) : Boolean is do
 		if other.getMetaClass != Integer then
 			// allow comparing with reals
 			if other.getMetaClass == Real then
@@ -466,7 +466,7 @@ class Real inherits Numeric, Summable<Real>
 	 * Returns true if <code>other</code> type is Integer or Real
 	 * and has the same numeric value than current object.
 	 */	
-	method equals(other : Object) : Boolean is do
+	method equals(other : kermeta::reflection::Object) : Boolean is do
 		if other.getMetaClass != Real then
 			// allow comparing with integers
 			if other.getMetaClass == Integer then
@@ -513,7 +513,7 @@ class Character inherits ValueType, Comparable
 	 * Returns true if <code>other</code> type is Character
 	 * and has the same letter value than current object.
 	 */	
-	method equals(other : Object) : Boolean is do
+	method equals(other : kermeta::reflection::Object) : Boolean is do
 		if other.getMetaClass != Character then
 			result := false
 		else
@@ -548,7 +548,7 @@ class String inherits ValueType, Comparable, Summable<String>
 	 * Returns true if <code>other</code> type is String
 	 * and has the same string value than current object.
 	 */	
-	method equals(other : Object) : Boolean is do
+	method equals(other : kermeta::reflection::Object) : Boolean is do
 		if other.getMetaClass != String then
 			result := false
 		else
