@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.23 2007-09-19 12:17:44 ftanguy Exp $
+/* $Id: KermetaRunHelper.java,v 1.24 2007-10-01 15:16:28 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: EPL
@@ -43,16 +43,10 @@ public class KermetaRunHelper {
 	 */
     public static KermetaUnit parse(IFile file)
     {   
-    	//StdLibKermetaUnitHelper.setURItoDefault();
-
-    	StructurePackageImpl.init();
-    	BehaviorPackageImpl.init();
     	String uri = "platform:/resource" + file.getFullPath().toString();
-    	//KermetaUnitFactory.getDefaultLoader().unloadAll();
         KermetaUnit result = null;
     	try {
         	result = IOPlugin.getDefault().loadKermetaUnit( uri, new NullProgressMonitor() );
-	        result.load();	        
         }
         catch(Throwable e) {
             KermetaUnit.internalLog.error("load error ", e);

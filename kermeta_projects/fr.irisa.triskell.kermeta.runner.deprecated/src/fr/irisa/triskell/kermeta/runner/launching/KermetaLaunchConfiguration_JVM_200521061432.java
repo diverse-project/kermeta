@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration_JVM_200521061432.java,v 1.6 2007-07-20 15:09:14 ftanguy Exp $
+/* $Id: KermetaLaunchConfiguration_JVM_200521061432.java,v 1.7 2007-10-01 15:16:28 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -334,7 +334,7 @@ public class KermetaLaunchConfiguration_JVM_200521061432 extends AbstractJavaLau
 	            String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
 	            
 	            // 	Get the values given by the user in the runPopupDialog
-	            KermetaInterpreter interpreter = new KermetaInterpreter(uri);
+	            KermetaInterpreter interpreter = new KermetaInterpreter(uri, null);
 	            
 	            interpreter.setEntryPoint(classQualifiedNameString, operationString);
 	            interpreter.setKStream(console);     

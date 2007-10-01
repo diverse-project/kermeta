@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.23 2007-09-19 12:17:44 ftanguy Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.24 2007-10-01 15:16:28 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -36,6 +36,8 @@ import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.util2.KermetaUnitHelper;
+
+import com.sun.org.apache.bcel.internal.generic.ClassObserver;
 
 import fr.irisa.triskell.kermeta.KermetaMessages;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
@@ -112,7 +114,13 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 				// bug detected when we use a workspace from Eclipse 3.1.x with an Eclipse 3.2.x
 				if( attributes.get(KermetaLaunchConfiguration.KM_FILENAME)!= null ) {
 				String comparedConfigurationFileName = attributes.get(KermetaLaunchConfiguration.KM_FILENAME).toString().replace('\\', '/');
-					if (
+				if ( 	attributes.get(KermetaLaunchConfiguration.KM_PROJECTNAME).toString().equals("") 						
+						&&	comparedConfigurationFileName.equals(comparedFileName)
+						&& 	attributes.get(KermetaLaunchConfiguration.KM_CLASSQNAME).toString().equals(className)
+						&& 	attributes.get(KermetaLaunchConfiguration.KM_OPERATIONNAME).toString().equals(operationName)
+						)				
+						existingLaunchConfigurations.add(tab[index]);
+				else if (
 							(attributes.get(KermetaLaunchConfiguration.KM_PROJECTNAME).toString().equals(projectName))
 						&&	(comparedConfigurationFileName.equals(comparedFileName))
 						&& 	(attributes.get(KermetaLaunchConfiguration.KM_CLASSQNAME).toString().equals(className))
@@ -133,13 +141,16 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
   
     }
     
-    private List<ILaunchConfiguration> findLaunchConfigurations(String projectName) throws CoreException {
+    private List<ILaunchConfiguration> findLaunchConfigurations(String projectName, String fileName) throws CoreException {
     	List<ILaunchConfiguration> existingLaunchConfigurations = new ArrayList<ILaunchConfiguration>();
     	ILaunchConfiguration[]	tab	=	launchManager.getLaunchConfigurations(configurationType);
     	for ( int i = 0; i < tab.length; i++ ) {
 			// getting the launch configuration's attributes
 			Map<?,?> attributes	=	tab[i].getAttributes();	
-			if( (attributes.get(KermetaLaunchConfiguration.KM_FILENAME)!= null)
+			if ( attributes.get(KermetaLaunchConfiguration.KM_PROJECTNAME).toString().equals("") 
+				&& attributes.get(KermetaLaunchConfiguration.KM_FILENAME).equals(fileName) )
+				existingLaunchConfigurations.add( tab[i] );
+			else if( (attributes.get(KermetaLaunchConfiguration.KM_FILENAME).equals(fileName))
 					&& (attributes.get(KermetaLaunchConfiguration.KM_PROJECTNAME).toString().equals(projectName)) )
 				existingLaunchConfigurations.add( tab[i] );
     	}
@@ -308,8 +319,8 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 
 			List<ILaunchConfiguration> launchConfigurations = findLaunchConfigurations(projectName, fileName, className, operationName);
 			
-			if ( launchConfigurations.isEmpty() )
-				launchConfigurations = findLaunchConfigurations(projectName);
+			if ( launchConfigurations.isEmpty() && className.equals("") && operationName.equals("") )
+				launchConfigurations = findLaunchConfigurations(projectName, fileName);
 
 			ILaunchConfiguration launchConfiguration = null;
 			
