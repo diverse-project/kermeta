@@ -7,7 +7,7 @@ package automaton;
 require kermeta
 require "../metamodels/automata.kmt"
 //require "../models/samples.kmt"
-using automaton::samples
+using automaton
 using automaton
 using kermeta::standard
 
@@ -95,7 +95,7 @@ class Minimization
     	stdio.writeln("Equivalence classes creation succeeded : " + output.stateSet.size.toString)
 		output.stateSet.each { s | s.name := String.clone(helper.join(s.combination.collect{ a | a.name }))  }
 		// Create the transition between the new states -- inputStates contains the links to their eq.class
-    	output.transitionSet := createEquivalentTransitions(output.stateSet, input.stateSet, input.transitionSet)
+    	output.transitionSet.addAll(createEquivalentTransitions(output.stateSet, input.stateSet, input.transitionSet))
     	stdio.writeln("Transition set creation succeeded")
     	// Set the initial and the final states
     	output.initialState := input.initialState.combination.one

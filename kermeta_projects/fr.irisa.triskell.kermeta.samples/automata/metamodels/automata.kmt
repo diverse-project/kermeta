@@ -103,7 +103,7 @@ class State
 	reference outgoingTransitions : Transition[0..*]#source
 	
 	/** Create a new state from self state. */
-	method copy() : State is do
+	operation copy() : State is do
 		result := State.new
 		result.name := String.clone(name)
 		result.combination := Set<State>.new
@@ -239,8 +239,8 @@ class AutomatonHelper
 	
 	/** 
 	 * Serialization helpers
-	 */  
-    operation saveEMFAutomaton(repository : EMFRepository, a : FiniteAutomaton, uri : String, mmuri : String) : FiniteAutomaton is do
+	 */
+    operation saveEMFAutomaton(repository : EMFRepository, a : FiniteAutomaton, uri : String, mmuri : String) : Void is do
 		if AutomatonHelper.new.conformityChecker(a) == true then 
 	    	var resource : EMFResource 
 		    resource ?= repository.createResource(uri , mmuri)

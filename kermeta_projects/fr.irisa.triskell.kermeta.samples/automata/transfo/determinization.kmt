@@ -10,7 +10,7 @@ require kermeta
 require "../metamodels/automata.kmt"
 //require "../models/samples.kmt"
 using kermeta::standard
-using automaton::samples
+using automaton
 using kermeta::persistence
  
 class Determinization 
