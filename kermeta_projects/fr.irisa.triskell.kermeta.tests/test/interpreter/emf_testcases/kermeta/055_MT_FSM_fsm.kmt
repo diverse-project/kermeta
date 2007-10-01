@@ -1,4 +1,4 @@
-/* $Id: 055_MT_FSM_fsm.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+/* $Id: 055_MT_FSM_fsm.kmt,v 1.2 2007-10-01 15:17:34 ftanguy Exp $
  * Project    : fr.irisa.triskell.samples.fsm
  * File       : fsmmodel.kmt
  * License    : EPL
@@ -253,6 +253,7 @@ class AutomatonHelper
 	    	stdio.writeln("I'm sorry, I'm afraid that your automaton is not valid; please check the following rules : ")
 	    	stdio.writeln(" - Do the transitions source and target states belong to the set of states of the automaton?")
 	    end
+	    result := void
     end
     
      operation loadEMFAutomaton(repository : EMFRepository, uri : String, mmuri : String) : FSM is do
@@ -288,7 +289,7 @@ class AutomatonHelper
     	var file : String init stdio.read(prompt)
     	stdio.writeln("\n"+file)
     	var r : EMFRepository init EMFRepository.new
-    	result := loadEMFAutomaton(r, file, "../metamodels/fsm.ecore")
+    	result := loadEMFAutomaton(r, file, "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/fsm.ecore")
     end
     
     /** Operation that tries to check the validity of the given automaton 

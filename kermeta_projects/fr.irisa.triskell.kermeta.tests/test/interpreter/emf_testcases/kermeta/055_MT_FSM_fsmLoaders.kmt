@@ -1,4 +1,4 @@
-/* $Id: 055_MT_FSM_fsmLoaders.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+/* $Id: 055_MT_FSM_fsmLoaders.kmt,v 1.2 2007-10-01 15:17:34 ftanguy Exp $
  * Creation date: November 13, 2006
  * License:
  * Copyright:
@@ -23,7 +23,7 @@ class BasicFSMLoader
 	operation loadFromFile(fileName : String) : basic_fsm_mt is
 	do
 		var res : EMFRepository init EMFRepository.new
-        var resource : Resource init res.createResource(fileName, "../metamodels/055_MT_FSM_basic_fsm_type.ecore")
+        var resource : Resource init res.createResource(fileName, "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/055_MT_FSM_basic_fsm_type.ecore")
         
         stdio.writeln("BasicFSMLoader : before loading " +fileName)
         // loading
@@ -39,7 +39,7 @@ class GenericBasicFSMLoader
 	operation loadFromFile(fileName : String) : basic_fsm_mt is
 	do
 		var res : EMFRepository init EMFRepository.new
-        var resource : Resource init res.createResource(fileName, "../metamodels/055_MT_FSM_basic_fsm_type.ecore")
+        var resource : Resource init res.createResource(fileName, "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/055_MT_FSM_basic_fsm_type.ecore")
         
         stdio.writeln("GenericBasicFSMLoader : before loading " +fileName)
         // loading
@@ -55,7 +55,7 @@ class GenericModelLoader<MT : kermeta::language::structure::Model> {
 	operation loadFromFile(fileName : String) : MT is
 	do
 		var res : EMFRepository init EMFRepository.new
-        var resource : Resource init res.createResource(fileName, "../metamodels/055_MT_FSM_basic_fsm_type.ecore")
+        var resource : Resource init res.createResource(fileName, "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/055_MT_FSM_basic_fsm_type.ecore")
         
         stdio.writeln("GenericModelLoader : before loading " +fileName)
         // loading
@@ -71,7 +71,7 @@ class FinalStateFSMLoader {
 	operation loadFromFile(fileName : String) : finalstates_fsm_mt is
 	do
 		var res : EMFRepository init EMFRepository.new
-        var resource : Resource init res.createResource(fileName, "../metamodels/055_MT_FSM_finalstates_fsm_type.ecore")
+        var resource : Resource init res.createResource(fileName, "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/055_MT_FSM_finalstates_fsm_type.ecore")
         
         stdio.writeln("FinalStateFSMLoader : before loading " +fileName)
         // loading
@@ -113,7 +113,7 @@ class CompositeFSMLoader
 	operation loadFromFile(fileName : String) : composite_fsm_mt is
 	do
 		var res : EMFRepository init EMFRepository.new
-        var resource : Resource init res.createResource(fileName, "../metamodels/055_MT_FSM_composite_fsm_type.ecore")
+        var resource : Resource init res.createResource(fileName, "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/055_MT_FSM_composite_fsm_type.ecore")
         
         stdio.writeln("before loading " +fileName)
         // loading

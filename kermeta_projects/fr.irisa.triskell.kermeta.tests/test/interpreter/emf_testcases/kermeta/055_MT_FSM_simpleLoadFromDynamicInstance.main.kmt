@@ -1,4 +1,4 @@
-/* $Id: 055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt,v 1.1 2007-09-10 08:35:05 cfaucher Exp $
+/* $Id: 055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt,v 1.2 2007-10-01 15:17:34 ftanguy Exp $
  * Creation date: November 14, 2006
  * License:
  * Copyright:
@@ -34,7 +34,7 @@ class SimpleLoader inherits kermeta::kunit::TestCase
 	 *  for the test, this file contains 7 objects : 1 FSM, 3 states and 3 transitions
 	 */
     operation testBasicSimpleLoad() : Void is do 
-        var myModel : basic_fsm_mt init BasicFSMLoader.new.loadFromFile("../instances/055_MT_FSM_createDynamicInstance.basic.xmi")
+        var myModel : basic_fsm_mt init BasicFSMLoader.new.loadFromFile("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/055_MT_FSM_createDynamicInstance.basic.xmi")
         //stdio.writeln(myModel.contents.size.toString)
         assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
         
@@ -59,7 +59,7 @@ class SimpleLoader inherits kermeta::kunit::TestCase
 	 * this test use the Generic FSM loader based on addAllCompatible
 	 */
     operation testBasicSimpleGenericFSMLoad() : Void is do 
-        var myModel : basic_fsm_mt init GenericBasicFSMLoader.new.loadFromFile("../instances/055_MT_FSM_createDynamicInstance.basic.xmi")
+        var myModel : basic_fsm_mt init GenericBasicFSMLoader.new.loadFromFile("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/055_MT_FSM_createDynamicInstance.basic.xmi")
         stdio.writeln("testBasicSimpleGenericLoad contents.size = " + myModel.contents.size.toString)
         assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
         
@@ -84,7 +84,7 @@ class SimpleLoader inherits kermeta::kunit::TestCase
 	 * this test use the Generic Model loader based on addAllCompatible
 	 */
     operation testBasicSimpleGenericLoad() : Void is do 
-        var myModel : basic_fsm_mt init GenericModelLoader<basic_fsm_mt>.new.loadFromFile("../instances/055_MT_FSM_createDynamicInstance.basic.xmi")
+        var myModel : basic_fsm_mt init GenericModelLoader<basic_fsm_mt>.new.loadFromFile("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/055_MT_FSM_createDynamicInstance.basic.xmi")
         stdio.writeln("testBasicSimpleGenericLoad contents.size = " + myModel.contents.size.toString)
         assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
         
@@ -108,7 +108,7 @@ class SimpleLoader inherits kermeta::kunit::TestCase
 	 *  for the test, this file contains 7 objects : 2 FSM, 4 states and 3 transitions
 	 */
     operation testCompositeSimpleLoad() : Void is do 
-        var myModel : composite_fsm_mt init CompositeFSMLoader.new.loadFromFile("../instances/055_MT_FSM_createDynamicInstance.composite.xmi")
+        var myModel : composite_fsm_mt init CompositeFSMLoader.new.loadFromFile("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/055_MT_FSM_createDynamicInstance.composite.xmi")
         //stdio.writeln(myModel.contents.size.toString)
         assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
         
@@ -131,7 +131,7 @@ class SimpleLoader inherits kermeta::kunit::TestCase
 	 * this test use the Generic Model loader based on addAllCompatible
 	 */
     operation testCompositeSimpleGenericLoad() : Void is do 
-        var myModel : composite_fsm_mt init GenericModelLoader<composite_fsm_mt>.new.loadFromFile("../instances/055_MT_FSM_createDynamicInstance.composite.xmi")
+        var myModel : composite_fsm_mt init GenericModelLoader<composite_fsm_mt>.new.loadFromFile("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/055_MT_FSM_createDynamicInstance.composite.xmi")
         //stdio.writeln(myModel.contents.size.toString)
         assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
         
@@ -154,7 +154,7 @@ class SimpleLoader inherits kermeta::kunit::TestCase
 	 *  for the test, this file contains 7 objects : 1 FSM, 3 states and 3 transitions
 	 */
     operation testFinalStatesSimpleLoad() : Void is do 
-        var myModel : finalstates_fsm_mt init FinalStateFSMLoader.new.loadFromFile("../instances/055_MT_FSM_createDynamicInstance.finalstates.xmi")
+        var myModel : finalstates_fsm_mt init FinalStateFSMLoader.new.loadFromFile("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/055_MT_FSM_createDynamicInstance.finalstates.xmi")
         //stdio.writeln(myModel.contents.size.toString)
         assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
         
@@ -176,7 +176,7 @@ class SimpleLoader inherits kermeta::kunit::TestCase
 	 *  for the test, this file contains 7 objects : 1 FSM, 3 states and 3 transitions
 	 */
     operation testFinalStatesSimpleGenericLoad() : Void is do 
-        var myModel : finalstates_fsm_mt init GenericModelLoader<finalstates_fsm_mt>.new.loadFromFile("../instances/055_MT_FSM_createDynamicInstance.finalstates.xmi")
+        var myModel : finalstates_fsm_mt init GenericModelLoader<finalstates_fsm_mt>.new.loadFromFile("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/055_MT_FSM_createDynamicInstance.finalstates.xmi")
         //stdio.writeln(myModel.contents.size.toString)
         assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
         
@@ -198,7 +198,7 @@ class SimpleLoader inherits kermeta::kunit::TestCase
    //    load compatible model
    
    operation testBasicSimpleLoadFromCompositeModel() : Void is do 
-        var myModel : basic_fsm_mt init BasicFSMLoader.new.loadFromFile("../instances/055_MT_FSM_createDynamicInstance.composite.xmi")
+        var myModel : basic_fsm_mt init BasicFSMLoader.new.loadFromFile("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/055_MT_FSM_createDynamicInstance.composite.xmi")
         //stdio.writeln(myModel.contents.size.toString)
         assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model, found " + myModel.contents.size.toString)
         
@@ -216,7 +216,7 @@ class SimpleLoader inherits kermeta::kunit::TestCase
     end
     
     operation testBasicSimpleLoadFromFinalStatesModel() : Void is do 
-        var myModel : basic_fsm_mt init BasicFSMLoader.new.loadFromFile("../instances/055_MT_FSM_createDynamicInstance.finalstates.xmi")
+        var myModel : basic_fsm_mt init BasicFSMLoader.new.loadFromFile("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/055_MT_FSM_createDynamicInstance.finalstates.xmi")
         //stdio.writeln(myModel.contents.size.toString)
         assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model, found " + myModel.contents.size.toString)
         

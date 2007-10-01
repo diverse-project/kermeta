@@ -1,4 +1,4 @@
-/* $Id: 044_testFrameworkModelConformance.main.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+/* $Id: 044_testFrameworkModelConformance.main.kmt,v 1.2 2007-10-01 15:17:34 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.interpreter
  * File      : 044_testFrameworkModelConformance.kmt
  * License   : EPL
@@ -161,7 +161,7 @@ class Main inherits kermeta::kunit::Assert
      */
     operation loadClassModel() : Set<EPackage> is do             
    		var repository : EMFRepository init EMFRepository.new       
-   		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore","../instances/Ecore.ecore")
+   		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore","platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/Ecore.ecore")
    		resource.load()      
        
        	result := Set<EPackage>.new

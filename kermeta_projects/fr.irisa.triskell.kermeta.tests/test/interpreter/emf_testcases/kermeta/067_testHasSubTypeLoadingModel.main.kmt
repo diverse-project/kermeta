@@ -1,4 +1,4 @@
-/* $Id: 067_testHasSubTypeLoadingModel.main.kmt,v 1.1 2007-09-10 08:35:05 cfaucher Exp $
+/* $Id: 067_testHasSubTypeLoadingModel.main.kmt,v 1.2 2007-10-01 15:17:34 ftanguy Exp $
  * Creation date: June 5, 2007
  * License:
  * Copyright:
@@ -28,7 +28,7 @@ class TestHasSubtypeLoadingModel inherits kermeta::kunit::TestCase {
 	end
 	
 	operation testHasSubtype1() : Boolean is do
-		var p : Package init loadModel("../instances/loadedFile4hasSubType.km")
+		var p : Package init loadModel("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/loadedFile4hasSubType.km")
 		var classes1 : Sequence<TypeDefinition> 
 		classes1 := p.ownedTypeDefinition.select{c |
 			ClassDefinition.isInstance(c)
@@ -47,6 +47,7 @@ class TestHasSubtypeLoadingModel inherits kermeta::kunit::TestCase {
 		assert(typeTest2.hasSubType(typeClass1))
 		assert(typeTest3.hasSubType(typeTest2))
 		assert(typeTest3.hasSubType(typeClass1))
+		result := void
 	end
 
 	operation loadModel(path : String) : Package is do

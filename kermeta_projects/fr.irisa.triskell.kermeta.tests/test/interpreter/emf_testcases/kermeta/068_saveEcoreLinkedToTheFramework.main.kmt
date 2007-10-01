@@ -1,4 +1,4 @@
-/* $Id: 068_saveEcoreLinkedToTheFramework.main.kmt,v 1.1 2007-09-10 08:35:06 cfaucher Exp $
+/* $Id: 068_saveEcoreLinkedToTheFramework.main.kmt,v 1.2 2007-10-01 15:17:34 ftanguy Exp $
  * Creation date: August 2, 2007
  * License:
  * Copyright:
@@ -29,13 +29,13 @@ class Main inherits TestCase
 	operation testSave() is do
 	
 		var repository : EMFRepository init EMFRepository.new
-		var resource : Resource init repository.createResource( "../instances/068_ecoreLinkedToTheFramework.ecore", "http://www.eclipse.org/emf/2002/Ecore" )
+		var resource : Resource init repository.createResource( "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/068_ecoreLinkedToTheFramework.ecore", "http://www.eclipse.org/emf/2002/Ecore" )
 		resource.load
 
 		var p : EPackage
 		p ?= resource.detect{ elem | elem.isInstanceOf(EPackage) }
 
-		resource.saveWithNewURI( "../instances/out/068_ecoreLinkedToTheFramework.ecore" )
+		resource.saveWithNewURI( "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/068_ecoreLinkedToTheFramework.ecore" )
 	
 		assert(true)
 	

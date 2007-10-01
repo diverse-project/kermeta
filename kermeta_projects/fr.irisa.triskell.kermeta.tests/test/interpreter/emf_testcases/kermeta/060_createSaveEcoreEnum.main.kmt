@@ -1,4 +1,4 @@
-/* $Id: 060_createSaveEcoreEnum.main.kmt,v 1.2 2007-09-20 12:49:24 cfaucher Exp $
+/* $Id: 060_createSaveEcoreEnum.main.kmt,v 1.3 2007-10-01 15:17:33 ftanguy Exp $
  * Creation date: Sep 20, 2007
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
@@ -31,7 +31,7 @@ class Main inherits TestCase
 	end
 	
 	method setUp() is do
-		outputmodelUriBase  := "../instances/out/060_"
+		outputmodelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/060_"
 	end
 	
 	/**
