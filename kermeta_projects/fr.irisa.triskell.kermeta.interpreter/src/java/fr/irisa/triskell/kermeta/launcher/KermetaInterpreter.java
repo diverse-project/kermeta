@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.35 2007-09-19 12:17:49 ftanguy Exp $
+/* $Id: KermetaInterpreter.java,v 1.36 2007-10-01 15:14:29 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -17,17 +17,21 @@
  */
 package fr.irisa.triskell.kermeta.launcher;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.merger.Merger; 
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -43,7 +47,6 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -80,14 +83,48 @@ public class KermetaInterpreter {
 	 * Constructor for a kermeta unit
 	 * @param unit
 	 */
-	public KermetaInterpreter(KermetaUnit unit)
+	/*public KermetaInterpreter(KermetaUnit unit)
 	{
 	    super();
 	    this.unit = unit;
 	    initializeMemory();
 	    initializeEntryPoint();
+	}*/
+	
+	public KermetaInterpreter(String uri_unit, String binDirectory, Tracer tracer)
+	{
+	    try {
+	    	KermetaUnit source = KermetaUnitChecker.check( uri_unit );
+	    	
+	    	if ( source.getUri().matches(".+\\.km") )
+	    		unit = source;
+	    	else {
+			    LinkedHashSet<KermetaUnit> kermetaUnitsToMerge = new LinkedHashSet<KermetaUnit> ();
+			    kermetaUnitsToMerge.add(source);
+			    kermetaUnitsToMerge.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(source) );
+			    
+			    Merger merger = new Merger();
+			    String fileToExecute = merger.process(kermetaUnitsToMerge, binDirectory, null);
+			    
+		    	unit = KermetaUnitChecker.basicCheck( fileToExecute, this, new NullProgressMonitor() );
+	    	}
+	    } catch (KermetaIOFileNotFoundException e) {
+			e.printStackTrace();
+			return;
+		} catch (URIMalformedException e) {
+			e.printStackTrace();
+			return;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if ( unit.isIndirectlyErroneous() )
+	        throw new KermetaInterpreterError( KermetaUnitHelper.getAllErrorsAsString(unit) );
+	    	    
+	    initializeMemory();
+	    initializeEntryPoint();
 	}
-
+	
 	/**
 	 * Constructor for a kermeta unit, for debug mode
 	 * @param unit
@@ -95,33 +132,35 @@ public class KermetaInterpreter {
 	public KermetaInterpreter(String uri_unit, Tracer tracer)
 	{
 	    super();
-	    
-	   // KermetaUnitFactory.getDefaultLoader().unloadAll();
-	   // unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri_unit);
-	    //	  we need to set the tracer before loading the unit ;P
 	   	    
 	    try {
-	    	unit = KermetaUnitChecker.check( uri_unit );
-//			unit = IOPlugin.getDefault().loadKermetaUnit( uri_unit );
-			// Why to erase the previous tracer ???
-			// If we erase the previous one, the debugger can not retrieve locations where to stop...
-			// if ( tracer != null ) 
-			//	 unit.setTracer(tracer);
+	    	KermetaUnit source = KermetaUnitChecker.check( uri_unit );
+	    	
+	    	if ( source.getUri().matches(".+\\.km") )
+	    		unit = source;
+	    	else {
+			    LinkedHashSet<KermetaUnit> kermetaUnitsToMerge = new LinkedHashSet<KermetaUnit> ();
+			    kermetaUnitsToMerge.add(source);
+			    kermetaUnitsToMerge.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(source) );
+			    
+			    IFile file = ResourceHelper.getIFile( uri_unit );
+			    IProject project = file.getProject();
+			    String binDirectory = "platform:/resource" + project.getFullPath().toString() + "/.bin";
+			    
+			    Merger merger = new Merger();
+			    String fileToExecute = merger.process(kermetaUnitsToMerge, binDirectory, null);
+			    
+		    	unit = KermetaUnitChecker.basicCheck( fileToExecute, this, new NullProgressMonitor() );
+	    	}
 	    } catch (KermetaIOFileNotFoundException e) {
 			e.printStackTrace();
 			return;
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
 			return;
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-	    
-	/*	KermetaTypeChecker typechecker = new KermetaTypeChecker( unit, new NullProgressMonitor() );
-		typechecker.checkUnit();
-		
-		if ( ! unit.isErrored() ) {
-			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( unit );
-			constraintchecker.checkUnit();
-		}*/
 		
 		if ( unit.isIndirectlyErroneous() )
 	        throw new KermetaInterpreterError( KermetaUnitHelper.getAllErrorsAsString(unit) );
@@ -134,10 +173,10 @@ public class KermetaInterpreter {
 	 * Constructor for a kermeta unit
 	 * @param unit
 	 */
-	public KermetaInterpreter(String uri_unit)
+	/*public KermetaInterpreter(String uri_unit)
 	{
 		this(uri_unit, null); 
-	}
+	}*/
 	
 
 

@@ -1,4 +1,4 @@
-/* $Id: RunInterpretedTestCase.java,v 1.1 2007-09-10 08:35:10 cfaucher Exp $
+/* $Id: RunInterpretedTestCase.java,v 1.2 2007-10-01 15:16:45 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -72,7 +72,7 @@ public class RunInterpretedTestCase extends TestCase {
         
         if (interpreter == null) {
             System.err.println("Memory before interpreter : " + Runtime.getRuntime().totalMemory());
-           	interpreter = new KermetaInterpreter(containerTestSuite.getUnit());
+           	interpreter = new KermetaInterpreter(containerTestSuite.getUnit().getUri(), "platform:/plugin/fr.irisa.triskell.kermeta.tests/bin", null);
             System.err.println("Memory after interpreter : " + Runtime.getRuntime().totalMemory());
         }
         

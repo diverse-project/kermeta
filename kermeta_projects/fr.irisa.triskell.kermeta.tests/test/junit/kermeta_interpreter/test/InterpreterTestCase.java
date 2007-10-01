@@ -1,4 +1,4 @@
-/* $Id: InterpreterTestCase.java,v 1.1 2007-09-10 08:35:15 cfaucher Exp $
+/* $Id: InterpreterTestCase.java,v 1.2 2007-10-01 15:16:45 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : LoadTest.java
 * License : GPL
@@ -40,7 +40,7 @@ public class InterpreterTestCase extends TestCase {
     	long mem = 0;
         for (int i=0; i<25; i++) {
         	mem = Runtime.getRuntime().totalMemory();
-            KermetaInterpreter inter = new KermetaInterpreter("test/interpreter/kmt_testcases/013_testString.main.kmt");
+            KermetaInterpreter inter = new KermetaInterpreter("test/interpreter/kmt_testcases/013_testString.main.kmt", null);
             inter.launch();
             inter.freeJavaMemory();
             System.err.println(" > Execution " + i + " memory used : " + Runtime.getRuntime().totalMemory() + ";  " + mem);

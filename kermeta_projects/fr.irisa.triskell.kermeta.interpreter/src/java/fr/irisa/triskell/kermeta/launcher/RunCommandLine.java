@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.18 2007-09-07 11:12:00 dvojtise Exp $
+/* $Id: RunCommandLine.java,v 1.19 2007-10-01 15:14:29 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : EPL
@@ -168,7 +168,7 @@ public class RunCommandLine {
 	    //else StdLibKermetaUnitHelper.STD_LIB_URI = kermetaStandardURI;
         
         
-	    theInterpreter = new KermetaInterpreter(unitURI);
+	    theInterpreter = new KermetaInterpreter(unitURI, null);
 	    internalLog.debug("init2");
 	    internalLog.debug ("The arguments not linked to an option are: (will be passed to the interpreter)");
 	    interpreterParameters =  new ArrayList<RuntimeObject>();
