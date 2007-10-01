@@ -1,4 +1,4 @@
-/*$Id: KermetaMarkersHelper.java,v 1.7 2007-08-07 13:29:06 ftanguy Exp $
+/*$Id: KermetaMarkersHelper.java,v 1.8 2007-10-01 15:11:19 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	KermetaMarkersHelper.java
 * License : EPL
@@ -52,12 +52,20 @@ public class KermetaMarkersHelper {
      *  Create markers for showing to the user the elements that are erroneous, or
      *  that are subjects to warnings.
      */
-    public static void createMarkers(IFile file, KermetaUnit unit)
-    {
-    	for (ErrorMessage next : KermetaUnitHelper.getErrors(unit) ) 
-    		createMarkerForKMTFile(file, next, unit);
-    	for (WarningMessage next : KermetaUnitHelper.getWarnings(unit)) 
-    		createMarkerForKMTFile(file, next, unit);
+    public static void createMarkers(IFile file, KermetaUnit unit) {
+    	
+    	if ( unit.getUri().matches(".+\\.kmt") ) {
+	    	for (ErrorMessage next : KermetaUnitHelper.getErrors(unit) ) 
+	    		createMarkerForKMTFile(file, next, unit);
+	    	for (WarningMessage next : KermetaUnitHelper.getWarnings(unit)) 
+	    		createMarkerForKMTFile(file, next, unit);
+    	} else {
+    		for (ErrorMessage next : KermetaUnitHelper.getErrors(unit) ) 
+	    		createError(file, next.getValue());
+	    	for (WarningMessage next : KermetaUnitHelper.getWarnings(unit)) 
+	    		createWarning(file, next.getValue());
+    	}
+    	
     }
 
     /**
