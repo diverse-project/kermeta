@@ -1,4 +1,4 @@
-/*$Id: WorkspaceDeltaVisitor.java,v 1.12 2007-09-04 08:13:05 ftanguy Exp $
+/*$Id: WorkspaceDeltaVisitor.java,v 1.13 2007-10-01 15:15:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -119,7 +119,8 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, Interest {
 				KPMHelper.addOpenDependencyOnKMTFile(currentProject.getKpm(), unit);
 				KPMHelper.addUpdateDependencyOnKMTFile(currentProject.getKpm(), unit);*/
 				KPMHelper.addRules(currentProject.getKpm(), unit);
-				events.add( new EventToDispatch(unit, "update") );
+				if ( ! unit.getValue().matches(".+/\\.bin/.+") )
+					events.add( new EventToDispatch(unit, "update") );
 				//sendEvent("update", unit);
 	    		/*KermetaUnitHost.getInstance().declareInterest(this, unit);
 	    		unit.receiveSynchroneEvent("update", null, new NullProgressMonitor() );
@@ -194,7 +195,8 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, Interest {
 						mustBeUpdated = true;
 					
 					if ( mustBeUpdated )
-						events.add( new EventToDispatch(unit, "update") );
+						if ( ! unit.getValue().matches(".+/\\.bin/.+") )
+							events.add( new EventToDispatch(unit, "update") );
 			//			unit.receiveAsynchroneEvent("update", null, null);
 				}
 			}
