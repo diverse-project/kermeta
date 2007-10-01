@@ -1,5 +1,5 @@
 
-/*$Id: KermetaLauncher.java,v 1.7 2007-09-19 12:19:31 ftanguy Exp $
+/*$Id: KermetaLauncher.java,v 1.8 2007-10-01 15:55:19 cfaucher Exp $
  * Project : fr.irisa.triskell.kermeta
  * File : 	KermetaLauncher.java
  * License : EPL
@@ -85,7 +85,7 @@ public class KermetaLauncher {
 			constraintcheker.checkUnit();
 		}*/
 		
-		if ( ! unit.isIndirectlyErroneous() ) {
+		/*if ( ! unit.isIndirectlyErroneous() ) {
 		
 			try {
 				KermetaInterpreter interpreter = new KermetaInterpreter(unit);
@@ -94,7 +94,7 @@ public class KermetaLauncher {
 			}
 		
 		} else
-			System.out.println( KermetaUnitHelper.getAllErrorsAsString(unit) );
+			System.out.println( KermetaUnitHelper.getAllErrorsAsString(unit) );*/
 		
 		IOPlugin.getDefault().unload( file );
 		
