@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.11 2007-10-01 15:14:43 ftanguy Exp $
+/* $Id: PropertyChecker.java,v 1.12 2007-10-02 15:18:26 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -15,15 +15,19 @@
  */
 package fr.irisa.triskell.kermeta.constraintchecker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
@@ -76,7 +80,8 @@ public class PropertyChecker extends AbstractChecker {
 			checkPropertyMultiplicity() &&
 			checkPropertyIsUnique() &&
 			checkPropertyIsDerived() &&
-			checkPropertyOpposite()
+			checkPropertyOpposite() && 
+			checkPropertiesConformity()
 			;
 		return new Boolean(result);
 	}
@@ -100,14 +105,7 @@ public class PropertyChecker extends AbstractChecker {
 		KermetaUnitHelper.getKermetaUnitFromObject( classDefinition );
 		List <Property> props = ClassDefinitionHelper.getAllProperties(classDefinition);
 		for (Property p : props) {
-			if ( (p != property) && (p.getName().equals(property.getName())) ) {
-					
-				if ( p.isIsDerived() )
-					System.out.println();
-				
-				if ( p.getName().equals("paco") )
-					System.out.println();
-				
+			if ( (p != property) && (p.getName().equals(property.getName())) ) {		
 				ClassDefinition possibleBaseClass = (ClassDefinition) p.eContainer();
 				if ( classDefinition.isIsAspect() && (possibleBaseClass != classDefinition) ) {
 					boolean error = false;
@@ -234,5 +232,41 @@ public class PropertyChecker extends AbstractChecker {
 		 return result;
 	 }
 	 
-	
+	private boolean checkPropertiesConformity() {
+		boolean result = true;
+		KermetaUnitHelper.getKermetaUnitFromObject( classDefinition );
+		List <Property> props = ClassDefinitionHelper.getAllProperties(classDefinition);
+		for (Property p : props) {
+			result = result && checkPropertyConformity(p);
+		}
+		return result;
+	}
+	 
+	 private boolean checkPropertyConformity(Property property) {
+		 boolean result = true;
+		 if ( property.isIsDerived() ) {
+		 
+			 ClassDefinition owner = (ClassDefinition) property.eContainer();
+			 String qualifiedName = NamedElementHelper.getQualifiedName(owner);
+			 for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(builder) ) {
+				 TypeDefinition typeDefinition = unit.getTypeDefinitionByQualifiedName(qualifiedName);
+				 if ( typeDefinition != null && typeDefinition instanceof ClassDefinition ) {
+					 ClassDefinition cd = (ClassDefinition) typeDefinition;
+					 Property p = ClassDefinitionHelper.getPropertyByName(cd, property.getName());
+					 if ( p != property ) {
+						 if ( ! property.isIsGetterAbstract() && ! p.isIsGetterAbstract() ) {
+							 builder.error("Property " + property.getName() + " has redeclared the getter declared in " + unit.getUri() + ".", property.getGetterBody());
+							 result = false;
+						 }
+						 if ( ! property.isIsSetterAbstract() && ! p.isIsSetterAbstract() ) {
+							 builder.error("Property " + property.getName() + " has redeclared the setter declared in " + unit.getUri() + ".", property.getSetterBody());
+							 result = false;
+						 }
+				 	}
+				 }
+			 }
+		 }
+		 return result;
+	 }
+	 
 }
