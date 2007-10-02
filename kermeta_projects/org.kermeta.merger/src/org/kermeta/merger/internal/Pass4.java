@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass4.java,v 1.1 2007-10-01 15:07:49 ftanguy Exp $
+/*$Id: Pass4.java,v 1.2 2007-10-02 15:20:32 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Pass4.java
 * License : EPL
@@ -13,6 +13,7 @@
 package org.kermeta.merger.internal;
 
 import java.io.StringReader;
+import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
@@ -116,8 +117,8 @@ public class Pass4 extends MergePass {
 		
 		for ( Property newProperty : newDefinition.getOwnedAttribute() ) {
 			if ( newProperty.isIsDerived() ) {
-				Property p = context.getBaseProperty(newProperty);
-				setBodies(newProperty, p);
+				//Property p = context.getBaseProperty(newProperty);
+				setBodies(newProperty, newDefinition);
 			}
 				
 		}
@@ -170,7 +171,21 @@ public class Pass4 extends MergePass {
 		context.popContext();
 	}
 	
-	private void setBodies(Property newProperty, Property baseProperty) {
+	private void setBodies(Property newProperty, ClassDefinition definition) {
+		List<Property> properties = context.getProperties(definition, newProperty.getName());
+		for ( Property p : properties ) {
+			if ( p.getGetterBody() != null ) {
+				FExpression node = getNodeExpression( p.getGetterBody() );
+				setGetterBody(newProperty, node);
+			}
+			if ( p.getSetterBody() != null ) {
+				FExpression node = getNodeExpression( p.getSetterBody() );
+				setSetterBody(newProperty, node);
+			}
+		}
+	}
+	
+	/*private void setBodies(Property newProperty, Property baseProperty) {
 		if ( baseProperty.getGetterBody() != null ) {
 			FExpression node = getNodeExpression( baseProperty.getGetterBody() );
 			setGetterBody(newProperty, node);
@@ -179,7 +194,7 @@ public class Pass4 extends MergePass {
 			FExpression node = getNodeExpression( baseProperty.getSetterBody() );
 			setSetterBody(newProperty, node);
 		}
-	}
+	}*/
 	
 	private void setGetterBody(Property newProperty, FExpression node) {
 		Expression expression = KMT2KMExperessionBuilder.process(context, node, kermetaUnit, new NullProgressMonitor());

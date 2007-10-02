@@ -1,6 +1,6 @@
 
 
-/*$Id: MergeContext.java,v 1.1 2007-10-01 15:07:49 ftanguy Exp $
+/*$Id: MergeContext.java,v 1.2 2007-10-02 15:20:32 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	MergeContext.java
 * License : EPL
@@ -94,6 +94,10 @@ public class MergeContext extends LoadingContext {
 		return classDefinitionsContext.get(cd).operationsMapping.get(operationName);
 	}
 	
+	public List<Property> getProperties(ClassDefinition cd, String propertyName) {
+		return classDefinitionsContext.get(cd).propertiesMapping.get(propertyName);
+	}
+	
 	public List<ClassDefinition> getAspects(ClassDefinition cd) {
 		if ( classDefinitionsContext.get(cd) == null )
 			return new ArrayList<ClassDefinition>();
@@ -155,6 +159,15 @@ public class MergeContext extends LoadingContext {
 			classDefinitionsContext.put(cd, context);
 		}
 		context.operationsMapping = mapping;
+	}
+	
+	public void setPropertiesMapping(ClassDefinition cd, Map<String, List<Property>> mapping) {
+		ClassDefinitionContext context = classDefinitionsContext.get(cd);
+		if ( context == null ) {
+			context = new ClassDefinitionContext();
+			classDefinitionsContext.put(cd, context);
+		}
+		context.propertiesMapping = mapping;
 	}
 	
 }

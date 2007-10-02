@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass2.java,v 1.1 2007-10-01 15:07:49 ftanguy Exp $
+/*$Id: Pass2.java,v 1.2 2007-10-02 15:20:32 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Pass2.java
 * License : EPL
@@ -34,7 +34,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
 
 public class Pass2 extends MergePass {
 
@@ -114,6 +113,7 @@ public class Pass2 extends MergePass {
 			list.add(p);
 			mapping.put(p.getName(), list);
 		}
+		context.setPropertiesMapping(t, mapping);
 		
 		/*
 		 * 
@@ -187,8 +187,8 @@ public class Pass2 extends MergePass {
 				
 				if ( result.isIsAbstract() && ! currentOperation.isIsAbstract() )
 					result = currentOperation;
-				else if ( OperationHelper.isOverloadable(result) && ! currentOperation.isIsAbstract() )
-					result = currentOperation;
+				/*else if ( OperationHelper.isOverloadable(result) && ! currentOperation.isIsAbstract() )
+					result = currentOperation;*/
 				
 			}
 			
