@@ -1,4 +1,4 @@
-// $Id: kermeta.ast,v 1.1.2.1 2007/07/04 15:59:32 ftanguy Exp $
+// $Id: $
 
 language Kermeta;
 	
@@ -80,14 +80,14 @@ sequence invariant : "inv" name=ID "is" body=fExpression ;
 
 //sequence attribute : MINUS modifiers typeRef name=ID (EQUALS defaultValueExpr)? SEMI ;
 //abstract property : normalProperty | derivedProperty;
-sequence property : propertyKind  (readOnlyModifier)? name=ID COLON typeRef (HASH oppositeName=ID)? (propertyBody)?;
+sequence property : propertyKind  (readOnlyModifier)? name=ID COLON typeRef (HASH oppositeName=ID)? (getterBody)? (setterBody)?;
 //sequence derivedProperty : derivedPropertyKind (readOnlyModifier)? name=ID COLON typeRef propertyBody;
 //token referenceKind : MINUS_GT | LT_GT | GT_LT ;
 
 token propertyKind : "attribute" | "reference" | "property";
 token readOnlyModifier : "readonly" ;
 
-sequence propertyBody : getterBody (setterBody)? ;
+//sequence propertyBody : getterBody (setterBody)? ;
 
 sequence getterBody : "getter" "is" getterbody = fExpression ;
 sequence setterBody : "setter" "is" setterbody = fExpression ;

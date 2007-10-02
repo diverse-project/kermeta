@@ -318,9 +318,9 @@ invariant returns [ Invariant retVal = null ]
 
 property returns [ Property retVal = null ]
 :
-{ PropertyKind propertyKind = null; ReadOnlyModifier readOnlyModifier = null; TypeRef typeRef = null; PropertyBody propertyBody = null; }
-  propertyKind=propertyKind ( readOnlyModifier=readOnlyModifier )? name:ID colon:COLON typeRef=typeRef ( hash:HASH oppositeName:ID )? ( propertyBody=propertyBody )? 
-{ retVal = new Property(propertyKind, readOnlyModifier, name, colon, typeRef, hash, oppositeName, propertyBody); }
+{ PropertyKind propertyKind = null; ReadOnlyModifier readOnlyModifier = null; TypeRef typeRef = null; GetterBody getterBody = null; SetterBody setterBody = null; }
+  propertyKind=propertyKind ( readOnlyModifier=readOnlyModifier )? name:ID colon:COLON typeRef=typeRef ( hash:HASH oppositeName:ID )? ( getterBody=getterBody )? ( setterBody=setterBody )? 
+{ retVal = new Property(propertyKind, readOnlyModifier, name, colon, typeRef, hash, oppositeName, getterBody, setterBody); }
 ;
 
 propertyKind returns [ PropertyKind retVal = null ]
@@ -337,13 +337,6 @@ readOnlyModifier returns [ ReadOnlyModifier retVal = null ]
 : ( "readonly"
   )
 { retVal = new ReadOnlyModifier(tok); }
-;
-
-propertyBody returns [ PropertyBody retVal = null ]
-:
-{ GetterBody getterBody = null; SetterBody setterBody = null; }
-  getterBody=getterBody ( setterBody=setterBody )? 
-{ retVal = new PropertyBody(getterBody, setterBody); }
 ;
 
 getterBody returns [ GetterBody retVal = null ]
