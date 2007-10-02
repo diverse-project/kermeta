@@ -1,6 +1,6 @@
 /*
  * This code has been generated to visit a kermeta model
- * Creation date: Tue Sep 04 17:43:41 CEST 2007
+ * Creation date: Mon Oct 01 17:35:39 CEST 2007
  * Template Created on feb. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * IRISA / INRIA / University of rennes 1
@@ -74,7 +74,39 @@ public class KermetaVisitor {
 				return result;
 			}
 
-	public Object visit(fr.irisa.triskell.kermeta.language.behavior.Assignment node) {
+	public Object visit(fr.irisa.triskell.kermeta.language.behavior.Conditional node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.behavior.LambdaExpression node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.behavior.LambdaParameter node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.behavior.TypeReference node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.behavior.CallFeature node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.behavior.CallExpression node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.behavior.EmptyExpression node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.behavior.Raise node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.behavior.Rescue node) {
 	return genericVisitChildren(node);
 	}
 
@@ -83,10 +115,6 @@ public class KermetaVisitor {
 	}
 
 	public Object visit(fr.irisa.triskell.kermeta.language.behavior.CallVariable node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.behavior.CallFeature node) {
 	return genericVisitChildren(node);
 	}
 
@@ -99,38 +127,6 @@ public class KermetaVisitor {
 	}
 
 	public Object visit(fr.irisa.triskell.kermeta.language.behavior.CallValue node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.behavior.Conditional node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.behavior.Raise node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.behavior.Rescue node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.behavior.TypeReference node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.behavior.EmptyExpression node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.behavior.LambdaExpression node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.behavior.LambdaParameter node) {
 	return genericVisitChildren(node);
 	}
 
@@ -154,6 +150,18 @@ public class KermetaVisitor {
 	return genericVisitChildren(node);
 	}
 
+	public Object visit(fr.irisa.triskell.kermeta.language.behavior.Assignment node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.behavior.VariableDecl node) {
+	return genericVisitChildren(node);
+	}
+
 	public Object visit(fr.irisa.triskell.kermeta.language.behavior.Loop node) {
 	return genericVisitChildren(node);
 	}
@@ -162,23 +170,11 @@ public class KermetaVisitor {
 	return genericVisitChildren(node);
 	}
 
-	public Object visit(fr.irisa.triskell.kermeta.language.behavior.VariableDecl node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.Class node) {
-	return genericVisitChildren(node);
-	}
-
 	public Object visit(fr.irisa.triskell.kermeta.language.structure.Object node) {
 	return genericVisitChildren(node);
 	}
 
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.Model node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.ModelType node) {
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.MultiplicityElement node) {
 	return genericVisitChildren(node);
 	}
 
@@ -202,7 +198,43 @@ public class KermetaVisitor {
 	return genericVisitChildren(node);
 	}
 
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.MultiplicityElement node) {
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.Class node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.Model node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.ModelType node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.NamedElement node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.TypedElement node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.ClassDefinition node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.FunctionType node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.ProductType node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.Package node) {
 	return genericVisitChildren(node);
 	}
 
@@ -210,11 +242,31 @@ public class KermetaVisitor {
 	return genericVisitChildren(node);
 	}
 
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.Enumeration node) {
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.VoidType node) {
 	return genericVisitChildren(node);
 	}
 
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.Package node) {
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.DataType node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.Require node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.Using node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.ModelingUnit node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.Filter node) {
+	return genericVisitChildren(node);
+	}
+
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.Enumeration node) {
 	return genericVisitChildren(node);
 	}
 
@@ -234,47 +286,11 @@ public class KermetaVisitor {
 	return genericVisitChildren(node);
 	}
 
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.ClassDefinition node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.ModelingUnit node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.Require node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.Using node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.Filter node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable node) {
-	return genericVisitChildren(node);
-	}
-
 	public Object visit(fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable node) {
 	return genericVisitChildren(node);
 	}
 
 	public Object visit(fr.irisa.triskell.kermeta.language.structure.VirtualType node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.ProductType node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.FunctionType node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.VoidType node) {
 	return genericVisitChildren(node);
 	}
 

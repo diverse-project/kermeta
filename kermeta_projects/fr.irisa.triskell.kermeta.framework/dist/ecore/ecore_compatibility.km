@@ -8,12 +8,12 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute name="eStructuralFeatureName" type="//@packages.0/ecore/EFeatureMapEntry/eStructuralFeatureName/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute name="eStructuralFeatureName" type="//@packages.0/ecore/EFeatureMapEntry/eStructuralFeatureName/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
         </ownedAttribute>
-        <ownedAttribute name="value" type="//@packages.0/ecore/EFeatureMapEntry/value/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute name="value" type="//@packages.0/ecore/EFeatureMapEntry/value/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
           </containedType>

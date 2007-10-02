@@ -8,15 +8,15 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/exceptions/Exception/message/@ownedTag.0" name="message" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/exceptions/Exception/message/@ownedTag.0" name="message" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/** The message attached to the exception     */" object="//@packages.0/exceptions/Exception/message"/>
           <type href="../language/structure.km#//@packages.0/language/structure/Object/set/@body/@statement.0/@elseBody/@statement.1/@target/@containedType.0"/>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/exceptions/Exception/nestedException/@ownedTag.0" name="nestedException" type="//@packages.0/exceptions/Exception/nestedException/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/exceptions/Exception/nestedException/@ownedTag.0" name="nestedException" type="//@packages.0/exceptions/Exception/nestedException/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/** Any nested exception     */" object="//@packages.0/exceptions/Exception/nestedException"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/exceptions/Exception"/>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/exceptions/Exception/stackTrace/@ownedTag.0" name="stackTrace" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/exceptions/Exception/stackTrace/@ownedTag.0" name="stackTrace" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/**&#xA;     * The stack trace as a String&#xA;     * Filled by the interpreted when the exception is raised&#xA;     */" object="//@packages.0/exceptions/Exception/stackTrace"/>
           <type href="../kunit/kunit.km#//@packages.0/kunit/Error/toString/@body/@statement.3/@thenBody/@statement.0/@value/@parameters.0/@containedType.0"/>
         </ownedAttribute>
@@ -24,7 +24,7 @@
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/exceptions/RuntimeError/@ownedTag.0" name="RuntimeError" superType="//@packages.0/exceptions/RuntimeError/@containedType.0">
         <ownedTag value="/** Exception for interpreter exceptions */" object="//@packages.0/exceptions/RuntimeError"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/exceptions/Exception"/>
-        <ownedAttribute tag="//@packages.0/exceptions/RuntimeError/expression/@ownedTag.0" name="expression" type="//@packages.0/exceptions/RuntimeError/expression/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/exceptions/RuntimeError/expression/@ownedTag.0" name="expression" type="//@packages.0/exceptions/RuntimeError/expression/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/** The code that raised the exception */" object="//@packages.0/exceptions/RuntimeError/expression"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/behavior.km#//@packages.0/language/behavior/Expression"/>

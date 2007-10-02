@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackageImpl.java,v 1.19 2007-08-07 13:35:04 ftanguy Exp $
+ * $Id: StructurePackageImpl.java,v 1.20 2007-10-02 15:15:46 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -655,8 +655,26 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getProperty_IsGetterAbstract() {
+		return (EAttribute)propertyEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_IsSetterAbstract() {
+		return (EAttribute)propertyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getProperty_OwningClass() {
-		return (EReference)propertyEClass.getEStructuralFeatures().get(2);
+		return (EReference)propertyEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -665,7 +683,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getProperty_Opposite() {
-		return (EReference)propertyEClass.getEStructuralFeatures().get(3);
+		return (EReference)propertyEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -674,24 +692,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EAttribute getProperty_IsReadOnly() {
-		return (EAttribute)propertyEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getProperty_Default() {
-		return (EAttribute)propertyEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getProperty_IsComposite() {
 		return (EAttribute)propertyEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -700,7 +700,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getProperty_IsDerived() {
+	public EAttribute getProperty_Default() {
 		return (EAttribute)propertyEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -709,8 +709,26 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getProperty_IsID() {
+	public EAttribute getProperty_IsComposite() {
 		return (EAttribute)propertyEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_IsDerived() {
+		return (EAttribute)propertyEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_IsID() {
+		return (EAttribute)propertyEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -1647,6 +1665,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		propertyEClass = createEClass(PROPERTY);
 		createEReference(propertyEClass, PROPERTY__GETTER_BODY);
 		createEReference(propertyEClass, PROPERTY__SETTER_BODY);
+		createEAttribute(propertyEClass, PROPERTY__IS_GETTER_ABSTRACT);
+		createEAttribute(propertyEClass, PROPERTY__IS_SETTER_ABSTRACT);
 		createEReference(propertyEClass, PROPERTY__OWNING_CLASS);
 		createEReference(propertyEClass, PROPERTY__OPPOSITE);
 		createEAttribute(propertyEClass, PROPERTY__IS_READ_ONLY);
@@ -1917,6 +1937,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProperty_GetterBody(), theBehaviorPackage.getExpression(), null, "getterBody", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProperty_SetterBody(), theBehaviorPackage.getExpression(), null, "setterBody", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_IsGetterAbstract(), this.getBoolean(), "isGetterAbstract", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_IsSetterAbstract(), this.getBoolean(), "isSetterAbstract", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProperty_OwningClass(), this.getClassDefinition(), this.getClassDefinition_OwnedAttribute(), "owningClass", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProperty_Opposite(), this.getProperty(), null, "opposite", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProperty_IsReadOnly(), this.getBoolean(), "isReadOnly", "false", 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

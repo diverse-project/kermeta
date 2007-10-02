@@ -2,7 +2,7 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
   <ecore:EAnnotation source="CompilationUnit">
     <details key="require" value="../Standard.kmt|assert.kmt|"/>
-    <details key="using" value="kermeta::standard|kermeta::utils|kermeta|kermeta::reflection|kermeta::kunit|kermeta::kunit|"/>
+    <details key="using" value="kermeta::standard|kermeta::utils|kermeta|kermeta::reflection|kermeta::kunit|"/>
   </ecore:EAnnotation>
   <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="kunit" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#//kunit" nsPrefix="kunit">
@@ -548,9 +548,9 @@
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
+    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../reflection/reflection.ecore#/2"/>
@@ -564,6 +564,7 @@
     <references href="assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
@@ -574,6 +575,7 @@
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>
@@ -581,7 +583,6 @@
     <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/2"/>

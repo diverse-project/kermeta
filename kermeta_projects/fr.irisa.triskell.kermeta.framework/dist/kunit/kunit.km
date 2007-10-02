@@ -20,7 +20,7 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="assert.km#//@packages.0/kunit/AbstractFallible"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/kunit/Fallible/rank/@ownedTag.0" name="rank" type="//@packages.0/kunit/Fallible/rank/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/kunit/Fallible/rank/@ownedTag.0" name="rank" type="//@packages.0/kunit/Fallible/rank/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/**&#xA;   * counter of assertions in the test method&#xA;   */" object="//@packages.0/kunit/Fallible/rank"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Integer"/>
@@ -353,21 +353,21 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/kunit/Log/runtests/@ownedTag.0" name="runtests" type="//@packages.0/kunit/Log/runtests/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/kunit/Log/runtests/@ownedTag.0" name="runtests" type="//@packages.0/kunit/Log/runtests/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/**&#xA;  * number of test that were run&#xA;  */" object="//@packages.0/kunit/Log/runtests"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Integer"/>
           </containedType>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/kunit/Log/failures/@ownedTag.0" name="failures" type="//@packages.0/kunit/Log/failures/@containedType.0" isOrdered="true" upper="-1">
+        <ownedAttribute tag="//@packages.0/kunit/Log/failures/@ownedTag.0" name="failures" type="//@packages.0/kunit/Log/failures/@containedType.0" isOrdered="true" upper="-1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/** &#xA;  * list of detected assertion failures&#xA;  */" object="//@packages.0/kunit/Log/failures"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Failure"/>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/kunit/Log/errors/@ownedTag.0" name="errors" type="//@packages.0/kunit/Log/errors/@containedType.0" isOrdered="true" upper="-1">
+        <ownedAttribute tag="//@packages.0/kunit/Log/errors/@ownedTag.0" name="errors" type="//@packages.0/kunit/Log/errors/@containedType.0" isOrdered="true" upper="-1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;  * list of detected test errors&#xA;  */" object="//@packages.0/kunit/Log/errors"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Error"/>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/kunit/Log/harnessErrors/@ownedTag.0" name="harnessErrors" type="//@packages.0/kunit/Log/harnessErrors/@containedType.0" isOrdered="true" upper="-1">
+        <ownedAttribute tag="//@packages.0/kunit/Log/harnessErrors/@ownedTag.0" name="harnessErrors" type="//@packages.0/kunit/Log/harnessErrors/@containedType.0" isOrdered="true" upper="-1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA; * list of detected errors with the test harness&#xA; */" object="//@packages.0/kunit/Log/harnessErrors"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Error"/>
         </ownedAttribute>
@@ -562,11 +562,11 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/kunit/Failure/failure/@ownedTag.0" name="failure" type="//@packages.0/kunit/Failure/failure/@containedType.0" isOrdered="true" upper="1">
+        <ownedAttribute tag="//@packages.0/kunit/Failure/failure/@ownedTag.0" name="failure" type="//@packages.0/kunit/Failure/failure/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;  * the stored failure&#xA;  */" object="//@packages.0/kunit/Failure/failure"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Fallible"/>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/kunit/Failure/message/@ownedTag.0" name="message" type="//@packages.0/kunit/Failure/message/@containedType.0" isOrdered="true" upper="1">
+        <ownedAttribute tag="//@packages.0/kunit/Failure/message/@ownedTag.0" name="message" type="//@packages.0/kunit/Failure/message/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;  * the stored message (given or generated one)&#xA;  */" object="//@packages.0/kunit/Failure/message"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
@@ -637,17 +637,17 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/kunit/Error/error/@ownedTag.0" name="error" type="//@packages.0/kunit/Error/error/@containedType.0" isOrdered="true" upper="1">
+        <ownedAttribute tag="//@packages.0/kunit/Error/error/@ownedTag.0" name="error" type="//@packages.0/kunit/Error/error/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;  * the stored error&#xA;  */" object="//@packages.0/kunit/Error/error"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Fallible"/>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/kunit/Error/exception/@ownedTag.0" name="exception" type="//@packages.0/kunit/Error/exception/@containedType.0" isOrdered="true" upper="1">
+        <ownedAttribute tag="//@packages.0/kunit/Error/exception/@ownedTag.0" name="exception" type="//@packages.0/kunit/Error/exception/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;  * the Kermeta exception corresponding to the error&#xA;  */" object="//@packages.0/kunit/Error/exception"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
           </containedType>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/kunit/Error/kind/@ownedTag.0" name="kind" type="//@packages.0/kunit/ErrorKind" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/kunit/Error/kind/@ownedTag.0" name="kind" type="//@packages.0/kunit/ErrorKind" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/**&#xA;  * the nature of the stored error&#xA;  */" object="//@packages.0/kunit/Error/kind"/>
         </ownedAttribute>
         <ownedOperation tag="//@packages.0/kunit/Error/initFrom/@ownedTag.0" name="initFrom" type="//@packages.0/kunit/Log/addTestError/@body/@statement.0/@parameters.0/@containedType.0" isOrdered="true" upper="1">
@@ -944,7 +944,7 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/kunit/Test/log/@ownedTag.0" name="log" type="//@packages.0/kunit/Test/log/@containedType.0" isOrdered="true" upper="1">
+        <ownedAttribute tag="//@packages.0/kunit/Test/log/@ownedTag.0" name="log" type="//@packages.0/kunit/Test/log/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;     * where failures and errors will be put &#xA;     */" object="//@packages.0/kunit/Test/log"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Log"/>
         </ownedAttribute>
@@ -1030,7 +1030,7 @@
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/TestSuite/@ownedTag.0" name="TestSuite" superType="//@packages.0/kunit/TestSuite/@containedType.0">
         <ownedTag value="/**&#xA; * A TestSuite is a structured collection of tests, using the&#xA; * composite pattern, all tests are runnable and have a log&#xA; * In addition a suite can be populated automatically from a&#xA; * test case class with one test case object for each test&#xA; * method in the class.&#xA; *  You can make a suite and populate it manually like this:&#xA; *&#xA; *  var suite : TestSuite init TestSuite.new.&#xA; *  suite.tests.add(t1)&#xA; *&#xA; *  Alternatively you can populate a suite automatically from&#xA; *  a class that inherits TestCase and which has several methods&#xA; *  called test:&#xA; *&#xA; *  var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)&#xA; */" object="//@packages.0/kunit/TestSuite"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Test"/>
-        <ownedAttribute tag="//@packages.0/kunit/TestSuite/tests/@ownedTag.0" name="tests" type="//@packages.0/kunit/TestSuite/tests/@containedType.0" isOrdered="true" upper="-1">
+        <ownedAttribute tag="//@packages.0/kunit/TestSuite/tests/@ownedTag.0" name="tests" type="//@packages.0/kunit/TestSuite/tests/@containedType.0" isOrdered="true" upper="-1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;  * The collection of tests which will be ran as the suite&#xA;  */" object="//@packages.0/kunit/TestSuite/tests"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Test"/>
         </ownedAttribute>
@@ -1570,7 +1570,7 @@
         <ownedTag value="/**&#xA; * A test case comprises one or more test methods plus&#xA; * setUp and tearDown that build and destroy their test harness.&#xA; * An instance of a subclass of TestCase should have its&#xA; * testMethodName set to the name of one of its operations&#xA; * which should be called whe the test is run. You can do this&#xA; * yourself:&#xA; *&#xA; * var testCase : TestCase init MyTestCaseClass.new.setTestMethodName(&quot;testSomething&quot;)&#xA; *&#xA; * Alternatively if your TestCase Class has many methods whose&#xA; * name begins with 'test' you can create a set of instaces already&#xA; * set up with their testMethodName using the addAllTestCasesFrom&#xA; * operation on TestSuite&#xA; */" object="//@packages.0/kunit/TestCase"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Test"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Fallible"/>
-        <ownedAttribute tag="//@packages.0/kunit/TestCase/__testMethodName/@ownedTag.0" name="__testMethodName" type="//@packages.0/kunit/TestCase/__testMethodName/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/kunit/TestCase/__testMethodName/@ownedTag.0" name="__testMethodName" type="//@packages.0/kunit/TestCase/__testMethodName/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/**&#xA;  * the name of the method which corresponds to the test case in the test class&#xA;  */" object="//@packages.0/kunit/TestCase/__testMethodName"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
@@ -2044,7 +2044,7 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/kunit/TestRunner/log/@ownedTag.0" name="log" type="//@packages.0/kunit/TestRunner/log/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/kunit/TestRunner/log/@ownedTag.0" name="log" type="//@packages.0/kunit/TestRunner/log/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/**&#xA;  * Where to register the failures and errors&#xA;  */" object="//@packages.0/kunit/TestRunner/log"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/Log"/>
         </ownedAttribute>
@@ -2458,7 +2458,6 @@
   <usings qualifiedName="kermeta::utils"/>
   <usings qualifiedName="kermeta"/>
   <usings qualifiedName="kermeta::reflection"/>
-  <usings qualifiedName="kermeta::kunit"/>
   <usings qualifiedName="kermeta::kunit"/>
   <referencedModelingUnits href="../Standard.km#/"/>
   <referencedModelingUnits href="../standard/collections.km#/"/>

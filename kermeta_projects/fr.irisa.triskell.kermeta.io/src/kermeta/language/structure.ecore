@@ -267,7 +267,6 @@
         <eClassifiers xsi:type="ecore:EClass" name="ModelType">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * Implements kermeta::reflection::ModelType&#xA; */"/>
-            <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Type"/>
           <eSuperTypes href="#/1/language/structure/TypeDefinition"/>
@@ -632,7 +631,6 @@
         <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeVariable">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * Implements kermeta::reflection::ObjectTypeVariable&#xA; */"/>
-            <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
           <eSuperTypes href="#/1/language/structure/TypeVariable"/>
@@ -656,7 +654,6 @@
         <eClassifiers xsi:type="ecore:EClass" name="VirtualType">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * Implements kermeta::reflection::VirtualType&#xA; */"/>
-            <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/ObjectTypeVariable"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/VirtualType"/>
@@ -679,7 +676,6 @@
         <eClassifiers xsi:type="ecore:EClass" name="ModelTypeVariable">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * Implements kermeta::reflection::ModelTypeVariable&#xA; */"/>
-            <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeVariable"/>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
@@ -787,7 +783,6 @@
         <eClassifiers xsi:type="ecore:EClass" name="ProductType">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * Implements kermeta::reflection::ProductType&#xA; */"/>
-            <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
           <eSuperTypes href="#/1/language/structure/Type"/>
@@ -811,7 +806,6 @@
         <eClassifiers xsi:type="ecore:EClass" name="FunctionType">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * Implements kermeta::reflection::FunctionType&#xA; */"/>
-            <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
           <eSuperTypes href="#/1/language/structure/Type"/>
@@ -835,7 +829,6 @@
         <eClassifiers xsi:type="ecore:EClass" name="Type">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * Implements kermeta::reflection::Type&#xA; */"/>
-            <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Object"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Type"/>
@@ -906,7 +899,6 @@
         <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * Implements kermeta::reflection::PrimitiveType&#xA; */"/>
-            <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
           <eSuperTypes href="#/1/language/structure/DataType"/>
@@ -1110,7 +1102,6 @@
         <eClassifiers xsi:type="ecore:EClass" name="VoidType">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * Implements kermeta::reflection::VoidType&#xA; */"/>
-            <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Type"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/VoidType"/>
@@ -1133,7 +1124,6 @@
         <eClassifiers xsi:type="ecore:EClass" name="DataType">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * Implements kermeta::reflection::DataType&#xA; */"/>
-            <details key="isSemanticallyAbstract" value="clone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeDefinition"/>
           <eSuperTypes href="#/1/language/structure/Type"/>
@@ -1165,7 +1155,6 @@
         <eClassifiers xsi:type="ecore:EClass" name="Enumeration">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA; * Implements kermeta::reflection::Enumeration&#xA; */"/>
-            <details key="isSemanticallyAbstract" value="deepClone"/>
           </eAnnotations>
           <eSuperTypes href="#/1/language/structure/DataType"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Enumeration"/>
@@ -1634,10 +1623,13 @@
     <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="behavior.ecore#/0"/>
     <references href="behavior.ecore#/1"/>
+    <references href="behavior.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../reflection/reflection.ecore#/2"/>
@@ -1648,10 +1640,13 @@
     <references href="reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
+    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
@@ -1662,6 +1657,7 @@
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="dynamic_expression.ecore#/0"/>
     <references href="dynamic_expression.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>

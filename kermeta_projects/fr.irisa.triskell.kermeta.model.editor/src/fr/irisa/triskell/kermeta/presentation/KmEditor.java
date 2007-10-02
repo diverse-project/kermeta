@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmEditor.java,v 1.6 2007-07-24 08:50:53 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.7 2007-10-02 15:15:59 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -945,8 +945,8 @@ public class KmEditor
 			//
 			resource = editingDomain.getResourceSet().getResource(resourceURI, true);
 			// Added CF in order to force the loading of framework.km when we open a km file
-			KermetaUnit kermetaUnit = IOPlugin.getDefault().getFramework();
-			editingDomain.getResourceSet().getResources().add( kermetaUnit.getModelingUnit().eResource() );
+			//KermetaUnit kermetaUnit = IOPlugin.getDefault().getFramework();
+			//editingDomain.getResourceSet().getResources().add( kermetaUnit.getModelingUnit().eResource() );
 		}
 		catch (Exception e) {
 			exception = e;

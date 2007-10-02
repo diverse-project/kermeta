@@ -2,7 +2,7 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/standard/@ownedTag.0" name="standard">
-      <ownedTag value="/**&#xA; * $Id: java.km,v 1.13 2007-10-01 15:14:43 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */" object="//@packages.0/standard"/>
+      <ownedTag value="/**&#xA; * $Id: java.km,v 1.14 2007-10-02 15:15:41 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */" object="//@packages.0/standard"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/UnknownJavaObject/@ownedTag.0" name="UnknownJavaObject" superType="//@packages.0/standard/UnknownJavaObject/@containedType.0">
         <ownedTag value="/** &#xA;  * This special object is used to represent java object that cannot be concretly used with kermeta&#xA;  * the only actions possible on these objects are : assignment and passing them as parameter&#xA;  */" object="//@packages.0/standard/UnknownJavaObject"/>
         <containedType xsi:type="kermeta_language_structure:Class">
@@ -28,7 +28,7 @@
     </nestedPackage>
   </packages>
   <requires tag="//@requires.0/@ownedTag.0" uri="primitive_types.kmt">
-    <ownedTag value="/**&#xA; * $Id: java.km,v 1.13 2007-10-01 15:14:43 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */" object="//@requires.0"/>
+    <ownedTag value="/**&#xA; * $Id: java.km,v 1.14 2007-10-02 15:15:41 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */" object="//@requires.0"/>
   </requires>
   <usings qualifiedName="kermeta::exceptions"/>
   <usings qualifiedName="kermeta::standard"/>

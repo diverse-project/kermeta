@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackage.java,v 1.14 2007-08-07 13:35:03 ftanguy Exp $
+ * $Id: StructurePackage.java,v 1.15 2007-10-02 15:15:46 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -606,13 +606,31 @@ public interface StructurePackage extends EPackage {
 	int PROPERTY__SETTER_BODY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Is Getter Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__IS_GETTER_ABSTRACT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Is Setter Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__IS_SETTER_ABSTRACT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__OWNING_CLASS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 2;
+	int PROPERTY__OWNING_CLASS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Opposite</b></em>' reference.
@@ -621,7 +639,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__OPPOSITE = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 3;
+	int PROPERTY__OPPOSITE = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Is Read Only</b></em>' attribute.
@@ -630,7 +648,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__IS_READ_ONLY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 4;
+	int PROPERTY__IS_READ_ONLY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Default</b></em>' attribute.
@@ -639,7 +657,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__DEFAULT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 5;
+	int PROPERTY__DEFAULT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Is Composite</b></em>' attribute.
@@ -648,7 +666,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__IS_COMPOSITE = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 6;
+	int PROPERTY__IS_COMPOSITE = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Is Derived</b></em>' attribute.
@@ -657,7 +675,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__IS_DERIVED = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 7;
+	int PROPERTY__IS_DERIVED = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Is ID</b></em>' attribute.
@@ -666,7 +684,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__IS_ID = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 8;
+	int PROPERTY__IS_ID = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Property</em>' class.
@@ -675,7 +693,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 9;
+	int PROPERTY_FEATURE_COUNT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeImpl <em>Type</em>}' class.
@@ -3154,6 +3172,28 @@ public interface StructurePackage extends EPackage {
 	EReference getProperty_SetterBody();
 
 	/**
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsGetterAbstract <em>Is Getter Abstract</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Getter Abstract</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.Property#isIsGetterAbstract()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EAttribute getProperty_IsGetterAbstract();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsSetterAbstract <em>Is Setter Abstract</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Setter Abstract</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.Property#isIsSetterAbstract()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EAttribute getProperty_IsSetterAbstract();
+
+	/**
 	 * Returns the meta object for the container reference '{@link fr.irisa.triskell.kermeta.language.structure.Property#getOwningClass <em>Owning Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4467,6 +4507,22 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROPERTY__SETTER_BODY = eINSTANCE.getProperty_SetterBody();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Getter Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY__IS_GETTER_ABSTRACT = eINSTANCE.getProperty_IsGetterAbstract();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Setter Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY__IS_SETTER_ABSTRACT = eINSTANCE.getProperty_IsSetterAbstract();
 
 		/**
 		 * The meta object literal for the '<em><b>Owning Class</b></em>' container reference feature.

@@ -747,9 +747,8 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/ParameterizedType/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/ModelType/@ownedTag.0 //@packages.0/language/structure/ModelType/@ownedTag.1" name="ModelType" superType="//@packages.0/language/structure/ModelType/@containedType.0 //@packages.0/language/structure/ModelType/@containedType.1 //@packages.0/language/structure/ModelType/@containedType.2 //@packages.0/language/structure/ModelType/@containedType.3">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/ModelType/@ownedTag.0" name="ModelType" superType="//@packages.0/language/structure/ModelType/@containedType.0 //@packages.0/language/structure/ModelType/@containedType.1 //@packages.0/language/structure/ModelType/@containedType.2 //@packages.0/language/structure/ModelType/@containedType.3">
           <ownedTag value="/**&#xA; * Implements kermeta::reflection::ModelType&#xA; */" object="//@packages.0/language/structure/ModelType"/>
-          <ownedTag name="isSemanticallyAbstract" value="clone" object="//@packages.0/language/structure/ModelType"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeDefinition"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -996,13 +995,13 @@
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Operation"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
-          <ownedAttribute tag="//@packages.0/language/structure/Constraint/language/@ownedTag.0" name="language" type="//@packages.0/language/structure/ConstraintLanguage" isOrdered="true" upper="1" isComposite="true">
+          <ownedAttribute tag="//@packages.0/language/structure/Constraint/language/@ownedTag.0" name="language" type="//@packages.0/language/structure/ConstraintLanguage" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
             <ownedTag value="/**&#xA;   * Language in which the constraint is expressed&#xA;   */" object="//@packages.0/language/structure/Constraint/language"/>
           </ownedAttribute>
-          <ownedAttribute tag="//@packages.0/language/structure/Constraint/stereotype/@ownedTag.0" name="stereotype" type="//@packages.0/language/structure/ConstraintType" isOrdered="true" upper="1" isComposite="true">
+          <ownedAttribute tag="//@packages.0/language/structure/Constraint/stereotype/@ownedTag.0" name="stereotype" type="//@packages.0/language/structure/ConstraintType" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
             <ownedTag value="/**&#xA;   * Type of the Constraint (precond/postcond/inv)&#xA;   */" object="//@packages.0/language/structure/Constraint/stereotype"/>
           </ownedAttribute>
-          <ownedAttribute tag="//@packages.0/language/structure/Constraint/body/@ownedTag.0" name="body" type="//@packages.0/language/structure/Constraint/body/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+          <ownedAttribute tag="//@packages.0/language/structure/Constraint/body/@ownedTag.0" name="body" type="//@packages.0/language/structure/Constraint/body/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
             <ownedTag value="/**&#xA;   * Body of the constraint, expressed as a KerMeta expression&#xA;   */" object="//@packages.0/language/structure/Constraint/body"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="behavior.km#//@packages.0/language/behavior/Expression"/>
@@ -1051,7 +1050,7 @@
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Operation"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
-          <ownedAttribute tag="//@packages.0/language/structure/Operation/body/@ownedTag.0" name="body" type="//@packages.0/language/structure/Operation/body/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+          <ownedAttribute tag="//@packages.0/language/structure/Operation/body/@ownedTag.0" name="body" type="//@packages.0/language/structure/Operation/body/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
             <ownedTag value="/**&#xA;   * Body of the Operation, expressed as a KerMeta expression&#xA;   */" object="//@packages.0/language/structure/Operation/body"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="behavior.km#//@packages.0/language/behavior/Expression"/>
@@ -1121,13 +1120,13 @@
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Property"/>
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
-          <ownedAttribute tag="//@packages.0/language/structure/Property/getterBody/@ownedTag.0" name="getterBody" type="//@packages.0/language/structure/Property/getterBody/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+          <ownedAttribute tag="//@packages.0/language/structure/Property/getterBody/@ownedTag.0" name="getterBody" type="//@packages.0/language/structure/Property/getterBody/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
             <ownedTag value="/**&#xA;   * To be written ################################&#xA;   */" object="//@packages.0/language/structure/Property/getterBody"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="behavior.km#//@packages.0/language/behavior/Expression"/>
             </containedType>
           </ownedAttribute>
-          <ownedAttribute tag="//@packages.0/language/structure/Property/setterBody/@ownedTag.0" name="setterBody" type="//@packages.0/language/structure/Property/setterBody/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+          <ownedAttribute tag="//@packages.0/language/structure/Property/setterBody/@ownedTag.0" name="setterBody" type="//@packages.0/language/structure/Property/setterBody/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
             <ownedTag value="/**&#xA;   * To be written ####################################&#xA;   */" object="//@packages.0/language/structure/Property/setterBody"/>
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="behavior.km#//@packages.0/language/behavior/Expression"/>
@@ -1279,9 +1278,8 @@
           </containedType>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/KMStructureVisitable"/>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/ObjectTypeVariable/@ownedTag.0 //@packages.0/language/structure/ObjectTypeVariable/@ownedTag.1" name="ObjectTypeVariable" superType="//@packages.0/language/structure/ObjectTypeVariable/@containedType.0 //@packages.0/language/structure/ObjectTypeVariable/@containedType.1 //@packages.0/language/structure/ObjectTypeVariable/@containedType.2 //@packages.0/language/structure/ObjectTypeVariable/@containedType.3">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/ObjectTypeVariable/@ownedTag.0" name="ObjectTypeVariable" superType="//@packages.0/language/structure/ObjectTypeVariable/@containedType.0 //@packages.0/language/structure/ObjectTypeVariable/@containedType.1 //@packages.0/language/structure/ObjectTypeVariable/@containedType.2 //@packages.0/language/structure/ObjectTypeVariable/@containedType.3">
           <ownedTag value="/**&#xA; * Implements kermeta::reflection::ObjectTypeVariable&#xA; */" object="//@packages.0/language/structure/ObjectTypeVariable"/>
-          <ownedTag name="isSemanticallyAbstract" value="clone" object="//@packages.0/language/structure/ObjectTypeVariable"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeVariable"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -1313,9 +1311,8 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/ObjectTypeVariable/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/VirtualType/@ownedTag.0 //@packages.0/language/structure/VirtualType/@ownedTag.1" name="VirtualType" superType="//@packages.0/language/structure/VirtualType/@containedType.0 //@packages.0/language/structure/VirtualType/@containedType.1 //@packages.0/language/structure/VirtualType/@containedType.2">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/VirtualType/@ownedTag.0" name="VirtualType" superType="//@packages.0/language/structure/VirtualType/@containedType.0 //@packages.0/language/structure/VirtualType/@containedType.1 //@packages.0/language/structure/VirtualType/@containedType.2">
           <ownedTag value="/**&#xA; * Implements kermeta::reflection::VirtualType&#xA; */" object="//@packages.0/language/structure/VirtualType"/>
-          <ownedTag name="isSemanticallyAbstract" value="clone" object="//@packages.0/language/structure/VirtualType"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/ObjectTypeVariable"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/VirtualType"/>
@@ -1346,9 +1343,8 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/VirtualType/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/ModelTypeVariable/@ownedTag.0 //@packages.0/language/structure/ModelTypeVariable/@ownedTag.1" name="ModelTypeVariable" superType="//@packages.0/language/structure/ModelTypeVariable/@containedType.0 //@packages.0/language/structure/ModelTypeVariable/@containedType.1 //@packages.0/language/structure/ModelTypeVariable/@containedType.2 //@packages.0/language/structure/ModelTypeVariable/@containedType.3">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/ModelTypeVariable/@ownedTag.0" name="ModelTypeVariable" superType="//@packages.0/language/structure/ModelTypeVariable/@containedType.0 //@packages.0/language/structure/ModelTypeVariable/@containedType.1 //@packages.0/language/structure/ModelTypeVariable/@containedType.2 //@packages.0/language/structure/ModelTypeVariable/@containedType.3">
           <ownedTag value="/**&#xA; * Implements kermeta::reflection::ModelTypeVariable&#xA; */" object="//@packages.0/language/structure/ModelTypeVariable"/>
-          <ownedTag name="isSemanticallyAbstract" value="clone" object="//@packages.0/language/structure/ModelTypeVariable"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeVariable"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/VirtualTypeContainer"/>
@@ -1642,9 +1638,8 @@
             <ownedParameter name="objectToAdd" type="//@packages.0/language/structure/Model/addCompatible/@body/@statement.1/@value/@parameters.1/@containedType.0" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/ProductType/@ownedTag.0 //@packages.0/language/structure/ProductType/@ownedTag.1" name="ProductType" superType="//@packages.0/language/structure/ProductType/@containedType.0 //@packages.0/language/structure/ProductType/@containedType.1 //@packages.0/language/structure/ProductType/@containedType.2 //@packages.0/language/structure/ProductType/@containedType.3">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/ProductType/@ownedTag.0" name="ProductType" superType="//@packages.0/language/structure/ProductType/@containedType.0 //@packages.0/language/structure/ProductType/@containedType.1 //@packages.0/language/structure/ProductType/@containedType.2 //@packages.0/language/structure/ProductType/@containedType.3">
           <ownedTag value="/**&#xA; * Implements kermeta::reflection::ProductType&#xA; */" object="//@packages.0/language/structure/ProductType"/>
-          <ownedTag name="isSemanticallyAbstract" value="clone" object="//@packages.0/language/structure/ProductType"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -1676,9 +1671,8 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/ProductType/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/FunctionType/@ownedTag.0 //@packages.0/language/structure/FunctionType/@ownedTag.1" name="FunctionType" superType="//@packages.0/language/structure/FunctionType/@containedType.0 //@packages.0/language/structure/FunctionType/@containedType.1 //@packages.0/language/structure/FunctionType/@containedType.2 //@packages.0/language/structure/FunctionType/@containedType.3">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/FunctionType/@ownedTag.0" name="FunctionType" superType="//@packages.0/language/structure/FunctionType/@containedType.0 //@packages.0/language/structure/FunctionType/@containedType.1 //@packages.0/language/structure/FunctionType/@containedType.2 //@packages.0/language/structure/FunctionType/@containedType.3">
           <ownedTag value="/**&#xA; * Implements kermeta::reflection::FunctionType&#xA; */" object="//@packages.0/language/structure/FunctionType"/>
-          <ownedTag name="isSemanticallyAbstract" value="clone" object="//@packages.0/language/structure/FunctionType"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -1710,9 +1704,8 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/FunctionType/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Type/@ownedTag.0 //@packages.0/language/structure/Type/@ownedTag.1" name="Type" superType="//@packages.0/language/structure/Type/@containedType.0 //@packages.0/language/structure/Type/@containedType.1 //@packages.0/language/structure/Type/@containedType.2">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Type/@ownedTag.0" name="Type" superType="//@packages.0/language/structure/Type/@containedType.0 //@packages.0/language/structure/Type/@containedType.1 //@packages.0/language/structure/Type/@containedType.2">
           <ownedTag value="/**&#xA; * Implements kermeta::reflection::Type&#xA; */" object="//@packages.0/language/structure/Type"/>
-          <ownedTag name="isSemanticallyAbstract" value="clone" object="//@packages.0/language/structure/Type"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Type"/>
@@ -1816,9 +1809,8 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/TypeVariableBinding/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/PrimitiveType/@ownedTag.0 //@packages.0/language/structure/PrimitiveType/@ownedTag.1" name="PrimitiveType" superType="//@packages.0/language/structure/PrimitiveType/@containedType.0 //@packages.0/language/structure/PrimitiveType/@containedType.1 //@packages.0/language/structure/PrimitiveType/@containedType.2 //@packages.0/language/structure/PrimitiveType/@containedType.3">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/PrimitiveType/@ownedTag.0" name="PrimitiveType" superType="//@packages.0/language/structure/PrimitiveType/@containedType.0 //@packages.0/language/structure/PrimitiveType/@containedType.1 //@packages.0/language/structure/PrimitiveType/@containedType.2 //@packages.0/language/structure/PrimitiveType/@containedType.3">
           <ownedTag value="/**&#xA; * Implements kermeta::reflection::PrimitiveType&#xA; */" object="//@packages.0/language/structure/PrimitiveType"/>
-          <ownedTag name="isSemanticallyAbstract" value="clone" object="//@packages.0/language/structure/PrimitiveType"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeContainer"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/DataType"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -2109,9 +2101,8 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/TypeDefinition/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/VoidType/@ownedTag.0 //@packages.0/language/structure/VoidType/@ownedTag.1" name="VoidType" superType="//@packages.0/language/structure/VoidType/@containedType.0 //@packages.0/language/structure/VoidType/@containedType.1 //@packages.0/language/structure/VoidType/@containedType.2">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/VoidType/@ownedTag.0" name="VoidType" superType="//@packages.0/language/structure/VoidType/@containedType.0 //@packages.0/language/structure/VoidType/@containedType.1 //@packages.0/language/structure/VoidType/@containedType.2">
           <ownedTag value="/**&#xA; * Implements kermeta::reflection::VoidType&#xA; */" object="//@packages.0/language/structure/VoidType"/>
-          <ownedTag name="isSemanticallyAbstract" value="clone" object="//@packages.0/language/structure/VoidType"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/VoidType"/>
@@ -2142,9 +2133,8 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/VoidType/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/DataType/@ownedTag.0 //@packages.0/language/structure/DataType/@ownedTag.1" name="DataType" superType="//@packages.0/language/structure/DataType/@containedType.0 //@packages.0/language/structure/DataType/@containedType.1 //@packages.0/language/structure/DataType/@containedType.2 //@packages.0/language/structure/DataType/@containedType.3">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/DataType/@ownedTag.0" name="DataType" superType="//@packages.0/language/structure/DataType/@containedType.0 //@packages.0/language/structure/DataType/@containedType.1 //@packages.0/language/structure/DataType/@containedType.2 //@packages.0/language/structure/DataType/@containedType.3">
           <ownedTag value="/**&#xA; * Implements kermeta::reflection::DataType&#xA; */" object="//@packages.0/language/structure/DataType"/>
-          <ownedTag name="isSemanticallyAbstract" value="clone" object="//@packages.0/language/structure/DataType"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/TypeDefinition"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Type"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -2183,9 +2173,8 @@
             </ownedParameter>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Enumeration/@ownedTag.0 //@packages.0/language/structure/Enumeration/@ownedTag.1" name="Enumeration" superType="//@packages.0/language/structure/Enumeration/@containedType.0 //@packages.0/language/structure/Enumeration/@containedType.1 //@packages.0/language/structure/Enumeration/@containedType.2">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Enumeration/@ownedTag.0" name="Enumeration" superType="//@packages.0/language/structure/Enumeration/@containedType.0 //@packages.0/language/structure/Enumeration/@containedType.1 //@packages.0/language/structure/Enumeration/@containedType.2">
           <ownedTag value="/**&#xA; * Implements kermeta::reflection::Enumeration&#xA; */" object="//@packages.0/language/structure/Enumeration"/>
-          <ownedTag name="isSemanticallyAbstract" value="deepClone" object="//@packages.0/language/structure/Enumeration"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/DataType"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Enumeration"/>

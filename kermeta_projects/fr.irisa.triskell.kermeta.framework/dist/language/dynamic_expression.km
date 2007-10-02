@@ -8,21 +8,21 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/interpreter/DynamicExpression/errors/@ownedTag.0" name="errors" type="//@packages.0/interpreter/DynamicExpression/errors/@containedType.0" isOrdered="true" upper="-1">
+        <ownedAttribute tag="//@packages.0/interpreter/DynamicExpression/errors/@ownedTag.0" name="errors" type="//@packages.0/interpreter/DynamicExpression/errors/@containedType.0" isOrdered="true" upper="-1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;  * Parse errors and type errors&#xA;  */" object="//@packages.0/interpreter/DynamicExpression/errors"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/interpreter/KermetaError"/>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/interpreter/DynamicExpression/expression/@ownedTag.0" name="expression" type="//@packages.0/interpreter/DynamicExpression/expression/@containedType.0" isOrdered="true" upper="1">
+        <ownedAttribute tag="//@packages.0/interpreter/DynamicExpression/expression/@ownedTag.0" name="expression" type="//@packages.0/interpreter/DynamicExpression/expression/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;  * the expression&#xA;  */" object="//@packages.0/interpreter/DynamicExpression/expression"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="behavior.km#//@packages.0/language/behavior/Expression"/>
           </containedType>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/interpreter/DynamicExpression/selfClass/@ownedTag.0" name="selfClass" isOrdered="true" upper="1">
+        <ownedAttribute tag="//@packages.0/interpreter/DynamicExpression/selfClass/@ownedTag.0" name="selfClass" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;  * The type of the self object&#xA;  * or void if the expression is not to be executed&#xA;  * in the context of an object&#xA;  */" object="//@packages.0/interpreter/DynamicExpression/selfClass"/>
           <type href="../kunit/kunit.km#//@packages.0/kunit/TestCase/run/@body/@statement.1/@statement.1/@statement.2/@containedType.0"/>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/interpreter/DynamicExpression/formalParameters/@ownedTag.0" name="formalParameters" type="//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0" isOrdered="true" upper="1">
+        <ownedAttribute tag="//@packages.0/interpreter/DynamicExpression/formalParameters/@ownedTag.0" name="formalParameters" type="//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;  * Formal parameters of the expression (bindings between parameters' names and types)&#xA;  */" object="//@packages.0/interpreter/DynamicExpression/formalParameters"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeParamBinding type="//@packages.0/interpreter/DynamicExpression/formalParameters/@containedType.0/@typeParamBinding.0/@containedType.0">
@@ -500,7 +500,7 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/interpreter/KermetaError/message/@ownedTag.0" name="message" type="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@parameters.0/@parameters.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/interpreter/KermetaError/message/@ownedTag.0" name="message" type="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@parameters.0/@parameters.0/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/**&#xA;  * Error message&#xA;  */" object="//@packages.0/interpreter/KermetaError/message"/>
         </ownedAttribute>
       </ownedTypeDefinition>

@@ -238,7 +238,7 @@
           <eParameters name="func">
             <eAnnotations source="kermeta.functionType">
               <details key="0" value="G"/>
-              <details key="1" value="kermeta::language::structure::Object"/>
+              <details key="1" value="alias Object : kermeta::language::structure::Object;"/>
             </eAnnotations>
             <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
           </eParameters>
@@ -1062,7 +1062,6 @@
     <references href="../language/behavior.ecore#/1"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../reflection/reflection.ecore#/2"/>
@@ -1070,14 +1069,13 @@
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
@@ -1095,7 +1093,6 @@
     <references href="java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/2"/>

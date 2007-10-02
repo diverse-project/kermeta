@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.54 2007-08-30 12:19:10 dvojtise Exp $
+/* $Id: reflection.kmt,v 1.55 2007-10-02 15:15:54 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -510,6 +510,17 @@ abstract class Property inherits MultiplicityElement
 	 * Boolean stating whether the property allows to identify its containing Object
 	 */
 	attribute isID : Boolean
+	
+	/**
+	 * Boolean stating wether the getter is abstract.
+	 */
+	attribute isGetterAbstract : Boolean
+	
+	/**
+	 * Boolean stating wether the setter is abstract.
+	 */
+	attribute isSetterAbstract : Boolean
+	
 }
 
 

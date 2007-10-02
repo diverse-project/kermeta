@@ -13,7 +13,10 @@
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="setterBody" eType="#//behavior/Expression"
           containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isGetterAbstract" eType="#//structure/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSetterAbstract" eType="#//structure/Boolean"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
   </eSubpackages>
   <eSubpackages name="behavior">
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>

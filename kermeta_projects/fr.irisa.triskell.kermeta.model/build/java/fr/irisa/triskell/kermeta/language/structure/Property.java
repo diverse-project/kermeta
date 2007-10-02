@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Property.java,v 1.4 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: Property.java,v 1.5 2007-10-02 15:15:46 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -18,6 +18,8 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getGetterBody <em>Getter Body</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getSetterBody <em>Setter Body</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsGetterAbstract <em>Is Getter Abstract</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsSetterAbstract <em>Is Setter Abstract</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getOpposite <em>Opposite</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsReadOnly <em>Is Read Only</em>}</li>
@@ -91,6 +93,58 @@ public interface Property extends MultiplicityElement {
 	 * @generated
 	 */
 	void setSetterBody(Expression value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Getter Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Getter Abstract</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Getter Abstract</em>' attribute.
+	 * @see #setIsGetterAbstract(boolean)
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_IsGetterAbstract()
+	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 * @generated
+	 */
+	boolean isIsGetterAbstract();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsGetterAbstract <em>Is Getter Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Getter Abstract</em>' attribute.
+	 * @see #isIsGetterAbstract()
+	 * @generated
+	 */
+	void setIsGetterAbstract(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Setter Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Setter Abstract</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Setter Abstract</em>' attribute.
+	 * @see #setIsSetterAbstract(boolean)
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_IsSetterAbstract()
+	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 * @generated
+	 */
+	boolean isIsSetterAbstract();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsSetterAbstract <em>Is Setter Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Setter Abstract</em>' attribute.
+	 * @see #isIsSetterAbstract()
+	 * @generated
+	 */
+	void setIsSetterAbstract(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Owning Class</b></em>' container reference.

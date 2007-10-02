@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.19 2007-08-08 12:53:20 dvojtise Exp $
+ * $Id: PropertyItemProvider.java,v 1.20 2007-10-02 15:15:50 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -79,6 +79,8 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addIsGetterAbstractPropertyDescriptor(object);
+			addIsSetterAbstractPropertyDescriptor(object);
 			addOppositePropertyDescriptor(object);
 			addIsReadOnlyPropertyDescriptor(object);
 			addDefaultPropertyDescriptor(object);
@@ -87,6 +89,50 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 			addIsIDPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Is Getter Abstract feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIsGetterAbstractPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Property_isGetterAbstract_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Property_isGetterAbstract_feature", "_UI_Property_type"),
+				 StructurePackage.Literals.PROPERTY__IS_GETTER_ABSTRACT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Is Setter Abstract feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIsSetterAbstractPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Property_isSetterAbstract_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Property_isSetterAbstract_feature", "_UI_Property_type"),
+				 StructurePackage.Literals.PROPERTY__IS_SETTER_ABSTRACT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -383,6 +429,8 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Property.class)) {
+			case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
+			case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
 			case StructurePackage.PROPERTY__IS_READ_ONLY:
 			case StructurePackage.PROPERTY__DEFAULT:
 			case StructurePackage.PROPERTY__IS_COMPOSITE:

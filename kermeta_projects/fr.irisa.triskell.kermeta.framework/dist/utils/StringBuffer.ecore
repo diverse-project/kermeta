@@ -43,7 +43,6 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
     <references href="../standard/primitive_types.ecore#/0"/>
@@ -54,7 +53,6 @@
     <references href="../language/structure.ecore#/1"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/0"/>
@@ -65,6 +63,7 @@
     <references href="../kunit/assert.ecore#/1"/>
     <references href="hashtable.ecore#/0"/>
     <references href="hashtable.ecore#/1"/>
+    <references href="hashtable.ecore#/2"/>
     <references href="stack.ecore#/0"/>
     <references href="stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
@@ -77,9 +76,7 @@
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

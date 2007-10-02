@@ -498,6 +498,18 @@
             <details key="documentation" value="/**&#xA;  * Boolean stating whether the property allows to identify its containing Object&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isGetterAbstract" eType="/1/reflection/Boolean">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+            <details key="documentation" value="/**&#xA;  * Boolean stating wether the getter is abstract.&#xA;  */"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSetterAbstract" eType="/1/reflection/Boolean">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+            <details key="documentation" value="/**&#xA;  * Boolean stating wether the setter is abstract.&#xA;  */"/>
+          </eAnnotations>
+        </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true" eSuperTypes="/1/reflection/Object">
         <eAnnotations source="kermeta">
@@ -949,6 +961,7 @@
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
     <references href="../language/structure.ecore#/0"/>
@@ -963,22 +976,26 @@
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
+    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

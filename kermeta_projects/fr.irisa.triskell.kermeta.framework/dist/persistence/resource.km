@@ -12,23 +12,23 @@
           </typeParamBinding>
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/persistence/Resource/uri/@ownedTag.0" name="uri" type="//@packages.0/persistence/Resource/uri/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/persistence/Resource/uri/@ownedTag.0" name="uri" type="//@packages.0/persistence/Resource/uri/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/**&#xA;  * Uri of the Resource to load&#xA;  */" object="//@packages.0/persistence/Resource/uri"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/persistence/Resource/metaModelURI/@ownedTag.0" name="metaModelURI" type="//@packages.0/persistence/Resource/metaModelURI/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/persistence/Resource/metaModelURI/@ownedTag.0" name="metaModelURI" type="//@packages.0/persistence/Resource/metaModelURI/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/**&#xA;  * Uri of the meta-model of the Resource to load&#xA;  */" object="//@packages.0/persistence/Resource/metaModelURI"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/persistence/Resource/repository/@ownedTag.0" name="repository" type="//@packages.0/persistence/Resource/repository/@containedType.0" isOrdered="true" upper="1" opposite="//@packages.0/persistence/Repository/resources">
+        <ownedAttribute tag="//@packages.0/persistence/Resource/repository/@ownedTag.0" name="repository" type="//@packages.0/persistence/Resource/repository/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" opposite="//@packages.0/persistence/Repository/resources">
           <ownedTag value="/**&#xA;  * Repository used to create the Resource&#xA;  * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only &#xA;  * one Resource of a given Repository&#xA;  */" object="//@packages.0/persistence/Resource/repository"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Repository"/>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/persistence/Resource/dependentResources/@ownedTag.0" name="dependentResources" type="//@packages.0/persistence/Resource/dependentResources/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
+        <ownedAttribute tag="//@packages.0/persistence/Resource/dependentResources/@ownedTag.0" name="dependentResources" type="//@packages.0/persistence/Resource/dependentResources/@containedType.0" upper="-1" isSetterAbstract="true" isReadOnly="true" isDerived="true">
           <ownedTag value="/**&#xA;  * Returns the set of Resources the current Resource, which must have been loaded,&#xA;  * depends on, an empty set if current Resource has no dependency&#xA;  */" object="//@packages.0/persistence/Resource/dependentResources"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <getterBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@containedType.0">
@@ -58,7 +58,7 @@
             </statement>
           </getterBody>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/persistence/Resource/contents/@ownedTag.0" name="contents" upper="-1" isReadOnly="true" isDerived="true">
+        <ownedAttribute tag="//@packages.0/persistence/Resource/contents/@ownedTag.0" name="contents" upper="-1" isSetterAbstract="true" isReadOnly="true" isDerived="true">
           <ownedTag value="/** &#xA;  * Returns the set of all Objects directly or indirectly contained by the Resource,&#xA;  * or an empty set if the Resource is empty&#xA;  */" object="//@packages.0/persistence/Resource/contents"/>
           <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           <getterBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/contents/@getterBody/@containedType.0">
@@ -520,7 +520,7 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/persistence/Repository/resources/@ownedTag.0" name="resources" type="//@packages.0/persistence/Repository/resources/@containedType.0" upper="-1" opposite="//@packages.0/persistence/Resource/repository" isComposite="true">
+        <ownedAttribute tag="//@packages.0/persistence/Repository/resources/@ownedTag.0" name="resources" type="//@packages.0/persistence/Repository/resources/@containedType.0" upper="-1" isGetterAbstract="true" isSetterAbstract="true" opposite="//@packages.0/persistence/Resource/repository" isComposite="true">
           <ownedTag value="/**&#xA;  * Resources created by this Repository &#xA;  * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only &#xA;  * one Resource of a given Repository&#xA;  */" object="//@packages.0/persistence/Repository/resources"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
         </ownedAttribute>
@@ -1242,15 +1242,15 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/persistence/DanglingDiagnostic/danglingElement/@ownedTag.0" name="danglingElement" isOrdered="true" upper="1">
+        <ownedAttribute tag="//@packages.0/persistence/DanglingDiagnostic/danglingElement/@ownedTag.0" name="danglingElement" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;  * Element that is not contained by a resource in the repository  &#xA;  */" object="//@packages.0/persistence/DanglingDiagnostic/danglingElement"/>
           <type href="../standard/collections.km#//@packages.0/standard/Object"/>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/persistence/DanglingDiagnostic/referencingElement/@ownedTag.0" name="referencingElement" isOrdered="true" upper="1">
+        <ownedAttribute tag="//@packages.0/persistence/DanglingDiagnostic/referencingElement/@ownedTag.0" name="referencingElement" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;  * Element that has a reference to the dangling element  &#xA;  */" object="//@packages.0/persistence/DanglingDiagnostic/referencingElement"/>
           <type href="../standard/collections.km#//@packages.0/standard/Object"/>
         </ownedAttribute>
-        <ownedAttribute tag="//@packages.0/persistence/DanglingDiagnostic/referencingProperty/@ownedTag.0" name="referencingProperty" type="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.3/@containedType.0" isOrdered="true" upper="1">
+        <ownedAttribute tag="//@packages.0/persistence/DanglingDiagnostic/referencingProperty/@ownedTag.0" name="referencingProperty" type="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@parameters.0/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.0/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@thenBody/@statement.3/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true">
           <ownedTag value="/**&#xA;  * Property used to reference the dangling element  &#xA;  */" object="//@packages.0/persistence/DanglingDiagnostic/referencingProperty"/>
         </ownedAttribute>
         <ownedOperation tag="//@packages.0/persistence/DanglingDiagnostic/toString/@ownedTag.0" name="toString" type="//@packages.0/persistence/DanglingDiagnostic/toString/@containedType.0" isOrdered="true" upper="1">
@@ -1313,7 +1313,7 @@
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/persistence/EMFRepository/@ownedTag.0" name="EMFRepository" superType="//@packages.0/persistence/EMFRepository/@containedType.0">
         <ownedTag value="/**&#xA; * Repository that stores and manages resources that come from EMF&#xA; */" object="//@packages.0/persistence/EMFRepository"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Repository"/>
-        <ownedAttribute tag="//@packages.0/persistence/EMFRepository/useInterpreterInternalResources/@ownedTag.0" name="useInterpreterInternalResources" type="//@packages.0/persistence/EMFRepository/useInterpreterInternalResources/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="//@packages.0/persistence/EMFRepository/useInterpreterInternalResources/@ownedTag.0" name="useInterpreterInternalResources" type="//@packages.0/persistence/EMFRepository/useInterpreterInternalResources/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/** &#xA;  * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself&#xA;  * this is usefull for example to make a dependency to framework.km&#xA;  * by default, not setting this is considered as false.&#xA;  */" object="//@packages.0/persistence/EMFRepository/useInterpreterInternalResources"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>

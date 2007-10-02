@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyValidator.java,v 1.2 2007-07-20 15:08:58 ftanguy Exp $
+ * $Id: PropertyValidator.java,v 1.3 2007-10-02 15:15:46 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.validation;
 
@@ -22,6 +22,10 @@ public interface PropertyValidator {
 
 	boolean validateGetterBody(Expression value);
 	boolean validateSetterBody(Expression value);
+	boolean validateIsGetterAbstract(boolean value);
+
+	boolean validateIsSetterAbstract(boolean value);
+
 	boolean validateOwningClass(ClassDefinition value);
 	boolean validateOpposite(Property value);
 	boolean validateIsReadOnly(boolean value);
