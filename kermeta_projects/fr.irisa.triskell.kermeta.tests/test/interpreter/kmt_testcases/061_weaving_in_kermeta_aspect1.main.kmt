@@ -1,4 +1,4 @@
-/* $Id: 061_weaving_in_kermeta_aspect1.main.kmt,v 1.1 2007-09-10 08:35:03 cfaucher Exp $ */
+/* $Id: 061_weaving_in_kermeta_aspect1.main.kmt,v 1.2 2007-10-02 15:19:58 ftanguy Exp $ */
 
 // Type checking on simple control stucts
 @mainClass "weavingtest::Main"
@@ -43,15 +43,7 @@ class C {
 	operation returnInteger() : kermeta::standard::Integer is do
 		result := 0
 	end
-	
-	operation overload1() : Void 
-	pre mypre is true
-	is do
-		//overload the base version
-		stdio.writeln("overload the base version")
-	end
-	
-	@overloadable "true" 
+
 	operation overload2() : Void 
 	pre mypre is true
 	is do

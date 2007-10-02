@@ -1,5 +1,5 @@
 @mainClass "testInvariant::Main"
-@mainOperation "main"
+@mainOperation "main2"
 
 
 package testInvariant;
@@ -21,8 +21,8 @@ class Main inherits TestCase, superMain, superMain2 {
         
 	reference stringTata : String 
 
- 
- 	operation main() : Void is do 
+  
+ 	operation main2() : Void is do 
 		var tr : TestRunner init TestRunner.new
 		tr.run(Main)
 		tr.printTestResult
