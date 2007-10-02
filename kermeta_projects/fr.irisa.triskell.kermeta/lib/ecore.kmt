@@ -1,4 +1,4 @@
-/* $Id: ecore.kmt,v 1.13 2007-08-21 09:26:28 dvojtise Exp $
+/* $Id: ecore.kmt,v 1.14 2007-10-02 15:13:43 ftanguy Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -200,7 +200,6 @@ class EEnum
 	operation getEEnumLiteral2(~value : EInt) : EEnumLiteral is do
 		result := eLiterals.detect { e | e.~value == ~value } 
 	end
-	operation getEEnumLiteralByLiteral(literal : EString) : EEnumLiteral is abstract
 }
 
 @aspect "true"
