@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.24 2007-08-28 09:12:20 dtouzet Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.25 2007-10-02 15:19:08 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -268,7 +268,7 @@ public class RuntimeObjectFactory {
 		if(meta_class.getData().get("kcoreObject") instanceof fr.irisa.triskell.kermeta.language.structure.Class){
 			fr.irisa.triskell.kermeta.language.structure.Class the_class = (fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject");
 			SimpleType t = new SimpleType(the_class); 
-			if (t.isSemanticallyAbstract()) {
+			/*if (t.isSemanticallyAbstract()) {
 				//throw new Error("Kermeta Runtime Error: Unable to instantiate semantically abstract class " + FTypePrettyPrinter.getInstance().accept(the_class));
 				SimpleType t1 = new SimpleType(the_class);
 				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::AbstractClassInstantiationError",
@@ -280,8 +280,8 @@ public class RuntimeObjectFactory {
 				/*
 				RuntimeObject ex = createObjectFromClassName("kermeta::exceptions::AbstractClassInstantiationError");
 				memory.getCurrentInterpreter().raiseKermetaException(ex, memory.getCurrentInterpreter().getInterpreterContext().peekCallFrame().getOperation());
-				*/
-			}
+				
+			}*/
 			ClassDefinition class_def = (ClassDefinition)the_class.getTypeDefinition();
 			//		 if this comes from a jar unit, create it in a special way
 	        if(RuntimeHelper.isJarProxy(class_def)){

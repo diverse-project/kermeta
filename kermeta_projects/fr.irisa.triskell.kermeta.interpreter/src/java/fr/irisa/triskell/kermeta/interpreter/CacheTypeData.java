@@ -1,4 +1,4 @@
-/* $Id: CacheTypeData.java,v 1.6 2007-08-02 09:57:03 dvojtise Exp $
+/* $Id: CacheTypeData.java,v 1.7 2007-10-02 15:19:08 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : CacheTypeData.java
  * License    : EPL
@@ -60,7 +60,7 @@ public class CacheTypeData {
 			    else {
 					boolean shouldAdd = false;
 					if ( savedOp.getOperation().isIsAbstract()
-						|| ( ! OperationHelper.isOverloadable( op.getOperation() ) && ! savedOp.getOperation().isIsAbstract() ) )
+						/*|| ( ! OperationHelper.isOverloadable( op.getOperation() ) && ! savedOp.getOperation().isIsAbstract() )*/ )
 					shouldAdd = true;
 					if ( shouldAdd )
 				    	callableOperationsCached.put(op.getOperation().getName(), op);

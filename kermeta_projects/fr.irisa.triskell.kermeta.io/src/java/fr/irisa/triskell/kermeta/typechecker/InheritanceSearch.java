@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.18 2007-09-11 15:21:11 ftanguy Exp $
+/* $Id: InheritanceSearch.java,v 1.19 2007-10-02 15:19:05 ftanguy Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -129,7 +129,7 @@ public class InheritanceSearch {
 			    		result.add( callableOperation );
 			    	} else {
 			    		CallableOperation currentCallableOperation = found_ops.get( op.getName() );
-			    		if ( currentCallableOperation.getOperation().isIsAbstract() || OperationHelper.isOverloadable(currentCallableOperation.operation) ) {
+			    		if ( currentCallableOperation.getOperation().isIsAbstract() /*|| OperationHelper.isOverloadable(currentCallableOperation.operation)*/ ) {
 			    			CallableOperation callableOperation = new CallableOperation(op, current);
 			    			found_ops.put(op.getName(), callableOperation);
 			    			result.remove( currentCallableOperation );

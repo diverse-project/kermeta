@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.22 2007-10-01 15:14:42 ftanguy Exp $
+/* $Id: KMT2KMPass6.java,v 1.23 2007-10-02 15:19:05 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -237,7 +237,7 @@ public class KMT2KMPass6 extends KMT2KMPass {
 				// ok lets update the body and changes it to be concrete
 				context.current_operation.setIsAbstract(false);				
 			}
-			else if(TagHelper.findTagFromNameAndValue(context.current_operation, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true") != null) {			
+			/*else if(TagHelper.findTagFromNameAndValue(context.current_operation, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true") != null) {			
 				// if the previous operation is tagged with overloadable = true then we can replace it by this one
 				internalLog.debug("overloading operation " +context.current_class.getName()+"." + context.current_operation.getName() +
 						" with version from " +builder.getUri());
@@ -250,7 +250,7 @@ public class KMT2KMPass6 extends KMT2KMPass {
 			else if(KermetaASTHelper.isOverloadable(operationExpressionBody)){
 				// previous operation is not overloadable but this one is, so we can safely ignore this body a keep the original one
 				return false;
-			}
+			}*/
 			else {
 				// this is an error !
 				builder.error("PASS 6 : Operation '"+context.current_class.getName()+"." + context.current_operation.getName() +
@@ -276,10 +276,10 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		// if the operation has a tag overloadble true, then add the info in the annotation
 		// DVK : the normal tag process in pass 7 must take care that we have already added the tag to the element
 		// don't add that tag if it already exist, even with a value to false
-		if(KermetaASTHelper.isOverloadable(operationExpressionBody) && 
+		/*if(KermetaASTHelper.isOverloadable(operationExpressionBody) && 
 				TagHelper.findTagFromName(context.current_operation, KermetaASTHelper.TAGNAME_OVERLOADABLE) == null) {
 			TagHelper.createNonExistingTagFromNameAndValue(context.current_operation, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
-		}
+		}*/
 		
 		Date t2 = new Date();
 		System.err.println(context.current_operation.getName() + " time consuming : " + (t2.getTime() - t1.getTime()) + "ms.");
@@ -355,11 +355,11 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		if ( monitor.isCanceled() )
 			return false;
 		
-		if(TagHelper.findTagFromNameAndValue(context.current_property, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true") != null) {			
+		/*if(TagHelper.findTagFromNameAndValue(context.current_property, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true") != null) {			
 			// if the previous operation is tagged with overloadable = true then we can replace it by this one
 			internalLog.debug("overloading derived property " +context.current_class.getName()+"." + context.current_property.getName() +
 					" with version from " +builder.getUri());
-		}
+		}*/
 		if (context.current_property.isIsDerived()) {
 			Expression e =KMT2KMExperessionBuilder.process(context, getterBody.getGetterbody(), builder, monitor);
 			//builder.current_property.setGetterBody();

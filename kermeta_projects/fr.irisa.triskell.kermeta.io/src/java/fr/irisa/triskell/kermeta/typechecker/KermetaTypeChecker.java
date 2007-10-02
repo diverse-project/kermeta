@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.25 2007-09-19 12:15:03 ftanguy Exp $
+/* $Id: KermetaTypeChecker.java,v 1.26 2007-10-02 15:19:05 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -48,7 +48,7 @@ public class KermetaTypeChecker {
     protected KermetaUnit unit;
     protected TypeCheckerContext context;
     /** Attribute that is set to semantically abstract class definitions */
-    public static final String IS_SEMANTICALLY_ABSTRACT = "isSemanticallyAbstract";
+   // public static final String IS_SEMANTICALLY_ABSTRACT = "isSemanticallyAbstract";
         
     private boolean internalOperation = false;
     
@@ -195,7 +195,7 @@ public class KermetaTypeChecker {
 		boolean foundSAbstractTag = false;
 		if (typedef.isIsAbstract()) return true;
 		Iterator<CallableOperation> it = InheritanceSearch.callableOperations(InheritanceSearch.getFClassForClassDefinition((ClassDefinition)typedef)).iterator();
-		while (it.hasNext() && !foundSAbstractTag && !ClassDefinitionHelper.isSemanticallyAbstract(typedef))
+		while (it.hasNext() && !foundSAbstractTag /*&& !ClassDefinitionHelper.isSemanticallyAbstract(typedef)*/)
 		{
 			Operation op = ((CallableOperation)it.next()).getOperation();
 			if (op.isIsAbstract()) {
@@ -204,19 +204,19 @@ public class KermetaTypeChecker {
 				 * Maybe the class is an aspect and the operation is defined in on of its base classes.
 				 * 
 				 */
-				for ( TypeDefinition typeDefinition : (List<TypeDefinition>) typedef.getBaseAspects() ) {
+				/*for ( TypeDefinition typeDefinition : (List<TypeDefinition>) typedef.getBaseAspects() ) {
 					if ( typeDefinition instanceof ClassDefinition ) {
 						ClassDefinition classDefinition = (ClassDefinition) typeDefinition;
 						
 					}
-				}
+				}*/
 				
 				foundSAbstractTag = true;
-				Tag tag = StructureFactory.eINSTANCE.createTag(); 
+				/*Tag tag = StructureFactory.eINSTANCE.createTag(); 
 				tag.setName(IS_SEMANTICALLY_ABSTRACT); tag.setValue(op.getName());
 				//typedef.getTag().add(tag);
 				typedef.getOwnedTag().add(tag); // tag is owned by the typedef
-				typedef.getTag().add(tag); // typedef is tagged
+				typedef.getTag().add(tag); // typedef is tagged*/
 			}
 		}
 		return foundSAbstractTag;

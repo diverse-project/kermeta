@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass5.java,v 1.11 2007-09-19 12:14:58 ftanguy Exp $
+/* $Id: Ecore2KMPass5.java,v 1.12 2007-10-02 15:19:05 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -145,16 +145,18 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 		}
 		
 		//TODO, add the getter and setter
-		if (node.isDerived() && ! currentProperty.isIsReadOnly() && currentProperty.getSetterBody() == null){
+	/*	if (node.isDerived() && ! currentProperty.isIsReadOnly() && currentProperty.getSetterBody() == null){
 			
-			currentProperty.setSetterBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new", monitor));
-				TagHelper.createNonExistingTagFromNameAndValue(currentProperty, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
+			//currentProperty.setSetterBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new", monitor));
+			currentProperty.setIsSetterAbstract(true);
+			//TagHelper.createNonExistingTagFromNameAndValue(currentProperty, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
 			}
 		if (node.isDerived() && currentProperty.getGetterBody() == null){
 			
-			currentProperty.setGetterBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new", monitor));
-			TagHelper.createNonExistingTagFromNameAndValue(currentProperty, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
-		}
+			//currentProperty.setGetterBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new", monitor));
+			currentProperty.setIsGetterAbstract(true);
+			//TagHelper.createNonExistingTagFromNameAndValue(currentProperty, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
+		}*/
 		
 		return null;
 	}
@@ -431,6 +433,7 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 			if (getter != null) {
 				Expression exp = ExpressionParser.parse(context, kermetaUnit, getter, monitor);
 				currentProperty.setGetterBody(exp);
+				currentProperty.setIsGetterAbstract(false);
 			}
 		}
 		// node.getSource() == "kermeta.derivedProp.setter"
@@ -439,6 +442,7 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 			if (setter != null) {
 				Expression exp = ExpressionParser.parse(context, kermetaUnit, setter, monitor);
 				currentProperty.setSetterBody(exp);
+				currentProperty.setIsSetterAbstract(false);
 			}
 		}
 		// node.getSource() == "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"

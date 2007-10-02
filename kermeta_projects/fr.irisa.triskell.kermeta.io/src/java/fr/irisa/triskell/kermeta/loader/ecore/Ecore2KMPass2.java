@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.24 2007-09-19 12:14:58 ftanguy Exp $
+/* $Id: Ecore2KMPass2.java,v 1.25 2007-10-02 15:19:05 ftanguy Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -129,6 +129,12 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 			}
 		} else if ( node.isDerived() )
 			isc = false;
+		
+		if ( node.isDerived() ) {
+			prop.setIsGetterAbstract(true);
+			prop.setIsSetterAbstract(true);
+		}
+		
 		prop.setIsComposite(isc);
 		return prop;
 	}
@@ -149,6 +155,12 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 			}
 			prop.setOpposite(oprop);
 		}
+		
+		if ( node.isDerived() ) {
+			prop.setIsGetterAbstract(true);
+			prop.setIsSetterAbstract(true);
+		}
+		
 		return prop;
 	}
 	

@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.52 2007-10-01 15:14:43 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.53 2007-10-02 15:19:05 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -307,8 +307,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        if (((CallFeature)exp).getTarget() instanceof TypeLiteral) {
 	            result = getTypeFromTypeLiteral((TypeLiteral)((CallFeature)exp).getTarget());
 	            // check that it is a concrete class (if the literal is in fact a class. If its a type variable, we're ok)
-	            if ((result instanceof fr.irisa.triskell.kermeta.language.structure.Class) && ((SimpleType)result).isSemanticallyAbstract())
-	                unit.error("TYPE-CHECKER : [Semantically] abstract class "+ result +" should not be instanciated.", (Expression)exp);
+	           // if ((result instanceof fr.irisa.triskell.kermeta.language.structure.Class) && ((SimpleType)result).isSemanticallyAbstract())
+	             //   unit.error("TYPE-CHECKER : [Semantically] abstract class "+ result +" should not be instanciated.", (Expression)exp);
 	        }
 	    }
 	    

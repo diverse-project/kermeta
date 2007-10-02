@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.25 2007-10-01 15:14:42 ftanguy Exp $
+/* $Id: KMT2KMPass3.java,v 1.26 2007-10-02 15:19:05 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -509,6 +509,12 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		context.current_property.setType(getFType(property.getTypeRef()));
 		// is readonly, false by default
 		context.current_property.setIsReadOnly(false);
+		
+		if ( property.getGetterBody() == null )
+			context.current_property.setIsGetterAbstract(true);
+		
+		if ( property.getSetterBody() == null )
+			context.current_property.setIsSetterAbstract(true);
 		
 	/*	if (ClassDefinitionHelper.getPropertyByName(context.current_class, context.current_property.getName()) != null) {
 			//	if the property is from an aspect class and its signature is the same, we should continue but reuse the existing one 

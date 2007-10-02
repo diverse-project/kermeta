@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.java,v 1.9 2007-10-01 15:14:45 ftanguy Exp $
+/* $Id: ClassDefinitionHelper.java,v 1.10 2007-10-02 15:19:05 ftanguy Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL
@@ -423,7 +423,7 @@ public class ClassDefinitionHelper {
 	/** The necessary and sufficient condition to know if a class definition is semantically
 	 * abstract or not is the presence of a tag which name is "isSemanticallyAbstract"; 
 	 * this methods looks for this tag and returns true if it found it. */
-	public static boolean isSemanticallyAbstract(ClassDefinition cdef) {
+	/*public static boolean isSemanticallyAbstract(ClassDefinition cdef) {
 		boolean isSemanticallyAbstract = false;
 		if ( cdef.isIsAbstract() ) 
 			return true;
@@ -434,13 +434,13 @@ public class ClassDefinitionHelper {
 				isSemanticallyAbstract = tag.getName().equals(KermetaTypeChecker.IS_SEMANTICALLY_ABSTRACT);
 		}
 		return isSemanticallyAbstract;
-	}
+	}*/
 	/**
 	 * Build a short message explaining why the ClassDefinition is semantically abstract
 	 * @param cdef
 	 * @return
 	 */
-	public static String getSemanticallyAbstractCause(ClassDefinition cdef) {
+	/*public static String getSemanticallyAbstractCause(ClassDefinition cdef) {
 		String semanticallyAbstractCause = "(at least) one operation ";
 		if (cdef.isIsAbstract()) return "The ClassDefinition is declared abstract";
 		Iterator<Tag> it = cdef.getTag().iterator();
@@ -453,7 +453,7 @@ public class ClassDefinitionHelper {
 		}
 		semanticallyAbstractCause += " is abstract";
 		return semanticallyAbstractCause;
-	}
+	}*/
 	
 	
 	static public Set <TypeDefinition> getAllBaseClasses(ClassDefinition cl) {

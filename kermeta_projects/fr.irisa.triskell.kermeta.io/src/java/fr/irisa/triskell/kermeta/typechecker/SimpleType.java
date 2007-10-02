@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.18 2007-09-04 08:29:31 ftanguy Exp $
+/* $Id: SimpleType.java,v 1.19 2007-10-02 15:19:05 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -51,7 +51,7 @@ public class SimpleType extends Type {
 	 * The corresponding fr.irisa.triskell.kermeta.language.structure.Type
 	 */
 	protected fr.irisa.triskell.kermeta.language.structure.Type type;
-	private boolean isSemanticallyAbstract;
+	//private boolean isSemanticallyAbstract;
 	
 	/**
 	 * Constructor
@@ -67,11 +67,11 @@ public class SimpleType extends Type {
 		else
 			this.type = type;
 		
-		this.setIsSemanticallyAbstract();
+		//this.setIsSemanticallyAbstract();
 	}
 	
 
-	public void setIsSemanticallyAbstract()
+	/*public void setIsSemanticallyAbstract()
 	{
 		// If type is linked to a class definition and if it is semantically abstract
 		isSemanticallyAbstract = true;
@@ -89,7 +89,7 @@ public class SimpleType extends Type {
 		}
 		else return "";
 	}
-	
+	*/
 	/**
 	 * @see fr.irisa.triskell.kermeta.typechecker.Type#isSubTypeOf(fr.irisa.triskell.kermeta.language.structure.Type)
 	 */
@@ -299,9 +299,9 @@ public class SimpleType extends Type {
 		return (String)FTypePrettyPrinter.getInstance().accept(type);
 	}
 	
-	public boolean isSemanticallyAbstract() {
+	/*public boolean isSemanticallyAbstract() {
 		return isSemanticallyAbstract;
-	}
+	}*/
 	
 	/**
 	 * Return the type definition of the type if it has one, null otherwise

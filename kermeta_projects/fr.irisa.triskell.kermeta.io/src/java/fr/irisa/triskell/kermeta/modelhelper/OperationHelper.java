@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.java,v 1.6 2007-08-09 14:58:15 dvojtise Exp $
+/* $Id: OperationHelper.java,v 1.7 2007-10-02 15:19:05 ftanguy Exp $
  * Project   : Kermeta 
  * File      : OperationHelper.java
  * License   : EPL
@@ -112,7 +112,7 @@ public class OperationHelper {
 		return null;
 	}
 
-	static public boolean isOverloadable(Operation operation) {
+	/*static public boolean isOverloadable(Operation operation) {
 		if ( operation.getTag() != null ) {
 			for ( Tag tag : (List<Tag>) operation.getTag() ) {
 				if ( tag.getName() != null )
@@ -121,7 +121,7 @@ public class OperationHelper {
 			}
 		}
 		return false;
-	}
+	}*/
 	
 	static public boolean operationsSignatureEqualityChecker(Operation op1, Operation op2) {
 		boolean result = op1.getName().equals( op2.getName() );

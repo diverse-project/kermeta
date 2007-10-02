@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.18 2007-09-19 12:14:58 ftanguy Exp $
+/* $Id: Ecore2KMPass4.java,v 1.19 2007-10-02 15:19:05 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -252,8 +252,9 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 			// If the given operation contain no abstract or body annotation or overloadable tag then we must create a body with a raise of NotImplemented Exception
 			// and add the overloadable tag to the operation
 			if(!isBodySpecified(node)){
-				currentOperation.setBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new", monitor));
-				TagHelper.createNonExistingTagFromNameAndValue(currentOperation, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
+				currentOperation.setIsAbstract(true);
+				//currentOperation.setBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new", monitor));
+				//TagHelper.createNonExistingTagFromNameAndValue(currentOperation, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
 			}
 			
 			isClassTypeOwner=false;
@@ -377,22 +378,6 @@ public class Ecore2KMPass4 extends Ecore2KMPass {
 		if(eAnnot != null) {
 			buildTypeVariableBindings((fr.irisa.triskell.kermeta.language.structure.Class) t, eAnnot.getDetails(), getVisibleTypeVariables(node));
 		}
-/*		
-		// Get the derived properties bodies and other stuffs
-		acceptList(node.getEAnnotations());
-		
-		//TODO, add the getter and setter 
-		if (node.isDerived() && currentProperty.getSetterBody() == null){
-			
-			currentProperty.setSetterBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new"));
-				TagHelper.createNonExistingTagFromNameAndValue(currentProperty, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
-			}
-		if (node.isDerived() && currentProperty.getGetterBody() == null){
-			
-			currentProperty.setGetterBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new"));
-			TagHelper.createNonExistingTagFromNameAndValue(currentProperty, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
-		}	
-*/		
 		return currentProperty;
 	}
 
