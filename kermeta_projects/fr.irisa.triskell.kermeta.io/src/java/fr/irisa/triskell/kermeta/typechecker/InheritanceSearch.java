@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.19 2007-10-02 15:19:05 ftanguy Exp $
+/* $Id: InheritanceSearch.java,v 1.20 2007-10-03 10:55:13 ftanguy Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -26,6 +26,8 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 
@@ -98,71 +100,85 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */	
-	public static ArrayList<CallableOperation> callableOperations(fr.irisa.triskell.kermeta.language.structure.Class c) {
+	public static ArrayList<CallableOperation> callableOperations(Class c) {
 		ArrayList<CallableOperation> result = new ArrayList<CallableOperation>();
 		Hashtable<String, CallableOperation> found_ops = new Hashtable<String, CallableOperation>();
-		ArrayList<fr.irisa.triskell.kermeta.language.structure.Class> toVisit = new ArrayList<fr.irisa.triskell.kermeta.language.structure.Class>();
+		ArrayList<Class> toVisit = new ArrayList<Class>();
 		List<ClassDefinition> classDefinitionProcessed = new ArrayList<ClassDefinition> ();
 		toVisit.add(c);
-		
+
 		while( ! toVisit.isEmpty() ) {
 
-			fr.irisa.triskell.kermeta.language.structure.Class current = (fr.irisa.triskell.kermeta.language.structure.Class)toVisit.get(0);
+			Class current = toVisit.get(0);
 			toVisit.remove(0);
-			
-			if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
-				classDefinitionProcessed.add( (ClassDefinition) current.getTypeDefinition() );
+
+			/*
+			 * 
+			 * Patch for bugs #1124
+			 * When redifining operations from Object class definition, the wrong one is called when interpreting.
+			 * Just make sure that the Object class definition is processed the last.
+			 * 
+			 */
+			if ( NamedElementHelper.getQualifiedName(current.getTypeDefinition()).equals("kermeta::language::structure::Object") && toVisit.size() >= 1 )
+				toVisit.add(current);
+			else {
+				if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
+					classDefinitionProcessed.add( (ClassDefinition) current.getTypeDefinition() );
 			 				
-			    // Add all operations of current parsed class
-			    for (Object next_op : ((ClassDefinition) current.getTypeDefinition()).getOwnedOperation()) {
-			    	Operation op = (Operation)next_op;
+					// Add all operations of current parsed class
+					for (Object next_op : ((ClassDefinition) current.getTypeDefinition()).getOwnedOperation()) {
+						Operation op = (Operation)next_op;
 			    	
-			    	if ( ! found_ops.containsKey(op.getName()) ) {
-			    		CallableOperation callableOperation = new CallableOperation(op, current);
-			    		found_ops.put(op.getName(), callableOperation);
-			    		result.add( callableOperation );
-			    	} else if (found_ops.get(op.getName()).getOperation() == op.getSuperOperation() ) {
-			    		CallableOperation callableOperation = new CallableOperation(op, current);
-			    		found_ops.put(op.getName(), callableOperation);
-			    		CallableOperation currentCallableOperation = found_ops.get( op.getName() );
-			    		result.remove( currentCallableOperation );
-			    		result.add( callableOperation );
-			    	} else {
-			    		CallableOperation currentCallableOperation = found_ops.get( op.getName() );
-			    		if ( currentCallableOperation.getOperation().isIsAbstract() /*|| OperationHelper.isOverloadable(currentCallableOperation.operation)*/ ) {
-			    			CallableOperation callableOperation = new CallableOperation(op, current);
-			    			found_ops.put(op.getName(), callableOperation);
-			    			result.remove( currentCallableOperation );
-				    		result.add( callableOperation );
-				    	}
-			    	}
-			    }
-			    
-			    // Get the direct super type of the current parsed class
-			    for (Object next_t : getDirectSuperTypes(current)) {
-			    	fr.irisa.triskell.kermeta.language.structure.Class stype = (fr.irisa.triskell.kermeta.language.structure.Class)next_t;
-			        if ( ! toVisit.contains(stype) ) 
-			        	toVisit.add(stype);
-			    }
+						if ( ! found_ops.containsKey(op.getName()) ) {
+							CallableOperation callableOperation = new CallableOperation(op, current);
+							found_ops.put(op.getName(), callableOperation);
+							result.add( callableOperation );
+						} else if (found_ops.get(op.getName()).getOperation() == op.getSuperOperation() ) {
+							CallableOperation callableOperation = new CallableOperation(op, current);
+							found_ops.put(op.getName(), callableOperation);
+							CallableOperation currentCallableOperation = found_ops.get( op.getName() );
+							result.remove( currentCallableOperation );
+							result.add( callableOperation );
+						} else {
+								CallableOperation currentCallableOperation = found_ops.get( op.getName() );
+				    		if ( currentCallableOperation.getOperation().isIsAbstract() /*|| OperationHelper.isOverloadable(currentCallableOperation.operation)*/ ) {
+				    			CallableOperation callableOperation = new CallableOperation(op, current);
+				    			found_ops.put(op.getName(), callableOperation);
+				    			result.remove( currentCallableOperation );
+					    		result.add( callableOperation );
+					    	}
+				    	
+						}
+					}
 	
-			    for ( TypeDefinition baseClass : current.getTypeDefinition().getBaseAspects() ) {
-		    		if ( baseClass instanceof ClassDefinition ) {
-		    			Class baseClassType = StructureFactory.eINSTANCE.createClass();
-		    			baseClassType.setTypeDefinition( (ClassDefinition) baseClass );
-		    			toVisit.add(baseClassType);
-		    		}
-		    	}
-		    
-				for ( TypeDefinition aspectClass : TypeDefinitionHelper.getAspects( (ClassDefinition) current.getTypeDefinition()) ) {
-					if ( aspectClass instanceof ClassDefinition ) {
-						Class aspectClassType = StructureFactory.eINSTANCE.createClass();
-						aspectClassType.setTypeDefinition( (ClassDefinition) aspectClass );
-		    			toVisit.add(aspectClassType);
+				    
+				    // Get the direct super type of the current parsed class
+				    for (Object next_t : getDirectSuperTypes(current)) {
+				    	fr.irisa.triskell.kermeta.language.structure.Class stype = (fr.irisa.triskell.kermeta.language.structure.Class)next_t;
+				        if ( ! toVisit.contains(stype) ) 
+				        	toVisit.add(stype);
+				    }
+		
+				    for ( TypeDefinition baseClass : current.getTypeDefinition().getBaseAspects() ) {
+			    		if ( baseClass instanceof ClassDefinition ) {
+			    			Class baseClassType = StructureFactory.eINSTANCE.createClass();
+			    			baseClassType.setTypeDefinition( (ClassDefinition) baseClass );
+			    			toVisit.add(baseClassType);
+			    		}
+			    	}
+			    
+					for ( TypeDefinition aspectClass : TypeDefinitionHelper.getAspects( (ClassDefinition) current.getTypeDefinition()) ) {
+						if ( aspectClass instanceof ClassDefinition ) {
+							Class aspectClassType = StructureFactory.eINSTANCE.createClass();
+							aspectClassType.setTypeDefinition( (ClassDefinition) aspectClass );
+			    			toVisit.add(aspectClassType);
+						}
 					}
 				}
 			}		    
 
 		}
+		
 		// TODO And only finally, handle the object kind -> consequently, remove
 		// from getDirectSuperTypes() the code that adds object to the list of direct super types.
 		// Implies to change all the methods of getDirectSuperTypes.
