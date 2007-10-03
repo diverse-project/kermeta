@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fsm"
+    nsURI="platform:/resource/FSM/MetaModel/fsm.ecore">
+  <eClassifiers xsi:type="ecore:EClass" name="FSM">
+    <eOperations name="PrettyPrint"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
+        eType="#//Transition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" upperBound="-1"
+        eType="#//State" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Target" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="TransitionChar" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EChar"/>
+  </eClassifiers>
+</ecore:EPackage>

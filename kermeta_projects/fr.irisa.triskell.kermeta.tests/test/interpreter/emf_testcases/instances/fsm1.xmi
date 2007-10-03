@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="platform:/resource/FSM/MetaModel/fsm.ecore">
+  <transition Source="//@state.0" Target="//@state.1" TransitionChar="98"/>
+  <transition Source="//@state.1" Target="//@state.2" TransitionChar="98"/>
+  <transition Source="//@state.2" Target="//@state.3" TransitionChar="99"/>
+  <transition Source="//@state.3" Target="//@state.0" TransitionChar="100"/>
+  <state Name="1"/>
+  <state Name="2"/>
+  <state Name="3"/>
+  <state Name="4"/>
+</FSM>

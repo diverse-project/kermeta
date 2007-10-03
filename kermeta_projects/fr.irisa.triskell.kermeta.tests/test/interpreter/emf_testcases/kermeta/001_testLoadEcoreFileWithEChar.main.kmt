@@ -1,0 +1,46 @@
+@mainClass "loadEcoreFileWithEChar::Main"
+@mainOperation "main"
+
+
+package loadEcoreFileWithEChar;
+
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/001_fsm.ecore"
+using kermeta::persistence
+using fsm
+using kermeta::kunit
+
+class Main inherits TestCase
+{
+
+	operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+    end
+
+    operation test0() : Void is do 
+        // TODO: implement 'main' operation
+        
+        var res : EMFRepository init EMFRepository.new
+        
+        var resource : Resource init res.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/fsm1.xmi", "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/001_fsm.ecore")
+        
+        resource.load()
+        
+        var fsm1 : FSM
+
+        fsm1 ?= resource.instances.one 
+        
+        fsm1.state.each 
+        { 
+        	s | stdio.writeln("State "+ s.Name) 
+        } 
+        fsm1.transition.each 
+        { 
+        	t | stdio.writeln( "State " + t.Source.Name + " --> State " + t.Target.Name )
+        }
+        assert(true)
+    end
+}
