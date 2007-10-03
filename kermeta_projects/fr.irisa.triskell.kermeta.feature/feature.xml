@@ -145,7 +145,7 @@ GPL license.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="fr.irisa.triskell.kermeta.migrationv032_v040"
          download-size="0"
@@ -190,6 +190,13 @@ GPL license.
 
    <plugin
          id="fr.irisa.triskell.kermeta.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.merger"
          download-size="0"
          install-size="0"
          version="0.0.0"
