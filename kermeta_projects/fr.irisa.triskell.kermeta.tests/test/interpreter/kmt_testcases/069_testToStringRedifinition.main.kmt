@@ -1,0 +1,46 @@
+/* $Id: $
+ * Creation date: October 3, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "toStringRedefined::Main"
+@mainOperation "main"
+
+
+package toStringRedefined;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::kunit
+
+class Main inherits TestCase
+{
+
+    operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+    end
+
+	operation test0() : Void is do 
+		var c : C init C.new
+		c.name := "coucou"
+  		assert( c.toString == "coucou" )
+	end
+} 
+
+class A {
+   attribute name : String
+   method toString () : String is do 
+ 		result := name 
+	end
+}
+
+class B inherits A {
+}
+
+class C inherits B {
+}
