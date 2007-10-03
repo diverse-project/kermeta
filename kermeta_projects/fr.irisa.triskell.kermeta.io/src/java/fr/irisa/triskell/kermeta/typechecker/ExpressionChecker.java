@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.53 2007-10-02 15:19:05 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.54 2007-10-03 12:40:46 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -795,7 +795,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		if (expression.getElseBody() != null) this.accept(expression.getElseBody());
 		context.popContext();
 		// Check constraints
-		if(!getTypeOfExpression(expression.getCondition()).isSubTypeOf(TypeCheckerContext.BooleanType)) {
+		SimpleType conditionType = (SimpleType) getTypeOfExpression(expression.getCondition());
+		if( conditionType.getTypeDefinition() != TypeCheckerContext.BooleanType.getTypeDefinition() ) {
 			unit.error("TYPE-CHECKER : The condition expression of a conditional statement should be a Boolean expression", expression.getCondition());
 		}
 		// compute the return type

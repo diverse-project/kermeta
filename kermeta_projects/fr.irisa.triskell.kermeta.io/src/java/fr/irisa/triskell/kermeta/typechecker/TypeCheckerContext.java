@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.23 2007-09-19 12:15:03 ftanguy Exp $
+/* $Id: TypeCheckerContext.java,v 1.24 2007-10-03 12:40:46 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -253,7 +253,7 @@ public class TypeCheckerContext {
 	}
 	
 	
-	protected static Type createTypeForClassDefinition(String qualified_name, KermetaUnit unit) {
+	protected static SimpleType createTypeForClassDefinition(String qualified_name, KermetaUnit unit) {
 	    ClassDefinition cdef = (ClassDefinition)unit.getTypeDefinitionByQualifiedName(qualified_name);
 	    fr.irisa.triskell.kermeta.language.structure.Class cls = StructureFactory.eINSTANCE.createClass();
 	    cls.setTypeDefinition(cdef);
@@ -297,7 +297,7 @@ public class TypeCheckerContext {
 	protected static Type VoidType;
 	protected static Type IntegerType;
 	protected static Type StringType;
-	protected static Type BooleanType;
+	protected static SimpleType BooleanType;
 	protected static Type StdIOType;
 	
 	protected static Operation objectAsType;
