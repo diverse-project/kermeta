@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.14 2007-09-19 12:15:04 ftanguy Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.15 2007-10-03 12:41:05 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -15,9 +15,12 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.TypeDefinitionCacheEntry;
 import org.kermeta.io.impl.KermetaUnitImpl;
 import org.kermeta.loader.LoadingContext;
 
@@ -56,6 +59,14 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
     	setModelingUnit( kermetaUnit.getModelingUnit() );
     	getInternalPackageEntries().addAll( kermetaUnit.getInternalPackageEntries() );
     	getExternalPackageEntries().addAll( kermetaUnit.getExternalPackageEntries() );
+    	setTypeDefinitionCache( IoFactory.eINSTANCE.createTypeDefinitionCache() );
+    	Map<String, TypeDefinitionCacheEntry> entries = kermetaUnit.getTypeDefinitionCache().getEntries();
+    	for ( TypeDefinitionCacheEntry entry : entries.values() ) {
+    		TypeDefinitionCacheEntry newEntry = IoFactory.eINSTANCE.createTypeDefinitionCacheEntry();
+    		newEntry.setQualifiedName( entry.getQualifiedName() );
+    		newEntry.setTypeDefinition( entry.getTypeDefinition() );
+    		getTypeDefinitionCache().getEntries().put(entry.getQualifiedName(), newEntry);
+    	}
     }
     
     public void resetMessages() {
