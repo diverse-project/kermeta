@@ -1,6 +1,6 @@
 
 
-/*$Id: RequireConstraint.java,v 1.1 2007-10-04 07:22:52 ftanguy Exp $
+/*$Id: RequireConstraint.java,v 1.2 2007-10-04 08:38:44 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	RequireConstraint.java
 * License : EPL
@@ -53,13 +53,13 @@ public class RequireConstraint {
 
 	public void check() {
 		
-		Map<String, List<Package>> mappings = new HashMap<String, List<Package>> ();
+		Map<String, Set<Package>> mappings = new HashMap<String, Set<Package>> ();
 		for ( KermetaUnitRequire kuRequire : requires ) {
 			for ( Package p : kuRequire.getKermetaUnit().getInternalPackages() ) {
 				String qualifiedName = NamedElementHelper.getQualifiedName(p);
-				List<Package> l = mappings.get(qualifiedName);
+				Set<Package> l = mappings.get(qualifiedName);
 				if ( l == null ) {
-					l = new ArrayList<Package>();
+					l = new HashSet<Package>();
 					mappings.put(qualifiedName, l);
 				}
 				l.add( p );
@@ -67,7 +67,7 @@ public class RequireConstraint {
 		}
 		
 		for ( String packageQualifiedName : mappings.keySet() ) {
-			List<Package> l = mappings.get(packageQualifiedName);
+			Set<Package> l = mappings.get(packageQualifiedName);
 			/*
 			 * 
 			 * If size > 1 it means that the package with the qualifiedName has been declared twice.
@@ -119,6 +119,9 @@ public class RequireConstraint {
 				
 			}
 		}
+		
+		requires.clear();
+		kermetaUnit = null;
 	}
 	
 	private List<KermetaUnitRequire> getAllRequires() {
