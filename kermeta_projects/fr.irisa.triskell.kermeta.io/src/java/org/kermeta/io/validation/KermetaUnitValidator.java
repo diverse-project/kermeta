@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitValidator.java,v 1.5 2007-09-19 12:14:58 ftanguy Exp $
+ * $Id: KermetaUnitValidator.java,v 1.6 2007-10-04 07:22:15 ftanguy Exp $
  */
 package org.kermeta.io.validation;
 
@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.kermeta.io.IBuildingState;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.KermetaUnitRequire;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
@@ -51,4 +52,8 @@ public interface KermetaUnitValidator {
 	boolean validateIsBeingTypechecked(boolean value);
 
 	boolean validateTypeDefinitionCache(TypeDefinitionCache value);
+
+	boolean validateKermetaUnitRequires(EList<KermetaUnitRequire> value);
+
+	boolean validateKermetaUnitRequired(EList<KermetaUnit> value);
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoAdapterFactory.java,v 1.6 2007-09-19 12:15:04 ftanguy Exp $
+ * $Id: IoAdapterFactory.java,v 1.7 2007-10-04 07:22:14 ftanguy Exp $
  */
 package org.kermeta.io.util;
 
@@ -127,6 +127,10 @@ public class IoAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTypeDefinitionCacheEntry(TypeDefinitionCacheEntry object) {
 				return createTypeDefinitionCacheEntryAdapter();
+			}
+			@Override
+			public Adapter caseKermetaUnitRequire(KermetaUnitRequire object) {
+				return createKermetaUnitRequireAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -313,6 +317,20 @@ public class IoAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeDefinitionCacheEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.io.KermetaUnitRequire <em>Kermeta Unit Require</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.io.KermetaUnitRequire
+	 * @generated
+	 */
+	public Adapter createKermetaUnitRequireAdapter() {
 		return null;
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactory.java,v 1.3 2007-09-19 12:15:04 ftanguy Exp $
+ * $Id: IoFactory.java,v 1.4 2007-10-04 07:22:15 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -105,6 +105,15 @@ public interface IoFactory extends EFactory {
 	 * @generated
 	 */
 	TypeDefinitionCacheEntry createTypeDefinitionCacheEntry();
+
+	/**
+	 * Returns a new object of class '<em>Kermeta Unit Require</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Kermeta Unit Require</em>'.
+	 * @generated
+	 */
+	KermetaUnitRequire createKermetaUnitRequire();
 
 	/**
 	 * Returns the package supported by this factory.

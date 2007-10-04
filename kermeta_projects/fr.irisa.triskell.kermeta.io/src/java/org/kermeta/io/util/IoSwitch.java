@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoSwitch.java,v 1.6 2007-09-19 12:15:04 ftanguy Exp $
+ * $Id: IoSwitch.java,v 1.7 2007-10-04 07:22:14 ftanguy Exp $
  */
 package org.kermeta.io.util;
 
@@ -173,6 +173,12 @@ public class IoSwitch<T> {
 			case IoPackage.TYPE_DEFINITION_CACHE_ENTRY: {
 				TypeDefinitionCacheEntry typeDefinitionCacheEntry = (TypeDefinitionCacheEntry)theEObject;
 				T result = caseTypeDefinitionCacheEntry(typeDefinitionCacheEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case IoPackage.KERMETA_UNIT_REQUIRE: {
+				KermetaUnitRequire kermetaUnitRequire = (KermetaUnitRequire)theEObject;
+				T result = caseKermetaUnitRequire(kermetaUnitRequire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -357,6 +363,21 @@ public class IoSwitch<T> {
 	 * @generated
 	 */
 	public T caseTypeDefinitionCacheEntry(TypeDefinitionCacheEntry object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Kermeta Unit Require</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Kermeta Unit Require</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseKermetaUnitRequire(KermetaUnitRequire object) {
 		return null;
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.11 2007-09-19 12:15:04 ftanguy Exp $
+ * $Id: KermetaUnit.java,v 1.12 2007-10-04 07:22:15 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -56,6 +56,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
  *   <li>{@link org.kermeta.io.KermetaUnit#getAspects <em>Aspects</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#isIsBeingTypechecked <em>Is Being Typechecked</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getTypeDefinitionCache <em>Type Definition Cache</em>}</li>
+ *   <li>{@link org.kermeta.io.KermetaUnit#getKermetaUnitRequires <em>Kermeta Unit Requires</em>}</li>
  * </ul>
  * </p>
  *
@@ -480,6 +481,22 @@ public interface KermetaUnit extends EObject {
 	void setTypeDefinitionCache(TypeDefinitionCache value);
 
 	/**
+	 * Returns the value of the '<em><b>Kermeta Unit Requires</b></em>' reference list.
+	 * The list contents are of type {@link org.kermeta.io.KermetaUnitRequire}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Kermeta Unit Requires</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Kermeta Unit Requires</em>' reference list.
+	 * @see org.kermeta.io.IoPackage#getKermetaUnit_KermetaUnitRequires()
+	 * @model
+	 * @generated
+	 */
+	EList<KermetaUnitRequire> getKermetaUnitRequires();
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model
@@ -512,7 +529,7 @@ public interface KermetaUnit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	Require addRequire(String uri);
+	Require addRequire(String uri, KermetaUnit kermetaUnit);
 
 	/**
 	 * <!-- begin-user-doc -->

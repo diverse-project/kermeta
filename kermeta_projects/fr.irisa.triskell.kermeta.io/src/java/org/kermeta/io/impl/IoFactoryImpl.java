@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.8 2007-09-19 12:15:02 ftanguy Exp $
+ * $Id: IoFactoryImpl.java,v 1.9 2007-10-04 07:22:15 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -87,6 +87,7 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 			case IoPackage.PARSING_ERROR: return createParsingError();
 			case IoPackage.TYPE_DEFINITION_CACHE: return createTypeDefinitionCache();
 			case IoPackage.TYPE_DEFINITION_CACHE_ENTRY: return createTypeDefinitionCacheEntry();
+			case IoPackage.KERMETA_UNIT_REQUIRE: return createKermetaUnitRequire();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -234,6 +235,16 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	public TypeDefinitionCacheEntry createTypeDefinitionCacheEntry() {
 		TypeDefinitionCacheEntryImpl typeDefinitionCacheEntry = new TypeDefinitionCacheEntryImpl();
 		return typeDefinitionCacheEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KermetaUnitRequire createKermetaUnitRequire() {
+		KermetaUnitRequireImpl kermetaUnitRequire = new KermetaUnitRequireImpl();
+		return kermetaUnitRequire;
 	}
 
 	/**

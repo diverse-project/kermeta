@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackage.java,v 1.6 2007-09-19 12:15:04 ftanguy Exp $
+ * $Id: IoPackage.java,v 1.7 2007-10-04 07:22:15 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -224,13 +224,22 @@ public interface IoPackage extends EPackage {
 	int KERMETA_UNIT__TYPE_DEFINITION_CACHE = 16;
 
 	/**
+	 * The feature id for the '<em><b>Kermeta Unit Requires</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_UNIT__KERMETA_UNIT_REQUIRES = 17;
+
+	/**
 	 * The number of structural features of the '<em>Kermeta Unit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT_FEATURE_COUNT = 17;
+	int KERMETA_UNIT_FEATURE_COUNT = 18;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.io.impl.KermetaUnitStorerImpl <em>Kermeta Unit Storer</em>}' class.
@@ -640,6 +649,43 @@ public interface IoPackage extends EPackage {
 	int TYPE_DEFINITION_CACHE_ENTRY_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.io.impl.KermetaUnitRequireImpl <em>Kermeta Unit Require</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.io.impl.KermetaUnitRequireImpl
+	 * @see org.kermeta.io.impl.IoPackageImpl#getKermetaUnitRequire()
+	 * @generated
+	 */
+	int KERMETA_UNIT_REQUIRE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Kermeta Unit</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_UNIT_REQUIRE__KERMETA_UNIT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Require</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_UNIT_REQUIRE__REQUIRE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Kermeta Unit Require</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_UNIT_REQUIRE_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '<em>Set</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -647,7 +693,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 12;
+	int SET = 13;
 
 
 	/**
@@ -658,7 +704,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 13;
+	int LIST = 14;
 
 
 	/**
@@ -669,7 +715,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getTracer()
 	 * @generated
 	 */
-	int TRACER = 14;
+	int TRACER = 15;
 
 
 	/**
@@ -680,7 +726,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getASTNode()
 	 * @generated
 	 */
-	int AST_NODE = 15;
+	int AST_NODE = 16;
 
 
 	/**
@@ -691,7 +737,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getANTLRException()
 	 * @generated
 	 */
-	int ANTLR_EXCEPTION = 16;
+	int ANTLR_EXCEPTION = 17;
 
 	/**
 	 * The meta object id for the '<em>IO Plugin</em>' data type.
@@ -701,7 +747,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getIOPlugin()
 	 * @generated
 	 */
-	int IO_PLUGIN = 17;
+	int IO_PLUGIN = 18;
 
 
 	/**
@@ -712,7 +758,7 @@ public interface IoPackage extends EPackage {
 	 * @see org.kermeta.io.impl.IoPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 18;
+	int IPROGRESS_MONITOR = 19;
 
 
 	/**
@@ -911,6 +957,17 @@ public interface IoPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getKermetaUnit_TypeDefinitionCache();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.io.KermetaUnit#getKermetaUnitRequires <em>Kermeta Unit Requires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Kermeta Unit Requires</em>'.
+	 * @see org.kermeta.io.KermetaUnit#getKermetaUnitRequires()
+	 * @see #getKermetaUnit()
+	 * @generated
+	 */
+	EReference getKermetaUnit_KermetaUnitRequires();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.io.KermetaUnitStorer <em>Kermeta Unit Storer</em>}'.
@@ -1177,6 +1234,38 @@ public interface IoPackage extends EPackage {
 	EReference getTypeDefinitionCacheEntry_TypeDefinition();
 
 	/**
+	 * Returns the meta object for class '{@link org.kermeta.io.KermetaUnitRequire <em>Kermeta Unit Require</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Kermeta Unit Require</em>'.
+	 * @see org.kermeta.io.KermetaUnitRequire
+	 * @generated
+	 */
+	EClass getKermetaUnitRequire();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.io.KermetaUnitRequire#getKermetaUnit <em>Kermeta Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Kermeta Unit</em>'.
+	 * @see org.kermeta.io.KermetaUnitRequire#getKermetaUnit()
+	 * @see #getKermetaUnitRequire()
+	 * @generated
+	 */
+	EReference getKermetaUnitRequire_KermetaUnit();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.io.KermetaUnitRequire#getRequire <em>Require</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Require</em>'.
+	 * @see org.kermeta.io.KermetaUnitRequire#getRequire()
+	 * @see #getKermetaUnitRequire()
+	 * @generated
+	 */
+	EReference getKermetaUnitRequire_Require();
+
+	/**
 	 * Returns the meta object for data type '{@link java.util.Set <em>Set</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1422,6 +1511,14 @@ public interface IoPackage extends EPackage {
 		EReference KERMETA_UNIT__TYPE_DEFINITION_CACHE = eINSTANCE.getKermetaUnit_TypeDefinitionCache();
 
 		/**
+		 * The meta object literal for the '<em><b>Kermeta Unit Requires</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KERMETA_UNIT__KERMETA_UNIT_REQUIRES = eINSTANCE.getKermetaUnit_KermetaUnitRequires();
+
+		/**
 		 * The meta object literal for the '{@link org.kermeta.io.impl.KermetaUnitStorerImpl <em>Kermeta Unit Storer</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1642,6 +1739,32 @@ public interface IoPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPE_DEFINITION_CACHE_ENTRY__TYPE_DEFINITION = eINSTANCE.getTypeDefinitionCacheEntry_TypeDefinition();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.io.impl.KermetaUnitRequireImpl <em>Kermeta Unit Require</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.io.impl.KermetaUnitRequireImpl
+		 * @see org.kermeta.io.impl.IoPackageImpl#getKermetaUnitRequire()
+		 * @generated
+		 */
+		EClass KERMETA_UNIT_REQUIRE = eINSTANCE.getKermetaUnitRequire();
+
+		/**
+		 * The meta object literal for the '<em><b>Kermeta Unit</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KERMETA_UNIT_REQUIRE__KERMETA_UNIT = eINSTANCE.getKermetaUnitRequire_KermetaUnit();
+
+		/**
+		 * The meta object literal for the '<em><b>Require</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KERMETA_UNIT_REQUIRE__REQUIRE = eINSTANCE.getKermetaUnitRequire_Require();
 
 		/**
 		 * The meta object literal for the '<em>Set</em>' data type.

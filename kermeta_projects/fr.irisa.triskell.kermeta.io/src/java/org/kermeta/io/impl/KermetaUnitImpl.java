@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.17 2007-10-01 15:14:44 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.18 2007-10-04 07:22:15 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -35,6 +35,7 @@ import org.kermeta.io.IBuildingState;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.IoPackage;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.KermetaUnitRequire;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
@@ -86,6 +87,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getAspects <em>Aspects</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isIsBeingTypechecked <em>Is Being Typechecked</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getTypeDefinitionCache <em>Type Definition Cache</em>}</li>
+ *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getKermetaUnitRequires <em>Kermeta Unit Requires</em>}</li>
  * </ul>
  * </p>
  *
@@ -323,6 +325,16 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @ordered
 	 */
 	protected TypeDefinitionCache typeDefinitionCache;
+
+	/**
+	 * The cached value of the '{@link #getKermetaUnitRequires() <em>Kermeta Unit Requires</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKermetaUnitRequires()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<KermetaUnitRequire> kermetaUnitRequires;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -758,6 +770,18 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<KermetaUnitRequire> getKermetaUnitRequires() {
+		if (kermetaUnitRequires == null) {
+			kermetaUnitRequires = new EObjectResolvingEList<KermetaUnitRequire>(KermetaUnitRequire.class, this, IoPackage.KERMETA_UNIT__KERMETA_UNIT_REQUIRES);
+		}
+		return kermetaUnitRequires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public void load() {
@@ -832,7 +856,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public Require addRequire(String uri) {
+	public Require addRequire(String uri, KermetaUnit kermetaUnit) {
 		assert ( modelingUnit != null );
 		for ( Require r : modelingUnit.getRequires() )
 			if ( r.getUri().equals(uri) )
@@ -840,6 +864,13 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		Require require = StructureFactory.eINSTANCE.createRequire();
 		require.setUri( uri );
 		modelingUnit.getRequires().add( require );
+
+		if ( kermetaUnit != null ) {
+			KermetaUnitRequire kuRequire = IoFactory.eINSTANCE.createKermetaUnitRequire();
+			kuRequire.setKermetaUnit(kermetaUnit);
+			kuRequire.setRequire(require);
+			getKermetaUnitRequires().add( kuRequire );
+		}
 		return require;
 	}
 
@@ -1469,6 +1500,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
 				if (resolve) return getTypeDefinitionCache();
 				return basicGetTypeDefinitionCache();
+			case IoPackage.KERMETA_UNIT__KERMETA_UNIT_REQUIRES:
+				return getKermetaUnitRequires();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1538,6 +1571,10 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
 				setTypeDefinitionCache((TypeDefinitionCache)newValue);
 				return;
+			case IoPackage.KERMETA_UNIT__KERMETA_UNIT_REQUIRES:
+				getKermetaUnitRequires().clear();
+				getKermetaUnitRequires().addAll((Collection<? extends KermetaUnitRequire>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1601,6 +1638,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
 				setTypeDefinitionCache((TypeDefinitionCache)null);
 				return;
+			case IoPackage.KERMETA_UNIT__KERMETA_UNIT_REQUIRES:
+				getKermetaUnitRequires().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1647,6 +1687,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return isBeingTypechecked != IS_BEING_TYPECHECKED_EDEFAULT;
 			case IoPackage.KERMETA_UNIT__TYPE_DEFINITION_CACHE:
 				return typeDefinitionCache != null;
+			case IoPackage.KERMETA_UNIT__KERMETA_UNIT_REQUIRES:
+				return kermetaUnitRequires != null && !kermetaUnitRequires.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

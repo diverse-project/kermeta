@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.12 2007-09-19 12:15:02 ftanguy Exp $
+ * $Id: IoPackageImpl.java,v 1.13 2007-10-04 07:22:15 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -24,6 +24,7 @@ import org.kermeta.io.IoFactory;
 import org.kermeta.io.IoPackage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitLoader;
+import org.kermeta.io.KermetaUnitRequire;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
@@ -132,6 +133,13 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * @generated
 	 */
 	private EClass typeDefinitionCacheEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass kermetaUnitRequireEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -420,6 +428,15 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getKermetaUnit_KermetaUnitRequires() {
+		return (EReference)kermetaUnitEClass.getEStructuralFeatures().get(17);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getKermetaUnitStorer() {
 		return kermetaUnitStorerEClass;
 	}
@@ -645,6 +662,33 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getKermetaUnitRequire() {
+		return kermetaUnitRequireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getKermetaUnitRequire_KermetaUnit() {
+		return (EReference)kermetaUnitRequireEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getKermetaUnitRequire_Require() {
+		return (EReference)kermetaUnitRequireEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getSet() {
 		return setEDataType;
 	}
@@ -749,6 +793,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__ASPECTS);
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__IS_BEING_TYPECHECKED);
 		createEReference(kermetaUnitEClass, KERMETA_UNIT__TYPE_DEFINITION_CACHE);
+		createEReference(kermetaUnitEClass, KERMETA_UNIT__KERMETA_UNIT_REQUIRES);
 
 		iBuildingStateEClass = createEClass(IBUILDING_STATE);
 
@@ -785,6 +830,10 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		typeDefinitionCacheEntryEClass = createEClass(TYPE_DEFINITION_CACHE_ENTRY);
 		createEAttribute(typeDefinitionCacheEntryEClass, TYPE_DEFINITION_CACHE_ENTRY__QUALIFIED_NAME);
 		createEReference(typeDefinitionCacheEntryEClass, TYPE_DEFINITION_CACHE_ENTRY__TYPE_DEFINITION);
+
+		kermetaUnitRequireEClass = createEClass(KERMETA_UNIT_REQUIRE);
+		createEReference(kermetaUnitRequireEClass, KERMETA_UNIT_REQUIRE__KERMETA_UNIT);
+		createEReference(kermetaUnitRequireEClass, KERMETA_UNIT_REQUIRE__REQUIRE);
 
 		// Create data types
 		setEDataType = createEDataType(SET);
@@ -858,6 +907,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		initEAttribute(getKermetaUnit_Aspects(), g1, "aspects", null, 0, 1, KermetaUnit.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKermetaUnit_IsBeingTypechecked(), ecorePackage.getEBoolean(), "isBeingTypechecked", null, 0, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKermetaUnit_TypeDefinitionCache(), this.getTypeDefinitionCache(), this.getTypeDefinitionCache_KermetaUnit(), "typeDefinitionCache", null, 1, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKermetaUnit_KermetaUnitRequires(), this.getKermetaUnitRequire(), null, "kermetaUnitRequires", null, 0, -1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(kermetaUnitEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -869,6 +919,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		op = addEOperation(kermetaUnitEClass, theStructurePackage.getRequire(), "addRequire", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getKermetaUnit(), "kermetaUnit", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitEClass, theStructurePackage.getUsing(), "addUsing", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1037,6 +1088,10 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		initEClass(typeDefinitionCacheEntryEClass, TypeDefinitionCacheEntry.class, "TypeDefinitionCacheEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTypeDefinitionCacheEntry_QualifiedName(), ecorePackage.getEString(), "qualifiedName", null, 1, 1, TypeDefinitionCacheEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeDefinitionCacheEntry_TypeDefinition(), theStructurePackage.getTypeDefinition(), null, "typeDefinition", null, 1, 1, TypeDefinitionCacheEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(kermetaUnitRequireEClass, KermetaUnitRequire.class, "KermetaUnitRequire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getKermetaUnitRequire_KermetaUnit(), this.getKermetaUnit(), null, "kermetaUnit", null, 1, 1, KermetaUnitRequire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKermetaUnitRequire_Require(), theStructurePackage.getRequire(), null, "require", null, 1, 1, KermetaUnitRequire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(setEDataType, Set.class, "Set", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
