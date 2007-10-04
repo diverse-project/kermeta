@@ -1,0 +1,24 @@
+/* $Id: $
+ * Creation date: October 3, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "requiresColliding::A"
+@mainOperation "main"
+
+
+package requiresColliding;
+ 
+
+require kermeta
+require "008_testRequiresColliding/008_testRequiresCollidingB.kmt"
+require "008_testRequiresColliding/008_testRequiresCollidingD.kmt"
+ 
+ 
+class A
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+} 

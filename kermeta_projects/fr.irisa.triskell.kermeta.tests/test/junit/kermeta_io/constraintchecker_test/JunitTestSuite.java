@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.4 2007-09-19 13:07:40 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.5 2007-10-04 08:39:17 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -62,6 +62,8 @@ public class JunitTestSuite extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
+
+
 
 
 
@@ -237,6 +239,10 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","006_inheritedproperty
 
 public void testinvalid_007_resultNotSet() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","007_resultNotSet.kmt" );
+}
+
+public void testinvalid_008_testRequiresColliding() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","008_testRequiresColliding.kmt" );
 }
 
 public void testinvalid_025_weaving_in_kermeta_aspect1() throws Exception {

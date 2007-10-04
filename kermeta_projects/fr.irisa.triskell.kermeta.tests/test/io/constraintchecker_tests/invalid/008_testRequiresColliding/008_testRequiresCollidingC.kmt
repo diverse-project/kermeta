@@ -1,0 +1,11 @@
+package root_package;
+
+require "kermeta"
+class Titi
+{
+	operation main() : Void is
+		do
+			result := void
+		end
+
+}

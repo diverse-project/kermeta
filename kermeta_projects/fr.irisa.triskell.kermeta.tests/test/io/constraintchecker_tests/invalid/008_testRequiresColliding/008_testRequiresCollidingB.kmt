@@ -1,0 +1,20 @@
+/* $Id: $
+ * Creation date: October 3, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Titi"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+class Titi
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+}
