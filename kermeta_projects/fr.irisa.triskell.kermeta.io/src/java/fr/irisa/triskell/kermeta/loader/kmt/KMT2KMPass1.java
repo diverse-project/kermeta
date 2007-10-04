@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.18 2007-10-01 15:14:42 ftanguy Exp $
+/* $Id: KMT2KMPass1.java,v 1.19 2007-10-04 07:22:51 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : EPL
@@ -182,7 +182,7 @@ public class KMT2KMPass1 extends KMT2KMPass {
 		if ( currentImportedUnit != null) {
 			if ( ! builder.getImportedKermetaUnits().contains( currentImportedUnit ) ) {
 				builder.getImportedKermetaUnits().add( currentImportedUnit );
-				Require require = builder.addRequire( uriRequire );
+				Require require = builder.addRequire( uriRequire, currentImportedUnit );
 				builder.storeTrace(require, importStmt);
 			} else if ( ! currentImportedUnit.getUri().equals(IOPlugin.FRAMEWORK_KM_URI) ){
 				builder.warning("Duplicate require of " + currentImportedUnit.getUri() + ".", importStmt);

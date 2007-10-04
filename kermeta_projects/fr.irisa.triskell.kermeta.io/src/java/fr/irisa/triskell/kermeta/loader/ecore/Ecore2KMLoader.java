@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.14 2007-09-19 12:14:58 ftanguy Exp $
+/*$Id: Ecore2KMLoader.java,v 1.15 2007-10-04 07:22:52 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -146,7 +146,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 					for(Entry<KermetaUnit,Resource> e : resources.entrySet()){
 						if(!e.getKey().getUri().equals(uri)){
 							kermetaUnit.getImportedKermetaUnits().add(e.getKey());
-							kermetaUnit.addRequire( e.getKey().getUri() );
+							kermetaUnit.addRequire( e.getKey().getUri(), e.getKey() );
 						}
 					}
 				}

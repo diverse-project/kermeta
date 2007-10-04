@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.14 2007-09-13 09:04:52 ftanguy Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.15 2007-10-04 07:22:52 ftanguy Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -26,6 +26,7 @@ import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
+import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -84,6 +85,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
     public void checkUnit() {
     	  	
     	if ( ! builder.isConstraintChecked() ) {
+    		new RequireConstraint(builder).check();
     		Iterator<TypeDefinition> it = TypeDefinitionSearcher.getInternalTypesDefinition(builder).iterator();
     		// Call the check constraint visitor on it!
     		while(it.hasNext()) {
@@ -189,6 +191,8 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 		//return result;
 		return super.visitOperation(operation);
 	}
+		
+	
 	/**
 	 * Checked constraints :
 	 *   - Only CallFeature contained in postcondition can have isIsAtPre == true.
