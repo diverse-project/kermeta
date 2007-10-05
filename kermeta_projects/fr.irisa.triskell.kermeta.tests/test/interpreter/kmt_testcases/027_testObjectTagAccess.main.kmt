@@ -1,0 +1,49 @@
+/* $Id: 027_testObjectTagAccess.main.kmt,v 1.1 2007-10-05 15:19:17 dvojtise Exp $
+ * Creation date: August 23, 2007
+ * License:	EPL
+ * Copyright:
+ * Authors:
+ *     Didier Vojtisek
+ */
+@mainClass "testTagAccess::TestTagReflexiveAccess"
+@mainOperation "main"
+
+package testTagAccess;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::reflection
+using kermeta::kunit
+
+
+/**
+ * checks various access the tag attribute inherited from Object
+ */
+ @bla "fff"
+class TestTagReflexiveAccess inherits kermeta::kunit::TestCase {
+
+	operation main() : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(TestTagAccess)
+		tr.printTestResult
+	end
+	
+	operation testTag() : Void is do
+		
+		var anObjectWithTag : Object
+		anObjectWithTag := self.getMetaClass 
+		stdio.writeln(anObjectWithTag.tag.size.toString)
+		stdio.writeln(anObjectWithTag.ownedTag.size.toString)
+		assert(anObjectWithTag.ownedTag.size == 2)  // one tag from @bla, one from the documentation
+		anObjectWithTag := TestTagAccess 
+		stdio.writeln(anObjectWithTag.tag.size.toString)
+		stdio.writeln(anObjectWithTag.ownedTag.size.toString)
+		assert(anObjectWithTag.ownedTag.size == 2)  // one tag from @bla, one from the documentation
+		
+	end
+}
+
+
+
