@@ -1,6 +1,6 @@
 
 
-/*$Id: KmExporter.java,v 1.4 2007-08-02 16:49:09 dvojtise Exp $
+/*$Id: KmExporter.java,v 1.5 2007-10-12 09:17:52 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -153,7 +153,7 @@ public class KmExporter {
 		if ( fileName != null )
 			uris.put(kermetaUnit, fileName);
 		else {
-			uri = StringHelper.replaceExtension(uri, ".km");
+			uri = StringHelper.replaceExtension(uri, "km");
 			uris.put(kermetaUnit, uri);
 		}
 			

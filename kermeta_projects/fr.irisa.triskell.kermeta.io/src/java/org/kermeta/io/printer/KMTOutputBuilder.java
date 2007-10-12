@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTOutputBuilder.java,v 1.3 2007-07-24 13:46:48 ftanguy Exp $
+/*$Id: KMTOutputBuilder.java,v 1.4 2007-10-12 09:16:06 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io2
 * File : 	KMTOutputBuilder.java
 * License : EPL
@@ -112,7 +112,7 @@ public class KMTOutputBuilder {
 		if ( fileName != null )
 			uris.put(kermetaUnit, fileName);
 		else {
-			uri = StringHelper.replaceExtension(uri, ".kmt");
+			uri = StringHelper.replaceExtension(uri, "kmt");
 			uris.put(kermetaUnit, uri);
 		}
 		
