@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.41 2007-09-04 08:22:20 ftanguy Exp $
+/* $Id: KM2Ecore.java,v 1.42 2007-10-12 09:17:22 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -90,12 +90,12 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
     	primitive_types_mapping = new Hashtable<String,String>();
     	primitive_types_mapping.put("kermeta::standard::Character", "char");
     	//primitive_types_mapping.put("kermeta::standard::Character",	"java.lang.Character");
-    	primitive_types_mapping.put("kermeta::standard::Integer",	"java.lang.Integer");
-    	primitive_types_mapping.put("kermeta::standard::Boolean",	"boolean");
+    	primitive_types_mapping.put("kermeta::language::structure::Integer",	"java.lang.Integer");
+    	primitive_types_mapping.put("kermeta::language::structure::Boolean",	"boolean");
     	//primitive_types_mapping.put("kermeta::standard::Boolean",	"java.lang.Boolean");
-    	primitive_types_mapping.put("kermeta::standard::String",	"java.lang.String");
+    	primitive_types_mapping.put("kermeta::language::structure::String",	"java.lang.String");
     	primitive_types_mapping.put("kermeta::standard::Object",	"java.lang.Object");
-    	primitive_types_mapping.put("kermeta::standard::UnlimitedNatural",	"java.lang.Integer");
+    	primitive_types_mapping.put("kermeta::language::structure::UnlimitedNatural",	"java.lang.Integer");
     	primitive_types_mapping.put("kermeta::standard::Real",	"java.lang.Double");
     }
     
