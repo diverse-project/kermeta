@@ -1,4 +1,4 @@
-/* $Id: TypecheckingStrategy.java,v 1.8 2007-09-13 09:02:41 ftanguy Exp $
+/* $Id: TypecheckingStrategy.java,v 1.9 2007-10-12 09:12:15 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : TypecheckingStrategy.java
 * License : EPL
@@ -14,7 +14,6 @@ import java.util.HashMap;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.text.IDocument;
@@ -24,16 +23,13 @@ import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.io.util2.KermetaUnitHelper;
 
-import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 

@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.24 2007-10-01 15:16:28 ftanguy Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.25 2007-10-12 09:11:19 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -9,7 +9,6 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
-import org.eclipse.jface.viewers.StructuredSelection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,6 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
@@ -29,23 +27,18 @@ import org.eclipse.debug.ui.ILaunchShortcut;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.io.util2.KermetaUnitHelper;
-
-import com.sun.org.apache.bcel.internal.generic.ClassObserver;
 
 import fr.irisa.triskell.kermeta.KermetaMessages;
-import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 /**
  * Launch shortcut that appears when users selects a file > Run > Kermeta App.
