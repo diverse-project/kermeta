@@ -2,13 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.19 2007-09-19 12:15:02 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.20 2007-10-12 09:16:22 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
 
 import java.lang.ref.WeakReference;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,6 +30,7 @@ import org.kermeta.io.IoPackage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.loader.FrameworkMapping;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -113,10 +116,14 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 		
 		String kermetaUnitURI = uri;
 		
+		String uriMapped = FrameworkMapping.mapping.get(kermetaUnitURI);
+		if ( uriMapped != null )
+			kermetaUnitURI = uriMapped;
+		
 		if ( uri.equals("kermeta") ) {
-			kermetaUnitURI = IOPlugin.FRAMEWORK_KM_URI;
+			kermetaUnitURI = IOPlugin.getFrameWorkURI();
 			framework = true;
-		} else if ( uri.equals(IOPlugin.FRAMEWORK_KM_URI) )
+		} else if ( uri.equals(IOPlugin.getFrameWorkURI()) )
 			framework = true;
 		else if ( uri.equals(IOPlugin.getFrameWorkEcoreURI()) )
 			framework = true;
@@ -194,10 +201,14 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * @generated NOT
 	 */
 	public KermetaUnit find(String uri) {
+		String realURI = FrameworkMapping.mapping.get(uri);
+		if ( realURI == null )
+			realURI = uri;
+		
 		Iterator <KermetaUnit> iterator = getKermetaUnits().iterator();
 		while ( iterator.hasNext() ) {
 			KermetaUnit current = iterator.next();
-			if ( current.getUri().equals(uri) ) {
+			if ( current.getUri().equals(realURI) ) {
 				WeakReference reference = new WeakReference( current );
 		        return (KermetaUnit) reference.get();
 			}
@@ -210,8 +221,45 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public void load(String uri, Map<Object, Object> options, IProgressMonitor monitor) {
+		int index = uri.lastIndexOf(".");
+		String extension = uri.substring(index+1);
+		
+		if ( extension.equals("kmt") ) {
+		
+			KMTUnitLoader loader = new KMTUnitLoader(options, monitor);
+			loader.load(uri);
+		
+		} else if ( extension.equals("km") ) {
+			
+			KMUnitLoader loader = new KMUnitLoader(options, monitor);
+			loader.load(uri);
+			
+		} else if ( extension.equals("ecore") || uri.equals(IOPlugin.ECORE_URI) ) {
+			
+			Ecore2KMLoader loader = new Ecore2KMLoader(options, monitor);
+			loader.load(uri);
+			
+		} else if ( extension.equals("jar") ) {
+		
+			JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader(options, monitor);
+			loader.load(uri);
+		
+		} else if ( uri.matches("http://.+") ) {
+			if ( EMFRegistryHelper.isDynamicallyRegistered(uri) ) {
+				// TODO
+				// Looking for the factory and see if the file can be translated into kermeta.
+			}
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public void load(String uri, IProgressMonitor monitor) {
-		load(uri, null, monitor);
+		load(uri, new HashMap<Object, Object>(), monitor);
 	}
 
 	/**
@@ -264,44 +312,6 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			kermetaUnit.setModelingUnit(null);
 			kermetaUnit.setStorer(null);
 			kermetaUnit.setTypeDefinitionCache(null);
-		}
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void load(String uri, String content, IProgressMonitor monitor) {
-		
-		int index = uri.lastIndexOf(".");
-		String extension = uri.substring(index+1);
-		
-		if ( extension.equals("kmt") ) {
-		
-			KMTUnitLoader loader = new KMTUnitLoader(content, monitor);
-			loader.load(uri);
-		
-		} else if ( extension.equals("km") ) {
-			
-			KMUnitLoader loader = new KMUnitLoader(monitor);
-			loader.load(uri);
-			
-		} else if ( extension.equals("ecore") || uri.equals(IOPlugin.ECORE_URI) ) {
-			
-			Ecore2KMLoader loader = new Ecore2KMLoader(monitor);
-			loader.load(uri, true);
-			
-		} else if ( extension.equals("jar") ) {
-		
-			JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader(monitor);
-			loader.load(uri);
-		
-		} else if ( uri.matches("http://.+") ) {
-			if ( EMFRegistryHelper.isDynamicallyRegistered(uri) ) {
-				// TODO
-				// Looking for the factory and see if the file can be translated into kermeta.
-			}
 		}
 	}
 

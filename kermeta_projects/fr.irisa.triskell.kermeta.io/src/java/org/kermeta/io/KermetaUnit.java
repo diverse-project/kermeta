@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.12 2007-10-04 07:22:15 ftanguy Exp $
+ * $Id: KermetaUnit.java,v 1.13 2007-10-12 09:16:22 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -557,10 +557,10 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model recursiveRequired="true"
 	 * @generated
 	 */
-	void importKermetaUnit(KermetaUnit value, boolean force);
+	void importKermetaUnit(KermetaUnit value, boolean force, boolean recursive);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.13 2007-10-04 07:22:15 ftanguy Exp $
+ * $Id: IoPackageImpl.java,v 1.14 2007-10-12 09:16:22 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -929,6 +929,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		op = addEOperation(kermetaUnitEClass, null, "importKermetaUnit", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getKermetaUnit(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBoolean(), "force", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "recursive", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitEClass, null, "addExternalPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theStructurePackage.getPackage(), "p", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1022,15 +1023,16 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		op = addEOperation(kermetaUnitStorerEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "options", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitStorerEClass, null, "unload", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(kermetaUnitStorerEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "content", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(packageEntryEClass, PackageEntry.class, "PackageEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPackageEntry_QualifiedName(), ecorePackage.getEString(), "qualifiedName", null, 1, 1, PackageEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

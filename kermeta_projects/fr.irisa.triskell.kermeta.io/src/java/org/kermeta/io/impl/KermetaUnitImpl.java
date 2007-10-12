@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.18 2007-10-04 07:22:15 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.19 2007-10-12 09:16:22 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -911,7 +911,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void importKermetaUnit(KermetaUnit value, boolean force) {
+	public void importKermetaUnit(KermetaUnit value, boolean force, boolean recursive) {
 		if ( value != this ) {
 			
 			boolean shouldImport = true;
@@ -934,13 +934,15 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 					addExternalPackage( p );
 				}
 				
-				for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits( value ) ) {
-					getImportedKermetaUnits().add( unitToImport );
-					modelingUnit.getReferencedModelingUnits().add( unitToImport.getModelingUnit() );
-					iterator = unitToImport.getInternalPackages().iterator();
-					while ( iterator.hasNext() ) {
-						Package p = iterator.next();
-						addExternalPackage( p );
+				if ( recursive ) {
+					for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits( value ) ) {
+						getImportedKermetaUnits().add( unitToImport );
+						modelingUnit.getReferencedModelingUnits().add( unitToImport.getModelingUnit() );
+						iterator = unitToImport.getInternalPackages().iterator();
+						while ( iterator.hasNext() ) {
+							Package p = iterator.next();
+							addExternalPackage( p );
+						}
 					}
 				}
 				
