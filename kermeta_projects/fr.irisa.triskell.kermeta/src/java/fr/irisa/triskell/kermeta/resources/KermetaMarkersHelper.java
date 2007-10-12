@@ -1,4 +1,4 @@
-/*$Id: KermetaMarkersHelper.java,v 1.8 2007-10-01 15:11:19 ftanguy Exp $
+/*$Id: KermetaMarkersHelper.java,v 1.9 2007-10-12 09:09:55 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	KermetaMarkersHelper.java
 * License : EPL
@@ -110,13 +110,15 @@ public class KermetaMarkersHelper {
             	   } else if ( message.getTarget() instanceof fr.irisa.triskell.kermeta.language.structure.Object ) {
             	               	   
             		   fr.irisa.triskell.kermeta.language.structure.Object o = (fr.irisa.triskell.kermeta.language.structure.Object) message.getTarget();
-            		   ModelReference mr = unit.getTracer().getModelReference( o );
-            		   TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
-            		   if (tr != null) {
-            			   if(tr.getFileURI().equals( "platform:/resource" + file.getFullPath().toString())){
-            				   offset = tr.getCharBeginAt() - 1;
-            				   length = tr.getCharEndAt() - offset;	
-            			   }
+            		   if ( unit.getTracer() != null ) {
+            			   ModelReference mr = unit.getTracer().getModelReference( o );
+            			   TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
+	            		   if (tr != null) {
+	            			   if(tr.getFileURI().equals( "platform:/resource" + file.getFullPath().toString())){
+	            				   offset = tr.getCharBeginAt() - 1;
+	            				   length = tr.getCharEndAt() - offset;	
+	            			   }
+	            		   }
             		   }
                     }
                     
