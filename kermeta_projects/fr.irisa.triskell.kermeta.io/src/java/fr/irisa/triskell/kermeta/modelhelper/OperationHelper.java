@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.java,v 1.7 2007-10-02 15:19:05 ftanguy Exp $
+/* $Id: OperationHelper.java,v 1.8 2007-10-12 09:15:56 ftanguy Exp $
  * Project   : Kermeta 
  * File      : OperationHelper.java
  * License   : EPL
@@ -280,5 +280,12 @@ public class OperationHelper {
 		}
 		
 		return text;
+	}
+	
+	static public TypeVariable getTypeVariable(Operation op, String name) {
+		for ( TypeVariable tv : op.getTypeParameter() )
+			if ( tv.getName().equals(name) )
+				return tv;
+		return null;
 	}
 }
