@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.9 2007-09-04 13:15:08 ftanguy Exp $
+/*$Id: EcoreExporter.java,v 1.10 2007-10-12 09:20:40 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -40,6 +41,7 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
+import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -421,7 +423,14 @@ public class EcoreExporter {
 		
 		URI uri = EcoreHelper.createURI( uris.get(kermetaUnit) );
 		Resource resource = resourceSet.createResource(uri);
-
+		/*
+		 * 
+		 * If the resource is null, maybe the URI comes fomr the registry.
+		 * 
+		 */
+		if ( resource == null )
+			resource = EMFRegistryHelper.getResource(uri);
+		
 		if ( kermetaUnit.isFramework() || kermetaUnit.equals(IOPlugin.getDefault().getEcore()) ) {
 			resourcesNotToSave.put( resource, kermetaUnit );
 			return;
@@ -506,7 +515,7 @@ public class EcoreExporter {
 		if ( fileName != null )
 			uris.put(kermetaUnit, fileName);
 		else {
-			uri = StringHelper.replaceExtension(uri, ".ecore");
+			uri = StringHelper.replaceExtension(uri, "ecore");
 			uris.put(kermetaUnit, uri);
 		}
 			

@@ -1,4 +1,4 @@
-/* $Id: TypeVariableEnforcer.java,v 1.10 2007-08-08 12:54:38 dvojtise Exp $
+/* $Id: TypeVariableEnforcer.java,v 1.11 2007-10-12 09:20:40 ftanguy Exp $
 * Project : Kermeta io
 * File : GenericTypeSubstitution.java
 * License : EPL
@@ -168,8 +168,21 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 	
 	
 	public Object visitObjectTypeVariable(ObjectTypeVariable arg0) {
-		if (bindings.containsKey(arg0)) return (fr.irisa.triskell.kermeta.language.structure.Type)bindings.get(arg0);
-		else return arg0;
+		if (bindings.containsKey(arg0)) 
+			return (fr.irisa.triskell.kermeta.language.structure.Type)bindings.get(arg0);
+		/*
+		 * FIXME
+		 * When loading ecore, TypeVariable are different.
+		 * It seams that each class contains their ownes type variables.
+		 * Must type variables be shared into the hierarchy of Class ? 
+		 * 
+		 */		
+		for ( TypeVariable tv : bindings.keySet() ) {
+			if ( tv.getName().equals(arg0.getName()) )
+				return bindings.get( tv );
+		}
+		
+		return arg0;
 	}
 	
 	public Object visitVoidType(VoidType arg0) {

@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.20 2007-09-04 08:29:31 ftanguy Exp $
+/* $Id: TypeConformanceChecker.java,v 1.21 2007-10-12 09:20:40 ftanguy Exp $
 * Project : Kermeta (io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -62,65 +62,6 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 			fr.irisa.triskell.kermeta.language.structure.Class cobject = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).getType();
 			if (TypeEqualityChecker.equals(cobject, required)) return true;
 
-			
-		/*
-		 * 
-		 * Base classes checking.
-		 * 
-		 */
-		/*if ( provided instanceof Class 
-			&& required instanceof Class ) {
-
-			Class cProvided = (Class) provided;
-			Class cRequired = (Class) required;
-			
-			// optimisation, if this is not a parametrized class and the typedefinition are equals doesn't need to 
-			// create the typeequalitychecker ...
-			if ( cRequired.getTypeDefinition().getTypeParameter().isEmpty()	&&
-				 cProvided.getTypeDefinition().getTypeParameter().isEmpty()	&&
-			     cProvided.getTypeDefinition() == cRequired.getTypeDefinition() )
-				return true;
-			
-			Set <TypeDefinition> providedBaseClasses = ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) cProvided.getTypeDefinition());
-			List <TypeDefinition> requiredAspectClasses = TypeDefinitionHelper.getAspects( (ClassDefinition) cRequired.getTypeDefinition());
-			Set<TypeDefinition> requiredBaseClasses = ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) cRequired.getTypeDefinition());
-			
-			for ( TypeDefinition baseClass : providedBaseClasses ) {
-				Class p = StructureFactory.eINSTANCE.createClass();
-				p.setTypeDefinition( (ClassDefinition) baseClass);
-				if ( TypeConformanceChecker.conforms(required, p) )
-					return true;
-			}
-			
-			for ( TypeDefinition aspectClass : requiredAspectClasses ) {
-				for ( TypeDefinition baseClass : providedBaseClasses ) {
-					Class p = StructureFactory.eINSTANCE.createClass();
-					Class r = StructureFactory.eINSTANCE.createClass();
-					p.setTypeDefinition( (ClassDefinition) baseClass);
-					r.setTypeDefinition( (ClassDefinition) aspectClass );
-					if ( TypeConformanceChecker.conforms(r, p) )
-							return true;
-				}
-				
-			}
-			
-			for ( TypeDefinition baseClass : requiredBaseClasses ) {
-				for ( TypeDefinition baseClass2 : providedBaseClasses ) {
-					Class p = StructureFactory.eINSTANCE.createClass();
-					Class r = StructureFactory.eINSTANCE.createClass();
-					p.setTypeDefinition( (ClassDefinition) baseClass);
-					r.setTypeDefinition( (ClassDefinition) baseClass2 );
-					if ( TypeConformanceChecker.conforms(p, r) )
-							return true;
-					
-
-					
-				}
-							
-			}
-			
-		}
-		*/
 		/*
 		 * 
 		 * Supertype checking.

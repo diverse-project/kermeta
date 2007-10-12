@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.43 2007-09-04 08:46:14 bitterjug Exp $
+/* $Id: KM2EcorePass2.java,v 1.44 2007-10-12 09:20:40 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -15,6 +15,8 @@ package fr.irisa.triskell.kermeta.exporter.ecore;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+
+import javax.lang.model.element.TypeParameterElement;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EAttribute;
@@ -141,6 +143,9 @@ public class KM2EcorePass2 extends KM2Ecore {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
 	public Object visitClassDefinition(ClassDefinition node) {
+		if (node.getName().equals("OrderedCollection") )
+			System.out.println();
+		
 		EClass newEClass = null;
 		internalLog.debug(loggerTabs + "Visiting ClassDefinition: "+ node.getName());
 		loggerTabs.increment();
@@ -151,18 +156,42 @@ public class KM2EcorePass2 extends KM2Ecore {
 		// Search the super types of EClass
 		for(Object next : node.getSuperType()) {
 			Type t = (Type) next;
-			Object o = accept(t); 
+			EClass o = (EClass) accept(t); 
 			if(o != null) {
-				// Add type to supertypes list
-				newEClass.getESuperTypes().add((EClass) o);
+				
+				/*if( t instanceof ParameterizedType ) {
+					
+					EGenericType supertype = EcoreFactory.eINSTANCE.createEGenericType();
+					ParameterizedType pType = (ParameterizedType) t;
+					for ( TypeVariableBinding tvb : pType.getTypeParamBinding() ) {
+						EGenericType gt = EcoreFactory.eINSTANCE.createEGenericType();
+						ETypeParameter tp = EcoreFactory.eINSTANCE.createETypeParameter();
+						tp.setName( tvb.getVariable().getName() );
+						gt.setETypeParameter( tp );
+						supertype.getETypeArguments().add( gt );
+						o.getETypeParameters().add( tp );
+					}
+					
+					
+					newEClass.getEGenericSuperTypes().add( supertype );
+					
+				} else*/
+					// Add type to supertypes list
+					newEClass.getESuperTypes().add(o);
 
 				// In case type has type variable bindings, add a superclass bindings annotation
 				// to generated EClass
-				if(t instanceof ParameterizedType) {
+				/*if(t instanceof ParameterizedType) {
 					ParameterizedType pType = (ParameterizedType) t;
-					if(! pType.getTypeParamBinding().isEmpty())
-						setSuperclassTypeVariableBindingsAnnotation(pType, newEClass);
-				}
+					for ( TypeVariableBinding tvb : pType.getTypeParamBinding() ) {
+						//EGenericType gt = EcoreFactory.eINSTANCE.createEGenericType();
+						ETypeParameter tp = EcoreFactory.eINSTANCE.createETypeParameter();
+						tp.setName( tvb.getVariable().getName() );
+						//gt.setETypeParameter(tp);
+						o.getETypeParameters().add( tp );
+					}
+					
+				}*/
 			}
 			else
 				// FIXME When this case does occur?
@@ -227,10 +256,16 @@ public class KM2EcorePass2 extends KM2Ecore {
 		}
 		else {
 			if(opType != null) {
+							
 				EGenericType genericType = EcoreFactory.eINSTANCE.createEGenericType();
-				genericType.setEClassifier( (EClassifier) this.accept((EObject) opType) );
-				newEOperation.setEGenericType( genericType );
-				
+				EClassifier c = (EClassifier) this.accept((EObject) opType);
+				if ( c == null )
+					newEOperation.setEType( null );
+				else {
+					genericType.setEClassifier( c );
+					newEOperation.setEGenericType( genericType );
+				}
+					
 				if ( opType instanceof Class ) {
 				
 					for ( TypeVariableBinding tvb : ((Class) opType).getTypeParamBinding() ) {
@@ -396,7 +431,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 	public Object visitProperty(Property node) {
 		internalLog.debug(loggerTabs + "Visiting Property: "+ node.getName());
 		loggerTabs.increment();
-		
+				
 		EStructuralFeature newEStructuralFeature = null;
 		EReference newEReference = null;
 		EAttribute newEAttribute = null;
@@ -462,26 +497,80 @@ public class KM2EcorePass2 extends KM2Ecore {
 			}
 		}
 		else {
-			type = (EClassifier)accept(propType);
 			
-			if (type == null ) {
-				// null type forbidden for parameter type
-				throw new KM2ECoreConversionException( 
-				"Problem : type not found for a property '"+ node.getName()+ "' in class definition : " +
-				NamedElementHelper.getQualifiedName(node.getOwningClass()));
-			}
-			else {
-				if(propType instanceof ParameterizedType) {
-					setTypeVariableBindingsAnnotation((ParameterizedType) propType, newEStructuralFeature);
+			if ( node.getUpper() != 1 ) {
+				type = (EClassifier)accept(propType);
+				newEStructuralFeature.setEType( type );
+				newEStructuralFeature.setLowerBound( node.getLower() );
+				newEStructuralFeature.setUpperBound( node.getUpper() );
+				newEStructuralFeature.setOrdered( node.isIsOrdered() );
+				newEStructuralFeature.setDerived( node.isIsDerived() );
+				newEStructuralFeature.setUnique( node.isIsUnique() );
+				/*String collectionQualifiedName = "";
+				if ( node.isIsOrdered() )
+					if ( node.isIsUnique() )
+						collectionQualifiedName = "kermeta::standard::OrderedSet";
+					else
+						collectionQualifiedName = "kermeta::standard::Sequence";
+				else
+					if ( node.isIsUnique() )
+						collectionQualifiedName = "kermeta::standard::Set";
+					else
+						collectionQualifiedName = "kermeta::standard::Bag";
+				
+				ClassDefinition cd = (ClassDefinition) kermetaUnit.getTypeDefinitionByQualifiedName( collectionQualifiedName );
+				EObject result = km2ecoremapping.get(cd);
+				newEStructuralFeature.setEType( (EClassifier) result );
+				TypeDefinition typeDefinition = null;
+				if ( propType instanceof Class )
+					typeDefinition = ((Class) propType).getTypeDefinition();
+				else if ( propType instanceof PrimitiveType )
+					typeDefinition = (TypeDefinition) propType;
+				else {
+					System.out.println();
+				}
+				EGenericType gt = EcoreFactory.eINSTANCE.createEGenericType();
+				EClassifier cl = (EClassifier) km2ecoremapping.get(typeDefinition);
+				gt.setEClassifier( cl );
+				newEStructuralFeature.getEGenericType().getETypeArguments().add( gt );*/
+				
+			} else {
+				type = (EClassifier)accept(propType);
+			
+				if (type == null ) {
+					// null type forbidden for parameter type
+					throw new KM2ECoreConversionException( 
+					"Problem : type not found for a property '"+ node.getName()+ "' in class definition : " +
+					NamedElementHelper.getQualifiedName(node.getOwningClass()));
+				}
+				else {
+					newEStructuralFeature.setEType(type);
+					if(propType instanceof ParameterizedType)
+						setTypeParameters(newEStructuralFeature, (ParameterizedType) propType );
 				}
 			}
-			newEStructuralFeature.setEType(type);
 		}
 		
 		loggerTabs.decrement();		
 		return newEStructuralFeature;
 	}
 
+	
+	private void setTypeParameters(EStructuralFeature structuralFeature, ParameterizedType type) {
+		EGenericType generictype = structuralFeature.getEGenericType();
+		for ( TypeVariableBinding tvb : type.getTypeParamBinding() ) {
+			EGenericType gt = EcoreFactory.eINSTANCE.createEGenericType();
+			Type t = tvb.getType();
+			EClassifier classifier = null;
+			if ( t instanceof Class ) {
+				classifier = (EClassifier) km2ecoremapping.get( ((Class) t).getTypeDefinition() );
+			} else if ( t instanceof DataType ) {
+				classifier = (EClassifier) km2ecoremapping.get( ((DataType) t) );
+			}
+			gt.setEClassifier(classifier);
+			generictype.getETypeArguments().add(gt);
+		}
+	}
 	
 	
 	/**

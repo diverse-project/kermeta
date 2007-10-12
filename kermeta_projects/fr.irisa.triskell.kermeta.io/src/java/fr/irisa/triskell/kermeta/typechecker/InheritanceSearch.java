@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.20 2007-10-03 10:55:13 ftanguy Exp $
+/* $Id: InheritanceSearch.java,v 1.21 2007-10-12 09:20:40 ftanguy Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -27,6 +27,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
@@ -47,7 +48,7 @@ public class InheritanceSearch {
 	public static ArrayList<Type> allSuperTypes(fr.irisa.triskell.kermeta.language.structure.Class c) {
 		ArrayList<Type> result = new ArrayList<Type>();
 		result.add(c);
-		
+		try  {
 		// get all super types of direct supertypes
 		for (Object super_type : ((ClassDefinition) c.getTypeDefinition()).getSuperType()) {
 			// get the super type
@@ -63,6 +64,8 @@ public class InheritanceSearch {
 		fr.irisa.triskell.kermeta.language.structure.Class object = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).type;
 		if (! TypeEqualityChecker.equals(c, object) && !result.contains(object)) {
 		    result.add(object);
+		}} catch (Exception e) {
+			System.out.println();
 		}
 		return result;
 	}
@@ -74,10 +77,10 @@ public class InheritanceSearch {
 	 * @return
 	 */
 	public static ArrayList<Type> getDirectSuperTypes(fr.irisa.triskell.kermeta.language.structure.Class c) {
-		fr.irisa.triskell.kermeta.language.structure.Class object = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).type;
+		//fr.irisa.triskell.kermeta.language.structure.Class object = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).type;
 	    ArrayList<Type> result = new ArrayList<Type>();
 	    // The class Object is the Root Class
-	    if (TypeEqualityChecker.equals(c, object)) return result;
+	   // if (TypeEqualityChecker.equals(c, object)) return result;
 	    
 	    for (Object super_type : ((ClassDefinition) c.getTypeDefinition()).getSuperType()) {
 			// get the super type
@@ -88,9 +91,9 @@ public class InheritanceSearch {
 	    }
 	    
 	    // Add the type object which is implicitly a super type of every type
-		if (!result.contains(object)) {
+		/*if (!result.contains(object)) {
 		    result.add(object);
-		}
+		}*/
 	    return result;
 	}
 	
@@ -111,7 +114,7 @@ public class InheritanceSearch {
 
 			Class current = toVisit.get(0);
 			toVisit.remove(0);
-
+			KermetaUnitHelper.getKermetaUnitFromObject( current.getTypeDefinition() );
 			/*
 			 * 
 			 * Patch for bugs #1124

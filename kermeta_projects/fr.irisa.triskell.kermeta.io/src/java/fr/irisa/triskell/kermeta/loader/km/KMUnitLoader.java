@@ -1,6 +1,6 @@
 
 
-/*$Id: KMUnitLoader.java,v 1.9 2007-09-19 12:15:04 ftanguy Exp $
+/*$Id: KMUnitLoader.java,v 1.10 2007-10-12 09:20:40 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL
@@ -15,6 +15,7 @@ package fr.irisa.triskell.kermeta.loader.km;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -29,6 +30,7 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.AbstractKermetaUnitLoader;
+import org.kermeta.loader.LoadingOptions;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -47,8 +49,15 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 	
 	private Hashtable <String, KermetaUnit> kermetaUnits = new Hashtable <String, KermetaUnit> ();
 	
-	public KMUnitLoader(IProgressMonitor monitor) {
-		super(monitor);
+	private boolean frameworkLoading = false;
+	
+	public KMUnitLoader(Map<Object, Object> options, IProgressMonitor monitor) {
+		super(options, monitor);
+		if ( options != null ) {
+			Boolean b = (Boolean) options.get( LoadingOptions.FRAMEWORK_LOADING );
+			if ( b != null )
+				frameworkLoading = b;
+		}
 	}
 	
 	@Override
@@ -58,7 +67,7 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 		
 		try {
 		
-			kermetaUnit = IOPlugin.getDefault().getKermetaUnit(uri);
+			kermetaUnit = IOPlugin.getDefault().getKermetaUnit(uri, frameworkLoading);
 			KmBuildingState buildingState = (KmBuildingState) kermetaUnit.getBuildingState();
 			
 			if ( buildingState.loaded )
@@ -107,12 +116,17 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 				
 				String fileURI = r.getURI().toString();
 
-				if ( ! kermetaUnit.getUri().startsWith("platform:/plugin") )
+				/*if ( ! kermetaUnit.getUri().startsWith("platform:/plugin") )
 					fileURI = EcoreHelper.getPlatformPluginURI(fileURI).toString();
 				else if ( ! kermetaUnit.getUri().startsWith("platform:/resource") )
-					fileURI = EcoreHelper.getPlatformResourceURI(fileURI).toString();
+					fileURI = EcoreHelper.getPlatformResourceURI(fileURI).toString();*/
 				
-				KermetaUnit currentUnit = IOPlugin.getDefault().getKermetaUnit( fileURI );
+				if ( ! fileURI.startsWith("platform:/plugin") && kermetaUnit.getUri().startsWith("platform:/plugin") )
+					fileURI = EcoreHelper.getPlatformPluginURI(fileURI).toString();
+				else if ( ! fileURI.startsWith("platform:/resource") && kermetaUnit.getUri().startsWith("platform:/resource") )
+					fileURI = EcoreHelper.getPlatformResourceURI(fileURI).toString();			
+				
+				KermetaUnit currentUnit = IOPlugin.getDefault().getKermetaUnit( fileURI, frameworkLoading );
 				if ( r.getContents().isEmpty() ) {
 					IOPlugin.getDefault().unload( fileURI );
 					kermetaUnit.error(fileURI + " could not have been loaded.");
@@ -197,7 +211,7 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 			
 			Set <KermetaUnit> kermetaUnitToImports = getKermetaUnitToImport(kermetaUnit);
 			for ( KermetaUnit unitToImport : kermetaUnitToImports ) {
-				kermetaUnit.importKermetaUnit( unitToImport, true );
+				kermetaUnit.importKermetaUnit( unitToImport, true, true );
 				kermetaUnit.getTypeDefinitionCache().setExternalSearchAuthorized( true );
 			}
 			

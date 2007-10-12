@@ -92,9 +92,10 @@ public class KM2EcorePass3 extends KM2Ecore {
 					currentEcorePackage.getEClassifiers().add( type );
 				}
 				operation.setEType( type );
-			}
+			} else if ( qualifiedName.equals("kermeta::language::structure::Void") || qualifiedName.equals("kermeta::standard::Void") )
+				operation.setEType( null );
 		
-		} else if(node.getType() instanceof VoidType) {
+		} else if(node.getType() instanceof VoidType ) {
 			// Set to null the return type of an Operation instead of EJavaObject (maybe the EMF default)
 			operation.setEType(null);
 		}

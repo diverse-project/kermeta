@@ -1,4 +1,4 @@
-/* $Id: Type.java,v 1.7 2007-08-02 15:53:30 dvojtise Exp $
+/* $Id: Type.java,v 1.8 2007-10-12 09:20:40 ftanguy Exp $
 * Project : Kermeta io
 * File : Type.java
 * License : EPL
@@ -110,7 +110,8 @@ public abstract class Type {
 		java.util.Iterator<CallableOperation> it = ops.iterator();
 		while(it.hasNext()) {
 		    CallableOperation op = (CallableOperation)it.next();
-			if (op.operation.getName().equals(name)) return op;
+			if (op.operation.getName().equals(name)) 
+				return op;
 		}
 		return null;
 	}

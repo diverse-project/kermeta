@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.16 2007-10-01 15:14:42 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.17 2007-10-12 09:20:40 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -15,18 +15,19 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.EList;
-import org.kermeta.io.IBuildingState;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.AbstractKermetaUnitLoader;
+import org.kermeta.loader.LoadingOptions;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
@@ -54,13 +55,10 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 	
 	private String content = null;
 	
-	public KMTUnitLoader(IProgressMonitor monitor) {
-		super(monitor);
-	}
-	
-	public KMTUnitLoader(String content, IProgressMonitor monitor) {
-		super(monitor);
-		this.content = content;
+	public KMTUnitLoader(Map<Object, Object> options, IProgressMonitor monitor) {
+		super(options, monitor);
+		if ( options.get(LoadingOptions.CONTENT) != null )
+			content = (String) options.get("content");
 	}
 	
 	public KermetaUnit load(String uri) {
@@ -202,20 +200,22 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			if ( ! currentState.loaded ) {
 				
 				if ( currentState instanceof KmBuildingState ) {
-					KMUnitLoader loader = new KMUnitLoader(monitor);
+					KMUnitLoader loader = new KMUnitLoader(null, monitor);
 					loader.load( currentUnit.getUri() );
 				} else if ( currentState instanceof KMTBuildingState ) {
 					KMTBuildingState currentKMTState = (KMTBuildingState) currentState;
 					if ( ! currentKMTState.loading ) {
 						for ( KermetaUnit unitToImport : KermetaUnitHelper.getAllImportedKermetaUnits( IOPlugin.getDefault().getFramework() ) )
-							currentUnit.importKermetaUnit( unitToImport, true );
+							currentUnit.importKermetaUnit( unitToImport, true, true );
 						loadAllImportedUnits( currentUnit );
 					}
 				} else if ( currentState instanceof EcoreBuildingState ) {
-					Ecore2KMLoader loader = new Ecore2KMLoader(monitor);
-					loader.load( currentUnit.getUri(), true );
+					Map<Object, Object> options = new HashMap<Object, Object> ();
+					options.put(LoadingOptions.ECORE_QuickFixEnabled, true);
+					Ecore2KMLoader loader = new Ecore2KMLoader(options, monitor);
+					loader.load( currentUnit.getUri() );
 				} else if ( currentState instanceof JavaBuildingState ) {
-					JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader(monitor);
+					JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader(null, monitor);
 					loader.load( currentUnit.getUri() );	
 				}
 

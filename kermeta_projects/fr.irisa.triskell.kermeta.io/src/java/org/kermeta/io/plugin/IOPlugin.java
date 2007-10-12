@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.18 2007-10-04 07:22:52 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.19 2007-10-12 09:20:40 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -14,13 +14,16 @@ package org.kermeta.io.plugin;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
@@ -31,6 +34,8 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitStorer;
+import org.kermeta.loader.FrameworkMapping;
+import org.kermeta.loader.LoadingOptions;
 import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
@@ -45,6 +50,8 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 public class IOPlugin extends AbstractUIPlugin {
 
 	final public static String FRAMEWORK_KM_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km";
+
+	final public static String FRAMEWORK_KM_LOCAL_URI = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km";
 	
 	final public static String ECORE_URI = "http://www.eclipse.org/emf/2002/Ecore";
 	
@@ -57,6 +64,13 @@ public class IOPlugin extends AbstractUIPlugin {
 			return FRAMEWORK_ECORE_LOCAL_URI;
 		else
 			return FRAMEWORK_ECORE_URI;
+	}
+	
+	static public String getFrameWorkURI() {
+		if ( LOCAL_USE )
+			return FRAMEWORK_KM_LOCAL_URI;
+		else
+			return FRAMEWORK_KM_URI;
 	}
 	
 	
@@ -109,6 +123,8 @@ public class IOPlugin extends AbstractUIPlugin {
 			//kermetaUnitHelper = new org.kermeta.io.util2.KermetaUnitHelper( storer );
 			KmPackageImpl.init();
 			
+			FrameworkMapping.initialize( ! LOCAL_USE );
+			
 			if ( LOCAL_USE ) {				
 				File file = new File(URI_MAP);
 				if (file.exists()){
@@ -120,6 +136,7 @@ public class IOPlugin extends AbstractUIPlugin {
 				}
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl());	
+							
 			} else {
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new EcoreResourceFactoryImpl());
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new EcoreResourceFactoryImpl());	
@@ -129,9 +146,9 @@ public class IOPlugin extends AbstractUIPlugin {
 			
 				try {
 					// Loading the framework
-					framework = loadFramework( FRAMEWORK_KM_URI );
-					for ( KermetaUnit kermetaUnit : KermetaUnitHelper.getAllImportedKermetaUnits(framework) )
-						kermetaUnit.setFramework( true );
+					framework = loadFramework();
+					/*for ( KermetaUnit kermetaUnit : KermetaUnitHelper.getAllImportedKermetaUnits(framework) )
+						kermetaUnit.setFramework( true );*/
 					
 					KermetaTypeChecker typechecker = new KermetaTypeChecker( framework, new NullProgressMonitor() );
 					typechecker.checkUnit();
@@ -156,13 +173,13 @@ public class IOPlugin extends AbstractUIPlugin {
 					}
 
 					// Loading the framework as ecore
-					/*frameworkAsEcore = loadKermetaUnit( FRAMEWORK_ECORE_URI );
+					/*frameworkAsEcore = loadEcoreFramework();
 					
-					typechecker = new KermetaTypeChecker( frameworkAsEcore );
+					typechecker = new KermetaTypeChecker( frameworkAsEcore, new NullProgressMonitor() );
 					typechecker.checkUnit();
 
-					if ( ! frameworkAsEcore.isErrored() ) {
-						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( frameworkAsEcore );
+					if ( ! frameworkAsEcore.isErroneous() ) {
+						KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( frameworkAsEcore, new NullProgressMonitor() );
 						constraintchecker.checkUnit();
 					}*/
 					
@@ -215,18 +232,36 @@ public class IOPlugin extends AbstractUIPlugin {
 	 * @throws URIMalformedException
 	 */
 	public KermetaUnit getKermetaUnit( String uri ) throws URIMalformedException {
-		KermetaUnit kermetaUnit = storer.find(uri);
+		return getKermetaUnit(uri, false);
+		/*KermetaUnit kermetaUnit = storer.find(uri);
 		if ( kermetaUnit == null ) {
 			kermetaUnit = storer.get( uri );
 		
-			if ( ! uri.equals(ECORE_URI) && uri.matches(".+\\.ecore") && (ecore != null) ) {
+			if ( ! uri.equals(ECORE_URI) && ! uri.equals(getFrameWorkEcoreURI()) && uri.matches(".+\\.ecore") && (ecore != null) ) {
 				kermetaUnit.importKermetaUnit( ecore, false );
 				kermetaUnit.addRequire( ECORE_URI, ecore );
 				kermetaUnit.importKermetaUnit( framework, false );
 				kermetaUnit.addRequire( "kermeta", framework );
-			} else if ( framework != null )
+			} else if ( (framework != null) && ! uri.equals(getFrameWorkEcoreURI()) )
 				kermetaUnit.getImportedKermetaUnits().add( framework );
 				//kermetaUnit.importKermetaUnit( framework, false );
+		}
+		return kermetaUnit;*/
+	}
+	
+	public KermetaUnit getKermetaUnit( String uri, boolean isFramework) throws URIMalformedException {
+		KermetaUnit kermetaUnit = storer.find( uri );
+		if ( kermetaUnit == null ) {
+			kermetaUnit = storer.get( uri );
+			if ( isFramework )
+				kermetaUnit.setFramework( true );
+			else if ( ! FRAMEWORK_GENERATION ) {
+				kermetaUnit.getImportedKermetaUnits().add( framework );
+				if ( uri.matches(".+\\.ecore") ) {
+					kermetaUnit.importKermetaUnit( ecore, false, true );
+					kermetaUnit.addRequire( ECORE_URI, ecore );	
+				}
+			}
 		}
 		return kermetaUnit;
 	}
@@ -242,7 +277,7 @@ public class IOPlugin extends AbstractUIPlugin {
 	}
 	
 	public KermetaUnit loadKermetaUnit( String uri, IProgressMonitor monitor ) throws KermetaIOFileNotFoundException, URIMalformedException {
-		return loadKermetaUnit(uri, null, monitor);
+		return loadKermetaUnit(uri, new HashMap<Object, Object> (), monitor);
 	}
 	
 	public KermetaUnit loadKermetaUnit(IFile file, IProgressMonitor monitor) throws KermetaIOFileNotFoundException, URIMalformedException {
@@ -278,9 +313,9 @@ public class IOPlugin extends AbstractUIPlugin {
 			
 			}
 			
-			//KermetaUnit kermetaUnit = kermetaUnitHelper.loadFile(uri, content);
-			kermetaUnit = getKermetaUnit( uri );
-			storer.load( uri, content, monitor );
+			Map<Object, Object> options = new HashMap<Object, Object> ();
+			options.put( LoadingOptions.CONTENT, content);
+			kermetaUnit = loadKermetaUnit(uri, options, monitor);
 		}
 		return kermetaUnit;
 
@@ -291,15 +326,35 @@ public class IOPlugin extends AbstractUIPlugin {
 		return loadKermetaUnit( uri, content, monitor );
 	}
 	
-	private KermetaUnit loadFramework( String uri ) throws URIMalformedException {
-		KermetaUnit kermetaUnit = getKermetaUnit( uri );
-		storer.load( uri, new NullProgressMonitor() );
+	public KermetaUnit loadKermetaUnit(String uri, Map<Object, Object> options, IProgressMonitor monitor) throws URIMalformedException {
+		KermetaUnit kermetaUnit = getKermetaUnit(uri);
+		storer.load(uri, options, monitor);
 		return kermetaUnit;
 	}
 	
+	private KermetaUnit loadFramework() throws URIMalformedException {
+		KermetaUnit kermetaUnit = getKermetaUnit( getFrameWorkURI(), true );
+		Map<Object, Object> options = new HashMap<Object, Object> ();
+		options.put( LoadingOptions.FRAMEWORK_LOADING, true );
+		storer.load( getFrameWorkURI(), options, new NullProgressMonitor() );
+		return kermetaUnit;
+	}
+	
+	/*private KermetaUnit loadEcoreFramework() throws URIMalformedException {
+		KermetaUnit kermetaUnit = getKermetaUnit(getFrameWorkEcoreURI(), true);
+		kermetaUnit.getImportedKermetaUnits().add( ecore );
+		Map<Object, Object> options = new HashMap<Object, Object> ();
+		options.put( LoadingOptions.ECORE_QuickFixEnabled, false );
+		options.put( LoadingOptions.ECORE_LOADING_FRAMEWORK, true );
+		storer.load( getFrameWorkEcoreURI(), options, new NullProgressMonitor() );
+		return kermetaUnit;
+	}*/
+	
 	private KermetaUnit loadEcore( String uri ) throws URIMalformedException {
 		KermetaUnit kermetaUnit = getKermetaUnit( uri );
-		storer.load( uri, new NullProgressMonitor() );
+		Map<Object, Object> options = new HashMap<Object, Object>();
+		options.put( LoadingOptions.ECORE_QuickFixEnabled, true );
+		storer.load( uri, options, new NullProgressMonitor() );
 		return kermetaUnit;
 	}
 	

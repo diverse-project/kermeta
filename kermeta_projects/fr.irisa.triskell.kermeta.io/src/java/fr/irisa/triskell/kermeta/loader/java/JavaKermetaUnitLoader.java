@@ -1,6 +1,6 @@
 
 
-/*$Id: JavaKermetaUnitLoader.java,v 1.5 2007-09-13 09:04:51 ftanguy Exp $
+/*$Id: JavaKermetaUnitLoader.java,v 1.6 2007-10-12 09:20:40 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	JavaKermetaUnitLoader.java
 * License : EPL
@@ -15,6 +15,7 @@ package fr.irisa.triskell.kermeta.loader.java;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -41,8 +42,8 @@ public class JavaKermetaUnitLoader extends AbstractKermetaUnitLoader {
     final static public Logger internalLog = LogConfigurationHelper.getLogger("JarKermetaUnitLoader");
 
     
-    public JavaKermetaUnitLoader(IProgressMonitor monitor) {
-    	super(monitor);
+    public JavaKermetaUnitLoader(Map<Object, Object> options, IProgressMonitor monitor) {
+    	super(options, monitor);
     }
     
     

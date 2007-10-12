@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.19 2007-10-04 07:22:51 ftanguy Exp $
+/* $Id: KMT2KMPass1.java,v 1.20 2007-10-12 09:20:40 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : EPL
@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
@@ -150,7 +151,8 @@ public class KMT2KMPass1 extends KMT2KMPass {
 					} catch (IllegalArgumentException e) {
 						error = true;
 					}
-				}
+				} else if ( EPackage.Registry.INSTANCE.getEPackage( fileURI.toString() ) != null  )
+					uriRequire = fileURI;
 			}
 			
 			if ( ! error ) {
@@ -184,7 +186,7 @@ public class KMT2KMPass1 extends KMT2KMPass {
 				builder.getImportedKermetaUnits().add( currentImportedUnit );
 				Require require = builder.addRequire( uriRequire, currentImportedUnit );
 				builder.storeTrace(require, importStmt);
-			} else if ( ! currentImportedUnit.getUri().equals(IOPlugin.FRAMEWORK_KM_URI) ){
+			} else if ( ! currentImportedUnit.getUri().equals(IOPlugin.getFrameWorkURI()) ){
 				builder.warning("Duplicate require of " + currentImportedUnit.getUri() + ".", importStmt);
 			}
 		}

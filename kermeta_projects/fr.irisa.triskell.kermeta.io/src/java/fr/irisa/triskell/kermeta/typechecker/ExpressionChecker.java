@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.54 2007-10-03 12:40:46 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.55 2007-10-12 09:20:40 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -51,6 +51,7 @@ import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
@@ -235,6 +236,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 					catch(TypeDoesNotMatchError e) {
 					    unit.error("TYPE-CHECKER : Type of argument " + i + " mismatch, expecting "+required_params[i]+", found "+provided+" (TypeDoesNotMatch).", (Expression)exp.getParameters().get(i));
 					    error = true;
+					} catch (Exception e) {
+						System.out.println();
 					}
 			    }
 		    }
@@ -483,7 +486,12 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	 **********************************/
 
 	public Object visitAssignment(Assignment expression) {
-	    preVisit();
+		
+		if ( expression.eContainer().eContainer() instanceof Operation )
+			if ( ((Operation) expression.eContainer().eContainer()).getName().equals("collect") )
+				System.out.println();
+		
+		preVisit();
 
 	    // Visit contained expressions
 	    this.accept(expression.getTarget());
@@ -580,7 +588,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	            return targetType;
 	        }
 	    }
-	    else {
+	    else {	    		
 	        if (!provided_type.isSubTypeOf(targetType)) {
 	        	provided_type.isSubTypeOf(targetType);
 	            unit.error("TYPE-CHECKER : Type mismatch, "+provided_type+" does not conform to required type : "+targetType+".", expression);
@@ -642,7 +650,11 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    return result;
 	}
 	
-	public Object visitCallFeature(CallFeature expression) {	
+	public Object visitCallFeature(CallFeature expression) {
+		
+		if ( expression.getName().equals("addAll") && expression.eContainer().eContainer() instanceof Property )
+			System.out.println();
+		
 		// visit target expression	
 		if (expression.getTarget() != null) 
 			this.accept(expression.getTarget());
@@ -796,7 +808,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		context.popContext();
 		// Check constraints
 		SimpleType conditionType = (SimpleType) getTypeOfExpression(expression.getCondition());
-		if( conditionType.getTypeDefinition() != TypeCheckerContext.BooleanType.getTypeDefinition() ) {
+		if( ! NamedElementHelper.getQualifiedName(conditionType.getTypeDefinition()).equals(
+			NamedElementHelper.getQualifiedName(TypeCheckerContext.BooleanType.getTypeDefinition())) ) {
 			unit.error("TYPE-CHECKER : The condition expression of a conditional statement should be a Boolean expression", expression.getCondition());
 		}
 		// compute the return type

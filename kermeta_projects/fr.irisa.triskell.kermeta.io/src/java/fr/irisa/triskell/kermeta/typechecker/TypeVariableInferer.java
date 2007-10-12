@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.16 2007-08-02 15:53:30 dvojtise Exp $
+/* $Id: TypeVariableInferer.java,v 1.17 2007-10-12 09:20:40 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeVariableInferer.java
 * License : EPL
@@ -136,7 +136,7 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 		    //throw new TypeDoesNotMatchError();
 		
 		Iterator<fr.irisa.triskell.kermeta.language.structure.Type> it = InheritanceSearch.allSuperTypes((fr.irisa.triskell.kermeta.language.structure.Class)provided).iterator();
-		
+		System.out.println();
 		while(it.hasNext()) {
 			fr.irisa.triskell.kermeta.language.structure.Class sp = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
 		    if (arg0.getTypeDefinition() == sp.getTypeDefinition()) {
