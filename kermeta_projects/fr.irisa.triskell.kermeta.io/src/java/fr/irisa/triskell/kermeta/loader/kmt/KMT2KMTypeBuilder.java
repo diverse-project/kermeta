@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.23 2007-10-01 15:14:42 ftanguy Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.24 2007-10-12 09:18:27 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -32,6 +32,7 @@ import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
@@ -267,6 +268,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 					
 					TypeVariableBinding bind = StructureFactory.eINSTANCE.createTypeVariableBinding();
 					bind.setVariable((TypeVariable)gtdef.getTypeParameter().get(i));
+					
 					bind.setType(actual_params[i]);
 					res.getTypeParamBinding().add(bind);
 				}
