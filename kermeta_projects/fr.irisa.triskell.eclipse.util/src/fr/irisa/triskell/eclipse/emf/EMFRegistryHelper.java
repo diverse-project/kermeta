@@ -1,10 +1,10 @@
-/* $Id: EMFRegistryHelper.java,v 1.8 2007-09-26 15:31:28 cfaucher Exp $
+/* $Id: EMFRegistryHelper.java,v 1.9 2007-10-12 09:08:43 ftanguy Exp $
  * Project   : Kermeta 
  * File      : EMFRegistryHelper.java
  * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
- * Creation date : 28 févr. 07
+ * Creation date : 28 fï¿½vr. 07
  * Authors       : dvojtise <dvojtise.irisa.fr>
  */
 package fr.irisa.triskell.eclipse.emf;
@@ -152,4 +152,10 @@ public class EMFRegistryHelper {
     	return msg;
 	}
 	
+	static public Resource getResource(URI uri) {
+		EPackage p = EPackage.Registry.INSTANCE.getEPackage( uri.toString() );
+		if ( p != null )
+			return p.eResource();
+		return null;
+	}
 }
