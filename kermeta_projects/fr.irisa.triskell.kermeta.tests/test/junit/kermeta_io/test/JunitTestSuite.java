@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.3 2007-09-19 13:07:40 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.4 2007-10-12 09:23:14 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -15,8 +15,10 @@
 
 package kermeta_io.test;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -25,6 +27,7 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KMTOutputBuilder;
 import org.kermeta.io.util2.UserDirURI;
+import org.kermeta.loader.LoadingOptions;
 
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
@@ -375,7 +378,9 @@ public void testWithFile(String dir, String file) throws Exception {
 	
 	String fileURI = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
 	// phase 1 : test that it load correctly
-	KermetaUnit builder = ioPlugin.loadKermetaUnit( fileURI, new NullProgressMonitor() );
+	Map<Object, Object> options = new HashMap<Object, Object> ();
+	options.put( LoadingOptions.ECORE_QuickFixEnabled, true );
+	KermetaUnit builder = ioPlugin.loadKermetaUnit( fileURI, options, new NullProgressMonitor() );
 	
 	if ( builder.isIndirectlyErroneous() )
 		assertTrue( KermetaUnitHelper.getErrorsAsString(builder), false);
@@ -411,7 +416,7 @@ public void testWithFile(String dir, String file) throws Exception {
 			ioPlugin.unload(TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file);
 			// phase 3 bis, check that the prettyprinted version can be parsed 
 			// try to re-parse the pretty-printed version
-			KermetaUnit builder2 = ioPlugin.loadKermetaUnit(ppfile, new NullProgressMonitor());
+			KermetaUnit builder2 = ioPlugin.loadKermetaUnit(ppfile, options, new NullProgressMonitor());
 			if ( builder2.isIndirectlyErroneous() )
 				assertTrue("RE-PARSE : " + KermetaUnitHelper.getErrorsAsString(builder2), false);
 

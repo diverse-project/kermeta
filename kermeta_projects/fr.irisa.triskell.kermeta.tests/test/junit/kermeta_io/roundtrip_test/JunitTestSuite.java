@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.3 2007-09-19 13:07:40 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.4 2007-10-12 09:23:14 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -223,7 +223,8 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		
 		
 		EcoreExporter exporter = new EcoreExporter();
-		exporter.export(kmtUnit, outputDir, ExporterOptions.getDefault() );
+		ExporterOptions options = new ExporterOptions(true, false);
+		exporter.export(kmtUnit, outputDir, options );
 		
 		KermetaUnit ecoreUnit = IOPlugin.getDefault().loadKermetaUnit( ecoreFile, new NullProgressMonitor() );
 		
@@ -258,7 +259,8 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 		
 		// Export to ecore
 		EcoreExporter exporter = new EcoreExporter();
-		exporter.export(baseKMTUnit, outputDir, ExporterOptions.getDefault());
+		ExporterOptions options = new ExporterOptions(true, false);
+		exporter.export(baseKMTUnit, outputDir, options);
 	
 		// Regenerate the kmt from the previous ecore
 		KermetaUnit ecoreUnit = IOPlugin.getDefault().loadKermetaUnit( ecoreFile, new NullProgressMonitor() );
@@ -270,8 +272,10 @@ testkmtFile("test/io/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.km
 				KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( ecoreUnit, new NullProgressMonitor() );
 				constraintchecker.checkUnit();
 		}
-		if ( ecoreUnit.isIndirectlyErroneous() )
-			assertTrue( KermetaUnitHelper.getErrorsAsString(ecoreUnit), false );
+		if ( ecoreUnit.isIndirectlyErroneous() ) {
+			System.out.println( KermetaUnitHelper.getAllErrorsAsString(ecoreUnit) );
+			assertTrue( KermetaUnitHelper.getAllErrorsAsString(ecoreUnit), false );
+		}
 		
 		KMTOutputBuilder printer = new KMTOutputBuilder();
 		printer.print( ecoreUnit, outputDir );
