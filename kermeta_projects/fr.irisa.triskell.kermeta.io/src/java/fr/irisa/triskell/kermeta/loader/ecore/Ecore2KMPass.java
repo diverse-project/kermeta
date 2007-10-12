@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass.java,v 1.6 2007-09-19 12:14:58 ftanguy Exp $
+/*$Id: Ecore2KMPass.java,v 1.7 2007-10-12 09:19:41 ftanguy Exp $
 * Project : io
 * File : 	Ecore2KMPass.java
 * License : EPL
@@ -32,10 +32,12 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
@@ -44,6 +46,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
@@ -75,6 +78,8 @@ public class Ecore2KMPass extends EcoreVisitor {
 	protected Ecore2KMDatas datas = null;
 	
 	protected IProgressMonitor monitor;
+	
+	protected LoadingContext context = new LoadingContext();
 	
 	public Ecore2KMPass(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, IProgressMonitor monitor) {
 		this.kermetaUnit = kermetaUnit;
@@ -524,41 +529,38 @@ public class Ecore2KMPass extends EcoreVisitor {
 		else {
 			def = kermetaUnit.getTypeDefinitionByQualifiedName(EcoreHelper.getQualifiedName(etype), monitor);
 		}
-		
-		/*if (def == null) {
-			// Ignore ecore types : we cannot create a kermeta unit since the URI of the ecore metamodel
-			// does not reflect a real path in the user file system. We will handle it separately
-			// Try to find the given element in the loaded kermeta units
-			// If not found, load a kermeta unit for the resource of the given element
-			if (etype.eResource() != resource) {
-				String etype_qname = EcoreHelper.getQualifiedName(etype);
-				// We create EcoreUnit this way (not using the KermetaUnitFactory) because
-				// this unit is not related to a real file in the user file system
-				// note: unit.packages argument: the list of found packages is added to this [main unit] hashtable.
-				EcoreUnit dep_unit = new EcoreUnit(etype.eResource(), unit.packages);
-				dep_unit.load();
-				unit.importedUnits.add(dep_unit);
-				def = dep_unit.typeDefs.get(etype_qname);
+
+		if (def == null) {
+			if ( etype instanceof EDataType ) {
+				EDataType datatype = (EDataType) etype;
+				for ( String key : KM2Ecore.primitive_types_mapping.keySet() ) {
+					String kermetaQualifiedName = KM2Ecore.primitive_types_mapping.get(key);
+					if ( kermetaQualifiedName.equals(datatype.getInstanceTypeName()) )
+						def = kermetaUnit.getTypeDefinitionByQualifiedName( kermetaQualifiedName, monitor );
+				}
 			}
-			else
-				def = (TypeDefinition)eclassifier_typedefinition_map.get(etype)!=null?
-						eclassifier_typedefinition_map.get(etype):datatypes.get(etype); // this does the same as unit.typeDefinitionLookUp
-		}*/
-
-		if (def == null)
-			kermetaUnit.error("Internal error of Ecore2KM conversion: type '" + EcoreHelper.getQualifiedName(etype) + "' not found.");
+			if ( def == null )
+				kermetaUnit.error("Internal error of Ecore2KM conversion: type '" + EcoreHelper.getQualifiedName(etype) + "' not found.");
 			//throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion: type '" + EcoreHelper.getQualifiedName(etype) + "' not found." );
-
+		}
 		// It can be a Type if the element is a EEnum (inherits datatype) or a EDatatype (inherits Type and TypeDefinition)
 		if (def instanceof Type) {
 			result = (Type)def;
 		}
 		else {
 			// Otherwise it is always a ClassDefinition
+			if ( def == null )
+				System.out.println();
 			ClassDefinition cd = (ClassDefinition)def;
 			fr.irisa.triskell.kermeta.language.structure.Class fc = StructureFactory.eINSTANCE.createClass();
 			fc.setTypeDefinition(cd);
 			result = fc;
+			for ( TypeVariable tv : cd.getTypeParameter() ) {
+				TypeVariableBinding tvb = StructureFactory.eINSTANCE.createTypeVariableBinding();
+				tvb.setType( tv );
+				tvb.setVariable( tv );
+				fc.getTypeParamBinding().add( tvb );
+			}
 		}
 		// Type should never be null
 		if (result == null) {
@@ -568,7 +570,6 @@ public class Ecore2KMPass extends EcoreVisitor {
 		}
 		return result;
 	}
-	
 	
 	/**
 	 * This method searches a type variable from its name in the provided list of type
@@ -714,10 +715,14 @@ public class Ecore2KMPass extends EcoreVisitor {
 	public fr.irisa.triskell.kermeta.language.structure.Object getObjectForEModelElement(EModelElement element)
 	{
 		fr.irisa.triskell.kermeta.language.structure.Object result =  null; 
-		if (element instanceof EPackage) result = getTopPackage();
+		if (element instanceof EPackage) result = getCurrentPackage();
 		if (element instanceof EClassifier) {
 			// I wish we could select {e| e instanceof EDatatype } more easily EDataTypes...
-			result = datas.getTypeDefinition( (EClassifier) element ) != null ? datas.getTypeDefinition( (EClassifier) element):datas.getPrimitiveType( (EDataType) element);
+			try {
+				result = datas.getTypeDefinition( (EClassifier) element ) != null ? datas.getTypeDefinition( (EClassifier) element):datas.getPrimitiveType( (EDataType) element);
+			} catch (Exception r) {
+				System.out.println();
+			}
 		}
 		if (element instanceof EStructuralFeature)	result = currentProperty;
 		if (element instanceof EOperation) result = datas.getOperation( (EOperation) element);
@@ -727,7 +732,7 @@ public class Ecore2KMPass extends EcoreVisitor {
 	protected Stack<Package> packagesStack = new Stack<Package>();
 
 	/** Return the package currently visited */
-	protected Package getTopPackage() {
+	protected Package getCurrentPackage() {
 		if (packagesStack.size() == 0) return null;
 		return (Package)packagesStack.peek();
 	}

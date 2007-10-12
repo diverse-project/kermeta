@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass5.java,v 1.12 2007-10-02 15:19:05 ftanguy Exp $
+/* $Id: Ecore2KMPass5.java,v 1.13 2007-10-12 09:19:41 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -42,6 +42,7 @@ import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -51,6 +52,7 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
@@ -79,8 +81,14 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 		
 		context.pushContext();
 		
+		for ( TypeVariable tv : currentClassDefinition.getTypeParameter() )
+			context.addTypeVar(tv);
+		
 		for ( Property p : ClassDefinitionHelper.getAllProperties(currentClassDefinition) )
 			context.addSymbol( new KMSymbolProperty(p) );
+		
+		for ( Operation op : ClassDefinitionHelper.getAllOperations(currentClassDefinition) )
+			context.addSymbol( new KMSymbolOperation(op) );
 		
 		// Set the super types of the type parameters
 		acceptList(((EClass)node).getETypeParameters());
@@ -142,22 +150,7 @@ public class Ecore2KMPass5 extends Ecore2KMPass {
 		// Visit all the annotations on Property
 		if( currentProperty != null && currentProperty instanceof Property) {
 			acceptList(node.getEAnnotations());
-		}
-		
-		//TODO, add the getter and setter
-	/*	if (node.isDerived() && ! currentProperty.isIsReadOnly() && currentProperty.getSetterBody() == null){
-			
-			//currentProperty.setSetterBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new", monitor));
-			currentProperty.setIsSetterAbstract(true);
-			//TagHelper.createNonExistingTagFromNameAndValue(currentProperty, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
-			}
-		if (node.isDerived() && currentProperty.getGetterBody() == null){
-			
-			//currentProperty.setGetterBody(ExpressionParser.parse(context, kermetaUnit, "   raise kermeta::exceptions::NotImplementedException.new", monitor));
-			currentProperty.setIsGetterAbstract(true);
-			//TagHelper.createNonExistingTagFromNameAndValue(currentProperty, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
-		}*/
-		
+		}		
 		return null;
 	}
 	

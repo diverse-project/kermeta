@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass6.java,v 1.9 2007-09-19 12:14:58 ftanguy Exp $
+/* $Id: Ecore2KMPass6.java,v 1.10 2007-10-12 09:19:41 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -84,7 +84,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 		
 		acceptList(((EClass)node).getEOperations());
 		acceptList(((EClass)node).getEAnnotations());
-
+		
 		return currentClassDefinition;
 	}
 	

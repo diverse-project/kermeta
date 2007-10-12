@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.15 2007-10-04 07:22:52 ftanguy Exp $
+/*$Id: Ecore2KMLoader.java,v 1.16 2007-10-12 09:19:41 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -37,6 +38,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.AbstractKermetaUnitLoader;
+import org.kermeta.loader.LoadingOptions;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
@@ -55,10 +57,19 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 
 	
-	public Ecore2KMLoader(IProgressMonitor monitor) {
-		super(monitor);
+	public Ecore2KMLoader(Map<Object, Object> options, IProgressMonitor monitor) {
+		super(options, monitor);
+		if ( options != null ) {
+			Boolean b = (Boolean) options.get(LoadingOptions.ECORE_QuickFixEnabled);
+			if ( b != null )
+				isQuickFixEnabled = b;
+			b = (Boolean) options.get(LoadingOptions.ECORE_LOADING_FRAMEWORK);
+			if ( b != null )
+				loadingFramework = b;
+		}	
 	}
 	
+	private boolean loadingFramework = false;
 	
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("EcoreLoader");
 	
@@ -95,7 +106,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		KermetaUnit kermetaUnit = null;
 		
 		try {
-			kermetaUnit = IOPlugin.getDefault().getKermetaUnit(uri);
+			kermetaUnit = IOPlugin.getDefault().getKermetaUnit(uri, loadingFramework);
 		
 			if  ( ! passDatas.contains(kermetaUnit) ) 
 				passDatas.put(kermetaUnit, new Ecore2KMDatas() );
@@ -116,7 +127,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 					Map<EObject,Collection<Setting>> m = EcoreUtil.ExternalCrossReferencer.find(p.eResource());
 					for(EObject eobj : m.keySet()){
 						if(eobj.eResource()!= null){
-							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( eobj.eResource().getURI().toString() );
+							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( eobj.eResource().getURI().toString(), loadingFramework );
 							resources.put(unit, eobj.eResource());
 						}
 					}
@@ -129,7 +140,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 										
 					for ( Resource r : resourceSet.getResources() ) {
 						if ( r != resource ) {
-							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( r.getURI().toString() );
+							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( r.getURI().toString(), loadingFramework );
 							resources.put(unit, r);
 						}
 					}
@@ -137,7 +148,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 					Map<EObject,Collection<Setting>> m = EcoreUtil.ExternalCrossReferencer.find(resource);
 					for(EObject eobj : m.keySet()){
 						if(eobj.eResource()!= null) {
-							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( eobj.eResource().getURI().toString() );
+							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( eobj.eResource().getURI().toString(), loadingFramework );
 							resources.put(unit, eobj.eResource());
 						}
 					}
@@ -146,7 +157,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 					for(Entry<KermetaUnit,Resource> e : resources.entrySet()){
 						if(!e.getKey().getUri().equals(uri)){
 							kermetaUnit.getImportedKermetaUnits().add(e.getKey());
-							kermetaUnit.addRequire( e.getKey().getUri(), e.getKey() );
+							//kermetaUnit.addRequire( e.getKey().getUri(), e.getKey() );
 						}
 					}
 				}
@@ -164,13 +175,13 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		return load(uri, false);
 	}
 	*/
-	public KermetaUnit load(String uri, boolean isQuickFixEnabled) {
-		this.isQuickFixEnabled = isQuickFixEnabled;
+	public KermetaUnit load(String uri) {
 		KermetaUnit kermetaUnit = null;
 		try {
 			
 			kermetaUnit = getKermetaUnit(uri);
-
+			kermetaUnit.getTypeDefinitionCache().setExternalSearchAuthorized(true);
+			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
 			
@@ -179,29 +190,29 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
 			
+			doImportForAllUnits( kermetaUnit );
+						
+			constructAspectsListsForAll(kermetaUnit);
+						
 			applyPass2ToAll(kermetaUnit);
 
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
-			
-			doImportForAllUnits( kermetaUnit );
-			
+						
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
 			
-			constructAspectsListsForAll(kermetaUnit);
-						
 			applyPass3ToAll(kermetaUnit);
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
-			
+			/*
 			applyPass4ToAll(kermetaUnit);
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
 			
-			applyPass5ToAll(kermetaUnit);
+			applyPass5ToAll(kermetaUnit);*/
 			
 			if ( isQuickFixEnabled && ! kermetaUnit.isErroneous() )
 				applyPass6ToAll(kermetaUnit);
@@ -235,7 +246,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		
 		for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits( kermetaUnit ) ) {
 			if ( unit.getUri().matches(".+\\.ecore") ) {
-				if  ( ! passDatas.contains(unit) ) 
+				if  ( ! passDatas.containsKey(unit) ) 
 					passDatas.put(unit, new Ecore2KMDatas() );				
 				if ( ! resources.containsKey(unit) ) {
 					URI u = URI.createURI( unit.getUri() );
@@ -244,7 +255,8 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 				}
 			} else if ( unit.getUri().matches("http:.+") ) {
 				 if (  Registry.INSTANCE.get( unit.getUri() ) instanceof EPackage )
-					 passDatas.put(unit, new Ecore2KMDatas() );
+					 if ( ! passDatas.containsKey(unit) )
+						 passDatas.put(unit, new Ecore2KMDatas() );
 			}
 		}
 		
@@ -257,10 +269,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		while ( iterator.hasNext() ) {
 			KermetaUnit currentUnit = iterator.next();
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
-				KMTUnitLoader loader = new KMTUnitLoader(monitor);
+				KMTUnitLoader loader = new KMTUnitLoader(null, monitor);
 				loader.load( currentUnit.getUri() );
 			} if ( currentUnit.getUri().matches(".+\\.km") ) {
-				KMUnitLoader loader = new KMUnitLoader(monitor);
+				KMUnitLoader loader = new KMUnitLoader(null, monitor);
 				loader.load( currentUnit.getUri() );
 			} else if (currentUnit.getUri().matches(".+\\.ecore") ) {	
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
@@ -280,13 +292,16 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			
 			if ( s.matches("http://.+") )
 				currentURI = s;
-			else if ( s.equals("kermeta") ) 
-				currentURI = IOPlugin.FRAMEWORK_KM_URI;
-			else if ( s.matches("platform:/plugin.+") || s.matches("platform:/resource.+") )
+			else if ( s.equals("kermeta") )  {
+				if ( loadingFramework )
+					currentURI = IOPlugin.getFrameWorkEcoreURI();
+				else
+					currentURI = IOPlugin.getFrameWorkURI();
+			} else if ( s.matches("platform:/plugin.+") || s.matches("platform:/resource.+") )
 				currentURI = s;
 			else if ( index != -1 ) {
 				currentURI = kermetaUnit.getUri().substring(0, index) + "/" + s;
-				currentURI = StringHelper.replaceExtension(currentURI, ".ecore");
+				currentURI = StringHelper.replaceExtension(currentURI, "ecore");
 				URI uri = URI.createURI( currentURI );
 				uri = EcoreHelper.getCanonicalURI(uri);
 				currentURI = uri.toString();
@@ -309,8 +324,13 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 				if ( ! currentState.loading )
 					applyPass1ToAll(currentUnit);
 			}
-			kermetaUnit.getImportedKermetaUnits().addAll( 
-					KermetaUnitHelper.getAllImportedKermetaUnits( currentUnit ) );
+			
+			if ( loadingFramework && currentUnit.isFramework() && currentUnit.getUri().matches(".+\\.ecore") )
+				kermetaUnit.getImportedKermetaUnits().add( currentUnit );
+			else if ( ! loadingFramework )
+				kermetaUnit.getImportedKermetaUnits().add( currentUnit );	
+			/*kermetaUnit.getImportedKermetaUnits().addAll( 
+					KermetaUnitHelper.getAllImportedKermetaUnits( currentUnit ) );*/
 			
 		}
 		
@@ -320,9 +340,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	
 	private void applyPass1(KermetaUnit kermetaUnit) {
 		Resource resource = resources.get(kermetaUnit);
-		EObject node = (EObject) resource.getContents().get(0);
-		Ecore2KMPass1 pass = new Ecore2KMPass1( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, resources.get(kermetaUnit), monitor );
-		pass.accept( node );
+		for ( EObject o : resource.getContents() ) {
+			Ecore2KMPass1 pass = new Ecore2KMPass1( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, resources.get(kermetaUnit), monitor );
+			pass.accept( o );
+		}
 	}
 
 	
@@ -340,10 +361,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			KermetaUnit currentUnit = iterator.next();
 			
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
-				KMTUnitLoader loader = new KMTUnitLoader(monitor);
+				KMTUnitLoader loader = new KMTUnitLoader(null, monitor);
 				loader.load( currentUnit.getUri() );
 			} else if ( currentUnit.getUri().matches(".+\\.km") ) {
-				KMUnitLoader loader = new KMUnitLoader(monitor);
+				KMUnitLoader loader = new KMUnitLoader(null, monitor);
 				loader.load( currentUnit.getUri() );
 			} else {
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
@@ -366,6 +387,8 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		while ( iterator.hasNext() ) {
 			EObject node = iterator.next();
 			pass.accept( node );
+			if ( node instanceof EPackage )
+				opTables.put(kermetaUnit, pass.getOpTable());
 		}
 	}
 	
@@ -381,10 +404,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		while ( iterator.hasNext() ) {
 			KermetaUnit currentUnit = iterator.next();
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
-				KMTUnitLoader loader = new KMTUnitLoader(monitor);
+				KMTUnitLoader loader = new KMTUnitLoader(null, monitor);
 				loader.load( currentUnit.getUri() );
 			} else if ( currentUnit.getUri().matches(".+\\.km") ) {
-				KMUnitLoader loader = new KMUnitLoader(monitor);
+				KMUnitLoader loader = new KMUnitLoader(null, monitor);
 				loader.load( currentUnit.getUri() );
 			} else {	
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
@@ -405,7 +428,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		Iterator <KermetaUnit> iterator = KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit).iterator();
 		while ( iterator.hasNext() ) {
 			KermetaUnit currentUnit = iterator.next();
-			kermetaUnit.importKermetaUnit( currentUnit, true );
+			if ( loadingFramework && currentUnit.isFramework() && currentUnit.getUri().matches(".+\\.ecore") )
+				kermetaUnit.importKermetaUnit( currentUnit, true, false );
+			else if ( ! loadingFramework )
+				kermetaUnit.importKermetaUnit( currentUnit, true, true );	
 		}
 	}
 	
@@ -422,10 +448,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		while ( iterator.hasNext() ) {
 			KermetaUnit currentUnit = iterator.next();
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
-				KMTUnitLoader loader = new KMTUnitLoader(monitor);
+				KMTUnitLoader loader = new KMTUnitLoader(null, monitor);
 				loader.load( currentUnit.getUri() );
 			} else if ( currentUnit.getUri().matches(".+\\.km") ) {
-				KMUnitLoader loader = new KMUnitLoader(monitor);
+				KMUnitLoader loader = new KMUnitLoader(null, monitor);
 				loader.load( currentUnit.getUri() );
 			} else {
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
@@ -452,7 +478,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	}
 	
 	
-	private void applyPass4ToAll(KermetaUnit kermetaUnit) {
+	/*private void applyPass4ToAll(KermetaUnit kermetaUnit) {
 
 		EcoreBuildingState state = (EcoreBuildingState) kermetaUnit.getBuildingState();
 		
@@ -483,24 +509,24 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 		state.loading = false;
 		state.pass4done = true;	
 		state.loaded = true;
-	}
+	}*/
 	
 	private Hashtable <KermetaUnit, Hashtable<Operation, ArrayList<Operation>>> opTables = 
 			new Hashtable <KermetaUnit, Hashtable<Operation, ArrayList<Operation>>> ();
 	
-	private void applyPass4(KermetaUnit kermetaUnit) {
+	/*private void applyPass4(KermetaUnit kermetaUnit) {
 		Ecore2KMPass4 pass = new Ecore2KMPass4( kermetaUnit, passDatas.get(kermetaUnit), isQuickFixEnabled, getLoadingContext(kermetaUnit), monitor );
 		pass.convertUnit();
 		/*Iterator iterator = resource.getContents().iterator();
 		while ( iterator.hasNext() ) {
 			EObject node = (EObject) iterator.next();
 			pass.accept( node );
-		}*/
+		}
 		opTables.put(kermetaUnit, pass.opTable);
-	}
+	}*/
 	
 	
-	private void applyPass5ToAll(KermetaUnit kermetaUnit) {
+	/*private void applyPass5ToAll(KermetaUnit kermetaUnit) {
 
 		EcoreBuildingState state = (EcoreBuildingState) kermetaUnit.getBuildingState();
 		
@@ -542,7 +568,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			EObject node = iterator.next();
 			pass.accept( node );
 		}
-	}
+	}*/
 	
 	
 	private void applyPass6ToAll(KermetaUnit kermetaUnit) {
@@ -559,10 +585,10 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 			
 			KermetaUnit currentUnit = iterator.next();
 			if ( currentUnit.getUri().matches(".+\\.kmt") ) {
-				KMTUnitLoader loader = new KMTUnitLoader(monitor);
+				KMTUnitLoader loader = new KMTUnitLoader(null, monitor);
 				loader.load( currentUnit.getUri() );
 			} else if ( currentUnit.getUri().matches(".+\\.km") ) {
-				KMUnitLoader loader = new KMUnitLoader(monitor);
+				KMUnitLoader loader = new KMUnitLoader(null, monitor);
 				loader.load( currentUnit.getUri() );
 			} else  if ( currentUnit.getUri().matches(".+\\.ecore") ) {	
 				EcoreBuildingState currentState = (EcoreBuildingState) currentUnit.getBuildingState();
