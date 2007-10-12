@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.28 2007-09-19 12:19:31 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.29 2007-10-12 09:10:15 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -255,12 +255,12 @@ public class UnitExporterWizard extends Wizard {
 			KermetaPlugin.getDefault().getConsole().println(message);
 		}
 		
-		if ( KermetaUnitHelper.isErrored(unit) ) {
+		if ( unit.isIndirectlyErroneous() ) {
 			Shell theShell = this.getContainer().getShell();
 			MessageDialog.openError(theShell, "Error loading file",
 					"The source file contains errors. Please have look to the Console view for the details");
 			
-			ErrorMessage errmessage = new ErrorMessage( KermetaUnitHelper.getErrorsAsString(unit) );
+			ErrorMessage errmessage = new ErrorMessage( KermetaUnitHelper.getAllErrorsAsString(unit) );
 			KermetaPlugin.getDefault().getConsole().println(errmessage);
 
 		} 
