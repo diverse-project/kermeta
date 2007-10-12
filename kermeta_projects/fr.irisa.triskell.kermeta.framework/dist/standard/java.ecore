@@ -7,7 +7,7 @@
   <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="standard" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#//standard" nsPrefix="standard">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * $Id: java.ecore,v 1.11 2007-10-02 15:15:53 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */"/>
+        <details key="documentation" value="/**&#xA; * $Id: java.ecore,v 1.12 2007-10-12 09:21:32 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="UnknownJavaObject">
         <eAnnotations source="kermeta">
@@ -33,10 +33,13 @@
     <references href="../Standard.ecore#/1"/>
     <references href="collections.ecore#/0"/>
     <references href="collections.ecore#/1"/>
+    <references href="collections.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
+    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
@@ -45,6 +48,7 @@
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
@@ -54,16 +58,19 @@
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

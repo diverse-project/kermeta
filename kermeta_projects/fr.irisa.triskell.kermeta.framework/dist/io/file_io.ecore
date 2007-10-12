@@ -19,7 +19,6 @@
             <details key="body" value="do&#xA;&#x9;if filename.equals(void) then&#xA;&#x9;&#x9;raise kermeta::exceptions::FileNotFoundException.new&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Writes a String in a text file&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="filename">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
@@ -53,15 +52,16 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
@@ -70,6 +70,7 @@
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
@@ -85,11 +86,9 @@
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

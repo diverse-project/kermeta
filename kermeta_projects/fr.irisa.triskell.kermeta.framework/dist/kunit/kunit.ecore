@@ -49,7 +49,6 @@
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
             <references href="assert.ecore#/1/kunit/AbstractFallible/assert"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -61,7 +60,6 @@
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
             <references href="assert.ecore#/1/kunit/AbstractFallible/assertWithMsg"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -76,7 +74,6 @@
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
             <references href="assert.ecore#/1/kunit/AbstractFallible/fail"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="msg">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
@@ -88,7 +85,6 @@
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
             <references href="assert.ecore#/1/kunit/AbstractFallible/assertTrue"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -100,7 +96,6 @@
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
             <references href="assert.ecore#/1/kunit/AbstractFallible/assertTrueWithMsg"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -115,7 +110,6 @@
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
             <references href="assert.ecore#/1/kunit/AbstractFallible/assertFalse"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -127,7 +121,6 @@
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
             <references href="assert.ecore#/1/kunit/AbstractFallible/assertFalseWithMsg"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -142,7 +135,6 @@
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
             <references href="assert.ecore#/1/kunit/AbstractFallible/assertEqual"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="expected">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
@@ -150,9 +142,8 @@
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="rank">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="rank" containment="true">
           <eAnnotations source="kermeta">
-            <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xA;   * counter of assertions in the test method&#xA;   */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
@@ -168,14 +159,12 @@
             <details key="body" value="do&#xA;&#x9;if (runtests) == (void) then&#xA;&#x9;&#x9;runtests := 0&#xA;&#xA;&#x9;end&#xA;&#x9;runtests := (1) + (runtests)&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Increments the runtests counter&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="addFailure">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;failures.add(kermeta::kunit::Failure.new.initFrom(test, msg))&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Adds a failed test to the list of failed tests&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="test" eType="/1/kunit/Fallible"/>
           <eParameters name="msg">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -186,7 +175,6 @@
             <details key="body" value="do&#xA;&#x9;errors.add(kermeta::kunit::Error.new.initFrom(test, e))&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Adds an error to the list of errors&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="test" eType="/1/kunit/Fallible"/>
           <eParameters name="e">
             <eType xsi:type="ecore:EClass" href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
@@ -197,7 +185,6 @@
             <details key="body" value="do&#xA;&#x9;harnessErrors.add(kermeta::kunit::Error.new.initFrom(test, e).makeSetUp)&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Adds errors which occur durint the SetUp phase&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="test" eType="/1/kunit/Fallible"/>
           <eParameters name="e">
             <eType xsi:type="ecore:EClass" href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
@@ -208,15 +195,13 @@
             <details key="body" value="do&#xA;&#x9;harnessErrors.add(kermeta::kunit::Error.new.initFrom(test, e).makeTearDown)&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Adds errors which occur durint the TearDown phase&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="test" eType="/1/kunit/Fallible"/>
           <eParameters name="e">
             <eType xsi:type="ecore:EClass" href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
           </eParameters>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="runtests">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="runtests" containment="true">
           <eAnnotations source="kermeta">
-            <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xA;  * number of test that were run&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
@@ -266,9 +251,8 @@
             <details key="documentation" value="/**&#xA;  * the stored failure&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="message">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="message">
           <eAnnotations source="kermeta">
-            <details key="isComposite" value="false"/>
             <details key="documentation" value="/**&#xA;  * the stored message (given or generated one)&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -358,7 +342,6 @@
           <eAnnotations source="kermeta.post">
             <details key="logNotVoid" value="self.log.isNotEqual(void)"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="log" eType="/1/kunit/Log"/>
         </eOperations>
         <eOperations name="run">
@@ -369,7 +352,6 @@
           <eAnnotations source="kermeta.pre">
             <details key="logNotVoid" value="self.log.isNotEqual(void)"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="log" eType="/1/kunit/Log">
           <eAnnotations source="kermeta">
@@ -405,7 +387,6 @@
             <details key="body" value="do&#xA;&#x9;aspect.ownedOperation.~select{o | ((o.name.size) >= (4)) and (o.name.substring(0, 4).equals(&quot;test&quot;))}.each{o | do&#xA;&#x9;&#x9;&#x9;var testCase : kermeta::kunit::TestCase&#xA;&#x9;&#x9;&#x9;testCase ?= testCaseClass.new&#xA;&#x9;&#x9;&#x9;testCase.setTestMethodName(o.name)&#xA;&#x9;&#x9;&#x9;self.tests.add(testCase)&#xA;&#x9;&#x9;end}&#xA;&#x9;aspect.baseAspects.each{a | if a.isInstanceOf(kermeta::reflection::ClassDefinition) then&#xA;&#x9;&#x9;&#x9;var castAspect : kermeta::reflection::ClassDefinition&#xA;&#x9;&#x9;&#x9;castAspect ?= a&#xA;&#x9;&#x9;&#x9;addAllTestCasesFromAspects(testCaseClass, castAspect)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
             <details key="documentation" value="/**&#xA;   * to be written #####################################################&#xA;   */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="testCaseClass">
             <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Class"/>
           </eParameters>
@@ -451,21 +432,18 @@
             <details key="body" value="do&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * the things to be done before execution of the test method&#xA;  * (designed to be overwritten in real TestCase classes) &#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="tearDown">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * the things to be done after execution of the test method&#xA;  * (designed to be overwritten in real TestCase classes) &#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="raiseIfHasFailures">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var msg : kermeta::standard::String init &quot;&quot;&#xA;&#x9;if not (log.failures.empty) then&#xA;&#x9;&#x9;msg := &quot;Failures: &quot;&#xA;&#x9;&#x9;log.failures.each{f | msg := msg.plus(&quot;&#xA;   &quot;).plus(f.toString)}&#xA;&#x9;&#x9;var exception : kermeta::kunit::AssertionFailedError init kermeta::kunit::AssertionFailedError.new&#xA;&#x9;&#x9;exception.message := msg&#xA;&#x9;&#x9;raise exception&#xA;&#xA;&#x9;end&#xA;&#x9;if not (log.errors.empty) then&#xA;&#x9;&#x9;log.errors.each{f | do&#xA;&#x9;&#x9;&#x9;&#x9;msg := &quot;Errors: &quot;&#xA;&#x9;&#x9;&#x9;&#x9;msg := msg.plus(&quot;&#xA;   &quot;).plus(f.toString)&#xA;&#x9;&#x9;&#x9;&#x9;var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new&#xA;&#x9;&#x9;&#x9;&#x9;exception.message := msg&#xA;&#x9;&#x9;&#x9;&#x9;raise exception&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * operation used when the TestCase is run from a java test runner, encapsulates the failures results&#xA;  * into an AssertionFailedError so the TestRunner can detect it&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="run" ordered="false">
           <eAnnotations source="kermeta" references="/1/kunit/Test/run">
@@ -483,9 +461,8 @@
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="__testMethodName">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="__testMethodName" containment="true">
           <eAnnotations source="kermeta">
-            <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xA;  * the name of the method which corresponds to the test case in the test class&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -507,7 +484,6 @@
           <eAnnotations source="kermeta.post">
             <details key="logNotVoid" value="log.isNotEqual(void)"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="test" eType="/1/kunit/Test"/>
         </eOperations>
         <eOperations name="run">
@@ -518,7 +494,6 @@
           <eAnnotations source="kermeta.pre">
             <details key="cIsATestCase" value="testCaseClass.superClass.contains(kermeta::kunit::TestCase)"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="testCaseClass">
             <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Class"/>
           </eParameters>
@@ -540,51 +515,39 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
-    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="assert.ecore#/0"/>
     <references href="assert.ecore#/1"/>
-    <references href="assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

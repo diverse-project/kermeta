@@ -80,7 +80,15 @@
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xA;  * Formal parameters of the expression (bindings between parameters' names and types)&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EClass" href="../utils/hashtable.ecore#/1/utils/Hashtable"/>
+          <eGenericType>
+            <eTypeArguments>
+              <eClassifier xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+            </eTypeArguments>
+            <eTypeArguments>
+              <eClassifier xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Type"/>
+            </eTypeArguments>
+            <eClassifier xsi:type="ecore:EClass" href="../utils/hashtable.ecore#/1/utils/Hashtable"/>
+          </eGenericType>
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="KermetaError" abstract="true">
@@ -88,9 +96,8 @@
           <details key="documentation" value="/**&#xA; * Kermeta language error in a code written in Kermeta&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="structure.ecore#/1/language/structure/Object"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="message">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="message" containment="true">
           <eAnnotations source="kermeta">
-            <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xA;  * Error message&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -111,57 +118,44 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
     <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="behavior.ecore#/0"/>
     <references href="behavior.ecore#/1"/>
-    <references href="behavior.ecore#/2"/>
     <references href="structure.ecore#/0"/>
     <references href="structure.ecore#/1"/>
     <references href="structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="reflective_collections.ecore#/0"/>
     <references href="reflective_collections.ecore#/1"/>
-    <references href="reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

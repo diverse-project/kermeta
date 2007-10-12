@@ -308,19 +308,20 @@
           <ownedOperation tag="//@packages.0/language/structure/Object/isKindOf/@ownedTag.0" name="isKindOf" type="//@packages.0/language/structure/Boolean" isOrdered="true" upper="1">
             <ownedTag value="/**&#xA;   * Implements kermeta::reflection::Object.isKindOf(Class)&#xA;   */" object="//@packages.0/language/structure/Object/isKindOf"/>
             <body xsi:type="kermeta_language_behavior:Block">
-              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+              <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
               <statement xsi:type="kermeta_language_behavior:Assignment">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallResult" name="result">
                   <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
                 </target>
-                <value xsi:type="kermeta_language_behavior:CallFeature" name="equals" staticOperation="//@packages.0/language/structure/Object/equals">
-                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/language/structure/Object/isKindOf/@body/@statement.0/@value/@parameters.0/@containedType.0" name="cl">
                     <containedType xsi:type="kermeta_language_structure:Class">
                       <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Class"/>
                     </containedType>
                   </parameters>
+                  <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                   <target xsi:type="kermeta_language_behavior:CallFeature" name="getMetaClass" staticOperation="//@packages.0/language/structure/Object/getMetaClass">
                     <staticType href="../standard/primitive_types.km#//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@containedType.0"/>
                     <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/language/structure/Object/isKindOf/@body/@statement.0/@value/@target/@target/@containedType.0">

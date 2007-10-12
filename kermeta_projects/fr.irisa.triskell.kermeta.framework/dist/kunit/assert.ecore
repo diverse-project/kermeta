@@ -19,7 +19,6 @@
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/** process the given condition and react if it is not satisfied */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -29,7 +28,6 @@
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xA;     * process the given condition and react with the given message&#xA;     * if it is not satisfied&#xA;     */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -42,7 +40,6 @@
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/** to be used if a failure reaction is needed */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="msg">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
@@ -52,7 +49,6 @@
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/** process the given condition and react if it is not satisfied */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -62,7 +58,6 @@
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xA;     * process the given condition and react with the given message&#xA;     * if it is not satisfied&#xA;     */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -75,7 +70,6 @@
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/** process the given condition and react if it is satisfied */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -85,7 +79,6 @@
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xA;     * process the given condition and react with the given message&#xA;     * if it is satisfied&#xA;     */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -98,7 +91,6 @@
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/** process the two given string and react if they are not equal */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="expected">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
@@ -120,7 +112,6 @@
             <details key="documentation" value="/** Fails if condition is false */"/>
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -131,7 +122,6 @@
             <details key="documentation" value="/** will fail if condition is false */"/>
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -142,7 +132,6 @@
             <details key="documentation" value="/** will fail if condition is false */"/>
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -156,7 +145,6 @@
             <details key="documentation" value="/** will fail if condition is true */"/>
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -167,7 +155,6 @@
             <details key="documentation" value="/** will fail if condition is true */"/>
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -181,7 +168,6 @@
             <details key="documentation" value="/** will fail if condition is false */"/>
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
@@ -195,7 +181,6 @@
             <details key="documentation" value="/** raise a AssertionViolatedException with the provided message */"/>
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="msg">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
@@ -206,7 +191,6 @@
             <details key="documentation" value="/** Will fail if the two strings are not identical */"/>
             <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="expected">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
@@ -228,8 +212,10 @@
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
+    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../reflection/reflection.ecore#/2"/>
@@ -237,13 +223,16 @@
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="kunit.ecore#/0"/>
     <references href="kunit.ecore#/1"/>
+    <references href="kunit.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>
@@ -252,13 +241,16 @@
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
     <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
+    <references href="../ecore/ecore_compatibility.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/2"/>

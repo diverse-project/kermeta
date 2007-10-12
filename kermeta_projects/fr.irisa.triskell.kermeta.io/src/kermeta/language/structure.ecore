@@ -10,18 +10,21 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * Contains the concrete implementation (including the operation bodies) &#xA; * of the classes of the &lt;code>kermeta::reflection&lt;/code> package.&#xA; * If you need more documentation, please take a look at the&#xA; * &lt;code>kermeta::reflection&lt;/code> package which is more complete.&#xA; * &lt;img src=&quot;./figures/language_structure_package.png&quot;>&#xA; */"/>
         </eAnnotations>
-        <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String">
+        <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.Object">
           <eAnnotations source="kermeta">
+            <details key="alias" value="kermeta::standard::String"/>
             <details key="documentation" value="/** Alias to kermeta::standard::String */"/>
           </eAnnotations>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean">
+        <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Object">
           <eAnnotations source="kermeta">
+            <details key="alias" value="kermeta::standard::Boolean"/>
             <details key="documentation" value="/** Alias to kermeta::standard::Boolean */"/>
           </eAnnotations>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer">
+        <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Object">
           <eAnnotations source="kermeta">
+            <details key="alias" value="kermeta::standard::Integer"/>
             <details key="documentation" value="/** Alias to kermeta::standard::Integer */"/>
           </eAnnotations>
         </eClassifiers>
@@ -30,8 +33,9 @@
             <details key="documentation" value="/** Alias to kermeta::standard::Real */"/>
           </eAnnotations>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Integer">
+        <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Object">
           <eAnnotations source="kermeta">
+            <details key="alias" value="kermeta::standard::UnlimitedNatural"/>
             <details key="documentation" value="/** Alias to kermeta::standard::UnlimitedNatural */"/>
           </eAnnotations>
         </eClassifiers>
@@ -66,7 +70,6 @@
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/checkInvariants"/>
             </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           </eOperations>
           <eOperations name="checkAllInvariants">
             <eAnnotations source="kermeta">
@@ -75,7 +78,6 @@
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/checkAllInvariants"/>
             </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           </eOperations>
           <eOperations name="equals" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
@@ -129,7 +131,6 @@
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/set"/>
             </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
             <eParameters name="property">
               <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Property"/>
             </eParameters>
@@ -155,7 +156,6 @@
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/unset"/>
             </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
             <eParameters name="property">
               <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Property"/>
             </eParameters>
@@ -207,7 +207,6 @@
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/freeze"/>
             </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           </eOperations>
           <eOperations name="asType">
             <eAnnotations source="kermeta">
@@ -735,7 +734,6 @@
               <details key="superOperation" value="kermeta::reflection::Model"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Model/add"/>
             </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
             <eParameters name="obj">
               <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Object"/>
             </eParameters>
@@ -747,7 +745,6 @@
               <details key="superOperation" value="kermeta::reflection::Model"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Model/remove"/>
             </eAnnotations>
-            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
             <eParameters name="obj">
               <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Object"/>
             </eParameters>
@@ -1620,54 +1617,40 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="behavior.ecore#/0"/>
     <references href="behavior.ecore#/1"/>
-    <references href="behavior.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="reflective_collections.ecore#/0"/>
     <references href="reflective_collections.ecore#/1"/>
-    <references href="reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="dynamic_expression.ecore#/0"/>
     <references href="dynamic_expression.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

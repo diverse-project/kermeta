@@ -19,9 +19,8 @@
               <details key="documentation" value="/**&#xA;  * Kermeta calls can embedd expressions as parameters&#xA;  */"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="name" containment="true">
             <eAnnotations source="kermeta">
-              <details key="isComposite" value="true"/>
               <details key="documentation" value="/**&#xA;  * A call must be named&#xA;  */"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -64,9 +63,8 @@
               <eGenericType eTypeParameter="/1/language/behavior/CallVariable/acceptKMExpressionVisitor/ContextType"/>
             </eParameters>
           </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="isAtpre" containment="true">
             <eAnnotations source="kermeta">
-              <details key="isComposite" value="true"/>
               <details key="documentation" value="/**&#xA;  * Tells whether this CallVariable represents a call to @pre in a postcondition&#xA;  */"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
@@ -108,9 +106,8 @@
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="structure.ecore#/1/language/structure/Property"/>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="isAtpre" containment="true">
             <eAnnotations source="kermeta">
-              <details key="isComposite" value="true"/>
               <details key="documentation" value="/**&#xA;  * Tells whether this CallFeature represents a call to @pre in a postcondition&#xA;  */"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
@@ -206,9 +203,8 @@
               <details key="documentation" value="/**&#xA;  * Value to be assigned, as a KerMeta expression&#xA;  */"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCast">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="isCast" containment="true">
             <eAnnotations source="kermeta">
-              <details key="isComposite" value="true"/>
               <details key="documentation" value="/**&#xA;  * Boolean stating whether current assignment corresponds to a cast operation &#xA;  */"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
@@ -319,9 +315,8 @@
               <eGenericType eTypeParameter="/1/language/behavior/IntegerLiteral/acceptKMExpressionVisitor/ContextType"/>
             </eParameters>
           </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true">
             <eAnnotations source="kermeta">
-              <details key="isComposite" value="true"/>
               <details key="documentation" value="/**&#xA;  * The concrete value represented by this literal&#xA;  */"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
@@ -345,9 +340,8 @@
               <eGenericType eTypeParameter="/1/language/behavior/StringLiteral/acceptKMExpressionVisitor/ContextType"/>
             </eParameters>
           </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true">
             <eAnnotations source="kermeta">
-              <details key="isComposite" value="true"/>
               <details key="documentation" value="/**&#xA;  * The concrete value represented by this literal&#xA;  */"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -371,9 +365,8 @@
               <eGenericType eTypeParameter="/1/language/behavior/BooleanLiteral/acceptKMExpressionVisitor/ContextType"/>
             </eParameters>
           </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true">
             <eAnnotations source="kermeta">
-              <details key="isComposite" value="true"/>
               <details key="documentation" value="/**&#xA;  * The concrete value represented by this literal&#xA;  */"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
@@ -518,9 +511,8 @@
               <details key="documentation" value="/**&#xA;  * Initialization expression for the variable&#xA;  * Default value is &lt;code>void&lt;/code> ????&#xA;  */"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" containment="true">
             <eAnnotations source="kermeta">
-              <details key="isComposite" value="true"/>
               <details key="documentation" value="/**&#xA;  * Name of the declared variable&#xA;  */"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -585,9 +577,8 @@
               <details key="documentation" value="/**&#xA;  * Type of the cathed exception&#xA;  */"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptionName">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="exceptionName" containment="true">
             <eAnnotations source="kermeta">
-              <details key="isComposite" value="true"/>
               <details key="documentation" value="/**&#xA;  * Name of the catched exception&#xA;  */"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -616,16 +607,14 @@
               <details key="documentation" value="/**&#xA;  * Parameters of the Java static call provided as KerMeta expressions&#xA;  */"/>
             </eAnnotations>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="jclass">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="jclass" containment="true">
             <eAnnotations source="kermeta">
-              <details key="isComposite" value="true"/>
               <details key="documentation" value="/**&#xA;  * Qualified name of the targeted Java class&#xA;  */"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eStructuralFeatures>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="jmethod">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="jmethod" containment="true">
             <eAnnotations source="kermeta">
-              <details key="isComposite" value="true"/>
               <details key="documentation" value="/**&#xA;  * Name of the Java method to be launched in the identified Java class&#xA;  */"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -680,9 +669,8 @@
               <eGenericType eTypeParameter="/1/language/behavior/LambdaParameter/acceptKMExpressionVisitor/ContextType"/>
             </eParameters>
           </eOperations>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="name" containment="true">
             <eAnnotations source="kermeta">
-              <details key="isComposite" value="true"/>
               <details key="documentation" value="/**&#xA;  * Name of the lambda parameter&#xA;  */"/>
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -955,9 +943,9 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="structure.ecore#/0"/>
     <references href="structure.ecore#/1"/>
+    <references href="structure.ecore#/2"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
     <references href="../standard/collections.ecore#/2"/>
@@ -965,17 +953,15 @@
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="reflective_collections.ecore#/0"/>
     <references href="reflective_collections.ecore#/1"/>
-    <references href="reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/2"/>
@@ -983,22 +969,19 @@
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="dynamic_expression.ecore#/0"/>
     <references href="dynamic_expression.ecore#/1"/>
+    <references href="dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

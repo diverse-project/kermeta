@@ -13,9 +13,6 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * The main class that handle a loaded/saved model.&#xA; * There are a few important things to note for the developer :&#xA; * &#xA; * - load a Resource : this loads a Collection of instances corresponding to the&#xA; *   objects in the loaded model. If the Collection of instances is empty, than &#xA; *  a ResourceLoadException is raised&#xA; *&#xA; * - save a Resource : this saves the collection of instances in a new file. This can&#xA; *   be correctly done if and only if the instances saved are conform to the metamodel&#xA; *   linked to this resource (this link does not need to be explicit. It is normally retrieved&#xA; *   through the EMF model -- see Java wrapping &quot;Resource.java&quot;).&#xA; * &#xA; * - add/remove an instance to the Resource : this adds an element in the resource. It cannot&#xA; *   be &quot;simply&quot; added because of the following potential errors :&#xA; *&#xA; *   - The object added is not conform to the metamodel -> Error&#xA; *   - The object was already added in the resource -> Not a real error : we do nothing&#xA; *   - The object to remove does not exist -> redirect to a collection-specific error&#xA; *   - The object to remove is attached to an object in the collection -> &quot;dependency-violation&quot; exception?&#xA;&#xA; */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta.typeVariableBindings">
-          <details key="kermeta::standard::Set&lt;alias Object : kermeta::language::structure::Object;>" value="kermeta::standard::Set&lt;alias Object : kermeta::language::structure::Object;>"/>
-        </eAnnotations>
         <eSuperTypes href="../standard/collections.ecore#/1/standard/Set"/>
         <eOperations name="instances" eType="/1/persistence/Resource">
           <eAnnotations source="kermeta">
@@ -28,14 +25,12 @@
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xA;  * Save a Resource in the file specified by the current value of uri &#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="saveWithNewURI">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Save a Resource in a file referenced by the new uri. &#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="new_uri">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
@@ -45,18 +40,15 @@
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xA;  * Loads the Resource, thus making content of the Resource browsable.&#xA;  * Raises a ResourceLoadException in case loaded Resource is empty&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="uri" containment="true">
           <eAnnotations source="kermeta">
-            <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xA;  * Uri of the Resource to load&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="metaModelURI">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="metaModelURI" containment="true">
           <eAnnotations source="kermeta">
-            <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xA;  * Uri of the meta-model of the Resource to load&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -97,7 +89,6 @@
             <details key="documentation" value="/**&#xA;  * Overrides Resource.saveWithNewURI(String)&#xA;  */"/>
             <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="new_uri">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
@@ -108,7 +99,6 @@
             <details key="documentation" value="/**&#xA;  * Overrides Resource.save()&#xA;  */"/>
             <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="saveAndValidateWithEMF">
           <eAnnotations source="kermeta">
@@ -123,7 +113,6 @@
             <details key="documentation" value="/**&#xA;  * Overrides Resource.save()&#xA;  * In case the metamodelURI was not previoulsy set, metamodelURI is filled with&#xA;  * the nsuri of the root package of the metamodel used to load the Resource after&#xA;  * a successful load&#xA;  */"/>
             <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="add">
           <eAnnotations source="kermeta">
@@ -132,7 +121,6 @@
             <details key="superOperation" value="kermeta::standard::Set"/>
             <references href="../standard/collections.ecore#/1/standard/Set/add"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="instance">
             <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
           </eParameters>
@@ -160,7 +148,6 @@
             <details key="documentation" value="/**&#xA;   * NOT IMPLEMENTED&#xA;   */"/>
             <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="load">
           <eAnnotations source="kermeta" references="/1/persistence/Resource/load">
@@ -168,7 +155,6 @@
             <details key="documentation" value="/**&#xA;   * NOT IMPLEMENTED&#xA;   */"/>
             <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="add">
           <eAnnotations source="kermeta">
@@ -177,7 +163,6 @@
             <details key="superOperation" value="kermeta::standard::Set"/>
             <references href="../standard/collections.ecore#/1/standard/Set/add"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="instance">
             <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
           </eParameters>
@@ -289,9 +274,8 @@
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInterpreterInternalResources">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="useInterpreterInternalResources" containment="true">
           <eAnnotations source="kermeta">
-            <details key="isComposite" value="true"/>
             <details key="documentation" value="/** &#xA;  * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself&#xA;  * this is usefull for example to make a dependency to framework.km&#xA;  * by default, not setting this is considered as false.&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
@@ -326,7 +310,6 @@
     <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
     <references href="../language/behavior.ecore#/2"/>
@@ -362,6 +345,7 @@
     <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
     <references href="../standard/java.ecore#/2"/>

@@ -793,25 +793,25 @@
                     </statement>
                   </elseBody>
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/ErrorKind" name="setUpError" staticEnumLiteral="//@packages.0/kunit/ErrorKind/setUpError">
                       <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/kunit/Error/initFrom/@body/@statement.2/@value/@target/@containedType.0">
                         <typeref type="//@packages.0/kunit/ErrorKind" upper="1"/>
                       </target>
                     </parameters>
-                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                    <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/ErrorKind" name="kind" staticProperty="//@packages.0/kunit/Error/kind"/>
                   </condition>
                 </statement>
               </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/ErrorKind" name="testError" staticEnumLiteral="//@packages.0/kunit/ErrorKind/testError">
                   <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/kunit/Error/initFrom/@body/@statement.2/@value/@target/@containedType.0">
                     <typeref type="//@packages.0/kunit/ErrorKind" upper="1"/>
                   </target>
                 </parameters>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/kunit/ErrorKind" name="kind" staticProperty="//@packages.0/kunit/Error/kind"/>
               </condition>
             </statement>
@@ -1123,17 +1123,17 @@
                       <containedType xsi:type="kermeta_language_structure:ProductType">
                         <type href="../reflection/reflection.km#//@packages.0/reflection/Class/superClass/@containedType.0"/>
                       </containedType>
-                      <right href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                      <right href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                     </containedType>
                     <parameters name="sc"/>
                     <body xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                       <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/kunit/Log/addFailure/@body/@statement.0/@parameters.0/@target/@target/@containedType.0">
                         <typeref type="//@packages.0/kunit/TestSuite/addAllTestCasesFrom/@body/@statement.0/@condition/@target/@parameters.0/@body/@parameters.0/@typeref/@containedType.0" upper="1">
                           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/TestCase"/>
                         </typeref>
                       </parameters>
-                      <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                      <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="sc">
                         <staticType href="../reflection/reflection.km#//@packages.0/reflection/Class/superClass/@containedType.0"/>
                       </target>
@@ -1198,7 +1198,7 @@
                     </statement>
                   </thenBody>
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="isInstanceOf">
-                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/kunit/Log/addFailure/@body/@statement.0/@parameters.0/@target/@target/@containedType.0">
                       <typeref type="//@packages.0/kunit/TestSuite/addAllTestCasesFrom/@body/@statement.3/@parameters.0/@body/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                         <containedType xsi:type="kermeta_language_structure:Class">
@@ -1206,7 +1206,7 @@
                         </containedType>
                       </typeref>
                     </parameters>
-                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isInstanceOf"/>
+                    <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isInstanceOf"/>
                     <target xsi:type="kermeta_language_behavior:CallVariable" name="aspect">
                       <staticType href="../reflection/reflection.km#//@packages.0/reflection/TypeDefinition/baseAspects/@containedType.0"/>
                     </target>
@@ -1533,7 +1533,7 @@
                     </statement>
                   </thenBody>
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="isInstanceOf">
-                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/kunit/Log/addFailure/@body/@statement.0/@parameters.0/@target/@target/@containedType.0">
                       <typeref type="//@packages.0/kunit/TestSuite/addAllTestCasesFromAspects/@body/@statement.1/@parameters.0/@body/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                         <containedType xsi:type="kermeta_language_structure:Class">
@@ -1541,7 +1541,7 @@
                         </containedType>
                       </typeref>
                     </parameters>
-                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isInstanceOf"/>
+                    <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isInstanceOf"/>
                     <target xsi:type="kermeta_language_behavior:CallVariable" name="a">
                       <staticType href="../reflection/reflection.km#//@packages.0/reflection/TypeDefinition/baseAspects/@containedType.0"/>
                     </target>

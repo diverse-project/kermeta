@@ -91,7 +91,6 @@
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.add(self, element)&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Adds an element in the Collection (default implementation)&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/standard/Collection/G"/>
           </eParameters>
@@ -104,7 +103,6 @@
           <eAnnotations source="kermeta.post">
             <details key="doesntContainsElementAnymore" value="not (contains(element))"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/standard/Collection/G"/>
           </eParameters>
@@ -114,14 +112,12 @@
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.clear(self)&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Removes all elements from the Collection&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eOperations name="addAll">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;elements.each{element | add(element)}&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Adds all elements from the Collection elements in the current Collection&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="elements" eType="/1/standard/Collection"/>
         </eOperations>
         <eOperations name="contains">
@@ -234,7 +230,6 @@
             <details key="body" value="do&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;func(it.next)&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Runs function func on each element of the Collection&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="func">
             <eAnnotations source="kermeta.functionType">
               <details key="0" value="G"/>
@@ -371,9 +366,6 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * A Set is a non-ordered collection that contains distinct elements&#xA; * (with regards to the G.equals(Object) operation)&#xA; */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta.typeVariableBindings">
-          <details key="kermeta::standard::Collection&lt;G>" value="kermeta::standard::Collection&lt;G>"/>
-        </eAnnotations>
         <eTypeParameters name="G"/>
         <eOperations name="add">
           <eAnnotations source="kermeta" references="/1/standard/Collection/add">
@@ -381,7 +373,6 @@
             <details key="documentation" value="/**&#xA;  * Overrides Collection&lt;G>.add(G)&#xA;  * Adds elt to the Set if it is not already contained by the&#xA;  * Set, does nothing otherwise&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/standard/Set/G"/>
           </eParameters>
@@ -392,7 +383,6 @@
             <details key="documentation" value="/**&#xA;  * Overrides Collection&lt;G>.remove(G)&#xA;  * Removes the element from the Set if it is contained by the Set&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/standard/Set/G"/>
           </eParameters>
@@ -560,9 +550,6 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * Bag is a concrete non-ordered Collection allowing duplicates&#xA; */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta.typeVariableBindings">
-          <details key="kermeta::standard::Collection&lt;G>" value="kermeta::standard::Collection&lt;G>"/>
-        </eAnnotations>
         <eTypeParameters name="G"/>
         <eOperations name="equals">
           <eAnnotations source="kermeta">
@@ -614,7 +601,6 @@
           <eAnnotations source="kermeta.post">
             <details key="doesntContainsElementAnymore" value="not (exists{e | (e.oid) == (elementOid)})"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="elementOid">
             <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
           </eParameters>
@@ -624,7 +610,6 @@
             <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | e.equals(element)}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Removes one instance of element from the Bag&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="element">
             <eGenericType eTypeParameter="/1/standard/Bag/G"/>
           </eParameters>
@@ -754,16 +739,12 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * An OrderedCollection is the root abstract class for all ordered Collections.&#xA; */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta.typeVariableBindings">
-          <details key="kermeta::standard::Collection&lt;G>" value="kermeta::standard::Collection&lt;G>"/>
-        </eAnnotations>
         <eTypeParameters name="G"/>
         <eOperations name="addAt">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if ((index) &lt; (0)) or ((index) > (size)) then&#xA;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.addAt(self, index, element)&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Adds element in the OrderedCollection at rank index&#xA;  * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xA;  * larger than the size of the OrderedCollection&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="index">
             <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
           </eParameters>
@@ -776,7 +757,6 @@
             <details key="body" value="do&#xA;&#x9;if ((index) &lt; (0)) or ((index) > ((size) - (1))) then&#xA;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.removeAt(self, index)&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Removes the element at rank index from the OrderedCollection&#xA;  * Raises IndexOutOfBound exception if provided index is lower than 0 or&#xA;  * larger than the size of the OrderedCollection&#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="index">
             <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
           </eParameters>
@@ -832,10 +812,6 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * An OrderedSet is a Set that contained ordered distinct elements&#xA; */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta.typeVariableBindings">
-          <details key="kermeta::standard::Set&lt;G>" value="kermeta::standard::Set&lt;G>"/>
-          <details key="kermeta::standard::OrderedCollection&lt;G>" value="kermeta::standard::OrderedCollection&lt;G>"/>
-        </eAnnotations>
         <eTypeParameters name="G"/>
         <eOperations name="add" ordered="false">
           <eAnnotations source="kermeta" references="/1/standard/Set/add">
@@ -853,7 +829,6 @@
             <details key="documentation" value="/**&#xA;  * Overrides OrderedCollection&lt;G>.addAt(Integer, G)&#xA;  * Adds element in the OrderedSet at rank index if the ordered set does&#xA;  * not already contain the element, does nothing otherwise&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           <eParameters name="index">
             <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
           </eParameters>
@@ -940,10 +915,6 @@
       <eClassifiers xsi:type="ecore:EClass" name="Sequence" eSuperTypes="/1/standard/Bag /1/standard/OrderedCollection">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xA; * A Sequence is an OrderedCollection of elements allowing duplicates&#xA; */"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta.typeVariableBindings">
-          <details key="kermeta::standard::Bag&lt;G>" value="kermeta::standard::Bag&lt;G>"/>
-          <details key="kermeta::standard::OrderedCollection&lt;G>" value="kermeta::standard::OrderedCollection&lt;G>"/>
         </eAnnotations>
         <eTypeParameters name="G"/>
         <eOperations name="equals">
@@ -1057,44 +1028,39 @@
     <references href="primitive_types.ecore#/1"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="java.ecore#/0"/>
     <references href="java.ecore#/1"/>
-    <references href="java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

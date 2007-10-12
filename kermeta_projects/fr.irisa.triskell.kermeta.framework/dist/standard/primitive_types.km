@@ -228,7 +228,7 @@
                 </statement>
               </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Class"/>
@@ -237,7 +237,7 @@
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
                   </typeref>
                 </parameters>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isNotEqual"/>
+                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isNotEqual"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Class"/>
@@ -517,13 +517,13 @@
                     </statement>
                   </elseBody>
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                    <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                    <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                       <typeref type="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                       </typeref>
                     </parameters>
-                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                    <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                       <containedType xsi:type="kermeta_language_structure:Class">
                         <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Class"/>
@@ -548,13 +548,13 @@
                 </statement>
               </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                   <typeref type="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                   </typeref>
                 </parameters>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isNotEqual"/>
+                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isNotEqual"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                   <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -604,13 +604,13 @@
                     </statement>
                   </elseBody>
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                    <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                    <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                       <typeref type="//@packages.0/standard/Integer/equals/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                       </typeref>
                     </parameters>
-                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                    <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                       <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/getMetaClass"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Integer/equals/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@parameters.0/@containedType.0" name="other"/>
@@ -632,13 +632,13 @@
                 </statement>
               </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                   <typeref type="//@packages.0/standard/Integer/equals/@body/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                   </typeref>
                 </parameters>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isNotEqual"/>
+                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isNotEqual"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                   <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/getMetaClass"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Integer/equals/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@parameters.0/@containedType.0" name="other"/>
@@ -967,13 +967,13 @@
                     </statement>
                   </elseBody>
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                    <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                    <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                       <typeref type="//@packages.0/standard/Integer/isGreater/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                       </typeref>
                     </parameters>
-                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                    <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                       <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -999,13 +999,13 @@
                 </statement>
               </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                   <typeref type="//@packages.0/standard/Integer/isGreater/@body/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                   </typeref>
                 </parameters>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isNotEqual"/>
+                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isNotEqual"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                   <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1052,13 +1052,13 @@
                     </statement>
                   </elseBody>
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                    <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                    <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                       <typeref type="//@packages.0/standard/Integer/isLower/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                       </typeref>
                     </parameters>
-                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                    <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                       <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1084,13 +1084,13 @@
                 </statement>
               </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                   <typeref type="//@packages.0/standard/Integer/isLower/@body/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                   </typeref>
                 </parameters>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isNotEqual"/>
+                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isNotEqual"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                   <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1137,13 +1137,13 @@
                     </statement>
                   </elseBody>
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                    <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                    <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                       <typeref type="//@packages.0/standard/Integer/isLowerOrEqual/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                       </typeref>
                     </parameters>
-                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                    <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                       <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1169,13 +1169,13 @@
                 </statement>
               </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                   <typeref type="//@packages.0/standard/Integer/isLowerOrEqual/@body/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                   </typeref>
                 </parameters>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isNotEqual"/>
+                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isNotEqual"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                   <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1222,13 +1222,13 @@
                     </statement>
                   </elseBody>
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                    <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                    <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                       <typeref type="//@packages.0/standard/Integer/isGreaterOrEqual/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                       </typeref>
                     </parameters>
-                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                    <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                       <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1254,13 +1254,13 @@
                 </statement>
               </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                   <typeref type="//@packages.0/standard/Integer/isGreaterOrEqual/@body/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                   </typeref>
                 </parameters>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isNotEqual"/>
+                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isNotEqual"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                   <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1531,13 +1531,13 @@
                     </statement>
                   </elseBody>
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                    <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                    <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                       <typeref type="//@packages.0/standard/Real/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                       </typeref>
                     </parameters>
-                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                    <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                       <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1559,13 +1559,13 @@
                 </statement>
               </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                   <typeref type="//@packages.0/standard/Real/compareTo/@body/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                   </typeref>
                 </parameters>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isNotEqual"/>
+                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isNotEqual"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Integer/compareTo/@body/@statement.0/@thenBody/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                   <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/getMetaClass"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="other">
@@ -1616,13 +1616,13 @@
                     </statement>
                   </elseBody>
                   <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                    <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                    <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                       <typeref type="//@packages.0/standard/Real/equals/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Integer"/>
                       </typeref>
                     </parameters>
-                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                    <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                       <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/getMetaClass"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Real/equals/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@parameters.0/@target/@target/@containedType.0" name="other"/>
@@ -1640,13 +1640,13 @@
                 </statement>
               </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                   <typeref type="//@packages.0/standard/Real/equals/@body/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Real"/>
                   </typeref>
                 </parameters>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isNotEqual"/>
+                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isNotEqual"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                   <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/getMetaClass"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Real/equals/@body/@statement.0/@thenBody/@statement.0/@thenBody/@statement.0/@value/@parameters.0/@target/@target/@containedType.0" name="other"/>
@@ -1765,13 +1765,13 @@
                 </statement>
               </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                   <typeref type="//@packages.0/standard/Character/equals/@body/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Character"/>
                   </typeref>
                 </parameters>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isNotEqual"/>
+                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isNotEqual"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                   <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/getMetaClass"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Character/equals/@body/@statement.0/@elseBody/@statement.0/@value/@parameters.1/@containedType.0" name="other"/>
@@ -1878,13 +1878,13 @@
                 </statement>
               </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
-                <staticType href="collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@parameters.0/@containedType.0">
                   <typeref type="//@packages.0/standard/String/equals/@body/@statement.0/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/String"/>
                   </typeref>
                 </parameters>
-                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isNotEqual"/>
+                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isNotEqual"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Boolean/equals/@body/@statement.0/@condition/@target/@containedType.0" name="getMetaClass">
                   <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/getMetaClass"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/String/equals/@body/@statement.0/@elseBody/@statement.0/@value/@parameters.1/@containedType.0" name="other"/>

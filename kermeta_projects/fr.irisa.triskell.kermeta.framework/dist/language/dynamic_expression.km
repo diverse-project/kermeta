@@ -154,9 +154,9 @@
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="or">
                 <staticType href="../standard/collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                   <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0"/>
-                  <staticOperation href="structure.km#//@packages.0/language/structure/Object/equals"/>
+                  <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                   <target xsi:type="kermeta_language_behavior:CallFeature" name="selfClass" staticProperty="//@packages.0/interpreter/DynamicExpression/selfClass">
                     <staticType href="../kunit/kunit.km#//@packages.0/kunit/TestCase/run/@body/@statement.1/@statement.1/@statement.2/@containedType.0"/>
                   </target>
@@ -326,9 +326,9 @@
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@containedType.0"/>
-                <staticOperation href="structure.km#//@packages.0/language/structure/Object/equals"/>
+                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/equals"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/interpreter/DynamicExpression/expression/@containedType.0" name="expression" staticProperty="//@packages.0/interpreter/DynamicExpression/expression"/>
               </condition>
             </statement>
