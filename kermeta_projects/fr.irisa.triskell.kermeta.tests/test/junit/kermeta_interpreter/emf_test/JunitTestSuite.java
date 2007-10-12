@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.3 2007-10-03 13:19:44 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.4 2007-10-12 13:28:51 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -63,7 +63,7 @@ public class JunitTestSuite extends TestSuite {
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
 		testWithFile("test/interpreter/emf_testcases/kermeta","001_testLoadEcoreFileWithEChar.main.kmt" );
-/*
+
 		testWithFile("test/interpreter/emf_testcases/kermeta","027_testRuntimeModelImport.main.kmt" );
 
 		testWithFile("test/interpreter/emf_testcases/kermeta","028_testLoadEcoreFile.main.kmt" );
@@ -109,7 +109,7 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/emf_testcases/kermeta","067_testHasSubTypeLoadingModel.main.kmt" );
 
 		testWithFile("test/interpreter/emf_testcases/kermeta","068_saveEcoreLinkedToTheFramework.main.kmt" );
-*/
+
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
 		//addTest(runfactory.getTest());
