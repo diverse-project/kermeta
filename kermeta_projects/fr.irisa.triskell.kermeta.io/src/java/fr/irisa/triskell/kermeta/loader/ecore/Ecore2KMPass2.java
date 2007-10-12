@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.26 2007-10-12 09:19:41 ftanguy Exp $
+/* $Id: Ecore2KMPass2.java,v 1.27 2007-10-12 13:04:01 dvojtise Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -15,7 +15,6 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.lang.model.element.TypeParameterElement;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;

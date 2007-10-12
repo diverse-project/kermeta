@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.44 2007-10-12 09:20:40 ftanguy Exp $
+/* $Id: KM2EcorePass2.java,v 1.45 2007-10-12 13:02:57 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import javax.lang.model.element.TypeParameterElement;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EAttribute;
