@@ -3,8 +3,8 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="org"
     nsURI="org" nsPrefix="org">
-  <eSubpackages name="kermeta" nsPrefix="kermeta">
-    <eSubpackages name="trek" nsURI="">
+  <eSubpackages name="kermeta" nsURI="kermeta" nsPrefix="kermeta">
+    <eSubpackages name="trek" nsURI="trek" nsPrefix="trek">
       <eClassifiers xsi:type="ecore:EClass" name="useKaseModel">
         <eStructuralFeatures xsi:type="ecore:EReference" name="kuseCases" upperBound="-1"
             eType="#//kermeta/trek/KUseCase" containment="true"/>
