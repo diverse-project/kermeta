@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectImpl.java,v 1.1 2007-10-15 07:13:59 barais Exp $
+/* $Id: RuntimeObjectImpl.java,v 1.2 2007-10-15 11:09:25 barais Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -15,15 +15,21 @@
  */
 package fr.irisa.triskell.kermeta.runtime;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
+import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
+import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
  * @author Franck Fleurey
@@ -138,63 +144,68 @@ public class RuntimeObjectImpl implements RuntimeObject {
     }
     
     
-//	/**
-//	 * This is a hack to make hastable implementation work
-//	 */
-///*    public int hashCode() {
-//    	// try with a StringValue
-//    	Object val = getData().get(STRING_VALUE);
-//        if (val != null) return val.hashCode();
-//        // try with a numericValue
-//        val = getData().get(NUMERIC_VALUE);
-//        if (val != null) return val.hashCode();
-//        // if the object defines a hashcode method (other than the default one deined on object), use it
-//        fr.irisa.triskell.kermeta.language.structure.Class t_target =(fr.irisa.triskell.kermeta.language.structure.Class)(getMetaclass()).getData().get("kcoreObject");
-//        SimpleType target_type = new SimpleType(t_target);
-//        ExpressionInterpreter interpreter = getFactory().getMemory().getCurrentInterpreter();
-//        InterpreterContext interpretercontext = interpreter.getInterpreterContext();
-//        CallableOperation  op = interpretercontext.typeCache.getOperationByName(target_type, "hashcode");
-//        String name = NamedElementHelper.getQualifiedName(op.getFclass().getTypeDefinition());
-//        if(!name.equals("kermeta::language::structure::Object")){
-//        	/*DynamicExpressionUnit deu = new DynamicExpressionUnit(getFactory().getMemory().getUnit().getPackages(), exp, getMetaclass());
-//    		ExpressionInterpreter interp = getFactory().getMemory().getCurrentInterpreter();
-//    		ExpressionCallFrame ecf = new ExpressionCallFrame(interp.getInterpreterContext(), deu, this, true);
-//    		
-//    		return ecf.eval(interp) == getFactory().getMemory().trueINSTANCE;
-//    		*/
-//        	// Create a context for this operation call, setting self object to ro_target
-//        	/**
-//        	 * 
-//        	 */
-//        	ArrayList<RuntimeObject> parameters = new ArrayList<RuntimeObject>();
-//        	interpretercontext.pushOperationCallFrame(this, op, parameters, null);
-//        	int result = 0;
-//			try {
-//				// Resolve this operation call
-//				RuntimeObject roResult = (RuntimeObject)interpreter.accept(op.getOperation());
-//				result = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.getValue(roResult);
-//				//System.err.println("hascode = " + result);
-//				// After operation has been evaluated, pop its context
-//			} finally {
-//				interpretercontext.popCallFrame();
-//			}
-//			return result;
-//        }
-//        else
-//        	// use the standard java hashcode for objects that doesn't redefine the hascode
-//        	return super.hashCode();
-//    }
-//    
-//    
-//    /**
-//     * Overrides the classic equals in order to evaluate properly equality between
-//     * RuntimeObject representations of the primitive types.
-//     * @return true if arg0 equals this RuntimeObject, false otherwise.
-//     */
-//    public boolean equals(Object arg0) {
-//        if (arg0 instanceof RuntimeObject) {
-//            RuntimeObject other = (RuntimeObject)arg0;
-//            
+	/**
+	 * This is a hack to make hastable implementation work
+	 */
+   public int hashCode() {
+    	// try with a StringValue
+    	
+        if ((this.STRING_VALUE.equals(this.getPrimitiveType())) || (this.NUMERIC_VALUE.equals(this.getPrimitiveType())))
+        	return this.javaNativeObject.hashCode();
+        // try with a numericValue
+        // if the object defines a hashcode method (other than the default one deined on object), use it
+        fr.irisa.triskell.kermeta.language.structure.Class t_target =(fr.irisa.triskell.kermeta.language.structure.Class)(getMetaclass()).getKCoreObject();
+        SimpleType target_type = new SimpleType(t_target);
+        ExpressionInterpreter interpreter = getFactory().getMemory().getCurrentInterpreter();
+        InterpreterContext interpretercontext = interpreter.getInterpreterContext();
+        CallableOperation  op = interpretercontext.typeCache.getOperationByName(target_type, "hashcode");
+        String name = NamedElementHelper.getQualifiedName(op.getFclass().getTypeDefinition());
+        if(!name.equals("kermeta::language::structure::Object")){
+        	/*DynamicExpressionUnit deu = new DynamicExpressionUnit(getFactory().getMemory().getUnit().getPackages(), exp, getMetaclass());
+    		ExpressionInterpreter interp = getFactory().getMemory().getCurrentInterpreter();
+    		ExpressionCallFrame ecf = new ExpressionCallFrame(interp.getInterpreterContext(), deu, this, true);
+    		
+    		return ecf.eval(interp) == getFactory().getMemory().trueINSTANCE;
+    		*/
+        	// Create a context for this operation call, setting self object to ro_target
+        	/**
+        	 * 
+        	 */
+        	ArrayList<RuntimeObject> parameters = new ArrayList<RuntimeObject>();
+        	interpretercontext.pushOperationCallFrame(this, op, parameters, null);
+        	int result = 0;
+			try {
+				// Resolve this operation call
+				RuntimeObject roResult = (RuntimeObject)interpreter.accept(op.getOperation());
+				result = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.getValue(roResult);
+				//System.err.println("hascode = " + result);
+				// After operation has been evaluated, pop its context
+			} finally {
+				interpretercontext.popCallFrame();
+			}
+			return result;
+        }
+        else
+        	// use the standard java hashcode for objects that doesn't redefine the hascode
+        	return super.hashCode();
+    }
+    
+    
+    /**
+     * Overrides the classic equals in order to evaluate properly equality between
+     * RuntimeObject representations of the primitive types.
+     * @return true if arg0 equals this RuntimeObject, false otherwise.
+     */
+    public boolean equals(Object arg0) {
+        if (arg0 instanceof RuntimeObject) {
+            RuntimeObject other = (RuntimeObject)arg0;
+            
+            if (getPrimitiveType() != null){
+            	return this.getJavaNativeObject().equals(((RuntimeObject) arg0).getJavaNativeObject());
+            	
+            	
+            }
+            
 //            // optimisation : do not use the kermeta version of equals on some types ...
 //            String selfString = (String) getData().get(STRING_VALUE);
 //            String otherString = (String) other.getData().get(STRING_VALUE);
@@ -231,65 +242,65 @@ public class RuntimeObjectImpl implements RuntimeObject {
 //                }
 //            	else return false;
 //            }
-//            
-//            // if any of the element is void the other must be void too
-//            RuntimeObject voidInstance = getFactory().getMemory().voidINSTANCE;
-//            if(this == voidInstance){
-//            	return other == voidInstance;
-//            }
-//            if(other == voidInstance){
-//            	return this == voidInstance;
-//            }
-//            // if this is the class Class 
-//            // 		do not fall to kermeta and directly use the typeequality checker
-//            if(getData().get("emfObject") instanceof fr.irisa.triskell.kermeta.language.structure.Class){
-//            	if (this == other) return true;
-//        		
-//        		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)this.getData().get("kcoreObject");
-//        		
-//        		fr.irisa.triskell.kermeta.language.structure.Object obj = (fr.irisa.triskell.kermeta.language.structure.Object)other.getData().get("kcoreObject");
-//        		fr.irisa.triskell.kermeta.language.structure.Class pro = null;
-//        		if(obj instanceof fr.irisa.triskell.kermeta.language.structure.Class)
-//        			pro = (fr.irisa.triskell.kermeta.language.structure.Class) obj;
-//        		else
-//        			return false;        		
-//        		
-//        		if (pro == null || req == null) return false;
-//        		
-//        		return TypeEqualityChecker.equals(req, pro);
-//            }
-//            // if the object defines a equals method (other than the default one defined on object), use it
-//	        fr.irisa.triskell.kermeta.language.structure.Class t_target =(fr.irisa.triskell.kermeta.language.structure.Class)(getMetaclass()).getData().get("kcoreObject");
-//	        SimpleType target_type = new SimpleType(t_target);
-//	        ExpressionInterpreter interpreter = getFactory().getMemory().getCurrentInterpreter();
-//	        InterpreterContext interpretercontext = interpreter.getInterpreterContext();
-//	        CallableOperation  op = interpretercontext.typeCache.getOperationByName(target_type, "equals");
-//	        String name = NamedElementHelper.getQualifiedName(op.getFclass().getTypeDefinition());
-//	        if(!name.equals("kermeta::language::structure::Object")){
-//	        	
-//	        	// Create a context for this operation call, setting self object to ro_target
-//	        	ArrayList<RuntimeObject> parameters = new ArrayList<RuntimeObject>();
-//	        	parameters.add(other);
-//	        	interpretercontext.pushOperationCallFrame(this, op, parameters, null);
-//	        	boolean result = false;
-//				try {
-//					// Resolve this operation call
-//					RuntimeObject roResult = (RuntimeObject)interpreter.accept(op.getOperation());
-//					result = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(roResult);
-//
-//					//if(!result) System.err.println(this + " " + other);
-//					// After operation has been evaluated, pop its context
-//				} finally {
-//					interpretercontext.popCallFrame();
-//				}
-//				return result;
-//	        }
-//	        else
-//	            return super.equals(arg0);
-//        }
-//        else
-//        	return super.equals(arg0);
-//    }
+            
+            // if any of the element is void the other must be void too
+            RuntimeObject voidInstance = getFactory().getMemory().voidINSTANCE;
+            if(this == voidInstance){
+            	return other == voidInstance;
+            }
+            if(other == voidInstance){
+            	return this == voidInstance;
+            }
+            // if this is the class Class 
+            // 		do not fall to kermeta and directly use the typeequality checker
+            if(getEmfObject() instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+            	if (this == other) return true;
+        		
+        		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)this.getKCoreObject();
+        		
+        		fr.irisa.triskell.kermeta.language.structure.Object obj = (fr.irisa.triskell.kermeta.language.structure.Object)other.getKCoreObject();
+        		fr.irisa.triskell.kermeta.language.structure.Class pro = null;
+        		if(obj instanceof fr.irisa.triskell.kermeta.language.structure.Class)
+        			pro = (fr.irisa.triskell.kermeta.language.structure.Class) obj;
+        		else
+        			return false;        		
+        		
+        		if (pro == null || req == null) return false;
+        		
+        		return TypeEqualityChecker.equals(req, pro);
+            }
+            // if the object defines a equals method (other than the default one defined on object), use it
+	        fr.irisa.triskell.kermeta.language.structure.Class t_target =(fr.irisa.triskell.kermeta.language.structure.Class)(getMetaclass()).getKCoreObject();
+	        SimpleType target_type = new SimpleType(t_target);
+	        ExpressionInterpreter interpreter = getFactory().getMemory().getCurrentInterpreter();
+	        InterpreterContext interpretercontext = interpreter.getInterpreterContext();
+	        CallableOperation  op = interpretercontext.typeCache.getOperationByName(target_type, "equals");
+	        String name = NamedElementHelper.getQualifiedName(op.getFclass().getTypeDefinition());
+	        if(!name.equals("kermeta::language::structure::Object")){
+	        	
+	        	// Create a context for this operation call, setting self object to ro_target
+	        	ArrayList<RuntimeObject> parameters = new ArrayList<RuntimeObject>();
+	        	parameters.add(other);
+	        	interpretercontext.pushOperationCallFrame(this, op, parameters, null);
+	        	boolean result = false;
+				try {
+					// Resolve this operation call
+					RuntimeObject roResult = (RuntimeObject)interpreter.accept(op.getOperation());
+					result = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(roResult);
+
+					//if(!result) System.err.println(this + " " + other);
+					// After operation has been evaluated, pop its context
+				} finally {
+					interpretercontext.popCallFrame();
+				}
+				return result;
+	        }
+	        else
+	            return super.equals(arg0);
+        }
+        else
+        	return super.equals(arg0);
+    }
     
 	/**
 	 * quick fix patch for #bug 137 
