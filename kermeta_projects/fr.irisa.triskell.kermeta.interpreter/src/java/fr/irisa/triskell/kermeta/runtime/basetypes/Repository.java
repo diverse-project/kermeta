@@ -1,4 +1,4 @@
-/* $Id: Repository.java,v 1.6 2007-10-15 07:13:58 barais Exp $
+/* $Id: Repository.java,v 1.7 2007-10-15 13:03:08 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : Repository.java
  * License   : EPL
@@ -67,7 +67,7 @@ public class Repository {
     	ResourceSet rSet = (ResourceSet) selfRO.getR2eEmfResourceset();
     	Resource res = null;
     	if (rSet != null)
-    		rSet.createResource(u);
+    		res = rSet.createResource(u);
     	
     	if(res != null) {
         	// Create the resource RO
