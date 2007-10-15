@@ -44,6 +44,12 @@
       <eClassifiers xsi:type="ecore:EClass" name="KUserStory">
         <eStructuralFeatures xsi:type="ecore:EReference" name="coveredBy" upperBound="-1"
             eType="#//kermeta/trek/KUseCase" eOpposite="#//kermeta/trek/KUseCase/covers"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+            defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+            iD="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="summary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="shortSummary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EEnum" name="KUseLevel">
         <eLiterals name="Implementation" value="1"/>
