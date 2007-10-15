@@ -72,7 +72,7 @@ class Serializer
     	result := _resource.rootContents.one
     end    
     
-    method saveModelWithObject(uri : String, mmuri : String, newuri : String, a : Object) : Void is do
+    operation saveModelWithObject(uri : String, mmuri : String, newuri : String, a : Object) : Void is do
     	
    		var resource : EMFResource
     	resource ?= _repository.createResource(uri, mmuri)
