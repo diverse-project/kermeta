@@ -1,4 +1,4 @@
-/* $Id: StringBuffer.java,v 1.4 2007-09-04 13:28:09 cfaucher Exp $
+/* $Id: StringBuffer.java,v 1.5 2007-10-15 07:13:58 barais Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : StringBuffer.java
 * License : EPL
@@ -21,7 +21,7 @@ public class StringBuffer {
 	
 	public static RuntimeObject append(RuntimeObject self, RuntimeObject arg0){
 		java.lang.StringBuffer buffer=getValue(self);
-		buffer.append((java.lang.String)arg0.getData().get("StringValue"));
+		buffer.append((java.lang.String)arg0.getJavaNativeObject());
 		return self;
 	}
 	
@@ -31,8 +31,8 @@ public class StringBuffer {
 	 * @return The StringBuffer value of the given RuntimeObject, or a new value if it does not exist.
 	 */
 	public static java.lang.StringBuffer getValue(RuntimeObject str) {
-		if (!str.getData().containsKey("StringBufferValue")) setValue(str, null);
-		return (java.lang.StringBuffer)str.getData().get("StringBufferValue");
+		if (!RuntimeObject.STRING_BUFFER_VALUE.equals(str.getPrimitiveType())) setValue(str, null);
+		return (java.lang.StringBuffer)str.getJavaNativeObject();
 	}
 	
 	/** method used to set a RuntimeObject StringBuffer with a java value
@@ -43,7 +43,8 @@ public class StringBuffer {
 		if(value==null) {
 			value = new java.lang.StringBuffer(32); //create a new with an initial capacity of 32 elements if it does not exist.
 		}
-	    str.getData().put("StringBufferValue", value);
+		str.setPrimitiveType(RuntimeObject.STRING_BUFFER_VALUE);
+		str.setJavaNativeObject(value);
 	}
 	
 	/**

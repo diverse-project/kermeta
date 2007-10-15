@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.71 2007-09-07 11:26:56 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.72 2007-10-15 07:13:58 barais Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -43,6 +43,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.runtime.rohelper.RepositoryHelper;
@@ -199,7 +200,7 @@ public class EMF2Runtime {
 					// a Resource inherit from Collection
 				ArrayList<RuntimeObject> elementList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(aResourceRO);
 				for(RuntimeObject anElementRO : elementList) {	
-					EObject eObj = (EObject)anElementRO.getData().get("emfObject");
+					EObject eObj = (EObject)anElementRO.getEmfObject();
 					// if it has an EObject  (even if this is not recommended, the user may have added new element in the resource between 2 load) 
 					//		put this Element RO and its associated EObject in the map   
 					if(eObj != null) this.runtime_objects_map.put(eObj, anElementRO);
@@ -207,7 +208,7 @@ public class EMF2Runtime {
 					RuntimeObject containedElementListRO = fr.irisa.triskell.kermeta.runtime.language.Object.getAllContainedObjects(anElementRO);
 					ArrayList<RuntimeObject> containedElementList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(containedElementListRO);
 					for(RuntimeObject aContainedElementRO : containedElementList) {							
-						EObject containedEObj = (EObject)aContainedElementRO.getData().get("emfObject");
+						EObject containedEObj = (EObject)aContainedElementRO.getEmfObject();
 						// do the same
 						if(containedEObj != null) this.runtime_objects_map.put(containedEObj, aContainedElementRO);
 					}
@@ -388,8 +389,8 @@ public class EMF2Runtime {
 	    // Define the RO-metaclass of the given EObject
 		RuntimeObject ro_metaclass = this.getRuntimeObjectForMetaClass(eObject.eClass());
 	    // Define the RO-instance of the given EObject, with the above given RO-metaclass
-	    RuntimeObject result = new RuntimeObject(unit.getRuntimeMemory().getROFactory(), ro_metaclass);
-        result.getData().put("emfObject", eObject);
+	    RuntimeObject result = new RuntimeObjectImpl(unit.getRuntimeMemory().getROFactory(), ro_metaclass);
+        result.setEmfObject( eObject);
         return result;
 	}
 	
@@ -517,7 +518,7 @@ public class EMF2Runtime {
 	 */
 	protected void populateRuntimeObject(RuntimeObject rObject)
 	{
-	    EObject eObject = (EObject)rObject.getData().get("emfObject");
+	    EObject eObject = (EObject)rObject.getEmfObject();
 	    fr.irisa.triskell.kermeta.language.structure.Class kclass = null;
 	    // Get the meta class in Ecore repr. (EClass) of the RuntimeObject to populate
 	    EClass eclass = eObject.eClass();
@@ -620,7 +621,7 @@ public class EMF2Runtime {
 	    			}
 	    			// If we instanciated a RuntimeObject value, we can set the properties for the object
 	    			// reminder : rovalue is null if fvalue was an instance of EFactory
-	    			if (fvalue != null && rovalue != null) rovalue.getData().put("emfObject", fvalue);
+	    			if (fvalue != null && rovalue != null) rovalue.setEmfObject(fvalue);
 	    		} // Catch any unhandled raised exception
 	    		catch (Exception e) {
 	    			String errmsg = "Exception received. Trying to set on " +  rObject  + " this property: " + prop +" / " + feature.getName() + " with value: "+ fvalue;
@@ -751,7 +752,9 @@ public class EMF2Runtime {
 	    RuntimeObject result = fr.irisa.triskell.kermeta.runtime.language.Object.get(rObject, roprop);
 	    // We create one by default 
 	    if (Collection.getArrayList(result) == null)
-	    { result.getData().put("CollectionArrayList", new ArrayList<Object>()); }
+	    { 
+	    	result.setPrimitiveType(RuntimeObject.COLLECTION_VALUE);
+	    	result.setJavaNativeObject(new ArrayList<Object>()); }
 	    
 	    // Transform the EObjects into RuntimeObject and add them in our collection
 	    for (Object fvalue : objects)
@@ -770,11 +773,11 @@ public class EMF2Runtime {
 		        // the containment of the added element. (see their code!). That's why we use the simple Collection.add method
 		        // NOTE 2 : sometimes createRuntimeObjectForPrimitiveTypeValue can return null if the "sfeature"
 		        // is not kermeta compliant, ex: the edatatype EJavaClass. We ignore it for the moment
-		        rovalue.getData().put("emfObject", fvalue);
+		        rovalue.setEmfObject(fvalue);
 		        Collection.add(result, rovalue);
 	        }
 	    }
-	    rObject.getProperties().put((String)((RuntimeObject)roprop.getProperties().get("name")).getData().get("StringValue"), result);
+	    rObject.getProperties().put((String)((RuntimeObject)roprop.getProperties().get("name")).getJavaNativeObject(), result);
 	    // FIXME : the set method handles the containment, but seems to be not appropriated for 
 	    // model instances. Containment is observed even if we simply use Collection.add to add instances
 	    // since result is still a reflective collection.
@@ -800,7 +803,9 @@ public class EMF2Runtime {
 	    RuntimeObject result = fr.irisa.triskell.kermeta.runtime.language.Object.get(rObject, roprop);
 	    // We create one by default 
 	    if (Collection.getArrayList(result) == null)
-	    { result.getData().put("CollectionArrayList", new ArrayList<Object>()); }
+	    { 
+	    	result.setPrimitiveType(RuntimeObject.COLLECTION_VALUE);
+	    	result.setJavaNativeObject(new ArrayList<Object>()); }
 	    
 	    // Transform the EObjects into RuntimeObject and add them in our collection
 	    for (Object fvalue : objects)
@@ -833,7 +838,7 @@ public class EMF2Runtime {
 	    		this.type_cache.put(kermeta_metaclass_name, ro_metaclass);
 	    	}
 		    // Define the RO-instance of the given EObject, with the above given RO-metaclass
-		    featureMapEntry = new RuntimeObject(unit.getRuntimeMemory().getROFactory(), ro_metaclass);
+		    featureMapEntry = new RuntimeObjectImpl(unit.getRuntimeMemory().getROFactory(), ro_metaclass);
 	        // set its key using the feature name
 		    RuntimeObject rofeaturenameprop = RuntimeObjectHelper.getPropertyByName(featureMapEntry,"eStructuralFeatureName");
 		    RuntimeObject rofeaturename = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(mapEntry.getEStructuralFeature().getName(), unit.getRuntimeMemory().getROFactory());
@@ -865,7 +870,7 @@ public class EMF2Runtime {
 		        Collection.add(result, featureMapEntry);
 	        }
 	    }
-	    rObject.getProperties().put((String)((RuntimeObject)roprop.getProperties().get("name")).getData().get("StringValue"), result);
+	    rObject.getProperties().put((String)((RuntimeObject)roprop.getProperties().get("name")).getJavaNativeObject(), result);
 	    // FIXME : the set method handles the containment, but seems to be not appropriated for 
 	    // model instances. Containment is observed even if we simply use Collection.add to add instances
 	    // since result is still a reflective collection.

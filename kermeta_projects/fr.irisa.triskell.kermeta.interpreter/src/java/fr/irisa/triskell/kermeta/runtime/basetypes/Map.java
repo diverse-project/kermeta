@@ -1,4 +1,4 @@
-/* $Id: Map.java,v 1.10 2007-08-08 13:00:01 dvojtise Exp $
+/* $Id: Map.java,v 1.11 2007-10-15 07:13:58 barais Exp $
  * Project : Kermeta interpreter
  * File : Map.java
  * License : EPL
@@ -64,7 +64,7 @@ public class Map {
 	    
 	    binding.setVariable((ObjectTypeVariable)it_class.getTypeDefinition().getTypeParameter().get(0));
 	    
-	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
+	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getKCoreObject();
 	    
 	    binding.setType(((TypeVariableBinding)self_class.getTypeParamBinding().get(0)).getType());
 	    
@@ -90,7 +90,7 @@ public class Map {
 	    
 	    binding.setVariable((ObjectTypeVariable)it_class.getTypeDefinition().getTypeParameter().get(0));
 	    
-	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
+	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getKCoreObject();
 	    
 	    binding.setType(((TypeVariableBinding)self_class.getTypeParamBinding().get(1)).getType());
 	    
@@ -134,8 +134,13 @@ public class Map {
 
 
 	public static Hashtable<RuntimeObject,RuntimeObject> getHashtable(RuntimeObject map) {
-		if (!map.getData().containsKey("Hashtable")) map.getData().put("Hashtable", new Hashtable<RuntimeObject,RuntimeObject>());
-		return (Hashtable<RuntimeObject,RuntimeObject>)map.getData().get("Hashtable");
+		
+		if (!RuntimeObject.HASHTABLE_VALUE.equals(map.getPrimitiveType()))
+		{
+			map.setPrimitiveType(RuntimeObject.HASHTABLE_VALUE);
+			map.setJavaNativeObject(new Hashtable<RuntimeObject,RuntimeObject>());
+		}
+		return (Hashtable<RuntimeObject,RuntimeObject>)map.getJavaNativeObject();
 	}
 
 }

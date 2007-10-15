@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectHelper.java,v 1.6 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: RuntimeObjectHelper.java,v 1.7 2007-10-15 07:13:59 barais Exp $
  * Project   : Kermeta 
  * File      : RuntimeObjectHelper.java
  * License   : EPL
@@ -39,8 +39,8 @@ public class RuntimeObjectHelper {
 		String[] s_primitive_types = new String[] { "StringValue",
 				"BooleanValue", "NumericValue", "CharacterValue" };
 		for (int i = 0; i < s_primitive_types.length; i++)
-			if (robject.getData().containsKey(s_primitive_types[i]))
-				return robject.getData().get(s_primitive_types[i]);
+			if (s_primitive_types[i].equals(robject.getPrimitiveType()))
+				return robject.getJavaNativeObject();
 		return null;
 	}
 	
@@ -60,7 +60,7 @@ public class RuntimeObjectHelper {
 		KermetaUnit kunit = robject.getFactory().getMemory().getUnit();
 		ClassDefinition coll_cd = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::standard::Collection");
 		fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class) robject
-				.getMetaclass().getData().get("kcoreObject");
+				.getMetaclass().getKCoreObject();
 		if (ClassDefinitionHelper.isSuperClassOf(coll_cd,
 				(ClassDefinition) c.getTypeDefinition()))
 			b = true;
@@ -73,7 +73,7 @@ public class RuntimeObjectHelper {
 		KermetaUnit kunit = robject.getFactory().getMemory().getUnit();
 		ClassDefinition coll_cd = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::language::structure::EnumerationLiteral");
 		fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class) robject
-				.getMetaclass().getData().get("kcoreObject");
+				.getMetaclass().getKCoreObject();
 		if (coll_cd.equals(c.getTypeDefinition()))
 			b = true;
 		return b;
@@ -85,7 +85,7 @@ public class RuntimeObjectHelper {
 		ClassDefinition coll_cd = (ClassDefinition) kunit.getTypeDefinitionByName(
 						"kermeta::language::structure::Enumeration");
 		fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class) robject
-				.getMetaclass().getData().get("kcoreObject");
+				.getMetaclass().getKCoreObject();
 		if (coll_cd.equals(c.getTypeDefinition()))
 			b = true;
 		return b;
@@ -100,7 +100,7 @@ public class RuntimeObjectHelper {
 	 * @return
 	 */
 	public static RuntimeObject getPropertyByName(RuntimeObject robject, String propertyName){
-		Property property = ClassDefinitionHelper.findPropertyByName((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) robject.getMetaclass().getData().get("kcoreObject")).getTypeDefinition(), propertyName);
+		Property property = ClassDefinitionHelper.findPropertyByName((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) robject.getMetaclass().getKCoreObject()).getTypeDefinition(), propertyName);
 		RuntimeObject roProperty = robject.getFactory().getMemory().getRuntimeObjectForFObject(property);
 		return roProperty;
 	}
@@ -132,7 +132,7 @@ public class RuntimeObjectHelper {
 		l.add(realCDef);
 		l.add(voidCDef);
 		
-		fr.irisa.triskell.kermeta.language.structure.Class cl = (fr.irisa.triskell.kermeta.language.structure.Class) mcRO.getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class cl = (fr.irisa.triskell.kermeta.language.structure.Class) mcRO.getKCoreObject();
 	    ClassDefinition cDef = (ClassDefinition) cl.getTypeDefinition();
 	    
 		return l.contains(cDef);

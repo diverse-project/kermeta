@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.16 2007-09-07 14:13:43 dtouzet Exp $
+/* $Id: Resource.java,v 1.17 2007-10-15 07:13:58 barais Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : EPL
@@ -19,6 +19,7 @@ import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
 import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
@@ -117,7 +118,7 @@ public class Resource {
 	    mapClass.getTypeParamBinding().add(tvBinding4map2);
 	    
 	    RuntimeObject metaclassRO = self.getFactory().getMemory().getRuntimeObjectForFObject(mapClass);
-    	RuntimeObject emptyMapRO = new RuntimeObject(self.getFactory(), metaclassRO);
+    	RuntimeObject emptyMapRO = new RuntimeObjectImpl(self.getFactory(), metaclassRO);
    	
     	Hashtable<RuntimeObject, RuntimeObject> ht = new Hashtable<RuntimeObject, RuntimeObject>();
 
@@ -138,7 +139,8 @@ public class Resource {
     		fr.irisa.triskell.kermeta.runtime.basetypes.Collection.create("kermeta::standard::Set", self.getFactory(), objClass)
     	);
     	
-    	emptyMapRO.getData().put("Hashtable", ht);
+    	emptyMapRO.setPrimitiveType(RuntimeObject.HASHTABLE_VALUE);
+    	emptyMapRO.setJavaNativeObject(ht);
     	emptyMapRO.getProperties().put("contentMap", emptyMapRO);
 
     	
@@ -198,7 +200,7 @@ public class Resource {
     	    setClass.getTypeParamBinding().add(tvBinding4set);
     	    
     	    RuntimeObject metaclassRO = selfRO.getFactory().getMemory().getRuntimeObjectForFObject(setClass);
-    	    result = new RuntimeObject(selfRO.getFactory(), metaclassRO);
+    	    result = new RuntimeObjectImpl(selfRO.getFactory(), metaclassRO);
     	    
     	    // Get corresponding list of resource ROs
     	    ArrayList<RuntimeObject> resultList = (ArrayList<RuntimeObject>) fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(result); 
@@ -232,6 +234,6 @@ public class Resource {
      * @return       - emf Resource associated with the provided resource RO, or null
      */
     public static org.eclipse.emf.ecore.resource.Resource getEmfResource(RuntimeObject selfRO) {
-    	return (org.eclipse.emf.ecore.resource.Resource) selfRO.getData().get("r2e.emfResource");
+    	return (org.eclipse.emf.ecore.resource.Resource) selfRO.getR2eEmfResource();
     }
 }

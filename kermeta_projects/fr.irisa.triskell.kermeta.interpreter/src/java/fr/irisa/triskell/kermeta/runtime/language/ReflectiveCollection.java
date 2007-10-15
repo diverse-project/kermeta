@@ -1,4 +1,4 @@
-/* $Id: ReflectiveCollection.java,v 1.13 2007-08-28 09:49:22 dtouzet Exp $
+/* $Id: ReflectiveCollection.java,v 1.14 2007-10-15 07:13:58 barais Exp $
  * Project   : Kermeta interpreter
  * File      : ReflectiveCollection.java
  * License   : EPL
@@ -167,9 +167,9 @@ public class ReflectiveCollection {
 		// Cache : ClassDefinition cd -> RuntimeObject of kermeta::language::ReflectiveCollection<cd>
 	    Hashtable cache_reflec_coll_class = object.getFactory().cache_reflec_coll_class;
 	    
-	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)object.getMetaclass().getData().get("kcoreObject");
+	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)object.getMetaclass().getKCoreObject();
 	    
-	    Property fprop = (Property)property.getData().get("kcoreObject");
+	    Property fprop = (Property)property.getKCoreObject();
 	    
 	    Type prop_type = TypeVariableEnforcer.getBoundType(fprop.getType(), TypeVariableEnforcer.getTypeVariableBinding(self_class));
 		
@@ -202,38 +202,38 @@ public class ReflectiveCollection {
 	    
 		RuntimeObject result = object.getFactory().createRuntimeObjectFromClass(metaClass);
 		
-		result.getData().put("RObject", object);
-		result.getData().put("RProperty", property);
+		result.setRObject(object);
+		result.setRProperty( property);
 		
 		return result;
 	}
 	
 	public static RuntimeObject getObject(RuntimeObject reflective_collection) {
-		return (RuntimeObject)reflective_collection.getData().get("RObject");
+		return (RuntimeObject)reflective_collection.getRObject();
 	}
 	
 	public static RuntimeObject getProperty(RuntimeObject reflective_collection) {
-		return (RuntimeObject)reflective_collection.getData().get("RProperty");
+		return (RuntimeObject)reflective_collection.getRProperty();
 	}
 	
 	public static int getUpper(RuntimeObject reflective_collection) {
-		return Integer.getValue((RuntimeObject)((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("upper"));
+		return Integer.getValue((RuntimeObject)((RuntimeObject)reflective_collection.getRProperty()).getProperties().get("upper"));
 	}
 	
 	public static boolean isaSet(RuntimeObject reflective_collection) {
-		return Boolean.getValue((RuntimeObject)((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("isUnique"));
+		return Boolean.getValue((RuntimeObject)((RuntimeObject)reflective_collection.getRProperty()).getProperties().get("isUnique"));
 	}
 	
 	public static boolean isaContainer(RuntimeObject reflective_collection) {
 	    // FIXME Bug d'outre tombe
 	    // reflective_collection.getData().get("RProperty") --> null;
-		return Boolean.getValue((RuntimeObject)((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("isComposite"));
+		return Boolean.getValue((RuntimeObject)((RuntimeObject)reflective_collection.getRProperty()).getProperties().get("isComposite"));
 	}
 	/** Get the opposite property of the kermeta object hosted by the given runtime object
 	 * @param reflective_collection The runtime object for which we look for the opposite. It must be a ReflectiveCollection
 	 * or a ReflectiveSequence */
 	public static RuntimeObject getOppositeProperty(RuntimeObject reflective_collection) {
-		return (RuntimeObject)((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("opposite");
+		return (RuntimeObject)((RuntimeObject)reflective_collection.getRProperty()).getProperties().get("opposite");
 	}
 	
 	/** Returns true if the Collection handled by the given runtime object already contains the given

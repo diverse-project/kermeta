@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.19 2007-10-01 15:14:29 ftanguy Exp $
+/* $Id: RunCommandLine.java,v 1.20 2007-10-15 07:13:59 barais Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : EPL
@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
 
-
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
@@ -30,6 +29,7 @@ import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_P;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_U;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.utils.argumentsreader.CheckOption;
 import fr.irisa.triskell.utils.argumentsreader.NoOption;
@@ -211,7 +211,7 @@ public class RunCommandLine {
 	{	
 		long time = System.currentTimeMillis();
         
-        int nb_ro = RuntimeObject.getInstanceCounter();
+        int nb_ro = RuntimeObjectImpl.getInstanceCounter();
         
         if (className != null)
 	        theInterpreter.setEntryPoint(mainClassValue, mainOperationValue);
@@ -225,13 +225,13 @@ public class RunCommandLine {
 	        long max = Runtime.getRuntime().maxMemory();
 	        
 	        time = System.currentTimeMillis() - time;
-	        nb_ro = RuntimeObject.getInstanceCounter() - nb_ro;
+	        nb_ro = RuntimeObjectImpl.getInstanceCounter() - nb_ro;
 	        
 	        internalLog.info("    ************************************************");
 	        internalLog.info("    * Consumed memory : " + total + "/" + max);
 	        internalLog.info("    * #objects cached : " +  theInterpreter.memory.getNumberOfObjectCached());
 	        internalLog.info("    * #ro created     : " + nb_ro);
-	        internalLog.info("    * #ro total       : " + RuntimeObject.getInstanceCounter());
+	        internalLog.info("    * #ro total       : " + RuntimeObjectImpl.getInstanceCounter());
 	        internalLog.info("    * time (ms)       : " + time);
 	        internalLog.info("    ************************************************");
 	    }

@@ -1,4 +1,4 @@
-/* $Id: Collection.java,v 1.12 2007-08-28 09:49:23 dtouzet Exp $
+/* $Id: Collection.java,v 1.13 2007-10-15 07:13:58 barais Exp $
  * Project : Kermeta interpreter
  * File : Collection.java
  * License : EPL
@@ -83,11 +83,13 @@ public class Collection {
 	}
 
 	public static ArrayList<RuntimeObject> getArrayList(RuntimeObject collection) {
-		if (!collection.getData().containsKey("CollectionArrayList"))
+		if (!RuntimeObject.COLLECTION_VALUE.equals(collection.getPrimitiveType()))
 		{
-		    collection.getData().put("CollectionArrayList", new ArrayList<RuntimeObject>());
+			collection.setPrimitiveType(RuntimeObject.COLLECTION_VALUE);
+			
+		    collection.setJavaNativeObject(new ArrayList<RuntimeObject>());
 		}
-		return (ArrayList<RuntimeObject>) collection.getData().get("CollectionArrayList");
+		return (ArrayList<RuntimeObject>) collection.getJavaNativeObject();
 	}
 	
 	

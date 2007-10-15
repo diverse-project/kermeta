@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.21 2007-07-24 13:47:38 ftanguy Exp $
+/* $Id: DebugInterpreter.java,v 1.22 2007-10-15 07:13:58 barais Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -82,7 +82,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 */
 	public void initialize(RuntimeObject ro_target,Operation foperation,ArrayList arguments) {
 		
-		fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)ro_target.getMetaclass().getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)ro_target.getMetaclass().getKCoreObject();
 		
 		entryObject = self_type;
 		entryOperation = foperation;
@@ -419,9 +419,9 @@ public class DebugInterpreter extends ExpressionInterpreter {
     			result.put(next_value[0], next_value[1]);
     		}
     	}
-    	if (ro.getData().get("CollectionArrayList") !=null)
+    	if (RuntimeObject.COLLECTION_VALUE.equals(ro.getPrimitiveType()))
     	{
-    		Collection collection = (Collection)ro.getData().get("CollectionArrayList");
+    		Collection collection = (Collection)ro.getJavaNativeObject();
     		Hashtable cmap = getRuntimeObjectList(collection);
     		for (Object cmnext : cmap.entrySet())  
     		{
@@ -481,6 +481,6 @@ public class DebugInterpreter extends ExpressionInterpreter {
      */
     public static String getRONameProp(RuntimeObject rObject){
     	RuntimeObject roName = (RuntimeObject)rObject.getProperties().get("name");
-        return  roName == null ? "" : (String)roName.getData().get("StringValue");
+        return  roName == null ? "" : (String)roName.getJavaNativeObject().toString();
     }
 }

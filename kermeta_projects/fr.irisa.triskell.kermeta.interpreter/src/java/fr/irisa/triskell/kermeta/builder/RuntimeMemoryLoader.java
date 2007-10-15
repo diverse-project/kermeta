@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.25 2007-08-03 11:53:03 dvojtise Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.26 2007-10-15 07:13:58 barais Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -93,7 +93,7 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
         
         // The type is not loaded yet as a runtime object
         if (!result.isFrozen()) {
-            getOrCreateRuntimeObject((fr.irisa.triskell.kermeta.language.structure.Object)result.getData().get("kcoreObject"));
+            getOrCreateRuntimeObject((fr.irisa.triskell.kermeta.language.structure.Object)result.getKCoreObject());
         }
         
         return result;

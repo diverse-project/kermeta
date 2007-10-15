@@ -1,4 +1,4 @@
-/* $Id: Repository.java,v 1.5 2007-08-02 13:03:53 ftanguy Exp $
+/* $Id: Repository.java,v 1.6 2007-10-15 07:13:58 barais Exp $
  * Project   : Kermeta (First iteration)
  * File      : Repository.java
  * License   : EPL
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 
 
 /**
@@ -63,8 +64,10 @@ public class Repository {
     			);
     	}
     	
-    	ResourceSet rSet = (ResourceSet) selfRO.getData().get("r2e.emfResourceset");
-    	Resource res = rSet.createResource(u);
+    	ResourceSet rSet = (ResourceSet) selfRO.getR2eEmfResourceset();
+    	Resource res = null;
+    	if (rSet != null)
+    		rSet.createResource(u);
     	
     	if(res != null) {
         	// Create the resource RO
@@ -86,11 +89,11 @@ public class Repository {
      */
     public static RuntimeObject initRepository(RuntimeObject selfRO) {
     	// Build the EMF ResourceSet associated with the repository RO 
-    	ResourceSet rSet = (ResourceSet) selfRO.getData().get("r2e.emfResourceset");
+    	ResourceSet rSet = (ResourceSet) selfRO.getR2eEmfResourceset();
     	if(rSet == null) {
     		// EMF ResourceSet does not exist, so we build it
     		rSet = new ResourceSetImpl();
-    		selfRO.getData().put("r2e.emfResourceset", rSet);
+    		selfRO.setR2eEmfResourceset(rSet);
     	}
     	
     	// Build RO for the "resource" property of the repository object
@@ -112,7 +115,7 @@ public class Repository {
     	    setClass.getTypeParamBinding().add(tvBinding);
     	    
     	    RuntimeObject metaclassRO = selfRO.getFactory().getMemory().getRuntimeObjectForFObject(setClass);
-    		resListRO = new RuntimeObject(selfRO.getFactory(), metaclassRO);
+    		resListRO = new RuntimeObjectImpl(selfRO.getFactory(), metaclassRO);
 
     		// Associating built property RO with the repository RO 
     		selfRO.getProperties().put("resources", resListRO);
@@ -132,7 +135,7 @@ public class Repository {
 		fr.irisa.triskell.kermeta.language.structure.Class strClass = StructureFactory.eINSTANCE.createClass();
 		strClass.setTypeDefinition(strClassDef);
 	    RuntimeObject metaclassRO = uriRO.getFactory().getMemory().getRuntimeObjectForFObject(strClass);
-    	RuntimeObject nuriRO = new RuntimeObject(uriRO.getFactory(), metaclassRO);
+    	RuntimeObject nuriRO = new RuntimeObjectImpl(uriRO.getFactory(), metaclassRO);
     	
     	// Normalize uri
     	java.lang.String file = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(uriRO);
@@ -145,7 +148,8 @@ public class Repository {
     	}
     	
     	// Assign normalized uri to nuri RO
-    	nuriRO.getData().put("StringValue", u.toString());
+    	nuriRO.setPrimitiveType(RuntimeObject.STRING_VALUE);
+    	nuriRO.setJavaNativeObject( u.toString());
     	
     	return nuriRO;
     }

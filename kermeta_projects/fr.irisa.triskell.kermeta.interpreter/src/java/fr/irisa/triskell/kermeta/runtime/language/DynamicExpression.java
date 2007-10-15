@@ -1,4 +1,4 @@
-/* $Id: DynamicExpression.java,v 1.10 2007-09-19 12:17:49 ftanguy Exp $
+/* $Id: DynamicExpression.java,v 1.11 2007-10-15 07:13:58 barais Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpression.java
 * License : EPL
@@ -48,19 +48,19 @@ public class DynamicExpression {
 	        RuntimeObject ro_type =  (RuntimeObject)params.get(ro_name);
 	        
 	        java.lang.String name = String.getValue(ro_name);
-	        Type type = (Type)ro_type.getData().get("kcoreObject");
+	        Type type = (Type)ro_type.getKCoreObject();
 	        
 	        ftype_params.put(name , type);
 	    }
 
-	    ClassDefinition cdef = (ClassDefinition)((RuntimeObject)self.getProperties().get("selfClass")).getData().get("kcoreObject");
+	    ClassDefinition cdef = (ClassDefinition)((RuntimeObject)self.getProperties().get("selfClass")).getKCoreObject();
 	    // the provided object should have an associated ecore object
 	    // otherwise the ecore object should be created.
 	    if (cdef == null) throw new Error("NOT IMPLEMENTED");
 	    
 		java.lang.String stringExpression = String.getValue(expression);
 		DynamicExpressionUnit dynamicExpressionUnit = new DynamicExpressionUnit( self.getFactory().getMemory().getUnit() );
-		self.getData().put("DynamicExpressionUnit", dynamicExpressionUnit);
+		self.setDynamicExpressionUnit(dynamicExpressionUnit);
 		
 	    try {
 			
@@ -113,7 +113,7 @@ public class DynamicExpression {
 
 	//result := extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.execute(self, selfObj, actualParams)
 	public static RuntimeObject execute(RuntimeObject self, RuntimeObject selfObj, RuntimeObject actualParams) {
-	    DynamicExpressionUnit deu = (DynamicExpressionUnit)self.getData().get("DynamicExpressionUnit");
+	    DynamicExpressionUnit deu = (DynamicExpressionUnit)self.getDynamicExpressionUnit();
 	    
 	    ExpressionInterpreter interp = self.getFactory().getMemory().getCurrentInterpreter();
 	    

@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.65 2007-09-07 14:13:43 dtouzet Exp $
+/* $Id: Runtime2EMF.java,v 1.66 2007-10-15 07:13:58 barais Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -150,7 +150,7 @@ public class Runtime2EMF {
 		// save process!
 		for (RuntimeObject o : instances)
 		{	
-			resource.getContents().add((EObject) o.getData().get("r2e.emfObject"));
+			resource.getContents().add((EObject) o.getR2eEmfObject());
 		}	
 	}
 
@@ -170,7 +170,7 @@ public class Runtime2EMF {
 		// save process!
 		for (RuntimeObject o : instances)
 		{	
-			resource.getContents().add((EObject) o.getData().get("r2e.emfObject"));
+			resource.getContents().add((EObject) o.getR2eEmfObject());
 		}
 	}
 	/**
@@ -184,44 +184,44 @@ public class Runtime2EMF {
 	 * they are already updated by themselve
 	 */
 	protected void fillRuntimeObjectList(RuntimeObject rObject)
-	{
+	{ 
 		if ( !(runtimeObjects.contains(rObject) || 
 				RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rObject) != null
 					|| RuntimeObjectHelper.isanEnumerationLiteral(rObject)
 					|| RuntimeObjectHelper.isanEnumeration(rObject)) )
 		{
-			EObject kcoreObject = (EObject)rObject.getData().get("kcoreObject");
+			EObject kcoreObject = (EObject)rObject.getKCoreObject();
 			if(kcoreObject != null){
 				// ignore objects from the kermeta program itself but only if it comes from a model				
 				// ie. that where loaded and typechecked => they should not be changed dynamically
 				// this greatly improve the performance of the save ...
 				if (kcoreObject.eResource() != null){
-					internalLog.info("     Ignoring update of Kermeta interpreter internal ClassDefinition EObject : "+((EObject)rObject.getData().get("kcoreObject")).eClass().getName());
+					internalLog.info("     Ignoring update of Kermeta interpreter internal ClassDefinition EObject : "+((EObject)rObject.getKCoreObject()).eClass().getName());
 					return;
 				}
 			}
-			EObject emfObject = (EObject)rObject.getData().get("emfObject");
+			EObject emfObject = (EObject)rObject.getEmfObject();
 			if(emfObject != null){
 				if(emfObject.eResource() != null){
 					// has been registered in emf ? we cannot modify/update it !!!
 					// espacillay we should not update http://www.eclipse.org/emf/2002/Ecore
 					if(EMFRegistryHelper.isRegistered(emfObject.eResource().getURI())){
-						internalLog.info("Ignoring update of object " + ((EObject)rObject.getData().get("emfObject")).eClass().getName() + " that comes from an ecore registered package: "+emfObject.eResource().getURI().toString());
+						internalLog.info("Ignoring update of object " + ((EObject)rObject.getEmfObject()).eClass().getName() + " that comes from an ecore registered package: "+emfObject.eResource().getURI().toString());
 						return;
 					}
 					if("http://www.eclipse.org/emf/2002/Ecore".equals(emfObject.eResource().getURI().toString())){
 						// we really don't want to modify the metameta model we are working on ...
-						internalLog.info("     Ignoring update of Ecore internal object : "+((EObject)rObject.getData().get("emfObject")).eClass().getName());
+						internalLog.info("     Ignoring update of Ecore internal object : "+((EObject)rObject.getEmfObject()).eClass().getName());
 						return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
 					}
 					// normally we should not update/modify objects that comes from a plugin ? ...
 					/*if("platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km".equals(emfObject.eResource().getURI().toString())){
-						internalLog.debug("     Ignoring update of kermeta framework.km internal object : "+((EObject)rObject.getData().get("emfObject")).eClass().getName());
+						internalLog.debug("     Ignoring update of kermeta framework.km internal object : "+((EObject)rObject.getEmfObject()).eClass().getName());
 						return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
 					}*/
 					/* DVK : this suppose that framework.ecore should be registered ...
 					if("platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore".equals(emfObject.eResource().getURI().toString())){
-						internalLog.debug("     Ignoring update of kermeta framework internal object : "+((EObject)rObject.getData().get("emfObject")).eClass().getName());
+						internalLog.debug("     Ignoring update of kermeta framework internal object : "+((EObject)rObject.getEmfObject()).eClass().getName());
 						return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
 					}*/
 				}
@@ -244,7 +244,7 @@ public class Runtime2EMF {
 			RuntimeObject resRO = fr.irisa.triskell.kermeta.runtime.language.Object.getContainingResource(rObject);
 			Resource refRes = fr.irisa.triskell.kermeta.runtime.basetypes.Resource.getEmfResource(resRO);
 			
-			EObject eObj = (EObject) rObject.getData().get("emfObject");
+			EObject eObj = (EObject) rObject.getEmfObject();
 			if(eObj != null){
 				Resource res = eObj.eResource();
 				if(res != null) {
@@ -253,7 +253,7 @@ public class Runtime2EMF {
 					}
 				}
 			}
-			eObj = (EObject) rObject.getData().get("r2e.emfObject");
+			eObj = (EObject) rObject.getR2eEmfObject();
 			if(eObj != null){
 				Resource res = eObj.eResource();
 				if(res != null) {
@@ -289,8 +289,8 @@ public class Runtime2EMF {
 	 */
 	protected void fillRuntimeObjectListWithProperty(RuntimeObject property) {
 		// If property is an EList ([m..n] where n>1)
-		if (property.getData().containsKey("CollectionArrayList")
-				&& property.getData().get("CollectionArrayList") != null)
+		if (RuntimeObject.COLLECTION_VALUE.equals( property.getPrimitiveType())
+				&& property.getJavaNativeObject() != null)
 		{   // For each feature of the collection of features
 			//for (RuntimeObject next : ((ArrayList<RuntimeObject>) property.getData().get("CollectionArrayList")))
 			for (RuntimeObject next : Collection.getArrayList(property))
@@ -308,7 +308,7 @@ public class Runtime2EMF {
 	protected void setEObjectPropertiesFromRuntimeObject(RuntimeObject rObject) {
 		EObject eObject = createEObjectFromRuntimeObject(rObject);
 		if(eObject != null) 
-			if(eObject.equals(rObject.getData().get("kcoreObject")))
+			if(eObject.equals(rObject.getKCoreObject()))
 			{
 				//	do not update objects from the framework it self (this is may be due to bug #156 the reflexion seem to not be complete and the save crashes ...
 				internalLog.debug("     Ignoring update of framework EObject : "+eObject.eClass().getName());
@@ -351,10 +351,11 @@ public class Runtime2EMF {
 				}
 				
 				// If the feature is a collection of Objects
-				if (property.getData().get("CollectionArrayList")!=null)
+				if (RuntimeObject.COLLECTION_VALUE.equals(property.getPrimitiveType())&& 
+						property.getJavaNativeObject()!=null)
 				{
 					// For each feature of the collection of features
-					ArrayList<RuntimeObject> colArr = (ArrayList<RuntimeObject>) property.getData().get("CollectionArrayList");
+					ArrayList<RuntimeObject> colArr = (ArrayList<RuntimeObject>) property.getJavaNativeObject();
 					for(int i = colArr.size()-1; i >= 0 ; i--)
 					{
 						RuntimeObject rcoll = colArr.get(i);
@@ -432,7 +433,7 @@ public class Runtime2EMF {
 		// (instanceClassName: org.eclipse.emf.common.util.Enumerator)
 		// (serializable: false))
 		else if (feature.getEType() instanceof EDataType) {
-			result = rProperty.getData().get("r2e.emfObject");
+			result = rProperty.getR2eEmfObject();
 			
 		
 		} 
@@ -518,12 +519,12 @@ public class Runtime2EMF {
 		EObject result = null;
 		// Get the meta class of the instance hosted by given runtime object
 		fr.irisa.triskell.kermeta.language.structure.Class metaclass = (fr.irisa.triskell.kermeta.language.structure.Class) rObject
-				.getMetaclass().getData().get("kcoreObject");
+				.getMetaclass().getKCoreObject();
 		// Get the qualified name of this meta class
 		String kqname = NamedElementHelper.getQualifiedName(
 				metaclass.getTypeDefinition());
 
-		if (rObject.getData().get("r2e.emfObject") == null)
+		if (rObject.getR2eEmfObject() == null)
 		{	// If we did not find the Eclass, then we could try to find it in
 			// the ecore metamodel resource (unless the metamodel is Kermeta metamodel)
 			if (getKermetaEcoreMap().containsKey(kqname)  &&  
@@ -531,19 +532,19 @@ public class Runtime2EMF {
 			{ // this is a patch-like solution :/ for handling ecore metamodel types
 				if (getKermetaEcoreMap().get(kqname).equals("ecore::EEnum"))
 				{
-					String enum_name = (String) rObject.getProperties().get("name").getData().get("StringValue");
+					String enum_name = (String) rObject.getProperties().get("name").getJavaNativeObject();
 					result = getEEnumFromQualifiedName(enum_name, p_resource);
 					if(result == null){
 						internalLog.warn("Problem with enumerations need to fix that !!!");
 					}
-					else rObject.getData().put("r2e.emfObject", result);
+					else rObject.setR2eEmfObject(result);
 				}
 			} 
-			else if( rObject.getData().containsKey("emfObject")){
+			else if( rObject.getEmfObject() != null){
 				// this object was loaded from a resoure 
 				// do not create a new EMF object, reuse the existing one (in order to keep the resource)				
-				result = (EObject)rObject.getData().get("emfObject");
-				rObject.getData().put("r2e.emfObject", result);
+				result = (EObject)rObject.getEmfObject();
+				rObject.setR2eEmfObject( result);
 				
 			}
 			else
@@ -556,7 +557,7 @@ public class Runtime2EMF {
 					EStructuralFeature structFeat;
 					// retreive the object
 					//result = FeatureMapUtil.createEntry(structFeat,);
-					rObject.getData().put("r2e.emfObject", result);
+					rObject.setR2eEmfObject(result);
 					// TODO DVK deal with FeatureMap when saving files
 				}
 				else if (eclass == null){
@@ -569,7 +570,7 @@ public class Runtime2EMF {
 				if (eclass != null)
 				{
 					result = EcoreUtil.create(eclass);
-					rObject.getData().put("r2e.emfObject", result);
+					rObject.setR2eEmfObject( result);
 				}
 				else {
 					// this is an error, we haven't been able to create the object because we haven't retreived its metaclass
@@ -577,12 +578,12 @@ public class Runtime2EMF {
 				}
 				
 			}
-			// if (rObject.getData().get("r2e.emfObject") == null)
+			// if (rObject.getR2eEmfObject() == null)
 			// else : null eclass occurs when the object type is a primitive
 			// type or an enumeration , or a special type,
 			// like ecore::EAnnotation, which is not handled properly
 		} else
-			result = (EObject) rObject.getData().get("r2e.emfObject");
+			result = (EObject) rObject.getR2eEmfObject();
 		return result;
 	}
 
@@ -636,7 +637,7 @@ public class Runtime2EMF {
 		// 1) get the "enumeration" property of this object.
 		RuntimeObject ro_enumeration = rObject.getProperties().get("enumeration");
 		String ro_enumeration_name = (String) ro_enumeration.getProperties()
-				.get("name").getData().get("StringValue");
+				.get("name").getJavaNativeObject();
 		// 2) get its eenum ecore equivalence
 		EEnum current_eenum = getEEnumFromQualifiedName(ro_enumeration_name, p_resource);
 		// Get the name of the enumeration literal element
@@ -647,7 +648,7 @@ public class Runtime2EMF {
 		// note : do not get the old r2e.emfObject if there existed one :
 		// successive load/save methods make
 		// them unvalid -> different location in memory from a load to another.
-		rObject.getData().put("r2e.emfObject", result);
+		rObject.setR2eEmfObject(result);
 		return result;
 	}
 
@@ -732,8 +733,7 @@ public class Runtime2EMF {
 	public static String getRONameProp(RuntimeObject rObject) {
 		RuntimeObject roName = (RuntimeObject) rObject.getProperties().get(
 				"name");
-		return roName == null ? "" : (String) roName.getData().get(
-				"StringValue");
+		return roName == null ? "" : (String) roName.getJavaNativeObject();
 	}
 
 	/**

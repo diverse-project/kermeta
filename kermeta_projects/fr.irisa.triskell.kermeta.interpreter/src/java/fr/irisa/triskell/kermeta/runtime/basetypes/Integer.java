@@ -1,4 +1,4 @@
-/* $Id: Integer.java,v 1.10 2007-07-24 13:47:38 ftanguy Exp $ 
+/* $Id: Integer.java,v 1.11 2007-10-15 07:13:58 barais Exp $ 
  * Implementation of Kermeta base type Integer 
  */
 
@@ -18,7 +18,7 @@ public class Integer {
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::compareTo(other)*/
 	public static RuntimeObject compareTo(RuntimeObject self, RuntimeObject param0) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
-		Integer.setValue(result, ((java.lang.Integer)self.getData().get("NumericValue")).compareTo((java.lang.Integer)param0.getData().get("NumericValue")));
+		Integer.setValue(result, ((java.lang.Integer)self.getJavaNativeObject()).compareTo((java.lang.Integer)param0.getJavaNativeObject()));
 		return result;
 	}
 
@@ -122,12 +122,14 @@ public class Integer {
 	}
 	
 	public static void setValue(RuntimeObject integer, int value) {
-		integer.getData().put("NumericValue", new java.lang.Integer(value));
+		integer.setPrimitiveType(RuntimeObject.NUMERIC_VALUE);
+		integer.setJavaNativeObject( new java.lang.Integer(value));
 	}
 	
 	public static int getValue(RuntimeObject integer) {
-		if (integer.getData().get("NumericValue") == null) setValue(integer, 0);
-	    return ((java.lang.Integer)integer.getData().get("NumericValue")).intValue();
+		if (!RuntimeObject.NUMERIC_VALUE.equals(integer.getPrimitiveType()))
+			setValue(integer, 0);
+	    return ((java.lang.Integer)integer.getJavaNativeObject()).intValue();
 	}
 	
 

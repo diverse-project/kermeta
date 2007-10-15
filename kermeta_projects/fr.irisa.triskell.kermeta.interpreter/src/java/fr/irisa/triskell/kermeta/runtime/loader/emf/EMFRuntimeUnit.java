@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.52 2007-09-07 14:13:43 dtouzet Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.53 2007-10-15 07:13:58 barais Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -254,7 +254,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    	
 	    	
 	    	// Try to get emf resource from resource RO
-	    	resource = (XMLResource) resRO.getData().get("r2e.emfResource");
+	    	resource = (XMLResource) resRO.getR2eEmfResource();
 	    	
 	    	// Try to create the resource specified by "u"
 	    	if(resource == null)
@@ -397,14 +397,14 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 				RuntimeObject roResource = next;
 				if (roResource != associatedResource){
 					// get orcreate an emf resource for this Resource
-					String res_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("uri"));						
+					String res_uri = (String) ((RuntimeObject) roResource.getProperties().get("uri")).getJavaNativeObject();						
 					/*if(res_uri.startsWith("platform:/plugin/")){ DVK doesn't work in some situations, sometimes the main upadte modify/update one of these object !? 
 						internalLog.info("ignoring update of readonly resource  "+ res_uri +" (ie. platform:/plugin/ )");
 					}
 					else{*/
 						Resource res2 = updateEMFResource(roResource, createURI(res_uri));
 						
-						String mm_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("metaModelURI"));
+						String mm_uri = (String) ((RuntimeObject) roResource.getProperties().get("metaModelURI")).getJavaNativeObject();
 						RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
 		        			getConcreteFactory("EMF").createRuntimeUnit("", mm_uri, roResource) ;
 						runtime_unit.associatedResource = roResource;
@@ -426,14 +426,14 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 				RuntimeObject roResource = next;
 				if (roResource != associatedResource){
 					// get orcreate an emf resource for this Resource
-					String res_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("uri"));						
+					String res_uri = (String) ((RuntimeObject) roResource.getProperties().get("uri")).getJavaNativeObject();						
 					/*if(res_uri.startsWith("platform:/plugin/")){
 						internalLog.info("ignoring update of readonly resource "+ res_uri +"(ie. platform:/plugin/ cannot be changed)");
 					}
 					else{*/
 						Resource res2 = updateEMFResource(roResource, createURI(res_uri));
 										
-						String mm_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("metaModelURI"));
+						String mm_uri = (String) ((RuntimeObject) roResource.getProperties().get("metaModelURI")).getJavaNativeObject();
 						RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
 		        			getConcreteFactory("EMF").createRuntimeUnit("", mm_uri, roResource) ;
 						runtime_unit.associatedResource = roResource;
@@ -484,7 +484,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 * @return
 	 */
    private Resource updateEMFResource(RuntimeObject roResource, URI uri) {
-	   Resource res = (Resource) roResource.getData().get("r2e.emfResource");
+	   Resource res = (Resource) roResource.getR2eEmfResource();
 		// if create getOrCreate the resource set associated to the container repository
 	   if(res == null){
 			res = createEMFResource(roResource, uri);
@@ -492,7 +492,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		else if(!res.getURI().equals(uri)){
 			// resource uri has changed, resource need to be be updated
 			// remove existing emfResource from the runtime object
-			roResource.getData().remove("r2e.emfResource");
+			roResource.setR2eEmfResource(null);
 			// remove the resource from the resource set
 			res.getResourceSet().getResources().remove(res);
 			// create a new one
@@ -526,18 +526,18 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			}
 		}
 		// associate this resource to kermesta ressource runtime object
-		roResource.getData().put("r2e.emfResource", res);
+		roResource.setR2eEmfResource(res);
 		return res;
 	}
 
    public ResourceSet getOrCreateRepositoryResourceSetForResource(RuntimeObject roResource){
 	   ResourceSet resource_set;
 		RuntimeObject roRepository = (RuntimeObject) roResource.getProperties().get("repository");
-		resource_set = (ResourceSet)roRepository.getData().get("r2e.emfResourceset");
+		resource_set = (ResourceSet)roRepository.getR2eEmfResourceset();
 		if(resource_set == null){
 			// need to create the resourceSet
 			resource_set = new ResourceSetImpl();
-			roRepository.getData().put("r2e.emfResourceset", resource_set);
+			roRepository.setR2eEmfResourceset(resource_set);
 		}
 		return resource_set;
    }
@@ -632,7 +632,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 */
 	public RuntimeObject getContentMapEntryFromString(String str)
 	{
-		Hashtable<RuntimeObject, RuntimeObject> content_table = (Hashtable<RuntimeObject,RuntimeObject>)this.getContentMap().getData().get("Hashtable");
+		Hashtable<RuntimeObject, RuntimeObject> content_table = (Hashtable<RuntimeObject,RuntimeObject>)this.getContentMap().getJavaNativeObject();
 		RuntimeObject entry = null;
 		Iterator<RuntimeObject> it = content_table.keySet().iterator();
 		while (it.hasNext() && entry == null)

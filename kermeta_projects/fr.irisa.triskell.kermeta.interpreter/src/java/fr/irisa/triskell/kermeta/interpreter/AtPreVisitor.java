@@ -1,4 +1,4 @@
-/* $Id: AtPreVisitor.java,v 1.10 2007-08-02 17:36:57 jmottu Exp $
+/* $Id: AtPreVisitor.java,v 1.11 2007-10-15 07:13:58 barais Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -90,7 +90,7 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 			}
 
 			// Get The type of the Object
-			t_target =(fr.irisa.triskell.kermeta.language.structure.Class)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
+			t_target =(fr.irisa.triskell.kermeta.language.structure.Class)((RuntimeObject)ro_target.getMetaclass()).getKCoreObject();
 
 			// This is just a test for debbuging the interpreter. It should never occur
 			if (t_target == null) {

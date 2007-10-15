@@ -31,8 +31,8 @@ public class Class {
 	}
 	
 	public static RuntimeObject isInstance(RuntimeObject self, RuntimeObject object) {
-		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getData().get("kcoreObject");
-		fr.irisa.triskell.kermeta.language.structure.Class pro = (fr.irisa.triskell.kermeta.language.structure.Class)object.getMetaclass().getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getKCoreObject();
+		fr.irisa.triskell.kermeta.language.structure.Class pro = (fr.irisa.triskell.kermeta.language.structure.Class)object.getMetaclass().getKCoreObject();
 		
 		SimpleType required = new SimpleType(req);
 		SimpleType provided = new SimpleType(pro);
@@ -42,8 +42,8 @@ public class Class {
 	}
 	
 	public static RuntimeObject hasSubType(RuntimeObject self, RuntimeObject object) {
-		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getData().get("kcoreObject");
-		Type pro = (Type)object.getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getKCoreObject();
+		Type pro = (Type)object.getKCoreObject();
 		
 		SimpleType required = new SimpleType(req);
 		SimpleType provided = new SimpleType(pro);
@@ -62,9 +62,9 @@ public class Class {
 
 		if (self == other) return self.getFactory().getMemory().trueINSTANCE;
 		
-		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getKCoreObject();
 		
-		fr.irisa.triskell.kermeta.language.structure.Object obj = (fr.irisa.triskell.kermeta.language.structure.Object)other.getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Object obj = (fr.irisa.triskell.kermeta.language.structure.Object)other.getKCoreObject();
 		fr.irisa.triskell.kermeta.language.structure.Class pro = null;
 		if(obj instanceof fr.irisa.triskell.kermeta.language.structure.Class)
 			pro = (fr.irisa.triskell.kermeta.language.structure.Class) obj;

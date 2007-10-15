@@ -1,4 +1,4 @@
-/* $Id: ModelType.java,v 1.3 2007-07-20 15:07:47 ftanguy Exp $
+/* $Id: ModelType.java,v 1.4 2007-10-15 07:13:58 barais Exp $
  * Project : Kermeta interpreter
  * File : ModelType.java
  * License : EPL
@@ -26,9 +26,9 @@ public class ModelType {
 	// extern fr::irisa::triskell::kermeta::runtime::language::ModelType.isModelTypeOf()
 	public static RuntimeObject isModelTypeOf(RuntimeObject modelType, RuntimeObject model) {
 		fr.irisa.triskell.kermeta.language.structure.ModelType required =
-			(fr.irisa.triskell.kermeta.language.structure.ModelType) modelType.getData().get("kcoreObject");
+			(fr.irisa.triskell.kermeta.language.structure.ModelType) modelType.getKCoreObject();
 		fr.irisa.triskell.kermeta.language.structure.ModelType provided =
-			(fr.irisa.triskell.kermeta.language.structure.ModelType) ((RuntimeObject) model.getData().get("modelType")).getData().get("kcoreObject");
+			(fr.irisa.triskell.kermeta.language.structure.ModelType) ((RuntimeObject) model.getModelType()).getKCoreObject();
 		
 		if (TypeEqualityChecker.equals(required, provided)) {
 			return model.getFactory().getMemory().trueINSTANCE;

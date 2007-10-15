@@ -11,7 +11,7 @@ public class Real {
 	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Real::compareTo(other)*/
 	public static RuntimeObject compareTo(RuntimeObject self, RuntimeObject param0) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
-		Integer.setValue(result, ((java.lang.Double)self.getData().get("NumericValue")).compareTo((java.lang.Double)param0.getData().get("NumericValue")));
+		Integer.setValue(result, ((java.lang.Double)self.getJavaNativeObject()).compareTo((java.lang.Double)param0.getJavaNativeObject()));
 		return result;
 	}
 	
@@ -69,12 +69,14 @@ public class Real {
 	}
 	
 	public static void setValue(RuntimeObject real, double value) {
-		real.getData().put("NumericValue", new Double(value));
+		real.setPrimitiveType(RuntimeObject.NUMERIC_VALUE);
+		real.setJavaNativeObject( new Double(value));
 	}
 	
 	public static double getValue(RuntimeObject real) {
-		if (real.getData().get("NumericValue") == null) setValue(real, 0);
-		return ((Double)real.getData().get("NumericValue")).doubleValue();
+		if (!RuntimeObject.NUMERIC_VALUE.equals(real.getPrimitiveType()) )
+			setValue(real, 0);
+		return ((Double)real.getJavaNativeObject()).doubleValue();
 	}
 	
 	public static RuntimeObject create(double value, RuntimeObjectFactory factory)

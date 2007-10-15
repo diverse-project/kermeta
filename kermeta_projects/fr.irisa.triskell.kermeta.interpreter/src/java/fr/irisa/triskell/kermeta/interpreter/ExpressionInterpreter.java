@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.62 2007-09-04 14:32:31 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.63 2007-10-15 07:13:58 barais Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -133,7 +133,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		setCurrentState(DEBUG_RESUME);
 		RuntimeObjectFactory roFactory = memory.getROFactory(); 
 		
-		fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)ro_target.getMetaclass().getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)ro_target.getMetaclass().getKCoreObject();
 		
 		CallableOperation op = new CallableOperation(foperation, self_type);
 		
@@ -187,7 +187,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        // FIXME : Type variables should be handled here (substitutions of variables) done ?
 	        if (c.getTypeParamBinding().size() != 0) {
 	        	@SuppressWarnings("unused")
-				fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)interpreterContext.peekCallFrame().getSelf().getMetaclass().getData().get("kcoreObject");
+				fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)interpreterContext.peekCallFrame().getSelf().getMetaclass().getKCoreObject();
 	            c = (fr.irisa.triskell.kermeta.language.structure.Class)TypeVariableEnforcer.getBoundType(c, interpreterContext.peekCallFrame().getTypeParameters());
 	            
 	        }    
@@ -274,7 +274,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			Type r = (Type)TypeVariableEnforcer.getBoundType(node.getTarget().getStaticType(), interpreterContext.peekCallFrame().getTypeParameters());
 			
 			SimpleType expectedType = new SimpleType(r);
-			fr.irisa.triskell.kermeta.language.structure.Class p = (fr.irisa.triskell.kermeta.language.structure.Class)rhs_value.getMetaclass().getData().get("kcoreObject");
+			fr.irisa.triskell.kermeta.language.structure.Class p = (fr.irisa.triskell.kermeta.language.structure.Class)rhs_value.getMetaclass().getKCoreObject();
 			SimpleType providedtype = new SimpleType(p);
 			
 			
@@ -310,7 +310,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			/******************************/
 			else if (r instanceof Enumeration) {
 			    Enumeration enumeration = (Enumeration)r;
-			    if (enumeration.getOwnedLiteral().contains(rhs_value.getData().get("kcoreObject"))) {
+			    if (enumeration.getOwnedLiteral().contains(rhs_value.getKCoreObject())) {
 			        // It is OK, let's continue with normal assignment
 			    }
 			    else {
@@ -379,7 +379,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		        raiseCallOnVoidTargetException(node,"");
 		    }
 		    
-		    fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)ro_target.getMetaclass().getData().get("kcoreObject");
+		    fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)ro_target.getMetaclass().getKCoreObject();
 
             // FIXME : Property is assumed to be the type of the feature
 		    
@@ -445,7 +445,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         //ClassDefinition foclass = current_op.getOwningClass();
         //internalLog.info("Visiting a super operation of : "+current_op.getFName());
         
-        fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)interpreterContext.peekCallFrame().getSelf().getMetaclass().getData().get("kcoreObject");
+        fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)interpreterContext.peekCallFrame().getSelf().getMetaclass().getKCoreObject();
         
         // Get the parameters of this operation
 		ArrayList parameters = visitList(node.getParameters());
@@ -584,7 +584,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	                resc_block = r;
 	            else {
 	                SimpleType exprected =  new SimpleType(r.getExceptionType().getType());
-	                SimpleType provided = new SimpleType((fr.irisa.triskell.kermeta.language.structure.Class)ex.raised_object.getMetaclass().getData().get("kcoreObject"));
+	                SimpleType provided = new SimpleType((fr.irisa.triskell.kermeta.language.structure.Class)ex.raised_object.getMetaclass().getKCoreObject());
 	                if (provided.isSubTypeOf(exprected)) {
 	                    resc_block = r;
 	                }
@@ -649,8 +649,8 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         boolean cond_value=true;
         
         // Get boolean value
-        if (cond_result.getData().containsKey("BooleanValue"))
-            cond_value = ((Boolean)cond_result.getData().get("BooleanValue")).booleanValue();
+        if (RuntimeObject.BOOLEAN_VALUE.equals(cond_result.getPrimitiveType()) )
+            cond_value = ((Boolean)cond_result.getJavaNativeObject()).booleanValue();
         else
         {
         	KM2KMTPrettyPrinter pp  = new KM2KMTPrettyPrinter(); 
@@ -707,9 +707,9 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 				
 		        RuntimeObject cond_result = (RuntimeObject)this.accept(node.getStopCondition());
 		        // Get boolean value
-		        if (cond_result.getData().containsKey("BooleanValue"))
-		            cond_value = ((Boolean)cond_result.getData().get("BooleanValue")).booleanValue();
-		        else
+		        if (RuntimeObject.BOOLEAN_VALUE.equals(cond_result.getPrimitiveType()) )
+		            cond_value = ((Boolean)cond_result.getJavaNativeObject()).booleanValue();
+		      else
 		        {
 		        	throw new Error("INTERPRETER INTERNAL ERROR : Loop : evaluation of the condition part does not result in a boolean value.");
 		        }
@@ -819,7 +819,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    }
 	    
 	    // Get The type of the Object
-	    t_target =(fr.irisa.triskell.kermeta.language.structure.Class)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
+	    t_target =(fr.irisa.triskell.kermeta.language.structure.Class)((RuntimeObject)ro_target.getMetaclass()).getKCoreObject();
 	    
 	    // This is just a test for debbuging the interpreter. It should never occur
 	    if (t_target == null) {
@@ -830,7 +830,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		// Get the feature
 	    SimpleType target_type = new SimpleType(t_target);
 	    //	  if this is a java object proxy some more initialization are needed
-	    boolean isJarProxy = ro_target.getData().containsKey("isJarProxy");
+	    boolean isJarProxy = ro_target.isJarProxy();
 	    /*if(RuntimeHelper.isJarProxy(target_type.getTypeDefinition())){
 	    	// this is a proxy to a jar must invoke it
 	    	throw new Error("don't know how to invoke " + node.getName()+ " on jar proxy for " + target_type);
@@ -945,7 +945,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * @return
 	 */
 	private RuntimeObject getPropertyOnProxy(RuntimeObject roSelf, RuntimeObject ro_property, Property node) {
-		if(!roSelf.getData().containsKey("javaObject")){
+		if(!RuntimeObject.JAVA_OBJECT.equals(roSelf.getPrimitiveType())  ){
    		 	throw KermetaRaisedException.createKermetaException("kermeta::exceptions::CallOnVoidTarget",
    	        		"This is a proxy for a java object but this java object was not initialized",
    					this, memory, node,
@@ -954,7 +954,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		RuntimeObject result = memory.voidINSTANCE;
 		try {
 
-			Object self = roSelf.getData().get("javaObject");    	
+			Object self = roSelf.getJavaNativeObject();    	
 			Field field = getJavaField(node);
 			Object returnedObject = field.get(self);
     		result = convertJavaObjectToRuntimeObject(node,returnedObject);
@@ -989,7 +989,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    try {
 		    // if the operation is not an initialize function and the object is not initialized then fail
 	    	RuntimeObject roSelf = interpreterContext.peekCallFrame().getSelf();
-	    	if(!RuntimeHelper.isInitOperation(node) && !roSelf.getData().containsKey("javaObject")){
+	    	if(!RuntimeHelper.isInitOperation(node) && !RuntimeObject.JAVA_OBJECT.equals(roSelf.getPrimitiveType())){
 	    		 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::CallOnVoidTarget",
 	    	        		"This is a proxy for a java object but this java object was not initialized",
 	    					this, memory, node,
@@ -1010,12 +1010,13 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    		Object[] args = buildJavaArgs(pParameters, constructor.getParameterTypes());
 	    		Object newInstance = constructor.newInstance(args);
 	    		// this is an initialize function, use its result to set the javaObject
-	    		roSelf.getData().put("javaObject", newInstance);
+	    		roSelf.setPrimitiveType(RuntimeObject.JAVA_OBJECT);
+	    		roSelf.setJavaNativeObject(newInstance);
 	    		result = roSelf;
 	    	}
 	    	else {
 		    	// find the java object
-	    		Object self = roSelf.getData().get("javaObject");
+	    		Object self = roSelf.getJavaNativeObject();
 		    	// retreive the method
 	    		Method method = getJavaMethod(node);
 	    		if(method !=  null ){
@@ -1070,7 +1071,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     	//    	 Set the result
 		RuntimeObject returnType = this.getMemory().getRuntimeObjectForFObject(typedElement.getType());
 		//RuntimeObject stringType = this.getMemory().getTypeDefinitionAsRuntimeObject("kermeta::standard::String");
-		String returnTypeQName = TypeHelper.getMangledQualifiedName((Type) returnType.getData().get("kcoreObject"));
+		String returnTypeQName = TypeHelper.getMangledQualifiedName((Type) returnType.getKCoreObject());
 		if (returnedObject ==  null){
 			result = getMemory().voidINSTANCE;
 		}	
@@ -1090,7 +1091,8 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		}
 		else{
 			result = this.getMemory().getROFactory().createObjectFromClassDefinition(returnType);
-    		result.getData().put("javaObject", returnedObject);
+    		result.setPrimitiveType(RuntimeObject.JAVA_OBJECT);
+			result.setJavaNativeObject(returnedObject);
     		
 		}
 		return result;
@@ -1106,7 +1108,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		Object[] result = new Object[parameters.size()];
 		for(int i = 0; i < parameters.size(); i++){
 			RuntimeObject fparam = (RuntimeObject)parameters.get(i);
-			Object javaObject = fparam.getData().get("javaObject");
+			Object javaObject = fparam.getJavaNativeObject();
 			String typename = javaTypeParams[i].getName();
 			if(typename.equals("java.lang.String")){
 				result[i] = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(fparam);

@@ -1,4 +1,4 @@
-/* $Id: RuntimeLambdaObject.java,v 1.8 2007-08-02 17:03:01 dvojtise Exp $
+/* $Id: RuntimeLambdaObject.java,v 1.9 2007-10-15 07:13:59 barais Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeLambdaObject.java
  * License: EPL
@@ -22,7 +22,7 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
  * A special RuntimeObject for LambdaExpressions :
  * it is a RuntimeObject that contains an internal context, stored in a hashtable.
  */
-public class RuntimeLambdaObject extends RuntimeObject {
+public class RuntimeLambdaObject extends RuntimeObjectImpl {
     
     /** 
      *The context in which the expression is executed

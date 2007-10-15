@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.24 2007-09-12 13:32:53 dvojtise Exp $
+/* $Id: Object.java,v 1.25 2007-10-15 07:13:58 barais Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
@@ -42,6 +40,7 @@ import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
@@ -78,12 +77,12 @@ public class Object {
 		fr.irisa.triskell.kermeta.language.structure.Type actual_class = null;
 
 		// Get the class for the given parameter :
-		if(cls.getData().get("kcoreObject") instanceof fr.irisa.triskell.kermeta.language.structure.Type)
-			param_class = (fr.irisa.triskell.kermeta.language.structure.Type) cls.getData().get("kcoreObject");
+		if(cls.getKCoreObject() instanceof fr.irisa.triskell.kermeta.language.structure.Type)
+			param_class = (fr.irisa.triskell.kermeta.language.structure.Type) cls.getKCoreObject();
 
 		// Get the class of self :
-		if(getMetaClass(self).getData().get("kcoreObject") instanceof fr.irisa.triskell.kermeta.language.structure.Type)
-			actual_class = (fr.irisa.triskell.kermeta.language.structure.Type) getMetaClass(self).getData().get("kcoreObject");
+		if(getMetaClass(self).getKCoreObject() instanceof fr.irisa.triskell.kermeta.language.structure.Type)
+			actual_class = (fr.irisa.triskell.kermeta.language.structure.Type) getMetaClass(self).getKCoreObject();
 		
 		// This is just for robusness, it should never occur
 		if (actual_class == null)
@@ -102,7 +101,7 @@ public class Object {
 	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants() */
 	public static RuntimeObject checkInvariants(RuntimeObject self) {
 		
-		 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
+		 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getKCoreObject();
 	     ClassDefinition classDef = (ClassDefinition)metaClass.getTypeDefinition();
 	     
 	     java.lang.String message = "";
@@ -185,11 +184,11 @@ public class Object {
 	/** Implementation of method get called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.get(~property) */
 	public static RuntimeObject get(RuntimeObject self, RuntimeObject param0) {
-		Property property = (Property)param0.getData().get("kcoreObject");
+		Property property = (Property)param0.getKCoreObject();
 		RuntimeObject result;
 		
 		if (property.isIsDerived()) {
-			fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
+			fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getKCoreObject();
 			ExpressionInterpreter interp = self.getFactory().getMemory().getCurrentInterpreter();
 			result = interp.getterDerivedProperty(new CallableProperty(property, cls), self, null);
 		}
@@ -223,10 +222,10 @@ public class Object {
 	
 	public static void set(RuntimeObject self, RuntimeObject param0, RuntimeObject param1, boolean handle_opposite) {
 		//setDerivedProperty
-		Property property = (Property)param0.getData().get("kcoreObject");
+		Property property = (Property)param0.getKCoreObject();
 		
 		if (property.isIsDerived()) {
-			fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
+			fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getKCoreObject();
 			ExpressionInterpreter interp = self.getFactory().getMemory().getCurrentInterpreter();
 			interp.setDerivedProperty(self, new CallableProperty(property, cls), param1, null);
 		}
@@ -265,7 +264,7 @@ public class Object {
         if (container == null) return;
         
         // Find the property in which the object is stoted
-        fr.irisa.triskell.kermeta.language.structure.Class containerClass = (fr.irisa.triskell.kermeta.language.structure.Class)container.getMetaclass().getData().get("kcoreObject");
+        fr.irisa.triskell.kermeta.language.structure.Class containerClass = (fr.irisa.triskell.kermeta.language.structure.Class)container.getMetaclass().getKCoreObject();
         
         Iterator<CallableProperty> it = InheritanceSearch.callableProperties(containerClass).iterator();
         while (it.hasNext()) {
@@ -323,7 +322,7 @@ public class Object {
 					fr.irisa.triskell.kermeta.language.structure.Class newClass = factory.createClass();
 					
 					// Set ClassDefinition
-					ClassDefinition cDef = (ClassDefinition) tDef_kro.getData().get("kcoreObject");
+					ClassDefinition cDef = (ClassDefinition) tDef_kro.getKCoreObject();
 					newClass.setTypeDefinition( cDef );
 					
 					// Set TypeVariableBinding
@@ -343,9 +342,9 @@ public class Object {
 								crtBinding_ro = it.next();
 								
 								ctrType_ro = crtBinding_ro.getProperties().get("type");
-								crtType = (fr.irisa.triskell.kermeta.language.structure.Type) ctrType_ro.getData().get("kcoreObject"); 
+								crtType = (fr.irisa.triskell.kermeta.language.structure.Type) ctrType_ro.getKCoreObject(); 
 								ctrVar_ro = crtBinding_ro.getProperties().get("variable");
-								crtTypeVar = (fr.irisa.triskell.kermeta.language.structure.TypeVariable) ctrVar_ro.getData().get("kcoreObject"); 
+								crtTypeVar = (fr.irisa.triskell.kermeta.language.structure.TypeVariable) ctrVar_ro.getKCoreObject(); 
 								
 								typeVB = factory.createTypeVariableBinding();
 								typeVB.setType( crtType );
@@ -357,7 +356,7 @@ public class Object {
 					
 					// If "newClass" compliant with its ClassDefinition "cDef"
 					if(checkInvariants(self) == self.getFactory().getMemory().trueINSTANCE) {
-						self.getData().put("kcoreObject", newClass);
+						self.setKCoreObject(newClass);
 					}
 					else {
 						throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
@@ -501,16 +500,16 @@ public class Object {
 		
 		RuntimeObject crtRO = selfRO;
 		boolean found = false;
-		if(crtRO.getData().containsKey("resourceRO")) {
+		if(crtRO.getResourceRO() !=  null) {
 			found = true;
-			result = (RuntimeObject) crtRO.getData().get("resourceRO");
+			result = (RuntimeObject) crtRO.getResourceRO();
 		}
 		while(crtRO.getContainer() != null && !found) {
 			
 			crtRO = crtRO.getContainer();
-			if(crtRO.getData().containsKey("resourceRO")) {
+			if(crtRO.getResourceRO() !=  null) {
 				found = true;
-				result = (RuntimeObject) crtRO.getData().get("resourceRO");
+				result = (RuntimeObject) crtRO.getResourceRO();
 			}
 		}
 		
@@ -528,7 +527,7 @@ public class Object {
 	 *                 are assigned to
 	 */
 	public static RuntimeObject setContainingResource(RuntimeObject selfRO, RuntimeObject resRO) {
-		selfRO.getData().put("resourceRO", resRO);
+		selfRO.setResourceRO(resRO);
 		return selfRO.getFactory().getMemory().voidINSTANCE;
 	}
 
@@ -539,8 +538,7 @@ public class Object {
 	 * @return
 	 */
 	public static RuntimeObject unSetContainingResource(RuntimeObject selfRO) {
-		if(selfRO.getData().containsKey("resourceRO"))
-			selfRO.getData().remove("resourceRO");
+		selfRO.setResourceRO(null);
 		return selfRO.getFactory().getMemory().voidINSTANCE;
 	}
 
@@ -567,14 +565,14 @@ public class Object {
 	    setClass.getTypeParamBinding().add(tvBinding4set);
 	    
 	    RuntimeObject metaclassRO = selfRO.getFactory().getMemory().getRuntimeObjectForFObject(setClass);
-	    RuntimeObject resultRO = new RuntimeObject(selfRO.getFactory(), metaclassRO);
+	    RuntimeObject resultRO = new RuntimeObjectImpl(selfRO.getFactory(), metaclassRO);
 
 	    // Get ArrayList contained by the built collection RO
 	    ArrayList<RuntimeObject> resultList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(resultRO);
 	    
 	    // Get list of properties of the current object (selfRO) from its metaclass
 	    RuntimeObject mcRO = selfRO.getMetaclass();
-	    fr.irisa.triskell.kermeta.language.structure.Class cl = (fr.irisa.triskell.kermeta.language.structure.Class) mcRO.getData().get("kcoreObject");
+	    fr.irisa.triskell.kermeta.language.structure.Class cl = (fr.irisa.triskell.kermeta.language.structure.Class) mcRO.getKCoreObject();
 	    ClassDefinition cDef = (ClassDefinition) cl.getTypeDefinition();
 	    ArrayList<Property> props = ClassDefinitionHelper.getAllProperties(cDef);
 	    

@@ -1,4 +1,4 @@
-/* $Id: ConstraintInterpreter.java,v 1.11 2007-08-03 14:37:54 jmottu Exp $
+/* $Id: ConstraintInterpreter.java,v 1.12 2007-10-15 07:13:58 barais Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -129,8 +129,8 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 		boolean cond_value=true;
 
 		// Get boolean value
-		if (cond_result.getData().containsKey("BooleanValue"))
-			cond_value = ((Boolean)cond_result.getData().get("BooleanValue")).booleanValue();
+		if (RuntimeObject.BOOLEAN_VALUE.equals(cond_result.getPrimitiveType()))
+			cond_value = ((Boolean)cond_result.getJavaNativeObject()).booleanValue();
 		else
 		{
 			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
@@ -195,7 +195,7 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 		}
 
 		// Get The type of the Object
-		t_target =(fr.irisa.triskell.kermeta.language.structure.Class)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
+		t_target =(fr.irisa.triskell.kermeta.language.structure.Class)((RuntimeObject)ro_target.getMetaclass()).getKCoreObject();
 
 		// This is just a test for debbuging the interpreter. It should never occur
 		if (t_target == null) {

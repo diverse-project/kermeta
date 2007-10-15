@@ -1,4 +1,4 @@
-/* $Id: KCoreRuntimeObject.java,v 1.6 2007-09-04 12:24:33 dvojtise Exp $
+/* $Id: KCoreRuntimeObject.java,v 1.7 2007-10-15 07:13:59 barais Exp $
 * Project : Kermeta (First iteration)
 * File : KCoreRuntimeObject.java
 * License : EPL
@@ -20,7 +20,7 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
  * IRISA / University of rennes 1
  * Distributed under the terms of the EPL license
  */
-public class KCoreRuntimeObject extends RuntimeObject {
+public class KCoreRuntimeObject extends RuntimeObjectImpl {
 
     private boolean loaded = false;
     
@@ -33,9 +33,9 @@ public class KCoreRuntimeObject extends RuntimeObject {
     public KCoreRuntimeObject(RuntimeObjectFactory factory, RuntimeObject metaclass, fr.irisa.triskell.kermeta.language.structure.Object kcoreObject) {
         super(factory, metaclass);
         this.kcoreObject = kcoreObject;
-        super.getData().put("kcoreObject", kcoreObject);
+        super.setKCoreObject(kcoreObject);
         // in order to serialise model that have dependencies to the framework, set the saved emf object to the one used to load it
-        super.getData().put("r2e.emfObject", kcoreObject);
+        super.setR2eEmfObject(kcoreObject);
     }
     
     private void load() {
@@ -48,10 +48,10 @@ public class KCoreRuntimeObject extends RuntimeObject {
         if (!loaded) load();
         return super.getContainer();
     }
-    public Hashtable<String,Object> getData() {
+    /*public Hashtable<String,Object> getData() {
         if (!loaded) load();
         return super.getData();
-    }
+    }*/
     public RuntimeObject getMetaclass() {
         if (!loaded) load();
         return super.getMetaclass();

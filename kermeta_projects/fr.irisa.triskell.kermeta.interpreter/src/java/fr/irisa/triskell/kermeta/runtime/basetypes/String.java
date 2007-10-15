@@ -1,4 +1,4 @@
-/* $Id: String.java,v 1.11 2007-09-04 13:28:09 cfaucher Exp $
+/* $Id: String.java,v 1.12 2007-10-15 07:13:58 barais Exp $
 * Project : Kermeta interpreter
 * File : String.java
 * License : EPL
@@ -159,7 +159,8 @@ public class String {
 		//value = value.replaceAll("\\\\n","__newline__");
 	    //value = value.replaceAll("\\\\", "");
 	    //value = value.replaceAll("__newline__","\n");
-	    str.getData().put("StringValue", value);
+	    str.setPrimitiveType(RuntimeObject.STRING_VALUE);
+		str.setJavaNativeObject( value);
 	}
 	
 	/**
@@ -168,8 +169,9 @@ public class String {
 	 * @return
 	 */
 	public static java.lang.String getValue(RuntimeObject str) {
-		if (!str.getData().containsKey("StringValue")) setValue(str, "");
-		return (java.lang.String)str.getData().get("StringValue");
+		if (!RuntimeObject.STRING_VALUE.equals(str.getPrimitiveType()))
+			setValue(str, "");
+		return (java.lang.String)str.getJavaNativeObject();
 	}
 	
 	

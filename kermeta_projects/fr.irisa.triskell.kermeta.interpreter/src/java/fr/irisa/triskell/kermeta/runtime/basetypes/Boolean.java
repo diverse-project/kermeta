@@ -1,4 +1,4 @@
-/* $Id: Boolean.java,v 1.9 2007-09-07 14:13:43 dtouzet Exp $ 
+/* $Id: Boolean.java,v 1.10 2007-10-15 07:13:58 barais Exp $ 
  * Implementation of Kermeta base type Boolean 
  */
 
@@ -53,11 +53,13 @@ public class Boolean {
 	}
 
 	public static boolean getValue(RuntimeObject bool) {
-	    return ((java.lang.Boolean)bool.getData().get("BooleanValue")).booleanValue();
+	    return ((java.lang.Boolean)bool.getJavaNativeObject()).booleanValue();
 	}
 	
 	public static void setValue(RuntimeObject bool, boolean value) {
-	   bool.getData().put("BooleanValue", new java.lang.Boolean(value)); 
+		bool.setPrimitiveType(RuntimeObject.BOOLEAN_VALUE);
+		
+		bool.setJavaNativeObject( new java.lang.Boolean(value)); 
 	}
 
 	/* initialize TRUE and FALse singletons

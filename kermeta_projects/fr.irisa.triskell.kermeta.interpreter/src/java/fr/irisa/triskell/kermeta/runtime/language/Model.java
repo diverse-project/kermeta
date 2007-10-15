@@ -1,4 +1,4 @@
-/* $Id: Model.java,v 1.6 2007-07-20 15:07:47 ftanguy Exp $
+/* $Id: Model.java,v 1.7 2007-10-15 07:13:58 barais Exp $
  * Project : Kermeta interpreter
  * File : ModelType.java
  * License : EPL
@@ -59,7 +59,7 @@ public class Model {
 	    
 		
 		// For all elements in the input collection
-	    ArrayList elemArray = (ArrayList)elements.getData().get("CollectionArrayList");
+	    ArrayList elemArray = (ArrayList)elements.getJavaNativeObject();
 	    for(java.lang.Object elem : elemArray ){
 	    	RuntimeObject roElement = (RuntimeObject)elem;
 	    		 
@@ -81,10 +81,10 @@ public class Model {
 		RuntimeObjectFactory factory = model.getFactory();
 		
 		// if this object is conform to one of the type of this model, add it
-		Type elementType = (Type)element.getMetaclass().getData().get("kcoreObject");
+		Type elementType = (Type)element.getMetaclass().getKCoreObject();
 
 		fr.irisa.triskell.kermeta.language.structure.ModelType modelType =
-			(fr.irisa.triskell.kermeta.language.structure.ModelType) ((RuntimeObject) model.getData().get("modelType")).getData().get("kcoreObject");
+			(fr.irisa.triskell.kermeta.language.structure.ModelType) ((RuntimeObject) model.getModelType()).getKCoreObject();
 		//ModelTypeDefinition modelTypeDef = (ModelTypeDefinition)modelType.getTypeDefinition();
 		// for each of the type def of this model type def check if it is conformant
 		for(java.lang.Object oTypeDef : modelType.getIncludedTypeDefinition()){

@@ -37,7 +37,8 @@ public class Character {
 	}
 
 	public static void setValue(RuntimeObject ch, char value) {
-		ch.getData().put("CharacterValue", new java.lang.Character(value));
+		ch.setPrimitiveType(RuntimeObject.CHARACTER_VALUE);
+		ch.setJavaNativeObject(new java.lang.Character(value));
 	}
 	
 	public static char getValue(RuntimeObject ch) {
@@ -45,8 +46,9 @@ public class Character {
 	}
 	
 	public static java.lang.Character getCharacterValue(RuntimeObject ch) {
-		if (!ch.getData().containsKey("CharacterValue")) setValue(ch, ' ');
-		return ((java.lang.Character)ch.getData().get("CharacterValue"));
+		if (!RuntimeObject.CHARACTER_VALUE.equals(ch.getPrimitiveType())) 
+			setValue(ch, ' ');
+		return ((java.lang.Character)ch.getJavaNativeObject());
 	}
 
 	public static RuntimeObject create(char value, RuntimeObjectFactory factory)

@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.16 2007-08-02 09:42:21 dvojtise Exp $
+/* $Id: RuntimeMemory.java,v 1.17 2007-10-15 07:13:58 barais Exp $
  * Project: Kermeta.interpreter
  * File: RuntimeMemory.java
  * License: EPL
@@ -18,10 +18,9 @@ import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
  * The runtime memory of a program that is currently executed
@@ -124,8 +123,8 @@ public class RuntimeMemory {
     protected void createSingletons(KermetaUnit interpreterbuilder)
     {
 	    //initialize TRUE and FALSE
-        trueINSTANCE = new RuntimeObject(roFactory, null);
-        falseINSTANCE =  new RuntimeObject(roFactory, null);
+        trueINSTANCE = new RuntimeObjectImpl(roFactory, null);
+        falseINSTANCE =  new RuntimeObjectImpl(roFactory, null);
         
         
 		Boolean.createTrue(roFactory, trueINSTANCE);

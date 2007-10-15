@@ -65,9 +65,9 @@ public class ReflectiveSequence {
 		// Cache : ClassDefinition cd -> RuntimeObject of kermeta::language::ReflectiveCollection<cd>
 	    Hashtable cache_reflec_seq_class = object.getFactory().cache_reflec_seq_class;
 	    // Get the object representation of the Class of *object*
-	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)object.getMetaclass().getData().get("kcoreObject");
+	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)object.getMetaclass().getKCoreObject();
 	    // Get the object representation of *property*
-	    Property fprop = (Property)property.getData().get("kcoreObject");
+	    Property fprop = (Property)property.getKCoreObject();
 	    // Get the resolved type of *property* (as a "resolved parameterized type") 
 	    Type prop_type = TypeVariableEnforcer.getBoundType(fprop.getType(), TypeVariableEnforcer.getTypeVariableBinding(self_class));
 		
@@ -100,8 +100,8 @@ public class ReflectiveSequence {
 
 		RuntimeObject result = object.getFactory().createRuntimeObjectFromClass(metaClass);
 		
-		result.getData().put("RObject", object);
-		result.getData().put("RProperty", property);
+		result.setRObject(object);
+		result.setRProperty( property);
 		
 		return result;
 	}

@@ -1,4 +1,4 @@
-/* $Id: StdIO.java,v 1.11 2007-03-08 14:16:37 cfaucher Exp $
+/* $Id: StdIO.java,v 1.12 2007-10-15 07:13:58 barais Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : EPL
@@ -23,7 +23,7 @@ public class StdIO {
 	// Implementation of method write called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.write(output)
 	public static RuntimeObject write(RuntimeObject output) {
-		output.getFactory().getKermetaIOStream().print(output.getData().get("StringValue"));
+		output.getFactory().getKermetaIOStream().print(output.getJavaNativeObject());
 		return output.getFactory().getMemory().voidINSTANCE;
 	}
 
