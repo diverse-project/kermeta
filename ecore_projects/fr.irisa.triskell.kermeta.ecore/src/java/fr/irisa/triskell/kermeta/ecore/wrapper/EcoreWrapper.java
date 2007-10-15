@@ -1,4 +1,4 @@
-/* $Id: EcoreWrapper.java,v 1.4 2007-07-26 13:34:09 ftanguy Exp $
+/* $Id: EcoreWrapper.java,v 1.5 2007-10-15 11:02:31 barais Exp $
  * Project   : fr.irisa.triskell.kermeta.ecore (First iteration)
  * File      : EcoreWrapper.java
  * License   : EPL
@@ -19,9 +19,10 @@ import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 
 /**
@@ -140,8 +141,8 @@ public class EcoreWrapper {
 	    // - fill its properties hashtable
 	    // runtime_objects_mapping unavailable here... proper to EMF2Runtime
 	    
-	    result = new RuntimeObject(memory.getROFactory(), ro_metaclass);
-        result.getData().put("emfObject", eObject);
+	    result = new RuntimeObjectImpl(memory.getROFactory(), ro_metaclass);
+        result.setEmfObject(eObject);
         return result;
         
 	}
