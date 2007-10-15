@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.17 2007-10-12 09:19:41 ftanguy Exp $
+/*$Id: Ecore2KMPass1.java,v 1.18 2007-10-15 15:41:33 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -85,7 +85,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 				String splits[] = s.split("\\|");
 				for ( int i = 0; i < splits.length; i++ ) {
 					kermetaUnit.addRequire( splits[i], null );
-					/*String fileURI = "";
+					String fileURI = "";
 					if ( splits[i].equals("kermeta") ) {
 						if ( kermetaUnit.isFramework() )
 							fileURI = IOPlugin.getFrameWorkEcoreURI();
@@ -112,7 +112,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 						kermetaUnit.getImportedKermetaUnits().add( importedUnit );
 					} catch ( URIMalformedException exception ) {
 						kermetaUnit.error( exception.getMessage() );
-					}*/
+					}
 				}
 			}
 			
@@ -162,6 +162,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		}
 		return super.visit(node);
 	}
+
 	
 	/** Create a primitive type for given datatype */
     public Object visit(EDataType node) {
@@ -329,7 +330,20 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 
 	/** Visit an EReference and convert it in a Property, with opposite if necessary. Also set
 	 * its type. So, this method is supposed to be called after the visit of ETypes. */
-	public Object visit(EReference node) {
+	public Object visit(EReference node) {	
+		/*
+		 * 
+		 * IMPORTANT : check if the type is a cross reference. If it is, add a dependency to its kermeta unit.
+		 * 
+		 */
+		if ( node.getEType().eResource() != node.eResource() ) {
+			try {
+				kermetaUnit.getImportedKermetaUnits().add( IOPlugin.getDefault().getKermetaUnit(node.getEType().eResource().getURI().toString()) );
+			} catch (URIMalformedException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		currentProperty = StructureFactory.eINSTANCE.createProperty();
 		datas.store(EcoreHelper.getQualifiedName(node), currentProperty);
 	
