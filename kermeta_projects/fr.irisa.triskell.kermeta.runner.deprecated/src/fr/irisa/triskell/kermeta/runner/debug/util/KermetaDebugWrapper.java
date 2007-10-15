@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.20 2007-07-20 15:09:14 ftanguy Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.21 2007-10-15 07:15:22 barais Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -232,7 +232,7 @@ public class KermetaDebugWrapper {
 	protected static String[] getValueStringFromRuntimeObject(RuntimeObject ro)
 	{
 		String[] result = new String[2];
-		Hashtable data = ro.getData();
+		//Hashtable data = ro.getData();
 		result[1] = RunnerConstants.IVALUE_PRIMITIVE ;
 		if (ro.getMetaclass()==null)
 		{
@@ -241,15 +241,15 @@ public class KermetaDebugWrapper {
 		else
 		{
 			String qname = 
-				NamedElementHelper.getMangledQualifiedName((NamedElement)((fr.irisa.triskell.kermeta.language.structure.Class)ro.getMetaclass().getData().get("kcoreObject")).getTypeDefinition());
+				NamedElementHelper.getMangledQualifiedName((NamedElement)((fr.irisa.triskell.kermeta.language.structure.Class)ro.getMetaclass().getKCoreObject()).getTypeDefinition());
 			if (qname.equals("kermeta::standard::String")) {
-				result[0] = "\"" + data.get("StringValue").toString() + "\"";
+				result[0] = "\"" + ro.getJavaNativeObject().toString() + "\"";
 			} else if (qname.equals("kermeta::standard::Integer")) {
-				result[0] = data.get("NumericValue").toString();
+				result[0] = ro.getJavaNativeObject().toString();
 			} else if (qname.equals("kermeta::standard::Character")) {
-				result[0] = "'" + data.get("CharacterValue").toString() + "'";
+				result[0] = "'" + ro.getJavaNativeObject().toString() + "'";
 			} else if (qname.equals("kermeta::standard::Boolean")) {
-				result[0] = data.get("BooleanValue").toString();
+				result[0] = ro.getJavaNativeObject().toString();
 			}
 			// FIXME Is there a proper way to get the Kermeta type??
 			else if (qname.equals("Collection") || qname.endsWith("Sequence"))
@@ -275,7 +275,7 @@ public class KermetaDebugWrapper {
 	 * is a Set/Collection/Sequence
 	 */
 	protected static SerializableVariable[] createPropertySetFromOID(DebugInterpreter interpreter, RuntimeObject ro, SerializableValue ownervalue) {
-		ArrayList set = (ArrayList)ro.getData().get("CollectionArrayList");
+		ArrayList set = (ArrayList)ro.getJavaNativeObject();
 		SerializableVariable[] variables = new SerializableVariable[set.size()];
 		Iterator it = set.iterator();
 		int i = 0;

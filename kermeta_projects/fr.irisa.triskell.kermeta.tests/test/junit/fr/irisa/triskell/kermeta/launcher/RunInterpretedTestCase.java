@@ -1,4 +1,4 @@
-/* $Id: RunInterpretedTestCase.java,v 1.2 2007-10-01 15:16:45 ftanguy Exp $
+/* $Id: RunInterpretedTestCase.java,v 1.3 2007-10-15 07:14:29 barais Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -23,6 +23,7 @@ import org.apache.log4j.Logger;
 
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
@@ -68,7 +69,7 @@ public class RunInterpretedTestCase extends TestCase {
         
         time = System.currentTimeMillis();
         
-        nb_ro = RuntimeObject.getInstanceCounter();
+        nb_ro = RuntimeObjectImpl.getInstanceCounter();
         
         if (interpreter == null) {
             System.err.println("Memory before interpreter : " + Runtime.getRuntime().totalMemory());
@@ -97,13 +98,13 @@ public class RunInterpretedTestCase extends TestCase {
         long max = Runtime.getRuntime().maxMemory();
         
         time = System.currentTimeMillis() - time;
-        nb_ro = RuntimeObject.getInstanceCounter() - nb_ro;
+        nb_ro = RuntimeObjectImpl.getInstanceCounter() - nb_ro;
         
         System.out.println("    ************************************************");
         System.out.println("    * Consumed memory : " + total + "/" + max);
         System.out.println("    * #objects cached : " +  interpreter.memory.getNumberOfObjectCached());
         System.out.println("    * #ro created     : " + nb_ro);
-        System.out.println("    * #ro total       : " + RuntimeObject.getInstanceCounter());
+        System.out.println("    * #ro total       : " + RuntimeObjectImpl.getInstanceCounter());
         System.out.println("    * time (ms)       : " + time);
         System.out.println("    ************************************************");
         interpreter = null;
@@ -132,7 +133,7 @@ public class RunInterpretedTestCase extends TestCase {
     	}
     	catch(KermetaRaisedException e){
     		// If this is a kermeta assertion that failed, then the Test must fail
-    		fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)e.raised_object.getMetaclass().getData().get("kcoreObject");        	
+    		fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)e.raised_object.getMetaclass().getKCoreObject();        	
     		String exceptionTypeName = t_target.getTypeDefinition().getName();
     		if(exceptionTypeName.compareTo("AssertionFailedError") == 0){
     			fail(e.toString());

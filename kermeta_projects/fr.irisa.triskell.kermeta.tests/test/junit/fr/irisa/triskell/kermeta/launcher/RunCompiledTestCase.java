@@ -41,7 +41,7 @@ public class RunCompiledTestCase extends RunInterpretedTestCase {
     	}
     	catch(KermetaRaisedException e){
     		// If this is a kermeta assertion that failed, then the Test must fail
-    		fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)e.raised_object.getMetaclass().getData().get("kcoreObject");        	
+    		fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)e.raised_object.getMetaclass().getKCoreObject();        	
     		String exceptionTypeName = t_target.getTypeDefinition().getName();
     		if(exceptionTypeName.compareTo("AssertionFailedError") == 0){
     			fail(e.toString());
