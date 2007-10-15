@@ -39,7 +39,26 @@ public class SimpleFileIO {
     {
         try
         {
-            FileWriter fw = new FileWriter(String.getValue(filename));
+        	/*
+        	 * 
+        	 * Getting the directory
+        	 * 
+        	 */
+        	java.lang.String folderPath = String.getValue(filename);
+        	int i = folderPath.lastIndexOf("/");
+        	folderPath = folderPath.substring(0, i);
+        	
+        	/*
+        	 * 
+        	 * 
+        	 * Checking for its existency
+        	 * 
+        	 */
+        	File folder = new File( folderPath );
+        	if ( ! folder.exists() )
+        		folder.mkdirs();
+        	
+        	FileWriter fw = new FileWriter(String.getValue(filename));
             fw.write(String.getValue(text));
             fw.close();
         }
