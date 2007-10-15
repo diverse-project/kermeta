@@ -40,7 +40,7 @@
             eType="#//kermeta/trek/KUserStory" eOpposite="#//kermeta/trek/KUserStory/coveredBy"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" lowerBound="1"
             eType="#//kermeta/trek/KUseLevel"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="Tags" upperBound="-1"
+        <eStructuralFeatures xsi:type="ecore:EReference" name="tags" upperBound="-1"
             eType="#//kermeta/trek/KTagElement"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="KTestCase">
