@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.20 2007-10-02 15:19:05 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.21 2007-10-16 12:40:00 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -22,6 +22,7 @@ import java.util.Set;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -35,6 +36,7 @@ import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
+import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
@@ -91,6 +93,10 @@ public class OperationChecker extends AbstractChecker {
 	 */
 	private boolean checkOperationSignature(Operation operation)
 	{
+		
+		if ( operation.getName().equals("evaluate") )
+			System.out.println();
+		
 		boolean result = false;
 		Operation next = null;
 		// (Dev.note : kermeta::reflection::Object "became" kermeta::language::structure::Object)
@@ -421,15 +427,38 @@ public class OperationChecker extends AbstractChecker {
 		{
 			isConform = isConformType(t1, t2);
 			if(!isConform) message += " uses incompatible classImpls ";
-		}
-		else if (op1.getType()!=null && op2.getType()!=null)
+		} else if ( t1 instanceof PrimitiveType && t2 instanceof PrimitiveType ) {
+			PrimitiveType pt1 = (PrimitiveType) t1;
+			PrimitiveType pt2 = (PrimitiveType) t2;
+			
+			fr.irisa.triskell.kermeta.language.structure.Class c1 = getClass(pt1);
+			fr.irisa.triskell.kermeta.language.structure.Class c2 = getClass(pt2);
+			isConform = c1.getTypeDefinition() == c2.getTypeDefinition();
+
+			message = "operation " + op1.getName() + " from class definition " + ((ClassDefinition) op1.eContainer()).getName() + " does not return the correct type as defined in the operation " + op2.getName() + " from class definition " + ((ClassDefinition) op2.eContainer()).getName();
+		} else if (op1.getType()!=null && op2.getType()!=null) {
 			message += "<"+pprinter.accept(op1.getType()) + "> != <" + pprinter.accept(op2.getType())+">"
 			+ op1.getType() + " != " + op2.getType() + "op1:" + op1.getName();
+			//isConform = false;
+		}
 		if (!isConform) 
-			addProblem(ERROR, message, op1);
+			builder.error(message, op1);
+			//addProblem(ERROR, message, op1);
 		return isConform;
 	}
 	
+	private Class getClass(PrimitiveType pt) {
+		PrimitiveType current = pt;
+		Class result = null;
+		while ( result == null ) {
+			Object o = current.getInstanceType();
+			if ( o instanceof Class )
+				result = (Class) o;
+			else if ( o instanceof PrimitiveType )
+				current = (PrimitiveType) o;
+		}
+		return result;
+	}
 	
 	/**
 	 * This is a dirty patch because "null"/unexisting type is VoidType by default
