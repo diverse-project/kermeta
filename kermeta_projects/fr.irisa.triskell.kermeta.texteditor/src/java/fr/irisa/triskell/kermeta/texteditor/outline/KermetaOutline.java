@@ -1,4 +1,4 @@
-/* $Id: KermetaOutline.java,v 1.14 2007-09-19 12:17:46 ftanguy Exp $
+/* $Id: KermetaOutline.java,v 1.15 2007-10-16 11:46:40 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
@@ -89,7 +89,7 @@ public class KermetaOutline extends ContentOutlinePage {
 		treeViewer.addSelectionChangedListener(this);
 		if (editor.getMcunit() != null && ! editor.getMcunit().getInternalPackages().isEmpty() ) {
 			treeViewer.setInput(editor.getMcunit());
-			treeViewer.expandToLevel(2);
+			//treeViewer.expandToLevel(2);
 		}
 	}
 	
@@ -125,7 +125,7 @@ public class KermetaOutline extends ContentOutlinePage {
 
 				public void run() {
 					updateHelper();
-					getTreeViewer().expandToLevel(2);
+					//getTreeViewer().expandToLevel(2);
 				}
 
 			});
