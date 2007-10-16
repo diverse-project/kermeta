@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.7 2007-10-01 15:14:45 ftanguy Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.8 2007-10-16 11:46:12 ftanguy Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -84,6 +84,13 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
  */
 public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 
+	
+	static final private String MODEL_TYPE_KW = "modeltype";
+	
+	
+	
+	
+	
 	protected ArrayList usings = new ArrayList();
 	protected ArrayList imports = new ArrayList();
 	protected String root_pname;
@@ -325,7 +332,11 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			}
 			else if((i==0) && (!alreadyPrefixed)) {
 				alreadyPrefixed = true;
-				result += getPrefix() + this.accept((EObject)expressions.get(i)) + "\n";
+				EObject o = (EObject)expressions.get(i);
+				String temp = (String) this.accept(o);
+				if ( o instanceof ModelType )
+					temp = MODEL_TYPE_KW + " " + temp;
+				result += getPrefix() + temp + "\n";
 			}
 			else {
 				alreadyPrefixed = true;
