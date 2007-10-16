@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass.java,v 1.7 2007-10-12 09:19:41 ftanguy Exp $
+/*$Id: Ecore2KMPass.java,v 1.8 2007-10-16 11:42:33 ftanguy Exp $
 * Project : io
 * File : 	Ecore2KMPass.java
 * License : EPL
@@ -549,8 +549,6 @@ public class Ecore2KMPass extends EcoreVisitor {
 		}
 		else {
 			// Otherwise it is always a ClassDefinition
-			if ( def == null )
-				System.out.println();
 			ClassDefinition cd = (ClassDefinition)def;
 			fr.irisa.triskell.kermeta.language.structure.Class fc = StructureFactory.eINSTANCE.createClass();
 			fc.setTypeDefinition(cd);
