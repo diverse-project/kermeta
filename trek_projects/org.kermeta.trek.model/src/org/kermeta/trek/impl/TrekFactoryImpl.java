@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekFactoryImpl.java,v 1.1 2007-10-15 16:54:07 fmunoz Exp $
+ * $Id: TrekFactoryImpl.java,v 1.2 2007-10-16 08:20:33 cfaucher Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -32,7 +32,7 @@ public class TrekFactoryImpl extends EFactoryImpl implements TrekFactory {
 	 */
 	public static TrekFactory init() {
 		try {
-			TrekFactory theTrekFactory = (TrekFactory)EPackage.Registry.INSTANCE.getEFactory("trek"); 
+			TrekFactory theTrekFactory = (TrekFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/trek"); 
 			if (theTrekFactory != null) {
 				return theTrekFactory;
 			}

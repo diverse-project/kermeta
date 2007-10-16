@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekPackage.java,v 1.1 2007-10-15 16:54:07 fmunoz Exp $
+ * $Id: TrekPackage.java,v 1.2 2007-10-16 08:20:33 cfaucher Exp $
  */
 package org.kermeta.trek;
 
@@ -42,7 +42,7 @@ public interface TrekPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "trek";
+	String eNS_URI = "http://www.kermeta.org/trek";
 
 	/**
 	 * The package namespace name.

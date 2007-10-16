@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editorconfigurator:EditorConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:editorconfigurator="http://www.topcased.org/editorconfigurator/0.10" xmi:id="_8A4vEHtKEdyeVIeg9tVZOw" name="org.kermeta.trek.graphicaleditor" projectName="org.kermeta.trek.graphicaleditor" pluginVersion="0.0.1" provider="IRISA / INRIA" forceOverwrite="true">
+  <genModel href="../model/usekase.genmodel#/"/>
+</editorconfigurator:EditorConfiguration>

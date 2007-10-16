@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekSwitch.java,v 1.1 2007-10-15 16:54:08 fmunoz Exp $
+ * $Id: TrekSwitch.java,v 1.2 2007-10-16 08:20:34 cfaucher Exp $
  */
 package org.kermeta.trek.util;
 

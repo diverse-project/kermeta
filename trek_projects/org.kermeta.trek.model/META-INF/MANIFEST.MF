@@ -7,10 +7,9 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.kermeta.trek,
+ org.kermeta.trek.impl,
+ org.kermeta.trek.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Eclipse-LazyStart: true
-Export-Package: org.kermeta.trek,
- org.kermeta.trek.impl,
- org.kermeta.trek.util,
- org.kermeta.trek.validation
