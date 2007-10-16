@@ -10,9 +10,14 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.interpreter,
  fr.irisa.triskell.kermeta.io,
  org.eclipse.core.resources,
- fr.irisa.triskell.traceability
+ fr.irisa.triskell.traceability,
+ org.eclipse.emf.compare,
+ org.eclipse.emf.compare.diff,
+ org.eclipse.emf.compare.match,
+ org.junit4
 Export-Package: fr.irisa.triskell.kermeta.interpreter.test,
  fr.irisa.triskell.kermeta.launcher,
+ fr.irisa.triskell.kermeta.tests.comparison,
  fr.irisa.triskell.kermeta.tests.plugin,
  kermeta_interpreter.constraint_test,
  kermeta_interpreter.emf_test,
@@ -24,4 +29,5 @@ Export-Package: fr.irisa.triskell.kermeta.interpreter.test,
  kermeta_io.roundtrip_test,
  kermeta_io.test,
  kermeta_io.typechecker_test
-Bundle-ClassPath: .
+Bundle-ClassPath: lib/thirdparty/junit.jar,
+ .
