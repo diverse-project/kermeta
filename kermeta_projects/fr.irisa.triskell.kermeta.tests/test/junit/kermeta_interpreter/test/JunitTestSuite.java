@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.2 2007-10-03 10:55:49 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.3 2007-10-16 11:50:01 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -12,6 +12,8 @@
  */
 package kermeta_interpreter.test;
 
+import junit.framework.JUnit4TestAdapter;
+import junit.framework.TestResult;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
@@ -29,9 +31,14 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 public class JunitTestSuite extends TestSuite {
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("JunitTestSuite");
-    RunJunitFactory runfactory = new RunJunitFactory();
+    RunJunitFactory runfactory = new RunJunitFactory("platform:/resource/fr.irisa.triskell.kermeta.tests/.bin");
     
     static private IOPlugin ioPlugin;
+    
+    public JunitTestSuite() {
+    	super();
+    	initialize();
+    }
     
     public JunitTestSuite(java.lang.Class<?> theClass)
     {
@@ -187,6 +194,8 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/interpreter/kmt_testcases","069_testToStringRedifinition.main.kmt" );
 
+
+
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
 		//addTest(runfactory.getTest());
@@ -204,10 +213,11 @@ public class JunitTestSuite extends TestSuite {
 	public void testWithFile(String dir, String file)  {
 	    //addTest(runfactory.addTestsForUnit(dir+"/"+file));
 		String uri = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
-		addTest( new RunJunitFactory().addTestsForUnit(uri) );
+		addTest( new RunJunitFactory("platform:/resource/fr.irisa.triskell.kermeta.tests/.bin").addTestsForUnit(uri) );
 	}
 	
-	public static void main(String[] args) {
-		TestRunner.run(JunitTestSuite.class);
+	public static junit.framework.Test suite() {
+		return new JUnit4TestAdapter(JunitTestSuite.class);  
 	}
 }
+

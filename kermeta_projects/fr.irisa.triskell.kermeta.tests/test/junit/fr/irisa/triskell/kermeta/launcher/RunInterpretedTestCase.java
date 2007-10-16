@@ -1,4 +1,4 @@
-/* $Id: RunInterpretedTestCase.java,v 1.3 2007-10-15 07:14:29 barais Exp $
+/* $Id: RunInterpretedTestCase.java,v 1.4 2007-10-16 11:50:01 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -45,6 +45,8 @@ public class RunInterpretedTestCase extends TestCase {
     protected boolean constraintExecution = false;
     
     protected boolean isLastOfSerie =  false;
+
+	private String binDirectory;
     
     /**
      * 
@@ -54,7 +56,7 @@ public class RunInterpretedTestCase extends TestCase {
      * @param constraintExecution true if the interpreter much run with pre/post checking
      * @param isLastOfSerie true if this is the last of the test suite
      */
-    public RunInterpretedTestCase(String themainClassValue, String themainOperationValue, RunJunitFactory thecontainerTestSuite, boolean constraintExecution, boolean isLastOfSerie)
+    public RunInterpretedTestCase(String themainClassValue, String themainOperationValue, RunJunitFactory thecontainerTestSuite, boolean constraintExecution, boolean isLastOfSerie, String binDirectory)
 
     {
         super(themainClassValue + "." + themainOperationValue);
@@ -63,6 +65,7 @@ public class RunInterpretedTestCase extends TestCase {
         containerTestSuite = thecontainerTestSuite;
         this.constraintExecution = constraintExecution;
         this.isLastOfSerie = isLastOfSerie;
+        this.binDirectory = binDirectory;
     }
 
     protected void setUp() throws java.lang.Exception {
@@ -73,7 +76,7 @@ public class RunInterpretedTestCase extends TestCase {
         
         if (interpreter == null) {
             System.err.println("Memory before interpreter : " + Runtime.getRuntime().totalMemory());
-           	interpreter = new KermetaInterpreter(containerTestSuite.getUnit().getUri(), "platform:/plugin/fr.irisa.triskell.kermeta.tests/bin", null);
+           	interpreter = new KermetaInterpreter(containerTestSuite.getUnit().getUri(), binDirectory, null);
             System.err.println("Memory after interpreter : " + Runtime.getRuntime().totalMemory());
         }
         

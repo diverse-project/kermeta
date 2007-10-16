@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.3 2007-09-19 13:07:40 ftanguy Exp $
+/* $Id: RunJunitFactory.java,v 1.4 2007-10-16 11:50:01 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -55,6 +55,8 @@ public class RunJunitFactory implements Test {
     
     private boolean isCompiled = false;
     
+    private String binDirectory;
+    
     /**
      * enabling this option will optimize the loading, so it will load it only once : one for the identification 
      * of the internal tests (if this test is a testsuite), one when it will run it
@@ -66,8 +68,8 @@ public class RunJunitFactory implements Test {
     /**
      * Default constructor
      */
-    public RunJunitFactory() {
-        
+    public RunJunitFactory(String binDirectory) {
+        this.binDirectory = binDirectory;
     }
     /**
      * constructor allowing to change some default setting
@@ -194,9 +196,9 @@ public class RunJunitFactory implements Test {
             else // it is not a test suite
             {
             	if(isCompiled) {
-            		theTestCase = new RunCompiledTestCase(main_class, main_operation, this, constraintExecution, true);
+            		theTestCase = new RunCompiledTestCase(main_class, main_operation, this, constraintExecution, true, binDirectory);
             	} else {
-            		theTestCase = new RunInterpretedTestCase(main_class, main_operation, this, constraintExecution, true);
+            		theTestCase = new RunInterpretedTestCase(main_class, main_operation, this, constraintExecution, true, binDirectory);
             	}
                 
                 if(!optimizeLoading) unit = null; // reset the unit to free some memory
@@ -263,9 +265,9 @@ public class RunJunitFactory implements Test {
             Operation mainOp = it.next();
             if (mainOp.getName().startsWith("test")) {
             	if(isCompiled) {
-            		theTestSuite.addTest(new RunCompiledTestCase(main_class, mainOp.getName(), this, constraintExecution, it.hasNext()));
+            		theTestSuite.addTest(new RunCompiledTestCase(main_class, mainOp.getName(), this, constraintExecution, it.hasNext(), binDirectory));
             	} else {
-            		theTestSuite.addTest(new RunInterpretedTestCase(main_class, mainOp.getName(), this, constraintExecution, it.hasNext()));
+            		theTestSuite.addTest(new RunInterpretedTestCase(main_class, mainOp.getName(), this, constraintExecution, it.hasNext(), binDirectory));
             	}
                 
             }

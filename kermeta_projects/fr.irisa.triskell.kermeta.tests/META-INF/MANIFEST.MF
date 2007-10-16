@@ -24,5 +24,4 @@ Export-Package: fr.irisa.triskell.kermeta.interpreter.test,
  kermeta_io.roundtrip_test,
  kermeta_io.test,
  kermeta_io.typechecker_test
-Bundle-ClassPath: lib/thirdparty/junit.jar,
- .
+Bundle-ClassPath: .

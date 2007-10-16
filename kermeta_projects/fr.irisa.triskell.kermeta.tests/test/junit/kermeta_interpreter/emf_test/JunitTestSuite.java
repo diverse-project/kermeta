@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.4 2007-10-12 13:28:51 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.5 2007-10-16 11:50:02 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -28,7 +28,7 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 public class JunitTestSuite extends TestSuite {
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("JunitTestSuite");
-    RunJunitFactory runfactory = new RunJunitFactory();
+    RunJunitFactory runfactory = new RunJunitFactory("platform:/resource/fr.irisa.triskell.kermeta.tests/.bin");
     
     static private IOPlugin ioPlugin;
     
@@ -127,10 +127,10 @@ public class JunitTestSuite extends TestSuite {
 	public void testWithFile(String dir, String file)  {
 	    //addTest(runfactory.addTestsForUnit(dir+"/"+file));
 		String uri = TestPlugin.PLUGIN_TESTS_PATH + dir+"/"+file;
-		addTest( new RunJunitFactory().addTestsForUnit(uri) );
+		addTest( new RunJunitFactory("platform:/resource/fr.irisa.triskell.kermeta.tests/.bin").addTestsForUnit(uri) );
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		TestRunner.run(JunitTestSuite.class);
-	}
+	}*/
 }

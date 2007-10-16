@@ -14,9 +14,9 @@ public class RunCompiledTestCase extends RunInterpretedTestCase {
     public RunCompiledTestCase(String themainClassValue,
 			String themainOperationValue,
 			RunJunitFactory thecontainerTestSuite, boolean constraintExecution,
-			boolean isLastOfSerie) {
+			boolean isLastOfSerie, String binDirectory) {
 		super(themainClassValue, themainOperationValue, thecontainerTestSuite,
-				constraintExecution, isLastOfSerie);
+				constraintExecution, isLastOfSerie, binDirectory);
 		// TODO Auto-generated constructor stub
 	}
 
