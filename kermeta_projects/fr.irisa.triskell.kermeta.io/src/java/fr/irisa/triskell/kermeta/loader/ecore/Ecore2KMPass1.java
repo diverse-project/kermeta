@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.18 2007-10-15 15:41:33 ftanguy Exp $
+/*$Id: Ecore2KMPass1.java,v 1.19 2007-10-16 11:43:00 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -85,7 +85,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 				String splits[] = s.split("\\|");
 				for ( int i = 0; i < splits.length; i++ ) {
 					kermetaUnit.addRequire( splits[i], null );
-					String fileURI = "";
+					/*String fileURI = "";
 					if ( splits[i].equals("kermeta") ) {
 						if ( kermetaUnit.isFramework() )
 							fileURI = IOPlugin.getFrameWorkEcoreURI();
@@ -112,7 +112,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 						kermetaUnit.getImportedKermetaUnits().add( importedUnit );
 					} catch ( URIMalformedException exception ) {
 						kermetaUnit.error( exception.getMessage() );
-					}
+					}*/
 				}
 			}
 			
