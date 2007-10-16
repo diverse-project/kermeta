@@ -1,5 +1,6 @@
 package modelC;
 
+require kermeta
 //require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 class ModelC
 {

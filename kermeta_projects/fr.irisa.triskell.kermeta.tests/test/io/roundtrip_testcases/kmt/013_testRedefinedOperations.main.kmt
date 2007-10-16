@@ -1,6 +1,7 @@
 package testRedefinedOperations;
 
 require "http://www.eclipse.org/emf/2002/Ecore"
+require kermeta
 
 class A
 {
@@ -24,6 +25,6 @@ class C inherits B
 
 class D inherits B, A
 {
-	method f() from A is do
+	method f() from B is do
 	end	
 }

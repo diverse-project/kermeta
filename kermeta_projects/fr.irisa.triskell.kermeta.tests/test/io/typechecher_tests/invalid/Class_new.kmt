@@ -4,6 +4,8 @@
 
 package tctest;
 
+require kermeta
+
 abstract class A {}
 
 

@@ -3,6 +3,7 @@
 
 package testUML2km;
 
+require kermeta
 require "input_test_models/Uml2.km"
 using uml2
 

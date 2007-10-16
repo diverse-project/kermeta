@@ -1,4 +1,4 @@
-/* $Id: ModelTypeOperations.kmt,v 1.1 2007-09-10 08:35:09 cfaucher Exp $ */
+/* $Id: ModelTypeOperations.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
 // test verifying that some cases should raise typechecker errors 
 // see also the other file with the same name in the directory "valid"
 // has it inherits from Test, it check that all operation have one error
@@ -6,6 +6,8 @@
 @mainClass "invalidModelTypeOperations::tester"
 
 package invalidModelTypeOperations;
+
+require kermeta
 
 using kermeta::standard
 

@@ -1,5 +1,7 @@
 package testCallExp;
 
+require kermeta
+
 class String {}
 class Integer {}
 class Boolean {}

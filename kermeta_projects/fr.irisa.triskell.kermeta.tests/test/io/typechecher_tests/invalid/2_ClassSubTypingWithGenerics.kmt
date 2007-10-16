@@ -1,8 +1,10 @@
-/* $Id: 2_ClassSubTypingWithGenerics.kmt,v 1.1 2007-09-10 08:35:09 cfaucher Exp $ */
+/* $Id: 2_ClassSubTypingWithGenerics.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
 
 // INVALID Simple subtyping test for simple 
 // inheritance between two generic classes 
 package tctest;
+
+require kermeta
 
 class X {}
 class Y inherits X {}

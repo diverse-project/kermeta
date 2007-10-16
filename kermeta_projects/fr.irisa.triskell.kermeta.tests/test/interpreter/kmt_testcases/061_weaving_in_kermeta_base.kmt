@@ -1,9 +1,10 @@
-/* $Id: 061_weaving_in_kermeta_base.kmt,v 1.2 2007-10-02 15:19:58 ftanguy Exp $ */
+/* $Id: 061_weaving_in_kermeta_base.kmt,v 1.3 2007-10-16 11:49:10 ftanguy Exp $ */
 
 // Type checking on simple control stucts
 
 package weavingtest;
 
+require kermeta
 
 // this file contains the original classes
 class A {

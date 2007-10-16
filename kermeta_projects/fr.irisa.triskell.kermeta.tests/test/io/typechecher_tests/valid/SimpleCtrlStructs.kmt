@@ -1,8 +1,10 @@
-/* $Id: SimpleCtrlStructs.kmt,v 1.1 2007-09-10 08:35:07 cfaucher Exp $ */
+/* $Id: SimpleCtrlStructs.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
 
 // Type checking on simple control stucts
 
 package tctest;
+
+require kermeta
 
 class A {}
 

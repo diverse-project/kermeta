@@ -1,10 +1,11 @@
-/* $Id: 061_weaving_in_kermeta_aspect1.main.kmt,v 1.3 2007-10-03 10:55:49 ftanguy Exp $ */
+/* $Id: 061_weaving_in_kermeta_aspect1.main.kmt,v 1.4 2007-10-16 11:49:10 ftanguy Exp $ */
 
 // Type checking on simple control stucts
 @mainClass "weavingtest::Main"
 @mainOperation "main"
 package weavingtest;
 
+require kermeta
 require "061_weaving_in_kermeta_base.kmt"
 // this file contains the aspect classes 
 

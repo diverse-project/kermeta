@@ -2,6 +2,7 @@
 @mainOperation "operation1"
 package testOpPkgCall;
 
+require kermeta
 require "005_testExternPackageCall.kmt"
 
 // call an operation from another package 

@@ -4,6 +4,7 @@
 
 package testInvariant;
 
+require kermeta
 
 using kermeta::standard
 using kermeta::exceptions

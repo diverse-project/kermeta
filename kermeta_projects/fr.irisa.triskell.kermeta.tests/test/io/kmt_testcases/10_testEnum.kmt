@@ -1,6 +1,6 @@
 package testEnum;
 
-require "kermeta"
+require kermeta
 
 using kermeta::standard
 

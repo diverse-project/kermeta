@@ -1,5 +1,7 @@
 package testLambdaExpressionAsCallFeature;
 
+require kermeta
+
 class Boolean
 {
 }

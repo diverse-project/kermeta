@@ -1,5 +1,7 @@
 package testpackage;
 
+require kermeta
+
 using kermeta::standard
 using kermeta::utils
 

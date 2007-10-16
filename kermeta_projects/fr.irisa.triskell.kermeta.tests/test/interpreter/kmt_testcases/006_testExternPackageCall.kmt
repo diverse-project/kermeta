@@ -1,5 +1,6 @@
 package testExternPackage;
 
+require kermeta
 require "006_testExternPackageCall2.kmt"
 
 alias Integer : kermeta::standard::Integer;

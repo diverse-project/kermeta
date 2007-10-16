@@ -1,6 +1,7 @@
 
 package fsm;
 
+require kermeta
 require "055_MT_FSM_basic_fsm_type.kmt"
 using kermeta::standard
 using kermeta::utils

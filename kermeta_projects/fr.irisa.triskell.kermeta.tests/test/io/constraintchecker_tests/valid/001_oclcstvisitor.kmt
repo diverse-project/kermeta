@@ -1,5 +1,6 @@
 package ocl;
 
+require kermeta
 require "001_super_operations_with_aspects/OCLCST.ecore" 
   
 package cst

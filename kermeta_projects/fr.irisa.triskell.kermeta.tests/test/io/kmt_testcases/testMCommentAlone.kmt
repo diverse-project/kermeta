@@ -1,5 +1,7 @@
 package testMCommentAlone;
 
+require kermeta
+
 class String {}
 class Integer {}
 class Boolean {}

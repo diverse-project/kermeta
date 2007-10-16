@@ -1,6 +1,8 @@
 // Begin
 package testSCommentAlone;
 
+require kermeta
+
 class String {}
 class Integer {}
 class Boolean {}

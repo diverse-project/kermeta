@@ -3,6 +3,8 @@
 
 package opsignature;
 
+require kermeta
+
 using kermeta::standard
 using kermeta::io
 
@@ -100,7 +102,7 @@ class Up
 class Down inherits Up
 {
 	method cv(m : Top) : String is do // parameter cannot be of type Middle due to invariance
-	// m.triggerError() // pour déclencher l'erreur de type
+	// m.triggerError() // pour dï¿½clencher l'erreur de type
 		result := "Down"
 	end
 	method ~inv(m : Middle) : String is do

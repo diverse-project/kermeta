@@ -1,5 +1,6 @@
 package testOpPkgCall;
 
+require kermeta
 require "5_testExternPackageCall.kmt"
 
 // call an operation from another package 

@@ -1,10 +1,12 @@
-/* $Id: ClassSubTypingWithGenericOperations.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $ */
+/* $Id: ClassSubTypingWithGenericOperations.kmt,v 1.3 2007-10-16 11:49:10 ftanguy Exp $ */
 
 // Simple subtyping test for simple 
 // inheritance between two generic classes
 // and generic operations
 
 package tctest;
+
+require kermeta
 
 class X {}
 class Y inherits X {}

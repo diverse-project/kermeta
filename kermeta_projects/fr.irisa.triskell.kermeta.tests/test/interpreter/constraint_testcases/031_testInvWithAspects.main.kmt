@@ -4,6 +4,7 @@
 
 package testInvariant;
 
+require kermeta
 require "030_testInv_fail_catched.main.kmt"
  
 using kermeta::standard

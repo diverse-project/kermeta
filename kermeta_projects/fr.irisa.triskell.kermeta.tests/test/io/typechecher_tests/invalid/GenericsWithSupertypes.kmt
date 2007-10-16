@@ -2,6 +2,8 @@
 
 package tctest;
 
+require kermeta
+
 using kermeta::standard
 
 class OddEven inherits Integer {

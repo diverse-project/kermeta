@@ -1,5 +1,7 @@
 package testSimpleCond;
 
+require kermeta
+
 class String {}
 class Integer {}
 class Boolean {}

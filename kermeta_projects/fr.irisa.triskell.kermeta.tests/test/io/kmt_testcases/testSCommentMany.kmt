@@ -1,5 +1,7 @@
 package testSCommentMany;
 
+require kermeta
+
 class String {}
 class Integer {}
 class Boolean {}

@@ -1,9 +1,11 @@
-/* $Id: 1_ClassSubTyping_1.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $ */
+/* $Id: 1_ClassSubTyping_1.kmt,v 1.3 2007-10-16 11:49:10 ftanguy Exp $ */
 
 // Simple subtyping test for simple 
 // inheritance between two classes
 
 package tctest;
+
+require kermeta
 
 class A {}
 class B inherits A{}

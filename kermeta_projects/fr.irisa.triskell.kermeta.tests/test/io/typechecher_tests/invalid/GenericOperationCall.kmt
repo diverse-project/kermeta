@@ -1,8 +1,10 @@
-/* $Id: GenericOperationCall.kmt,v 1.1 2007-09-10 08:35:08 cfaucher Exp $ */
+/* $Id: GenericOperationCall.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
 
 // Some wrong operation calls involving generics
 
 package tctest;
+
+require kermeta
 
 class List<T> {
 	operation one() : T is do end

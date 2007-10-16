@@ -1,5 +1,6 @@
 package simpleUML_MM;
 
+require kermeta
 require "001_simpleUML_MM.ecore"
 
 using kermeta

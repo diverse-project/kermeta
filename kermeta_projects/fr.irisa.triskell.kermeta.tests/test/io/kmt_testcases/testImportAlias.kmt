@@ -1,5 +1,6 @@
 package testPrimitiveType;
 
+require kermeta
 require "testClass.kmt"
 
 using testClass::package1

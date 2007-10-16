@@ -1,6 +1,7 @@
 package testRequireFramework;
 
 require "http://www.eclipse.org/emf/2002/Ecore"
+require kermeta
 
 using kermeta::language::structure
 

@@ -1,8 +1,10 @@
-/* $Id: SimpleOperationCall.kmt,v 1.1 2007-09-10 08:35:09 cfaucher Exp $ */
+/* $Id: SimpleOperationCall.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $ */
 
 // Simple operation Call
 
 package tctest;
+
+require kermeta
 
 class A {
 

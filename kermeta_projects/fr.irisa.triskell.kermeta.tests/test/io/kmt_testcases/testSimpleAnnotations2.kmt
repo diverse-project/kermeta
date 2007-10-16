@@ -1,5 +1,7 @@
 package testSimpleAnnotations;
 
+require kermeta
+
 /*
  * bonjour les degats
  */
