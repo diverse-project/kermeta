@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.1 2007-10-16 08:22:52 cfaucher Exp $
+-->
+
+<plugin>
+
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "org.kermeta.trek.presentation.TrekModelWizardID"
+      name = "%_UI_TrekModelWizard_label"
+      class = "org.kermeta.trek.presentation.TrekModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/TrekModelFile.gif">
+      <description>%_UI_TrekModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "org.kermeta.trek.presentation.TrekEditorID"
+        name = "%_UI_TrekEditor_label"
+        icon = "icons/full/obj16/TrekModelFile.gif"
+        extensions = "trek"
+        class = "org.kermeta.trek.presentation.TrekEditor" 
+        contributorClass="org.kermeta.trek.presentation.TrekActionBarContributor" >
+    </editor>
+  </extension>    
+</plugin>
