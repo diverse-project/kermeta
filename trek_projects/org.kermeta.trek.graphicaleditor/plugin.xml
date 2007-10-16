@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            class="org.kermeta.trek.graphicaleditor.editor.TrekEditor"
+            icon="icons/Trek.gif"
+            default="true"
+            name="Trek Graphical Editor"
+            id="org.kermeta.trek.graphicaleditor.editor.TrekEditor"
+            contributorClass="org.kermeta.trek.graphicaleditor.actions.TrekEditorActionBarContributor"
+            extensions="trekdi">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.newWizards">
+      <wizard
+            icon="icons/Trek.gif"
+            class="org.kermeta.trek.graphicaleditor.wizards.NewTrekDiagrams"
+            category="org.topcased.facilities.newWizards/org.topcased.modeler.newdiagram"
+            name="Trek Diagram"
+            id="org.kermeta.trek.graphicaleditor.wizards.NewTrekDiagrams">
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+   
+   <extension point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="org.topcased.modeler.perspective">
+         <newWizardShortcut id="org.kermeta.trek.graphicaleditor.wizards.NewTrekDiagrams"/>
+      </perspectiveExtension>
+   </extension>
+   
+   <extension point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.topcased.modeler.preferences.ModelerPreferencePage"
+            class="org.kermeta.trek.graphicaleditor.preferences.TrekPreferencePage"
+            id="org.kermeta.trek.graphicaleditor.preferences.TrekPreferencePage"
+            name="Trek"/>
+   </extension>
+   
+   <extension point="org.topcased.modeler.templates">
+      <template
+            di="templates/diag/%name%.trekdi"
+            model="templates/diag/%name%.trek"
+            name="Trek Graphical Editor"
+            id="org.kermeta.trek.graphicaleditor.templates.diag"
+            editorId="org.kermeta.trek.graphicaleditor.editor.TrekEditor"/>
+   </extension>
+   
+   <extension point="org.topcased.modeler.diagrams">
+      <diagram
+            configuration="org.kermeta.trek.graphicaleditor.diag.TrekConfiguration"
+            id="org.kermeta.trek.graphicaleditor.diag"
+            name="Trek Graphical Editor">
+         <enableFor class="org.kermeta.trek.UseKaseModel"/>
+      </diagram>
+	</extension>
+   
+</plugin>

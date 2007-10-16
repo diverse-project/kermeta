@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmi:id="_BjYuUHtLEdyeVIeg9tVZOw" projectName="org.kermeta.trek.graphicaleditor" name="org.kermeta.trek.graphicaleditor" package="diag" prefix="Trek" forceOverwrite="true" pluginVersion="0.0.1" provider="IRISA / INRIA" samePluginAsEditor="true">
+<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmi:id="_BjYuUHtLEdyeVIeg9tVZOw" projectName="org.kermeta.trek.graphicaleditor" name="Trek Graphical Editor" package="diag" prefix="Trek" forceOverwrite="true" pluginVersion="0.0.1" provider="IRISA / INRIA" samePluginAsEditor="true">
   <palette xmi:id="_7mYu8HtLEdyeVIeg9tVZOw" name="Palette">
     <paletteCategories xmi:id="_Fxa_kHtMEdyeVIeg9tVZOw" name="Category">
       <items xmi:id="_G5_KIHtMEdyeVIeg9tVZOw" name="K Use Case" part="_KYnNIHtMEdyeVIeg9tVZOw"/>
@@ -10,16 +10,16 @@
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_KYnNIHtMEdyeVIeg9tVZOw" object="_AU4eYHtMEdyeVIeg9tVZOw" defaultFont="Tahoma-regular-8" type="Class" layout="ClassLayout"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_LwiCUHtMEdyeVIeg9tVZOw" object="_D7Z5IHtMEdyeVIeg9tVZOw" type="Class" defaultBackgroundColor="128,255,128" layout="ClassLayout"/>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_8ZWc8HtLEdyeVIeg9tVZOw">
-    <genClass href="../model/usekase.genmodel#//org/kermeta/trek/UseKaseModel"/>
+    <genClass href="../model/usekase.genmodel#//trek/UseKaseModel"/>
     <diagrams xmi:id="_9BlhoHtLEdyeVIeg9tVZOw" diagram="_BjYuUHtLEdyeVIeg9tVZOw"/>
   </objects>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_AU4eYHtMEdyeVIeg9tVZOw">
-    <genClass href="../model/usekase.genmodel#//org/kermeta/trek/KUseCase"/>
+    <genClass href="../model/usekase.genmodel#//trek/KUseCase"/>
   </objects>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_D7Z5IHtMEdyeVIeg9tVZOw">
-    <genClass href="../model/usekase.genmodel#//org/kermeta/trek/KTestCase"/>
+    <genClass href="../model/usekase.genmodel#//trek/KTestCase"/>
   </objects>
   <genModel href="../model/usekase.genmodel#/"/>
-  <templateRootObject href="../model/usekase.genmodel#//org/kermeta/trek/UseKaseModel"/>
+  <templateRootObject href="../model/usekase.genmodel#//trek/UseKaseModel"/>
   <editorConfigurator href="usekase.editorconfigurator#_8A4vEHtKEdyeVIeg9tVZOw"/>
 </diagramconfigurator:DiagramConfiguration>

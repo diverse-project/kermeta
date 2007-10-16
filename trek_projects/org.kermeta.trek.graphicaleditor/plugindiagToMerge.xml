@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.topcased.modeler.templates">
+      <template
+            di="templates/diag/%name%.trekdi"
+            model="templates/diag/%name%.trek"
+            name="Trek Graphical Editor"
+            id="org.kermeta.trek.graphicaleditor.templates.diag"
+            editorId="org.kermeta.trek.graphicaleditor.editor.TrekEditor"/>
+   </extension>
+   
+   <extension point="org.topcased.modeler.diagrams">
+      <diagram
+            configuration="org.kermeta.trek.graphicaleditor.diag.TrekConfiguration"
+            id="org.kermeta.trek.graphicaleditor.diag"
+            name="Trek Graphical Editor">
+         <enableFor class="org.kermeta.trek.UseKaseModel"/>
+      </diagram>
+	</extension>
+	
+   
+</plugin>
