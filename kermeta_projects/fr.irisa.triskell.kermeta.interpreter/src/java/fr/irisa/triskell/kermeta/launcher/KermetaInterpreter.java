@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.36 2007-10-01 15:14:29 ftanguy Exp $
+/* $Id: KermetaInterpreter.java,v 1.37 2007-10-16 11:41:28 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -74,7 +74,7 @@ public class KermetaInterpreter {
 	private KermetaUnit unit=null;
 	
 	// The memory of the interpreter
-	RuntimeMemory memory;
+	public RuntimeMemory memory;
 	
 	/** If true, the launch will be preceded by a call to setUp, and followed by tearDown operationnif they exist */
 	public boolean isTestCase = false;
