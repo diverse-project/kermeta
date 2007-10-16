@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.19 2007-10-12 09:20:40 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.20 2007-10-16 11:45:33 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -256,11 +256,15 @@ public class IOPlugin extends AbstractUIPlugin {
 			if ( isFramework )
 				kermetaUnit.setFramework( true );
 			else if ( ! FRAMEWORK_GENERATION ) {
-				kermetaUnit.getImportedKermetaUnits().add( framework );
+				//kermetaUnit.getImportedKermetaUnits().add( framework );
 				if ( uri.matches(".+\\.ecore") ) {
+					kermetaUnit.getImportedKermetaUnits().add( framework );
 					kermetaUnit.importKermetaUnit( ecore, false, true );
 					kermetaUnit.addRequire( ECORE_URI, ecore );	
-				}
+				} else if ( uri.equals( ECORE_URI ) )
+					kermetaUnit.getImportedKermetaUnits().add( framework );
+				else if ( uri.matches("http://.+") )
+					kermetaUnit.getImportedKermetaUnits().add( framework );
 			}
 		}
 		return kermetaUnit;
@@ -369,7 +373,6 @@ public class IOPlugin extends AbstractUIPlugin {
 					if ( importedUnit.getImportedKermetaUnits().contains( kermetaUnit ) )
 						unitToUnload.add( importedUnit );
 			} catch (URIMalformedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			storer.unload(uri);
