@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.20 2007-10-12 09:16:22 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.21 2007-10-16 11:44:43 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -168,9 +168,10 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 				kermetaUnit.setBuildingState( new KmBuildingState() );
 			else if ( extension.equals("jar") )
 				kermetaUnit.setBuildingState( new JavaBuildingState() );
-			else if ( ! EMFRegistryHelper.isRegistered( kermetaUnitURI ) )
-				kermetaUnit.error("Unknown Format. It is impossible to load this file.");
-			else {
+			else if ( ! EMFRegistryHelper.isRegistered( kermetaUnitURI ) ) {
+				kermetaUnit.setBuildingState( new AbstractBuildingState() );
+				kermetaUnit.error("Unknown Format. It is impossible to load this file.\n You may have to register this URI.");
+			} else {
 				Object o = Registry.INSTANCE.get( kermetaUnitURI );
 				if ( o instanceof Package )
 					kermetaUnit.setBuildingState( new KmBuildingState() );
