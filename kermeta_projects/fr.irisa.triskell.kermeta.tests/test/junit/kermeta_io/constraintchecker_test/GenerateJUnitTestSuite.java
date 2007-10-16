@@ -20,8 +20,9 @@ import java.util.Arrays;
  */
 public class GenerateJUnitTestSuite {
 
-
-	protected static String[] folders = {"test/io/constraintchecker_tests/valid", "test/io/constraintchecker_tests/invalid"} ;
+	private static final String io_folder = "test/io/";
+	
+	protected static String[] folders = {io_folder + "constraintchecker_tests/valid", io_folder + "constraintchecker_tests/invalid"} ;
 	protected static String[] filetypes = {"kmt", "emf"};
 	
 	protected static String template = null;
