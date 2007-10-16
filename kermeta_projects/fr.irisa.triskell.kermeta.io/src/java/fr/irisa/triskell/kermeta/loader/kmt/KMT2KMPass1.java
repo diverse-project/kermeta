@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.20 2007-10-12 09:20:40 ftanguy Exp $
+/* $Id: KMT2KMPass1.java,v 1.21 2007-10-16 11:43:41 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : EPL
@@ -104,6 +104,7 @@ public class KMT2KMPass1 extends KMT2KMPass {
 			if ( getAllowedQualifiedIDs().contains(uriRequire) )
 				try {
 					currentImportedUnit = IOPlugin.getDefault().getKermetaUnit( uriRequire );
+					requireEntries.add( new RequireEntry(importStmt, currentImportedUnit, uriRequire));
 				} catch ( URIMalformedException exception ) {
 					builder.error( exception.getMessage() );
 				}
@@ -119,9 +120,10 @@ public class KMT2KMPass1 extends KMT2KMPass {
 				s = s.substring(2, s.length());
 			
 			String fileURI = "";
-			if ( s.equals("kermeta") )
+			if ( s.equals("kermeta") ) {
 				fileURI = s;
-			else {
+				uriRequire = s;
+			} else {
 				
 				if ( ! s.startsWith("platform:/") && ! s.startsWith("http://") && ! s.startsWith("file:") ) {
 					int index = builder.getUri().lastIndexOf("/");
