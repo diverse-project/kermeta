@@ -1,3 +1,13 @@
+/*$Id: GenerateJUnitTestSuite.java,v 1.2 2007-10-16 09:24:37 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.tests
+* File : 	GenerateJUnitTestSuite.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 16 fev. 05
+* Authors : Franck Fleurey <ffleurey@irisa.fr>
+*/
+
 package kermeta_io.test;
 
 import java.io.BufferedReader;
@@ -8,22 +18,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
-/*
- * Created on 16 f�vr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
-
-/**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
- */
 public class GenerateJUnitTestSuite {
 
+	private static final String io_folder = "test/io/";
 
-	protected static String[] folders = {"test/io/ecore_testcases", 
+	protected static String[] folders = {io_folder + "ecore_testcases", 
 										//"test/emfatic_testcases", 
-										"test/io/kmt_testcases"} ;
+										io_folder + "kmt_testcases"} ;
 	protected static String[] filetypes = {"kmt", "emf", "ecore"};
 	
 	protected static String template = null;
