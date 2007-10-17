@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.kermeta.compiler.compileecorecontribution"
+            nameFilter="*.ecore"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+               label="Kermeta"
+               path="additions">
+            <separator name="kermetagroup1"/>
+         </menu>
+         <action
+               class="org.kermeta.compiler.popup.actions.CompileEcoreAction"
+               enablesFor="1"
+               icon="icons/emfCode.png"
+               id="fr.irisa.triskell.kermeta.compiler.CompileEcoreAction"
+               label="Compile Ecore to EMF plugin (experimental)"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+      </objectContribution>
+      <objectContribution
+            id="org.kermeta.compiler.compilekmtcontribution"
+            nameFilter="*.kmt"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+               label="Kermeta"
+               path="additions">
+            <separator name="kermetagroup1"/>
+         </menu>
+         <action
+               class="org.kermeta.compiler.popup.actions.CompileKermetaAction"
+               enablesFor="1"
+               icon="icons/emfCode.png"
+               id="fr.irisa.triskell.kermeta.compiler.CompileKmtAction"
+               label="Compile Kmt to EMF plugin (experimental)"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+      </objectContribution>
+      <objectContribution
+            id="org.kermeta.compiler.compilekmtcontribution"
+            nameFilter="*.km"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+               label="Kermeta"
+               path="additions">
+            <separator name="kermetagroup1"/>
+         </menu>
+         <action
+               class="org.kermeta.compiler.popup.actions.CompileKermetaAction"
+               enablesFor="1"
+               icon="icons/emfCode.png"
+               id="fr.irisa.triskell.kermeta.compiler.CompileKmtAction"
+               label="Compile Km to EMF plugin (experimental)"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
+         </action>
+      </objectContribution>
+   </extension>
+   
+
+</plugin>
