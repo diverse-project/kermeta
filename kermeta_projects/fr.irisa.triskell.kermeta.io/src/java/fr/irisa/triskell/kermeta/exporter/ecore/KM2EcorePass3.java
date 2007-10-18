@@ -1,3 +1,16 @@
+/* $Id: KM2EcorePass3.java,v 1.6 2007-10-18 09:33:22 cfaucher Exp $
+ * Project    : fr.irisa.triskell.kermeta.io
+ * File       : KM2EcorePass3.java
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 11 juil. 2005
+ * Authors : 
+ *        dvojtise <dvojtise@irisa.fr>
+ * Description : 
+ *        Exports KM or KMT to Ecore. 
+ */
+
 package fr.irisa.triskell.kermeta.exporter.ecore;
 
 import java.util.Hashtable;

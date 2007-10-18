@@ -1,6 +1,6 @@
-/* $Id: KM2EcorePass1.java,v 1.51 2007-10-18 09:30:50 cfaucher Exp $
+/* $Id: KM2EcorePass1.java,v 1.52 2007-10-18 09:33:22 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
- * File       : KM2EcoreExporter.java
+ * File       : KM2EcorePass1.java
  * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
@@ -10,6 +10,7 @@
  * Description : 
  *        Exports KM or KMT to Ecore. 
  */
+
 package fr.irisa.triskell.kermeta.exporter.ecore;
 
 
@@ -54,7 +55,6 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Using;
 import fr.irisa.triskell.kermeta.loader.ecore.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
