@@ -1,6 +1,6 @@
 
 
-/*$Id: Merger.java,v 1.2 2007-10-18 11:50:58 cfaucher Exp $
+/*$Id: Merger.java,v 1.3 2007-10-18 16:13:33 khpts Exp $
 * Project : org.kermeta.merger
 * File : 	Merger.java
 * License : EPL
@@ -61,6 +61,12 @@ public class Merger {
 				s += unit.getUri().substring(i+1, j);
 			}
 		}
+		
+
+		if ( s.length() > 14*4 ) {
+			s = s.substring(0, 14*4);
+		}
+		
 		if ( setPath )
 			return path + "/" + s + ".km";
 		else
