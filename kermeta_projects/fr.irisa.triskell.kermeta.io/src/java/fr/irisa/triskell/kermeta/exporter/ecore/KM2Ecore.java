@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.42 2007-10-12 09:17:22 ftanguy Exp $
+/* $Id: KM2Ecore.java,v 1.43 2007-10-18 15:35:05 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -92,6 +92,7 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
     	//primitive_types_mapping.put("kermeta::standard::Character",	"java.lang.Character");
     	primitive_types_mapping.put("kermeta::language::structure::Integer",	"java.lang.Integer");
     	primitive_types_mapping.put("kermeta::language::structure::Boolean",	"boolean");
+    	primitive_types_mapping.put("kermeta::standard::Boolean",	"java.lang.Boolean");
     	//primitive_types_mapping.put("kermeta::standard::Boolean",	"java.lang.Boolean");
     	primitive_types_mapping.put("kermeta::language::structure::String",	"java.lang.String");
     	primitive_types_mapping.put("kermeta::standard::Object",	"java.lang.Object");
