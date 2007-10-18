@@ -1,4 +1,4 @@
-/* $Id: KM2JavaPrettyPrinter.java,v 1.1 2007-10-17 08:56:19 cfaucher Exp $
+/* $Id: KM2JavaPrettyPrinter.java,v 1.2 2007-10-18 09:38:28 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : KM2JavaPrettyPrinter.java
  * License   : EPL
@@ -21,6 +21,7 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.checker.KermetaUnitChecker;
@@ -860,7 +861,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 			String allPackages_label = localType.substring(0, localType.length()-name[name.length-1].length());
 			
 			if(name.length>=2) {
-				text = " = " + allPackages_label + CompilerUtil.upperCaseFirstLetter(name[name.length-2]) +"Factory.eINSTANCE.create" + name[name.length-1] + "()";
+				text = " = " + allPackages_label + CodeGenUtil.capName(name[name.length-2]) +"Factory.eINSTANCE.create" + name[name.length-1] + "()";
 			}
 		}
 

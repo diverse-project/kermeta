@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.1 2007-10-17 08:56:19 cfaucher Exp $
+/* $Id: Compiler.java,v 1.2 2007-10-18 09:38:27 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 //import org.eclipse.emf.codegen.ecore.Generator;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -25,6 +26,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import org.kermeta.compiler.util.CompilerUtil;
@@ -92,7 +94,17 @@ public class Compiler extends Generator {
 				setGenModelParameters(genModel);
 				
 				// May be add the GenPackage in the list of canGenerate() Package
-				genModel.getAllUsedGenPackagesWithClassifiers().addAll(genModel.getGenPackages());
+				//genModel.getAllUsedGenPackagesWithClassifiers().addAll(genModel.getGenPackages());
+
+				
+				for( GenPackage genpack : genModel.getGenPackages() ) {
+					System.out.println("GenPackages: " + genpack.getNSName());
+					if(genpack.getNSName().equals("kermeta")) {
+						//genModel.getGenPackages().remove(genpack);
+					}
+				}
+				
+				System.out.println("Number of GenPackages: " + genModel.getGenPackages().size());
 	
 				// Saving the *.genmodel before the generation of plugins
 				genModelResource.save(Collections.EMPTY_MAP);
@@ -144,7 +156,7 @@ public class Compiler extends Generator {
 	 * @param genModel generated GenModel that is used to generate plugins
 	 */
 	private void setGenModelParameters(GenModel genModel) {
-		genModel.setModelName(CompilerUtil.upperCaseFirstLetter(genModel.getModelName()));
+		genModel.setModelName(CodeGenUtil.capName(genModel.getModelName()));
 		genModel.setModelPluginID(compiledPluginId);
 		// Model and edit sources are generated in the same plugin and in the same source folder
 		genModel.setModelDirectory("/" + compiledPluginId + "/src");
