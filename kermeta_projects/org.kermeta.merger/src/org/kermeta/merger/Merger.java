@@ -1,13 +1,13 @@
 
 
-/*$Id: Merger.java,v 1.1 2007-10-01 15:07:49 ftanguy Exp $
+/*$Id: Merger.java,v 1.2 2007-10-18 11:50:58 cfaucher Exp $
 * Project : org.kermeta.merger
 * File : 	Merger.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 20 sept. 07
-* Authors : paco
+* Authors : paco <ftanguy@irisa.fr>
 */
 
 package org.kermeta.merger;
@@ -78,6 +78,18 @@ public class Merger {
 	}
 	
 	public void process(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile) throws URIMalformedException, IOException {
+		
+		processInMemory(kermetaUnitsToMerge, outputFile);
+		
+		URI uri = URI.createURI( kermetaUnit.getUri() );
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Resource resource = resourceSet.createResource(uri);
+		
+		resource.getContents().add( kermetaUnit.getModelingUnit() );
+		resource.save(null);
+	}
+	
+	public KermetaUnit processInMemory(Set<KermetaUnit> kermetaUnitsToMerge, String outputFile) throws URIMalformedException, IOException {
 		IOPlugin.getDefault().unload(outputFile);
 		kermetaUnit = IOPlugin.getDefault().basicGetKermetaUnit(outputFile);
 		
@@ -145,13 +157,8 @@ public class Merger {
 			
 		for ( Package p : kermetaUnit.getPackages() )
 			fixTypeContainement(p);
-		
-		URI uri = URI.createURI( kermetaUnit.getUri() );
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.createResource(uri);
-		
-		resource.getContents().add( kermetaUnit.getModelingUnit() );
-		resource.save(null);
+
+		return kermetaUnit;
 	}
 	
 	/**
