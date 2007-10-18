@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.50 2007-09-05 09:35:17 cfaucher Exp $
+/* $Id: KM2EcorePass1.java,v 1.51 2007-10-18 09:30:50 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -154,6 +154,12 @@ public class KM2EcorePass1 extends KM2Ecore {
 		
 		EPackage newEPackage = EcoreFactory.eINSTANCE.createEPackage();
 		newEPackage.setNsPrefix(current_name);
+		
+		// Reset the current_path when we deal a new root packages
+		if ( node.eContainer() instanceof ModelingUnit ) {
+			current_ppath = current_name;
+		}
+		
 		newEPackage.setNsURI(ecoreResource.getURI().toString() + (node==currentPackage?"":"#/") + current_ppath);
 		
 		// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
