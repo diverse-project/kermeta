@@ -1,4 +1,4 @@
-<!-- $Id: test_interpreter_build.xml,v 1.6 2007-10-12 13:10:36 dvojtise Exp $ -->
+<!-- $Id: test_interpreter_build.xml,v 1.7 2007-10-19 13:07:24 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
@@ -49,6 +49,10 @@
 	<property name="ui.workbench.jar" location="${eclipse.home}/plugins/org.eclipse.ui.workbench_3.3.0.I20070608-1100.jar" />
 	<property name="jface.jar" location="${eclipse.home}/plugins/org.eclipse.jface_3.3.0.I20070606-0010.jar" />
 	<property name="swt.jar" location="${eclipse.home}/plugins/org.eclipse.swt.gtk.linux.x86_3.3.0.v3346.jar" />
+	<property name="emf.compare.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare_0.8.0.v200710050855.jar" />
+	<property name="emf.compare.diff.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.diff_0.8.0.v200710050855.jar" />
+		
+	
 	<path id="interpreter.class.path">
 		<pathelement location="${kermeta.model.jar}" />
 		<pathelement location="${kermeta.interpreter.jar}" />
@@ -61,6 +65,8 @@
 		<pathelement location="${emf.ecore.jar}" />
 		<pathelement location="${emf.ecore.xmi.jar}" />
 		<pathelement location="${emf.validation.jar}" />
+		<pathelement location="${emf.compare.jar}" />
+		<pathelement location="${emf.compare.diff.jar}" />
 		<pathelement location="${equinox.common.jar}" />
 		<pathelement location="${equinox.registry.jar}" />
 		<pathelement location="${equinox.preferences.jar}" />
