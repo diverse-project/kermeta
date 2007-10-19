@@ -1,10 +1,9 @@
 package org;
    require kermeta
-   require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
-   //require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersMerged.kmt"   
-   require "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore" 
-   require "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"     
-  
+   require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersMerged.kmt"
+   require "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
+   require "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"
+
    using kermeta::standard
    using kermeta::utils
    using patternframework
@@ -16,7 +15,7 @@ package org;
    { 
        	package core
     	{ 
-   			@aspect "true"
+/*   		@aspect "true"
      		class Adapter{
 				operation initConvert() : Void is do
 					stdio.write("Mapping MM' to MM...")
@@ -26,8 +25,8 @@ package org;
 					stdio.writeln("OK!")
 				end
 			}
-							
-/*			class FSMAdapter inherits Adapter{
+*/							
+			class FSMAdapter inherits Adapter{
 				method initConvert() : Void is do
 					stdio.write("Mapping MM' to MM...")
 					convert.put(pattern::FSM::State,FSM::State)
@@ -35,15 +34,15 @@ package org;
 					convert.put(pattern::FSM::Fsm,FSM::Fsm)
 					stdio.writeln("OK!")
 				end
-			}*/
+			}
 		}
 	package adaptations{
 	
 class createState inherits createAdaptation{
-	reference  newState : pattern::FSM::State
- 
+	attribute newState:pattern::FSM::State
+
 	method check() : Boolean is do
-		result:=(newState != void) 
+		result:=(newState!=void)
 	end
 
 	method execute() is do
@@ -52,7 +51,7 @@ class createState inherits createAdaptation{
 			realState?=Object.clone(newState)//adapter.converter.convert(Object.clone(newState), adapter.convert)
 			adapter.created.put(newState,realState)
 			else
-			var clone:Boolean init false 
+			var clone:Boolean init false
 			if(isUnique==uniqueType.non_unique) then
 				var input:String init stdio.read("clone "+newState.toString+" (true/false) :")
 				clone:=input.toBoolean

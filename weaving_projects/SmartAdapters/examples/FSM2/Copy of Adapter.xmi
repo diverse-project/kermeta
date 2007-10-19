@@ -35,14 +35,7 @@
     <aFsm href="templateFsm.xmi#/"/>
     <atransitions href="templateFsm.xmi#//@transitions.0"/>
   </adapt>
-  <adapt xsi:type="adaptations:createTransition" name="">
-    <newTransition/>
-  </adapt>
-  <adapt xsi:type="adaptations:setTransition" asource="//@adapt.1/@realState" atarget="//@adapt.0/@realState">
-    <aTransition href="templateFsm.xmi#//@transitions.0"/>
-  </adapt>
   <adapt xsi:type="adaptations:setFsm" astates="//@adapt.0/@realState //@adapt.1/@realState">
     <aFsm href="templateFsm.xmi#/"/>
-    <atransitions href="templateFsm.xmi#//@transitions.0"/>
   </adapt>
 </core:Adapter>

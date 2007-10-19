@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.4 2007-10-19 09:06:03 bmorin Exp $
+/* $Id: genericSmartAdaptersMerged.kmt,v 1.1 2007-10-19 09:06:03 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -7,8 +7,9 @@
 
 package org;
 
-require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.kmt"
-require "../../program/weaving/converter.kmt"
+require "platform:/resource/SmartAdapters/program/weaving/converter.kmt"
+//require "http://www.eclipse.org/emf/2002/Ecore" 
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
 
 using kermeta::standard
 using kermeta::utils
@@ -17,16 +18,19 @@ using kermeta::exceptions
 using patternframework
 using org::smartadapters::core
 using org::smartadapters::extension
-using ecore
+//using ecore
 using utils
 
 package smartadapters
 {
 	package core
 	{
-		@aspect "true"
-		class Adapter
+		abstract class Adapter
 		{	
+		
+			attribute aspect : Aspect[1..1]
+			attribute adapt : Adaptation[0..*]#adapter
+			attribute name : String	
 			/**
 			key : aspect element
 			value : associated clone
@@ -37,6 +41,7 @@ package smartadapters
 			attribute convert : Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>
 			attribute created : Hashtable<Object, Object>
 			attribute converter : Converter
+			
 			
 			operation initConvert() : Void is abstract
 			
@@ -54,8 +59,6 @@ package smartadapters
 			initClone must be called before the first binding
 			*/
 			operation initClone() is do
-				converter:=Converter.new
-				convert:=Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new
 				clone:=Hashtable<Object, Object>.new
 				cloned:=Set<Object>.new
 				created:=Hashtable<Object, Object>.new
@@ -126,8 +129,40 @@ package smartadapters
 				end		
 			end
 		}
-		
-/*		abstract class cloneAdaptation inherits Adaptation
+
+		class Aspect
+		{ 
+			attribute template : ModelPattern[0..1]
+			
+			attribute structure : PModel[1..1]
+			
+			/**
+			persistent refers to aspectual PObject that must not be
+			cloned between two bindings
+			TODO : contraints...
+			*/
+			reference persistent : PObject[0..*]
+			
+		}
+
+
+		abstract class Adaptation inherits AdapterElement
+		{
+			reference adapter : Adapter[1..1]#adapt			
+			
+			operation check() : Boolean
+				is abstract
+			
+			/**
+			Execute the adaptation for a given binding
+			Sub-classes must implement this method
+			*/		         
+			operation execute() : Void
+				pre checking is check 
+				is abstract
+
+		}		
+		abstract class cloneAdaptation inherits Adaptation
 		{
 			attribute isUnique : uniqueType
 		}
@@ -146,14 +181,44 @@ package smartadapters
 		{
 		
 		}
-*/		
+		class makeUnique inherits Adaptation
+		{
+			reference element : PObject[1..1]
+			
+			method check() : Boolean is do
+				var res:Boolean init false
+				if(adapter.aspect.structure!=void)then
+					if(adapter.aspect.structure.content!=void) then
+						res:=(element!=void and adapter.aspect.structure.content.contains(element))
+					end			
+				end
+				result:=res
+			end
+			
+			method execute() : Void is do
+				adapter.aspect.persistent.add(element)
+			end
+		}
+		
+		enumeration uniqueType{unique; non_unique; onDemand;}		
 	}
 	
 	package extension
 	{
-		@aspect "true"
+		class AdapterElement
+		{
+			attribute name : String
+
+			attribute isOptional : Boolean
+
+		}
+			
 		class DerivableAdapter inherits Adapter
 		{
+		
+			attribute alternatives : EntityAlternative[0..*]
+			attribute constraints : Constraint[0..*]#adapter
+			
 			operation resolve(derivation:Derivation):Adapter is do
 				var adapter:DerivableAdapter init DerivableAdapter.new
 				var isChecked:Boolean init true
@@ -201,7 +266,7 @@ package smartadapters
 								addAlternative(d,alt)
 							else
 								var conj:EntityConjunction
-								conj?=c
+								conj:=c
 								if(conj!=void) then
 									addConjunction(d,conj)
 								end
@@ -243,10 +308,69 @@ package smartadapters
 			end
 
 			
-			operation isConcretizable() : ecore::EBoolean is do
+			operation isConcretizable() : Boolean is do
 				result:=(alternatives.size==0)
 			end			
 		}
+		
+				class EntityAlternative inherits AdapterElement
+		{			
+			reference xor : AdapterElement[0..*]	
+		}
+		
+		
+		class EntityConjunction inherits AdapterElement
+		{
+			reference ~and : AdapterElement[0..*]
+
+		}
+		
+		abstract class Constraint
+		{
+			reference adapter:DerivableAdapter[1..1]#constraints
+			
+			operation check(d:Derivation): Boolean is abstract
+		}
+		
+		class MutualExclusion inherits Constraint
+		{
+			reference entities : AdapterElement[2..*]
+			
+			method check(d:Derivation): Boolean is do
+				var c:Set<AdapterElement> init Set<AdapterElement>.new
+				c.addAll(d.selectedOptions)
+				d.elements.each{e | c.add(e.selectedVariant)}
+				result:=c.intersection(entities).size<=1
+			end
+		}
+		
+		class Dependency inherits Constraint
+		{
+			reference source : AdapterElement[1..1]
+			
+			reference dependencies : AdapterElement[1..*]
+
+			method check(d:Derivation): Boolean is do
+				var c:Collection<AdapterElement> init Set<AdapterElement>.new
+				c.addAll(d.selectedOptions)
+				d.elements.each{e | c.add(e.selectedVariant)}
+				result:=not(c.contains(source)) or c.containsAll(self.dependencies)
+			end			
+		}
+
+		class Derivation
+		{
+			reference elements : DerivationElement[0..*]
+			
+			reference selectedOptions : AdapterElement[0..*]
+		}
+		
+		class DerivationElement
+		{
+			reference alternative:EntityAlternative[1..1]
+			
+			reference selectedVariant:AdapterElement[1..1]
+		}			
 		
 		class NonApplicableDerivation inherits kermeta::exceptions::Exception {
 			operation display() is do

@@ -1,4 +1,4 @@
-/* $Id: weaver4FSMs.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+/* $Id: weaver4FSMs.kmt,v 1.2 2007-10-19 09:06:03 bmorin Exp $
  * Creation date: June 13, 2007
  * License:
  * Copyright:
@@ -11,4 +11,4 @@
 package weaver;
 
 require "./weaver.kmt"
-require "platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.kmt"
+require "platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.kmt" 

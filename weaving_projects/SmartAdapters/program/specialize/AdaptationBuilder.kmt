@@ -1,4 +1,4 @@
-/* $Id: AdaptationBuilder.kmt,v 1.4 2007-08-24 14:38:31 bmorin Exp $
+/* $Id: AdaptationBuilder.kmt,v 1.5 2007-10-19 09:06:03 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -20,7 +20,7 @@ using EcoreHelpers
 using kermeta::standard
 using kermeta::utils
 using kermeta::persistence
-using kermeta::reflection
+using kermeta::reflection 
 using kermeta::io
 
 class AdaptationBuilder

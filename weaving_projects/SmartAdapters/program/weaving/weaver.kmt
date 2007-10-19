@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.3 2007-08-24 14:38:31 bmorin Exp $
+/* $Id: weaver.kmt,v 1.4 2007-10-19 09:06:03 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -12,13 +12,13 @@ package weaver;
 require kermeta
 
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
+//require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersMerged.kmt"
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
-//require "platform:/resource/SmartAdapters/examples/EcoreHelper.kmt"
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/PatternMatchingFlora2.kmt"
 
 using ecore
 using EcoreHelpers
-using kermeta::standard
+using kermeta::standard 
 using kermeta::utils
 using kermeta::persistence
 using patternframework
@@ -51,17 +51,24 @@ class Weaver
 		var inputAdapter:Set<Object> init loadModel(repository, adapterUri, adaptMMUri)
 
 		var adapter:Adapter
-		adapter?=inputAdapter.select{o | Adapter.isInstance(o)}.first
+		inputAdapter.each{o | 
+							var temp:Adapter
+							temp?=o
+							if(temp!=void) then
+								adapter:=temp
+							end
+						}
+		//adapter?=inputAdapter.select{o | Adapter.isInstance(o)}.first
 		stdio.writeln(" OK!")
 
 		stdio.write("Checking adaptations...")
 		var isChecked:EBoolean init true
 		adapter.adapt.each{a | isChecked:=(isChecked and a.check)}
 		
-		//if (adapter.adapt.size>0 and isChecked) then
+		if (adapter.adapt.size>0 and isChecked) then
 			stdio.writeln(" OK!")
-			//adapter.initConvert
-			adapter.initClone		
+			adapter.initClone
+			adapter.initConvert
 			if (adapter.aspect.template!=void) then
 				/*---Pattern matching---*/
 				stdio.writeln("Searching base model elements matching template...")
@@ -113,11 +120,11 @@ class Weaver
 			*/
 			stdio.writeln("Saving Result")
 			saveModel(inputModel, resultUri, domainMMUri)		
-		/*else
+		else
 			var e:WeaverException init WeaverException.new
 			e.display
 			raise e
-		end*/		
+		end		
 	end
 
     operation loadModel(repository : EMFRepository, modelPath : String, metamodelPath : String) : Set<kermeta::standard::Object> is do                   

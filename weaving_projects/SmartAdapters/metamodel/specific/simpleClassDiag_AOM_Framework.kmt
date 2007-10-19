@@ -35,11 +35,11 @@ end
 	attribute isUnique:Boolean
 	attribute newNamedElement:pattern::ClassMM::NamedElement
 
-	operation check() : Boolean is do
+	method check() : Boolean is do
 		result:=(newNamedElement!=void)
 	end
 
-	operation execute() is do
+	method execute() is do
 		if(adapter.created.getValue(newNamedElement)==void or not(isUnique)) then
 			var realNamedElement:ClassMM::NamedElement
 			realNamedElement?=adapter.converter.convert(Object.clone(newNamedElement), adapter.convert)

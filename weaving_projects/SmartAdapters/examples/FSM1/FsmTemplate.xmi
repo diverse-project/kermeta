@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<FSM:Fsm xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:FSM="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMMPattern.ecore/FSM" xsi:schemaLocation="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMMPattern.ecore/FSM ../../metamodel/domain/FSMMMPattern.ecore#//FSM">
-  <states name="any"/>
-</FSM:Fsm>
