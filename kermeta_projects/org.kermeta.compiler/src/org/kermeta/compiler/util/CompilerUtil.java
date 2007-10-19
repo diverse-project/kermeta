@@ -1,4 +1,4 @@
-/* $Id: CompilerUtil.java,v 1.2 2007-10-18 09:38:28 cfaucher Exp $
+/* $Id: CompilerUtil.java,v 1.3 2007-10-19 16:34:13 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompilerUtil.java
  * License   : EPL
@@ -21,6 +21,11 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
  */
 public class CompilerUtil {
 
+	/**
+	 * 
+	 * Fix the prefix of all the EPackages contained by a GenModel
+	 * @param genModel
+	 */
 	public static void ePackagePrefixFixer(GenModel genModel) {
 		for (Iterator<GenPackage> it_genpack = genModel.getAllGenPackagesWithClassifiers().iterator(); it_genpack.hasNext();) {
 			GenPackage _genPackage = it_genpack.next();
