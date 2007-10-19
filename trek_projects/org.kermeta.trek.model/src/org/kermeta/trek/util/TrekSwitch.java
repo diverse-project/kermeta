@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekSwitch.java,v 1.2 2007-10-16 08:20:34 cfaucher Exp $
+ * $Id: TrekSwitch.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
  */
 package org.kermeta.trek.util;
 
@@ -96,24 +96,34 @@ public class TrekSwitch<T> {
 			case TrekPackage.KUSE_CASE: {
 				KUseCase kUseCase = (KUseCase)theEObject;
 				T result = caseKUseCase(kUseCase);
+				if (result == null) result = caseTrekModelElement(kUseCase);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrekPackage.KTEST_CASE: {
 				KTestCase kTestCase = (KTestCase)theEObject;
 				T result = caseKTestCase(kTestCase);
+				if (result == null) result = caseTrekModelElement(kTestCase);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrekPackage.KUSER_STORY: {
 				KUserStory kUserStory = (KUserStory)theEObject;
 				T result = caseKUserStory(kUserStory);
+				if (result == null) result = caseTrekModelElement(kUserStory);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrekPackage.KTAG_ELEMENT: {
 				KTagElement kTagElement = (KTagElement)theEObject;
 				T result = caseKTagElement(kTagElement);
+				if (result == null) result = caseTrekModelElement(kTagElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TrekPackage.TREK_MODEL_ELEMENT: {
+				TrekModelElement trekModelElement = (TrekModelElement)theEObject;
+				T result = caseTrekModelElement(trekModelElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -193,6 +203,21 @@ public class TrekSwitch<T> {
 	 * @generated
 	 */
 	public T caseKTagElement(KTagElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTrekModelElement(TrekModelElement object) {
 		return null;
 	}
 

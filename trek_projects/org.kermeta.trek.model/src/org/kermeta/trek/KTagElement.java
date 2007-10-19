@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KTagElement.java,v 1.2 2007-10-16 08:20:33 cfaucher Exp $
+ * $Id: KTagElement.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
  */
 package org.kermeta.trek;
 
@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface KTagElement extends EObject {
+public interface KTagElement extends TrekModelElement {
 	/**
 	 * Returns the value of the '<em><b>Concept</b></em>' attribute.
 	 * The default value is <code>""</code>.

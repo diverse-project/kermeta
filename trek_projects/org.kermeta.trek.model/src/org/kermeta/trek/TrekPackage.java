@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekPackage.java,v 1.2 2007-10-16 08:20:33 cfaucher Exp $
+ * $Id: TrekPackage.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
  */
 package org.kermeta.trek;
 
@@ -116,6 +116,25 @@ public interface TrekPackage extends EPackage {
 	int USE_KASE_MODEL_FEATURE_COUNT = 4;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.trek.impl.TrekModelElementImpl <em>Model Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.trek.impl.TrekModelElementImpl
+	 * @see org.kermeta.trek.impl.TrekPackageImpl#getTrekModelElement()
+	 * @generated
+	 */
+	int TREK_MODEL_ELEMENT = 5;
+
+	/**
+	 * The number of structural features of the '<em>Model Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TREK_MODEL_ELEMENT_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.kermeta.trek.impl.KUseCaseImpl <em>KUse Case</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -132,7 +151,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE__NAME = 0;
+	int KUSE_CASE__NAME = TREK_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -141,7 +160,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE__ID = 1;
+	int KUSE_CASE__ID = TREK_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Summary</b></em>' attribute.
@@ -150,7 +169,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE__SUMMARY = 2;
+	int KUSE_CASE__SUMMARY = TREK_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Short Summary</b></em>' attribute.
@@ -159,7 +178,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE__SHORT_SUMMARY = 3;
+	int KUSE_CASE__SHORT_SUMMARY = TREK_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Use</b></em>' reference list.
@@ -168,7 +187,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE__USE = 4;
+	int KUSE_CASE__USE = TREK_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Used By</b></em>' reference list.
@@ -177,7 +196,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE__USED_BY = 5;
+	int KUSE_CASE__USED_BY = TREK_MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Verified By</b></em>' reference list.
@@ -186,7 +205,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE__VERIFIED_BY = 6;
+	int KUSE_CASE__VERIFIED_BY = TREK_MODEL_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Refines</b></em>' reference.
@@ -195,7 +214,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE__REFINES = 7;
+	int KUSE_CASE__REFINES = TREK_MODEL_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Refined By</b></em>' reference list.
@@ -204,7 +223,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE__REFINED_BY = 8;
+	int KUSE_CASE__REFINED_BY = TREK_MODEL_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Covers</b></em>' reference list.
@@ -213,7 +232,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE__COVERS = 9;
+	int KUSE_CASE__COVERS = TREK_MODEL_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Level</b></em>' attribute.
@@ -222,7 +241,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE__LEVEL = 10;
+	int KUSE_CASE__LEVEL = TREK_MODEL_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' reference list.
@@ -231,7 +250,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE__TAGS = 11;
+	int KUSE_CASE__TAGS = TREK_MODEL_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>KUse Case</em>' class.
@@ -240,7 +259,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE_FEATURE_COUNT = 12;
+	int KUSE_CASE_FEATURE_COUNT = TREK_MODEL_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.trek.impl.KTestCaseImpl <em>KTest Case</em>}' class.
@@ -259,7 +278,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KTEST_CASE__VERIFIES = 0;
+	int KTEST_CASE__VERIFIES = TREK_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Test Case</b></em>' attribute.
@@ -268,7 +287,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KTEST_CASE__TEST_CASE = 1;
+	int KTEST_CASE__TEST_CASE = TREK_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' attribute.
@@ -277,7 +296,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KTEST_CASE__FILE = 2;
+	int KTEST_CASE__FILE = TREK_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>KTest Case</em>' class.
@@ -286,7 +305,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KTEST_CASE_FEATURE_COUNT = 3;
+	int KTEST_CASE_FEATURE_COUNT = TREK_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.trek.impl.KUserStoryImpl <em>KUser Story</em>}' class.
@@ -305,7 +324,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSER_STORY__COVERED_BY = 0;
+	int KUSER_STORY__COVERED_BY = TREK_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -314,7 +333,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSER_STORY__NAME = 1;
+	int KUSER_STORY__NAME = TREK_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -323,7 +342,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSER_STORY__ID = 2;
+	int KUSER_STORY__ID = TREK_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Summary</b></em>' attribute.
@@ -332,7 +351,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSER_STORY__SUMMARY = 3;
+	int KUSER_STORY__SUMMARY = TREK_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Short Summary</b></em>' attribute.
@@ -341,7 +360,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSER_STORY__SHORT_SUMMARY = 4;
+	int KUSER_STORY__SHORT_SUMMARY = TREK_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>KUser Story</em>' class.
@@ -350,7 +369,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KUSER_STORY_FEATURE_COUNT = 5;
+	int KUSER_STORY_FEATURE_COUNT = TREK_MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.trek.impl.KTagElementImpl <em>KTag Element</em>}' class.
@@ -369,7 +388,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KTAG_ELEMENT__CONCEPT = 0;
+	int KTAG_ELEMENT__CONCEPT = TREK_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -378,7 +397,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KTAG_ELEMENT__NAME = 1;
+	int KTAG_ELEMENT__NAME = TREK_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>KTag Element</em>' class.
@@ -387,7 +406,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KTAG_ELEMENT_FEATURE_COUNT = 2;
+	int KTAG_ELEMENT_FEATURE_COUNT = TREK_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.trek.KUseLevel <em>KUse Level</em>}' enum.
@@ -397,7 +416,7 @@ public interface TrekPackage extends EPackage {
 	 * @see org.kermeta.trek.impl.TrekPackageImpl#getKUseLevel()
 	 * @generated
 	 */
-	int KUSE_LEVEL = 5;
+	int KUSE_LEVEL = 6;
 
 
 	/**
@@ -737,6 +756,16 @@ public interface TrekPackage extends EPackage {
 	EAttribute getKTagElement_Name();
 
 	/**
+	 * Returns the meta object for class '{@link org.kermeta.trek.TrekModelElement <em>Model Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Element</em>'.
+	 * @see org.kermeta.trek.TrekModelElement
+	 * @generated
+	 */
+	EClass getTrekModelElement();
+
+	/**
 	 * Returns the meta object for enum '{@link org.kermeta.trek.KUseLevel <em>KUse Level</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1025,6 +1054,16 @@ public interface TrekPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute KTAG_ELEMENT__NAME = eINSTANCE.getKTagElement_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.trek.impl.TrekModelElementImpl <em>Model Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.trek.impl.TrekModelElementImpl
+		 * @see org.kermeta.trek.impl.TrekPackageImpl#getTrekModelElement()
+		 * @generated
+		 */
+		EClass TREK_MODEL_ELEMENT = eINSTANCE.getTrekModelElement();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.trek.KUseLevel <em>KUse Level</em>}' enum.

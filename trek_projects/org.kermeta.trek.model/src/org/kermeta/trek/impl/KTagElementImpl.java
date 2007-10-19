@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KTagElementImpl.java,v 1.2 2007-10-16 08:20:33 cfaucher Exp $
+ * $Id: KTagElementImpl.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -30,7 +30,7 @@ import org.kermeta.trek.TrekPackage;
  *
  * @generated
  */
-public class KTagElementImpl extends EObjectImpl implements KTagElement {
+public class KTagElementImpl extends TrekModelElementImpl implements KTagElement {
 	/**
 	 * The default value of the '{@link #getConcept() <em>Concept</em>}' attribute.
 	 * <!-- begin-user-doc -->

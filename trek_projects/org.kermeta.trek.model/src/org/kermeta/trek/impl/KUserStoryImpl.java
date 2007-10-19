@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KUserStoryImpl.java,v 1.2 2007-10-16 08:20:33 cfaucher Exp $
+ * $Id: KUserStoryImpl.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -43,7 +43,7 @@ import org.kermeta.trek.TrekPackage;
  *
  * @generated
  */
-public class KUserStoryImpl extends EObjectImpl implements KUserStory {
+public class KUserStoryImpl extends TrekModelElementImpl implements KUserStory {
 	/**
 	 * The cached value of the '{@link #getCoveredBy() <em>Covered By</em>}' reference list.
 	 * <!-- begin-user-doc -->

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekPackageImpl.java,v 1.2 2007-10-16 08:20:33 cfaucher Exp $
+ * $Id: TrekPackageImpl.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -20,6 +20,7 @@ import org.kermeta.trek.KUseCase;
 import org.kermeta.trek.KUseLevel;
 import org.kermeta.trek.KUserStory;
 import org.kermeta.trek.TrekFactory;
+import org.kermeta.trek.TrekModelElement;
 import org.kermeta.trek.TrekPackage;
 import org.kermeta.trek.UseKaseModel;
 
@@ -64,6 +65,13 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * @generated
 	 */
 	private EClass kTagElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass trekModelElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -424,6 +432,15 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTrekModelElement() {
+		return trekModelElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getKUseLevel() {
 		return kUseLevelEEnum;
 	}
@@ -492,6 +509,8 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 		createEAttribute(kTagElementEClass, KTAG_ELEMENT__CONCEPT);
 		createEAttribute(kTagElementEClass, KTAG_ELEMENT__NAME);
 
+		trekModelElementEClass = createEClass(TREK_MODEL_ELEMENT);
+
 		// Create enums
 		kUseLevelEEnum = createEEnum(KUSE_LEVEL);
 	}
@@ -524,6 +543,10 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		kUseCaseEClass.getESuperTypes().add(this.getTrekModelElement());
+		kTestCaseEClass.getESuperTypes().add(this.getTrekModelElement());
+		kUserStoryEClass.getESuperTypes().add(this.getTrekModelElement());
+		kTagElementEClass.getESuperTypes().add(this.getTrekModelElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(useKaseModelEClass, UseKaseModel.class, "UseKaseModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -561,6 +584,8 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 		initEClass(kTagElementEClass, KTagElement.class, "KTagElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getKTagElement_Concept(), ecorePackage.getEString(), "concept", "", 1, 1, KTagElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKTagElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, KTagElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(trekModelElementEClass, TrekModelElement.class, "TrekModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(kUseLevelEEnum, KUseLevel.class, "KUseLevel");

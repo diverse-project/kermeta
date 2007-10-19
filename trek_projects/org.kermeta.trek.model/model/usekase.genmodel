@@ -48,5 +48,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//KTagElement/concept"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//KTagElement/name"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="usekase.ecore#//TrekModelElement"/>
   </genPackages>
 </genmodel:GenModel>

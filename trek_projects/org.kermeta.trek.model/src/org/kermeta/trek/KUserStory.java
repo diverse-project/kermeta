@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KUserStory.java,v 1.2 2007-10-16 08:20:33 cfaucher Exp $
+ * $Id: KUserStory.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
  */
 package org.kermeta.trek;
 
@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface KUserStory extends EObject {
+public interface KUserStory extends TrekModelElement {
 	/**
 	 * Returns the value of the '<em><b>Covered By</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.trek.KUseCase}.
