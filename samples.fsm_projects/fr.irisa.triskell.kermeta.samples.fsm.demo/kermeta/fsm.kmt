@@ -245,6 +245,7 @@ class AutomatonHelper
 	    	stdio.writeln("I'm sorry, I'm afraid that your automaton is not valid; please check the following rules : ")
 	    	stdio.writeln(" - Do the transitions source and target states belong to the set of states of the automaton?")
 	    end
+	    result := void
     end
     
     /** Load an automaton and return a FSM instance */

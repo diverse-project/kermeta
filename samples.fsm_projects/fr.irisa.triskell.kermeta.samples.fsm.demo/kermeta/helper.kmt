@@ -19,7 +19,7 @@ class Helper
 {
 	// Method body to design the checkAllInvariants method
 	/** @deprecated */
-	method checkAllInvariants(obj : kermeta::reflection::Object) is do
+	/*method checkAllInvariants(obj : kermeta::reflection::Object) is do
 	
 		if(obj!=void) then
 			do
@@ -50,7 +50,7 @@ class Helper
 				end
 			}
 		end
-	end
+	end*/
   
 
 	/**

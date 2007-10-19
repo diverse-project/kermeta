@@ -1,0 +1,53 @@
+/* $Id: $
+ * Creation date: October 15, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "fsmModelsLoading::Main"
+@mainOperation "main"
+
+
+package fsmModelsLoading;
+
+
+require kermeta
+require "http://www.kermeta.org/fsm"
+
+using kermeta::standard
+using kermeta::persistence
+using fsm
+
+class Main inherits kermeta::kunit::TestCase
+{
+
+	attribute models : String[0..*]
+
+	operation main() : Void is do 
+		
+	end
+
+	operation testLoadModels() is do
+		models.each { modelName | 
+			var modelURI : String init "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.tests/test/fsm_models/" + modelName
+			var repository : EMFRepository init EMFRepository.new
+			var resource : Resource init repository.getResource( modelURI )
+			if ( resource.contents.one.isInstanceOf(FSM) ) then
+				assertWithMsg(true, modelURI + " has been correctly loaded.")
+			else
+				assertWithMsg(false, modelURI + " could not have been loaded.")
+			end
+		}
+	end
+	
+	operation initialize() is do
+		models.add("complextodet.fsm")
+		models.add("exampledemo")
+		models.add("helloWorld.fsm")
+		models.add("sample1.fsm")
+		models.add("sample1postv.fsm")
+		models.add("samplerun.fsm")
+		models.add("sampletodeterminize.fsm")
+	end
+
+}

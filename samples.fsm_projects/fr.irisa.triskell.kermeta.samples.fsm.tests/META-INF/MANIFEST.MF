@@ -12,5 +12,6 @@ Require-Bundle: org.eclipse.ui.editors,
  fr.irisa.triskell.kermeta.io,
  org.openembedd.tests,
  fr.irisa.triskell.kermeta.tests,
- org.junit4
+ fr.irisa.triskell.kermeta.samples.fsm,
+ fr.irisa.triskell.kermeta.interpreter
 Export-Package: fr.irisa.triskell.kermeta.samples.fsm.tests

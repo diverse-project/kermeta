@@ -16,6 +16,8 @@ public class FsmPlugin extends AbstractUIPlugin {
 	
 	public static String PROJECT_NAME = "fr.irisa.triskell.kermeta.samples.fsm";
 	
+	public static String DEMO_PROJECT_NAME = "fr.irisa.triskell.kermeta.samples.fsm.demo";
+	
 	/**
 	 * The constructor.
 	 */

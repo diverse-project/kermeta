@@ -6,14 +6,14 @@ package fr.irisa.triskell.kermeta.samples.fsm.tests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import fr.irisa.triskell.kermeta.samples.fsm.tests.exemple.junit3.JUnit3TestSuiteExample;
-import fr.irisa.triskell.kermeta.samples.fsm.tests.exemple.junit4.*;
-import fr.irisa.triskell.kermeta.samples.fsm.tests.exemple.kermeta.KermetaTestSuite;
+import fr.irisa.triskell.kermeta.samples.fsm.tests.launcher.FSMLauncherTestSuite;
+import fr.irisa.triskell.kermeta.samples.fsm.tests.loading.KermetaTestSuite;
+import fr.irisa.triskell.kermeta.samples.fsm.tests.ui.FsmUITestSuite;
 
 @RunWith(Suite.class)  
 @Suite.SuiteClasses({
-	ExampleCreationTestSuite.class,
-	JUnit3TestSuiteExample.class,
-	KermetaTestSuite.class
+	FsmUITestSuite.class,
+	KermetaTestSuite.class,
+	FSMLauncherTestSuite.class
 })
 public class FSMTestSuite { }

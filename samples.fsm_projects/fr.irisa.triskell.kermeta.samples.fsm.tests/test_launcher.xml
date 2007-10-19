@@ -1,0 +1,9 @@
+<project name="Test Launcher For FSM" default="all" basedir=".">
+	
+	<target name="all" description="launching test">
+		<java classname="fr.irisa.triskell.kermeta.dev.framework.CompileFramework">
+			<classpath refid="project.class.path"/>
+		</java>
+	</target>
+	
+</project>
