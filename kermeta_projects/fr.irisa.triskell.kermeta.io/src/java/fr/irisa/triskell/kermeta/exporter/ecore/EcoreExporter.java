@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.10 2007-10-12 09:20:40 ftanguy Exp $
+/*$Id: EcoreExporter.java,v 1.11 2007-10-19 16:31:05 cfaucher Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -282,6 +282,7 @@ public class EcoreExporter {
 		this.exporterOptions = exporterOptions;
 
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
+		
 		fillResourceSet(kermetaUnit);
 		
 		applyPass1ToAll(kermetaUnit);
@@ -527,6 +528,9 @@ public class EcoreExporter {
 		
 	}
 	
+	public Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, EObject> getKm2ecoremapping() {
+		return km2ecoremapping;
+	}
 }
 
 
