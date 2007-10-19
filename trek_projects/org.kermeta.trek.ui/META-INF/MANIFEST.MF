@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Editor Plug-in
+Bundle-SymbolicName: org.kermeta.trek.ui;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: org.kermeta.trek.ui.views.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.kermeta.trek.model
+Eclipse-LazyStart: true
+Export-Package: org.kermeta.trek.ui.wizards,
+ org.kermeta.trek.ui.wizards.kusecase
