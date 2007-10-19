@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass3.java,v 1.6 2007-10-18 09:33:22 cfaucher Exp $
+/* $Id: KM2EcorePass3.java,v 1.7 2007-10-19 16:32:20 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass3.java
  * License    : EPL
@@ -65,8 +65,10 @@ public class KM2EcorePass3 extends KM2Ecore {
 			TypeDefinition typeDefinition = (TypeDefinition) ((Class) node.getType()).getTypeDefinition();
 			String qualifiedName = NamedElementHelper.getQualifiedName( typeDefinition );
 			String javaClassQualifiedName = primitive_types_mapping.get( qualifiedName );
+			
 			if ( javaClassQualifiedName != null ) {
 				EDataType type = datatypes.get( qualifiedName );
+				// Create the DataType if it does not exist
 				if ( type == null ) {
 					type = EcoreFactory.eINSTANCE.createEDataType();
 					datatypes.put( qualifiedName, type );
@@ -74,10 +76,28 @@ public class KM2EcorePass3 extends KM2Ecore {
 					type.setInstanceClassName( javaClassQualifiedName );
 					EPackage currentEcorePackage = (EPackage) km2ecoremapping.get( currentPackage );
 					currentEcorePackage.getEClassifiers().add( type );
-				}
+				} 
 				feature.setEType( type );
 			}
-		
+			
+			String datatypeQualifiedName = types_mapping.get( qualifiedName );
+			if ( datatypeQualifiedName != null ) {
+				// To put in a external method
+				javaClassQualifiedName = primitive_types_mapping.get( datatypeQualifiedName );
+				if ( javaClassQualifiedName != null ) {
+					EDataType type = datatypes.get( qualifiedName );
+					// Create the DataType if it does not exist
+					if ( type == null ) {
+						type = EcoreFactory.eINSTANCE.createEDataType();
+						datatypes.put( qualifiedName, type );
+						type.setName( typeDefinition.getName() );
+						type.setInstanceClassName( javaClassQualifiedName );
+						EPackage currentEcorePackage = (EPackage) km2ecoremapping.get( currentPackage );
+						currentEcorePackage.getEClassifiers().add( type );
+					} 
+					feature.setEType( type );
+				}
+			}
 		}
 
 		return null;
