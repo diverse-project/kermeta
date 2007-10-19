@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass1.java,v 1.1 2007-10-01 15:07:49 ftanguy Exp $
+/*$Id: Pass1.java,v 1.2 2007-10-19 08:37:50 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Pass1.java
 * License : EPL
@@ -27,6 +27,7 @@ import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
@@ -43,6 +44,18 @@ public class Pass1 extends MergePass {
 		Set<TypeDefinition> definitionProcessed = new HashSet<TypeDefinition> ();
 		for ( KermetaUnit unit : context.getKermetaUnitsToMerge() ) {
 
+			/*
+			 * 
+			 * Creating the tags for modeling units.
+			 * 
+			 */
+			for ( Tag tag : unit.getModelingUnit().getOwnedTags() ) {
+				Tag newTag = StructureFactory.eINSTANCE.createTag();
+				newTag.setName( tag.getName() );
+				newTag.setValue( tag.getValue() );
+				kermetaUnit.getModelingUnit().getOwnedTags().add( newTag );
+			}			
+			
 			for ( Package p : unit.getPackages() ) {			
 				String qualifiedName = NamedElementHelper.getQualifiedName(p);
 				/*
