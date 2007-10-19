@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.34 2007-09-19 12:14:58 ftanguy Exp $
+/* $Id: KMT2KMPass7.java,v 1.35 2007-10-19 16:23:25 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -33,6 +33,7 @@ import fr.irisa.triskell.kermeta.ast.ContextMultiLineComment;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.PackageDecl;
 import fr.irisa.triskell.kermeta.ast.Tag;
+import fr.irisa.triskell.kermeta.ast.helper.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Object;
 import fr.irisa.triskell.kermeta.language.structure.Operation;

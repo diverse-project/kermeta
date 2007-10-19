@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass1.java,v 1.2 2007-10-19 08:37:50 ftanguy Exp $
+/*$Id: Pass1.java,v 1.3 2007-10-19 16:23:27 cfaucher Exp $
 * Project : org.kermeta.merger
 * File : 	Pass1.java
 * License : EPL
@@ -64,6 +64,7 @@ public class Pass1 extends MergePass {
 				 * 
 				 */
 				Package newPackage = kermetaUnit.addInternalPackage( qualifiedName );
+				newPackage.setUri(p.getUri());
 				for ( TypeDefinition t : p.getOwnedTypeDefinition() ) {
 					String s = NamedElementHelper.getQualifiedName(t);
 					TypeDefinition existingTypedefinition = kermetaUnit.getTypeDefinitionByQualifiedName(s);

@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.52 2007-10-18 09:33:22 cfaucher Exp $
+/* $Id: KM2EcorePass1.java,v 1.53 2007-10-19 16:25:24 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass1.java
  * License    : EPL
@@ -160,7 +160,13 @@ public class KM2EcorePass1 extends KM2Ecore {
 			current_ppath = current_name;
 		}
 		
-		newEPackage.setNsURI(ecoreResource.getURI().toString() + (node==currentPackage?"":"#/") + current_ppath);
+		// if the uri is given, also we use it to set the package's uri.
+		// else a default uri is generated and set
+		if(node.getUri() != null && !node.getUri().equals("")) {
+			newEPackage.setNsURI(node.getUri());
+		} else {
+			newEPackage.setNsURI(ecoreResource.getURI().toString() + (node==currentPackage?"":"#/") + current_ppath);
+		}
 		
 		// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
 		newEPackage.setName( KMTHelper.getUnescapedIdentifier(current_name) );
