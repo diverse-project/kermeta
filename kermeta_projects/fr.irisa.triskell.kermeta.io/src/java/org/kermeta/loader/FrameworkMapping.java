@@ -1,6 +1,6 @@
 
 
-/*$Id: FrameworkMapping.java,v 1.1 2007-10-12 09:14:48 ftanguy Exp $
+/*$Id: FrameworkMapping.java,v 1.2 2007-10-19 07:15:14 bmorin Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	FrameworkMapping.java
 * License : EPL
@@ -101,6 +101,10 @@ public class FrameworkMapping {
 		mapping.put(
 				"platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.ecore"
 				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km");
+		
+		mapping.put(
+				"platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.ecore"
+				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km");
 							
 	}
 	
@@ -178,6 +182,10 @@ public class FrameworkMapping {
 		mapping.put(
 				"platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.ecore"
 				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km");
+		
+		mapping.put(
+				"platform:/resource/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.ecore"
+				, "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km");
 							
 	}
 	
