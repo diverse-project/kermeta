@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.5 2007-10-22 09:26:46 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.6 2007-10-22 09:43:46 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -16,12 +16,21 @@ import junit.framework.JUnit4TestAdapter;
 import junit.framework.TestSuite;
 
 import org.apache.log4j.Logger;
-import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
 import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
+@RunWith(Suite.class)
+@Suite.SuiteClasses(
+	{
+		JunitTestSuite.class
+	}
+)
+
 
 /**
  * Interpreter test suite.
@@ -37,17 +46,20 @@ public class JunitTestSuite extends TestSuite {
     public JunitTestSuite() {
     	super();
     	initialize();
+		generatedCall();
     }
     
     public JunitTestSuite(java.lang.Class<?> theClass)
     {
         super();
         initialize();
+		generatedCall();
     }
     public JunitTestSuite(java.lang.Class<?> theClass, String bla)
     {
         super();
         initialize();
+		generatedCall();
     }    
 
     private void initialize() {
@@ -64,7 +76,10 @@ public class JunitTestSuite extends TestSuite {
 	public JunitTestSuite(String arg0) {
 		super();
 		initialize();
-
+		generatedCall();
+	}
+	private void generatedCall(){
+		
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
 		testWithFile("test/interpreter/kmt_testcases","001_testAssignment.main.kmt" );
@@ -197,7 +212,6 @@ public class JunitTestSuite extends TestSuite {
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
-		//addTest(runfactory.getTest());
 	}
 	
 	/* the stupid Eclipse UI creates a testsuite from this class 
@@ -218,5 +232,6 @@ public class JunitTestSuite extends TestSuite {
 	public static junit.framework.Test suite() {
 		return new JUnit4TestAdapter(JunitTestSuite.class);  
 	}
+		
 }
 
