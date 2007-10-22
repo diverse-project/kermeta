@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.4 2007-10-22 09:12:55 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.5 2007-10-22 09:26:46 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -215,7 +215,6 @@ public class JunitTestSuite extends TestSuite {
 		addTest( new RunJunitFactory("platform:/resource/fr.irisa.triskell.kermeta.tests/.bin").addTestsForUnit(uri) );
 	}
 
-	@Test
 	public static junit.framework.Test suite() {
 		return new JUnit4TestAdapter(JunitTestSuite.class);  
 	}

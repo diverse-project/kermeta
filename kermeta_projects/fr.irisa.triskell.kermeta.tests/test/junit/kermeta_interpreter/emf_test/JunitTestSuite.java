@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.5 2007-10-16 11:50:02 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.6 2007-10-22 09:26:47 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -41,6 +41,10 @@ public class JunitTestSuite extends TestSuite {
 	
     	}
 
+    }
+    public JunitTestSuite() {
+    	super();
+    	initialize();
     }
     
     public JunitTestSuite(java.lang.Class<?> theClass)
