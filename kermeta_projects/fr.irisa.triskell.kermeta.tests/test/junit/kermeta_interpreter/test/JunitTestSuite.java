@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.3 2007-10-16 11:50:01 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.4 2007-10-22 09:12:55 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -13,11 +13,10 @@
 package kermeta_interpreter.test;
 
 import junit.framework.JUnit4TestAdapter;
-import junit.framework.TestResult;
 import junit.framework.TestSuite;
-import junit.textui.TestRunner;
 
 import org.apache.log4j.Logger;
+import org.junit.Test;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
@@ -215,7 +214,8 @@ public class JunitTestSuite extends TestSuite {
 		String uri = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
 		addTest( new RunJunitFactory("platform:/resource/fr.irisa.triskell.kermeta.tests/.bin").addTestsForUnit(uri) );
 	}
-	
+
+	@Test
 	public static junit.framework.Test suite() {
 		return new JUnit4TestAdapter(JunitTestSuite.class);  
 	}
