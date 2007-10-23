@@ -1,4 +1,4 @@
-/* $Id: RunInterpretedTestCase.java,v 1.4 2007-10-16 11:50:01 ftanguy Exp $
+/* $Id: RunInterpretedTestCase.java,v 1.5 2007-10-23 11:39:01 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -22,7 +22,6 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -110,8 +109,9 @@ public class RunInterpretedTestCase extends TestCase {
         System.out.println("    * #ro total       : " + RuntimeObjectImpl.getInstanceCounter());
         System.out.println("    * time (ms)       : " + time);
         System.out.println("    ************************************************");
-        interpreter = null;
-       
+        if(isLastOfSerie){
+        	interpreter = null;
+        }
         
     }
 
