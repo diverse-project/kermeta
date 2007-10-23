@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.21 2007-10-16 12:40:00 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.22 2007-10-23 11:25:11 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -35,8 +35,6 @@ import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
-import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
@@ -75,8 +73,7 @@ public class OperationChecker extends AbstractChecker {
 	{
 		boolean result = false;
 		if (operation.getName()!=null) {
-			result =
-				result = checkOperationIsUnique(operation) &&
+			result = checkOperationIsUnique(operation) &&
 				checkReturnType(operation) &&
 				checkOperationSignature(operation) &&
 				checkOperationIsAbstract(operation);
@@ -93,10 +90,7 @@ public class OperationChecker extends AbstractChecker {
 	 */
 	private boolean checkOperationSignature(Operation operation)
 	{
-		
-		if ( operation.getName().equals("evaluate") )
-			System.out.println();
-		
+				
 		boolean result = false;
 		Operation next = null;
 		// (Dev.note : kermeta::reflection::Object "became" kermeta::language::structure::Object)
