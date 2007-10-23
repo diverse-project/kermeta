@@ -1,4 +1,4 @@
-/* $Id: FsmSampleExampleWizard.java,v 1.7 2007-10-23 13:39:25 dvojtise Exp $
+/* $Id: FsmSampleExampleWizard.java,v 1.8 2007-10-23 13:42:08 dvojtise Exp $
  * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
