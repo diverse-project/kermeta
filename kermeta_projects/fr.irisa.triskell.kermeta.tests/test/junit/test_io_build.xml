@@ -1,4 +1,4 @@
-<!-- $Id: test_io_build.xml,v 1.5 2007-10-23 09:29:45 dvojtise Exp $ -->
+<!-- $Id: test_io_build.xml,v 1.6 2007-10-23 11:48:27 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -184,6 +184,7 @@
 		  	</test>
   
 		</junit>
+		<echo>Generate intermediate report</echo>
 		<antcall target="genreport"/>
 	</target>
 	<target name="genreport" >
@@ -192,7 +193,7 @@
 		    <include name="TEST-*.xml"/>
 		  </fileset>
 		  <!--<report format="frames" todir="${report.dir}/html" styledir="./report_stylesheet"/>-->
-		  <report format="frames" todir="${report.dir}/html"  styledir="/udd/triskell/bin/multiplatform/apache-ant-1.5.4/etc"/>
+		  <report format="frames" todir="${report.dir}/html"  styledir="/udd/triskell/bin/multiplatform/apache-ant-1.7.0/etc"/>
 		</junitreport>
 		<!-- generate the Build date -->
 		<tstamp>
