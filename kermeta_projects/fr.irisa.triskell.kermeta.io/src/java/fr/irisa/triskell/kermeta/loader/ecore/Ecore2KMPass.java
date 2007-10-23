@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass.java,v 1.8 2007-10-16 11:42:33 ftanguy Exp $
+/*$Id: Ecore2KMPass.java,v 1.9 2007-10-23 11:26:01 dvojtise Exp $
 * Project : io
 * File : 	Ecore2KMPass.java
 * License : EPL
@@ -719,7 +719,8 @@ public class Ecore2KMPass extends EcoreVisitor {
 			try {
 				result = datas.getTypeDefinition( (EClassifier) element ) != null ? datas.getTypeDefinition( (EClassifier) element):datas.getPrimitiveType( (EDataType) element);
 			} catch (Exception r) {
-				System.out.println();
+				this.
+				kermetaUnit.internalLog.warn("Excepteion received in getObjectForEModelElement",r);
 			}
 		}
 		if (element instanceof EStructuralFeature)	result = currentProperty;

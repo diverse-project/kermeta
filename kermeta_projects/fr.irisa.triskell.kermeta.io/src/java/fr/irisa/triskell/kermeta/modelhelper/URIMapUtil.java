@@ -1,4 +1,4 @@
-/* $Id: URIMapUtil.java,v 1.3 2007-08-02 13:18:54 dvojtise Exp $
+/* $Id: URIMapUtil.java,v 1.4 2007-10-23 11:26:25 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : XMLMap.java
  * License    : EPL
@@ -24,6 +24,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.kermeta.io.plugin.IOPlugin;
 
 
 /**
@@ -79,11 +80,11 @@ public class URIMapUtil {
 		           	else if (value == null)
 		           		value = sTokenizer.sval;
 		           	else 
-		           		System.out.println("problem parsing file: " +file.getName()+
+		           		IOPlugin.internalLog.warn("problem parsing file: " +file.getName()+
 		           				" line: "+ sTokenizer.lineno() + ", ignoring token: " +sTokenizer.sval);
 					break;	
 		        default:
-	           		System.out.println("Unknown: nval = " + sTokenizer.nval +
+		        	IOPlugin.internalLog.warn("Unknown: nval = " + sTokenizer.nval +
 	           				" sval = " + sTokenizer.sval);
 	           		break;
 			    }

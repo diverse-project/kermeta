@@ -2,6 +2,8 @@ package fr.irisa.triskell.kermeta.parser;
 
 import java.io.Reader;
 
+import org.kermeta.io.plugin.IOPlugin;
+
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
 
@@ -30,12 +32,12 @@ public class KermetaParserDriver implements IParser {
 		CompUnit compUnit = parseCompUnit(parser, parseContext);
 	
 		if (parseContext.getMessageCount() == 0) {
-			System.out.println("Parse OK!");
+			IOPlugin.internalLog.debug("Parse OK!");
 		}
 		else {
 			ParseMessage[] msgs = parseContext.getMessages();
 			for (int i = 0; i < msgs.length; i++) {
-				System.err.println(msgs[i].getMessage());
+				IOPlugin.internalLog.error(msgs[i].getMessage());
 			}
 		}
 		

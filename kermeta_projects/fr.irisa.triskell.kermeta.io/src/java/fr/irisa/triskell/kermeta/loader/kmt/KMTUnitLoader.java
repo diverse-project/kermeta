@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.17 2007-10-12 09:20:40 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.18 2007-10-23 11:26:01 dvojtise Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -79,7 +79,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			Date t1 = new Date();
 			loadAllImportedUnits(kermetaUnit);
 			Date t2 = new Date();
-			System.err.println("Load All Imported Units : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.error("Load All Imported Units : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
@@ -88,7 +88,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			t1 = new Date();
 			loadAllTypeDefinitions(kermetaUnit);
 			t2 = new Date();
-			System.err.println("Load All typeDefinitiosn : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.error("Load All typeDefinitiosn : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;			
@@ -107,30 +107,30 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			t1 = new Date();
 			importAllKermetaUnits(kermetaUnit);
 			t2 = new Date();
-			System.err.println("Import All Kermeta Units : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.error("Import All Kermeta Units : " + (t2.getTime() - t1.getTime()) + "ms");
 						
 			// 4 - Set the aspect staff
 			t1 = new Date();
 			setBaseAspectsForAll(kermetaUnit);
 			t2 = new Date();
-			System.err.println("Set Base Aspects : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.error("Set Base Aspects : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			// 10, finally create the aspects lists to improve performances.
 			t1 = new Date();
 			constructAspectsListsForAll(kermetaUnit);
 			t2 = new Date();
-			System.err.println("Construct Aspects : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.error("Construct Aspects : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			// 5
 			t1 = new Date();
 			replaceObjectTypeVariablesForAll(kermetaUnit);
 			t2 = new Date();
-			System.err.println("Replace Object Type Variables : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.error("Replace Object Type Variables : " + (t2.getTime() - t1.getTime()) + "ms");
 			// 6
 			t1 = new Date();
 			loadAllStructuralFeatures(kermetaUnit);
 			t2 = new Date();
-			System.err.println("Load Structural Features : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.error("Load Structural Features : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
@@ -141,7 +141,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			t1 = new Date();
 			loadAllOppositeProperties(kermetaUnit);
 			t2 = new Date();
-			System.err.println("Load Opposite Properties : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.error("Load Opposite Properties : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
@@ -150,7 +150,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			t1 = new Date();
 			loadAllBodies(kermetaUnit);
 			t2 = new Date();
-			System.err.println("Load All Bodies : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.error("Load All Bodies : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
@@ -159,13 +159,13 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			t1 = new Date();
 			loadAllAnnotations(kermetaUnit);
 			t2 = new Date();
-			System.err.println("Load All Annotations : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.error("Load All Annotations : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			// 10
 			t1 = new Date();
 			markErrorsFromImportedUnits(kermetaUnit);
 			t2 = new Date();
-			System.err.println("Mark Errors : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.error("Mark Errors : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 		} catch ( URIMalformedException exception) {
 		} catch (RecognitionException e) {
@@ -183,7 +183,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 
 		if ( state.doneLoadImportedUnits ) return;
 		state.loading = true;
-		System.out.println( kermetaUnit.getUri() );
+		IOPlugin.internalLog.debug( kermetaUnit.getUri() );
 		loadImportedUnits(kermetaUnit);
 		state.doneLoadImportedUnits = true;
 	
@@ -572,10 +572,10 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		
 		CompUnit compUnit = ast.get(kermetaUnit);
 		
-		System.out.println("Pass 4 for " + kermetaUnit.getUri());
+		IOPlugin.internalLog.debug("Pass 4 for " + kermetaUnit.getUri());
 		KMT2KMPass pass = new KMT2KMPass4(kermetaUnit, getLoadingContext(kermetaUnit), monitor); 
 		compUnit.accept(pass); 
-		System.out.println("Pass 5 for " + kermetaUnit.getUri());
+		IOPlugin.internalLog.debug("Pass 5 for " + kermetaUnit.getUri());
 		if (kermetaUnit.isErroneous()) return;
 		pass = new KMT2KMPass5(kermetaUnit, getLoadingContext(kermetaUnit), monitor); 
 		compUnit.accept(pass);
@@ -616,7 +616,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 		
 		CompUnit compUnit = ast.get(kermetaUnit);
 
-		System.out.println("Pass 6 for " + kermetaUnit.getUri());
+		IOPlugin.internalLog.debug("Pass 6 for " + kermetaUnit.getUri());
 		KMT2KMPass pass = new KMT2KMPass6(kermetaUnit, getLoadingContext(kermetaUnit), monitor); 
 		compUnit.accept(pass);
 	}
