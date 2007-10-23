@@ -1,3 +1,12 @@
+/* $Id: AbstractExampleWizard.java,v 1.6 2007-10-23 13:36:59 dvojtise Exp $
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : oct. 07
+ * Authors       :
+ * 		Cyril Faucher <cfaucher@irisa.fr> 
+ * 		dvojtise <dvojtise.irisa.fr>
+ */
 package fr.irisa.triskell.kermeta.samples.fsm.wizards;
 
 import java.io.File;
@@ -103,7 +112,7 @@ public abstract class AbstractExampleWizard extends Wizard
 	}
 
 	public boolean performFinish() {
-		final Collection projectDescriptors = getProjectDescriptors();
+		final Collection<ProjectDescriptor> projectDescriptors = getProjectDescriptors();
 		
 		try {
 			getContainer().run(true, false, new IRunnableWithProgress() {
@@ -112,8 +121,8 @@ public abstract class AbstractExampleWizard extends Wizard
 					
 					monitor.beginTask("Unzipping Projects", projectDescriptors.size());
 					
-					for (Iterator i = projectDescriptors.iterator(); i.hasNext();) {
-						unzipProject((ProjectDescriptor)i.next(), monitor);
+					for (Iterator<ProjectDescriptor> i = projectDescriptors.iterator(); i.hasNext();) {
+						unzipProject(i.next(), monitor);
 						monitor.worked(1);
 					}
 				}
@@ -136,7 +145,7 @@ public abstract class AbstractExampleWizard extends Wizard
 	 * @return The collection of project descriptors that should be
 	 *  unzipped into the workspace.
 	 */
-	protected abstract Collection getProjectDescriptors();
+	protected abstract Collection<ProjectDescriptor> getProjectDescriptors();
 	
 	private void unzipProject(ProjectDescriptor descriptor, IProgressMonitor monitor) {
 		String bundleName = descriptor.getBundleName();
