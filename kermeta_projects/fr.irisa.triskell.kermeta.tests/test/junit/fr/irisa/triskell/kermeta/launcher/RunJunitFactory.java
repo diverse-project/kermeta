@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.4 2007-10-16 11:50:01 ftanguy Exp $
+/* $Id: RunJunitFactory.java,v 1.5 2007-10-23 08:42:25 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -120,7 +120,7 @@ public class RunJunitFactory implements Test {
             	theTestCase = new FailedTestCase(failedTestName, 
             		new Exception("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)" +
             					  KermetaUnitHelper.getAllErrorsAsString(unit)));
-            	if(!optimizeLoading) unit = null; // reset the unit to free some memory
+            	if(!optimizeLoading) resetUnit(); // reset the unit to free some memory
                 return theTestCase;
             }
             
@@ -134,7 +134,7 @@ public class RunJunitFactory implements Test {
             	theTestCase = new FailedTestCase(failedTestName, 
             		new Exception("Unit " + unit.getUri() + " contains errors (ie. didn't load or constraintcheck correctly)"+
             				KermetaUnitHelper.getAllErrorsAsString(unit)));
-            	if(!optimizeLoading) unit = null; // reset the unit to free some memory
+            	if(!optimizeLoading) resetUnit(); // reset the unit to free some memory
             	return theTestCase;
             }
             
@@ -184,7 +184,7 @@ public class RunJunitFactory implements Test {
                 theTestSuite.setName(unit_uri);
                 
                 includeTestSuite(main_class, unit, constraintExecution);
-                if(!optimizeLoading) unit = null; // reset the unit to free some memory
+                if(!optimizeLoading) resetUnit(); // reset the unit to free some memory
                 if(theTestSuite.countTestCases() == 0){
                 	// No valid test in the testsuite ! => fails
                 	Exception e = new Exception("Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')");
@@ -201,7 +201,7 @@ public class RunJunitFactory implements Test {
             		theTestCase = new RunInterpretedTestCase(main_class, main_operation, this, constraintExecution, true, binDirectory);
             	}
                 
-                if(!optimizeLoading) unit = null; // reset the unit to free some memory
+                if(!optimizeLoading) resetUnit(); // reset the unit to free some memory
                 return theTestCase;
             }
 
@@ -211,7 +211,7 @@ public class RunJunitFactory implements Test {
             // construct a "fake" test that simply fails and return this
             // exception
             theTestCase = new FailedTestCase(failedTestName, e);
-            if(!optimizeLoading) unit = null; // reset the unit to free some memory
+            if(!optimizeLoading) resetUnit(); // reset the unit to free some memory
             return theTestCase;
         }
     }
@@ -265,9 +265,9 @@ public class RunJunitFactory implements Test {
             Operation mainOp = it.next();
             if (mainOp.getName().startsWith("test")) {
             	if(isCompiled) {
-            		theTestSuite.addTest(new RunCompiledTestCase(main_class, mainOp.getName(), this, constraintExecution, it.hasNext(), binDirectory));
+            		theTestSuite.addTest(new RunCompiledTestCase(main_class, mainOp.getName(), this, constraintExecution, !it.hasNext(), binDirectory));
             	} else {
-            		theTestSuite.addTest(new RunInterpretedTestCase(main_class, mainOp.getName(), this, constraintExecution, it.hasNext(), binDirectory));
+            		theTestSuite.addTest(new RunInterpretedTestCase(main_class, mainOp.getName(), this, constraintExecution, !it.hasNext(), binDirectory));
             	}
                 
             }
@@ -312,6 +312,7 @@ public class RunJunitFactory implements Test {
     
     
     public void resetUnit(){
+    	IOPlugin.getDefault().unload(unit_uri);
     	unit = null;
     }
     /**
