@@ -1,6 +1,4 @@
-
-
-/*$Id: Ecore2KMPass.java,v 1.9 2007-10-23 11:26:01 dvojtise Exp $
+/*$Id: Ecore2KMPass.java,v 1.10 2007-10-23 12:23:59 dvojtise Exp $
 * Project : io
 * File : 	Ecore2KMPass.java
 * License : EPL
@@ -32,7 +30,6 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -46,7 +43,6 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
@@ -719,8 +715,7 @@ public class Ecore2KMPass extends EcoreVisitor {
 			try {
 				result = datas.getTypeDefinition( (EClassifier) element ) != null ? datas.getTypeDefinition( (EClassifier) element):datas.getPrimitiveType( (EDataType) element);
 			} catch (Exception r) {
-				this.
-				kermetaUnit.internalLog.warn("Excepteion received in getObjectForEModelElement",r);
+				KermetaUnit.internalLog.warn("Exception received in getObjectForEModelElement",r);
 			}
 		}
 		if (element instanceof EStructuralFeature)	result = currentProperty;
