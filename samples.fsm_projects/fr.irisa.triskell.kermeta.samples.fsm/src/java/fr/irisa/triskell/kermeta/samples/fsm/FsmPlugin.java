@@ -1,3 +1,11 @@
+/* $Id: FsmPlugin.java,v 1.5 2007-10-23 13:38:47 dvojtise Exp $
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : oct. 07
+ * Authors       :
+ * 		Cyril Faucher <cfaucher@irisa.fr> 
+ */
 package fr.irisa.triskell.kermeta.samples.fsm;
 
 import org.eclipse.jface.resource.ImageDescriptor;
