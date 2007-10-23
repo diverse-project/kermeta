@@ -1,6 +1,6 @@
 
 
-/*$Id: ReturnTypeChecker.java,v 1.1 2007-09-14 13:40:53 ftanguy Exp $
+/*$Id: ReturnTypeChecker.java,v 1.2 2007-10-23 11:37:00 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	ReturnTypeChecker.java
 * License : EPL
@@ -12,14 +12,13 @@
 
 package fr.irisa.triskell.kermeta.constraintchecker;
 
-import sun.reflect.generics.tree.ReturnType;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Raise;
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
-import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 public class ReturnTypeChecker extends KermetaOptimizedVisitor {
 	

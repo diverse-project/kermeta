@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.12 2007-10-02 15:18:26 ftanguy Exp $
+/* $Id: PropertyChecker.java,v 1.13 2007-10-23 11:37:00 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -15,14 +15,12 @@
  */
 package fr.irisa.triskell.kermeta.constraintchecker;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;

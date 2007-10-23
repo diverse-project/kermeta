@@ -1,4 +1,4 @@
-/* $Id: TestPlugin.java,v 1.2 2007-10-16 09:20:20 cfaucher Exp $
+/* $Id: TestPlugin.java,v 1.3 2007-10-23 11:41:06 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.tests
  * File       : TestPlugin.java
  * License    : EPL
@@ -17,7 +17,6 @@ import java.io.File;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.kermeta.io.plugin.IOPlugin;
