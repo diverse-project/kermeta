@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.6 2007-10-22 09:43:46 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.7 2007-10-23 08:19:02 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -12,24 +12,15 @@
  */
 package kermeta_interpreter.test;
 
-import junit.framework.JUnit4TestAdapter;
 import junit.framework.TestSuite;
 
 import org.apache.log4j.Logger;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
 import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses(
-	{
-		JunitTestSuite.class
-	}
-)
 
 
 /**
@@ -212,6 +203,7 @@ public class JunitTestSuite extends TestSuite {
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
+		//IOPlugin.getDefault().unloadAll();
 	}
 	
 	/* the stupid Eclipse UI creates a testsuite from this class 
@@ -229,8 +221,13 @@ public class JunitTestSuite extends TestSuite {
 		addTest( new RunJunitFactory("platform:/resource/fr.irisa.triskell.kermeta.tests/.bin").addTestsForUnit(uri) );
 	}
 
+	/**
+	 * Used when called by a JUnit4 test suite
+	 * @return
+	 */
 	public static junit.framework.Test suite() {
-		return new JUnit4TestAdapter(JunitTestSuite.class);  
+		return new JunitTestSuite();
+		//return new JUnit4TestAdapter(JunitTestSuite.class);  
 	}
 		
 }
