@@ -1,4 +1,4 @@
-/* $Id: KermetaCycleConstraintChecker.java,v 1.5 2007-07-24 13:46:46 ftanguy Exp $
+/* $Id: KermetaCycleConstraintChecker.java,v 1.6 2007-10-23 12:19:39 dvojtise Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -17,7 +17,6 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.directedgraph.DirectedGraphClass;
 import fr.irisa.triskell.kermeta.directedgraph.Findcycle;
@@ -36,8 +35,8 @@ public class KermetaCycleConstraintChecker {
     
     protected KermetaUnit unit;
     
-    Hashtable nodeId2Object = new Hashtable();
-    Hashtable fObject2nodeId = new Hashtable();
+    Hashtable<Integer, Object> nodeId2Object = new Hashtable<Integer, Object>();
+    Hashtable<Object, Integer> fObject2nodeId = new Hashtable<Object, Integer>();
         
     final static public Logger internalLog = LogConfigurationHelper.getLogger("CycleConstraintChecker");
    
@@ -70,12 +69,12 @@ public class KermetaCycleConstraintChecker {
 		*/
 		if (find.findcycle()){
 			ArrayList allcycle=find.findallcycle();
-			ArrayList reponse=new ArrayList();
+			ArrayList<ArrayList<String>> reponse=new ArrayList<ArrayList<String>>();
 			for (int j=0;j<allcycle.size();j++){
-				ArrayList current=(ArrayList) allcycle.get(j);
-				ArrayList rep=new ArrayList();
+				ArrayList<ClassDefinition> current=(ArrayList<ClassDefinition>) allcycle.get(j);
+				ArrayList<String> rep=new ArrayList<String>();
 				for (int i=0;i<current.size();i++){
-					rep.add(((ClassDefinition) current.get(i)).getName());
+					rep.add( current.get(i).getName());
 				}
 				reponse.add(rep);
 			}
@@ -96,9 +95,9 @@ public class KermetaCycleConstraintChecker {
     public void buildNode(KermetaUnit u) {
         
         
-        Iterator it = TypeDefinitionSearcher.getTypesDefinition(unit).iterator();
+        Iterator<TypeDefinition> it = TypeDefinitionSearcher.getTypesDefinition(unit).iterator();
         while(it.hasNext()) {
-            TypeDefinition td = (TypeDefinition)it.next();
+            TypeDefinition td = it.next();
             if (td instanceof ClassDefinition) {
             	addNode(td);
             	
@@ -114,12 +113,12 @@ public class KermetaCycleConstraintChecker {
     	nodeId2Object.put(i, o);
     	fObject2nodeId.put(o, i);
     }
-    /**
+    /*
      * Type check all the operations and derived properties
      * of a class definition
      * @param clsdef
      */
-    public void visitClassDefinition(ClassDefinition clsdef) {
+    //public void visitClassDefinition(ClassDefinition clsdef) {
         
         /*Iterator it = clsdef.getFOwnedOperation().iterator();
         while(it.hasNext()) {
@@ -127,15 +126,15 @@ public class KermetaCycleConstraintChecker {
             checkOperation(op);
         }*/
         
-    	Iterator it = clsdef.getOwnedAttribute().iterator();
+    	/*Iterator it = clsdef.getOwnedAttribute().iterator();
         while(it.hasNext()) {
             Property prop = (Property)it.next();
            // checkOppositeProperties(prop);
            // buildDirectedGraphForStrictComposition();
-        }
+        }*/
         
         // add the classDef to the nodes for 
-    }
+    //}
     
     /**
      * check is the given property is a strict composition
@@ -146,13 +145,10 @@ public class KermetaCycleConstraintChecker {
     public boolean isStrictCompositionProperties(Property prop){    	
     	if(prop.getOpposite() != null)
     	{
-    		    		
-    		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
-			
+    		    		    		
 	    	// Composition with multiplicity == 1
     		if(prop.isIsComposite()){
     			if( prop.getLower() >= 1){
-    				//unit.messages.addError("CONSTRAINT-CHECKER : Composition multiplicity problem : change the multiplicity or do not use composition on the other end of the association. " + pp.ppSimplifiedPropertyInContext(prop), prop);
     				return true;  
     			}
     		}    	
