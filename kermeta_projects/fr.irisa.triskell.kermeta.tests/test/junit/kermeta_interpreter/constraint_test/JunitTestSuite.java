@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.5 2007-10-23 09:27:02 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.6 2007-10-23 09:41:32 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -32,6 +32,10 @@ public class JunitTestSuite extends TestSuite {
     static private IOPlugin ioPlugin;
 
     private void initialize() {
+    	System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
+    	"../fr.irisa.triskell.kermeta.model/kermeta_log4j_configuration.xml");
+    	// reload conf in case iwas loaded befaore with another configuration
+    	fr.irisa.triskell.kermeta.util.LogConfigurationHelper.configureLogger(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName);
     	
     	if ( ioPlugin == null ) {
 		
