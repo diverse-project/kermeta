@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.20 2007-10-16 11:45:33 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.21 2007-10-23 11:31:52 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -389,6 +389,13 @@ public class IOPlugin extends AbstractUIPlugin {
 	public void unload(IFile file) {
 		String uri = "platform:/resource" + file.getFullPath().toString();
 		unload( uri );
+	}
+	public void unloadAll() {
+		List <KermetaUnit> unitToUnload = new ArrayList <KermetaUnit> ();
+		unitToUnload.addAll(storer.getKermetaUnits());
+		for(KermetaUnit unit : unitToUnload){
+			storer.unload(unit.getUri());
+		}
 	}
 	
 	public KermetaUnit getFramework() {
