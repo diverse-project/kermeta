@@ -16,7 +16,7 @@ Require-Bundle: fr.irisa.triskell.kermeta.model,
  org.eclipse.core.runtime,
  org.eclipse.emf.validation,
  fr.irisa.triskell.eclipse.util,
- fr.irisa.triskell.traceability,
+ fr.irisa.triskell.traceability;visibility:=reexport,
  org.eclipse.ui,
  org.eclipse.ui.ide,
  org.kermeta.merger
