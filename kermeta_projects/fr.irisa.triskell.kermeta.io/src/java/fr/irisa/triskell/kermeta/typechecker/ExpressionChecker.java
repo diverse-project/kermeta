@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.55 2007-10-12 09:20:40 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.56 2007-10-23 11:31:11 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -16,6 +16,7 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.ast.FSuperCall;
@@ -237,7 +238,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 					    unit.error("TYPE-CHECKER : Type of argument " + i + " mismatch, expecting "+required_params[i]+", found "+provided+" (TypeDoesNotMatch).", (Expression)exp.getParameters().get(i));
 					    error = true;
 					} catch (Exception e) {
-						System.out.println();
+						IOPlugin.internalLog.warn("Exception received", e);
 					}
 			    }
 		    }
@@ -486,11 +487,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	 **********************************/
 
 	public Object visitAssignment(Assignment expression) {
-		
-		if ( expression.eContainer().eContainer() instanceof Operation )
-			if ( ((Operation) expression.eContainer().eContainer()).getName().equals("collect") )
-				System.out.println();
-		
+				
 		preVisit();
 
 	    // Visit contained expressions
@@ -650,10 +647,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    return result;
 	}
 	
-	public Object visitCallFeature(CallFeature expression) {
-		
-		if ( expression.getName().equals("addAll") && expression.eContainer().eContainer() instanceof Property )
-			System.out.println();
+	public Object visitCallFeature(CallFeature expression) {		
 		
 		// visit target expression	
 		if (expression.getTarget() != null) 

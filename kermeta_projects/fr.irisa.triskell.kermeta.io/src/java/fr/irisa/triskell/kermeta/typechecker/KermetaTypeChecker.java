@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.26 2007-10-02 15:19:05 ftanguy Exp $
+/* $Id: KermetaTypeChecker.java,v 1.27 2007-10-23 11:31:11 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -20,6 +20,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -162,7 +163,7 @@ public class KermetaTypeChecker {
     			for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(unit) ) {
     				if ( ! importedUnit.isTypeChecked() ) {
 		    			KermetaTypeChecker t = new KermetaTypeChecker(importedUnit, monitor);
-		    			System.out.println( importedUnit.getUri() );
+		    			IOPlugin.internalLog.debug( importedUnit.getUri() );
 		    			t.checkUnit();
 		    		}
 		    	}

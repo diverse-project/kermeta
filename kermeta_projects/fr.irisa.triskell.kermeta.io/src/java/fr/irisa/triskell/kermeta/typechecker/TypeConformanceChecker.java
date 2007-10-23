@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.21 2007-10-12 09:20:40 ftanguy Exp $
+/* $Id: TypeConformanceChecker.java,v 1.22 2007-10-23 11:31:11 dvojtise Exp $
 * Project : Kermeta (io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -17,6 +17,8 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -54,7 +56,7 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 	    			provided == ((SimpleType)TypeCheckerContext.VoidType).type) 
 			return true;
 	    } catch (Exception e) {
-	    	System.out.println();
+	    	IOPlugin.internalLog.warn("Exception received", e);
 	    }
 		
 		// RETURN TRUE IF THE REQUIRED TYPE IS OBJECT OR ANY OF IT SUPERTYPE
@@ -88,7 +90,7 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 			}
 		}
 		} catch (Exception e) {
-			System.out.println();
+	    	IOPlugin.internalLog.warn("Exception received", e);
 		}
 		// Transformation if provided is a type variable to the least derived type admissible
 		// for the variable.

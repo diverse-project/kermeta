@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.46 2007-10-18 09:33:22 cfaucher Exp $
+/* $Id: KM2EcorePass2.java,v 1.47 2007-10-23 11:31:11 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass2.java
  * License    : EPL
@@ -142,8 +142,6 @@ public class KM2EcorePass2 extends KM2Ecore {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
 	public Object visitClassDefinition(ClassDefinition node) {
-		if (node.getName().equals("OrderedCollection") )
-			System.out.println();
 		
 		EClass newEClass = null;
 		internalLog.debug(loggerTabs + "Visiting ClassDefinition: "+ node.getName());

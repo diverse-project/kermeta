@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.21 2007-10-12 09:20:40 ftanguy Exp $
+/* $Id: InheritanceSearch.java,v 1.22 2007-10-23 11:31:11 dvojtise Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.List;
+
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -65,7 +67,7 @@ public class InheritanceSearch {
 		if (! TypeEqualityChecker.equals(c, object) && !result.contains(object)) {
 		    result.add(object);
 		}} catch (Exception e) {
-			System.out.println();
+			IOPlugin.internalLog.warn("Exception received",e);
 		}
 		return result;
 	}
