@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.4 2007-10-23 08:42:55 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.5 2007-10-23 09:27:02 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -45,21 +45,27 @@ public class JunitTestSuite extends TestSuite {
     public JunitTestSuite() {
     	super();
     	initialize();
+		generatedCall();
     }
     public JunitTestSuite(java.lang.Class<?> theClass)
     {
         super();
         initialize();
+		generatedCall();
     }
     public JunitTestSuite(java.lang.Class<?> theClass, String bla)
     {
         super();
         initialize();
+		generatedCall();
     }    
 	public JunitTestSuite(String arg0) {
 		super();
 		initialize();
-
+		generatedCall();
+	}
+	
+	private void generatedCall(){	
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
 		testWithFile("test/interpreter/jar_testcases/kermeta","001_requireJava_rt_io.main.kmt" );
