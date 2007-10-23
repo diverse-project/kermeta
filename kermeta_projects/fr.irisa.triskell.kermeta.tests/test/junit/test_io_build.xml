@@ -1,4 +1,4 @@
-<!-- $Id: test_io_build.xml,v 1.6 2007-10-23 11:48:27 dvojtise Exp $ -->
+<!-- $Id: test_io_build.xml,v 1.7 2007-10-23 12:03:33 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -20,7 +20,7 @@
 	<property name="cobertura.lib.dir" location="${cobertura.dir}/lib"/>
 	
 	
-	<property name="kermeta.io.class" location="..\..\@dot"/>
+	<property name="kermeta.test.class" location="${build.bin}"/>
 	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\@dot"/>
 	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\@dot" />
 	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\@dot"/>	
@@ -163,7 +163,7 @@
 			<sysproperty key="net.sourceforge.cobertura.datafile" file="coverage.ser" />
 		  	<classpath>
 		  		<pathelement location="${instrumented.dir}"/>
-		  		<pathelement location="${kermeta.io.class}"/>
+		  		<pathelement location="${kermeta.test.class}"/>
 				<path refid="io.class.path"/> 
 		  	</classpath>
 		  	<classpath refid="cobertura_classpath" />
