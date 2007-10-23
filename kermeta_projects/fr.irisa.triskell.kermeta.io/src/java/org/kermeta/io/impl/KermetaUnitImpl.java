@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.19 2007-10-12 09:16:22 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.20 2007-10-23 11:32:04 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -1291,7 +1291,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public void finalize() {
-		System.out.println( "finalize " + getUri() );
+
+    	IOPlugin.internalLog.info( "finalize " + getUri() );
 
 	}
 
