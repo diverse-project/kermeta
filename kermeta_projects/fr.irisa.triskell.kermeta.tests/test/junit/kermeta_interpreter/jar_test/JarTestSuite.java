@@ -1,6 +1,6 @@
-/* $Id: InterpreterTestSuite.java,v 1.2 2007-10-23 08:42:56 dvojtise Exp $
+/* $Id: JarTestSuite.java,v 1.1 2007-10-23 08:42:55 dvojtise Exp $
  * Project : Kermeta.tests
- * File : InterpreterTestSuite.java
+ * File : JarTestSuite.java
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
@@ -9,8 +9,7 @@
  * 		dvojtise@irisa.fr
  * Description :  	
  * 	JUnit4 launcher that encapsulate our previous JUnit3 test suites	 
- */
-package kermeta_interpreter.test;
+ */package kermeta_interpreter.jar_test;
 
 
 import org.junit.runner.RunWith;
@@ -21,4 +20,4 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
 	JunitTestSuite.class
 })
-public class InterpreterTestSuite { }
+public class JarTestSuite { }

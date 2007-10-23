@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.3 2007-10-22 09:26:46 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.4 2007-10-23 08:42:55 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -13,7 +13,6 @@
 package kermeta_interpreter.jar_test;
 
 import junit.framework.TestSuite;
-import junit.textui.TestRunner;
 
 import org.apache.log4j.Logger;
 import org.kermeta.io.plugin.IOPlugin;
@@ -92,4 +91,12 @@ public class JunitTestSuite extends TestSuite {
 	/*public static void main(String[] args) {
 		TestRunner.run(JunitTestSuite.class);
 	}*/
+	
+	/**
+	 * Used when called by a JUnit4 test suite
+	 * @return
+	 */
+	public static junit.framework.Test suite() {
+		return new JunitTestSuite(); 
+	}
 }
