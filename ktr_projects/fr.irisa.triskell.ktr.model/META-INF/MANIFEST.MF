@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: KTR plugin
 Bundle-SymbolicName: fr.irisa.triskell.ktr.model; singleton:=true
-Bundle-Version: 0.0.1
+Bundle-Version: 1.0.1
 Bundle-ClassPath: .
-Bundle-Vendor: INRIA/IRISA
+Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
 Export-Package: fr.irisa.triskell.ktr,
  fr.irisa.triskell.ktr.impl,
