@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.kermeta.sintaks.stsFilesRegistration">
+      <StsFile
+            Documentation="Sintaks mapping file for the Abstract Syntax of kmLogo"
+            Extension="logo"
+            File="sts/ASMLogo.sts">
+      </StsFile>
+   </extension>
+
+</plugin>
