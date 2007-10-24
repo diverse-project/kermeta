@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.8 2007-10-16 11:46:12 ftanguy Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.9 2007-10-24 12:47:45 cfaucher Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -171,6 +171,12 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 
 		String tags = ppTags( p );
 		print ( tags );
+		
+		// Print uri like a tag into kmt file, because we have not for the moment a dedicated concrete syntax
+		if( p.getUri() != null && !p.getUri().equals("") ) {
+			print("@uri \"" + p.getUri() + "\"\n");
+		}
+		
 		boolean printBraket = false;
 		if ( p.eContainer() instanceof ModelingUnit)
 			print( "package " + root_pname + ";\n\n" );
