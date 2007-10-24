@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.21 2007-10-23 11:31:52 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.22 2007-10-24 11:04:34 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -23,6 +23,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
@@ -38,10 +39,13 @@ import org.kermeta.loader.FrameworkMapping;
 import org.kermeta.loader.LoadingOptions;
 import org.osgi.framework.BundleContext;
 
+import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
+import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.impl.KmPackageImpl;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
@@ -263,8 +267,14 @@ public class IOPlugin extends AbstractUIPlugin {
 					kermetaUnit.addRequire( ECORE_URI, ecore );	
 				} else if ( uri.equals( ECORE_URI ) )
 					kermetaUnit.getImportedKermetaUnits().add( framework );
-				else if ( uri.matches("http://.+") )
+				else if ( uri.matches("http://.+") ) {
 					kermetaUnit.getImportedKermetaUnits().add( framework );
+					Object o = EPackage.Registry.INSTANCE.get( uri );
+					if ( ! (o instanceof Package) ) {
+						kermetaUnit.importKermetaUnit( ecore, false, true );
+						kermetaUnit.addRequire( ECORE_URI, ecore );	
+					}
+				}
 			}
 		}
 		return kermetaUnit;
