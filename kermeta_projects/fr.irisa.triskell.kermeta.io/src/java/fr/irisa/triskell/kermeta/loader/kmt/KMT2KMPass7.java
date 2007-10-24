@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.35 2007-10-19 16:23:25 cfaucher Exp $
+/* $Id: KMT2KMPass7.java,v 1.36 2007-10-24 12:09:41 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -144,16 +144,20 @@ public class KMT2KMPass7 extends KMT2KMPass {
 		if ( monitor.isCanceled() )
 			return false;
 		
-		fr.irisa.triskell.kermeta.language.structure.Tag t = StructureFactory.eINSTANCE.createTag();
-		
 		String name = qualifiedIDAsString(tag.getName());
-		t.setName( name );
 		
-		String value = tag.getVal().getText().replace("\"", "");
-		t.setValue( value );
+		// Tags that concern uri are not written in km, but there are stored into the attribute uri of the ClassDefinition associated to a package
+		if( !name.equals(KermetaASTHelper.TAGNAME_URI) ) {
+			fr.irisa.triskell.kermeta.language.structure.Tag t = StructureFactory.eINSTANCE.createTag();
 
-		currentTags.add( t );
-		km2ecore.put( t, tag );
+			t.setName( name );
+		
+			String value = tag.getVal().getText().replace("\"", "");
+			t.setValue( value );
+
+			currentTags.add( t );
+			km2ecore.put( t, tag );
+		}
 		
 		return false;
 	}
