@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.47 2007-10-23 11:31:11 dvojtise Exp $
+/* $Id: KM2EcorePass2.java,v 1.48 2007-10-25 09:41:43 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass2.java
  * License    : EPL
@@ -426,6 +426,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 	 * @see KermetaOptimizedVisitor#visitProperty(fr.irisa.triskell.kermeta.language.structure.Property)
 	 */
 	public Object visitProperty(Property node) {
+	
 		internalLog.debug(loggerTabs + "Visiting Property: "+ node.getName());
 		loggerTabs.increment();
 				
@@ -640,31 +641,53 @@ public class KM2EcorePass2 extends KM2Ecore {
 		return eenum ;
 	}
 	
-
+	private Hashtable<PrimitiveType, EClassifier> primitiveTypesMappingForIndependency = new Hashtable<PrimitiveType, EClassifier> ();
+	
 	/**
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitPrimitiveType(PrimitiveType)
 	 */
 	public Object visitPrimitiveType(PrimitiveType node)
 	{
 		String type_name = NamedElementHelper.getMangledQualifiedName(node);
-		EClassifier newEClassifier = (EClassifier)km2ecoremapping.get(node);
 		
-		if (newEClassifier ==  null)
-		{
-			if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
-				internalLog.debug(loggerTabs + "Creating DataType: "+ node.getName());
-				type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
-				// we need to create a new datatype for it and connect it to the root package
-				newEClassifier  = EcoreFactory.eINSTANCE.createEDataType();
-				newEClassifier.setName(node.getName());
-				newEClassifier.setInstanceClassName(type_name);
-				EPackage root_EPackage = (EPackage)km2ecoremapping.get( currentPackage );
-				root_EPackage.getEClassifiers().add(newEClassifier);
-				km2ecoremapping.put(node,newEClassifier);
+		if ( exporterOptions.isIndependent ) {
+			EClassifier newEClassifier = primitiveTypesMappingForIndependency.get(node);
+			if (newEClassifier ==  null) {
+				if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
+					internalLog.debug(loggerTabs + "Creating DataType: "+ node.getName());
+					type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
+					// we need to create a new datatype for it and connect it to the root package
+					newEClassifier  = EcoreFactory.eINSTANCE.createEDataType();
+					newEClassifier.setName(node.getName());
+					newEClassifier.setInstanceClassName(type_name);
+					EPackage root_EPackage = (EPackage)km2ecoremapping.get( currentPackage );
+					root_EPackage.getEClassifiers().add(newEClassifier);
+					primitiveTypesMappingForIndependency.put(node,newEClassifier);
+				}
 			}
+			return newEClassifier;
+		} else {
+				
+			EClassifier newEClassifier = (EClassifier)km2ecoremapping.get(node);
+			
+			if (newEClassifier ==  null)
+			{
+				if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
+					internalLog.debug(loggerTabs + "Creating DataType: "+ node.getName());
+					type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
+					// we need to create a new datatype for it and connect it to the root package
+					newEClassifier  = EcoreFactory.eINSTANCE.createEDataType();
+					newEClassifier.setName(node.getName());
+					newEClassifier.setInstanceClassName(type_name);
+					EPackage root_EPackage = (EPackage)km2ecoremapping.get( currentPackage );
+					root_EPackage.getEClassifiers().add(newEClassifier);
+					km2ecoremapping.put(node,newEClassifier);
+				}
+			}
+
+			if (newEClassifier==null) newEClassifier = getEObjectForType(node);
+			return newEClassifier;
 		}
-		if (newEClassifier==null) newEClassifier = getEObjectForType(node);
-		return newEClassifier;
 	}
 	
 
