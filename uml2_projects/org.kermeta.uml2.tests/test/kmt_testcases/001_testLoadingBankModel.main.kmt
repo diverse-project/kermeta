@@ -4,11 +4,11 @@
  * Copyright:
  * Authors:
  */
-@mainClass "uml2ModelsLoading::Main"
+@mainClass "uml2BankLoading::Main"
 @mainOperation "main"
 
 
-package uml2ModelsLoading;
+package uml2BankLoading;
 
 
 require kermeta

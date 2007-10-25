@@ -1,4 +1,4 @@
-/* $Id: LoadingTestSuite.java,v 1.1 2007-10-23 15:19:32 ftanguy Exp $
+/* $Id: LoadingTestSuite.java,v 1.2 2007-10-25 12:04:28 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -17,8 +17,6 @@ import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
  */
 public class LoadingTestSuite extends TestSuite {
 
-    static RunJunitFactory runfactory = new RunJunitFactory("platform:/resource/org.kermeta.mdk.tests/.bin");
-    
 	public static Test suite() {
 	    return new LoadingTestSuite();
 	}    
@@ -29,6 +27,8 @@ public class LoadingTestSuite extends TestSuite {
 /*** BEGIN GENERATED TESTS ***/
 		testWithFile("test/kmt_testcases","001_testLoadingBankModel.main.kmt" );
 		testWithFile("test/kmt_testcases","002_testLoadingImprovedVehiclesModel.main.kmt" );
+		testWithFile("test/kmt_testcases","003_testLoadingGOFStatePatternModel.main.kmt" );
+		testWithFile("test/kmt_testcases","004_testLoadingSimulatorDesignModel.main.kmt" );
 /*** END GENERATED TESTS ***/
 	}
 
@@ -37,7 +37,7 @@ public class LoadingTestSuite extends TestSuite {
 		String uri = null;
 		uri = "platform:/plugin/org.kermeta.uml2.tests/" + dir + "/" + file;
 		
-		Test tests = runfactory.addTestsForUnit(uri);
+		Test tests = new RunJunitFactory("platform:/resource/org.kermeta.mdk.tests/.bin").addTestsForUnit(uri);
 		addTest( tests );
 	}
 	
