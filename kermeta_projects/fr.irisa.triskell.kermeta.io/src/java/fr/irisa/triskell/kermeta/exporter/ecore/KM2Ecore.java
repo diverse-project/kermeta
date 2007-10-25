@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.44 2007-10-19 16:32:20 cfaucher Exp $
+/* $Id: KM2Ecore.java,v 1.45 2007-10-25 09:23:06 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -370,6 +370,10 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
 			type_def_name = NamedElementHelper.getMangledQualifiedName(fClass.getTypeDefinition());
 			if (KM2Ecore.primitive_types_mapping.containsKey(type_def_name)) {
 				return true;
+			} else {
+				type_def_name = KM2Ecore.types_mapping.get(type_def_name);
+				if ( (type_def_name != null) && KM2Ecore.primitive_types_mapping.containsKey(type_def_name) )
+					return true;				
 			}
 		}
 		return false;
