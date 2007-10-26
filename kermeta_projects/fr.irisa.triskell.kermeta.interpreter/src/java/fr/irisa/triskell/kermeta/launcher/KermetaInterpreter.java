@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.37 2007-10-16 11:41:28 ftanguy Exp $
+/* $Id: KermetaInterpreter.java,v 1.38 2007-10-26 14:47:01 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -91,24 +91,31 @@ public class KermetaInterpreter {
 	    initializeEntryPoint();
 	}*/
 	
+	public KermetaInterpreter(KermetaUnit source, Tracer tracer) {
+		unit = source;
+		if ( unit.isIndirectlyErroneous() )
+	        throw new KermetaInterpreterError( KermetaUnitHelper.getAllErrorsAsString(unit) );
+	    initializeMemory();
+	    initializeEntryPoint();
+	}
+	
 	public KermetaInterpreter(String uri_unit, String binDirectory, Tracer tracer)
 	{
 	    try {
 	    	KermetaUnit source = KermetaUnitChecker.check( uri_unit );
-	    	
-	    	if ( source.getUri().matches(".+\\.km") )
-	    		unit = source;
-	    	else {
-			    LinkedHashSet<KermetaUnit> kermetaUnitsToMerge = new LinkedHashSet<KermetaUnit> ();
-			    kermetaUnitsToMerge.add(source);
-			    kermetaUnitsToMerge.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(source) );
-			    
-			    Merger merger = new Merger();
-			    String fileToExecute = merger.process(kermetaUnitsToMerge, binDirectory, null);
-			    
-		    	unit = KermetaUnitChecker.basicCheck( fileToExecute, this, new NullProgressMonitor() );
-	    	}
-	    } catch (KermetaIOFileNotFoundException e) {
+	   		if ( source.getUri().matches(".+\\.km") )
+	   			unit = source;
+	   		else {
+	   			LinkedHashSet<KermetaUnit> kermetaUnitsToMerge = new LinkedHashSet<KermetaUnit> ();
+	   			kermetaUnitsToMerge.add(source);
+	   			kermetaUnitsToMerge.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(source) );
+	   			
+	   			Merger merger = new Merger();
+	   			String fileToExecute = merger.process(kermetaUnitsToMerge, binDirectory, null);
+		    
+	   			unit = KermetaUnitChecker.basicCheck( fileToExecute, this, new NullProgressMonitor() );
+	    	} 
+	   	} catch (KermetaIOFileNotFoundException e) {
 			e.printStackTrace();
 			return;
 		} catch (URIMalformedException e) {
