@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.22 2007-10-24 11:04:34 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.23 2007-10-26 14:47:30 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -390,10 +390,7 @@ public class IOPlugin extends AbstractUIPlugin {
 			for ( KermetaUnit unit : unitToUnload )
 				unload( unit.getUri() );
 		}
-		internalLog.info("Available Memory before running garbage collection : " + Runtime.getRuntime().freeMemory() + " (unloading " + uri + ")");
-		Runtime.getRuntime().gc();
-		internalLog.info("Available Memory after running garbage collection : " + Runtime.getRuntime().freeMemory() + " (unloading " + uri + ")");
-
+		garbageCollect();
 	}
 	
 	public void unload(IFile file) {
@@ -406,6 +403,19 @@ public class IOPlugin extends AbstractUIPlugin {
 		for(KermetaUnit unit : unitToUnload){
 			storer.unload(unit.getUri());
 		}
+	}
+	
+	private void garbageCollect() {
+		List <KermetaUnit> unitToUnload = new ArrayList <KermetaUnit> ();
+		for ( KermetaUnit unit : storer.getKermetaUnits() ) {
+			if ( unit.getImporters().isEmpty() && ! unit.isLocked() )
+				unitToUnload.add( unit );
+		}
+		for ( KermetaUnit unit : unitToUnload )
+			storer.unload(unit.getUri() );
+		internalLog.info("Available Memory before running garbage collection : " + Runtime.getRuntime().freeMemory());
+		Runtime.getRuntime().gc();
+		internalLog.info("Available Memory after running garbage collection : " + Runtime.getRuntime().freeMemory());
 	}
 	
 	public KermetaUnit getFramework() {

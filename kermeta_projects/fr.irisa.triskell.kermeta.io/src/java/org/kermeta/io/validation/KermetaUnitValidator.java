@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitValidator.java,v 1.6 2007-10-04 07:22:15 ftanguy Exp $
+ * $Id: KermetaUnitValidator.java,v 1.7 2007-10-26 14:47:31 ftanguy Exp $
  */
 package org.kermeta.io.validation;
 
@@ -54,6 +54,8 @@ public interface KermetaUnitValidator {
 	boolean validateTypeDefinitionCache(TypeDefinitionCache value);
 
 	boolean validateKermetaUnitRequires(EList<KermetaUnitRequire> value);
+
+	boolean validateLocked(boolean value);
 
 	boolean validateKermetaUnitRequired(EList<KermetaUnit> value);
 }

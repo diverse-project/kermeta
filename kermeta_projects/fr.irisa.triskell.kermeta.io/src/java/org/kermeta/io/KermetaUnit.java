@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.13 2007-10-12 09:16:22 ftanguy Exp $
+ * $Id: KermetaUnit.java,v 1.14 2007-10-26 14:47:31 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -57,6 +57,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
  *   <li>{@link org.kermeta.io.KermetaUnit#isIsBeingTypechecked <em>Is Being Typechecked</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getTypeDefinitionCache <em>Type Definition Cache</em>}</li>
  *   <li>{@link org.kermeta.io.KermetaUnit#getKermetaUnitRequires <em>Kermeta Unit Requires</em>}</li>
+ *   <li>{@link org.kermeta.io.KermetaUnit#isLocked <em>Locked</em>}</li>
  * </ul>
  * </p>
  *
@@ -495,6 +496,32 @@ public interface KermetaUnit extends EObject {
 	 * @generated
 	 */
 	EList<KermetaUnitRequire> getKermetaUnitRequires();
+
+	/**
+	 * Returns the value of the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Locked</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Locked</em>' attribute.
+	 * @see #setLocked(boolean)
+	 * @see org.kermeta.io.IoPackage#getKermetaUnit_Locked()
+	 * @model
+	 * @generated
+	 */
+	boolean isLocked();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.io.KermetaUnit#isLocked <em>Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Locked</em>' attribute.
+	 * @see #isLocked()
+	 * @generated
+	 */
+	void setLocked(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

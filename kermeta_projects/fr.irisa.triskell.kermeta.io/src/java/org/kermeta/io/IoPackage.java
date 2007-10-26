@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackage.java,v 1.7 2007-10-04 07:22:15 ftanguy Exp $
+ * $Id: IoPackage.java,v 1.8 2007-10-26 14:47:31 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -233,13 +233,22 @@ public interface IoPackage extends EPackage {
 	int KERMETA_UNIT__KERMETA_UNIT_REQUIRES = 17;
 
 	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_UNIT__LOCKED = 18;
+
+	/**
 	 * The number of structural features of the '<em>Kermeta Unit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT_FEATURE_COUNT = 18;
+	int KERMETA_UNIT_FEATURE_COUNT = 19;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.io.impl.KermetaUnitStorerImpl <em>Kermeta Unit Storer</em>}' class.
@@ -970,6 +979,17 @@ public interface IoPackage extends EPackage {
 	EReference getKermetaUnit_KermetaUnitRequires();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.io.KermetaUnit#isLocked <em>Locked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Locked</em>'.
+	 * @see org.kermeta.io.KermetaUnit#isLocked()
+	 * @see #getKermetaUnit()
+	 * @generated
+	 */
+	EAttribute getKermetaUnit_Locked();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.io.KermetaUnitStorer <em>Kermeta Unit Storer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1517,6 +1537,14 @@ public interface IoPackage extends EPackage {
 		 * @generated
 		 */
 		EReference KERMETA_UNIT__KERMETA_UNIT_REQUIRES = eINSTANCE.getKermetaUnit_KermetaUnitRequires();
+
+		/**
+		 * The meta object literal for the '<em><b>Locked</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KERMETA_UNIT__LOCKED = eINSTANCE.getKermetaUnit_Locked();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.io.impl.KermetaUnitStorerImpl <em>Kermeta Unit Storer</em>}' class.

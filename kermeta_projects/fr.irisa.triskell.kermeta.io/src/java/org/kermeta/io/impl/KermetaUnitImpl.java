@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.20 2007-10-23 11:32:04 dvojtise Exp $
+ * $Id: KermetaUnitImpl.java,v 1.21 2007-10-26 14:47:31 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -88,6 +88,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isIsBeingTypechecked <em>Is Being Typechecked</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getTypeDefinitionCache <em>Type Definition Cache</em>}</li>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#getKermetaUnitRequires <em>Kermeta Unit Requires</em>}</li>
+ *   <li>{@link org.kermeta.io.impl.KermetaUnitImpl#isLocked <em>Locked</em>}</li>
  * </ul>
  * </p>
  *
@@ -335,6 +336,26 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @ordered
 	 */
 	protected EList<KermetaUnitRequire> kermetaUnitRequires;
+
+	/**
+	 * The default value of the '{@link #isLocked() <em>Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLocked()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean LOCKED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isLocked() <em>Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLocked()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean locked = LOCKED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -777,6 +798,27 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			kermetaUnitRequires = new EObjectResolvingEList<KermetaUnitRequire>(KermetaUnitRequire.class, this, IoPackage.KERMETA_UNIT__KERMETA_UNIT_REQUIRES);
 		}
 		return kermetaUnitRequires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isLocked() {
+		return locked;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocked(boolean newLocked) {
+		boolean oldLocked = locked;
+		locked = newLocked;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, IoPackage.KERMETA_UNIT__LOCKED, oldLocked, locked));
 	}
 
 	/**
@@ -1505,6 +1547,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return basicGetTypeDefinitionCache();
 			case IoPackage.KERMETA_UNIT__KERMETA_UNIT_REQUIRES:
 				return getKermetaUnitRequires();
+			case IoPackage.KERMETA_UNIT__LOCKED:
+				return isLocked() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1578,6 +1622,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				getKermetaUnitRequires().clear();
 				getKermetaUnitRequires().addAll((Collection<? extends KermetaUnitRequire>)newValue);
 				return;
+			case IoPackage.KERMETA_UNIT__LOCKED:
+				setLocked(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1644,6 +1691,9 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			case IoPackage.KERMETA_UNIT__KERMETA_UNIT_REQUIRES:
 				getKermetaUnitRequires().clear();
 				return;
+			case IoPackage.KERMETA_UNIT__LOCKED:
+				setLocked(LOCKED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1692,6 +1742,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				return typeDefinitionCache != null;
 			case IoPackage.KERMETA_UNIT__KERMETA_UNIT_REQUIRES:
 				return kermetaUnitRequires != null && !kermetaUnitRequires.isEmpty();
+			case IoPackage.KERMETA_UNIT__LOCKED:
+				return locked != LOCKED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1722,6 +1774,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		result.append(aspects);
 		result.append(", isBeingTypechecked: ");
 		result.append(isBeingTypechecked);
+		result.append(", locked: ");
+		result.append(locked);
 		result.append(')');
 		return result.toString();
 	}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.14 2007-10-12 09:16:22 ftanguy Exp $
+ * $Id: IoPackageImpl.java,v 1.15 2007-10-26 14:47:31 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -437,6 +437,15 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getKermetaUnit_Locked() {
+		return (EAttribute)kermetaUnitEClass.getEStructuralFeatures().get(18);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getKermetaUnitStorer() {
 		return kermetaUnitStorerEClass;
 	}
@@ -794,6 +803,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__IS_BEING_TYPECHECKED);
 		createEReference(kermetaUnitEClass, KERMETA_UNIT__TYPE_DEFINITION_CACHE);
 		createEReference(kermetaUnitEClass, KERMETA_UNIT__KERMETA_UNIT_REQUIRES);
+		createEAttribute(kermetaUnitEClass, KERMETA_UNIT__LOCKED);
 
 		iBuildingStateEClass = createEClass(IBUILDING_STATE);
 
@@ -908,6 +918,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		initEAttribute(getKermetaUnit_IsBeingTypechecked(), ecorePackage.getEBoolean(), "isBeingTypechecked", null, 0, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKermetaUnit_TypeDefinitionCache(), this.getTypeDefinitionCache(), this.getTypeDefinitionCache_KermetaUnit(), "typeDefinitionCache", null, 1, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKermetaUnit_KermetaUnitRequires(), this.getKermetaUnitRequire(), null, "kermetaUnitRequires", null, 0, -1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKermetaUnit_Locked(), ecorePackage.getEBoolean(), "locked", null, 0, 1, KermetaUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(kermetaUnitEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
 
