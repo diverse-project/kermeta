@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.5 2007-10-23 08:42:25 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.6 2007-10-26 14:48:18 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -12,11 +12,15 @@
  */
 package fr.irisa.triskell.kermeta.launcher;
 
+import java.io.IOException;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.merger.Merger;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -56,6 +60,37 @@ public class RunJunitFactory implements Test {
     private boolean isCompiled = false;
     
     private String binDirectory;
+
+    private KermetaUnit executable = null;
+    
+    public KermetaUnit getExecutable() {
+    	if ( executable == null )
+			try {
+				setExecutable();
+			} catch (URIMalformedException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	return executable;
+    }
+    
+    private void setExecutable() throws URIMalformedException, IOException {
+    	if ( executable == null ) {
+    		KermetaUnit source = getUnit();
+    		source.setLocked(true);
+   			LinkedHashSet<KermetaUnit> kermetaUnitsToMerge = new LinkedHashSet<KermetaUnit> ();
+   			kermetaUnitsToMerge.add(source);
+   			kermetaUnitsToMerge.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(source) );
+   			
+   			Merger merger = new Merger();
+   			String fileToExecute = merger.process(kermetaUnitsToMerge, binDirectory, null);
+	    	executable = KermetaUnitChecker.basicCheck( fileToExecute, this, new NullProgressMonitor() );
+   		
+	    	source.setLocked(false);
+   			
+    	}
+    }
     
     /**
      * enabling this option will optimize the loading, so it will load it only once : one for the identification 
@@ -70,6 +105,7 @@ public class RunJunitFactory implements Test {
      */
     public RunJunitFactory(String binDirectory) {
         this.binDirectory = binDirectory;
+        optimizeLoading = false;
     }
     /**
      * constructor allowing to change some default setting
@@ -120,7 +156,8 @@ public class RunJunitFactory implements Test {
             	theTestCase = new FailedTestCase(failedTestName, 
             		new Exception("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)" +
             					  KermetaUnitHelper.getAllErrorsAsString(unit)));
-            	if(!optimizeLoading) resetUnit(); // reset the unit to free some memory
+            	if(!optimizeLoading) 
+            		resetUnit(); // reset the unit to free some memory
                 return theTestCase;
             }
             
@@ -134,7 +171,8 @@ public class RunJunitFactory implements Test {
             	theTestCase = new FailedTestCase(failedTestName, 
             		new Exception("Unit " + unit.getUri() + " contains errors (ie. didn't load or constraintcheck correctly)"+
             				KermetaUnitHelper.getAllErrorsAsString(unit)));
-            	if(!optimizeLoading) resetUnit(); // reset the unit to free some memory
+            	if(!optimizeLoading) 
+            		resetUnit(); // reset the unit to free some memory
             	return theTestCase;
             }
             
@@ -184,12 +222,14 @@ public class RunJunitFactory implements Test {
                 theTestSuite.setName(unit_uri);
                 
                 includeTestSuite(main_class, unit, constraintExecution);
-                if(!optimizeLoading) resetUnit(); // reset the unit to free some memory
+                if(!optimizeLoading) 
+                	resetUnit(); // reset the unit to free some memory
                 if(theTestSuite.countTestCases() == 0){
                 	// No valid test in the testsuite ! => fails
                 	Exception e = new Exception("Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')");
                 	return new FailedTestCase(failedTestName, e);
                 }
+                
                 return theTestSuite;
                 
             }
@@ -201,7 +241,8 @@ public class RunJunitFactory implements Test {
             		theTestCase = new RunInterpretedTestCase(main_class, main_operation, this, constraintExecution, true, binDirectory);
             	}
                 
-                if(!optimizeLoading) resetUnit(); // reset the unit to free some memory
+            	if(!optimizeLoading)
+            		resetUnit(); // reset the unit to free some memory
                 return theTestCase;
             }
 
@@ -312,7 +353,14 @@ public class RunJunitFactory implements Test {
     
     
     public void resetUnit(){
+     	
     	IOPlugin.getDefault().unload(unit_uri);
+    	
+    	if ( executable != null ) {
+        	String s = executable.getUri();
+    		executable = null;
+    		IOPlugin.getDefault().unload( s );
+    	}
     	unit = null;
     }
     /**

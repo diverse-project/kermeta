@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.8 2007-10-23 09:41:32 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.9 2007-10-26 14:48:19 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -30,7 +30,6 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 public class JunitTestSuite extends TestSuite {
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("JunitTestSuite");
-    RunJunitFactory runfactory = new RunJunitFactory("platform:/resource/fr.irisa.triskell.kermeta.tests/.bin");
     
     static private IOPlugin ioPlugin;
     
@@ -203,7 +202,6 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/kmt_testcases","068_testVariableInit.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","069_testToStringRedifinition.main.kmt" );
-
 
 
 /*** END GENERATED TESTS ***/

@@ -14,7 +14,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.compare,
  org.eclipse.emf.compare.diff,
  org.eclipse.emf.compare.match,
- org.junit4
+ org.junit4,
+ org.kermeta.merger
 Export-Package: fr.irisa.triskell.kermeta.interpreter.test,
  fr.irisa.triskell.kermeta.launcher,
  fr.irisa.triskell.kermeta.tests.comparison,
