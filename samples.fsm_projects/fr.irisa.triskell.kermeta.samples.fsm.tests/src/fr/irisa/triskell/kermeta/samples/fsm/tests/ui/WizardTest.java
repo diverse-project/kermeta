@@ -30,7 +30,7 @@ public class WizardTest {
 	@Test public void creationSamplesproject() throws CoreException {
 		final FsmSampleExampleWizard wizard;
 		wizard = (FsmSampleExampleWizard) PlatformUI.getWorkbench().getNewWizardRegistry().findWizard("fr.irisa.triskell.kermeta.samples.fsm.wizard").createWizard();
-		assert( wizard != null );
+		Assert.assertTrue( wizard != null );
 			
 		UIJob job = new UIJob("blah") {
 			@Override
@@ -46,7 +46,7 @@ public class WizardTest {
 		};
 		UiTools.executeUIJob(job);
 		
-		assert( ResourcesPlugin.getWorkspace().getRoot().getProject( FsmPlugin.DEMO_PROJECT_NAME ).exists() );
+		Assert.assertTrue( ResourcesPlugin.getWorkspace().getRoot().getProject( FsmPlugin.DEMO_PROJECT_NAME ).exists() );
 		
 	}
 	

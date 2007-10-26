@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
+import org.junit.Assert;
 import org.junit.Test;
 
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
@@ -22,7 +23,7 @@ public class Determinization {
 		interpreter.setEntryParameters(parameters);
 		interpreter.launch();
 		
-		assert( ResourcesPlugin.getWorkspace().getRoot().getFile( new Path("/fr.irisa.triskell.kermeta.samples.fsm.demo/models/sampletodeterminize.det.fsm") ).exists() );
+		Assert.assertTrue( ResourcesPlugin.getWorkspace().getRoot().getFile( new Path("/fr.irisa.triskell.kermeta.samples.fsm.demo/models/sampletodeterminize.det.fsm") ).exists() );
 		
 	}
 	
