@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.15 2007-10-29 09:44:29 ftanguy Exp $
+/* $Id: PropertyChecker.java,v 1.16 2007-10-29 16:12:04 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -15,6 +15,7 @@
  */
 package fr.irisa.triskell.kermeta.constraintchecker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.kermeta.io.KermetaUnit;
@@ -200,7 +201,7 @@ public class PropertyChecker extends AbstractChecker {
 		 {
 			 KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 			 // Opposite mismatch
-			 if ( property.getOpposite() != null ) {
+			// if ( property.getOpposite() != null ) {
 				 /*
 				  * 
 				  * If the property got an opposite, check if the container of the respective opposite property is the same,
@@ -220,7 +221,7 @@ public class PropertyChecker extends AbstractChecker {
 						+ pp.ppSimplifiedPropertyInContext(property.getOpposite()), property.getOpposite());
 					 result = false;
 				 }
-			 }
+
 			 // Composition multiplicity
 			 if(property.getOpposite().isIsComposite()){
 				 if(property.getUpper() != 1){
@@ -241,7 +242,7 @@ public class PropertyChecker extends AbstractChecker {
 		 }
 		 return result;
 	 }
-	 
+
 	private boolean checkPropertiesConformity() {
 		boolean result = true;
 		KermetaUnitHelper.getKermetaUnitFromObject( classDefinition );
