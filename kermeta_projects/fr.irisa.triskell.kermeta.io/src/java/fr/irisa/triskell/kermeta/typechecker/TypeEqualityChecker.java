@@ -1,4 +1,4 @@
-/* $Id: TypeEqualityChecker.java,v 1.12 2007-09-04 08:29:31 ftanguy Exp $
+/* $Id: TypeEqualityChecker.java,v 1.13 2007-10-29 16:14:32 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -163,7 +163,14 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 
 	
 	public Object visitObjectTypeVariable(ObjectTypeVariable arg0) {
-		return new Boolean(provided == arg0);
+		if ( provided instanceof ObjectTypeVariable ) {
+			ObjectTypeVariable otv = (ObjectTypeVariable) provided;
+			if ( otv.getName().equals(arg0.getName()) )
+				return true;
+		}
+		return false;
+/*		if ( arg0.getName().equals(provided.get))
+		return new Boolean(provided == arg0);*/
 	}
 	
 	public Object visitVoidType(VoidType arg0) {
