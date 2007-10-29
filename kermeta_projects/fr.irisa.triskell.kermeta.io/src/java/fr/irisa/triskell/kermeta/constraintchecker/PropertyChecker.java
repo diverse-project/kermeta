@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.13 2007-10-23 11:37:00 dvojtise Exp $
+/* $Id: PropertyChecker.java,v 1.14 2007-10-29 09:35:36 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -200,8 +200,11 @@ public class PropertyChecker extends AbstractChecker {
 		 {
 			 KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 			 // Opposite mismatch
-			 if(property.getOpposite().getOpposite() != property)
-			 {
+			 
+			 ClassDefinition container1 = (ClassDefinition) property.getOpposite().getOpposite().eContainer();
+			 ClassDefinition container2 = (ClassDefinition) property.eContainer();
+			 
+			 if ( (container1 != container2) && ! container2.getBaseAspects().contains(container1) ) {			 
 				 builder.error(OPPOSITE_ERROR
 					 + pp .ppSimplifiedPropertyInContext(property), property);
 				 if(property.getOpposite().getOpposite() == null)
