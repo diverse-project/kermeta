@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.23 2007-10-26 14:47:30 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.24 2007-10-29 10:23:48 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -167,7 +167,8 @@ public class IOPlugin extends AbstractUIPlugin {
 					
 					// Loading Ecore
 					ecore = loadEcore( ECORE_URI );
-										
+					ecore.setLocked(true);				
+					
 					typechecker = new KermetaTypeChecker( ecore, new NullProgressMonitor() );
 					typechecker.checkUnit();
 
