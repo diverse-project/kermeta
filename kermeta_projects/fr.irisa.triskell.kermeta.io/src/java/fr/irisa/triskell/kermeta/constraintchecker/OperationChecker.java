@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.22 2007-10-23 11:25:11 dvojtise Exp $
+/* $Id: OperationChecker.java,v 1.23 2007-10-29 16:12:31 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -24,6 +24,7 @@ import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -35,6 +36,8 @@ import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.modelhelper.PrimitiveTypeHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
@@ -173,27 +176,8 @@ public class OperationChecker extends AbstractChecker {
 							// Checking the returned type
 							error = ! TypeEqualityChecker.equals(operation.getType(), op.getType());
 						// Checking the parameter's type
-						Iterator <Parameter> iterator1 = operation.getOwnedParameter().iterator();
-						Iterator <Parameter> iterator2 = op.getOwnedParameter().iterator();
-						while ( ! error && iterator1.hasNext() && iterator2.hasNext() ) {
-							Parameter parameter1 = iterator1.next();
-							Parameter parameter2 = iterator2.next();
-							error = ! TypeEqualityChecker.equals(parameter1.getType(), parameter2.getType());
-							// If there is an error, it is maybe because types come from aspect. Let's take one more shot.
-							if ( error ) {
-								if ( parameter1.getType() instanceof fr.irisa.triskell.kermeta.language.structure.Class ) {
-									
-									ClassDefinition cd1 = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) parameter1.getType()).getTypeDefinition();
-									ClassDefinition cd2 = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) parameter2.getType()).getTypeDefinition();
-									
-									if ( ClassDefinitionHelper.getAllBaseClasses(cd1).contains(cd2) )
-										error = false;
-									
-								} else if ( parameter1.getType() instanceof PrimitiveType ) {
-									
-								}
-							}
-						}
+						if ( ! error )
+							error = ! checkParameters(operation, op);
 						
 						if ( error ) {
 							KermetaUnit distantUnit = KermetaUnitHelper.getKermetaUnitFromObject(op);
@@ -218,11 +202,65 @@ public class OperationChecker extends AbstractChecker {
 								"duplicate definition of operation '"+operation.getName()+"'.",operation);
 						return false;
 					}
+				} else if (op.getName().equals(operation.getName()) ) {
+					boolean error = ! checkParameters(operation, op);
+					if ( error ) {
+						error = checkParameters(operation, op);
+						KermetaUnit distantUnit = KermetaUnitHelper.getKermetaUnitFromObject(op);
+						String message = "";
+						if ( distantUnit != null ) {
+							KM2KMTPrettyPrinter printer = new KM2KMTPrettyPrinter();
+							message = "Operation " + operation.getName() + " is already implemented in " + distantUnit.getUri() + "\n\n";
+							message += printer.ppSimplifiedFOperation(operation) + " does not matched with " + printer.ppSimplifiedFOperation(op);
+						} else
+							message = "Operation " + operation.getName() + " is already implemented elsewhere.";
+						
+						addProblem(ERROR, message, operation);
+						return false;
+					}
 				}
+					
 			}
 		}
 		return true;
 	}
+	
+	/**
+	 * 
+	 * Checking that parameters from op1 are typed the same way in op2.
+	 * 
+	 * @param op1
+	 * @param op2
+	 * @return true or false wether an error has been found.
+	 */
+	/*private boolean checkParameters(Operation op1, Operation op2) {
+		boolean error = false;
+		Iterator <Parameter> iterator1 = op1.getOwnedParameter().iterator();
+		Iterator <Parameter> iterator2 = op2.getOwnedParameter().iterator();
+		while ( ! error && iterator1.hasNext() && iterator2.hasNext() ) {
+			Parameter parameter1 = iterator1.next();
+			Parameter parameter2 = iterator2.next();
+			if ( ! (parameter2.getType() instanceof ObjectTypeVariable) ) {
+				error = ! TypeEqualityChecker.equals(parameter1.getType(), parameter2.getType());
+				// If there is an error, it is maybe because types come from aspect. Let's take one more shot.
+				if ( error ) {
+				//	TypeEqualityChecker.equals(parameter1.getType(), parameter2.getType());
+					if ( parameter1.getType() instanceof fr.irisa.triskell.kermeta.language.structure.Class ) {
+						
+						ClassDefinition cd1 = TypeHelper.getClassDefinition(parameter1.getType());
+						ClassDefinition cd2 = TypeHelper.getClassDefinition(parameter2.getType());
+						
+						if ( ClassDefinitionHelper.getAllBaseClasses(cd1).contains(cd2) )
+							error = false;
+						
+					} else if ( parameter1.getType() instanceof PrimitiveType ) {
+						
+					}
+				}
+			}
+		}
+		return error;
+	}*/
 	
 	private boolean checkReturnType(Operation operation) {
 		boolean result = ReturnTypeChecker.typeCheckExpression(operation);
@@ -331,8 +369,15 @@ public class OperationChecker extends AbstractChecker {
 					//isConform = (((ClassImpl)typeA).getTypeDefinition().equals(((ClassImpl)typeB).getTypeDefinition()));
 					isConform = isConformType((ClassImpl)typeA, (ClassImpl)typeB);
 				}
-				else
-				{
+				else if (typeA instanceof PrimitiveType && typeB instanceof Class ) {
+					Type t = PrimitiveTypeHelper.resolvePrimitiveType(typeA);
+					isConform = isConformType((ClassImpl)t, (ClassImpl)typeB);
+					System.out.println();
+				} else if ( typeA instanceof Class && typeB instanceof PrimitiveType) {
+					Type t = PrimitiveTypeHelper.resolvePrimitiveType(typeB);
+					isConform = isConformType((ClassImpl)typeA, (ClassImpl)t);
+					System.out.println();
+				} else {
 					// Until we know the type politics, conformity will be true.
 					isConform = true;
 				}
