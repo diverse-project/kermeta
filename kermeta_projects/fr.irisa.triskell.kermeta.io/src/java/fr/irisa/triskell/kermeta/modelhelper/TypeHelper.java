@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.java,v 1.5 2007-08-02 15:19:03 cfaucher Exp $
+/* $Id: TypeHelper.java,v 1.6 2007-10-29 16:13:59 ftanguy Exp $
  * Project   : Kermeta 
  * File      : TypeHelper.java
  * License   : EPL
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 
@@ -203,4 +204,26 @@ public class TypeHelper {
 		// FIXME : getName return sometimes null, which is unconsistent
 		return (type_name != null) ? type_name : "<Unset>";
 	}
+	 
+		/**
+		 * 
+		 * Return the class definition of a type if this type is a Class or a Virtualtype.
+		 * 
+		 * @param type
+		 * @return
+		 */
+		static public ClassDefinition getClassDefinition(Type type) {
+			if ( type instanceof Class ) {
+				return (ClassDefinition) ((Class) type).getTypeDefinition();
+			} else if ( type instanceof VirtualType ) {
+				return ((VirtualType) type).getClassDefinition();
+			} else if ( type instanceof PrimitiveType ) {
+				Object o = type;
+				while ( ! (o instanceof Class) )
+					o = ((PrimitiveType) o).getInstanceType();
+				return (ClassDefinition) ((Class) o).getTypeDefinition();
+			}
+			return null;
+		} 
+	 
 }

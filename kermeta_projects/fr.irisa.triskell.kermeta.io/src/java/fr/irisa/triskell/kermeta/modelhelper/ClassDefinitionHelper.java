@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.java,v 1.10 2007-10-02 15:19:05 ftanguy Exp $
+/* $Id: ClassDefinitionHelper.java,v 1.11 2007-10-29 16:13:59 ftanguy Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL
@@ -21,6 +21,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
@@ -30,6 +31,7 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 /**
@@ -125,15 +127,20 @@ public class ClassDefinitionHelper {
 			return;
 		
 		classDefinitionProcessed.add( currentClassDefinition );
-		
+
 		for (Property prop : currentClassDefinition.getOwnedAttribute()) {
 			if ( ! properties.contains(prop) ) 
 				properties.add( prop );
 		}
 		
 		for ( Type stnext : currentClassDefinition.getSuperType() ) {
-			ClassDefinition superClassDefinition = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stnext).getTypeDefinition();
-			internGetAllProperties(superClassDefinition, properties, classDefinitionProcessed);
+			if ( stnext instanceof VirtualType ) {
+				ClassDefinition superClassDefinition = ((VirtualType)stnext).getClassDefinition();
+				internGetAllProperties(superClassDefinition, properties, classDefinitionProcessed);								
+			} else if ( stnext instanceof Class ) {
+				ClassDefinition superClassDefinition = (ClassDefinition) ((Class)stnext).getTypeDefinition();
+				internGetAllProperties(superClassDefinition, properties, classDefinitionProcessed);				
+			}
 		}
 		
 		for ( TypeDefinition baseTypeDefinition : (List<TypeDefinition>) currentClassDefinition.getBaseAspects() ) {
@@ -152,6 +159,15 @@ public class ClassDefinitionHelper {
 			}
 		}
 		
+	}
+	
+	static public List<Property> getAllPropertiesWithOpposite(ClassDefinition classDefinition) {
+		List<Property> result = new ArrayList<Property> ();
+		for ( Property p : getAllProperties(classDefinition) ) {
+			if ( p.getOpposite() != null )
+				result.add(p);
+		}
+		return result;
 	}
 	
 	/**
@@ -263,7 +279,7 @@ public class ClassDefinitionHelper {
 		}
 		
 		for ( Type stnext : currentClassDefinition.getSuperType() ) {
-			ClassDefinition superClassDefinition = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stnext).getTypeDefinition();
+			ClassDefinition superClassDefinition = TypeHelper.getClassDefinition(stnext);
 			internGetAllOperations(superClassDefinition, operations, classDefinitionProcessed);
 		}
 		
@@ -316,8 +332,8 @@ public class ClassDefinitionHelper {
 	 * @return
 	 */
 	public static boolean isSuperClassOf(ClassDefinition supercls, ClassDefinition cls) {
-		for(Object stype : cls.getSuperType()) {
-			ClassDefinition scls = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stype).getTypeDefinition();
+		for(Type stype : cls.getSuperType()) {
+			ClassDefinition scls = TypeHelper.getClassDefinition(stype);
 			if (supercls == scls) return true;
 			else if(isSuperClassOf(supercls, scls)) return true;
 		}
