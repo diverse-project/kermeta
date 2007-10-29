@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.26 2007-10-02 15:19:05 ftanguy Exp $
+/* $Id: KMT2KMPass3.java,v 1.27 2007-10-29 16:13:06 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -166,9 +166,11 @@ public class KMT2KMPass3 extends KMT2KMPass {
 				ClassDefinition supertypeDefinition = (ClassDefinition) builder.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object", monitor);
 				if ( supertypeDefinition == null )
 					builder.error("Missing the statement : require kermeta");
-				fr.irisa.triskell.kermeta.language.structure.Class superclass = StructureFactory.eINSTANCE.createClass();
-				superclass.setTypeDefinition( supertypeDefinition );
-				context.current_class.getSuperType().add( superclass );
+				else {
+					fr.irisa.triskell.kermeta.language.structure.Class superclass = StructureFactory.eINSTANCE.createClass();
+					superclass.setTypeDefinition( supertypeDefinition );
+					context.current_class.getSuperType().add( superclass );
+				}
 			}
 		}
 		return super.beginVisit(classDecl);
