@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.38 2007-10-26 14:47:01 ftanguy Exp $
+/* $Id: KermetaInterpreter.java,v 1.39 2007-10-29 16:10:54 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -146,7 +146,8 @@ public class KermetaInterpreter {
 	    	if ( source.getUri().matches(".+\\.km") )
 	    		unit = source;
 	    	else {
-			    LinkedHashSet<KermetaUnit> kermetaUnitsToMerge = new LinkedHashSet<KermetaUnit> ();
+			    source.setLocked(true);
+	    		LinkedHashSet<KermetaUnit> kermetaUnitsToMerge = new LinkedHashSet<KermetaUnit> ();
 			    kermetaUnitsToMerge.add(source);
 			    kermetaUnitsToMerge.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(source) );
 			    
@@ -156,6 +157,8 @@ public class KermetaInterpreter {
 			    
 			    Merger merger = new Merger();
 			    String fileToExecute = merger.process(kermetaUnitsToMerge, binDirectory, null);
+			    
+			    source.setLocked(false);
 			    
 		    	unit = KermetaUnitChecker.basicCheck( fileToExecute, this, new NullProgressMonitor() );
 	    	}
