@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.24 2007-10-29 10:23:48 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.25 2007-10-29 16:14:51 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -276,7 +276,8 @@ public class IOPlugin extends AbstractUIPlugin {
 						kermetaUnit.addRequire( ECORE_URI, ecore );	
 					}
 				}
-			}
+			} else
+				kermetaUnit.setLocked(true);
 		}
 		return kermetaUnit;
 	}
