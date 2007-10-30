@@ -1,4 +1,4 @@
-/* $Id: 003_ComplexTest_rdl.main.kmt,v 1.2 2007-10-16 11:49:10 ftanguy Exp $
+/* $Id: 003_ComplexTest_rdl.main.kmt,v 1.3 2007-10-30 14:12:37 ftanguy Exp $
 * Project    : RdlModel
 * File       : rdl.kmt
 * License    : EPL
@@ -11,10 +11,11 @@
 *       Contains classes corresponding to RDL meta-model
 */
 
+@uri "ComplexTestRDL"
 package fr;
 
-require "general.kmt"
 require "http://www.eclipse.org/emf/2002/Ecore"
+require "general.kmt"
 require kermeta
 
 using kermeta::standard

@@ -1,3 +1,4 @@
+@uri "http://TestAlias"
 package testAliasInOperationBody;
 
 require "http://www.eclipse.org/emf/2002/Ecore"

@@ -1,7 +1,8 @@
+@uri "http://SimpleMain"
 package src;
 
-require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
+require kermeta
 
 class Main
 {

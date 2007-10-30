@@ -1,7 +1,7 @@
 @mainClass "testString::Main"
 @mainOperation "main"
 
-
+@uri "http://TestString"
 package testString;
 
 require "http://www.eclipse.org/emf/2002/Ecore"

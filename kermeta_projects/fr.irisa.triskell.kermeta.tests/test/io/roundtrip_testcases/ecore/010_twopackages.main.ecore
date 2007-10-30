@@ -2,7 +2,7 @@
 <xmi:XMI xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
-  <ecore:EPackage name="SimpleClass">
+  <ecore:EPackage name="SimpleClass" nsURI="http://SimpleClass" nsPrefix="SimpleClass">
     <eClassifiers xsi:type="ecore:EClass" name="Classifier">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false"
           unique="false" lowerBound="1" eType="#/1/String"/>
@@ -33,7 +33,7 @@
           lowerBound="1" eType="#/0/Classifier"/>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="PrimitiveTypes">
+  <ecore:EPackage name="PrimitiveTypes" nsURI="http://PrimitiveTypes" nsPrefix="PrimitiveTypes">
     <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.boolean"/>
   </ecore:EPackage>

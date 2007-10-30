@@ -1,4 +1,4 @@
-
+@uri "http://testTypeVariable"
 package test;
 
 require "http://www.eclipse.org/emf/2002/Ecore"
