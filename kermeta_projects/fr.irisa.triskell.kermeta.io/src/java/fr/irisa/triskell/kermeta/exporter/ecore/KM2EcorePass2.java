@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.48 2007-10-25 09:41:43 ftanguy Exp $
+/* $Id: KM2EcorePass2.java,v 1.49 2007-10-30 14:11:24 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass2.java
  * License    : EPL
@@ -650,7 +650,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 	{
 		String type_name = NamedElementHelper.getMangledQualifiedName(node);
 		
-		if ( exporterOptions.isIndependent ) {
+ 		if ( exporterOptions.isIndependent ) {
 			EClassifier newEClassifier = primitiveTypesMappingForIndependency.get(node);
 			if (newEClassifier ==  null) {
 				if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
@@ -663,7 +663,8 @@ public class KM2EcorePass2 extends KM2Ecore {
 					EPackage root_EPackage = (EPackage)km2ecoremapping.get( currentPackage );
 					root_EPackage.getEClassifiers().add(newEClassifier);
 					primitiveTypesMappingForIndependency.put(node,newEClassifier);
-				}
+				} else
+					newEClassifier = (EClassifier)km2ecoremapping.get(node);
 			}
 			return newEClassifier;
 		} else {
