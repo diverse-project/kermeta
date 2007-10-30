@@ -13,9 +13,6 @@ class OddEven inherits Integer {
 	end
 }
 
-class SuperOddEven inherits OddEven {
-}
-
 class OddEvenList <T : OddEven> {
 	attribute odds : set T[0..*]
 	attribute evens : set T[0..*]
@@ -31,12 +28,12 @@ class OddEvenList <T : OddEven> {
 }
 
 class User {
-	attribute myList : OddEvenList<OddEven>
+	attribute myList : OddEvenList<Object>
 	operation test() : Void is
 	do
-		var myList2 : OddEvenList<SuperOddEven>
-		//myList := OddEvenList<Object>.new
-		myList.add( OddEven.new )
-		//OddEvenList<String>.new
+		var myList2 : OddEvenList<Boolean>
+		myList := OddEvenList<Object>.new
+		myList.add(false)
+		OddEvenList<String>.new
 	end
 }

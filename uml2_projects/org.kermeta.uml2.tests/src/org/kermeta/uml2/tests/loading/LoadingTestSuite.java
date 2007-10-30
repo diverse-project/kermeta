@@ -1,4 +1,4 @@
-/* $Id: LoadingTestSuite.java,v 1.2 2007-10-25 12:04:28 ftanguy Exp $
+/* $Id: LoadingTestSuite.java,v 1.3 2007-10-30 14:17:53 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -29,6 +29,7 @@ public class LoadingTestSuite extends TestSuite {
 		testWithFile("test/kmt_testcases","002_testLoadingImprovedVehiclesModel.main.kmt" );
 		testWithFile("test/kmt_testcases","003_testLoadingGOFStatePatternModel.main.kmt" );
 		testWithFile("test/kmt_testcases","004_testLoadingSimulatorDesignModel.main.kmt" );
+		testWithFile("test/kmt_testcases","005_testLoadingSimpleBehavioredClassModel.main.kmt" );
 /*** END GENERATED TESTS ***/
 	}
 
