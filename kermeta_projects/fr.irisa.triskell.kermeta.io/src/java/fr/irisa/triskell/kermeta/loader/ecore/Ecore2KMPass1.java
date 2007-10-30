@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.20 2007-10-23 12:23:59 dvojtise Exp $
+/*$Id: Ecore2KMPass1.java,v 1.21 2007-10-30 14:10:51 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -128,7 +128,10 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		// FIXME : we have to test if URI is valid as a file path or not!
 		// Was : pack.setUri(node.getNsURI());
 		// node.getNsURI() is not always valid, so by default, we will take unit.getUri();
-		p.setUri( kermetaUnit.getUri() );
+		if ( (node.getNsURI() != null) && (! node.getNsURI().equals("")) )
+			p.setUri( node.getNsURI() );
+		else
+			p.setUri( kermetaUnit.getUri() );
 		
 		packagesStack.push(p);
 		
