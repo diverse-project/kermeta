@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.56 2007-10-23 11:31:11 dvojtise Exp $
+/* $Id: ExpressionChecker.java,v 1.57 2007-11-05 08:50:33 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -346,9 +346,14 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		    	
 		    	result = getTypeFromTypeLiteral((TypeLiteral)((CallFeature)exp).getTarget());
 	
-		    	if (((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)result).getType()).getTypeDefinition()).isIsAbstract()) {
-	                unit.error("TYPE-CHECKER : Abstract class instance ("+ result +") should not be cloned.", (Expression)exp);
-	            }
+/*		    	if ( ((SimpleType)result).getType() instanceof ObjectTypeVariable ) {
+					
+				} else*/ if ( ((SimpleType)result).getType() instanceof Class ) {
+			    	if (((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)result).getType()).getTypeDefinition()).isIsAbstract()) {
+		                unit.error("TYPE-CHECKER : Abstract class instance ("+ result +") should not be cloned.", (Expression)exp);
+		            }					
+				}
+	
 	    	} else {
 	    		unit.error("TYPE-CHECKER : clone() may only be called on a type literal.", exp);
 	    	}
