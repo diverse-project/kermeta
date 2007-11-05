@@ -4,10 +4,10 @@
     <details key="require" value="primitive_types.kmt|"/>
     <details key="using" value="kermeta::exceptions|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="standard" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#//standard" nsPrefix="standard">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#/kermeta" nsPrefix="kermeta">
+    <eSubpackages name="standard" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#/kermeta/standard" nsPrefix="standard">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * $Id: java.ecore,v 1.15 2007-10-12 09:22:50 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */"/>
+        <details key="documentation" value="/**&#xA; * $Id: java.ecore,v 1.16 2007-11-05 08:49:03 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="UnknownJavaObject">
         <eAnnotations source="kermeta">
@@ -29,17 +29,15 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="primitive_types.ecore#/0"/>
     <references href="primitive_types.ecore#/1"/>
+    <references href="primitive_types.ecore#/2"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
     <references href="collections.ecore#/0"/>
     <references href="collections.ecore#/1"/>
-    <references href="collections.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
-    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
@@ -48,26 +46,20 @@
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/0"/>

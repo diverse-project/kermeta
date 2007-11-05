@@ -4,8 +4,8 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::persistence|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="persistence" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#//persistence" nsPrefix="persistence">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/kermeta" nsPrefix="kermeta">
+    <eSubpackages name="persistence" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/kermeta/persistence" nsPrefix="persistence">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Contains the classes that handle the serialization of models, in particular&#xA; * EMF models.&#xA; * &lt;img src=&quot;./figures/persistence_package.png&quot;>&#xA; */"/>
       </eAnnotations>
@@ -41,14 +41,16 @@
             <details key="documentation" value="/**&#xA;  * Loads the Resource, thus making content of the Resource browsable.&#xA;  * Raises a ResourceLoadException in case loaded Resource is empty&#xA;  */"/>
           </eAnnotations>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="uri" containment="true">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri">
           <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xA;  * Uri of the Resource to load&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="metaModelURI" containment="true">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="metaModelURI">
           <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xA;  * Uri of the meta-model of the Resource to load&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -274,8 +276,9 @@
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="useInterpreterInternalResources" containment="true">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInterpreterInternalResources">
           <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
             <details key="documentation" value="/** &#xA;  * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself&#xA;  * this is usefull for example to make a dependency to framework.km&#xA;  * by default, not setting this is considered as false.&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
@@ -307,12 +310,11 @@
     <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
-    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
     <references href="../language/structure.ecore#/2"/>
@@ -321,7 +323,6 @@
     <references href="../reflection/reflection.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/2"/>
@@ -333,7 +334,6 @@
     <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>

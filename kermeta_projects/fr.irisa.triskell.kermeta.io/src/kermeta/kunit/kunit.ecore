@@ -4,8 +4,8 @@
     <details key="require" value="../Standard.kmt|assert.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::utils|kermeta|kermeta::reflection|kermeta::kunit|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="kunit" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#//kunit" nsPrefix="kunit">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#/kermeta" nsPrefix="kermeta">
+    <eSubpackages name="kunit" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#/kermeta/kunit" nsPrefix="kunit">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Contains the implementation of a unit test tool. This is a clone of&#xA; * JUnit architecture.&#xA; * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm&#xA; *&#xA; * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.&#xA; *&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;>&#xA; */"/>
       </eAnnotations>
@@ -251,8 +251,9 @@
             <details key="documentation" value="/**&#xA;  * the stored failure&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="message">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="message">
           <eAnnotations source="kermeta">
+            <details key="isComposite" value="false"/>
             <details key="documentation" value="/**&#xA;  * the stored message (given or generated one)&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -461,8 +462,9 @@
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="__testMethodName" containment="true">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="__testMethodName">
           <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xA;  * the name of the method which corresponds to the test case in the test class&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -515,39 +517,51 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="assert.ecore#/0"/>
     <references href="assert.ecore#/1"/>
+    <references href="assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
+    <references href="../ecore/ecore_compatibility.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
+    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

@@ -4,8 +4,8 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::reflection|kermeta::utils|kermeta::interpreter|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="interpreter" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.ecore#//interpreter" nsPrefix="interpreter">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.ecore#/kermeta" nsPrefix="kermeta">
+    <eSubpackages name="interpreter" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.ecore#/kermeta/interpreter" nsPrefix="interpreter">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Contains a set of classes whose function is to evaluate a kermeta &#xA; * expression written as a string.&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/interpreter_package.png&quot;>&#xA; */"/>
       </eAnnotations>
@@ -96,8 +96,9 @@
           <details key="documentation" value="/**&#xA; * Kermeta language error in a code written in Kermeta&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="structure.ecore#/1/language/structure/Object"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="message" containment="true">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="message">
           <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xA;  * Error message&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -118,25 +119,25 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="behavior.ecore#/0"/>
     <references href="behavior.ecore#/1"/>
     <references href="structure.ecore#/0"/>
     <references href="structure.ecore#/1"/>
-    <references href="structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="reflective_collections.ecore#/0"/>
     <references href="reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
@@ -153,9 +154,12 @@
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
+    <references href="../ecore/ecore_compatibility.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
+    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

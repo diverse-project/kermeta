@@ -2279,7 +2279,7 @@
                       <type type="//@packages.0/standard/Bag/equals/@body/@statement.1/@thenBody/@statement.0/@thenBody/@statement.2/@containedType.0" isOrdered="true" upper="1"/>
                     </statement>
                     <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Set/equals/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/Bag/equals/@containedType.0" name="result"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Bag/equals/@body/@containedType.0" name="isEqual"/>
                       <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Set/equals/@containedType.0" name="equals" staticOperation="//@packages.0/standard/Set/equals">
                         <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Bag/equals/@body/@statement.1/@thenBody/@statement.0/@thenBody/@statement.3/@value/@parameters.0/@containedType.0" name="asSet" staticOperation="//@packages.0/standard/Bag/asSet">
                           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Set">
