@@ -3,17 +3,27 @@
 
 package testUML2km;
 
-require kermeta
+require kermeta 
 require "input_test_models/Uml2.km"
+require "input_test_models/ecore.km"
 using uml2
+using ecore
+using kermeta::kunit
 
 // DVK: this test is quite stupid, because every tymes we change kermeta MM we have to regenerate
 // the uml2.km and we are not sure about the original uml2.kmt file ..., 
 // we should think to improve it ... 
 class Main inherits kermeta::kunit::TestCase {
 
+	operation main() : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main) 
+		tr.printTestResult
+		stdio.writeln(void.getMetaClass.toString)
+	end
 
-	operation main () is do
+
+	operation test() is do
 		stdio.writeln("This program counts types in UML2")
 		
 		stdio.write("getting UML2 package...")
@@ -33,10 +43,6 @@ class Main inherits kermeta::kunit::TestCase {
 		
 		stdio.writeln("There are " + i.toString + " types in UML2")
 		assertTrueWithMsg(i==243,"looking for 243 types in UML2 found " + i.toString)
-	end
-	
-	operation test () is do
-		main
 	end
 	
 	operation printDoc() is do

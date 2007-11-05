@@ -1,12 +1,21 @@
 @mainClass "metaclass_package::TestMetaClass"
-@mainOperation "testMetaClassOfClass"
+@mainOperation "main"
 
 
 package metaclass_package;
 
 require kermeta
+
+using kermeta::kunit
+
 class TestMetaClass inherits kermeta::kunit::TestCase
 {
+	operation main() : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(TestMetaClass)
+		tr.printTestResult
+	end
+
     operation testMetaClassOfClass() : Void is do 
     	var type : kermeta::language::structure::Class init TheClass
     	assert(type.getMetaClass != void)
@@ -19,14 +28,13 @@ class TestMetaClass inherits kermeta::kunit::TestCase
     
     operation testClassDefinitionPropertiesOfMetaClass() : Void is do
         var type : kermeta::language::structure::Class init TheClass
- 	  	assert(type.getMetaClass.typeDefinition.name != void)
+ 	  	assert(type.getMetaClass.typeDefinition.name == "Class")
     end
     
     operation testClassProperties() : Void is do
         var type : kermeta::language::structure::Class init TheClass
         stdio.writeln(type.typeDefinition.qualifiedName)
         stdio.writeln(type.name)
-       	assert(type.container != void)
     	assert(type.typeDefinition.qualifiedName == "metaclass_package::TheClass") 
     	assert(type.name == "TheClass")
     end

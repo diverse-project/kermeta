@@ -1,11 +1,11 @@
-/* $Id: 041_testDynamicExpression.main.kmt,v 1.1 2007-09-10 08:35:03 cfaucher Exp $
+/* $Id: 041_testDynamicExpression.main.kmt,v 1.2 2007-11-05 08:51:16 ftanguy Exp $
  * Creation date: May 5, 2006
  * License: EPL
  * Copyright: INRIA / IRISA
  * Authors: Didier Vojtisek
  */
 @mainClass "testDynamicExpression::TestDynamicExpression"
-@mainOperation "test1"
+@mainOperation "main"
 
 
 package testDynamicExpression;
@@ -16,9 +16,18 @@ require kermeta
 using kermeta::interpreter
 using kermeta::utils
 using kermeta::standard
+using kermeta::kunit
+using kermeta::exceptions
 
 class TestDynamicExpression inherits kermeta::kunit::TestCase 
 {
+
+	operation main() : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(TestDynamicExpression)
+		tr.printTestResult
+	end
+
     operation test1() : Void is do 
         var tester : TesterClass1 init TesterClass1.new
         tester.testDynExpOnSelf
@@ -35,7 +44,7 @@ class TestDynamicExpression inherits kermeta::kunit::TestCase
     end
    
    
-   /** this test that a wrong dynamic expresion is correctly reported */
+  // /** this test that a wrong dynamic expresion is correctly reported */
    operation test5() : Void is do 
         var dynExpr : DynamicExpression init DynamicExpression.new
         dynExpr.initializeDefaults()
@@ -46,7 +55,10 @@ class TestDynamicExpression inherits kermeta::kunit::TestCase
         var params : Hashtable<String, Object> init Hashtable<String, Object>.new
         //params.put("a", self)
         dynExpr.execute(self, params)
-    end 
+        rescue (s : DynamicExpressionException) 
+        	assert(true)	
+        
+    end
     
     
     
@@ -93,6 +105,7 @@ class TesterClass1 inherits kermeta::kunit::TestCase
                     dynExpr.initializeDefaults
                     // set the type of self in order to parse correctly
                     dynExpr.selfClass ?= self.getMetaClass.typeDefinition
+                    stdio.writeln( dynExpr.selfClass.name )
                     var res : Boolean init dynExpr.parse(opName)
                     if not res then stdio.writeln("parse failed...") end
                     dynExpr.errors.each{ kerror | stdio.writeln(kerror.toString)}

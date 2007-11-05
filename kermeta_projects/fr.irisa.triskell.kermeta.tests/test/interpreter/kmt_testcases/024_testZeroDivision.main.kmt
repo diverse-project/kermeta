@@ -7,20 +7,23 @@ package root_package;
 
 require kermeta
 using kermeta::standard
+using kermeta::kunit
 
 class Main inherits kermeta::kunit::TestCase
 {
     operation main() : Void is do 
-       //testZeroDivision
-       testUndeclared
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
     end
     
     operation testZeroDivision() : Void is do
      	var i : Integer
         i := 5/0
+        assert(false)
         stdio.writeln(i.toString)
         rescue kermeta::exceptions::DivisionByZero
-        	stdio.writeln("Division par zero")
+        	assert(true)
     end
     
     operation testUndeclared() : Void is do
@@ -29,7 +32,7 @@ class Main inherits kermeta::kunit::TestCase
         var divid : Integer
         5/divid
         assert(false)
-        rescue (c : kermeta::exceptions::CallOnVoidTarget)
+       	rescue (c : kermeta::exceptions::VoidOperandError)
         	assert(true)
     end
     

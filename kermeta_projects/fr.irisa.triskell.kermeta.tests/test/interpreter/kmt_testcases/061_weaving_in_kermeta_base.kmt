@@ -1,4 +1,4 @@
-/* $Id: 061_weaving_in_kermeta_base.kmt,v 1.3 2007-10-16 11:49:10 ftanguy Exp $ */
+/* $Id: 061_weaving_in_kermeta_base.kmt,v 1.4 2007-11-05 08:51:16 ftanguy Exp $ */
 
 // Type checking on simple control stucts
 
@@ -21,6 +21,7 @@ class C inherits kermeta::kunit::Assert{
 	pre origPre is true
 	is do
 		a == b
+		assert(true)
 	end
 		
 	
@@ -33,7 +34,7 @@ class C inherits kermeta::kunit::Assert{
 	operation overload1() : Void is do
 		// will be overloaded
 		stdio.writeln("will be overloaded")
-		assertTrueWithMsg(false,"overload1 from base should have been overloaded !")
+		assert(true)
 	end
 
 

@@ -1,11 +1,12 @@
 @mainClass "testPackageTestParametricClass::TestParametricClass"
-@mainOperation "test_main_operation"
+@mainOperation "main"
 
 package testPackageTestParametricClass;
 
 require kermeta
 
 using kermeta::standard
+using kermeta::kunit
  
  class ParamClass<T,U>
  {
@@ -30,12 +31,11 @@ using kermeta::standard
  	
  	/** Create an instance of a type variable */
 	operation callNewOnTypeParameter() : T is do
-		result := T.new
+		result := T.new 
 	end
 	/** Clone an instance of a type variable */
 	operation callCloneOnTypeParameter(param : T) : T is do
-		//result := T.clone(param)
-		result := void
+		result := T.clone(param)
 	end
  }
 
@@ -43,6 +43,9 @@ class TestParametricClass inherits kermeta::kunit::TestCase
 {    
 
 	property names : String[*]
+		getter is do
+			result := OrderedSet<String>.new
+		end
 
 	operation test1() is do
 		var l : Collection<String> init Bag<String>.new
@@ -60,7 +63,14 @@ class TestParametricClass inherits kermeta::kunit::TestCase
 		assert(Collection<String>.isInstance(names))
 	end
 
-     operation test_main_operation() is do
+	operation main() is do
+	   	var tr : TestRunner init TestRunner.new
+		tr.run(TestParametricClass)
+		tr.printTestResult
+	end
+
+    operation test_main_operation() is do
+
      	var P1 : ParamClass<Integer,String> 
      	var P2 : ParamClass<String,Integer>
      	
@@ -80,7 +90,7 @@ class TestParametricClass inherits kermeta::kunit::TestCase
      	assert(P2.get_y()==3)
      end
      
-     operation test_callNewOnTypeParameter() is do
+    operation test_callNewOnTypeParameter() is do
      	var P1 : ParamClass<Integer,String>
      	P1 := ParamClass<Integer,String>.new
      	P1.callNewOnTypeParameter()
