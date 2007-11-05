@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectImpl.java,v 1.2 2007-10-15 11:09:25 barais Exp $
+/* $Id: RuntimeObjectImpl.java,v 1.3 2007-11-05 08:47:43 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -16,6 +16,7 @@
 package fr.irisa.triskell.kermeta.runtime;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 
 import org.eclipse.emf.ecore.EObject;
@@ -421,11 +422,22 @@ public class RuntimeObjectImpl implements RuntimeObject {
 	public String toString() {
 	    String class_name = "< No Metaclass ! >";
 	    try {
+	    	
 	        class_name = NamedElementHelper.getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)metaclass.getKCoreObject()).getTypeDefinition());
-		    String sValue = (String)getJavaNativeObject();
-		    if(sValue != null)
-		    	return "[" + class_name + " : "+ oId +" = \"" +sValue+"\"]";
-		    
+		   
+	        if ( getJavaNativeObject() instanceof String ) {
+	        	String sValue = (String)getJavaNativeObject();
+	        	if(sValue != null)
+	        		return "[" + class_name + " : "+ oId +" = \"" +sValue+"\"]";
+	        } else if ( getJavaNativeObject() instanceof Collection ) {
+	        	String sValue = "";
+	        	Collection<RuntimeObject> c = (Collection<RuntimeObject>) getJavaNativeObject();
+	        	for ( RuntimeObject o : c ) {
+	        		sValue += c.toString();
+	        	}
+	        	if(sValue != null)
+	        		return "[" + class_name + " : "+ oId +" = \"" +sValue+"\"]";
+	        }
 /*		    String sbValue = ((fr.irisa.triskell.kermeta.runtime.basetypes.StringBuffer)getData().get(STRING_BUFFER_VALUE)).toString();
 		    if(sbValue != null)
 		    	return "[" + class_name + " : "+ oId +" = \"" +sbValue+"\"]";
