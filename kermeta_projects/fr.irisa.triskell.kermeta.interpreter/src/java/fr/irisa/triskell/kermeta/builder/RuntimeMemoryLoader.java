@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.26 2007-10-15 07:13:58 barais Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.27 2007-11-05 08:46:49 ftanguy Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -33,6 +33,7 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -84,7 +85,7 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
     }
     
     
-    protected RuntimeObject getTypeDefinitionFromQualifiedName(String qname) {
+    protected RuntimeObject getTypeDefinitionFromQualifiedName(String qname) {  	
         RuntimeObject result = (RuntimeObject)typeDefinitions.get(qname);
         // should never happen robustness
         if (result == null) {
@@ -125,22 +126,20 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
     
     private void loadTypesForTypeDefContainer(TypeDefinitionContainer td_cont) {
         // For each type definition, create the associated RuntimeObject
-        for (Object tnext : td_cont.getOwnedTypeDefinition()) {
+        for (TypeDefinition td : td_cont.getOwnedTypeDefinition()) {
+
         	// TypeDefinition can be a ClassDefinition or a ModelType
-            TypeDefinition td = (TypeDefinition)tnext;
             RuntimeObject ro =  new KCoreRuntimeObject(memory.getROFactory(), null, td);
             typeDefinitions.put(NamedElementHelper.getQualifiedName(td), ro);
             objects.put(td, ro);
             // If the type definition is a *classDefinition* than, create the complete runtime object, for the 
             // class definition itself, AND for all its properties.
             if (td instanceof ClassDefinition) {
-                for (Object pnext : ((ClassDefinition)td).getOwnedAttribute())
-                {
-                    Property prop = (Property)pnext;
-                    RuntimeObject ro_prop = new KCoreRuntimeObject(memory.getROFactory(), null, prop);
+                for (Property property : ((ClassDefinition)td).getOwnedAttribute()) {
+                    RuntimeObject ro_prop = new KCoreRuntimeObject(memory.getROFactory(), null, property);
                     //ro_prop.getData().put("kcoreObject", prop);
-                    properties.put(NamedElementHelper.getQualifiedName(prop), ro_prop);
-                    objects.put(prop, ro_prop);
+                    properties.put(NamedElementHelper.getQualifiedName(property), ro_prop);
+                    objects.put(property, ro_prop);
                 }
             } /* FIXME CF ModelType 07-06-06
             else if (td instanceof ModelType) {
@@ -188,8 +187,7 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
         // set the class definition
         RuntimeObject classdef = getConcreteTypeDefinitionByName(kcoreObject);
 		// set the meta-class
-        
-               
+
 		run_obj.setMetaclass( memory.getROFactory().getClassForClassDefinition(classdef) );
 		
 		// set the container
@@ -340,6 +338,7 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 	    // If so, we need the concrete class! -- TODO : adapt this for RuntimeObjects that "wrap"
 	    // other elements than Kermeta ones
 	    String fname = qname.substring(qname.lastIndexOf(":")+1, qname.length());
+    
 	    fname = "kermeta::language::structure::"+fname;
 	    if (qname.startsWith("kermeta::reflection") && unit.getTypeDefinitionByName(fname)!=null)
 	    {
