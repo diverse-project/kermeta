@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.37 2007-10-01 15:12:55 ftanguy Exp $
+ * $Id: collections.kmt,v 1.38 2007-11-05 08:46:02 ftanguy Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -617,7 +617,7 @@ class Bag<G> inherits Collection<G>
 				var collection : Bag<G>
 				collection ?= element
 				var selfAsSet : Set<G> init self.asSet()
-				result := selfAsSet.equals(collection.asSet())
+				isEqual := selfAsSet.equals(collection.asSet())
 			end
 		end
 		result := isEqual
