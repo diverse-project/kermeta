@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.15 2007-10-03 12:41:05 ftanguy Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.16 2007-11-05 08:49:51 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -30,14 +30,19 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.KermetaParser;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+import fr.irisa.triskell.kermeta.language.structure.Operation; 
 
 /**
  * @author Franck Fleurey
@@ -100,6 +105,11 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
         loadingContext.current_class = context;
         loadingContext.pushContext();
         
+        /*
+         * 
+         * Adding symbols to the context.
+         * 
+         */
         Enumeration<String> e = formalParams.keys();
         while(e.hasMoreElements()) {
             String var_name = e.nextElement();
@@ -116,11 +126,28 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
             loadingContext.addSymbol(new KMSymbolVariable(var));
         }
 		
+        /*
+         * 
+         * Attributes
+         * 
+         */
+        for ( Property property : ClassDefinitionHelper.getAllProperties(context) )
+        	loadingContext.addSymbol( new KMSymbolProperty(property) );
+        
+        /*
+         * 
+         * Operations
+         * 
+         */
+        for ( Operation operation : ClassDefinitionHelper.getAllOperations(context) )
+        	loadingContext.addSymbol( new KMSymbolOperation(operation) );
+        
 		if (ast_exp != null)
 		    expression = KMT2KMExperessionBuilder.process(loadingContext, ast_exp, this, new NullProgressMonitor());
 		else {
 			error( "Expression Parse error." );
 		}
+
     }
     
     public KermetaTypeChecker typeCheck(KermetaTypeChecker checker) {
@@ -133,15 +160,15 @@ public class DynamicExpressionUnit extends KermetaUnitImpl {
        
        Hashtable<String, KMSymbol> symbs = loadingContext.peekSymbols();
        KMSymbolVariable var;
-       Iterator<KMSymbol> it = symbs.values().iterator();
        
-       while(it.hasNext()){
-       		var = (KMSymbolVariable)it.next();
-       		if (var.getVariable().getStaticType() == null) continue;
-       		checker.getContext().addSymbol(var, new SimpleType(var.getVariable().getStaticType()));
-       	
+       for ( KMSymbol symbol : symbs.values() ) {
+    	   if ( symbol instanceof KMSymbolVariable ) {
+    			var = (KMSymbolVariable) symbol;
+           		if (var.getVariable().getStaticType() == null) continue;
+           		checker.getContext().addSymbol(var, new SimpleType(var.getVariable().getStaticType()));	   
+    	   }
        }
-	   
+       	   
 	   checker.checkExpression(expression);
        return checker;
     }
