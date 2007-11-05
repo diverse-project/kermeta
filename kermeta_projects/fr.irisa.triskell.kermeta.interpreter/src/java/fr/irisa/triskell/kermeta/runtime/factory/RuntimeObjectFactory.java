@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.26 2007-10-15 07:13:59 barais Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.27 2007-11-05 08:48:39 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -92,7 +92,7 @@ public class RuntimeObjectFactory {
 	/**
 	 * The meta-class Class (bootstrap)
 	 */
-	private RuntimeObject class_class;
+	private KCoreRuntimeObject class_class;
 	
 	/**
 	 * The meta-class ModelType
@@ -110,9 +110,13 @@ public class RuntimeObjectFactory {
 		// The class definition for the class class should be assigned
 		// not sure how to get it from here
 		
-		class_class = new RuntimeObjectImpl(this, null);
+		class_class = new KCoreRuntimeObject(this, null, fclass);
+		class_class.setMetaclass( class_class );
+		//loadKCoreRuntimeObject( class_class );
+		
+/*		class_class = new RuntimeObjectImpl(this, null);
 		class_class.setMetaclass(class_class);
-		class_class.setKCoreObject(fclass);
+		class_class.setKCoreObject(fclass);*/
 	}
 	
 	/**
