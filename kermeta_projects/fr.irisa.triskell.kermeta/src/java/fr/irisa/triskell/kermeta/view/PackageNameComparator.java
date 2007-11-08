@@ -1,6 +1,6 @@
 
 
-/*$Id: PackageNameComparator.java,v 1.1 2007-11-08 13:16:17 ftanguy Exp $
+/*$Id: PackageNameComparator.java,v 1.2 2007-11-08 13:40:42 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	PackageNameComparator.java
 * License : EPL
@@ -20,12 +20,7 @@ public class PackageNameComparator extends RegisteredPackageComparator {
 	public PackageNameComparator(int order) {
 		super(order);
 	}
-		
-	@Override
-	public int category(Object element) {
-		return 1;
-	}
-	
+
 	@Override
 	public int compare(Viewer viewer, Object e1, Object e2) {
 		EPackage p1 = (EPackage) e1;
