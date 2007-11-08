@@ -1,4 +1,4 @@
-/* $Id: CopyNSURIAction.java,v 1.1 2007-09-24 20:13:48 dvojtise Exp $
+/* $Id: CopyNSURIAction.java,v 1.2 2007-11-08 13:16:18 ftanguy Exp $
  * Project : Kermeta
  * File : Kermeta2EcoreAction.java
  * License : EPL
@@ -14,6 +14,7 @@
 package fr.irisa.triskell.kermeta.popup.actions;
 
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jface.action.Action;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.TextTransfer;
@@ -42,10 +43,10 @@ public class CopyNSURIAction extends Action {
 		String stringToClip = "";
 		
 		for(int i = 0; i < view.getSelectedPackages().length; i++){
-			String nsURI = view.getSelectedPackages()[i];;
+			EPackage p = view.getSelectedPackages()[i];;
 
 			if(i > 0) stringToClip += "\n";
-			stringToClip += nsURI;
+			stringToClip += p.getNsURI();
 			
 		}
 		clipboard.setContents(new Object[] { stringToClip },

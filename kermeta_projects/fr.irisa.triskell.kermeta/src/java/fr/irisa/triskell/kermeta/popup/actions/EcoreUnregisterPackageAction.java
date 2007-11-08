@@ -1,4 +1,4 @@
-/*$Id: EcoreUnregisterPackageAction.java,v 1.2 2007-05-30 07:26:07 dvojtise Exp $
+/*$Id: EcoreUnregisterPackageAction.java,v 1.3 2007-11-08 13:16:18 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	EcoreUnregisterPackageAction.java
 * License : EPL
@@ -13,6 +13,7 @@ package fr.irisa.triskell.kermeta.popup.actions;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.jface.action.Action;
 
@@ -35,15 +36,15 @@ public class EcoreUnregisterPackageAction extends Action {
 
 	public void run() {
 		for(int i = 0; i < view.getSelectedPackages().length; i++){
-			String nsURI = view.getSelectedPackages()[i];;
+			EPackage p = view.getSelectedPackages()[i];;
 			// remove all children and gran children ...
-			Iterator<String> it = EMFRegistryHelper.getAllRegisteredChildren(nsURI).iterator();
+			Iterator<String> it = EMFRegistryHelper.getAllRegisteredChildren( p.getNsURI() ).iterator();
 			while(it.hasNext()){
 				Registry.INSTANCE.remove(it.next());
 			}
 
 			// remove it
-			Registry.INSTANCE.remove(nsURI);
+			Registry.INSTANCE.remove( p.getNsURI() );
 			
 		}
 
