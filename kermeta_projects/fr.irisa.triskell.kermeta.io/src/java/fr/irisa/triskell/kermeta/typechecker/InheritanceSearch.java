@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.22 2007-10-23 11:31:11 dvojtise Exp $
+/* $Id: InheritanceSearch.java,v 1.23 2007-11-09 16:11:10 ftanguy Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -263,7 +263,92 @@ public class InheritanceSearch {
 	 * @return
 	 */
 	public static ArrayList<CallableProperty> callableProperties(fr.irisa.triskell.kermeta.language.structure.Class c) {
-	    ArrayList<Type> allTypes = allSuperTypes(c);
+		ArrayList<CallableProperty> result = new ArrayList<CallableProperty>();
+		Hashtable<String, CallableProperty> found_poperties = new Hashtable<String, CallableProperty>();
+		ArrayList<Class> toVisit = new ArrayList<Class>();
+		List<ClassDefinition> classDefinitionProcessed = new ArrayList<ClassDefinition> ();
+		toVisit.add(c);
+
+		while( ! toVisit.isEmpty() ) {
+
+			Class current = toVisit.get(0);
+			toVisit.remove(0);
+			KermetaUnitHelper.getKermetaUnitFromObject( current.getTypeDefinition() );
+			/*
+			 * 
+			 * Patch for bugs #1124
+			 * When redifining operations from Object class definition, the wrong one is called when interpreting.
+			 * Just make sure that the Object class definition is processed the last.
+			 * 
+			 */
+			if ( NamedElementHelper.getQualifiedName(current.getTypeDefinition()).equals("kermeta::language::structure::Object") && toVisit.size() >= 1 )
+				toVisit.add(current);
+			else {
+				if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
+					classDefinitionProcessed.add( (ClassDefinition) current.getTypeDefinition() );
+			 				
+					// Add all operations of current parsed class
+					for (Object next_prop : ((ClassDefinition) current.getTypeDefinition()).getOwnedAttribute()) {
+						Property property = (Property)next_prop;
+			    	
+						if ( ! found_poperties.containsKey(property.getName()) ) {
+							CallableProperty callableProperty = new CallableProperty(property, current);
+							found_poperties.put(property.getName(), callableProperty);
+							result.add( callableProperty );
+						/*} else if (found_poperties.get(property.getName()).getProperty() == property.getSuperOperation() ) {
+							CallableProperty callableProperty = new CallableProperty(property, current);
+							found_poperties.put(property.getName(), callableProperty);
+							CallableProperty currentCallableOperation = found_poperties.get( property.getName() );
+							result.remove( currentCallableOperation );
+							result.add( callableProperty );
+						} /*else {
+							CallableProperty currentCallableProperty = found_poperties.get( property.getName() );
+				    		if ( currentCallableProperty.getProperty().isIsAbstract() /*|| OperationHelper.isOverloadable(currentCallableOperation.operation) ) {
+				    			CallableProperty callableProperty = new CallableProperty(property, current);
+				    			found_poperties.put(property.getName(), callableProperty);
+				    			result.remove( currentCallableProperty );
+					    		result.add( callableProperty );
+					    	}*/
+				    	
+						}
+					}
+	
+				    
+				    // Get the direct super type of the current parsed class
+				    for (Object next_t : getDirectSuperTypes(current)) {
+				    	fr.irisa.triskell.kermeta.language.structure.Class stype = (fr.irisa.triskell.kermeta.language.structure.Class)next_t;
+				        if ( ! toVisit.contains(stype) ) 
+				        	toVisit.add(stype);
+				    }
+		
+				    for ( TypeDefinition baseClass : current.getTypeDefinition().getBaseAspects() ) {
+			    		if ( baseClass instanceof ClassDefinition ) {
+			    			Class baseClassType = StructureFactory.eINSTANCE.createClass();
+			    			baseClassType.setTypeDefinition( (ClassDefinition) baseClass );
+			    			toVisit.add(baseClassType);
+			    		}
+			    	}
+			    
+					for ( TypeDefinition aspectClass : TypeDefinitionHelper.getAspects( (ClassDefinition) current.getTypeDefinition()) ) {
+						if ( aspectClass instanceof ClassDefinition ) {
+							Class aspectClassType = StructureFactory.eINSTANCE.createClass();
+							aspectClassType.setTypeDefinition( (ClassDefinition) aspectClass );
+			    			toVisit.add(aspectClassType);
+						}
+					}
+				}
+			}		    
+
+		}
+		
+		// TODO And only finally, handle the object kind -> consequently, remove
+		// from getDirectSuperTypes() the code that adds object to the list of direct super types.
+		// Implies to change all the methods of getDirectSuperTypes.
+		
+		
+		return result;
+		
+		/* ArrayList<Type> allTypes = allSuperTypes(c);
 		ArrayList<CallableProperty> result = new ArrayList<CallableProperty>();
 		Hashtable<Property, Property> found_properties = new Hashtable<Property, Property>();
 		
@@ -278,7 +363,7 @@ public class InheritanceSearch {
 				}
 			}
 		}
-		return result;
+		return result;*/
 	}
 
 }
