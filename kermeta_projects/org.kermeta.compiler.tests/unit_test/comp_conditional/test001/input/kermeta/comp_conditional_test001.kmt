@@ -1,0 +1,17 @@
+@mainClass "comp_conditional_test001::Main"
+@mainOperation "main"
+
+package comp_conditional_test001;
+
+require kermeta
+
+class Main
+{
+	// simple if
+	operation main() : Void is
+	do
+		if(1==1) then
+			stdio.writeln("enter in then")
+		end
+	end
+}
