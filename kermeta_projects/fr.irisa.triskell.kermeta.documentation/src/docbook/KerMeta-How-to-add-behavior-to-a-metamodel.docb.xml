@@ -343,13 +343,17 @@ end</programlisting>
     return its result.</para>
 
     <programlisting>// Go to the next state
-operation step(c : String) : String raises FSMException is
+operation step(c : String) : String raises FSMException
 
   // Declaration of the pre-condition
   pre notVoidInput is
     c != void and c != ""
 
-  do
+  // Declaration of the post-condition
+  post notVoidOutput is
+  result != void and result != ""
+  
+  is do
     // Get the valid transitions
     var validTransitions : Collection&lt;Transition&gt; 
     validTransitions :=	outgoingTransition.select { t | t.input.equals(c) }
@@ -360,10 +364,7 @@ operation step(c : String) : String raises FSMException is
     // Fire the transition
     result := validTransitions.one.fire
   end
-
-  // Declaration of the post-condition
-  post notVoidOutput is
-  result != void and result != ""</programlisting>
+</programlisting>
 
     <para>The fire algorithm</para>
 
