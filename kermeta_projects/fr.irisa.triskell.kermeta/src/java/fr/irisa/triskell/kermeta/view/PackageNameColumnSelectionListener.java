@@ -1,6 +1,6 @@
 
 
-/*$Id: PackageNameColumnSelectionListener.java,v 1.1 2007-11-08 13:16:17 ftanguy Exp $
+/*$Id: PackageNameColumnSelectionListener.java,v 1.2 2007-11-09 09:16:08 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	PackageNameColumnSelectionListener.java
 * License : EPL
@@ -25,11 +25,9 @@ public class PackageNameColumnSelectionListener implements SelectionListener {
 		this.viewer = viewer;
 	}
 	
-	@Override
 	public void widgetDefaultSelected(SelectionEvent e) {
 	}
 
-	@Override
 	public void widgetSelected(SelectionEvent e) {
 		ViewerComparator newComparator = null;
 		ViewerComparator comparator = viewer.getComparator();
