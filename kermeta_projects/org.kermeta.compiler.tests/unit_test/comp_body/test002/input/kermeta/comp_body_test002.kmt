@@ -1,0 +1,15 @@
+@mainClass "comp_body_test002::Main"
+@mainOperation "main"
+
+package comp_body_test002;
+
+require kermeta
+
+class Main
+{
+	// at least a statement in the body
+	operation main() : Void is
+	do
+		stdio.writeln("")
+	end
+}

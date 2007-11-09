@@ -1,0 +1,14 @@
+@mainClass "comp_body_test001::Main"
+@mainOperation "main"
+
+package comp_body_test001;
+
+require kermeta
+
+class Main
+{
+	// empty body
+	operation main() : Void is
+	do
+	end
+}

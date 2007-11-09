@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Compiler tests Plug-in
+Bundle-SymbolicName: org.kermeta.compiler.tests
+Bundle-Version: 0.0.1
