@@ -1,0 +1,544 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<book lang="en-GB">
+<?ooogenerator OpenOffice.org/2.2$Linux OpenOffice.org_project/680m14$Build-9134?>
+<?oooversion ?>
+  <bookinfo>
+    <subtitle>How to create an EMF model and use it in Kermeta</subtitle>
+    <pubdate>Build date: @BUILD.DATE@</pubdate>
+    <author>
+      <firstname>Zoé </firstname>
+      <surname>Drey</surname>
+      <firstname> </firstname>
+      <authorblurb>
+        <para>Engineer in Triskell team.</para>
+      </authorblurb>
+    </author>
+    <author>
+      <firstname>Didier </firstname>
+      <surname>Vojtisek</surname>
+      <firstname> </firstname>
+      <authorblurb>
+        <para>Engineer in Triskell team.</para>
+      </authorblurb>
+    </author>
+    <date>2007-11-09T13:26:46</date>
+    <date>March 2005</date>
+    <confgroup/>
+  </bookinfo>
+  <chapter>
+    <title>Introduction</title>
+    <para>This document is aimed at people who want either to use the Eclipse Modeling Framework in order to create an EMF model, and/or to manipulate them using Kermeta. The use of EMF models in Kermeta is achieved through the following steps, which some of them are optional (they are detailed sections):</para>
+    <orderedlist continuation="restarts">
+      <listitem>
+        <para>creating a meta-model in <emphasis>Ecore</emphasis> format, following a few constraints that make its instances loadable by Kermeta;</para>
+      </listitem>
+      <listitem>
+        <para>creating a model, also called an EMF model, as an instance of the above meta-model;</para>
+      </listitem>
+      <listitem>
+        <para>loading this model and manipulating it through a Kermeta program;</para>
+      </listitem>
+      <listitem>
+        <para>saving this model, as well as other ones programmatically created from scratch with Kermeta.</para>
+      </listitem>
+    </orderedlist>
+    <para><phrase id="DDE_LINK2"/><emphasis role="strong">Kermeta is an evolving software and d</emphasis><emphasis role="strong">espite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bugtracker in the forge:</emphasis><ulink url="http://gforge.inria.fr/tracker/?group_id=32" type=""><emphasis role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis></ulink><ulink url="http://gforge.inria.fr/tracker/?group_id=32" type=""><emphasis role="strong"/></ulink>Last check: v0.1.0</para>
+    <para>Most of the code presented in this tutorial comes from the FSM sample available on the <ulink url="http://www.kermeta.org/" type="">kermeta web site</ulink>. Have a try to it for a complete working sample!</para>
+    <section>
+      <title>Required background</title>
+      <orderedlist continuation="restarts">
+        <listitem>
+          <para>Readers are supposed to be familiar to either the EMOF or the Ecore meta-model.</para>
+        </listitem>
+        <listitem>
+          <para>The use of Ecore also supposes readers to have a minimal knowledge, as end-users, of the Eclipse development environment.</para>
+        </listitem>
+      </orderedlist>
+    </section>
+    <section>
+      <title>Terminology and format used in this tutorial<phrase id="terminology"/></title>
+      <orderedlist continuation="restarts">
+        <listitem>
+          <para><emphasis role="strong">meta-model</emphasis> / <emphasis role="strong">Ecore model</emphasis>: both terms are used to point to the meta-model level. “Ecore model” corresponds to the Eclipse terminology for a meta-model specified in Ecore.</para>
+        </listitem>
+        <listitem>
+          <para><emphasis role="strong">instance</emphasis>: in the context of this tutorial, the term “instance” is used to refer to an instance of a meta-model, i.e. of an <emphasis role="strong">Ecore model</emphasis>. Sometimes we will talk about instance-model (an Ecore model which is an instance of the meta-model), so, don't get confused.</para>
+        </listitem>
+        <listitem>
+          <para><emphasis role="strong">model object</emphasis> <emphasis role="strong">/</emphasis> <emphasis role="strong">root class</emphasis>: in the scope of the EMF dynamic editor, these terms designate the model root class that contains all other ones. This root class is the only one in a model that has no container (i.e. which has no “black-diamonded” relation pointing to it).</para>
+        </listitem>
+        <listitem>
+          <para><emphasis role="strong">containment</emphasis>: this term designates an important property of classes attributes/references. This property has to be appropriately set, in such a way that all the elements of an instance-model should be accessed from the root class of the model, which is aimed at being the highest-level container (you will see that at the 10<superscript>th</superscript> step of section <link linkend="create_metamodel"/>, p.<link linkend="create_metamodel"/>, and fig ).</para>
+        </listitem>
+      </orderedlist>
+    </section>
+    <section>
+      <title>Required environment</title>
+      <para>The required environment, whatever the underlying operating system, for handling EMF models and being able to run the samples provided in this tutorial includes:</para>
+      <orderedlist continuation="restarts">
+        <listitem>
+          <para>Java 1.5;</para>
+        </listitem>
+        <listitem>
+          <para>Eclipse, preferably the 3.1.1 version;</para>
+        </listitem>
+        <listitem>
+          <para>Ideally, Omondo, that provides a graphical editor of Ecore meta-models;</para>
+        </listitem>
+      </orderedlist>
+      <orderedlist continuation="restarts">
+        <listitem>
+          <para>
+            <emphasis role="strong">Kermeta plugin (remote site for a direct eclipse installation: </emphasis>
+            <ulink url="http://www.kermeta.org/update" type="">
+              <emphasis role="strong">http://www.kermeta.org/update</emphasis>
+            </ulink>
+            <emphasis role="strong">), version 0.1.0;</emphasis>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <emphasis role="strong">EMF modeling framework, version 2.1.0 (remote site: Eclipse update site).</emphasis>
+          </para>
+        </listitem>
+      </orderedlist>
+      <para><emphasis role="strong">Required plugins can be found by using Eclipse installation tool, through the tool bar me</emphasis>nu:<emphasis role="strong">Help &gt; Find and install &gt; Search for new features to install &gt; Next buttons</emphasis></para>
+    </section>
+  </chapter>
+  <chapter>
+    <title><phrase id="Create a metamodel for Kermeta programs"/>Create a meta-model for Kermeta programs</title>
+    <para>
+      <emphasis role="strong">For simplicity sake, the different steps (meta-model, model creation, as well as model handling through Kermeta) introduced in the scope of this tutorial are illustrated by means of the finite state machines classical example.</emphasis>
+    </para>
+    <section>
+      <title>Editing a new meta-model with the EMF sample editor</title>
+      <orderedlist continuation="restarts" numeration="arabic">
+        <listitem>
+          <para>
+            <emphasis role="strong">Create a new simple project (for instance </emphasis>
+            <emphasis role="strong">
+              <emphasis>MyFirstEMFSamples</emphasis>
+            </emphasis>
+            <emphasis role="strong">).</emphasis>
+          </para>
+        </listitem>
+        <listitem>
+          <para><emphasis role="strong">Select in the tool bar menu (on top of Eclipse window)</emphasis><emphasis role="strong"><emphasis role="strong">File </emphasis></emphasis><emphasis role="strong">&gt; New &gt; </emphasis><emphasis role="strong">O</emphasis><emphasis role="strong">ther &gt; Example EMF Creation Wizards </emphasis>folder<emphasis role="strong"> &gt; Ecore Model</emphasis></para>
+          <figure id="refIllustration0">
+            <title>Selection of the model object (root element)</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="KermetaEMFTutorial_figures/select_ecore_model.png" width="15.998cm" depth="15.262cm"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+          <para/>
+        </listitem>
+        <listitem>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KermetaEMFTutorial_figures/name_ecore_model.png" width="10.022cm" depth="11.299cm"/>
+            </imageobject>
+          </mediaobject>
+          <para>Enter a name for the meta-model file (e.g. <emphasis>fsm.ecore</emphasis>), then click on <emphasis role="strong">Next</emphasis> button.</para>
+          <para role="lineBreak"/>
+        </listitem>
+        <listitem>
+          <para>Choose <emphasis role="strong">EPackage</emphasis> as the Model Object (i.e. the root of the meta-model), and click on the <emphasis role="strong">Finish</emphasis> button.</para>
+          <figure id="refIllustration1">
+            <title>Selection of the model object (root element)</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="KermetaEMFTutorial_figures/select_epackage.png" width="15.998cm" depth="7.393cm"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+          <para/>
+        </listitem>
+        <listitem>
+          <para>If Omondo is installed, the meta-model can be edited by means of the Omondo graphical editor. However, this tutorial focuses on the creation of meta-models using the <emphasis role="strong">Sample Ecore Editor</emphasis>. In case the Omondo editor is set as the default editor, the sample Ecore editor can be opened (after having closed the Omondo editor) by right-clicking onto the Ecore file and selecting <emphasis role="strong">Open with &gt; Sample Ecore Editor</emphasis>.</para>
+          <para/>
+        </listitem>
+        <listitem>
+          <para>If the <emphasis role="strong">Properties</emphasis> view is not visible at the bottom (or left, or right) part of the Eclipse window, open it using the tool bar menu.<emphasis role="strong">Window &gt; Show View &gt; Other &gt; General </emphasis>folder<emphasis role="strong"> &gt; Properties</emphasis>;</para>
+        </listitem>
+        <listitem>
+          <figure id="refIllustration2">
+            <title>New empty ecore model</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="KermetaEMFTutorial_figures/new_ecore_model.png" width="15.998cm" depth="4.18cm"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+          <para/>
+          <figure id="refIllustration3">
+            <title>How to show properties view</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="KermetaEMFTutorial_figures/show_properties.png" width="11.711cm" depth="8.304cm"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+          <para/>
+        </listitem>
+        <listitem>
+          <para>Two properties of the created EPackage (which is initially displayed as <emphasis>null</emphasis>) have to be set through the <emphasis role="strong">Properties</emphasis> tab:</para>
+        </listitem>
+      </orderedlist>
+      <orderedlist continuation="restarts">
+        <listitem>
+          <orderedlist continuation="restarts">
+            <listitem>
+              <para>its <emphasis role="strong">Name</emphasis>: <emphasis>fsm,</emphasis> for example;</para>
+            </listitem>
+            <listitem>
+              <para>its <emphasis role="strong">Ns URI</emphasis>: the namespace URI of the Ecore model is mandatory to allow Kermeta being able to correctly load its potential instances, as well as for the Dynamic creation of instances tool (see section <link linkend="emf_dynamic">3.1</link> p.<link linkend="emf_dynamic">11</link>). It is strongly recommended to set an absolute Eclipse URI (this kind of URI is actually relative to your Eclipse project), e.g. <emphasis>platform:/resource/MyFirstEMFSamples/metamodels/fsm.ecore</emphasis></para>
+              <mediaobject>
+                <imageobject>
+                  <imagedata fileref="KermetaEMFTutorial_figures/complete_view_ecore.png" width="17.402cm" depth="11.031cm"/>
+                </imageobject>
+              </mediaobject>
+              <para/>
+            </listitem>
+          </orderedlist>
+        </listitem>
+      </orderedlist>
+      <orderedlist continuation="continues" numeration="arabic">
+        <listitem>
+          <para>At this stage, it is now possible to add children to the created root (which is <emphasis>fsm</emphasis> EPackage in the considered example). This could be achieved by right-clicking on the class and choosing the <emphasis role="strong">New child</emphasis> item. In the scope of the FSM example, three classes are added, one of them (the class <emphasis>Fsm</emphasis>) being considered as the “root class” (this should not be not mandatory, but allows a better EMF working):</para>
+          <figure id="refIllustration4">
+            <title>New child on EPackage root node</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="KermetaEMFTutorial_figures/new_child_epackage.png" width="10.733cm" depth="11.288cm"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+          <para/>
+        </listitem>
+      </orderedlist>
+      <orderedlist continuation="restarts">
+        <listitem>
+          <orderedlist continuation="restarts">
+            <listitem>
+              <para>a <emphasis>Fsm</emphasis> class, for which the <emphasis role="strong">Name</emphasis> attribute (in the properties view) has to be set (other properties do not need to be considered at this stage);</para>
+            </listitem>
+            <listitem>
+              <para>a <emphasis>Transition</emphasis> class (idem as for the <emphasis>Fsm</emphasis> class);</para>
+            </listitem>
+            <listitem>
+              <para>a <emphasis>State</emphasis> class (idem as for previous classes).</para>
+            </listitem>
+          </orderedlist>
+        </listitem>
+      </orderedlist>
+      <orderedlist continuation="continues" numeration="arabic">
+        <listitem>
+          <para>Adding operations, attributes, or references to the newly created classes is achieved in the same way classes have been added to the root EPackage, i.e. using <emphasis role="strong">New child</emphasis> on each created element.</para>
+        </listitem>
+      </orderedlist>
+      <orderedlist continuation="continues" numeration="arabic">
+        <listitem>
+          <para>Still through the <emphasis role="strong">Properties</emphasis> tab, the <emphasis role="strong">EContainment</emphasis> property will have to be set to <emphasis>true</emphasis> for each reference which intended to contain instances. In the scope of the automaton example, the <emphasis>transition</emphasis> and <emphasis>state</emphasis> references of the <emphasis>Fsm</emphasis> class are defined as containment reference. By this mean, it will be possible to create, in an EMF model of it, a collection of transitions and states. Refer to the EMF model creation step (section <link linkend="create_model">3</link>, p.<link linkend="create_model">11</link>) for further details.</para>
+          <figure id="refIllustration5">
+            <title>Setting the properties of an EReference</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="KermetaEMFTutorial_figures/class_properties.png" width="16.252cm" depth="15.49cm"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+          <para/>
+        </listitem>
+        <listitem>
+          <para>Setting properties, such as the upper and lower bounds, the type (<emphasis role="strong">EType</emphasis>), of the attributes, operations, and references is achieved through the <emphasis role="strong">Properties</emphasis> view. The main properties to consider are: ESuperType, EType, Name, Upper Bound, Lower Bound, Containment (for the diamond-ed associations), Ordered, Unique, and EOpposite (opposite property). For simplicity purpose, other properties can be ignored in the scope of this tutorial.</para>
+          <para>Lower and upper bound properties: 0, 1, -1 (stands for *) are allowed.</para>
+        </listitem>
+        <listitem>
+          <para>Do not forget to save the created meta-model.</para>
+        </listitem>
+      </orderedlist>
+    </section>
+    <section>
+      <title>
+        <emphasis role="strong">Resulting meta-model</emphasis>
+      </title>
+      <para>
+        <emphasis role="strong">At this stage of the tutorial, the designed meta-model should look like the following meta-model:</emphasis>
+      </para>
+      <figure id="refIllustration6">
+        <title>A simple FSM meta-model</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KermetaEMFTutorial_figures/fsm_metamodel.png" width="10.209cm" depth="6.379cm"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <para/>
+    </section>
+    <section>
+      <title>EMF meta-model creation tips</title>
+      <para>Creating a good meta-model is sometime difficult due to limitations of the used tools. For a better experience in using EMF tools and Kermeta, it is advised to respect the following rules:</para>
+      <orderedlist continuation="restarts">
+        <listitem>
+          <para>Create an element that will contain directly or indirectly all the other elements. The reflexive editor and the editor generated by EMF allow to create only one root element and then, from this element, create contained elements.</para>
+          <para role="lineBreak">This problem occurs only for model element creation from the editors. The editors correctly display models from meta-models that do not follow this rule if you are able to create such models by another mean. Kermeta is <emphasis role="strong">not</emphasis> affected by this constraint.</para>
+        </listitem>
+      </orderedlist>
+    </section>
+    <section>
+      <title>
+        <emphasis role="strong">External documentation</emphasis>
+      </title>
+      <para>
+        <emphasis role="strong">Additional documentation on EMF can be found at the following links:</emphasis>
+      </para>
+      <orderedlist continuation="restarts">
+        <listitem>
+          <para>
+            <ulink url="www.eclipsecon.org/2005/presentations/EclipseCon2005_Tutorial28.pdf" type="">www.eclipsecon.org/2005/presentations/EclipseCon2005_Tutorial28.pdf</ulink>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <ulink url="http://dev.eclipse.org/viewcvs/indextools.cgi/emf-home/Attic/faq.html?rev=1.3" type="">http://dev.eclipse.org/viewcvs/indextools.cgi/emf-home/Attic/faq.html?rev=1.3</ulink>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <ulink url="http://eclipse.org/emf/docs.php?doc=docs/tutorials/1.1/xlibmod/xlibmod_emf1.1.html" type="">http://eclipse.org/emf/docs.php?doc=docs/tutorials/1.1/xlibmod/xlibmod_emf1.1.html</ulink>
+          </para>
+        </listitem>
+      </orderedlist>
+      <orderedlist continuation="restarts">
+        <listitem>
+          <para>
+            <ulink url="http://www.eclipse.org/articles/Article-Using%20EMF/using-emf.html" type="">
+              <emphasis role="strong">http://www.eclipse.org/articles/Article-Using%20EMF/using-emf.html</emphasis>
+            </ulink>
+          </para>
+          <para>
+            <emphasis role="strong"/>
+          </para>
+        </listitem>
+      </orderedlist>
+      <para>
+        <emphasis role="strong">More generally, most of EMF documentation can be found onto the Eclipse website.</emphasis>
+      </para>
+    </section>
+    <section>
+      <title>
+        <emphasis role="strong">Alternative ways to create a meta-model</emphasis>
+      </title>
+      <para>
+        <emphasis role="strong">EMF tools are not the only way to create Ecore meta-models. Any tool that can manipulate Ecore can do the same. Here is a small list of tools that can be used to create your meta-model:</emphasis>
+      </para>
+      <orderedlist continuation="restarts">
+        <listitem>
+          <para><emphasis role="strong">Omondo / Eclipse UML has a nice graphical editor for Ecore models. It even enables to directly generate the EMF editor </emphasis>from this tool.</para>
+        </listitem>
+        <listitem>
+          <para>
+            <emphasis role="strong">Kermeta allows users to specify meta-models by means of the Kermeta syntax and then translate them into Ecore using the Kermeta2Ecore function.</emphasis>
+          </para>
+        </listitem>
+      </orderedlist>
+      <para>
+        <emphasis role="strong"/>
+      </para>
+      <figure id="refIllustration7">
+        <title>Generate Ecore meta-model from Kermeta</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KermetaEMFTutorial_figures/kermeta_generate_ecore.png" width="9.383cm" depth="11.031cm"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <para/>
+      <para>The Ecore import/export function and the Omondo editor can be used in order to graphically display the Kermeta classes of a model. It will act as a basic manual roundtrip editor.</para>
+    </section>
+  </chapter>
+  <chapter>
+    <title>Create an instance-model from a meta-model<phrase id="create_model"/></title>
+    <section>
+      <title>With the dynamic instance creation tool <phrase id="emf_dynamic"/></title>
+      <para>This is the most simple way for creating an instance of a meta-model. Creation is accessible by right-clicking onto the root class/model object of the meta-model (in the scope of the FSM example, it is the <emphasis>Fsm</emphasis> class). Because of the containment property, classes are only available for creation through this root class.</para>
+      <figure id="refIllustration8">
+        <title>Create dynamic instance from an Ecore file</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KermetaEMFTutorial_figures/create_dynamic_instance.png" width="9.528cm" depth="5.136cm"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <para/>
+    </section>
+    <section>
+      <title>Using a reflexive editor</title>
+      <para>Since it allows to customize the generated editor to match meta-model specificities. (see the end of this article: <ulink url="http://www.eclipse.org/articles/Article-Using%20EMF/using-emf.html" type="">http://www.eclipse.org/articles/Article-Using%20EMF/using-emf.html</ulink>), this solution should be favoured for meta-models that are relatively stable.</para>
+      <section>
+        <title>Generate the editor </title>
+        <para>This is the most ergonomic – but longest – way to create an instance of a meta-model. This method is here presented in its main lines:</para>
+        <orderedlist continuation="restarts" numeration="arabic">
+          <listitem>
+            <para>Once the meta-model is created, it is possible to create a model for model generation, called <emphasis>genmodel</emphasis>:</para>
+          </listitem>
+        </orderedlist>
+        <orderedlist continuation="restarts">
+          <listitem>
+            <orderedlist continuation="restarts">
+              <listitem>
+                <para><emphasis role="strong"><emphasis role="strong">File </emphasis></emphasis><emphasis role="strong">&gt; New &gt; </emphasis><emphasis role="strong">O</emphasis><emphasis role="strong">ther &gt; Eclipse Modeling Framework </emphasis>folder<emphasis role="strong"> &gt; EMF Models</emphasis>;</para>
+              </listitem>
+              <listitem>
+                <para>Choose a name for your genmodel (<emphasis>fsm.genmodel</emphasis> is ok);</para>
+              </listitem>
+              <listitem>
+                <para>Select <emphasis role="strong">Load from an EMF core model</emphasis> button, and find the meta-model file (<emphasis>fsm.ecore</emphasis>);</para>
+              </listitem>
+              <listitem>
+                <para>Select the unique package <emphasis>fsm</emphasis>.</para>
+              </listitem>
+            </orderedlist>
+          </listitem>
+        </orderedlist>
+        <orderedlist continuation="continues" numeration="arabic">
+          <listitem>
+            <para>In order to avoid weird behaviour (particularly if the current project was not set as a “Java project”) the model directory of the genmodel needs to be changed in the <emphasis role="strong">Properties</emphasis> tab of the genmodel. For this purpose, change the property called <emphasis role="strong">Model Directory</emphasis> (in the Model folder), to <emphasis>/MyFirstEMFSamples.model/src</emphasis>, so that the EMF source code is generated in a new empty project that will exclusively contain this source code.</para>
+          </listitem>
+          <listitem>
+            <para>Right-click on the root node of the <emphasis>fsm.genmodel</emphasis>, and choose the <emphasis role="strong">Generate all</emphasis> item.</para>
+          </listitem>
+        </orderedlist>
+      </section>
+      <section>
+        <title>Use the editor</title>
+        <orderedlist continuation="restarts" numeration="arabic">
+          <listitem>
+            <para>To be able to use the generated reflexive editor, a new runtime workbench has to be launched through the tool bar menu:</para>
+          </listitem>
+        </orderedlist>
+        <orderedlist continuation="restarts">
+          <listitem>
+            <orderedlist continuation="restarts">
+              <listitem>
+                <para><emphasis role="strong">Run &gt; Run As &gt; Run-time Workbench</emphasis> (in Eclipse 3.0.2);</para>
+              </listitem>
+              <listitem>
+                <para>or <emphasis role="strong">Run &gt; Run... &gt; Eclipse application item in the right part &gt; New</emphasis> button<emphasis role="strong"> &gt; Apply</emphasis> button<emphasis role="strong"> &gt; Run</emphasis> button at the bottom (Eclipse 3.1).</para>
+              </listitem>
+              <listitem>
+                <para>or <emphasis role="strong">Run &gt; Open Run Dialog... &gt; Eclipse application item in the left part &gt; New</emphasis> button<emphasis role="strong"> &gt; Apply</emphasis> button<emphasis role="strong"> &gt; Run</emphasis> button at the bottom (Eclipse 3.3).</para>
+              </listitem>
+            </orderedlist>
+          </listitem>
+        </orderedlist>
+        <orderedlist continuation="continues" numeration="arabic">
+          <listitem>
+            <para>Once the new eclipse application is launched, create a new simple project (e.g. called <emphasis>MyFirstEMFInstances</emphasis>), and select <emphasis role="strong"><emphasis role="strong">File </emphasis></emphasis><emphasis role="strong">&gt; New &gt; </emphasis><emphasis role="strong">O</emphasis><emphasis role="strong">ther &gt; Example EMF Creation Wizards </emphasis>folder<emphasis role="strong"> &gt; Fsm Model</emphasis>;</para>
+          </listitem>
+          <listitem>
+            <para>Creation of an EMF model follows the same principles that the creation of an Ecore model. Please refer to the meta-model creation steps, section <link linkend="create_metamodel"/>, p.<link linkend="create_metamodel"/>. Note that the model object, which was <emphasis role="strong">EPackage</emphasis> in the meta-model creation, becomes <emphasis role="strong">Fsm</emphasis> in the EMF model creation;</para>
+          </listitem>
+          <listitem>
+            <para>As you work in another Eclipse environment, you will probably want to copy the models that you created this way in your initial project (the one named <emphasis>MyFirstEMFSamples</emphasis>). Simply do it.</para>
+          </listitem>
+        </orderedlist>
+      </section>
+    </section>
+  </chapter>
+  <chapter>
+    <title>Manipulate instance-models with Kermeta</title>
+    <para>Loading a first Kermeta program can be achieved by just copying the code provided in the following sections, following carefully the suggested instructions. Readers who want to directly load their own models should directly go to the section <link linkend="template">4.5</link>, p.<link linkend="template">15</link> and copy the given template.</para>
+    <section>
+      <title>Preparing a Kermeta program</title>
+      <section>
+        <title>The persistence library</title>
+        <para>The persistence library is inspired from the resource manager of EMF models. There is a repository (called <emphasis>EMFRepository</emphasis>), that is aimed at containing a set of resources (the <emphasis>EMFResources</emphasis>). Each resource contains a reference called <emphasis>instances</emphasis>, that contains all the root classes of the loaded model (there is usually only have one root class). So, the procedure of creation of a resource that will handle EMF models is the following (code example is provided in next sections):</para>
+        <orderedlist continuation="restarts">
+          <listitem>
+            <para>Instanciate an EMFRepository;</para>
+          </listitem>
+          <listitem>
+            <para>Create a new EMF resource in this repository;</para>
+          </listitem>
+          <listitem>
+            <para>Load this resource;</para>
+          </listitem>
+          <listitem>
+            <para>Get the instances, i.e. the root class(es). All other instances can then be accessed by navigating the root class(es) properties.</para>
+          </listitem>
+        </orderedlist>
+      </section>
+      <section>
+        <title>A first Kermeta program using persistence</title>
+        <para>As a reminder, here is the common skeleton of a Kermeta program, inside which can must be added any library that is necessary to load and save the FSM samples.</para>
+        <programlisting>@mainClass "fsm_package::Main"@mainOperation "main"<emphasis role="strong">package</emphasis> fsm_package;<emphasis role="strong">require</emphasis> kermeta<emphasis role="strong">require</emphasis> "../metamodels/fsm.ecore"<emphasis role="strong">using</emphasis> kermeta::persistence // &lt;- used to load and save EMF models.<emphasis role="strong">using</emphasis> kermeta::standard<emphasis role="strong">class</emphasis> Main{     <emphasis role="strong">operation</emphasis> main() : Void <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>          <emphasis>// TODO: implement 'main' operation</emphasis>     <emphasis role="strong">end</emphasis>}</programlisting>
+      </section>
+    </section>
+    <section>
+      <title>Load an EMF model with Kermeta</title>
+      <para>The following code sample load a previously created FSM model:</para>
+      <programlisting><emphasis role="strong">operation</emphasis> main() : Void <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>  <emphasis>// Input fsm</emphasis> <emphasis role="strong">var</emphasis> fsm1 : fsm::Fsm <emphasis>// Create the repository, then the resource</emphasis> <emphasis role="strong">var</emphasis> repository : EMFRepository <emphasis role="strong">init</emphasis> EMFRepository.new <emphasis role="strong">var</emphasis> resource : EMFResource  resource ?= repository.createResource("../models/Fsm_dyn_sample1.xmi", "../metamodels/fsm.ecore") resource.load <emphasis>// Load the fsm (we get the instance)</emphasis>  fsm1 ?= resource.instances.one <emphasis>// Check that the fsm was correctly loaded</emphasis> fsm1.state.each { s | stdio.writeln("-&gt; "+s.name) } fsm1.transition.each { t | stdio.writeln( t.source.name+ " -- " +t.target.name ) }<emphasis role="strong">end</emphasis></programlisting>
+    </section>
+    <section>
+      <title>Modify and save an EMF model with Kermeta</title>
+      <para>At this stage, it should be interesting to be able to modify a previously loaded model using Kermeta before saving it. The procedure is very simple: do your manipulation as if your loaded FSM model is a Kermeta model (which is, in effect, the case!), and then, simply call a save method on the handling resource. For this purpose, the following code can be added at the end of the <emphasis>main</emphasis> operation defined in the above section:</para>
+      <programlisting><emphasis role="strong">var</emphasis> newstate : fsm::State <emphasis role="strong">init</emphasis> fsm::State.newnewstate.name := "s_new"fsm1.state.add(newstate)<emphasis>// save fsm1 </emphasis>resource.save()</programlisting>
+      <para>It is also possible to save the modified model in a new file instead of overwriting the initial one by using the <literal>saveWithNewURI()</literal> method. To this end, just replace the last line of above code (<literal>resource.save()</literal>) by the following one:</para>
+      <programlisting>resource.saveWithNewURI("../models/modified_dyn_sample1.xmi")</programlisting>
+    </section>
+    <section>
+      <title>Create a model in Kermeta, and save it as an EMF model</title>
+      <para>Saving a programmatically generated model requires to use a new specific instruction that addq the created <emphasis>Fsm</emphasis> root class to the destination resource. The following code chunk creates a simple EMF model with 2 states (named “foo”, and “bar”), and 2 transitions. Saving it then consists in adding the root class (i.e. the model object) stored in the variable <literal>fsm2</literal> into the resource instances.</para>
+      <programlisting><emphasis role="strong">var</emphasis> another_resource : EMFResourceanother_resource ?= repository.createResource(       "../models/Fsm_scratch_sample.xmi",       "../metamodels/fsm.ecore")<emphasis role="strong">var</emphasis> fsm2 : fsm::Fsm <emphasis role="strong">init</emphasis> fsm::Fsm.new<emphasis role="strong">var</emphasis> s0 : fsm::State <emphasis role="strong">init</emphasis> fsm::State.new<emphasis role="strong">var</emphasis> s1 : fsm::State <emphasis role="strong">init</emphasis> fsm::State.new<emphasis role="strong">var</emphasis> t01 : fsm::Transition <emphasis role="strong">init</emphasis> fsm::Transition.new<emphasis role="strong">var</emphasis> t11 : fsm::Transition <emphasis role="strong">init</emphasis> fsm::Transition.news0.name := "foo"s1.name := "bar"t01.source := s0t01.target := s1t11.source := s1t11.target := s1fsm2.state.add(s0)fsm2.state.add(s1)fsm2.transition.add(t01)fsm2.transition.add(t11)<emphasis>// save the from-scratch model!</emphasis>another_resource.instances.add(fsm2)another_resource.save()</programlisting>
+      <para>This program should return the following FSM model (viewed with the reflexive editor):</para>
+      <figure id="refIllustration9">
+        <title>Fsm_scratch_sample view</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KermetaEMFTutorial_figures/fsm_scratch_sample.png" width="14.707cm" depth="9.02cm"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <para/>
+      <orderedlist continuation="restarts" numeration="arabic"/>
+    </section>
+    <section>
+      <title>A template for a complete Kermeta program<phrase id="template"/></title>
+      <para>The following short code sample provides a comprehensive code template (replace the <emphasis>&lt;words&gt;</emphasis>) for model loading. Note here that the term <emphasis>model object</emphasis> is appropriate (better than <emphasis>root class</emphasis>!): loading a model consists in getting the root class, from which, thanks to the containment property (see section <link linkend="terminology">1.2</link>, p.<link linkend="terminology">2</link>), all the contained instances can be accessed.</para>
+      <programlisting>@mainClass "fsm_package::Main"@mainOperation "main"<emphasis role="strong">package</emphasis> fsm_package;<emphasis role="strong">require</emphasis> kermeta <emphasis role="strong">require</emphasis> "&lt;relative_path_of_the_metamodel&gt;" // NOTE : same as param of createResource<emphasis role="strong">using</emphasis> kermeta::persistence<emphasis role="strong">using</emphasis> kermeta::standard<emphasis role="strong">class</emphasis> Main{ <emphasis role="strong">operation</emphasis> main() : Void is do       /<emphasis>/ Variable for your input EMF model</emphasis>      <emphasis role="strong">var</emphasis> &lt;my_model_object&gt; : &lt;type_of_my_model&gt;      <emphasis>// Create the repository, then the resource</emphasis>      <emphasis role="strong">var</emphasis> &lt;my_rep&gt; : EMFRepository <emphasis role="strong">init</emphasis> EMFRepository.new       <emphasis role="strong">var</emphasis> &lt;my_resource&gt; : EMFResource       &lt;my_resource&gt; ?= repository.createResource(      "&lt;relative_path_of_my_model_to_load&gt;",      "&lt;relative_path_of_the_metamodel&gt;")      &lt;my_resource&gt;.load      <emphasis>// Load the emf model - get the root class </emphasis>      &lt;my_model_object&gt; ?= resource.instances.one     <emphasis>// You can now browse your model through its attributes/references </emphasis>      &lt;my_model_object&gt;.&lt;an_attribute_of_it&gt;.each { o |          stdio.writeln("-&gt; "+o.toString) } )     <emphasis>// Save your model in another file</emphasis>      &lt;my_resource&gt;.saveWithNewUri("&lt;relative_path_of_a_file_where_to_save_model&gt;") <emphasis role="strong">end</emphasis>}</programlisting>
+    </section>
+  </chapter>
+  <chapter>
+    <title>Meta-model with behaviour and persistency</title>
+    <para>Kermeta makes it possible to add behaviour to a meta-model. Developers may therefore be interested in loading models that conform to such a meta-model. The following section explains one of the simplest way to achieve this goal. This is a very small variation on the code presented in the previous sections.</para>
+    <para>At current stage, this is based on Kermeta ability to “require” class definition written in several formats. Currently (version v0.0.16) supported formats are:</para>
+    <orderedlist continuation="restarts">
+      <listitem>
+        <para>kmt files (Kermeta textual syntax);</para>
+      </listitem>
+      <listitem>
+        <para>km files (Kermeta model in XMI 2.0);</para>
+      </listitem>
+      <listitem>
+        <para>Ecore files (Ecore model in XMI 2.0);</para>
+      </listitem>
+      <listitem>
+        <para>emfatic files (Ecore textual syntax developed by IBM).</para>
+      </listitem>
+    </orderedlist>
+    <para>The transformations Kermeta2Ecore and Ecore2Kermeta enables to obtain two versions of a same meta-model, one in Ecore, the other in Kermeta. From a structural point of view, they will be equivalent and compatible in Kermeta.</para>
+    <para>Then, these two syntaxes are structurally equivalent.</para>
+    <programlisting><emphasis role="strong">require</emphasis><emphasis role="strong"> </emphasis>"fsm.kmt" <emphasis>// if you use this one, you'll have the FSM behavior</emphasis></programlisting>
+    <para>is equivalent to</para>
+    <programlisting><emphasis role="strong">require</emphasis> "fsm.ecore" <emphasis>// if you use this one, you won't be able to use the FSM behavior</emphasis></programlisting>
+    <para>If you have generated the Ecore from a kmt that defines a behaviour, this Ecore will also contain the specified behaviour.</para>
+    <para>Model loading and saving must be achieved using the Ecore version, so that EMF will know how to serialize/deserialize the models.</para>
+    <programlisting><emphasis role="strong">var</emphasis> my_resource : EMFResource <emphasis role="strong">init</emphasis> repository.createResource( "./my_fsm_usermodel.fsm", "./fsm.ecore")</programlisting>
+    <para>The Kermeta version of the meta-model will be used to specify the behaviour, the Ecore version will be used by EMF for the persistency aspects.</para>
+    <note>Kermeta2Ecore and Ecore2Kermeta transformations are available in the workbench by respectively right-clicking onto a Kermeta or an Ecore file).</note>
+  </chapter>
+</book>
