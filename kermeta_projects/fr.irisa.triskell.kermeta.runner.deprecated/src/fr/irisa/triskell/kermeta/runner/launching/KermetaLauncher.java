@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.23 2007-07-20 15:09:14 ftanguy Exp $
+/* $Id: KermetaLauncher.java,v 1.24 2007-11-12 10:16:23 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -26,6 +28,7 @@ import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
+import fr.irisa.triskell.kermeta.runner.debug.process.KermetaProcess;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
@@ -150,7 +153,7 @@ public class KermetaLauncher
         }
         catch (KermetaInterpreterError ierror)
         {
-            console.print("Kermeta interpreter could not be launched :\n");
+            console.print("Kermeta interpreter can't be launched :\n");
             console.print(ierror.getMessage());
             console.dispose();
         }
@@ -160,7 +163,10 @@ public class KermetaLauncher
             		"-------------------------------------------\n");
             console.print("Reported java error :\n "+e);
             console.dispose();
+            KermetaProcess.internalLog.error("Reported java error : ", e);
             e.printStackTrace();
+            RunnerPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RunnerPlugin.PLUGIN_ID, 0,"Interpreter internal error", (Exception)e));
+            
         }
         console.print("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
         
@@ -272,6 +278,7 @@ public class KermetaLauncher
             console.print(e.getMessage());
             console.dispose();
             e.printStackTrace();
+            RunnerPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RunnerPlugin.PLUGIN_ID, 0,"Interpreter internal error", (Exception)e));
         }
         console.print("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
         // this console is not used any more

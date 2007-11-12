@@ -10,9 +10,13 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.ExportException;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
+import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaSecurityManager;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteDebugUI;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
@@ -107,7 +111,7 @@ public class KermetaDebugProcess extends KermetaProcess {
 	        }
 	        catch (KermetaInterpreterError ierror)
 	        {
-	            console.print("Kermeta interpreter could not be launched :\n");
+	            console.print("Kermeta interpreter can't be launched :\n");
 	            console.print(ierror.getMessage());
 	        }
 	        catch (Throwable e)
@@ -117,6 +121,7 @@ public class KermetaDebugProcess extends KermetaProcess {
 	            console.print("Reported java error : "+e);
 	            console.print(e.getMessage());
 				internalLog.error("Reported java error : ", e);
+	            RunnerPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RunnerPlugin.PLUGIN_ID, 0,"Interpreter internal error", (Exception)e));
 	        }
 	        finally
 	        {
