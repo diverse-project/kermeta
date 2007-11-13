@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.4 2007-10-12 09:23:14 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.5 2007-11-13 16:00:22 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -70,6 +70,7 @@ public class JunitTestSuite extends TestCase {
 	}
 	
 	// do not modify this comment
+
 
 
 
@@ -308,6 +309,10 @@ testWithFile("test/io/kmt_testcases","testPackageDepD2.kmt" );
 
 public void testtestPrimitiveType() throws Exception {
 testWithFile("test/io/kmt_testcases","testPrimitiveType.kmt" );
+}
+
+public void testtestPrimitiveType2() throws Exception {
+testWithFile("test/io/kmt_testcases","testPrimitiveType2.kmt" );
 }
 
 public void testtestProperty() throws Exception {
