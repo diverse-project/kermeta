@@ -70,5 +70,20 @@
          </action>
       </objectContribution>
    </extension>
-
+<extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="fr.irisa.triskell.kermeta.samples.category"
+            name="Kermeta samples"
+            parentCategory="org.eclipse.ui.Examples"/>
+      <wizard
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/fr.irisa.triskell.kermeta.samples.category"
+            class="fr.irisa.triskell.kmlogo.ui.tools.wizards.KmLogoExampleWizard"
+            finalPerspective="kermetaPerspective"
+            hasPages="false"
+            id="org.kermeta.kmlogo.samples.wizard"
+            name="Km Logo samples"
+            preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
+   </extension>
 </plugin>
