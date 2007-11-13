@@ -1,7 +1,7 @@
-/* $Id: SimpleType.java,v 1.19 2007-10-02 15:19:05 ftanguy Exp $
+/* $Id: SimpleType.java,v 1.20 2007-11-13 14:30:37 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 10 avr. 2005
@@ -17,16 +17,11 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
@@ -36,14 +31,12 @@ import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.language.structure.impl.PrimitiveTypeImpl;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class SimpleType extends Type {
 

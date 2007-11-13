@@ -4,20 +4,20 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::language::structure|kermeta::exceptions|kermeta::io|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/io/file_io.ecore#/kermeta" nsPrefix="kermeta">
-    <eSubpackages name="io" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/io/file_io.ecore#/kermeta/io" nsPrefix="io">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/io/file_io.ecore#/kermeta" nsPrefix="kermeta">
+    <eSubpackages name="io" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/io/file_io.ecore#/kermeta/io" nsPrefix="io">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xA; * Contains file input/output related classes. &#xA; * &lt;img src=&quot;./figures/file_io_view.png&quot;>&#xA; */"/>
+        <details key="documentation" value="/**&#xD;&#xA; * Contains file input/output related classes. &#xD;&#xA; * &lt;img src=&quot;./figures/file_io_view.png&quot;>&#xD;&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="FileIO">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xA; * Implementation of simple helpers to read ans write text files&#xA; */"/>
+          <details key="documentation" value="/**&#xD;&#xA; * Implementation of simple helpers to read ans write text files&#xD;&#xA; */"/>
         </eAnnotations>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="writeTextFile">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if filename.equals(void) then&#xA;&#x9;&#x9;raise kermeta::exceptions::FileNotFoundException.new&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Writes a String in a text file&#xA;  */"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Writes a String in a text file&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="filename">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
@@ -29,7 +29,7 @@
         <eOperations name="readTextFile">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if filename.equals(void) then&#xA;&#x9;&#x9;raise kermeta::exceptions::FileNotFoundException.new&#xA;&#xA;&#x9;end&#xA;&#x9;var exists : kermeta::standard::Boolean&#xA;&#x9;var isdirectory : kermeta::standard::Boolean&#xA;&#x9;exists ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.fileExists(filename)&#xA;&#x9;isdirectory ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.fileIsDirectory(filename)&#xA;&#x9;if (not (exists)) or (isdirectory) then&#xA;&#x9;&#x9;raise kermeta::exceptions::FileNotFoundException.new&#xA;&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.readTextFile(filename)&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Reads a text file&#xA;  */"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Reads a text file&#xD;&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           <eParameters name="filename">
@@ -39,7 +39,7 @@
         <eOperations name="getAbsolutePathFolder">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if foldername.equals(void) then&#xA;&#x9;&#x9;raise kermeta::exceptions::FileNotFoundException.new&#xA;&#xA;&#x9;end&#xA;&#x9;var path : kermeta::standard::String&#xA;&#x9;path ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.getAbsolutePathFolder(foldername)&#xA;&#x9;if path.equals(&quot;Cannot find path.&quot;) then&#xA;&#x9;&#x9;raise kermeta::exceptions::FileNotFoundException.new&#xA;&#xA;&#x9;end&#xA;&#x9;result := path&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Gets the path of a folder from the folder of the current kermeta file&#xA;  */"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Gets the path of a folder from the folder of the current kermeta file&#xD;&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           <eParameters name="foldername">
@@ -56,7 +56,6 @@
     <references href="../standard/collections.ecore#/1"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
     <references href="../language/structure.ecore#/0"/>
@@ -71,6 +70,7 @@
     <references href="../kunit/kunit.ecore#/1"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
+    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/stack.ecore#/0"/>
@@ -79,14 +79,15 @@
     <references href="std_io.ecore#/1"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
+    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>
