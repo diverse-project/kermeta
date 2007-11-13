@@ -1,4 +1,13 @@
-/* Implementation of Kermeta base type Class */
+/* $Id: Class.java,v 1.13 2007-11-13 14:28:11 dvojtise Exp $
+* Project : Kermeta interpreter
+* File : Class.java
+* License : EPL
+* Copyright : IRISA / INRIA
+* ----------------------------------------------------------------------------
+* Creation date : 11 nov. 2007
+* Authors : Franck Fleurey, Didier Vojtisek 
+*/
+
 
 package fr.irisa.triskell.kermeta.runtime.language;
 
@@ -6,9 +15,11 @@ package fr.irisa.triskell.kermeta.runtime.language;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
-import fr.irisa.triskell.kermeta.language.structure.Type;
 
+/**
+ * Implementation of the extern of the class Class in Kermeta framework
+ * it does the mapping with fr.irisa.triskell.kermeta.language.structure.Class and its kermeta version
+ */
 public class Class {
 
 	// Implementation of method newObject called as :
@@ -41,16 +52,6 @@ public class Class {
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 	
-	public static RuntimeObject hasSubType(RuntimeObject self, RuntimeObject object) {
-		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getKCoreObject();
-		Type pro = (Type)object.getKCoreObject();
-		
-		SimpleType required = new SimpleType(req);
-		SimpleType provided = new SimpleType(pro);
-		
-		if (provided.isSubTypeOf(required)) return self.getFactory().getMemory().trueINSTANCE;
-		else return self.getFactory().getMemory().falseINSTANCE;
-	}
 	
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject other) {
 		

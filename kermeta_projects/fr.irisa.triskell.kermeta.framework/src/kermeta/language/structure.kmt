@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.49 2007-09-19 12:14:49 ftanguy Exp $
+/* $Id: structure.kmt,v 1.50 2007-11-13 14:27:24 dvojtise Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -259,6 +259,7 @@ class ModelType inherits Type, TypeDefinition, kermeta::reflection::ModelType, K
 		do
 			result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.isModelTypeOf(self, m)
 		end
+		
 }
 
 
@@ -295,13 +296,6 @@ class Class inherits ParameterizedType, kermeta::reflection::Class, KMStructureV
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.isInstance(self, object)
 	end 
 	*/
-
-	/**
- 	 * Implements kermeta::language::structure::Type.hasSubType(Type)
- 	 */	
-	method hasSubType(object : kermeta::reflection::Type) : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.hasSubType(self, object)
-	end
 
 	/**
  	 * Implements kermeta::language::structure::Object.equals(Object)
@@ -694,6 +688,16 @@ class Type inherits Object, kermeta::reflection::Type, KMStructureVisitable
 		do
 			result := visitor.visitType(self, context)
 		end
+	
+	/**
+ 	 * Implements kermeta::reflection::Type.hasSubType(Type)
+ 	 * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)
+ 	 * it won't work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers
+ 	 * to extend it.
+ 	 */	
+	method hasSubType(object : kermeta::reflection::Type) : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Type.hasSubType(self, object)
+	end
 }
 
 

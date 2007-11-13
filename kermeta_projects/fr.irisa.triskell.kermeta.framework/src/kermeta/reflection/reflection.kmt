@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.55 2007-10-02 15:15:54 ftanguy Exp $
+/* $Id: reflection.kmt,v 1.56 2007-11-13 14:27:24 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -91,6 +91,7 @@ abstract class Object
 	
 	/**
 	 * Returns a Boolean stating whether the current Object conforms to given Type
+	 * This means: is this object an instance of this type, or is it an instance of its subtype 
 	 */
 	operation isInstanceOf(type : Type) : Boolean is abstract
 	
