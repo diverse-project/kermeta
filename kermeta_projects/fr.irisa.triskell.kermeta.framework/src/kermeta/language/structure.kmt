@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.50 2007-11-13 14:27:24 dvojtise Exp $
+/* $Id: structure.kmt,v 1.51 2007-11-13 17:17:54 dvojtise Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -793,7 +793,7 @@ class Package inherits TypeDefinitionContainer, kermeta::reflection::Package, KM
 /**
  * Implements kermeta::reflection::ModelingUnit
  */
-class ModelingUnit inherits kermeta::reflection::ModelingUnit, KMStructureVisitable
+class ModelingUnit inherits Object, kermeta::reflection::ModelingUnit, KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -807,7 +807,7 @@ class ModelingUnit inherits kermeta::reflection::ModelingUnit, KMStructureVisita
 /**
  * Implements kermeta::reflection::Filter
  */
-class Filter inherits kermeta::reflection::Filter, KMStructureVisitable
+class Filter inherits Object, kermeta::reflection::Filter, KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -822,7 +822,7 @@ class Filter inherits kermeta::reflection::Filter, KMStructureVisitable
 /**
  * Extends kermeta::reflection::Require with visitor pattern
  */
-abstract class Require inherits kermeta::reflection::Require, KMStructureVisitable
+abstract class Require inherits Object, kermeta::reflection::Require, KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
@@ -837,7 +837,7 @@ abstract class Require inherits kermeta::reflection::Require, KMStructureVisitab
 /**
  * Extends kermeta::reflection::Using with visitor pattern
  */
-abstract class Using inherits kermeta::reflection::Using, KMStructureVisitable
+abstract class Using inherits Object, kermeta::reflection::Using, KMStructureVisitable
 {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern

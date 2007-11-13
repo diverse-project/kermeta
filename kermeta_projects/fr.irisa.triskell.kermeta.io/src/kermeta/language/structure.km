@@ -1946,8 +1946,9 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/Package/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/ModelingUnit/@ownedTag.0" name="ModelingUnit" superType="//@packages.0/language/structure/ModelingUnit/@containedType.0 //@packages.0/language/structure/ModelingUnit/@containedType.1">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/ModelingUnit/@ownedTag.0" name="ModelingUnit" superType="//@packages.0/language/structure/ModelingUnit/@containedType.0 //@packages.0/language/structure/ModelingUnit/@containedType.1 //@packages.0/language/structure/ModelingUnit/@containedType.2">
           <ownedTag value="/**&#xD;&#xA; * Implements kermeta::reflection::ModelingUnit&#xD;&#xA; */" object="//@packages.0/language/structure/ModelingUnit"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/ModelingUnit"/>
           </containedType>
@@ -1977,8 +1978,9 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/ModelingUnit/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Filter/@ownedTag.0" name="Filter" superType="//@packages.0/language/structure/Filter/@containedType.0 //@packages.0/language/structure/Filter/@containedType.1">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Filter/@ownedTag.0" name="Filter" superType="//@packages.0/language/structure/Filter/@containedType.0 //@packages.0/language/structure/Filter/@containedType.1 //@packages.0/language/structure/Filter/@containedType.2">
           <ownedTag value="/**&#xD;&#xA; * Implements kermeta::reflection::Filter&#xD;&#xA; */" object="//@packages.0/language/structure/Filter"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Filter"/>
           </containedType>
@@ -2008,8 +2010,9 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/Filter/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Require/@ownedTag.0" name="Require" isAbstract="true" superType="//@packages.0/language/structure/Require/@containedType.0 //@packages.0/language/structure/Require/@containedType.1">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Require/@ownedTag.0" name="Require" isAbstract="true" superType="//@packages.0/language/structure/Require/@containedType.0 //@packages.0/language/structure/Require/@containedType.1 //@packages.0/language/structure/Require/@containedType.2">
           <ownedTag value="/**&#xD;&#xA; * Extends kermeta::reflection::Require with visitor pattern&#xD;&#xA; */" object="//@packages.0/language/structure/Require"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Require"/>
           </containedType>
@@ -2039,8 +2042,9 @@
             <ownedParameter name="context" type="//@packages.0/language/structure/Require/acceptKMStructureVisitor/@containedType.1" isOrdered="true" upper="1"/>
           </ownedOperation>
         </ownedTypeDefinition>
-        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Using/@ownedTag.0" name="Using" isAbstract="true" superType="//@packages.0/language/structure/Using/@containedType.0 //@packages.0/language/structure/Using/@containedType.1">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/structure/Using/@ownedTag.0" name="Using" isAbstract="true" superType="//@packages.0/language/structure/Using/@containedType.0 //@packages.0/language/structure/Using/@containedType.1 //@packages.0/language/structure/Using/@containedType.2">
           <ownedTag value="/**&#xD;&#xA; * Extends kermeta::reflection::Using with visitor pattern&#xD;&#xA; */" object="//@packages.0/language/structure/Using"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/structure/Object"/>
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../reflection/reflection.km#//@packages.0/reflection/Using"/>
           </containedType>

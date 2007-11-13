@@ -993,6 +993,7 @@
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA; * Implements kermeta::reflection::ModelingUnit&#xD;&#xA; */"/>
           </eAnnotations>
+          <eSuperTypes href="#/1/language/structure/Object"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/ModelingUnit"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
@@ -1014,6 +1015,7 @@
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA; * Implements kermeta::reflection::Filter&#xD;&#xA; */"/>
           </eAnnotations>
+          <eSuperTypes href="#/1/language/structure/Object"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Filter"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
@@ -1035,6 +1037,7 @@
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA; * Extends kermeta::reflection::Require with visitor pattern&#xD;&#xA; */"/>
           </eAnnotations>
+          <eSuperTypes href="#/1/language/structure/Object"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Require"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
@@ -1056,6 +1059,7 @@
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA; * Extends kermeta::reflection::Using with visitor pattern&#xD;&#xA; */"/>
           </eAnnotations>
+          <eSuperTypes href="#/1/language/structure/Object"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Using"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
           <eOperations name="acceptKMStructureVisitor">
