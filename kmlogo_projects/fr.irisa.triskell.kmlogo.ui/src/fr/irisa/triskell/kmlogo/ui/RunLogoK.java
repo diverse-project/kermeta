@@ -6,6 +6,8 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 
+import org.eclipse.core.runtime.Platform;
+
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
@@ -42,10 +44,12 @@ public class RunLogoK {
 		//ResourcesPlugin.getPlugin().getDescriptor().getInstallURL()
 		
 		
-		URL[] urls = new URL[1];
+		URL[] urls = new URL[2];
 		try {
-			//urls[0] = new URL("file://" + Platform.resolve(Platform.getPlugin("fr.irisa.triskell.kmlogo.model").getDescriptor().getInstallURL()).getFile() + "bin");
-			urls[0] = new URL("file:///home/franck/turtle.jar");
+			urls[0] = new URL("file://" + Platform.resolve(Platform.getPlugin("fr.irisa.triskell.kmlogo.model").getDescriptor().getInstallURL()).getFile() + "bin/");
+			//urls[0] = new URL("file:///home/franck/turtle.jar");
+			urls[1] = new URL(jar);
+			//urls[0] = new URL("file:///C:/eclipse3.3_dist051/workspace/fr.irisa.triskell.kmlogo.model/bin/");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
