@@ -1,4 +1,4 @@
-/* $Id: 053_savingKM.main.kmt,v 1.2 2007-10-01 15:17:34 ftanguy Exp $
+/* $Id: 053_savingKM.main.kmt,v 1.3 2007-11-13 16:39:23 dvojtise Exp $
  * Creation date: June 14, 2006
  * License:
  * Copyright:
@@ -51,7 +51,7 @@ class Main inherits kermeta::kunit::TestCase
 		
 		stdio.writeln("Creating pb_EnregKM.km...")
 		var resResource : kermeta::persistence::EMFResource
-		resResource ?= resRepository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/pb_EnregKM.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+		resResource ?= resRepository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/pb_EnregKM.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
 		resResource.instances.add(pack)
 		
 

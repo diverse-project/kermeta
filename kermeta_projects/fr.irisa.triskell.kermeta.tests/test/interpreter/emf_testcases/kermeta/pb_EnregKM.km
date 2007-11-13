@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure" name="P1" uri="http://P1">
-  <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="C1">
-    <ownedOperation name="Op1" type="//@ownedTypeDefinition.0/@ownedOperation.0/@containedType.0">
-      <containedType xsi:type="kermeta_language_structure:Class"/>
-    </ownedOperation>
-  </ownedTypeDefinition>
-</kermeta_language_structure:Package>
