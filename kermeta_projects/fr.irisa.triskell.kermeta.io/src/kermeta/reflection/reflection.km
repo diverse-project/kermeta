@@ -1502,8 +1502,9 @@
           <ownedTag value="/**&#xD;&#xA;  * Uri of the Package&#xD;&#xA;  */" object="//@packages.0/reflection/Package/uri"/>
         </ownedAttribute>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/reflection/ModelingUnit/@ownedTag.0" name="ModelingUnit" isAbstract="true">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/reflection/ModelingUnit/@ownedTag.0" name="ModelingUnit" isAbstract="true" superType="//@packages.0/reflection/ModelingUnit/@containedType.0">
         <ownedTag value="/**&#xD;&#xA; * The modeling unit is the root of any kermeta model. It contains packages, requires and usings.&#xD;&#xA; * It also reference others modeling unit.&#xD;&#xA; */" object="//@packages.0/reflection/ModelingUnit"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Object"/>
         <ownedAttribute tag="//@packages.0/reflection/ModelingUnit/packages/@ownedTag.0" name="packages" type="//@packages.0/reflection/ModelingUnit/packages/@containedType.0" upper="-1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/**&#xD;&#xA;  * root packages contained by this ModelingUnit&#xD;&#xA;  */" object="//@packages.0/reflection/ModelingUnit/packages"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Package"/>
@@ -1533,8 +1534,9 @@
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Filter"/>
         </ownedAttribute>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/reflection/Filter/@ownedTag.0" name="Filter" isAbstract="true">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/reflection/Filter/@ownedTag.0" name="Filter" isAbstract="true" superType="//@packages.0/reflection/Filter/@containedType.0">
         <ownedTag value="/**&#xD;&#xA; * Filter is the class that represent a filter on a ModelingUnit.&#xD;&#xA; * the qualifiedName represent the beginning of the matched names&#xD;&#xA; */" object="//@packages.0/reflection/Filter"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Object"/>
         <ownedAttribute name="qualifiedName" type="//@packages.0/reflection/String" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true"/>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/reflection/Require/@ownedTag.0" name="Require" isAbstract="true" superType="//@packages.0/reflection/Require/@containedType.0">

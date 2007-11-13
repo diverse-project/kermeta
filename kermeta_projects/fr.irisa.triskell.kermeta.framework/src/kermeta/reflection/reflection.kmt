@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.56 2007-11-13 14:27:24 dvojtise Exp $
+/* $Id: reflection.kmt,v 1.57 2007-11-13 16:23:21 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -961,7 +961,7 @@ abstract class Package inherits TypeDefinitionContainer
  * The modeling unit is the root of any kermeta model. It contains packages, requires and usings.
  * It also reference others modeling unit.
  */
-abstract class ModelingUnit
+abstract class ModelingUnit inherits Object
 {
 	/**
 	 * root packages contained by this ModelingUnit
@@ -1009,7 +1009,7 @@ abstract class ModelingUnit
  * Filter is the class that represent a filter on a ModelingUnit.
  * the qualifiedName represent the beginning of the matched names
  */
-abstract class Filter
+abstract class Filter inherits Object
 {
 	attribute qualifiedName : String
 }

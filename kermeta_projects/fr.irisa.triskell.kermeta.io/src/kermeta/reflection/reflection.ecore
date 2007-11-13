@@ -823,7 +823,7 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ModelingUnit" abstract="true">
+      <eClassifiers xsi:type="ecore:EClass" name="ModelingUnit" abstract="true" eSuperTypes="/1/reflection/Object">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * The modeling unit is the root of any kermeta model. It contains packages, requires and usings.&#xD;&#xA; * It also reference others modeling unit.&#xD;&#xA; */"/>
         </eAnnotations>
@@ -863,7 +863,7 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Filter" abstract="true">
+      <eClassifiers xsi:type="ecore:EClass" name="Filter" abstract="true" eSuperTypes="/1/reflection/Object">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Filter is the class that represent a filter on a ModelingUnit.&#xD;&#xA; * the qualifiedName represent the beginning of the matched names&#xD;&#xA; */"/>
         </eAnnotations>
