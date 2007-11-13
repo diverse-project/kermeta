@@ -10,6 +10,7 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.OrderedCollection;
 import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
@@ -38,7 +39,6 @@ public class ReflectiveSequence {
 	 * extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.removeAt(index)
 	 */
 	public static RuntimeObject removeAt(RuntimeObject self, RuntimeObject param0) {
-		RuntimeObject to_remove = OrderedCollection.elementAt(self, param0);
 		ReflectiveCollection.remove(self, param0);
 		return self.getFactory().getMemory().voidINSTANCE;
 	}
@@ -63,7 +63,7 @@ public class ReflectiveSequence {
 	 */
 	public static RuntimeObject createReflectiveSequence(RuntimeObject object, RuntimeObject property) {
 		// Cache : ClassDefinition cd -> RuntimeObject of kermeta::language::ReflectiveCollection<cd>
-	    Hashtable cache_reflec_seq_class = object.getFactory().cache_reflec_seq_class;
+	    Hashtable<GenericTypeDefinition,RuntimeObject> cache_reflec_seq_class = object.getFactory().cache_reflec_seq_class;
 	    // Get the object representation of the Class of *object*
 	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)object.getMetaclass().getKCoreObject();
 	    // Get the object representation of *property*
@@ -74,7 +74,7 @@ public class ReflectiveSequence {
 	    RuntimeObject metaClass = null;
 	    // Try to get the RuntimeObject representation of prop_type in the cache
 	    if (prop_type instanceof fr.irisa.triskell.kermeta.language.structure.Class && ((fr.irisa.triskell.kermeta.language.structure.Class)prop_type).getTypeParamBinding().size() == 0) {
-	        metaClass = (RuntimeObject)cache_reflec_seq_class.get(((fr.irisa.triskell.kermeta.language.structure.Class)prop_type).getTypeDefinition());
+	        metaClass = cache_reflec_seq_class.get(((fr.irisa.triskell.kermeta.language.structure.Class)prop_type).getTypeDefinition());
 	    }
 	    // If not found in the cache, then let's construct it.
 	    if (metaClass == null) {

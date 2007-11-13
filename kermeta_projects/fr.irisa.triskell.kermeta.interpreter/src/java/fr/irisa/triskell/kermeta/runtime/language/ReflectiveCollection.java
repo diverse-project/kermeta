@@ -1,4 +1,4 @@
-/* $Id: ReflectiveCollection.java,v 1.14 2007-10-15 07:13:58 barais Exp $
+/* $Id: ReflectiveCollection.java,v 1.15 2007-11-13 14:28:35 dvojtise Exp $
  * Project   : Kermeta interpreter
  * File      : ReflectiveCollection.java
  * License   : EPL
@@ -28,6 +28,7 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
@@ -165,7 +166,7 @@ public class ReflectiveCollection {
 	public static RuntimeObject createReflectiveCollection(RuntimeObject object, RuntimeObject property)
 	{
 		// Cache : ClassDefinition cd -> RuntimeObject of kermeta::language::ReflectiveCollection<cd>
-	    Hashtable cache_reflec_coll_class = object.getFactory().cache_reflec_coll_class;
+	    Hashtable<GenericTypeDefinition,RuntimeObject> cache_reflec_coll_class = object.getFactory().cache_reflec_coll_class;
 	    
 	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)object.getMetaclass().getKCoreObject();
 	    
@@ -176,7 +177,7 @@ public class ReflectiveCollection {
 	    RuntimeObject metaClass = null;
 	    
 	    if (prop_type instanceof fr.irisa.triskell.kermeta.language.structure.Class && ((fr.irisa.triskell.kermeta.language.structure.Class)prop_type).getTypeParamBinding().size() == 0) {
-	        metaClass = (RuntimeObject)cache_reflec_coll_class.get(((fr.irisa.triskell.kermeta.language.structure.Class)prop_type).getTypeDefinition());
+	        metaClass = cache_reflec_coll_class.get(((fr.irisa.triskell.kermeta.language.structure.Class)prop_type).getTypeDefinition());
 	    }
 	    
 	    if (metaClass == null) {

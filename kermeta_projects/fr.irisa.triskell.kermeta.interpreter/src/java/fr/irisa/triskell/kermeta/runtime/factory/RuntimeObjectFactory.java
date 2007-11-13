@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.27 2007-11-05 08:48:39 ftanguy Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.28 2007-11-13 14:28:56 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -41,7 +41,7 @@ import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
-import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+//import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
 /**
  * @author Franck Fleurey
@@ -56,10 +56,14 @@ public class RuntimeObjectFactory {
 	
 	/**
 	 * These are caches of classes
+	 * These caches are used when creating ReflectiveSequence or RefelctiveCollection
 	 */
-	public Hashtable cache_reflec_seq_class = new Hashtable();
-	public Hashtable cache_reflec_coll_class = new Hashtable();
-	
+	public Hashtable<GenericTypeDefinition,RuntimeObject> cache_reflec_seq_class = new Hashtable<GenericTypeDefinition,RuntimeObject>();
+	public Hashtable<GenericTypeDefinition,RuntimeObject> cache_reflec_coll_class = new Hashtable<GenericTypeDefinition,RuntimeObject>();
+
+	private Hashtable<GenericTypeDefinition,RuntimeObject> non_parametric_metaclass_cache = new Hashtable<GenericTypeDefinition,RuntimeObject>();
+	private Hashtable<TypeDefinition, RuntimeObject> modeltype_cache = new Hashtable<TypeDefinition, RuntimeObject>();
+
 	
 	
 	StructureFactory struct_factory;
@@ -176,13 +180,11 @@ public class RuntimeObjectFactory {
 	    return classReflectiveSequenceOtTypeParamBinding;
 	}
 	
-	private Hashtable non_parametric_metaclass_cache = new Hashtable();
-	private Hashtable<TypeDefinition, RuntimeObject> modeltype_cache = new Hashtable<TypeDefinition, RuntimeObject>();
 
 	public RuntimeObject createMetaClass(fr.irisa.triskell.kermeta.language.structure.Class fclass) {
 	    
 	    if (fclass.getTypeParamBinding().size() == 0) {
-	        RuntimeObject result = (RuntimeObject)non_parametric_metaclass_cache.get(fclass.getTypeDefinition());
+	        RuntimeObject result = non_parametric_metaclass_cache.get(fclass.getTypeDefinition());
 	        if (result != null) return result;
 	    }
 	    
@@ -268,8 +270,8 @@ public class RuntimeObjectFactory {
 		RuntimeObject result = new RuntimeObjectImpl(this, meta_class);
 		if(meta_class.getKCoreObject() instanceof fr.irisa.triskell.kermeta.language.structure.Class){
 			fr.irisa.triskell.kermeta.language.structure.Class the_class = (fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getKCoreObject();
-			SimpleType t = new SimpleType(the_class); 
-			/*if (t.isSemanticallyAbstract()) {
+			/*SimpleType t = new SimpleType(the_class); 
+			if (t.isSemanticallyAbstract()) {
 				//throw new Error("Kermeta Runtime Error: Unable to instantiate semantically abstract class " + FTypePrettyPrinter.getInstance().accept(the_class));
 				SimpleType t1 = new SimpleType(the_class);
 				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::AbstractClassInstantiationError",
@@ -606,7 +608,7 @@ public class RuntimeObjectFactory {
 	        throw new Error("INTERNAL ERROR : method getClassForClassDefinition can only create classes for non parametric class definitions");
 	    }
 	    
-	    RuntimeObject result = (RuntimeObject)non_parametric_metaclass_cache.get(class_def);
+	    RuntimeObject result = non_parametric_metaclass_cache.get(class_def);
 	    
 	    if(result != null) return result;
 	    
@@ -671,6 +673,9 @@ public class RuntimeObjectFactory {
     	
     	// Set "repository" property of resource RO
     	resRO.getProperties().put("repository", repRO);
+    	
+    	// Set "isReadOnly" property of resource RO
+    	resRO.getProperties().put("isReadOnly", repRO.getFactory().getMemory().falseINSTANCE);
     	
     	// Associate EMF resource to resource RO 
     	resRO.setR2eEmfResource(emfRes);
