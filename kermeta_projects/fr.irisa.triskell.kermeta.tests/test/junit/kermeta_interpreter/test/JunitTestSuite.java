@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.9 2007-10-26 14:48:19 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.10 2007-11-13 14:26:14 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -127,6 +127,8 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/interpreter/kmt_testcases","026_testMetaClass.main.kmt" );
 
+		testWithFile("test/interpreter/kmt_testcases","027_testObjectTagAccess.main.kmt" );
+
 		testWithFile("test/interpreter/kmt_testcases","029_testClone1.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","029_testClone2.main.kmt" );
@@ -202,7 +204,6 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/kmt_testcases","068_testVariableInit.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","069_testToStringRedifinition.main.kmt" );
-
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
