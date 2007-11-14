@@ -1,4 +1,4 @@
-/* $Id: 067_testHasSubTypeLoadingModel.main.kmt,v 1.2 2007-10-01 15:17:34 ftanguy Exp $
+/* $Id: 067_testHasSubTypeLoadingModel.main.kmt,v 1.3 2007-11-14 14:45:58 dvojtise Exp $
  * Creation date: June 5, 2007
  * License:
  * Copyright:
@@ -28,7 +28,12 @@ class TestHasSubtypeLoadingModel inherits kermeta::kunit::TestCase {
 	end
 	
 	operation testHasSubtype1() : Boolean is do
-		var p : Package init loadModel("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/loadedFile4hasSubType.km")
+		
+		var mu : ModelingUnit init loadModel("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/loadedFile4hasSubType.km")
+		assert(not mu.isVoid)
+		var p : Package		
+		p := mu.packages.one
+		assert( not p.isVoid)
 		var classes1 : Sequence<TypeDefinition> 
 		classes1 := p.ownedTypeDefinition.select{c |
 			ClassDefinition.isInstance(c)
@@ -50,14 +55,17 @@ class TestHasSubtypeLoadingModel inherits kermeta::kunit::TestCase {
 		result := void
 	end
 
-	operation loadModel(path : String) : Package is do
+	operation loadModel(path : String) : ModelingUnit is do
     	var resource : kermeta::persistence::Resource             
-		var repository : kermeta::persistence::EMFRepository  
-		init kermeta::persistence::EMFRepository.new
-        resource := repository.getResource(path)
-        resource.load()
+		var repository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+		
+		resource := repository.getResource(path)
+		resource.load()
         // models should only contain one package
-		result ?= resource.instances.detect{p | Package.isInstance(p)}
+		result ?= resource.detect{mu | ModelingUnit.isInstance(mu)}
+		
+        stdio.writeln(result.toString)
+		assert( not result.isVoid)
    	end
 }
 
