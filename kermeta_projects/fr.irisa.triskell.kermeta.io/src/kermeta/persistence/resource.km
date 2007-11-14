@@ -229,16 +229,58 @@
           <ownedTag value="/**&#xD;&#xA;  * Overrides Resource.save()&#xD;&#xA;  */" object="//@packages.0/persistence/EMFResource/save"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/EMFResource/save/@body/@statement.0/@thenBody/@statement.0/@containedType.0" identifier="e">
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/ResourceSaveException"/>
+                  </containedType>
+                  <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/EMFResource/save/@body/@statement.0/@thenBody/@statement.0/@initialization/@containedType.0" name="new">
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/ResourceSaveException"/>
+                    </containedType>
+                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                    <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/persistence/Resource/contents/@getterBody/@statement.0/@initialization/@target/@containedType.0">
+                      <typeref type="//@packages.0/persistence/EMFResource/save/@body/@statement.0/@thenBody/@statement.0/@initialization/@containedType.0" upper="1"/>
+                    </target>
+                  </initialization>
+                  <type type="//@packages.0/persistence/EMFResource/save/@body/@statement.0/@thenBody/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:Assignment">
+                  <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="message">
+                    <staticType href="../language/structure.km#//@packages.0/language/structure/Object/set/@body/@statement.0/@elseBody/@statement.1/@target/@containedType.0"/>
+                    <staticProperty href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message"/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/save/@body/@statement.0/@thenBody/@statement.0/@containedType.0" name="e"/>
+                  </target>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                    <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
+                    <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@parameters.3/@containedType.0" value="Note : setting isReadOnly to false on the metamodel may lead to unpredictable results"/>
+                    <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                      <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
+                      <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@parameters.3/@containedType.0" value="If you really intend to save this resource, you can set isReadOnly to false, but you must ensure to do so before any resource save.&#xA;"/>
+                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
+                      <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@parameters.3/@containedType.0" value="Cannot save a readonly resource. Probably this resource was indirectly loaded when loading another resource. &#xA;"/>
+                    </target>
+                  </value>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
+                  <expression xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/save/@body/@statement.0/@thenBody/@statement.0/@containedType.0" name="e"/>
+                </statement>
+              </thenBody>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Resource/isReadOnly/@containedType.0" name="isReadOnly" staticProperty="//@packages.0/persistence/Resource/isReadOnly"/>
+            </statement>
             <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Resource" jmethod="save">
-              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/persistence/EMFResource/save/@body/@statement.0/@parameters.0/@containedType.0">
+              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/persistence/EMFResource/save/@body/@statement.1/@parameters.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/EMFResource"/>
               </parameters>
               <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Resource/uri/@containedType.0" name="uri" staticProperty="//@packages.0/persistence/Resource/uri">
-                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/persistence/EMFResource/save/@body/@statement.0/@parameters.0/@containedType.0"/>
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/persistence/EMFResource/save/@body/@statement.1/@parameters.0/@containedType.0"/>
               </parameters>
               <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Resource/metaModelURI/@containedType.0" name="metaModelURI" staticProperty="//@packages.0/persistence/Resource/metaModelURI"/>
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@parameters.3/@containedType.0" value="EMF"/>
-              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/persistence/EMFResource/save/@body/@statement.0/@parameters.0/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/persistence/EMFResource/save/@body/@statement.1/@parameters.0/@containedType.0"/>
               <parameters xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="//@packages.0/persistence/EMFResource/saveWithNewURI/@body/@statement.0/@parameters.5/@containedType.0"/>
             </statement>
           </body>
@@ -267,7 +309,7 @@
           </body>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/persistence/EMFResource/load/@ownedTag.0" name="load" type="//@packages.0/persistence/EMFResource/load/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/load">
-          <ownedTag value="/**&#xD;&#xA;  * Overrides Resource.save()&#xD;&#xA;  * In case the metamodelURI was not previoulsy set, metamodelURI is filled with&#xD;&#xA;  * the nsuri of the root package of the metamodel used to load the Resource after&#xD;&#xA;  * a successful load&#xD;&#xA;  */" object="//@packages.0/persistence/EMFResource/load"/>
+          <ownedTag value="/**&#xD;&#xA;  * Overrides Resource.load()&#xD;&#xA;  * In case the metamodelURI was not previously set, metamodelURI is filled with&#xD;&#xA;  * the nsuri of the root package of the metamodel used to load the Resource after&#xD;&#xA;  * a successful load&#xD;&#xA;  */" object="//@packages.0/persistence/EMFResource/load"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:CallFeature" name="clear">
@@ -309,6 +351,14 @@
                     </target>
                   </initialization>
                   <type type="//@packages.0/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.1/@containedType.0" isOrdered="true" upper="1"/>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@parameters.3/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="message">
+                    <staticType href="../language/structure.km#//@packages.0/language/structure/Object/set/@body/@statement.0/@elseBody/@statement.1/@target/@containedType.0"/>
+                    <staticProperty href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message"/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.1/@containedType.0" name="e"/>
+                  </target>
+                  <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@parameters.3/@containedType.0" value="Resource load failed, no object was created in this resource"/>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:Raise" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
                   <expression xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.1/@containedType.0" name="e"/>

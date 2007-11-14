@@ -104,7 +104,7 @@
         </eOperations>
         <eOperations name="save">
           <eAnnotations source="kermeta" references="/1/persistence/Resource/save">
-            <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(self, self.uri, metaModelURI, &quot;EMF&quot;, self, false)&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if isReadOnly then&#xA;&#x9;&#x9;var e : kermeta::exceptions::ResourceSaveException init kermeta::exceptions::ResourceSaveException.new&#xA;&#x9;&#x9;e.message := &quot;Cannot save a readonly resource. Probably this resource was indirectly loaded when loading another resource. &#xA;&quot;.plus(&quot;If you really intend to save this resource, you can set isReadOnly to false, but you must ensure to do so before any resource save.&#xA;&quot;).plus(&quot;Note : setting isReadOnly to false on the metamodel may lead to unpredictable results&quot;)&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(self, self.uri, metaModelURI, &quot;EMF&quot;, self, false)&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Overrides Resource.save()&#xD;&#xA;  */"/>
             <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
@@ -118,8 +118,8 @@
         </eOperations>
         <eOperations name="load">
           <eAnnotations source="kermeta" references="/1/persistence/Resource/load">
-            <details key="body" value="do&#xA;&#x9;self.clear&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(self, uri, metaModelURI, &quot;EMF&quot;)&#xA;&#x9;if (self.size) == (0) then&#xA;&#x9;&#x9;stdio.writeln(&quot;Resource load failed!&quot;)&#xA;&#x9;&#x9;var e : kermeta::exceptions::ResourceLoadException init kermeta::exceptions::ResourceLoadException.new&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Resource.save()&#xD;&#xA;  * In case the metamodelURI was not previoulsy set, metamodelURI is filled with&#xD;&#xA;  * the nsuri of the root package of the metamodel used to load the Resource after&#xD;&#xA;  * a successful load&#xD;&#xA;  */"/>
+            <details key="body" value="do&#xA;&#x9;self.clear&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(self, uri, metaModelURI, &quot;EMF&quot;)&#xA;&#x9;if (self.size) == (0) then&#xA;&#x9;&#x9;stdio.writeln(&quot;Resource load failed!&quot;)&#xA;&#x9;&#x9;var e : kermeta::exceptions::ResourceLoadException init kermeta::exceptions::ResourceLoadException.new&#xA;&#x9;&#x9;e.message := &quot;Resource load failed, no object was created in this resource&quot;&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Resource.load()&#xD;&#xA;  * In case the metamodelURI was not previously set, metamodelURI is filled with&#xD;&#xA;  * the nsuri of the root package of the metamodel used to load the Resource after&#xD;&#xA;  * a successful load&#xD;&#xA;  */"/>
             <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
         </eOperations>

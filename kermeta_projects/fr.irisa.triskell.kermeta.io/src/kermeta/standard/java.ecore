@@ -7,7 +7,7 @@
   <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#/kermeta" nsPrefix="kermeta">
     <eSubpackages name="standard" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#/kermeta/standard" nsPrefix="standard">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xD;&#xA; * $Id: java.ecore,v 1.19 2007-11-13 17:19:42 dvojtise Exp $&#xD;&#xA; * Contains types dedicated to dealing with java objects&#xD;&#xA; */"/>
+        <details key="documentation" value="/**&#xD;&#xA; * Contains types dedicated to dealing with java objects&#xD;&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="UnknownJavaObject">
         <eAnnotations source="kermeta">
