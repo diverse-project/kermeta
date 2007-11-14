@@ -8,7 +8,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.40 2007-11-14 16:56:38 dvojtise Exp $
+ * $Id: resource.kmt,v 1.41 2007-11-14 17:18:00 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -146,6 +146,13 @@ class EMFResource inherits Resource
 	 * Overrides Resource.save()
 	 */
 	method save() : Void is do
+		if isReadOnly then
+			var e : kermeta::exceptions::ResourceSaveException init kermeta::exceptions::ResourceSaveException.new
+			e.message := "Cannot save a readonly resource. Probably this resource was indirectly loaded when loading another resource. \n" +
+				"If you really intend to save this resource, you can set isReadOnly to false, but you must ensure to do so before any resource save.\n" +
+				"Note : setting isReadOnly to false on the metamodel may lead to unpredictable results"
+			raise e
+		end
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			self, self.uri, metaModelURI, "EMF", self, false
 		)
@@ -164,8 +171,8 @@ class EMFResource inherits Resource
 	end
 	
 	/**
-	 * Overrides Resource.save()
-	 * In case the metamodelURI was not previoulsy set, metamodelURI is filled with
+	 * Overrides Resource.load()
+	 * In case the metamodelURI was not previously set, metamodelURI is filled with
 	 * the nsuri of the root package of the metamodel used to load the Resource after
 	 * a successful load
 	 */
@@ -178,6 +185,7 @@ class EMFResource inherits Resource
 		if(self.size == 0) then
 			stdio.writeln("Resource load failed!")
 			var e : kermeta::exceptions::ResourceLoadException init kermeta::exceptions::ResourceLoadException.new
+			e.message := "Resource load failed, no object was created in this resource"
 			raise e
 		end
 	end
