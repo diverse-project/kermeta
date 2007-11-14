@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.66 2007-10-15 07:13:58 barais Exp $
+/* $Id: Runtime2EMF.java,v 1.67 2007-11-14 16:56:01 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -56,8 +56,10 @@ public class Runtime2EMF {
 
 	final static public String KERMETA_NSURI = "http://kermeta/kermeta.ecore";
 
-	// Put in this list all the RuntimeObject that were already updated
-	protected HashSet<RuntimeObject> runtimeObjects;
+	/** this list contains all the RuntimeObject that are updated during this transformation
+	 * 
+	 */
+	protected HashSet<RuntimeObject> runtimeObjectsToUpdate;
 
 	protected EMFRuntimeUnit unit;
 
@@ -101,7 +103,7 @@ public class Runtime2EMF {
 	 *            empty...
 	 */
 	public Runtime2EMF(EMFRuntimeUnit p_unit, Resource p_resource) {
-		this.runtimeObjects = new HashSet<RuntimeObject>();
+		this.runtimeObjectsToUpdate = new HashSet<RuntimeObject>();
 		this.unit = p_unit;
 		this.resource = p_resource;
 		this.eenum_map = new Hashtable<String, EEnum>();
@@ -129,15 +131,15 @@ public class Runtime2EMF {
 		int processedElements = 0;
 		
 		for (RuntimeObject ro : instances)
-		{ fillRuntimeObjectList(ro); }
-		internalLog.info("Saving " + instances.size()+"/"+ runtimeObjects.size()+ " objects from " + resource.getURI().toString() +  " and its dependencies ");
+		{ fillRuntimeObjectToUpdateList(ro); }
+		internalLog.info("Saving " + instances.size()+"/"+ runtimeObjectsToUpdate.size()+ " objects from " + resource.getURI().toString() +  " and its dependencies ");
 		
 		// Now that we have the complete list of runtime objects, we can update
 		// the properties of each of those runtime objects. The mapping between
 		// RuntimeObject and EObject to update is done through the
 		// entry { "r2e.emfObject" : EObject } in RuntimeObject.data hashtable.
 		internalLog.debug("updateEMFModel phase 2 : get/create the associated EObject, update the properties ");
-		for (RuntimeObject ro : runtimeObjects)
+		for (RuntimeObject ro : runtimeObjectsToUpdate)
 		{	
 			setEObjectPropertiesFromRuntimeObject(ro); 
 			processedElements++;
@@ -183,9 +185,9 @@ public class Runtime2EMF {
 	 * Ignore RO that belong to another Resource, as the save call the updateEMFModel on each of the other resources
 	 * they are already updated by themselve
 	 */
-	protected void fillRuntimeObjectList(RuntimeObject rObject)
+	protected void fillRuntimeObjectToUpdateList(RuntimeObject rObject)
 	{ 
-		if ( !(runtimeObjects.contains(rObject) || 
+		if ( !(runtimeObjectsToUpdate.contains(rObject) || 
 				RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rObject) != null
 					|| RuntimeObjectHelper.isanEnumerationLiteral(rObject)
 					|| RuntimeObjectHelper.isanEnumeration(rObject)) )
@@ -266,7 +268,7 @@ public class Runtime2EMF {
 			////////////////////////////////////////////////////////
 			
 			
-			runtimeObjects.add(rObject);
+			runtimeObjectsToUpdate.add(rObject);
 				
 				
 			// Now, get the RO repr. of the properties of this object
@@ -274,7 +276,7 @@ public class Runtime2EMF {
 			{
 				// Get the RuntimeObject value of property given by prop_name
 				RuntimeObject property = (RuntimeObject) rObject.getProperties().get(prop_name);
-				fillRuntimeObjectListWithProperty(property);
+				fillRuntimeObjectToUpdateListWithProperty(property);
 			}
 		}
 	}
@@ -287,17 +289,17 @@ public class Runtime2EMF {
 	 * @param prop_name
 	 * @param property
 	 */
-	protected void fillRuntimeObjectListWithProperty(RuntimeObject property) {
+	protected void fillRuntimeObjectToUpdateListWithProperty(RuntimeObject property) {
 		// If property is an EList ([m..n] where n>1)
 		if (RuntimeObject.COLLECTION_VALUE.equals( property.getPrimitiveType())
 				&& property.getJavaNativeObject() != null)
 		{   // For each feature of the collection of features
 			//for (RuntimeObject next : ((ArrayList<RuntimeObject>) property.getData().get("CollectionArrayList")))
 			for (RuntimeObject next : Collection.getArrayList(property))
-				fillRuntimeObjectList( next);
+				fillRuntimeObjectToUpdateList( next);
 		}
 		// If property is not an EList
-		else fillRuntimeObjectList(property);
+		else fillRuntimeObjectToUpdateList(property);
 	}
 
 	/**
@@ -370,8 +372,8 @@ public class Runtime2EMF {
 				else // EObject, EClass, EDataType
 				{
 					Object p_o = getOrCreatePropertyFromRuntimeObject(property, feature);
-					if(p_o instanceof EnumerationLiteral)
-						p_o = getOrCreatePropertyFromRuntimeObject(property, feature);
+					/*if(p_o instanceof EnumerationLiteral)
+						p_o = getOrCreatePropertyFromRuntimeObject(property, feature);*/
 					eObject.eSet(feature, p_o);					
 					if (p_o == null) {
 						internalLog.warn("    setting null to "+ eObject.eClass().getName() + "."  + feature.getName() + "");}
@@ -395,8 +397,21 @@ public class Runtime2EMF {
 		else if (RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rProperty) != null)
 			result = RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rProperty);
 		else if (RuntimeObjectHelper.isanEnumerationLiteral(rProperty) == true){
+			/*if(unit.getEQualifiedName(feature.getEType()).equals("kermeta::standard::Object")){
+				// for some unknown reason, the type has been mapped to a simple java object
+				// the reflexivity won't work
+				// the only way to retrieve the enumeration is to navigate in the metamodel resource 
+				result = createEEnumLiteralFromRuntimeObjectWithResource(rProperty,			
+						unit.getMetaModelResource());
+			}
+			else*/
 			if(feature.getEType().getInstanceClass() !=  null){			
 				// this enumeration has its own implementation must use it ...
+				/*if(feature.getEType() instanceof EJavaObject)
+				{
+					feature.getEType().isInstance(org.eclipse.emf.ecore.EEnum);
+					EJavaObject ejo = feature.getEType(); 
+				}*/
 				result = createGeneratedClassLiteralFromEnumRuntimeObject(rProperty,
 						feature.getEType());
 			}

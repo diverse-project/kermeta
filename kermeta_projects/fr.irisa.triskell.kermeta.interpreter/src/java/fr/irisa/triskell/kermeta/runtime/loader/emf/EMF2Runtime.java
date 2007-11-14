@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.72 2007-10-15 07:13:58 barais Exp $
+/* $Id: EMF2Runtime.java,v 1.73 2007-11-14 16:56:01 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -251,6 +251,11 @@ public class EMF2Runtime {
 					RuntimeObject resListRO = repRO.getProperties().get("resources");
 					ArrayList<RuntimeObject> aResourceListRO = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(resListRO);
 					aResourceListRO.add(crtResRO);
+					
+					// new dependent resources are declared readonly by default
+						// ie. they are not updated when saving the repository
+					crtResRO.getProperties().put("isReadOnly", crtResRO.getFactory().getMemory().trueINSTANCE);
+					
 		    	}
 			}
 			else {

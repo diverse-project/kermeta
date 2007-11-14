@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.53 2007-10-15 07:13:58 barais Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.54 2007-11-14 16:56:01 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -355,7 +355,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         	}
         	catch (WrappedException e){
         		throwKermetaRaisedExceptionOnLoad(
-        		"Error loading EMF model '" + this.getUriAsString() + "' : " + e.exception().getMessage(), e);
+        		"Error Loading metamodel '" + this.getMetaModelUri() + "' for saving model '" + this.getUriAsString() + "' : " + e.exception().getMessage(), e);
 			}
         }
         else // if metaModelResource is null 
@@ -397,11 +397,13 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 				RuntimeObject roResource = next;
 				if (roResource != associatedResource){
 					// get orcreate an emf resource for this Resource
-					String res_uri = (String) ((RuntimeObject) roResource.getProperties().get("uri")).getJavaNativeObject();						
-					/*if(res_uri.startsWith("platform:/plugin/")){ DVK doesn't work in some situations, sometimes the main upadte modify/update one of these object !? 
-						internalLog.info("ignoring update of readonly resource  "+ res_uri +" (ie. platform:/plugin/ )");
+					String res_uri = (String) ((RuntimeObject) roResource.getProperties().get("uri")).getJavaNativeObject();
+					Boolean isReadOnly = (Boolean) ((RuntimeObject) roResource.getProperties().get("isReadOnly")).getJavaNativeObject();
+					if(isReadOnly) {
+					///if(res_uri.startsWith("platform:/plugin/")){ DVK doesn't work in some situations, sometimes the main upadte modify/update one of these object !? 
+						internalLog.info("ignoring update of readonly resource  "+ res_uri +" (ie. indirectly loaded and attribute isReadOnly has not been explicitly set to True )");
 					}
-					else{*/
+					else{
 						Resource res2 = updateEMFResource(roResource, createURI(res_uri));
 						
 						String mm_uri = (String) ((RuntimeObject) roResource.getProperties().get("metaModelURI")).getJavaNativeObject();
@@ -410,7 +412,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 						runtime_unit.associatedResource = roResource;
 						Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
 						r2emf.updateEMFModel();
-					//}
+					}
 				}
 			}
 
@@ -427,10 +429,12 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 				if (roResource != associatedResource){
 					// get orcreate an emf resource for this Resource
 					String res_uri = (String) ((RuntimeObject) roResource.getProperties().get("uri")).getJavaNativeObject();						
-					/*if(res_uri.startsWith("platform:/plugin/")){
-						internalLog.info("ignoring update of readonly resource "+ res_uri +"(ie. platform:/plugin/ cannot be changed)");
+					Boolean isReadOnly = (Boolean) ((RuntimeObject) roResource.getProperties().get("isReadOnly")).getJavaNativeObject();
+					if(isReadOnly) {
+					//if(res_uri.startsWith("platform:/plugin/")){
+						internalLog.info("ignoring update of readonly resource "+ res_uri +"(ie. indirectly loaded and attribute isReadOnly has not been explicitly set to True )");
 					}
-					else{*/
+					else{
 						Resource res2 = updateEMFResource(roResource, createURI(res_uri));
 										
 						String mm_uri = (String) ((RuntimeObject) roResource.getProperties().get("metaModelURI")).getJavaNativeObject();
@@ -439,7 +443,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 						runtime_unit.associatedResource = roResource;
 						Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
 						r2emf.updateEMFModel();
-					//}
+					}
 				}
 			}
 	        

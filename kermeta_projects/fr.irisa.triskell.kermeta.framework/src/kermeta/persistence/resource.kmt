@@ -8,7 +8,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.39 2007-09-19 12:14:49 ftanguy Exp $
+ * $Id: resource.kmt,v 1.40 2007-11-14 16:56:38 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -52,6 +52,15 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	 * Uri of the meta-model of the Resource to load
 	 */
 	attribute metaModelURI : String
+	
+	/**
+	 * Indicates weither this resource will be updated when saving the repository
+	 * This is useful if the repository contains some metamodels that should not be saved.
+	 *
+	 * Note that in the current version, it doesn't ensure that you have not modified its content (using the freeze)
+	 * If you modify the elements of such resource, other resource that depend on it will be incorrectly saved 
+	 */
+	attribute isReadOnly : Boolean
 	
 	/**
 	 * The entities contained in the model-instance, that are provided when user loads a resource 

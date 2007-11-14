@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.28 2007-11-13 14:28:56 dvojtise Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.29 2007-11-14 16:56:23 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -675,7 +675,7 @@ public class RuntimeObjectFactory {
     	resRO.getProperties().put("repository", repRO);
     	
     	// Set "isReadOnly" property of resource RO
-    	resRO.getProperties().put("isReadOnly", repRO.getFactory().getMemory().falseINSTANCE);
+    	resRO.getProperties().put("isReadOnly", resRO.getFactory().getMemory().falseINSTANCE);
     	
     	// Associate EMF resource to resource RO 
     	resRO.setR2eEmfResource(emfRes);
