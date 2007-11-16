@@ -1,4 +1,4 @@
-/*$Id: ResourceHelper.java,v 1.11 2007-07-20 15:08:44 ftanguy Exp $
+/*$Id: ResourceHelper.java,v 1.12 2007-11-16 13:13:31 cfaucher Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -311,7 +311,9 @@ public class ResourceHelper {
 	 */
 	static public void deleteIProject(String projectName, boolean force) {
 		try {
-			getIProject(projectName).delete(force, null);
+			if( getIProject(projectName) != null ) {
+				getIProject(projectName).delete(force, null);
+			}
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
