@@ -1,0 +1,63 @@
+@mainClass "comp_runner_test001::Main"
+@mainOperation "main0"
+
+package comp_runner_test001;
+
+require kermeta
+
+using kermeta::language::structure
+//using kermeta::standard
+
+class Main
+{
+	// This method should infer a "main" runner, because this one has not parameters
+	operation main0() : Void is
+	do
+		stdio.writeln("The runner class will be generated for main0")
+	end
+	
+	// This method should infer a "main" runner, because this one has one parameter with its type equals to String
+	operation main1(text0 : String) : Void is
+	do
+		stdio.writeln("The runner class will be generated for main1")
+	end
+	
+	// This method should infer a "main" runner, because this one has 2 parameters with their types equals to String
+	operation main2(text0 : String, text1 : String) : Void is
+	do
+		stdio.writeln("The runner class will be generated for main2")
+	end
+	
+	
+	/****** Cases that should be in error ******/
+	
+	// This method should not infer a "main" runner, because this one has at least one parameter with a type different to String
+	operation main3(condition : Boolean) : Void is
+	do
+		stdio.writeln("The runner class will not be generated for main3")
+	end
+	
+	// This method should not infer a "main" runner, because this one has at least one parameter with a type different to String
+	operation main4(text0 : String, condition : Boolean) : Void is
+	do
+		stdio.writeln("The runner class will not be generated for main4")
+	end
+	
+	// This method should not infer a "main" runner, because this one has at least one parameter with a type different to String
+	operation main5(text0 : String, text1 : String, condition : Boolean) : Void is
+	do
+		stdio.writeln("The runner class will not be generated for main5")
+	end
+	
+	// This method should not infer a "main" runner, because this one has at least one parameter with a type different to String
+	operation main6(condition : Boolean, text0 : String) : Void is
+	do
+		stdio.writeln("MThe runner class will not be generated for main6")
+	end
+	
+	// This method should not infer a "main" runner, because this one has at least one parameter with a type different to String
+	operation main7(text0 : String, condition : Boolean, text1 : String) : Void is
+	do
+		stdio.writeln("The runner class will not be generated for main7")
+	end
+}
