@@ -9,13 +9,13 @@
             nameFilter="*.kmtt"
             id="fr.irisa.triskell.kermeta.ket.contribution">
          <menu
-               label="KerMeta"
+               label="Kermeta"
                path="additions"
                id="org.eclipse.ui.articles.action.contribution.navigator.subMenu">
             <separator name="additions"/>
          </menu>
          <action
-               label="Translate Kermeta Template..."
+               label="Translate Kermeta Template"
                class="fr.irisa.triskell.kermeta.ket.Generator"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/Kermeta"
                enablesFor="1"
