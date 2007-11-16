@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreHelper.java,v 1.5 2007-09-04 07:59:41 ftanguy Exp $
+/*$Id: EcoreHelper.java,v 1.6 2007-11-16 13:14:37 cfaucher Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	EcoreHelper.java
 * License : EPL
@@ -46,10 +46,10 @@ public class EcoreHelper {
 	static public String getQualifiedName(ENamedElement element, String separator) {
 		assert( element != null );
 		
-		if ( (element.eContainer() !=null) 
-			&& (element.eContainer() instanceof ENamedElement) ) 
+		if ( (element.eContainer() !=null)
+			&& (element.eContainer() instanceof ENamedElement) )
 			
-			return getQualifiedName( (ENamedElement) element.eContainer()) + separator + element.getName();
+			return getQualifiedName( (ENamedElement) element.eContainer(), separator) + separator + element.getName();
 		
 		else 
 			return element.getName();
