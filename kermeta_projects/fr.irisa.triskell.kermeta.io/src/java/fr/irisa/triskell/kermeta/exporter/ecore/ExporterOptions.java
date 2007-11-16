@@ -1,4 +1,4 @@
-/*$Id: ExporterOptions.java,v 1.2 2007-10-18 09:36:57 cfaucher Exp $
+/*$Id: ExporterOptions.java,v 1.3 2007-11-16 13:18:41 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	ExporterOptions.java
 * License : EPL
@@ -18,10 +18,13 @@ public class ExporterOptions {
 	
 	public boolean isExportedWithMerger;
 	
+	public boolean isRemoveKermetaEAnnotations;
+	
 	private ExporterOptions() {
 		isIndependent = false;
 		isOnlyStructural = false;
 		isExportedWithMerger = false;
+		isRemoveKermetaEAnnotations = false;
 	}
 	
 	public ExporterOptions(boolean independent, boolean onlyStructural) {
@@ -33,6 +36,13 @@ public class ExporterOptions {
 		isIndependent = independent;
 		isOnlyStructural = onlyStructural;
 		isExportedWithMerger = exportedWithMerger;
+	}
+	
+	public ExporterOptions(boolean independent, boolean onlyStructural, boolean exportedWithMerger, boolean removeKermetaEAnnotations) {
+		isIndependent = independent;
+		isOnlyStructural = onlyStructural;
+		isExportedWithMerger = exportedWithMerger;
+		isRemoveKermetaEAnnotations = removeKermetaEAnnotations;
 	}
 	
 	public static ExporterOptions getDefault() {
