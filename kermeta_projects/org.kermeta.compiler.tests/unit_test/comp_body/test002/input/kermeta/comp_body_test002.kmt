@@ -10,6 +10,6 @@ class Main
 	// at least a statement in the body
 	operation main() : Void is
 	do
-		stdio.writeln("")
+		stdio.writeln("Main method has been executed")
 	end
 }
