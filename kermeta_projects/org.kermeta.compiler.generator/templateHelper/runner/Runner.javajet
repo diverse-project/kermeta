@@ -1,0 +1,30 @@
+<%@jet
+	 package="org.kermeta.compiler.generator.templates"
+	 imports="java.util.* org.eclipse.emf.ecore.* org.eclipse.emf.codegen.util.* org.eclipse.emf.ecore.util.* org.eclipse.emf.codegen.ecore.genmodel.* fr.irisa.triskell.eclipse.ecore.*"
+	 class="Runner"
+	 version="$Id: Runner.javajet,v 1.1 2007-11-16 14:04:41 cfaucher Exp $" %>
+<%EOperation eop = (EOperation) argument;%>
+
+package kermeta.runner;
+
+
+/**
+ * A test Runner
+ *
+ * @generated
+ */
+public class <%=CodeGenUtil.capName(EcoreHelper.getQualifiedName((ENamedElement) eop, "__"))%>_Runner {
+
+	public static void main(String [] args) {
+		<%=CodeGenUtil.capName(EcoreHelper.getQualifiedName((ENamedElement) eop.eContainer().eContainer(), "__"))%>Factory.eINSTANCE.create<%=((ENamedElement) eop.eContainer()).getName()%>().<%=eop.getName()%>(
+		<%
+			for( int i=0 ; i<eop.getEParameters().size() ; i++) {
+				if(i>0) {
+					%>, <%
+				}%>
+				args[<%=i%>]
+			<%}
+		%>);
+	}
+
+}

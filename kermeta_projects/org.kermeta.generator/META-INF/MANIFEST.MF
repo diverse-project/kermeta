@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Basic Generator for Kermeta
+Bundle-SymbolicName: org.kermeta.generator
+Bundle-Version: 0.0.1.qualifier
+Bundle-Activator: org.kermeta.generator.internal.GeneratorPlugin
+Bundle-Vendor: IRISA/INRIA
+Export-Package: org.kermeta.generator,
+ org.kermeta.generator.internal;x-internal:=true,
+ org.kermeta.generator.jet,
+ org.kermeta.generator.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.emf.codegen.ecore;visibility:=reexport,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.launching,
+ org.eclipse.jdt.ui,
+ org.eclipse.jface.text,
+ org.eclipse.ui
+Eclipse-LazyStart: true

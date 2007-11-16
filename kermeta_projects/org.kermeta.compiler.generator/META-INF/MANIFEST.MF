@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kermeta Compiler Helper Generator
+Bundle-SymbolicName: org.kermeta.compiler.generator;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Activator: org.kermeta.compiler.generator.internal.GeneratorPlugin
+Bundle-Vendor: IRISA/INRIA
+Bundle-Localization: plugin
+Export-Package: org.kermeta.compiler.generator.internal,
+ org.kermeta.compiler.generator.internal.actions,
+ org.kermeta.compiler.generator.internal.generators
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.jdt.core,
+ org.eclipse.ui,
+ org.eclipse.jdt.launching,
+ org.eclipse.jface,
+ org.kermeta.generator,
+ org.eclipse.emf.ecore.editor,
+ fr.irisa.triskell.eclipse.util,
+ fr.irisa.triskell.kermeta.io
+Eclipse-LazyStart: true

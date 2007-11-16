@@ -1,0 +1,21 @@
+<%@jet
+	 package="org.kermeta.compiler.generator.templates"
+	 imports="java.util.* org.eclipse.emf.ecore.* org.eclipse.emf.codegen.util.* org.eclipse.emf.codegen.ecore.genmodel.*"
+	 class="JavaLauncher"
+	 skeleton="../skeleton/3param.skeleton"
+	 version="$Id: JavaLauncher.launchjet,v 1.1 2007-11-16 14:04:42 cfaucher Exp $" %>
+<%GenModel genModel = (GenModel) argument0;%>
+<%String mainClass = (String) argument1;%>
+<%String mainOperation = (String) argument2;%>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/<%=genModel.getModelPluginID()%>/src/kermeta/runner/<%=CodeGenUtil.capName(mainClass.replace("::","__"))%>__<%=mainOperation%>_Runner.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.debug.core.appendEnvironmentVariables" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="kermeta.runner.<%=CodeGenUtil.capName(mainClass.replace("::","__"))%>__<%=mainOperation%>_Runner"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="<%=genModel.getModelPluginID()%>"/>
+</launchConfiguration>

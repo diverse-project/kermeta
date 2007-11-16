@@ -1,0 +1,17 @@
+<%@jet
+	 package="org.kermeta.compiler.generator.templates"
+	 imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.*"
+	 class="Helper"
+	 version="$Id: Helper.javajet,v 1.1 2007-11-16 14:04:42 cfaucher Exp $" %>
+<%GenModel genModel = (GenModel) argument;%>
+
+package kermeta.helper;
+
+
+/**
+ * A test helper
+ *
+ * @generated
+ */
+public class <%=genModel.getGenPackages().get(0).getPrefix()%>Helper {
+}

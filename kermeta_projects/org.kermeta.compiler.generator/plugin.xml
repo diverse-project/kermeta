@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.eclipse.ui.popupMenus">     
+
+      <objectContribution
+            adaptable="true"
+            id="org.kermeta.compiler.generator.GenCompilerHelperContribution"
+            nameFilter="*.genmodel"
+            objectClass="org.eclipse.core.resources.IFile">
+                  <menu
+               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+               label="Kermeta"
+               path="additions">
+            <separator name="kermetagroup1"/>
+         </menu>
+         <action
+               class="org.kermeta.compiler.generator.internal.actions.GenerateHelperAction"
+               enablesFor="1"
+               icon="icons/emfCode.png"
+               id="org.kermeta.compiler.generator.action.GenCompilerHelperAction"
+               label="Compile Kermeta helpers"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
+         </action>
+      </objectContribution>
+
+   </extension>
+
+</plugin>
