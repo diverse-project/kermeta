@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.kermeta.alltests.feature"
+      id="org.kermeta.alltests"
       label="All tests Feature"
       version="0.99.0.qualifier"
       provider-name="IRISA/INRIA">
