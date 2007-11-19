@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="CompilationUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="kermeta::language::structure|comp_assignment_test003|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comp_assignment_test003" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/input/kermeta/comp_assignment_test003.ecore#/comp_assignment_test003" nsPrefix="comp_assignment_test003">
+    <eClassifiers xsi:type="ecore:EClass" name="Main">
+      <eOperations name="main" ordered="false">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var a : comp_assignment_test003::A init comp_assignment_test003::A.new&#xA;&#x9;var aa : comp_assignment_test003::A&#xA;&#x9;aa := a&#xA;&#x9;stdio.writeln(&quot;a: &quot;.plus(a.toString).plus(&quot; - aa: &quot;).plus(aa.toString))&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#x9;comp_assignment_test003.A a = comp_assignment_test003.Comp_assignment_test003Factory.eINSTANCE.createA();&#xD;&#xA;      comp_assignment_test003.A aa = comp_assignment_test003.Comp_assignment_test003Factory.eINSTANCE.createA();&#xD;&#xA;      aa = a;&#xD;&#xA;      System.out.println(&quot;a: &quot; + a.toString() + &quot; - aa: &quot; + aa.toString());"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="A"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

@@ -1,0 +1,39 @@
+@mainClass "comp_assignment_test004::Main"
+@mainOperation "main"
+
+package comp_assignment_test004;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main
+{
+    operation main() is do
+    	
+    	var a : A init A.new
+    	a.name := "Assignment of a feature"
+    	
+    	var b1 : B init B.new
+    	var b2 : B init B.new
+    	
+    	a.b.add(b1)
+    	a.b.add(b2)
+    	
+    	stdio.writeln("a.name: " + a.name)
+    	
+    	a.b.each{ e |
+    		stdio.writeln("a.b: " + e.toString)
+    	}
+    end    
+}
+
+class A
+{
+	attribute name : String [0..1]
+	attribute b : B [0..*]
+}
+
+class B
+{
+}

@@ -1,0 +1,17 @@
+@mainClass "comp_assignment_test002::Main"
+@mainOperation "main"
+
+package comp_assignment_test002;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main
+{
+    operation main() is do
+    	var i : Integer
+    	i := 1
+    	stdio.writeln("Assignment_Var_Integer: " + i.toString)
+    end    
+}
