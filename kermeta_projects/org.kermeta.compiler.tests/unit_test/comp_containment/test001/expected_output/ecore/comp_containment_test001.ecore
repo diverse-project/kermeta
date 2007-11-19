@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="CompilationUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="kermeta::language::structure|comp_containment_test001|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comp_containment_test001" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_containment/test001/input/kermeta/comp_containment_test001.ecore#/comp_containment_test001" nsPrefix="comp_containment_test001">
+    <eClassifiers xsi:type="ecore:EClass" name="Main">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="a" eType="/1/A" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="A">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="b" lowerBound="1" eType="/1/B" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="B">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="c" upperBound="-1" eType="/1/C" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="C">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="d" lowerBound="1" upperBound="-1" eType="/1/D" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="D"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

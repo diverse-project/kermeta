@@ -1,0 +1,30 @@
+
+package comp_containment_test001;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main
+{
+	attribute a : A [0..1]
+}
+
+class A
+{
+	attribute b : B [1..1]
+}
+
+class B
+{
+	attribute c : C [0..*]
+}
+
+class C
+{
+	attribute d : D [1..*]
+}
+
+class D
+{
+}
