@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="CompilationUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="comp_initialization_test006|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comp_initialization_test006" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/input/kermeta/comp_initialization_test006.ecore#/comp_initialization_test006" nsPrefix="comp_initialization_test006">
+    <eClassifiers xsi:type="ecore:EClass" name="Main">
+      <eOperations name="main" ordered="false">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var a : comp_initialization_test006::A&#xA;&#x9;a := comp_initialization_test006::A.new&#xA;&#x9;stdio.writeln(&quot;The variable a is correctly initialized: &quot;.plus(a.toString))&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#x9;comp_initialization_test006.A a = null;&#xD;&#xA;      a = comp_initialization_test006.Comp_initialization_test006Factory.eINSTANCE.createA();&#xD;&#xA;      System.out.println(&quot;The variable a is correctly initialized: &quot; + a.toString());"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="A"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

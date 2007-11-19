@@ -1,0 +1,20 @@
+@mainClass "comp_initialization_test006::Main"
+@mainOperation "main"
+
+package comp_initialization_test006;
+
+require kermeta
+
+class Main
+{
+	// Initialization indirect of a variable with type = A
+    operation main() is do
+    	var a : A
+    	a := A.new
+    	stdio.writeln("The variable a is correctly initialized: " + a.toString)
+    end    
+}
+
+class A
+{
+}
