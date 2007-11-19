@@ -52,7 +52,7 @@ class Main
 	// This method should not infer a "main" runner, because this one has at least one parameter with a type different to String
 	operation main6(condition : Boolean, text0 : String) : Void is
 	do
-		stdio.writeln("MThe runner class will not be generated for main6")
+		stdio.writeln("The runner class will not be generated for main6")
 	end
 	
 	// This method should not infer a "main" runner, because this one has at least one parameter with a type different to String
