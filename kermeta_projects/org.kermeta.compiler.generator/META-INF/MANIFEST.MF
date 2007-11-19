@@ -6,7 +6,8 @@ Bundle-Version: 0.0.1.qualifier
 Bundle-Activator: org.kermeta.compiler.generator.internal.GeneratorPlugin
 Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
-Export-Package: org.kermeta.compiler.generator.internal,
+Export-Package: org.kermeta.compiler.generator.helper.model,
+ org.kermeta.compiler.generator.internal,
  org.kermeta.compiler.generator.internal.actions,
  org.kermeta.compiler.generator.internal.generators
 Require-Bundle: org.eclipse.core.runtime,

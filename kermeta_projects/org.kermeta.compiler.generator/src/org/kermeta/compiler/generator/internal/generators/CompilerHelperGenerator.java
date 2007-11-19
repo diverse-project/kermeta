@@ -31,6 +31,8 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
+import org.kermeta.compiler.generator.helper.model.HelperMethod;
+import org.kermeta.compiler.generator.helper.model.HelperModel;
 import org.kermeta.compiler.generator.internal.GeneratorPlugin;
 import org.kermeta.generator.AbstractGenerator;
 import org.kermeta.generator.jet.DefaultJETEmitter;
@@ -102,6 +104,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 
 	private KermetaUnit kmUnit;
 	private EcoreExporter km2ecoreGen;
+	private HelperModel helperModel;
 
 	/**
 	 * Constructor
@@ -110,10 +113,11 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	 *            The editor configuration to generate
 	 */
 	public CompilerHelperGenerator(GenModel conf, KermetaUnit kmUnit,
-			EcoreExporter km2ecoreGen) {
+			EcoreExporter km2ecoreGen, HelperModel helperModel) {
 		this.configuration = conf;
 		this.kmUnit = kmUnit;
 		this.km2ecoreGen = km2ecoreGen;
+		this.helperModel = helperModel;
 	}
 
 	/**
@@ -140,6 +144,10 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		// generateProviders(configuration, pathProject, monitor);
 		// generateEditor(configuration, pathProject, monitor);
 
+		if(this.helperModel!=null) {
+			generateHelperModel(helperModel, pathProject, monitor);
+		}
+		
 		return project;
 	}
 
@@ -155,6 +163,10 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 				// addVariable("EDITOR_CONF", "org.kermeta.compiler.helper");
 				addVariable("KERMETA_ECLIPSE_HELPER",
 						"fr.irisa.triskell.eclipse.util");
+				addVariable("KERMETA_COMPILER_GENERATOR",
+						"org.kermeta.compiler.generator");
+				addVariable("KERMETA_MODEL",
+						"fr.irisa.triskell.kermeta.model");
 				addVariable("ECLIPSE_CORE_RUNTIME", "org.eclipse.core.runtime");
 				addVariable("ECLIPSE_OSGI", "org.eclipse.osgi");
 				super.initialize(monitor);
@@ -174,7 +186,10 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	 */
 	private void generateStaticPackages(IProject project, IPath pathProject)
 			throws CoreException {
-		String projectName = "kermeta";// project.getName();
+		
+		for(GenPackage genpack : configuration.getAllGenPackagesWithClassifiers()) {
+		
+		String projectName = EcoreHelper.getQualifiedName(genpack.getEcorePackage());/*"kermeta"; project.getName();*/
 		IPath packagePath = new Path(projectName.replace('.', IPath.SEPARATOR));
 
 		for (int i = 1; i < packagePath.segmentCount() + 1; i++) {
@@ -190,10 +205,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			}
 		}
 
-		String[] packagesUtils = { "helper", "runner" };// {"actions", "editor",
-														// "providers",
-														// "wizards",
-														// "preferences"};
+		String[] packagesUtils = { "helper", "runner" };
 		for (int i = 0; i < packagesUtils.length; i++) {
 			IPath pathPackage = pathProject.append(IPath.SEPARATOR
 					+ SOURCE_DIRECTORY + IPath.SEPARATOR + packagePath
@@ -204,24 +216,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 				packagefolder.create(true, false, new NullProgressMonitor());
 			}
 		}
-
-		// // create the templates and template1 folders
-		// IPath pathTemplates = pathProject.append(IPath.SEPARATOR +
-		// "templates");
-		// IFolder templatesFolder =
-		// ResourcesPlugin.getWorkspace().getRoot().getFolder(pathTemplates);
-		// if (!(templatesFolder.exists()))
-		// {
-		// templatesFolder.create(true, false, new NullProgressMonitor());
-		// }
-		// IPath pathTemplate1 = pathTemplates.append(IPath.SEPARATOR +
-		// "template1");
-		// IFolder template1Folder =
-		// ResourcesPlugin.getWorkspace().getRoot().getFolder(pathTemplate1);
-		// if (!(template1Folder.exists()))
-		// {
-		// template1Folder.create(true, false, new NullProgressMonitor());
-		// }
+		}
 
 		// create the icons folder
 		IPath pathIcons = pathProject.append(IPath.SEPARATOR + "icons");
@@ -400,7 +395,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 
 			monitor.subTask("Files creation");
 
-			generateTestHelpers(conf, projectPath);
+			//generateTestHelpers(conf, projectPath);
 			generateRunner(conf, projectPath);
 			generateLauncher(conf, projectPath);
 
@@ -440,12 +435,56 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		}
 	}
 
+	// ---------------------------------------------------------
+	// Generate the classes for the helpers
+	// ---------------------------------------------------------
+	private void generateHelperModel(HelperModel theHelperModel, IPath projectPath,
+			IProgressMonitor monitor) {
+		try {
+
+			monitor.subTask("Files creation");
+
+			generateTestHelperModel(theHelperModel, projectPath);
+
+			monitor.worked(1);
+		} catch (JETException e) {
+			GeneratorPlugin.log(e);
+			GeneratorPlugin
+					.displayDialog(
+							null,
+							"JETException : an error occured during editor generation. See error logs for more details.",
+							IStatus.ERROR);
+		} catch (CoreException e) {
+			GeneratorPlugin.log(e);
+			GeneratorPlugin
+					.displayDialog(
+							null,
+							"CoreException : an error occured during editor generation. See error logs for more details.",
+							IStatus.ERROR);
+		}
+	}
+	
 	private void generateTestHelpers(GenModel conf, IPath projectPath)
 			throws JETException, CoreException {
-		applyTemplate(conf, getTemplateURI(TEST_HELPER_JAVA), projectPath
-				.append("/" + SOURCE_DIRECTORY + "/" + "kermeta" + "/helper/"
-						+ conf.getGenPackages().get(0).getPrefix()
-						+ "Helper.java"), conf.isForceOverwrite());
+		for(GenPackage genpack : conf.getAllGenPackagesWithClassifiers()) {
+			applyTemplate(genpack, getTemplateURI(TEST_HELPER_JAVA), projectPath
+					.append("/" + SOURCE_DIRECTORY + "/" + EcoreHelper.getQualifiedName(genpack.getEcorePackage(), "/") + "/helper/"
+							+ conf.getGenPackages().get(0).getPrefix()
+							+ "Helper.java"), conf.isForceOverwrite());
+		}
+	}
+	
+	private void generateTestHelperModel(HelperModel theHelperModel, IPath projectPath)
+			throws JETException, CoreException {
+		for(HelperMethod helperMethod : theHelperModel.helperMethods) {
+			if(!helperMethod.getAllPackagesName().contains("kermeta")){
+			applyTemplate(helperMethod, getTemplateURI(TEST_HELPER_JAVA), projectPath
+					.append("/" + SOURCE_DIRECTORY + "/" + helperMethod.getAllPackagesName().replace("::", "/") + "/helper/"
+							+ CodeGenUtil.capName(helperMethod.getParentMethodFromModel().getName()) + "_" + helperMethod.getId()
+							+ "_Helper.java"), configuration.isForceOverwrite());
+			System.out.println("tttttttttttttttoooooooooooo");
+			}
+		}
 	}
 
 	private void generateRunner(GenModel conf, IPath projectPath)
@@ -484,7 +523,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 							applyTemplate(
 									eop,
 									getTemplateURI(RUNNER_JAVA),
-									projectPath.append("/" + SOURCE_DIRECTORY + "/" + "kermeta" + "/runner/" + CodeGenUtil.capName(EcoreHelper.getQualifiedName((ENamedElement) eop, "__")) + "_Runner.java"),
+									projectPath.append("/" + SOURCE_DIRECTORY + "/" + EcoreHelper.getQualifiedName(epackage, "/") + "/runner/" + CodeGenUtil.capName(EcoreHelper.getQualifiedName((ENamedElement) eop, "__")) + "_Runner.java"),
 									conf.isForceOverwrite());
 						}
 

@@ -1,17 +1,29 @@
 <%@jet
 	 package="org.kermeta.compiler.generator.templates"
-	 imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.*"
+	 imports="java.util.* org.eclipse.emf.codegen.util.* org.eclipse.emf.codegen.ecore.genmodel.* fr.irisa.triskell.eclipse.ecore.* org.kermeta.compiler.generator.helper.model.* fr.irisa.triskell.kermeta.language.structure.NamedElement"
 	 class="Helper"
-	 version="$Id: Helper.javajet,v 1.1 2007-11-16 14:04:42 cfaucher Exp $" %>
-<%GenModel genModel = (GenModel) argument;%>
+	 version="$Id: Helper.javajet,v 1.2 2007-11-19 14:08:34 cfaucher Exp $" %>
+<%HelperMethod helperMethod = (HelperMethod) argument;%>
 
-package kermeta.helper;
+package <%=helperMethod.getAllPackagesName()%>.helper;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
- * A test helper
  *
  * @generated
  */
-public class <%=genModel.getGenPackages().get(0).getPrefix()%>Helper {
+public class <%=CodeGenUtil.capName(((NamedElement) helperMethod.getParentMethodFromModel()).getName())%>_<%=helperMethod.getId()%>_Helper {
+
+
+	public static void each(EList<<%=helperMethod.getParamType()%>> list) {
+		for(<%=helperMethod.getParamType()%> it : list) {
+			func(it);
+		}
+	}
+	
+	private static void func(<%=helperMethod.getParamType()%> <%=helperMethod.getParamName()%>) {
+		<%=helperMethod.getBody()%>
+	}
+
 }

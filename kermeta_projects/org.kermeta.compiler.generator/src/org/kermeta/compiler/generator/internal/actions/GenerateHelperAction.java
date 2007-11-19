@@ -30,12 +30,15 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.kermeta.compiler.generator.helper.model.HelperModel;
 import org.kermeta.compiler.generator.internal.GeneratorPlugin;
 import org.kermeta.compiler.generator.internal.generators.CompilerHelperGenerator;
 import org.kermeta.generator.AbstractGenerator;
 import org.kermeta.generator.util.ConfiguratorObjectManager;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 
 /**
@@ -97,11 +100,21 @@ public class GenerateHelperAction implements IActionDelegate
         // get the selected *.configuration file
         final IFile file = convertSelection2File(selection);
         
-        generate(file, null, null);
+        KermetaUnit kermetaUnit = null;
+        String genModelPath = file.getFullPath().removeFileExtension().addFileExtension("kmt").toString();
+
+        try {
+        	kermetaUnit = IOPlugin.getDefault().getKermetaUnit("platform:/resource" + genModelPath);
+		} catch (URIMalformedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        generate(file, kermetaUnit, null, null);
 
     }
     
-    public void generate(final IFile file, final KermetaUnit kmUnit, final EcoreExporter km2ecoreGen) {
+    public void generate(final IFile file, final KermetaUnit kmUnit, final EcoreExporter km2ecoreGen, final HelperModel helperModel) {
     	if (file == null)
         {
             GeneratorPlugin.displayDialog(null, "Invalid selection : Only one file can be selected.", IStatus.ERROR);
@@ -129,7 +142,7 @@ public class GenerateHelperAction implements IActionDelegate
                         {
                             monitor.worked(1);
 
-                            CompilerHelperGenerator generator = new CompilerHelperGenerator(configuration, kmUnit, km2ecoreGen);
+                            CompilerHelperGenerator generator = new CompilerHelperGenerator(configuration, kmUnit, km2ecoreGen, helperModel);
                             generatedProject = generator.generate(monitor);
                         }
                         else
