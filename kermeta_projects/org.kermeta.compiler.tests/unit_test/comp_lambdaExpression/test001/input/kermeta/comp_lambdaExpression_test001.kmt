@@ -1,0 +1,29 @@
+@mainClass "comp_lambdaExpression_test001::Main"
+@mainOperation "main"
+
+package comp_lambdaExpression_test001;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main
+{
+	operation main() : Void is
+	do
+		var a : A init A.new
+		a.ref.add("Kernel")
+		a.ref.add("Metamodeling")
+		a.ref.add(" ")
+		a.ref.add("Compiler")
+		
+		a.ref.each{ r |
+			stdio.writeln(r.toString)
+		}
+	end
+}
+
+class A
+{
+	reference ref : bag String [0..*]
+}
