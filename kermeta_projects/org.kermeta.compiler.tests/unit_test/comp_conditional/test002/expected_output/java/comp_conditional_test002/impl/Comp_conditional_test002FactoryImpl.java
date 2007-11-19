@@ -1,20 +1,20 @@
 /**
- * Copyright : IRISA / INRIA / Universite de Rennes 1/nLicense   : EPL/nhttp://www.kermeta.org
+ * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: Comp_conditional_test002FactoryImpl.java,v 1.1 2007-11-09 17:56:37 cfaucher Exp $
+ * $Id: Comp_conditional_test002FactoryImpl.java,v 1.2 2007-11-19 09:45:27 cfaucher Exp $
  */
 package comp_conditional_test002.impl;
-
-import comp_conditional_test002.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import comp_conditional_test002.Comp_conditional_test002Factory;
+import comp_conditional_test002.Comp_conditional_test002Package;
+import comp_conditional_test002.Main;
 
 /**
  * <!-- begin-user-doc -->

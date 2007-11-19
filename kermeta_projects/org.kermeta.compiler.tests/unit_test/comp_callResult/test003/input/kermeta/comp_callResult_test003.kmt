@@ -1,0 +1,16 @@
+
+package comp_callResult_test003;
+
+require kermeta
+
+class Main
+{
+	operation main() : A is
+	do
+		result := A.new
+	end
+}
+
+class A
+{
+}

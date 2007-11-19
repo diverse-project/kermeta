@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="CompilationUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="comp_instanceOf_test001|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comp_instanceOf_test001" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_instanceof/test001/input/kermeta/comp_instanceOf_test001.ecore#/comp_instanceOf_test001" nsPrefix="comp_instanceOf_test001">
+    <eClassifiers xsi:type="ecore:EClass" name="Main">
+      <eOperations name="main">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var a : comp_instanceOf_test001::A&#xA;&#x9;if a.isInstanceOf(comp_instanceOf_test001::A) then&#xA;&#x9;&#x9;stdio.writeln(&quot;a is instance of A&quot;)&#xA;&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#x9;comp_instanceOf_test001.A a = comp_instanceOf_test001.Comp_instanceOf_test001Factory.eINSTANCE.createA();&#xD;&#xA;&#x9;if( a instanceof comp_instanceOf_test001.A) {&#xD;&#xA;&#x9;&#x9;System.out.println(&quot;a is instance of A&quot;);&#xD;&#xA;&#xD;&#xA;&#x9;}&#xD;&#xA;"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="A"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

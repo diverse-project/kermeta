@@ -1,7 +1,7 @@
 /**
- * Copyright : IRISA / INRIA / Universite de Rennes 1/nLicense   : EPL/nhttp://www.kermeta.org
+ * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: Main.java,v 1.1 2007-11-09 17:25:07 cfaucher Exp $
+ * $Id: Main.java,v 1.2 2007-11-19 09:45:26 cfaucher Exp $
  */
 package comp_body_test001;
 
@@ -23,7 +23,7 @@ public interface Main extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model annotation="kermeta body='do\nend'"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='{}'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='//TODO: implement operation main\nthrow new kermeta.exceptions.NotImplementedException();'"
    * @generated
    */
   void main();

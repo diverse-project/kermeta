@@ -10,6 +10,9 @@
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;end"/>
         </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="//TODO: implement operation main&#xA;throw new kermeta.exceptions.NotImplementedException();"/>
+        </eAnnotations>
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>

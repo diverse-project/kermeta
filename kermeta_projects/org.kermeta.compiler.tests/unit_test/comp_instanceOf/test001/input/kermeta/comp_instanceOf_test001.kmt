@@ -1,0 +1,21 @@
+@mainClass "comp_instanceOf_test001::Main"
+@mainOperation "main"
+
+package comp_instanceOf_test001;
+
+require kermeta
+
+class Main
+{
+	operation main() : Void is
+	do
+		var a : A
+		if(a.isInstanceOf(A)) then
+			stdio.writeln("a is instance of A")
+		end
+	end
+}
+
+class A
+{
+} 

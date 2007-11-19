@@ -1,0 +1,11 @@
+
+package comp_callResult_test002;
+
+require kermeta
+
+class Main
+{
+	operation main() : Void is
+	do
+	end
+}

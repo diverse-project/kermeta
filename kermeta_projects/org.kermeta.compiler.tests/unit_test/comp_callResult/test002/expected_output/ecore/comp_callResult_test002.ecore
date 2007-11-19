@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="CompilationUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="comp_callResult_test002|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comp_callResult_test002" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/input/kermeta/comp_callResult_test002.ecore#/comp_callResult_test002" nsPrefix="comp_callResult_test002">
+    <eClassifiers xsi:type="ecore:EClass" name="Main">
+      <eOperations name="main">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="//TODO: implement operation main&#xA;throw new kermeta.exceptions.NotImplementedException();"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

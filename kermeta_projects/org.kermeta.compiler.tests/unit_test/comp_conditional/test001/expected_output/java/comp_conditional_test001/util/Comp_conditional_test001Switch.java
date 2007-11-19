@@ -1,16 +1,17 @@
 /**
- * Copyright : IRISA / INRIA / Universite de Rennes 1/nLicense   : EPL/nhttp://www.kermeta.org
+ * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: Comp_conditional_test001Switch.java,v 1.1 2007-11-09 17:56:38 cfaucher Exp $
+ * $Id: Comp_conditional_test001Switch.java,v 1.2 2007-11-19 09:45:27 cfaucher Exp $
  */
 package comp_conditional_test001.util;
-
-import comp_conditional_test001.*;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import comp_conditional_test001.Comp_conditional_test001Package;
+import comp_conditional_test001.Main;
 
 /**
  * <!-- begin-user-doc -->

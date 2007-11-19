@@ -1,7 +1,7 @@
 /**
- * Copyright : IRISA / INRIA / Universite de Rennes 1/nLicense   : EPL/nhttp://www.kermeta.org
+ * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: Comp_body_test002PackageImpl.java,v 1.1 2007-11-09 17:44:46 cfaucher Exp $
+ * $Id: Comp_body_test002PackageImpl.java,v 1.2 2007-11-19 09:45:28 cfaucher Exp $
  */
 package comp_body_test002.impl;
 
@@ -223,7 +223,7 @@ public class Comp_body_test002PackageImpl extends EPackageImpl implements Comp_b
        source, 
        new String[] 
        {
-       "body", "do\n\tstdio.writeln(\"\")\nend"
+       "body", "do\n\tstdio.writeln(\"Main method has been executed\")\nend"
        });	
   }
 

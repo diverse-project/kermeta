@@ -1,7 +1,7 @@
 /**
- * Copyright : IRISA / INRIA / Universite de Rennes 1/nLicense   : EPL/nhttp://www.kermeta.org
+ * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: Main.java,v 1.1 2007-11-09 17:56:37 cfaucher Exp $
+ * $Id: Main.java,v 1.2 2007-11-19 09:45:31 cfaucher Exp $
  */
 package comp_conditional_test001;
 
@@ -23,7 +23,7 @@ public interface Main extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model annotation="kermeta body='do\n\tif (1) == (1) then\n\t\tstdio.writeln(\"enter in then\")\n\n\tend\nend'"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='{\tif( (1) == (1)) {\n\t\tSystem.out.println(\"enter in then\")\n\n\t}\n}'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\tif( (1) == (1)) {\n\t\tSystem.out.println(\"enter in then\")\n\n\t}\n'"
    * @generated
    */
   void main();

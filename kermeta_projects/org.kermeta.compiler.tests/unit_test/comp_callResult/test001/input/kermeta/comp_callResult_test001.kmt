@@ -1,0 +1,14 @@
+
+package comp_callResult_test001;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main
+{
+	operation main() : String is
+	do
+		result := "main"
+	end
+}

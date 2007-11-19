@@ -1,7 +1,7 @@
 /**
- * Copyright : IRISA / INRIA / Universite de Rennes 1/nLicense   : EPL/nhttp://www.kermeta.org
+ * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: MainImpl.java,v 1.1 2007-11-09 17:56:37 cfaucher Exp $
+ * $Id: MainImpl.java,v 1.2 2007-11-19 09:45:27 cfaucher Exp $
  */
 package comp_conditional_test001.impl;
 
@@ -51,11 +51,11 @@ public class MainImpl extends EObjectImpl implements Main
    */
   public void main()
   {
-    {	if( 1 == 1) {
+      if( 1 == 1) {
         System.out.println("enter in then");
     
       }
-    }
+    
   }
 
 } //MainImpl

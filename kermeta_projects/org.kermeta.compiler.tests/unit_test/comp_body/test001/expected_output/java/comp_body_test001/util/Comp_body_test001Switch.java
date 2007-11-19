@@ -1,16 +1,17 @@
 /**
- * Copyright : IRISA / INRIA / Universite de Rennes 1/nLicense   : EPL/nhttp://www.kermeta.org
+ * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: Comp_body_test001Switch.java,v 1.1 2007-11-09 17:25:07 cfaucher Exp $
+ * $Id: Comp_body_test001Switch.java,v 1.2 2007-11-19 09:45:22 cfaucher Exp $
  */
 package comp_body_test001.util;
-
-import comp_body_test001.*;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import comp_body_test001.Comp_body_test001Package;
+import comp_body_test001.Main;
 
 /**
  * <!-- begin-user-doc -->
