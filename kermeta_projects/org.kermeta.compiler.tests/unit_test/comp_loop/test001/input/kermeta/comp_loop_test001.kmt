@@ -1,0 +1,21 @@
+@mainClass "comp_loop_test001::Main"
+@mainOperation "main"
+
+package comp_loop_test001;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main
+{
+	operation main() : Void is
+	do
+		from var i : Integer init 0
+		until i == 10
+		loop
+			stdio.writeln(i.toString)
+			i := i+1
+		end
+	end
+}
