@@ -1,0 +1,17 @@
+@mainClass "comp_javaStaticCall_test001::Main"
+@mainOperation "main"
+package comp_javaStaticCall_test001;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main
+{	
+	operation main() : Void is
+	do
+		var filename : String init "file.txt"
+		var text : String init "The text"
+		extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)
+	end
+}
