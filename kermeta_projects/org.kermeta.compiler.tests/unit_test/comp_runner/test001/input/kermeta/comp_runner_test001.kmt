@@ -1,5 +1,5 @@
 @mainClass "comp_runner_test001::Main"
-@mainOperation "main0"
+@mainOperation "main1"
 
 package comp_runner_test001;
 

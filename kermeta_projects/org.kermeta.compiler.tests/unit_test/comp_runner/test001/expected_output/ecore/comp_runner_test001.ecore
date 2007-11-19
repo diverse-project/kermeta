@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="CompilationUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="kermeta::language::structure|comp_runner_test001|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comp_runner_test001" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_runner/test001/input/kermeta/comp_runner_test001.ecore#/comp_runner_test001" nsPrefix="comp_runner_test001">
+    <eClassifiers xsi:type="ecore:EClass" name="Main">
+      <eOperations name="main0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;The runner class will be generated for main0&quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#x9;System.out.println(&quot;The runner class will be generated for main0&quot;);&#xD;&#xA;"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="main1">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;The runner class will be generated for main1&quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#x9;System.out.println(&quot;The runner class will be generated for main1&quot;);&#xD;&#xA;"/>
+        </eAnnotations>
+        <eParameters name="text0" eType="/1/String"/>
+      </eOperations>
+      <eOperations name="main2">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;The runner class will be generated for main2&quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#x9;System.out.println(&quot;The runner class will be generated for main2&quot;);&#xD;&#xA;"/>
+        </eAnnotations>
+        <eParameters name="text0" eType="/1/String"/>
+        <eParameters name="text1" eType="/1/String"/>
+      </eOperations>
+      <eOperations name="main3">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;The runner class will not be generated for main3&quot;)&#xA;end"/>
+          <details key="documentation" value="/****** Cases that should be in error ******/"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#x9;System.out.println(&quot;The runner class will not be generated for main3&quot;);&#xD;&#xA;"/>
+        </eAnnotations>
+        <eParameters name="condition" eType="/1/Boolean"/>
+      </eOperations>
+      <eOperations name="main4">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;The runner class will not be generated for main4&quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#x9;System.out.println(&quot;The runner class will not be generated for main4&quot;);&#xD;&#xA;"/>
+        </eAnnotations>
+        <eParameters name="text0" eType="/1/String"/>
+        <eParameters name="condition" eType="/1/Boolean"/>
+      </eOperations>
+      <eOperations name="main5">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;The runner class will not be generated for main5&quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#x9;System.out.println(&quot;The runner class will not be generated for main5&quot;);&#xD;&#xA;"/>
+        </eAnnotations>
+        <eParameters name="text0" eType="/1/String"/>
+        <eParameters name="text1" eType="/1/String"/>
+        <eParameters name="condition" eType="/1/Boolean"/>
+      </eOperations>
+      <eOperations name="main6">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;MThe runner class will not be generated for main6&quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;System.out.println(&quot;MThe runner class will not be generated for main6&quot;)&#xA;"/>
+          </eAnnotations>
+          <details key="body" value="&#x9;System.out.println(&quot;MThe runner class will not be generated for main6&quot;);&#xD;&#xA;"/>
+        </eAnnotations>
+        <eParameters name="condition" eType="/1/Boolean"/>
+        <eParameters name="text0" eType="/1/String"/>
+      </eOperations>
+      <eOperations name="main7">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;The runner class will not be generated for main7&quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#x9;System.out.println(&quot;The runner class will not be generated for main7&quot;);&#xD;&#xA;"/>
+        </eAnnotations>
+        <eParameters name="text0" eType="/1/String"/>
+        <eParameters name="condition" eType="/1/Boolean"/>
+        <eParameters name="text1" eType="/1/String"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>
