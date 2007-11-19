@@ -1,0 +1,19 @@
+@mainClass "comp_initialization_test004::Main"
+@mainOperation "main"
+
+package comp_initialization_test004;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main
+{
+	// Initialization indirect of a variable with type = Integer
+    operation main() is do
+    	var i : Integer
+    	i := 1
+    	stdio.writeln(i.toString)
+    end
+    
+}

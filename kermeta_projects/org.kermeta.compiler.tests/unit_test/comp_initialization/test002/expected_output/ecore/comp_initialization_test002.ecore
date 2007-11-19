@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="CompilationUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="kermeta::language::structure|comp_initialization_test002|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comp_initialization_test002" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/input/kermeta/comp_initialization_test002.ecore#/comp_initialization_test002" nsPrefix="comp_initialization_test002">
+    <eClassifiers xsi:type="ecore:EClass" name="Main">
+      <eOperations name="main" ordered="false">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var s : kermeta::language::structure::String&#xA;&#x9;s := &quot;InitStringIndirect&quot;&#xA;&#x9;stdio.writeln(s)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#x9;String s;&#xD;&#xA;      s = &quot;InitStringIndirect&quot;;&#xD;&#xA;      System.out.println(s);&#xD;&#xA;"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

@@ -1,0 +1,17 @@
+@mainClass "comp_initialization_test001::Main"
+@mainOperation "main"
+
+package comp_initialization_test001;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main
+{
+	// Initialization direct of a variable with type = String
+    operation main() is do
+    	var s : String init "InitStringDirect"
+    	stdio.writeln(s)
+    end    
+}

@@ -1,0 +1,17 @@
+@mainClass "comp_initialization_test003::Main"
+@mainOperation "main"
+
+package comp_initialization_test003;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main
+{
+	// Initialization direct of a variable with type = Integer
+    operation main() is do
+    	var i : Integer init 1
+    	stdio.writeln(i.toString)
+    end    
+}
