@@ -1,4 +1,4 @@
-/* $Id: RunInterpretedTestCase.java,v 1.6 2007-10-26 14:48:18 ftanguy Exp $
+/* $Id: RunInterpretedTestCase.java,v 1.7 2007-11-21 14:13:48 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -17,22 +17,13 @@
  */
 package fr.irisa.triskell.kermeta.launcher;
 
-import java.io.IOException;
-import java.util.LinkedHashSet;
-
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.kermeta.checker.KermetaUnitChecker;
-import org.kermeta.io.KermetaUnit;
-import org.kermeta.merger.Merger;
 
-import com.sun.corba.se.spi.legacy.connection.GetEndPointInfoAgainException;
-
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -58,6 +49,8 @@ public class RunInterpretedTestCase extends TestCase {
 
 	private String binDirectory;
     
+	private IOConsole console = new LocalIOConsole();
+	
     /**
      * 
      * @param themainClassValue
@@ -87,7 +80,8 @@ public class RunInterpretedTestCase extends TestCase {
         if (interpreter == null) {
             System.err.println("Memory before interpreter : " + Runtime.getRuntime().totalMemory());
            	interpreter = new KermetaInterpreter(containerTestSuite.getExecutable(), null);
-            System.err.println("Memory after interpreter : " + Runtime.getRuntime().totalMemory());
+           	interpreter.setKStream(console);
+           	System.err.println("Memory after interpreter : " + Runtime.getRuntime().totalMemory());
         }
         
         //interpreter.setEntryPoint(mainClassValue, mainOperationValue);
