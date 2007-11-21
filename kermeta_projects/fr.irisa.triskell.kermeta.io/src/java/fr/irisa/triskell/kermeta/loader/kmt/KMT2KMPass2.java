@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.19 2007-11-21 13:45:21 cfaucher Exp $
+/* $Id: KMT2KMPass2.java,v 1.20 2007-11-21 14:06:31 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.ast.ClassMemberDecls;
@@ -74,12 +75,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			return false;
 		
 		//fr.irisa.triskell.kermeta.language.structure.Package p = getOrCreatePackage(qualifiedIDAsString(node.getName()), node);
-		fr.irisa.triskell.kermeta.language.structure.Package p = builder.addInternalPackage( qualifiedIDAsString(node.getName()) );
-		
-		String p_uri = KermetaASTHelper.getURI(node);
-		if( p_uri != null ) {
-			p.setUri(p_uri);
-		}
+		fr.irisa.triskell.kermeta.language.structure.Package p = builder.addInternalPackage( qualifiedIDAsString(node.getName()), KermetaASTHelper.getURI(node) );
 		
 		builder.storeTrace(p, node);
 		pkgs.push( p );
@@ -243,8 +239,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			builder.error("PASS 2 : A type definition for '" + qualifiedName + "' already exists.");
 		}
 		else {
-			PrimitiveType c = StructureFactory.eINSTANCE.createPrimitiveType();
-			c.setName(getTextForID(node.getName()));
+			PrimitiveType c = KermetaModelHelper.PrimitiveType.create( getTextForID(node.getName()) );
 			builder.addTypeDefinition(c, current_package());
 //			current_package().getOwnedTypeDefinition().add(c);
 			//builder.typeDefs.put(NamedElementHelper.getQualifiedName(c), c);

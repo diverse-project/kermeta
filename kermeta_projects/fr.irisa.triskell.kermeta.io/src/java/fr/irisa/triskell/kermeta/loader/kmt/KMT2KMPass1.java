@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.21 2007-10-16 11:43:41 ftanguy Exp $
+/* $Id: KMT2KMPass1.java,v 1.22 2007-11-21 14:06:31 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : EPL
@@ -17,7 +17,6 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -43,7 +42,6 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Using;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 
 /**

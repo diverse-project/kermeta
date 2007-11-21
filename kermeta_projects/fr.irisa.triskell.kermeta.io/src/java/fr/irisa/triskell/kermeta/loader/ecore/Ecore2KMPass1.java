@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.21 2007-10-30 14:10:51 ftanguy Exp $
+/*$Id: Ecore2KMPass1.java,v 1.22 2007-11-21 14:05:08 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.ast.helper.KMTHelper;
@@ -181,8 +182,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
        		kermetaUnit.addTypeDefinition(currentPrimitiveType, getCurrentPackage());
     	}*/
     	
-    	currentPrimitiveType = StructureFactory.eINSTANCE.createPrimitiveType();
-    	currentPrimitiveType.setName( node.getName() );
+    	currentPrimitiveType = KermetaModelHelper.PrimitiveType.create( node.getName() );
     	kermetaUnit.addTypeDefinition(currentPrimitiveType, getCurrentPackage());
     	
     	datas.store(currentPrimitiveType, node);
