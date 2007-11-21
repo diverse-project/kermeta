@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteInterpreter.java,v 1.12 2007-07-24 13:47:19 ftanguy Exp $
+/* $Id: KermetaRemoteInterpreter.java,v 1.13 2007-11-21 14:13:05 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteInterpreter.java
  * License   : EPL
@@ -15,6 +15,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Hashtable;
 
+import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
@@ -132,7 +133,7 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	}
 	
 	// Hem, the names ....
-	public KermetaIOStream getKermetaIOStream() {
+	public IOConsole getKermetaIOStream() {
 		return kermetaInterpreter.getKStream();
 	}
 

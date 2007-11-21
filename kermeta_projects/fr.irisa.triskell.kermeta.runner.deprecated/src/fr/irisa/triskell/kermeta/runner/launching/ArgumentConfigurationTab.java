@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.29 2007-07-24 13:47:19 ftanguy Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.30 2007-11-21 14:13:04 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -52,12 +52,16 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
+import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.KermetaMessages;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
@@ -66,7 +70,6 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
-import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.dialogs.SelectionListDialog;
 /**
  * 
@@ -270,7 +273,13 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     	String defaultClassName = "";
     	if(kunit == null && selectedFile != null)
     	{
-    		kunit = KermetaRunHelper.parse(selectedFile);
+    		try {
+				kunit = KermetaUnitChecker.check(selectedFile);
+			} catch (KermetaIOFileNotFoundException e) {
+				e.printStackTrace();
+			} catch (URIMalformedException e) {
+				e.printStackTrace();
+			}
     	}
     	if (kunit != null)
   		{
@@ -290,7 +299,13 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     	String defaultOperationName = "";
     	if(kunit == null && selectedFile != null)
     	{
-    		kunit = KermetaRunHelper.parse(selectedFile);
+    		try {
+				kunit = KermetaUnitChecker.check(selectedFile);
+			} catch (KermetaIOFileNotFoundException e) {
+				e.printStackTrace();
+			} catch (URIMalformedException e) {
+				e.printStackTrace();
+			}
     	}
     	if (kunit != null)
   		{
@@ -511,7 +526,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     	try{
 	        IFile selectedFile = ResourceHelper.getIFile(fileLocationText.getText());
 	        // Recompile kermeta source code
-	        KermetaUnit selectedUnit = KermetaRunHelper.parse(selectedFile);
+	        KermetaUnit selectedUnit = KermetaUnitChecker.check(selectedFile);
 	        
 	        if (selectedClassString == null){
 	        	MessageDialog.openError(getShell(),"","Please select a class before searching for the operation ...");
@@ -556,7 +571,13 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		// Parse the selected file
 		if (selectedPath!=null)
 		{   // update the className and the operationName
-		    parseFileAndUpdateFields(selectedPath);
+		    try {
+				parseFileAndUpdateFields(selectedPath);
+			} catch (KermetaIOFileNotFoundException e) {
+				e.printStackTrace();
+			} catch (URIMalformedException e) {
+				e.printStackTrace();
+			}
 		    //selectedUnit.saveAsXMIModel(selectedPath);
 		}
 		updateLaunchConfigurationDialog();
@@ -578,11 +599,13 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 	 * and update the fields of this configuration tab. The new configuration is not
 	 * saved, so user must ask it explicitely (click on Apply) if he wants to. 
      * @param currentPath
+	 * @throws URIMalformedException 
+	 * @throws KermetaIOFileNotFoundException 
      */
-    protected void parseFileAndUpdateFields(String currentPath)
+    protected void parseFileAndUpdateFields(String currentPath) throws KermetaIOFileNotFoundException, URIMalformedException
     {
         IFile file = ResourceHelper.getIFile(currentPath);
-        KermetaUnit selectedUnit = KermetaRunHelper.parse(file);
+        KermetaUnit selectedUnit = KermetaUnitChecker.check(file);
         Tag operation = ModelingUnitHelper.getMainOperation( selectedUnit );
 	    Tag cls = ModelingUnitHelper.getMainClass( selectedUnit );
 
@@ -601,7 +624,6 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 	 */
 
 	private IProject handleBrowseProjects() {
-	    //LabelProvider labelProvider = new KermetaLabelProvider();
 	    JavaElementLabelProvider labelProvider = new JavaElementLabelProvider(JavaElementLabelProvider.SHOW_DEFAULT);
 	    
 	    // Get the open projects (KermetaProject)
@@ -612,7 +634,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		dialog.setTitle(KermetaMessages.getString("ArgTab.PROJECTSELECT"));
 		dialog.setElements(projects);
 		// Set the default selection to currently selected resource
-		ISelection sresource = RunnerPlugin.getActiveWorkbenchWindow().getSelectionService().getSelection();
+		ISelection sresource = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService().getSelection();
 		if (sresource instanceof IStructuredSelection)
 		{ 
 		    if (((IStructuredSelection)sresource).getFirstElement() instanceof IProject)
@@ -651,7 +673,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 			    KermetaMessages.getString("ArgTab.FILESELECT")
 			        );
 		// Set the default selection to currently selected resource
-		ISelection sresource = RunnerPlugin.getActiveWorkbenchWindow().getSelectionService().getSelection();
+		ISelection sresource = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService().getSelection();
 		if (sresource instanceof IStructuredSelection)
 		{ 
 		    if (((IStructuredSelection)sresource).getFirstElement() instanceof IResource)
@@ -681,7 +703,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     	try{
 	        // Reparse the selected file
 	        IFile selectedFile = ResourceHelper.getIFile(fileLocationText.getText());
-	        KermetaUnit selectedUnit = KermetaRunHelper.parse(selectedFile);
+	        KermetaUnit selectedUnit = KermetaUnitChecker.check(selectedFile);
 	        
 	        // Get classes of root package, and recursively of child packages
 	        Set <TypeDefinition> typedefs = KermetaUnitHelper.getTypeDefinitions( selectedUnit );

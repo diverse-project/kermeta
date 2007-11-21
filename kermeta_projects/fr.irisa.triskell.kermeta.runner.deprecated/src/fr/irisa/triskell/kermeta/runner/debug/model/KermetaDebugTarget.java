@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.24 2007-07-24 13:47:19 ftanguy Exp $
+/* $Id: KermetaDebugTarget.java,v 1.25 2007-11-21 14:13:04 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -227,7 +227,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	 */
 	public synchronized void initialize() {
 		initPath();
-		initConsole();
+		initConsole(this);
 		initializeBreakpoints();
 		setState(RunnerConstants.RESUME);
 	}

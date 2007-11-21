@@ -1,5 +1,7 @@
 package fr.irisa.triskell.kermeta.runner.console;
 
+import org.eclipse.core.commands.contexts.ContextEvent;
+import org.eclipse.core.commands.contexts.IContextListener;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
@@ -22,16 +24,20 @@ import org.eclipse.ui.part.ShowInContext;
 import org.eclipse.debug.ui.contexts.DebugContextEvent;
 import org.eclipse.debug.ui.contexts.IDebugContextListener;
 
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
+import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
+
 /**
  * Strongly inspired from org.eclipse.debug.internal.ui.views.console.ProcessConsolePageParticipant
  * @see org.eclipse.debug.internal.ui.views.console.ProcessConsolePageParticipant
  */
-public class ConsolePageParticipant implements IConsolePageParticipant, IShowInSource, IShowInTargetList, IDebugEventSetListener, IDebugContextListener {
+public class ConsolePageParticipant implements IConsolePageParticipant, IShowInSource, IShowInTargetList, IDebugEventSetListener, IDebugContextListener, IContextListener {
 
 	// actions
 	private ConsoleTerminateAction fTerminate;
 
-    private InternalIOConsole fConsole;
+    private RunnerConsole console;
 
     private IPageBookViewPage fPage;
 
@@ -39,21 +45,26 @@ public class ConsolePageParticipant implements IConsolePageParticipant, IShowInS
     
     private IDebugTarget target;
 
+    private AbstractKermetaTarget kermetaTarget = null;
     		
     /* (non-Javadoc)
      * @see org.eclipse.ui.console.IConsolePageParticipant#init(IPageBookViewPage, IConsole)
      */
     public void init(IPageBookViewPage page, IConsole console) {
     	fPage = page;
-    	fConsole = (InternalIOConsole) console;
-    	target = fConsole.getKermetaConsole().getTarget();
-    	fTerminate = new ConsoleTerminateAction(fConsole);
+    	this.console = (RunnerConsole) console;
+    	//target = fConsole.getKermetaConsole().getTarget();
+    	fTerminate = new ConsoleTerminateAction( this.console.getTarget() );
 
+    	RunnerPlugin.getDefault().prepareExecution(this.console.getTarget(), fTerminate);
+    	
     	fView = (IConsoleView) fPage.getSite().getPage().findView(IConsoleConstants.ID_CONSOLE_VIEW);
 
     	DebugPlugin.getDefault().addDebugEventListener(this);
     	DebugContextManager.getDefault().addDebugContextListener(this);
 
+    	
+    	
     	// contribute to toolbar
     	IActionBars actionBars = fPage.getSite().getActionBars();
     	configureToolBar(actionBars.getToolBarManager());
@@ -68,10 +79,10 @@ public class ConsolePageParticipant implements IConsolePageParticipant, IShowInS
     	DebugPlugin.getDefault().removeDebugEventListener(this);
 
     	if (fTerminate != null) {
-    		fTerminate.dispose();
+    		//fTerminate.dispose();
     		fTerminate = null;
     	}
-    	fConsole = null;
+    	console = null;
     }
 
     /**
@@ -158,6 +169,11 @@ public class ConsolePageParticipant implements IConsolePageParticipant, IShowInS
 	public void debugContextChanged(DebugContextEvent event) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void contextChanged(ContextEvent contextEvent) {
+		System.out.println();
 	}
 
 

@@ -1,4 +1,4 @@
-/* $Id: KermetaRunTarget.java,v 1.20 2007-07-24 13:47:19 ftanguy Exp $
+/* $Id: KermetaRunTarget.java,v 1.21 2007-11-21 14:13:04 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
  * License: EPL
@@ -36,9 +36,10 @@ public class KermetaRunTarget extends AbstractKermetaTarget
 
     public void start() {
     	initPath();
-    	initConsole();
-    	kermeta_process = new KermetaRunProcess(startFile, className, opName, args, "Kermeta Run Thread", false, console);
+    	initConsole(this);
+    	kermeta_process = new KermetaRunProcess(startFile, className, opName, args, "Kermeta Run Thread", false, console, this);
     	kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute, getCurrentProjectOutputPath());
+    	setKermetaInterpreter( ((KermetaRunProcess) kermeta_process).getInterpreter() ); 
     	kermeta_process.start();
     }
 
@@ -55,9 +56,9 @@ public class KermetaRunTarget extends AbstractKermetaTarget
 		kermeta_process.state = KermetaProcess.STATE_TERMINATED;
 		// This condition is verified if KermetaInterpreter could not be instanciated
 		// for example, when there are parse errors.
-		if (console.getKermetaInterpreter()!=null)
+		if ( kermetaInterpreter != null )
 		{
-			ExpressionInterpreter interpreter = console.getKermetaInterpreter().getMemory().getCurrentInterpreter();
+			ExpressionInterpreter interpreter = kermetaInterpreter.getMemory().getCurrentInterpreter();
 			// this condition is verified when the interpretation process terminates naturally
 			if (interpreter != null)
 				interpreter.setCurrentState(ExpressionInterpreter.DEBUG_TERMINATE);
@@ -74,6 +75,8 @@ public class KermetaRunTarget extends AbstractKermetaTarget
 	}
     
 	public boolean canTerminate() {
-		return kermeta_process.state != KermetaProcess.STATE_TERMINATED;
+		if ( kermeta_process != null )
+			return kermeta_process.state != KermetaProcess.STATE_TERMINATED;
+		return true;
 	}
 }

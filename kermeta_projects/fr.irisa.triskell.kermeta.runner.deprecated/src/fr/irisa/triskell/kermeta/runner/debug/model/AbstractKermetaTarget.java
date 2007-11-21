@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.21 2007-07-24 13:47:19 ftanguy Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.22 2007-11-21 14:13:04 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -39,11 +39,12 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 
+import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
-import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
+import fr.irisa.triskell.kermeta.runner.console.RunnerConsole;
 import fr.irisa.triskell.kermeta.runner.debug.process.KermetaProcess;
 import fr.irisa.triskell.kermeta.runner.launching.ConstraintRunTarget;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration;
@@ -56,7 +57,7 @@ import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
 public abstract class AbstractKermetaTarget implements IDebugElement,
 		IDebugTarget, ILaunchListener, IStepFilters {
 
-	protected KermetaConsole console;
+	protected IOConsole console;
 	
     protected IDebugTarget target;
 	protected ILaunch launch;
@@ -132,10 +133,10 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 		if ( path == null )
 			throw new KermetaInterpreterError("File Path from Launch Configuration is invalid. Please correct it before running the file.");
 		
-		projectName = RunnerPlugin.getWorkspace().getRoot().findMember(startFile).getProject().getName();
+		projectName = ResourcesPlugin.getWorkspace().getRoot().findMember(startFile).getProject().getName();
 		workingDir = path.removeLastSegments(1);
 		//startFile = path.lastSegment();
-		startFile = RunnerPlugin.getWorkspace().getRoot().findMember(startFile).getFullPath().toString();
+		startFile = ResourcesPlugin.getWorkspace().getRoot().findMember(startFile).getFullPath().toString();
 	}
 	/** retrieve the path of the project if this is a java project */ 
 	protected String getCurrentProjectOutputPath() {
@@ -411,7 +412,7 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 		if (filestring != null)
 		{
 			
-			IResource r = RunnerPlugin.getWorkspace().getRoot().findMember(filestring);
+			IResource r = ResourcesPlugin.getWorkspace().getRoot().findMember(filestring);
 			// It appears that : putting in findMember method call "platform:/resource/blabla/blu"
 			// returns null, but /blabla/blu returns null
 			if (r == null && filestring.startsWith("platform:/resource"))
@@ -435,12 +436,15 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 	/** Initialize the run console for the Run mode. This method is not 
 	 * defined in AbstractKermetaTarget, since we only need to create a specific console in Run mode.
 	 */
-	public void initConsole()
+	public void initConsole(AbstractKermetaTarget target)
 	{
 		String shortname = startFile.contains("/")?startFile.substring(startFile.lastIndexOf("/")+1):startFile;
 	    String consolename = shortname + " - "+ className + "::" + opName;
 	    if(this instanceof ConstraintRunTarget) consolename += " (pre/post activated)";
-	    console = new KermetaConsole(consolename, this);
+	    //console = new KermetaConsole(consolename, this);
+	    RunnerConsole runnerConsole = new RunnerConsole(consolename, null);
+	    runnerConsole.setTarget( target );
+	    console = new IOConsole( runnerConsole );
 	}
 	
 
@@ -606,14 +610,14 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 	/**
 	 * @return the console
 	 */
-	public KermetaConsole getConsole() {
+	public IOConsole getConsole() {
 		return console;
 	}
 
 	/**
 	 * @param console the console to set
 	 */
-	public void setConsole(KermetaConsole console) {
+	public void setConsole(IOConsole console) {
 		this.console = console;
 	}
 

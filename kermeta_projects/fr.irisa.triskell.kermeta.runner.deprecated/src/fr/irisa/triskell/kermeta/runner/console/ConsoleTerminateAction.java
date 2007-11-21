@@ -10,6 +10,9 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.IUpdate;
 
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
+
 /**
  * ConsoleTerminateAction 
  * a Copy of the one available on org.eclipse.debug.internal.ui.views.console.ConsoleTerminateAction
@@ -19,15 +22,19 @@ import org.eclipse.ui.texteditor.IUpdate;
  */
 public class ConsoleTerminateAction extends Action implements IUpdate {
 
-	private InternalIOConsole fConsole;
+	//private IOConsole fConsole = null;
+	
+	private AbstractKermetaTarget target = null;
+	
 	//org.eclipse.debug.internal.ui.views.console.ConsoleTerminateAction
 	/**
 	 * Creates a terminate action for the console 
 	 */
-	public ConsoleTerminateAction(InternalIOConsole console) {
+	public ConsoleTerminateAction(/*IOConsole console, */AbstractKermetaTarget target) {
 		super(ConsoleMessages.ConsoleTerminateAction_0); 
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IDebugHelpContextIds.CONSOLE_TERMINATE_ACTION);
-		fConsole = console;
+		//fConsole = console;
+		this.target = target;
 		setToolTipText(ConsoleMessages.ConsoleTerminateAction_1); 
 		setImageDescriptor(DebugPluginImages.getImageDescriptor(IInternalDebugUIConstants.IMG_LCL_TERMINATE));
 		setDisabledImageDescriptor(DebugPluginImages.getImageDescriptor(IInternalDebugUIConstants.IMG_DLCL_TERMINATE));
@@ -39,8 +46,8 @@ public class ConsoleTerminateAction extends Action implements IUpdate {
 	 * @see org.eclipse.ui.texteditor.IUpdate#update()
 	 */
 	public void update() {
-		if (fConsole.getKermetaConsole().getTarget()!=null)
-			setEnabled(fConsole.getKermetaConsole().getTarget().canTerminate());
+		if ( target != null )
+			setEnabled( target.canTerminate() );
 	}
 	
 	/* (non-Javadoc)
@@ -48,16 +55,15 @@ public class ConsoleTerminateAction extends Action implements IUpdate {
 	 */
 	public void run() {
 		try {
-			IDebugTarget target = fConsole.getKermetaConsole().getTarget();
             target.terminate();
 		} catch (DebugException e) {
 			// TODO: report exception
 		}
 	}
 
-    public void dispose() {
+   /* public void dispose() {
 	    fConsole = null;
-	}
+	}*/
 
 }
 

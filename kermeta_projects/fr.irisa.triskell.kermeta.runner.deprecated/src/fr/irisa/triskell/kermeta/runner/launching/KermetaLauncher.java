@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.24 2007-11-12 10:16:23 dvojtise Exp $
+/* $Id: KermetaLauncher.java,v 1.25 2007-11-21 14:13:04 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
@@ -23,13 +24,12 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 
+import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
-import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.debug.process.KermetaProcess;
-import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 
@@ -51,6 +51,24 @@ public class KermetaLauncher
     /** separator for the arguments given in the Run configuration */
     public static final String ARG_SEP = " ";
     
+    
+    protected KermetaInterpreter interpreter = null;
+    
+    public KermetaInterpreter getInterpreter() {
+    	return interpreter;
+    }
+    
+    public void initInterpreter(String fileNameString) {
+        IResource iresource = ResourcesPlugin.getWorkspace().getRoot().findMember(fileNameString);
+	    if (iresource instanceof IFile)
+	        selectedFile = (IFile) iresource;
+	    else
+	      throw (new Error("File not found! - "+ fileNameString));
+	    
+	    String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
+        interpreter = new KermetaInterpreter(uri, null);
+    }
+        
     public static KermetaLauncher getDefault() {
         if (defaultLauncher == null)
         {
@@ -97,27 +115,12 @@ public class KermetaLauncher
     		String operationString, 
     		String argsString, boolean isDebugMode, boolean isConstraintMode)
     {
-        IResource iresource = RunnerPlugin.getWorkspace().getRoot().findMember(fileNameString);
-	    if (iresource instanceof IFile)
-	        selectedFile = (IFile) iresource;
-	    else
-	      throw (new Error("File not found! - "+ fileNameString));
-	    
 	    String shortname = fileNameString.contains("/")?fileNameString.substring(fileNameString.lastIndexOf("/")):fileNameString;
 	    String consolename = shortname + ": "+ classQualifiedNameString + "::" + operationString;
-	    KermetaConsole console = new KermetaConsole(consolename);
-        
-	    KermetaInterpreter interpreter = null;
-        try
-        {
-        	String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
-            //  be sure this value is correctly set           
-        	//StdLibKermetaUnitHelper.setURItoDefault();
-            
-            Tracer tracer = isDebugMode?createTracer():null;
-            
-            interpreter = new KermetaInterpreter(uri, tracer);
-                        
+	    IOConsole console = new IOConsole(consolename);
+     
+	    try
+        {                
             interpreter.setEntryPoint(classQualifiedNameString, operationString);
             ArrayList interpreter_params =  new ArrayList();
             
@@ -199,23 +202,10 @@ public class KermetaLauncher
     		String classQualifiedNameString, 
     		String operationString, 
     		String argsString, boolean isDebugMode, boolean isConstraintMode,
-    		KermetaIOStream console)
+    		IOConsole console)
     {
-        IResource iresource = RunnerPlugin.getWorkspace().getRoot().findMember(fileNameString);
-	    if (iresource instanceof IFile)
-	        selectedFile = (IFile) iresource;
-	    else
-	      throw (new Error("File not found! - "+ fileNameString));
-	    KermetaInterpreter interpreter = null;
-        try
+         try
         {
-        	String uri = "platform:/resource" + selectedFile.getFullPath().toString();
-            //  be sure this value is correctly set        
-        	//StdLibKermetaUnitHelper.setURItoDefault();
-            
-            Tracer tracer = isDebugMode?createTracer():null;
-            
-            interpreter = new KermetaInterpreter(uri, tracer);
 
             interpreter.setEntryPoint(classQualifiedNameString, operationString);
             ArrayList interpreter_params =  new ArrayList();

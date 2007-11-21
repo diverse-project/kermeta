@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration_JVM_200521061432.java,v 1.7 2007-10-01 15:16:28 ftanguy Exp $
+/* $Id: KermetaLaunchConfiguration_JVM_200521061432.java,v 1.8 2007-11-21 14:13:04 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -19,14 +19,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
-
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -49,12 +46,10 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleException;
 import org.osgi.framework.Constants;
 
-import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
-import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.KermetaMessages;
+import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
+import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
-import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 
 /**
  * 
@@ -311,7 +306,7 @@ public class KermetaLaunchConfiguration_JVM_200521061432 extends AbstractJavaLau
      * @param configuration
      * @param mode
      */
-    private void runKermeta(ILaunchConfiguration configuration) {
+   /* private void runKermeta(ILaunchConfiguration configuration) {
         try {
             
             
@@ -320,13 +315,13 @@ public class KermetaLaunchConfiguration_JVM_200521061432 extends AbstractJavaLau
             String operationString = configuration.getAttribute(KM_OPERATIONNAME, "");
            
             IFile selectedFile = null;
-		    IResource iresource = RunnerPlugin.getWorkspace().getRoot().findMember(fileNameString);
+		    IResource iresource = ResourcesPlugin.getWorkspace().getRoot().findMember(fileNameString);
 		    if (iresource instanceof IFile)
 		        selectedFile = (IFile) iresource;
 		    else
 		    {  // TODO : throw an exception!
 		    }
-            KermetaConsole console = new KermetaConsole("KermetaConsole");
+            IOConsole console = new IOConsole("KermetaConsole");
             	
 	        try
 	        {
@@ -366,7 +361,7 @@ public class KermetaLaunchConfiguration_JVM_200521061432 extends AbstractJavaLau
             e.printStackTrace();
         }
         
-    }
+    }*/
     
 	public String[] getClasspath(ILaunchConfiguration configuration)
 	throws CoreException {

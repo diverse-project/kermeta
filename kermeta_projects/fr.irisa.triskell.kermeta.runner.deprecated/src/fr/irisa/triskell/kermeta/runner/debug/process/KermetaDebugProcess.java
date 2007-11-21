@@ -13,6 +13,7 @@ import java.rmi.server.ExportException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
+import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
@@ -21,7 +22,6 @@ import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaSecurityManager;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteDebugUI;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.KermetaRemoteInterpreter;
-import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 
 /**
  * The thread inside which the DebugInterpreter will be launched.
@@ -92,7 +92,7 @@ public class KermetaDebugProcess extends KermetaProcess {
 		{ 
 			KermetaRemoteInterpreter kermeta_interpreter = (KermetaRemoteInterpreter)remote_interpreter; 
 			// Get the stream where to display the exceptions caught externally..
-			KermetaIOStream console = kermeta_interpreter.getKermetaIOStream();
+			IOConsole console = kermeta_interpreter.getKermetaIOStream();
 			
 			try {
 				debugPlatform.remoteInterpreterCreated();
@@ -121,7 +121,7 @@ public class KermetaDebugProcess extends KermetaProcess {
 	            console.print("Reported java error : "+e);
 	            console.print(e.getMessage());
 				internalLog.error("Reported java error : ", e);
-	            RunnerPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RunnerPlugin.PLUGIN_ID, 0,"Interpreter internal error", (Exception)e));
+	            RunnerPlugin.getDefault().getLog().log( new Status(IStatus.ERROR, RunnerPlugin.PLUGIN_ID, 0,"Interpreter internal error", (Exception)e));
 	        }
 	        finally
 	        {

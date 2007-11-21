@@ -1,4 +1,4 @@
-/* $Id: KermetaSourceLocator.java,v 1.17 2006-09-13 08:49:29 cfaucher Exp $
+/* $Id: KermetaSourceLocator.java,v 1.18 2007-11-21 14:13:04 ftanguy Exp $
  * Project: Kermeta.runner
  * File: KermetaSourceLocator.java
  * License: EPL
@@ -9,6 +9,11 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
+import java.io.File;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -16,6 +21,7 @@ import org.eclipse.debug.core.model.IPersistableSourceLocator;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.ui.ISourcePresentation;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.part.FileEditorInput;
 
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaStackFrame;
@@ -97,7 +103,17 @@ public class KermetaSourceLocator implements IPersistableSourceLocator, ISourceP
 			IPath path = ((KermetaStackFrame)element).getPath();
 			if (path != null) 
 			{
-		        edInput = RunnerPlugin.createEditorInput(path);
+				IWorkspace w = ResourcesPlugin.getWorkspace();      
+				IFile file = w.getRoot().getFileForLocation(path);
+				if (file == null  || !file.exists())
+				{
+		        	// todo : study org.eclipse.ui.part
+		        	edInput = new FileEditorInput( file );
+				}
+				else
+				{
+					edInput = new FileEditorInput(file);
+				}
 			}
 		}
 		return edInput;
