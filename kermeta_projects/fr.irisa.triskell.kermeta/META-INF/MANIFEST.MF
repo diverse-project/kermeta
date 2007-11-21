@@ -30,8 +30,7 @@ Export-Package: .,
  fr.irisa.triskell.kermeta.resources,
  fr.irisa.triskell.kermeta.tools.wizards,
  fr.irisa.triskell.kermeta.tools.wizards.dialogs,
- fr.irisa.triskell.kermeta.tools.wizards.util,
- fr.irisa.triskell.kermeta.view
+ fr.irisa.triskell.kermeta.tools.wizards.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.editors,
  org.eclipse.ui.ide,
