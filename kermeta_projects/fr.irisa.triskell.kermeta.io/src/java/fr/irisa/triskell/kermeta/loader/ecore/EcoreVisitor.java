@@ -58,7 +58,9 @@ public class EcoreVisitor {
 				cname = node.getClass().getName();
 				
 				try {
-									
+					
+					// FIXME 2007-11-06 Say why the following source is commented and also update the class comment
+					
 					// consider EcorePackageImpl and XMLTypePackageImpl as EPackageImpl
 					/*if ( cname.equals("org.eclipse.emf.ecore.impl.EcorePackageImpl") ||
 						 cname.equals("org.eclipse.emf.ecore.xml.type.impl.XMLTypePackageImpl")) {
