@@ -1,4 +1,4 @@
-/* $Id: 044_testFrameworkModelConformance.main.kmt,v 1.2 2007-10-01 15:17:34 ftanguy Exp $
+/* $Id: 044_testFrameworkModelConformance.main.kmt,v 1.3 2007-11-21 09:25:13 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.interpreter
  * File      : 044_testFrameworkModelConformance.kmt
  * License   : EPL
@@ -68,7 +68,7 @@ class Main inherits kermeta::kunit::Assert
 		ePackage.eClassifiers.each{ eClassifier | stdio.writeln("h: " + eClassifier.toString) }
   		ePackage.eClassifiers.each{ eClassifer | 
   			var thekTypeDefinition : TypeDefinition
-  			stdio.writeln("zoe: " + eClassifer.name )
+  			stdio.writeln("classifier: " + eClassifer.name )
 			thekTypeDefinition ?= kPackage.ownedTypeDefinition.detect{kTypeDefinition | kTypeDefinition.name.equals(eClassifer.name)}
 			checkClassifier(eClassifer, thekTypeDefinition)			
   		}
