@@ -13,5 +13,7 @@ Require-Bundle: org.eclipse.ui.editors,
  org.openembedd.tests,
  fr.irisa.triskell.kermeta.tests,
  fr.irisa.triskell.kermeta.samples.fsm,
- fr.irisa.triskell.kermeta.interpreter
+ fr.irisa.triskell.kermeta.interpreter,
+ fr.irisa.triskell.traceability,
+ org.junit4
 Export-Package: fr.irisa.triskell.kermeta.samples.fsm.tests

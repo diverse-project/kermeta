@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Merger Plug-in
+Bundle-Name: Kermeta Merger Plug-in
 Bundle-SymbolicName: org.kermeta.merger;singleton:=true
-Bundle-Version: 0.0.1
+Bundle-Version: 0.99.0.qualifier
 Require-Bundle: fr.irisa.triskell.kermeta.io,
  org.eclipse.ui,
  org.eclipse.core.resources,
@@ -10,3 +10,4 @@ Require-Bundle: fr.irisa.triskell.kermeta.io,
  org.eclipse.ui.ide,
  org.eclipse.jdt.ui
 Export-Package: org.kermeta.merger
+Bundle-Vendor: IRISA/INRIA

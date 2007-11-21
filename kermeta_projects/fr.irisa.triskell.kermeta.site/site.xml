@@ -3,30 +3,34 @@
    <description url="http://www.kermeta.org/update">
       Kermeta eclipse update site
    </description>
-   <feature url="features/fr.irisa.triskell.kermeta_0.5.0.jar" id="fr.irisa.triskell.kermeta" version="0.5.0">
-      <category name="Kermeta"/>
-   </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.graphical_0.5.0.jar" id="fr.irisa.triskell.kermeta.graphical" version="0.5.0">
-      <category name="Kermeta"/>
-   </feature>
    <feature url="features/fr.irisa.triskell.traceability_0.1.0.jar" id="fr.irisa.triskell.traceability" version="0.1.0">
       <category name="Kermeta"/>
    </feature>
    <feature url="features/fr.irisa.triskell.kermeta.samples.fsm_0.1.1.jar" id="fr.irisa.triskell.kermeta.samples.fsm" version="0.1.1">
       <category name="Kermeta"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.ecore_0.0.2.jar" id="fr.irisa.triskell.kermeta.ecore" version="0.0.2">
-      <category name="Kermeta"/>
-   </feature>
-   <feature url="features/org.kermeta.sintaks.feature_0.1.0.jar" id="org.kermeta.sintaks.feature" version="0.1.0">
-      <category name="Kermeta"/>
-   </feature>
    <feature url="features/fr.irisa.triskell.kermeta.ocl_0.1.0.jar" id="fr.irisa.triskell.kermeta.ocl" version="0.1.0">
       <category name="Kermeta"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.kermeta_0.99.0.200711161637.jar" id="fr.irisa.triskell.kermeta" version="0.99.0.200711161637">
+      <category name="Kermeta"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.kermeta.ecore_0.0.3.jar" id="fr.irisa.triskell.kermeta.ecore" version="0.0.3">
+      <category name="Kermeta"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.kermeta.graphical_0.99.0.200711161637.jar" id="fr.irisa.triskell.kermeta.graphical" version="0.99.0.200711161637">
+      <category name="Kermeta"/>
+   </feature>
+   <feature url="features/org.kermeta.sintaks.feature_0.1.1.200711161640.jar" id="org.kermeta.sintaks.feature" version="0.1.1.200711161640">
+      <category name="Kermeta"/>
+   </feature>
+   <feature url="features/com.ibm.eclipse.emfatic.feature_0.0.2.jar" id="com.ibm.eclipse.emfatic.feature" version="0.0.2">
+      <category name="extra"/>
    </feature>
    <category-def name="Kermeta" label="Kermeta and its MDKs">
       <description>
          provided by Triskell team
       </description>
    </category-def>
+   <category-def name="extra" label="extra"/>
 </site>
