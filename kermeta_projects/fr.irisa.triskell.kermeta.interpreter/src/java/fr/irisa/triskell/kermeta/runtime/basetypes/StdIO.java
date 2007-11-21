@@ -1,4 +1,4 @@
-/* $Id: StdIO.java,v 1.12 2007-10-15 07:13:58 barais Exp $
+/* $Id: StdIO.java,v 1.13 2007-11-21 14:00:45 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : EPL
@@ -40,9 +40,9 @@ public class StdIO {
 	public static RuntimeObject read(RuntimeObject prompt)
 	{
 	    java.lang.String input = null;
-		if (String.getValue(prompt).length()>0)
-		    prompt.getFactory().getKermetaIOStream().print(String.getValue(prompt));
-		input = prompt.getFactory().getKermetaIOStream().read(String.getValue(prompt));
+		/*if (String.getValue(prompt).length()>0)
+		    prompt.getFactory().getKermetaIOStream().print(String.getValue(prompt));*/
+		input = prompt.getFactory().getKermetaIOStream().promptAndRead(String.getValue(prompt));
 		
 		RuntimeObject result = String.create(input, prompt.getFactory());
 		return result;

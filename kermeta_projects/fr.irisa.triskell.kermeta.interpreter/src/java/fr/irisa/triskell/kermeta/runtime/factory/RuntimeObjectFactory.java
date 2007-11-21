@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.29 2007-11-14 16:56:23 dvojtise Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.30 2007-11-21 14:00:45 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -19,6 +19,7 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
+import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
@@ -52,7 +53,7 @@ public class RuntimeObjectFactory {
 
 	protected RuntimeMemory memory;
 	
-	protected KermetaIOStream stream = null;
+	protected IOConsole console = null;
 	
 	/**
 	 * These are caches of classes
@@ -66,6 +67,7 @@ public class RuntimeObjectFactory {
 
 	
 	
+	
 	StructureFactory struct_factory;
 	
 	/**
@@ -75,7 +77,7 @@ public class RuntimeObjectFactory {
 	    super();
 	    this.memory = memory;
 	    // Set by default
-	    this.stream = new SystemIOStream();
+	    //console = new IOConsole("Kermeta Console");
 	    struct_factory = StructurePackageImpl.init().getStructureFactory();
 	}
 	
@@ -631,14 +633,14 @@ public class RuntimeObjectFactory {
 	protected  RuntimeObject class_typeParamBinding_property = null;
 	
 
-	public KermetaIOStream getKermetaIOStream()
+	public IOConsole getKermetaIOStream()
 	{
-	    return stream;
+	    return console;
 	}
 	
-	public void setKermetaIOStream(KermetaIOStream pStream)
+	public void setKermetaIOStream(IOConsole console)
 	{
-	    stream = pStream;
+	  this.console = console;
 	}
 	
     public RuntimeMemory getMemory() {

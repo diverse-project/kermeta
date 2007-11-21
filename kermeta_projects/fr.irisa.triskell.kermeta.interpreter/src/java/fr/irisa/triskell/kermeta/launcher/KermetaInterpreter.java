@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.39 2007-10-29 16:10:54 ftanguy Exp $
+/* $Id: KermetaInterpreter.java,v 1.40 2007-11-21 14:00:45 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -30,6 +30,7 @@ import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.merger.Merger; 
 
+import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
@@ -295,13 +296,13 @@ public class KermetaInterpreter {
 	    }
 	}
 	
-	public void setKStream(KermetaIOStream stream)
+	public void setKStream(IOConsole console)
 	{
-		memory.getROFactory().setKermetaIOStream(stream);
-	    stream.setKermetaInterpreter(this);
+		memory.getROFactory().setKermetaIOStream(console);
+	    //stream.setKermetaInterpreter(this);
 	}
 	
-	public KermetaIOStream getKStream() { return memory.getROFactory().getKermetaIOStream();} 
+	public IOConsole getKStream() { return memory.getROFactory().getKermetaIOStream();} 
 	
 	/**
 	 * Set the actual parameter for the "main" method
