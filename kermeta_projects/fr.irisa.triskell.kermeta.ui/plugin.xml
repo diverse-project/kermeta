@@ -64,6 +64,19 @@
            project="true">
         <selection class="org.eclipse.core.resources.IProject"/>
      </wizard>
+      <wizard 
+               icon="images/newkermetafile.png"
+               class="fr.irisa.triskell.kermeta.wizards.KermetaNewFileWizard"
+               category="fr.irisa.triskell.kermeta.KermetaWizard"
+               descriptionImage="images/kermeta.png"
+               project="false"
+               preferredPerspectives="org.eclipse.ui.resourcePerspective"
+               name="New Kermeta file"
+               id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard">
+            <selection class="org.eclipse.core.resources.IProject"/>
+            <selection class="org.eclipse.core.resources.IFolder"/>
+            <selection class="org.eclipse.core.resources.IFile"/>
+        </wizard>
   </extension>
     <extension
           point="org.eclipse.ui.preferencePages">
