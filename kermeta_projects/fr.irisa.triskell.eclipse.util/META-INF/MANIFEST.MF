@@ -5,15 +5,17 @@ Bundle-SymbolicName: fr.irisa.triskell.eclipse.util;singleton:=true
 Bundle-Version: 0.99.0.qualifier
 Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.core.runtime,
- org.eclipse.ui.console,
- org.eclipse.ui,
+ org.eclipse.ui.console;visibility:=reexport,
+ org.eclipse.ui;visibility:=reexport,
  org.eclipse.emf.ecore,
- org.eclipse.emf.ecore.xmi;visibility:=reexport
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.jface.text
 Export-Package: fr.irisa.triskell.eclipse.console,
  fr.irisa.triskell.eclipse.console.messages,
  fr.irisa.triskell.eclipse.ecore,
  fr.irisa.triskell.eclipse.emf,
  fr.irisa.triskell.eclipse.resources,
- fr.irisa.triskell.eclipse.wizard
+ fr.irisa.triskell.eclipse.wizard,
+ org.kermeta.ecore.model.helper
 Bundle-Vendor: IRISA/INRIA
 Bundle-ClassPath: .

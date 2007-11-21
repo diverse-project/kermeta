@@ -1,6 +1,6 @@
 
 
-/*$Id: IOConsole.java,v 1.3 2007-06-26 14:28:53 dvojtise Exp $
+/*$Id: IOConsole.java,v 1.4 2007-11-21 14:00:18 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -14,6 +14,7 @@ package fr.irisa.triskell.eclipse.console;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.console.ConsolePlugin;
@@ -45,7 +46,7 @@ public class IOConsole {
 	 * Considering the IOConsole protocol, several output stream can be created.
 	 * For the moment, we just need one. To get access to it, please use the accessor method.
 	 */
-	private IOConsoleOutputStream outputStream = null;
+	protected OutputStream outputStream = null;
 
 	/**
 	 * The reader is used to read strings from the keyboard. To get access to it, please use the accessor method.
@@ -68,7 +69,12 @@ public class IOConsole {
 	 * @param name
 	 */
 	public IOConsole(String name) {
-		console = new org.eclipse.ui.console.IOConsole(name, null);
+		console = new KermetaConsole(name, null);
+		initialize();
+	}
+	
+	public IOConsole(KermetaConsole console) {
+		this.console = console;
 		initialize();
 	}
 	
@@ -98,7 +104,7 @@ public class IOConsole {
 	 * This is a lazy initialization.
 	 * @return
 	 */
-	private IOConsoleOutputStream getOutputStream() {
+	protected OutputStream getOutputStream() {
 		if ( outputStream == null )
 			outputStream = console.newOutputStream();
 		return outputStream;
@@ -130,18 +136,21 @@ public class IOConsole {
 	// Any object can be printed for the moment it declares a toString method.			 //
 	///////////////////////////////////////////////////////////////////////////////////////
 	public void print(Object o) {
-		print( new ObjectKermetaMessage(o) );
+		if ( o != null )
+			print( new ObjectKermetaMessage(o) );
 	}
 	
 	public void println(Object o) {
-		println( new ObjectKermetaMessage(o) );
+		if ( o != null )
+			println( new ObjectKermetaMessage(o) );
 	}
 	
 	public void print(ConsoleMessage message) {
 		changeColor(message.getColor());
-		IOConsoleOutputStream stream = getOutputStream();
+		IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
 		try {
-			stream.write(message.getMessage());
+			if ( ! stream.isClosed() )
+				stream.write(message.getMessage());
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
@@ -153,16 +162,16 @@ public class IOConsole {
 	 * @param c
 	 */
 	public void changeColor(Color c){
-		Color previousColor = getOutputStream().getColor();
+		Color previousColor = ((IOConsoleOutputStream) getOutputStream()).getColor();
 		if(!c.equals(previousColor)){
 			// need to change to another stream for the new color
 			outputStream = null; // reset the stream
-			getOutputStream().setColor(c);
+			((IOConsoleOutputStream) getOutputStream()).setColor(c);
 		}
 	}
 	public void println(ConsoleMessage message) {
 		changeColor(message.getColor());
-		IOConsoleOutputStream stream = getOutputStream();
+		IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
 		try {
 			stream.write(message.getMessage() + '\n');
 		} catch (IOException exception) {
@@ -214,9 +223,11 @@ public class IOConsole {
 	
 	public void dispose() {
 		try {
-			outputStream.close();
-			reader.close();
-			//KermetaPlugin.getDefault().getConsoleManager().removeConsoles( new IConsole[]{console} );
+			if ( outputStream != null )
+				outputStream.close();
+			if ( reader != null )
+				reader.close();
+			//ConsolePlugin.getDefault().getConsoleManager().removeConsoles( new IConsole[]{console} );
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
@@ -224,7 +235,7 @@ public class IOConsole {
 	
 	public void finalize() throws Throwable {
 		super.finalize();
-		if ( (outputStream != null) && ! outputStream.isClosed() )
+		if ( (outputStream != null) && ! ((IOConsoleOutputStream) getOutputStream()).isClosed() )
 			outputStream.close();
 	}
 	
