@@ -552,7 +552,7 @@ public abstract class AbstractGenerator
     /**
      * Apply a JET template to an array of objects.
      * 
-     * @param input the input object
+     * @param arguments an Object array of the input objects
      * @param templateURI
      * @param outputFile
      * @param isOverwrite whether the file should be overwritten
