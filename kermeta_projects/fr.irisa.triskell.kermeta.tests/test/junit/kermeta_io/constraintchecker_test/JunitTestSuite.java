@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.5 2007-10-04 08:39:17 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.6 2007-11-21 16:07:04 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -25,6 +25,7 @@ import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaCycleConstraintChecker;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
@@ -92,8 +93,9 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
 /*** BEGIN GENERATED TESTS ***/
-public void testvalid_001_oclcstvisitor() throws Exception {
+/*public void testvalid_001_oclcstvisitor() throws Exception {
 testvalidFile("test/io/constraintchecker_tests/valid","001_oclcstvisitor.kmt" );
 }
 
@@ -244,7 +246,19 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","007_resultNotSet.kmt"
 public void testinvalid_008_testRequiresColliding() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","008_testRequiresColliding.kmt" );
 }
+*/
+public void testinvalid_009_requiringFiles1() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","009_requiringFiles1.kmt" );
+}
 
+public void testinvalid_010_requiringFiles2() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","010_requiringFiles2.kmt" );
+}
+
+public void testinvalid_011_requiringFiles3() throws Exception {
+testinvalidFile("test/io/constraintchecker_tests/invalid","011_requiringFiles3.kmt" );
+}
+/*
 public void testinvalid_025_weaving_in_kermeta_aspect1() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","025_weaving_in_kermeta_aspect1.kmt" );
 }
@@ -332,7 +346,7 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 public void testinvalid_027_constraint_type_boolean9() throws Exception {
 testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_boolean9.kmt" );
 }
-
+*/
 /*** END GENERATED TESTS ***/
 	// do not modify this comment
 
@@ -408,6 +422,7 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 			}
 			else {
 				System.out.println("succesfully found error in " +file );
+				assertTrue( KermetaUnitHelper.getAllErrorsAsString(kermetaUnit), true);
 				//System.out.println(builder.messages.getAllMessagesAsString() );
 			}
 		}
