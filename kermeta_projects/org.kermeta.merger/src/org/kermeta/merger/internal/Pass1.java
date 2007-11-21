@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass1.java,v 1.3 2007-10-19 16:23:27 cfaucher Exp $
+/*$Id: Pass1.java,v 1.4 2007-11-21 13:15:03 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Pass1.java
 * License : EPL
@@ -16,6 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -137,8 +138,7 @@ public class Pass1 extends MergePass {
 	
 	private void createPrimitiveType(TypeDefinition t, Package p) {
 		PrimitiveType definition = (PrimitiveType) t;
-		PrimitiveType newDefinition = StructureFactory.eINSTANCE.createPrimitiveType();
-		newDefinition.setName( definition.getName() );
+		PrimitiveType newDefinition = KermetaModelHelper.PrimitiveType.create( definition.getName() );
 		kermetaUnit.addTypeDefinition(newDefinition, p);
 		context.putBaseTypeDefinition(newDefinition, definition);
 	} 
