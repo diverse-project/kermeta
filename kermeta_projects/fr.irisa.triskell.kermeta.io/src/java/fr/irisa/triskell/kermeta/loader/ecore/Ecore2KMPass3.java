@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.30 2007-10-23 12:23:59 dvojtise Exp $
+/* $Id: Ecore2KMPass3.java,v 1.31 2007-11-21 13:45:21 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -146,7 +146,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 			visitStandardAnnotation(node);
 		}
 		// node.getSource() == "http://www.eclipse.org/emf/2002/GenModel"
-		else if (node.getSource().equals(KM2Ecore.ANNOTATION_DOCUMENTATION)) {
+		else if (node.getSource().equals(KM2Ecore.ANNOTATION_GENMODEL)) {
 			visitGenModelAnnotation(node);
 		}
 		// node.getSource() == "kermeta.pre"
@@ -315,7 +315,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 			visitStandardAnnotation(node);
 		}
 		// node.getSource() == "http://www.eclipse.org/emf/2002/GenModel"
-		else if(node.getSource().equals(KM2Ecore.ANNOTATION_DOCUMENTATION)) {
+		else if(node.getSource().equals(KM2Ecore.ANNOTATION_GENMODEL)) {
 			visitGenModelAnnotation(node);
 		}
 		// node.getSource() == "kermeta.inv"
@@ -359,7 +359,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 			visitStandardAnnotation(node);
 		}
 		// node.getSource() == "http://www.eclipse.org/emf/2002/GenModel"
-		else if (node.getSource().equals(KM2Ecore.ANNOTATION_DOCUMENTATION)) {
+		else if (node.getSource().equals(KM2Ecore.ANNOTATION_GENMODEL)) {
 			visitGenModelAnnotation(node);
 		}
 		// node.getSource() == "kermeta.derivedProp.getter"

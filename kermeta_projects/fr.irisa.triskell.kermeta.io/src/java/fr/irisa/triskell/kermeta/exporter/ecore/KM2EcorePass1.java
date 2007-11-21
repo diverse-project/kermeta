@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.53 2007-10-19 16:25:24 cfaucher Exp $
+/* $Id: KM2EcorePass1.java,v 1.54 2007-11-21 13:45:21 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass1.java
  * License    : EPL
@@ -556,7 +556,10 @@ public class KM2EcorePass1 extends KM2Ecore {
 			newEOperation.getETypeParameters().add((ETypeParameter) accept((ObjectTypeVariable) next));
 		}
 		
-		km2ecoremapping.put(node,newEOperation);
+		// The if condition is a special issue for the compiler
+		if( km2ecoremapping.get(node) == null ) {
+			km2ecoremapping.put(node,newEOperation);
+		}
 		loggerTabs.decrement();
 		return newEOperation;
 	}
@@ -693,7 +696,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 				
 		if(KMT2KMPass7.KERMETA_DOCUMENTATION.equals(current_name)){
 			//	deal with special case of documentation
-			newEAnnotation.setSource(KM2Ecore.ANNOTATION_DOCUMENTATION);
+			newEAnnotation.setSource(KM2Ecore.ANNOTATION_GENMODEL);
 			newEAnnotation.getDetails().put(KM2Ecore.ANNOTATION_DOCUMENTATION_DETAILS, KMTHelper.formatTagValue(node.getValue()));
 		}
 		else{

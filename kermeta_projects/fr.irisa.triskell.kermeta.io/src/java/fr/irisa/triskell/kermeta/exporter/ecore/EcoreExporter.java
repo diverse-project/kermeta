@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.11 2007-10-19 16:31:05 cfaucher Exp $
+/*$Id: EcoreExporter.java,v 1.12 2007-11-21 13:45:21 cfaucher Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -18,20 +18,19 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
-
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -256,6 +255,13 @@ public class EcoreExporter {
 
 					resource.getContents().add(annotation);
 
+					// FIXME CF under development
+					/*if ( exporterOptions.isRemoveKermetaEAnnotations ) {
+						for(EObject eObj : resource.getContents()) {
+							EcoreExporter.removeKermetaEAnnotations(eObj);
+						}
+					}*/
+					
 					resource.save(null);
 				}
 			}
@@ -290,7 +296,7 @@ public class EcoreExporter {
 		
 		if ( exporterOptions.isIndependent )
 			applyPass3ToAll(kermetaUnit);
-		
+
 		try {
 			
 			EPackage p = null;
@@ -526,6 +532,49 @@ public class EcoreExporter {
 			setUri(current, rep, null);
 		}
 		
+	}
+	
+	/**
+	 * Return true if the EAnnotations is a Kermeta EAnnotations
+	 * @param eAnnotation
+	 * @return
+	 */
+	private static boolean isKermetaEAnnotations(EAnnotation eAnnotation) {
+		if(eAnnotation.getSource().equals("CompilationUnit")) {
+			return true;
+		}
+		if(eAnnotation.getSource().equals("dependentResource")) {
+			return true;
+		}
+		if(eAnnotation.getSource().equals("kermeta")) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Recursive method
+	 * @param eModelElement
+	 */
+	private static void removeKermetaEAnnotations(EObject eObj) {
+		if(eObj instanceof EAnnotation) {
+			EAnnotation eAnnotation = (EAnnotation) eObj;
+			//for(EAnnotation eAnnotation : eModelElement.getEAnnotations()) {
+				if(isKermetaEAnnotations(eAnnotation) ) {
+					System.out.println("eAnnotation " + eAnnotation.getSource() + " ______--------______");
+					if(eAnnotation.eContainer() != null) {
+						((EModelElement) eAnnotation.eContainer()).getEAnnotations().remove(eAnnotation);
+					} else {
+						eAnnotation.eResource().getContents().remove(eAnnotation);
+					}
+				}
+			//}
+		} else {
+			for(EObject eObj2 : eObj.eContents()) {
+				System.out.println("eAnnotation eAnnotation eAnnotation 3");
+				removeKermetaEAnnotations(eObj2);
+			}
+		}
 	}
 	
 	public Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, EObject> getKm2ecoremapping() {

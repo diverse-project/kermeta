@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.45 2007-10-25 09:23:06 ftanguy Exp $
+/* $Id: KM2Ecore.java,v 1.46 2007-11-21 13:45:21 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -111,7 +111,7 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
     // Supported EAnnotation names, along with the type of elements they can be associated with:
     //  => All annotated elements
     public final static String ANNOTATION = "kermeta";
-    public final static String ANNOTATION_DOCUMENTATION = "http://www.eclipse.org/emf/2002/GenModel";
+    public final static String ANNOTATION_GENMODEL = "http://www.eclipse.org/emf/2002/GenModel";
     //  => Packages
     public final static String ANNOTATION_REQUIRE = ANNOTATION + ".req";
     //  => Operations

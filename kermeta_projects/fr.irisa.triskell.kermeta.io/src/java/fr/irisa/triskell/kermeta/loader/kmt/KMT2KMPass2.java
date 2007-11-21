@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.18 2007-10-19 16:23:25 cfaucher Exp $
+/* $Id: KMT2KMPass2.java,v 1.19 2007-11-21 13:45:21 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -78,7 +78,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		
 		String p_uri = KermetaASTHelper.getURI(node);
 		if( p_uri != null ) {
-		p.setUri(p_uri);
+			p.setUri(p_uri);
 		}
 		
 		builder.storeTrace(p, node);
