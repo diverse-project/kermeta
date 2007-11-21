@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.12 2007-11-21 13:45:21 cfaucher Exp $
+/*$Id: EcoreExporter.java,v 1.13 2007-11-21 14:05:18 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.kermeta.ecore.model.helper.EcoreModelHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
@@ -83,12 +84,9 @@ public class EcoreExporter {
 	
 	private EDataType kermetaTypesAlias = null;
 	
-	public EDataType getKermetaTypesAlias() {
-		if ( kermetaTypesAlias == null ) {
-			kermetaTypesAlias = EcoreFactory.eINSTANCE.createEDataType(); 
-			kermetaTypesAlias.setName( KM2Ecore.KERMETA_TYPES );
-			kermetaTypesAlias.setInstanceClassName("java.lang.Object");
-		}
+	public EDataType getKermetaTypesAlias() { 
+		if ( kermetaTypesAlias == null )
+			kermetaTypesAlias = EcoreModelHelper.EDataType.create( KM2Ecore.KERMETA_TYPES );
 		return kermetaTypesAlias;
 	}
 	
@@ -296,7 +294,7 @@ public class EcoreExporter {
 		
 		if ( exporterOptions.isIndependent )
 			applyPass3ToAll(kermetaUnit);
-
+		
 		try {
 			
 			EPackage p = null;

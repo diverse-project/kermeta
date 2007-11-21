@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass3.java,v 1.8 2007-10-24 09:49:25 cfaucher Exp $
+/* $Id: KM2EcorePass3.java,v 1.9 2007-11-21 14:05:18 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass3.java
  * License    : EPL
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.kermeta.ecore.model.helper.EcoreModelHelper;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
@@ -86,10 +87,8 @@ public class KM2EcorePass3 extends KM2Ecore {
 			EDataType type = datatypes.get( qualifiedName );
 			// Create the DataType if it does not exist
 			if ( type == null ) {
-				type = EcoreFactory.eINSTANCE.createEDataType();
+				type = EcoreModelHelper.EDataType.create(typeDefinition.getName(), javaClassQualifiedName);
 				datatypes.put( qualifiedName, type );
-				type.setName( typeDefinition.getName() );
-				type.setInstanceClassName( javaClassQualifiedName );
 				EPackage currentEcorePackage = (EPackage) km2ecoremapping.get( currentPackage );
 				currentEcorePackage.getEClassifiers().add( type );
 			} 
@@ -109,10 +108,8 @@ public class KM2EcorePass3 extends KM2Ecore {
 			if ( javaClassQualifiedName != null ) {
 				EDataType type = datatypes.get( qualifiedName );
 				if ( type == null ) {
-					type = EcoreFactory.eINSTANCE.createEDataType();
+					type = EcoreModelHelper.EDataType.create(typeDefinition.getName(), javaClassQualifiedName); 
 					datatypes.put( qualifiedName, type );
-					type.setName( typeDefinition.getName() );
-					type.setInstanceClassName( javaClassQualifiedName );
 					EPackage currentEcorePackage = (EPackage) km2ecoremapping.get( currentPackage );
 					currentEcorePackage.getEClassifiers().add( type );
 				}
@@ -139,10 +136,8 @@ public class KM2EcorePass3 extends KM2Ecore {
 			if ( javaClassQualifiedName != null ) {
 				EDataType type = datatypes.get( qualifiedName );
 				if ( type == null ) {
-					type = EcoreFactory.eINSTANCE.createEDataType();
+					type = EcoreModelHelper.EDataType.create(typeDefinition.getName(), javaClassQualifiedName);
 					datatypes.put( qualifiedName, type );
-					type.setName( typeDefinition.getName() );
-					type.setInstanceClassName( javaClassQualifiedName );
 					EPackage currentEcorePackage = (EPackage) km2ecoremapping.get( currentPackage );
 					currentEcorePackage.getEClassifiers().add( type );
 				}

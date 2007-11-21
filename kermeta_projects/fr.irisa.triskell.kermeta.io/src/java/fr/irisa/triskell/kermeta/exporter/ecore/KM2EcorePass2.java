@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.49 2007-10-30 14:11:24 ftanguy Exp $
+/* $Id: KM2EcorePass2.java,v 1.50 2007-11-21 14:05:18 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass2.java
  * License    : EPL
@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.kermeta.ecore.model.helper.EcoreModelHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
@@ -397,9 +398,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 				//internalLog.debug(loggerTabs + "Creating DataType: "+ node.getTypeDefinition().getName());
 				type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
 				// we need to create a new datatype for it and connect it to the root package
-				newEClassifier  = EcoreFactory.eINSTANCE.createEDataType();
-				newEClassifier.setName(node.getTypeDefinition().getName());
-				newEClassifier.setInstanceClassName(type_name);
+				newEClassifier = EcoreModelHelper.EDataType.create(node.getTypeDefinition().getName(), type_name);
 				EPackage root_EPackage = (EPackage)km2ecoremapping.get( currentPackage );
 				root_EPackage.getEClassifiers().add(newEClassifier);
 				km2ecoremapping.put(node.getTypeDefinition(),newEClassifier);
@@ -657,9 +656,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 					internalLog.debug(loggerTabs + "Creating DataType: "+ node.getName());
 					type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
 					// we need to create a new datatype for it and connect it to the root package
-					newEClassifier  = EcoreFactory.eINSTANCE.createEDataType();
-					newEClassifier.setName(node.getName());
-					newEClassifier.setInstanceClassName(type_name);
+					newEClassifier = EcoreModelHelper.EDataType.create(node.getName(), type_name);
 					EPackage root_EPackage = (EPackage)km2ecoremapping.get( currentPackage );
 					root_EPackage.getEClassifiers().add(newEClassifier);
 					primitiveTypesMappingForIndependency.put(node,newEClassifier);
@@ -677,9 +674,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 					internalLog.debug(loggerTabs + "Creating DataType: "+ node.getName());
 					type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
 					// we need to create a new datatype for it and connect it to the root package
-					newEClassifier  = EcoreFactory.eINSTANCE.createEDataType();
-					newEClassifier.setName(node.getName());
-					newEClassifier.setInstanceClassName(type_name);
+					newEClassifier = EcoreModelHelper.EDataType.create(node.getName(), type_name);
 					EPackage root_EPackage = (EPackage)km2ecoremapping.get( currentPackage );
 					root_EPackage.getEClassifiers().add(newEClassifier);
 					km2ecoremapping.put(node,newEClassifier);

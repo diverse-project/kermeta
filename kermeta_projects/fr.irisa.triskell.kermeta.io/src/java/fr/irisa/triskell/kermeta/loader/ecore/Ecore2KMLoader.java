@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.17 2007-10-23 12:23:59 dvojtise Exp $
+/*$Id: Ecore2KMLoader.java,v 1.18 2007-11-21 14:04:49 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.kermeta.ecore.model.helper.EcoreModelHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.AbstractKermetaUnitLoader;
@@ -83,11 +84,8 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 	private EDataType kermetaTypesAlias = null;
 	
 	public EDataType getKermetaTypesAlias() {
-		if ( kermetaTypesAlias == null ) {
-			kermetaTypesAlias = EcoreFactory.eINSTANCE.createEDataType(); 
-			kermetaTypesAlias.setName( KM2Ecore.KERMETA_TYPES );
-			kermetaTypesAlias.setInstanceClassName("java.lang.Object");
-		}
+		if ( kermetaTypesAlias == null )
+			kermetaTypesAlias = EcoreModelHelper.EDataType.create( KM2Ecore.KERMETA_TYPES );
 		return kermetaTypesAlias;
 	}
 	

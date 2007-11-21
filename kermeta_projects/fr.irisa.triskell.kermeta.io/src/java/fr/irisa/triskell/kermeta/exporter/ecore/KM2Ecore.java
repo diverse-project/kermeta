@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.46 2007-11-21 13:45:21 cfaucher Exp $
+/* $Id: KM2Ecore.java,v 1.47 2007-11-21 14:05:18 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.kermeta.ecore.model.helper.EcoreModelHelper;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
@@ -275,40 +276,28 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
 	
 	/**
 	 * add the given info in the annotation, eventually create it
-	 * @param annotedModelElement
-	 * @param annotationName the name of the annotation "source"
+	 * @param modelElement
+	 * @param annotationSource the name of the annotation "source"
 	 * @param annotationDetailKey (optional)
 	 * @param annotationDetailValue
 	 * @param referedFObject the object that may be refered. can be null
 	 */
-	public void addAnnotation( 
-			EModelElement annotedModelElement,
-			String annotationName,
-			String annotationDetailKey,
-			String annotationDetailValue,
+	public void addAnnotation(EModelElement modelElement, String annotationSource,
+			String key, String value,
 			EObject referedEObject
 			) {
-		// find the Annotation or create a new one
-		EAnnotation newEAnnotation = annotedModelElement.getEAnnotation(annotationName);
-		if (newEAnnotation == null){
-			newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-			newEAnnotation.setSource(annotationName);
-			annotedModelElement.getEAnnotations().add( newEAnnotation );
-			//ecoreResource.getContents().add(newEAnnotation);
-			//annotedModelElement.getEAnnotations().add(newEAnnotation);
-		}
-		// add the info in the Details map
-		if (annotationDetailKey != null)
-			newEAnnotation.getDetails().put(annotationDetailKey, 
-					annotationDetailValue);
-		else {
-			newEAnnotation.getDetails().put(KMT2KMPass7.KERMETA_DOCUMENTATION, annotationDetailValue);
-		}
+		
+		EAnnotation annotation = EcoreModelHelper.EModelElement.getEAnnotation(modelElement, annotationSource, true);
+		if ( key != null )
+			EcoreModelHelper.EAnnotation.addDetails(annotation, key, value);
+		else
+			EcoreModelHelper.EAnnotation.addDetails(annotation, KMT2KMPass7.KERMETA_DOCUMENTATION, value);
+
 		// try a direct link additionnaly to the detail map. 
 		if (referedEObject != null) 
 		{
-			internalLog.debug(" adding annotation reference for " +annotationDetailKey + " = " + annotationDetailValue);
-			newEAnnotation.getReferences().add(referedEObject);
+			internalLog.debug(" adding annotation reference for " +key + " = " + value);
+			annotation.getReferences().add(referedEObject);
 		}
 	}
 	
@@ -319,31 +308,31 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
 	 * annotation already exists, but systematically create a new one.
 	 * Used for managing the constraints annotations.
 	 * @param annotedModelElement
-	 * @param annotationName
-	 * @param annotationDetailKey
-	 * @param annotationDetailValue
+	 * @param annotationSource
+	 * @param key
+	 * @param value
 	 * @param referedEObject
 	 * @return the generated EAnnotation element
 	 */
 	public EAnnotation addConstraintAnnotation(
 			EModelElement annotedModelElement,
-			String annotationName,
-			String annotationDetailKey,
-			String annotationDetailValue,
+			String annotationSource,
+			String key,
+			String value,
 			EObject referedEObject
 			) {
 		// find the Annotation or create a new one
-		EAnnotation	newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-		newEAnnotation.setSource(annotationName);
+		EAnnotation newEAnnotation = EcoreModelHelper.EAnnotation.create( annotationSource );
 		ecoreResource.getContents().add(newEAnnotation);
 		annotedModelElement.getEAnnotations().add(newEAnnotation);
 		// add the info in the Details map
-		if (annotationDetailKey != null)
-			newEAnnotation.getDetails().put(annotationDetailKey, annotationDetailValue);
+		if (key != null)
+			EcoreModelHelper.EAnnotation.addDetails(newEAnnotation, key, value);
+		
 		// try a direct link additionnaly to the detail map. 
 		if (referedEObject != null) 
 		{
-			internalLog.debug(" adding annotation reference for " +annotationDetailKey + " = " + annotationDetailValue);
+			internalLog.debug(" adding annotation reference for " +key + " = " + value);
 			newEAnnotation.getReferences().add(referedEObject);
 		}
 		return newEAnnotation;
