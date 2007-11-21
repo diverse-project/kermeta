@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.14 2007-10-26 14:47:31 ftanguy Exp $
+ * $Id: KermetaUnit.java,v 1.15 2007-11-21 14:07:13 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -768,6 +768,14 @@ public interface KermetaUnit extends EObject {
 	 * @generated
 	 */
 	void finalize();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	fr.irisa.triskell.kermeta.language.structure.Package addInternalPackage(String qualifiedName, String uri);
 
 	/**
 	 * <!-- begin-user-doc -->

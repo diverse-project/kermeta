@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.21 2007-10-26 14:47:31 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.22 2007-11-21 14:07:13 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -44,6 +44,7 @@ import org.kermeta.io.ParsingError;
 import org.kermeta.io.WarningMessage;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.model.KermetaModelHelper;
 
 import antlr.ANTLRException;
 import antlr.MismatchedTokenException;
@@ -835,47 +836,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public fr.irisa.triskell.kermeta.language.structure.Package addInternalPackage(String qualifiedName) {
-			
-		Package result = findInternalpackage(qualifiedName);
-		if ( result != null )
-			return result;
-		
-		String[] parts = qualifiedName.split("::");
-		String currentQualifiedName = "";
-		String currentName = "";
-		Package currentPackage = null;
-		
-		for ( int i = 0; i < parts.length; i++ ) {
-			
-			currentQualifiedName += parts[i];
-			currentName = parts[i];
-			
-			Package p = findInternalpackage( currentQualifiedName );
-			if ( p == null ) {
-				p = StructureFactory.eINSTANCE.createPackage();
-				p.setName( currentName );
-				getModelingUnit().getPackages().add( p );
-				if ( currentPackage != null )
-					currentPackage.getNestedPackage().add( p );
-				
-				/*
-				 * 
-				 * Creation of the package entry.
-				 * 
-				 */
-				PackageEntry entry = IoFactory.eINSTANCE.createPackageEntry();
-				entry.setQualifiedName( currentQualifiedName );
-				entry.setPackage( p );
-				getInternalPackageEntries().add( entry );
-				
-			} 
-			currentPackage = p;
-			
-			currentQualifiedName += "::";
-			
-		}
-		
-		return currentPackage;		
+		return addInternalPackage(qualifiedName, null);
 	}
 
 	/**
@@ -1343,6 +1304,57 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public fr.irisa.triskell.kermeta.language.structure.Package addInternalPackage(String qualifiedName, String uri) {
+		
+		Package result = findInternalpackage(qualifiedName);
+		if ( result != null )
+			return result;
+		
+		String[] parts = qualifiedName.split("::");
+		String currentQualifiedName = "";
+		String currentName = "";
+		Package currentPackage = null;
+		
+		for ( int i = 0; i < parts.length; i++ ) {
+			
+			currentQualifiedName += parts[i];
+			currentName = parts[i];
+			
+			Package p = findInternalpackage( currentQualifiedName );
+			if ( p == null ) {
+				p = KermetaModelHelper.Package.create( currentName );
+				getModelingUnit().getPackages().add( p );
+				if ( currentPackage != null )
+					currentPackage.getNestedPackage().add( p );
+				
+				/*
+				 * 
+				 * Creation of the package entry.
+				 * 
+				 */
+				PackageEntry entry = IoFactory.eINSTANCE.createPackageEntry();
+				entry.setQualifiedName( currentQualifiedName );
+				entry.setPackage( p );
+				getInternalPackageEntries().add( entry );
+				
+			} 
+			currentPackage = p;
+			
+			currentQualifiedName += "::";
+			
+		}
+		
+		if ( uri != null )
+			currentPackage.setUri( uri );
+		
+		return currentPackage;	
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public boolean isErroneous() {
 		return KermetaUnitHelper.isErrored(this);
 	}
@@ -1391,7 +1403,10 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public TypeDefinition getTypeDefinitionByQualifiedName(String qualifiedName, IProgressMonitor monitor) {
-		return getTypeDefinitionCache().getTypeDefinitionByQualifiedName(qualifiedName, monitor);
+		if ( getTypeDefinitionCache() != null )
+			return getTypeDefinitionCache().getTypeDefinitionByQualifiedName(qualifiedName, monitor);
+		else
+			return null;
 	}
 
 	/**
