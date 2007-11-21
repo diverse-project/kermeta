@@ -1,4 +1,4 @@
-/*$Id: ResourceHelper.java,v 1.12 2007-11-16 13:13:31 cfaucher Exp $
+/*$Id: ResourceHelper.java,v 1.13 2007-11-21 13:23:28 cfaucher Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -26,6 +26,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.emf.common.util.URI;
@@ -312,7 +313,7 @@ public class ResourceHelper {
 	static public void deleteIProject(String projectName, boolean force) {
 		try {
 			if( getIProject(projectName) != null ) {
-				getIProject(projectName).delete(force, null);
+				getIProject(projectName).delete(true, force, new NullProgressMonitor());
 			}
 		} catch (CoreException e) {
 			e.printStackTrace();
