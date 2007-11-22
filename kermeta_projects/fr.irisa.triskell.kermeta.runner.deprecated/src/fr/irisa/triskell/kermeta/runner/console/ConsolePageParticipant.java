@@ -171,7 +171,6 @@ public class ConsolePageParticipant implements IConsolePageParticipant, IShowInS
 		
 	}
 
-	@Override
 	public void contextChanged(ContextEvent contextEvent) {
 		System.out.println();
 	}
