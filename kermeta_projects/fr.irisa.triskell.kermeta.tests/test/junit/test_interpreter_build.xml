@@ -1,4 +1,4 @@
-<!-- $Id: test_interpreter_build.xml,v 1.10 2007-10-23 11:48:27 dvojtise Exp $ -->
+<!-- $Id: test_interpreter_build.xml,v 1.11 2007-11-22 16:21:23 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
@@ -104,7 +104,8 @@
 
 	<taskdef classpathref="interpreter.class.path" resource="tasks.properties" />
 
-	<target name="all" depends="compile_java,instrument,test,coverage-report" description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports." />
+	<!--<target name="all" depends="compile_java,instrument,test,coverage-report" description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports." />-->
+	<target name="all" depends="test" description="run the tests and generate JUnit reports." />
 
 
 	<target name="compile_java">
