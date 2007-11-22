@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
-    <nestedPackage tag="//@packages.0/language/@ownedTag.0" name="language">
+    <nestedPackage tag="//@packages.0/language/@ownedTag.0" name="language" uri="http://www.kermeta.org/kermeta/language">
       <ownedTag value="/**&#xA; * Contains the implementation of Kermeta reflective collections.&#xA; * &lt;img src=&quot;./figures/language_package.png&quot;>&#xA; */" object="//@packages.0/language"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/ReflectiveCollection/@ownedTag.0" name="ReflectiveCollection" superType="//@packages.0/language/ReflectiveCollection/@containedType.0">
         <ownedTag value="/**&#xA; * ReflectiveCollection is a special collection that is used to define the type &#xA; * of attributes that have an upper multiplicity > 1 in a class. It indeed handles&#xA; * the update of opposite property if such an attribute has got one.&#xA; */" object="//@packages.0/language/ReflectiveCollection"/>

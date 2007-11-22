@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
-    <nestedPackage tag="//@packages.0/utils/@ownedTag.0" name="utils">
+    <nestedPackage tag="//@packages.0/utils/@ownedTag.0" name="utils" uri="http://www.kermeta.org/kermeta/utils">
       <ownedTag value="/** &#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xA; * metamodel&#xA; * &#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;>&#xA; */" object="//@packages.0/utils"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/utils/Hashtable/@ownedTag.0" name="Hashtable" superType="//@packages.0/utils/Hashtable/@containedType.0">
         <ownedTag value="/**&#xA; * An implementation of hashtable&#xA; * This implementation is for speed optimisation it cannot be serialized. &#xA; * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)&#xA; * &lt;img src=&quot;./figures/hashtable_view.png&quot;>&#xA; */" object="//@packages.0/utils/Hashtable"/>

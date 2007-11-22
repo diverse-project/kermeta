@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
-    <nestedPackage tag="//@packages.0/io/@ownedTag.0" name="io">
+    <nestedPackage tag="//@packages.0/io/@ownedTag.0" name="io" uri="http://www.kermeta.org/kermeta/io">
       <ownedTag value="/**&#xA; * Contains standard input/output related classes. &#xA; * &lt;img src=&quot;./figures/std_io_view.png&quot;>&#xA; */" object="//@packages.0/io"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/io/StdIO/@ownedTag.0" name="StdIO" superType="//@packages.0/io/StdIO/@containedType.0">
         <ownedTag value="/**&#xA; * An implementation of StdIO : standard input/output&#xA; */" object="//@packages.0/io/StdIO"/>

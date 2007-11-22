@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
-  <ecore:EAnnotation source="CompilationUnit">
+  <ecore:EAnnotation source="ModellingUnit">
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::persistence|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="persistence" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#//persistence" nsPrefix="persistence">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="persistence" nsURI="http://www.kermeta.org/kermeta/persistence" nsPrefix="persistence">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Contains the classes that handle the serialization of models, in particular&#xA; * EMF models.&#xA; * &lt;img src=&quot;./figures/persistence_package.png&quot;>&#xA; */"/>
       </eAnnotations>
@@ -41,17 +41,26 @@
             <details key="documentation" value="/**&#xA;  * Loads the Resource, thus making content of the Resource browsable.&#xA;  * Raises a ResourceLoadException in case loaded Resource is empty&#xA;  */"/>
           </eAnnotations>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="uri" containment="true">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri">
           <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xA;  * Uri of the Resource to load&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="metaModelURI" containment="true">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="metaModelURI">
           <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xA;  * Uri of the meta-model of the Resource to load&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReadOnly">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+            <details key="documentation" value="/**&#xA;  * Indicates weither this resource will be updated when saving the repository&#xA;  * This is useful if the repository contains some metamodels that should not be saved.&#xA;  *&#xA;  * Note that in the current version, it doesn't ensure that you have not modified its content (using the freeze)&#xA;  * If you modify the elements of such resource, other resource that depend on it will be incorrectly saved &#xA;  */"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="repository" eType="/1/persistence/Repository" eOpposite="/1/persistence/Repository/resources">
           <eAnnotations source="kermeta">
@@ -76,7 +85,7 @@
           <eAnnotations source="kermetaderivedProp.getter">
             <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Set&lt;kermeta::language::structure::Object> init kermeta::standard::Set&lt;kermeta::language::structure::Object>.new&#xA;&#x9;res.addAll(self)&#xA;&#x9;var coll : kermeta::standard::Set&lt;kermeta::language::structure::Object>&#xA;&#x9;self.each{e | do&#xA;&#x9;&#x9;&#x9;coll ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getAllContainedObjects(e)&#xA;&#x9;&#x9;&#x9;res.addAll(coll)&#xA;&#x9;&#x9;end}&#xA;&#x9;result := res&#xA;end"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
+          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="EMFResource" eSuperTypes="/1/persistence/Resource">
@@ -95,7 +104,7 @@
         </eOperations>
         <eOperations name="save">
           <eAnnotations source="kermeta" references="/1/persistence/Resource/save">
-            <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(self, self.uri, metaModelURI, &quot;EMF&quot;, self, false)&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if isReadOnly then&#xA;&#x9;&#x9;var e : kermeta::exceptions::ResourceSaveException init kermeta::exceptions::ResourceSaveException.new&#xA;&#x9;&#x9;e.message := &quot;Cannot save a readonly resource. Probably this resource was indirectly loaded when loading another resource. &#xA;&quot;.plus(&quot;If you really intend to save this resource, you can set isReadOnly to false, but you must ensure to do so before any resource save.&#xA;&quot;).plus(&quot;Note : setting isReadOnly to false on the metamodel may lead to unpredictable results&quot;)&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(self, self.uri, metaModelURI, &quot;EMF&quot;, self, false)&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Overrides Resource.save()&#xA;  */"/>
             <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
@@ -109,8 +118,8 @@
         </eOperations>
         <eOperations name="load">
           <eAnnotations source="kermeta" references="/1/persistence/Resource/load">
-            <details key="body" value="do&#xA;&#x9;self.clear&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(self, uri, metaModelURI, &quot;EMF&quot;)&#xA;&#x9;if (self.size) == (0) then&#xA;&#x9;&#x9;stdio.writeln(&quot;Resource load failed!&quot;)&#xA;&#x9;&#x9;var e : kermeta::exceptions::ResourceLoadException init kermeta::exceptions::ResourceLoadException.new&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xA;  * Overrides Resource.save()&#xA;  * In case the metamodelURI was not previoulsy set, metamodelURI is filled with&#xA;  * the nsuri of the root package of the metamodel used to load the Resource after&#xA;  * a successful load&#xA;  */"/>
+            <details key="body" value="do&#xA;&#x9;self.clear&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(self, uri, metaModelURI, &quot;EMF&quot;)&#xA;&#x9;if (self.size) == (0) then&#xA;&#x9;&#x9;stdio.writeln(&quot;Resource load failed!&quot;)&#xA;&#x9;&#x9;var e : kermeta::exceptions::ResourceLoadException init kermeta::exceptions::ResourceLoadException.new&#xA;&#x9;&#x9;e.message := &quot;Resource load failed, no object was created in this resource&quot;&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="documentation" value="/**&#xA;  * Overrides Resource.load()&#xA;  * In case the metamodelURI was not previously set, metamodelURI is filled with&#xA;  * the nsuri of the root package of the metamodel used to load the Resource after&#xA;  * a successful load&#xA;  */"/>
             <details key="superOperation" value="kermeta::persistence::Resource"/>
           </eAnnotations>
         </eOperations>
@@ -122,7 +131,7 @@
             <references href="../standard/collections.ecore#/1/standard/Set/add"/>
           </eAnnotations>
           <eParameters name="instance">
-            <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
+            <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
           </eParameters>
         </eOperations>
         <eOperations name="remove">
@@ -132,9 +141,9 @@
             <details key="superOperation" value="kermeta::standard::Set"/>
             <references href="../standard/collections.ecore#/1/standard/Set/remove"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
+          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
           <eParameters name="instance">
-            <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
+            <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
           </eParameters>
         </eOperations>
       </eClassifiers>
@@ -164,7 +173,7 @@
             <references href="../standard/collections.ecore#/1/standard/Set/add"/>
           </eAnnotations>
           <eParameters name="instance">
-            <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
+            <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
           </eParameters>
         </eOperations>
         <eOperations name="remove">
@@ -174,9 +183,9 @@
             <details key="superOperation" value="kermeta::standard::Set"/>
             <references href="../standard/collections.ecore#/1/standard/Set/remove"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
+          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
           <eParameters name="instance">
-            <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
+            <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
           </eParameters>
         </eOperations>
       </eClassifiers>
@@ -241,14 +250,14 @@
             <details key="isComposite" value="false"/>
             <details key="documentation" value="/**&#xA;  * Element that is not contained by a resource in the repository  &#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
+          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="referencingElement">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="false"/>
             <details key="documentation" value="/**&#xA;  * Element that has a reference to the dangling element  &#xA;  */"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
+          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="referencingProperty">
           <eAnnotations source="kermeta">
@@ -274,8 +283,9 @@
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="useInterpreterInternalResources" containment="true">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInterpreterInternalResources">
           <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
             <details key="documentation" value="/** &#xA;  * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself&#xA;  * this is usefull for example to make a dependency to framework.km&#xA;  * by default, not setting this is considered as false.&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
@@ -315,43 +325,33 @@
     <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
     <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
-    <references href="../ecore/ecore_compatibility.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/2"/>

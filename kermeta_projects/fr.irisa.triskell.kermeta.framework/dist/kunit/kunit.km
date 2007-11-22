@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
-    <nestedPackage tag="//@packages.0/kunit/@ownedTag.0" name="kunit">
+    <nestedPackage tag="//@packages.0/kunit/@ownedTag.0" name="kunit" uri="http://www.kermeta.org/kermeta/kunit">
       <ownedTag value="/**&#xA; * Contains the implementation of a unit test tool. This is a clone of&#xA; * JUnit architecture.&#xA; * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm&#xA; *&#xA; * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.&#xA; *&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png&quot;>&#xA; */" object="//@packages.0/kunit"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/InvalidTestCaseNameException/@ownedTag.0" name="InvalidTestCaseNameException" superType="//@packages.0/kunit/InvalidTestCaseNameException/@containedType.0">
         <ownedTag value="/**&#xA; * This exception is rose if there is a problem on the name of the test method&#xA; */" object="//@packages.0/kunit/InvalidTestCaseNameException"/>

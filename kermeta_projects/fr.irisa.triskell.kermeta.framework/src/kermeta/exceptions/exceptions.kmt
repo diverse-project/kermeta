@@ -2,6 +2,7 @@
  * Contains the definition of a Kermeta exception and a few basic exceptions.
  * <img src="./figures/exceptions_package.png">
  */
+@uri "http://www.kermeta.org/kermeta/exceptions"
 package kermeta::exceptions;
 
 require "../Standard.kmt"
@@ -10,7 +11,7 @@ using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id: exceptions.kmt,v 1.17 2007-08-14 12:19:40 vmahe Exp $
+ * $Id: exceptions.kmt,v 1.18 2007-11-22 08:53:56 ftanguy Exp $
  * Project : Kermeta framework
  * Creation date :  
  * File : exception.kmt

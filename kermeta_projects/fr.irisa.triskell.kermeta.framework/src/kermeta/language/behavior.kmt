@@ -1,4 +1,4 @@
-/* $Id: behavior.kmt,v 1.24 2007-09-19 12:14:49 ftanguy Exp $
+/* $Id: behavior.kmt,v 1.25 2007-11-22 08:53:55 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : behavior.kmt
  * License   : EPL
@@ -19,6 +19,7 @@
  * You can also find some information about the behavior package here : <a href="http://www.kermeta.org/documents/manual/html.single">KermetaManual</a>
  * <img src="./figures/language_behavior_package.png">
  */
+  @uri "http://www.kermeta.org/kermeta/language/behavior"
 package kermeta::language::behavior;
 
 require "structure.kmt"

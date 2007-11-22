@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
-  <ecore:EAnnotation source="CompilationUnit">
+  <ecore:EAnnotation source="ModellingUnit">
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::utils|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/hashtable.ecore#/kermeta" nsPrefix="kermeta">
-    <eSubpackages name="utils" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/hashtable.ecore#/kermeta/utils" nsPrefix="utils">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/utils/hashtable.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="utils" nsURI="http://www.kermeta.org/kermeta/utils" nsPrefix="utils">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/** &#xD;&#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xD;&#xA; * metamodel&#xD;&#xA; * &#xD;&#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;>&#xD;&#xA; */"/>
+        <details key="documentation" value="/** &#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xA; * metamodel&#xA; * &#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;>&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EClass" name="Hashtable">
         <eAnnotations source="kermeta">
-          <details key="documentation" value="/**&#xD;&#xA; * An implementation of hashtable&#xD;&#xA; * This implementation is for speed optimisation it cannot be serialized. &#xD;&#xA; * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)&#xD;&#xA; * &lt;img src=&quot;./figures/hashtable_view.png&quot;>&#xD;&#xA; */"/>
+          <details key="documentation" value="/**&#xA; * An implementation of hashtable&#xA; * This implementation is for speed optimisation it cannot be serialized. &#xA; * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)&#xA; * &lt;img src=&quot;./figures/hashtable_view.png&quot;>&#xA; */"/>
         </eAnnotations>
         <eTypeParameters name="K"/>
         <eTypeParameters name="V"/>
@@ -19,14 +19,14 @@
         <eOperations name="size">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.size(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns size of the Map&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns size of the Map&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
         </eOperations>
         <eOperations name="keyIterator">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.keysIterator(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns an iterator on the keys of the Map&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns an iterator on the keys of the Map&#xA;  */"/>
           </eAnnotations>
           <eGenericType>
             <eTypeArguments eTypeParameter="/1/utils/Hashtable/K"/>
@@ -36,7 +36,7 @@
         <eOperations name="valueIterator">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.valueIterator(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns an iterator on the values of the Map&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns an iterator on the values of the Map&#xA;  */"/>
           </eAnnotations>
           <eGenericType>
             <eTypeArguments eTypeParameter="/1/utils/Hashtable/V"/>
@@ -46,7 +46,7 @@
         <eOperations name="getValue">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.get(self, key)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns the value for key 'key'&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns the value for key 'key'&#xA;  */"/>
           </eAnnotations>
           <eGenericType eTypeParameter="/1/utils/Hashtable/V"/>
           <eParameters name="key">
@@ -56,7 +56,7 @@
         <eOperations name="put">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.put(self, key, ~value)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Adds a entry in the Hashtable&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Adds a entry in the Hashtable&#xA;  */"/>
           </eAnnotations>
           <eParameters name="key">
             <eGenericType eTypeParameter="/1/utils/Hashtable/K"/>
@@ -68,7 +68,7 @@
         <eOperations name="remove">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.remove(self, key)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Removes the entry which key equals 'key'&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Removes the entry which key equals 'key'&#xA;  */"/>
           </eAnnotations>
           <eParameters name="key">
             <eGenericType eTypeParameter="/1/utils/Hashtable/K"/>
@@ -77,13 +77,13 @@
         <eOperations name="clear">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.clear(self)&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Removes all elements from the Hashtable&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Removes all elements from the Hashtable&#xA;  */"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="keys">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;K>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;K> init keyIterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;result.add(it.next)&#xA;&#x9;end&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns the keys of the Hashtable&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns the keys of the Hashtable&#xA;  */"/>
           </eAnnotations>
           <eGenericType>
             <eTypeArguments eTypeParameter="/1/utils/Hashtable/K"/>
@@ -93,7 +93,7 @@
         <eOperations name="values">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Bag&lt;V>.new&#xA;&#x9;keys.each{k | result.add(self.getValue(k))}&#xA;end"/>
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns the keys of the Hashtable&#xD;&#xA;  */"/>
+            <details key="documentation" value="/**&#xA;  * Returns the keys of the Hashtable&#xA;  */"/>
           </eAnnotations>
           <eGenericType>
             <eTypeArguments eTypeParameter="/1/utils/Hashtable/V"/>
@@ -103,7 +103,7 @@
         <eOperations name="containsKey">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := getValue(key).isNotEqual(void)&#xA;end"/>
-            <details key="documentation" value="/** &#xD;&#xA;  * Returns a Boolean stating whether a key is present in the Map&#xD;&#xA;  */"/>
+            <details key="documentation" value="/** &#xA;  * Returns a Boolean stating whether a key is present in the Map&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           <eParameters name="key">
@@ -128,7 +128,6 @@
     <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../reflection/reflection.ecore#/2"/>

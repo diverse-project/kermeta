@@ -3,12 +3,13 @@
  * EMF models.
  * <img src="./figures/persistence_package.png">
  */
+  @uri "http://www.kermeta.org/kermeta/persistence"
 package kermeta::persistence;
 require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.41 2007-11-14 17:18:00 dvojtise Exp $
+ * $Id: resource.kmt,v 1.42 2007-11-22 08:53:56 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt

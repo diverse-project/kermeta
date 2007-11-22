@@ -1,4 +1,4 @@
-/* $Id: assert.kmt,v 1.4 2007-09-11 12:26:16 dvojtise Exp $
+/* $Id: assert.kmt,v 1.5 2007-11-22 08:53:56 ftanguy Exp $
  * Creation date: May 29, 2007
  * License:
  * Copyright:
@@ -9,6 +9,7 @@
  * main features of the famous *Unit tool for Kermeta language
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/assert_view.png">
  */
+@uri "http://www.kermeta.org/kermeta/kunit"
 package kermeta::kunit;
 
 require "../Standard.kmt"

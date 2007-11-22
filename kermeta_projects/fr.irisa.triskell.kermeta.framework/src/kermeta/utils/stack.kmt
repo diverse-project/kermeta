@@ -11,6 +11,7 @@
  * Contains special classes (Hashtable, Stack) that are not contained in Kermeta
  * metamodel
  */
+ @uri "http://www.kermeta.org/kermeta/utils"
 package kermeta::utils;
 
 require "../Standard.kmt"

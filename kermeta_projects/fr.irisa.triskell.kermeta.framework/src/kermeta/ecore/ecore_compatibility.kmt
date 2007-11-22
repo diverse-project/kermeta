@@ -1,4 +1,4 @@
-/* $Id: ecore_compatibility.kmt,v 1.1 2007-08-31 07:13:00 dvojtise Exp $
+/* $Id: ecore_compatibility.kmt,v 1.2 2007-11-22 08:53:56 ftanguy Exp $
  * Creation date: Aug, 2007
  * License: EPL
  * Copyright: INRIA
@@ -9,6 +9,7 @@
 /** 
  * Contains the definition of a Kermeta classes used for compatibility with Ecore 
  */
+@uri "http://www.kermeta.org/kermeta/ecore"
 package kermeta::ecore;
 require "../Standard.kmt"
 

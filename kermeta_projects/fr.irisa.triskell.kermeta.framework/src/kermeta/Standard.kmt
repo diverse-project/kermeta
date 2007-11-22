@@ -1,8 +1,9 @@
-/* $Id: Standard.kmt,v 1.13 2007-09-03 16:08:28 fmunoz Exp $ */
+/* $Id: Standard.kmt,v 1.14 2007-11-22 08:53:56 ftanguy Exp $ */
 /**
  * The root package. See the other packages if you want to browse the classes of Kermeta api.
  * <img src="./figures/kermeta_packages.png">
  */
+@uri "http://www.kermeta.org/kermeta"
 package kermeta;
 
 /*

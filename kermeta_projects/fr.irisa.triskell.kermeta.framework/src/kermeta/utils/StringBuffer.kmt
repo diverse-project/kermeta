@@ -7,7 +7,7 @@
  * Implementation of a kermeta wrapper for java.lang.StringBuffer
  *
  */
-
+ @uri "http://www.kermeta.org/kermeta/utils"
 package kermeta::utils;
 
 require "../Standard.kmt"

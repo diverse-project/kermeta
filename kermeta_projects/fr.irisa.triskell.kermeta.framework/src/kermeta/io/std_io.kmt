@@ -2,6 +2,7 @@
  * Contains standard input/output related classes. 
  * <img src="./figures/std_io_view.png">
  */
+@uri "http://www.kermeta.org/kermeta/io"
 package kermeta::io;
 
 require "../Standard.kmt"

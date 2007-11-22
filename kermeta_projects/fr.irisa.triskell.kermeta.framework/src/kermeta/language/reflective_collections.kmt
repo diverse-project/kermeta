@@ -2,6 +2,7 @@
  * Contains the implementation of Kermeta reflective collections.
  * <img src="./figures/language_package.png">
  */
+  @uri "http://www.kermeta.org/kermeta/language"
 package kermeta::language;
 
 require "../Standard.kmt"
@@ -10,7 +11,7 @@ require "structure.kmt"
 using kermeta::standard
 
 /* *************************************************
- * $Id: reflective_collections.kmt,v 1.11 2007-08-14 12:19:40 vmahe Exp $
+ * $Id: reflective_collections.kmt,v 1.12 2007-11-22 08:53:55 ftanguy Exp $
  * Franck FLEUREY - 17/02/2005
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
-    <nestedPackage name="utils">
+    <nestedPackage name="utils" uri="http://www.kermeta.org/kermeta/utils">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/utils/StringBuffer/@ownedTag.0" name="StringBuffer" superType="//@packages.0/utils/StringBuffer/@containedType.0">
         <ownedTag value="/**&#xA; * This class mimic the behavior of the StringBuffer class in java, enabling better performance in log&#xA; * strings&#xA; */" object="//@packages.0/utils/StringBuffer"/>
         <containedType xsi:type="kermeta_language_structure:Class">

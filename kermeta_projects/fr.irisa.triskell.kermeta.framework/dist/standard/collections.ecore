@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
-  <ecore:EAnnotation source="CompilationUnit">
+  <ecore:EAnnotation source="ModellingUnit">
     <details key="require" value="primitive_types.kmt|"/>
     <details key="using" value="kermeta::exceptions|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="standard" nsURI="file:/home/paco/Desktop/KermetaCVS/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#//standard" nsPrefix="standard">
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="standard" nsURI="http://www.kermeta.org/kermeta/standard" nsPrefix="standard">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xA; * Defines Collection types &#xA; * &lt;img src=&quot;./figures/collections_view.png&quot;>&#xA; */"/>
       </eAnnotations>
-      <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object">
+      <eClassifiers xsi:type="ecore:EDataType" name="kermeta::language::structure::Object" instanceClassName="java.lang.Object">
         <eAnnotations source="kermeta">
           <details key="alias" value="kermeta::language::structure::Object"/>
         </eAnnotations>
@@ -495,7 +495,7 @@
             <details key="documentation" value="/**&#xA;  * Returns a new Set which content includes all non-Collection elements&#xA;  * of the current Set, and, for each Collection element of the current&#xA;  * Set, as many elements as the Collection contains&#xA;  * Duplicates are removed&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Set">
-            <eTypeArguments eClassifier="/1/standard/Object"/>
+            <eTypeArguments eClassifier="/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
           </eGenericType>
         </eOperations>
         <eOperations name="sortedBy">
@@ -553,7 +553,7 @@
         <eTypeParameters name="G"/>
         <eOperations name="equals">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if not (element.isVoid) then&#xA;&#x9;&#x9;if kermeta::standard::Collection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Bag&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;var selfAsSet : kermeta::standard::Set&lt;G> init self.asSet&#xA;&#x9;&#x9;&#x9;result := selfAsSet.equals(collection.asSet)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if not (element.isVoid) then&#xA;&#x9;&#x9;if kermeta::standard::Collection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Bag&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;var selfAsSet : kermeta::standard::Set&lt;G> init self.asSet&#xA;&#x9;&#x9;&#x9;isEqual := selfAsSet.equals(collection.asSet)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
             <details key="documentation" value="/**&#xA;  * Overrides Object.equals(elt : Object)&#xA;  * Returns a Boolean stating whether the provided element is equal to&#xA;  * current Bag&#xA;  */"/>
             <details key="superOperation" value="kermeta::language::structure::Object"/>
             <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
@@ -684,7 +684,7 @@
             <details key="documentation" value="/**&#xA;  * Returns a new Bag which content includes all non-Collection elements&#xA;  * of the current Set, and, for each Collection element of the current&#xA;  * Bag, as many elements as the Collection contains&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Bag">
-            <eTypeArguments eClassifier="/1/standard/Object"/>
+            <eTypeArguments eClassifier="/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
           </eGenericType>
         </eOperations>
         <eOperations name="sortedBy">
@@ -1028,11 +1028,12 @@
     <references href="primitive_types.ecore#/1"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
+    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
@@ -1041,7 +1042,6 @@
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
@@ -1058,9 +1058,11 @@
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="java.ecore#/0"/>
     <references href="java.ecore#/1"/>
+    <references href="java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
+    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

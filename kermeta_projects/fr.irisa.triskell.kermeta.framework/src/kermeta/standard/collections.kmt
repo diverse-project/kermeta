@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.38 2007-11-05 08:46:02 ftanguy Exp $
+ * $Id: collections.kmt,v 1.39 2007-11-22 08:53:55 ftanguy Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -12,6 +12,7 @@
  * Defines Collection types 
  * <img src="./figures/collections_view.png">
  */
+ @uri "http://www.kermeta.org/kermeta/standard"
 package kermeta::standard;
 
 require "primitive_types.kmt"
