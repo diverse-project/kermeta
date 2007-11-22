@@ -58,6 +58,24 @@
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
          </action>
       </objectContribution>
+      <!--objectContribution
+            id="org.kermeta.compiler.compilekmtwithparamcontribution"
+            nameFilter="*.kmt"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+               label="Kermeta"
+               path="additions">
+            <separator name="kermetagroup1"/>
+         </menu>
+         <action
+               class="org.kermeta.compiler.popup.actions.CompileKermetaActionWithParam"
+               enablesFor="1"
+               icon="icons/emfCode.png"
+               id="fr.irisa.triskell.kermeta.compiler.CompileKmtActionWithParam"
+               label="Compile Kmt to EMF plugin with params (experimental) ..."
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+      </objectContribution-->
    </extension>
    
 

@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.2 2007-10-18 09:38:27 cfaucher Exp $
+/* $Id: Compiler.java,v 1.3 2007-11-22 13:00:25 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -15,21 +15,24 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-//import org.eclipse.emf.codegen.ecore.Generator;
+import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
-import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
-import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.kermeta.compiler.generator.helper.model.HelperModel;
+import org.kermeta.compiler.generator.internal.actions.GenerateHelperAction;
+import org.kermeta.compiler.util.CompilerUtil;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import org.kermeta.compiler.util.CompilerUtil;
+import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 
 public class Compiler extends Generator {
 
@@ -38,17 +41,28 @@ public class Compiler extends Generator {
 
 	private IFile ecorefile = null;
 	
-	private String compiledPluginId = "";
+	private String compiledPluginId = null;
 
-	public Compiler(String abosluteEcorePath) {
+	private String genModelPath = null;
+	
+	private KermetaUnit kmUnit = null;
+	
+	private EcoreExporter km2ecoreGen = null;
+	
+	private HelperModel helperModel = null;
+	
+	public Compiler(String abosluteEcorePath, KermetaUnit kmUnit, EcoreExporter km2ecoreGen, HelperModel helperModel) {
 		super();
 		arguments[0] = "-ecore2GenModel";
 		arguments[1] = abosluteEcorePath;
 		arguments[2] = "";
-		arguments[3] = "Ckm";
+		arguments[3] = "Ckm"; // it seems this assignment is deprecated
 		
 		// Get the IFile corresponding to the generated Ecore file
-		ecorefile = ResourceHelper.getIFile("file:/"+arguments[1]);
+		this.ecorefile = ResourceHelper.getIFile("file:/"+arguments[1]);
+		this.kmUnit = kmUnit;
+		this.km2ecoreGen = km2ecoreGen;
+		this.helperModel = helperModel;
 	}
 
 	public Compiler(IFile ecoreFile) {
@@ -57,7 +71,7 @@ public class Compiler extends Generator {
 		arguments[0] = "-ecore2GenModel";
 		arguments[1] = ecorefile.getFullPath().toString();
 		arguments[2] = "";
-		arguments[3] = "Ckm";
+		arguments[3] = "Ckm"; // it seems this assignment is deprecated
 	}
 
 	public void run() throws IOException {
@@ -69,7 +83,7 @@ public class Compiler extends Generator {
 			
 			ResourceSet resourceSet = new ResourceSetImpl();
 			
-			String genModelPath = ecorefile.getLocation().removeFileExtension().addFileExtension("genmodel").toString();
+			genModelPath = ecorefile.getLocation().removeFileExtension().addFileExtension("genmodel").toString();
 	
 			// Get and load the generated genmodel file
 			URI genModelURI = URI.createFileURI(genModelPath);
@@ -104,7 +118,7 @@ public class Compiler extends Generator {
 					}
 				}
 				
-				System.out.println("Number of GenPackages: " + genModel.getGenPackages().size());
+				//System.out.println("Number of GenPackages: " + genModel.getGenPackages().size());
 	
 				// Saving the *.genmodel before the generation of plugins
 				genModelResource.save(Collections.EMPTY_MAP);
@@ -128,6 +142,8 @@ public class Compiler extends Generator {
 			ResourceHelper.deleteIProject(compiledPluginId, true);
 			// Generate the plugins
 			this.run(args);
+			
+			compileHelpers();
 		
 		} else {
 			throw new IOException("IOException Compiler- The compilation fails: none ecore file was found");
@@ -168,7 +184,7 @@ public class Compiler extends Generator {
 		genModel.setCreationIcons(false);
 		// The use of Java generics is enabled
 		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
-		genModel.setCopyrightText("Copyright : IRISA / INRIA / Universite de Rennes 1/nLicense   : EPL/nhttp://www.kermeta.org");
+		genModel.setCopyrightText("Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org");
 	}
 
 	/**
@@ -184,7 +200,19 @@ public class Compiler extends Generator {
 	 * @param genModel
 	 */
 	private void setCompiledPluginId(GenModel genModel) {
-		compiledPluginId = "org.kermeta."+ genModel.getModelName().toLowerCase() + ".compiled";
+		compiledPluginId = "org.kermeta.compiled."+ genModel.getModelName().toLowerCase();
+	}
+	
+	private void compileHelpers() {
+		GenerateHelperAction compileHelperAction = new GenerateHelperAction();
+		
+		genModelPath = genModelPath.replace( ResourcesPlugin.getWorkspace().getRoot().getLocationURI().toString(), "platform:/resource/" );
+		genModelPath = genModelPath.replace( ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(), "platform:/resource/" );
+		
+		IFile genModelFile = ResourceHelper.getIFile(genModelPath);
+		if(genModelFile.exists()) {
+			compileHelperAction.generate(genModelFile, this.kmUnit, this.km2ecoreGen, this.helperModel);
+		}
 	}
 
 }

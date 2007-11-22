@@ -1,4 +1,4 @@
-/* $Id: KM2JavaPrettyPrinter.java,v 1.2 2007-10-18 09:38:28 cfaucher Exp $
+/* $Id: KM2JavaPrettyPrinter.java,v 1.3 2007-11-22 13:00:25 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : KM2JavaPrettyPrinter.java
  * License   : EPL
@@ -13,22 +13,17 @@
  */
 package org.kermeta.compiler.exporter;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.kermeta.checker.KermetaUnitChecker;
-import org.kermeta.compiler.util.CompilerUtil;
-import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.compiler.generator.helper.model.HelperMethod;
+import org.kermeta.compiler.generator.helper.model.HelperModel;
 
+import fr.irisa.triskell.kermeta.ast.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.BooleanLiteral;
@@ -61,10 +56,10 @@ import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -76,17 +71,10 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.ast.helper.KMTHelper;
-import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 
 
 /**
@@ -97,8 +85,15 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 
 	protected ArrayList usings = new ArrayList();
 	protected ArrayList imports = new ArrayList();
+	
+	private Operation current_modelOperation;
+	
 	protected String root_pname;
 	protected String current_pname;
+	
+	protected String prefixTab = "\t";
+	
+	private HelperModel helperModel = null;
 	
 	/**
 	 * Boolean variable used to manage the prefix printing
@@ -114,48 +109,6 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	
 	public KM2JavaPrettyPrinter() {
-	}
-		
-	public void ppPackage(Package p, File file) {
-		try {
-			FileWriter w = new FileWriter(file);
-			w.write(ppPackage(p));
-			w.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public String ppPackage(Package p) {
-		root_pname = NamedElementHelper.getMangledQualifiedName(p, NamedElementHelper.simplePointSeparator);
-		String result = "package " + root_pname + ";\n\n";
-		for(int i=0; i<imports.size();i++)
-			result += "require \"" + imports.get(i) + "\"\n";
-		if (imports.size()>0) result += "\n";
-		for(int i=0; i<usings.size();i++) result += "using " + usings.get(i) + "\n";
-		if (usings.size()>0) result += "\n";
-		current_pname = root_pname;
-		typedef = true;
-		result += ppCRSeparatedNode(p.getOwnedTypeDefinition());
-		typedef = false;
-		result += ppCRSeparatedNode(p.getNestedPackage());
-		
-		// temporary handle of orphan tags
-		//result +=
-		return result;
-	}
-	
-	// It seems that this method is never called !!!!
-	public String ppPackageContents(Package p) {
-		root_pname = NamedElementHelper.getMangledQualifiedName(p, NamedElementHelper.simplePointSeparator);
-		String result = "";
-		current_pname = root_pname;
-		typedef = true;
-		result += ppCRSeparatedNode(p.getOwnedTypeDefinition());
-		typedef = false;
-		result += ppCRSeparatedNode(p.getNestedPackage());
-		return result;
 	}
 	
 	/**
@@ -179,7 +132,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 		else {
 			pushPrefix();
 			result += getPrefix() + "//TODO: implement constraint\n"; 
-			result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new \n";
+			result += getPrefix() + "throw kermeta.exceptions.ExceptionsFactory.eINSTANCE.createNotImplementedException()\n";
 			popPrefix();
 		}
 		return result;
@@ -189,6 +142,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FAssignement)
 	 */
 	public Object visitAssignment(Assignment node) {
+		
 		String left = this.accept(node.getTarget()).toString();
 		String right = this.accept(node.getValue()).toString();
 		
@@ -197,7 +151,33 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 			right = "function " + right;
 		
 		String op = "";//(node.isIsCast())?"?":":";
-		return left + " " + op + "= " + right + ";";
+		
+		/*if(tgt instanceof CallFeature) {
+			result += "get" + CodeGenUtil.capName(KMTHelper.getMangledIdentifier(node.getName()));
+		} else {*/
+		
+		if(node.getTarget() instanceof CallFeature) {
+			//left = left.substring(0,left.length()-2);
+			
+			left.replace(".", ";");
+			
+			String[] tabLeft = left.split(";");
+			
+			String result = "";
+			for(int i=0; i<tabLeft.length; i++) {
+				
+				if( i < (tabLeft.length-1) ) {
+					result += tabLeft[i] + ".";
+				}
+				if( i == (tabLeft.length-1) ) {
+					result += "set" + CodeGenUtil.capName(tabLeft[i]);
+				}
+			}
+			
+			return result + "(" + right + ");";
+		} else {
+			return left + " " + op + "= " + right + ";";
+		}
 	}
 	
 	/**
@@ -205,17 +185,30 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	 * compiler ready
 	 */
 	public Object visitBlock(Block node) {
-		String result = "{";
+		String result = "";
+		
+		boolean firstBlock = false;
+		// If the parent is a root statement of the operation
+		if(getParent().eContainer() instanceof ClassDefinition) {
+			firstBlock = true;
+		}
+		if(!firstBlock) {
+			result = "{";
+		}
 		alreadyPrefixed = false;
 		pushPrefix();
 		result += ppCRSeparatedNode(node.getStatement());
 		
 		popPrefix();
-		Iterator it = node.getRescueBlock().iterator();
-		while(it.hasNext()) {
-			result += getPrefix() + this.accept((Rescue)it.next()) + "\n";
+		
+		for(Rescue itRB : node.getRescueBlock()) {
+			result += getPrefix() + this.accept((Rescue) itRB) + "\n";
 		}
-		result += getPrefix() + "}";
+
+		if(!firstBlock) {
+			result += getPrefix() + "}";
+		}
+		
 		return result;
 	}
 	
@@ -265,6 +258,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.CallSuperOperation)
+	 * @reqComp "comp_callSuperoperation"
 	 */
 	public Object visitCallSuperOperation(CallSuperOperation node) {
 		String result = "super(";
@@ -351,7 +345,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 		if (result.equals("")) result += qname;
 		
-		if( result.equals("kermeta.standard.String") ) {
+		if( result.equals("kermeta::standard::String") || result.equals("kermeta.standard.String") ) {
 			result = "String";
 		}
 		
@@ -365,52 +359,13 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 		return this.accept(node.getType());
 	}
 	
-	/** 
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
-	 */
-	public Object visitClassDefinition(ClassDefinition node) {
-		//setParent(node);
-
-		typedef = false;
-		String result = "";
-
-		result += ppTags(node.getTag());
 		
-		if(! alreadyPrefixed) result += getPrefix();
-		
-		if (node.isIsAbstract()) result += "abstract ";
-		result += "class " + KMTHelper.getMangledIdentifier(node.getName());
-		if (node.getTypeParameter().size() > 0) {
-			result += "<";
-			result += ppTypeVariableDeclaration(node.getTypeParameter());
-			result += ">";
-		}
-		if (node.getSuperType().size() > 0) {
-			result += " inherits ";
-			result += ppComaSeparatedNodes(node.getSuperType());
-		}
-		result += "\n" + getPrefix() + "{\n";
-
-		alreadyPrefixed = false;
-		
-		pushPrefix();
-		result += ppCRSeparatedNode(node.getInv());
-		result += ppCRSeparatedNode(node.getOwnedAttribute());
-		result += ppCRSeparatedNode(node.getOwnedOperation());
-		popPrefix();
-
-		result += getPrefix() + "}";		
-		
-		typedef = true;
-		
-		return result;
-	}
-	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.PrimitiveType)
 	 */
 	public Object visitPrimitiveType(PrimitiveType node) {
-		setParent(node);
+		// FIXME we should deal the primitive type
+		/*setParent(node);
 		if (typedef == true) {
 			typedef = false;
 			String result = "alias " + node.getName() + " : " + this.accept(node.getInstanceType()) + ";";
@@ -422,7 +377,8 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 			String name = KMTHelper.getMangledIdentifier(node.getName());
 			String result = ppTypeName(qname, name);
 			return result;
-		}
+		}*/
+		return null;
 	}
 	
 	public String ppTypeVariableDeclaration(EList tparams) {
@@ -439,7 +395,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	/** Prettyprint the annotations */
 	public String ppTags(EList tagList) {
-		String result = "";
+		String result = "/**\n";
 	    
 		int tagNb = tagList.size();
 		for(int i=0; i<tagNb; i++) {
@@ -455,12 +411,12 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 			}
 		}
 		if(tagNb > 0) alreadyPrefixed = false;
-	    return result;
+	    return result + "\n*/";
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FConditionnal)
-	 * compiler ready
+	 * @reqComp "comp_conditional"
 	 */
 	public Object visitConditional(Conditional node) {
 		String result = "if( " + this.accept(node.getCondition()) + ") {\n";
@@ -482,6 +438,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	/**
+	 * Enumeration are used by the compiler, but I don't know why?
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)
 	 */
 	public Object visitEnumeration(Enumeration node) {
@@ -520,21 +477,62 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.IntegerLiteral)
 	 */
 	public Object visitIntegerLiteral(IntegerLiteral node) {
 		return "" + node.getValue();
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.JavaStaticCall)
+	 * @reqComp "comp_javaStaticCall"
 	 */
 	public Object visitJavaStaticCall(JavaStaticCall node) {
-		String result = "extern " + node.getJclass() + "." + KMTHelper.getMangledIdentifier(node.getJmethod()) + "(";
+		String result = /*"extern " +*/ node.getJclass().replace("::", ".") + "." + KMTHelper.getMangledIdentifier(node.getJmethod()) + "(";
 		result += ppComaSeparatedNodes(node.getParameters());
 		result += ")";
 		return result;
 	}
+	
+	private boolean isACollectionMethod(LambdaExpression node) {
+		if(node.eContainer()!=null 
+				&& ((CallFeature) node.eContainer()).getStaticOperation()!=null
+				&& ((CallFeature) node.eContainer()).getStaticOperation().eContainer()!=null
+				&& ((CallFeature) node.eContainer()).getStaticOperation().eContainer() instanceof ClassDefinition
+				) {
+		String typeOfOp = ((ClassDefinition)((CallFeature) node.eContainer()).getStaticOperation().eContainer()).getName();
+		String opName = ((CallFeature) node.eContainer()).getStaticOperation().getName();
+		
+			//String paramType = "";
+			for(EObject eobj1 : node.eContainer().eContents()) {
+				if(eobj1 instanceof CallFeature) {
+					CallFeature cf = (CallFeature) eobj1;
+					for(EObject eobj2 : cf.eContents()) {
+						if(eobj2 instanceof Class) {
+							Class aClass = (Class) eobj2;
+							typeOfOp = aClass.getTypeDefinition().getName();
+							//paramType = TypeHelper.getName(((TypeVariableBinding)aClass.getTypeDefinition()).getType());
+						}
+					}
+				}
+			}
+			if(typeOfOp.equals("Collection") && (opName.equals("each") || opName.equals("select") || opName.equals("detect"))) {
+				return true;
+			}
+			if(typeOfOp.equals("Set") && (opName.equals("each") || opName.equals("select") || opName.equals("detect"))) {
+				return true;
+			}
+			if(typeOfOp.equals("OrderedSet") && (opName.equals("each") || opName.equals("select") || opName.equals("detect"))) {
+				return true;
+			}
+			if(typeOfOp.equals("Sequence") && (opName.equals("each") || opName.equals("select") || opName.equals("detect"))) {
+				return true;
+			}
+			if(typeOfOp.equals("Bag") && (opName.equals("each") || opName.equals("select") || opName.equals("detect"))) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * A lambda expression is printed differently according to its use.
 	 * But for now we will only authorize it to be :
@@ -542,17 +540,61 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.LambdaExpression)
 	 */
 	public Object visitLambdaExpression(LambdaExpression node) {
-		String result = "{";
-		result += ppComaSeparatedNodes(node.getParameters());
-		result += " | ";
-		pushPrefix();
-		result += this.accept(node.getBody());
-		popPrefix();
-		result += "}";
+		
+		String result = "";	
+		if(isACollectionMethod(node)) {
+			
+			String paramType = "";
+			for(EObject eobj1 : node.eContainer().eContents()) {
+				if(eobj1 instanceof CallFeature) {
+					CallFeature cf = (CallFeature) eobj1;
+					for(EObject eobj2 : cf.eContents()) {
+						System.out.println("toto222222222");
+						if(eobj2 instanceof Class) {
+							Class aClass = (Class) eobj2;
+							//typeOfOp = aClass.getTypeDefinition().getName();
+							System.out.println("titi");
+							if(((TypeVariableBinding)aClass.getTypeParamBinding().get(0)).getType() instanceof Type) {
+								Type aParamType = (Type) ((TypeVariableBinding)aClass.getTypeParamBinding().get(0)).getType();
+								if(aParamType instanceof PrimitiveType) {
+									paramType = ((PrimitiveType) aParamType).getName();
+									System.out.println("tata");
+								}
+								if(aParamType instanceof ParameterizedType) {
+									paramType = ((ParameterizedType) aParamType).getTypeDefinition().getName();
+									System.out.println("tutu");
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			HelperMethod aHM = new HelperMethod(
+					((CallFeature) node.eContainer()).getStaticOperation().getName(),
+					node.getParameters().get(0).getName(),
+					paramType,
+					TypeHelper.getName(((CallFeature) node.eContainer()).getStaticType()),
+					current_modelOperation,
+					(String) this.accept(node.getBody()),
+					((NamedElement)current_modelOperation.eContainer().eContainer()).getName(),
+					NamedElementHelper.getQualifiedName((NamedElement) current_modelOperation.eContainer().eContainer()),
+					Integer.toString(helperModel.getNextId())
+							);
+			helperModel.helperMethods.add(aHM);
+		} else {
+			result = "{";
+			result += ppComaSeparatedNodes(node.getParameters());
+			result += " | ";
+			pushPrefix();
+			result += this.accept(node.getBody());
+			popPrefix();
+			result += "}";
+		}
 		return result;
 	}
+	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.LambdaParameter)
 	 */
 	public Object visitLambdaParameter(LambdaParameter node) {
 		String result = KMTHelper.getMangledIdentifier(node.getName());
@@ -563,21 +605,20 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Loop)
-	 * compiler ready
+	 * @reqComp "comp_loop"
 	 */
 	public Object visitLoop(Loop node) {
-		String result = "for { " ; 
+		String result = "" ; 
 		result += this.accept(node.getInitialization()) + "\n";
-		result += "; ";
-		result += getPrefix() + "until " + this.accept(node.getStopCondition()) + "\n";
-		result += getPrefix() +"loop\n";
+		result += "while ( " + this.accept(node.getStopCondition()) + " ) {\n";
+		//result += getPrefix() +"loop\n";
 		alreadyPrefixed = false;
 		pushPrefix();
 		// Precise type of Loop is always "Block" (see also KMT2KMPrimitiveExpressionBuilder)
 		// And block textual syntax is already represented by "loop..end"
 		result += this.ppCRSeparatedNode(((Block)node.getBody()).getStatement());
 		popPrefix();
-		result += getPrefix() +"}";
+		result += getPrefix() + "}";
 		return result;
 	}
 	
@@ -586,9 +627,14 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitOperation(Operation node) {
 		setParent(node);
-		String result = ppTags(node.getTag());
 		
-		if(!alreadyPrefixed) result += getPrefix();
+		if(node.eContainer() instanceof ClassDefinition) {
+			current_modelOperation = node;
+		}
+		
+		String result = "";//ppTags(node.getTag());
+		
+		/*if(!alreadyPrefixed) result += getPrefix();
 		
 		if (node.getSuperOperation() != null)
 			result += "method ";
@@ -634,34 +680,65 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 		
 		pushPrefix();
 		alreadyPrefixed = false;
+		*/
 		
 		if (node.getBody() != null) {
-			result += getPrefix() + this.accept(node.getBody()) + "\n";
+			
+			String resultType = "";
+			if(node.getType()!=null) {
+				boolean void_t = false;
+				if(node.getType() instanceof VoidType) {
+					void_t = true;
+				}
+				if(TypeHelper.getName(node.getType()).equals("String")) {
+					void_t = false;
+				}
+				if(TypeHelper.getName(node.getType()).equals("Boolean")) {
+					void_t = false;
+				}
+				if(TypeHelper.getName(node.getType()).equals("Integer")) {
+					void_t = false;
+				}
+				if(void_t) {
+					
+				} else {
+					Object resultTypeObj = TypeHelper.getName(node.getType());
+					if(resultTypeObj!=null) {
+						resultType = (String) resultTypeObj;
+						if(resultType.equals("void")) {
+							resultType = "";
+						}
+					}
+				}
+			}
+			
+			if(!resultType.equals("")) {
+				result += resultType + "\nresult=null;\n";
+			}
+			
+			result += this.accept(node.getBody());
+			
+			if(!resultType.equals("")) {
+				result += "\nreturn result;";
+			}
 		}
 		else if (node.isIsAbstract()) {
-			result += getPrefix() + "abstract\n";
+			//result += getPrefix() + "abstract\n";
 		}
-		else {
-			result += getPrefix() + "do\n";
-			pushPrefix();
-			result += getPrefix() + "//TODO: implement operation " + node.getName() + "\n"; 
-			result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new\n";
-			result += ppCRSeparatedNode(node.getPost());
-			popPrefix();
-			result += getPrefix() + "end\n";
+		if(result.equals("")) {
+			result += "//TODO: implement operation " + node.getName() + "\n"; 
+			result += "throw new kermeta.exceptions.NotImplementedException();";
 		}
-		popPrefix();
+		/*popPrefix();*/
+
 		return result;
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Parameter)
+	 * 
+	 * @param elem
+	 * @return
 	 */
-	public Object visitParameter(Parameter node) {
-		setParent(node);
-		return KMTHelper.getMangledIdentifier(node.getName()) + " : " + ppTypeFromMultiplicityElement(node);
-	}
-	
 	public String ppTypeFromMultiplicityElement(MultiplicityElement elem) {
 		String result = "";
 		if (elem.getUpper() != 1) {
@@ -681,28 +758,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 		return result;
 	}
-	
-	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Package)
-	 */
-	public Object visitPackage(Package node) {
-	    setParent(node);
-		String result = ppTags(node.getTag());
-		result += "package " + KMTHelper.getMangledIdentifier(node.getName()) + "\n";
-		result += getPrefix() + "{\n";
-		String old_cname = current_pname;
-		current_pname = NamedElementHelper.getMangledQualifiedName(node, NamedElementHelper.simplePointSeparator);
-		pushPrefix();
-		typedef = true;
-		alreadyPrefixed = false;
-		result += ppCRSeparatedNode(node.getOwnedTypeDefinition());
-		result += ppCRSeparatedNode(node.getNestedPackage());
-		popPrefix();
-		current_pname = old_cname;
-		result += getPrefix() + "}\n";
-		return result;
-	}
-	
+		
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ProductType)
 	 */
@@ -712,56 +768,17 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Property)
+	 * FIXME CF maybe we should take into account the derived property
+	 * @param node
+	 * @param body_type
+	 * @return
+	 * @reqComp "2.15"
 	 */
-	public Object visitProperty(Property node) {
-		setParent(node);
-	    String result = ppTags(node.getTag());
-	    
-	    if(!alreadyPrefixed) result += getPrefix();
-		
-	    if (node.isIsDerived()) result += "property ";
-		else if (node.isIsComposite()) result += "attribute ";
-		else result += "reference ";
-		if (node.isIsReadOnly()) result += "readonly ";
-		result += KMTHelper.getMangledIdentifier(node.getName());
-		// FIXME : It should not be the role of KMTPrettyPrinter to handle this case! :
-		// Type of Property should be mandatory (with a multiplicity [1..1]!).. at least
-		// in framework.km, not in kermeta.ecore which would not be conform to MOF if we
-		// changed there the multiplicity?
-		if(node.getType() != null) {
-			result += " : " + ppTypeFromMultiplicityElement(node);
-		}
-		else {
-			result += " : kermeta::standard::~Void" ;
-		}
-		
-		if (node.getOpposite() != null) result += "#" + KMTHelper.getMangledIdentifier(node.getOpposite().getName());
-		if (node.isIsDerived()) {
-			pushPrefix();
-			result += "\n" + getPrefix() + "getter is " ;
-			if (node.getGetterBody() != null) result += this.accept(node.getGetterBody());
-			else {
-				result += getEmptyDerivedPropertyBody(node, "getter");
-			}
-			if (! node.isIsReadOnly()) {
-				result += "\n" + getPrefix() + "setter is ";
-				if (node.getSetterBody() != null) result += this.accept(node.getSetterBody());
-				else {
-					result += getEmptyDerivedPropertyBody(node, "getter");
-				}
-			}
-			popPrefix();
-		}
-		result += "\n";
-		return result;
-	}
-	
 	protected String getEmptyDerivedPropertyBody(Property node, String body_type) {
 		String result = "{\n";
 		pushPrefix();
 		result += getPrefix() + "//TODO: implement "+ body_type + " for derived property " + node.getName() + "\n"; 
-		result += getPrefix() + "throws new NotImplementedException() \n";
+		result += getPrefix() + "throw new NotImplementedException() \n";
 		popPrefix();
 		result += getPrefix() + "}";
 		return result;
@@ -771,7 +788,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Raise)
 	 */
 	public Object visitRaise(Raise node) {
-		return "throws " + this.accept(node.getExpression());
+		return "throw " + this.accept(node.getExpression());
 	}
 	
 	/**
@@ -787,18 +804,21 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	public Object visitStringLiteral(StringLiteral node) {
 		return "\"" + node.getValue().replace("\"", "\\\"") +"\"";
 	}
+	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeLiteral)
 	 */
 	public Object visitTypeLiteral(TypeLiteral node) {
 		return this.accept(node.getTyperef());
 	}
+	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeReference)
 	 */
 	public Object visitTypeReference(TypeReference node) {
 	    return ppTypeFromMultiplicityElement(node);
 	}
+	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ObjectTypeVariable)
 	 */
@@ -814,6 +834,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 		result += KMTHelper.getMangledIdentifier(node.getName());
 		return result;
 	}
+	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.VariableDecl)
 	 */
@@ -842,7 +863,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	/**
-	 * 
+	 * Give the String corresponding to the CreateFactory  of a type
 	 * @param localType
 	 * @return
 	 */
@@ -854,8 +875,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 			
 		} else {
 			String localType2 = localType.replace(".", "%");
-			System.out.println();
-			//String[] localType3 = localType2.split("[");
+
 			String[] name = localType2.split("%");
 			
 			String allPackages_label = localType.substring(0, localType.length()-name[name.length-1].length());
@@ -878,7 +898,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.VoidType)
 	 */
 	public Object visitVoidType(VoidType node) {
-		return "Void";
+		return "void";
 	}
 	
 	/**
@@ -911,6 +931,8 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 		
 		setParent(node);
 		String result = "";
+		
+		// FIXME Compiler Manage the case where node.getName().equals("new")
 		String fName = node.getName();
 		
 		// Feature calls that correspond to primitive types operators have specific
@@ -920,7 +942,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 		if(tgt != null) {
 			
 			if(fName == "not" && isBooleanTypeDef(tgt.getStaticType())) {
-					result += "not (";
+					result += "! (";
 					result += this.accept(tgt);
 					result += ")";
 				}
@@ -928,7 +950,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 				result += "(";
 				result += this.accept(tgt);
 				result += ")";
-				result += " and ";
+				result += " && ";
 				result += "(";
 				result += ppComaSeparatedNodes(node.getParameters());
 				result += ")";
@@ -937,7 +959,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 				result += "(";
 				result += this.accept(tgt);
 				result += ")";
-				result += " or ";
+				result += " || ";
 				result += "(";
 				result += ppComaSeparatedNodes(node.getParameters());
 				result += ")";
@@ -1047,7 +1069,8 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 				else if (node.getParameters().size()> 0) {
 					result += "(" + ppComaSeparatedNodes(node.getParameters()) + ")";
 				} else {
-					result += "()";
+					// We have never passed here?
+					result += "();";
 				}
 			}
 		}
@@ -1063,15 +1086,25 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 			// the classic case : a list of parameters
 			else if (node.getParameters().size()> 0) {
 				result += "(" + ppComaSeparatedNodes(node.getParameters()) + ")";
-			} else {
-				result += "()";
 			}
 		}
-		return result + ";";
+		
+		return result;
 	}
 	
-	/** @see kermeta.visitor.KermetaVisitor#visit(kermeta.behavior.CallResult) */
-	public Object visitCallResult(CallResult node) { return "result"; }
+	/** @see kermeta.visitor.KermetaVisitor#visit(kermeta.behavior.CallResult)
+	 * @reqComp "comp_callResult"
+	 */
+	public Object visitCallResult(CallResult node) {
+		String result = "";
+		
+/*		if( node.getStaticType() != null ) {
+			result += accept(node.getStaticType()).toString();
+		}
+		*/
+		result += "result";
+		return result;
+	}
 	
 	/** 
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitCallValue(fr.irisa.triskell.kermeta.language.behavior.CallValue)
@@ -1088,7 +1121,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 		String result = KMTHelper.getMangledIdentifier(node.getName());
 		
 		if(result.contains("stdio")) {
-			result = "// fr.irisa.triskell.kermeta.compiler.basetypes.StdIO";
+			result = "StdIO";
 		}
 		
 		if (node.getParameters().size()> 0) {
@@ -1126,7 +1159,6 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 		return prefix;
 	}
 	
-	protected String prefixTab = "\t";
 	protected void pushPrefix() {
 		prefix = prefix + prefixTab;
 	}
@@ -1136,13 +1168,15 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	/**
+	 * To see this is used
 	 * @return Returns the imports.
 	 */
 	public ArrayList getImports() {
 		return imports;
 	}
 	/**
-	 * @return Returns the usings.
+	 * To see this is used
+	 * @return Returns the imports.
 	 */
 	public ArrayList getUsings() {
 		return usings;
@@ -1171,87 +1205,6 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	    return result_tagArray;
 	}
 	
-	
-	/**
-	 * PrettyPrint a simplified version of the property
-	 * (no tag, no getter and setter)
-	 * with its context (ie. class)
-	 * @param node
-	 * @return
-	 */
-	public String ppSimplifiedPropertyInContext(Property node){
-		String result="class "+node.getOwningClass().getName() + "{\n";
-		result += "\t...\n";
-		result += "\t" + ppSimplifiedProperty(node);
-		result += "\n\t...\n}";
-		return result;
-    }
-	/**
-	 * PrettyPrint a simplified version of the property
-	 * (no tag, no getter and setter)
-	 * @param node
-	 * @return
-	 */
-	public String ppSimplifiedProperty(Property node){
-    	String result="";
-    	if (node.isIsDerived()) result += "property ";
-		else if (node.isIsComposite()) result += "attribute ";
-		else result += "reference ";
-		if (node.isIsReadOnly()) result += "readonly ";
-		result += KMTHelper.getMangledIdentifier(node.getName()) + " : " + ppTypeFromMultiplicityElement(node);
-		if (node.getOpposite() != null) result += "#" + KMTHelper.getMangledIdentifier(node.getOpposite().getName());
-		return result;
-    }
-	
-	/**
-	 * PrettyPrint a simplified version of the operation
-	 * (no tag, no body)
-	 * with its context (ie. class)
-	 * @param node
-	 * @return
-	 */
-	public String ppSimplifiedFOperationInContext(Operation node){
-		String result="class "+ KMTHelper.getMangledIdentifier(node.getOwningClass().getName()) + "{\n\t...\n";
-		result += "\t" + ppSimplifiedFOperation(node);
-		result += "\n\t...\n}";
-		return result;
-    }
-	/**
-	 * PrettyPrint a simplified version of the operation
-	 * (no tag, no body)
-	 * @param node
-	 * @return
-	 */
-	public String ppSimplifiedFOperation(Operation node){
-    	String result="";
-    	if (node.getSuperOperation() != null) result += "method ";
-		else result += "operation ";
-		result += KMTHelper.getMangledIdentifier(node.getName());
-		if (node.getTypeParameter().size() > 0) {
-			result += "<";
-			result += ppTypeVariableDeclaration(node.getTypeParameter());
-			result += ">";
-		}
-		result += "(";
-		result += ppComaSeparatedNodes(node.getOwnedParameter());
-		result += ")";
-		if(node.getType() != null) {
-			result += " : " + ppTypeFromMultiplicityElement(node);
-		}
-	
-		if (node.getSuperOperation() != null) {
-			result += " from " + KMTHelper.getMangledIdentifier(NamedElementHelper.getMangledQualifiedName(node.getSuperOperation().getOwningClass(), NamedElementHelper.simplePointSeparator));
-		}
-		if (node.getRaisedException().size() > 0) {
-			result += " raises " + ppComaSeparatedNodes(node.getRaisedException());
-		}
-		if (node.isIsAbstract()) result += " is abstract";
-		else {
-			result += " is do ... end";
-		}
-		return result;
-    }
-
 	/**
 	 * Set the printing context. Printing kermeta programs changes if we are inside a classdefinition or not.
 	 * In particular, this context boolean is used when printing Enumeration or PrimitiveType : 
@@ -1262,7 +1215,6 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	public void setTypedef(boolean typedef) {
 		this.typedef = typedef;
 	}
-	
 	
 	/**
 	 * Tests whether the Type t corresponds to a Kermeta numerical type, which can be encoded
@@ -1300,4 +1252,13 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 		else
 			return false;
 	}
+
+	public HelperModel getHelperModel() {
+		return helperModel;
+	}
+
+	public void setHelperModel(HelperModel helperModel) {
+		this.helperModel = helperModel;
+	}
+	
 }
