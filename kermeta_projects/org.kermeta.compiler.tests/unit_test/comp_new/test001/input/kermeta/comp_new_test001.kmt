@@ -1,0 +1,20 @@
+@mainClass "comp_new_test001::Main"
+@mainOperation "main"
+
+package comp_new_test001;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main
+{
+    operation main() is do
+    	var a : A init A.new
+    	stdio.writeln("a: " + a.toString)
+    end    
+}
+
+class A
+{
+}
