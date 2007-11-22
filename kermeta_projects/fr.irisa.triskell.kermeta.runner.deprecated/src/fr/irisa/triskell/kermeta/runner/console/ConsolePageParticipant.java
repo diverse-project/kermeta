@@ -171,8 +171,7 @@ public class ConsolePageParticipant implements IConsolePageParticipant, IShowInS
 		
 	}
 
-	public void contextChanged(ContextEvent contextEvent) {
-		System.out.println();
+	public void contextChanged(ContextEvent contextEvent) {		
 	}
 
 
