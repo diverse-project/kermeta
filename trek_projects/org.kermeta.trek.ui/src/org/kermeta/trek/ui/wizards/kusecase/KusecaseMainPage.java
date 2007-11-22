@@ -44,7 +44,6 @@ public class KusecaseMainPage extends WizardPage implements Listener {
 		this.nameStatus=new Status(IStatus.OK, "not_used", 0, "", null);
 	}
 
-	@Override
 	public void handleEvent(Event event) {
 		 Status status = new Status(IStatus.OK, "not_used", 0, "", null);
 		 if (event.widget==this.name){
@@ -58,7 +57,6 @@ public class KusecaseMainPage extends WizardPage implements Listener {
 		 getWizard().getContainer().updateButtons();
 	}
 
-	@Override
 	public void createControl(Composite parent) {
 		GridData gd;
 		Composite composite =  new Composite(parent, SWT.NULL);

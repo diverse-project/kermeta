@@ -15,7 +15,6 @@ public abstract class KTreeObject implements IAdaptable {
 		this.name = name;
 	}
 
-	@Override
 	public Object getAdapter(Class adapter) {
 		// TODO Auto-generated method stub
 		return null;

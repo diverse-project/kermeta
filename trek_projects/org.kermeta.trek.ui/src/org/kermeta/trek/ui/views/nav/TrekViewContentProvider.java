@@ -24,7 +24,6 @@ public class TrekViewContentProvider implements IStructuredContentProvider,
 		this.view=viewSite;
 	}
 	
-	@Override
 	public Object[] getElements(Object inputElement) {
 		if (inputElement.equals(view)) {
 			if(!init){
@@ -35,19 +34,16 @@ public class TrekViewContentProvider implements IStructuredContentProvider,
 		return this.getChildren(inputElement);
 	}
 
-	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public Object[] getChildren(Object parentElement) {
 
 		if(parentElement instanceof KStaticElement){
@@ -75,7 +71,6 @@ public class TrekViewContentProvider implements IStructuredContentProvider,
 		//fill the elements
 	}
 
-	@Override
 	public Object getParent(Object element) {
 		if(element instanceof KStaticElement){
 			return ((KStaticElement)element);
@@ -89,7 +84,6 @@ public class TrekViewContentProvider implements IStructuredContentProvider,
 		return null;
 	}
 
-	@Override
 	public boolean hasChildren(Object element) {
 		if(element instanceof KStaticElement){
 			return ((KStaticElement)element).hasFamily();

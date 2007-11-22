@@ -28,7 +28,7 @@ public class KusecaseWizard extends Wizard implements INewWizard {
 		}
 		return true;
 	}
-	@Override
+
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		// TODO Auto-generated method stub
 		this.workbench = workbench;
