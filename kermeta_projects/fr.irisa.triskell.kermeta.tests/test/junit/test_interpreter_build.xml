@@ -1,4 +1,4 @@
-<!-- $Id: test_interpreter_build.xml,v 1.12 2007-11-23 10:41:34 dvojtise Exp $ -->
+<!-- $Id: test_interpreter_build.xml,v 1.13 2007-11-23 10:50:22 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
@@ -48,6 +48,7 @@
 	<property name="core.jobs.jar" location="${eclipse.home}/plugins/org.eclipse.core.jobs_3.3.0.v20070423.jar" />
 	<property name="core.resources.jar" location="${eclipse.home}/plugins/org.eclipse.core.resources_3.3.0.v20070604.jar" />
 	<property name="ui.workbench.jar" location="${eclipse.home}/plugins/org.eclipse.ui.workbench_3.3.0.I20070608-1100.jar" />
+	<property name="ui.console.jar" location="${eclipse.home}/plugins/org.eclipse.ui.console_3.2.0.v20070530.jar" />
 	<property name="jface.jar" location="${eclipse.home}/plugins/org.eclipse.jface_3.3.0.I20070606-0010.jar" />
 	<property name="swt.jar" location="${eclipse.home}/plugins/org.eclipse.swt.gtk.linux.x86_3.3.0.v3346.jar" />
 	<property name="emf.compare.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare_0.8.0.v200710050855.jar" />
@@ -79,6 +80,7 @@
 		<pathelement location="${core.runtime.jar}" />
 		<pathelement location="${core.resources.jar}" />
 		<pathelement location="${ui.workbench.jar}" />
+		<pathelement location="${ui.console.jar}" />
 		<pathelement location="${jface.jar}" />
 		<pathelement location="${swt.jar}" />
 		<pathelement location="${core.jobs.jar}" />
