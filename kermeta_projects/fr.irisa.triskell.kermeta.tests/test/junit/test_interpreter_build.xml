@@ -1,4 +1,4 @@
-<!-- $Id: test_interpreter_build.xml,v 1.11 2007-11-22 16:21:23 dvojtise Exp $ -->
+<!-- $Id: test_interpreter_build.xml,v 1.12 2007-11-23 10:41:34 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
@@ -30,6 +30,7 @@
 	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\@dot" />
 	<property name="kermeta.merger.jar" location="..\..\..\org.kermeta.merger\@dot" />
 	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.traceability.model\@dot" />
+	<property name="kermeta.tests.jar" location="..\..\..\fr.irisa.triskell.kermeta.tests\@dot" />
 
 	<property name="log4j.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\lib\thirdparty\log4j.jar" />
 	<property name="antlr.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\lib\thirdparty\antlr.jar" />
@@ -61,6 +62,7 @@
 		<pathelement location="${kermeta.io.jar}" />
 		<pathelement location="${kermeta.merger.jar}" />
 		<pathelement location="${kermeta.model.jar}" />
+		<pathelement location="${kermeta.tests.jar}" />
 		<pathelement location="${triskell.eclipse.util.jar}" />
 		<pathelement location="${traceability.jar}" />
 		<pathelement location="${emf.common.jar}" />
