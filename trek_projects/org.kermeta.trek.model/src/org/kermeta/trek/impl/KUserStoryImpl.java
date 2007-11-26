@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KUserStoryImpl.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
+ * $Id: KUserStoryImpl.java,v 1.4 2007-11-26 17:04:18 cfaucher Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -34,9 +33,7 @@ import org.kermeta.trek.TrekPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.kermeta.trek.impl.KUserStoryImpl#getCoveredBy <em>Covered By</em>}</li>
- *   <li>{@link org.kermeta.trek.impl.KUserStoryImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.kermeta.trek.impl.KUserStoryImpl#getId <em>Id</em>}</li>
- *   <li>{@link org.kermeta.trek.impl.KUserStoryImpl#getSummary <em>Summary</em>}</li>
  *   <li>{@link org.kermeta.trek.impl.KUserStoryImpl#getShortSummary <em>Short Summary</em>}</li>
  * </ul>
  * </p>
@@ -53,26 +50,6 @@ public class KUserStoryImpl extends TrekModelElementImpl implements KUserStory {
 	 * @ordered
 	 */
 	protected EList<KUseCase> coveredBy;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = "";
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -93,26 +70,6 @@ public class KUserStoryImpl extends TrekModelElementImpl implements KUserStory {
 	 * @ordered
 	 */
 	protected String id = ID_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getSummary() <em>Summary</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSummary()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SUMMARY_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSummary() <em>Summary</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSummary()
-	 * @generated
-	 * @ordered
-	 */
-	protected String summary = SUMMARY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getShortSummary() <em>Short Summary</em>}' attribute.
@@ -170,27 +127,6 @@ public class KUserStoryImpl extends TrekModelElementImpl implements KUserStory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrekPackage.KUSER_STORY__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getId() {
 		return id;
 	}
@@ -205,27 +141,6 @@ public class KUserStoryImpl extends TrekModelElementImpl implements KUserStory {
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrekPackage.KUSER_STORY__ID, oldId, id));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getSummary() {
-		return summary;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSummary(String newSummary) {
-		String oldSummary = summary;
-		summary = newSummary;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrekPackage.KUSER_STORY__SUMMARY, oldSummary, summary));
 	}
 
 	/**
@@ -288,12 +203,8 @@ public class KUserStoryImpl extends TrekModelElementImpl implements KUserStory {
 		switch (featureID) {
 			case TrekPackage.KUSER_STORY__COVERED_BY:
 				return getCoveredBy();
-			case TrekPackage.KUSER_STORY__NAME:
-				return getName();
 			case TrekPackage.KUSER_STORY__ID:
 				return getId();
-			case TrekPackage.KUSER_STORY__SUMMARY:
-				return getSummary();
 			case TrekPackage.KUSER_STORY__SHORT_SUMMARY:
 				return getShortSummary();
 		}
@@ -313,14 +224,8 @@ public class KUserStoryImpl extends TrekModelElementImpl implements KUserStory {
 				getCoveredBy().clear();
 				getCoveredBy().addAll((Collection<? extends KUseCase>)newValue);
 				return;
-			case TrekPackage.KUSER_STORY__NAME:
-				setName((String)newValue);
-				return;
 			case TrekPackage.KUSER_STORY__ID:
 				setId((String)newValue);
-				return;
-			case TrekPackage.KUSER_STORY__SUMMARY:
-				setSummary((String)newValue);
 				return;
 			case TrekPackage.KUSER_STORY__SHORT_SUMMARY:
 				setShortSummary((String)newValue);
@@ -340,14 +245,8 @@ public class KUserStoryImpl extends TrekModelElementImpl implements KUserStory {
 			case TrekPackage.KUSER_STORY__COVERED_BY:
 				getCoveredBy().clear();
 				return;
-			case TrekPackage.KUSER_STORY__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case TrekPackage.KUSER_STORY__ID:
 				setId(ID_EDEFAULT);
-				return;
-			case TrekPackage.KUSER_STORY__SUMMARY:
-				setSummary(SUMMARY_EDEFAULT);
 				return;
 			case TrekPackage.KUSER_STORY__SHORT_SUMMARY:
 				setShortSummary(SHORT_SUMMARY_EDEFAULT);
@@ -366,12 +265,8 @@ public class KUserStoryImpl extends TrekModelElementImpl implements KUserStory {
 		switch (featureID) {
 			case TrekPackage.KUSER_STORY__COVERED_BY:
 				return coveredBy != null && !coveredBy.isEmpty();
-			case TrekPackage.KUSER_STORY__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TrekPackage.KUSER_STORY__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case TrekPackage.KUSER_STORY__SUMMARY:
-				return SUMMARY_EDEFAULT == null ? summary != null : !SUMMARY_EDEFAULT.equals(summary);
 			case TrekPackage.KUSER_STORY__SHORT_SUMMARY:
 				return SHORT_SUMMARY_EDEFAULT == null ? shortSummary != null : !SHORT_SUMMARY_EDEFAULT.equals(shortSummary);
 		}
@@ -388,12 +283,8 @@ public class KUserStoryImpl extends TrekModelElementImpl implements KUserStory {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", id: ");
+		result.append(" (id: ");
 		result.append(id);
-		result.append(", summary: ");
-		result.append(summary);
 		result.append(", shortSummary: ");
 		result.append(shortSummary);
 		result.append(')');

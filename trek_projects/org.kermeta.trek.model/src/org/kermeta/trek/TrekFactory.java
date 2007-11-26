@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekFactory.java,v 1.2 2007-10-16 08:20:33 cfaucher Exp $
+ * $Id: TrekFactory.java,v 1.3 2007-11-26 17:04:18 cfaucher Exp $
  */
 package org.kermeta.trek;
 
@@ -69,6 +69,15 @@ public interface TrekFactory extends EFactory {
 	 * @generated
 	 */
 	KTagElement createKTagElement();
+
+	/**
+	 * Returns a new object of class '<em>KStatus</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>KStatus</em>'.
+	 * @generated
+	 */
+	KStatus createKStatus();
 
 	/**
 	 * Returns the package supported by this factory.

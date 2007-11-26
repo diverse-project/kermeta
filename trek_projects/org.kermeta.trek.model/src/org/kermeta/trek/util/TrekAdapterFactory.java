@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekAdapterFactory.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
+ * $Id: TrekAdapterFactory.java,v 1.4 2007-11-26 17:04:19 cfaucher Exp $
  */
 package org.kermeta.trek.util;
 
@@ -94,6 +94,10 @@ public class TrekAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTrekModelElement(TrekModelElement object) {
 				return createTrekModelElementAdapter();
+			}
+			@Override
+			public Adapter caseKStatus(KStatus object) {
+				return createKStatusAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -196,6 +200,20 @@ public class TrekAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTrekModelElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.trek.KStatus <em>KStatus</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.trek.KStatus
+	 * @generated
+	 */
+	public Adapter createKStatusAdapter() {
 		return null;
 	}
 

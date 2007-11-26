@@ -2,13 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KUseCase.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
+ * $Id: KUseCase.java,v 1.4 2007-11-26 17:04:18 cfaucher Exp $
  */
 package org.kermeta.trek;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,9 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.trek.KUseCase#getName <em>Name</em>}</li>
  *   <li>{@link org.kermeta.trek.KUseCase#getId <em>Id</em>}</li>
- *   <li>{@link org.kermeta.trek.KUseCase#getSummary <em>Summary</em>}</li>
  *   <li>{@link org.kermeta.trek.KUseCase#getShortSummary <em>Short Summary</em>}</li>
  *   <li>{@link org.kermeta.trek.KUseCase#getUse <em>Use</em>}</li>
  *   <li>{@link org.kermeta.trek.KUseCase#getUsedBy <em>Used By</em>}</li>
@@ -30,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.kermeta.trek.KUseCase#getCovers <em>Covers</em>}</li>
  *   <li>{@link org.kermeta.trek.KUseCase#getLevel <em>Level</em>}</li>
  *   <li>{@link org.kermeta.trek.KUseCase#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.kermeta.trek.KUseCase#getStatus <em>Status</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,33 +35,6 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface KUseCase extends TrekModelElement {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * The default value is <code>""</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.kermeta.trek.TrekPackage#getKUseCase_Name()
-	 * @model default="" required="true"
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.trek.KUseCase#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -92,32 +62,6 @@ public interface KUseCase extends TrekModelElement {
 	void setId(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Summary</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Summary</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Summary</em>' attribute.
-	 * @see #setSummary(String)
-	 * @see org.kermeta.trek.TrekPackage#getKUseCase_Summary()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getSummary();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.trek.KUseCase#getSummary <em>Summary</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Summary</em>' attribute.
-	 * @see #getSummary()
-	 * @generated
-	 */
-	void setSummary(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Short Summary</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -128,7 +72,7 @@ public interface KUseCase extends TrekModelElement {
 	 * @return the value of the '<em>Short Summary</em>' attribute.
 	 * @see #setShortSummary(String)
 	 * @see org.kermeta.trek.TrekPackage#getKUseCase_ShortSummary()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getShortSummary();
@@ -182,6 +126,7 @@ public interface KUseCase extends TrekModelElement {
 	/**
 	 * Returns the value of the '<em><b>Verified By</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.trek.KTestCase}.
+	 * It is bidirectional and its opposite is '{@link org.kermeta.trek.KTestCase#getVerifies <em>Verifies</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Verified By</em>' reference list isn't clear,
@@ -190,7 +135,8 @@ public interface KUseCase extends TrekModelElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Verified By</em>' reference list.
 	 * @see org.kermeta.trek.TrekPackage#getKUseCase_VerifiedBy()
-	 * @model
+	 * @see org.kermeta.trek.KTestCase#getVerifies
+	 * @model opposite="verifies"
 	 * @generated
 	 */
 	EList<KTestCase> getVerifiedBy();
@@ -303,5 +249,21 @@ public interface KUseCase extends TrekModelElement {
 	 * @generated
 	 */
 	EList<KTagElement> getTags();
+
+	/**
+	 * Returns the value of the '<em><b>Status</b></em>' containment reference list.
+	 * The list contents are of type {@link org.kermeta.trek.KStatus}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Status</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Status</em>' containment reference list.
+	 * @see org.kermeta.trek.TrekPackage#getKUseCase_Status()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<KStatus> getStatus();
 
 } // KUseCase

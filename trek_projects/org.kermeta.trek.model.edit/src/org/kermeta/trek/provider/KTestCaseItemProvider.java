@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KTestCaseItemProvider.java,v 1.1 2007-10-16 08:22:56 cfaucher Exp $
+ * $Id: KTestCaseItemProvider.java,v 1.2 2007-11-26 17:04:15 cfaucher Exp $
  */
 package org.kermeta.trek.provider;
 
@@ -23,7 +23,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.kermeta.trek.KTestCase;
@@ -36,7 +35,7 @@ import org.kermeta.trek.TrekPackage;
  * @generated
  */
 public class KTestCaseItemProvider
-	extends ItemProviderAdapter
+	extends TrekModelElementItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -65,8 +64,9 @@ public class KTestCaseItemProvider
 			super.getPropertyDescriptors(object);
 
 			addVerifiesPropertyDescriptor(object);
-			addTestCasePropertyDescriptor(object);
-			addFilePropertyDescriptor(object);
+			addUriPropertyDescriptor(object);
+			addTypePropertyDescriptor(object);
+			addResultIdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -94,19 +94,19 @@ public class KTestCaseItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Test Case feature.
+	 * This adds a property descriptor for the Uri feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTestCasePropertyDescriptor(Object object) {
+	protected void addUriPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_KTestCase_testCase_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_KTestCase_testCase_feature", "_UI_KTestCase_type"),
-				 TrekPackage.Literals.KTEST_CASE__TEST_CASE,
+				 getString("_UI_KTestCase_uri_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_KTestCase_uri_feature", "_UI_KTestCase_type"),
+				 TrekPackage.Literals.KTEST_CASE__URI,
 				 true,
 				 false,
 				 false,
@@ -116,19 +116,41 @@ public class KTestCaseItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the File feature.
+	 * This adds a property descriptor for the Type feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addFilePropertyDescriptor(Object object) {
+	protected void addTypePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_KTestCase_file_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_KTestCase_file_feature", "_UI_KTestCase_type"),
-				 TrekPackage.Literals.KTEST_CASE__FILE,
+				 getString("_UI_KTestCase_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_KTestCase_type_feature", "_UI_KTestCase_type"),
+				 TrekPackage.Literals.KTEST_CASE__TYPE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Result Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addResultIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_KTestCase_resultId_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_KTestCase_resultId_feature", "_UI_KTestCase_type"),
+				 TrekPackage.Literals.KTEST_CASE__RESULT_ID,
 				 true,
 				 false,
 				 false,
@@ -156,7 +178,7 @@ public class KTestCaseItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((KTestCase)object).getTestCase();
+		String label = ((KTestCase)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_KTestCase_type") :
 			getString("_UI_KTestCase_type") + " " + label;
@@ -174,8 +196,9 @@ public class KTestCaseItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(KTestCase.class)) {
-			case TrekPackage.KTEST_CASE__TEST_CASE:
-			case TrekPackage.KTEST_CASE__FILE:
+			case TrekPackage.KTEST_CASE__URI:
+			case TrekPackage.KTEST_CASE__TYPE:
+			case TrekPackage.KTEST_CASE__RESULT_ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

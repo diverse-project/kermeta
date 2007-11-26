@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekActionBarContributor.java,v 1.1 2007-10-16 08:22:52 cfaucher Exp $
+ * $Id: TrekActionBarContributor.java,v 1.2 2007-11-26 17:04:12 cfaucher Exp $
  */
 package org.kermeta.trek.presentation;
 

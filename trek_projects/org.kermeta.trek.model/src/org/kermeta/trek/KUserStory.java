@@ -2,13 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KUserStory.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
+ * $Id: KUserStory.java,v 1.4 2007-11-26 17:04:18 cfaucher Exp $
  */
 package org.kermeta.trek;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,9 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.kermeta.trek.KUserStory#getCoveredBy <em>Covered By</em>}</li>
- *   <li>{@link org.kermeta.trek.KUserStory#getName <em>Name</em>}</li>
  *   <li>{@link org.kermeta.trek.KUserStory#getId <em>Id</em>}</li>
- *   <li>{@link org.kermeta.trek.KUserStory#getSummary <em>Summary</em>}</li>
  *   <li>{@link org.kermeta.trek.KUserStory#getShortSummary <em>Short Summary</em>}</li>
  * </ul>
  * </p>
@@ -50,33 +46,6 @@ public interface KUserStory extends TrekModelElement {
 	EList<KUseCase> getCoveredBy();
 
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * The default value is <code>""</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.kermeta.trek.TrekPackage#getKUserStory_Name()
-	 * @model default="" required="true"
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.trek.KUserStory#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -103,32 +72,6 @@ public interface KUserStory extends TrekModelElement {
 	void setId(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Summary</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Summary</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Summary</em>' attribute.
-	 * @see #setSummary(String)
-	 * @see org.kermeta.trek.TrekPackage#getKUserStory_Summary()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getSummary();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.trek.KUserStory#getSummary <em>Summary</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Summary</em>' attribute.
-	 * @see #getSummary()
-	 * @generated
-	 */
-	void setSummary(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Short Summary</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -139,7 +82,7 @@ public interface KUserStory extends TrekModelElement {
 	 * @return the value of the '<em>Short Summary</em>' attribute.
 	 * @see #setShortSummary(String)
 	 * @see org.kermeta.trek.TrekPackage#getKUserStory_ShortSummary()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getShortSummary();

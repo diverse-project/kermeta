@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UseKaseModel.java,v 1.2 2007-10-16 08:20:33 cfaucher Exp $
+ * $Id: UseKaseModel.java,v 1.3 2007-11-26 17:04:18 cfaucher Exp $
  */
 package org.kermeta.trek;
 
@@ -64,7 +64,7 @@ public interface UseKaseModel extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Ktags</b></em>' containment reference list.
-	 * The list contents are of type {@link org.kermeta.trek.KTestCase}.
+	 * The list contents are of type {@link org.kermeta.trek.KTagElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Ktags</em>' containment reference list isn't clear,
@@ -76,7 +76,7 @@ public interface UseKaseModel extends EObject {
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList<KTestCase> getKtags();
+	EList<KTagElement> getKtags();
 
 	/**
 	 * Returns the value of the '<em><b>Kuser Stories</b></em>' containment reference list.
@@ -93,5 +93,13 @@ public interface UseKaseModel extends EObject {
 	 * @generated
 	 */
 	EList<KUserStory> getKuserStories();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	KUseCase getUseCaseByTags(KTagElement tags);
 
 } // UseKaseModel

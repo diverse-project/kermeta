@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekModelElementImpl.java,v 1.2 2007-11-26 17:04:18 cfaucher Exp $
+ * $Id: KStatusImpl.java,v 1.1 2007-11-26 17:04:18 cfaucher Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -11,72 +11,71 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.kermeta.trek.TrekModelElement;
+import org.kermeta.trek.KStatus;
 import org.kermeta.trek.TrekPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model Element</b></em>'.
+ * An implementation of the model object '<em><b>KStatus</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.trek.impl.TrekModelElementImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.kermeta.trek.impl.TrekModelElementImpl#getSummary <em>Summary</em>}</li>
+ *   <li>{@link org.kermeta.trek.impl.KStatusImpl#getProgress <em>Progress</em>}</li>
+ *   <li>{@link org.kermeta.trek.impl.KStatusImpl#getKey <em>Key</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class TrekModelElementImpl extends EObjectImpl implements TrekModelElement {
+public class KStatusImpl extends TrekModelElementImpl implements KStatus {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getProgress() <em>Progress</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getProgress()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+	protected static final int PROGRESS_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getProgress() <em>Progress</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getProgress()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
+	protected int progress = PROGRESS_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getSummary() <em>Summary</em>}' attribute.
+	 * The default value of the '{@link #getKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSummary()
+	 * @see #getKey()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String SUMMARY_EDEFAULT = "";
+	protected static final String KEY_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getSummary() <em>Summary</em>}' attribute.
+	 * The cached value of the '{@link #getKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSummary()
+	 * @see #getKey()
 	 * @generated
 	 * @ordered
 	 */
-	protected String summary = SUMMARY_EDEFAULT;
+	protected String key = KEY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TrekModelElementImpl() {
+	protected KStatusImpl() {
 		super();
 	}
 
@@ -87,7 +86,7 @@ public abstract class TrekModelElementImpl extends EObjectImpl implements TrekMo
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TrekPackage.Literals.TREK_MODEL_ELEMENT;
+		return TrekPackage.Literals.KSTATUS;
 	}
 
 	/**
@@ -95,8 +94,8 @@ public abstract class TrekModelElementImpl extends EObjectImpl implements TrekMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
+	public int getProgress() {
+		return progress;
 	}
 
 	/**
@@ -104,11 +103,11 @@ public abstract class TrekModelElementImpl extends EObjectImpl implements TrekMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
+	public void setProgress(int newProgress) {
+		int oldProgress = progress;
+		progress = newProgress;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrekPackage.TREK_MODEL_ELEMENT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, TrekPackage.KSTATUS__PROGRESS, oldProgress, progress));
 	}
 
 	/**
@@ -116,8 +115,8 @@ public abstract class TrekModelElementImpl extends EObjectImpl implements TrekMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getSummary() {
-		return summary;
+	public String getKey() {
+		return key;
 	}
 
 	/**
@@ -125,11 +124,11 @@ public abstract class TrekModelElementImpl extends EObjectImpl implements TrekMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSummary(String newSummary) {
-		String oldSummary = summary;
-		summary = newSummary;
+	public void setKey(String newKey) {
+		String oldKey = key;
+		key = newKey;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrekPackage.TREK_MODEL_ELEMENT__SUMMARY, oldSummary, summary));
+			eNotify(new ENotificationImpl(this, Notification.SET, TrekPackage.KSTATUS__KEY, oldKey, key));
 	}
 
 	/**
@@ -140,10 +139,10 @@ public abstract class TrekModelElementImpl extends EObjectImpl implements TrekMo
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TrekPackage.TREK_MODEL_ELEMENT__NAME:
-				return getName();
-			case TrekPackage.TREK_MODEL_ELEMENT__SUMMARY:
-				return getSummary();
+			case TrekPackage.KSTATUS__PROGRESS:
+				return new Integer(getProgress());
+			case TrekPackage.KSTATUS__KEY:
+				return getKey();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,11 +155,11 @@ public abstract class TrekModelElementImpl extends EObjectImpl implements TrekMo
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TrekPackage.TREK_MODEL_ELEMENT__NAME:
-				setName((String)newValue);
+			case TrekPackage.KSTATUS__PROGRESS:
+				setProgress(((Integer)newValue).intValue());
 				return;
-			case TrekPackage.TREK_MODEL_ELEMENT__SUMMARY:
-				setSummary((String)newValue);
+			case TrekPackage.KSTATUS__KEY:
+				setKey((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -174,11 +173,11 @@ public abstract class TrekModelElementImpl extends EObjectImpl implements TrekMo
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TrekPackage.TREK_MODEL_ELEMENT__NAME:
-				setName(NAME_EDEFAULT);
+			case TrekPackage.KSTATUS__PROGRESS:
+				setProgress(PROGRESS_EDEFAULT);
 				return;
-			case TrekPackage.TREK_MODEL_ELEMENT__SUMMARY:
-				setSummary(SUMMARY_EDEFAULT);
+			case TrekPackage.KSTATUS__KEY:
+				setKey(KEY_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -192,10 +191,10 @@ public abstract class TrekModelElementImpl extends EObjectImpl implements TrekMo
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TrekPackage.TREK_MODEL_ELEMENT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case TrekPackage.TREK_MODEL_ELEMENT__SUMMARY:
-				return SUMMARY_EDEFAULT == null ? summary != null : !SUMMARY_EDEFAULT.equals(summary);
+			case TrekPackage.KSTATUS__PROGRESS:
+				return progress != PROGRESS_EDEFAULT;
+			case TrekPackage.KSTATUS__KEY:
+				return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -210,12 +209,12 @@ public abstract class TrekModelElementImpl extends EObjectImpl implements TrekMo
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", summary: ");
-		result.append(summary);
+		result.append(" (progress: ");
+		result.append(progress);
+		result.append(", key: ");
+		result.append(key);
 		result.append(')');
 		return result.toString();
 	}
 
-} //TrekModelElementImpl
+} //KStatusImpl

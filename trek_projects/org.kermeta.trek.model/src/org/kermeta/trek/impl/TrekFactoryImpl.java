@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekFactoryImpl.java,v 1.2 2007-10-16 08:20:33 cfaucher Exp $
+ * $Id: TrekFactoryImpl.java,v 1.3 2007-11-26 17:04:18 cfaucher Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -66,6 +66,7 @@ public class TrekFactoryImpl extends EFactoryImpl implements TrekFactory {
 			case TrekPackage.KTEST_CASE: return createKTestCase();
 			case TrekPackage.KUSER_STORY: return createKUserStory();
 			case TrekPackage.KTAG_ELEMENT: return createKTagElement();
+			case TrekPackage.KSTATUS: return createKStatus();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -81,6 +82,8 @@ public class TrekFactoryImpl extends EFactoryImpl implements TrekFactory {
 		switch (eDataType.getClassifierID()) {
 			case TrekPackage.KUSE_LEVEL:
 				return createKUseLevelFromString(eDataType, initialValue);
+			case TrekPackage.KTEST_CASE_TYPE:
+				return createKTestCaseTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -96,6 +99,8 @@ public class TrekFactoryImpl extends EFactoryImpl implements TrekFactory {
 		switch (eDataType.getClassifierID()) {
 			case TrekPackage.KUSE_LEVEL:
 				return convertKUseLevelToString(eDataType, instanceValue);
+			case TrekPackage.KTEST_CASE_TYPE:
+				return convertKTestCaseTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -156,6 +161,16 @@ public class TrekFactoryImpl extends EFactoryImpl implements TrekFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public KStatus createKStatus() {
+		KStatusImpl kStatus = new KStatusImpl();
+		return kStatus;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public KUseLevel createKUseLevelFromString(EDataType eDataType, String initialValue) {
 		KUseLevel result = KUseLevel.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -168,6 +183,26 @@ public class TrekFactoryImpl extends EFactoryImpl implements TrekFactory {
 	 * @generated
 	 */
 	public String convertKUseLevelToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KTestCaseType createKTestCaseTypeFromString(EDataType eDataType, String initialValue) {
+		KTestCaseType result = KTestCaseType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertKTestCaseTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

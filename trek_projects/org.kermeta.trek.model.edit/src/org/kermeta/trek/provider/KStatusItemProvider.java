@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UseKaseModelItemProvider.java,v 1.2 2007-11-26 17:04:15 cfaucher Exp $
+ * $Id: KStatusItemProvider.java,v 1.1 2007-11-26 17:04:15 cfaucher Exp $
  */
 package org.kermeta.trek.provider;
 
@@ -15,29 +15,27 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
-
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.kermeta.trek.TrekFactory;
+import org.kermeta.trek.KStatus;
 import org.kermeta.trek.TrekPackage;
-import org.kermeta.trek.UseKaseModel;
 
 /**
- * This is the item provider adapter for a {@link org.kermeta.trek.UseKaseModel} object.
+ * This is the item provider adapter for a {@link org.kermeta.trek.KStatus} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class UseKaseModelItemProvider
-	extends ItemProviderAdapter
+public class KStatusItemProvider
+	extends TrekModelElementItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -50,7 +48,7 @@ public class UseKaseModelItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UseKaseModelItemProvider(AdapterFactory adapterFactory) {
+	public KStatusItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -65,52 +63,65 @@ public class UseKaseModelItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addProgressPropertyDescriptor(object);
+			addKeyPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * This adds a property descriptor for the Progress feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(TrekPackage.Literals.USE_KASE_MODEL__KUSE_CASES);
-			childrenFeatures.add(TrekPackage.Literals.USE_KASE_MODEL__KTEST_CASES);
-			childrenFeatures.add(TrekPackage.Literals.USE_KASE_MODEL__KTAGS);
-			childrenFeatures.add(TrekPackage.Literals.USE_KASE_MODEL__KUSER_STORIES);
-		}
-		return childrenFeatures;
+	protected void addProgressPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_KStatus_progress_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_KStatus_progress_feature", "_UI_KStatus_type"),
+				 TrekPackage.Literals.KSTATUS__PROGRESS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
+	 * This adds a property descriptor for the Key feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
+	protected void addKeyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_KStatus_key_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_KStatus_key_feature", "_UI_KStatus_type"),
+				 TrekPackage.Literals.KSTATUS__KEY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This returns UseKaseModel.gif.
+	 * This returns KStatus.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/UseKaseModel"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/KStatus"));
 	}
 
 	/**
@@ -121,7 +132,10 @@ public class UseKaseModelItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_UseKaseModel_type");
+		String label = ((KStatus)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_KStatus_type") :
+			getString("_UI_KStatus_type") + " " + label;
 	}
 
 	/**
@@ -135,12 +149,10 @@ public class UseKaseModelItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(UseKaseModel.class)) {
-			case TrekPackage.USE_KASE_MODEL__KUSE_CASES:
-			case TrekPackage.USE_KASE_MODEL__KTEST_CASES:
-			case TrekPackage.USE_KASE_MODEL__KTAGS:
-			case TrekPackage.USE_KASE_MODEL__KUSER_STORIES:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+		switch (notification.getFeatureID(KStatus.class)) {
+			case TrekPackage.KSTATUS__PROGRESS:
+			case TrekPackage.KSTATUS__KEY:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -156,26 +168,6 @@ public class UseKaseModelItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrekPackage.Literals.USE_KASE_MODEL__KUSE_CASES,
-				 TrekFactory.eINSTANCE.createKUseCase()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrekPackage.Literals.USE_KASE_MODEL__KTEST_CASES,
-				 TrekFactory.eINSTANCE.createKTestCase()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrekPackage.Literals.USE_KASE_MODEL__KTAGS,
-				 TrekFactory.eINSTANCE.createKTagElement()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrekPackage.Literals.USE_KASE_MODEL__KUSER_STORIES,
-				 TrekFactory.eINSTANCE.createKUserStory()));
 	}
 
 	/**

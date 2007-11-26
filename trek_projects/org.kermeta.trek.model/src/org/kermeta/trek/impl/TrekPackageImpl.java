@@ -2,20 +2,23 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekPackageImpl.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
+ * $Id: TrekPackageImpl.java,v 1.4 2007-11-26 17:04:18 cfaucher Exp $
  */
 package org.kermeta.trek.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.kermeta.trek.KStatus;
 import org.kermeta.trek.KTagElement;
 import org.kermeta.trek.KTestCase;
+import org.kermeta.trek.KTestCaseType;
 import org.kermeta.trek.KUseCase;
 import org.kermeta.trek.KUseLevel;
 import org.kermeta.trek.KUserStory;
@@ -78,7 +81,21 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass kStatusEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum kUseLevelEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum kTestCaseTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -207,7 +224,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKUseCase_Name() {
+	public EAttribute getKUseCase_Id() {
 		return (EAttribute)kUseCaseEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -216,7 +233,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKUseCase_Id() {
+	public EAttribute getKUseCase_ShortSummary() {
 		return (EAttribute)kUseCaseEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -225,26 +242,8 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKUseCase_Summary() {
-		return (EAttribute)kUseCaseEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getKUseCase_ShortSummary() {
-		return (EAttribute)kUseCaseEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getKUseCase_Use() {
-		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(4);
+		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -253,7 +252,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * @generated
 	 */
 	public EReference getKUseCase_UsedBy() {
-		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(5);
+		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -262,7 +261,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * @generated
 	 */
 	public EReference getKUseCase_VerifiedBy() {
-		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(6);
+		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -271,7 +270,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * @generated
 	 */
 	public EReference getKUseCase_Refines() {
-		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(7);
+		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -280,7 +279,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * @generated
 	 */
 	public EReference getKUseCase_RefinedBy() {
-		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(8);
+		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -289,7 +288,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * @generated
 	 */
 	public EReference getKUseCase_Covers() {
-		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(9);
+		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -298,7 +297,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * @generated
 	 */
 	public EAttribute getKUseCase_Level() {
-		return (EAttribute)kUseCaseEClass.getEStructuralFeatures().get(10);
+		return (EAttribute)kUseCaseEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -307,7 +306,16 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * @generated
 	 */
 	public EReference getKUseCase_Tags() {
-		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(11);
+		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getKUseCase_Status() {
+		return (EReference)kUseCaseEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -333,7 +341,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKTestCase_TestCase() {
+	public EAttribute getKTestCase_Uri() {
 		return (EAttribute)kTestCaseEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -342,8 +350,17 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKTestCase_File() {
+	public EAttribute getKTestCase_Type() {
 		return (EAttribute)kTestCaseEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKTestCase_ResultId() {
+		return (EAttribute)kTestCaseEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -369,7 +386,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKUserStory_Name() {
+	public EAttribute getKUserStory_Id() {
 		return (EAttribute)kUserStoryEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -378,26 +395,8 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKUserStory_Id() {
-		return (EAttribute)kUserStoryEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getKUserStory_Summary() {
-		return (EAttribute)kUserStoryEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getKUserStory_ShortSummary() {
-		return (EAttribute)kUserStoryEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)kUserStoryEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -414,24 +413,6 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKTagElement_Concept() {
-		return (EAttribute)kTagElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getKTagElement_Name() {
-		return (EAttribute)kTagElementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getTrekModelElement() {
 		return trekModelElementEClass;
 	}
@@ -441,8 +422,62 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTrekModelElement_Name() {
+		return (EAttribute)trekModelElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTrekModelElement_Summary() {
+		return (EAttribute)trekModelElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getKStatus() {
+		return kStatusEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKStatus_Progress() {
+		return (EAttribute)kStatusEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKStatus_Key() {
+		return (EAttribute)kStatusEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getKUseLevel() {
 		return kUseLevelEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getKTestCaseType() {
+		return kTestCaseTypeEEnum;
 	}
 
 	/**
@@ -480,9 +515,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 		createEReference(useKaseModelEClass, USE_KASE_MODEL__KUSER_STORIES);
 
 		kUseCaseEClass = createEClass(KUSE_CASE);
-		createEAttribute(kUseCaseEClass, KUSE_CASE__NAME);
 		createEAttribute(kUseCaseEClass, KUSE_CASE__ID);
-		createEAttribute(kUseCaseEClass, KUSE_CASE__SUMMARY);
 		createEAttribute(kUseCaseEClass, KUSE_CASE__SHORT_SUMMARY);
 		createEReference(kUseCaseEClass, KUSE_CASE__USE);
 		createEReference(kUseCaseEClass, KUSE_CASE__USED_BY);
@@ -492,27 +525,32 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 		createEReference(kUseCaseEClass, KUSE_CASE__COVERS);
 		createEAttribute(kUseCaseEClass, KUSE_CASE__LEVEL);
 		createEReference(kUseCaseEClass, KUSE_CASE__TAGS);
+		createEReference(kUseCaseEClass, KUSE_CASE__STATUS);
 
 		kTestCaseEClass = createEClass(KTEST_CASE);
 		createEReference(kTestCaseEClass, KTEST_CASE__VERIFIES);
-		createEAttribute(kTestCaseEClass, KTEST_CASE__TEST_CASE);
-		createEAttribute(kTestCaseEClass, KTEST_CASE__FILE);
+		createEAttribute(kTestCaseEClass, KTEST_CASE__URI);
+		createEAttribute(kTestCaseEClass, KTEST_CASE__TYPE);
+		createEAttribute(kTestCaseEClass, KTEST_CASE__RESULT_ID);
 
 		kUserStoryEClass = createEClass(KUSER_STORY);
 		createEReference(kUserStoryEClass, KUSER_STORY__COVERED_BY);
-		createEAttribute(kUserStoryEClass, KUSER_STORY__NAME);
 		createEAttribute(kUserStoryEClass, KUSER_STORY__ID);
-		createEAttribute(kUserStoryEClass, KUSER_STORY__SUMMARY);
 		createEAttribute(kUserStoryEClass, KUSER_STORY__SHORT_SUMMARY);
 
 		kTagElementEClass = createEClass(KTAG_ELEMENT);
-		createEAttribute(kTagElementEClass, KTAG_ELEMENT__CONCEPT);
-		createEAttribute(kTagElementEClass, KTAG_ELEMENT__NAME);
 
 		trekModelElementEClass = createEClass(TREK_MODEL_ELEMENT);
+		createEAttribute(trekModelElementEClass, TREK_MODEL_ELEMENT__NAME);
+		createEAttribute(trekModelElementEClass, TREK_MODEL_ELEMENT__SUMMARY);
+
+		kStatusEClass = createEClass(KSTATUS);
+		createEAttribute(kStatusEClass, KSTATUS__PROGRESS);
+		createEAttribute(kStatusEClass, KSTATUS__KEY);
 
 		// Create enums
 		kUseLevelEEnum = createEEnum(KUSE_LEVEL);
+		kTestCaseTypeEEnum = createEEnum(KTEST_CASE_TYPE);
 	}
 
 	/**
@@ -547,50 +585,60 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 		kTestCaseEClass.getESuperTypes().add(this.getTrekModelElement());
 		kUserStoryEClass.getESuperTypes().add(this.getTrekModelElement());
 		kTagElementEClass.getESuperTypes().add(this.getTrekModelElement());
+		kStatusEClass.getESuperTypes().add(this.getTrekModelElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(useKaseModelEClass, UseKaseModel.class, "UseKaseModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUseKaseModel_KuseCases(), this.getKUseCase(), null, "kuseCases", null, 0, -1, UseKaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUseKaseModel_KtestCases(), this.getKTestCase(), null, "ktestCases", null, 0, -1, UseKaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUseKaseModel_Ktags(), this.getKTestCase(), null, "ktags", null, 0, -1, UseKaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUseKaseModel_Ktags(), this.getKTagElement(), null, "ktags", null, 0, -1, UseKaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUseKaseModel_KuserStories(), this.getKUserStory(), null, "KuserStories", null, 0, -1, UseKaseModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		EOperation op = addEOperation(useKaseModelEClass, this.getKUseCase(), "getUseCaseByTags", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getKTagElement(), "tags", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(kUseCaseEClass, KUseCase.class, "KUseCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getKUseCase_Name(), ecorePackage.getEString(), "name", "", 1, 1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKUseCase_Id(), ecorePackage.getEString(), "id", null, 1, 1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKUseCase_Summary(), ecorePackage.getEString(), "summary", null, 1, 1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKUseCase_ShortSummary(), ecorePackage.getEString(), "shortSummary", null, 1, 1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKUseCase_ShortSummary(), ecorePackage.getEString(), "shortSummary", null, 0, 1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKUseCase_Use(), this.getKUseCase(), this.getKUseCase_UsedBy(), "use", null, 0, -1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKUseCase_UsedBy(), this.getKUseCase(), this.getKUseCase_Use(), "usedBy", null, 0, -1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKUseCase_VerifiedBy(), this.getKTestCase(), null, "verifiedBy", null, 0, -1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKUseCase_VerifiedBy(), this.getKTestCase(), this.getKTestCase_Verifies(), "verifiedBy", null, 0, -1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKUseCase_Refines(), this.getKUseCase(), this.getKUseCase_RefinedBy(), "refines", null, 0, 1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKUseCase_RefinedBy(), this.getKUseCase(), this.getKUseCase_Refines(), "refinedBy", null, 0, -1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKUseCase_Covers(), this.getKUserStory(), this.getKUserStory_CoveredBy(), "covers", null, 0, -1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKUseCase_Level(), this.getKUseLevel(), "level", null, 1, 1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKUseCase_Tags(), this.getKTagElement(), null, "tags", null, 0, -1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKUseCase_Status(), this.getKStatus(), null, "status", null, 0, -1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kTestCaseEClass, KTestCase.class, "KTestCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getKTestCase_Verifies(), this.getKUseCase(), null, "verifies", null, 0, 1, KTestCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKTestCase_TestCase(), ecorePackage.getEString(), "testCase", null, 1, 1, KTestCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKTestCase_File(), ecorePackage.getEString(), "file", null, 1, 1, KTestCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKTestCase_Verifies(), this.getKUseCase(), this.getKUseCase_VerifiedBy(), "verifies", null, 0, -1, KTestCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKTestCase_Uri(), ecorePackage.getEString(), "uri", null, 1, 1, KTestCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKTestCase_Type(), this.getKTestCaseType(), "type", null, 0, 1, KTestCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKTestCase_ResultId(), ecorePackage.getEString(), "resultId", null, 0, 1, KTestCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kUserStoryEClass, KUserStory.class, "KUserStory", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKUserStory_CoveredBy(), this.getKUseCase(), this.getKUseCase_Covers(), "coveredBy", null, 0, -1, KUserStory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKUserStory_Name(), ecorePackage.getEString(), "name", "", 1, 1, KUserStory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKUserStory_Id(), ecorePackage.getEString(), "id", null, 1, 1, KUserStory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKUserStory_Summary(), ecorePackage.getEString(), "summary", null, 1, 1, KUserStory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKUserStory_ShortSummary(), ecorePackage.getEString(), "shortSummary", null, 1, 1, KUserStory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKUserStory_ShortSummary(), ecorePackage.getEString(), "shortSummary", null, 0, 1, KUserStory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kTagElementEClass, KTagElement.class, "KTagElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getKTagElement_Concept(), ecorePackage.getEString(), "concept", "", 1, 1, KTagElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKTagElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, KTagElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(trekModelElementEClass, TrekModelElement.class, "TrekModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTrekModelElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, TrekModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTrekModelElement_Summary(), ecorePackage.getEString(), "summary", "", 1, 1, TrekModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(kStatusEClass, KStatus.class, "KStatus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getKStatus_Progress(), ecorePackage.getEInt(), "progress", null, 0, 1, KStatus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKStatus_Key(), ecorePackage.getEString(), "key", null, 0, 1, KStatus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(kUseLevelEEnum, KUseLevel.class, "KUseLevel");
 		addEEnumLiteral(kUseLevelEEnum, KUseLevel.IMPLEMENTATION);
 		addEEnumLiteral(kUseLevelEEnum, KUseLevel.UNKNOWN);
+
+		initEEnum(kTestCaseTypeEEnum, KTestCaseType.class, "KTestCaseType");
+		addEEnumLiteral(kTestCaseTypeEEnum, KTestCaseType.UNIT_TEST);
+		addEEnumLiteral(kTestCaseTypeEEnum, KTestCaseType.BLACK_BOX);
 
 		// Create resource
 		createResource(eNS_URI);

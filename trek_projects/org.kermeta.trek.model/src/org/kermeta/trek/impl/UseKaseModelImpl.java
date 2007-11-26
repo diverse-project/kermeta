@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UseKaseModelImpl.java,v 1.2 2007-10-16 08:20:33 cfaucher Exp $
+ * $Id: UseKaseModelImpl.java,v 1.3 2007-11-26 17:04:18 cfaucher Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.kermeta.trek.KTagElement;
 import org.kermeta.trek.KTestCase;
 import org.kermeta.trek.KUseCase;
 import org.kermeta.trek.KUserStory;
@@ -71,7 +72,7 @@ public class UseKaseModelImpl extends EObjectImpl implements UseKaseModel {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<KTestCase> ktags;
+	protected EList<KTagElement> ktags;
 
 	/**
 	 * The cached value of the '{@link #getKuserStories() <em>Kuser Stories</em>}' containment reference list.
@@ -131,9 +132,9 @@ public class UseKaseModelImpl extends EObjectImpl implements UseKaseModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<KTestCase> getKtags() {
+	public EList<KTagElement> getKtags() {
 		if (ktags == null) {
-			ktags = new EObjectContainmentEList.Resolving<KTestCase>(KTestCase.class, this, TrekPackage.USE_KASE_MODEL__KTAGS);
+			ktags = new EObjectContainmentEList.Resolving<KTagElement>(KTagElement.class, this, TrekPackage.USE_KASE_MODEL__KTAGS);
 		}
 		return ktags;
 	}
@@ -148,6 +149,17 @@ public class UseKaseModelImpl extends EObjectImpl implements UseKaseModel {
 			kuserStories = new EObjectContainmentEList.Resolving<KUserStory>(KUserStory.class, this, TrekPackage.USE_KASE_MODEL__KUSER_STORIES);
 		}
 		return kuserStories;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KUseCase getUseCaseByTags(KTagElement tags) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -209,7 +221,7 @@ public class UseKaseModelImpl extends EObjectImpl implements UseKaseModel {
 				return;
 			case TrekPackage.USE_KASE_MODEL__KTAGS:
 				getKtags().clear();
-				getKtags().addAll((Collection<? extends KTestCase>)newValue);
+				getKtags().addAll((Collection<? extends KTagElement>)newValue);
 				return;
 			case TrekPackage.USE_KASE_MODEL__KUSER_STORIES:
 				getKuserStories().clear();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KUserStoryItemProvider.java,v 1.1 2007-10-16 08:22:56 cfaucher Exp $
+ * $Id: KUserStoryItemProvider.java,v 1.2 2007-11-26 17:04:15 cfaucher Exp $
  */
 package org.kermeta.trek.provider;
 
@@ -23,7 +23,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.kermeta.trek.KUserStory;
@@ -36,7 +35,7 @@ import org.kermeta.trek.TrekPackage;
  * @generated
  */
 public class KUserStoryItemProvider
-	extends ItemProviderAdapter
+	extends TrekModelElementItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -65,9 +64,7 @@ public class KUserStoryItemProvider
 			super.getPropertyDescriptors(object);
 
 			addCoveredByPropertyDescriptor(object);
-			addNamePropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
-			addSummaryPropertyDescriptor(object);
 			addShortSummaryPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -96,28 +93,6 @@ public class KUserStoryItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_KUserStory_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_KUserStory_name_feature", "_UI_KUserStory_type"),
-				 TrekPackage.Literals.KUSER_STORY__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Id feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -131,28 +106,6 @@ public class KUserStoryItemProvider
 				 getString("_UI_KUserStory_id_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_KUserStory_id_feature", "_UI_KUserStory_type"),
 				 TrekPackage.Literals.KUSER_STORY__ID,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Summary feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSummaryPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_KUserStory_summary_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_KUserStory_summary_feature", "_UI_KUserStory_type"),
-				 TrekPackage.Literals.KUSER_STORY__SUMMARY,
 				 true,
 				 false,
 				 false,
@@ -220,9 +173,7 @@ public class KUserStoryItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(KUserStory.class)) {
-			case TrekPackage.KUSER_STORY__NAME:
 			case TrekPackage.KUSER_STORY__ID:
-			case TrekPackage.KUSER_STORY__SUMMARY:
 			case TrekPackage.KUSER_STORY__SHORT_SUMMARY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

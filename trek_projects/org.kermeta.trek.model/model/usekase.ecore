@@ -4,33 +4,28 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="trek"
     nsURI="http://www.kermeta.org/trek" nsPrefix="trek">
   <eClassifiers xsi:type="ecore:EClass" name="UseKaseModel">
-    <eOperations name="getUseCaseByTags" upperBound="-1" eType="#//KUseCase">
-      <eParameters name="tags" lowerBound="1" upperBound="-1" eType="#//KTagElement"/>
+    <eOperations name="getUseCaseByTags" eType="#//KUseCase">
+      <eParameters name="tags" eType="#//KTagElement"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="kuseCases" upperBound="-1"
         eType="#//KUseCase" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ktestCases" upperBound="-1"
         eType="#//KTestCase" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ktags" upperBound="-1"
-        eType="#//KTestCase" containment="true"/>
+        eType="#//KTagElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="KuserStories" upperBound="-1"
         eType="#//KUserStory" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KUseCase" eSuperTypes="#//TrekModelElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="summary" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shortSummary" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shortSummary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="use" upperBound="-1" eType="#//KUseCase"
         eOpposite="#//KUseCase/usedBy"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="usedBy" upperBound="-1"
         eType="#//KUseCase" eOpposite="#//KUseCase/use"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="verifiedBy" upperBound="-1"
-        eType="#//KTestCase"/>
+        eType="#//KTestCase" eOpposite="#//KTestCase/verifies"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refines" eType="#//KUseCase"
         eOpposite="#//KUseCase/refinedBy"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refinedBy" upperBound="-1"
@@ -39,33 +34,39 @@
         eType="#//KUserStory" eOpposite="#//KUserStory/coveredBy"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" lowerBound="1" eType="#//KUseLevel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" upperBound="-1" eType="#//KTagElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="status" upperBound="-1"
+        eType="#//KStatus" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KTestCase" eSuperTypes="#//TrekModelElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="verifies" eType="#//KUseCase"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="testCase" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="verifies" upperBound="-1"
+        eType="#//KUseCase" eOpposite="#//KUseCase/verifiedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//KTestCaseType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resultId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KUserStory" eSuperTypes="#//TrekModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="coveredBy" upperBound="-1"
         eType="#//KUseCase" eOpposite="#//KUseCase/covers"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="summary" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shortSummary" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shortSummary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="KUseLevel">
     <eLiterals name="Implementation" value="1"/>
     <eLiterals name="Unknown"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="KTagElement" eSuperTypes="#//TrekModelElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="concept" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
+  <eClassifiers xsi:type="ecore:EClass" name="KTagElement" eSuperTypes="#//TrekModelElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TrekModelElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="summary" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TrekModelElement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="KTestCaseType">
+    <eLiterals name="UnitTest"/>
+    <eLiterals name="BlackBox" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="KStatus" eSuperTypes="#//TrekModelElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="progress" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

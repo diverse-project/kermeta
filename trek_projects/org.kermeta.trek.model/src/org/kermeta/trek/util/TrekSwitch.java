@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekSwitch.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
+ * $Id: TrekSwitch.java,v 1.4 2007-11-26 17:04:19 cfaucher Exp $
  */
 package org.kermeta.trek.util;
 
@@ -127,6 +127,13 @@ public class TrekSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TrekPackage.KSTATUS: {
+				KStatus kStatus = (KStatus)theEObject;
+				T result = caseKStatus(kStatus);
+				if (result == null) result = caseTrekModelElement(kStatus);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -218,6 +225,21 @@ public class TrekSwitch<T> {
 	 * @generated
 	 */
 	public T caseTrekModelElement(TrekModelElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>KStatus</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>KStatus</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseKStatus(KStatus object) {
 		return null;
 	}
 

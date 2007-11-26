@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekItemProviderAdapterFactory.java,v 1.1 2007-10-16 08:22:56 cfaucher Exp $
+ * $Id: TrekItemProviderAdapterFactory.java,v 1.2 2007-11-26 17:04:15 cfaucher Exp $
  */
 package org.kermeta.trek.provider;
 
@@ -191,6 +191,29 @@ public class TrekItemProviderAdapterFactory extends TrekAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.trek.KStatus} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected KStatusItemProvider kStatusItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.trek.KStatus}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createKStatusAdapter() {
+		if (kStatusItemProvider == null) {
+			kStatusItemProvider = new KStatusItemProvider(this);
+		}
+
+		return kStatusItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -294,6 +317,7 @@ public class TrekItemProviderAdapterFactory extends TrekAdapterFactory implement
 		if (kTestCaseItemProvider != null) kTestCaseItemProvider.dispose();
 		if (kUserStoryItemProvider != null) kUserStoryItemProvider.dispose();
 		if (kTagElementItemProvider != null) kTagElementItemProvider.dispose();
+		if (kStatusItemProvider != null) kStatusItemProvider.dispose();
 	}
 
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KUseCaseItemProvider.java,v 1.1 2007-10-16 08:22:56 cfaucher Exp $
+ * $Id: KUseCaseItemProvider.java,v 1.2 2007-11-26 17:04:15 cfaucher Exp $
  */
 package org.kermeta.trek.provider;
 
@@ -15,6 +15,8 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,10 +25,10 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.kermeta.trek.KUseCase;
+import org.kermeta.trek.TrekFactory;
 import org.kermeta.trek.TrekPackage;
 
 /**
@@ -36,7 +38,7 @@ import org.kermeta.trek.TrekPackage;
  * @generated
  */
 public class KUseCaseItemProvider
-	extends ItemProviderAdapter
+	extends TrekModelElementItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -64,9 +66,7 @@ public class KUseCaseItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
-			addSummaryPropertyDescriptor(object);
 			addShortSummaryPropertyDescriptor(object);
 			addUsePropertyDescriptor(object);
 			addUsedByPropertyDescriptor(object);
@@ -78,28 +78,6 @@ public class KUseCaseItemProvider
 			addTagsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_KUseCase_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_KUseCase_name_feature", "_UI_KUseCase_type"),
-				 TrekPackage.Literals.KUSE_CASE__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -116,28 +94,6 @@ public class KUseCaseItemProvider
 				 getString("_UI_KUseCase_id_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_KUseCase_id_feature", "_UI_KUseCase_type"),
 				 TrekPackage.Literals.KUSE_CASE__ID,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Summary feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSummaryPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_KUseCase_summary_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_KUseCase_summary_feature", "_UI_KUseCase_type"),
-				 TrekPackage.Literals.KUSE_CASE__SUMMARY,
 				 true,
 				 false,
 				 false,
@@ -345,6 +301,36 @@ public class KUseCaseItemProvider
 	}
 
 	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(TrekPackage.Literals.KUSE_CASE__STATUS);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
+	}
+
+	/**
 	 * This returns KUseCase.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -381,12 +367,13 @@ public class KUseCaseItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(KUseCase.class)) {
-			case TrekPackage.KUSE_CASE__NAME:
 			case TrekPackage.KUSE_CASE__ID:
-			case TrekPackage.KUSE_CASE__SUMMARY:
 			case TrekPackage.KUSE_CASE__SHORT_SUMMARY:
 			case TrekPackage.KUSE_CASE__LEVEL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case TrekPackage.KUSE_CASE__STATUS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -402,6 +389,11 @@ public class KUseCaseItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TrekPackage.Literals.KUSE_CASE__STATUS,
+				 TrekFactory.eINSTANCE.createKStatus()));
 	}
 
 	/**

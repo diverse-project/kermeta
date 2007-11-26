@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KUseCaseImpl.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
+ * $Id: KUseCaseImpl.java,v 1.4 2007-11-26 17:04:18 cfaucher Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -17,12 +17,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.kermeta.trek.KStatus;
 import org.kermeta.trek.KTagElement;
 import org.kermeta.trek.KTestCase;
 import org.kermeta.trek.KUseCase;
@@ -37,9 +38,7 @@ import org.kermeta.trek.TrekPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getId <em>Id</em>}</li>
- *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getSummary <em>Summary</em>}</li>
  *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getShortSummary <em>Short Summary</em>}</li>
  *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getUse <em>Use</em>}</li>
  *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getUsedBy <em>Used By</em>}</li>
@@ -49,32 +48,13 @@ import org.kermeta.trek.TrekPackage;
  *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getCovers <em>Covers</em>}</li>
  *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getLevel <em>Level</em>}</li>
  *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getStatus <em>Status</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = "";
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -94,26 +74,6 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 	 * @ordered
 	 */
 	protected String id = ID_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getSummary() <em>Summary</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSummary()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SUMMARY_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSummary() <em>Summary</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSummary()
-	 * @generated
-	 * @ordered
-	 */
-	protected String summary = SUMMARY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getShortSummary() <em>Short Summary</em>}' attribute.
@@ -226,6 +186,16 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 	protected EList<KTagElement> tags;
 
 	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<KStatus> status;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -249,27 +219,6 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrekPackage.KUSE_CASE__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getId() {
 		return id;
 	}
@@ -284,27 +233,6 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrekPackage.KUSE_CASE__ID, oldId, id));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getSummary() {
-		return summary;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSummary(String newSummary) {
-		String oldSummary = summary;
-		summary = newSummary;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrekPackage.KUSE_CASE__SUMMARY, oldSummary, summary));
 	}
 
 	/**
@@ -359,7 +287,7 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 	 */
 	public EList<KTestCase> getVerifiedBy() {
 		if (verifiedBy == null) {
-			verifiedBy = new EObjectResolvingEList<KTestCase>(KTestCase.class, this, TrekPackage.KUSE_CASE__VERIFIED_BY);
+			verifiedBy = new EObjectWithInverseResolvingEList.ManyInverse<KTestCase>(KTestCase.class, this, TrekPackage.KUSE_CASE__VERIFIED_BY, TrekPackage.KTEST_CASE__VERIFIES);
 		}
 		return verifiedBy;
 	}
@@ -486,6 +414,18 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<KStatus> getStatus() {
+		if (status == null) {
+			status = new EObjectContainmentEList.Resolving<KStatus>(KStatus.class, this, TrekPackage.KUSE_CASE__STATUS);
+		}
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -494,6 +434,8 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUse()).basicAdd(otherEnd, msgs);
 			case TrekPackage.KUSE_CASE__USED_BY:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUsedBy()).basicAdd(otherEnd, msgs);
+			case TrekPackage.KUSE_CASE__VERIFIED_BY:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getVerifiedBy()).basicAdd(otherEnd, msgs);
 			case TrekPackage.KUSE_CASE__REFINES:
 				if (refines != null)
 					msgs = ((InternalEObject)refines).eInverseRemove(this, TrekPackage.KUSE_CASE__REFINED_BY, KUseCase.class, msgs);
@@ -518,12 +460,16 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 				return ((InternalEList<?>)getUse()).basicRemove(otherEnd, msgs);
 			case TrekPackage.KUSE_CASE__USED_BY:
 				return ((InternalEList<?>)getUsedBy()).basicRemove(otherEnd, msgs);
+			case TrekPackage.KUSE_CASE__VERIFIED_BY:
+				return ((InternalEList<?>)getVerifiedBy()).basicRemove(otherEnd, msgs);
 			case TrekPackage.KUSE_CASE__REFINES:
 				return basicSetRefines(null, msgs);
 			case TrekPackage.KUSE_CASE__REFINED_BY:
 				return ((InternalEList<?>)getRefinedBy()).basicRemove(otherEnd, msgs);
 			case TrekPackage.KUSE_CASE__COVERS:
 				return ((InternalEList<?>)getCovers()).basicRemove(otherEnd, msgs);
+			case TrekPackage.KUSE_CASE__STATUS:
+				return ((InternalEList<?>)getStatus()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -536,12 +482,8 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TrekPackage.KUSE_CASE__NAME:
-				return getName();
 			case TrekPackage.KUSE_CASE__ID:
 				return getId();
-			case TrekPackage.KUSE_CASE__SUMMARY:
-				return getSummary();
 			case TrekPackage.KUSE_CASE__SHORT_SUMMARY:
 				return getShortSummary();
 			case TrekPackage.KUSE_CASE__USE:
@@ -561,6 +503,8 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 				return getLevel();
 			case TrekPackage.KUSE_CASE__TAGS:
 				return getTags();
+			case TrekPackage.KUSE_CASE__STATUS:
+				return getStatus();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -574,14 +518,8 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TrekPackage.KUSE_CASE__NAME:
-				setName((String)newValue);
-				return;
 			case TrekPackage.KUSE_CASE__ID:
 				setId((String)newValue);
-				return;
-			case TrekPackage.KUSE_CASE__SUMMARY:
-				setSummary((String)newValue);
 				return;
 			case TrekPackage.KUSE_CASE__SHORT_SUMMARY:
 				setShortSummary((String)newValue);
@@ -616,6 +554,10 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 				getTags().clear();
 				getTags().addAll((Collection<? extends KTagElement>)newValue);
 				return;
+			case TrekPackage.KUSE_CASE__STATUS:
+				getStatus().clear();
+				getStatus().addAll((Collection<? extends KStatus>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -628,14 +570,8 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TrekPackage.KUSE_CASE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case TrekPackage.KUSE_CASE__ID:
 				setId(ID_EDEFAULT);
-				return;
-			case TrekPackage.KUSE_CASE__SUMMARY:
-				setSummary(SUMMARY_EDEFAULT);
 				return;
 			case TrekPackage.KUSE_CASE__SHORT_SUMMARY:
 				setShortSummary(SHORT_SUMMARY_EDEFAULT);
@@ -664,6 +600,9 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 			case TrekPackage.KUSE_CASE__TAGS:
 				getTags().clear();
 				return;
+			case TrekPackage.KUSE_CASE__STATUS:
+				getStatus().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -676,12 +615,8 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TrekPackage.KUSE_CASE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TrekPackage.KUSE_CASE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case TrekPackage.KUSE_CASE__SUMMARY:
-				return SUMMARY_EDEFAULT == null ? summary != null : !SUMMARY_EDEFAULT.equals(summary);
 			case TrekPackage.KUSE_CASE__SHORT_SUMMARY:
 				return SHORT_SUMMARY_EDEFAULT == null ? shortSummary != null : !SHORT_SUMMARY_EDEFAULT.equals(shortSummary);
 			case TrekPackage.KUSE_CASE__USE:
@@ -700,6 +635,8 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 				return level != LEVEL_EDEFAULT;
 			case TrekPackage.KUSE_CASE__TAGS:
 				return tags != null && !tags.isEmpty();
+			case TrekPackage.KUSE_CASE__STATUS:
+				return status != null && !status.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -714,12 +651,8 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", id: ");
+		result.append(" (id: ");
 		result.append(id);
-		result.append(", summary: ");
-		result.append(summary);
 		result.append(", shortSummary: ");
 		result.append(shortSummary);
 		result.append(", level: ");

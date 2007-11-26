@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KUseLevel.java,v 1.3 2007-11-26 17:04:18 cfaucher Exp $
+ * $Id: KTestCaseType.java,v 1.1 2007-11-26 17:04:18 cfaucher Exp $
  */
 package org.kermeta.trek;
 
@@ -14,93 +14,93 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>KUse Level</b></em>',
+ * A representation of the literals of the enumeration '<em><b>KTest Case Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.kermeta.trek.TrekPackage#getKUseLevel()
+ * @see org.kermeta.trek.TrekPackage#getKTestCaseType()
  * @model
  * @generated
  */
-public enum KUseLevel implements Enumerator {
+public enum KTestCaseType implements Enumerator {
 	/**
-	 * The '<em><b>Implementation</b></em>' literal object.
+	 * The '<em><b>Unit Test</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #IMPLEMENTATION_VALUE
+	 * @see #UNIT_TEST_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	IMPLEMENTATION(1, "Implementation", "Implementation"),
+	UNIT_TEST(0, "UnitTest", "UnitTest"),
 
 	/**
-	 * The '<em><b>Unknown</b></em>' literal object.
+	 * The '<em><b>Black Box</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #UNKNOWN_VALUE
+	 * @see #BLACK_BOX_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	UNKNOWN(0, "Unknown", "Unknown");
+	BLACK_BOX(1, "BlackBox", "BlackBox");
 
 	/**
-	 * The '<em><b>Implementation</b></em>' literal value.
+	 * The '<em><b>Unit Test</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Implementation</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Unit Test</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #IMPLEMENTATION
-	 * @model name="Implementation"
+	 * @see #UNIT_TEST
+	 * @model name="UnitTest"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int IMPLEMENTATION_VALUE = 1;
+	public static final int UNIT_TEST_VALUE = 0;
 
 	/**
-	 * The '<em><b>Unknown</b></em>' literal value.
+	 * The '<em><b>Black Box</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Unknown</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Black Box</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #UNKNOWN
-	 * @model name="Unknown"
+	 * @see #BLACK_BOX
+	 * @model name="BlackBox"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int UNKNOWN_VALUE = 0;
+	public static final int BLACK_BOX_VALUE = 1;
 
 	/**
-	 * An array of all the '<em><b>KUse Level</b></em>' enumerators.
+	 * An array of all the '<em><b>KTest Case Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final KUseLevel[] VALUES_ARRAY =
-		new KUseLevel[] {
-			IMPLEMENTATION,
-			UNKNOWN,
+	private static final KTestCaseType[] VALUES_ARRAY =
+		new KTestCaseType[] {
+			UNIT_TEST,
+			BLACK_BOX,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>KUse Level</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>KTest Case Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<KUseLevel> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<KTestCaseType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>KUse Level</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>KTest Case Type</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static KUseLevel get(String literal) {
+	public static KTestCaseType get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			KUseLevel result = VALUES_ARRAY[i];
+			KTestCaseType result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -109,14 +109,14 @@ public enum KUseLevel implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>KUse Level</b></em>' literal with the specified name.
+	 * Returns the '<em><b>KTest Case Type</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static KUseLevel getByName(String name) {
+	public static KTestCaseType getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			KUseLevel result = VALUES_ARRAY[i];
+			KTestCaseType result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -125,15 +125,15 @@ public enum KUseLevel implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>KUse Level</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>KTest Case Type</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static KUseLevel get(int value) {
+	public static KTestCaseType get(int value) {
 		switch (value) {
-			case IMPLEMENTATION_VALUE: return IMPLEMENTATION;
-			case UNKNOWN_VALUE: return UNKNOWN;
+			case UNIT_TEST_VALUE: return UNIT_TEST;
+			case BLACK_BOX_VALUE: return BLACK_BOX;
 		}
 		return null;
 	}
@@ -165,7 +165,7 @@ public enum KUseLevel implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private KUseLevel(int value, String name, String literal) {
+	private KTestCaseType(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -209,4 +209,4 @@ public enum KUseLevel implements Enumerator {
 		return literal;
 	}
 	
-} //KUseLevel
+} //KTestCaseType

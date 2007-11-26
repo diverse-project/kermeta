@@ -2,11 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KTestCase.java,v 1.3 2007-10-19 14:10:06 fmunoz Exp $
+ * $Id: KTestCase.java,v 1.4 2007-11-26 17:04:18 cfaucher Exp $
  */
 package org.kermeta.trek;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,8 +17,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.kermeta.trek.KTestCase#getVerifies <em>Verifies</em>}</li>
- *   <li>{@link org.kermeta.trek.KTestCase#getTestCase <em>Test Case</em>}</li>
- *   <li>{@link org.kermeta.trek.KTestCase#getFile <em>File</em>}</li>
+ *   <li>{@link org.kermeta.trek.KTestCase#getUri <em>Uri</em>}</li>
+ *   <li>{@link org.kermeta.trek.KTestCase#getType <em>Type</em>}</li>
+ *   <li>{@link org.kermeta.trek.KTestCase#getResultId <em>Result Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,81 +29,102 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface KTestCase extends TrekModelElement {
 	/**
-	 * Returns the value of the '<em><b>Verifies</b></em>' reference.
+	 * Returns the value of the '<em><b>Verifies</b></em>' reference list.
+	 * The list contents are of type {@link org.kermeta.trek.KUseCase}.
+	 * It is bidirectional and its opposite is '{@link org.kermeta.trek.KUseCase#getVerifiedBy <em>Verified By</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Verifies</em>' reference isn't clear,
+	 * If the meaning of the '<em>Verifies</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Verifies</em>' reference.
-	 * @see #setVerifies(KUseCase)
+	 * @return the value of the '<em>Verifies</em>' reference list.
 	 * @see org.kermeta.trek.TrekPackage#getKTestCase_Verifies()
+	 * @see org.kermeta.trek.KUseCase#getVerifiedBy
+	 * @model opposite="verifiedBy"
+	 * @generated
+	 */
+	EList<KUseCase> getVerifies();
+
+	/**
+	 * Returns the value of the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Uri</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Uri</em>' attribute.
+	 * @see #setUri(String)
+	 * @see org.kermeta.trek.TrekPackage#getKTestCase_Uri()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getUri();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.trek.KTestCase#getUri <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Uri</em>' attribute.
+	 * @see #getUri()
+	 * @generated
+	 */
+	void setUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.kermeta.trek.KTestCaseType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' attribute.
+	 * @see org.kermeta.trek.KTestCaseType
+	 * @see #setType(KTestCaseType)
+	 * @see org.kermeta.trek.TrekPackage#getKTestCase_Type()
 	 * @model
 	 * @generated
 	 */
-	KUseCase getVerifies();
+	KTestCaseType getType();
 
 	/**
-	 * Sets the value of the '{@link org.kermeta.trek.KTestCase#getVerifies <em>Verifies</em>}' reference.
+	 * Sets the value of the '{@link org.kermeta.trek.KTestCase#getType <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Verifies</em>' reference.
-	 * @see #getVerifies()
+	 * @param value the new value of the '<em>Type</em>' attribute.
+	 * @see org.kermeta.trek.KTestCaseType
+	 * @see #getType()
 	 * @generated
 	 */
-	void setVerifies(KUseCase value);
+	void setType(KTestCaseType value);
 
 	/**
-	 * Returns the value of the '<em><b>Test Case</b></em>' attribute.
+	 * Returns the value of the '<em><b>Result Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Test Case</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Result Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Test Case</em>' attribute.
-	 * @see #setTestCase(String)
-	 * @see org.kermeta.trek.TrekPackage#getKTestCase_TestCase()
-	 * @model required="true"
+	 * @return the value of the '<em>Result Id</em>' attribute.
+	 * @see #setResultId(String)
+	 * @see org.kermeta.trek.TrekPackage#getKTestCase_ResultId()
+	 * @model
 	 * @generated
 	 */
-	String getTestCase();
+	String getResultId();
 
 	/**
-	 * Sets the value of the '{@link org.kermeta.trek.KTestCase#getTestCase <em>Test Case</em>}' attribute.
+	 * Sets the value of the '{@link org.kermeta.trek.KTestCase#getResultId <em>Result Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Test Case</em>' attribute.
-	 * @see #getTestCase()
+	 * @param value the new value of the '<em>Result Id</em>' attribute.
+	 * @see #getResultId()
 	 * @generated
 	 */
-	void setTestCase(String value);
-
-	/**
-	 * Returns the value of the '<em><b>File</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>File</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>File</em>' attribute.
-	 * @see #setFile(String)
-	 * @see org.kermeta.trek.TrekPackage#getKTestCase_File()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getFile();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.trek.KTestCase#getFile <em>File</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>File</em>' attribute.
-	 * @see #getFile()
-	 * @generated
-	 */
-	void setFile(String value);
+	void setResultId(String value);
 
 } // KTestCase
