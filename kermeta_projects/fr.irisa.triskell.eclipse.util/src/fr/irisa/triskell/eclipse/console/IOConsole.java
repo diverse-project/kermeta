@@ -1,6 +1,6 @@
 
 
-/*$Id: IOConsole.java,v 1.4 2007-11-21 14:00:18 ftanguy Exp $
+/*$Id: IOConsole.java,v 1.5 2007-11-27 16:40:25 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -145,15 +145,21 @@ public class IOConsole {
 			println( new ObjectKermetaMessage(o) );
 	}
 	
-	public void print(ConsoleMessage message) {
-		changeColor(message.getColor());
-		IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
-		try {
-			if ( ! stream.isClosed() )
-				stream.write(message.getMessage());
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
+	public void print(final ConsoleMessage message) {
+		Runnable r = new Runnable() {
+			@Override
+			public void run() {
+				changeColor(message.getColor());
+				IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
+				try {
+					if ( ! stream.isClosed() )
+						stream.write(message.getMessage());
+				} catch (IOException exception) {
+					exception.printStackTrace();
+				}
+			}
+		};
+		ConsolePlugin.getStandardDisplay().syncExec(r);
 	}
 	
 	/**
@@ -169,14 +175,20 @@ public class IOConsole {
 			((IOConsoleOutputStream) getOutputStream()).setColor(c);
 		}
 	}
-	public void println(ConsoleMessage message) {
-		changeColor(message.getColor());
-		IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
-		try {
-			stream.write(message.getMessage() + '\n');
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
+	public void println(final ConsoleMessage message) {
+		Runnable r = new Runnable() {
+			@Override
+			public void run() {
+				changeColor(message.getColor());
+				IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
+				try {
+					stream.write(message.getMessage() + '\n');
+				} catch (IOException exception) {
+					exception.printStackTrace();
+				}
+			}
+		};
+		ConsolePlugin.getStandardDisplay().syncExec(r);
 	}
 	//////////////////////////////////////
 	//////////////////////////////////////
