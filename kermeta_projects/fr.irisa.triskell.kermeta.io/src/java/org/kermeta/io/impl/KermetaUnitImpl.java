@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.22 2007-11-21 14:07:13 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.23 2007-11-27 10:49:29 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -1021,6 +1021,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public TypeDefinition getTypeDefinitionByName(String name) {
+		if ( typeDefinitionCache == null )
+			return null;
 		return typeDefinitionCache.getTypeDefinitionByName(name);
 	}
 
@@ -1030,6 +1032,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * @generated NOT
 	 */
 	public TypeDefinition getTypeDefinitionByQualifiedName(String qualifiedName) {
+		if ( typeDefinitionCache == null )
+			return null;
 		return typeDefinitionCache.getTypeDefinitionByQualifiedName(qualifiedName);
 	}
 
