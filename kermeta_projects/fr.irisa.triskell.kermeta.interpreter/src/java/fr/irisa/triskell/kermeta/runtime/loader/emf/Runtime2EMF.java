@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.67 2007-11-14 16:56:01 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.68 2007-11-27 16:44:35 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -115,7 +115,7 @@ public class Runtime2EMF {
 	 * 
 	 * @param resource
 	 */
-	public void updateEMFModel() {
+	public void updateEMFModel(boolean saveWithNewURI) {
 		// Get the RuntimeObjects from the return result of external call of
 		// save() method (in Kermeta side)
 		// Important : *On save process*, unit.getContentMap contains the
@@ -152,7 +152,18 @@ public class Runtime2EMF {
 		// save process!
 		for (RuntimeObject o : instances)
 		{	
-			resource.getContents().add((EObject) o.getR2eEmfObject());
+			if ( ! saveWithNewURI ) {
+				if ( o.getResourceRO().getProperties().get("uri").getJavaNativeObject().equals(resource.getURI().toString()) )
+					/*
+					 * 
+					 * Maybe during the execution, the resource of the instances may have changed.
+					 * Therefore, we need to check if the current resource is the resource of the instance.
+					 * If it is true, let's update the instance, otherwise we do nothing because it will be done later.
+					 * 
+					 */
+					resource.getContents().add((EObject) o.getR2eEmfObject());				
+			} else
+				resource.getContents().add((EObject) o.getR2eEmfObject());
 		}	
 	}
 
@@ -235,7 +246,8 @@ public class Runtime2EMF {
 						if(nameString != null) {
 							internalLog.info(" ignore update of Ecore internal object named : " + fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(nameString));
 						}
-						else internalLog.info(" ignore update of Ecore internal object : ");
+						else 
+							internalLog.info(" ignore update of Ecore internal object : ");
 						return;
 					}				
 				}
@@ -330,8 +342,8 @@ public class Runtime2EMF {
 			String eprop_name = prop_name;
 			// Special handling -> convert kermeta-Enumeration in ecore-EEnum
 			RuntimeObject property = (RuntimeObject) rObject.getProperties().get(prop_name);
-			if (getKermetaEcoreMap().containsValue(unit.getEQualifiedName(eObject.eClass())))
-				eprop_name = getKermetaEcoreMap().get(prop_name);
+			/*if (getKermetaEcoreMap().containsValue(unit.getEQualifiedName(eObject.eClass())))
+				eprop_name = getKermetaEcoreMap().get(prop_name);*/
 
 			// The feature corresponding to the name of the property
 			feature = eObject.eClass().getEStructuralFeature(eprop_name);

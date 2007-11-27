@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.54 2007-11-14 16:56:01 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.55 2007-11-27 16:44:35 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -363,6 +363,10 @@ public class EMFRuntimeUnit extends RuntimeUnit {
             throwKermetaRaisedExceptionOnSave("Metamodel for the instance to save was not found or provided.", null);
         }
         
+        boolean saveWithNewURI = false;
+        if ( ! file_path.equals( ((Resource) associatedResource.getR2eEmfResource()).getURI().toString()) )
+        	saveWithNewURI = true;
+        
         // Create an URI for the resource that is going to be saved
         URI u = createURI(file_path); 
         KermetaInterpreter.internalLog.info("URI created for model to save : "+u);
@@ -378,7 +382,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         	// DVK: does this case occurs ???
 	        ResourceSet resource_set = new ResourceSetImpl();
 	        Runtime2EMF r2e = new Runtime2EMF(this, resource_set.createResource(u));
-	        r2e.updateEMFModel();
+	        r2e.updateEMFModel(saveWithNewURI);
 	        res = r2e.getResource();
         }
         else {
@@ -411,13 +415,13 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		        			getConcreteFactory("EMF").createRuntimeUnit("", mm_uri, roResource) ;
 						runtime_unit.associatedResource = roResource;
 						Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
-						r2emf.updateEMFModel();
+						r2emf.updateEMFModel(saveWithNewURI);
 					}
 				}
 			}
 
     		Runtime2EMF r2e = new Runtime2EMF(this, res);
-	        r2e.updateEMFModel();
+	        r2e.updateEMFModel(saveWithNewURI);
 	        res = r2e.getResource();
     		
         	// for each of the resources in the repository (other than the current one)    		
@@ -442,7 +446,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		        			getConcreteFactory("EMF").createRuntimeUnit("", mm_uri, roResource) ;
 						runtime_unit.associatedResource = roResource;
 						Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
-						r2emf.updateEMFModel();
+						r2emf.updateEMFModel(saveWithNewURI);
 					}
 				}
 			}
