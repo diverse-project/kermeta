@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.9 2007-10-23 09:41:32 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.10 2007-11-27 16:41:52 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -74,6 +74,10 @@ public class JunitTestSuite extends TestSuite {
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
 		testWithFile("test/interpreter/emf_testcases/kermeta","001_testLoadEcoreFileWithEChar.main.kmt" );
+
+		testWithFile("test/interpreter/emf_testcases/kermeta","002_loadAndSaveEcoreInDifferentRepository.main.kmt" );
+
+		testWithFile("test/interpreter/emf_testcases/kermeta","003_loadAndSaveEcoreInTheSameRepository.main.kmt" );
 
 		testWithFile("test/interpreter/emf_testcases/kermeta","027_testRuntimeModelImport.main.kmt" );
 

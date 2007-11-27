@@ -1,0 +1,55 @@
+/* $Id: $
+ * Creation date: November 26, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "loadEcore::EcoreLoader"
+@mainOperation "main"
+
+
+package loadEcore;
+
+ 
+require kermeta
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/Patterns4Ecore.kmt"
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::persistence
+using kermeta::standard
+using kermeta::kunit
+
+class EcoreLoader inherits TestCase
+{
+
+	operation main() : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(EcoreLoader)
+		tr.printTestResult
+	end
+  
+	operation testLoadAndSaveInTheSameRepository() : Void is do 
+		// load the given Ecore metamodel
+    	var repository : EMFRepository init EMFRepository.new
+    	var inputResource : Resource init repository.getResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/My.ecore")
+    	
+    	var umlMetamodel : ecore::EPackage
+		umlMetamodel ?= inputResource.instances.one
+    	
+    	var outputResource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/visitedUML003.ecore", "http://www.eclipse.org/emf/2002/Ecore")
+    	outputResource.add(umlMetamodel)
+		outputResource.save
+		
+		check(umlMetamodel.name)
+ 	end
+ 	
+ 	operation check(s : String) is do
+     	var repository : EMFRepository init EMFRepository.new
+    	var inputResource : Resource init repository.getResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/visitedUML003.ecore")
+
+    	var umlMetamodel : ecore::EPackage
+		umlMetamodel ?= inputResource.instances.one
+		stdio.writeln(s + " : " + umlMetamodel.name )
+		assert( umlMetamodel.name == s )
+ 	end
+}
