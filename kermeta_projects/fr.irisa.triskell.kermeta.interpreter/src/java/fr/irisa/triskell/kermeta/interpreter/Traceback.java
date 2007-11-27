@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.17 2007-08-02 17:06:31 dvojtise Exp $
+/* $Id: Traceback.java,v 1.18 2007-11-27 16:42:11 ftanguy Exp $
  * Project   : Kermeta Interpreter
  * File      : Traceback.java
  * License   : EPL
@@ -121,18 +121,21 @@ public class Traceback {
 	 */
 	public ModelReference findModelReferenceToModelElement(KermetaUnit kermetaUnit, fr.irisa.triskell.kermeta.language.structure.Object object)
 	{
-		ModelReference result = kermetaUnit.getTracer().getModelReference(object);
-	    if (result != null) 
-	    	return result;
-	    // try imported unit tracer
-	    List <KermetaUnit> iulist = KermetaUnitHelper.getAllImportedKermetaUnits( kermetaUnit );
-	    for ( KermetaUnit iu : iulist ) {	        
-	        if (iu.getTracer() != null) 
-	        	result = iu.getTracer().getModelReference(object);
+		if ( kermetaUnit.getTracer() != null ) {
+			ModelReference result = kermetaUnit.getTracer().getModelReference(object);
 		    if (result != null) 
 		    	return result;
-	    }
-	    return result;
+		    // try imported unit tracer
+		    List <KermetaUnit> iulist = KermetaUnitHelper.getAllImportedKermetaUnits( kermetaUnit );
+		    for ( KermetaUnit iu : iulist ) {	        
+		        if (iu.getTracer() != null) 
+		        	result = iu.getTracer().getModelReference(object);
+			    if (result != null) 
+			    	return result;
+		    }
+		    return result;
+		}
+		return null;
 	}
 	
 
