@@ -1,4 +1,4 @@
-/** $Id: KermetaRunProcess.java,v 1.4 2007-11-21 14:13:05 ftanguy Exp $
+/** $Id: KermetaRunProcess.java,v 1.5 2007-11-27 16:41:06 ftanguy Exp $
  * Project   : Kermeta Runner
  * File      : KermetaRunProcess.java
  * License   : EPL
@@ -26,6 +26,7 @@ import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.part.IPageBookViewPage;
 import org.eclipse.ui.progress.UIJob;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
@@ -74,7 +75,6 @@ public class KermetaRunProcess extends KermetaProcess {
 	public KermetaRunProcess(String f, String c, String o, String a, String threadName, boolean isConstraintMode, IOConsole console, AbstractKermetaTarget target) {
 		this(f, c, o, a, threadName, isConstraintMode, target);
 		this.console = console;
-		KermetaLauncher.getDefault().initInterpreter(f);
 	}
 	
 	public KermetaInterpreter getInterpreter() {
@@ -86,8 +86,11 @@ public class KermetaRunProcess extends KermetaProcess {
 	 * @see java.lang.Runnable#run()
 	 */
 	public void run() {
+		KermetaUnit kermetaUnit = KermetaLauncher.getDefault().getInterpreter().getUnit();
+		kermetaUnit.setLocked(true);
 		KermetaLauncher.getDefault().runKermeta(file, className, opName, args, false, isConstraintMode, console);
 		RunnerPlugin.getDefault().stopExecution(target);
+		kermetaUnit.setLocked(false);
 	}
 	
 	
