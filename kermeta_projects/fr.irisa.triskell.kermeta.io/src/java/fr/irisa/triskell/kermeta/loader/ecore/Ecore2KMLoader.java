@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.18 2007-11-21 14:04:49 ftanguy Exp $
+/*$Id: Ecore2KMLoader.java,v 1.19 2007-11-27 10:49:47 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -126,6 +126,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 						if(eobj.eResource()!= null){
 							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( eobj.eResource().getURI().toString(), loadingFramework );
 							resources.put(unit, eobj.eResource());
+							kermetaUnit.addRequire(eobj.eResource().getURI().toString(), unit);
 						}
 					}
 				} else {
@@ -139,6 +140,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 						if ( r != resource ) {
 							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( r.getURI().toString(), loadingFramework );
 							resources.put(unit, r);
+							kermetaUnit.addRequire(r.getURI().toString(), unit);
 						}
 					}
 					
@@ -147,6 +149,7 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 						if(eobj.eResource()!= null) {
 							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( eobj.eResource().getURI().toString(), loadingFramework );
 							resources.put(unit, eobj.eResource());
+							kermetaUnit.addRequire(eobj.eResource().getURI().toString(), unit);
 						}
 					}
 					
