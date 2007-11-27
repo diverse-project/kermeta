@@ -7,7 +7,10 @@ Bundle-Activator: org.kermeta.trek.ui.views.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
- org.kermeta.trek.model
+ org.kermeta.trek.model.edit
 Eclipse-LazyStart: true
-Export-Package: org.kermeta.trek.ui.wizards,
+Export-Package: org.kermeta.trek.ui.views,
+ org.kermeta.trek.ui.views.nav,
+ org.kermeta.trek.ui.views.nav.operations,
+ org.kermeta.trek.ui.wizards,
  org.kermeta.trek.ui.wizards.kusecase
