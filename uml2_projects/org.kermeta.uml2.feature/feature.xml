@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.kermeta.uml2.feature"
+      id="org.kermeta.uml2"
       label="UML2 MDK Feature"
       version="0.1.0">
 
