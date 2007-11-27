@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KUserStoryItemProvider.java,v 1.2 2007-11-26 17:04:15 cfaucher Exp $
+ * $Id: KUserStoryItemProvider.java,v 1.3 2007-11-27 16:45:58 cfaucher Exp $
  */
 package org.kermeta.trek.provider;
 
@@ -88,7 +88,7 @@ public class KUserStoryItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
+				 getString("_UI_AllPropertyCategory"),
 				 null));
 	}
 
@@ -110,7 +110,7 @@ public class KUserStoryItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_AllPropertyCategory"),
 				 null));
 	}
 
@@ -132,7 +132,7 @@ public class KUserStoryItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_DescriptionPropertyCategory"),
 				 null));
 	}
 

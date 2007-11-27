@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KUseCaseItemProvider.java,v 1.2 2007-11-26 17:04:15 cfaucher Exp $
+ * $Id: KUseCaseItemProvider.java,v 1.3 2007-11-27 16:45:59 cfaucher Exp $
  */
 package org.kermeta.trek.provider;
 
@@ -76,6 +76,7 @@ public class KUseCaseItemProvider
 			addCoversPropertyDescriptor(object);
 			addLevelPropertyDescriptor(object);
 			addTagsPropertyDescriptor(object);
+			addPriorityPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -98,7 +99,7 @@ public class KUseCaseItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_AllPropertyCategory"),
 				 null));
 	}
 
@@ -120,7 +121,7 @@ public class KUseCaseItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_DescriptionPropertyCategory"),
 				 null));
 	}
 
@@ -142,7 +143,7 @@ public class KUseCaseItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
+				 getString("_UI_RelationshipsbetweenusecasePropertyCategory"),
 				 null));
 	}
 
@@ -164,7 +165,7 @@ public class KUseCaseItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
+				 getString("_UI_RelationshipsbetweenusecasePropertyCategory"),
 				 null));
 	}
 
@@ -186,7 +187,7 @@ public class KUseCaseItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
+				 getString("_UI_AllPropertyCategory"),
 				 null));
 	}
 
@@ -208,7 +209,7 @@ public class KUseCaseItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
+				 getString("_UI_RelationshipsbetweenusecasePropertyCategory"),
 				 null));
 	}
 
@@ -230,7 +231,7 @@ public class KUseCaseItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
+				 getString("_UI_RelationshipsbetweenusecasePropertyCategory"),
 				 null));
 	}
 
@@ -252,7 +253,7 @@ public class KUseCaseItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
+				 getString("_UI_AllPropertyCategory"),
 				 null));
 	}
 
@@ -274,7 +275,7 @@ public class KUseCaseItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_QualifierPropertyCategory"),
 				 null));
 	}
 
@@ -296,7 +297,29 @@ public class KUseCaseItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
+				 getString("_UI_QualifierPropertyCategory"),
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Priority feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPriorityPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_KUseCase_priority_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_KUseCase_priority_feature", "_UI_KUseCase_type"),
+				 TrekPackage.Literals.KUSE_CASE__PRIORITY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_QualifierPropertyCategory"),
 				 null));
 	}
 
@@ -370,6 +393,7 @@ public class KUseCaseItemProvider
 			case TrekPackage.KUSE_CASE__ID:
 			case TrekPackage.KUSE_CASE__SHORT_SUMMARY:
 			case TrekPackage.KUSE_CASE__LEVEL:
+			case TrekPackage.KUSE_CASE__PRIORITY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrekPackage.KUSE_CASE__STATUS:

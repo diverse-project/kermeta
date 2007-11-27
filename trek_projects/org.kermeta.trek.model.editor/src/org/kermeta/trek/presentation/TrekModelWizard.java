@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekModelWizard.java,v 1.2 2007-11-26 17:04:12 cfaucher Exp $
+ * $Id: TrekModelWizard.java,v 1.3 2007-11-27 16:45:52 cfaucher Exp $
  */
 package org.kermeta.trek.presentation;
 
@@ -386,7 +386,8 @@ public class TrekModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		public void createControl(Composite parent) {
-			Composite composite = new Composite(parent, SWT.NONE); {
+			Composite composite = new Composite(parent, SWT.NONE);
+			{
 				GridLayout layout = new GridLayout();
 				layout.numColumns = 1;
 				layout.verticalSpacing = 12;

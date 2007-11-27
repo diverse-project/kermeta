@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KStatusItemProvider.java,v 1.1 2007-11-26 17:04:15 cfaucher Exp $
+ * $Id: KStatusItemProvider.java,v 1.2 2007-11-27 16:45:58 cfaucher Exp $
  */
 package org.kermeta.trek.provider;
 
@@ -87,7 +87,7 @@ public class KStatusItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
+				 getString("_UI_AllPropertyCategory"),
 				 null));
 	}
 
@@ -109,7 +109,7 @@ public class KStatusItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_AllPropertyCategory"),
 				 null));
 	}
 

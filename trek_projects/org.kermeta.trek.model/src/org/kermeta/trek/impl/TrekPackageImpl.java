@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekPackageImpl.java,v 1.4 2007-11-26 17:04:18 cfaucher Exp $
+ * $Id: TrekPackageImpl.java,v 1.5 2007-11-27 16:45:55 cfaucher Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -20,6 +20,7 @@ import org.kermeta.trek.KTagElement;
 import org.kermeta.trek.KTestCase;
 import org.kermeta.trek.KTestCaseType;
 import org.kermeta.trek.KUseCase;
+import org.kermeta.trek.KUseCasePriority;
 import org.kermeta.trek.KUseLevel;
 import org.kermeta.trek.KUserStory;
 import org.kermeta.trek.TrekFactory;
@@ -96,6 +97,13 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * @generated
 	 */
 	private EEnum kTestCaseTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum kUseCasePriorityEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -323,6 +331,15 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getKUseCase_Priority() {
+		return (EAttribute)kUseCaseEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getKTestCase() {
 		return kTestCaseEClass;
 	}
@@ -485,6 +502,15 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getKUseCasePriority() {
+		return kUseCasePriorityEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TrekFactory getTrekFactory() {
 		return (TrekFactory)getEFactoryInstance();
 	}
@@ -526,6 +552,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 		createEAttribute(kUseCaseEClass, KUSE_CASE__LEVEL);
 		createEReference(kUseCaseEClass, KUSE_CASE__TAGS);
 		createEReference(kUseCaseEClass, KUSE_CASE__STATUS);
+		createEAttribute(kUseCaseEClass, KUSE_CASE__PRIORITY);
 
 		kTestCaseEClass = createEClass(KTEST_CASE);
 		createEReference(kTestCaseEClass, KTEST_CASE__VERIFIES);
@@ -551,6 +578,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 		// Create enums
 		kUseLevelEEnum = createEEnum(KUSE_LEVEL);
 		kTestCaseTypeEEnum = createEEnum(KTEST_CASE_TYPE);
+		kUseCasePriorityEEnum = createEEnum(KUSE_CASE_PRIORITY);
 	}
 
 	/**
@@ -609,6 +637,7 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 		initEAttribute(getKUseCase_Level(), this.getKUseLevel(), "level", null, 1, 1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKUseCase_Tags(), this.getKTagElement(), null, "tags", null, 0, -1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKUseCase_Status(), this.getKStatus(), null, "status", null, 0, -1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKUseCase_Priority(), this.getKUseCasePriority(), "priority", null, 0, 1, KUseCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kTestCaseEClass, KTestCase.class, "KTestCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKTestCase_Verifies(), this.getKUseCase(), this.getKUseCase_VerifiedBy(), "verifies", null, 0, -1, KTestCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -639,6 +668,12 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 		initEEnum(kTestCaseTypeEEnum, KTestCaseType.class, "KTestCaseType");
 		addEEnumLiteral(kTestCaseTypeEEnum, KTestCaseType.UNIT_TEST);
 		addEEnumLiteral(kTestCaseTypeEEnum, KTestCaseType.BLACK_BOX);
+
+		initEEnum(kUseCasePriorityEEnum, KUseCasePriority.class, "KUseCasePriority");
+		addEEnumLiteral(kUseCasePriorityEEnum, KUseCasePriority.DEFAULT);
+		addEEnumLiteral(kUseCasePriorityEEnum, KUseCasePriority.HIGH);
+		addEEnumLiteral(kUseCasePriorityEEnum, KUseCasePriority.MEDIUM);
+		addEEnumLiteral(kUseCasePriorityEEnum, KUseCasePriority.LOW);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -2,11 +2,12 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.trek.model/src"
-    modelPluginID="org.kermeta.trek.model" modelName="Usekase" testsDirectory="" importerID="org.eclipse.emf.importer.ecore"
-    containmentProxies="true" complianceLevel="5.0" copyrightFields="false">
+    creationSubmenus="true" modelPluginID="org.kermeta.trek.model" modelName="Usekase"
+    testsDirectory="" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
+    complianceLevel="5.0" copyrightFields="false">
   <foreignModel>usekase.ecore</foreignModel>
   <genPackages prefix="Trek" basePackage="org.kermeta" disposableProviderFactory="true"
-      ecorePackage="usekase.ecore#/">
+      multipleEditorPages="false" ecorePackage="usekase.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="usekase.ecore#//KUseLevel">
       <genEnumLiterals ecoreEnumLiteral="usekase.ecore#//KUseLevel/Implementation"/>
       <genEnumLiterals ecoreEnumLiteral="usekase.ecore#//KUseLevel/Unknown"/>
@@ -15,47 +16,69 @@
       <genEnumLiterals ecoreEnumLiteral="usekase.ecore#//KTestCaseType/UnitTest"/>
       <genEnumLiterals ecoreEnumLiteral="usekase.ecore#//KTestCaseType/BlackBox"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="usekase.ecore#//KUseCasePriority">
+      <genEnumLiterals ecoreEnumLiteral="usekase.ecore#//KUseCasePriority/Default"/>
+      <genEnumLiterals ecoreEnumLiteral="usekase.ecore#//KUseCasePriority/High"/>
+      <genEnumLiterals ecoreEnumLiteral="usekase.ecore#//KUseCasePriority/Medium"/>
+      <genEnumLiterals ecoreEnumLiteral="usekase.ecore#//KUseCasePriority/Low"/>
+    </genEnums>
     <genClasses ecoreClass="usekase.ecore#//UseKaseModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference usekase.ecore#//UseKaseModel/kuseCases"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference usekase.ecore#//UseKaseModel/ktestCases"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference usekase.ecore#//UseKaseModel/ktags"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference usekase.ecore#//UseKaseModel/KuserStories"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory="All"
+          ecoreFeature="ecore:EReference usekase.ecore#//UseKaseModel/kuseCases"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory="All"
+          ecoreFeature="ecore:EReference usekase.ecore#//UseKaseModel/ktestCases"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory="All"
+          ecoreFeature="ecore:EReference usekase.ecore#//UseKaseModel/ktags"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory="All"
+          ecoreFeature="ecore:EReference usekase.ecore#//UseKaseModel/KuserStories"/>
       <genOperations ecoreOperation="usekase.ecore#//UseKaseModel/getUseCaseByTags">
         <genParameters ecoreParameter="usekase.ecore#//UseKaseModel/getUseCaseByTags/tags"/>
       </genOperations>
     </genClasses>
-    <genClasses ecoreClass="usekase.ecore#//KUseCase">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//KUseCase/id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//KUseCase/shortSummary"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/use"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/usedBy"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/verifiedBy"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/refines"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/refinedBy"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/covers"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//KUseCase/level"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/tags"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/status"/>
+    <genClasses ecoreClass="usekase.ecore#//KUseCase" labelFeature="#//trek/TrekModelElement/name">
+      <genFeatures createChild="false" propertyCategory="All" ecoreFeature="ecore:EAttribute usekase.ecore#//KUseCase/id"/>
+      <genFeatures createChild="false" propertyCategory="Description" ecoreFeature="ecore:EAttribute usekase.ecore#//KUseCase/shortSummary"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Relationships between use case"
+          propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/use"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Relationships between use case"
+          propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/usedBy"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="All" propertySortChoices="true"
+          ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/verifiedBy"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Relationships between use case"
+          propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/refines"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Relationships between use case"
+          propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/refinedBy"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="All" propertySortChoices="true"
+          ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/covers"/>
+      <genFeatures createChild="false" propertyCategory="Qualifier" ecoreFeature="ecore:EAttribute usekase.ecore#//KUseCase/level"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Qualifier"
+          propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/tags"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory="Qualifier"
+          ecoreFeature="ecore:EReference usekase.ecore#//KUseCase/status"/>
+      <genFeatures createChild="false" propertyCategory="Qualifier" ecoreFeature="ecore:EAttribute usekase.ecore#//KUseCase/priority"/>
     </genClasses>
     <genClasses ecoreClass="usekase.ecore#//KTestCase">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KTestCase/verifies"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//KTestCase/uri"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//KTestCase/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//KTestCase/resultId"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="All" propertySortChoices="true"
+          ecoreFeature="ecore:EReference usekase.ecore#//KTestCase/verifies"/>
+      <genFeatures createChild="false" propertyCategory="All" ecoreFeature="ecore:EAttribute usekase.ecore#//KTestCase/uri"/>
+      <genFeatures createChild="false" propertyCategory="All" ecoreFeature="ecore:EAttribute usekase.ecore#//KTestCase/type"/>
+      <genFeatures createChild="false" propertyCategory="All" ecoreFeature="ecore:EAttribute usekase.ecore#//KTestCase/resultId"/>
     </genClasses>
     <genClasses ecoreClass="usekase.ecore#//KUserStory">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference usekase.ecore#//KUserStory/coveredBy"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//KUserStory/id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//KUserStory/shortSummary"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="All" propertySortChoices="true"
+          ecoreFeature="ecore:EReference usekase.ecore#//KUserStory/coveredBy"/>
+      <genFeatures createChild="false" propertyCategory="All" ecoreFeature="ecore:EAttribute usekase.ecore#//KUserStory/id"/>
+      <genFeatures createChild="false" propertyCategory="Description" ecoreFeature="ecore:EAttribute usekase.ecore#//KUserStory/shortSummary"/>
     </genClasses>
     <genClasses ecoreClass="usekase.ecore#//KTagElement"/>
     <genClasses image="false" ecoreClass="usekase.ecore#//TrekModelElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//TrekModelElement/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//TrekModelElement/summary"/>
+      <genFeatures createChild="false" propertyCategory="Description" ecoreFeature="ecore:EAttribute usekase.ecore#//TrekModelElement/name"/>
+      <genFeatures createChild="false" propertyCategory="Description" propertyMultiLine="true"
+          ecoreFeature="ecore:EAttribute usekase.ecore#//TrekModelElement/summary"/>
     </genClasses>
     <genClasses ecoreClass="usekase.ecore#//KStatus">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//KStatus/progress"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute usekase.ecore#//KStatus/key"/>
+      <genFeatures createChild="false" propertyCategory="All" ecoreFeature="ecore:EAttribute usekase.ecore#//KStatus/progress"/>
+      <genFeatures createChild="false" propertyCategory="All" ecoreFeature="ecore:EAttribute usekase.ecore#//KStatus/key"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

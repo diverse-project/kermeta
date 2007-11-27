@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UsekaseEditorPlugin.java,v 1.2 2007-11-26 17:04:12 cfaucher Exp $
+ * $Id: UsekaseEditorPlugin.java,v 1.3 2007-11-27 16:45:52 cfaucher Exp $
  */
 package org.kermeta.trek.presentation;
 

@@ -36,6 +36,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" upperBound="-1" eType="#//KTagElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="status" upperBound="-1"
         eType="#//KStatus" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="#//KUseCasePriority"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KTestCase" eSuperTypes="#//TrekModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="verifies" upperBound="-1"
@@ -68,5 +69,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="KStatus" eSuperTypes="#//TrekModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="progress" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="KUseCasePriority">
+    <eLiterals name="Default"/>
+    <eLiterals name="High" value="1"/>
+    <eLiterals name="Medium" value="2"/>
+    <eLiterals name="Low"/>
   </eClassifiers>
 </ecore:EPackage>

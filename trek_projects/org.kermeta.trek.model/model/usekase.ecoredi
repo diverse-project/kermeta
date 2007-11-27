@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_w8QV0Hu_Edyl0NdVD9ldcg" activeDiagram="_w8QV0Xu_Edyl0NdVD9ldcg">
   <model href="usekase.ecore#/"/>
-  <diagrams xmi:id="_w8QV0Xu_Edyl0NdVD9ldcg" position="0,0" size="100,100" name="No name" viewport="0,0">
+  <diagrams xmi:id="_w8QV0Xu_Edyl0NdVD9ldcg" position="0,0" size="100,100" name="No name" viewport="0,6">
     <property xmi:id="_x_nQQHu_Edyl0NdVD9ldcg" key="pageFormatName" value="A4"/>
     <property xmi:id="_x_nQQXu_Edyl0NdVD9ldcg" key="diagramWidth" value="840"/>
     <property xmi:id="_x_nQQnu_Edyl0NdVD9ldcg" key="diagramHeight" value="1188"/>
@@ -89,6 +89,11 @@
         <contained xsi:type="di:GraphNode" xmi:id="_yyuIOHu_Edyl0NdVD9ldcg" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_yyuIOXu_Edyl0NdVD9ldcg" presentation="default">
             <element href="usekase.ecore#//KUseCase/level"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_RlFXIJ0HEdyJ3MC-RL0nBg" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_RlFXIZ0HEdyJ3MC-RL0nBg" presentation="default">
+            <element href="usekase.ecore#//KUseCase/priority"/>
           </semanticModel>
         </contained>
       </contained>
@@ -382,6 +387,37 @@
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_gg57cpwxEdybEqCfwJTdhw" id="nameLabel" uDistance="4" vDistance="13"/>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_gg57c5wxEdybEqCfwJTdhw" id="cardinalityLabel" uDistance="4" vDistance="-10"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_UcYUYJ0HEdyJ3MC-RL0nBg" position="350,448" size="150,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_UcYUYZ0HEdyJ3MC-RL0nBg" presentation="default">
+        <element href="usekase.ecore#//KUseCasePriority"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_UcYUYp0HEdyJ3MC-RL0nBg">
+        <property xmi:id="_UcYUY50HEdyJ3MC-RL0nBg" key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_UcYUZJ0HEdyJ3MC-RL0nBg" presentation="default">
+          <element href="usekase.ecore#//KUseCasePriority"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_YySksp0HEdyJ3MC-RL0nBg" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_YySks50HEdyJ3MC-RL0nBg" presentation="default">
+            <element href="usekase.ecore#//KUseCasePriority/Default"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_a7Y_Mp0HEdyJ3MC-RL0nBg" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_a7Y_M50HEdyJ3MC-RL0nBg" presentation="default">
+            <element href="usekase.ecore#//KUseCasePriority/High"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_cWu70p0HEdyJ3MC-RL0nBg" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_cWu7050HEdyJ3MC-RL0nBg" presentation="default">
+            <element href="usekase.ecore#//KUseCasePriority/Medium"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_eizx0p0HEdyJ3MC-RL0nBg" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_eizx050HEdyJ3MC-RL0nBg" presentation="default">
+            <element href="usekase.ecore#//KUseCasePriority/Low"/>
+          </semanticModel>
+        </contained>
+      </contained>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

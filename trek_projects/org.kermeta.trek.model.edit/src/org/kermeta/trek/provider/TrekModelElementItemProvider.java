@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekModelElementItemProvider.java,v 1.1 2007-11-26 17:04:15 cfaucher Exp $
+ * $Id: TrekModelElementItemProvider.java,v 1.2 2007-11-27 16:45:59 cfaucher Exp $
  */
 package org.kermeta.trek.provider;
 
@@ -88,7 +88,7 @@ public class TrekModelElementItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_DescriptionPropertyCategory"),
 				 null));
 	}
 
@@ -107,10 +107,10 @@ public class TrekModelElementItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_TrekModelElement_summary_feature", "_UI_TrekModelElement_type"),
 				 TrekPackage.Literals.TREK_MODEL_ELEMENT__SUMMARY,
 				 true,
-				 false,
+				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_DescriptionPropertyCategory"),
 				 null));
 	}
 

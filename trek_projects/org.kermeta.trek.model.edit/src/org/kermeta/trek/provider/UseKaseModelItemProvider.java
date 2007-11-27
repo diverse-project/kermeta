@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UseKaseModelItemProvider.java,v 1.2 2007-11-26 17:04:15 cfaucher Exp $
+ * $Id: UseKaseModelItemProvider.java,v 1.3 2007-11-27 16:45:59 cfaucher Exp $
  */
 package org.kermeta.trek.provider;
 

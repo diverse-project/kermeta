@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekPackage.java,v 1.4 2007-11-26 17:04:18 cfaucher Exp $
+ * $Id: TrekPackage.java,v 1.5 2007-11-27 16:45:55 cfaucher Exp $
  */
 package org.kermeta.trek;
 
@@ -280,13 +280,22 @@ public interface TrekPackage extends EPackage {
 	int KUSE_CASE__STATUS = TREK_MODEL_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Priority</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KUSE_CASE__PRIORITY = TREK_MODEL_ELEMENT_FEATURE_COUNT + 11;
+
+	/**
 	 * The number of structural features of the '<em>KUse Case</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KUSE_CASE_FEATURE_COUNT = TREK_MODEL_ELEMENT_FEATURE_COUNT + 11;
+	int KUSE_CASE_FEATURE_COUNT = TREK_MODEL_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.trek.impl.KTestCaseImpl <em>KTest Case</em>}' class.
@@ -539,6 +548,17 @@ public interface TrekPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.trek.KUseCasePriority <em>KUse Case Priority</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.trek.KUseCasePriority
+	 * @see org.kermeta.trek.impl.TrekPackageImpl#getKUseCasePriority()
+	 * @generated
+	 */
+	int KUSE_CASE_PRIORITY = 9;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.trek.UseKaseModel <em>Use Kase Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -722,6 +742,17 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getKUseCase_Status();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.trek.KUseCase#getPriority <em>Priority</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Priority</em>'.
+	 * @see org.kermeta.trek.KUseCase#getPriority()
+	 * @see #getKUseCase()
+	 * @generated
+	 */
+	EAttribute getKUseCase_Priority();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.trek.KTestCase <em>KTest Case</em>}'.
@@ -915,6 +946,16 @@ public interface TrekPackage extends EPackage {
 	EEnum getKTestCaseType();
 
 	/**
+	 * Returns the meta object for enum '{@link org.kermeta.trek.KUseCasePriority <em>KUse Case Priority</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>KUse Case Priority</em>'.
+	 * @see org.kermeta.trek.KUseCasePriority
+	 * @generated
+	 */
+	EEnum getKUseCasePriority();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1077,6 +1118,14 @@ public interface TrekPackage extends EPackage {
 		EReference KUSE_CASE__STATUS = eINSTANCE.getKUseCase_Status();
 
 		/**
+		 * The meta object literal for the '<em><b>Priority</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KUSE_CASE__PRIORITY = eINSTANCE.getKUseCase_Priority();
+
+		/**
 		 * The meta object literal for the '{@link org.kermeta.trek.impl.KTestCaseImpl <em>KTest Case</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1233,6 +1282,16 @@ public interface TrekPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum KTEST_CASE_TYPE = eINSTANCE.getKTestCaseType();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.trek.KUseCasePriority <em>KUse Case Priority</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.trek.KUseCasePriority
+		 * @see org.kermeta.trek.impl.TrekPackageImpl#getKUseCasePriority()
+		 * @generated
+		 */
+		EEnum KUSE_CASE_PRIORITY = eINSTANCE.getKUseCasePriority();
 
 	}
 

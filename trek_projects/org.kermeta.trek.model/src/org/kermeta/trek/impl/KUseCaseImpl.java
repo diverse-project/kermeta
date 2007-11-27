@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KUseCaseImpl.java,v 1.4 2007-11-26 17:04:18 cfaucher Exp $
+ * $Id: KUseCaseImpl.java,v 1.5 2007-11-27 16:45:55 cfaucher Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -27,6 +27,7 @@ import org.kermeta.trek.KStatus;
 import org.kermeta.trek.KTagElement;
 import org.kermeta.trek.KTestCase;
 import org.kermeta.trek.KUseCase;
+import org.kermeta.trek.KUseCasePriority;
 import org.kermeta.trek.KUseLevel;
 import org.kermeta.trek.KUserStory;
 import org.kermeta.trek.TrekPackage;
@@ -49,6 +50,7 @@ import org.kermeta.trek.TrekPackage;
  *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getLevel <em>Level</em>}</li>
  *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.kermeta.trek.impl.KUseCaseImpl#getPriority <em>Priority</em>}</li>
  * </ul>
  * </p>
  *
@@ -194,6 +196,26 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 	 * @ordered
 	 */
 	protected EList<KStatus> status;
+
+	/**
+	 * The default value of the '{@link #getPriority() <em>Priority</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPriority()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final KUseCasePriority PRIORITY_EDEFAULT = KUseCasePriority.DEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getPriority() <em>Priority</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPriority()
+	 * @generated
+	 * @ordered
+	 */
+	protected KUseCasePriority priority = PRIORITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -426,6 +448,27 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public KUseCasePriority getPriority() {
+		return priority;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPriority(KUseCasePriority newPriority) {
+		KUseCasePriority oldPriority = priority;
+		priority = newPriority == null ? PRIORITY_EDEFAULT : newPriority;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrekPackage.KUSE_CASE__PRIORITY, oldPriority, priority));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -505,6 +548,8 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 				return getTags();
 			case TrekPackage.KUSE_CASE__STATUS:
 				return getStatus();
+			case TrekPackage.KUSE_CASE__PRIORITY:
+				return getPriority();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -558,6 +603,9 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 				getStatus().clear();
 				getStatus().addAll((Collection<? extends KStatus>)newValue);
 				return;
+			case TrekPackage.KUSE_CASE__PRIORITY:
+				setPriority((KUseCasePriority)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -603,6 +651,9 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 			case TrekPackage.KUSE_CASE__STATUS:
 				getStatus().clear();
 				return;
+			case TrekPackage.KUSE_CASE__PRIORITY:
+				setPriority(PRIORITY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -637,6 +688,8 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 				return tags != null && !tags.isEmpty();
 			case TrekPackage.KUSE_CASE__STATUS:
 				return status != null && !status.isEmpty();
+			case TrekPackage.KUSE_CASE__PRIORITY:
+				return priority != PRIORITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -657,6 +710,8 @@ public class KUseCaseImpl extends TrekModelElementImpl implements KUseCase {
 		result.append(shortSummary);
 		result.append(", level: ");
 		result.append(level);
+		result.append(", priority: ");
+		result.append(priority);
 		result.append(')');
 		return result.toString();
 	}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KUseCase.java,v 1.4 2007-11-26 17:04:18 cfaucher Exp $
+ * $Id: KUseCase.java,v 1.5 2007-11-27 16:45:55 cfaucher Exp $
  */
 package org.kermeta.trek;
 
@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.kermeta.trek.KUseCase#getLevel <em>Level</em>}</li>
  *   <li>{@link org.kermeta.trek.KUseCase#getTags <em>Tags</em>}</li>
  *   <li>{@link org.kermeta.trek.KUseCase#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.kermeta.trek.KUseCase#getPriority <em>Priority</em>}</li>
  * </ul>
  * </p>
  *
@@ -265,5 +266,34 @@ public interface KUseCase extends TrekModelElement {
 	 * @generated
 	 */
 	EList<KStatus> getStatus();
+
+	/**
+	 * Returns the value of the '<em><b>Priority</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.kermeta.trek.KUseCasePriority}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Priority</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Priority</em>' attribute.
+	 * @see org.kermeta.trek.KUseCasePriority
+	 * @see #setPriority(KUseCasePriority)
+	 * @see org.kermeta.trek.TrekPackage#getKUseCase_Priority()
+	 * @model
+	 * @generated
+	 */
+	KUseCasePriority getPriority();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.trek.KUseCase#getPriority <em>Priority</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Priority</em>' attribute.
+	 * @see org.kermeta.trek.KUseCasePriority
+	 * @see #getPriority()
+	 * @generated
+	 */
+	void setPriority(KUseCasePriority value);
 
 } // KUseCase

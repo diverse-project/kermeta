@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekFactoryImpl.java,v 1.3 2007-11-26 17:04:18 cfaucher Exp $
+ * $Id: TrekFactoryImpl.java,v 1.4 2007-11-27 16:45:55 cfaucher Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -84,6 +84,8 @@ public class TrekFactoryImpl extends EFactoryImpl implements TrekFactory {
 				return createKUseLevelFromString(eDataType, initialValue);
 			case TrekPackage.KTEST_CASE_TYPE:
 				return createKTestCaseTypeFromString(eDataType, initialValue);
+			case TrekPackage.KUSE_CASE_PRIORITY:
+				return createKUseCasePriorityFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -101,6 +103,8 @@ public class TrekFactoryImpl extends EFactoryImpl implements TrekFactory {
 				return convertKUseLevelToString(eDataType, instanceValue);
 			case TrekPackage.KTEST_CASE_TYPE:
 				return convertKTestCaseTypeToString(eDataType, instanceValue);
+			case TrekPackage.KUSE_CASE_PRIORITY:
+				return convertKUseCasePriorityToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -203,6 +207,26 @@ public class TrekFactoryImpl extends EFactoryImpl implements TrekFactory {
 	 * @generated
 	 */
 	public String convertKTestCaseTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KUseCasePriority createKUseCasePriorityFromString(EDataType eDataType, String initialValue) {
+		KUseCasePriority result = KUseCasePriority.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertKUseCasePriorityToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
