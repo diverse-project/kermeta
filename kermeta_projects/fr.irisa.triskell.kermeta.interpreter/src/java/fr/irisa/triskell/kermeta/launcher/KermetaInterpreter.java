@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.40 2007-11-21 14:00:45 ftanguy Exp $
+/* $Id: KermetaInterpreter.java,v 1.41 2007-11-28 15:56:04 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -144,7 +144,7 @@ public class KermetaInterpreter {
 	    try {
 	    	KermetaUnit source = KermetaUnitChecker.check( uri_unit );
 	    	
-	    	if ( source.getUri().matches(".+\\.km") )
+	    	if ( source.getUri().matches(".+\\.km") && source.getUri().matches(".+/.bin.+") )
 	    		unit = source;
 	    	else {
 			    source.setLocked(true);
