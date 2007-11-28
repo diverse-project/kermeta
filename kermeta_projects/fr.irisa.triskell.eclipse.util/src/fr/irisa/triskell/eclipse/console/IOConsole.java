@@ -1,5 +1,7 @@
-/* $Id: IOConsole.java,v 1.6 2007-11-28 07:50:59 dvojtise Exp $
-* Project : fr.irisa.triskell.eclipse.util
+
+
+/*$Id: IOConsole.java,v 1.7 2007-11-28 15:00:23 ftanguy Exp $
+* Project : fr.irisa.triskell.kermeta.kpm
 * File : 	IOConsole.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
