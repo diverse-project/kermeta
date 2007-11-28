@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="org.kermeta.trek.ui.contribution1"
+            objectClass="org.eclipse.core.resources.IFolder">
+         <menu
+	         id="org.kermeta.compiler.trek.subMenu"
+	         label="Trek for K Compiler"
+	         path="additions">
+      		<separator name="summary"/>
+        <separator
+              name="trek_model">
+        </separator>
+		 </menu>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.InitializeTestCasesModel"
+               enablesFor="+"
+               id="org.kermeta.compiler.trek.ui.InitializeTestCasesModel"
+               label="Initialize the Trek models for the compilation Test Cases"
+               menubarPath="org.kermeta.compiler.trek.subMenu/trek_model">
+         </action>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.InitializeUseCasesModel"
+               enablesFor="+"
+               id="org.kermeta.compiler.trek.ui.InitializeUseCasesModel"
+               label="Initialize the Trek models for the compilation Use Cases"
+               menubarPath="org.kermeta.compiler.trek.subMenu/trek_model">
+         </action>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.InitializeTrekSummary"
+               enablesFor="+"
+               id="org.kermeta.compiler.trek.ui.InitializeTrekSummary"
+               label="Initialize the summary files for the compilation doc"
+               menubarPath="org.kermeta.compiler.trek.subMenu/summary">
+         </action>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.DeleteTrekSummary"
+               enablesFor="+"
+               icon="icons/delete.gif"
+               id="org.kermeta.compiler.trek.ui.DeleteTrekSummary"
+               label="Delete the summary files for the compilation doc"
+               menubarPath="org.kermeta.compiler.trek.subMenu/summary">
+         </action>
+      </objectContribution>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="org.kermeta.trek.ui.contribution2"
+            objectClass="org.eclipse.core.resources.IResource">
+         <menu
+	         id="org.kermeta.compiler.trek.subMenu"
+	         label="Trek for K Compiler"
+	         path="additions">
+      		<separator name="mapping"/>
+		 </menu>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.AssignTestCasesToUseCases"
+               enablesFor="+"
+               id="org.kermeta.trek.ui.AssignTestCasesToUseCases"
+               label="Assign Test Cases to Use Cases"
+               menubarPath="org.kermeta.compiler.trek.subMenu/mapping">
+         </action>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.DeleteTestCasesUseCasesMapping"
+               enablesFor="+"
+               icon="icons/delete.gif"
+               id="org.kermeta.trek.ui.DeleteTestCasesUseCasesMapping"
+               label="Delete the Mapping between TestCases and UseCases"
+               menubarPath="org.kermeta.compiler.trek.subMenu/mapping">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
