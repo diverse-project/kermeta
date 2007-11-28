@@ -1,4 +1,4 @@
-/*$Id: DeleteTestCasesUseCasesMapping.java,v 1.1 2007-11-28 12:20:25 cfaucher Exp $
+/*$Id: DeleteTestCasesUseCasesMapping.java,v 1.2 2007-11-28 12:40:22 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	DeleteTestCasesUseCasesMapping.java
 * License : EPL
@@ -156,7 +156,6 @@ public class DeleteTestCasesUseCasesMapping implements IObjectActionDelegate {
 			usecasesResources.add(trek_resource);
 			
 			for(KUseCase uC : ((UseKaseModel) trek_resource.getContents().get(0)).getKuseCases()) {
-				System.out.println(uC.getId() + " " + uC);
 				useCases.put(uC.getId(), uC);
 			}
 		}
