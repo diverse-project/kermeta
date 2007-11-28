@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.30 2007-11-28 13:59:35 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.31 2007-11-28 14:54:39 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -183,7 +183,6 @@ public class UnitExporterWizard extends Wizard {
 
 
 		IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
-			@Override
 			public void run(IProgressMonitor monitor) throws CoreException {
 				exporter.export(builder, targetDir, fileURI);				
 				ifile.refreshLocal(1, null);
