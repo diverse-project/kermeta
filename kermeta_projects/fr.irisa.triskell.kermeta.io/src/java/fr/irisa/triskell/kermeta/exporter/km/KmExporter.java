@@ -1,6 +1,6 @@
 
 
-/*$Id: KmExporter.java,v 1.5 2007-10-12 09:17:52 ftanguy Exp $
+/*$Id: KmExporter.java,v 1.6 2007-11-28 13:59:57 ftanguy Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -145,6 +145,8 @@ public class KmExporter {
 		} else if (kermetaUnit.getUri().startsWith("http://")) {
 			int index = kermetaUnit.getUri().lastIndexOf("/");
 			uri = rep + kermetaUnit.getUri().substring(index+1) + ".km";
+		} else if ( kermetaUnit.getUri().startsWith("platform:/resource") ) {
+			uri = kermetaUnit.getUri();			
 		} else {
 			uri = uri.replace(pathToRemove + "/", "");
 			uri = rep + uri;
