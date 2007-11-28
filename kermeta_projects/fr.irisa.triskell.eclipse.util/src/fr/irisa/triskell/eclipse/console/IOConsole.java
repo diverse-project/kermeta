@@ -1,8 +1,6 @@
-
-
-/*$Id: IOConsole.java,v 1.5 2007-11-27 16:40:25 ftanguy Exp $
-* Project : fr.irisa.triskell.kermeta.kpm
-* File : 	sdfg.java
+/* $Id: IOConsole.java,v 1.6 2007-11-28 07:50:59 dvojtise Exp $
+* Project : fr.irisa.triskell.eclipse.util
+* File : 	IOConsole.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
@@ -147,7 +145,6 @@ public class IOConsole {
 	
 	public void print(final ConsoleMessage message) {
 		Runnable r = new Runnable() {
-			@Override
 			public void run() {
 				changeColor(message.getColor());
 				IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
@@ -177,7 +174,6 @@ public class IOConsole {
 	}
 	public void println(final ConsoleMessage message) {
 		Runnable r = new Runnable() {
-			@Override
 			public void run() {
 				changeColor(message.getColor());
 				IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
