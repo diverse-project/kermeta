@@ -12,7 +12,6 @@ package loadEcore;
 
  
 require kermeta
-require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/Patterns4Ecore.kmt"
 require "http://www.eclipse.org/emf/2002/Ecore"
 
 using kermeta::persistence
