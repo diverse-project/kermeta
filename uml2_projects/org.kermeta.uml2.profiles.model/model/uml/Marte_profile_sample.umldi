@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_z7s7kJ3DEdych_LXgc3zSA" activeDiagram="_z7s7kZ3DEdych_LXgc3zSA">
+  <model href="Marte_profile_sample.uml#_w8IxIM37EdqwVrslYOdUDA"/>
+  <diagrams xmi:id="_z7s7kZ3DEdych_LXgc3zSA" position="0,0" size="100,100" name="Marte_profile_sample*" viewport="0,0">
+    <property xmi:id="_1Vy7AJ3DEdych_LXgc3zSA" key="pageFormatName" value="A4"/>
+    <property xmi:id="_1Vy7AZ3DEdych_LXgc3zSA" key="diagramWidth" value="840"/>
+    <property xmi:id="_1Vy7Ap3DEdych_LXgc3zSA" key="diagramHeight" value="1188"/>
+    <property xmi:id="_1Vy7A53DEdych_LXgc3zSA" key="pageMarginName" value="Small Margin"/>
+    <property xmi:id="_1Vy7BJ3DEdych_LXgc3zSA" key="diagramTopMargin" value="20"/>
+    <property xmi:id="_1Vy7BZ3DEdych_LXgc3zSA" key="diagramBottomMargin" value="20"/>
+    <property xmi:id="_1Vy7Bp3DEdych_LXgc3zSA" key="diagramLeftMargin" value="20"/>
+    <property xmi:id="_1Vy7B53DEdych_LXgc3zSA" key="diagramRightMargin" value="20"/>
+    <property xmi:id="_1Vy7CJ3DEdych_LXgc3zSA" key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_z7s7kp3DEdych_LXgc3zSA" presentation="org.topcased.modeler.uml.classdiagram">
+      <element href="Marte_profile_sample.uml#_w8IxIM37EdqwVrslYOdUDA"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" xmi:id="_3MA1wJ3DEdych_LXgc3zSA" position="137,106" size="130,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_3MA1wZ3DEdych_LXgc3zSA" presentation="default">
+        <element href="Marte_profile_sample.uml#_3MtZUJ3DEdych_LXgc3zSA"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_3MA1wp3DEdych_LXgc3zSA">
+        <property xmi:id="_3MA1w53DEdych_LXgc3zSA" key="eStructuralFeatureID" value="37"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_3MA1xJ3DEdych_LXgc3zSA" presentation="default">
+          <element href="Marte_profile_sample.uml#_3MtZUJ3DEdych_LXgc3zSA"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_3MA1xZ3DEdych_LXgc3zSA">
+        <property xmi:id="_3MA1xp3DEdych_LXgc3zSA" key="eStructuralFeatureID" value="47"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_3MA1x53DEdych_LXgc3zSA" presentation="default">
+          <element href="Marte_profile_sample.uml#_3MtZUJ3DEdych_LXgc3zSA"/>
+        </semanticModel>
+      </contained>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>
