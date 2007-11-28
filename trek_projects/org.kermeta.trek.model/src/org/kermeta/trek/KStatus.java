@@ -2,9 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KStatus.java,v 1.1 2007-11-26 17:04:18 cfaucher Exp $
+ * $Id: KStatus.java,v 1.2 2007-11-28 09:23:46 cfaucher Exp $
  */
 package org.kermeta.trek;
+
+import org.eclipse.emf.ecore.EObject;
 
 
 /**
@@ -24,7 +26,7 @@ package org.kermeta.trek;
  * @model
  * @generated
  */
-public interface KStatus extends TrekModelElement {
+public interface KStatus extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Progress</b></em>' attribute.
 	 * <!-- begin-user-doc -->

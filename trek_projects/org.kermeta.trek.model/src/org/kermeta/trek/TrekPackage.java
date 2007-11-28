@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekPackage.java,v 1.5 2007-11-27 16:45:55 cfaucher Exp $
+ * $Id: TrekPackage.java,v 1.6 2007-11-28 09:23:46 cfaucher Exp $
  */
 package org.kermeta.trek;
 
@@ -482,31 +482,13 @@ public interface TrekPackage extends EPackage {
 	int KSTATUS = 6;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KSTATUS__NAME = TREK_MODEL_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Summary</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KSTATUS__SUMMARY = TREK_MODEL_ELEMENT__SUMMARY;
-
-	/**
 	 * The feature id for the '<em><b>Progress</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KSTATUS__PROGRESS = TREK_MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int KSTATUS__PROGRESS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -515,7 +497,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KSTATUS__KEY = TREK_MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int KSTATUS__KEY = 1;
 
 	/**
 	 * The number of structural features of the '<em>KStatus</em>' class.
@@ -524,7 +506,7 @@ public interface TrekPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KSTATUS_FEATURE_COUNT = TREK_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int KSTATUS_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.trek.KUseLevel <em>KUse Level</em>}' enum.

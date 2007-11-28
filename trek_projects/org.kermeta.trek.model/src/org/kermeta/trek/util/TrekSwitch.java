@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekSwitch.java,v 1.4 2007-11-26 17:04:19 cfaucher Exp $
+ * $Id: TrekSwitch.java,v 1.5 2007-11-28 09:23:46 cfaucher Exp $
  */
 package org.kermeta.trek.util;
 
@@ -130,7 +130,6 @@ public class TrekSwitch<T> {
 			case TrekPackage.KSTATUS: {
 				KStatus kStatus = (KStatus)theEObject;
 				T result = caseKStatus(kStatus);
-				if (result == null) result = caseTrekModelElement(kStatus);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

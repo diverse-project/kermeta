@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KStatusItemProvider.java,v 1.2 2007-11-27 16:45:58 cfaucher Exp $
+ * $Id: KStatusItemProvider.java,v 1.3 2007-11-28 09:23:43 cfaucher Exp $
  */
 package org.kermeta.trek.provider;
 
@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.kermeta.trek.KStatus;
@@ -35,7 +36,7 @@ import org.kermeta.trek.TrekPackage;
  * @generated
  */
 public class KStatusItemProvider
-	extends TrekModelElementItemProvider
+	extends ItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -128,14 +129,14 @@ public class KStatusItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((KStatus)object).getName();
+		String label = ((KStatus)object).getKey();
 		return label == null || label.length() == 0 ?
 			getString("_UI_KStatus_type") :
-			getString("_UI_KStatus_type") + " " + label;
+			label + " " + ((KStatus)object).getProgress() + " %";
 	}
 
 	/**

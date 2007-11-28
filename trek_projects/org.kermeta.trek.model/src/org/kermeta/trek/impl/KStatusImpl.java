@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KStatusImpl.java,v 1.1 2007-11-26 17:04:18 cfaucher Exp $
+ * $Id: KStatusImpl.java,v 1.2 2007-11-28 09:23:46 cfaucher Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.kermeta.trek.KStatus;
 import org.kermeta.trek.TrekPackage;
 
@@ -29,7 +30,7 @@ import org.kermeta.trek.TrekPackage;
  *
  * @generated
  */
-public class KStatusImpl extends TrekModelElementImpl implements KStatus {
+public class KStatusImpl extends EObjectImpl implements KStatus {
 	/**
 	 * The default value of the '{@link #getProgress() <em>Progress</em>}' attribute.
 	 * <!-- begin-user-doc -->

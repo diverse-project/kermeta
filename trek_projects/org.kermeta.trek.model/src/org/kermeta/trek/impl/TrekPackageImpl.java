@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrekPackageImpl.java,v 1.5 2007-11-27 16:45:55 cfaucher Exp $
+ * $Id: TrekPackageImpl.java,v 1.6 2007-11-28 09:23:46 cfaucher Exp $
  */
 package org.kermeta.trek.impl;
 
@@ -613,7 +613,6 @@ public class TrekPackageImpl extends EPackageImpl implements TrekPackage {
 		kTestCaseEClass.getESuperTypes().add(this.getTrekModelElement());
 		kUserStoryEClass.getESuperTypes().add(this.getTrekModelElement());
 		kTagElementEClass.getESuperTypes().add(this.getTrekModelElement());
-		kStatusEClass.getESuperTypes().add(this.getTrekModelElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(useKaseModelEClass, UseKaseModel.class, "UseKaseModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

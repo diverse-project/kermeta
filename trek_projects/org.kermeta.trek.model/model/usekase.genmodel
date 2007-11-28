@@ -76,7 +76,7 @@
       <genFeatures createChild="false" propertyCategory="Description" propertyMultiLine="true"
           ecoreFeature="ecore:EAttribute usekase.ecore#//TrekModelElement/summary"/>
     </genClasses>
-    <genClasses ecoreClass="usekase.ecore#//KStatus">
+    <genClasses ecoreClass="usekase.ecore#//KStatus" labelFeature="#//trek/KStatus/key">
       <genFeatures createChild="false" propertyCategory="All" ecoreFeature="ecore:EAttribute usekase.ecore#//KStatus/progress"/>
       <genFeatures createChild="false" propertyCategory="All" ecoreFeature="ecore:EAttribute usekase.ecore#//KStatus/key"/>
     </genClasses>
