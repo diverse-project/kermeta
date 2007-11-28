@@ -1,4 +1,4 @@
-/* $Id: Tools.kmt,v 1.2 2007-05-03 14:28:21 barais Exp $
+/* $Id: Tools.kmt,v 1.3 2007-11-28 08:27:48 vmahe Exp $
  * File : Tools.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -39,6 +39,10 @@ class Tools inherits kermeta::kunit::Assert
 	operation getSpecializedPackage(name : String, packUnderPattern : EPackage) : EPackage is do
 		var specPack : EPackage init EPackage.new
 		specPack.name := name
+		
+		// needed for resulting Ecore model validity 
+		specPack.nsURI := name
+		specPack.nsPrefix := name
 		
 		// for saving in model, the specialized package must be nested in the treated package
 		packUnderPattern.eSubpackages.add(specPack)

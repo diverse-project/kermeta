@@ -1,4 +1,4 @@
-/* $Id: Visitors.kmt,v 1.6 2007-05-03 14:28:21 barais Exp $
+/* $Id: Visitors.kmt,v 1.7 2007-11-28 08:27:48 vmahe Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Authors : 
  *  Didier Vojtisek <dvojtise@irisa.fr>
  *  Damien Pollet   <dpollet@irisa.fr>
- *  Vincent Mah�	<vmahe@irisa.fr>
+ *  Vincent Mahe	<vmahe@irisa.fr>
  * 
  */
 
@@ -64,33 +64,22 @@ class VisitorPattern
         // basic method for each of the 2 abstract classes
         var acceptOp : ecore::EOperation
         acceptOp := addAcceptOperation( visitableInterface,  abstractVisitor, visitReturnType)
-//        helper.addAnnotation(acceptOp, "kermeta","isAbstract","true") // not instanciable in 0.4.0+ version
-        helper.addAnnotation(acceptOp, "kermeta","isAbstract","false")
 		if self.generateJavaCode then
 			// add the java code for the implementation
 			helper.addAnnotation(acceptOp,"http://www.eclipse.org/emf/2002/GenModel","body",
-				"do end")
+				"")
 		end
 		if self.generateKermetaCode then
 			// add the kermeta code for the implementation
+//        	helper.addAnnotation(acceptOp, "kermeta","isAbstract","true") // not instanciable in 0.4.0+ version
 			helper.addAnnotation(acceptOp,"kermeta","body",
 				"do end")
+			helper.addAnnotation(acceptOp,"kermeta","isAbstract", "false")
 		end
 		
 		var visitOp : ecore::EOperation
+		// REM : abstract methods not instanciable in 0.4.0+ version of Kermeta => concrete method
         visitOp := addVisitOperation(abstractVisitor, visitableInterface, visitReturnType)
-//        helper.addAnnotation(visitOp, "kermeta","isAbstract","true") // not instanciable in 0.4.0+ version
-        helper.addAnnotation(visitOp, "kermeta","isAbstract","false")
-		if self.generateJavaCode then
-			// add the java code for the implementation
-			helper.addAnnotation(visitOp,"http://www.eclipse.org/emf/2002/GenModel","body",
-				"do end")
-		end
-		if self.generateKermetaCode then
-			// add the kermeta code for the implementation
-			helper.addAnnotation(visitOp,"kermeta","body",
-				"do end")
-		end
         
         // execute the pattern on the given package
         applyPattern(pack, visitableInterface, abstractVisitor, visitReturnType)
@@ -140,6 +129,7 @@ class VisitorPattern
 			// add the kermeta code for the implementation
 			helper.addAnnotation(visitOp,"kermeta","body",
 				"do end")
+			helper.addAnnotation(visitOp,"kermeta","isAbstract", "false")
 		end
 		result := visitOp
     end
@@ -190,6 +180,7 @@ class VisitorPattern
 	        var eClass : EClass
 	        eClass ?= eClassifier
 	        if eClass != void then
+		
 	        	if(eClass.eAllSuperTypes.exists{e | e.equals(visitableInterface)}) then
 	        		
 	        		var acceptOp : EOperation init addAcceptOperation(eClass, abstractVisitor, visitReturnType)
@@ -203,11 +194,12 @@ class VisitorPattern
 					if self.generateKermetaCode then
 						// add the kermeta code for the implementation
 						helper.addAnnotation(acceptOp,"kermeta","body",
-							"result := visitor.visit" + eClass.name + "(self)")
+							"do\nresult := visitor.visit" + eClass.name + "(self)\nend")
+						helper.addAnnotation(acceptOp,"kermeta","isAbstract", "false")
 					end
 					// the visitFoo methods in the visitor
 	        		var visitFoo : EOperation init addVisitFooOperation(abstractVisitor, eClass, eClass.name, visitReturnType)
-    				helper.addAnnotation(visitFoo,"kermeta","isAbstract","false")
+//    				helper.addAnnotation(visitFoo,"kermeta","isAbstract","false")
 	        	end
 	    	end
 	    }
