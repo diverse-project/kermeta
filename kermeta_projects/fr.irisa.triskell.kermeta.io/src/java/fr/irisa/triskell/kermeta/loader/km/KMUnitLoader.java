@@ -1,6 +1,6 @@
 
 
-/*$Id: KMUnitLoader.java,v 1.10 2007-10-12 09:20:40 ftanguy Exp $
+/*$Id: KMUnitLoader.java,v 1.11 2007-11-28 15:54:28 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL
@@ -127,6 +127,7 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 					fileURI = EcoreHelper.getPlatformResourceURI(fileURI).toString();			
 				
 				KermetaUnit currentUnit = IOPlugin.getDefault().getKermetaUnit( fileURI, frameworkLoading );
+				kermetaUnit.getImportedKermetaUnits().add( currentUnit );
 				if ( r.getContents().isEmpty() ) {
 					IOPlugin.getDefault().unload( fileURI );
 					kermetaUnit.error(fileURI + " could not have been loaded.");
