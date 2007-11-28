@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.9 2007-10-24 12:47:45 cfaucher Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.10 2007-11-28 15:55:21 ftanguy Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -134,6 +134,9 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	public void ppCompilationUnit(ModelingUnit compilationUnit) {
 		this.modelingUnit = compilationUnit;
+		
+		content += ppTags( modelingUnit.getOwnedTags() );
+		
 		Iterator <Package> iterator = compilationUnit.getPackages().iterator();
 		while ( iterator.hasNext() ) {
 			//print ( ppPackage(iterator.next()) );
