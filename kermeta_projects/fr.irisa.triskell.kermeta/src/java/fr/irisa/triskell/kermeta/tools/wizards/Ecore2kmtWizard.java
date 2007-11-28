@@ -1,4 +1,4 @@
-/* $Id: Ecore2kmtWizard.java,v 1.9 2007-07-24 13:46:39 ftanguy Exp $
+/* $Id: Ecore2kmtWizard.java,v 1.10 2007-11-28 13:59:35 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : Wizard.java
  * License    : EPL
@@ -14,6 +14,7 @@ package fr.irisa.triskell.kermeta.tools.wizards;
 
 import org.eclipse.ui.INewWizard;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.LoadingOptions;
 
 import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KM;
 
@@ -53,6 +54,8 @@ public class Ecore2kmtWizard extends KmtPrinterWizard implements INewWizard {
         Ecore2KM.isMethodNameOverlapSafe = quickFixPage.isOperationFixEnabled();
         Ecore2KM.methodRenamePrefix = quickFixPage.getOpPrefixString();
         Ecore2KM.methodRenamePostfix = quickFixPage.getOpPostfixString();
+        
+        options.put( LoadingOptions.ECORE_QuickFixEnabled, quickFixPage.isQuickFixEnabled() );
         
        	return super.createUnit();	
 	}

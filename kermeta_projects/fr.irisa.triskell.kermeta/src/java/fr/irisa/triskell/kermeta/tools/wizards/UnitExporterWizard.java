@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.29 2007-10-12 09:10:15 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.30 2007-11-28 13:59:35 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -14,11 +14,16 @@
 package fr.irisa.triskell.kermeta.tools.wizards;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -84,6 +89,8 @@ public class UnitExporterWizard extends Wizard {
 
 	public String defaultTraceExtension = "traceability";
 
+	protected Map<Object, Object> options = new HashMap<Object, Object>();
+	
 	/**
 	 * <code>isInputKM</code> indicates weither the input unit is a km unit.
 	 * Ie. it tells if the input references are directly loaded or
@@ -167,16 +174,23 @@ public class UnitExporterWizard extends Wizard {
 	 * @param ifile
 	 * @throws Exception
 	 */
-	public void writeUnit(KermetaUnit builder, IFile ifile) throws Exception {
+	public void writeUnit(final KermetaUnit builder, final IFile ifile) throws Exception {
 
-		String fileURI = "platform:/resource" + ifile.getFullPath().toString();
+		final String fileURI = "platform:/resource" + ifile.getFullPath().toString();
     	int index = fileURI.lastIndexOf("/");
-    	String targetDir = fileURI.substring(0, index);
-		KmExporter exporter = new KmExporter();
+    	final String targetDir = fileURI.substring(0, index);
+		final KmExporter exporter = new KmExporter();
+
+
+		IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
+			@Override
+			public void run(IProgressMonitor monitor) throws CoreException {
+				exporter.export(builder, targetDir, fileURI);				
+				ifile.refreshLocal(1, null);
+			}
+		};
 		
-		exporter.export(builder, targetDir, fileURI);
-		
-		ifile.refreshLocal(1, null);
+		ResourcesPlugin.getWorkspace().run(runnable, null);		
 	}
 
 	public void writeTrace() throws Exception {
@@ -308,11 +322,7 @@ public class UnitExporterWizard extends Wizard {
 			// init the tracer (needed in order to get error messages and for an eventual save of the trace file)
 			initTraces();
 			unit.setTracer(tracer);
-			IOPlugin.getDefault().loadKermetaUnit( inputFile_uri, new NullProgressMonitor() );
-						
-		} catch (KermetaIOFileNotFoundException e) {
-			e.printStackTrace();
-			return null;
+			IOPlugin.getDefault().loadKermetaUnit( inputFile_uri, options, new NullProgressMonitor() );
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
