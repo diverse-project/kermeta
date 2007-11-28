@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.36 2007-10-24 12:09:41 cfaucher Exp $
+/* $Id: KMT2KMPass7.java,v 1.37 2007-11-28 15:54:55 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -70,6 +70,38 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	}
 
 
+	private void processAnnotations(Object object) {
+		for ( fr.irisa.triskell.kermeta.language.structure.Tag tag : currentTags ) {
+			if ( isEntrypoint(tag) ) {
+				// entryPoint tag should go to the modeling unit
+				builder.getModelingUnit().getOwnedTags().add( tag );
+				fr.irisa.triskell.kermeta.language.structure.Tag mainClassTag = ModelingUnitHelper.getMainClass(builder);
+				if ( mainClassTag != null ) {
+					TypeDefinition mainClass = builder.getTypeDefinitionByName( mainClassTag.getValue(), monitor );
+					if ( mainClass == null )
+						builder.warning("Main Class nof found.", km2ecore.get( mainClassTag));
+					else {
+						fr.irisa.triskell.kermeta.language.structure.Tag mainOperationTag = ModelingUnitHelper.getMainOperation(builder);
+						if ( mainOperationTag != null ) {
+							Operation op = ClassDefinitionHelper.findOperationByName( (ClassDefinition) mainClass, mainOperationTag.getValue() );
+							if ( op == null )
+								builder.warning("Main Operation not found.", km2ecore.get(mainOperationTag));
+						}
+					}
+				}
+			} else if ( tag.getName() != null ) {
+				if ( TagHelper.findTagFromName(object, tag.getName()) == null ){
+						object.getOwnedTag().add( tag ); // tag is owned by this object
+						object.getTag().add( tag ); // this object is tagged
+				}
+			} else{
+				object.getOwnedTag().add( tag ); // tag is owned by this object
+				object.getTag().add( tag ); // this object is tagged
+			}
+		}
+	}
+	
+	
 	@Override
 	public boolean beginVisit(KermetaASTNode node) {
 		
@@ -78,34 +110,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 		
 		Object object = builder.getModelElementByNode(node);
 		if ( (object != null) && ! currentTags.isEmpty() ) {
-			for ( fr.irisa.triskell.kermeta.language.structure.Tag tag : currentTags ) {
-				if ( isEntrypoint(tag) ) {
-					// entryPoint tag should go to the modeling unit
-					builder.getModelingUnit().getOwnedTags().add( tag );
-					fr.irisa.triskell.kermeta.language.structure.Tag mainClassTag = ModelingUnitHelper.getMainClass(builder);
-					if ( mainClassTag != null ) {
-						TypeDefinition mainClass = builder.getTypeDefinitionByName( mainClassTag.getValue(), monitor );
-						if ( mainClass == null )
-							builder.warning("Main Class nof found.", km2ecore.get( mainClassTag));
-						else {
-							fr.irisa.triskell.kermeta.language.structure.Tag mainOperationTag = ModelingUnitHelper.getMainOperation(builder);
-							if ( mainOperationTag != null ) {
-								Operation op = ClassDefinitionHelper.findOperationByName( (ClassDefinition) mainClass, mainOperationTag.getValue() );
-								if ( op == null )
-									builder.warning("Main Operation not found.", km2ecore.get(mainOperationTag));
-							}
-						}
-					}
-				} else if ( tag.getName() != null ) {
-					if ( TagHelper.findTagFromName(object, tag.getName()) == null ){
-							object.getOwnedTag().add( tag ); // tag is owned by this object
-							object.getTag().add( tag ); // this object is tagged
-					}
-				} else{
-					object.getOwnedTag().add( tag ); // tag is owned by this object
-					object.getTag().add( tag ); // this object is tagged
-				}
-			}
+			processAnnotations(object);
 			currentTags.clear();
 			km2ecore.clear();
 			return true;
@@ -131,11 +136,17 @@ public class KMT2KMPass7 extends KMT2KMPass {
 		if ( monitor.isCanceled() )
 			return false;
 		
+		Object object = builder.getModelElementByNode(packageDecl);
 		// force to read the annotation and fill the "currentTags" property
 		packageDecl.getAnnotations().accept(this);
+		processAnnotations(object);
+		currentTags.clear();
+		km2ecore.clear();
 		// let's go and add this to the packagedecl  ie. go to beginVisit(KermetaASTNode node) {
-	    return super.beginVisit(packageDecl);
-	        
+	    
+		//return super.beginVisit(packageDecl);
+	    return false;  
+		
 	}
 	
 	@Override
