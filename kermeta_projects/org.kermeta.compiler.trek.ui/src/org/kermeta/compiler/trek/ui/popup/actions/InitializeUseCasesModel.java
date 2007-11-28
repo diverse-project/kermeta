@@ -1,4 +1,4 @@
-/*$Id: InitializeUseCasesModel.java,v 1.1 2007-11-28 12:20:25 cfaucher Exp $
+/*$Id: InitializeUseCasesModel.java,v 1.2 2007-11-28 13:11:17 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeUseCasesModel.java
 * License : EPL
@@ -27,6 +27,7 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
+import org.kermeta.compiler.trek.ui.KCompilerConstants;
 import org.kermeta.trek.KUseCase;
 import org.kermeta.trek.TrekFactory;
 import org.kermeta.trek.UseKaseModel;
@@ -101,7 +102,7 @@ public class InitializeUseCasesModel implements IObjectActionDelegate {
 	
 	private UseKaseModel createUseKaseModel(IFolder folder)
     {
-		IFile trek_file = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(folder.getFullPath().append("/" + folder.getName()).addFileExtension("trek"));
+		IFile trek_file = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(folder.getFullPath().append("/" + folder.getName()).addFileExtension(KCompilerConstants.TREK_EXT));
 		return TrekModelHelper.createUseKaseModel(trek_file);
     }
 	
@@ -111,9 +112,9 @@ public class InitializeUseCasesModel implements IObjectActionDelegate {
 		aUseCase.setName(CodeGenUtil.capName(folder.getName().substring(5)));
 		aUseCase.setId(folder.getName());
 		aUseCase.setSummary(TrekModelHelper.getSummaryContent(folder));
-		aUseCase.getStatus().add(TrekModelHelper.newStatus("Design",100));
-		aUseCase.getStatus().add(TrekModelHelper.newStatusImpl("Java",100));
-		aUseCase.getStatus().add(TrekModelHelper.newStatusImpl("Kermeta",0));
+		aUseCase.getStatus().add(TrekModelHelper.newStatus(KCompilerConstants.STATUS_DESIGN,KCompilerConstants.PROGRESS_OK));
+		aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_JAVA,KCompilerConstants.PROGRESS_OK));
+		aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_KERMETA,KCompilerConstants.PROGRESS_NOK));
 		return aUseCase;
     }
 

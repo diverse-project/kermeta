@@ -1,4 +1,4 @@
-/*$Id: TrekModelHelper.java,v 1.1 2007-11-28 12:20:25 cfaucher Exp $
+/*$Id: TrekModelHelper.java,v 1.2 2007-11-28 13:11:17 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	TrekModelHelper.java
 * License : EPL
@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
+import org.kermeta.compiler.trek.ui.KCompilerConstants;
 import org.kermeta.trek.KStatus;
 import org.kermeta.trek.TrekFactory;
 import org.kermeta.trek.UseKaseModel;
@@ -46,13 +47,29 @@ public class TrekModelHelper {
 	 */
 	public static UseKaseModel createUseKaseModel(IFile file)
     {
-		// create Trek structure
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("trek",new XMIResourceFactoryImpl());
+		// Create a Trek structure
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(KCompilerConstants.TREK_EXT,new XMIResourceFactoryImpl());
 		ResourceSet trek_resource_set = new ResourceSetImpl();
 		URI u = URI.createURI(file.getFullPath().toString());
     	u = new URIConverterImpl().normalize(u);
 		Resource trek_resource = trek_resource_set.createResource(u);
 		trek_resource.getContents().add(TrekFactory.eINSTANCE.createUseKaseModel());
+		return (UseKaseModel) trek_resource.getContents().get(0);
+    }
+	
+	/**
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public static UseKaseModel getUseKaseModel(IFile file)
+    {
+		// Get a Trek structure
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(KCompilerConstants.TREK_EXT,new XMIResourceFactoryImpl());
+		ResourceSet trek_resource_set = new ResourceSetImpl();
+		URI u = URI.createURI(file.getFullPath().toString());
+    	u = new URIConverterImpl().normalize(u);
+		Resource trek_resource = trek_resource_set.getResource(u, true);
 		return (UseKaseModel) trek_resource.getContents().get(0);
     }
 	

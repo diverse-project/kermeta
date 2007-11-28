@@ -1,4 +1,4 @@
-/*$Id: InitializeTestCasesModel.java,v 1.1 2007-11-28 12:20:25 cfaucher Exp $
+/*$Id: InitializeTestCasesModel.java,v 1.2 2007-11-28 13:11:17 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeTestCasesModel.java
 * License : EPL
@@ -26,6 +26,7 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
+import org.kermeta.compiler.trek.ui.KCompilerConstants;
 import org.kermeta.trek.KTestCase;
 import org.kermeta.trek.KTestCaseType;
 import org.kermeta.trek.TrekFactory;
@@ -37,8 +38,6 @@ public class InitializeTestCasesModel implements IObjectActionDelegate {
 	protected StructuredSelection currentSelection;
 
 	protected List<IFolder> folders = new ArrayList<IFolder>();
-	
-	private static final String KERMETA_CVS = "http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/";
 	
 	/**
 	 * Constructor for Action1.
@@ -103,7 +102,7 @@ public class InitializeTestCasesModel implements IObjectActionDelegate {
 	
 	private UseKaseModel createUseKaseModel(IFolder folder)
     {
-		IFile trek_file = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(folder.getFullPath().append("/" + folder.getName()).addFileExtension("trek"));
+		IFile trek_file = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(folder.getFullPath().append("/" + folder.getName()).addFileExtension(KCompilerConstants.TREK_EXT));
 		return TrekModelHelper.createUseKaseModel(trek_file);
     }
 	
@@ -111,7 +110,7 @@ public class InitializeTestCasesModel implements IObjectActionDelegate {
     {
 		KTestCase aTestCase = TrekFactory.eINSTANCE.createKTestCase();
 		aTestCase.setName(folder.getName());
-		aTestCase.setUri(KERMETA_CVS + "org.kermeta.compiler.tests/unit_test/" + folder.getParent().getName() + "/" + folder.getName() + "/input/kermeta/?cvsroot=kermeta");
+		aTestCase.setUri(KCompilerConstants.KERMETA_CVS + "org.kermeta.compiler.tests/unit_test/" + folder.getParent().getName() + "/" + folder.getName() + KCompilerConstants.KERMETA_CVS_VIEW_SUFFIX);
 		aTestCase.setType(KTestCaseType.UNIT_TEST);
 		
 		String inputResources = "Input resources:\n";

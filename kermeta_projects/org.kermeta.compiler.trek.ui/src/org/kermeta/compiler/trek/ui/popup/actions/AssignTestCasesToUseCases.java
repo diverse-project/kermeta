@@ -1,4 +1,4 @@
-/*$Id: AssignTestCasesToUseCases.java,v 1.2 2007-11-28 12:40:22 cfaucher Exp $
+/*$Id: AssignTestCasesToUseCases.java,v 1.3 2007-11-28 13:11:17 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	AssignTestCasesToUseCases.java
 * License : EPL
@@ -31,6 +31,7 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
+import org.kermeta.compiler.trek.ui.KCompilerConstants;
 import org.kermeta.trek.KTestCase;
 import org.kermeta.trek.KUseCase;
 import org.kermeta.trek.UseKaseModel;
@@ -103,7 +104,7 @@ public class AssignTestCasesToUseCases implements IObjectActionDelegate {
 
 			while (it.hasNext()) {
 				Object obj = (Object) it.next();
-				if(obj instanceof IFile && ((IFile)obj).getFileExtension().equals("trek") ) {
+				if(obj instanceof IFile && ((IFile)obj).getFileExtension().equals(KCompilerConstants.TREK_EXT) ) {
 					usecasesFiles.add((IFile) obj);
 				}
 				if(obj instanceof IFolder) {
@@ -127,16 +128,11 @@ public class AssignTestCasesToUseCases implements IObjectActionDelegate {
 	 */
 	private List<KTestCase> getTestCases(IFolder folder)
     {
-		IFile trek_file = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(folder.getFullPath().append("/" + folder.getName()).addFileExtension("trek"));
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("trek",new XMIResourceFactoryImpl());
-		ResourceSet trek_resource_set = new ResourceSetImpl();
-		URI u = URI.createURI(trek_file.getFullPath().toString());
-    	u = new URIConverterImpl().normalize(u);
-		Resource trek_resource = trek_resource_set.getResource(u, true);
+		IFile trek_file = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(folder.getFullPath().append("/" + folder.getName()).addFileExtension(KCompilerConstants.TREK_EXT));
+		UseKaseModel useKaseModel = TrekModelHelper.getUseKaseModel(trek_file);
+		testcasesResources.add(useKaseModel.eResource());
 		
-		testcasesResources.add(trek_resource);
-		
-		return ((UseKaseModel) trek_resource.getContents().get(0)).getKtestCases();
+		return useKaseModel.getKtestCases();
     }
 	
 	/**
@@ -147,15 +143,11 @@ public class AssignTestCasesToUseCases implements IObjectActionDelegate {
 	private Hashtable<String, KUseCase> getUseCases(List<IFile> trek_files) {
 
 		Hashtable<String, KUseCase> useCases = new Hashtable<String, KUseCase>();
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("trek",new XMIResourceFactoryImpl());
 		for(IFile trek_file : trek_files) {
-			ResourceSet trek_resource_set = new ResourceSetImpl();
-			URI u = URI.createURI(trek_file.getFullPath().toString());
-	    	u = new URIConverterImpl().normalize(u);
-			Resource trek_resource = trek_resource_set.getResource(u, true);
-			usecasesResources.add(trek_resource);
+			UseKaseModel useKaseModel = TrekModelHelper.getUseKaseModel(trek_file);
+			usecasesResources.add(useKaseModel.eResource());
 			
-			for(KUseCase uC : ((UseKaseModel) trek_resource.getContents().get(0)).getKuseCases()) {
+			for(KUseCase uC : useKaseModel.getKuseCases()) {
 				useCases.put(uC.getId(), uC);
 			}
 		}
