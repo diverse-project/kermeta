@@ -20,6 +20,7 @@
          <action
                class="org.kermeta.compiler.trek.ui.popup.actions.InitializeTestCasesModel"
                enablesFor="+"
+               icon="icons/add.png"
                id="org.kermeta.compiler.trek.ui.InitializeTestCasesModel"
                label="Initialize the Trek models for the compilation Test Cases"
                menubarPath="org.kermeta.compiler.trek.subMenu/trek_model">
@@ -27,6 +28,7 @@
          <action
                class="org.kermeta.compiler.trek.ui.popup.actions.InitializeUseCasesModel"
                enablesFor="+"
+               icon="icons/add.png"
                id="org.kermeta.compiler.trek.ui.InitializeUseCasesModel"
                label="Initialize the Trek models for the compilation Use Cases"
                menubarPath="org.kermeta.compiler.trek.subMenu/trek_model">
@@ -34,6 +36,7 @@
          <action
                class="org.kermeta.compiler.trek.ui.popup.actions.InitializeTrekSummary"
                enablesFor="+"
+               icon="icons/add.png"
                id="org.kermeta.compiler.trek.ui.InitializeTrekSummary"
                label="Initialize the summary files for the compilation doc"
                menubarPath="org.kermeta.compiler.trek.subMenu/summary">
@@ -41,7 +44,7 @@
          <action
                class="org.kermeta.compiler.trek.ui.popup.actions.DeleteTrekSummary"
                enablesFor="+"
-               icon="icons/delete.gif"
+               icon="icons/delete.png"
                id="org.kermeta.compiler.trek.ui.DeleteTrekSummary"
                label="Delete the summary files for the compilation doc"
                menubarPath="org.kermeta.compiler.trek.subMenu/summary">
@@ -64,6 +67,7 @@
          <action
                class="org.kermeta.compiler.trek.ui.popup.actions.AssignTestCasesToUseCases"
                enablesFor="+"
+               icon="icons/add.png"
                id="org.kermeta.trek.ui.AssignTestCasesToUseCases"
                label="Assign Test Cases to Use Cases"
                menubarPath="org.kermeta.compiler.trek.subMenu/mapping">
@@ -71,7 +75,7 @@
          <action
                class="org.kermeta.compiler.trek.ui.popup.actions.DeleteTestCasesUseCasesMapping"
                enablesFor="+"
-               icon="icons/delete.gif"
+               icon="icons/delete.png"
                id="org.kermeta.trek.ui.DeleteTestCasesUseCasesMapping"
                label="Delete the Mapping between TestCases and UseCases"
                menubarPath="org.kermeta.compiler.trek.subMenu/mapping">
