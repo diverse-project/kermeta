@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMLoader.java,v 1.19 2007-11-27 10:49:47 ftanguy Exp $
+/*$Id: Ecore2KMLoader.java,v 1.20 2007-11-29 10:00:09 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMLoader.java
 * License : EPL
@@ -27,7 +27,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -141,22 +140,24 @@ public class Ecore2KMLoader extends AbstractKermetaUnitLoader {
 							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( r.getURI().toString(), loadingFramework );
 							resources.put(unit, r);
 							kermetaUnit.addRequire(r.getURI().toString(), unit);
+							
 						}
 					}
 					
-					Map<EObject,Collection<Setting>> m = EcoreUtil.ExternalCrossReferencer.find(resource);
+/*					Map<EObject,Collection<Setting>> m = EcoreUtil.ExternalCrossReferencer.find(resource);
 					for(EObject eobj : m.keySet()){
 						if(eobj.eResource()!= null) {
 							KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit( eobj.eResource().getURI().toString(), loadingFramework );
 							resources.put(unit, eobj.eResource());
 							kermetaUnit.addRequire(eobj.eResource().getURI().toString(), unit);
 						}
-					}
+					}*/
 					
 					// update the ImportedKermetaUnit property from the computed resource dependencies
 					for(Entry<KermetaUnit,Resource> e : resources.entrySet()){
-						if(!e.getKey().getUri().equals(uri)){
-							kermetaUnit.getImportedKermetaUnits().add(e.getKey());
+						for ( KermetaUnit unit : resources.keySet() )
+							if( ! unit.isFramework() && ! e.getKey().isFramework() && ! e.getKey().getUri().equals(unit.getUri()) ) {
+								unit.getImportedKermetaUnits().add(e.getKey());
 							//kermetaUnit.addRequire( e.getKey().getUri(), e.getKey() );
 						}
 					}
