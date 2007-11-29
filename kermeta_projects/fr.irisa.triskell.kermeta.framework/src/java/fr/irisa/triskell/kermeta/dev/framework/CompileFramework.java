@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.15 2007-09-19 12:14:49 ftanguy Exp $
+/* $Id: CompileFramework.java,v 1.16 2007-11-29 14:05:13 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.framework
 * File : CompileFramework.java
 * License : EPL
@@ -9,19 +9,16 @@
 */ 
 package fr.irisa.triskell.kermeta.dev.framework;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
-import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 
 /**
@@ -35,7 +32,7 @@ public class CompileFramework {
     	IOPlugin.LOCAL_USE = true;
     	IOPlugin.FRAMEWORK_GENERATION = true;
     	@SuppressWarnings("unused")
-		IOPlugin ioPlugin = new IOPlugin();
+		IOPlugin ioPlugin = IOPlugin.getDefault();
     	
     	KermetaUnit kermetaUnit = null;
     	try {

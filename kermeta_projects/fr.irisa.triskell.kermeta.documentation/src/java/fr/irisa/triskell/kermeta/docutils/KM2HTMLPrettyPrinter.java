@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.15 2007-09-13 09:04:33 ftanguy Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.16 2007-11-29 14:04:20 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
  * License    : GPL
@@ -136,7 +136,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		IOPlugin.LOCAL_USE = true;
     	IOPlugin.FRAMEWORK_GENERATION = true;
     	@SuppressWarnings("unused")
-		IOPlugin ioPlugin = new IOPlugin();
+		IOPlugin ioPlugin = IOPlugin.getDefault();
     	
 		_contents = new Hashtable<String, StringBuffer>();
 		_descriptions = new ArrayList<StringBuffer>();

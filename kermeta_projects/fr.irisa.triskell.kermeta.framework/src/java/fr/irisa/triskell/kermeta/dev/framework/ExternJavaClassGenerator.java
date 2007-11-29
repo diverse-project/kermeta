@@ -1,4 +1,4 @@
-/* $Id: ExternJavaClassGenerator.java,v 1.15 2007-09-19 12:14:49 ftanguy Exp $
+/* $Id: ExternJavaClassGenerator.java,v 1.16 2007-11-29 14:05:13 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExternJavaClassGenerator.java
  * License : EPL
@@ -47,7 +47,7 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 	
 	private void initialize() {
 		IOPlugin.LOCAL_USE = true;
-		ioPlugin = new IOPlugin();
+		ioPlugin = IOPlugin.getDefault();
 	}
 	
 	public String out_dir = "src/java";
