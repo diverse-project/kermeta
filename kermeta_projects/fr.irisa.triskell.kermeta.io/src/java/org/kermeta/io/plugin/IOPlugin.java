@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.25 2007-10-29 16:14:51 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.26 2007-11-29 09:15:54 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -24,7 +24,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
@@ -39,8 +38,6 @@ import org.kermeta.loader.FrameworkMapping;
 import org.kermeta.loader.LoadingOptions;
 import org.osgi.framework.BundleContext;
 
-import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
-import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -90,8 +87,6 @@ public class IOPlugin extends AbstractUIPlugin {
 	private KermetaUnitStorer storer = IoFactory.eINSTANCE.createKermetaUnitStorer();
 	
 	private KermetaUnit framework;
-
-	private KermetaUnit frameworkAsEcore;
 	
 	private KermetaUnit ecore;
 	
@@ -263,6 +258,7 @@ public class IOPlugin extends AbstractUIPlugin {
 			else if ( ! FRAMEWORK_GENERATION ) {
 				//kermetaUnit.getImportedKermetaUnits().add( framework );
 				if ( uri.matches(".+\\.ecore") ) {
+					internalLog.debug("See if framework is null ??? => " + framework);
 					kermetaUnit.getImportedKermetaUnits().add( framework );
 					kermetaUnit.importKermetaUnit( ecore, false, true );
 					kermetaUnit.addRequire( ECORE_URI, ecore );	
