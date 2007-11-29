@@ -1,16 +1,24 @@
+/* $Id: GenerateOCL.java,v 1.8 2007-11-29 16:59:03 dvojtise Exp $
+ * Project    : fr.irisa.triskell.kermeta.ocl
+ * File       : GenerateOCL.java
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 27 janv. 2005
+ * Authors : 
+ *        	Olivier Barais
+ *          Mark Skipper
+ *          Didier Vojtisek
+ */
 package fr.irisa.triskell.kermeta.ocl.kmtactions;
 
 
 import java.util.ArrayList;
 
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
-import fr.irisa.triskell.kermeta.ocl.console.DevOCLConsole;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 public class GenerateOCL {
 
@@ -28,7 +36,7 @@ public class GenerateOCL {
 	 * @param outKmtPath
 	 */
 	public static void run(String inCstXmiPath, String modelEcorePath, String outKmtPath) {
-		run(inCstXmiPath, modelEcorePath, outKmtPath, new DevOCLConsole());
+		run(inCstXmiPath, modelEcorePath, outKmtPath, new LocalIOConsole());
 	}
 	
 	/**
@@ -38,7 +46,7 @@ public class GenerateOCL {
 	 * @param outKmtPath
 	 * @param console
 	 */
-	public static void run(String inCstXmiPath, String modelEcorePath, String outKmtPath, KermetaIOStream console ) {
+	public static void run(String inCstXmiPath, String modelEcorePath, String outKmtPath, IOConsole console ) {
 		System.out.println("running OCL2KMT Transformation \n from " + inCstXmiPath + "\n to " + outKmtPath + "\n against: " + modelEcorePath);
 		/*KermetaUnit unit = null;
 		try {
@@ -50,14 +58,9 @@ public class GenerateOCL {
 		}
 		KermetaTypeChecker typechecker = new KermetaTypeChecker(unit);
 		typechecker.checkUnit();*/
-		StdLibKermetaUnitHelper.STD_LIB_URI = KermetaConfig.STD_LIB_URI;
-		KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(oclKmtPrinterKmtPath);
 		
-		KermetaTypeChecker typechecker = new KermetaTypeChecker(unit);
-		typechecker.checkUnit();
-		unit.load();
 		
-		KermetaInterpreter inter = new KermetaInterpreter(unit);
+		KermetaInterpreter inter = new KermetaInterpreter(oclKmtPrinterKmtPath, null);
 		inter.setKStream(console);
 		// This is the operation to call
 		inter.setEntryPoint("OCLKMTPrinter::OCLKMTPrinter", "generateOCL");

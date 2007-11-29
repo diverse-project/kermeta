@@ -1,16 +1,23 @@
+/*$Id: TestGenerateKMT.java,v 1.4 2007-11-29 16:59:03 dvojtise Exp $
+* Project : org.kermeta.ocl
+* File : 	TestGenerateKMT.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 29 juin 07
+* Authors : 
+* 		Mark Skipper
+* 		Olivier Barais
+*/
 package fr.irisa.triskell.kermeta.ocl;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
-import fr.irisa.triskell.kermeta.utils.URIMapUtil;
+import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
+
 
 public class TestGenerateKMT {
 
@@ -34,22 +41,6 @@ public class TestGenerateKMT {
 	public static void main(String[] args) {
 		URIConverter.URI_MAP.putAll(URIMapUtil.readMapFile(new File("uri.map")));
 		test();
-	}
-
-	private void openURI(){
-		URI oclURI = URI.createURI(oclPath);
-		URIConverter converter = new URIConverterImpl();
-		InputStream in;
-		String s = "";
-		try {
-			in = converter.createInputStream(oclURI);
-    		BufferedReader reader = new BufferedReader( 	new	InputStreamReader(in));
-    		while ((s= reader.readLine()) != null) {
-    			System.out.println(s);
-    		}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 }

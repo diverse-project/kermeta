@@ -1,3 +1,15 @@
+/* $Id: RunStandaloneKM.java,v 1.6 2007-11-29 16:59:03 dvojtise Exp $
+* Project : fr.irisa.triskell.kermeta.ocl
+* File : 	RunStandaloneKM.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : Feb 20, 2007
+* Authors : 
+* 	Olivier Barais
+* 	Mark Skipper
+* 	Didier Vojtisek
+*/
 package fr.irisa.triskell.kermeta.ocl.kmtactions;
 
 
@@ -15,9 +27,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.ocl.ParserException;
 
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
+import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 import fr.irisa.triskell.kermeta.ocl.TestOCLParser;
-import fr.irisa.triskell.kermeta.ocl.console.DevOCLConsole;
 
 public class RunStandaloneKM {
 
@@ -66,8 +77,8 @@ public class RunStandaloneKM {
 			EPackage ePack = (EPackage) res.getContents().get(0);
 			registerPackages(ePack);
 			
-			StdLibKermetaUnitHelper.STD_LIB_URI= "/udd/barais/workspace2/fr.irisa.triskell.kermeta/lib/framework.km";
-			GenerateOCL.run(xmiOutputFileName,ecoreFileNameFileName,  outputKMTFileName, new DevOCLConsole());
+			//StdLibKermetaUnitHelper.STD_LIB_URI= "/udd/barais/workspace2/fr.irisa.triskell.kermeta/lib/framework.km";
+			GenerateOCL.run(xmiOutputFileName,ecoreFileNameFileName,  outputKMTFileName, new LocalIOConsole());
 
 			
 		

@@ -1,3 +1,15 @@
+/* $Id: OCLParseWizard.java,v 1.7 2007-11-29 16:59:03 dvojtise Exp $
+* Project : fr.irisa.triskell.kermeta.ocl
+* File : 	OCLParseWizard.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : Feb 20, 2007
+* Authors : 
+* 	Olivier Barais
+* 	Mark Skipper
+* 	Didier Vojtisek
+*/
 package fr.irisa.triskell.kermeta.ocl.ui.popup.actions;
 
 import java.io.File;
@@ -16,9 +28,11 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
 import fr.irisa.triskell.kermeta.ocl.GenerateKMT;
 import fr.irisa.triskell.kermeta.ocl.TestOCLParser;
-import fr.irisa.triskell.kermeta.ocl.console.OCLConsole;
 
 
 public class OCLParseWizard extends Wizard {
@@ -32,11 +46,15 @@ public class OCLParseWizard extends Wizard {
 	public DestFileWizardPage outputPage;
 	public String defaultOutputExtension = "kmt";
 	
+	private IOConsole console;
+	
 	/** pagenames */
 	public static final String OUTPUTFILE_PAGENAME = "OutputFile";
 	
 	public OCLParseWizard() {
 		super();
+		console = new EclipseConsole("mocl generator");
+		
 		setNeedsProgressMonitor(false);
 	}
 
@@ -63,7 +81,7 @@ public class OCLParseWizard extends Wizard {
 	IFile outOCLfile;
 	private boolean generatemOCL(){
 		
-		OCLConsole.printlnMessage( "Parsing file " + inputFile, OCLConsole.INFO);
+		console.println(new ConsoleMessage("Parsing file " + inputFile, EclipseConsole.INFO));
 		
 		try {
 			 outOCLfile = inputFile.getWorkspace().getRoot().getFile(inputFile.getLocation().removeFileExtension().addFileExtension("mocl"));
@@ -73,7 +91,7 @@ public class OCLParseWizard extends Wizard {
 			
 			
 			
-			new TestOCLParser().run(ipath,opath);
+			TestOCLParser.run(ipath,opath);
 			
 			/*//ISTeCQLexer lexer = new ISTeCQLexer(inputFile.getContents());
 			//ISTeCQParser parser = new ISTeCQParser(lexer);
@@ -99,14 +117,14 @@ public class OCLParseWizard extends Wizard {
 				
 			outOCLfile.refreshLocal(1, null);
 				
-				OCLConsole.printlnMessage( "Done - File " + outOCLfile + " successfully created.", OCLConsole.OK);
+			console.println(new ConsoleMessage("Done - File " + outOCLfile + " successfully created.", EclipseConsole.OK));
 			/*}
 			else {
 				for(String msg : parser.errors) OCLConsole.printlnMessage( msg, OCLConsole.ERROR);
 			}*/
 			
 		} catch (Throwable e) {
-			OCLConsole.printlnMessage( "ERROR : " + e.getMessage(), OCLConsole.ERROR);
+			console.println(new ConsoleMessage( "ERROR : " + e.getMessage(), EclipseConsole.ERROR));
 			return false;
 		}
 		
@@ -131,12 +149,12 @@ public class OCLParseWizard extends Wizard {
 	private void registerPackages(EPackage pack) {
 		Registry.INSTANCE.put(pack.getNsURI(), pack);
 		
-		EList l = pack.getESubpackages();
+		EList<EPackage> l = pack.getESubpackages();
 		
 		if(l != null) {
-			Iterator it = l.iterator();
+			Iterator<EPackage> it = l.iterator();
 			while(it.hasNext()) {
-				registerPackages((EPackage) it.next());
+				registerPackages( it.next());
 			}
 		}
 	}
@@ -197,7 +215,7 @@ public class OCLParseWizard extends Wizard {
 		//	msgStream.println("Model " + xmiFile + " created successfully.");
 			
 		} catch (Exception e) {
-			OCLConsole.printlnMessage( "ERROR : " + e.getMessage(), OCLConsole.ERROR);
+			console.println(new ConsoleMessage( "ERROR : " + e.getMessage(), EclipseConsole.ERROR));
 			e.printStackTrace();
 		}
 

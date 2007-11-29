@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.ParserException;
 
-import fr.irisa.triskell.kermeta.utils.URIMapUtil;
+import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 
 /**
  * An OCL File Parser parses the contents of a file of OCL source text.
