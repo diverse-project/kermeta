@@ -1,6 +1,6 @@
 
 
-/*$Id: LocalIOConsole.java,v 1.2 2007-11-29 14:13:42 ftanguy Exp $
+/*$Id: LocalIOConsole.java,v 1.3 2007-11-29 16:28:04 dvojtise Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	LocalIOConsole.java
 * License : EPL
@@ -48,11 +48,10 @@ public class LocalIOConsole extends IOConsole {
 		}
 	}
 
-	@Override
 	public void changeColor(Color c) {
+		// nothing to do if the output is the stout console
 	}
 
-	@Override
 	protected BufferedReader getReader() {
 		if ( reader == null )
 			reader = new BufferedReader( new InputStreamReader( System.in ) );

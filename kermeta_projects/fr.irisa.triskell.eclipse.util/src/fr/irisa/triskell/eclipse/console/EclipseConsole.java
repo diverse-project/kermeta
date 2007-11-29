@@ -1,6 +1,6 @@
 
 
-/*$Id: EclipseConsole.java,v 1.1 2007-11-29 14:13:42 ftanguy Exp $
+/*$Id: EclipseConsole.java,v 1.2 2007-11-29 16:28:04 dvojtise Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	EclipseConsole.java
 * License : EPL
@@ -18,6 +18,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IOConsoleOutputStream;
@@ -25,6 +26,13 @@ import org.eclipse.ui.console.IOConsoleOutputStream;
 import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
 
 public class EclipseConsole extends IOConsole {
+
+	// some default colors that can be used
+	public static final Color INFO = new Color(null, 0,0,255);
+	public static final Color OK = new Color(null, 0,128,0);
+	public static final Color ERROR = new Color(null, 192,0,0);
+	public static final Color WARNING = new Color(null, 215,150,0);
+	public static final Color KERMETA = new Color(null, 255,114,0);
 
 	/**
 	 * The IOConsole instance.
@@ -139,6 +147,8 @@ public class EclipseConsole extends IOConsole {
 		};
 		ConsolePlugin.getStandardDisplay().syncExec(r);
 	}
+	
+
 	//////////////////////////////////////
 	//////////////////////////////////////
 	//		End of Writing Methods		//
