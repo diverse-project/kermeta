@@ -1,6 +1,6 @@
 
 
-/*$Id: IOConsole.java,v 1.7 2007-11-28 15:00:23 ftanguy Exp $
+/*$Id: IOConsole.java,v 1.8 2007-11-29 14:13:42 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	IOConsole.java
 * License : EPL
@@ -13,12 +13,9 @@ package fr.irisa.triskell.eclipse.console;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.ui.console.ConsolePlugin;
-import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IOConsoleOutputStream;
 
 import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
@@ -35,24 +32,19 @@ import fr.irisa.triskell.eclipse.console.messages.ObjectKermetaMessage;
  * @author ftanguy
  *
  */
-public class IOConsole {
-
-	/**
-	 * The IOConsole instance.
-	 */
-	protected org.eclipse.ui.console.IOConsole console = null;
+abstract public class IOConsole {
 	
 	/**
 	 * Considering the IOConsole protocol, several output stream can be created.
 	 * For the moment, we just need one. To get access to it, please use the accessor method.
 	 */
 	protected OutputStream outputStream = null;
-
+	
 	/**
 	 * The reader is used to read strings from the keyboard. To get access to it, please use the accessor method.
 	 */
-	private BufferedReader reader;
-	
+	protected BufferedReader reader;
+
 	//////////////////////////
 	//////////////////////////
 	//		Constructor		//
@@ -62,32 +54,7 @@ public class IOConsole {
 	 * This constructor is IMPORTANT for the subclasses.
 	 */
 	protected IOConsole() {}
-	
-	/**
-	 * This basic constructor instanciates an IOConsole object and initialize it.
-	 * The name parameter is used by the Eclipse console view and is mandatory.
-	 * @param name
-	 */
-	public IOConsole(String name) {
-		console = new KermetaConsole(name, null);
-		initialize();
-	}
-	
-	public IOConsole(KermetaConsole console) {
-		this.console = console;
-		initialize();
-	}
-	
-	/**
-	 * The initialize method add the console instance to the eclipse console registry,
-	 * and display it.
-	 *
-	 */
-	protected void initialize() {
-		ConsolePlugin.getDefault().getConsoleManager().addConsoles(new IConsole[]{ console });
-		ConsolePlugin.getDefault().getConsoleManager().showConsoleView(console);
-		console.activate();
-	}
+
 	//////////////////////////////////
 	//////////////////////////////////
 	//		End of Constructor		//
@@ -104,21 +71,14 @@ public class IOConsole {
 	 * This is a lazy initialization.
 	 * @return
 	 */
-	protected OutputStream getOutputStream() {
-		if ( outputStream == null )
-			outputStream = console.newOutputStream();
-		return outputStream;
-	}
+	abstract protected OutputStream getOutputStream();
 	
 	/**
 	 * This is a lazy initialization.
 	 * @return
 	 */
-	private BufferedReader getReader() {
-		if ( reader == null )
-			reader = new BufferedReader( new InputStreamReader( console.getInputStream() ) );
-		return reader;
-	}
+	abstract protected BufferedReader getReader();
+	
 	//////////////////////////////////
 	//////////////////////////////////
 	//		End of Accessors		//
@@ -145,49 +105,16 @@ public class IOConsole {
 			println( new ObjectKermetaMessage(o) );
 	}
 	
-	public void print(final ConsoleMessage message) {
-		Runnable r = new Runnable() {
-			public void run() {
-				changeColor(message.getColor());
-				IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
-				try {
-					if ( ! stream.isClosed() )
-						stream.write(message.getMessage());
-				} catch (IOException exception) {
-					exception.printStackTrace();
-				}
-			}
-		};
-		ConsolePlugin.getStandardDisplay().syncExec(r);
-	}
+	abstract public void print(ConsoleMessage message);
 	
 	/**
 	 * this methods allow to change the color of futur message
 	 * (this is because a simple change of current stream color, change the color for all messages, even previous ones ...) 
 	 * @param c
 	 */
-	public void changeColor(Color c){
-		Color previousColor = ((IOConsoleOutputStream) getOutputStream()).getColor();
-		if(!c.equals(previousColor)){
-			// need to change to another stream for the new color
-			outputStream = null; // reset the stream
-			((IOConsoleOutputStream) getOutputStream()).setColor(c);
-		}
-	}
-	public void println(final ConsoleMessage message) {
-		Runnable r = new Runnable() {
-			public void run() {
-				changeColor(message.getColor());
-				IOConsoleOutputStream stream = (IOConsoleOutputStream) getOutputStream();
-				try {
-					stream.write(message.getMessage() + '\n');
-				} catch (IOException exception) {
-					exception.printStackTrace();
-				}
-			}
-		};
-		ConsolePlugin.getStandardDisplay().syncExec(r);
-	}
+	abstract public void changeColor(Color c);
+	
+	abstract public void println(ConsoleMessage message);
 	//////////////////////////////////////
 	//////////////////////////////////////
 	//		End of Writing Methods		//
@@ -215,7 +142,6 @@ public class IOConsole {
 	}
 	
 	public String promptAndRead(String prompt) {
-		console.activate();
 		print(prompt);
 		return read();
 	}
@@ -227,7 +153,6 @@ public class IOConsole {
 	
 	
 	public void clear() {
-		console.clearConsole();
 	}
 	
 	

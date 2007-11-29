@@ -10,6 +10,7 @@ import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.kermeta.KermetaIcons;
 import fr.irisa.triskell.kermeta.FileRegistry;
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -86,7 +87,7 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	 */
 	public IOConsole getConsole() {
 		if ( console == null )
-			console = new IOConsole("Kermeta Console");
+			console = new EclipseConsole("Kermeta Console");
 	    return console;
     }
 

@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.25 2007-11-21 14:13:04 ftanguy Exp $
+/* $Id: KermetaLauncher.java,v 1.26 2007-11-29 14:13:47 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
@@ -117,7 +118,7 @@ public class KermetaLauncher
     {
 	    String shortname = fileNameString.contains("/")?fileNameString.substring(fileNameString.lastIndexOf("/")):fileNameString;
 	    String consolename = shortname + ": "+ classQualifiedNameString + "::" + operationString;
-	    IOConsole console = new IOConsole(consolename);
+	    IOConsole console = new EclipseConsole(consolename);
      
 	    try
         {                

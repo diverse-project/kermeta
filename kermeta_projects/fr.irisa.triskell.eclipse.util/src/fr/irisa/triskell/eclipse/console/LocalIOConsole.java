@@ -1,6 +1,6 @@
 
 
-/*$Id: LocalIOConsole.java,v 1.1 2007-11-21 14:00:18 ftanguy Exp $
+/*$Id: LocalIOConsole.java,v 1.2 2007-11-29 14:13:42 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	LocalIOConsole.java
 * License : EPL
@@ -12,9 +12,13 @@
 
 package fr.irisa.triskell.eclipse.console;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
+
+import org.eclipse.swt.graphics.Color;
 
 import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
 
@@ -42,6 +46,17 @@ public class LocalIOConsole extends IOConsole {
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
+	}
+
+	@Override
+	public void changeColor(Color c) {
+	}
+
+	@Override
+	protected BufferedReader getReader() {
+		if ( reader == null )
+			reader = new BufferedReader( new InputStreamReader( System.in ) );
+		return reader;
 	}
 	
 }

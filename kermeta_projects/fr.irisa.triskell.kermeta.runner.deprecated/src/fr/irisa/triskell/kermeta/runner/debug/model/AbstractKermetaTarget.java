@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.22 2007-11-21 14:13:04 ftanguy Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.23 2007-11-29 14:13:47 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -39,11 +39,11 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.RunnerConsole;
 import fr.irisa.triskell.kermeta.runner.debug.process.KermetaProcess;
 import fr.irisa.triskell.kermeta.runner.launching.ConstraintRunTarget;
@@ -444,7 +444,7 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 	    //console = new KermetaConsole(consolename, this);
 	    RunnerConsole runnerConsole = new RunnerConsole(consolename, null);
 	    runnerConsole.setTarget( target );
-	    console = new IOConsole( runnerConsole );
+	    console = new EclipseConsole( runnerConsole );
 	}
 	
 
