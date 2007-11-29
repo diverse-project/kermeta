@@ -1,3 +1,14 @@
+/* $Id: CompileNXCLogoK.java,v 1.3 2007-11-29 16:29:12 dvojtise Exp $
+ * Project   : KmLogo
+ * File      : CompileNXCLogoK.java
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Jun 14, 2007
+ * Authors       : 
+ *		Franck Fleurey
+ *		Didier Vojtisek
+ */
 package fr.irisa.triskell.kmlogo.ui;
 
 import java.io.IOException;
@@ -8,21 +19,17 @@ import java.util.ArrayList;
 
 import org.eclipse.core.runtime.Platform;
 
+import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 
 public class CompileNXCLogoK {
 
-	public static void run(String file, String out, KermetaIOStream console) {
+	public static final String LOGO_COMPILER_KERMETA_CODE = "platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoNXCCompiler.kmt";
+	public static void run(String file, String out, IOConsole console) {
 		System.out.println("run FixModel");
-		//KermetaUnit unit = IOPlugin.getDefault().loadKermetaUnit("platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoNXCCompiler.kmt", new NullProgressMonitor());
-		KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoNXCCompiler.kmt");
-		unit.load();
-		unit.typeCheckAllUnits();
-		KermetaInterpreter inter = new KermetaInterpreter(unit);
+		
+		KermetaInterpreter inter = new KermetaInterpreter(LOGO_COMPILER_KERMETA_CODE, null);
 		inter.setKStream(console);
 		// This is the operation to call
 		inter.setEntryPoint("kmLogo::NXCCompiler", "compile");

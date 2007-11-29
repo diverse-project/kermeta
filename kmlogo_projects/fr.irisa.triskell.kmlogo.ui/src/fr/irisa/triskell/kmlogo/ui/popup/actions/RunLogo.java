@@ -1,6 +1,19 @@
+/* $Id: RunLogo.java,v 1.2 2007-11-29 16:29:12 dvojtise Exp $
+ * Project   : KmLogo
+ * File      : RunLogo.java
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Jun 14, 2007
+ * Authors       : 
+ *		Franck Fleurey
+ *		Didier Vojtisek
+ */
 package fr.irisa.triskell.kmlogo.ui.popup.actions;
 
-import fr.irisa.triskell.kmlogo.ui.LogoConsole;
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
 import fr.irisa.triskell.kmlogo.ui.RunLogoK;
 
 import java.util.Iterator;
@@ -26,23 +39,24 @@ public class RunLogo implements IObjectActionDelegate, Runnable {
 	
 	public void run() {
 		
-		LogoConsole.printlnMessage("Launching logo interpreter on file : " + logoFile.getLocation().toOSString() + "...", LogoConsole.INFO);
+		IOConsole console = new EclipseConsole("Logo compiler");
+		console.println(new ConsoleMessage("Launching logo interpreter on file : " + logoFile.getLocation().toOSString() + "...", EclipseConsole.INFO));
 		
 		try {			
 				
 			String file_uri = "file:/" + logoFile.getLocation().toOSString();
 
 			try {
-				RunLogoK.run(file_uri, new LogoConsole());
+				RunLogoK.run(file_uri, console);
 			} catch (Throwable e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-			LogoConsole.printlnMessage("Execution terminated successfully.", LogoConsole.OK);
+			console.println(new ConsoleMessage("Execution terminated successfully.", EclipseConsole.OK));
 			
 		} catch (Exception e) {
-			LogoConsole.printlnMessage("Logo runtime error : " +  e.getMessage(), LogoConsole.ERROR);
+			console.println(new ConsoleMessage("Logo runtime error : " +  e.getMessage(), EclipseConsole.ERROR));
 			e.printStackTrace();
 		}
 	}

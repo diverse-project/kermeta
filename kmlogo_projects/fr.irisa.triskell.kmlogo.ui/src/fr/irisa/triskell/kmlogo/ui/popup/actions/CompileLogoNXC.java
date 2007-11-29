@@ -1,8 +1,21 @@
+/* $Id: CompileLogoNXC.java,v 1.2 2007-11-29 16:29:12 dvojtise Exp $
+ * Project   : KmLogo
+ * File      : CompileLogoNXC.java
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Jun 14, 2007
+ * Authors       : 
+ *		Franck Fleurey
+ *		Didier Vojtisek
+ */
 package fr.irisa.triskell.kmlogo.ui.popup.actions;
 
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
+import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
 import fr.irisa.triskell.kmlogo.ui.CompileNXCLogoK;
-import fr.irisa.triskell.kmlogo.ui.LogoConsole;
-import fr.irisa.triskell.kmlogo.ui.RunLogoK;
 
 import java.util.Iterator;
 
@@ -26,20 +39,20 @@ public class CompileLogoNXC implements IObjectActionDelegate, Runnable {
 	}
 	
 	public void run() {
-		
-		LogoConsole.printlnMessage("Compiling model : " + logoFile.getLocation().toOSString() + "...", LogoConsole.INFO);
+		IOConsole console = new EclipseConsole("Logo compiler");
+		console.println(new ConsoleMessage("Compiling model : " + logoFile.getLocation().toOSString() + "...", EclipseConsole.INFO));
 		
 		try {			
 			IFile out_file = logoFile.getWorkspace().getRoot().getFile(logoFile.getFullPath().removeFileExtension().addFileExtension("nxc"));
 			String file_uri = "file:/" + logoFile.getLocation().toOSString();
 			String out = out_file.getLocation().toOSString();
 
-			CompileNXCLogoK.run(file_uri, out, new LogoConsole());
+			CompileNXCLogoK.run(file_uri, out, console);
 			out_file.refreshLocal(0, null);
-			LogoConsole.printlnMessage("Model compiled successfully.", LogoConsole.OK);
+			console.println(new ConsoleMessage("Model compiled successfully.", EclipseConsole.OK));
 			
 		} catch (Exception e) {
-			LogoConsole.printlnMessage("Error : " +  e.getMessage(), LogoConsole.ERROR);
+			console.println(new ErrorMessage("Error : " +  e.getMessage()));
 			e.printStackTrace();
 		}
 	}
@@ -64,12 +77,12 @@ public class CompileLogoNXC implements IObjectActionDelegate, Runnable {
 		
 		if (selection instanceof StructuredSelection)
 		{
-			// the se=lection should be a single *.ecore file
+			// the selection should be a single *.ecore file
 			currentSelection = (StructuredSelection)selection;
-			Iterator it = currentSelection.iterator();
+			Iterator<IFile> it = currentSelection.iterator();
 
 			while(it.hasNext()) {
-				logoFile = (IFile)it.next();
+				logoFile = it.next();
 			}
 
 		}

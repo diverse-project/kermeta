@@ -1,3 +1,14 @@
+/* $Id: UploadRXE.java,v 1.2 2007-11-29 16:29:12 dvojtise Exp $
+ * Project   : KmLogo
+ * File      : UploadRXE.java
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Jun 14, 2007
+ * Authors       : 
+ *		Franck Fleurey
+ *		Didier Vojtisek
+ */
 package fr.irisa.triskell.kmlogo.ui.popup.actions;
 
 
@@ -13,8 +24,10 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
 import fr.irisa.triskell.kmlogo.ui.ExecHelper;
-import fr.irisa.triskell.kmlogo.ui.LogoConsole;
 
 
 public class UploadRXE implements IObjectActionDelegate {
@@ -42,8 +55,8 @@ public class UploadRXE implements IObjectActionDelegate {
 	public void run(IAction action) {
 		Shell shell = new Shell();
 
-		
-    	LogoConsole.printlnMessage("Uploading File " +  nxcFile.getLocation().toString(), LogoConsole.INFO);
+		IOConsole console = new EclipseConsole("Logo compiler");
+		console.println(new ConsoleMessage("Uploading File " +  nxcFile.getLocation().toString(), EclipseConsole.INFO));
     	
     	 try {
     		
@@ -63,12 +76,12 @@ public class UploadRXE implements IObjectActionDelegate {
     		 cmds[3] = nxcFile.getLocation().toString();
     		 
     		 String result = ExecHelper.exec(cmds).getOutput();
-    		 LogoConsole.printlnMessage(result , LogoConsole.KERMETA);
+    		 console.println(new ConsoleMessage(result , EclipseConsole.KERMETA));
     		 
-    		 LogoConsole.printlnMessage("File Uploaded", LogoConsole.OK);
+    		 console.println(new ConsoleMessage("File Uploaded", EclipseConsole.OK));
     		 
     	 } catch(Exception e) {
-    		 LogoConsole.printlnMessage("ERROR : " + e, LogoConsole.ERROR);
+    		 console.println(new ConsoleMessage("ERROR : " + e, EclipseConsole.ERROR));
     		 e.printStackTrace();
     	} 
 	}

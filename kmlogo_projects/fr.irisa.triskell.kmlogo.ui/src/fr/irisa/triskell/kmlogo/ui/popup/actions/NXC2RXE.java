@@ -1,3 +1,14 @@
+/* $Id: NXC2RXE.java,v 1.2 2007-11-29 16:29:12 dvojtise Exp $
+ * Project   : KmLogo
+ * File      : NXC2RXE.java
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Jun 14, 2007
+ * Authors       : 
+ *		Franck Fleurey
+ *		Didier Vojtisek
+ */
 package fr.irisa.triskell.kmlogo.ui.popup.actions;
 
 
@@ -8,13 +19,14 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
 import fr.irisa.triskell.kmlogo.ui.ExecHelper;
-import fr.irisa.triskell.kmlogo.ui.LogoConsole;
 
 
 public class NXC2RXE implements IObjectActionDelegate {
@@ -40,13 +52,14 @@ public class NXC2RXE implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
-		Shell shell = new Shell();
+		//Shell shell = new Shell();
 
 		IFile rxeFile = nxcFile.getWorkspace().getRoot().getFile(nxcFile.getFullPath().removeFileExtension().addFileExtension("rxe"));
     	
     	//String cmd = "dot -Tpdf -o "+pdfFile.getLocation().toOSString()+" " + dotFile.getLocation().toOSString();
     	
-    	LogoConsole.printlnMessage("Compiling file " + nxcFile, LogoConsole.INFO);
+		IOConsole console = new EclipseConsole("Logo compiler");
+		console.println(new ConsoleMessage("Compiling file " + nxcFile, EclipseConsole.INFO));
     	
     	 try {
     		 //Runtime r = Runtime.getRuntime();
@@ -59,13 +72,13 @@ public class NXC2RXE implements IObjectActionDelegate {
     		 cmds[2] = "-O=" + rxeFile.getLocation().toOSString();
     		 
     		 String result = ExecHelper.exec(cmds).getOutput();
-    		 LogoConsole.printlnMessage(result , LogoConsole.KERMETA);
+    		 console.println(new ConsoleMessage(result , EclipseConsole.KERMETA));
     		 
     		 rxeFile.refreshLocal(1, null);
-    		 LogoConsole.printlnMessage("File " + rxeFile + " created", LogoConsole.OK);
+    		 console.println(new ConsoleMessage("File " + rxeFile + " created", EclipseConsole.OK));
     		 
     	 } catch(Exception e) {
-    		 LogoConsole.printlnMessage("ERROR : " + e, LogoConsole.ERROR);
+    		 console.println(new ConsoleMessage("ERROR : " + e, EclipseConsole.ERROR));
     		 e.printStackTrace();
     	} 
 	}
