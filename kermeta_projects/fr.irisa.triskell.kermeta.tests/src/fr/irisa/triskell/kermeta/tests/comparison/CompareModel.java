@@ -1,4 +1,4 @@
-/*$Id: CompareModel.java,v 1.1 2007-10-16 09:19:02 cfaucher Exp $
+/*$Id: CompareModel.java,v 1.2 2007-11-29 14:28:19 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.tests
 * File : 	CompareModel.java
 * License : EPL
@@ -138,7 +138,7 @@ public class CompareModel {
 	 * 
 	 * @unused
 	 * You should never use this method, because this one is only used to test the behavior of this class.
-	 * 
+	 * DVK : we should rewrite this as a junit test !?
 	 */
 	public static void main (String args[]) {
 		String l = "test/interpreter/emf_testcases/instances/kmLogo.km";
