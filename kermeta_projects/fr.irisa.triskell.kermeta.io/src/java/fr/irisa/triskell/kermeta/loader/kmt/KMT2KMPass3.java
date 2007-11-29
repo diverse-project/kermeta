@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.28 2007-11-29 16:49:04 dvojtise Exp $
+/* $Id: KMT2KMPass3.java,v 1.29 2007-11-29 16:52:13 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -124,8 +124,8 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		currentClassIsAspect = KermetaASTHelper.isAnAspect(classDecl);
 		internalLog.debug(context.current_class.getName() + " isAspect="+currentClassIsAspect + " from " +builder.getUri());
 //		 add type variables to the context
-		Iterator tvs = context.current_class.getTypeParameter().iterator();
-		while(tvs.hasNext()) context.addTypeVar((TypeVariable)tvs.next());
+		Iterator<TypeVariable> tvs = context.current_class.getTypeParameter().iterator();
+		while(tvs.hasNext()) context.addTypeVar(tvs.next());
 		
 		context.current_class.setIsAbstract(false); // false by default
 		
@@ -406,9 +406,9 @@ public class KMT2KMPass3 extends KMT2KMPass {
 			}
 			tv.setName(name);
 			// check that another param with the same name does not exist yet
-			EList other_params = context.current_operation.getTypeParameter();
+			EList<TypeVariable> other_params = context.current_operation.getTypeParameter();
 			for (int i=0; i<other_params.size(); i++) {
-				if (((TypeVariable)other_params.get(i)).getName().equals(name)) {
+				if ((other_params.get(i)).getName().equals(name)) {
 					//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Parametric operation '" + builder.current_operation.getName() + "' already contains a type parameter named '"+name+"'.",typeVarDecl));
 					builder.error("PASS 3 : Parametric operation '" + context.current_operation.getName() + "' already contains a type parameter named '"+name+"'.");
 					return false;
@@ -459,9 +459,9 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		parameter.setType(getFType(param.getTypeRef()));
 		
 		// check that another param with the same name does not exist yet
-		EList other_params = context.current_operation.getOwnedParameter();
+		EList<Parameter> other_params = context.current_operation.getOwnedParameter();
 		for (int i=0; i<other_params.size(); i++) {
-			if (((Parameter)other_params.get(i)).getName().equals(parameter.getName())) {
+			if ((other_params.get(i)).getName().equals(parameter.getName())) {
 				//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Operation '" + builder.current_operation.getName() + "' already contains a parameter named '"+parameter.getName()+"'.",param));
 				builder.error("PASS 3 : Operation '" + context.current_operation.getName() + "' already contains a parameter named '"+parameter.getName()+"'.");
 				return false;
@@ -545,23 +545,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		return super.beginVisit(property);
 	}
 
-	/**
-	 * Check that the propose operation have the same signature
-	 * 
-	 * @param astOperation
-	 * @param modelOperation
-	 * @return
-	 */
-	private boolean haveSameTypeSignature(Property astProperty, fr.irisa.triskell.kermeta.language.structure.Property modelProperty) {
-		// check return type
-		// DVK: maybe I should use the type equality checker insead of a simple name comparison ...
-		if(!TypeHelper.getName(getFType(astProperty.getTypeRef())).equals(TypeHelper.getName(modelProperty.getType())))
-		{
-			return false;
-		}		
-		return true;
-	}
-	
+		
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#endVisit(metacore.ast.Property)
 	 */
