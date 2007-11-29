@@ -1,4 +1,4 @@
-/* $Id: TurtleGUIWrapper.java,v 1.2 2007-05-31 21:15:26 dvojtise Exp $
+/* $Id: TurtleGUIWrapper.java,v 1.3 2007-11-29 15:26:55 dvojtise Exp $
  * Project    : fr.irisa.triskell.kmLogo
  * File       : TurtleGUIWrapper.java
  * License    : EPL
@@ -22,7 +22,6 @@ import fr.irisa.triskell.kmLogo.gui.TurtleSimpleAWTGUI;
  */
 public class TurtleGUIWrapper {
 
-	public final static String RUNTIMEOBJECT_DATA_KEY = "TurtlePlatformWrapper.JavaObject";
 	/**
 	 * as call from kermeta using :
 	 * 		extern fr::irisa::triskell::kmLogo::wrapper::TurtleGUIWrapper.initialize(self, name)
@@ -38,7 +37,8 @@ public class TurtleGUIWrapper {
 		String name = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(roname);
 		ITurtleGUI turtleGUI = new TurtleSimpleAWTGUI(name, 600);
 		
-		self.getData().put(RUNTIMEOBJECT_DATA_KEY, turtleGUI);
+		// the UserData is used to store the real Java Object
+		self.setUserData( turtleGUI);
 		return self.getFactory().getMemory().voidINSTANCE;
     }
 	/**
@@ -55,7 +55,7 @@ public class TurtleGUIWrapper {
 			RuntimeObject rox1, RuntimeObject roy1, 
 			RuntimeObject rox2, RuntimeObject roy2)
     {
-		ITurtleGUI turtleGUI = (ITurtleGUI)self.getData().get(RUNTIMEOBJECT_DATA_KEY);
+		ITurtleGUI turtleGUI = (ITurtleGUI)self.getUserData();
 		turtleGUI.drawLine(fr.irisa.triskell.kermeta.runtime.basetypes.Integer.getValue(rox1), 
 				fr.irisa.triskell.kermeta.runtime.basetypes.Integer.getValue(roy1), 
 				fr.irisa.triskell.kermeta.runtime.basetypes.Integer.getValue(rox2), 
@@ -67,7 +67,7 @@ public class TurtleGUIWrapper {
 			RuntimeObject rox, RuntimeObject roy, 
 			RuntimeObject roAngle, RuntimeObject roPenUp)
     {
-		ITurtleGUI turtleGUI = (ITurtleGUI)self.getData().get(RUNTIMEOBJECT_DATA_KEY);
+		ITurtleGUI turtleGUI = (ITurtleGUI)self.getUserData();
 		turtleGUI.drawTurtle(fr.irisa.triskell.kermeta.runtime.basetypes.Integer.getValue(rox), 
 				fr.irisa.triskell.kermeta.runtime.basetypes.Integer.getValue(roy), 
 				fr.irisa.triskell.kermeta.runtime.basetypes.Real.getValue(roAngle), 
@@ -77,7 +77,7 @@ public class TurtleGUIWrapper {
 	
 	public static RuntimeObject clearDrawing(RuntimeObject self)
     {
-		ITurtleGUI turtleGUI = (ITurtleGUI)self.getData().get(RUNTIMEOBJECT_DATA_KEY);
+		ITurtleGUI turtleGUI = (ITurtleGUI)self.getUserData();
 		turtleGUI.clearDrawing();
 		return self.getFactory().getMemory().voidINSTANCE;
     }
