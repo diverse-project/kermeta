@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.26 2007-11-29 09:15:54 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.27 2007-11-29 10:14:30 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -258,7 +258,7 @@ public class IOPlugin extends AbstractUIPlugin {
 			else if ( ! FRAMEWORK_GENERATION ) {
 				//kermetaUnit.getImportedKermetaUnits().add( framework );
 				if ( uri.matches(".+\\.ecore") ) {
-					internalLog.debug("See if framework is null ??? => " + framework);
+					System.out.println("See if framework is null ??? => " + framework);
 					kermetaUnit.getImportedKermetaUnits().add( framework );
 					kermetaUnit.importKermetaUnit( ecore, false, true );
 					kermetaUnit.addRequire( ECORE_URI, ecore );	
