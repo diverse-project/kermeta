@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.31 2007-11-21 13:45:21 cfaucher Exp $
+/* $Id: Ecore2KMPass3.java,v 1.32 2007-11-29 15:34:23 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -70,6 +70,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EClass)
 	 */
 	public Object visit(EClass node) {
+		
 		currentClassDefinition = (ClassDefinition) datas.getTypeDefinition(node);
 		
 		context.pushContext();
@@ -93,6 +94,8 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 		// Set the super types of the type parameters and visit all other annotations
 		acceptList(((EClass)node).getEOperations());
 
+		acceptList( node.getEAnnotations() );
+		
 		context.popContext();
 		
 		return currentClassDefinition;
