@@ -1,6 +1,6 @@
 
 
-/*$Id: ConsoleMessage.java,v 1.2 2007-02-20 14:19:55 ftanguy Exp $
+/*$Id: ConsoleMessage.java,v 1.3 2007-11-29 16:28:25 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -13,8 +13,9 @@ package fr.irisa.triskell.eclipse.console.messages;
 
 import org.eclipse.swt.graphics.Color;
 
-public abstract class ConsoleMessage {
+public class ConsoleMessage {
 
+	
 	/**
 	 * The color of the displayed message.
 	 * @see org.eclipse.swt.graphics.Color
@@ -25,6 +26,13 @@ public abstract class ConsoleMessage {
 	 * The message to be displayed.
 	 */
 	protected String message;
+	
+
+	public ConsoleMessage( String message, Color color) {
+		super();
+		this.color = color;
+		this.message = message;
+	}
 	
 	/**
 	 * 
@@ -41,5 +49,6 @@ public abstract class ConsoleMessage {
 	public String getMessage() {
 		return message;
 	}
+
 	
 }

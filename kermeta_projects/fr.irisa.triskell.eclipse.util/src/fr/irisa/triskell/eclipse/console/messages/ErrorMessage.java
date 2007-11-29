@@ -1,6 +1,6 @@
 
 
-/*$Id: ErrorMessage.java,v 1.2 2007-02-20 14:19:55 ftanguy Exp $
+/*$Id: ErrorMessage.java,v 1.3 2007-11-29 16:28:25 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -17,8 +17,7 @@ import org.eclipse.swt.widgets.Display;
 public class ErrorMessage extends ConsoleMessage {
 
 	public ErrorMessage(String content) {
-		color = new Color(Display.getCurrent(), 255, 0, 0);
-		message = content;
+		super(content,new Color(Display.getCurrent(), 255, 0, 0));
 	}
 	
 }

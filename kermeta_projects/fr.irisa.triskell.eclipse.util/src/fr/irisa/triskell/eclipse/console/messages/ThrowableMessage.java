@@ -1,6 +1,6 @@
 
 
-/*$Id: ThrowableMessage.java,v 1.3 2007-07-24 13:46:31 ftanguy Exp $
+/*$Id: ThrowableMessage.java,v 1.4 2007-11-29 16:28:25 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Display;
 public class ThrowableMessage extends ConsoleMessage {
 
 	public ThrowableMessage(Throwable t) {
-		color = new Color(Display.getCurrent(), 255,0 ,0 );
+		super("",new Color(Display.getCurrent(), 255,0 ,0 ));
 		
 		ByteArrayOutputStream oStream = new java.io.ByteArrayOutputStream();		
 		PrintWriter pw = new PrintWriter(oStream);			
