@@ -1,6 +1,7 @@
 
 package testModelTypes;
 
+require kermeta
 using kermeta::standard
 
 package basic_fsm {
