@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.27 2007-11-29 10:14:30 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.28 2007-11-29 13:53:01 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -102,7 +102,7 @@ public class IOPlugin extends AbstractUIPlugin {
 	
 	static public boolean FRAMEWORK_GENERATION = false;
 	
-	static private boolean INITIALIZED = false;
+	private boolean INITIALIZED = false;
 	
 	/**
 	 * The constructor
@@ -259,6 +259,7 @@ public class IOPlugin extends AbstractUIPlugin {
 				//kermetaUnit.getImportedKermetaUnits().add( framework );
 				if ( uri.matches(".+\\.ecore") ) {
 					System.out.println("See if framework is null ??? => " + framework);
+					System.out.println("See if is initialized ??? => " + INITIALIZED);
 					kermetaUnit.getImportedKermetaUnits().add( framework );
 					kermetaUnit.importKermetaUnit( ecore, false, true );
 					kermetaUnit.addRequire( ECORE_URI, ecore );	
