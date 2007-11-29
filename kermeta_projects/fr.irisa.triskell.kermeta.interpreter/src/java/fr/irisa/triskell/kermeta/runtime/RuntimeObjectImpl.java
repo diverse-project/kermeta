@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectImpl.java,v 1.3 2007-11-05 08:47:43 ftanguy Exp $
+/* $Id: RuntimeObjectImpl.java,v 1.4 2007-11-29 15:26:14 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -86,6 +86,14 @@ public class RuntimeObjectImpl implements RuntimeObject {
 	
 	private Object javaNativeObject;
 	
+	/** the userData object is used for some wrapper between java and kermeta
+	 * this structure can be used to store the java object
+	 * Note: this structure should disappear when we'll have found a way to extend RuntimeObject properly
+	 *   the user should be able to extend RuntimeObject himself, and thus the Factory should be aware of that new kind
+	 *   of runtime object
+	 */
+	private Object userData;
+	
 	private RuntimeObject modelType;
 	
 	private DynamicExpressionUnit dynamicExpressionUnit ;
@@ -151,7 +159,7 @@ public class RuntimeObjectImpl implements RuntimeObject {
    public int hashCode() {
     	// try with a StringValue
     	
-        if ((this.STRING_VALUE.equals(this.getPrimitiveType())) || (this.NUMERIC_VALUE.equals(this.getPrimitiveType())))
+        if ((STRING_VALUE.equals(this.getPrimitiveType())) || (NUMERIC_VALUE.equals(this.getPrimitiveType())))
         	return this.javaNativeObject.hashCode();
         // try with a numericValue
         // if the object defines a hashcode method (other than the default one deined on object), use it
@@ -468,15 +476,15 @@ public class RuntimeObjectImpl implements RuntimeObject {
 			    	return "\"" +((String)javaNativeObject)+"\"";
 		    	
 		    }
-		    else if (this.STRING_BUFFER_VALUE.equals(primitiveType)){
+		    else if (STRING_BUFFER_VALUE.equals(primitiveType)){
 		    	return "\"" +((StringBuffer)javaNativeObject)+"\"";
 	    	
 		    }
-		    else if (this.NUMERIC_VALUE.equals(primitiveType)){
+		    else if (NUMERIC_VALUE.equals(primitiveType)){
 		    	return "" +((Integer)javaNativeObject);
 	    	
 		    }
-		    else if (this.BOOLEAN_VALUE.equals(primitiveType)){
+		    else if (BOOLEAN_VALUE.equals(primitiveType)){
 		    	return "" +((Boolean)javaNativeObject);
 	    	
 		    }
@@ -654,5 +662,13 @@ public class RuntimeObjectImpl implements RuntimeObject {
 	 */
 	public void setEmfObject(Object emfObject) {
 		this.emfObject = emfObject;
+	}
+
+	public Object getUserData() {
+		return userData;
+	}
+
+	public void setUserData(Object userData) {
+		this.userData = userData;		
 	}
 }

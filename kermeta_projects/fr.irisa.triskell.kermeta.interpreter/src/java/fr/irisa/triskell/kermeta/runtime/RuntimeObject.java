@@ -20,7 +20,9 @@ public interface RuntimeObject {
 	public static final String CHARACTER_VALUE = "CharacterValue";
 	public static final String ITERATOR_VALUE = "Iterator";
 	public static final String HASHTABLE_VALUE = "Hashtable";
-
+	//public static final String USEROBJECT_VALUE = "UserObjectValue";
+	
+	
 	/**
 	 * quick fix patch for #bug 137 
 	 * see http://gforge.inria.fr/tracker/index.php?func=detail&aid=137&group_id=32&atid=205
@@ -133,7 +135,23 @@ public interface RuntimeObject {
 
 	public abstract Object getJavaNativeObject();
 
+	/** setter for JavaNativeObject
+	 * the JavaNativeObject field is used when importing java native jar as kermeta code
+	 * @param javaNativeObject
+	 */
 	public abstract void setJavaNativeObject(Object javaNativeObject);
+	
+	/** getter for userData
+	 * the userData field is used for some wrapper between java and kermeta
+	 * this structure can be used to store the java object
+	 */
+	public abstract Object getUserData();
+	/** setter for userData
+	 * the userData field is used for some wrapper between java and kermeta
+	 * this structure can be used to store the java object
+	 * @param userData
+	 */
+	public abstract void setUserData(Object userData);
 
 	public abstract String getPrimitiveType();
 
@@ -179,5 +197,7 @@ public interface RuntimeObject {
 	public abstract Object getEmfObject();
 
 	public abstract void setEmfObject(Object emfObject);
+	
+	
 
 }
