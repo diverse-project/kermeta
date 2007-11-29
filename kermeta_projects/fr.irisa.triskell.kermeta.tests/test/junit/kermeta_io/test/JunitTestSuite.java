@@ -1,7 +1,7 @@
-/* $Id: JunitTestSuite.java,v 1.5 2007-11-13 16:00:22 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.6 2007-11-29 14:02:37 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
- * License    : GPL
+ * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : 27 janv. 2005
@@ -54,7 +54,7 @@ public class JunitTestSuite extends TestCase {
 		if ( ioPlugin == null ) {
 
 			IOPlugin.LOCAL_USE = true;
-			ioPlugin = new IOPlugin();
+			ioPlugin = IOPlugin.getDefault();
 		
 		}
 

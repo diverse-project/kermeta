@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.6 2007-10-23 09:41:32 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.7 2007-11-29 14:02:38 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -41,7 +41,7 @@ public class JunitTestSuite extends TestSuite {
     	if ( ioPlugin == null ) {
 		
     		IOPlugin.LOCAL_USE = true;
-    		ioPlugin = new IOPlugin();
+    		ioPlugin = IOPlugin.getDefault();
 	
     	}
 

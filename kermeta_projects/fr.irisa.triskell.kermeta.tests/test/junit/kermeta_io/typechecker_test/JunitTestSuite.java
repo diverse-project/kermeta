@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.4 2007-09-19 13:07:40 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.5 2007-11-29 14:02:38 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -46,7 +46,7 @@ public class JunitTestSuite extends TestCase {
 		if ( ioPlugin == null ) {
 		
 			IOPlugin.LOCAL_USE = true;
-			ioPlugin = new IOPlugin();
+			ioPlugin = IOPlugin.getDefault();
 		
 		}
 
