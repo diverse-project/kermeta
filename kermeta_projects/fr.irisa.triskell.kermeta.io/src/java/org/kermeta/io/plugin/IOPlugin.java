@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.28 2007-11-29 13:53:01 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.29 2007-11-29 14:12:59 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -106,8 +106,9 @@ public class IOPlugin extends AbstractUIPlugin {
 	
 	/**
 	 * The constructor
+	 * must not be used by user, please use getDefault() instead
 	 */
-	public IOPlugin() {
+	private IOPlugin() {
 		plugin = this;
 		if ( ! INITIALIZED ) {
 			initialize();
