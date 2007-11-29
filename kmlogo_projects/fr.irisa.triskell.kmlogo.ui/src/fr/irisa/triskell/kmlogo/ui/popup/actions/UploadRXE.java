@@ -1,4 +1,4 @@
-/* $Id: UploadRXE.java,v 1.2 2007-11-29 16:29:12 dvojtise Exp $
+/* $Id: UploadRXE.java,v 1.3 2007-11-29 16:31:48 dvojtise Exp $
  * Project   : KmLogo
  * File      : UploadRXE.java
  * License   : EPL
@@ -55,7 +55,7 @@ public class UploadRXE implements IObjectActionDelegate {
 	public void run(IAction action) {
 		Shell shell = new Shell();
 
-		IOConsole console = new EclipseConsole("Logo compiler");
+		IOConsole console = new EclipseConsole("Logo uploadRXE");
 		console.println(new ConsoleMessage("Uploading File " +  nxcFile.getLocation().toString(), EclipseConsole.INFO));
     	
     	 try {

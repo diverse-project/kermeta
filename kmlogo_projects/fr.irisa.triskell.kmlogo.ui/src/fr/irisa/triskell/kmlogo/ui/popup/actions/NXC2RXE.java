@@ -1,4 +1,4 @@
-/* $Id: NXC2RXE.java,v 1.2 2007-11-29 16:29:12 dvojtise Exp $
+/* $Id: NXC2RXE.java,v 1.3 2007-11-29 16:31:48 dvojtise Exp $
  * Project   : KmLogo
  * File      : NXC2RXE.java
  * License   : EPL
@@ -58,7 +58,7 @@ public class NXC2RXE implements IObjectActionDelegate {
     	
     	//String cmd = "dot -Tpdf -o "+pdfFile.getLocation().toOSString()+" " + dotFile.getLocation().toOSString();
     	
-		IOConsole console = new EclipseConsole("Logo compiler");
+		IOConsole console = new EclipseConsole("Logo NXC2RXE compiler");
 		console.println(new ConsoleMessage("Compiling file " + nxcFile, EclipseConsole.INFO));
     	
     	 try {

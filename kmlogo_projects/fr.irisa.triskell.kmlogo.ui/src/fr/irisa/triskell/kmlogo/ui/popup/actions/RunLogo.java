@@ -1,4 +1,4 @@
-/* $Id: RunLogo.java,v 1.2 2007-11-29 16:29:12 dvojtise Exp $
+/* $Id: RunLogo.java,v 1.3 2007-11-29 16:31:48 dvojtise Exp $
  * Project   : KmLogo
  * File      : RunLogo.java
  * License   : EPL
@@ -39,7 +39,7 @@ public class RunLogo implements IObjectActionDelegate, Runnable {
 	
 	public void run() {
 		
-		IOConsole console = new EclipseConsole("Logo compiler");
+		IOConsole console = new EclipseConsole("Logo Simulator");
 		console.println(new ConsoleMessage("Launching logo interpreter on file : " + logoFile.getLocation().toOSString() + "...", EclipseConsole.INFO));
 		
 		try {			

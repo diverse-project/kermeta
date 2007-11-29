@@ -1,4 +1,4 @@
-/* $Id: CompileLogoNXC.java,v 1.2 2007-11-29 16:29:12 dvojtise Exp $
+/* $Id: CompileLogoNXC.java,v 1.3 2007-11-29 16:31:48 dvojtise Exp $
  * Project   : KmLogo
  * File      : CompileLogoNXC.java
  * License   : EPL
@@ -39,7 +39,7 @@ public class CompileLogoNXC implements IObjectActionDelegate, Runnable {
 	}
 	
 	public void run() {
-		IOConsole console = new EclipseConsole("Logo compiler");
+		IOConsole console = new EclipseConsole("Logo2NXC compiler");
 		console.println(new ConsoleMessage("Compiling model : " + logoFile.getLocation().toOSString() + "...", EclipseConsole.INFO));
 		
 		try {			
