@@ -16,6 +16,7 @@ Export-Package: fr.irisa.triskell.eclipse.console,
  fr.irisa.triskell.eclipse.emf,
  fr.irisa.triskell.eclipse.resources,
  fr.irisa.triskell.eclipse.wizard,
+ org.kermeta.ecore.internal.model.helper;x-internal:=true,
  org.kermeta.ecore.model.helper
 Bundle-Vendor: IRISA/INRIA
 Bundle-ClassPath: .
