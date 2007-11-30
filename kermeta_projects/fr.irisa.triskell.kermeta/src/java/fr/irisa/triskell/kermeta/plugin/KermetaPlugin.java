@@ -19,6 +19,9 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
  * The main plugin class to be used in the desktop.
  */
 public class KermetaPlugin extends AbstractUIPlugin {
+	
+	final static public String ID = "fr.irisa.triskell.kermeta";
+	
 	//The shared instance.
 	private static KermetaPlugin plugin = null;
 
