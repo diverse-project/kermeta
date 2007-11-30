@@ -1,7 +1,7 @@
-/* $Id: KermetaLauncher.java,v 1.27 2007-11-30 13:18:50 ftanguy Exp $
+/* $Id: KermetaLauncher.java,v 1.28 2007-11-30 13:53:46 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Jun 14, 2005
