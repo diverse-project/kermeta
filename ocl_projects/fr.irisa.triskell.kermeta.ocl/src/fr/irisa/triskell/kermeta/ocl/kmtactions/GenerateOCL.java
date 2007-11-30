@@ -1,4 +1,4 @@
-/* $Id: GenerateOCL.java,v 1.8 2007-11-29 16:59:03 dvojtise Exp $
+/* $Id: GenerateOCL.java,v 1.9 2007-11-30 16:03:24 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.ocl
  * File       : GenerateOCL.java
  * License    : EPL
@@ -60,7 +60,7 @@ public class GenerateOCL {
 		typechecker.checkUnit();*/
 		
 		
-		KermetaInterpreter inter = new KermetaInterpreter(oclKmtPrinterKmtPath, null);
+		KermetaInterpreter inter = new KermetaInterpreter(oclKmtPrinterKmtPath, null, true);
 		inter.setKStream(console);
 		// This is the operation to call
 		inter.setEntryPoint("OCLKMTPrinter::OCLKMTPrinter", "generateOCL");

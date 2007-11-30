@@ -1,4 +1,4 @@
-/* $Id: OCLParseWizard.java,v 1.7 2007-11-29 16:59:03 dvojtise Exp $
+/* $Id: OCLParseWizard.java,v 1.8 2007-11-30 16:03:24 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.ocl
 * File : 	OCLParseWizard.java
 * License : EPL
@@ -30,7 +30,10 @@ import org.eclipse.ui.IWorkbenchWizard;
 
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
+import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
+import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
+import fr.irisa.triskell.eclipse.console.messages.OKMessage;
+import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.kermeta.ocl.GenerateKMT;
 import fr.irisa.triskell.kermeta.ocl.TestOCLParser;
 
@@ -81,7 +84,7 @@ public class OCLParseWizard extends Wizard {
 	IFile outOCLfile;
 	private boolean generatemOCL(){
 		
-		console.println(new ConsoleMessage("Parsing file " + inputFile, EclipseConsole.INFO));
+		console.println(new InfoMessage("Parsing file " + inputFile));
 		
 		try {
 			 outOCLfile = inputFile.getWorkspace().getRoot().getFile(inputFile.getLocation().removeFileExtension().addFileExtension("mocl"));
@@ -92,6 +95,8 @@ public class OCLParseWizard extends Wizard {
 			
 			
 			TestOCLParser.run(ipath,opath);
+			
+			
 			
 			/*//ISTeCQLexer lexer = new ISTeCQLexer(inputFile.getContents());
 			//ISTeCQParser parser = new ISTeCQParser(lexer);
@@ -117,14 +122,16 @@ public class OCLParseWizard extends Wizard {
 				
 			outOCLfile.refreshLocal(1, null);
 				
-			console.println(new ConsoleMessage("Done - File " + outOCLfile + " successfully created.", EclipseConsole.OK));
+			console.println(new OKMessage("Done - File " + outOCLfile + " successfully created."));
 			/*}
 			else {
 				for(String msg : parser.errors) OCLConsole.printlnMessage( msg, OCLConsole.ERROR);
 			}*/
 			
 		} catch (Throwable e) {
-			console.println(new ConsoleMessage( "ERROR : " + e.getMessage(), EclipseConsole.ERROR));
+			console.println(new ErrorMessage( "ERROR : " + e.getMessage()));
+			console.println(new ThrowableMessage( e));
+			e.printStackTrace();
 			return false;
 		}
 		
@@ -215,7 +222,8 @@ public class OCLParseWizard extends Wizard {
 		//	msgStream.println("Model " + xmiFile + " created successfully.");
 			
 		} catch (Exception e) {
-			console.println(new ConsoleMessage( "ERROR : " + e.getMessage(), EclipseConsole.ERROR));
+			console.println(new ErrorMessage( "ERROR : " ));
+			console.println(new ThrowableMessage( e ));
 			e.printStackTrace();
 		}
 
