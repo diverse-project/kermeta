@@ -16,7 +16,7 @@ public class Determinization {
 		
 		String file = "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/determinization.kmt";
 		
-		KermetaInterpreter interpreter = new KermetaInterpreter(file, null);
+		KermetaInterpreter interpreter = new KermetaInterpreter(file, null, false);
 		ArrayList<RuntimeObject> parameters = new ArrayList<RuntimeObject> ();
 		parameters.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(
 				"../models/sampletodeterminize.fsm", interpreter.getMemory().getROFactory()));
