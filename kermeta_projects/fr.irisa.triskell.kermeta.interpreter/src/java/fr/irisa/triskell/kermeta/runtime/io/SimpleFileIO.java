@@ -37,6 +37,7 @@ public class SimpleFileIO {
 	
 	public static RuntimeObject writeTextFile(RuntimeObject filename, RuntimeObject text)
     {
+		
         try
         {
         	/*
@@ -45,6 +46,8 @@ public class SimpleFileIO {
         	 * 
         	 */
         	java.lang.String folderPath = String.getValue(filename);
+        	//convert windows delimiter into /
+    		folderPath = folderPath.replaceAll("\\\\", "/");
         	int i = folderPath.lastIndexOf("/");
         	folderPath = folderPath.substring(0, i);
         	
@@ -74,7 +77,9 @@ public class SimpleFileIO {
         StringBuilder builder = new StringBuilder();
         java.lang.String ligne;
        	try {
-			br = new BufferedReader(new FileReader(String.getValue(filename)));
+       		//convert windows delimiter into /    		
+    		java.lang.String sfileName = String.getValue(filename).replaceAll("\\\\", "/");
+			br = new BufferedReader(new FileReader(sfileName));
 			while((ligne = br.readLine()) != null) builder.append(ligne + "\n");
 			br.close();
 		} catch (FileNotFoundException e) {
