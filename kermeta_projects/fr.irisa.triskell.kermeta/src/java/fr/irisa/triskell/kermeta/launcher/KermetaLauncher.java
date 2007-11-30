@@ -1,5 +1,5 @@
 
-/*$Id: KermetaLauncher.java,v 1.9 2007-11-30 16:17:42 ftanguy Exp $
+/*$Id: KermetaLauncher.java,v 1.10 2007-11-30 21:08:35 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta
  * File : 	KermetaLauncher.java
  * License : EPL
@@ -11,37 +11,23 @@
 
 package fr.irisa.triskell.kermeta.launcher;
 
-import java.io.Console;
 import java.util.ArrayList;
 
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.ErrorDialog;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-import org.kermeta.checker.KermetaUnitChecker;
-import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
-import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
-import fr.irisa.triskell.eclipse.console.messages.ObjectKermetaMessage;
 import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
-import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
-import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 public class KermetaLauncher {
 
