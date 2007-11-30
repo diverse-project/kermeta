@@ -1,4 +1,4 @@
-/* $Id: LogoDynSemantics.kmt,v 1.1 2007-09-14 08:18:28 ffleurey Exp $
+/* $Id: LogoDynSemantics.kmt,v 1.2 2007-11-30 14:32:02 dvojtise Exp $
  * Creation date: May 30, 2007
  * License:
  * Copyright:
@@ -57,7 +57,7 @@ package ASM {
 	@aspect "true"
 	class Constant
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			result := integerValue
 		end 
 	}
@@ -65,7 +65,7 @@ package ASM {
 	@aspect "true"
 	class ParameterCall
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			result := context.peekFrame.getValue(parameter.name)
 		end 
 	}
@@ -73,7 +73,7 @@ package ASM {
 	@aspect "true"
 	class Plus
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			result := lhs.eval(context) + rhs.eval(context)
 		end
 	}
@@ -81,7 +81,7 @@ package ASM {
 	@aspect "true"
 	class Minus
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			result := lhs.eval(context) - rhs.eval(context)
 		end
 	}
@@ -89,7 +89,7 @@ package ASM {
 	@aspect "true"
 	class Mult
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			result := lhs.eval(context) * rhs.eval(context)
 		end
 	}
@@ -97,7 +97,7 @@ package ASM {
 	@aspect "true"
 	class Div
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			result := lhs.eval(context) / rhs.eval(context)
 		end
 	}
@@ -105,7 +105,7 @@ package ASM {
 	@aspect "true"
 	class Equals
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			result := if lhs.eval(context) == rhs.eval(context) then 1 else 0 end
 		end
 	}
@@ -113,7 +113,7 @@ package ASM {
 	@aspect "true"
 	class Greater
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			result := if lhs.eval(context) > rhs.eval(context) then 1 else 0 end
 		end
 	}
@@ -121,7 +121,7 @@ package ASM {
 	@aspect "true"
 	class Lower
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			result := if lhs.eval(context) < rhs.eval(context) then 1 else 0 end
 		end
 	}
@@ -129,7 +129,7 @@ package ASM {
 	@aspect "true"
 	class Block
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			instructions.each{instruction  | result := instruction.eval(context)}
 		end 
 	}
@@ -138,7 +138,7 @@ package ASM {
 	@aspect "true"
 	class ProcCall
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			// create a new stack frame
 			var frame : Bindings init Bindings.new
 			// for each formal arg, create a binding with actual value
@@ -163,7 +163,7 @@ package ASM {
 	@aspect "true"
 	class If
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			if condition.eval(context) != 0 then
 				result := thenPart.eval(context)
 			else
@@ -175,7 +175,7 @@ package ASM {
 	@aspect "true"
 	class While
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			var cond : Integer
 			from cond := condition.eval(context)
 			until cond == 0
@@ -188,7 +188,7 @@ package ASM {
 	@aspect "true"
 	class Repeat
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			from var i : Integer init condition.eval(context)
 			until i < 1
 			loop
@@ -204,50 +204,57 @@ package ASM {
 	@aspect "true"
 	class Back
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			context.turtle.forward(-steps.eval(context))
+			result := void
 		end
 	}
 	@aspect "true"
 	class Forward
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			context.turtle.forward(steps.eval(context))
+			result := void
 		end
 	}
 	@aspect "true"
 	class Left
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			context.turtle.rotate(-angle.eval(context))
+			result := void
 		end
 	}
 	@aspect "true"
 	class Right
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			context.turtle.rotate(angle.eval(context))
+			result := void
 		end
 	}
 	@aspect "true"
 	class PenDown
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			context.turtle.setPenUp(false)
+			result := void
 		end
 	}
 	@aspect "true"
 	class PenUp
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			context.turtle.setPenUp(true)
+			result := void
 		end
 	}
 	@aspect "true"
 	class Clear
 	{
-		operation eval(context : Context) : Integer is do 
+		method eval(context : Context) : Integer is do 
 			context.turtle.reset()
+			result := void
 		end
 	}
 	
