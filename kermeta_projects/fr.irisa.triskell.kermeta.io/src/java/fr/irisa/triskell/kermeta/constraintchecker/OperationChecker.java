@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.23 2007-10-29 16:12:31 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.24 2007-11-30 16:19:05 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
@@ -164,7 +165,7 @@ public class OperationChecker extends AbstractChecker {
 					
 						boolean error = false;
 						// Checking abstract
-						boolean isAbstract = 
+						boolean isAbstract = (op.isIsAbstract() && operation.isIsAbstract()) ||
 									(op.isIsAbstract() && ! operation.isIsAbstract())
 								|| 	(! op.isIsAbstract() && operation.isIsAbstract());
 								/*||	OperationHelper.isOverloadable(op) && ! operation.isIsAbstract()
