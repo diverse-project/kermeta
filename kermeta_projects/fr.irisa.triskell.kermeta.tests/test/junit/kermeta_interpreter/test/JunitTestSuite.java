@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.11 2007-11-29 14:02:38 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.12 2007-11-30 07:44:05 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -77,7 +77,7 @@ public class JunitTestSuite extends TestSuite {
 		
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
-/*		testWithFile("test/interpreter/kmt_testcases","001_testAssignment.main.kmt" );
+		testWithFile("test/interpreter/kmt_testcases","001_testAssignment.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","002_testArithm.main.kmt" );
 
@@ -188,19 +188,19 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/kmt_testcases","060_testNewOnModelTypeClass.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","061_weaving_in_kermeta_aspect1.main.kmt" );
-*/
+
 		testWithFile("test/interpreter/kmt_testcases","062_testIsInstanceOf.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","063_testAsType.main.kmt" );
 
-//		testWithFile("test/interpreter/kmt_testcases","064_testReals.main.kmt" );
+		testWithFile("test/interpreter/kmt_testcases","064_testReals.main.kmt" );
 
-//		testWithFile("test/interpreter/kmt_testcases","065_testInheritFromCollection.main.kmt" );
+		testWithFile("test/interpreter/kmt_testcases","065_testInheritFromCollection.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","066_testHasSubType.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","067_testHasSubTypeLoadingModel.main.kmt" );
-/*
+
 		testWithFile("test/interpreter/kmt_testcases","068_testVariableInit.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","069_testToStringRedifinition.main.kmt" );
