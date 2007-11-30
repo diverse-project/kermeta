@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.15 2007-07-20 15:07:48 ftanguy Exp $
+/* $Id: OperationCallFrame.java,v 1.16 2007-11-30 13:15:50 ftanguy Exp $
 * Project : Kermeta Interpreter
 * File : OperationCallFrame.java
 * License : EPL
@@ -18,12 +18,14 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-//import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.CallableElement;
@@ -104,8 +106,36 @@ public class OperationCallFrame extends CallFrame {
     }
     
     protected void initialize(ArrayList<RuntimeObject> pParameters) {
+        
+    	/*
+    	 * 
+    	 * Checking the validity of the parameters
+    	 * 
+    	 */
+    	if ( operation.getOwnedParameter().size() != pParameters.size() ) {
+        	String expected = "";
+        	KM2KMTPrettyPrinter prettyprinter = new KM2KMTPrettyPrinter();
+        	for ( Parameter p : operation.getOwnedParameter() ) {
+        		if ( expected.equals("") )
+        			expected = (String) prettyprinter.ppTypeFromMultiplicityElement( p );
+        		else
+        			expected += ", " + (String) prettyprinter.ppTypeFromMultiplicityElement( p );
+        	}
+        	expected = "Expecting : " + expected;
+        	String found = "";
+        	for ( RuntimeObject ro : pParameters ) {
+    			Class c = (Class) ro.getMetaclass().getKCoreObject();
+        		if ( found.equals("") )
+        			found = KermetaModelHelper.NamedElement.qualifiedName(c.getTypeDefinition());
+        		else
+        			found += ", " + KermetaModelHelper.NamedElement.qualifiedName(c.getTypeDefinition());
+        	}
+        	found = "Found " + found;
+        	throw new Error("INTERNAL ERROR : Wrong number of arguments for the operation " + operation.getName() + ".\n " + expected + "\n" + found);
+        }
+    	
         pushExpressionContext();
-        Iterator it = operation.getOwnedParameter().iterator();
+        Iterator<Parameter> it = operation.getOwnedParameter().iterator();       
         int i=0;
         while (it.hasNext()) {
             Parameter fparam = (Parameter)it.next();
