@@ -1,4 +1,4 @@
-/* $Id: OCLParseWizard.java,v 1.8 2007-11-30 16:03:24 dvojtise Exp $
+/* $Id: OCLParseWizard.java,v 1.9 2007-11-30 17:14:15 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.ocl
 * File : 	OCLParseWizard.java
 * License : EPL
@@ -12,17 +12,24 @@
 */
 package fr.irisa.triskell.kermeta.ocl.ui.popup.actions;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbench;
@@ -34,7 +41,9 @@ import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
 import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
 import fr.irisa.triskell.eclipse.console.messages.OKMessage;
 import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.ocl.GenerateKMT;
+import fr.irisa.triskell.kermeta.ocl.MyOCLParser;
 import fr.irisa.triskell.kermeta.ocl.TestOCLParser;
 
 
@@ -87,14 +96,39 @@ public class OCLParseWizard extends Wizard {
 		console.println(new InfoMessage("Parsing file " + inputFile));
 		
 		try {
-			 outOCLfile = inputFile.getWorkspace().getRoot().getFile(inputFile.getLocation().removeFileExtension().addFileExtension("mocl"));
+			outOCLfile = inputFile.getWorkspace().getRoot().getFile(inputFile.getLocation().removeFileExtension().addFileExtension("mocl"));
 			if (outOCLfile.exists()) outOCLfile.delete(true, null);
-			String ipath =  inputFile.getLocation().toOSString();
-			String opath =  inputFile.getLocation().removeFileExtension().addFileExtension("mocl").toOSString();
+			//String ipath =  inputFile.getLocation().toOSString();
+			//String opath =  inputFile.getLocation().removeFileExtension().addFileExtension("mocl").toOSString();
 			
-			
-			
-			TestOCLParser.run(ipath,opath);
+			// read input file into a string
+			InputStream inStream = inputFile.getContents();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(inStream));
+			String str;
+			StringBuffer oclSourceText = new StringBuffer();
+			while ((str = reader.readLine()) != null) {
+				oclSourceText.append(str);
+				oclSourceText.append("\n");
+	        }
+            reader.close();
+            
+            MyOCLParser parser = new MyOCLParser(oclSourceText.toString());
+    		EObject constraint = null;
+    		constraint = parser.parse();
+    		if (constraint != null) {
+    			// eventually patch the name of the file
+    			IFile outFile = ResourceHelper.getOrCreateIFile(outOCLfile.toString());
+    			URI fileURI = URI.createURI(outFile.toString());
+    			ResourceSet resource_set = new ResourceSetImpl();
+    			Resource resource = resource_set.createResource(fileURI);
+    			//Resource resource = new XMIResourceFactoryImpl().createResource(fileURI);
+    			resource.getContents().add(constraint);
+    			TestOCLParser.saveList(constraint.eCrossReferences());
+    			resource.save(Collections.EMPTY_MAP);
+    		
+    		
+            
+			//TestOCLParser.run(ipath,opath);
 			
 			
 			
@@ -118,15 +152,17 @@ public class OCLParseWizard extends Wizard {
 				res.save(null);
 				*/
 			
-			 outOCLfile = inputFile.getWorkspace().getRoot().getFile(inputFile.getLocation().removeFileExtension().addFileExtension("mocl"));
+			 //outOCLfile = inputFile.getWorkspace().getRoot().getFile(inputFile.getLocation().removeFileExtension().addFileExtension("mocl"));
 				
 			outOCLfile.refreshLocal(1, null);
 				
 			console.println(new OKMessage("Done - File " + outOCLfile + " successfully created."));
-			/*}
+			}
 			else {
-				for(String msg : parser.errors) OCLConsole.printlnMessage( msg, OCLConsole.ERROR);
-			}*/
+				console.println(new ErrorMessage( "ERROR :  Nothing to save"));
+				
+				//for(String msg : parser.errors) OCLConsole.printlnMessage( msg, OCLConsole.ERROR);
+			}
 			
 		} catch (Throwable e) {
 			console.println(new ErrorMessage( "ERROR : " + e.getMessage()));

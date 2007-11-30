@@ -1,4 +1,4 @@
-/*$Id: ResourceHelper.java,v 1.14 2007-11-30 10:49:23 dvojtise Exp $
+/*$Id: ResourceHelper.java,v 1.15 2007-11-30 17:13:50 dvojtise Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -80,7 +80,6 @@ public class ResourceHelper {
 	
 	/**
 	 * This methods gives an IFile resource corresponding to the file path in the workspace.
-	 * No control is done. It means that even if the file does not exist, you will be given a resource.
 	 * Note: it cannot retreive IFile outside of the workspace
 	 * @see org.eclipse.core.resources.IFile
 	 * @param filePath The path of the file. It accepts several formats:
@@ -99,6 +98,28 @@ public class ResourceHelper {
 				return file;
 			else 
 				return null;
+		} catch (java.lang.IllegalArgumentException exception) {
+			return null;
+		}
+	}
+	/**
+	 * This methods gives an IFile resource corresponding to the file path in the workspace.
+	 * No control is done. It means that even if the file does not exist, you will be given a resource.
+	 * Note: it cannot retreive IFile outside of the workspace
+	 * @see org.eclipse.core.resources.IFile
+	 * @param filePath The path of the file. It accepts several formats:
+	 * 		- relative to the workspace root directory (ex: /myProject/myDir/myFile).
+	 * 		- platform:/resource url (ex: platform:/resource/myProject/mydir/myFile).
+	 * 		- file:/ url (ex: file:/C:/eclipse/workspace/myProject/mydir/myFile or file:/udd/userName/eclipse/workspace/myProject/mydir/myFile
+	 * 			note that in this case it will work only if the file is really in the workspace 
+	 * @return The method returns an IFile resource.
+	 */
+	static public IFile getOrCreateIFile(String filePath) {
+		String cleanPath = cleanIfNecessaryPath(filePath);
+		Path path = new Path(cleanPath);
+		try {
+			IFile file = root.getFile(path);
+			return file;
 		} catch (java.lang.IllegalArgumentException exception) {
 			return null;
 		}

@@ -21,7 +21,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 public class TestOCLParser {
 	static Resource resource;
 
-	protected static void saveList(EList l) {
+	public static void saveList(EList l) {
 		for (Object o1 : l) {
 			EObject o = (EObject) o1;
 			resource.getContents().add(o);
