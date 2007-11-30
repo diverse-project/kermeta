@@ -1,4 +1,4 @@
-/* $Id: CompileLogoNXC.java,v 1.3 2007-11-29 16:31:48 dvojtise Exp $
+/* $Id: CompileLogoNXC.java,v 1.4 2007-11-30 08:05:36 dvojtise Exp $
  * Project   : KmLogo
  * File      : CompileLogoNXC.java
  * License   : EPL
@@ -13,8 +13,9 @@ package fr.irisa.triskell.kmlogo.ui.popup.actions;
 
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
 import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
+import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
+import fr.irisa.triskell.eclipse.console.messages.OKMessage;
 import fr.irisa.triskell.kmlogo.ui.CompileNXCLogoK;
 
 import java.util.Iterator;
@@ -40,7 +41,7 @@ public class CompileLogoNXC implements IObjectActionDelegate, Runnable {
 	
 	public void run() {
 		IOConsole console = new EclipseConsole("Logo2NXC compiler");
-		console.println(new ConsoleMessage("Compiling model : " + logoFile.getLocation().toOSString() + "...", EclipseConsole.INFO));
+		console.println(new InfoMessage("Compiling model : " + logoFile.getLocation().toOSString() + "..."));
 		
 		try {			
 			IFile out_file = logoFile.getWorkspace().getRoot().getFile(logoFile.getFullPath().removeFileExtension().addFileExtension("nxc"));
@@ -49,7 +50,7 @@ public class CompileLogoNXC implements IObjectActionDelegate, Runnable {
 
 			CompileNXCLogoK.run(file_uri, out, console);
 			out_file.refreshLocal(0, null);
-			console.println(new ConsoleMessage("Model compiled successfully.", EclipseConsole.OK));
+			console.println(new OKMessage("Model compiled successfully."));
 			
 		} catch (Exception e) {
 			console.println(new ErrorMessage("Error : " +  e.getMessage()));

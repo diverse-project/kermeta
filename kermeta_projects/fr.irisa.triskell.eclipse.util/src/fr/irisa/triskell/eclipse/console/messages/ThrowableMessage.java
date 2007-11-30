@@ -1,6 +1,4 @@
-
-
-/*$Id: ThrowableMessage.java,v 1.4 2007-11-29 16:28:25 dvojtise Exp $
+/*$Id: ThrowableMessage.java,v 1.5 2007-11-30 08:05:33 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -14,13 +12,11 @@ package fr.irisa.triskell.eclipse.console.messages;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.widgets.Display;
 
 public class ThrowableMessage extends ConsoleMessage {
 
 	public ThrowableMessage(Throwable t) {
-		super("",new Color(Display.getCurrent(), 255,0 ,0 ));
+		super("",ConsoleMessage.ERROR);
 		
 		ByteArrayOutputStream oStream = new java.io.ByteArrayOutputStream();		
 		PrintWriter pw = new PrintWriter(oStream);			

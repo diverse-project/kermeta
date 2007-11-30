@@ -1,4 +1,4 @@
-/* $Id: NXC2RXE.java,v 1.3 2007-11-29 16:31:48 dvojtise Exp $
+/* $Id: NXC2RXE.java,v 1.4 2007-11-30 08:05:36 dvojtise Exp $
  * Project   : KmLogo
  * File      : NXC2RXE.java
  * License   : EPL
@@ -25,7 +25,11 @@ import org.eclipse.ui.IWorkbenchPart;
 
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
+import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
+import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
+import fr.irisa.triskell.eclipse.console.messages.KermetaMessage;
+import fr.irisa.triskell.eclipse.console.messages.OKMessage;
+import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.kmlogo.ui.ExecHelper;
 
 
@@ -59,7 +63,7 @@ public class NXC2RXE implements IObjectActionDelegate {
     	//String cmd = "dot -Tpdf -o "+pdfFile.getLocation().toOSString()+" " + dotFile.getLocation().toOSString();
     	
 		IOConsole console = new EclipseConsole("Logo NXC2RXE compiler");
-		console.println(new ConsoleMessage("Compiling file " + nxcFile, EclipseConsole.INFO));
+		console.println(new InfoMessage("Compiling file " + nxcFile));
     	
     	 try {
     		 //Runtime r = Runtime.getRuntime();
@@ -72,14 +76,14 @@ public class NXC2RXE implements IObjectActionDelegate {
     		 cmds[2] = "-O=" + rxeFile.getLocation().toOSString();
     		 
     		 String result = ExecHelper.exec(cmds).getOutput();
-    		 console.println(new ConsoleMessage(result , EclipseConsole.KERMETA));
+    		 console.println(new KermetaMessage(result ));
     		 
     		 rxeFile.refreshLocal(1, null);
-    		 console.println(new ConsoleMessage("File " + rxeFile + " created", EclipseConsole.OK));
+    		 console.println(new OKMessage("File " + rxeFile + " created"));
     		 
-    	 } catch(Exception e) {
-    		 console.println(new ConsoleMessage("ERROR : " + e, EclipseConsole.ERROR));
-    		 e.printStackTrace();
+    	 } catch(Throwable e) {
+    		 console.println(new ErrorMessage("ERROR : " ));
+    		 console.println(new ThrowableMessage(e ));
     	} 
 	}
 

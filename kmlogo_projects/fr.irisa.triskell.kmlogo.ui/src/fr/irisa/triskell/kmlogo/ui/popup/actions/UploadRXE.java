@@ -1,4 +1,4 @@
-/* $Id: UploadRXE.java,v 1.3 2007-11-29 16:31:48 dvojtise Exp $
+/* $Id: UploadRXE.java,v 1.4 2007-11-30 08:05:36 dvojtise Exp $
  * Project   : KmLogo
  * File      : UploadRXE.java
  * License   : EPL
@@ -27,6 +27,11 @@ import org.eclipse.ui.IWorkbenchPart;
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
+import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
+import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
+import fr.irisa.triskell.eclipse.console.messages.KermetaMessage;
+import fr.irisa.triskell.eclipse.console.messages.OKMessage;
+import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.kmlogo.ui.ExecHelper;
 
 
@@ -56,7 +61,7 @@ public class UploadRXE implements IObjectActionDelegate {
 		Shell shell = new Shell();
 
 		IOConsole console = new EclipseConsole("Logo uploadRXE");
-		console.println(new ConsoleMessage("Uploading File " +  nxcFile.getLocation().toString(), EclipseConsole.INFO));
+		console.println(new InfoMessage("Uploading File " +  nxcFile.getLocation().toString()));
     	
     	 try {
     		
@@ -76,12 +81,13 @@ public class UploadRXE implements IObjectActionDelegate {
     		 cmds[3] = nxcFile.getLocation().toString();
     		 
     		 String result = ExecHelper.exec(cmds).getOutput();
-    		 console.println(new ConsoleMessage(result , EclipseConsole.KERMETA));
+    		 console.println(new KermetaMessage(result ));
     		 
-    		 console.println(new ConsoleMessage("File Uploaded", EclipseConsole.OK));
+    		 console.println(new OKMessage("File Uploaded"));
     		 
-    	 } catch(Exception e) {
-    		 console.println(new ConsoleMessage("ERROR : " + e, EclipseConsole.ERROR));
+    	 } catch(Throwable e) {
+    		 console.println(new ErrorMessage("ERROR : " ));
+    		 console.println(new ThrowableMessage(e));
     		 e.printStackTrace();
     	} 
 	}

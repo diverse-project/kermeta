@@ -1,6 +1,6 @@
-/*$Id: ErrorMessage.java,v 1.4 2007-11-30 08:05:33 dvojtise Exp $
+/*$Id: OKMessage.java,v 1.1 2007-11-30 08:05:33 dvojtise Exp $
 * Project : fr.irisa.triskell.eclipse.util
-* File : 	ErrorMessage.java
+* File : 	InfoMessage.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
@@ -9,10 +9,10 @@
 */
 package fr.irisa.triskell.eclipse.console.messages;
 
-public class ErrorMessage extends ConsoleMessage {
+public class OKMessage extends ConsoleMessage {
 
-	public ErrorMessage(String content) {
-		super(content, ConsoleMessage.ERROR);
+	public OKMessage(String content) {
+		super(content, ConsoleMessage.OK);
 	}
 	
 }

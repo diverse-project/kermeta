@@ -1,6 +1,4 @@
-
-
-/*$Id: WarningMessage.java,v 1.3 2007-11-29 16:28:25 dvojtise Exp $
+/*$Id: WarningMessage.java,v 1.4 2007-11-30 08:05:33 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -11,13 +9,11 @@
 */
 package fr.irisa.triskell.eclipse.console.messages;
 
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.widgets.Display;
 
 public class WarningMessage extends ConsoleMessage {
 
 	public WarningMessage(String content) {
-		super(content, new Color(Display.getCurrent(), 255,170,0));
+		super(content, ConsoleMessage.WARNING);
 	}
 	
 }
