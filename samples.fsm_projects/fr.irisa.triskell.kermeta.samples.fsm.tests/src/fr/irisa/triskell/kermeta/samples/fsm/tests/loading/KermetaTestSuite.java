@@ -1,4 +1,4 @@
-/* $Id: KermetaTestSuite.java,v 1.1 2007-10-19 14:59:55 ftanguy Exp $
+/* $Id: KermetaTestSuite.java,v 1.2 2007-11-30 14:21:04 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -12,6 +12,11 @@
  */
 package fr.irisa.triskell.kermeta.samples.fsm.tests.loading;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -24,7 +29,8 @@ import fr.irisa.triskell.kermeta.samples.fsm.tests.Utils;
  */
 public class KermetaTestSuite extends TestSuite {
 
-    static RunJunitFactory runfactory = new RunJunitFactory("platform:/resource/org.kermeta.mdk.tests/.bin");
+	static final String RUNTIMEPROJECTNAME = "kermeta_mdk.fsm.tests";
+    static RunJunitFactory runfactory = new RunJunitFactory("platform:/resource/"+RUNTIMEPROJECTNAME+"/.bin");
     
 //    private static TestSuite _suite;
     
@@ -42,6 +48,17 @@ public class KermetaTestSuite extends TestSuite {
 	public KermetaTestSuite() {
 		super();
 
+		// ensure projects are created in the workbench
+		IProject project =
+			ResourcesPlugin.getWorkspace().getRoot().getProject(RUNTIMEPROJECTNAME);
+		try{
+			project.create( new NullProgressMonitor() );		
+			project.open( new NullProgressMonitor() );
+		} 
+		catch (CoreException e) {
+			e.printStackTrace();
+		}
+		
 /*** BEGIN GENERATED TESTS ***/
 		testWithFile("test/kmt_testcases","001_testLoadingFSMModels.main.kmt" );
 /*** END GENERATED TESTS ***/
