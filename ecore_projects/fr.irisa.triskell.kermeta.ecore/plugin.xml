@@ -19,6 +19,14 @@
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="fr.irisa.triskell.kermeta.io"/>
       <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
+      <import plugin="fr.irisa.triskell.kermeta.kpm"/>
    </requires>
+   <extension
+         id="org.kermeta.ecore.generateVisitor"
+         point="fr.irisa.triskell.kermeta.kpm.kermetaAction">
+      <Action
+            File="src/kermeta/kpm/VisitorHelper.kmt">
+      </Action>
+   </extension>
 
 </plugin>

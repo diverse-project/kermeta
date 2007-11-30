@@ -1,0 +1,86 @@
+/* $Id: VisitorHelper.kmt,v 1.2 2007/11/21 13:58:41 vmahe Exp $
+ * Creation date: February 23, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "kpmActions::Main"
+@mainOperation "main"
+
+
+package kpmActions;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/Patterns4Ecore.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using ecore
+using EcoreTransformations
+
+
+class Main
+{
+
+	attribute metamodelURI : String
+
+	reference rootPackage : EPackage
+
+	attribute patternHelper : Patterns4Ecore
+	
+	operation main(args : String) : Void is do 
+		var outputFile : String
+		
+		var index : Integer init args.indexOf(" ")
+		
+		metamodelURI := "platform:/resource" + args.substring(0, index)
+		outputFile := "platform:/resource" + args.substring(index+1, args.size)
+		
+		initialize	
+		addVisitor( outputFile )
+//		addTopDownVisitor("platform:/resource/com.orange_ftgroup.voice.simulator/metamodel/ecore/VoiceTopDownVisitor.ecore")
+	end
+
+	operation initialize() : Void is do
+		//metamodelURI := "platform:/resource/com.orange_ftgroup.voice.simulator/metamodel/ecore/voice.ecore"
+		patternHelper := Patterns4Ecore.new
+		patternHelper.initialize
+
+	end
+	
+	operation loadMetamodel() : Void is do
+		var repository : EMFRepository init EMFRepository.new
+		var resource : Resource init repository.createResource( metamodelURI, "http://www.eclipse.org/emf/2002/Ecore")
+		stdio.writeln("Loading " + metamodelURI )
+		resource.load
+		stdio.writeln(metamodelURI + " Loaded")
+		rootPackage ?= resource.instances.one
+	end
+	
+	operation saveMetamodelAs( outputURI : String ): Void is do
+		var repository : EMFRepository init EMFRepository.new		
+		var resource : Resource init repository.createResource( outputURI, "http://www.eclipse.org/emf/2002/Ecore" )	
+		resource.instances.add( rootPackage )
+		stdio.writeln("Saving " + outputURI )
+		resource.save
+		stdio.writeln(outputURI + " Saved")
+	end
+	
+	operation addVisitor( outputURI : String ) : Void is do
+		loadMetamodel
+		stdio.writeln("Adding Visitor...")
+		patternHelper.addVisitor( rootPackage, void )
+		stdio.writeln("Visitor Added")
+		saveMetamodelAs( outputURI )
+	end
+	
+	operation addTopDownVisitor( outputURI : String ) : Void is do
+		loadMetamodel
+		stdio.writeln("Adding TopDownVisitor...")
+		patternHelper.addTopDownVisitor( rootPackage, void )
+		stdio.writeln("TopDownVisitor Added")
+		saveMetamodelAs( outputURI )
+	end
+
+}
