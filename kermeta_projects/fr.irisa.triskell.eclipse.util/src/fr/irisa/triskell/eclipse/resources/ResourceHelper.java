@@ -1,4 +1,4 @@
-/*$Id: ResourceHelper.java,v 1.13 2007-11-21 13:23:28 cfaucher Exp $
+/*$Id: ResourceHelper.java,v 1.14 2007-11-30 10:49:23 dvojtise Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -57,18 +57,22 @@ public class ResourceHelper {
 	 * @return It returns the clean path.
 	 */
 	static private String cleanIfNecessaryPath(String resourcePath) {
-		String cleanPath = resourcePath;
-		if ( resourcePath.matches("platform:/resource.*") )
+		// deal with windows \\ delimiter
+		String unifiedSepratorResourcePath = resourcePath.replaceAll("\\\\", "/");
+		
+		String cleanPath = unifiedSepratorResourcePath;
+		if ( unifiedSepratorResourcePath.matches("platform:/resource.*") )
 			cleanPath = URIHelper.getPathFromPlatformURI(resourcePath);
-		if ( resourcePath.matches("file:/.*") ){
-			String rootPath = ""; // path of the workspace root that we will remove from the resource path			
+		if ( unifiedSepratorResourcePath.matches("file:/.*") ){
+			String rootPath = ""; // path of the workspace root that we will remove from the resource path
+			
 			// deal with windows C:/ path
-			if ( resourcePath.matches("file:/.:/.+") )
+			if ( unifiedSepratorResourcePath.matches("file:/.:/.+") )
 				rootPath = "file:/" + root.getLocation().toString().replaceAll(" ", "%20");
 			else
 				rootPath = "file:" + root.getLocation().toString();
-				
-			cleanPath = resourcePath.replace(rootPath, "");
+							
+			cleanPath = unifiedSepratorResourcePath.replace(rootPath, "");
 		}
 		return cleanPath;
 	}
