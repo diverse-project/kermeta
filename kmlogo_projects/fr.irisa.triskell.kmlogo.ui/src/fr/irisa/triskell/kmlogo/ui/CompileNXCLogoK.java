@@ -1,4 +1,4 @@
-/* $Id: CompileNXCLogoK.java,v 1.3 2007-11-29 16:29:12 dvojtise Exp $
+/* $Id: CompileNXCLogoK.java,v 1.4 2007-11-30 21:14:09 dvojtise Exp $
  * Project   : KmLogo
  * File      : CompileNXCLogoK.java
  * License   : EPL
@@ -29,7 +29,7 @@ public class CompileNXCLogoK {
 	public static void run(String file, String out, IOConsole console) {
 		System.out.println("run FixModel");
 		
-		KermetaInterpreter inter = new KermetaInterpreter(LOGO_COMPILER_KERMETA_CODE, null);
+		KermetaInterpreter inter = new KermetaInterpreter(LOGO_COMPILER_KERMETA_CODE, null, true);
 		inter.setKStream(console);
 		// This is the operation to call
 		inter.setEntryPoint("kmLogo::NXCCompiler", "compile");

@@ -1,4 +1,4 @@
-/* $Id: RunLogoK.java,v 1.4 2007-11-29 16:29:12 dvojtise Exp $
+/* $Id: RunLogoK.java,v 1.5 2007-11-30 21:14:09 dvojtise Exp $
  * Project   : kmLogo
  * File      : RunLogoK.java
  * License   : EPL
@@ -32,7 +32,7 @@ public class RunLogoK {
 		//KermetaUnit unit = IOPlugin.getDefault().loadKermetaUnit("platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoSimulator.kmt", new NullProgressMonitor());
 		
 		
-		KermetaInterpreter inter = new KermetaInterpreter(LOGO_SIMULATOR_KERMETA_CODE, null);
+		KermetaInterpreter inter = new KermetaInterpreter(LOGO_SIMULATOR_KERMETA_CODE, null, true);
 		inter.setKStream(console);
 		// This is the operation to call
 		try {
