@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutImpl.java,v 1.7 2007-08-07 13:31:49 ftanguy Exp $
+ * $Id: OutImpl.java,v 1.8 2007-11-30 16:19:42 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -23,10 +23,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Action;
+import fr.irisa.triskell.kermeta.kpm.FilterExpression;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 import fr.irisa.triskell.kermeta.launcher.KermetaLauncher;
 
 /**
@@ -222,10 +224,15 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 						IConfigurationElement[] elements = extension.getConfigurationElements();
 						String relativePath = elements[0].getAttribute("File");
 						String filePath = "platform:/plugin/" + extension.getContributor().getName() + "/" + relativePath;
-						String[] arguments = new String[1];
+						String[] arguments = new String[2];
 						arguments[0] = unit.getValue();
-						KermetaLauncher.execute( filePath, arguments );
 						
+						String outputString = "";
+						if ( getExpression() instanceof FilterExpression )
+							outputString = NameFilterHelper.getOutputString(unit, (FilterExpression) getExpression() );
+						arguments[1] = outputString;
+						
+						KermetaLauncher.execute( filePath, arguments );	
 					}
 					
 				} catch (CoreException exception) {
