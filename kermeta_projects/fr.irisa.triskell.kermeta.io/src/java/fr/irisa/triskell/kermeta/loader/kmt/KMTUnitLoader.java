@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.18 2007-10-23 11:26:01 dvojtise Exp $
+/*$Id: KMTUnitLoader.java,v 1.19 2007-11-30 08:11:05 dvojtise Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -79,7 +79,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			Date t1 = new Date();
 			loadAllImportedUnits(kermetaUnit);
 			Date t2 = new Date();
-			IOPlugin.internalLog.error("Load All Imported Units : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.debug("Load All Imported Units : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
@@ -88,7 +88,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			t1 = new Date();
 			loadAllTypeDefinitions(kermetaUnit);
 			t2 = new Date();
-			IOPlugin.internalLog.error("Load All typeDefinitiosn : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.debug("Load All typeDefinitiosn : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;			
@@ -107,30 +107,30 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			t1 = new Date();
 			importAllKermetaUnits(kermetaUnit);
 			t2 = new Date();
-			IOPlugin.internalLog.error("Import All Kermeta Units : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.debug("Import All Kermeta Units : " + (t2.getTime() - t1.getTime()) + "ms");
 						
 			// 4 - Set the aspect staff
 			t1 = new Date();
 			setBaseAspectsForAll(kermetaUnit);
 			t2 = new Date();
-			IOPlugin.internalLog.error("Set Base Aspects : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.debug("Set Base Aspects : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			// 10, finally create the aspects lists to improve performances.
 			t1 = new Date();
 			constructAspectsListsForAll(kermetaUnit);
 			t2 = new Date();
-			IOPlugin.internalLog.error("Construct Aspects : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.debug("Construct Aspects : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			// 5
 			t1 = new Date();
 			replaceObjectTypeVariablesForAll(kermetaUnit);
 			t2 = new Date();
-			IOPlugin.internalLog.error("Replace Object Type Variables : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.debug("Replace Object Type Variables : " + (t2.getTime() - t1.getTime()) + "ms");
 			// 6
 			t1 = new Date();
 			loadAllStructuralFeatures(kermetaUnit);
 			t2 = new Date();
-			IOPlugin.internalLog.error("Load Structural Features : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.debug("Load Structural Features : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
@@ -141,7 +141,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			t1 = new Date();
 			loadAllOppositeProperties(kermetaUnit);
 			t2 = new Date();
-			IOPlugin.internalLog.error("Load Opposite Properties : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.debug("Load Opposite Properties : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
@@ -150,7 +150,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			t1 = new Date();
 			loadAllBodies(kermetaUnit);
 			t2 = new Date();
-			IOPlugin.internalLog.error("Load All Bodies : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.debug("Load All Bodies : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			if ( kermetaUnit.isErroneous() )
 				return kermetaUnit;
@@ -159,13 +159,13 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 			t1 = new Date();
 			loadAllAnnotations(kermetaUnit);
 			t2 = new Date();
-			IOPlugin.internalLog.error("Load All Annotations : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.debug("Load All Annotations : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 			// 10
 			t1 = new Date();
 			markErrorsFromImportedUnits(kermetaUnit);
 			t2 = new Date();
-			IOPlugin.internalLog.error("Mark Errors : " + (t2.getTime() - t1.getTime()) + "ms");
+			IOPlugin.internalLog.debug("Mark Errors : " + (t2.getTime() - t1.getTime()) + "ms");
 			
 		} catch ( URIMalformedException exception) {
 		} catch (RecognitionException e) {
