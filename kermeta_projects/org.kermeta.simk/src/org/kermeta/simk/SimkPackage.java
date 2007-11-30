@@ -1,5 +1,5 @@
 /**
- * $Id: SimkPackage.java,v 1.1 2007-11-30 13:36:45 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkPackage.java,v 1.1 2007-11-30 13:36:45 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -241,13 +241,22 @@ public interface SimkPackage extends EPackage {
 	int SM_CONTEXT__SM_PACKAGE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Static Methods</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CONTEXT__STATIC_METHODS = 1;
+
+	/**
 	 * The feature id for the '<em><b>SM Class</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SM_CONTEXT__SM_CLASS = 1;
+	int SM_CONTEXT__SM_CLASS = 2;
 
 	/**
 	 * The number of structural features of the '<em>SM Context</em>' class.
@@ -256,7 +265,7 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SM_CONTEXT_FEATURE_COUNT = 2;
+	int SM_CONTEXT_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.simk.impl.SMPackageImpl <em>SM Package</em>}' class.
@@ -584,6 +593,17 @@ public interface SimkPackage extends EPackage {
 	EReference getSMContext_SMPackage();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.simk.SMContext#getStaticMethods <em>Static Methods</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Static Methods</em>'.
+	 * @see org.kermeta.simk.SMContext#getStaticMethods()
+	 * @see #getSMContext()
+	 * @generated
+	 */
+	EReference getSMContext_StaticMethods();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.kermeta.simk.SMContext#getSMClass <em>SM Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -853,6 +873,14 @@ public interface SimkPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SM_CONTEXT__SM_PACKAGE = eINSTANCE.getSMContext_SMPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Methods</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SM_CONTEXT__STATIC_METHODS = eINSTANCE.getSMContext_StaticMethods();
 
 		/**
 		 * The meta object literal for the '<em><b>SM Class</b></em>' containment reference feature.

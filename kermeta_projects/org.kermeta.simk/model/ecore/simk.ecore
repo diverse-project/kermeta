@@ -24,7 +24,8 @@
         eType="#//SMParameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sMReturn" eType="#//SMReturn"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sMContext" eType="#//SMContext"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sMContext" eType="#//SMContext"
+        eOpposite="#//SMContext/staticMethods"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="usages" upperBound="-1"
@@ -38,6 +39,8 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sMPackage" eType="#//SMPackage"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="staticMethods" upperBound="-1"
+        eType="#//StaticMethod" eOpposite="#//StaticMethod/sMContext"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sMClass" eType="#//SMClass"
         containment="true"/>
   </eClassifiers>

@@ -1,5 +1,5 @@
 /**
- * $Id: SMContextItemProvider.java,v 1.1 2007-11-30 13:36:45 cfaucher Exp $
+ * $Id: SMContextItemProvider.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMContextItemProvider.java,v 1.1 2007-11-30 13:36:45 cfaucher Exp $
+ * $Id: SMContextItemProvider.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -70,8 +71,31 @@ public class SMContextItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addStaticMethodsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Static Methods feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStaticMethodsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SMContext_staticMethods_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SMContext_staticMethods_feature", "_UI_SMContext_type"),
+				 SimkPackage.Literals.SM_CONTEXT__STATIC_METHODS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -117,15 +141,23 @@ public class SMContextItemProvider
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getText(Object object) {
-		return getString("_UI_SMContext_type");
-	}
+     * This returns the label text for the adapted class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated NOT
+     */
+    @Override
+    public String getText(Object object) {
+        String label = "";
+        if (((SMContext)object).getSMPackage() != null) {
+            label += " " + ((SMContext)object).getSMPackage().getQualifiedName();
+        }
+    
+        if (((SMContext)object).getSMClass() != null) {
+            label += " - " + ((SMContext)object).getSMClass().getName();
+        }
+        return getString("_UI_SMContext_type") + label;
+    }
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

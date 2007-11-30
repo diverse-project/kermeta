@@ -1,5 +1,5 @@
 /**
- * $Id: StaticMethod.java,v 1.1 2007-11-30 13:36:45 cfaucher Exp $
+ * $Id: StaticMethod.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: StaticMethod.java,v 1.1 2007-11-30 13:36:45 cfaucher Exp $
+ * $Id: StaticMethod.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -81,6 +81,7 @@ public interface StaticMethod extends SMNamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>SM Context</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.kermeta.simk.SMContext#getStaticMethods <em>Static Methods</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>SM Context</em>' reference isn't clear,
@@ -90,7 +91,8 @@ public interface StaticMethod extends SMNamedElement {
 	 * @return the value of the '<em>SM Context</em>' reference.
 	 * @see #setSMContext(SMContext)
 	 * @see org.kermeta.simk.SimkPackage#getStaticMethod_SMContext()
-	 * @model
+	 * @see org.kermeta.simk.SMContext#getStaticMethods
+	 * @model opposite="staticMethods"
 	 * @generated
 	 */
 	SMContext getSMContext();
