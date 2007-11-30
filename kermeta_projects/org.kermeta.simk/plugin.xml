@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ 	Project : org.kermeta.simk
+ 	License : EPL
+	Copyright : IRISA / INRIA / Universite de Rennes 1
+ </copyright>
+
+ $Id: plugin.xml,v 1.1 2007-11-30 13:36:44 cfaucher Exp $
+-->
+
+<plugin>
+
+  <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+    <factory 
+       uri = "http://www.kermeta.org/simk" 
+       class = "org.kermeta.simk.provider.SimkItemProviderAdapterFactory"
+       supportedTypes = 
+         "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+          org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+          org.eclipse.emf.edit.provider.ITreeItemContentProvider
+          org.eclipse.emf.edit.provider.IItemLabelProvider
+          org.eclipse.emf.edit.provider.IItemPropertySource" />
+  </extension>
+  
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package
+       uri = "http://www.kermeta.org/simk"
+       class = "org.kermeta.simk.SimkPackage"
+       genModel = "model/ecore/simk.genmodel" /> 
+  </extension>
+
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+          id="org.kermeta.utils.Wizard.category.ID"
+          name="utils"
+          parentCategory="fr.irisa.triskell.kermeta.KermetaWizard">
+    </category>
+    <wizard
+      id = "org.kermeta.simk.presentation.SimkModelWizardID"
+      name = "%_UI_SimkModelWizard_label"
+      class = "org.kermeta.simk.presentation.SimkModelWizard"
+      category = "fr.irisa.triskell.kermeta.KermetaWizard/org.kermeta.utils.Wizard.category.ID"
+      icon = "icons/full/obj16/SimkModelFile.gif">
+      <description>%_UI_SimkModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "org.kermeta.simk.presentation.SimkEditorID"
+        name = "%_UI_SimkEditor_label"
+        icon = "icons/full/obj16/SimkModelFile.gif"
+        extensions = "simk"
+        class = "org.kermeta.simk.presentation.SimkEditor" 
+        contributorClass="org.kermeta.simk.presentation.SimkActionBarContributor" >
+    </editor>
+  </extension>    
+</plugin>

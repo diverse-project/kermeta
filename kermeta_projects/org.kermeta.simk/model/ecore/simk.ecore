@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="simk"
+    nsURI="http://www.kermeta.org/simk" nsPrefix="simk">
+  <eClassifiers xsi:type="ecore:EClass" name="SIMKModel" eSuperTypes="#//SMNamedElement">
+    <eOperations name="getNextId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getStaticMethods().size()+1;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sMContexts" upperBound="-1"
+        eType="#//SMContext" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="staticMethods" upperBound="-1"
+        eType="#//StaticMethod" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StaticMethod" eSuperTypes="#//SMNamedElement">
+    <eOperations name="getParentMethodFromModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="//TODO&#xD;&#xA;return null;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sMParameters" upperBound="-1"
+        eType="#//SMParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sMReturn" eType="#//SMReturn"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sMContext" eType="#//SMContext"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="usages" upperBound="-1"
+        eType="#//SMUsage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMContext">
+    <eOperations name="getDeepestPackage" eType="#//SMPackage">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="if ( this.getSMPackage() != null ) {&#xD;&#xA;&#x9;SMPackage smp = this.getSMPackage();&#xD;&#xA;&#x9;while( smp.getSubSMPackage() != null ) {&#xD;&#xA;&#x9;&#x9;smp = smp.getSubSMPackage();&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;return smp;&#xD;&#xA;} else {&#xD;&#xA;&#x9;return null;&#xD;&#xA;}"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sMPackage" eType="#//SMPackage"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sMClass" eType="#//SMClass"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMPackage" eSuperTypes="#//SMNamedElement">
+    <eOperations name="getQualifiedNameRec" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="if (element == null) return &quot;&quot;;&#xD;&#xA;if (element.getParentSMPackage() != null) {&#xD;&#xA;&#x9;return getQualifiedNameRec( element.getParentSMPackage() ) + &quot;.&quot; + element.getName();&#xD;&#xA;} else {&#xD;&#xA;&#x9;return element.getName();&#xD;&#xA;}"/>
+      </eAnnotations>
+      <eParameters name="element" eType="#//SMPackage"/>
+    </eOperations>
+    <eOperations name="getQualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getQualifiedNameRec(this);"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sMClass" eType="#//SMClass"
+        eOpposite="#//SMClass/sMPackage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subSMPackage" eType="#//SMPackage"
+        containment="true" eOpposite="#//SMPackage/parentSMPackage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentSMPackage" eType="#//SMPackage"
+        eOpposite="#//SMPackage/subSMPackage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMClass" eSuperTypes="#//SMNamedElement">
+    <eOperations name="getQualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="if ( getSMPackage() != null ) {&#xD;&#xA;&#x9;return getSMPackage().getQualifiedName() + &quot;.&quot; + getName();&#xD;&#xA;}&#xD;&#xA;return getName();"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sMPackage" eType="#//SMPackage"
+        eOpposite="#//SMPackage/sMClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMNamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMParameter" eSuperTypes="#//SMNamedElement #//SMTypedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTypedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMReturn" eSuperTypes="#//SMTypedElement"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="SMUsage">
+    <eLiterals name="FunctionType"/>
+    <eLiterals name="Runner" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>
