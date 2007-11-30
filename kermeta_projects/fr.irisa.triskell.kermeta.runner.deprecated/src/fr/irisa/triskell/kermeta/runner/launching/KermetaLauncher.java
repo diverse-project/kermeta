@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.26 2007-11-29 14:13:47 ftanguy Exp $
+/* $Id: KermetaLauncher.java,v 1.27 2007-11-30 13:18:50 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -67,7 +67,7 @@ public class KermetaLauncher
 	      throw (new Error("File not found! - "+ fileNameString));
 	    
 	    String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
-        interpreter = new KermetaInterpreter(uri, null);
+        interpreter = new KermetaInterpreter(uri, null, false);
     }
         
     public static KermetaLauncher getDefault() {

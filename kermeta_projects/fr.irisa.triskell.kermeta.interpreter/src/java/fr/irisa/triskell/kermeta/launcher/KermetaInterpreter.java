@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.41 2007-11-28 15:56:04 ftanguy Exp $
+/* $Id: KermetaInterpreter.java,v 1.42 2007-11-30 13:17:33 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -137,7 +137,7 @@ public class KermetaInterpreter {
 	 * Constructor for a kermeta unit, for debug mode
 	 * @param unit
 	 */
-	public KermetaInterpreter(String uri_unit, Tracer tracer)
+	public KermetaInterpreter(String uri_unit, Tracer tracer, boolean inMemory)
 	{
 	    super();
 	   	    
@@ -152,16 +152,23 @@ public class KermetaInterpreter {
 			    kermetaUnitsToMerge.add(source);
 			    kermetaUnitsToMerge.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(source) );
 			    
-			    IFile file = ResourceHelper.getIFile( uri_unit );
-			    IProject project = file.getProject();
-			    String binDirectory = "platform:/resource" + project.getFullPath().toString() + "/.bin";
+			    if ( ! inMemory ) {
+			    	IFile file = ResourceHelper.getIFile( uri_unit );
+			    	IProject project = file.getProject();
+			    	String binDirectory = "platform:/resource" + project.getFullPath().toString() + "/.bin";
 			    
-			    Merger merger = new Merger();
-			    String fileToExecute = merger.process(kermetaUnitsToMerge, binDirectory, null);
+			    	Merger merger = new Merger();
+			    	String fileToExecute = merger.process(kermetaUnitsToMerge, binDirectory, null);
 			    
-			    source.setLocked(false);
+			    	source.setLocked(false);
 			    
-		    	unit = KermetaUnitChecker.basicCheck( fileToExecute, this, new NullProgressMonitor() );
+			    	unit = KermetaUnitChecker.basicCheck( fileToExecute, this, new NullProgressMonitor() );
+			    
+			    } else {
+			    	Merger merger = new Merger();
+			    	unit = merger.processInMemory(kermetaUnitsToMerge, "platform:/resource/undefined.km" );			    	
+			    	KermetaUnitChecker.check("platform:/resource/undefined.km");
+			    }
 	    	}
 	    } catch (KermetaIOFileNotFoundException e) {
 			e.printStackTrace();
