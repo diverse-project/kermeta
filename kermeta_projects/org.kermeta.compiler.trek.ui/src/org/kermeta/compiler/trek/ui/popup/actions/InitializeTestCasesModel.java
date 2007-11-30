@@ -1,4 +1,4 @@
-/*$Id: InitializeTestCasesModel.java,v 1.2 2007-11-28 13:11:17 cfaucher Exp $
+/*$Id: InitializeTestCasesModel.java,v 1.3 2007-11-30 13:24:53 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeTestCasesModel.java
 * License : EPL
@@ -110,7 +110,7 @@ public class InitializeTestCasesModel implements IObjectActionDelegate {
     {
 		KTestCase aTestCase = TrekFactory.eINSTANCE.createKTestCase();
 		aTestCase.setName(folder.getName());
-		aTestCase.setUri(KCompilerConstants.KERMETA_CVS + "org.kermeta.compiler.tests/unit_test/" + folder.getParent().getName() + "/" + folder.getName() + KCompilerConstants.KERMETA_CVS_VIEW_SUFFIX);
+		aTestCase.setUri(KCompilerConstants.KERMETA_CVS + KCompilerConstants.COMPILER_USE_CASES_FOLDER + folder.getParent().getName() + "/" + folder.getName() + KCompilerConstants.KERMETA_CVS_VIEW_SUFFIX);
 		aTestCase.setType(KTestCaseType.UNIT_TEST);
 		
 		String inputResources = "Input resources:\n";

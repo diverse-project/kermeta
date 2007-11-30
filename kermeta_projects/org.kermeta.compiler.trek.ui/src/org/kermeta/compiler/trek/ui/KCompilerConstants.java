@@ -1,4 +1,4 @@
-/*$Id: KCompilerConstants.java,v 1.1 2007-11-28 13:11:17 cfaucher Exp $
+/*$Id: KCompilerConstants.java,v 1.2 2007-11-30 13:24:53 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	KCompilerConstants.java
 * License : EPL
@@ -10,7 +10,7 @@
 
 package org.kermeta.compiler.trek.ui;
 
-public class KCompilerConstants {
+public final class KCompilerConstants {
 
 	public static final String KERMETA_CVS = "http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/";
 	
@@ -18,11 +18,17 @@ public class KCompilerConstants {
 	
 	public static final String TREK_EXT = "trek";
 	
+	public static final String SUMMARY_EXT = "txt";
+	
 	public static final String STATUS_KERMETA = "Kermeta";
 	
 	public static final String STATUS_JAVA = "Java";
 	
 	public static final String STATUS_DESIGN = "Design";
+	
+	public static final String SUMMARY_PREFIX = "summary_";
+	
+	public static final String COMPILER_USE_CASES_FOLDER = "org.kermeta.compiler.tests/unit_test/";
 	
 	public static final int PROGRESS_OK = 100;
 	

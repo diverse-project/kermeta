@@ -1,4 +1,4 @@
-/*$Id: TrekModelHelper.java,v 1.2 2007-11-28 13:11:17 cfaucher Exp $
+/*$Id: TrekModelHelper.java,v 1.3 2007-11-30 13:24:53 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	TrekModelHelper.java
 * License : EPL
@@ -111,7 +111,7 @@ public class TrekModelHelper {
 	}
 
 	public static String getSummaryContent(IFolder folder) {
-		IFile summary_file = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(folder.getFullPath().append("/summary_" + folder.getName()).addFileExtension("txt"));
+		IFile summary_file = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(folder.getFullPath().append("/summary_" + folder.getName()).addFileExtension(KCompilerConstants.SUMMARY_EXT));
 		if(summary_file.exists()) {
 			try {
 				return readString(summary_file.getContents());
