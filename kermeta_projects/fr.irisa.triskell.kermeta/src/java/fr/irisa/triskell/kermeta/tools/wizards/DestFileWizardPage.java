@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.12 2007-07-26 09:36:47 ftanguy Exp $
+/* $Id: DestFileWizardPage.java,v 1.13 2007-12-03 10:56:37 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
 import java.util.Iterator;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceStatus;
@@ -53,7 +54,6 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.ContainerGenerator;
-// import org.eclipse.ui.help.WorkbenchHelp;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.internal.ide.dialogs.CreateLinkedResourceGroup;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
@@ -348,7 +348,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 	 * @see #createFile
 	 */
 	protected IFile createFileHandle(IPath filePath) {
-		return IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(
+		return ResourcesPlugin.getWorkspace().getRoot().getFile(
 				filePath);
 	}
 
@@ -428,8 +428,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 			} else {
 				// CoreExceptions are handled above, but unexpected runtime
 				// exceptions and errors may still occur.
-				IDEWorkbenchPlugin
-						.log(MessageFormat.format(
+				IDEWorkbenchPlugin.log(MessageFormat.format(
 								"Exception in {0}.getNewFile(): {1}",
 								new Object[] { getClass().getName(),
 										e.getTargetException() }));
