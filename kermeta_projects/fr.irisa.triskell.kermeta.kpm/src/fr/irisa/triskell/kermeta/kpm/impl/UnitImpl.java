@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.17 2007-09-13 09:04:01 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.18 2007-12-03 15:57:19 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
@@ -26,7 +27,10 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.KPM;
@@ -338,6 +342,13 @@ public class UnitImpl extends EObjectImpl implements Unit {
 		try {
 			monitor.beginTask("Processing Rules", getRules().size());
 		
+			IFile file = ResourceHelper.getIFile( getValue() );
+			KermetaUnit kermetaUnit = null;
+			if ( file != null )
+				kermetaUnit = IOPlugin.getDefault().findKermetaUnit(file);
+				if ( kermetaUnit != null )
+					kermetaUnit.setLocked(true);
+			
 			for ( Rule currentRule : (List <Rule>) getRules() ) {
 				Event currentEvent = currentRule.getEvent();
 				if ( currentEvent.equals(event) ) {
@@ -346,6 +357,9 @@ public class UnitImpl extends EObjectImpl implements Unit {
 					EventMonitor.stopMonitor(this, currentEvent);
 				}
 			}
+			
+			if ( kermetaUnit != null )
+				kermetaUnit.setLocked(false);
 		} finally {
 			monitor.done();
 		}
