@@ -1,0 +1,13 @@
+package fsm
+ -- no collect (relative to the 'sample.ecore' metamodel)
+context State inv:
+   self.outgoingTransition->forAll(tr1 | self.outgoingTransition->forAll(tr2 |
+                ( tr2.input=tr1.input ) = (tr1=tr2) ))
+               
+context State::step(c : String) : String 
+	pre notVoidInput :
+			c <> null and c.size > 0
+	post notVoidOutput :
+			result <> null and result.size > 0
+
+endpackage

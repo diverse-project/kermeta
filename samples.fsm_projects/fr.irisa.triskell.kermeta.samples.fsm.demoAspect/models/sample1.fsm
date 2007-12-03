@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fsm="http://www.kermeta.org/fsm" xmi:id="_ZW534OnBEduxCpcuRdsECg" initialState="_ZW534enBEduxCpcuRdsECg" finalState="_ZW534-nBEduxCpcuRdsECg">
+  <ownedState xmi:id="_ZW534enBEduxCpcuRdsECg" name="s1">
+    <outgoingTransition xmi:id="_ZW534unBEduxCpcuRdsECg" target="_ZW534-nBEduxCpcuRdsECg" input="c" output="v"/>
+  </ownedState>
+  <ownedState xmi:id="_ZW534-nBEduxCpcuRdsECg" name="s2" incomingTransition="_ZW534unBEduxCpcuRdsECg _ZW535OnBEduxCpcuRdsECg">
+    <outgoingTransition xmi:id="_ZW535OnBEduxCpcuRdsECg" target="_ZW534-nBEduxCpcuRdsECg" input="x" output="y"/>
+  </ownedState>
+</fsm:FSM>

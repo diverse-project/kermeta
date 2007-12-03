@@ -1,0 +1,93 @@
+/* $Id: fsmLauncher.kmt,v 1.1 2007-12-03 14:38:45 ftanguy Exp $
+ * Project    : fr.irisa.triskell.kermeta.samples.fsm.demo
+ * File       : fsmLauncher.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 27 juil. 2005
+ * Modified By : 
+ *        Waqas Ahmed Saeed <wahmedsa@irisa.fr>
+ *        Cyril Faucher <cfaucher@irisa.fr>
+ * Description : 
+ *       Launching Kermeta File for Finite State Machine Sample
+ *		 Use mainloadFSM method as entering point for loading XMI based file  
+ */
+@mainClass "fsm::Main"
+@mainOperation "mainloadFSM"
+
+package fsm;
+
+require kermeta
+require "../metamodels/fsm_Helper.kmt"
+
+
+using fsm
+using kermeta::exceptions
+using kermeta::persistence
+using kermeta::standard
+
+class Main
+{
+	operation mainloadFSM(input_automaton : String) is do
+		var theFSM : FSM init loadfsm(input_automaton)
+		printFSM(theFSM)
+		theFSM.run()
+	end
+	
+	 /**
+	 * Load the FSM model from the xmi file sample1.fsm
+	 * It's an instance of the FSM metamodel
+	 * "../models/sample1.fsm"
+	 */
+	operation loadfsm(input_automaton : String) : FSM is do
+		var rep : EMFRepository init EMFRepository.new
+		result := AutomatonHelper.new.loadEMFAutomaton(rep, input_automaton, "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsm.ecore")
+        
+        // Uncomment to check the invariant properties : WFR
+        // To check all contained elements by "result"
+        //result.checkAllInvariants
+        // To check only the states that are contained in "result"
+        //checkWFR(result)
+	end
+
+	/**
+	 * For all states, we check the Well-Formedness rules
+	 */
+	operation checkWFR(theFSM : FSM) is do
+		stdio.writeln("Check WFR : start")
+		theFSM.ownedState.each{ s | 
+			do
+				// Call the invariant verification
+				s.checkInvariants
+				rescue (err : ConstraintViolatedInv)
+		            stdio.writeln(err.toString)
+		            stdio.write(err.message)
+		            stdio.writeln(" on " + s.name)
+		    end
+		}
+		stdio.writeln("Check WFR : end")
+	end
+	
+	
+	/**
+	 * Print the FSM on the standard output
+	 */
+	operation printFSM(fsm : FSM) is do
+		fsm.ownedState.each 
+		{ s | 
+			stdio.writeln("State : " + s.name)
+			s.outgoingTransition.each { t | 
+				var outputText : String
+				if( t.output != void and t.output != "" )
+					then outputText := t.output
+					else outputText := "NC"
+				end
+				stdio.writeln("  Transition : " + t.source.name + "-(" + t.input + "/" + outputText + ")->" + t.target.name)
+			}
+		}
+	end
+
+}
+
+
+

@@ -1,0 +1,124 @@
+/* $Id: helper.kmt,v 1.1 2007-12-03 14:38:45 ftanguy Exp $
+ * Creation date: June 9, 2006
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * Authors: dvojtise, zdrey, cfaucher
+ * Description: Some help methods for the fsm sample
+ */
+package help;
+
+require "fsm.ecore"
+require kermeta
+using fsm
+using kermeta::exceptions
+using kermeta::language
+using kermeta::standard
+using kermeta::reflection
+
+class Helper
+{
+	// Method body to design the checkAllInvariants method
+	/** @deprecated */
+	/*method checkAllInvariants(obj : kermeta::reflection::Object) is do
+	
+		if(obj!=void) then
+			do
+				// Call the invariant verification
+				stdio.writeln(" -- " + obj.toString)
+				obj.checkInvariants
+				rescue (err : ConstraintViolatedInv)
+					stdio.writeln(err.toString)
+					stdio.write(err.message)
+					stdio.writeln(" on " + obj.toString)
+			end
+			
+			obj.getMetaClass.ownedAttribute.each{ subObj |
+				if( subObj.isComposite) then
+					if( obj.get(subObj).getMetaClass.toString.equals("ReflectiveSequence") or obj.get(subObj).getMetaClass.toString.equals("ReflectiveCollection") ) then
+						//stdio.writeln(" -> " + subObj.type.toString + " - " + subObj.name)
+						
+						var subObjInstances : Collection<kermeta::reflection::Object>
+						subObjInstances ?= obj.get(subObj)
+						
+						subObjInstances.each{ aSubObjInstances | 
+							checkAllInvariants(aSubObjInstances)
+						}
+					end
+					if(obj.get(subObj).getMetaClass.toString.equals("Property")) then
+						checkAllInvariants(obj.get(subObj))
+					end
+				end
+			}
+		end
+	end
+  */
+
+	/**
+	 * Create a sample FSM
+	 */
+	operation createFSM() : FSM is do
+		// The FSM
+		result := FSM.new
+		
+		// Create the states of the FSM
+		var s1 : State init State.new 	s1.name := "s1"		result.ownedState.add(s1)
+		
+		var s2 : State init State.new	s2.name := "s2"		result.ownedState.add(s2)
+		
+		var s3 : State init State.new	s3.name := "s3"		result.ownedState.add(s3)
+		
+		
+		// Create the transitions
+		var t12 : Transition init Transition.new
+			t12.input := "a"	t12.source := s1
+			t12.output := "b"	t12.target := s2
+		
+		do
+			s1.checkInvariants
+			rescue (err : ConstraintViolatedInv)
+	            stdio.writeln(err.toString)
+	            stdio.writeln(err.message)
+	    end
+			
+		var t23x : Transition init Transition.new
+			t23x.input := "x"	t23x.source := s2
+			t23x.output := "y"	t23x.target := s3
+		
+		var t23y : Transition init Transition.new
+			t23y.input := "y"	t23y.source := s2
+			t23y.output := "x"	t23y.target := s3
+		var t31 : Transition init Transition.new
+			t31.input := "b"	t31.source := s3
+			t31.output := "a"	t31.target := s1
+		
+		var tQuitS1 : Transition init Transition.new
+			tQuitS1.input := "b"	tQuitS1.source := s1
+			tQuitS1.output := "a"	tQuitS1.target := s1
+		
+		// Uncomment to check the invariant properties
+		do
+			s1.checkInvariants
+			rescue (err : ConstraintViolatedInv)
+	            stdio.writeln(err.toString)
+	            stdio.writeln(err.message)
+	    end
+		
+		// start : adding	
+		//var tQuitS1_ : Transition init Transition.new
+		//	tQuitS1_.input := "b"	tQuitS1_.source := s1
+		//	tQuitS1_.output := "a"	tQuitS1_.target := s2
+		// end : adding
+		
+		// Uncomment to check the invariant properties	
+		//do
+		//	s1.checkInvariants
+		//	rescue (err : ConstraintViolatedInv)
+	    //        stdio.writeln(err.toString)
+	    //        stdio.writeln(err.message)
+	    //end
+
+		// Set the initial state
+		result.initialState := s1
+		result.finalState.add(s3)
+	end
+}

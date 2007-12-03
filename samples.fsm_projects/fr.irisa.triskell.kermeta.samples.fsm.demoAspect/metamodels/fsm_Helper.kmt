@@ -1,0 +1,180 @@
+/* $Id: fsm_Helper.kmt,v 1.1 2007-12-03 14:38:45 ftanguy Exp $
+ * Project    : fr.irisa.triskell.samples.fsm
+ * File       : fsmmodel.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 03 October. 2005
+ * Modified By : 
+ *        Waqas Ahmed Saeed <wahmedsa@irisa.fr>
+ *        Cyril Faucher <cfaucher@irisa.fr>
+ * Description : 
+ *       Finite State Machine Sample with Behaviour implemented in Kermeta
+ */
+
+
+package fsm;
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/kermeta/fsm.kmt"
+
+using fsm
+using kermeta::standard
+using kermeta::persistence
+using kermeta::exceptions
+
+
+@aspect "true"
+class FSM
+{
+	
+	property readonly ownedTransition : OrderedSet<Transition>
+		/*getter is do
+			var seqTransition : Sequence<Set<Transition>>
+			seqTransition := self.ownedState.collect{ st | st.outgoingTransition}
+			result := AutomatonHelper.new.seq1ToSet(seqTransition)
+		end
+	*/
+	property readonly alphabet : Set<String>
+		getter is do
+		var seqState : Sequence<Sequence<String>>
+		seqState := self.ownedState.collect{st | 
+			st.outgoingTransition.collect{tr | tr.input}
+			}
+		result := AutomatonHelper.new.seq2ToSet(seqState)
+		
+		end
+		
+} 
+ 
+ 
+
+
+
+
+
+
+// -------------------------------------------------------------------
+//              END OF DEFINITION OF FSM METAMODEL
+// -------------------------------------------------------------------
+
+
+/** 
+ * A set of helper methods to ease the determinisation/minimization
+ * From Automata
+ */
+class AutomatonHelper
+{	
+	/** Quick transformation of a Set into a Sequence */
+	operation seqToSet<G>( iseq : Sequence<G> ) : Set<G> is do
+    	result := Set<G>.new
+    	iseq.each { n | if n != void and not result.contains(n) then result.add(n) end	}
+    end
+    
+    operation seq1ToSet<G>( iseq : Sequence<Set<G>> ) : OrderedSet<G> is do
+    	result := OrderedSet<G>.new
+    	iseq.each{ a | 
+    		a.each { n | if n != void and not result.contains(n) then result.add(n) end	}
+    	}
+    end
+    
+    operation seq2ToSet<G>( iseq : Sequence<Sequence<G>> ) : Set<G> is do
+    	result := Set<G>.new
+    	iseq.each{ a | 
+    		a.each { n | if n != void and not result.contains(n) then result.add(n) end	}
+    	}
+    end
+    
+    operation join( str_seq : Collection<String>) : String is do
+    	result := ""
+    	str_seq.each { str | result.append(str) }
+    end
+    
+    operation join_with( str_seq : Collection<String>, sep : String) : String is do
+    	result := ""
+    	str_seq.each { str | result.append(str + sep) }
+    	result :=  result.substring(0, result.size-sep.size)
+    end
+    
+    operation createPair(p : State, q : State) : Pair is do
+    	result := Pair.new
+    	result.left := p.copy
+    	result.right := q.copy
+    end
+    
+    operation createTransition( s : State, t : State, l : String) : Transition is do
+    	result := Transition.new
+		result.source := s
+		result.target := t 
+		result.input := l
+	end
+	
+	/** 
+	 * Serialization helpers
+	 */  
+    operation saveEMFAutomaton(repository : EMFRepository, a : FSM, uri : String, mmuri : String) : FSM is do
+		if AutomatonHelper.new.conformityChecker(a) == true then 
+	    	var resource : Resource init repository.createResource(uri , mmuri)
+	    	resource.instances.add(a)
+	    	//a.stateSet.each { z | resource.instances.add(z)}
+	    	resource.save()
+	    else
+	    	stdio.writeln("I'm sorry, I'm afraid that your automaton is not valid; please check the following rules : ")
+	    	stdio.writeln(" - Do the transitions source and target states belong to the set of states of the automaton?")
+	    end
+	    result := void
+    end
+    
+     operation loadEMFAutomaton(repository : EMFRepository, uri : String, mmuri : String) : FSM is do
+    	var resource : Resource init repository.createResource(uri , mmuri)
+    	resource.load
+    	var roots : Set<Object> init resource.instances
+    	result ?= roots.one
+    end
+    
+    /** Print in dot format the given automaton */
+    operation dotprint(fsm : FSM) is do
+       stdio.writeln("\ndigraph finite_state_machine {")
+       stdio.writeln("  rankdir=LR;")
+       stdio.writeln("  node [shape = doublecircle];")
+       fsm.finalState.each{ s | stdio.write("  " + s.name + " ")}
+       stdio.writeln(";")
+       stdio.writeln("  node [shape = circle];")
+       fsm.ownedTransition.each{ t |
+       		stdio.writeln(    "  " + t.source.name + " -> " + t.target.name +
+       		" [ label=\"" + t.input + "\" ];")}
+       stdio.writeln("}")
+	end
+	
+    
+    /**
+     * Interactive commands
+     */
+    operation ask_dotprint() is do
+    	dotprint(ask_emfmodel("Enter an EMF model representing an automata to 'dot-printer' : "))
+    end
+    
+    operation ask_emfmodel(prompt : String) : FSM is do
+    	var file : String init stdio.read(prompt)
+    	stdio.writeln("\n"+file)
+    	var r : EMFRepository init EMFRepository.new
+    	result := loadEMFAutomaton(r, file, "../metamodels/fsm.ecore")
+    end
+    
+    /** Operation that tries to check the validity of the given automaton 
+     *  (the states referenced in all the transitions must appear in the stateSet of the
+     *  given automaton)
+    */
+	operation conformityChecker(fsm : FSM) : Boolean is do
+		result := fsm.ownedTransition.detect { t |  
+			stdio.writeln("transitions : " + t.source.toString + ", " + t.target.toString)
+			not (fsm.ownedState.contains(t.source) and fsm.ownedState.contains(t.target))}==void
+	end
+}
+
+/** A pair of States, as an equivalence relation */
+class Pair
+{
+	reference left : State
+	reference right : State	
+}

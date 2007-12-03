@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/0.11" activeDiagram="//@diagrams.0">
+  <model href="samplerun.fsm#/"/>
+  <diagrams position="0,0" size="100,100" name="samplerun" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram">
+      <element href="samplerun.fsm#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="60,82" size="50,50">
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.3 //@diagrams.0/@contained.6"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="samplerun.fsm#//@ownedState.0"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="169,83" size="50,50">
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.3 //@diagrams.0/@contained.4 //@diagrams.0/@contained.5 //@diagrams.0/@contained.6"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.4 //@diagrams.0/@contained.5"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="samplerun.fsm#//@ownedState.1"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="samplerun.fsm#//@ownedState.0/@outgoingTransition.0"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="-3,-10"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="samplerun.fsm#//@ownedState.0/@outgoingTransition.1"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="1,9"/>
+      <waypoints>[8, 51, -101, 50]</waypoints>
+      <waypoints>[96, 51, -13, 50]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="samplerun.fsm#//@ownedState.1/@outgoingTransition.0"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="16,-20"/>
+      <waypoints>[48, 12, 48, 12]</waypoints>
+      <waypoints>[48, 50, 48, 50]</waypoints>
+      <waypoints>[15, 50, 15, 50]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="samplerun.fsm#//@ownedState.1/@outgoingTransition.1"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="16,14"/>
+      <waypoints>[11, -45, 11, -45]</waypoints>
+      <waypoints>[47, -45, 47, -45]</waypoints>
+      <waypoints>[47, -12, 47, -12]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="samplerun.fsm#//@ownedState.1/@outgoingTransition.2"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="1,-11"/>
+      <waypoints>[-14, -45, 95, -44]</waypoints>
+      <waypoints>[-100, -45, 9, -44]</waypoints>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

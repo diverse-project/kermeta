@@ -1,0 +1,41 @@
+/* $Id: checkInvariants.kmt,v 1.1 2007-12-03 14:38:45 ftanguy Exp $
+ * Project    : fr.irisa.triskell.kermeta.samples.fsm.demo
+ * File       : checkInvariants.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+  * Creation date: May 24, 2006
+ * Authors:
+ *      Cyril Faucher <cfaucher@irisa.fr>
+ * Description : 
+ */
+@mainClass "fsm::InvariantChecker"
+@mainOperation "main"
+
+
+package fsm;
+
+require kermeta
+require "../metamodels/fsm_Helper.kmt"
+require "fsmLauncher.kmt"
+
+using fsm
+using kermeta::standard
+using kermeta::persistence
+
+
+class InvariantChecker
+{
+    operation main(input_automaton : String) : Void is do 
+        var rep : EMFRepository init EMFRepository.new
+        var theFSM : FSM init AutomatonHelper.new.loadEMFAutomaton(rep, input_automaton, "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsm.ecore")
+        
+        // Uncomment to check the invariant properties : WFR
+        // To check all contained elements by "theFSM"
+        stdio.writeln("> call of the checkAllInvariants method")
+        theFSM.checkAllInvariants
+        // To check only the states that are contained in "theFSM"
+        stdio.writeln("> call of the checkInvariants method")
+        Main.new.checkWFR(theFSM)
+	end
+}

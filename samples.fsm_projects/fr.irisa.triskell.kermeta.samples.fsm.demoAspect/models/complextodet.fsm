@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fsm="http://www.kermeta.org/fsm" initialState="//@ownedState.0" finalState="//@ownedState.2 //@ownedState.3 //@ownedState.1">
+  <ownedState name="a" incomingTransition="//@ownedState.4/@outgoingTransition.0 //@ownedState.1/@outgoingTransition.1">
+    <outgoingTransition target="//@ownedState.4" input="z" output=""/>
+    <outgoingTransition target="//@ownedState.1" input="a" output=""/>
+    <outgoingTransition target="//@ownedState.2" input="a"/>
+    <outgoingTransition target="//@ownedState.3" input="z"/>
+  </ownedState>
+  <ownedState name="b" incomingTransition="//@ownedState.0/@outgoingTransition.1 //@ownedState.3/@outgoingTransition.0 //@ownedState.2/@outgoingTransition.2">
+    <outgoingTransition target="//@ownedState.3" input="a"/>
+    <outgoingTransition target="//@ownedState.0" input="a" output=""/>
+  </ownedState>
+  <ownedState name="c" incomingTransition="//@ownedState.3/@outgoingTransition.1 //@ownedState.4/@outgoingTransition.1 //@ownedState.0/@outgoingTransition.2 //@ownedState.3/@outgoingTransition.2">
+    <outgoingTransition target="//@ownedState.3" input="z"/>
+    <outgoingTransition target="//@ownedState.4" input="z"/>
+    <outgoingTransition target="//@ownedState.1" input="a"/>
+  </ownedState>
+  <ownedState name="d" incomingTransition="//@ownedState.1/@outgoingTransition.0 //@ownedState.2/@outgoingTransition.0 //@ownedState.0/@outgoingTransition.3">
+    <outgoingTransition target="//@ownedState.1" input="a"/>
+    <outgoingTransition target="//@ownedState.2" input="a"/>
+    <outgoingTransition target="//@ownedState.2" input="z"/>
+  </ownedState>
+  <ownedState name="e" incomingTransition="//@ownedState.0/@outgoingTransition.0 //@ownedState.2/@outgoingTransition.1">
+    <outgoingTransition target="//@ownedState.0" input="a"/>
+    <outgoingTransition target="//@ownedState.2" input="a"/>
+  </ownedState>
+</fsm:FSM>
