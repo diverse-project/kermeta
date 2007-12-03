@@ -1,4 +1,4 @@
-/*$Id: TrekModelHelper.java,v 1.3 2007-11-30 13:24:53 cfaucher Exp $
+/*$Id: TrekModelHelper.java,v 1.4 2007-12-03 10:48:57 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	TrekModelHelper.java
 * License : EPL
@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -24,7 +25,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.kermeta.compiler.trek.ui.KCompilerConstants;
 import org.kermeta.trek.KStatus;
 import org.kermeta.trek.TrekFactory;
@@ -111,7 +111,7 @@ public class TrekModelHelper {
 	}
 
 	public static String getSummaryContent(IFolder folder) {
-		IFile summary_file = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(folder.getFullPath().append("/summary_" + folder.getName()).addFileExtension(KCompilerConstants.SUMMARY_EXT));
+		IFile summary_file = ResourcesPlugin.getWorkspace().getRoot().getFile(folder.getFullPath().append("/summary_" + folder.getName()).addFileExtension(KCompilerConstants.SUMMARY_EXT));
 		if(summary_file.exists()) {
 			try {
 				return readString(summary_file.getContents());

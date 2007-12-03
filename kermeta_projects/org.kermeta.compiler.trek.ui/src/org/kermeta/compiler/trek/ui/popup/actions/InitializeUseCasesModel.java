@@ -1,4 +1,4 @@
-/*$Id: InitializeUseCasesModel.java,v 1.2 2007-11-28 13:11:17 cfaucher Exp $
+/*$Id: InitializeUseCasesModel.java,v 1.3 2007-12-03 10:48:57 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeUseCasesModel.java
 * License : EPL
@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.jface.action.IAction;
@@ -26,7 +27,6 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.kermeta.compiler.trek.ui.KCompilerConstants;
 import org.kermeta.trek.KUseCase;
 import org.kermeta.trek.TrekFactory;
@@ -102,7 +102,7 @@ public class InitializeUseCasesModel implements IObjectActionDelegate {
 	
 	private UseKaseModel createUseKaseModel(IFolder folder)
     {
-		IFile trek_file = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(folder.getFullPath().append("/" + folder.getName()).addFileExtension(KCompilerConstants.TREK_EXT));
+		IFile trek_file = ResourcesPlugin.getWorkspace().getRoot().getFile(folder.getFullPath().append("/" + folder.getName()).addFileExtension(KCompilerConstants.TREK_EXT));
 		return TrekModelHelper.createUseKaseModel(trek_file);
     }
 	

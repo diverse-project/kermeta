@@ -1,4 +1,4 @@
-/*$Id: InitializeTrekSummary.java,v 1.2 2007-11-30 13:24:53 cfaucher Exp $
+/*$Id: InitializeTrekSummary.java,v 1.3 2007-12-03 10:48:57 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeTrekSummary.java
 * License : EPL
@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.action.IAction;
@@ -26,7 +27,6 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.kermeta.compiler.trek.ui.KCompilerConstants;
 
 
@@ -82,7 +82,7 @@ public class InitializeTrekSummary implements IObjectActionDelegate {
 			for(IResource subResource : folder.members(false) ) {
 				if(subResource instanceof IFolder) {
 					IFolder subFolder = (IFolder) subResource;
-					IFile summary_file = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(subFolder.getFullPath().append("/" + KCompilerConstants.SUMMARY_PREFIX + subFolder.getName()).addFileExtension(KCompilerConstants.SUMMARY_EXT));
+					IFile summary_file = ResourcesPlugin.getWorkspace().getRoot().getFile(subFolder.getFullPath().append("/" + KCompilerConstants.SUMMARY_PREFIX + subFolder.getName()).addFileExtension(KCompilerConstants.SUMMARY_EXT));
 					if( !summary_file.exists() ) {
 						summary_file.create(new ByteArrayInputStream("".getBytes()), true, new NullProgressMonitor());
 					}
