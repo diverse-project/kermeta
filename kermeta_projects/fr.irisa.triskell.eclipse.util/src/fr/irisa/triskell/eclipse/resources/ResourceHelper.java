@@ -1,4 +1,4 @@
-/*$Id: ResourceHelper.java,v 1.15 2007-11-30 17:13:50 dvojtise Exp $
+/*$Id: ResourceHelper.java,v 1.16 2007-12-03 15:58:48 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -90,7 +90,7 @@ public class ResourceHelper {
 	 * @return The method returns an IFile resource.
 	 */
 	static public IFile getIFile(String filePath) {
-		String cleanPath = cleanIfNecessaryPath(filePath);
+		/*String cleanPath = cleanIfNecessaryPath(filePath);
 		Path path = new Path(cleanPath);
 		try {
 			IFile file = root.getFile(path);
@@ -100,8 +100,28 @@ public class ResourceHelper {
 				return null;
 		} catch (java.lang.IllegalArgumentException exception) {
 			return null;
+		}*/
+		return getIFile(filePath, true);
+	}
+	
+	static public IFile getIFile(String filePath, boolean checkExistency) {
+		String cleanPath = cleanIfNecessaryPath(filePath);
+		Path path = new Path(cleanPath);
+		try {
+			IFile file = root.getFile(path);
+			if ( ! checkExistency )
+				return file;
+			else {
+				if ( file.exists() )
+					return file;
+				else 
+					return null;
+			}
+		} catch (java.lang.IllegalArgumentException exception) {
+			return null;
 		}
 	}
+	
 	/**
 	 * This methods gives an IFile resource corresponding to the file path in the workspace.
 	 * No control is done. It means that even if the file does not exist, you will be given a resource.
