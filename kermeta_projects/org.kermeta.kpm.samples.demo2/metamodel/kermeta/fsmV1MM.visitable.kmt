@@ -1,0 +1,82 @@
+@uri "http://www.kermeta.org/fsmV1"
+package fsm;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "kermeta"
+class FSM
+{
+	attribute ownedState : State[0..*]#owningFSM
+
+	reference initialState : State[1..1]
+
+	reference finalState : State[1..*]
+
+	operation accept(visitor : visitors::Visitor) : Void is
+		do
+			result := visitor.visitFSM(self)
+		end
+
+}
+class State
+{
+	reference owningFSM : FSM[1..1]#ownedState
+
+	attribute name : String
+
+	attribute outgoingTransition : Transition[0..*]#source
+
+	reference incomingTransition : Transition[0..*]#target
+
+	operation accept(visitor : visitors::Visitor) : Void is
+		do
+			result := visitor.visitState(self)
+		end
+
+}
+class Transition
+{
+	reference source : State[1..1]#outgoingTransition
+
+	reference target : State[1..1]#incomingTransition
+
+	attribute input : String
+
+	attribute output : String
+
+	operation accept(visitor : visitors::Visitor) : Void is
+		do
+			result := visitor.visitTransition(self)
+		end
+
+}
+alias String : kermeta::standard::String;
+package visitors
+{
+	abstract class Visitable
+	{
+		operation accept(visitor : Visitor) : Void is
+			do
+			end
+
+	}
+	abstract class Visitor
+	{
+		operation visit(visitable : Visitable) : Void is
+			do
+			end
+
+		operation visitFSM(visitable : FSM) : Void is
+			do
+			end
+
+		operation visitState(visitable : State) : Void is
+			do
+			end
+
+		operation visitTransition(visitable : Transition) : Void is
+			do
+			end
+
+	}
+}
+

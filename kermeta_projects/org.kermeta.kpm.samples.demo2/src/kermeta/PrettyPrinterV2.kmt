@@ -1,0 +1,121 @@
+/* $Id: PrettyPrinterV2.kmt,v 1.1 2007-12-03 15:43:51 ftanguy Exp $
+ * Creation date: December 3, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "printing::PrettyPrinter"
+@mainOperation "main"
+
+
+package printing;
+
+
+require kermeta
+
+require "platform:/resource/org.kermeta.kpm.samples.demo2/metamodel/ecore/fsmV2MM.visitable.ecore"
+
+using fsm
+using fsm::visitors
+using kermeta::persistence
+using kermeta::standard
+
+class PrettyPrinter inherits Visitor
+{
+
+	attribute tabs : Integer
+
+	operation main() : Void is do 
+		var repository : EMFRepository init EMFRepository.new
+		var resource : Resource init repository.getResource("platform:/resource/org.kermeta.kpm.samples.demo2/model/v2/helloWorldV2.xmi")
+		
+		var root : FSM
+		
+		root ?= resource.instances.one
+		
+		tabs := 0
+		
+		root.accept( self )
+		
+	end
+	
+	
+	/*
+	 *
+	 *	Beginning of the visit methods
+	 *
+	 */
+	method visitFSM(o : FSM) is do
+		println("FSM")
+		increaseTabs()
+		o.ownedState.each { s | s.accept(self) println("") }
+		decreaseTabs()
+	end
+
+	
+	method visitState(o : State) is do
+		println( "state's name : " + o.name )
+
+		println("Incoming Transitions : ")		
+		increaseTabs()
+		o.incomingTransition.each { t | t.accept(self) }
+		decreaseTabs()
+		
+		println("Outgoing Transitions : ")
+		increaseTabs()
+		o.outgoingTransition.each { t | t.accept(self) }
+		decreaseTabs()
+	end
+
+	
+	method visitTransition(o : Transition) is do
+		println("Input : " + o.input)
+		println("Output : " + o.output)
+		increaseTabs()
+		o.action.each { a | a.accept(self) }
+		decreaseTabs()
+	end
+	
+	method visitAction(o : Action) is do
+		println("Action : " + o.name)
+	end
+	/*
+	 *
+	 *	End of the visit methods
+	 *
+	 */	
+	
+	
+	
+	/*
+	 *
+	 *	Beginning of the helper operations
+	 *
+	 */
+	operation increaseTabs() is do
+		tabs := tabs + 1
+	end
+	
+	operation decreaseTabs() is do
+		tabs := tabs - 1
+	end
+	
+	operation printTabs() is do
+		from var i : Integer init 0
+		until i == tabs
+		loop
+    		stdio.write("\t")
+    		i := i + 1
+		end
+	end
+	
+	operation println(s : String) is do
+		printTabs()
+		stdio.writeln(s)
+	end
+	/*
+	 *
+	 *	End of the helper operations
+	 *
+	 */
+}
