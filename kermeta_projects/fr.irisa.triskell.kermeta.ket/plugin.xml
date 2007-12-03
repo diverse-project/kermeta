@@ -18,7 +18,7 @@
                label="Translate Kermeta Template"
                class="fr.irisa.triskell.kermeta.ket.Generator"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/Kermeta"
-               enablesFor="1"
+               enablesFor="+"
                id="fr.irisa.triskell.kermeta.ket.menu.action">
          </action>
       </objectContribution>
