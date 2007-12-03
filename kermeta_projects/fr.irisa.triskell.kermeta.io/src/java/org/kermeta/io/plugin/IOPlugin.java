@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.30 2007-11-29 16:41:14 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.31 2007-12-03 15:56:00 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -223,7 +223,16 @@ public class IOPlugin extends AbstractUIPlugin {
 			plugin = new IOPlugin();
 		return plugin;
 	}
+	
+	public KermetaUnit findKermetaUnit(IFile file) {
+		String uri = "platform:/resource" + file.getFullPath().toString();
+		return findKermetaUnit(uri);
+	}
 
+	public KermetaUnit findKermetaUnit(String uri) {
+		return storer.find(uri);
+	}
+	
 	/**
 	 * 
 	 * This method is used to get a kermeta unit that imports the kermeta framework and the ecore.ecore wether the
