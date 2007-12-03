@@ -1,4 +1,4 @@
-/* $Id: Generator.java,v 1.4 2007-12-03 13:44:22 cfaucher Exp $
+/* $Id: Generator.java,v 1.5 2007-12-03 16:51:52 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.ket
  * File       : Generator.java
  * License    : EPL
@@ -7,6 +7,7 @@
  * Creation date : 23 Jul. 2007
  * Authors : 
  *        Olivier Barais <barais@irisa.fr>
+ *        Cyril Faucher <cfaucher@irisa.fr>
  * Description : 
  *   First iteration of a template engine for Kermeta
  */
@@ -23,11 +24,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.filebuffers.FileBuffers;
-import org.eclipse.core.resources.IResource;
+import org.eclipse.core.filebuffers.ITextFileBufferManager;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jet.core.parser.IJETParser;
 import org.eclipse.jet.core.parser.ITagLibraryResolver;
 import org.eclipse.jet.core.parser.ITemplateInput;
@@ -101,12 +102,12 @@ public class Generator implements IObjectActionDelegate{
 		 IJETParser p = new KetParser(nullTemplateResolver, new NullTagLibraryResolver() ,new HashMap());
 		 String outputURI = kmttfile.getLocation().removeFileExtension().addFileExtension("kmt").toOSString();
 		 try {
-			FileBuffers.getTextFileBufferManager().connect(kmttfile.getLocation(),null);
+			 ITextFileBufferManager.DEFAULT.connect(kmttfile.getLocation(), null, new NullProgressMonitor());
 		} catch (CoreException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		 String s = FileBuffers.getTextFileBufferManager().getTextFileBuffer(kmttfile.getLocation()).getDocument().get();
+		 String s = ITextFileBufferManager.DEFAULT.getTextFileBuffer(kmttfile.getLocation(), null).getDocument().get();
 		 
 			 JETCompilationUnit cu = (JETCompilationUnit) p.parse(s.toCharArray());
 			// 
