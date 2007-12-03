@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.22 2007-11-21 14:05:08 ftanguy Exp $
+/*$Id: Ecore2KMPass1.java,v 1.23 2007-12-03 15:55:38 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -58,6 +58,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 	public Ecore2KMPass1(KermetaUnit kermetaUnit, Ecore2KMDatas datas, boolean isQuickFixEnabled, Resource resource, IProgressMonitor monitor) {
 		super(kermetaUnit, datas, isQuickFixEnabled, monitor);
 		this.resource = resource;
+		kermetaUnit.addRequire("kermeta", null);
 	}
 	
 	
