@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMT.java,v 1.2 2007-09-19 12:17:41 ftanguy Exp $
+/*$Id: Ecore2KMT.java,v 1.3 2007-12-03 15:58:00 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	Ecore2KMT.java
 * License : EPL
@@ -47,7 +47,7 @@ public class Ecore2KMT implements IAction {
 			 * 
 			 */
 			String outputString = NameFilterHelper.getOuputString(unit, out);
-			IFile outputFile = ResourceHelper.getIFile( outputString );
+			IFile outputFile = ResourceHelper.getIFile( outputString, false );
 			
 			/*
 			 * 
@@ -116,7 +116,9 @@ public class Ecore2KMT implements IAction {
 			}	
 			try {
 				KMTOutputBuilder builder = new KMTOutputBuilder();
-				builder.print(kermetaUnit, "");
+				int index = outputString.lastIndexOf("/");
+				String rep = outputString.substring(0, index);
+				builder.print(kermetaUnit, rep, "platform:/resource"+outputString);
 				builder.flush();
 				outputFile.refreshLocal(0, monitor);
 			} catch (Exception e1) {

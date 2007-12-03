@@ -1,4 +1,4 @@
-/*$Id: RemoveDependentDependencies.java,v 1.2 2007-09-13 09:03:45 ftanguy Exp $
+/*$Id: RemoveDependentDependencies.java,v 1.3 2007-12-03 15:58:00 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	RemoveDependentDependencies.java
 * License : EPL
@@ -80,7 +80,8 @@ public class RemoveDependentDependencies implements IAction {
 			 * 
 			 */
 			for ( Dependency currentDependency : entriesToRemove ) {
-				currentDependency.getTo().getDependents().remove(currentDependency);
+				if ( currentDependency.getTo() != null )
+					currentDependency.getTo().getDependents().remove(currentDependency);
 				unit.getDependents().remove(currentDependency);
 			}
 			
@@ -95,6 +96,10 @@ public class RemoveDependentDependencies implements IAction {
 	}
 
 	private boolean findImportedUnit(KermetaUnit kermetaUnit, Unit unitToFind,IProgressMonitor monitor) {
+		
+		if ( unitToFind == null )
+			return false;
+		
 		
 		if ( monitor.isCanceled() )
 			return false;
