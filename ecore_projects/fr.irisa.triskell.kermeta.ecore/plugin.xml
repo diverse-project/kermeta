@@ -22,7 +22,7 @@
       <import plugin="fr.irisa.triskell.kermeta.kpm"/>
    </requires>
    <extension
-         id="org.kermeta.ecore.generateVisitor"
+         id="generateVisitor"
          point="fr.irisa.triskell.kermeta.kpm.kermetaAction">
       <Action
             File="src/kermeta/kpm/VisitorHelper.kmt">

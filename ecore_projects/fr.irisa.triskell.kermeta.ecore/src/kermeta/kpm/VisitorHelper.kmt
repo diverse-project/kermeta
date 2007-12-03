@@ -35,7 +35,7 @@ class Main
 		var index : Integer init args.indexOf(" ")
 		
 		metamodelURI := "platform:/resource" + args.substring(0, index)
-		outputFile := "platform:/resource" + args.substring(index+1, args.size)
+		outputFile := "platform:/resource" + args.substring(index+1, args.size-1)
 		
 		initialize	
 		addVisitor( outputFile )
