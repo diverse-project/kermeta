@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:uml="http://www.eclipse.org/uml2/1.0.0/UML" xmi:id="_tPOCIaLHEdqkGMDvm75SlQ" name="main">
-  <eAnnotations xmi:id="_IPpPECPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
-    <details xmi:id="_IPpPESPLEdumr8b4wghgYQ" key="uuid" value="11547041276170"/>
-  </eAnnotations>
-  <ownedMember xmi:type="uml:Package" xmi:id="_tPOCIqLHEdqkGMDvm75SlQ" name="bank">
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
+  <packagedElement xmi:type="uml:Package" xmi:id="_tPOCIqLHEdqkGMDvm75SlQ" name="bank">
     <eAnnotations xmi:id="_IPrEQCPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
       <details xmi:id="_IPrEQSPLEdumr8b4wghgYQ" key="uuid" value="11547041276201"/>
     </eAnnotations>
@@ -41,7 +38,7 @@ end</body>
     end
 end</body>
     </ownedComment>
-    <ownedMember xmi:type="uml:Class" xmi:id="_KfQWsCPKEdumr8b4wghgYQ" name="Customer">
+    <packagedElement xmi:type="uml:Class" xmi:id="_KfQWsCPKEdumr8b4wghgYQ" name="Customer">
       <eAnnotations xmi:id="_IPsSYCPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
         <details xmi:id="_IPsSYSPLEdumr8b4wghgYQ" key="uuid" value="11547041276222"/>
       </eAnnotations>
@@ -54,7 +51,7 @@ end</body>
         <eAnnotations xmi:id="_IPuHkCPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
           <details xmi:id="_IPuHkSPLEdumr8b4wghgYQ" key="uuid" value="11547041276254"/>
         </eAnnotations>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8nPBgCPKEdumr8b4wghgYQ" value="-1">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8nPBgCPKEdumr8b4wghgYQ" value="*">
           <eAnnotations xmi:id="_IPuuoCPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
             <details xmi:id="_IPuuoSPLEdumr8b4wghgYQ" key="uuid" value="11547041276265"/>
           </eAnnotations>
@@ -65,8 +62,8 @@ end</body>
           </eAnnotations>
         </lowerValue>
       </ownedAttribute>
-    </ownedMember>
-    <ownedMember xmi:type="uml:Class" xmi:id="_L0uU0CPKEdumr8b4wghgYQ" name="Account">
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_L0uU0CPKEdumr8b4wghgYQ" name="Account">
       <eAnnotations xmi:id="_IPwj0CPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
         <details xmi:id="_IPwj0SPLEdumr8b4wghgYQ" key="uuid" value="11547041276297"/>
       </eAnnotations>
@@ -85,47 +82,49 @@ end</body>
           </eAnnotations>
         </ownedParameter>
       </ownedOperation>
-      <ownedOperation xmi:id="_iPZyICPKEdumr8b4wghgYQ" name="printAmount" type="_ys--4CPKEdumr8b4wghgYQ">
+      <ownedOperation xmi:id="_iPZyICPKEdumr8b4wghgYQ" name="printAmount">
         <eAnnotations xmi:id="_IPyZAiPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
           <details xmi:id="_IPyZAyPLEdumr8b4wghgYQ" key="uuid" value="115470412763211"/>
         </eAnnotations>
+        <ownedParameter xmi:id="_l4q6EJwgEdyRJ4YY8443fA" type="_ys--4CPKEdumr8b4wghgYQ" direction="return"/>
         <returnResult xmi:id="_kYaGACPKEdumr8b4wghgYQ" type="_ys--4CPKEdumr8b4wghgYQ">
           <eAnnotations xmi:id="_IPzAECPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
             <details xmi:id="_IPzAESPLEdumr8b4wghgYQ" key="uuid" value="115470412763312"/>
           </eAnnotations>
         </returnResult>
       </ownedOperation>
-      <ownedOperation xmi:id="_k_oeECPKEdumr8b4wghgYQ" name="withdraw" type="_TqWNQCPKEdumr8b4wghgYQ">
+      <ownedOperation xmi:id="_k_oeECPKEdumr8b4wghgYQ" name="withdraw">
         <eAnnotations xmi:id="_IPznICPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
           <details xmi:id="_IPznISPLEdumr8b4wghgYQ" key="uuid" value="115470412763413"/>
         </eAnnotations>
-        <returnResult xmi:id="_dWw88SXzEdubto646KJ45g" type="_TqWNQCPKEdumr8b4wghgYQ">
-          <eAnnotations xmi:id="_ffHwkCXzEdubto646KJ45g" source="http://www.topcased.org/uuid">
-            <details xmi:id="_ffHwkSXzEdubto646KJ45g" key="uuid" value="115494136578451"/>
-          </eAnnotations>
-        </returnResult>
         <ownedParameter xmi:id="_stJjYCPKEdumr8b4wghgYQ" name="desired" type="_TqWNQCPKEdumr8b4wghgYQ">
           <eAnnotations xmi:id="_IP0OMCPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
             <details xmi:id="_IP0OMSPLEdumr8b4wghgYQ" key="uuid" value="115470412763414"/>
           </eAnnotations>
         </ownedParameter>
+        <ownedParameter xmi:id="_l4q6EZwgEdyRJ4YY8443fA" type="_TqWNQCPKEdumr8b4wghgYQ" direction="return"/>
+        <returnResult xmi:id="_dWw88SXzEdubto646KJ45g" type="_TqWNQCPKEdumr8b4wghgYQ">
+          <eAnnotations xmi:id="_ffHwkCXzEdubto646KJ45g" source="http://www.topcased.org/uuid">
+            <details xmi:id="_ffHwkSXzEdubto646KJ45g" key="uuid" value="115494136578451"/>
+          </eAnnotations>
+        </returnResult>
       </ownedOperation>
-    </ownedMember>
-    <ownedMember xmi:type="uml:DataType" xmi:id="_TqWNQCPKEdumr8b4wghgYQ" name="Integer">
+    </packagedElement>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_TqWNQCPKEdumr8b4wghgYQ" name="Integer">
       <eAnnotations xmi:id="_IP0OMiPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
         <details xmi:id="_IP0OMyPLEdumr8b4wghgYQ" key="uuid" value="115470412763515"/>
       </eAnnotations>
-    </ownedMember>
-    <ownedMember xmi:type="uml:DataType" xmi:id="_ys--4CPKEdumr8b4wghgYQ" name="String">
+    </packagedElement>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_ys--4CPKEdumr8b4wghgYQ" name="String">
       <eAnnotations xmi:id="_IP01QCPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
         <details xmi:id="_IP01QSPLEdumr8b4wghgYQ" key="uuid" value="115470412763616"/>
       </eAnnotations>
-    </ownedMember>
-    <ownedMember xmi:type="uml:Association" xmi:id="_2VyRkCPKEdumr8b4wghgYQ" name="Association1" memberEnd="_2V93wCPKEdumr8b4wghgYQ _2V-e0CPKEdumr8b4wghgYQ">
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_2VyRkCPKEdumr8b4wghgYQ" name="Association1" memberEnd="_2V93wCPKEdumr8b4wghgYQ _2V-e0CPKEdumr8b4wghgYQ">
       <eAnnotations xmi:id="_IP2DYCPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
         <details xmi:id="_IP2DYSPLEdumr8b4wghgYQ" key="uuid" value="115470412763717"/>
       </eAnnotations>
-      <ownedEnd xmi:id="_2V93wCPKEdumr8b4wghgYQ" type="_KfQWsCPKEdumr8b4wghgYQ" association="_2VyRkCPKEdumr8b4wghgYQ" aggregation="composite">
+      <ownedEnd xmi:id="_2V93wCPKEdumr8b4wghgYQ" type="_KfQWsCPKEdumr8b4wghgYQ" aggregation="composite" association="_2VyRkCPKEdumr8b4wghgYQ">
         <eAnnotations xmi:id="_IP2qcCPLEdumr8b4wghgYQ" source="http://www.topcased.org/uuid">
           <details xmi:id="_IP2qcSPLEdumr8b4wghgYQ" key="uuid" value="115470412763918"/>
         </eAnnotations>
@@ -140,6 +139,6 @@ end</body>
           </eAnnotations>
         </lowerValue>
       </ownedEnd>
-    </ownedMember>
-  </ownedMember>
+    </packagedElement>
+  </packagedElement>
 </uml:Model>

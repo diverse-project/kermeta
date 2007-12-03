@@ -1,4 +1,4 @@
-/* $Id: three_way_switch.kmt,v 1.6 2006-06-26 16:15:46 vmahe Exp $
+/* $Id: three_way_switch.kmt,v 1.7 2007-12-03 09:12:01 vmahe Exp $
  * Creation date: May 19, 2006
  * License:
  * Copyright:
@@ -50,7 +50,7 @@ class Light_impl inherits Light, ActiveStateMachine {
 		inhabitant.add(new_inhabitant)
 	end
 	operation make() is do
-		inhabitant := OrderedSet<Inhabitant>.new
+//		inhabitant := OrderedSet<Inhabitant>.new	// initialization not needed in recent Kermeta versions
 		light_in_On := Light_in_On.new
 		light_in_On.init_activable("light_in_On")
 		light_in_Off := Light_in_Off.new

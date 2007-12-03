@@ -1,21 +1,20 @@
-/* $Id: GOFStatePatternTool.kmt,v 1.6 2006-08-31 07:23:39 vmahe Exp $
+/* $Id: GOFStatePatternTool.kmt,v 1.7 2007-12-03 09:12:07 vmahe Exp $
  * Creation date: July 6, 2006
  * License:
  * Copyright:
  * Authors:
  */
 
-package uml2::transformations;
+package uml::transformations;
 
 
 require "StaticTools.kmt"
 require "UmlCloneFactory.kmt"
-require "../TopDownVisitor.kmt"
+require "../visitableUML.kmt"
 
-using uml2
+using uml
 
-//class GOFStatePatternTool inherits UmlTool, topdown_visitor::TopDownVisitor
-class GOFStatePatternTool inherits UmlTool, topdown_visitor::TopDownVisitor
+class GOFStatePatternTool inherits UmlTool, uml::visitors::TopDownVisitor
 {
 	reference ioTable : IOElementsTable
 	reference currentContext : BehavioredClassifier
@@ -52,18 +51,24 @@ class GOFStatePatternTool inherits UmlTool, topdown_visitor::TopDownVisitor
     end
     
     method visitClass(visitable : Class) is do
+    	var machines : StateMachine[]
+    	visitable.ownedBehavior.each{ b |
+    		var sm : StateMachine
+    		sm ?= b
+    		if sm != void then machines.add(sm) end
+    	}
     	// multiple StateMachine are forbidden
-		if visitable.ownedStateMachine.size > 1 then
+		if machines.size > 1 then
 			var e : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
 			e.message := "GOF State Pattern tool : multiple StateMachines are not processed"
 			raise e
 		end
 		
     	// for a root state machine, the GOF State context class corresponds to the statemachine owning Class.
-    	if visitable.ownedStateMachine.size == 1 then
+    	if machines.size == 1 then
 	    	var rootClass : Class
 	    	rootClass ?= ioTable.getValue(visitable)
-	    	ioTable.putValue(visitable.ownedStateMachine.one, rootClass)
+	    	ioTable.putValue(machines.one, rootClass)
     	end
     	
     	super(visitable)

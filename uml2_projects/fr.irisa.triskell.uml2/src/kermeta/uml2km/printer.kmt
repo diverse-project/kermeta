@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: printer.kmt,v 1.2 2006-08-08 06:57:46 vmahe Exp $
+/* $Id: printer.kmt,v 1.3 2007-12-03 09:12:07 vmahe Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : GPL
@@ -244,7 +244,7 @@ class BasicPrettyPrinter inherits
 		result := "[typed element]"
 	end
 	
-	method visitTypeVariable(node : TypeVariable, context : Integer) : String is do
+	operation visitTypeVariable(node : TypeVariable, context : Integer) : String is do
 		result := pp.ppIdentifier(node.name)
 	end
 	
@@ -262,7 +262,8 @@ class BasicPrettyPrinter inherits
 	 */ 
 	method visitType(node : Type, context : Integer) : String is do
 		result := ""
-		if (PrimitiveType.isInstance(node)) then 
+		// done through each visit*() method
+/*		if (PrimitiveType.isInstance(node)) then 
 			var pt : PrimitiveType
 			pt ?= node
 			result := self.accept(pt.instanceType, context)
@@ -280,7 +281,7 @@ class BasicPrettyPrinter inherits
 					result := "ERROR : unknown type "+ node.toString +" !"
 				end
 			end
-		end
+		end	*/
 	end
 	
 	method visitTypeVariableBinding(node : TypeVariableBinding, context : Integer) : String is do

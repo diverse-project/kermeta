@@ -1,15 +1,15 @@
-/* $Id: BehaviorTools.kmt,v 1.3 2006-08-31 07:23:39 vmahe Exp $
+/* $Id: BehaviorTools.kmt,v 1.4 2007-12-03 09:12:07 vmahe Exp $
  * Creation date: July 3, 2006
  * License:
  * Copyright:
  * Authors:
  */
 
-package uml2::transformations;
+package uml::transformations;
 
 require "UmlTool.kmt"
 
-using uml2
+using uml
 
 /** class for converting a transition characterisitics into a equivalent kermeta code */
 class Transition_Tool
@@ -33,14 +33,14 @@ class Transition_Tool
 			// doing the state leaving
 			code.append("\t" + sourceIntoOperation)
 			if transition.effect != void then
-				if transition.effect.body != void then
+/*				if transition.effect.body != void then
 					// inserting activity code
 					code.append("\t" + transition.effect.body)
 				else
 					var message : kermeta::standard::String
 					message := "Transition '"+ transition.name+"' must have a body in its an activity (effect) to be transformed"
 					raise message
-				end
+				end */		// no more "body" ifor Behavior in Uml 2.1 version
 			else
 				var message : kermeta::standard::String
 				message := "Transition '"+ transition.name+"' must have an activity (effect) to be transformed"
@@ -67,7 +67,11 @@ class Transition_Tool
 		var opexpr : OpaqueExpression
 		opexpr ?= transition.guard.specification
 		if opexpr != void then if opexpr.language == "kermeta" then
-			result := opexpr.body
+			var body : String init ""
+			opexpr.body.each{ s |
+				body.append(s + "\n")
+			}
+			result := body
 		end end
 	end
 	operation sourceIntoOperation() : kermeta::standard::String is do

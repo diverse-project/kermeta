@@ -22,7 +22,7 @@ class BClass inherits AClass
 {
 	attribute composition : DClass
 	operation bOperation() : GClass is do
-//		result := void
+		result := void
 	end
 	reference h : HClass[0..*]#b
 }

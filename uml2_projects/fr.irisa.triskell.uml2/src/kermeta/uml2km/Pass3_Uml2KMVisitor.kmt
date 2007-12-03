@@ -1,4 +1,4 @@
-/* $Id: Pass3_Uml2KMVisitor.kmt,v 1.4 2006-08-08 06:57:46 vmahe Exp $
+/* $Id: Pass3_Uml2KMVisitor.kmt,v 1.5 2007-12-03 09:12:07 vmahe Exp $
  * Creation date: May 10, 2006
  * License:
  * Copyright:
@@ -7,24 +7,24 @@
 package uml2kmt_visitors;
 
 require kermeta
-require "../TopDownVisitor.kmt"
+require "../visitableUML.kmt"
 require "KmBuilder.kmt"
 
 using kermeta::standard
 using kermeta::interpreter
 using kermeta::language::structure
-using km_builder
+using km_builder 
 
-class Pass3_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
+class Pass3_Uml2KMTVisitor inherits uml::visitors::TopDownVisitor
 {
-    reference output : kermeta::utils::Hashtable<uml2::Element, Object>
+    reference output : kermeta::utils::Hashtable<uml::Element, Object>
     
-    operation initialize(outputKm : kermeta::utils::Hashtable<uml2::Element, Object>) is do
+    operation initialize(outputKm : kermeta::utils::Hashtable<uml::Element, Object>) is do
     	output := outputKm
     end
     
     // each UML2 operation needs its body to be parsed
-    method visitOperation(visitable : uml2::Operation) is do
+    method visitOperation(visitable : uml::Operation) is do
     	// completes the operation
     	var op : Operation
     	op ?= output.getValue(visitable)

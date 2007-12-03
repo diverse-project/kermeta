@@ -1,17 +1,17 @@
-/* $Id: UmlTool.kmt,v 1.3 2006-07-27 13:34:21 vmahe Exp $
+/* $Id: UmlTool.kmt,v 1.4 2007-12-03 09:12:07 vmahe Exp $
  * Creation date: June 29, 2006
  * License:
  * Copyright:
  * Authors:
  */
 
-package uml2::transformations;
+package uml::transformations;
 
 
 require kermeta
-require "UmlCloneFactory.kmt"	// for Uml2 elements
+require "UmlCloneFactory.kmt"	// for Uml2 elements 
 
-using uml2
+using uml 
 
 class UmlTool
 {

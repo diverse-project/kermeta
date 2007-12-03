@@ -1,18 +1,19 @@
-/* $Id: UmlCloneFactory.kmt,v 1.7 2006-08-31 07:23:39 vmahe Exp $
+/* $Id: UmlCloneFactory.kmt,v 1.8 2007-12-03 09:12:06 vmahe Exp $
  * Creation date: July 5, 2006
  * License:
  * Copyright:
  * Authors:
  */
 
-package uml2::transformations;
+package uml::transformations;
 
 
 require kermeta
 require "DiagramsClonePass.kmt"
 require "IOElementsTable.kmt"
 
-using uml2
+using uml
+using uml::transformations
 
 class UmlCloneFactory
 {
@@ -89,17 +90,11 @@ class UmlCloneFactory
     operation cloneOperation(element : Operation) : Operation is do 
         var clone : Operation init Operation.new
     	// super classes properties
-    	affectMultiplicityElement(element, clone)
-    	affectTypedElement(element, clone)
+    	affectTemplateableElement(element, clone)
     	affectParameterableElement(element, clone)
     	affectBehavioralFeature(element, clone)
     	// specific properties
-        element.ownedParameter.each{ u |
-        	var par : Parameter init cloneParameter(u)
-        	ioTable.putValue(u, par)
-        	clone.ownedParameter.add(par)
-        	par.~operation := clone
-        }
+        //element.ownedParameter : done within affectBehavioralFeature()
         
         // store the clone before going back
         ioTable.putValue(element, clone)
@@ -178,8 +173,10 @@ class UmlCloneFactory
 	    		result := clone
 	    	else if opexpr != void then
 	    		var clone : OpaqueExpression init OpaqueExpression.new
-	    		clone.body := opexpr.body
-	    		clone.language := opexpr.language
+	    		clone.body.clear
+	    		clone.body.addAll(opexpr.body)
+	    		clone.language.clear
+	    		clone.language.addAll(opexpr.language)
 	    		result := clone
 	    	else if bool != void then
 	    		var clone : LiteralBoolean init LiteralBoolean.new
@@ -222,11 +219,9 @@ class UmlCloneFactory
     /** return a clone of the Comment with the same value */
     operation cloneComment(element : Comment) : Comment is do
     	var clone : Comment init Comment.new
-    	affectTemplateableElement(element, clone)
+    	affectElement(element, clone)
     	//annotatedElement	: not cloned (must be linked by user)
     	clone.body := element.body
-    	// FIXME :
-//    	if element.bodyExpression != void then clone.bodyExpression := cloneExpression(element.bodyExpression) end
         
         // store the clone before going back
         ioTable.putValue(element, clone)
@@ -319,6 +314,7 @@ class UmlCloneFactory
         	ioTable.putValue(u, ifClone)
         	clone.redefinedInterface.add(ifClone)
         }
+        result := clone
     end
     
     ////////////////////// GENERIC AFFECTATIONS FOR ABSTRACT CLASSES ////////////////////////
@@ -393,19 +389,16 @@ class UmlCloneFactory
     	// we must complete the "operation" attribute for any Parameter (if the BehavioralFeature is an Operation)
     	var op : Operation
     	op ?= clone
-        element.formalParameter.each{ u |
-        	var par : Parameter init cloneParameter(u)
-        	ioTable.putValue(u, par)
-	        clone.formalParameter.add(par)
-        	par.~operation := op
-        }
+    	if op != void then
+	        element.ownedParameter.each{ u |
+	        	var par : Parameter init cloneParameter(u)
+		        clone.ownedParameter.add(par)
+	        	par.~operation := op
+	        }
+        end
         clone.isAbstract := element.isAbstract
-        element.returnResult.each{ u |
-        	var par : Parameter init cloneParameter(u)
-        	ioTable.putValue(u, par)
-	        clone.returnResult.add(par)
-//        	par.~operation := op	// FIXME : it destroys the parameter in returnResult
-        }
+        //element.ownedParameterSet : TODO
+        
         // the raised exceptions are direct types and we don't clone referenced types
         element.raisedException.each{ u | clone.raisedException.add(u) }
     end
@@ -426,7 +419,7 @@ class UmlCloneFactory
     
     operation affectNamedElement(element : NamedElement, clone : NamedElement) is do
     	// superclasses
-    	affectTemplateableElement(element, clone)
+    	affectElement(element, clone)
     	// specific properties
     	clone.name := element.name
         clone.visibility := giveVisibilityKind(element.visibility)
@@ -436,8 +429,6 @@ class UmlCloneFactory
     	// superclasses
     	affectNamedElement(element, clone)
     	affectParameterableElement(element, clone)
-    	// specific properties
-        clone.packageableElement_visibility := giveVisibilityKind(element.packageableElement_visibility)
     end
     
     operation affectTypedElement(element : TypedElement, clone : TypedElement) is do
@@ -446,14 +437,16 @@ class UmlCloneFactory
     	// specific properties
     	var dt : DataType
     	dt ?= element.type
-    	if dt != void then
-    		// FIXME : test if the DataType clone exists !!!!
-    		var dtClone : DataType init cloneDataType(dt)
-    		ioTable.putValue(dt, dtClone)
-    		clone.type := dtClone
-    	else
-    		clone.type := element.type
-    	end
+//    	if dt != void then
+//    		// FIXME : test if the DataType clone exists !!!!
+//    		var dtClone : DataType
+//    		dtClone ?= ioTable.getValue(dt)
+//    		if dtClone == void then cloneDataType(dt) end
+//    		ioTable.putValue(dt, dtClone)
+//    		clone.type := dtClone
+//    	else
+    		clone.type := element.type	// DataType question is managed by second pass if needed 
+//    	end
     end
     
     operation affectRedefinableElement(element : RedefinableElement, clone : RedefinableElement) is do

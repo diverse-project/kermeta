@@ -1,4 +1,4 @@
-package uml2;
+package uml;
 
 
 require kermeta
@@ -8,6 +8,7 @@ using kermeta::language::structure
 using kermeta::language::behavior
 using kermeta::standard
 
+/** do not use this class directly. See Uml2KM class */
 class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 {
 	

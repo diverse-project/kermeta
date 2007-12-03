@@ -1,17 +1,16 @@
-/* $Id: polymorphism.kmt,v 1.4 2006-08-17 14:49:05 vmahe Exp $
+/* $Id: polymorphism.kmt,v 1.5 2007-12-03 09:12:07 vmahe Exp $
  * Creation date: May 3, 2006
  * License:
  * Copyright:
  * Authors:
  */
-@mainClass "uml2::polymorphism::Polymorphism"
+@mainClass "uml::polymorphism::Polymorphism"
 @mainOperation "main"
 
-package uml2::polymorphism;
+package uml::polymorphism;
 
 require kermeta
-//require "Uml2.kmt"
-require "Uml2.kmt"
+require "visitableUML.kmt"
 
 using kermeta::standard
 using kermeta::reflection
@@ -42,25 +41,25 @@ enumeration Process { prettyprint ; rename ; }
 
 class Polymorphism
 {
-    reference model : uml2::Package
-    reference families : Set<Set<uml2::Class>>
+    reference model : uml::Package
+    reference families : Set<Set<uml::Class>>
     
     reference homonyms : Set<HomonymColl>
     
-    operation initialize(m : uml2::Package) is do
+    operation initialize(m : uml::Package) is do
     	// load the given UML2 model
     	model := m
     	
     	//initialize storages
-    	families := Set<Set<uml2::Class>>.new
+    	families := Set<Set<uml::Class>>.new
     end
     
     operation pass1() is do
     	// we first make a family for each Class of the model
     	model.ownedMember.each{ elem |
-    		if uml2::Class.isInstance(elem) then
-    			var family : Set<uml2::Class> init Set<uml2::Class>.new
-    			var cl : uml2::Class
+    		if uml::Class.isInstance(elem) then
+    			var family : Set<uml::Class> init Set<uml::Class>.new
+    			var cl : uml::Class
     			cl ?= elem
     			family.add(cl)
     			families.add(family)
@@ -68,18 +67,18 @@ class Polymorphism
     	}
     	// we process each generalization to group classes by inheritance
     	model.ownedMember.each{ elem |
-    		if uml2::Class.isInstance(elem) then
-    			var family : Set<uml2::Class> init Set<uml2::Class>.new
-    			var child : uml2::Class
+    		if uml::Class.isInstance(elem) then
+    			var family : Set<uml::Class> init Set<uml::Class>.new
+    			var child : uml::Class
     			child ?= elem
     			// find the family of the current "child"
-    			var childFamily : Set<uml2::Class> init getFamily(child)
+    			var childFamily : Set<uml::Class> init getFamily(child)
     			
     			// parents' families join the child family
     			child.generalization.each{ gen |
-    				var supClass : uml2::Class
+    				var supClass : uml::Class
 					supClass ?= gen.general
-    				var supFamily : Set<uml2::Class> init getFamily(supClass)
+    				var supFamily : Set<uml::Class> init getFamily(supClass)
     				if supFamily != childFamily then
     					// we join the two families
     					childFamily.addAll(supFamily)
@@ -92,7 +91,7 @@ class Polymorphism
     	// we may process each family to extract polymorphic operations
     end
     
-    operation pass2(family : Set<uml2::Class>) is do
+    operation pass2(family : Set<uml::Class>) is do
     	// initialize the list of all homonyms (void at the beginning)
     	// It's a tree of different HomonymColl's which have SignColl's
     	homonyms := Set<HomonymColl>.new
@@ -144,14 +143,14 @@ class Polymorphism
     					// we let unchanged  the first occurence
     					if i > 0 then
     						signColl.list.each{ elem | 
-    							if uml2::Property.isInstance(elem) then
+    							if uml::Property.isInstance(elem) then
     								// it's an attribute
-    								var att : uml2::Property
+    								var att : uml::Property
     								att ?= elem
     								att.name.append(i.toString)
     							else
     								// it's an operation
-    								var op : uml2::Operation
+    								var op : uml::Operation
     								op ?= elem
     								op.name.append(i.toString)
     							end
@@ -165,16 +164,16 @@ class Polymorphism
     				homColl.list.each{ signColl | 
     					stdio.writeln("   " + signColl.signature + "       found in the classes :")
     					signColl.list.each{ element | 
-							if uml2::Property.isInstance(element) then
+							if uml::Property.isInstance(element) then
 								// it's an attribute
-								var att : uml2::Property
+								var att : uml::Property
 								att ?= element
-								stdio.writeln("     - "+ att.class_.name )
+								stdio.writeln("     - "+ att.~class.name )
 							else
 								// it's an operation
-								var op : uml2::Operation
+								var op : uml::Operation
 								op ?= element
-								stdio.writeln("     - "+ op.class_.name )
+								stdio.writeln("     - "+ op.~class.name )
 							end
     					}
     				}
@@ -183,7 +182,7 @@ class Polymorphism
     	}
     end
     
-    operation getFamily(cl : uml2::Class) : Set<uml2::Class> is do
+    operation getFamily(cl : uml::Class) : Set<uml::Class> is do
     	// FIXME : could optimization be done with iterators (stop when found) ???
     	result := void
 		families.each{ family |
@@ -222,7 +221,7 @@ class Polymorphism
     	inputResource.load()
     	
     	// "instances" only gives the main diagramm package for the targeted code tree
-    	var mod : uml2::Package
+    	var mod : uml::Package
     	mod ?= inputResource.instances.one
     	// we get the first package
     	mod ?= mod.ownedMember.one
@@ -248,27 +247,27 @@ class Polymorphism
  * to a different class.
  */
 class SignColl {
-	reference list : Set<uml2::Element>
+	reference list : Set<uml::Element>
 	reference name : String
 	reference signature : String
 	
-	operation create(opName : String, element : uml2::Element) is do
+	operation create(opName : String, element : uml::Element) is do
 		name := opName
-		list := Set<uml2::Element>.new
+		list := Set<uml::Element>.new
 		list.add(element)
 		signature := getSignature(element)
 	end
 	
-	operation getSignature(element : uml2::Element) : String is do
+	operation getSignature(element : uml::Element) : String is do
 		result := ""
-		if uml2::StructuralFeature.isInstance(element) then
+		if uml::StructuralFeature.isInstance(element) then
 			// its an attribute
-			var prop : uml2::Property
+			var prop : uml::Property
 			prop ?= element
 			result.append(prop.name + " : " + prop.type.name)
 		else
 			// its an operation
-			var op : uml2::Operation
+			var op : uml::Operation
 			op ?= element
 			result.append(op.name +"(")
 			op.ownedParameter.each{ p | 
@@ -281,7 +280,7 @@ class SignColl {
 		end
 	end
 	/** test the signature and add the Element if it has the good signature */
-	operation belongsTo(element : uml2::Element) : Boolean is do
+	operation belongsTo(element : uml::Element) : Boolean is do
 		result := false
 		if signature == getSignature(element) then
 			result := true
@@ -299,7 +298,7 @@ class HomonymColl {
 	reference list : OrderedSet<SignColl>
 	reference name : String
 	
-	operation create(opName : String, element : uml2::Element) is do
+	operation create(opName : String, element : uml::Element) is do
 		name := opName
 		list := OrderedSet<SignColl>.new
 		name := getName(element)
@@ -308,22 +307,22 @@ class HomonymColl {
 		list.add(signColl)
 	end
 	
-	operation getName(element : uml2::Element) : String is do
+	operation getName(element : uml::Element) : String is do
 		result := ""
-		if uml2::StructuralFeature.isInstance(element) then
+		if uml::StructuralFeature.isInstance(element) then
 			// its an attribute
-			var prop : uml2::Property
+			var prop : uml::Property
 			prop ?= element
 			result.append(prop.name)
 		else
 			// its an operation
-			var op : uml2::Operation
+			var op : uml::Operation
 			op ?= element
 			result.append(op.name)
 		end
 	end
 	/** test the signature and add the Element if it has the good name */
-	operation belongsTo(element : uml2::Element) : Boolean is do
+	operation belongsTo(element : uml::Element) : Boolean is do
 		result := false
 		if name == getName(element) then
 			result := true
@@ -336,7 +335,7 @@ class HomonymColl {
 				// non referenced signature
 				var sign : SignColl init SignColl.new
 				sign.create(name, element)
-				if uml2::Property.isInstance(element) then
+				if uml::Property.isInstance(element) then
 					// the attribute collection must be the first
 					// (we choosed to let attributes unchanged
 					// because they are structural in Kermeta

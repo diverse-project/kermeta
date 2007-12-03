@@ -1,17 +1,17 @@
-/* $Id: IOElementsTable.kmt,v 1.1 2006-07-18 15:10:45 vmahe Exp $
+/* $Id: IOElementsTable.kmt,v 1.2 2007-12-03 09:12:06 vmahe Exp $
  * Creation date: July 17, 2006
  * License:
  * Copyright:
  * Authors:
  */
 
-package uml2::transformations;
+package uml::transformations;
 
 
 require kermeta
-require "../Uml2.kmt"
+require "../visitableUML.kmt"
 
-using uml2
+using uml
 
 class IOElementsTable
 {

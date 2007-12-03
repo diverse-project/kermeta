@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xmi:id="_tPOCIaLHEdqkGMDvm75SlQ" name="main">
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_tPOCIaLHEdqkGMDvm75SlQ" name="main">
   <eAnnotations xmi:id="_ce3wEMYWEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
     <details xmi:id="_ce3wEcYWEdqnU4rvBMdn4Q" key="uuid" value="11444010663850"/>
   </eAnnotations>

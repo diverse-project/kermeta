@@ -1,4 +1,4 @@
-/* $Id: prototype.kmt,v 1.1 2006-08-08 07:02:07 vmahe Exp $
+/* $Id: prototype.kmt,v 1.2 2007-12-03 09:12:01 vmahe Exp $
  * Creation date: August 7, 2006
  * License: GPL
  * Copyright: irisa.fr
@@ -52,7 +52,8 @@ class UserInterface
 	reference utility : utilities::StringConverter
 	
 	operation initialize(new_bank : kermeta::standard::OrderedSet<bank::Customer>) is do
-		customers := new_bank
+		customers.clear
+		customers.addAll(new_bank)
 		utility := utilities::StringConverter.new
 	end
 	

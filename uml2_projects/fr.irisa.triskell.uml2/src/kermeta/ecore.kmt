@@ -1,6 +1,6 @@
 package ecore;
  
-//require kermeta
+require kermeta
 
 /** This class refers to any EDataType feature*/
 class EAttribute inherits EStructuralFeature

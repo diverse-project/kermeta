@@ -1,15 +1,15 @@
-/* $Id: StaticTools.kmt,v 1.5 2006-08-31 16:31:28 vmahe Exp $
+/* $Id: StaticTools.kmt,v 1.6 2007-12-03 09:12:07 vmahe Exp $
  * Creation date: July 3, 2006
  * License:
  * Copyright:
  * Authors:
  */
 
-package uml2::transformations;
+package uml::transformations;
 
 require "UmlTool.kmt"
 
-using uml2
+using uml 
 
 /** Class dedicated to add a generalization between 2 classifiers */
 class Generalization_Tool
@@ -26,6 +26,31 @@ class Generalization_Tool
 /** Class dedicated to extract a interface from a classifier */
 class Interface_Tool
 {
+    operation addInterfaceRealization(interface : Interface, concrete : Class) : Void is do
+    	// dedect existing realization (for general interfacing on a collection of classes)
+    	// in order to avoid double realizations
+    	if concrete.interfaceRealization.select{ ir |
+	        ir.contract == interface and
+	        ir.implementingClassifier == concrete
+	   	}.size == 0 then
+     	
+	        var realization : InterfaceRealization init InterfaceRealization.new
+	        realization.contract := interface
+	        realization.implementingClassifier := concrete
+//	        concrete.interfaceRealization.add(realization)	// added by opposite
+	
+			// will feed derivate properties of InterfaceRealization type
+	        realization.supplier.add(interface)
+	        realization.client.add(concrete)
+	        
+	        // remove from concrete attributes which exist in interface
+	        cleanAttributesFromInterface(concrete, interface)
+	        
+	        // the concrete class must implement interface operations
+	        implementOperations(concrete, interface)
+        
+        end
+    end
 	/** given a concrete class, this method generates the corresponding Interface */
     operation extractInterface(concrete : Class) : Interface is do
         var ifce : Interface init Interface.new
@@ -36,16 +61,15 @@ class Interface_Tool
         ifce.name := nameForInterface(name)
         ifce.visibility := concrete.visibility
         
-        // add generalisation
-        var gt : Generalization_Tool init Generalization_Tool.new
-        gt.addGeneralization(ifce, concrete)
+        // link the concrete class with the interface
+        addInterfaceRealization(ifce, concrete)
         
         // put the attributes in the interface ...
         concrete.ownedAttribute.each{ u |
         	ifce.ownedAttribute.add(u)
         }
         // ... and erase them from concrete class
-        concrete.ownedAttribute.clear
+        cleanAttributesFromInterface(concrete, ifce)
         
         // the operations of the concrete class became those of interface
         var factory : UmlCloneFactory init UmlCloneFactory.new
@@ -57,32 +81,11 @@ class Interface_Tool
 	    	ifce.ownedOperation.add(op)
 	    	if u.isAbstract then
 	    		u.isAbstract := false
-	    		///////////////////////////////////////////////////////////////////
-	    		//FIXME : is there a need for body, since we are at UML model ???
 	    	end
         }
         result := ifce
     end
-    // prefixes & suffixes for (re)naming the elements
-	/** overwrite this method to change resulting name of the accessor */
-    operation prefixForInterface() : kermeta::standard::String is do result := "I" end
-	/** overwrite this method to change resulting name of the accessor */
-    operation suffixForInterface() : kermeta::standard::String is do result := "" end
-	/** overwrite this method to change resulting name of the accessor */
-    operation nameForInterface(name : kermeta::standard::String) : kermeta::standard::String is do
-    	var tool : Tools init Tools.new
-    	result := prefixForInterface + tool.upperFirstChar(name) + suffixForInterface
-    end
-	/** overwrite this method to change resulting name of the accessor */
-    operation prefixForImplementation() : kermeta::standard::String is do result := "" end
-	/** overwrite this method to change resulting name of the accessor */
-    operation suffixForImplementation() : kermeta::standard::String is do result := "" end
-	/** overwrite this method to change resulting name of the accessor */
-    operation nameForImplementation(name : kermeta::standard::String) : kermeta::standard::String is do
-    	var tool : Tools init Tools.new
-    	result := prefixForImplementation + tool.upperFirstChar(name) + suffixForImplementation
-    end
-	
+    
 	/** given a class, this method transform it in an abstract class
 	 * and generates the corresponding concrete class */
     operation concreteFromAbstract(classToAbstract : Class) : Class is do
@@ -110,20 +113,67 @@ class Interface_Tool
         // the operations of the abstract class must be abstract
         classToAbstract.ownedOperation.each{ u |
 	    	u.isAbstract := true
-	    	//////////////////////////////////////////////////////////////////////////////////////
-	    	//FIXME : is there a need for transfer an existing body, since we are at UML model ???
 	    }
         // the concrete class must be concrete
         concrete.isAbstract := false
         // the operations of the concrete class must be concrete
         concrete.ownedOperation.each{ u |
 	    	u.isAbstract := false
-	    	///////////////////////////////////////////////////////////////////
-	    	//FIXME : is there a need for body, since we are at UML model ???
         }
         result := concrete
     end
     
+    /** compare a concrete class to its interface and remove duplicate attributes */
+    operation cleanAttributesFromInterface(concrete : Class, interface : Interface) is do
+		interface.ownedAttribute.each{ a |
+			var tmp : Property
+			tmp := concrete.ownedAttribute.select{ attr | attr.name == a.name}.one
+			concrete.ownedAttribute.remove(tmp)
+		}
+	end
+    
+	operation implementOperations(concrete : Class, interface : Interface) is do
+		var compare : Compare_Tool init Compare_Tool.new
+		
+		interface.ownedOperation.each{ o |
+			if concrete.ownedOperation.select{ op | 
+				compare.isEqualOperation(op, o)
+			}.size == 0 then
+				// the operation presented in interface does not exist in concrete class
+		        var factory : UmlCloneFactory init UmlCloneFactory.new
+		        factory.initialize
+		        concrete.ownedOperation.add(factory.cloneOperation(o))
+	        
+			end
+		}
+	end
+    
+    // prefixes & suffixes for (re)naming the elements
+    
+	/** overwrite this method to change resulting name of the accessor */
+    operation prefixForInterface() : kermeta::standard::String is do result := "I" end
+    
+	/** overwrite this method to change resulting name of the accessor */
+    operation suffixForInterface() : kermeta::standard::String is do result := "" end
+    
+	/** overwrite this method to change resulting name of the accessor */
+    operation nameForInterface(name : kermeta::standard::String) : kermeta::standard::String is do
+    	var tool : Tools init Tools.new
+    	result := prefixForInterface + tool.upperFirstChar(name) + suffixForInterface
+    end
+    
+	/** overwrite this method to change resulting name of the accessor */
+    operation prefixForImplementation() : kermeta::standard::String is do result := "" end
+    
+	/** overwrite this method to change resulting name of the accessor */
+    operation suffixForImplementation() : kermeta::standard::String is do result := "" end
+    
+	/** overwrite this method to change resulting name of the accessor */
+    operation nameForImplementation(name : kermeta::standard::String) : kermeta::standard::String is do
+    	var tool : Tools init Tools.new
+    	result := prefixForImplementation + tool.upperFirstChar(name) + suffixForImplementation
+    end
+	
     /** this operation authorize the Valooder to erase attributes only after a specific work on them */
     operation clearAttributes(concrete : Class) is do
     	concrete.ownedAttribute.clear
@@ -198,10 +248,10 @@ class Accessor_Tool
 		op.name := nameForGetter(attr.name)
 		op.visibility := VisibilityKind.public
 		var returnPar : Parameter init Parameter.new
-		returnPar.name := nameForReturn(attr.name)
+//		returnPar.name := nameForReturn(attr.name)
 		returnPar.type := attr.type
 		returnPar.direction := ParameterDirectionKind.return
-		op.returnResult.add(returnPar)
+		op.ownedParameter.add(returnPar)
 		op.isAbstract := false
 		
 		// reading the upper value of the multiplicity
@@ -245,7 +295,7 @@ class Accessor_Tool
 		var op : Operation init Operation.new
 		op.visibility := VisibilityKind.public
 		op.isAbstract := false
-		var inPar : uml2::Parameter init Parameter.new
+		var inPar : Parameter init Parameter.new
 		inPar.type := attr.type
 		inPar.direction := ParameterDirectionKind.in
 		inPar.name := nameForSetterInput(attr.name)
@@ -354,8 +404,8 @@ class Association_Tool
 {
 	////////////////// non navigable links ///////////////////
 	
-    operation addSimpleAssociation(firstClass : Class,
-		                           secondClass : Class,
+    operation addSimpleAssociation(firstClass : Classifier,
+		                           secondClass : Classifier,
 		                           associationName : kermeta::standard::String,
 		                           firstEndName : kermeta::standard::String,
 		                           secondEndName : kermeta::standard::String) : Association is do 
@@ -366,8 +416,8 @@ class Association_Tool
         
         result := assoc
     end
-    operation addSimpleComposition(container : Class,
-		                           component : Class,
+    operation addSimpleComposition(container : Classifier,
+		                           component : Classifier,
 		                           associationName : kermeta::standard::String,
 		                           componentEndName : kermeta::standard::String) : Association is do 
         var assoc : Association init addSimpleAssociation(container, component, associationName, "", componentEndName)
@@ -378,7 +428,7 @@ class Association_Tool
         result := assoc
     end
     operation addSimpleAggregation(container : Class,
-		                           component : Class,
+		                           component : Classifier,
 		                           associationName : kermeta::standard::String,
 		                           componentEndName : kermeta::standard::String) : Association is do 
         var assoc : Association init addSimpleAssociation(container, component, associationName, "", componentEndName)
@@ -392,7 +442,7 @@ class Association_Tool
 	////////////////// one side navigable links ///////////////////
 	
     operation addOneSideNavigableAssociation(owningClass : Class,
-		                           navigatedClass : Class,
+		                           navigatedClass : Classifier,
 		                           associationName : kermeta::standard::String,
 		                           ownerEndName : kermeta::standard::String,
 		                           navigableEndName : kermeta::standard::String) : Association is do 
@@ -416,7 +466,7 @@ class Association_Tool
         result := assoc
     end
     operation addNavigableComposition(container : Class,
-    	                           component : Class,
+    	                           component : Classifier,
 		                           associationName : kermeta::standard::String,
     	                           compositionName : kermeta::standard::String) : Association is do 
         var assoc : Association init addOneSideNavigableAssociation(container, component, associationName, "", compositionName)
@@ -428,7 +478,7 @@ class Association_Tool
         result := assoc
     end
     operation addNavigableAggregation(container : Class,
-    	                           component : Class,
+    	                           component : Classifier,
 		                           associationName : kermeta::standard::String,
     	                           compositionName : kermeta::standard::String) : Association is do 
         var assoc : Association init addOneSideNavigableAssociation(container, component, associationName, "", compositionName)
@@ -441,7 +491,34 @@ class Association_Tool
     end
     
 	////////////////// two side navigable links ///////////////////
-	
+	// TODO
+}
+
+class Compare_Tool
+{
+	operation isEqualOperation(op1 : Operation, op2 : Operation) : kermeta::standard::Boolean is do
+		result := true
+		//compare names
+		if op1.name != op2.name then
+			result := false
+		else
+			// compare parameters
+			op1.ownedParameter.each{ p1 |
+				if op2.ownedParameter.select{ p2 |
+					p2.name == p1.name
+						and p2.type == p1.type
+						and p2.direction == p1.direction
+				}.size == 0 then result := false end
+			}
+			op2.ownedParameter.each{ p2 |
+				if op1.ownedParameter.select{ p1 |
+					p1.name == p2.name
+						and p1.type == p2.type
+						and p1.direction == p2.direction
+				}.size == 0 then result := false end
+			}
+		end
+	end 
 }
 
 class Tools
