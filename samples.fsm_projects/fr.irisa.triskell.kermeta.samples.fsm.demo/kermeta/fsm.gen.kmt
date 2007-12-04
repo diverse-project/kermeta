@@ -1,5 +1,7 @@
 package fsm;
 
+require kermeta
+
 class FSM
 {
 	attribute ownedState : State[0..*]#owningFSM
