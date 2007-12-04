@@ -5,8 +5,8 @@ package Class2RDBMS;
 
 require kermeta
 require "trace.kmt"
-require "../metamodels/ClassMM.ecore"
-require "../metamodels/RDBMSMM.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -212,8 +212,8 @@ class Main
         
         var repository : EMFRepository init EMFRepository.new    
         var resource : Resource init 
-        	repository.createResource("../models/out.xmi", 
-        							  "../metamodels/RDBMSMM.ecore")
+        	repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/out.xmi", 
+        							  "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
 	 	// Define a Root ...
 	 	resource.instances.add(outputModel)
 	 		 	
@@ -223,7 +223,7 @@ class Main
     
     operation loadClassModel() : ClassModel is do             
    		var repository : EMFRepository init EMFRepository.new             
-   		var resource : Resource init repository.getResource("../models/ClassModel.xmi")
+   		var resource : Resource init repository.getResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel.xmi")
        	resource.load()
       
        // result ?= resource.instances.one
