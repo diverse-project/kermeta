@@ -1,4 +1,4 @@
-/* $Id: FsmSampleExampleWizard.java,v 1.8 2007-10-23 13:42:08 dvojtise Exp $
+/* $Id: FsmSampleExampleWizard.java,v 1.9 2007-12-04 18:19:41 cfaucher Exp $
  * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
@@ -26,6 +26,7 @@ public class FsmSampleExampleWizard
 		// EMF library example model, edit and editor examples
 		List<ProjectDescriptor> projects = new ArrayList<ProjectDescriptor>(1);
 		projects.add(new ProjectDescriptor(FsmPlugin.PROJECT_NAME, "zips/fr.irisa.triskell.kermeta.samples.fsm.demo.zip", "fr.irisa.triskell.kermeta.samples.fsm.demo"));
+		projects.add(new ProjectDescriptor(FsmPlugin.PROJECT_NAME, "zips/fr.irisa.triskell.kermeta.samples.fsm.demoAspect.zip", "fr.irisa.triskell.kermeta.samples.fsm.demoAspect"));
 		return projects;
 	}
 }
