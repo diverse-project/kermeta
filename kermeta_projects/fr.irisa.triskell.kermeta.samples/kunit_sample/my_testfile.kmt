@@ -83,7 +83,7 @@ class MyTestCase inherits kermeta::kunit::TestCase
 		assert("bonjour".substring(1, 4)=="onj")
 	end
 	
-	operation testsize() : kermeta::standard::Integer is do
+	operation testsize() : Void is do
 		assert("BlaBleBli".size == 9)
 	end
 	
