@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.1 2007-09-14 08:20:42 ffleurey Exp $
+ $Id: plugin.xml,v 1.2 2007-12-05 18:14:48 dvojtise Exp $
 -->
 
 <plugin>
@@ -33,7 +33,7 @@
         id = "fr.irisa.triskell.kmLogo.ASM.presentation.ASMEditorID"
         name = "%_UI_ASMEditor_label"
         icon = "icons/full/obj16/ASMModelFile.gif"
-        extensions = "asm"
+        extensions = "asmlogo"
         class = "fr.irisa.triskell.kmLogo.ASM.presentation.ASMEditor" 
         contributorClass="fr.irisa.triskell.kmLogo.ASM.presentation.ASMActionBarContributor" >
     </editor>
