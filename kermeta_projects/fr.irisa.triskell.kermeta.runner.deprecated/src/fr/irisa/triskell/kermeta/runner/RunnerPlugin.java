@@ -1,4 +1,4 @@
-/* $Id: RunnerPlugin.java,v 1.19 2007-11-21 14:13:05 ftanguy Exp $
+/* $Id: RunnerPlugin.java,v 1.20 2007-12-05 10:46:02 cfaucher Exp $
  * Project: Kermeta.runner
  * File: runner.java
  * License: EPL
@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
@@ -27,6 +28,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.progress.UIJob;
 import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.kermeta.runner.console.ConsoleTerminateAction;
@@ -144,14 +146,22 @@ public class RunnerPlugin extends AbstractUIPlugin
 		errorDialog(message, null);
 	}
 
-	public static void errorDialog(String message, IStatus status)
+	public static void errorDialog(final String message, final IStatus status)
 	{
-
-		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		if (shell != null)
-		{
-			shell.getDisplay().syncExec(new DisplayErrorThread(shell, message,status));
-		}
+		
+		UIJob job = new UIJob("") {
+			@Override
+			public IStatus runInUIThread(IProgressMonitor monitor) {
+				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				if (shell != null)
+				{
+					shell.getDisplay().syncExec(new DisplayErrorThread(shell, message,status));
+				}
+				return null;
+			}
+		};
+		job.schedule();
+		
 	}
 	
 	public static void log(int fSeverity, String fText, Exception fException)
