@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.2 2007-12-05 18:14:48 dvojtise Exp $
+ $Id: plugin.xml,v 1.3 2007-12-05 18:42:45 dvojtise Exp $
 -->
 
 <plugin>
@@ -32,7 +32,7 @@
     <editor
         id = "fr.irisa.triskell.kmLogo.ASM.presentation.ASMEditorID"
         name = "%_UI_ASMEditor_label"
-        icon = "icons/full/obj16/ASMModelFile.gif"
+        icon = "icons/full/obj16/turtlemodel16_16.gif"
         extensions = "asmlogo"
         class = "fr.irisa.triskell.kmLogo.ASM.presentation.ASMEditor" 
         contributorClass="fr.irisa.triskell.kmLogo.ASM.presentation.ASMActionBarContributor" >
