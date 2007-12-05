@@ -22,6 +22,11 @@
                id="fr.irisa.triskell.kermeta.ket.menu.action">
          </action>
       </objectContribution>
-      
    </extension>
+   <extension
+         id="kmtt2kmt"
+         point="fr.irisa.triskell.kermeta.kpm.javaAction">
+      <Action class="fr.irisa.triskell.kermeta.ket.kpm.actions.Kmtt2Kmt"/>
+   </extension>
+   
 </plugin>

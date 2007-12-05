@@ -19,4 +19,5 @@ Require-Bundle: org.eclipse.text,
  fr.irisa.triskell.kermeta.kpm
 Export-Package: fr.irisa.triskell.kermeta.ket,
  fr.irisa.triskell.kermeta.ket.builder,
+ fr.irisa.triskell.kermeta.ket.kpm.actions,
  fr.irisa.triskell.kermeta.ket.parser

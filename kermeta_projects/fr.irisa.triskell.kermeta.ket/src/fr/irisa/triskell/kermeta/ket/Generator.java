@@ -1,4 +1,4 @@
-/* $Id: Generator.java,v 1.5 2007-12-03 16:51:52 cfaucher Exp $
+/* $Id: Generator.java,v 1.6 2007-12-05 10:07:41 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.ket
  * File       : Generator.java
  * License    : EPL
@@ -15,8 +15,13 @@
 package fr.irisa.triskell.kermeta.ket;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.StringBufferInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -101,15 +106,30 @@ public class Generator implements IObjectActionDelegate{
 	 public void generate( IFile kmttfile ){
 		 IJETParser p = new KetParser(nullTemplateResolver, new NullTagLibraryResolver() ,new HashMap());
 		 String outputURI = kmttfile.getLocation().removeFileExtension().addFileExtension("kmt").toOSString();
+		 generate(kmttfile, outputURI);
+	 }
+	 
+	 /**
+	  * 
+	  * @param kmttfile
+	  */
+	 public void generate( IFile kmttfile, String outputURI){
+		 IJETParser p = new KetParser(nullTemplateResolver, new NullTagLibraryResolver() ,new HashMap());
+		 String content = "";
 		 try {
-			 ITextFileBufferManager.DEFAULT.connect(kmttfile.getLocation(), null, new NullProgressMonitor());
-		} catch (CoreException e1) {
+			 FileInputStream stream = new FileInputStream(kmttfile.getLocation().toString());
+			 content = readAll(stream);
+//			 ITextFileBufferManager.DEFAULT.connect(kmttfile.getLocation(), null, new NullProgressMonitor());
+//		} catch (CoreException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+//			e1.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		 String s = ITextFileBufferManager.DEFAULT.getTextFileBuffer(kmttfile.getLocation(), null).getDocument().get();
+//		 String s = ITextFileBufferManager.DEFAULT.getTextFileBuffer(kmttfile.getLocation(), null).getDocument().get();
 		 
-			 JETCompilationUnit cu = (JETCompilationUnit) p.parse(s.toCharArray());
+			 JETCompilationUnit cu = (JETCompilationUnit) p.parse(content.toCharArray());
 			// 
 			 PrintWriter fo=null;
 			File f = new File(outputURI);
@@ -121,10 +141,27 @@ public class Generator implements IObjectActionDelegate{
 			 Visitor v =new Visitor(fo); 
 			 cu.accept(v);
 			 fo.flush();
-			 fo.close();
-			 
+			 fo.close();	 
 	 }
-
+	 
+	 private String readAll(InputStream in) { 
+		    StringBuffer output = new StringBuffer();
+		    try
+		    {
+		        int c; 
+		       // int charcount = 0; int linenum = 1; int c_old = -1;
+		        while ((c = in.read()) != -1) {
+		            output.append((char)c);
+		        }
+		        in.close();
+		    }
+		    catch (IOException e)
+		    {
+		        e.printStackTrace();
+		    }
+		    return output.toString();
+		}
+	 
 	/**
 	 * 
 	 */
