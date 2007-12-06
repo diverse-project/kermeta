@@ -14,12 +14,13 @@ require "../Standard.kmt"
 
 using kermeta::standard
 /**
- * This class mimic the behavior of the StringBuffer class in java, enabling better performance in log
- * strings
+ * This class mimic the behavior of the java's StringBuffer class. This enables better performance in long
+ * string concatenation.<br>
+ * <b>Only work on Strings</b>
  */
 class StringBuffer{
 	/**
-	 * Append a given string at the end of the given StringBuffer
+	 * Append a given string at the end of this StringBuffer
 	 * @param arg0 A string to append at the end of this StringBuffer
 	 * @return A reference to this object
 	 */
@@ -35,9 +36,4 @@ class StringBuffer{
 		stringValue?=extern fr::irisa::triskell::kermeta::runtime::basetypes::StringBuffer.toString(self)
 		result:=stringValue
 	end
-	
-	operation create(arg0: Integer):StringBuffer is do
-		result := void
-	end
-	
 }
