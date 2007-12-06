@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.16 2007-11-30 13:15:50 ftanguy Exp $
+/* $Id: OperationCallFrame.java,v 1.17 2007-12-06 14:44:50 ftanguy Exp $
 * Project : Kermeta Interpreter
 * File : OperationCallFrame.java
 * License : EPL
@@ -106,34 +106,34 @@ public class OperationCallFrame extends CallFrame {
     }
     
     protected void initialize(ArrayList<RuntimeObject> pParameters) {
-        
-    	/*
-    	 * 
-    	 * Checking the validity of the parameters
-    	 * 
-    	 */
-    	if ( operation.getOwnedParameter().size() != pParameters.size() ) {
-        	String expected = "";
-        	KM2KMTPrettyPrinter prettyprinter = new KM2KMTPrettyPrinter();
-        	for ( Parameter p : operation.getOwnedParameter() ) {
-        		if ( expected.equals("") )
-        			expected = (String) prettyprinter.ppTypeFromMultiplicityElement( p );
-        		else
-        			expected += ", " + (String) prettyprinter.ppTypeFromMultiplicityElement( p );
-        	}
-        	expected = "Expecting : " + expected;
-        	String found = "";
-        	for ( RuntimeObject ro : pParameters ) {
-    			Class c = (Class) ro.getMetaclass().getKCoreObject();
-        		if ( found.equals("") )
-        			found = KermetaModelHelper.NamedElement.qualifiedName(c.getTypeDefinition());
-        		else
-        			found += ", " + KermetaModelHelper.NamedElement.qualifiedName(c.getTypeDefinition());
-        	}
-        	found = "Found " + found;
-        	throw new Error("INTERNAL ERROR : Wrong number of arguments for the operation " + operation.getName() + ".\n " + expected + "\n" + found);
-        }
-    	
+        if ( pParameters != null ) {
+	    	/*
+	    	 * 
+	    	 * Checking the validity of the parameters
+	    	 * 
+	    	 */
+	    	if ( operation.getOwnedParameter().size() != pParameters.size() ) {
+	        	String expected = "";
+	        	KM2KMTPrettyPrinter prettyprinter = new KM2KMTPrettyPrinter();
+	        	for ( Parameter p : operation.getOwnedParameter() ) {
+	        		if ( expected.equals("") )
+	        			expected = (String) prettyprinter.ppTypeFromMultiplicityElement( p );
+	        		else
+	        			expected += ", " + (String) prettyprinter.ppTypeFromMultiplicityElement( p );
+	        	}
+	        	expected = "Expecting : " + expected;
+	        	String found = "";
+	        	for ( RuntimeObject ro : pParameters ) {
+	    			Class c = (Class) ro.getMetaclass().getKCoreObject();
+	        		if ( found.equals("") )
+	        			found = KermetaModelHelper.NamedElement.qualifiedName(c.getTypeDefinition());
+	        		else
+	        			found += ", " + KermetaModelHelper.NamedElement.qualifiedName(c.getTypeDefinition());
+	        	}
+	        	found = "Found " + found;
+	        	throw new Error("INTERNAL ERROR : Wrong number of arguments for the operation " + operation.getName() + ".\n " + expected + "\n" + found);
+	        }
+        }    	
         pushExpressionContext();
         Iterator<Parameter> it = operation.getOwnedParameter().iterator();       
         int i=0;
