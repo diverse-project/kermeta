@@ -3,20 +3,20 @@
   <FragmentsMM:PartitionModel>
     <propertyPartitions featureName="attr2" className="classA">
       <valuePartition>
-        <ranges xsi:type="FragmentsMM:StringRange" regexp=""/>
         <ranges xsi:type="FragmentsMM:StringRange" regexp="+"/>
+        <ranges xsi:type="FragmentsMM:StringRange" regexp=""/>
       </valuePartition>
     </propertyPartitions>
   </FragmentsMM:PartitionModel>
   <FragmentsMM:Fragments>
     <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.0/@valuePartition/@ranges.0" featureName="attr2" className="classA"/>
+        <constraints range="/0/@propertyPartitions.0/@valuePartition/@ranges.1" featureName="attr2" className="classA"/>
       </objectFragments>
     </fragments>
     <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.0/@valuePartition/@ranges.1" featureName="attr2" className="classA"/>
+        <constraints range="/0/@propertyPartitions.0/@valuePartition/@ranges.0" featureName="attr2" className="classA"/>
       </objectFragments>
     </fragments>
   </FragmentsMM:Fragments>

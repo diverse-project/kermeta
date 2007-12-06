@@ -1,4 +1,4 @@
-/* $Id: TestBuildPartitions.kmt,v 1.2 2007-09-24 14:55:05 cfaucher Exp $
+/* $Id: TestBuildPartitions.kmt,v 1.3 2007-12-06 20:25:16 jmottu Exp $
  * Creation date: January 12, 2007
  * License:
  * Copyright:
@@ -61,7 +61,7 @@ class Main
 	operation testSimpleMMIntFeaturewAllPart() : Void is do 
 		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMIntFeature.xmi",testDataDir+"SimpleMMIntFeature.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
-		model := objectsInModel(testResultsDir+"AllPartSimpleMMIntFeature.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMIntFeature.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 1, "valueParts testSimpleMMIntFeaturewAllPart") 
 		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMIntFeaturewAllPart") 
 		assertEqual(intRanges(model), 3, "intRanges testSimpleMMIntFeaturewAllPart") 
@@ -77,7 +77,7 @@ class Main
 	operation testSimpleMMOneAssowAllPart() : Void is do 
 		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMOneAsso.xmi",testDataDir+"SimpleMMOneAsso.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllPartSimpleMMOneAsso.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMOneAsso.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 0, "valueParts testSimpleMMOneAssowAllPart") 
 		assertEqual(multiplicityParts(model), 2, "multiplicityParts testSimpleMMOneAssowAllPart") 
 		assertEqual(intRanges(model), 4, "intRanges testSimpleMMOneAssowAllPart") 
@@ -93,7 +93,7 @@ class Main
 	operation testSimpleMMBoolFeaturewAllPart() : Void is do 
 		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMBoolFeature.xmi",testDataDir+"SimpleMMBoolFeature.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllPartSimpleMMBoolFeature.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMBoolFeature.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 1, "valueParts testSimpleMMBoolFeaturewAllPart") 
 		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMBoolFeaturewAllPart") 
 		assertEqual(intRanges(model), 0, "intRanges testSimpleMMBoolFeaturewAllPart") 
@@ -109,7 +109,7 @@ class Main
 	operation testSimpleMMIntFeatureMultiplewAllPart() : Void is do 
 		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMIntFeatureMultiple.xmi",testDataDir+"SimpleMMIntFeatureMultiple.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllPartSimpleMMIntFeatureMultiple.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMIntFeatureMultiple.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 1, "valueParts testSimpleMMIntFeatureMultiplewAllPart") 
 		assertEqual(multiplicityParts(model), 1, "multiplicityParts testSimpleMMIntFeatureMultiplewAllPart") 
 		assertEqual(intRanges(model), 6, "intRanges testSimpleMMIntFeatureMultiplewAllPart") 
@@ -125,7 +125,7 @@ class Main
 	operation testSimpleMMBoolFeatureMultiplewAllPart() : Void is do 
 		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMBoolFeatureMultiple.xmi",testDataDir+"SimpleMMBoolFeatureMultiple.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllPartSimpleMMBoolFeatureMultiple.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMBoolFeatureMultiple.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 1, "valueParts testSimpleMMBoolFeatureMultiplewAllPart") 
 		assertEqual(multiplicityParts(model), 1, "multiplicityParts testSimpleMMBoolFeatureMultiplewAllPart") 
 		assertEqual(intRanges(model), 3, "intRanges testSimpleMMBoolFeatureMultiplewAllPart") 
@@ -141,7 +141,7 @@ class Main
 	operation testSimpleMMStringFeaturewAllPart() : Void is do 
 		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMStringFeature.xmi",testDataDir+"SimpleMMStringFeature.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllPartSimpleMMStringFeature.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMStringFeature.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 1, "valueParts testSimpleMMStringFeaturewAllPart") 
 		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMStringFeaturewAllPart") 
 		assertEqual(intRanges(model), 0, "intRanges testSimpleMMStringFeaturewAllPart") 
@@ -157,7 +157,7 @@ class Main
 	operation testSimpleMMStringFeatureSinglewAllPart() : Void is do 
 		buildFragmentswAllPart(testResultsDir+"AllPartSimpleMMStringFeatureSingle.xmi",testDataDir+"SimpleMMStringFeatureSingle.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllPartSimpleMMStringFeatureSingle.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllPartSimpleMMStringFeatureSingle.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 1, "valueParts testSimpleMMStringFeatureSinglewAllPart") 
 		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMStringFeatureSinglewAllPart") 
 		assertEqual(intRanges(model), 0, "intRanges testSimpleMMStringFeatureSinglewAllPart") 
@@ -173,7 +173,7 @@ class Main
 	operation teststatechartwAllPart() : Void is do 
 		buildFragmentswAllPart(testResultsDir+"AllPartStatechart.xmi",testDataDir+"statechart.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllPartStatechart.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllPartStatechart.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 4, "valueParts teststatechartwAllPart") 
 		assertEqual(multiplicityParts(model), 10, "multiplicityParts teststatechartwAllPart") 
 		assertEqual(intRanges(model), 24, "intRanges teststatechartwAllPart")
@@ -189,7 +189,7 @@ class Main
 	operation testSimpleMMIntFeaturewAllRanges() : Void is do 
 		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMIntFeature.xmi",testDataDir+"SimpleMMIntFeature.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
-		model := objectsInModel(testResultsDir+"AllRangesSimpleMMIntFeature.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMIntFeature.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 1, "valueParts testSimpleMMIntFeaturewAllRanges") 
 		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMIntFeaturewAllRanges") 
 		assertEqual(intRanges(model), 3, "intRanges testSimpleMMIntFeaturewAllRanges") 
@@ -205,7 +205,7 @@ class Main
 	operation testSimpleMMOneAssowAllRanges() : Void is do 
 		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMOneAsso.xmi",testDataDir+"SimpleMMOneAsso.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllRangesSimpleMMOneAsso.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMOneAsso.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 0, "valueParts testSimpleMMOneAssowAllRanges") 
 		assertEqual(multiplicityParts(model), 2, "multiplicityParts testSimpleMMOneAssowAllRanges") 
 		assertEqual(intRanges(model), 4, "intRanges testSimpleMMOneAssowAllRanges") 
@@ -221,7 +221,7 @@ class Main
 	operation testSimpleMMBoolFeaturewAllRanges() : Void is do 
 		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMBoolFeature.xmi",testDataDir+"SimpleMMBoolFeature.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllRangesSimpleMMBoolFeature.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMBoolFeature.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 1, "valueParts testSimpleMMBoolFeaturewAllRanges") 
 		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMBoolFeaturewAllRanges") 
 		assertEqual(intRanges(model), 0, "intRanges testSimpleMMBoolFeaturewAllRanges") 
@@ -237,7 +237,7 @@ class Main
 	operation testSimpleMMIntFeatureMultiplewAllRanges() : Void is do 
 		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMIntFeatureMultiple.xmi",testDataDir+"SimpleMMIntFeatureMultiple.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllRangesSimpleMMIntFeatureMultiple.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMIntFeatureMultiple.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 1, "valueParts testSimpleMMIntFeatureMultiplewAllRanges") 
 		assertEqual(multiplicityParts(model), 1, "multiplicityParts testSimpleMMIntFeatureMultiplewAllRanges") 
 		assertEqual(intRanges(model), 6, "intRanges testSimpleMMIntFeatureMultiplewAllRanges") 
@@ -253,7 +253,7 @@ class Main
 	operation testSimpleMMBoolFeatureMultiplewAllRanges() : Void is do 
 		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMBoolFeatureMultiple.xmi",testDataDir+"SimpleMMBoolFeatureMultiple.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllRangesSimpleMMBoolFeatureMultiple.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMBoolFeatureMultiple.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 1, "valueParts testSimpleMMBoolFeatureMultiplewAllRanges") 
 		assertEqual(multiplicityParts(model), 1, "multiplicityParts testSimpleMMBoolFeatureMultiplewAllRanges") 
 		assertEqual(intRanges(model), 3, "intRanges testSimpleMMBoolFeatureMultiplewAllRanges") 
@@ -269,7 +269,7 @@ class Main
 	operation testSimpleMMStringFeaturewAllRanges() : Void is do 
 		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMStringFeature.xmi",testDataDir+"SimpleMMStringFeature.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllRangesSimpleMMStringFeature.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMStringFeature.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 1, "valueParts testSimpleMMStringFeaturewAllRanges") 
 		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMStringFeaturewAllRanges") 
 		assertEqual(intRanges(model), 0, "intRanges testSimpleMMStringFeaturewAllRanges") 
@@ -285,7 +285,7 @@ class Main
 	operation testSimpleMMStringFeatureSinglewAllRanges() : Void is do 
 		buildFragmentswAllRanges(testResultsDir+"AllRangesSimpleMMStringFeatureSingle.xmi",testDataDir+"SimpleMMStringFeatureSingle.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllRangesSimpleMMStringFeatureSingle.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllRangesSimpleMMStringFeatureSingle.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 1, "valueParts testSimpleMMStringFeatureSinglewAllRanges") 
 		assertEqual(multiplicityParts(model), 0, "multiplicityParts testSimpleMMStringFeatureSinglewAllRanges") 
 		assertEqual(intRanges(model), 0, "intRanges testSimpleMMStringFeatureSinglewAllRanges") 
@@ -301,7 +301,7 @@ class Main
 	operation teststatechartwAllRanges() : Void is do 
 		buildFragmentswAllRanges(testResultsDir+"AllRangesStatechart.xmi",testDataDir+"statechart.ecore")
 		var model : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new 
-		model := objectsInModel(testResultsDir+"AllRangesStatechart.xmi", "./ciMM.ecore")
+		model := objectsInModel(testResultsDir+"AllRangesStatechart.xmi", "platform:/resource/org.kermeta.testing.mmcc/metamodels/ciMM.ecore")
 		assertEqual(valueParts(model), 4, "valueParts teststatechartwAllRanges") 
 		assertEqual(multiplicityParts(model), 10, "multiplicityParts teststatechartwAllRanges") 
 		assertEqual(intRanges(model), 24, "intRanges teststatechartwAllRanges")

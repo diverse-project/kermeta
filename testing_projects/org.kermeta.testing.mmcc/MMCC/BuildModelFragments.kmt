@@ -1,4 +1,4 @@
-/* $Id: BuildModelFragments.kmt,v 1.3 2007-09-24 14:55:05 cfaucher Exp $
+/* $Id: BuildModelFragments.kmt,v 1.4 2007-12-06 20:25:16 jmottu Exp $
  * Creation date: January 9, 2007
  * Authors: Benoit Baudry
  *
@@ -36,10 +36,10 @@ class BuildModelFragments
     */
     operation buildFragments(sourceMMName : String, testCriterion : String) is do
     	/*This is the absolute path where tmp file ModelsCoverageChecker will be generated*/
-    	//var tmpPath : String init "E:\\eclipseK\\workspaceMMCC\\ModelTransfoTestData\\tmp\\"
+    	//var tmpPath : String init "C:/WORK/Workspaces/runtime-kermetaCVS_kermetaNight/org.kermeta.testing.mmcc/tmp/"
     	
-    	var tmpPath : String init "C:/NOSAVE/eclipse_kermeta_0.4.1_windows/workspace/org.kermeta.testing.mmcc/tmp"
-    	
+ 	  	var tmpPath : String init "C:/NOSAVE/eclipse_kermeta_0.4.1_windows/workspace/org.kermeta.testing.mmcc/tmp/"
+     	
     	/*This is the absolute name of the model that will contain the partitions and the fragments*/
     	var fragmentsModelName : String init "platform:/resource/org.kermeta.testing.mmcc/tmp/"+testCriterion+"Fragments.xmi"
     	
@@ -86,7 +86,7 @@ class BuildModelFragments
 		if (criterion != void) then
  			setFragments := criterion.generateFragments(partitions) 
  			stdio.writeln("There are "+setFragments.fragments.size.toString+" model fragments.")
- //			setFragments.fragments.each{ fragment | stdio.writeln(fragment.toString+"\n")} 	
+ 			setFragments.fragments.each{ fragment | stdio.writeln(fragment.toString+"\n")} 	
  		//If the crietrion is not correct nothing is generated
 		else
 			stdio.writeln("In the absence of a valid test criterion, no model fragment could be generated.")

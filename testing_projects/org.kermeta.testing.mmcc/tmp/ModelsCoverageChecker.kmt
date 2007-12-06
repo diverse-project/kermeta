@@ -4,7 +4,7 @@
 package mmcc; 
 
 require kermeta 
-require "platform:/resource/org.kermeta.testing.mmcc/TestData/statechart.ecore"
+require "platform:/resource/org.kermeta.testing.mmcc/TestData/demo.ecore"
 require "platform:/resource/org.kermeta.testing.mmcc/MMCC/CheckInputModels.kmt" 
 using kermeta::persistence 
 using kermeta::standard 
@@ -16,19 +16,16 @@ class ModelsCoverageChecker{
 		var modelsToCheck : OrderedSet<EMFResource> init OrderedSet<EMFResource>.new
 		var repository : EMFRepository init EMFRepository.new 
 		models.each{model | 
-			var resource : EMFResource    resource ?= repository.createResource(model, "platform:/resource/org.kermeta.testing.mmcc/TestData/statechart.ecore") 
+			var resource : EMFResource    resource ?= repository.createResource(model, "platform:/resource/org.kermeta.testing.mmcc/TestData/demo.ecore") 
 			resource.load 
 			modelsToCheck.add(resource) 
 		} 
 
 		var mmClasses : Class[*] init OrderedSet<Class>.new 
-		mmClasses.add(statechart::State)
-		mmClasses.add(statechart::AbstractState)
-		mmClasses.add(statechart::Composite)
-		mmClasses.add(statechart::Transition)
-		mmClasses.add(statechart::Statechart)
+		mmClasses.add(demo::ClassA)
+		mmClasses.add(demo::ClassB)
 
 		var c: CheckInputModels init CheckInputModels.new 
-		c.checkInputModels(repository,modelsToCheck, "platform:/resource/org.kermeta.testing.mmcc/tmp/AllPartFragments.xmi","platform:/resource/org.kermeta.testing.mmcc/TestData/statechart.ecore", mmClasses) 
+		c.checkInputModels(repository,modelsToCheck, "platform:/resource/org.kermeta.testing.mmcc/tmp/AllPartFragments.xmi","platform:/resource/org.kermeta.testing.mmcc/TestData/demo.ecore", mmClasses) 
 	end 
 } 

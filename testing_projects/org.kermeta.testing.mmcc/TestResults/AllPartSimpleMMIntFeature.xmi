@@ -4,21 +4,21 @@
     <propertyPartitions featureName="attr2" className="classA">
       <valuePartition>
         <ranges xsi:type="FragmentsMM:IntegerRange" lower="1" upper="1"/>
-        <ranges xsi:type="FragmentsMM:IntegerRange" lower="0" upper="0"/>
         <ranges xsi:type="FragmentsMM:IntegerRange" lower="2" upper="20000"/>
+        <ranges xsi:type="FragmentsMM:IntegerRange" lower="0" upper="0"/>
       </valuePartition>
     </propertyPartitions>
   </FragmentsMM:PartitionModel>
   <FragmentsMM:Fragments>
     <fragments>
       <objectFragments>
+        <constraints range="/0/@propertyPartitions.0/@valuePartition/@ranges.2" featureName="attr2" className="classA"/>
+      </objectFragments>
+      <objectFragments>
         <constraints range="/0/@propertyPartitions.0/@valuePartition/@ranges.0" featureName="attr2" className="classA"/>
       </objectFragments>
       <objectFragments>
         <constraints range="/0/@propertyPartitions.0/@valuePartition/@ranges.1" featureName="attr2" className="classA"/>
-      </objectFragments>
-      <objectFragments>
-        <constraints range="/0/@propertyPartitions.0/@valuePartition/@ranges.2" featureName="attr2" className="classA"/>
       </objectFragments>
     </fragments>
   </FragmentsMM:Fragments>

@@ -1,4 +1,4 @@
-/* $Id: ModelFragmentsGenerator.kmt,v 1.1 2007-09-14 13:08:05 ffleurey Exp $
+/* $Id: ModelFragmentsGenerator.kmt,v 1.2 2007-12-06 20:25:16 jmottu Exp $
  * Creation date: July 10, 2007
  * License:
  * Copyright:
@@ -32,11 +32,13 @@ class ModelFragmentsGenerator
 
 	/*This oepration defines different configuration for model fragments generation.*/
 	operation main() : Void is do 
-		buildFragments("platform:/resource/org.kermeta.testing.mmcc/TestData/statechart.ecore","AllPart")
+//		buildFragments("platform:/resource/org.kermeta.testing.mmcc/TestData/statechart.ecore","AllPart")
 //		buildFragments("platform:/resource/org.kermeta.testing.mmcc/TestData/statechart.ecore","AllRanges")
 //		buildFragments("platform:/resource/org.kermeta.testing.mmcc/TestData/SimpleMMIntFeature.ecore","AllPart")
 //		buildFragments("platform:/resource/org.kermeta.testing.mmcc/TestData/classModel.ecore","AllRanges")
 //		buildFragments("platform:/resource/org.kermeta.testing.mmcc/TestData/classModel.ecore","AllPart")
+		buildFragments("platform:/resource/org.kermeta.testing.mmcc/TestData/demo.ecore","AllPart")
+
 	end
 	
 }

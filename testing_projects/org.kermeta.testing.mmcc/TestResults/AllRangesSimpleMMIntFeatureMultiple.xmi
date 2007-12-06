@@ -3,14 +3,14 @@
   <FragmentsMM:PartitionModel>
     <propertyPartitions featureName="attr2" className="classA">
       <valuePartition>
-        <ranges xsi:type="FragmentsMM:IntegerRange" lower="2" upper="20000"/>
         <ranges xsi:type="FragmentsMM:IntegerRange" lower="0" upper="0"/>
+        <ranges xsi:type="FragmentsMM:IntegerRange" lower="2" upper="20000"/>
         <ranges xsi:type="FragmentsMM:IntegerRange" lower="1" upper="1"/>
       </valuePartition>
       <multiplicityPartition>
+        <ranges lower="3" upper="3"/>
         <ranges lower="0" upper="0"/>
         <ranges lower="1" upper="2"/>
-        <ranges lower="3" upper="3"/>
       </multiplicityPartition>
     </propertyPartitions>
   </FragmentsMM:PartitionModel>
@@ -18,6 +18,11 @@
     <fragments>
       <objectFragments>
         <constraints range="/0/@propertyPartitions.0/@valuePartition/@ranges.0" featureName="attr2" className="classA"/>
+      </objectFragments>
+    </fragments>
+    <fragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.0/@valuePartition/@ranges.2" featureName="attr2" className="classA"/>
       </objectFragments>
     </fragments>
     <fragments>
@@ -33,11 +38,6 @@
     <fragments>
       <objectFragments>
         <constraints range="/0/@propertyPartitions.0/@multiplicityPartition/@ranges.2" featureName="attr2" className="classA"/>
-      </objectFragments>
-    </fragments>
-    <fragments>
-      <objectFragments>
-        <constraints range="/0/@propertyPartitions.0/@valuePartition/@ranges.2" featureName="attr2" className="classA"/>
       </objectFragments>
     </fragments>
     <fragments>

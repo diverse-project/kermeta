@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<demo:ClassA xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:demo="http://demo.ecore" xsi:schemaLocation="http://demo.ecore demo.ecore">
+  <b href="demoModel.xmi#/"/>
+</demo:ClassA>

@@ -40,6 +40,8 @@ class TestCheckInputModels
  		var model : Sequence<kermeta::reflection::Object>
  		resource.load
  		model:=check.getObjectsInModel(resource)
+ 		stdio.writeln(resource.uri.toString)
+ 		stdio.writeln(model.size.toString)
  		assertEqual(5, model.size, "test1")	  	
     end
 

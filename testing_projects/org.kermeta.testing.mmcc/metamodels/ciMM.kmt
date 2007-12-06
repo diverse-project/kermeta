@@ -1,4 +1,4 @@
-/* $Id: ciMM.kmt,v 1.1 2007-09-14 13:08:06 ffleurey Exp $
+/* $Id: ciMM.kmt,v 1.2 2007-12-06 20:25:16 jmottu Exp $
  * Creation date: January 12, 2006
  * Author: Benoit Baudry
  * This package contains the metamodel for partitions, model and object fragments
@@ -14,6 +14,8 @@
  */
 
 package FragmentsMM;
+
+require kermeta
 
 using kermeta::standard 
 using kermeta::reflection
@@ -70,7 +72,7 @@ class BooleanRange inherits Range
 	attribute boolValue : kermeta::standard::Boolean
 	
 	//checks that the actualBool is equal to the boolValue
-	operation isContained (actualBool: Object) : kermeta::standard::Boolean is do
+	method isContained (actualBool: Object) : kermeta::standard::Boolean is do
 		result := (actualBool==boolValue)
 	end
 
@@ -93,7 +95,8 @@ class StringRange inherits Range
 	//	if regexp="+" the actualString can be any string that is different from ""
 	//	if regexp="" the actualString can be only ""
 	//	if regexp is any string the actualString must be equal to this string
-	operation isContained (actualString: kermeta::standard::String) : kermeta::standard::Boolean is do
+	method isContained (actualString: Object) : kermeta::standard::Boolean is do
+		result := void
 		if (regexp=="+" and actualString != "") then	
 			result := true
 		else 
@@ -191,22 +194,22 @@ class ValuePartition inherits Partition
 
 	attribute ranges : Range[0..*]#valuePartition
 	
-	operation getRanges () : Range[0..*] is do
+	method getRanges () : Range[0..*] is do
 		var res : Range[0..*] init OrderedSet<Range>.new
 		ranges.each{ r | res.add(r)}
 		result:=res
 	end
 	
-	operation getFeatureName () : kermeta::standard::String is do
+	method getFeatureName () : kermeta::standard::String is do
 		result := propertyPartition.featureName
 	end
 	
-	operation getClassName () : kermeta::standard::String is do
+	method getClassName () : kermeta::standard::String is do
 		result := propertyPartition.className
 	end
 	
 	/* pre-condition : range included in ranges*/
-	operation isObjectInRange (oToCheck: Object, range:Range) : Boolean is do
+	method isObjectInRange (oToCheck: Object, range:Range) : Boolean is do
 		// properties collects all the properties of the object and the inherited properties
 		var properties : Collection<Property> init getAllPropertiesOfClass(oToCheck.getMetaClass.typeDefinition.asType(ClassDefinition))
 		var feature : Property  
@@ -235,22 +238,22 @@ class MultiplicityPartition inherits Partition
 
 	attribute ranges : IntegerRange [0..*]#multiplicityPartition
 	
-	operation getRanges () : Range[0..*] is do
+	method getRanges () : Range[0..*] is do
 		var res : Range[0..*] init OrderedSet<Range>.new
 		ranges.each{ r | res.add(r)}
 		result:=res
 	end
 	
-	operation getFeatureName () : kermeta::standard::String is do
+	method getFeatureName () : kermeta::standard::String is do
 		result := propertyPartition.featureName
 	end
 	
-	operation getClassName () : kermeta::standard::String is do
+	method getClassName () : kermeta::standard::String is do
 		result := propertyPartition.className
 	end
 
 	/* pre-condition : range included in ranges*/
-	operation isObjectInRange (oToCheck: Object, range:Range) : Boolean is do
+	method isObjectInRange (oToCheck: Object, range:Range) : Boolean is do
 		// properties collects all the properties of the object and the inherited properties
 		var properties : Collection<Property> init getAllPropertiesOfClass(oToCheck.getMetaClass.typeDefinition.asType(ClassDefinition))
 		var feature : Property  

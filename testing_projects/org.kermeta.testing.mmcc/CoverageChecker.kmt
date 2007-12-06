@@ -1,4 +1,4 @@
-/* $Id: CoverageChecker.kmt,v 1.1 2007-09-14 13:08:05 ffleurey Exp $
+/* $Id: CoverageChecker.kmt,v 1.2 2007-12-06 20:25:16 jmottu Exp $
  * Creation date: July 10, 2007
  * License:
  * Copyright:
@@ -37,8 +37,9 @@ class CoverageChecker
 	/* This operation calls the coverage check for different sets of models */
 	operation main() : Void is do 
 		/*To run these checks, ModelsCoverageChecker must have been generated with statechart.ecore as the input metamodel*/
-		checkCoverageOfModels(buildStatechartsSet1)
+//		checkCoverageOfModels(buildStatechartsSet1)
 //		checkCoverageOfModels(buildStatechartsSet2)
+		checkCoverageOfModels(buildStatechartsSet3)
 
 		/*To run these checks, ModelsCoverageChecker must have been generated with SimpleMMIntFeature.ecore as the input metamodel*/
 //		checkCoverageOfModels(buildSimpleMMIntFeatureSet)		
@@ -74,6 +75,14 @@ class CoverageChecker
 		models.add(testDataDir+"Statechart3.xmi")
 		models.add(testDataDir+"Statechart5.xmi")
 		models.add(testDataDir+"Statechart6.xmi")	
+		result := models
+	end
+	
+	operation buildStatechartsSet3() : OrderedSet<String> is do
+		var testDataDir : String init "platform:/resource/org.kermeta.testing.mmcc/TestData/"
+		var models : OrderedSet<String>
+		models := OrderedSet<String>.new
+		models.add(testDataDir+"demoClassB.xmi")
 		result := models
 	end
 	
