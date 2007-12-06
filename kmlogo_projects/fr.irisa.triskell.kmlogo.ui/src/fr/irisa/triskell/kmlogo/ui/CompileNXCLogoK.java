@@ -1,4 +1,4 @@
-/* $Id: CompileNXCLogoK.java,v 1.4 2007-11-30 21:14:09 dvojtise Exp $
+/* $Id: CompileNXCLogoK.java,v 1.5 2007-12-06 14:47:17 dvojtise Exp $
  * Project   : KmLogo
  * File      : CompileNXCLogoK.java
  * License   : EPL
@@ -28,6 +28,16 @@ public class CompileNXCLogoK {
 	public static final String LOGO_COMPILER_KERMETA_CODE = "platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoNXCCompiler.kmt";
 	public static void run(String file, String out, IOConsole console) {
 		System.out.println("run FixModel");
+		
+		/*
+		 // merge in user projet .bin directory
+		// create intermediate files into the project of the user
+		IFile file = ResourceHelper.getIFile( fileURI );
+	    IProject project = file.getProject();
+	    String binDirectory = "platform:/resource" + project.getFullPath().toString() + "/.bin";
+	    KermetaInterpreter inter = new KermetaInterpreter(LOGO_COMPILER_KERMETA_CODE, binDirectory , null);
+		*/
+		// merge in memory
 		
 		KermetaInterpreter inter = new KermetaInterpreter(LOGO_COMPILER_KERMETA_CODE, null, true);
 		inter.setKStream(console);

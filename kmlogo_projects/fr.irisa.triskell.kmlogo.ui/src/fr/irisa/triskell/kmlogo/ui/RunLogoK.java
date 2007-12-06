@@ -1,4 +1,4 @@
-/* $Id: RunLogoK.java,v 1.5 2007-11-30 21:14:09 dvojtise Exp $
+/* $Id: RunLogoK.java,v 1.6 2007-12-06 14:47:35 dvojtise Exp $
  * Project   : kmLogo
  * File      : RunLogoK.java
  * License   : EPL
@@ -17,23 +17,35 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Platform;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public class RunLogoK {
 	public static final String LOGO_SIMULATOR_KERMETA_CODE = "platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoSimulator.kmt";
 	
-	public static void run(String file, IOConsole console)  {
+	public static void run(String fileURI, IOConsole console)  {
 		System.out.println("run FixModel");
 		
 		//KermetaUnit unit = IOPlugin.getDefault().loadKermetaUnit("platform:/plugin/fr.irisa.triskell.kmlogo.model/model/LogoSimulator.kmt", new NullProgressMonitor());
 		
 		
+		/*
+		 // merge in user projet .bin directory
+		// create intermediate files into the project of the user
+		IFile file = ResourceHelper.getIFile( fileURI );
+	    IProject project = file.getProject();
+	    String binDirectory = "platform:/resource" + project.getFullPath().toString() + "/.bin";
+	    KermetaInterpreter inter = new KermetaInterpreter(LOGO_SIMULATOR_KERMETA_CODE, binDirectory , null);
+		*/
+		// merge in memory
 		KermetaInterpreter inter = new KermetaInterpreter(LOGO_SIMULATOR_KERMETA_CODE, null, true);
-		inter.setKStream(console);
+	    inter.setKStream(console);
 		// This is the operation to call
 		try {
 			inter.setEntryPoint("kmLogo::Interpreter", "execute");
@@ -43,7 +55,7 @@ public class RunLogoK {
 		}
 		// These are the parameters
 		ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
-		params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(file, inter.getMemory().getROFactory()));
+		params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(fileURI, inter.getMemory().getROFactory()));
 		inter.setEntryParameters(params);
 		// And we launch the interpreter
 		
