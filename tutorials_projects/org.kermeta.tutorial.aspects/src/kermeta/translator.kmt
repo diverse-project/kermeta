@@ -1,0 +1,211 @@
+/* $Id: translator.kmt,v 1.1 2007-12-06 22:50:36 vmahe Exp $
+ * Creation date: December 3, 2007
+ * License:	EPL
+ * Copyright: INRIA 2007
+ * Authors: Vincent Mahe <vmahe@irisa.fr>
+ */
+@mainClass "uml2fsm::Translator"
+@mainOperation "main"
+
+
+package uml2fsm;
+
+require kermeta
+require "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore"
+require "platform:/plugin/fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore"
+
+class Translator
+{
+	reference umlModel : uml::Model
+	reference fsmModel : fsm::FSM
+	reference table : kermeta::utils::Hashtable<uml::Element, kermeta::standard::Object>
+	
+	operation main() : Void is do 
+		
+		//////////// first : load the UML model //////////////
+		
+		var repo : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+		var inResource : kermeta::persistence::Resource
+		// Rem : .bin/ dir => relative paths are non trivial.... 
+		inResource := repo.getResource("platform:/resource/org.kermeta.formation.basics/model/MyStateChart.uml")
+		umlModel ?= inResource.instances.one
+		// a eye on what we loaded
+		stdio.writeln("The model we loaded : "+umlModel.toString)
+		
+		//////////// second : navigate through the model ///////////////
+		
+		// NB : needs UML2 => requirement
+		umlModel.packagedElement.each{ e |
+			stdio.writeln("Packaged Element : " + e.name)
+		}
+		
+		//////////// third : need a complete browsing of the machine
+		
+		// We must write Visitor methods before implementing our on treatment
+		var p : uml::Package
+		p ?= umlModel.packagedElement.one
+		if p != void then
+			p.packagedElement.each{ e |
+				var machine : uml::StateMachine
+				machine ?= e
+				if machine != void then visitStateMachine(machine) end 
+			}
+		end
+		
+		//////////// fourth : build on-the-fly FSM corresponding model
+		
+		// NB : need knowledge about FSM:
+		//		- the "model" is FSM => only one state machine
+		//		- states know their transitions
+		//		- transitions know their states
+		// all these points mean we need a "2-pass" translation
+		//	=> 2 new classes (see bottom of the file)
+		// NB : need 2 pass => hashtable for storage
+		initialize
+		var machine : uml::StateMachine
+		machine ?= p.packagedElement.one
+		var firstPass : Uml2Fsm_Pass1 init Uml2Fsm_Pass1.new
+		firstPass.initialize(table)
+		firstPass.visitStateMachine(machine)
+		
+		var secondPass : Uml2Fsm_Pass2 init Uml2Fsm_Pass2.new
+		secondPass.initialize(table)
+		secondPass.visitStateMachine(machine)
+		
+		///////////// fifth : save the resulting FSM
+		
+		var resultFsm : fsm::FSM
+		resultFsm ?= table.getValue(machine)
+		
+		var outRepo : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+		var outResource : kermeta::persistence::Resource
+		// Rem : .bin/ dir => relative paths are non trivial.... 
+		outResource := repo.createResource("platform:/resource/org.kermeta.formation.basics/model/MyStateChart.fsm",
+											"platform:/plugin/fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore")
+		outResource.instances.add(resultFsm)
+		outResource.save
+	end
+	
+	operation visitStateMachine(node : uml::StateMachine) is do
+		stdio.writeln(" StateMachine : "+node.name)
+		node.region.each{ r | visitRegion(r) }
+		stdio.writeln(" StateMachine's end")
+	end
+	
+	operation visitRegion(node : uml::Region) is do
+		stdio.writeln("--- Region : "+node.name)
+		node.subvertex.each{ sv | visitVertex(sv) }
+		node.transition.each{ t | visitTransition(t) }
+		stdio.writeln("--- Region's end")
+	end
+	
+	/* incoming and outgoing are derivated properties
+	  because the link is owned by transitions */
+	operation visitVertex(node : uml::Vertex) is do
+		stdio.writeln("      --- Vertex : "+node.name)
+	end
+	
+	operation visitTransition(node : uml::Transition) is do
+		stdio.writeln("   --- Transition : "+node.name)
+		stdio.writeln("      source vertex : " + node.source.name)
+		stdio.writeln("      targeted vertex : " + node.target.name)
+		stdio.writeln("   --- Transition's end")
+	end
+	
+	operation initialize() is do
+		table := kermeta::utils::Hashtable<uml::Element, kermeta::standard::Object>.new
+	end
+}
+/* first pass will create FSM entities */
+class Uml2Fsm_Pass1 {
+	
+	reference tmpTable : kermeta::utils::Hashtable<uml::Element, kermeta::standard::Object>
+	
+	operation initialize(table : kermeta::utils::Hashtable<uml::Element, kermeta::standard::Object>) is do
+		tmpTable := table
+	end
+
+	operation visitStateMachine(node : uml::StateMachine) is do
+		var fsmNode : fsm::FSM init fsm::FSM.new 
+		node.region.each{ r | visitRegion(r) }
+		tmpTable.put(node, fsmNode)
+	end
+	
+	operation visitRegion(node : uml::Region) is do
+		// nothing to create
+		node.subvertex.each{ sv | visitVertex(sv) }
+		node.transition.each{ t | visitTransition(t) }
+		
+	end
+	
+	operation visitVertex(node : uml::Vertex) is do
+		var fsmNode : fsm::State init fsm::State.new
+		fsmNode.name := node.name
+		tmpTable.put(node, fsmNode)
+	end
+	
+	operation visitTransition(node : uml::Transition) is do
+		var fsmNode : fsm::Transition init fsm::Transition.new 
+		tmpTable.put(node, fsmNode)
+	end
+}
+
+/* second pass will rely entities */
+class Uml2Fsm_Pass2 {
+	
+	reference tmpTable : kermeta::utils::Hashtable<uml::Element, kermeta::standard::Object>
+	reference fsmMachine : fsm::FSM
+	
+	operation initialize(table : kermeta::utils::Hashtable<uml::Element, kermeta::standard::Object>) is do
+		tmpTable := table
+	end
+
+	operation visitStateMachine(node : uml::StateMachine) is do
+		fsmMachine ?= tmpTable.getValue(node)
+		node.region.each{ r | visitRegion(r) }
+	end
+	
+	operation visitRegion(node : uml::Region) is do
+		node.subvertex.each{ sv |
+			visitVertex(sv)
+			var state : fsm::State
+			state ?= tmpTable.getValue(sv)
+			fsmMachine.ownedState.add(state)
+		}
+		node.transition.each{ t |
+			visitTransition(t)
+		}
+	end
+	
+	operation visitVertex(node : uml::Vertex) is do
+		var pseudoState : uml::Pseudostate
+		pseudoState ?= node
+		if pseudoState != void then
+			if pseudoState.kind == uml::PseudostateKind.initial then
+				fsmMachine.initialState ?= tmpTable.getValue(node)
+			end
+		end
+		var finalState : uml::FinalState
+		finalState ?= node
+		if finalState != void then
+			var state : fsm::State
+			state ?= tmpTable.getValue(node)
+			fsmMachine.finalState.add(state)
+		end
+	end
+	
+	operation visitTransition(node : uml::Transition) is do
+		var transition : fsm::Transition
+		transition ?= tmpTable.getValue(node)
+		
+		var sourceState : fsm::State
+		sourceState ?= tmpTable.getValue(node.source)
+		sourceState.outgoingTransition.add(transition)
+		transition.source := sourceState
+		
+		var targetState : fsm::State
+		targetState ?= tmpTable.getValue(node.target)
+		targetState.incomingTransition.add(transition)
+		transition.target := targetState
+	end
+}

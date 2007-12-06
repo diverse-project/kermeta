@@ -1,0 +1,113 @@
+/* $Id: uml2fsm.kmt,v 1.1 2007-12-06 22:50:36 vmahe Exp $
+ * Creation date: December 5, 2007
+ * License:	EPL
+ * Copyright: Inria 2007
+ * Authors:	Didier Vojtisek <Didier.Vojtisek@irisa.fr>
+ 			Vincent Mahe <vmahe@irisa.fr>
+ */
+
+package uml;
+
+require kermeta
+require "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore"
+require "platform:/plugin/fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore"
+
+@aspect "true"
+class Package
+{
+	operation uml2fsmPass1() is do
+		self.packagedElement.each {e | 
+			var sm: uml::StateMachine
+			sm ?= e		// we force a cast in order to catch state machines
+			if sm != void then sm.uml2fsmPass1() end
+		}
+	end
+	operation uml2fsmPass2() is do
+		self.packagedElement.each {e | 
+			var sm: uml::StateMachine
+			sm ?= e		// we force a cast in order to catch state machines
+			if sm != void then sm.uml2fsmPass2() end
+		}
+	end
+	
+	// example of a derived property in Kermeta
+	operation output() : fsm::FSM is do
+		// we consider only one state machine in our UML models/packages
+		var sm : uml::StateMachine
+		sm ?= self.packagedElement.one
+		result := sm.output
+	end
+}
+
+@aspect "true"
+class StateMachine
+{
+	reference output : fsm::FSM
+	operation uml2fsmPass1() is do
+		output := fsm::FSM.new 
+		self.region.each{ r | r.uml2fsmPass1 }
+	end
+	operation uml2fsmPass2() is do
+		/* the region does not know directly its state machine
+		   so we must pass it to the Pass2 method */
+		self.region.each{ r | r.uml2fsmPass2(output) }
+	end
+}
+
+@aspect "true"
+class Region
+{
+	operation uml2fsmPass1() is do
+	 	// nothing to create
+		self.subvertex.each{v| v.uml2fsmPass1 }
+		self.transition.each{t| t.uml2fsmPass1 }
+	end
+	operation uml2fsmPass2(outModel : fsm::FSM) is do
+		self.subvertex.each{ sv |
+			outModel.ownedState.add(sv.output)
+		}
+		self.subvertex.each{v| v.uml2fsmPass2(outModel) }
+		self.transition.each{t| t.uml2fsmPass2(outModel) }
+	end
+}
+
+@aspect "true"
+class Vertex {
+	reference output : fsm::State
+	operation uml2fsmPass1() is do
+		output := fsm::State.new
+		output.name := self.name
+	end
+	operation uml2fsmPass2(outModel : fsm::FSM) is do
+		outModel.ownedState.add(output)
+		var pseudoState : uml::Pseudostate
+		pseudoState ?= self
+		if pseudoState != void then
+			if pseudoState.kind == uml::PseudostateKind.initial then
+				outModel.initialState := output
+			end
+		end
+		var finalState : uml::FinalState
+		finalState ?= self
+		if finalState != void then
+			outModel.finalState.add(output)
+		end
+	end
+}
+
+@aspect "true"
+class Transition {
+	reference output : fsm::Transition
+	operation uml2fsmPass1() is do
+		output := fsm::Transition.new
+	end
+	operation uml2fsmPass2(outModel : fsm::FSM) is do
+		output.source := self.source.output
+		// we update the targeted state
+		output.source.outgoingTransition.add(output)
+
+		output.target := self.target.output
+		// we update the targeted state
+		output.target.incomingTransition.add(output)
+	end
+}

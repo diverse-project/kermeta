@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="idModel" name="MyStateMachineModel">
+  <packagedElement xsi:type="uml:Package" xmi:id="idPackage" name="MyStateMachinePackage">
+    <packagedElement xsi:type="uml:StateMachine" xmi:id="idStateMachine" name="MyStateMachine">
+      <region xmi:id="idRegion" name="MainRegion">
+        <subvertex xsi:type="uml:Pseudostate" xmi:id="_tULOgKMUEdyKgsK99ZMb4w" name="Initial"/>
+        <subvertex xsi:type="uml:State" xmi:id="_uCz2IKMUEdyKgsK99ZMb4w" name="On"/>
+        <subvertex xsi:type="uml:FinalState" xmi:id="_vOg0QKMUEdyKgsK99ZMb4w" name="Exit"/>
+        <subvertex xsi:type="uml:State" xmi:id="_xHgWMKMUEdyKgsK99ZMb4w" name="Off"/>
+        <transition xmi:id="_v8jmBaMUEdyKgsK99ZMb4w" name="initialize" target="_uCz2IKMUEdyKgsK99ZMb4w" source="_tULOgKMUEdyKgsK99ZMb4w"/>
+        <transition xmi:id="_wL5plKMUEdyKgsK99ZMb4w" name="close" target="_vOg0QKMUEdyKgsK99ZMb4w" source="_uCz2IKMUEdyKgsK99ZMb4w"/>
+        <transition xmi:id="_wagGRKMUEdyKgsK99ZMb4w" name="end" target="_vOg0QKMUEdyKgsK99ZMb4w" source="_xHgWMKMUEdyKgsK99ZMb4w"/>
+        <transition xmi:id="_yhEKJKMUEdyKgsK99ZMb4w" name="switchOff" target="_xHgWMKMUEdyKgsK99ZMb4w" source="_uCz2IKMUEdyKgsK99ZMb4w"/>
+        <transition xmi:id="_zBZQA6MUEdyKgsK99ZMb4w" name="switchOn" target="_uCz2IKMUEdyKgsK99ZMb4w" source="_xHgWMKMUEdyKgsK99ZMb4w"/>
+      </region>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
