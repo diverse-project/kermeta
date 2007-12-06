@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutImpl.java,v 1.8 2007-11-30 16:19:42 ftanguy Exp $
+ * $Id: OutImpl.java,v 1.9 2007-12-06 14:47:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -13,7 +13,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -29,6 +31,7 @@ import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
+import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 import fr.irisa.triskell.kermeta.launcher.KermetaLauncher;
 
 /**
@@ -220,7 +223,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 						action.execute(this, unit, monitor, args);
 									
 					} else if ( extensionPointName.equals("fr.irisa.triskell.kermeta.kpm.kermetaAction") ) {
-					
+					 
 						IConfigurationElement[] elements = extension.getConfigurationElements();
 						String relativePath = elements[0].getAttribute("File");
 						String filePath = "platform:/plugin/" + extension.getContributor().getName() + "/" + relativePath;
@@ -237,6 +240,10 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 					
 				} catch (CoreException exception) {
 					exception.printStackTrace();
+				} catch (Exception e) {
+					String message = "KPM Error when processing the action " + getAction() + " on " + unit.getValue();
+					Status status = new Status(IStatus.ERROR, KPMPlugin.PLUGIN_ID, message, e);
+					KPMPlugin.getDefault().getLog().log(status);
 				}
 			}
 		
