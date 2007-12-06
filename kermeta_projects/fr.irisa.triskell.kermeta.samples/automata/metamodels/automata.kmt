@@ -303,11 +303,12 @@ class AutomatonHelper
 	
 	/** Operation for Workshop demo */
 	operation run_demo() : FiniteAutomaton is do
-/*    	var file : String init "../models/fsm.demo.1.xmi"*/
-		var file : String init stdio.read("Give me a model please :")
+    	//var file : String init "platform:/resource/fr.irisa.triskell.kermeta.samples/automata/models/fsm.demo.xmi"
+		var file : String init stdio.read("Give me a model please\n platform:/resource/fr.irisa.triskell.kermeta.samples/automata/models/")
+		file := "platform:/resource/fr.irisa.triskell.kermeta.samples/automata/models/"+file
     	stdio.writeln("Reading the following EMF Model : "+file)
     	var r : EMFRepository init EMFRepository.new
-    	result := loadEMFAutomaton(r, file, "../metamodels/automata.ecore")
+    	result := loadEMFAutomaton(r, file, "platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore")
     	result.run()
     end
 	 

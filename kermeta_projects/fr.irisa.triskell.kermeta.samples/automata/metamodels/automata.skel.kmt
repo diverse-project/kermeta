@@ -1,5 +1,7 @@
 package automaton;
 
+require kermeta
+
 class FiniteAutomaton
 {
 	attribute stateSet : State[0..*]
