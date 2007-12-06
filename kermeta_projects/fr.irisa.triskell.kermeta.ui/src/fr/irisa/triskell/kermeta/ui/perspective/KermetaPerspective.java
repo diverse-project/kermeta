@@ -1,4 +1,4 @@
-/* $Id: KermetaPerspective.java,v 1.1 2007-04-04 13:25:30 ftanguy Exp $
+/* $Id: KermetaPerspective.java,v 1.2 2007-12-06 19:49:47 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaPerspective.java
  * License: GPL
@@ -21,7 +21,7 @@ import org.eclipse.ui.console.IConsoleConstants;
  */
 public class KermetaPerspective implements IPerspectiveFactory {
 
-    
+    final static private String PORJECT_EXPLORER_VIEW_ID = "org.eclipse.ui.navigator.ProjectExplorer";
     
     /* (non-Javadoc)
      * @see org.eclipse.ui.IPerspectiveFactory#createInitialLayout(org.eclipse.ui.IPageLayout)
@@ -42,7 +42,8 @@ public class KermetaPerspective implements IPerspectiveFactory {
         layout.addNewWizardShortcut("org.eclipse.ui.wizards.new.file");*/
 	    
 	    // Add "show views"
-        layout.addShowViewShortcut(IPageLayout.ID_RES_NAV);
+        layout.addShowViewShortcut( PORJECT_EXPLORER_VIEW_ID );
+        layout.addShowViewShortcut( IPageLayout.ID_RES_NAV );
         layout.addShowViewShortcut(IPageLayout.ID_OUTLINE);
         layout.addShowViewShortcut(IPageLayout.ID_PROP_SHEET);
         layout.addShowViewShortcut(IPageLayout.ID_EDITOR_AREA);
@@ -58,8 +59,9 @@ public class KermetaPerspective implements IPerspectiveFactory {
      
         // place navigator and package explorer to the left (of editor area)
         IFolderLayout left = layout.createFolder("left", IPageLayout.LEFT, (float) 0.25, editorArea);
-        left.addView(IPageLayout.ID_RES_NAV);
+        left.addView( PORJECT_EXPLORER_VIEW_ID );
         left.addView(org.eclipse.jdt.ui.JavaUI.ID_PACKAGES);
+        left.addView( IPageLayout.ID_RES_NAV );
         
         // problem view at the bottom (of editor area)
         IFolderLayout bottom = layout.createFolder("bottom", IPageLayout.BOTTOM, (float) 0.75, editorArea);
