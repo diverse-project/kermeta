@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass2.java,v 1.2 2007-10-02 15:20:32 ftanguy Exp $
+/*$Id: Pass2.java,v 1.3 2007-12-06 23:29:26 ftanguy Exp $
 * Project : org.kermeta.merger
 * File : 	Pass2.java
 * License : EPL
@@ -80,6 +80,7 @@ public class Pass2 extends MergePass {
 			newProperty.setIsComposite( p.isIsComposite() );
 			newProperty.setIsID( p.isIsID() );
 			newProperty.setIsOrdered( p.isIsOrdered() );
+			newProperty.setIsUnique( p.isIsUnique() );
 			t.getOwnedAttribute().add( newProperty );
 			context.putBaseProperty(newProperty, p);
 		}
