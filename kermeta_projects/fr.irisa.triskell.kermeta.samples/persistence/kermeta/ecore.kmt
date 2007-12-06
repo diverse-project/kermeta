@@ -1,5 +1,7 @@
 package ecore;
 
+require kermeta
+
 class EAttribute inherits EStructuralFeature
 {
 	attribute iD : EBoolean
