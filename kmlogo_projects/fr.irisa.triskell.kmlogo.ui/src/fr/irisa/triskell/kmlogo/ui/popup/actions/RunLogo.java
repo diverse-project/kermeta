@@ -1,4 +1,4 @@
-/* $Id: RunLogo.java,v 1.4 2007-11-30 08:05:36 dvojtise Exp $
+/* $Id: RunLogo.java,v 1.5 2007-12-06 14:48:47 dvojtise Exp $
  * Project   : KmLogo
  * File      : RunLogo.java
  * License   : EPL
@@ -11,6 +11,16 @@
  */
 package fr.irisa.triskell.kmlogo.ui.popup.actions;
 
+import java.util.Iterator;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IActionDelegate;
+import org.eclipse.ui.IObjectActionDelegate;
+import org.eclipse.ui.IWorkbenchPart;
+
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
@@ -18,15 +28,6 @@ import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
 import fr.irisa.triskell.eclipse.console.messages.OKMessage;
 import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.kmlogo.ui.RunLogoK;
-
-import java.util.Iterator;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.ui.IObjectActionDelegate;
-import org.eclipse.ui.IWorkbenchPart;
 
 public class RunLogo implements IObjectActionDelegate, Runnable {
 
@@ -48,7 +49,7 @@ public class RunLogo implements IObjectActionDelegate, Runnable {
 		try {			
 				
 			String file_uri = "file:/" + logoFile.getLocation().toOSString();
-
+		    
 			RunLogoK.run(file_uri, console);
 			console.println(new OKMessage("Execution terminated successfully."));
 			
@@ -56,6 +57,7 @@ public class RunLogo implements IObjectActionDelegate, Runnable {
 		} catch (Throwable e) {
 			console.println(new ErrorMessage("Logo runtime error : "));
 			console.println(new ThrowableMessage(e));
+			e.printStackTrace();
 		}
 	}
 
