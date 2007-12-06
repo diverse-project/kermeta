@@ -1,4 +1,4 @@
-/* $Id: ClassConformanceChecker.java,v 1.3 2007-09-04 16:46:17 dvojtise Exp $
+/* $Id: ClassConformanceChecker.java,v 1.4 2007-12-06 14:46:13 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ClassConformanceChecker.java
 * License : EPL
@@ -17,6 +17,8 @@ import java.util.Stack;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
@@ -55,17 +57,32 @@ public class ClassConformanceChecker {
 						Type t_required = it_required.next().getType();
 						SimpleType providedType = new SimpleType( t_provided );
 						SimpleType requiredType = new SimpleType( t_required );
-						/*
-						 * 
-						 * We do not use voluntarily the isSubType because of the genericity.
-						 * So we use the basic comparison and the aspects.
-						 * 
-						 */
-						result = providedType.getTypeDefinition() == requiredType.getTypeDefinition();
-						if ( ! result )
-							result = TypeDefinitionHelper.getAspects( providedType.getTypeDefinition() ).contains(requiredType.getTypeDefinition());
-						if ( !result )
-							result = TypeDefinitionHelper.getAspects( requiredType.getTypeDefinition() ).contains(providedType.getTypeDefinition());	
+						
+						if ( t_provided instanceof ObjectTypeVariable && t_required instanceof ObjectTypeVariable ) {
+							result = t_provided == t_required;
+						} else if ( t_provided instanceof Enumeration && t_required instanceof Enumeration ) {
+							result = t_provided == t_required;
+						} else {
+							/*
+							 * 
+							 * We do not use voluntarily the isSubType because of the genericity.
+							 * So we use the basic comparison and the aspects.
+							 * 
+							 */
+							Set<TypeDefinition> tdProvided = ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) providedType.getTypeDefinition() );
+							tdProvided.add( providedType.getTypeDefinition() );
+							
+							Set<TypeDefinition> tdRequired = ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) requiredType.getTypeDefinition() );
+							tdRequired.add( requiredType.getTypeDefinition() );
+							
+							Iterator<TypeDefinition> iterator = tdProvided.iterator();
+							boolean found = false;
+							while ( iterator.hasNext() && ! found )
+								if ( tdRequired.contains(iterator.next()) )
+									found = true;
+							
+							result = found;
+						}
 					}
 				}
 				
