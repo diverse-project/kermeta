@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.15 2007-10-04 07:22:52 ftanguy Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.16 2007-12-06 14:08:38 ftanguy Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -85,6 +85,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
     public void checkUnit() {
     	  	
     	if ( ! builder.isConstraintChecked() ) {
+    		builder.lock();
     		new RequireConstraint(builder).check();
     		Iterator<TypeDefinition> it = TypeDefinitionSearcher.getInternalTypesDefinition(builder).iterator();
     		// Call the check constraint visitor on it!
@@ -108,6 +109,7 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
     			t.checkUnit();
     		}
     	}
+    	builder.unlock();
     }
 	
 	/**
