@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.21 2007-10-16 11:44:43 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.22 2007-12-06 14:10:53 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
@@ -22,7 +22,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xml.type.internal.DataValue.URI.MalformedURIException;
 import org.kermeta.io.IoFactory;
@@ -56,6 +58,8 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.kermeta.io.impl.KermetaUnitStorerImpl#getKermetaUnits <em>Kermeta Units</em>}</li>
+ *   <li>{@link org.kermeta.io.impl.KermetaUnitStorerImpl#getKermetaUnitsBeingLoaded <em>Kermeta Units Being Loaded</em>}</li>
+ *   <li>{@link org.kermeta.io.impl.KermetaUnitStorerImpl#getKermetaUnitsBeingUnloaded <em>Kermeta Units Being Unloaded</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,6 +75,26 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * @ordered
 	 */
 	protected EList<KermetaUnit> kermetaUnits;
+
+	/**
+	 * The cached value of the '{@link #getKermetaUnitsBeingLoaded() <em>Kermeta Units Being Loaded</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKermetaUnitsBeingLoaded()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<KermetaUnit> kermetaUnitsBeingLoaded;
+
+	/**
+	 * The cached value of the '{@link #getKermetaUnitsBeingUnloaded() <em>Kermeta Units Being Unloaded</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKermetaUnitsBeingUnloaded()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<KermetaUnit> kermetaUnitsBeingUnloaded;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -101,6 +125,30 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			kermetaUnits = new EObjectContainmentWithInverseEList<KermetaUnit>(KermetaUnit.class, this, IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS, IoPackage.KERMETA_UNIT__STORER);
 		}
 		return kermetaUnits;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<KermetaUnit> getKermetaUnitsBeingLoaded() {
+		if (kermetaUnitsBeingLoaded == null) {
+			kermetaUnitsBeingLoaded = new EObjectResolvingEList<KermetaUnit>(KermetaUnit.class, this, IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_LOADED);
+		}
+		return kermetaUnitsBeingLoaded;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<KermetaUnit> getKermetaUnitsBeingUnloaded() {
+		if (kermetaUnitsBeingUnloaded == null) {
+			kermetaUnitsBeingUnloaded = new EObjectResolvingEList<KermetaUnit>(KermetaUnit.class, this, IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_UNLOADED);
+		}
+		return kermetaUnitsBeingUnloaded;
 	}
 
 	/**
@@ -220,46 +268,81 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @throws URIMalformedException 
 	 * @generated NOT
 	 */
-	public void load(String uri, Map<Object, Object> options, IProgressMonitor monitor) {
+	public void load(String uri, Map<Object, Object> options, IProgressMonitor monitor) throws URIMalformedException {
 		int index = uri.lastIndexOf(".");
 		String extension = uri.substring(index+1);
 		
-		if ( extension.equals("kmt") ) {
-		
-			KMTUnitLoader loader = new KMTUnitLoader(options, monitor);
-			loader.load(uri);
-		
-		} else if ( extension.equals("km") ) {
-			
-			KMUnitLoader loader = new KMUnitLoader(options, monitor);
-			loader.load(uri);
-			
-		} else if ( extension.equals("ecore") || uri.equals(IOPlugin.ECORE_URI) ) {
-			
-			Ecore2KMLoader loader = new Ecore2KMLoader(options, monitor);
-			loader.load(uri);
-			
-		} else if ( extension.equals("jar") ) {
-		
-			JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader(options, monitor);
-			loader.load(uri);
-		
-		} else if ( uri.matches("http://.+") ) {
-			if ( EMFRegistryHelper.isDynamicallyRegistered(uri) ) {
-				// TODO
-				// Looking for the factory and see if the file can be translated into kermeta.
+		KermetaUnit kermetaUnit = get(uri);
+		kermetaUnit.lock();
+/*		
+ * synchronized( getKermetaUnitsBeingUnloaded() ) {
+			while ( getKermetaUnitsBeingUnloaded().contains(kermetaUnit) ) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
+			getKermetaUnitsBeingLoaded().add( kermetaUnit );
+		}*/
+
+		synchronized( getKermetaUnitsBeingLoaded() ) {
+			getKermetaUnitsBeingLoaded().add( kermetaUnit );
 		}
+
+		try {
+			
+			if ( extension.equals("kmt") ) {
+			
+				KMTUnitLoader loader = new KMTUnitLoader(options, monitor);
+				loader.load(uri);
+			
+			} else if ( extension.equals("km") ) {
+				
+				KMUnitLoader loader = new KMUnitLoader(options, monitor);
+				loader.load(uri);
+				
+			} else if ( extension.equals("ecore") || uri.equals(IOPlugin.ECORE_URI) ) {
+				
+				Ecore2KMLoader loader = new Ecore2KMLoader(options, monitor);
+				loader.load(uri);
+				
+			} else if ( extension.equals("jar") ) {
+			
+				JavaKermetaUnitLoader loader = new JavaKermetaUnitLoader(options, monitor);
+				loader.load(uri);
+			
+			} else if ( uri.matches("http://.+") ) {
+				if ( EMFRegistryHelper.isDynamicallyRegistered(uri) ) {
+					// TODO
+					// Looking for the factory and see if the file can be translated into kermeta.
+				}
+			}
+
+		} finally {
+			synchronized( getKermetaUnitsBeingLoaded() ) {
+				getKermetaUnitsBeingLoaded().remove( kermetaUnit );
+				getKermetaUnitsBeingLoaded().notify();
+			}
+		}		
+		kermetaUnit.unlock();
+		
+		/*synchronized( getKermetaUnitsBeingLoaded() ) {
+			getKermetaUnitsBeingLoaded().remove( kermetaUnit );
+			notify();
+		}*/
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @throws URIMalformedException 
 	 * @generated NOT
 	 */
-	public void load(String uri, IProgressMonitor monitor) {
+	public void load(String uri, IProgressMonitor monitor) throws URIMalformedException {
 		load(uri, new HashMap<Object, Object>(), monitor);
 	}
 
@@ -268,9 +351,30 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void unload(String uri) {
+	synchronized public void unload(String uri) {
+
 		KermetaUnit kermetaUnit = find(uri);
 		if ( kermetaUnit != null ) {
+			
+			while ( getKermetaUnitsBeingLoaded().contains(kermetaUnit) ) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			
+/*			synchronized ( getKermetaUnitsBeingLoaded() ) {
+				while ( getKermetaUnitsBeingLoaded().contains(kermetaUnit) ) {
+					try {
+						wait();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				getKermetaUnitsBeingUnloaded().add( kermetaUnit );
+			}*/
+			
 			getKermetaUnits().remove( kermetaUnit );
 		
 			for ( TypeDefinition typeDefinition : KermetaUnitHelper.getInternalTypeDefinitions( kermetaUnit ) ) {
@@ -313,6 +417,11 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			kermetaUnit.setModelingUnit(null);
 			kermetaUnit.setStorer(null);
 			kermetaUnit.setTypeDefinitionCache(null);
+			
+			/*synchronized( getKermetaUnitsBeingUnloaded() ) {
+				getKermetaUnitsBeingUnloaded().remove( kermetaUnit );
+				notify();
+			}*/
 		}
 	}
 
@@ -355,6 +464,10 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS:
 				return getKermetaUnits();
+			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_LOADED:
+				return getKermetaUnitsBeingLoaded();
+			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_UNLOADED:
+				return getKermetaUnitsBeingUnloaded();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -372,6 +485,14 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 				getKermetaUnits().clear();
 				getKermetaUnits().addAll((Collection<? extends KermetaUnit>)newValue);
 				return;
+			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_LOADED:
+				getKermetaUnitsBeingLoaded().clear();
+				getKermetaUnitsBeingLoaded().addAll((Collection<? extends KermetaUnit>)newValue);
+				return;
+			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_UNLOADED:
+				getKermetaUnitsBeingUnloaded().clear();
+				getKermetaUnitsBeingUnloaded().addAll((Collection<? extends KermetaUnit>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -387,6 +508,12 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS:
 				getKermetaUnits().clear();
 				return;
+			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_LOADED:
+				getKermetaUnitsBeingLoaded().clear();
+				return;
+			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_UNLOADED:
+				getKermetaUnitsBeingUnloaded().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -401,6 +528,10 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 		switch (featureID) {
 			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS:
 				return kermetaUnits != null && !kermetaUnits.isEmpty();
+			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_LOADED:
+				return kermetaUnitsBeingLoaded != null && !kermetaUnitsBeingLoaded.isEmpty();
+			case IoPackage.KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_UNLOADED:
+				return kermetaUnitsBeingUnloaded != null && !kermetaUnitsBeingUnloaded.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

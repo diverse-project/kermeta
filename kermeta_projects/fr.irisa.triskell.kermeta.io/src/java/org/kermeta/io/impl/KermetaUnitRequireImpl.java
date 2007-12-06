@@ -2,23 +2,20 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitRequireImpl.java,v 1.1 2007-10-04 07:22:15 ftanguy Exp $
+ * $Id: KermetaUnitRequireImpl.java,v 1.2 2007-12-06 14:10:53 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
-import fr.irisa.triskell.kermeta.language.structure.Require;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.kermeta.io.IoPackage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitRequire;
+
+import fr.irisa.triskell.kermeta.language.structure.Require;
 
 /**
  * <!-- begin-user-doc -->

@@ -2,25 +2,21 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.23 2007-11-27 10:49:29 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.24 2007-12-06 14:10:53 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
-import org.eclipse.core.runtime.IProgressMonitor;
-import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -39,8 +35,8 @@ import org.kermeta.io.KermetaUnitRequire;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
-import org.kermeta.io.TypeDefinitionCache;
 import org.kermeta.io.ParsingError;
+import org.kermeta.io.TypeDefinitionCache;
 import org.kermeta.io.WarningMessage;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
@@ -929,6 +925,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 			if ( shouldImport ) {
 					
 				getImportedKermetaUnits().add( value );
+				
 				modelingUnit.getReferencedModelingUnits().add( value.getModelingUnit() );
 				//Iterator <Package> iterator = value.getPackages().iterator();
 				Iterator <Package> iterator = value.getInternalPackages().iterator();
@@ -1420,6 +1417,30 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 */
 	public boolean isIndirectlyErroneous() {
 		return KermetaUnitHelper.isIndirectlyErrored(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void lock() {
+		setLocked(true);
+		for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(this) ) {
+			importedUnit.setLocked(true);
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void unlock() {
+		setLocked(false);
+		for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(this) ) {
+			importedUnit.setLocked(false);
+		}
 	}
 
 	/**

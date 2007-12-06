@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerValidator.java,v 1.3 2007-08-08 12:55:47 dvojtise Exp $
+ * $Id: KermetaUnitStorerValidator.java,v 1.4 2007-12-06 14:10:53 ftanguy Exp $
  */
 package org.kermeta.io.validation;
 
@@ -19,4 +19,12 @@ public interface KermetaUnitStorerValidator {
 	boolean validate();
 
 	boolean validateKermetaUnits(EList value);
+
+	boolean validateKermetaUnitsBeingLoaded(EList<KermetaUnit> value);
+
+	boolean validateKermetaUnitsBeingUnloaded(EList<KermetaUnit> value);
+
+	boolean validateKermetaUnitsBeginLoaded(EList<KermetaUnit> value);
+
+	boolean validateKermetaUnitsBeginUnloaded(EList<KermetaUnit> value);
 }

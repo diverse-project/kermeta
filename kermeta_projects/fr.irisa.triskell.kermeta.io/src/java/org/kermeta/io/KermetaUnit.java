@@ -2,13 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.15 2007-11-21 14:07:13 ftanguy Exp $
+ * $Id: KermetaUnit.java,v 1.16 2007-12-06 14:10:53 ftanguy Exp $
  */
 package org.kermeta.io;
 
-import java.util.Set;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -20,8 +21,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.language.structure.Using;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.traceability.helper.Tracer;
-import java.util.Map;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -68,15 +67,10 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public interface KermetaUnit extends EObject {
 	
 	/**
-	 * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUri()
+	 * 
 	 * @generated NOT
-	 * @ordered
 	 */
-    final static public Logger internalLog = LogConfigurationHelper.getLogger("KermetaUnit");
-	
+	final static public Logger internalLog = LogConfigurationHelper.getLogger("Kermeta Unit");
 	
 	/**
 	 * Returns the value of the '<em><b>Storer</b></em>' container reference.
@@ -109,10 +103,6 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Uri</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * URI of the unit. Ie. name of the file that was loaded
@@ -833,5 +823,21 @@ public interface KermetaUnit extends EObject {
 	 * @generated
 	 */
 	boolean isIndirectlyErroneous();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void lock();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void unlock();
 
 } // KermetaUnit

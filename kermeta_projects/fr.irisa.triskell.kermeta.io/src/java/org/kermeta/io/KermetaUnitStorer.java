@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorer.java,v 1.6 2007-10-12 09:16:22 ftanguy Exp $
+ * $Id: KermetaUnitStorer.java,v 1.7 2007-12-06 14:10:53 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -23,6 +23,8 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.kermeta.io.KermetaUnitStorer#getKermetaUnits <em>Kermeta Units</em>}</li>
+ *   <li>{@link org.kermeta.io.KermetaUnitStorer#getKermetaUnitsBeingLoaded <em>Kermeta Units Being Loaded</em>}</li>
+ *   <li>{@link org.kermeta.io.KermetaUnitStorer#getKermetaUnitsBeingUnloaded <em>Kermeta Units Being Unloaded</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,6 +52,38 @@ public interface KermetaUnitStorer extends EObject {
 	EList<KermetaUnit> getKermetaUnits();
 
 	/**
+	 * Returns the value of the '<em><b>Kermeta Units Being Loaded</b></em>' reference list.
+	 * The list contents are of type {@link org.kermeta.io.KermetaUnit}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Kermeta Units Being Loaded</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Kermeta Units Being Loaded</em>' reference list.
+	 * @see org.kermeta.io.IoPackage#getKermetaUnitStorer_KermetaUnitsBeingLoaded()
+	 * @model
+	 * @generated
+	 */
+	EList<KermetaUnit> getKermetaUnitsBeingLoaded();
+
+	/**
+	 * Returns the value of the '<em><b>Kermeta Units Being Unloaded</b></em>' reference list.
+	 * The list contents are of type {@link org.kermeta.io.KermetaUnit}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Kermeta Units Being Unloaded</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Kermeta Units Being Unloaded</em>' reference list.
+	 * @see org.kermeta.io.IoPackage#getKermetaUnitStorer_KermetaUnitsBeingUnloaded()
+	 * @model
+	 * @generated
+	 */
+	EList<KermetaUnit> getKermetaUnitsBeingUnloaded();
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @throws KermetaIOException 
@@ -70,9 +104,9 @@ public interface KermetaUnitStorer extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model monitorDataType="org.kermeta.io.IProgressMonitor"
-	 * @generated
+	 * @generated NOT
 	 */
-	void load(String uri, Map<Object, Object> options, IProgressMonitor monitor);
+	void load(String uri, Map<Object, Object> options, IProgressMonitor monitor) throws URIMalformedException;
 
 	/**
 	 * <!-- begin-user-doc -->

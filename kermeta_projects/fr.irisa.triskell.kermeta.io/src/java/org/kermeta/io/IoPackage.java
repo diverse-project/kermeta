@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackage.java,v 1.8 2007-10-26 14:47:31 ftanguy Exp $
+ * $Id: IoPackage.java,v 1.9 2007-12-06 14:10:53 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -299,13 +299,31 @@ public interface IoPackage extends EPackage {
 	int KERMETA_UNIT_STORER__KERMETA_UNITS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Kermeta Units Being Loaded</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_LOADED = 1;
+
+	/**
+	 * The feature id for the '<em><b>Kermeta Units Being Unloaded</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_UNLOADED = 2;
+
+	/**
 	 * The number of structural features of the '<em>Kermeta Unit Storer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KERMETA_UNIT_STORER_FEATURE_COUNT = 1;
+	int KERMETA_UNIT_STORER_FEATURE_COUNT = 3;
 
 	/**
 	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
@@ -1011,6 +1029,28 @@ public interface IoPackage extends EPackage {
 	EReference getKermetaUnitStorer_KermetaUnits();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.io.KermetaUnitStorer#getKermetaUnitsBeingLoaded <em>Kermeta Units Being Loaded</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Kermeta Units Being Loaded</em>'.
+	 * @see org.kermeta.io.KermetaUnitStorer#getKermetaUnitsBeingLoaded()
+	 * @see #getKermetaUnitStorer()
+	 * @generated
+	 */
+	EReference getKermetaUnitStorer_KermetaUnitsBeingLoaded();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.io.KermetaUnitStorer#getKermetaUnitsBeingUnloaded <em>Kermeta Units Being Unloaded</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Kermeta Units Being Unloaded</em>'.
+	 * @see org.kermeta.io.KermetaUnitStorer#getKermetaUnitsBeingUnloaded()
+	 * @see #getKermetaUnitStorer()
+	 * @generated
+	 */
+	EReference getKermetaUnitStorer_KermetaUnitsBeingUnloaded();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.io.PackageEntry <em>Package Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1563,6 +1603,22 @@ public interface IoPackage extends EPackage {
 		 * @generated
 		 */
 		EReference KERMETA_UNIT_STORER__KERMETA_UNITS = eINSTANCE.getKermetaUnitStorer_KermetaUnits();
+
+		/**
+		 * The meta object literal for the '<em><b>Kermeta Units Being Loaded</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_LOADED = eINSTANCE.getKermetaUnitStorer_KermetaUnitsBeingLoaded();
+
+		/**
+		 * The meta object literal for the '<em><b>Kermeta Units Being Unloaded</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KERMETA_UNIT_STORER__KERMETA_UNITS_BEING_UNLOADED = eINSTANCE.getKermetaUnitStorer_KermetaUnitsBeingUnloaded();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.io.impl.PackageEntryImpl <em>Package Entry</em>}' class.
