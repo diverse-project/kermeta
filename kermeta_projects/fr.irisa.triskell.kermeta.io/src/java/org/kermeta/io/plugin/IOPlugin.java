@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.31 2007-12-03 15:56:00 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.32 2007-12-06 14:10:11 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -422,7 +422,8 @@ public class IOPlugin extends AbstractUIPlugin {
 				unitToUnload.add( unit );
 		}
 		for ( KermetaUnit unit : unitToUnload )
-			storer.unload(unit.getUri() );
+			if ( ! unit.getUri().equals( ECORE_URI ) )
+				storer.unload(unit.getUri() );
 		internalLog.info("Available Memory before running garbage collection : " + Runtime.getRuntime().freeMemory());
 		Runtime.getRuntime().gc();
 		internalLog.info("Available Memory after running garbage collection : " + Runtime.getRuntime().freeMemory());
