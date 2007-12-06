@@ -64,15 +64,15 @@
            project="true">
         <selection class="org.eclipse.core.resources.IProject"/>
      </wizard>
-      <wizard 
-               icon="images/newkermetafile.png"
-               class="fr.irisa.triskell.kermeta.wizards.KermetaNewFileWizard"
-               category="fr.irisa.triskell.kermeta.KermetaWizard"
-               descriptionImage="images/kermeta.png"
-               project="false"
-               preferredPerspectives="org.eclipse.ui.resourcePerspective"
-               name="New Kermeta file"
-               id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard">
+      <wizard
+            category="fr.irisa.triskell.kermeta.KermetaWizard"
+            class="fr.irisa.triskell.kermeta.wizards.KermetaNewFileWizard"
+            descriptionImage="images/kermeta.png"
+            finalPerspective="kermetaPerspective"
+            icon="images/newkermetafile.png"
+            id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard"
+            name="New Kermeta file"
+            project="false">
             <selection class="org.eclipse.core.resources.IProject"/>
             <selection class="org.eclipse.core.resources.IFolder"/>
             <selection class="org.eclipse.core.resources.IFile"/>
@@ -144,6 +144,29 @@
              id="fr.irisa.triskell.kermeta.ui.views.kermetadoc"
              name="KermetaDoc">
        </view>
+    </extension>
+    <extension
+          point="org.eclipse.ui.navigator.navigatorContent">
+       <commonWizard
+             type="new"
+             wizardId="fr.irisa.triskell.kermeta.ui.wizards.newProject">
+          <enablement></enablement>
+       </commonWizard>
+       <commonWizard
+             type="new"
+             wizardId="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard">
+          <enablement></enablement>
+       </commonWizard>
+       <commonWizard
+             type="new"
+             wizardId="fr.irisa.triskell.kermeta.presentation.KmModelWizardID">
+          <enablement></enablement>
+       </commonWizard>
+       <commonWizard
+             type="new"
+             wizardId="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams">
+          <enablement></enablement>
+       </commonWizard>
     </extension>
 
 </plugin>
