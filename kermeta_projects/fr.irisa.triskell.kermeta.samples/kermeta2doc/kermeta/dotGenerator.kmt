@@ -125,7 +125,8 @@ class DotGenerator {
 				end
 			else
 				// an attribute
-				var t : PrimitiveType t ?= p.type
+				var t : kermeta::language::structure::PrimitiveType
+				t ?= p.type
 				if t != void then
 					result := result + p.name + " : " + t.name + "\\l"
 				end

@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: kermeta2docbook.kmt,v 1.2 2006-06-26 14:58:20 dvojtise Exp $
+/* $Id: kermeta2docbook.kmt,v 1.3 2007-12-06 21:15:06 bmorin Exp $
  * Project : Kermeta samples
  * File : kermeta2docbook.kmt
  * License : EPL
@@ -219,7 +219,7 @@ class Kermeta2DocbookVisitor inherits
 		result := "[typed element]"
 	end
 	
-	method visitTypeVariable(node : TypeVariable, context : Integer) : String is do
+	method visitObjectTypeVariable(node : ObjectTypeVariable, context : Integer) : String is do
 		result := ph.ppIdentifier(node.name)
 	end
 	

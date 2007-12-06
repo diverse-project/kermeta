@@ -6,56 +6,45 @@ package kermeta2docbook;
 
 
 require kermeta
-require "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore"
-require "./kermeta2docbook.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.samples/kermeta2doc/kermeta/kermeta2docbook.kmt"
 using kermeta::language::structure
 using kermeta::language::behavior
 using kermeta::standard
 using kermeta::persistence
 
+/*
+
+*/
 class Main
 {
     operation main() : Void is do 
-        var inputModel : Set<Package> init loadClassModel
+        var inputModel : ModelingUnit init loadClassModel
         
         var transfo : Kermeta2DocbookVisitor init Kermeta2DocbookVisitor.new
 
 		transfo.initialize()
         
         stdio.write("Begin\n")
-       	inputModel.each{ p | stdio.writeln(transfo.accept(p,0)) }
+       	inputModel.packages.each{ p | stdio.writeln(transfo.accept(p,0)) }
         stdio.write("\nEnd\n")        
-        
-      /*  var tranfo : Class2RDBMS init Class2RDBMS.new
-        var outputModel : RDBMSModel init tranfo.transform(inputModel)
-        
-        var repository : EMFRepository init EMFRepository.new    
-        var resource : EMFResource init 
-        	repository.createResource("../models/out.xmi", 
-        							  "../metamodels/RDBMSMM.ecore")
-	 	// Define a Root ...
-	 	resource.instances.add(outputModel)
-	 		 	
-	 	resource.save()
-        */
     end
     
-    operation loadClassModel() : Set<Package> is do             
+    operation loadClassModel() : ModelingUnit is do             
    		var repository : EMFRepository init EMFRepository.new             
-   		var resource : Resource init repository.createResource("../../kmlogo/kermeta/kmLogo.km","platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+   		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.km", "http://www.kermeta.org/kermeta" )
        
        stdio.writeln("Loading resource...")
        resource.load()      
        stdio.writeln("Resource loaded...")
-       result := Set<Package>.new
+       result := ModelingUnit.new
        from var it : Iterator<Object> init resource.instances.iterator
        until it.isOff
        loop
            var next : Object init it.next
-           if (Package.isInstance(next)) then 
-           		var aPackage : Package 
-           		aPackage ?= next
-           		result.add(aPackage)
+           if ( ModelingUnit.isInstance(next) ) then 
+           		var aModelingUnit : ModelingUnit 
+           		aModelingUnit ?= next
+           		result := aModelingUnit
            end
        end
        
