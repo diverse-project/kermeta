@@ -1,6 +1,6 @@
 package fsm;
 require kermeta
-require "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/metamodels/fsm.ecore"
+require "http://www.kermeta.org/fsm"
 using kermeta::standard
 @aspect "true"
 class State{ 

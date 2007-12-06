@@ -1,4 +1,4 @@
-/* $Id: checkInvariants.kmt,v 1.2 2007-12-04 18:18:38 cfaucher Exp $
+/* $Id: checkInvariants.kmt,v 1.3 2007-12-06 23:13:37 bmorin Exp $
  * Project    : fr.irisa.triskell.kermeta.samples.fsm.demoAspect
  * File       : checkInvariants.kmt
  * License    : EPL
@@ -28,7 +28,7 @@ class InvariantChecker
 {
     operation main(input_automaton : String) : Void is do 
         var rep : EMFRepository init EMFRepository.new
-        var theFSM : FSM init AutomatonHelper.new.loadEMFAutomaton(rep, input_automaton, "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/metamodels/fsm.ecore")
+        var theFSM : FSM init AutomatonHelper.new.loadEMFAutomaton(rep, input_automaton, "http://www.kermeta.org/fsm")
         
         // Uncomment to check the invariant properties : WFR
         // To check all contained elements by "theFSM"

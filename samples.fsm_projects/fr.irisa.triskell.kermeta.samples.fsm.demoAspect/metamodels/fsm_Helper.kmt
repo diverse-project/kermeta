@@ -1,4 +1,4 @@
-/* $Id: fsm_Helper.kmt,v 1.2 2007-12-04 18:18:38 cfaucher Exp $
+/* $Id: fsm_Helper.kmt,v 1.3 2007-12-06 23:13:37 bmorin Exp $
  * Project    : fr.irisa.triskell.samples.fsm.demoAspect
  * File       : fsmmodel.kmt
  * License    : EPL
@@ -16,7 +16,7 @@
 package fsm;
 
 require kermeta
-require "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/kermeta/fsm.kmt"
+require "../kermeta/fsm.kmt"
 
 using fsm
 using kermeta::standard
@@ -29,12 +29,12 @@ class FSM
 {
 	
 	property readonly ownedTransition : OrderedSet<Transition>
-		/*getter is do
+		getter is do
 			var seqTransition : Sequence<Set<Transition>>
 			seqTransition := self.ownedState.collect{ st | st.outgoingTransition}
 			result := AutomatonHelper.new.seq1ToSet(seqTransition)
 		end
-	*/
+	
 	property readonly alphabet : Set<String>
 		getter is do
 		var seqState : Sequence<Sequence<String>>
