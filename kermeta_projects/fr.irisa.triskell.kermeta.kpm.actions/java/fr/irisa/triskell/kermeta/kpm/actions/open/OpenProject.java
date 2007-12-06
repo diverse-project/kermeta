@@ -55,7 +55,7 @@ public class OpenProject implements IAction, Interest {
 			 * 
 			 * 
 			 */
-			Map map = new HashMap();
+			Map<String, Object> map = new HashMap<String, Object>();
 			List<Unit> updatedUnits = new ArrayList<Unit> ();
 			map.put("updatedUnits", updatedUnits);
 		
@@ -69,11 +69,8 @@ public class OpenProject implements IAction, Interest {
 			 */
 			// Here the list of units is copied because during the process, some units can be added
 			// wich can lead a concurrent modification exception.
-			List <Unit> copy = new ArrayList( kpm.getUnits() );
-			Iterator<Unit> iterator = copy.iterator();
-			while ( iterator.hasNext() ) {
-				
-				Unit currentUnit = iterator.next();
+			List <Unit> copy = new ArrayList<Unit>( kpm.getUnits() );
+			for ( Unit currentUnit : copy ) {
 				
 				/*
 				 * 
@@ -106,8 +103,9 @@ public class OpenProject implements IAction, Interest {
 						map.put("forceTypechecking", true);
 						currentUnit.receiveSynchroneEvent("update", map, new SubProgressMonitor(monitor, 0) );
 						KermetaUnit kermetaUnit = KermetaUnitHost.getInstance().getValue(currentUnit);
-						if ( kermetaUnit != null )
+						if ( kermetaUnit != null ) {
 							markAsUpdated(currentUnit, kermetaUnit, updatedUnits, kpm);
+						}
 						KermetaUnitHost.getInstance().undeclareInterest(this, currentUnit);
 						
 					}
