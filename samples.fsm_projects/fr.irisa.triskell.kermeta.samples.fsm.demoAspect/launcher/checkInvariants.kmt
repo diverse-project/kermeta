@@ -1,4 +1,4 @@
-/* $Id: checkInvariants.kmt,v 1.3 2007-12-06 23:13:37 bmorin Exp $
+/* $Id: checkInvariants.kmt,v 1.4 2007-12-06 23:22:55 bmorin Exp $
  * Project    : fr.irisa.triskell.kermeta.samples.fsm.demoAspect
  * File       : checkInvariants.kmt
  * License    : EPL
@@ -16,8 +16,8 @@
 package fsm;
 
 require kermeta
-require "../metamodels/fsm_Helper.kmt"
-require "fsmLauncher.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/metamodels/fsm_Helper.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/launcher/fsmLauncher.kmt"
 
 using fsm
 using kermeta::standard
