@@ -1,0 +1,6 @@
+package sample
+
+context A def:
+ 	test(): Boolean = true
+
+endpackage

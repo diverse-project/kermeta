@@ -1,0 +1,6 @@
+package sample
+-- 23: isUnique
+context A inv:
+	b->isUnique( o | true )
+
+endpackage

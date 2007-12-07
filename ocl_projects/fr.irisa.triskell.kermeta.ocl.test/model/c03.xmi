@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="207">
+  <pathNameCS startOffset="8" endOffset="14">
+    <sequenceOfNames>company</sequenceOfNames>
+  </pathNameCS>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="50" endOffset="192">
+    <pathNameCS startOffset="58" endOffset="74">
+      <sequenceOfNames>Business</sequenceOfNames>
+      <sequenceOfNames>Company</sequenceOfNames>
+    </pathNameCS>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="76" endOffset="192">
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="82" endOffset="192">
+        <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="82" endOffset="123" accessor="dot">
+          <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="82" endOffset="91" accessor="dot">
+            <source xsi:type="ocl.cst:VariableExpCS" startOffset="82" endOffset="85">
+              <simpleNameCS startOffset="82" endOffset="85" value="self" type="self"/>
+              <isMarkedPreCS startOffset="86" endOffset="86"/>
+            </source>
+            <simpleNameCS startOffset="87" endOffset="91" value="owner"/>
+            <isMarkedPreCS startOffset="92" endOffset="92"/>
+          </source>
+          <simpleNameCS startOffset="93" endOffset="103" value="oclIsKindOf"/>
+          <arguments xsi:type="ocl.cst:EnumLiteralExpCS" startOffset="106" endOffset="122">
+            <pathNameCS startOffset="106" endOffset="114">
+              <sequenceOfNames>Personnel</sequenceOfNames>
+            </pathNameCS>
+            <simpleNameCS startOffset="117" endOffset="122" value="Person"/>
+          </arguments>
+          <isMarkedPreCS startOffset="105" endOffset="105"/>
+        </source>
+        <simpleNameCS startOffset="125" endOffset="131" value="implies" type="String"/>
+        <arguments xsi:type="ocl.cst:OperationCallExpCS" startOffset="133" endOffset="192">
+          <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="133" endOffset="181" accessor="dot">
+            <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="133" endOffset="172" accessor="arrow">
+              <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="133" endOffset="142" accessor="dot">
+                <source xsi:type="ocl.cst:VariableExpCS" startOffset="133" endOffset="136">
+                  <simpleNameCS startOffset="133" endOffset="136" value="self" type="self"/>
+                  <isMarkedPreCS startOffset="137" endOffset="137"/>
+                </source>
+                <simpleNameCS startOffset="138" endOffset="142" value="owner"/>
+                <isMarkedPreCS startOffset="143" endOffset="144"/>
+              </source>
+              <simpleNameCS startOffset="145" endOffset="153" value="oclAsType"/>
+              <arguments xsi:type="ocl.cst:EnumLiteralExpCS" startOffset="155" endOffset="171">
+                <pathNameCS startOffset="155" endOffset="163">
+                  <sequenceOfNames>Personnel</sequenceOfNames>
+                </pathNameCS>
+                <simpleNameCS startOffset="166" endOffset="171" value="Person"/>
+              </arguments>
+              <isMarkedPreCS startOffset="154" endOffset="154"/>
+            </source>
+            <simpleNameCS startOffset="174" endOffset="181" value="forename"/>
+            <isMarkedPreCS startOffset="183" endOffset="184"/>
+          </source>
+          <simpleNameCS startOffset="183" endOffset="184" value="&lt;>" type="String"/>
+          <arguments xsi:type="ocl.cst:VariableExpCS" startOffset="185" endOffset="192">
+            <simpleNameCS startOffset="185" endOffset="192" value="duprie"/>
+            <isMarkedPreCS startOffset="198" endOffset="207"/>
+          </arguments>
+          <isMarkedPreCS/>
+        </arguments>
+        <isMarkedPreCS/>
+      </expressionCS>
+    </invOrDefCS>
+  </contextDecls>
+</ocl.cst:PackageDeclarationCS>

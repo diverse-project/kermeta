@@ -1,0 +1,6 @@
+package sample
+-- 13: greater or equals
+context A inv:
+	3 >= 4
+
+endpackage

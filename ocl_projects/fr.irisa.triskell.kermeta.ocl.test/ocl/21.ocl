@@ -1,0 +1,6 @@
+package sample
+-- 21: reject
+context A inv:
+	b->reject( o | true )
+
+endpackage

@@ -1,0 +1,6 @@
+package sample
+
+context A inv:
+	self.ab.oclIsKindOf(SubB) implies self.ab.oclAsType(SubB).ac
+
+endpackage

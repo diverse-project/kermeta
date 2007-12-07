@@ -1,0 +1,7 @@
+package sample
+-- 58: string toInteger
+context A inv:
+	"10".toInteger()
+
+endpackage
+

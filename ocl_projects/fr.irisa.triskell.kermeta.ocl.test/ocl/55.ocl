@@ -1,0 +1,9 @@
+package sample
+-- 55: count
+context A inv:
+	b->count(ab)
+
+endpackage
+
+
+

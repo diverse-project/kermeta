@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="speedsL1" nsURI="platform:/resource/speedsImplementation/hrc/ecore/speedsL1.ecore" nsPrefix="speedsL1">
+  <eAnnotations source="kermeta.req">
+    <details key="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km" value="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+  <eSubpackages name="kernel" nsURI="platform:/resource/speedsImplementation/hrc/ecore/speedsL1.ecore#//kernel" nsPrefix="kernel">
+    <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DeclarationZone" abstract="true" eSuperTypes="//kernel/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="declared" upperBound="-1" eType="//kernel/ReusableElement" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subPackage" upperBound="-1" eType="//kernel/Package" containment="true" eOpposite="//kernel/Package/owner"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="//kernel/DeclarationZone">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="//kernel/DeclarationZone" eOpposite="//kernel/DeclarationZone/subPackage"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="//kernel/DeclarationZone">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="//kernel/RichComponent"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ReusableElement" abstract="true" eSuperTypes="//kernel/NamedElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TemplatableElement" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1" eType="//kernel/Parameter" containment="true" eOpposite="//kernel/Parameter/template"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameterSubstitution" upperBound="-1" eType="//kernel/ParameterSubstitution" containment="true" eOpposite="//kernel/ParameterSubstitution/template"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="//kernel/TemplatableElement"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="//kernel/NavigableFeature">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="//kernel/Function" eOpposite="//kernel/Function/parameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="initializer" eType="//kernel/Initializer" eOpposite="//kernel/Initializer/parameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//kernel/DataType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="//kernel/TemplatableElement" eOpposite="//kernel/TemplatableElement/parameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="interconnection" eType="//kernel/InterconnectionSpecification" eOpposite="//kernel/InterconnectionSpecification/parameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="//kernel/Service" eOpposite="//kernel/Service/formalParameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="servicePin" eType="//kernel/ServicePin" eOpposite="//kernel/ServicePin/parameter"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ParameterSubstitution">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="formal" lowerBound="1" eType="//kernel/Parameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="//kernel/TemplatableElement" eOpposite="//kernel/TemplatableElement/parameterSubstitution"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="actual" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elaboratedInterconnection" eType="//kernel/ElaboratedInterconnection" eOpposite="//kernel/ElaboratedInterconnection/parameterSubstitution"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="size" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InterconnectionEnd" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fixedInterconnection" eType="//kernel/FixedInterconnection" eOpposite="//kernel/FixedInterconnection/end"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Interconnection" abstract="true" eSuperTypes="//kernel/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1" eType="//kernel/RichComponent" eOpposite="//kernel/RichComponent/interconnection"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FixedInterconnection" abstract="true" eSuperTypes="//kernel/Interconnection">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="end" lowerBound="2" upperBound="-1" eType="//kernel/InterconnectionEnd" containment="true" eOpposite="//kernel/InterconnectionEnd/fixedInterconnection"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RichComponent" eSuperTypes="//kernel/TemplatableElement //kernel/ReusableElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="contract" upperBound="-1" eType="//kernel/Contract" containment="true" eOpposite="//kernel/Contract/component"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="implementation" eType="//kernel/Implementation" containment="true" eOpposite="//kernel/Implementation/component"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="initializer" eType="//kernel/Initializer" containment="true" eOpposite="//kernel/Initializer/component"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="port" upperBound="-1" eType="//kernel/Port" containment="true" eOpposite="//kernel/Port/component"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1" eType="//kernel/Variable" containment="true" eOpposite="//kernel/Variable/component"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="part" upperBound="-1" eType="//kernel/RichComponentProperty" containment="true" eOpposite="//kernel/RichComponentProperty/component"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refinedComponent" upperBound="-1" eType="//kernel/RichComponent"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refiningComponent" upperBound="-1" eType="//kernel/RichComponent"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" eType="//kernel/BlockOccurrence" containment="true" eOpposite="//kernel/BlockOccurrence/component"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="link" upperBound="-1" eType="//kernel/Link" containment="true" eOpposite="//kernel/Link/component"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="serviceImplementation" upperBound="-1" eType="//kernel/ServiceImplementation" containment="true" eOpposite="//kernel/ServiceImplementation/component"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="viewpoint" upperBound="-1" eType="//kernel/Viewpoint" containment="true" eOpposite="//kernel/Viewpoint/component"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="interconnection" upperBound="-1" eType="//kernel/Interconnection" containment="true" eOpposite="//kernel/Interconnection/component"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="priorityRule" upperBound="-1" eType="//Priorities/PriorityRule" containment="true" eOpposite="//Priorities/PriorityRule/component"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RichComponentProperty" eSuperTypes="//kernel/MultiplicityElement //kernel/NavigableFeature">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1" eType="//kernel/RichComponent" eOpposite="//kernel/RichComponent/part"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//kernel/RichComponent"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FlowReference" abstract="true" eSuperTypes="//kernel/PortReference">
+      <eOperations name="kind" eType="//kernel/FlowKind">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="direction" eType="//kernel/FlowDirection">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="type" eType="//kernel/DataType">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="flow" lowerBound="1" eType="//kernel/Flow"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ServiceBinding" eSuperTypes="//kernel/FixedInterconnection"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="//kernel/MultiplicityElement //kernel/NavigableFeature">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isConjugated" eType="//Boolean">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1" eType="//kernel/RichComponent" eOpposite="//kernel/RichComponent/port"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//kernel/PortSpecification"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Connector" eSuperTypes="//kernel/FixedInterconnection"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PortReference" abstract="true">
+      <eOperations name="size" eType="//Integer">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="port" lowerBound="1" eType="//kernel/Port"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="part" eType="//kernel/RichComponentProperty"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="partIndex" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="portIndex" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="//kernel/NavigableFeature">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="compositeAction" eType="//kernel/CompositeAction" eOpposite="//kernel/CompositeAction/declaredVariable"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="component" eType="//kernel/RichComponent" eOpposite="//kernel/RichComponent/attribute"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//kernel/DataType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="//kernel/MachineBlock" eOpposite="//kernel/MachineBlock/variable"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FlowBinding" eSuperTypes="//kernel/FixedInterconnection"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FlowEnd" eSuperTypes="//kernel/InterconnectionEnd //kernel/FlowReference"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ServiceEnd" eSuperTypes="//kernel/InterconnectionEnd //kernel/ServiceReference"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PortEnd" eSuperTypes="//kernel/InterconnectionEnd //kernel/PortReference"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ServiceReference" abstract="true" eSuperTypes="//kernel/PortReference">
+      <eOperations name="direction" eType="//kernel/ServiceDirection">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="service" lowerBound="1" eType="//kernel/Service"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InteractionPoint" abstract="true" eSuperTypes="//kernel/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="portSpecification" lowerBound="1" eType="//kernel/PortSpecification" eOpposite="//kernel/PortSpecification/interactionPoint"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Flow" eSuperTypes="//kernel/InteractionPoint">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="//kernel/FlowDirection">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="//kernel/FlowKind">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//kernel/DataType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ActivationFlow" eSuperTypes="//kernel/Flow"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EnablingFlow" eSuperTypes="//kernel/Flow"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PortSpecification" eSuperTypes="//kernel/TemplatableElement //kernel/ReusableElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="interactionPoint" lowerBound="1" upperBound="-1" eType="//kernel/InteractionPoint" containment="true" eOpposite="//kernel/InteractionPoint/portSpecification"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="FlowDirection">
+      <eLiterals name="in" literal="in"/>
+      <eLiterals name="out" value="1" literal="out"/>
+      <eLiterals name="bidirectional" value="2" literal="bidirectional"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="FlowKind">
+      <eLiterals name="discrete" literal="discrete"/>
+      <eLiterals name="continuous" value="1" literal="continuous"/>
+      <eLiterals name="event" value="2" literal="event"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Service" eSuperTypes="//kernel/InteractionPoint">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="formalParameter" upperBound="-1" eType="//kernel/Parameter" containment="true" eOpposite="//kernel/Parameter/service"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" lowerBound="1" eType="//kernel/DataType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="//kernel/ServiceDirection">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ServiceDirection">
+      <eLiterals name="provided" literal="provided"/>
+      <eLiterals name="required" value="1" literal="required"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ElaboratedInterconnection" eSuperTypes="//kernel/Interconnection">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="endSubstitution" upperBound="-1" eType="//kernel/EndSubstitution" containment="true" eOpposite="//kernel/EndSubstitution/elaboratedIinterconnection"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameterSubstitution" upperBound="-1" eType="//kernel/ParameterSubstitution" containment="true" eOpposite="//kernel/ParameterSubstitution/elaboratedInterconnection"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="specification" lowerBound="1" eType="//kernel/InterconnectionSpecification"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InterconnectionSpecification" eSuperTypes="//kernel/ReusableElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="endParameter" upperBound="-1" eType="//kernel/EndParameter" containment="true" eOpposite="//kernel/EndParameter/interconnectionSpecification"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1" eType="//kernel/Parameter" containment="true" eOpposite="//kernel/Parameter/interconnection"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EndParameter" eSuperTypes="//kernel/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="interconnectionSpecification" lowerBound="1" eType="//kernel/InterconnectionSpecification" eOpposite="//kernel/InterconnectionSpecification/endParameter"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EndSubstitution">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="formal" lowerBound="1" eType="//kernel/EndParameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elaboratedIinterconnection" lowerBound="1" eType="//kernel/ElaboratedInterconnection" eOpposite="//kernel/ElaboratedInterconnection/endSubstitution"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="actual" lowerBound="1" eType="//kernel/PortEnd" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Initializer">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1" eType="//kernel/RichComponent" eOpposite="//kernel/RichComponent/initializer"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1" eType="//kernel/Parameter" containment="true" eOpposite="//kernel/Parameter/initializer"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1" eType="//kernel/ActionSpecification" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ServiceImplementation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1" eType="//kernel/RichComponent" eOpposite="//kernel/RichComponent/serviceImplementation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="specification" lowerBound="1" eType="//kernel/Service"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1" eType="//kernel/ActionSpecification" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Implementation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1" eType="//kernel/RichComponent" eOpposite="//kernel/RichComponent/implementation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="artifact" lowerBound="1" upperBound="-1" eType="//kernel/Artifact" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Artifact">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="filename" eType="//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AtomicContract" eSuperTypes="//kernel/Contract">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="assumption" lowerBound="1" eType="//kernel/Assertion" containment="true" eOpposite="//kernel/Assertion/assumingContract"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="promise" lowerBound="1" eType="//kernel/Assertion" containment="true" eOpposite="//kernel/Assertion/promisingContract"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ContractCompositionOperator">
+      <eLiterals name="glb" literal="glb"/>
+      <eLiterals name="parallel" value="1" literal="parallel"/>
+      <eLiterals name="fusion" value="2" literal="fusion"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CompositeContract" eSuperTypes="//kernel/Contract">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="//kernel/ContractCompositionOperator">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="2" upperBound="-1" eType="//kernel/Contract" containment="true" eOpposite="//kernel/Contract/compositeContract"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Contract" abstract="true" eSuperTypes="//kernel/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="component" eType="//kernel/RichComponent" eOpposite="//kernel/RichComponent/contract"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="compositeContract" eType="//kernel/CompositeContract" eOpposite="//kernel/CompositeContract/operand"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="viewpoint" lowerBound="1" upperBound="-1" eType="//kernel/Viewpoint"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Viewpoint" eSuperTypes="//kernel/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1" eType="//kernel/RichComponent" eOpposite="//kernel/RichComponent/viewpoint"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="contract" upperBound="-1" eType="//kernel/Contract"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Assertion">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="informal" eType="//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="assumingContract" eType="//kernel/AtomicContract" eOpposite="//kernel/AtomicContract/assumption"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="promisingContract" eType="//kernel/AtomicContract" eOpposite="//kernel/AtomicContract/promise"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="formal" lowerBound="1" eType="//kernel/BlockOccurrence" containment="true" eOpposite="//kernel/BlockOccurrence/assertion"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="HRCBlock" abstract="true" eSuperTypes="//kernel/TemplatableElement //kernel/ReusableElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="pin" lowerBound="1" upperBound="-1" eType="//kernel/Pin" containment="true" eOpposite="//kernel/Pin/block"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CompositeBlock" eSuperTypes="//kernel/HRCBlock">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="//kernel/BlockCompositionOperator">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="link" upperBound="-1" eType="//kernel/Link" containment="true" eOpposite="//kernel/Link/block"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="1" upperBound="-1" eType="//kernel/BlockOccurrence" containment="true" eOpposite="//kernel/BlockOccurrence/compositeBlock"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="BlockCompositionOperator">
+      <eLiterals name="conjunction" literal="conjunction"/>
+      <eLiterals name="disjunction" value="1" literal="disjunction"/>
+      <eLiterals name="negation" value="2" literal="negation"/>
+      <eLiterals name="renaming" value="3" literal="renaming"/>
+      <eLiterals name="hiding" value="4" literal="hiding"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ProbabilisticBlock" eSuperTypes="//kernel/HRCBlock">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="probability" lowerBound="1" eType="//kernel/FunctionCall" containment="true" eOpposite="//kernel/FunctionCall/block"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MachineBlock" eSuperTypes="//kernel/HRCBlock">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" lowerBound="1" eType="//kernel/StateMachine" containment="true" eOpposite="//kernel/StateMachine/block"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="variable" upperBound="-1" eType="//kernel/Variable" containment="true" eOpposite="//kernel/Variable/block"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BlockOccurrence">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="component" eType="//kernel/RichComponent" eOpposite="//kernel/RichComponent/behavior"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="compositeBlock" eType="//kernel/CompositeBlock" eOpposite="//kernel/CompositeBlock/operand"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//kernel/HRCBlock"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="assertion" eType="//kernel/Assertion" eOpposite="//kernel/Assertion/formal"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AttributeEnd" eSuperTypes="//kernel/LinkEnd">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1" eType="//kernel/Variable"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LinkEnd" abstract="true" eSuperTypes="//kernel/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="link" lowerBound="1" eType="//kernel/Link" eOpposite="//kernel/Link/end"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Link">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="//kernel/CompositeBlock" eOpposite="//kernel/CompositeBlock/link"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="end" lowerBound="2" upperBound="2" eType="//kernel/LinkEnd" containment="true" eOpposite="//kernel/LinkEnd/link"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="component" eType="//kernel/RichComponent" eOpposite="//kernel/RichComponent/link"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Pin" abstract="true" eSuperTypes="//kernel/NavigableFeature">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" eType="//kernel/HRCBlock" eOpposite="//kernel/HRCBlock/pin"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PinEnd" abstract="true" eSuperTypes="//kernel/LinkEnd">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="blockOccurrence" eType="//kernel/BlockOccurrence"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FlowPin" eSuperTypes="//kernel/Pin">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="//kernel/FlowDirection">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="//kernel/FlowKind">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//kernel/DataType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ServicePin" eSuperTypes="//kernel/Pin">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="//kernel/ServiceDirection">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" lowerBound="1" eType="//kernel/DataType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1" eType="//kernel/Parameter" containment="true" eOpposite="//kernel/Parameter/servicePin"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FlowLinkEnd" eSuperTypes="//kernel/LinkEnd //kernel/FlowReference"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ServiceLinkEnd" eSuperTypes="//kernel/LinkEnd //kernel/ServiceReference"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ServicePinEnd" eSuperTypes="//kernel/PinEnd">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="servicePin" lowerBound="1" eType="//kernel/ServicePin"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FlowPinEnd" eSuperTypes="//kernel/PinEnd">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="flowPin" lowerBound="1" eType="//kernel/FlowPin"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StateMachine" eSuperTypes="//kernel/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="state" lowerBound="1" upperBound="-1" eType="//kernel/State" containment="true" eOpposite="//kernel/State/stateMachine"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1" eType="//kernel/Transition" containment="true" eOpposite="//kernel/Transition/stateMachine"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="initialState" lowerBound="1" eType="//kernel/State"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="//kernel/MachineBlock" eOpposite="//kernel/MachineBlock/behavior"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owningState" eType="//kernel/State" eOpposite="//kernel/State/submachine"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="idlingSet" upperBound="-1" eType="//kernel/IdlingSet" containment="true" eOpposite="//kernel/IdlingSet/stateMachine"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="//kernel/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" lowerBound="1" eType="//kernel/StateMachine" eOpposite="//kernel/StateMachine/state"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1" eType="//kernel/Transition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1" eType="//kernel/Transition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="stateInvariant" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="acceptCondition" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="submachine" eType="//kernel/StateMachine" containment="true" eOpposite="//kernel/StateMachine/owningState"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Transition">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" lowerBound="1" eType="//kernel/StateMachine" eOpposite="//kernel/StateMachine/transition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//kernel/State"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//kernel/State"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="//kernel/ActionSpecification" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="quantification" upperBound="-1" eType="//kernel/Quantification" containment="true" eOpposite="//kernel/Quantification/transition"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IdlingSet">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" lowerBound="1" eType="//kernel/StateMachine" eOpposite="//kernel/StateMachine/idlingSet"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="idlingCondition" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="idlingState" upperBound="-1" eType="//kernel/State"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Quantification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1" eType="//kernel/Variable" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="transition" lowerBound="1" eType="//kernel/Transition" eOpposite="//kernel/Transition/quantification"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Intension" eSuperTypes="//kernel/Quantification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="minimum" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="maximum" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Extension" eSuperTypes="//kernel/Quantification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="//kernel/State"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DataType" abstract="true" eSuperTypes="//kernel/ReusableElement">
+      <eOperations name="isBoolean" eType="//Boolean">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="isInteger" eType="//Boolean">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="isReal" eType="//Boolean">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="isString" eType="//Boolean">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="isVoidType" eType="//Boolean">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="conformsTo" eType="//Boolean">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;raise kermeta::exceptions::NotImplementedException.new&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="other" eType="//kernel/DataType"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="//kernel/DataType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="//kernel/DataType">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1" upperBound="-1" eType="//kernel/EnumerationElement" containment="true" eOpposite="//kernel/EnumerationElement/enumeration"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EnumerationElement" eSuperTypes="//kernel/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="enumeration" lowerBound="1" eType="//kernel/Enumeration" eOpposite="//kernel/Enumeration/element"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Array" eSuperTypes="//kernel/DataType">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elementType" lowerBound="1" eType="//kernel/DataType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="size" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Record" eSuperTypes="//kernel/DataType">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="field" lowerBound="1" upperBound="-1" eType="//kernel/Field" containment="true" eOpposite="//kernel/Field/record"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="//kernel/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//kernel/DataType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="record" lowerBound="1" eType="//kernel/Record" eOpposite="//kernel/Record/field"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true">
+      <eOperations name="type" eType="//kernel/DataType">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="intValue" eType="//Integer">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="boolValue" eType="//Boolean">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="stringValue" eType="//String">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="isStaticallyComputable" eType="//Boolean">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LiteralSpecification" abstract="true" eSuperTypes="//kernel/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="//kernel/LiteralSpecification">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="//Integer">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="//kernel/LiteralSpecification">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="//Boolean">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="//kernel/LiteralSpecification">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VoidLiteral" eSuperTypes="//kernel/LiteralSpecification"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral" eSuperTypes="//kernel/LiteralSpecification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="enumerationElement" lowerBound="1" eType="//kernel/EnumerationElement"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NavigationExpression" abstract="true" eSuperTypes="//kernel/Expression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="context" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FeatureNavigation" eSuperTypes="//kernel/NavigationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1" eType="//kernel/NavigableFeature"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NavigableFeature" abstract="true" eSuperTypes="//kernel/NamedElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="RecordNavigation" eSuperTypes="//kernel/NavigationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="field" lowerBound="1" eType="//kernel/Field"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ArrayNavigation" eSuperTypes="//kernel/NavigationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="index" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InstanceSpecification" abstract="true" eSuperTypes="//kernel/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="RecordInstance" eSuperTypes="//kernel/InstanceSpecification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="slot" lowerBound="1" upperBound="-1" eType="//kernel/RecordSlot" containment="true" eOpposite="//kernel/RecordSlot/recordInstance"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RecordSlot">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="field" lowerBound="1" eType="//kernel/Field"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="recordInstance" lowerBound="1" eType="//kernel/RecordInstance" eOpposite="//kernel/RecordInstance/slot"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ArrayInstance" eSuperTypes="//kernel/InstanceSpecification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" upperBound="-1" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//kernel/Array"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BuiltinExpression" abstract="true" eSuperTypes="//kernel/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" eSuperTypes="//kernel/BuiltinExpression">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="//kernel/UnaryOperator">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BinaryExpression" eSuperTypes="//kernel/BuiltinExpression">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="//kernel/BinaryOperator">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="UnaryOperator">
+      <eLiterals name="negative" literal="negative"/>
+      <eLiterals name="positive" value="1" literal="positive"/>
+      <eLiterals name="bitwise_complement" value="2" literal="bitwise_complement"/>
+      <eLiterals name="logical_not" value="3" literal="logical_not"/>
+      <eLiterals name="prime" value="4" literal="prime"/>
+      <eLiterals name="present" value="5" literal="present"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="BinaryOperator">
+      <eLiterals name="addition" literal="addition"/>
+      <eLiterals name="substraction" value="1" literal="substraction"/>
+      <eLiterals name="multiplication" value="2" literal="multiplication"/>
+      <eLiterals name="division" value="3" literal="division"/>
+      <eLiterals name="modulus" value="4" literal="modulus"/>
+      <eLiterals name="bitwise_left" value="5" literal="bitwise_left"/>
+      <eLiterals name="bitwise_right" value="6" literal="bitwise_right"/>
+      <eLiterals name="bitwise_and" value="7" literal="bitwise_and"/>
+      <eLiterals name="bitwise_or" value="8" literal="bitwise_or"/>
+      <eLiterals name="equality" value="9" literal="equality"/>
+      <eLiterals name="inequality" value="10" literal="inequality"/>
+      <eLiterals name="less_than" value="11" literal="less_than"/>
+      <eLiterals name="greater_than" value="12" literal="greater_than"/>
+      <eLiterals name="less_than_or_equal" value="13" literal="less_than_or_equal"/>
+      <eLiterals name="greater_than_or_equal" value="14" literal="greater_than_or_equal"/>
+      <eLiterals name="logical_and" value="15" literal="logical_and"/>
+      <eLiterals name="logical_or" value="16" literal="logical_or"/>
+      <eLiterals name="logical_implication" value="17" literal="logical_implication"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="//kernel/Call //kernel/Expression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="//kernel/ProbabilisticBlock" eOpposite="//kernel/ProbabilisticBlock/probability"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1" eType="//kernel/Function"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="//kernel/ReusableElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1" eType="//kernel/Parameter" containment="true" eOpposite="//kernel/Parameter/function"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" lowerBound="1" eType="//kernel/DataType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="//kernel/ActionSpecification" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Call" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="actualParameter" upperBound="-1" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ActionSpecification" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="//kernel/ActionSpecification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//kernel/NavigationExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CompositeAction" eSuperTypes="//kernel/ActionSpecification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="content" upperBound="-1" eType="//kernel/ActionSpecification" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="declaredVariable" upperBound="-1" eType="//kernel/Variable" containment="true" eOpposite="//kernel/Variable/compositeAction"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InitializationCall" eSuperTypes="//kernel/Call //kernel/ActionSpecification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//kernel/RichComponentProperty"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ReturnAction" eSuperTypes="//kernel/ActionSpecification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="returnedExpression" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ControlFlowAction" abstract="true" eSuperTypes="//kernel/ActionSpecification"/>
+    <eClassifiers xsi:type="ecore:EClass" name="JumpAction" abstract="true" eSuperTypes="//kernel/ControlFlowAction"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LoopAction" abstract="true" eSuperTypes="//kernel/ControlFlowAction">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="content" lowerBound="1" eType="//kernel/ActionSpecification" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Break" eSuperTypes="//kernel/JumpAction"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Continue" eSuperTypes="//kernel/JumpAction"/>
+    <eClassifiers xsi:type="ecore:EClass" name="WhileDoAction" eSuperTypes="//kernel/LoopAction"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DoWhileAction" eSuperTypes="//kernel/LoopAction"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ForAction" eSuperTypes="//kernel/LoopAction">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="iteration" lowerBound="1" eType="//kernel/Assignment" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" eType="//kernel/Assignment" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IfAction" eSuperTypes="//kernel/ControlFlowAction">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ifCase" lowerBound="1" eType="//kernel/ActionSpecification" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elseCase" eType="//kernel/ActionSpecification" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SwitchAction" eSuperTypes="//kernel/ControlFlowAction">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="defaultAction" eType="//kernel/ActionSpecification" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="switchExpression" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="case" upperBound="-1" eType="//kernel/SwitchCase" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SwitchCase">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="caseAction" eType="//kernel/ActionSpecification" containment="true"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="RichConnectors" nsURI="platform:/resource/speedsImplementation/hrc/ecore/speedsL1.ecore#//RichConnectors" nsPrefix="RichConnectors">
+    <eClassifiers xsi:type="ecore:EClass" name="EDTransition" eSuperTypes="//kernel/Transition">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EDInteractionPoint" eSuperTypes="//kernel/InteractionPoint"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EDInteractionPointReference" abstract="true" eSuperTypes="//kernel/PortReference">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="interactionPoint" lowerBound="1" eType="//RichConnectors/EDInteractionPoint"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EDLinkEnd" eSuperTypes="//RichConnectors/EDInteractionPointReference //kernel/LinkEnd"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EDPinEnd" eSuperTypes="//kernel/PinEnd">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="pin" lowerBound="1" eType="//RichConnectors/EDPin"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EDPin" eSuperTypes="//kernel/Pin"/>
+    <eClassifiers xsi:type="ecore:EClass" name="SynchronizableEnd" abstract="true" eSuperTypes="//kernel/NavigableFeature //kernel/InterconnectionEnd">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="//RichConnectors/SynchronizationKind">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SimpleSynchronizableEnd" eSuperTypes="//RichConnectors/SynchronizableEnd //RichConnectors/EDInteractionPointReference"/>
+    <eClassifiers xsi:type="ecore:EClass" name="HierarchicalSynchronizableEnd" eSuperTypes="//RichConnectors/SynchronizableEnd">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subConnector" lowerBound="1" eType="//RichConnectors/RichConnector"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="SynchronizationKind">
+      <eLiterals name="none" literal="none"/>
+      <eLiterals name="sync" value="1" literal="sync"/>
+      <eLiterals name="trig" value="2" literal="trig"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RichConnector" eSuperTypes="//kernel/FixedInterconnection">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="superEnd" upperBound="-1" eType="//RichConnectors/HierarchicalSynchronizableEnd"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1" eType="//kernel/Parameter" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="allowedInteraction" upperBound="-1" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="exportLocation" upperBound="-1" eType="//RichConnectors/ExportLocation" containment="true" eOpposite="//RichConnectors/ExportLocation/richConnector"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="interactionSpecification" upperBound="-1" eType="//RichConnectors/InteractionSpecification" containment="true" eOpposite="//RichConnectors/InteractionSpecification/richConnector"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExportLocation" eSuperTypes="//RichConnectors/EDInteractionPointReference">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="richConnector" lowerBound="1" eType="//RichConnectors/RichConnector" eOpposite="//RichConnectors/RichConnector/exportLocation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InteractionSpecification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="richConnector" lowerBound="1" eType="//RichConnectors/RichConnector" eOpposite="//RichConnectors/RichConnector/interactionSpecification"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="preAction" eType="//kernel/ActionSpecification" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="//kernel/ActionSpecification" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="interaction" lowerBound="1" eType="//kernel/Expression" containment="true"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="Priorities" nsURI="platform:/resource/speedsImplementation/hrc/ecore/speedsL1.ecore#//Priorities" nsPrefix="Priorities">
+    <eClassifiers xsi:type="ecore:EClass" name="PriorityRule" eSuperTypes="//kernel/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="higher" lowerBound="1" upperBound="-1" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lower" lowerBound="1" upperBound="-1" eType="//kernel/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1" eType="//kernel/RichComponent" eOpposite="//kernel/RichComponent/priorityRule"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

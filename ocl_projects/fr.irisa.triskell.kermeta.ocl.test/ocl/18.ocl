@@ -1,0 +1,6 @@
+package sample
+-- 18 : 
+context A inv:
+  	b->any( o | true)
+
+endpackage

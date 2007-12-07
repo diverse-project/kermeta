@@ -1,0 +1,10 @@
+package sample
+-- 44: set difference (-)
+context A inv:
+	b - b
+
+endpackage
+
+
+
+

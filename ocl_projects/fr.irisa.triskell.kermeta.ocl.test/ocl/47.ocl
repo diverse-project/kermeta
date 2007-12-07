@@ -1,0 +1,10 @@
+package sample
+-- 47: self
+context A inv:
+	self
+
+endpackage
+
+
+
+

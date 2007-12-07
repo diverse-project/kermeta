@@ -1,0 +1,9 @@
+package sample
+-- 34: indexOf
+context A inv:
+	b->indexOf(b->first())
+
+endpackage
+
+
+

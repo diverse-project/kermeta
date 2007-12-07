@@ -1,0 +1,9 @@
+package sample
+-- 60: substring
+context A inv:
+	"foobar".substring(4, 8)
+
+endpackage
+
+
+

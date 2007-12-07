@@ -1,0 +1,7 @@
+package sample
+-- 53: insertAt
+context A inv:
+	b->insertAt(1, ab)
+
+endpackage
+

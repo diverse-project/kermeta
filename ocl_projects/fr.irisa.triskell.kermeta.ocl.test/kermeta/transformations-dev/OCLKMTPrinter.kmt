@@ -1,0 +1,95 @@
+ /* $Id: OCLKMTPrinter.kmt,v 1.10 2007/12/07 01:54:44 ffleurey Exp $
+ * File : Visitors.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Authors :  Olivier Brais, Mark Skipper
+ * 
+ */
+@mainClass "OCLKMTPrinter::OCLKMTPrinter"
+@mainOperation "main"
+ 
+/* This package contains operations code for Visitor Patterns
+ You should use Patterns4Ecore.kmt operations for applying Patterns */
+package OCLKMTPrinter;
+require "DefinitionPreprocessor.kmt"
+ 
+require "ocl2kmtVisitor.kmt"   
+//require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "EcoreHelper.kmt"
+require "OCLHelper.kmt" 
+require "IOMixin.kmt"
+
+//require "Tools.kmt"    
+//require "../../../fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+   
+  
+using kermeta::standard
+using kermeta::persistence  
+using kermeta::exceptions
+using ocl::cst
+using ocl2kmt
+//using EcoreHelpers
+using OCLHelpers 
+
+class OCLKMTPrinter 
+{ 
+	attribute repository: EMFRepository
+	attribute parsedOclURI: String
+    reference oclHelper : OCLHelper
+    reference ecoreHelper : EcoreHelpers::EcoreHelper
+    reference mhelper : EcoreHelpers::EcoreHelper
+    attribute visitor :Ocl2kmtVisitor 
+    attribute preprocessor : DefinitionPreprocessor
+    attribute parsedOcl : Resource
+    attribute metamodel: Resource
+    
+    operation main(): Void is
+		do
+				//self.generateOCL("../../ocl/speedsDepTest.xmi", "../../ocl/speedsL1.ecore", "speedsDepTest.kmt")
+				self.generateOCL("platform:/resource/testOCL/01.xmi", "platform:/resource/testOCL/sample.ecore", "platform:/resource/testOCL/01.kmt")
+	    end
+	    
+	    
+    /** generateOCL
+     **  parsedOclURI: String <-- the xmi file containing the OCLCST model of the expression
+     **  metamodelURI: String <-- the metamodel against which the ocl was written
+     **  Outputfilename: String <-- where to write the kermeta code
+     **/ 
+	  operation generateOCL(parsedOclURI : String, metamodelURI : String,Outputfilename : String): Void is
+		do
+			repository := EMFRepository.new
+	     	parsedOcl  := repository.getResource(parsedOclURI)
+	     	metamodel := repository.getResource(metamodelURI)
+	     	ecoreHelper := EcoreHelpers::EcoreHelper.new
+	     	ecoreHelper.setModel(metamodel) 
+			oclHelper := OCLHelper.new
+		    preprocessor := DefinitionPreprocessor.new
+		    preprocessor.setEcoreHelper(ecoreHelper)
+		    stdio.writeln("======= Pass one ========")
+		    oclHelper.getPackageDeclaration(parsedOcl).accept(preprocessor)
+			// the preprocessor and the visitor shold use the same ecore helper  so they share models
+	    	visitor := Ocl2kmtVisitor.new 
+		    visitor.setEcoreHelper(ecoreHelper)
+		    stdio.writeln("======= Pass two ========")
+			oclHelper.getPackageDeclaration(parsedOcl.instances).accept(visitor)
+		    stdio.writeln("=======  Done  ========") 
+			var f : kermeta::io::FileIO init kermeta::io::FileIO.new
+			var io : StringWriter   
+			io ?= visitor.getIo
+			if (io != void) then 
+		     	if Outputfilename.indexOf(".kmt") == 0 then
+					Outputfilename.append(".kmt")
+		     	end 
+				f.writeTextFile(Outputfilename,io.s)
+				stdio.write("-----------------------------------------------")
+				stdio.write(io.s)
+				stdio.write("-----------------------------------------------")
+				stdio.writeln("Output written to:" + Outputfilename)
+			else
+				stdio.writeln("\n\n output written to std.out")
+			end
+	    end
+	    
+
+}

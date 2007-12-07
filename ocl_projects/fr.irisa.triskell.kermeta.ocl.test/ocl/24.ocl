@@ -1,0 +1,6 @@
+package sample
+-- 24: let expressions
+context A inv:
+	let v : Integer = 1 in v
+
+endpackage

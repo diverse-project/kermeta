@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="fr   ">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Gforge: TOPCASED-SYSML: dépôt de sources</title>
+    <link rel="icon" type="image/png" href="/themes/gforge/images/icon.png"/>
+    <link rel="shortcut icon" href="/themes/gforge/images/icon.png"/>
+    <link rel="alternate" title="Gforge - Project News Highlights RSS" href="/export/rss_sfnews.php" type="application/rss+xml"/>
+    <link rel="alternate" title="Gforge - Project News Highlights RSS" href="/export/rss20_news.php" type="application/rss+xml"/>
+    <link rel="alternate" title="Gforge - New Projects RSS" href="/export/rss_sfprojects.php" type="application/rss+xml"/>
+
+    <script language="JavaScript" type="text/javascript">
+    <!--
+
+    function admin_window(adminurl) {
+        AdminWin = window.open( adminurl, 'AdminWindow','scrollbars=yes,resizable=yes, toolbar=yes, height=400, width=400, top=2, left=2');
+        AdminWin.focus();
+    }
+    function help_window(helpurl) {
+        HelpWin = window.open( helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
+    }
+    // -->
+        </script>
+           <link rel="stylesheet" type="text/css" href="/themes/gforge/css/theme.css" />
+       
+</head>
+
+<body>
+
+  <div class="header">
+  <table border="0" width="100%" cellspacing="0" cellpadding="0">
+      <tr>
+        <td class="topLeft"><a href="/"><img src="/themes/gforge/images/header/top-logo.gif" border="0" alt="" width="205" height="54" /></a></td>
+        <td class="middleRight">
+        <form action="/search/" method="get">
+        <table border="0" cellpadding="0" cellspacing="0">
+        <tr><td>
+        <div align="center" style="font-size:smaller"><select name="type_of_search"><option value="soft">Logiciel/Groupe</option>
+<option value="people">Personne</option>
+<option value="skill">Savoir-faire</option>
+</select></div></td><td>&nbsp;</td><td><input type="text" size="12" name="words" value="" /></td><td>&nbsp;</td><td><input type="submit" name="Search" value="Rechercher" /></td></tr></table></form></td>
+        <td class="middleRight">            <a href="/account/login.php">S'identifier</a>
+            |
+            <a href="/account/register.php">Nouveau compte</a>
+            </td>
+        <td>&nbsp;&nbsp;</td>
+      </tr>
+  
+  </table>
+</div>
+
+<!-- outer tabs -->
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+
+        <!-- start tabs -->
+
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr><td valign="top" width="3" background="/themes/gforge/images/toptab-new/left.gif">
+      			<img src="/themes/gforge/images/clear.png" height="30" width="3" alt="" />
+                	</td><td background="/themes/gforge/images/toptab-new/middle.gif" width="16%" align="center">
+            		<a class="topTab" href="/">Accueil</a>
+    		</td><td valign="top" width="9" background="/themes/gforge/images/toptab-new/right.gif">
+        			<img src="/themes/gforge/images/clear.png" height="30" width="9" alt="" />
+                  	  </td><td valign="top" width="3" background="/themes/gforge/images/toptab-new/left.gif">
+      			<img src="/themes/gforge/images/clear.png" height="30" width="3" alt="" />
+                	</td><td background="/themes/gforge/images/toptab-new/middle.gif" width="16%" align="center">
+            		<a class="topTab" href="/my/">Ma page</a>
+    		</td><td valign="top" width="9" background="/themes/gforge/images/toptab-new/right.gif">
+        			<img src="/themes/gforge/images/clear.png" height="30" width="9" alt="" />
+                  	  </td><td valign="top" width="3" background="/themes/gforge/images/toptab-new/left.gif">
+      			<img src="/themes/gforge/images/clear.png" height="30" width="3" alt="" />
+                	</td><td background="/themes/gforge/images/toptab-new/middle.gif" width="16%" align="center">
+            		<a class="topTab" href="/softwaremap/">Arbre des projets</a>
+    		</td><td valign="top" width="9" background="/themes/gforge/images/toptab-new/right.gif">
+        			<img src="/themes/gforge/images/clear.png" height="30" width="9" alt="" />
+                  	  </td><td valign="top" width="3" background="/themes/gforge/images/toptab-new/left.gif">
+      			<img src="/themes/gforge/images/clear.png" height="30" width="3" alt="" />
+                	</td><td background="/themes/gforge/images/toptab-new/middle.gif" width="16%" align="center">
+            		<a class="topTab" href="/snippet/">Boite à outils</a>
+    		</td><td valign="top" width="9" background="/themes/gforge/images/toptab-new/right.gif">
+        			<img src="/themes/gforge/images/clear.png" height="30" width="9" alt="" />
+                  	  </td><td valign="top" width="3" background="/themes/gforge/images/toptab-new/left.gif">
+      			<img src="/themes/gforge/images/clear.png" height="30" width="3" alt="" />
+                	</td><td background="/themes/gforge/images/toptab-new/middle.gif" width="16%" align="center">
+            		<a class="topTab" href="/people/">Demande d'aide</a>
+    		</td><td valign="top" width="3" background="/themes/gforge/images/toptab-new/selected-left.gif">
+      			<img src="/themes/gforge/images/clear.png" height="30" width="3" alt="" />
+                	</td><td background="/themes/gforge/images/toptab-new/selected-middle.gif" width="16%" align="center">
+            		<a class="topTabSelected" href="/projects/topcased-sysml/">TOPCASED-SYSML</a>
+    		</td><td valign="top" width="9" background="/themes/gforge/images/toptab-new/selected-right.gif">
+        			<img src="/themes/gforge/images/clear.png" height="30" width="9" alt="" />
+                  	  </td></tr>
+        </table> 
+
+        <!-- end tabs -->
+</td>
+    </tr>
+</table>
+
+<!-- inner tabs -->
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+          <tr>
+        <td>
+           
+
+        <!-- start tabs -->
+
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr><td valign="top" width="5" background="/themes/gforge/images/bottomtab-new/middle.gif">
+      			<img src="/themes/gforge/images/clear.png" height="22" width="5" alt="" />
+                	</td><td background="/themes/gforge/images/bottomtab-new/middle.gif" width="9%" align="center">
+            		<a class="bottomTab" href="/projects/topcased-sysml/">En bref</a>
+    		</td><td valign="top" width="2" background="/themes/gforge/images/bottomtab-new/separator.gif">
+          			<img src="/themes/gforge/images/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="/themes/gforge/images/bottomtab-new/middle.gif">
+      			<img src="/themes/gforge/images/clear.png" height="22" width="5" alt="" />
+                	</td><td background="/themes/gforge/images/bottomtab-new/middle.gif" width="9%" align="center">
+            		<a class="bottomTab" href="/activity/?group_id=20">Activity</a>
+    		</td><td valign="top" width="2" background="/themes/gforge/images/bottomtab-new/separator.gif">
+          			<img src="/themes/gforge/images/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="/themes/gforge/images/bottomtab-new/middle.gif">
+      			<img src="/themes/gforge/images/clear.png" height="22" width="5" alt="" />
+                	</td><td background="/themes/gforge/images/bottomtab-new/middle.gif" width="9%" align="center">
+            		<a class="bottomTab" href="/forum/?group_id=20">Forums</a>
+    		</td><td valign="top" width="2" background="/themes/gforge/images/bottomtab-new/separator.gif">
+          			<img src="/themes/gforge/images/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="/themes/gforge/images/bottomtab-new/middle.gif">
+      			<img src="/themes/gforge/images/clear.png" height="22" width="5" alt="" />
+                	</td><td background="/themes/gforge/images/bottomtab-new/middle.gif" width="9%" align="center">
+            		<a class="bottomTab" href="/tracker/?group_id=20">Suivi</a>
+    		</td><td valign="top" width="2" background="/themes/gforge/images/bottomtab-new/separator.gif">
+          			<img src="/themes/gforge/images/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="/themes/gforge/images/bottomtab-new/middle.gif">
+      			<img src="/themes/gforge/images/clear.png" height="22" width="5" alt="" />
+                	</td><td background="/themes/gforge/images/bottomtab-new/middle.gif" width="9%" align="center">
+            		<a class="bottomTab" href="/mail/?group_id=20">Listes</a>
+    		</td><td valign="top" width="2" background="/themes/gforge/images/bottomtab-new/separator.gif">
+          			<img src="/themes/gforge/images/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="/themes/gforge/images/bottomtab-new/middle.gif">
+      			<img src="/themes/gforge/images/clear.png" height="22" width="5" alt="" />
+                	</td><td background="/themes/gforge/images/bottomtab-new/middle.gif" width="9%" align="center">
+            		<a class="bottomTab" href="/pm/?group_id=20">Tâches</a>
+    		</td><td valign="top" width="2" background="/themes/gforge/images/bottomtab-new/separator.gif">
+          			<img src="/themes/gforge/images/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="/themes/gforge/images/bottomtab-new/middle.gif">
+      			<img src="/themes/gforge/images/clear.png" height="22" width="5" alt="" />
+                	</td><td background="/themes/gforge/images/bottomtab-new/middle.gif" width="9%" align="center">
+            		<a class="bottomTab" href="/docman/?group_id=20">Documents</a>
+    		</td><td valign="top" width="2" background="/themes/gforge/images/bottomtab-new/separator.gif">
+          			<img src="/themes/gforge/images/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="/themes/gforge/images/bottomtab-new/middle.gif">
+      			<img src="/themes/gforge/images/clear.png" height="22" width="5" alt="" />
+                	</td><td background="/themes/gforge/images/bottomtab-new/middle.gif" width="9%" align="center">
+            		<a class="bottomTab" href="/survey/?group_id=20">Sondages</a>
+    		</td><td valign="top" width="2" background="/themes/gforge/images/bottomtab-new/separator.gif">
+          			<img src="/themes/gforge/images/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="/themes/gforge/images/bottomtab-new/middle.gif">
+      			<img src="/themes/gforge/images/clear.png" height="22" width="5" alt="" />
+                	</td><td background="/themes/gforge/images/bottomtab-new/middle.gif" width="9%" align="center">
+            		<a class="bottomTab" href="/news/?group_id=20">Annonces</a>
+    		</td><td valign="top" width="2" background="/themes/gforge/images/bottomtab-new/separator.gif">
+          			<img src="/themes/gforge/images/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="/themes/gforge/images/bottomtab-new/selected-middle.gif">
+      			<img src="/themes/gforge/images/clear.png" height="22" width="5" alt="" />
+                	</td><td background="/themes/gforge/images/bottomtab-new/selected-middle.gif" width="9%" align="center">
+            		<a class="bottomTabSelected" href="/scm/?group_id=20">Sources</a>
+    		</td><td valign="top" width="2" background="/themes/gforge/images/bottomtab-new/selected-separator.gif">
+          			<img src="/themes/gforge/images/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="/themes/gforge/images/bottomtab-new/middle.gif">
+      			<img src="/themes/gforge/images/clear.png" height="22" width="5" alt="" />
+                	</td><td background="/themes/gforge/images/bottomtab-new/middle.gif" width="9%" align="center">
+            		<a class="bottomTab" href="/frs/?group_id=20">Fichiers</a>
+    		</td></tr>
+        </table> 
+
+        <!-- end tabs -->
+        </td>
+      </tr>
+    </table>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0">  
+  <tr>
+    <td class="mainCanvas"> <!-- main body area -->
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- ViewVC :: http://www.viewvc.org/ -->
+<head>
+<title>[topcased-sysml] Log of /plugins/org.topcased.sysml/model/sysMLAddedRules.ocl</title>
+<meta name="generator" content="ViewVC 1.0.0" />
+<link rel="stylesheet" href="/themes/gforge/viewvc/styles.css" type="text/css" />
+
+</head>
+<body>
+<div class="vc_navheader">
+
+<form method="get" action="/scm/viewvc.php/">
+
+<table style="padding:0.1em;">
+<tr>
+<td>
+<strong>
+
+<a href="/scm/viewvc.php/?root=topcased-sysml">
+
+[topcased-sysml]</a>
+/
+
+<a href="/scm/viewvc.php/plugins/?root=topcased-sysml">
+
+plugins</a>
+/
+
+<a href="/scm/viewvc.php/plugins/org.topcased.sysml/?root=topcased-sysml">
+
+org.topcased.sysml</a>
+/
+
+<a href="/scm/viewvc.php/plugins/org.topcased.sysml/model/?root=topcased-sysml">
+
+model</a>
+/
+
+
+
+sysMLAddedRules.ocl
+
+
+</strong>
+
+</td>
+<td style="text-align:right;">
+
+
+<strong>Repository:</strong>
+<select name="root" onchange="submit()">
+
+
+<option value="*viewroots*">Repository Listing</option>
+
+
+
+
+
+
+
+
+
+
+<optgroup label="CVS Repositories"><option selected="selected">topcased-sysml</option></optgroup>
+
+
+</select>
+<input type="submit" value="Go" />
+
+</td>
+</tr>
+</table>
+
+</form>
+
+</div>
+<div style="float: right; padding: 5px;"><a href="http://www.viewvc.org/"><img src="/themes/gforge/viewvc/images/logo.png" alt="ViewVC logotype" width="128" height="48" /></a></div>
+<h1>Log of /plugins/org.topcased.sysml/model/sysMLAddedRules.ocl</h1>
+
+<p style="margin:0;">
+
+<a href="/scm/viewvc.php/plugins/org.topcased.sysml/model/?root=topcased-sysml"><img src="/themes/gforge/viewvc/images/back_small.png" width="16" height="16" alt="Parent Directory" /> Parent Directory</a>
+
+
+
+
+</p>
+
+<hr />
+<table class="auto">
+
+
+
+<tr>
+<td>Links to HEAD:</td>
+<td>
+(<a href="/scm/viewvc.php/plugins/org.topcased.sysml/model/sysMLAddedRules.ocl?root=topcased-sysml&amp;view=markup">view</a>)
+(<a href="/scm/viewvc.php/*checkout*/plugins/org.topcased.sysml/model/sysMLAddedRules.ocl?root=topcased-sysml">download</a>)
+
+(<a href="/scm/viewvc.php/plugins/org.topcased.sysml/model/sysMLAddedRules.ocl?view=annotate&amp;root=topcased-sysml">annotate</a>)
+</td>
+</tr>
+
+
+
+<tr>
+<td>Sticky Tag:</td>
+<td><form method="get" action="/scm/viewvc.php/plugins/org.topcased.sysml/model/sysMLAddedRules.ocl" style="display: inline">
+<input type="hidden" name="view" value="log" /><input type="hidden" name="root" value="topcased-sysml" />
+
+
+<select name="pathrev" onchange="submit()">
+<option value=""></option>
+
+<optgroup label="Branches">
+
+
+<option>MAIN</option>
+
+
+</optgroup>
+
+<optgroup label="Non-branch tags">
+
+
+<option>HEAD</option>
+
+
+</optgroup>
+
+</select>
+
+<input type="submit" value="Set" />
+</form>
+
+</td>
+</tr>
+</table>
+ 
+
+
+
+
+
+
+
+
+<div>
+<hr />
+
+<a name="rev1.1"></a>
+<a name="HEAD"></a>
+
+
+Revision <strong>1.1</strong> -
+
+(<a href="/scm/viewvc.php/plugins/org.topcased.sysml/model/sysMLAddedRules.ocl?revision=1.1&amp;root=topcased-sysml&amp;view=markup">view</a>)
+
+(<a href="/scm/viewvc.php/*checkout*/plugins/org.topcased.sysml/model/sysMLAddedRules.ocl?revision=1.1&amp;root=topcased-sysml">download</a>)
+
+(<a href="/scm/viewvc.php/plugins/org.topcased.sysml/model/sysMLAddedRules.ocl?annotate=1.1&amp;root=topcased-sysml">annotate</a>)
+
+
+
+- <a href="/scm/viewvc.php/plugins/org.topcased.sysml/model/sysMLAddedRules.ocl?root=topcased-sysml&amp;r1=1.1&amp;view=log">[select for diffs]</a>
+
+
+
+
+<br />
+
+<em>Thu May 10 12:36:13 2007 UTC</em> (6 days ago) by <em>spelleschi</em>
+
+
+<br />Branch:
+
+<a href="/scm/viewvc.php/plugins/org.topcased.sysml/model/sysMLAddedRules.ocl?view=log&amp;root=topcased-sysml&amp;pathrev=MAIN"><strong>MAIN</strong></a>
+
+
+
+<br />CVS Tags:
+
+<a href="/scm/viewvc.php/plugins/org.topcased.sysml/model/sysMLAddedRules.ocl?view=log&amp;root=topcased-sysml&amp;pathrev=HEAD"><strong>HEAD</strong></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<pre class="vc_log">New SysML CVS base
+</pre>
+</div>
+
+ 
+
+
+
+ <hr />
+<p><a name="diff"></a>
+This form allows you to request diffs between any two revisions of this file.
+For each of the two "sides" of the diff,
+
+select a symbolic revision name using the selection box, or choose
+'Use Text Field' and enter a numeric revision.
+
+</p>
+<form method="get" action="/scm/viewvc.php/plugins/org.topcased.sysml/model/sysMLAddedRules.ocl" name="diff_select">
+<table cellpadding="2" cellspacing="0" class="auto">
+<tr>
+<td>&nbsp;</td>
+<td>
+<input type="hidden" name="root" value="topcased-sysml" /><input type="hidden" name="view" value="diff" />
+Diffs between
+
+<select name="r1">
+<option value="text" selected="selected">Use Text Field</option>
+
+<option value="1.1:MAIN">MAIN</option>
+
+<option value="1.1:HEAD">HEAD</option>
+
+</select>
+<input type="text" size="12" name="tr1"
+value="1.1"
+onchange="document.diff_select.r1.selectedIndex=0" />
+
+and
+
+<select name="r2">
+<option value="text" selected="selected">Use Text Field</option>
+
+<option value="1.1:MAIN">MAIN</option>
+
+<option value="1.1:HEAD">HEAD</option>
+
+</select>
+<input type="text" size="12" name="tr2"
+value="1.1"
+onchange="document.diff_select.r1.selectedIndex=0" />
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+Type of Diff should be a
+<select name="diff_format" onchange="submit()">
+<option value="h" selected="selected">Colored Diff</option>
+<option value="l" >Long Colored Diff</option>
+<option value="u" >Unidiff</option>
+<option value="c" >Context Diff</option>
+<option value="s" >Side by Side</option>
+</select>
+<input type="submit" value=" Get Diffs " />
+</td>
+</tr>
+</table>
+</form>
+
+
+<form method="get" action="/scm/viewvc.php/plugins/org.topcased.sysml/model/sysMLAddedRules.ocl">
+<div>
+<hr />
+<a name="logsort"></a>
+<input type="hidden" name="root" value="topcased-sysml" /><input type="hidden" name="view" value="log" />
+Sort log by:
+<select name="logsort" onchange="submit()">
+<option value="cvs" >Not sorted</option>
+<option value="date" selected="selected">Commit date</option>
+<option value="rev" >Revision</option>
+</select>
+<input type="submit" value=" Sort " />
+</div>
+</form>
+
+
+<hr />
+<table>
+<tr>
+<td><address><a href='mailto:root@gforge.enseeiht.fr'>root@gforge.enseeiht.fr</a></address></td>
+<td style="text-align: right;"><strong><a href="/themes/gforge/viewvc/help_log.html">ViewVC Help</strong></td>
+</tr>
+<tr>
+<td>Powered by <a href="http://viewvc.tigris.org/">ViewVC 1.0.0</a></td>
+<td style="text-align: right;">&nbsp;</td>
+</tr>
+</table>
+</body>
+</html>
+
+
+  </td></tr>
+</table>  
+ 
+<br />
+<center>
+<a href="http://gforge.org/"><img src="/images/pow-gforge.png" alt="Powered By GForge Collaborative Development Environment" border="0" /></a>
+</center>
+
+
+</body>
+</html>
+

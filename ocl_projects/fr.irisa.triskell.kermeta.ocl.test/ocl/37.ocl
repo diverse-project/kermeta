@@ -1,0 +1,9 @@
+package sample
+-- 37:as ordered set
+context A inv:
+	b->asOrderedSet()
+
+endpackage
+
+
+

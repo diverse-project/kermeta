@@ -1,0 +1,40 @@
+package sample
+
+context A::getB(a: Integer, b: Boolean):B
+	pre: a > 0
+	pre: true
+	post: result = self.ab
+
+endpackage
+
+/*
+
+package p
+@aspect "true"
+class Y{
+
+   @overloadable "true"
+   operation foo(i: Integer): Boolean
+   pre precondition1 is 
+   do 
+      i.isGreater(0)
+   end
+   pre precondition2 is 
+   do 
+      true
+   end
+   post postcondition2 is 
+   do 
+      true 
+   end
+   is 
+   do
+      var e: Exception init NotImplementedException.new
+      e.message := "OCL pre/post: Y.foo()"
+      raise e
+   end
+}
+
+*/
+
+

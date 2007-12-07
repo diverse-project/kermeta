@@ -1,0 +1,6 @@
+package sample
+-- 27: String literals
+context A inv:
+	"foo"="bar"
+
+endpackage

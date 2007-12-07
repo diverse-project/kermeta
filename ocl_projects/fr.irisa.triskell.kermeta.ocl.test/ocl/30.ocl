@@ -1,0 +1,6 @@
+package sample
+-- 30: collection literal
+context A inv:
+	Bag{1, 1}
+
+endpackage

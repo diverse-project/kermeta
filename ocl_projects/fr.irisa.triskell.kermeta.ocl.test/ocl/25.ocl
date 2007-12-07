@@ -1,0 +1,6 @@
+package sample
+-- 25: null literal
+context A inv:
+	null
+
+endpackage

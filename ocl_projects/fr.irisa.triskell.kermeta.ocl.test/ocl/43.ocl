@@ -1,0 +1,10 @@
+package sample
+-- 43: intersection
+context A inv:
+	b->intersection(b)
+
+endpackage
+
+
+
+

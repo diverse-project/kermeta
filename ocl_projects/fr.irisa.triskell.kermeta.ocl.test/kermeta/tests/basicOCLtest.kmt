@@ -1,0 +1,52 @@
+/* $Id: basicOCLtest.kmt,v 1.4 2007/09/07 10:08:38 bitterjug Exp $
+ * Creation date: July 26, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "tests::Main"
+@mainOperation "main"
+
+package tests;
+require kermeta
+//require "../../../someUnit/src/newUnit.kmt" // some unit was the development version of the new kunit, shoudl work with Kunit now.
+require "../transformations-dev/EcoreHelper.kmt"
+require "../transformations-dev/ocl2kmtVisitor.kmt"  
+require "../helpers/OCLHelper.kmt"   
+
+using kermeta::standard
+   
+using kermeta::kunit
+using kermeta::standard
+using kermeta::persistence
+using ocl2kmt
+using EcoreHelpers
+
+
+class Main
+{
+    attribute repository: EMFRepository
+    attribute helper : OCLHelpers::OCLHelper
+    attribute visitor :Ocl2kmtVisitor 
+    attribute parsedOCL : Set<Object>
+    reference ecoreHelper: EcoreHelper 
+    
+    
+	operation main() : Void is do 
+            var filename: String init "74"
+            var sourceFileName : String init "../../ocl/" + filename + ".xmi"
+            repository := EMFRepository.new        
+            helper := OCLHelpers::OCLHelper.new
+            visitor := Ocl2kmtVisitor.new
+            ecoreHelper := EcoreHelper.new
+            parsedOCL  := helper.loadOCLModel(repository, sourceFileName)
+            ecoreHelper.setModel( repository.getResource("../../ocl/sample.ecore") )
+          
+            var io : StringWriter init StringWriter.new
+            visitor.setIo(io)
+            visitor.setEcoreHelper(ecoreHelper)
+            helper.getPackageDeclaration(parsedOCL).accept(visitor)
+            stdio.writeln("\n--------------------------------------------------------------------------------------")
+            stdio.writeln(io.s)
+	end
+}

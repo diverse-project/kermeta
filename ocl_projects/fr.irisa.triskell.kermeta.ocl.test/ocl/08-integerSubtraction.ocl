@@ -1,0 +1,6 @@
+package sample
+
+context A inv:
+	3 - 4
+
+endpackage

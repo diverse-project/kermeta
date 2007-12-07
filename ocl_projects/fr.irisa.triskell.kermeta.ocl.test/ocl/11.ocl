@@ -1,0 +1,6 @@
+package sample
+-- 11: not
+context A inv:
+	not true
+
+endpackage

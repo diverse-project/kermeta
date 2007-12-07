@@ -1,0 +1,11 @@
+package sample
+-- 49: including
+context A inv:
+	b->including(ab)
+
+endpackage
+
+
+
+
+

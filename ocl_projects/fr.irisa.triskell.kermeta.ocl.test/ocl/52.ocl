@@ -1,0 +1,6 @@
+package sample
+-- 52: prepend
+context A inv:
+	b->prepend(ab)
+
+endpackage

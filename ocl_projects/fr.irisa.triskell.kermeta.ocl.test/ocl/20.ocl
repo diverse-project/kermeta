@@ -1,0 +1,6 @@
+package sample
+-- 20: select
+context A inv:
+	b->select( o | true )
+
+endpackage

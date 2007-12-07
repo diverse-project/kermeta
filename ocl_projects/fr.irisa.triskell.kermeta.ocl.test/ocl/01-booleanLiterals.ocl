@@ -1,0 +1,9 @@
+package p
+
+context X inv:
+	true
+
+context Y inv:
+	false
+
+endpackage

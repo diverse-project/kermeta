@@ -1,0 +1,7 @@
+package sample
+-- 32: first
+context A inv:
+	b->first()
+
+endpackage
+

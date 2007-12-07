@@ -1,0 +1,9 @@
+package sample
+-- 42: union
+context A inv:
+	b->union(b)
+
+endpackage
+
+
+

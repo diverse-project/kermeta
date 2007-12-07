@@ -1,0 +1,8 @@
+package sample
+-- 48: sortedBy
+context A inv:
+	b->sortedBy(o|o.y )
+
+endpackage
+
+

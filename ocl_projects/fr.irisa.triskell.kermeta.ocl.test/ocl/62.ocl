@@ -1,0 +1,10 @@
+package sample
+-- 62: size
+context A inv:
+	"foo".size()
+
+endpackage
+
+
+
+

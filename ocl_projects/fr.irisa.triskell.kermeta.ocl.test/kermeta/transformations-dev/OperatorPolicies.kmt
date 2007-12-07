@@ -1,0 +1,429 @@
+/* $Id: OperatorPolicies.kmt,v 1.11 2007/12/07 01:54:43 ffleurey Exp $
+ * License:
+ * Copyright:
+ * Authors: Mark Skipper
+ */
+package ocl2kmt;
+require kermeta
+require "ocl2kmtVisitor.kmt"
+
+
+using kermeta::standard
+using kermeta::exceptions
+using kermeta::utils
+using ocl::cst
+using ocl::cst::visitors 
+using qualifiedNames 
+ 
+ /** Superclass for the visitor that abstracts out its knowledge of 
+  ** how to deal with OCL operators
+  **/
+ class Operators{
+ 
+ 	   attribute __operators: Hashtable<String, OperatorPolicy>
+ 	   attribute __collectionOperations: Hashtable<String, OperatorPolicy>
+ 	   
+ 	   property readonly element: String 
+ 	   	getter is
+ 	   		do 
+ 	   			result := "element"
+ 	   		end
+ 	   
+        property readonly operators: Hashtable<String, OperatorPolicy>
+			getter is 
+				do
+          			if __operators == void then
+          				__operators := Hashtable<String, OperatorPolicy>.new
+          			    var functionCall : OperatorPolicy init FunctionCallOp.new
+          				__operators.put("implies", ImpliesOP.new)
+          				__operators.put("and", functionCall)  
+          				__operators.put("or", functionCall) 
+          				__operators.put("xor", functionCall)
+          				__operators.put("<", FunctionCallOp.new.withName("isLower"))
+          				__operators.put("<=", FunctionCallOp.new.withName("isLowerOrEqual"))
+          				__operators.put(">",  FunctionCallOp.new.withName("isGreater"))
+          				__operators.put(">=",  FunctionCallOp.new.withName("isGreaterOrEqual"))
+          				__operators.put("<>",  FunctionCallOp.new.withName("equals").withSuffix(".~not"))
+          				__operators.put("+",  FunctionCallOp.new.withName("plus"))
+          				__operators.put("-", MinusSignOp.new)
+          				__operators.put("*",  FunctionCallOp.new.withName("mult"))
+          				__operators.put("/",  FunctionCallOp.new.withName("div"))
+          				__operators.put("oclIsUndefined", NotNullOp.new)          				
+          				__operators.put("allInstances", NotSupported.new.withName("allInstances")) 
+          				__operators.put("not", functionCall)  
+          				__operators.put("oclIsTypeOf", TypeTest.new.withName("isKindOf"))
+           				__operators.put("oclIsKindOf", TypeTest.new.withName("isInstanceOf"))
+          				__operators.put("oclAsType", CastOp.new.withName("asType"))
+           				__operators.put("=", FunctionCallOp.new.withName("equals"))
+           				__operators.put("concatenate", FunctionCallOp.new.withName("plus"))
+          			end
+          			result := __operators
+          		end
+          		
+        property readonly collectionOperations: Hashtable<String, OperatorPolicy>
+			getter is 
+				do
+          			if __collectionOperations == void then
+          			    __collectionOperations := Hashtable<String, OperatorPolicy>.new
+          			    var unimplemented: OperatorPolicy init NotSupported.new
+          			    var bool: String init "Boolean"
+          			    var int : String init "Integer"
+          			    var simpleCall: CollectionFunctionCall init CollectionFunctionCall.new
+          				__collectionOperations.put("size", CollectionFunctionCall.new.returns(int))
+           				__collectionOperations.put("count", CollectionFunctionCall.new.returns(int))
+           				__collectionOperations.put("indexOf", CollectionFunctionCall.new.returns(int))
+          				__collectionOperations.put("includes", CollectionFunctionCall.new.returns(bool))
+           				__collectionOperations.put("excludes", CollectionFunctionCall.new.returns(bool))
+           				__collectionOperations.put("includesAll", CollectionFunctionCall.new.returns(bool))
+          				__collectionOperations.put("excludesAll", CollectionFunctionCall.new.returns(bool))
+          				__collectionOperations.put("notEmpty", CollectionFunctionCall.new.returns(bool).withName("empty").withSuffix(".~not"))
+          				__collectionOperations.put("isEmpty", CollectionFunctionCall.new.returns(bool).withName("empty"))
+          				__collectionOperations.put("union", CollectionFunctionCall.new.returnsUnorderedCollection(element))
+           				__collectionOperations.put("intersection", CollectionFunctionCall.new.returnsUnorderedCollection(element))
+           				__collectionOperations.put("including", CollectionFunctionCall.new.returnsUnorderedCollection(element))
+           				__collectionOperations.put("excluding", CollectionFunctionCall.new.returnsUnorderedCollection(element))
+           				__collectionOperations.put("asBag", CollectionFunctionCall.new.returnsUnorderedCollection(element))
+           				__collectionOperations.put("asSet", CollectionFunctionCall.new.returnsUnorderedCollection(element))
+           				__collectionOperations.put("asOrderedSet", CollectionFunctionCall.new.returnsOrderedCollection(element))
+           				__collectionOperations.put("asSequence", CollectionFunctionCall.new.returnsOrderedCollection(element))
+           				__collectionOperations.put("subSequence", CollectionFunctionCall.new.returnsOrderedCollection(element))
+           				__collectionOperations.put("prepend", CollectionFunctionCall.new.returnsOrderedCollection(element))
+           				__collectionOperations.put("insertAt", CollectionFunctionCall.new.returnsOrderedCollection(element))
+           				__collectionOperations.put("append", CollectionFunctionCall.new.returnsOrderedCollection(element))
+           				__collectionOperations.put("flatten", unimplemented) // return type depends on argument type
+           				__collectionOperations.put("sum", unimplemented) // returns singleton
+           				__collectionOperations.put("product", unimplemented) // returns set of pairs
+           				__collectionOperations.put("symmetricDifference", CollectionFunctionCall.new.returnsUnorderedCollection(element))
+           				__collectionOperations.put("subOrderedSet", CollectionFunctionCall.new.returnsOrderedCollection(element))
+          				__collectionOperations.put("last", CollectionFunctionCall.new.returns(element)) 
+          				__collectionOperations.put("first", CollectionFunctionCall.new.returns(element))
+          				__collectionOperations.put("at", CollectionFunctionCall.new.returns(element).withName("elementAt")) 
+          			end
+          			result := __collectionOperations
+				end
+				
+		operation getCollectionOperationPolicy(operationName: String): OperatorPolicy is
+			do
+				result := collectionOperations.getValue(operationName)
+				if  result == void then
+					raise TypeError.new.setMessage("Unknown collection operation: " + operationName )
+				end
+			end
+			
+		operation isOperator(operationName: String) : Boolean is
+			do
+				result := operators.containsKey(operationName)
+				if result then
+    				stdio.writeln("["+operationName+"] *IS* a  standard OCL operation")
+				else
+    				stdio.writeln("["+operationName+"] is *NOT* a  standard OCL operation")
+				end
+			end
+			
+		operation getOperatorPolicy(operationName: String): OperatorPolicy is
+			do
+			// require isOperator(operationName)
+				result := operators.getValue(operationName)
+				if  result == void then
+					raise TypeError.new.setMessage("Unknown operator: " + operationName )
+				end
+			end
+ }
+ 
+class OperatorPolicy  {
+
+	attribute name: String
+	
+	operation withName(opName: String): OperatorPolicy is
+		do
+			name := opName
+			result := self
+		end
+		
+	attribute suffix: String
+	
+    operation withSuffix(theSuffix: String): OperatorPolicy is
+	    do
+	    	suffix := theSuffix
+	    	result := self
+	    end
+	    
+	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+	  do
+		 	visitor.write("Unimplemented policy: " + oclOp.simpleNameCS.~value.toString)
+	  end
+	  
+	operation getPrefix():String is
+	  do
+  		 	result := ""
+	  end
+	  
+ 	operation getSuffix(): String is
+   	  do
+   	  		if suffix != void then
+   	  			result := suffix 
+   	  		else
+   	  			result := ""
+   	  		end
+   	  end
+}
+
+class SimpleOP inherits OperatorPolicy {
+
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+		 do 
+		 		visitor.write("(")
+				oclOp.source.accept(visitor)	
+				visitor.write(" ")
+				if name != void then
+					visitor.write(name)
+				else
+					oclOp.simpleNameCS.accept(visitor)
+				end
+				visitor.write(" ")
+				// TODO: assert: visitable.arguments.size == 1 ??? 
+				oclOp.arguments.each{ arg |
+						arg.accept(visitor)
+			  	}
+		 		visitor.write(")")
+		 end
+}
+
+
+class MinusSignOp inherits OperatorPolicy {
+ 
+	/**
+	 * When you get a minus sign, you have several choices:
+	 *  - negative numbers
+	 *  - numeric subtraction
+	 *  - set subtraction
+	 */ 
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+		 do
+			if oclOp.arguments.empty  then
+				// unary minus
+				oclOp.source.accept(visitor)
+			  	 visitor.write(".uminus")
+			else
+				// infix minus
+				// we eally need to know the type of the 
+				oclOp.source.accept(visitor)
+				visitor.write(".minus")
+	  			visitor.write("(")
+				oclOp.arguments.each{ arg |
+					arg.accept(visitor)
+			  	}
+	  			visitor.write(")")
+		  	end
+		 end
+
+}
+
+
+class ImpliesOP inherits OperatorPolicy {
+
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+		 do
+			oclOp.source.accept(visitor)
+			visitor.write(".~not.~or(")
+			// TODO: assert: visitable.arguments.size == 1 ??? 
+			oclOp.arguments.each{ arg |
+				arg.accept(visitor)
+		  	}
+  			visitor.writeln(")")
+		 end
+}
+
+class UnimplementedOp inherits OperatorPolicy {
+
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+		 do
+			var e: Exception init Exception.new
+			e.message := "Unimplemented Operation type: " + oclOp.simpleNameCS.~value.toString
+			raise e
+		 end
+}
+
+class NotNullOp inherits OperatorPolicy {
+
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+		do
+			oclOp.source.accept(visitor)
+			visitor.write (" == void")
+		end
+		
+}
+
+class PrefixOp inherits OperatorPolicy {
+
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+		do
+			visitor.write(name)
+			visitor.write(" (")
+			oclOp.source.accept(visitor)			
+			visitor.write(")")
+		end
+		
+}
+
+class NotSupported inherits OperatorPolicy {
+
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+		do
+			var message: String init "Unsupported operation [" + oclOp.simpleNameCS.~value.toString + "]"
+			stdio.writeln("***** WARNING " + message)
+			visitor.write(" /* " + message + "*/")
+		end
+		
+}
+
+/**
+ ** This is the superclass for the two collection policies
+ ** it doesn't do any context processing do don't use it
+ ** directly, use one of its sublcasses
+ **/
+ abstract class CollectionOperation  inherits FunctionCallOp{
+
+	reference resultUpperBound: Integer
+	reference resultIsOrdered : Boolean
+	reference returnType: String
+	
+	operation returns(type: String): OperatorPolicy is
+		do
+    		result:=self
+			resultUpperBound:= 1
+			resultIsOrdered := false
+			returnType := type
+		end
+
+	operation returnsOrderedCollection(type: String) : OperatorPolicy is
+		do
+    		result:=self
+			resultUpperBound:= -1
+			resultIsOrdered := true
+			returnType := type
+		end
+		
+	operation returnsUnorderedCollection(type: String) : OperatorPolicy is
+		do
+    		result:=self
+			resultUpperBound:= -1
+			resultIsOrdered := false
+			returnType := type
+		end
+		  
+	operation checkRequirements(operationName: String, visitor: Ocl2kmtVisitor): Void is
+		abstract
+		  
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is 
+	  do
+			var opName: String init oclOp.simpleNameCS.~value.toString
+		    visitor.write(getPrefix)
+			oclOp.source.accept(visitor)
+			checkRequirements(opName, visitor)
+			// visitor.setLocalFeature(....somethingresulting from this operation...)
+			// the return type of each kind of operation is specific.:e
+			//if visitor.isDefined(returnType ) then
+				if returnType.equals("element") then
+					visitor.setLocalFeature(visitor.createAttribute("functionreturn", visitor.getLocalFeatureType, 0, resultUpperBound , resultIsOrdered))
+				else
+            		visitor.setLocalFeature(visitor.simpleValue(returnType))
+				end 
+			//end 
+			visitor.write(".") 
+			if name != void then
+				visitor.write(name)
+			else
+				visitor.write(opName)
+			end
+			addActuals(oclOp, visitor)
+  			visitor.write(getSuffix)
+	  	end
+}
+
+class CollectionFunctionCall inherits CollectionOperation {
+ 
+	method checkRequirements(operationName: String, visitor: Ocl2kmtVisitor): Void is
+	  do
+			if not visitor.getLocalFeatureIsMultiple() then 
+				raise TypeError.new.setMessage("Multiplicity error, can't call [" + operationName + "]  on non-multiple expression")
+			end
+	end
+}
+
+class functionOrderedCollectionCall inherits CollectionOperation {
+
+	method checkRequirements(operationName: String, visitor: Ocl2kmtVisitor): Void is
+		do
+			if not visitor.getLocalFeatureIsOrdered() then
+				raise TypeError.new.setMessage("Ordering error, can't call [" + operationName + "]  on non-ordered expression")
+			end
+		end
+}
+
+
+class FunctionCallOp inherits OperatorPolicy {
+
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+		 do
+		    visitor.write(getPrefix)
+			oclOp.source.accept(visitor)
+			visitor.write(".")
+			if name != void then
+				visitor.write(name)
+			else
+				oclOp.simpleNameCS.accept(visitor)
+			end
+			addActuals(oclOp, visitor)
+  			visitor.write(getSuffix)
+		 end
+		 
+	operation addActuals(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is 
+		do
+				if not oclOp.arguments.empty then
+					visitor.write("(")
+					from
+						var it : Iterator<OCLExpressionCS> init oclOp.arguments.iterator
+					until
+						it.isOff
+					loop
+						it.next.accept(visitor)
+						if  it.hasNext then
+							visitor.write(",") 
+						end
+					end
+		  			visitor.write(")")
+		  		end
+		  end
+
+}
+
+class TypeTest inherits FunctionCallOp {
+
+	reference parameterType: ecore::EClassifier
+	
+	method addActuals(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is 
+		do
+			stdio.writeln("Adding actual parameter for type test operation")
+			if not oclOp.arguments.size.equals(1) then
+				raise TypeError.new.setMessage("type-test ["+ name+"] must have single type as parameter, param count ["+oclOp.arguments.size.toString+"]")
+			end
+			visitor.expectType
+			visitor.write( "(" )
+			oclOp.arguments.any.accept(visitor)
+			visitor.write( ")" )
+			visitor.expectExpression 
+			parameterType := visitor.findType( visitor.qualifiedTypeName)
+		end
+}
+
+class CastOp inherits TypeTest {
+
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+		do
+			super(oclOp, visitor)
+			stdio.writeln("CastOp: Setting local context to [" + parameterType.name +"]")
+			visitor.setLocalFeature(visitor.createAttribute("castreturn", parameterType, 0, 1 , false))
+		end
+}
+

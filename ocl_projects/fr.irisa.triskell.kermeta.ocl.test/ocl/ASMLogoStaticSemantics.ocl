@@ -1,0 +1,10 @@
+
+package kmLogo::ASM
+
+context ProcDeclaration 
+inv unique_names_for_formal_arguments :
+		args->forAll ( a1 | true)
+	
+		
+endpackage
+
