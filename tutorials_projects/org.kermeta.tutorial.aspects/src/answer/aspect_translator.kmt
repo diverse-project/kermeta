@@ -1,4 +1,4 @@
-/* $Id: aspect_translator.kmt,v 1.1 2007-12-06 22:50:36 vmahe Exp $
+/* $Id: aspect_translator.kmt,v 1.1 2007-12-07 13:18:45 vmahe Exp $
  * Creation date: December 5, 2007
  * License:
  * Copyright:
@@ -27,13 +27,13 @@ class AspectTranslator
 		var inRes :  Resource   
 		var umlModel : uml::Model
 	 
-		inRes := inRep.getResource("platform:/resource/org.kermeta.formation.basics/model/MyStateMachine.uml")
+		inRes := inRep.getResource("platform:/resource/org.kermeta.tutorial.aspects/model/MyStateMachine.uml")
 		umlModel ?= inRes.one
 	
 		var outRep : EMFRepository init EMFRepository.new
 		var outRes :  Resource   
 		
-		outRes := outRep.createResource("platform:/resource/org.kermeta.formation.basics/model/MyStateMachine.fsm",
+		outRes := outRep.createResource("platform:/resource/org.kermeta.tutorial.aspects/model/MyStateMachine.fsm",
 				"platform:/plugin/fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore")
 		
 		umlModel.packagedElement.each {e | 
