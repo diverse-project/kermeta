@@ -1,0 +1,417 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE>The UML to FSM transformation sample</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.2  (Linux)">
+	<META NAME="CREATED" CONTENT="20071207;17201200">
+	<META NAME="CHANGEDBY" CONTENT="Vincent Mahe">
+	<META NAME="CHANGED" CONTENT="20071207;17201200">
+</HEAD>
+<BODY LANG="fr-FR" BGCOLOR="#ffffff" DIR="LTR">
+<H1><FONT FACE="Nimbus Sans L"><FONT SIZE=5>The UML to FSM
+transformation sample</FONT></FONT></H1>
+<H2><FONT FACE="Nimbus Sans L"><FONT SIZE=4><I>Install the sample
+project</I></FONT></FONT></H2>
+<P>In order to follow the current tutorial, you may get the tutorial
+sample project:</P>
+<UL>
+	<LI><P>In your current Eclipse, open the &laquo;&nbsp;File&nbsp;&raquo;
+	menu, then &laquo;&nbsp;New&nbsp;&raquo; and &laquo;&nbsp;Example...&nbsp;&raquo;.</P>
+	<LI><P>Select &laquo;&nbsp;Kermeta Aspects Tutorial Project&nbsp;&raquo;
+	in the &laquo;&nbsp;Kermeta samples&nbsp;&raquo; and click on the
+	Finish button.</P>
+	<LI><P>A org.kermeta.tutorial.aspects appears with &laquo;&nbsp;Model&nbsp;&raquo;
+	and &laquo;&nbsp;src&nbsp;&raquo; folders in it.</P>
+</UL>
+<P>As you can see, the <I>src/kermeta/</I> folder contains a fully
+functional translator between UML2 state machines and their FSM
+equivalent.</P>
+<H2><FONT FACE="Nimbus Sans L"><FONT SIZE=4><I>Use the classical UML2
+-&gt; FSM translator</I></FONT></FONT></H2>
+<P>You can look at the default sample UML diagram in the <I>model/</I>
+folder (double-click on <I>MyStateMachine.umldi</I> to open the
+graphical UML2 modeler).</P>
+<P>We propose you launch the translator (right-click -&gt; Kermeta -&gt;
+Run as.. -&gt; Kermeta app) and see the resulting FSM model
+(<I>MyStateMachine.fsm</I>).</P>
+<P>You can get the corresponding graphical diagram (right-click -&gt;
+New -&gt; Other... -&gt; Kermeta -&gt; FSM Samples -&gt; FSM
+Diagram).</P>
+<P>Now, look at the translator.kmt file. It contains three classes,
+dedicated to a part of the transformation process:</P>
+<UL>
+	<LI><P><I><B>Translator</B></I>: this is the main class, which loads
+	and saves models, launching process passes. The different steps of a
+	transformation process are documented inside its code. We wrote a
+	set of simple visiting methods so you can see how Translator is able
+	to browse one kind of UML2 models.</P>
+</UL>
+<P>The transformation into a FSM model needs two passes on input
+model so we wrote the two classes below;</P>
+<UL>
+	<LI VALUE=1><P><I><B>Uml2Fsm_Pass1</B></I>: this pass creates each
+	FSM entity corresponding to UML2 input model. As we need to access
+	to FSM entities during the second pass, we store them into an hash
+	table.</P>
+	<LI><P><I><B>Uml2Fsm_Pass2</B></I>: this pass links the created FSM
+	entities (corresponding to the UML2 model relations).</P>
+</UL>
+<P>You may modify the  model and see how the translator deals with
+UML2 State Machines.</P>
+<H2><FONT FACE="Nimbus Sans L"><FONT SIZE=4><I>What can Aspect
+Oriented Programming change?</I></FONT></FONT></H2>
+<P>It is possible to write Kermeta code using a simplified Aspect
+Oriented approach.</P>
+<P>Technically, you can declare classes as &quot;aspects&quot; that
+will contribute features (attributes, references, properties,
+operations, constraints) to an existing class. In such situation, the
+definition of two classes that have the same qualified name will be
+merged into a single class in the interpreter memory.</P>
+<P>This is a great help when you want to separate the concerns into
+several files. For example, you may have one file that strictly
+conforms to the structural part of your metamodel, one file
+containing the constraints for a given purpose and another file
+containing the operation and special extension to the metamodel for
+an interpreter.</P>
+<P>Obviously, the merge will be successful only if there is no
+conflict between all the declared features.</P>
+<H3 LANG="en-US">Textual syntax for merging</H3>
+<DL>
+	<DD>
+	<TABLE WIDTH=547 BORDER=0 CELLPADDING=2 CELLSPACING=0>
+		<COL WIDTH=26>
+		<COL WIDTH=513>
+		<TR>
+			<TD ROWSPAN=2 WIDTH=26 VALIGN=TOP>
+				<P ALIGN=CENTER><IMG SRC="http://127.0.0.1:61063/help/topic/fr.irisa.triskell.kermeta.documentation/build/eclipse.help/KerMeta-Manual/gfx/admonitions/important.gif" NAME="graphics1" ALT="[Important]" ALIGN=BOTTOM WIDTH=24 HEIGHT=24 BORDER=0></TD>
+			<TH WIDTH=513>
+				<P ALIGN=LEFT>Important</TH>
+		</TR>
+		<TR>
+			<TD WIDTH=513 VALIGN=TOP>
+				<P ALIGN=LEFT>Since this feature is really successful and very
+				well accepted, the surface syntax will change in the future
+				release v1.0.0 in order to use a dedicated keyword instead of a
+				simple annotation. The syntax presented here is valid only for
+				prior versions. 
+			</TD>
+		</TR>
+	</TABLE>
+</DL>
+<P LANG="en-US">The merge is driven by the qualified name of the
+element to merge. Two classes will be merged if they have exactly the
+same qualified name (packages names + class name)</P>
+<P LANG="en-US">In order to keep the compatibility with previous
+behaviour, the merge is allowed only if you add some tags:</P>
+<DL>
+	<DT LANG="en-US"><B>@aspect &quot;true&quot;</B></DT><DD><P LANG="en-US">
+	is placed on a class, it indicates that this class is an aspect of
+	another one. This allows to complement a class with the features of
+	the aspect class.</P></DD><DT LANG="en-US">
+	<B>@overloadable &quot;true&quot;</B></DT><DD><P LANG="en-US">
+	is placed on an operation, it indicates that the body of the
+	operation can be overloaded by another definition of the same
+	operation in an aspect class. This is useful in some situation were
+	the code expect to be overloaded.</P></DD><DD>
+	<TABLE WIDTH=547 BORDER=0 CELLPADDING=2 CELLSPACING=0>
+		<COL WIDTH=26>
+		<COL WIDTH=513>
+		<TR>
+			<TD ROWSPAN=2 WIDTH=26 VALIGN=TOP>
+				<P ALIGN=CENTER><IMG SRC="http://127.0.0.1:61063/help/topic/fr.irisa.triskell.kermeta.documentation/build/eclipse.help/KerMeta-Manual/gfx/admonitions/note.gif" NAME="graphics2" ALT="[Note]" ALIGN=BOTTOM WIDTH=24 HEIGHT=24 BORDER=0></TD>
+			<TH WIDTH=513>
+				<P ALIGN=LEFT>Note</TH>
+		</TR>
+		<TR>
+			<TD WIDTH=513 VALIGN=TOP>
+				<P ALIGN=LEFT>When using overloadable tag, for a given set of
+				definition, the operation that is not tagged overlodable will
+				overload all other definitions. If all the declarations declare
+				to be overloadable, then the declaration order is important. The
+				last declared will be used by the interpreter. 
+			</TD>
+		</TR>
+	</TABLE>
+</DL>
+<H3 LANG="en-US">Example: adding properties and methods to UML2
+elements</H3>
+<DL>
+	<DT>For our UML2 -&gt; FSM model transformation, we will need a way
+	to do something on UML2 &laquo;&nbsp;Package&nbsp;&raquo; element.<DT>
+	First, we need to conform with the UML2 models tree, which have
+	&laquo;&nbsp;uml&nbsp;&raquo; as top package:<DT>
+	Create a new Kermeta file with &laquo;&nbsp;uml&nbsp;&raquo; as root
+	package. Your file only needs few lines for the moment:<DD>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000064"><B>package</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">uml</FONT><FONT COLOR="#000000">;</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#960000"><FONT FACE="Sans"><FONT SIZE=2><B>require</B></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>
+	</FONT></FONT></FONT><FONT COLOR="#000064"><FONT FACE="Sans"><FONT SIZE=2>kermeta</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#960000"><FONT FACE="Sans"><FONT SIZE=2><B>require</B></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>
+	</FONT></FONT></FONT><FONT COLOR="#3f5fbe"><FONT FACE="Sans"><FONT SIZE=2>&quot;platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore&quot;</FONT></FONT></FONT><DT>
+	You can then add the Package class in order to improve it:<DD>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000064"><B>class</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">Package</FONT><FONT COLOR="#000000"> {</FONT></FONT></FONT><DD>
+	<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>}</FONT></FONT></FONT><DT><P>
+	But now, the Kermeta environment throws an error, because you define
+	a Package class which exists inside the &laquo;&nbsp;uml&nbsp;&raquo;
+	package of the UML2 metamodel.<DT><P>
+	You must specify that your Package class will be woven with the
+	existing one:<DD>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">@</FONT><FONT COLOR="#000064">aspect</FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#3f5fbe">&quot;true&quot;</FONT></FONT></FONT><DD>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000064"><B>class</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">Package</FONT><FONT COLOR="#000000"> {</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>}</FONT></FONT></FONT></DL>
+<P>
+From now, all stuff you will add to this class will be added to the
+UML2 Package class.</P>
+<P>As an example, you may add amyOperation() method:</P>
+<DL>
+	<DD><FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">@</FONT><FONT COLOR="#000064">aspect</FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#3f5fbe">&quot;true&quot;</FONT></FONT></FONT><DD>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000064"><B>class</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">Package</FONT><FONT COLOR="#000000"> {</FONT></FONT></FONT><DD>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000"><B>	</B></FONT><FONT COLOR="#000064"><B>operation</B></FONT><FONT COLOR="#000000"><B>
+	</B></FONT><FONT COLOR="#000064">myOperation</FONT><FONT COLOR="#000000">()</FONT><FONT COLOR="#000000"><B>
+	</B></FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000"><B>
+	</B></FONT><FONT COLOR="#000064"><B>do</B></FONT></FONT></FONT><DD>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000"><B>		</B></FONT><FONT COLOR="#41825a"><B>//
+	</B></FONT><FONT COLOR="#41825a">some stuf to be done when this
+	method is called during Kermeta exec</FONT></FONT></FONT><DD>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000"><B>	</B></FONT><FONT COLOR="#000064"><B>end</B></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>}</FONT></FONT></FONT></DL>
+<P>
+After that, you can see this operation inserted into the UML2 Package
+element in the Kermeta outline:</P>
+<P ALIGN=LEFT><IMG SRC="../img/KermetaAspectsTutorial1.png" NAME="graphics3" ALIGN=LEFT WIDTH=401 HEIGHT=371 BORDER=0><BR CLEAR=LEFT>As
+you can see, the outline icon for the UML2 Package has changed and
+informs you this element is partly redefined by current Kermeta file.</P>
+<P>Using the same way, you can add new properties on-the-fly to a
+write-only metamodel, in order to handle specific behavior or
+processes on its models:</P>
+<DL>
+	<DD><FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">@</FONT><FONT COLOR="#000064">aspect</FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#3f5fbe">&quot;true&quot;</FONT></FONT></FONT><DD>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000064"><B>class</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">Package</FONT><FONT COLOR="#000000"> {</FONT></FONT></FONT><DD>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000"><B>	</B></FONT><FONT COLOR="#000064"><B>reference</B></FONT><FONT COLOR="#000000"><B>
+	</B></FONT><FONT COLOR="#000064">myProperty : uml::Element</FONT></FONT></FONT><DD>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000064">	</FONT><FONT COLOR="#000064"><B>attribute</B></FONT><FONT COLOR="#000064">
+	anotherNonUmlProperty : kermeta::standard::String</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>}</FONT></FONT></FONT></DL>
+<P>
+All those &laquo;&nbsp;aspect&nbsp;&raquo; features will help you
+challenge the tutorial main work, which is the realization of the
+UML2 -&gt; FSM transformation</P>
+<H2><FONT FACE="Nimbus Sans L"><FONT SIZE=4><I>Realize the &laquo;&nbsp;aspect&nbsp;&raquo;
+version of the translator</I></FONT></FONT></H2>
+<P>In the classical version of the translator, we used the GOF
+Visitor design pattern (in a simplified version, but we could use the
+UML2 MDK TopDownVisitor) for navigation inside the UML StateMachine
+model. As we needed two passes in order to manage links once the
+output objects have been created, this implied two Kermeta classes
+with visitXxx() methods plus a hash table.</P>
+<P>With the aspect approach, you can store the FSM created object in
+a reference of the original UML corresponding object and have two
+operations (<I>uml2fsm_pass1()</I> and <I>uml2fsm_pass2()</I>) for
+the creation pass and the linkage pass on each UML object.</P>
+<H3>Step 1: the application structure and launcher</H3>
+<P>As the aspects must be applied to the real package of the
+aspectized elements, it is easier to split the whole transformation
+in a Kermeta launching file and a <I>aspectizor</I> file which will
+weave the new features to the UML2 metamodel.</P>
+<P>The launcher must:</P>
+<UL>
+	<LI><P>load the UML model,</P>
+	<LI><P>get the model root,</P>
+	<LI><P>execute the Pass1 method on this root (just execute the pass1
+	method on the root :-)),</P>
+	<LI><P>execute the Pass2 method on this root,</P>
+	<LI><P>catch the generated FSM model,</P>
+	<LI><P>save the FSM model.</P>
+</UL>
+<P>All those tasks do not rely upon aspect so you can use the
+Translator code of the <I>src/kermeta/translator.kmt</I> file for
+inspiration in order to realize the &laquo;&nbsp;aspect&nbsp;&raquo;
+launcher (have a look on the <I>src/answer/aspect_translator</I> file
+if you do not succeed in this work).</P>
+<P>The real aspects can be writen in a separate file (like
+<I>uml2fsm_aspects.kmt</I>). For each UML2 element you need to
+transform into its FSM equivalent, you must add (as an aspect, of
+course) an <I>output</I> reference (the place to store its FSM
+equivalent) and the two passes methods <I>uml2fsm_pass1()</I> and
+<I>uml2fsm_pass2()</I>.</P>
+<H3>Step 2:  the first pass</H3>
+<P>A large part of the classical implementation of the first pass
+(<I>visitXxx()</I> methods in <I>src/kermeta/translator.kmt</I> file)
+can be used in the aspect uml2fsm_pass1 method.</P>
+<P>But the operation you are writing will be directly the UML object
+operation so you do not need to handle this object and you can access
+it simply with <B>self</B> keyword. The effect is a simplier code for
+the same goal.</P>
+<P>In the same way, the FSM generated object can be stored in an
+<I>output</I> reference which is specific to the UML object. It means
+that you can (and must) strongly type this reference. Its give your
+application a strongness which you cannot afford with a <I>&lt;object,
+object&gt;</I> hash table (and you do not have to seam uncertain
+casts which complicate the code).</P>
+<P>Below is the example for the uml::StateMachine class:</P>
+<DL>
+	<DD><P ALIGN=LEFT><FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">@</FONT><FONT COLOR="#000064">aspect</FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#3f5fbe">&quot;true&quot;</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000064"><B>class</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">StateMachine</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>{</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>reference</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">output</FONT><FONT COLOR="#000000"> :
+	</FONT><FONT COLOR="#000064">fsm</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">FSM</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>operation</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">uml2fsmPass1</FONT><FONT COLOR="#000000">()
+	</FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064"><B>do</B></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064">output</FONT><FONT COLOR="#000000">
+	:= </FONT><FONT COLOR="#000064">fsm</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">FSM</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">new</FONT><FONT COLOR="#000000">
+	</FONT></FONT></FONT>
+	<DD><P ALIGN=LEFT><FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>self</B></FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">region</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">each</FONT><FONT COLOR="#000000">{
+	</FONT><FONT COLOR="#000064">r</FONT><FONT COLOR="#000000"> |
+	</FONT><FONT COLOR="#000064">r</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">uml2fsmPass1</FONT><FONT COLOR="#000000">
+	}</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>end</B></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>}</FONT></FONT></FONT></DL>
+<P>
+You can compare with the classical way:</P>
+<DL>
+	<DD><P ALIGN=LEFT><FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000064"><B>class</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">Uml2Fsm_Pass1</FONT><FONT COLOR="#000000">
+	{</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>reference</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">tmpTable</FONT><FONT COLOR="#000000"> :
+	</FONT><FONT COLOR="#000064">kermeta</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">utils</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">Hashtable</FONT><FONT COLOR="#000000">&lt;</FONT><FONT COLOR="#000064">uml</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">Element</FONT><FONT COLOR="#000000">,</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>							</FONT></FONT></FONT><FONT COLOR="#000064"><FONT FACE="Sans"><FONT SIZE=2>kermeta</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>::</FONT></FONT></FONT><FONT COLOR="#000064"><FONT FACE="Sans"><FONT SIZE=2>standard</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>::</FONT></FONT></FONT><FONT COLOR="#000064"><FONT FACE="Sans"><FONT SIZE=2>Object</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>&gt;</FONT></FONT></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>operation</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">initialize</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">table</FONT><FONT COLOR="#000000">
+	: </FONT><FONT COLOR="#000064">kermeta</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">utils</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">Hashtable</FONT><FONT COLOR="#000000">&lt;</FONT><FONT COLOR="#000064">uml</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">Element</FONT><FONT COLOR="#000000">,</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">							</FONT><FONT COLOR="#000064">kermeta</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">standard</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">Object</FONT><FONT COLOR="#000000">&gt;)
+	</FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064"><B>do</B></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064">tmpTable</FONT><FONT COLOR="#000000">
+	:= </FONT><FONT COLOR="#000064">table</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>end</B></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000"><B>	</B></FONT><FONT COLOR="#000064"><B>operation</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">visitStateMachine</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">node</FONT><FONT COLOR="#000000">
+	: </FONT><FONT COLOR="#000064">uml</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">StateMachine</FONT><FONT COLOR="#000000">)
+	</FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064"><B>do</B></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">fsmNode</FONT><FONT COLOR="#000000"> :
+	</FONT><FONT COLOR="#000064">fsm</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">FSM</FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064"><B>init</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">fsm</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">FSM</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">new</FONT><FONT COLOR="#000000">
+	</FONT></FONT></FONT>
+	<DD><P ALIGN=LEFT><FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064">node</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">region</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">each</FONT><FONT COLOR="#000000">{
+	</FONT><FONT COLOR="#000064">r</FONT><FONT COLOR="#000000"> |
+	</FONT><FONT COLOR="#000064">visitRegion</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">r</FONT><FONT COLOR="#000000">)
+	}</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064">tmpTable</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">put</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">node</FONT><FONT COLOR="#000000">,
+	</FONT><FONT COLOR="#000064">fsmNode</FONT><FONT COLOR="#000000">)</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>	</FONT></FONT></FONT><FONT COLOR="#000064"><FONT FACE="Sans"><FONT SIZE=2><B>end</B></FONT></FONT></FONT></DL>
+<P>
+You no more need a hash table (and its initialization) nor a visitor
+design pattern nor a reference to the visited UML node.</P>
+<H3>Step 3: the second pass</H3>
+<P>As tha aspect approach only adds methods and properties to
+existing metamodel elements, you only must write the uml2fsm_pass2()
+method where you need, which means on the same UML classes than the
+first pass.</P>
+<P>As the UML states and transitions do not directly know their
+container (only derivated property which is not implemented in the
+metamodel, off course), you may pass the FSM root to the pass2
+methods as a parameter.</P>
+<P>The aspect second pass code is even more simple than in classical
+approach because you do not need now to get the first pass objects
+through a local variable and an enforced type cast.</P>
+<P>Below is the example for the uml::Region class:</P>
+<DL>
+	<DD><P ALIGN=LEFT><FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">@</FONT><FONT COLOR="#000064">aspect</FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#3f5fbe">&quot;true&quot;</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000064"><B>class</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">Region</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>{</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>operation</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">uml2fsmPass1</FONT><FONT COLOR="#000000">()
+	</FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064"><B>do</B></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	 	</FONT><FONT COLOR="#41825a">//
+	nothing to create</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>self</B></FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">subvertex</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">each</FONT><FONT COLOR="#000000">{</FONT><FONT COLOR="#000064">v</FONT><FONT COLOR="#000000">|
+	</FONT><FONT COLOR="#000064">v</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">uml2fsmPass1</FONT><FONT COLOR="#000000">
+	}</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>self</B></FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">transition</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">each</FONT><FONT COLOR="#000000">{</FONT><FONT COLOR="#000064">t</FONT><FONT COLOR="#000000">|
+	</FONT><FONT COLOR="#000064">t</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">uml2fsmPass1</FONT><FONT COLOR="#000000">
+	}</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>end</B></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>operation</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">uml2fsmPass2</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">outModel</FONT><FONT COLOR="#000000">
+	: </FONT><FONT COLOR="#000064">fsm</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">FSM</FONT><FONT COLOR="#000000">)
+	</FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064"><B>do</B></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>self</B></FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">subvertex</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">each</FONT><FONT COLOR="#000000">{
+	</FONT><FONT COLOR="#000064">sv</FONT><FONT COLOR="#000000"> |</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">			</FONT><FONT COLOR="#000064">outModel</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">ownedState</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">add</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">sv</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">output</FONT><FONT COLOR="#000000">)</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>		}</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>self</B></FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">subvertex</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">each</FONT><FONT COLOR="#000000">{</FONT><FONT COLOR="#000064">v</FONT><FONT COLOR="#000000">|
+	</FONT><FONT COLOR="#000064">v</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">uml2fsmPass2</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">outModel</FONT><FONT COLOR="#000000">)
+	}</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064"><B>self</B></FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">transition</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">each</FONT><FONT COLOR="#000000">{</FONT><FONT COLOR="#000064">t</FONT><FONT COLOR="#000000">|
+	</FONT><FONT COLOR="#000064">t</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">uml2fsmPass2</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">outModel</FONT><FONT COLOR="#000000">)
+	}</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>end</B></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>}</FONT></FONT></FONT></DL>
+<P>
+You can compare with the classical code:</P>
+<DL>
+	<DD><P ALIGN=LEFT><FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000064"><B>class</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">Uml2Fsm_Pass2</FONT><FONT COLOR="#000000">
+	{</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>reference</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">tmpTable</FONT><FONT COLOR="#000000"> :
+	</FONT><FONT COLOR="#000064">kermeta</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">utils</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">Hashtable</FONT><FONT COLOR="#000000">&lt;</FONT><FONT COLOR="#000064">uml</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">Element</FONT><FONT COLOR="#000000">,</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">							</FONT><FONT COLOR="#000064">kermeta</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">standard</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">Object</FONT><FONT COLOR="#000000">&gt;</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>reference</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">fsmMachine</FONT><FONT COLOR="#000000">
+	: </FONT><FONT COLOR="#000064">fsm</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">FSM</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>operation</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">initialize</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">table</FONT><FONT COLOR="#000000">
+	: </FONT><FONT COLOR="#000064">kermeta</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">utils</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">Hashtable</FONT><FONT COLOR="#000000">&lt;</FONT><FONT COLOR="#000064">uml</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">Element</FONT><FONT COLOR="#000000">,</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">							</FONT><FONT COLOR="#000064">kermeta</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">standard</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">Object</FONT><FONT COLOR="#000000">&gt;)
+	</FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064"><B>do</B></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064">tmpTable</FONT><FONT COLOR="#000000">
+	:= </FONT><FONT COLOR="#000064">table</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>end</B></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">	</FONT><FONT COLOR="#000064"><B>operation</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">visitRegion</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">node</FONT><FONT COLOR="#000000">
+	: </FONT><FONT COLOR="#000064">uml</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">Region</FONT><FONT COLOR="#000000">)
+	</FONT><FONT COLOR="#000064"><B>is</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064"><B>do</B></FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064">node</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">subvertex</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">each</FONT><FONT COLOR="#000000">{
+	</FONT><FONT COLOR="#000064">sv</FONT><FONT COLOR="#000000"> |</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">			</FONT><FONT COLOR="#000064">visitVertex</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">sv</FONT><FONT COLOR="#000000">)</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">			</FONT><FONT COLOR="#000064"><B>var</B></FONT><FONT COLOR="#000000">
+	</FONT><FONT COLOR="#000064">state</FONT><FONT COLOR="#000000"> :
+	</FONT><FONT COLOR="#000064">fsm</FONT><FONT COLOR="#000000">::</FONT><FONT COLOR="#000064">State</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">			</FONT><FONT COLOR="#000064">state</FONT><FONT COLOR="#000000">
+	?= </FONT><FONT COLOR="#000064">tmpTable</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">getValue</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">sv</FONT><FONT COLOR="#000000">)</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">			</FONT><FONT COLOR="#000064">fsmMachine</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">ownedState</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">add</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">state</FONT><FONT COLOR="#000000">)</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>		}</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">		</FONT><FONT COLOR="#000064">node</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">transition</FONT><FONT COLOR="#000000">.</FONT><FONT COLOR="#000064">each</FONT><FONT COLOR="#000000">{
+	</FONT><FONT COLOR="#000064">t</FONT><FONT COLOR="#000000"> |</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT FACE="Sans"><FONT SIZE=2><FONT COLOR="#000000">			</FONT><FONT COLOR="#000064">visitTransition</FONT><FONT COLOR="#000000">(</FONT><FONT COLOR="#000064">t</FONT><FONT COLOR="#000000">)</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>		}</FONT></FONT></FONT><DD><P ALIGN=LEFT>
+	<FONT COLOR="#000000"><FONT FACE="Sans"><FONT SIZE=2>	</FONT></FONT></FONT><FONT COLOR="#000064"><FONT FACE="Sans"><FONT SIZE=2><B>end</B></FONT></FONT></FONT></DL>
+<P>
+So you can notice how the Kermeta aspect approach is a powerful tool
+for Model Driven Engineering.</P>
+</BODY>
+</HTML>
