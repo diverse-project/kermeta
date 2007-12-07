@@ -251,9 +251,9 @@ class AutomatonHelper
     /** Load an automaton and return a FSM instance */
     operation loadEMFAutomaton(repository : EMFRepository, uri : String) : FSM is do
     	var resource : Resource init repository.getResource(uri)
-    	stdio.writeln("before loading")
+    	//stdio.writeln("before loading")
     	resource.load
-    	stdio.writeln("after loading")
+    	//stdio.writeln("after loading")
     	var roots : Set<Object> init resource
     	result ?= roots.one
     end
@@ -281,8 +281,9 @@ class AutomatonHelper
     end
     
     operation ask_emfmodel(prompt : String) : FSM is do
-    	var file : String init stdio.read(prompt)
-    	stdio.writeln("\n"+file)
+    	var file : String init stdio.read(prompt+"\nplatform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demo/models/")
+    	file := "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demo/models/"+file
+    	//stdio.writeln("\n"+file)
     	var r : EMFRepository init EMFRepository.new
     	result := loadEMFAutomaton(r, file)
     end

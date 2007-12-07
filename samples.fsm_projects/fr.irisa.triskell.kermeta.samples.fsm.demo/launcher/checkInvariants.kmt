@@ -16,8 +16,8 @@
 package fsm;
 
 require kermeta
-require "../kermeta/fsm.kmt"
-require "fsmLauncher.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demo/kermeta/fsm.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/fsmLauncher.kmt"
 
 using fsm
 using kermeta::standard

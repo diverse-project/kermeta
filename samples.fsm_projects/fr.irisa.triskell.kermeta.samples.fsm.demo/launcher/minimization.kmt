@@ -17,7 +17,7 @@
 
 package fsm;
 
-require "../kermeta/fsm.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demo/kermeta/fsm.kmt"
 require kermeta
 
 using fsm
@@ -41,9 +41,10 @@ class Minimization
 	   	helper := AutomatonHelper.new
 		//input := Sampler.new.createSampleM1() // "../models/sampleM1min.automaton"
 		
-		input := helper.ask_emfmodel("Enter the EMF model of the automaton to minimize :")
-		output_path := stdio.read("Enter the output file where to store the minimal automaton :") 
-
+		input := helper.ask_emfmodel("Enter the EMF model of the automaton to minimize: ")
+		output_path := stdio.read("Enter the output file where to store the minimal automaton:\nplatform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demo/models/") 
+		output_path := "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demo/models/"+output_path
+		
 		stdio.writeln("input:"+ input.isVoid.toString + "tostring : "+ input.toString)
 
 	   	// Initialize equivalent_pairs and possible all_input_pairs
