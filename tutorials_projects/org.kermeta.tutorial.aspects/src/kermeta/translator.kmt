@@ -1,4 +1,4 @@
-/* $Id: translator.kmt,v 1.1 2007-12-06 22:50:36 vmahe Exp $
+/* $Id: translator.kmt,v 1.2 2007-12-07 13:19:16 vmahe Exp $
  * Creation date: December 3, 2007
  * License:	EPL
  * Copyright: INRIA 2007
@@ -22,24 +22,24 @@ class Translator
 	
 	operation main() : Void is do 
 		
-		//////////// first : load the UML model //////////////
+		//////////// first step : load the UML model //////////////
 		
 		var repo : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
 		var inResource : kermeta::persistence::Resource
 		// Rem : .bin/ dir => relative paths are non trivial.... 
-		inResource := repo.getResource("platform:/resource/org.kermeta.formation.basics/model/MyStateChart.uml")
+		inResource := repo.getResource("platform:/resource/org.kermeta.tutorial.aspects/model/MyStateMachine.uml")
 		umlModel ?= inResource.instances.one
 		// a eye on what we loaded
 		stdio.writeln("The model we loaded : "+umlModel.toString)
 		
-		//////////// second : navigate through the model ///////////////
+		//////////// second step : navigate through the model ///////////////
 		
 		// NB : needs UML2 => requirement
 		umlModel.packagedElement.each{ e |
 			stdio.writeln("Packaged Element : " + e.name)
 		}
 		
-		//////////// third : need a complete browsing of the machine
+		//////////// third step : need a complete browsing of the state machine
 		
 		// We must write Visitor methods before implementing our on treatment
 		var p : uml::Package
@@ -52,7 +52,7 @@ class Translator
 			}
 		end
 		
-		//////////// fourth : build on-the-fly FSM corresponding model
+		//////////// fourth step : build on-the-fly FSM corresponding model
 		
 		// NB : need knowledge about FSM:
 		//		- the "model" is FSM => only one state machine
@@ -72,7 +72,7 @@ class Translator
 		secondPass.initialize(table)
 		secondPass.visitStateMachine(machine)
 		
-		///////////// fifth : save the resulting FSM
+		///////////// fifth step : save the resulting FSM
 		
 		var resultFsm : fsm::FSM
 		resultFsm ?= table.getValue(machine)
@@ -80,7 +80,7 @@ class Translator
 		var outRepo : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
 		var outResource : kermeta::persistence::Resource
 		// Rem : .bin/ dir => relative paths are non trivial.... 
-		outResource := repo.createResource("platform:/resource/org.kermeta.formation.basics/model/MyStateChart.fsm",
+		outResource := repo.createResource("platform:/resource/org.kermeta.formation.basics/model/MyStateMachine.fsm",
 											"platform:/plugin/fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore")
 		outResource.instances.add(resultFsm)
 		outResource.save
