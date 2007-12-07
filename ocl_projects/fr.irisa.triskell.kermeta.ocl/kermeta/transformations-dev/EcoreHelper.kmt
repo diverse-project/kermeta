@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.8 2007-09-21 11:26:13 barais Exp $
+/* $Id: EcoreHelper.kmt,v 1.9 2007-12-07 01:54:43 ffleurey Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -14,17 +14,18 @@
  
 
 package EcoreHelpers;  
-require "./ecore.kmt"   
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 //require "http://www.eclipse.org/emf/2002/Ecore"
+ 
 require "../helpers/QualifiedName.kmt"
-require "platform:/plugin/fr.irisa.triskell.traceability.model/model/kmt/Traceability.kmt"
-  
+require "platform:/plugin/fr.irisa.triskell.traceability/model/kmt/Traceability.kmt"
+
 using kermeta::standard 
 using kermeta::exceptions
-using kermeta::persistence
-using qualifiedNames
+using kermeta::persistence 
+//using qualifiedNames
 using ecore
-
+ 
 /** This class provides some helper methods to load/save Ecore models
     Plus some other useful navigation methods
  */
@@ -101,13 +102,13 @@ class EcoreHelper
     /**
      ** Returns the QualifiedName of the given class 
      **/
-	operation getClassifierFQN(c : EClassifier) : QualifiedName is 
+	operation getClassifierFQN(c : EClassifier) : qualifiedNames::QualifiedName is 
     	do
     		if (c.ePackage != void) then
     			result := getPackageFQN(c.ePackage)
     			result.append(c.name)
     		else
-    			result := QualifiedName.new.fromString(c.name)
+    			result := qualifiedNames::QualifiedName.new.fromString(c.name)
     		end
     	end
     	
@@ -126,21 +127,21 @@ class EcoreHelper
 	/**
 	 ** Resolves a possibly relative or absolute type reference w.r.t. the current model.
 	 **/
-	operation findClassifierRelativeOrAbsolute(contextPackageName: QualifiedName, typeName: QualifiedName): EClassifier is
-		do
+	operation findClassifierRelativeOrAbsolute(contextPackageName: qualifiedNames::QualifiedName, typeName: qualifiedNames::QualifiedName): EClassifier is
+		do 
 			// try relative first:
 		    result := getClassifierByFQN( contextPackageName.concat(typeName))
 		    if result == void then // try absolute
     		    result := getClassifierByFQN( typeName)
-		    end
+		    end 
 		end
-		
+		 
 	/**
 	 ** Navigates the model according to the path described by name and returns the classifier thus described
 	 **/
-	operation getClassifierByFQN(name : QualifiedName) : EClassifier is 
+	operation getClassifierByFQN(name : qualifiedNames::QualifiedName) : EClassifier is 
     	do
-    	  	var packagePath  : QualifiedName init name.packageName
+    	  	var packagePath  : qualifiedNames::QualifiedName init name.packageName
     		var classifierName :String init name.typeName
     		var pack : EPackage init packages.detect{p|p.name==(packagePath.first)}
     		packagePath.remove(packagePath.first)
@@ -162,19 +163,19 @@ class EcoreHelper
 	 **/
 	operation getPackageQualifiedName(p : EPackage) : String is 
 		do
-			result := getPackageFQN(p).toString
+			result := getPackageFQN(p).toString 
 		end
 		
 	/**
 	 ** Gets the QualifiedName of  a package.
 	 **/
-	operation getPackageFQN(p : EPackage) : QualifiedName is 
+	operation getPackageFQN(p : EPackage) : qualifiedNames::QualifiedName is 
     	do
     		if (p.eSuperPackage != void) then
     			result := getPackageFQN(p.eSuperPackage)
     			result.appendString( p.name)
     		else
-    			result := QualifiedName.new.fromString(p.name)
+    			result := qualifiedNames::QualifiedName.new.fromString(p.name)
     		end
     	end
 	
@@ -232,6 +233,7 @@ class EcoreHelper
     		detail.key := detailKey
     		detail.~value := detailValue
     		theAnnotation.details.add(detail)
+    		result := theAnnotation
         end
 	
 	/**

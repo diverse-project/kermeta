@@ -1,4 +1,4 @@
-/* $Id: OperatorPolicies.kmt,v 1.10 2007-09-21 14:09:56 barais Exp $
+/* $Id: OperatorPolicies.kmt,v 1.11 2007-12-07 01:54:43 ffleurey Exp $
  * License:
  * Copyright:
  * Authors: Mark Skipper
@@ -6,15 +6,14 @@
 package ocl2kmt;
 require kermeta
 require "ocl2kmtVisitor.kmt"
-require "TypeSystemMixin.kmt"
-require "../helpers/QualifiedName.kmt"
+
 
 using kermeta::standard
 using kermeta::exceptions
 using kermeta::utils
 using ocl::cst
 using ocl::cst::visitors 
-using qualifiedNames
+using qualifiedNames 
  
  /** Superclass for the visitor that abstracts out its knowledge of 
   ** how to deal with OCL operators

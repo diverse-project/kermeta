@@ -1,18 +1,17 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.12 2007-09-21 07:43:30 barais Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.12 2007-09-21 07:43:30 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.13 2007-12-07 01:54:44 ffleurey Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.13 2007-12-07 01:54:44 ffleurey Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
  * Authors:
  */
-@mainClass "::"
-@mainOperation ""
 
+  
 package ocl2kmt;
 require kermeta
 require "TypeSystemMixin.kmt"
 require "IOMixin.kmt"
-require "./oclcstvisitor.kmt"
+
  
 require "../helpers/QualifiedName.kmt"
 require "OperatorPolicies.kmt"  
@@ -38,8 +37,8 @@ using qualifiedNames
  ** called from within the visit methods here to set and, where necessary, obtain
  ** the necessary additional type information.
  **/
- class Ocl2kmtVisitor inherits ocl::cst::visitors::Visitor,  IOMixin,  TypeSystemMixin {
-
+ class Ocl2kmtVisitor inherits Visitor,  IOMixin,  TypeSystemMixin {
+   
 		attribute __kermeta : KermetaHelper // I should be able to put [1] after this and have it initialised
 		
 		property readonly kermeta : KermetaHelper 
@@ -290,7 +289,7 @@ using qualifiedNames
 
 		method visitPathNameCS(visitable : PathNameCS) : Void is
 			do
-				qualifiedTypeName := QualifiedName.new.fromSequence(visitable.sequenceOfNames)
+				qualifiedTypeName := QualifiedName.new.fromSequence(visitable.sequenceOfNames.asSequence())
 				write(qualifiedTypeName.toString)
 			end
           
@@ -330,7 +329,7 @@ using qualifiedNames
 			do
 				visit(visitable)
 			end
-			
+			 
 		method visitVariableCS(visitable : VariableCS) : Void is
 			do
     			var variableName: String init visitable.name.toString
@@ -400,7 +399,7 @@ using qualifiedNames
 			
 		operation visitEnumLiteralAsType(visitable : EnumLiteralExpCS) : Void is
 			do
-				qualifiedTypeName := QualifiedName.new.fromSequence( visitable.pathNameCS.sequenceOfNames)
+				qualifiedTypeName := QualifiedName.new.fromSequence( visitable.pathNameCS.sequenceOfNames.asSequence())
 				qualifiedTypeName.add(visitable.simpleNameCS.~value.toString)
 				write(qualifiedTypeName.toString)
 			end

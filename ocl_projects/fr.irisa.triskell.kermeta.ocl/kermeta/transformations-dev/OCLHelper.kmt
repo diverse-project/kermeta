@@ -1,4 +1,4 @@
-/* $Id: OCLHelper.kmt,v 1.4 2007-09-21 07:43:30 barais Exp $
+/* $Id: OCLHelper.kmt,v 1.5 2007-12-07 01:54:44 ffleurey Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -14,11 +14,11 @@
 
 
 package OCLHelpers;
-   
+     
 require kermeta
 require "oclcstvisitor.kmt" 
  //require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
-   
+    
 using ocl::cst
 using kermeta::standard
 using kermeta::persistence
@@ -28,8 +28,8 @@ using kermeta::exceptions
     Plus some other useful navigation methods
  */
 class OCLHelper
-{
-	
+{ 
+	 
     operation getPackageDeclaration(model : Resource): ocl::cst::PackageDeclarationCS is
 	    do
 	    	result ?= model.instances.detect{ o |

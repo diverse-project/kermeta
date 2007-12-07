@@ -1,4 +1,4 @@
-/* $Id: OCLParseWizard.java,v 1.9 2007-11-30 17:14:15 dvojtise Exp $
+/* $Id: OCLParseWizard.java,v 1.10 2007-12-07 01:54:45 ffleurey Exp $
 * Project : fr.irisa.triskell.kermeta.ocl
 * File : 	OCLParseWizard.java
 * License : EPL
@@ -21,6 +21,8 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -28,12 +30,14 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
@@ -42,6 +46,7 @@ import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
 import fr.irisa.triskell.eclipse.console.messages.OKMessage;
 import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
+import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.ocl.GenerateKMT;
 import fr.irisa.triskell.kermeta.ocl.MyOCLParser;
 import fr.irisa.triskell.kermeta.ocl.TestOCLParser;
@@ -90,7 +95,7 @@ public class OCLParseWizard extends Wizard {
 		
 	}
 
-	IFile outOCLfile;
+	/*IFile outOCLfile;
 	private boolean generatemOCL(){
 		
 		console.println(new InfoMessage("Parsing file " + inputFile));
@@ -132,7 +137,7 @@ public class OCLParseWizard extends Wizard {
 			
 			
 			
-			/*//ISTeCQLexer lexer = new ISTeCQLexer(inputFile.getContents());
+			//ISTeCQLexer lexer = new ISTeCQLexer(inputFile.getContents());
 			//ISTeCQParser parser = new ISTeCQParser(lexer);
 			
 			//ApplicationModel m = null;
@@ -150,7 +155,7 @@ public class OCLParseWizard extends Wizard {
 				Resource res = resource_set.createResource(URI.createFileURI(xmiFile.getLocation().toOSString()));
 				res.getContents().add(m);
 				res.save(null);
-				*/
+				
 			
 			 //outOCLfile = inputFile.getWorkspace().getRoot().getFile(inputFile.getLocation().removeFileExtension().addFileExtension("mocl"));
 				
@@ -176,7 +181,7 @@ public class OCLParseWizard extends Wizard {
 		return true;
 	}
 	
-	
+	*/
 
 	@Override
 	public boolean canFinish() {
@@ -189,84 +194,75 @@ public class OCLParseWizard extends Wizard {
 		return super.canFinish() && outputPage.getEcoreFile() != null;
 	}
 
-	private void registerPackages(EPackage pack) {
-		Registry.INSTANCE.put(pack.getNsURI(), pack);
-		
-		EList<EPackage> l = pack.getESubpackages();
-		
-		if(l != null) {
-			Iterator<EPackage> it = l.iterator();
-			while(it.hasNext()) {
-				registerPackages( it.next());
-			}
-		}
-	}
+	
 	
 	@Override
 	public boolean performFinish() {
-		IFile xmiFile = null;
+		IFile kmtFile = outputPage.createNewFile();;
 		//this.generatemOCL();
-		if (this.generatemOCL()){
-			try{
+		//if (this.generatemOCL()){
+		//	try{
 				
+		//URIConverter.URI_MAP.putAll(URIMapUtil.readMapFile(new File("uri.map")));
+		inputMetaFile = outputPage.getEcoreFile();
+		//IOPlugin.LOCAL_USE= true;
+		String oclPath = "platform:/resource" + inputFile.getFullPath().toString();
+		String ecorePath ="platform:/resource" + inputMetaFile.getFullPath().toString();
+		
+		String kmtPath = kmtFile.getLocation().toOSString();
+		
+		URI ecoreURI = URI.createURI(ecorePath);
+		URI oclURI = URI.createURI(oclPath);
+		URI kmtURI = URI.createURI(kmtPath);
+		new GenerateKMT().generate(ecoreURI, oclURI, kmtURI);		
 				
-				
-			xmiFile = outputPage.createNewFile();
-			inputMetaFile = outputPage.getEcoreFile();
 			
-			String strURI = null;
-			URI mmURI = null;
-			Resource res = null;
-			EPackage ePack = null;
 			
-			ResourceSet rs = new ResourceSetImpl();
+			
+			
 				
-			strURI = "platform:/plugin/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore"; 
-			mmURI = URI.createURI(strURI);
-			res = rs.getResource(mmURI, true);
+			//strURI = "platform:/plugin/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore"; 
+			//mmURI = URI.createURI(strURI);
+			//res = rs.getResource(mmURI, true);
 				
-			ePack = (EPackage) res.getContents().get(0);
-			registerPackages(ePack);
+			//ePack = (EPackage) res.getContents().get(0);
+			//registerPackages(ePack);
 			
 			
 			
 			//IFile outfile = inputFile.getWorkspace().getRoot().getFile(inputFile.getLocation().removeFileExtension().addFileExtension("fixed.istecq"));
-			if (xmiFile.exists()) xmiFile.delete(true, null);
+			IFile tmpfile = ResourceHelper.getIFile(kmtFile.getFullPath().removeFileExtension().addFileExtension("xmi").toString(),false);
+			if (tmpfile.exists())
+				try {
+					tmpfile.delete(true, null);
+				} catch (CoreException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
-			String ipath = "file:/" + inputFile.getLocation().removeFileExtension().addFileExtension("mocl").toOSString();
-			String imetapath ="file:/" +  inputMetaFile.getLocation().toOSString();
 			
-			String opath = xmiFile.getLocation().toOSString();
 			
 			// Here I need to redirect Kermeta Console !
 			
-			//GenerateOCL.run(ipath, imetapath, opath, new OCLConsole(), KermetaConfig.KM_DIR + "/OCLKMTPrinter.kmt");
-			GenerateKMT generator = new GenerateKMT();
-			generator.generate(URI.createURI(ipath), URI.createURI(imetapath), URI.createURI(opath));
+		
 			
-			
-			 File f = new File(inputFile.getLocation().removeFileExtension().addFileExtension("mocl").toString());
+			/* File f = new File(inputFile.getLocation().removeFileExtension().addFileExtension("mocl").toString());
 				if (f.exists()) {
 					f.delete();
 					System.err.println("delete File");
 				}
-				
-			inputFile.getParent().refreshLocal(1, null);
+				*/
+			try {
+				inputFile.getParent().refreshLocal(1, null);
+			} catch (CoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//xmiFile.refreshLocal(1, null);
-			
-		//	msgStream = OCLConsole.newOKMessageStream();
-		//	msgStream.println("Model " + xmiFile + " created successfully.");
-			
-		} catch (Exception e) {
-			console.println(new ErrorMessage( "ERROR : " ));
-			console.println(new ThrowableMessage( e ));
-			e.printStackTrace();
-		}
-
-			
 			return true;
-		}else
-			return false;
+
+		 
+			
 		
 	}
 	

@@ -1,7 +1,7 @@
 package ocl;
 
-require "OCLCST.ecore" 
-  
+require "OCLCST.kmt" 
+   
 package cst
 {
 	@aspect "true"
@@ -19,14 +19,14 @@ package cst
 		method accept(visitor : visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitPackageDeclarationCS(self)
   
-	} 
+	}  
 	@aspect "true"
 	abstract class ContextDeclCS
 	{
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitContextDeclCS(self)
 
-	}
+	} 
 	@aspect "true"
 	class PropertyContextCS 
 	{

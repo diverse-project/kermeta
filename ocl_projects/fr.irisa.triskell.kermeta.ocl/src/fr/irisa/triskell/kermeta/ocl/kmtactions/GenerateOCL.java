@@ -1,4 +1,4 @@
-/* $Id: GenerateOCL.java,v 1.9 2007-11-30 16:03:24 dvojtise Exp $
+/* $Id: GenerateOCL.java,v 1.10 2007-12-07 01:54:45 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.ocl
  * File       : GenerateOCL.java
  * License    : EPL
@@ -15,17 +15,22 @@ package fr.irisa.triskell.kermeta.ocl.kmtactions;
 
 import java.util.ArrayList;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.kermeta.checker.KermetaUnitChecker;
+import org.kermeta.io.KermetaUnit;
+
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.eclipse.console.LocalIOConsole;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public class GenerateOCL {
 
 	public static String workbench_path = "platform:/plugin/";
-	//public static String workbench_path = "/udd/barais/workspace2/";
-
-	private static String project_path = workbench_path + "fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/";
+	
+	private static String project_path = workbench_path + "fr.irisa.triskell.kermeta.ocl/.bin/";
 	private static String oclKmtPrinterKmtPath = project_path + "OCLKMTPrinter.km";
 	
 	/**
@@ -48,19 +53,16 @@ public class GenerateOCL {
 	 */
 	public static void run(String inCstXmiPath, String modelEcorePath, String outKmtPath, IOConsole console ) {
 		System.out.println("running OCL2KMT Transformation \n from " + inCstXmiPath + "\n to " + outKmtPath + "\n against: " + modelEcorePath);
-		/*KermetaUnit unit = null;
+		KermetaUnit unit=null;
 		try {
-			unit = IOPlugin.getDefault().loadKermetaUnit(oclKmtPrinterKmtPath);
-		} catch (KermetaIOFileNotFoundException e) {
-			e.printStackTrace();
+			unit = KermetaUnitChecker.basicCheck(oclKmtPrinterKmtPath,null, new NullProgressMonitor());
 		} catch (URIMalformedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		KermetaTypeChecker typechecker = new KermetaTypeChecker(unit);
-		typechecker.checkUnit();*/
+	
 		
-		
-		KermetaInterpreter inter = new KermetaInterpreter(oclKmtPrinterKmtPath, null, true);
+		KermetaInterpreter inter = new KermetaInterpreter(unit, null);
 		inter.setKStream(console);
 		// This is the operation to call
 		inter.setEntryPoint("OCLKMTPrinter::OCLKMTPrinter", "generateOCL");
@@ -72,6 +74,8 @@ public class GenerateOCL {
 		inter.setEntryParameters(params);
 		// And we launch the interpreter
 		inter.launch();
+		System.out.println("file generated " + outKmtPath);
+		
 	}
 
 	

@@ -1,30 +1,29 @@
- /* $Id: DefinitionPreprocessor.kmt,v 1.3 2007-09-21 07:43:30 barais Exp $
+ /* $Id: DefinitionPreprocessor.kmt,v 1.4 2007-12-07 01:54:44 ffleurey Exp $
  * Creation date: August 20, 2007
  * License:
  * Copyright:
  * Authors:
  */
-@mainClass "root_package::Main"
-@mainOperation "main"
+
 
 
 package ocl2kmt;
-require "EcoreHelper.kmt"
+//require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "EcoreHelper.kmt" 
 require "TypeSystemMixin.kmt" 
-require "./oclcstvisitor.kmt" 
-require "../helpers/QualifiedName.kmt"
-using EcoreHelpers
+
+using EcoreHelpers  
 using ocl::cst 
 using kermeta::standard
-using qualifiedNames 
+//using qualifiedNames 
 using kermeta::persistence
 using kermeta::exceptions
  
 class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor  
 { 
 
-	attribute packageFQN: QualifiedName 
-	attribute classifierQN: QualifiedName 
+	attribute packageFQN: qualifiedNames::QualifiedName 
+	attribute classifierQN: qualifiedNames::QualifiedName 
 	reference classifier : ecore::EClass
 	reference newOperation: ecore::EOperation
 	
@@ -49,21 +48,21 @@ class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor
 	method visitPackageDeclarationCS(visitable : PackageDeclarationCS) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting Package Delcaration")
-			packageFQN := QualifiedName.new.fromSequence( visitable.pathNameCS.sequenceOfNames)
+			packageFQN := qualifiedNames::QualifiedName.new.fromSequence( visitable.pathNameCS.sequenceOfNames.asSequence()) 
 			stdio.writeln("   got package: " + packageFQN.toString)
 			visitable.contextDecls.each{ cd | cd.accept(self) }
         end
-
+ 
 	method visitPropertyContextCS(visitable : PropertyContextCS) : kermeta::standard::~Void is
-		do
+		do 
 		end
-
+ 
 	method visitClassifierContextDeclCS(visitable : ClassifierContextDeclCS) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting classifier context")
-			classifierQN := QualifiedName.new.fromSequence( visitable.pathNameCS.sequenceOfNames)
-			var fqn:QualifiedName init packageFQN.concat(classifierQN)
-			classifier ?= helper.getClassifierByFQN(fqn)
+			classifierQN := qualifiedNames::QualifiedName.new.fromSequence( visitable.pathNameCS.sequenceOfNames.asSequence()	)
+			var fqn:qualifiedNames::QualifiedName init packageFQN.concat(classifierQN)
+			classifier ?= helper.getClassifierByFQN(fqn)    
 			if classifier == void then
 				raise TypeError.new.setMessage("Can only define method for classes [" + fqn.toString+ "]")
 			else
@@ -127,7 +126,7 @@ class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor
 	method visitPathNameCS(visitable : PathNameCS) : kermeta::standard::~Void is
 		do
 			stdio.writeln("Visiting path name (type)")
-			var typeName: QualifiedName init QualifiedName.new.fromSequence(visitable.sequenceOfNames)
+			var typeName: qualifiedNames::QualifiedName init qualifiedNames::QualifiedName.new.fromSequence(visitable.sequenceOfNames.asSequence())
 			stdio.writeln("   got:" + typeName.toString)
 			newOperation.eType := helper.findClassifierRelativeOrAbsolute(packageFQN, typeName)
 		end

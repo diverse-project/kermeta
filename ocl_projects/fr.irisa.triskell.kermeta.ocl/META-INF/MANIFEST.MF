@@ -2,10 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: fr.irisa.triskell.kermeta.ocl
 Bundle-Version: 1.0.2
-Bundle-ClassPath: .,
- lib/antlr.jar,
- lib/log4j-1.2.14.jar,
- lib/net.sourceforge.lpg.lpgjavaruntime_1.1.0.v200702061926.jar
+Bundle-ClassPath: src/
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -18,45 +15,11 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kermeta.ecore,
  org.eclipse.ocl,
  org.eclipse.emf.ocl,
- fr.irisa.triskell.eclipse.util
+ fr.irisa.triskell.eclipse.util,
+ net.sourceforge.lpg.lpgjavaruntime
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.ocl ; singleton:=true
 Bundle-Vendor: INRIA/IRISA
-Export-Package: about_files,
- antlr,
- antlr.ASdebug,
- antlr.actions.cpp,
- antlr.actions.csharp,
- antlr.actions.java,
- antlr.actions.python,
- antlr.build,
- antlr.collections,
- antlr.collections.impl,
- antlr.debug,
- antlr.debug.misc,
- antlr.preprocessor,
- fr.irisa.triskell.kermeta.ocl,
+Export-Package: fr.irisa.triskell.kermeta.ocl,
  fr.irisa.triskell.kermeta.ocl.kmtactions,
  fr.irisa.triskell.kermeta.ocl.ui,
- fr.irisa.triskell.kermeta.ocl.ui.popup.actions,
- lpg.lpgjavaruntime,
- org.apache.log4j,
- org.apache.log4j.chainsaw,
- org.apache.log4j.config,
- org.apache.log4j.helpers,
- org.apache.log4j.jdbc,
- org.apache.log4j.jmx,
- org.apache.log4j.lf5,
- org.apache.log4j.lf5.config,
- org.apache.log4j.lf5.util,
- org.apache.log4j.lf5.viewer,
- org.apache.log4j.lf5.viewer.categoryexplorer,
- org.apache.log4j.lf5.viewer.configure,
- org.apache.log4j.lf5.viewer.images,
- org.apache.log4j.net,
- org.apache.log4j.nt,
- org.apache.log4j.or,
- org.apache.log4j.or.jms,
- org.apache.log4j.or.sax,
- org.apache.log4j.spi,
- org.apache.log4j.varia,
- org.apache.log4j.xml
+ fr.irisa.triskell.kermeta.ocl.ui.popup.actions

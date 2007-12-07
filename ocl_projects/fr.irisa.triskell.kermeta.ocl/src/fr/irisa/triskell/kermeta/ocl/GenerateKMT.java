@@ -19,9 +19,8 @@ import fr.irisa.triskell.kermeta.ocl.kmtactions.GenerateOCL;
 
 public class GenerateKMT {
 
-	private static String workbench_path = "platform:/resource/";
+	private static String workbench_path = "platform:/plugin/";
 	private static String project_path = workbench_path + "fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/";
-	private static String frameworkkm = "/opt/eclipse/plugins/fr.irisa.triskell.kermeta_0.5.0.qualifier/lib/framework.km";
 	private static String ecore_ecore =  project_path + "Ecore.ecore";
 	private static String oclcst_ecore =  project_path + "OCLCST.ecore";
 	
@@ -39,10 +38,10 @@ public class GenerateKMT {
 	
 	
 	public void generate(URI ecoreURI, URI inputOclFileURI, URI outputKMTFileURI){
-		URI xmiTempFileURI = inputOclFileURI.trimFileExtension().appendFileExtension(".xmi");
+		URI xmiTempFileURI = inputOclFileURI.trimFileExtension().appendFileExtension("xmi");
 		System.out.println("Parsing: \nfrom: " + inputOclFileURI + " \nto  : " + xmiTempFileURI  );
 		try {
-				OCLFileParser.parseTextFileToXmiFile(inputOclFileURI, outputKMTFileURI);
+				OCLFileParser.parseTextFileToXmiFile(inputOclFileURI, xmiTempFileURI);
 		} catch (ParserException e) {
 				System.err.println(e.getMessage());
 				return;
@@ -52,7 +51,7 @@ public class GenerateKMT {
 	
 	
 	private void runOclCstToKmtPrinter(URI cstXmiURI, URI ecoreURI, URI outputKmtFileURI){
-		System.out.println("Generating: \nfrom: " + cstXmiURI + " \nto  : " + outputKmtFileURI );
+		System.out.println("Generating: \nfrom: " + cstXmiURI + " \nto  : " + outputKmtFileURI +"with " + ecoreURI );
 		registerPackages(EcorePackage.eINSTANCE);
 		EPackage ePack = (EPackage) getResource().getContents().get(0);
 		registerPackages(ePack); 
