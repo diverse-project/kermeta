@@ -1,0 +1,14 @@
+@mainClass "Class2RDBMSk::Main"
+@mainOperation "main"
+
+package Class2RDBMSk;
+
+require kermeta
+
+require kermeta
+class Main
+{
+	operation main() : Void is do 
+		stdio.writeln("file to copy")
+	end
+}

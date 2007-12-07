@@ -1,0 +1,69 @@
+@mainClass "ptpr::Main" 
+@mainOperation "main"
+
+package ptpr;
+
+require kermeta
+
+using kermeta::utils
+using kermeta::persistence
+using kermeta::exceptions
+using kermeta::kunit
+
+class Main inherits TestCase 
+{
+
+    operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+    end
+
+    operation test0() : Void is
+    do 
+   		var repository_load : EMFRepository init EMFRepository.new
+    	var resource_load : Resource init repository_load.createResource("../instances/069_km_model_to_copy.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+ 
+  		do
+			resource_load.load()
+			stdio.writeln("load OK")
+			rescue (e1 : ResourceLoadException)
+			do
+				stdio.writeln(e1.toString)
+        		stdio.writeln(e1.message)
+        		assert(false)
+        	end
+		end
+		
+		var mypackage : kermeta::language::structure::Package
+	 	var mymodelunit : kermeta::language::structure::ModelingUnit	 	
+	 	mymodelunit ?= resource_load.instances.one	 			
+											 				
+		var repository_save : EMFRepository init EMFRepository.new    
+        var resource_save : Resource init repository_save.createResource("../instances/069_km_model_to_copy(copied).km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+	 	resource_save.instances.add(mymodelunit)
+	 	do
+		 	resource_save.save()
+		 	stdio.writeln("save OK")
+		 	rescue (e2 : ResourceLoadException)
+		 	do
+				stdio.writeln(e2.toString)
+        		stdio.writeln(e2.message)
+        		assert(false)
+        	end
+	 	end
+	 	
+	 	var repository_load2 : EMFRepository init EMFRepository.new     
+    	var resource_load2 : Resource init repository_load2.createResource("../instances/069_km_model_to_copy(copied).km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+    	do
+			resource_load2.load()
+			stdio.writeln("load2 OK")
+			rescue (e3 : ResourceLoadException)
+			do
+				stdio.writeln(e3.toString)
+        		stdio.writeln(e3.message)
+        		assert(false)
+        	end
+		end
+    end   
+}
