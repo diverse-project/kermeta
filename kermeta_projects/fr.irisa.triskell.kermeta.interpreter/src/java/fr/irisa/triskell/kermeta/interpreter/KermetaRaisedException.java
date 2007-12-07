@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.17 2007-10-15 07:13:58 barais Exp $
+/* $Id: KermetaRaisedException.java,v 1.18 2007-12-07 00:09:31 gperroui Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -21,6 +21,7 @@ import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Object;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
@@ -31,7 +32,8 @@ import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 @SuppressWarnings("serial")
 public class KermetaRaisedException extends Error {
 
-    public RuntimeObject raised_object;
+    private static Object contextException;
+	public RuntimeObject raised_object;
     // The trace handler
     protected Traceback traceback;
     
@@ -42,7 +44,7 @@ public class KermetaRaisedException extends Error {
     /**
      * Constructor 
      * Developer should then use the setContext method on this object in order to fill the readable stack trace
-     * If possible, developer should use the other constructor, othewise he should try to build the context later
+     * If possible, developer should use the other constructor, otherwise he should try to build the context later
      */
     public KermetaRaisedException(RuntimeObject raised_object, ExpressionInterpreter theInterpreter)
     {
@@ -59,7 +61,7 @@ public class KermetaRaisedException extends Error {
      */
     public KermetaRaisedException(RuntimeObject raised_object, ExpressionInterpreter theInterpreter, Throwable t)
     {
-        super("kermeta exception : " + raised_object, t );
+    	super("kermeta exception : " + raised_object, t );
         interpreter = theInterpreter;
         
         this.raised_object = raised_object;
@@ -68,7 +70,7 @@ public class KermetaRaisedException extends Error {
     /**
      * 
      * @param raised_object
-     * @param cause_object the FExpression where the error occured
+     * @param cause_object the FExpression where the error occurred
      */
     public KermetaRaisedException(RuntimeObject raised_object, RuntimeObject cause_object, ExpressionInterpreter theInterpreter) {
         super("kermeta exception : " + raised_object);
@@ -86,7 +88,7 @@ public class KermetaRaisedException extends Error {
      */
     public String toString(){
     	String result = super.toString();
-    	// display the atributes of the raise object
+    	// display the attributes of the raise object
     	fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)raised_object.getMetaclass().getKCoreObject();        	    	
     	
     	SimpleType target = new SimpleType(t_target);
@@ -218,14 +220,38 @@ public class KermetaRaisedException extends Error {
     	RuntimeObject raised_object = rofactory.createObjectFromClassName(kermetaExceptionName);
     	
     	// adds some info on this exception (in the message attribute of the exception)
-    	
     	fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)raised_object.getMetaclass().getKCoreObject();        	
     	SimpleType target = new SimpleType(t_target);
 	    CallableProperty cproperty = target.getPropertyByName("message");
 	    RuntimeObject ro_property = memory.getRuntimeObjectForFObject(cproperty.getProperty());
 	    RuntimeObject rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(exceptionMessage, rofactory);
-         
+	    
+	    String context = "";	    
+	    RuntimeObject cause_object= memory.getRuntimeObjectForFObject(contextException);	    
+        fr.irisa.triskell.kermeta.language.structure.Object fobject = null;
+        if(cause_object != null) {
+	        if (cause_object.getKCoreObject() != null)
+	        {
+	        	fobject = (fr.irisa.triskell.kermeta.language.structure.Object)cause_object.getKCoreObject();
+		        context = new Traceback(interpreter, fobject).getStackTrace();
+	        }
+	        else
+	        {
+	            System.err.println("RuntimeObject with no kcore object : " + cause_object);
+	            context += "Context not available : (internal RuntimeObject with no kcore object : " + cause_object +")";
+	        }
+	        
+        }
+        else {
+        	context += "Context not available : cause_object is null";
+        }
+	    
+	    CallableProperty cproperty2 = target.getPropertyByName("stackTrace");
+	    RuntimeObject ro_property2 = memory.getRuntimeObjectForFObject(cproperty2.getProperty());
+	    RuntimeObject rovalue2 = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(context, rofactory);
+	         
     	fr.irisa.triskell.kermeta.runtime.language.Object.set(raised_object, ro_property, rovalue);
+    	fr.irisa.triskell.kermeta.runtime.language.Object.set(raised_object, ro_property2, rovalue2);
 
     	return new KermetaRaisedException( raised_object, 
 				interpreter,
@@ -249,12 +275,14 @@ public class KermetaRaisedException extends Error {
 			fr.irisa.triskell.kermeta.language.structure.Object context,
 			Throwable javaCause)
     {
+    	contextException = context;
     	KermetaRaisedException e = createKermetaException(kermetaExceptionName,
     			exceptionMessage,
     			interpreter, 
-    			memory, 
+    			memory,
     			javaCause);
     	e.setContextString(interpreter, memory.getRuntimeObjectForFObject(context));
+    	
     	return e;
     }
     
