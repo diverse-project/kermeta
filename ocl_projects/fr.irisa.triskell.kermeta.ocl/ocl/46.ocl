@@ -1,9 +1,0 @@
-package sample
--- 46: excludes
-context A inv:
-	b->excludes(ab)
-
-endpackage
-
-
-

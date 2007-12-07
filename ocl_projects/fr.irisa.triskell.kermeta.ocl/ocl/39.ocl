@@ -1,7 +1,0 @@
-package sample
--- 39: is empty
-context A inv:
-	b->isEmpty()
-
-endpackage
-

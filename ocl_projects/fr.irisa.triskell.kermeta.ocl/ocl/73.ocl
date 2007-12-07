@@ -1,6 +1,0 @@
-package sample
-
-context A inv:
-  self.ab.oclIsKindOf(sample::B)
-
-endpackage

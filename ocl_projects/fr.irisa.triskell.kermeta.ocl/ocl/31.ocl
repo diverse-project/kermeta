@@ -1,6 +1,0 @@
-package sample
--- 31: Operation call with arguments
-context A inv:
-	b->last()
-
-endpackage

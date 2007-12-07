@@ -1,5 +1,0 @@
-package sample
-
-context A inv:
-	true or true
-endpackage

@@ -1,6 +1,0 @@
-package sample
--- implies
-context A inv:
-	true implies true
-
-endpackage

@@ -1,7 +1,0 @@
-package sample
-
-context A inv:
-  self.ab.oclIsKindOf(B)
-
-endpackage
-

@@ -1,6 +1,0 @@
-package sample
--- 16: not equals
-context A inv:
-	3 <> 4
-
-endpackage

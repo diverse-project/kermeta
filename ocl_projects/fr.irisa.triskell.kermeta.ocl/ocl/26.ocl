@@ -1,6 +1,0 @@
-package sample
--- 26: real literals
-context A inv:
-	3.14
-
-endpackage

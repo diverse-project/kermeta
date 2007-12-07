@@ -1,8 +1,0 @@
-package sample
--- 33: at
-context A inv:
-	b->at(1)
-
-endpackage
-
-

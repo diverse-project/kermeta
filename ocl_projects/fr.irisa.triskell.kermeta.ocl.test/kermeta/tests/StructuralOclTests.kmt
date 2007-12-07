@@ -12,8 +12,8 @@ package oclTests;
 
 require kermeta
 
-require "../transformations-dev/ocl2kmtVisitor.kmt" 
-require "../helpers/OCLHelper.kmt" 
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/ocl2kmtVisitor.kmt" 
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLHelper.kmt" 
      
 using kermeta::kunit
 using kermeta::standard
@@ -35,7 +35,7 @@ class  StructuralOclTests  inherits TestCase
 			repository := EMFRepository.new        
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
-            ecoreFile := "platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/company.ecore"
+            ecoreFile := "platform:/plugin/fr.irisa.triskell.kermeta.ocl.test/ocl/company.ecore"
 
 	    	
 			//de := DynamicExpression.new
@@ -44,7 +44,7 @@ class  StructuralOclTests  inherits TestCase
 		
 	 operation visitOclXmi(filename: String): String is
         do
-             var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl/model/" + filename + ".xmi"
+             var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl.test/model/" + filename + ".xmi"
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
             visitor.setEcoreHelper(EcoreHelpers::EcoreHelper.new.loadMetamodel(ecoreFile))

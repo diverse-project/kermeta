@@ -1,8 +1,0 @@
-package sample
--- 59: String: toReal
-context A inv:
-	"3.14".toReal()
-
-endpackage
-
-

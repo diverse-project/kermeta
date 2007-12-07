@@ -1,8 +1,0 @@
-package sample
- -- simple if
-context A inv:
-   if true then true else true endif
-
-
-
-endpackage

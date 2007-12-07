@@ -1,8 +1,0 @@
-package sample
--- 61: concatenate
-context A inv:
-	"foo".concatenate("bar")
-
-endpackage
-
-

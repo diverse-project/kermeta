@@ -1,7 +1,0 @@
-package sample
--- 57: symmetricdifference
-context A inv:
-	b->symmetricDifference(b)
-
-endpackage
-

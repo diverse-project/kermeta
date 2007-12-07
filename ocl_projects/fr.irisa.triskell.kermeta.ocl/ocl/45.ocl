@@ -1,8 +1,0 @@
-package sample
--- 45: includes
-context A inv:
-	b->includes(ab)
-
-endpackage
-
-

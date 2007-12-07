@@ -1,8 +1,0 @@
-package sample
--- 38: not empty
-context A inv:
-	b->excludesAll(b)
-
-endpackage
-
-

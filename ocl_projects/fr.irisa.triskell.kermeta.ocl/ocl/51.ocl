@@ -1,6 +1,0 @@
-package sample
--- 51: subSequence
-context A inv:
-	b->subSequence(1, 2)
-
-endpackage

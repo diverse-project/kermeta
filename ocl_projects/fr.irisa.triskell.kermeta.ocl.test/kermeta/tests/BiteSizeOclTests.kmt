@@ -10,10 +10,10 @@
 package oclTests;
 
 require kermeta
-require "../transformations-dev/EcoreHelper.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/EcoreHelper.kmt"
 //require "../../../someUnit/src/newUnit.kmt" 
-require "../transformations-dev/ocl2kmtVisitor.kmt"  
-require "../helpers/OCLHelper.kmt"   
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/ocl2kmtVisitor.kmt"  
+require "platform:/plugin/fr.irisa.triskell.kermeta.ocl/kermeta/helpers/OCLHelper.kmt"   
 
 //require "http://sample"
    
@@ -39,7 +39,7 @@ class  BiteSizeOclTests  inherits TestCase
             repository := EMFRepository.new        
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
-            ecoreFile := "platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/sample.ecore"
+            ecoreFile := "platform:/plugin/fr.irisa.triskell.kermeta.ocl.test/ocl/sample.ecore"
 
         end
         
@@ -62,7 +62,7 @@ class  BiteSizeOclTests  inherits TestCase
         
     operation visitOclXmi(filename: String): String is
         do
-            var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/" + filename + ".xmi"
+            var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl.test/ocl/" + filename + ".xmi"
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
             visitor.setEcoreHelper(EcoreHelper.new.loadMetamodel(ecoreFile))

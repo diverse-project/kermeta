@@ -1,6 +1,0 @@
-package sample
--- 12: greater than
-context A inv:
-	3 > 4
-
-endpackage

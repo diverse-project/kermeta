@@ -1,8 +1,0 @@
-package sample
--- 54: append
-context A inv:
-	b->append(ab)
-
-endpackage
-
-

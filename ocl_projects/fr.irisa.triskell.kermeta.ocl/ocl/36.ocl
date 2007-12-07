@@ -1,9 +1,0 @@
-package sample
--- 36: asBag
-context A inv:
-	b->asBag()
-
-endpackage
-
-
-

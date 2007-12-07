@@ -1,6 +1,0 @@
-package sample
--- 09: xor
-context A inv:
-	true xor true
-
-endpackage

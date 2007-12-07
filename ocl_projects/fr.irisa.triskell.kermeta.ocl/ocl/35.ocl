@@ -1,8 +1,0 @@
-package sample
--- 35: asSequence
-context A inv:
-	b->asSequence()
-
-endpackage
-
-

@@ -1,6 +1,0 @@
-package sample
--- 29: Operation call with arguments
-context A inv:
-	self.getB(2, true)
-
-endpackage
