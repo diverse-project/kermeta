@@ -6,12 +6,28 @@
          point="org.eclipse.ui.editors">
       <editor
             name="Ket Editor"
-            extensions="kmtt"
+            extensions="ket"
             icon="icons/ket.png"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             class="org.kermeta.ket.texteditor.XMLEditor"
             id="org.kermeta.ket.texteditor.KetEditor">
       </editor>
    </extension>
+   <!--extension
+        point="org.eclipse.ui.newWizards">
+	   <wizard 
+	               icon="icons/ket.png"
+	               class="org.kermeta.ket.texteditor.wizards.KetNewFileWizard"
+	               category="fr.irisa.triskell.kermeta.KermetaWizard"
+	               descriptionImage=""
+	               project="false"
+	               preferredPerspectives="org.eclipse.ui.resourcePerspective"
+	               name="New Ket file"
+	               id="org.kermeta.ket.texteditor.wizards.kermetaNewKetWizard">
+	            <selection class="org.eclipse.core.resources.IProject"/>
+	            <selection class="org.eclipse.core.resources.IFolder"/>
+	            <selection class="org.eclipse.core.resources.IFile"/>
+	   </wizard>
+   </extension-->
 
 </plugin>

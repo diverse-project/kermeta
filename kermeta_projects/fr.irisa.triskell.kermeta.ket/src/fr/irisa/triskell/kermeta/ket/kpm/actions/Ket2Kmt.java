@@ -1,6 +1,6 @@
-/*$Id: Kmtt2Kmt.java,v 1.1 2007-12-05 10:07:40 cfaucher Exp $
+/*$Id: Ket2Kmt.java,v 1.1 2007-12-07 05:31:58 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.ket
-* File : 	Kmtt2Kmt.java
+* File : 	Ket2Kmt.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
@@ -26,7 +26,7 @@ import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 
-public class Kmtt2Kmt implements IAction {
+public class Ket2Kmt implements IAction {
 
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
 
@@ -70,9 +70,9 @@ public class Kmtt2Kmt implements IAction {
 			monitor.beginTask("", 1);
 			monitor.subTask(inputFile.getName().toString() + " converted to " + outputFile.getName().toString());
 			
-			Generator kmtt2Kmt = new Generator();
+			Generator ket2Kmt = new Generator();
 			
-			kmtt2Kmt.generate(inputFile, outputFile.getLocation().toString());
+			ket2Kmt.generate(inputFile, outputFile.getLocation().toString());
 						
 			try {
 				IFile outputFile2 = ResourceHelper.getIFile( outputString );

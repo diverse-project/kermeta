@@ -1,4 +1,4 @@
-/* $Id: Generator.java,v 1.6 2007-12-05 10:07:41 cfaucher Exp $
+/* $Id: Generator.java,v 1.7 2007-12-07 05:31:58 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.ket
  * File       : Generator.java
  * License    : EPL
@@ -60,9 +60,9 @@ public class Generator implements IObjectActionDelegate{
 	private StructuredSelection currentSelection;
 	
 	/**
-	 * List of kmttffiles to compile into kmt
+	 * List of ketffiles to compile into kmt
 	 */
-	private List<IFile> kmttfiles;
+	private List<IFile> ketfiles;
 	
 	private  final class NullTagLibraryResolver implements
 			ITagLibraryResolver {
@@ -101,47 +101,40 @@ public class Generator implements IObjectActionDelegate{
 	 
 	 /**
 	  * 
-	  * @param kmttfile
+	  * @param ketfile
 	  */
-	 public void generate( IFile kmttfile ){
+	 public void generate( IFile ketfile ){
 		 IJETParser p = new KetParser(nullTemplateResolver, new NullTagLibraryResolver() ,new HashMap());
-		 String outputURI = kmttfile.getLocation().removeFileExtension().addFileExtension("kmt").toOSString();
-		 generate(kmttfile, outputURI);
+		 String outputURI = ketfile.getLocation().removeFileExtension().addFileExtension("kmt").toOSString();
+		 generate(ketfile, outputURI);
 	 }
 	 
 	 /**
 	  * 
-	  * @param kmttfile
+	  * @param ketfile
 	  */
-	 public void generate( IFile kmttfile, String outputURI){
+	 public void generate( IFile ketfile, String outputURI){
 		 IJETParser p = new KetParser(nullTemplateResolver, new NullTagLibraryResolver() ,new HashMap());
 		 String content = "";
 		 try {
-			 FileInputStream stream = new FileInputStream(kmttfile.getLocation().toString());
+			 FileInputStream stream = new FileInputStream(ketfile.getLocation().toString());
 			 content = readAll(stream);
-//			 ITextFileBufferManager.DEFAULT.connect(kmttfile.getLocation(), null, new NullProgressMonitor());
-//		} catch (CoreException e1) {
-			// TODO Auto-generated catch block
-//			e1.printStackTrace();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		 String s = ITextFileBufferManager.DEFAULT.getTextFileBuffer(kmttfile.getLocation(), null).getDocument().get();
-		 
-			 JETCompilationUnit cu = (JETCompilationUnit) p.parse(content.toCharArray());
-			// 
-			 PrintWriter fo=null;
-			File f = new File(outputURI);
-			 try {
-				fo = new PrintWriter( f);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			 Visitor v =new Visitor(fo); 
-			 cu.accept(v);
-			 fo.flush();
-			 fo.close();	 
+		JETCompilationUnit cu = (JETCompilationUnit) p.parse(content.toCharArray());
+		PrintWriter fo=null;
+		File f = new File(outputURI);
+		try {
+			fo = new PrintWriter( f);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		Visitor v =new Visitor(fo); 
+		cu.accept(v);
+		fo.flush();
+		fo.close();	 
 	 }
 	 
 	 private String readAll(InputStream in) { 
@@ -175,10 +168,10 @@ public class Generator implements IObjectActionDelegate{
 	 */
 	public void run(IAction action) {
 		Shell shell = new Shell();
-		for(IFile kmttfile : this.kmttfiles) {
-			generate(kmttfile);   
+		for(IFile ketfile : this.ketfiles) {
+			generate(ketfile);   
 			try {
-				kmttfile.getParent().refreshLocal(IResource.DEPTH_ONE, null);
+				ketfile.getParent().refreshLocal(IResource.DEPTH_ONE, null);
 			} catch (CoreException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -192,15 +185,15 @@ public class Generator implements IObjectActionDelegate{
 	public void selectionChanged(IAction action, ISelection selection) {
 		if (selection instanceof StructuredSelection)
 		{
-			kmttfiles = new ArrayList<IFile>();
-			// the selection should be a single *.kmtt file or multiple
+			ketfiles = new ArrayList<IFile>();
+			// the selection should be a single *.ket file or multiple
 			currentSelection = (StructuredSelection)selection;
 			Iterator it = currentSelection.iterator();
 
 			while(it.hasNext()) {
 				IResource res = (IResource) it.next();
 				if( res instanceof IFile ) {
-					this.kmttfiles.add((IFile)res);
+					this.ketfiles.add((IFile)res);
 				}
 			}
 

@@ -2,11 +2,11 @@
 <?eclipse version="3.3"?>
 <plugin>
    <extension
-         id="kmtt"
+         id="ket"
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             objectClass="org.eclipse.core.resources.IFile"
-            nameFilter="*.kmtt"
+            nameFilter="*.ket"
             id="fr.irisa.triskell.kermeta.ket.contribution">
          <menu
                label="Kermeta"
@@ -24,9 +24,9 @@
       </objectContribution>
    </extension>
    <extension
-         id="kmtt2kmt"
+         id="ket2kmt"
          point="fr.irisa.triskell.kermeta.kpm.javaAction">
-      <Action class="fr.irisa.triskell.kermeta.ket.kpm.actions.Kmtt2Kmt"/>
+      <Action class="fr.irisa.triskell.kermeta.ket.kpm.actions.Ket2Kmt"/>
    </extension>
    
 </plugin>
