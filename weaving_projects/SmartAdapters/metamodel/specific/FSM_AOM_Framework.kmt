@@ -1,320 +1,235 @@
+/* Authors: Brice Morin
+ * Creation date: 
+ * License: 
+ * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
+ */
+
+
 package org;
-   require kermeta
-   require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
-   //require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersMerged.kmt"   
-   require "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore" 
-   require "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"     
-  
-   using kermeta::standard
-   using kermeta::utils
-   using patternframework
-   using org::smartadapters::core
-   using org::smartadapters::extension
-   using ecore
+require kermeta
+require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
+require "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
+require "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"
 
-   package smartadapters
-   { 
-       	package core
-    	{ 
-   			@aspect "true"
-     		class Adapter{
-				operation initConvert() : Void is do
-					stdio.write("Mapping MM' to MM...")
-					convert.put(pattern::FSM::State,FSM::State)
-					convert.put(pattern::FSM::Transition,FSM::Transition)
-					convert.put(pattern::FSM::Fsm,FSM::Fsm)
-					stdio.writeln("OK!")
-				end
-			}
-							
-/*			class FSMAdapter inherits Adapter{
-				method initConvert() : Void is do
-					stdio.write("Mapping MM' to MM...")
-					convert.put(pattern::FSM::State,FSM::State)
-					convert.put(pattern::FSM::Transition,FSM::Transition)
-					convert.put(pattern::FSM::Fsm,FSM::Fsm)
-					stdio.writeln("OK!")
-				end
-			}*/
+using kermeta::standard
+using kermeta::utils
+using patternframework
+using org::smartadapters::core
+using org::smartadapters::extension
+using ecore
+using org::smartadapters::utils
+
+package smartadapters
+{
+	package core
+	{
+		@aspect "true"
+		class Adapter 
+		{
+			operation initConvert(): Void is do
+				stdio.write("Mapping MM\' to MM...")
+				converter := Converter.new
+				convert := Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new
+				convert.put(pattern::FSM::State,FSM::State)
+				convert.put(pattern::FSM::Transition,FSM::Transition)
+				convert.put(pattern::FSM::Fsm,FSM::Fsm)
+				converter.initConverter(convert)
+				stdio.writeln("OK!")
+			end
 		}
-	package adaptations{
-	
-class createState inherits createAdaptation{
-	reference  newState : pattern::FSM::State
- 
-	method check() : Boolean is do
-		result:=(newState != void) 
-	end
-
-	method execute() is do
-			var realState:FSM::State
-		if(adapter.created.getValue(newState)==void or not(isUnique==uniqueType.unique)) then
-			realState?=Object.clone(newState)//adapter.converter.convert(Object.clone(newState), adapter.convert)
-			adapter.created.put(newState,realState)
-			else
-			var clone:Boolean init false 
-			if(isUnique==uniqueType.non_unique) then
-				var input:String init stdio.read("clone "+newState.toString+" (true/false) :")
-				clone:=input.toBoolean
+		
+	package adaptations
+	{
+		
+		class CreateState inherits createAdaptation
+		{
+			attribute newState : pattern::FSM::State
+					
+			method check(): Boolean is do
+				result := newState!=void
 			end
-			if(isUnique==uniqueType.non_unique or clone) then
-				realState?=adapter.converter.convert(Object.clone(newState), adapter.convert)
-				adapter.created.put(newState,realState)
+					
+			method execute(): Void is do
+				adapter.cloneAgain(newState, void, isUnique)					
 			end
-		end
-	end
-}
+		}
 
-class cloneState inherits cloneAdaptation{
-	reference newState:pattern::FSM::State
-	attribute realState:pattern::FSM::State
-
-	method check() : Boolean is do
-		result:=(newState!=void)
-	end
-
-	method execute() is do
-		var clonedState:FSM::State
-		var temp:FSM::State
-		temp?=adapter.getRealObject(newState,false)
-		if(isUnique==uniqueType.unique) then
-			if(not(adapter.cloned.exists{o | o==temp})) then
-				clonedState?=Object.clone(temp)
-				adapter.clone.put(realState,clonedState)
-				adapter.cloned.add(temp)
+		class CloneState inherits cloneAdaptation
+		{
+			reference StateToClone : pattern::FSM::State
+			attribute clonedState : pattern::FSM::State
+			
+			method check(): Boolean is do
+				result := StateToClone!=void
 			end
-		else
-			var clone:Boolean init false
-			if(isUnique==uniqueType.non_unique) then
-				var input:String init stdio.read("clone "+newState.toString+" (true/false) :")
-				clone:=input.toBoolean
+			
+			method execute(): Void is do
+				adapter.cloneAgain(clonedState, StateToClone, isUnique)
+			end					
+		}
+
+		class SetState inherits setAdaptation
+		{
+			reference StateToSet : pattern::FSM::State
+			reference refname : String
+			
+			method check(): Boolean is do
+				result := StateToSet!=void
 			end
-			if(isUnique==uniqueType.non_unique or clone) then
-				clonedState?=Object.clone(temp)
-				adapter.clone.put(realState,clonedState)
-				adapter.cloned.add(temp)
+			
+			method execute(): Void is do
+				var tempState : FSM::State
+				tempState ?= adapter.getRealObject(StateToSet,false)
+				
+				tempState.name ?= adapter.setSingleProperty(refname, tempState.name)
+			end			
+		}
+		
+		class UnsetState inherits unsetAdaptation
+		{
+			reference StateToUnset : pattern::FSM::State
+			reference refname : String
+			
+			method check(): Boolean is do
+				result := StateToUnset!=void
 			end
-		end
-	end
-}
-
-class setState inherits setAdaptation{
-	reference aState:pattern::FSM::State
-	reference aname:ecore::EString
-
-	method check() : Boolean is do
-		result:=(aState!=void)
-	end
-
-	method execute() is do
-		var tempState:FSM::State
-		tempState?=adapter.getRealObject(aState,false)
-		var tempname:ecore::EString
-		tempname?=adapter.getRealObject(aname,false)
-		if(tempname!=void) then
-			tempState.name:=tempname
-		end
-	end
-}
-
-class unsetState inherits unsetAdaptation{
-	reference aState:pattern::FSM::State
-	reference aname:ecore::EString
-
-	method check() : Boolean is do
-		result:=(aState!=void)
-	end
-
-	method execute() is do
-		var tempState:FSM::State
-		tempState?=adapter.getRealObject(aState,false)
-		var tempname:ecore::EString
-		tempname?=adapter.getRealObject(aname,false)
-		if(tempname!=void) then
-			tempState.name:=void
-		end
-	end
-}
-
-class createTransition inherits createAdaptation{
-	attribute newTransition:pattern::FSM::Transition
-
-	method check() : Boolean is do
-		result:=(newTransition!=void)
-	end
-
-	method execute() is do
-			var realTransition:FSM::Transition
-		if(adapter.created.getValue(newTransition)==void or not(isUnique==uniqueType.unique)) then
-			realTransition?=Object.clone(newTransition)//adapter.converter.convert(Object.clone(newTransition), adapter.convert)
-			adapter.created.put(newTransition,realTransition)
-			else
-			var clone:Boolean init false
-			if(isUnique==uniqueType.non_unique) then
-				var input:String init stdio.read("clone "+newTransition.toString+" (true/false) :")
-				clone:=input.toBoolean
+			
+			method execute(): Void is do
+				var tempState : FSM::State
+				tempState ?= adapter.getRealObject(StateToUnset,false)
+				
+				tempState.name ?= adapter.unsetSingleProperty(refname, tempState.name)
 			end
-			if(isUnique==uniqueType.non_unique or clone) then
-				realTransition?=adapter.converter.convert(Object.clone(newTransition), adapter.convert)
-				adapter.created.put(newTransition,realTransition)
+		}
+		
+		class CreateTransition inherits createAdaptation
+		{
+			attribute newTransition : pattern::FSM::Transition
+					
+			method check(): Boolean is do
+				result := newTransition!=void
 			end
-		end
-	end
-}
-
-class cloneTransition inherits cloneAdaptation{
-	reference newTransition:pattern::FSM::Transition
-	attribute realTransition:pattern::FSM::Transition
-
-	method check() : Boolean is do
-		result:=(newTransition!=void)
-	end
-
-	method execute() is do
-		var clonedTransition:FSM::Transition
-		var temp:FSM::Transition
-		temp?=adapter.getRealObject(newTransition,false)
-		if(isUnique==uniqueType.unique) then
-			if(not(adapter.cloned.exists{o | o==temp})) then
-				clonedTransition?=Object.clone(temp)
-				adapter.clone.put(realTransition,clonedTransition)
-				adapter.cloned.add(temp)
+					
+			method execute(): Void is do
+				adapter.cloneAgain(newTransition, void, isUnique)					
 			end
-		else
-			var clone:Boolean init false
-			if(isUnique==uniqueType.non_unique) then
-				var input:String init stdio.read("clone "+newTransition.toString+" (true/false) :")
-				clone:=input.toBoolean
+		}
+
+		class CloneTransition inherits cloneAdaptation
+		{
+			reference TransitionToClone : pattern::FSM::Transition
+			attribute clonedTransition : pattern::FSM::Transition
+			
+			method check(): Boolean is do
+				result := TransitionToClone!=void
 			end
-			if(isUnique==uniqueType.non_unique or clone) then
-				clonedTransition?=Object.clone(temp)
-				adapter.clone.put(realTransition,clonedTransition)
-				adapter.cloned.add(temp)
+			
+			method execute(): Void is do
+				adapter.cloneAgain(clonedTransition, TransitionToClone, isUnique)
+			end					
+		}
+
+		class SetTransition inherits setAdaptation
+		{
+			reference TransitionToSet : pattern::FSM::Transition
+			reference refsource : pattern::FSM::State
+			reference reftarget : pattern::FSM::State
+			
+			method check(): Boolean is do
+				result := TransitionToSet!=void
 			end
-		end
-	end
-}
+			
+			method execute(): Void is do
+				var tempTransition : FSM::Transition
+				tempTransition ?= adapter.getRealObject(TransitionToSet,false)
+				
+				tempTransition.source ?= adapter.setSingleProperty(refsource, tempTransition.source)
+				tempTransition.target ?= adapter.setSingleProperty(reftarget, tempTransition.target)
+			end			
+		}
+		
+		class UnsetTransition inherits unsetAdaptation
+		{
+			reference TransitionToUnset : pattern::FSM::Transition
+			reference refsource : pattern::FSM::State
+			reference reftarget : pattern::FSM::State
+			
+			method check(): Boolean is do
+				result := TransitionToUnset!=void
+			end
+			
+			method execute(): Void is do
+				var tempTransition : FSM::Transition
+				tempTransition ?= adapter.getRealObject(TransitionToUnset,false)
+				
+				tempTransition.source ?= adapter.unsetSingleProperty(refsource, tempTransition.source)
+				tempTransition.target ?= adapter.unsetSingleProperty(reftarget, tempTransition.target)
+			end
+		}
+		
+		class CreateFsm inherits createAdaptation
+		{
+			attribute newFsm : pattern::FSM::Fsm
+					
+			method check(): Boolean is do
+				result := newFsm!=void
+			end
+					
+			method execute(): Void is do
+				adapter.cloneAgain(newFsm, void, isUnique)					
+			end
+		}
 
-class setTransition inherits setAdaptation{
-	reference aTransition:pattern::FSM::Transition
-	reference asource:pattern::FSM::State
-	reference atarget:pattern::FSM::State
+		class CloneFsm inherits cloneAdaptation
+		{
+			reference FsmToClone : pattern::FSM::Fsm
+			attribute clonedFsm : pattern::FSM::Fsm
+			
+			method check(): Boolean is do
+				result := FsmToClone!=void
+			end
+			
+			method execute(): Void is do
+				adapter.cloneAgain(clonedFsm, FsmToClone, isUnique)
+			end					
+		}
 
-	method check() : Boolean is do
-		result:=(aTransition!=void)
-	end
-
-	method execute() is do
-		var tempTransition:FSM::Transition
-		tempTransition?=adapter.getRealObject(aTransition,false)
-		var tempsource:FSM::State
-		tempsource?=adapter.getRealObject(asource,false)
-		if(tempsource!=void) then
-			tempTransition.source:=tempsource
-		end
-		var temptarget:FSM::State
-		temptarget?=adapter.getRealObject(atarget,false)
-		if(temptarget!=void) then
-			tempTransition.target:=temptarget
-		end
-	end
-}
-
-class unsetTransition inherits unsetAdaptation{
-	reference aTransition:pattern::FSM::Transition
-	reference asource:pattern::FSM::State
-	reference atarget:pattern::FSM::State
-
-	method check() : Boolean is do
-		result:=(aTransition!=void)
-	end
-
-	method execute() is do
-		var tempTransition:FSM::Transition
-		tempTransition?=adapter.getRealObject(aTransition,false)
-		var tempsource:FSM::State
-		tempsource?=adapter.getRealObject(asource,false)
-		if(tempsource!=void) then
-			tempTransition.source:=tempsource
-		end
-		var temptarget:FSM::State
-		temptarget?=adapter.getRealObject(atarget,false)
-		if(temptarget!=void) then
-			tempTransition.target:=void
-		end
-	end
-}
-
-class setFsm inherits setAdaptation{
-	reference aFsm:pattern::FSM::Fsm
-	reference astates:pattern::FSM::State[0..*]
-	reference atransitions:pattern::FSM::Transition[0..*]
-
-	method check() : Boolean is do
-		result:=(aFsm!=void)
-	end
-
-	method execute() is do
-		var tempFsm:FSM::Fsm
-		tempFsm?=adapter.getRealObject(aFsm,false)
-		var tempstates:Collection<kermeta::reflection::Object>
-		tempstates?=adapter.getRealObject(astates,true)
-		if(tempstates!=void) then
-			tempstates.each{o | 
-				var temp:FSM::State
-				temp?=o
-				if(temp!=void) then
-					tempFsm.states.add(temp)
-				end}
-		end
-		var temptransitions:Collection<kermeta::reflection::Object>
-		temptransitions?=adapter.getRealObject(atransitions,true)
-		if(temptransitions!=void) then
-			temptransitions.each{o | 
-				var temp:FSM::Transition
-				temp?=o
-				if(temp!=void) then
-					tempFsm.transitions.add(temp)
-				end}
-		end
-	end
-}
-
-class unsetFsm inherits unsetAdaptation{
-	reference aFsm:pattern::FSM::Fsm
-	reference astates:pattern::FSM::State[0..*]
-	reference atransitions:pattern::FSM::Transition[0..*]
-
-	method check() : Boolean is do
-		result:=(aFsm!=void)
-	end
-
-	method execute() is do
-		var tempFsm:FSM::Fsm
-		tempFsm?=adapter.getRealObject(aFsm,false)
-		var tempstates:Collection<kermeta::reflection::Object>
-		tempstates?=adapter.getRealObject(astates,true)
-		if(tempstates!=void) then
-			tempstates.each{o | 
-				var temp:FSM::State
-				temp?=o
-				if(temp!=void) then
-					tempFsm.states.add(temp)
-				end}
-		end
-		var temptransitions:Collection<kermeta::reflection::Object>
-		temptransitions?=adapter.getRealObject(atransitions,true)
-		if(temptransitions!=void) then
-			temptransitions.each{o | 
-				var temp:FSM::Transition
-				temp?=o
-				if(temp!=void) then
-					tempFsm.transitions.remove(temp)
-				end}
-		end
-	end
-}
-
-						}
+		class SetFsm inherits setAdaptation
+		{
+			reference FsmToSet : pattern::FSM::Fsm
+			reference refstates : pattern::FSM::State[0..*]
+			reference reftransitions : pattern::FSM::Transition[0..*]
+			
+			method check(): Boolean is do
+				result := FsmToSet!=void
+			end
+			
+			method execute(): Void is do
+				var tempFsm : FSM::Fsm
+				tempFsm ?= adapter.getRealObject(FsmToSet,false)
+				
+				adapter.setMultipleProperty(tempFsm.states,refstates)
+				adapter.setMultipleProperty(tempFsm.transitions,reftransitions)
+			end			
+		}
+		
+		class UnsetFsm inherits unsetAdaptation
+		{
+			reference FsmToUnset : pattern::FSM::Fsm
+			reference refstates : pattern::FSM::State[0..*]
+			reference reftransitions : pattern::FSM::Transition[0..*]
+			
+			method check(): Boolean is do
+				result := FsmToUnset!=void
+			end
+			
+			method execute(): Void is do
+				var tempFsm : FSM::Fsm
+				tempFsm ?= adapter.getRealObject(FsmToUnset,false)
+				
+				adapter.unsetMultipleProperty(tempFsm.states,refstates)
+				adapter.unsetMultipleProperty(tempFsm.transitions,reftransitions)
+			end
+		}
 	}
-}
+}}

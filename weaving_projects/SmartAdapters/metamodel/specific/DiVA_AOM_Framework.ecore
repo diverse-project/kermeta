@@ -1,0 +1,1283 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="org"
+    nsURI="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/"
+    nsPrefix="org">
+  <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  <eSubpackages name="smartadapters" nsURI="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters"
+      nsPrefix="smartadapters">
+    <eSubpackages name="core" nsURI="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters/core"
+        nsPrefix="core">
+      <eClassifiers xsi:type="ecore:EClass" name="Adapter" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+        <eOperations name="initConvert">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;stdio.write(&quot;Mapping MM\' to MM...&quot;)&#xA;&#x9;converter := org::smartadapters::utils::Converter.new&#xA;&#x9;convert := kermeta::utils::Hashtable&lt;kermeta::reflection::Class, kermeta::reflection::Class>.new&#xA;&#x9;convert.put(pattern::runtime::System, runtime::System)&#xA;&#x9;convert.put(pattern::runtime::Configuration, runtime::Configuration)&#xA;&#x9;convert.put(pattern::runtime::CompositeComponentInstance, runtime::CompositeComponentInstance)&#xA;&#x9;convert.put(pattern::runtime::PrimitiveComponentInstance, runtime::PrimitiveComponentInstance)&#xA;&#x9;convert.put(pattern::runtime::SimpleBind, runtime::SimpleBind)&#xA;&#x9;convert.put(pattern::runtime::ExportBind, runtime::ExportBind)&#xA;&#x9;convert.put(pattern::type::ComponentType, type::ComponentType)&#xA;&#x9;convert.put(pattern::type::FunctionalService, type::FunctionalService)&#xA;&#x9;convert.put(pattern::type::ControlService, type::ControlService)&#xA;&#x9;convert.put(pattern::type::Operation, type::Operation)&#xA;&#x9;convert.put(pattern::type::Port, type::Port)&#xA;&#x9;converter.initConverter(convert)&#xA;&#x9;stdio.writeln(&quot;OK!&quot;)&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="aspect" lowerBound="1"
+            eType="#//smartadapters/core/Aspect" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="adapt" upperBound="-1"
+            eType="#//smartadapters/core/Adaptation" containment="true" eOpposite="#//smartadapters/core/Adaptation/adapter"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Aspect" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="ecore:EClass ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/ModelPattern"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="structure" lowerBound="1"
+            eType="ecore:EClass ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/PModel"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="persistent" upperBound="-1"
+            eType="ecore:EClass ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/PObject">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA;   persistent refers to aspectual PObject that must not be&#xD;&#xA;   cloned between two bindings&#xD;&#xA;   TODO : contraints...&#xD;&#xA;   */"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Adaptation" abstract="true" eSuperTypes="#//smartadapters/extension/AdapterElement">
+        <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="execute">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+            <details key="documentation" value="/**&#xD;&#xA;   Execute the adaptation for a given binding&#xD;&#xA;   Sub-classes must implement this method&#xD;&#xA;   */"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.pre">
+            <details key="checking" value="check"/>
+          </eAnnotations>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="adapter" lowerBound="1"
+            eType="#//smartadapters/core/Adapter" eOpposite="#//smartadapters/core/Adapter/adapt"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="cloneAdaptation" abstract="true"
+          eSuperTypes="#//smartadapters/core/Adaptation">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="#//smartadapters/core/uniqueType">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="createAdaptation" abstract="true"
+          eSuperTypes="#//smartadapters/core/Adaptation">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="#//smartadapters/core/uniqueType">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="setAdaptation" abstract="true" eSuperTypes="#//smartadapters/core/Adaptation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="unsetAdaptation" abstract="true"
+          eSuperTypes="#//smartadapters/core/Adaptation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="makeUnique" eSuperTypes="#//smartadapters/core/Adaptation">
+        <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+            <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Boolean init false&#xA;&#x9;if adapter.aspect.structure.isNotEqual(void) then&#xA;&#x9;&#x9;if adapter.aspect.structure.content.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;res := (element.isNotEqual(void)) and (adapter.aspect.structure.content.contains(element))&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+            <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="execute">
+          <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+            <details key="body" value="do&#xA;&#x9;adapter.aspect.persistent.add(element)&#xA;end"/>
+            <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+          </eAnnotations>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+            eType="ecore:EClass ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/PObject"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="uniqueType">
+        <eLiterals name="unique" literal="unique"/>
+        <eLiterals name="non_unique" value="1" literal="non_unique"/>
+        <eLiterals name="onDemand" value="2" literal="onDemand"/>
+      </eClassifiers>
+      <eSubpackages name="adaptations" nsURI="platform:/resource/SmartAdapters/metamodel/specific/DiVA_AOM_FrameworkTemp.ecore#/org/smartadapters/core/adaptations"
+          nsPrefix="adaptations">
+        <eClassifiers xsi:type="ecore:EClass" name="CreateSystem" eSuperTypes="#//smartadapters/core/createAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := newSystem.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newSystem, void, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newSystem" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/System"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CloneSystem" eSuperTypes="#//smartadapters/core/cloneAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := SystemToClone.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedSystem, SystemToClone, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="SystemToClone" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/System"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedSystem" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/System"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetSystem" eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := SystemToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempSystem : runtime::System&#xA;&#x9;tempSystem ?= adapter.getRealObject(SystemToSet, false)&#xA;&#x9;adapter.setMultipleProperty(tempSystem.configurations, refconfigurations)&#xA;&#x9;adapter.setMultipleProperty(tempSystem.components, refcomponents)&#xA;&#x9;adapter.setMultipleProperty(tempSystem.types, reftypes)&#xA;&#x9;adapter.setMultipleProperty(tempSystem.serviceDeclarations, refserviceDeclarations)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="SystemToSet" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/System"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refconfigurations"
+              upperBound="-1" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Configuration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refcomponents" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="reftypes" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refserviceDeclarations"
+              upperBound="-1" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Service"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetSystem" eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := SystemToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempSystem : runtime::System&#xA;&#x9;tempSystem ?= adapter.getRealObject(SystemToUnset, false)&#xA;&#x9;adapter.unsetMultipleProperty(tempSystem.configurations, refconfigurations)&#xA;&#x9;adapter.unsetMultipleProperty(tempSystem.components, refcomponents)&#xA;&#x9;adapter.unsetMultipleProperty(tempSystem.types, reftypes)&#xA;&#x9;adapter.unsetMultipleProperty(tempSystem.serviceDeclarations, refserviceDeclarations)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="SystemToUnset" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/System"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refconfigurations"
+              upperBound="-1" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Configuration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refcomponents" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="reftypes" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refserviceDeclarations"
+              upperBound="-1" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Service"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CreateConfiguration" eSuperTypes="#//smartadapters/core/createAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := newConfiguration.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newConfiguration, void, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newConfiguration"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Configuration"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CloneConfiguration" eSuperTypes="#//smartadapters/core/cloneAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ConfigurationToClone.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedConfiguration, ConfigurationToClone, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ConfigurationToClone"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Configuration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedConfiguration"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Configuration"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetConfiguration" eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ConfigurationToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempConfiguration : runtime::Configuration&#xA;&#x9;tempConfiguration ?= adapter.getRealObject(ConfigurationToSet, false)&#xA;&#x9;adapter.setMultipleProperty(tempConfiguration.components, refcomponents)&#xA;&#x9;tempConfiguration.name ?= adapter.setSingleProperty(refname, tempConfiguration.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ConfigurationToSet"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Configuration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refcomponents" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetConfiguration" eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ConfigurationToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempConfiguration : runtime::Configuration&#xA;&#x9;tempConfiguration ?= adapter.getRealObject(ConfigurationToUnset, false)&#xA;&#x9;adapter.unsetMultipleProperty(tempConfiguration.components, refcomponents)&#xA;&#x9;tempConfiguration.name ?= adapter.unsetSingleProperty(refname, tempConfiguration.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ConfigurationToUnset"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Configuration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refcomponents" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetComponentInstance" eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ComponentInstanceToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempComponentInstance : runtime::ComponentInstance&#xA;&#x9;tempComponentInstance ?= adapter.getRealObject(ComponentInstanceToSet, false)&#xA;&#x9;tempComponentInstance.type ?= adapter.setSingleProperty(reftype, tempComponentInstance.type)&#xA;&#x9;adapter.setMultipleProperty(tempComponentInstance.superComponents, refsuperComponents)&#xA;&#x9;adapter.setMultipleProperty(tempComponentInstance.bindings, refbindings)&#xA;&#x9;tempComponentInstance.state ?= adapter.setSingleProperty(refstate, tempComponentInstance.state)&#xA;&#x9;tempComponentInstance.name ?= adapter.setSingleProperty(refname, tempComponentInstance.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ComponentInstanceToSet"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refsuperComponents"
+              upperBound="-1" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/CompositeComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refbindings" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Binding"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetComponentInstance" eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ComponentInstanceToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempComponentInstance : runtime::ComponentInstance&#xA;&#x9;tempComponentInstance ?= adapter.getRealObject(ComponentInstanceToUnset, false)&#xA;&#x9;tempComponentInstance.type ?= adapter.unsetSingleProperty(reftype, tempComponentInstance.type)&#xA;&#x9;adapter.unsetMultipleProperty(tempComponentInstance.superComponents, refsuperComponents)&#xA;&#x9;adapter.unsetMultipleProperty(tempComponentInstance.bindings, refbindings)&#xA;&#x9;tempComponentInstance.state ?= adapter.unsetSingleProperty(refstate, tempComponentInstance.state)&#xA;&#x9;tempComponentInstance.name ?= adapter.unsetSingleProperty(refname, tempComponentInstance.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ComponentInstanceToUnset"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refsuperComponents"
+              upperBound="-1" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/CompositeComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refbindings" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Binding"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CreateCompositeComponentInstance"
+            eSuperTypes="#//smartadapters/core/createAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := newCompositeComponentInstance.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newCompositeComponentInstance, void, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newCompositeComponentInstance"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/CompositeComponentInstance"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CloneCompositeComponentInstance"
+            eSuperTypes="#//smartadapters/core/cloneAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := CompositeComponentInstanceToClone.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedCompositeComponentInstance, CompositeComponentInstanceToClone, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="CompositeComponentInstanceToClone"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/CompositeComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedCompositeComponentInstance"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/CompositeComponentInstance"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetCompositeComponentInstance"
+            eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := CompositeComponentInstanceToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempCompositeComponentInstance : runtime::CompositeComponentInstance&#xA;&#x9;tempCompositeComponentInstance ?= adapter.getRealObject(CompositeComponentInstanceToSet, false)&#xA;&#x9;adapter.setMultipleProperty(tempCompositeComponentInstance.subComponents, refsubComponents)&#xA;&#x9;tempCompositeComponentInstance.type ?= adapter.setSingleProperty(reftype, tempCompositeComponentInstance.type)&#xA;&#x9;adapter.setMultipleProperty(tempCompositeComponentInstance.superComponents, refsuperComponents)&#xA;&#x9;adapter.setMultipleProperty(tempCompositeComponentInstance.bindings, refbindings)&#xA;&#x9;tempCompositeComponentInstance.state ?= adapter.setSingleProperty(refstate, tempCompositeComponentInstance.state)&#xA;&#x9;tempCompositeComponentInstance.name ?= adapter.setSingleProperty(refname, tempCompositeComponentInstance.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="CompositeComponentInstanceToSet"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/CompositeComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refsubComponents"
+              upperBound="-1" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refsuperComponents"
+              upperBound="-1" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/CompositeComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refbindings" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Binding"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetCompositeComponentInstance"
+            eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := CompositeComponentInstanceToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempCompositeComponentInstance : runtime::CompositeComponentInstance&#xA;&#x9;tempCompositeComponentInstance ?= adapter.getRealObject(CompositeComponentInstanceToUnset, false)&#xA;&#x9;adapter.unsetMultipleProperty(tempCompositeComponentInstance.subComponents, refsubComponents)&#xA;&#x9;tempCompositeComponentInstance.type ?= adapter.unsetSingleProperty(reftype, tempCompositeComponentInstance.type)&#xA;&#x9;adapter.unsetMultipleProperty(tempCompositeComponentInstance.superComponents, refsuperComponents)&#xA;&#x9;adapter.unsetMultipleProperty(tempCompositeComponentInstance.bindings, refbindings)&#xA;&#x9;tempCompositeComponentInstance.state ?= adapter.unsetSingleProperty(refstate, tempCompositeComponentInstance.state)&#xA;&#x9;tempCompositeComponentInstance.name ?= adapter.unsetSingleProperty(refname, tempCompositeComponentInstance.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="CompositeComponentInstanceToUnset"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/CompositeComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refsubComponents"
+              upperBound="-1" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refsuperComponents"
+              upperBound="-1" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/CompositeComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refbindings" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Binding"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CreatePrimitiveComponentInstance"
+            eSuperTypes="#//smartadapters/core/createAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := newPrimitiveComponentInstance.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newPrimitiveComponentInstance, void, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newPrimitiveComponentInstance"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/PrimitiveComponentInstance"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ClonePrimitiveComponentInstance"
+            eSuperTypes="#//smartadapters/core/cloneAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := PrimitiveComponentInstanceToClone.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedPrimitiveComponentInstance, PrimitiveComponentInstanceToClone, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="PrimitiveComponentInstanceToClone"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/PrimitiveComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedPrimitiveComponentInstance"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/PrimitiveComponentInstance"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetPrimitiveComponentInstance"
+            eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := PrimitiveComponentInstanceToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempPrimitiveComponentInstance : runtime::PrimitiveComponentInstance&#xA;&#x9;tempPrimitiveComponentInstance ?= adapter.getRealObject(PrimitiveComponentInstanceToSet, false)&#xA;&#x9;tempPrimitiveComponentInstance.type ?= adapter.setSingleProperty(reftype, tempPrimitiveComponentInstance.type)&#xA;&#x9;adapter.setMultipleProperty(tempPrimitiveComponentInstance.superComponents, refsuperComponents)&#xA;&#x9;adapter.setMultipleProperty(tempPrimitiveComponentInstance.bindings, refbindings)&#xA;&#x9;tempPrimitiveComponentInstance.state ?= adapter.setSingleProperty(refstate, tempPrimitiveComponentInstance.state)&#xA;&#x9;tempPrimitiveComponentInstance.name ?= adapter.setSingleProperty(refname, tempPrimitiveComponentInstance.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="PrimitiveComponentInstanceToSet"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/PrimitiveComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refsuperComponents"
+              upperBound="-1" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/CompositeComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refbindings" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Binding"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetPrimitiveComponentInstance"
+            eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := PrimitiveComponentInstanceToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempPrimitiveComponentInstance : runtime::PrimitiveComponentInstance&#xA;&#x9;tempPrimitiveComponentInstance ?= adapter.getRealObject(PrimitiveComponentInstanceToUnset, false)&#xA;&#x9;tempPrimitiveComponentInstance.type ?= adapter.unsetSingleProperty(reftype, tempPrimitiveComponentInstance.type)&#xA;&#x9;adapter.unsetMultipleProperty(tempPrimitiveComponentInstance.superComponents, refsuperComponents)&#xA;&#x9;adapter.unsetMultipleProperty(tempPrimitiveComponentInstance.bindings, refbindings)&#xA;&#x9;tempPrimitiveComponentInstance.state ?= adapter.unsetSingleProperty(refstate, tempPrimitiveComponentInstance.state)&#xA;&#x9;tempPrimitiveComponentInstance.name ?= adapter.unsetSingleProperty(refname, tempPrimitiveComponentInstance.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="PrimitiveComponentInstanceToUnset"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/PrimitiveComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="reftype" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refsuperComponents"
+              upperBound="-1" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/CompositeComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refbindings" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Binding"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refstate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetBinding" eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := BindingToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempBinding : runtime::Binding&#xA;&#x9;tempBinding ?= adapter.getRealObject(BindingToSet, false)&#xA;&#x9;tempBinding.portA ?= adapter.setSingleProperty(refportA, tempBinding.portA)&#xA;&#x9;tempBinding.portB ?= adapter.setSingleProperty(refportB, tempBinding.portB)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="BindingToSet" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Binding"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refportA" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refportB" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetBinding" eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := BindingToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempBinding : runtime::Binding&#xA;&#x9;tempBinding ?= adapter.getRealObject(BindingToUnset, false)&#xA;&#x9;tempBinding.portA ?= adapter.unsetSingleProperty(refportA, tempBinding.portA)&#xA;&#x9;tempBinding.portB ?= adapter.unsetSingleProperty(refportB, tempBinding.portB)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="BindingToUnset" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/Binding"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refportA" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refportB" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CreateSimpleBind" eSuperTypes="#//smartadapters/core/createAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := newSimpleBind.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newSimpleBind, void, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newSimpleBind" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/SimpleBind"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CloneSimpleBind" eSuperTypes="#//smartadapters/core/cloneAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := SimpleBindToClone.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedSimpleBind, SimpleBindToClone, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="SimpleBindToClone"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/SimpleBind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedSimpleBind"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/SimpleBind"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetSimpleBind" eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := SimpleBindToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempSimpleBind : runtime::SimpleBind&#xA;&#x9;tempSimpleBind ?= adapter.getRealObject(SimpleBindToSet, false)&#xA;&#x9;tempSimpleBind.cptA ?= adapter.setSingleProperty(refcptA, tempSimpleBind.cptA)&#xA;&#x9;tempSimpleBind.cptB ?= adapter.setSingleProperty(refcptB, tempSimpleBind.cptB)&#xA;&#x9;tempSimpleBind.portA ?= adapter.setSingleProperty(refportA, tempSimpleBind.portA)&#xA;&#x9;tempSimpleBind.portB ?= adapter.setSingleProperty(refportB, tempSimpleBind.portB)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="SimpleBindToSet"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/SimpleBind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refcptA" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refcptB" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refportA" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refportB" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetSimpleBind" eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := SimpleBindToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempSimpleBind : runtime::SimpleBind&#xA;&#x9;tempSimpleBind ?= adapter.getRealObject(SimpleBindToUnset, false)&#xA;&#x9;tempSimpleBind.cptA ?= adapter.unsetSingleProperty(refcptA, tempSimpleBind.cptA)&#xA;&#x9;tempSimpleBind.cptB ?= adapter.unsetSingleProperty(refcptB, tempSimpleBind.cptB)&#xA;&#x9;tempSimpleBind.portA ?= adapter.unsetSingleProperty(refportA, tempSimpleBind.portA)&#xA;&#x9;tempSimpleBind.portB ?= adapter.unsetSingleProperty(refportB, tempSimpleBind.portB)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="SimpleBindToUnset"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/SimpleBind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refcptA" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refcptB" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refportA" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refportB" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CreateExportBind" eSuperTypes="#//smartadapters/core/createAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := newExportBind.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newExportBind, void, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newExportBind" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ExportBind"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CloneExportBind" eSuperTypes="#//smartadapters/core/cloneAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ExportBindToClone.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedExportBind, ExportBindToClone, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ExportBindToClone"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ExportBind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedExportBind"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ExportBind"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetExportBind" eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ExportBindToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempExportBind : runtime::ExportBind&#xA;&#x9;tempExportBind ?= adapter.getRealObject(ExportBindToSet, false)&#xA;&#x9;tempExportBind.cptA ?= adapter.setSingleProperty(refcptA, tempExportBind.cptA)&#xA;&#x9;tempExportBind.cptB ?= adapter.setSingleProperty(refcptB, tempExportBind.cptB)&#xA;&#x9;tempExportBind.portA ?= adapter.setSingleProperty(refportA, tempExportBind.portA)&#xA;&#x9;tempExportBind.portB ?= adapter.setSingleProperty(refportB, tempExportBind.portB)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ExportBindToSet"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ExportBind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refcptA" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refcptB" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refportA" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refportB" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetExportBind" eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ExportBindToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempExportBind : runtime::ExportBind&#xA;&#x9;tempExportBind ?= adapter.getRealObject(ExportBindToUnset, false)&#xA;&#x9;tempExportBind.cptA ?= adapter.unsetSingleProperty(refcptA, tempExportBind.cptA)&#xA;&#x9;tempExportBind.cptB ?= adapter.unsetSingleProperty(refcptB, tempExportBind.cptB)&#xA;&#x9;tempExportBind.portA ?= adapter.unsetSingleProperty(refportA, tempExportBind.portA)&#xA;&#x9;tempExportBind.portB ?= adapter.unsetSingleProperty(refportB, tempExportBind.portB)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ExportBindToUnset"
+              eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ExportBind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refcptA" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refcptB" eType="ecore:EClass ../domain/runtime/runtimePattern.ecore#/1/runtime/ComponentInstance"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refportA" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refportB" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CreateComponentType" eSuperTypes="#//smartadapters/core/createAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := newComponentType.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newComponentType, void, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newComponentType"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ComponentType"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CloneComponentType" eSuperTypes="#//smartadapters/core/cloneAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ComponentTypeToClone.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedComponentType, ComponentTypeToClone, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ComponentTypeToClone"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedComponentType"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ComponentType"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetComponentType" eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ComponentTypeToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempComponentType : type::ComponentType&#xA;&#x9;tempComponentType ?= adapter.getRealObject(ComponentTypeToSet, false)&#xA;&#x9;adapter.setMultipleProperty(tempComponentType.ports, refports)&#xA;&#x9;tempComponentType.name ?= adapter.setSingleProperty(refname, tempComponentType.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ComponentTypeToSet"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refports" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetComponentType" eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ComponentTypeToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempComponentType : type::ComponentType&#xA;&#x9;tempComponentType ?= adapter.getRealObject(ComponentTypeToUnset, false)&#xA;&#x9;adapter.unsetMultipleProperty(tempComponentType.ports, refports)&#xA;&#x9;tempComponentType.name ?= adapter.unsetSingleProperty(refname, tempComponentType.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ComponentTypeToUnset"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ComponentType"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refports" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetService" eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ServiceToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempService : type::Service&#xA;&#x9;tempService ?= adapter.getRealObject(ServiceToSet, false)&#xA;&#x9;adapter.setMultipleProperty(tempService.operations, refoperations)&#xA;&#x9;tempService.name ?= adapter.setSingleProperty(refname, tempService.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ServiceToSet" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Service"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refoperations" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetService" eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ServiceToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempService : type::Service&#xA;&#x9;tempService ?= adapter.getRealObject(ServiceToUnset, false)&#xA;&#x9;adapter.unsetMultipleProperty(tempService.operations, refoperations)&#xA;&#x9;tempService.name ?= adapter.unsetSingleProperty(refname, tempService.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ServiceToUnset" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Service"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refoperations" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CreateFunctionalService" eSuperTypes="#//smartadapters/core/createAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := newFunctionalService.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newFunctionalService, void, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newFunctionalService"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/FunctionalService"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CloneFunctionalService" eSuperTypes="#//smartadapters/core/cloneAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := FunctionalServiceToClone.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedFunctionalService, FunctionalServiceToClone, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="FunctionalServiceToClone"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/FunctionalService"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedFunctionalService"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/FunctionalService"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetFunctionalService" eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := FunctionalServiceToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempFunctionalService : type::FunctionalService&#xA;&#x9;tempFunctionalService ?= adapter.getRealObject(FunctionalServiceToSet, false)&#xA;&#x9;adapter.setMultipleProperty(tempFunctionalService.operations, refoperations)&#xA;&#x9;tempFunctionalService.name ?= adapter.setSingleProperty(refname, tempFunctionalService.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="FunctionalServiceToSet"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/FunctionalService"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refoperations" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetFunctionalService" eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := FunctionalServiceToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempFunctionalService : type::FunctionalService&#xA;&#x9;tempFunctionalService ?= adapter.getRealObject(FunctionalServiceToUnset, false)&#xA;&#x9;adapter.unsetMultipleProperty(tempFunctionalService.operations, refoperations)&#xA;&#x9;tempFunctionalService.name ?= adapter.unsetSingleProperty(refname, tempFunctionalService.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="FunctionalServiceToUnset"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/FunctionalService"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refoperations" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CreateControlService" eSuperTypes="#//smartadapters/core/createAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := newControlService.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newControlService, void, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newControlService"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ControlService"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CloneControlService" eSuperTypes="#//smartadapters/core/cloneAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ControlServiceToClone.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedControlService, ControlServiceToClone, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ControlServiceToClone"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ControlService"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedControlService"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ControlService"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetControlService" eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ControlServiceToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempControlService : type::ControlService&#xA;&#x9;tempControlService ?= adapter.getRealObject(ControlServiceToSet, false)&#xA;&#x9;adapter.setMultipleProperty(tempControlService.operations, refoperations)&#xA;&#x9;tempControlService.name ?= adapter.setSingleProperty(refname, tempControlService.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ControlServiceToSet"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ControlService"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refoperations" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetControlService" eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := ControlServiceToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempControlService : type::ControlService&#xA;&#x9;tempControlService ?= adapter.getRealObject(ControlServiceToUnset, false)&#xA;&#x9;adapter.unsetMultipleProperty(tempControlService.operations, refoperations)&#xA;&#x9;tempControlService.name ?= adapter.unsetSingleProperty(refname, tempControlService.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ControlServiceToUnset"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/ControlService"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refoperations" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CreateOperation" eSuperTypes="#//smartadapters/core/createAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := newOperation.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newOperation, void, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newOperation" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Operation"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CloneOperation" eSuperTypes="#//smartadapters/core/cloneAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := OperationToClone.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedOperation, OperationToClone, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="OperationToClone"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedOperation"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Operation"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetOperation" eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := OperationToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempOperation : type::Operation&#xA;&#x9;tempOperation ?= adapter.getRealObject(OperationToSet, false)&#xA;&#x9;tempOperation.name ?= adapter.setSingleProperty(refname, tempOperation.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="OperationToSet" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetOperation" eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := OperationToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempOperation : type::Operation&#xA;&#x9;tempOperation ?= adapter.getRealObject(OperationToUnset, false)&#xA;&#x9;tempOperation.name ?= adapter.unsetSingleProperty(refname, tempOperation.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="OperationToUnset"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetDiVANamedElement" eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := DiVANamedElementToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempDiVANamedElement : type::DiVANamedElement&#xA;&#x9;tempDiVANamedElement ?= adapter.getRealObject(DiVANamedElementToSet, false)&#xA;&#x9;tempDiVANamedElement.name ?= adapter.setSingleProperty(refname, tempDiVANamedElement.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="DiVANamedElementToSet"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/DiVANamedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetDiVANamedElement" eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := DiVANamedElementToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempDiVANamedElement : type::DiVANamedElement&#xA;&#x9;tempDiVANamedElement ?= adapter.getRealObject(DiVANamedElementToUnset, false)&#xA;&#x9;tempDiVANamedElement.name ?= adapter.unsetSingleProperty(refname, tempDiVANamedElement.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="DiVANamedElementToUnset"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/DiVANamedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CreatePort" eSuperTypes="#//smartadapters/core/createAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := newPort.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newPort, void, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newPort" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ClonePort" eSuperTypes="#//smartadapters/core/cloneAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := PortToClone.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedPort, PortToClone, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="PortToClone" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedPort" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetPort" eSuperTypes="#//smartadapters/core/setAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := PortToSet.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempPort : type::Port&#xA;&#x9;tempPort ?= adapter.getRealObject(PortToSet, false)&#xA;&#x9;adapter.setMultipleProperty(tempPort.provided, refprovided)&#xA;&#x9;adapter.setMultipleProperty(tempPort.required, refrequired)&#xA;&#x9;tempPort.name ?= adapter.setSingleProperty(refname, tempPort.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="PortToSet" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refprovided" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Service"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refrequired" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Service"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnsetPort" eSuperTypes="#//smartadapters/core/unsetAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := PortToUnset.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;var tempPort : type::Port&#xA;&#x9;tempPort ?= adapter.getRealObject(PortToUnset, false)&#xA;&#x9;adapter.unsetMultipleProperty(tempPort.provided, refprovided)&#xA;&#x9;adapter.unsetMultipleProperty(tempPort.required, refrequired)&#xA;&#x9;tempPort.name ?= adapter.unsetSingleProperty(refname, tempPort.name)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="PortToUnset" eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Port"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refprovided" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Service"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refrequired" upperBound="-1"
+              eType="ecore:EClass ../domain/runtime/typePattern.ecore#/1/type/Service"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+    <eSubpackages name="extension" nsURI="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters/extension"
+        nsPrefix="extension">
+      <eClassifiers xsi:type="ecore:EClass" name="AdapterElement" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DerivableAdapter" eSuperTypes="#//smartadapters/core/Adapter">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" upperBound="-1"
+            eType="#//smartadapters/extension/EntityAlternative" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+            eType="#//smartadapters/extension/Constraint" containment="true" eOpposite="#//smartadapters/extension/Constraint/adapter"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="EntityAlternative" eSuperTypes="#//smartadapters/extension/AdapterElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="xor" upperBound="-1"
+            eType="#//smartadapters/extension/AdapterElement" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="EntityConjunction" eSuperTypes="#//smartadapters/extension/AdapterElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="and" upperBound="-1"
+            eType="#//smartadapters/extension/AdapterElement" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Constraint" abstract="true" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+        <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="d" eType="#//smartadapters/extension/Derivation"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="adapter" lowerBound="1"
+            eType="#//smartadapters/extension/DerivableAdapter" eOpposite="#//smartadapters/extension/DerivableAdapter/constraints"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="MutualExclusion" eSuperTypes="#//smartadapters/extension/Constraint">
+        <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eAnnotations source="kermeta" references="#//smartadapters/extension/Constraint/check">
+            <details key="body" value="do&#xA;&#x9;var c : kermeta::standard::Set&lt;org::smartadapters::extension::AdapterElement> init kermeta::standard::Set&lt;org::smartadapters::extension::AdapterElement>.new&#xA;&#x9;c.addAll(d.selectedOptions)&#xA;&#x9;d.elements.each{e | c.add(e.selectedVariant)}&#xA;&#x9;result := (c.intersection(entities).size) &lt;= (1)&#xA;end"/>
+            <details key="superOperation" value="org::smartadapters::extension::Constraint"/>
+          </eAnnotations>
+          <eParameters name="d" eType="#//smartadapters/extension/Derivation"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="entities" lowerBound="2"
+            upperBound="-1" eType="#//smartadapters/extension/AdapterElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Dependency" eSuperTypes="#//smartadapters/extension/Constraint">
+        <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+          <eAnnotations source="kermeta" references="#//smartadapters/extension/Constraint/check">
+            <details key="body" value="do&#xA;&#x9;var c : kermeta::standard::Collection&lt;org::smartadapters::extension::AdapterElement> init kermeta::standard::Set&lt;org::smartadapters::extension::AdapterElement>.new&#xA;&#x9;c.addAll(d.selectedOptions)&#xA;&#x9;d.elements.each{e | c.add(e.selectedVariant)}&#xA;&#x9;result := (not (c.contains(source))) or (c.containsAll(self.dependencies))&#xA;end"/>
+            <details key="superOperation" value="org::smartadapters::extension::Constraint"/>
+          </eAnnotations>
+          <eParameters name="d" eType="#//smartadapters/extension/Derivation"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+            eType="#//smartadapters/extension/AdapterElement"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" lowerBound="1"
+            upperBound="-1" eType="#//smartadapters/extension/AdapterElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Derivation" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+            eType="#//smartadapters/extension/DerivationElement"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="selectedOptions" upperBound="-1"
+            eType="#//smartadapters/extension/AdapterElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DerivationElement" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="alternative" lowerBound="1"
+            eType="#//smartadapters/extension/EntityAlternative"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="selectedVariant" lowerBound="1"
+            eType="#//smartadapters/extension/AdapterElement"/>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>

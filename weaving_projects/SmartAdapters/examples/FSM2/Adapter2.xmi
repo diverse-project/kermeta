@@ -30,11 +30,7 @@
     <refsource href="templateFsm.xmi#//@states.1"/>
     <reftarget href="templateFsm.xmi#//@states.0"/>
   </adapt>
-  <adapt xsi:type="adaptations:SetFsm" reftransitions="//@adapt.0/@newTransition">
+  <adapt xsi:type="adaptations:SetFsm" name="" reftransitions="//@adapt.0/@newTransition">
     <FsmToSet href="templateFsm.xmi#/"/>
-  </adapt>
-  <adapt xsi:type="adaptations:UnsetFsm">
-    <FsmToUnset href="templateFsm.xmi#/"/>
-    <reftransitions href="templateFsm.xmi#//@transitions.0"/>
   </adapt>
 </core:Adapter>

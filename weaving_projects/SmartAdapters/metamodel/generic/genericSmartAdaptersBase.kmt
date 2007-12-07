@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdaptersBase.kmt,v 1.4 2007-10-19 09:06:03 bmorin Exp $
+/* $Id: genericSmartAdaptersBase.kmt,v 1.5 2007-12-07 07:15:14 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -8,7 +8,6 @@
 package org;
 
 require kermeta 
-//require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
 require "http://www.eclipse.org/emf/2002/Ecore" 
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
 
@@ -16,7 +15,6 @@ using kermeta::standard
 using kermeta::utils
 using patternframework
 using org::smartadapters::core
-//using org::smartadapters::core::adaptations
 using org::smartadapters::extension
 using ecore
 
@@ -30,12 +28,7 @@ package smartadapters
 			
 			attribute adapt : Adaptation[0..*]#adapter
 						
-			attribute name : ecore::EString
-			
-			/*attribute convert : Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>
-			
-			operation initConvert() : Void 
-				is abstract*/		
+			attribute name : ecore::EString		
 		}
 
 		class Aspect
@@ -127,24 +120,16 @@ package smartadapters
 			attribute alternatives : EntityAlternative[0..*]
 
 			attribute constraints : Constraint[0..*]#adapter
-			/*attribute options : AdapterElement[0..*]
-			
-			attribute xor : MutualExclusion[0..*]
-			
-			attribute ~and : Dependency[0..*]*/
-			
-			operation resolve(derivation : Derivation) : smartadapters::core::Adapter raises kermeta::exceptions::Exception 
-			is abstract
 		}
 		class EntityAlternative inherits AdapterElement
 		{			
-			reference xor : AdapterElement[0..*]	
+			attribute xor : AdapterElement[0..*]	
 		}
 		
 		
 		class EntityConjunction inherits AdapterElement
 		{
-			reference ~and : AdapterElement[0..*]
+			attribute ~and : AdapterElement[0..*]
 
 		}
 		

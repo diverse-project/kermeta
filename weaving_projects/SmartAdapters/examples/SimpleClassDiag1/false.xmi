@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<ClassMM:ClassModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ClassMM="platform:/resource/SmartAdapters4Models/metamodel/domain/ClassMMPattern.ecore/ClassMMPattern" xsi:schemaLocation="platform:/resource/SmartAdapters4Models/metamodel/domain/ClassMMPattern.ecore/ClassMMPattern ../../metamodel/domain/ClassMMPattern.ecore#//ClassMM">
-  <classifier xsi:type="ClassMM:Class" name="any" super="//@classifier.1"/>
-  <classifier xsi:type="ClassMM:Class" name="another"/>
-</ClassMM:ClassModel>

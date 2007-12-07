@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.4 2007-10-19 09:06:03 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.5 2007-12-07 07:15:14 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -8,7 +8,7 @@
 package org;
 
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.kmt"
-require "../../program/weaving/converter.kmt"
+require "platform:/resource/SmartAdapters/program/weaving/converter.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -18,7 +18,7 @@ using patternframework
 using org::smartadapters::core
 using org::smartadapters::extension
 using ecore
-using utils
+using org::smartadapters::utils
 
 package smartadapters
 {
@@ -31,10 +31,11 @@ package smartadapters
 			key : aspect element
 			value : associated clone
 			*/
-			attribute clone : Hashtable</*P*/Object, Object>
+			attribute clone : Hashtable<Object, Object>
 			attribute cloned : Set<Object>
 			attribute binding : Hashtable<Object, Object>
 			attribute convert : Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>
+			attribute enum : Hashtable<kermeta::reflection::Enumeration,kermeta::reflection::Enumeration>
 			attribute created : Hashtable<Object, Object>
 			attribute converter : Converter
 			
@@ -45,7 +46,11 @@ package smartadapters
 				if(clone==void) then
 					initClone 
 				end
-				adapt.each{a | a.execute()}
+				adapt.each{a |
+					stdio.writeln("#>"+a.getMetaClass.name+"...") 
+					a.execute()
+					stdio.writeln("#>done!")
+				}
 				updateClones
 			end
 					
@@ -54,44 +59,134 @@ package smartadapters
 			initClone must be called before the first binding
 			*/
 			operation initClone() is do
-				converter:=Converter.new
-				convert:=Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new
-				clone:=Hashtable<Object, Object>.new
+				//stdio.writeln("initClone...")
+				initConvert
+				clone:=Hashtable<Object,Object>.new
 				cloned:=Set<Object>.new
-				created:=Hashtable<Object, Object>.new
+				created:=Hashtable<Object,Object>.new
 				if(aspect.structure!=void) then
 				aspect.structure.content.each{elt |
+							//stdio.writeln("elt: "+elt.toString)
 							var newCloned:Object
-							newCloned:=converter.convert(Object.clone(elt), convert)
+							newCloned:=converter.getConverted(elt)
 							if(newCloned!=void) then
 								clone.put(elt, newCloned)
 							end
 						}
 				end
+				//stdio.writeln("initClone: END!")
 			end
 			
 			/**
 			updateClone must be called after every binding
 			*/
 			operation updateClones() is do
+				//stdio.writeln("updateClones...")
 				if(aspect.structure!=void) then
 				aspect.structure.content.each{o | 
 					if(not(aspect.persistent.contains(o))) then
-						updateClone(o)
+						//stdio.writeln("updateClone: "+o.toString)
+						updateClone(o,void)
 					end}
+				end
+				//stdio.writeln("updateClones: END!")
+			end
+			
+			operation updateClone(pObj : Object, template : Object) is do
+				//stdio.writeln("  updateClone..."+pObj.toString+", "+template.toString)
+				clone.remove(pObj)
+				converter.deleteConverted(pObj)
+				var newCloned:Object
+				if(template!=void) then
+					cloned.remove(template)
+					newCloned:=Object.clone(template)
+				else
+					newCloned:=converter.getConverted(pObj)
+				end
+				if(newCloned!=void) then
+					clone.put(pObj, newCloned)
+					if(template!=void) then
+						cloned.add(template)
+					end
+				end
+				//stdio.writeln("  updateClone: END!")
+			end
+
+			operation cloneAgain(o : Object, template : Object, type : uniqueType)	: Void is do
+				var toClone : Boolean init type==uniqueType.non_unique
+				if(not(toClone) and type==uniqueType.unique) then
+					//stdio.writeln("?>unique")
+					if(template!=void) then
+						toClone := not(cloned.contains(getRealObject(template,false)))
+					else
+						toClone := clone.getValue(o)==void
+					end
+				end
+				if(not(toClone) and type==uniqueType.onDemand) then
+					var input : String init stdio.read("$>clone "+o.toString+" (true/false) :")
+			        toClone := input.toBoolean
+				end
+				if(toClone) then
+					//stdio.writeln("?>updating clones...")
+					if(template!=void) then
+						updateClone(o,getRealObject(template,false))
+					else
+						updateClone(o,void)
+					end
 				end
 			end
 			
-			operation updateClone(pObj : Object) is do
-				clone.remove(pObj)
-				converter.deleteConverted(pObj)
-					var newCloned:Object
-					newCloned:=converter.convert(Object.clone(pObj), convert)
-					if(newCloned!=void) then
-						clone.put(pObj, newCloned)
+			operation setMultipleProperty(prty : Object, o : Object) : Void is do
+				//stdio.writeln("  setProperty: "+prty.toString+", "+o.toString)
+				if(o != void) then
+					var coll : Collection<kermeta::reflection::Object>
+					var collToSet : Collection<kermeta::reflection::Object>
+					coll ?= o
+					collToSet ?= prty
+					if(coll != void and collToSet != void and coll.size > 0) then
+						var realColl : Collection<kermeta::reflection::Object>
+						realColl ?= getRealObject(o,true)
+						collToSet.addAll(realColl)
 					end
+				end
 			end
 			
+			operation setSingleProperty(o : Object, old : Object) : Object is do
+				if(o != void) then
+					result := getRealObject(o,false)
+				else
+					result := old
+				end
+			end
+
+			operation unsetSingleProperty(o : Object, old : Object) : Object is do
+				if(o != void) then
+					stdio.writeln("?>unset: 1")
+					result := void
+				else
+					stdio.writeln("?>unset: 2 "+getRealObject(o,false).toString)
+					result := old
+				end
+			end
+
+			operation unsetMultipleProperty(prty : Object, o : Object) : Void is do
+				//stdio.writeln("unsetProperty: "+prty.toString+", "+o.toString)
+				if(prty != void and o != void) then
+					var coll : Collection<kermeta::reflection::Object>
+					var collToSet : Collection<kermeta::reflection::Object>
+					coll ?= o
+					collToSet ?= prty
+					if(coll != void and collToSet != void) then
+						//stdio.writeln("  unsetProperty: Collection")
+						var realColl : Collection<kermeta::reflection::Object>
+						realColl ?= getRealObject(o,true)
+						realColl.each{o |
+							collToSet.remove(o)
+						}
+					end
+				end
+			end			
+						
 			operation getRealObject(obj : Object, isCollect:Boolean) : Object is do
 				if(isCollect) then
 					var col:Collection<kermeta::reflection::Object>
@@ -116,7 +211,7 @@ package smartadapters
 								var pObj:PObject
 								pObj?=obj
 								if(pObj!=void) then
-									result:=converter.convert(Object.clone(obj), convert)
+									result:=converter.getConverted(obj)
 								else
 									result:=obj
 								end
@@ -126,27 +221,6 @@ package smartadapters
 				end		
 			end
 		}
-		
-/*		abstract class cloneAdaptation inherits Adaptation
-		{
-			attribute isUnique : uniqueType
-		}
-		
-		abstract class createAdaptation inherits Adaptation
-		{
-			attribute isUnique : uniqueType
-		}
-		
-		abstract class setAdaptation inherits Adaptation
-		{
-		
-		}
-		
-		abstract class unsetAdaptation inherits Adaptation
-		{
-		
-		}
-*/		
 	}
 	
 	package extension
@@ -163,13 +237,12 @@ package smartadapters
 					alternatives.each{a | adapter.addAlternative(derivation,a)}
 					if(adapter.isConcretizable) then
 						var concreteAdapter:Adapter init Adapter.new
-						var hash:Hashtable<kermeta::reflection::Class,kermeta::reflection::Class> init Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new
-						hash.put(adapter.getMetaClass,concreteAdapter.getMetaClass)
-						adapter.adapt.each{a | hash.put(a.getMetaClass, a.getMetaClass)}
+						converter.addEntry(adapter.getMetaClass,concreteAdapter.getMetaClass)
+						adapter.adapt.each{a | converter.addEntry(a.getMetaClass, a.getMetaClass)}
 						if(converter==void) then
 							converter:=Converter.new
 						end
-						concreteAdapter?=converter.convert(adapter,hash)
+						concreteAdapter?=converter.getConverted(adapter)
 						result:=concreteAdapter
 					else
 						result:=adapter
@@ -201,7 +274,7 @@ package smartadapters
 								addAlternative(d,alt)
 							else
 								var conj:EntityConjunction
-								conj?=c
+								conj?=e
 								if(conj!=void) then
 									addConjunction(d,conj)
 								end

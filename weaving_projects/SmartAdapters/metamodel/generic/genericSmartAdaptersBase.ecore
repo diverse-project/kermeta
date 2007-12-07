@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
-  <ecore:EAnnotation source="CompilationUnit">
+  <ecore:EAnnotation source="ModellingUnit">
     <details key="require" value="http://www.eclipse.org/emf/2002/Ecore|platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore|"/>
     <details key="using" value="kermeta::standard|kermeta::utils|patternframework|org::smartadapters::core|org::smartadapters::extension|ecore|org|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="org" nsURI="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org" nsPrefix="org">
-    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <ecore:EPackage name="org" nsURI="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/" nsPrefix="org">
     <eSubpackages name="smartadapters" nsURI="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters" nsPrefix="smartadapters">
       <eSubpackages name="core" nsURI="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters/core" nsPrefix="core">
         <eClassifiers xsi:type="ecore:EClass" name="Adapter">
+          <eSuperTypes href="../../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="aspect" lowerBound="1" eType="/1/smartadapters/core/Aspect" containment="true"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="adapt" upperBound="-1" eType="/1/smartadapters/core/Adaptation" containment="true" eOpposite="/1/smartadapters/core/Adaptation/adapter"/>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
@@ -19,6 +19,7 @@
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Aspect">
+          <eSuperTypes href="../../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="template" containment="true">
             <eType xsi:type="ecore:EClass" href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/ModelPattern"/>
           </eStructuralFeatures>
@@ -33,10 +34,11 @@
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Adaptation" abstract="true" eSuperTypes="/1/smartadapters/extension/AdapterElement">
-          <eOperations name="check" eType="/1/Boolean">
+          <eOperations name="check">
             <eAnnotations source="kermeta">
               <details key="isAbstract" value="true"/>
             </eAnnotations>
+            <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eOperations>
           <eOperations name="execute">
             <eAnnotations source="kermeta">
@@ -66,11 +68,12 @@
         <eClassifiers xsi:type="ecore:EClass" name="setAdaptation" abstract="true" eSuperTypes="/1/smartadapters/core/Adaptation"/>
         <eClassifiers xsi:type="ecore:EClass" name="unsetAdaptation" abstract="true" eSuperTypes="/1/smartadapters/core/Adaptation"/>
         <eClassifiers xsi:type="ecore:EClass" name="makeUnique" eSuperTypes="/1/smartadapters/core/Adaptation">
-          <eOperations name="check" eType="/1/Boolean">
+          <eOperations name="check">
             <eAnnotations source="kermeta" references="/1/smartadapters/core/Adaptation/check">
               <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Boolean init false&#xA;&#x9;if adapter.aspect.structure.isNotEqual(void) then&#xA;&#x9;&#x9;if adapter.aspect.structure.content.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;res := (element.isNotEqual(void)) and (adapter.aspect.structure.content.contains(element))&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
             </eAnnotations>
+            <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eOperations>
           <eOperations name="execute">
             <eAnnotations source="kermeta" references="/1/smartadapters/core/Adaptation/execute">
@@ -90,6 +93,7 @@
       </eSubpackages>
       <eSubpackages name="extension" nsURI="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters/extension" nsPrefix="extension">
         <eClassifiers xsi:type="ecore:EClass" name="AdapterElement">
+          <eSuperTypes href="../../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object"/>
           <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="true"/>
@@ -104,60 +108,56 @@
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="DerivableAdapter" eSuperTypes="/1/smartadapters/core/Adapter">
-          <eOperations name="resolve" eType="/1/smartadapters/core/Adapter">
-            <eAnnotations source="kermeta">
-              <details key="isAbstract" value="true"/>
-            </eAnnotations>
-            <eAnnotations source="kermeta.raisedExceptions">
-              <details key="kermeta::exceptions::Exception" value="kermeta::exceptions::Exception"/>
-              <references href="../../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.ecore#/1/exceptions/Exception"/>
-            </eAnnotations>
-            <eParameters name="derivation" eType="/1/smartadapters/extension/Derivation"/>
-          </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" upperBound="-1" eType="/1/smartadapters/extension/EntityAlternative" containment="true"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1" eType="/1/smartadapters/extension/Constraint" containment="true" eOpposite="/1/smartadapters/extension/Constraint/adapter"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="EntityAlternative" eSuperTypes="/1/smartadapters/extension/AdapterElement">
-          <eStructuralFeatures xsi:type="ecore:EReference" name="xor" upperBound="-1" eType="/1/smartadapters/extension/AdapterElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="xor" upperBound="-1" eType="/1/smartadapters/extension/AdapterElement" containment="true"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="EntityConjunction" eSuperTypes="/1/smartadapters/extension/AdapterElement">
-          <eStructuralFeatures xsi:type="ecore:EReference" name="and" upperBound="-1" eType="/1/smartadapters/extension/AdapterElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="and" upperBound="-1" eType="/1/smartadapters/extension/AdapterElement" containment="true"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Constraint" abstract="true">
-          <eOperations name="check" eType="/1/Boolean">
+          <eSuperTypes href="../../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object"/>
+          <eOperations name="check">
             <eAnnotations source="kermeta">
               <details key="isAbstract" value="true"/>
             </eAnnotations>
+            <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
             <eParameters name="d" eType="/1/smartadapters/extension/Derivation"/>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="adapter" lowerBound="1" eType="/1/smartadapters/extension/DerivableAdapter" eOpposite="/1/smartadapters/extension/DerivableAdapter/constraints"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="MutualExclusion" eSuperTypes="/1/smartadapters/extension/Constraint">
-          <eOperations name="check" eType="/1/Boolean">
+          <eOperations name="check">
             <eAnnotations source="kermeta" references="/1/smartadapters/extension/Constraint/check">
               <details key="body" value="do&#xA;&#x9;var c : kermeta::standard::Set&lt;org::smartadapters::extension::AdapterElement> init kermeta::standard::Set&lt;org::smartadapters::extension::AdapterElement>.new&#xA;&#x9;c.addAll(d.selectedOptions)&#xA;&#x9;d.elements.each{e | c.add(e.selectedVariant)}&#xA;&#x9;result := (c.intersection(entities).size) &lt;= (1)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::extension::Constraint"/>
             </eAnnotations>
+            <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
             <eParameters name="d" eType="/1/smartadapters/extension/Derivation"/>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="entities" lowerBound="2" upperBound="-1" eType="/1/smartadapters/extension/AdapterElement"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Dependency" eSuperTypes="/1/smartadapters/extension/Constraint">
-          <eOperations name="check" eType="/1/Boolean">
+          <eOperations name="check">
             <eAnnotations source="kermeta" references="/1/smartadapters/extension/Constraint/check">
               <details key="body" value="do&#xA;&#x9;var c : kermeta::standard::Collection&lt;org::smartadapters::extension::AdapterElement> init kermeta::standard::Set&lt;org::smartadapters::extension::AdapterElement>.new&#xA;&#x9;c.addAll(d.selectedOptions)&#xA;&#x9;d.elements.each{e | c.add(e.selectedVariant)}&#xA;&#x9;result := (not (c.contains(source))) or (c.containsAll(self.dependencies))&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::extension::Constraint"/>
             </eAnnotations>
+            <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean"/>
             <eParameters name="d" eType="/1/smartadapters/extension/Derivation"/>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="/1/smartadapters/extension/AdapterElement"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" lowerBound="1" upperBound="-1" eType="/1/smartadapters/extension/AdapterElement"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Derivation">
+          <eSuperTypes href="../../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1" eType="/1/smartadapters/extension/DerivationElement"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="selectedOptions" upperBound="-1" eType="/1/smartadapters/extension/AdapterElement"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="DerivationElement">
+          <eSuperTypes href="../../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="alternative" lowerBound="1" eType="/1/smartadapters/extension/EntityAlternative"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="selectedVariant" lowerBound="1" eType="/1/smartadapters/extension/AdapterElement"/>
         </eClassifiers>
@@ -167,6 +167,11 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/0"/>
     <references href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1"/>
-    <references href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/2"/>
+    <references href="../domain/runtime/runtimePattern.ecore#/0"/>
+    <references href="../domain/runtime/runtimePattern.ecore#/1"/>
+    <references href="../domain/FSMMMPattern.ecore#/0"/>
+    <references href="../domain/FSMMMPattern.ecore#/1"/>
+    <references href="../domain/runtime/typePattern.ecore#/0"/>
+    <references href="../domain/runtime/typePattern.ecore#/1"/>
   </ecore:EAnnotation>
 </xmi:XMI>
