@@ -77,18 +77,19 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.bin/translatorvisitableUML.km"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.project"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.project.kpm"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/MyStateMachine.fsm"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/MyStateMachine.fsmdi"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/MyStateMachine.uml"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/MyStateMachine.umldi"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-12-05T15:20:11.000+0100" value="/org.kermeta.tutorial.aspects/src/kermeta/aspect_translator.kmt">
-    <dependencies type="//@ruleTypes.0" from="//@units.26" to="//@units.28"/>
-  </units>
-  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-12-06T22:53:48.453+0100" value="/org.kermeta.tutorial.aspects/src/kermeta/translator.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-12-06T23:37:01.625+0100" value="/org.kermeta.tutorial.aspects/src/kermeta/uml2fsm.kmt" dependents="//@units.26/@dependencies.0"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-12-07T13:59:03.000+0100" value="/org.kermeta.tutorial.aspects/src/kermeta/translator.kmt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/META-INF/MANIFEST.MF"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/build.properties"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/.cvsignore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="2007-12-07T10:50:21.000+0100" value="/org.kermeta.tutorial.aspects/src/answer/aspect_translator.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.28" to="//@units.29"/>
+  </units>
+  <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/src/answer/uml2fsm.kmt" dependents="//@units.28/@dependencies.0"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/MyStateMachine.fsm"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/MyStateMachine.fsmdi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/.cvsignore"/>
   <ruleTypes name="require"/>
   <ruleTypes name="normal"/>
 </kpm:KPM>
