@@ -1,0 +1,8 @@
+
+ @uri "http://www.kermeta.org/kermeta/utils"
+package utils;
+
+require "../StringBuffer.kmt"
+require "../hashtable.kmt"
+require "../Stack.kmt"
+
