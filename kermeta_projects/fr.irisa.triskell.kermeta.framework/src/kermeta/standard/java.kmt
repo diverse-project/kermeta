@@ -1,4 +1,4 @@
-// $Id: java.kmt,v 1.5 2007-11-22 08:53:55 ftanguy Exp $
+// $Id: java.kmt,v 1.6 2007-12-07 01:15:09 fmunoz Exp $
  
 /**
  * Contains types dedicated to dealing with java objects
@@ -12,8 +12,8 @@ using kermeta::exceptions
 
 
 /** 
-  * This special object is used to represent java object that cannot be concretly used with kermeta
-  * the only actions possible on these objects are : assignment and passing them as parameter
+  * This special object is used to represent java objects that cannot be concretely used with kermeta
+  * <b>the only actions possible on these objects are : assignment and passing them as parameter</b>
   */
 class UnknownJavaObject {
  
