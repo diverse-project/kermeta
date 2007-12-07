@@ -1,4 +1,4 @@
-/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.1 2007-09-11 12:29:51 dvojtise Exp $
+/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.2 2007-12-07 06:03:02 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -73,6 +73,9 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 
 		if(node instanceof Operation)
 			result += htmlSummary((Operation)node);
+
+		if(node instanceof Property)
+			result += htmlSummary((Property)node);
 		mainClass =  false;
 		result+="</pre>";
 		return  fixPlatformURL(result);
@@ -176,6 +179,17 @@ public class KMTDocHTMLPrettyPrinter extends KM2KMTPrettyPrinter{
 		String tags = ppTags(node.getTag());
 		result.append(getPrefix() + tags);
 		if(tags.compareTo("")!=0) result.append("\n") ;
+		return result.toString();
+	}
+	
+	public String htmlSummary(Property node) {
+		StringBuffer result= new StringBuffer("");
+		result.append(ppSimplifiedProperty(node));
+		/*result.append("<b>Property </b> " + KMTHelper.getMangledIdentifier(node.getName()));
+		result.append("\n") ;
+		String tags = ppTags(node.getTag());
+		result.append(getPrefix() + tags);
+		if(tags.compareTo("")!=0) result.append("\n") ;*/
 		return result.toString();
 	}
 	
