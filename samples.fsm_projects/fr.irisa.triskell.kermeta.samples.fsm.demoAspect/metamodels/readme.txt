@@ -1,0 +1,1 @@
+fsm.ecore should be removed when FR#4576 will be realized
