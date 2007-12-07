@@ -3,7 +3,7 @@
   <packages name="kermeta">
     <nestedPackage name="language">
       <nestedPackage tag="//@packages.0/language/behavior/@ownedTag.0" name="behavior" uri="http://www.kermeta.org/kermeta/language/behavior">
-        <ownedTag value="/**&#xD;&#xA; * Contains all the classes that define the behavior of Kermeta (i.e the model representation&#xD;&#xA; * of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta &#xD;&#xA; * metamodel, viewed as a model.&#xD;&#xA; * You can also find some information about the behavior package here : &lt;a href=&quot;http://www.kermeta.org/documents/manual/html.single&quot;>KermetaManual&lt;/a>&#xD;&#xA; * &lt;img src=&quot;./figures/language_behavior_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/language/behavior"/>
+        <ownedTag value="/**&#xD;&#xA; * Contains all the classes that define the behavior of Kermeta (i.e the model representation&#xD;&#xA; * of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta &#xD;&#xA; * metamodel, viewed as a model.&#xD;&#xA; * You can also find some information about the behavior package here : &lt;a href=&quot;http://www.kermeta.org/documents/manual/html.single&quot;>KermetaManual&lt;/a>&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_package.png&quot;>&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_visitable_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/language/behavior"/>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/behavior/CallExpression/@ownedTag.0" name="CallExpression" isAbstract="true" superType="//@packages.0/language/behavior/CallExpression/@containedType.0">
           <ownedTag value="/**&#xD;&#xA; * Any callable expression inherits this class, e.g : &#xD;&#xA; *   - variable call&#xD;&#xA; *   - feature call ( &lt;code>a.b&lt;/code> : b is a feature call)&#xD;&#xA; *&#xD;&#xA; * &lt;img alt=&quot;&quot;  height=&quot;90%&quot; width=&quot;90%&quot;  src=&quot;http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png&quot; />&#xD;&#xA; *&#xD;&#xA; */" object="//@packages.0/language/behavior/CallExpression"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/language/behavior/Expression"/>
@@ -1199,13 +1199,14 @@
   <referencedModelingUnits href="reflective_collections.km#/"/>
   <referencedModelingUnits href="../kunit/kunit.km#/"/>
   <referencedModelingUnits href="../kunit/assert.km#/"/>
+  <referencedModelingUnits href="../utils/utils.km#/"/>
+  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
   <referencedModelingUnits href="../utils/hashtable.km#/"/>
-  <referencedModelingUnits href="../utils/stack.km#/"/>
+  <referencedModelingUnits href="../utils/Stack.km#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>
   <referencedModelingUnits href="../io/file_io.km#/"/>
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
   <referencedModelingUnits href="dynamic_expression.km#/"/>
   <referencedModelingUnits href="../standard/java.km#/"/>
   <referencedModelingUnits href="../ecore/ecore_compatibility.km#/"/>
-  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
 </kermeta_language_structure:ModelingUnit>

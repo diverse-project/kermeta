@@ -2,9 +2,9 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/io/@ownedTag.0" name="io" uri="http://www.kermeta.org/kermeta/io">
-      <ownedTag value="/**&#xD;&#xA; * Contains file input/output related classes. &#xD;&#xA; * &lt;img src=&quot;./figures/file_io_view.png&quot;>&#xD;&#xA; */" object="//@packages.0/io"/>
+      <ownedTag value="/**&#xD;&#xA; * Contains file input/output related classes. &#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/io"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/io/FileIO/@ownedTag.0" name="FileIO" superType="//@packages.0/io/FileIO/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * Implementation of simple helpers to read ans write text files&#xD;&#xA; */" object="//@packages.0/io/FileIO"/>
+        <ownedTag value="/**&#xD;&#xA; * Implementation of simple helpers to read ans write text files&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/io/FileIO"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
@@ -240,12 +240,13 @@
   <referencedModelingUnits href="../language/reflective_collections.km#/"/>
   <referencedModelingUnits href="../kunit/kunit.km#/"/>
   <referencedModelingUnits href="../kunit/assert.km#/"/>
+  <referencedModelingUnits href="../utils/utils.km#/"/>
+  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
   <referencedModelingUnits href="../utils/hashtable.km#/"/>
-  <referencedModelingUnits href="../utils/stack.km#/"/>
+  <referencedModelingUnits href="../utils/Stack.km#/"/>
   <referencedModelingUnits href="std_io.km#/"/>
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
   <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
   <referencedModelingUnits href="../standard/java.km#/"/>
   <referencedModelingUnits href="../ecore/ecore_compatibility.km#/"/>
-  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
 </kermeta_language_structure:ModelingUnit>

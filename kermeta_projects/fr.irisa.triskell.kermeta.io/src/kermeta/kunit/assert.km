@@ -379,13 +379,14 @@
   <referencedModelingUnits href="../persistence/resource.km#/"/>
   <referencedModelingUnits href="../language/reflective_collections.km#/"/>
   <referencedModelingUnits href="kunit.km#/"/>
+  <referencedModelingUnits href="../utils/utils.km#/"/>
+  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
   <referencedModelingUnits href="../utils/hashtable.km#/"/>
-  <referencedModelingUnits href="../utils/stack.km#/"/>
+  <referencedModelingUnits href="../utils/Stack.km#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>
   <referencedModelingUnits href="../io/file_io.km#/"/>
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
   <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
   <referencedModelingUnits href="../standard/java.km#/"/>
   <referencedModelingUnits href="../ecore/ecore_compatibility.km#/"/>
-  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
 </kermeta_language_structure:ModelingUnit>

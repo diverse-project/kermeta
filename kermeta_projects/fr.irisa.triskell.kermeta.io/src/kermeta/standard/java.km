@@ -2,9 +2,9 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/standard/@ownedTag.0" name="standard" uri="http://www.kermeta.org/kermeta/standard">
-      <ownedTag value="/**&#xD;&#xA; * Contains types dedicated to dealing with java objects&#xD;&#xA; */" object="//@packages.0/standard"/>
+      <ownedTag value="/**&#xD;&#xA; * Contains types dedicated to dealing with java objects&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/java_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/standard"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/standard/UnknownJavaObject/@ownedTag.0" name="UnknownJavaObject" superType="//@packages.0/standard/UnknownJavaObject/@containedType.0">
-        <ownedTag value="/** &#xD;&#xA;  * This special object is used to represent java objects that cannot be concretely used with kermeta&#xD;&#xA;  * &lt;b>the only actions possible on these objects are : assignment and passing them as parameter&lt;/b>&#xD;&#xA;  */" object="//@packages.0/standard/UnknownJavaObject"/>
+        <ownedTag value="/** &#xD;&#xA;  * This special object is used to represent java objects that cannot be concretely used with kermeta&#xD;&#xA;  * &lt;b>the only actions possible on these objects are : assignment and passing them as parameter&lt;/b>&#xD;&#xA;  * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/java_package.png&quot;>&#xD;&#xA;  */" object="//@packages.0/standard/UnknownJavaObject"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
@@ -40,12 +40,13 @@
   <referencedModelingUnits href="../language/reflective_collections.km#/"/>
   <referencedModelingUnits href="../kunit/kunit.km#/"/>
   <referencedModelingUnits href="../kunit/assert.km#/"/>
+  <referencedModelingUnits href="../utils/utils.km#/"/>
+  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
   <referencedModelingUnits href="../utils/hashtable.km#/"/>
-  <referencedModelingUnits href="../utils/stack.km#/"/>
+  <referencedModelingUnits href="../utils/Stack.km#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>
   <referencedModelingUnits href="../io/file_io.km#/"/>
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
   <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
   <referencedModelingUnits href="../ecore/ecore_compatibility.km#/"/>
-  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
 </kermeta_language_structure:ModelingUnit>

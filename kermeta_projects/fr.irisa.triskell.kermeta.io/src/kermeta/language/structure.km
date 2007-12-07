@@ -3,7 +3,7 @@
   <packages name="kermeta">
     <nestedPackage name="language">
       <nestedPackage tag="//@packages.0/language/structure/@ownedTag.0" name="structure" uri="http://www.kermeta.org/kermeta/language/structure">
-        <ownedTag value="/**&#xD;&#xA; * Contains the concrete implementation (including the operation bodies) &#xD;&#xA; * of the classes of the &lt;code>kermeta::reflection&lt;/code> package.&#xD;&#xA; * If you need more documentation, please take a look at the&#xD;&#xA; * &lt;code>kermeta::reflection&lt;/code> package which is more complete.&#xD;&#xA; * &lt;img src=&quot;./figures/language_structure_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/language/structure"/>
+        <ownedTag value="/**&#xD;&#xA; * Contains the concrete implementation (including the operation bodies) &#xD;&#xA; * of the classes of the &lt;code>kermeta::reflection&lt;/code> package.&#xD;&#xA; * If you need more documentation, please take a look at the&#xD;&#xA; * &lt;code>kermeta::reflection&lt;/code> package which is more complete.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_package.png&quot;>&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_visitor_view.png&quot;>&#xD;&#xA; */" object="//@packages.0/language/structure"/>
         <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" tag="//@packages.0/language/structure/String/@ownedTag.0" name="String" instanceType="//@packages.0/language/structure/String/@containedType.0">
           <ownedTag value="/** Alias to kermeta::standard::String */" object="//@packages.0/language/structure/String"/>
           <containedType xsi:type="kermeta_language_structure:Class">
@@ -2777,13 +2777,14 @@
   <referencedModelingUnits href="reflective_collections.km#/"/>
   <referencedModelingUnits href="../kunit/kunit.km#/"/>
   <referencedModelingUnits href="../kunit/assert.km#/"/>
+  <referencedModelingUnits href="../utils/utils.km#/"/>
+  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
   <referencedModelingUnits href="../utils/hashtable.km#/"/>
-  <referencedModelingUnits href="../utils/stack.km#/"/>
+  <referencedModelingUnits href="../utils/Stack.km#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>
   <referencedModelingUnits href="../io/file_io.km#/"/>
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
   <referencedModelingUnits href="dynamic_expression.km#/"/>
   <referencedModelingUnits href="../standard/java.km#/"/>
   <referencedModelingUnits href="../ecore/ecore_compatibility.km#/"/>
-  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
 </kermeta_language_structure:ModelingUnit>

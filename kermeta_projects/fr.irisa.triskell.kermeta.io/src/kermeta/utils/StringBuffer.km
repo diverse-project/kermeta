@@ -3,7 +3,7 @@
   <packages name="kermeta">
     <nestedPackage name="utils" uri="http://www.kermeta.org/kermeta/utils">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/utils/StringBuffer/@ownedTag.0" name="StringBuffer" superType="//@packages.0/utils/StringBuffer/@containedType.0">
-        <ownedTag value="/**&#xA; * This class mimic the behavior of the java's StringBuffer class. This enables better performance in long&#xA; * string concatenation.&lt;br>&#xA; * &lt;b>Only work on Strings&lt;/b>&#xA; */" object="//@packages.0/utils/StringBuffer"/>
+        <ownedTag value="/**&#xA; * This class mimic the behavior of the java's StringBuffer class. This enables better performance in long&#xA; * string concatenation.&lt;br>&#xA; * &lt;b>Only work on Strings&lt;/b>&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;>&#xA; */" object="//@packages.0/utils/StringBuffer"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
@@ -73,8 +73,9 @@
   <referencedModelingUnits href="../language/reflective_collections.km#/"/>
   <referencedModelingUnits href="../kunit/kunit.km#/"/>
   <referencedModelingUnits href="../kunit/assert.km#/"/>
+  <referencedModelingUnits href="utils.km#/"/>
   <referencedModelingUnits href="hashtable.km#/"/>
-  <referencedModelingUnits href="stack.km#/"/>
+  <referencedModelingUnits href="Stack.km#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>
   <referencedModelingUnits href="../io/file_io.km#/"/>
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>

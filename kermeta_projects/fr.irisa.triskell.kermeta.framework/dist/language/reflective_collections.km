@@ -2,7 +2,7 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/language/@ownedTag.0" name="language" uri="http://www.kermeta.org/kermeta/language">
-      <ownedTag value="/**&#xD;&#xA; * Contains the implementation of Kermeta reflective collections.&#xD;&#xA; * &lt;img src=&quot;./figures/language_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/language"/>
+      <ownedTag value="/**&#xD;&#xA; * Contains the implementation of Kermeta reflective collections.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/language"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/language/ReflectiveCollection/@ownedTag.0" name="ReflectiveCollection" superType="//@packages.0/language/ReflectiveCollection/@containedType.0">
         <ownedTag value="/**&#xD;&#xA; * ReflectiveCollection is a special collection that is used to define the type &#xD;&#xA; * of attributes that have an upper multiplicity > 1 in a class. It indeed handles&#xD;&#xA; * the update of opposite property if such an attribute has got one.&#xD;&#xA; */" object="//@packages.0/language/ReflectiveCollection"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
@@ -182,13 +182,14 @@
   <referencedModelingUnits href="../persistence/resource.km#/"/>
   <referencedModelingUnits href="../kunit/kunit.km#/"/>
   <referencedModelingUnits href="../kunit/assert.km#/"/>
+  <referencedModelingUnits href="../utils/utils.km#/"/>
+  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
   <referencedModelingUnits href="../utils/hashtable.km#/"/>
-  <referencedModelingUnits href="../utils/stack.km#/"/>
+  <referencedModelingUnits href="../utils/Stack.km#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>
   <referencedModelingUnits href="../io/file_io.km#/"/>
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
   <referencedModelingUnits href="dynamic_expression.km#/"/>
   <referencedModelingUnits href="../standard/java.km#/"/>
   <referencedModelingUnits href="../ecore/ecore_compatibility.km#/"/>
-  <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
 </kermeta_language_structure:ModelingUnit>

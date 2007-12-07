@@ -7,7 +7,7 @@
   <ecore:EPackage name="kermeta" nsURI="file:/C:/Franck/workspace/fr.irisa.triskell.kermeta.framework/dist/reflection/reflection.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="reflection" nsURI="http://www.kermeta.org/kermeta/reflection" nsPrefix="reflection">
       <eAnnotations source="kermeta">
-        <details key="documentation" value="/**&#xD;&#xA; * Contains all the abstract classes used in the reflection mechanism. Implements the &lt;b>derived&#xD;&#xA; * properties&lt;/b> contained in the classes; declares the abstract operations.&#xD;&#xA; * Concrete implementation is in kermeta.language.structure.&#xD;&#xA; * &lt;img src=&quot;./figures/reflection_package.png&quot;>&#xD;&#xA; */"/>
+        <details key="documentation" value="/**&#xD;&#xA; * Contains all the abstract classes used in the reflection mechanism. Implements the &lt;b>derived&#xD;&#xA; * properties&lt;/b> contained in the classes; declares the abstract operations.&#xD;&#xA; * Concrete implementation is in kermeta.language.structure.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/reflection_package.png&quot;>&#xD;&#xA; */"/>
       </eAnnotations>
       <eClassifiers xsi:type="ecore:EDataType" name="kermeta::standard::String" instanceClassName="java.lang.Object">
         <eAnnotations source="kermeta">
@@ -249,6 +249,15 @@
           </eAnnotations>
           <eAnnotations source="kermetaderivedProp.getter">
             <details key="body" value="do&#xA;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;cDef ?= typeDefinition&#xA;&#x9;result := cDef.isAbstract&#xA;end"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="classDefinition" eType="/1/reflection/ClassDefinition" changeable="false" volatile="true" transient="true" derived="true">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA;  * Returns the ClassDefinition for this class&#xD;&#xA;  */"/>
+            <details key="isReadOnly" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermetaderivedProp.getter">
+            <details key="body" value="do&#xA;&#x9;result ?= typeDefinition&#xA;end"/>
           </eAnnotations>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AString" changeable="false" volatile="true" transient="true" derived="true">
@@ -577,60 +586,6 @@
           </eAnnotations>
           <eAnnotations source="kermetaderivedProp.getter">
             <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;result.addAll(self.ownedAttribute)&#xA;&#x9;self.superType.each{t | do&#xA;&#x9;&#x9;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;&#x9;&#x9;cDef ?= t.typeDefinition&#xA;&#x9;&#x9;&#x9;cDef.allAttribute.each{p | result.add(p)}&#xA;&#x9;&#x9;end}&#xA;end"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedCompositeAttribute" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns only the Attributes (isComposite and not isDerived) owned by&#xD;&#xA;  * the ClassDefinition&#xD;&#xA;  */"/>
-            <details key="isReadOnly" value="true"/>
-          </eAnnotations>
-          <eAnnotations source="kermetaderivedProp.getter">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;self.ownedAttribute.each{oa | if (oa.isComposite) and (not (oa.isDerived)) then&#xA;&#x9;&#x9;&#x9;result.add(oa)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="allCompositeAttribute" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns only all the Attributes (isComposite and not isDerived) of&#xD;&#xA;  * this ClassDefinition including the inherited ones&#xD;&#xA;  */"/>
-            <details key="isReadOnly" value="true"/>
-          </eAnnotations>
-          <eAnnotations source="kermetaderivedProp.getter">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;self.allAttribute.each{oa | if (oa.isComposite) and (not (oa.isDerived)) then&#xA;&#x9;&#x9;&#x9;result.add(oa)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttributeAsReference" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns only the References (not isComposite and not isDerived) owned by&#xD;&#xA;  * this ClassDefinition&#xD;&#xA;  */"/>
-            <details key="isReadOnly" value="true"/>
-          </eAnnotations>
-          <eAnnotations source="kermetaderivedProp.getter">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;self.ownedAttribute.each{oa | if (not (oa.isComposite)) and (not (oa.isDerived)) then&#xA;&#x9;&#x9;&#x9;result.add(oa)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="allAttributeAsReference" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns only all the References (not isComposite and not isDerived) of&#xD;&#xA;  * this ClassDefinition including the inherited ones&#xD;&#xA;  */"/>
-            <details key="isReadOnly" value="true"/>
-          </eAnnotations>
-          <eAnnotations source="kermetaderivedProp.getter">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;self.allAttribute.each{oa | if (not (oa.isComposite)) and (not (oa.isDerived)) then&#xA;&#x9;&#x9;&#x9;result.add(oa)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttributeAsProperty" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns only the Properties (not isComposite and isDerived) owned by&#xD;&#xA;  * this ClassDefinition&#xD;&#xA;  */"/>
-            <details key="isReadOnly" value="true"/>
-          </eAnnotations>
-          <eAnnotations source="kermetaderivedProp.getter">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;self.ownedAttribute.each{oa | if (not (oa.isComposite)) and (oa.isDerived) then&#xA;&#x9;&#x9;&#x9;result.add(oa)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
-          </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="allAttributeAsProperty" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
-          <eAnnotations source="kermeta">
-            <details key="documentation" value="/**&#xD;&#xA;  * Returns only all the Properties (not isComposite and isDerived) of&#xD;&#xA;  * this ClassDefinition including the inherited ones&#xD;&#xA;  */"/>
-            <details key="isReadOnly" value="true"/>
-          </eAnnotations>
-          <eAnnotations source="kermetaderivedProp.getter">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;self.allAttribute.each{oa | if (not (oa.isComposite)) and (oa.isDerived) then&#xA;&#x9;&#x9;&#x9;result.add(oa)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
           </eAnnotations>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="allOperation" ordered="false" upperBound="-1" eType="/1/reflection/Operation" changeable="false" volatile="true" transient="true" derived="true">
@@ -966,51 +921,45 @@
     <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
     <references href="../Standard.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
-    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
+    <references href="../utils/utils.ecore#/0"/>
+    <references href="../utils/utils.ecore#/1"/>
+    <references href="../utils/utils.ecore#/2"/>
+    <references href="../utils/StringBuffer.ecore#/0"/>
+    <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
-    <references href="../utils/stack.ecore#/0"/>
-    <references href="../utils/stack.ecore#/1"/>
-    <references href="../utils/stack.ecore#/2"/>
+    <references href="../utils/Stack.ecore#/0"/>
+    <references href="../utils/Stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../ecore/ecore_compatibility.ecore#/2"/>
-    <references href="../utils/StringBuffer.ecore#/0"/>
-    <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

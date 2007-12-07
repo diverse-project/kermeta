@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.60 2007-12-07 01:53:26 fmunoz Exp $
+/* $Id: reflection.kmt,v 1.61 2007-12-07 03:11:55 ffleurey Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -261,6 +261,14 @@ abstract class Class inherits ParameterizedType
 			var cDef : ClassDefinition
 			cDef ?= typeDefinition
 			result := cDef.isAbstract
+		end
+		
+	/**
+	 * Returns the ClassDefinition for this class
+	 */
+	property readonly classDefinition : ClassDefinition
+		getter is do
+			result ?= typeDefinition
 		end
 	
 	/**
@@ -621,90 +629,7 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 				}
 			}
 		end
-		
-	/**
-	 * Returns only the Attributes (isComposite and not isDerived) owned by
-	 * the ClassDefinition
-	 */
-	property readonly ownedCompositeAttribute : set Property[0..*]
-		getter is do
- 		    result := kermeta::standard::Set<Property>.new
- 		    self.ownedAttribute.each{ oa |
- 		    	if ( /*(*/oa.isComposite /*or PrimitiveType.hasSubType(oa.type))*/ and not oa.isDerived ) then
- 		    		result.add(oa)
- 		    	end
- 		    }
-		end
-	
-	/**
-	 * Returns only all the Attributes (isComposite and not isDerived) of
-	 * this ClassDefinition including the inherited ones
-	 */
-	property readonly allCompositeAttribute : set Property[0..*]
-		getter is do
- 		    result := kermeta::standard::Set<Property>.new
- 		    self.allAttribute.each{ oa |
- 		    	if (oa.isComposite and not oa.isDerived) then
- 		    		result.add(oa)
- 		    	end
- 		    }
-		end
-	
-	/**
-	 * Returns only the References (not isComposite and not isDerived) owned by
-	 * this ClassDefinition
-	 */
-	property readonly ownedAttributeAsReference : set Property[0..*]
-		getter is do
- 		    result := kermeta::standard::Set<Property>.new
- 		    self.ownedAttribute.each{ oa |
- 		    	if (not oa.isComposite and not oa.isDerived) then
- 		    		result.add(oa)
- 		    	end
- 		    }
-		end
-	
-	/**
-	 * Returns only all the References (not isComposite and not isDerived) of
-	 * this ClassDefinition including the inherited ones
-	 */
-	property readonly allAttributeAsReference : set Property[0..*]
-		getter is do
- 		    result := kermeta::standard::Set<Property>.new
- 		    self.allAttribute.each{ oa |
- 		    	if (not oa.isComposite and not oa.isDerived) then
- 		    		result.add(oa)
- 		    	end
- 		    }
-		end
 
-	/**
-	 * Returns only the Properties (not isComposite and isDerived) owned by
-	 * this ClassDefinition
-	 */
-	property readonly ownedAttributeAsProperty : set Property[0..*]
-		getter is do
- 		    result := kermeta::standard::Set<Property>.new
- 		    self.ownedAttribute.each{ oa |
- 		    	if (not oa.isComposite and oa.isDerived) then
- 		    		result.add(oa)
- 		    	end
- 		    }
-		end
-	
-	/**
-	 * Returns only all the Properties (not isComposite and isDerived) of
-	 * this ClassDefinition including the inherited ones
-	 */
-	property readonly allAttributeAsProperty : set Property[0..*]
-		getter is do
- 		    result := kermeta::standard::Set<Property>.new
- 		    self.allAttribute.each{ oa |
- 		    	if (not oa.isComposite and oa.isDerived) then
- 		    		result.add(oa)
- 		    	end
- 		    }
-		end
 
 	/**
 	 * Returns all the Operations of this ClassDefinition
@@ -721,7 +646,7 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 					result.add(p)
 				}
 			}
-		end
+	end
 }
 
 

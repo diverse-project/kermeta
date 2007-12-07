@@ -4,7 +4,7 @@
     <nestedPackage tag="//@packages.0/utils/@ownedTag.0" name="utils" uri="http://www.kermeta.org/kermeta/utils">
       <ownedTag value="/** &#xD;&#xA; * Contains special classes (Hashtable, Stack) that are not contained in Kermeta&#xD;&#xA; * metamodel&#xD;&#xA; * &#xD;&#xA; * &lt;img src=&quot;./figures/utils_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/utils"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/utils/Hashtable/@ownedTag.0" name="Hashtable" superType="//@packages.0/utils/Hashtable/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * An implementation of hashtable&#xD;&#xA; * This implementation is for speed optimisation it cannot be serialized. &#xD;&#xA; * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)&#xD;&#xA; * &lt;img src=&quot;./figures/hashtable_view.png&quot;>&#xD;&#xA; */" object="//@packages.0/utils/Hashtable"/>
+        <ownedTag value="/**&#xD;&#xA; * An implementation of hashtable&#xD;&#xA; * This implementation is for speed optimisation it cannot be serialized. &#xD;&#xA; * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/utils/Hashtable"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="K"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="V"/>
         <containedType xsi:type="kermeta_language_structure:Class">
@@ -308,12 +308,13 @@
   <referencedModelingUnits href="../language/reflective_collections.km#/"/>
   <referencedModelingUnits href="../kunit/kunit.km#/"/>
   <referencedModelingUnits href="../kunit/assert.km#/"/>
-  <referencedModelingUnits href="stack.km#/"/>
+  <referencedModelingUnits href="utils.km#/"/>
+  <referencedModelingUnits href="StringBuffer.km#/"/>
+  <referencedModelingUnits href="Stack.km#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>
   <referencedModelingUnits href="../io/file_io.km#/"/>
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
   <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
   <referencedModelingUnits href="../standard/java.km#/"/>
   <referencedModelingUnits href="../ecore/ecore_compatibility.km#/"/>
-  <referencedModelingUnits href="StringBuffer.km#/"/>
 </kermeta_language_structure:ModelingUnit>
