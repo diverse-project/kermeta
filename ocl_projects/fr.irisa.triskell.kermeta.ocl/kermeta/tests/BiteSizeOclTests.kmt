@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.19 2007-09-21 07:43:31 barais Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.20 2007-12-07 04:33:49 ffleurey Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -11,16 +11,17 @@ package oclTests;
 
 require kermeta
 require "../transformations-dev/EcoreHelper.kmt"
-require "../../../someUnit/src/newUnit.kmt" 
+//require "../../../someUnit/src/newUnit.kmt" 
 require "../transformations-dev/ocl2kmtVisitor.kmt"  
 require "../helpers/OCLHelper.kmt"   
- 
+
 //require "http://sample"
    
-using newUnit
+using kermeta::kunit
 using kermeta::standard
 using kermeta::persistence
-using kermeta::interpreter 
+using kermeta::exceptions
+
 using EcoreHelpers
 using ocl2kmt
 
@@ -38,7 +39,7 @@ class  BiteSizeOclTests  inherits TestCase
             repository := EMFRepository.new        
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
-            ecoreFile := "platform:/resource/fr.irisa.triskell.kermeta.ocl/ocl/sample.ecore"
+            ecoreFile := "platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/sample.ecore"
             //de := DynamicExpression.new
             //de.initializeDefaults
         end
@@ -62,14 +63,14 @@ class  BiteSizeOclTests  inherits TestCase
         
     operation visitOclXmi(filename: String): String is
         do
-            var sourceFileName : String init "../../ocl/" + filename + ".xmi"
+            var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/" + filename + ".xmi"
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
             visitor.setEcoreHelper(EcoreHelper.new.loadMetamodel(ecoreFile))
             parsedOCL  := helper.loadOCLModel(repository, sourceFileName)
             helper.getPackageDeclaration(parsedOCL).accept(visitor)
             result := io.s
-        end
+        end 
 
   // boolean literal true
     operation test01(): Void is
@@ -156,7 +157,7 @@ class  BiteSizeOclTests  inherits TestCase
         do
             assertSimilar( expect( "3.isLower(4)"), visitOclXmi( "14"))
         end
-
+ 
   // <=
     operation test15(): Void is
         do
@@ -217,10 +218,10 @@ class  BiteSizeOclTests  inherits TestCase
         do
             assertSimilar( expect( "do var v : Integer init 1 v end"), visitOclXmi( "24"))
         end
-
+ 
   // null literal
      operation test25(): Void is
-        do
+        do 
             assertSimilar( expect( "void"), visitOclXmi( "25"))
         end
 
@@ -229,7 +230,7 @@ class  BiteSizeOclTests  inherits TestCase
         do
             assertSimilar( expect( "3.14"), visitOclXmi( "26"))
         end
-
+ 
   // string literals
      operation test27(): Void is
         do
@@ -686,7 +687,7 @@ class  BiteSizeOclTests  inherits TestCase
               self.setTestMethodName("test" +nn)
               testRunner.runTest(self)
               if oneOff then
-                 testRunner.printLogs
+                 testRunner.printTestResult
               end
           end
       
@@ -705,7 +706,7 @@ class  BiteSizeOclTests  inherits TestCase
             runOneTest(testRunner,s)
             i := i + 1
         end
-        testRunner.printLogs
+        testRunner.printTestResult
       end
       
       operation oldmain() : Void is 
@@ -718,7 +719,7 @@ class  BiteSizeOclTests  inherits TestCase
                 var testRunner : TestRunner init TestRunner.new
     		    var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(BiteSizeOclTests)
         		testRunner.runTest(suite)
-                testRunner.printLogs
+                testRunner.printTestResult
           end    
       
 }
