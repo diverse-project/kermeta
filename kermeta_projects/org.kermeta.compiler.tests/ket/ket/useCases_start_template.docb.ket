@@ -1,0 +1,8 @@
+<%@ket
+	package="org::kermeta::compiler::trek2docbook::template"
+	require="" using=""
+	class="DOCBKUseCasesTemplate_Start"
+	parameters=""
+%>
+<chapter>
+	<title>Detailed Description of the Use Cases</title>

@@ -1,0 +1,8 @@
+<%@ket
+	package="org::kermeta::compiler::trek2docbook::template"
+	require="" using=""
+	class="DOCBKUseCaseTemplate_End"
+	parameters=""
+%>
+
+</section>

@@ -1,0 +1,100 @@
+/* $Id: trek2docbook.kmt,v 1.1 2007-12-07 05:45:20 cfaucher Exp $
+ * Creation date: July 26, 2007
+ * License:
+ * Copyright:
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+@mainClass "org::kermeta::compiler::trek2docbook::Main"
+@mainOperation "main"
+
+package org::kermeta::compiler::trek2docbook;
+
+require kermeta
+require "http://www.kermeta.org/trek"
+
+require "kermeta/header_template.docb.kmt"
+require "kermeta/footer_template.docb.kmt"
+
+require "kermeta/statusBoard_template.docb.kmt"
+
+require "kermeta/testCase_template.docb.kmt"
+require "kermeta/useCase_template.docb.kmt"
+require "kermeta/useCase_start_template.docb.kmt"
+require "kermeta/useCase_end_template.docb.kmt"
+require "kermeta/useCases_end_template.docb.kmt"
+require "kermeta/useCases_start_template.docb.kmt"
+
+using ecore
+using kermeta::standard
+using kermeta::persistence
+using kermeta::language::structure
+using kermeta::utils
+using kermeta::io
+using trek
+using org::kermeta::compiler::trek2docbook::template
+
+class Main
+{
+
+	operation load() : UseKaseModel is do
+		var firstPackage : UseKaseModel init UseKaseModel.new
+		var repository : EMFRepository init EMFRepository.new             
+
+   		var resource : Resource init repository.getResource("platform:/resource/org.kermeta.compiler.tests/unit_test/unit_test.trek")
+       	
+       	stdio.writeln("resource loading start")
+       	resource.load()
+		stdio.writeln("resource loading end")
+		result ?=resource.instances.one
+	end
+	
+	operation main() : Void is do
+	
+		var targetDir : String init "C:/eclipse3.3M5/eclipse/runtime-New_configuration2/fr.irisa.triskell.kermeta.documentation/src/docbook/"
+		var useKaseModel : UseKaseModel init UseKaseModel.new
+       	useKaseModel := load()
+       	
+       	var docbook : StringBuffer init StringBuffer.new
+       	
+       	docbook.append(DOCBHeaderTemplate.new.generate())
+       	
+       	docbook.append(DOCBStatusBoardTemplate.new.generate(useKaseModel))
+       	
+       	docbook.append(DOCBKUseCasesTemplate_Start.new.generate())
+       
+		useKaseModel.kuseCases.each{ uc | 
+			do
+				visitKUseCase(docbook, uc)
+			end
+		}		
+		
+		docbook.append(DOCBKUseCasesTemplate_End.new.generate())
+		
+       	docbook.append(DOCBFooterTemplate.new.generate())
+		
+		var ioHelper : FileIO init FileIO.new
+		var filename : String init targetDir+"unit_test.docb.xml"
+           			
+		ioHelper.writeTextFile(filename,docbook.toString)
+             
+		stdio.writeln("printing finish")
+	end
+	
+	/**
+	*/ 
+	operation visitKUseCase(docbook:StringBuffer, uc:KUseCase) : Void is do
+		docbook.append(DOCBKUseCaseTemplate.new.generate(uc))
+		uc.verifiedBy.each{ tc |
+		   	docbook.append(DOCBKTestCaseTemplate.new.generate(tc))
+		}
+		docbook.append(DOCBKUseCaseTemplate_End.new.generate())
+		
+		/*p.nestedPackage.each{ np |
+			do 
+				var currentPack : Package init Package.new                 
+           		currentPack ?= np
+				visitKUseCase(docbook, currentPack)
+			end
+		}*/
+	end
+}

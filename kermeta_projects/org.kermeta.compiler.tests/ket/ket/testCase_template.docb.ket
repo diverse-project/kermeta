@@ -1,0 +1,13 @@
+<%@ket
+	package="org::kermeta::compiler::trek2docbook::template"
+	require="http://www.kermeta.org/trek"
+	using="kermeta::language::structure"
+	using="trek"
+	class="DOCBKTestCaseTemplate" 
+	parameters="tc:KTestCase"
+%>
+ 
+<para/>
+<para><emphasis role="bold"><%=tc.name%></emphasis> [<%=tc.type.name%>]:</para>
+<para><%=tc.summary%></para>
+<para/>

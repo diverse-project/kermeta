@@ -1,0 +1,50 @@
+<%@ket
+	package="org::kermeta::compiler::trek2docbook::template"
+	require="http://www.kermeta.org/trek"
+	using="kermeta::language::structure"
+	using="trek"
+	class="DOCBStatusBoardTemplate"
+	parameters="useKaseModel:UseKaseModel"
+%>
+<chapter>
+	<title>Listing of the issues in compiling</title>
+	<section>
+		<title id="statusBoard.title.link">Status board of the issues</title>
+		<para>
+		</para>
+		
+		<informaltable>
+          <tgroup cols="4">
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <colspec colname="c3"/>
+            <colspec colname="c4"/>
+            <colspec colname="c5"/>
+            <!--colspec colname="c6"/-->
+            <thead>
+              <row>
+                <!--entry><para>Doc ref</para></entry-->
+                <entry><para>Identifier</para></entry>
+                <entry><para>Note</para></entry>
+                <entry><para>Design</para></entry>
+                <entry><para>Impl</para></entry>
+              </row>
+            </thead>
+            <tbody>
+              <%useKaseModel.kuseCases.each{ uc |%>
+              <row>
+                <entry><para><link linkend="uc_<%=uc.name%>.link"><%=uc.name%></link></para></entry>
+                <entry><para><%if uc.shortSummary != void then%><%=uc.shortSummary%><%end%></para></entry>
+                <%uc.status.each{ s |%>
+                	<entry><para><%=s.key%> <%=s.progress.toString%> %</para></entry>
+                <%}%>
+              </row>
+              <%}%>
+            </tbody>
+          </tgroup>
+        </informaltable>
+		
+		
+		
+	</section>
+</chapter>

@@ -1,0 +1,7 @@
+<%@ket
+	package="org::kermeta::compiler::trek2docbook::template"
+	require="" using=""
+	class="DOCBKUseCaseTemplate_Start"
+	parameters=""
+%>
+<chapter>
