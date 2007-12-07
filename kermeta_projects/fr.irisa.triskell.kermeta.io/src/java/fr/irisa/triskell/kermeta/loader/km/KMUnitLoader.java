@@ -1,6 +1,6 @@
 
 
-/*$Id: KMUnitLoader.java,v 1.11 2007-11-28 15:54:28 ftanguy Exp $
+/*$Id: KMUnitLoader.java,v 1.12 2007-12-07 01:50:26 ffleurey Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL
@@ -77,12 +77,12 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 			
 			ResourceSet resourceSet = new ResourceSetImpl();
 			
-			KermetaUnit framework = IOPlugin.getDefault().getFramework();
+			/*KermetaUnit framework = IOPlugin.getDefault().getFramework();
 			if ( framework != null ) {
 				resourceSet.getResources().add( framework.getModelingUnit().eResource() );
 				for ( KermetaUnit pieceOfFramework : KermetaUnitHelper.getAllImportedKermetaUnits(framework) )
 					resourceSet.getResources().add( pieceOfFramework.getModelingUnit().eResource() );
-			}
+			}*/
 			
 			URI u = EcoreHelper.createURI( uri );
 			
