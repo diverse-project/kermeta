@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModellingUnit">
+    <details key="require" value="http://www.eclipse.org/emf/2002/Ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.ecore|platform:/resource/SmartAdapters/metamodel/domain/runtime/type.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.ecore|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="runtime" nsURI="platform:/resource/SmartAdapters/metamodel/domain/runtime/runtime.ecore#/runtime"
+      nsPrefix="runtime">
+    <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="configurations" lowerBound="1"
+          upperBound="-1" eType="#/1/Configuration" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="components" lowerBound="1"
+          upperBound="-1" eType="#/1/ComponentInstance" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+          eType="ecore:EClass type.ecore#/1/ComponentType" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="serviceDeclarations"
+          upperBound="-1" eType="ecore:EClass type.ecore#/1/Service" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Configuration" eSuperTypes="type.ecore#/1/DiVANamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="components" lowerBound="1"
+          upperBound="-1" eType="#/1/ComponentInstance"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" abstract="true"
+        eSuperTypes="type.ecore#/1/DiVANamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+          eType="ecore:EClass type.ecore#/1/ComponentType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="superComponents" upperBound="-1"
+          eType="#/1/CompositeComponentInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
+          eType="#/1/Binding" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="ecore:EDataType type.ecore#/1/String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CompositeComponentInstance" eSuperTypes="#/1/ComponentInstance">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subComponents" upperBound="-1"
+          eType="#/1/ComponentInstance"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimitiveComponentInstance" eSuperTypes="#/1/ComponentInstance"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Binding" abstract="true" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="portA" lowerBound="1"
+          eType="ecore:EClass type.ecore#/1/Port"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="portB" lowerBound="1"
+          eType="ecore:EClass type.ecore#/1/Port"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SimpleBind" eSuperTypes="#/1/Binding">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="cptA" lowerBound="1"
+          eType="#/1/ComponentInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="cptB" lowerBound="1"
+          eType="#/1/ComponentInstance"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExportBind" eSuperTypes="#/1/SimpleBind"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource" references="type.ecore#/0 type.ecore#/1"/>
+</xmi:XMI>

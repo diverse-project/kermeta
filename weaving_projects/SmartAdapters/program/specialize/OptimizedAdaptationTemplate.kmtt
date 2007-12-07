@@ -44,6 +44,7 @@ package smartadapters
 					<%end
 					end
 					}%>
+				converter.initConverter(convert)
 				stdio.writeln("OK!")
 			end
 		}
@@ -67,21 +68,7 @@ package smartadapters
 			end
 					
 			method execute(): Void is do
-				var real<%=c.name%> : <%=qualifiedName%>
-				if(adapter.created.getValue(new<%=c.name%>) == void or not(isUnique==uniqueType.unique)) then
-					real<%=c.name%> ?= adapter.converter.getConverted(new<%=c.name%>)
-					adapter.created.put(new<%=c.name%>,real<%=c.name%>)
-				else
-					var clone : Boolean init false
-					if(isUnique==uniqueType.onDemand) then
-						var input : String init stdio.read("create "+new<%=c.name%>.toString+" (true/false) :")
-			               clone := input.toBoolean
-					end									
-					if(isUnique == uniqueType.non_unique or clone) then
-						real<%=c.name%> ?= adapter.converter.getConverted(new<%=c.name%>)
-						adapter.created.put(new<%=c.name%>,real<%=c.name%>)
-					end
-				end						
+				adapter.cloneAgain(new<%=c.name%>, void, isUnique)					
 			end
 		}
 
@@ -95,27 +82,7 @@ package smartadapters
 			end
 			
 			method execute(): Void is do
-				var realCloned<%=c.name%> : <%=qualifiedName%>
-				var temp : <%=qualifiedName%>
-				temp?=adapter.getRealObject(<%=c.name%>ToClone,false)
-				if(isUnique == uniqueType.unique) then
-					if(not(adapter.cloned.exists{o | o == temp})) then
-						realCloned<%=c.name%> ?= Object.clone(temp)
-						adapter.created.put(cloned<%=c.name%>,realCloned<%=c.name%>)
-						adapter.cloned.add(temp)
-					end
-				else
-					var clone : Boolean init false
-					if(isUnique == uniqueType.onDemand) then
-						var input : String init stdio.read("clone "+<%=c.name%>ToClone.toString+" (true/false) :")
-		                clone := input.toBoolean
-					end
-					if(isUnique == uniqueType.non_unique or clone) then
-						realCloned<%=c.name%> ?= Object.clone(temp)
-						adapter.created.put(cloned<%=c.name%>,realCloned<%=c.name%>)
-						adapter.cloned.add(temp)
-					end
-				end
+				adapter.cloneAgain(cloned<%=c.name%>, <%=c.name%>ToClone, isUnique)
 			end					
 		}
 		<%end%>
@@ -153,43 +120,16 @@ package smartadapters
 			method execute(): Void is do
 				var temp<%=c.name%> : <%=qualifiedName%>
 				temp<%=c.name%> ?= adapter.getRealObject(<%=c.name%>ToSet,false)
-				if(temp<%=c.name%> != void) then
+				
 				<%c.eAllStructuralFeatures.each{f | 
-				if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then	
-					fQualName:=helper.getClassifierQualifiedName(f.eType)
-					if(not(f.upperBound==1))then%>
-					var temp<%=f.name%> : Collection<kermeta::reflection::Object>
-					<%else%>
-					var temp<%=f.name%> : <%=fQualName%>
-					<%end%>
-					<%newObj:=f.eType.getMetaClass.new
-					primitive?=newObj%>
-					if(ref<%=f.name%>!=void) then
-						<%if(primitive==void) then%>
-						<%if(f.upperBound==1)then%>
-						temp<%=f.name%> ?= adapter.getRealObject(ref<%=f.name%>,false)
-						<%else%>
-						temp<%=f.name%> ?= adapter.getRealObject(ref<%=f.name%>,true)
-						<%end%>
-						<%else%>
-						temp<%=f.name%>:=ref<%=f.name%>
-						<%end%>
-						if(temp<%=f.name%>!=void) then
-							<%if(f.upperBound==1) then%>
-							temp<%=c.name%>.<%=f.name%> := temp<%=f.name%>
-							<%else%>
-							temp<%=f.name%>.each{o | 
-								var temp : <%=fQualName%>
-								temp?=o
-								if(temp!=void) then
-									temp<%=c.name%>.<%=f.name%>.add(temp)
-								end}
-							<%end%>
-						end
-					end
+				if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
+				<%if f.upperBound==1 then%>
+				temp<%=c.name%>.<%=f.name%> ?= adapter.setSingleProperty(ref<%=f.name%>, temp<%=c.name%>.<%=f.name%>)
+				<%else%>
+				adapter.setMultipleProperty(temp<%=c.name%>.<%=f.name%>,ref<%=f.name%>)
+				<%end%>
 				<%end
 				}%>
-				end			
 			end			
 		}
 		
@@ -221,37 +161,17 @@ package smartadapters
 			
 			method execute(): Void is do
 				var temp<%=c.name%> : <%=qualifiedName%>
-				temp<%=c.name%>?=adapter.getRealObject(<%=c.name%>ToUnset,false)
-				if(temp<%=c.name%>!=void) then
-					<%c.eAllStructuralFeatures.each{f | 
-					if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
-					if(ref<%=f.name%> != void) then
-						<%fQualName:=helper.getClassifierQualifiedName(f.eType)
-						if(not(f.upperBound==1))then%>
-						var temp<%=f.name%> : Collection<kermeta::reflection::Object>
-						temp<%=f.name%>?=adapter.getRealObject(ref<%=f.name%>,true)
-						if(temp<%=f.name%>!=void) then
-							temp<%=f.name%>.each{o | 
-								var temp : <%=fQualName%>
-								temp?=o
-								if(temp!=void) then
-									temp<%=c.name%>.<%=f.name%>.remove(temp)
-								end
-							}
-						end
-						<%else%>
-						var temp<%=f.name%> : <%=fQualName%>
-						temp<%=f.name%> ?= adapter.getRealObject(ref<%=f.name%>,false)
-						if(temp<%=f.name%>!=void) then
-							if(temp<%=f.name%>==temp<%=c.name%>.<%=f.name%>) then
-								temp<%=c.name%>.<%=f.name%>:=void
-							end
-						end						
-						<%end%>
-					end
+				temp<%=c.name%> ?= adapter.getRealObject(<%=c.name%>ToUnset,false)
+				
+				<%c.eAllStructuralFeatures.each{f | 
+				if(not(f.derived or f.unsettable) and f.changeable and not(f.name.equals("tag") or f.name.equals("ownedTag"))) then%>
+				<%if f.upperBound==1 then%>
+				temp<%=c.name%>.<%=f.name%> ?= adapter.unsetSingleProperty(ref<%=f.name%>, temp<%=c.name%>.<%=f.name%>)
+				<%else%>
+				adapter.unsetMultipleProperty(temp<%=c.name%>.<%=f.name%>,ref<%=f.name%>)
 				<%end%>
-				<%}%>
-				end
+				<%end
+				}%>
 			end
 		}
 		<%end

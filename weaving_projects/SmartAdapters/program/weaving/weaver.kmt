@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.4 2007-10-19 09:06:03 bmorin Exp $
+/* $Id: weaver.kmt,v 1.5 2007-12-07 07:15:17 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -12,7 +12,6 @@ package weaver;
 require kermeta
 
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
-//require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersMerged.kmt"
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/PatternMatchingFlora2.kmt"
 
@@ -34,19 +33,12 @@ class Weaver
 	    handler.initialize()
 		var repository:EMFRepository init EMFRepository.new
 
-		//stdio.writeln("Loading meta-model "+domainMMUri+" ...")
-		//bug Kermeta collection + @aspect
 		var inputMetamodel:Sequence<EPackage> init Sequence<EPackage>.new 
 		handler.loadEcoreModel(EMFRepository.new, domainMMUri).each{p | inputMetamodel.add(p)}
 		var inputPatternMetamodel:Sequence<EPackage> init Sequence<EPackage>.new 
 		handler.loadEcoreModel(EMFRepository.new, domainMMPatternUri).each{p | inputPatternMetamodel.add(p)}
-		
-		stdio.writeln(domainMMUri+": "+inputMetamodel.toString)
-		stdio.writeln(domainMMPatternUri+": "+inputPatternMetamodel.toString)
-		//stdio.writeln("Loading meta-models... OK!")
 
-		//stdio.writeln("Weaving...")
-		stdio.write("Loading models...")
+		stdio.writeln("Loading models...")
 		var inputModel:Set<Object> init loadModel(repository, baseModelUri, domainMMUri)
 		var inputAdapter:Set<Object> init loadModel(repository, adapterUri, adaptMMUri)
 
@@ -58,7 +50,6 @@ class Weaver
 								adapter:=temp
 							end
 						}
-		//adapter?=inputAdapter.select{o | Adapter.isInstance(o)}.first
 		stdio.writeln(" OK!")
 
 		stdio.write("Checking adaptations...")
@@ -68,7 +59,7 @@ class Weaver
 		if (adapter.adapt.size>0 and isChecked) then
 			stdio.writeln(" OK!")
 			adapter.initClone
-			adapter.initConvert
+			
 			if (adapter.aspect.template!=void) then
 				/*---Pattern matching---*/
 				stdio.writeln("Searching base model elements matching template...")
@@ -95,7 +86,7 @@ class Weaver
 				     stdio.writeln("  -Binding"+i.toString+":")
 					 keys:=binding.keys
 					 keys.each{k | stdio.writeln(k.toString+" -> "+binding.getValue(k).toString)}
-					 input:=stdio.read("apply this binding ? (true/false): ")//user interaction
+					 input:=stdio.read("$>apply this binding ? (true/false): ")//user interaction
 					 apply:=input.toBoolean
 					 if apply then //apply the adapter for the selected binding
 					 	 stdio.writeln("----------------------------")
@@ -106,7 +97,7 @@ class Weaver
 					 	stdio.writeln("")
 					 	
 					 	if(iteBindings.hasNext) then
-						 	inputPM:=stdio.read("execute pattern matching ? (true/false): ")
+						 	inputPM:=stdio.read("$>execute pattern matching ? (true/false): ")
 						 	executePM:=inputPM.toBoolean
 						 	if executePM then
 						 		iteBindings := matcher.match(inputMetamodel, inputModel, adapter.aspect.template)
@@ -121,8 +112,8 @@ class Weaver
 			stdio.writeln("Saving Result")
 			saveModel(inputModel, resultUri, domainMMUri)		
 		else
-			var e:WeaverException init WeaverException.new
-			e.display
+			var e:kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			e.message:="WeaverException: Adapter contains no adaptation or at least one adaptation is not well typed"
 			raise e
 		end		
 	end
@@ -131,21 +122,14 @@ class Weaver
     	stdio.writeln("  loading: "+modelPath+"("+metamodelPath+")")
    		var resource : Resource init repository.createResource(modelPath, metamodelPath)
        	resource.load()
-       	//stdio.writeln("  loading: OK!")
         result := resource.instances
     end	
 	
     operation saveModel(obj : Set<Object>, uri : String, domainMM : String) is do
+    	obj.each{o | stdio.writeln(o.toString)}
     	var repository:EMFRepository init EMFRepository.new
 	    var resource : Resource init repository.createResource(uri , domainMM)
 	    obj.each{o | resource.instances.add(o)}
 	    resource.save
     end
-}
-
-class WeaverException inherits kermeta::exceptions::Exception
-{
-	operation display() : Void is do
-		message:="WeaverException: Adapter contains no adaptation or at least one adaptation is not well typed"
-	end
 }

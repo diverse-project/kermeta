@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<runtime:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:runtime="platform:/resource/SmartAdapters/metamodel/domain/runtime/runtimePattern.ecore#/pattern/runtime" xmlns:type="platform:/resource/SmartAdapters/metamodel/domain/runtime/typePattern.ecore#/pattern/type" xsi:schemaLocation="platform:/resource/SmartAdapters/metamodel/domain/runtime/runtimePattern.ecore#/pattern/runtime ../../metamodel/domain/runtime/runtimePattern.ecore#/1/runtime platform:/resource/SmartAdapters/metamodel/domain/runtime/typePattern.ecore#/pattern/type ../../metamodel/domain/runtime/typePattern.ecore#/1/type">
+  <components xsi:type="runtime:CompositeComponentInstance" name="rootComp" state="ON" subComponents="//@components.1 //@components.2">
+    <bindings xsi:type="runtime:ExportBind" portA="//@types.0/@ports.0" portB="//@types.1/@ports.0" cptA="//@components.0" cptB="//@components.1"/>
+  </components>
+  <components xsi:type="runtime:PrimitiveComponentInstance" name="cpt1" type="//@types.1" superComponents="//@components.0" state="ON">
+    <bindings xsi:type="runtime:SimpleBind" portA="//@types.1/@ports.0" portB="//@types.2/@ports.0" cptA="//@components.1" cptB="//@components.2"/>
+  </components>
+  <components xsi:type="runtime:PrimitiveComponentInstance" name="cpt2" type="//@types.2" superComponents="//@components.0" state="ON"/>
+  <types name="rootType">
+    <ports name="rootPort" provided="//@serviceDeclarations.0"/>
+  </types>
+  <types name="type1">
+    <ports name="p1" provided="//@serviceDeclarations.0" required="//@serviceDeclarations.1 //@serviceDeclarations.2"/>
+  </types>
+  <types name="type2">
+    <ports name="p2" provided="//@serviceDeclarations.1 //@serviceDeclarations.2"/>
+  </types>
+  <serviceDeclarations xsi:type="type:FunctionalService" name="s1"/>
+  <serviceDeclarations xsi:type="type:FunctionalService" name="s2"/>
+  <serviceDeclarations xsi:type="type:FunctionalService" name="s3"/>
+</runtime:System>

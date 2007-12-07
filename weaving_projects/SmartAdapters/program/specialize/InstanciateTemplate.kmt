@@ -1,4 +1,4 @@
-/* $Id: InstanciateTemplate.kmt,v 1.1 2007-10-19 09:06:03 bmorin Exp $
+/* $Id: InstanciateTemplate.kmt,v 1.2 2007-12-07 07:15:18 bmorin Exp $
  * Creation date: August 27, 2007
  * License:
  * Copyright:
@@ -13,7 +13,7 @@ package specialize;
 
 require kermeta
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
-require "platform:/resource/SmartAdapters/program/specialize/AdaptationTemplate.kmt"
+require "platform:/resource/SmartAdapters/program/specialize/OptimizedAdaptationTemplate.kmt"
 
 using kermeta::standard
 using kermeta::persistence
@@ -24,8 +24,12 @@ class Main
 	operation main() : Void is do
 		var domainMM:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
 		var domainMMPattern:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"
+		
+		/*var domainMM2:String init "platform:/resource/SmartAdapters/metamodel/domain/runtime/type.ecore"
+		var domainMMPattern2:String init "platform:/resource/SmartAdapters/metamodel/domain/runtime/typePattern.ecore"*/
+		
 		var shortName:String init "FSM"
-		var file:String init "C:\\temp\\FSM_AOM_Framework3.kmt"
+		var file:String init "C:/temp/FSM_AOM_Framework.kmt"
 	 
 	 	var ecore:String init "http://www.eclipse.org/emf/2002/Ecore"
 	 	var generator:AdaptationTemplate init AdaptationTemplate.new 
@@ -34,10 +38,17 @@ class Main
 	    handler.initialize()
 		var repository:EMFRepository init EMFRepository.new
 		var inputMM:Set<Object> init loadModel(repository, domainMM, ecore)
+		
+		/*var repository2:EMFRepository init EMFRepository.new
+		var inputMM2:Set<Object> init loadModel(repository2, domainMM2, ecore)*/
+		
 		var mm:EPackage
 		mm?=inputMM.select{o | EPackage.isInstance(o)}.first
-		if(mm!=void) then
-			var classif:Set<EClassifier> init getAllNestedClassifiers(mm)	
+		/*var mm2:EPackage
+		mm2?=inputMM2.select{o | EPackage.isInstance(o)}.first*/
+		if(mm!=void /*and mm2!=void*/) then
+			var classif:Set<EClassifier> init getAllNestedClassifiers(mm)
+			//classif.addAll(getAllNestedClassifiers(mm2))	
 			var content:String init generator.generate(classif, domainMM, domainMMPattern, shortName)
 			stdio.writeln("OK!")
 			stdio.write("Saving...")

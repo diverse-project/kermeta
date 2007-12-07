@@ -1,4 +1,4 @@
-/* $Id: weaver4UML.kmt,v 1.1 2007-07-18 15:43:47 bmorin Exp $
+/* $Id: weaver4Runtime.kmt,v 1.1 2007-12-07 07:15:17 bmorin Exp $
  * Creation date: June 13, 2007
  * License:
  * Copyright:
@@ -11,4 +11,4 @@
 package weaver;
 
 require "./weaver.kmt"
-require "platform:/resource/SmartAdapters/metamodel/specific/UML_AOM_Framework.kmt"
+require "platform:/resource/SmartAdapters/metamodel/specific/DiVA_AOM_Framework.kmt" 

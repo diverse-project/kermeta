@@ -1,15 +1,14 @@
-/* $Id: converter.kmt,v 1.4 2007-10-19 09:06:03 bmorin Exp $
+/* $Id: converter.kmt,v 1.5 2007-12-07 07:15:17 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
- * Copyright:
- * Authors: bmorin
+ * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
+ * Authors: Brice MORIN
  */
 //@mainClass "root_package::Main"
 //@mainOperation "main"
 
 
-package utils;
-
+package org::smartadapters::utils;
 
 require kermeta
 using kermeta::reflection
@@ -17,106 +16,144 @@ using kermeta::standard
 using kermeta::utils
 
 /**
-Aims at converting a model that conforms to a MM' metamodel 
-into a model that conforms to a MM metamodel
+Converts a model that conforms to MM' into a model that conforms to MM
 It can be improved...
 */
 class Converter
 {
-	attribute converted:Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>
-
-	//handles cyclic references (I hope...)
-	attribute converting:Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>
+	//Mapping MM'->MM
+	attribute convertTable : Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>
+	attribute enumTable : Hashtable<kermeta::reflection::Enumeration,kermeta::reflection::Enumeration>
+	
+	reference converted : Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>
+	reference converting : Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>	
+	
+	/**
+	initializes the converter (~constructor)
+	must be called before any other operation
+	*/
+	operation initConverter(convert:Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>/*,
+			enum : Hashtable<kermeta::reflection::Enumeration,kermeta::reflection::Enumeration>*/) is do	
+		convertTable := convert
+		//enumTable := enum
+		converted := Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>.new
+		converting := Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>.new
+	end
 	
 	operation deleteConverted(obj:kermeta::reflection::Object) : Void is do
+		converting.remove(obj)
 		converted.remove(obj)
+	end	
+
+	operation addEntry(key : kermeta::reflection::Class, val : kermeta::reflection::Class) is do
+		convertTable.put(key,val)
+	end
+	
+	operation getConverted(obj : kermeta::reflection::Object) : kermeta::reflection::Object is do
+		var e : kermeta::reflection::EnumerationLiteral
+		e ?= obj
+		if(e!=void) then
+			result := obj
+			//result := getConvertedEnum(e)
+		else
+			result := getConvertedObject(obj)
+		end
+	end
+	
+	/**
+	returns a converted object (MM), equivalent to obj (MM')
+	*/
+	operation getConvertedObject(obj : kermeta::reflection::Object) : kermeta::reflection::Object is do
+		//stdio.writeln("getConverted "+obj.toString+" ...")
+		var newMeta : kermeta::reflection::Class 
+		newMeta := convertTable.getValue(obj.getMetaClass)
+		if(newMeta!=void) then
+			var o : kermeta::reflection::Object init newMeta.new
+			if(converted.getValue(obj)==void) then
+				//stdio.writeln(obj.toString+" is NOT converted")
+				if(converting.getValue(obj)==void) then
+					//stdio.writeln(obj.toString+" is NOT being converting")
+					converting.put(obj,o)
+					convert(obj,o)
+				    converted.put(obj,o)
+				    converting.remove(obj)
+				    result:=o
+				else
+					//stdio.writeln(obj.toString+" is being converting")
+					result := converting.getValue(obj)	
+				end
+			else
+				//stdio.writeln(obj.toString+" is converted")
+				result := converted.getValue(obj) 
+			end
+		else
+			result := obj
+		end
+	end
+	
+	/**
+	TODO: à revoir...
+	*/
+	operation getConvertedEnum(enumLit : kermeta::reflection::EnumerationLiteral) : kermeta::reflection::EnumerationLiteral is do	
+		stdio.writeln("?>enumLit: "+enumLit.name)
+		stdio.writeln("?>enumLit.getMetaClass: "+enumLit.getMetaClass.name)
+		stdio.writeln("?>enumLit.enumeration.getMetaClass: "+enumLit.~enumeration.getMetaClass.name)
+		/*var enum : kermeta::reflection::Enumeration init enumLit.~enumeration
+		var e : kermeta::reflection::Enumeration init enumTable.getValue(enum)
+		if(e != void) then
+			var lit : kermeta::reflection::EnumerationLiteral
+			lit := e.ownedLiteral.select{l | l.name.equals(enumLit.name)}.one
+			if(lit != void) then
+				stdio.writeln("?>lit: "+lit.name)
+				stdio.writeln("?>lit.getMetaClass: "+lit.getMetaClass.name)
+				stdio.writeln("?>lit.enumeration.getMetaClass: "+lit.~enumeration.getMetaClass.name)
+				result := lit
+			end
+		else*/
+			result := enumLit
+		//end
 	end
 		
 	/**
-	changes the metaclass of obj
+	copies obj (MM') into conv (MM) thanks to the convert Hashtable
 	*/	
-	operation convert(obj:kermeta::reflection::Object, convert:Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>) : kermeta::reflection::Object is do		
-		//stdio.writeln("converting "+obj.toString)
-		if(converted==void) then
-			converted:=Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>.new
-		end
-		if(converting==void) then
-			converting:=Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>.new
-		end
-
-		var res:kermeta::reflection::Object
-		res:=converted.getValue(obj)
-		if(res!=void) then
-			//stdio.writeln(obj.toString+" already converted: "+res.toString)
-			result:=res 
-		else
-		res:=converting.getValue(obj)
-		if(res!=void) then
-			//stdio.writeln(obj.toString+" being converted: "+res.toString)
-			result:=res 
-		else
-		var newMetaClass:kermeta::reflection::Class 
-		newMetaClass:=convert.getValue(obj.getMetaClass)
-		if(newMetaClass!=void) then
-			//stdio.writeln("")
-			//stdio.writeln("converting "+obj.getMetaClass.typeDefinition.qualifiedName+": "+obj.toString+" into "+newMetaClass.typeDefinition.qualifiedName+" ...")
-			var newObj:kermeta::reflection::Object init newMetaClass.new
-			var classDef:kermeta::reflection::ClassDefinition
-			classDef?=newObj.getMetaClass.typeDefinition
-			converting.put(obj,newObj)
-			if(classDef!=void) then
-				var att:Set<Property> init classDef.allAttribute
-				att.each{a | 
-					var primitive:kermeta::language::structure::PrimitiveType
-					primitive?=a.type
-					if(a.upper==1) then
-						if (primitive==void) then
-							var temp:Object
-							temp:=self.convert(obj.get(a),convert)
-							if(converting.getValue(obj.get(a))==void) then 
-								
-								if(temp.isInstanceOf(a.type)) then
-									//stdio.writeln("set: "+a.name+": "+a.type.toString+"("+obj.get(a).toString+")")
-									newObj.~set(a,temp)
-								end
-							else
-								//stdio.writeln("set: "+a.name+": "+a.type.toString+"("+obj.get(a).toString+")")
-								newObj.~set(a,temp)
-							end
-						else
-							//stdio.writeln("set primitive: "+a.name+": "+a.type.toString+"("+obj.get(a).toString+")")
-							newObj.~set(a,obj.get(a))
-						end
-					else
-							//stdio.writeln("recursion")
-							var list:Collection<kermeta::reflection::Object>
-							var convertedList:Collection<kermeta::reflection::Object> init Set<kermeta::reflection::Object>.new
-							list?=obj.get(a)
-							if(list!=void) then
-								list.each{o | if(converting.getValue(o)==void and converted.getValue(o)==void) then
-														var tmp:Object init self.convert(o,convert)
-														converting.put(o,tmp)
-														list.remove(o)
-														list.add(tmp)
-														end}
-								//list.each{o | stdio.writeln(o.toString)}
-								var list2:Collection<kermeta::reflection::Object> 
-								list2 ?= newObj.get(a)
-								list2.clear
-								list2.addAll(list)
-							end
+	operation convert(obj : kermeta::reflection::Object, conv : kermeta::reflection::Object) : Void is do		
+		//stdio.writeln("converting "+obj.toString+" into "+conv.toString)
+		var classDef:kermeta::reflection::ClassDefinition
+		classDef?=conv.getMetaClass.typeDefinition
+		if(classDef!=void) then
+			//getting all the properties of the converted object
+			var att:Set<Property> init classDef.allAttribute
+			att.each{a |
+			//stdio.writeln("?>"+a.getMetaClass.typeDefinition.name)
+			if(obj.get(a)!=void and not(a.name.equals("tag") or a.name.equals("ownedTag"))) then
+				var  cl : kermeta::reflection::Class init a.getMetaClass.typeDefinition.getMetaClass
+				var ob : Object init obj.get(a)
+				//single property (upper bound==1)
+				if(a.upper==1 and ob!=void) then
+					//stdio.writeln("Single property")
+					var temp:Object
+					temp:= getConverted(ob)
+					if(temp!=void) then
+						conv.~set(a,temp)
 					end
-				}
-				converted.put(obj,newObj)
-				converting.remove(obj)
-
-				//end
-				//stdio.writeln("converted.put("+obj.toString+", "+newObj.toString+")")
-				//stdio.writeln("")
-				result:=newObj
+				//collection property -> iteration
+				else
+					//stdio.writeln("Collection property")
+					var list:Collection<kermeta::reflection::Object>
+					var convertedList:Collection<kermeta::reflection::Object>
+					list?=ob
+					if(list!=void and list.size>0) then
+						convertedList ?= conv.get(a)
+						convertedList.clear
+						list.each{o |
+								var tmp:Object init getConverted(o)
+								convertedList.add(tmp)
+						}						
+					end
+				end
 			end
-		end
-		end
+			}
 		end
 	end
 }

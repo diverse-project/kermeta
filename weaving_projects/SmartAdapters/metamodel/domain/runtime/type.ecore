@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModellingUnit">
+    <details key="require" value="http://www.eclipse.org/emf/2002/Ecore|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="type" nsURI="platform:/resource/SmartAdapters/metamodel/domain/runtime/type.ecore#/type"
+      nsPrefix="type">
+    <eClassifiers xsi:type="ecore:EClass" name="ComponentType" eSuperTypes="#/1/DiVANamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ports" upperBound="-1"
+          eType="#/1/Port" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Service" abstract="true" eSuperTypes="#/1/DiVANamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operations" lowerBound="1"
+          upperBound="-1" eType="#/1/Operation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FunctionalService" eSuperTypes="#/1/Service"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ControlService" eSuperTypes="#/1/Service"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#/1/DiVANamedElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DiVANamedElement" abstract="true"
+        eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#/1/String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String">
+      <eAnnotations source="kermeta">
+        <details key="alias" value="kermeta::standard::String"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#/1/DiVANamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="provided" upperBound="-1"
+          eType="#/1/Service"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="required" upperBound="-1"
+          eType="#/1/Service"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource" references="runtime.ecore#/0 runtime.ecore#/1 runtime.ecore#/2"/>
+</xmi:XMI>
