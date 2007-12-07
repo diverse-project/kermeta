@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.16 2007-11-29 14:04:20 dvojtise Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.17 2007-12-07 05:32:52 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
  * License    : GPL
@@ -654,9 +654,16 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 			String nline = lines[i].replaceFirst("\\s*\\*?(.*)", "$1");
 			// nline.matches("\\s*\\*?(.*)"));
 			nline = html(nline);
+			nline = fixPlatformURI(nline);
 			lresult.add(new StringBuffer(nline));
 		}
 		result = join(lresult,"<br/>");
+		return result;
+	}
+	/** fix platform:/plugin URI */
+	protected String fixPlatformURI(String str){
+		String result = str;
+		result = result.replaceAll("src=\"platform:/plugin/fr\\.irisa\\.triskell\\.kermeta\\.documentation/src/figures","src=\"./figures");
 		return result;
 	}
 	
