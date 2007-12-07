@@ -4,15 +4,15 @@
   <subdiagrams>
     <model href="file_io.km#//@packages.0/io"/>
     <diagrams position="0,0" size="100,100" name="file_io_view" viewport="0,0">
-      <property key="pageFormatName" value="A4"/>
-      <property key="diagramWidth" value="840"/>
-      <property key="diagramHeight" value="1188"/>
+      <property key="pageFormatName" value="A5"/>
+      <property key="diagramWidth" value="592"/>
+      <property key="diagramHeight" value="840"/>
       <property key="pageMarginName" value="Small Margin"/>
       <property key="diagramTopMargin" value="20"/>
       <property key="diagramBottomMargin" value="20"/>
       <property key="diagramLeftMargin" value="20"/>
       <property key="diagramRightMargin" value="20"/>
-      <property key="orientation" value="portrait"/>
+      <property key="orientation" value="landscape"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
         <element href="file_io.km#//@packages.0/io"/>
       </semanticModel>

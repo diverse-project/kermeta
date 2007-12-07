@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.58 2007-11-22 08:53:56 ftanguy Exp $
+/* $Id: reflection.kmt,v 1.59 2007-12-07 01:43:05 ffleurey Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -849,9 +849,14 @@ abstract class Type inherits Object
 	operation isInstance(element : Object) : Boolean is abstract
 
 	/**
-	 * Returns a boolean stating if the type is inherited by sub types
+	 * Returns true if element is a supertype of self
 	 */
-	operation hasSubType(element : Type) : Boolean is abstract
+	operation isSuperTypeOf(element : Type) : Boolean is abstract
+	
+	/**
+	 * Returns true if element is a subtype of self
+	 */
+	operation isSubTypeOf(element : Type) : Boolean is abstract
 }
 
 

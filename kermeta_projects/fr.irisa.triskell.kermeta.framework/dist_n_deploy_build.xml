@@ -1,11 +1,11 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.25 2007-09-13 09:04:38 ftanguy Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.26 2007-12-07 01:43:06 ffleurey Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="eclipse.home" location="/home/paco/Desktop/eclipse"/>
+	<property name="eclipse.home" location="C:/Franck/eclipse-rcp-europa-fall2-win32/eclipse"/>
 
 	<path id="project.class.path">
 		

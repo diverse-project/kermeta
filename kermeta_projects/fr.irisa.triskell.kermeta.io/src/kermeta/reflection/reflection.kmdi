@@ -3,16 +3,16 @@
   <model href="reflection.km#/"/>
   <subdiagrams>
     <model href="reflection.km#//@packages.0/reflection"/>
-    <diagrams position="0,0" size="100,100" name="reflection_package" zoom="0.75" viewport="49,390">
-      <property key="pageFormatName" value="A1"/>
-      <property key="diagramWidth" value="2376"/>
-      <property key="diagramHeight" value="3364"/>
+    <diagrams position="0,0" size="100,100" name="reflection_package" zoom="1.5" viewport="0,0">
+      <property key="pageFormatName" value="A2"/>
+      <property key="diagramWidth" value="1680"/>
+      <property key="diagramHeight" value="2376"/>
       <property key="pageMarginName" value="Small Margin"/>
       <property key="diagramTopMargin" value="20"/>
       <property key="diagramBottomMargin" value="20"/>
       <property key="diagramLeftMargin" value="20"/>
       <property key="diagramRightMargin" value="20"/>
-      <property key="orientation" value="portrait"/>
+      <property key="orientation" value="landscape"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
         <element href="reflection.km#//@packages.0/reflection"/>
       </semanticModel>
@@ -223,7 +223,7 @@
           </semanticModel>
         </contained>
       </contained>
-      <contained xsi:type="di:GraphNode" position="1627,919" size="-1,-1">
+      <contained xsi:type="di:GraphNode" position="1563,906" size="-1,-1">
         <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.67"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="reflection.km#//@packages.0/reflection/Tag"/>
@@ -650,8 +650,8 @@
           </semanticModel>
         </contained>
       </contained>
-      <contained xsi:type="di:GraphNode" position="1646,807" size="-1,-1">
-        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.67 //@subdiagrams.0/@diagrams.0/@contained.122 //@subdiagrams.0/@diagrams.0/@contained.123 //@subdiagrams.0/@diagrams.0/@contained.124 //@subdiagrams.0/@diagrams.0/@contained.125"/>
+      <contained xsi:type="di:GraphNode" position="1634,803" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.67 //@subdiagrams.0/@diagrams.0/@contained.122 //@subdiagrams.0/@diagrams.0/@contained.123 //@subdiagrams.0/@diagrams.0/@contained.124 //@subdiagrams.0/@diagrams.0/@contained.125 //@subdiagrams.0/@diagrams.0/@contained.132 //@subdiagrams.0/@diagrams.0/@contained.133"/>
         <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.123"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="reflection.km#//@packages.0/reflection/ModelingUnit"/>
@@ -692,7 +692,7 @@
           </semanticModel>
         </contained>
       </contained>
-      <contained xsi:type="di:GraphNode" position="1802,909" size="-1,-1">
+      <contained xsi:type="di:GraphNode" position="1731,922" size="-1,-1">
         <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.125"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="reflection.km#//@packages.0/reflection/Using"/>
@@ -716,8 +716,8 @@
         </contained>
       </contained>
       <contained xsi:type="di:GraphNode" position="1483,500" size="-1,-1">
-        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.46 //@subdiagrams.0/@diagrams.0/@contained.47 //@subdiagrams.0/@diagrams.0/@contained.92 //@subdiagrams.0/@diagrams.0/@contained.116 //@subdiagrams.0/@diagrams.0/@contained.119 //@subdiagrams.0/@diagrams.0/@contained.126 //@subdiagrams.0/@diagrams.0/@contained.127 //@subdiagrams.0/@diagrams.0/@contained.128"/>
-        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.126 //@subdiagrams.0/@diagrams.0/@contained.127"/>
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.46 //@subdiagrams.0/@diagrams.0/@contained.47 //@subdiagrams.0/@diagrams.0/@contained.92 //@subdiagrams.0/@diagrams.0/@contained.116 //@subdiagrams.0/@diagrams.0/@contained.119 //@subdiagrams.0/@diagrams.0/@contained.126 //@subdiagrams.0/@diagrams.0/@contained.127"/>
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.126"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="reflection.km#//@packages.0/reflection/TypeDefinition"/>
         </semanticModel>
@@ -757,8 +757,8 @@
           </semanticModel>
         </contained>
       </contained>
-      <contained xsi:type="di:GraphNode" position="1441,878" size="-1,-1">
-        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.113 //@subdiagrams.0/@diagrams.0/@contained.114 //@subdiagrams.0/@diagrams.0/@contained.128 //@subdiagrams.0/@diagrams.0/@contained.129"/>
+      <contained xsi:type="di:GraphNode" position="1397,835" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.113 //@subdiagrams.0/@diagrams.0/@contained.114 //@subdiagrams.0/@diagrams.0/@contained.127 //@subdiagrams.0/@diagrams.0/@contained.128"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="reflection.km#//@packages.0/reflection/DataType"/>
         </semanticModel>
@@ -776,7 +776,7 @@
         </contained>
       </contained>
       <contained xsi:type="di:GraphNode" position="1490,975" size="-1,-1">
-        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.129 //@subdiagrams.0/@diagrams.0/@contained.130 //@subdiagrams.0/@diagrams.0/@contained.131"/>
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.128 //@subdiagrams.0/@diagrams.0/@contained.129 //@subdiagrams.0/@diagrams.0/@contained.130"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="reflection.km#//@packages.0/reflection/Enumeration"/>
         </semanticModel>
@@ -794,7 +794,7 @@
         </contained>
       </contained>
       <contained xsi:type="di:GraphNode" position="1770,450" size="-1,-1">
-        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.117 //@subdiagrams.0/@diagrams.0/@contained.130 //@subdiagrams.0/@diagrams.0/@contained.131"/>
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.117 //@subdiagrams.0/@diagrams.0/@contained.129 //@subdiagrams.0/@diagrams.0/@contained.130"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="reflection.km#//@packages.0/reflection/EnumerationLiteral"/>
         </semanticModel>
@@ -867,7 +867,7 @@
         </semanticModel>
         <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="-2" vDistance="-50"/>
         <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
-        <waypoints>[-1, -212, -400, 143]</waypoints>
+        <waypoints>[5, -251, -393, 105]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.1/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.1/@anchorage.1">
         <property key="foregroundColor" value="0,0,255"/>
@@ -1515,11 +1515,10 @@
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="reflection.km#//@packages.0/reflection/ModelingUnit/referencedModelingUnits"/>
         </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="32" vDistance="26"/>
+        <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="8" vDistance="16"/>
         <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
-        <waypoints>[112, 10, 112, 10]</waypoints>
-        <waypoints>[112, 52, 112, 52]</waypoints>
-        <waypoints>[24, 52, 24, 52]</waypoints>
+        <waypoints>[-118, 10, -118, 10]</waypoints>
+        <waypoints>[-118, -2, -118, -2]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.27/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.28/@anchorage.0">
         <property key="foregroundColor" value="0,0,255"/>
@@ -1539,7 +1538,6 @@
         </semanticModel>
         <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="8" vDistance="8"/>
         <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
-        <waypoints>[186, 0, -62, -108]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.30/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.30/@anchorage.1">
         <property key="foregroundColor" value="0,0,255"/>
@@ -1551,17 +1549,6 @@
         <waypoints>[-120, -6, -120, -6]</waypoints>
         <waypoints>[-120, -54, -120, -54]</waypoints>
         <waypoints>[-56, -54, -56, -54]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.30/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.30/@anchorage.1">
-        <property key="foregroundColor" value="0,0,255"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="reflection.km#//@packages.0/reflection/TypeDefinition/aspects"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="34" vDistance="14"/>
-        <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
-        <waypoints>[112, -18, 112, -18]</waypoints>
-        <waypoints>[112, -58, 112, -58]</waypoints>
-        <waypoints>[42, -58, 42, -58]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.32/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.30/@anchorage.0">
         <property key="router" value="Oblique"/>
@@ -1595,6 +1582,46 @@
         <waypoints>[190, 0, 490, -524]</waypoints>
         <waypoints>[190, 568, 490, 44]</waypoints>
         <waypoints>[-300, 568, 0, 44]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="1846,791" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.132 //@subdiagrams.0/@diagrams.0/@contained.133"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="reflection.km#//@packages.0/reflection/Filter"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="8"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="reflection.km#//@packages.0/reflection/Filter"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="propertyNode">
+              <element href="reflection.km#//@packages.0/reflection/Filter/qualifiedName"/>
+            </semanticModel>
+          </contained>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="reflection.km#//@packages.0/reflection/Filter"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.27/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.131/@anchorage.0">
+        <property key="router" value="Oblique"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="reflection.km#//@packages.0/reflection/ModelingUnit/includeFilters"/>
+        </semanticModel>
+        <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="8" vDistance="8"/>
+        <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.27/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.131/@anchorage.0">
+        <property key="router" value="Oblique"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="reflection.km#//@packages.0/reflection/ModelingUnit/excludeFilters"/>
+        </semanticModel>
+        <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="8" vDistance="8"/>
+        <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
+        <waypoints>[170, 46, -79, 54]</waypoints>
       </contained>
     </diagrams>
   </subdiagrams>

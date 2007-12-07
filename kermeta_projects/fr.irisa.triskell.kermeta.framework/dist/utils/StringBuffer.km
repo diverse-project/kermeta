@@ -3,12 +3,12 @@
   <packages name="kermeta">
     <nestedPackage name="utils" uri="http://www.kermeta.org/kermeta/utils">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/utils/StringBuffer/@ownedTag.0" name="StringBuffer" superType="//@packages.0/utils/StringBuffer/@containedType.0">
-        <ownedTag value="/**&#xA; * This class mimic the behavior of the StringBuffer class in java, enabling better performance in log&#xA; * strings&#xA; */" object="//@packages.0/utils/StringBuffer"/>
+        <ownedTag value="/**&#xA; * This class mimic the behavior of the java's StringBuffer class. This enables better performance in long&#xA; * string concatenation.&lt;br>&#xA; * &lt;b>Only work on Strings&lt;/b>&#xA; */" object="//@packages.0/utils/StringBuffer"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
         <ownedOperation tag="//@packages.0/utils/StringBuffer/append/@ownedTag.0" name="append" type="//@packages.0/utils/StringBuffer/append/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xA;  * Append a given string at the end of the given StringBuffer&#xA;  * @param arg0 A string to append at the end of this StringBuffer&#xA;  * @return A reference to this object&#xA;  */" object="//@packages.0/utils/StringBuffer/append"/>
+          <ownedTag value="/**&#xA;  * Append a given string at the end of this StringBuffer&#xA;  * @param arg0 A string to append at the end of this StringBuffer&#xA;  * @return A reference to this object&#xA;  */" object="//@packages.0/utils/StringBuffer/append"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/utils/StringBuffer"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/StringBuffer/append/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/StringBuffer/append/@containedType.0" isCast="true">
@@ -56,23 +56,6 @@
             </statement>
           </body>
           <superOperation href="../language/structure.km#//@packages.0/language/structure/Object/toString"/>
-        </ownedOperation>
-        <ownedOperation name="create" type="//@packages.0/utils/StringBuffer/create/@containedType.0" isOrdered="true" upper="1">
-          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/utils/StringBuffer"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/utils/StringBuffer/create/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Void"/>
-            </containedType>
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/StringBuffer/create/@body/@containedType.0">
-              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/StringBuffer/create/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/utils/StringBuffer/create/@body/@containedType.0"/>
-            </statement>
-          </body>
-          <ownedParameter name="arg0" type="//@packages.0/utils/StringBuffer/create/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
-            <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Integer"/>
-            </containedType>
-          </ownedParameter>
         </ownedOperation>
       </ownedTypeDefinition>
     </nestedPackage>

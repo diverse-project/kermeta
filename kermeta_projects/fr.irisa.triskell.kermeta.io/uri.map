@@ -1,4 +1,4 @@
-# $Id: uri.map,v 1.10 2007-12-06 18:46:44 jmottu Exp $
+# $Id: uri.map,v 1.11 2007-12-07 01:43:19 ffleurey Exp $
 #
 #"platform:/plugin/fr.irisa.triskell.kermeta/"		"file:/C:/eclipse3.1.1/eclipse/plugins/fr.irisa.triskell.kermeta_0.1.1/"
 
@@ -12,9 +12,10 @@
 #"platform:/resource/"		"file:/home/paco/Desktop/KermetaCVS/"
 #"platform:/plugin/"		"/home/paco/Desktop/KermetaCVS/"
 #"platform:/resource/"		"/home/paco/Desktop/KermetaCVS/"
-"platform:/plugin/"			"file://tmp/kermeta_build/src/plugins/"
-"platform:/resource/"		"file://tmp/kermeta_build/src/plugins/"
+#"platform:/plugin/"			"file://tmp/kermeta_build/src/plugins/"
+#"platform:/resource/"		"file://tmp/kermeta_build/src/plugins/"
 #"platform:/plugin/"		"file:/C:/eclipse3.3/eclipse/workspace/"
 #"platform:/resource/"		"file:/C:/eclipse3.3/eclipse/workspace/"
-
+"platform:/plugin/"		"file:/C:/Franck/workspace/"
+"platform:/resource/"	"file:/C:/Franck/workspace/"
 
