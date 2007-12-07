@@ -1,4 +1,4 @@
-/* $Id: Standard.kmt,v 1.16 2007-12-07 02:08:02 dvojtise Exp $ */
+/* $Id: Standard.kmt,v 1.17 2007-12-07 02:12:03 dvojtise Exp $ */
 /**
  * The root package. See the other packages if you want to browse the classes of Kermeta api.
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png">
@@ -25,9 +25,9 @@ require "kunit/kunit.kmt"
 
 require "utils/utils.kmt"
 
-require "utils/hashtable.kmt"
+//require "utils/hashtable.kmt"
 
-require "utils/stack.kmt"
+//require "utils/stack.kmt"
 
 require "io/std_io.kmt"
 
@@ -43,5 +43,5 @@ require "standard/java.kmt"
 
 require "ecore/ecore_compatibility.kmt"
 
-require "utils/StringBuffer.kmt"
+//require "utils/StringBuffer.kmt"
  
