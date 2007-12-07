@@ -40,8 +40,7 @@ class  BiteSizeOclTests  inherits TestCase
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
             ecoreFile := "platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/sample.ecore"
-            //de := DynamicExpression.new
-            //de.initializeDefaults
+
         end
         
         

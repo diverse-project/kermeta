@@ -12,12 +12,11 @@ package oclTests;
 
 
 require kermeta
-require "../../../someUnit/src/newUnit.kmt"
 require "BiteSizeOclTests.kmt" 
 require "SnackSizeOclTests.kmt" 
 require "StructuralOclTests.kmt"  
      
-using newUnit
+using kermeta::kunit
 
 class Main
 {
@@ -29,6 +28,6 @@ class Main
 		    suite.addAllTestCasesFrom(SnackSizeOclTests)
 		    stdio.write(suite.tests.size.toString)
     		testRunner.runTest(suite)
-            testRunner.printLogs
+            testRunner.printTestResult
   	  end
 }

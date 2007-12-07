@@ -1,4 +1,4 @@
-/* $Id: StructuralOclTests.kmt,v 1.9 2007-12-07 04:33:49 ffleurey Exp $
+/* $Id: StructuralOclTests.kmt,v 1.10 2007-12-07 04:55:50 ffleurey Exp $
  * Creation date: March 6, 2007
  * License:
  * Copyright:
@@ -22,24 +22,21 @@ using ocl2kmt
 
 class  StructuralOclTests  inherits TestCase
 {
-	attribute repository: EMFRepository
+    attribute repository: EMFRepository
     attribute helper : OCLHelpers::OCLHelper
-    attribute model : Set<Object> 
-    
-    attribute parsedOclURI: String
-    attribute parsedOcl : Resource
-    attribute metamodel: Resource
-    reference ecoreHelper : EcoreHelpers::EcoreHelper
-    reference mhelper : EcoreHelpers::EcoreHelper
     attribute visitor :Ocl2kmtVisitor 
+    attribute parsedOCL : Set<Object> 
+    attribute ecoreFile: String
 	//attribute de : DynamicExpression 
 
 				    
 	method setUp() is
 		do
-			repository := EMFRepository.new		
-			helper := OCLHelpers::OCLHelper.new
-	    	visitor := Ocl2kmtVisitor.new
+			repository := EMFRepository.new        
+            helper := OCLHelpers::OCLHelper.new
+            visitor := Ocl2kmtVisitor.new
+            ecoreFile := "platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/company.ecore"
+
 	    	
 			//de := DynamicExpression.new
 			//de.initializeDefaults
@@ -47,25 +44,19 @@ class  StructuralOclTests  inherits TestCase
 		
 	 operation visitOclXmi(filename: String): String is
         do
-            
-              
-	     	parsedOcl  := repository.getResource(parsedOclURI)
-	     	metamodel := repository.getResource("platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/company.ecore")
-            
-            var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl/model/" + filename + ".xmi"
+             var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl/model/" + filename + ".xmi"
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
-            var ecoreHelper: EcoreHelpers::EcoreHelper  init EcoreHelpers::EcoreHelper.new
-	     	ecoreHelper.setModel(metamodel) 
-            visitor.setEcoreHelper(ecoreHelper) 
+            visitor.setEcoreHelper(EcoreHelpers::EcoreHelper.new.loadMetamodel(ecoreFile))
+            parsedOCL  := helper.loadOCLModel(repository, sourceFileName)
+            helper.getPackageDeclaration(parsedOCL).accept(visitor)
+            result := io.s
+              
+	     	 
+            
             
 
-            
-            
-		    //visitor.("../../ocl/sample.ecore")
-            model  := helper.loadOCLModel(repository, sourceFileName)
-            helper.getPackageDeclaration(model).accept(visitor)
-            result := io.s
+    
         end
 		
 		

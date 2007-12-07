@@ -10,24 +10,31 @@
 package oclTests;
 
 require kermeta
-require "../../../someUnit/src/newUnit.kmt" 
 require "../transformations-dev/ocl2kmtVisitor.kmt" 
+require "../transformations-dev/EcoreHelper.kmt" 
+
 require "../helpers/OCLHelper.kmt"   
+
 
 //require "http://sample"
    
-using newUnit
+using kermeta::kunit
 using kermeta::standard
 using kermeta::persistence
-using kermeta::interpreter 
 using ocl2kmt
 
 class  SnackSizeOclTests  inherits TestCase
 {
+
     attribute repository: EMFRepository
     attribute helper : OCLHelpers::OCLHelper
     attribute visitor :Ocl2kmtVisitor 
-    attribute model : Set<Object> 
+    attribute parsedOCL : Set<Object> 
+    attribute ecoreFile: String
+
+
+
+
     attribute person : String 
     attribute company : String
                     
@@ -36,7 +43,9 @@ class  SnackSizeOclTests  inherits TestCase
             repository := EMFRepository.new        
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
-            visitor.initialize
+            //visitor.initialize
+            ecoreFile := "platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/company.ecore"
+            
             person := "Personnel::Person"
             company := "Business:Company"
         end
@@ -60,13 +69,18 @@ class  SnackSizeOclTests  inherits TestCase
         
     operation visitOclXmi(filename: String): String is
         do
-            var sourceFileName : String init "../../model/" + filename + ".xmi"
+        
+        
+        	
+            var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl/model/" + filename + ".xmi"
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
-            visitor.setMetamodelURI("../../ocl/company.ecore") 
-            model  := helper.loadOCLModel(repository, sourceFileName)
-            helper.getPackageDeclaration(model).accept(visitor)
+            visitor.setEcoreHelper(EcoreHelpers::EcoreHelper.new.loadMetamodel(ecoreFile))
+            parsedOCL  := helper.loadOCLModel(repository, sourceFileName)
+            helper.getPackageDeclaration(parsedOCL).accept(visitor)
             result := io.s
+        
+            
         end
         
       // boolean Simple test to get started
@@ -116,7 +130,7 @@ class  SnackSizeOclTests  inherits TestCase
             self.setTestMethodName("test" +nn)
             testRunner.runTest(self)
             if oneOff then
-                    testRunner.printLogs
+                    testRunner.printTestResult
             end
           end
       
@@ -135,7 +149,7 @@ class  SnackSizeOclTests  inherits TestCase
                 runOneTest(testRunner,s)
                 i := i + 1
             end
-            testRunner.printLogs
+            testRunner.printTestResult
           end
       
       operation main() : Void is 
@@ -143,7 +157,7 @@ class  SnackSizeOclTests  inherits TestCase
             var testRunner : TestRunner init TestRunner.new
 		    var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(SnackSizeOclTests)
     		testRunner.runTest(suite)
-            testRunner.printLogs
+            testRunner.printTestResult
       end    
       
 }

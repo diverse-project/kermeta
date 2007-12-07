@@ -1,4 +1,4 @@
-/* $Id: assert.kmt,v 1.5 2007-11-22 08:53:56 ftanguy Exp $
+/* $Id: assert.kmt,v 1.6 2007-12-07 04:59:28 ffleurey Exp $
  * Creation date: May 29, 2007
  * License:
  * Copyright:
@@ -62,6 +62,45 @@ abstract class AbstractFallible
 	/** process the two given string and react if they are not equal */ 
  	operation assertEqual(expected: String, actual: String): Void is
 		abstract
+
+  /**
+   * Log a failure if the two strings are not identical modulo-white-space
+   */
+ 	operation assertSimilar(expected: String, actual: String): Void is
+		do	
+			expected := distil(expected)
+			actual := distil(actual)
+			assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual\t:[" + actual + "]")
+		end
+		
+	/** 
+	 ** reduces all runs of white-space to a single space character
+	 **/
+	operation distil(s: String): String is
+		do
+			result := ""
+			var white: Boolean init false
+			from
+				var i : Integer init 0
+			until
+				i == s.size
+			loop
+				var c: String init s.elementAt(i).toString
+				if " \n\t".indexOf(c) >= 0 then
+					if not white then
+						white : = true
+						result := result +" "
+					end
+				else
+					result := result + c
+					if white then
+						white : = false
+					end
+				end
+				i := i + 1
+			end
+		end
+
 
 }
 

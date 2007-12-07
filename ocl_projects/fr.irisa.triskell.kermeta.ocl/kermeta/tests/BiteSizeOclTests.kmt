@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.20 2007-12-07 04:33:49 ffleurey Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.21 2007-12-07 04:55:51 ffleurey Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -40,8 +40,7 @@ class  BiteSizeOclTests  inherits TestCase
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
             ecoreFile := "platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/sample.ecore"
-            //de := DynamicExpression.new
-            //de.initializeDefaults
+
         end
         
         

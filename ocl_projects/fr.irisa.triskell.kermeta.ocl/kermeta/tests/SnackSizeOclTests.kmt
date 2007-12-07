@@ -1,4 +1,4 @@
-/* $Id: SnackSizeOclTests.kmt,v 1.3 2007-12-07 04:33:49 ffleurey Exp $
+/* $Id: SnackSizeOclTests.kmt,v 1.4 2007-12-07 04:55:51 ffleurey Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -10,7 +10,6 @@
 package oclTests;
 
 require kermeta
-//require "../../../someUnit/src/newUnit.kmt" 
 require "../transformations-dev/ocl2kmtVisitor.kmt" 
 require "../transformations-dev/EcoreHelper.kmt" 
 
@@ -27,15 +26,15 @@ using ocl2kmt
 class  SnackSizeOclTests  inherits TestCase
 {
 
-	attribute parsedOclURI: String
-    attribute parsedOcl : Resource
-    attribute metamodel: Resource
-    reference ecoreHelper : EcoreHelpers::EcoreHelper
-    reference mhelper : EcoreHelpers::EcoreHelper
     attribute repository: EMFRepository
     attribute helper : OCLHelpers::OCLHelper
     attribute visitor :Ocl2kmtVisitor 
-    attribute model : Set<Object> 
+    attribute parsedOCL : Set<Object> 
+    attribute ecoreFile: String
+
+
+
+
     attribute person : String 
     attribute company : String
                     
@@ -45,6 +44,8 @@ class  SnackSizeOclTests  inherits TestCase
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
             //visitor.initialize
+            ecoreFile := "platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/company.ecore"
+            
             person := "Personnel::Person"
             company := "Business:Company"
         end
@@ -68,18 +69,18 @@ class  SnackSizeOclTests  inherits TestCase
         
     operation visitOclXmi(filename: String): String is
         do
-            parsedOcl  := repository.getResource(parsedOclURI)
-	     	metamodel := repository.getResource("platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/company.ecore")
-            
+        
+        
+        	
             var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl/model/" + filename + ".xmi"
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
-            var ecoreHelper: EcoreHelpers::EcoreHelper  init EcoreHelpers::EcoreHelper.new
-	     	ecoreHelper.setModel(metamodel) 
-            visitor.setEcoreHelper(ecoreHelper) 
-            model  := helper.loadOCLModel(repository, sourceFileName)
-            helper.getPackageDeclaration(model).accept(visitor)
+            visitor.setEcoreHelper(EcoreHelpers::EcoreHelper.new.loadMetamodel(ecoreFile))
+            parsedOCL  := helper.loadOCLModel(repository, sourceFileName)
+            helper.getPackageDeclaration(parsedOCL).accept(visitor)
             result := io.s
+        
+            
         end
         
       // boolean Simple test to get started

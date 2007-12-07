@@ -34,13 +34,13 @@ class Main
     
 	operation main() : Void is do 
             var filename: String init "74"
-            var sourceFileName : String init "../../ocl/" + filename + ".xmi"
+            var sourceFileName : String init "platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/" + filename + ".xmi"
             repository := EMFRepository.new        
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
             ecoreHelper := EcoreHelper.new
             parsedOCL  := helper.loadOCLModel(repository, sourceFileName)
-            ecoreHelper.setModel( repository.getResource("../../ocl/sample.ecore") )
+            ecoreHelper.setModel( repository.getResource("platform:/plugin/fr.irisa.triskell.kermeta.ocl/ocl/sample.ecore") )
           
             var io : StringWriter init StringWriter.new
             visitor.setIo(io)
