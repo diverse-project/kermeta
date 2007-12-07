@@ -32,7 +32,7 @@ class FSM
 	
 	property readonly ownedTransition : OrderedSet<Transition>
 		getter is do
-			var seqTransition : Sequence<Set<Transition>>
+			var seqTransition : Sequence<OrderedSet<Transition>>
 			seqTransition := self.ownedState.collect{ st | st.outgoingTransition}
 			result := AutomatonHelper.new.seq1ToSet(seqTransition)
 		end
@@ -114,8 +114,8 @@ class FSM
 class State {
 	attribute name : String
 	reference owningFSM : FSM[1..1]#ownedState
-	attribute outgoingTransition : set Transition[0..*]#source
-	reference incomingTransition : set Transition[0..*]#target
+	attribute outgoingTransition : oset Transition[0..*]#source
+	reference incomingTransition : oset Transition[0..*]#target
 	
 	// Declaration of the invariant : deterministicTransition
 	inv deterministicTransition is
@@ -194,7 +194,7 @@ class AutomatonHelper
     	iseq.each { n | if n != void and not result.contains(n) then result.add(n) end	}
     end
     
-    operation seq1ToSet<G>( iseq : Sequence<Set<G>> ) : OrderedSet<G> is do
+    operation seq1ToSet<G>( iseq : Sequence<OrderedSet<G>> ) : OrderedSet<G> is do
     	result := OrderedSet<G>.new
     	iseq.each{ a | 
     		a.each { n | if n != void and not result.contains(n) then result.add(n) end	}

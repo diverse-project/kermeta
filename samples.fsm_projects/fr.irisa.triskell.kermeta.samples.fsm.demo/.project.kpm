@@ -81,7 +81,7 @@
   <events name="open"/>
   <events name="update"/>
   <events name="close"/>
-  <units rules="//@rules.0" value="/fr.irisa.triskell.kermeta.samples.fsm.demo"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/.project"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/.project.kpm"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/fsm.demo.checkInvariants.launch"/>
@@ -89,29 +89,29 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/fsm.demo.loaderFsm.launch"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/fsm.demo.loaderFsm4prepost.launch"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/fsm.demo.minimization.launch"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/kermeta/fsm.gen.km"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="2007-12-04T18:56:12.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/kermeta/fsm.gen.km"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/kermeta/fsm.gen.kmdi"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/kermeta/fsm.gen.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-04T18:56:12.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/kermeta/fsm.gen.kmt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/kermeta/fsm.kmdi"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T01:33:43.576+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/kermeta/fsm.kmt" dependents="//@units.13/@dependencies.0 //@units.14/@dependencies.0 //@units.15/@dependencies.0 //@units.16/@dependencies.0"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T01:19:17.233+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/checkInvariants.kmt">
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T04:59:37.717+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/kermeta/fsm.kmt" dependents="//@units.13/@dependencies.0 //@units.14/@dependencies.0 //@units.15/@dependencies.0 //@units.16/@dependencies.0"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T01:40:58.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/checkInvariants.kmt">
     <dependencies type="//@ruleTypes.0" from="//@units.13" to="//@units.12"/>
     <dependencies type="//@ruleTypes.0" from="//@units.13" to="//@units.15"/>
   </units>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T01:19:33.030+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/determinization.kmt">
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T01:40:58.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/determinization.kmt">
     <dependencies type="//@ruleTypes.0" from="//@units.14" to="//@units.12"/>
   </units>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T01:37:05.326+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/fsmLauncher.kmt" dependents="//@units.13/@dependencies.1">
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T01:40:58.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/fsmLauncher.kmt" dependents="//@units.13/@dependencies.1">
     <dependencies type="//@ruleTypes.0" from="//@units.15" to="//@units.12"/>
   </units>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T01:37:00.748+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/minimization.kmt">
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T01:40:58.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/minimization.kmt">
     <dependencies type="//@ruleTypes.0" from="//@units.16" to="//@units.12"/>
   </units>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsm.ecoredi"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsmHoriz.ecoredi"/>
-  <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsmStatic.ecore"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-01-15T17:11:49.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsmStatic.ecore"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsmStatic.ecoredi"/>
-  <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsmToComplete.ecore"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2006-06-13T13:13:16.000+0200" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/fsmToComplete.ecore"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/metamodels/readme.fsm.ecoredi.txt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/models/complextodet.fsm"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/models/complextodet.fsmdi"/>
@@ -123,14 +123,14 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/models/sample1.fsmdi"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/models/sample1postv.fsm"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/models/sample1postv.fsmdi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/readme.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/zip_build.xml"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/models/samplerun.fsm"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/models/samplerun.fsmdi"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/models/sampletodeterminize.fsm"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/models/sampletodeterminize.fsmdi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/readme.txt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/sintaks/FsmDemo.sts"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/sintaks/HelloWorld-En.txt"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/zip_build.xml"/>
   <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/.bin/checkInvariantsfsmfsmLauncher.km"/>
   <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/.bin/determinizationfsm.km"/>
   <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples.fsm.demo/.bin/fsmLauncherfsm.km"/>

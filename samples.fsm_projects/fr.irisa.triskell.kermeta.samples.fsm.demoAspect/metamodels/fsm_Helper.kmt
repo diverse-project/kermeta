@@ -1,4 +1,4 @@
-/* $Id: fsm_Helper.kmt,v 1.4 2007-12-07 00:03:23 bmorin Exp $
+/* $Id: fsm_Helper.kmt,v 1.5 2007-12-07 04:06:02 bmorin Exp $
  * Project    : fr.irisa.triskell.samples.fsm.demoAspect
  * File       : fsmmodel.kmt
  * License    : EPL
@@ -30,7 +30,7 @@ class FSM
 	
 	property readonly ownedTransition : OrderedSet<Transition>
 		getter is do
-			var seqTransition : Sequence<Set<Transition>>
+			var seqTransition : Sequence<OrderedSet<Transition>>
 			seqTransition := self.ownedState.collect{ st | st.outgoingTransition}
 			result := AutomatonHelper.new.seq1ToSet(seqTransition)
 		end
@@ -71,7 +71,7 @@ class AutomatonHelper
     	iseq.each { n | if n != void and not result.contains(n) then result.add(n) end	}
     end
     
-    operation seq1ToSet<G>( iseq : Sequence<Set<G>> ) : OrderedSet<G> is do
+    operation seq1ToSet<G>( iseq : Sequence<OrderedSet<G>> ) : OrderedSet<G> is do
     	result := OrderedSet<G>.new
     	iseq.each{ a | 
     		a.each { n | if n != void and not result.contains(n) then result.add(n) end	}
