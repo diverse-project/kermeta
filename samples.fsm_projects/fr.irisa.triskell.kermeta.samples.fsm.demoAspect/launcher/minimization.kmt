@@ -1,4 +1,4 @@
-/* $Id: minimization.kmt,v 1.4 2007-12-06 23:22:54 bmorin Exp $
+/* $Id: minimization.kmt,v 1.5 2007-12-07 00:03:22 bmorin Exp $
  * Project    : fr.irisa.triskell.kermeta.samples.fsm.demoAspect
  * File       : minimization.kmt
  * License    : EPL
@@ -40,9 +40,10 @@ class Minimization
 	   	helper := AutomatonHelper.new 
 		//input := Sampler.new.createSampleM1() // "../models/sampleM1min.automaton"
 		
-		input := helper.ask_emfmodel("Enter the EMF model of the automaton to minimize :")
-		output_path := stdio.read("Enter the output file where to store the minimal automaton :") 
-
+		input := helper.ask_emfmodel("Enter the EMF model of the automaton to minimize: ")
+		output_path := stdio.read("Enter the output file where to store the minimal automaton:\nplatform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/models/") 
+		output_path := "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/models/"+output_path
+		
 		stdio.writeln("input:"+ input.isVoid.toString + "tostring : "+ input.toString)
 
 	   	// Initialize equivalent_pairs and possible all_input_pairs

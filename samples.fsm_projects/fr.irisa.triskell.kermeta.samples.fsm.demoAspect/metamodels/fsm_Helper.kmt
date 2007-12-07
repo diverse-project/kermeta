@@ -1,4 +1,4 @@
-/* $Id: fsm_Helper.kmt,v 1.3 2007-12-06 23:13:37 bmorin Exp $
+/* $Id: fsm_Helper.kmt,v 1.4 2007-12-07 00:03:23 bmorin Exp $
  * Project    : fr.irisa.triskell.samples.fsm.demoAspect
  * File       : fsmmodel.kmt
  * License    : EPL
@@ -155,10 +155,11 @@ class AutomatonHelper
     end
     
     operation ask_emfmodel(prompt : String) : FSM is do
-    	var file : String init stdio.read(prompt)
-    	stdio.writeln("\n"+file)
+    	var file : String init stdio.read(prompt+"\nplatform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/models/")
+    	file := "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demoAspect/models/"+file 
+    	stdio.writeln(file)
     	var r : EMFRepository init EMFRepository.new
-    	result := loadEMFAutomaton(r, file, "../metamodels/fsm.ecore")
+    	result := loadEMFAutomaton(r, file, "http://www.kermeta.org/fsm")
     end
     
     /** Operation that tries to check the validity of the given automaton 
