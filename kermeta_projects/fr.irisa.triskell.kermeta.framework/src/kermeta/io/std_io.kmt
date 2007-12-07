@@ -1,6 +1,5 @@
 /**
  * Contains standard input/output related classes. 
- * <img src="./figures/std_io_view.png">
  */
 @uri "http://www.kermeta.org/kermeta/io"
 package kermeta::io;
@@ -21,6 +20,7 @@ using kermeta::language::structure
  
 /**
  * An implementation of StdIO : standard input/output
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png">
  */
 class StdIO
 {

@@ -1,14 +1,14 @@
-/* $Id: Standard.kmt,v 1.14 2007-11-22 08:53:56 ftanguy Exp $ */
+/* $Id: Standard.kmt,v 1.15 2007-12-07 01:54:08 fmunoz Exp $ */
 /**
  * The root package. See the other packages if you want to browse the classes of Kermeta api.
- * <img src="./figures/kermeta_packages.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png">
  */
 @uri "http://www.kermeta.org/kermeta"
 package kermeta;
 
 /*
- This unit loads kermeta standard library
-*/
+ * This unit loads kermeta standard library
+ */
 
 // this imports the standard types and
 // the definition of the language
@@ -41,6 +41,5 @@ require "standard/java.kmt"
 
 require "ecore/ecore_compatibility.kmt"
 
-// new StringBuffer data Type
 require "utils/StringBuffer.kmt"
  

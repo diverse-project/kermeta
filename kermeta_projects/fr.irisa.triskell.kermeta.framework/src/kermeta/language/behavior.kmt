@@ -1,4 +1,4 @@
-/* $Id: behavior.kmt,v 1.25 2007-11-22 08:53:55 ftanguy Exp $
+/* $Id: behavior.kmt,v 1.26 2007-12-07 01:58:11 fmunoz Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : behavior.kmt
  * License   : EPL
@@ -17,7 +17,8 @@
  * of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta 
  * metamodel, viewed as a model.
  * You can also find some information about the behavior package here : <a href="http://www.kermeta.org/documents/manual/html.single">KermetaManual</a>
- * <img src="./figures/language_behavior_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_package.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_behavior_visitable_package.png">
  */
   @uri "http://www.kermeta.org/kermeta/language/behavior"
 package kermeta::language::behavior;

@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.41 2007-12-07 01:15:09 fmunoz Exp $
+// $Id: primitive_types.kmt,v 1.42 2007-12-07 01:53:40 fmunoz Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -10,7 +10,7 @@
 
 /**
  * Defines primitive types 
- * <img src="./figures/primitive_types_view.png">
+ * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/primitive_types_view.png">
  */
  @uri "http://www.kermeta.org/kermeta/standard"
  package kermeta::standard; 
