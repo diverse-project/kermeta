@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.18 2007-12-07 00:09:31 gperroui Exp $
+/* $Id: KermetaRaisedException.java,v 1.19 2007-12-07 03:44:46 gperroui Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -41,31 +41,7 @@ public class KermetaRaisedException extends Error {
     
     protected ExpressionInterpreter interpreter;
     
-    /**
-     * Constructor 
-     * Developer should then use the setContext method on this object in order to fill the readable stack trace
-     * If possible, developer should use the other constructor, otherwise he should try to build the context later
-     */
-    public KermetaRaisedException(RuntimeObject raised_object, ExpressionInterpreter theInterpreter)
-    {
-        super("kermeta exception : " + raised_object );
-        interpreter = theInterpreter;
-        
-        this.raised_object = raised_object;
-    }
-  
-    /**
-     * Constructor 
-     * keeps an existing java exception as a cause
-     * Developer should then use the setContext method on this object in order to fill the readable stack trace
-     */
-    public KermetaRaisedException(RuntimeObject raised_object, ExpressionInterpreter theInterpreter, Throwable t)
-    {
-    	super("kermeta exception : " + raised_object, t );
-        interpreter = theInterpreter;
-        
-        this.raised_object = raised_object;
-    }
+    
     
     /**
      * 
@@ -254,10 +230,11 @@ public class KermetaRaisedException extends Error {
     	fr.irisa.triskell.kermeta.runtime.language.Object.set(raised_object, ro_property2, rovalue2);
 
     	return new KermetaRaisedException( raised_object, 
-				interpreter,
-				javaCause);
+    			(RuntimeObject)javaCause,
+    			interpreter);
     }
-    /**
+    
+    /**		
      * Helper method that create an exception for Kermeta 
      * @param kermetaExceptionName name of the created exception
      * @param exceptionMessage message associated to the exception
