@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KStatusItemProvider.java,v 1.3 2007-11-28 09:23:43 cfaucher Exp $
+ * $Id: KStatusItemProvider.java,v 1.4 2007-12-10 13:57:11 cfaucher Exp $
  */
 package org.kermeta.trek.provider;
 
@@ -134,9 +134,16 @@ public class KStatusItemProvider
 	@Override
 	public String getText(Object object) {
 		String label = ((KStatus)object).getKey();
+		String progress = "not OK";
+		if ( ((KStatus)object).getProgress()>0 ) {
+			progress = "in progress";
+		}
+		if ( ((KStatus)object).getProgress()==100 ) {
+			progress = "OK";
+		}
 		return label == null || label.length() == 0 ?
 			getString("_UI_KStatus_type") :
-			label + " " + ((KStatus)object).getProgress() + " %";
+			label + " " + progress;
 	}
 
 	/**
