@@ -253,28 +253,28 @@
 	
 	<!-- Cleaning targets -->
     <target name="clean">
-        <delete dir="${project.base.dir}/build" failonerror="false" quiet="true" />
-        <mkdir dir="${project.base.dir}/build" />
+        <delete dir="${build.dir}" failonerror="false" quiet="true" />
+        <mkdir dir="${build.dir}" />
     </target>
 	<target name="clean.fop">
-	        <delete dir="${project.base.dir}/build/pdf.fop/${project.name}" failonerror="false" quiet="true" />
-	        <mkdir dir="${project.base.dir}/build/pdf.fop" />
+	        <delete dir="${build.dir}/pdf.fop/${project.name}" failonerror="false" quiet="true" />
+	        <mkdir dir="${build.dir}/pdf.fop" />
 	</target>
 	<target name="clean.html.chunked">
-	        <delete dir="${project.base.dir}/build/html.chunked/${project.name}" failonerror="false" quiet="true" />
-	        <mkdir dir="${project.base.dir}/build/html.chunked" />
+	        <delete dir="${build.dir}/html.chunked/${project.name}" failonerror="false" quiet="true" />
+	        <mkdir dir="${build.dir}/html.chunked" />
 	</target>
 	<target name="clean.html.single">
-	        <delete dir="${project.base.dir}/build/html.single/${project.name}" failonerror="false" quiet="true" />
-	        <mkdir dir="${project.base.dir}/build/html.single" />
+	        <delete dir="${build.dir}/html.single/${project.name}" failonerror="false" quiet="true" />
+	        <mkdir dir="${build.dir}/html.single" />
 	</target>
 	<target name="clean.html.help">
-	        <delete dir="${project.base.dir}/build/html.help/${project.name}" failonerror="false" quiet="true" />
-	        <mkdir dir="${project.base.dir}/build/html.help" />
+	        <delete dir="${build.dir}/html.help/${project.name}" failonerror="false" quiet="true" />
+	        <mkdir dir="${build.dir}/html.help" />
 	</target>
 	<target name="clean.eclipse.help">
-	        <delete dir="${project.base.dir}/build/eclipse.help/${project.name}" failonerror="false" quiet="true" />
-	        <mkdir dir="${project.base.dir}/build/eclipse.help" />
+	        <delete dir="${build.dir}/eclipse.help/${project.name}" failonerror="false" quiet="true" />
+	        <mkdir dir="${build.dir}/eclipse.help" />
 	</target>
 	
 </project>
