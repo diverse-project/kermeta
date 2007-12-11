@@ -1,6 +1,6 @@
-/*$Id: InitializeTrekSummary.java,v 1.4 2007-12-11 18:19:12 cfaucher Exp $
+/*$Id: InitializeTrekProgress.java,v 1.1 2007-12-11 18:19:12 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
-* File : 	InitializeTrekSummary.java
+* File : 	InitializeTrekProgress.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
@@ -10,22 +10,27 @@
 
 package org.kermeta.compiler.trek.ui.popup.actions;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.kermeta.compiler.trek.ui.KCompilerConstants;
 
 
-public class InitializeTrekSummary implements IObjectActionDelegate {
+public class InitializeTrekProgress implements IObjectActionDelegate {
 
 	protected StructuredSelection currentSelection;
 
@@ -34,7 +39,7 @@ public class InitializeTrekSummary implements IObjectActionDelegate {
 	/**
 	 * Constructor for Action1.
 	 */
-	public InitializeTrekSummary() {
+	public InitializeTrekProgress() {
 		super();
 	}
 
@@ -49,7 +54,7 @@ public class InitializeTrekSummary implements IObjectActionDelegate {
 	 */
 	public void run(IAction action) {
 		for(IFolder folder : folders) {
-			createSummaryTextFile(folder);
+			createProgressTextFile(folder);
 		}
 	}
 
@@ -75,13 +80,13 @@ public class InitializeTrekSummary implements IObjectActionDelegate {
 	 * 
 	 * @param folder
 	 */
-	private void createSummaryTextFile(IFolder folder)
+	private void createProgressTextFile(IFolder folder)
     {
 		try {
 			for(IResource subResource : folder.members(false) ) {
 				if(subResource instanceof IFolder) {
 					IFolder subFolder = (IFolder) subResource;
-					InitializeTrekLocalSummary.createSummaryTextFile(subFolder);
+					InitializeTrekLocalProgress.createProgressTextFile(subFolder);
 				}
 			}
 		} catch (CoreException e) {

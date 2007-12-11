@@ -1,6 +1,6 @@
-/*$Id: InitializeTrekSummary.java,v 1.4 2007-12-11 18:19:12 cfaucher Exp $
+/*$Id: InitializeTrekLocalSummary.java,v 1.1 2007-12-11 18:19:12 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
-* File : 	InitializeTrekSummary.java
+* File : 	InitializeTrekLocalSummary.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
@@ -10,22 +10,26 @@
 
 package org.kermeta.compiler.trek.ui.popup.actions;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.kermeta.compiler.trek.ui.KCompilerConstants;
 
 
-public class InitializeTrekSummary implements IObjectActionDelegate {
+public class InitializeTrekLocalSummary implements IObjectActionDelegate {
 
 	protected StructuredSelection currentSelection;
 
@@ -34,7 +38,7 @@ public class InitializeTrekSummary implements IObjectActionDelegate {
 	/**
 	 * Constructor for Action1.
 	 */
-	public InitializeTrekSummary() {
+	public InitializeTrekLocalSummary() {
 		super();
 	}
 
@@ -73,17 +77,15 @@ public class InitializeTrekSummary implements IObjectActionDelegate {
 	
 	/**
 	 * 
-	 * @param folder
+	 * @param subFolder
 	 */
-	private void createSummaryTextFile(IFolder folder)
+	protected static void createSummaryTextFile(IFolder subFolder)
     {
 		try {
-			for(IResource subResource : folder.members(false) ) {
-				if(subResource instanceof IFolder) {
-					IFolder subFolder = (IFolder) subResource;
-					InitializeTrekLocalSummary.createSummaryTextFile(subFolder);
-				}
-			}
+					IFile summary_file = ResourcesPlugin.getWorkspace().getRoot().getFile(subFolder.getFullPath().append("/" + KCompilerConstants.SUMMARY_PREFIX + subFolder.getName()).addFileExtension(KCompilerConstants.SUMMARY_EXT));
+					if( !summary_file.exists() ) {
+						summary_file.create(new ByteArrayInputStream("".getBytes()), true, new NullProgressMonitor());
+					}
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

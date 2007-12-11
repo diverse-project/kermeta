@@ -1,4 +1,4 @@
-/*$Id: InitializeUseCasesModel.java,v 1.3 2007-12-03 10:48:57 cfaucher Exp $
+/*$Id: InitializeUseCasesModel.java,v 1.4 2007-12-11 18:19:12 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeUseCasesModel.java
 * License : EPL
@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -112,9 +113,13 @@ public class InitializeUseCasesModel implements IObjectActionDelegate {
 		aUseCase.setName(CodeGenUtil.capName(folder.getName().substring(5)));
 		aUseCase.setId(folder.getName());
 		aUseCase.setSummary(TrekModelHelper.getSummaryContent(folder));
-		aUseCase.getStatus().add(TrekModelHelper.newStatus(KCompilerConstants.STATUS_DESIGN,KCompilerConstants.PROGRESS_OK));
-		aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_JAVA,KCompilerConstants.PROGRESS_OK));
-		aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_KERMETA,KCompilerConstants.PROGRESS_NOK));
+		
+		Map<String, Integer> map = TrekModelHelper.getProgressContent(folder);
+		
+		aUseCase.getStatus().add(TrekModelHelper.newStatus(KCompilerConstants.STATUS_DESIGN, map.get(KCompilerConstants.STATUS_DESIGN)));
+		aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_JAVA, map.get("Impl_" + KCompilerConstants.STATUS_JAVA)));
+		aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_KERMETA, map.get("Impl_" + KCompilerConstants.STATUS_KERMETA)));
+		
 		return aUseCase;
     }
 

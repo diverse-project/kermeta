@@ -10,12 +10,11 @@
             objectClass="org.eclipse.core.resources.IFolder">
          <menu
 	         id="org.kermeta.compiler.trek.subMenu"
-	         label="Trek for K Compiler"
+	         label="Trek for Kermeta Compiler"
 	         path="additions">
-      		<separator name="summary"/>
-        <separator
-              name="trek_model">
-        </separator>
+      	 <separator name="summary"/>
+         <separator name="progress"/>
+         <separator name="trek_model"/>
 		 </menu>
          <action
                class="org.kermeta.compiler.trek.ui.popup.actions.InitializeTestCasesModel"
@@ -34,20 +33,52 @@
                menubarPath="org.kermeta.compiler.trek.subMenu/trek_model">
          </action>
          <action
-               class="org.kermeta.compiler.trek.ui.popup.actions.InitializeTrekSummary"
-               enablesFor="+"
-               icon="icons/add.png"
-               id="org.kermeta.compiler.trek.ui.InitializeTrekSummary"
-               label="Initialize the summary files for the compilation doc"
-               menubarPath="org.kermeta.compiler.trek.subMenu/summary">
-         </action>
-         <action
                class="org.kermeta.compiler.trek.ui.popup.actions.DeleteTrekSummary"
                enablesFor="+"
                icon="icons/delete.png"
                id="org.kermeta.compiler.trek.ui.DeleteTrekSummary"
                label="Delete the summary files for the compilation doc"
                menubarPath="org.kermeta.compiler.trek.subMenu/summary">
+         </action>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.InitializeTrekLocalSummary"
+               enablesFor="+"
+               icon="icons/add.png"
+               id="org.kermeta.compiler.trek.ui.InitializeTrekLocalSummary"
+               label="Initialize the summary files directly inside the selected folder(s)"
+               menubarPath="org.kermeta.compiler.trek.subMenu/summary">
+         </action>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.InitializeTrekSummary"
+               enablesFor="+"
+               icon="icons/add.png"
+               id="org.kermeta.compiler.trek.ui.InitializeTrekSummary"
+               label="Initialize the summary files inside the subfolder(s) of the selected folder(s)"
+               menubarPath="org.kermeta.compiler.trek.subMenu/summary">
+         </action>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.DeleteTrekProgress"
+               enablesFor="+"
+               icon="icons/delete.png"
+               id="org.kermeta.compiler.trek.ui.DeleteTrekProgress"
+               label="Delete the progress files for the compilation doc"
+               menubarPath="org.kermeta.compiler.trek.subMenu/progress">
+         </action>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.InitializeTrekLocalProgress"
+               enablesFor="+"
+               icon="icons/add.png"
+               id="org.kermeta.compiler.trek.ui.InitializeTrekLocalProgress"
+               label="Initialize the progress files directly inside the selected folder(s)"
+               menubarPath="org.kermeta.compiler.trek.subMenu/progress">
+         </action>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.InitializeTrekProgress"
+               enablesFor="+"
+               icon="icons/add.png"
+               id="org.kermeta.compiler.trek.ui.InitializeTrekProgress"
+               label="Initialize the progress files inside the subfolder(s) of the selected folder(s)"
+               menubarPath="org.kermeta.compiler.trek.subMenu/progress">
          </action>
       </objectContribution>
    </extension>
@@ -64,20 +95,20 @@
 	         path="additions">
       		<separator name="mapping"/>
 		 </menu>
+		 <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.DeleteTestCasesUseCasesMapping"
+               enablesFor="+"
+               icon="icons/delete.png"
+               id="org.kermeta.trek.ui.DeleteTestCasesUseCasesMapping"
+               label="Delete the Mapping between TestCases and UseCases"
+               menubarPath="org.kermeta.compiler.trek.subMenu/mapping">
+         </action>
          <action
                class="org.kermeta.compiler.trek.ui.popup.actions.AssignTestCasesToUseCases"
                enablesFor="+"
                icon="icons/add.png"
                id="org.kermeta.trek.ui.AssignTestCasesToUseCases"
                label="Assign Test Cases to Use Cases"
-               menubarPath="org.kermeta.compiler.trek.subMenu/mapping">
-         </action>
-         <action
-               class="org.kermeta.compiler.trek.ui.popup.actions.DeleteTestCasesUseCasesMapping"
-               enablesFor="+"
-               icon="icons/delete.png"
-               id="org.kermeta.trek.ui.DeleteTestCasesUseCasesMapping"
-               label="Delete the Mapping between TestCases and UseCases"
                menubarPath="org.kermeta.compiler.trek.subMenu/mapping">
          </action>
       </objectContribution>
