@@ -1,4 +1,4 @@
-/* $Id: trek2docbook.kmt,v 1.1 2007-12-11 15:42:03 cfaucher Exp $
+/* $Id: trek2docbook.kmt,v 1.2 2007-12-11 20:12:47 cfaucher Exp $
  * Creation date: July 26, 2007
  * License:
  * Copyright:
@@ -50,7 +50,7 @@ class Main
 	
 	operation main() : Void is do
 	
-		var targetDir : String init "C:/eclipse3.3M5/eclipse/runtime-New_configuration2/fr.irisa.triskell.kermeta.documentation/src/docbook/"
+		var targetDir : String init "C:/eclipse3.3M5/eclipse/runtime-New_configuration2/org.kermeta.compiler.tests/doc/docbook/"
 		var useKaseModel : UseKaseModel init UseKaseModel.new
        	useKaseModel := load()
        	
