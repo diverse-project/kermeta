@@ -1,0 +1,11 @@
+package org::kermeta::compiler::trek2docbook::template;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class DOCBHeaderTemplate{
+operation generate():String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<!DOCTYPE book PUBLIC \"-//OASIS//DTD DocBook XML V4.4//EN\"\r\n\"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd\">\r\n<!-- $Id: header_template.docb.kmt,v 1.1 2007-12-11 15:42:03 cfaucher Exp $ -->\r\n<book lang=\"en-US\">")
+result := _res.toString
+end
+}

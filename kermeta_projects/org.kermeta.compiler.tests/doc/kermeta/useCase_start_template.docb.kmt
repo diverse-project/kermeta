@@ -1,0 +1,11 @@
+package org::kermeta::compiler::trek2docbook::template;
+require kermeta
+using kermeta::standard
+using kermeta::utils
+class DOCBKUseCaseTemplate_Start{
+operation generate():String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("<chapter>")
+result := _res.toString
+end
+}

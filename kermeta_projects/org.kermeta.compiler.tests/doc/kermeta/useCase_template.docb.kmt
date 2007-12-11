@@ -1,0 +1,27 @@
+package org::kermeta::compiler::trek2docbook::template;
+require kermeta
+require "http://www.kermeta.org/trek"
+using kermeta::standard
+using kermeta::utils
+using trek
+class DOCBKUseCaseTemplate{
+operation generate(uc:KUseCase):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append(" \r\n<section id=\"uc_")
+_res.append(uc.name)
+_res.append(".link\">\r\n    <title id=\"uc_")
+_res.append(uc.name)
+_res.append(".title.link\">")
+_res.append(uc.name)
+_res.append("</title>\r\n    ")
+if uc.shortSummary != void then
+_res.append("<para>")
+_res.append(uc.shortSummary)
+_res.append("</para>")
+end
+_res.append("\r\n    <para>")
+_res.append(uc.summary)
+_res.append("</para>")
+result := _res.toString
+end
+}

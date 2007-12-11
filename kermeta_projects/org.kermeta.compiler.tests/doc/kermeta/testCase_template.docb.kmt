@@ -1,0 +1,19 @@
+package org::kermeta::compiler::trek2docbook::template;
+require kermeta
+require "http://www.kermeta.org/trek"
+using kermeta::standard
+using kermeta::utils
+using trek
+class DOCBKTestCaseTemplate{
+operation generate(tc:KTestCase):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append(" \r\n<para/>\r\n<para><emphasis role=\"bold\">")
+_res.append(tc.name)
+_res.append("</emphasis> [")
+_res.append(tc.type.name)
+_res.append("]:</para>\r\n<para>")
+_res.append(tc.summary)
+_res.append("</para>\r\n<para/>")
+result := _res.toString
+end
+}

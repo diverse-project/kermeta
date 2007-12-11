@@ -1,0 +1,21 @@
+<%@ket
+	package="org::kermeta::compiler::trek2docbook::template"
+	require="http://www.kermeta.org/trek"
+	using="kermeta::language::structure"
+	using="trek"
+	class="DOCBCompilationProcessTemplate"
+	parameters=""
+%>
+<chapter>
+	<title>Compilation Process</title>
+	<section>
+		<title id="compilationProcess.title.link">Compilation process, step 1</title>
+		<para>
+		</para>
+		
+		
+		
+		
+		
+	</section>
+</chapter>

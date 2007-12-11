@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kpm:KPM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpm="http://kpm">
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.openProject"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.addMarkers"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.typecheck"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.constraintCheck"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.kmt2km"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.ecore2kmt"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.ket.ket2kmt"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.kmt"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.km"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.ecore"/>
+  <filters xsi:type="kpm:NameFilter" regex="/org.kermeta.compiler.tests/doc/templates/*.ket"/>
+  <filters xsi:type="kpm:NameFilter" regex="/org.kermeta.compiler.tests/doc/kermeta/*.kmt"/>
+  <rules event="//@events.0" name="Open Project" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:NullExpression"/>
+    </in>
+    <outs action="//@actions.0">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update KMT File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
+    </in>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.6">
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.1"/>
+    </outs>
+    <outs action="//@actions.4">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.5">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update KM File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.1"/>
+    </in>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update Ecore File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.2"/>
+    </in>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.2" name="Close KMT File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
+    </in>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Compile Kmtt for Ket" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.3"/>
+    </in>
+    <outs action="//@actions.8">
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.4"/>
+    </outs>
+  </rules>
+  <events name="open"/>
+  <events name="update"/>
+  <events name="close"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/input/kermeta/comp_runner_test001.simk"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T13:25:47.984+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/input/kermeta/comp_runner_test001.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/input/kermeta/comp_runner_test001.genmodel"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-30T17:38:18.010+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/input/kermeta/comp_runner_test001.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/java/comp_runner_test001/util/Comp_runner_test001Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/java/comp_runner_test001/util/Comp_runner_test001AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/java/comp_runner_test001/runner/Comp_runner_test001__Main__main2_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/java/comp_runner_test001/runner/Comp_runner_test001__Main__main1_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/java/comp_runner_test001/runner/Comp_runner_test001__Main__main0_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/java/comp_runner_test001/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/java/comp_runner_test001/impl/Comp_runner_test001PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/java/comp_runner_test001/impl/Comp_runner_test001FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/java/comp_runner_test001/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/java/comp_runner_test001/Comp_runner_test001Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/java/comp_runner_test001/Comp_runner_test001Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T13:26:31.618+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/ecore/comp_runner_test001.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/eclipse_launcher/comp_runner_test001.launch"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-18T16:46:14.234+0100" value="/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test001/input/kermeta/comp_primitiveType_test001.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test001/input/kermeta/comp_primitiveType_test001.genmodel"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-18T17:05:52.921+0100" value="/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test001/input/kermeta/comp_primitiveType_test001.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T16:04:32.188+0100" value="/org.kermeta.compiler.tests/unit_test/comp_new/test001/input/kermeta/comp_new_test001.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T13:44:15.625+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/test001/input/kermeta/comp_loop_test001.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/java/comp_loop_test001/util/Comp_loop_test001Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/java/comp_loop_test001/util/Comp_loop_test001AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/java/comp_loop_test001/runner/Comp_loop_test001__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/java/comp_loop_test001/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/java/comp_loop_test001/impl/Comp_loop_test001PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/java/comp_loop_test001/impl/Comp_loop_test001FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/java/comp_loop_test001/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/java/comp_loop_test001/Comp_loop_test001Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/java/comp_loop_test001/Comp_loop_test001Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T13:48:35.670+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/ecore/comp_loop_test001.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T14:16:39.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/input/kermeta/comp_lambdaExpression_test001.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/comp_lambdaExpression_test001/util/Comp_lambdaExpression_test001Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/comp_lambdaExpression_test001/util/Comp_lambdaExpression_test001AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/comp_lambdaExpression_test001/runner/Comp_lambdaExpression_test001__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/comp_lambdaExpression_test001/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/comp_lambdaExpression_test001/impl/Comp_lambdaExpression_test001PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/comp_lambdaExpression_test001/impl/Comp_lambdaExpression_test001FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/comp_lambdaExpression_test001/impl/AImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/comp_lambdaExpression_test001/helper/Main_3_Helper.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/comp_lambdaExpression_test001/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/comp_lambdaExpression_test001/Comp_lambdaExpression_test001Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/comp_lambdaExpression_test001/Comp_lambdaExpression_test001Factory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/comp_lambdaExpression_test001/A.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T14:15:16.749+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/ecore/comp_lambdaExpression_test001.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/eclipse_launcher/comp_lambdaExpression_test001.launch"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T13:54:22.492+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/input/kermeta/comp_javaStaticCall_test001.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/java/comp_javaStaticCall_test001/util/Comp_javaStaticCall_test001Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/java/comp_javaStaticCall_test001/util/Comp_javaStaticCall_test001AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/java/comp_javaStaticCall_test001/runner/Comp_javaStaticCall_test001__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/java/comp_javaStaticCall_test001/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/java/comp_javaStaticCall_test001/impl/Comp_javaStaticCall_test001PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/java/comp_javaStaticCall_test001/impl/Comp_javaStaticCall_test001FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/java/comp_javaStaticCall_test001/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/java/comp_javaStaticCall_test001/Comp_javaStaticCall_test001Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/java/comp_javaStaticCall_test001/Comp_javaStaticCall_test001Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T13:55:44.018+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/ecore/comp_javaStaticCall_test001.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-18T20:09:53.328+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/input/kermeta/comp_instanceOf_test001.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/comp_instanceOf_test001/util/Comp_instanceOf_test001Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/comp_instanceOf_test001/util/Comp_instanceOf_test001AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/comp_instanceOf_test001/runner/Comp_instanceOf_test001__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/comp_instanceOf_test001/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/comp_instanceOf_test001/impl/Comp_instanceOf_test001PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/comp_instanceOf_test001/impl/Comp_instanceOf_test001FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/comp_instanceOf_test001/impl/AImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/comp_instanceOf_test001/helper/Comp_instanceOf_test001Helper.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/comp_instanceOf_test001/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/comp_instanceOf_test001/Comp_instanceOf_test001Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/comp_instanceOf_test001/Comp_instanceOf_test001Factory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/comp_instanceOf_test001/A.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-18T17:42:11.828+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/ecore/comp_instanceOf_test001.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T11:23:06.290+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/input/kermeta/comp_initialization_test006.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/java/comp_initialization_test006/util/Comp_initialization_test006Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/java/comp_initialization_test006/util/Comp_initialization_test006AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/java/comp_initialization_test006/runner/Comp_initialization_test006__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/java/comp_initialization_test006/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/java/comp_initialization_test006/impl/Comp_initialization_test006PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/java/comp_initialization_test006/impl/Comp_initialization_test006FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/java/comp_initialization_test006/impl/AImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/java/comp_initialization_test006/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/java/comp_initialization_test006/Comp_initialization_test006Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/java/comp_initialization_test006/Comp_initialization_test006Factory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/java/comp_initialization_test006/A.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T11:25:22.055+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/ecore/comp_initialization_test006.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T11:17:30.835+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/input/kermeta/comp_initialization_test005.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/java/comp_initialization_test005/util/Comp_initialization_test005Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/java/comp_initialization_test005/util/Comp_initialization_test005AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/java/comp_initialization_test005/runner/Comp_initialization_test005__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/java/comp_initialization_test005/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/java/comp_initialization_test005/impl/Comp_initialization_test005PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/java/comp_initialization_test005/impl/Comp_initialization_test005FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/java/comp_initialization_test005/impl/AImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/java/comp_initialization_test005/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/java/comp_initialization_test005/Comp_initialization_test005Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/java/comp_initialization_test005/Comp_initialization_test005Factory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/java/comp_initialization_test005/A.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T11:19:08.570+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/ecore/comp_initialization_test005.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T11:02:41.110+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/input/kermeta/comp_initialization_test004.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/java/comp_initialization_test004/util/Comp_initialization_test004Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/java/comp_initialization_test004/util/Comp_initialization_test004AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/java/comp_initialization_test004/runner/Comp_initialization_test004__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/java/comp_initialization_test004/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/java/comp_initialization_test004/impl/Comp_initialization_test004PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/java/comp_initialization_test004/impl/Comp_initialization_test004FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/java/comp_initialization_test004/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/java/comp_initialization_test004/Comp_initialization_test004Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/java/comp_initialization_test004/Comp_initialization_test004Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T11:11:32.034+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/ecore/comp_initialization_test004.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T11:01:55.065+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/input/kermeta/comp_initialization_test003.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/java/comp_initialization_test003/util/Comp_initialization_test003Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/java/comp_initialization_test003/util/Comp_initialization_test003AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/java/comp_initialization_test003/runner/Comp_initialization_test003__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/java/comp_initialization_test003/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/java/comp_initialization_test003/impl/Comp_initialization_test003PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/java/comp_initialization_test003/impl/Comp_initialization_test003FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/java/comp_initialization_test003/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/java/comp_initialization_test003/Comp_initialization_test003Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/java/comp_initialization_test003/Comp_initialization_test003Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T11:10:16.033+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/ecore/comp_initialization_test003.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T10:59:56.429+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/input/kermeta/comp_initialization_test002.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/java/comp_initialization_test002/util/Comp_initialization_test002Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/java/comp_initialization_test002/util/Comp_initialization_test002AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/java/comp_initialization_test002/runner/Comp_initialization_test002__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/java/comp_initialization_test002/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/java/comp_initialization_test002/impl/Comp_initialization_test002PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/java/comp_initialization_test002/impl/Comp_initialization_test002FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/java/comp_initialization_test002/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/java/comp_initialization_test002/Comp_initialization_test002Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/java/comp_initialization_test002/Comp_initialization_test002Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T11:07:49.467+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/ecore/comp_initialization_test002.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T10:59:45.398+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/input/kermeta/comp_initialization_test001.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/java/comp_initialization_test001/util/Comp_initialization_test001Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/java/comp_initialization_test001/util/Comp_initialization_test001AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/java/comp_initialization_test001/runner/Comp_initialization_test001__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/java/comp_initialization_test001/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/java/comp_initialization_test001/impl/Comp_initialization_test001PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/java/comp_initialization_test001/impl/Comp_initialization_test001FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/java/comp_initialization_test001/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/java/comp_initialization_test001/Comp_initialization_test001Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/java/comp_initialization_test001/Comp_initialization_test001Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T11:06:20.027+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/ecore/comp_initialization_test001.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T14:21:20.794+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/input/kermeta/comp_containment_test001.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/util/Comp_containment_test001Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/util/Comp_containment_test001AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/impl/DImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/impl/Comp_containment_test001PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/impl/Comp_containment_test001FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/impl/CImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/impl/BImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/impl/AImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/D.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/Comp_containment_test001Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/Comp_containment_test001Factory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/C.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/B.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/comp_containment_test001/A.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T14:22:54.194+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/ecore/comp_containment_test001.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-06T11:27:15.915+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/input/kermeta/comp_conditional_test002.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/java/comp_conditional_test002/util/Comp_conditional_test002Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/java/comp_conditional_test002/util/Comp_conditional_test002AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/java/comp_conditional_test002/runner/Comp_conditional_test002__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/java/comp_conditional_test002/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/java/comp_conditional_test002/impl/Comp_conditional_test002PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/java/comp_conditional_test002/impl/Comp_conditional_test002FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/java/comp_conditional_test002/helper/Comp_conditional_test002Helper.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/java/comp_conditional_test002/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/java/comp_conditional_test002/Comp_conditional_test002Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/java/comp_conditional_test002/Comp_conditional_test002Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-09T18:55:14.633+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/ecore/comp_conditional_test002.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-09T18:49:52.338+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/input/kermeta/comp_conditional_test001.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/java/comp_conditional_test001/util/Comp_conditional_test001Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/java/comp_conditional_test001/util/Comp_conditional_test001AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/java/comp_conditional_test001/runner/Comp_conditional_test001__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/java/comp_conditional_test001/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/java/comp_conditional_test001/impl/Comp_conditional_test001PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/java/comp_conditional_test001/impl/Comp_conditional_test001FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/java/comp_conditional_test001/helper/Comp_conditional_test001Helper.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/java/comp_conditional_test001/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/java/comp_conditional_test001/Comp_conditional_test001Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/java/comp_conditional_test001/Comp_conditional_test001Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-09T18:52:29.329+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/ecore/comp_conditional_test001.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T10:38:42.689+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/input/kermeta/comp_callResult_test003.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/java/comp_callResult_test003/util/Comp_callResult_test003Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/java/comp_callResult_test003/util/Comp_callResult_test003AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/java/comp_callResult_test003/runner/Comp_callResult_test003__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/java/comp_callResult_test003/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/java/comp_callResult_test003/impl/Comp_callResult_test003PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/java/comp_callResult_test003/impl/Comp_callResult_test003FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/java/comp_callResult_test003/impl/AImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/java/comp_callResult_test003/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/java/comp_callResult_test003/Comp_callResult_test003Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/java/comp_callResult_test003/Comp_callResult_test003Factory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/java/comp_callResult_test003/A.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T10:43:53.166+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/ecore/comp_callResult_test003.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T10:38:33.610+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/input/kermeta/comp_callResult_test002.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/java/comp_callResult_test002/util/Comp_callResult_test002Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/java/comp_callResult_test002/util/Comp_callResult_test002AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/java/comp_callResult_test002/runner/Comp_callResult_test002__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/java/comp_callResult_test002/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/java/comp_callResult_test002/impl/Comp_callResult_test002PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/java/comp_callResult_test002/impl/Comp_callResult_test002FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/java/comp_callResult_test002/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/java/comp_callResult_test002/Comp_callResult_test002Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/java/comp_callResult_test002/Comp_callResult_test002Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T10:40:58.521+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/ecore/comp_callResult_test002.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T10:38:23.469+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/input/kermeta/comp_callResult_test001.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/java/comp_callResult_test001/util/Comp_callResult_test001Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/java/comp_callResult_test001/util/Comp_callResult_test001AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/java/comp_callResult_test001/runner/Comp_callResult_test001__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/java/comp_callResult_test001/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/java/comp_callResult_test001/impl/Comp_callResult_test001PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/java/comp_callResult_test001/impl/Comp_callResult_test001FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/java/comp_callResult_test001/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/java/comp_callResult_test001/Comp_callResult_test001Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/java/comp_callResult_test001/Comp_callResult_test001Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T10:39:13.377+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/ecore/comp_callResult_test001.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-15T13:58:53.036+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test002/input/kermeta/comp_body_test002.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/java/comp_body_test002/util/Comp_body_test002Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/java/comp_body_test002/util/Comp_body_test002AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/java/comp_body_test002/runner/Comp_body_test002__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/java/comp_body_test002/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/java/comp_body_test002/impl/Comp_body_test002PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/java/comp_body_test002/impl/Comp_body_test002FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/java/comp_body_test002/helper/Comp_body_test002Helper.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/java/comp_body_test002/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/java/comp_body_test002/Comp_body_test002Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/java/comp_body_test002/Comp_body_test002Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-09T18:44:01.609+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/ecore/comp_body_test002.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-09T14:38:30.351+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test001/input/kermeta/comp_body_test001.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/java/comp_body_test001/util/Comp_body_test001Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/java/comp_body_test001/util/Comp_body_test001AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/java/comp_body_test001/runner/Comp_body_test001__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/java/comp_body_test001/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/java/comp_body_test001/impl/Comp_body_test001PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/java/comp_body_test001/impl/Comp_body_test001FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/java/comp_body_test001/helper/Comp_body_test001Helper.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/java/comp_body_test001/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/java/comp_body_test001/Comp_body_test001Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/java/comp_body_test001/Comp_body_test001Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-18T17:16:33.687+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/ecore/comp_body_test001.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/summary_test004.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/input/kermeta/comp_assignment_test004.simk"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-29T14:52:47.360+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/input/kermeta/comp_assignment_test004.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/input/kermeta/comp_assignment_test004.genmodel"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-30T17:32:32.467+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/input/kermeta/comp_assignment_test004.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/util/Comp_assignment_test004Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/util/Comp_assignment_test004AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/runner/Comp_assignment_test004__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/impl/Comp_assignment_test004PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/impl/Comp_assignment_test004FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/impl/BImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/impl/AImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/helper/Main_9_Helper.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/Comp_assignment_test004Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/Comp_assignment_test004Factory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/B.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/A.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T15:02:54.160+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/ecore/comp_assignment_test004.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/eclipse_launcher/comp_assignment_test004.launch"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/summary_test003.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T14:47:15.519+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/input/kermeta/comp_assignment_test003.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/java/comp_assignment_test003/util/Comp_assignment_test003Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/java/comp_assignment_test003/util/Comp_assignment_test003AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/java/comp_assignment_test003/runner/Comp_assignment_test003__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/java/comp_assignment_test003/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/java/comp_assignment_test003/impl/Comp_assignment_test003PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/java/comp_assignment_test003/impl/Comp_assignment_test003FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/java/comp_assignment_test003/impl/AImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/java/comp_assignment_test003/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/java/comp_assignment_test003/Comp_assignment_test003Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/java/comp_assignment_test003/Comp_assignment_test003Factory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/java/comp_assignment_test003/A.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T14:58:14.723+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/ecore/comp_assignment_test003.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/summary_test002.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T14:47:09.767+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/input/kermeta/comp_assignment_test002.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/java/comp_assignment_test002/util/Comp_assignment_test002Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/java/comp_assignment_test002/util/Comp_assignment_test002AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/java/comp_assignment_test002/runner/Comp_assignment_test002__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/java/comp_assignment_test002/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/java/comp_assignment_test002/impl/Comp_assignment_test002PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/java/comp_assignment_test002/impl/Comp_assignment_test002FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/java/comp_assignment_test002/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/java/comp_assignment_test002/Comp_assignment_test002Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/java/comp_assignment_test002/Comp_assignment_test002Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T14:56:30.646+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/ecore/comp_assignment_test002.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/summary_test001.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T14:47:03.217+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/input/kermeta/comp_assignment_test001.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/util/Comp_assignment_test001Switch.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/util/Comp_assignment_test001AdapterFactory.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/runner/Comp_assignment_test001__Main__main_Runner.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/impl/MainImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/impl/Comp_assignment_test001PackageImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/impl/Comp_assignment_test001FactoryImpl.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/Main.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/Comp_assignment_test001Package.java"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/Comp_assignment_test001Factory.java"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T14:54:31.067+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/ecore/comp_assignment_test001.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/comp_assignment.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/build.properties"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/META-INF/MANIFEST.MF"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/.project"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/.classpath"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/.project.kpm"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_attribute/comp_attribute.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/comp_body.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/comp_callResult.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callSuperOperation/comp_callSuperOperation.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_classDefinition/comp_classDefinition.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_collection/comp_collection.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/comp_conditional.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/comp_containment.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_exception/comp_exception.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_functionType/comp_functionType.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_generics/comp_generics.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/comp_initialization.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/comp_instanceOf.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_invariant/comp_invariant.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/comp_javaStaticCall.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/comp_lambdaExpression.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/comp_loop.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_modelingUnit/comp_modelingUnit.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_multipleInheritance/comp_multipleInheritance.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_multiplePackagesRoot/comp_multiplePackagesRoot.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_multiplicity/comp_multiplicity.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_new/comp_new.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_operationStructure/comp_operationStructure.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_opposite/comp_opposite.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_package/comp_package.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_postcondition/comp_postcondition.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_precondition/comp_precondition.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_primitiveType/comp_primitiveType.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_propertyBehavior/comp_propertyBehavior.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_propertyStructure/comp_propertyStructure.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_reference/comp_reference.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/comp_runner.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_subPackage/comp_subPackage.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_tag/comp_tag.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_uriManagement/comp_uriManagement.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/summary_comp_assignment.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_attribute/summary_comp_attribute.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/summary_comp_body.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/summary_comp_callResult.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callSuperOperation/summary_comp_callSuperOperation.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_classDefinition/summary_comp_classDefinition.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_collection/summary_comp_collection.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/summary_comp_conditional.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_containment/summary_comp_containment.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_exception/summary_comp_exception.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_functionType/summary_comp_functionType.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_generics/summary_comp_generics.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/summary_comp_initialization.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/summary_comp_instanceOf.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_invariant/summary_comp_invariant.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/summary_comp_javaStaticCall.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/summary_comp_lambdaExpression.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/summary_comp_loop.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_modelingUnit/summary_comp_modelingUnit.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_multipleInheritance/summary_comp_multipleInheritance.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_multiplePackagesRoot/summary_comp_multiplePackagesRoot.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_multiplicity/summary_comp_multiplicity.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_new/summary_comp_new.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_operationStructure/summary_comp_operationStructure.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_opposite/summary_comp_opposite.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_package/summary_comp_package.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_postcondition/summary_comp_postcondition.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_precondition/summary_comp_precondition.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_primitiveType/summary_comp_primitiveType.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_propertyBehavior/summary_comp_propertyBehavior.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_propertyStructure/summary_comp_propertyStructure.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_reference/summary_comp_reference.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/summary_comp_runner.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_subPackage/summary_comp_subPackage.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_tag/summary_comp_tag.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_uriManagement/summary_comp_uriManagement.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test001/summary_test001.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_body/test002/summary_test002.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/summary_test001.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/summary_test002.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/summary_test003.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/unit_test.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_new/test001/summary_test001.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_loop/test001/summary_test001.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/summary_test001.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/summary_test002.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/summary_test001.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/summary_test001.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/summary_test002.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/summary_test003.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/summary_test004.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/summary_test005.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/summary_test006.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_modelElementReflexivity/comp_modelElementReflexivity.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_modelElementReflexivity/summary_comp_modelElementReflexivity.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_traceability/comp_traceability.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_traceability/summary_comp_traceability.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/summary_test001.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:09.406+0100" value="/org.kermeta.compiler.tests/doc/kermeta/header_template.docb.kmt" dependents="//@units.419/@dependencies.0"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:10.015+0100" value="/org.kermeta.compiler.tests/doc/kermeta/statusBoard_template.docb.kmt" dependents="//@units.419/@dependencies.2"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:10.093+0100" value="/org.kermeta.compiler.tests/doc/kermeta/testCase_template.docb.kmt" dependents="//@units.419/@dependencies.3"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:10.703+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCase_end_template.docb.kmt" dependents="//@units.419/@dependencies.6"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:11.546+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCase_start_template.docb.kmt" dependents="//@units.419/@dependencies.5"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:11.812+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCase_template.docb.kmt" dependents="//@units.419/@dependencies.4"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:12.359+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCases_end_template.docb.kmt" dependents="//@units.419/@dependencies.7"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:13.375+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCases_start_template.docb.kmt" dependents="//@units.419/@dependencies.8"/>
+  <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/footer_template.docb.ket"/>
+  <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/header_template.docb.ket"/>
+  <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/statusBoard_template.docb.ket"/>
+  <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/testCase_template.docb.ket"/>
+  <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/useCase_end_template.docb.ket"/>
+  <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/useCase_start_template.docb.ket"/>
+  <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/useCase_template.docb.ket"/>
+  <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/useCases_end_template.docb.ket"/>
+  <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/useCases_start_template.docb.ket"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:53:48.281+0100" value="/org.kermeta.compiler.tests/doc/builder/trek2docbook.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.419" to="//@units.402"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.419"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.419" to="//@units.403"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.419" to="//@units.404"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.419" to="//@units.407"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.419" to="//@units.406"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.419" to="//@units.405"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.419" to="//@units.408"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.419" to="//@units.409"/>
+  </units>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/docbook/unit_test.docb.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/unit_test.docb.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/index.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/css/docbook.css"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/1.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/10.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/11.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/12.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/13.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/14.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/15.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/2.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/3.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/4.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/5.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/6.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/7.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/8.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/callouts/9.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/caution.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/home.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/important.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/next.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/note.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/prev.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/tip.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/up.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/warning.gif"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-10T10:53:46.284+0100" value="/org.kermeta.compiler.tests/doc/kermeta/footer_template.docb.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:10.015+0100" value="/org.kermeta.compiler.tests/doc/kermeta/compilationProcess.docb.kmt"/>
+  <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/compilationProcess_template.docb.ket"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/builder/common_build.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/builder/unit_test_build.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/docbook-ready-file.tmp"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/figures/readme.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/figures/readme.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/css/docbook.css"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/figures/readme.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/1.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/10.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/11.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/12.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/13.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/14.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/15.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/2.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/3.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/4.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/5.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/6.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/7.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/8.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/callouts/9.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/caution.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/home.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/important.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/next.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/note.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/prev.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/tip.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/up.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/gfx/admonitions/warning.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/index.html"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/KMM_multiple_inheritance.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/Kermeta-Manual_figures.odg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/SimpleStateMachine_metamodel.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/StateMachine_sample.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/Thumbs.db"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/collections.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/cs_ecore.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/fsm-example.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/fsm.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_assign_expressions.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_behavior_package.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_call_expressions.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_control_struct.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_emof_promotion.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_lambda_expressions.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_literal_expressions.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_positioning2.odg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_positioning2.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_positionning.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_positionning.wmf"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_raise_expressions.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_raise_expressions.wmf"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_structure_classdef.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_structure_classdef.wmf"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_structure_package.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_structure_type.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_structure_type.wmf"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_type.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_type.wmf"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/kermeta_var_expressions.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/library.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/operation_redefinition.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/operation_redefinition.wmf"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/person.png"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-12-11T16:35:32.728+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/properties.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/properties.ecoredi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/properties.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/superoperation_selection.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/unit_test_figures/superoperation_selection.wmf"/>
+  <ruleTypes name="require"/>
+  <ruleTypes name="normal"/>
+</kpm:KPM>

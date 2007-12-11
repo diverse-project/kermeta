@@ -1,0 +1,13 @@
+package org::kermeta::compiler::trek2docbook::template;
+require kermeta
+require "http://www.kermeta.org/trek"
+using kermeta::standard
+using kermeta::utils
+using trek
+class DOCBCompilationProcessTemplate{
+operation generate():String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("<chapter>\r\n\t<title>Compilation Process</title>\r\n\t<section>\r\n\t\t<title id=\"compilationProcess.title.link\">Compilation process, step 1</title>\r\n\t\t<para>\r\n\t\t</para>\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t</section>\r\n</chapter>")
+result := _res.toString
+end
+}

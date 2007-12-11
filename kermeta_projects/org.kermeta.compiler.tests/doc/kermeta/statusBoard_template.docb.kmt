@@ -1,0 +1,33 @@
+package org::kermeta::compiler::trek2docbook::template;
+require kermeta
+require "http://www.kermeta.org/trek"
+using kermeta::standard
+using kermeta::utils
+using trek
+class DOCBStatusBoardTemplate{
+operation generate(useKaseModel:UseKaseModel):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("<chapter>\r\n\t<title>Listing of the issues in compiling</title>\r\n\t<section>\r\n\t\t<title id=\"statusBoard.title.link\">Status board of the issues</title>\r\n\t\t<para>\r\n\t\t</para>\r\n\t\t\r\n\t\t<informaltable>\r\n          <tgroup cols=\"4\">\r\n            <colspec colname=\"c1\"/>\r\n            <colspec colname=\"c2\"/>\r\n            <colspec colname=\"c3\"/>\r\n            <colspec colname=\"c4\"/>\r\n            <colspec colname=\"c5\"/>\r\n            <!--colspec colname=\"c6\"/-->\r\n            <thead>\r\n              <row>\r\n                <!--entry><para>Doc ref</para></entry-->\r\n                <entry><para>Identifier</para></entry>\r\n                <entry><para>Note</para></entry>\r\n                <entry><para>Design</para></entry>\r\n                <entry><para>Impl</para></entry>\r\n              </row>\r\n            </thead>\r\n            <tbody>\r\n")
+useKaseModel.kuseCases.each{ uc |
+_res.append("              <row>\r\n                <entry><para><link linkend=\"uc_")
+_res.append(uc.name)
+_res.append(".link\">")
+_res.append(uc.name)
+_res.append("</link></para></entry>\r\n                <entry><para>")
+if uc.shortSummary != void then
+_res.append(uc.shortSummary)
+end
+_res.append("</para></entry>\r\n")
+uc.status.each{ s |
+_res.append("                \t<entry><para>")
+_res.append(s.key)
+_res.append(" ")
+_res.append(s.progress.toString)
+_res.append(" %</para></entry>\r\n")
+}
+_res.append("              </row>\r\n")
+}
+_res.append("            </tbody>\r\n          </tgroup>\r\n        </informaltable>\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t</section>\r\n</chapter>")
+result := _res.toString
+end
+}

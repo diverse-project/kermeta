@@ -1,4 +1,4 @@
-/* $Id: trek2docbook.kmt,v 1.1 2007-12-07 05:45:20 cfaucher Exp $
+/* $Id: trek2docbook.kmt,v 1.1 2007-12-11 15:42:03 cfaucher Exp $
  * Creation date: July 26, 2007
  * License:
  * Copyright:
@@ -12,17 +12,17 @@ package org::kermeta::compiler::trek2docbook;
 require kermeta
 require "http://www.kermeta.org/trek"
 
-require "kermeta/header_template.docb.kmt"
-require "kermeta/footer_template.docb.kmt"
+require "../kermeta/header_template.docb.kmt"
+require "../kermeta/footer_template.docb.kmt"
 
-require "kermeta/statusBoard_template.docb.kmt"
+require "../kermeta/statusBoard_template.docb.kmt"
 
-require "kermeta/testCase_template.docb.kmt"
-require "kermeta/useCase_template.docb.kmt"
-require "kermeta/useCase_start_template.docb.kmt"
-require "kermeta/useCase_end_template.docb.kmt"
-require "kermeta/useCases_end_template.docb.kmt"
-require "kermeta/useCases_start_template.docb.kmt"
+require "../kermeta/testCase_template.docb.kmt"
+require "../kermeta/useCase_template.docb.kmt"
+require "../kermeta/useCase_start_template.docb.kmt"
+require "../kermeta/useCase_end_template.docb.kmt"
+require "../kermeta/useCases_end_template.docb.kmt"
+require "../kermeta/useCases_start_template.docb.kmt"
 
 using ecore
 using kermeta::standard
