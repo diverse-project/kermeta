@@ -1,6 +1,6 @@
 
 
-/*$Id: FrameworkMapping.java,v 1.2 2007-10-19 07:15:14 bmorin Exp $
+/*$Id: FrameworkMapping.java,v 1.3 2007-12-11 13:58:59 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	FrameworkMapping.java
 * License : EPL
@@ -8,6 +8,8 @@
 * ----------------------------------------------------------------------------
 * Creation date : 10 oct. 07
 * Authors : paco
+* 
+* FIXME CF: Maybe this file should be generated when the framework is compiled
 */
 
 package org.kermeta.loader;

@@ -196,6 +196,39 @@
           <ownedTag value="/**&#xD;&#xA;  * Loads the Resource, thus making content of the Resource browsable.&#xD;&#xA;  * Raises a ResourceLoadException in case loaded Resource is empty&#xD;&#xA;  */" object="//@packages.0/persistence/Resource/load"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
         </ownedOperation>
+        <ownedOperation tag="//@packages.0/persistence/Resource/compare/@ownedTag.0" name="compare" type="//@packages.0/persistence/Resource/compare/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+          <ownedTag value="/**&#xD;&#xA;  * TODO&#xD;&#xA;  */" object="//@packages.0/persistence/Resource/compare"/>
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
+          </containedType>
+          <ownedParameter name="rightResource" type="//@packages.0/persistence/Resource/compare/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation tag="//@packages.0/persistence/Resource/getMatch/@ownedTag.0" name="getMatch" type="//@packages.0/persistence/Resource/getMatch/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+          <ownedTag value="/**&#xD;&#xA;  * TODO&#xD;&#xA;  */" object="//@packages.0/persistence/Resource/getMatch"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
+          <ownedParameter name="rightResource" type="//@packages.0/persistence/Resource/getMatch/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
+          </ownedParameter>
+          <ownedParameter name="matchModelUri" type="//@packages.0/persistence/Resource/getMatch/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+            </containedType>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation tag="//@packages.0/persistence/Resource/getDiff/@ownedTag.0" name="getDiff" type="//@packages.0/persistence/Resource/getDiff/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+          <ownedTag value="/**&#xD;&#xA;  * TODO&#xD;&#xA;  */" object="//@packages.0/persistence/Resource/getDiff"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
+          <ownedParameter name="rightResource" type="//@packages.0/persistence/Resource/getDiff/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
+          </ownedParameter>
+          <ownedParameter name="diffModelUri" type="//@packages.0/persistence/Resource/getDiff/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+            </containedType>
+          </ownedParameter>
+        </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/persistence/EMFResource/@ownedTag.0" name="EMFResource" superType="//@packages.0/persistence/EMFResource/@containedType.0">
         <ownedTag value="/**&#xD;&#xA; * Extension of the Resource class definition that is specific to EMF Repository.&#xD;&#xA; * User is not supposed to directly create it. Otherwise it will not be correctly initialized&#xD;&#xA; * You must To create one &#xD;&#xA; */" object="//@packages.0/persistence/EMFResource"/>
@@ -531,6 +564,127 @@
             <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
         </ownedOperation>
+        <ownedOperation tag="//@packages.0/persistence/EMFResource/compare/@ownedTag.0" name="compare" type="//@packages.0/persistence/EMFResource/compare/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/compare">
+          <ownedTag value="/**&#xD;&#xA;  * Overrides Resource.compare()&#xD;&#xA;  */" object="//@packages.0/persistence/EMFResource/compare"/>
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
+          </containedType>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/EMFResource/compare/@body/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
+            </containedType>
+            <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/EMFResource/compare/@body/@containedType.0" identifier="bool">
+              <type type="//@packages.0/persistence/EMFResource/compare/@body/@containedType.0" isOrdered="true" upper="1"/>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/EMFResource/compare/@body/@containedType.0" isCast="true">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/compare/@body/@containedType.0" name="bool"/>
+              <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Resource" jmethod="compare">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Resource/uri/@containedType.0" name="uri" staticProperty="//@packages.0/persistence/Resource/uri">
+                  <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/persistence/EMFResource/compare/@body/@statement.1/@value/@parameters.0/@target/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/EMFResource"/>
+                  </target>
+                </parameters>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Resource/uri/@containedType.0" name="uri" staticProperty="//@packages.0/persistence/Resource/uri">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/compare/@body/@statement.1/@value/@parameters.1/@target/@containedType.0" name="rightResource">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
+                  </target>
+                </parameters>
+              </value>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/EMFResource/compare/@body/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/EMFResource/compare/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/compare/@body/@containedType.0" name="bool"/>
+            </statement>
+          </body>
+          <ownedParameter name="rightResource" type="//@packages.0/persistence/EMFResource/compare/@body/@statement.1/@value/@parameters.1/@target/@containedType.0" isOrdered="true" upper="1"/>
+        </ownedOperation>
+        <ownedOperation tag="//@packages.0/persistence/EMFResource/getMatch/@ownedTag.0" name="getMatch" type="//@packages.0/persistence/EMFResource/getMatch/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/getMatch">
+          <ownedTag value="/**&#xD;&#xA;  * Overrides Resource.getMatch()&#xD;&#xA;  */" object="//@packages.0/persistence/EMFResource/getMatch"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
+            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Resource" jmethod="getMatch">
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Resource/uri/@containedType.0" name="uri" staticProperty="//@packages.0/persistence/Resource/uri">
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.0/@parameters.0/@target/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/EMFResource"/>
+                </target>
+              </parameters>
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Resource/uri/@containedType.0" name="uri" staticProperty="//@packages.0/persistence/Resource/uri">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.0/@parameters.1/@target/@containedType.0" name="rightResource">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
+                </target>
+              </parameters>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.0/@parameters.2/@containedType.0" name="matchModelUri">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+                </containedType>
+              </parameters>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@containedType.0" identifier="resource">
+              <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.1/@initialization/@containedType.0" name="getResource" staticOperation="//@packages.0/persistence/Repository/getResource">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.0/@parameters.2/@containedType.0" name="matchModelUri"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.1/@initialization/@target/@containedType.0" name="new">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/EMFRepository"/>
+                  <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                  <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/persistence/Resource/contents/@getterBody/@statement.0/@initialization/@target/@containedType.0">
+                    <typeref type="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.1/@initialization/@target/@containedType.0" upper="1"/>
+                  </target>
+                </target>
+              </initialization>
+              <type type="//@packages.0/persistence/EMFResource/getMatch/@body/@containedType.0" isOrdered="true" upper="1"/>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/EMFResource/getMatch/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@containedType.0" name="resource"/>
+            </statement>
+          </body>
+          <ownedParameter name="rightResource" type="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.0/@parameters.1/@target/@containedType.0" isOrdered="true" upper="1"/>
+          <ownedParameter name="matchModelUri" type="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.0/@parameters.2/@containedType.0" isOrdered="true" upper="1"/>
+        </ownedOperation>
+        <ownedOperation tag="//@packages.0/persistence/EMFResource/getDiff/@ownedTag.0" name="getDiff" type="//@packages.0/persistence/EMFResource/getDiff/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Resource/getDiff">
+          <ownedTag value="/**&#xD;&#xA;  * Overrides Resource.getDiff()&#xD;&#xA;  */" object="//@packages.0/persistence/EMFResource/getDiff"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/EMFResource/getDiff/@body/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
+            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Resource" jmethod="getDiff">
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Resource/uri/@containedType.0" name="uri" staticProperty="//@packages.0/persistence/Resource/uri">
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/persistence/EMFResource/getDiff/@body/@statement.0/@parameters.0/@target/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/EMFResource"/>
+                </target>
+              </parameters>
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Resource/uri/@containedType.0" name="uri" staticProperty="//@packages.0/persistence/Resource/uri">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/getDiff/@body/@statement.0/@parameters.1/@target/@containedType.0" name="rightResource">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
+                </target>
+              </parameters>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/getDiff/@body/@statement.0/@parameters.2/@containedType.0" name="diffModelUri">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+                </containedType>
+              </parameters>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/EMFResource/getDiff/@body/@containedType.0" identifier="resource">
+              <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.1/@initialization/@containedType.0" name="getResource" staticOperation="//@packages.0/persistence/Repository/getResource">
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/getDiff/@body/@statement.0/@parameters.2/@containedType.0" name="diffModelUri"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/EMFResource/getDiff/@body/@statement.1/@initialization/@target/@containedType.0" name="new">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/EMFRepository"/>
+                  <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                  <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/persistence/Resource/contents/@getterBody/@statement.0/@initialization/@target/@containedType.0">
+                    <typeref type="//@packages.0/persistence/EMFResource/getDiff/@body/@statement.1/@initialization/@target/@containedType.0" upper="1"/>
+                  </target>
+                </target>
+              </initialization>
+              <type type="//@packages.0/persistence/EMFResource/getDiff/@body/@containedType.0" isOrdered="true" upper="1"/>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/EMFResource/getDiff/@body/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/EMFResource/getDiff/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/EMFResource/getDiff/@body/@containedType.0" name="resource"/>
+            </statement>
+          </body>
+          <ownedParameter name="rightResource" type="//@packages.0/persistence/EMFResource/getDiff/@body/@statement.0/@parameters.1/@target/@containedType.0" isOrdered="true" upper="1"/>
+          <ownedParameter name="diffModelUri" type="//@packages.0/persistence/EMFResource/getDiff/@body/@statement.0/@parameters.2/@containedType.0" isOrdered="true" upper="1"/>
+        </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/persistence/KMResource/@ownedTag.0" name="KMResource" superType="//@packages.0/persistence/KMResource/@containedType.0">
         <ownedTag value="/**&#xD;&#xA; * NOT IMPLEMENTED&#xD;&#xA; */" object="//@packages.0/persistence/KMResource"/>
@@ -594,9 +748,8 @@
             </containedType>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/persistence/Repository/getResource/@ownedTag.0" name="getResource" type="//@packages.0/persistence/Repository/getResource/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/persistence/Repository/getResource/@ownedTag.0" name="getResource" type="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.1/@initialization/@containedType.0" isOrdered="true" upper="1">
           <ownedTag value="/**&#xD;&#xA;  * Returns the Resource associated with the given uri if this uri is associated with&#xD;&#xA;  * an already created Resource of the Repository.&#xD;&#xA;  * If the Repository contains no Resource associated with the given uri, creates&#xD;&#xA;  * a new Resource and loads it.&#xD;&#xA;  * Raises a ResourceCreate exception if the given uri does not point to an existing&#xD;&#xA;  * model file &#xD;&#xA;  */" object="//@packages.0/persistence/Repository/getResource"/>
-          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/load/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/persistence/Repository/getResource/@body/@statement.0/@containedType.0" identifier="nUri">
               <containedType xsi:type="kermeta_language_structure:Class">
@@ -673,7 +826,7 @@
                 <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/persistence/Repository/getResource/@body/@statement.4/@body/@containedType.0">
                   <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Repository/getResource/@body/@statement.4/@body/@containedType.0">
                     <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Repository/getResource/@body/@statement.4/@body/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/Repository/getResource/@containedType.0" name="result"/>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.1/@initialization/@containedType.0" name="result"/>
                       <value xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/getResource/@body/@statement.4/@body/@containedType.0" name="next"/>
                     </statement>
                   </thenBody>
@@ -694,7 +847,7 @@
             <statement xsi:type="kermeta_language_behavior:Conditional" staticType="//@packages.0/persistence/Resource/load/@containedType.0">
               <thenBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/load/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Repository/createResource/@containedType.0">
-                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/Repository/getResource/@containedType.0" name="result"/>
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.1/@initialization/@containedType.0" name="result"/>
                   <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Repository/createResource/@containedType.0" name="createResource" staticOperation="//@packages.0/persistence/Repository/createResource">
                     <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/getResource/@body/@statement.2/@value/@parameters.0/@containedType.0" name="uri"/>
                     <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@parameters.3/@containedType.0" value=""/>
@@ -702,14 +855,14 @@
                   </value>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/persistence/Resource/load/@containedType.0" name="load" staticOperation="//@packages.0/persistence/Resource/load">
-                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/Repository/getResource/@containedType.0" name="result"/>
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.1/@initialization/@containedType.0" name="result"/>
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                 <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0"/>
                 <staticOperation href="../standard/collections.km#//@packages.0/standard/Set/equals"/>
-                <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/Repository/getResource/@containedType.0" name="result"/>
+                <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/persistence/EMFResource/getMatch/@body/@statement.1/@initialization/@containedType.0" name="result"/>
               </condition>
             </statement>
           </body>

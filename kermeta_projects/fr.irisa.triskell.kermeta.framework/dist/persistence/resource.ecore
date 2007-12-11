@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::persistence|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/Franck/workspace/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="persistence" nsURI="http://www.kermeta.org/kermeta/persistence" nsPrefix="persistence">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xD;&#xA; * Contains the classes that handle the serialization of models, in particular&#xD;&#xA; * EMF models.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/persistence_package.png&quot;>&#xD;&#xA; */"/>
@@ -40,6 +40,34 @@
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Loads the Resource, thus making content of the Resource browsable.&#xD;&#xA;  * Raises a ResourceLoadException in case loaded Resource is empty&#xD;&#xA;  */"/>
           </eAnnotations>
+        </eOperations>
+        <eOperations name="compare">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * TODO&#xD;&#xA;  */"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="rightResource" eType="/1/persistence/Resource"/>
+        </eOperations>
+        <eOperations name="getMatch" eType="/1/persistence/Resource">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * TODO&#xD;&#xA;  */"/>
+          </eAnnotations>
+          <eParameters name="rightResource" eType="/1/persistence/Resource"/>
+          <eParameters name="matchModelUri">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="getDiff" eType="/1/persistence/Resource">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * TODO&#xD;&#xA;  */"/>
+          </eAnnotations>
+          <eParameters name="rightResource" eType="/1/persistence/Resource"/>
+          <eParameters name="diffModelUri">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri">
           <eAnnotations source="kermeta">
@@ -144,6 +172,37 @@
           <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
           <eParameters name="instance">
             <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="compare">
+          <eAnnotations source="kermeta" references="/1/persistence/Resource/compare">
+            <details key="body" value="do&#xA;&#x9;var bool : kermeta::standard::Boolean&#xA;&#x9;bool ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.compare(self.uri, rightResource.uri)&#xA;&#x9;result := bool&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Resource.compare()&#xD;&#xA;  */"/>
+            <details key="superOperation" value="kermeta::persistence::Resource"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="rightResource" eType="/1/persistence/Resource"/>
+        </eOperations>
+        <eOperations name="getMatch" eType="/1/persistence/Resource">
+          <eAnnotations source="kermeta" references="/1/persistence/Resource/getMatch">
+            <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.getMatch(self.uri, rightResource.uri, matchModelUri)&#xA;&#x9;var resource : kermeta::persistence::Resource init kermeta::persistence::EMFRepository.new.getResource(matchModelUri)&#xA;&#x9;result := resource&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Resource.getMatch()&#xD;&#xA;  */"/>
+            <details key="superOperation" value="kermeta::persistence::Resource"/>
+          </eAnnotations>
+          <eParameters name="rightResource" eType="/1/persistence/Resource"/>
+          <eParameters name="matchModelUri">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="getDiff" eType="/1/persistence/Resource">
+          <eAnnotations source="kermeta" references="/1/persistence/Resource/getDiff">
+            <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.getDiff(self.uri, rightResource.uri, diffModelUri)&#xA;&#x9;var resource : kermeta::persistence::Resource init kermeta::persistence::EMFRepository.new.getResource(diffModelUri)&#xA;&#x9;result := resource&#xA;end"/>
+            <details key="documentation" value="/**&#xD;&#xA;  * Overrides Resource.getDiff()&#xD;&#xA;  */"/>
+            <details key="superOperation" value="kermeta::persistence::Resource"/>
+          </eAnnotations>
+          <eParameters name="rightResource" eType="/1/persistence/Resource"/>
+          <eParameters name="diffModelUri">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
         </eOperations>
       </eClassifiers>
@@ -314,51 +373,39 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
-    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
-    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/Stack.ecore#/0"/>
     <references href="../utils/Stack.ecore#/1"/>
-    <references href="../utils/Stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
     <references href="../standard/java.ecore#/2"/>
