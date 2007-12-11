@@ -1,0 +1,19 @@
+# $Id: uri.map,v 1.1 2007-12-11 13:10:13 dvojtise Exp $
+#
+
+"platform:/plugin/"			"file://tmp/kermeta_build/src/plugins/"
+"platform:/resource/"		"file://tmp/kermeta_build/src/plugins/"
+
+# This is the values that are correct for daily build
+# You probably have to change it to match your configuration
+# but, please do not commit them it into the CVS
+#"platform:/plugin/"		"file:/home/paco/Desktop/KermetaCVS/"
+#"platform:/resource/"		"file:/home/paco/Desktop/KermetaCVS/"
+#"platform:/plugin/"		"/home/paco/Desktop/KermetaCVS/"
+#"platform:/resource/"		"/home/paco/Desktop/KermetaCVS/"
+#"platform:/plugin/"			"file://c:/eclipse3.3/eclipse/workspace/"
+#"platform:/resource/"		"file://c:/eclipse3.3/eclipse/workspace/"
+#"platform:/plugin/"		"file:/C:/eclipse3.3/eclipse/workspace/"
+#"platform:/resource/"		"file:/C:/eclipse3.3/eclipse/workspace/"
+
+
