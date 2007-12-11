@@ -1,11 +1,11 @@
-/*$Id: InitializeTestCasesModel.java,v 1.4 2007-12-03 10:48:57 cfaucher Exp $
+/*$Id: InitializeTestCasesModel.java,v 1.5 2007-12-11 20:16:44 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeTestCasesModel.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 27 nov. 07
-* Authors : cfaucher <cfaucher@irisa.fr>
+* Authors : Cyril Faucher <cfaucher@irisa.fr>
 */
 
 package org.kermeta.compiler.trek.ui.popup.actions;
@@ -15,10 +15,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
@@ -56,8 +54,16 @@ public class InitializeTestCasesModel implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
+		initializeTrekFiles(this.folders);
+	}
+	
+	/**
+	 * 
+	 * @param folders
+	 */
+	public static void initializeTrekFiles(List<IFolder> folders) {
 		for(IFolder folder : folders) {
-			UseKaseModel useKaseModel = createUseKaseModel(folder);
+			UseKaseModel useKaseModel = TrekModelHelper.createUseKaseModel(folder);
 			initializeTrekFile(folder, useKaseModel);
 		}
 	}
@@ -80,7 +86,7 @@ public class InitializeTestCasesModel implements IObjectActionDelegate {
 		}
 	}
 	
-	private void initializeTrekFile(IFolder folder, UseKaseModel useKaseModel) {
+	protected static void initializeTrekFile(IFolder folder, UseKaseModel useKaseModel) {
 		try {
 			for(IResource subResource : folder.members(false) ) {
 				if(subResource instanceof IFolder) {
@@ -100,13 +106,7 @@ public class InitializeTestCasesModel implements IObjectActionDelegate {
 		}
 	}
 	
-	private UseKaseModel createUseKaseModel(IFolder folder)
-    {
-		IFile trek_file = ResourcesPlugin.getWorkspace().getRoot().getFile(folder.getFullPath().append("/" + folder.getName()).addFileExtension(KCompilerConstants.TREK_EXT));
-		return TrekModelHelper.createUseKaseModel(trek_file);
-    }
-	
-	private KTestCase createKTestCase(IFolder folder)
+	protected static KTestCase createKTestCase(IFolder folder)
     {
 		KTestCase aTestCase = TrekFactory.eINSTANCE.createKTestCase();
 		aTestCase.setName(folder.getName());

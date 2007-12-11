@@ -1,11 +1,11 @@
-/*$Id: InitializeTrekLocalSummary.java,v 1.1 2007-12-11 18:19:12 cfaucher Exp $
+/*$Id: InitializeTrekLocalSummary.java,v 1.2 2007-12-11 20:16:44 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeTrekLocalSummary.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 27 nov. 07
-* Authors : cfaucher <cfaucher@irisa.fr>
+* Authors : Cyril Faucher <cfaucher@irisa.fr>
 */
 
 package org.kermeta.compiler.trek.ui.popup.actions;

@@ -1,11 +1,11 @@
-/*$Id: TrekModelHelper.java,v 1.5 2007-12-11 18:19:12 cfaucher Exp $
+/*$Id: TrekModelHelper.java,v 1.6 2007-12-11 20:16:44 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	TrekModelHelper.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 27 nov. 07
-* Authors : cfaucher <cfaucher@irisa.fr>
+* Authors : Cyril Faucher <cfaucher@irisa.fr>
 */
 
 package org.kermeta.compiler.trek.ui.popup.actions;
@@ -42,6 +42,12 @@ public class TrekModelHelper {
 	public TrekModelHelper() {
 
 	}
+	
+	public static UseKaseModel createUseKaseModel(IFolder folder)
+    {
+		IFile trek_file = ResourcesPlugin.getWorkspace().getRoot().getFile(folder.getFullPath().append("/" + folder.getName()).addFileExtension(KCompilerConstants.TREK_EXT));
+		return TrekModelHelper.createUseKaseModel(trek_file);
+    }
 	
 	/**
 	 * 

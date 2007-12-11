@@ -1,11 +1,11 @@
-/*$Id: DeleteTrekSummary.java,v 1.3 2007-12-03 10:48:57 cfaucher Exp $
+/*$Id: DeleteTrekSummary.java,v 1.4 2007-12-11 20:16:44 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	DeleteTrekSummary.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 27 nov. 07
-* Authors : cfaucher <cfaucher@irisa.fr>
+* Authors : Cyril Faucher <cfaucher@irisa.fr>
 */
 
 package org.kermeta.compiler.trek.ui.popup.actions;

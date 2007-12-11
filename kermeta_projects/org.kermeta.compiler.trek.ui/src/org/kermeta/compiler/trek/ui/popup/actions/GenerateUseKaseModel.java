@@ -1,6 +1,6 @@
-/*$Id: InitializeTrekSummary.java,v 1.5 2007-12-11 20:16:44 cfaucher Exp $
+/*$Id: GenerateUseKaseModel.java,v 1.1 2007-12-11 20:16:44 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
-* File : 	InitializeTrekSummary.java
+* File : 	GenerateUseKaseModel.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -23,9 +24,11 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.kermeta.compiler.trek.ui.KCompilerConstants;
+import org.kermeta.compiler.trek.ui.command.AssignTestCasesToUseCasesCommand;
 
 
-public class InitializeTrekSummary implements IObjectActionDelegate {
+public class GenerateUseKaseModel implements IObjectActionDelegate {
 
 	protected StructuredSelection currentSelection;
 
@@ -34,7 +37,7 @@ public class InitializeTrekSummary implements IObjectActionDelegate {
 	/**
 	 * Constructor for Action1.
 	 */
-	public InitializeTrekSummary() {
+	public GenerateUseKaseModel() {
 		super();
 	}
 
@@ -48,9 +51,32 @@ public class InitializeTrekSummary implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
+		InitializeUseCasesModel.initializeTrekFiles(folders);
+		
+		List<IFile> usecasesFiles = new ArrayList<IFile>();
+		List<IFolder> subFolders = new ArrayList<IFolder>();
 		for(IFolder folder : folders) {
-			createSummaryTextFile(folder);
+			try {				
+				for(IResource subResource : folder.members(false) ) {
+					// populate the subfolders list
+					if(subResource instanceof IFolder) {
+						subFolders.add((IFolder) subResource);
+					}
+					// populate the list of trek files containing the definition of use cases
+					if(subResource instanceof IFile) {
+						if(((IFile) subResource).getFileExtension().equals(KCompilerConstants.TREK_EXT)) {
+							usecasesFiles.add((IFile) subResource);
+						}
+					}
+				}
+				InitializeTestCasesModel.initializeTrekFiles(subFolders);
+			} catch (CoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		AssignTestCasesToUseCasesCommand cmd = new AssignTestCasesToUseCasesCommand(usecasesFiles, subFolders);
+		cmd.execute();
 	}
 
 	/**
@@ -70,24 +96,5 @@ public class InitializeTrekSummary implements IObjectActionDelegate {
 			}
 		}
 	}
-	
-	/**
-	 * 
-	 * @param folder
-	 */
-	private void createSummaryTextFile(IFolder folder)
-    {
-		try {
-			for(IResource subResource : folder.members(false) ) {
-				if(subResource instanceof IFolder) {
-					IFolder subFolder = (IFolder) subResource;
-					InitializeTrekLocalSummary.createSummaryTextFile(subFolder);
-				}
-			}
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
 
 }

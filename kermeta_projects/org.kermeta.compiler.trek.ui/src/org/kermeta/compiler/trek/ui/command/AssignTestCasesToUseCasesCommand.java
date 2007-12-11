@@ -1,19 +1,18 @@
-/*$Id: DeleteTestCasesUseCasesMapping.java,v 1.5 2007-12-11 20:16:44 cfaucher Exp $
+/*$Id: AssignTestCasesToUseCasesCommand.java,v 1.1 2007-12-11 20:16:44 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
-* File : 	DeleteTestCasesUseCasesMapping.java
+* File : 	AssignTestCasesToUseCasesCommand.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 27 nov. 07
+* Creation date : 11 dec. 07
 * Authors : Cyril Faucher <cfaucher@irisa.fr>
 */
 
-package org.kermeta.compiler.trek.ui.popup.actions;
+package org.kermeta.compiler.trek.ui.command;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -21,20 +20,15 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
-import org.eclipse.ui.IObjectActionDelegate;
-import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.trek.ui.KCompilerConstants;
+import org.kermeta.compiler.trek.ui.popup.actions.TrekModelHelper;
 import org.kermeta.trek.KTestCase;
 import org.kermeta.trek.KUseCase;
 import org.kermeta.trek.UseKaseModel;
 
-
-public class DeleteTestCasesUseCasesMapping implements IObjectActionDelegate {
-
-	protected StructuredSelection currentSelection;
+public class AssignTestCasesToUseCasesCommand {
 
 	protected List<IFile> usecasesFiles = new ArrayList<IFile>();
 	
@@ -43,24 +37,17 @@ public class DeleteTestCasesUseCasesMapping implements IObjectActionDelegate {
 	private List<Resource> usecasesResources = new ArrayList<Resource>();
 	
 	private List<Resource> testcasesResources = new ArrayList<Resource>();
+
+	/**
+	 * Constructor of a AssignTestCasesToUseCasesCommand
+	 */
+	public AssignTestCasesToUseCasesCommand(List<IFile> usecasesFiles, List<IFolder> folders) {
+		this.usecasesFiles = usecasesFiles;
+		this.folders = folders;
+	}
+
 	
-	/**
-	 * Constructor for Action1.
-	 */
-	public DeleteTestCasesUseCasesMapping() {
-		super();
-	}
-
-	/**
-	 * @see IObjectActionDelegate#setActivePart(IAction, IWorkbenchPart)
-	 */
-	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-	}
-
-	/**
-	 * @see IActionDelegate#run(IAction)
-	 */
-	public void run(IAction action) {
+	public void execute() {
 		
 		// Get the use cases contained into selected "trek" files
 		// These use cases are global for all the test cases
@@ -68,7 +55,7 @@ public class DeleteTestCasesUseCasesMapping implements IObjectActionDelegate {
 		testcasesResources.clear();
 		Hashtable<String, KUseCase> useCases = getUseCases(usecasesFiles);
 		for(IFolder folder : folders) {
-			deleteTestCasesToUseCases(useCases, folder);
+			assignTestCasesToUseCases(useCases, folder);
 		}
 		
 		try {
@@ -83,37 +70,6 @@ public class DeleteTestCasesUseCasesMapping implements IObjectActionDelegate {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
-	 */
-	public void selectionChanged(IAction action, ISelection selection) {
-		
-		usecasesFiles.clear();
-		folders.clear();
-		if (selection instanceof StructuredSelection) {
-			currentSelection = (StructuredSelection) selection;
-			
-			Iterator it = currentSelection.iterator();
-
-			while (it.hasNext()) {
-				Object obj = (Object) it.next();
-				if(obj instanceof IFile && ((IFile)obj).getFileExtension().equals(KCompilerConstants.TREK_EXT) ) {
-					usecasesFiles.add((IFile) obj);
-				}
-				if(obj instanceof IFolder) {
-					folders.add((IFolder) obj);
-				}
-			}
-		}
-		
-		if(usecasesFiles.size()>0 && folders.size()>0) {
-			action.setEnabled(true);
-		} else {
-			action.setEnabled(false);
-		}
-			
 	}
 	
 	/**
@@ -154,11 +110,11 @@ public class DeleteTestCasesUseCasesMapping implements IObjectActionDelegate {
 	 * @param useCases
 	 * @param testCaseFolder
 	 */
-	private void deleteTestCasesToUseCases(Hashtable<String, KUseCase> useCases, IFolder testCaseFolder) {
-		useCases.get(testCaseFolder.getName()).getVerifiedBy().clear();
-		for(KTestCase testCase : getTestCases(testCaseFolder)) {
-			testCase.getVerifies().clear();
-		}
+	private void assignTestCasesToUseCases(Hashtable<String, KUseCase> useCases, IFolder testCaseFolder) {
+		KUseCase theKUseCase = useCases.get(testCaseFolder.getName());
+		theKUseCase.getVerifiedBy().addAll(getTestCases(testCaseFolder));
 	}
-
+	
 }
+
+

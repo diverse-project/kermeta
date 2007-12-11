@@ -21,7 +21,7 @@
                enablesFor="+"
                icon="icons/add.png"
                id="org.kermeta.compiler.trek.ui.InitializeTestCasesModel"
-               label="Initialize the Trek models for the compilation Test Cases"
+               label="Initialize the Trek models for the Test Cases"
                menubarPath="org.kermeta.compiler.trek.subMenu/trek_model">
          </action>
          <action
@@ -29,7 +29,14 @@
                enablesFor="+"
                icon="icons/add.png"
                id="org.kermeta.compiler.trek.ui.InitializeUseCasesModel"
-               label="Initialize the Trek models for the compilation Use Cases"
+               label="Initialize the Trek models for the Use Cases"
+               menubarPath="org.kermeta.compiler.trek.subMenu/trek_model">
+         </action>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.GenerateUseKaseModel"
+               enablesFor="+"
+               id="org.kermeta.compiler.trek.ui.GenerateUseKaseModel"
+               label="Generate the Trek Use Kase Models (full process)"
                menubarPath="org.kermeta.compiler.trek.subMenu/trek_model">
          </action>
          <action
@@ -91,7 +98,7 @@
             objectClass="org.eclipse.core.resources.IResource">
          <menu
 	         id="org.kermeta.compiler.trek.subMenu"
-	         label="Trek for K Compiler"
+	         label="Trek for Kermeta Compiler"
 	         path="additions">
       		<separator name="mapping"/>
 		 </menu>

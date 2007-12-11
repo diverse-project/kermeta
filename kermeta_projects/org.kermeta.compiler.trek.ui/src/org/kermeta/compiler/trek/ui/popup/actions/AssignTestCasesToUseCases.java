@@ -1,25 +1,21 @@
-/*$Id: AssignTestCasesToUseCases.java,v 1.4 2007-12-03 10:48:57 cfaucher Exp $
+/*$Id: AssignTestCasesToUseCases.java,v 1.5 2007-12-11 20:16:44 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	AssignTestCasesToUseCases.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 27 nov. 07
-* Authors : cfaucher <cfaucher@irisa.fr>
+* Authors : Cyril Faucher <cfaucher@irisa.fr>
 */
 
 package org.kermeta.compiler.trek.ui.popup.actions;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -27,9 +23,7 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.trek.ui.KCompilerConstants;
-import org.kermeta.trek.KTestCase;
-import org.kermeta.trek.KUseCase;
-import org.kermeta.trek.UseKaseModel;
+import org.kermeta.compiler.trek.ui.command.AssignTestCasesToUseCasesCommand;
 
 
 public class AssignTestCasesToUseCases implements IObjectActionDelegate {
@@ -40,9 +34,9 @@ public class AssignTestCasesToUseCases implements IObjectActionDelegate {
 	
 	protected List<IFolder> folders = new ArrayList<IFolder>();
 	
-	private List<Resource> usecasesResources = new ArrayList<Resource>();
+	//private List<Resource> usecasesResources = new ArrayList<Resource>();
 	
-	private List<Resource> testcasesResources = new ArrayList<Resource>();
+	//private List<Resource> testcasesResources = new ArrayList<Resource>();
 	
 	/**
 	 * Constructor for Action1.
@@ -61,7 +55,7 @@ public class AssignTestCasesToUseCases implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
-		
+		/*
 		// Get the use cases contained into selected "trek" files
 		// These use cases are global for all the test cases
 		usecasesResources.clear();
@@ -82,7 +76,10 @@ public class AssignTestCasesToUseCases implements IObjectActionDelegate {
 		}catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+		
+		AssignTestCasesToUseCasesCommand cmd = new AssignTestCasesToUseCasesCommand(usecasesFiles, folders);
+		cmd.execute();
 	}
 
 	/**
@@ -121,21 +118,21 @@ public class AssignTestCasesToUseCases implements IObjectActionDelegate {
 	 * @param folder
 	 * @return
 	 */
-	private List<KTestCase> getTestCases(IFolder folder)
+	/*private List<KTestCase> getTestCases(IFolder folder)
     {
 		IFile trek_file = ResourcesPlugin.getWorkspace().getRoot().getFile(folder.getFullPath().append("/" + folder.getName()).addFileExtension(KCompilerConstants.TREK_EXT));
 		UseKaseModel useKaseModel = TrekModelHelper.getUseKaseModel(trek_file);
 		testcasesResources.add(useKaseModel.eResource());
 		
 		return useKaseModel.getKtestCases();
-    }
+    }*/
 	
 	/**
 	 * 
 	 * @param trek_files
 	 * @return
 	 */
-	private Hashtable<String, KUseCase> getUseCases(List<IFile> trek_files) {
+	/*private Hashtable<String, KUseCase> getUseCases(List<IFile> trek_files) {
 
 		Hashtable<String, KUseCase> useCases = new Hashtable<String, KUseCase>();
 		for(IFile trek_file : trek_files) {
@@ -147,16 +144,16 @@ public class AssignTestCasesToUseCases implements IObjectActionDelegate {
 			}
 		}
 		return useCases;
-	}
+	}*/
 
 	/**
 	 * 
 	 * @param useCases
 	 * @param testCaseFolder
 	 */
-	private void assignTestCasesToUseCases(Hashtable<String, KUseCase> useCases, IFolder testCaseFolder) {
+	/*private void assignTestCasesToUseCases(Hashtable<String, KUseCase> useCases, IFolder testCaseFolder) {
 		KUseCase theKUseCase = useCases.get(testCaseFolder.getName());
 		theKUseCase.getVerifiedBy().addAll(getTestCases(testCaseFolder));
-	}
+	}*/
 
 }
