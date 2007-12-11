@@ -87,8 +87,6 @@
     <dependencies type="//@ruleTypes.0" from="//@units.28" to="//@units.29"/>
   </units>
   <units rules="//@rules.0 //@rules.1 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/src/answer/uml2fsm.kmt" dependents="//@units.28/@dependencies.0"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/MyStateMachine.fsm"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/MyStateMachine.fsmdi"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.tutorial.aspects/model/.cvsignore"/>
   <ruleTypes name="require"/>
   <ruleTypes name="normal"/>
