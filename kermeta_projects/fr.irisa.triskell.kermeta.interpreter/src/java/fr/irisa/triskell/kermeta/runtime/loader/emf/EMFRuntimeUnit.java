@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.55 2007-11-27 16:44:35 ftanguy Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.56 2007-12-11 16:42:33 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -177,7 +177,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     }
 
     /** print the content of the EMF Registry */
-	public String logEMFRegistryContent() {
+	private static String logEMFRegistryContent() {
 		String msg = "";
 		try {
 				
@@ -192,7 +192,6 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    	internalLog.debug("Factory.Registry known extensions are : " + msg);
 		}
 	    catch(Exception e){
-	    	
 	    	e.printStackTrace();
 	    }
     	return msg;
@@ -323,7 +322,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
      * Register a Factory for a file extension. This is necessary especially when running outside of eclipse 
      * @param kunit_uri : name of the file for which we want to register the extension
      */
-	private void registerEMFextensionToFactoryMap(String kunit_uri) {
+	public static void registerEMFextensionToFactoryMap(String kunit_uri) {
 		String ext = kunit_uri.substring(kunit_uri.lastIndexOf(".")+1);
 		
 		if (! Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().contains(ext)){
@@ -483,6 +482,148 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         }
     }
 	
+	/**
+	 * FIXME CF unused for the moment
+	 */
+	public EObject saveInMemory(String file_path) {
+		// Get and load the resource of the ECore MetaModel of which the model that we want to save is an instance
+        if (this.getMetaModelUri() != null && this.getMetaModelUri().length()>0)
+        {
+        	try {
+        		this.metaModelResource = this.loadMetaModelAsEcore(this.getMetaModelUri());
+        	}
+        	catch (WrappedException e){
+        		throwKermetaRaisedExceptionOnLoad(
+        		"Error Loading metamodel '" + this.getMetaModelUri() + "' for saving model '" + this.getUriAsString() + "' : " + e.exception().getMessage(), e);
+			}
+        }
+        else // if metaModelResource is null 
+        {
+            throwKermetaRaisedExceptionOnSave("Metamodel for the instance to save was not found or provided.", null);
+        }
+        
+        boolean saveWithNewURI = false;
+        if ( ! file_path.equals( ((Resource) associatedResource.getR2eEmfResource()).getURI().toString()) )
+        	saveWithNewURI = true;
+        
+        // Create an URI for the resource that is going to be saved
+        URI u = createURI(file_path); 
+        KermetaInterpreter.internalLog.info("URI created for model to save : "+u);
+        
+        // Add the extension of the file to save into the resource registry, so that EMF won't complain
+        registerEMFextensionToFactoryMap(getKermetaUnit().getUri());
+        
+        Resource res;
+        boolean useInterpreterInternalResources = false;	// by default do not include				
+        if(associatedResource == null){
+        	// No RuntimeObject Resource associated need to fall back to previous way to save it 
+	        // Create the resource, and fill it (done in updateEMFModel)
+        	// DVK: does this case occurs ???
+	        ResourceSet resource_set = new ResourceSetImpl();
+	        Runtime2EMF r2e = new Runtime2EMF(this, resource_set.createResource(u));
+	        r2e.updateEMFModel(saveWithNewURI);
+	        res = r2e.getResource();
+        }
+        else {
+        	// ok, let's try to find in memory what are the other resources in the same repository that may need to be updated now
+        	// getOrCreate the resource for this runtimeobject resource, deal with an eventual change in the uri
+        		// current resource
+        	res = updateEMFResource(associatedResource,u);
+        	RuntimeObject roRepository = (RuntimeObject) associatedResource.getProperties().get("repository");
+			RuntimeObject roResources = (RuntimeObject) roRepository.getProperties().get("resources");
+			RuntimeObject rouseInterpreterInternalResources = (RuntimeObject) roRepository.getProperties().get("useInterpreterInternalResources");
+			useInterpreterInternalResources = rouseInterpreterInternalResources != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(rouseInterpreterInternalResources) : false;		
+			//	for each of the resources in the repository (other than the current one)
+        	//for (RuntimeObject next : ((ArrayList<RuntimeObject>) roResources.getData().get("CollectionArrayList"))) 
+        	for (RuntimeObject next : Collection.getArrayList(roResources))
+			{
+				RuntimeObject roResource = next;
+				if (roResource != associatedResource){
+					// get orcreate an emf resource for this Resource
+					String res_uri = (String) ((RuntimeObject) roResource.getProperties().get("uri")).getJavaNativeObject();
+					Boolean isReadOnly = (Boolean) ((RuntimeObject) roResource.getProperties().get("isReadOnly")).getJavaNativeObject();
+					if(isReadOnly) {
+					///if(res_uri.startsWith("platform:/plugin/")){ DVK doesn't work in some situations, sometimes the main upadte modify/update one of these object !? 
+						internalLog.info("ignoring update of readonly resource  "+ res_uri +" (ie. indirectly loaded and attribute isReadOnly has not been explicitly set to True )");
+					}
+					else{
+						Resource res2 = updateEMFResource(roResource, createURI(res_uri));
+						
+						String mm_uri = (String) ((RuntimeObject) roResource.getProperties().get("metaModelURI")).getJavaNativeObject();
+						RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
+		        			getConcreteFactory("EMF").createRuntimeUnit("", mm_uri, roResource) ;
+						runtime_unit.associatedResource = roResource;
+						Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
+						r2emf.updateEMFModel(saveWithNewURI);
+					}
+				}
+			}
+
+    		Runtime2EMF r2e = new Runtime2EMF(this, res);
+	        r2e.updateEMFModel(saveWithNewURI);
+	        res = r2e.getResource();
+    		
+        	// for each of the resources in the repository (other than the current one)    		
+			// update the models
+			//for (RuntimeObject next : ((ArrayList<RuntimeObject>) roResources.getData().get("CollectionArrayList"))) 
+			for (RuntimeObject next : Collection.getArrayList(roResources))
+			{
+				RuntimeObject roResource = next;
+				if (roResource != associatedResource){
+					// get orcreate an emf resource for this Resource
+					String res_uri = (String) ((RuntimeObject) roResource.getProperties().get("uri")).getJavaNativeObject();						
+					Boolean isReadOnly = (Boolean) ((RuntimeObject) roResource.getProperties().get("isReadOnly")).getJavaNativeObject();
+					if(isReadOnly) {
+					//if(res_uri.startsWith("platform:/plugin/")){
+						internalLog.info("ignoring update of readonly resource "+ res_uri +"(ie. indirectly loaded and attribute isReadOnly has not been explicitly set to True )");
+					}
+					else{
+						Resource res2 = updateEMFResource(roResource, createURI(res_uri));
+										
+						String mm_uri = (String) ((RuntimeObject) roResource.getProperties().get("metaModelURI")).getJavaNativeObject();
+						RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
+		        			getConcreteFactory("EMF").createRuntimeUnit("", mm_uri, roResource) ;
+						runtime_unit.associatedResource = roResource;
+						Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
+						r2emf.updateEMFModel(saveWithNewURI);
+					}
+				}
+			}
+	        
+        }
+        ResourceSetManager rsManager = new ResourceSetManager(res.getResourceSet());
+        // if the resource must know about the resources from the interpreter
+        if(useInterpreterInternalResources) rsManager.addStdLibResource();
+        // And save the created resource!
+        try { 
+        	if(res.getContents().size() == 0){
+        		throwKermetaRaisedExceptionOnSave("Error saving EMF model '" + this.getUriAsString() + "': There is nothing to save in the resource", null);
+        	}
+        	//res.save(null);
+            if(mustValidate) validateWithEMF(res);
+        	
+            return res.getContents().get(0);
+        }
+        catch (Exception e) {
+        	// "t" can be of type Resource.IOWrappedException or DanglingHREFException
+		    Throwable t = e.getCause();
+	/*	    if(t instanceof org.eclipse.emf.ecore.xmi.DanglingHREFException){
+		    	String additionalInfo = "";
+		    	org.eclipse.emf.ecore.xmi.DanglingHREFException dhe = (org.eclipse.emf.ecore.xmi.DanglingHREFException)t;
+		    	
+		    }*/
+		    String msg = "Error saving EMF model '" + this.getUriAsString() + "'" +
+		    " :\n Error : \n    " + e.getMessage() + ((t!=null)?"\n Cause : \n    "+ t.getMessage():"");
+		    e.printStackTrace();
+		    throwKermetaRaisedExceptionOnSave(msg, e); 
+		}
+        finally{
+        	// if the resource must know about the resources from the interpreter
+        	// set them back to their original ResourceSet
+        	if(useInterpreterInternalResources) rsManager.restoreInterpreterInternalResources();
+        }
+        return null;
+    }
 	
 	
 	/** deal with an eventual change in the uri
@@ -536,7 +677,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		// associate this resource to kermesta ressource runtime object
 		roResource.setR2eEmfResource(res);
 		return res;
-	}
+   }
 
    public ResourceSet getOrCreateRepositoryResourceSetForResource(RuntimeObject roResource){
 	   ResourceSet resource_set;
@@ -549,12 +690,12 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		}
 		return resource_set;
    }
-/*
-    * ACCESSORS
+   
+   /*
+    * MetaModelUri ACCESSORS
     *
     */
-	public String getMetaModelUri()
-	{
+	public String getMetaModelUri() {
 	    return metamodel_uri;
 	}
 	
@@ -563,7 +704,6 @@ public class EMFRuntimeUnit extends RuntimeUnit {
      */
     public void setMetaModelUri(String mmUri) {
         this.metamodel_uri = mmUri;
-        
     }
     
 	/** @return the string uri as user gave it in its Kermeta source code */
@@ -612,7 +752,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    		result = primitive_types_mapping.get(icn);
 	    	else // Throw an error? --> For Ecore metamodel, we need to accept types...
 	    	{
-	    		String msg = "Sorry, your model probably won't be saved properly : it contains types that have no equivalence in kermeta : '" + obj.getName() + "';";
+	    		String msg = "Sorry, your model probably won't be saved properly: it contains types that have no equivalence in kermeta : '" + obj.getName() + "';";
 	    		//msg += "\n - Please mail kermeta-users list with your metamodel and instance :) )";
 	    		result = primitive_types_mapping.get("java.lang.Object");
 	        	// throwKermetaRaisedExceptionOnSave(msg, null);
@@ -627,8 +767,6 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    }
 	    return result;
 	}
-
-
     
 	
 	/**
