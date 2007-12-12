@@ -1,4 +1,4 @@
-$Id: readme.txt,v 1.2 2007-12-12 10:07:35 cfaucher Exp $
+$Id: readme.txt,v 1.3 2007-12-12 15:24:52 cfaucher Exp $
 - Project : org.kermeta.compiler.tests
 - File : 	readme.txt
 - License : EPL
@@ -7,20 +7,28 @@ $Id: readme.txt,v 1.2 2007-12-12 10:07:35 cfaucher Exp $
 - Creation date : 11 dec. 07
 - Authors : Cyril Faucher <cfaucher@irisa.fr>
 
-
+--------------------------
 --- Goal of the plugin ---
-This plugin aims to providing a useful environment to manage the Use and Test cases related to
+--------------------------
+
+This plugin is aimed to provide a useful environment to manage Use and Test cases related to
 the issues in compiling Kermeta.
-The final result is a generated document (*.html, *.pdf) that is summarized and described
-the Use and Test cases. There is a status board too, this one indicates design and implementation
+The final result is a generated document (*.html, *.pdf) that summarizes and describes
+Use and Test cases. There is a status board too, this one indicates design and implementation
 status for each use case.
 
 
+--------------------
 --- Requirements ---
+--------------------
+
 You must check out the project ant-docbook-styler from the Kermeta forge.
 
 
+-----------------------------------------------
 --- How to build the compiler documentation ---
+-----------------------------------------------
+
 The generation of the final document is done in four steps:
 1. edit summary and progress text files for each use cases,
 2. generate the Trek Use Kase Models,
@@ -66,3 +74,17 @@ Right-click on the xml file (ANT): <project_dir>/doc/builder/unit_test_build.xml
 	Refresh the project (F5) for avoiding "out of synchronize" mistakes.
 	A html-single file is generated: <project_dir>/doc/build/html.single/unit_test/index.html
 	A pdf file is generated: <project_dir>/doc/build/pdf.fop/unit_test/unit_test.pdf
+
+
+----------------------------------------------------
+--- How to customize the docbook file generation ---
+----------------------------------------------------
+
+The generation of the docbook file is built thanks to the tool: KET (more info. at: http://www.kermeta.org/mdk/ket).
+Thus, some templates have been used to generate the docbook file, these resources are located
+in the folder: <project_dir>/doc/templates as *.ket files.
+The translation/compilation KET to KMT is automatic thanks  to a KPM rule that takes in input a *.ket file
+and transforms it into a *.kmt file. Also if you change the location of the *.ket file, you must update
+.project.kpm file, i.e.: updating the related name filters.
+To conclude, in order to add or customize the docbook templates (*.ket), you have to adapt the *.ket files and
+maybe adapt the model navigation written in <project_dir>/doc/builder/trek2docbook.kmt.
