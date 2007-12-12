@@ -1,0 +1,3 @@
+Design:
+
+Implemented by the structural part (“model” plugin) of the EMF generated source code.

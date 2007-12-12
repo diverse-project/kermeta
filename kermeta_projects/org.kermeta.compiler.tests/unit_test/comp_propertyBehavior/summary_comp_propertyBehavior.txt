@@ -1,0 +1,4 @@
+Design:
+
+Behavior of a derived property: getter/ setter.
+This ability is not supported by the EMF mechanism based on the use of EAnnotations containing the Java source code corresponding the expected behavior.

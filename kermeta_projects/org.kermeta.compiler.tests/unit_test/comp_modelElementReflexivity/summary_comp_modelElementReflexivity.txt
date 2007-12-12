@@ -1,0 +1,1 @@
+The ModelElement reflexivity is provided by EMF on models and metamodels. When a km model is translated into in XMI, all the full reflexivity is able. The limit of the reflexivity is given by the input metamodel.

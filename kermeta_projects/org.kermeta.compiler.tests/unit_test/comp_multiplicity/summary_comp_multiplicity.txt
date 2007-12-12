@@ -1,0 +1,4 @@
+Design:
+
+Implemented by the structural part (“model” plugin) of the EMF generated source code.
+Some issues for multiplicity have taken into account during the assignment translation.

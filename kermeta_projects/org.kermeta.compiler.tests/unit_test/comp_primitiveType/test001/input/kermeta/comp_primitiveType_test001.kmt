@@ -1,0 +1,24 @@
+
+package comp_primitiveType_test001;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main
+{
+	operation main0() : String is
+	do
+		result := "main0"
+	end
+	
+	operation main1() : Boolean is
+	do
+		result := true
+	end
+	
+	operation main2() : Integer is
+	do
+		result := 1
+	end
+}

@@ -1,0 +1,9 @@
+Design:
+
+If the left and right expressions have the same type and "attr" is a property from a Class Definition "myCD" and the multiplicity is [0..1] or [1..1]
+In kmt: attr := theValueOfAttr
+In Java: myCD.setAttr(theValueOfAttr);
+
+If the left and right expressions have the same type and "attr" is a property from a Class Definition "myCD" and the multiplicity is [0..*] or [1..*]
+In kmt: attr := theValueOfAttr
+In Java: myCD.getAttr.add(theValueOfAttr);

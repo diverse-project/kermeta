@@ -1,0 +1,1 @@
+Indirect initialization of a variable (String).

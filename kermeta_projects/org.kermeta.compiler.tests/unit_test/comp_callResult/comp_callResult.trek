@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<trek:UseKaseModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:trek="http://www.kermeta.org/trek">
+  <ktestCases name="test001" summary="Input resources:&#xA;[kermeta] &#xA;&#xA;Output resources:&#xA;[ecore] [java] &#xA;&#xA;The result type of the method is String, then the result variable (having String as type) and the return statement will be added." uri="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/input/kermeta/?cvsroot=kermeta">
+    <verifies href="../unit_test.trek#comp_callResult"/>
+  </ktestCases>
+  <ktestCases name="test002" summary="Input resources:&#xA;[kermeta] &#xA;&#xA;Output resources:&#xA;[ecore] [java] &#xA;&#xA;The result type of the method is VoidType, then the return is not required." uri="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/input/kermeta/?cvsroot=kermeta">
+    <verifies href="../unit_test.trek#comp_callResult"/>
+  </ktestCases>
+  <ktestCases name="test003" summary="Input resources:&#xA;[kermeta] &#xA;&#xA;Output resources:&#xA;[ecore] [java] &#xA;&#xA;The result type of the method is a class A, then the result variable (having A as type) and the return statement will be added." uri="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/input/kermeta/?cvsroot=kermeta">
+    <verifies href="../unit_test.trek#comp_callResult"/>
+  </ktestCases>
+</trek:UseKaseModel>

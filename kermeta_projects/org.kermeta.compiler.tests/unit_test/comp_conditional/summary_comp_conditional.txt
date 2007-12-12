@@ -1,0 +1,13 @@
+Design:
+
+In kmt:
+	if(...) then
+	…
+	else
+	…
+	end
+
+In Java:
+	if(...) {
+	} else {
+	}

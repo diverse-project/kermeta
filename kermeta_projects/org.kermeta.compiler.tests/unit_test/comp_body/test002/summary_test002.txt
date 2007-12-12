@@ -1,0 +1,5 @@
+Design:
+The body of the operation is not empty
+
+Implementation:
+If the body is not empty, the generation is processed and "do" is replaced by "{" and "end" by "}".

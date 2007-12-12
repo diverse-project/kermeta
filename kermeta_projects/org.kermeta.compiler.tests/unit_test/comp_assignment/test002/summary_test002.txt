@@ -1,0 +1,1 @@
+Assignment of a variable has type: Integer.

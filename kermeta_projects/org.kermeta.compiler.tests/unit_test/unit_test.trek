@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="ASCII"?>
+<trek:UseKaseModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:trek="http://www.kermeta.org/trek">
+  <kuseCases name="Assignment" summary="Design:&#xD;&#xA;&#xD;&#xA;If the left and right expressions have the same type and &quot;attr&quot; is a property from a Class Definition &quot;myCD&quot; and the multiplicity is [0..1] or [1..1]&#xD;&#xA;In kmt: attr := theValueOfAttr&#xD;&#xA;In Java: myCD.setAttr(theValueOfAttr);&#xD;&#xA;&#xD;&#xA;If the left and right expressions have the same type and &quot;attr&quot; is a property from a Class Definition &quot;myCD&quot; and the multiplicity is [0..*] or [1..*]&#xD;&#xA;In kmt: attr := theValueOfAttr&#xD;&#xA;In Java: myCD.getAttr.add(theValueOfAttr);" id="comp_assignment">
+    <verifiedBy href="comp_assignment/comp_assignment.trek#//@ktestCases.0"/>
+    <verifiedBy href="comp_assignment/comp_assignment.trek#//@ktestCases.1"/>
+    <verifiedBy href="comp_assignment/comp_assignment.trek#//@ktestCases.2"/>
+    <verifiedBy href="comp_assignment/comp_assignment.trek#//@ktestCases.3"/>
+    <status progress="100" key="Design"/>
+    <status progress="80" key="Impl_Java"/>
+    <status progress="80" key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Attribute" id="comp_attribute">
+    <status key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Body" summary="In kmt the body of an operation begins by &quot;do&quot; and is closed by &quot;end&quot;.&#xD;&#xA;In Java: &quot;{&quot; to begin and &quot;}&quot; to close an operation body." id="comp_body">
+    <verifiedBy href="comp_body/comp_body.trek#//@ktestCases.0"/>
+    <verifiedBy href="comp_body/comp_body.trek#//@ktestCases.1"/>
+    <status progress="100" key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status progress="100" key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="CallResult" summary="In Kermeta syntax the type of the CallResult variable: &quot;result&quot; can be used anywhere, in Java the &quot;return&quot; statement must be used as a root expression in the operation body. Also, we have to add systematically a first declaration of a variable which has the type of the return type with an initialization: String result=null; and as well as the &quot;return&quot; statement at the end of the operation: return result;." id="comp_callResult">
+    <verifiedBy href="comp_callResult/comp_callResult.trek#//@ktestCases.0"/>
+    <verifiedBy href="comp_callResult/comp_callResult.trek#//@ktestCases.1"/>
+    <verifiedBy href="comp_callResult/comp_callResult.trek#//@ktestCases.2"/>
+    <status progress="100" key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status progress="100" key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="CallSuperOperation" id="comp_callSuperOperation">
+    <status key="Design"/>
+    <status key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="ClassDefinition" id="comp_classDefinition">
+    <status key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Collection" summary="Design:&#xD;&#xA;&#xD;&#xA;Helper:&#xD;&#xA;In order to access to the specific Kermeta&#x92;s methods on the Collections, we could use Java static methods. These methods will be generated from the framework in external Java classes, but not integrated into the Ecore model, because the EMF generation does not support static methods." id="comp_collection">
+    <status progress="50" key="Design"/>
+    <status progress="50" key="Impl_Java"/>
+    <status progress="50" key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Conditional" summary="Design:&#xD;&#xA;&#xD;&#xA;In kmt:&#xD;&#xA;&#x9;if(...) then&#xD;&#xA;&#x9;&#x85;&#xD;&#xA;&#x9;else&#xD;&#xA;&#x9;&#x85;&#xD;&#xA;&#x9;end&#xD;&#xA;&#xD;&#xA;In Java:&#xD;&#xA;&#x9;if(...) {&#xD;&#xA;&#x9;} else {&#xD;&#xA;&#x9;}" id="comp_conditional">
+    <verifiedBy href="comp_conditional/comp_conditional.trek#//@ktestCases.0"/>
+    <verifiedBy href="comp_conditional/comp_conditional.trek#//@ktestCases.1"/>
+    <status progress="100" key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Containment" id="comp_containment">
+    <verifiedBy href="comp_containment/comp_containment.trek#//@ktestCases.0"/>
+    <status key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Exception" id="comp_exception">
+    <status progress="80" key="Design"/>
+    <status progress="80" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="FunctionType" summary="A Function Type is called inside another method.&#xD;&#xA;&#xD;&#xA;The function type is prettyprinted in a specific static method and called by the method that uses it.&#xD;&#xA;&#xD;&#xA;In the context of a lambda expression:&#xD;&#xA;&#xD;&#xA;The two methods are generated in a same new Java Class in a &quot;helper&quot; package.&#xD;&#xA;&#xD;&#xA;/** Kermeta source code **/&#xD;&#xA;a.ref.each{ r |&#xD;&#xA;&#x9;stdio.writeln(r.toString)&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;/** Java source code **/&#xD;&#xA;// Method that uses the function type&#xD;&#xA;  public static void each(EList String list) {&#xD;&#xA;    for(String it : list) {&#xD;&#xA;      func(it);&#xD;&#xA;    }&#xD;&#xA;  }&#xD;&#xA;  &#xD;&#xA;// The FunctionType prettyprinted in the same Java class&#xD;&#xA;  private static void func(String r) {&#xD;&#xA;    System.out.println(r.toString());&#xD;&#xA;  }&#xD;&#xA;&#xD;&#xA;The call of the method from the original method: &#xD;&#xA;Main_3_Helper.each(a.getRef());" id="comp_functionType">
+    <status progress="100" key="Design"/>
+    <status progress="80" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+    <status progress="100" key="Impl_Jet"/>
+    <status progress="100" key="Impl_Simk"/>
+  </kuseCases>
+  <kuseCases name="Generics" id="comp_generics">
+    <status key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Initialization" summary="Design:&#xD;&#xA;&#xD;&#xA;- Initialization of a variable:&#xD;&#xA;&#xD;&#xA;In kmt: var aPrinter : Printer init Printer.new&#xD;&#xA;In Java: comptest2.Printer aPrinter = comptest2.Comptest2Factory.eINSTANCE.createPrinter();&#xD;&#xA;&#xD;&#xA;- Initialization of a String:&#xD;&#xA;&#xD;&#xA;In kmt: var text1 : String init &quot;Hello&quot;&#xD;&#xA;In Java: String text1 = &quot;Hello &quot;;&#xD;&#xA;&#xD;&#xA;In kmt:&#xD;&#xA;&#x9;var text2 : String&#xD;&#xA;&#x9;text2 := &quot;World&quot;&#xD;&#xA;In Java:&#xD;&#xA;&#x9;String text2 = null;&#xD;&#xA;&#x9;text2 = &quot;World&quot;;" id="comp_initialization">
+    <verifiedBy href="comp_initialization/comp_initialization.trek#//@ktestCases.0"/>
+    <verifiedBy href="comp_initialization/comp_initialization.trek#//@ktestCases.1"/>
+    <verifiedBy href="comp_initialization/comp_initialization.trek#//@ktestCases.2"/>
+    <verifiedBy href="comp_initialization/comp_initialization.trek#//@ktestCases.3"/>
+    <verifiedBy href="comp_initialization/comp_initialization.trek#//@ktestCases.4"/>
+    <verifiedBy href="comp_initialization/comp_initialization.trek#//@ktestCases.5"/>
+    <status progress="100" key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="InstanceOf" id="comp_instanceOf">
+    <verifiedBy href="comp_instanceOf/comp_instanceOf.trek#//@ktestCases.0"/>
+    <status key="Design"/>
+    <status key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Invariant" id="comp_invariant">
+    <status key="Design"/>
+    <status key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="JavaStaticCall" summary="Design:&#xD;&#xA;&#xD;&#xA;In kmt: extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)&#xD;&#xA;In Java: fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.writeTextFile(filename, text);" id="comp_javaStaticCall">
+    <verifiedBy href="comp_javaStaticCall/comp_javaStaticCall.trek#//@ktestCases.0"/>
+    <status progress="100" key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="LambdaExpression" summary="A Function Type is called inside another method.&#xD;&#xA;&#xD;&#xA;The function type is prettyprinted in a specific static method and called by the method that uses it.&#xD;&#xA;&#xD;&#xA;In the context of a lambda expression:&#xD;&#xA;&#xD;&#xA;The two methods are generated in a same new Java Class in a &quot;helper&quot; package.&#xD;&#xA;&#xD;&#xA;/** Kermeta source code **/&#xD;&#xA;a.ref.each{ r |&#xD;&#xA;&#x9;stdio.writeln(r.toString)&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;/** Java source code **/&#xD;&#xA;// Method that uses the function type&#xD;&#xA;  public static void each(EList String list) {&#xD;&#xA;    for(String it : list) {&#xD;&#xA;      func(it);&#xD;&#xA;    }&#xD;&#xA;  }&#xD;&#xA;  &#xD;&#xA;// The FunctionType prettyprinted in the same Java class&#xD;&#xA;  private static void func(String r) {&#xD;&#xA;    System.out.println(r.toString());&#xD;&#xA;  }&#xD;&#xA;&#xD;&#xA;The call of the method from the original method: &#xD;&#xA;Main_3_Helper.each(a.getRef());" id="comp_lambdaExpression">
+    <verifiedBy href="comp_lambdaExpression/comp_lambdaExpression.trek#//@ktestCases.0"/>
+    <status progress="100" key="Design"/>
+    <status progress="80" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+    <status progress="100" key="Impl_Jet"/>
+    <status progress="100" key="Impl_Simk"/>
+  </kuseCases>
+  <kuseCases name="Loop" summary="Design:&#xD;&#xA;&#xD;&#xA;In kmt:&#xD;&#xA;&#x9;var j : Integer init 5&#xD;&#xA;&#x9;from var i : Integer init 0&#xD;&#xA;&#x9;until i == self&#xD;&#xA;&#x9;loop&#xD;&#xA;&#x9;&#x9;i := i + 1&#xD;&#xA;&#x9;end&#xD;&#xA;&#xD;&#xA;In Java:&#xD;&#xA;&#x9;int j = 5;&#xD;&#xA;&#x9;int i = 0;&#xD;&#xA;&#x9;while( i != j ) {&#xD;&#xA;&#x9;&#x9;i = i + 1;&#xD;&#xA;&#x9;}" id="comp_loop">
+    <verifiedBy href="comp_loop/comp_loop.trek#//@ktestCases.0"/>
+    <status progress="100" key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="ModelElementReflexivity" summary="The ModelElement reflexivity is provided by EMF on models and metamodels. When a km model is translated into in XMI, all the full reflexivity is able. The limit of the reflexivity is given by the input metamodel." id="comp_modelElementReflexivity">
+    <status key="Design"/>
+    <status key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="ModelingUnit" id="comp_modelingUnit">
+    <status key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="MultipleInheritance" id="comp_multipleInheritance">
+    <status key="Design"/>
+    <status key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="MultiplePackagesRoot" id="comp_multiplePackagesRoot">
+    <status key="Design"/>
+    <status key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Multiplicity" summary="Design:&#xD;&#xA;&#xD;&#xA;Implemented by the structural part (&#x93;model&#x94; plugin) of the EMF generated source code.&#xD;&#xA;Some issues for multiplicity have taken into account during the assignment translation." id="comp_multiplicity">
+    <status progress="100" key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="New" summary="Design:&#xD;&#xA;&#xD;&#xA;The creation of Object is performed by the new method, in EMF-Java: a factory is used and it can be called like:&#xD;&#xA;&#xD;&#xA;For MyClassDefinition owns by the package: comp_new_test001&#xD;&#xA;&#xD;&#xA;In Kermeta: A.new&#xD;&#xA;In EMF-Java: Comp_new_test001Factory.eINSTANCE.createA();&#xD;&#xA;" id="comp_new">
+    <verifiedBy href="comp_new/comp_new.trek#//@ktestCases.0"/>
+    <status progress="100" key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status progress="100" key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="OperationStructure" id="comp_operationStructure">
+    <status key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Opposite" summary="Design:&#xD;&#xA;&#xD;&#xA;Implemented by the structural part (&#x93;model&#x94; plugin) of the EMF generated source code." id="comp_opposite">
+    <status progress="100" key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Package" summary="Design:&#xD;&#xA;The granularity of the EMF regeneration is the EPackage. If we want to generate incrementally the Java source code, also we regenerate the whole of the EPackage." id="comp_package">
+    <status key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Postcondition" id="comp_postcondition">
+    <status progress="10" key="Design"/>
+    <status key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Precondition" id="comp_precondition">
+    <status progress="10" key="Design"/>
+    <status key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="PrimitiveType" summary="Design:&#xD;&#xA;&#xD;&#xA;Helper:&#xD;&#xA;In order to access to the specific Kermeta&#x92;s methods on the Primitive Types, we could use Java static methods. These methods will be generated from the framework in external Java classes, but not integrated into the Ecore model, because the EMF generation does not support static methods." id="comp_primitiveType">
+    <verifiedBy href="comp_primitiveType/comp_primitiveType.trek#//@ktestCases.0"/>
+    <status progress="50" key="Design"/>
+    <status progress="20" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="PropertyBehavior" summary="Design:&#xD;&#xA;&#xD;&#xA;Behavior of a derived property: getter/ setter.&#xD;&#xA;This ability is not supported by the EMF mechanism based on the use of EAnnotations containing the Java source code corresponding the expected behavior." id="comp_propertyBehavior">
+    <status progress="50" key="Design"/>
+    <status key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+    <status key="Impl_Jet"/>
+  </kuseCases>
+  <kuseCases name="PropertyStructure" summary="Design:&#xD;&#xA;&#xD;&#xA;Derived property signature." id="comp_propertyStructure">
+    <status key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Reference" id="comp_reference">
+    <status key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Runner" summary="Design:&#xD;&#xA;&#xD;&#xA;In order to facilitate the accessibility for the users of the generated source code, some runners are generated. A Runner is a Java Class containing a main method which is able to launch the execution of a method. Not all the methods should infer a runner, only the methods which have none parameter or some parameters having String as type. The parameterized Method and method owning by a parameterized Class should not infer a Runner too. The runners are generated in a specific Java Package for each source code package.&#xD;&#xA;Another file is generated that is a &#x93;Eclipse Java Application Launch&#x94; file: *.launch (generated in the root of the project). This one is able to configure automatically the &quot;Run &#x85;&quot; assist of Eclipse to launch quickly an execution. The parameters of this file are provided by the tags: mainClass and mainOperation given by the ModelingUnit.&#xD;&#xA;&#xD;&#xA;&lt;warning>&lt;para>The simk model should be populated by the pass written in Kermeta and not in Java.&lt;/para>&lt;/warning>" id="comp_runner">
+    <verifiedBy href="comp_runner/comp_runner.trek#//@ktestCases.0"/>
+    <status progress="100" key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+    <status progress="100" key="Impl_Jet"/>
+    <status progress="100" key="Impl_Simk"/>
+  </kuseCases>
+  <kuseCases name="SubPackage" id="comp_subPackage">
+    <status key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Tag" id="comp_tag">
+    <status key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="Traceability" summary="A traceability mechanism could be added between the merged Kermeta model file (*.km) and the generated Java." id="comp_traceability">
+    <status progress="10" key="Design"/>
+    <status key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+  <kuseCases name="UriManagement" id="comp_uriManagement">
+    <status progress="10" key="Design"/>
+    <status key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+  </kuseCases>
+</trek:UseKaseModel>

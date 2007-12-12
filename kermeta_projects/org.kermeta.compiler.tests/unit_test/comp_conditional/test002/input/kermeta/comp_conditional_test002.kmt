@@ -7,7 +7,7 @@ require kermeta
 
 class Main
 {
-	// simple if
+	// if with an else
 	operation main() : Void is
 	do
 		if(1==0) then

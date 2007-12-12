@@ -1,0 +1,4 @@
+Design:
+
+In kmt: extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)
+In Java: fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.writeTextFile(filename, text);

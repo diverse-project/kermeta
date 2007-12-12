@@ -1,0 +1,8 @@
+Design:
+
+The creation of Object is performed by the new method, in EMF-Java: a factory is used and it can be called like:
+
+For MyClassDefinition owns by the package: comp_new_test001
+
+In Kermeta: A.new
+In EMF-Java: Comp_new_test001Factory.eINSTANCE.createA();

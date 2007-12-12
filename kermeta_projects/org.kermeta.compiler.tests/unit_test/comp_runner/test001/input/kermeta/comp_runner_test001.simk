@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simk:SIMKModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:simk="http://www.kermeta.org/simk" name="comp_runner_test001.simk">
+  <sMContexts staticMethods="//@staticMethods.0">
+    <sMPackage name="comp_runner_test001" sMClass="//@sMContexts.0/@sMClass"/>
+    <sMClass name="Main" sMPackage="//@sMContexts.0/@sMPackage"/>
+  </sMContexts>
+  <sMContexts staticMethods="//@staticMethods.1">
+    <sMPackage name="comp_runner_test001" sMClass="//@sMContexts.1/@sMClass"/>
+    <sMClass name="Main" sMPackage="//@sMContexts.1/@sMPackage"/>
+  </sMContexts>
+  <sMContexts staticMethods="//@staticMethods.2">
+    <sMPackage name="comp_runner_test001" sMClass="//@sMContexts.2/@sMClass"/>
+    <sMClass name="Main" sMPackage="//@sMContexts.2/@sMPackage"/>
+  </sMContexts>
+  <staticMethods sMContext="//@sMContexts.0">
+    <usages>Runner</usages>
+    <parentMethod href="comp_runner_test001.ecore#/1/Main/main0"/>
+  </staticMethods>
+  <staticMethods sMContext="//@sMContexts.1">
+    <sMParameters name="text0" type="String"/>
+    <usages>Runner</usages>
+    <parentMethod href="comp_runner_test001.ecore#/1/Main/main1"/>
+  </staticMethods>
+  <staticMethods sMContext="//@sMContexts.2">
+    <sMParameters name="text0" type="String"/>
+    <sMParameters name="text1" type="String"/>
+    <usages>Runner</usages>
+    <parentMethod href="comp_runner_test001.ecore#/1/Main/main2"/>
+  </staticMethods>
+</simk:SIMKModel>

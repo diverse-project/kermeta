@@ -1,0 +1,16 @@
+Design:
+
+In kmt:
+	var j : Integer init 5
+	from var i : Integer init 0
+	until i == self
+	loop
+		i := i + 1
+	end
+
+In Java:
+	int j = 5;
+	int i = 0;
+	while( i != j ) {
+		i = i + 1;
+	}

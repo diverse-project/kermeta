@@ -1,6 +1,7 @@
 @mainClass "comp_assignment_test004::Main"
 @mainOperation "main"
 
+@uri "toto"
 package comp_assignment_test004;
 
 require kermeta
@@ -22,8 +23,8 @@ class Main
     	
     	stdio.writeln("a.name: " + a.name)
     	
-    	a.b.each{ e |
-    		stdio.writeln("a.b: " + e.toString)
+    	a.b.each{ eeeee |
+    		stdio.writeln("a.b: " + eeeee.toString)
     	}
     end    
 }

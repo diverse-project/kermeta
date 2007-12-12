@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simk:SIMKModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:simk="http://www.kermeta.org/simk" name="comp_assignment_test004.simk">
+  <sMContexts staticMethods="//@staticMethods.0">
+    <sMPackage name="comp_assignment_test004"/>
+  </sMContexts>
+  <sMContexts staticMethods="//@staticMethods.1">
+    <sMPackage name="comp_assignment_test004" sMClass="//@sMContexts.1/@sMClass"/>
+    <sMClass name="Main" sMPackage="//@sMContexts.1/@sMPackage"/>
+  </sMContexts>
+  <staticMethods name="each" sMContext="//@sMContexts.0" id="1" body="StdIO.writeln(&quot;a.b: &quot;.plus(eeeee.toString();))">
+    <sMParameters name="eeeee" type=""/>
+    <sMReturn type=""/>
+    <usages>FunctionType</usages>
+    <parentMethod href="comp_assignment_test004.ecore#/1/Main/main"/>
+  </staticMethods>
+  <staticMethods sMContext="//@sMContexts.1">
+    <usages>Runner</usages>
+    <parentMethod href="comp_assignment_test004.ecore#/1/Main/main"/>
+  </staticMethods>
+</simk:SIMKModel>

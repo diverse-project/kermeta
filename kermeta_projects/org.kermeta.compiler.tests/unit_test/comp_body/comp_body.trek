@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<trek:UseKaseModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:trek="http://www.kermeta.org/trek">
+  <ktestCases name="test001" summary="Input resources:&#xA;[kermeta] &#xA;&#xA;Output resources:&#xA;[ecore] [java] &#xA;&#xA;Design:&#xD;&#xA;Empty body of the operation&#xD;&#xA;&#xD;&#xA;Implementation:&#xD;&#xA;If the body is empty, the generation is not processed." uri="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test001/input/kermeta/?cvsroot=kermeta">
+    <verifies href="../unit_test.trek#comp_body"/>
+  </ktestCases>
+  <ktestCases name="test002" summary="Input resources:&#xA;[kermeta] &#xA;&#xA;Output resources:&#xA;[ecore] [java] &#xA;&#xA;Design:&#xD;&#xA;The body of the operation is not empty&#xD;&#xA;&#xD;&#xA;Implementation:&#xD;&#xA;If the body is not empty, the generation is processed and &quot;do&quot; is replaced by &quot;{&quot; and &quot;end&quot; by &quot;}&quot;.&#xD;&#xA;" uri="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test002/input/kermeta/?cvsroot=kermeta">
+    <verifies href="../unit_test.trek#comp_body"/>
+  </ktestCases>
+</trek:UseKaseModel>

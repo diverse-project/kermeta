@@ -1,0 +1,3 @@
+Design=50
+Impl_Java=20
+Impl_Kermeta=0

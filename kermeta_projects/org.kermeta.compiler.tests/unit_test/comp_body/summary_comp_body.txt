@@ -1,0 +1,2 @@
+In kmt the body of an operation begins by "do" and is closed by "end".
+In Java: "{" to begin and "}" to close an operation body.

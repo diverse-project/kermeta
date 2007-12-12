@@ -1,0 +1,4 @@
+Design:
+
+Helper:
+In order to access to the specific Kermeta’s methods on the Primitive Types, we could use Java static methods. These methods will be generated from the framework in external Java classes, but not integrated into the Ecore model, because the EMF generation does not support static methods.

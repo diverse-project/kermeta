@@ -1,0 +1,5 @@
+Design:
+Empty body of the operation
+
+Implementation:
+If the body is empty, the generation is not processed.
