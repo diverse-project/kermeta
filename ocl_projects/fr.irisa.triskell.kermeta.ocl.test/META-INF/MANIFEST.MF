@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Test Plug-in
-Bundle-SymbolicName: fr.irisa.triskell.kermeta.ocl.test
+Bundle-SymbolicName: fr.irisa.triskell.kermeta.ocl.test;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: fr.irisa.triskell.kermeta.ocl.test.Activator
 Require-Bundle: org.eclipse.ui,
