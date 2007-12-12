@@ -1,4 +1,4 @@
-/*$Id: InitializeUseCasesModel.java,v 1.5 2007-12-11 20:16:44 cfaucher Exp $
+/*$Id: InitializeUseCasesModel.java,v 1.6 2007-12-12 18:05:48 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeUseCasesModel.java
 * License : EPL
@@ -116,9 +116,18 @@ public class InitializeUseCasesModel implements IObjectActionDelegate {
 		
 		Map<String, Integer> map = TrekModelHelper.getProgressContent(folder);
 		
-		aUseCase.getStatus().add(TrekModelHelper.newStatus(KCompilerConstants.STATUS_DESIGN, map.get(KCompilerConstants.STATUS_DESIGN)));
-		aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_JAVA, map.get("Impl_" + KCompilerConstants.STATUS_JAVA)));
-		aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_KERMETA, map.get("Impl_" + KCompilerConstants.STATUS_KERMETA)));
+		if(map.get(KCompilerConstants.STATUS_DESIGN)!=null)
+			aUseCase.getStatus().add(TrekModelHelper.newStatus(KCompilerConstants.STATUS_DESIGN, map.get(KCompilerConstants.STATUS_DESIGN)));
+		if(map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_JAVA)!=null)
+			aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_JAVA, map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_JAVA)));
+		if(map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_KERMETA)!=null)
+			aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_KERMETA, map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_KERMETA)));
+		if(map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_JET)!=null)
+			aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_JET, map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_JET)));
+		if(map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_KET)!=null)
+			aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_KET, map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_KET)));
+		if(map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_SIMK)!=null)
+			aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_SIMK, map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_SIMK)));
 		
 		return aUseCase;
     }

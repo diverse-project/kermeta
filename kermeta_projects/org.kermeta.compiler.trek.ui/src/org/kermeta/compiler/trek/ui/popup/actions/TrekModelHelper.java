@@ -1,4 +1,4 @@
-/*$Id: TrekModelHelper.java,v 1.6 2007-12-11 20:16:44 cfaucher Exp $
+/*$Id: TrekModelHelper.java,v 1.7 2007-12-12 18:05:48 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	TrekModelHelper.java
 * License : EPL
@@ -102,7 +102,7 @@ public class TrekModelHelper {
 	 * @return
 	 */
 	public static KStatus newStatusImpl(String key, int progress) {
-		return newStatus("Impl", key, progress);
+		return newStatus(KCompilerConstants.IMPL_PREFIX, key, progress);
 	}
 	
 	/**
@@ -114,7 +114,7 @@ public class TrekModelHelper {
 	 */
 	private static KStatus newStatus(String key_prefix, String key, int progress) {
 		KStatus newStatus = TrekFactory.eINSTANCE.createKStatus();
-		newStatus.setKey(key_prefix + "_" + key);
+		newStatus.setKey(key_prefix + key);
 		newStatus.setProgress(progress);
 		return newStatus;
 	}
@@ -141,11 +141,7 @@ public class TrekModelHelper {
 			try {
 				return readStringByLine(summary_file.getContents());
 			} catch (CoreException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 			}
 		}
 		return null;
@@ -179,9 +175,11 @@ public class TrekModelHelper {
 		BufferedReader input = new BufferedReader(new InputStreamReader(in));
 		try {
 			String thisLine;
-			while ((thisLine = input.readLine()) != null) { // while loop begins here
+			while ((thisLine = input.readLine()) != null) {
 				String[] lineContent = thisLine.split("=");
-				map.put(lineContent[0], Integer.parseInt(lineContent[1]));
+				if( !lineContent[1].equals("-1") ) {
+					map.put(lineContent[0], Integer.parseInt(lineContent[1]));
+				}
 		    }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

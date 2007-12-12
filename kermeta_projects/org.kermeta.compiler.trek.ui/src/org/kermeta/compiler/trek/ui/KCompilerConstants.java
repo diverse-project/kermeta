@@ -1,4 +1,4 @@
-/*$Id: KCompilerConstants.java,v 1.3 2007-12-11 18:19:12 cfaucher Exp $
+/*$Id: KCompilerConstants.java,v 1.4 2007-12-12 18:05:48 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	KCompilerConstants.java
 * License : EPL
@@ -27,6 +27,14 @@ public final class KCompilerConstants {
 	public static final String STATUS_JAVA = "Java";
 	
 	public static final String STATUS_DESIGN = "Design";
+	
+	public static final String STATUS_JET = "Jet";
+	
+	public static final String STATUS_KET = "Ket";
+	
+	public static final String STATUS_SIMK = "Simk";
+	
+	public static final String IMPL_PREFIX = "Impl_";
 	
 	public static final String SUMMARY_PREFIX = "summary_";
 	
