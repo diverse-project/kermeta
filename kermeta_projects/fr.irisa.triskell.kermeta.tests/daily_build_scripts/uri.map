@@ -1,8 +1,8 @@
-# $Id: uri.map,v 1.1 2007-12-11 13:10:13 dvojtise Exp $
+# $Id: uri.map,v 1.2 2007-12-12 11:01:48 dvojtise Exp $
 #
 
-"platform:/plugin/"			"file://tmp/kermeta_build/src/plugins/"
-"platform:/resource/"		"file://tmp/kermeta_build/src/plugins/"
+"platform:/plugin/"			"/tmp/kermeta_build/src/plugins/"
+"platform:/resource/"		"/tmp/kermeta_build/src/plugins/"
 
 # This is the values that are correct for daily build
 # You probably have to change it to match your configuration
