@@ -1,4 +1,4 @@
-/*$Id: AssignTestCasesToUseCases.java,v 1.5 2007-12-11 20:16:44 cfaucher Exp $
+/*$Id: AssignTestCasesToUseCases.java,v 1.6 2007-12-12 09:29:00 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	AssignTestCasesToUseCases.java
 * License : EPL
@@ -34,12 +34,9 @@ public class AssignTestCasesToUseCases implements IObjectActionDelegate {
 	
 	protected List<IFolder> folders = new ArrayList<IFolder>();
 	
-	//private List<Resource> usecasesResources = new ArrayList<Resource>();
-	
-	//private List<Resource> testcasesResources = new ArrayList<Resource>();
 	
 	/**
-	 * Constructor for Action1.
+	 * Constructor for the action: AssignTestCasesToUseCases.
 	 */
 	public AssignTestCasesToUseCases() {
 		super();
@@ -55,29 +52,6 @@ public class AssignTestCasesToUseCases implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
-		/*
-		// Get the use cases contained into selected "trek" files
-		// These use cases are global for all the test cases
-		usecasesResources.clear();
-		testcasesResources.clear();
-		Hashtable<String, KUseCase> useCases = getUseCases(usecasesFiles);
-		for(IFolder folder : folders) {
-			assignTestCasesToUseCases(useCases, folder);
-		}
-		
-		try {
-			// Save the "use cases resources" after the assignment of test cases to use cases
-			for(Resource ucR : usecasesResources) {
-				ucR.save(null);
-			}
-			for(Resource tcR : testcasesResources) {
-				tcR.save(null);
-			}
-		}catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
 		AssignTestCasesToUseCasesCommand cmd = new AssignTestCasesToUseCasesCommand(usecasesFiles, folders);
 		cmd.execute();
 	}
