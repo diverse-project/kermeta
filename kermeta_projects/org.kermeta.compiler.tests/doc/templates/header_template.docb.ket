@@ -8,5 +8,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: header_template.docb.ket,v 1.1 2007-12-11 15:42:02 cfaucher Exp $ -->
+<!-- $Id: header_template.docb.ket,v 1.2 2007-12-12 13:50:36 cfaucher Exp $ -->
 <book lang="en-US">
+	<bookinfo>
+	    <title>Kermeta Compiler Documentation</title>
+		<pubdate>Build date: @BUILD.DATE@</pubdate>
+	    <pubdate>$Date: 2007-12-12 13:50:36 $</pubdate>
+	    <author>
+	      <firstname>Triskell</firstname>
+	      <surname>INRIA Group</surname>
+	    </author>
+	    <author>
+	      <firstname>Cyril</firstname>
+	      <surname>Faucher</surname>
+	    </author>
+		<keywordset>
+	      <keyword>Kermeta</keyword>
+	      <keyword>compiler</keyword>
+		  <keyword>specification</keyword>
+	      <keyword>use case</keyword>	
+	      <keyword>test case</keyword>	      	      
+	    </keywordset>
+	
+	    <bibliomisc>License EPL</bibliomisc>
+	
+	    <abstract>
+	      <para>This document aims to provide a development plan of the Kermeta compiler: Kermeta to Java.</para>
+	    </abstract>
+	
+	    <publisher>
+	      <publishername>INRIA</publishername>
+	      <address><state>France</state>
+			<otheraddr><ulink url="http://www.inria.fr">http://www.inria.fr</ulink></otheraddr>
+		  </address>
+	    </publisher>
+	  </bookinfo>
+	  
+	  <preface id="preface.link">
+		 <title id="preface.title.link">Preface<phrase id="preface"></phrase></title>
+		<para>
+		    	This document aims to provide a development plan of the Kermeta compiler: Kermeta to Java.
+					The document is divided in three parts:
+					- An introduction dedicated to the architecture shows the process of the generation of the Java source code,
+					- a status board showing the state of the whole of tasks,
+					- a listing of the issues in compiling, giving the description of the issue and links to the files in the Kermeta CVS. These kmt files are pieces of KMT source code to explain and show the issues in different cases. A piece of a Java source code is as well provided to show the expected Java source code and to finish the generated Ecore file corresponding to the KMT file. All the resources are available at [<ulink type="" url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/?cvsroot=kermeta">cvs</ulink>].
+		</para>
+		<important>
+    		<para>
+			   Kermeta is an evolving software and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
+				<ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+			    <emphasis role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+			    </ulink> or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v0.99.0
+    		</para>
+    	</important>
+
+    	<!--tip> The most update version of this document is available on line from <ulink type="" url="http://www.kermeta.org/">http://www.kermeta.org</ulink>.</tip-->
+  	  </preface>
