@@ -3,3 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Compiler tests Plug-in
 Bundle-SymbolicName: org.kermeta.compiler.tests
 Bundle-Version: 0.1.99.qualifier
+Eclipse-LazyStart: true
+Bundle-Activator: org.kermeta.compiler.tests.CompilerTestsPlugin
+Require-Bundle: org.eclipse.core.runtime
+Export-Package: org.kermeta.compiler.tests
