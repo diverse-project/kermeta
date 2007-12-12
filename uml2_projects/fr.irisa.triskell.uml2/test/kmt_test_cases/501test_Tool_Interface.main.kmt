@@ -1,13 +1,10 @@
-@mainClass "tools_tests::ToolInterfaceTestCase"
-@mainOperation "testExtractInterfaceTool_HasInterface"
-
 package tools_tests;
 
 require kermeta
 require "../../src/kermeta/transformations/StaticTools.kmt"
 
-using uml2
-using uml2::transformations
+using uml
+using uml::transformations
 
 class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
 {
@@ -19,12 +16,12 @@ class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
     	model := Model.new
     	Aclass := Class.new
     	Aclass.name := "Aclass"
-    	model.ownedMember.add(Aclass)
+    	model.packagedElement.add(Aclass)
     	
     	Bclass := Class.new
     	Bclass.name := "Bclass"
     	Bclass.isAbstract := true
-    	model.ownedMember.add(Bclass)
+    	model.packagedElement.add(Bclass)
     	
     	// test placement of attributes & operations
     	var attr : Property init Property.new
@@ -36,7 +33,8 @@ class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
     	var par : Parameter init Parameter.new
     	par.name := "par1"
     	par.type := Aclass
-    	meth.returnResult.add(par)
+    	par.direction := ParameterDirectionKind.return
+    	meth.ownedParameter.add(par)
     	Aclass.ownedOperation.add(meth)
     	meth := Operation.new
     	meth.name := "concreteOperation"
@@ -48,8 +46,8 @@ class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
     	Aclass.ownedOperation.add(meth)
     	
      	var iftool : Interface_Tool init Interface_Tool.new
-     	model.ownedMember.add(iftool.extractInterface(Aclass))
-     	model.ownedMember.add(iftool.extractInterface(Bclass))
+     	model.packagedElement.add(iftool.extractInterface(Aclass))
+     	model.packagedElement.add(iftool.extractInterface(Bclass))
 	end
 	
 	method tearDown() is do
@@ -58,12 +56,12 @@ class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
 	
     operation testExtractInterfaceTool_HasInterface() is do
     	// first asserts the generalization collection is not empty (uncatched exception)
-    	assertTrueWithMsg(Aclass.generalization != void,
+    	assertTrueWithMsg(Aclass.interfaceRealization != void,
     		"The given class must have a generalisation")
-    	assertTrueWithMsg(Aclass.generalization.size != 0,
+    	assertTrueWithMsg(Aclass.interfaceRealization.size != 0,
     		"The given class must inherit its new interface")
     		
-    	assertTrueWithMsg(Aclass.generalization.one.general.getMetaClass == Interface,
+    	assertTrueWithMsg(Aclass.interfaceRealization.one.contract.getMetaClass == Interface,
     		"The given class must inherit its new interface")
     end
     
@@ -73,20 +71,20 @@ class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
     		"The given class must have no attributes")
     	
     	var interf : Interface
-    	interf ?= Aclass.generalization.one.general
+    	interf := Aclass.interfaceRealization.one.contract
     	assertTrueWithMsg(interf.ownedAttribute.size == 1,
     		"The interface must have the given class attributes")
     end
 	
     operation testExtractInterfaceTool_InterfaceHasAllOperations() is do
-    	// first asserts the generalization collection is not empty (uncatched exception)
-    	assertTrueWithMsg(Aclass.generalization != void,
+    	// first asserts the interfaceRealization collection is not empty (uncatched exception)
+    	assertTrueWithMsg(Aclass.interfaceRealization != void,
     		"The given class must have a generalisation")
-    	assertTrueWithMsg(Aclass.generalization.size != 0,
+    	assertTrueWithMsg(Aclass.interfaceRealization.size != 0,
     		"The given class must inherit its new interface")
     		
     	var interf : Interface
-    	interf ?= Aclass.generalization.one.general
+    	interf := Aclass.interfaceRealization.one.contract
     	assertTrueWithMsg(interf.ownedOperation.size == 2,
     		"The new interface must have all the operations of the concrete class")
     	assertTrueWithMsg(interf.ownedAttribute.size == 1,
@@ -106,14 +104,24 @@ class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
 	
     operation testExtractInterfaceTool_InterfaceHasOperationsParameters() is do
     	var interf : Interface
-    	interf ?= Aclass.generalization.one.general
-    	assertTrueWithMsg(interf.ownedOperation.elementAt(0).returnResult.first.name == "par1",
+    	interf := Aclass.interfaceRealization.one.contract
+    	
+    	var op0 : Operation init interf.ownedOperation.elementAt(0)
+    	var result0 : Parameter init op0.ownedParameter.detect{ p | p.direction == ParameterDirectionKind.return }
+    	assertTrueWithMsg(result0 != void,
+    		"The new interface must have a return parameter for operation 0")
+    	assertTrueWithMsg(result0.name == "par1",
     		"The new interface must have the correct name of return parameter for operation")
-    	assertTrueWithMsg(interf.ownedOperation.elementAt(0).returnResult.first.type == Aclass,
+    	assertTrueWithMsg(result0.type == Aclass,
     		"The new interface must have the correct return type for operation")
-    	assertTrueWithMsg(interf.ownedOperation.elementAt(1).ownedParameter.first.name == "par2",
+    	
+    	var op1 : Operation init interf.ownedOperation.elementAt(1)
+    	var result1 : Parameter init op1.ownedParameter.first
+    	assertTrueWithMsg(result1 != void,
+    		"The new interface must have a return parameter for operation 1")
+     	assertTrueWithMsg(result1.name == "par2",
     		"The new interface must have the correct name for parameters of operation")
-    	assertTrueWithMsg(interf.ownedOperation.elementAt(1).ownedParameter.first.type == Bclass,
+    	assertTrueWithMsg(result1.type == Bclass,
     		"The new interface must have the correct type for parameters of operation")
     end
 	
@@ -124,16 +132,18 @@ class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
 	
     // the added interface must be present in the model, to be saved
     operation testExtractInterfaceTool_Model() is do
-    	var bool : kermeta::standard::Boolean init false
-    	model.ownedMember.each{ u |
-    		if u.name == "IA" then bool := true end
+    	var boolIA : kermeta::standard::Boolean init false
+    	model.packagedElement.each{ u |
+    		if u.name == "I"+Aclass.name then boolIA := true end
     	}
-    	assertTrueWithMsg(bool,
-    		"Tool failed to add the interface 'IA' to the model")
-    	model.ownedMember.each{ u |
-    		if u.name == "IB" then bool := true end
+    	assertTrueWithMsg(boolIA,
+    		"Tool failed to add the Aclass interface to the model")
+
+    	var boolIB : kermeta::standard::Boolean init false
+    	model.packagedElement.each{ u |
+    		if u.name == "I"+Bclass.name then boolIB := true end
     	}
-    	assertTrueWithMsg(bool,
-    		"Tool failed to add the interface 'IB' to the model")
+    	assertTrueWithMsg(boolIB,
+    		"Tool failed to add the Bclass interface to the model")
     end
 }

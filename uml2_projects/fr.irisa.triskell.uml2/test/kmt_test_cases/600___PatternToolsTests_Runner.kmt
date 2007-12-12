@@ -15,9 +15,11 @@ class MyTestClass
     operation main() : Void is do 
 	    var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
 		
+		stdio.writeln("  ... testing Tool_GOFStatePattern_apply ...")
 		testRunner.run(ToolGOFStateApplyTestCase)
 		testRunner.printTestResult
 		
+		stdio.writeln("  ... testing Tool_GOFStatePattern_visitors ...")
 		testRunner.run(ToolGOFStateVisitorsTestCase)
 		testRunner.printTestResult
     end 

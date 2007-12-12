@@ -1,14 +1,11 @@
-@mainClass "tools_tests::ToolCloneValueSpecificationTestCase"
-@mainOperation "test_CloneTool_ValueSpecification_Expression"
-
 package tools_tests;
 
 
 require kermeta
 require "../../src/kermeta/transformations/UmlCloneFactory.kmt"
 
-using uml2
-using uml2::transformations
+using uml
+using uml::transformations
 
 class ToolCloneValueSpecificationTestCase inherits kermeta::kunit::TestCase
 {
@@ -39,8 +36,8 @@ class ToolCloneValueSpecificationTestCase inherits kermeta::kunit::TestCase
     end
     operation test_CloneTool_ValueSpecification_OpaqueExpression() is do
     	var orig : OpaqueExpression init OpaqueExpression.new
-    	orig.body := "do end"
-    	orig.language := "kermeta"
+    	orig.body.add("do end")
+    	orig.language.add("kermeta")
     	var clone : OpaqueExpression
     	clone ?= factory.cloneValueSpecification(orig)
     	assertTrueWithMsg(clone != void,

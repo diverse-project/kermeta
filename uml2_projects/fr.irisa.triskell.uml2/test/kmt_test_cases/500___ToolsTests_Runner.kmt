@@ -21,35 +21,35 @@ class MyTestClass
     operation main() : Void is do 
 	    var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
 		
-		stdio.writeln("  ... testing ToolGeneralizationTestCase ...")
+		stdio.writeln("  ... testing Tool_Generalization ...")
 		testRunner.run(ToolGeneralizationTestCase)
 		testRunner.printTestResult
 		
-		stdio.writeln("  ... testing ToolInterfaceTestCase ...")
+		stdio.writeln("  ... testing Tool_Interface ...")
 		testRunner.run(ToolInterfaceTestCase)
 		testRunner.printTestResult
 		
-		stdio.writeln("  ... testing ToolInterfaceAbstractTestCase ...")
+		stdio.writeln("  ... testing Tool_InterfaceAbstract ...")
 		testRunner.run(ToolInterfaceAbstractTestCase)
 		testRunner.printTestResult
 		
-		stdio.writeln("  ... testing ToolAccessorTestCase ...")
+		stdio.writeln("  ... testing Tool_Accessor ...")
 		testRunner.run(ToolAccessorTestCase)
 		testRunner.printTestResult
 		
-		stdio.writeln("  ... testing ToolAccessorPublicTestCase ...")
+		stdio.writeln("  ... testing Tool_AccessorPublic ...")
 		testRunner.run(ToolAccessorPublicTestCase)
 		testRunner.printTestResult
 		
-		stdio.writeln("  ... testing ToolTransitionTestCase ...")
+		stdio.writeln("  ... testing Tool_Transition ...")
 		testRunner.run(ToolTransitionTestCase)
 		testRunner.printTestResult
 		
-		stdio.writeln("  ... testing ToolContext4StateTestCase ...")
+		stdio.writeln("  ... testing Tool_Context4State ...")
 		testRunner.run(ToolContext4StateTestCase)
 		testRunner.printTestResult
 		
-		stdio.writeln("  ... testing ToolAssociationTestCase ...")
+		stdio.writeln("  ... testing Tool_Association ...")
 		testRunner.run(ToolAssociationTestCase)
 		testRunner.printTestResult
     end 

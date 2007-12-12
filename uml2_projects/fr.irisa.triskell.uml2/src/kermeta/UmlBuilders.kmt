@@ -1,10 +1,9 @@
 package builders;
 
 /* this package is not use for Uml2KMT transformation */
-//require "Uml2.kmt"
-require "Uml2.km"
+require "visitableUML.kmt"
 
-using uml2
+using uml
 
 	abstract class AbstractUmlFactory
 	{

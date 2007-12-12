@@ -1,4 +1,4 @@
-/* $Id: UmlCloneFactory.kmt,v 1.8 2007-12-03 09:12:06 vmahe Exp $
+/* $Id: UmlCloneFactory.kmt,v 1.9 2007-12-12 15:53:46 vmahe Exp $
  * Creation date: July 5, 2006
  * License:
  * Copyright:
@@ -18,10 +18,12 @@ using uml::transformations
 class UmlCloneFactory
 {
 	reference ioTable : IOElementsTable
+	reference uncontainedElements : Element[0..*]
 	
 	operation initialize() is do
 		ioTable := IOElementsTable.new
 		ioTable.initialize
+		uncontainedElements.clear
 	end
 
 ///////////////////////// MAIN DIAGRAMS CLONING ///////////////////////
@@ -136,7 +138,7 @@ class UmlCloneFactory
         clone.isReadOnly := element.isReadOnly
         clone.isDerivedUnion := element.isDerivedUnion
         clone.association := element.association	// NB : not a clone of the association but the original one
-    	// rem : the "owningAssociation" attribute must be fixed by its owning association
+    	// rem : the "owningAssociation" attribute must be fixed by this association
     	// redefinedProperty : TODO
     	// subsettedProperty : TODO
     	// rem : the "associationEnd" attribute must be fixed by the property (of an association) which own the qualifier

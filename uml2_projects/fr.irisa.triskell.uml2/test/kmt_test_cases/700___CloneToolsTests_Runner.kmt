@@ -25,7 +25,7 @@ class MyTestClass
 	    var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
 		
 		///////// tests on UML2 elements cloning //////////
-		
+/*		
 		stdio.writeln("   ... testing ToolClonePackageTestCase ...")
 		testRunner.run(ToolClonePackageTestCase)
 		testRunner.printTestResult
@@ -57,7 +57,7 @@ class MyTestClass
 		stdio.writeln("   ... testing ToolCloneDataTypeTestCase ...")
 		testRunner.run(ToolCloneDataTypeTestCase)
 		testRunner.printTestResult
-		
+	*/	
 		///////// tests on UML2 diagrams cloning //////////
 		
 		stdio.writeln("   ... testing ToolCloneStaticDiagramTestCase ...")

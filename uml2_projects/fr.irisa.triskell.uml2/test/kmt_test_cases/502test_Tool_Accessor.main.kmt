@@ -1,13 +1,10 @@
-@mainClass "tools_tests::ToolAccessorTestCase"
-@mainOperation "testAccessorTool_Getters"
-
 package tools_tests;
 
 require kermeta
 require "../../src/kermeta/transformations/StaticTools.kmt"
 
-using uml2
-using uml2::transformations
+using uml
+using uml::transformations
 
 class ToolAccessorTestCase inherits kermeta::kunit::TestCase
 {
@@ -42,10 +39,10 @@ class ToolAccessorTestCase inherits kermeta::kunit::TestCase
     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr"}.size == 1,
     		"The class must have the right getters on its attributes")
     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr"}
-    			.one.returnResult.one.type == Aclass,
+    			.one.ownedParameter.detect{p | p.direction == ParameterDirectionKind.return}.type == Aclass,
 		    "The getter must return the right type for attribute")
     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr"}
-    			.one.ownedParameter.size == 0,
+    			.one.ownedParameter.select{p | p.direction != ParameterDirectionKind.return}.size == 0,
 		    "The getter must have no parameter other than return for attribute")
     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr"}
     			.one.isAbstract == false,
@@ -79,10 +76,10 @@ class ToolAccessorTestCase inherits kermeta::kunit::TestCase
     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Mult"}.size == 1,
     		"The class must have the right getters on its attributes")
     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Mult"}
-    			.one.returnResult.one.type == Aclass,
+    			.one.ownedParameter.detect{p | p.direction == ParameterDirectionKind.return}.type == Aclass,
 		    "The getter must return the right type for attribute")
     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Mult"}
-    			.one.ownedParameter.size == 1,
+    			.one.ownedParameter.select{p | p.direction != ParameterDirectionKind.return}.size == 1,
 		    "The getter must have one parameter (other than return type) for attribute")
     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Mult"}
     			.one.ownedParameter.select{ par | par.name == "order"}.size == 1,

@@ -1,4 +1,4 @@
-/* $Id: GOFStatePatternTool.kmt,v 1.7 2007-12-03 09:12:07 vmahe Exp $
+/* $Id: GOFStatePatternTool.kmt,v 1.8 2007-12-12 15:53:46 vmahe Exp $
  * Creation date: July 6, 2006
  * License:
  * Copyright:
@@ -51,7 +51,7 @@ class GOFStatePatternTool inherits UmlTool, uml::visitors::TopDownVisitor
     end
     
     method visitClass(visitable : Class) is do
-    	var machines : StateMachine[]
+    	var machines : StateMachine[0..*] init kermeta::standard::OrderedSet<StateMachine>.new
     	visitable.ownedBehavior.each{ b |
     		var sm : StateMachine
     		sm ?= b
@@ -93,7 +93,7 @@ class GOFStatePatternTool inherits UmlTool, uml::visitors::TopDownVisitor
 /*		var assocTool : Association_Tool init Association_Tool.new
 		var abstractState : Class
 		abstractState ?= ioTable.getValue(visitable.region.one)
-		currentOutPackage.ownedMember.add(assocTool.addNavigableAggregation(context, abstractState, "", nameForCurrentStateLink))
+		currentOutPackage.packagedElement.add(assocTool.addNavigableAggregation(context, abstractState, "", nameForCurrentStateLink))
 		*/
     end
     
@@ -117,10 +117,10 @@ class GOFStatePatternTool inherits UmlTool, uml::visitors::TopDownVisitor
 	    	addHandleOperation(abstractState, true)
 	        
 			var assocTool : Association_Tool init Association_Tool.new
-			currentOutPackage.ownedMember.add(assocTool.addNavigableAggregation(context, abstractState, "", nameForCurrentStateLink))
+			currentOutPackage.packagedElement.add(assocTool.addNavigableAggregation(context, abstractState, "", nameForCurrentStateLink))
 	    	
 			ioTable.putValue(visitable, abstractState)
-			currentOutPackage.ownedMember.add(abstractState)
+			currentOutPackage.packagedElement.add(abstractState)
 		end
         super(visitable)
     end
@@ -156,7 +156,7 @@ class GOFStatePatternTool inherits UmlTool, uml::visitors::TopDownVisitor
     operation preProcessState(visitable : Vertex) : Void is do
     	var concreteState : Class init concreteVertex(visitable)
     	ioTable.putValue(visitable, concreteState)
-		currentOutPackage.ownedMember.add(concreteState)
+		currentOutPackage.packagedElement.add(concreteState)
     	
     	// substate machine (if exist)
 		var state : State

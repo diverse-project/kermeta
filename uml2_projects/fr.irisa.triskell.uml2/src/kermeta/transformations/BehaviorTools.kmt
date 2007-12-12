@@ -1,4 +1,4 @@
-/* $Id: BehaviorTools.kmt,v 1.4 2007-12-03 09:12:07 vmahe Exp $
+/* $Id: BehaviorTools.kmt,v 1.5 2007-12-12 15:53:46 vmahe Exp $
  * Creation date: July 3, 2006
  * License:
  * Copyright:
@@ -102,7 +102,7 @@ class Context4States_Tool
 		var reg : Region
 		reg ?= s.container
 		if reg.stateMachine != void then
-			context := reg.stateMachine.context
+			context ?= reg.stateMachine.container	// the context is now derived in UML 2.1
 		else
 			if reg.state != void then
 				// we are in a submachine so do recursive search

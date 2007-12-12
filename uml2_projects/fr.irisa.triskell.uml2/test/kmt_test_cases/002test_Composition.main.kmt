@@ -1,6 +1,3 @@
-@mainClass "uml2_tests::CompositionTestCase"
-@mainOperation "testUsedClasses"
-
 package uml2_tests;
 
 require kermeta

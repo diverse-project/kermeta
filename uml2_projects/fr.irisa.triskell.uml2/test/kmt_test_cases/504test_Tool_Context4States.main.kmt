@@ -1,13 +1,10 @@
-@mainClass "tools_tests::ToolContext4StateTestCase"
-@mainOperation "testContext4StatesTool_Classifier"
-
 package tools_tests;
 
 require kermeta
 require "../../src/kermeta/transformations/BehaviorTools.kmt"
 
-using uml2
-using uml2::transformations
+using uml
+using uml::transformations
 
 class ToolContext4StateTestCase inherits kermeta::kunit::TestCase
 {

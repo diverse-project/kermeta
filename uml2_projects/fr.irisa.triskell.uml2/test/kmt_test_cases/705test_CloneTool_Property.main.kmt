@@ -1,14 +1,11 @@
-@mainClass "tools_tests::ToolClonePropertyTestCase"
-@mainOperation "test_CloneTool_Property"
-
 package tools_tests;
 
 
 require kermeta
 require "../../src/kermeta/transformations/UmlCloneFactory.kmt"
 
-using uml2
-using uml2::transformations
+using uml
+using uml::transformations
 
 class ToolClonePropertyTestCase inherits kermeta::kunit::TestCase
 {
@@ -86,7 +83,7 @@ class ToolClonePropertyTestCase inherits kermeta::kunit::TestCase
     	// The "orig" end is non-navigable because the orig property as no class.
     	var propA : Property init Property.new
     	AClass.ownedAttribute.add(propA)
-    	propA.class_ := AClass
+    	propA.~class := AClass
     	orig.type := AClass
     	
     	assoc.memberEnd.addAt(0, propA)

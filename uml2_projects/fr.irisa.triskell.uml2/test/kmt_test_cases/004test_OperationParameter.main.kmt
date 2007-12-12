@@ -1,6 +1,3 @@
-@mainClass "uml2_tests::OperationParameterTestCase"
-@mainOperation "testOperationParamater"
-
 package uml2_tests;
 
 require kermeta

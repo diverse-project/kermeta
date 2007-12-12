@@ -1,4 +1,4 @@
-/* $Id: IOElementsTable.kmt,v 1.2 2007-12-03 09:12:06 vmahe Exp $
+/* $Id: IOElementsTable.kmt,v 1.3 2007-12-12 15:53:46 vmahe Exp $
  * Creation date: July 17, 2006
  * License:
  * Copyright:
@@ -24,7 +24,7 @@ class IOElementsTable
     operation initializeIdentity(pack : Package) : Void is do
     	initialize
         table.put(pack, pack)
-        pack.ownedMember.each{ m | table.put(m, m) }
+        pack.packagedElement.each{ m | table.put(m, m) }
     end
     
     operation putValue(in : kermeta::standard::Object, out : Element) is do

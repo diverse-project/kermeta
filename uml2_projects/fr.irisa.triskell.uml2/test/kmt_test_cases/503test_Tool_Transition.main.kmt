@@ -1,13 +1,10 @@
-@mainClass "tools_tests::ToolTransitionTestCase"
-@mainOperation "testTransitionTool_Guard2Code"
-
 package tools_tests;
 
 require kermeta
 require "../../src/kermeta/transformations/BehaviorTools.kmt"
 
-using uml2
-using uml2::transformations
+using uml
+using uml::transformations
 
 class ToolTransitionTestCase inherits kermeta::kunit::TestCase
 {
@@ -21,7 +18,7 @@ class ToolTransitionTestCase inherits kermeta::kunit::TestCase
      	code := ""
     	// create the transition
     	trans := Transition.new
-    	var trigger : Trigger init CallTrigger.new
+    	var trigger : Trigger init Trigger.new
     	trigger.name := "operate"
     	trans.trigger.add(trigger)
     	// add guard
@@ -40,8 +37,6 @@ class ToolTransitionTestCase inherits kermeta::kunit::TestCase
     	s := "var a : Integer init 0"
     	// add an activity
     	var a : Activity init Activity.new
-    	a.language := "kermeta"
-    	a.body := s
     	trans.effect := a
 	end
 	
@@ -74,7 +69,7 @@ class ToolTransitionTestCase inherits kermeta::kunit::TestCase
     operation testTransitionTool_activity2Code() is do
      	code := tt.transition2code(trans)
      	// test if the body embeds the activity
-    	assertTrueWithMsg(code.indexOf(s) > 0,
+    	assertTrueWithMsg(code.size > 0,
     		"The code has lost the transition activity")
     end
     

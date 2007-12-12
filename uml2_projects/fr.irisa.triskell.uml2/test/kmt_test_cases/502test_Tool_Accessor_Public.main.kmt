@@ -1,13 +1,10 @@
-@mainClass "tools_tests::ToolAccessorTestCase"
-@mainOperation "testAccessorTool_Getters"
-
 package tools_tests;
 
 require kermeta
 require "../../src/kermeta/transformations/StaticTools.kmt"
 
-using uml2
-using uml2::transformations
+using uml
+using uml::transformations
 
 class ToolAccessorPublicTestCase inherits kermeta::kunit::TestCase
 {
@@ -46,7 +43,7 @@ class ToolAccessorPublicTestCase inherits kermeta::kunit::TestCase
     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr2"}.size == 1,
     		"The class must have the right getters on its attributes")
     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr2"}
-    			.one.returnResult.one.type == Aclass,
+    			.one.ownedParameter.detect{p | p.direction == ParameterDirectionKind.return}.type == Aclass,
 		    "The getter must return the right type for attribute")
     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr2"}
     			.one.isAbstract == false,

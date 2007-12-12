@@ -1,11 +1,11 @@
-/* $Id: polymorphism.kmt,v 1.5 2007-12-03 09:12:07 vmahe Exp $
+/* $Id: polymorphism.kmt,v 1.6 2007-12-12 15:53:46 vmahe Exp $
  * Creation date: May 3, 2006
  * License:
  * Copyright:
  * Authors:
  */
 @mainClass "uml::polymorphism::Polymorphism"
-@mainOperation "main"
+@mainOperation "test"
 
 package uml::polymorphism;
 
@@ -18,7 +18,7 @@ using kermeta::reflection
 /*
  * The problematic beyond Polymorphism is that Kermeta forbiddes two operations
  * with the same name, and also forbiddes a property and an operation with the
- * same name. So we need to process any input UML2 model and rename polymorphic
+ * same name. So we need to process any input UML2 package and rename polymorphic
  * operations. The difficulty remain in that inheritance transmit operations of
  * super classes to specific classes,
  * 
@@ -36,27 +36,27 @@ using kermeta::reflection
  * group.
  */
 
-/** define the choices for processing polymorphism inside a model */
+/** define the choices for processing polymorphism inside a UML package */
 enumeration Process { prettyprint ; rename ; }
 
 class Polymorphism
 {
-    reference model : uml::Package
+    reference umlPackage : uml::Package
     reference families : Set<Set<uml::Class>>
     
     reference homonyms : Set<HomonymColl>
     
     operation initialize(m : uml::Package) is do
-    	// load the given UML2 model
-    	model := m
+    	// load the given UML2 umlPackage
+    	umlPackage := m
     	
     	//initialize storages
     	families := Set<Set<uml::Class>>.new
     end
     
     operation pass1() is do
-    	// we first make a family for each Class of the model
-    	model.ownedMember.each{ elem |
+    	// we first make a family for each Class of the umlPackage
+    	umlPackage.packagedElement.each{ elem |
     		if uml::Class.isInstance(elem) then
     			var family : Set<uml::Class> init Set<uml::Class>.new
     			var cl : uml::Class
@@ -66,7 +66,7 @@ class Polymorphism
     		end
     	}
     	// we process each generalization to group classes by inheritance
-    	model.ownedMember.each{ elem |
+    	umlPackage.packagedElement.each{ elem |
     		if uml::Class.isInstance(elem) then
     			var family : Set<uml::Class> init Set<uml::Class>.new
     			var child : uml::Class
@@ -202,7 +202,7 @@ class Polymorphism
     	
     	// then we process each family
     	families.each{ family |
-    		// the pass2 dispatches the operation
+    		// the pass2 dispatches the operations
     		// and attributes of the family
     		pass2(family)
     		// the pass3 processes the result of pass2
@@ -210,32 +210,39 @@ class Polymorphism
     	}
     end
     
-    operation main() : Void is do 
+    operation test() : Void is do 
         // only for tests purpose
         
-        stdio.writeln("\n>>>>----> loading the model")
+        stdio.writeln("\n>>>>----> loading the UML package")
     	// load the given UML2 resource
     	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var inputResource : kermeta::persistence::EMFResource
-    	inputResource ?= inputRepository.createResource("../../test/kmt_test_cases/uml2/PolymorphicTestModel.uml2", "../ecore/UML2.ecore")
-    	inputResource.load()
+    	inputResource ?= inputRepository.getResource("platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/PolymorphicTestModel.uml")
     	
     	// "instances" only gives the main diagramm package for the targeted code tree
     	var mod : uml::Package
     	mod ?= inputResource.instances.one
     	// we get the first package
-    	mod ?= mod.ownedMember.one
+    	mod ?= mod.packagedElement.one
     	initialize(mod)
     	
     	// first ability offered : tell the user what is wrong (console warnings)
         stdio.writeln("\n>>>>----> prettyprinting polymorphic operations")
     	processPolymorphism(Process.prettyprint)
         
-        // second ability : correct the model then save it
-        stdio.writeln("\n>>>>----> renaming polymorphs in the model")
+        // second ability : correct the umlPackage then save it
+        stdio.writeln("\n>>>>----> renaming polymorphs in the UML package")
     	processPolymorphism(Process.rename)
-        stdio.writeln("\n>>>>----> saving the renamed model")
-    	inputResource.save()
+        stdio.writeln("\n>>>>----> saving the renamed UML package")
+        
+    	var outputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var outputResource : kermeta::persistence::EMFResource
+    	outputResource ?= outputRepository.createResource("platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/DepolymorphizedModel.uml",
+    																						"platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore")
+    	var m : uml::Model init uml::Model.new
+    	m.packagedElement.add(umlPackage)
+    	outputResource.add(m)
+    	outputResource.save()
     	
         stdio.writeln("\n  ... end of the process  <----<<<<")
     end
@@ -243,7 +250,7 @@ class Polymorphism
 
 /**
  * This class collect all the homonyms of an operation which have the same signature.
- * From a correctly formed UML2 model, each item of the collection relies
+ * From a well formed UML2 package, each item of the collection relies
  * to a different class.
  */
 class SignColl {
@@ -274,9 +281,6 @@ class SignColl {
 				result.append(" " + p.type.name)
 			}
 			result.append(" )")
-			if not op.type.isVoid then
-				result.append(" : "+ op.type.name)
-			end
 		end
 	end
 	/** test the signature and add the Element if it has the good signature */

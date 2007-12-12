@@ -1,14 +1,11 @@
-@mainClass "tools_tests::ToolCloneAssociationTestCase"
-@mainOperation "test_CloneTool_Association"
-
 package tools_tests;
 
 
 require kermeta
 require "../../src/kermeta/transformations/UmlCloneFactory.kmt"
 
-using uml2
-using uml2::transformations
+using uml
+using uml::transformations
 
 class ToolCloneAssociationTestCase inherits kermeta::kunit::TestCase
 {
@@ -62,9 +59,9 @@ class ToolCloneAssociationTestCase inherits kermeta::kunit::TestCase
     	// test the "memberEnds" attribute
     	assertTrueWithMsg(clone.memberEnd.size == 2,
     		"the clone must be have the same number of ends than the original")
-    	assertTrueWithMsg(clone.memberEnd.select{ u | u == prop0 }.size == 1,
+    	assertTrueWithMsg(clone.memberEnd.select{ u | u.name == prop0.name }.size == 1,
     		"the clone must be have the same 'prop0' end than the original")
-    	assertTrueWithMsg(clone.memberEnd.select{ u | u == prop1 }.size == 1,
+    	assertTrueWithMsg(clone.memberEnd.select{ u | u.name == prop1.name }.size == 1,
     		"the clone must be have the same 'prop1' end than the original")
     	assertTrueWithMsg(clone.memberEnd.elementAt(0) == clone.ownedEnd.elementAt(0),
     		"the clone must be have the equivalent ends of the original")

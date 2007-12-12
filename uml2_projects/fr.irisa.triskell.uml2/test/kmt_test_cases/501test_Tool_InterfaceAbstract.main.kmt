@@ -1,13 +1,10 @@
-@mainClass "tools_tests::ToolInterfaceTestCase"
-@mainOperation "testExtractInterfaceTool_HasInterface"
-
 package tools_tests;
 
 require kermeta
 require "../../src/kermeta/transformations/StaticTools.kmt"
 
-using uml2
-using uml2::transformations
+using uml
+using uml::transformations
 
 class ToolInterfaceAbstractTestCase inherits kermeta::kunit::TestCase
 {
@@ -21,12 +18,12 @@ class ToolInterfaceAbstractTestCase inherits kermeta::kunit::TestCase
     	model := Model.new
     	Aclass := Class.new
     	Aclass.name := "Aclass"
-    	model.ownedMember.add(Aclass)
+    	model.packagedElement.add(Aclass)
     	
     	Bclass := Class.new
     	Bclass.name := "Bclass"
     	Bclass.isAbstract := true
-    	model.ownedMember.add(Bclass)
+    	model.packagedElement.add(Bclass)
     	
     	// test placement of attributes & operations
     	var attr : Property init Property.new
@@ -38,7 +35,8 @@ class ToolInterfaceAbstractTestCase inherits kermeta::kunit::TestCase
     	var par : Parameter init Parameter.new
     	par.name := "par1"
     	par.type := Aclass
-    	meth.returnResult.add(par)
+    	par.direction := ParameterDirectionKind.return
+    	meth.ownedParameter.add(par)
     	Aclass.ownedOperation.add(meth)
     	meth := Operation.new
     	meth.name := "concreteOperation"
@@ -105,13 +103,19 @@ class ToolInterfaceAbstractTestCase inherits kermeta::kunit::TestCase
     end
 	
     operation testExtractInterfaceTool_InterfaceHasOperationsParameters() is do
-    	assertTrueWithMsg(concreteAclass.ownedOperation.elementAt(0).returnResult.first.name == "par1",
+    
+    	var op0 : Operation init concreteAclass.ownedOperation.elementAt(0)
+    	var result0 : Parameter init op0.ownedParameter.detect{ p | p.direction == ParameterDirectionKind.return }
+    	assertTrueWithMsg(result0.name == "par1",
     		"The new concrete must have the correct name of return parameter for operation")
-    	assertTrueWithMsg(concreteAclass.ownedOperation.elementAt(0).returnResult.first.type == Aclass,
+    	assertTrueWithMsg(result0.type == Aclass,
     		"The new concrete must have the correct return type for operation")
-    	assertTrueWithMsg(concreteAclass.ownedOperation.elementAt(1).ownedParameter.first.name == "par2",
+    	
+    	var op1 : Operation init concreteAclass.ownedOperation.elementAt(1)
+ 	  	var result1 : Parameter init op1.ownedParameter.first
+     	assertTrueWithMsg(result1.name == "par2",
     		"The new concrete must have the correct name for parameters of operation")
-    	assertTrueWithMsg(concreteAclass.ownedOperation.elementAt(1).ownedParameter.first.type == Bclass,
+    	assertTrueWithMsg(result1.type == Bclass,
     		"The new concrete must have the correct type for parameters of operation")
     end
 	

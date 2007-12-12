@@ -1,14 +1,11 @@
-@mainClass "tools_tests::ToolCloneDataTypeTestCase"
-@mainOperation "test_CloneTool_DataType"
-
 package tools_tests;
 
 
 require kermeta
 require "../../src/kermeta/transformations/UmlCloneFactory.kmt"
 
-using uml2
-using uml2::transformations
+using uml
+using uml::transformations
 
 class ToolCloneDataTypeTestCase inherits kermeta::kunit::TestCase
 {
@@ -18,7 +15,7 @@ class ToolCloneDataTypeTestCase inherits kermeta::kunit::TestCase
 	reference InOutClass : Class
 	reference OutClass : Class
 	reference ReturnClass : Class
-	reference ExcClass : uml2::Type
+	reference ExcClass : uml::Type
 	
 	method setUp() is do
 		//creating needed instances

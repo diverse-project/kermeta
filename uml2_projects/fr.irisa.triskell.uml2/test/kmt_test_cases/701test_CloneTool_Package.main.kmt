@@ -1,14 +1,11 @@
-@mainClass "tools_tests::ToolClonePackageTestCase"
-@mainOperation "test_CloneTool_Package"
-
 package tools_tests;
 
 
 require kermeta
 require "../../src/kermeta/transformations/UmlCloneFactory.kmt"
 
-using uml2
-using uml2::transformations
+using uml
+using uml::transformations
 
 class ToolClonePackageTestCase inherits kermeta::kunit::TestCase
 {
