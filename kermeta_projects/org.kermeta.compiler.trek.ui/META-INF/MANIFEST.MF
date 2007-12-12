@@ -17,5 +17,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.codegen.ui
 Eclipse-LazyStart: true
 Export-Package: org.kermeta.compiler.trek.ui,
+ org.kermeta.compiler.trek.ui.command,
  org.kermeta.compiler.trek.ui.popup.actions
 Bundle-Vendor: IRISA/INRIA
