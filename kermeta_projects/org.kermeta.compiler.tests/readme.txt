@@ -1,4 +1,4 @@
-$Id: readme.txt,v 1.3 2007-12-12 15:24:52 cfaucher Exp $
+$Id: readme.txt,v 1.4 2007-12-13 12:24:46 cfaucher Exp $
 - Project : org.kermeta.compiler.tests
 - File : 	readme.txt
 - License : EPL
@@ -22,7 +22,14 @@ status for each use case.
 --- Requirements ---
 --------------------
 
-You must check out the project ant-docbook-styler from the Kermeta forge.
+You must check out in your workspace the project ant-docbook-styler from the Kermeta forge.
+
+Pulgin dependencies: your installation should contain the following plugins:
+org.kermeta.trek.model
+org.kermeta.trek.model.edit
+org.kermeta.trek.model.editor
+org.kermeta.trek.ui
+org.kermeta.compiler.trek.ui
 
 
 -----------------------------------------------
