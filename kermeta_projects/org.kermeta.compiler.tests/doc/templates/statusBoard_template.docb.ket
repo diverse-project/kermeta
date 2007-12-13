@@ -35,9 +35,9 @@
               <row>
                 <entry><para><link linkend="uc_<%=uc.name%>.link"><%=uc.name%></link></para></entry>
                 <entry><para><%if uc.shortSummary != void then%><%=uc.shortSummary%><%end%></para></entry>
-                <entry><para><%uc.status.each{ s |%>
-                	<%=s.key%> <%=s.progress.toString%>
-                <%}%></para></entry>
+                <entry><%uc.status.each{ s |%>
+                	<para><%=s.key%> [<%if s.progress==0 then%>NOK<%end%><%if s.progress==100 then%>OK<%end%><%if s.progress>0 and s.progress<100 then%>in progress<%end%>]</para>
+                <%}%></entry>
               </row>
               <%}%>
             </tbody>

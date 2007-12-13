@@ -17,15 +17,23 @@ _res.append("</link></para></entry>\r\n                <entry><para>")
 if uc.shortSummary != void then
 _res.append(uc.shortSummary)
 end
-_res.append("</para></entry>\r\n                <entry><para>")
+_res.append("</para></entry>\r\n                <entry>")
 uc.status.each{ s |
-_res.append("\r\n                \t")
+_res.append("\r\n                \t<para>")
 _res.append(s.key)
-_res.append(" ")
-_res.append(s.progress.toString)
-_res.append("\r\n                ")
+_res.append(" [")
+if s.progress==0 then
+_res.append("NOK")
+end
+if s.progress==100 then
+_res.append("OK")
+end
+if s.progress>0 and s.progress<100 then
+_res.append("in progress")
+end
+_res.append("]</para>\r\n                ")
 }
-_res.append("</para></entry>\r\n              </row>\r\n")
+_res.append("</entry>\r\n              </row>\r\n")
 }
 _res.append("            </tbody>\r\n          </tgroup>\r\n        </informaltable>\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t</section>\r\n</chapter>")
 result := _res.toString
