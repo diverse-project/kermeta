@@ -1,4 +1,4 @@
-/*$Id: InitializeTestCasesModel.java,v 1.5 2007-12-11 20:16:44 cfaucher Exp $
+/*$Id: InitializeTestCasesModel.java,v 1.6 2007-12-13 17:16:53 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeTestCasesModel.java
 * License : EPL
@@ -110,30 +110,42 @@ public class InitializeTestCasesModel implements IObjectActionDelegate {
     {
 		KTestCase aTestCase = TrekFactory.eINSTANCE.createKTestCase();
 		aTestCase.setName(folder.getName());
-		aTestCase.setUri(KCompilerConstants.KERMETA_CVS + KCompilerConstants.COMPILER_USE_CASES_FOLDER + folder.getParent().getName() + "/" + folder.getName() + KCompilerConstants.KERMETA_CVS_VIEW_SUFFIX);
+		aTestCase.setUri(KCompilerConstants.KERMETA_CVS + KCompilerConstants.COMPILER_USE_CASES_FOLDER + folder.getParent().getName() + "/" + folder.getName() + "/input/kermeta" + KCompilerConstants.KERMETA_CVS_VIEW_SUFFIX);
 		aTestCase.setType(KTestCaseType.UNIT_TEST);
 		
-		String inputResources = "Input resources:\n";
-		String outputResources = "Output resources:\n";
+		/*
+		 * Print the folder organization for the input and output resources
+		 * An inspection of the "input" and "expected_output" folders is done, i.e.: each sub folder is printed between "[" "]" with an url to the corresponding gforge folder
+		 */
+		String inputResources = "<para>Input resources:";
+		String outputResources = "<para>Output resources:";
 		
-		try {
-			
-			if(folder.getFolder("input").exists()) {
-				for(IResource resMember : folder.getFolder("input").members(false)) {
-					inputResources += "[" + resMember.getName() + "] ";
-				}
-			}
-			if(folder.getFolder("expected_output").exists()) {
-				for(IResource resMember : folder.getFolder("expected_output").members(false)) {
-					outputResources += "[" + resMember.getName() + "] ";
-				}
-			}
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// Get the docbook xml-text corresponding to the input resources
+		inputResources += getRelatedResources("input", folder) + "</para>";
+		// Get the docbook xml-text corresponding to the output resources
+		outputResources += getRelatedResources("expected_output", folder) + "</para>";
+		
 		aTestCase.setSummary(inputResources + "\n\n" + outputResources + "\n\n" +TrekModelHelper.getSummaryContent(folder));
 		return aTestCase;
     }
+	
+	private static String getRelatedResources(String targetedFolderName, IFolder folder) {
+		String textResources = "";
+		if(folder.getFolder(targetedFolderName).exists()) {
+			try {
+				for(IResource resMember : folder.getFolder(targetedFolderName).members(false)) {
+					textResources += " " + getULink(resMember, folder);
+				}
+			} catch (CoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return textResources;
+	}
+	
+	private static String getULink(IResource resMember, IFolder folder) {
+		return "[<ulink url=\"" + KCompilerConstants.KERMETA_CVS + KCompilerConstants.COMPILER_USE_CASES_FOLDER + folder.getParent().getName() + "/" + folder.getName() + "/" + resMember.getParent().getName() + "/" + resMember.getName() + KCompilerConstants.KERMETA_CVS_VIEW_SUFFIX + "\">" + resMember.getName() + "</ulink>] ";
+	}
 
 }
