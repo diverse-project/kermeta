@@ -1,0 +1,31 @@
+/**
+ * This file is needed to conform the syntax of the code in
+ * the ClassDiagram.kmt 
+ */
+package ExternClassDiagram;
+
+require kermeta
+
+using kermeta::standard
+
+class EClass
+{
+	attribute eProperty : String
+	attribute has : FClass[0..*]
+	operation eOperation() : Void is do
+		
+	end
+}
+
+class FClass
+{
+	
+}
+
+class GClass
+{
+	attribute gProperty : String
+	operation gOperation(f : FClass) : Void is do
+		
+	end
+}

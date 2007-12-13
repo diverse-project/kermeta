@@ -1,0 +1,135 @@
+package tools_tests;
+
+
+require kermeta
+require "platform:/plugin/org.kermeta.uml2/src/kermeta/transformations/UmlCloneFactory.kmt"
+
+using uml
+using uml::transformations
+
+class ToolCloneValueSpecificationTestCase inherits kermeta::kunit::TestCase
+{
+	reference factory : UmlCloneFactory
+	
+	method setUp() is do
+		factory := UmlCloneFactory.new
+		factory.initialize
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    operation test_CloneTool_ValueSpecification_Expression() is do
+    	var orig : Expression init Expression.new
+    	orig.symbol := "symbol"
+    	var clone : Expression
+    	clone ?= factory.cloneValueSpecification(orig)
+    	assertTrueWithMsg(clone != void,
+    		"the cloneValueSpecification() method must return something")
+    	assertTrueWithMsg(Expression.isInstance(clone),
+    		"the object returned by cloneValueSpecification() method must be a Expression")
+    	assertTrueWithMsg(clone != orig,
+    		"the clone object must be different than the original")
+    	assertTrueWithMsg(clone.symbol == orig.symbol,
+    		"the clone object must have the same value than the original")
+    end
+    operation test_CloneTool_ValueSpecification_OpaqueExpression() is do
+    	var orig : OpaqueExpression init OpaqueExpression.new
+    	orig.body.add("do end")
+    	orig.language.add("kermeta")
+    	var clone : OpaqueExpression
+    	clone ?= factory.cloneValueSpecification(orig)
+    	assertTrueWithMsg(clone != void,
+    		"the cloneValueSpecification() method must return something")
+    	assertTrueWithMsg(OpaqueExpression.isInstance(clone),
+    		"the object returned by cloneValueSpecification() method must be a OpaqueExpression")
+    	assertTrueWithMsg(clone != orig,
+    		"the clone object must be different than the original")
+    	assertTrueWithMsg(clone.body == orig.body,
+    		"the clone object must have the same value than the original")
+    	assertTrueWithMsg(clone.language == orig.language,
+    		"the clone object must have the same value than the original")
+    end
+    operation test_CloneTool_ValueSpecification_LiteralBoolean() is do
+    	var orig : LiteralBoolean init LiteralBoolean.new
+    	orig.~value := true
+    	var clone : LiteralBoolean
+    	clone ?= factory.cloneValueSpecification(orig)
+    	assertTrueWithMsg(clone != void,
+    		"the cloneValueSpecification() method must return something")
+    	assertTrueWithMsg(LiteralBoolean.isInstance(clone),
+    		"the object returned by cloneValueSpecification() method must be a LiteralBoolean")
+    	assertTrueWithMsg(clone != orig,
+    		"the clone object must be different than the original")
+    	assertTrueWithMsg(clone.~value == orig.~value,
+    		"the clone object must have the same value than the original")
+    end
+    operation test_CloneTool_ValueSpecification_LiteralInteger() is do
+    	var orig : LiteralInteger init LiteralInteger.new
+    	orig.~value := 100
+    	var clone : LiteralInteger
+    	clone ?= factory.cloneValueSpecification(orig)
+    	assertTrueWithMsg(clone != void,
+    		"the cloneValueSpecification() method must return something")
+    	assertTrueWithMsg(LiteralInteger.isInstance(clone),
+    		"the object returned by cloneValueSpecification() method must be a LiteralInteger")
+    	assertTrueWithMsg(clone != orig,
+    		"the clone object must be different than the original")
+    	assertTrueWithMsg(clone.~value == orig.~value,
+    		"the clone object must have the same value than the original")
+    end
+    operation test_CloneTool_ValueSpecification_LiteralString() is do
+    	var orig : LiteralString init LiteralString.new
+    	orig.~value := "test"
+    	var clone : LiteralString
+    	clone ?= factory.cloneValueSpecification(orig)
+    	assertTrueWithMsg(clone != void,
+    		"the cloneValueSpecification() method must return something")
+    	assertTrueWithMsg(LiteralString.isInstance(clone),
+    		"the object returned by cloneValueSpecification() method must be a LiteralString")
+    	assertTrueWithMsg(clone != orig,
+    		"the clone object must be different than the original")
+    	assertTrueWithMsg(clone.~value == orig.~value,
+    		"the clone object must have the same value than the original")
+    end
+    operation test_CloneTool_ValueSpecification_LiteralUnlimitedNatural() is do
+    	var orig : LiteralUnlimitedNatural init LiteralUnlimitedNatural.new
+    	orig.~value := 0
+    	var clone : LiteralUnlimitedNatural
+    	clone ?= factory.cloneValueSpecification(orig)
+    	assertTrueWithMsg(clone != void,
+    		"the cloneValueSpecification() method must return something")
+    	assertTrueWithMsg(LiteralUnlimitedNatural.isInstance(clone),
+    		"the object returned by cloneValueSpecification() method must be a LiteralUnlimitedNatural")
+    	assertTrueWithMsg(clone != orig,
+    		"the clone object must be different than the original")
+    	assertTrueWithMsg(clone.~value == orig.~value,
+    		"the clone object must have the same value than the original")
+    end
+    operation test_CloneTool_ValueSpecification_LiteralNull() is do
+    	var orig : LiteralNull init LiteralNull.new
+    	var clone : LiteralNull
+    	clone ?= factory.cloneValueSpecification(orig)
+    	assertTrueWithMsg(clone != void,
+    		"the cloneValueSpecification() method must return something")
+    	assertTrueWithMsg(LiteralNull.isInstance(clone),
+    		"the object returned by cloneValueSpecification() method must be a LiteralNull")
+    	assertTrueWithMsg(clone != orig,
+    		"the clone object must be different than the original")
+    end
+    operation test_CloneTool_ValueSpecification_InstanceValue() is do
+    	var orig : InstanceValue init InstanceValue.new
+    	orig.instance := InstanceSpecification.new
+    	var clone : InstanceValue
+    	clone ?= factory.cloneValueSpecification(orig)
+    	assertTrueWithMsg(clone != void,
+    		"the cloneValueSpecification() method must return something")
+    	assertTrueWithMsg(InstanceValue.isInstance(clone),
+    		"the object returned by cloneValueSpecification() method must be a InstanceValue")
+    	assertTrueWithMsg(clone != orig,
+    		"the clone object must be different than the original")
+    	assertTrueWithMsg(clone.instance == orig.instance,
+    		"the clone object must have the same value than the original")
+    end
+}

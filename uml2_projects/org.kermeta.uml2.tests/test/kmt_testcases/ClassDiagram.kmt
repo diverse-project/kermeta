@@ -1,0 +1,45 @@
+/**
+ * This file represents the code we are supposed to obtain from
+ * the ClassDiagram.uml2 using the uml2kmt facility
+ */
+package ClassDiagram;
+
+
+require kermeta
+require "ExternClassDiagram.kmt"
+
+using ExternClassDiagram
+using kermeta::standard
+
+abstract class AClass
+{
+	attribute aProperty : String
+	attribute cCollection : CClass[0..*]
+	operation aOperation() is abstract
+}
+
+class BClass inherits AClass
+{
+	attribute composition : DClass
+	operation bOperation() : GClass is do
+		result := void
+	end
+	reference h : HClass[0..*]#b
+}
+
+class CClass
+{
+	operation cOperation(in : String) : Void is do
+	
+	end
+}
+
+class DClass inherits EClass
+{
+	attribute dProperty : String
+}
+
+class HClass
+{
+	reference b : BClass[0..*]#h
+}

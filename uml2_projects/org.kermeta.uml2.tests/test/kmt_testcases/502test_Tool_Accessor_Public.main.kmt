@@ -1,0 +1,63 @@
+package tools_tests;
+
+require kermeta
+require "platform:/plugin/org.kermeta.uml2/src/kermeta/transformations/StaticTools.kmt"
+
+using uml
+using uml::transformations
+
+class ToolAccessorPublicTestCase inherits kermeta::kunit::TestCase
+{
+    reference Aclass : Class
+	
+	method setUp() is do
+    	Aclass := Class.new
+    	Aclass.name := "A"
+    	
+    	var attr1 : Property init Property.new
+    	attr1.name := "attr1"
+    	attr1.type := Aclass
+    	attr1.visibility := VisibilityKind.protected
+    	Aclass.ownedAttribute.add(attr1)
+    	
+    	var attr2 : Property init Property.new
+    	attr2.name := "attr2"
+    	attr2.type := Aclass
+    	attr2.visibility := VisibilityKind.public
+    	Aclass.ownedAttribute.add(attr2)
+    	
+     	var acc : Accessor_Tool init Accessor_Tool.new
+     	acc.addPublicGettersSetters(Aclass)
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+	
+    operation testAccessorTool_Operations() is do
+    	assertTrueWithMsg(Aclass.ownedOperation.size == 2,
+    		"The class must have only 2 operations (1 getter + 1 setter)")
+    end
+	
+    operation testAccessorTool_Getters() is do
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr2"}.size == 1,
+    		"The class must have the right getters on its attributes")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr2"}
+    			.one.ownedParameter.detect{p | p.direction == ParameterDirectionKind.return}.type == Aclass,
+		    "The getter must return the right type for attribute")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr2"}
+    			.one.isAbstract == false,
+		    "The getter must be an concrete operation")
+    end
+	
+    operation testAccessorTool_Setters() is do
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_Attr2"}.size == 1,
+    		"The class must have the right setters on its attributes")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_Attr2"}
+    			.one.ownedParameter.one.type == Aclass,
+		    "The setter must take the right type parameter for attribute")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_Attr2"}
+    			.one.isAbstract == false,
+		    "The setter must be an concrete operation")
+    end
+}

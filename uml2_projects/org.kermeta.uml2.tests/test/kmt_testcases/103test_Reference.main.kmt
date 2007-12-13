@@ -1,0 +1,33 @@
+package uml2_tests;
+
+require kermeta
+require "ClassDiagram.kmt"
+
+using kermeta::standard
+using ClassDiagram
+
+class ReferenceTestCase inherits kermeta::kunit::TestCase
+{
+	attribute aClass : AClass
+	
+	method setUp() is do
+		// AClass is abstract so can't be instanciated
+    	aClass := BClass.new
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    // the AClass must have a collection of CClasses
+    operation testAClassAssociation() is do
+    	var cClass1 : CClass init CClass.new
+    	aClass.cCollection.add(cClass1)
+    	assertTrueWithMsg(aClass.cCollection.size == 1,
+    		"The AClass can manage a collection of CClasses")
+    	var cClass2 : CClass init CClass.new
+    	aClass.cCollection.add(cClass2)
+    	assertTrueWithMsg(aClass.cCollection.size == 2,
+    		"The AClass can manage a collection of numerous CClasses")
+    end
+}

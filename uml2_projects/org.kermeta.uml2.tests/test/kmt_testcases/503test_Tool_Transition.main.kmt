@@ -1,0 +1,77 @@
+package tools_tests;
+
+require kermeta
+require "platform:/plugin/org.kermeta.uml2/src/kermeta/transformations/BehaviorTools.kmt"
+
+using uml
+using uml::transformations
+
+class ToolTransitionTestCase inherits kermeta::kunit::TestCase
+{
+    reference trans : Transition
+    reference code : kermeta::standard::String
+    reference tt : Transition_Tool
+    reference s : kermeta::standard::String
+	
+	method setUp() is do
+     	tt := Transition_Tool.new
+     	code := ""
+    	// create the transition
+    	trans := Transition.new
+    	var trigger : Trigger init Trigger.new
+    	trigger.name := "operate"
+    	trans.trigger.add(trigger)
+    	// add guard
+    	var g : Constraint init Constraint.new
+    	var spec : LiteralBoolean init LiteralBoolean.new
+    	spec.~value := true
+    	g.specification := spec
+    	trans.guard := g
+    	// add source & target states
+    	var s0 : State init State.new
+    	var s1 : State init State.new
+    	s0.name := "sourceState"
+    	s1.name := "targetState"
+    	trans.source := s0
+    	trans.target := s1
+    	s := "var a : Integer init 0"
+    	// add an activity
+    	var a : Activity init Activity.new
+    	trans.effect := a
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+	
+    operation testTransitionTool_Guard2Code() is do
+      	code := tt.transition2code(trans)
+     	// test if the body embeds the constraint
+    	assertTrueWithMsg(code.indexOf("if true") > 0,
+    		"The constraint is not well processed")
+    	// test the lack of guard (implies "true" default value)
+    	trans.guard := void
+      	code := tt.transition2code(trans)
+     	// test if the body embeds the constraint
+    	assertTrueWithMsg(code.indexOf("if true") > 0,
+    		"The constraint is not well processed")
+    end
+    
+    operation testTransitionTool_vertex2Code() is do
+     	code := tt.transition2code(trans)
+     	// test if the body embeds the vertices
+    	assertTrueWithMsg(code.indexOf("sourceState") > 0,
+    		"The code has lost the transition source state")
+    	assertTrueWithMsg(code.indexOf("targetState") > 0,
+    		"The code has lost the transition target state")
+    end
+    
+    operation testTransitionTool_activity2Code() is do
+     	code := tt.transition2code(trans)
+     	// test if the body embeds the activity
+    	assertTrueWithMsg(code.size > 0,
+    		"The code has lost the transition activity")
+    end
+    
+    /////// TODO :  test the raising of exceptions when incomplete transitions
+}

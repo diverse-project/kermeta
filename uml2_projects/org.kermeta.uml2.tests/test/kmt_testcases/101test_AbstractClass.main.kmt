@@ -1,0 +1,44 @@
+package uml2_tests;
+
+require kermeta
+require "ClassDiagram.kmt"
+
+using kermeta::standard
+using ClassDiagram
+
+class AbstractClassTestCase inherits kermeta::kunit::TestCase
+{
+	attribute aClass : AClass
+	
+	method setUp() is do
+		// AClass is abstract so can't be instanciated
+    	aClass := BClass.new
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    // the AClass of the UML model must exist and must be coded as a abstract class
+    operation testAbstractClass() is do
+    	assertTrueWithMsg(aClass != void,
+    		"An AClass must exist in ClassDiagram.kmt")
+ //   	assertTrueWithMsg(aClass.eSuperTypes.first.~abstract,
+//    		"The AClass in ClassDiagram must be abstract")
+    end
+    
+    // thz AClass has a aProperty
+    operation testAClassProperty() is do
+    	aClass.aProperty := "test"
+    	assertTrueWithMsg(aClass.aProperty == "test",
+    		"The AClass must have a aProperty attribute in code")
+    end
+    
+    // the AClass must have a collection of CClasses
+    operation testAClassAssociation() is do
+    	var cClass : CClass init CClass.new
+    	aClass.cCollection.add(cClass)
+    	assertTrueWithMsg(aClass.cCollection.size == 1,
+    		"The AClass can manage a collection of CClasses")
+    end
+}

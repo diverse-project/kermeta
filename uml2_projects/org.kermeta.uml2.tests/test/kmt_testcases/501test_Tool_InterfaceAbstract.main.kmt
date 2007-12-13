@@ -1,0 +1,126 @@
+package tools_tests;
+
+require kermeta
+require "platform:/plugin/org.kermeta.uml2/src/kermeta/transformations/StaticTools.kmt"
+
+using uml
+using uml::transformations
+
+class ToolInterfaceAbstractTestCase inherits kermeta::kunit::TestCase
+{
+	reference model : Model
+    reference Aclass : Class
+    reference Bclass : Class
+    reference concreteAclass : Class
+    reference concreteBclass : Class
+	
+	method setUp() is do
+    	model := Model.new
+    	Aclass := Class.new
+    	Aclass.name := "Aclass"
+    	model.packagedElement.add(Aclass)
+    	
+    	Bclass := Class.new
+    	Bclass.name := "Bclass"
+    	Bclass.isAbstract := true
+    	model.packagedElement.add(Bclass)
+    	
+    	// test placement of attributes & operations
+    	var attr : Property init Property.new
+    	attr.name := "attribute"
+    	Aclass.ownedAttribute.add(attr)
+    	var meth : Operation init Operation.new
+    	meth.name := "abstractOperation"
+    	meth.isAbstract := true
+    	var par : Parameter init Parameter.new
+    	par.name := "par1"
+    	par.type := Aclass
+    	par.direction := ParameterDirectionKind.return
+    	meth.ownedParameter.add(par)
+    	Aclass.ownedOperation.add(meth)
+    	meth := Operation.new
+    	meth.name := "concreteOperation"
+    	meth.isAbstract := false
+    	par := Parameter.new
+    	par.name := "par2"
+    	par.type := Bclass
+    	meth.ownedParameter.add(par)
+    	Aclass.ownedOperation.add(meth)
+    	
+     	var iftool : Interface_Tool init Interface_Tool.new
+     	concreteAclass := iftool.concreteFromAbstract(Aclass)
+     	concreteBclass := iftool.concreteFromAbstract(Bclass)
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+	
+    operation testExtractInterfaceTool_HasAbstract() is do
+    	// first asserts the generalization collection is not empty (uncatched exception)
+    	assertTrueWithMsg(concreteAclass.generalization != void,
+    		"The concrete class must have a generalisation")
+    	assertTrueWithMsg(concreteAclass.generalization.size != 0,
+    		"The concrete class must inherit its abstract class")
+    		
+    	assertTrueWithMsg(concreteAclass.generalization.one.general == Aclass,
+    		"The concrete class must inherit its abstract class")
+    end
+    
+	
+    operation testExtractInterfaceTool_ConcreteHasAttributes() is do
+    	assertTrueWithMsg(concreteAclass.ownedAttribute.size == 0,
+    		"The given class must have no attributes")
+    	
+    	var abs : Class
+    	abs ?= concreteAclass.generalization.one.general
+    	assertTrueWithMsg(abs.ownedAttribute.size == 1,
+    		"The avbstract must have the given class attributes")
+    end
+	
+    operation testExtractInterfaceTool_ConcreteHasAllOperations() is do
+    	// first asserts the generalization collection is not empty (uncatched exception)
+    	assertTrueWithMsg(concreteAclass.generalization != void,
+    		"The obtained class must have a generalisation")
+    	assertTrueWithMsg(concreteAclass.generalization.size != 0,
+    		"The obtained class must inherit its new interface")
+    		
+    	assertTrueWithMsg(concreteAclass.ownedOperation.size == 2,
+    		"The concrete must have all the operations of the abstract class")
+    	assertTrueWithMsg(concreteAclass.ownedAttribute.size == 0,
+    		"The concrete must not have any of the attributes of the abstract class")
+    end
+	
+    operation testExtractInterfaceTool_AbstractClass_ConcreteOperations() is do
+    	var bool : kermeta::standard::Boolean init true
+    	Aclass.ownedOperation.each{ u | if not u.isAbstract then bool := false end }
+    	assertTrueWithMsg(bool,
+    		"The abstract class must have only abstract operations")
+    	assertTrueWithMsg(Aclass.ownedOperation.elementAt(0).name == "abstractOperation",
+    		"The abstract class must have 'abstractOperation' as first operation")
+    	assertTrueWithMsg(Aclass.ownedOperation.elementAt(1).name == "concreteOperation",
+    		"The abstract class must have 'concreteOperation' as second operation")
+    end
+	
+    operation testExtractInterfaceTool_InterfaceHasOperationsParameters() is do
+    
+    	var op0 : Operation init concreteAclass.ownedOperation.elementAt(0)
+    	var result0 : Parameter init op0.ownedParameter.detect{ p | p.direction == ParameterDirectionKind.return }
+    	assertTrueWithMsg(result0.name == "par1",
+    		"The new concrete must have the correct name of return parameter for operation")
+    	assertTrueWithMsg(result0.type == Aclass,
+    		"The new concrete must have the correct return type for operation")
+    	
+    	var op1 : Operation init concreteAclass.ownedOperation.elementAt(1)
+ 	  	var result1 : Parameter init op1.ownedParameter.first
+     	assertTrueWithMsg(result1.name == "par2",
+    		"The new concrete must have the correct name for parameters of operation")
+    	assertTrueWithMsg(result1.type == Bclass,
+    		"The new concrete must have the correct type for parameters of operation")
+    end
+	
+    operation testExtractInterfaceTool_ConcreteClass_NoAttributes() is do
+    	assertTrueWithMsg(concreteAclass.ownedAttribute.size == 0,
+    		"The concrete class must have no attributes")
+    end
+}
