@@ -1,6 +1,6 @@
 
 
-/*$Id: KMUnitLoader.java,v 1.12 2007-12-07 01:50:26 ffleurey Exp $
+/*$Id: KMUnitLoader.java,v 1.13 2007-12-13 08:30:06 ftanguy Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL
@@ -64,7 +64,7 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 	public KermetaUnit load(String uri) {
 
 		KermetaUnit kermetaUnit = null;
-		
+
 		try {
 		
 			kermetaUnit = IOPlugin.getDefault().getKermetaUnit(uri, frameworkLoading);
@@ -76,13 +76,6 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 			internalLog.info("Creating uri for " + kermetaUnit.getUri());
 			
 			ResourceSet resourceSet = new ResourceSetImpl();
-			
-			/*KermetaUnit framework = IOPlugin.getDefault().getFramework();
-			if ( framework != null ) {
-				resourceSet.getResources().add( framework.getModelingUnit().eResource() );
-				for ( KermetaUnit pieceOfFramework : KermetaUnitHelper.getAllImportedKermetaUnits(framework) )
-					resourceSet.getResources().add( pieceOfFramework.getModelingUnit().eResource() );
-			}*/
 			
 			URI u = EcoreHelper.createURI( uri );
 			
@@ -116,33 +109,41 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 				
 				String fileURI = r.getURI().toString();
 
-				/*if ( ! kermetaUnit.getUri().startsWith("platform:/plugin") )
-					fileURI = EcoreHelper.getPlatformPluginURI(fileURI).toString();
-				else if ( ! kermetaUnit.getUri().startsWith("platform:/resource") )
-					fileURI = EcoreHelper.getPlatformResourceURI(fileURI).toString();*/
-				
 				if ( ! fileURI.startsWith("platform:/plugin") && kermetaUnit.getUri().startsWith("platform:/plugin") )
 					fileURI = EcoreHelper.getPlatformPluginURI(fileURI).toString();
 				else if ( ! fileURI.startsWith("platform:/resource") && kermetaUnit.getUri().startsWith("platform:/resource") )
 					fileURI = EcoreHelper.getPlatformResourceURI(fileURI).toString();			
 				
 				KermetaUnit currentUnit = IOPlugin.getDefault().getKermetaUnit( fileURI, frameworkLoading );
-				kermetaUnit.getImportedKermetaUnits().add( currentUnit );
-				if ( r.getContents().isEmpty() ) {
-					IOPlugin.getDefault().unload( fileURI );
-					kermetaUnit.error(fileURI + " could not have been loaded.");
-				} else {
-					ModelingUnit modelingUnit = null;
-					// Backward compatibility. Adding a modeling unit to old km files.
-					if ( r.getContents().get(0) instanceof ModelingUnit )
-						modelingUnit = (ModelingUnit) r.getContents().get(0);
-					else {
-						modelingUnit = StructureFactory.eINSTANCE.createModelingUnit();
-						modelingUnit.getPackages().add( (Package) r.getContents().get(0) );
+				
+				/*
+				 * 
+				 * Do not redo the job done just before for the main unit of this load.
+				 * 
+				 */
+				if ( currentUnit != kermetaUnit ) {
+					kermetaUnit.getImportedKermetaUnits().add( currentUnit );
+					if ( r.getContents().isEmpty() ) {
+						IOPlugin.getDefault().unload( fileURI );
+						kermetaUnit.error(fileURI + " could not have been loaded.");
+					} else if ( ! ((AbstractBuildingState) currentUnit.getBuildingState()).loaded ) {
+						/*
+						 * 
+						 * Take care about not overriding existing loaded units.
+						 * 
+						 */
+						ModelingUnit modelingUnit = null;
+						// Backward compatibility. Adding a modeling unit to old km files.
+						if ( r.getContents().get(0) instanceof ModelingUnit )
+							modelingUnit = (ModelingUnit) r.getContents().get(0);
+						else {
+							modelingUnit = StructureFactory.eINSTANCE.createModelingUnit();
+							modelingUnit.getPackages().add( (Package) r.getContents().get(0) );
+						}
+						currentUnit.setModelingUnit( modelingUnit );
+						((AbstractBuildingState) currentUnit.getBuildingState()).loaded = true;
+						kermetaUnits.put(currentUnit.getUri(), currentUnit);
 					}
-					currentUnit.setModelingUnit( modelingUnit );
-					((AbstractBuildingState) currentUnit.getBuildingState()).loaded = true;
-					kermetaUnits.put(currentUnit.getUri(), currentUnit);
 				}
 			}
 						
