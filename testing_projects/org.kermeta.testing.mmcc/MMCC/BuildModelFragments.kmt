@@ -1,4 +1,4 @@
-/* $Id: BuildModelFragments.kmt,v 1.4 2007-12-06 20:25:16 jmottu Exp $
+/* $Id: BuildModelFragments.kmt,v 1.5 2007-12-13 10:54:12 jmottu Exp $
  * Creation date: January 9, 2007
  * Authors: Benoit Baudry
  *
@@ -36,10 +36,12 @@ class BuildModelFragments
     */
     operation buildFragments(sourceMMName : String, testCriterion : String) is do
     	/*This is the absolute path where tmp file ModelsCoverageChecker will be generated*/
-    	//var tmpPath : String init "C:/WORK/Workspaces/runtime-kermetaCVS_kermetaNight/org.kermeta.testing.mmcc/tmp/"
-    	
- 	  	var tmpPath : String init "C:/NOSAVE/eclipse_kermeta_0.4.1_windows/workspace/org.kermeta.testing.mmcc/tmp/"
+    	//var tmpPath : String init "C:/NOSAVE/eclipse_kermeta_0.4.1_windows/workspace/org.kermeta.testing.mmcc/tmp/"
      	
+     	/*It is also possible to put a path relative to the workspace*/
+    	var tmpPath : String init "platform:/resource/org.kermeta.testing.mmcc/tmp/"
+    	
+ 	  	
     	/*This is the absolute name of the model that will contain the partitions and the fragments*/
     	var fragmentsModelName : String init "platform:/resource/org.kermeta.testing.mmcc/tmp/"+testCriterion+"Fragments.xmi"
     	
