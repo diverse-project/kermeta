@@ -1,2 +1,2 @@
-In kmt the body of an operation begins by "do" and is closed by "end".
-In Java: "{" to begin and "}" to close an operation body.
+<para>In kmt the body of an operation begins by "do" and is closed by "end".</para>
+<para>In Java: "{" to begin and "}" to close an operation body.</para>

@@ -1,28 +1,32 @@
-A Function Type is called inside another method.
+<para>A Function Type is called inside another method.</para>
 
-The function type is prettyprinted in a specific static method and called by the method that uses it.
+<para>The function type is prettyprinted in a specific static method and called by the method that uses it.</para>
 
-In the context of a lambda expression:
+<para>In the context of a lambda expression:</para>
 
-The two methods are generated in a same new Java Class in a "helper" package.
+<para>The two methods are generated in a same new Java Class in a "helper" package.</para>
 
+<programlisting>
 /** Kermeta source code **/
 a.ref.each{ r |
-	stdio.writeln(r.toString)
+  stdio.writeln(r.toString)
 }
 
 /** Java source code **/
 // Method that uses the function type
-  public static void each(EList String list) {
-    for(String it : list) {
-      func(it);
-    }
+public static void each(EList String list) {
+  for(String it : list) {
+    func(it);
   }
+}
   
 // The FunctionType prettyprinted in the same Java class
-  private static void func(String r) {
-    System.out.println(r.toString());
-  }
+private static void func(String r) {
+  System.out.println(r.toString());
+}
+</programlisting>
 
-The call of the method from the original method: 
+<programlisting>
+// The call of the method from the original method:
 Main_3_Helper.each(a.getRef());
+</programlisting>

@@ -1,1 +1,1 @@
-The result type of the method is a class A, then the result variable (having A as type) and the return statement will be added.
+<para>The result type of the method is a class A, then the result variable (having A as type) and the return statement will be added.</para>

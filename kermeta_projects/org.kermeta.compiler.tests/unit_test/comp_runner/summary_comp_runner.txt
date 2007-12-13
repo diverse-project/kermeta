@@ -1,6 +1,6 @@
-Design:
+<para>Design:</para>
 
-In order to facilitate the accessibility for the users of the generated source code, some runners are generated. A Runner is a Java Class containing a main method which is able to launch the execution of a method. Not all the methods should infer a runner, only the methods which have none parameter or some parameters having String as type. The parameterized Method and method owning by a parameterized Class should not infer a Runner too. The runners are generated in a specific Java Package for each source code package.
-Another file is generated that is a “Eclipse Java Application Launch” file: *.launch (generated in the root of the project). This one is able to configure automatically the "Run …" assist of Eclipse to launch quickly an execution. The parameters of this file are provided by the tags: mainClass and mainOperation given by the ModelingUnit.
+<para>In order to facilitate the accessibility for the users of the generated source code, some runners are generated. A Runner is a Java Class containing a main method which is able to launch the execution of a method. Not all the methods should infer a runner, only the methods which have none parameter or some parameters having String as type. The parameterized Method and method owning by a parameterized Class should not infer a Runner too. The runners are generated in a specific Java Package for each source code package.
+Another file is generated that is a “Eclipse Java Application Launch” file: *.launch (generated in the root of the project). This one is able to configure automatically the "Run …" assist of Eclipse to launch quickly an execution. The parameters of this file are provided by the tags: mainClass and mainOperation given by the ModelingUnit.</para>
 
 <warning><para>The simk model should be populated by the pass written in Kermeta and not in Java.</para></warning>

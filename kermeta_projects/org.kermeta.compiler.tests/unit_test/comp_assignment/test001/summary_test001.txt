@@ -1,1 +1,1 @@
-Assignment of a variable has type: String.
+<para>Assignment of a variable has type: String.</para>

@@ -1,1 +1,1 @@
-An example of a loop.
+<para>An example of a loop.</para>

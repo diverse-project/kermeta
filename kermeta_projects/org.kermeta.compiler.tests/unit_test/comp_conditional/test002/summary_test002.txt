@@ -1,1 +1,1 @@
-An example of a Conditional with an "if" with an "else".
+<para>An example of a Conditional with an "if" with an "else".</para>

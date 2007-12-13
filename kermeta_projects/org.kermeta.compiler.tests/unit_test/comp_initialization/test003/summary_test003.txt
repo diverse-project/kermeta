@@ -1,1 +1,1 @@
-Direct initialization of a variable (Integer).
+<para>Direct initialization of a variable (Integer).</para>

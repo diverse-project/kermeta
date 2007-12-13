@@ -1,8 +1,13 @@
-Design:
+<para>Design:</para>
 
-The creation of Object is performed by the new method, in EMF-Java: a factory is used and it can be called like:
+<para>The creation of Object is performed by the new method, in EMF-Java: a factory is used and it can be called like:</para>
 
-For MyClassDefinition owns by the package: comp_new_test001
+<para>For MyClassDefinition owns by the package: comp_new_test001</para>
 
-In Kermeta: A.new
-In EMF-Java: Comp_new_test001Factory.eINSTANCE.createA();
+<programlisting>
+// In Kermeta:
+A.new
+
+// In EMF-Java:
+Comp_new_test001Factory.eINSTANCE.createA();
+</programlisting>

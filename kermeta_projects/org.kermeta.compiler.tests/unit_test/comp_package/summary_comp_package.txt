@@ -1,2 +1,3 @@
-Design:
-The granularity of the EMF regeneration is the EPackage. If we want to generate incrementally the Java source code, also we regenerate the whole of the EPackage.
+<para>Design:</para>
+
+<para>The granularity of the EMF regeneration is the EPackage. If we want to generate incrementally the Java source code, also we regenerate the whole of the EPackage.</para>

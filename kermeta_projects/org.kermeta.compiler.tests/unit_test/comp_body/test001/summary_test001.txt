@@ -1,5 +1,5 @@
-Design:
-Empty body of the operation
-
-Implementation:
-If the body is empty, the generation is not processed.
+<para>Design:</para>
+<para>Empty body of the operation.</para>
+<para/>
+<para>Implementation:</para>
+<para>If the body is empty, the generation is not processed.</para>

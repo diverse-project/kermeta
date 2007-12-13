@@ -1,1 +1,1 @@
-Indirect initialization of a variable (String).
+<para>Indirect initialization of a variable (String).</para>

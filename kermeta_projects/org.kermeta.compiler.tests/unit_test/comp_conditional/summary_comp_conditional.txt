@@ -1,5 +1,6 @@
-Design:
-
+<para>Design:</para>
+<para/>
+<programlisting>
 In kmt:
 	if(...) then
 	…
@@ -11,3 +12,4 @@ In Java:
 	if(...) {
 	} else {
 	}
+</programlisting>

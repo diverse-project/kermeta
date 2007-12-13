@@ -1,1 +1,1 @@
-Assignment of a variable has type of a feature from another ClassDefinition.
+<para>Assignment of a variable has type of a feature from another ClassDefinition.</para>

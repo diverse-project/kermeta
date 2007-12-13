@@ -1,1 +1,1 @@
-Direct initialization of a feature (A).
+<para>Direct initialization of a feature (A).</para>

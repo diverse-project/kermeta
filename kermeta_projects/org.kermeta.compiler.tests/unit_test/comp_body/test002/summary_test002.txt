@@ -1,5 +1,5 @@
-Design:
-The body of the operation is not empty
-
-Implementation:
-If the body is not empty, the generation is processed and "do" is replaced by "{" and "end" by "}".
+<para>Design:</para>
+<para>The body of the operation is not empty</para>
+<para/>
+<para>Implementation:</para>
+<para>If the body is not empty, the generation is processed and "do" is replaced by "{" and "end" by "}".</para>
