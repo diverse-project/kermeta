@@ -1,3 +1,13 @@
+/* $Id: 504test_Tool_Context4States.main.kmt,v 1.2 2007-12-13 13:07:04 vmahe Exp $
+ * Creation date: Summer 2006
+ * License:		Eclipse Public License
+ * Copyright:	INRIA
+ * Authors:		Vincent MAHE <vmahe@irisa.fr>
+ */
+@mainClass "tools_tests::ToolContext4StateTestCase"
+@mainOperation "main"
+
+
 package tools_tests;
 
 require kermeta
@@ -8,6 +18,12 @@ using uml::transformations
 
 class ToolContext4StateTestCase inherits kermeta::kunit::TestCase
 {
+	operation main() : Void is do 
+		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(ToolContext4StateTestCase)
+		tr.printTestResult		
+	end
+
     reference Aclass : BehavioredClassifier
     reference Sstate : State
     reference ct : Context4States_Tool

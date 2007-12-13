@@ -1,3 +1,13 @@
+/* $Id: 705test_CloneTool_Property.main.kmt,v 1.2 2007-12-13 13:07:04 vmahe Exp $
+ * Creation date: Summer 2006
+ * License:		Eclipse Public License
+ * Copyright:	INRIA
+ * Authors:		Vincent MAHE <vmahe@irisa.fr>
+ */
+@mainClass "tools_tests::ToolClonePropertyTestCase"
+@mainOperation "main"
+
+
 package tools_tests;
 
 
@@ -9,6 +19,12 @@ using uml::transformations
 
 class ToolClonePropertyTestCase inherits kermeta::kunit::TestCase
 {
+	operation main() : Void is do 
+		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(ToolClonePropertyTestCase)
+		tr.printTestResult		
+	end
+
 	reference orig : Property
 	reference clone : Property
 	reference typeClass : Class

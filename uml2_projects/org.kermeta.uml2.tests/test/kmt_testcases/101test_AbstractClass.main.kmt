@@ -1,3 +1,13 @@
+/* $Id: 101test_AbstractClass.main.kmt,v 1.2 2007-12-13 13:07:04 vmahe Exp $
+ * Creation date: Summer 2006
+ * License:		Eclipse Public License
+ * Copyright:	INRIA
+ * Authors:		Vincent MAHE <vmahe@irisa.fr>
+ */
+@mainClass "uml2_tests::AbstractClassTestCase"
+@mainOperation "main"
+
+
 package uml2_tests;
 
 require kermeta
@@ -8,6 +18,12 @@ using ClassDiagram
 
 class AbstractClassTestCase inherits kermeta::kunit::TestCase
 {
+	operation main() : Void is do 
+		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(AbstractClassTestCase)
+		tr.printTestResult		
+	end
+
 	attribute aClass : AClass
 	
 	method setUp() is do

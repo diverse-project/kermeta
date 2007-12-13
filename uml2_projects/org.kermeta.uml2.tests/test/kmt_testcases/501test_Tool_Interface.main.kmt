@@ -1,3 +1,13 @@
+/* $Id: 501test_Tool_Interface.main.kmt,v 1.2 2007-12-13 13:07:04 vmahe Exp $
+ * Creation date: Summer 2006
+ * License:		Eclipse Public License
+ * Copyright:	INRIA
+ * Authors:		Vincent MAHE <vmahe@irisa.fr>
+ */
+@mainClass "tools_tests::ToolInterfaceTestCase"
+@mainOperation "main"
+
+
 package tools_tests;
 
 require kermeta
@@ -8,6 +18,12 @@ using uml::transformations
 
 class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
 {
+	operation main() : Void is do 
+		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(ToolInterfaceTestCase)
+		tr.printTestResult		
+	end
+
 	reference model : Model
     reference Aclass : Class
     reference Bclass : Class
