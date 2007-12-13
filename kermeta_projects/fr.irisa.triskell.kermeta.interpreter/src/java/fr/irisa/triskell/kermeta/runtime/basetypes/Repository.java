@@ -1,4 +1,4 @@
-/* $Id: Repository.java,v 1.7 2007-10-15 13:03:08 ftanguy Exp $
+/* $Id: Repository.java,v 1.8 2007-12-13 08:29:27 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : Repository.java
  * License   : EPL
@@ -56,12 +56,17 @@ public class Repository {
     		u = u.resolve(c.normalize(URI.createURI(unit_uripath)));    			
     	}
     	
-    	if(u.fileExtension() != null){
-    		if ( ! u.fileExtension().equals("ecore") && ! u.fileExtension().equals("km") )
+    	if ( u.fileExtension() != null ) {
+    		
+    		Object o = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(u.fileExtension());
+    		if ( o == null )
+    			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(u.fileExtension(), new XMIResourceFactoryImpl());
+    		
+    		/*if ( ! u.fileExtension().equals("ecore") && ! u.fileExtension().equals("km") )
     			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
     					u.fileExtension(),
     					new XMIResourceFactoryImpl()
-    			);
+    			);*/
     	}
     	
     	ResourceSet rSet = (ResourceSet) selfRO.getR2eEmfResourceset();
