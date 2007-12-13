@@ -1035,6 +1035,7 @@
     <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../reflection/reflection.ecore#/2"/>
@@ -1060,7 +1061,6 @@
     <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/Stack.ecore#/0"/>
     <references href="../utils/Stack.ecore#/1"/>
-    <references href="../utils/Stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>
@@ -1075,7 +1075,6 @@
     <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="java.ecore#/0"/>
     <references href="java.ecore#/1"/>
-    <references href="java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../ecore/ecore_compatibility.ecore#/2"/>

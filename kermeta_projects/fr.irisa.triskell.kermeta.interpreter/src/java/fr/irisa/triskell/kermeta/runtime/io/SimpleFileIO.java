@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIO.java,v 1.7 2007-12-13 09:18:57 cfaucher Exp $
+/* $Id: SimpleFileIO.java,v 1.8 2007-12-13 10:16:44 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -129,32 +129,5 @@ public class SimpleFileIO {
     	
     	return filePath;
     }
-    
-    /**
-     * 
-     * @param foldername
-     * @return path of the current folder of the file calling this operation
-     */
-    public static RuntimeObject getAbsolutePathFolder(RuntimeObject foldername)
-    {   	
-    	IFile fileKermeta = ResourceHelper.getIFile(foldername.getFactory().getMemory().getUnit().getUri());
-    	RuntimeObject result = null;
 
-    	if (fileKermeta.exists()){
-    		java.lang.String pathFile = fileKermeta.getLocation().toString();
-        	java.lang.String pathFolder = pathFile.substring(0,pathFile.lastIndexOf("/")+1) + String.getValue(foldername);
-   		 	
-   		 	
-   		 	File folder = new File(pathFolder);
-   		 	if (folder.exists()){
-   		 		result = String.create(pathFolder, foldername.getFactory());
-   		 	}else{
-   		 		result = String.create("Cannot find path.", foldername.getFactory());
-   		 	}
-    	}else{
-    		result = String.create("Cannot find path.", foldername.getFactory());
-    	}
-    	
-		return result;
-    }
 }

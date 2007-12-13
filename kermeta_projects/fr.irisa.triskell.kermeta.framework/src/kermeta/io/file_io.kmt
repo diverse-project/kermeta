@@ -46,16 +46,6 @@ class FileIO
 		if not exists or isdirectory then raise FileNotFoundException.new end
 		result ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.readTextFile(filename)
 	end
-	
-	/**
-	 * Gets the path of a folder from the folder of the current kermeta file
-	 */	
-	 operation getAbsolutePathFolder(foldername : String) : String is do
-	 	if foldername == void then raise FileNotFoundException.new end
-	 	var path : String
- 		path ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.getAbsolutePathFolder(foldername)
-		if path == "Cannot find path." then raise FileNotFoundException.new end
-		result := path
-	 end
+
 }
 // FileIO
