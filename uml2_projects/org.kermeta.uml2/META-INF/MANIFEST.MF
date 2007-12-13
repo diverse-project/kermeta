@@ -4,7 +4,6 @@ Bundle-Name: Uml2
 Bundle-SymbolicName: org.kermeta.uml2
 Bundle-Version: 0.5.0
 Require-Bundle: fr.irisa.triskell.kermeta,
- fr.irisa.triskell.kermeta.ecore,
  fr.irisa.triskell.kermeta.interpreter,
  fr.irisa.triskell.kermeta.io,
  fr.irisa.triskell.kermeta.model,
