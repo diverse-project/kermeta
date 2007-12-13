@@ -7,7 +7,7 @@ using trek
 class DOCBCompilationProcessTemplate{
 operation generate():String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("<chapter>\r\n\t<title>Compilation Process</title>\r\n\t<section>\r\n\t\t<title id=\"compilationProcess.title.link\">Compilation process, step 1</title>\r\n\t\t<para>\r\n\t\t</para>\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t\t\r\n\t</section>\r\n</chapter>")
+_res.append("<chapter>\r\n\t<title>Compilation Process</title>\r\n\t<section>\r\n\t\t<title id=\"kermeta2ecore.title.link\">Step 1: Kermeta to Ecore</title>\r\n\t\t<para>\r\n\t\t\tImplementation in Kermeta of a visitor to transform a Kermeta structure into an Ecore structure. [currently written in Java] This step is implemented in \"fr.irisa.triskell.kermeta.io\" plugin, EcoreExporter.\r\n\t\t</para>\r\n\t\t<para>\r\n\t\t\tImplementation in Kermeta of a Java pretty-printer for including Java sources in EAnnotations. [currently written in Java] This step is implemented in \"org.kermeta.compiler\" plugin.\r\n\t\t</para>\r\n\t</section>\r\n\t<section>\r\n\t\t<title id=\"ecore2java.title.link\">Step 2: Ecore to Java</title>\r\n\t\t<para>\r\n\t\t\tGeneration of a genmodel file from the Ecore file.\r\n\t\t\tThis generation is automatic and the genmodel is modified to customize and fix some parameters for the source code generation. This step is implemented in ?org.kermeta.compiler\" plugin.\r\n\t\t</para>\r\n\t\t<para>\r\n\t\t\tGeneration of the source code from the genmodel file thanks to the EMF generator abilities:\r\n\t\t\tEmf-model interfaces + implementation. This step is implemented in ?org.kermeta.compiler\" plugin.\r\n\t\t</para>\r\n\t</section>\r\n</chapter>")
 result := _res.toString
 end
 }

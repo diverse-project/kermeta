@@ -19,15 +19,15 @@
             <colspec colname="c2"/>
             <colspec colname="c3"/>
             <colspec colname="c4"/>
-            <colspec colname="c5"/>
+            <!--colspec colname="c5"/-->
             <!--colspec colname="c6"/-->
             <thead>
               <row>
                 <!--entry><para>Doc ref</para></entry-->
                 <entry><para>Identifier</para></entry>
                 <entry><para>Note</para></entry>
-                <entry><para>Design</para></entry>
-                <entry><para>Impl</para></entry>
+                <entry><para>Status</para></entry>
+                <!--entry><para>Impl</para></entry-->
               </row>
             </thead>
             <tbody>
@@ -35,9 +35,9 @@
               <row>
                 <entry><para><link linkend="uc_<%=uc.name%>.link"><%=uc.name%></link></para></entry>
                 <entry><para><%if uc.shortSummary != void then%><%=uc.shortSummary%><%end%></para></entry>
-                <%uc.status.each{ s |%>
-                	<entry><para><%=s.key%> <%=s.progress.toString%> %</para></entry>
-                <%}%>
+                <entry><para><%uc.status.each{ s |%>
+                	<%=s.key%> <%=s.progress.toString%>
+                <%}%></para></entry>
               </row>
               <%}%>
             </tbody>

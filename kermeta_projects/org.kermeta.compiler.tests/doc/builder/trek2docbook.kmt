@@ -1,7 +1,7 @@
-/* $Id: trek2docbook.kmt,v 1.2 2007-12-11 20:12:47 cfaucher Exp $
+/* $Id: trek2docbook.kmt,v 1.3 2007-12-13 12:55:39 cfaucher Exp $
  * Creation date: July 26, 2007
- * License:
- * Copyright:
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
  * Authors: Cyril Faucher <cfaucher@irisa.fr>
  */
 @mainClass "org::kermeta::compiler::trek2docbook::Main"
@@ -15,6 +15,7 @@ require "http://www.kermeta.org/trek"
 require "../kermeta/header_template.docb.kmt"
 require "../kermeta/footer_template.docb.kmt"
 
+require "../kermeta/compilationProcess_template.docb.kmt"
 require "../kermeta/statusBoard_template.docb.kmt"
 
 require "../kermeta/testCase_template.docb.kmt"
@@ -35,31 +36,40 @@ using org::kermeta::compiler::trek2docbook::template
 
 class Main
 {
-
+	// Load the given UseKaseModel
 	operation load() : UseKaseModel is do
 		var firstPackage : UseKaseModel init UseKaseModel.new
 		var repository : EMFRepository init EMFRepository.new             
 
    		var resource : Resource init repository.getResource("platform:/resource/org.kermeta.compiler.tests/unit_test/unit_test.trek")
        	
-       	stdio.writeln("resource loading start")
+       	//stdio.writeln("resource loading start")
        	resource.load()
-		stdio.writeln("resource loading end")
+		//stdio.writeln("resource loading end")
 		result ?=resource.instances.one
 	end
-	
+
+	/**
+	 *
+	 */
 	operation main() : Void is do
 	
-		var targetDir : String init "C:/eclipse3.3M5/eclipse/runtime-New_configuration2/org.kermeta.compiler.tests/doc/docbook/"
+		var targetDir : String init "platform:/resource/org.kermeta.compiler.tests/doc/docbook/"
 		var useKaseModel : UseKaseModel init UseKaseModel.new
        	useKaseModel := load()
        	
        	var docbook : StringBuffer init StringBuffer.new
        	
+       	// Header of the book
        	docbook.append(DOCBHeaderTemplate.new.generate())
        	
+       	// First chapter
+       	docbook.append(DOCBCompilationProcessTemplate.new.generate())
+
+		// Second chapter
        	docbook.append(DOCBStatusBoardTemplate.new.generate(useKaseModel))
        	
+       	// Third chapter
        	docbook.append(DOCBKUseCasesTemplate_Start.new.generate())
        
 		useKaseModel.kuseCases.each{ uc | 
@@ -69,19 +79,22 @@ class Main
 		}		
 		
 		docbook.append(DOCBKUseCasesTemplate_End.new.generate())
+		//
 		
+		// Footer of the book
        	docbook.append(DOCBFooterTemplate.new.generate())
 		
 		var ioHelper : FileIO init FileIO.new
-		var filename : String init targetDir+"unit_test.docb.xml"
+		var filename : String init targetDir + "unit_test.docb.xml"
            			
 		ioHelper.writeTextFile(filename,docbook.toString)
              
-		stdio.writeln("printing finish")
+		stdio.writeln("Docbook generation finished\nSee the result at: " + filename)
 	end
 	
 	/**
-	*/ 
+	 *
+	 */
 	operation visitKUseCase(docbook:StringBuffer, uc:KUseCase) : Void is do
 		docbook.append(DOCBKUseCaseTemplate.new.generate(uc))
 		uc.verifiedBy.each{ tc |
