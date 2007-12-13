@@ -1,13 +1,12 @@
-/* $Id: EcoreRegisteringAction.java,v 1.1 2007-11-21 13:17:59 cfaucher Exp $
+/* $Id: EcoreRegisteringAction.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
  * Project : org.eclipse.emf.ecoretools.registration
  * File : EcoreRegisteringAction.java
  * License : EPL
- * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * Copyright : INRIA
  * ----------------------------------------------------------------------------
  * Creation date : 24 juil. 2006
  * Authors : 
  * 		David Touzet <dtouzet@irisa.fr>
- * Description :
  */
 package org.eclipse.emf.ecoretools.registration.popup.actions;
 
@@ -25,7 +24,7 @@ import org.eclipse.swt.widgets.Shell;
 
 
 /**
- * @author dtouzet
+ * Action that register an ecore file
  *
  */
 public class EcoreRegisteringAction extends EMFRegisterAction {

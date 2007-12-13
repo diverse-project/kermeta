@@ -1,11 +1,11 @@
-/* $Id: EMFRegistryHelper.java,v 1.1 2007-11-21 13:18:00 cfaucher Exp $
+/* $Id: EMFRegistryHelper.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
  * Project   : org.eclipse.emf.ecoretools.registration 
  * File      : EMFRegistryHelper.java
  * License   : EPL
- * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * Copyright : INRIA
  * ----------------------------------------------------------------------------
- * Creation date : 28 f�vr. 07
- * Authors       : dvojtise <dvojtise.irisa.fr>
+ * Creation date : 28 feb. 07
+ * Authors       : Didier Vojtisek <dvojtise.irisa.fr>
  */
 package org.eclipse.emf.ecoretools.registration;
 

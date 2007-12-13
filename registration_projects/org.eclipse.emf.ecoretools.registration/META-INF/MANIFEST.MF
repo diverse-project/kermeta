@@ -34,6 +34,6 @@ Export-Package: org.apache.log4j,
  org.eclipse.emf.ecoretools.registration,
  org.eclipse.emf.ecoretools.registration.popup.actions,
  org.eclipse.emf.ecoretools.registration.view
-Bundle-Vendor: IRISA/INRIA
+Bundle-Vendor: INRIA
 Bundle-ClassPath: lib/thirdparty/log4j.jar,
  .

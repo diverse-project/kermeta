@@ -1,5 +1,12 @@
-/**
- * 
+/* $Id: EcoreUnregisteringAction.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
+ * Project : org.eclipse.emf.ecoretools.registration
+ * File : EcoreUnregisteringAction.java
+ * License : EPL
+ * Copyright : INRIA
+ * ----------------------------------------------------------------------------
+ * Creation date : 24 juil. 2006
+ * Authors : 
+ * 		David Touzet <dtouzet@irisa.fr>
  */
 package org.eclipse.emf.ecoretools.registration.popup.actions;
 
@@ -18,7 +25,7 @@ import org.eclipse.swt.widgets.Shell;
 
 
 /**
- * @author dtouzet
+ * Action that unregister an ecore file
  *
  */
 public class EcoreUnregisteringAction extends EMFRegisterAction {

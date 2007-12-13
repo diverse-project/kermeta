@@ -1,11 +1,11 @@
-/* $Id: RegistrationConstants.java,v 1.1 2007-11-21 13:18:00 cfaucher Exp $
+/* $Id: RegistrationConstants.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
  * Project   : org.eclipse.emf.ecoretools.registration
- * File      : RunnerConstants.java
+ * File      : RegistrationConstants.java
  * License   : EPL
- * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * Copyright : INRIA
  * ----------------------------------------------------------------------------
  * Creation date : Nov 23, 2005
- * Authors       : zdrey
+ * Authors       : Didier Vojtisek <dvojtise@irisa.fr>
  */
 package org.eclipse.emf.ecoretools.registration;
 

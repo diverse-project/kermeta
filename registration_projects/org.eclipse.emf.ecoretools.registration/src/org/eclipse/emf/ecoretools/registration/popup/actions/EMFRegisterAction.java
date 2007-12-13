@@ -1,6 +1,13 @@
-/**
- * 
- */
+/*$Id: EMFRegisterAction.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
+* Project : org.eclipse.emf.ecoretools.registration
+* File : 	EMFRegisterAction.java
+* License : EPL
+* Copyright : INRIA
+* ----------------------------------------------------------------------------
+* Creation date : 29 mai 07
+* Authors : 
+*     dvojtise <dvojtise@irisa.fr>
+*/
 package org.eclipse.emf.ecoretools.registration.popup.actions;
 
 import java.util.ArrayList;
@@ -20,7 +27,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * @author dtouzet
+ * Action on the RegisteredPackageView that register a Ns uri 
+ * and the corresponding children
  *
  */
 public class EMFRegisterAction implements IObjectActionDelegate {

@@ -1,19 +1,20 @@
 
 
-/*$Id: NsURIComparator.java,v 1.1 2007-11-21 13:17:59 cfaucher Exp $
+/*$Id: NsURIComparator.java,v 1.2 2007-12-13 15:23:10 dvojtise Exp $
 * Project : org.eclipse.emf.ecoretools.registration
-* File : 	RegisteredPackagesComparator.java
+* File : 	NsURIComparator.java
 * License : EPL
-* Copyright : IRISA / INRIA / Universite de Rennes 1
+* Copyright : INRIA
 * ----------------------------------------------------------------------------
 * Creation date : 7 nov. 07
-* Authors : paco
+* Authors : Didier Vojtisek <dvojtise@irisa.fr>
 */
 
 package org.eclipse.emf.ecoretools.registration.view;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jface.viewers.Viewer;
+
 
 public class NsURIComparator extends RegisteredPackageComparator {
 	

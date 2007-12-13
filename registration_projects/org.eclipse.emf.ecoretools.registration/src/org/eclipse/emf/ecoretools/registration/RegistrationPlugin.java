@@ -1,3 +1,12 @@
+/* $Id: RegistrationPlugin.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
+ * Project   : org.eclipse.emf.ecoretools.registration
+ * File      : RegistrationPlugin.java
+ * License   : EPL
+ * Copyright : INRIA
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 14, 2006
+ * Authors       : Didier Vojtisek <dvojtise@irisa.fr>
+ */
 package org.eclipse.emf.ecoretools.registration;
 
 import org.apache.log4j.Logger;
