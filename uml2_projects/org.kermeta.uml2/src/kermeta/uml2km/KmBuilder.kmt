@@ -1,0 +1,71 @@
+package km_builder;
+
+require kermeta
+
+using kermeta
+using kermeta::language::structure
+
+class KmBuilder
+{
+	/** this object is the one which contains a Kermeta class */
+    operation createClassDefinition() : ClassDefinition is do 
+        var obj : ClassDefinition init ClassDefinition.new
+        
+        result := obj
+    end
+
+	/** the Kermeta Class object is designed for typing parameters and methods */
+    operation createClass() : Class is do 
+        var obj : Class init Class.new
+        
+        result := obj
+    end
+
+    operation createOperation() : Operation is do 
+        var obj : Operation init Operation.new
+        
+        result := obj
+    end
+
+    operation createProperty() : Property is do 
+        var obj : Property init Property.new
+        
+        result := obj
+    end
+
+    operation createType() : Type is do 
+        var obj : Type init Type.new
+        
+        result := obj
+    end
+
+    operation createMultiplicityElement() : MultiplicityElement is do 
+        var obj : MultiplicityElement init MultiplicityElement.new
+        
+        result := obj
+    end
+
+    operation createDataType() : DataType is do 
+        var obj : DataType init DataType.new
+        
+        result := obj
+    end
+
+    operation createPackage() : Package is do 
+        var obj : Package init Package.new
+        
+        result := obj
+    end
+
+    operation createParameter() : Parameter is do 
+        var obj : Parameter init Parameter.new
+        
+        result := obj
+    end
+
+    operation createTag() : Tag is do 
+        var obj : Tag init Tag.new
+        
+        result := obj
+    end
+}

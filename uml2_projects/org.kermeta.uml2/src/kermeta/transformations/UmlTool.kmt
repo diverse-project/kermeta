@@ -1,0 +1,30 @@
+/* $Id: UmlTool.kmt,v 1.1 2007-12-13 10:34:40 vmahe Exp $
+ * Creation date: June 29, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package uml::transformations;
+
+
+require kermeta
+require "UmlCloneFactory.kmt"	// for Uml2 elements 
+
+using uml 
+
+class UmlTool
+{
+	// enumerations can't embed figures so string are used
+	// like "2.0", "2.1"
+	// Rem : first version of tools have been written for UML 2.0
+	reference umlVersion : kermeta::standard::String
+	
+	reference inputRootPackage : Package
+	reference outputRootPackage : Package
+	
+	operation initialize(input : Package, output : Package) is do
+		inputRootPackage := input
+		outputRootPackage := output
+	end
+}

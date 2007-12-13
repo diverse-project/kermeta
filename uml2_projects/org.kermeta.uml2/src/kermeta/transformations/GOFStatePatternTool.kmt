@@ -1,0 +1,247 @@
+/* $Id: GOFStatePatternTool.kmt,v 1.1 2007-12-13 10:34:40 vmahe Exp $
+ * Creation date: July 6, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package uml::transformations;
+
+
+require "StaticTools.kmt"
+require "UmlCloneFactory.kmt"
+require "../visitableUML.kmt"
+
+using uml
+
+class GOFStatePatternTool inherits UmlTool, uml::visitors::TopDownVisitor
+{
+	reference ioTable : IOElementsTable
+	reference currentContext : BehavioredClassifier
+	reference currentPackage : Package
+	reference currentOutPackage : Package
+	
+	/** method for applying the pattern only on one element
+	  * @parameter machineOwner : we need the "class" owning the state machine
+	  *     in order to give it the reified states as links (recursive composites)
+	  * @parameter input : the package where the state machine is
+	  *     for correspondance through the hash table
+	  * @parameter outputTable : the table containing its clone
+	  *     (needed as the pattern involves a visitor approach) */
+	operation applyPattern(machineOwner : Class, input : Package, outputTable : IOElementsTable) is do
+		// The outputTable must contain the output elements corresponding to all input package elements.
+		// Output elements can be strictly the same than the input ones but the table must have been
+		// filled before it is passed to the current GOF tool.
+		inputRootPackage := input
+		ioTable := outputTable
+		currentPackage := input
+		currentOutPackage := input
+		visitClass(machineOwner)
+	end
+	
+    method visitPackage(visitable : Package) is do 
+        // must manage the current package for each processed element
+        // to be put in the corresponding package
+        var previousPackage : Package init currentPackage
+        currentPackage := visitable
+        currentOutPackage ?= ioTable.getValue(currentPackage)
+        super(visitable)
+        currentPackage := previousPackage
+        currentOutPackage ?= ioTable.getValue(currentPackage)
+    end
+    
+    method visitClass(visitable : Class) is do
+    	var machines : StateMachine[0..*] init kermeta::standard::OrderedSet<StateMachine>.new
+    	visitable.ownedBehavior.each{ b |
+    		var sm : StateMachine
+    		sm ?= b
+    		if sm != void then machines.add(sm) end
+    	}
+    	// multiple StateMachine are forbidden
+		if machines.size > 1 then
+			var e : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			e.message := "GOF State Pattern tool : multiple StateMachines are not processed"
+			raise e
+		end
+		
+    	// for a root state machine, the GOF State context class corresponds to the statemachine owning Class.
+    	if machines.size == 1 then
+	    	var rootClass : Class
+	    	rootClass ?= ioTable.getValue(visitable)
+	    	ioTable.putValue(machines.one, rootClass)
+    	end
+    	
+    	super(visitable)
+    end
+    
+    method visitStateMachine(visitable : StateMachine) : Void is do
+		var context : Class
+		context ?= ioTable.getValue(visitable)
+    	addRequestOperation(context)
+    	
+    	// FIXME : in this version, multiple regions are not processed
+		if visitable.region.size != 1 then
+			var e : kermeta::exceptions::NotImplementedException init kermeta::exceptions::NotImplementedException.new
+			e.message := "GOF State Pattern tool : multiple regions are not processed"
+			raise e
+		end
+		
+		super(visitable)
+		
+		// region(s) has been processed since the "super" call 
+		// so we can link the abstract state class to its context
+/*		var assocTool : Association_Tool init Association_Tool.new
+		var abstractState : Class
+		abstractState ?= ioTable.getValue(visitable.region.one)
+		currentOutPackage.packagedElement.add(assocTool.addNavigableAggregation(context, abstractState, "", nameForCurrentStateLink))
+		*/
+    end
+    
+    method visitRegion(visitable : Region) : Void is do
+    	// as the same owning class must be processed multiple times,
+    	// we test the existance of the abstractState in the memory
+    	if ioTable.getValue(visitable) == void then
+			// states will retrieve their abstract state class through their owning region (state 'container' property)
+			var abstractState : Class init Class.new
+			abstractState.isAbstract := true
+			
+			// add the name of the abstract state class
+			var context : Class
+			// the region owner could be a statemachine ...
+			context ?= ioTable.getValue(visitable.stateMachine)
+			// ... or a state having sub states
+			if context == void then context ?= ioTable.getValue(visitable.state) end
+			abstractState.name := nameForIAbstractState(context.name)
+			
+	    	// add "handle()" operation
+	    	addHandleOperation(abstractState, true)
+	        
+			var assocTool : Association_Tool init Association_Tool.new
+			currentOutPackage.packagedElement.add(assocTool.addNavigableAggregation(context, abstractState, "", nameForCurrentStateLink))
+	    	
+			ioTable.putValue(visitable, abstractState)
+			currentOutPackage.packagedElement.add(abstractState)
+		end
+        super(visitable)
+    end
+    
+    method visitState(visitable : State) : Void is do
+    	preProcessState(visitable)
+        super(visitable)
+    	postProcessState(visitable)
+    end
+    
+    method visitFinalState(visitable : FinalState) : Void is do
+    	preProcessState(visitable)
+        super(visitable)
+    	postProcessState(visitable)
+    end
+    
+    method visitPseudostate(visitable : Pseudostate) : Void is do 
+        if visitable.kind == PseudostateKind.initial then
+	    	preProcessState(visitable)
+        else
+        	// others pseudostates don't concern GOF State pattern
+        end
+        super(visitable)
+        if visitable.kind == PseudostateKind.initial then
+	    	postProcessState(visitable)
+        else
+        	// others pseudostates don't concern GOF State pattern
+        end
+    end
+    
+    //////////////// methods used both by visitors and applyPattern ////////////////
+    
+    operation preProcessState(visitable : Vertex) : Void is do
+    	var concreteState : Class init concreteVertex(visitable)
+    	ioTable.putValue(visitable, concreteState)
+		currentOutPackage.packagedElement.add(concreteState)
+    	
+    	// substate machine (if exist)
+		var state : State
+		state ?= visitable
+    	if state != void then
+	    	if state.region.size > 1 then
+				var e : kermeta::exceptions::NotImplementedException init kermeta::exceptions::NotImplementedException.new
+				e.message := "GOF State Pattern tool : multiple regions are not processed"
+				raise e
+			end
+		end
+	end
+    
+    operation postProcessState(visitable : Vertex) : Void is do
+    	// nothing to do here, but it may be the case for specialized versions (like Valooder)
+    end
+    
+    /**
+     * process any UML2 vertex (vertices are states, pseudo and final states).
+     * It is a factorization of the operation for states and pseudo states visits.
+     */
+    operation concreteVertex(vertex : Vertex) : Class is do
+    	var concreteVertex : Class init Class.new
+		
+		// add the name of the abstract state class
+		concreteVertex.name := nameForConcreteState(vertex)
+		concreteVertex.isAbstract := false
+    	
+    	// add "handle()" operation (with an overidable method)
+    	addHandleOperation(concreteVertex, false)
+    	
+    	var geneTool : Generalization_Tool init Generalization_Tool.new
+    	// we add a generalisation between the new concrete state and the corresponding
+    	// abstract state class which is stored under the current state's region in ioTable
+    	// See Umlaut-Architecture-guide for more informations on the use of IOElementsTable
+    	// in the GoF State Pattern tool.
+    	var abstractState : Class
+    	abstractState ?= ioTable.getValue(vertex.container)
+    	geneTool.addGeneralization(abstractState, concreteVertex)
+    	
+    	result := concreteVertex
+    end
+    
+    operation addHandleOperation(concreteVertex : Class, isAbstract : kermeta::standard::Boolean) is do
+    	// "handle()" operation
+    	var handleOp : Operation init Operation.new
+    	handleOp.name := nameForHandleMethod
+    	handleOp.isAbstract := isAbstract
+    	concreteVertex.ownedOperation.add(handleOp)
+    end
+    
+    operation addRequestOperation(context : Class) is do
+    	// "request()" operation
+    	var requestOp : Operation init Operation.new
+    	requestOp.name := nameForRequestMethod
+    	requestOp.isAbstract := false
+    	context.ownedOperation.add(requestOp)
+    	
+    	// code of request() op => parameterized "handle()" call :
+    	//      do
+    	//         state.handle()
+    	//      end
+    	var code : Comment init Comment.new
+    	code.body := "@language \"kermeta\"\n"	// identification for containers of Kermeta code
+    	code.body.append("do\n\t" + nameForCurrentStateLink + "." + nameForHandleMethod + "()\nend")
+    	code.annotatedElement.add(requestOp)
+    	currentOutPackage.ownedComment.add(code)
+    end
+    
+    // prefixes & suffixes for (re)naming the elements
+    operation prefixForAbstractState() : kermeta::standard::String is do result := "" end
+    operation suffixForAbstractState() : kermeta::standard::String is do result := "_State" end
+    operation nameForIAbstractState(name : kermeta::standard::String) : kermeta::standard::String is do
+    	result := prefixForAbstractState + name + suffixForAbstractState
+    end
+    operation prefixForConcreteState() : kermeta::standard::String is do result := "ConcreteState" end
+    operation suffixForConcreteState() : kermeta::standard::String is do result := "" end
+    operation nameForConcreteState(vertex : Vertex) : kermeta::standard::String is do
+    	if vertex.name != void then
+	    	result := prefixForConcreteState + vertex.name + suffixForConcreteState
+    	else	// pseudo states generaly don't have name
+	    	result := prefixForConcreteState + suffixForConcreteState
+    	end
+    end
+    operation nameForCurrentStateLink() : kermeta::standard::String is do result := "state" end
+    operation nameForRequestMethod() : kermeta::standard::String is do result := "request" end
+    operation nameForHandleMethod() : kermeta::standard::String is do result := "handle" end
+}

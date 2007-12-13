@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_tPOCIaLHEdqkGMDvm75SlQ" name="main">
+  <packagedElement xsi:type="uml:Package" xmi:id="_tPOCIqLHEdqkGMDvm75SlQ" name="GOFPatterns">
+    <ownedComment xmi:id="_8NYtkBy4EdutOuniNDPRvw" body="do&#xA;    state.handle()&#xA;end" annotatedElement="_qp3KQRypEdutOuniNDPRvw">
+      <eAnnotations xmi:id="_EDqGQBy5EdutOuniNDPRvw" source="http://www.topcased.org/uuid">
+        <details xmi:id="_EDqGQRy5EdutOuniNDPRvw" key="uuid" value="11539267104366"/>
+      </eAnnotations>
+    </ownedComment>
+    <packagedElement xsi:type="uml:Class" xmi:id="_qp3KQRypEdutOuniNDPRvw" name="Context">
+      <ownedAttribute xmi:id="_0ps3gBypEdutOuniNDPRvw" name="state" type="_sXqv4BypEdutOuniNDPRvw" association="_0pVEEBypEdutOuniNDPRvw">
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_4e2kIBypEdutOuniNDPRvw" value="1"/>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_4e19EBypEdutOuniNDPRvw" value="1"/>
+      </ownedAttribute>
+      <ownedOperation xmi:id="_9f-7sBypEdutOuniNDPRvw" name="request"/>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" xmi:id="_sXqv4BypEdutOuniNDPRvw" name="AbtractState" isAbstract="true">
+      <ownedOperation xmi:id="__H7w8BypEdutOuniNDPRvw" name="handle" isAbstract="true"/>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" xmi:id="_uwzKcBypEdutOuniNDPRvw" name="ConcreteStateA">
+      <generalization xmi:id="_z1GKwBypEdutOuniNDPRvw" general="_sXqv4BypEdutOuniNDPRvw"/>
+      <ownedOperation xmi:id="_Ejy8sByqEdutOuniNDPRvw" name="handle"/>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" xmi:id="_xCpRQBypEdutOuniNDPRvw" name="ConcreteStateB">
+      <generalization xmi:id="_0Cj_ABypEdutOuniNDPRvw" general="_sXqv4BypEdutOuniNDPRvw"/>
+      <ownedOperation xmi:id="_F6N9EByqEdutOuniNDPRvw" name="handle"/>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_0pVEEBypEdutOuniNDPRvw" name="Association1" memberEnd="_0prCUBypEdutOuniNDPRvw _0ps3gBypEdutOuniNDPRvw">
+      <ownedEnd xmi:id="_0prCUBypEdutOuniNDPRvw" type="_qp3KQRypEdutOuniNDPRvw" aggregation="shared" association="_0pVEEBypEdutOuniNDPRvw">
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_4eleYBypEdutOuniNDPRvw" value="1"/>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_4eibEBypEdutOuniNDPRvw" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

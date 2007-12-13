@@ -1,0 +1,170 @@
+@mainClass "uml2km::Uml2KM"
+@mainOperation "main"
+
+package uml2km;
+
+require kermeta
+require "Pass1_Uml2KMTVisitor.kmt"
+require "Pass2_Uml2KMTVisitor.kmt"
+require "Pass3_Uml2KMVisitor.kmt"
+require "Uml2KMTPrinter.kmt"
+
+using kermeta::standard
+using uml2kmt_visitors
+
+/**
+ * Root of the UML2 to KM transformation tool.
+ */
+class Uml2KM
+{
+    reference mainModel : uml::Package
+    reference externModels : OrderedSet<uml::Package>
+    reference rootPackage : uml::Package
+    reference objectsStore : kermeta::utils::Hashtable<uml::Element, Object>
+    reference resourceObjects : Set<Object>
+    reference uncomposedObjects : Set<Object>
+    
+    operation initialize(input_uri : String, input_mm_uri : String) is do
+    	// load the given UML2 resource
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var inputResource : kermeta::persistence::EMFResource
+    	inputResource ?= inputRepository.createResource(input_uri, input_mm_uri)
+    	inputResource.load()
+    	
+    	// "instances" only gives the main diagramm package for the targeted code tree
+    	mainModel ?= inputResource.instances.one
+    	
+    	// we must parse all the included models, for extra models references
+    	externModels := OrderedSet<uml::Package>.new
+    	inputResource.instances.each{ o |
+    		// the upper root of UML2 model tree is the first package
+    		var model : uml::Package
+    		model ?= o
+	    	if not model.equals(mainModel) then
+	    		var p : uml::Package
+	    		p ?= model.packagedElement.one
+		    	if not p.isVoid then externModels.add(p) end
+	    	end
+    	}
+    	
+    	// creates the Kermeta objects' storage
+	    objectsStore := kermeta::utils::Hashtable<uml::Element, Object>.new
+	    rootPackage ?= mainModel.packagedElement.one
+	    uncomposedObjects := Set<Object>.new
+    end
+    
+    operation main() : Void is do
+    	stdio.writeln("\n>>>>-------------> initializing the model !\n")
+        // the UML2 model to be transformed
+        initialize("platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ClassDiagram.uml",
+        			 "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore")
+//        initialize("platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/simpleModel.uml", "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore")
+//        initialize("platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/rts.uml", "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore")
+		uml2km()
+		saveKm("platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ClassDiagramOutput.km",
+					"platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+		
+	   	stdio.writeln("\n<-------------<<<< end of the programm.\n")
+    end
+    operation uml2km() is do
+    	stdio.writeln("\n>>>>-------------> running Pass 1 !\n")
+        // the first Pass creates the KM objects
+        var pass1 : Pass1_Uml2KMTVisitor init Pass1_Uml2KMTVisitor.new
+        pass1.initialize(objectsStore)
+        
+		pass1.visitPackage(rootPackage)
+        // we pass all the model, for creating all references
+		externModels.each{ p |
+			pass1.visitPackage(p)
+		}
+        
+    	stdio.writeln("\n>>>>-------------> running Pass 2 !\n")
+        // the second Pass links the KM objects
+        var pass2 : Pass2_Uml2KMTVisitor init Pass2_Uml2KMTVisitor.new
+        pass2.initialize(objectsStore)
+        
+		pass2.visitPackage(rootPackage)
+        // we pass all the model, for creating all references
+		externModels.each{ p |
+			pass2.visitPackage(p)
+		}
+		pass2.resourceObjects.each{ o | 
+			uncomposedObjects.add(o)
+		}
+        
+    	stdio.writeln("\n>>>>-------------> running Pass 3 !\n")
+        // the third Pass does additional work on operation objects
+        var pass3 : Pass3_Uml2KMTVisitor init Pass3_Uml2KMTVisitor.new
+        pass3.initialize(objectsStore)
+        
+		pass3.visitPackage(rootPackage)
+    end
+    operation saveKm(output_uri : String, output_mm_uri : String) is do
+    
+    	stdio.writeln("\n>>>>-------------> saving the KM program structure !\n")
+		var resRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+		var resResource : kermeta::persistence::EMFResource
+		resResource ?= resRepository.createResource(output_uri, output_mm_uri)
+    	
+        /////////// storage of the generated KM model /////////////
+		var kmTree : kermeta::language::structure::Package
+		kmTree ?= objectsStore.getValue(rootPackage)
+		var mainUnit : kermeta::language::structure::ModelingUnit init kermeta::language::structure::ModelingUnit.new
+		mainUnit := kermeta::language::structure::ModelingUnit.new
+		mainUnit.packages.add(kmTree)
+		resResource.instances.add(mainUnit)
+		
+		// we add external referenced models
+		var externKmTree : kermeta::language::structure::Package
+		var externUnit : kermeta::language::structure::ModelingUnit
+		externModels.each{ p |
+			externKmTree ?= objectsStore.getValue(p)
+			externUnit := kermeta::language::structure::ModelingUnit.new
+			externUnit.packages.add(externKmTree)
+			resResource.instances.add(externUnit)
+		}
+		// we also add the objects not composed in the tree
+		//FIXME : may be some should not be put in the resource
+		uncomposedObjects.each{ o |
+			resResource.instances.add(o)
+		}
+		// add the kermeta requirement
+		var kRequire : kermeta::language::structure::Require init kermeta::language::structure::Require.new
+		kRequire.uri := "kermeta"
+		mainUnit.requires.add(kRequire)
+		
+		/////////// suspended waiting correction of "pre" & "post" problems
+		
+		resResource.save()
+	end
+	operation prettyPrintKmt() is do
+		var tree : kermeta::language::structure::Package
+		tree ?= objectsStore.getValue(rootPackage)
+
+        // the Kermeta PrettyPrinter transforms the KM tree to code
+    	stdio.writeln("\n>>>>-------------> running Km2Kmt pretty printer !\n")
+        var upp : uml::Uml2KMTPrinter init uml::Uml2KMTPrinter.new
+        upp.initialize()
+		// external references to other diagramms
+		var extRef : OrderedSet<kermeta::language::structure::Package>
+		  init OrderedSet<kermeta::language::structure::Package>.new
+		externModels.each{ p |
+			var pack : kermeta::language::structure::Package
+			pack ?= objectsStore.getValue(p)
+			extRef.add(pack)
+		}
+	    stdio.writeln(upp.visitRootPackage(tree, extRef, 0))
+     end
+}
+/*
+class KMLoaderModuleUML inherits KermetaLoaderModule {
+
+	operation createKermetaUnit(uri : String, packages : Hashtable) : KermetaUnit is do
+//		result := UMLUnit(uri, packages); 
+	end
+}
+
+class UMLUnit inherits KermetaUnit {
+	
+}
+*/

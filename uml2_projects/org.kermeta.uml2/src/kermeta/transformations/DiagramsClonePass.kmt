@@ -1,0 +1,298 @@
+/* $Id: DiagramsClonePass.kmt,v 1.1 2007-12-13 10:34:39 vmahe Exp $
+ * Creation date: July 7, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package uml::transformations;
+
+
+require kermeta
+require "../visitableUML.kmt"
+require "UmlCloneFactory.kmt" 
+require "IOElementsTable.kmt"
+
+using uml
+
+class DiagramClonePass inherits uml::visitors::TopDownVisitor
+{
+	reference currentPackage : Package
+	reference table : IOElementsTable
+	reference factory : UmlCloneFactory
+
+    operation initialize(inputModel : Model, clonesTable : IOElementsTable, cloneFactory : UmlCloneFactory) is do 
+        // the Hashtable could be used by the calling program
+        // which must give it to the passes for putting in the clones
+        table := clonesTable
+        factory := cloneFactory
+    end
+    method visitPackage(visitable : Package) is do 
+        // must manage the current package for each processed element
+        // to be put in the corresponding package
+        var previousPackage : Package init currentPackage
+        currentPackage := visitable
+        
+        // processing the node (different for each pass)
+        self.processPackage(visitable)
+        // end of processing the node
+        
+        super(visitable)
+        currentPackage := previousPackage
+    end
+    operation processPackage(visitable : Package) is abstract
+}
+
+class StaticDiagramClonePass1 inherits DiagramClonePass
+{
+    method visitModel(visitable : Model) is do
+		table.putValue(visitable, factory.cloneModel(visitable))
+	    super(visitable)
+    end
+    
+    method processPackage(visitable : Package) is do 
+        // processing the node
+        var clone : Package init factory.clonePackage(visitable)
+        table.putValue(visitable, clone)
+    end
+    
+    /* cloned with its properties and operations (and corresponding parameters) */
+   method visitClass(visitable : Class) is do
+		// we need to break infinite recursivity thru Type
+		var o : Element init table.getValue(visitable)
+		if o.isVoid
+		then
+    		table.putValue(visitable, factory.cloneClass(visitable))
+	    	super(visitable)
+    	end
+    end
+    
+ /*    method visitComment(visitable : Comment) is do
+    	table.putValue(visitable, factory.cloneComment(visitable))
+    	super(visitable)
+    end
+    
+    method visitDataType(visitable : DataType) is do
+    	table.putValue(visitable, factory.cloneDataType(visitable))
+    	super(visitable)
+    end
+ */   
+    method visitGeneralization(visitable : Generalization) is do
+    	table.putValue(visitable, factory.cloneGeneralization(visitable))
+    	super(visitable)
+    end
+   /* 
+    method visitAssociation(visitable : Association) is do
+    	table.putValue(visitable, factory.cloneAssociation(visitable))
+    	super(visitable)
+    end
+    
+    method visitInterface(visitable : Interface) is do
+    	table.putValue(visitable, factory.cloneInterface(visitable))
+    	super(visitable)
+    end	*/
+}
+
+class StaticDiagramClonePass2 inherits DiagramClonePass
+{
+    method processPackage(visitable : Package) is do 
+        // include all members in the clone package
+        var clone : Package
+        clone ?= table.getValue(visitable)
+        visitable.packagedElement.each{ u |
+        	var mClone : PackageableElement
+        	mClone ?= table.getValue(u)
+        	clone.packagedElement.add(mClone)
+        }
+    end
+    
+    method visitModel(visitable : Model) is do
+        // include all members in the clone Model
+        var clone : Model
+        clone ?= table.getValue(visitable)
+        visitable.packagedElement.each{ u |
+        	var mClone : PackageableElement
+        	mClone ?= table.getValue(u)
+        	clone.packagedElement.add(mClone)
+        }
+    	super(visitable)
+    end
+   
+    method visitClass(visitable : Class) is do
+        var clone : Class
+        clone ?= table.getValue(visitable)
+        
+        //  Classifier uncloned properties
+        visitable.generalization.each{ u |
+        	var eClone : Generalization
+        	eClone ?= table.getValue(u)
+        	clone.generalization.add(eClone)
+        }
+        visitable.ownedUseCase.each{ u |
+        	var eClone : UseCase
+        	eClone ?= table.getValue(u)
+        	clone.ownedUseCase.add(eClone)
+        }
+        //powertypeExtent : FIXME
+        visitable.redefinedClassifier.each{ u |
+        	var eClone : Classifier
+        	eClone ?= table.getValue(u)
+        	clone.redefinedClassifier.add(eClone)
+        }
+        //representation : FIXME
+        //substitution : FIXME
+        //usedCase				: not in StaticDiagram
+        
+        //  BehavioredClassifier uncloned properties
+		//classifierBehavior	: not in StaticDiagram
+		//implementation		: not in StaticDiagram
+		//ownedTrigger			: not in StaticDiagram
+		//ownedStateMachine		: not in StaticDiagram
+    	super(visitable)
+    end
+    
+  /*   method visitComment(visitable : Comment) is do
+        var clone : Comment
+        clone ?= table.getValue(visitable)
+        currentPackage.ownedComment.add(clone)
+    	visitable.annotatedElement.each{u |
+    		clone.annotatedElement.add(table.getValue(u))
+    	}
+    	//  Comment uncloned properties : none
+    	super(visitable)
+    end
+    
+    method visitDataType(visitable : DataType) is do
+        var clone : DataType
+        clone ?= table.getValue(visitable)
+        //  Classifier uncloned properties
+        visitable.ownedAttribute.each{ u |
+			var uVal : Property
+			uVal ?= table.getValue(u)
+			clone.ownedAttribute.add(uVal)
+		}
+        visitable.ownedOperation.each{ u |
+			var uVal : Operation
+			uVal ?= table.getValue(u)
+			clone.ownedOperation.add(uVal) }
+    	super(visitable)
+    end
+   */   
+    method visitGeneralization(visitable : Generalization) is do
+        var clone : Generalization
+        clone ?= table.getValue(visitable)
+        var specVal : Classifier
+        specVal ?= table.getValue(visitable.specific)
+        clone.specific := specVal
+        
+        var genVal : Classifier
+        genVal ?= table.getValue(visitable.general)
+        clone.general := genVal
+      
+       /* FIXME : not available for the moment
+        visitable.generalizationSet.each{ u |
+			var uVal : GeneralizationSet
+			uVal ?= table.getValue(u)
+			clone.generalizationSet.add(uVal) }	*/
+		
+		//  DirectedRelationship uncloned properties : none
+  	 	super(visitable)
+    end
+ /*    
+    method visitAssociation(visitable : Association) is do
+        var clone : Association
+        clone ?= table.getValue(visitable)
+        
+        // we must replace the clone member ends (which point on original instances)
+        // by their cloned equivalents
+        clone.memberEnd.clear
+        visitable.memberEnd.each{ u |
+			var uVal : Property
+			uVal ?= table.getValue(u)
+			if uVal != void then	//////FIXME : defensive programming
+				clone.memberEnd.add(uVal)
+				// store the Ends to be added later in the output resource
+				factory.uncontainedElements.add(uVal)
+			end
+			}
+        
+        //  Classifier uncloned properties
+        visitable.generalization.each{ u |
+        	var eClone : Generalization
+        	eClone ?= table.getValue(u)
+        	clone.generalization.add(eClone)
+        }
+    */    
+        /* not part in static diagrams so not cloned
+        visitable.ownedUseCase.each{ u |
+        	var eClone : UseCase
+        	eClone ?= table.getValue(u)
+        	clone.ownedUseCase.add(eClone)
+        }	*/
+        
+        //powertypeExtent : FIXME
+ /*       visitable.redefinedClassifier.each{ u |
+        	var eClone : Classifier
+        	eClone ?= table.getValue(u)
+        	clone.redefinedClassifier.add(eClone)
+        }
+        //representation : FIXME
+        //substitution : FIXME
+        //usedCase				: not in StaticDiagram
+        
+		//  Relationship uncloned properties : none
+    	super(visitable)
+    end
+    
+    method visitParameter(visitable : Parameter) is do
+    	var clone : Parameter
+        clone ?= table.getValue(visitable)
+        var cl : Classifier
+        cl ?=table.getValue(visitable.type)
+        clone.type := cl
+    	super(visitable)
+    end
+    
+    method visitProperty(visitable : Property) is do
+    	var clone : Property
+        clone ?= table.getValue(visitable)
+        var cl : Classifier
+        cl ?=table.getValue(visitable.type)
+        clone.type := cl
+        
+    	super(visitable)
+    end
+    
+    method visitInterface(visitable : Interface) is do
+        var clone : Interface
+        clone ?= table.getValue(visitable)
+        visitable.nestedClassifier.each{ u | 
+        	var cl : Classifier
+        	cl ?= table.getValue(u)
+        	clone.nestedClassifier.add(cl)
+        }
+        
+        //  Classifier uncloned properties
+        visitable.generalization.each{ u |
+        	var eClone : Generalization
+        	eClone ?= table.getValue(u)
+        	clone.generalization.add(eClone)
+        }
+   */     /* not part in static diagrams so not cloned
+        visitable.ownedUseCase.each{ u |
+        	var eClone : UseCase
+        	eClone ?= table.getValue(u)
+        	clone.ownedUseCase.add(eClone)
+        }	*/
+/*        //powertypeExtent : FIXME
+        visitable.redefinedClassifier.each{ u |
+        	var eClone : Classifier
+        	eClone ?= table.getValue(u)
+        	clone.redefinedClassifier.add(eClone)
+        }
+        //representation : FIXME
+        //substitution : FIXME
+        //usedCase				: not in StaticDiagram
+    	super(visitable)
+    end	*/
+}
