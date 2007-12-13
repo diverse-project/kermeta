@@ -7,13 +7,15 @@ using trek
 class DOCBKTestCaseTemplate{
 operation generate(tc:KTestCase):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append(" \r\n<para/>\r\n<para><emphasis role=\"bold\">")
+_res.append(" \r\n<para/>\r\n")
+// tc.type.name is the type of the given test case
+_res.append("<para><emphasis role=\"bold\">")
 _res.append(tc.name)
 _res.append("</emphasis> [")
 _res.append(tc.type.name)
-_res.append("]:</para>\r\n<para>")
+_res.append("]:</para>\r\n")
 _res.append(tc.summary)
-_res.append("</para>\r\n<para/>")
+_res.append("\r\n<para/>")
 result := _res.toString
 end
 }

@@ -8,19 +8,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: header_template.docb.ket,v 1.2 2007-12-12 13:50:36 cfaucher Exp $ -->
+<!-- $Id: header_template.docb.ket,v 1.3 2007-12-13 17:11:16 cfaucher Exp $ -->
 <book lang="en-US">
 	<bookinfo>
 	    <title>Kermeta Compiler Documentation</title>
 		<pubdate>Build date: @BUILD.DATE@</pubdate>
-	    <pubdate>$Date: 2007-12-12 13:50:36 $</pubdate>
-	    <author>
-	      <firstname>Triskell</firstname>
-	      <surname>INRIA Group</surname>
-	    </author>
+	    <pubdate>$Date: 2007-12-13 17:11:16 $</pubdate>
 	    <author>
 	      <firstname>Cyril</firstname>
 	      <surname>Faucher</surname>
+	    </author>
+	    <author>
+	      <firstname>Didier</firstname>
+	      <surname>Vojtisek</surname>
 	    </author>
 		<keywordset>
 	      <keyword>Kermeta</keyword>

@@ -10,4 +10,4 @@
 <section id="uc_<%=uc.name%>.link">
     <title id="uc_<%=uc.name%>.title.link"><%=uc.name%></title>
     <%if uc.shortSummary != void then%><para><%=uc.shortSummary%></para><%end%>
-    <para><%=uc.summary%></para>
+    <%=uc.summary%>

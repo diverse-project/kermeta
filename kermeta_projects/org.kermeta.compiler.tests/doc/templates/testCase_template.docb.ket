@@ -8,6 +8,7 @@
 %>
  
 <para/>
+<%// tc.type.name is the type of the given test case%>
 <para><emphasis role="bold"><%=tc.name%></emphasis> [<%=tc.type.name%>]:</para>
-<para><%=tc.summary%></para>
+<%=tc.summary%>
 <para/>

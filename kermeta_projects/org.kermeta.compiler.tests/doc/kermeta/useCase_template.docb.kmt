@@ -19,9 +19,8 @@ _res.append("<para>")
 _res.append(uc.shortSummary)
 _res.append("</para>")
 end
-_res.append("\r\n    <para>")
+_res.append("\r\n    ")
 _res.append(uc.summary)
-_res.append("</para>")
 result := _res.toString
 end
 }
