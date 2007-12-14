@@ -1,4 +1,4 @@
-/*$Id: AssignTestCasesToUseCasesCommand.java,v 1.2 2007-12-14 08:43:34 cfaucher Exp $
+/*$Id: AssignTestCasesToUseCasesCommand.java,v 1.3 2007-12-14 09:51:18 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	AssignTestCasesToUseCasesCommand.java
 * License : EPL
@@ -25,6 +25,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.compiler.trek.ui.KCompilerConstants;
+import org.kermeta.compiler.trek.ui.exception.RefinesUCWFRException;
 import org.kermeta.compiler.trek.ui.popup.actions.TrekModelHelper;
 import org.kermeta.trek.KTestCase;
 import org.kermeta.trek.KUseCase;
@@ -122,19 +123,28 @@ public class AssignTestCasesToUseCasesCommand {
 			map_current_testcases.put(tc.getName(), tc);
 		}
 		
-		if ( useCases.get(useCaseFolder.getName()) != null ) {
-			KUseCase theKUseCase = useCases.get(useCaseFolder.getName());
-			theKUseCase.getVerifiedBy().addAll(current_testcases);
-			Collection<String> refined_ucs = TrekModelHelper.getRefinesUCContent(useCaseFolder);
-			
-			// There is only one refined use case, because the Trek model defines that
-			// a use case is able to refine a unique use case
-			if (refined_ucs!=null && refined_ucs.size()==1) {
-				theKUseCase.setRefines(useCases.get(refined_ucs.toArray()[0]));
+		try {
+			// Assign the test cases that are contained by the current use case
+			if ( useCases.get(useCaseFolder.getName()) != null ) {
+				KUseCase theKUseCase = useCases.get(useCaseFolder.getName());
+				theKUseCase.getVerifiedBy().addAll(current_testcases);
+				Collection<String> refined_ucs;
+				
+				refined_ucs = TrekModelHelper.getRefinesUCContent(useCaseFolder);
+				
+				// There is only one refined use case, because the Trek model defines that
+				// a use case is able to refine a unique use case
+				if (refined_ucs!=null && refined_ucs.size()==1) {
+					theKUseCase.setRefines(useCases.get(refined_ucs.toArray()[0]));
+				}
+				
 			}
-			
+		} catch (RefinesUCWFRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
+		// Assign the test cases to the use cases by using information that are stored in the "verifies" file
 		try {
 			// Iteration on the test case folders
 			for(IResource ires : useCaseFolder.members()) {

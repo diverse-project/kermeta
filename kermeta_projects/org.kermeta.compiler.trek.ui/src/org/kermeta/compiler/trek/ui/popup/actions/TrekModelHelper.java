@@ -1,4 +1,4 @@
-/*$Id: TrekModelHelper.java,v 1.8 2007-12-14 08:43:34 cfaucher Exp $
+/*$Id: TrekModelHelper.java,v 1.9 2007-12-14 09:51:19 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	TrekModelHelper.java
 * License : EPL
@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.compiler.trek.ui.KCompilerConstants;
+import org.kermeta.compiler.trek.ui.exception.RefinesUCWFRException;
 import org.kermeta.trek.KStatus;
 import org.kermeta.trek.TrekFactory;
 import org.kermeta.trek.UseKaseModel;
@@ -157,12 +158,17 @@ public class TrekModelHelper {
 	 * 
 	 * @param folder
 	 * @return
+	 * @throws RefinesUCWFRException 
 	 */
-	public static Collection<String> getRefinesUCContent(IFolder folder) {
+	public static Collection<String> getRefinesUCContent(IFolder folder) throws RefinesUCWFRException {
 		IFile refinesUC_file = ResourcesPlugin.getWorkspace().getRoot().getFile(folder.getFullPath().append("/" + KCompilerConstants.REFINES_UC_PREFIX + folder.getName()).addFileExtension(KCompilerConstants.REFINES_UC_EXT));
 		if (refinesUC_file.exists()) {
 			try {
-				return (Collection<String>) readStringByLine(refinesUC_file.getContents()).values();
+				Collection<String> refines_uc = (Collection<String>) readStringByLine(refinesUC_file.getContents()).values();
+				if( refines_uc.size() > 1 ) {
+					throw new RefinesUCWFRException(refinesUC_file);
+				}
+				return refines_uc;
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
