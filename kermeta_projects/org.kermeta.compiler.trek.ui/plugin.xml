@@ -104,6 +104,22 @@
                menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.highLevel/progress">
          </action>
          <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.InitializeTrekLocalVerifiesUC"
+               enablesFor="+"
+               icon="icons/add.png"
+               id="org.kermeta.compiler.trek.ui.InitializeTrekLocalVerifiesUC"
+               label="Initialize the verifies files directly inside the selected folder(s)"
+               menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.lowLevel/specific">
+         </action>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.InitializeTrekLocalRefinesUC"
+               enablesFor="+"
+               icon="icons/add.png"
+               id="org.kermeta.compiler.trek.ui.InitializeTrekLocalRefinesUC"
+               label="Initialize the refines files directly inside the selected folder(s)"
+               menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.lowLevel/specific">
+         </action>
+         <action
                class="org.kermeta.compiler.trek.ui.popup.actions.InitializeTrekAllLocalTextFiles"
                enablesFor="+"
                icon="icons/add.png"

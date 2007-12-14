@@ -1,10 +1,10 @@
-/*$Id: InitializeTrekLocalSummary.java,v 1.3 2007-12-14 08:43:34 cfaucher Exp $
+/*$Id: InitializeTrekLocalRefinesUC.java,v 1.1 2007-12-14 08:43:34 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
-* File : 	InitializeTrekLocalSummary.java
+* File : 	InitializeTrekLocalRefinesUC.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 27 nov. 07
+* Creation date : 13 dec. 07
 * Authors : Cyril Faucher <cfaucher@irisa.fr>
 */
 
@@ -29,7 +29,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.trek.ui.KCompilerConstants;
 
 
-public class InitializeTrekLocalSummary implements IObjectActionDelegate {
+public class InitializeTrekLocalRefinesUC implements IObjectActionDelegate {
 
 	protected StructuredSelection currentSelection;
 
@@ -38,7 +38,7 @@ public class InitializeTrekLocalSummary implements IObjectActionDelegate {
 	/**
 	 * Constructor for Action1.
 	 */
-	public InitializeTrekLocalSummary() {
+	public InitializeTrekLocalRefinesUC() {
 		super();
 	}
 
@@ -82,10 +82,11 @@ public class InitializeTrekLocalSummary implements IObjectActionDelegate {
 	protected static void createSummaryTextFile(IFolder subFolder)
     {
 		try {
-					IFile summary_file = ResourcesPlugin.getWorkspace().getRoot().getFile(subFolder.getFullPath().append("/" + KCompilerConstants.SUMMARY_PREFIX + subFolder.getName()).addFileExtension(KCompilerConstants.SUMMARY_EXT));
-					if( !summary_file.exists() ) {
-						summary_file.create(new ByteArrayInputStream("<para></para>".getBytes()), true, new NullProgressMonitor());
-					}
+			IFile summary_file = ResourcesPlugin.getWorkspace().getRoot().getFile(subFolder.getFullPath().append("/" + KCompilerConstants.REFINES_UC_PREFIX + subFolder.getName()).addFileExtension(KCompilerConstants.REFINES_UC_EXT));
+			if( !summary_file.exists() ) {
+				String content = "refines_uc=";
+				summary_file.create(new ByteArrayInputStream(content.getBytes()), true, new NullProgressMonitor());
+			}
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

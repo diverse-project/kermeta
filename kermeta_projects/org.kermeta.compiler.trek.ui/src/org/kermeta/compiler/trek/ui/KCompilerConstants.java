@@ -1,4 +1,4 @@
-/*$Id: KCompilerConstants.java,v 1.5 2007-12-13 17:13:04 cfaucher Exp $
+/*$Id: KCompilerConstants.java,v 1.6 2007-12-14 08:43:34 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	KCompilerConstants.java
 * License : EPL
@@ -22,6 +22,10 @@ public final class KCompilerConstants {
 	
 	public static final String PROGRESS_EXT = "txt";
 	
+	public static final String VERIFIES_UC_EXT = "txt";
+
+	public static final String REFINES_UC_EXT = "txt";
+
 	public static final String STATUS_KERMETA = "Kermeta";
 	
 	public static final String STATUS_JAVA = "Java";
@@ -39,6 +43,10 @@ public final class KCompilerConstants {
 	public static final String SUMMARY_PREFIX = "summary_";
 	
 	public static final String PROGRESS_PREFIX = "progress_";
+	
+	public static final String REFINES_UC_PREFIX = "refines_uc_";
+
+	public static final String VERIFIES_UC_PREFIX = "verifies_uc_";
 	
 	public static final String COMPILER_USE_CASES_FOLDER = "org.kermeta.compiler.tests/unit_test/";
 	

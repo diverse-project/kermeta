@@ -1,4 +1,4 @@
-/*$Id: AssignTestCasesToUseCasesCommand.java,v 1.1 2007-12-11 20:16:44 cfaucher Exp $
+/*$Id: AssignTestCasesToUseCasesCommand.java,v 1.2 2007-12-14 08:43:34 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	AssignTestCasesToUseCasesCommand.java
 * License : EPL
@@ -12,16 +12,18 @@ package org.kermeta.compiler.trek.ui.command;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.ui.IActionDelegate;
 import org.kermeta.compiler.trek.ui.KCompilerConstants;
 import org.kermeta.compiler.trek.ui.popup.actions.TrekModelHelper;
 import org.kermeta.trek.KTestCase;
@@ -46,7 +48,9 @@ public class AssignTestCasesToUseCasesCommand {
 		this.folders = folders;
 	}
 
-	
+	/**
+	 * 
+	 */
 	public void execute() {
 		
 		// Get the use cases contained into selected "trek" files
@@ -57,16 +61,16 @@ public class AssignTestCasesToUseCasesCommand {
 		for(IFolder folder : folders) {
 			assignTestCasesToUseCases(useCases, folder);
 		}
-		
+
 		try {
 			// Save the "use cases resources" after the assignment of test cases to use cases
-			for(Resource ucR : usecasesResources) {
+			for (Resource ucR : usecasesResources) {
 				ucR.save(null);
 			}
-			for(Resource tcR : testcasesResources) {
+			for (Resource tcR : testcasesResources) {
 				tcR.save(null);
 			}
-		}catch (IOException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -77,8 +81,7 @@ public class AssignTestCasesToUseCasesCommand {
 	 * @param folder
 	 * @return
 	 */
-	private List<KTestCase> getTestCases(IFolder folder)
-    {
+	private List<KTestCase> getTestCases(IFolder folder) {
 		IFile trek_file = ResourcesPlugin.getWorkspace().getRoot().getFile(folder.getFullPath().append("/" + folder.getName()).addFileExtension(KCompilerConstants.TREK_EXT));
 		UseKaseModel useKaseModel = TrekModelHelper.getUseKaseModel(trek_file);
 		testcasesResources.add(useKaseModel.eResource());
@@ -94,11 +97,11 @@ public class AssignTestCasesToUseCasesCommand {
 	private Hashtable<String, KUseCase> getUseCases(List<IFile> trek_files) {
 
 		Hashtable<String, KUseCase> useCases = new Hashtable<String, KUseCase>();
-		for(IFile trek_file : trek_files) {
+		for (IFile trek_file : trek_files) {
 			UseKaseModel useKaseModel = TrekModelHelper.getUseKaseModel(trek_file);
 			usecasesResources.add(useKaseModel.eResource());
 			
-			for(KUseCase uC : useKaseModel.getKuseCases()) {
+			for (KUseCase uC : useKaseModel.getKuseCases()) {
 				useCases.put(uC.getId(), uC);
 			}
 		}
@@ -110,11 +113,49 @@ public class AssignTestCasesToUseCasesCommand {
 	 * @param useCases
 	 * @param testCaseFolder
 	 */
-	private void assignTestCasesToUseCases(Hashtable<String, KUseCase> useCases, IFolder testCaseFolder) {
-		KUseCase theKUseCase = useCases.get(testCaseFolder.getName());
-		theKUseCase.getVerifiedBy().addAll(getTestCases(testCaseFolder));
+	private void assignTestCasesToUseCases(Hashtable<String, KUseCase> useCases, IFolder useCaseFolder) {
+		List<KTestCase> current_testcases = getTestCases(useCaseFolder);
+		
+		// This map will be used to retrieve a test case from its name
+		Map<String, KTestCase> map_current_testcases = new HashMap<String, KTestCase>();
+		for (KTestCase tc : current_testcases) {
+			map_current_testcases.put(tc.getName(), tc);
+		}
+		
+		if ( useCases.get(useCaseFolder.getName()) != null ) {
+			KUseCase theKUseCase = useCases.get(useCaseFolder.getName());
+			theKUseCase.getVerifiedBy().addAll(current_testcases);
+			Collection<String> refined_ucs = TrekModelHelper.getRefinesUCContent(useCaseFolder);
+			
+			// There is only one refined use case, because the Trek model defines that
+			// a use case is able to refine a unique use case
+			if (refined_ucs!=null && refined_ucs.size()==1) {
+				theKUseCase.setRefines(useCases.get(refined_ucs.toArray()[0]));
+			}
+			
+		}
+		
+		try {
+			// Iteration on the test case folders
+			for(IResource ires : useCaseFolder.members()) {
+				if( ires instanceof IFolder ) {
+					IFolder testCaseFolder = (IFolder) ires;
+					Collection<String> verifiesUCContent = TrekModelHelper.getVerifiesUCContent(testCaseFolder);
+					if( verifiesUCContent != null && verifiesUCContent.size()>0 ) {
+						for ( String id_uc : verifiesUCContent ) {
+							KTestCase current_tc = map_current_testcases.get(testCaseFolder.getName());
+							KUseCase current_uc = useCases.get(id_uc);
+							if ( current_uc != null && current_tc != null && !current_uc.getVerifiedBy().contains(current_tc) ) {
+								current_uc.getVerifiedBy().add(current_tc);
+							}
+						}
+					}
+				}
+			}
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
-
-

@@ -1,4 +1,4 @@
-/*$Id: InitializeUseCasesModel.java,v 1.6 2007-12-12 18:05:48 cfaucher Exp $
+/*$Id: InitializeUseCasesModel.java,v 1.7 2007-12-14 08:43:34 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeUseCasesModel.java
 * License : EPL
@@ -87,6 +87,11 @@ public class InitializeUseCasesModel implements IObjectActionDelegate {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param folder
+	 * @param useKaseModel
+	 */
 	protected static void initializeTrekFile(IFolder folder, UseKaseModel useKaseModel) {
 		try {
 			for(IResource subResource : folder.members(false) ) {
@@ -107,6 +112,11 @@ public class InitializeUseCasesModel implements IObjectActionDelegate {
 		}
 	}
 	
+	/**
+	 * Create a Use Case from the metadata contained in the a "Use Case" folder
+	 * @param folder
+	 * @return
+	 */
 	protected static KUseCase createKUseCase(IFolder folder)
     {
 		KUseCase aUseCase = TrekFactory.eINSTANCE.createKUseCase();
@@ -114,20 +124,15 @@ public class InitializeUseCasesModel implements IObjectActionDelegate {
 		aUseCase.setId(folder.getName());
 		aUseCase.setSummary(TrekModelHelper.getSummaryContent(folder));
 		
-		Map<String, Integer> map = TrekModelHelper.getProgressContent(folder);
+		Map<String, String> map = TrekModelHelper.getProgressContent(folder);
 		
-		if(map.get(KCompilerConstants.STATUS_DESIGN)!=null)
-			aUseCase.getStatus().add(TrekModelHelper.newStatus(KCompilerConstants.STATUS_DESIGN, map.get(KCompilerConstants.STATUS_DESIGN)));
-		if(map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_JAVA)!=null)
-			aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_JAVA, map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_JAVA)));
-		if(map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_KERMETA)!=null)
-			aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_KERMETA, map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_KERMETA)));
-		if(map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_JET)!=null)
-			aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_JET, map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_JET)));
-		if(map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_KET)!=null)
-			aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_KET, map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_KET)));
-		if(map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_SIMK)!=null)
-			aUseCase.getStatus().add(TrekModelHelper.newStatusImpl(KCompilerConstants.STATUS_SIMK, map.get(KCompilerConstants.IMPL_PREFIX + KCompilerConstants.STATUS_SIMK)));
+		// Create the status and add it to the given use case
+		// Status are created from the Map that is extracted from the "progress" file
+		for(String key : map.keySet()) {
+			if( map.get(key) != null ) {
+				aUseCase.getStatus().add(TrekModelHelper.newStatus(key, Integer.parseInt(map.get(key))));
+			}
+		}
 		
 		return aUseCase;
     }

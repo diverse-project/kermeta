@@ -1,4 +1,4 @@
-/*$Id: TrekModelHelper.java,v 1.7 2007-12-12 18:05:48 cfaucher Exp $
+/*$Id: TrekModelHelper.java,v 1.8 2007-12-14 08:43:34 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	TrekModelHelper.java
 * License : EPL
@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -121,23 +122,62 @@ public class TrekModelHelper {
 
 	public static String getSummaryContent(IFolder folder) {
 		IFile summary_file = ResourcesPlugin.getWorkspace().getRoot().getFile(folder.getFullPath().append("/" + KCompilerConstants.SUMMARY_PREFIX + folder.getName()).addFileExtension(KCompilerConstants.SUMMARY_EXT));
-		if(summary_file.exists()) {
+		if (summary_file.exists()) {
 			try {
 				return readString(summary_file.getContents());
 			} catch (CoreException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		return "";
 	}
 	
-	public static Map<String,Integer> getProgressContent(IFolder folder) {
+	/**
+	 * 
+	 * @param folder
+	 * @return
+	 */
+	public static Collection<String> getVerifiesUCContent(IFolder folder) {
+		IFile verifiesUC_file = ResourcesPlugin.getWorkspace().getRoot().getFile(folder.getFullPath().append("/" + KCompilerConstants.VERIFIES_UC_PREFIX + folder.getName()).addFileExtension(KCompilerConstants.VERIFIES_UC_EXT));
+		if (verifiesUC_file.exists()) {
+			try {
+				return (Collection<String>) readStringByLine(verifiesUC_file.getContents()).values();
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param folder
+	 * @return
+	 */
+	public static Collection<String> getRefinesUCContent(IFolder folder) {
+		IFile refinesUC_file = ResourcesPlugin.getWorkspace().getRoot().getFile(folder.getFullPath().append("/" + KCompilerConstants.REFINES_UC_PREFIX + folder.getName()).addFileExtension(KCompilerConstants.REFINES_UC_EXT));
+		if (refinesUC_file.exists()) {
+			try {
+				return (Collection<String>) readStringByLine(refinesUC_file.getContents()).values();
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param folder
+	 * @return
+	 */
+	public static Map<String, String> getProgressContent(IFolder folder) {
 		IFile summary_file = ResourcesPlugin.getWorkspace().getRoot().getFile(folder.getFullPath().append("/" + KCompilerConstants.PROGRESS_PREFIX + folder.getName()).addFileExtension(KCompilerConstants.SUMMARY_EXT));
-		if(summary_file.exists()) {
+		if (summary_file.exists()) {
 			try {
 				return readStringByLine(summary_file.getContents());
 			} catch (CoreException e) {
@@ -147,11 +187,21 @@ public class TrekModelHelper {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param in
+	 * @return
+	 */
 	public static String readString( InputStream in ){
 		FileInputStream stream = (FileInputStream) in;
 		return readAll(stream);
 	}
 	
+	/**
+	 * 
+	 * @param in
+	 * @return
+	 */
 	private static String readAll( InputStream in ) { 
 	    StringBuffer output = new StringBuffer();
 	    try
@@ -167,18 +217,23 @@ public class TrekModelHelper {
 	    }
 	    return output.toString();
 	}
-	
-	public static Map<String,Integer> readStringByLine( InputStream in ){
+
+	/**
+	 * 
+	 * @param in
+	 * @return
+	 */
+	public static Map<String, String> readStringByLine( InputStream in ){
 		
-		Map<String,Integer> map = new HashMap<String,Integer>();
+		Map<String, String> map = new HashMap<String, String>();
 		
 		BufferedReader input = new BufferedReader(new InputStreamReader(in));
 		try {
 			String thisLine;
 			while ((thisLine = input.readLine()) != null) {
 				String[] lineContent = thisLine.split("=");
-				if( !lineContent[1].equals("-1") ) {
-					map.put(lineContent[0], Integer.parseInt(lineContent[1]));
+				if( lineContent.length==2 && !lineContent[1].equals("") && !lineContent[1].equals("-1") ) {
+					map.put(lineContent[0], lineContent[1]);
 				}
 		    }
 		} catch (IOException e) {
