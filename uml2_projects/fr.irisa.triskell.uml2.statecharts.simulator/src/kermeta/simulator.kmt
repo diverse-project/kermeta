@@ -1,0 +1,74 @@
+/* $Id: simulator.kmt,v 1.3 2007-12-14 10:53:29 vmahe Exp $
+ * Creation date: June 12, 2006
+ * License:
+ * Copyright:
+ * Authors: vmahe@irisa.fr
+ */
+
+
+package simulator;
+
+
+require kermeta
+
+using kermeta::standard
+
+package core
+{
+    abstract class Simulator
+    {
+    	reference configuration : Configuration
+    	reference fireableTransitions : String
+    	
+    	/** this method must be implemented by Ui simulators */
+    	operation displayFireableTransitions() is abstract
+    	
+    	/** this method must be implemented by Ui simulators */
+    	operation displayCurrentSystem() is abstract
+    	
+    	/** this method must be implemented by Ui simulators.
+    	 * Must also have exception handling to intercept user mistakes */
+    	operation readChoosenTransition() : Integer is abstract
+    	
+    	operation setInitialConfiguration(new : Configuration) is do
+    		configuration := new
+    	end
+    	operation goNextTransition() is do
+    		// results of previous fired transition have been displayed
+    		// including the new set of fireable transitions
+    		from true until false
+	    	loop
+	    		var choice : Integer
+	    		choice := readChoosenTransition
+	    		configuration.fireTransition(choice)
+	    		displayCurrentSystem()
+	    		displayFireableTransitions
+	    	end
+    	end
+    	
+    	/** this method must be implemented by foreign package using the simulator.
+    	 * It must first instanciate the all configuration,
+    	 * secondly display fireable transitions for all objects
+    	 * and after that, launch the goNextTransition() loop.
+    	 */
+    	operation run() is abstract
+    }
+    
+    abstract class Configuration
+    {
+    	operation getStatus() : String is abstract
+    	operation getFireableTransitions() : String is abstract
+    	operation fireTransition(num : Integer) is abstract
+    }
+}
+
+/** This package is a generic one, for wrapping any Ui by the foreign packages */
+package ui
+{
+	class Simulator inherits core::Simulator
+	{
+		method displayCurrentSystem() is abstract
+		method displayFireableTransitions() is abstract
+		method readChoosenTransition() : Integer is abstract
+	}
+}

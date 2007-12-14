@@ -1,0 +1,46 @@
+TODO
+----
+
+Known Bugs :
+- in the model resulting from Valooder, navigable associations have only
+  one "ownedMember", despite the 2 "ownedMember" of the original association.
+- in the model resulting from Valooder, pseudo states (the initial state) don't
+  have a corresponding concrete state class in the IOTable. See the
+  "createTransitionOperation()" operation in Vlaooder for more details.
+
+Valooder :
+=========
+
+ 0 - methods (of the valooded model) which needed to be completed
+     (generation of their body code) :
+       - proxies : code of the accessors (operations of "_impl" class). Quite simple.
+       - actor's state(s) : we needed to identify context which rely to an actor
+         and then write the generator of code for the methods "nb_transitions",
+         "labels" and "completion". See "three_way_switch_toBeProducedByValooder.kmt"
+         for a sample of these methods. The generator will take place in the
+         "visitRegion", with a browsing of the region's transitions.
+
+ 1 - generation of the configuration class (inherits rts::CADPSimulator)
+     from an instances diagram given by the user.
+     See the class "ThreeWaySwitch" at the end of the
+     "three_way_switch_toBeProducedByValooder.kmt" file in
+     fr.irisa.triskell.uml2.samples/three-way switch/kermeta/ .
+     it must refer to the valooded model.
+
+ 2 - make a a tool which embbeded the opening of a model, then valood it
+     and then save the reified model and produce a Kermeta version.
+
+ 3 - make a tool which use the Kermeta valooded model, open a instances
+     diagram, then generate the configuration clas/code and run it through
+     the simulator
+
+Other :
+======
+ - write unit tests for the valooder transformation
+ - write unit tests for the configuration generator
+
+History :
+---------
+
+
+
