@@ -82,68 +82,69 @@
   <events name="update"/>
   <events name="close"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/.project"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/CVS/Entries"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/CVS/Repository"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/CVS/Root"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/CVS/Entries"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/CVS/Repository"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/CVS/Root"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/GOFStatePattern.jpg"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/GOFStatePattern.uml"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/GOFStatePattern.umldi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/transformations.jpg"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/transformations.uml"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/transformations.umldi"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/valooder.jpg"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/CVS/Entries"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/CVS/Repository"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/CVS/Root"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/CVS/Entries"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/CVS/Repository"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/CVS/Root"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-12T09:36:32.000+0100" value="/org.kermeta.uml2/src/kermeta/UmlBuilders.kmt">
-    <dependencies type="//@ruleTypes.0" from="//@units.21" to="//@units.49"/>
-  </units>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2006-07-20T10:38:27.000+0200" value="/org.kermeta.uml2/src/kermeta/keyword_list.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-12T16:53:46.000+0100" value="/org.kermeta.uml2/src/kermeta/polymorphism.kmt">
-    <dependencies type="//@ruleTypes.0" from="//@units.23" to="//@units.49"/>
-  </units>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-03T10:12:08.000+0100" value="/org.kermeta.uml2/src/kermeta/tools/BuildTopDownVisitor.kmt"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/tools/CVS/Entries"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/tools/CVS/Repository"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/tools/CVS/Root"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/tools/CVS/Template"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-12T16:53:46.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/BehaviorTools.kmt">
-    <dependencies type="//@ruleTypes.0" from="//@units.29" to="//@units.38"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.29" to="//@units.37"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.29" to="//@units.33"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.29" to="//@units.49"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.29" to="//@units.35"/>
-  </units>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/CVS/Entries"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/CVS/Repository"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/CVS/Root"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/DiagramsClonePass.kmt" dependents="//@units.29/@dependencies.2"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/GOFStatePatternTool.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/IOElementsTable.kmt" dependents="//@units.29/@dependencies.4"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/StaticTools.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/UmlCloneFactory.kmt" dependents="//@units.29/@dependencies.1"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/UmlTool.kmt" dependents="//@units.29/@dependencies.0"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/CVS/Entries"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/CVS/Repository"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/CVS/Root"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/KmBuilder.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/Pass1_Uml2KMTVisitor.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/Pass2_Uml2KMTVisitor.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/Pass3_Uml2KMVisitor.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/Uml2KM.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/Uml2KMTPrinter.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src_doc/Uml2-Demos.odt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/visitableUML.kmt"/>
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/printer.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/visitableUML.kmt" dependents="//@units.21/@dependencies.0 //@units.23/@dependencies.0 //@units.29/@dependencies.3"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/META-INF/MANIFEST.MF"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/Uml2KMTPrinter.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/Uml2KM.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/Pass3_Uml2KMVisitor.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/Pass2_Uml2KMTVisitor.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/Pass1_Uml2KMTVisitor.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/uml2km/KmBuilder.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/UmlTool.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/UmlCloneFactory.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/StaticTools.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/IOElementsTable.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/GOFStatePatternTool.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/DiagramsClonePass.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/transformations/BehaviorTools.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/tools/BuildTopDownVisitor.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/polymorphism.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/keyword_list.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/src/kermeta/UmlBuilders.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/plugin.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/img/Vehicules_original_model.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/img/Vehicules_improved_model.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/img/Bank_model.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/img/Bank_km_details.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/help/toc.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/help/Uml2-Demos4.html"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/help/Uml2-Demos3.html"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/help/Uml2-Demos2.html"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/help/Uml2-Demos1.html"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/help/Uml2-Demos.html"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/valooder.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/transformations.umldi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/transformations.uml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/transformations.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/GOFStatePattern.umldi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/GOFStatePattern.uml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/models/GOFStatePattern.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/general-architecture.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/general-architecture.odg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/Umlaut.odg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/Transformations - main diagram.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/Transformations - Valooder.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/Simulator_design_components.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/Simulator_design_UI.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/Simulator_design_Foreign.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/Simulator_design_Core.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/RTS_library.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/InternalTransitionSequenceDiagram_instances.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/InternalTransitionSequenceDiagram_affectation.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/InternalTransitionSequenceDiagram.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/InternalTransitionSequenceDiagram.odg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/GOFState_cases.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/GOFState_cases.odg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/GOFState_IOTable_correspondances.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/GOFState_IOTable_correspondances.odg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/GOFStatePattern.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide_figures/ClassDiagram.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Umlaut-Architecture-Guide.odt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/build.properties"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/META-INF/MANIFEST.MF"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/.project.kpm"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/.project"/>
   <ruleTypes name="require"/>
   <ruleTypes name="normal"/>
 </kpm:KPM>
