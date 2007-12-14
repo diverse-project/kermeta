@@ -1,16 +1,20 @@
-/* $Id: 001test_Tool_Valooder.kmt,v 1.1 2007-12-14 13:16:18 vmahe Exp $
+/* $Id: 001test_Tool_Valooder.main.kmt,v 1.1 2007-12-14 13:25:20 vmahe Exp $
  * Creation date: July 6, 2006
  * License:
  * Copyright:
  * Authors:
  */
+@mainClass "tools_tests::ToolValooderTestCase"
+@mainOperation "main"
+
 
 package tools_tests;
 
 /*
 require kermeta
-require "../../src/kermeta/transformations/GOFStatePatternTool.kmt"
+require "platform:/plugin/org.kermeta.uml2/src/kermeta/transformations/GOFStatePatternTool.kmt"
 
+using kermeta::kunit
 using uml2
 using uml2::transformations
 
@@ -29,6 +33,12 @@ class ToolValooderTestCase inherits kermeta::kunit::TestCase
 	reference t12 : Transition
 	reference t21 : Transition
 	reference t2f : Transition
+
+	operation main() : Void is do 
+		var tr : TestRunner init TestRunner.new
+		tr.run(ToolValooderTestCase)
+		tr.printTestResult		
+	end
 	
 	method setUp() is do
 		//creating needed instances

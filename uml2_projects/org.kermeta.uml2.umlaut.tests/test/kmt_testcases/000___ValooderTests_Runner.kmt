@@ -5,7 +5,7 @@
 package test_package;
 
 require kermeta
-require "001test_Tool_Valooder.kmt"
+require "001test_Tool_Valooder.main.kmt"
 
 using tools_tests
 
