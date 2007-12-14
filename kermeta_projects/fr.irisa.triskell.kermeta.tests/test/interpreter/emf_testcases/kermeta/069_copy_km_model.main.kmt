@@ -22,7 +22,7 @@ class Main inherits TestCase
     operation test0() : Void is
     do 
    		var repository_load : EMFRepository init EMFRepository.new
-    	var resource_load : Resource init repository_load.createResource("../instances/069_km_model_to_copy.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+    	var resource_load : Resource init repository_load.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/069_km_model_to_copy.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
  
   		do
 			resource_load.load()
@@ -40,7 +40,7 @@ class Main inherits TestCase
 	 	mymodelunit ?= resource_load.instances.one	 			
 											 				
 		var repository_save : EMFRepository init EMFRepository.new    
-        var resource_save : Resource init repository_save.createResource("../instances/069_km_model_to_copy(copied).km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+        var resource_save : Resource init repository_save.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/069_km_model_to_copy(copied).km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
 	 	resource_save.instances.add(mymodelunit)
 	 	do
 		 	resource_save.save()
@@ -54,7 +54,7 @@ class Main inherits TestCase
 	 	end
 	 	
 	 	var repository_load2 : EMFRepository init EMFRepository.new     
-    	var resource_load2 : Resource init repository_load2.createResource("../instances/069_km_model_to_copy(copied).km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+    	var resource_load2 : Resource init repository_load2.createResource("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/069_km_model_to_copy(copied).km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
     	do
 			resource_load2.load()
 			stdio.writeln("load2 OK")
