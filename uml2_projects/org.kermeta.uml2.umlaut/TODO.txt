@@ -6,7 +6,11 @@ Known Bugs :
   one "ownedMember", despite the 2 "ownedMember" of the original association.
 - in the model resulting from Valooder, pseudo states (the initial state) don't
   have a corresponding concrete state class in the IOTable. See the
-  "createTransitionOperation()" operation in Vlaooder for more details.
+  "createTransitionOperation()" operation in Valooder for more details.
+
+Plugin :
+=====
+Add an "Example" wizard which could unzip the "org.kermeta.uml2.umlaut.samples" project.
 
 Valooder :
 =========

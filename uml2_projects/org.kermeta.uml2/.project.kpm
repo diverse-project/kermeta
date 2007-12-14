@@ -172,6 +172,8 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Uml2-MDK-Architecture-Guide_figures/general-architecture.odg"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Uml2-MDK-Architecture-Guide_figures/general-architecture.png"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/design/Uml2-MDK-Architecture-Guide.odt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/zip/org.kermeta.uml2.samples.zip"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2/TODO.txt"/>
   <ruleTypes name="require"/>
   <ruleTypes name="normal"/>
 </kpm:KPM>
