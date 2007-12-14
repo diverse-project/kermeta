@@ -1,4 +1,4 @@
-fr.irisa.triskell.uml2.samples : README.txt
+fr.irisa.triskell.uml2.statecharts : README.txt
 
 All the UML2 tools have moved to org.kermeta.uml2.*
 
