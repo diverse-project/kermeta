@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.1 2007-12-14 12:46:38 cfaucher Exp $
+/* $Id: Resource.java,v 1.2 2007-12-14 15:21:26 cfaucher Exp $
  * Project   : org.kermeta.emfcompare
  * File      : Resource.java
  * License   : EPL
@@ -36,7 +36,7 @@ import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
 /**
  * This class is intended to "wrap" EMF Compare into kermeta.
  */
-public class Resource extends fr.irisa.triskell.kermeta.runtime.basetypes.Resource {
+public class Resource {
     
     public static RuntimeObject getDiff(RuntimeObject self, RuntimeObject param0, RuntimeObject param1) {
 		
