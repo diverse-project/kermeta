@@ -1,4 +1,4 @@
-/* $Id: LoadingTestSuite.java,v 1.1 2007-12-14 10:48:50 vmahe Exp $
+/* $Id: LoadingTestSuite.java,v 1.2 2007-12-14 12:32:06 vmahe Exp $
  * Project : Kermeta MDK UML2
  * File : LoadingTestSuite.java
  * License : EPL

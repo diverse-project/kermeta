@@ -1,4 +1,4 @@
-/* $Id: prototype.kmt,v 1.1 2007-12-14 08:41:29 vmahe Exp $
+/* $Id: prototype.kmt,v 1.2 2007-12-14 12:34:00 vmahe Exp $
  * Creation date: August 7, 2006
  * License: GPL
  * Copyright: irisa.fr
@@ -10,7 +10,7 @@
 package bank;
 
 require kermeta
-require "bank.km"	// link to the executable model
+require "platform:/resource/org.kermeta.uml2.samples/bank/kermeta/bank.kmt"	// link to the executable model
 require "utilities.kmt"
 
 class Main
@@ -96,7 +96,7 @@ class UserInterface
 	operation choiceCustomer() : bank::Customer is do
 		var num : kermeta::standard::Integer init 0
 		customers.each{ c |
-			stdio.writeln("  "+c.name+" - n° "+num.toString)
+			stdio.writeln("  "+ c.name +" - n° "+num.toString)
 			num := num + 1
 		}
 		num := utility.string2Integer(stdio.read("    give the n° of the customer : "))

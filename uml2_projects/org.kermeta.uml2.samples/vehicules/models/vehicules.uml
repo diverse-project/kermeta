@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
-  <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="vehicules">
-    <packagedElement xmi:type="uml:DataType" xmi:id="_ECFwgKoeEdybGuUhIemzag" name="Integer"/>
-    <packagedElement xmi:type="uml:Class" xmi:id="_GUAIwKoeEdybGuUhIemzag" name="Vehicule">
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
+  <packagedElement xsi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="vehicules">
+    <packagedElement xsi:type="uml:DataType" xmi:id="_ECFwgKoeEdybGuUhIemzag" name="Integer"/>
+    <packagedElement xsi:type="uml:Class" xmi:id="_GUAIwKoeEdybGuUhIemzag" name="Vehicule">
       <ownedOperation xmi:id="_Rw9UQKoeEdybGuUhIemzag" name="go"/>
       <ownedOperation xmi:id="_Sqlq8KoeEdybGuUhIemzag" name="halt"/>
       <ownedOperation xmi:id="_UQ-Z8KoeEdybGuUhIemzag" name="turnRight"/>
@@ -11,16 +11,16 @@
         <ownedParameter xmi:id="_Z5ik8KoeEdybGuUhIemzag" name="kmph" type="_ECFwgKoeEdybGuUhIemzag"/>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_IHKvgKoeEdybGuUhIemzag" name="Car">
+    <packagedElement xsi:type="uml:Class" xmi:id="_IHKvgKoeEdybGuUhIemzag" name="Car">
       <generalization xmi:id="_JMgm86oeEdybGuUhIemzag" general="_GUAIwKoeEdybGuUhIemzag"/>
       <ownedAttribute xmi:id="_KVJC8KoeEdybGuUhIemzag" name="wheelsNumber" type="_ECFwgKoeEdybGuUhIemzag"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_mmwecKoeEdybGuUhIemzag" name="GazEngine">
+    <packagedElement xsi:type="uml:Class" xmi:id="_mmwecKoeEdybGuUhIemzag" name="GasEngine">
       <ownedAttribute xmi:id="_oKdF0KoeEdybGuUhIemzag" name="wattsPower" type="_ECFwgKoeEdybGuUhIemzag"/>
       <ownedOperation xmi:id="_rIp8UKoeEdybGuUhIemzag" name="start"/>
       <ownedOperation xmi:id="_sCGs0KoeEdybGuUhIemzag" name="stop"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_tOVPYKoeEdybGuUhIemzag" name="ElectricMotor">
+    <packagedElement xsi:type="uml:Class" xmi:id="_tOVPYKoeEdybGuUhIemzag" name="ElectricMotor">
       <ownedAttribute xmi:id="_vbFa0KoeEdybGuUhIemzag" name="wattsPower" type="_ECFwgKoeEdybGuUhIemzag"/>
       <ownedOperation xmi:id="_xKKy0KoeEdybGuUhIemzag" name="switchOn"/>
       <ownedOperation xmi:id="_zFczwKoeEdybGuUhIemzag" name="switchOff"/>

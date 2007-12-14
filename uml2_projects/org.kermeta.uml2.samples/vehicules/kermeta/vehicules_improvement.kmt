@@ -1,4 +1,4 @@
-/* $Id: vehicules_improvement.kmt,v 1.1 2007-12-14 08:41:29 vmahe Exp $
+/* $Id: vehicules_improvement.kmt,v 1.2 2007-12-14 12:34:00 vmahe Exp $
  * Creation date: August 4, 2006
  * License: GPL
  * Copyright: irisa.fr
@@ -63,7 +63,7 @@ class Main
 		
 		stdio.writeln(" >>>------> saving the transformed model")
 		
-		cloneModelName := "platform:/resource/fr.irisa.triskell.uml2.samples/vehicules/models/improved_vehicules.uml"
+		cloneModelName := "platform:/resource/org.kermeta.uml2.samples/vehicules/models/improved_vehicules.uml"
     	var outputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var outputResource : kermeta::persistence::EMFResource
     	outputResource ?= outputRepository.createResource(cloneModelName, "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore")
@@ -75,18 +75,9 @@ class Main
     
     /////////////  code for transformations //////////////////
 	operation addGetterOnWattsPower() is do
-		
-		//DEBUG
-		root_package.packagedElement.each{e |
-			stdio.writeln("DEBUG - addGetterOnWattsPower() : packagedElement = "+e.toString)
-		}
-		
 		// we get the "GasEngine" class (before this class will loose its attributes, passed to the interface)
 		var cl : uml::Class
 		cl ?= root_package.packagedElement.select{ e | e.name == "GasEngine" }.one
-		
-		//DEBUG
-		stdio.writeln("DEBUG - addGetterOnWattsPower() : GasEngine clone = "+cl.toString)
 		
 		// we need the accessors tool for transformation
 		var accTool : uml::transformations::Accessor_Tool init uml::transformations::Accessor_Tool.new

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
+  <kermeta_language_structure:ModelingUnit>
+    <packages name="bank">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Customer">
+        <ownedAttribute name="name" type="#/4" upper="1"/>
+        <ownedAttribute name="account" type="#/5" isOrdered="true" upper="-1"/>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Account">
+        <ownedAttribute name="amount" type="#/6" upper="1"/>
+        <ownedOperation tag="#/1" name="deposit" lower="1" upper="1">
+          <ownedParameter name="new_cash" type="#/6" upper="1"/>
+        </ownedOperation>
+        <ownedOperation tag="#/2" name="printAmount" type="#/4" lower="1" upper="1">
+          <ownedParameter type="#/4" upper="1"/>
+        </ownedOperation>
+        <ownedOperation tag="#/3" name="withdraw" type="#/6" lower="1" upper="1">
+          <ownedParameter type="#/6" upper="1"/>
+          <ownedParameter name="desired" type="#/6" upper="1"/>
+        </ownedOperation>
+      </ownedTypeDefinition>
+    </packages>
+    <requires uri="kermeta"/>
+  </kermeta_language_structure:ModelingUnit>
+  <kermeta_language_structure:Tag name="kdoc" value="do&#xA;    if amount == void then&#xA;        amount := new_cash&#xA;    else&#xA;        amount := amount + new_cash&#xA;    end&#xA;end"
+      object="#/0/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0"/>
+  <kermeta_language_structure:Tag name="kdoc" value="do&#xA;    result := amount&#xA;end"
+      object="#/0/@packages.0/@ownedTypeDefinition.1/@ownedOperation.1"/>
+  <kermeta_language_structure:Tag name="kdoc" value="do&#xA;    if amount > desired then&#xA;        result := desired&#xA;        amount := amount - desired&#xA;    else&#xA;        result := amount&#xA;        amount := 0&#xA;    end&#xA;end"
+      object="#/0/@packages.0/@ownedTypeDefinition.1/@ownedOperation.2"/>
+  <kermeta_language_structure:Class typeDefinition="kermeta_language_structure:ClassDefinition ../../.bin/kermetisationUml2KMPass1_Uml2KMTVisitorvisitableUMLkeywo.km#//@packages.1/standard/String"/>
+  <kermeta_language_structure:Class typeDefinition="#/0/@packages.0/@ownedTypeDefinition.1"/>
+  <kermeta_language_structure:Class typeDefinition="kermeta_language_structure:ClassDefinition ../../.bin/kermetisationUml2KMPass1_Uml2KMTVisitorvisitableUMLkeywo.km#//@packages.1/standard/Integer"/>
+  <kermeta_language_structure:Class typeDefinition="#/0/@packages.0/@ownedTypeDefinition.0"/>
+</xmi:XMI>

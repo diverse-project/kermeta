@@ -5,7 +5,7 @@ package org.kermeta.uml2.umlaut.tests;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import org.kermeta.uml2.tests.loading.LoadingTestSuite;
+import org.kermeta.uml2.umlaut.tests.loading.LoadingTestSuite;
 
 @RunWith(Suite.class)  
 @Suite.SuiteClasses({

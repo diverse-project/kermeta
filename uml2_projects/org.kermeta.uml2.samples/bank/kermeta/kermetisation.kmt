@@ -1,4 +1,4 @@
-/* $Id: kermetisation.kmt,v 1.1 2007-12-14 08:41:29 vmahe Exp $
+/* $Id: kermetisation.kmt,v 1.2 2007-12-14 12:34:00 vmahe Exp $
  * Creation date: August 4, 2006
  * License: GPL
  * Copyright: irisa.fr
@@ -30,7 +30,7 @@ class Main
     	
     	// then run the uml2km features
 		u2k.uml2km()
-		u2k.saveKm("platform:/resource/org.kermeta.uml2/bank/kermeta/bank.km")
+		u2k.saveKm("platform:/resource/org.kermeta.uml2.samples/bank/kermeta/bank.km")
     	
     end
 }

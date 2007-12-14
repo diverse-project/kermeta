@@ -82,36 +82,31 @@
   <events name="update"/>
   <events name="close"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/build.properties"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/META-INF/MANIFEST.MF"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/.project"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/documentation/bank_km_details.png"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/documentation/bank_model.jpg"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/bank.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-13T16:54:39.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/kermetisation.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-03T10:12:01.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/prototype.kmt">
-    <dependencies type="//@ruleTypes.0" from="//@units.8" to="//@units.9"/>
-  </units>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/utilities.kmt" dependents="//@units.8/@dependencies.0"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/models/bank.uml"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/vehicules/documentation/vehicules_improved_model.jpg"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/vehicules/documentation/vehicules_original_model.jpg"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-13T16:10:26.000+0100" value="/org.kermeta.uml2.samples/vehicules/kermeta/vehicules2km.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-13T17:22:17.000+0100" value="/org.kermeta.uml2.samples/vehicules/kermeta/vehicules_improvement.kmt"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/README.txt"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/.bin/prototypebankutilities.km"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="2007-11-26T13:54:42.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/bankOLD.km"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/.bin/kermetisationUml2KMPass1_Uml2KMTVisitorvisitableUMLkeywo.km"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/models/bank.umldi"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/.bin/new_file.km"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/.bin/vehicules_improvementStaticToolsUmlToolUmlCloneFactoryDi.km"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/.bin/vehicules_improvement.km"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/.bin/vehicules2kmUml2KMPass1_Uml2KMTVisitorvisitableUMLkeywor.km"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/.project.kpm"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/vehicules/models/vehicules.jpg"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/vehicules/models/vehicules.uml"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/vehicules/models/vehicules.umldi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/vehicules/models/vehicules.uml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/vehicules/models/vehicules.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/vehicules/models/improved_vehicules.jpg"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/vehicules/kermeta/vehicules_improvement.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/vehicules/kermeta/vehicules2km.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/vehicules/documentation/vehicules_original_model.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/vehicules/documentation/vehicules_improved_model.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/build.properties"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/models/bank.umldi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/models/bank.uml"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/utilities.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/prototype.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/kermetisation.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/bank.kmt"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/bank.km"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/documentation/bank_model.jpg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/documentation/bank_km_details.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/README.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/META-INF/MANIFEST.MF"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/.project.kpm"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/.project"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/.cvsignore"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/.bin/prototypebankutilities.km"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/.bin/kermetisationUml2KMPass1_Uml2KMTVisitorvisitableUMLkeywo.km"/>
   <ruleTypes name="require"/>
   <ruleTypes name="normal"/>
 </kpm:KPM>
