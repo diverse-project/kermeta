@@ -28,13 +28,14 @@ Require-Bundle: org.eclipse.ui;resolution:=optional,
  fr.irisa.triskell.traceability
 Eclipse-LazyStart: true
 Export-Package: 
- fr.irisa.triskell.kermeta.runner.launching,
- fr.irisa.triskell.kermeta.runner.dialogs,
- fr.irisa.triskell.kermeta.runner.debug.util,
- fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions,
- fr.irisa.triskell.kermeta.runner.debug.remote.interpreter,
- fr.irisa.triskell.kermeta.runner.debug.remote,
- fr.irisa.triskell.kermeta.runner.debug.process,
- fr.irisa.triskell.kermeta.runner.debug.model,
+ fr.irisa.triskell.kermeta.runner,
  fr.irisa.triskell.kermeta.runner.actions,
- fr.irisa.triskell.kermeta.runner
+ fr.irisa.triskell.kermeta.runner.console,
+ fr.irisa.triskell.kermeta.runner.debug.model,
+ fr.irisa.triskell.kermeta.runner.debug.process,
+ fr.irisa.triskell.kermeta.runner.debug.remote,
+ fr.irisa.triskell.kermeta.runner.debug.remote.interpreter,
+ fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions,
+ fr.irisa.triskell.kermeta.runner.debug.util,
+ fr.irisa.triskell.kermeta.runner.dialogs,
+ fr.irisa.triskell.kermeta.runner.launching

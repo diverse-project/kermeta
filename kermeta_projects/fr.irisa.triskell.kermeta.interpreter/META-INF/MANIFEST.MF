@@ -34,6 +34,7 @@ Export-Package: fr.irisa.triskell.kermeta.builder,
  fr.irisa.triskell.kermeta.runtime.language,
  fr.irisa.triskell.kermeta.runtime.loader,
  fr.irisa.triskell.kermeta.runtime.loader.emf,
+ fr.irisa.triskell.kermeta.runtime.rohelper,
  fr.irisa.triskell.kermeta.runtime.testing,
  fr.irisa.triskell.utils.argumentsreader
 Bundle-Vendor: IRISA/INRIA

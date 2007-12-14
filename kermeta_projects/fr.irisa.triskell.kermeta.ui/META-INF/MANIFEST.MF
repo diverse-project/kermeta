@@ -28,6 +28,8 @@ Export-Package: fr.irisa.triskell.kermeta.actions,
  fr.irisa.triskell.kermeta.ui.perspective,
  fr.irisa.triskell.kermeta.ui.preferences,
  fr.irisa.triskell.kermeta.ui.provider,
+ fr.irisa.triskell.kermeta.ui.textPresentation,
  fr.irisa.triskell.kermeta.ui.util,
+ fr.irisa.triskell.kermeta.ui.validation,
  fr.irisa.triskell.kermeta.ui.views,
  fr.irisa.triskell.kermeta.wizards
