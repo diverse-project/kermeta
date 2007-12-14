@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.kermeta.trek.feature"
-      label="Trek Feature"
+      label="Kermeta MDK for Trek"
       version="0.1.0"
       provider-name="IRISA/INRIA">
 
