@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Emf Compare Wrapper for Kermeta Plug-in
+Bundle-SymbolicName: org.kermeta.emfcompare
+Bundle-Version: 0.0.99.qualifier
+Bundle-Activator: org.kermeta.emfcompare.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ fr.irisa.triskell.kermeta.interpreter,
+ org.eclipse.emf.compare,
+ org.eclipse.emf.compare.diff,
+ org.eclipse.emf.compare.match
+Eclipse-LazyStart: true
+Export-Package: org.kermeta.emfcompare,
+ org.kermeta.emfcompare.basetypes
+Bundle-Vendor: IRISA/INRIA

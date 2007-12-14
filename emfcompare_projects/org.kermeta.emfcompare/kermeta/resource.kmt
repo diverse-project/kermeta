@@ -1,0 +1,78 @@
+/**
+ * 
+ */
+  @uri "http://www.kermeta.org/kermeta/persistence"
+package kermeta::persistence;
+require kermeta
+using kermeta::standard
+using kermeta::persistence
+
+/* ****************************************************************************
+ * $Id: resource.kmt,v 1.1 2007-12-14 12:46:38 cfaucher Exp $
+ * Project : Kermeta (First iteration)
+ * Creation date :  
+ * File : resource.kmt
+ * License : EPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * Creation date : Mar 14, 2005
+ * Authors :
+ *			Cyril Faucher <cfaucher@irisa.fr>
+ *			Jean-Marie Mottu <jean-marie.mottu@irisa.fr>
+ */
+
+
+/**
+ * 
+ */
+@aspect "true"
+abstract class Resource inherits kermeta::standard::Set<Object>
+{
+	/**
+	 * TODO
+	 */
+	operation compare(rightResource : Resource) : Boolean is abstract
+	/**
+	 * TODO
+	 */
+	operation getMatch(rightResource : Resource, matchModelUri : String) : Resource is abstract
+	/**
+	 * TODO
+	 */
+	operation getDiff(rightResource : Resource, diffModelUri : String) : Resource is abstract
+}
+
+
+/**
+ *  
+ */
+@aspect "true"
+class EMFResource inherits Resource
+{
+	
+	/**
+	 * Overrides Resource.compare()
+	 */
+	method compare(rightResource : Resource) : Boolean is do
+		var bool : Boolean
+		bool ?= extern org::kermeta::emfcompare::basetypes::Resource.compare(self.uri,rightResource.uri)
+		result := bool
+	end
+	
+	/**
+	 * Overrides Resource.getMatch()
+	 */	
+	method getMatch(rightResource : Resource, matchModelUri : String) : Resource is do
+		extern org::kermeta::emfcompare::basetypes::Resource.getMatch(self.uri, rightResource.uri, matchModelUri)
+		var resource : Resource init EMFRepository.new.getResource(matchModelUri)
+		result := resource
+	end
+	
+	/**
+	 * Overrides Resource.getDiff()
+	 */
+	method getDiff(rightResource : Resource, diffModelUri : String) : Resource is do
+		extern org::kermeta::emfcompare::basetypes::Resource.getDiff(self.uri, rightResource.uri, diffModelUri)
+		var resource : Resource init EMFRepository.new.getResource(diffModelUri)
+		result := resource
+	end
+}
