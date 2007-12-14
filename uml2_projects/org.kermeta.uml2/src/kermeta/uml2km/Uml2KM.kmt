@@ -24,12 +24,11 @@ class Uml2KM
     reference resourceObjects : Set<Object>
     reference uncomposedObjects : Set<Object>
     
-    operation initialize(input_uri : String, input_mm_uri : String) is do
+    operation initialize(input_uri : String) is do
     	// load the given UML2 resource
     	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var inputResource : kermeta::persistence::EMFResource
-    	inputResource ?= inputRepository.createResource(input_uri, input_mm_uri)
-    	inputResource.load()
+    	inputResource ?= inputRepository.getResource(input_uri)
     	
     	// "instances" only gives the main diagramm package for the targeted code tree
     	mainModel ?= inputResource.instances.one
@@ -56,13 +55,11 @@ class Uml2KM
     operation main() : Void is do
     	stdio.writeln("\n>>>>-------------> initializing the model !\n")
         // the UML2 model to be transformed
-        initialize("platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ClassDiagram.uml",
-        			 "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore")
+        initialize("platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ClassDiagram.uml")
 //        initialize("platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/simpleModel.uml", "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore")
 //        initialize("platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/rts.uml", "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore")
 		uml2km()
-		saveKm("platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ClassDiagramOutput.km",
-					"platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+		saveKm("platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ClassDiagramOutput.km")
 		
 	   	stdio.writeln("\n<-------------<<<< end of the programm.\n")
     end
@@ -99,12 +96,12 @@ class Uml2KM
         
 		pass3.visitPackage(rootPackage)
     end
-    operation saveKm(output_uri : String, output_mm_uri : String) is do
+    operation saveKm(output_uri : String) is do
     
     	stdio.writeln("\n>>>>-------------> saving the KM program structure !\n")
 		var resRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
 		var resResource : kermeta::persistence::EMFResource
-		resResource ?= resRepository.createResource(output_uri, output_mm_uri)
+		resResource ?= resRepository.createResource(output_uri, "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
     	
         /////////// storage of the generated KM model /////////////
 		var kmTree : kermeta::language::structure::Package

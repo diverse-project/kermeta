@@ -30,10 +30,17 @@ class Pass1_Uml2KMTVisitor inherits uml::visitors::TopDownVisitor
     	// as it must not add semantics to its annotated elements
     	// (see UML2 Superstructure  - 1.2 Kernel - the Root Diagram)
     	
+    	//DEBUG
+    	stdio.writeln("DEBUG - Pass1.visitComment() : comment = "+visitable.name)
+    	
     	var tag : Tag init build.createTag()
    		tag.name := "kdoc"
 		if visitable.annotatedElement.size > 0 then
 			visitable.annotatedElement.each{ e |
+    	
+    	//DEBUG
+    	stdio.writeln("DEBUG - Pass1.visitComment() : comment.annotatedElement = "+e.toString)
+    	
 /*				// only operation comments which start with "do" and finish with "end"
 				// are taken as Kermeta code for the operation body
 				if e.getMetaClass.equals(uml::Operation)
