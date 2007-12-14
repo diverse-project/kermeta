@@ -1,0 +1,119 @@
+/* $Id: 705test_CloneTool_Property.main.kmt,v 1.4 2007-12-14 12:29:22 vmahe Exp $
+ * Creation date: Summer 2006
+ * License:		Eclipse Public License
+ * Copyright:	INRIA
+ * Authors:		Vincent MAHE <vmahe@irisa.fr>
+ */
+@mainClass "tools_tests::ToolClonePropertyTestCase"
+@mainOperation "main"
+
+
+package tools_tests;
+
+
+require kermeta
+require "platform:/plugin/org.kermeta.uml2/src/kermeta/transformations/UmlCloneFactory.kmt"
+
+using uml
+using uml::transformations
+
+class ToolClonePropertyTestCase inherits kermeta::kunit::TestCase
+{
+	operation main() : Void is do 
+		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(ToolClonePropertyTestCase)
+		tr.printTestResult		
+	end
+
+	reference orig : Property
+	reference clone : Property
+	reference typeClass : Class
+	reference factory : UmlCloneFactory
+	
+	method setUp() is do
+		//creating needed instances
+		orig := Property.new
+		orig.name := "pack"
+		orig.visibility := VisibilityKind.private
+		orig.isDerived := true
+		orig.isReadOnly := true
+		orig.isDerivedUnion := true
+		orig.aggregation := AggregationKind.shared
+		typeClass := Class.new
+		orig.type := typeClass
+		orig.defaultValue := LiteralString.new
+		
+		factory := UmlCloneFactory.new
+		factory.initialize
+		clone := factory.cloneProperty(orig)
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    operation test_CloneTool_Property() is do
+    	assertTrueWithMsg(clone != void,
+    		"the cloneProperty() method must return something")
+    	assertTrueWithMsg(Property.isInstance(clone),
+    		"the object returned by cloneProperty() method must be a Property")
+    	assertTrueWithMsg(clone != orig,
+    		"the clone object must be different than the original")
+    end
+    operation test_CloneTool_PropertyType() is do
+    	assertTrueWithMsg(clone.type != void,
+    		"the clone type must exist")
+    	assertTrueWithMsg(clone.type == typeClass,
+    		"the clone type must be the same than the original")
+    	assertTrueWithMsg(orig.defaultValue.getMetaClass.isInstance(clone.defaultValue),
+    		"the clone must have the same type for its default value than the original")
+    	var cloneDefault : LiteralString
+    	cloneDefault ?= clone.defaultValue
+    	var origDefault : LiteralString
+    	origDefault ?= orig.defaultValue
+    	assertTrueWithMsg(cloneDefault.~value == origDefault.~value,
+    		"the clone must have the same default value than the original")
+    end
+    operation test_CloneTool_PropertyProperties() is do
+    	assertTrueWithMsg(clone.name == orig.name,
+    		"the clone must be have the same name than the original")
+    	// we must test on the opposite of the property default value
+    	assertTrueWithMsg(clone.visibility == VisibilityKind.private,
+    		"the clone must be have the same visibility than the original")
+    	assertTrueWithMsg(clone.isDerived == true,
+    		"the clone must be have the same isDerived than the original")
+    	assertTrueWithMsg(clone.isReadOnly == true,
+    		"the clone must be have the same isReadOnly than the original")
+    	assertTrueWithMsg(clone.isDerivedUnion == true,
+    		"the clone must be have the same isDerivedUnion than the original")
+    	assertTrueWithMsg(clone.aggregation == AggregationKind.shared,
+    		"the clone must be have the same aggregation than the original")
+    end
+    operation test_CloneTool_PropertyAssociation() is do
+    	// we need to manage a new one clone, as association differs from direct type
+    	var AClass : Class init Class.new
+    	var assoc : Association init Association.new
+    	assoc.name := "assoc"
+    	orig.association := assoc
+    	// We test an association which is navigable on the other end (Aclass).
+    	// The "orig" end is non-navigable because the orig property as no class.
+    	var propA : Property init Property.new
+    	AClass.ownedAttribute.add(propA)
+    	propA.~class := AClass
+    	orig.type := AClass
+    	
+    	assoc.memberEnd.addAt(0, propA)
+    	assoc.memberEnd.addAt(1, orig)
+    	
+    	clone := factory.cloneProperty(orig)
+    	assertTrueWithMsg(clone.association.name == orig.association.name,
+    		"the clone must be have the same association than the original")
+    	/* an association must not be cloned from each of its ends because it would be cloned twice or more
+    	assertTrueWithMsg(clone.association != orig.association,
+    		"the clone association must be a different instance than the original one") */
+    	assertTrueWithMsg(clone.association.memberEnd.one == orig.association.memberEnd.one,
+    		"the clone must be have the same association other end than the original")
+    	assertTrueWithMsg(clone.type == AClass,
+    		"the clone must be have the same type than the original through the association")
+    end
+}

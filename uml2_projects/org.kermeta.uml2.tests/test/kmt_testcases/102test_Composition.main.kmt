@@ -1,0 +1,53 @@
+/* $Id: 102test_Composition.main.kmt,v 1.4 2007-12-14 12:29:22 vmahe Exp $
+ * Creation date: Summer 2006
+ * License:		Eclipse Public License
+ * Copyright:	INRIA
+ * Authors:		Vincent MAHE <vmahe@irisa.fr>
+ */
+@mainClass "uml2_tests::CompositionTestCase"
+@mainOperation "main"
+
+
+package uml2_tests;
+
+require kermeta
+require "ClassDiagram.kmt"
+
+using kermeta::standard
+using ClassDiagram
+
+class CompositionTestCase inherits kermeta::kunit::TestCase
+{
+	operation main() : Void is do 
+		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(CompositionTestCase)
+		tr.printTestResult		
+	end
+
+	attribute bClass : BClass
+	attribute dClass : DClass
+	
+	method setUp() is do
+    	bClass := BClass.new
+    	dClass := DClass.new
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    // the BClass and DClass of the UML model must exist
+    operation testUsedClasses() is do
+    	assertTrueWithMsg(bClass != void,
+    		"An BClass must exist in ClassDiagram.kmt")
+    	assertTrueWithMsg(dClass != void,
+    		"An DClass must exist in ClassDiagram.kmt")
+    end
+    
+    // the BClass must be composed of one DClass
+    operation testBClassInheritedAssociation() is do
+    	bClass.composition := dClass
+    	assertTrueWithMsg(DClass.isInstance(bClass.composition),
+    		"The BClass must be composed of one DClass")
+    end
+}

@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_tPOCIaLHEdqkGMDvm75SlQ" name="main">
+  <eAnnotations xmi:id="__-SS8PnzEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+    <details xmi:id="__-SS8fnzEdq-YeF9gwJfwA" key="uuid" value="11501037326390"/>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Package" xmi:id="_tPOCIqLHEdqkGMDvm75SlQ" name="Simulator">
+    <eAnnotations xmi:id="__-S6APnzEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+      <details xmi:id="__-S6AfnzEdq-YeF9gwJfwA" key="uuid" value="11501037326401"/>
+    </eAnnotations>
+    <ownedComment xmi:id="_1AwPkPoNEdq-YeF9gwJfwA" annotatedElement="_AWy-8PoHEdq-YeF9gwJfwA">
+      <eAnnotations xmi:id="_NVC54PoOEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_NVC54foOEdq-YeF9gwJfwA" key="uuid" value="11501149891826"/>
+      </eAnnotations>
+      <body>The foreign package will be
+the concrete simulator.
+It owns the events and classes
+of the model to be simulated.
+It implements Core features needed for run() and uses one Ui
+implementation.</body>
+    </ownedComment>
+    <packagedElement xmi:type="uml:Package" xmi:id="_tLwBAPnzEdq-YeF9gwJfwA" name="simulator::core">
+      <eAnnotations xmi:id="__-ThEPnzEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="__-ThEfnzEdq-YeF9gwJfwA" key="uuid" value="11501037326412"/>
+      </eAnnotations>
+      <ownedComment xmi:id="_aKWk8Pn5Edq-YeF9gwJfwA" annotatedElement="_1JGAIPn1Edq-YeF9gwJfwA">
+        <eAnnotations xmi:id="_GWsXwPn6Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+          <details xmi:id="_GWsXwfn6Edq-YeF9gwJfwA" key="uuid" value="11501063524449"/>
+        </eAnnotations>
+        <body>The run() method initiate the transition loop :
+  - get the first state from initial configuration
+  - display all the fireable transitions in the system
+  - launches transition loop with goNextTransition</body>
+      </ownedComment>
+      <ownedComment xmi:id="_2JNGYPoCEdq-YeF9gwJfwA" annotatedElement="_UZmOoPn2Edq-YeF9gwJfwA">
+        <eAnnotations xmi:id="_pCLwUPoDEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+          <details xmi:id="_pCLwUfoDEdq-YeF9gwJfwA" key="uuid" value="115011045064412"/>
+        </eAnnotations>
+        <body>The goNextTransition() method loops :
+  - if internal transitions :
+       get the transition to fire
+    else
+       ask user about his choice
+    endif
+  - fire the given transition
+  - get the new current state
+  - display the current state (or all the configuration => instances' current state)
+  - get &amp; display current fireable transitions
+  - loop</body>
+      </ownedComment>
+      <packagedElement xmi:type="uml:Class" xmi:id="_5doCUPnzEdq-YeF9gwJfwA" name="Simulator" isAbstract="true">
+        <eAnnotations xmi:id="__-UIIPnzEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+          <details xmi:id="__-UIIfnzEdq-YeF9gwJfwA" key="uuid" value="11501037326423"/>
+        </eAnnotations>
+        <ownedAttribute xmi:id="_dwo2gPn2Edq-YeF9gwJfwA" name="currentState">
+          <eAnnotations xmi:id="_N4HCIPn3Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_N4HCIfn3Edq-YeF9gwJfwA" key="uuid" value="115010511443315"/>
+          </eAnnotations>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gelDcPn2Edq-YeF9gwJfwA" value="1">
+            <eAnnotations xmi:id="_N4HpMPn3Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_N4HpMfn3Edq-YeF9gwJfwA" key="uuid" value="115010511443416"/>
+            </eAnnotations>
+          </upperValue>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gekcYPn2Edq-YeF9gwJfwA" value="1">
+            <eAnnotations xmi:id="_N4IQQPn3Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_N4IQQfn3Edq-YeF9gwJfwA" key="uuid" value="115010511443617"/>
+            </eAnnotations>
+          </lowerValue>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_2zyFsfoIEdq-YeF9gwJfwA" name="configuration" type="_ExtlsPn0Edq-YeF9gwJfwA" association="_2ztNMPoIEdq-YeF9gwJfwA">
+          <eAnnotations xmi:id="_plaKcPoJEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_plaKcfoJEdq-YeF9gwJfwA" key="uuid" value="115011303131930"/>
+          </eAnnotations>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5F0ZwPoIEdq-YeF9gwJfwA" value="1">
+            <eAnnotations xmi:id="_plaxgPoJEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_plaxgfoJEdq-YeF9gwJfwA" key="uuid" value="115011303132031"/>
+            </eAnnotations>
+          </upperValue>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5FzysPoIEdq-YeF9gwJfwA" value="1">
+            <eAnnotations xmi:id="_plbYkPoJEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_plbYkfoJEdq-YeF9gwJfwA" key="uuid" value="115011303132132"/>
+            </eAnnotations>
+          </lowerValue>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_bG-lMPq9Edqo2eA-dr3a-w" name="fireableTransitions" association="_bGyX8Pq9Edqo2eA-dr3a-w">
+          <eAnnotations xmi:id="_ex27gPq9Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+            <details xmi:id="_ex27gfq9Edqo2eA-dr3a-w" key="uuid" value="115019026821639"/>
+          </eAnnotations>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dIgYEPq9Edqo2eA-dr3a-w" value="1">
+            <eAnnotations xmi:id="_ex4JoPq9Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+              <details xmi:id="_ex4Jofq9Edqo2eA-dr3a-w" key="uuid" value="115019026821840"/>
+            </eAnnotations>
+          </upperValue>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dIfJ8Pq9Edqo2eA-dr3a-w" value="1">
+            <eAnnotations xmi:id="_ex4Jovq9Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+              <details xmi:id="_ex4Jo_q9Edqo2eA-dr3a-w" key="uuid" value="115019026821841"/>
+            </eAnnotations>
+          </lowerValue>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_-GKE4Pq9Edqo2eA-dr3a-w" name="fullDisplay" type="_UeUb8PoJEdq-YeF9gwJfwA">
+          <eAnnotations xmi:id="_BGm-IPq-Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+            <details xmi:id="_BGm-Ifq-Edqo2eA-dr3a-w" key="uuid" value="115019049856248"/>
+          </eAnnotations>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_DXQ8sPq_Edqo2eA-dr3a-w" name="fireableTransitions">
+          <eAnnotations xmi:id="_QQ9zAPq_Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+            <details xmi:id="_QQ9zAfq_Edqo2eA-dr3a-w" key="uuid" value="115019102980851"/>
+          </eAnnotations>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NLBVwPq_Edqo2eA-dr3a-w" value="1">
+            <eAnnotations xmi:id="_QQ-aEPq_Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+              <details xmi:id="_QQ-aEfq_Edqo2eA-dr3a-w" key="uuid" value="115019102980952"/>
+            </eAnnotations>
+          </upperValue>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NK9rYPq_Edqo2eA-dr3a-w" value="1">
+            <eAnnotations xmi:id="_QQ_oMPq_Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+              <details xmi:id="_QQ_oMfq_Edqo2eA-dr3a-w" key="uuid" value="115019102981153"/>
+            </eAnnotations>
+          </lowerValue>
+        </ownedAttribute>
+        <ownedOperation xmi:id="_1JGAIPn1Edq-YeF9gwJfwA" name="run">
+          <eAnnotations xmi:id="_9tzMIPn1Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_9tzMIfn1Edq-YeF9gwJfwA" key="uuid" value="115010457648113"/>
+          </eAnnotations>
+        </ownedOperation>
+        <ownedOperation xmi:id="_2U66EPn1Edq-YeF9gwJfwA" name="displayFireableTransitions">
+          <eAnnotations xmi:id="_9tzMIvn1Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_9tzMI_n1Edq-YeF9gwJfwA" key="uuid" value="115010457648214"/>
+          </eAnnotations>
+        </ownedOperation>
+        <ownedOperation xmi:id="_5VZBcPn1Edq-YeF9gwJfwA" name="readChoicedTransition">
+          <eAnnotations xmi:id="_9tzzMPn1Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_9tzzMfn1Edq-YeF9gwJfwA" key="uuid" value="115010457648315"/>
+          </eAnnotations>
+          <ownedParameter xmi:id="_HzOkAPn2Edq-YeF9gwJfwA">
+            <eAnnotations xmi:id="_bMzn0Pn2Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_bMzn0fn2Edq-YeF9gwJfwA" key="uuid" value="115010477434924"/>
+            </eAnnotations>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_JvOWoPn2Edq-YeF9gwJfwA" name="setInitialConfiguration">
+          <eAnnotations xmi:id="_bM0O4Pn2Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_bM0O4fn2Edq-YeF9gwJfwA" key="uuid" value="115010477435025"/>
+          </eAnnotations>
+          <ownedParameter xmi:id="_M_1y0Pn2Edq-YeF9gwJfwA" name="new" type="_ExtlsPn0Edq-YeF9gwJfwA">
+            <eAnnotations xmi:id="_bM018Pn2Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_bM018fn2Edq-YeF9gwJfwA" key="uuid" value="115010477435126"/>
+            </eAnnotations>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_UZmOoPn2Edq-YeF9gwJfwA" name="goNextTransition">
+          <eAnnotations xmi:id="_bM1dAPn2Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_bM1dAfn2Edq-YeF9gwJfwA" key="uuid" value="115010477435127"/>
+          </eAnnotations>
+        </ownedOperation>
+        <ownedOperation xmi:id="_3e-LAPn4Edq-YeF9gwJfwA" name="displayCurrentSystem">
+          <eAnnotations xmi:id="_5Fp08Pn4Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_5Fp08fn4Edq-YeF9gwJfwA" key="uuid" value="115010583391945"/>
+          </eAnnotations>
+          <ownedParameter xmi:id="_dU0ikPoJEdq-YeF9gwJfwA" name="fullDisplay" type="_UeUb8PoJEdq-YeF9gwJfwA">
+            <eAnnotations xmi:id="_plb_oPoJEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_plb_ofoJEdq-YeF9gwJfwA" key="uuid" value="115011303132257"/>
+            </eAnnotations>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ExtlsPn0Edq-YeF9gwJfwA" name="Configuration" isAbstract="true">
+        <eAnnotations xmi:id="_9t1oYPn1Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+          <details xmi:id="_9t1oYfn1Edq-YeF9gwJfwA" key="uuid" value="115010457648619"/>
+        </eAnnotations>
+        <ownedOperation xmi:id="_WxUV4f0VEdqhDIM9vSCSwg" name="getStatus">
+          <eAnnotations xmi:id="_maTAcP0WEdqhDIM9vSCSwg" source="http://www.topcased.org/uuid">
+            <details xmi:id="_maTAcf0WEdqhDIM9vSCSwg" key="uuid" value="115044844696790"/>
+          </eAnnotations>
+          <ownedParameter xmi:id="_dTpacP0VEdqhDIM9vSCSwg" type="_LUFoYPoGEdq-YeF9gwJfwA">
+            <eAnnotations xmi:id="_maUOkP0WEdqhDIM9vSCSwg" source="http://www.topcased.org/uuid">
+              <details xmi:id="_maUOkf0WEdqhDIM9vSCSwg" key="uuid" value="115044844696991"/>
+            </eAnnotations>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_ZmOtgP0VEdqhDIM9vSCSwg" name="getLabels">
+          <eAnnotations xmi:id="_maU1oP0WEdqhDIM9vSCSwg" source="http://www.topcased.org/uuid">
+            <details xmi:id="_maU1of0WEdqhDIM9vSCSwg" key="uuid" value="115044844697092"/>
+          </eAnnotations>
+          <ownedParameter xmi:id="_cTuOgP0VEdqhDIM9vSCSwg" type="_LUFoYPoGEdq-YeF9gwJfwA">
+            <eAnnotations xmi:id="_maWq0P0WEdqhDIM9vSCSwg" source="http://www.topcased.org/uuid">
+              <details xmi:id="_maWq0f0WEdqhDIM9vSCSwg" key="uuid" value="115044844697393"/>
+            </eAnnotations>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_ehEP0P0VEdqhDIM9vSCSwg" name="fireLabel">
+          <eAnnotations xmi:id="_maXR4P0WEdqhDIM9vSCSwg" source="http://www.topcased.org/uuid">
+            <details xmi:id="_maXR4f0WEdqhDIM9vSCSwg" key="uuid" value="115044844697394"/>
+          </eAnnotations>
+          <ownedParameter xmi:id="_kdr_QP0VEdqhDIM9vSCSwg" name="labelNum" type="_8BCIUPn1Edq-YeF9gwJfwA">
+            <eAnnotations xmi:id="_maXR4v0WEdqhDIM9vSCSwg" source="http://www.topcased.org/uuid">
+              <details xmi:id="_maX48P0WEdqhDIM9vSCSwg" key="uuid" value="115044844697495"/>
+            </eAnnotations>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_2ztNMPoIEdq-YeF9gwJfwA" name="Association6" memberEnd="_2zyFsPoIEdq-YeF9gwJfwA _2zyFsfoIEdq-YeF9gwJfwA">
+        <eAnnotations xmi:id="_pldNwPoJEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+          <details xmi:id="_pldNwfoJEdq-YeF9gwJfwA" key="uuid" value="1150113031324184"/>
+        </eAnnotations>
+        <ownedEnd xmi:id="_2zyFsPoIEdq-YeF9gwJfwA" type="_5doCUPnzEdq-YeF9gwJfwA" association="_2ztNMPoIEdq-YeF9gwJfwA">
+          <eAnnotations xmi:id="_pleb4PoJEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_pleb4foJEdq-YeF9gwJfwA" key="uuid" value="1150113031326185"/>
+          </eAnnotations>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5FwvYPoIEdq-YeF9gwJfwA" value="1">
+            <eAnnotations xmi:id="_plfC8PoJEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_plfC8foJEdq-YeF9gwJfwA" key="uuid" value="1150113031327186"/>
+            </eAnnotations>
+          </upperValue>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5FwIUPoIEdq-YeF9gwJfwA" value="1">
+            <eAnnotations xmi:id="_plfqAPoJEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_plfqAfoJEdq-YeF9gwJfwA" key="uuid" value="1150113031327187"/>
+            </eAnnotations>
+          </lowerValue>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_J3CucPq9Edqo2eA-dr3a-w" name="Association7" memberEnd="_J3LRUPq9Edqo2eA-dr3a-w">
+        <eAnnotations xmi:id="_eyChsPq9Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+          <details xmi:id="_eyChsfq9Edqo2eA-dr3a-w" key="uuid" value="1150190268235220"/>
+        </eAnnotations>
+        <ownedEnd xmi:id="_J3LRUPq9Edqo2eA-dr3a-w" association="_J3CucPq9Edqo2eA-dr3a-w">
+          <eAnnotations xmi:id="_eyDIwPq9Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+            <details xmi:id="_eyDIwfq9Edqo2eA-dr3a-w" key="uuid" value="1150190268236221"/>
+          </eAnnotations>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PaS7oPq9Edqo2eA-dr3a-w" value="1">
+            <eAnnotations xmi:id="_eyE98Pq9Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+              <details xmi:id="_eyE98fq9Edqo2eA-dr3a-w" key="uuid" value="1150190268239222"/>
+            </eAnnotations>
+          </upperValue>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_PaRGcPq9Edqo2eA-dr3a-w" value="1">
+            <eAnnotations xmi:id="_eyFlAPq9Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+              <details xmi:id="_eyFlAfq9Edqo2eA-dr3a-w" key="uuid" value="1150190268240223"/>
+            </eAnnotations>
+          </lowerValue>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_bGyX8Pq9Edqo2eA-dr3a-w" name="Association9" memberEnd="_bG9XEPq9Edqo2eA-dr3a-w _bG-lMPq9Edqo2eA-dr3a-w">
+        <eAnnotations xmi:id="_eyJ2cPq9Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+          <details xmi:id="_eyJ2cfq9Edqo2eA-dr3a-w" key="uuid" value="1150190268247228"/>
+        </eAnnotations>
+        <ownedEnd xmi:id="_bG9XEPq9Edqo2eA-dr3a-w" type="_5doCUPnzEdq-YeF9gwJfwA" association="_bGyX8Pq9Edqo2eA-dr3a-w">
+          <eAnnotations xmi:id="_eyKdgPq9Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+            <details xmi:id="_eyKdgfq9Edqo2eA-dr3a-w" key="uuid" value="1150190268248229"/>
+          </eAnnotations>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dIVY8Pq9Edqo2eA-dr3a-w" value="1">
+            <eAnnotations xmi:id="_eyLEkPq9Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+              <details xmi:id="_eyLEkfq9Edqo2eA-dr3a-w" key="uuid" value="1150190268249230"/>
+            </eAnnotations>
+          </upperValue>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dITjwPq9Edqo2eA-dr3a-w" value="1">
+            <eAnnotations xmi:id="_eyLEkvq9Edqo2eA-dr3a-w" source="http://www.topcased.org/uuid">
+              <details xmi:id="_eyLEk_q9Edqo2eA-dr3a-w" key="uuid" value="1150190268249231"/>
+            </eAnnotations>
+          </lowerValue>
+        </ownedEnd>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_8BCIUPn1Edq-YeF9gwJfwA" name="Integer">
+      <eAnnotations xmi:id="_9t22gPn1Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_9t22gfn1Edq-YeF9gwJfwA" key="uuid" value="115010457648824"/>
+      </eAnnotations>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_PtU3UPn3Edq-YeF9gwJfwA" name="simulator::ui" clientDependency="_W6xpkPoEEdq-YeF9gwJfwA">
+      <eAnnotations xmi:id="_aFDgIPn3Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_aFDgIfn3Edq-YeF9gwJfwA" key="uuid" value="1150105196321141"/>
+      </eAnnotations>
+      <packagedElement xmi:type="uml:Class" xmi:id="_oRukwPn4Edq-YeF9gwJfwA" name="Simulator">
+        <eAnnotations xmi:id="_2cW3cPn4Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+          <details xmi:id="_2cW3cfn4Edq-YeF9gwJfwA" key="uuid" value="1150105816167144"/>
+        </eAnnotations>
+        <generalization xmi:id="_BwA9APn5Edq-YeF9gwJfwA" general="_5doCUPnzEdq-YeF9gwJfwA">
+          <eAnnotations xmi:id="_Gk198Pn5Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_Gk198fn5Edq-YeF9gwJfwA" key="uuid" value="1150105924431150"/>
+          </eAnnotations>
+        </generalization>
+        <ownedAttribute xmi:id="_Y7ktkPoNEdq-YeF9gwJfwA" name="configuration" type="_qE1xEPoMEdq-YeF9gwJfwA" association="_Y7hqQPoNEdq-YeF9gwJfwA">
+          <eAnnotations xmi:id="_i5UwIPoNEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_i5UwIfoNEdq-YeF9gwJfwA" key="uuid" value="1150114704418216"/>
+          </eAnnotations>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_haEj4PoNEdq-YeF9gwJfwA" value="1">
+            <eAnnotations xmi:id="_i5VXMPoNEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_i5VXMfoNEdq-YeF9gwJfwA" key="uuid" value="1150114704419217"/>
+            </eAnnotations>
+          </upperValue>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_haCusPoNEdq-YeF9gwJfwA" value="1">
+            <eAnnotations xmi:id="_i5VXMvoNEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_i5VXM_oNEdq-YeF9gwJfwA" key="uuid" value="1150114704419218"/>
+            </eAnnotations>
+          </lowerValue>
+        </ownedAttribute>
+        <ownedOperation xmi:id="_rihnIPn4Edq-YeF9gwJfwA" name="displayCurrentState">
+          <eAnnotations xmi:id="_2cYsoPn4Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_2cYsofn4Edq-YeF9gwJfwA" key="uuid" value="1150105816170146"/>
+          </eAnnotations>
+        </ownedOperation>
+        <ownedOperation xmi:id="_w0Kf4Pn4Edq-YeF9gwJfwA" name="displayFireableTransitions">
+          <eAnnotations xmi:id="_2cZTsPn4Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_2cZTsfn4Edq-YeF9gwJfwA" key="uuid" value="1150105816171147"/>
+          </eAnnotations>
+        </ownedOperation>
+        <ownedOperation xmi:id="_zJweQPn4Edq-YeF9gwJfwA" name="readChoicedTransition">
+          <eAnnotations xmi:id="_2cZ6wPn4Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_2cZ6wfn4Edq-YeF9gwJfwA" key="uuid" value="1150105816172148"/>
+          </eAnnotations>
+          <ownedParameter xmi:id="_2CbUgPn4Edq-YeF9gwJfwA">
+            <eAnnotations xmi:id="_2cah0Pn4Edq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_2cah0fn4Edq-YeF9gwJfwA" key="uuid" value="1150105816173149"/>
+            </eAnnotations>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_Q3j2APocEdq-YeF9gwJfwA" name="launchUi">
+          <eAnnotations xmi:id="_TUlSEPocEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_TUlSEfocEdq-YeF9gwJfwA" key="uuid" value="1150121042353243"/>
+          </eAnnotations>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_Y7hqQPoNEdq-YeF9gwJfwA" name="Association1" memberEnd="_Y7jfcPoNEdq-YeF9gwJfwA _Y7ktkPoNEdq-YeF9gwJfwA">
+        <eAnnotations xmi:id="_i5VXNPoNEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+          <details xmi:id="_i5VXNfoNEdq-YeF9gwJfwA" key="uuid" value="1150114704419231"/>
+        </eAnnotations>
+        <ownedEnd xmi:id="_Y7jfcPoNEdq-YeF9gwJfwA" type="_oRukwPn4Edq-YeF9gwJfwA" association="_Y7hqQPoNEdq-YeF9gwJfwA">
+          <eAnnotations xmi:id="_i5WlUPoNEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_i5WlUfoNEdq-YeF9gwJfwA" key="uuid" value="1150114704421232"/>
+          </eAnnotations>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hZ8oEPoNEdq-YeF9gwJfwA" value="1">
+            <eAnnotations xmi:id="_i5XMYPoNEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_i5XMYfoNEdq-YeF9gwJfwA" key="uuid" value="1150114704422233"/>
+            </eAnnotations>
+          </upperValue>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hZ6y4PoNEdq-YeF9gwJfwA" value="1">
+            <eAnnotations xmi:id="_i5XMYvoNEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+              <details xmi:id="_i5XMY_oNEdq-YeF9gwJfwA" key="uuid" value="1150114704422234"/>
+            </eAnnotations>
+          </lowerValue>
+        </ownedEnd>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_W6xpkPoEEdq-YeF9gwJfwA" name="Dependency1" supplier="_tLwBAPnzEdq-YeF9gwJfwA" client="_PtU3UPn3Edq-YeF9gwJfwA">
+      <eAnnotations xmi:id="_Xh9lYPoEEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_Xh9lYfoEEdq-YeF9gwJfwA" key="uuid" value="1150110762678171"/>
+      </eAnnotations>
+    </packagedElement>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_LUFoYPoGEdq-YeF9gwJfwA" name="String">
+      <eAnnotations xmi:id="_MU1TsPoGEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_MU1TsfoGEdq-YeF9gwJfwA" key="uuid" value="1150111546475198"/>
+      </eAnnotations>
+    </packagedElement>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_UeUb8PoJEdq-YeF9gwJfwA" name="Boolean">
+      <eAnnotations xmi:id="_plgREPoJEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_plgREfoJEdq-YeF9gwJfwA" key="uuid" value="1150113031328221"/>
+      </eAnnotations>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_ztvIgPoNEdq-YeF9gwJfwA" name="Dependency2" supplier="_tLwBAPnzEdq-YeF9gwJfwA" client="_AWy-8PoHEdq-YeF9gwJfwA">
+      <eAnnotations xmi:id="_NVEIAPoOEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_NVEvEPoOEdq-YeF9gwJfwA" key="uuid" value="1150114989184259"/>
+      </eAnnotations>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_0ACZcPoNEdq-YeF9gwJfwA" name="Dependency3" supplier="_PtU3UPn3Edq-YeF9gwJfwA" client="_AWy-8PoHEdq-YeF9gwJfwA">
+      <eAnnotations xmi:id="_NVFWIPoOEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_NVFWIfoOEdq-YeF9gwJfwA" key="uuid" value="1150114989185260"/>
+      </eAnnotations>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_YyZG8PoOEdq-YeF9gwJfwA" name="console_ui" clientDependency="_hNS2sPoOEdq-YeF9gwJfwA">
+      <eAnnotations xmi:id="_kZY_QPoOEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_kZY_QfoOEdq-YeF9gwJfwA" key="uuid" value="1150115143988267"/>
+      </eAnnotations>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_bIXf0PoOEdq-YeF9gwJfwA" name="graphic_ui" clientDependency="_hc9DUPoOEdq-YeF9gwJfwA">
+      <eAnnotations xmi:id="_kZaNYPoOEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_kZaNYfoOEdq-YeF9gwJfwA" key="uuid" value="1150115143990268"/>
+      </eAnnotations>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_hNS2sPoOEdq-YeF9gwJfwA" name="Dependency4" supplier="_PtU3UPn3Edq-YeF9gwJfwA" client="_YyZG8PoOEdq-YeF9gwJfwA">
+      <eAnnotations xmi:id="_kZa0cPoOEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_kZa0cfoOEdq-YeF9gwJfwA" key="uuid" value="1150115143991269"/>
+      </eAnnotations>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_hc9DUPoOEdq-YeF9gwJfwA" name="Dependency5" supplier="_PtU3UPn3Edq-YeF9gwJfwA" client="_bIXf0PoOEdq-YeF9gwJfwA">
+      <eAnnotations xmi:id="_kZbbgPoOEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_kZbbgfoOEdq-YeF9gwJfwA" key="uuid" value="1150115143992270"/>
+      </eAnnotations>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_AWy-8PoHEdq-YeF9gwJfwA" name="foreign" clientDependency="_ztvIgPoNEdq-YeF9gwJfwA _0ACZcPoNEdq-YeF9gwJfwA">
+    <eAnnotations xmi:id="_plgREvoJEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+      <details xmi:id="_plgRE_oJEdq-YeF9gwJfwA" key="uuid" value="1150113031329222"/>
+    </eAnnotations>
+    <ownedComment xmi:id="_4p6O8PoKEdq-YeF9gwJfwA">
+      <eAnnotations xmi:id="_j7xWgPoLEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_j7xWgfoLEdq-YeF9gwJfwA" key="uuid" value="1150113852392243"/>
+      </eAnnotations>
+      <body>It's an external package,
+within a tool which need a simulator (ex : UMLaut).
+This tool must define the
+concrete operations of
+manipulated classes.</body>
+    </ownedComment>
+    <packagedElement xmi:type="uml:Class" xmi:id="_n6LFwPoLEdq-YeF9gwJfwA" name="Main">
+      <eAnnotations xmi:id="_uylSkPoMEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_uylSkfoMEdq-YeF9gwJfwA" key="uuid" value="1150114354745243"/>
+      </eAnnotations>
+      <ownedAttribute xmi:id="_4QcJkPoLEdq-YeF9gwJfwA" name="simulator" type="_oRukwPn4Edq-YeF9gwJfwA" association="_4QZGQPoLEdq-YeF9gwJfwA">
+        <eAnnotations xmi:id="_uyl5oPoMEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+          <details xmi:id="_uymgsPoMEdq-YeF9gwJfwA" key="uuid" value="1150114354746244"/>
+        </eAnnotations>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6Jy34PoLEdq-YeF9gwJfwA" value="1">
+          <eAnnotations xmi:id="_uynHwPoMEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_uynHwfoMEdq-YeF9gwJfwA" key="uuid" value="1150114354748245"/>
+          </eAnnotations>
+        </upperValue>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6JxpwPoLEdq-YeF9gwJfwA" value="1">
+          <eAnnotations xmi:id="_uyoV4PoMEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_uyoV4foMEdq-YeF9gwJfwA" key="uuid" value="1150114354750246"/>
+          </eAnnotations>
+        </lowerValue>
+      </ownedAttribute>
+      <ownedOperation xmi:id="_qiNfAPoLEdq-YeF9gwJfwA" name="main">
+        <eAnnotations xmi:id="_uyo88PoMEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+          <details xmi:id="_uyo88foMEdq-YeF9gwJfwA" key="uuid" value="1150114354751247"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_4QZGQPoLEdq-YeF9gwJfwA" name="Association1" memberEnd="_4QbigPoLEdq-YeF9gwJfwA _4QcJkPoLEdq-YeF9gwJfwA">
+      <eAnnotations xmi:id="_uyqLEPoMEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_uyqLEfoMEdq-YeF9gwJfwA" key="uuid" value="1150114354753248"/>
+      </eAnnotations>
+      <ownedEnd xmi:id="_4QbigPoLEdq-YeF9gwJfwA" type="_n6LFwPoLEdq-YeF9gwJfwA" association="_4QZGQPoLEdq-YeF9gwJfwA">
+        <eAnnotations xmi:id="_uyqyIPoMEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+          <details xmi:id="_uyqyIfoMEdq-YeF9gwJfwA" key="uuid" value="1150114354754249"/>
+        </eAnnotations>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6JmqoPoLEdq-YeF9gwJfwA" value="1">
+          <eAnnotations xmi:id="_uyrZMPoMEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_uyrZMfoMEdq-YeF9gwJfwA" key="uuid" value="1150114354755250"/>
+          </eAnnotations>
+        </upperValue>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6JlcgPoLEdq-YeF9gwJfwA" value="1">
+          <eAnnotations xmi:id="_uysnUPoMEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_uysnUfoMEdq-YeF9gwJfwA" key="uuid" value="1150114354756251"/>
+          </eAnnotations>
+        </lowerValue>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_qE1xEPoMEdq-YeF9gwJfwA" name="Configuration">
+      <eAnnotations xmi:id="_uy2_YPoMEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+        <details xmi:id="_uy2_YfoMEdq-YeF9gwJfwA" key="uuid" value="1150114354774257"/>
+      </eAnnotations>
+      <generalization xmi:id="_lC03MP0WEdqhDIM9vSCSwg" general="_ExtlsPn0Edq-YeF9gwJfwA">
+        <eAnnotations xmi:id="_maYgAP0WEdqhDIM9vSCSwg" source="http://www.topcased.org/uuid">
+          <details xmi:id="_maYgAf0WEdqhDIM9vSCSwg" key="uuid" value="1150448446976243"/>
+        </eAnnotations>
+      </generalization>
+      <ownedAttribute xmi:id="_GvglwPoNEdq-YeF9gwJfwA" name="instancesTable">
+        <eAnnotations xmi:id="_i5XMZPoNEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+          <details xmi:id="_i5XMZfoNEdq-YeF9gwJfwA" key="uuid" value="1150114704422298"/>
+        </eAnnotations>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_O-L3YPoNEdq-YeF9gwJfwA" value="*">
+          <eAnnotations xmi:id="_i5XzcPoNEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_i5XzcfoNEdq-YeF9gwJfwA" key="uuid" value="1150114704423299"/>
+          </eAnnotations>
+        </upperValue>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_O-KpQPoNEdq-YeF9gwJfwA" value="1">
+          <eAnnotations xmi:id="_i5YagPoNEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_i5YagfoNEdq-YeF9gwJfwA" key="uuid" value="1150114704424300"/>
+          </eAnnotations>
+        </lowerValue>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_G_F54PoNEdq-YeF9gwJfwA" name="initialState">
+        <eAnnotations xmi:id="_i5ZBkPoNEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+          <details xmi:id="_i5ZBkfoNEdq-YeF9gwJfwA" key="uuid" value="1150114704425301"/>
+        </eAnnotations>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RlZxQPoNEdq-YeF9gwJfwA" value="1">
+          <eAnnotations xmi:id="_i5ZooPoNEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_i5ZoofoNEdq-YeF9gwJfwA" key="uuid" value="1150114704426302"/>
+          </eAnnotations>
+        </upperValue>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_RlYjIPoNEdq-YeF9gwJfwA" value="1">
+          <eAnnotations xmi:id="_i5ZoovoNEdq-YeF9gwJfwA" source="http://www.topcased.org/uuid">
+            <details xmi:id="_i5Zoo_oNEdq-YeF9gwJfwA" key="uuid" value="1150114704426303"/>
+          </eAnnotations>
+        </lowerValue>
+      </ownedAttribute>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

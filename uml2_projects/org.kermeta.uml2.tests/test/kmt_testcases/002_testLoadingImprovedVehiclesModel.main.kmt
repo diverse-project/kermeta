@@ -1,0 +1,49 @@
+/* $Id: $
+ * Creation date: October 15, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "improvedVehiculesLoading::Main"
+@mainOperation "main"
+
+
+package improvedVehiculesLoading;
+
+
+require kermeta
+require "http://www.eclipse.org/uml2/2.1.0/UML"
+
+using kermeta::standard
+using kermeta::persistence
+using uml
+using kermeta::kunit
+
+class Main inherits TestCase
+{ 
+
+	attribute models : String[0..*]
+
+	operation main() : Void is do 
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+	end
+
+	operation testLoadModels() is do	
+		var modelURI : String init "platform:/plugin/org.kermeta.uml2.tests/test/models/improved_vehicules.uml"
+		var repository : EMFRepository init EMFRepository.new
+		var resource : Resource init repository.getResource( modelURI )
+		if ( resource.contents.one.isInstanceOf(Model) ) then
+			assertWithMsg(true, modelURI + " has been correctly loaded.")
+			var model : Model
+			model ?= resource.contents.one
+			var p : uml::Package
+			p ?= model.packagedElement.one
+			assert( p.name.equals("vehicules") )
+		else
+			assertWithMsg(false, modelURI + " could not have been loaded.")
+		end
+	end
+
+}

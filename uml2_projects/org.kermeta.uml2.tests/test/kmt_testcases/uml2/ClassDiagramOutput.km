@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
+  <kermeta_language_structure:Package tag="#/1" name="ClassDiagram">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="AClass"
+        isAbstract="true">
+      <ownedAttribute name="target" type="#/5" upper="-1"/>
+      <ownedAttribute name="aProperty" type="#/6" upper="1"/>
+      <ownedOperation name="aOperation" isAbstract="true"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="BClass"
+        superType="#/8">
+      <ownedAttribute name="target" type="#/7" lower="1" upper="1" isComposite="true"/>
+      <ownedOperation tag="#/3 #/4" name="bOperation"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="CClass">
+      <ownedOperation name="cOperation">
+        <ownedParameter name="in" type="#/9" upper="1"/>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="#/2"
+        name="DClass">
+      <ownedAttribute name="dProperty" type="#/11" upper="1"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="HClass"/>
+  </kermeta_language_structure:Package>
+  <kermeta_language_structure:Tag name="kdoc" value="This diagram intends to represents a general classes sample.&#xA;It must cover a large part of UML2 class diagram possibilities,&#xA;in order to test the UML2 tranformation tools provided&#xA;in the present package."
+      object="#/0"/>
+  <kermeta_language_structure:Tag name="kdoc" value="Example of a class comment" object="#/0/@ownedTypeDefinition.3"/>
+  <kermeta_language_structure:Tag name="kdoc" value="do&#xA;    // Operation code in Kermeta language !&#xA;    // Must start with &quot;do&quot; and finish with &quot;end&quot;&#xA;    var g : ExternClassDiagram::GClass init ExternClassDiagram::GClass.new&#xA;    result := g&#xA;end"
+      object="#/0/@ownedTypeDefinition.1/@ownedOperation.0"/>
+  <kermeta_language_structure:Tag name="kdoc" value="An ordinary operation comment"
+      object="#/0/@ownedTypeDefinition.1/@ownedOperation.0"/>
+  <kermeta_language_structure:Class typeDefinition="#/0/@ownedTypeDefinition.2"/>
+  <kermeta_language_structure:Class/>
+  <kermeta_language_structure:Class typeDefinition="#/0/@ownedTypeDefinition.3"/>
+  <kermeta_language_structure:Class typeDefinition="#/0/@ownedTypeDefinition.0"/>
+  <kermeta_language_structure:Class typeDefinition="kermeta_language_structure:ClassDefinition ../../../.bin/Uml2KMPass1_Uml2KMTVisitorvisitableUMLkeyword_listKmBuil.km#//@packages.1/standard/String"/>
+  <kermeta_language_structure:Class typeDefinition="#/0/@ownedTypeDefinition.0"/>
+  <kermeta_language_structure:Class/>
+  <kermeta_language_structure:Class typeDefinition="#/0/@ownedTypeDefinition.1"/>
+  <kermeta_language_structure:Class typeDefinition="#/0/@ownedTypeDefinition.1"/>
+  <kermeta_language_structure:Class/>
+  <kermeta_language_structure:Class typeDefinition="#/0/@ownedTypeDefinition.1"/>
+  <kermeta_language_structure:Class typeDefinition="#/0/@ownedTypeDefinition.4"/>
+</xmi:XMI>

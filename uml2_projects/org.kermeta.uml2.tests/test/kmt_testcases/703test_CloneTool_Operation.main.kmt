@@ -1,0 +1,130 @@
+/* $Id: 703test_CloneTool_Operation.main.kmt,v 1.4 2007-12-14 12:29:22 vmahe Exp $
+ * Creation date: Summer 2006
+ * License:		Eclipse Public License
+ * Copyright:	INRIA
+ * Authors:		Vincent MAHE <vmahe@irisa.fr>
+ */
+@mainClass "tools_tests::ToolCloneOperationTestCase"
+@mainOperation "main"
+
+
+package tools_tests;
+
+
+require kermeta
+require "platform:/plugin/org.kermeta.uml2/src/kermeta/transformations/UmlCloneFactory.kmt"
+
+using uml
+using uml::transformations
+
+class ToolCloneOperationTestCase inherits kermeta::kunit::TestCase
+{
+	operation main() : Void is do 
+		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(ToolCloneOperationTestCase)
+		tr.printTestResult		
+	end
+
+	reference orig : Operation
+	reference clone : Operation
+	reference InClass : Class
+	reference InOutClass : Class
+	reference OutClass : Class
+	reference ReturnClass : Class
+	reference ExcClass : uml::Type
+	
+	method setUp() is do
+		//creating needed instances
+		orig := Operation.new
+		orig.name := "op"
+		orig.visibility := VisibilityKind.private
+		orig.isStatic := true
+		
+		var in : Parameter init Parameter.new
+		in.name := "in"
+		in.direction := ParameterDirectionKind.in
+		InClass := Class.new
+		in.type := InClass
+		var inout : Parameter init Parameter.new
+		inout.name := "inout"
+		inout.direction := ParameterDirectionKind.inout
+		InOutClass := Class.new
+		inout.type := InOutClass
+		var out : Parameter init Parameter.new
+		out.name := "out"
+		out.direction := ParameterDirectionKind.out
+		OutClass := Class.new
+		out.type := OutClass
+		var ret : Parameter init Parameter.new
+		ret.name := "ret"
+		ret.direction := ParameterDirectionKind.return
+		ReturnClass := Class.new
+		ret.type := ReturnClass
+		
+		ExcClass :=  uml::Class.new
+		ExcClass.name := "exc"
+		orig.raisedException.add(ExcClass)
+		
+		orig.ownedParameter.add(in)
+		orig.ownedParameter.add(inout)
+		orig.ownedParameter.add(out)
+		orig.ownedParameter.add(ret)
+		
+		var factory : UmlCloneFactory init UmlCloneFactory.new
+		factory.initialize
+		clone := factory.cloneOperation(orig)
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    operation test_CloneTool_Operation() is do
+    	assertTrueWithMsg(clone != void,
+    		"the cloneOperation() method must return something")
+    	assertTrueWithMsg(Operation.isInstance(clone),
+    		"the object returned by cloneOperation() method must be a Operation")
+    	assertTrueWithMsg(clone != orig,
+    		"the clone object must be different than the original")
+    end
+    operation test_CloneTool_OperationProperties() is do
+    	assertTrueWithMsg(clone.name == orig.name,
+    		"the clone must be have the same name than the original")
+    	assertTrueWithMsg(clone.visibility == VisibilityKind.private,
+    		"the clone must be have the same visibility than the original")
+    end
+    operation test_CloneTool_OperationParameters() is do
+    	assertTrueWithMsg(clone.ownedParameter.size == 4,
+    		"the clone must be have the parameters of the original")
+    	assertTrueWithMsg(clone.ownedParameter.elementAt(0).name == "in"
+    		and clone.ownedParameter.elementAt(1).name == "inout"
+    		and clone.ownedParameter.elementAt(2).name == "out"
+    		and clone.ownedParameter.elementAt(3).name == "ret",
+    		"the clone parameter must be have the same name than the original")
+    	assertTrueWithMsg(clone.ownedParameter.elementAt(0).type == InClass,
+    		"the clone parameters must be have the same type than the original")
+    	assertTrueWithMsg(clone.ownedParameter.elementAt(1).type == InOutClass,
+    		"the clone parameters must be have the same type than the original")
+    	assertTrueWithMsg(clone.ownedParameter.elementAt(2).type == OutClass,
+    		"the clone parameters must be have the same type than the original")
+    	assertTrueWithMsg(clone.ownedParameter.elementAt(3).type == ReturnClass,
+    		"the clone parameters must be have the same type than the original")
+    end
+    operation test_CloneTool_OperationReturn() is do
+    	var results : kermeta::standard::Sequence <Parameter> init clone.ownedParameter.select{ p | p.direction == ParameterDirectionKind.return }
+    	assertTrueWithMsg(results.size == 1,
+    		"the clone must be have the parameters of the original")
+    	assertTrueWithMsg(results.elementAt(0).name == "ret",
+    		"the clone parameter must be have the same name than the original")
+    	assertTrueWithMsg(results.elementAt(0).type == ReturnClass,
+    		"the clone parameters must be have the same type than the original")
+    end
+    operation test_CloneTool_OperationException() is do
+    	assertTrueWithMsg(clone.raisedException.size == 1,
+    		"the clone must be have the exceptions raised by the original")
+    	assertTrueWithMsg(clone.raisedException.one.name == "exc",
+    		"the clone exception must be have the same name than the original")
+    	assertTrueWithMsg(clone.raisedException.one == ExcClass,
+    		"the clone exception must be of the same type than the original")
+    end
+}

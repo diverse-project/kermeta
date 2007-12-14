@@ -1,0 +1,165 @@
+/* $Id: 501test_Tool_Interface.main.kmt,v 1.4 2007-12-14 12:29:22 vmahe Exp $
+ * Creation date: Summer 2006
+ * License:		Eclipse Public License
+ * Copyright:	INRIA
+ * Authors:		Vincent MAHE <vmahe@irisa.fr>
+ */
+@mainClass "tools_tests::ToolInterfaceTestCase"
+@mainOperation "main"
+
+
+package tools_tests;
+
+require kermeta
+require "platform:/plugin/org.kermeta.uml2/src/kermeta/transformations/StaticTools.kmt"
+
+using uml
+using uml::transformations
+
+class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
+{
+	operation main() : Void is do 
+		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(ToolInterfaceTestCase)
+		tr.printTestResult		
+	end
+
+	reference model : Model
+    reference Aclass : Class
+    reference Bclass : Class
+	
+	method setUp() is do
+    	model := Model.new
+    	Aclass := Class.new
+    	Aclass.name := "Aclass"
+    	model.packagedElement.add(Aclass)
+    	
+    	Bclass := Class.new
+    	Bclass.name := "Bclass"
+    	Bclass.isAbstract := true
+    	model.packagedElement.add(Bclass)
+    	
+    	// test placement of attributes & operations
+    	var attr : Property init Property.new
+    	attr.name := "attribute"
+    	Aclass.ownedAttribute.add(attr)
+    	var meth : Operation init Operation.new
+    	meth.name := "abstractOperation"
+    	meth.isAbstract := true
+    	var par : Parameter init Parameter.new
+    	par.name := "par1"
+    	par.type := Aclass
+    	par.direction := ParameterDirectionKind.return
+    	meth.ownedParameter.add(par)
+    	Aclass.ownedOperation.add(meth)
+    	meth := Operation.new
+    	meth.name := "concreteOperation"
+    	meth.isAbstract := false
+    	par := Parameter.new
+    	par.name := "par2"
+    	par.type := Bclass
+    	meth.ownedParameter.add(par)
+    	Aclass.ownedOperation.add(meth)
+    	
+     	var iftool : Interface_Tool init Interface_Tool.new
+     	model.packagedElement.add(iftool.extractInterface(Aclass))
+     	model.packagedElement.add(iftool.extractInterface(Bclass))
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+	
+    operation testExtractInterfaceTool_HasInterface() is do
+    	// first asserts the generalization collection is not empty (uncatched exception)
+    	assertTrueWithMsg(Aclass.interfaceRealization != void,
+    		"The given class must have a generalisation")
+    	assertTrueWithMsg(Aclass.interfaceRealization.size != 0,
+    		"The given class must inherit its new interface")
+    		
+    	assertTrueWithMsg(Aclass.interfaceRealization.one.contract.getMetaClass == Interface,
+    		"The given class must inherit its new interface")
+    end
+    
+	
+    operation testExtractInterfaceTool_InterfaceHasAttributes() is do
+    	assertTrueWithMsg(Aclass.ownedAttribute.size == 0,
+    		"The given class must have no attributes")
+    	
+    	var interf : Interface
+    	interf := Aclass.interfaceRealization.one.contract
+    	assertTrueWithMsg(interf.ownedAttribute.size == 1,
+    		"The interface must have the given class attributes")
+    end
+	
+    operation testExtractInterfaceTool_InterfaceHasAllOperations() is do
+    	// first asserts the interfaceRealization collection is not empty (uncatched exception)
+    	assertTrueWithMsg(Aclass.interfaceRealization != void,
+    		"The given class must have a generalisation")
+    	assertTrueWithMsg(Aclass.interfaceRealization.size != 0,
+    		"The given class must inherit its new interface")
+    		
+    	var interf : Interface
+    	interf := Aclass.interfaceRealization.one.contract
+    	assertTrueWithMsg(interf.ownedOperation.size == 2,
+    		"The new interface must have all the operations of the concrete class")
+    	assertTrueWithMsg(interf.ownedAttribute.size == 1,
+    		"The new interface must have all the attributes of the concrete class")
+    end
+	
+    operation testExtractInterfaceTool_ConcreteClass_ConcreteOperations() is do
+    	var bool : kermeta::standard::Boolean init true
+    	Aclass.ownedOperation.each{ u | if u.isAbstract then bool := false end }
+    	assertTrueWithMsg(bool,
+    		"The concrete class must have only concrete operations")
+    	assertTrueWithMsg(Aclass.ownedOperation.elementAt(0).name == "abstractOperation",
+    		"The concrete class must have 'abstractOperation' as first operation")
+    	assertTrueWithMsg(Aclass.ownedOperation.elementAt(1).name == "concreteOperation",
+    		"The concrete class must have 'concreteOperation' as second operation")
+    end
+	
+    operation testExtractInterfaceTool_InterfaceHasOperationsParameters() is do
+    	var interf : Interface
+    	interf := Aclass.interfaceRealization.one.contract
+    	
+    	var op0 : Operation init interf.ownedOperation.elementAt(0)
+    	var result0 : Parameter init op0.ownedParameter.detect{ p | p.direction == ParameterDirectionKind.return }
+    	assertTrueWithMsg(result0 != void,
+    		"The new interface must have a return parameter for operation 0")
+    	assertTrueWithMsg(result0.name == "par1",
+    		"The new interface must have the correct name of return parameter for operation")
+    	assertTrueWithMsg(result0.type == Aclass,
+    		"The new interface must have the correct return type for operation")
+    	
+    	var op1 : Operation init interf.ownedOperation.elementAt(1)
+    	var result1 : Parameter init op1.ownedParameter.first
+    	assertTrueWithMsg(result1 != void,
+    		"The new interface must have a return parameter for operation 1")
+     	assertTrueWithMsg(result1.name == "par2",
+    		"The new interface must have the correct name for parameters of operation")
+    	assertTrueWithMsg(result1.type == Bclass,
+    		"The new interface must have the correct type for parameters of operation")
+    end
+	
+    operation testExtractInterfaceTool_ConcreteClass_NoAttributes() is do
+    	assertTrueWithMsg(Aclass.ownedAttribute.size == 0,
+    		"The concrete class must have no attributes")
+    end
+	
+    // the added interface must be present in the model, to be saved
+    operation testExtractInterfaceTool_Model() is do
+    	var boolIA : kermeta::standard::Boolean init false
+    	model.packagedElement.each{ u |
+    		if u.name == "I"+Aclass.name then boolIA := true end
+    	}
+    	assertTrueWithMsg(boolIA,
+    		"Tool failed to add the Aclass interface to the model")
+
+    	var boolIB : kermeta::standard::Boolean init false
+    	model.packagedElement.each{ u |
+    		if u.name == "I"+Bclass.name then boolIB := true end
+    	}
+    	assertTrueWithMsg(boolIB,
+    		"Tool failed to add the Bclass interface to the model")
+    end
+}

@@ -1,0 +1,90 @@
+/* $Id: 707test_CloneTool_Association.main.kmt,v 1.4 2007-12-14 12:29:22 vmahe Exp $
+ * Creation date: Summer 2006
+ * License:		Eclipse Public License
+ * Copyright:	INRIA
+ * Authors:		Vincent MAHE <vmahe@irisa.fr>
+ */
+@mainClass "tools_tests::ToolCloneAssociationTestCase"
+@mainOperation "main"
+
+
+package tools_tests;
+
+
+require kermeta
+require "platform:/plugin/org.kermeta.uml2/src/kermeta/transformations/UmlCloneFactory.kmt"
+
+using uml
+using uml::transformations
+
+class ToolCloneAssociationTestCase inherits kermeta::kunit::TestCase
+{
+	operation main() : Void is do 
+		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(ToolCloneAssociationTestCase)
+		tr.printTestResult		
+	end
+
+	reference orig : Association
+	reference clone : Association
+	reference prop0 : Property
+	reference prop1 : Property
+	reference factory : UmlCloneFactory
+	
+	method setUp() is do
+		//creating needed instances
+		orig := Association.new
+		orig.name := "pack"
+		orig.visibility := VisibilityKind.private
+		orig.isDerived := true
+		prop0 := Property.new
+		prop0.name := "prop0"
+		prop1 := Property.new
+		prop1.name := "prop1"
+		orig.memberEnd.addAt(0, prop0)
+		orig.memberEnd.addAt(1, prop1)
+		orig.ownedEnd.add(prop0)
+		
+		factory := UmlCloneFactory.new
+		factory.initialize
+		clone := factory.cloneAssociation(orig)
+		// ends must be linked after the cloning process (second pass)
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    operation test_CloneTool_Association() is do
+    	assertTrueWithMsg(clone != void,
+    		"the cloneAssociation() method must return something")
+    	assertTrueWithMsg(Association.isInstance(clone),
+    		"the object returned by cloneAssociation() method must be a Association")
+    	assertTrueWithMsg(clone != orig,
+    		"the clone object must be different than the original")
+    end
+    operation test_CloneTool_AssociationProperties() is do
+    	assertTrueWithMsg(clone.name == orig.name,
+    		"the clone must be have the same name than the original")
+    	assertTrueWithMsg(clone.visibility == VisibilityKind.private,
+    		"the clone must be have the same visibility than the original")
+    	assertTrueWithMsg(clone.isDerived == true,
+    		"the clone must be have the same visibility than the original")
+    end
+    operation test_CloneTool_AssociationEnds() is do
+    	// test the "memberEnds" attribute
+    	assertTrueWithMsg(clone.memberEnd.size == 2,
+    		"the clone must be have the same number of ends than the original")
+    	assertTrueWithMsg(clone.memberEnd.select{ u | u.name == prop0.name }.size == 1,
+    		"the clone must be have the same 'prop0' end than the original")
+    	assertTrueWithMsg(clone.memberEnd.select{ u | u.name == prop1.name }.size == 1,
+    		"the clone must be have the same 'prop1' end than the original")
+    	assertTrueWithMsg(clone.memberEnd.elementAt(0) == clone.ownedEnd.elementAt(0),
+    		"the clone must be have the equivalent ends of the original")
+    	// test the "ownedEnds" attribute
+    	assertTrueWithMsg(clone.ownedEnd.size == 1,
+    		"the clone must be have the same number of owned ends than the original")
+    	assertTrueWithMsg(clone.ownedEnd.elementAt(0) == factory.ioTable.getValue(prop0),
+    		"the clone must be have the same owned ends instances than the original")
+    end
+}

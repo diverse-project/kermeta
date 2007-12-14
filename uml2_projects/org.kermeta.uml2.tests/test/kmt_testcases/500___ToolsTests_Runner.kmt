@@ -1,0 +1,56 @@
+@mainClass "test_package::MyTestClass" 
+@mainOperation "main"
+
+
+package test_package;
+
+require kermeta
+require "500test_Tool_Generalization.main.kmt"
+require "501test_Tool_Interface.main.kmt"
+require "501test_Tool_InterfaceAbstract.main.kmt"
+require "502test_Tool_Accessor.main.kmt"
+require "502test_Tool_Accessor_Public.main.kmt"
+require "503test_Tool_Transition.main.kmt"
+require "504test_Tool_Context4States.main.kmt"
+require "505test_Tool_Association.main.kmt"
+
+using tools_tests
+
+class MyTestClass
+{
+    operation main() : Void is do 
+	    var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		
+		stdio.writeln("  ... testing Tool_Generalization ...")
+		testRunner.run(ToolGeneralizationTestCase)
+		testRunner.printTestResult
+		
+		stdio.writeln("  ... testing Tool_Interface ...")
+		testRunner.run(ToolInterfaceTestCase)
+		testRunner.printTestResult
+		
+		stdio.writeln("  ... testing Tool_InterfaceAbstract ...")
+		testRunner.run(ToolInterfaceAbstractTestCase)
+		testRunner.printTestResult
+		
+		stdio.writeln("  ... testing Tool_Accessor ...")
+		testRunner.run(ToolAccessorTestCase)
+		testRunner.printTestResult
+		
+		stdio.writeln("  ... testing Tool_AccessorPublic ...")
+		testRunner.run(ToolAccessorPublicTestCase)
+		testRunner.printTestResult
+		
+		stdio.writeln("  ... testing Tool_Transition ...")
+		testRunner.run(ToolTransitionTestCase)
+		testRunner.printTestResult
+		
+		stdio.writeln("  ... testing Tool_Context4State ...")
+		testRunner.run(ToolContext4StateTestCase)
+		testRunner.printTestResult
+		
+		stdio.writeln("  ... testing Tool_Association ...")
+		testRunner.run(ToolAssociationTestCase)
+		testRunner.printTestResult
+    end 
+}

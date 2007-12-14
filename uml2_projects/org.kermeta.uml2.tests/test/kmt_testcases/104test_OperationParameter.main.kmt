@@ -1,0 +1,49 @@
+/* $Id: 104test_OperationParameter.main.kmt,v 1.4 2007-12-14 12:29:22 vmahe Exp $
+ * Creation date: Summer 2006
+ * License:		Eclipse Public License
+ * Copyright:	INRIA
+ * Authors:		Vincent MAHE <vmahe@irisa.fr>
+ */
+@mainClass "uml2_tests::OperationParameterTestCase"
+@mainOperation "main"
+
+
+package uml2_tests;
+
+require kermeta
+require "ClassDiagram.kmt"
+
+using kermeta::standard
+using ClassDiagram
+
+class OperationParameterTestCase inherits kermeta::kunit::TestCase
+{
+	operation main() : Void is do 
+		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(OperationParameterTestCase)
+		tr.printTestResult		
+	end
+
+	attribute cClass : CClass
+	
+	method setUp() is do
+    	cClass := CClass.new
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    // test if the cOperation of the CClass accept a String
+    operation testOperationParameter() is do
+    	var str : String init "test"
+    	cClass.cOperation(str)
+    	// if passed
+    	assertTrueWithMsg(true,
+    		"The cOperation of the CClass must accept a String")
+    rescue
+    	// if failed
+    	assertTrueWithMsg(false,
+    		"The cOperation of the CClass must accept a String")
+    end
+}
