@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.44 2007-12-11 13:58:12 cfaucher Exp $
+ * $Id: resource.kmt,v 1.45 2007-12-14 13:00:54 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -123,20 +123,7 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 		}
 		result := res
 	end
-	
-	/**
-	 * TODO
-	 */
-	operation compare(rightResource : Resource) : Boolean is abstract
-	/**
-	 * TODO
-	 */
-	operation getMatch(rightResource : Resource, matchModelUri : String) : Resource is abstract
-	/**
-	 * TODO
-	 */
-	operation getDiff(rightResource : Resource, diffModelUri : String) : Resource is abstract
-	
+
 }
 
 
@@ -232,33 +219,6 @@ class EMFResource inherits Resource
 		else
 			result := void
 		end
-	end
-	
-	/**
-	 * Overrides Resource.compare()
-	 */
-	method compare(rightResource : Resource) : Boolean is do
-		var bool : Boolean
-		bool ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.compare(self.uri,rightResource.uri)
-		result := bool
-	end
-	
-	/**
-	 * Overrides Resource.getMatch()
-	 */	
-	method getMatch(rightResource : Resource, matchModelUri : String) : Resource is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.getMatch(self.uri, rightResource.uri, matchModelUri)
-		var resource : Resource init EMFRepository.new.getResource(matchModelUri)
-		result := resource
-	end
-	
-	/**
-	 * Overrides Resource.getDiff()
-	 */
-	method getDiff(rightResource : Resource, diffModelUri : String) : Resource is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.getDiff(self.uri, rightResource.uri, diffModelUri)
-		var resource : Resource init EMFRepository.new.getResource(diffModelUri)
-		result := resource
 	end
 }
 
