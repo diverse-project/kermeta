@@ -6,7 +6,7 @@
          point="org.eclipse.core.runtime.applications">
       <application>
          <run
-               class="org.kermeta.uml2.tests.UML2TestsLauncher">
+               class="org.kermeta.uml2.umlaut.tests.UML2TestsLauncher">
          </run></application>
    </extension>
 

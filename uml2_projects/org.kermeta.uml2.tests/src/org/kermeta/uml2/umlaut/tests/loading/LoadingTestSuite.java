@@ -1,10 +1,10 @@
-/* $Id: LoadingTestSuite.java,v 1.5 2007-12-13 10:33:28 vmahe Exp $
+/* $Id: LoadingTestSuite.java,v 1.1 2007-12-14 10:48:50 vmahe Exp $
  * Project : Kermeta MDK UML2
  * File : LoadingTestSuite.java
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1 
  */
-package org.kermeta.uml2.tests.loading;
+package org.kermeta.uml2.umlaut.tests.loading;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;

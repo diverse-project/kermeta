@@ -1,4 +1,4 @@
-package org.kermeta.uml2.tests;
+package org.kermeta.uml2.umlaut.tests;
 
 //import junit.framework.Test;
 //import junit.framework.TestSuite;
