@@ -93,10 +93,13 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/build.properties"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/models/bank.umldi"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/models/bank.uml"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/utilities.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/prototype.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/utilities.kmt" dependents="//@units.13/@dependencies.1"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-14T13:34:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/prototype.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.13" to="//@units.15"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.13" to="//@units.12"/>
+  </units>
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/kermetisation.kmt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/bank.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/bank.kmt" dependents="//@units.13/@dependencies.0"/>
   <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/kermeta/bank.km"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/documentation/bank_model.jpg"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.uml2.samples/bank/documentation/bank_km_details.png"/>
