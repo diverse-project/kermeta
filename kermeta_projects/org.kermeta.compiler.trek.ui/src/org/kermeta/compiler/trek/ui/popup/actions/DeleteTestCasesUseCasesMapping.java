@@ -1,4 +1,4 @@
-/*$Id: DeleteTestCasesUseCasesMapping.java,v 1.5 2007-12-11 20:16:44 cfaucher Exp $
+/*$Id: DeleteTestCasesUseCasesMapping.java,v 1.6 2007-12-14 16:46:02 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	DeleteTestCasesUseCasesMapping.java
 * License : EPL
@@ -12,7 +12,7 @@ package org.kermeta.compiler.trek.ui.popup.actions;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -66,7 +66,7 @@ public class DeleteTestCasesUseCasesMapping implements IObjectActionDelegate {
 		// These use cases are global for all the test cases
 		usecasesResources.clear();
 		testcasesResources.clear();
-		Hashtable<String, KUseCase> useCases = getUseCases(usecasesFiles);
+		HashMap<String, KUseCase> useCases = getUseCases(usecasesFiles);
 		for(IFolder folder : folders) {
 			deleteTestCasesToUseCases(useCases, folder);
 		}
@@ -135,9 +135,9 @@ public class DeleteTestCasesUseCasesMapping implements IObjectActionDelegate {
 	 * @param trek_files
 	 * @return
 	 */
-	private Hashtable<String, KUseCase> getUseCases(List<IFile> trek_files) {
+	private HashMap<String, KUseCase> getUseCases(List<IFile> trek_files) {
 
-		Hashtable<String, KUseCase> useCases = new Hashtable<String, KUseCase>();
+		HashMap<String, KUseCase> useCases = new HashMap<String, KUseCase>();
 		for(IFile trek_file : trek_files) {
 			UseKaseModel useKaseModel = TrekModelHelper.getUseKaseModel(trek_file);
 			usecasesResources.add(useKaseModel.eResource());
@@ -154,7 +154,7 @@ public class DeleteTestCasesUseCasesMapping implements IObjectActionDelegate {
 	 * @param useCases
 	 * @param testCaseFolder
 	 */
-	private void deleteTestCasesToUseCases(Hashtable<String, KUseCase> useCases, IFolder testCaseFolder) {
+	private void deleteTestCasesToUseCases(HashMap<String, KUseCase> useCases, IFolder testCaseFolder) {
 		useCases.get(testCaseFolder.getName()).getVerifiedBy().clear();
 		for(KTestCase testCase : getTestCases(testCaseFolder)) {
 			testCase.getVerifies().clear();

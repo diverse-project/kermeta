@@ -1,4 +1,4 @@
-/*$Id: AssignTestCasesToUseCases.java,v 1.6 2007-12-12 09:29:00 cfaucher Exp $
+/*$Id: AssignTestCasesToUseCases.java,v 1.7 2007-12-14 16:46:02 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	AssignTestCasesToUseCases.java
 * License : EPL
@@ -86,48 +86,5 @@ public class AssignTestCasesToUseCases implements IObjectActionDelegate {
 		}
 			
 	}
-	
-	/**
-	 * 
-	 * @param folder
-	 * @return
-	 */
-	/*private List<KTestCase> getTestCases(IFolder folder)
-    {
-		IFile trek_file = ResourcesPlugin.getWorkspace().getRoot().getFile(folder.getFullPath().append("/" + folder.getName()).addFileExtension(KCompilerConstants.TREK_EXT));
-		UseKaseModel useKaseModel = TrekModelHelper.getUseKaseModel(trek_file);
-		testcasesResources.add(useKaseModel.eResource());
-		
-		return useKaseModel.getKtestCases();
-    }*/
-	
-	/**
-	 * 
-	 * @param trek_files
-	 * @return
-	 */
-	/*private Hashtable<String, KUseCase> getUseCases(List<IFile> trek_files) {
-
-		Hashtable<String, KUseCase> useCases = new Hashtable<String, KUseCase>();
-		for(IFile trek_file : trek_files) {
-			UseKaseModel useKaseModel = TrekModelHelper.getUseKaseModel(trek_file);
-			usecasesResources.add(useKaseModel.eResource());
-			
-			for(KUseCase uC : useKaseModel.getKuseCases()) {
-				useCases.put(uC.getId(), uC);
-			}
-		}
-		return useCases;
-	}*/
-
-	/**
-	 * 
-	 * @param useCases
-	 * @param testCaseFolder
-	 */
-	/*private void assignTestCasesToUseCases(Hashtable<String, KUseCase> useCases, IFolder testCaseFolder) {
-		KUseCase theKUseCase = useCases.get(testCaseFolder.getName());
-		theKUseCase.getVerifiedBy().addAll(getTestCases(testCaseFolder));
-	}*/
 
 }

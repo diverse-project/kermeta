@@ -1,4 +1,4 @@
-/*$Id: AssignTestCasesToUseCasesCommand.java,v 1.3 2007-12-14 09:51:18 cfaucher Exp $
+/*$Id: AssignTestCasesToUseCasesCommand.java,v 1.4 2007-12-14 16:46:02 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	AssignTestCasesToUseCasesCommand.java
 * License : EPL
@@ -14,9 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -58,7 +56,7 @@ public class AssignTestCasesToUseCasesCommand {
 		// These use cases are global for all the test cases
 		usecasesResources.clear();
 		testcasesResources.clear();
-		Hashtable<String, KUseCase> useCases = getUseCases(usecasesFiles);
+		HashMap<String, KUseCase> useCases = getUseCases(usecasesFiles);
 		for(IFolder folder : folders) {
 			assignTestCasesToUseCases(useCases, folder);
 		}
@@ -95,9 +93,9 @@ public class AssignTestCasesToUseCasesCommand {
 	 * @param trek_files
 	 * @return
 	 */
-	private Hashtable<String, KUseCase> getUseCases(List<IFile> trek_files) {
+	private HashMap<String, KUseCase> getUseCases(List<IFile> trek_files) {
 
-		Hashtable<String, KUseCase> useCases = new Hashtable<String, KUseCase>();
+		HashMap<String, KUseCase> useCases = new HashMap<String, KUseCase>();
 		for (IFile trek_file : trek_files) {
 			UseKaseModel useKaseModel = TrekModelHelper.getUseKaseModel(trek_file);
 			usecasesResources.add(useKaseModel.eResource());
@@ -114,11 +112,11 @@ public class AssignTestCasesToUseCasesCommand {
 	 * @param useCases
 	 * @param testCaseFolder
 	 */
-	private void assignTestCasesToUseCases(Hashtable<String, KUseCase> useCases, IFolder useCaseFolder) {
+	private void assignTestCasesToUseCases(HashMap<String, KUseCase> useCases, IFolder useCaseFolder) {
 		List<KTestCase> current_testcases = getTestCases(useCaseFolder);
 		
 		// This map will be used to retrieve a test case from its name
-		Map<String, KTestCase> map_current_testcases = new HashMap<String, KTestCase>();
+		HashMap<String, KTestCase> map_current_testcases = new HashMap<String, KTestCase>();
 		for (KTestCase tc : current_testcases) {
 			map_current_testcases.put(tc.getName(), tc);
 		}
