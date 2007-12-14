@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.6 2007-10-26 14:48:18 ftanguy Exp $
+/* $Id: RunJunitFactory.java,v 1.7 2007-12-14 09:34:04 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -252,6 +252,12 @@ public class RunJunitFactory implements Test {
             // construct a "fake" test that simply fails and return this
             // exception
             theTestCase = new FailedTestCase(failedTestName, e);
+            if(!optimizeLoading) resetUnit(); // reset the unit to free some memory
+            return theTestCase;
+        }
+        catch (Throwable t){
+        	// In Junit 4 we do not have the right to raise an exception otherwise all the test will not be displayed
+        	theTestCase = new FailedTestCase(failedTestName, t);
             if(!optimizeLoading) resetUnit(); // reset the unit to free some memory
             return theTestCase;
         }
