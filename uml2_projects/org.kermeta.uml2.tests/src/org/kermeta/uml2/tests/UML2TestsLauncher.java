@@ -1,4 +1,4 @@
-package org.kermeta.uml2.umlaut.tests;
+package org.kermeta.uml2.tests;
 
 import org.openembedd.tests.TestLauncher;
 import org.openembedd.tests.TestWorkbenchAdvisor;
