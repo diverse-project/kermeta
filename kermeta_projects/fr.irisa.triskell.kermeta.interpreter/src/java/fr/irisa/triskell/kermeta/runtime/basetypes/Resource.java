@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.19 2007-12-14 13:00:41 cfaucher Exp $
+/* $Id: Resource.java,v 1.20 2007-12-14 13:11:54 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : EPL
@@ -10,25 +10,11 @@
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.compare.diff.generic.DiffMaker;
-import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
-import org.eclipse.emf.compare.diff.metamodel.DiffModel;
-import org.eclipse.emf.compare.match.metamodel.MatchModel;
-import org.eclipse.emf.compare.match.statistic.DifferencesServices;
-import org.eclipse.emf.compare.util.ModelUtils;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
