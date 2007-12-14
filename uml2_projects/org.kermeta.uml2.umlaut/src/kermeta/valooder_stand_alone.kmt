@@ -1,0 +1,128 @@
+/* $Id: valooder_stand_alone.kmt,v 1.1 2007-12-14 13:04:32 vmahe Exp $
+ * Creation date: August 21, 2006
+ * License: GPL
+ * Copyright: IRISA (http://irisa.fr)
+ * Authors: vmahe@irisa.fr
+ */
+@mainClass "valood::ValooderStandAlone"
+@mainOperation "main"
+
+
+package valood;
+
+
+require kermeta
+require "valooder.kmt"
+require "../../../fr.irisa.triskell.uml2/src/kermeta/uml2km/Uml2KM.kmt"
+
+
+using uml2
+
+class ValooderStandAlone
+{
+	reference inputModel : Model
+	reference outputModel : Model
+	
+	method setUp() is do
+    	// load the given UML2 resource
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var inputResource : kermeta::persistence::EMFResource
+    	inputResource ?= inputRepository.createResource("../../test/kmt_test_cases/uml2/SimpleBehavioredClass.uml2", "../../../fr.irisa.triskell.uml2/src/ecore/UML2.ecore")
+    	inputResource.load()
+    	
+    	// "instances" only gives the main diagramm package for the targeted code tree
+    	inputModel ?= inputResource.instances.one
+	end
+	
+    operation main() : Void is do 
+        stdio.writeln("VALOODER : .....")
+        
+        // create the model to be valooded
+        stdio.writeln("VALOODER : setUp")
+		setUp
+		
+		//DEBUG
+		var modelIn : kermeta::standard::Object init inputModel
+        
+        // valooding the model
+        var valood : Valood init Valood.new
+        outputModel := Model.new
+        
+        stdio.writeln("VALOODER : initializing valood")
+        valood.initialize(inputModel, outputModel)
+        stdio.writeln("VALOODER : running the valooder")
+        valood.valooder
+        outputModel ?= valood.outputRootPackage
+		
+		//DEBUG
+		var modelOut : kermeta::standard::Object init outputModel
+        
+/*        
+        // saving the intermediate model
+        stdio.writeln("VALOODER : saving the valooded model")
+    	var outputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var outputResource : kermeta::persistence::EMFResource
+    	outputResource ?= outputRepository.createResource("../../test/kmt_test_cases/uml2/SimpleBehavioredClass_valooded.uml2", "../../../fr.irisa.triskell.uml2/src/ecore/UML2.ecore")
+    	// "instances" only gives the main diagramm package for the targeted code tree
+    	outputResource.instances.add(outputModel)
+    	
+    	extractUncomposed(outputModel, outputResource)
+    	
+    	outputResource.save
+        
+        // prettyprint the resulting model
+        var uml2km : uml2km::Uml2KM init uml2km::Uml2KM.new
+    	// "instances" only gives the main diagramm package for the targeted code tree
+    	uml2km.mainModel ?= outputModel.ownedMember.one
+    	// we must parse all the included models, for extra models references
+    	uml2km.externModels := kermeta::standard::OrderedSet<Package>.new
+    	outputModel.ownedMember.each{ o |
+    		// the upper root of UML2 model tree is the first package
+    		var model : uml2::Package
+    		model ?= o
+	    	if not model.equals(uml2km.mainModel) then
+	    		var p : uml2::Package
+	    		p ?= model.ownedMember.one
+		    	if not p.isVoid then uml2km.externModels.add(p) end
+	    	end
+    	}
+    	// creates the Kermeta objects' storage
+	    uml2km.objectsStore := kermeta::utils::Hashtable<uml2::Element, kermeta::standard::Object>.new
+	    uml2km.rootPackage := uml2km.mainModel
+	    uml2km.uncomposedObjects := kermeta::standard::Set<kermeta::standard::Object>.new
+        stdio.writeln("UML2KM : ... transforming ...")
+	    uml2km.uml2km
+		
+		//DEBUG
+		var modelKM : kermeta::standard::Object init uml2km.objectsStore.getValue(uml2km.rootPackage)
+        
+        stdio.writeln("UML2KM : ... saving ...")
+	    uml2km.saveKm("../../test/kmt_test_cases/uml2/SimpleBehavioredClassOutput.km", "../../../fr.irisa.triskell.uml2/src/ecore/kermeta_java.ecore")
+//        stdio.writeln("UML2KM : ... printing ...")
+//	    uml2km.prettyPrintKmt
+       */
+        stdio.writeln("VALOODER : .... has ended")
+    end
+
+	operation extractUncomposed(packge : Package, resource : kermeta::persistence::EMFResource) is do
+    	// we must manually add every comment of the embedded package(s)
+    	// to the resource as they are not composition of anything
+    	// and remove them from the package to avoid the error "... EAnnotation....."
+    	packge.ownedMember.each{p|
+    		var pack : Package
+    		pack ?= p
+    		if pack != void then
+		    	pack.ownedComment.each{c|
+//		    		resource.instances.add(c)
+		    		pack.ownedComment.remove(c)
+		    	}
+		    	// recursive extraction on sub packages
+		    	extractUncomposed(pack, resource)
+	    	end
+    	}
+    	// process also the imported packages
+    	packge.packageImport.each{p|
+    		extractUncomposed(p.importedPackage, resource)
+    	}
+    end
+}

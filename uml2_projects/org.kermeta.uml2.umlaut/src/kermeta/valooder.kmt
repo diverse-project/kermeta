@@ -1,0 +1,495 @@
+/* $Id: valooder.kmt,v 1.1 2007-12-14 13:04:32 vmahe Exp $
+ * Creation date: August 21, 2006
+ * License: GPL
+ * Copyright: IRISA (http://irisa.fr)
+ * Authors: vmahe@irisa.fr
+ */
+package valood;
+
+
+require kermeta
+require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/BehaviorTools.kmt"
+require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/GOFStatePatternTool.kmt"
+require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/StaticTools.kmt"
+require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/UmlCloneFactory.kmt"
+
+using uml2
+
+class Valood inherits uml2::transformations::GOFStatePatternTool
+{
+	reference factory : uml2::transformations::UmlCloneFactory
+	reference accessor_Tool : ValooderAccessor_Tool
+	reference association_Tool : uml2::transformations::Association_Tool
+	reference generalization_Tool : uml2::transformations::Generalization_Tool
+	reference interface_Tool : ValooderInterface_Tool
+	reference transition_Tool : ValooderTransition_Tool
+	reference tools : uml2::transformations::Tools
+	
+	reference rtsPackage : Package
+	reference rtsActiveStateMachine : Class
+	reference rtsProxy : Class
+	reference rtsEvent : Class
+	
+	method initialize(input : Package, output : Package) is do
+		// UmlTool initialization
+		super(input, output)
+		// GOFState initialization
+		currentPackage := input
+		
+		// initialization of the cloning tool
+		factory := uml2::transformations::UmlCloneFactory.new
+		factory.initialize
+		ioTable := factory.ioTable
+		
+		// initialization of other tools
+		accessor_Tool := ValooderAccessor_Tool.new
+		association_Tool := uml2::transformations::Association_Tool.new
+		generalization_Tool := uml2::transformations::Generalization_Tool.new
+		interface_Tool := ValooderInterface_Tool.new
+		transition_Tool := ValooderTransition_Tool.new
+		tools := uml2::transformations::Tools.new
+		
+    	// load the RTS UML2 resource
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var inputResource : kermeta::persistence::EMFResource
+    	inputResource ?= inputRepository.createResource("../uml2/rts.uml2", "../../../fr.irisa.triskell.uml2/src/ecore/UML2.ecore")
+    	inputResource.load()
+    	
+    	// catching the needed classes inside the RTS library
+		var rtsLibrary : Package
+    	rtsLibrary ?= inputResource.instances.one
+    	rtsPackage ?= rtsLibrary.ownedMember.select{ u | u.name == "rts" }.one
+    	rtsActiveStateMachine ?= rtsPackage.ownedMember.select{ u | u.name == "ActiveStateMachine" }.one
+    	rtsEvent ?= rtsPackage.ownedMember.select{ u | u.name == "Event" }.one
+    	rtsProxy ?= rtsPackage.ownedMember.select{ u | u.name == "Proxy" }.one
+	end
+	
+	operation valooder() is do
+		var model : Model
+		model ?= inputRootPackage
+		
+		// clone the input model
+		outputRootPackage := factory.cloneStaticDiagram(model)
+		
+		//DEBUG
+		var cloneModel : kermeta::standard::Object init outputRootPackage
+		
+		// transform the model
+		visitModel(model)
+		
+		// add reference to the RTS model/library
+		var importPack : PackageImport init PackageImport.new
+		importPack.importedPackage := rtsPackage
+		outputRootPackage.packageImport.add(importPack)
+		var importASM : ElementImport init ElementImport.new
+		importASM.importedElement := rtsActiveStateMachine
+		outputRootPackage.elementImport.add(importASM)
+		var importEvent : ElementImport init ElementImport.new
+		importEvent.importedElement := rtsEvent
+		outputRootPackage.elementImport.add(importEvent)
+		var importProxy : ElementImport init ElementImport.new
+		importProxy.importedElement := rtsProxy
+		outputRootPackage.elementImport.add(importProxy)
+	end
+	
+	method visitClass(visitable : Class) is do
+		// getting the clone to make the modifications on it
+		var clone : Class
+		clone ?= ioTable.getValue(visitable)
+		
+		// the old valooder did reify association ends (UML 1.x)
+		// In UML 2.0, navigable associations are embedded as properties
+		// so we don't need to reify them !!
+		
+		// then make the given class an abstract class, extracting the corresponding implementation, ...
+		var concreteClass : Class init interface_Tool.concreteFromAbstract(clone)
+		currentOutPackage.ownedMember.add(concreteClass)
+		
+		// the accessors must be created first, ...
+		accessor_Tool.addGettersSetters(concreteClass)
+		
+		// we disabled the "clearAttributes() in the Association_Tool
+		// to be able to process geters and setters so we must clear now
+		concreteClass.ownedAttribute.clear
+		
+		// the new implementation replaces the clone as the destination of links with states
+		ioTable.putValue(visitable, concreteClass)
+		
+		// then the call_event and signal classes, ...
+		clone.ownedOperation.each{ op |
+			currentOutPackage.ownedMember.add(createCallEvent(op))
+			currentOutPackage.ownedMember.add(createSignal(op))
+		}
+		
+		// ... and then the proxies
+		currentOutPackage.ownedMember.add(createProxy(clone, concreteClass))
+		
+		// the concrete class has the RTS ActiveStateMachine type
+		if visitable.ownedStateMachine.size == 1 then
+			generalization_Tool.addGeneralization(rtsActiveStateMachine, concreteClass)
+		end
+		
+		// apply the GoFState pattern :-)
+		super(visitable)
+		
+		// renaming the concrete class only after its states have been reified under the old name
+		concreteClass.name := concreteClass.name + "_impl"
+		
+		// adding the code of operations of the implementation class
+		// getters and setters have been coded by the Accessor_Tool
+		// the "make()" operation is added in the "visitRegion()" method
+	end
+	
+    method visitRegion(visitable : Region) : Void is do
+    	// as the same owning class must be processed multiple times,
+    	// we test the existance of the abstractState in the memory
+    	if ioTable.getValue(visitable) == void then
+ 	        super(visitable)	// implies the states have been processed
+ 	        
+			// need some work to be done on the context of the states
+			var context : Class
+			// the region owner could be a statemachine ...
+			context ?= ioTable.getValue(visitable.stateMachine)
+			// ... or a state having sub states
+			if context == void then context ?= ioTable.getValue(visitable.state) end
+			
+			var topState : Class
+			topState ?= ioTable.getValue(visitable)
+			generalization_Tool.addGeneralization(context, topState)
+			// the topState has no operations on its own.
+//			topState.ownedOperation.clear
+			
+			// concrete operations needed in the "top_state" (are abstract in rts::[Active]StateMachine)
+			var entry : Operation init Operation.new
+			entry.name := "entry"
+			var entryCode : Comment init Comment.new
+			entryCode.body := "do\n\t// Empty (nothing to do)\nend"
+			entry.ownedComment.add(entryCode)
+			
+			var exit : Operation init Operation.new
+			exit.name := "exit"
+			var exitCode : Comment init Comment.new
+			exitCode.body := "do\n\t// Empty (nothing to do)\nend"
+			exit.ownedComment.add(exitCode)
+			
+			// we must built here the "make()" operation of the "_impl" class
+			// FIXME : see if it mus be done also on substates contex (which is a reified up state)
+			var make : Operation init Operation.new
+			make.name := "make"
+			context.ownedOperation.add(make)
+			var code : kermeta::standard::String init ""
+			// we need first to initialize sets of attributes (those of the model)
+			var abstractClass : Class
+			abstractClass ?= context.generalization.select{sup|sup.general.name == context.name}.one.general
+			abstractClass.ownedAttribute.each{attr|
+				var int : kermeta::standard::Integer init 1
+				var lun : LiteralUnlimitedNatural
+				lun ?= attr.upperValue
+				var li : LiteralInteger
+				li ?= attr.upperValue
+				if lun != void then int := lun.~value
+				else if li != void then int := li.~value end end
+				if int == -1 then
+					if attr.isUnique then
+						if attr.isOrdered then
+							code.append("\t" + attr.name + " := kermeta::standard::OrderedSet<"+ attr.type.name + ">.new")
+						else
+							code.append("\t" + attr.name + " := kermeta::standard::Set<"+ attr.type.name + ">.new")
+						end
+					else
+						if attr.isOrdered then
+							code.append("\t" + attr.name + " := kermeta::standard::Sequence<"+ attr.type.name + ">.new")
+						else
+							code.append("\t" + attr.name + " := kermeta::standard::Bag<"+ attr.type.name + ">.new")
+						end
+					end
+				end
+			}
+			// then we must init each concrete state class (linked in the context class)
+			visitable.subvertex.each{vertex|
+				// for each processed state, we add initialisation code
+				var concreteState : Class
+				concreteState ?= ioTable.getValue(vertex)
+				if concreteState != void then
+					// code to initialize the state class
+					code.append("\t" + nameForConcreteStateLink(vertex) + " := " + nameForConcreteState(vertex) + ".new\n")
+					// code to activate the state class
+					code.append("\t" + nameForConcreteStateLink(vertex) + ".init_activable(\"" + nameForConcreteState(vertex) + "\")\n")
+					// code to link the state class with the "_impl" (ActiveStateMachine)
+					// REM : it is needed by Kermeta simulator (not needed in Eiffel for CADP)
+					code.append("\t" + nameForConcreteStateLink(vertex) + ".machine := self\n")
+					
+					// we add the link from the "_impl" class to the state class
+					var link : Property init Property.new
+					link.name := nameForConcreteStateLink(vertex)
+					link.type := concreteState
+					context.ownedAttribute.add(link)
+				end
+			}
+			// specify the initial state to the "ActiveStateMachine"
+			var initial : Vertex init initialState(visitable)
+			if initial != void then
+				code.append("\tinstanceCurrentState := " + tools.lowerFirstChar(nameForConcreteStateLink(initial)) + "\n")
+			else
+				code.append("\t// #### no initial state has been found in the region ####\n")
+				code.append("//\tinstanceCurrentState := void\n")
+			end
+			// rely the code to the "make()" operation
+			var makeCode : Comment init Comment.new
+			makeCode.body := "do\n" + code + "end"
+			make.ownedComment.add(makeCode)
+			
+			// the transitions can be processed only after all "source" state
+			// have been processed so we can't use the "visitTransition()" method
+			visitable.transition.each{ trans | createTransitionOperation(trans) }
+		end
+    end
+	
+	
+	/////////// overwrite GoFStatePattern methods //////////////////
+	
+    method suffixForAbstractState() : kermeta::standard::String is do result := "_top_state" end
+    method nameForConcreteState(vertex : Vertex) : kermeta::standard::String is do
+    	result := context(vertex).name + "_in_" + vertex.name
+    end
+    operation nameForConcreteStateLink(vertex : Vertex) : kermeta::standard::String is do
+    	result := tools.lowerFirstChar(nameForConcreteState(vertex))
+    end
+    method addHandleOperation(concreteVertex : Class, isAbstract : kermeta::standard::Boolean) is do
+    	// we don't need any "handle()" operation in Valooder
+    end
+    
+    method addRequestOperation(context : Class) is do
+    	// we don't need any "request()" operation in Valooder
+    end
+    method postProcessState(visitable : Vertex) : Void is do
+    	// after a vertex (state, final state, or pseudo state) has been processed,
+    	// we must rely it to its "context" class
+    	var concreteState : Class
+    	concreteState ?= ioTable.getValue(visitable)
+		// create a link between the context class and the concrete state
+		var prop : Property init Property.new
+		prop.type := concreteState
+		prop.name := concreteState.name
+		context(visitable).ownedAttribute.add(prop)
+    end
+	
+	
+	//////////////// useful internal operations ///////////////////
+    
+    operation createTransitionOperation(visitable : Transition) is do
+    
+    //DEBUG
+    stdio.writeln("DEBUG Valooder.createTransOp() : transition = "+visitable.name)
+    stdio.writeln("DEBUG Valooder.createTransOp() : transition.source = "+visitable.source.toString)
+    stdio.writeln("DEBUG Valooder.createTransOp() : transition.source class = "+ioTable.getValue(visitable.source).toString)
+    
+/*    	////////// code corresponding to the static classes of the model (non Actors)
+    	// we add to the source state the operation corresponding to the transition
+    	var sourceState : Class
+    	sourceState ?= ioTable.getValue(visitable.source)
+    	var op : Operation init Operation.new
+    	op.name := visitable.name
+    	sourceState.ownedOperation.add(op)
+    	var opCode : Comment init Comment.new
+    	// we use the transition tool to get the code of the transition
+    	opCode.body := transition_Tool.transition2code(visitable)
+    	op.ownedComment.add(opCode)
+    	
+    	/////////// TODO : distinguish between Actors and non Actors
+    	///////////        - generate the code for Actors : 
+    	///////////             - "nb_transitions()"
+    	///////////             - "labels()"
+    	///////////             - "completion()"
+*/
+    end
+	
+	operation createCallEvent(op : Operation) : Class is do
+		result := Class.new
+		result.name := nameForCallEvent(op)
+		// the call event has the RTS Event type
+		generalization_Tool.addGeneralization(rtsEvent, result)
+		
+		///////// TODO : generate the corresponding code for Event operations
+		// which, for a Xxx main class with a xOp(y : Yyy) operation, must seems like :
+		/*class Xxx_xOp_call_event
+			method dispatch_to(target : kermeta::standard::Object) is
+			do
+				var target_as_Xxxx : Xxx
+				target_as_Xxx ?= target
+				var arg0 : Yyy
+				arg0 ?= arguments.elementAt(0)
+				target_as_Xxx.xOp(arg0)
+			end
+			method event_name() is
+			do
+				result := "xOp"
+			end
+		*/
+		
+		///// generate the corresponding code for operation "dispatch_to"
+		var dispatchOp : Operation init Operation.new
+		dispatchOp.name := "dispatch_to"
+		result.ownedOperation.add(dispatchOp)
+		// add the "target" parameter
+		var target : Parameter init Parameter.new
+		target.name := "target"
+		var o : Class init Class.new
+		o.name := "kermeta::standard::Object"
+		target.type := o
+		dispatchOp.ownedParameter.add(target)
+		// generate the code
+		var dispatchOpCode : Comment init Comment.new
+		dispatchOpCode.body := "do\n"
+		dispatchOpCode.body.append("\ttarget_as_"+op.class_.name+ " : "+ op.class_.name+"\n")
+		dispatchOpCode.body.append("\ttarget_as_"+op.class_.name+ " ?= target\n")
+		var count : kermeta::standard::Integer init 0
+		op.ownedParameter.each{ par|
+			dispatchOpCode.body.append("\tvar arg"+count.toString+ " : " +par.type.name+"\n")
+			count := count + 1
+		}
+		dispatchOpCode.body.append("\ttarget_as_"+op.class_.name+ "."+op.name+"(")	// begin of the call
+		count := 0
+		op.ownedParameter.each{ par|
+			if count > 0 then dispatchOpCode.body.append(", ") end
+			dispatchOpCode.body.append("arg"+count.toString)
+			count := count + 1
+		}
+		dispatchOpCode.body.append(")\n")	// end of the call
+		dispatchOpCode.body.append("end")
+		dispatchOp.ownedComment.add(dispatchOpCode)
+		
+		// generate the corresponding code for operation "event_name"
+		var nameOp : Operation init Operation.new
+		nameOp.name := "event_name"
+		result.ownedOperation.add(nameOp)
+		var nameOpCode : Comment init Comment.new
+		nameOpCode.body := "do\n\tresult := \"" + op.name + "\"\nend"
+		nameOp.ownedComment.add(nameOpCode)
+	end
+	
+	operation createSignal(op : Operation) : Class is do
+		var signal : Class init Class.new
+		signal.name := nameForSignal(op)
+		
+		// generate the attribute corresponding to each operation's parameter
+		// for this version, we don't manage multiple return parameters
+		// (no information on compatibility with the I/O-LTS approach)
+		if op.returnResult.size == 1 then createSignalParameter(signal, op.returnResult.one, "result") end
+		
+		op.ownedParameter.each{ par | createSignalParameter(signal, par, par.name)}
+		
+		result := signal
+	end
+	
+	operation createProxy(cl : Class, cl_impl : Class) : Class is do
+		result := Class.new
+		result.name := nameForProxy(cl.name)
+		// the concrete class proxy has the RTS Proxy type
+		generalization_Tool.addGeneralization(rtsProxy, result)
+		generalization_Tool.addGeneralization(cl, result)
+		
+		// TODO : generate the corresponding code for inherited operations of the implementation
+		cl_impl.ownedOperation.each{ op |
+			result.ownedOperation.add(factory.cloneOperation(op))
+			
+			///////////////////////////////
+		}
+		
+		
+	end
+	
+	operation context(vertex : Vertex) : Class is do
+    	var region : Region
+    	region ?= vertex.container
+    	var context : Class
+    	
+		// the region owner could be a statemachine ...
+		context ?= ioTable.getValue(region.stateMachine)
+		// ... or a state having sub states
+		if context == void then context ?= ioTable.getValue(region.state) end
+		
+		result := context
+	end
+	
+	operation nameForCallEvent(op : Operation) : kermeta::standard::String is do
+		result := op.class_.name + "_" + op.name + "_call_event"
+	end
+	
+	operation nameForSignal(op : Operation) : kermeta::standard::String is do
+		result := op.class_.name + "_" + op.name + "_signal"
+	end
+	
+	operation nameForProxy(className : kermeta::standard::String) : kermeta::standard::String is do
+		result := className + "_proxy"
+	end
+	
+	operation createSignalParameter(signal : Class, param : Parameter, name : kermeta::standard::String) is do
+		// create a link between the signal and the parameter's type class
+		var prop : Property init Property.new
+		prop.type := param.type
+		prop.name := name
+		signal.ownedAttribute.add(prop)
+	end
+	
+	operation initialState(region : Region) : Vertex is do
+		var initial : Vertex
+		if region.subvertex.size == 1 then
+			initial := region.subvertex.one
+		else
+			region.subvertex.each{v|
+				var pseudo : Pseudostate
+				pseudo ?= v
+				if pseudo != void then
+					if pseudo.kind == PseudostateKind.initial then initial := v end
+				end
+			}
+		end
+		result := initial
+	end
+}
+
+/** redefine the naming of abstract and concrete classes */
+class ValooderInterface_Tool inherits uml2::transformations::Interface_Tool
+{
+    method prefixForAbstract() : kermeta::standard::String is do result := "" end
+    method suffixForAbstract() : kermeta::standard::String is do result := "" end
+    method prefixForNewConcrete() : kermeta::standard::String is do result := "" end
+    // the renaming of the implementation class is differed, waiting its states being processed
+    method suffixForNewConcrete() : kermeta::standard::String is do result := "" end
+/** disable the "clearAttributes() method */
+    method clearAttributes(concrete : Class) is do  end
+}
+
+/** redefine the naming of some getters and setters (others stay unchanged) */
+class ValooderAccessor_Tool inherits uml2::transformations::Accessor_Tool
+{
+	method prefixForGetter() : kermeta::standard::String is do result := "get" end
+	method prefixForSetter() : kermeta::standard::String is do result := "set" end
+	method prefixForSetterOnMultiple() : kermeta::standard::String is do result := "add" end
+}
+
+/** redefine the code for leave source and enter target (others stay unchanged) */
+class ValooderTransition_Tool inherits uml2::transformations::Transition_Tool
+{
+	method sourceIntoOperation() : kermeta::standard::String is do
+		if transition.source != void then
+			var tools : uml2::transformations::Tools init uml2::transformations::Tools.new
+			result := "\tleave("+tools.lowerFirstChar(transition.source.name)+")"
+		else
+			var message : kermeta::standard::String
+			message := "Transition '"+ transition.name+"' must have a source state to be transformed"
+			raise message
+		end
+	end
+	method targetIntoOperation() : kermeta::standard::String is do
+		if transition.target != void then
+			var tools : uml2::transformations::Tools init uml2::transformations::Tools.new
+			result := "\tenter("+tools.lowerFirstChar(transition.target.name)+")"
+		else
+			var message : kermeta::standard::String
+			message := "Transition '"+ transition.name+"' must have a target state to be transformed"
+			raise message
+		end
+	end
+}

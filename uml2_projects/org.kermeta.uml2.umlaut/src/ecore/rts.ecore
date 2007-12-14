@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="rts" nsURI="platform:/resource/fr.irisa.triskell.uml2.statecharts.simulator/src/kermeta/rts.kmt" nsPrefix="rts">
+  <eClassifiers xsi:type="ecore:EClass" name="TimeManager" eSuperTypes="//Activable">
+    <eOperations name="make" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.date := 0&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="reset" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.timer_list.clear&#xA;&#x9;self.date := d&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="d" eType="//Integer"/>
+    </eOperations>
+    <eOperations name="nb_transitions" eType="//Integer">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := 0&#xA;&#x9;if self.timer_list.empty.~not then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;result := 1&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Activable/nb_transitions">
+        <details key="SuperOperation" value="rts::Activable"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="guards" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := true&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Activable/guards">
+        <details key="SuperOperation" value="rts::Activable"/>
+      </eAnnotations>
+      <eParameters name="n" eType="//Integer"/>
+    </eOperations>
+    <eOperations name="labels">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.timer_list.first.label&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Activable/labels">
+        <details key="SuperOperation" value="rts::Activable"/>
+      </eAnnotations>
+      <eParameters name="n" eType="//Integer"/>
+    </eOperations>
+    <eOperations name="action" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.date := self.timer_list.first.deadline&#xA;&#x9;self.timer_list.first.fire&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Activable/action">
+        <details key="SuperOperation" value="rts::Activable"/>
+      </eAnnotations>
+      <eParameters name="n" eType="//Integer"/>
+    </eOperations>
+    <eOperations name="has" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.timer_list.exists{r | do&#xA;&#x9;&#x9;&#x9;r.equals(t)&#xA;&#x9;&#x9;end}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="t" eType="//Timer"/>
+    </eOperations>
+    <eOperations name="remove" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.timer_list.remove(t)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="t" eType="//Timer"/>
+    </eOperations>
+    <eOperations name="put" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.timer_list.add(t)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="t" eType="//Timer"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="date" eType="//Integer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timer_list" eType="//Linked_queue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Activable">
+    <eOperations name="nb_transitions" eType="//Integer">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="labels">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+      <eParameters name="n" eType="//Integer"/>
+    </eOperations>
+    <eOperations name="action" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+      <eParameters name="n" eType="//Integer"/>
+    </eOperations>
+    <eOperations name="guards" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+      <eParameters name="n" eType="//Integer"/>
+    </eOperations>
+    <eOperations name="init_activable" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;if name.isNotEqual(void).~and(name.isNotEqual(&quot;&quot;)) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.identity.set_out(name)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="name"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="identity" eType="//Identity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Reactive">
+    <eOperations name="receive" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+      <eParameters name="e" eType="//Event"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateMachine" eSuperTypes="//Reactive">
+    <eOperations name="entry" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="exit" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="enter" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;new_state.entry&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="new_state" eType="//StateMachine"/>
+    </eOperations>
+    <eOperations name="leave" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;old_state.exit&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="old_state" eType="//StateMachine"/>
+    </eOperations>
+    <eOperations name="oclInState" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="other" eType="//StateMachine"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Timer" eSuperTypes="//TimeManagerAccessor">
+    <eOperations name="make" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.target := reactor&#xA;&#x9;self.alarm := rts::Alarm.new&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="reactor" eType="//Reactive"/>
+    </eOperations>
+    <eOperations name="setSignal" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.target := reactor&#xA;&#x9;self.alarm := signal&#xA;&#x9;self.deadline := self.current_date.plus(delay)&#xA;&#x9;self.label := new_label&#xA;&#x9;self.manager.put(self)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="reactor" eType="//Reactive"/>
+      <eParameters name="signal" eType="//Alarm"/>
+      <eParameters name="delay" eType="//Integer"/>
+      <eParameters name="new_label"/>
+    </eOperations>
+    <eOperations name="current_date" eType="//Integer">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.manager.date&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="is_running" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.manager.has(self)&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="is_ringing" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.current_date.isGreaterOrEqual(self.deadline)&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="is_equal" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;if other.isNotEqual(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;result := self.deadline.equals(other.deadline)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="other" eType="//Timer"/>
+    </eOperations>
+    <eOperations name="reset" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.manager.remove(self)&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="reschedule" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;if self.is_running then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.reset&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;self.deadline := self.current_date.plus(new_delay)&#xA;&#x9;self.label := new_label&#xA;&#x9;self.manager.put(self)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="new_delay" eType="//Integer"/>
+      <eParameters name="new_label"/>
+    </eOperations>
+    <eOperations name="fire" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.reset&#xA;&#x9;self.target.receive(self.alarm)&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="label"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deadline" eType="//Integer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="//Reactive"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alarm" eType="//Alarm"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Identity">
+    <eOperations name="default_create" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="set_out" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.out := new_out&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="new_out"/>
+    </eOperations>
+    <eOperations name="deep_twin" eType="//Identity">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="is_deep_equal" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.out.equals(other.out)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="other" eType="//Identity"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="out"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event">
+    <eOperations name="event_name">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="make" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="send_to" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var reactive : rts::Reactive&#xA;&#x9;reactive ?= target&#xA;&#x9;if reactive.isNotEqual(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;reactive.receive(self)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="target" eType="//Object"/>
+    </eOperations>
+    <eOperations name="dispatch_to" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+      <eParameters name="target" eType="//Object"/>
+    </eOperations>
+    <eOperations name="label">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.event_name.plus(self.label_for_arguments)&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="label_for_arguments">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var arg : kermeta::standard::Integer&#xA;&#x9;var act : rts::Activable&#xA;&#x9;var res : kermeta::standard::String init &quot;&quot;&#xA;&#x9;if self.arguments.isNotEqual(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;if self.arguments.size.isGreater(0) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;res.append(&quot;(&quot;)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;from arg := 0&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;until arg.equals(self.arguments.size)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;act ?= self.arguments.elementAt(arg)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if act.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;res.append(act.identity.out)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;res.append(self.arguments.elementAt(arg).toString)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;res.append(&quot;,&quot;)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;arg := arg.plus(1)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="out">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.label&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" eType="//Linked_queue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeEvent" eSuperTypes="//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActiveStateMachine" eSuperTypes="//Activable //StateMachine">
+    <eOperations name="init_activable" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;super(name)&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Activable/init_activable">
+        <details key="SuperOperation" value="rts::Activable"/>
+      </eAnnotations>
+      <eParameters name="name"/>
+    </eOperations>
+    <eOperations name="receive" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;if self.message_queue.size.isGreaterOrEqual(self.message_queue_capacity) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise &quot;QUEUE_FULL&quot;&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.message_queue.add(e)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Reactive/receive">
+        <details key="SuperOperation" value="rts::Reactive"/>
+      </eAnnotations>
+      <eParameters name="e" eType="//Event"/>
+    </eOperations>
+    <eOperations name="dispatch" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var current_event : rts::Event&#xA;&#x9;current_event := self.message_queue.one&#xA;&#x9;self.message_queue.remove(self.message_queue.one)&#xA;&#x9;current_event.dispatch_to(self)&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="nb_transitions" eType="//Integer">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;if self.message_queue.empty.~not then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;result := 1&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Activable/nb_transitions">
+        <details key="SuperOperation" value="rts::Activable"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="labels">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := &quot;?&quot;.plus(self.message_queue.one.label)&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Activable/labels">
+        <details key="SuperOperation" value="rts::Activable"/>
+      </eAnnotations>
+      <eParameters name="n" eType="//Integer"/>
+    </eOperations>
+    <eOperations name="guards" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := true&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Activable/guards">
+        <details key="SuperOperation" value="rts::Activable"/>
+      </eAnnotations>
+      <eParameters name="n" eType="//Integer"/>
+    </eOperations>
+    <eOperations name="action" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var nb_completion : kermeta::standard::Integer&#xA;&#x9;var is_discarded : kermeta::standard::Boolean&#xA;&#x9;nb_completion := self.nb_transitions&#xA;&#x9;if self.message_queue.empty.~not then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;nb_completion := nb_completion.minus(1)&#xA;&#x9;&#x9;&#x9;if n.isLowerOrEqual(nb_completion) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.completion(n)&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.dispatch&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Activable/action">
+        <details key="SuperOperation" value="rts::Activable"/>
+      </eAnnotations>
+      <eParameters name="n" eType="//Integer"/>
+    </eOperations>
+    <eOperations name="completion" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="n" eType="//Integer"/>
+    </eOperations>
+    <eOperations name="reset_events_from_action" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.events_from_action := &quot;&quot;&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="message_queue_capacity" eType="//Integer">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := 1&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message_queue" eType="//Linked_queue"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events_from_action"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PassiveStateMachine" eSuperTypes="//StateMachine">
+    <eOperations name="receive" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;e.dispatch_to(self)&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Reactive/receive">
+        <details key="SuperOperation" value="rts::Reactive"/>
+      </eAnnotations>
+      <eParameters name="e" eType="//Event"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeManagerAccessor">
+    <eOperations name="manager" eType="//TimeManager">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timeManager" eType="//TimeManager"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CADPSimulator" eSuperTypes="//TimeManagerAccessor">
+    <eOperations name="make_CADP_simulator" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.nb_exported_configurations_since_last_gc := 0&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="initial_configuration" eType="//Configuration">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="current_configuration" eType="//Configuration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exported_configurations" ordered="false" upperBound="-1" eType="//Configuration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exported_labels">
+      <eType xsi:type="ecore:EClass" href="null/framework.ecore#//utils/Hashtable"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nb_exported_configurations_since_last_gc" eType="//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Configuration">
+    <eOperations name="out">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var i : kermeta::standard::Integer&#xA;&#x9;var l : kermeta::standard::Integer&#xA;&#x9;var a : rts::ActiveStateMachine&#xA;&#x9;result := &quot;There are &quot;.plus(self.process_table.size.toString)&#xA;&#x9;result.append(&quot; activable objects :&#xA;&quot;)&#xA;&#x9;from i := 0&#xA;&#x9;until i.isGreaterOrEqual(self.process_table.size)&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;result.append(i.toString.plus(&quot; -> &quot;))&#xA;&#x9;&#x9;&#x9;result.append(self.process_table.elementAt(i).getMetaClass.name.plus(&quot;&#xA;&quot;))&#xA;&#x9;&#x9;&#x9;a ?= self.process_table.elementAt(i)&#xA;&#x9;&#x9;&#x9;if a.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result.append(a.message_queue.out)&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;i := i.plus(1)&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="hash" eType="//Integer">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var i : kermeta::standard::Integer&#xA;&#x9;var l : kermeta::standard::Integer&#xA;&#x9;var e : kermeta::standard::Integer&#xA;&#x9;var m : rts::Event&#xA;&#x9;var res : kermeta::standard::Integer init 0&#xA;&#x9;var a : rts::ActiveStateMachine&#xA;&#x9;from i := 0&#xA;&#x9;until i.isGreaterOrEqual(self.process_table.size)&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;a ?= self.process_table.elementAt(i)&#xA;&#x9;&#x9;&#x9;if a.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;l := a.message_queue.size.plus(1)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if l.isGreater(1) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;m := a.message_queue.one&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;e := m.oid&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;e := 1&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;l := 1&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;e := 1&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;res := res.plus(i.mult(l).mult(e).mult(a.oid))&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="make" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="register" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.process_table.addAt(self.process_table.size, new_process)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="new_process" eType="//Activable"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="process_table" eType="//Linked_queue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="//StateMachine //Activable">
+    <eOperations name="initialize" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="connect" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.server := new_server&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="new_server" eType="//Object"/>
+    </eOperations>
+    <eOperations name="receive" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.enqueue(e)&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Reactive/receive">
+        <details key="SuperOperation" value="rts::Reactive"/>
+      </eAnnotations>
+      <eParameters name="e" eType="//Event"/>
+    </eOperations>
+    <eOperations name="enqueue" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.fifo.add(e)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="e" eType="//Event"/>
+    </eOperations>
+    <eOperations name="nb_transitions" eType="//Integer">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := 0&#xA;&#x9;if self.fifo.empty.~not then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;result := 1&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Activable/nb_transitions">
+        <details key="SuperOperation" value="rts::Activable"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="labels">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.fifo.one.label&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Activable/labels">
+        <details key="SuperOperation" value="rts::Activable"/>
+      </eAnnotations>
+      <eParameters name="n" eType="//Integer"/>
+    </eOperations>
+    <eOperations name="guards" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := true&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Activable/guards">
+        <details key="SuperOperation" value="rts::Activable"/>
+      </eAnnotations>
+      <eParameters name="n" eType="//Integer"/>
+    </eOperations>
+    <eOperations name="action" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.fifo.one.send_to(self.server)&#xA;&#x9;self.fifo.remove(self.fifo.one)&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KermetaSuperOperations" references="//Activable/action">
+        <details key="SuperOperation" value="rts::Activable"/>
+      </eAnnotations>
+      <eParameters name="n" eType="//Integer"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fifo" ordered="false" upperBound="-1" eType="//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="server" eType="//Object"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Any"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Proxy">
+    <eOperations name="connect" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.server := new_server&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="new_server" eType="//Object"/>
+    </eOperations>
+    <eOperations name="send" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;e.send_to(self.server)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="e" eType="//Event"/>
+    </eOperations>
+    <eOperations name="initialize" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="server" eType="//Object"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Enumeration">
+    <eOperations name="make" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.out := &quot;&quot;&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="enumeration">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.out&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="value" eType="//Enumeration">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="is_initialized" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.out.isNotEqual(&quot;&quot;)&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="is_valid_enumeration" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.all_images.getValue(enum_name).isNotEqual(void)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="enum_name"/>
+    </eOperations>
+    <eOperations name="value_of" eType="//Enumeration">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.from_string(enum_name)&#xA;&#x9;result := self&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="enum_name"/>
+    </eOperations>
+    <eOperations name="from_string" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.set_by_name(str)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="str"/>
+    </eOperations>
+    <eOperations name="set_image" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.out := new_image&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="new_image"/>
+    </eOperations>
+    <eOperations name="set_by_name" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="str"/>
+    </eOperations>
+    <eOperations name="setEnum" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="new_enum" eType="//Enumeration"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="out"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="all_images">
+      <eType xsi:type="ecore:EClass" href="null/framework.ecore#//utils/Hashtable"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Linked_queue">
+    <eAnnotations source="KermetaTypeParameters">
+      <details key="E" value="E"/>
+    </eAnnotations>
+    <eOperations name="out">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::String init &quot;There are &quot;&#xA;&#x9;s.append(self.size.toString)&#xA;&#x9;s.append(&quot; queued messages :&#xA;&quot;)&#xA;&#x9;from var i : kermeta::standard::Integer init 0&#xA;&#x9;until i.isGreater(self.size)&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;s.append(self.elementAt(i).toString.plus(&quot;&#xA;&quot;))&#xA;&#x9;&#x9;&#x9;i := i.plus(1)&#xA;&#x9;&#x9;end&#x9;end&#xA;&#x9;result := s&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="is_empty" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.size.equals(0)&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="item">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.last&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Alarm" eSuperTypes="//Event"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"/>
+</ecore:EPackage>
