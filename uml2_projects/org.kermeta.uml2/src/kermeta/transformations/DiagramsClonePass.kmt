@@ -1,4 +1,4 @@
-/* $Id: DiagramsClonePass.kmt,v 1.1 2007-12-13 10:34:39 vmahe Exp $
+/* $Id: DiagramsClonePass.kmt,v 1.2 2007-12-14 09:59:53 vmahe Exp $
  * Creation date: July 7, 2006
  * License:
  * Copyright:
@@ -27,7 +27,7 @@ class DiagramClonePass inherits uml::visitors::TopDownVisitor
         table := clonesTable
         factory := cloneFactory
     end
-    method visitPackage(visitable : Package) is do 
+    method visitPackage(visitable : Package) is do
         // must manage the current package for each processed element
         // to be put in the corresponding package
         var previousPackage : Package init currentPackage
@@ -67,7 +67,7 @@ class StaticDiagramClonePass1 inherits DiagramClonePass
     	end
     end
     
- /*    method visitComment(visitable : Comment) is do
+     method visitComment(visitable : Comment) is do
     	table.putValue(visitable, factory.cloneComment(visitable))
     	super(visitable)
     end
@@ -76,12 +76,12 @@ class StaticDiagramClonePass1 inherits DiagramClonePass
     	table.putValue(visitable, factory.cloneDataType(visitable))
     	super(visitable)
     end
- */   
+    
     method visitGeneralization(visitable : Generalization) is do
     	table.putValue(visitable, factory.cloneGeneralization(visitable))
     	super(visitable)
     end
-   /* 
+    
     method visitAssociation(visitable : Association) is do
     	table.putValue(visitable, factory.cloneAssociation(visitable))
     	super(visitable)
@@ -90,7 +90,7 @@ class StaticDiagramClonePass1 inherits DiagramClonePass
     method visitInterface(visitable : Interface) is do
     	table.putValue(visitable, factory.cloneInterface(visitable))
     	super(visitable)
-    end	*/
+    end
 }
 
 class StaticDiagramClonePass2 inherits DiagramClonePass
@@ -151,7 +151,7 @@ class StaticDiagramClonePass2 inherits DiagramClonePass
     	super(visitable)
     end
     
-  /*   method visitComment(visitable : Comment) is do
+    method visitComment(visitable : Comment) is do
         var clone : Comment
         clone ?= table.getValue(visitable)
         currentPackage.ownedComment.add(clone)
@@ -177,7 +177,7 @@ class StaticDiagramClonePass2 inherits DiagramClonePass
 			clone.ownedOperation.add(uVal) }
     	super(visitable)
     end
-   */   
+      
     method visitGeneralization(visitable : Generalization) is do
         var clone : Generalization
         clone ?= table.getValue(visitable)
@@ -198,7 +198,7 @@ class StaticDiagramClonePass2 inherits DiagramClonePass
 		//  DirectedRelationship uncloned properties : none
   	 	super(visitable)
     end
- /*    
+     
     method visitAssociation(visitable : Association) is do
         var clone : Association
         clone ?= table.getValue(visitable)
@@ -222,7 +222,7 @@ class StaticDiagramClonePass2 inherits DiagramClonePass
         	eClone ?= table.getValue(u)
         	clone.generalization.add(eClone)
         }
-    */    
+        
         /* not part in static diagrams so not cloned
         visitable.ownedUseCase.each{ u |
         	var eClone : UseCase
@@ -231,7 +231,7 @@ class StaticDiagramClonePass2 inherits DiagramClonePass
         }	*/
         
         //powertypeExtent : FIXME
- /*       visitable.redefinedClassifier.each{ u |
+        visitable.redefinedClassifier.each{ u |
         	var eClone : Classifier
         	eClone ?= table.getValue(u)
         	clone.redefinedClassifier.add(eClone)
@@ -278,13 +278,13 @@ class StaticDiagramClonePass2 inherits DiagramClonePass
         	eClone ?= table.getValue(u)
         	clone.generalization.add(eClone)
         }
-   */     /* not part in static diagrams so not cloned
+        /* not part in static diagrams so not cloned
         visitable.ownedUseCase.each{ u |
         	var eClone : UseCase
         	eClone ?= table.getValue(u)
         	clone.ownedUseCase.add(eClone)
         }	*/
-/*        //powertypeExtent : FIXME
+        //powertypeExtent : FIXME
         visitable.redefinedClassifier.each{ u |
         	var eClone : Classifier
         	eClone ?= table.getValue(u)
@@ -294,5 +294,5 @@ class StaticDiagramClonePass2 inherits DiagramClonePass
         //substitution : FIXME
         //usedCase				: not in StaticDiagram
     	super(visitable)
-    end	*/
+    end
 }
