@@ -1,0 +1,20 @@
+@mainClass "test_package::MyTestClass" 
+@mainOperation "main"
+
+
+package test_package;
+
+require kermeta
+require "001test_Tool_Valooder.kmt"
+
+using tools_tests
+
+class MyTestClass
+{
+    operation main() : Void is do 
+	    var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		
+		testRunner.run(ToolValooderTestCase)
+		testRunner.printTestResult
+    end 
+}
