@@ -1,4 +1,4 @@
-/* $Id: 750test_CloneTool_StaticDiagram.main.kmt,v 1.4 2007-12-14 12:29:22 vmahe Exp $
+/* $Id: 750test_CloneTool_StaticDiagram.main.kmt,v 1.5 2007-12-14 13:45:33 vmahe Exp $
  * Creation date: Summer 2006
  * License:		Eclipse Public License
  * Copyright:	INRIA
@@ -34,7 +34,7 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
 	
 	method setUp() is do
 		//creating needed instances
-		origModelName := "platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ClassDiagram.uml"
+		origModelName := "platform:/resource/org.kermeta.uml2/test/kmt_test_cases/uml2/ClassDiagram.uml"
 		
     	// load the given UML2 resource
     	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
@@ -47,7 +47,7 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
 		var factory : UmlCloneFactory init UmlCloneFactory.new
 		factory.initialize
 		cloneModel := factory.cloneStaticDiagram(origModel)
-		cloneModelName := "platform:/resource/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ClassDiagram_Clone.uml"
+		cloneModelName := "platform:/resource/org.kermeta.uml2/test/kmt_test_cases/uml2/ClassDiagram_Clone.uml"
 		
     	var outputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var outputResource : kermeta::persistence::EMFResource

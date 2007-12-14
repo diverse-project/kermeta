@@ -1,4 +1,4 @@
-/* $Id: LoadingTestSuite.java,v 1.7 2007-12-14 13:12:16 vmahe Exp $
+/* $Id: LoadingTestSuite.java,v 1.8 2007-12-14 13:45:33 vmahe Exp $
  * Project : Kermeta MDK UML2
  * File : LoadingTestSuite.java
  * License : EPL
@@ -20,7 +20,7 @@ import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
  * UML2 Loading test suite.
  */
 public class LoadingTestSuite extends TestSuite {
-	static final String RUNTIMEPROJECTNAME = "kermeta_mdk.uml2.umlaut.tests";
+	static final String RUNTIMEPROJECTNAME = "kermeta_mdk.uml2.tests";
     
 	public static Test suite() {
 	    return new LoadingTestSuite();
