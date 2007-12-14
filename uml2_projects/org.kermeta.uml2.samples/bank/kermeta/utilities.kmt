@@ -1,0 +1,51 @@
+/* $Id: utilities.kmt,v 1.1 2007-12-14 08:41:29 vmahe Exp $
+ * Creation date: August 7, 2006
+ * License: GPL
+ * Copyright: irisa.fr
+ * Authors: vmahe@irisa.fr
+ */
+
+// FIXME : hack waiting a String ot Integer converter in Kermeta
+package utilities;
+
+require kermeta
+
+using kermeta::standard
+
+class StringConverter
+{
+    
+    /** Ugly hack to be able to get the order of choosen transition */
+    operation string2Integer(n : String) : Integer is do
+    	var nSize : Integer init n.size
+    	var res : Integer init 0
+    	from var i : Integer init 0
+    	until i == nSize
+    	loop
+    		var x : Integer
+    		var c : String
+    		c := n.elementAt(i).toString
+    		if c == "0" then x := 0 end
+    		if c == "1" then x := 1 end
+    		if c == "2" then x := 2 end
+    		if c == "3" then x := 3 end
+    		if c == "4" then x := 4 end
+    		if c == "5" then x := 5 end
+    		if c == "6" then x := 6 end
+    		if c == "7" then x := 7 end
+    		if c == "8" then x := 8 end
+    		if c == "9" then x := 9 end
+    		if c == "q" or c == "Q" then x := -10000 end
+    		if x.isVoid then x := 0 end
+    		from var j : Integer init nSize - i - 1
+    		until j == 0
+    		loop
+    			x := x * 10
+    			j := j - 1
+    		end
+    		res := res + x
+    		i := i + 1
+    	end
+    	result := res
+    end
+}

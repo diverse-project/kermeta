@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
+  <packagedElement xsi:type="uml:Package" xmi:id="_tPOCIqLHEdqkGMDvm75SlQ" name="bank">
+    <ownedComment xmi:id="_K_DboCPLEdumr8b4wghgYQ" body="do&#xA;    if amount == void then&#xA;        amount := new_cash&#xA;    else&#xA;        amount := amount + new_cash&#xA;    end&#xA;end" annotatedElement="_XqAgwCPKEdumr8b4wghgYQ"/>
+    <ownedComment xmi:id="_Tga_wCPLEdumr8b4wghgYQ" body="do&#xA;    result := amount&#xA;end" annotatedElement="_iPZyICPKEdumr8b4wghgYQ"/>
+    <ownedComment xmi:id="_imyh8CPLEdumr8b4wghgYQ" body="do&#xA;    if amount > desired then&#xA;        result := desired&#xA;        amount := amount - desired&#xA;    else&#xA;        result := amount&#xA;        amount := 0&#xA;    end&#xA;end" annotatedElement="_k_oeECPKEdumr8b4wghgYQ"/>
+    <packagedElement xsi:type="uml:Class" xmi:id="_KfQWsCPKEdumr8b4wghgYQ" name="Customer">
+      <ownedAttribute xmi:id="_xgAOYCPKEdumr8b4wghgYQ" name="name" type="_ys--4CPKEdumr8b4wghgYQ"/>
+      <ownedAttribute xmi:id="_2V-e0CPKEdumr8b4wghgYQ" name="account" type="_L0uU0CPKEdumr8b4wghgYQ" isOrdered="true" aggregation="composite" association="_2VyRkCPKEdumr8b4wghgYQ">
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_8nPBgCPKEdumr8b4wghgYQ" value="*"/>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_8nOacCPKEdumr8b4wghgYQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" xmi:id="_L0uU0CPKEdumr8b4wghgYQ" name="Account">
+      <ownedAttribute xmi:id="_O14_wCPKEdumr8b4wghgYQ" name="amount" visibility="private" type="_TqWNQCPKEdumr8b4wghgYQ"/>
+      <ownedOperation xmi:id="_XqAgwCPKEdumr8b4wghgYQ" name="deposit">
+        <ownedParameter xmi:id="_gqj7QCPKEdumr8b4wghgYQ" name="new_cash" type="_TqWNQCPKEdumr8b4wghgYQ"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_iPZyICPKEdumr8b4wghgYQ" name="printAmount">
+        <ownedParameter xmi:id="_l4q6EJwgEdyRJ4YY8443fA" type="_ys--4CPKEdumr8b4wghgYQ" direction="return"/>
+        <ownedParameter xmi:id="_kYaGACPKEdumr8b4wghgYQ" type="_ys--4CPKEdumr8b4wghgYQ"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_k_oeECPKEdumr8b4wghgYQ" name="withdraw">
+        <ownedParameter xmi:id="_stJjYCPKEdumr8b4wghgYQ" name="desired" type="_TqWNQCPKEdumr8b4wghgYQ"/>
+        <ownedParameter xmi:id="_l4q6EZwgEdyRJ4YY8443fA" type="_TqWNQCPKEdumr8b4wghgYQ" direction="return"/>
+        <ownedParameter xmi:id="_dWw88SXzEdubto646KJ45g" type="_TqWNQCPKEdumr8b4wghgYQ"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xsi:type="uml:DataType" xmi:id="_TqWNQCPKEdumr8b4wghgYQ" name="Integer"/>
+    <packagedElement xsi:type="uml:DataType" xmi:id="_ys--4CPKEdumr8b4wghgYQ" name="String"/>
+    <packagedElement xsi:type="uml:Association" xmi:id="_2VyRkCPKEdumr8b4wghgYQ" name="Association1" memberEnd="_2V93wCPKEdumr8b4wghgYQ _2V-e0CPKEdumr8b4wghgYQ">
+      <ownedEnd xmi:id="_2V93wCPKEdumr8b4wghgYQ" type="_KfQWsCPKEdumr8b4wghgYQ" association="_2VyRkCPKEdumr8b4wghgYQ">
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_8mrn4CPKEdumr8b4wghgYQ" value="1"/>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_8mokkCPKEdumr8b4wghgYQ" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

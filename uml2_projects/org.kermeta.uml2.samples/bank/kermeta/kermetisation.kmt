@@ -1,0 +1,36 @@
+/* $Id: kermetisation.kmt,v 1.1 2007-12-14 08:41:29 vmahe Exp $
+ * Creation date: August 4, 2006
+ * License: GPL
+ * Copyright: irisa.fr
+ * Authors: vmahe@irisa.fr
+ */
+@mainClass "bank::Main"
+@mainOperation "main"
+
+
+package bank;
+
+
+require kermeta
+require "platform:/plugin/org.kermeta.uml2/src/kermeta/uml2km/Uml2KM.kmt"
+
+class Main
+{
+	
+	/**
+	 * This sample program will generate the Kermeta program
+	 * corresponding to the given sample model
+	 * in order to use it in protote applications.
+	 */
+    operation main() : Void is do
+    	 
+		// we need a ready-to-run Uml2KM tool
+		var u2k : uml2km::Uml2KM init uml2km::Uml2KM.new
+		u2k.initialize("platform:/resource/org.kermeta.uml2.samples/bank/models/bank.uml")
+    	
+    	// then run the uml2km features
+		u2k.uml2km()
+		u2k.saveKm("platform:/resource/org.kermeta.uml2/bank/kermeta/bank.km")
+    	
+    end
+}
