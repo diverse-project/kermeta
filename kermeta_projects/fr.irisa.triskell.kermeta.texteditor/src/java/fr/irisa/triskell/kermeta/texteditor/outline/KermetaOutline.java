@@ -1,4 +1,4 @@
-/* $Id: KermetaOutline.java,v 1.16 2007-12-17 14:05:11 ftanguy Exp $
+/* $Id: KermetaOutline.java,v 1.17 2007-12-17 15:26:05 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
@@ -165,6 +165,16 @@ public class KermetaOutline extends ContentOutlinePage {
             	modelElement = ((PackageItem)selection.getFirstElement()).initialPackage;
             }
             ModelReference mr = textEditor.getKermetaUnit().getTracer().getModelReference(modelElement);
+            
+            // Now notify other plugins
+            if(modelElement != null){
+                Iterator<KermetaEditorEventListener> it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
+    			while(it.hasNext())
+    			{
+    				KermetaEditorEventListener listener = it.next();
+    				listener.outlineSelectionChanged(modelElement);
+    			}
+            }
             
             TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
             if(tr != null)
