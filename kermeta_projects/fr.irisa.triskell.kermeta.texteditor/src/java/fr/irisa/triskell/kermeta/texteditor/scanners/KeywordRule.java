@@ -1,4 +1,4 @@
-/* $Id: KeywordRule.java,v 1.4 2007-06-27 13:19:27 cfaucher Exp $
+/* $Id: KeywordRule.java,v 1.5 2007-12-17 14:05:11 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KeywordRule.java
 * License : EPL
@@ -32,6 +32,7 @@ public class KeywordRule implements IRule {
 	private IToken tokenForLiteralKeyword = new Token ( KMTTextAttributeProvider.getTextAttribute(KMTTextAttributeProvider.LITERAL_ATTRIBUTE));
 	private IToken tokenForSpecialKeyword = new Token ( KMTTextAttributeProvider.getTextAttribute(KMTTextAttributeProvider.SPECIAL_ATTRIBUTE));
 	private IToken tokenForOperatorKeyword = new Token ( KMTTextAttributeProvider.getTextAttribute(KMTTextAttributeProvider.OPERATOR_ATTRIBUTE));
+	private IToken tokenForAbstractKeyword = new Token ( KMTTextAttributeProvider.getTextAttribute(KMTTextAttributeProvider.ABSTRACT_ATTRIBUTE));
 
 	
 	public List <String> structureKeyword = new ArrayList <String> ();
@@ -41,6 +42,7 @@ public class KeywordRule implements IRule {
 	public List <String> operatorKeyword = new ArrayList <String> ();
 	public List <String> specialKeyword = new ArrayList <String> ();
 	public List <String> nonSpecialKW = new ArrayList <String> ();
+	public List <String> abstractKeywords = new ArrayList <String> ();
 
 	private List <List<String>> keywordLists = new ArrayList<List<String>> ();
 	
@@ -69,7 +71,7 @@ public class KeywordRule implements IRule {
 		addKeyword("pre", specialKeyword);
 		addKeyword("post", specialKeyword);
 		addKeyword("inv", specialKeyword);
-		addKeyword("abstract", structureKeyword);
+		addKeyword("abstract", abstractKeywords);
 		//addKeyword("Self", typeKW);
 		addKeyword("Void", typeKeyword);
 		addKeyword("attribute", structureKeyword);
@@ -122,6 +124,7 @@ public class KeywordRule implements IRule {
 		keywordLists.add(literalKeyword);
 		keywordLists.add(specialKeyword);
 		keywordLists.add(operatorKeyword);
+		keywordLists.add( abstractKeywords );
 	}
 	
 	private void initializeMap() {
@@ -131,6 +134,7 @@ public class KeywordRule implements IRule {
 		tokenMap.put(literalKeyword, tokenForLiteralKeyword);
 		tokenMap.put(specialKeyword, tokenForSpecialKeyword);
 		tokenMap.put(operatorKeyword, tokenForOperatorKeyword);
+		tokenMap.put( abstractKeywords, tokenForAbstractKeyword);
 	}
 	
 	private IToken isKeywordOf(String keyword, List<String> keywords) {
@@ -159,46 +163,43 @@ public class KeywordRule implements IRule {
 		int c;
 		int size = 0;
 		
-		//System.out.println("-----------------------");
-		
-		while ( (c = scanner.read()) != ICharacterScanner.EOF ) {
-			size ++;
-			
-		//	System.out.println( (char) c );
-			
-			if ( Character.isLetter(c) ) {
-				String temp = new String( new char[] { (char) c } );
-				word = word.concat( temp );
-				//System.out.println("word : " + "\"" + word + "\"");
-				IToken token = getToken(word);
-				if ( token != null ) {
-					c = scanner.read();
-					if ( (c == ICharacterScanner.EOF) || Character.isWhitespace(c) || (c == '.')) {
+		scanner.unread();
+		c = scanner.read();
+		if ( Character.isWhitespace(c) ) {
+
+			while ( (c = scanner.read()) != ICharacterScanner.EOF ) {
+				size ++;
+				if ( Character.isLetter(c) ) {
+					String temp = new String( new char[] { (char) c } );
+					word = word.concat( temp );
+						
+					IToken token = getToken(word);
+					if ( token != null ) {
+						c = scanner.read();
+						if ( (c == ICharacterScanner.EOF) || Character.isWhitespace(c) || (c == '.')) {
+							scanner.unread();
+							return token;
+						} else
+							scanner.unread();
+					}
+				} else {
+					while ( size > 0 ) {
 						scanner.unread();
-						//System.out.println("keyword : \"" + word + "\"");
-						return token;
-					} else
-						scanner.unread();
+						size--;
+					}
+					return Token.UNDEFINED;
 				}
-			} else {
-				//scanner.unread();
-				while ( size > 0 ) {
-					scanner.unread();
-					size--;
-				}
-				return Token.UNDEFINED;
-				//word = "";
-			}
+			}	
+			
 		}
-		
-		///System.out.println("-----------------------");
 		
 		while ( size > 0 ) {
 			scanner.unread();
 			size--;
 		}
 
-      return Token.UNDEFINED;
+		return Token.UNDEFINED;
+
 	}
 
 }

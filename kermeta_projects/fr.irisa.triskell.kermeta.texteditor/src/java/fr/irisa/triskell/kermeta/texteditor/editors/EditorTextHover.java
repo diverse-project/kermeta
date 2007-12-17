@@ -1,4 +1,4 @@
-/* $Id: EditorTextHover.java,v 1.27 2007-09-19 12:17:46 ftanguy Exp $
+/* $Id: EditorTextHover.java,v 1.28 2007-12-17 14:05:06 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorTextHover.java
 * License : EPL
@@ -12,8 +12,8 @@ package fr.irisa.triskell.kermeta.texteditor.editors;
 
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
@@ -26,11 +26,16 @@ import org.eclipse.jface.text.ITextHoverExtension;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.texteditor.MarkerUtilities;
+import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.texteditor.KermetaTextEditor;
 
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
@@ -48,6 +53,8 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 
 	private KMTEditor editor;
 
+	private KermetaTextEditor textEditor;
+	
 	//////////////////////////
 	//////////////////////////
 	//		Constructor		//
@@ -57,12 +64,31 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		super();
 		this.editor = editor;		
 	}
+	
+	public EditorTextHover(KermetaTextEditor editor) {
+		super();
+		textEditor = editor;		
+	}
 	//////////////////////////////////
 	//////////////////////////////////
 	//		End of Constructor		//
 	//////////////////////////////////
 	//////////////////////////////////
 
+	private KermetaUnit getKermetaUnit() {
+		if ( editor != null )
+			return editor.getMcunit();
+		else
+			return textEditor.getKermetaUnit();
+	}
+	
+	private IFile getFile() {
+		if ( editor != null )
+			return editor.getFile();
+		else
+			return ((IFileEditorInput) textEditor.getEditorInput()).getFile();
+	}
+	
     public IInformationControlCreator getHoverControlCreator() {
         return this;
     }
@@ -82,7 +108,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
 		
 	    try {
-			IMarker[] markers = editor.getFile().findMarkers(KermetaMarkersHelper.getMarkerType(), true, 2);
+			IMarker[] markers = getFile().findMarkers(KermetaMarkersHelper.getMarkerType(), true, 2);
 			for (int i=0; i<markers.length; i++) {
 				int start = MarkerUtilities.getCharStart(markers[i]);
 				int end = MarkerUtilities.getCharEnd(markers[i]);
@@ -94,11 +120,11 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		}
 		
 		Tracer tracer = null;
-		if ( editor.getMcunit() != null )
-			tracer = editor.getMcunit().getTracer();
+		if ( getKermetaUnit() != null )
+			tracer = getKermetaUnit().getTracer();
 		if(tracer == null) 
 			return null; // ignore hover if there is no tracer (this may occur if the load of the unit failed due to an internal error)
-		Set<ModelReference> references = tracer.getModelReferences(hoverRegion.getOffset(), hoverRegion.getLength(), editor.getMcunit().getUri());
+		java.util.List<ModelReference> references = tracer.getModelReferences(hoverRegion.getOffset(), hoverRegion.getLength(), getKermetaUnit().getUri());
 		for ( ModelReference reference : references ) {
 			EObject o = reference.getRefObject();
 	        if (o instanceof Expression)
@@ -122,7 +148,16 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	        	fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class)o;
 				String ftags = kdocPrettyPrint(aClass.getTypeDefinition().getTag());
 				return NamedElementHelper.getMangledQualifiedName(aClass.getTypeDefinition())+ "\n" + ftags;
-	        }
+	        } else if ( o instanceof Property ) {
+	        	Property p = (Property) o;
+				String ftags = kdocPrettyPrint( p.getTag() );
+				return NamedElementHelper.getMangledQualifiedName( p )+ "\n" + ftags;
+	        } else if ( o instanceof Operation ) {
+	        	Operation p = (Operation) o;
+				String ftags = kdocPrettyPrint( p.getTag() );
+				return NamedElementHelper.getMangledQualifiedName( p )+ "\n" + ftags;	        	
+	        } else
+	        	System.out.println();
 		}
 		
 		

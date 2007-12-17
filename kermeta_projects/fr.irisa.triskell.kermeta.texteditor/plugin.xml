@@ -2,7 +2,32 @@
 <?eclipse version="3.0"?>
 <plugin>
 
-     <extension
+   <extension
+   point="org.eclipse.ui.editors">
+   <editor
+      name="Kermeta Editor"
+      icon="src/java/fr/irisa/triskell/kermeta/texteditor/icons/kermeta.png"
+      extensions="kmt"
+      contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+      class="org.kermeta.texteditor.KermetaTextEditor"
+      id="org.eclipse.ui.editors.text.texteditor">
+   </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            class="org.kermeta.texteditor.preferences.ModelcheckingPropertyPage"
+            icon="icons/kermeta_logo.gif"
+            id="fr.irisa.triskell.kermeta.texteditor.page1"
+            name="Modelchecking Strategy">
+         <enabledWhen>
+            <instanceof
+                  value="org.eclipse.core.resources.IProject">
+            </instanceof>
+         </enabledWhen>
+      </page>
+   </extension>
+<!--   <extension
    point="org.eclipse.ui.editors">
    <editor
       name="Kermeta Editor"
@@ -13,11 +38,11 @@
       id="org.eclipse.ui.editors.text.texteditor">
    </editor>
    </extension>
-    <extension
+   <extension
           point="org.eclipse.core.filebuffers.documentSetup">
        <participant
              class="fr.irisa.triskell.kermeta.texteditor.editors.KMTDocumentSetupParticipant"
              extensions="kmt"/>
     </extension>
-
+-->
 </plugin>

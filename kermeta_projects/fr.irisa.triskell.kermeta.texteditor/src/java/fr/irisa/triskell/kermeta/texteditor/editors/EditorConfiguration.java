@@ -1,4 +1,4 @@
-/* $Id: EditorConfiguration.java,v 1.20 2007-06-27 14:43:04 cfaucher Exp $
+/* $Id: EditorConfiguration.java,v 1.21 2007-12-17 14:05:06 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorConfiguration.java
 * License : EPL
@@ -28,6 +28,7 @@ import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
+import org.kermeta.texteditor.completion.TagContentAssistProcessor;
 
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.completion.EditorCompletion;

@@ -1,4 +1,4 @@
-/* $Id: TexteditorPlugin.java,v 1.13 2007-09-11 12:31:00 dvojtise Exp $
+/* $Id: TexteditorPlugin.java,v 1.14 2007-12-17 14:05:09 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : TexteditorPlugin.java
  * License : EPL
@@ -12,10 +12,15 @@
 package fr.irisa.triskell.kermeta.texteditor;
 
 import java.util.HashSet;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 import java.util.Set;
+
+import javax.annotation.PreDestroy;
 
 import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.kermeta.texteditor.ModelcheckingStrategy;
 import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
@@ -33,6 +38,29 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	
 	// the current kermeta texteditor
 	private KMTEditor editor;
+	
+	// Resource bundle.
+	private ResourceBundle resourceBundle;
+	
+	/**
+	 * Returns the plugin's resource bundle,
+	 */
+	public ResourceBundle getResourceBundle() {
+		return resourceBundle;
+	}
+	
+	/**
+	 * Returns the string from the plugin's resource bundle, or 'key' if not
+	 * found.
+	 */
+	public static String getResourceString(String key) {
+		ResourceBundle bundle = getDefault().getResourceBundle();
+		try {
+			return (bundle != null) ? bundle.getString(key) : key;
+		} catch (MissingResourceException e) {
+			return key;
+		}
+	}
 	
 	public KMTEditor getEditor() {
 		return editor;
@@ -55,15 +83,35 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	public TexteditorPlugin() {
 		super();
 		plugin = this;
+		try {
+			resourceBundle = ResourceBundle.getBundle("org.kermeta.texteditor.EditorPluginResources");
+		} catch (MissingResourceException x) {
+			resourceBundle = null;
+		}
 	}
 
 	/**
 	 * This method is called upon plug-in activation
 	 */
 	public void start(BundleContext context) throws Exception {
-		super.start(context);	
+		super.start(context);
+		getPreferenceStore().setDefault( ModelcheckingStrategy.INPUT_CHANGED_KEY, ModelcheckingStrategy.INPUT_CHANGED);
+		getPreferenceStore().setDefault( ModelcheckingStrategy.SAVING_TIME_KEY, ModelcheckingStrategy.SAVING_TIME);
 	}
 
+	public int getModelCheckingStrategy() {
+		int value = getPreferenceStore().getInt( ModelcheckingStrategy.MODE_KEY );
+		if ( value == 0 ) {
+			value = getPreferenceStore().getDefaultInt( ModelcheckingStrategy.INPUT_CHANGED_KEY );
+			getPreferenceStore().setValue( ModelcheckingStrategy.MODE_KEY, value);
+		}
+		return value;
+	}
+	
+	public void setModelCheckingStrategy(int value) {
+		getPreferenceStore().setValue( ModelcheckingStrategy.MODE_KEY, value);
+	}
+	
 	/**
 	 * This method is called when the plug-in is stopped
 	 */

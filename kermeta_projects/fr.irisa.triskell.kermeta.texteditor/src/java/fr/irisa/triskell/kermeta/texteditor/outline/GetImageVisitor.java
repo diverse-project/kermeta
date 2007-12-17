@@ -1,4 +1,4 @@
-/* $Id: GetImageVisitor.java,v 1.9 2007-08-31 13:14:17 dvojtise Exp $
+/* $Id: GetImageVisitor.java,v 1.10 2007-12-17 14:05:11 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetImageVisitor.java
 * License : EPL
@@ -38,16 +38,16 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 public class GetImageVisitor extends KermetaOptimizedVisitor {
     
     protected KermetaOutline outline;
-    protected OutlineItem item;
+    protected ModelElementOutlineItem item;
     
     
-    public static Image getImage(OutlineItem item, KermetaOutline outline) {
+    public static Image getImage(ModelElementOutlineItem item, KermetaOutline outline) {
         GetImageVisitor visitor = new GetImageVisitor(outline, item);
         Image result = (Image)visitor.accept(item.modelElement);
         return result;
     }
     
-    private GetImageVisitor(KermetaOutline outline, OutlineItem item) {
+    private GetImageVisitor(KermetaOutline outline, ModelElementOutlineItem item) {
         this.outline = outline;
         this.item = item;
     }
@@ -103,8 +103,8 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.EnumerationLiteral)
 	 */
 	public Object visitEnumerationLiteral(EnumerationLiteral arg0) {
-    	if ( item.parent instanceof OutlineItem ) {
-    		OutlineItem parentItem = (OutlineItem) item.parent;
+    	if ( item.parent instanceof ModelElementOutlineItem ) {
+    		ModelElementOutlineItem parentItem = (ModelElementOutlineItem) item.parent;
     		if ( parentItem.isTypeDefinitionImported() )
     			return KermetaIconsBlue.ENUM_LIT;
 	    }

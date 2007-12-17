@@ -1,6 +1,6 @@
 
 
-/*$Id: PackageItem.java,v 1.5 2007-09-11 12:32:18 dvojtise Exp $
+/*$Id: PackageItem.java,v 1.6 2007-12-17 14:05:11 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	PackageItem.java
 * License : EPL
@@ -32,7 +32,7 @@ public class PackageItem  implements Comparable<PackageItem> {
 
 	private String name = "";
 	
-	private HashMap<String, OutlineItem> typeDefinitions = new HashMap<String, OutlineItem> ();
+	private HashMap<String, ModelElementOutlineItem> typeDefinitions = new HashMap<String, ModelElementOutlineItem> ();
 	
 	private int addingCounter = 0;
 	
@@ -80,14 +80,14 @@ public class PackageItem  implements Comparable<PackageItem> {
 		if ( addingCounter > 1 )
 			isMerged = true;
 		for ( TypeDefinition typeDefinition : value ) {
-			OutlineItem item = new OutlineItem(typeDefinition, this, outline);
+			ModelElementOutlineItem item = new ModelElementOutlineItem(typeDefinition, this, outline);
 			typeDefinitions.put( typeDefinition.getName(), item );
 		}
 	}
 	
-	public Collection<OutlineItem> getTypeDefinitions() {
+	public Collection<ModelElementOutlineItem> getTypeDefinitions() {
 		if ( outline.prefSortedOutline() ) {
-			List <OutlineItem> list = new ArrayList <OutlineItem> ();
+			List <ModelElementOutlineItem> list = new ArrayList <ModelElementOutlineItem> ();
 			list.addAll( typeDefinitions.values() );
 			Collections.sort( list );
 			return list;

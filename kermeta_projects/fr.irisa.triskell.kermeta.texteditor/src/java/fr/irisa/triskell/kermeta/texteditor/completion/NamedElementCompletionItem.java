@@ -1,4 +1,4 @@
-/* $Id: NamedElementCompletionItem.java,v 1.4 2007-06-27 14:43:05 cfaucher Exp $
+/* $Id: NamedElementCompletionItem.java,v 1.5 2007-12-17 14:05:10 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : NamedElementCompletionItem.java
 * License : EPL
@@ -10,9 +10,14 @@
 
 package fr.irisa.triskell.kermeta.texteditor.completion;
 
+import java.util.Iterator;
+
 import org.eclipse.swt.graphics.Image;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.model.NamedElementHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.Using;
 
 /**
  * @author Franck Fleurey
@@ -24,8 +29,11 @@ public class NamedElementCompletionItem extends CompletionItem {
     protected static GetTextVisitor getTextVisitor =  new GetTextVisitor();
     protected static GetImageVisitor getImageVisitor =  new GetImageVisitor();
     
-    public NamedElementCompletionItem(NamedElement n) {
+    private KermetaUnit kermetaUnit = null;
+    
+    public NamedElementCompletionItem(NamedElement n, KermetaUnit kermetaUnit) {
         namedElement = n;
+        this.kermetaUnit = kermetaUnit;
     }
     
     /**
@@ -51,7 +59,17 @@ public class NamedElementCompletionItem extends CompletionItem {
 
     
     public String getCompletionText() {
-        return namedElement.getName();
+    	String s = NamedElementHelper.qualifiedName(namedElement);
+    	boolean found = false;
+    	Iterator<String> it = kermetaUnit.getUsings().iterator();
+    	while ( ! found && it.hasNext() ) {
+    		String using = it.next();
+    		if ( s.matches(using + ".+") ) {
+    			found = true;
+    			s = s.replace(using, "");
+    		}
+    	}
+        return s;
     }
     public int getCursorLocation() {
         return getCompletionText().length();

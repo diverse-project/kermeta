@@ -1,4 +1,4 @@
-/* $Id: KermetaEditorEventListener.java,v 1.3 2006-12-15 15:16:23 ftanguy Exp $
+/* $Id: KermetaEditorEventListener.java,v 1.4 2007-12-17 14:05:06 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : KermetaEditorEventListener.java
  * License : EPL
@@ -12,6 +12,8 @@ package fr.irisa.triskell.kermeta.texteditor.editors;
 
 import java.util.EventListener;
 
+import fr.irisa.triskell.kermeta.language.structure.Object;
+
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
@@ -22,6 +24,8 @@ public interface KermetaEditorEventListener extends EventListener {
 	public void unitGotFocus(KMTEditor editor);
 	public void selectionChanged();
 
-	public void outlineSelectionChanged(fr.irisa.triskell.kermeta.language.structure.Object fobj);
-	public void textHoverCalled(fr.irisa.triskell.kermeta.language.structure.Object fobj);
+	public void outlineSelectionChanged(Object fobj);
+	public void textHoverCalled(Object fobj);
+
+	public void contentAssistSelectionChanged(Object o);
 }

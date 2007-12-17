@@ -1,4 +1,4 @@
-/* $Id: KMTTextAttributeProvider.java,v 1.5 2007-06-27 13:19:27 cfaucher Exp $
+/* $Id: KMTTextAttributeProvider.java,v 1.6 2007-12-17 14:05:11 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KMTTextAttributeProvider.java
 * License : EPL
@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jface.text.TextAttribute;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
@@ -26,7 +27,7 @@ public class KMTTextAttributeProvider {
 	public static final Color BLUE 			= 	new Color(Display.getCurrent(), new RGB(0, 0, 100));
 	public static final Color BLACK 		= 	new Color( Display.getCurrent(), new RGB(0,0,0) );
 	public static final Color FUSHIA 		= 	new Color(Display.getCurrent(), new RGB(127, 0, 85));
-	public static final Color RED 			= new Color(Display.getCurrent(), new RGB(150, 0, 0));
+	public static final Color RED 			= 	new Color(Display.getCurrent(), new RGB(150, 0, 0));
 	public static final Color GREEN 		= 	new Color(Display.getCurrent(), new RGB(0, 255, 0) );
 	public static final Color PINK	 		= 	new Color(Display.getCurrent(), new RGB(255, 20, 147) );
 	public static final Color SEASHELL	 	= 	new Color(Display.getCurrent(), new RGB(139, 134, 130) );
@@ -44,6 +45,8 @@ public class KMTTextAttributeProvider {
 	public static final String LITERAL_ATTRIBUTE 	= 	"__kmt_literal_attribute";	
 	public static final String OPERATOR_ATTRIBUTE 	= 	"__kmt_operator_attribute";	
 	public static final String STRING_ATTRIBUTE 	= 	"__kmt_string_attribute";	
+	public static final String ABSTRACT_ATTRIBUTE 	= 	"__kmt_abstract_attribute";	
+	
 	
 	
 	private Map <String, TextAttribute> attributes = new HashMap <String, TextAttribute> ();
@@ -57,18 +60,21 @@ public class KMTTextAttributeProvider {
 			instance.attributes.put(	COMMENT_ATTRIBUTE, 		new TextAttribute(BLUE_GREEN)			);
 			instance.attributes.put(	TAG_ATTRIBUTE, 			new TextAttribute(LIGHT_BLUE)			);
 			instance.attributes.put(	UNDEFINED_ATTRIBUTE, 	new TextAttribute( BLACK )				);
-			instance.attributes.put(	KEYWORD_ATTRIBUTE, 		new TextAttribute( BLUE, null, 3 )		);
-			instance.attributes.put(	CONTROL_ATTRIBUTE, 		new TextAttribute( BLUE, null, 3 )	);
+//			instance.attributes.put(	KEYWORD_ATTRIBUTE, 		new TextAttribute( BLUE, null, 3 )		);
+			instance.attributes.put(	KEYWORD_ATTRIBUTE, 		new TextAttribute( BLUE, null, SWT.BOLD )	);
+//			instance.attributes.put(	CONTROL_ATTRIBUTE, 		new TextAttribute( BLUE, null, 3 )	);
+			instance.attributes.put(	CONTROL_ATTRIBUTE, 		new TextAttribute( BLUE, null, SWT.BOLD )	);
 			instance.attributes.put(	TYPE_ATTRIBUTE, 		new TextAttribute( BLACK, null, 1 )		);
 			instance.attributes.put(	LITERAL_ATTRIBUTE, 		new TextAttribute( FUSHIA, null, 3 )	);
 			instance.attributes.put(	SPECIAL_ATTRIBUTE, 		new TextAttribute( RED, null, 1 )		);
 			instance.attributes.put(	OPERATOR_ATTRIBUTE, 	new TextAttribute( BLACK, null, 1 )		);
 			instance.attributes.put(	STRING_ATTRIBUTE, 		new TextAttribute( LIGHT_BLUE )			);
+			instance.attributes.put( 	ABSTRACT_ATTRIBUTE, 	new TextAttribute( BLUE, null, SWT.ITALIC | SWT.BOLD )	);
 		}
 		return instance;
 	}
 	
-	static TextAttribute getTextAttribute(String attributeID) {
+	static public TextAttribute getTextAttribute(String attributeID) {
 		return getInstance().attributes.get(attributeID);
 	}
 

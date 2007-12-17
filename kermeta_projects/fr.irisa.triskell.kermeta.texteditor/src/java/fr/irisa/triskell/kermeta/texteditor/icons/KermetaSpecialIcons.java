@@ -1,4 +1,4 @@
-/* $Id: KermetaSpecialIcons.java,v 1.5 2007-06-27 13:01:13 cfaucher Exp $
+/* $Id: KermetaSpecialIcons.java,v 1.6 2007-12-17 14:05:10 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaSpecialIcons.java
 * License : EPL
@@ -10,8 +10,14 @@
 
 package fr.irisa.triskell.kermeta.texteditor.icons;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
+
+import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
+import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 
 
 /**
@@ -19,6 +25,8 @@ import org.eclipse.swt.graphics.Image;
  */
 public class KermetaSpecialIcons {
 
+	final static private URL KermetaEditPluginURL = KermetaEditPlugin.getPlugin().getBaseURL();
+	
     public static Image PACKAGE_GRAY = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/package_gray.gif").createImage();
   
     public static Image PACKAGE_BLUE_RED = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/package_blue_red.gif").createImage();
@@ -35,4 +43,37 @@ public class KermetaSpecialIcons {
     
     public static Image POST_CONSTRAINT = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/post.png").createImage();
 
+    public Image CONDITIONAL = null;
+
+    public Image BLOCK = null;
+
+    public Image LOOP = null;
+    
+    public Image RESCUE_BLOCK = null;
+    
+    public Image VARAIBLE_DECLARATION = null;
+    
+    
+    static private KermetaSpecialIcons instance = null;
+    
+    static public KermetaSpecialIcons getDefault() {
+    	if ( instance == null ) {
+    		instance = new KermetaSpecialIcons();
+    		instance.initialize();
+    	}
+    	return instance;
+    }
+    
+    private void initialize() {
+    	try {
+			instance.CONDITIONAL = ImageDescriptor.createFromURL( new URL(KermetaEditPluginURL, "/icons/full/obj16/Conditional.gif") ).createImage();
+			instance.BLOCK = ImageDescriptor.createFromURL( new URL(KermetaEditPluginURL, "/icons/full/obj16/Block.gif") ).createImage();
+			instance.LOOP = ImageDescriptor.createFromURL( new URL(KermetaEditPluginURL, "/icons/full/obj16/Loop.gif") ).createImage();
+			instance.RESCUE_BLOCK = instance.BLOCK;
+			instance.VARAIBLE_DECLARATION = ImageDescriptor.createFromURL( new URL(KermetaEditPluginURL, "/icons/full/obj16/VariableDecl.gif") ).createImage();
+    	} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+    }
+    
 }

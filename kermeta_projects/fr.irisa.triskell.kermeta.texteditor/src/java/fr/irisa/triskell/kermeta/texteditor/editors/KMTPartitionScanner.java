@@ -1,4 +1,4 @@
-/* $Id: KMTPartitionScanner.java,v 1.4 2007-06-27 14:43:05 cfaucher Exp $
+/* $Id: KMTPartitionScanner.java,v 1.5 2007-12-17 14:05:06 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KMTPartitionScanner.java
 * License : EPL
@@ -29,10 +29,8 @@ public class KMTPartitionScanner extends RuleBasedPartitionScanner {
 	
 	
 	public KMTPartitionScanner() {
-		
 		super();
 		setPredicateRules( getRules() );
-		
 	}
 	
 	
@@ -42,11 +40,12 @@ public class KMTPartitionScanner extends RuleBasedPartitionScanner {
 		Token tag = new Token ( KMT_TAG );
 		Token literal = new Token ( KMT_STRING );
 		
-		IPredicateRule[] predicateRules = new IPredicateRule[4];
+		IPredicateRule[] predicateRules = new IPredicateRule[5];
 		
 		predicateRules[0] = new MultiLineRule("/**", "*/", tag);
 		predicateRules[1] = new MultiLineRule("/*", "*/", comment);
 		predicateRules[2] = new EndOfLineRule("//", comment);
+		predicateRules[4] = new EndOfLineRule("@", tag);
 		
 		predicateRules[3] = new MultiLineRule("\"", "\"", literal);
 		

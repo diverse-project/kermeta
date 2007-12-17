@@ -1,4 +1,4 @@
-/* $Id: TypecheckingStrategy.java,v 1.9 2007-10-12 09:12:15 ftanguy Exp $
+/* $Id: TypecheckingStrategy.java,v 1.10 2007-12-17 14:05:06 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : TypecheckingStrategy.java
 * License : EPL
@@ -70,6 +70,8 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 				job = new Job("Typechecking " + editor.getFile().getFullPath().toString()) {
 					
 					public IStatus run(IProgressMonitor monitor) {
+						editor.isTypechecking = true;
+						editor.outline.update();
 						//KermetaUnitHelper.unloadKermetaUnit( editor.getMcunit() );
 						KermetaMarkersHelper.clearMarkers(editor.getFile());
 						
@@ -93,13 +95,16 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 					
 							editor.updateValue(kermetaUnit);
 							KermetaMarkersHelper.createMarkers(editor.getFile(), kermetaUnit);	
+							kermetaUnit.setLocked(false);
 						} catch (KermetaIOFileNotFoundException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} catch (URIMalformedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}						
+						} finally {
+							editor.isTypechecking = false;
+						}
 
 						return Status.OK_STATUS;
 					}
@@ -124,18 +129,23 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 				job = new Job("Building Workspace") {
 					
 					public IStatus run(IProgressMonitor monitor) {
-			
-						//KermetaUnitHelper.abortTypechecking(editor.getFile());
+						try {
+							editor.isTypechecking = true;
+							editor.outline.update();
+							//KermetaUnitHelper.abortTypechecking(editor.getFile());
 								
-						Unit unit = editor.getUnit();
-						KermetaUnitHost.getInstance().declareInterest(interest, unit);
+							Unit unit = editor.getUnit();
+							KermetaUnitHost.getInstance().declareInterest(interest, unit);
 						
-						HashMap args = new HashMap();
-						//args.put("content", editor.getFileContent());
-						args.put("content", editor.getCurrentContent());
-						unit.receiveSynchroneEvent("update", args, monitor);
+							HashMap args = new HashMap();
+							//args.put("content", editor.getFileContent());
+							args.put("content", editor.getCurrentContent());
+							unit.receiveSynchroneEvent("update", args, monitor);
 						
-						KermetaUnitHost.getInstance().undeclareInterest(interest, unit);
+							KermetaUnitHost.getInstance().undeclareInterest(interest, unit);
+						} finally {
+							editor.isTypechecking = false;
+						}
 						return Status.OK_STATUS;
 					}
 					

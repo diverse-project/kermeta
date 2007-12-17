@@ -1,4 +1,4 @@
-/* $Id: KMTEditor.java,v 1.22 2007-09-13 09:02:42 ftanguy Exp $
+/* $Id: KMTEditor.java,v 1.23 2007-12-17 14:05:06 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KMTEditor.java
 * License : EPL
@@ -64,6 +64,8 @@ public class KMTEditor extends TextEditor implements Interest {
 	protected KermetaOutline outline;
 	
 	private EditorCompletion completion = null;
+	
+	public boolean isTypechecking = false;
 	
 	public void setEditorCompletion(EditorCompletion value) {
 		completion = value;
@@ -267,9 +269,9 @@ public class KMTEditor extends TextEditor implements Interest {
 		KermetaUnit kermetaUnit = (KermetaUnit) newValue;
 		mcunit = kermetaUnit;
 		
-		if ( completion != null )
+		if ( (completion != null) && ! kermetaUnit.isErroneous() )
 			completion.setkermetaUnit( kermetaUnit );
-			if (outline != null)
+		if (outline != null)
 			outline.update();
 	}
 	

@@ -1,4 +1,4 @@
-/* $Id: EditorCompletion.java,v 1.24 2007-08-07 13:30:49 ftanguy Exp $
+/* $Id: EditorCompletion.java,v 1.25 2007-12-17 14:05:10 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorCompletion.java
 * License : EPL
@@ -113,7 +113,12 @@ public class EditorCompletion implements IContentAssistProcessor {
 			    addProposalsForTypes(doc, offset, propList, qualifier.substring(1));
 	*/
 			// "." -> should be followed by call feature
-			else {
+			else if ( qualifier.equals(":") ) {
+				String text = doc.get().substring(0, offset);
+				String s = getVariableDeclaration(text);
+				if ( ! s.equals("") )
+					proposals.addAll( EditorCompletionHelper.getProposalsForTypeDefinitions(kermetaUnit, s, offset) );
+			} else {
 				
 				int index = offset - 1;
 				String uri = kermetaUnit.getUri();
@@ -140,7 +145,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 						text = text.substring(0, text.length()-1);
 						
 						if ( kermetaUnit.getTracer() != null ) {
-							Set <ModelReference> references = kermetaUnit.getTracer().getModelReferences(trueOffset, length, uri);  
+							List <ModelReference> references = kermetaUnit.getTracer().getModelReferences(trueOffset, length, uri);  
 							for ( ModelReference reference : references ) {
 								boolean stop = false;
 								EObject container = reference.getRefObject();
@@ -153,7 +158,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 					
 					} else if ( kermetaUnit.getTracer() != null ){
 												
-						Set <ModelReference> references = kermetaUnit.getTracer().getModelReferences(trueOffset, length, uri);  
+						List <ModelReference> references = kermetaUnit.getTracer().getModelReferences(trueOffset, length, uri);  
 						for ( ModelReference reference : references ) {
 							EObject container = reference.getRefObject();
 							while ( container != null ) {
@@ -162,25 +167,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 							}
 						}
 						
-						List<String> qualifiedNames = new ArrayList<String> ();
-				        for ( Package p : kermetaUnit.getPackages() ) {
-				            for (TypeDefinition td: p.getOwnedTypeDefinition()) {
-				                String qualifiedName = NamedElementHelper.getQualifiedName(td);
-				                if ( ! qualifiedNames.contains(qualifiedName) ) {
-				                	qualifiedNames.add(qualifiedName);
-				                	CompletionItem ci = new NamedElementCompletionItem(td);
-				                	if (ci.getCompletionText().toLowerCase().startsWith( text.toLowerCase()) )
-				                		proposals.add(ci.getCompletionProposal(trueOffset, text.length() ));
-				                }
-				            }
-			                String qualifiedName = NamedElementHelper.getQualifiedName(p);
-			                if ( ! qualifiedNames.contains(qualifiedName) ) {
-			                	qualifiedNames.add(qualifiedName);
-			                	CompletionItem ci = new NamedElementCompletionItem(p);
-			                	if (ci.getCompletionText().toLowerCase().startsWith(text.toLowerCase()))
-			                		proposals.add(ci.getCompletionProposal(trueOffset, text.length() ));
-			                }
-				        }
+						proposals.addAll( EditorCompletionHelper.getProposalsForTypeDefinitions(kermetaUnit, text, trueOffset) );
 				    	Collections.sort(proposals, cpCmp);
 						
 				    	Iterator <String> iterator = CathegorizedKWList.getInstance().keywords.iterator();
@@ -276,7 +263,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 		 */
 		Iterator <Property> iterator = definition.getOwnedAttribute().iterator();
 		while ( iterator.hasNext() ) {
-			NamedElementCompletionItem item = new NamedElementCompletionItem( iterator.next() );
+			NamedElementCompletionItem item = new NamedElementCompletionItem( iterator.next(), kermetaUnit );
 			proposals.add( item.getCompletionProposal(offset, 0) );
 		}
 		
@@ -287,7 +274,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 		 */
 		Iterator <Operation> itOnOperations = definition.getOwnedOperation().iterator();
 		while ( itOnOperations.hasNext() ) {
-			NamedElementCompletionItem item = new NamedElementCompletionItem( itOnOperations.next() );
+			NamedElementCompletionItem item = new NamedElementCompletionItem( itOnOperations.next(), kermetaUnit );
 			proposals.add( item.getCompletionProposal(offset, 0) );
 		}
 		
@@ -578,7 +565,7 @@ public class EditorCompletion implements IContentAssistProcessor {
     		for (Object next : p.getOwnedTypeDefinition())
     		{
     			TypeDefinition t = (TypeDefinition)next;
-    			CompletionItem ci = new NamedElementCompletionItem(t);
+    			CompletionItem ci = new NamedElementCompletionItem(t, kermetaUnit);
     			if (short_name.length() == 0 ) 
     				proposals.add(ci.getCompletionProposal(offset, 0));
     			else if (ci.getCompletionText().toLowerCase().startsWith(short_name.toLowerCase())) {
@@ -595,7 +582,7 @@ public class EditorCompletion implements IContentAssistProcessor {
             	
             		listedQualifiedName.add(qualifiedName);
             	         	
-	            	CompletionItem ci = new NamedElementCompletionItem(subPackage);
+	            	CompletionItem ci = new NamedElementCompletionItem(subPackage, kermetaUnit);
 	            	if (short_name.length() == 0) 
 	            		proposals.add(ci.getCompletionProposal(offset,0));
 	            	else if (ci.getCompletionText().toLowerCase().startsWith(short_name.toLowerCase()))
@@ -627,4 +614,42 @@ public class EditorCompletion implements IContentAssistProcessor {
 	     }
 	 };
     
+		/**
+		 * 
+		 * Check if the given string matches with the pattern "var someID : "
+		 * If yes returns the string corresponding to the variable declaration statement.
+		 * If no returns empty string.
+		 * 
+		 * @param s
+		 * @return
+		 */
+		public String getVariableDeclaration(String s) {
+			String variableDeclaration = "";
+			boolean varFound = false;
+			boolean idFound = false;
+			String currentString = "";
+			int index = s.length() - 1;
+			while ( (index != -1) && ! varFound ) {
+				char currentChar = s.charAt(index);
+				if ( Character.isWhitespace(currentChar) ) {
+					if ( ! currentString.equals("") ) {
+						idFound = true;
+						currentString = "";
+					}
+				} else if ( idFound ) {
+					currentString = currentChar + currentString;
+					if ( currentString.equals("var") )
+						varFound = true;
+				} else if ( currentChar != ':' )
+					currentString = currentChar + currentString;
+			
+				variableDeclaration = currentChar + variableDeclaration;
+				index--;
+			}
+			if ( varFound )
+				return variableDeclaration;
+			else
+				return "";
+		}
+	 
 }

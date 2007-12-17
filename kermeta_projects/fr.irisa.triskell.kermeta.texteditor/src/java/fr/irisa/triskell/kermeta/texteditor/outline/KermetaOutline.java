@@ -1,4 +1,4 @@
-/* $Id: KermetaOutline.java,v 1.15 2007-10-16 11:46:40 ftanguy Exp $
+/* $Id: KermetaOutline.java,v 1.16 2007-12-17 14:05:11 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
@@ -16,7 +16,6 @@ import org.eclipse.jface.preference.BooleanPropertyAction;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -25,6 +24,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.texteditor.KermetaTextEditor;
 
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
@@ -44,6 +45,8 @@ public class KermetaOutline extends ContentOutlinePage {
 
 	protected KMTEditor editor;
 	
+	private KermetaTextEditor textEditor;
+	
 	protected boolean _isDisposed = false;
 
 	protected IPreferenceStore preferences;
@@ -57,6 +60,21 @@ public class KermetaOutline extends ContentOutlinePage {
 		contentProvider = new OutlineContentProvider(this);
 		labelProvider = new OutlineLabelProvider();
 		preferences = new PreferenceStore();
+	}
+	
+	public KermetaOutline(KermetaTextEditor editor) {
+		textEditor = editor;
+		contentProvider = new OutlineContentProvider(this);
+		labelProvider = new OutlineLabelProvider();
+		preferences = new PreferenceStore();		
+	}
+	
+	public KermetaUnit getKermetaUnit() {
+		if ( textEditor != null )
+			return textEditor.getKermetaUnit();
+		else if ( editor != null )
+			return editor.getMcunit();
+		return null;
 	}
 	
 	public boolean prefSortedOutline() {
@@ -87,10 +105,10 @@ public class KermetaOutline extends ContentOutlinePage {
 		treeViewer.setContentProvider(contentProvider);
 		treeViewer.setLabelProvider(labelProvider);
 		treeViewer.addSelectionChangedListener(this);
-		if (editor.getMcunit() != null && ! editor.getMcunit().getInternalPackages().isEmpty() ) {
-			treeViewer.setInput(editor.getMcunit());
-			//treeViewer.expandToLevel(2);
-		}
+		
+		if ( getKermetaUnit() != null && ! getKermetaUnit().getInternalPackages().isEmpty() )
+			treeViewer.setInput( getKermetaUnit() );
+		
 	}
 	
     public void setActionBars(IActionBars actionBars) {
@@ -135,6 +153,26 @@ public class KermetaOutline extends ContentOutlinePage {
 	
     public void selectionChanged(SelectionChangedEvent event)
     {
+    	if ( editor != null )
+    		selectionChnaged_1(event);
+    	else {
+    		IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+    		fr.irisa.triskell.kermeta.language.structure.Object modelElement = null;
+            if ( selection.getFirstElement() instanceof ModelElementOutlineItem )
+            	modelElement =((ModelElementOutlineItem)selection.getFirstElement()).modelElement;
+            else if (selection.getFirstElement() instanceof PackageItem){
+            	// get first package part 
+            	modelElement = ((PackageItem)selection.getFirstElement()).initialPackage;
+            }
+            ModelReference mr = textEditor.getKermetaUnit().getTracer().getModelReference(modelElement);
+            
+            TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
+            if(tr != null)
+            	textEditor.setHighlightRange(tr.getCharBeginAt()-1,0 ,true);
+    	}
+    }
+    
+    private void selectionChnaged_1(SelectionChangedEvent event) {
         super.selectionChanged(event);
         if (editor.getMcunit()==null || (! editor.getMcunit().getInternalPackages().isEmpty() && editor.getMcunit().getInternalPackages().get(0) == null)) return;
         ISelection selection = event.getSelection();
@@ -146,8 +184,8 @@ public class KermetaOutline extends ContentOutlinePage {
                 IStructuredSelection ssel = (IStructuredSelection)selection;
                 // try to get one kermeta model element  (DVK with aspect this may be not precise ...)
                 fr.irisa.triskell.kermeta.language.structure.Object modelElement = null;
-                if(ssel.getFirstElement() instanceof OutlineItem)
-                	modelElement =((OutlineItem)ssel.getFirstElement()).modelElement;
+                if(ssel.getFirstElement() instanceof ModelElementOutlineItem)
+                	modelElement =((ModelElementOutlineItem)ssel.getFirstElement()).modelElement;
                 else if (ssel.getFirstElement() instanceof PackageItem){
                 	// get first package part 
                 	modelElement = ((PackageItem)ssel.getFirstElement()).initialPackage;
@@ -183,26 +221,28 @@ public class KermetaOutline extends ContentOutlinePage {
         TreeViewer treeViewer = getTreeViewer();
 
         if (treeViewer != null) {
-            if (editor.getMcunit() == null) {
-                //treeViewer.setInput("Nothing to display");
-                return;
-            } else {
+            //if (getKermetaUnit() == null) {
+        	if ( editor != null ) {
+            	if ( editor.isTypechecking )
+            		treeViewer.setInput("The file is being typeched.");
+        	} else {
+            	//} else {
                 
                 // save expanded elements
-                Object[] expended = treeViewer.getExpandedElements();
-
-                Control control = treeViewer.getControl();
-                if (control != null && !control.isDisposed()) {
-                    control.setRedraw(false);
-                    treeViewer.setInput(editor.getMcunit());
-                    treeViewer.expandToLevel(1);
-                    
-                    // Restore expanded elements
-                   // treeViewer.setComparer(fNamedElementComparer);
-                    treeViewer.setExpandedElements(expended);
-                    
-                    control.setRedraw(true);
-                }
+	                Object[] expended = treeViewer.getExpandedElements();
+	
+	                Control control = treeViewer.getControl();
+	                if (control != null && !control.isDisposed()) {
+	                    control.setRedraw(false);
+	                    treeViewer.setInput(getKermetaUnit());
+	                    treeViewer.expandToLevel(1);
+	                    
+	                    // Restore expanded elements
+	                   // treeViewer.setComparer(fNamedElementComparer);
+	                    treeViewer.setExpandedElements(expended);
+	                    
+	                    control.setRedraw(true);
+	            }
             }
         }
     }

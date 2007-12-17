@@ -1,4 +1,4 @@
-/* $Id: OutlineContentProvider.java,v 1.7 2007-09-11 12:32:19 dvojtise Exp $
+/* $Id: OutlineContentProvider.java,v 1.8 2007-12-17 14:05:11 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineContentProvider.java
 * License : EPL
@@ -47,7 +47,7 @@ public class OutlineContentProvider implements ITreeContentProvider {
 	    
 	    if ( parentElement instanceof PackageItem )
 	    	return ((PackageItem) parentElement).getTypeDefinitions().toArray();
-		if (parentElement instanceof OutlineItem) 
+		if (parentElement instanceof ModelElementOutlineItem) 
 			return ((OutlineItem)parentElement).getChildren();
 		else if (parentElement instanceof KermetaUnit) 
 			return getElements(parentElement);
@@ -61,7 +61,7 @@ public class OutlineContentProvider implements ITreeContentProvider {
 	public Object getParent(Object element) {
 		if ( element instanceof PackageItem )
 			return null;
-		return ((OutlineItem)element).parent;
+		return ((ModelElementOutlineItem)element).parent;
 	}
 	/**
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#hasChildren(java.lang.Object)
@@ -82,67 +82,73 @@ public class OutlineContentProvider implements ITreeContentProvider {
 	    
 	    try {
 	    
-	    if (!(inputElement instanceof KermetaUnit) || inputElement == null) {
-	        Object[] o = new Object[1];
-	        o[0] = "error creating outline";
-	    }
-		KermetaUnit unit = (KermetaUnit)inputElement;
-		ArrayList <PackageItem> result = new ArrayList <PackageItem> ();
-		
-		Map <String, PackageItem> packages = new HashMap <String, PackageItem> ();
-		
-		if ( outline.prefShowImported() ) {
-			for ( Package p : (List<Package>) unit.getExternalPackages() ) {
+		    if ( ! (inputElement instanceof KermetaUnit) ) {
+		    	Object[] o = new Object[1];
+		    	if ( inputElement instanceof String ) {
+			        o[0] = new NonModelElementItem( (String) inputElement);		    				    		
+		    	} else {
+			        o[0] = new NonModelElementItem( "error creating outline" );		    		
+		    	}
+		    	return o;
+		    }
+
+			KermetaUnit unit = (KermetaUnit)inputElement;
+			ArrayList <PackageItem> result = new ArrayList <PackageItem> ();
+			
+			Map <String, PackageItem> packages = new HashMap <String, PackageItem> ();
+			
+			if ( outline.prefShowImported() ) {
+				for ( Package p : (List<Package>) unit.getExternalPackages() ) {
+					String qualifiedName = NamedElementHelper.getQualifiedName(p);
+					PackageItem item = packages.get( qualifiedName );
+					if ( item == null ) {
+						item = new PackageItem( qualifiedName, false, outline, p );
+						item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
+						packages.put( qualifiedName, item );
+						result.add( item );
+					} else {
+						item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
+						item.getPackageParts().add(p);	// the item must know about all its parts
+					}
+				}	
+			}
+			
+			for ( Package p : (List<Package>) unit.getInternalPackages() ) {
 				String qualifiedName = NamedElementHelper.getQualifiedName(p);
 				PackageItem item = packages.get( qualifiedName );
 				if ( item == null ) {
-					item = new PackageItem( qualifiedName, false, outline, p );
+					item = new PackageItem( qualifiedName, true, outline, p );
 					item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
-					packages.put( qualifiedName, item );
-					result.add( item );
+					 result.add( item );
+					 packages.put( qualifiedName, item );
 				} else {
 					item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
 					item.getPackageParts().add(p);	// the item must know about all its parts
 				}
 			}	
-		}
 		
-		for ( Package p : (List<Package>) unit.getInternalPackages() ) {
-			String qualifiedName = NamedElementHelper.getQualifiedName(p);
-			PackageItem item = packages.get( qualifiedName );
-			if ( item == null ) {
-				item = new PackageItem( qualifiedName, true, outline, p );
-				item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
-				 result.add( item );
-				 packages.put( qualifiedName, item );
-			} else {
-				item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
-				item.getPackageParts().add(p);	// the item must know about all its parts
-			}
-		}	
-	
-		
-	   /* Iterator it = unit.getPackages().iterator();
-	    while(it.hasNext()) {
-	    	
-	    	
-	    	
-	        Package pack = (Package)it.next();
-	       
-            OutlineItem item = new OutlineItem(pack, null, outline);
-            
-            
-            if (!outline.prefPackageTree() || pack.getNestingPackage() == null) {
-                if(outline.prefShowImported() || !item.isPackageFullyImported()) {
-	                result.add(item);
+			
+		   /* Iterator it = unit.getPackages().iterator();
+		    while(it.hasNext()) {
+		    	
+		    	
+		    	
+		        Package pack = (Package)it.next();
+		       
+	            OutlineItem item = new OutlineItem(pack, null, outline);
+	            
+	            
+	            if (!outline.prefPackageTree() || pack.getNestingPackage() == null) {
+	                if(outline.prefShowImported() || !item.isPackageFullyImported()) {
+		                result.add(item);
+		            }
 	            }
-            }
-	    }*/
-	    
-		if (outline.prefSortedOutline())
-		    Collections.sort(result);
-		
-		return result.toArray();
+		    }*/
+		    
+			if (outline.prefSortedOutline())
+			    Collections.sort(result);
+			
+			return result.toArray();
 		
 	    }
 	    catch(Throwable t) {
