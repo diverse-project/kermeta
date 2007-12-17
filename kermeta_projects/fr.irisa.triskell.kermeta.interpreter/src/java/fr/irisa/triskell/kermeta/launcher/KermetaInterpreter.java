@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.42 2007-11-30 13:17:33 ftanguy Exp $
+/* $Id: KermetaInterpreter.java,v 1.43 2007-12-17 10:46:15 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -45,7 +45,6 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
@@ -100,6 +99,13 @@ public class KermetaInterpreter {
 	    initializeEntryPoint();
 	}
 	
+	/**
+	 * create an interpreter from a Kermeta file, the intermediate files are created in the bin directory (useful, if 
+	 * the kermeta file is in a plugin
+	 * @param uri_unit
+	 * @param binDirectory
+	 * @param tracer
+	 */
 	public KermetaInterpreter(String uri_unit, String binDirectory, Tracer tracer)
 	{
 	    try {
