@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaTextEditor.java,v 1.1 2007-12-17 14:05:08 ftanguy Exp $
+/*$Id: KermetaTextEditor.java,v 1.2 2007-12-17 16:49:00 gperroui Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaTextEditor.java
 * License : EPL
@@ -341,7 +341,8 @@ public class KermetaTextEditor extends TextEditor implements Interest {
 				
 				if ( outline != null )
 					outline.update();
-			}	
+			} else if ( kermetaUnit == null )
+				kermetaUnit = currentKermetaUnit;
 		}
 	}
 	
