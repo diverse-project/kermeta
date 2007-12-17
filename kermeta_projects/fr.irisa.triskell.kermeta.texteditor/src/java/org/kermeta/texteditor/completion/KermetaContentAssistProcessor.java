@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaContentAssistProcessor.java,v 1.1 2007-12-17 14:05:09 ftanguy Exp $
+/*$Id: KermetaContentAssistProcessor.java,v 1.2 2007-12-17 15:24:17 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -341,7 +341,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	final static private String ATTRIBUTE = "attribute";
 	
 	final static private String ATTRIBUTE_DECLARATION = "attribute - template";
-	final static private String ATTRIBUTE_DECLARATION_SUBSTITUTION = "/**\n*\n*/\nattribute attributeName : attributeType";
+	final static private String ATTRIBUTE_DECLARATION_SUBSTITUTION = "/**\n*\n*/\nattribute attributeName : AttributeType";
 	
 	private void getAttributeProposal(List<KermetaCompletionProposal> proposals, int replacementOffset, String stringToMatch) {
 		String regex = stringToMatch + ".+";
@@ -363,7 +363,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	final static private String REFERENCE = "reference";
 
 	final static private String REFERENCE_DECLARATION = "reference - template";
-	final static private String REFERENCE_DECLARATION_SUBSTITUTION = "/**\n*\n*/\nreference referenceName : referenceType";
+	final static private String REFERENCE_DECLARATION_SUBSTITUTION = "/**\n*\n*/\nreference referenceName : ReferenceType";
 	
 	private void getReferenceProposal(List<KermetaCompletionProposal> proposals, int replacementOffset, String stringToMatch) {
 		String regex = stringToMatch + ".+";
@@ -375,6 +375,46 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		String regex = stringToMatch + ".+";
 		if ( REFERENCE_DECLARATION_SUBSTITUTION.replace("\n", "").matches(regex) )
 			proposals.add( new KermetaCompletionProposal(REFERENCE_DECLARATION_SUBSTITUTION, replacementOffset - stringToMatch.length(), stringToMatch.length(), REFERENCE_DECLARATION_SUBSTITUTION.length(), KermetaIconsGreen.PROPERTY, REFERENCE_DECLARATION, null, null, null) );
+	}
+	
+	/*
+	 * 
+	 * Properties.
+	 * 
+	 */
+	final static private String PROPERTY = "property";
+
+	final static private String PROPERTY_DECLARATION = "property - template";
+	final static private String PROPERTY_DECLARATION_SUBSTITUTION = "/**\n*\n*/\nproperty propertyName : PropertyType";
+
+	final static private String PROPERTY_GETTER_DECLARATION = "property with getter - template";
+	final static private String PROPERTY_GETTER_DECLARATION_SUBSTITUTION = "/**\n*\n*/\nproperty propertyName : PropertyType\ngetter is do\nend\n";
+	
+	final static private String PROPERTY_GETTER_SETTER_DECLARATION = "property with getter and setter - template";
+	final static private String PROPERTY_GETTER_SETTER_DECLARATION_SUBSTITUTION = "/**\n*\n*/\nproperty propertyName : PropertyType\ngetter is do\nend\nsetter is do\nend\n";
+	
+	private void getPropertyProposal(List<KermetaCompletionProposal> proposals, int replacementOffset, String stringToMatch) {
+		String regex = stringToMatch + ".+";
+		if ( PROPERTY.replace("\n", "").matches(regex) )
+			proposals.add( new KermetaCompletionProposal(PROPERTY, replacementOffset - stringToMatch.length(), 0, PROPERTY.length(), KermetaIconsGreen.PROPERTY, PROPERTY + " - keyword", null, null, null) );
+	}
+	
+	private void getPropertyDeclarationProposal(List<KermetaCompletionProposal> proposals, int replacementOffset, String stringToMatch) {
+		String regex = stringToMatch + ".+";
+		if ( PROPERTY_DECLARATION_SUBSTITUTION.replace("\n", "").matches(regex) )
+			proposals.add( new KermetaCompletionProposal(PROPERTY_DECLARATION_SUBSTITUTION, replacementOffset - stringToMatch.length(), stringToMatch.length(), PROPERTY_DECLARATION_SUBSTITUTION.length(), KermetaIconsGreen.PROPERTY_DERIVED, PROPERTY_DECLARATION, null, null, null) );
+	}
+	
+	private void getPropertyGetterDeclarationProposal(List<KermetaCompletionProposal> proposals, int replacementOffset, String stringToMatch) {
+		String regex = stringToMatch + ".+";
+		if ( PROPERTY_GETTER_DECLARATION_SUBSTITUTION.replace("\n", "").matches(regex) )
+			proposals.add( new KermetaCompletionProposal(PROPERTY_GETTER_DECLARATION_SUBSTITUTION, replacementOffset - stringToMatch.length(), stringToMatch.length(), PROPERTY_GETTER_DECLARATION_SUBSTITUTION.length(), KermetaIconsGreen.PROPERTY_DERIVED, PROPERTY_GETTER_DECLARATION, null, null, null) );
+	}
+	
+	private void getPropertyGetterSetterDeclarationProposal(List<KermetaCompletionProposal> proposals, int replacementOffset, String stringToMatch) {
+		String regex = stringToMatch + ".+";
+		if ( PROPERTY_GETTER_SETTER_DECLARATION_SUBSTITUTION.replace("\n", "").matches(regex) )
+			proposals.add( new KermetaCompletionProposal(PROPERTY_GETTER_SETTER_DECLARATION_SUBSTITUTION, replacementOffset - stringToMatch.length(), stringToMatch.length(), PROPERTY_GETTER_SETTER_DECLARATION_SUBSTITUTION.length(), KermetaIconsGreen.PROPERTY_DERIVED, PROPERTY_GETTER_SETTER_DECLARATION, null, null, null) );
 	}
 	
 	/*
@@ -477,6 +517,11 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		getReferenceProposal(proposals, offset, stringToMatch);
 		getReferenceDeclarationProposal(proposals, offset, stringToMatch);
 
+		getPropertyProposal(proposals, offset, stringToMatch);
+		getPropertyDeclarationProposal(proposals, offset, stringToMatch);
+		getPropertyGetterDeclarationProposal(proposals, offset, stringToMatch);
+		getPropertyGetterSetterDeclarationProposal(proposals, offset, stringToMatch);
+		
 		getOperationProposal(proposals, offset, stringToMatch);
 		getAbstractOperationProposal(proposals, offset, stringToMatch);
 		
@@ -591,6 +636,12 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	private List<KermetaCompletionProposal> getKermetaCompletionProposalsForBlock(ITextViewer viewer, int offset, Block block, String stringToMatch) {
 		List<KermetaCompletionProposal> result = new ArrayList<KermetaCompletionProposal>();
 		
+		String regex = stringToMatch + ".+";
+		if ( SELF.matches(regex) )
+			result.add( new KermetaCompletionProposal(SELF, offset - stringToMatch.length(), 0, SELF.length()) );
+		if ( RESULT.matches(regex) )
+			result.add( new KermetaCompletionProposal(RESULT, offset - stringToMatch.length(), 0, RESULT.length()) );
+		
 		Block currentBlock = block;
 		boolean goOn = true;
 		while ( goOn ) {
@@ -598,7 +649,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 			for ( Expression expression : currentBlock.getStatement() ) {
 				if ( expression instanceof VariableDecl ) {
 					VariableDecl declaration = (VariableDecl) expression;
-					String regex = stringToMatch + ".+";
+					regex = stringToMatch + ".+";
 					if ( declaration.getIdentifier().matches(regex) ) {
 						KM2KMTPrettyPrinter prettyprinter = new KM2KMTPrettyPrinter();
 						String type = prettyprinter.ppTypeFromMultiplicityElement( declaration.getType() );
@@ -616,7 +667,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				Loop l = (Loop) currentBlock.eContainer();
 				if ( l.getInitialization() instanceof VariableDecl ) {
 					VariableDecl declaration = (VariableDecl) l.getInitialization();
-					String regex = stringToMatch + ".+";
+					regex = stringToMatch + ".+";
 					if ( declaration.getIdentifier().matches(regex) ) {
 						KM2KMTPrettyPrinter prettyprinter = new KM2KMTPrettyPrinter();
 						String type = prettyprinter.ppTypeFromMultiplicityElement( declaration.getType() );
@@ -655,6 +706,9 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		return result;
 	}
 
+	static final private String SELF = "self";
+	
+	static final private String RESULT = "result";
 	
 	private void addCallableFeatures(List<KermetaCompletionProposal> result, int offset, ClassDefinition cdef, String stringToMatch) {
 		/*
@@ -744,7 +798,14 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 					declarations.add( (VariableDecl) o );
 			if ( currentBlock.eContainer() instanceof Block )
 				currentBlock = (Block) currentBlock.eContainer();
-			else
+			else if ( currentBlock.eContainer() instanceof Conditional )
+				currentBlock = (Block) currentBlock.eContainer().eContainer();
+			else if ( currentBlock.eContainer() instanceof Loop ) {
+				Loop loop = (Loop) currentBlock.eContainer();
+				if ( loop.getInitialization() instanceof VariableDecl )
+					declarations.add( (VariableDecl) loop.getInitialization() );
+				currentBlock = (Block) loop.eContainer();
+			} else
 				goOn = false;
 		}
 		
@@ -763,20 +824,44 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				else
 					System.out.println();
 			}
+
+			boolean found = false;
+			
+			/*
+			 * 
+			 * Looking for self call.
+			 * 
+			 */
+			if ( s.equals(SELF) ) {
+				Class c = StructureFactory.eINSTANCE.createClass();
+				c.setTypeDefinition( cdef );
+				currentType = c;
+				found = true;
+			}
+			
+			/*
+			 * 
+			 * Looking for result call.
+			 * 
+			 */
+			if ( s.equals(RESULT) ) {
+				Operation op = (Operation) currentBlock.eContainer();
+				currentType = op.getType();
+				found = true;
+			}
 			
 			/*
 			 * 
 			 * Look into the variables.
 			 * 
 			 */
-			boolean found = false;
 			Iterator<VariableDecl> it = declarations.iterator();
 			while ( ! found && it.hasNext() ) {
 				VariableDecl currentDeclaration = it.next();
 				//String regex = s + ".+";
 				//if ( currentDeclaration.getIdentifier().matches(regex) ) {
 				if ( currentDeclaration.getIdentifier().equals(s) ) {
-					currentType = currentDeclaration.getInitialization().getStaticType();
+					currentType = currentDeclaration.getStaticType();
 					found = true;
 				}
 			}
