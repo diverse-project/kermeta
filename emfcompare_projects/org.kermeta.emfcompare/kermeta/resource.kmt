@@ -8,7 +8,7 @@ using kermeta::standard
 using kermeta::persistence
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.1 2007-12-14 12:46:38 cfaucher Exp $
+ * $Id: resource.kmt,v 1.2 2007-12-17 13:34:06 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -54,7 +54,7 @@ class EMFResource inherits Resource
 	 */
 	method compare(rightResource : Resource) : Boolean is do
 		var bool : Boolean
-		bool ?= extern org::kermeta::emfcompare::basetypes::Resource.compare(self.uri,rightResource.uri)
+		bool ?= extern org::kermeta::emfcompare::compare::EMFCompareModel.compare(self.uri,rightResource.uri)
 		result := bool
 	end
 	
@@ -62,7 +62,7 @@ class EMFResource inherits Resource
 	 * Overrides Resource.getMatch()
 	 */	
 	method getMatch(rightResource : Resource, matchModelUri : String) : Resource is do
-		extern org::kermeta::emfcompare::basetypes::Resource.getMatch(self.uri, rightResource.uri, matchModelUri)
+		extern org::kermeta::emfcompare::compare::EMFCompareModel.getMatch(self.uri, rightResource.uri, matchModelUri)
 		var resource : Resource init EMFRepository.new.getResource(matchModelUri)
 		result := resource
 	end
@@ -71,7 +71,7 @@ class EMFResource inherits Resource
 	 * Overrides Resource.getDiff()
 	 */
 	method getDiff(rightResource : Resource, diffModelUri : String) : Resource is do
-		extern org::kermeta::emfcompare::basetypes::Resource.getDiff(self.uri, rightResource.uri, diffModelUri)
+		extern org::kermeta::emfcompare::compare::EMFCompareModel.getDiff(self.uri, rightResource.uri, diffModelUri)
 		var resource : Resource init EMFRepository.new.getResource(diffModelUri)
 		result := resource
 	end

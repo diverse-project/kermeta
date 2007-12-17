@@ -1,0 +1,74 @@
+/* ****************************************************************************
+ * $Id: compare.kmt,v 1.1 2007-12-17 13:34:06 cfaucher Exp $
+ * Project : org.kermeta.emfcompare
+ * File : compare.kmt
+ * License : EPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * Creation date : Dec. 17, 2007
+ * Authors :
+ *			Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+/**
+ * 
+ */
+  @uri "http://www.kermeta.org/kermeta/compare"
+package kermeta::compare;
+require kermeta
+using kermeta::standard
+using kermeta::persistence
+using kermeta::compare
+
+/**
+ * 
+ */
+abstract class CompareModel inherits kermeta::language::structure::Object
+{
+	/**
+	 * TODO
+	 */
+	operation compare(leftModelUri : String, rightModelUri : String) : Boolean is abstract
+	/**
+	 * TODO
+	 */
+	operation getMatch(leftModelUri : String, rightModelUri : String, matchModelUri : String) : Resource is abstract
+	/**
+	 * TODO
+	 */
+	operation getDiff(leftModelUri : String, rightModelUri : String, diffModelUri : String) : Resource is abstract
+}
+
+
+/**
+ *  
+ */
+class EMFCompareModel inherits CompareModel
+{
+	
+	/**
+	 * Overrides Resource.compare()
+	 */
+	method compare(leftModelUri : String, rightModelUri : String) : Boolean is do
+		var bool : Boolean
+		bool ?= extern org::kermeta::emfcompare::compare::EMFCompareModel.compare(leftModelUri, rightModelUri)
+		result := bool
+	end
+	
+	/**
+	 * Overrides Resource.getMatch()
+	 */	
+	method getMatch(leftModelUri : String, rightModelUri : String, matchModelUri : String) : Resource is do
+		extern org::kermeta::emfcompare::compare::EMFCompareModel.getMatch(leftModelUri, rightModelUri, matchModelUri)
+		var resource : Resource init EMFRepository.new.getResource(matchModelUri)
+		result := resource
+	end
+	
+	/**
+	 * Overrides Resource.getDiff()
+	 */
+	method getDiff(leftModelUri : String, rightModelUri : String, diffModelUri : String) : Resource is do
+		extern org::kermeta::emfcompare::compare::EMFCompareModel.getDiff(leftModelUri, rightModelUri, diffModelUri)
+		var resource : Resource init EMFRepository.new.getResource(diffModelUri)
+		result := resource
+	end
+}

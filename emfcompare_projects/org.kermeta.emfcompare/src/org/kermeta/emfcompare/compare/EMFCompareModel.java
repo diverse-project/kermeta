@@ -1,13 +1,13 @@
-/* $Id: Resource.java,v 1.2 2007-12-14 15:21:26 cfaucher Exp $
+/* $Id: EMFCompareModel.java,v 1.1 2007-12-17 13:34:06 cfaucher Exp $
  * Project   : org.kermeta.emfcompare
- * File      : Resource.java
+ * File      : EMFCompareModel.java
  * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
- * Creation date : Jul 6, 2005
- * Authors       : zdrey
+ * Creation date : Dec 17, 2007
+ * Authors       : Cyril Faucher <cfaucher@irisa.fr>
  */
-package org.kermeta.emfcompare.basetypes;
+package org.kermeta.emfcompare.compare;
 
 
 import java.io.IOException;
@@ -36,7 +36,7 @@ import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
 /**
  * This class is intended to "wrap" EMF Compare into kermeta.
  */
-public class Resource {
+public class EMFCompareModel {
     
     public static RuntimeObject getDiff(RuntimeObject self, RuntimeObject param0, RuntimeObject param1) {
 		
