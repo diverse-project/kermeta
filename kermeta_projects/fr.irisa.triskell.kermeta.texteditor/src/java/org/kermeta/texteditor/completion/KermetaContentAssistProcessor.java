@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaContentAssistProcessor.java,v 1.2 2007-12-17 15:24:17 ftanguy Exp $
+/*$Id: KermetaContentAssistProcessor.java,v 1.3 2007-12-17 16:58:12 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -15,7 +15,6 @@ package org.kermeta.texteditor.completion;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -39,14 +38,19 @@ import org.kermeta.texteditor.KermetaTextEditor;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.Conditional;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaParameter;
 import fr.irisa.triskell.kermeta.language.behavior.Loop;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
@@ -55,10 +59,7 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Using;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.texteditor.completion.CompletionItem;
-import fr.irisa.triskell.kermeta.texteditor.completion.NamedElementCompletionItem;
 import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.texteditor.icons.blue.KermetaIconsBlue;
 import fr.irisa.triskell.kermeta.texteditor.icons.green.KermetaIconsGreen;
@@ -638,9 +639,11 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		
 		String regex = stringToMatch + ".+";
 		if ( SELF.matches(regex) )
-			result.add( new KermetaCompletionProposal(SELF, offset - stringToMatch.length(), 0, SELF.length()) );
+			result.add( new KermetaCompletionProposal(SELF, offset - stringToMatch.length(), stringToMatch.length(), SELF.length()) );
 		if ( RESULT.matches(regex) )
-			result.add( new KermetaCompletionProposal(RESULT, offset - stringToMatch.length(), 0, RESULT.length()) );
+			result.add( new KermetaCompletionProposal(RESULT, offset - stringToMatch.length(), stringToMatch.length(), RESULT.length()) );
+		if ( STDIO.matches(regex) )
+			result.add( new KermetaCompletionProposal(STDIO, offset - stringToMatch.length(), stringToMatch.length(), STDIO.length()) );
 		
 		Block currentBlock = block;
 		boolean goOn = true;
@@ -677,6 +680,16 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 					}
 				}
 				currentBlock = (Block)l.eContainer();
+			} else if ( currentBlock.eContainer() instanceof LambdaExpression ) {
+				LambdaExpression lambda = (LambdaExpression) currentBlock.eContainer();
+				regex = stringToMatch + ".+";
+				for ( LambdaParameter parameter : lambda.getParameters() )
+					if ( parameter.getName().matches(regex) )
+						result.add( new KermetaCompletionProposal(parameter.getName(), offset-stringToMatch.length(), stringToMatch.length(), parameter.getName().length()) );
+				EObject o = currentBlock.eContainer();
+				while ( ! (o instanceof Block) )
+					o = o.eContainer();
+				currentBlock = (Block) o;
 			} else if ( ! (currentBlock.eContainer() instanceof Block) )
 				goOn = false;
 			else
@@ -710,6 +723,8 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	
 	static final private String RESULT = "result";
 	
+	static final private String STDIO = "stdio";
+	
 	private void addCallableFeatures(List<KermetaCompletionProposal> result, int offset, ClassDefinition cdef, String stringToMatch) {
 		/*
 		 * 
@@ -725,14 +740,14 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				String displayedString = property.getName() + " : " + type + " from " + KermetaModelHelper.NamedElement.qualifiedName( (NamedElement) property.eContainer() ) ;
 				if ( property.isIsComposite() ) {
 					if ( cdef.getOwnedAttribute().contains(property) )
-						temp.add( new KermetaCompletionProposal(property.getName(), offset - stringToMatch.length(), 0, property.getName().length(), KermetaIconsGreen.PROPERTY_CONTAINED, displayedString, null, null, property) );				
+						temp.add( new KermetaCompletionProposal(property.getName(), offset - stringToMatch.length(), stringToMatch.length(), property.getName().length(), KermetaIconsGreen.PROPERTY_CONTAINED, displayedString, null, null, property) );				
 					else
-						temp.add( new KermetaCompletionProposal(property.getName(), offset - stringToMatch.length(), 0, property.getName().length(), KermetaIconsBlue.PROPERTY_CONTAINED, displayedString, null, null, property) );				
+						temp.add( new KermetaCompletionProposal(property.getName(), offset - stringToMatch.length(), stringToMatch.length(), property.getName().length(), KermetaIconsBlue.PROPERTY_CONTAINED, displayedString, null, null, property) );				
 				} else {
 					if ( cdef.getOwnedAttribute().contains(property) )
-						temp.add( new KermetaCompletionProposal(property.getName(), offset - stringToMatch.length(), 0, property.getName().length(), KermetaIconsGreen.PROPERTY, displayedString, null, null, property) );
+						temp.add( new KermetaCompletionProposal(property.getName(), offset - stringToMatch.length(), stringToMatch.length(), property.getName().length(), KermetaIconsGreen.PROPERTY, displayedString, null, null, property) );
 					else
-						temp.add( new KermetaCompletionProposal(property.getName(), offset - stringToMatch.length(), 0, property.getName().length(), KermetaIconsBlue.PROPERTY, displayedString, null, null, property) );
+						temp.add( new KermetaCompletionProposal(property.getName(), offset - stringToMatch.length(), stringToMatch.length(), property.getName().length(), KermetaIconsBlue.PROPERTY, displayedString, null, null, property) );
 				}
 			}
 		}
@@ -751,13 +766,26 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 			if ( operation.getName().matches(regex) ) {
 				if ( cdef.getOwnedOperation().contains(operation) ) {
 					String displayedString = operation.getName() + " from " + NamedElementHelper.getQualifiedName( (NamedElement) operation.eContainer() );
-					String replacedString = operation.getName() + "()";
-					temp.add( new KermetaCompletionProposal(replacedString, offset - stringToMatch.length(), 0, replacedString.length(), KermetaIconsGreen.OPERATION, displayedString, null, null, operation) );				
+
+					String replacedString = operation.getName();
+					if ( (operation.getOwnedParameter().size() == 1) && (operation.getOwnedParameter().get(0) instanceof FunctionType) )
+						replacedString += "{ elem |\n}";
+					else
+						replacedString += "()";
+					
+					temp.add( new KermetaCompletionProposal(replacedString, offset - stringToMatch.length(), stringToMatch.length(), replacedString.length(), KermetaIconsGreen.OPERATION, displayedString, null, null, operation) );				
+				
 				} else {
 					if ( ! NamedElementHelper.getQualifiedName( (NamedElement) operation.eContainer() ).matches("kermeta::reflection.+") ) {
 						String displayedString = operation.getName() + " from " + NamedElementHelper.getQualifiedName( (NamedElement) operation.eContainer() );
-						String replacedString = operation.getName() + "()";
-						temp.add( new KermetaCompletionProposal(replacedString, offset - stringToMatch.length(), 0, replacedString.length(), KermetaIconsBlue.OPERATION, displayedString, null, null, operation) );				
+
+						String replacedString = operation.getName();
+						if ( (operation.getOwnedParameter().size() == 1) && (operation.getOwnedParameter().get(0).getType() instanceof FunctionType) )
+							replacedString += "{ elem |\n}";
+						else
+							replacedString += "()";
+						
+						temp.add( new KermetaCompletionProposal(replacedString, offset - stringToMatch.length(), stringToMatch.length(), replacedString.length(), KermetaIconsBlue.OPERATION, displayedString, null, null, operation) );				
 					}
 				}
 			}
@@ -790,6 +818,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		String[] splits = input.split("\\.");
 				
 		List<VariableDecl> declarations = new ArrayList<VariableDecl>();
+		List<LambdaParameter> lambdaParameters = new ArrayList<LambdaParameter>();
 		Block currentBlock = block;
 		boolean goOn = true;
 		while ( goOn ) {
@@ -805,6 +834,13 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				if ( loop.getInitialization() instanceof VariableDecl )
 					declarations.add( (VariableDecl) loop.getInitialization() );
 				currentBlock = (Block) loop.eContainer();
+			} else if ( currentBlock.eContainer() instanceof LambdaExpression ) {
+				LambdaExpression lambda = (LambdaExpression) currentBlock.eContainer();
+				lambdaParameters.addAll( lambda.getParameters() );
+				EObject o = lambda;
+				while ( ! (o instanceof Block) )
+					o = o.eContainer();
+				currentBlock = (Block) o;
 			} else
 				goOn = false;
 		}
@@ -847,6 +883,19 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 			if ( s.equals(RESULT) ) {
 				Operation op = (Operation) currentBlock.eContainer();
 				currentType = op.getType();
+				found = true;
+			}
+			
+			/*
+			 * 
+			 * Looking for stdio call.
+			 * 
+			 */
+			if ( s.equals(STDIO) ) {
+				TypeDefinition tdef = editor.getKermetaUnit().getTypeDefinitionByQualifiedName("kermeta::io::StdIO");
+				Class c = StructureFactory.eINSTANCE.createClass();
+				c.setTypeDefinition( (GenericTypeDefinition) tdef );
+				currentType = c;
 				found = true;
 			}
 			
@@ -918,6 +967,24 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 					}
 				}
 			}
+			
+			/*
+			 * 
+			 * Look into the lambda parameters call.
+			 * 
+			 */
+			if ( ! found ) {
+				Iterator<LambdaParameter> iterator = lambdaParameters.iterator();
+				while ( ! found && iterator.hasNext() ) {
+					LambdaParameter currentParameter = iterator.next();
+					if ( currentParameter.getName().equals(s) ) {
+						LambdaExpression expression = (LambdaExpression) currentParameter.eContainer();
+						ProductType productType = (ProductType) ((FunctionType) expression.getStaticType()).getLeft();
+						currentType = productType.getType().get(0);
+						found = true;
+					}
+				}
+			}
 		}
 				
 		return currentType;
@@ -966,15 +1033,23 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		} else
 			type = getType(stringToMatch, (Expression) e);
 		
+		String[] splits = stringToMatch.split("\\.");
+		
 		if ( type instanceof Class ) {
 			ClassDefinition cdef = (ClassDefinition) ((Class) type).getTypeDefinition();
-			addCallableFeatures(result, offset, cdef, "");
+			if ( splits.length > 1 )
+				addCallableFeatures(result, offset, cdef, splits[splits.length-1]);
+			else
+				addCallableFeatures(result, offset, cdef, "");				
 		} else if ( type instanceof PrimitiveType ) {
 			PrimitiveType primitiveType = (PrimitiveType) type;
 			Type instanceType = primitiveType.getInstanceType();
 			if ( instanceType instanceof Class ) {
 				ClassDefinition cdef = (ClassDefinition) ((Class) instanceType).getTypeDefinition();
-				addCallableFeatures(result, offset, cdef, "");
+				if ( splits.length > 1 )
+					addCallableFeatures(result, offset, cdef, splits[splits.length-1]);
+				else
+					addCallableFeatures(result, offset, cdef, "");
 			} else
 				System.out.println();
 		} else if ( type == null ) {
