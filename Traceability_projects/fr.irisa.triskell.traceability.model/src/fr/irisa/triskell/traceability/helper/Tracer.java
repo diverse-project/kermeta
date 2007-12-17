@@ -1,4 +1,4 @@
-/* $Id: Tracer.java,v 1.7 2007-11-30 16:20:45 ftanguy Exp $
+/* $Id: Tracer.java,v 1.8 2007-12-17 14:07:43 ftanguy Exp $
  * Project    : fr.irisa.triskell.traceability.model
  * File       : Tracer.java
  * License    : EPL
@@ -13,8 +13,11 @@
 package fr.irisa.triskell.traceability.helper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -133,6 +136,18 @@ public class Tracer {
 		sourceTextRef.setCharEndAt(charEndAt);
 		//traceResource.getContents().add(sourceTextRef);		
 		addTargetTrace(target, message, sourceTextRef);
+		
+		/*
+		 * 
+		 * Using the cache for fast search functionality.
+		 * 
+		 */
+		List<TextReference> references = textReferencesCache.get( sourceTextRef.getCharBeginAt() );
+		if ( references == null ) {
+			references = new ArrayList<TextReference>();
+			textReferencesCache.put(sourceTextRef.getCharBeginAt(), references );
+		}
+		references.add(sourceTextRef);
 	}
 	
 	/**
@@ -228,8 +243,11 @@ public class Tracer {
 		modelTrace.getMessages().add(tmessage);
 		modelTrace.getReferences().add(sourceRef);
 		modelTrace.getReferences().add(targetExtRef);
+		
 	}
 	
+	private Map<Integer, List<TextReference>> textReferencesCache = new HashMap<Integer, List<TextReference>>();
+		
 	public ModelReference getModelReference(EObject referedObject)
 	{
 		if (modelTrace ==  null)
@@ -337,8 +355,8 @@ public class Tracer {
 		if (modelTrace ==  null) return;
 	}
 	
-	private Set<TextReference> getTextReferences() {
-		Set <TextReference> textReferences = new HashSet <TextReference> ();
+	/*private List<TextReference> getTextReferences() {
+		List <TextReference> textReferences = new ArrayList<TextReference> ();
 		if ( modelTrace != null ) {
 			Iterator <Reference> iterator = modelTrace.getReferences().iterator();
 			while ( iterator.hasNext() ) {
@@ -348,48 +366,87 @@ public class Tracer {
 			}
 		}
 		return textReferences;
+	}*/
+	
+	public List <ModelReference> getModelReferences(int offset, int length, String uri) {
+
+		TextReference result = null;
+		List<TextReference> references = textReferencesCache.get(offset);
+		if ( references != null ) {	
+			for ( TextReference reference : references ) {
+
+				if ( result == null ) {
+					if ( reference.getCharEndAt() >= offset+length )
+						result = reference;
+				} else {
+					if ( reference.getCharEndAt() > result.getCharBeginAt() )
+						result = reference;
+				}
+						
+				/*if ( result == null ) {
+		
+					if ( reference.getFileURI().equals(uri) 
+					&& ( reference.getCharBeginAt() <= offset ) 
+					&& ( reference.getCharEndAt() >= offset+length ) )
+					
+					result = reference;
+						
+				} else {
+				
+					if ( reference.getFileURI().equals(uri) 
+						&& ( reference.getCharBeginAt() < offset ) && ( reference.getCharBeginAt() >= result.getCharBeginAt() ) 
+						&& ( reference.getCharEndAt() > offset+length ) && ( reference.getCharEndAt() <= result.getCharEndAt() ) )
+					
+					result = reference;
+				
+				}*/
+			}
+
+			if ( result != null ) {
+				List <ModelReference> modelReferences = new ArrayList <ModelReference> ();
+				Iterator <Trace> iterator = result.getTargetTraces().iterator();
+				while ( iterator.hasNext() ) {
+					Trace currentTrace = iterator.next();
+					if ( currentTrace.getTargetReferences().get(0) instanceof ModelReference )
+						modelReferences.add( (ModelReference) currentTrace.getTargetReferences().get(0) );
+				}
+		
+				return modelReferences;
+			}
+		}
+		
+		return new ArrayList<ModelReference>();
 	}
 	
-	public Set <ModelReference> getModelReferences(int offset, int length, String uri) {
-		
-		Set <TextReference> textReferences = getTextReferences();
-		
+	/*public ModelReference findFirstReference(int offset, int length, String uri) {
+
 		TextReference result = null;
 		
-		for ( TextReference reference : textReferences ) {
-			
-			if ( result == null ) {
-				
+		Iterator<Reference> it = modelTrace.getReferences().iterator();
+		while ( (result == null) && it.hasNext() ) {
+			Reference currentReference = it.next();		
+			if ( currentReference instanceof TextReference ) {
+				TextReference reference = (TextReference) currentReference;
+		
 				if ( reference.getFileURI().equals(uri) 
-				&& ( reference.getCharBeginAt() <= offset ) 
-				&& ( reference.getCharEndAt() >= offset+length ) )
-				
-				result = reference;
+					&& ( reference.getCharBeginAt() <= offset ) 
+					&& ( reference.getCharEndAt() >= offset+length ) )
 					
-			} else {
-			
-				if ( reference.getFileURI().equals(uri) 
-					&& ( reference.getCharBeginAt() < offset ) && ( reference.getCharBeginAt() >= result.getCharBeginAt() ) 
-					&& ( reference.getCharEndAt() > offset+length ) && ( reference.getCharEndAt() <= result.getCharEndAt() ) )
-				
-				result = reference;
-			
+					result = reference;
 			}
 		}
 
 		if ( result != null ) {
-			Set <ModelReference> modelReferences = new HashSet <ModelReference> ();
 			Iterator <Trace> iterator = result.getTargetTraces().iterator();
 			while ( iterator.hasNext() ) {
 				Trace currentTrace = iterator.next();
 				if ( currentTrace.getTargetReferences().get(0) instanceof ModelReference )
-					modelReferences.add( (ModelReference) currentTrace.getTargetReferences().get(0) );
+					return (ModelReference) currentTrace.getTargetReferences().get(0);
 			}
 		
-			return modelReferences;
 		}
 		
-		return new HashSet <ModelReference> ();
-	}
+		return null;
+	}*/
 	
 }
