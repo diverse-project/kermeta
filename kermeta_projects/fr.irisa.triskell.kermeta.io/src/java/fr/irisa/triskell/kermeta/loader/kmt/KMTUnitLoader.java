@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.19 2007-11-30 08:11:05 dvojtise Exp $
+/*$Id: KMTUnitLoader.java,v 1.20 2007-12-17 16:54:58 ftanguy Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -261,6 +261,7 @@ public class KMTUnitLoader extends AbstractKermetaUnitLoader {
 				return;
 			} catch (TokenStreamException e) {
 				kermetaUnit.parsingError(e);
+				return;
 			} catch (IOException e) {
 				kermetaUnit.error("The file " + kermetaUnit.getUri() + " does not exist.");
 				return;
