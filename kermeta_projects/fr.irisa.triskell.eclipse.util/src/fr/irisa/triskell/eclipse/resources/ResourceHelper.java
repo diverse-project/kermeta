@@ -1,4 +1,4 @@
-/*$Id: ResourceHelper.java,v 1.18 2007-12-13 09:58:09 cfaucher Exp $
+/*$Id: ResourceHelper.java,v 1.19 2007-12-17 10:34:44 cfaucher Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -63,9 +63,9 @@ public class ResourceHelper {
 		String cleanPath = unifiedSepratorResourcePath;
 		if ( unifiedSepratorResourcePath.matches("platform:/resource.*") )
 			cleanPath = URIHelper.getPathFromPlatformURI(resourcePath);
-		else if ( unifiedSepratorResourcePath.matches("platform:/plugin.*") )
+		else /*if ( unifiedSepratorResourcePath.matches("platform:/plugin.*") )
 			cleanPath = URIHelper.getPathFromPlatformURI(resourcePath);
-		else if ( unifiedSepratorResourcePath.matches("file:/.*") ){
+		else*/ if ( unifiedSepratorResourcePath.matches("file:/.*") ){
 			String rootPath = ""; // path of the workspace root that we will remove from the resource path
 			
 			// deal with windows path
