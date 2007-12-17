@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.15 2007-09-13 09:04:49 ftanguy Exp $
+/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.16 2007-12-17 16:57:53 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMPostfixExpressionBuilder.java
  * License : EPL
@@ -106,15 +106,15 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 				// Patch that avoids to create a Block element in case the body of the lambda expression
 				// contains a single expression.
 				//OLD: current_le.setBody(createBlock(lambdaPostfix.getExpression()));
-				if(lambdaPostfix.getExpression().getChildCount() > 1) {
-					current_le.setBody( createBlock(lambdaPostfix.getExpression()) );
-				} else {
+				//if(lambdaPostfix.getExpression().getChildCount() > 1) {
+					current_le.setBody( createBlock(lambdaPostfix) );
+				//} else {
 
-					FExpression fExp = (FExpression) lambdaPostfix.getExpression().getChild(0);
-					fr.irisa.triskell.kermeta.language.behavior.Expression expr =  BehaviorFactory.eINSTANCE.createEmptyExpression();
-					builder.storeTrace(expr, fExp);
-					current_le.setBody( KMT2KMExperessionBuilder.process(context, fExp, builder, monitor) );
-				}
+				//	FExpression fExp = (FExpression) lambdaPostfix.getExpression().getChild(0);
+				//	fr.irisa.triskell.kermeta.language.behavior.Expression expr =  BehaviorFactory.eINSTANCE.createEmptyExpression();
+					//builder.storeTrace(expr, fExp);
+				//	current_le.setBody( KMT2KMExperessionBuilder.process(context, fExp, builder, monitor) );
+				//}
 			} else {
 				//builder.messages.addMessage(new KMTUnitLoadError("A lambda expression should have at least one expression in its body.", lambdaPostfix));
 				builder.error("A lambda expression should have at least one expression in its body.", lambdaPostfix);
@@ -133,11 +133,11 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 		return false;
 	}
 	
-	protected fr.irisa.triskell.kermeta.language.behavior.Block createBlock(FExpressionLst explst) {
+	protected fr.irisa.triskell.kermeta.language.behavior.Block createBlock(LambdaPostfix lambda) {
 		fr.irisa.triskell.kermeta.language.behavior.Block block =  BehaviorFactory.eINSTANCE.createBlock();
-		if (explst != null) {
-			builder.storeTrace(block,explst);
-			block.getStatement().addAll(KMT2KMExperessionListBuilder.process(context, explst, builder, monitor));
+		if (lambda.getExpression() != null) {
+			builder.storeTrace(block,lambda);
+			block.getStatement().addAll(KMT2KMExperessionListBuilder.process(context, lambda.getExpression(), builder, monitor));
 		}
 		return block;
 	}
