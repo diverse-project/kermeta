@@ -1,4 +1,4 @@
-/*$Id: KermetadocView.java,v 1.1 2007-09-11 12:29:51 dvojtise Exp $
+/*$Id: KermetadocView.java,v 1.2 2007-12-17 14:09:01 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -19,7 +19,6 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ColorRegistry;
 import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTError;
 import org.eclipse.swt.browser.Browser;
@@ -51,6 +50,8 @@ import fr.irisa.triskell.kermeta.ui.textPresentation.KMTDocHTMLPrettyPrinter;
  */
 public class KermetadocView extends ViewPart implements KermetaEditorEventListener {
 
+	final static public String ID = "fr.irisa.triskell.kermeta.ui.views.kermetadoc";
+	
 	/** The Browser widget */
 	private boolean fIsUsingBrowserWidget;
 	/** The HTML widget. */
@@ -321,5 +322,9 @@ public class KermetadocView extends ViewPart implements KermetaEditorEventListen
 			textEditorPlugin.registerListener(this);
 		}
 		
+	}
+
+	public void contentAssistSelectionChanged(fr.irisa.triskell.kermeta.language.structure.Object o) {
+		updateHTMLDocumentationFrom(o);
 	}
 }
