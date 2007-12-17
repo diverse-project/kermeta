@@ -1,4 +1,4 @@
-/* $Id: Iterator.java,v 1.2 2007-10-15 07:13:58 barais Exp $
+/* $Id: Iterator.java,v 1.3 2007-12-17 10:47:23 dvojtise Exp $
  * Implementation of Kermeta base type Iterator 
  */
 
@@ -23,10 +23,10 @@ public class Iterator {
 		return (RuntimeObject)getValue(self).next();
 	}
 
-	public static java.util.Iterator getValue(RuntimeObject iterator) {
+	public static java.util.Iterator<RuntimeObject> getValue(RuntimeObject iterator) {
 		if (!RuntimeObject.ITERATOR_VALUE.equals(iterator.getPrimitiveType()))
 			setValue(iterator, new ArrayList().iterator());
-		return (java.util.Iterator)iterator.getJavaNativeObject();
+		return (java.util.Iterator<RuntimeObject>)iterator.getJavaNativeObject();
 	}
 	
 	public static void setValue(RuntimeObject iterator, java.util.Iterator it) {
