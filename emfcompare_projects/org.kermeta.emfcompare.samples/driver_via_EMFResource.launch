@@ -2,7 +2,7 @@
 <launchConfiguration type="KermetaLaunchConfiguration">
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS" value=""/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_CLASSQNAME" value="class2RDBMS::Main"/>
-<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_FILENAME" value="\org.kermeta.emfcompare.samples\class2RDBMS\transfo\driver_via_EMFResource.kmt"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_FILENAME" value="\org.kermeta.emfcompare.samples\class2RDBMS\kermeta\driver_via_EMFResource.kmt"/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_OPERATIONNAME" value="main"/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_PROJECTNAME" value="org.kermeta.emfcompare.samples"/>
 <listAttribute key="org.eclipse.jdt.launching.CLASSPATH">

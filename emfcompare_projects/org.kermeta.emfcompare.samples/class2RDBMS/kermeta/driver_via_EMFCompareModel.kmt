@@ -1,4 +1,4 @@
-/* $Id: driver_via_EMFResource.kmt,v 1.1 2007-12-17 13:30:18 cfaucher Exp $
+/* $Id: driver_via_EMFCompareModel.kmt,v 1.1 2007-12-17 13:32:24 cfaucher Exp $
  * Creation date: December 17, 2007
  * License: EPL
  * Copyright: INRIA
@@ -12,13 +12,16 @@ package class2RDBMS;
 
 require kermeta
 require "../metamodels/ClassMM.ecore"
-require "platform:/plugin/org.kermeta.emfcompare/kermeta/resource.kmt"
+require "platform:/plugin/org.kermeta.emfcompare/kermeta/compare.kmt"
 require "http://www.eclipse.org/emf/compare/match/1.1"
 require "http://www.eclipse.org/emf/compare/diff/1.1"
 
 using kermeta::standard
 using kermeta::utils
 using kermeta::persistence
+
+using kermeta::compare
+
 using ClassMM
 
 using match
@@ -40,27 +43,17 @@ class Main
 		var uriDiff : String init "platform:/resource/org.kermeta.emfcompare.samples/.bin/result.diff"
 		
 		// Display the result of the comparison
-		stdio.writeln(loadClassModel(uri1).compare(loadClassModel(uri2)).toString)
+		stdio.writeln(EMFCompareModel.new.compare(uri1,uri2).toString)
 		
 		// Get the model of matching between the 2 models
-		var match_resource : Resource init loadClassModel(uri1).getMatch(loadClassModel(uri2),uriMatch)
+		var match_resource : Resource init EMFCompareModel.new.getMatch(uri1, uri2, uriMatch)
 		
 		// Get the diff model between the 2 models
-		var diff_resource : Resource init loadClassModel(uri1).getDiff(loadClassModel(uri2),uriDiff)
+		var diff_resource : Resource init EMFCompareModel.new.getDiff(uri1, uri2, uriDiff)
 		
 		// Display the root of the diff model
 		// instances.one should be a DiffModel
 		stdio.writeln(diff_resource.instances.one.toString)
 		
 	end
-	
-	// Load the model refered by the parameter "uri"
-	operation loadClassModel(uri : String) : Resource is do             
-
-   		var resource : Resource init EMFRepository.new.getResource(uri)
-       	resource.load()
-       
-       result := resource
-       
-   end
 }
