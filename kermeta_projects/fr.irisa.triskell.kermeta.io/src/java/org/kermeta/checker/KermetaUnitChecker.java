@@ -1,6 +1,4 @@
-
-
-/*$Id: KermetaUnitChecker.java,v 1.3 2007-10-01 15:14:45 ftanguy Exp $
+/*$Id: KermetaUnitChecker.java,v 1.4 2007-12-17 10:47:42 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	KermetaUnitChecker.java
 * License : EPL
