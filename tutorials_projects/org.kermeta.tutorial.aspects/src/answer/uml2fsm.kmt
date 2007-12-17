@@ -1,4 +1,4 @@
-/* $Id: uml2fsm.kmt,v 1.1 2007-12-07 13:18:45 vmahe Exp $
+/* $Id: uml2fsm.kmt,v 1.2 2007-12-17 16:47:06 dvojtise Exp $
  * Creation date: December 5, 2007
  * License:	EPL
  * Copyright: Inria 2007
@@ -8,8 +8,9 @@
 
 package uml;
 
-require kermeta
-require "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore"
+require kermeta 
+//require "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore"
+require "http://www.eclipse.org/uml2/2.1.0/UML"
 require "platform:/plugin/fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore"
 
 @aspect "true"

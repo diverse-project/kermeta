@@ -1,4 +1,4 @@
-/* $Id: translator.kmt,v 1.2 2007-12-07 13:19:16 vmahe Exp $
+/* $Id: translator.kmt,v 1.3 2007-12-17 16:47:06 dvojtise Exp $
  * Creation date: December 3, 2007
  * License:	EPL
  * Copyright: INRIA 2007
@@ -11,7 +11,8 @@
 package uml2fsm;
 
 require kermeta
-require "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore"
+//require "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore"
+require "http://www.eclipse.org/uml2/2.1.0/UML"
 require "platform:/plugin/fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore"
 
 class Translator
@@ -80,7 +81,7 @@ class Translator
 		var outRepo : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
 		var outResource : kermeta::persistence::Resource
 		// Rem : .bin/ dir => relative paths are non trivial.... 
-		outResource := repo.createResource("platform:/resource/org.kermeta.formation.basics/model/MyStateMachine.fsm",
+		outResource := repo.createResource("platform:/resource/org.kermeta.tutorial.aspects/model/MyStateMachine.fsm",
 											"platform:/plugin/fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore")
 		outResource.instances.add(resultFsm)
 		outResource.save

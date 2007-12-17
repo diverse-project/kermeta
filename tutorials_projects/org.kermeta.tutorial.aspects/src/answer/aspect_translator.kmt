@@ -1,4 +1,4 @@
-/* $Id: aspect_translator.kmt,v 1.1 2007-12-07 13:18:45 vmahe Exp $
+/* $Id: aspect_translator.kmt,v 1.2 2007-12-17 16:47:06 dvojtise Exp $
  * Creation date: December 5, 2007
  * License:
  * Copyright:
@@ -12,7 +12,8 @@ package root_package;
 
 
 require kermeta
-require "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore"
+//require "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore"
+require "http://www.eclipse.org/uml2/2.1.0/UML"
 require "uml2fsm.kmt"
 
 
