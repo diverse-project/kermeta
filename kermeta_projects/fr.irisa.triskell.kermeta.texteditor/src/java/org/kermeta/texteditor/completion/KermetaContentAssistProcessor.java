@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaContentAssistProcessor.java,v 1.3 2007-12-17 16:58:12 ftanguy Exp $
+/*$Id: KermetaContentAssistProcessor.java,v 1.4 2007-12-18 07:59:53 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -15,9 +15,11 @@ package org.kermeta.texteditor.completion;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -761,31 +763,35 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		 * 
 		 */
 		temp = new ArrayList<KermetaCompletionProposal>();
+		Map<String, Operation> processedOperations = new HashMap<String, Operation>();
 		for ( Operation operation : ClassDefinitionHelper.getAllOperations(cdef) ) {
-			String regex = stringToMatch + ".+";
-			if ( operation.getName().matches(regex) ) {
-				if ( cdef.getOwnedOperation().contains(operation) ) {
-					String displayedString = operation.getName() + " from " + NamedElementHelper.getQualifiedName( (NamedElement) operation.eContainer() );
-
-					String replacedString = operation.getName();
-					if ( (operation.getOwnedParameter().size() == 1) && (operation.getOwnedParameter().get(0) instanceof FunctionType) )
-						replacedString += "{ elem |\n}";
-					else
-						replacedString += "()";
-					
-					temp.add( new KermetaCompletionProposal(replacedString, offset - stringToMatch.length(), stringToMatch.length(), replacedString.length(), KermetaIconsGreen.OPERATION, displayedString, null, null, operation) );				
-				
-				} else {
-					if ( ! NamedElementHelper.getQualifiedName( (NamedElement) operation.eContainer() ).matches("kermeta::reflection.+") ) {
+			if ( ! processedOperations.containsKey(operation.getName()) ) {
+				processedOperations.put(operation.getName(), operation);
+				String regex = stringToMatch + ".+";
+				if ( operation.getName().matches(regex) ) {
+					if ( cdef.getOwnedOperation().contains(operation) ) {
 						String displayedString = operation.getName() + " from " + NamedElementHelper.getQualifiedName( (NamedElement) operation.eContainer() );
-
+	
 						String replacedString = operation.getName();
-						if ( (operation.getOwnedParameter().size() == 1) && (operation.getOwnedParameter().get(0).getType() instanceof FunctionType) )
+						if ( (operation.getOwnedParameter().size() == 1) && (operation.getOwnedParameter().get(0) instanceof FunctionType) )
 							replacedString += "{ elem |\n}";
 						else
 							replacedString += "()";
 						
-						temp.add( new KermetaCompletionProposal(replacedString, offset - stringToMatch.length(), stringToMatch.length(), replacedString.length(), KermetaIconsBlue.OPERATION, displayedString, null, null, operation) );				
+						temp.add( new KermetaCompletionProposal(replacedString, offset - stringToMatch.length(), stringToMatch.length(), replacedString.length(), KermetaIconsGreen.OPERATION, displayedString, null, null, operation) );				
+					
+					} else {
+						if ( ! NamedElementHelper.getQualifiedName( (NamedElement) operation.eContainer() ).matches("kermeta::reflection.+") ) {
+							String displayedString = operation.getName() + " from " + NamedElementHelper.getQualifiedName( (NamedElement) operation.eContainer() );
+	
+							String replacedString = operation.getName();
+							if ( (operation.getOwnedParameter().size() == 1) && (operation.getOwnedParameter().get(0).getType() instanceof FunctionType) )
+								replacedString += "{ elem |\n}";
+							else
+								replacedString += "()";
+							
+							temp.add( new KermetaCompletionProposal(replacedString, offset - stringToMatch.length(), stringToMatch.length(), replacedString.length(), KermetaIconsBlue.OPERATION, displayedString, null, null, operation) );				
+						}
 					}
 				}
 			}
