@@ -1,4 +1,4 @@
-/* $Id: TexteditorPlugin.java,v 1.14 2007-12-17 14:05:09 ftanguy Exp $
+/* $Id: TexteditorPlugin.java,v 1.15 2007-12-18 10:16:41 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : TexteditorPlugin.java
  * License : EPL
@@ -15,8 +15,6 @@ import java.util.HashSet;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
-
-import javax.annotation.PreDestroy;
 
 import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
