@@ -1,4 +1,4 @@
-/* $Id: NamedElementCompletionItem.java,v 1.5 2007-12-17 14:05:10 ftanguy Exp $
+/* $Id: NamedElementCompletionItem.java,v 1.6 2007-12-19 15:03:53 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : NamedElementCompletionItem.java
 * License : EPL
@@ -14,7 +14,7 @@ import java.util.Iterator;
 
 import org.eclipse.swt.graphics.Image;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.model.NamedElementHelper;
+import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Using;
@@ -59,7 +59,7 @@ public class NamedElementCompletionItem extends CompletionItem {
 
     
     public String getCompletionText() {
-    	String s = NamedElementHelper.qualifiedName(namedElement);
+    	String s = KermetaModelHelper.NamedElement.qualifiedName(namedElement);
     	boolean found = false;
     	Iterator<String> it = kermetaUnit.getUsings().iterator();
     	while ( ! found && it.hasNext() ) {

@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaContentAssistProcessor.java,v 1.8 2007-12-19 14:00:19 ftanguy Exp $
+/*$Id: KermetaContentAssistProcessor.java,v 1.9 2007-12-19 15:03:53 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -182,14 +182,12 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 								if ( (input.length() > 1) && input.charAt(input.length()-1) == '.' ) {
 									Type type = getType(input, (Block) previousReference.getRefObject());
 									if ( type instanceof Class ) {
-										ClassDefinition cdef = (ClassDefinition) ((Class) type).getTypeDefinition();
-										addCallableFeatures(proposals, offset, cdef, "");
+										addCallableFeatures(proposals, offset, (Class) type, "");
 									} else if ( type instanceof PrimitiveType ) {
 										PrimitiveType primitiveType = (PrimitiveType) type;
 										Type instanceType = primitiveType.getInstanceType();
 										if ( instanceType instanceof Class ) {
-											ClassDefinition cdef = (ClassDefinition) ((Class) instanceType).getTypeDefinition();
-											addCallableFeatures(proposals, offset, cdef, "");
+											addCallableFeatures(proposals, offset, (Class) type, "");
 										} else
 											System.out.println();
 									} else
@@ -208,14 +206,12 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 								if ( (input.length() > 1) && input.charAt(input.length()-1) == '.' ) {
 									Type type = getType(input, (Block) previousReference.getRefObject().eContainer());
 									if ( type instanceof Class ) {
-										ClassDefinition cdef = (ClassDefinition) ((Class) type).getTypeDefinition();
-										addCallableFeatures(proposals, offset, cdef, "");
+										addCallableFeatures(proposals, offset, (Class) type, "");
 									} else if ( type instanceof PrimitiveType ) {
 										PrimitiveType primitiveType = (PrimitiveType) type;
 										Type instanceType = primitiveType.getInstanceType();
 										if ( instanceType instanceof Class ) {
-											ClassDefinition cdef = (ClassDefinition) ((Class) instanceType).getTypeDefinition();
-											addCallableFeatures(proposals, offset, cdef, "");
+											addCallableFeatures(proposals, offset, (Class) type, "");
 										} else
 											System.err.println("erreur1");
 									} else
@@ -716,7 +712,9 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 			b = b.eContainer();
 		ClassDefinition cdef = (ClassDefinition) b.eContainer();
 		
-		addCallableFeatures(result, offset, cdef, stringToMatch);
+		Class c = StructureFactory.eINSTANCE.createClass();
+		c.setTypeDefinition( cdef );
+		addCallableFeatures(result, offset, c, stringToMatch);
 		
 		return result;
 	}
@@ -727,7 +725,8 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 	
 	static final private String STDIO = "stdio";
 	
-	private void addCallableFeatures(List<KermetaCompletionProposal> result, int offset, ClassDefinition cdef, String stringToMatch) {
+	private void addCallableFeatures(List<KermetaCompletionProposal> result, int offset, Class c, String stringToMatch) {
+		ClassDefinition cdef = (ClassDefinition) c.getTypeDefinition();
 		/*
 		 * 
 		 * Properties.
@@ -773,9 +772,14 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 						String displayedString = operation.getName() + " from " + NamedElementHelper.getQualifiedName( (NamedElement) operation.eContainer() );
 	
 						String replacedString = operation.getName();
-						if ( (operation.getOwnedParameter().size() == 1) && (operation.getOwnedParameter().get(0) instanceof FunctionType) )
-							replacedString += "{ elem |\n}";
-						else
+						if ( (operation.getOwnedParameter().size() == 1) && (operation.getOwnedParameter().get(0) instanceof FunctionType) ) {
+							replacedString += "{";
+							Type t = c.getTypeParamBinding().get(0).getType();
+							if ( t instanceof Class )
+								replacedString += Character.toLowerCase( ((Class) t).getTypeDefinition().getName().charAt(0) );
+							else
+								replacedString += " elem ";							replacedString += "|\n}";
+						} else
 							replacedString += "()";
 						
 						temp.add( new KermetaCompletionProposal(replacedString, offset - stringToMatch.length(), stringToMatch.length(), replacedString.length(), KermetaIconsGreen.OPERATION, displayedString, null, null, operation) );				
@@ -785,9 +789,15 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 							String displayedString = operation.getName() + " from " + NamedElementHelper.getQualifiedName( (NamedElement) operation.eContainer() );
 	
 							String replacedString = operation.getName();
-							if ( (operation.getOwnedParameter().size() == 1) && (operation.getOwnedParameter().get(0).getType() instanceof FunctionType) )
-								replacedString += "{ elem |\n}";
-							else
+							if ( (operation.getOwnedParameter().size() == 1) && (operation.getOwnedParameter().get(0).getType() instanceof FunctionType) ) {
+								replacedString += "{";
+								Type t = c.getTypeParamBinding().get(0).getType();
+								if ( t instanceof Class )
+									replacedString += Character.toLowerCase( ((Class) t).getTypeDefinition().getName().charAt(0) );
+								else
+									replacedString += " elem ";
+								replacedString += "|\n}";
+							} else
 								replacedString += "()";
 							
 							temp.add( new KermetaCompletionProposal(replacedString, offset - stringToMatch.length(), stringToMatch.length(), replacedString.length(), KermetaIconsBlue.OPERATION, displayedString, null, null, operation) );				
@@ -1042,22 +1052,22 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		String[] splits = stringToMatch.split("\\.");
 		
 		if ( type instanceof Class ) {
-			ClassDefinition cdef = (ClassDefinition) ((Class) type).getTypeDefinition();
+			Class c = (Class) type;
 			boolean finsihByPoint = stringToMatch.charAt( stringToMatch.length() -1 ) == '.' ? true : false;
 			if ( ! finsihByPoint && splits.length > 1 )
-				addCallableFeatures(result, offset, cdef, splits[splits.length-1]);
+				addCallableFeatures(result, offset, c, splits[splits.length-1]);
 			else
-				addCallableFeatures(result, offset, cdef, "");				
+				addCallableFeatures(result, offset, c, "");				
 		} else if ( type instanceof PrimitiveType ) {
 			PrimitiveType primitiveType = (PrimitiveType) type;
 			Type instanceType = primitiveType.getInstanceType();
 			if ( instanceType instanceof Class ) {
-				ClassDefinition cdef = (ClassDefinition) ((Class) instanceType).getTypeDefinition();
+				Class c = (Class) instanceType;
 				boolean finsihByPoint = stringToMatch.charAt( stringToMatch.length() -1 ) == '.' ? true : false;
 				if ( ! finsihByPoint && splits.length > 1 )
-					addCallableFeatures(result, offset, cdef, splits[splits.length-1]);
+					addCallableFeatures(result, offset, c, splits[splits.length-1]);
 				else
-					addCallableFeatures(result, offset, cdef, "");
+					addCallableFeatures(result, offset, c, "");
 			} else
 				System.out.println();
 		} else if ( type == null ) {

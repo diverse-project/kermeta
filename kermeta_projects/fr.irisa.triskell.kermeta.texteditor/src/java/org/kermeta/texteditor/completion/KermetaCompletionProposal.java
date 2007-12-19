@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaCompletionProposal.java,v 1.1 2007-12-17 14:05:09 ftanguy Exp $
+/*$Id: KermetaCompletionProposal.java,v 1.2 2007-12-19 15:03:53 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaCompletionProposal.java
 * License : EPL
@@ -160,8 +160,21 @@ public class KermetaCompletionProposal implements ICompletionProposal, ICompleti
 	}
 
 	public boolean validate(IDocument document, int offset, DocumentEvent event) {
-		// TODO Auto-generated method stub
-		return false;
+		String s = "";
+		int i = event.fOffset;
+		while ( i >= fReplacementOffset ) {
+			try {
+				s = document.getChar(i--) + s;
+			} catch (BadLocationException e) {
+				e.printStackTrace();
+			}
+		}
+		String regex = s.toLowerCase() + ".+";
+		boolean result = fReplacementString.replace("\n", "").toLowerCase().matches(regex);
+		if ( result )
+			fReplacementLength++;
+		
+		return result;
 	}
 }
 

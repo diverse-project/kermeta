@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaFastPartitioner.java,v 1.1 2007-12-17 14:05:08 ftanguy Exp $
+/*$Id: KermetaFastPartitioner.java,v 1.2 2007-12-19 15:03:53 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaFastPartioner.java
 * License : EPL
@@ -28,7 +28,7 @@ public class KermetaFastPartitioner extends FastPartitioner {
 	public void connect(IDocument document, boolean delayInitialise)
 	{
 	    super.connect(document, delayInitialise);
-	    printPartitions(document);
+	  //  printPartitions(document);
 	}
 
 	public void printPartitions(IDocument document)

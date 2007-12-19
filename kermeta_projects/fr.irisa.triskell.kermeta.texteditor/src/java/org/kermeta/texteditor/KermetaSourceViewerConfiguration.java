@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaSourceViewerConfiguration.java,v 1.1 2007-12-17 14:05:08 ftanguy Exp $
+/*$Id: KermetaSourceViewerConfiguration.java,v 1.2 2007-12-19 15:03:53 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaSourceViewerConfiguration.java
 * License : EPL
@@ -160,7 +160,7 @@ public class KermetaSourceViewerConfiguration extends SourceViewerConfiguration 
 	  //  assistant.setContentAssistProcessor(blockContentAssistProcessor, KermetaPartitionScanner.BLOCK);
 
 	    assistant.enableAutoActivation(true);
-	    assistant.setAutoActivationDelay(500);
+	    assistant.setAutoActivationDelay(400);
 		assistant.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);
 		assistant.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_BELOW);
 	   /*
