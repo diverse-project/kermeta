@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.17 2007-07-30 14:33:15 ftanguy Exp $
+/* $Id: KermetaGLPanel.java,v 1.18 2007-12-19 19:36:22 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -598,5 +598,11 @@ public class KermetaGLPanel extends GLPanel
 			return (String)hintpp.getHTMLDoc(typeDef);
 		else
 			return "not found";
+	}
+
+	public void contentAssistSelectionChanged(
+			fr.irisa.triskell.kermeta.language.structure.Object o) {
+		// TODO Auto-generated method stub
+		
 	}
 } 
