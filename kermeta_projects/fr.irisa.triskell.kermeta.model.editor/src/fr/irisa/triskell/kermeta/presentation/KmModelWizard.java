@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmModelWizard.java,v 1.7 2007-07-24 08:50:53 cfaucher Exp $
+ * $Id: KmModelWizard.java,v 1.8 2007-12-19 14:19:57 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -196,6 +196,9 @@ public class KmModelWizard extends Wizard implements INewWizard {
 				}
 			}
 			// begin Adding at the generated code
+			// FIXME CF it seems this customization is not required, because we are skipping
+			// this method in: validatePage()
+			// we/I could search if this method is used by other resources
 			initialObjectNames.add("ModelingUnit");
 			// finish Adding at the generated code
 			Collections.sort(initialObjectNames, CommonPlugin.INSTANCE.getComparator());
