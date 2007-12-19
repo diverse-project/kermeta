@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaContentAssistProcessor.java,v 1.4 2007-12-18 07:59:53 ftanguy Exp $
+/*$Id: KermetaContentAssistProcessor.java,v 1.5 2007-12-19 13:24:40 barais Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -116,7 +116,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 								trueOffset--;
 							else
 								goOn = false;
-						} catch (BadLocationException exception) {}
+						} catch (BadLocationException exception) {exception.printStackTrace();}
 					}
 					
 					/*
@@ -217,12 +217,12 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 											ClassDefinition cdef = (ClassDefinition) ((Class) instanceType).getTypeDefinition();
 											addCallableFeatures(proposals, offset, cdef, "");
 										} else
-											System.out.println();
+											System.err.println("erreur1");
 									} else
-										System.out.println();
+										System.err.println("erreur2");
 								}
 							} else
-								System.out.println();
+								System.err.println("erreur3");
 						} else if ( previousReference.getRefObject() instanceof Require && nextReference.getRefObject() instanceof ClassDefinition ) {
 							proposals.add( new KermetaCompletionProposal(REQUIRE, offset, 0, REQUIRE.length()) );
 							proposals.add( new KermetaCompletionProposal(USING, offset, 0, USING.length()) );
