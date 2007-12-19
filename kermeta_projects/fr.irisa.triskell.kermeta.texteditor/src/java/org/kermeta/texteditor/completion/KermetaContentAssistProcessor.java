@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaContentAssistProcessor.java,v 1.7 2007-12-19 13:28:33 ftanguy Exp $
+/*$Id: KermetaContentAssistProcessor.java,v 1.8 2007-12-19 14:00:19 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -165,7 +165,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 					String input = "";
 					int index = offset -1;
 					c = viewer.getDocument().getChar(index);
-					while ( ! Character.isWhitespace(c) ) {
+					while ( ! Character.isWhitespace(c) && (c != '|') ) {
 						input = c + input;
 						index--;
 						c = viewer.getDocument().getChar(index);
