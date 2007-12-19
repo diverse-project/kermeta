@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaContentAssistProcessor.java,v 1.5 2007-12-19 13:24:40 barais Exp $
+/*$Id: KermetaContentAssistProcessor.java,v 1.6 2007-12-19 13:26:43 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -1043,7 +1043,8 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		
 		if ( type instanceof Class ) {
 			ClassDefinition cdef = (ClassDefinition) ((Class) type).getTypeDefinition();
-			if ( splits.length > 1 )
+			boolean finsihByPoint = stringToMatch.charAt( stringToMatch.length() -1 ) == '.' ? true : false;
+			if ( ! finsihByPoint && splits.length > 1 )
 				addCallableFeatures(result, offset, cdef, splits[splits.length-1]);
 			else
 				addCallableFeatures(result, offset, cdef, "");				
