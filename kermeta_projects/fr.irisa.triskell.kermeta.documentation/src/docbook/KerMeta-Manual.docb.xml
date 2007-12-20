@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.26 2007-12-20 16:28:17 cfaucher Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.27 2007-12-20 16:38:52 cfaucher Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2007-12-20 16:28:17 $</pubdate>
+    <pubdate>$Date: 2007-12-20 16:38:52 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -93,7 +93,7 @@
         role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
       </ulink>
 
-       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v0.4.1 
+       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v1.0.0 
     </para></important>
 
     <tip><para>
