@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaContentAssistProcessor.java,v 1.9 2007-12-19 15:03:53 ftanguy Exp $
+/*$Id: KermetaContentAssistProcessor.java,v 1.10 2007-12-20 15:53:43 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -51,6 +51,7 @@ import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -204,7 +205,10 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 								addTypeDefintionsProposals(proposals, offset, input);
 							} else if ( previousReference.getRefObject() instanceof Expression ) {
 								if ( (input.length() > 1) && input.charAt(input.length()-1) == '.' ) {
-									Type type = getType(input, (Block) previousReference.getRefObject().eContainer());
+									EObject current = previousReference.getRefObject();
+									while ( ! (current instanceof Block) )
+										current = current.eContainer();
+									Type type = getType(input, (Block) current);
 									if ( type instanceof Class ) {
 										addCallableFeatures(proposals, offset, (Class) type, "");
 									} else if ( type instanceof PrimitiveType ) {
@@ -835,6 +839,7 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				
 		List<VariableDecl> declarations = new ArrayList<VariableDecl>();
 		List<LambdaParameter> lambdaParameters = new ArrayList<LambdaParameter>();
+		List<Parameter> parameters = new ArrayList<Parameter>();
 		Block currentBlock = block;
 		boolean goOn = true;
 		while ( goOn ) {
@@ -857,6 +862,10 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 				while ( ! (o instanceof Block) )
 					o = o.eContainer();
 				currentBlock = (Block) o;
+			} else if ( currentBlock.eContainer() instanceof Operation ) {
+				Operation operation = (Operation) currentBlock.eContainer();
+				parameters.addAll( operation.getOwnedParameter() );
+				goOn = false;
 			} else
 				goOn = false;
 		}
@@ -997,6 +1006,22 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 						LambdaExpression expression = (LambdaExpression) currentParameter.eContainer();
 						ProductType productType = (ProductType) ((FunctionType) expression.getStaticType()).getLeft();
 						currentType = productType.getType().get(0);
+						found = true;
+					}
+				}
+			}
+			
+			/*
+			 * 
+			 * Look into the parameters.
+			 * 
+			 */
+			if ( ! found ) {
+				Iterator<Parameter> iterator = parameters.iterator();
+				while ( ! found && iterator.hasNext() ) {
+					Parameter currentParameter = iterator.next();
+					if ( currentParameter.getName().equals(s) ) {
+						currentType = currentParameter.getType();
 						found = true;
 					}
 				}
