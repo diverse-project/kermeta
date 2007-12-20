@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.30 2007-11-21 14:13:04 ftanguy Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.31 2007-12-20 10:31:02 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -609,8 +609,14 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
         Tag operation = ModelingUnitHelper.getMainOperation( selectedUnit );
 	    Tag cls = ModelingUnitHelper.getMainClass( selectedUnit );
 
-	    selectedClassString = cls.getValue();
-	    String selectedOperationString = operation.getValue();
+	    // maybe there is no tag
+	    if(cls != null)
+	    	selectedClassString = cls.getValue();
+	    else
+	    	selectedClassString = "";
+	    String selectedOperationString = "";
+	    if(operation != null)
+	    	selectedOperationString = operation.getValue();
 	    
         getFileLocationText().setText(currentPath);
         getclassNameText().setText(selectedClassString);
