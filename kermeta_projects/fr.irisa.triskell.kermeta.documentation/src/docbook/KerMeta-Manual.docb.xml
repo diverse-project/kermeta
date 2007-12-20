@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.25 2007-12-20 16:10:41 cfaucher Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.26 2007-12-20 16:28:17 cfaucher Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2007-12-20 16:10:41 $</pubdate>
+    <pubdate>$Date: 2007-12-20 16:28:17 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -3888,11 +3888,11 @@ and op.name.indexOf("All")==-1}
       conflict between all the declared features.</para>
 
       <section>
-        <title>textual syntax for merging</title>
+        <title>Textual syntax for merging</title>
 
-        <important><para>
+        <!-- important><para>
            Since this feature is really successful and very well accepted, the surface syntax will change in the future release v1.0.0 in order to use a dedicated keyword instead of a simple annotation. The syntax presented here is valid only for prior versions. 
-        </para></important>
+        </para></important> -->
 
         <para>The merge is driven by the qualified name of the element to
         merge. Two classes will be merged if they have exactly the same
@@ -3936,8 +3936,7 @@ and op.name.indexOf("All")==-1}
 
          <para>In this sample, writing:</para>
 
-        <programlisting>
-// aspect1.kmt
+        <programlisting>// aspect1.kmt
 // this is the first aspect of class A
 @aspect "true"
 class A {
@@ -3946,13 +3945,11 @@ class A {
 // this aspect also declares a new class, visible only when requiring this aspect
 class Decoration{
 	attribute val : kermeta::standard::String
-}
-      	</programlisting>
+}</programlisting>
 
          
 
-        <programlisting>
-// base.kmt
+        <programlisting>// base.kmt
 // this is the base class
 class A {
 	attribute name : kermeta::standard::String
@@ -3961,13 +3958,11 @@ class A {
 	operation getName() : kermeta::standard::String is do
 		result := name
 	end
-}
-      	</programlisting>
+}</programlisting>
 
          
 
-        <programlisting>
-// aspect2.kmt
+        <programlisting>// aspect2.kmt
 require "base.kmt"
 require "aspect1.kmt"
 
@@ -3980,8 +3975,7 @@ class A {
 		result := "(" + id.toString + ")"
 		decorations.each{ decoration | result := result + "&lt;" + decoration.val+ "&gt;" }
 	end
-}
-      </programlisting>
+}</programlisting>
 
          
 
@@ -3989,15 +3983,17 @@ class A {
         base.kmt, class A doesn't know about attributes id or
         decorators...</para></note>
 
-         
+		<tip>
+			<para>In the previous example we aspectize a *.kmt, we could choose to aspectize the corresponding *.ecore file.</para>
+			<para>In fact, the both formats are available: *.kmt or *.ecore.</para>
+		</tip>         
 
         <para>from the point of view of aspect2.kmt (ie. any file that
         requires aspect2.kmt) is equivalent to write :</para>
 
          
 
-        <programlisting>
-class A {
+        <programlisting>class A {
 	attribute name : kermeta::standard::String
 	attribute decorations : Decoration[0..*]	
 	attribute id : kermeta::standard::Integer
@@ -4014,8 +4010,7 @@ class A {
 }
 class Decoration{
 	attribute val : kermeta::standard::String
-}
-      </programlisting>
+}</programlisting>
 
          
 
@@ -4041,8 +4036,7 @@ class Decoration{
         linkend="section_derived_properties.link">derived properties</link>
         cannot be redefined in several aspect classes.</para>
 
-        <programlisting>
-@aspect "true"        
+        <programlisting>@aspect "true"        
 class A {
 	//the feature is equivalent to the one define in the base class, so this is legal
 	attribute name : kermeta::standard::String	
@@ -4051,19 +4045,15 @@ class A {
 	operation getQualifiedName() : kermeta::standard::String 
 		post notVoid is not result == Void
 		is abstract
-} 
+}</programlisting>
 
-      	</programlisting>
-
-        <programlisting>
-class A {
+        <programlisting>class A {
 
 	attribute name : kermeta::standard::String
 	operation getQualifiedName() : kermeta::standard::String is do
 		result := name
 	end
-}
-      	</programlisting>
+}</programlisting>
       </section>
 
       <section>
@@ -4071,37 +4061,31 @@ class A {
 
         <para>This sample shows the use of the overloadable tag</para>
 
-        <programlisting>
-@aspect "true"        
+        <programlisting>@aspect "true"        
 class A {
 	
 	@overloadable "true"
 	operation getQualifiedName() : kermeta::standard::String 
 		post notVoid is not result == Void
 		is abstract
-}        
-      	</programlisting>
+}</programlisting>
 
-        <programlisting>
-@aspect "true"        
+        <programlisting>@aspect "true"        
 class A {
 	
 	@overloadable "true"
 	operation getQualifiedName() : kermeta::standard::String is do
 		raise kermeta::exceptions::NotImplementedException.new
 	end
-}
-      	</programlisting>
+}</programlisting>
 
-        <programlisting>
-class A {
+        <programlisting>class A {
 
 	attribute name : kermeta::standard::String
 	operation getQualifiedName() : kermeta::standard::String is do
 		result := name
 	end
-}
-      	</programlisting>
+}</programlisting>
 
         <para>In this sample, the first declaration of the operation is adds a
         post condition to the operation. As it is abstract, it isn't in
