@@ -1,6 +1,6 @@
 
 
-/*$Id: EclipseConsole.java,v 1.3 2007-11-30 08:05:33 dvojtise Exp $
+/*$Id: EclipseConsole.java,v 1.4 2007-12-20 09:12:12 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	EclipseConsole.java
 * License : EPL
@@ -16,6 +16,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.console.ConsolePlugin;
@@ -26,6 +28,12 @@ import fr.irisa.triskell.eclipse.console.messages.ConsoleMessage;
 
 public class EclipseConsole extends IOConsole {
 
+	/**		List of consoles to be able to remove some when there are too many.		*/
+	private static List<EclipseConsole> consoles = new ArrayList<EclipseConsole>();
+	
+	/**		Number maximum of consoles that can be displayed in the console view.	*/
+	private static final int CONSOLE_MAX = 3;
+	
 	/**
 	 * The IOConsole instance.
 	 */
@@ -55,6 +63,11 @@ public class EclipseConsole extends IOConsole {
 		ConsolePlugin.getDefault().getConsoleManager().addConsoles(new IConsole[]{ console });
 		ConsolePlugin.getDefault().getConsoleManager().showConsoleView(console);
 		console.activate();
+		if ( consoles.size() >= CONSOLE_MAX ) {
+			EclipseConsole consoleToRemove = consoles.remove(0);
+			ConsolePlugin.getDefault().getConsoleManager().removeConsoles( new IConsole[] {consoleToRemove.console} );
+		}
+		consoles.add(this);
 	}
 	
 	
@@ -62,7 +75,7 @@ public class EclipseConsole extends IOConsole {
 	 * This is a lazy initialization.
 	 * @return
 	 */
-	protected OutputStream getOutputStream() {
+	public OutputStream getOutputStream() {
 		if ( outputStream == null )
 			outputStream = console.newOutputStream();
 		return outputStream;
@@ -72,7 +85,7 @@ public class EclipseConsole extends IOConsole {
 	 * This is a lazy initialization.
 	 * @return
 	 */
-	protected BufferedReader getReader() {
+	public BufferedReader getReader() {
 		if ( reader == null )
 			reader = new BufferedReader( new InputStreamReader( console.getInputStream() ) );
 		return reader;
