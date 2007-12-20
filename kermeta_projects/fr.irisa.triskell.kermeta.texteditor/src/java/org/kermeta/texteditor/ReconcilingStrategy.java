@@ -1,6 +1,6 @@
 
 
-/*$Id: ReconcilingStrategy.java,v 1.1 2007-12-17 14:05:08 ftanguy Exp $
+/*$Id: ReconcilingStrategy.java,v 1.2 2007-12-20 08:24:24 gperroui Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	FoldingStrategy.java
 * License : EPL
@@ -23,6 +23,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
+import org.eclipse.ui.part.FileEditorInput;
 import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
@@ -140,7 +141,7 @@ public class ReconcilingStrategy implements IReconcilingStrategy, Interest {
 					
 					KermetaUnit kermetaUnit;
 					try {
-						kermetaUnit = KermetaUnitChecker.check( editor.getFile(), editor.getDocumentProvider().getDocument(null).get() );
+						kermetaUnit = KermetaUnitChecker.check( editor.getFile(), editor.getDocumentProvider().getDocument(editor.getEditorInput()).get() );
 						
 						if (monitor.isCanceled())
 							return Status.CANCEL_STATUS;
