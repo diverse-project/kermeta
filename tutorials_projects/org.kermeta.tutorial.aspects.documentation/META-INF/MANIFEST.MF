@@ -4,14 +4,13 @@ Bundle-Name: Kermeta tutorial on Aspect Programming
 Bundle-SymbolicName: org.kermeta.tutorial.aspects.documentation;singleton:=true
 Bundle-Version: 0.1.0
 Bundle-Vendor: INRIA
-Require-Bundle: fr.irisa.triskell.kermeta.samples.fsm,
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.help,
+ org.eclipse.uml2.uml,
+ fr.irisa.triskell.kermeta.samples.fsm,
  fr.irisa.triskell.kermeta.samples.fsm.edit,
  fr.irisa.triskell.kermeta.samples.fsm.editor,
- fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor,
- fr.irisa.triskell.kermeta.samples.fsm.model,
- org.eclipse.uml2.uml,
- org.eclipse.help,
- org.eclipse.core.runtime
+ fr.irisa.triskell.kermeta.samples.fsm.model
 Export-Package: org.kermeta.tutorial.aspects.documentation,
  org.kermeta.tutorial.aspects.documentation.wizards
 Eclipse-LazyStart: true
