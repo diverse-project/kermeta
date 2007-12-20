@@ -1,4 +1,4 @@
-/*$Id: Ket2Kmt.java,v 1.1 2007-12-07 05:31:58 cfaucher Exp $
+/*$Id: Ket2Kmt.java,v 1.2 2007-12-20 13:41:55 ffleurey Exp $
 * Project : fr.irisa.triskell.kermeta.ket
 * File : 	Ket2Kmt.java
 * License : EPL
@@ -10,6 +10,7 @@
 
 package fr.irisa.triskell.kermeta.ket.kpm.actions;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -23,12 +24,15 @@ import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.ket.Generator;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 
 public class Ket2Kmt implements IAction {
 
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
+
+	public void execute(Out out, Unit unit, IProgressMonitor monitor,
+			Map<String, Object> args, List<Parameter> parameters) {
 
 		if ( monitor.isCanceled() )
 			return;
