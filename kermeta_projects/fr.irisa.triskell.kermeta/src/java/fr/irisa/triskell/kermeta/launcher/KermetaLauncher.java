@@ -1,5 +1,5 @@
 
-/*$Id: KermetaLauncher.java,v 1.10 2007-11-30 21:08:35 dvojtise Exp $
+/*$Id: KermetaLauncher.java,v 1.11 2007-12-20 09:11:45 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta
  * File : 	KermetaLauncher.java
  * License : EPL
@@ -33,7 +33,7 @@ public class KermetaLauncher {
 
 	public static boolean execute(String filePath, String[] args) {
 
-		EclipseConsole console = new EclipseConsole("KPM Console");
+		EclipseConsole console = new EclipseConsole("KPM Console - Executing Kermeta file : " + filePath);
 		
 		try {
 			
