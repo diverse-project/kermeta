@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.24 2007-12-07 01:25:21 ftanguy Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.25 2007-12-20 16:10:41 cfaucher Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2007-12-07 01:25:21 $</pubdate>
+    <pubdate>$Date: 2007-12-20 16:10:41 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -86,11 +86,7 @@
     linkend="chapter_framework">Kermeta framework</link>.</para>
 
     <important>
-       
-
-      <para />
-
-       Kermeta is an evolving software and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
+      <para>Kermeta is an evolving software and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
 
       <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
         <emphasis
@@ -98,16 +94,16 @@
       </ulink>
 
        or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v0.4.1 
-    </important>
+    </para></important>
 
-    <tip>
+    <tip><para>
        The most update version of this document is available on line from 
 
       <ulink type=""
       url="http://www.kermeta.org/">http://www.kermeta.org</ulink>
 
        . 
-    </tip>
+    </para></tip>
   </preface>
 
   <chapter id="chapter_introduction.link">
@@ -533,7 +529,8 @@ aLibrary ?= resource.one // note the conditionnal assignment using the ?=, if no
       <title>Some "advanced" features</title>
 
       <para>Kermeta implements several "less common" or advanced features that
-      helps in many situations. <para /> Typically, lambda
+      helps in many situations.</para>
+      <para> Typically, lambda
       expressions/functions is a well known concept, very useful in almost all
       kermeta code. Even, if you will probably not write your own function,
       you'll certainly use the existing one defined on collections.</para>
@@ -632,7 +629,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
       <title id="section_comments.title.link">Comments<phrase
       id="section_comments"></phrase></title>
 
-      <warning>
+      <warning><para>
          Comments are a little bit particular in the Kermeta language because they are not all ignored by the interpreter. There are two kinds of comments: the first (syntax : // foo , /* bar * 
 
         <emphasis role="strong">/) is only associated to the text editor view
@@ -644,6 +641,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
         <emphasis role="strong">or</emphasis>
 
          @tag_name "tag value") is translated into a MOF tag linked to structures described in the Kermeta model. 
+      </para>
       </warning>
 
       <section>
@@ -1102,9 +1100,7 @@ this line too. */</programlisting>
     i := i + 1
 <emphasis role="strong">end</emphasis></programlisting>
 
-        <note>
-           Unlike Java, there is no exit, break or continue function in Kermeta. 
-        </note>
+        <note><para>Unlike Java, there is no exit, break or continue function in Kermeta.</para></note>
 
         <para>See <xref linkend="section_collections.link" /> for functions
         offering iterator-like scanning.</para>
@@ -1145,17 +1141,15 @@ this line too. */</programlisting>
 <emphasis>// ...</emphasis>
 }</programlisting>
 
-        <note>
+        <note><para>
            In most case, the order of the declaration in not important. The only exception is a very rare situation related to aspects (see 
 
           <xref linkend="section_weaving.link" />
 
           ). 
-        </note>
+        </para></note>
 
-        <note>
-           You can create cyclic dependencies of files, the environment will deal with that. 
-        </note>
+        <note><para>You can create cyclic dependencies of files, the environment will deal with that.</para></note>
       </section>
 
       <section>
@@ -1357,9 +1351,9 @@ this line too. */</programlisting>
     stdio.writeln("This is small !") 
 <emphasis role="strong">end</emphasis></programlisting>
 
-        <note>
+        <note><para>
            Enumeration are concept of the same level as classes, they must be defined in a package. 
-        </note>
+        </para></note>
       </section>
 
       <section id="section_alias.link">
@@ -1401,9 +1395,9 @@ this line too. */</programlisting>
         <para>Wheras defining an alias allows you to access this new
         definition from another package if needed.</para>
 
-        <tip>
+        <tip><para>
            It is interesting to redefine your own datatype for all the standard type you use in your metamodel, so when you convert the file into ecore in order to have serialisation, you won't have any dependency to framework.ecore (which is the ecore version of the framework where kermeta standard type) This allow a lazy coupling of the type definitions. 
-        </tip>
+        </para></tip>
       </section>
     </section>
 
@@ -1537,7 +1531,7 @@ a := A&lt;Integer&gt;.new
         <emphasis role="strong">result</emphasis> := <emphasis role="strong">self</emphasis>.name
     <emphasis role="strong">end</emphasis></programlisting>
 
-          <note>
+          <note><para>
              This is different of the 
 
             <literal>return</literal>
@@ -1547,7 +1541,7 @@ a := A&lt;Integer&gt;.new
             <literal>result</literal>
 
              assignment. 
-          </note>
+          </para></note>
         </section>
 
         <section>
@@ -1616,7 +1610,7 @@ class A
 
         <title>Rationale</title>
 
-         Here are some explanation about some design choice of Kermeta classes. 
+         <para>Here are some explanation about some design choice of Kermeta classes. </para>
 
         <section>
           <title>No constructor</title>
@@ -1825,9 +1819,9 @@ class C {
         <literal>operation</literal> keyword. Then, whenever you override it,
         you will have to use the <literal>method</literal> keyword.</para>
 
-        <note>
+        <note><para>
            In the sample,Person and adopt are abstract, but this has no influence on the operation-method keywords rule, it would have been the same even if Person was not abstract or if adopt had a behavior in this class. 
-        </note>
+        </para></note>
 
         <programlisting><emphasis role="strong">abstract class</emphasis> Person
 {
@@ -1944,7 +1938,7 @@ class C {
             </tgroup>
           </table>
 
-          <note>
+          <note><para>
              Notice in that sample that method redefinition uses the 
 
             <literal>method</literal>
@@ -1954,7 +1948,7 @@ class C {
             <literal>operation.</literal>
 
              
-          </note>
+          </para></note>
         </section>
 
         <section>
@@ -2204,9 +2198,9 @@ class C {
 }
 </programlisting>
 
-        <note>
+        <note><para>
            Notice in that sample that even the "if" is an expression that can return a value that is assigned here to the special variable "result". 
-        </note>
+        </para></note>
       </section>
 
       <section>
@@ -2258,9 +2252,9 @@ class C {
     // ...
 <emphasis role="strong">end</emphasis></programlisting>
 
-      <tip>
+      <tip><para>
         do not hesitate to create "do .. end" block into another block if you want to check for an exception only in a part of the code. This also works if you want to rescue code from within a rescue code.
-      </tip>
+      </para></tip>
     </section>
 
     <section id="section_loadingsaving_models.link">
@@ -2281,14 +2275,11 @@ class C {
         </mediaobject>
       </figure>
 
-      <note>
+      <note><para>
          Loading and saving model has it own tutorial. It provides more information in a step by step approach. See the EMF tutorial at 
-
         <ulink type=""
         url="http://www.kermeta.org/documents/emfTutorial/">http://www.kermeta.org/documents/emfTutorial/</ulink>
-
-         
-      </note>
+      </para></note>
 
       <section>
         <title>Prepare a model</title>
@@ -2538,14 +2529,14 @@ operation main() is do
         <para>The using statement is a syntactical shorcut, it has no
         conterpart in kermeta metamodel.</para>
 
-        <note>
+        <note><para>
            The using statement is different from the definition of a local datatype with an alias. (See 
 
           <xref endterm="section_alias.title.link"
                 linkend="section_alias.link" />
 
            subsection ) 
-        </note>
+        </para></note>
       </section>
     </section>
 
@@ -2744,9 +2735,9 @@ myCol1.add(50)
 <emphasis role="strong">var</emphasis> myCol3a : kermeta::standard::Sequence&lt;Integer&gt; <emphasis
             role="strong">init</emphasis> myCol4</programlisting>
 
-        <note>
+        <note><para>
            Conclusion : in most cases, you don't need to use this special syntax, you can simply use the generic collection names (Set&lt;Something&gt;, OrderedSet&lt;Something&gt;, etc.) available in Kermeta framework. Moreover, lower and upper bounds aren’t checked yet by Kermeta type checker and interpreter. 
-        </note>
+        </para></note>
       </section>
 
       <section>
@@ -2830,9 +2821,9 @@ aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e |
             role="strong">attribute</emphasis> x : <emphasis role="strong">set</emphasis> X[0..*] } 
 <emphasis role="strong">class</emphasis> X {}</programlisting>
 
-        <note>
+        <note><para>
            Composition notion also relates to containment notion. So, there are some restriction about valid model. For example, in an association, only one end can be an attribute, otherwise this means that we have an association with a diamond on both end and we cannot say who is the container of the other. 
-        </note>
+        </para></note>
 
         <itemizedlist>
           <listitem>
@@ -2876,14 +2867,12 @@ class A {
         opposite property of the entity of type B, and <literal>b</literal> is
         mutually the opposite property of the entity of type A.</para>
 
-        <caution>
+        <caution><para>
            A property whose type is a DataType (i.e String, Boolean, Integer) cannot have an opposite! 
-        </caution>
+        </para></caution>
 
         <para><emphasis role="strong">Example 1</emphasis>: definition of an
         attribute, a reference, and an opposite property</para>
-
-        <orderedlist continuation="restarts"></orderedlist>
 
         <para>This means that a can be accessed from b. Subsequently, if you
         modify the property b of an instance of A, it will mutually update its
@@ -2984,7 +2973,7 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
     <emphasis role="strong">reference</emphasis> a : A9[1..1]
 }</programlisting>
 
-        <note>
+        <note><para>
            For every case where the upper bound of a property is upper to 1, the type of the property is 
 
           <literal>OrderedSet</literal>
@@ -2994,7 +2983,7 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
           <xref linkend="section_collections.link" />
 
            (except the bag type) to have the available types for a [m..n](n&gt;1) multiplicity property. 
-        </note>
+        </para></note>
       </section>
 
       <section id="section_derived_properties.link">
@@ -3208,7 +3197,7 @@ assert(a5c.equals(a5))</programlisting></entry>
           </tgroup>
         </informaltable>
 
-        <note>
+        <note><para>
            Be careful with attributes or references ref with multiplicity greater than 1, they are automatically initialized with a reflective collection (ie. a collection that is aware of an eventual opposite). So, you cannot assign them using := If you wish to change completely its content with the one of another collection, you must use the 
 
           <literal>clear</literal>
@@ -3218,7 +3207,7 @@ assert(a5c.equals(a5))</programlisting></entry>
           <literal>addAll</literal>
 
            operations. 
-        </note>
+        </para></note>
       </section>
 
       <section id="section_assignment_behavior_4_attribute.link">
@@ -3267,7 +3256,7 @@ aB.c2 := aA.c1     <emphasis>// aB.c2 == aA.c1 and aA.c1 keeps its value !!!
             role="strong">reference</emphasis> c1 : String }<emphasis
             role="strong">class</emphasis> B {<emphasis role="strong"> reference</emphasis> c2 : String }aA.c1 := "Robert"aB.c2 := aA.c1 // aB.c2 == aA.c1 == "Robert"</programlisting>
 
-        <note>
+        <note><para>
            The assignment into a 
 
           <literal>variable</literal>
@@ -3277,7 +3266,7 @@ aB.c2 := aA.c1     <emphasis>// aB.c2 == aA.c1 and aA.c1 keeps its value !!!
           <literal>reference</literal>
 
            is not a problem because it doesn't change the owner of the assigned object. 
-        </note>
+        </para></note>
       </section>
     </section>
 
@@ -3452,13 +3441,13 @@ end
       cheap implementation of lambda expressions, that is mainly useful for
       implementing OCL-like functions.</para>
 
-      <note>
+      <note><para>
          Limitations of lambda expressions usage:An operation with a function as parameter : if you define an operation which has a function as a parameter ( ex: 
 
         <literal>operation op( func : &lt;Integer-&gt;Object&gt;)</literal>
 
          ), then you cannot put more parameters : only one parameter is allowed in such a case. 
-      </note>
+      </para></note>
 
       <section id="section_function-syntax.link">
         <title id="section_function-syntax.title.link">Syntax<phrase
@@ -3722,9 +3711,9 @@ and op.name.indexOf("All")==-1}
     <emphasis role="strong">end</emphasis>
 }</programlisting>
 
-      <caution>
+      <caution><para>
          You cannot use "self" inside a dynamic expression 
-      </caution>
+      </para></caution>
     </section>
 
     <section id="section_contracts.link">
@@ -3766,9 +3755,9 @@ and op.name.indexOf("All")==-1}
         // operation body
     <emphasis role="strong">end</emphasis></programlisting>
 
-          <tip>
+          <tip><para>
              If the body contains only one expression, the block declaration "do ... end" is not mandatory. If your block contains several instructions, the latest one will be evaluated as a boolean expression. 
-          </tip>
+          </para></tip>
         </section>
 
         <section id="section_inv_syntax.link">
@@ -3901,9 +3890,9 @@ and op.name.indexOf("All")==-1}
       <section>
         <title>textual syntax for merging</title>
 
-        <important>
+        <important><para>
            Since this feature is really successful and very well accepted, the surface syntax will change in the future release v1.0.0 in order to use a dedicated keyword instead of a simple annotation. The syntax presented here is valid only for prior versions. 
-        </important>
+        </para></important>
 
         <para>The merge is driven by the qualified name of the element to
         merge. Two classes will be merged if they have exactly the same
@@ -3935,9 +3924,9 @@ and op.name.indexOf("All")==-1}
           </varlistentry>
         </variablelist>
 
-        <note>
+        <note><para>
            When using overloadable tag, for a given set of definition, the operation that is not tagged overlodable will overload all other definitions. If all the declaration declare to be overloadable, then the declaration order is important. The last declared will be used by the interpreter. 
-        </note>
+        </para></note>
       </section>
 
       <section>
@@ -3945,7 +3934,7 @@ and op.name.indexOf("All")==-1}
 
         <title>Example 1: Simple Class merge</title>
 
-         In this sample, writting : 
+         <para>In this sample, writing:</para>
 
         <programlisting>
 // aspect1.kmt
@@ -3996,9 +3985,9 @@ class A {
 
          
 
-        <note>Please note that the visibility of the features is respected. In
+        <note><para>Please note that the visibility of the features is respected. In
         base.kmt, class A doesn't know about attributes id or
-        decorators...</note>
+        decorators...</para></note>
 
          
 
@@ -4030,9 +4019,9 @@ class Decoration{
 
          
 
-        <note>When there is no conflict like in this sample, the order used to
+        <note><para>When there is no conflict like in this sample, the order used to
         declare the features doesn't changes the final behavior of the
-        code.</note>
+        code.</para></note>
 
          
       </section>
@@ -4133,9 +4122,9 @@ class A {
     <section id="section_modeltype.link">
       <title id="section_modeltype.title.link">Model type</title>
 
-      <warning>
+      <warning><para>
          In current version of Kermeta(v0.4.2), ModelType is still a prototype. Any help, feedback, contribution is welcome to help us to finalize it. 
-      </warning>
+      </para></warning>
 
       <para>Kermeta is clearly a model oriented language, one of its first
       concept is a model element, because they are the manipulated objects.
@@ -4173,9 +4162,9 @@ class C2 {
 modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
       	</programlisting>
 
-        <tip>
+        <tip><para>
           You can use all classic way to define classes, in kmt, but you can also require an ecore file that will contain your class definition (see require section ???) 
-        </tip>
+        </para></tip>
       </section>
 
       <section>
@@ -4268,9 +4257,9 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
       		</programlisting>
         </note>
 
-        <warning>
+        <warning><para>
            The current implementation works only when there is no ambiguity, if there is ambiguity between two metamodels, then they are considered as not conformant. A future version, may eventually introduce a binding mecanism that would allows to remove those ambiguity. (See Jim Steel Phd thesis for more details ???) 
-        </warning>
+        </para></warning>
       </section>
 
       <section>
@@ -4375,9 +4364,9 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
       <emphasis role="strong">return</emphasis> result; 
    }</programlisting>
 
-        <tip>
+        <tip><para>
            This method is used to implement Kermeta framework. You'll find much more code samples of extern call in its sources. 
-        </tip>
+        </para></tip>
       </section>
 
       <section id="section_seamless_java_code.link">
@@ -4388,9 +4377,9 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 
          
 
-        <warning>This feature is still a prototype and still have many
+        <warning><para>This feature is still a prototype and still have many
         limitations. The first version is already available but any help is
-        welcome to help us to improve it.</warning>
+        welcome to help us to improve it.</para></warning>
 
          
 
@@ -4422,12 +4411,9 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
         library is really big and as you probably don't need all java from
         Kermeta ;-) then you must use the includeFilter and
         excludeFilter.</para>
-
-        Sample using java.io from java Standard library
-
-        <para />
-
-         
+        
+		<para>Sample using java.io from java Standard library</para>
+		<para/>
 
         <programlisting> 
 require kermeta
@@ -4558,9 +4544,9 @@ class testRequireJava inherits kermeta::kunit::TestCase
       performed for each attribute of its meta-class and a shallow clone is
       performed for each reference.</para>
 
-      <caution>
+      <caution><para>
          Reminder : be very careful with the use of the assignment operator on object. Most of the time, you need to use the "clone" feature. Using assignment on attributes break the previous link between objects. So, In the previous example, p1 has no more name after the assignment !There is one exception to this behavior : when the type of attributes are DataType, i.e, in Kermeta, String, Integer, Boolean, the assignment behaves as if those entities were defined as references. 
-      </caution>
+      </para></caution>
     </section>
   </chapter>
 
@@ -4577,9 +4563,9 @@ class testRequireJava inherits kermeta::kunit::TestCase
     some Kermeta code. This may be useful to understand how Kermeta works
     too.</para>
 
-    <note>
+    <note><para>
        All the code samples in this section are for illustration of the given concepts. 
-    </note>
+    </para></note>
 
     <para>The goal of the Kermeta language is to provide an action language
     for MOF models. The idea is to start from MOF, which provides the
@@ -4626,7 +4612,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
         </mediaobject>
       </figure>
 
-      <note>
+      <note><para>
         This weaving of behavior into MOF has been explained in 
 
         <ulink
@@ -4635,7 +4621,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
         executability into object-oriented meta-languages. -- In S. Kent L.
         Briand, editor, Proceedings of MODELS/UML'2005, volume 3713 of LNCS,
         pages 264--278, Montego Bay, Jamaica, October 2005. Springer.</ulink>
-      </note>
+      </para></note>
 
       <para>The link between structure and behavior is made through the
       property <literal>body</literal> of class <literal>Operation</literal>
@@ -4921,8 +4907,6 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
             </imageobject>
           </mediaobject>
         </figure>
-
-        <para></para>
       </section>
     </section>
 
@@ -4936,9 +4920,9 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
       in XMI ("Compile to XMI" function on *.kmt files). You can then load
       Kermeta program as a model, typically to transform it.</para>
 
-      <warning>
+      <warning><para>
          You should not try to execute operations on kermeta models you've just dynamically created unless you froze it. This is a feature which has not been completly tested. 
-      </warning>
+      </para></warning>
 
       <para>Another typical way to access to a Kermeta model and Kermeta
       metamodel is to use the reflection. All objects inherits from Object
@@ -4961,13 +4945,13 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
     <para>Kermeta is bundled with a framework that provides the base
     functionalities for metamodel engineering.</para>
 
-    <tip>
+    <tip><para>
        When you write 
 
       <literal>require kermeta</literal>
 
        at the head of your file, you are importing the file framework.km located in the Kermeta plugin. 
-    </tip>
+    </para></tip>
 
     <para>Currently, it provides the following packages :</para>
 
@@ -5090,14 +5074,11 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
       </varlistentry>
     </variablelist>
 
-    <note>
-       For more details about the content of these packages, please look at the generated documentation available on line : 
-
+    <note><para>
+       For more details about the content of these packages, please look at the generated documentation available on line: 
       <ulink type=""
       url="http://www.kermeta.org/docs/KermetaFramework/framework.km.html">http://www.kermeta.org/docs/KermetaFramework/framework.km.html</ulink>
-
-       
-    </note>
+    </para></note>
   </chapter>
 
   <appendix id="appendix_keywords.link">
