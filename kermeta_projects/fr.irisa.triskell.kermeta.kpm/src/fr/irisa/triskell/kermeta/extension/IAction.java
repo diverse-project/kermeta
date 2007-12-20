@@ -1,4 +1,4 @@
-/*$Id: IAction.java,v 1.3 2007-07-24 13:47:12 ftanguy Exp $
+/*$Id: IAction.java,v 1.4 2007-12-20 09:13:08 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -9,11 +9,13 @@
 */
 package fr.irisa.triskell.kermeta.extension;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
 /**
@@ -31,6 +33,6 @@ public interface IAction {
 	 * @param monitor A progress monitor to display process information.
 	 * @param args Any other usefull arguments can be sent via this map.
 	 */
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args);
+	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters);
 	
 }

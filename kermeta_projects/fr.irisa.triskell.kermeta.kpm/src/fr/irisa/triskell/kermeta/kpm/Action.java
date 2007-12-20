@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Action.java,v 1.6 2007-07-24 13:47:12 ftanguy Exp $
+ * $Id: Action.java,v 1.7 2007-12-20 09:13:07 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**

@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMT.java,v 1.3 2007-12-03 15:58:00 ftanguy Exp $
+/*$Id: Ecore2KMT.java,v 1.4 2007-12-20 09:13:00 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	Ecore2KMT.java
 * License : EPL
@@ -12,6 +12,7 @@
 
 package fr.irisa.triskell.kermeta.kpm.actions.transformation;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -24,6 +25,7 @@ import fr.irisa.triskell.eclipse.resources.PropertyNotFoundException;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
@@ -31,8 +33,7 @@ import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 
 public class Ecore2KMT implements IAction {
 
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
-
+	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {
 			
 		
 		if ( monitor.isCanceled() )

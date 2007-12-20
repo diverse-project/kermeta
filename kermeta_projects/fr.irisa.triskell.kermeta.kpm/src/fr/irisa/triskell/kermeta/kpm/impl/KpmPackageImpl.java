@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackageImpl.java,v 1.14 2007-07-24 13:47:10 ftanguy Exp $
+ * $Id: KpmPackageImpl.java,v 1.15 2007-12-20 09:13:06 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -35,6 +35,7 @@ import fr.irisa.triskell.kermeta.kpm.NestedExpression;
 import fr.irisa.triskell.kermeta.kpm.NullExpression;
 import fr.irisa.triskell.kermeta.kpm.ORExpression;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.RuleType;
 import fr.irisa.triskell.kermeta.kpm.SimpleExpression;
@@ -57,6 +58,13 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * @generated
 	 */
 	private EClass dependencyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass parameterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -275,16 +283,11 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 
 		isInited = true;
 
-		// Obtain or create and register interdependencies
-		InterestPackageImpl theInterestPackage = (InterestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(InterestPackage.eNS_URI) instanceof InterestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(InterestPackage.eNS_URI) : InterestPackage.eINSTANCE);
-
 		// Create package meta-data objects
 		theKpmPackage.createPackageContents();
-		theInterestPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theKpmPackage.initializePackageContents();
-		theInterestPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theKpmPackage.freeze();
@@ -326,6 +329,33 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 */
 	public EReference getDependency_To() {
 		return (EReference)dependencyEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getParameter() {
+		return parameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getParameter_Type() {
+		return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getParameter_Value() {
+		return (EAttribute)parameterEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -398,6 +428,15 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 */
 	public EAttribute getOut_Independant() {
 		return (EAttribute)outEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOut_Parameters() {
+		return (EReference)outEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -877,6 +916,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		createEReference(outEClass, OUT__ACTION);
 		createEReference(outEClass, OUT__RULE);
 		createEAttribute(outEClass, OUT__INDEPENDANT);
+		createEReference(outEClass, OUT__PARAMETERS);
 
 		filterEClass = createEClass(FILTER);
 
@@ -939,6 +979,10 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		createEReference(dependencyEClass, DEPENDENCY__TYPE);
 		createEReference(dependencyEClass, DEPENDENCY__FROM);
 		createEReference(dependencyEClass, DEPENDENCY__TO);
+
+		parameterEClass = createEClass(PARAMETER);
+		createEAttribute(parameterEClass, PARAMETER__TYPE);
+		createEAttribute(parameterEClass, PARAMETER__VALUE);
 
 		// Create data types
 		iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
@@ -1036,6 +1080,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		initEReference(getOut_Action(), this.getAction(), null, "action", null, 0, 1, Out.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOut_Rule(), this.getRule(), this.getRule_Outs(), "rule", null, 0, 1, Out.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOut_Independant(), ecorePackage.getEBoolean(), "independant", "false", 0, 1, Out.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOut_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, Out.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(outEClass, null, "process", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getUnit(), "unit", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1239,6 +1284,10 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		initEReference(getDependency_Type(), this.getRuleType(), null, "type", null, 1, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDependency_From(), this.getUnit(), null, "from", null, 1, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDependency_To(), this.getUnit(), null, "to", null, 1, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getParameter_Type(), ecorePackage.getEString(), "type", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParameter_Value(), ecorePackage.getEString(), "value", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

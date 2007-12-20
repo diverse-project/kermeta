@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackage.java,v 1.11 2007-07-24 13:47:12 ftanguy Exp $
+ * $Id: KpmPackage.java,v 1.12 2007-12-20 09:13:07 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -424,13 +424,22 @@ public interface KpmPackage extends EPackage {
 	int OUT__INDEPENDANT = ABSTRACT_ENTITY_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUT__PARAMETERS = ABSTRACT_ENTITY_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Out</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OUT_FEATURE_COUNT = ABSTRACT_ENTITY_FEATURE_COUNT + 3;
+	int OUT_FEATURE_COUNT = ABSTRACT_ENTITY_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Filter</em>' class.
@@ -857,6 +866,43 @@ public interface KpmPackage extends EPackage {
 	int DEPENDENCY_FEATURE_COUNT = 3;
 
 	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ParameterImpl <em>Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.ParameterImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getParameter()
+	 * @generated
+	 */
+	int PARAMETER = 22;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__TYPE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -864,7 +910,7 @@ public interface KpmPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 22;
+	int IPROGRESS_MONITOR = 23;
 
 
 	/**
@@ -875,7 +921,7 @@ public interface KpmPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getList()
 	 * @generated
 	 */
-	int LIST = 23;
+	int LIST = 24;
 
 
 	/**
@@ -920,6 +966,38 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDependency_To();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Parameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Parameter</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Parameter
+	 * @generated
+	 */
+	EClass getParameter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Parameter#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Parameter#getType()
+	 * @see #getParameter()
+	 * @generated
+	 */
+	EAttribute getParameter_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Parameter#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Parameter#getValue()
+	 * @see #getParameter()
+	 * @generated
+	 */
+	EAttribute getParameter_Value();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.In <em>In</em>}'.
@@ -1005,6 +1083,17 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getOut_Independant();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.Out#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Out#getParameters()
+	 * @see #getOut()
+	 * @generated
+	 */
+	EReference getOut_Parameters();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Filter <em>Filter</em>}'.
@@ -1573,6 +1662,32 @@ public interface KpmPackage extends EPackage {
 		EReference DEPENDENCY__TO = eINSTANCE.getDependency_To();
 
 		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ParameterImpl <em>Parameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.ParameterImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getParameter()
+		 * @generated
+		 */
+		EClass PARAMETER = eINSTANCE.getParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAMETER__TYPE = eINSTANCE.getParameter_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAMETER__VALUE = eINSTANCE.getParameter_Value();
+
+		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.InImpl <em>In</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1641,6 +1756,14 @@ public interface KpmPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OUT__INDEPENDANT = eINSTANCE.getOut_Independant();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OUT__PARAMETERS = eINSTANCE.getOut_Parameters();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.FilterImpl <em>Filter</em>}' class.

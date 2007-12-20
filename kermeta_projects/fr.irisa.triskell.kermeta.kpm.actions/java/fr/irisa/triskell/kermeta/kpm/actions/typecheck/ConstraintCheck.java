@@ -1,6 +1,6 @@
 
 
-/*$Id: ConstraintCheck.java,v 1.3 2007-09-19 12:17:41 ftanguy Exp $
+/*$Id: ConstraintCheck.java,v 1.4 2007-12-20 09:13:00 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	ConstraintCheck.java
 * License : EPL
@@ -12,6 +12,7 @@
 
 package fr.irisa.triskell.kermeta.kpm.actions.typecheck;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -21,12 +22,12 @@ import org.kermeta.io.KermetaUnit;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 public class ConstraintCheck implements IAction {
 
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
-		
+	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {		
 		
 		if ( monitor.isCanceled() )
 			return;

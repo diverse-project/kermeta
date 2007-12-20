@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmItemProviderAdapterFactory.java,v 1.5 2007-07-24 13:47:43 ftanguy Exp $
+ * $Id: KpmItemProviderAdapterFactory.java,v 1.6 2007-12-20 09:12:55 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -96,6 +96,29 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 		}
 
 		return dependencyItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Parameter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ParameterItemProvider parameterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Parameter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createParameterAdapter() {
+		if (parameterItemProvider == null) {
+			parameterItemProvider = new ParameterItemProvider(this);
+		}
+
+		return parameterItemProvider;
 	}
 
 	/**
@@ -582,6 +605,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 		if (existFilterItemProvider != null) existFilterItemProvider.dispose();
 		if (ruleTypeItemProvider != null) ruleTypeItemProvider.dispose();
 		if (dependencyItemProvider != null) dependencyItemProvider.dispose();
+		if (parameterItemProvider != null) parameterItemProvider.dispose();
 	}
 
 }

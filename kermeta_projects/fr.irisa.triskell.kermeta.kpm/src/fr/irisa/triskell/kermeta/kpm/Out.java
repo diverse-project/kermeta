@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Out.java,v 1.3 2007-07-24 13:47:12 ftanguy Exp $
+ * $Id: Out.java,v 1.4 2007-12-20 09:13:07 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -10,6 +10,7 @@ package fr.irisa.triskell.kermeta.kpm;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,6 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Out#getAction <em>Action</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Out#getRule <em>Rule</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Out#isIndependant <em>Independant</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Out#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,6 +112,22 @@ public interface Out extends AbstractEntity {
 	 * @generated
 	 */
 	void setIndependant(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Parameter}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parameters</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getOut_Parameters()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Parameter> getParameters();
 
 	/**
 	 * <!-- begin-user-doc -->

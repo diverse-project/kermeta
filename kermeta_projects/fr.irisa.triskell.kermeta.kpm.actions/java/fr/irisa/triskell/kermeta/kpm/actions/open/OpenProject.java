@@ -16,6 +16,7 @@ import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
@@ -25,8 +26,8 @@ import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 
 public class OpenProject implements IAction, Interest {
 
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
-
+	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {
+		
 		try {
 						
 			KPM kpm = (KPM) unit.eContainer();	

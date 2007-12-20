@@ -1,4 +1,4 @@
-/*$Id: KMT2KM.java,v 1.3 2007-09-19 12:17:41 ftanguy Exp $
+/*$Id: KMT2KM.java,v 1.4 2007-12-20 09:13:00 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -9,6 +9,7 @@
 */
 package fr.irisa.triskell.kermeta.kpm.actions.transformation;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -21,14 +22,14 @@ import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 
 public class KMT2KM implements IAction {
 
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
-			
+	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {			
 		
 		if ( monitor.isCanceled() )
 			return;

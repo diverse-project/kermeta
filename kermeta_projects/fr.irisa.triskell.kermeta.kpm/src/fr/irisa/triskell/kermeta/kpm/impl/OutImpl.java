@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutImpl.java,v 1.9 2007-12-06 14:47:10 ftanguy Exp $
+ * $Id: OutImpl.java,v 1.10 2007-12-20 09:13:06 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -18,18 +18,23 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import org.eclipse.emf.ecore.util.InternalEList;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Action;
 import fr.irisa.triskell.kermeta.kpm.FilterExpression;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import java.util.Collection;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 import fr.irisa.triskell.kermeta.launcher.KermetaLauncher;
@@ -44,6 +49,7 @@ import fr.irisa.triskell.kermeta.launcher.KermetaLauncher;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl#getAction <em>Action</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl#getRule <em>Rule</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl#isIndependant <em>Independant</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,6 +85,16 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * @ordered
 	 */
 	protected boolean independant = INDEPENDANT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Parameter> parameters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -202,6 +218,18 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Parameter> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, KpmPackage.OUT__PARAMETERS);
+		}
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public void process(Unit unit, IProgressMonitor monitor, Map<String, Object> args) {
@@ -220,7 +248,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 								
 						IConfigurationElement[] elements = extension.getConfigurationElements();
 						IAction action = (IAction) elements[0].createExecutableExtension("class");
-						action.execute(this, unit, monitor, args);
+						action.execute(this, unit, monitor, args, getParameters());
 									
 					} else if ( extensionPointName.equals("fr.irisa.triskell.kermeta.kpm.kermetaAction") ) {
 					 
@@ -276,6 +304,8 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 		switch (featureID) {
 			case KpmPackage.OUT__RULE:
 				return basicSetRule(null, msgs);
+			case KpmPackage.OUT__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -309,6 +339,8 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 				return getRule();
 			case KpmPackage.OUT__INDEPENDANT:
 				return isIndependant() ? Boolean.TRUE : Boolean.FALSE;
+			case KpmPackage.OUT__PARAMETERS:
+				return getParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -318,6 +350,7 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -329,6 +362,10 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 				return;
 			case KpmPackage.OUT__INDEPENDANT:
 				setIndependant(((Boolean)newValue).booleanValue());
+				return;
+			case KpmPackage.OUT__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends Parameter>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -351,6 +388,9 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 			case KpmPackage.OUT__INDEPENDANT:
 				setIndependant(INDEPENDANT_EDEFAULT);
 				return;
+			case KpmPackage.OUT__PARAMETERS:
+				getParameters().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -369,6 +409,8 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 				return getRule() != null;
 			case KpmPackage.OUT__INDEPENDANT:
 				return independant != INDEPENDANT_EDEFAULT;
+			case KpmPackage.OUT__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

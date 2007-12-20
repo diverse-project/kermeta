@@ -1,4 +1,4 @@
-/*$Id: KermetaProject.java,v 1.11 2007-07-24 13:47:13 ftanguy Exp $
+/*$Id: KermetaProject.java,v 1.12 2007-12-20 09:13:08 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -80,7 +80,8 @@ public class KermetaProject {
 	 * @return Returns an Eclipse resource on the KPM file.
 	 */
 	public IFile getKpmIFile() {
-		return ResourceHelper.getIFile( project.getFullPath().toString() + "/" + kpmFileName );
+		String path = "platform:/resource" + project.getFullPath().toString() + "/" + kpmFileName;
+		return ResourceHelper.getIFile( path );
 	}
 	
 	/**

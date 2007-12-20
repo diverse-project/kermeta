@@ -1,4 +1,4 @@
-/*$Id: AddMarkers.java,v 1.2 2007-09-19 12:17:41 ftanguy Exp $
+/*$Id: AddMarkers.java,v 1.3 2007-12-20 09:13:01 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
@@ -29,6 +29,7 @@ import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
@@ -37,7 +38,7 @@ import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 
 public class AddMarkers implements IAction, Interest {
 
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
+	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {
 		
 		if ( monitor.isCanceled() )
 			return;

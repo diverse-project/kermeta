@@ -1,4 +1,4 @@
-/*$Id: Typecheck.java,v 1.3 2007-10-12 09:11:01 ftanguy Exp $
+/*$Id: Typecheck.java,v 1.4 2007-12-20 09:13:00 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -10,6 +10,7 @@
 package fr.irisa.triskell.kermeta.kpm.actions.typecheck;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -23,13 +24,14 @@ import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 
 public class Typecheck implements IAction {
 
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args) {
-			
+	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {
+		
 		if ( monitor.isCanceled() )
 			return;
 		

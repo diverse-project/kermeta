@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmFactoryImpl.java,v 1.8 2007-07-24 13:47:10 ftanguy Exp $
+ * $Id: KpmFactoryImpl.java,v 1.9 2007-12-20 09:13:06 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
+import fr.irisa.triskell.kermeta.kpm.*;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -97,6 +98,7 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 			case KpmPackage.EXIST_FILTER: return createExistFilter();
 			case KpmPackage.RULE_TYPE: return createRuleType();
 			case KpmPackage.DEPENDENCY: return createDependency();
+			case KpmPackage.PARAMETER: return createParameter();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -144,6 +146,16 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	public Dependency createDependency() {
 		DependencyImpl dependency = new DependencyImpl();
 		return dependency;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Parameter createParameter() {
+		ParameterImpl parameter = new ParameterImpl();
+		return parameter;
 	}
 
 	/**

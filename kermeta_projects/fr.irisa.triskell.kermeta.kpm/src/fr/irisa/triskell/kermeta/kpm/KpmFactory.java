@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmFactory.java,v 1.5 2007-05-15 15:22:53 ftanguy Exp $
+ * $Id: KpmFactory.java,v 1.6 2007-12-20 09:13:07 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -33,6 +33,15 @@ public interface KpmFactory extends EFactory {
 	 * @generated
 	 */
 	Dependency createDependency();
+
+	/**
+	 * Returns a new object of class '<em>Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameter</em>'.
+	 * @generated
+	 */
+	Parameter createParameter();
 
 	/**
 	 * Returns a new object of class '<em>In</em>'.

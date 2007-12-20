@@ -1,4 +1,4 @@
-/*$Id: CreateDependentDependencies.java,v 1.2 2007-09-13 09:03:45 ftanguy Exp $
+/*$Id: CreateDependentDependencies.java,v 1.3 2007-12-20 09:13:01 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	CreateDependentDependencies.java
 * License : EPL
@@ -15,19 +15,18 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 
 public class CreateDependentDependencies implements IAction {
 
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
-			
+	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {			
 		try {
 
 			if ( monitor.isCanceled() )

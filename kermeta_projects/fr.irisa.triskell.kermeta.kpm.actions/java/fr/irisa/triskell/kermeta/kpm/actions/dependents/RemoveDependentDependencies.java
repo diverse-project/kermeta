@@ -1,4 +1,4 @@
-/*$Id: RemoveDependentDependencies.java,v 1.3 2007-12-03 15:58:00 ftanguy Exp $
+/*$Id: RemoveDependentDependencies.java,v 1.4 2007-12-20 09:13:01 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	RemoveDependentDependencies.java
 * License : EPL
@@ -22,14 +22,15 @@ import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Parameter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 
 
 public class RemoveDependentDependencies implements IAction {
 
-	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
-			
+	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {
+		
 		if ( monitor.isCanceled() )
 			return;
 		

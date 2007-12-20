@@ -48,5 +48,12 @@
             File="src/kermeta/printerApplication.kmt">
       </Action>
    </extension>
+   <extension
+         id="executeAnt"
+         point="fr.irisa.triskell.kermeta.kpm.javaAction">
+      <Action
+            class="fr.irisa.triskell.kermeta.kpm.actions.ant.ExecuteAntAction">
+      </Action>
+   </extension>
 
 </plugin>
