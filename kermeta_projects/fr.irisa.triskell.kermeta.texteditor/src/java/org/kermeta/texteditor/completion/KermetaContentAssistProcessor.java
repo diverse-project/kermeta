@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaContentAssistProcessor.java,v 1.10 2007-12-20 15:53:43 ftanguy Exp $
+/*$Id: KermetaContentAssistProcessor.java,v 1.11 2007-12-20 16:14:53 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -738,8 +738,8 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		 */
 		List<KermetaCompletionProposal> temp = new ArrayList<KermetaCompletionProposal>();
 		for ( Property property : ClassDefinitionHelper.getAllProperties(cdef) ) {
-			String regex = stringToMatch + ".+";
-			if ( property.getName().matches(regex) ) {
+			String regex = stringToMatch.toLowerCase() + ".+";
+			if ( property.getName().toLowerCase().matches(regex) ) {
 				KM2KMTPrettyPrinter prettyprinter = new KM2KMTPrettyPrinter();
 				String type = prettyprinter.ppTypeFromMultiplicityElement( property );
 				String displayedString = property.getName() + " : " + type + " from " + KermetaModelHelper.NamedElement.qualifiedName( (NamedElement) property.eContainer() ) ;
@@ -770,8 +770,8 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		for ( Operation operation : ClassDefinitionHelper.getAllOperations(cdef) ) {
 			if ( ! processedOperations.containsKey(operation.getName()) ) {
 				processedOperations.put(operation.getName(), operation);
-				String regex = stringToMatch + ".+";
-				if ( operation.getName().matches(regex) ) {
+				String regex = stringToMatch.toLowerCase() + ".+";
+				if ( operation.getName().toLowerCase().matches(regex) ) {
 					if ( cdef.getOwnedOperation().contains(operation) ) {
 						String displayedString = operation.getName() + " from " + NamedElementHelper.getQualifiedName( (NamedElement) operation.eContainer() );
 	
