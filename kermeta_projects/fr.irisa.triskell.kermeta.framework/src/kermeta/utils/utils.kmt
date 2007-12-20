@@ -4,5 +4,5 @@ package utils;
 
 require "./StringBuffer.kmt"
 require "./hashtable.kmt"
-require "./Stack.kmt"
+require "./stack.kmt"
 
