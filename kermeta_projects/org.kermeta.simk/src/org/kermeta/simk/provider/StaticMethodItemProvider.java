@@ -1,5 +1,5 @@
 /**
- * $Id: StaticMethodItemProvider.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
+ * $Id: StaticMethodItemProvider.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: StaticMethodItemProvider.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
+ * $Id: StaticMethodItemProvider.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -75,6 +75,7 @@ public class StaticMethodItemProvider
 			addIdPropertyDescriptor(object);
 			addBodyPropertyDescriptor(object);
 			addUsagesPropertyDescriptor(object);
+			addParentMethodPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -163,6 +164,28 @@ public class StaticMethodItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Parent Method feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addParentMethodPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_StaticMethod_parentMethod_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StaticMethod_parentMethod_feature", "_UI_StaticMethod_type"),
+				 SimkPackage.Literals.STATIC_METHOD__PARENT_METHOD,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

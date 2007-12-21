@@ -1,5 +1,5 @@
 /**
- * $Id: StaticMethod.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
+ * $Id: StaticMethod.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: StaticMethod.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
+ * $Id: StaticMethod.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EOperation;
  *   <li>{@link org.kermeta.simk.StaticMethod#getId <em>Id</em>}</li>
  *   <li>{@link org.kermeta.simk.StaticMethod#getBody <em>Body</em>}</li>
  *   <li>{@link org.kermeta.simk.StaticMethod#getUsages <em>Usages</em>}</li>
+ *   <li>{@link org.kermeta.simk.StaticMethod#getParentMethod <em>Parent Method</em>}</li>
  * </ul>
  * </p>
  *
@@ -178,10 +179,36 @@ public interface StaticMethod extends SMNamedElement {
 	EList<SMUsage> getUsages();
 
 	/**
+	 * Returns the value of the '<em><b>Parent Method</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parent Method</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parent Method</em>' reference.
+	 * @see #setParentMethod(EOperation)
+	 * @see org.kermeta.simk.SimkPackage#getStaticMethod_ParentMethod()
+	 * @model
+	 * @generated
+	 */
+	EOperation getParentMethod();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.simk.StaticMethod#getParentMethod <em>Parent Method</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Parent Method</em>' reference.
+	 * @see #getParentMethod()
+	 * @generated
+	 */
+	void setParentMethod(EOperation value);
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='//TODO\r\nreturn null;'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return getParentMethod();'"
 	 * @generated
 	 */
 	EOperation getParentMethodFromModel();

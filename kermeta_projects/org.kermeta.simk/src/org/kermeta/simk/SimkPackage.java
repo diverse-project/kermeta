@@ -1,5 +1,5 @@
 /**
- * $Id: SimkPackage.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkPackage.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -213,13 +213,22 @@ public interface SimkPackage extends EPackage {
 	int STATIC_METHOD__USAGES = SM_NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Parent Method</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_METHOD__PARENT_METHOD = SM_NAMED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Static Method</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD_FEATURE_COUNT = SM_NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int STATIC_METHOD_FEATURE_COUNT = SM_NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.simk.impl.SMContextImpl <em>SM Context</em>}' class.
@@ -572,6 +581,17 @@ public interface SimkPackage extends EPackage {
 	EAttribute getStaticMethod_Usages();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.simk.StaticMethod#getParentMethod <em>Parent Method</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Parent Method</em>'.
+	 * @see org.kermeta.simk.StaticMethod#getParentMethod()
+	 * @see #getStaticMethod()
+	 * @generated
+	 */
+	EReference getStaticMethod_ParentMethod();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.simk.SMContext <em>SM Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -855,6 +875,14 @@ public interface SimkPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STATIC_METHOD__USAGES = eINSTANCE.getStaticMethod_Usages();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent Method</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATIC_METHOD__PARENT_METHOD = eINSTANCE.getStaticMethod_ParentMethod();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.simk.impl.SMContextImpl <em>SM Context</em>}' class.

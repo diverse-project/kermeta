@@ -38,7 +38,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_vFaEoJgpEdy6esKMCSUVgg" position="182,141" size="281,-1">
-      <anchorage xmi:id="_-ASBIJgsEdy6esKMCSUVgg" graphEdge="_-ASBIZgsEdy6esKMCSUVgg _AWBwgJgtEdy6esKMCSUVgg _vCXrIZlPEdyYHaXNQh-Plg _5VedMJlQEdyYHaXNQh-Plg _9qYLcJlREdyYHaXNQh-Plg _PiZKoJ9MEdy6ndC8pZladA"/>
+      <anchorage xmi:id="_-ASBIJgsEdy6esKMCSUVgg" graphEdge="_-ASBIZgsEdy6esKMCSUVgg _AWBwgJgtEdy6esKMCSUVgg _vCXrIZlPEdyYHaXNQh-Plg _5VedMJlQEdyYHaXNQh-Plg _9qYLcJlREdyYHaXNQh-Plg _PiZKoJ9MEdy6ndC8pZladA _BzE9IZ9bEdy6ndC8pZladA"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_vFaEoZgpEdy6esKMCSUVgg" presentation="default">
         <element href="simk.ecore#//StaticMethod"/>
       </semanticModel>
@@ -396,6 +396,31 @@
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_lvm-Qp9NEdy6ndC8pZladA" id="nameLabel" uDistance="13" vDistance="5"/>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_lvm-Q59NEdy6ndC8pZladA" id="cardinalityLabel" uDistance="16" vDistance="-4"/>
       <waypoints>[136, -13, 24, 247]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_AYenYJ9bEdy6ndC8pZladA" position="315,572" size="101,-1">
+      <anchorage xmi:id="_BzE9IJ9bEdy6ndC8pZladA" graphEdge="_BzE9IZ9bEdy6ndC8pZladA"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_AYenYZ9bEdy6ndC8pZladA" presentation="default">
+        <element href="http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_AYenYp9bEdy6ndC8pZladA">
+        <property xmi:id="_AYenY59bEdy6ndC8pZladA" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_AYenZJ9bEdy6ndC8pZladA" presentation="default">
+          <element href="http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_AYenZZ9bEdy6ndC8pZladA">
+        <property xmi:id="_AYenZp9bEdy6ndC8pZladA" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_AYenZ59bEdy6ndC8pZladA" presentation="default">
+          <element href="http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_BzE9IZ9bEdy6ndC8pZladA" anchor="_-ASBIJgsEdy6esKMCSUVgg _BzE9IJ9bEdy6ndC8pZladA">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_BzE9Ip9bEdy6ndC8pZladA" presentation="default">
+        <element href="simk.ecore#//StaticMethod/parentMethod"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_BzE9I59bEdy6ndC8pZladA" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_BzE9JJ9bEdy6ndC8pZladA" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

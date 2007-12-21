@@ -1,5 +1,5 @@
 /**
- * $Id: StaticMethodImpl.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
+ * $Id: StaticMethodImpl.java,v 1.3 2007-12-21 14:17:03 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: StaticMethodImpl.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
+ * $Id: StaticMethodImpl.java,v 1.3 2007-12-21 14:17:03 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
@@ -36,6 +36,7 @@ import org.kermeta.simk.StaticMethod;
  *   <li>{@link org.kermeta.simk.impl.StaticMethodImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.kermeta.simk.impl.StaticMethodImpl#getBody <em>Body</em>}</li>
  *   <li>{@link org.kermeta.simk.impl.StaticMethodImpl#getUsages <em>Usages</em>}</li>
+ *   <li>{@link org.kermeta.simk.impl.StaticMethodImpl#getParentMethod <em>Parent Method</em>}</li>
  * </ul>
  * </p>
  *
@@ -158,9 +159,26 @@ public class StaticMethodImpl extends SMNamedElementImpl implements StaticMethod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getParentMethod() {
+		return (EOperation)eGet(SimkPackage.Literals.STATIC_METHOD__PARENT_METHOD, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParentMethod(EOperation newParentMethod) {
+		eSet(SimkPackage.Literals.STATIC_METHOD__PARENT_METHOD, newParentMethod);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getParentMethodFromModel() {
-		//TODO
-		return null;
+		return getParentMethod();
 	}
 
 } //StaticMethodImpl

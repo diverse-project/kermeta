@@ -1,5 +1,5 @@
 /**
- * $Id: SMContextItemProvider.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
+ * $Id: SMContextItemProvider.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMContextItemProvider.java,v 1.2 2007-11-30 14:11:24 cfaucher Exp $
+ * $Id: SMContextItemProvider.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -141,23 +141,15 @@ public class SMContextItemProvider
 	}
 
 	/**
-     * This returns the label text for the adapted class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    @Override
-    public String getText(Object object) {
-        String label = "";
-        if (((SMContext)object).getSMPackage() != null) {
-            label += " " + ((SMContext)object).getSMPackage().getQualifiedName();
-        }
-    
-        if (((SMContext)object).getSMClass() != null) {
-            label += " - " + ((SMContext)object).getSMClass().getName();
-        }
-        return getString("_UI_SMContext_type") + label;
-    }
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getText(Object object) {
+		return getString("_UI_SMContext_type");
+	}
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

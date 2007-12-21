@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="$Id: simk.genmodel,v 1.2 2007-11-30 14:11:24 cfaucher Exp $&#xD;&#xA;Project : org.kermeta.simk&#xD;&#xA;License : EPL&#xD;&#xA;Copyright : IRISA / INRIA / Universite de Rennes 1&#xD;&#xA;----------------------------------------------------------------------------&#xD;&#xA;Creation date : 30 nov. 07&#xD;&#xA;Authors : Cyril Faucher &lt;cfaucher@irisa.fr> (first iteration)"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="$Id: simk.genmodel,v 1.3 2007-12-21 14:17:03 cfaucher Exp $&#xD;&#xA;Project : org.kermeta.simk&#xD;&#xA;License : EPL&#xD;&#xA;Copyright : IRISA / INRIA / Universite de Rennes 1&#xD;&#xA;----------------------------------------------------------------------------&#xD;&#xA;Creation date : 30 nov. 07&#xD;&#xA;Authors : Cyril Faucher &lt;cfaucher@irisa.fr> (first iteration)"
     modelDirectory="/org.kermeta.simk/src" creationSubmenus="true" editDirectory="/org.kermeta.simk/src"
     editorDirectory="/org.kermeta.simk/src" modelPluginID="org.kermeta.simk" templateDirectory=""
     redirection="" forceOverwrite="true" modelName="Simk" modelPluginClass="" reflectiveDelegation="true"
     testsDirectory="" importerID="org.eclipse.emf.importer.ecore" featureDelegation="Reflective"
-    containmentProxies="true" complianceLevel="5.0" copyrightFields="false">
+    containmentProxies="true" complianceLevel="5.0" copyrightFields="false" publicConstructors="true">
   <foreignModel>simk.ecore</foreignModel>
   <genPackages prefix="Simk" basePackage="org.kermeta" disposableProviderFactory="true"
       multipleEditorPages="false" ecorePackage="simk.ecore#/">
@@ -26,6 +26,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//StaticMethod/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//StaticMethod/body"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//StaticMethod/usages"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//StaticMethod/parentMethod"/>
       <genOperations ecoreOperation="simk.ecore#//StaticMethod/getParentMethodFromModel"/>
     </genClasses>
     <genClasses ecoreClass="simk.ecore#//SMContext">
