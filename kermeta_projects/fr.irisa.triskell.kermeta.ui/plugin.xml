@@ -63,6 +63,9 @@
            name="New Kermeta Project"
            project="true">
         <selection class="org.eclipse.core.resources.IProject"/>
+        <description>
+           Create a new Kermeta project
+        </description>
      </wizard>
       <wizard
             category="fr.irisa.triskell.kermeta.KermetaWizard"
@@ -76,6 +79,9 @@
             <selection class="org.eclipse.core.resources.IProject"/>
             <selection class="org.eclipse.core.resources.IFolder"/>
             <selection class="org.eclipse.core.resources.IFile"/>
+            <description>
+               Create a new Kermeta text file
+            </description>
         </wizard>
   </extension>
     <extension
