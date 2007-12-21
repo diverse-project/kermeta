@@ -1,4 +1,4 @@
-/* $Id: PatternMatchingFlora2.kmt,v 1.4 2007-12-21 16:02:46 bmorin Exp $
+/* $Id: PatternMatchingFlora2.kmt,v 1.5 2007-12-21 16:25:42 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -11,8 +11,8 @@ require kermeta
 
 //require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
 
-require "../pattern/PatternMatching.kmt"
-require "../pattern/metamodel/PatternFramework.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/PatternMatching.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
 
 require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.kmt"
 require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/FloraInterpreter.kmt"

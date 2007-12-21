@@ -1,4 +1,4 @@
-/* $Id: PatternMatching.kmt,v 1.3 2007-12-21 16:20:57 bmorin Exp $
+/* $Id: PatternMatching.kmt,v 1.4 2007-12-21 16:25:42 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -8,7 +8,7 @@ package kermeta::pattern;
 
 
 require kermeta
-require "./metamodel/PatternFramework.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
 require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 //comment
 
