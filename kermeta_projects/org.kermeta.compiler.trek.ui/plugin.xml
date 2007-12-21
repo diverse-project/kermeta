@@ -153,7 +153,7 @@
          <action
                class="org.kermeta.compiler.trek.ui.popup.actions.AssignTestCasesToUseCases"
                enablesFor="+"
-               icon="icons/mapping.png"
+               icon="icons/mapping.gif"
                id="org.kermeta.trek.ui.AssignTestCasesToUseCases"
                label="Map Test Cases to Use Cases"
                menubarPath="org.kermeta.compiler.trek.subMenu/mapping">
