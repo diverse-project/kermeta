@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!-- $Id: Generator-UI-Guide.docb.xml,v 1.1 2007-12-21 14:14:58 cfaucher Exp $ -->
+<book lang="en-US">
+	<bookinfo>
+	    <title>Generation of the Kermeta Compiler Documentation</title>
+		<pubdate>Build date: @BUILD.DATE@</pubdate>
+	    <pubdate>$Date: 2007-12-21 14:14:58 $</pubdate>
+	    <author>
+	      <firstname>Cyril</firstname>
+	      <surname>Faucher</surname>
+	    </author>
+		<keywordset>
+	      <keyword>Kermeta</keyword>
+		  <keyword>requirement</keyword>
+		  <keyword>specification</keyword>
+	      <keyword>use case</keyword>	
+	      <keyword>test case</keyword>	      	      
+	    </keywordset>
+	
+	    <bibliomisc>License EPL</bibliomisc>
+	
+	    <abstract>
+	      <para>This document aims to explain the user interface abilities dedicated to the generation of the Kermeta Compiler Documentation.</para>
+	    </abstract>
+	
+	    <publisher>
+	      <publishername>INRIA</publishername>
+	      <address><state>France</state>
+			<otheraddr><ulink url="http://www.inria.fr">http://www.inria.fr</ulink></otheraddr>
+		  </address>
+	    </publisher>
+	  </bookinfo>
+	  
+	  <preface id="preface.link">
+		 <title id="preface.title.link">Preface<phrase id="preface"></phrase></title>
+		<para>This plugin is aimed to provide a useful environment to manage Use and Test cases related to
+		    the issues in compiling Kermeta.
+			The final result is a generated document (*.html, *.pdf) that summarizes and describes
+			Use and Test cases. There is a status board too, this one indicates design and implementation
+			status for each use case.</para>
+		<important>
+    		<para>
+			   Kermeta is an evolving software and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
+				<ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+			    <emphasis role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+			    </ulink> or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v0.99.0
+    		</para>
+    	</important>
+
+    	<!--tip> The most update version of this document is available on line from <ulink type="" url="http://www.kermeta.org/">http://www.kermeta.org</ulink>.</tip-->
+  	  </preface>
+  	<chapter>
+		<title>Compilation Process</title>
+		<section>
+			<title id="requirements.title.link">Required resources</title>
+			<para>You must check out in your workspace the project ant-docbook-styler from the Kermeta forge.</para>
+			<para/>
+	    	<para>Plugin dependencies: your installation should contain the following plugins:</para>
+			<itemizedlist>
+				<listitem><para>org.kermeta.trek.model</para></listitem>
+				<listitem><para>org.kermeta.trek.model.edit</para></listitem>
+				<listitem><para>org.kermeta.trek.model.editor</para></listitem>
+				<listitem><para>org.kermeta.trek.ui</para></listitem>
+				<listitem><para>org.kermeta.compiler.trek.ui</para></listitem>
+			</itemizedlist>
+		</section>
+	
+		<section>
+			<title id="how_to_build.title.link">How to build the compiler documentation ?</title>
+			<para>The generation of the final document is done in four steps:</para>
+			<orderedlist>
+				<listitem><para>edit summary and progress text files for each use cases,</para></listitem>
+				<listitem><para>generate the Trek Use Kase Models,</para></listitem>
+				<listitem><para>generate the docbook file,</para></listitem>
+				<listitem><para>generate the html-single and pdf files.</para></listitem>
+			</orderedlist>
+			
+			<para>1. Editing summary and progress text files for each use cases:</para>
+<para/>
+<para>Folders organization:</para>
+<para>Assumption: a test case verifies an unique use case, then a test case can be contained by a use case.</para>
+			<itemizedlist>
+				<listitem><para>The use cases are defined in the folder: *project_dir*/unit_test</para></listitem>
+				<listitem><para>A use case is contained inside a folder named like this: ~/unit_test/comp_*use_case_name*
+	Each use case folder contains a summary file: summary_*use_case_name*.txt
+	and a progress file: progress_*use_case_name*.txt</para></listitem>
+				<listitem><para>The test cases that verify a use case are contained in subfolders as: ~/comp_*use_case_name*/*test_case_name*
+	The test case name is calculated like this: test*number_of_the_test_case*
+	Each test case folder contains a summary file: summary_*test_case_name*.txt
+	Each test case folder contains a folder "input" and "expected_output": "input" contains the resources that
+	are required in order to launch the test case and the "expected_output" contains the resources that are
+	expected after the execution of the test case.</para></listitem>
+			</itemizedlist>
+			<para/>
+			<para>The Summary and progress text files are used during the second step: generation of the Trek models,
+			thus to update information in the final document, the recommended way is to modify summary and
+			progress text files, then restart the second, third and fourth steps (these three steps are press-button operations).</para>
+			
+			<para/>
+			
+			<para>2. Generation of the Trek Use Kase Models:</para>
+			<para>Right-click on the folder: *project_dir*/unit_test and choose the action:</para>
+			<para>	> Trek for Kermeta Compiler > Generate the Trek Use Kase Models (full process)</para>
+			<para>	Refresh the project (press F5) for avoiding "out of synchronize" mistakes.</para>
+			<para>	Some *.trek files are generated.</para>
+			
+			<para/>
+			
+			<para>3. Generation of the docbook file (*.xml):</para>
+			<para>Right-click on the Kermeta file: *project_dir*/doc/builder/trek2docbook.kmt and choose the action:</para>
+			<para>	> Run As > Kermeta App</para>
+			<para>	Refresh the project (press F5) for avoiding "out of synchronize" mistakes.</para>
+			<para>	A docbook file is generated: *project_dir*/doc/docbook/unit_test.docb.xml</para>
+			
+			<para/>
+			
+			<para>4. Generation of the html-single and pdf files:</para>
+			<para>Right-click on the xml file (Ant): *project_dir*/doc/builder/unit_test_build.xml and choose the action:</para>
+			<para>	> Run As > Ant Build</para>
+			<para>	Refresh the project (press F5) for avoiding "out of synchronize" mistakes.</para>
+			<para>	A html-single file is generated: *project_dir*/doc/build/html.single/unit_test/index.html</para>
+			<para>	A pdf file is generated: *project_dir*/doc/build/pdf.fop/unit_test/unit_test.pdf</para>
+		</section>
+		
+		<section>
+			<title id="how_to_customize.title.link">How to customize the docbook file generation ?</title>
+			<para>The generation of the docbook file is built thanks to the tool: KET (more info. at: http://www.kermeta.org/mdk/ket).
+			Thus, some templates have been used to generate the docbook file, these resources are located
+			in the folder: *project_dir*/doc/templates as *.ket files.</para>
+			<para>The translation/compilation KET to KMT is automatic thanks to a KPM rule that takes in input a *.ket file
+			and transforms it into a *.kmt file. Also if you change the location of the *.ket file, you must update
+			.project.kpm file, i.e.: updating the related name filters.</para>
+			<para>To conclude, in order to add or customize the docbook templates (*.ket), you have to adapt the *.ket files and
+			maybe adapt the model navigation written in *project_dir*/doc/builder/trek2docbook.kmt.
+			</para>
+		</section>
+	
+	</chapter>
+</book>
