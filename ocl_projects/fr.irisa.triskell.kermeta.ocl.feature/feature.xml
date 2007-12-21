@@ -18,11 +18,36 @@
    </license>
 
    <requires>
-      <import feature="fr.irisa.triskell.kermeta" version="0.5.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="fr.irisa.triskell.traceability"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui.forms"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.ocl"/>
+      <import plugin="org.eclipse.emf.ocl"/>
+      <import plugin="fr.irisa.triskell.eclipse.util"/>
+      <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
+      <import plugin="fr.irisa.triskell.kermeta"/>
    </requires>
 
    <plugin
          id="fr.irisa.triskell.kermeta.ocl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="net.sourceforge.lpg.lpgjavaruntime"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="fr.irisa.triskell.traceability"
          download-size="0"
          install-size="0"
          version="0.0.0"
