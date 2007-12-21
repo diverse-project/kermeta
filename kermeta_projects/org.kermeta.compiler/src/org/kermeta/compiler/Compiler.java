@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.3 2007-11-22 13:00:25 cfaucher Exp $
+/* $Id: Compiler.java,v 1.4 2007-12-21 14:25:12 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -17,6 +17,7 @@ import java.util.Iterator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
@@ -26,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.kermeta.compiler.generator.helper.model.HelperModel;
+import org.kermeta.compiler.generator.helper.model.SimkModelHelper;
 import org.kermeta.compiler.generator.internal.actions.GenerateHelperAction;
 import org.kermeta.compiler.util.CompilerUtil;
 import org.kermeta.io.KermetaUnit;
@@ -49,9 +50,7 @@ public class Compiler extends Generator {
 	
 	private EcoreExporter km2ecoreGen = null;
 	
-	private HelperModel helperModel = null;
-	
-	public Compiler(String abosluteEcorePath, KermetaUnit kmUnit, EcoreExporter km2ecoreGen, HelperModel helperModel) {
+	public Compiler(String abosluteEcorePath, KermetaUnit kmUnit, EcoreExporter km2ecoreGen) {
 		super();
 		arguments[0] = "-ecore2GenModel";
 		arguments[1] = abosluteEcorePath;
@@ -62,7 +61,6 @@ public class Compiler extends Generator {
 		this.ecorefile = ResourceHelper.getIFile("file:/"+arguments[1]);
 		this.kmUnit = kmUnit;
 		this.km2ecoreGen = km2ecoreGen;
-		this.helperModel = helperModel;
 	}
 
 	public Compiler(IFile ecoreFile) {
@@ -126,7 +124,7 @@ public class Compiler extends Generator {
 			
 			try {
 				// Refresh the project containing the ecore file
-				ecorefile.getParent().refreshLocal(1, null);
+				ecorefile.getParent().refreshLocal(1, new NullProgressMonitor());
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
@@ -210,8 +208,9 @@ public class Compiler extends Generator {
 		genModelPath = genModelPath.replace( ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(), "platform:/resource/" );
 		
 		IFile genModelFile = ResourceHelper.getIFile(genModelPath);
+		IFile simk_file = ResourcesPlugin.getWorkspace().getRoot().getFile(genModelFile.getFullPath().removeFileExtension().addFileExtension(SimkModelHelper.SIMK_EXT));
 		if(genModelFile.exists()) {
-			compileHelperAction.generate(genModelFile, this.kmUnit, this.km2ecoreGen, this.helperModel);
+			compileHelperAction.generate(genModelFile, this.kmUnit, this.km2ecoreGen, simk_file);
 		}
 	}
 

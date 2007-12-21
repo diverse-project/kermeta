@@ -1,4 +1,4 @@
-/* $Id: KM2JavaPrettyPrinter.java,v 1.3 2007-11-22 13:00:25 cfaucher Exp $
+/* $Id: KM2JavaPrettyPrinter.java,v 1.4 2007-12-21 14:25:12 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : KM2JavaPrettyPrinter.java
  * License   : EPL
@@ -20,10 +20,18 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.kermeta.compiler.generator.helper.model.HelperMethod;
-import org.kermeta.compiler.generator.helper.model.HelperModel;
+import org.eclipse.emf.ecore.EOperation;
+import org.kermeta.simk.SIMKModel;
+import org.kermeta.simk.SMContext;
+import org.kermeta.simk.SMPackage;
+import org.kermeta.simk.SMParameter;
+import org.kermeta.simk.SMReturn;
+import org.kermeta.simk.SMUsage;
+import org.kermeta.simk.SimkFactory;
+import org.kermeta.simk.StaticMethod;
 
 import fr.irisa.triskell.kermeta.ast.helper.KMTHelper;
+import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.BooleanLiteral;
@@ -93,7 +101,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	protected String prefixTab = "\t";
 	
-	private HelperModel helperModel = null;
+	private SIMKModel helperModel = null;
 	
 	/**
 	 * Boolean variable used to manage the prefix printing
@@ -107,8 +115,10 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KM2JAVA");
 	
+	private EcoreExporter km2ecore = null;
 	
-	public KM2JavaPrettyPrinter() {
+	public KM2JavaPrettyPrinter(EcoreExporter km2ecore) {
+		this.km2ecore = km2ecore;
 	}
 	
 	/**
@@ -570,7 +580,38 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 				}
 			}
 			
-			HelperMethod aHM = new HelperMethod(
+			StaticMethod newStaticMethod = SimkFactory.eINSTANCE.createStaticMethod();
+			newStaticMethod.setName(((CallFeature) node.eContainer()).getStaticOperation().getName());
+			
+			SMParameter newParameter = SimkFactory.eINSTANCE.createSMParameter();
+			newParameter.setName(node.getParameters().get(0).getName());
+			newParameter.setType(paramType);
+			
+			SMReturn newReturn = SimkFactory.eINSTANCE.createSMReturn();
+			newReturn.setType(TypeHelper.getName(((CallFeature) node.eContainer()).getStaticType()));
+			
+			newStaticMethod.getSMParameters().add(newParameter);
+			newStaticMethod.setSMReturn(newReturn);
+			
+			newStaticMethod.setId(Integer.toString(helperModel.getNextId()));
+			newStaticMethod.setBody((String) this.accept(node.getBody()));
+			
+			//org.kermeta.simk.Class newClass = SimkFactory.eINSTANCE.createClass();
+			//newClass.setName("");
+			
+			SMPackage newPackage = SimkFactory.eINSTANCE.createSMPackage();
+			newPackage.setName(((NamedElement)current_modelOperation.eContainer().eContainer()).getName());
+			
+			//newClass.setPackage(newPackage);
+			
+			SMContext newContext = SimkFactory.eINSTANCE.createSMContext();
+			//newContext.setClass(newClass);
+			newContext.setSMPackage(newPackage);
+			
+			newStaticMethod.setParentMethod((EOperation) this.km2ecore.getKm2ecoremapping().get(current_modelOperation));
+			newStaticMethod.getUsages().add(SMUsage.FUNCTION_TYPE);
+			
+			/*SimkMethodHelper aHM = new SimkMethodHelper(
 					((CallFeature) node.eContainer()).getStaticOperation().getName(),
 					node.getParameters().get(0).getName(),
 					paramType,
@@ -580,8 +621,13 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 					((NamedElement)current_modelOperation.eContainer().eContainer()).getName(),
 					NamedElementHelper.getQualifiedName((NamedElement) current_modelOperation.eContainer().eContainer()),
 					Integer.toString(helperModel.getNextId())
-							);
-			helperModel.helperMethods.add(aHM);
+							);*/
+			
+			if(!NamedElementHelper.getQualifiedName((NamedElement) current_modelOperation.eContainer().eContainer()).contains("kermeta")) {
+				helperModel.getSMContexts().add(newContext);
+				helperModel.getStaticMethods().add(newStaticMethod);
+				newStaticMethod.setSMContext(newContext);
+			}
 		} else {
 			result = "{";
 			result += ppComaSeparatedNodes(node.getParameters());
@@ -1253,12 +1299,12 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
 			return false;
 	}
 
-	public HelperModel getHelperModel() {
+	public SIMKModel getHelperModel() {
 		return helperModel;
 	}
 
-	public void setHelperModel(HelperModel helperModel) {
+	public void setHelperModel(SIMKModel helperModel) {
 		this.helperModel = helperModel;
 	}
-	
+
 }

@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.2 2007-11-22 13:00:24 cfaucher Exp $
+/* $Id: CompileKermetaAction.java,v 1.3 2007-12-21 14:25:12 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -16,11 +16,14 @@ import java.util.LinkedHashSet;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
@@ -30,11 +33,20 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.Compiler;
 import org.kermeta.compiler.exporter.KM2JavaPrettyPrinter;
-import org.kermeta.compiler.generator.helper.model.HelperModel;
+import org.kermeta.compiler.generator.helper.model.SimkModelHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.merger.Merger;
+import org.kermeta.simk.SIMKModel;
+import org.kermeta.simk.SMClass;
+import org.kermeta.simk.SMContext;
+import org.kermeta.simk.SMPackage;
+import org.kermeta.simk.SMParameter;
+import org.kermeta.simk.SMUsage;
+import org.kermeta.simk.SimkFactory;
+import org.kermeta.simk.StaticMethod;
 
+import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
@@ -129,8 +141,8 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 		/*ResourceSet resource_set = */km2ecoreGen.exportInMemory(unit, kermetafile.getParent().getFullPath().toString(), exporterOptions);
 		internalLog.info("Ecore structure has been generated");
 		
-		HelperModel helperModel = prettyPrintJavaCode(km2ecoreGen,unit);
-		
+		prettyPrintJavaCode(km2ecoreGen,unit);
+
 		fixPrintJavaCode(km2ecoreGen,unit);
 		internalLog.info("Java source code has been printed inside GenModel EAnnotations");
 		
@@ -139,7 +151,7 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 			
 //		kermetafile.getParent().refreshLocal(1, null);
 	
-		Compiler compiler = new Compiler(ecorePath, unit, km2ecoreGen, helperModel);
+		Compiler compiler = new Compiler(ecorePath, unit, km2ecoreGen);
 		
 		try {
 			compiler.run();
@@ -197,14 +209,17 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 	 * @param km2ecore
 	 * @param unit
 	 */
-	private static HelperModel prettyPrintJavaCode(EcoreExporter km2ecore, KermetaUnit unit) {
+	private void prettyPrintJavaCode(EcoreExporter km2ecore, KermetaUnit unit) {
 		
-		HelperModel helperModel = new HelperModel();
+		IFile simk_file = ResourcesPlugin.getWorkspace().getRoot().getFile(kermetafile.getFullPath().removeFileExtension().addFileExtension(SimkModelHelper.SIMK_EXT));
+		SIMKModel simkModel = SimkModelHelper.createSIMKModel(simk_file);
+		simkModel.setName(simk_file.getName());
+		//SimkModelHelper helperModel = new SimkModelHelper();
 		
 		try {
-			KM2JavaPrettyPrinter prettyPrinter = new KM2JavaPrettyPrinter();
+			KM2JavaPrettyPrinter prettyPrinter = new KM2JavaPrettyPrinter(km2ecore);
 
-			prettyPrinter.setHelperModel(helperModel);
+			prettyPrinter.setHelperModel(simkModel);
 			
 			for(TypeDefinition aTypeDef : fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper.getTypeDefinitions(unit)) {
 				if(aTypeDef instanceof ClassDefinition) {
@@ -246,24 +261,53 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 										bodyString,
 										null);
 									
-									/*EOperation eOp = (EOperation) eObj;
+									EOperation eOp = (EOperation) eObj;
 									
+									/*
 									// Duplicate the EOperation to solve the problem of multiple inheritance
 									KM2EcorePass1 aKM2EcorePass1 = new KM2EcorePass1(eOp.eResource(), km2ecore.getKm2ecoremapping(), unit, null, null);
 									EOperation eOp_class = (EOperation) aKM2EcorePass1.accept(op);
 									eOp_class.setName(eOp_class.getName() + "_" + ((EClass) eOp.eContainer()).getName());
 									((EClass) eOp.eContainer()).getEOperations().add(eOp_class);*/
+									
+									if( isRunnable(eOp) && !EcoreHelper.getQualifiedName(eOp).contains("kermeta") ) {
+										StaticMethod newStaticMethod = SimkFactory.eINSTANCE.createStaticMethod();
+										newStaticMethod.setParentMethod(eOp);
+										
+										SMContext newSMContext = SimkFactory.eINSTANCE.createSMContext();
+										newStaticMethod.setSMContext(newSMContext);
+										newStaticMethod.getUsages().add(SMUsage.RUNNER);
+										
+										for(EParameter param : eOp.getEParameters()) {
+											SMParameter newSMParameter = SimkFactory.eINSTANCE.createSMParameter();
+											newSMParameter.setName(param.getName());
+											newSMParameter.setType(param.getEType().getName());
+											newStaticMethod.getSMParameters().add(newSMParameter);
+										}
+										
+										SMClass newSMClass = SimkFactory.eINSTANCE.createSMClass();
+										newSMClass.setName(((ENamedElement)eOp.eContainer()).getName());
+										
+										SMPackage newSMPackage = SimkFactory.eINSTANCE.createSMPackage();
+										newSMPackage.setName(((ENamedElement)eOp.eContainer().eContainer()).getName());
+										
+										newSMContext.setSMClass(newSMClass);
+										newSMContext.setSMPackage(newSMPackage);
+										newSMClass.setSMPackage(newSMPackage);
+										
+										prettyPrinter.getHelperModel().getStaticMethods().add(newStaticMethod);
+										prettyPrinter.getHelperModel().getSMContexts().add(newSMContext);
+									}
 								}
 							//}
 						}
 					}
 				}
 			}
-			helperModel = prettyPrinter.getHelperModel();
+			prettyPrinter.getHelperModel().eResource().save(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return helperModel;
 	}
 	
 	/**
@@ -359,4 +403,20 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 		}
 	}
 
+	/**
+	 * Check if an EOperation is runnable via for the generation the main and class method
+	 * @param eop
+	 * @return
+	 */
+	public boolean isRunnable(EOperation eop) {
+		boolean res = true;
+		for (EParameter eparam : eop.getEParameters()) {
+			if (eparam.getEType().getName().equals("String")) {
+				res = true;
+			} else {
+				return false;
+			}
+		}
+		return res;
+	}
 }
