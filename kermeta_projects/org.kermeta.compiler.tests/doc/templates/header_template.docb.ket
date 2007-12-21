@@ -8,12 +8,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: header_template.docb.ket,v 1.3 2007-12-13 17:11:16 cfaucher Exp $ -->
+<!-- $Id: header_template.docb.ket,v 1.4 2007-12-21 15:41:09 cfaucher Exp $ -->
 <book lang="en-US">
 	<bookinfo>
 	    <title>Kermeta Compiler Documentation</title>
 		<pubdate>Build date: @BUILD.DATE@</pubdate>
-	    <pubdate>$Date: 2007-12-13 17:11:16 $</pubdate>
+	    <pubdate>$Date: 2007-12-21 15:41:09 $</pubdate>
 	    <author>
 	      <firstname>Cyril</firstname>
 	      <surname>Faucher</surname>
@@ -46,13 +46,14 @@
 	  
 	  <preface id="preface.link">
 		 <title id="preface.title.link">Preface<phrase id="preface"></phrase></title>
-		<para>
-		    	This document aims to provide a development plan of the Kermeta compiler: Kermeta to Java.
-					The document is divided in three parts:
-					- An introduction dedicated to the architecture shows the process of the generation of the Java source code,
-					- a status board showing the state of the whole of tasks,
-					- a listing of the issues in compiling, giving the description of the issue and links to the files in the Kermeta CVS. These kmt files are pieces of KMT source code to explain and show the issues in different cases. A piece of a Java source code is as well provided to show the expected Java source code and to finish the generated Ecore file corresponding to the KMT file. All the resources are available at [<ulink type="" url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/?cvsroot=kermeta">cvs</ulink>].
-		</para>
+		<para>This document aims to provide a development plan of the Kermeta compiler: Kermeta to Java. The document is divided in three parts:</para>		
+	    
+	    <itemizedlist>
+	    	<listitem><para>An introduction dedicated to the architecture shows the process of the generation of the Java source code,</para></listitem>
+			<listitem><para>a status board showing the state of the whole of tasks,</para></listitem>
+			<listitem><para>a listing of the issues in compiling, giving the description of the issue and links to the files in the Kermeta CVS. These kmt files are pieces of KMT source code to explain and show the issues in different cases. A piece of a Java source code is as well provided to show the expected Java source code and to finish the generated Ecore file corresponding to the KMT file. All the resources are available at [<ulink type="" url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/?cvsroot=kermeta">cvs</ulink>].</para></listitem>
+		</itemizedlist>
+		
 		<important>
     		<para>
 			   Kermeta is an evolving software and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
