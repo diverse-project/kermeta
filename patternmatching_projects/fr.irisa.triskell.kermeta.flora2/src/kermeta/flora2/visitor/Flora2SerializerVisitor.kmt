@@ -1,4 +1,4 @@
-/* $Id: Flora2SerializerVisitor.kmt,v 1.3 2007-08-24 12:09:18 bmorin Exp $
+/* $Id: Flora2SerializerVisitor.kmt,v 1.4 2007-12-21 15:16:31 bmorin Exp $
  * Creation date: October 5, 2006
  * License:
  * Copyright:
@@ -11,7 +11,7 @@
 package flora2::visitors;
 
 require kermeta
-require "../../../flora2/Flora2wVisitor.kmt"  
+require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.kmt"  
   
 using kermeta::standard
 using kermeta::reflection
@@ -67,7 +67,9 @@ class Flora2SerializerVisitor inherits Visitor
        end end end end end end end end end end end end end
  	end
  	
-	method visitProgram(visitable : flora2::Program) : flora2::DTString is do end
+	method visitProgram(visitable : flora2::Program) : flora2::DTString is do 
+		result :=""
+	end
 	
 	method visitRule(visitable : flora2::Rule) : flora2::DTString is do 
 	   result := visitable.head.accept(self)+ ":-"+ result visitable.body.accept(self)+"."	
@@ -160,29 +162,37 @@ class Flora2SerializerVisitor inherits Visitor
 	end	
  
 	method visitClause(visitable : flora2::Clause) : flora2::DTString is do 
-	      stdio.writeln ("Should not enter em clause")		
+	      stdio.writeln ("Should not enter em clause")	
+	      result := ""	
 	end
 	method visitAtomicFormula(visitable : flora2::AtomicFormula) : flora2::DTString is do 
-	      stdio.writeln ("Should not enter in AtomicFormula")			
+	      stdio.writeln ("Should not enter in AtomicFormula")	
+	      result := ""			
 	end
 	
 	method visitTerm(visitable : flora2::Term) : flora2::DTString is do 
-	      stdio.writeln ("Should not enter in Term")				
+	      stdio.writeln ("Should not enter in Term")	
+	      result := ""				
 	end
 	method visitNonFunctionalTerm(visitable : flora2::NonFunctionalTerm) : flora2::DTString is do 
-	      stdio.writeln ("Should not enter in FunctionalTerm")				
+	      stdio.writeln ("Should not enter in FunctionalTerm")	
+	      result := ""				
 	end
 	method visitISAAtom(visitable : flora2::ISAAtom) : flora2::DTString is do 
-	      stdio.writeln ("Should not enter in IsAAtom")				
+	      stdio.writeln ("Should not enter in IsAAtom")		
+	      result := ""			
 	end
 	method visitFeatureAtom(visitable : flora2::FeatureAtom) : flora2::DTString is do 
-	      stdio.writeln ("Should not enter in FeatureAtom")				
+	      stdio.writeln ("Should not enter in FeatureAtom")		
+	      result := ""			
 	end	
 	method visitIdTerm(visitable : flora2::IdTerm) : flora2::DTString is do 
-	      stdio.writeln ("Should not enter in IdTErm")				
+	      stdio.writeln ("Should not enter in IdTErm")	
+	      result := ""				
 	end
 	method visitExpression(visitable : flora2::Expression) : flora2::DTString is do 
-	      stdio.writeln ("Should not enter in Expression")				
+	      stdio.writeln ("Should not enter in Expression")	
+	      result := ""				
 	end	
 	
 

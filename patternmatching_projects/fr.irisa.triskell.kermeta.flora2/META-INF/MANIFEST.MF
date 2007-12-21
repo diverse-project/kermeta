@@ -7,7 +7,11 @@ Bundle-Activator: fr.irisa.triskell.kermeta.flora2.Activator
 Bundle-Vendor: IRISA Triskell
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore
+ org.eclipse.emf.ecore,
+ fr.irisa.triskell.kermeta,
+ fr.irisa.triskell.kermeta.model,
+ fr.irisa.triskell.kermeta.io,
+ fr.irisa.triskell.kermeta.interpreter
 Eclipse-LazyStart: true
 Export-Package: com.declarativa.interprolog,
  com.declarativa.interprolog.examples,

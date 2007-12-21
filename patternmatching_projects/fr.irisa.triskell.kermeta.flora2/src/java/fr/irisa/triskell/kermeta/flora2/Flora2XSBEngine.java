@@ -1,4 +1,4 @@
-/* $Id: Flora2XSBEngine.java,v 1.6 2007-07-26 12:52:23 ftanguy Exp $
+/* $Id: Flora2XSBEngine.java,v 1.7 2007-12-21 15:16:31 bmorin Exp $
  * Project : Kermeta (First iteration)
  * License : GPL
  * Copyright : IRISA / Universite de Rennes 1
@@ -33,13 +33,13 @@ public class Flora2XSBEngine {
     
 
     public static RuntimeObject executeCommand (RuntimeObject self, RuntimeObject command) {
-            java.lang.String strCommand = java.lang.String.valueOf( command.getData().get("StringValue"));
+            java.lang.String strCommand = java.lang.String.valueOf( command.getJavaNativeObject());
             	   getSession().ExecuteCommand(strCommand);
             return self.getFactory().getMemory().voidINSTANCE;
     } 
 
     public static RuntimeObject executeQueryCommand(RuntimeObject self, RuntimeObject command) {
-        java.lang.String strQuery = java.lang.String.valueOf( command.getData().get("StringValue"));
+        java.lang.String strQuery = java.lang.String.valueOf( command.getJavaNativeObject());
         java.util.Iterator ite = getSession().ExecuteQuery(strQuery);
         java.util.List<RuntimeObject> list = new java.util.ArrayList<RuntimeObject>(); 
         while (ite.hasNext()) {
@@ -63,13 +63,13 @@ public class Flora2XSBEngine {
       
         java.util.List list = new java.util.ArrayList();
 
-        java.lang.String strQuery = java.lang.String.valueOf( command.getData().get("StringValue"));
+        java.lang.String strQuery = java.lang.String.valueOf( command.getJavaNativeObject());
         java.util.Vector<java.lang.String> vectorParams = new java.util.Vector<java.lang.String>();
         
         java.util.ArrayList varlist = Collection.getArrayList(vars);
         java.util.Iterator iteVars = varlist.iterator();
         while ( iteVars.hasNext()){
-            String str = java.lang.String.valueOf( ((RuntimeObject) iteVars.next()).getData().get("StringValue"));
+            String str = java.lang.String.valueOf( ((RuntimeObject) iteVars.next()).getJavaNativeObject());
             vectorParams.add( str);
             //System.out.println("parameters= "+ str);            
         }
