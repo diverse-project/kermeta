@@ -14,7 +14,7 @@
 		</para>
 		
 		<informaltable>
-          <tgroup cols="4">
+          <tgroup cols="3">
             <colspec colname="c1"/>
             <colspec colname="c2"/>
             <colspec colname="c3"/>
