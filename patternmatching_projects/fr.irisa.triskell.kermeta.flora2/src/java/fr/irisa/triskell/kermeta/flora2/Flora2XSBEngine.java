@@ -1,4 +1,4 @@
-/* $Id: Flora2XSBEngine.java,v 1.7 2007-12-21 15:16:31 bmorin Exp $
+/* $Id: Flora2XSBEngine.java,v 1.8 2007-12-21 15:19:17 bmorin Exp $
  * Project : Kermeta (First iteration)
  * License : GPL
  * Copyright : IRISA / Universite de Rennes 1
@@ -155,6 +155,5 @@ public class Flora2XSBEngine {
           Flora2XSBEngine.close();          
           System.out.println("End");
       }    
-
 } 
  
