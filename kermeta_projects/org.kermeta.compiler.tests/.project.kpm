@@ -355,7 +355,7 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/Comp_assignment_test004Factory.java"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/B.java"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/comp_assignment_test004/A.java"/>
-  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T15:02:54.160+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/ecore/comp_assignment_test004.ecore"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T15:02:54.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/ecore/comp_assignment_test004.ecore"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/eclipse_launcher/comp_assignment_test004.launch"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/summary_test003.txt"/>
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T14:47:15.519+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/input/kermeta/comp_assignment_test003.kmt"/>
@@ -384,7 +384,7 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/java/comp_assignment_test002/Comp_assignment_test002Factory.java"/>
   <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T14:56:30.646+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/ecore/comp_assignment_test002.ecore"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/summary_test001.txt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T14:47:03.217+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/input/kermeta/comp_assignment_test001.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-11-19T14:47:03.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/input/kermeta/comp_assignment_test001.kmt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/util/Comp_assignment_test001Switch.java"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/util/Comp_assignment_test001AdapterFactory.java"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/runner/Comp_assignment_test001__Main__main_Runner.java"/>
@@ -395,7 +395,6 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/Comp_assignment_test001Package.java"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/comp_assignment_test001/Comp_assignment_test001Factory.java"/>
   <units rules="//@rules.0 //@rules.3" lastTimeModified="2007-11-19T14:54:31.067+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/ecore/comp_assignment_test001.ecore"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/comp_assignment.trek"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/build.properties"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/META-INF/MANIFEST.MF"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/.project"/>
@@ -431,7 +430,6 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_primitiveType/comp_primitiveType.trek"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_propertyBehavior/comp_propertyBehavior.trek"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_reference/comp_reference.trek"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/comp_runner.trek"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_subPackage/comp_subPackage.trek"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/summary_comp_assignment.txt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_attribute/summary_comp_attribute.txt"/>
@@ -488,14 +486,14 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_traceability/comp_traceability.trek"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_traceability/summary_comp_traceability.txt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/test001/summary_test001.txt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-13T15:35:43.198+0100" value="/org.kermeta.compiler.tests/doc/kermeta/header_template.docb.kmt" dependents="//@units.413/@dependencies.19"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-13T17:51:37.089+0100" value="/org.kermeta.compiler.tests/doc/kermeta/statusBoard_template.docb.kmt" dependents="//@units.413/@dependencies.22"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-13T14:53:19.081+0100" value="/org.kermeta.compiler.tests/doc/kermeta/testCase_template.docb.kmt" dependents="//@units.413/@dependencies.23"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:10.703+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCase_end_template.docb.kmt" dependents="//@units.413/@dependencies.26"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:11.546+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCase_start_template.docb.kmt" dependents="//@units.413/@dependencies.25"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-13T16:51:29.678+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCase_template.docb.kmt" dependents="//@units.413/@dependencies.24"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:12.359+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCases_end_template.docb.kmt" dependents="//@units.413/@dependencies.27"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:13.375+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCases_start_template.docb.kmt" dependents="//@units.413/@dependencies.28"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-17T16:19:26.824+0100" value="/org.kermeta.compiler.tests/doc/kermeta/header_template.docb.kmt" dependents="//@units.411/@dependencies.19"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-17T17:17:00.894+0100" value="/org.kermeta.compiler.tests/doc/kermeta/statusBoard_template.docb.kmt" dependents="//@units.411/@dependencies.22"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-13T14:53:19.081+0100" value="/org.kermeta.compiler.tests/doc/kermeta/testCase_template.docb.kmt" dependents="//@units.411/@dependencies.23"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:10.703+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCase_end_template.docb.kmt" dependents="//@units.411/@dependencies.26"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:11.546+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCase_start_template.docb.kmt" dependents="//@units.411/@dependencies.25"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-13T16:51:29.678+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCase_template.docb.kmt" dependents="//@units.411/@dependencies.24"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:12.359+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCases_end_template.docb.kmt" dependents="//@units.411/@dependencies.27"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-07T06:54:13.375+0100" value="/org.kermeta.compiler.tests/doc/kermeta/useCases_start_template.docb.kmt" dependents="//@units.411/@dependencies.28"/>
   <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/footer_template.docb.ket"/>
   <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/header_template.docb.ket"/>
   <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/statusBoard_template.docb.ket"/>
@@ -505,36 +503,36 @@
   <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/useCase_template.docb.ket"/>
   <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/useCases_end_template.docb.ket"/>
   <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/useCases_start_template.docb.ket"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-13T18:05:51.827+0100" value="/org.kermeta.compiler.tests/doc/builder/trek2docbook.kmt">
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.396"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.397"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.398"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.401"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.400"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.399"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.402"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.403"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.441"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.396"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.441"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.525"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.397"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.398"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.401"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.400"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.399"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.402"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.403"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.396"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.441"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.525"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.397"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.398"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.401"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.400"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.399"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.402"/>
-    <dependencies type="//@ruleTypes.0" from="//@units.413" to="//@units.403"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-21T16:18:35.204+0100" value="/org.kermeta.compiler.tests/doc/builder/trek2docbook.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.394"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.395"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.396"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.399"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.398"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.397"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.400"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.401"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.439"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.394"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.439"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.521"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.395"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.396"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.399"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.398"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.397"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.400"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.401"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.394"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.439"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.521"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.395"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.396"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.399"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.398"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.397"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.400"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.411" to="//@units.401"/>
   </units>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/unit_test.docb.xml"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/index.xml"/>
@@ -563,7 +561,7 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/tip.gif"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/up.gif"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/gfx/admonitions/warning.gif"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-10T10:53:46.284+0100" value="/org.kermeta.compiler.tests/doc/kermeta/footer_template.docb.kmt" dependents="//@units.413/@dependencies.20"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-10T10:53:46.284+0100" value="/org.kermeta.compiler.tests/doc/kermeta/footer_template.docb.kmt" dependents="//@units.411/@dependencies.20"/>
   <units rules="//@rules.0 //@rules.5" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/templates/compilationProcess_template.docb.ket"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/builder/common_build.xml"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/builder/unit_test_build.xml"/>
@@ -633,7 +631,6 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_subPackage/progress_comp_subPackage.txt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_tag/progress_comp_tag.txt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_tag/summary_comp_tag.txt"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/.bin/trek2docbookheader_template.docbfooter_template.docbstat.km"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_propertyStructure/comp_propertyStructure.trek"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_tag/comp_tag.trek"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_uriManagement/comp_uriManagement.trek"/>
@@ -644,15 +641,141 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/customized.pdf-fop.xsl.tmp"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/unit_test/fop-ready.fo"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/builder/Kermeta Compiler Documentation - docbook generation.launch"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/pdf.fop/unit_test/index.pdf"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/src/org/kermeta/compiler/tests/CompilerTestsPlugin.java"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/bin/org/kermeta/compiler/tests/CompilerTestsPlugin.class"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-13T13:51:43.987+0100" value="/org.kermeta.compiler.tests/doc/kermeta/compilationProcess_template.docb.kmt" dependents="//@units.413/@dependencies.21"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/.bin/trek2docbookheader_template.docbfooter_template.docbcomp.km"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-12-13T13:51:43.987+0100" value="/org.kermeta.compiler.tests/doc/kermeta/compilationProcess_template.docb.kmt" dependents="//@units.411/@dependencies.21"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/unit_test/index.html"/>
-  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/pdf.fop/unit_test/unit_test.pdf"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/summary_test001.txt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test001/summary_test001.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_assignment/comp_assignment.trek"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/comp_runner/comp_runner.trek"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/.bin/trek2docbookheader_template.docbfooter_template.docbcomp.km"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/pdf.fop/unit_test/index.pdf"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/pdf.fop/unit_test/unit_test.pdf"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/docbook/Simk-Guide.docb.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/builder/Simk-Guide_build.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/Simk-Guide.docb.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/css/docbook.css"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/customized.pdf-fop.xsl.tmp"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/docbook-ready-file.tmp"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/figures/readme.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/fop-ready.fo"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/1.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/10.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/11.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/12.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/13.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/14.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/15.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/2.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/3.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/4.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/5.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/6.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/7.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/8.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/callouts/9.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/caution.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/home.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/important.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/next.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/note.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/prev.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/tip.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/up.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/gfx/admonitions/warning.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Simk-Guide/index.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/css/docbook.css"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/figures/readme.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/1.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/10.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/11.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/12.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/13.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/14.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/15.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/2.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/3.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/4.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/5.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/6.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/7.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/8.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/callouts/9.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/caution.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/home.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/important.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/next.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/note.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/prev.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/tip.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/up.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/gfx/admonitions/warning.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Simk-Guide/index.html"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/pdf.fop/Simk-Guide/Simk-Guide.pdf"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/pdf.fop/Simk-Guide/index.pdf"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/docbook/Generator-UI-Guide.docb.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/builder/Generator-UI-Guide_build.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/Generator-UI-Guide.docb.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/css/docbook.css"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/customized.pdf-fop.xsl.tmp"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/docbook-ready-file.tmp"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/figures/readme.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/fop-ready.fo"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/1.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/10.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/11.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/12.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/13.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/14.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/15.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/2.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/3.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/4.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/5.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/6.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/7.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/8.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/callouts/9.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/caution.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/home.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/important.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/next.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/note.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/prev.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/tip.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/up.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/gfx/admonitions/warning.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/docbook42/Generator-UI-Guide/index.xml"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/css/docbook.css"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/figures/readme.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/1.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/10.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/11.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/12.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/13.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/14.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/15.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/2.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/3.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/4.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/5.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/6.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/7.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/8.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/callouts/9.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/caution.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/home.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/important.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/next.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/note.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/prev.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/tip.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/up.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/gfx/admonitions/warning.gif"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/html.single/Generator-UI-Guide/index.html"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/pdf.fop/Generator-UI-Guide/Generator-UI-Guide.pdf"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/build/pdf.fop/Generator-UI-Guide/index.pdf"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/unit_test/unit_test.trek"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/org.kermeta.compiler.tests/doc/docbook/unit_test.docb.xml"/>
   <ruleTypes name="require"/>
