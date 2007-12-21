@@ -1,11 +1,17 @@
-$Id: readme.txt,v 1.4 2007-12-13 12:24:46 cfaucher Exp $
+$Id: readme.txt,v 1.5 2007-12-21 15:41:59 cfaucher Exp $
 - Project : org.kermeta.compiler.tests
 - File : 	readme.txt
 - License : EPL
 - Copyright : IRISA / INRIA / Universite de Rennes 1
 - ----------------------------------------------------------------------------
-- Creation date : 11 dec. 07
+- Creation date : Dec. 11, 2007
 - Authors : Cyril Faucher <cfaucher@irisa.fr>
+
+
+
+DEPRECATED: all the documentation is now in the docbook file: Generator-UI-Guide.docb.xml
+
+
 
 --------------------------
 --- Goal of the plugin ---
@@ -24,7 +30,7 @@ status for each use case.
 
 You must check out in your workspace the project ant-docbook-styler from the Kermeta forge.
 
-Pulgin dependencies: your installation should contain the following plugins:
+Plugin dependencies: your installation should contain the following plugins:
 org.kermeta.trek.model
 org.kermeta.trek.model.edit
 org.kermeta.trek.model.editor
@@ -66,19 +72,19 @@ progress text files, then restart the second, third and fourth steps (these thre
 2. Generation of the Trek Use Kase Models:
 Right-click on the folder: <project_dir>/unit_test and choose the action:
 	> Trek for Kermeta Compiler > Generate the Trek Use Kase Models (full process)
-	Refresh the project (F5) for avoiding "out of synchronize" mistakes.
+	Refresh the project (press F5) for avoiding "out of synchronize" mistakes.
 	Some *.trek files are generated.
 
 3. Generation of the docbook file (*.xml):
 Right-click on the Kermeta file: <project_dir>/doc/builder/trek2docbook.kmt and choose the action:
 	> Run As > Kermeta App
-	Refresh the project (F5) for avoiding "out of synchronize" mistakes.
+	Refresh the project (press F5) for avoiding "out of synchronize" mistakes.
 	A docbook file is generated: <project_dir>/doc/docbook/unit_test.docb.xml
 
 4. Generation of the html-single and pdf files:
-Right-click on the xml file (ANT): <project_dir>/doc/builder/unit_test_build.xml and choose the action:
+Right-click on the xml file (Ant): <project_dir>/doc/builder/unit_test_build.xml and choose the action:
 	> Run As > Ant Build
-	Refresh the project (F5) for avoiding "out of synchronize" mistakes.
+	Refresh the project (press F5) for avoiding "out of synchronize" mistakes.
 	A html-single file is generated: <project_dir>/doc/build/html.single/unit_test/index.html
 	A pdf file is generated: <project_dir>/doc/build/pdf.fop/unit_test/unit_test.pdf
 
