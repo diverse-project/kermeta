@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.63 2007-10-15 07:13:58 barais Exp $
+/* $Id: ExpressionInterpreter.java,v 1.64 2007-12-21 14:35:42 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -20,9 +20,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
