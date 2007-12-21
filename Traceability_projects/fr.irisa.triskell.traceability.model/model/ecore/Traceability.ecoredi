@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_FOY9IB2YEdyYPoyw7qeztQ" activeDiagram="_FO1pEB2YEdyYPoyw7qeztQ">
   <model href="Traceability.ecore#/"/>
-  <diagrams xmi:id="_FO1pEB2YEdyYPoyw7qeztQ" position="0,0" size="100,100" name="No name" viewport="260,0">
+  <diagrams xmi:id="_FO1pEB2YEdyYPoyw7qeztQ" position="0,0" size="100,100" name="traceability" viewport="80,0">
     <property xmi:id="_FvXjQB2YEdyYPoyw7qeztQ" key="pageFormatName" value="A3"/>
     <property xmi:id="_FvXjQR2YEdyYPoyw7qeztQ" key="diagramWidth" value="1188"/>
     <property xmi:id="_FvXjQh2YEdyYPoyw7qeztQ" key="diagramHeight" value="1680"/>
