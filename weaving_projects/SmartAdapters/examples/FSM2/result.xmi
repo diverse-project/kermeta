@@ -7,7 +7,7 @@
   <transitions source="//@states.0" target="//@states.1"/>
   <transitions source="//@states.0" target="//@states.2"/>
   <transitions source="//@states.2" target="//@states.3"/>
-  <transitions xsi:type="FSM:Transition" source="//@states.1" target="//@states.0"/>
+  <transitions source="//@states.1" target="//@states.0"/>
   <transitions source="//@states.2" target="//@states.0"/>
-  <transitions source="//@states.3" target="//@states.2"/>
+  <transitions xsi:type="FSM:Transition" source="//@states.3" target="//@states.2"/>
 </FSM:Fsm>

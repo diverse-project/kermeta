@@ -3,10 +3,10 @@
   <aspect>
     <template>
       <pattern>
-        <content href="templateFsm.xmi#/"/>
+        <content href="templateFsm.xmi#//@transitions.0"/>
         <content href="templateFsm.xmi#//@states.0"/>
         <content href="templateFsm.xmi#//@states.1"/>
-        <content href="templateFsm.xmi#//@transitions.0"/>
+        <content href="templateFsm.xmi#/"/>
         <roles name="anyFSM">
           <player href="templateFsm.xmi#/"/>
         </roles>
@@ -21,20 +21,31 @@
         </roles>
       </pattern>
       <featureIdentifier>name</featureIdentifier>
+      <falsepositivepatterns>
+        <content href="falseFsm.xmi#//@transitions.0"/>
+        <content href="falseFsm.xmi#//@states.0"/>
+        <content href="falseFsm.xmi#//@states.1"/>
+        <roles name="falseTransition">
+          <player href="falseFsm.xmi#//@transitions.0"/>
+        </roles>
+        <roles name="anyState">
+          <player href="falseFsm.xmi#//@states.1"/>
+        </roles>
+        <roles name="anotherState">
+          <player href="falseFsm.xmi#//@states.0"/>
+        </roles>
+      </falsepositivepatterns>
     </template>
   </aspect>
-  <adapt xsi:type="adaptations:CreateTransition" isUnique="non_unique">
-    <newTransition/>
+  <adapt xsi:type="adaptations:CloneTransition">
+    <TransitionToClone href="templateFsm.xmi#//@transitions.0"/>
+    <clonedTransition/>
   </adapt>
-  <adapt xsi:type="adaptations:SetTransition" TransitionToSet="//@adapt.0/@newTransition">
+  <adapt xsi:type="adaptations:SetTransition" TransitionToSet="//@adapt.0/@clonedTransition">
     <refsource href="templateFsm.xmi#//@states.1"/>
     <reftarget href="templateFsm.xmi#//@states.0"/>
   </adapt>
-  <adapt xsi:type="adaptations:SetFsm" reftransitions="//@adapt.0/@newTransition">
+  <adapt xsi:type="adaptations:SetFsm" reftransitions="//@adapt.0/@clonedTransition">
     <FsmToSet href="templateFsm.xmi#/"/>
-  </adapt>
-  <adapt xsi:type="adaptations:UnsetFsm">
-    <FsmToUnset href="templateFsm.xmi#/"/>
-    <reftransitions href="templateFsm.xmi#//@transitions.0"/>
   </adapt>
 </core:Adapter>

@@ -1,4 +1,4 @@
-/* $Id: weaver.kmt,v 1.5 2007-12-07 07:15:17 bmorin Exp $
+/* $Id: weaver.kmt,v 1.6 2007-12-21 15:47:21 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -64,7 +64,8 @@ class Weaver
 				/*---Pattern matching---*/
 				stdio.writeln("Searching base model elements matching template...")
 		        var matcher : PatternMatching init PatternMatchingFlora2.new
-		        var iteBindings : Iterator<Hashtable<Object, Object>> init Iterator<Hashtable<Object, Object>>.new
+		        var iteBindings : Iterator<Hashtable<Object, Object>> 
+		        	init Iterator<Hashtable<Object, Object>>.new
 		        iteBindings := matcher.match(inputMetamodel, inputModel, adapter.aspect.template)
 		        stdio.writeln("") 
 		        stdio.writeln("")
@@ -78,28 +79,35 @@ class Weaver
 				var apply:Boolean
 				var executePM:Boolean
 			 	var inputPM:String
+			 	//iterating on bindings
 				from iteBindings until iteBindings.isOff loop 
 				     binding := iteBindings.next
 					 i:=i+1
 					 stdio.writeln("")
 					 stdio.writeln("")
+					 //display current binding
 				     stdio.writeln("  -Binding"+i.toString+":")
 					 keys:=binding.keys
-					 keys.each{k | stdio.writeln(k.toString+" -> "+binding.getValue(k).toString)}
-					 input:=stdio.read("$>apply this binding ? (true/false): ")//user interaction
+					 keys.each{k | stdio.writeln(k.toString+" -> "+binding.getValue(k).toString)}				 
+					 //interaction with user
+					 input:=stdio.read("$>apply this binding ? (true/false): ")
 					 apply:=input.toBoolean
-					 if apply then //apply the adapter for the selected binding
-					 	 stdio.writeln("----------------------------")
-					 	 stdio.writeln("weaving the aspect for binding"+i.toString+"...")
-						 adapter.apply(binding)
+					 //apply composition protocol for the current binding
+					 if apply then
+					 	stdio.writeln("----------------------------")
+					 	stdio.writeln("weaving the aspect for binding"+i.toString+"...")
+						adapter.apply(binding) //aspect weaving: do not require domain concepts
 					 	stdio.writeln("weaving the aspect for binding"+i.toString+"... done")
 					 	stdio.writeln("----------------------------")
-					 	stdio.writeln("")
-					 	
+					 	stdio.writeln("")		 	
 					 	if(iteBindings.hasNext) then
+					 		//interaction with user
 						 	inputPM:=stdio.read("$>execute pattern matching ? (true/false): ")
 						 	executePM:=inputPM.toBoolean
+						 	//executing pattern matching again 
+						 	//(the composition might have change the base model)
 						 	if executePM then
+						 		iteBindings := Iterator<Hashtable<Object, Object>>.new
 						 		iteBindings := matcher.match(inputMetamodel, inputModel, adapter.aspect.template)
 						 	end
 						end
