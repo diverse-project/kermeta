@@ -1,4 +1,4 @@
-/* $Id: EMFHandler.kmt,v 1.1 2006-10-24 12:27:26 rodrigotex Exp $
+/* $Id: EMFHandler.kmt,v 1.2 2007-12-21 16:03:40 bmorin Exp $
  * Creation date: October 11, 2006
  * License:
  * Copyright:
@@ -6,7 +6,7 @@
  */
 package kermeta::persistence;
 
-require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
 
 require kermeta
 

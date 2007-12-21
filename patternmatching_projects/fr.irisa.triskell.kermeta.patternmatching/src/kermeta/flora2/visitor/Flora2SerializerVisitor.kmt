@@ -1,4 +1,4 @@
-/* $Id: Flora2SerializerVisitor.kmt,v 1.1 2006-10-24 12:27:26 rodrigotex Exp $
+/* $Id: Flora2SerializerVisitor.kmt,v 1.2 2007-12-21 16:02:46 bmorin Exp $
  * Creation date: October 5, 2006
  * License:
  * Copyright:
@@ -11,7 +11,7 @@
 package flora2::visitors;
 
 require kermeta
-require "../../../flora2/Flora2wVisitor.ecore"  
+require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.ecore"  
 
 using kermeta::standard
 using kermeta::reflection

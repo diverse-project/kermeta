@@ -1,4 +1,4 @@
-/* $Id: PatternMatching.kmt,v 1.1 2006-10-24 12:27:26 rodrigotex Exp $
+/* $Id: PatternMatching.kmt,v 1.2 2007-12-21 16:02:46 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -9,7 +9,7 @@ package kermeta::pattern;
 
 require kermeta
 require "./metamodel/PatternFramework.ecore"
-require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 
 using ecore
 using kermeta::standard
@@ -72,7 +72,7 @@ class MockPatternModel {
     // moke attributes
 	attribute pattern : MockPModel
 	reference constraints : patternframework::PConstraint
-	reference featureIdentifier : patternframework::PLabel[0..*]
+	reference featureIdentifier : String[0..*]
 	
     
     operation initializeRoles(model : Set<Object>,
@@ -83,8 +83,9 @@ class MockPatternModel {
 	        
            pattern := mockModel
 	       constraints := template.constraints
-	       featureIdentifier := template.featureIdentifier
-           pattern.roles := OrderedSet<MockePRole>.new	       
+	       featureIdentifier.clear
+	       featureIdentifier.addAll( template.featureIdentifier )
+           pattern.roles.clear     
                            
            template.pattern.roles.each{ prol | 
                var rol : MockePRole init MockePRole.new
@@ -93,7 +94,7 @@ class MockPatternModel {
                pattern.roles.add(rol)} 
     end
 
-	operation getRole(roleName : patternframework::PLabel) : Object is
+	operation getRole(roleName : String) : Object is
 		do
 			var rol : MockePRole init pattern.roles.detect{r | r.name.equals(roleName)}
 			result := if rol.isVoid.~not then
@@ -111,6 +112,6 @@ class MockPModel {
 }
 
 class MockePRole {
-	attribute name : patternframework::PLabel[0..1]
+	attribute name : String
 	reference player : Object[0..1]
 }
