@@ -1,18 +1,18 @@
-/*$Id: HelperMethod.java,v 1.1 2007-11-19 14:08:34 cfaucher Exp $
+/*$Id: SimkMethodHelper.java,v 1.1 2007-12-21 14:24:21 cfaucher Exp $
 * Project : org.kermeta.compiler
 * File : 	HelperMethod.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 18 nov. 07
-* Authors : cfaucher
+* Authors : Cyril Faucher <cfaucher@irisa.fr>
 */
 
 package org.kermeta.compiler.generator.helper.model;
 
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 
-public class HelperMethod {
+public class SimkMethodHelper {
 
 	private String name;
 	private String paramName;
@@ -25,7 +25,7 @@ public class HelperMethod {
 	private String id;
 	
 	
-	public HelperMethod(String name, String paramName, String paramType,
+	public SimkMethodHelper(String name, String paramName, String paramType,
 			String returnType, Operation parentMethodFromModel,
 			String body, String packageName,
 			String allPackagesName, String id) {
@@ -40,7 +40,7 @@ public class HelperMethod {
 		this.id = id;
 	}
 	
-	public String getName() {
+	/*public String getName() {
 		return name;
 	}
 	
@@ -114,7 +114,7 @@ public class HelperMethod {
 	
 	public String toString() {
 		return getAllPackagesName() + getName();
-	}
+	}*/
 
 }
 

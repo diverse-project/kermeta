@@ -8,6 +8,16 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
+/*$Id: GenerateHelperAction.java,v 1.3 2007-12-21 14:24:22 cfaucher Exp $
+* Project : org.kermeta.compiler.generator
+* File : 	GenerateHelperAction.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 28 nov. 07
+* Authors : Cyril Faucher <cfaucher@irisa.fr>
+*/
+
 package org.kermeta.compiler.generator.internal.actions;
 
 import java.io.IOException;
@@ -30,7 +40,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.kermeta.compiler.generator.helper.model.HelperModel;
+import org.kermeta.compiler.generator.helper.model.SimkModelHelper;
 import org.kermeta.compiler.generator.internal.GeneratorPlugin;
 import org.kermeta.compiler.generator.internal.generators.CompilerHelperGenerator;
 import org.kermeta.generator.AbstractGenerator;
@@ -114,7 +124,7 @@ public class GenerateHelperAction implements IActionDelegate
 
     }
     
-    public void generate(final IFile file, final KermetaUnit kmUnit, final EcoreExporter km2ecoreGen, final HelperModel helperModel) {
+    public void generate(final IFile file, final KermetaUnit kmUnit, final EcoreExporter km2ecoreGen, final IFile simk_file) {
     	if (file == null)
         {
             GeneratorPlugin.displayDialog(null, "Invalid selection : Only one file can be selected.", IStatus.ERROR);
@@ -142,7 +152,7 @@ public class GenerateHelperAction implements IActionDelegate
                         {
                             monitor.worked(1);
 
-                            CompilerHelperGenerator generator = new CompilerHelperGenerator(configuration, kmUnit, km2ecoreGen, helperModel);
+                            CompilerHelperGenerator generator = new CompilerHelperGenerator(configuration, kmUnit, km2ecoreGen, SimkModelHelper.getSIMKModel(simk_file));
                             generatedProject = generator.generate(monitor);
                         }
                         else

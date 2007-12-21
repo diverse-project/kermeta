@@ -8,6 +8,16 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
+/*$Id: CompilerHelperGenerator.java,v 1.4 2007-12-21 14:24:21 cfaucher Exp $
+* Project : org.kermeta.compiler.generator
+* File : 	CompilerHelperGenerator.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 28 nov. 07
+* Authors : Cyril Faucher <cfaucher@irisa.fr>
+*/
+
 package org.kermeta.compiler.generator.internal.generators;
 
 import org.eclipse.core.resources.IFolder;
@@ -31,12 +41,13 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
-import org.kermeta.compiler.generator.helper.model.HelperMethod;
-import org.kermeta.compiler.generator.helper.model.HelperModel;
 import org.kermeta.compiler.generator.internal.GeneratorPlugin;
 import org.kermeta.generator.AbstractGenerator;
 import org.kermeta.generator.jet.DefaultJETEmitter;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.simk.SIMKModel;
+import org.kermeta.simk.SMUsage;
+import org.kermeta.simk.StaticMethod;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
@@ -66,7 +77,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private KermetaUnit kmUnit;
 	// FIXME CF unused for the moment
 	private EcoreExporter km2ecoreGen;
-	private HelperModel helperModel;
+	private SIMKModel simkModel;
 
 	/**
 	 * Constructor
@@ -77,11 +88,11 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	 * @param helperModel
 	 */
 	public CompilerHelperGenerator(GenModel conf, KermetaUnit kmUnit,
-			EcoreExporter km2ecoreGen, HelperModel helperModel) {
+			EcoreExporter km2ecoreGen, SIMKModel simkModel) {
 		this.configuration = conf;
 		this.kmUnit = kmUnit;
 		this.km2ecoreGen = km2ecoreGen;
-		this.helperModel = helperModel;
+		this.simkModel = simkModel;
 	}
 
 	/**
@@ -104,10 +115,10 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		generateStaticPackages(project, pathProject);
 		monitor.worked(1);
 
-		generateHelpers(configuration, pathProject, monitor);
+		generateHelpers(simkModel, pathProject, monitor);
 
-		if(this.helperModel!=null) {
-			generateHelperModel(helperModel, pathProject, monitor);
+		if(this.simkModel!=null) {
+			generateHelperModel(simkModel, pathProject, monitor);
 		}
 		
 		return project;
@@ -124,6 +135,8 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 						"fr.irisa.triskell.eclipse.util");
 				addVariable("KERMETA_COMPILER_GENERATOR",
 						"org.kermeta.compiler.generator");
+				addVariable("SIMK_MODEL",
+						"org.kermeta.simk");
 				addVariable("KERMETA_MODEL",
 						"fr.irisa.triskell.kermeta.model");
 				addVariable("ECLIPSE_CORE_RUNTIME", "org.eclipse.core.runtime");
@@ -200,14 +213,14 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	// ---------------------------------------------------------
 	// Generate the classes for the helpers
 	// ---------------------------------------------------------
-	private void generateHelpers(GenModel conf, IPath projectPath,
+	private void generateHelpers(SIMKModel simkConf, IPath projectPath,
 			IProgressMonitor monitor) {
 		try {
 
 			monitor.subTask("Files creation");
 
-			generateRunner(conf, projectPath);
-			generateLauncher(conf, projectPath);
+			generateRunner(simkConf, projectPath);
+			generateLauncher(configuration, projectPath);
 
 			monitor.worked(1);
 		} catch (JETException e) {
@@ -230,13 +243,13 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	// ---------------------------------------------------------
 	// Generate the classes for the helpers
 	// ---------------------------------------------------------
-	private void generateHelperModel(HelperModel theHelperModel, IPath projectPath,
+	private void generateHelperModel(SIMKModel simkConf, IPath projectPath,
 			IProgressMonitor monitor) {
 		try {
 
 			monitor.subTask("Files creation");
 
-			generateTestHelperModel(theHelperModel, projectPath);
+			generateTestHelperModel(simkConf, projectPath);
 
 			monitor.worked(1);
 		} catch (JETException e) {
@@ -266,41 +279,41 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		}
 	}
 	
-	private void generateTestHelperModel(HelperModel theHelperModel, IPath projectPath)
+	private void generateTestHelperModel(SIMKModel simkConf, IPath projectPath)
 			throws JETException, CoreException {
-		for(HelperMethod helperMethod : theHelperModel.helperMethods) {
-			if(!helperMethod.getAllPackagesName().contains("kermeta")){
-			applyTemplate(helperMethod, getTemplateURI(TEST_HELPER_JAVA), projectPath
-					.append("/" + SOURCE_DIRECTORY + "/" + helperMethod.getAllPackagesName().replace("::", "/") + "/helper/"
-							+ CodeGenUtil.capName(helperMethod.getParentMethodFromModel().getName()) + "_" + helperMethod.getId()
+		for(StaticMethod sm : simkConf.getStaticMethods()) {
+			if(sm.getUsages().contains(SMUsage.FUNCTION_TYPE) && !sm.getSMContext().getDeepestPackage().getQualifiedName().contains("kermeta")){
+			applyTemplate(sm, getTemplateURI(TEST_HELPER_JAVA), projectPath
+					.append("/" + SOURCE_DIRECTORY + "/" + sm.getSMContext().getDeepestPackage().getQualifiedName().replace(".", "/") + "/helper/"
+							+ CodeGenUtil.capName(sm.getParentMethodFromModel().getName()) + "_" + sm.getId()
 							+ "_Helper.java"), configuration.isForceOverwrite());
 			}
 		}
 	}
 
-	private void generateRunner(GenModel conf, IPath projectPath)
+	private void generateRunner(SIMKModel simkConf, IPath projectPath)
 			throws JETException, CoreException {
-		for (GenPackage genPackage : conf.getGenPackages()) {
-			EPackage epackage = genPackage.getEcorePackage();
+		//for (GenPackage genPackage : conf.getGenPackages()) {
+		//	EPackage epackage = genPackage.getEcorePackage();
 
-			for (EClassifier eClassifier : epackage.getEClassifiers()) {
-				if (eClassifier instanceof EClass) {
-					EClass eClass = (EClass) eClassifier;
+			//for (EClassifier eClassifier : epackage.getEClassifiers()) {
+				//if (eClassifier instanceof EClass) {
+				//	EClass eClass = (EClass) eClassifier;
 
-					for (EOperation eop : eClass.getEOperations()) {
-						if (isRunnable(eop)) {
+					for (StaticMethod sm : simkConf.getStaticMethods()) {
+						if (sm.getUsages().contains(SMUsage.RUNNER)) {
 							applyTemplate(
-									eop,
+									sm,
 									getTemplateURI(RUNNER_JAVA),
-									projectPath.append("/" + SOURCE_DIRECTORY + "/" + EcoreHelper.getQualifiedName(epackage, "/") + "/runner/" + CodeGenUtil.capName(EcoreHelper.getQualifiedName((ENamedElement) eop, "__")) + "_Runner.java"),
-									conf.isForceOverwrite());
+									projectPath.append("/" + SOURCE_DIRECTORY + "/" + sm.getSMContext().getDeepestPackage().getQualifiedName().replace(".", "/") + "/runner/" + CodeGenUtil.capName(EcoreHelper.getQualifiedName((ENamedElement) sm.getParentMethodFromModel(), "__")) + "_Runner.java"),
+									configuration.isForceOverwrite());
 						}
 
 					}
 
-				}
-			}
-		}
+				//}
+			//}
+		//}
 
 	}
 
@@ -337,20 +350,5 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		return getTemplateURI(GeneratorPlugin.getDefault().getBundle(),
 				relativePath);
 	}
-
-	/**
-	 * Check if an EOperation is runnable via for the generation the main and class method
-	 * @param eop
-	 * @return
-	 */
-	private boolean isRunnable(EOperation eop) {
-		for (EParameter eparam : eop.getEParameters()) {
-			if (eparam.getEType().getName().equals("String")) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-		return true;
-	}
+	
 }
