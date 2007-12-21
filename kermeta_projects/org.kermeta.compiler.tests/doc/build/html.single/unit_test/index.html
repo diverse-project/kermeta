@@ -1,0 +1,356 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Kermeta Compiler Documentation</title><link rel="stylesheet" href="css/docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.68.1"><meta name="description" content="This document aims to provide a development plan of the Kermeta compiler: Kermeta to Java."><meta name="keywords" content="Kermeta, compiler, specification, use case, test case"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en-US"><div class="titlepage"><div><div><h1 class="title"><a name="id187791"></a>Kermeta Compiler Documentation</h1></div><div><div class="author"><h3 class="author"><span class="firstname">Cyril</span> <span class="surname">Faucher</span></h3></div></div><div><div class="author"><h3 class="author"><span class="firstname">Didier</span> <span class="surname">Vojtisek</span></h3></div></div><div><p class="pubdate">Build date: 21-December-2007</p></div><div><p class="pubdate">$Date: 2007-12-21 15:44:00 $</p></div><div><div class="abstract"><p class="title"><b>Abstract</b></p><p>This document aims to provide a development plan of the Kermeta compiler: Kermeta to Java.</p></div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="preface"><a href="#preface.link">Preface<span><a name="preface"></a></span></a></span></dt><dt><span class="chapter"><a href="#id408845">1. Compilation Process</a></span></dt><dd><dl><dt><span class="section"><a href="#id408838">1.1. Step 1: Kermeta to Ecore</a></span></dt><dt><span class="section"><a href="#id404629">1.2. Step 2: Ecore to Java</a></span></dt></dl></dd><dt><span class="chapter"><a href="#id404396">2. Listing of the issues in compiling</a></span></dt><dd><dl><dt><span class="section"><a href="#id404290">2.1. Status board of the issues</a></span></dt></dl></dd><dt><span class="chapter"><a href="#id415651">3. Detailed Description of the Use Cases</a></span></dt><dd><dl><dt><span class="section"><a href="#uc_Assignment.link">3.1. Assignment</a></span></dt><dt><span class="section"><a href="#uc_Attribute.link">3.2. Attribute</a></span></dt><dt><span class="section"><a href="#uc_Body.link">3.3. Body</a></span></dt><dt><span class="section"><a href="#uc_CallResult.link">3.4. CallResult</a></span></dt><dt><span class="section"><a href="#uc_CallSuperOperation.link">3.5. CallSuperOperation</a></span></dt><dt><span class="section"><a href="#uc_ClassDefinition.link">3.6. ClassDefinition</a></span></dt><dt><span class="section"><a href="#uc_Collection.link">3.7. Collection</a></span></dt><dt><span class="section"><a href="#uc_Conditional.link">3.8. Conditional</a></span></dt><dt><span class="section"><a href="#uc_Containment.link">3.9. Containment</a></span></dt><dt><span class="section"><a href="#uc_Exception.link">3.10. Exception</a></span></dt><dt><span class="section"><a href="#uc_FunctionType.link">3.11. FunctionType</a></span></dt><dt><span class="section"><a href="#uc_Generics.link">3.12. Generics</a></span></dt><dt><span class="section"><a href="#uc_Initialization.link">3.13. Initialization</a></span></dt><dt><span class="section"><a href="#uc_InstanceOf.link">3.14. InstanceOf</a></span></dt><dt><span class="section"><a href="#uc_Invariant.link">3.15. Invariant</a></span></dt><dt><span class="section"><a href="#uc_JavaStaticCall.link">3.16. JavaStaticCall</a></span></dt><dt><span class="section"><a href="#uc_LambdaExpression.link">3.17. LambdaExpression</a></span></dt><dt><span class="section"><a href="#uc_Loop.link">3.18. Loop</a></span></dt><dt><span class="section"><a href="#uc_ModelElementReflexivity.link">3.19. ModelElementReflexivity</a></span></dt><dt><span class="section"><a href="#uc_ModelingUnit.link">3.20. ModelingUnit</a></span></dt><dt><span class="section"><a href="#uc_MultipleInheritance.link">3.21. MultipleInheritance</a></span></dt><dt><span class="section"><a href="#uc_MultiplePackagesRoot.link">3.22. MultiplePackagesRoot</a></span></dt><dt><span class="section"><a href="#uc_Multiplicity.link">3.23. Multiplicity</a></span></dt><dt><span class="section"><a href="#uc_New.link">3.24. New</a></span></dt><dt><span class="section"><a href="#uc_OperationStructure.link">3.25. OperationStructure</a></span></dt><dt><span class="section"><a href="#uc_Opposite.link">3.26. Opposite</a></span></dt><dt><span class="section"><a href="#uc_Package.link">3.27. Package</a></span></dt><dt><span class="section"><a href="#uc_Postcondition.link">3.28. Postcondition</a></span></dt><dt><span class="section"><a href="#uc_Precondition.link">3.29. Precondition</a></span></dt><dt><span class="section"><a href="#uc_PrimitiveType.link">3.30. PrimitiveType</a></span></dt><dt><span class="section"><a href="#uc_PropertyBehavior.link">3.31. PropertyBehavior</a></span></dt><dt><span class="section"><a href="#uc_PropertyStructure.link">3.32. PropertyStructure</a></span></dt><dt><span class="section"><a href="#uc_Reference.link">3.33. Reference</a></span></dt><dt><span class="section"><a href="#uc_Runner.link">3.34. Runner</a></span></dt><dt><span class="section"><a href="#uc_SubPackage.link">3.35. SubPackage</a></span></dt><dt><span class="section"><a href="#uc_Tag.link">3.36. Tag</a></span></dt><dt><span class="section"><a href="#uc_Traceability.link">3.37. Traceability</a></span></dt><dt><span class="section"><a href="#uc_UriManagement.link">3.38. UriManagement</a></span></dt></dl></dd></dl></div><div class="preface" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a name="preface.link"></a>Preface<span><a name="preface"></a></span></h2></div></div></div><p>This document aims to provide a development plan of the Kermeta compiler: Kermeta to Java. The document is divided in three parts:</p><div class="itemizedlist"><ul type="disc"><li><p>An introduction dedicated to the architecture shows the process of the generation of the Java source code,</p></li><li><p>a status board showing the state of the whole of tasks,</p></li><li><p>a listing of the issues in compiling, giving the description of the issue and links to the files in the Kermeta CVS. These kmt files are pieces of KMT source code to explain and show the issues in different cases. A piece of a Java source code is as well provided to show the expected Java source code and to finish the generated Ecore file corresponding to the KMT file. All the resources are available at [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/?cvsroot=kermeta" target="_top">cvs</a>].</p></li></ul></div><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Important]" src="gfx/admonitions/important.gif"></td><th align="left">Important</th></tr><tr><td align="left" valign="top"><p>
+			   Kermeta is an evolving software and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
+				<a href="http://gforge.inria.fr/tracker/?group_id=32" target="_top">
+			    <span class="strong"><strong>http://gforge.inria.fr/tracker/?group_id=32</strong></span>
+			    </a> or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v0.99.0
+    		</p></td></tr></table></div></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a name="id408845"></a>Chapter 1. Compilation Process</h2></div></div></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id408838"></a>1.1. Step 1: Kermeta to Ecore</h2></div></div></div><p>
+			Implementation in Kermeta of a visitor to transform a Kermeta structure into an Ecore structure. [currently written in Java] This step is implemented in "fr.irisa.triskell.kermeta.io" plugin, EcoreExporter.
+		</p><p>
+			Implementation in Kermeta of a Java pretty-printer for including Java sources in EAnnotations. [currently written in Java] This step is implemented in "org.kermeta.compiler" plugin.
+		</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id404629"></a>1.2. Step 2: Ecore to Java</h2></div></div></div><p>
+			Generation of a genmodel file from the Ecore file.
+			This generation is automatic and the genmodel is modified to customize and fix some parameters for the source code generation. This step is implemented in ?org.kermeta.compiler" plugin.
+		</p><p>
+			Generation of the source code from the genmodel file thanks to the EMF generator abilities:
+			Emf-model interfaces + implementation. This step is implemented in ?org.kermeta.compiler" plugin.
+		</p></div></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a name="id404396"></a>Chapter 2. Listing of the issues in compiling</h2></div></div></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id404290"></a>2.1. Status board of the issues</h2></div></div></div><p>
+		</p><div class="informaltable"><table border="0" style="border-collapse: collapse;"><colgroup><col><col><col></colgroup><thead><tr><th style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p>Identifier</p></th><th style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p>Note</p></th><th style="border-bottom: 0.5pt solid ; "><p>Status</p></th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Assignment.link" title="3.1. Assignment">Assignment</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [in progress]</p>
+                
+                	<p>Impl_Kermeta [in progress]</p>
+                
+                	<p>Design [OK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Attribute.link" title="3.2. Attribute">Attribute</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Body.link" title="3.3. Body">Body</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [OK]</p>
+                
+                	<p>Design [OK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_CallResult.link" title="3.4. CallResult">CallResult</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [OK]</p>
+                
+                	<p>Design [OK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_CallSuperOperation.link" title="3.5. CallSuperOperation">CallSuperOperation</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [NOK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_ClassDefinition.link" title="3.6. ClassDefinition">ClassDefinition</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Collection.link" title="3.7. Collection">Collection</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [in progress]</p>
+                
+                	<p>Impl_Kermeta [in progress]</p>
+                
+                	<p>Design [in progress]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Conditional.link" title="3.8. Conditional">Conditional</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [OK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Containment.link" title="3.9. Containment">Containment</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Exception.link" title="3.10. Exception">Exception</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [in progress]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [in progress]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_FunctionType.link" title="3.11. FunctionType">FunctionType</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [in progress]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Impl_Simk [OK]</p>
+                
+                	<p>Impl_Jet [OK]</p>
+                
+                	<p>Design [OK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Generics.link" title="3.12. Generics">Generics</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Initialization.link" title="3.13. Initialization">Initialization</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [OK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_InstanceOf.link" title="3.14. InstanceOf">InstanceOf</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [NOK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Invariant.link" title="3.15. Invariant">Invariant</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [NOK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_JavaStaticCall.link" title="3.16. JavaStaticCall">JavaStaticCall</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [OK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_LambdaExpression.link" title="3.17. LambdaExpression">LambdaExpression</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [in progress]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Impl_Simk [OK]</p>
+                
+                	<p>Impl_Jet [OK]</p>
+                
+                	<p>Design [OK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Loop.link" title="3.18. Loop">Loop</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [OK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_ModelElementReflexivity.link" title="3.19. ModelElementReflexivity">ModelElementReflexivity</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [NOK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_ModelingUnit.link" title="3.20. ModelingUnit">ModelingUnit</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_MultipleInheritance.link" title="3.21. MultipleInheritance">MultipleInheritance</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [NOK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_MultiplePackagesRoot.link" title="3.22. MultiplePackagesRoot">MultiplePackagesRoot</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [NOK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Multiplicity.link" title="3.23. Multiplicity">Multiplicity</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [OK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_New.link" title="3.24. New">New</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [OK]</p>
+                
+                	<p>Design [OK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_OperationStructure.link" title="3.25. OperationStructure">OperationStructure</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Opposite.link" title="3.26. Opposite">Opposite</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [OK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Package.link" title="3.27. Package">Package</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Postcondition.link" title="3.28. Postcondition">Postcondition</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [NOK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [in progress]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Precondition.link" title="3.29. Precondition">Precondition</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [NOK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [in progress]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_PrimitiveType.link" title="3.30. PrimitiveType">PrimitiveType</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [in progress]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [in progress]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_PropertyBehavior.link" title="3.31. PropertyBehavior">PropertyBehavior</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [NOK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Impl_Jet [NOK]</p>
+                
+                	<p>Design [in progress]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_PropertyStructure.link" title="3.32. PropertyStructure">PropertyStructure</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Reference.link" title="3.33. Reference">Reference</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Runner.link" title="3.34. Runner">Runner</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Impl_Simk [OK]</p>
+                
+                	<p>Impl_Jet [OK]</p>
+                
+                	<p>Design [OK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_SubPackage.link" title="3.35. SubPackage">SubPackage</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Tag.link" title="3.36. Tag">Tag</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [OK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [NOK]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p><a href="#uc_Traceability.link" title="3.37. Traceability">Traceability</a></p></td><td style="border-right: 0.5pt solid ; border-bottom: 0.5pt solid ; "><p></p></td><td style="border-bottom: 0.5pt solid ; ">
+                	<p>Impl_Java [NOK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [in progress]</p>
+                </td></tr><tr><td style="border-right: 0.5pt solid ; "><p><a href="#uc_UriManagement.link" title="3.38. UriManagement">UriManagement</a></p></td><td style="border-right: 0.5pt solid ; "><p></p></td><td style="">
+                	<p>Impl_Java [NOK]</p>
+                
+                	<p>Impl_Kermeta [NOK]</p>
+                
+                	<p>Design [in progress]</p>
+                </td></tr></tbody></table></div></div></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a name="id415651"></a>Chapter 3. Detailed Description of the Use Cases</h2></div></div></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Assignment.link"></a>3.1. Assignment</h2></div></div></div><p>Design:</p><p></p><p>If the left and right expressions have the same type and "attr" is a property from a Class Definition "myCD" and the multiplicity is [0..1] or [1..1]</p><pre class="programlisting">//In kmt:
+attr := theValueOfAttr
+
+//In Java:
+myCD.setAttr(theValueOfAttr);</pre><p>If the left and right expressions have the same type and "attr" is a property from a Class Definition "myCD" and the multiplicity is [0..*] or [1..*]</p><pre class="programlisting">// In kmt:
+attr := theValueOfAttr
+
+// In Java:
+myCD.getAttr.add(theValueOfAttr);</pre><p></p><p><span class="bold"><strong>test001</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>Assignment of a variable has type: String.</p><p></p><p></p><p><span class="bold"><strong>test002</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>Assignment of a variable has type: Integer.</p><p></p><p></p><p><span class="bold"><strong>test003</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>Assignment of a variable has type of a feature from another ClassDefinition.</p><p></p><p></p><p><span class="bold"><strong>test004</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/eclipse_launcher/?cvsroot=kermeta" target="_top">eclipse_launcher</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>Assignment of a feature has type of a feature from another ClassDefinition with further cases: different multiplicities.</p><p>Important note: the semantic of the assignment is delegated to EMF, i.e.: the assignment semantic is defined by the Java source code that EMF generate. It would be interesting to add a survey of the behaviour of EMF in order to track semantic evolution from EMF.</p><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Attribute.link"></a>3.2. Attribute</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Body.link"></a>3.3. Body</h2></div></div></div><p>In kmt the body of an operation begins by "do" and is closed by "end".</p><p>In Java: "{" to begin and "}" to close an operation body.</p><p></p><p><span class="bold"><strong>test001</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test001/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>Design:</p><p>Empty body of the operation.</p><p></p><p>Implementation:</p><p>If the body is empty, the generation is not processed.</p><p></p><p></p><p><span class="bold"><strong>test002</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test002/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>Design:</p><p>The body of the operation is not empty</p><p></p><p>Implementation:</p><p>If the body is not empty, the generation is processed and "do" is replaced by "{" and "end" by "}".</p><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_CallResult.link"></a>3.4. CallResult</h2></div></div></div><p>In Kermeta syntax the type of the CallResult variable: "result" can be used anywhere, in Java the "return" statement must be used as a root expression in the operation body. Also, we have to add systematically a first declaration of a variable which has the type of the return type with an initialization: String result=null; and as well as the "return" statement at the end of the operation: return result;.</p><p></p><p><span class="bold"><strong>test001</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>The result type of the method is String, then the result variable (having String as type) and the return statement will be added.</p><p></p><p></p><p><span class="bold"><strong>test002</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>The result type of the method is VoidType, then the return is not required.</p><p></p><p></p><p><span class="bold"><strong>test003</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>The result type of the method is a class A, then the result variable (having A as type) and the return statement will be added.</p><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_CallSuperOperation.link"></a>3.5. CallSuperOperation</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_ClassDefinition.link"></a>3.6. ClassDefinition</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Collection.link"></a>3.7. Collection</h2></div></div></div><p>Design:</p><p></p><p>Helper:</p><p>In order to access to the specific Kermeta?s methods on the Collections, we could use Java static methods. These methods will be generated from the framework in external Java classes, but not integrated into the Ecore model, because the EMF generation does not support static methods.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Conditional.link"></a>3.8. Conditional</h2></div></div></div><p>Design:</p><p></p><pre class="programlisting">// In kmt:
+if(...) then
+...
+else
+...
+end
+
+//In Java:
+if(...) {
+} else {
+}</pre><p></p><p><span class="bold"><strong>test001</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>An example of a Conditional with a simple "if".</p><p></p><p></p><p><span class="bold"><strong>test002</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>An example of a Conditional with an "if" with an "else".</p><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Containment.link"></a>3.9. Containment</h2></div></div></div><p></p><p></p><p><span class="bold"><strong>test001</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_containment/test001/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Exception.link"></a>3.10. Exception</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_FunctionType.link"></a>3.11. FunctionType</h2></div></div></div><p>Design:</p><p>A Function Type is called inside another method.</p><p>The function type is prettyprinted in a specific static method and called by the method that uses it.</p><p>In the context of a lambda expression:</p><p>The two methods are generated in a same new Java Class in a "helper" package.</p><pre class="programlisting">
+/** Kermeta source code **/
+a.ref.each{ r |
+	stdio.writeln(r.toString)
+}
+
+/** Java source code **/
+// Method that uses the function type
+  public static void each(EList String list) {
+    for(String it : list) {
+      func(it);
+    }
+  }
+  
+// The FunctionType prettyprinted in the same Java class
+  private static void func(String r) {
+    System.out.println(r.toString());
+  }
+</pre><p>The call of the method from the original method:</p><pre class="programlisting">Main_3_Helper.each(a.getRef());</pre></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Generics.link"></a>3.12. Generics</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Initialization.link"></a>3.13. Initialization</h2></div></div></div><p>Design:</p><p>- Initialization of a variable:</p><pre class="programlisting">// In kmt:
+var aPrinter : Printer init Printer.new
+
+// In Java:
+comptest2.Printer aPrinter = comptest2.Comptest2Factory.eINSTANCE.createPrinter();</pre><p></p><p>- Initialization of a String:</p><pre class="programlisting">// In kmt:
+var text1 : String init "Hello"
+
+// In Java:
+String text1 = "Hello ";</pre><p></p><pre class="programlisting">// In kmt:
+var text2 : String
+text2 := "World"
+
+// In Java:
+String text2 = null;
+text2 = "World";</pre><p></p><p><span class="bold"><strong>test001</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>Direct initialization of a variable (String).</p><p></p><p></p><p><span class="bold"><strong>test002</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>Indirect initialization of a variable (String).</p><p></p><p></p><p><span class="bold"><strong>test003</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>Direct initialization of a variable (Integer).</p><p></p><p></p><p><span class="bold"><strong>test004</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>Indirect initialization of a variable (Integer).</p><p></p><p></p><p><span class="bold"><strong>test005</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>Direct initialization of a feature (A).</p><p></p><p></p><p><span class="bold"><strong>test006</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>Indirect initialization of a feature (A).</p><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_InstanceOf.link"></a>3.14. InstanceOf</h2></div></div></div><p>TODO</p><p></p><p><span class="bold"><strong>test001</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>TODO</p><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Invariant.link"></a>3.15. Invariant</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_JavaStaticCall.link"></a>3.16. JavaStaticCall</h2></div></div></div><p>Design:</p><pre class="programlisting">//In kmt:
+extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)
+
+//In Java:
+fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.writeTextFile(filename, text);</pre><p></p><p><span class="bold"><strong>test001</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>An example of a JavaStaticCall.</p><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_LambdaExpression.link"></a>3.17. LambdaExpression</h2></div></div></div><p>A Function Type is called inside another method.</p><p>The function type is prettyprinted in a specific static method and called by the method that uses it.</p><p>In the context of a lambda expression:</p><p>The two methods are generated in a same new Java Class in a "helper" package.</p><pre class="programlisting">
+/** Kermeta source code **/
+a.ref.each{ r |
+  stdio.writeln(r.toString)
+}
+
+/** Java source code **/
+// Method that uses the function type
+public static void each(EList String list) {
+  for(String it : list) {
+    func(it);
+  }
+}
+  
+// The FunctionType prettyprinted in the same Java class
+private static void func(String r) {
+  System.out.println(r.toString());
+}
+</pre><pre class="programlisting">
+// The call of the method from the original method:
+Main_3_Helper.each(a.getRef());
+</pre><p></p><p><span class="bold"><strong>test001</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/eclipse_launcher/?cvsroot=kermeta" target="_top">eclipse_launcher</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Loop.link"></a>3.18. Loop</h2></div></div></div><p>Design:</p><pre class="programlisting">// In kmt:
+var j : Integer init 5
+from var i : Integer init 0
+until i == self
+loop
+	i := i + 1
+end
+
+// In Java:
+int j = 5;
+int i = 0;
+while( i != j ) {
+	i = i + 1;
+}</pre><p></p><p><span class="bold"><strong>test001</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_loop/test001/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>An example of a loop.</p><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_ModelElementReflexivity.link"></a>3.19. ModelElementReflexivity</h2></div></div></div><p>The ModelElement reflexivity is provided by EMF on models and metamodels. When a km model is translated into in XMI, all the full reflexivity is able. The limit of the reflexivity is given by the input metamodel.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_ModelingUnit.link"></a>3.20. ModelingUnit</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_MultipleInheritance.link"></a>3.21. MultipleInheritance</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_MultiplePackagesRoot.link"></a>3.22. MultiplePackagesRoot</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Multiplicity.link"></a>3.23. Multiplicity</h2></div></div></div><p>Design:</p><p>Implemented by the structural part (?model? plugin) of the EMF generated source code.</p><p>Some issues for multiplicity have taken into account during the assignment translation.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_New.link"></a>3.24. New</h2></div></div></div><p>Design:</p><p>The creation of Object is performed by the new method, in EMF-Java: a factory is used and it can be called like:</p><p>For MyClassDefinition owns by the package: comp_new_test001</p><pre class="programlisting">
+// In Kermeta:
+A.new
+
+// In EMF-Java:
+Comp_new_test001Factory.eINSTANCE.createA();
+</pre><p></p><p><span class="bold"><strong>test001</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_new/test001/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources:</p><p>TODO</p><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_OperationStructure.link"></a>3.25. OperationStructure</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Opposite.link"></a>3.26. Opposite</h2></div></div></div><p>Design:</p><p>Implemented by the structural part (?model? plugin) of the EMF generated source code.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Package.link"></a>3.27. Package</h2></div></div></div><p>Design:</p><p>The granularity of the EMF regeneration is the EPackage. If we want to generate incrementally the Java source code, also we regenerate the whole of the EPackage.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Postcondition.link"></a>3.28. Postcondition</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Precondition.link"></a>3.29. Precondition</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_PrimitiveType.link"></a>3.30. PrimitiveType</h2></div></div></div><p>Design:</p><p>Helper:</p><p>In order to access to the specific Kermeta?s methods on the Primitive Types, we could use Java static methods. These methods will be generated from the framework in external Java classes, but not integrated into the Ecore model, because the EMF generation does not support static methods.</p><p></p><p><span class="bold"><strong>test001</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test001/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test001/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test001/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>TODO</p><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_PropertyBehavior.link"></a>3.31. PropertyBehavior</h2></div></div></div><p>Design:</p><p>Behavior of a derived property: getter/ setter.</p><p>This ability is not supported by the EMF mechanism based on the use of EAnnotations containing the Java source code corresponding the expected behavior.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_PropertyStructure.link"></a>3.32. PropertyStructure</h2></div></div></div><p>Design:</p><p>Derived property signature.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Reference.link"></a>3.33. Reference</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Runner.link"></a>3.34. Runner</h2></div></div></div><p>Design:</p><p>In order to facilitate the accessibility for the users of the generated source code, some runners are generated. A Runner is a Java Class containing a main method which is able to launch the execution of a method. Not all the methods should infer a runner, only the methods which have none parameter or some parameters having String as type. The parameterized Method and method owning by a parameterized Class should not infer a Runner too. The runners are generated in a specific Java Package for each source code package.
+Another file is generated that is a ?Eclipse Java Application Launch? file: *.launch (generated in the root of the project). This one is able to configure automatically the "Run ?" assist of Eclipse to launch quickly an execution. The parameters of this file are provided by the tags: mainClass and mainOperation given by the ModelingUnit.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Warning"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Warning]" src="gfx/admonitions/warning.gif"></td><th align="left">Warning</th></tr><tr><td align="left" valign="top"><p>The simk model should be populated by the pass written in Kermeta and not in Java.</p></td></tr></table></div><p></p><p><span class="bold"><strong>test001</strong></span> [UnitTest]:</p><p>Input resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_runner/test001/input/kermeta/?cvsroot=kermeta" target="_top">kermeta</a>] </p><p>Output resources: [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/eclipse_launcher/?cvsroot=kermeta" target="_top">eclipse_launcher</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/ecore/?cvsroot=kermeta" target="_top">ecore</a>]  [<a href="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/java/?cvsroot=kermeta" target="_top">java</a>] </p><p>This sample shows the different cases for the generation of Runners: none parameters, one parameter having String as type, one parameter with different type, multiple parameters having String as type, multiple parameters with different types.</p><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_SubPackage.link"></a>3.35. SubPackage</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Tag.link"></a>3.36. Tag</h2></div></div></div><p></p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_Traceability.link"></a>3.37. Traceability</h2></div></div></div><p>A traceability mechanism could be added between the merged Kermeta model file (*.km) and the generated Java.</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="uc_UriManagement.link"></a>3.38. UriManagement</h2></div></div></div><p>Problem:</p><p>To load the user model (conforms to a metamodel in ecore), we are using the uri-registry mechanism from EMF.</p><p></p><p>In the context where an user has its own generated source code, then the both uri: this one generated by the user and this one generated by the compiler are the same.
+If the two plugins are deployed then some conflicts will appear.</p><p>A primary approach is to ignore if the user has generated its own source code.
+Also we consider the uri generated by the compiler as the reference.</p><p></p><p>Several solutions could be considered:</p><p>using the plugin extension: factory_override</p><p>From Eclipse: (http://dev.eclipse.org/newslists/news.eclipse.tools.emf/msg22892.html)</p><p>This extension point is used to register an overriding Ecore factory implementation against a namespace URI (Uniform Resource Identifier) in EMF's global package registry, EPackage.Registry.INSTANCE. When the corresponding Ecore package is initialized, the package registry is consulted for the registered factory implementation to override the default that would otherwise be used.</p><p>uri - A URI that uniquely identifies an Ecore package for which this factory in an override.</p><p>class - A fully qualified Java classname of an overriding factory implementation.</p></div></div></div></body></html>
