@@ -1,9 +1,7 @@
 <para>Design:</para>
 
-<programlisting>
-//In kmt:
+<programlisting>//In kmt:
 extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)
 
 //In Java:
-fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.writeTextFile(filename, text);
-</programlisting>
+fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.writeTextFile(filename, text);</programlisting>

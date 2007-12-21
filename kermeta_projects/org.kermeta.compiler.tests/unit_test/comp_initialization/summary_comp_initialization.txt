@@ -1,22 +1,27 @@
 <para>Design:</para>
 
 <para>- Initialization of a variable:</para>
-<para>In kmt: var aPrinter : Printer init Printer.new</para>
-<para>In Java: comptest2.Printer aPrinter = comptest2.Comptest2Factory.eINSTANCE.createPrinter();</para>
+<programlisting>// In kmt:
+var aPrinter : Printer init Printer.new
+
+// In Java:
+comptest2.Printer aPrinter = comptest2.Comptest2Factory.eINSTANCE.createPrinter();</programlisting>
+
 <para/>
 
 <para>- Initialization of a String:</para>
-<para>In kmt: var text1 : String init "Hello"</para>
-<para>In Java: String text1 = "Hello ";</para>
+<programlisting>// In kmt:
+var text1 : String init "Hello"
+
+// In Java:
+String text1 = "Hello ";</programlisting>
+
 <para/>
 
-<para>In kmt:</para>
-<programlisting>
-	var text2 : String
-	text2 := "World"
-</programlisting>
-<para>In Java:</para>
-<programlisting>
-	String text2 = null;
-	text2 = "World";
-</programlisting>
+<programlisting>// In kmt:
+var text2 : String
+text2 := "World"
+
+// In Java:
+String text2 = null;
+text2 = "World";</programlisting>

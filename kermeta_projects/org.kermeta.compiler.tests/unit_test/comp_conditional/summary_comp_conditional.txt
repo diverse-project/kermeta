@@ -1,15 +1,13 @@
 <para>Design:</para>
 <para/>
-<programlisting>
-In kmt:
-	if(...) then
-	…
-	else
-	…
-	end
+<programlisting>// In kmt:
+if(...) then
+...
+else
+...
+end
 
-In Java:
-	if(...) {
-	} else {
-	}
-</programlisting>
+//In Java:
+if(...) {
+} else {
+}</programlisting>

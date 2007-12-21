@@ -1,3 +1,3 @@
 <para>Assignment of a feature has type of a feature from another ClassDefinition with further cases: different multiplicities.</para>
-<para/>
+
 <para>Important note: the semantic of the assignment is delegated to EMF, i.e.: the assignment semantic is defined by the Java source code that EMF generate. It would be interesting to add a survey of the behaviour of EMF in order to track semantic evolution from EMF.</para>
