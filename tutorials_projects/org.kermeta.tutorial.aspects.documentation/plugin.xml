@@ -16,6 +16,7 @@
             class="org.kermeta.tutorial.aspects.documentation.wizards.TutorialAspectsExampleWizard"
             finalPerspective="kermetaPerspective"
             hasPages="false"
+            icon="icons/newkermetafile.png"
             id="org.kermeta.tutorial.aspects.wizard"
             name="Kermeta tutorial on Aspect Programming"
             preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
