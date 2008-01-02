@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!-- $Id: toc.xml,v 1.14 2007-07-11 13:10:40 dvojtise Exp $ -->
+<!-- $Id: toc.xml,v 1.15 2008-01-02 13:29:53 dvojtise Exp $ -->
 <toc label="KerMeta documentation">
 	<topic label="User documentation">		
 		<topic label="Kermeta manual" href="build/eclipse.help/KerMeta-Manual/index.html"> 
@@ -30,7 +30,8 @@
 			</topic>				
 			<topic label="How to execute a behavior" href="build/eclipse.help/KerMeta-How-to-use-run-configuration/index.html"> 
 				<link toc="build/eclipse.help/KerMeta-How-to-use-run-configuration/toc.xml" />
-			</topic>					
+			</topic>
+			<anchor id="tutorials" />					
 		</topic>
 		<topic label="KerMeta history and known limitations (online)"
 			href="http://www.irisa.fr/triskell/softwares/kermeta/update/history.html">
