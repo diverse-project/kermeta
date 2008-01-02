@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.17 2007-12-07 05:32:52 dvojtise Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.18 2008-01-02 10:36:41 vmahe Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
  * License    : GPL
@@ -10,6 +10,9 @@
  *    spierre <sebastien@type-z.org>
  *    http://www.ivy.fr/SDoc
  *    This code is an adapted *copy* of sebastien code for python document generator. (It is under GPL!)
+ *    
+ *    This is a tool used by Kermeta developers to generate doc.
+ *    This code is not distributed with Kermeta.
  */
 package fr.irisa.triskell.kermeta.docutils;
 
