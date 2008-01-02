@@ -1,7 +1,7 @@
-/* $Id: InputStreamDialog.java,v 1.1 2005-05-20 12:06:00 zdrey Exp $
+/* $Id: InputStreamDialog.java,v 1.2 2008-01-02 10:28:07 vmahe Exp $
  * Project: Kermeta (First iteration)
  * File: InputStreamDialog.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 20, 2005

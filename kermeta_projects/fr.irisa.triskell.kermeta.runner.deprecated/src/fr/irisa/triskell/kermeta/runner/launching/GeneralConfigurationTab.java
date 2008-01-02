@@ -1,7 +1,7 @@
-/* $Id: GeneralConfigurationTab.java,v 1.3 2005-05-27 15:06:12 zdrey Exp $
+/* $Id: GeneralConfigurationTab.java,v 1.4 2008-01-02 10:28:07 vmahe Exp $
  * Project: Kermeta (First iteration)
  * File: GeneralConfigurationTab.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 20, 2005

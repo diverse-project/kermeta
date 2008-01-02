@@ -1,7 +1,7 @@
-/* $Id: LogConfigurationHelper.java,v 1.1 2005-04-14 13:35:19 dvojtise Exp $
+/* $Id: LogConfigurationHelper.java,v 1.2 2008-01-02 10:28:00 vmahe Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : LogConfigurationHelper.java
- * License    : GPL
+ * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : 14 avr. 2005

@@ -8,12 +8,12 @@ require kermeta
 using kermeta::standard
 
 /*****************************************************************************
- * $Id: 040_testSet.main.kmt,v 1.2 2007-09-14 13:40:29 ftanguy Exp $
+ * $Id: 040_testSet.main.kmt,v 1.3 2008-01-02 10:28:13 vmahe Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
  * 		
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * Creation date : Mar 14, 2005
  * Author : zdrey

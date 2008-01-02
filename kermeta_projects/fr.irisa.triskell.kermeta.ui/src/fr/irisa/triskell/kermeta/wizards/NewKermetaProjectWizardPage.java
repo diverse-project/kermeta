@@ -1,7 +1,7 @@
-/* $Id: NewKermetaProjectWizardPage.java,v 1.2 2007-07-24 13:47:00 ftanguy Exp $
+/* $Id: NewKermetaProjectWizardPage.java,v 1.3 2008-01-02 10:28:20 vmahe Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewProjectWizardPage.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 19, 2005

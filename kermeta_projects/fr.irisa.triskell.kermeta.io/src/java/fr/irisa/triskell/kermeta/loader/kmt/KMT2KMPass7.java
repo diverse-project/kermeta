@@ -1,7 +1,7 @@
-/* $Id: KMT2KMPass7.java,v 1.37 2007-11-28 15:54:55 ftanguy Exp $
+/* $Id: KMT2KMPass7.java,v 1.38 2008-01-02 10:28:31 vmahe Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Feb 25, 2005

@@ -1,4 +1,4 @@
-/* $Id: CallableProperty.java,v 1.5 2007-08-02 13:27:30 dvojtise Exp $
+/* $Id: CallableProperty.java,v 1.6 2008-01-02 10:28:31 vmahe Exp $
 * Project : Kermeta (First iteration)
 * File : CallableProperty.java
 * License : EPL
@@ -22,7 +22,7 @@ import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class CallableProperty extends CallableElement {
 

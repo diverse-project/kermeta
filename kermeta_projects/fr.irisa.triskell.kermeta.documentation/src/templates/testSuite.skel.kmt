@@ -10,7 +10,7 @@ require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
  * Creation date :  
  * File : testVariable.main.kmt
  * 		
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * Creation date : Mar 14, 2005
  * Author : zdrey

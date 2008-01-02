@@ -12,7 +12,7 @@ import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public abstract class KMSymbol {
 

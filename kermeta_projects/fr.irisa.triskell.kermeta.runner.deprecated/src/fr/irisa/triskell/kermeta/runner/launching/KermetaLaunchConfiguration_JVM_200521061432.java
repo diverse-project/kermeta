@@ -1,7 +1,7 @@
-/* $Id: KermetaLaunchConfiguration_JVM_200521061432.java,v 1.8 2007-11-21 14:13:04 ftanguy Exp $
+/* $Id: KermetaLaunchConfiguration_JVM_200521061432.java,v 1.9 2008-01-02 10:28:07 vmahe Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 18, 2005

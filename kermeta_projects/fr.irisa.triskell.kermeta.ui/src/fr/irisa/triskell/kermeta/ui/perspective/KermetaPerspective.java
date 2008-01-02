@@ -1,7 +1,7 @@
-/* $Id: KermetaPerspective.java,v 1.2 2007-12-06 19:49:47 ftanguy Exp $
+/* $Id: KermetaPerspective.java,v 1.3 2008-01-02 10:28:20 vmahe Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaPerspective.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 26, 2005

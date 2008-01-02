@@ -1,4 +1,4 @@
-/* $Id: ExternJavaClassGenerator.java,v 1.16 2007-11-29 14:05:13 dvojtise Exp $
+/* $Id: ExternJavaClassGenerator.java,v 1.17 2008-01-02 10:28:17 vmahe Exp $
  * Project : Kermeta (First iteration)
  * File : ExternJavaClassGenerator.java
  * License : EPL
@@ -37,7 +37,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class ExternJavaClassGenerator extends KermetaVisitor {
 

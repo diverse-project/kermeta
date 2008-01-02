@@ -1,7 +1,7 @@
-/* $Id: RunPopupDialog.java,v 1.9 2005-06-09 13:37:03 zdrey Exp $
+/* $Id: RunPopupDialog.java,v 1.10 2008-01-02 10:28:07 vmahe Exp $
  * Project: Kermeta (First iteration)
  * File: RunPopupDialog.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 12, 2005

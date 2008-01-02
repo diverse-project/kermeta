@@ -1,7 +1,7 @@
-/* $Id: KermetaVariable.java,v 1.6 2007-07-24 13:47:19 ftanguy Exp $
+/* $Id: KermetaVariable.java,v 1.7 2008-01-02 10:28:07 vmahe Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaVariable.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Sep 7, 2005

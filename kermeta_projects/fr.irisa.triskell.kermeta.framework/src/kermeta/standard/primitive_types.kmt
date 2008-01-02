@@ -1,9 +1,9 @@
-// $Id: primitive_types.kmt,v 1.42 2007-12-07 01:53:40 fmunoz Exp $
+// $Id: primitive_types.kmt,v 1.43 2008-01-02 10:28:18 vmahe Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
- * Distributed under the terms of the GPL licence
+ * Distributed under the terms of the EPL licence
  *
  * Implementation of Metacore base types.
  *************************************************** */

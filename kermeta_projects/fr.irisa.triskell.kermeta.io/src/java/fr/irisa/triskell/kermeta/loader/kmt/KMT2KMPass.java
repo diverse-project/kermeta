@@ -1,7 +1,7 @@
-/* $Id: KMT2KMPass.java,v 1.17 2007-11-21 14:05:53 ftanguy Exp $
+/* $Id: KMT2KMPass.java,v 1.18 2008-01-02 10:28:31 vmahe Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Feb 25, 2005

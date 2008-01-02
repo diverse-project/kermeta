@@ -3,21 +3,23 @@
   <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.openProject"/>
   <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.addMarkers"/>
   <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.typecheck"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.constraintCheck"/>
   <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies"/>
   <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies"/>
   <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.kmt2km"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.ecore2kmt"/>
   <filters xsi:type="kpm:NameFilter" regex="*.kmt"/>
   <filters xsi:type="kpm:NameFilter" regex="*.km"/>
   <filters xsi:type="kpm:NameFilter" regex="*.ecore"/>
-  <dependencies event="//@events.0" name="Open Project" type="//@dependencyTypes.1">
+  <rules event="//@events.0" name="Open Project" type="//@ruleTypes.1">
     <in>
       <expression xsi:type="kpm:NullExpression"/>
     </in>
     <outs action="//@actions.0">
       <expression xsi:type="kpm:NullExpression"/>
     </outs>
-  </dependencies>
-  <dependencies event="//@events.1" name="Update KMT File" type="//@dependencyTypes.1">
+  </rules>
+  <rules event="//@events.1" name="Update KMT File" type="//@ruleTypes.1">
     <in>
       <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
     </in>
@@ -27,60 +29,146 @@
     <outs action="//@actions.3">
       <expression xsi:type="kpm:NullExpression"/>
     </outs>
+    <outs action="//@actions.6">
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.1"/>
+    </outs>
     <outs action="//@actions.4">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.5">
       <expression xsi:type="kpm:NullExpression"/>
     </outs>
     <outs action="//@actions.1">
       <expression xsi:type="kpm:NullExpression"/>
     </outs>
-  </dependencies>
-  <dependencies event="//@events.2" name="Close KMT File" type="//@dependencyTypes.1">
+  </rules>
+  <rules event="//@events.1" name="Update KM File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.1"/>
+    </in>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update Ecore File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.2"/>
+    </in>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.2" name="Close KMT File" type="//@ruleTypes.1">
     <in>
       <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
     </in>
     <outs action="//@actions.1">
       <expression xsi:type="kpm:NullExpression"/>
     </outs>
-  </dependencies>
-  <dependencies event="//@events.1" name="require /fr.irisa.triskell.kermeta.samples/prettyprinter/kermeta/printer.kmt" type="//@dependencyTypes.0">
-    <in>
-      <expression xsi:type="kpm:NullExpression"/>
-    </in>
-    <outs>
-      <expression xsi:type="kpm:NullExpression"/>
-    </outs>
-  </dependencies>
-  <dependencies event="//@events.1" name="require /fr.irisa.triskell.kermeta.samples/km2ecore/kermeta/printer.kmt" type="//@dependencyTypes.0">
-    <in>
-      <expression xsi:type="kpm:NullExpression"/>
-    </in>
-    <outs>
-      <expression xsi:type="kpm:NullExpression"/>
-    </outs>
-  </dependencies>
+  </rules>
   <events name="open"/>
   <events name="update"/>
   <events name="close"/>
-  <units dependencies="//@dependencies.0" value="/fr.irisa.triskell.kermeta.samples"/>
-  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="2007-04-20T18:27:52.734+0200" value="/fr.irisa.triskell.kermeta.samples/prettyprinter/kermeta/printer.kmt">
-    <dependentUnits type="//@dependencyTypes.0" unit="//@units.3"/>
+  <units rules="//@rules.0" value="/fr.irisa.triskell.kermeta.samples"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/.project"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/.project.kpm"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2006-10-31T13:29:47.000+0100" value="/fr.irisa.triskell.kermeta.samples/arabic2roman/kermeta/arab2roman.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/arabic2roman.launch"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/documentation/images/demo_paper.odg"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/documentation/images/demo_paper.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/documentation/images/fsm.demo.1.det.dot"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/documentation/images/fsm.demo.1.det.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/documentation/images/fsm.demo.1.dot"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/documentation/images/fsm.demo.1.png"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/documentation/readme.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecd"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2005-11-16T16:21:03.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-10-01T18:12:43.000+0200" value="/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.kmt" dependents="//@units.22/@dependencies.0 //@units.24/@dependencies.0 //@units.25/@dependencies.0"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2005-11-16T16:21:03.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.skel.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/models/fsm.demo.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/models/meta_franck.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/models/sample1.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/models/sample2.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/models/sample2_min.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/models/sample3.automaton"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-10-01T18:12:43.000+0200" value="/fr.irisa.triskell.kermeta.samples/automata/models/samples.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.22" to="//@units.14"/>
   </units>
-  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="2007-03-01T17:24:07.000+0100" value="/fr.irisa.triskell.kermeta.samples/fileIO/TextFileIOSample.kmt"/>
-  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="2007-04-23T14:11:44.974+0200" value="/fr.irisa.triskell.kermeta.samples/prettyprinter/kermeta/printerApplication.kmt">
-    <dependsOnUnits type="//@dependencyTypes.0" unit="//@units.1"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/automata/readme.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-10-01T18:14:23.000+0200" value="/fr.irisa.triskell.kermeta.samples/automata/transfo/determinization.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.24" to="//@units.14"/>
   </units>
-  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/arabic2roman/kermeta/arab2roman.kmt"/>
-  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/kermeta2doc/kermeta/dotGenerator.kmt"/>
-  <units dependencies="//@dependencies.2 //@dependencies.1" lastTimeModified="2007-04-20T18:27:52.734+0200" value="/fr.irisa.triskell.kermeta.samples/km2ecore/kermeta/printer.kmt">
-    <dependentUnits type="//@dependencyTypes.0" unit="//@units.7"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-10-01T18:14:23.000+0200" value="/fr.irisa.triskell.kermeta.samples/automata/transfo/minimization.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.25" to="//@units.14"/>
   </units>
-  <units dependencies="//@dependencies.2 //@dependencies.1" lastTimeModified="2007-04-20T18:11:38.531+0200" value="/fr.irisa.triskell.kermeta.samples/km2ecore/kermeta/printerApplication.kmt">
-    <dependsOnUnits type="//@dependencyTypes.0" unit="//@units.6"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecd"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2005-09-07T17:30:50.000+0200" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore" dependents="//@units.43/@dependencies.1"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2006-12-22T17:52:11.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/Diagram.ecd"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecd"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2006-03-28T17:30:19.000+0200" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2005-09-07T17:30:50.000+0200" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.kmt" dependents="//@units.43/@dependencies.2"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel1.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel11.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel13.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel2.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel3.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel5.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel7.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel9.xmi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/readme.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2006-11-28T11:33:24.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/transfo/Class2RDBMS.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.43" to="//@units.44"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.43" to="//@units.27"/>
+    <dependencies type="//@ruleTypes.0" from="//@units.43" to="//@units.32"/>
   </units>
-  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/transfo/Class2RDBMS.kmt"/>
-  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="2006-12-22T17:52:11.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.kmt"/>
-  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="2006-06-26T16:58:20.000+0200" value="/fr.irisa.triskell.kermeta.samples/kermeta2doc/kermeta/kermeta2docbook.kmt"/>
-  <units dependencies="//@dependencies.2 //@dependencies.1" lastTimeModified="2007-04-20T18:23:00.078+0200" value="/fr.irisa.triskell.kermeta.samples/km2ecore/kermeta/KM2EcorePass1.kmt"/>
-  <dependencyTypes name="require"/>
-  <dependencyTypes name="normal"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2005-09-07T17:30:50.000+0200" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/transfo/trace.kmt" dependents="//@units.43/@dependencies.0"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS.launch"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-04-24T16:17:29.000+0200" value="/fr.irisa.triskell.kermeta.samples/fileIO/TextFileIOSample.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/fr.irisa.triskell.kermeta.samples.zip"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2006-11-29T09:59:30.000+0100" value="/fr.irisa.triskell.kermeta.samples/helloworld/helloworld.kmt"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2005-09-15T15:24:11.000+0200" value="/fr.irisa.triskell.kermeta.samples/kermeta2doc/ecore/docbook.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2006-06-26T16:58:20.000+0200" value="/fr.irisa.triskell.kermeta.samples/kermeta2doc/kermeta/dotGenerator.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2006-06-26T16:58:20.000+0200" value="/fr.irisa.triskell.kermeta.samples/kermeta2doc/kermeta/kermeta2docbook.kmt" dependents="//@units.52/@dependencies.0"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2006-06-26T16:58:20.000+0200" value="/fr.irisa.triskell.kermeta.samples/kermeta2doc/kermeta/kermeta2docbook.main.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.52" to="//@units.51"/>
+  </units>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/kmlogo/ecore/kmLogo/abstractSyntax.ecd"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/kmlogo/ecore/kmLogo/semanticDomain.ecd"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/kmlogo/ecore/kmLogo.ecd"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2006-06-06T16:40:13.000+0200" value="/fr.irisa.triskell.kermeta.samples/kmlogo/ecore/kmLogo.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2006-11-28T13:21:08.000+0100" value="/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.kmt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/kmlogo.launch"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2005-09-06T12:05:38.000+0200" value="/fr.irisa.triskell.kermeta.samples/kunit_sample/my_kunittest.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.59" to="//@units.60"/>
+  </units>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2006-06-26T16:57:13.000+0200" value="/fr.irisa.triskell.kermeta.samples/kunit_sample/my_testfile.kmt" dependents="//@units.59/@dependencies.0"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/kunit_sample.launch"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2005-07-20T11:31:18.000+0200" value="/fr.irisa.triskell.kermeta.samples/persistence/ecore/resource.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2006-06-26T16:57:54.000+0200" value="/fr.irisa.triskell.kermeta.samples/persistence/kermeta/ecore.kmt" dependents="//@units.64/@dependencies.0"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2005-07-20T11:31:18.000+0200" value="/fr.irisa.triskell.kermeta.samples/persistence/kermeta/resource.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.64" to="//@units.63"/>
+  </units>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-04-23T14:16:24.000+0200" value="/fr.irisa.triskell.kermeta.samples/prettyprinter/kermeta/printer.kmt" dependents="//@units.66/@dependencies.0"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2007-04-23T14:16:24.000+0200" value="/fr.irisa.triskell.kermeta.samples/prettyprinter/kermeta/printerApplication.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.66" to="//@units.65"/>
+  </units>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/prettyprinter.launch"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/readme.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/zip_build.xml"/>
+  <ruleTypes name="require"/>
+  <ruleTypes name="normal"/>
 </kpm:KPM>

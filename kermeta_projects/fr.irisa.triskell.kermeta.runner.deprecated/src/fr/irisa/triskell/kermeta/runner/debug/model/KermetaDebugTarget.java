@@ -1,7 +1,7 @@
-/* $Id: KermetaDebugTarget.java,v 1.25 2007-11-21 14:13:04 ftanguy Exp $
+/* $Id: KermetaDebugTarget.java,v 1.26 2008-01-02 10:28:07 vmahe Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Sep 6, 2005

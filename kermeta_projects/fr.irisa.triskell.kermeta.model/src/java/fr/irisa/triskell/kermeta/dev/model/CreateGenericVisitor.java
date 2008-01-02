@@ -1,7 +1,7 @@
-/* $Id: CreateGenericVisitor.java,v 1.8 2007-09-04 15:44:32 dvojtise Exp $
+/* $Id: CreateGenericVisitor.java,v 1.9 2008-01-02 10:28:00 vmahe Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
- * License    : GPL
+ * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : 8 janv. 2005

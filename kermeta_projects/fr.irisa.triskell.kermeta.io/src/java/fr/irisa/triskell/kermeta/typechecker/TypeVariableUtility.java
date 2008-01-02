@@ -1,4 +1,4 @@
-/* $Id: TypeVariableUtility.java,v 1.5 2007-07-20 15:08:03 ftanguy Exp $
+/* $Id: TypeVariableUtility.java,v 1.6 2008-01-02 10:28:31 vmahe Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableUtility.java
 * License : EPL
@@ -19,7 +19,7 @@ import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class TypeVariableUtility {
 

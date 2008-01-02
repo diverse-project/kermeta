@@ -1,7 +1,7 @@
-/* $Id: KermetaDebugThread.java,v 1.15 2006-06-15 13:03:22 zdrey Exp $
+/* $Id: KermetaDebugThread.java,v 1.16 2008-01-02 10:28:07 vmahe Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Sep 6, 2005

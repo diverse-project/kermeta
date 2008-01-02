@@ -1,5 +1,5 @@
 /* $Id : $
- * Created on 17 févr. 2005
+ * Created on 17 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description : 
  * 		A class that transforms all the classes defined in kermeta model to abstract classes.
@@ -13,7 +13,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class MakeAbstractClass extends KermetaVisitor {
 

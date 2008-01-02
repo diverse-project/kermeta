@@ -1,7 +1,7 @@
-/* $Id: PrimitiveTypeResolver.java,v 1.4 2007-07-20 15:08:03 ftanguy Exp $
+/* $Id: PrimitiveTypeResolver.java,v 1.5 2008-01-02 10:28:31 vmahe Exp $
 * Project : Kermeta (First iteration)
 * File : PrimitiveTypeResolver.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 14 avr. 2005
@@ -17,7 +17,7 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class PrimitiveTypeResolver {
 

@@ -1,5 +1,5 @@
 /*
- * Created on 9 févr. 2005
+ * Created on 9 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 package fr.irisa.triskell.kermeta.standalone.editor;
@@ -9,7 +9,7 @@ import java.util.Hashtable;
 
 /**
  * @author Franck Fleurey IRISA / University of rennes 1 Distributed under the
- *         terms of the GPL license
+ *         terms of the EPL license
  */
 public class CathegorizedKWList {
 

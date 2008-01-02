@@ -1,7 +1,7 @@
-/* $Id: SelectionListDialog.java,v 1.5 2007-07-24 15:06:45 cfaucher Exp $
+/* $Id: SelectionListDialog.java,v 1.6 2008-01-02 10:28:07 vmahe Exp $
  * Project: Kermeta (First iteration)
  * File: SelectionListDialog.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 23, 2005

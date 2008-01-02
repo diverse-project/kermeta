@@ -37,7 +37,7 @@ import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 /**
  * @author Franck Fleurey
  * IRISA / INRIA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class EcoreVisitor {
 

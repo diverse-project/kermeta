@@ -1,6 +1,6 @@
-/* $Id: 014_testExternJavaCall.main.kmt,v 1.1 2007-09-10 08:35:04 cfaucher Exp $
+/* $Id: 014_testExternJavaCall.main.kmt,v 1.2 2008-01-02 10:28:13 vmahe Exp $
  * Project : Kermeta.interpreter. test
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Apr 18 2005
@@ -114,7 +114,7 @@ class Test_ExternJavaCall  inherits kermeta::kunit::TestCase {
         extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.assertMethodWasCalled() 
     end 
     
-    /** tester l'appel a TestJavaCall.call3IntegersParams mais en passant plusieurs fois le même int */
+    /** tester l'appel a TestJavaCall.call3IntegersParams mais en passant plusieurs fois le mï¿½me int */
     operation test3SameIntegersParams() : Void is do	
 		
 		var intValue : kermeta::standard::Integer

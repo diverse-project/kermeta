@@ -1,7 +1,7 @@
-/* $Id: KermetaStackFrame.java,v 1.9 2007-07-24 13:47:19 ftanguy Exp $
+/* $Id: KermetaStackFrame.java,v 1.10 2008-01-02 10:28:07 vmahe Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaStackFrame.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Sep 7, 2005

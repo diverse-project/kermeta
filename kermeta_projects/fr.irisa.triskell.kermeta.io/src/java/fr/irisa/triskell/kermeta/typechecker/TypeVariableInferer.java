@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.18 2007-10-23 11:31:11 dvojtise Exp $
+/* $Id: TypeVariableInferer.java,v 1.19 2008-01-02 10:28:31 vmahe Exp $
 * Project : Kermeta io
 * File : TypeVariableInferer.java
 * License : EPL
@@ -31,7 +31,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class TypeVariableInferer extends KermetaOptimizedVisitor {
 

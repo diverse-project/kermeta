@@ -1,7 +1,7 @@
-/* $Id: KermetaVisitorError.java,v 1.2 2005-04-18 09:05:03 dvojtise Exp $
+/* $Id: KermetaVisitorError.java,v 1.3 2008-01-02 10:28:00 vmahe Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : KermetaVisitorError.java
- * License    : GPL
+ * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : 14 avr. 2005

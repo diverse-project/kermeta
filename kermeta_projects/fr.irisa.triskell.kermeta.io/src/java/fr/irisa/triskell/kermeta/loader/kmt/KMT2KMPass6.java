@@ -1,8 +1,8 @@
-/* $Id: KMT2KMPass6.java,v 1.23 2007-10-02 15:19:05 ftanguy Exp $
+/* $Id: KMT2KMPass6.java,v 1.24 2008-01-02 10:28:31 vmahe Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Feb 23, 2005

@@ -15,7 +15,7 @@ import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class KMT2KMTypeReferenceBuilder extends KMT2KMPass {
 

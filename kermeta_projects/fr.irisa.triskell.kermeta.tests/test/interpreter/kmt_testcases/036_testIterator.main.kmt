@@ -8,12 +8,12 @@ require kermeta
 
 alias Integer : kermeta::standard::Integer;
 /*****************************************************************************
- * $Id: 036_testIterator.main.kmt,v 1.1 2007-09-10 08:35:05 cfaucher Exp $
+ * $Id: 036_testIterator.main.kmt,v 1.2 2008-01-02 10:28:13 vmahe Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
  * 		
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * Creation date : Mar 14, 2005
  * Author : zdrey

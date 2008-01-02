@@ -1,7 +1,7 @@
-/* $Id: KMTbodiesTestSuite.java,v 1.1 2007-09-10 08:35:10 cfaucher Exp $
+/* $Id: KMTbodiesTestSuite.java,v 1.2 2008-01-02 10:28:13 vmahe Exp $
  * Created on Feb 21, 2005
  * Author : zdrey
- * License : GPL
+ * License : EPL
  * Organization : IRISA / Universite de Rennes 1
  * Description : 
  * 		Stupid tests for KMTBodies management

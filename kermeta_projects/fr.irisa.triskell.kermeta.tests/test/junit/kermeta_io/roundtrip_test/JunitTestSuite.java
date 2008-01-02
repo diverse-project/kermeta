@@ -1,7 +1,7 @@
-/* $Id: JunitTestSuite.java,v 1.4 2007-10-12 09:23:14 ftanguy Exp $
+/* $Id: JunitTestSuite.java,v 1.5 2008-01-02 10:28:13 vmahe Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
- * License    : GPL
+ * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : 27 janv. 2005

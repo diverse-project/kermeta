@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.23 2007-11-09 16:11:10 ftanguy Exp $
+/* $Id: InheritanceSearch.java,v 1.24 2008-01-02 10:28:31 vmahe Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -37,7 +37,7 @@ import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionHelper;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class InheritanceSearch {
 

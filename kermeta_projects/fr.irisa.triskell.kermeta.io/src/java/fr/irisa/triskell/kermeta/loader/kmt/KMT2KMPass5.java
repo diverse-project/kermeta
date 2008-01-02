@@ -14,7 +14,7 @@ import fr.irisa.triskell.kermeta.ast.ClassDecl;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  * 
  * This pass is just a check pass.
  * 

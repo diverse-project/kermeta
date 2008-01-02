@@ -1,7 +1,7 @@
-/* $Id: InterpreterTestCase.java,v 1.3 2007-11-30 13:19:06 ftanguy Exp $
+/* $Id: InterpreterTestCase.java,v 1.4 2008-01-02 10:28:13 vmahe Exp $
 * Project : Kermeta (First iteration)
 * File : LoadTest.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 3 juin 2005
@@ -16,7 +16,7 @@ import junit.framework.TestCase;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  * Runs 25 times a kermeta program and check that memory does not increase
  */
 public class InterpreterTestCase extends TestCase {

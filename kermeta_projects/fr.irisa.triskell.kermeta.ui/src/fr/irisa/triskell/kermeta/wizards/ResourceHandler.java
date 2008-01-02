@@ -1,7 +1,7 @@
-/* $Id: ResourceHandler.java,v 1.1 2007-11-21 13:16:13 ftanguy Exp $
+/* $Id: ResourceHandler.java,v 1.2 2008-01-02 10:28:20 vmahe Exp $
  * Project : Kermeta (First iteration)
  * File : ResourceHandler.java
- * License : GPL
+ * License : EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : May 30, 2005

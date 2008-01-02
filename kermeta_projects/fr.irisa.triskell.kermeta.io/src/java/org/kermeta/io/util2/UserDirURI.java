@@ -1,7 +1,7 @@
-/* $Id: UserDirURI.java,v 1.3 2007-08-02 16:56:09 dvojtise Exp $
+/* $Id: UserDirURI.java,v 1.4 2008-01-02 10:28:31 vmahe Exp $
  * Project : Kermeta (First iteration)
  * File : UserDirURI.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Mar 3, 2005
