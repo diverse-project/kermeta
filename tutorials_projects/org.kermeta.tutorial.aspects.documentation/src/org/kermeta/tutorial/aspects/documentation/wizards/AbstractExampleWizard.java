@@ -1,4 +1,4 @@
-/* $Id: AbstractExampleWizard.java,v 1.1 2007-12-20 15:46:22 cfaucher Exp $
+/* $Id: AbstractExampleWizard.java,v 1.2 2008-01-02 10:35:39 dvojtise Exp $
  * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
@@ -37,8 +37,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
+import org.kermeta.tutorial.aspects.documentation.TutorialAspectsPlugin;
 
-import fr.irisa.triskell.kermeta.samples.fsm.FsmPlugin;
 
 
 /**
@@ -128,7 +128,7 @@ public abstract class AbstractExampleWizard extends Wizard
 				}
 			});
 		} catch (InvocationTargetException e) {
-			FsmPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, FsmPlugin.getDefault().getBundle().getSymbolicName(),IStatus.ERROR, e.getMessage(),e));
+			TutorialAspectsPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, TutorialAspectsPlugin.getDefault().getBundle().getSymbolicName(),IStatus.ERROR, e.getMessage(),e));
 		} catch (InterruptedException e) {
 			// We cannot be interrupted, just proceed as normal.
 		}
@@ -220,9 +220,9 @@ public abstract class AbstractExampleWizard extends Wizard
 				
 			project.refreshLocal(IFile.DEPTH_INFINITE, monitor);
 		} catch (IOException e) {
-			FsmPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, FsmPlugin.getDefault().getBundle().getSymbolicName(),IStatus.ERROR, e.getMessage(),e));
+			TutorialAspectsPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, TutorialAspectsPlugin.getDefault().getBundle().getSymbolicName(),IStatus.ERROR, e.getMessage(),e));
 		} catch (CoreException e) {
-			FsmPlugin.getDefault().getLog().log(e.getStatus());
+			TutorialAspectsPlugin.getDefault().getLog().log(e.getStatus());
 		}
 	}
 
