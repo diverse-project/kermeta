@@ -1,4 +1,4 @@
-/* $Id: kmLogo.kmt,v 1.7 2006-11-28 12:21:08 dvojtise Exp $
+/* $Id: kmLogo.kmt,v 1.8 2008-01-03 13:56:01 vmahe Exp $
  * Project    : fr.irisa.triskell.kermeta.samples
  * File       : kmLogo.kmt
  * License    : EPL
@@ -6,7 +6,7 @@
  * -------------------------------------------------------------------
  * Creation date : juil. 2005
  * Authors : 
- *        Jean-Marc Jézéquel <jezequel@irisa.fr>
+ *        Jean-Marc Jï¿½zï¿½quel <jezequel@irisa.fr>
  * Description : 
  *       Sample of metamodel with behavior in Kermeta
  */
@@ -49,9 +49,9 @@ package semanticDomain
 			var newPos : Point
 			newPos := position.getDelta(dx,dy)
 			if penUp then
-				stdio.writeln("Tortue se deplace en "+newPos.toString)
+				stdio.writeln("Turtle goes to "+newPos.toString)
 			else
-				stdio.writeln("Tortue trace vers "+newPos.toString)
+				stdio.writeln("Turtle draws to "+newPos.toString)
 				var trace : Segment init Segment.new
 				trace.make(position,newPos)
 				drawings.add(trace)
@@ -448,7 +448,7 @@ package actions
 	class Main
 	{
 		operation pointille() : abstractSyntax::Instruction is do
-		// tracer des pointillés
+		// tracer des pointillï¿½s
 			var cst3 : abstractSyntax::Constant init abstractSyntax::Constant.new()
 			var cst4 : abstractSyntax::Constant init abstractSyntax::Constant.new()
 			var fo1 : abstractSyntax::Forward init abstractSyntax::Forward.new()
