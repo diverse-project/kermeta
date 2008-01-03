@@ -2,7 +2,7 @@
 <launchConfiguration type="KermetaLaunchConfiguration">
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_PROJECTNAME" value="fr.irisa.triskell.kermeta.samples"/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_CLASSQNAME" value="kmLogo::actions::Main"/>
-<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_FILENAME" value="/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta\kmLogo.kmt"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_FILENAME" value="/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.kmt"/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS" value=""/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_OPERATIONNAME" value="main"/>
 </launchConfiguration>
