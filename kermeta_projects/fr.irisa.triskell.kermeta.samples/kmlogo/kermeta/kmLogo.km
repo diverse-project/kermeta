@@ -2,7 +2,7 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior"
-    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/">
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/">
   <packages name="kmLogo">
     <nestedPackage name="semanticDomain">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Turtle"
@@ -193,7 +193,7 @@
                           name="newPos"/>
                     </parameters>
                     <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
-                        value="Tortue se deplace en ">
+                        value="Turtle goes to ">
                       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
                     </target>
                   </parameters>
@@ -215,7 +215,7 @@
                           name="newPos"/>
                     </parameters>
                     <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0"
-                        value="Tortue trace vers "/>
+                        value="Turtle draws to "/>
                   </parameters>
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@thenBody/@statement.0/@target/@containedType.0"
                       name="stdio"/>
@@ -1053,8 +1053,8 @@
         <ownedAttribute name="stack" type="#//@packages.0/actions/Interpreter/stack/@containedType.0"
             isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true"
             isComposite="true">
-          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack">
-            <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack/G"
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack">
+            <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack/G"
                 type="#//@packages.0/actions/Interpreter/stack/@containedType.0/@typeParamBinding.0/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/Bindings"/>
             </typeParamBinding>
@@ -1067,8 +1067,8 @@
         </ownedAttribute>
         <ownedOperation name="initialize">
           <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/actions/Interpreter/initialize/@body/@containedType.0">
-            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack">
-              <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack/G"
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack">
+              <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack/G"
                   type="#//@packages.0/actions/Interpreter/initialize/@body/@containedType.0/@typeParamBinding.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/Bindings"/>
               </typeParamBinding>
@@ -1083,8 +1083,8 @@
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/actions/Interpreter/initialize/@body/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/initialize/@body/@statement.1/@target/@containedType.0"
                   name="stack" staticProperty="#//@packages.0/actions/Interpreter/stack">
-                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack">
-                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack/G"
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack/G"
                       type="#//@packages.0/actions/Interpreter/stack/@containedType.0/@typeParamBinding.0/@containedType.0"/>
                 </containedType>
               </target>
@@ -1541,14 +1541,14 @@
               <type type="#//@packages.0/actions/Interpreter/visitProcCall/@body/@statement.0/@containedType.0"
                   isOrdered="true" upper="1"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack/push/@containedType.0"
-                name="push" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack/push">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack/push/@containedType.0"
+                name="push" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack/push">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/Interpreter/visitProcCall/@body/@statement.0/@containedType.0"
                   name="frame"/>
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/visitProcCall/@body/@statement.1/@target/@containedType.0"
                   name="stack" staticProperty="#//@packages.0/actions/Interpreter/stack">
-                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack">
-                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack/G"
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack/G"
                       type="#//@packages.0/actions/Interpreter/stack/@containedType.0/@typeParamBinding.0/@containedType.0"/>
                 </containedType>
               </target>
@@ -1702,11 +1702,11 @@
               </target>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/stack/@containedType.0/@typeParamBinding.0/@containedType.0"
-                name="pop" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack/pop">
+                name="pop" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack/pop">
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/visitProcCall/@body/@statement.5/@target/@containedType.0"
                   name="stack" staticProperty="#//@packages.0/actions/Interpreter/stack">
-                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack">
-                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack/G"
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack/G"
                       type="#//@packages.0/actions/Interpreter/stack/@containedType.0/@typeParamBinding.0/@containedType.0"/>
                 </containedType>
               </target>
@@ -1734,14 +1734,16 @@
                       type="#//@packages.0/abstractSyntax/Block/instructions/@containedType.0"/>
                 </containedType>
                 <parameters name="i"/>
-                <body xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@containedType.0"
-                    name="traverse" staticOperation="#//@packages.0/abstractSyntax/Instruction/traverse">
-                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"
-                      staticType="#//@packages.0/actions/Interpreter/visitBlock/@body/@statement.0/@parameters.0/@body/@parameters.0/@containedType.0">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/Interpreter"/>
-                  </parameters>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/abstractSyntax/Block/instructions/@containedType.0"
-                      name="i"/>
+                <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@containedType.0"
+                      name="traverse" staticOperation="#//@packages.0/abstractSyntax/Instruction/traverse">
+                    <parameters xsi:type="kermeta_language_behavior:SelfExpression"
+                        staticType="#//@packages.0/actions/Interpreter/visitBlock/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/Interpreter"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/abstractSyntax/Block/instructions/@containedType.0"
+                        name="i"/>
+                  </statement>
                 </body>
               </parameters>
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/visitBlock/@body/@statement.0/@target/@containedType.0"
@@ -1939,8 +1941,8 @@
                     name="first" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/OrderedCollection/first">
                   <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/Interpreter/visitVariable/@body/@statement.0/@value/@target/@target/@containedType.0"
                       name="stack" staticProperty="#//@packages.0/actions/Interpreter/stack">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack">
-                      <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#//@packages.0/utils/Stack/G"
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack">
+                      <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/Stack.km#//@packages.0/utils/Stack/G"
                           type="#//@packages.0/actions/Interpreter/stack/@containedType.0/@typeParamBinding.0/@containedType.0"/>
                     </containedType>
                   </target>
@@ -2185,14 +2187,16 @@
                       type="#//@packages.0/abstractSyntax/ProcCall/actualArgs/@containedType.0"/>
                 </containedType>
                 <parameters name="e"/>
-                <body xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@containedType.0"
-                    name="traverse" staticOperation="#//@packages.0/abstractSyntax/Instruction/traverse">
-                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"
-                      staticType="#//@packages.0/actions/PrettyPrinter/visitProcCall/@body/@statement.1/@parameters.0/@body/@parameters.0/@containedType.0">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/PrettyPrinter"/>
-                  </parameters>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/abstractSyntax/ProcCall/actualArgs/@containedType.0"
-                      name="e"/>
+                <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@containedType.0"
+                      name="traverse" staticOperation="#//@packages.0/abstractSyntax/Instruction/traverse">
+                    <parameters xsi:type="kermeta_language_behavior:SelfExpression"
+                        staticType="#//@packages.0/actions/PrettyPrinter/visitProcCall/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/PrettyPrinter"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/abstractSyntax/ProcCall/actualArgs/@containedType.0"
+                        name="e"/>
+                  </statement>
                 </body>
               </parameters>
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/PrettyPrinter/visitProcCall/@body/@statement.1/@target/@containedType.0"
@@ -2250,14 +2254,16 @@
                       type="#//@packages.0/abstractSyntax/ProcDeclaration/args/@containedType.0"/>
                 </containedType>
                 <parameters name="arg"/>
-                <body xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@containedType.0"
-                    name="traverse" staticOperation="#//@packages.0/abstractSyntax/Variable/traverse">
-                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"
-                      staticType="#//@packages.0/actions/PrettyPrinter/visitProcDeclaration/@body/@statement.2/@parameters.0/@body/@parameters.0/@containedType.0">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/PrettyPrinter"/>
-                  </parameters>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/abstractSyntax/ProcDeclaration/args/@containedType.0"
-                      name="arg"/>
+                <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@containedType.0"
+                      name="traverse" staticOperation="#//@packages.0/abstractSyntax/Variable/traverse">
+                    <parameters xsi:type="kermeta_language_behavior:SelfExpression"
+                        staticType="#//@packages.0/actions/PrettyPrinter/visitProcDeclaration/@body/@statement.2/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/PrettyPrinter"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/abstractSyntax/ProcDeclaration/args/@containedType.0"
+                        name="arg"/>
+                  </statement>
                 </body>
               </parameters>
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/PrettyPrinter/visitProcDeclaration/@body/@statement.2/@target/@containedType.0"
@@ -2279,7 +2285,7 @@
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@containedType.0"
                 name="traverse" staticOperation="#//@packages.0/abstractSyntax/Block/traverse">
-              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/actions/PrettyPrinter/visitProcDeclaration/@body/@statement.2/@parameters.0/@body/@parameters.0/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/actions/PrettyPrinter/visitProcDeclaration/@body/@statement.2/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0"/>
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/abstractSyntax/ProcDeclaration/block/@containedType.0"
                   name="block" staticProperty="#//@packages.0/abstractSyntax/ProcDeclaration/block">
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/actions/PrettyPrinter/visitProcDeclaration/@body/@statement.1/@parameters.0/@target/@parameters.0/@target/@containedType.0"
@@ -2309,14 +2315,16 @@
                       type="#//@packages.0/abstractSyntax/Block/instructions/@containedType.0"/>
                 </containedType>
                 <parameters name="i"/>
-                <body xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@containedType.0"
-                    name="traverse" staticOperation="#//@packages.0/abstractSyntax/Instruction/traverse">
-                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"
-                      staticType="#//@packages.0/actions/PrettyPrinter/visitBlock/@body/@statement.0/@parameters.0/@body/@parameters.0/@containedType.0">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/PrettyPrinter"/>
-                  </parameters>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/abstractSyntax/Block/instructions/@containedType.0"
-                      name="i"/>
+                <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/semanticDomain/Turtle/move/@body/@statement.2/@elseBody/@containedType.0"
+                      name="traverse" staticOperation="#//@packages.0/abstractSyntax/Instruction/traverse">
+                    <parameters xsi:type="kermeta_language_behavior:SelfExpression"
+                        staticType="#//@packages.0/actions/PrettyPrinter/visitBlock/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/actions/PrettyPrinter"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/abstractSyntax/Block/instructions/@containedType.0"
+                        name="i"/>
+                  </statement>
                 </body>
               </parameters>
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/actions/PrettyPrinter/visitBlock/@body/@statement.0/@target/@containedType.0"
