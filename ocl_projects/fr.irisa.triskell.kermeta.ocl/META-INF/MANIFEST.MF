@@ -1,25 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: fr.irisa.triskell.kermeta.ocl
+Bundle-Name: Ocl Plug-in
+Bundle-SymbolicName: fr.irisa.triskell.kermeta.ocl;singleton:=true
 Bundle-Version: 1.1.0
-Bundle-ClassPath: src/
-Bundle-Localization: plugin
+Bundle-Activator: fr.irisa.triskell.kermeta.ocl.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.core.resources,
- fr.irisa.triskell.kermeta.interpreter,
- org.eclipse.ui.forms,
  fr.irisa.triskell.kermeta,
- org.eclipse.ui.ide,
- org.eclipse.ui.console,
- fr.irisa.triskell.kermeta.ecore,
+ fr.irisa.triskell.kermeta.interpreter,
+ net.sourceforge.lpg.lpgjavaruntime,
  org.eclipse.ocl,
- org.eclipse.emf.ocl,
- fr.irisa.triskell.eclipse.util,
- net.sourceforge.lpg.lpgjavaruntime
-Bundle-SymbolicName: fr.irisa.triskell.kermeta.ocl ; singleton:=true
-Bundle-Vendor: INRIA/IRISA
-Export-Package: fr.irisa.triskell.kermeta.ocl,
- fr.irisa.triskell.kermeta.ocl.kmtactions,
- fr.irisa.triskell.kermeta.ocl.ui,
- fr.irisa.triskell.kermeta.ocl.ui.popup.actions
+ org.eclipse.ui.ide
+Eclipse-LazyStart: true
+Bundle-Vendor: IRISA/INRIA
