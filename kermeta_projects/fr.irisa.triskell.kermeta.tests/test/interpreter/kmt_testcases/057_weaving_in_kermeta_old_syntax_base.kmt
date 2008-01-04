@@ -1,0 +1,43 @@
+/* $Id: 057_weaving_in_kermeta_old_syntax_base.kmt,v 1.1 2008-01-04 14:32:36 dvojtise Exp $ */
+
+// Type checking on simple control stucts
+
+package weavingtest_old_syntax;
+
+require kermeta
+
+// this file contains the original classes
+class A {
+
+
+}
+
+class B inherits A {}
+
+class C inherits kermeta::kunit::Assert{
+
+	inv originv is true
+	operation test0(param : A) : Void
+	pre origPre is true
+	is do
+		a == b
+		assert(true)
+	end
+		
+	
+	attribute a : A
+	attribute b : B
+	operation returnString() : kermeta::standard::String is do
+		result := "a string"
+	end
+	
+	operation overload1() : Void is do
+		// will be overloaded
+		stdio.writeln("will be overloaded")
+		assert(true)
+	end
+
+
+}
+
+/* END OF FILE */

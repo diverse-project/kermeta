@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.12 2007-11-30 07:44:05 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.13 2008-01-04 14:33:49 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -180,6 +180,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/kmt_testcases","053_testCollection.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","054_testIsKindOf.main.kmt" );
+
+		testWithFile("test/interpreter/kmt_testcases","057_weaving_in_kermeta_old_syntax_aspect1.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","058_testEqualsOnCollection.main.kmt" );
 

@@ -1,28 +1,31 @@
-/* $Id: 061_weaving_in_kermeta_aspect1.main.kmt,v 1.6 2008-01-04 14:32:36 dvojtise Exp $ */
+/* $Id: 057_weaving_in_kermeta_old_syntax_aspect1.main.kmt,v 1.1 2008-01-04 14:32:36 dvojtise Exp $ */
 
 // Type checking on simple control stucts
-@mainClass "weavingtest::WeavingTest"
+@mainClass "weavingtest_old_syntax::WeavingTest"
 @mainOperation "main"
-package weavingtest;
+package weavingtest_old_syntax;
 
 require kermeta
-require "061_weaving_in_kermeta_base.kmt"
+require "057_weaving_in_kermeta_old_syntax_base.kmt"
 // this file contains the aspect classes 
 
 
 using kermeta::kunit
 
 
+@aspect "true"
 @anothertag "othertagvalue"
-aspect class A {
+class A {
 	
 
 }
 
-aspect class B inherits C{}
+@aspect "true"
+class B inherits C{}
 
 
-aspect class C {
+@aspect "true"
+class C {
 
 	inv myinv is true
 	operation test1(param : A) : Void is do
@@ -51,6 +54,7 @@ aspect class C {
 
 }
 
+@aspect "false"
 class D{
 }
 
