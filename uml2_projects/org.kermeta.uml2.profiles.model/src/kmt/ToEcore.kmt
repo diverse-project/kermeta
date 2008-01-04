@@ -1,4 +1,4 @@
-/* $Id: ToEcore.kmt,v 1.1 2008-01-04 17:15:44 gperroui Exp $
+/* $Id: ToEcore.kmt,v 1.2 2008-01-04 17:32:03 gperroui Exp $
  * Creation date: November 30, 2007
  * License: EPL
  * Copyright:
@@ -7,7 +7,7 @@
 
 
 package uml;
-
+ 
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"

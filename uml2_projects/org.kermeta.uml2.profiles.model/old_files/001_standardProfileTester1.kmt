@@ -12,7 +12,7 @@ package standardProfileTester1;
 
  
 require kermeta
-require "../../src/kmt/UmlProfilesHelper.kmt" 
+require "UmlProfilesHelper.kmt" 
 using kermeta::persistence
 class Main
 {

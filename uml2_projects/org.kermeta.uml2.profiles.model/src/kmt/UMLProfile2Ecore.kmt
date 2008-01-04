@@ -1,4 +1,4 @@
-/* $Id: UMLProfile2Ecore.kmt,v 1.1 2008-01-04 17:15:44 gperroui Exp $
+/* $Id: UMLProfile2Ecore.kmt,v 1.2 2008-01-04 17:32:03 gperroui Exp $
  * Creation date: November 29, 2007
  * License: EPL
  * Copyright:
@@ -11,14 +11,14 @@
 package UMLProfiles;
 
 require kermeta
-
+ 
 require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
 require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
 require "UMLProfilesUtils.kmt"
 require "Profile.kmt"
 require "ToEcore.kmt"  
 require "UMLProfile2EcoreTrace.kmt" 
-require "KLog.kmt"
+require "KLog.kmt" 
  
 using kermeta::persistence
 using kermeta::standard

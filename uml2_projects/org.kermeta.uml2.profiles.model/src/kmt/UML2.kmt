@@ -1,4 +1,4 @@
-/* $Id: UML2.kmt,v 1.1 2008-01-04 17:15:44 gperroui Exp $
+/* $Id: UML2.kmt,v 1.2 2008-01-04 17:32:03 gperroui Exp $
  * Creation date: December 13, 2007
  * License: EPL
  * Copyright:
@@ -8,7 +8,7 @@
 
 package uml;
 
-
+ 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
