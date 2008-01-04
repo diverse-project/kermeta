@@ -70,6 +70,9 @@
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/getTypeDefinitionByQualifiedName">
         <genParameters ecoreParameter="io.ecore#//KermetaUnit/getTypeDefinitionByQualifiedName/qualifiedName"/>
       </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getInternalTypeDefinitionByName">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/getInternalTypeDefinitionByName/name"/>
+      </genOperations>
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/getPackages.1">
         <genParameters ecoreParameter="io.ecore#//KermetaUnit/getPackages.1/qualifiedName"/>
       </genOperations>
@@ -181,6 +184,9 @@
       </genOperations>
       <genOperations ecoreOperation="io.ecore#//TypeDefinitionCache/getTypeDefinitionByQualifiedName">
         <genParameters ecoreParameter="io.ecore#//TypeDefinitionCache/getTypeDefinitionByQualifiedName/qualifiedName"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//TypeDefinitionCache/getInternalTypeDefinitionByQualifiedName">
+        <genParameters ecoreParameter="io.ecore#//TypeDefinitionCache/getInternalTypeDefinitionByQualifiedName/name"/>
       </genOperations>
       <genOperations ecoreOperation="io.ecore#//TypeDefinitionCache/addTypeDefinition">
         <genParameters ecoreParameter="io.ecore#//TypeDefinitionCache/addTypeDefinition/qualifiedName"/>

@@ -48,10 +48,19 @@
     <eOperations name="getInternalPackages" upperBound="-1" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/Package"/>
     <eOperations name="getExternalPackages" upperBound="-1" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/Package"/>
     <eOperations name="getTypeDefinitionByName" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Retreives a TypeDefinition , it will also look for this TypeDefinition into the required units"/>
+      </eAnnotations>
       <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="getTypeDefinitionByQualifiedName" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition">
       <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getInternalTypeDefinitionByName" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Retreives a TypeDefinition but only if it is contained by this KermetaUnit"/>
+      </eAnnotations>
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="getPackages" upperBound="-1" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/Package">
       <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -223,7 +232,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ParseErrorMessage" eSuperTypes="#//ErrorMessage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="node" eType="#//ASTNode"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="ASTNode" instanceClassName="com.ibm.eclipse.ldt.core.ast.ASTNode"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ASTNode" instanceClassName="org.eclipse.gymnast.runtime.core.ast.ASTNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="ParsingError" eSuperTypes="#//ErrorMessage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -237,6 +246,9 @@
     </eOperations>
     <eOperations name="getTypeDefinitionByQualifiedName" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition">
       <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getInternalTypeDefinitionByQualifiedName" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/TypeDefinition">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="addTypeDefinition">
       <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
