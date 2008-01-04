@@ -1,4 +1,4 @@
-/* $Id: KTNHintHTMLPrettyPrinter.java,v 1.7 2007-07-30 14:33:16 ftanguy Exp $
+/* $Id: KTNHintHTMLPrettyPrinter.java,v 1.8 2008-01-04 15:05:46 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
-import fr.irisa.triskell.kermeta.ast.helper.KMTHelper;
+import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;

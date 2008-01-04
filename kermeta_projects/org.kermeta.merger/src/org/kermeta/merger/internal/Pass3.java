@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass3.java,v 1.1 2007-10-01 15:07:49 ftanguy Exp $
+/*$Id: Pass3.java,v 1.2 2008-01-04 15:08:47 dvojtise Exp $
 * Project : org.kermeta.merger
 * File : 	Pass3.java
 * License : EPL
@@ -38,8 +38,8 @@ import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionSearcher;
-import fr.irisa.triskell.kermeta.parser.KermetaLexer;
-import fr.irisa.triskell.kermeta.parser.KermetaParser;
+import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaLexer;
+import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaParser;
 
 
 /**
@@ -136,7 +136,7 @@ public class Pass3 extends MergePass {
 		StringReader reader = new StringReader(typeAsString);
 		KermetaLexer lexer = new KermetaLexer(reader);
 		KermetaParser parser = new KermetaParser(lexer);
-		fr.irisa.triskell.kermeta.ast.Type  node = parser.type();
+		fr.irisa.triskell.kermeta.parser.gen.ast.Type  node = parser.type();
 		Type type = KMT2KMTypeBuilder.process(context, node, kermetaUnit, new NullProgressMonitor());
 		return type;
 	}

@@ -8,6 +8,8 @@ Require-Bundle: fr.irisa.triskell.kermeta.io,
  org.eclipse.core.resources,
  org.eclipse.core.runtime,
  org.eclipse.ui.ide,
- org.eclipse.jdt.ui
+ org.eclipse.jdt.ui,
+ org.antlr,
+ org.eclipse.gymnast.runtime.core
 Export-Package: org.kermeta.merger
 Bundle-Vendor: IRISA/INRIA

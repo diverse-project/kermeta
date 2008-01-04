@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass4.java,v 1.2 2007-10-02 15:20:32 ftanguy Exp $
+/*$Id: Pass4.java,v 1.3 2008-01-04 15:08:47 dvojtise Exp $
 * Project : org.kermeta.merger
 * File : 	Pass4.java
 * License : EPL
@@ -22,8 +22,8 @@ import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
 
-import fr.irisa.triskell.kermeta.ast.FExpression;
-import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
+import fr.irisa.triskell.kermeta.parser.gen.ast.OperationExpressionBody;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -39,8 +39,8 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionSearcher;
-import fr.irisa.triskell.kermeta.parser.KermetaLexer;
-import fr.irisa.triskell.kermeta.parser.KermetaParser;
+import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaLexer;
+import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaParser;
 
 public class Pass4 extends MergePass {
 
@@ -106,7 +106,7 @@ public class Pass4 extends MergePass {
 		for ( Operation newOperation : newDefinition.getOwnedOperation() ) {
 			Operation o = context.getBaseOperation(newOperation);
 			KermetaUnit owner = KermetaUnitHelper.getKermetaUnitFromObject(o);
-			fr.irisa.triskell.kermeta.ast.Operation nodeOperation = (fr.irisa.triskell.kermeta.ast.Operation) owner.getNodeByModelElement(o);
+			fr.irisa.triskell.kermeta.parser.gen.ast.Operation nodeOperation = (fr.irisa.triskell.kermeta.parser.gen.ast.Operation) owner.getNodeByModelElement(o);
 			FExpression node = null;
 			if ( (nodeOperation == null) && (! o.isIsAbstract()) )
 				node = getNodeExpression( o.getBody() );

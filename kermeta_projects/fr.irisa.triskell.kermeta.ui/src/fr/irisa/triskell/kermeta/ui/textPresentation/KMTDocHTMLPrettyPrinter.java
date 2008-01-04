@@ -1,4 +1,4 @@
-/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.2 2007-12-07 06:03:02 dvojtise Exp $
+/* $Id: KMTDocHTMLPrettyPrinter.java,v 1.3 2008-01-04 15:07:05 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -13,29 +13,25 @@
  */
 package fr.irisa.triskell.kermeta.ui.textPresentation;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
-import fr.irisa.triskell.kermeta.ast.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 
 /**
  * Create a HTML presentation of the given Kermeta object for use in a documentation
