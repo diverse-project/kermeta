@@ -1,4 +1,4 @@
-/* $Id: CathegorizedKWList.java,v 1.10 2007-07-20 15:09:22 ftanguy Exp $
+/* $Id: CathegorizedKWList.java,v 1.11 2008-01-04 08:31:02 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : CathegorizedKWList.java
 * License : EPL
@@ -62,6 +62,7 @@ public class CathegorizedKWList {
 		addKeyword("post", specialKW);
 		addKeyword("inv", specialKW);
 		addKeyword("abstract", structKW);
+		addKeyword("aspect", structKW);
 		//addKeyword("Self", typeKW);
 		addKeyword("Void", typeKW);
 		addKeyword("attribute", structKW);

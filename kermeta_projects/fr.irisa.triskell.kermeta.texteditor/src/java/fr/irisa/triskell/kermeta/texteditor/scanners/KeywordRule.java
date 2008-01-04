@@ -1,4 +1,4 @@
-/* $Id: KeywordRule.java,v 1.5 2007-12-17 14:05:11 ftanguy Exp $
+/* $Id: KeywordRule.java,v 1.6 2008-01-04 08:30:37 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KeywordRule.java
 * License : EPL
@@ -72,6 +72,7 @@ public class KeywordRule implements IRule {
 		addKeyword("post", specialKeyword);
 		addKeyword("inv", specialKeyword);
 		addKeyword("abstract", abstractKeywords);
+		addKeyword("aspect", abstractKeywords);
 		//addKeyword("Self", typeKW);
 		addKeyword("Void", typeKeyword);
 		addKeyword("attribute", structureKeyword);
