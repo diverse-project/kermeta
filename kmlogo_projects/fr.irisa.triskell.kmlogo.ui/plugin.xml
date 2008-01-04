@@ -82,6 +82,7 @@
             class="fr.irisa.triskell.kmlogo.ui.tools.wizards.KmLogoExampleWizard"
             finalPerspective="kermetaPerspective"
             hasPages="false"
+            icon="icons/newkermetafile.png"
             id="org.kermeta.kmlogo.samples.wizard"
             name="Km Logo samples"
             preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
