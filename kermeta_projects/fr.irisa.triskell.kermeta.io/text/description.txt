@@ -24,19 +24,24 @@ Package io <http://io>
     Attribute constraintChecked : EBoolean<<1..1>>
     Attribute aspects : EMap
     Attribute isBeingTypechecked : EBoolean
+    Reference typeDefinitionCache : TypeDefinitionCache<<1..1>>
+    Reference kermetaUnitRequires : KermetaUnitRequire<<0..*>>
+    Attribute locked : EBoolean
     Operation load() : void
     Operation addInternalPackage(EString) : Package
+    Operation addInternalPackage(EString, EString) : Package
     Operation findInternalpackage(EString) : Package
-    Operation addRequire(EString) : Require
+    Operation addRequire(EString, KermetaUnit) : Require
     Operation addUsing(EString) : Using
     Operation getRequires() : String<<0..*>>
-    Operation importKermetaUnit(KermetaUnit, EBoolean) : void
+    Operation importKermetaUnit(KermetaUnit, EBoolean, EBoolean<<1..1>>) : void
     Operation addExternalPackage(Package) : void
     Operation getPackages() : Package<<0..*>>
     Operation getInternalPackages() : Package<<0..*>>
     Operation getExternalPackages() : Package<<0..*>>
     Operation getTypeDefinitionByName(EString) : TypeDefinition
     Operation getTypeDefinitionByQualifiedName(EString) : TypeDefinition
+    Operation getInternalTypeDefinitionByName(EString) : TypeDefinition
     Operation getPackages(EString) : Package<<0..*>>
     Operation getInternalPackage(EString) : Package
     Operation getExternalPackage(EString) : Package<<0..*>>
@@ -44,7 +49,7 @@ Package io <http://io>
     Operation isLoading() : EBoolean
     Operation error(EString) : void
     Operation warning(EString) : void
-    Operation isErrored() : EBoolean
+    Operation isErroneous() : EBoolean
     Operation storeTrace(Object, EJavaObject) : void
     Operation getModelElementByNode(EJavaObject) : Object
     Operation getNodeByModelElement(Object) : EJavaObject
@@ -55,16 +60,23 @@ Package io <http://io>
     Operation warning(EString, EJavaObject) : void
     Operation finalize() : void
     Operation getUniquePackageQualifiedNames() : String<<0..*>>
+    Operation addTypeDefinition(TypeDefinition, TypeDefinitionContainer) : void
+    Operation getTypeDefinitionByName(EString, IProgressMonitor) : TypeDefinition
+    Operation getTypeDefinitionByQualifiedName(EString, IProgressMonitor) : TypeDefinition
+    Operation isIndirectlyErroneous() : EBoolean
+    Operation lock() : void
+    Operation unlock() : void
 
   Class IBuildingState
 
   Class KermetaUnitStorer
     Reference kermetaUnits : KermetaUnit<<0..*>>
+    Reference kermetaUnitsBeingLoaded : KermetaUnit<<0..*>>
+    Reference kermetaUnitsBeingUnloaded : KermetaUnit<<0..*>>
     Operation get(EString) : KermetaUnit
     Operation find(EString) : KermetaUnit
-    Operation load(EString, IProgressMonitor) : void
+    Operation load(EString, EMap, IProgressMonitor) : void
     Operation unload(EString) : void
-    Operation load(EString, EString, IProgressMonitor) : void
 
   Class PackageEntry
     Attribute qualifiedName : EString<<1..1>>
@@ -89,13 +101,32 @@ Package io <http://io>
     Attribute offset : EInt
     Attribute length : EInt
 
+  Class TypeDefinitionCache
+    Reference kermetaUnit : KermetaUnit<<1..1>>
+    Attribute entries : EMap<<1..1>>
+    Attribute externalSearchAuthorized : EBoolean<<1..1>>
+    Operation getTypeDefinitionByName(EString) : TypeDefinition
+    Operation getTypeDefinitionByQualifiedName(EString) : TypeDefinition
+    Operation getInternalTypeDefinitionByQualifiedName(EString) : TypeDefinition
+    Operation addTypeDefinition(EString, TypeDefinition) : void
+    Operation getTypeDefinitionByName(EString, IProgressMonitor) : TypeDefinition
+    Operation getTypeDefinitionByQualifiedName(EString, IProgressMonitor) : TypeDefinition
+
+  Class TypeDefinitionCacheEntry
+    Attribute qualifiedName : EString<<1..1>>
+    Reference typeDefinition : TypeDefinition<<1..1>>
+
+  Class KermetaUnitRequire
+    Reference kermetaUnit : KermetaUnit<<1..1>>
+    Reference require : Require<<1..1>>
+
   DataType Set <java.util.Set>
 
   DataType List <java.util.List>
 
   DataType Tracer <fr.irisa.triskell.traceability.helper.Tracer>
 
-  DataType ASTNode <com.ibm.eclipse.ldt.core.ast.ASTNode>
+  DataType ASTNode <org.eclipse.gymnast.runtime.core.ast.ASTNode>
 
   DataType ANTLRException <antlr.ANTLRException>
 
