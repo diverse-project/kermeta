@@ -1,4 +1,4 @@
-/* $Id: AbstractBreakpointStopCondition.java,v 1.13 2007-07-24 13:47:19 ftanguy Exp $
+/* $Id: AbstractBreakpointStopCondition.java,v 1.14 2008-01-04 14:30:32 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : AbstractBreakpointStopCondition.java
  * License   : EPL
@@ -15,7 +15,7 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.KermetaUnit;
 
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionContext;

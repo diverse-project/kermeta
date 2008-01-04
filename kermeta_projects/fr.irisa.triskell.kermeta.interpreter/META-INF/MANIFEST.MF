@@ -19,7 +19,8 @@ Require-Bundle: fr.irisa.triskell.kermeta.model,
  fr.irisa.triskell.traceability;visibility:=reexport,
  org.eclipse.ui,
  org.eclipse.ui.ide,
- org.kermeta.merger
+ org.kermeta.merger,
+ org.eclipse.gymnast.runtime.core
 Export-Package: fr.irisa.triskell.kermeta.builder,
  fr.irisa.triskell.kermeta.dev.interpreter,
  fr.irisa.triskell.kermeta.error,

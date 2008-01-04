@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.64 2007-12-21 14:35:42 cfaucher Exp $
+/* $Id: ExpressionInterpreter.java,v 1.65 2008-01-04 14:23:54 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
-import fr.irisa.triskell.kermeta.ast.helper.SimpleKWList;
+import fr.irisa.triskell.kermeta.parser.helper.SimpleKWList;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;

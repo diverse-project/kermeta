@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.18 2008-01-02 10:36:41 vmahe Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.19 2008-01-04 14:25:21 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
  * License    : GPL
@@ -55,7 +55,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import org.kermeta.io.KermetaUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.ast.helper.KMTHelper;
+import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 

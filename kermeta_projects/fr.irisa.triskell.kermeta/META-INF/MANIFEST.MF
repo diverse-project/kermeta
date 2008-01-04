@@ -41,5 +41,6 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.io,
  fr.irisa.triskell.eclipse.util,
  fr.irisa.triskell.traceability,
- fr.irisa.triskell.kermeta.interpreter
+ fr.irisa.triskell.kermeta.interpreter,
+ org.eclipse.gymnast.runtime.core
 Eclipse-LazyStart: true
