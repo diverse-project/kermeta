@@ -1,4 +1,4 @@
-<!-- $Id: test_io_build.xml,v 1.8 2008-01-04 15:32:29 dvojtise Exp $ -->
+<!-- $Id: test_io_build.xml,v 1.9 2008-01-04 15:34:29 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -72,7 +72,7 @@
 	    <pathelement location="${log4j.jar}"/>
 		<pathelement location="${junit4.jar}" />
 	    <pathelement location="${antlr.jar}"/>
-	    <pathelement location="${ldt-core.jar}"/>
+	    <!--<pathelement location="${ldt-core.jar}"/>-->
 	    <pathelement location="${emfatic-core.jar}"/>
 	    <pathelement path="${java.class.path}"/>
 	</path>
