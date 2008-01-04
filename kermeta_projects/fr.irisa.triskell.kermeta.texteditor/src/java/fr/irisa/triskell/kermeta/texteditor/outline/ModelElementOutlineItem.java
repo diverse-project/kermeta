@@ -1,4 +1,4 @@
-/* $Id: ModelElementOutlineItem.java,v 1.1 2007-12-17 14:05:11 ftanguy Exp $
+/* $Id: ModelElementOutlineItem.java,v 1.2 2008-01-04 14:34:26 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineItem.java
 * License : EPL
@@ -79,7 +79,7 @@ public class ModelElementOutlineItem extends OutlineItem implements Comparable<M
         KermetaUnit unit = getKermetaUnit();
         if (unit == null) return false;
         if (modelElement instanceof TypeDefinition) {
-            return ! (unit.getTypeDefinitionByName(NamedElementHelper.getQualifiedName((TypeDefinition)modelElement)) != null);
+            return ! (unit.getInternalTypeDefinitionByName(NamedElementHelper.getQualifiedName((TypeDefinition)modelElement)) != null);
         }
         else return false;
     }

@@ -1,4 +1,4 @@
-/* $Id: KMTEditor.java,v 1.23 2007-12-17 14:05:06 ftanguy Exp $
+/* $Id: KMTEditor.java,v 1.24 2008-01-04 14:34:26 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KMTEditor.java
 * License : EPL
@@ -18,7 +18,6 @@ import java.util.ResourceBundle;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.IAction;
@@ -36,24 +35,20 @@ import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
 
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
+import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
+import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.completion.EditorCompletion;
 import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
-
-import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
-import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 
 /**
  * @author Franck Fleurey

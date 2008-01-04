@@ -1,6 +1,6 @@
 
 
-/*$Id: FoldingVisitor.java,v 1.1 2007-12-17 14:05:12 ftanguy Exp $
+/*$Id: FoldingVisitor.java,v 1.2 2008-01-04 14:34:26 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	FoldingVisitor.java
 * License : EPL
@@ -16,11 +16,11 @@ import java.util.List;
 
 import org.eclipse.jface.text.Position;
 
-import fr.irisa.triskell.kermeta.ast.ClassDecl;
-import fr.irisa.triskell.kermeta.ast.ContextMultiLineComment;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor;
-import fr.irisa.triskell.kermeta.ast.Operation;
-import fr.irisa.triskell.kermeta.ast.ScompUnit;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ClassDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ContextMultiLineComment;
+import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNodeVisitor;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Operation;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ScompUnit;
 
 public class FoldingVisitor extends KermetaASTNodeVisitor {
 
