@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmModelWizard.java,v 1.8 2007-12-19 14:19:57 cfaucher Exp $
+ * $Id: KmModelWizard.java,v 1.9 2008-01-04 13:10:10 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -81,6 +81,7 @@ import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
 
@@ -221,6 +222,11 @@ public class KmModelWizard extends Wizard implements INewWizard {
 		StructurePackage structurePackage = StructurePackage.eINSTANCE;
 		EClass eClass = (EClass) structurePackage.getEClassifier("ModelingUnit");
 		ModelingUnit rootObject = (ModelingUnit) structurePackage.getStructureFactory().create(eClass);
+		
+		// Add the "require" statement for the "kermeta" package - FIX BUG #4742
+		Require kermeta_req = structurePackage.getStructureFactory().createRequire();
+		kermeta_req.setUri("kermeta");
+		rootObject.getRequires().add(kermeta_req);
 		
 		// Add a first package to the new modeling unit
 		EClass eClass4Package = (EClass) structurePackage.getEClassifier("Package");
