@@ -1,0 +1,69 @@
+/* $Id: UMLProfilesUtils.kmt,v 1.1 2008-01-04 17:15:44 gperroui Exp $
+ * Creation date: November 9, 2007
+ * License: EPL
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+@mainClass "UMLProfileUtils::LoadStoreMM"
+
+
+
+package UMLProfileUtils;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+using kermeta::persistence
+using kermeta::standard
+using kermeta::reflection
+using kermeta::utils
+using ecore
+
+class LoadStoreMM
+{
+operation load(modelURI: String, metamodelURI: String): EMFResource is do 
+ var emf_store : EMFRepository init EMFRepository.new
+ var emf_res : EMFResource
+emf_res ?= emf_store.createResource(modelURI,metamodelURI)
+emf_res.load
+result := emf_res
+end
+
+operation store(newModelURI: String,resource:EMFResource): Void is do
+resource.saveWithNewURI(newModelURI)
+end
+
+operation printMM(cl : Object, level : Integer): Void is do
+
+stdio.writeln(" metaClass name "  + cl.getMetaClass.name)
+cl.getMetaClass.ownedAttribute.each {att |stdio.writeln("Attribute Name: "+att.name +" Default Value"+ att.default) }
+cl.getMetaClass.ownedOperation.each {att |stdio.writeln("Operation Name: "+att.name) }
+stdio.writeln("============================================")
+end
+}
+
+
+class UML2EcoreHelper {
+
+
+
+
+operation getETypeFromUML(typeName: String, qualifiedName: String) : ecore::EClassifier is do
+
+var eType : EDataType
+
+if qualifiedName.indexOf("UMLPrimitiveTypes") != -1 
+	then
+		if typeName.indexOf("String") != -1  then
+		result := EString.new.asType(EClassifier)
+		end
+		
+end
+
+
+end 
+
+
+}
+
+

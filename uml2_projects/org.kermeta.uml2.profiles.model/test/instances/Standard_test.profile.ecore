@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EPackage name="Standard" nsURI="platform:/resource/org.kermeta.uml2.profiles.model/test/instances/Standard_test.profile.ecore"
+      nsPrefix="Standard">
+    <eClassifiers xsi:type="ecore:EClass" name="Auxiliary">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BuildComponent">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Component"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Create">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Usage"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Call">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Usage"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Derive">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Abstraction"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Destroy">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Focus">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Framework">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Implement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Component"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ImplementationClass">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Instantiate">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Usage"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Metaclass">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelLibrary">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Refine">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Abstraction"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Responsibility">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Usage"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Script">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Artifact"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Send">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Usage"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Trace">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Abstraction"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Type">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Utility">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Document">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Artifact"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Entity">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Component"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Executable">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Artifact"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="File">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Artifact"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Library">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Artifact"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Process">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Component"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Realization">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Classifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Service">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Component"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Source">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Artifact"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Specification">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Classifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Subsystem">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Component"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Metamodel">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Model"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SystemModel">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Model"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+  <ecore:EObject/>
+</xmi:XMI>

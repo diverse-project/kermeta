@@ -1,39 +1,33 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Ecore" nsURI="http://www.eclipse.org/uml2/schemas/Ecore/3" nsPrefix="Ecore">
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Ecore"
+    nsURI="http://www.eclipse.org/uml2/schemas/Ecore/3" nsPrefix="Ecore">
   <eClassifiers xsi:type="ecore:EClass" name="EPackage">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false" lowerBound="1">
-      <eType xsi:type="ecore:EClass" href="uml.ecore#//Package"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packageName" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsPrefix" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsURI" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="basePackage" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false"
+        lowerBound="1" eType="ecore:EClass uml.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packageName" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsPrefix" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsURI" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="basePackage" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ENamedElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xmlName" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xmlName" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EClassifier" abstract="true" eSuperTypes="//ENamedElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceClassName" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="EClassifier" abstract="true" eSuperTypes="#//ENamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceClassName" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Extend">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Generalization" ordered="false" lowerBound="1">
-      <eType xsi:type="ecore:EClass" href="uml.ecore#//Generalization"/>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Generalization" ordered="false"
+        lowerBound="1" eType="ecore:EClass uml.ecore#//Generalization"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ContentKind">
     <eLiterals name="Unspecified"/>
@@ -42,57 +36,46 @@
     <eLiterals name="Mixed" value="3"/>
     <eLiterals name="ElementOnly" value="4"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EClass" eSuperTypes="//EClassifier">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false" lowerBound="1">
-      <eType xsi:type="ecore:EClass" href="uml.ecore#//Class"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Interface" ordered="false" lowerBound="1">
-      <eType xsi:type="ecore:EClass" href="uml.ecore#//Interface"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xmlContentKind" ordered="false" eType="//ContentKind"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass" eSuperTypes="#//EClassifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
+        lowerBound="1" eType="ecore:EClass uml.ecore#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Interface" ordered="false"
+        lowerBound="1" eType="ecore:EClass uml.ecore#//Interface"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xmlContentKind" ordered="false"
+        eType="#//ContentKind"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_DataType" eType="#//EDataType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EDataType" eSuperTypes="//EClassifier">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base_PrimitiveType" ordered="false" lowerBound="1">
-      <eType xsi:type="ecore:EClass" href="uml.ecore#//PrimitiveType"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataTypeName" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="EDataType" eSuperTypes="#//EClassifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_PrimitiveType" ordered="false"
+        lowerBound="1" eType="ecore:EClass uml.ecore#//PrimitiveType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataTypeName" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EEnum" eSuperTypes="//ENamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Enumeration" ordered="false" lowerBound="1">
-      <eType xsi:type="ecore:EClass" href="uml.ecore#//Enumeration"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enumName" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="EEnum" eSuperTypes="#//ENamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Enumeration" ordered="false"
+        lowerBound="1" eType="ecore:EClass uml.ecore#//Enumeration"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enumName" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EEnumLiteral" eSuperTypes="//ENamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base_EnumerationLiteral" ordered="false" lowerBound="1">
-      <eType xsi:type="ecore:EClass" href="uml.ecore#//EnumerationLiteral"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enumLiteralName" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="EEnumLiteral" eSuperTypes="#//ENamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_EnumerationLiteral"
+        ordered="false" lowerBound="1" eType="ecore:EClass uml.ecore#//EnumerationLiteral"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enumLiteralName" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EOperation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Operation" ordered="false" lowerBound="1">
-      <eType xsi:type="ecore:EClass" href="uml.ecore#//Operation"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Operation" ordered="false"
+        lowerBound="1" eType="ecore:EClass uml.ecore#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EParameter">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Parameter" ordered="false" lowerBound="1">
-      <eType xsi:type="ecore:EClass" href="uml.ecore#//Parameter"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterName" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Parameter" ordered="false"
+        lowerBound="1" eType="ecore:EClass uml.ecore#//Parameter"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterName" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="FeatureKind">
     <eLiterals name="Unspecified"/>
@@ -103,21 +86,20 @@
     <eLiterals name="ElementWildcard" value="5"/>
     <eLiterals name="Group" value="6"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EStructuralFeature" abstract="true" eSuperTypes="//ENamedElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTransient" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isVolatile" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnsettable" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xmlNamespace" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xmlFeatureKind" ordered="false" eType="//FeatureKind"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" ordered="false" eType="//VisibilityKind"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EStructuralFeature" abstract="true"
+      eSuperTypes="#//ENamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTransient" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isVolatile" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnsettable" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xmlNamespace" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xmlFeatureKind" ordered="false"
+        eType="#//FeatureKind"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" ordered="false"
+        eType="#//VisibilityKind"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="VisibilityKind">
     <eLiterals name="Unspecified"/>
@@ -127,26 +109,31 @@
     <eLiterals name="ReadOnlyUnsettable" value="4"/>
     <eLiterals name="ReadWriteUnsettable" value="5"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EAttribute" eSuperTypes="//EStructuralFeature">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false" lowerBound="1">
-      <eType xsi:type="ecore:EClass" href="uml.ecore#//Property"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attributeName" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isID" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="EAttribute" eSuperTypes="#//EStructuralFeature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+        lowerBound="1" eType="ecore:EClass uml.ecore#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attributeName" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isID" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EReference" eSuperTypes="//EStructuralFeature">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false" lowerBound="1">
-      <eType xsi:type="ecore:EClass" href="uml.ecore#//Property"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceName" ordered="false">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isResolveProxies" ordered="false" defaultValueLiteral="true">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="EReference" eSuperTypes="#//EStructuralFeature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+        lowerBound="1" eType="ecore:EClass uml.ecore#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceName" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isResolveProxies" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EGenericType" eSuperTypes="#//EClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="upperBound" eType="#//EClassifier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lowerBound" eType="#//EClassifier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="baseInterface" eType="ecore:EClass uml.ecore#//Interface"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="baseClass" eType="#//EClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ETypeParameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bounds" upperBound="-1"
+        eType="#//EClassifier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_TemplateParameter"
+        eType="ecore:EClass uml.ecore#//TemplateParameter"/>
   </eClassifiers>
 </ecore:EPackage>

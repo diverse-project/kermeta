@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="BasicClock"
+    nsURI="platform:/resource/org.kermeta.uml2.profiles.model/test/instances/BasicClock_test.profile.ecore"
+    nsPrefix="BasicClock">
+  <eClassifiers xsi:type="ecore:EEnum" name="Brand">
+    <eLiterals name="Casio"/>
+    <eLiterals name="Citizen" value="1"/>
+    <eLiterals name="Rolex" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractWatch">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="brand" eType="#//Brand"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
+        lowerBound="1" eType="ecore:EClass ../../model/ecore/uml.ecore#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int" eType="ecore:EDataType ../../model/ecore/ecore.ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConcreteWatch" eSuperTypes="#//AbstractWatch">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
+        lowerBound="1" eType="ecore:EClass ../../model/ecore/uml.ecore#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userManual" upperBound="-1"
+        eType="ecore:EDataType ../../model/ecore/ecore.ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

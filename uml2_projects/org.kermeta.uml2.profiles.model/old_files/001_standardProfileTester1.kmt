@@ -1,4 +1,4 @@
-/* $Id: 001_standardProfileTester1.kmt,v 1.1 2007-07-05 09:48:13 dvojtise Exp $
+/* $Id: 001_standardProfileTester1.kmt,v 1.1 2007/07/05 09:48:13 dvojtise Exp $
  * Creation date: June 29, 2007
  * License:
  * Copyright:
@@ -10,7 +10,7 @@
 
 package standardProfileTester1;
 
-
+ 
 require kermeta
 require "../../src/kmt/UmlProfilesHelper.kmt" 
 using kermeta::persistence

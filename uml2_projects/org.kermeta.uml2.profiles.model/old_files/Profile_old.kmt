@@ -1,0 +1,149 @@
+/* $Id: $
+ * Creation date: November 30, 2007
+ * License: EPL
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+
+package uml;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+require "ToEcore.kmt"
+require "UMLProfilesUtils.kmt"
+
+using ecore
+
+@aspect "true"
+class Profile inherits ToEcore  
+{
+	reference prof : EObject
+	/** This method deals with creation of new Ecore objects */
+	method toEcorePass1() : EObject is do
+	prof := EPackage.new
+	prof.asType(EPackage).name := name
+	
+	// special profiles have EPackage nature also... 
+	if (isInstanceOf(EPackage)) then
+		prof.asType(EPackage).nsPrefix := asType(EPackage).nsPrefix
+		prof.asType(EPackage).nsURI := asType(EPackage).nsURI
+	 else
+		// There is no way to derive nsURI and nsPrefix information from UML in the general case...
+		// TODO: find a way to compute default values...
+	end
+	
+	//prof.asType(ecore::EPackage).base_Package := 
+	result:= prof
+	// Managing contained stereotypes... (TODO: generalize when transfo complete)
+	//self.ownedStereotype.each{s | prof.asType(ecore::EPackage).eClassifiers.add((s.asType(uml::Stereotype).toEcorePass1()).asType(ecore::EClassifier))}
+	
+	self.packagedElement.select {m | m.isInstanceOf(uml::Stereotype)}.each {s|prof.asType(EPackage).eClassifiers.add((s.asType(uml::Stereotype).toEcorePass1()).asType(EClassifier))}
+	end
+	
+	
+	/** This method deals with relationship establishment*/
+	method toEcorePass2() : Void is do
+	end
+} 
+
+@aspect "true"
+class Stereotype inherits ToEcore {
+
+reference st : EClass
+
+/** This method deals with creation of new Ecore objects */
+method toEcorePass1() : EObject is do
+	st := EClass.new
+	st.asType(EClass).name := name
+	st.~abstract := self.isAbstract
+	self.ownedAttribute.each{att| st.eStructuralFeatures.add(att.asType(uml::Property).toEcorePass1.asType(EStructuralFeature))}
+	
+	result := st
+	end
+
+ /** This method deals with relationship establishment*/
+	method toEcorePass2() : Void is do
+	end
+}
+
+@aspect "true"
+class Enumeration inherits ToEcore {
+reference enum : EEnum
+
+/** This method deals with creation of new Ecore objects*/
+method toEcorePass1() : EObject is do
+enum := EEnum.new
+enum.name := self.name
+self.ownedLiteral.each{l|enum.eLiterals.add(l.asType(uml::EnumerationLiteral).toEcorePass1.asType(EEnumLiteral))}
+result := enum
+end
+
+/** This method deals with relationship establishment*/
+method toEcorePass2() : Void is do
+end
+}
+
+@aspect "true"
+class EnumerationLiteral inherits ToEcore {
+reference literal : EEnumLiteral
+
+/** This method deals with creation of new Ecore objects*/
+method toEcorePass1() : EObject is do
+literal := EEnumLiteral.new
+literal.name := self.name
+result := literal
+end
+
+/** This method deals with relationship establishment*/
+method toEcorePass2() : Void is do
+end
+}
+
+@aspect "true"
+class Property inherits ToEcore 
+{
+reference att : EStructuralFeature
+//reference att : EAttribute
+//reference ref : EReference
+/** This method deals with creation of new Ecore objects*/
+method toEcorePass1() : EObject is do
+//att := EAttribute.new 
+
+// setting common information to attribute and references
+att.name := self.name
+//att.eType := self.datatype.toEcorePass1.asType(EClassifier)
+
+result := att
+end
+
+/** This method deals with relationship establishment*/
+method toEcorePass2() : Void is do
+end
+
+}
+
+@aspect "true"
+class DataType inherits ToEcore {
+
+reference type : EClassifier
+
+method toEcorePass1(): EObject is do
+type := EClassifier.new
+
+
+result := type
+end
+
+/** This method deals with relationship establishment*/
+method toEcorePass2() : Void is do
+end
+}
+
+@aspect "true"
+class Classifier inherits ToEcore {
+
+}

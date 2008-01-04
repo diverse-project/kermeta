@@ -1,0 +1,162 @@
+@uri "http://www.eclipse.org/uml2/schemas/Ecore/3"
+package Ecore;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore"
+require "kermeta"
+class EPackage
+{
+	reference base_Package : uml::Package[1..1]
+
+	attribute packageName : ecore::EString
+
+	attribute nsPrefix : ecore::EString
+
+	attribute nsURI : ecore::EString
+
+	attribute basePackage : ecore::EString
+
+	attribute prefix : ecore::EString
+
+}
+abstract class ENamedElement
+{
+	attribute xmlName : ecore::EString
+
+}
+abstract class EClassifier inherits ENamedElement
+{
+	attribute instanceClassName : ecore::EString
+
+}
+class Extend
+{
+	reference base_Generalization : uml::Generalization[1..1]
+
+}
+enumeration ContentKind
+{
+	Unspecified;
+	Empty;
+	Simple;
+	Mixed;
+	ElementOnly;
+}
+class EClass inherits EClassifier
+{
+	reference base_Class : uml::Class[1..1]
+
+	reference base_Interface : uml::Interface[1..1]
+
+	attribute className : ecore::EString
+
+	attribute xmlContentKind : ContentKind
+
+	reference base_DataType : EDataType
+
+}
+class EDataType inherits EClassifier
+{
+	reference base_PrimitiveType : uml::PrimitiveType[1..1]
+
+	attribute dataTypeName : ecore::EString
+
+}
+class EEnum inherits ENamedElement
+{
+	reference base_Enumeration : uml::Enumeration[1..1]
+
+	attribute enumName : ecore::EString
+
+}
+class EEnumLiteral inherits ENamedElement
+{
+	reference base_EnumerationLiteral : uml::EnumerationLiteral[1..1]
+
+	attribute enumLiteralName : ecore::EString
+
+}
+class EOperation
+{
+	reference base_Operation : uml::Operation[1..1]
+
+	attribute operationName : ecore::EString
+
+}
+class EParameter
+{
+	reference base_Parameter : uml::Parameter[1..1]
+
+	attribute parameterName : ecore::EString
+
+}
+enumeration FeatureKind
+{
+	Unspecified;
+	Simple;
+	Attribute;
+	Element;
+	AttributeWildcard;
+	ElementWildcard;
+	Group;
+}
+abstract class EStructuralFeature inherits ENamedElement
+{
+	attribute isTransient : ecore::EBoolean
+
+	attribute isVolatile : ecore::EBoolean
+
+	attribute isUnsettable : ecore::EBoolean
+
+	attribute xmlNamespace : ecore::EString
+
+	attribute xmlFeatureKind : FeatureKind
+
+	attribute visibility : VisibilityKind
+
+}
+enumeration VisibilityKind
+{
+	Unspecified;
+	None;
+	ReadOnly;
+	ReadWrite;
+	ReadOnlyUnsettable;
+	ReadWriteUnsettable;
+}
+class EAttribute inherits EStructuralFeature
+{
+	reference base_Property : uml::Property[1..1]
+
+	attribute attributeName : ecore::EString
+
+	attribute isID : ecore::EBoolean
+
+}
+class EReference inherits EStructuralFeature
+{
+	reference base_Property : uml::Property[1..1]
+
+	attribute referenceName : ecore::EString
+
+	attribute isResolveProxies : ecore::EBoolean
+
+}
+class EGenericType inherits EClass
+{
+	reference upperBound : EClassifier
+
+	reference lowerBound : EClassifier
+
+	reference baseInterface : uml::Interface
+
+	reference baseClass : EClass
+
+}
+class ETypeParameter
+{
+	reference bounds : EClassifier[0..*]
+
+	reference base_TemplateParameter : uml::TemplateParameter
+
+}

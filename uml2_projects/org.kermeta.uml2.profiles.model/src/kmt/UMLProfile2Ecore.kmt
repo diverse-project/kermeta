@@ -1,0 +1,87 @@
+/* $Id: UMLProfile2Ecore.kmt,v 1.1 2008-01-04 17:15:44 gperroui Exp $
+ * Creation date: November 29, 2007
+ * License: EPL
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+@mainClass "UMLProfiles::Main"
+@mainOperation "main" 
+
+
+package UMLProfiles;
+
+require kermeta
+
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+require "UMLProfilesUtils.kmt"
+require "Profile.kmt"
+require "ToEcore.kmt"  
+require "UMLProfile2EcoreTrace.kmt" 
+require "KLog.kmt"
+ 
+using kermeta::persistence
+using kermeta::standard
+using kermeta::exceptions
+using UMLProfileUtils
+ 
+@aspect "true"
+class Main
+{ 
+	
+	operation main() : Void is do 
+	
+	// source model and metamodel
+	var srcModelURI: String init  "platform:/resource/org.kermeta.uml2.profiles.model/model/uml/BasicClock.profile.uml"
+	var srcMetamodelURI: String init "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore"
+	
+	// target model and metamodel
+	var tgtModelURI: String init "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/BasicClock_test.profile.ecore"
+	var tgtMetamodelURI: String init "http://www.eclipse.org/emf/2002/Ecore"
+	
+	var srcEmf_res : EMFResource
+	var tgtEmf_res: EMFResource
+	  
+	var util : UMLProfileUtils::LoadStoreMM
+	util := UMLProfileUtils::LoadStoreMM.new
+	
+	var log : UMLProfileUtils::KLogger
+	log := UMLProfileUtils::KLogger.new
+	log.enableLog(true) 
+	
+	// Load the UML profile
+	log.print("UML Profile loading...") 
+   	srcEmf_res := util.load(srcModelURI,srcMetamodelURI)
+	log.print("UML profile loaded")	
+	log.print("============================================")
+	// Prepare the Ecore representation
+	var tgtEmf_store : EMFRepository init EMFRepository.new
+	tgtEmf_res ?= tgtEmf_store.createResource(tgtModelURI,tgtMetamodelURI)
+	
+	/* stdio.writeln("Displaying contents:")
+	stdio.writeln("============================================")
+	stdio.writeln("size of the profile model: "+ srcEmf_res.contents.size.toString)
+	srcEmf_res.contents.each { e | util.printMM(e,0)} */
+	    
+	// transforming the UML profile
+	do 
+	// initializing trace
+	var trace: UMLProfileUtils::UMLProfile2EcoreTrace init UMLProfileUtils::UMLProfile2EcoreTrace.new 
+	trace.initRep(tgtEmf_store)   
+	trace.initTables  
+	trace.initializeLog(true) 
+	// Converting UML elements...  
+	log.print("////////////////// First pass ////////////////// ")
+	srcEmf_res.contents.select{e|e.isInstanceOf(uml::ToEcore)}.each {e| 
+		tgtEmf_res.add(e.asType(uml::ToEcore).toEcorePass1(trace))} 
+	log.print("////////////////// Second pass ////////////////// ")
+	srcEmf_res.contents.select{e|e.isInstanceOf(uml::ToEcore)}.each {e| 
+		e.asType(uml::ToEcore).toEcorePass2(trace)} 
+	//rescue (e: Exception )
+	//stdio.writeln("Sorry Transformation for "+ e.stackTrace + " not supported yet...")
+	end
+	// store the Ecore representation
+	log.print("////////////////// Serializing the new Ecore ////////////////// ") 
+	util.store(tgtModelURI,tgtEmf_res)
+	end
+}

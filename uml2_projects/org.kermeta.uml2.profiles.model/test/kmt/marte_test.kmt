@@ -1,4 +1,4 @@
-/* $Id: marte_test.kmt,v 1.1 2007-11-28 15:53:54 vmahe Exp $
+/* $Id: marte_test.kmt,v 1.1 2007/11/28 15:53:54 vmahe Exp $
  * Creation date: November 28, 2007
  * License:
  * Copyright:
@@ -12,15 +12,15 @@ package marte_test;
 
 
 require kermeta
-require "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore"
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore"
 
 class MarteTest
 {
 	operation main() : Void is do
 		stdio.writeln("launching the load")
 		
-		var origModelName : kermeta::standard::String init "platform:/resource/org.kermeta.uml2.profiles.model/model/uml/Marte_profile_sample.uml"
-		
+		var origModelName : kermeta::standard::String init "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+		var mm_name : kermeta::standard::String init "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore" 
     	// load the given UML2 resource
     	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var inputResource : kermeta::persistence::EMFResource
@@ -30,10 +30,14 @@ class MarteTest
     	inputResource ?= inputRepository.getResource(origModelName)
     	stdio.writeln("model loaded !")
     	
-    	inputResource.instances.each{ e | 
-    		stdio.writeln("Element : " + e.toString)
-    	}
     	
+    	var refu : ecore::EReference init ecore::EReference.new 
+    	refu := inputResource.contents.select{ref| ref.isInstanceOf(ecore::EReference)}.one.asType(ecore::EReference)
+    	stdio.writeln("refu name "+ refu.name)
+    	stdio.writeln("refu container" + refu.container.asType(ecore::EClass).name)
+    	//stdio.writeln("refu type" + refu.eType.instanceTypeName)
+    	//stdio.writeln("refu generic type" + refu.eGenericType.eTypeParameter.name)
+    	    	stdio.writeln("metamodel name " + inputResource.metaModelURI)
     	// "instances" only gives the main diagramm package for the targeted code tree
     	var origModel : uml::Model 
     	origModel ?= inputResource.instances.one

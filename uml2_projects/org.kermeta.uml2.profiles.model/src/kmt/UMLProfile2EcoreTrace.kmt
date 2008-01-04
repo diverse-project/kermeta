@@ -1,0 +1,148 @@
+/* $Id: UMLProfile2EcoreTrace.kmt,v 1.1 2008-01-04 17:15:44 gperroui Exp $
+ * Creation date: December 13, 2007
+ * License: EPL
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+
+
+package  UMLProfileUtils;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+require "KLog.kmt"
+using kermeta::utils
+using kermeta::persistence
+using uml
+using ecore
+/** This class keeps track of some objects useful for ecore creation...  */
+
+class UMLProfile2EcoreTrace {
+
+reference log : KLogger
+reference tgt_store: EMFRepository
+
+// store Ecore Metaclasses extended by stereotypes
+attribute typesTable : Hashtable<String,ecore::EClassifier>
+// deals with ecore primitive types refered by the profile
+attribute ecoreDataTypesTable : Hashtable<String,ecore::EDataType>
+// store UML qualfied names and their ecore correspondencies. Useful for containement...
+attribute qualNamesTable : Hashtable<String,ecore::EObject>
+// resources useful for managing external types
+attribute uml_resource: EMFResource
+attribute ecore_resource: EMFResource 
+
+operation initTables(): Void is do
+
+qualNamesTable := Hashtable<String,ecore::EObject>.new
+typesTable := Hashtable<String,ecore::EClassifier>.new
+ecoreDataTypesTable := Hashtable<String,ecore::EDataType>.new
+end
+
+operation initRep(rep: EMFRepository): Void is do
+tgt_store := rep
+uml_resource := EMFResource.new 
+ecore_resource := EMFResource.new 
+uml_resource ?= tgt_store.createResource("platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore","http://www.eclipse.org/emf/2002/Ecore") 
+ecore_resource ?=  tgt_store.createResource("platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/ecore.ecore","http://www.eclipse.org/emf/2002/Ecore")
+uml_resource.load
+ecore_resource.load
+end
+
+operation setQualNameObj(qualName:String,ecoreObj:ecore::EObject): Void is do
+qualNamesTable.put(qualName,ecoreObj)
+end
+
+operation getEcoreFromUMLQualName(qualName:String): ecore::EObject is do
+result := qualNamesTable.getValue(qualName)
+if result.isVoid then
+	log.print("sorry, no object for: " + qualName) 
+	end
+end
+
+operation initializeLog(b: Boolean): Void is do
+	log := UMLProfileUtils::KLogger.new
+	log.enableLog(b) 
+end
+
+operation traceLog(message : String): Void is do
+	log.print(message)
+end
+
+// designed to work with ecores that have only one root package... (such as uml.ecore)
+operation registerBaseType(name: String) : Void is do
+log.print("registering external base type " + name)
+var c: EClass init EClass.new
+//log.print("uml classes to search : " + resource.instances.one.asType(EPackage).eClassifiers.size.toString) 
+c := uml_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.asType(EClassifier).name == name}.one.asType(EClass)
+if c != void then
+		typesTable.put(name,c)
+		log.print("external base type " + name + " found and registered")
+	else
+		log.print("external base type " + name + " not found, houston we have a problem...")
+end
+end
+
+operation getBaseType(name: String): EClass is do
+ result := typesTable.getValue(name).asType(EClass) 
+if result.isVoid then
+	log.print("Sorry, no Ecore Class for: " + name) 
+	end 
+end
+
+operation registerEcoreDataType(name: String) : Void is do 
+log.print("registering ecore element " + name)
+var e: EDataType //init EDataType.new
+
+//ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EEnum)}.each{e|log.print("primitive type found: " + e.name)}
+log.print("ecore classes to search : " + ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EDataType)}.size.toString)
+ 
+// dealing with UML primitve types mappings...
+ if name == "Integer" then
+ 	log.print("registering an Integer")	
+	e := ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EDataType) and c.name == "EInt"}.one.asType(EDataType)	
+	log.print("registered an EInt")
+	else 
+		if name == "String" then
+		log.print("registering an EString")	
+		e := ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EDataType) and c.name == "EString"}.one.asType(ecore::EDataType)
+		log.print("registered an EString")	
+	else
+		if name == "Boolean" then
+		log.print("registering an EBoolean")	
+		e := ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EDataType) and c.name == "EBoolean"}.one.asType(EDataType)
+		log.print("registered an EBoolean")	
+	else
+		// TODO: not sure for the unlimited natural mapping...
+		if name == "UnlimitedNatural" then
+		log.print("registering an UnlimitedNatural")
+		e := ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EDataType) and c.name == "EInt"}.one.asType(EDataType)
+		log.print("registered an UnlimitedNatural --> EInt")
+	//else
+		//e := ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.asType(EDataType).name == name}.one.asType(EDataType)		
+end
+end 
+end 
+end
+
+ 
+if e != void then
+		ecoreDataTypesTable.put(name,e)
+		log.print("ecore element " + name + " found and registered")
+	else
+		log.print("ecore element " + name + " not found, houston we have a problem...")
+end
+end
+
+operation getEcoreDataType(name: String): EDataType is do
+result := ecoreDataTypesTable.getValue(name).asType(EDataType)
+if result.isVoid then
+	log.print("Sorry, no Ecore Primitive type for: " + name) 
+	end
+end
+
+
+}

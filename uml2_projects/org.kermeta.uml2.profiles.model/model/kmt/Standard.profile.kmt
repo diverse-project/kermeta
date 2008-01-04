@@ -1,0 +1,173 @@
+@uri "http://www.eclipse.org/uml2/schemas/Standard/1"
+package Standard;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore"
+require "kermeta"
+class Auxiliary
+{
+	reference base_Class : uml::Class[1..1]
+
+}
+class BuildComponent
+{
+	reference base_Component : uml::Component[1..1]
+
+}
+class Create
+{
+	reference base_BehavioralFeature : uml::BehavioralFeature[1..1]
+
+	reference base_Usage : uml::Usage[1..1]
+
+}
+class Call
+{
+	reference base_Usage : uml::Usage[1..1]
+
+}
+class Derive
+{
+	reference base_Abstraction : uml::Abstraction[1..1]
+
+}
+class Destroy
+{
+	reference base_BehavioralFeature : uml::BehavioralFeature[1..1]
+
+}
+class Focus
+{
+	reference base_Class : uml::Class[1..1]
+
+}
+class Framework
+{
+	reference base_Package : uml::Package[1..1]
+
+}
+class Implement
+{
+	reference base_Component : uml::Component[1..1]
+
+}
+class ImplementationClass
+{
+	reference base_Class : uml::Class[1..1]
+
+}
+class Instantiate
+{
+	reference base_Usage : uml::Usage[1..1]
+
+}
+class Metaclass
+{
+	reference base_Class : uml::Class[1..1]
+
+}
+class ModelLibrary
+{
+	reference base_Package : uml::Package[1..1]
+
+}
+class Refine
+{
+	reference base_Abstraction : uml::Abstraction[1..1]
+
+}
+class Responsibility
+{
+	reference base_Usage : uml::Usage[1..1]
+
+}
+class Script
+{
+	reference base_Artifact : uml::Artifact[1..1]
+
+}
+class Send
+{
+	reference base_Usage : uml::Usage[1..1]
+
+}
+class Trace
+{
+	reference base_Abstraction : uml::Abstraction[1..1]
+
+}
+class Type
+{
+	reference base_Class : uml::Class[1..1]
+
+}
+class Utility
+{
+	reference base_Class : uml::Class[1..1]
+
+}
+class Document
+{
+	reference base_Artifact : uml::Artifact[1..1]
+
+}
+class Entity
+{
+	reference base_Component : uml::Component[1..1]
+
+}
+class Executable
+{
+	reference base_Artifact : uml::Artifact[1..1]
+
+}
+class File
+{
+	reference base_Artifact : uml::Artifact[1..1]
+
+}
+class Library
+{
+	reference base_Artifact : uml::Artifact[1..1]
+
+}
+class Process
+{
+	reference base_Component : uml::Component[1..1]
+
+}
+class Realization
+{
+	reference base_Classifier : uml::Classifier[1..1]
+
+}
+class Service
+{
+	reference base_Component : uml::Component[1..1]
+
+}
+class Source
+{
+	reference base_Artifact : uml::Artifact[1..1]
+
+}
+class Specification
+{
+	reference base_Classifier : uml::Classifier[1..1]
+
+}
+class Subsystem
+{
+	reference base_Component : uml::Component[1..1]
+
+}
+class Metamodel
+{
+	reference base_Model : uml::Model[1..1]
+
+}
+class SystemModel
+{
+	reference base_Model : uml::Model[1..1]
+
+}
