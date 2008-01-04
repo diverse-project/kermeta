@@ -55,34 +55,38 @@
                     <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Collection/G"/>
                   </containedType>
                   <parameters name="x"/>
-                  <body xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/forAllCpl/@body/@containedType.0" name="forAll" staticOperation="//@packages.0/standard/Collection/forAll">
-                    <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@parameters.0/@containedType.0">
-                      <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@parameters.0/@containedType.0/@containedType.0" right="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@parameters.0/@containedType.0/@containedType.1">
-                        <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Collection/G"/>
-                        <containedType xsi:type="kermeta_language_structure:Class">
-                          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/forAllCpl/@body/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/forAllCpl/@body/@containedType.0" name="forAll" staticOperation="//@packages.0/standard/Collection/forAll">
+                      <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0" right="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.1">
+                          <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Collection/G"/>
+                          <containedType xsi:type="kermeta_language_structure:Class">
+                            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
+                          </containedType>
                         </containedType>
-                      </containedType>
-                      <parameters name="y"/>
-                      <body xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@parameters.0/@containedType.0/@containedType.1" name="f">
-                        <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="x"/>
-                        <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="y"/>
-                      </body>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@target/@containedType.0">
-                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Collection">
-                        <typeParamBinding variable="//@packages.0/standard/Collection/G" type="//@packages.0/standard/Collection/G"/>
-                        <typeParamBinding variable="//@packages.0/standard/Collection/G" type="//@packages.0/standard/Collection/G"/>
-                      </containedType>
-                    </target>
+                        <parameters name="y"/>
+                        <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.1">
+                          <statement xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.1" name="f">
+                            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="x"/>
+                            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="y"/>
+                          </statement>
+                        </body>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@target/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Collection">
+                          <typeParamBinding variable="//@packages.0/standard/Collection/G" type="//@packages.0/standard/Collection/G"/>
+                          <typeParamBinding variable="//@packages.0/standard/Collection/G" type="//@packages.0/standard/Collection/G"/>
+                        </containedType>
+                      </target>
+                    </statement>
                   </body>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@target/@containedType.0"/>
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@target/@containedType.0"/>
               </value>
             </statement>
           </body>
           <ownedParameter name="f" type="//@packages.0/standard/Collection/forAllCpl/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
-            <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Collection/forAllCpl/@ownedParameter.0/@containedType.0/@containedType.0" right="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@parameters.0/@containedType.0/@containedType.1">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Collection/forAllCpl/@ownedParameter.0/@containedType.0/@containedType.0" right="//@packages.0/standard/Collection/forAllCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.1">
               <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Collection/G //@packages.0/standard/Collection/G"/>
             </containedType>
           </ownedParameter>
@@ -104,34 +108,38 @@
                     <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Collection/G"/>
                   </containedType>
                   <parameters name="x"/>
-                  <body xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/existsCpl/@body/@containedType.0" name="exists" staticOperation="//@packages.0/standard/Collection/exists">
-                    <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@parameters.0/@containedType.0">
-                      <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@parameters.0/@containedType.0/@containedType.0" right="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@parameters.0/@containedType.0/@containedType.1">
-                        <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Collection/G"/>
-                        <containedType xsi:type="kermeta_language_structure:Class">
-                          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/existsCpl/@body/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/existsCpl/@body/@containedType.0" name="exists" staticOperation="//@packages.0/standard/Collection/exists">
+                      <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0" right="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.1">
+                          <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Collection/G"/>
+                          <containedType xsi:type="kermeta_language_structure:Class">
+                            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
+                          </containedType>
                         </containedType>
-                      </containedType>
-                      <parameters name="y"/>
-                      <body xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@parameters.0/@containedType.0/@containedType.1" name="f">
-                        <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="x"/>
-                        <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="y"/>
-                      </body>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@target/@containedType.0">
-                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Collection">
-                        <typeParamBinding variable="//@packages.0/standard/Collection/G" type="//@packages.0/standard/Collection/G"/>
-                        <typeParamBinding variable="//@packages.0/standard/Collection/G" type="//@packages.0/standard/Collection/G"/>
-                      </containedType>
-                    </target>
+                        <parameters name="y"/>
+                        <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.1">
+                          <statement xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.1" name="f">
+                            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="x"/>
+                            <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="y"/>
+                          </statement>
+                        </body>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@target/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Collection">
+                          <typeParamBinding variable="//@packages.0/standard/Collection/G" type="//@packages.0/standard/Collection/G"/>
+                          <typeParamBinding variable="//@packages.0/standard/Collection/G" type="//@packages.0/standard/Collection/G"/>
+                        </containedType>
+                      </target>
+                    </statement>
                   </body>
                 </parameters>
-                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@target/@containedType.0"/>
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@target/@containedType.0"/>
               </value>
             </statement>
           </body>
           <ownedParameter name="f" type="//@packages.0/standard/Collection/existsCpl/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
-            <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Collection/existsCpl/@ownedParameter.0/@containedType.0/@containedType.0" right="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@parameters.0/@containedType.0/@containedType.1">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Collection/existsCpl/@ownedParameter.0/@containedType.0/@containedType.0" right="//@packages.0/standard/Collection/existsCpl/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.1">
               <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Collection/G //@packages.0/standard/Collection/G"/>
             </containedType>
           </ownedParameter>
@@ -176,10 +184,12 @@
                       </containedType>
                     </containedType>
                     <parameters name="e"/>
-                    <body xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1" name="equals">
-                      <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="element"/>
-                      <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
-                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="e"/>
+                    <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1">
+                      <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1" name="equals">
+                        <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="element"/>
+                        <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="e"/>
+                      </statement>
                     </body>
                   </parameters>
                   <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@target/@containedType.0">
@@ -204,10 +214,12 @@
                         <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Collection/G"/>
                       </containedType>
                       <parameters name="e"/>
-                      <body xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1" name="equals">
-                        <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="element"/>
-                        <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
-                        <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="e"/>
+                      <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1">
+                        <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1" name="equals">
+                          <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="element"/>
+                          <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                          <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="e"/>
+                        </statement>
                       </body>
                     </parameters>
                     <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@target/@containedType.0"/>
@@ -261,8 +273,10 @@
                   <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Collection/G"/>
                 </containedType>
                 <parameters name="element"/>
-                <body xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/add/@containedType.0" name="add" staticOperation="//@packages.0/standard/Collection/add">
-                  <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="element"/>
+                <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/add/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/add/@containedType.0" name="add" staticOperation="//@packages.0/standard/Collection/add">
+                    <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="element"/>
+                  </statement>
                 </body>
               </parameters>
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/addAll/@body/@statement.0/@target/@containedType.0" name="elements">
@@ -1118,14 +1132,16 @@
                     <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Collection/G"/>
                   </containedType>
                   <parameters name="elem"/>
-                  <body xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0" name="not">
-                    <staticOperation href="primitive_types.km#//@packages.0/standard/Boolean/not"/>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/reject/@body/@statement.0/@value/@parameters.0/@body/@target/@containedType.0" name="rejector">
-                      <containedType xsi:type="kermeta_language_structure:Class">
-                        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
-                      </containedType>
-                      <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="elem"/>
-                    </target>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0" name="not">
+                      <staticOperation href="primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/reject/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@target/@containedType.0" name="rejector">
+                        <containedType xsi:type="kermeta_language_structure:Class">
+                          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Boolean"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="elem"/>
+                      </target>
+                    </statement>
                   </body>
                 </parameters>
                 <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Collection/reject/@body/@statement.0/@value/@target/@containedType.0">
@@ -1137,7 +1153,7 @@
             </statement>
           </body>
           <ownedParameter name="rejector" type="//@packages.0/standard/Collection/reject/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
-            <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Collection/G" right="//@packages.0/standard/Collection/reject/@body/@statement.0/@value/@parameters.0/@body/@target/@containedType.0"/>
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/standard/Collection/G" right="//@packages.0/standard/Collection/reject/@body/@statement.0/@value/@parameters.0/@body/@statement.0/@target/@containedType.0"/>
           </ownedParameter>
         </ownedOperation>
         <ownedOperation tag="//@packages.0/standard/Collection/count/@ownedTag.0" name="count" type="//@packages.0/standard/Collection/count/@containedType.0" isOrdered="true" upper="1">
@@ -1158,10 +1174,12 @@
                       <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Collection/G"/>
                     </containedType>
                     <parameters name="e"/>
-                    <body xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1" name="equals">
-                      <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="element"/>
-                      <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
-                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="e"/>
+                    <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1">
+                      <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1" name="equals">
+                        <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="element"/>
+                        <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Collection/G" name="e"/>
+                      </statement>
                     </body>
                   </parameters>
                   <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Collection/count/@body/@statement.0/@value/@target/@target/@containedType.0">
@@ -1306,10 +1324,12 @@
                     <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Set/G"/>
                   </containedType>
                   <parameters name="e"/>
-                  <body xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1" name="equals">
-                    <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Set/G" name="element"/>
-                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Set/G" name="e"/>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1" name="equals">
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Set/G" name="element"/>
+                      <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Set/G" name="e"/>
+                    </statement>
                   </body>
                 </parameters>
                 <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Set/remove/@body/@statement.0/@initialization/@target/@containedType.0">
@@ -2582,20 +2602,22 @@
                     <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Bag/G"/>
                   </containedType>
                   <parameters name="e"/>
-                  <body xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/empty/@body/@containedType.0" name="equals">
-                    <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@parameters.0/@containedType.0" name="elementOid">
-                      <containedType xsi:type="kermeta_language_structure:Class">
-                        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Integer"/>
-                      </containedType>
-                    </parameters>
-                    <staticOperation href="primitive_types.km#//@packages.0/standard/Integer/equals"/>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@target/@containedType.0" name="oid">
-                      <containedType xsi:type="kermeta_language_structure:Class">
-                        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Integer"/>
-                      </containedType>
-                      <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/oid"/>
-                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Bag/G" name="e"/>
-                    </target>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/empty/@body/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/empty/@body/@containedType.0" name="equals">
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0" name="elementOid">
+                        <containedType xsi:type="kermeta_language_structure:Class">
+                          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Integer"/>
+                        </containedType>
+                      </parameters>
+                      <staticOperation href="primitive_types.km#//@packages.0/standard/Integer/equals"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@statement.0/@target/@containedType.0" name="oid">
+                        <containedType xsi:type="kermeta_language_structure:Class">
+                          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/Integer"/>
+                        </containedType>
+                        <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/oid"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Bag/G" name="e"/>
+                      </target>
+                    </statement>
                   </body>
                 </parameters>
                 <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@target/@containedType.0">
@@ -2621,7 +2643,7 @@
               </condition>
             </statement>
           </body>
-          <ownedParameter name="elementOid" type="//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@parameters.0/@containedType.0" isOrdered="true" upper="1"/>
+          <ownedParameter name="elementOid" type="//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0" isOrdered="true" upper="1"/>
           <post name="doesntContainsElementAnymore" stereotype="post">
             <body xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0" name="not">
               <staticOperation href="primitive_types.km#//@packages.0/standard/Boolean/not"/>
@@ -2631,13 +2653,15 @@
                     <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Bag/G"/>
                   </containedType>
                   <parameters name="e"/>
-                  <body xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/empty/@body/@containedType.0" name="equals">
-                    <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@parameters.0/@containedType.0" name="elementOid"/>
-                    <staticOperation href="primitive_types.km#//@packages.0/standard/Integer/equals"/>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@target/@containedType.0" name="oid">
-                      <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/oid"/>
-                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Bag/G" name="e"/>
-                    </target>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/empty/@body/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/empty/@body/@containedType.0" name="equals">
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0" name="elementOid"/>
+                      <staticOperation href="primitive_types.km#//@packages.0/standard/Integer/equals"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Bag/removeFromOid/@body/@statement.0/@initialization/@parameters.0/@body/@statement.0/@target/@containedType.0" name="oid">
+                        <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/oid"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Bag/G" name="e"/>
+                      </target>
+                    </statement>
                   </body>
                 </parameters>
               </target>
@@ -2655,10 +2679,12 @@
                     <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/standard/Bag/G"/>
                   </containedType>
                   <parameters name="e"/>
-                  <body xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1" name="equals">
-                    <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Bag/G" name="element"/>
-                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Bag/G" name="e"/>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1" name="equals">
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Bag/G" name="element"/>
+                      <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/standard/Bag/G" name="e"/>
+                    </statement>
                   </body>
                 </parameters>
                 <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/standard/Bag/removeOne/@body/@statement.0/@initialization/@target/@containedType.0">
@@ -4603,7 +4629,7 @@
   <referencedModelingUnits href="../utils/utils.km#/"/>
   <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
   <referencedModelingUnits href="../utils/hashtable.km#/"/>
-  <referencedModelingUnits href="../utils/Stack.km#/"/>
+  <referencedModelingUnits href="../utils/stack.km#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>
   <referencedModelingUnits href="../io/file_io.km#/"/>
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>

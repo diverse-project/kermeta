@@ -87,7 +87,7 @@
                 <staticType href="../kunit/kunit.km#//@packages.0/kunit/TestCase/run/@body/@statement.1/@statement.1/@statement.2/@containedType.0"/>
               </target>
               <value xsi:type="kermeta_language_behavior:CallFeature" name="typeDefinition">
-                <staticType href="structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
+                <staticType href="structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
                 <staticProperty href="../reflection/reflection.km#//@packages.0/reflection/ParameterizedType/typeDefinition"/>
                 <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@value/@target/@containedType.0">
                   <typeref type="//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value/@target/@typeref/@containedType.0" upper="1">
@@ -232,25 +232,28 @@
                       <right href="../standard/primitive_types.km#//@packages.0/standard/String/append/@containedType.0"/>
                     </containedType>
                     <parameters name="error"/>
-                    <body xsi:type="kermeta_language_behavior:CallFeature" name="append">
+                    <body xsi:type="kermeta_language_behavior:Block">
                       <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/append/@containedType.0"/>
-                      <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
-                        <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
-                        <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@parameters.0/@parameters.0/@containedType.0" name="message" staticProperty="//@packages.0/interpreter/KermetaError/message">
-                          <containedType xsi:type="kermeta_language_structure:Class">
-                            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
-                          </containedType>
-                          <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/errors/@containedType.0" name="error"/>
+                      <statement xsi:type="kermeta_language_behavior:CallFeature" name="append">
+                        <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/append/@containedType.0"/>
+                        <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                          <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
+                          <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@containedType.0" name="message" staticProperty="//@packages.0/interpreter/KermetaError/message">
+                            <containedType xsi:type="kermeta_language_structure:Class">
+                              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+                            </containedType>
+                            <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/errors/@containedType.0" name="error"/>
+                          </parameters>
+                          <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
+                          <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@containedType.0" value="&#xA;"/>
                         </parameters>
-                        <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
-                        <target xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@containedType.0" value="&#xA;"/>
-                      </parameters>
-                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/append"/>
-                      <target xsi:type="kermeta_language_behavior:CallFeature" name="message">
-                        <staticType href="structure.km#//@packages.0/language/structure/Object/set/@body/@statement.0/@elseBody/@statement.1/@target/@containedType.0"/>
-                        <staticProperty href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message"/>
-                        <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@containedType.0" name="e"/>
-                      </target>
+                        <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/append"/>
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="message">
+                          <staticType href="structure.km#//@packages.0/language/structure/Object/set/@body/@statement.0/@elseBody/@statement.1/@target/@containedType.0"/>
+                          <staticProperty href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception/message"/>
+                          <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.0/@containedType.0" name="e"/>
+                        </target>
+                      </statement>
                     </body>
                   </parameters>
                   <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
@@ -500,7 +503,7 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute tag="//@packages.0/interpreter/KermetaError/message/@ownedTag.0" name="message" type="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@parameters.0/@parameters.0/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
+        <ownedAttribute tag="//@packages.0/interpreter/KermetaError/message/@ownedTag.0" name="message" type="//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.3/@thenBody/@statement.2/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
           <ownedTag value="/**&#xD;&#xA;  * Error message&#xD;&#xA;  */" object="//@packages.0/interpreter/KermetaError/message"/>
         </ownedAttribute>
       </ownedTypeDefinition>
@@ -532,7 +535,7 @@
   <referencedModelingUnits href="../utils/utils.km#/"/>
   <referencedModelingUnits href="../utils/StringBuffer.km#/"/>
   <referencedModelingUnits href="../utils/hashtable.km#/"/>
-  <referencedModelingUnits href="../utils/Stack.km#/"/>
+  <referencedModelingUnits href="../utils/stack.km#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>
   <referencedModelingUnits href="../io/file_io.km#/"/>
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>

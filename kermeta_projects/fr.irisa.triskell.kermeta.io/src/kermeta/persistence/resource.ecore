@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::persistence|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/persistence/resource.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="persistence" nsURI="http://www.kermeta.org/kermeta/persistence" nsPrefix="persistence">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xD;&#xA; * Contains the classes that handle the serialization of models, in particular&#xD;&#xA; * EMF models.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/persistence_package.png&quot;>&#xD;&#xA; */"/>
@@ -125,7 +125,7 @@
         </eOperations>
         <eOperations name="add">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.setContainingResource(instance, self)&#xA;&#x9;super(instance)&#xA;&#x9;repository.resources.~select{r | (r.isNotEqual(self)) and (r.contains(instance))}.each{r | do&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;DVK ! another resource of the same repository was containing this element&quot;)&#xA;&#x9;&#x9;&#x9;r.remove(instance)&#xA;&#x9;&#x9;end}&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.setContainingResource(instance, self)&#xA;&#x9;super(instance)&#xA;&#x9;repository.resources.~select{r | do&#xA;&#x9;&#x9;&#x9;(r.isNotEqual(self)) and (r.contains(instance))&#xA;&#x9;&#x9;end}.each{r | do&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;DVK ! another resource of the same repository was containing this element&quot;)&#xA;&#x9;&#x9;&#x9;r.remove(instance)&#xA;&#x9;&#x9;end}&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Overrides Set&lt;Object>.add(Object)&#xD;&#xA;  * Add an instance to the Resource &#xD;&#xA;  * Ensures that the instance is referenced by a one and only one Resource of the same Repository&#xD;&#xA;  * Ensures that the instance does not appear more than once in the Resource&#xD;&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Set"/>
             <references href="../standard/collections.ecore#/1/standard/Set/add"/>
@@ -217,7 +217,7 @@
         </eOperations>
         <eOperations name="findDanglingModelElements">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::persistence::DanglingDiagnostic>.new&#xA;&#x9;self.resources.each{res | res.contents.each{containedObj | do&#xA;&#x9;&#x9;&#x9;&#x9;var classDef : kermeta::language::structure::ClassDefinition&#xA;&#x9;&#x9;&#x9;&#x9;classDef ?= containedObj.getMetaClass.typeDefinition&#xA;&#x9;&#x9;&#x9;&#x9;if not (classDef.isVoid) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;classDef.allAttribute.each{prop | if not (prop.isDerived) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if (prop.upper.isGreater(1)) or (prop.upper.equals(1.uminus)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var referencedObjs : kermeta::standard::Collection&lt;kermeta::reflection::Object>&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;referencedObjs ?= containedObj.get(prop)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if not (referencedObjs.isVoid) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;referencedObjs.each{referencedObj | if (not (self.resources.exists{res2 | res2.contents.contains(referencedObj)})) and (not (((referencedObj.isKindOf(kermeta::standard::String)) or (referencedObj.isKindOf(kermeta::standard::Integer))) or (referencedObj.isKindOf(kermeta::standard::Boolean)))) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var diagnostic : kermeta::persistence::DanglingDiagnostic init kermeta::persistence::DanglingDiagnostic.new&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.danglingElement := referencedObj&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.referencingElement := containedObj&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.referencingProperty ?= prop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(diagnostic)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var referencedObj : kermeta::standard::Object&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;referencedObj := containedObj.get(prop)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if not (referencedObj.isVoid) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if (not (self.resources.exists{res2 | res2.contents.contains(referencedObj)})) and (not (((referencedObj.isKindOf(kermeta::standard::String)) or (referencedObj.isKindOf(kermeta::standard::Integer))) or (referencedObj.isKindOf(kermeta::standard::Boolean)))) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var diagnostic : kermeta::persistence::DanglingDiagnostic init kermeta::persistence::DanglingDiagnostic.new&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.danglingElement := referencedObj&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.referencingElement := containedObj&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.referencingProperty ?= prop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(diagnostic)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}}&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::persistence::DanglingDiagnostic>.new&#xA;&#x9;self.resources.each{res | do&#xA;&#x9;&#x9;&#x9;res.contents.each{containedObj | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var classDef : kermeta::language::structure::ClassDefinition&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;classDef ?= containedObj.getMetaClass.typeDefinition&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if not (classDef.isVoid) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;classDef.allAttribute.each{prop | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if not (prop.isDerived) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if (prop.upper.isGreater(1)) or (prop.upper.equals(1.uminus)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var referencedObjs : kermeta::standard::Collection&lt;kermeta::reflection::Object>&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;referencedObjs ?= containedObj.get(prop)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if not (referencedObjs.isVoid) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;referencedObjs.each{referencedObj | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if (not (self.resources.exists{res2 | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;res2.contents.contains(referencedObj)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end})) and (not (((referencedObj.isKindOf(kermeta::standard::String)) or (referencedObj.isKindOf(kermeta::standard::Integer))) or (referencedObj.isKindOf(kermeta::standard::Boolean)))) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var diagnostic : kermeta::persistence::DanglingDiagnostic init kermeta::persistence::DanglingDiagnostic.new&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.danglingElement := referencedObj&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.referencingElement := containedObj&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.referencingProperty ?= prop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(diagnostic)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var referencedObj : kermeta::standard::Object&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;referencedObj := containedObj.get(prop)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if not (referencedObj.isVoid) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if (not (self.resources.exists{res2 | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;res2.contents.contains(referencedObj)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end})) and (not (((referencedObj.isKindOf(kermeta::standard::String)) or (referencedObj.isKindOf(kermeta::standard::Integer))) or (referencedObj.isKindOf(kermeta::standard::Boolean)))) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var diagnostic : kermeta::persistence::DanglingDiagnostic init kermeta::persistence::DanglingDiagnostic.new&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.danglingElement := referencedObj&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.referencingElement := containedObj&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;diagnostic.referencingProperty ?= prop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(diagnostic)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;end}&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Search for elements referenced by one element contained by this repository  that are not contained by this repository&#xD;&#xA;  * ie. element that EMF would claim as &quot;not contained in a resource&quot;&#xD;&#xA;  * example of use :&#xD;&#xA;  *  var report : Set&lt;DanglingDiagnostic>&#xD;&#xA;     * report := repository.findDanglingModelElements()&#xD;&#xA;     * report.each{ diag | stdio.writeln(diag.toString ) }&#xD;&#xA;  */"/>
           </eAnnotations>
           <eGenericType>
@@ -272,7 +272,7 @@
         </eAnnotations>
         <eOperations name="createResource" eType="/1/persistence/Resource">
           <eAnnotations source="kermeta" references="/1/persistence/Repository/createResource">
-            <details key="body" value="do&#xA;&#x9;var nUri : kermeta::standard::String&#xA;&#x9;nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)&#xA;&#x9;if not (resources.collect{r | extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(r.uri)}.contains(nUri)) then&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var e : kermeta::exceptions::ResourceCreateException init kermeta::exceptions::ResourceCreateException.new&#xA;&#x9;&#x9;e.message := &quot;Trying to create a resource already existing at &quot;.plus(uri).plus(&quot;.&#xA;&quot;).plus(&quot;Remove existing resource from repository first, or use \&quot;getResource\&quot; operation.&quot;)&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var nUri : kermeta::standard::String&#xA;&#x9;nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)&#xA;&#x9;if not (resources.collect{r | do&#xA;&#x9;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(r.uri)&#xA;&#x9;&#x9;end}.contains(nUri)) then&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var e : kermeta::exceptions::ResourceCreateException init kermeta::exceptions::ResourceCreateException.new&#xA;&#x9;&#x9;e.message := &quot;Trying to create a resource already existing at &quot;.plus(uri).plus(&quot;.&#xA;&quot;).plus(&quot;Remove existing resource from repository first, or use \&quot;getResource\&quot; operation.&quot;)&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Overrides Repository.createResource(String, String)&#xD;&#xA;  * Create a new resource for a model given by its uri, &#xD;&#xA;  * which meta-model is stored in file given by mm_uri&#xD;&#xA;  * If file already exists, you'll be able to call the load method to concretly load the model&#xD;&#xA;  * otherwise, you can only call the save method&#xD;&#xA;  */"/>
             <details key="superOperation" value="kermeta::persistence::Repository"/>
           </eAnnotations>
@@ -320,6 +320,7 @@
     <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
     <references href="../language/behavior.ecore#/2"/>
@@ -331,24 +332,21 @@
     <references href="../reflection/reflection.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
     <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
-    <references href="../utils/Stack.ecore#/0"/>
-    <references href="../utils/Stack.ecore#/1"/>
-    <references href="../utils/Stack.ecore#/2"/>
+    <references href="../utils/stack.ecore#/0"/>
+    <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>
@@ -360,6 +358,7 @@
     <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
     <references href="../standard/java.ecore#/2"/>

@@ -4,7 +4,7 @@
     <details key="require" value="../Standard.kmt|"/>
     <details key="using" value="kermeta::standard|kermeta::reflection|kermeta::utils|kermeta::interpreter|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="interpreter" nsURI="http://www.kermeta.org/kermeta/interpreter" nsPrefix="interpreter">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xD;&#xA; * Contains a set of classes whose function is to evaluate a kermeta &#xD;&#xA; * expression written as a string.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/interpreter_package.png&quot;>&#xD;&#xA; */"/>
@@ -22,7 +22,7 @@
         </eOperations>
         <eOperations name="parse">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;errors.clear&#xA;&#x9;if (formalParameters.equals(void)) or (selfClass.equals(void)) then&#xA;&#x9;&#x9;var e : kermeta::exceptions::DynamicExpressionException init kermeta::exceptions::DynamicExpressionException.new&#xA;&#x9;&#x9;e.message := &quot;parse precondition - formalParameters or selfType is void&quot;&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.parse(self, expression)&#xA;&#x9;if (errors.size) != (0) then&#xA;&#x9;&#x9;var e : kermeta::exceptions::DynamicExpressionException init kermeta::exceptions::DynamicExpressionException.new&#xA;&#x9;&#x9;e.message := &quot;parse result - expression contains errors&quot;&#xA;&#x9;&#x9;errors.each{error | e.message.append(&quot;&#xA;&quot;.plus(error.message))}&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;errors.clear&#xA;&#x9;if (formalParameters.equals(void)) or (selfClass.equals(void)) then&#xA;&#x9;&#x9;var e : kermeta::exceptions::DynamicExpressionException init kermeta::exceptions::DynamicExpressionException.new&#xA;&#x9;&#x9;e.message := &quot;parse precondition - formalParameters or selfType is void&quot;&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.parse(self, expression)&#xA;&#x9;if (errors.size) != (0) then&#xA;&#x9;&#x9;var e : kermeta::exceptions::DynamicExpressionException init kermeta::exceptions::DynamicExpressionException.new&#xA;&#x9;&#x9;e.message := &quot;parse result - expression contains errors&quot;&#xA;&#x9;&#x9;errors.each{error | do&#xA;&#x9;&#x9;&#x9;&#x9;e.message.append(&quot;&#xA;&quot;.plus(error.message))&#xA;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Parse the expression as a string&#xD;&#xA;  * and updates the expression field and errors&#xD;&#xA;  * Returns true if the expression was parsed sucessfuly&#xD;&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
@@ -119,46 +119,37 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
     <references href="../standard/primitive_types.ecore#/2"/>
     <references href="behavior.ecore#/0"/>
     <references href="behavior.ecore#/1"/>
-    <references href="behavior.ecore#/2"/>
     <references href="structure.ecore#/0"/>
     <references href="structure.ecore#/1"/>
-    <references href="structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../reflection/reflection.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="reflective_collections.ecore#/0"/>
     <references href="reflective_collections.ecore#/1"/>
     <references href="reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
     <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
-    <references href="../utils/StringBuffer.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
-    <references href="../utils/Stack.ecore#/0"/>
-    <references href="../utils/Stack.ecore#/1"/>
-    <references href="../utils/Stack.ecore#/2"/>
+    <references href="../utils/stack.ecore#/0"/>
+    <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>
@@ -167,7 +158,6 @@
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
     <references href="../standard/java.ecore#/2"/>

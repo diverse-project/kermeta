@@ -243,19 +243,22 @@
                   <right href="../standard/collections.km#//@packages.0/standard/Collection/add/@containedType.0"/>
                 </containedType>
                 <parameters name="k"/>
-                <body xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                <body xsi:type="kermeta_language_behavior:Block">
                   <staticType href="../standard/collections.km#//@packages.0/standard/Collection/add/@containedType.0"/>
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/V" name="getValue" staticOperation="//@packages.0/utils/Hashtable/getValue">
-                    <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/Hashtable/K" name="k"/>
-                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/utils/Hashtable/values/@body/@statement.1/@parameters.0/@body/@parameters.0/@target/@containedType.0">
-                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/utils/Hashtable">
-                        <typeParamBinding variable="//@packages.0/utils/Hashtable/K" type="//@packages.0/utils/Hashtable/K"/>
-                        <typeParamBinding variable="//@packages.0/utils/Hashtable/V" type="//@packages.0/utils/Hashtable/V"/>
-                      </containedType>
-                    </target>
-                  </parameters>
-                  <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/add"/>
-                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Hashtable/values/@containedType.0" name="result"/>
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/add/@containedType.0"/>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Hashtable/V" name="getValue" staticOperation="//@packages.0/utils/Hashtable/getValue">
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/Hashtable/K" name="k"/>
+                      <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/utils/Hashtable/values/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0/@target/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/utils/Hashtable">
+                          <typeParamBinding variable="//@packages.0/utils/Hashtable/K" type="//@packages.0/utils/Hashtable/K"/>
+                          <typeParamBinding variable="//@packages.0/utils/Hashtable/V" type="//@packages.0/utils/Hashtable/V"/>
+                        </containedType>
+                      </target>
+                    </parameters>
+                    <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/add"/>
+                    <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Hashtable/values/@containedType.0" name="result"/>
+                  </statement>
                 </body>
               </parameters>
               <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
@@ -310,7 +313,7 @@
   <referencedModelingUnits href="../kunit/assert.km#/"/>
   <referencedModelingUnits href="utils.km#/"/>
   <referencedModelingUnits href="StringBuffer.km#/"/>
-  <referencedModelingUnits href="Stack.km#/"/>
+  <referencedModelingUnits href="stack.km#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>
   <referencedModelingUnits href="../io/file_io.km#/"/>
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>

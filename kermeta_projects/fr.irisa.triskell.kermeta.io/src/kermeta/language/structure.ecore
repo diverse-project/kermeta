@@ -4,8 +4,8 @@
     <details key="require" value="../Standard.kmt|behavior.kmt|"/>
     <details key="using" value="kermeta::language::structure|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="language" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/kermeta/language" nsPrefix="language">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="language" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/kermeta/language" nsPrefix="language">
       <eSubpackages name="structure" nsURI="http://www.kermeta.org/kermeta/language/structure" nsPrefix="structure">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Contains the concrete implementation (including the operation bodies) &#xD;&#xA; * of the classes of the &lt;code>kermeta::reflection&lt;/code> package.&#xD;&#xA; * If you need more documentation, please take a look at the&#xD;&#xA; * &lt;code>kermeta::reflection&lt;/code> package which is more complete.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_package.png&quot;>&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_visitor_view.png&quot;>&#xD;&#xA; */"/>
@@ -72,7 +72,7 @@
           </eOperations>
           <eOperations name="checkAllInvariants">
             <eAnnotations source="kermeta">
-              <details key="body" value="do&#xA;&#x9;if self.isNotEqual(void) then&#xA;&#x9;&#x9;self.checkInvariants&#xA;&#x9;&#x9;self.getMetaClass.ownedAttribute.each{subObj | if subObj.isComposite then&#xA;&#x9;&#x9;&#x9;&#x9;if (self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveSequence&quot;)) or (self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveCollection&quot;)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var subObjInstances : kermeta::standard::Collection&lt;kermeta::reflection::Object>&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances ?= self.get(subObj)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances.each{aSubObjInstances | aSubObjInstances.checkAllInvariants}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.get(subObj).checkAllInvariants&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+              <details key="body" value="do&#xA;&#x9;if self.isNotEqual(void) then&#xA;&#x9;&#x9;self.checkInvariants&#xA;&#x9;&#x9;self.getMetaClass.ownedAttribute.each{subObj | do&#xA;&#x9;&#x9;&#x9;&#x9;if subObj.isComposite then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if (self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveSequence&quot;)) or (self.get(subObj).getMetaClass.typeDefinition.name.equals(&quot;ReflectiveCollection&quot;)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;var subObjInstances : kermeta::standard::Collection&lt;kermeta::reflection::Object>&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances ?= self.get(subObj)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;subObjInstances.each{aSubObjInstances | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;aSubObjInstances.checkAllInvariants&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.get(subObj).checkAllInvariants&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.checkAllInvariants()&#xD;&#xA;   */"/>
               <details key="superOperation" value="kermeta::reflection::Object"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Object/checkAllInvariants"/>
@@ -705,7 +705,7 @@
           </eOperations>
           <eOperations name="filter" ordered="false" upperBound="-1">
             <eAnnotations source="kermeta">
-              <details key="body" value="do&#xA;&#x9;result := contents.~select{o | typeName.isInstance(o)}.asSet&#xA;end"/>
+              <details key="body" value="do&#xA;&#x9;result := contents.~select{o | do&#xA;&#x9;&#x9;&#x9;typeName.isInstance(o)&#xA;&#x9;&#x9;end}.asSet&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;  * Implements kermeta::reflection::Model.filter(Type)&#xD;&#xA;  */"/>
               <details key="superOperation" value="kermeta::reflection::Model"/>
               <references href="../reflection/reflection.ecore#/1/reflection/Model/filter"/>
@@ -1631,14 +1631,15 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
     <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="behavior.ecore#/0"/>
     <references href="behavior.ecore#/1"/>
-    <references href="behavior.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../reflection/reflection.ecore#/2"/>
@@ -1646,9 +1647,9 @@
     <references href="../persistence/resource.ecore#/1"/>
     <references href="reflective_collections.ecore#/0"/>
     <references href="reflective_collections.ecore#/1"/>
+    <references href="reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/utils.ecore#/0"/>
@@ -1658,21 +1659,24 @@
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
-    <references href="../utils/Stack.ecore#/0"/>
-    <references href="../utils/Stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/0"/>
+    <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="dynamic_expression.ecore#/0"/>
     <references href="dynamic_expression.ecore#/1"/>
+    <references href="dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../ecore/ecore_compatibility.ecore#/2"/>

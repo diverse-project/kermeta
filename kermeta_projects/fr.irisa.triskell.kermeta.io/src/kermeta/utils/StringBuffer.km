@@ -75,7 +75,7 @@
   <referencedModelingUnits href="../kunit/assert.km#/"/>
   <referencedModelingUnits href="utils.km#/"/>
   <referencedModelingUnits href="hashtable.km#/"/>
-  <referencedModelingUnits href="Stack.km#/"/>
+  <referencedModelingUnits href="stack.km#/"/>
   <referencedModelingUnits href="../io/std_io.km#/"/>
   <referencedModelingUnits href="../io/file_io.km#/"/>
   <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
