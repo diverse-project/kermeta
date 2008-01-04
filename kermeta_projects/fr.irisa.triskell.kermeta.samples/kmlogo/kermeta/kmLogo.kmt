@@ -1,4 +1,4 @@
-/* $Id: kmLogo.kmt,v 1.8 2008-01-03 13:56:01 vmahe Exp $
+/* $Id: kmLogo.kmt,v 1.9 2008-01-04 10:46:19 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.samples
  * File       : kmLogo.kmt
  * License    : EPL
@@ -6,7 +6,7 @@
  * -------------------------------------------------------------------
  * Creation date : juil. 2005
  * Authors : 
- *        Jean-Marc J�z�quel <jezequel@irisa.fr>
+ *        Jean-Marc Jezequel <jezequel@irisa.fr>
  * Description : 
  *       Sample of metamodel with behavior in Kermeta
  */
@@ -448,7 +448,7 @@ package actions
 	class Main
 	{
 		operation pointille() : abstractSyntax::Instruction is do
-		// tracer des pointill�s
+		// charts dotted line
 			var cst3 : abstractSyntax::Constant init abstractSyntax::Constant.new()
 			var cst4 : abstractSyntax::Constant init abstractSyntax::Constant.new()
 			var fo1 : abstractSyntax::Forward init abstractSyntax::Forward.new()
