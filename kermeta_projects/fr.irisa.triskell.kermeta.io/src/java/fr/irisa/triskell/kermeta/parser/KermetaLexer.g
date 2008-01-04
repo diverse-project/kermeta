@@ -67,6 +67,9 @@ protected ESC :
 ID options { testLiterals=true; }
 : ('~')? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | DIGIT)* ;
 
+// same as ID but doesn't check for literals=true 
+UNPROTECTEDID : ('~')? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | DIGIT)* ;
+
 // INT_LITERAL completed on 08/04/2005
 // INT_LITERAL : (DIGIT)+ ;
 INT_LITERAL	:	('-')?(DIGIT)+	;

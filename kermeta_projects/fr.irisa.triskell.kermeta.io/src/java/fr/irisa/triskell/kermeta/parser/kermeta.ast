@@ -14,6 +14,13 @@ abstract compUnit [entry] : scompUnit (postAnnotations=annotations);
 sequence packageDecl : annotations "package" name=qualifiedID SEMI ;
 
 list qualifiedID : id1=ID (qidSeparator idn=ID)* ;
+
+// I don't know why, but it seem that it must contain sequence only
+// enable the use of keyword for those value
+abstract kwOrNamedQualifiedID : aspectModifier | squalifiedID ;
+
+sequence squalifiedID : qualifiedID ;
+
 token qidSeparator : COL_COL ;
 
 abstract stringLiteralOrQualifiedID : stringLiteralContainer | qualifiedID ;
@@ -22,7 +29,8 @@ sequence stringLiteralContainer : STRING_LITERAL ;
 list annotations : annotation* ;
 abstract annotation : tag | contextMultiLineComment; 
 
-sequence tag : AT name=qualifiedID val=STRING_LITERAL ;
+sequence tag : AT name=kwOrNamedQualifiedID val=STRING_LITERAL ;
+
 
 sequence contextMultiLineComment : CONTEXT_MULTI_LINE_COMMENT ;
 
@@ -54,10 +62,12 @@ sequence modelTypeDecl : "modeltype" name=ID LCURLY included=qualifiedIDlst RCUR
 
 list qualifiedIDlst : id1=qualifiedID (COMMA idn=qualifiedID)*;
 
-sequence classDecl :  (abstractModifier)? classKind name=ID (LT typeVarDecllst GT)? ("inherits" superTypes=typelst)? LCURLY classMemberDecls RCURLY; 
+sequence classDecl :  (aspectModifier)? (abstractModifier)? classKind name=ID (LT typeVarDecllst GT)? ("inherits" superTypes=typelst)? LCURLY classMemberDecls RCURLY; 
+//sequence classDecl :  (abstractModifier)? classKind name=ID (LT typeVarDecllst GT)? ("inherits" superTypes=typelst)? LCURLY classMemberDecls RCURLY;
 //(COLON instClassName=stringLiteralOrQualifiedID)? LCURLY classMemberDecls RCURLY ;
 token classKind : "class" ; //| "interface" ;
 token abstractModifier : "abstract" ;
+sequence aspectModifier : "aspect" ;
 list typelst : t1=type (COMMA tn=type)* ;
 list typeVarDecllst : tv1=typeVarDecl (COMMA tvn=typeVarDecl)*;
 
