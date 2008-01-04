@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.24 2007-12-06 14:10:53 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.25 2008-01-04 14:20:07 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -47,7 +47,7 @@ import antlr.MismatchedTokenException;
 import antlr.NoViableAltException;
 import antlr.TokenStreamRecognitionException;
 
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;
@@ -1032,6 +1032,17 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		if ( typeDefinitionCache == null )
 			return null;
 		return typeDefinitionCache.getTypeDefinitionByQualifiedName(qualifiedName);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public TypeDefinition getInternalTypeDefinitionByName(String name) {
+		if ( typeDefinitionCache == null )
+			return null;
+		return typeDefinitionCache.getInternalTypeDefinitionByQualifiedName(name);
 	}
 
 	/**

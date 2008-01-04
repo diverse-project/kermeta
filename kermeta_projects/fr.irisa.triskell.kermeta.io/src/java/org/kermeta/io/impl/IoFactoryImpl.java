@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.9 2007-10-04 07:22:15 ftanguy Exp $
+ * $Id: IoFactoryImpl.java,v 1.10 2008-01-04 14:20:07 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -30,7 +30,7 @@ import org.kermeta.io.plugin.IOPlugin;
 
 import antlr.ANTLRException;
 
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 
 import fr.irisa.triskell.traceability.helper.Tracer;
 

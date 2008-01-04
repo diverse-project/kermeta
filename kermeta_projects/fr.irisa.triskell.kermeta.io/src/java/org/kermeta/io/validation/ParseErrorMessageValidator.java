@@ -2,11 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParseErrorMessageValidator.java,v 1.2 2007-07-20 15:08:05 ftanguy Exp $
+ * $Id: ParseErrorMessageValidator.java,v 1.3 2008-01-04 14:20:07 dvojtise Exp $
  */
 package org.kermeta.io.validation;
 
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 
 /**
  * A sample validator interface for {@link org.kermeta.io.ParseErrorMessage}.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.16 2007-12-06 14:10:53 ftanguy Exp $
+ * $Id: KermetaUnit.java,v 1.17 2008-01-04 14:20:07 dvojtise Exp $
  */
 package org.kermeta.io;
 
@@ -614,6 +614,9 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Retreives a TypeDefinition , it will also look for this TypeDefinition into the required units
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -626,6 +629,17 @@ public interface KermetaUnit extends EObject {
 	 * @generated
 	 */
 	TypeDefinition getTypeDefinitionByQualifiedName(String qualifiedName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Retreives a TypeDefinition but only if it is contained by this KermetaUnit
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	TypeDefinition getInternalTypeDefinitionByName(String name);
 
 	/**
 	 * <!-- begin-user-doc -->

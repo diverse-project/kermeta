@@ -2,11 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParseErrorMessage.java,v 1.2 2007-07-20 15:08:08 ftanguy Exp $
+ * $Id: ParseErrorMessage.java,v 1.3 2008-01-04 14:20:07 dvojtise Exp $
  */
 package org.kermeta.io;
 
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 
 /**
  * <!-- begin-user-doc -->

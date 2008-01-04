@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackage.java,v 1.9 2007-12-06 14:10:53 ftanguy Exp $
+ * $Id: IoPackage.java,v 1.10 2008-01-04 14:20:07 dvojtise Exp $
  */
 package org.kermeta.io;
 
@@ -749,7 +749,7 @@ public interface IoPackage extends EPackage {
 	 * The meta object id for the '<em>AST Node</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.ibm.eclipse.ldt.core.ast.ASTNode
+	 * @see org.eclipse.gymnast.runtime.core.ast.ASTNode
 	 * @see org.kermeta.io.impl.IoPackageImpl#getASTNode()
 	 * @generated
 	 */
@@ -1359,12 +1359,12 @@ public interface IoPackage extends EPackage {
 	EDataType getTracer();
 
 	/**
-	 * Returns the meta object for data type '{@link com.ibm.eclipse.ldt.core.ast.ASTNode <em>AST Node</em>}'.
+	 * Returns the meta object for data type '{@link org.eclipse.gymnast.runtime.core.ast.ASTNode <em>AST Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>AST Node</em>'.
-	 * @see com.ibm.eclipse.ldt.core.ast.ASTNode
-	 * @model instanceClass="com.ibm.eclipse.ldt.core.ast.ASTNode"
+	 * @see org.eclipse.gymnast.runtime.core.ast.ASTNode
+	 * @model instanceClass="org.eclipse.gymnast.runtime.core.ast.ASTNode"
 	 * @generated
 	 */
 	EDataType getASTNode();
@@ -1884,7 +1884,7 @@ public interface IoPackage extends EPackage {
 		 * The meta object literal for the '<em>AST Node</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.ibm.eclipse.ldt.core.ast.ASTNode
+		 * @see org.eclipse.gymnast.runtime.core.ast.ASTNode
 		 * @see org.kermeta.io.impl.IoPackageImpl#getASTNode()
 		 * @generated
 		 */

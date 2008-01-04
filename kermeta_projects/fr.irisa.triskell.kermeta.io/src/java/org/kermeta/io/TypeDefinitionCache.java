@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionCache.java,v 1.1 2007-09-19 12:15:04 ftanguy Exp $
+ * $Id: TypeDefinitionCache.java,v 1.2 2008-01-04 14:20:07 dvojtise Exp $
  */
 package org.kermeta.io;
 
@@ -128,6 +128,14 @@ public interface TypeDefinitionCache extends EObject {
 	 * @generated
 	 */
 	TypeDefinition getTypeDefinitionByQualifiedName(String qualifiedName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	TypeDefinition getInternalTypeDefinitionByQualifiedName(String name);
 
 	/**
 	 * <!-- begin-user-doc -->

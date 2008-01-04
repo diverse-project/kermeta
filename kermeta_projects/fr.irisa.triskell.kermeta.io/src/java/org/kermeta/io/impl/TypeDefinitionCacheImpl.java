@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionCacheImpl.java,v 1.1 2007-09-19 12:15:02 ftanguy Exp $
+ * $Id: TypeDefinitionCacheImpl.java,v 1.2 2008-01-04 14:20:07 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -230,6 +230,20 @@ public class TypeDefinitionCacheImpl extends EObjectImpl implements TypeDefiniti
 	 */
 	public TypeDefinition getTypeDefinitionByQualifiedName(String qualifiedName) {
 		return getTypeDefinitionByQualifiedName( qualifiedName, new NullProgressMonitor() );
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public TypeDefinition getInternalTypeDefinitionByQualifiedName(String name) {
+		TypeDefinitionCacheEntry entry = entries.get( name );
+		if ( entry != null )
+			return entry.getTypeDefinition();
+		else {
+			return null;
+		}
 	}
 
 	/**

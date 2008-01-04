@@ -2,13 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.17 2007-12-06 14:10:53 ftanguy Exp $
+ * $Id: IoPackageImpl.java,v 1.18 2008-01-04 14:20:07 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
 import antlr.ANTLRException;
 
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 
 import fr.irisa.triskell.kermeta.KmPackage;
 
@@ -906,7 +906,6 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		// Obtain other dependent packages
 		StructurePackage theStructurePackage = (StructurePackage)EPackage.Registry.INSTANCE.getEPackage(StructurePackage.eNS_URI);
-		KmPackage theKmPackage = (KmPackage)EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -952,6 +951,10 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		EOperation op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "addInternalPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "addInternalPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "findInternalpackage", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -984,6 +987,9 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		op = addEOperation(kermetaUnitEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(kermetaUnitEClass, theStructurePackage.getTypeDefinition(), "getInternalTypeDefinitionByName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "getPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1002,6 +1008,8 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		op = addEOperation(kermetaUnitEClass, null, "warning", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "message", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(kermetaUnitEClass, ecorePackage.getEBoolean(), "isErroneous", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(kermetaUnitEClass, null, "storeTrace", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theStructurePackage.getObject(), "modelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1029,12 +1037,6 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		addEParameter(op, ecorePackage.getEJavaObject(), "target", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(kermetaUnitEClass, null, "finalize", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(kermetaUnitEClass, theStructurePackage.getPackage(), "addInternalPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(kermetaUnitEClass, ecorePackage.getEBoolean(), "isErroneous", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(kermetaUnitEClass, theStructurePackage.getString(), "getUniquePackageQualifiedNames", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -1122,6 +1124,9 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 
 		op = addEOperation(typeDefinitionCacheEClass, theStructurePackage.getTypeDefinition(), "getTypeDefinitionByQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(typeDefinitionCacheEClass, theStructurePackage.getTypeDefinition(), "getInternalTypeDefinitionByQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(typeDefinitionCacheEClass, null, "addTypeDefinition", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);

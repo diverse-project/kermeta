@@ -2,11 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParseErrorMessageImpl.java,v 1.3 2007-08-02 13:09:01 dvojtise Exp $
+ * $Id: ParseErrorMessageImpl.java,v 1.4 2008-01-04 14:20:07 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 
 import org.eclipse.emf.common.notify.Notification;
 
