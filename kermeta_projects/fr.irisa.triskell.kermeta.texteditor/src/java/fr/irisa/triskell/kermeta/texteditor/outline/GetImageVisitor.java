@@ -1,4 +1,4 @@
-/* $Id: GetImageVisitor.java,v 1.10 2007-12-17 14:05:11 ftanguy Exp $
+/* $Id: GetImageVisitor.java,v 1.11 2008-01-04 09:41:46 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetImageVisitor.java
 * License : EPL
@@ -26,6 +26,7 @@ import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.texteditor.icons.blue.KermetaIconsBlue;
 import fr.irisa.triskell.kermeta.texteditor.icons.green.KermetaIconsGreen;
 import fr.irisa.triskell.kermeta.texteditor.icons.red.KermetaIconsRed;
+import fr.irisa.triskell.kermeta.texteditor.icons.redblue.KermetaIconsRedBlue;
 import fr.irisa.triskell.kermeta.texteditor.icons.yellow.KermetaIconsYellow;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -65,7 +66,8 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	public Object visitClassDefinition(ClassDefinition arg0) {
 	   
 		if ( arg0.isIsAspect() ) {
-			return KermetaSpecialIcons.PACKAGE_BLUE_RED;
+			if (arg0.isIsAbstract()) return KermetaIconsRedBlue.CLASS_ABSTRACT;
+			return KermetaIconsRedBlue.CLASS;
 		} else if (item.isTypeDefinitionImported()) {
 	        if (arg0.isIsAbstract()) return KermetaIconsBlue.CLASS_ABSTRACT;
 			return KermetaIconsBlue.CLASS;
