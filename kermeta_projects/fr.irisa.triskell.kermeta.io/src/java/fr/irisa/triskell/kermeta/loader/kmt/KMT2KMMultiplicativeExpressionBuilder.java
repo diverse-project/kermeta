@@ -1,4 +1,4 @@
-/*
+/* $Id: KMT2KMMultiplicativeExpressionBuilder.java,v 1.9 2008-01-04 14:17:24 dvojtise Exp $
  * Created on 6 f�vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
@@ -11,12 +11,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.ast.MultiplicativeExpression;
-import fr.irisa.triskell.kermeta.ast.MultiplicativeOp;
-import fr.irisa.triskell.kermeta.ast.UnaryExpression;
+import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.parser.gen.ast.MultiplicativeExpression;
+import fr.irisa.triskell.kermeta.parser.gen.ast.MultiplicativeOp;
+import fr.irisa.triskell.kermeta.parser.gen.ast.UnaryExpression;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;

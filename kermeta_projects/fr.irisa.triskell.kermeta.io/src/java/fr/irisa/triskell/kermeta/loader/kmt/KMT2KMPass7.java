@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.38 2008-01-02 10:28:31 vmahe Exp $
+/* $Id: KMT2KMPass7.java,v 1.39 2008-01-04 14:17:24 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : EPL
@@ -29,11 +29,11 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.ast.ContextMultiLineComment;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.ast.PackageDecl;
-import fr.irisa.triskell.kermeta.ast.Tag;
-import fr.irisa.triskell.kermeta.ast.helper.KermetaASTHelper;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ContextMultiLineComment;
+import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.parser.gen.ast.PackageDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Tag;
+import fr.irisa.triskell.kermeta.parser.helper.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Object;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -155,7 +155,8 @@ public class KMT2KMPass7 extends KMT2KMPass {
 		if ( monitor.isCanceled() )
 			return false;
 		
-		String name = qualifiedIDAsString(tag.getName());
+		String name = unprotectedIDAsString(tag.getName());
+		//String name = qualifiedIDAsString(tag.getName());
 		
 		// Tags that concern uri are not written in km, but there are stored into the attribute uri of the ClassDefinition associated to a package
 		if( !name.equals(KermetaASTHelper.TAGNAME_URI) ) {

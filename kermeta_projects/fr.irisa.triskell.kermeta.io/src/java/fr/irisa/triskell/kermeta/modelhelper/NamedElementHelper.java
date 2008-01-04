@@ -1,4 +1,4 @@
-/* $Id: NamedElementHelper.java,v 1.4 2007-07-20 15:08:10 ftanguy Exp $
+/* $Id: NamedElementHelper.java,v 1.5 2008-01-04 14:17:38 dvojtise Exp $
  * Project   : Kermeta 
  * File      : NamedElementHelper.java
  * License   : EPL
@@ -10,7 +10,7 @@
 package fr.irisa.triskell.kermeta.modelhelper;
 
 
-import fr.irisa.triskell.kermeta.ast.helper.KMTHelper;
+import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 
 /**

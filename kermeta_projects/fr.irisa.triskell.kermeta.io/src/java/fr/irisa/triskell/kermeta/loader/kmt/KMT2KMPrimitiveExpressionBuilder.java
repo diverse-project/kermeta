@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.21 2007-09-19 12:14:58 ftanguy Exp $
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.22 2008-01-04 14:17:24 dvojtise Exp $
  * Project : Kermeta io
  * File : KMT2KMExpressionBuilder.java
  * License : EPL
@@ -19,30 +19,30 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.ast.ActualParameter;
-import fr.irisa.triskell.kermeta.ast.Basictype;
-import fr.irisa.triskell.kermeta.ast.FBlock;
-import fr.irisa.triskell.kermeta.ast.FBooleanLiteral;
-import fr.irisa.triskell.kermeta.ast.FConditional;
-import fr.irisa.triskell.kermeta.ast.FExpression;
-import fr.irisa.triskell.kermeta.ast.FExpressionLst;
-import fr.irisa.triskell.kermeta.ast.FIntegerLiteral;
-import fr.irisa.triskell.kermeta.ast.FJavaStaticCall;
-import fr.irisa.triskell.kermeta.ast.FLambdaExpression;
-import fr.irisa.triskell.kermeta.ast.FLambdaparam;
-import fr.irisa.triskell.kermeta.ast.FLoop;
-import fr.irisa.triskell.kermeta.ast.FRaiseException;
-import fr.irisa.triskell.kermeta.ast.FRescue;
-import fr.irisa.triskell.kermeta.ast.FSelfCall;
-import fr.irisa.triskell.kermeta.ast.FStringLiteral;
-import fr.irisa.triskell.kermeta.ast.FSuperCall;
-import fr.irisa.triskell.kermeta.ast.FTypeOrVarLiteral;
-import fr.irisa.triskell.kermeta.ast.FVariableDecl;
-import fr.irisa.triskell.kermeta.ast.FVoidLiteral;
-import fr.irisa.triskell.kermeta.ast.ParentExp;
-import fr.irisa.triskell.kermeta.ast.PrimitiveExpression;
-import fr.irisa.triskell.kermeta.ast.ResultCall;
-import fr.irisa.triskell.kermeta.ast.ValueCall;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ActualParameter;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Basictype;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FBlock;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FBooleanLiteral;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FConditional;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FExpressionLst;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FIntegerLiteral;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FJavaStaticCall;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FLambdaExpression;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FLambdaparam;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FLoop;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FRaiseException;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FRescue;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FSelfCall;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FStringLiteral;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FSuperCall;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FTypeOrVarLiteral;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FVariableDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FVoidLiteral;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ParentExp;
+import fr.irisa.triskell.kermeta.parser.gen.ast.PrimitiveExpression;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ResultCall;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ValueCall;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.CallResult;

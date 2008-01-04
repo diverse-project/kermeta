@@ -1,4 +1,4 @@
-/*
+/* $Id: KMT2KMLogicalExperessionBuilder.java,v 1.8 2008-01-04 14:17:24 dvojtise Exp $
  * Created on 5 f�vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
@@ -11,12 +11,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.ast.LogicalExpression;
-import fr.irisa.triskell.kermeta.ast.LogicalOp;
-import fr.irisa.triskell.kermeta.ast.RelationalExpression;
+import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.parser.gen.ast.LogicalExpression;
+import fr.irisa.triskell.kermeta.parser.gen.ast.LogicalOp;
+import fr.irisa.triskell.kermeta.parser.gen.ast.RelationalExpression;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;

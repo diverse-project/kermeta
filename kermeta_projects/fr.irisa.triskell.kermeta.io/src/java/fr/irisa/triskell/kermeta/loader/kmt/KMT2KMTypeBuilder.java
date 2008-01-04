@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.24 2007-10-12 09:18:27 ftanguy Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.25 2008-01-04 14:17:24 dvojtise Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -18,14 +18,14 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 
-import fr.irisa.triskell.kermeta.ast.Basictype;
-import fr.irisa.triskell.kermeta.ast.Functype;
-import fr.irisa.triskell.kermeta.ast.Prodtype;
-import fr.irisa.triskell.kermeta.ast.Type;
-import fr.irisa.triskell.kermeta.ast.Typelst;
-import fr.irisa.triskell.kermeta.ast.VoidType;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Basictype;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Functype;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Prodtype;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Type;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Typelst;
+import fr.irisa.triskell.kermeta.parser.gen.ast.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;

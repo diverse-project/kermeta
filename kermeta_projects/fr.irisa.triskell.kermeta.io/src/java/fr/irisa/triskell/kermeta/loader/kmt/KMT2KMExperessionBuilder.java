@@ -1,4 +1,4 @@
-/* $Id : $
+/* $Id: KMT2KMExperessionBuilder.java,v 1.12 2008-01-04 14:17:24 dvojtise Exp $
  * Created on 5 f�vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
@@ -8,8 +8,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.ast.FAssignement;
-import fr.irisa.triskell.kermeta.ast.FExpression;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FAssignement;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;

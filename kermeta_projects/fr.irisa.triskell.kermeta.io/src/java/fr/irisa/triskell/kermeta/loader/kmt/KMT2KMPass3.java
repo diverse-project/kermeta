@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.29 2007-11-29 16:52:13 dvojtise Exp $
+/* $Id: KMT2KMPass3.java,v 1.30 2008-01-04 14:17:24 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -21,28 +21,28 @@ import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 
-import fr.irisa.triskell.kermeta.ast.AbstractModifier;
-import fr.irisa.triskell.kermeta.ast.ClassDecl;
-import fr.irisa.triskell.kermeta.ast.DataTypeDecl;
-import fr.irisa.triskell.kermeta.ast.EnumDecl;
-import fr.irisa.triskell.kermeta.ast.EnumLiteral;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor;
-import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
-import fr.irisa.triskell.kermeta.ast.Operation;
-import fr.irisa.triskell.kermeta.ast.OperationBody;
-import fr.irisa.triskell.kermeta.ast.Param;
-import fr.irisa.triskell.kermeta.ast.Property;
-import fr.irisa.triskell.kermeta.ast.PropertyBody;
-import fr.irisa.triskell.kermeta.ast.PropertyKind;
-import fr.irisa.triskell.kermeta.ast.QualifiedID;
-import fr.irisa.triskell.kermeta.ast.ReadOnlyModifier;
-import fr.irisa.triskell.kermeta.ast.Type;
-import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
-import fr.irisa.triskell.kermeta.ast.UsingStmt;
-import fr.irisa.triskell.kermeta.ast.helper.KermetaASTHelper;
+import fr.irisa.triskell.kermeta.parser.gen.ast.AbstractModifier;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ClassDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.DataTypeDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.EnumDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.EnumLiteral;
+import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNodeVisitor;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ModelTypeDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Operation;
+import fr.irisa.triskell.kermeta.parser.gen.ast.OperationBody;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Param;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Property;
+//import fr.irisa.triskell.kermeta.parser.gen.ast.PropertyBody;
+import fr.irisa.triskell.kermeta.parser.gen.ast.PropertyKind;
+import fr.irisa.triskell.kermeta.parser.gen.ast.QualifiedID;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ReadOnlyModifier;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Type;
+import fr.irisa.triskell.kermeta.parser.gen.ast.TypeVarDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.UsingStmt;
+import fr.irisa.triskell.kermeta.parser.helper.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
@@ -595,10 +595,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.PropertyBody)
 	 */
-	public boolean beginVisit(PropertyBody propertyBody) {
+/*	public boolean beginVisit(PropertyBody propertyBody) {
 //		 to avoid visiting the whole tree
 		return false;
-	}
+	}*/
 	/*
 	* *******************************************************
 	*                  BUILD ENNUMERATIONS

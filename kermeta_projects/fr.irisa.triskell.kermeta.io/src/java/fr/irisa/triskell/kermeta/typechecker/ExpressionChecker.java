@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.57 2007-11-05 08:50:33 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.58 2008-01-04 14:19:19 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -19,7 +19,7 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
-import fr.irisa.triskell.kermeta.ast.FSuperCall;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FSuperCall;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.BooleanLiteral;

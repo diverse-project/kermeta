@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.24 2008-01-02 10:28:31 vmahe Exp $
+/* $Id: KMT2KMPass6.java,v 1.25 2008-01-04 14:17:24 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -24,16 +24,16 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.ast.ClassDecl;
-import fr.irisa.triskell.kermeta.ast.GetterBody;
-import fr.irisa.triskell.kermeta.ast.Invariant;
-import fr.irisa.triskell.kermeta.ast.Operation;
-import fr.irisa.triskell.kermeta.ast.OperationEmptyBody;
-import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
-import fr.irisa.triskell.kermeta.ast.Postcondition;
-import fr.irisa.triskell.kermeta.ast.Precondition;
-import fr.irisa.triskell.kermeta.ast.SetterBody;
-import fr.irisa.triskell.kermeta.ast.helper.KermetaASTHelper;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ClassDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.GetterBody;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Invariant;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Operation;
+import fr.irisa.triskell.kermeta.parser.gen.ast.OperationEmptyBody;
+import fr.irisa.triskell.kermeta.parser.gen.ast.OperationExpressionBody;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Postcondition;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Precondition;
+import fr.irisa.triskell.kermeta.parser.gen.ast.SetterBody;
+import fr.irisa.triskell.kermeta.parser.helper.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;

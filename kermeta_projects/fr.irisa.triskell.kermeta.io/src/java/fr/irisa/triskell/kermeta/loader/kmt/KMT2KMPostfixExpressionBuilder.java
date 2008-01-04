@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.16 2007-12-17 16:57:53 ftanguy Exp $
+/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.17 2008-01-04 14:17:24 dvojtise Exp $
  * Project : Kermeta io
  * File : KMT2KMPostfixExpressionBuilder.java
  * License : EPL
@@ -13,14 +13,14 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.ast.ActualParameter;
-import fr.irisa.triskell.kermeta.ast.CallPostfix;
-import fr.irisa.triskell.kermeta.ast.FExpression;
-import fr.irisa.triskell.kermeta.ast.FExpressionLst;
-import fr.irisa.triskell.kermeta.ast.LambdaPostfix;
-import fr.irisa.triskell.kermeta.ast.LambdaPostfixParam;
-import fr.irisa.triskell.kermeta.ast.ParamPostfix;
-import fr.irisa.triskell.kermeta.ast.PostfixExp;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ActualParameter;
+import fr.irisa.triskell.kermeta.parser.gen.ast.CallPostfix;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FExpressionLst;
+import fr.irisa.triskell.kermeta.parser.gen.ast.LambdaPostfix;
+import fr.irisa.triskell.kermeta.parser.gen.ast.LambdaPostfixParam;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ParamPostfix;
+import fr.irisa.triskell.kermeta.parser.gen.ast.PostfixExp;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;

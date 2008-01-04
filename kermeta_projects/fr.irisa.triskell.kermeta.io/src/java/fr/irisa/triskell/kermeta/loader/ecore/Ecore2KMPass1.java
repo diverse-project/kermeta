@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.23 2007-12-03 15:55:38 ftanguy Exp $
+/*$Id: Ecore2KMPass1.java,v 1.24 2008-01-04 14:17:25 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -31,7 +31,7 @@ import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
-import fr.irisa.triskell.kermeta.ast.helper.KMTHelper;
+import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;

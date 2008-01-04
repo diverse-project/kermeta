@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2_1.java,v 1.7 2007-09-19 12:14:58 ftanguy Exp $
+/* $Id: KMT2KMPass2_1.java,v 1.8 2008-01-04 14:17:24 dvojtise Exp $
  * Project : Kermeta io
  * File : KMT2KMPass2_1.java
  * License : EPL
@@ -18,9 +18,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.ast.Basictype;
-import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
-import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Basictype;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ModelTypeDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.TypeVarDecl;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;

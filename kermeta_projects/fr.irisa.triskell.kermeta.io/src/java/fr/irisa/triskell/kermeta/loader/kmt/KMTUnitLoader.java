@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTUnitLoader.java,v 1.20 2007-12-17 16:54:58 ftanguy Exp $
+/*$Id: KMTUnitLoader.java,v 1.21 2008-01-04 14:17:24 dvojtise Exp $
 * Project : io
 * File : 	KMTUnitLoader.java
 * License : EPL
@@ -31,8 +31,8 @@ import org.kermeta.loader.LoadingOptions;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
-import fr.irisa.triskell.kermeta.ast.CompUnit;
-import fr.irisa.triskell.kermeta.ast.ImportStmt;
+import fr.irisa.triskell.kermeta.parser.gen.ast.CompUnit;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ImportStmt;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;

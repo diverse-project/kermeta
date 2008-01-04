@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass.java,v 1.18 2008-01-02 10:28:31 vmahe Exp $
+/* $Id: KMT2KMPass.java,v 1.19 2008-01-04 14:17:24 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
  * License : EPL
@@ -22,23 +22,24 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 
-import fr.irisa.triskell.kermeta.ast.ClassDecl;
-import fr.irisa.triskell.kermeta.ast.CollectionType;
-import fr.irisa.triskell.kermeta.ast.EnumDecl;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor;
-import fr.irisa.triskell.kermeta.ast.KermetaTokenNode;
-import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
-import fr.irisa.triskell.kermeta.ast.Multiplicity;
-import fr.irisa.triskell.kermeta.ast.MultiplicityExpr;
-import fr.irisa.triskell.kermeta.ast.Operation;
-import fr.irisa.triskell.kermeta.ast.PackageDecl;
-import fr.irisa.triskell.kermeta.ast.Property;
-import fr.irisa.triskell.kermeta.ast.QualifiedID;
-import fr.irisa.triskell.kermeta.ast.SubPackageDecl;
-import fr.irisa.triskell.kermeta.ast.TypeRef;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ClassDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.CollectionType;
+import fr.irisa.triskell.kermeta.parser.gen.ast.EnumDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaASTNodeVisitor;
+import fr.irisa.triskell.kermeta.parser.gen.ast.KermetaTokenNode;
+import fr.irisa.triskell.kermeta.parser.gen.ast.KwOrNamedQualifiedID;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ModelTypeDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Multiplicity;
+import fr.irisa.triskell.kermeta.parser.gen.ast.MultiplicityExpr;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Operation;
+import fr.irisa.triskell.kermeta.parser.gen.ast.PackageDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Property;
+import fr.irisa.triskell.kermeta.parser.gen.ast.QualifiedID;
+import fr.irisa.triskell.kermeta.parser.gen.ast.SubPackageDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.TypeRef;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
@@ -97,6 +98,27 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 			if (ids[i].getTypeName().equals("QidSeparator")) continue;
 			result += getTextForID((KermetaTokenNode)ids[i]);
 			if (i != ids.length-1) result += "::";
+		}
+		return result;
+	}
+	/**
+	 * Returns a String corresponding to the AST node of type QualifiedID, as a list
+	 * of terms separated by a "::" ("this::is::an::id"=> qualified id of "id").
+	 * @param node the AST representation of a Qualified ID
+	 * @return a String corresponding to the QualifiedID node.
+	 */
+	protected String unprotectedIDAsString(KwOrNamedQualifiedID node) {
+		String result = "";
+		ASTNode[] ids = node.getChildren();
+		for(int i=0; i<ids.length; i++) {
+			if (ids[i].getTypeName().equals("QidSeparator")) continue;
+			if(ids[i] instanceof QualifiedID){ 
+				result += qualifiedIDAsString((QualifiedID)ids[i]);
+			}
+			else{
+				result += getTextForID((KermetaTokenNode)ids[i]);
+				if (i != ids.length-1) result += "::";
+			}
 		}
 		return result;
 	}

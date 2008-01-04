@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.22 2007-11-21 14:06:31 ftanguy Exp $
+/* $Id: KMT2KMPass1.java,v 1.23 2008-01-04 14:17:24 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : EPL
@@ -30,14 +30,14 @@ import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
-import fr.irisa.triskell.kermeta.ast.Filter;
-import fr.irisa.triskell.kermeta.ast.ImportStmt;
-import fr.irisa.triskell.kermeta.ast.PackageDecl;
-import fr.irisa.triskell.kermeta.ast.QualifiedID;
-import fr.irisa.triskell.kermeta.ast.StringLiteralContainer;
-import fr.irisa.triskell.kermeta.ast.StringLiteralOrQualifiedID;
-import fr.irisa.triskell.kermeta.ast.TopLevelDecls;
-import fr.irisa.triskell.kermeta.ast.UsingStmt;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Filter;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ImportStmt;
+import fr.irisa.triskell.kermeta.parser.gen.ast.PackageDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.QualifiedID;
+import fr.irisa.triskell.kermeta.parser.gen.ast.StringLiteralContainer;
+import fr.irisa.triskell.kermeta.parser.gen.ast.StringLiteralOrQualifiedID;
+import fr.irisa.triskell.kermeta.parser.gen.ast.TopLevelDecls;
+import fr.irisa.triskell.kermeta.parser.gen.ast.UsingStmt;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;

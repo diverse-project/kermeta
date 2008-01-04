@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.20 2007-10-23 12:23:59 dvojtise Exp $
+/* $Id: Ecore2KMPass4.java,v 1.21 2008-01-04 14:17:25 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -34,7 +34,7 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
-import fr.irisa.triskell.kermeta.ast.helper.KMTHelper;
+import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;

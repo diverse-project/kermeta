@@ -8,7 +8,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.ast.ClassDecl;
+import fr.irisa.triskell.kermeta.parser.gen.ast.ClassDecl;
 
 
 /**
