@@ -1,4 +1,4 @@
-<!-- $Id: test_interpreter_build.xml,v 1.15 2008-01-04 15:56:15 dvojtise Exp $ -->
+<!-- $Id: test_interpreter_build.xml,v 1.16 2008-01-07 10:41:20 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
@@ -199,18 +199,15 @@
 			<!--<classpath refid="cobertura_classpath" />-->
 
 			<formatter type="plain" />
-			<echo>---Starting InterpreterTestSuite---</echo>
 			<test name="kermeta_interpreter.test.InterpreterTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-interpreter-result">
 				<formatter type="xml" />
 			</test>
 			<!-- <test name="kermeta_interpreter.emf_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-emf-result">
 				<formatter type="xml" /> 
 			</test> this test is run separately -->
-			<echo>---Starting ConstraintTestSuite---</echo>
 			<test name="kermeta_interpreter.constraint_test.ConstraintTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-constraint-result">
 				<formatter type="xml" />
 			</test>
-			<echo>---Starting JarTestSuite---</echo>
 			<test name="kermeta_interpreter.jar_test.JarTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-jar-result">
 				<formatter type="xml" />
 			</test>
@@ -239,7 +236,6 @@
 
 			<formatter type="plain" />
 
-			<echo>---Starting EmfTestSuite---</echo>
 			<test name="kermeta_interpreter.emf_test.EmfTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-emf-result">
 				<formatter type="xml" />
 			</test>
