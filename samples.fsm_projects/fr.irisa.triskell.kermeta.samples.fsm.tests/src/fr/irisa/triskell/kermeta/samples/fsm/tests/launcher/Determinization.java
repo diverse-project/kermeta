@@ -7,6 +7,8 @@ import org.eclipse.core.runtime.Path;
 import org.junit.Assert;
 import org.junit.Test;
 
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
+import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
@@ -16,7 +18,10 @@ public class Determinization {
 		
 		String file = "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm.demo/launcher/determinization.kmt";
 		
-		KermetaInterpreter interpreter = new KermetaInterpreter(file, null, false);
+		KermetaInterpreter interpreter = new KermetaInterpreter(file, null, true);
+		IOConsole console = new EclipseConsole("Determinization");
+		
+		interpreter.setKStream(console);
 		ArrayList<RuntimeObject> parameters = new ArrayList<RuntimeObject> ();
 		parameters.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(
 				"../models/sampletodeterminize.fsm", interpreter.getMemory().getROFactory()));
