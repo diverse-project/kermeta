@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.3 2007-12-21 14:25:12 cfaucher Exp $
+/* $Id: CompileKermetaAction.java,v 1.4 2008-01-07 14:18:46 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -79,7 +79,7 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 	 */
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 	}
-	
+
 	/**
 	 * @see IActionDelegate#run(IAction)
 	 */
@@ -92,87 +92,85 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 		KermetaUnit unit = null;
 		try {
 			unit = IOPlugin.getDefault().loadKermetaUnit(kermetafile, new NullProgressMonitor());
-		} catch (KermetaIOFileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (URIMalformedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+			unit.setLocked(true);
 		
-		//ResourceSet resource_set;// = new ResourceSetImpl();
-		//Resource resource = resource_set.createResource(URI.createFileURI(ecorePath));
-		// Generate Ecore in memory and saving
-		EcoreExporter km2ecoreGen = new EcoreExporter();
 		
-		ExporterOptions exporterOptions = ExporterOptions.getDefault();
-		exporterOptions.isIndependent = true;
-		exporterOptions.isOnlyStructural = false; // method's body will be generated
-		exporterOptions.isExportedWithMerger = false;
-		exporterOptions.isRemoveKermetaEAnnotations = false;
-		
-		if(exporterOptions.isExportedWithMerger) {
-			LinkedHashSet<KermetaUnit> relatedUnit = new LinkedHashSet<KermetaUnit>();
-			relatedUnit.add( unit );
-			relatedUnit.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(unit) );
-			Merger mergedVersion = new Merger();
-			try {
+			// ResourceSet resource_set;// = new ResourceSetImpl();
+			// Resource resource =
+			// resource_set.createResource(URI.createFileURI(ecorePath));
+			// Generate Ecore in memory and saving
+			EcoreExporter km2ecoreGen = new EcoreExporter();
+			
+			ExporterOptions exporterOptions = ExporterOptions.getDefault();
+			exporterOptions.isIndependent = true;
+			exporterOptions.isOnlyStructural = false; // method's body will be
+														// generated
+			exporterOptions.isExportedWithMerger = false;
+			exporterOptions.isRemoveKermetaEAnnotations = false;
+			
+			if(exporterOptions.isExportedWithMerger) {
+				LinkedHashSet<KermetaUnit> relatedUnit = new LinkedHashSet<KermetaUnit>();
+				relatedUnit.add( unit );
+				relatedUnit.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(unit) );
+				Merger mergedVersion = new Merger();
+			
 				
 				for ( KermetaUnit kunit : relatedUnit )
 					kunit.setLocked(true);
-				
+					
 				unit = mergedVersion.processInMemory(relatedUnit,"platform:/resource" + ecoreRelativePath);
-
+	
 				for ( KermetaUnit kunit : relatedUnit )
 					kunit.setLocked(false);
-				
-			} catch (URIMalformedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-		}
-		
-		/*ResourceSet resource_set = */km2ecoreGen.exportInMemory(unit, kermetafile.getParent().getFullPath().toString(), exporterOptions);
-		internalLog.info("Ecore structure has been generated");
-		
-		prettyPrintJavaCode(km2ecoreGen,unit);
-
-		fixPrintJavaCode(km2ecoreGen,unit);
-		internalLog.info("Java source code has been printed inside GenModel EAnnotations");
-		
-		km2ecoreGen.save();
-		internalLog.info("Ecore file has been saved");
 			
-//		kermetafile.getParent().refreshLocal(1, null);
-	
-		Compiler compiler = new Compiler(ecorePath, unit, km2ecoreGen);
 		
-		try {
+			/* ResourceSet resource_set = */km2ecoreGen.exportInMemory(unit, kermetafile.getParent().getFullPath().toString(), exporterOptions);
+			internalLog.info("Ecore structure has been generated");
+			
+			prettyPrintJavaCode(km2ecoreGen,unit);
+	
+			fixPrintJavaCode(km2ecoreGen,unit);
+			internalLog.info("Java source code has been printed inside GenModel EAnnotations");
+			
+			km2ecoreGen.save();
+			internalLog.info("Ecore file has been saved");
+			
+			// kermetafile.getParent().refreshLocal(1, null);
+	
+			Compiler compiler = new Compiler(ecorePath, unit, km2ecoreGen);
+		
 			compiler.run();
 			internalLog.info("The compilation process is complete");
 			
-		} catch (IOException e) {
+		} catch (KermetaIOFileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (URIMalformedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			unit.setLocked(false);
 		}
 		
-		// Iteration on the generated Ecore files, then each Ecore file are compiling
-		// FIXME Does not work for the moment, because the list has never been filled
-		/*for(Iterator it=km2ecoreGen.getEcoreFileList().iterator(); it.hasNext();) {
-			System.err.println("DEBUG - test list " + it.next().toString());
-			
-			Compiler compiler = new Compiler(it.next().toString());
-			try {
-				compiler.run();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}*/
+		// Iteration on the generated Ecore files, then each Ecore file are
+		// compiling
+		// FIXME Does not work for the moment, because the list has never been
+		// filled
+		/*
+		 * for(Iterator it=km2ecoreGen.getEcoreFileList().iterator();
+		 * it.hasNext();) { System.err.println("DEBUG - test list " +
+		 * it.next().toString());
+		 * 
+		 * Compiler compiler = new Compiler(it.next().toString()); try {
+		 * compiler.run(); } catch (IOException e) { e.printStackTrace(); } }
+		 */
 
 	}
 
@@ -191,8 +189,9 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 		}
 		try {
 			action.setEnabled(false);
-			KermetaUnit ku_fromFile = IOPlugin.getDefault().loadKermetaUnit(kermetafile, new NullProgressMonitor());
-			if(!ku_fromFile.isErroneous()) {
+			KermetaUnit ku_fromFile = IOPlugin.getDefault().loadKermetaUnit(
+					kermetafile, new NullProgressMonitor());
+			if (!ku_fromFile.isErroneous()) {
 				action.setEnabled(true);
 			}
 		} catch (KermetaIOFileNotFoundException e) {
@@ -203,103 +202,129 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Pretty-print Java source code into GenModel Annotations
+	 * 
 	 * @param km2ecore
 	 * @param unit
 	 */
 	private void prettyPrintJavaCode(EcoreExporter km2ecore, KermetaUnit unit) {
-		
-		IFile simk_file = ResourcesPlugin.getWorkspace().getRoot().getFile(kermetafile.getFullPath().removeFileExtension().addFileExtension(SimkModelHelper.SIMK_EXT));
+
+		IFile simk_file = ResourcesPlugin.getWorkspace().getRoot().getFile(
+				kermetafile.getFullPath().removeFileExtension()
+						.addFileExtension(SimkModelHelper.SIMK_EXT));
 		SIMKModel simkModel = SimkModelHelper.createSIMKModel(simk_file);
 		simkModel.setName(simk_file.getName());
-		//SimkModelHelper helperModel = new SimkModelHelper();
-		
+		// SimkModelHelper helperModel = new SimkModelHelper();
+
 		try {
-			KM2JavaPrettyPrinter prettyPrinter = new KM2JavaPrettyPrinter(km2ecore);
+			KM2JavaPrettyPrinter prettyPrinter = new KM2JavaPrettyPrinter(
+					km2ecore);
 
 			prettyPrinter.setHelperModel(simkModel);
-			
-			for(TypeDefinition aTypeDef : fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper.getTypeDefinitions(unit)) {
-				if(aTypeDef instanceof ClassDefinition) {
+
+			for (TypeDefinition aTypeDef : fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper
+					.getTypeDefinitions(unit)) {
+				if (aTypeDef instanceof ClassDefinition) {
 					ClassDefinition aClassDef = (ClassDefinition) aTypeDef;
-					for(Operation op : aClassDef.getOwnedOperation()) {
+					for (Operation op : aClassDef.getOwnedOperation()) {
 						if (op.getBody() != null) {
-							// (if "typedef" is false, then it means that prettyPrinter is not in typdef
-							// context, so it will prettyPrint visited node accordingly)
+							// (if "typedef" is false, then it means that
+							// prettyPrinter is not in typdef
+							// context, so it will prettyPrint visited node
+							// accordingly)
 							prettyPrinter.setTypedef(false);
-							String bodyString = (String) prettyPrinter.accept(op);
-							
-							//if(!bodyString.equals("{}")) {
-							
-								/*String resultType = "";
-								if(op.getType()!=null) {
-									if(op.getType() instanceof VoidType) {
-										
-									} else {
-										Object resultTypeObj = prettyPrinter.accept(op.getType());
-										if(resultTypeObj!=null) {
-											resultType = (String) resultTypeObj;
-											if(resultType.equals("void")) {
-												resultType = "";
-											}
-										}
-									}
-								}
-								
-								if(!resultType.equals("")) {
-									bodyString = resultType + " result=null;\n" + bodyString + "\nreturn result;";
-								}*/
-								
-								EObject eObj = km2ecore.getKm2ecoremapping().get(op);
-								if(eObj != null && eObj instanceof EOperation) {
-									addAnnotation( 
-										(EOperation) eObj,
+							String bodyString = (String) prettyPrinter
+									.accept(op);
+
+							// if(!bodyString.equals("{}")) {
+
+							/*
+							 * String resultType = ""; if(op.getType()!=null) {
+							 * if(op.getType() instanceof VoidType) {
+							 *  } else { Object resultTypeObj =
+							 * prettyPrinter.accept(op.getType());
+							 * if(resultTypeObj!=null) { resultType = (String)
+							 * resultTypeObj; if(resultType.equals("void")) {
+							 * resultType = ""; } } } }
+							 * 
+							 * if(!resultType.equals("")) { bodyString =
+							 * resultType + " result=null;\n" + bodyString +
+							 * "\nreturn result;"; }
+							 */
+
+							EObject eObj = km2ecore.getKm2ecoremapping()
+									.get(op);
+							if (eObj != null && eObj instanceof EOperation) {
+								addAnnotation((EOperation) eObj,
 										KM2Ecore.ANNOTATION_GENMODEL,
 										KM2Ecore.ANNOTATION_BODY_DETAILS,
-										bodyString,
-										null);
-									
-									EOperation eOp = (EOperation) eObj;
-									
-									/*
-									// Duplicate the EOperation to solve the problem of multiple inheritance
-									KM2EcorePass1 aKM2EcorePass1 = new KM2EcorePass1(eOp.eResource(), km2ecore.getKm2ecoremapping(), unit, null, null);
-									EOperation eOp_class = (EOperation) aKM2EcorePass1.accept(op);
-									eOp_class.setName(eOp_class.getName() + "_" + ((EClass) eOp.eContainer()).getName());
-									((EClass) eOp.eContainer()).getEOperations().add(eOp_class);*/
-									
-									if( isRunnable(eOp) && !EcoreHelper.getQualifiedName(eOp).contains("kermeta") ) {
-										StaticMethod newStaticMethod = SimkFactory.eINSTANCE.createStaticMethod();
-										newStaticMethod.setParentMethod(eOp);
-										
-										SMContext newSMContext = SimkFactory.eINSTANCE.createSMContext();
-										newStaticMethod.setSMContext(newSMContext);
-										newStaticMethod.getUsages().add(SMUsage.RUNNER);
-										
-										for(EParameter param : eOp.getEParameters()) {
-											SMParameter newSMParameter = SimkFactory.eINSTANCE.createSMParameter();
-											newSMParameter.setName(param.getName());
-											newSMParameter.setType(param.getEType().getName());
-											newStaticMethod.getSMParameters().add(newSMParameter);
-										}
-										
-										SMClass newSMClass = SimkFactory.eINSTANCE.createSMClass();
-										newSMClass.setName(((ENamedElement)eOp.eContainer()).getName());
-										
-										SMPackage newSMPackage = SimkFactory.eINSTANCE.createSMPackage();
-										newSMPackage.setName(((ENamedElement)eOp.eContainer().eContainer()).getName());
-										
-										newSMContext.setSMClass(newSMClass);
-										newSMContext.setSMPackage(newSMPackage);
-										newSMClass.setSMPackage(newSMPackage);
-										
-										prettyPrinter.getHelperModel().getStaticMethods().add(newStaticMethod);
-										prettyPrinter.getHelperModel().getSMContexts().add(newSMContext);
+										bodyString, null);
+
+								EOperation eOp = (EOperation) eObj;
+
+								/*
+								 * // Duplicate the EOperation to solve the
+								 * problem of multiple inheritance KM2EcorePass1
+								 * aKM2EcorePass1 = new
+								 * KM2EcorePass1(eOp.eResource(),
+								 * km2ecore.getKm2ecoremapping(), unit, null,
+								 * null); EOperation eOp_class = (EOperation)
+								 * aKM2EcorePass1.accept(op);
+								 * eOp_class.setName(eOp_class.getName() + "_" +
+								 * ((EClass) eOp.eContainer()).getName());
+								 * ((EClass)
+								 * eOp.eContainer()).getEOperations().add(eOp_class);
+								 */
+
+								if (isRunnable(eOp)
+										&& !EcoreHelper.getQualifiedName(eOp)
+												.contains("kermeta")) {
+									StaticMethod newStaticMethod = SimkFactory.eINSTANCE
+											.createStaticMethod();
+									newStaticMethod.setParentMethod(eOp);
+
+									SMContext newSMContext = SimkFactory.eINSTANCE
+											.createSMContext();
+									newStaticMethod.setSMContext(newSMContext);
+									newStaticMethod.getUsages().add(
+											SMUsage.RUNNER);
+
+									for (EParameter param : eOp
+											.getEParameters()) {
+										SMParameter newSMParameter = SimkFactory.eINSTANCE
+												.createSMParameter();
+										newSMParameter.setName(param.getName());
+										newSMParameter.setType(param.getEType()
+												.getName());
+										newStaticMethod.getSMParameters().add(
+												newSMParameter);
 									}
+
+									SMClass newSMClass = SimkFactory.eINSTANCE
+											.createSMClass();
+									newSMClass.setName(((ENamedElement) eOp
+											.eContainer()).getName());
+
+									SMPackage newSMPackage = SimkFactory.eINSTANCE
+											.createSMPackage();
+									newSMPackage.setName(((ENamedElement) eOp
+											.eContainer().eContainer())
+											.getName());
+
+									newSMContext.setSMClass(newSMClass);
+									newSMContext.setSMPackage(newSMPackage);
+									newSMClass.setSMPackage(newSMPackage);
+
+									prettyPrinter.getHelperModel()
+											.getStaticMethods().add(
+													newStaticMethod);
+									prettyPrinter.getHelperModel()
+											.getSMContexts().add(newSMContext);
 								}
-							//}
+							}
+							// }
 						}
 					}
 				}
@@ -309,61 +334,79 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Fix Java source code into GenModel Annotations
+	 * 
 	 * @param km2ecore
 	 * @param unit
 	 */
-	private static void fixPrintJavaCode(EcoreExporter km2ecore, KermetaUnit unit) {
-		
+	private static void fixPrintJavaCode(EcoreExporter km2ecore,
+			KermetaUnit unit) {
+
 		try {
-				
-			//KM2JavaPrettyPrinter2 prettyPrinter = new KM2JavaPrettyPrinter2();
-			
-			for(TypeDefinition aTypeDef : fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper.getTypeDefinitions(unit)) {
-				if(aTypeDef instanceof ClassDefinition) {
+
+			// KM2JavaPrettyPrinter2 prettyPrinter = new
+			// KM2JavaPrettyPrinter2();
+
+			for (TypeDefinition aTypeDef : fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper
+					.getTypeDefinitions(unit)) {
+				if (aTypeDef instanceof ClassDefinition) {
 					ClassDefinition aClassDef = (ClassDefinition) aTypeDef;
-					for(Operation op : aClassDef.getOwnedOperation()) {
+					for (Operation op : aClassDef.getOwnedOperation()) {
 						if (op.getName().equals("assert")) {
-							EObject eObj = km2ecore.getKm2ecoremapping().get(op);
-							if(eObj != null && eObj instanceof EOperation) {
+							EObject eObj = km2ecore.getKm2ecoremapping()
+									.get(op);
+							if (eObj != null && eObj instanceof EOperation) {
 								EOperation eOp = (EOperation) eObj;
 								eOp.setName("_assert");
 							}
 						}
 						if (op.getBody() != null) {
-							EObject eObj = km2ecore.getKm2ecoremapping().get(op);
-							
-							if(eObj != null && eObj instanceof EOperation) {
-								
+							EObject eObj = km2ecore.getKm2ecoremapping()
+									.get(op);
+
+							if (eObj != null && eObj instanceof EOperation) {
+
 								EOperation eOp = (EOperation) eObj;
-								EAnnotation javaAnnotation = eOp.getEAnnotation(KM2Ecore.ANNOTATION_GENMODEL);
-								if(javaAnnotation != null) {
-									String fixedCode = javaAnnotation.getDetails().get(0).getValue().replace("~","");
-									fixedCode = fixedCode.replace(".equals(null)"," == null");
-									fixedCode = fixedCode.replace(".size().equals",".size() == ");
-									fixedCode = fixedCode.replace("assert(","_assert(");
-									fixedCode = fixedCode.replace("StdIO.writeln","System.out.println");
-									
-									javaAnnotation.getDetails().get(0).setValue(fixedCode);
+								EAnnotation javaAnnotation = eOp
+										.getEAnnotation(KM2Ecore.ANNOTATION_GENMODEL);
+								if (javaAnnotation != null) {
+									String fixedCode = javaAnnotation
+											.getDetails().get(0).getValue()
+											.replace("~", "");
+									fixedCode = fixedCode.replace(
+											".equals(null)", " == null");
+									fixedCode = fixedCode.replace(
+											".size().equals", ".size() == ");
+									fixedCode = fixedCode.replace("assert(",
+											"_assert(");
+									fixedCode = fixedCode.replace(
+											"StdIO.writeln",
+											"System.out.println");
+
+									javaAnnotation.getDetails().get(0)
+											.setValue(fixedCode);
 								}
 							}
 						}
 					}
 				}
-				/*if( aTypeDef instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
-					fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class) aTypeDef;
-					if( aClass.getTypeDefinition() instanceof fr.irisa.triskell.kermeta.standard.String) {
-						
-					}
-				}*/
+				/*
+				 * if( aTypeDef instanceof
+				 * fr.irisa.triskell.kermeta.language.structure.Class) {
+				 * fr.irisa.triskell.kermeta.language.structure.Class aClass =
+				 * (fr.irisa.triskell.kermeta.language.structure.Class)
+				 * aTypeDef; if( aClass.getTypeDefinition() instanceof
+				 * fr.irisa.triskell.kermeta.standard.String) {
+				 *  } }
+				 */
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * FIXME CF To factorize
@@ -374,37 +417,37 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 	 * @param annotationDetailValue
 	 * @param referedEObject
 	 */
-	public static void addAnnotation( 
-			EModelElement annotedModelElement,
-			String annotationName,
-			String annotationDetailKey,
-			String annotationDetailValue,
-			EObject referedEObject
-			) {
+	public static void addAnnotation(EModelElement annotedModelElement,
+			String annotationName, String annotationDetailKey,
+			String annotationDetailValue, EObject referedEObject) {
 		// find the Annotation or create a new one
-		EAnnotation newEAnnotation = annotedModelElement.getEAnnotation(annotationName);
-		if (newEAnnotation == null){
+		EAnnotation newEAnnotation = annotedModelElement
+				.getEAnnotation(annotationName);
+		if (newEAnnotation == null) {
 			newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
 			newEAnnotation.setSource(annotationName);
-			annotedModelElement.getEAnnotations().add( newEAnnotation );
+			annotedModelElement.getEAnnotations().add(newEAnnotation);
 		}
 		// add the info in the Details map
 		if (annotationDetailKey != null)
-			newEAnnotation.getDetails().put(annotationDetailKey, 
+			newEAnnotation.getDetails().put(annotationDetailKey,
 					annotationDetailValue);
 		else {
-			newEAnnotation.getDetails().put(KMT2KMPass7.KERMETA_DOCUMENTATION, annotationDetailValue);
+			newEAnnotation.getDetails().put(KMT2KMPass7.KERMETA_DOCUMENTATION,
+					annotationDetailValue);
 		}
-		// try a direct link additionnaly to the detail map. 
-		if (referedEObject != null) 
-		{
-			internalLog.debug(" adding annotation reference for " +annotationDetailKey + " = " + annotationDetailValue);
+		// try a direct link additionnaly to the detail map.
+		if (referedEObject != null) {
+			internalLog.debug(" adding annotation reference for "
+					+ annotationDetailKey + " = " + annotationDetailValue);
 			newEAnnotation.getReferences().add(referedEObject);
 		}
 	}
 
 	/**
-	 * Check if an EOperation is runnable via for the generation the main and class method
+	 * Check if an EOperation is runnable via for the generation the main and
+	 * class method
+	 * 
 	 * @param eop
 	 * @return
 	 */
