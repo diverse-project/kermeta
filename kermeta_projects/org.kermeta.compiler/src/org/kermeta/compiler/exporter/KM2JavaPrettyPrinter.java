@@ -1,4 +1,4 @@
-/* $Id: KM2JavaPrettyPrinter.java,v 1.4 2007-12-21 14:25:12 cfaucher Exp $
+/* $Id: KM2JavaPrettyPrinter.java,v 1.5 2008-01-07 14:17:50 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : KM2JavaPrettyPrinter.java
  * License   : EPL
@@ -30,7 +30,7 @@ import org.kermeta.simk.SMUsage;
 import org.kermeta.simk.SimkFactory;
 import org.kermeta.simk.StaticMethod;
 
-import fr.irisa.triskell.kermeta.ast.helper.KMTHelper;
+import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
