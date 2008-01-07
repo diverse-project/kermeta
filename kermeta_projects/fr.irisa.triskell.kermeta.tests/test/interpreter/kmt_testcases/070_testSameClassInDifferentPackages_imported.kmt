@@ -1,0 +1,28 @@
+
+package testSameClassInDifferentPackages_imported;
+
+require kermeta
+
+using kermeta::standard
+
+// this test check that the merge doesn't mix the classes that have the same name in several package in kmt files
+// for bug #4747
+class Test_SameClassInDifferentPackages inherits kermeta::kunit::TestCase {
+
+    operation testoperation1() : Void is do
+    	// both declaration should indicate the same class A
+        var aA1 : A
+        var aA2 : testSameClassInDifferentPackages_imported::A
+        aA1 := aA2
+        aA2 := aA1
+    end
+    
+    
+}
+
+class A {
+
+}
+
+
+

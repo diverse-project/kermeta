@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.13 2008-01-04 14:33:49 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.14 2008-01-07 16:38:36 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -206,6 +206,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/kmt_testcases","068_testVariableInit.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","069_testToStringRedifinition.main.kmt" );
+
+		testWithFile("test/interpreter/kmt_testcases","070_testSameClassInDifferentPackages.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
