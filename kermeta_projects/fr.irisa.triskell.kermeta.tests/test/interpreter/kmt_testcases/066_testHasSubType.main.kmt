@@ -38,55 +38,55 @@ class TestHasSubtype inherits kermeta::kunit::TestCase {
 	end
 	
 	operation testHasSubtype1() : Void is do
-		assert(A<C>.hasSubType(B<C>))
-		assert(not B<C>.hasSubType(A<C>))
+		assert(A<C>.isSuperTypeOf(B<C>))
+		assert(not B<C>.isSuperTypeOf(A<C>))
 	end
 	operation testHasSubtype2() : Void is do	
-		assert(C.hasSubType(D<C>))
-		assert(not D<C>.hasSubType(C))
+		assert(C.isSuperTypeOf(D<C>))
+		assert(not D<C>.isSuperTypeOf(C))
 	end
 	operation testHasSubtype3() : Void is do	
-		assert(C.hasSubType(D<String>))
-		assert(not D<String>.hasSubType(C))
+		assert(C.isSuperTypeOf(D<String>))
+		assert(not D<String>.isSuperTypeOf(C))
 	end	
 	
 	operation testHasSubtype4() : Void is do
-		assert(D<String>.hasSubType(E))
-		assert(not E.hasSubType(D<String>))
+		assert(D<String>.isSuperTypeOf(E))
+		assert(not E.isSuperTypeOf(D<String>))
 	end
 	
 	operation testPrimitiveHasSubtype1() : Void is do
-		assert(A_X.hasSubType(Y))
-		assert(not Y.hasSubType(A_X))
+		assert(A_X.isSuperTypeOf(Y))
+		assert(not Y.isSuperTypeOf(A_X))
 	end
 	
 	operation testPrimitiveHasSubtype2() : Void is do	
 		assertWithMsg(false,"Test disabled because it doesn't typecheck correctly, see test in io : testPrimitiveType2.kmt")
-//		assert(A_A_X.hasSubType(Y))
-//		assert(not Y.hasSubType(A_A_X))
+//		assert(A_A_X.isSuperTypeOf(Y))
+//		assert(not Y.isSuperTypeOf(A_A_X))
 	end
 	
 	operation testPrimitiveHasSubtype3() : Void is do
-		assert(A_X.hasSubType(A_Y))
-		assert(not A_Y.hasSubType(A_X))
+		assert(A_X.isSuperTypeOf(A_Y))
+		assert(not A_Y.isSuperTypeOf(A_X))
 	end
 	
 	operation testPrimitiveHasSubtype4() : Void is do
 		assertWithMsg(false,"Test disabled because it doesn't typecheck correctly, see test in io : testPrimitiveType2.kmt")
-//		assert(A_A_X.hasSubType(A_Y))
-//		assert(not A_Y.hasSubType(A_A_X))
+//		assert(A_A_X.isSuperTypeOf(A_Y))
+//		assert(not A_Y.isSuperTypeOf(A_A_X))
 	end
 	
 	
 	operation testPrimitiveHasSubtype5() : Void is do
-		assert(X.hasSubType(A_Y))
-		assert(not A_Y.hasSubType(X))
+		assert(X.isSuperTypeOf(A_Y))
+		assert(not A_Y.isSuperTypeOf(X))
 	end
 	
 	operation testPrimitiveHasSubtype6() : Void is do
 		assertWithMsg(false,"Test disabled because it doesn't typecheck correctly, see test in io : testPrimitiveType2.kmt")
-//		assert(X.hasSubType(A_A_Y))
-//		assert(not A_A_Y.hasSubType(X))
+//		assert(X.isSuperTypeOf(A_A_Y))
+//		assert(not A_A_Y.isSuperTypeOf(X))
 	end
 
 

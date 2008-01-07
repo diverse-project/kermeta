@@ -46,9 +46,9 @@ class TestHasSubtypeLoadingModel inherits kermeta::kunit::TestCase {
 		
 		// inheritance hierarchy: Test3 -> Test2 -> Class1
 		// currently throws an "error in visitor"
-		assert(typeTest2.hasSubType(typeClass1))
-		assert(typeTest3.hasSubType(typeTest2))
-		assert(typeTest3.hasSubType(typeClass1))
+		assert(typeTest2.isSuperTypeOf(typeClass1))
+		assert(typeTest3.isSuperTypeOf(typeTest2))
+		assert(typeTest3.isSuperTypeOf(typeClass1))
 		result := void
 	end
 
