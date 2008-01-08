@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIO.java,v 1.8 2007-12-13 10:16:44 cfaucher Exp $
+/* $Id: SimpleFileIO.java,v 1.9 2008-01-08 14:50:32 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -22,13 +22,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
+import fr.irisa.triskell.eclipse.resources.URIHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 
@@ -78,7 +77,9 @@ public class SimpleFileIO {
             // Refresh the content of the folder that contains the created file
         	try {
             	int i_folder = String.getValue(filename).lastIndexOf("/");
-				ResourceHelper.getIFolder(String.getValue(filename).substring(0, i_folder)).refreshLocal(1, new NullProgressMonitor());
+				IFolder result_folder = ResourceHelper.getIFolder(String.getValue(filename).substring(0, i_folder));
+				if(result_folder != null)
+					result_folder.refreshLocal(1, new NullProgressMonitor());
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
@@ -119,15 +120,32 @@ public class SimpleFileIO {
     private static java.lang.String getOSFileLocation(java.lang.String fileEclipsePath) {
     	// FIXME CF Here we did the assumption that the path is absolute (towards the Eclipse workspace) !
     	// We should here recalculate the path of the file if filePath is a relative path !
-    	java.lang.String filePath = ResourceHelper.cleanIfNecessaryPath(fileEclipsePath);
+    	java.lang.String filePath = cleanIfNecessaryPath(fileEclipsePath);
 
-    	IPath wkspace_path = ResourcesPlugin.getWorkspace().getRoot().getLocation();
-    	filePath = wkspace_path.toString() + filePath;
+    	//IPath wkspace_path = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+    	//filePath = wkspace_path.toString() + filePath;
     	
     	//convert windows delimiter into /
     	filePath = filePath.replaceAll("\\\\", "/");
     	
     	return filePath;
     }
+    
+    /**
+     * Ugly patch
+     * 
+     * @param resourcePath
+     * @return
+     */
+	static private java.lang.String cleanIfNecessaryPath(java.lang.String resourcePath) {
+		// deal with windows \\ delimiter
+		java.lang.String unifiedSepratorResourcePath = resourcePath.replaceAll("\\\\", "/");
+		
+		java.lang.String cleanPath = unifiedSepratorResourcePath;
+		if ( unifiedSepratorResourcePath.matches("platform:/resource.*") ) {
+			cleanPath = ResourceHelper.root.getLocation().toString() + URIHelper.getPathFromPlatformURI(resourcePath);
+		}
+		return cleanPath;
+	}
 
 }
