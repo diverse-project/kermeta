@@ -1,3 +1,12 @@
+/* $Id: Utils.java,v 1.3 2008-01-08 09:19:41 dvojtise Exp $
+ * Project   : fr.irisa.triskell.kermeta.fsm.test
+ * File      : Utils.java
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Nov 23, 2005
+ * Authors       : vmahe
+ */
 package fr.irisa.triskell.kermeta.samples.fsm.tests;
 
 //import java.io.File;
