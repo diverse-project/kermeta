@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.24 2007-11-30 16:19:05 ftanguy Exp $
+/* $Id: OperationChecker.java,v 1.25 2008-01-08 17:04:54 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -34,10 +34,12 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
+import fr.irisa.triskell.kermeta.loader.java.Jar2KMPass;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.PrimitiveTypeHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
@@ -265,8 +267,10 @@ public class OperationChecker extends AbstractChecker {
 	
 	private boolean checkReturnType(Operation operation) {
 		boolean result = ReturnTypeChecker.typeCheckExpression(operation);
-		if ( ! result )
-			builder.error("In class definition " + NamedElementHelper.getQualifiedName(classDefinition) + ", the result variable has not been correctly set in operation " + operation.getName() + ".", operation);
+		if ( ! result ){
+			if(TagHelper.findTagFromName(classDefinition,Jar2KMPass.JARUNIT_TAG_NAME) == null)
+				builder.error("In class definition " + NamedElementHelper.getQualifiedName(classDefinition) + ", the result variable has not been correctly set in operation " + operation.getName() + ".", operation);
+		}
 		return result; 
 	}
 	
