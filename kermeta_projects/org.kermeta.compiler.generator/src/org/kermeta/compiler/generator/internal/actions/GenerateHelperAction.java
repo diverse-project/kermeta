@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: GenerateHelperAction.java,v 1.3 2007-12-21 14:24:22 cfaucher Exp $
+/*$Id: GenerateHelperAction.java,v 1.4 2008-01-08 09:35:13 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	GenerateHelperAction.java
 * License : EPL
@@ -199,7 +199,7 @@ public class GenerateHelperAction implements IActionDelegate
         catch (Exception e)
         {
             GeneratorPlugin.log(e);
-            GeneratorPlugin.displayDialog(null, "An error occurred during the editor generation", IStatus.ERROR);
+            GeneratorPlugin.displayDialog(null, "An error occurred during the helper generation", IStatus.ERROR);
         }
     }
 

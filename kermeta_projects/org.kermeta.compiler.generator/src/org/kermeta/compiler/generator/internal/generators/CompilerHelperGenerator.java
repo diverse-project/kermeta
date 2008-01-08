@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.4 2007-12-21 14:24:21 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.5 2008-01-08 09:35:13 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -220,7 +220,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			monitor.subTask("Files creation");
 
 			generateRunner(simkConf, projectPath);
-			generateLauncher(configuration, projectPath);
+			generateLauncher(simkConf, projectPath);
 
 			monitor.worked(1);
 		} catch (JETException e) {
@@ -317,10 +317,10 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 
 	}
 
-	private void generateLauncher(GenModel conf, IPath projectPath)
+	private void generateLauncher(SIMKModel simkConf, IPath projectPath)
 			throws JETException, CoreException {
 		
-		String mainClass = null;
+		/*String mainClass = null;
 		String mainOperation = null;
 		
 		for(Tag tag : this.kmUnit.getModelingUnit().getOwnedTags()) {
@@ -337,6 +337,21 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			
 			Object[] args = {conf, mainClass, mainOperation};
 			applyTemplate(args, getTemplateURI(JAVA_LAUNCHER_LAUNCH), projectPath.append("/" + tab_mainClass[0] + ".launch"), conf.isForceOverwrite());
+		}*/
+		for (StaticMethod sm : simkConf.getStaticMethods()) {
+			if (sm.getUsages().contains(SMUsage.LAUNCHER)) {
+				
+				String mainClass = sm.getSMContext().getSMClass().getQualifiedName();
+				String mainOperation = sm.getParentMethod().getName();
+				
+				Object[] args = {configuration, mainClass, mainOperation};
+				applyTemplate(
+						args,
+						getTemplateURI(JAVA_LAUNCHER_LAUNCH),
+						projectPath.append("/" + sm.getSMContext().getSMClass().getQualifiedName() + ".launch"),
+						configuration.isForceOverwrite());
+			}
+
 		}
 	}
 
