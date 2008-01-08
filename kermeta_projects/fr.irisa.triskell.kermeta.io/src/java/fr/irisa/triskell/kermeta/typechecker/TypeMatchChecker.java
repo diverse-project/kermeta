@@ -1,4 +1,4 @@
-/* $Id: TypeMatchChecker.java,v 1.7 2007-07-24 13:46:45 ftanguy Exp $
+/* $Id: TypeMatchChecker.java,v 1.8 2008-01-08 11:07:39 dvojtise Exp $
 * Project : Kermeta io
 * File : TypeMatchChecker.java
 * License : EPL
@@ -232,6 +232,10 @@ public class TypeMatchChecker {
 				if (!fail) {
 					for (CallableOperation r_op : (ArrayList<CallableOperation>) r_type.callableOperations()) {
 						CallableOperation p_op = p_type.getOperationByName(r_op.getName());
+						// must calculate the isRequired separatlety because the type may be not a class (ex: funtiontype ...)
+						boolean isClassRequired = false;
+						if(r_op.getType().getFType() instanceof Class)
+							isClassRequired = isRequired((Class) r_op.getType().getFType());
 						if (r_op.equals(p_op)) {
 							// Hate to use continue, but the alternative is a nuisance
 							continue;
@@ -248,7 +252,7 @@ public class TypeMatchChecker {
 							if (p_op.getReturnType() != r_op.getReturnType()) {
 								fail = true;
 							}
-						} else if (!fail && isRequired((Class) r_op.getType().getFType())){
+						} else if (!fail && isClassRequired){
 							Binding op_type_binding = new Binding((Class) p_op.getType().getFType(), (Class) r_op.getType().getFType());
 							if (!candidates.contains(op_type_binding)) {
 								fail = true;

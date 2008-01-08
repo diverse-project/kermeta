@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.24 2008-01-02 10:28:31 vmahe Exp $
+/* $Id: InheritanceSearch.java,v 1.25 2008-01-08 11:07:39 dvojtise Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -26,6 +26,7 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
@@ -86,10 +87,23 @@ public class InheritanceSearch {
 	    
 	    for (Object super_type : ((ClassDefinition) c.getTypeDefinition()).getSuperType()) {
 			// get the super type
-	    	fr.irisa.triskell.kermeta.language.structure.Class direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)super_type;
-			// propagate type variables
-			direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)TypeVariableEnforcer.getBoundType(direct_st, TypeVariableEnforcer.getTypeVariableBinding(c));
-			result.add(direct_st);
+	    	
+	    	if (super_type instanceof VirtualType){
+	    		VirtualType vt = (VirtualType)super_type;
+	    		for (Object virtualsuper_type : (vt.getClassDefinition()).getSuperType()) {
+	    			fr.irisa.triskell.kermeta.language.structure.Type virtualdirect_st = (fr.irisa.triskell.kermeta.language.structure.Type)virtualsuper_type;
+					// propagate type variables
+	    			virtualdirect_st = (fr.irisa.triskell.kermeta.language.structure.Class)TypeVariableEnforcer.getBoundType(virtualdirect_st, TypeVariableEnforcer.getTypeVariableBinding(c));
+					result.add(virtualdirect_st);
+	    		}
+	    		
+	    	}
+	    	else{
+		    	fr.irisa.triskell.kermeta.language.structure.Type direct_st = (fr.irisa.triskell.kermeta.language.structure.Type)super_type;
+				// propagate type variables
+				direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)TypeVariableEnforcer.getBoundType(direct_st, TypeVariableEnforcer.getTypeVariableBinding(c));
+				result.add(direct_st);
+	    	}
 	    }
 	    
 	    // Add the type object which is implicitly a super type of every type
