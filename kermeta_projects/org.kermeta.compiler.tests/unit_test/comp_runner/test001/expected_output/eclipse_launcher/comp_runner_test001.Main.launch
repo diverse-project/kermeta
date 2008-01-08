@@ -8,6 +8,6 @@
 </listAttribute>
 <booleanAttribute key="org.eclipse.debug.core.appendEnvironmentVariables" value="true"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="comp_runner_test001.runner.Comp_runner_test001__Main__main1_Runner"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value=""/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="t"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.kermeta.compiled.comp_runner_test001"/>
 </launchConfiguration>
