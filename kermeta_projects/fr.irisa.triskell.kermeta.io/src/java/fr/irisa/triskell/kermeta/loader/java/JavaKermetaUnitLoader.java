@@ -1,6 +1,6 @@
 
 
-/*$Id: JavaKermetaUnitLoader.java,v 1.6 2007-10-12 09:20:40 ftanguy Exp $
+/*$Id: JavaKermetaUnitLoader.java,v 1.7 2008-01-08 15:19:00 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	JavaKermetaUnitLoader.java
 * License : EPL
@@ -51,6 +51,11 @@ public class JavaKermetaUnitLoader extends AbstractKermetaUnitLoader {
 		try {
 			
 			KermetaUnit unit = IOPlugin.getDefault().getKermetaUnit(uri);
+
+			// jar unit are automatically dependent on the framework
+			KermetaUnit frameworkUnit = IOPlugin.getDefault().getKermetaUnit(IOPlugin.FRAMEWORK_KM_URI);
+			unit.getImportedKermetaUnits().add(frameworkUnit);
+			unit.getTypeDefinitionCache().setExternalSearchAuthorized(true);
 
 			JavaBuildingState buildingState = (JavaBuildingState) unit.getBuildingState();
 			
