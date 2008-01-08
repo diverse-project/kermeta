@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass3.java,v 1.15 2007-08-09 14:58:03 dvojtise Exp $
+/* $Id: Jar2KMPass3.java,v 1.16 2008-01-08 16:23:42 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass3.java
  * License : EPL
@@ -128,7 +128,6 @@ public class Jar2KMPass3 extends Jar2KMPass {
 			e.printStackTrace();
 		}
 	}
-
 
 	/**
 	 * This method processes the operations according to Kermeta constraints
@@ -427,6 +426,14 @@ public class Jar2KMPass3 extends Jar2KMPass {
 				internalLog.debug("so "+classDef.getName()+ " inherits from " + parentTypeDef.getName());				
 				classDef.getSuperType().add(parentType);
 			}
+		}
+		// if in the end there is no inheritance add the one to kermeta::standard::Object
+		// (either because it inherits from nothing or because it may inherit from a definition not imported due to the filters
+		if (classDef.getSuperType().size() == 0) {
+			// automatically add inheritance of Object
+			internalLog.debug(c.getCanonicalName()+ " inherits from kermeta::language::structure::Object");
+			Type parentType = getTypeByID("kermeta::language::structure::Object");
+			classDef.getSuperType().add(parentType);
 		}
 	}
 	
