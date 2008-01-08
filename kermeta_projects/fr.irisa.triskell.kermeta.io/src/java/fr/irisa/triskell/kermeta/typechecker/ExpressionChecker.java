@@ -1,11 +1,16 @@
-/* $Id: ExpressionChecker.java,v 1.58 2008-01-04 14:19:19 dvojtise Exp $
+/* $Id: ExpressionChecker.java,v 1.59 2008-01-08 09:57:11 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 12 mars 2005
-* Author : Franck Fleurey
+* Authors : 
+* 		Franck Fleurey
+* 		Francois Tanguy
+* 		Didier Vojtisek
+* 		Jim Steel
+* 		Zoé Drey
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
@@ -13,13 +18,11 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-
 import org.eclipse.emf.common.util.EList;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
-import fr.irisa.triskell.kermeta.parser.gen.ast.FSuperCall;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.BooleanLiteral;
@@ -52,7 +55,6 @@ import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
-import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
@@ -64,8 +66,8 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FSuperCall;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -311,6 +313,10 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        if (((CallFeature)exp).getTarget() instanceof TypeLiteral) {
 	            result = getTypeFromTypeLiteral((TypeLiteral)((CallFeature)exp).getTarget());
 	            // check that it is a concrete class (if the literal is in fact a class. If its a type variable, we're ok)
+	            if (((SimpleType)result).getType() instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+	            	if ((((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)result).getType()).getTypeDefinition()).isIsAbstract()))
+	            		unit.error("TYPE-CHECKER : abstract class "+ result +" should not be instanciated.", (Expression)exp);
+	            }
 	           // if ((result instanceof fr.irisa.triskell.kermeta.language.structure.Class) && ((SimpleType)result).isSemanticallyAbstract())
 	             //   unit.error("TYPE-CHECKER : [Semantically] abstract class "+ result +" should not be instanciated.", (Expression)exp);
 	        }
