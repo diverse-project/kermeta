@@ -1,4 +1,4 @@
-/*$Id: ResourceHelper.java,v 1.19 2007-12-17 10:34:44 cfaucher Exp $
+/*$Id: ResourceHelper.java,v 1.20 2008-01-08 14:49:37 cfaucher Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -56,7 +56,7 @@ public class ResourceHelper {
 	 * @param resourcePath
 	 * @return It returns the clean path.
 	 */
-	static public String cleanIfNecessaryPath(String resourcePath) {
+	static private String cleanIfNecessaryPath(String resourcePath) {
 		// deal with windows \\ delimiter
 		String unifiedSepratorResourcePath = resourcePath.replaceAll("\\\\", "/");
 		
@@ -75,9 +75,6 @@ public class ResourceHelper {
 				rootPath = "file:" + root.getLocation().toString();
 							
 			cleanPath = unifiedSepratorResourcePath.replace(rootPath, "");
-		} else {
-			resourcePath = "file:/" + resourcePath;
-			cleanPath = cleanIfNecessaryPath(resourcePath);
 		}
 		return cleanPath;
 	}
