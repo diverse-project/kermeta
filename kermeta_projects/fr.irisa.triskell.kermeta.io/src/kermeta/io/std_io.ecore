@@ -74,6 +74,7 @@
     <references href="../utils/hashtable.ecore#/1"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
     <references href="file_io.ecore#/0"/>
     <references href="file_io.ecore#/1"/>
     <references href="../exceptions/exceptions.ecore#/0"/>

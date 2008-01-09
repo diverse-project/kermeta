@@ -479,15 +479,15 @@
             <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/persistence/EMFResource/remove/@ownedTag.0" name="remove" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/persistence/EMFResource/remove/@ownedTag.0" name="remove" type="//@packages.0/persistence/EMFResource/remove/@containedType.0" isOrdered="true" upper="1">
           <ownedTag value="/**&#xD;&#xA;  * Overrides Set&lt;Object>.remove(Object)&#xD;&#xA;  * Remove the instance from the Resource&#xD;&#xA;  */" object="//@packages.0/persistence/EMFResource/remove"/>
-          <type href="../standard/collections.km#//@packages.0/standard/Object"/>
+          <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+            <staticType href="../standard/collections.km#//@packages.0/standard/Set/remove/@containedType.0"/>
             <statement xsi:type="kermeta_language_behavior:Conditional">
-              <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+              <staticType href="../standard/collections.km#//@packages.0/standard/Set/remove/@containedType.0"/>
               <thenBody xsi:type="kermeta_language_behavior:Block">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
+                <staticType href="../standard/collections.km#//@packages.0/standard/Set/remove/@containedType.0"/>
                 <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="//@packages.0/persistence/Resource/dependentResources/@getterBody/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::language::Object" jmethod="unSetContainingResource">
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" name="instance">
                     <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
@@ -499,24 +499,7 @@
                     <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
                   </parameters>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Assignment">
-                  <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
-                  <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                    <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
-                  </target>
-                  <value xsi:type="kermeta_language_behavior:CallVariable" name="instance">
-                    <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
-                  </value>
-                </statement>
               </thenBody>
-              <elseBody xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
-                  <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                    <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
-                  </target>
-                  <value xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0"/>
-                </statement>
-              </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" name="contains">
                 <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@target/@containedType.0"/>
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" name="instance">
@@ -557,17 +540,10 @@
             <type href="../standard/collections.km#//@packages.0/standard/Object"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/persistence/KMResource/remove/@ownedTag.0" name="remove" isOrdered="true" upper="1">
+        <ownedOperation tag="//@packages.0/persistence/KMResource/remove/@ownedTag.0" name="remove" type="//@packages.0/persistence/KMResource/remove/@containedType.0" isOrdered="true" upper="1">
           <ownedTag value="/**&#xD;&#xA;   * NOT IMPLEMENTED&#xD;&#xA;   */" object="//@packages.0/persistence/KMResource/remove"/>
-          <type href="../standard/collections.km#//@packages.0/standard/Object"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0">
-              <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Object/@containedType.0"/>
-              </target>
-              <value xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0"/>
-            </statement>
-          </body>
+          <containedType xsi:type="kermeta_language_structure:VoidType"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/persistence/Resource/saveWithNewURI/@body/@containedType.0"/>
           <superOperation href="../standard/collections.km#//@packages.0/standard/Set/remove"/>
           <ownedParameter name="instance" isOrdered="true" upper="1">
             <type href="../standard/collections.km#//@packages.0/standard/Object"/>

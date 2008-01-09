@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.45 2007-12-14 13:00:54 cfaucher Exp $
+ * $Id: resource.kmt,v 1.46 2008-01-09 15:27:43 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -211,13 +211,10 @@ class EMFResource inherits Resource
 	 * Overrides Set<Object>.remove(Object)
 	 * Remove the instance from the Resource
 	 */
-	method remove(instance : Object) : Object is do
+	method remove(instance : Object) : Void is do
 		if self.contains(instance) then
 			extern fr::irisa::triskell::kermeta::runtime::language::Object.unSetContainingResource(instance)
 			super(instance)
-			result := instance
-		else
-			result := void
 		end
 	end
 }
@@ -252,9 +249,8 @@ class KMResource inherits Resource
 	/**
  	 * NOT IMPLEMENTED
  	 */
-	method remove(instance : Object) : Object is do
-		//TODO: implement operation load
-		result := void
+	method remove(instance : Object) : Void is do
+		
 	end
 }
 

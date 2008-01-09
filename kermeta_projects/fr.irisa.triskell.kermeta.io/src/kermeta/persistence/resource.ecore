@@ -136,12 +136,11 @@
         </eOperations>
         <eOperations name="remove">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;if self.contains(instance) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.unSetContainingResource(instance)&#xA;&#x9;&#x9;super(instance)&#xA;&#x9;&#x9;result := instance&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := void&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;if self.contains(instance) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::language::Object.unSetContainingResource(instance)&#xA;&#x9;&#x9;super(instance)&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Overrides Set&lt;Object>.remove(Object)&#xD;&#xA;  * Remove the instance from the Resource&#xD;&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Set"/>
             <references href="../standard/collections.ecore#/1/standard/Set/remove"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
           <eParameters name="instance">
             <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
           </eParameters>
@@ -178,12 +177,11 @@
         </eOperations>
         <eOperations name="remove">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := void&#xA;end"/>
+            <details key="body" value="do&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;   * NOT IMPLEMENTED&#xD;&#xA;   */"/>
             <details key="superOperation" value="kermeta::standard::Set"/>
             <references href="../standard/collections.ecore#/1/standard/Set/remove"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
           <eParameters name="instance">
             <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
           </eParameters>
@@ -314,32 +312,24 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
-    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
-    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
@@ -355,13 +345,10 @@
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../standard/java.ecore#/0"/>
     <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
     <references href="../ecore/ecore_compatibility.ecore#/2"/>
