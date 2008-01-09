@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.4 2008-01-07 14:18:46 cfaucher Exp $
+/* $Id: CompileKermetaAction.java,v 1.5 2008-01-09 13:50:36 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -57,6 +57,8 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 public class CompileKermetaAction implements IObjectActionDelegate {
@@ -223,6 +225,9 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 					km2ecore);
 
 			prettyPrinter.setHelperModel(simkModel);
+			
+			String mainClass = ModelingUnitHelper.getMainClass(unit).getValue();
+			String mainOperation = ModelingUnitHelper.getMainOperation(unit).getValue();
 
 			for (TypeDefinition aTypeDef : fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper
 					.getTypeDefinitions(unit)) {
@@ -290,6 +295,11 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 									newStaticMethod.setSMContext(newSMContext);
 									newStaticMethod.getUsages().add(
 											SMUsage.RUNNER);
+									
+									if(mainClass.equals(NamedElementHelper.getQualifiedName(aTypeDef)) && mainOperation.equals(op.getName())) {
+										newStaticMethod.getUsages().add(
+												SMUsage.LAUNCHER);
+									}
 
 									for (EParameter param : eOp
 											.getEParameters()) {
@@ -329,6 +339,8 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 					}
 				}
 			}
+			
+			// Save in a file the simk helper model
 			prettyPrinter.getHelperModel().eResource().save(null);
 		} catch (Exception e) {
 			e.printStackTrace();
