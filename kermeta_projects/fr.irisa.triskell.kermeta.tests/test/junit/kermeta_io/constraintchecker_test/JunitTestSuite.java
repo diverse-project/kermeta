@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.8 2007-11-29 14:02:38 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.9 2008-01-09 14:22:38 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -375,8 +375,8 @@ testinvalidFile("test/io/constraintchecker_tests/invalid","027_constraint_type_b
 				constraintChecker.checkUnit();
 			}
 			
-			if ( ! kermetaUnit.isIndirectlyErroneous() ) {
-				assertTrue("Looking for a constraint error but none found", false);
+			if ( ! (kermetaUnit.isIndirectlyErroneous() || kermetaUnit.isWarned())) {
+				assertTrue("Looking for a constraint error or direct warning but none found", false);
 			}
 			else {
 				System.out.println("succesfully found error in " +file );
