@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.46 2008-01-09 15:27:43 dvojtise Exp $
+ * $Id: resource.kmt,v 1.47 2008-01-09 16:28:31 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -133,7 +133,8 @@ abstract class Resource inherits kermeta::standard::Set<Object>
  * You must To create one 
  */
 class EMFResource inherits Resource
-{
+{	
+	 
 	/**
 	 * Overrides Resource.saveWithNewURI(String)
 	 */
@@ -442,6 +443,13 @@ class EMFRepository inherits Repository
 	 * by default, not setting this is considered as false.
 	 */
 	attribute useInterpreterInternalResources : Boolean
+	
+	/**
+	 * When loading the Resources, 
+	 * if there are some errors while loading some objects, those objects are ignored
+	 * by default, not setting this is considered as false.
+	 */	 
+	 attribute ignoreLoadErrors : kermeta::standard::Boolean
 }
 
 

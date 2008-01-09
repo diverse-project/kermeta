@@ -1369,6 +1369,12 @@
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
           </containedType>
         </ownedAttribute>
+        <ownedAttribute tag="//@packages.0/persistence/EMFRepository/ignoreLoadErrors/@ownedTag.0" name="ignoreLoadErrors" type="//@packages.0/persistence/EMFRepository/ignoreLoadErrors/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
+          <ownedTag value="/**&#xD;&#xA;  * When loading the Resources, &#xD;&#xA;  * if there are some errors while loading some objects, those objects are ignored&#xD;&#xA;  * by default, not setting this is considered as false.&#xD;&#xA;  */" object="//@packages.0/persistence/EMFRepository/ignoreLoadErrors"/>
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
+          </containedType>
+        </ownedAttribute>
         <ownedOperation tag="//@packages.0/persistence/EMFRepository/createResource/@ownedTag.0" name="createResource" type="//@packages.0/persistence/EMFRepository/createResource/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/persistence/Repository/createResource">
           <ownedTag value="/**&#xD;&#xA;  * Overrides Repository.createResource(String, String)&#xD;&#xA;  * Create a new resource for a model given by its uri, &#xD;&#xA;  * which meta-model is stored in file given by mm_uri&#xD;&#xA;  * If file already exists, you'll be able to call the load method to concretly load the model&#xD;&#xA;  * otherwise, you can only call the save method&#xD;&#xA;  */" object="//@packages.0/persistence/EMFRepository/createResource"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/persistence/Resource"/>

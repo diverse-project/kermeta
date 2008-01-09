@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.73 2007-11-14 16:56:01 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.74 2008-01-09 16:29:39 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -71,6 +71,11 @@ public class EMF2Runtime {
     protected Hashtable<String, RuntimeObject> type_cache;
     
     protected Hashtable<String, RuntimeObject> special_primitive_types;
+    
+    /**
+     * if true, try to ignore faulty objects while loading the resources
+     */
+    protected boolean ignoreLoadErrors = false;
     
     /**
      * The list of runtimeObjects that represent the EMF instances
@@ -301,7 +306,13 @@ public class EMF2Runtime {
 			dependentResources = unit.findDependentResources(resource);
 			
 			// make sure we don't recreate already loaded RO			
-			RuntimeObject roRepository = (RuntimeObject) mainResRO.getProperties().get("repository");			
+			RuntimeObject roRepository = (RuntimeObject) mainResRO.getProperties().get("repository");	
+			
+			// update the ignore load error field from the RuntimeObject
+			RuntimeObject rouseInterpreterInternalResources = (RuntimeObject) roRepository.getProperties().get("useInterpreterInternalResources");
+			ignoreLoadErrors = rouseInterpreterInternalResources != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(rouseInterpreterInternalResources) : false;		
+			
+			
 			fillRuntimeObjectsMapWithPreExistingObjects(roRepository); 
 			nbPreExistingObjects = runtime_objects_map.keySet().size();
 			// Pass 1 : pre-create the runtime objects
