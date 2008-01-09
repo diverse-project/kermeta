@@ -1,5 +1,5 @@
 /**
- * $Id: SMUsage.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.4 2008-01-09 14:12:57 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMUsage.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.4 2008-01-09 14:12:57 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -45,7 +45,15 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	RUNNER(1, "Runner", "Runner");
+	RUNNER(1, "Runner", "Runner"), /**
+	 * The '<em><b>Launcher</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LAUNCHER_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	LAUNCHER(2, "Launcher", "Launcher");
 
 	/**
 	 * The '<em><b>Function Type</b></em>' literal value.
@@ -78,6 +86,21 @@ public enum SMUsage implements Enumerator {
 	public static final int RUNNER_VALUE = 1;
 
 	/**
+	 * The '<em><b>Launcher</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Launcher</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #LAUNCHER
+	 * @model name="Launcher"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LAUNCHER_VALUE = 2;
+
+	/**
 	 * An array of all the '<em><b>SM Usage</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,6 +110,7 @@ public enum SMUsage implements Enumerator {
 		new SMUsage[] {
 			FUNCTION_TYPE,
 			RUNNER,
+			LAUNCHER,
 		};
 
 	/**
@@ -139,6 +163,7 @@ public enum SMUsage implements Enumerator {
 		switch (value) {
 			case FUNCTION_TYPE_VALUE: return FUNCTION_TYPE;
 			case RUNNER_VALUE: return RUNNER;
+			case LAUNCHER_VALUE: return LAUNCHER;
 		}
 		return null;
 	}

@@ -1,5 +1,5 @@
 /**
- * $Id: SMNamedElementImpl.java,v 1.3 2007-12-21 14:17:03 cfaucher Exp $
+ * $Id: SMNamedElementImpl.java,v 1.4 2008-01-09 14:12:57 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMNamedElementImpl.java,v 1.3 2007-12-21 14:17:03 cfaucher Exp $
+ * $Id: SMNamedElementImpl.java,v 1.4 2008-01-09 14:12:57 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
@@ -37,7 +37,7 @@ public abstract class SMNamedElementImpl extends EObjectImpl implements SMNamedE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SMNamedElementImpl() {
+	public SMNamedElementImpl() {
 		super();
 	}
 
