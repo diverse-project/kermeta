@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Compiler
 Bundle-SymbolicName: org.kermeta.compiler;singleton:=true
-Bundle-Version: 0.1.0
+Bundle-Version: 0.1.99.qualifier
 Bundle-Activator: org.kermeta.compiler.CompilerPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -21,7 +21,9 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kermeta.interpreter,
  org.kermeta.merger,
  org.kermeta.compiler.generator,
- org.kermeta.generator
+ org.kermeta.generator,
+ org.kermeta.simk,
+ org.kermeta.compiler.generator.emftemplates
 Eclipse-LazyStart: true
 Bundle-Vendor: IRISA/INRIA
 Export-Package: org.kermeta.compiler;
