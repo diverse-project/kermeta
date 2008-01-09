@@ -96,7 +96,7 @@
         <eLiterals name="non_unique" value="1" literal="non_unique"/>
         <eLiterals name="onDemand" value="2" literal="onDemand"/>
       </eClassifiers>
-      <eSubpackages name="adaptations" nsURI="platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_FrameworkTemp.ecore#/org/smartadapters/core/adaptations"
+      <eSubpackages name="adaptations" nsURI="platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.ecore#/org/smartadapters/core/adaptations"
           nsPrefix="adaptations">
         <eClassifiers xsi:type="ecore:EClass" name="CreateState" eSuperTypes="#//smartadapters/core/createAdaptation">
           <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
@@ -140,12 +140,12 @@
           </eOperations>
           <eOperations name="execute">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var tempState : FSM::State&#xA;&#x9;tempState ?= adapter.getRealObject(StateToSet, false)&#xA;&#x9;tempState.name ?= adapter.setSingleProperty(refname)&#xA;end"/>
+              <details key="body" value="do&#xA;&#x9;var tempState : FSM::State&#xA;&#x9;tempState ?= adapter.getRealObject(StateToSet, false)&#xA;&#x9;tempState.name ?= adapter.setSingleProperty(refname, tempState.name)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
             </eAnnotations>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="StateToSet" eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/State"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/String">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
@@ -160,12 +160,12 @@
           </eOperations>
           <eOperations name="execute">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var tempState : FSM::State&#xA;&#x9;tempState ?= adapter.getRealObject(StateToUnset, false)&#xA;&#x9;tempState.name ?= adapter.unsetSingleProperty(refname)&#xA;end"/>
+              <details key="body" value="do&#xA;&#x9;var tempState : FSM::State&#xA;&#x9;tempState ?= adapter.getRealObject(StateToUnset, false)&#xA;&#x9;tempState.name ?= adapter.unsetSingleProperty(refname, tempState.name)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
             </eAnnotations>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="StateToUnset" eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/State"/>
-          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/String">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="refname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
             <eAnnotations source="kermeta">
               <details key="isComposite" value="false"/>
             </eAnnotations>
@@ -199,6 +199,9 @@
               <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedTransition, TransitionToClone, isUnique)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
             </eAnnotations>
+            <eAnnotations source="kermeta.pre">
+              <details key="isChecked" value="check"/>
+            </eAnnotations>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="TransitionToClone"
               eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/Transition"/>
@@ -215,8 +218,11 @@
           </eOperations>
           <eOperations name="execute">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var tempTransition : FSM::Transition&#xA;&#x9;tempTransition ?= adapter.getRealObject(TransitionToSet, false)&#xA;&#x9;tempTransition.source ?= adapter.setSingleProperty(refsource)&#xA;&#x9;tempTransition.target ?= adapter.setSingleProperty(reftarget)&#xA;end"/>
+              <details key="body" value="do&#xA;&#x9;var tempTransition : FSM::Transition&#xA;&#x9;tempTransition ?= adapter.getRealObject(TransitionToSet, false)&#xA;&#x9;tempTransition.source ?= adapter.setSingleProperty(refsource, tempTransition.source)&#xA;&#x9;tempTransition.target ?= adapter.setSingleProperty(reftarget, tempTransition.target)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.pre">
+              <details key="isChecked" value="check"/>
             </eAnnotations>
           </eOperations>
           <eStructuralFeatures xsi:type="ecore:EReference" name="TransitionToSet"
@@ -233,7 +239,7 @@
           </eOperations>
           <eOperations name="execute">
             <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
-              <details key="body" value="do&#xA;&#x9;var tempTransition : FSM::Transition&#xA;&#x9;tempTransition ?= adapter.getRealObject(TransitionToUnset, false)&#xA;&#x9;tempTransition.source ?= adapter.unsetSingleProperty(refsource)&#xA;&#x9;tempTransition.target ?= adapter.unsetSingleProperty(reftarget)&#xA;end"/>
+              <details key="body" value="do&#xA;&#x9;var tempTransition : FSM::Transition&#xA;&#x9;tempTransition ?= adapter.getRealObject(TransitionToUnset, false)&#xA;&#x9;tempTransition.source ?= adapter.unsetSingleProperty(refsource, tempTransition.source)&#xA;&#x9;tempTransition.target ?= adapter.unsetSingleProperty(reftarget, tempTransition.target)&#xA;end"/>
               <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
             </eAnnotations>
           </eOperations>
@@ -241,6 +247,39 @@
               eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/Transition"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="refsource" eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/State"/>
           <eStructuralFeatures xsi:type="ecore:EReference" name="reftarget" eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/State"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CreateFsm" eSuperTypes="#//smartadapters/core/createAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := newFsm.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(newFsm, void, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newFsm" eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/Fsm"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CloneFsm" eSuperTypes="#//smartadapters/core/cloneAdaptation">
+          <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/check">
+              <details key="body" value="do&#xA;&#x9;result := FsmToClone.isNotEqual(void)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute">
+            <eAnnotations source="kermeta" references="#//smartadapters/core/Adaptation/execute">
+              <details key="body" value="do&#xA;&#x9;adapter.cloneAgain(clonedFsm, FsmToClone, isUnique)&#xA;end"/>
+              <details key="superOperation" value="org::smartadapters::core::Adaptation"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="FsmToClone" eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/Fsm"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clonedFsm" eType="ecore:EClass ../domain/FSMMMPattern.ecore#/1/FSM/Fsm"
+              containment="true"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="SetFsm" eSuperTypes="#//smartadapters/core/setAdaptation">
           <eOperations name="check" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Boolean">

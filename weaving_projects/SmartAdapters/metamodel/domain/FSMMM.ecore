@@ -28,5 +28,4 @@
       </eAnnotations>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EAnnotation source="dependentResource"/>
 </xmi:XMI>

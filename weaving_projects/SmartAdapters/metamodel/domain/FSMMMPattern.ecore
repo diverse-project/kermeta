@@ -10,7 +10,7 @@
     <eSubpackages name="FSM" nsURI="platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore#/pattern/FSM"
         nsPrefix="FSM">
       <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/PObject">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/String">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
           </eAnnotations>
@@ -28,5 +28,4 @@
       </eClassifiers>
     </eSubpackages>
   </ecore:EPackage>
-  <ecore:EAnnotation source="dependentResource" references="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/0 ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1 runtime/runtimePattern.ecore#/0 runtime/runtimePattern.ecore#/1 runtime/runtimePattern.ecore#/2 runtime/typePattern.ecore#/0 runtime/typePattern.ecore#/1 runtime/typePattern.ecore#/2"/>
 </xmi:XMI>

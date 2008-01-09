@@ -46,7 +46,7 @@ package smartadapters
 			attribute newState : pattern::FSM::State
 					
 			method check(): Boolean is do
-				result := newState!=void
+				result := newState != void
 			end
 					
 			method execute(): Void is do
@@ -60,11 +60,16 @@ package smartadapters
 			attribute clonedState : pattern::FSM::State
 			
 			method check(): Boolean is do
-				result := StateToClone!=void
+				result := StateToClone != void
 			end
 			
 			method execute(): Void is do
 				adapter.cloneAgain(clonedState, StateToClone, isUnique)
+				var real : FSM::State
+				real ?= adapter.getRealObject(StateToClone,false)
+				stdio.writeln("StateToClone "+real.name+"("+real.toString+")")
+				real ?= adapter.getRealObject(clonedState,false)
+				stdio.writeln("clonedState "+real.name+"("+real.toString+")")
 			end					
 		}
 
@@ -117,34 +122,74 @@ package smartadapters
 
 		class CloneTransition inherits cloneAdaptation
 		{
+			//Object to clone
 			reference TransitionToClone : pattern::FSM::Transition
+			//Cloned object
 			attribute clonedTransition : pattern::FSM::Transition
 			
+			//Object to clone should not be void
 			method check(): Boolean is do
 				result := TransitionToClone!=void
 			end
 			
-			method execute(): Void is do
+			method execute(): Void
+			pre isChecked is check 
+			is do	
 				adapter.cloneAgain(clonedTransition, TransitionToClone, isUnique)
 			end					
 		}
 
 		class SetTransition inherits setAdaptation
 		{
+			//Object to set
 			reference TransitionToSet : pattern::FSM::Transition
+			
+			//References to the properties of the object
 			reference refsource : pattern::FSM::State
 			reference reftarget : pattern::FSM::State
+			//reference container : pattern::FSM::Region
 			
-			method check(): Boolean is do
+			//Object to set should not be void
+			method check(): Boolean 
+			is do
 				result := TransitionToSet!=void
 			end
 			
-			method execute(): Void is do
+			method execute(): Void 
+			pre isChecked is check
+			is do
+				//getting the real object of the object to set
 				var tempTransition : FSM::Transition
 				tempTransition ?= adapter.getRealObject(TransitionToSet,false)
 				
-				tempTransition.source ?= adapter.setSingleProperty(refsource, tempTransition.source)
-				tempTransition.target ?= adapter.setSingleProperty(reftarget, tempTransition.target)
+				//setting properties of the real object to set
+				/*stdio.writeln("   source: "+refsource.name+" "+refsource.toString)
+				stdio.writeln("   target: "+reftarget.name+" "+reftarget.toString)
+				*/
+				tempTransition.source ?= 
+					adapter.setSingleProperty(refsource, tempTransition.source)
+				tempTransition.target ?= 
+					adapter.setSingleProperty(reftarget, tempTransition.target)	
+				//tempTransition.container ?= 
+					//adapter.setSingleProperty(reftarget, tempTransition.target)
+				
+				/*adapter.clone.keys().each{k |
+					var s : pattern::FSM::State 
+					var real : FSM::State
+					s ?= k
+					real ?= adapter.clone.getValue(k)
+					if (s != void and real != void) then
+						stdio.writeln("clone: "+s.name+" -> "+real.name+" ("+real.toString+")")
+					end	
+				}
+				
+				var realSource : FSM::State
+				realSource ?= adapter.setSingleProperty(refsource, tempTransition.source)
+				var realTarget : FSM::State
+				realTarget ?= adapter.setSingleProperty(reftarget, tempTransition.target)
+				stdio.writeln("   real source: "+realSource.name+" "+realSource.toString)
+				stdio.writeln("   real target: "+realTarget.name+" "+realSource.toString)
+				*/
 			end			
 		}
 		

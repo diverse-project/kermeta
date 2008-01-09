@@ -1,4 +1,4 @@
-/* $Id: converter.kmt,v 1.5 2007-12-07 07:15:17 bmorin Exp $
+/* $Id: converter.kmt,v 1.6 2008-01-09 13:15:44 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA Rennes - Equipe Projet INRIA Triskell
@@ -32,8 +32,8 @@ class Converter
 	initializes the converter (~constructor)
 	must be called before any other operation
 	*/
-	operation initConverter(convert:Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>/*,
-			enum : Hashtable<kermeta::reflection::Enumeration,kermeta::reflection::Enumeration>*/) is do	
+	operation initConverter(convert:Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>
+			/*,	enum : Hashtable<kermeta::reflection::Enumeration,kermeta::reflection::Enumeration>*/) is do	
 		convertTable := convert
 		//enumTable := enum
 		converted := Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>.new

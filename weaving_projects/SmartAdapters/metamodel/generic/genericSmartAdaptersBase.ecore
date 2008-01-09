@@ -164,14 +164,4 @@
       </eSubpackages>
     </eSubpackages>
   </ecore:EPackage>
-  <ecore:EAnnotation source="dependentResource">
-    <references href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/0"/>
-    <references href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1"/>
-    <references href="../domain/runtime/runtimePattern.ecore#/0"/>
-    <references href="../domain/runtime/runtimePattern.ecore#/1"/>
-    <references href="../domain/FSMMMPattern.ecore#/0"/>
-    <references href="../domain/FSMMMPattern.ecore#/1"/>
-    <references href="../domain/runtime/typePattern.ecore#/0"/>
-    <references href="../domain/runtime/typePattern.ecore#/1"/>
-  </ecore:EAnnotation>
 </xmi:XMI>

@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.5 2007-12-07 07:15:14 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.6 2008-01-09 13:15:28 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -9,6 +9,9 @@ package org;
 
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.kmt"
 require "platform:/resource/SmartAdapters/program/weaving/converter.kmt"
+
+require "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
+require "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"
 
 using kermeta::standard
 using kermeta::utils
@@ -32,49 +35,60 @@ package smartadapters
 			value : associated clone
 			*/
 			attribute clone : Hashtable<Object, Object>
-			attribute cloned : Set<Object>
 			attribute binding : Hashtable<Object, Object>
+			attribute cloned : Set<Object>
 			attribute convert : Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>
 			attribute enum : Hashtable<kermeta::reflection::Enumeration,kermeta::reflection::Enumeration>
-			attribute created : Hashtable<Object, Object>
 			attribute converter : Converter
 			
 			operation initConvert() : Void is abstract
 			
 			operation apply(b:Hashtable<Object, Object>) is do
-				binding:=b
-				if(clone==void) then
-					initClone 
-				end
+				binding := b
+				
 				adapt.each{a |
 					stdio.writeln("#>"+a.getMetaClass.name+"...") 
 					a.execute()
 					stdio.writeln("#>done!")
 				}
+	
+				/*clone.keys.each{k | 
+					stdio.writeln("clone: "+k.toString+", "+clone.getValue(k).toString)
+				}
+				cloned.each{k | 
+					stdio.writeln("cloned: "+k.toString)
+				}*/
+		
 				updateClones
 			end
-					
+			
+			operation initAdapter() : Void is 
+			do
+				if (clone == void) then
+					clone := Hashtable<Object, Object>.new
+				end
+				if (convert == void) then
+					initConvert
+				end
+				if (cloned == void) then
+					cloned := Set<Object>.new
+				end
+			end		
 				
 			/**
 			initClone must be called before the first binding
 			*/
 			operation initClone() is do
-				//stdio.writeln("initClone...")
-				initConvert
-				clone:=Hashtable<Object,Object>.new
-				cloned:=Set<Object>.new
-				created:=Hashtable<Object,Object>.new
-				if(aspect.structure!=void) then
-				aspect.structure.content.each{elt |
-							//stdio.writeln("elt: "+elt.toString)
+				initAdapter
+				if (aspect.structure!=void) then
+					aspect.structure.content.each{elt |
 							var newCloned:Object
 							newCloned:=converter.getConverted(elt)
-							if(newCloned!=void) then
+							if (newCloned!=void) then
 								clone.put(elt, newCloned)
 							end
-						}
+					}
 				end
-				//stdio.writeln("initClone: END!")
 			end
 			
 			/**
@@ -82,58 +96,96 @@ package smartadapters
 			*/
 			operation updateClones() is do
 				//stdio.writeln("updateClones...")
-				if(aspect.structure!=void) then
-				aspect.structure.content.each{o | 
-					if(not(aspect.persistent.contains(o))) then
-						//stdio.writeln("updateClone: "+o.toString)
-						updateClone(o,void)
-					end}
+				if (aspect.structure!=void) then
+					aspect.structure.content.each{o | 
+						if (not(aspect.persistent.contains(o))) then
+							//stdio.writeln("updateClone: "+o.toString)
+							updateClone(o,void)
+						end
+					}
 				end
 				//stdio.writeln("updateClones: END!")
 			end
 			
-			operation updateClone(pObj : Object, template : Object) is do
-				//stdio.writeln("  updateClone..."+pObj.toString+", "+template.toString)
-				clone.remove(pObj)
-				converter.deleteConverted(pObj)
-				var newCloned:Object
-				if(template!=void) then
-					cloned.remove(template)
-					newCloned:=Object.clone(template)
+			operation updateClone(handler : Object, template : Object) is do
+				//stdio.writeln("?>  updateClone "+pObj.toString+" ("+template.toString+") ")
+				clone.remove(handler)
+				converter.deleteConverted(handler)
+			
+				var realHandler : Object
+				var realTemplate : Object
+			
+				if (template != void) then
+					//stdio.writeln("?>   template != void")
+					realTemplate := getRealObject(template,false)
+					realHandler:=Object.clone(realTemplate)
+					cloned.remove(realTemplate)
 				else
-					newCloned:=converter.getConverted(pObj)
+					//stdio.writeln("?>   template == void")
+					realHandler:=converter.getConverted(handler)
 				end
-				if(newCloned!=void) then
-					clone.put(pObj, newCloned)
-					if(template!=void) then
-						cloned.add(template)
+				if (realHandler != void) then
+					//stdio.writeln("?>   new clone created")
+					clone.put(handler, realHandler)
+					if (template != void) then
+						cloned.add(realTemplate)
 					end
 				end
-				//stdio.writeln("  updateClone: END!")
+				//stdio.writeln(newCloned.toString)
 			end
 
-			operation cloneAgain(o : Object, template : Object, type : uniqueType)	: Void is do
-				var toClone : Boolean init type==uniqueType.non_unique
-				if(not(toClone) and type==uniqueType.unique) then
+			operation cloneAgain(handler : Object, template : Object, type : uniqueType)	: Void is do
+				//stdio.writeln("operation cloneAgain " + (template!=void).toString)
+				
+				var toClone : Boolean init type == uniqueType.non_unique
+				if (not(toClone) and type == uniqueType.unique) then
 					//stdio.writeln("?>unique")
-					if(template!=void) then
+					if (template != void) then
+						cloned.each{o | stdio.writeln("cloned: "+o.toString)}
 						toClone := not(cloned.contains(getRealObject(template,false)))
+						clone.remove(handler)
+						clone.put(handler, getRealObject(template,false))
 					else
-						toClone := clone.getValue(o)==void
+						toClone := not(clone.containsKey(handler)) 
 					end
 				end
-				if(not(toClone) and type==uniqueType.onDemand) then
-					var input : String init stdio.read("$>clone "+o.toString+" (true/false) :")
+				if (not(toClone) and type == uniqueType.onDemand) then
+					var input : String init stdio.read("$>clone "+handler.toString+" (true/false) :")
 			        toClone := input.toBoolean
 				end
-				if(toClone) then
+				
+				stdio.writeln(toClone.toString)
+				
+				if (toClone) then
 					//stdio.writeln("?>updating clones...")
-					if(template!=void) then
-						updateClone(o,getRealObject(template,false))
+					if(template != void) then
+						//stdio.writeln("?>  with template")
+						updateClone(handler,template)
 					else
-						updateClone(o,void)
+						//stdio.writeln("?>  from scratch")
+						updateClone(handler,void)
 					end
 				end
+				
+				stdio.writeln(getRealObject(handler,false).toString)
+				clone.keys.each{k |
+					var a : pattern::FSM::State
+					var b : FSM::State
+					a ?= k
+					b ?= clone.getValue(k) 
+					if(a != void and b != void) then
+						stdio.writeln("clone: "+a.name+" -> "+b.name)
+					end
+				}
+				binding.keys.each{k | 
+					var a : pattern::FSM::State
+					var b : FSM::State
+					a ?= k
+					b ?= binding.getValue(k)
+					if(a != void and b != void) then 
+						stdio.writeln("binding: "+a.name+" -> "+b.name)
+					end
+				}
 			end
 			
 			operation setMultipleProperty(prty : Object, o : Object) : Void is do
@@ -161,10 +213,8 @@ package smartadapters
 
 			operation unsetSingleProperty(o : Object, old : Object) : Object is do
 				if(o != void) then
-					stdio.writeln("?>unset: 1")
 					result := void
 				else
-					stdio.writeln("?>unset: 2 "+getRealObject(o,false).toString)
 					result := old
 				end
 			end
@@ -188,37 +238,32 @@ package smartadapters
 			end			
 						
 			operation getRealObject(obj : Object, isCollect:Boolean) : Object is do
-				if(isCollect) then
-					var col:Collection<kermeta::reflection::Object>
-					col?=obj
-					var res:Set<Object> init Set<Object>.new
+				if (isCollect) then
+					var col : Collection<kermeta::reflection::Object>
+					col ?= obj
+					var res : Set<Object> init Set<Object>.new
 					col.each{o | res.add(getRealObject(o,false))}
-					result:=res
+					result := res
 				else
-					var realObj:Object
-					realObj:=clone.getValue(obj)
-					if(realObj!=void) then
-						result:=realObj
+					var realObj : Object
+					realObj := clone.getValue(obj)
+					if (realObj != void) then
+						result := realObj
 					else
-						realObj:=binding.getValue(obj)
-						if(realObj!=void) then
-							result:=realObj
+						realObj := binding.getValue(obj)
+						if (realObj != void) then
+							result := realObj
 						else
-							realObj:=created.getValue(obj)
-							if(realObj!=void) then
-								result:=realObj
+							var pObj : PObject
+							pObj ?= obj
+							if (pObj != void) then
+								result := converter.getConverted(obj)
 							else
-								var pObj:PObject
-								pObj?=obj
-								if(pObj!=void) then
-									result:=converter.getConverted(obj)
-								else
-									result:=obj
-								end
+								result := obj
 							end
 						end
-					end	
-				end		
+					end
+				end			
 			end
 		}
 	}
