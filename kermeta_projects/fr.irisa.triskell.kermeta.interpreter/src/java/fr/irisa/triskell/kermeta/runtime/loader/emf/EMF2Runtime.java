@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.75 2008-01-09 16:37:39 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.76 2008-01-09 16:55:09 gperroui Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -309,8 +309,8 @@ public class EMF2Runtime {
 			RuntimeObject roRepository = (RuntimeObject) mainResRO.getProperties().get("repository");	
 			
 			// update the ignore load error field from the RuntimeObject
-			RuntimeObject rouseInterpreterInternalResources = (RuntimeObject) roRepository.getProperties().get("useInterpreterInternalResources");
-			ignoreLoadErrors = rouseInterpreterInternalResources != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(rouseInterpreterInternalResources) : false;		
+			RuntimeObject roIgnoreLoadErrors = (RuntimeObject) roRepository.getProperties().get("ignoreLoadErrors");
+			ignoreLoadErrors = roIgnoreLoadErrors != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(roIgnoreLoadErrors) : false;		
 			
 			
 			fillRuntimeObjectsMapWithPreExistingObjects(roRepository); 
