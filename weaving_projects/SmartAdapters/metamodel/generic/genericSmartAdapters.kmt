@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.6 2008-01-09 13:15:28 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.7 2008-01-09 15:07:54 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -9,9 +9,6 @@ package org;
 
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.kmt"
 require "platform:/resource/SmartAdapters/program/weaving/converter.kmt"
-
-require "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
-require "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"
 
 using kermeta::standard
 using kermeta::utils
@@ -44,21 +41,12 @@ package smartadapters
 			operation initConvert() : Void is abstract
 			
 			operation apply(b:Hashtable<Object, Object>) is do
-				binding := b
-				
+				binding := b		
 				adapt.each{a |
 					stdio.writeln("#>"+a.getMetaClass.name+"...") 
 					a.execute()
 					stdio.writeln("#>done!")
 				}
-	
-				/*clone.keys.each{k | 
-					stdio.writeln("clone: "+k.toString+", "+clone.getValue(k).toString)
-				}
-				cloned.each{k | 
-					stdio.writeln("cloned: "+k.toString)
-				}*/
-		
 				updateClones
 			end
 			
@@ -95,20 +83,16 @@ package smartadapters
 			updateClone must be called after every binding
 			*/
 			operation updateClones() is do
-				//stdio.writeln("updateClones...")
 				if (aspect.structure!=void) then
 					aspect.structure.content.each{o | 
 						if (not(aspect.persistent.contains(o))) then
-							//stdio.writeln("updateClone: "+o.toString)
 							updateClone(o,void)
 						end
 					}
 				end
-				//stdio.writeln("updateClones: END!")
 			end
 			
 			operation updateClone(handler : Object, template : Object) is do
-				//stdio.writeln("?>  updateClone "+pObj.toString+" ("+template.toString+") ")
 				clone.remove(handler)
 				converter.deleteConverted(handler)
 			
@@ -116,32 +100,24 @@ package smartadapters
 				var realTemplate : Object
 			
 				if (template != void) then
-					//stdio.writeln("?>   template != void")
 					realTemplate := getRealObject(template,false)
 					realHandler:=Object.clone(realTemplate)
 					cloned.remove(realTemplate)
 				else
-					//stdio.writeln("?>   template == void")
 					realHandler:=converter.getConverted(handler)
 				end
 				if (realHandler != void) then
-					//stdio.writeln("?>   new clone created")
 					clone.put(handler, realHandler)
 					if (template != void) then
 						cloned.add(realTemplate)
 					end
 				end
-				//stdio.writeln(newCloned.toString)
 			end
 
 			operation cloneAgain(handler : Object, template : Object, type : uniqueType)	: Void is do
-				//stdio.writeln("operation cloneAgain " + (template!=void).toString)
-				
 				var toClone : Boolean init type == uniqueType.non_unique
 				if (not(toClone) and type == uniqueType.unique) then
-					//stdio.writeln("?>unique")
 					if (template != void) then
-						cloned.each{o | stdio.writeln("cloned: "+o.toString)}
 						toClone := not(cloned.contains(getRealObject(template,false)))
 						clone.remove(handler)
 						clone.put(handler, getRealObject(template,false))
@@ -153,43 +129,16 @@ package smartadapters
 					var input : String init stdio.read("$>clone "+handler.toString+" (true/false) :")
 			        toClone := input.toBoolean
 				end
-				
-				stdio.writeln(toClone.toString)
-				
 				if (toClone) then
-					//stdio.writeln("?>updating clones...")
 					if(template != void) then
-						//stdio.writeln("?>  with template")
 						updateClone(handler,template)
 					else
-						//stdio.writeln("?>  from scratch")
 						updateClone(handler,void)
 					end
 				end
-				
-				stdio.writeln(getRealObject(handler,false).toString)
-				clone.keys.each{k |
-					var a : pattern::FSM::State
-					var b : FSM::State
-					a ?= k
-					b ?= clone.getValue(k) 
-					if(a != void and b != void) then
-						stdio.writeln("clone: "+a.name+" -> "+b.name)
-					end
-				}
-				binding.keys.each{k | 
-					var a : pattern::FSM::State
-					var b : FSM::State
-					a ?= k
-					b ?= binding.getValue(k)
-					if(a != void and b != void) then 
-						stdio.writeln("binding: "+a.name+" -> "+b.name)
-					end
-				}
 			end
 			
 			operation setMultipleProperty(prty : Object, o : Object) : Void is do
-				//stdio.writeln("  setProperty: "+prty.toString+", "+o.toString)
 				if(o != void) then
 					var coll : Collection<kermeta::reflection::Object>
 					var collToSet : Collection<kermeta::reflection::Object>
@@ -220,14 +169,12 @@ package smartadapters
 			end
 
 			operation unsetMultipleProperty(prty : Object, o : Object) : Void is do
-				//stdio.writeln("unsetProperty: "+prty.toString+", "+o.toString)
 				if(prty != void and o != void) then
 					var coll : Collection<kermeta::reflection::Object>
 					var collToSet : Collection<kermeta::reflection::Object>
 					coll ?= o
 					collToSet ?= prty
 					if(coll != void and collToSet != void) then
-						//stdio.writeln("  unsetProperty: Collection")
 						var realColl : Collection<kermeta::reflection::Object>
 						realColl ?= getRealObject(o,true)
 						realColl.each{o |

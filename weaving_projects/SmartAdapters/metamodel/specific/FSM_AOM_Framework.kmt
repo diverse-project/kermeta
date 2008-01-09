@@ -65,11 +65,6 @@ package smartadapters
 			
 			method execute(): Void is do
 				adapter.cloneAgain(clonedState, StateToClone, isUnique)
-				var real : FSM::State
-				real ?= adapter.getRealObject(StateToClone,false)
-				stdio.writeln("StateToClone "+real.name+"("+real.toString+")")
-				real ?= adapter.getRealObject(clonedState,false)
-				stdio.writeln("clonedState "+real.name+"("+real.toString+")")
 			end					
 		}
 
@@ -163,33 +158,12 @@ package smartadapters
 				tempTransition ?= adapter.getRealObject(TransitionToSet,false)
 				
 				//setting properties of the real object to set
-				/*stdio.writeln("   source: "+refsource.name+" "+refsource.toString)
-				stdio.writeln("   target: "+reftarget.name+" "+reftarget.toString)
-				*/
 				tempTransition.source ?= 
 					adapter.setSingleProperty(refsource, tempTransition.source)
 				tempTransition.target ?= 
 					adapter.setSingleProperty(reftarget, tempTransition.target)	
 				//tempTransition.container ?= 
 					//adapter.setSingleProperty(reftarget, tempTransition.target)
-				
-				/*adapter.clone.keys().each{k |
-					var s : pattern::FSM::State 
-					var real : FSM::State
-					s ?= k
-					real ?= adapter.clone.getValue(k)
-					if (s != void and real != void) then
-						stdio.writeln("clone: "+s.name+" -> "+real.name+" ("+real.toString+")")
-					end	
-				}
-				
-				var realSource : FSM::State
-				realSource ?= adapter.setSingleProperty(refsource, tempTransition.source)
-				var realTarget : FSM::State
-				realTarget ?= adapter.setSingleProperty(reftarget, tempTransition.target)
-				stdio.writeln("   real source: "+realSource.name+" "+realSource.toString)
-				stdio.writeln("   real target: "+realTarget.name+" "+realSource.toString)
-				*/
 			end			
 		}
 		
