@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.4 2007-12-21 14:25:12 cfaucher Exp $
+/* $Id: Compiler.java,v 1.5 2008-01-09 13:52:24 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -180,7 +180,10 @@ public class Compiler extends Generator {
 		genModel.setTestsDirectory("");
 		// Icons will be not generated
 		genModel.setCreationIcons(false);
-		// The use of Java generics is enabled
+		// Use of dynamic templates like  for the implementation of the getter/setter of derived properties
+		genModel.setDynamicTemplates(true);
+		genModel.setTemplateDirectory("platform:/plugin/org.kermeta.compiler.generator.emftemplates/templates");
+		// Use of Java generics is enabled
 		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
 		genModel.setCopyrightText("Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org");
 	}

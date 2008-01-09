@@ -12,7 +12,7 @@
  *
  * </copyright>
  *
- * $Id: Generator.java,v 1.1 2007-10-17 08:56:19 cfaucher Exp $
+ * $Id: Generator.java,v 1.2 2008-01-09 13:46:58 cfaucher Exp $
  */
 package org.kermeta.compiler;
 
@@ -80,7 +80,7 @@ public class Generator extends CodeGen
   /**
    * This supports a non-headless invocation.
    * The variable VABASE or ECLIPSE.
-   * @deprecated It is not possible to generate code withtout using Eclipse.  If
+   * @deprecated It is not possible to generate code without using Eclipse.  If
    * you are invoking this method, you should instantiate a Generator and call
    * {@link #run(Object)}.  This method will be removed in a future release.
    */
@@ -95,12 +95,11 @@ public class Generator extends CodeGen
   public void printGenerateUsage()
   {
     System.out.println("Usage arguments:");
-    System.out.println("  [-platform | -data] <workspace-directory> ");
-    System.out.println("  [-projects ] <project-root-directory> ");
+    System.out.println("  [-projects <project-root-directory>]");
     System.out.println("  [-dynamicTemplates] [-forceOverwrite | -diff]");
     System.out.println("  [-generateSchema] [-nonNLSMarkers]");
     System.out.println("  [-codeFormatting { default | <profile-file> } ]");
-    System.out.println("  [-model] [-edit] [-editor]");
+    System.out.println("  [-model] [-edit] [-editor] [-tests]");
     System.out.println("  [-autoBuild <true|false>]");
     System.out.println("  <genmodel-file>");
     System.out.println("  [ <target-root-directory> ]");
@@ -172,7 +171,7 @@ public class Generator extends CodeGen
                   resourceSet.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap()); 
                   URI ecoreURI = URI.createFileURI(ecorePath.toString());
                   Resource resource = resourceSet.getResource(ecoreURI, true);
-                  
+                  // Kermeta compiler customization
                   List<EPackage> availablePackageList = new ArrayList<EPackage>();
                   
                   for(org.eclipse.emf.ecore.EObject eObj : resource.getContents()) {
@@ -194,6 +193,7 @@ public class Generator extends CodeGen
                   resourceSet.getResources().add(genModelResource);
                   genModel.setModelDirectory("/TargetProject/src");
                   genModel.getForeignModel().add(ecorePath.toString());
+                  // Kermeta compiler customization
                   genModel.initialize(availablePackageList/*Collections.singleton(ePackage)*/);
                   GenPackage genPackage = genModel.getGenPackages().get(0);
                   genModel.setModelName(genModelURI.trimFileExtension().lastSegment());
@@ -867,6 +867,9 @@ public class Generator extends CodeGen
               CodeGenUtil.EclipseUtil.addClasspathEntries(classpathEntries, "ECLIPSE_CORE_RESOURCES", "org.eclipse.core.resources");
               CodeGenUtil.EclipseUtil.addClasspathEntries(classpathEntries, "EMF_COMMON", "org.eclipse.emf.common");
               CodeGenUtil.EclipseUtil.addClasspathEntries(classpathEntries, "EMF_ECORE", "org.eclipse.emf.ecore");
+              
+              // Kermeta compiler customization
+              CodeGenUtil.EclipseUtil.addClasspathEntries(classpathEntries, "KERMETA_COMPILER", "org.kermeta.compiler.generator.emftemplates");
   
               if ((style & EMF_XML_PROJECT_STYLE) != 0)
               {
