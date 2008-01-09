@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.16 2007-10-29 16:12:04 ftanguy Exp $
+/* $Id: PropertyChecker.java,v 1.17 2008-01-09 14:21:02 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -15,7 +15,6 @@
  */
 package fr.irisa.triskell.kermeta.constraintchecker;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.kermeta.io.KermetaUnit;
@@ -23,6 +22,7 @@ import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
@@ -51,6 +51,8 @@ public class PropertyChecker extends AbstractChecker {
 		"A composite property cannot have at its opposite property a multiplicity  greater than 1 : " +
 		"change the multiplicity or do not use composition"+
 		" on the other end of the association. ";
+	public static final String NOT_USABLE_ATTRIBUTE_WARNING = "the attribute cannot be used because the target object has a constraint " +
+			"that force it to be contained by another kind of object";
 	public static final String ISCOMPOSITE_ERROR = "Double composition problem (container contained by its content)";
 	public static final String ISDERIVED_ERROR = "If property.isDerived is false than property.getterBody and property.setterBody must be void ";
 	
@@ -80,7 +82,8 @@ public class PropertyChecker extends AbstractChecker {
 			checkPropertyIsUnique() &&
 			checkPropertyIsDerived() &&
 			checkPropertyOpposite() && 
-			checkPropertiesConformity()
+			checkPropertiesConformity() &&
+			checkAttributeIsUsable()
 			;
 		return new Boolean(result);
 	}
@@ -278,6 +281,39 @@ public class PropertyChecker extends AbstractChecker {
 			 }
 		 }
 		 return result;
+	 }
+	 
+	 /**
+	  * Checks if on the target object it exists a link that declares a multiplicity 1 for an agregation which is not this property
+		then we have an error
+	  * @param property
+	  * @return
+	  */
+	 private boolean checkAttributeIsUsable(){
+		 boolean result = true;
+		 if(property.isIsComposite()){
+			 // if on the target object it exists a link that declares a multiplicity 1 for an agregation which is not this property
+			 // then we have an error
+			 Type type = property.getType();
+			 if(type instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+				 fr.irisa.triskell.kermeta.language.structure.Class ctype = ( fr.irisa.triskell.kermeta.language.structure.Class)type;
+				 ClassDefinition cd = (ClassDefinition)ctype.getTypeDefinition();
+				 for(Property p : ClassDefinitionHelper.getAllPropertiesWithOpposite(cd)){
+					 if(p.getLower() == 1 && p.getUpper() == 1){
+						 if(p.getOpposite() != property) {
+							 builder.warning("Property " + property.getName() + " cannot be used because its target " + cd.getName() +
+							 		" is already contained in a mandatory composition " + new KM2KMTPrettyPrinter().ppSimplifiedPropertyInContext(p) +
+							 		"\nyour model will be incorrect by construction !", 
+							 	property );
+							 
+							 result = false;
+						 }
+					 }
+				 }
+			 }
+		 }
+		 return result;
+		 
 	 }
 	 
 }
