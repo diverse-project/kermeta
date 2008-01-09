@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.25 2008-01-08 17:04:54 dvojtise Exp $
+/* $Id: OperationChecker.java,v 1.26 2008-01-09 15:36:31 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -17,20 +17,16 @@ package fr.irisa.triskell.kermeta.constraintchecker;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
@@ -40,7 +36,6 @@ import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.PrimitiveTypeHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
-import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
@@ -275,70 +270,6 @@ public class OperationChecker extends AbstractChecker {
 	}
 	
 	/**
-	 * 
-	 * Check if one operation with the same name, same parameters, same returned type and abstract exist in base classes.
-	 * 
-	 * @param operation
-	 * @param classDefinition
-	 * @return
-	 */
-/*	private boolean checkAspectOperation(Operation operation) {
-		Set <Operation> ops = ClassDefinitionHelper.getAllOperations(classDefinition);
-		for (Operation op : ops) {
-			if ( operation != op ) {		
-				
-				if ( operation.getName().equals(op.getName()) )
-					return false;
-
-				ClassDefinition possibleBaseClass = (ClassDefinition) op.eContainer();
-				Set<TypeDefinition> baseClasses = ClassDefinitionHelper.getAllBaseClasses(classDefinition);
-				if ( baseClasses.contains(possibleBaseClass) ) {
-					boolean isAbstract = checkOperationIsAbstract(op);
-					
-					
-					
-					return checkOperationIsAbstract(op) && ! checkOperationSignature(operation);
-				}
-			}
-		}
-		return false;
-	}*/
-	
-	private boolean isOperationAspectOverloadingCorrect(Operation operation, Operation operationToCompare) {
-		/*
-		 * 
-		 * Check if the operation to compare comes from a base class.
-		 * 
-		 */
-		ClassDefinition possibleBaseClass = (ClassDefinition) operationToCompare.eContainer();
-		Set<TypeDefinition> baseClasses = ClassDefinitionHelper.getAllBaseClasses(classDefinition);
-		if ( baseClasses.contains(possibleBaseClass) ) {
-	
-			///if ( checkOperationIsAbstract() )
-			
-			/*if ( 
-					// checking if abstract
-					operationToCompare.isIsAbstract() 
-					// check the name
-					&& operationToCompare.getName().equals(operation.getName()) 
-					// Check the returned type
-					&& TypeEqualityChecker.equals( operationToCompare.getType(), operation.getType() ) ) {
-					
-				for ( Parameter currentParameter : (List<Parameter>) operationToCompare.getOwnedParameter() ) {
-					Parameter parameter = OperationHelper.getParameter(operation, currentParameter.getName());
-					if ( ! TypeEqualityChecker.equals(parameter.getType(), currentParameter.getType()) )
-						return false;
-				}
-					
-				return true;
-					
-			}*/
-			
-		}
-		return false;
-	}
-	
-	/**
 	 * Compare the parameter types of op1 and op2, return true if they are identical,
 	 * false otherwise 
 	 */
@@ -455,6 +386,11 @@ public class OperationChecker extends AbstractChecker {
 		String message = op1.getOwningClass().getName()+"." + op1.getName() + ": ReturnType ";
 		Type t1 = op1.getType(); Type t2 = op2.getType();
 		if (isVoidType(t1) && isVoidType(t2)) isConform = true;
+		else if ((isVoidType(t1) && !isVoidType(t2)) || (!isVoidType(t1) && isVoidType(t2))){
+			// as kermeta is invariant, the return type mus be the same even if one of them is Void (which is usually conform to everything)
+			message += " uses incompatible return types ";
+			isConform = false;
+		}
 		// else if (op1.getType()==null && op2.getType()==null)  isConform = true; 
 		else if (op1.getType()==null || op2==null || op2.getType()==null) 
 		{
