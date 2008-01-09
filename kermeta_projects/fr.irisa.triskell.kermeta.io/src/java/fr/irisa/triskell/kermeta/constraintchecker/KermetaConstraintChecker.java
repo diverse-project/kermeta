@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.16 2007-12-06 14:08:38 ftanguy Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.17 2008-01-09 14:20:03 dvojtise Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -11,7 +11,6 @@
 
 package fr.irisa.triskell.kermeta.constraintchecker;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,7 +25,6 @@ import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
-import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
