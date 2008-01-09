@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.74 2008-01-09 16:29:39 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.75 2008-01-09 16:37:39 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -520,8 +520,10 @@ public class EMF2Runtime {
 	    		errmsg += "EMF had trouble finding the package ("+ type_name +"), this typically occurs when the uri used in the model is not correctly registered. You must either : register your metamodel, or use a nsuri that correspond to a physical location ex: platform:/resource/yourproject/yourmm.ecore";
 	    	}
 	    	internalLog.error(errmsg);
-	    	// Stop after the first error
-        	unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
+	    	if(!ignoreLoadErrors){ // maybe we can 
+	    		// Stop after the first error
+	    		unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
+	    	}
         }
         return ftype;
 	}
@@ -916,8 +918,16 @@ public class EMF2Runtime {
 	    	{	
 	    		Type ftype = this.getTypeFromName(kermeta_metaclass_name);
 	    		// fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;
-	    		result = unit.getRuntimeMemory().getRuntimeObjectForFObject(ftype);
-	    		this.type_cache.put(metaclass_name, result);
+	    		
+	    		if (this.ignoreLoadErrors && ftype == null){
+	    			// we had to ignore this kind of object return a Void Object ...
+	    			result = unit.getRuntimeMemory().getRuntimeObjectForFObject(ftype);
+	    		}
+	    		else{
+	    			// normal case
+	    			result = unit.getRuntimeMemory().getRuntimeObjectForFObject(ftype);
+	    			this.type_cache.put(metaclass_name, result);
+	    		}
 	    	}
 	    }
 	    else if (this.type_cache.containsKey(metaclass_name)) 
