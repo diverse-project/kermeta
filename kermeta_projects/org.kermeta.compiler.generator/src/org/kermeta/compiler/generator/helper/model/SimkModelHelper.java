@@ -1,4 +1,4 @@
-/*$Id: SimkModelHelper.java,v 1.1 2007-12-21 14:24:21 cfaucher Exp $
+/*$Id: SimkModelHelper.java,v 1.2 2008-01-10 16:10:32 cfaucher Exp $
 * Project : org.kermeta.compiler
 * File : 	HelperModel.java
 * License : EPL
@@ -62,13 +62,16 @@ public class SimkModelHelper {
 	 */
 	public static SIMKModel getSIMKModel(IFile file)
     {
-		// Get a Trek structure
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(SIMK_EXT,new XMIResourceFactoryImpl());
-		ResourceSet resource_set = new ResourceSetImpl();
-		URI u = URI.createURI(file.getFullPath().toString());
-    	u = new URIConverterImpl().normalize(u);
-		Resource resource = resource_set.getResource(u, true);
-		return (SIMKModel) resource.getContents().get(0);
+		if(file.exists()) {
+			// Get a Trek structure
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(SIMK_EXT,new XMIResourceFactoryImpl());
+			ResourceSet resource_set = new ResourceSetImpl();
+			URI u = URI.createURI(file.getFullPath().toString());
+	    	u = new URIConverterImpl().normalize(u);
+			Resource resource = resource_set.getResource(u, true);
+			return (SIMKModel) resource.getContents().get(0);
+		}
+		return null;
     }
 }
 

@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.5 2008-01-08 09:35:13 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.6 2008-01-10 16:10:32 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -35,12 +35,7 @@ import org.eclipse.emf.codegen.jet.JETEmitter;
 import org.eclipse.emf.codegen.jet.JETException;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Monitor;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EParameter;
 import org.kermeta.compiler.generator.internal.GeneratorPlugin;
 import org.kermeta.generator.AbstractGenerator;
 import org.kermeta.generator.jet.DefaultJETEmitter;
@@ -51,7 +46,6 @@ import org.kermeta.simk.StaticMethod;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
-import fr.irisa.triskell.kermeta.language.structure.Tag;
 
 /**
  * This class is the Entry point of the generation for Kermeta compiler's helpers
@@ -115,10 +109,12 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		generateStaticPackages(project, pathProject);
 		monitor.worked(1);
 
-		generateHelpers(simkModel, pathProject, monitor);
-
-		if(this.simkModel!=null) {
-			generateHelperModel(simkModel, pathProject, monitor);
+		if( this.simkModel!=null ) {
+			generateHelpers(this.simkModel, pathProject, monitor);
+		}
+		
+		if( this.simkModel!=null ) {
+			generateHelperModel(this.simkModel, pathProject, monitor);
 		}
 		
 		return project;
@@ -291,6 +287,14 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		}
 	}
 
+	/**
+	 * Generate the Runner classes, a Runner class is a class coming from an Operation in Kermeta might be a main method in Java
+	 * 
+	 * @param simkConf
+	 * @param projectPath
+	 * @throws JETException
+	 * @throws CoreException
+	 */
 	private void generateRunner(SIMKModel simkConf, IPath projectPath)
 			throws JETException, CoreException {
 		//for (GenPackage genPackage : conf.getGenPackages()) {
@@ -317,6 +321,14 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 
 	}
 
+	/**
+	 * Generate the .launch file corresponding to the mainClass and mainOperation that are defined into the header of a Kermeta file
+	 * 
+	 * @param simkConf
+	 * @param projectPath
+	 * @throws JETException
+	 * @throws CoreException
+	 */
 	private void generateLauncher(SIMKModel simkConf, IPath projectPath)
 			throws JETException, CoreException {
 		
