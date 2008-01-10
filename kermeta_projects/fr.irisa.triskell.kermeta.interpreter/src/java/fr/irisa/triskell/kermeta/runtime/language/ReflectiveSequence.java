@@ -16,6 +16,8 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 
 public class ReflectiveSequence {
 
@@ -39,7 +41,7 @@ public class ReflectiveSequence {
 	 * extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.removeAt(index)
 	 */
 	public static RuntimeObject removeAt(RuntimeObject self, RuntimeObject param0) {
-		ReflectiveCollection.remove(self, param0);
+		ReflectiveCollection.remove(self, Collection.getArrayList(self).get(Integer.getValue(param0)));
 		return self.getFactory().getMemory().voidINSTANCE;
 	}
 		
