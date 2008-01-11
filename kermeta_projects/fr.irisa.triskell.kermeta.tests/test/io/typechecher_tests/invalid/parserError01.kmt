@@ -1,0 +1,25 @@
+/* $Id: parserError01.kmt,v 1.1 2008-01-11 15:46:00 dvojtise Exp $
+ * Creation date: January 10, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ *  the parser must fail on that file
+ * see bug #4768
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+xxx
+
+require kermeta
+class Main 
+{
+	operation main xxxxx () : Void is do 
+		;
+	end
+}
+
+sdflk 
