@@ -1,5 +1,5 @@
 /**
- * $Id: StaticMethod.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: StaticMethod.java,v 1.4 2008-01-11 14:28:08 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,13 +7,15 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: StaticMethod.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: StaticMethod.java,v 1.4 2008-01-11 14:28:08 cfaucher Exp $
  */
 package org.kermeta.simk;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,6 +32,8 @@ import org.eclipse.emf.ecore.EOperation;
  *   <li>{@link org.kermeta.simk.StaticMethod#getBody <em>Body</em>}</li>
  *   <li>{@link org.kermeta.simk.StaticMethod#getUsages <em>Usages</em>}</li>
  *   <li>{@link org.kermeta.simk.StaticMethod#getParentMethod <em>Parent Method</em>}</li>
+ *   <li>{@link org.kermeta.simk.StaticMethod#getParentReference <em>Parent Reference</em>}</li>
+ *   <li>{@link org.kermeta.simk.StaticMethod#getParentAttribute <em>Parent Attribute</em>}</li>
  * </ul>
  * </p>
  *
@@ -203,6 +207,58 @@ public interface StaticMethod extends SMNamedElement {
 	 * @generated
 	 */
 	void setParentMethod(EOperation value);
+
+	/**
+	 * Returns the value of the '<em><b>Parent Reference</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parent Reference</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parent Reference</em>' reference.
+	 * @see #setParentReference(EReference)
+	 * @see org.kermeta.simk.SimkPackage#getStaticMethod_ParentReference()
+	 * @model
+	 * @generated
+	 */
+	EReference getParentReference();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.simk.StaticMethod#getParentReference <em>Parent Reference</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Parent Reference</em>' reference.
+	 * @see #getParentReference()
+	 * @generated
+	 */
+	void setParentReference(EReference value);
+
+	/**
+	 * Returns the value of the '<em><b>Parent Attribute</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parent Attribute</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parent Attribute</em>' reference.
+	 * @see #setParentAttribute(EAttribute)
+	 * @see org.kermeta.simk.SimkPackage#getStaticMethod_ParentAttribute()
+	 * @model
+	 * @generated
+	 */
+	EAttribute getParentAttribute();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.simk.StaticMethod#getParentAttribute <em>Parent Attribute</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Parent Attribute</em>' reference.
+	 * @see #getParentAttribute()
+	 * @generated
+	 */
+	void setParentAttribute(EAttribute value);
 
 	/**
 	 * <!-- begin-user-doc -->

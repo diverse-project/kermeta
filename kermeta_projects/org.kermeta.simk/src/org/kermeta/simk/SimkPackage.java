@@ -1,5 +1,5 @@
 /**
- * $Id: SimkPackage.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.4 2008-01-11 14:28:08 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkPackage.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.4 2008-01-11 14:28:08 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -222,13 +222,31 @@ public interface SimkPackage extends EPackage {
 	int STATIC_METHOD__PARENT_METHOD = SM_NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Parent Reference</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_METHOD__PARENT_REFERENCE = SM_NAMED_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Parent Attribute</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_METHOD__PARENT_ATTRIBUTE = SM_NAMED_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>Static Method</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD_FEATURE_COUNT = SM_NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int STATIC_METHOD_FEATURE_COUNT = SM_NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.simk.impl.SMContextImpl <em>SM Context</em>}' class.
@@ -592,6 +610,28 @@ public interface SimkPackage extends EPackage {
 	EReference getStaticMethod_ParentMethod();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.simk.StaticMethod#getParentReference <em>Parent Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Parent Reference</em>'.
+	 * @see org.kermeta.simk.StaticMethod#getParentReference()
+	 * @see #getStaticMethod()
+	 * @generated
+	 */
+	EReference getStaticMethod_ParentReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.simk.StaticMethod#getParentAttribute <em>Parent Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Parent Attribute</em>'.
+	 * @see org.kermeta.simk.StaticMethod#getParentAttribute()
+	 * @see #getStaticMethod()
+	 * @generated
+	 */
+	EReference getStaticMethod_ParentAttribute();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.simk.SMContext <em>SM Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -883,6 +923,22 @@ public interface SimkPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STATIC_METHOD__PARENT_METHOD = eINSTANCE.getStaticMethod_ParentMethod();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent Reference</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATIC_METHOD__PARENT_REFERENCE = eINSTANCE.getStaticMethod_ParentReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent Attribute</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATIC_METHOD__PARENT_ATTRIBUTE = eINSTANCE.getStaticMethod_ParentAttribute();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.simk.impl.SMContextImpl <em>SM Context</em>}' class.

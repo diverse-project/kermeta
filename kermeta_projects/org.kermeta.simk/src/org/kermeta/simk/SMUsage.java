@@ -1,5 +1,5 @@
 /**
- * $Id: SMUsage.java,v 1.4 2008-01-09 14:12:57 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.5 2008-01-11 14:28:08 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMUsage.java,v 1.4 2008-01-09 14:12:57 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.5 2008-01-11 14:28:08 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -53,7 +53,15 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LAUNCHER(2, "Launcher", "Launcher");
+	LAUNCHER(2, "Launcher", "Launcher"), /**
+	 * The '<em><b>Derived Property</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DERIVED_PROPERTY_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	DERIVED_PROPERTY(3, "DerivedProperty", "DerivedProperty");
 
 	/**
 	 * The '<em><b>Function Type</b></em>' literal value.
@@ -101,6 +109,21 @@ public enum SMUsage implements Enumerator {
 	public static final int LAUNCHER_VALUE = 2;
 
 	/**
+	 * The '<em><b>Derived Property</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Derived Property</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #DERIVED_PROPERTY
+	 * @model name="DerivedProperty"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DERIVED_PROPERTY_VALUE = 3;
+
+	/**
 	 * An array of all the '<em><b>SM Usage</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -111,6 +134,7 @@ public enum SMUsage implements Enumerator {
 			FUNCTION_TYPE,
 			RUNNER,
 			LAUNCHER,
+			DERIVED_PROPERTY,
 		};
 
 	/**
@@ -164,6 +188,7 @@ public enum SMUsage implements Enumerator {
 			case FUNCTION_TYPE_VALUE: return FUNCTION_TYPE;
 			case RUNNER_VALUE: return RUNNER;
 			case LAUNCHER_VALUE: return LAUNCHER;
+			case DERIVED_PROPERTY_VALUE: return DERIVED_PROPERTY;
 		}
 		return null;
 	}

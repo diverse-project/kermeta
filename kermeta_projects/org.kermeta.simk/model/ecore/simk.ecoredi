@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_yW7VMZgoEdy6esKMCSUVgg" activeDiagram="_yXFGMJgoEdy6esKMCSUVgg">
   <model href="simk.ecore#/"/>
-  <diagrams xmi:id="_yXFGMJgoEdy6esKMCSUVgg" position="0,0" size="100,100" name="simk" viewport="0,272">
-    <property xmi:id="_ylzesJgoEdy6esKMCSUVgg" key="pageFormatName" value="A4"/>
-    <property xmi:id="_ylzesZgoEdy6esKMCSUVgg" key="diagramWidth" value="840"/>
-    <property xmi:id="_ylzespgoEdy6esKMCSUVgg" key="diagramHeight" value="1188"/>
+  <diagrams xmi:id="_yXFGMJgoEdy6esKMCSUVgg" position="0,0" size="100,100" name="simk" viewport="0,0">
+    <property xmi:id="_ylzesJgoEdy6esKMCSUVgg" key="pageFormatName" value="A3"/>
+    <property xmi:id="_ylzesZgoEdy6esKMCSUVgg" key="diagramWidth" value="1188"/>
+    <property xmi:id="_ylzespgoEdy6esKMCSUVgg" key="diagramHeight" value="1680"/>
     <property xmi:id="_ylzes5goEdy6esKMCSUVgg" key="pageMarginName" value="Small Margin"/>
     <property xmi:id="_ylzetJgoEdy6esKMCSUVgg" key="diagramTopMargin" value="20"/>
     <property xmi:id="_ylzetZgoEdy6esKMCSUVgg" key="diagramBottomMargin" value="20"/>
     <property xmi:id="_ylzetpgoEdy6esKMCSUVgg" key="diagramLeftMargin" value="20"/>
     <property xmi:id="_ylzet5goEdy6esKMCSUVgg" key="diagramRightMargin" value="20"/>
-    <property xmi:id="_ylzeuJgoEdy6esKMCSUVgg" key="orientation" value="landscape"/>
+    <property xmi:id="_ylzeuJgoEdy6esKMCSUVgg" key="orientation" value="portrait"/>
     <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_yXOQIJgoEdy6esKMCSUVgg" presentation="org.topcased.modeler.ecore.ediagram">
       <element href="simk.ecore#/"/>
     </semanticModel>
@@ -38,7 +38,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_vFaEoJgpEdy6esKMCSUVgg" position="182,141" size="281,-1">
-      <anchorage xmi:id="_-ASBIJgsEdy6esKMCSUVgg" graphEdge="_-ASBIZgsEdy6esKMCSUVgg _AWBwgJgtEdy6esKMCSUVgg _vCXrIZlPEdyYHaXNQh-Plg _5VedMJlQEdyYHaXNQh-Plg _9qYLcJlREdyYHaXNQh-Plg _PiZKoJ9MEdy6ndC8pZladA _BzE9IZ9bEdy6ndC8pZladA"/>
+      <anchorage xmi:id="_-ASBIJgsEdy6esKMCSUVgg" graphEdge="_-ASBIZgsEdy6esKMCSUVgg _AWBwgJgtEdy6esKMCSUVgg _vCXrIZlPEdyYHaXNQh-Plg _5VedMJlQEdyYHaXNQh-Plg _9qYLcJlREdyYHaXNQh-Plg _PiZKoJ9MEdy6ndC8pZladA _BzE9IZ9bEdy6ndC8pZladA _YbgmQcBPEdyuU9tJf-uqVA _YuvEQcBPEdyuU9tJf-uqVA"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_vFaEoZgpEdy6esKMCSUVgg" presentation="default">
         <element href="simk.ecore#//StaticMethod"/>
       </semanticModel>
@@ -260,7 +260,7 @@
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_vChcIJlPEdyYHaXNQh-Plg" id="nameLabel" uDistance="26" vDistance="-4"/>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_vChcIZlPEdyYHaXNQh-Plg" id="cardinalityLabel" uDistance="5" vDistance="-8"/>
-      <waypoints>[-196, -9, 40, -263]</waypoints>
+      <waypoints>[-225, -9, 11, -263]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_0tD9EJlPEdyYHaXNQh-Plg" anchor="_vCXrIJlPEdyYHaXNQh-Plg _8W8EwJgsEdy6esKMCSUVgg">
       <property xmi:id="_kiS1oJmyEdyVibShhIQGjA" key="router" value="Rectilinear"/>
@@ -268,7 +268,7 @@
       <waypoints>[-46, -325, -428, 57]</waypoints>
       <waypoints>[382, -325, 0, 57]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_nk0fAJlQEdyYHaXNQh-Plg" position="154,319" size="149,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_nk0fAJlQEdyYHaXNQh-Plg" position="111,299" size="149,-1">
       <anchorage xmi:id="_3m6poJlQEdyYHaXNQh-Plg" graphEdge="_3m6poZlQEdyYHaXNQh-Plg _EoMHkJlREdyYHaXNQh-Plg"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_nk0fAZlQEdyYHaXNQh-Plg" presentation="default">
         <element href="simk.ecore#//SMTypedElement"/>
@@ -291,7 +291,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_zwcuYJlQEdyYHaXNQh-Plg" position="224,423" size="92,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_zwcuYJlQEdyYHaXNQh-Plg" position="168,423" size="92,-1">
       <anchorage xmi:id="_4DOLIJlQEdyYHaXNQh-Plg" graphEdge="_EoMHkJlREdyYHaXNQh-Plg _5VedMJlQEdyYHaXNQh-Plg"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_zwcuYZlQEdyYHaXNQh-Plg" presentation="default">
         <element href="simk.ecore#//SMReturn"/>
@@ -312,22 +312,22 @@
     <contained xsi:type="di:GraphEdge" xmi:id="_3m6poZlQEdyYHaXNQh-Plg" anchor="_vCXrIJlPEdyYHaXNQh-Plg _3m6poJlQEdyYHaXNQh-Plg">
       <property xmi:id="_CsidEJ9NEdy6ndC8pZladA" key="router" value="Rectilinear"/>
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_3m6poplQEdyYHaXNQh-Plg" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[53, -43, -89, 56]</waypoints>
-      <waypoints>[142, -43, 0, 56]</waypoints>
+      <waypoints>[31, -53, -68, 66]</waypoints>
+      <waypoints>[99, -53, 0, 66]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_5VedMJlQEdyYHaXNQh-Plg" anchor="_-ASBIJgsEdy6esKMCSUVgg _4DOLIJlQEdyYHaXNQh-Plg">
       <property xmi:id="_U5C3kJmsEdyVibShhIQGjA" key="router" value="Rectilinear"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_5VedMZlQEdyYHaXNQh-Plg" presentation="default">
         <element href="simk.ecore#//StaticMethod/sMReturn"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" xmi:id="_5VedMplQEdyYHaXNQh-Plg" id="nameLabel" uDistance="2" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_5VedMplQEdyYHaXNQh-Plg" id="nameLabel" uDistance="-36" vDistance="-29"/>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_5VedM5lQEdyYHaXNQh-Plg" id="cardinalityLabel" uDistance="3" vDistance="-10"/>
-      <waypoints>[19, 258, 67, -5]</waypoints>
+      <waypoints>[-35, 253, 73, -1]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_EoMHkJlREdyYHaXNQh-Plg" anchor="_4DOLIJlQEdyYHaXNQh-Plg _3m6poJlQEdyYHaXNQh-Plg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_EoMHkZlREdyYHaXNQh-Plg" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -43, 42, 56]</waypoints>
-      <waypoints>[-42, -43, 0, 56]</waypoints>
+      <waypoints>[0, -53, 29, 66]</waypoints>
+      <waypoints>[0, -53, 29, 66]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_9qYLcJlREdyYHaXNQh-Plg" anchor="_-ASBIJgsEdy6esKMCSUVgg _Tal4gJgrEdy6esKMCSUVgg">
       <property xmi:id="_ATp60JlSEdyYHaXNQh-Plg" key="foregroundColor" value="0,0,255"/>
@@ -339,7 +339,7 @@
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_9qYLc5lREdyYHaXNQh-Plg" id="cardinalityLabel" uDistance="2" vDistance="-1"/>
       <waypoints>[81, 282, -139, -1]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_bYzM0JxrEdyy46-BP9uwiw" position="40,476" size="115,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_bYzM0JxrEdyy46-BP9uwiw" position="40,476" size="132,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bYzM0ZxrEdyy46-BP9uwiw" presentation="default">
         <element href="simk.ecore#//SMUsage"/>
       </semanticModel>
@@ -361,6 +361,11 @@
         <contained xsi:type="di:GraphNode" xmi:id="_SAOfwL0sEdy1y6pH3wTMsw" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_SAOfwb0sEdy1y6pH3wTMsw" presentation="default">
             <element href="simk.ecore#//SMUsage/Launcher"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_I6yrYsBEEdyuU9tJf-uqVA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_I6yrY8BEEdyuU9tJf-uqVA" presentation="default">
+            <element href="simk.ecore#//SMUsage/DerivedProperty"/>
           </semanticModel>
         </contained>
       </contained>
@@ -402,7 +407,7 @@
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_lvm-Q59NEdy6ndC8pZladA" id="cardinalityLabel" uDistance="16" vDistance="-4"/>
       <waypoints>[136, -13, 24, 247]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_AYenYJ9bEdy6ndC8pZladA" position="315,572" size="101,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_AYenYJ9bEdy6ndC8pZladA" position="436,715" size="101,-1">
       <anchorage xmi:id="_BzE9IJ9bEdy6ndC8pZladA" graphEdge="_BzE9IZ9bEdy6ndC8pZladA"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_AYenYZ9bEdy6ndC8pZladA" presentation="default">
         <element href="http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
@@ -421,11 +426,87 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_BzE9IZ9bEdy6ndC8pZladA" anchor="_-ASBIJgsEdy6esKMCSUVgg _BzE9IJ9bEdy6ndC8pZladA">
+      <property xmi:id="_jNCPIMBPEdyuU9tJf-uqVA" key="router" value="Rectilinear"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_BzE9Ip9bEdy6ndC8pZladA" presentation="default">
         <element href="simk.ecore#//StaticMethod/parentMethod"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" xmi:id="_BzE9I59bEdy6ndC8pZladA" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" xmi:id="_BzE9JJ9bEdy6ndC8pZladA" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_BzE9I59bEdy6ndC8pZladA" id="nameLabel" uDistance="12" vDistance="7"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_BzE9JJ9bEdy6ndC8pZladA" id="cardinalityLabel" uDistance="13" vDistance="-4"/>
+      <waypoints>[-12, 553, -176, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_AsqLUMBPEdyuU9tJf-uqVA" position="435,602" size="181,-1">
+      <anchorage xmi:id="_YbgmQMBPEdyuU9tJf-uqVA" graphEdge="_YbgmQcBPEdyuU9tJf-uqVA"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_AsqLUcBPEdyuU9tJf-uqVA" presentation="default">
+        <element href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_AsqLUsBPEdyuU9tJf-uqVA">
+        <property xmi:id="_AsqLU8BPEdyuU9tJf-uqVA" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_AsqLVMBPEdyuU9tJf-uqVA" presentation="default">
+          <element href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_gILXAMBPEdyuU9tJf-uqVA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_gILXAcBPEdyuU9tJf-uqVA" presentation="default">
+            <element href="http://www.eclipse.org/emf/2002/Ecore#//EReference/container"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_gILXAsBPEdyuU9tJf-uqVA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_gILXA8BPEdyuU9tJf-uqVA" presentation="default">
+            <element href="http://www.eclipse.org/emf/2002/Ecore#//EReference/resolveProxies"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_gILXBMBPEdyuU9tJf-uqVA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_gILXBcBPEdyuU9tJf-uqVA" presentation="default">
+            <element href="http://www.eclipse.org/emf/2002/Ecore#//EReference/containment"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_AsqLVcBPEdyuU9tJf-uqVA">
+        <property xmi:id="_AsqLVsBPEdyuU9tJf-uqVA" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_AsqLV8BPEdyuU9tJf-uqVA" presentation="default">
+          <element href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_Db5YwMBPEdyuU9tJf-uqVA" position="435,527" size="104,-1">
+      <anchorage xmi:id="_YuvEQMBPEdyuU9tJf-uqVA" graphEdge="_YuvEQcBPEdyuU9tJf-uqVA"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Db5YwcBPEdyuU9tJf-uqVA" presentation="default">
+        <element href="http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_Db5YwsBPEdyuU9tJf-uqVA">
+        <property xmi:id="_Db5Yw8BPEdyuU9tJf-uqVA" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Db5YxMBPEdyuU9tJf-uqVA" presentation="default">
+          <element href="http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_Db5YyMBPEdyuU9tJf-uqVA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Db5YycBPEdyuU9tJf-uqVA" presentation="default">
+            <element href="http://www.eclipse.org/emf/2002/Ecore#//EAttribute/iD"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_Db5YxcBPEdyuU9tJf-uqVA">
+        <property xmi:id="_Db5YxsBPEdyuU9tJf-uqVA" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Db5Yx8BPEdyuU9tJf-uqVA" presentation="default">
+          <element href="http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_YbgmQcBPEdyuU9tJf-uqVA" anchor="_-ASBIJgsEdy6esKMCSUVgg _YbgmQMBPEdyuU9tJf-uqVA">
+      <property xmi:id="_jNCPIsBPEdyuU9tJf-uqVA" key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_YbgmQsBPEdyuU9tJf-uqVA" presentation="default">
+        <element href="simk.ecore#//StaticMethod/parentReference"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_YbgmQ8BPEdyuU9tJf-uqVA" id="nameLabel" uDistance="2" vDistance="9"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_YbgmRMBPEdyuU9tJf-uqVA" id="cardinalityLabel" uDistance="13" vDistance="-4"/>
+      <waypoints>[9, 463, -194, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_YuvEQcBPEdyuU9tJf-uqVA" anchor="_-ASBIJgsEdy6esKMCSUVgg _YuvEQMBPEdyuU9tJf-uqVA">
+      <property xmi:id="_jNCPIcBPEdyuU9tJf-uqVA" key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_YuvEQsBPEdyuU9tJf-uqVA" presentation="default">
+        <element href="simk.ecore#//StaticMethod/parentAttribute"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_YuvEQ8BPEdyuU9tJf-uqVA" id="nameLabel" uDistance="4" vDistance="7"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_YuvERMBPEdyuU9tJf-uqVA" id="cardinalityLabel" uDistance="2" vDistance="-6"/>
+      <waypoints>[32, 363, -133, -7]</waypoints>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

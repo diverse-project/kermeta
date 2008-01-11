@@ -1,5 +1,5 @@
 /**
- * $Id: StaticMethodItemProvider.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: StaticMethodItemProvider.java,v 1.4 2008-01-11 14:28:10 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: StaticMethodItemProvider.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: StaticMethodItemProvider.java,v 1.4 2008-01-11 14:28:10 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -76,6 +76,8 @@ public class StaticMethodItemProvider
 			addBodyPropertyDescriptor(object);
 			addUsagesPropertyDescriptor(object);
 			addParentMethodPropertyDescriptor(object);
+			addParentReferencePropertyDescriptor(object);
+			addParentAttributePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -182,6 +184,50 @@ public class StaticMethodItemProvider
 				 getString("_UI_StaticMethod_parentMethod_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_StaticMethod_parentMethod_feature", "_UI_StaticMethod_type"),
 				 SimkPackage.Literals.STATIC_METHOD__PARENT_METHOD,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Parent Reference feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addParentReferencePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_StaticMethod_parentReference_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StaticMethod_parentReference_feature", "_UI_StaticMethod_type"),
+				 SimkPackage.Literals.STATIC_METHOD__PARENT_REFERENCE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Parent Attribute feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addParentAttributePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_StaticMethod_parentAttribute_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StaticMethod_parentAttribute_feature", "_UI_StaticMethod_type"),
+				 SimkPackage.Literals.STATIC_METHOD__PARENT_ATTRIBUTE,
 				 true,
 				 false,
 				 true,

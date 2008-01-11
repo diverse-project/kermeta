@@ -31,6 +31,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="usages" upperBound="-1"
         eType="#//SMUsage"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentMethod" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentReference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentAttribute" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SMContext">
     <eOperations name="getDeepestPackage" eType="#//SMPackage">
@@ -85,5 +87,6 @@
     <eLiterals name="FunctionType"/>
     <eLiterals name="Runner" value="1"/>
     <eLiterals name="Launcher" value="2"/>
+    <eLiterals name="DerivedProperty" value="3"/>
   </eClassifiers>
 </ecore:EPackage>
