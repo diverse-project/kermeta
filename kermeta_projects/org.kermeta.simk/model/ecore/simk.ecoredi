@@ -368,6 +368,16 @@
             <element href="simk.ecore#//SMUsage/DerivedProperty"/>
           </semanticModel>
         </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_20V7AsBREdyuU9tJf-uqVA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_20V7A8BREdyuU9tJf-uqVA" presentation="default">
+            <element href="simk.ecore#//SMUsage/PreCondition"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_7tieksBREdyuU9tJf-uqVA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_7tiek8BREdyuU9tJf-uqVA" presentation="default">
+            <element href="simk.ecore#//SMUsage/PostCondition"/>
+          </semanticModel>
+        </contained>
       </contained>
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="__NiD4Z29EdyzJrChLt9rOg" anchor="_SnCUoJgrEdy6esKMCSUVgg _TrRY0JgrEdy6esKMCSUVgg">

@@ -88,5 +88,7 @@
     <eLiterals name="Runner" value="1"/>
     <eLiterals name="Launcher" value="2"/>
     <eLiterals name="DerivedProperty" value="3"/>
+    <eLiterals name="PreCondition" value="4"/>
+    <eLiterals name="PostCondition" value="5"/>
   </eClassifiers>
 </ecore:EPackage>

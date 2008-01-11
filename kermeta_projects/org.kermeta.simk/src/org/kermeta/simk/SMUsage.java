@@ -1,5 +1,5 @@
 /**
- * $Id: SMUsage.java,v 1.5 2008-01-11 14:28:08 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.6 2008-01-11 14:33:02 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMUsage.java,v 1.5 2008-01-11 14:28:08 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.6 2008-01-11 14:33:02 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -61,7 +61,23 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DERIVED_PROPERTY(3, "DerivedProperty", "DerivedProperty");
+	DERIVED_PROPERTY(3, "DerivedProperty", "DerivedProperty"), /**
+	 * The '<em><b>Pre Condition</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PRE_CONDITION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	PRE_CONDITION(4, "PreCondition", "PreCondition"), /**
+	 * The '<em><b>Post Condition</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #POST_CONDITION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	POST_CONDITION(5, "PostCondition", "PostCondition");
 
 	/**
 	 * The '<em><b>Function Type</b></em>' literal value.
@@ -124,6 +140,36 @@ public enum SMUsage implements Enumerator {
 	public static final int DERIVED_PROPERTY_VALUE = 3;
 
 	/**
+	 * The '<em><b>Pre Condition</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Pre Condition</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #PRE_CONDITION
+	 * @model name="PreCondition"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PRE_CONDITION_VALUE = 4;
+
+	/**
+	 * The '<em><b>Post Condition</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Post Condition</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #POST_CONDITION
+	 * @model name="PostCondition"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int POST_CONDITION_VALUE = 5;
+
+	/**
 	 * An array of all the '<em><b>SM Usage</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -135,6 +181,8 @@ public enum SMUsage implements Enumerator {
 			RUNNER,
 			LAUNCHER,
 			DERIVED_PROPERTY,
+			PRE_CONDITION,
+			POST_CONDITION,
 		};
 
 	/**
@@ -189,6 +237,8 @@ public enum SMUsage implements Enumerator {
 			case RUNNER_VALUE: return RUNNER;
 			case LAUNCHER_VALUE: return LAUNCHER;
 			case DERIVED_PROPERTY_VALUE: return DERIVED_PROPERTY;
+			case PRE_CONDITION_VALUE: return PRE_CONDITION;
+			case POST_CONDITION_VALUE: return POST_CONDITION;
 		}
 		return null;
 	}
