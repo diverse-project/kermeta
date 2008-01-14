@@ -1,27 +1,23 @@
-/* $Id: parserError01.kmt,v 1.2 2008-01-14 10:50:14 dvojtise Exp $
+/* $Id: parserError02.kmt,v 1.1 2008-01-14 10:50:14 dvojtise Exp $
  * Creation date: January 10, 2008
  * License:
  * Copyright:
  * Authors:
  *  the parser must fail on that file
  * see bug #4768
- * introduce a parser error  before the tags
+ * introduce a parser error  between the tags
  */
-
-fff
-
 @mainClass "root_package::Main"
+xxx
 @mainOperation "main"
 
 
 package root_package;
 
 
-
 require kermeta
 class Main 
 {
 	operation main() : Void is do 
-		
 	end
 }
