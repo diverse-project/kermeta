@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.6 2008-01-11 15:46:49 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.7 2008-01-14 10:53:50 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -305,6 +305,42 @@ testinvalidFile("test/io/typechecher_tests/invalid","ObjectAndVoid.kmt" );
 
 public void testinvalid_parserError01() throws Exception {
 testinvalidFile("test/io/typechecher_tests/invalid","parserError01.kmt" );
+}
+
+public void testinvalid_parserError02() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","parserError02.kmt" );
+}
+
+public void testinvalid_parserError03() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","parserError03.kmt" );
+}
+
+public void testinvalid_parserError04() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","parserError04.kmt" );
+}
+
+public void testinvalid_parserError05() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","parserError05.kmt" );
+}
+
+public void testinvalid_parserError07() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","parserError07.kmt" );
+}
+
+public void testinvalid_parserError08() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","parserError08.kmt" );
+}
+
+public void testinvalid_parserError09() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","parserError09.kmt" );
+}
+
+public void testinvalid_parserError10() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","parserError10.kmt" );
+}
+
+public void testinvalid_parserError11() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","parserError11.kmt" );
 }
 
 public void testinvalid_SimpleCtrlStructs() throws Exception {
