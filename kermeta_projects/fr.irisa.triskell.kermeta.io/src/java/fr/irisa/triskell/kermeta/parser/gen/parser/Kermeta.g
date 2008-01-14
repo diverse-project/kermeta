@@ -11,7 +11,7 @@ class KermetaParser extends Parser;
 
 options {
   k=3;
-
+  defaultErrorHandler=false;
 }
 {
     private ParseError createParseError(RecognitionException ex) {
