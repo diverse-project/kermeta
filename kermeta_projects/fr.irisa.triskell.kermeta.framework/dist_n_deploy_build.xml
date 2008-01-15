@@ -1,11 +1,11 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.26 2007-12-07 01:43:06 ffleurey Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.27 2008-01-15 09:31:45 ftanguy Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="eclipse.home" location="C:/Franck/eclipse-rcp-europa-fall2-win32/eclipse"/>
+	<property name="eclipse.home" location="/home/paco/Desktop/eclipse"/>
 
 	<path id="project.class.path">
 		
@@ -18,9 +18,6 @@
   		<pathelement location="../fr.irisa.triskell.traceability.model/build/class"/>
 
 	  	<pathelement location="lib/thirdparty/log4j.jar"/>
-	  	<pathelement location="lib/thirdparty/antlr.jar"/>
-	  	<pathelement location="lib/thirdparty/ldt-core.jar"/>
-	  	<pathelement location="lib/thirdparty/emfatic-core.jar"/>
   		
 		<fileset dir="${eclipse.home}/plugins">
 		    <include name="**/org.eclipse.emf.common_*.jar"/>
@@ -37,6 +34,9 @@
 			<include name="**/org.eclipse.ui.workbench_*.jar"/>
 			<include name="**/org.eclipse.jface_*.jar"/>
 			<include name="**/org.eclipse.swt.*.jar"/>
+			<include name="**/org.eclipse.gymnast.runtime.core_*.jar"/>
+			<include name="**/org.antlr.eclipse.core_*/*.jar" />
+			<include name="**/org.antlr_*/*.jar" />
 		</fileset>		
 	</path>
 

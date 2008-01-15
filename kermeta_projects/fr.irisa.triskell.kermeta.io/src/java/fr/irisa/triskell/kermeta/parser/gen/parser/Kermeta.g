@@ -11,7 +11,7 @@ class KermetaParser extends Parser;
 
 options {
   k=3;
-  defaultErrorHandler=false;
+defaultErrorHandler=false;
 }
 {
     private ParseError createParseError(RecognitionException ex) {
@@ -654,32 +654,39 @@ postfixExp returns [ PostfixExp retVal = null ]
 { retVal = new PostfixExp(target, postfixlst); }
 ;
 
-postfixlst returns [ Postfixlst retVal = new Postfixlst() ]
+postfixlst returns [ Postfixlst retVal = null ]
 :
 { Postfix postfix = null; }
-  ( postfix=postfix { retVal.addChild(postfix); } )*
+  ( postfix=postfix )? 
+{ retVal = new Postfixlst(postfix); }
 ;
 
 postfix returns [ Postfix retVal = null ]
 :
+  ( retVal=call
+  | retVal=paramPostfix
+  )
+;
+
+call returns [ Call retVal = null ]
+:
   ( retVal=callPostfix
   | retVal=lambdaPostfix
-  | retVal=paramPostfix
   )
 ;
 
 callPostfix returns [ CallPostfix retVal = null ]
 :
-{ AtpreOp atp = null; }
-  dot:DOT name:ID ( atp=atpreOp )? 
-{ retVal = new CallPostfix(createTokenInfo(dot), createTokenInfo(name), atp); }
+{ AtpreOp atp = null; Postfix postfix = null; }
+  dot:DOT name:ID ( atp=atpreOp )? ( postfix=postfix )? 
+{ retVal = new CallPostfix(createTokenInfo(dot), createTokenInfo(name), atp, postfix); }
 ;
 
 paramPostfix returns [ ParamPostfix retVal = null ]
 :
-{ ActualParameterList parameters = null; }
-  lparen:LPAREN ( parameters=actualParameterList )? rparen:RPAREN 
-{ retVal = new ParamPostfix(createTokenInfo(lparen), parameters, createTokenInfo(rparen)); }
+{ ActualParameterList parameters = null; Call call = null; }
+  lparen:LPAREN ( parameters=actualParameterList )? rparen:RPAREN ( call=call )? 
+{ retVal = new ParamPostfix(createTokenInfo(lparen), parameters, createTokenInfo(rparen), call); }
 ;
 
 actualParameterList returns [ ActualParameterList retVal = new ActualParameterList() ]
@@ -698,9 +705,9 @@ actualParameter returns [ ActualParameter retVal = null ]
 
 lambdaPostfix returns [ LambdaPostfix retVal = null ]
 :
-{ LambdaPostfixParamLst params = null; FExpressionLst expression = null; }
-  lcurly:LCURLY params=lambdaPostfixParamLst pipe:PIPE expression=fExpressionLst rcurly:RCURLY 
-{ retVal = new LambdaPostfix(createTokenInfo(lcurly), params, createTokenInfo(pipe), expression, createTokenInfo(rcurly)); }
+{ LambdaPostfixParamLst params = null; FExpressionLst expression = null; Call call = null; }
+  lcurly:LCURLY params=lambdaPostfixParamLst pipe:PIPE expression=fExpressionLst rcurly:RCURLY ( call=call )? 
+{ retVal = new LambdaPostfix(createTokenInfo(lcurly), params, createTokenInfo(pipe), expression, createTokenInfo(rcurly), call); }
 ;
 
 lambdaPostfixParamLst returns [ LambdaPostfixParamLst retVal = new LambdaPostfixParamLst() ]
@@ -969,7 +976,7 @@ ID options { testLiterals=true; }
 : ('~')? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | DIGIT)* ;
 
 // same as ID but doesn't check for literals=true 
-UNPROTECTEDID : ('~')? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | DIGIT)* ;
+//UNPROTECTEDID : ('~')? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | DIGIT)* ;
 
 // INT_LITERAL completed on 08/04/2005
 // INT_LITERAL : (DIGIT)+ ;

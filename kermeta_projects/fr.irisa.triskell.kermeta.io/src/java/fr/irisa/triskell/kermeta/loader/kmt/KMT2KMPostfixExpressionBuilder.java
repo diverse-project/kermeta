@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.17 2008-01-04 14:17:24 dvojtise Exp $
+/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.18 2008-01-15 09:31:28 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMPostfixExpressionBuilder.java
  * License : EPL
@@ -83,6 +83,10 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 		call.setIsAtpre(callPostfix.getAtp()!=null);
 		call.setTarget(result);
 		result = call;
+		
+		if ( callPostfix.getPostfix() != null )
+			callPostfix.getPostfix().accept(this);		
+		
 		return false;
 	}
 	
@@ -122,6 +126,8 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 			}
 						
 			((CallExpression)result).getParameters().add(current_le);
+			if ( lambdaPostfix.getCall() != null )
+				lambdaPostfix.getCall().accept(this);
 			context.popContext();
 		}
 		else {
@@ -168,7 +174,15 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 			builder.error("Parameters can only be associated to a call expression.", paramPostfix);
 			return false;
 		}
-		return super.beginVisit(paramPostfix);
+		
+		if ( paramPostfix.getParameters() != null )
+			paramPostfix.getParameters().accept(this);
+		
+		if ( paramPostfix.getCall() != null )
+			paramPostfix.getCall().accept(this);
+		
+		return false;
+		//return super.beginVisit(paramPostfix);
 	}
 	
 	/**

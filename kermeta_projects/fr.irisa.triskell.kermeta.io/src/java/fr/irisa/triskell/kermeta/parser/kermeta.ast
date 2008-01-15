@@ -167,14 +167,15 @@ token unaryOp : "not" | MINUS ;
 
 sequence postfixExp : target=primitiveExpression postfixlst ;
 
-list postfixlst : postfix* ;
-abstract postfix : callPostfix | lambdaPostfix | paramPostfix;
+sequence postfixlst : (postfix)?;
+abstract postfix : call | paramPostfix;
+abstract call : callPostfix | lambdaPostfix;
 
-sequence callPostfix : DOT name=ID (atp = atpreOp)?;
-sequence paramPostfix : LPAREN (parameters=actualParameterList)? RPAREN ;
+sequence callPostfix : DOT name=ID (atp = atpreOp)? (postfix)?;//(paramPostfix)? (lambdaPostfix)?;
+sequence paramPostfix : LPAREN (parameters=actualParameterList)? RPAREN (call)?;
 list actualParameterList : p1=actualParameter (COMMA pn=actualParameter)* ;
 sequence actualParameter : expression=fExpression ;
-sequence lambdaPostfix : LCURLY params=lambdaPostfixParamLst PIPE expression=fExpressionLst RCURLY ;
+sequence lambdaPostfix : LCURLY params=lambdaPostfixParamLst PIPE expression=fExpressionLst RCURLY (call)?;
 list lambdaPostfixParamLst : p1=lambdaPostfixParam (COMMA pn=lambdaPostfixParam)* ;
 sequence lambdaPostfixParam : name=ID;
 
