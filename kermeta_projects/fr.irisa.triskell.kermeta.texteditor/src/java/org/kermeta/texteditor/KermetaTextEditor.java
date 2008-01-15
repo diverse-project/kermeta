@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaTextEditor.java,v 1.2 2007-12-17 16:49:00 gperroui Exp $
+/*$Id: KermetaTextEditor.java,v 1.3 2008-01-15 09:32:09 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaTextEditor.java
 * License : EPL
@@ -14,6 +14,7 @@ package org.kermeta.texteditor;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -324,7 +325,7 @@ public class KermetaTextEditor extends TextEditor implements Interest {
 		if ( newValue != null ) {
 			KermetaUnit currentKermetaUnit = (KermetaUnit) newValue;
 			if ( ! currentKermetaUnit.isErroneous() && currentKermetaUnit != kermetaUnit ) {
-				
+				//KermetaUnitHelper.getAllErrorsAsString(currentKermetaUnit)
 				currentKermetaUnit.setLocked(true);
 				
 				if ( kermetaUnit != null ) {
@@ -332,18 +333,21 @@ public class KermetaTextEditor extends TextEditor implements Interest {
 					IOPlugin.getDefault().unload( kermetaUnit.getUri() );
 				}
 				
-				IFile file = ((IFileEditorInput) getEditorInput()).getFile();
-				String uri = "platform:/resource" + file.getProject().getFullPath().toString() + "/" + file.getName();
-				uri = uri.substring(0, uri.length()-4) + "_text_editor_.kmt";
-				
-				currentKermetaUnit.setUri( uri );
-				kermetaUnit = currentKermetaUnit;IOPlugin.getDefault();
+				setKermetaUnit( currentKermetaUnit );
 				
 				if ( outline != null )
 					outline.update();
 			} else if ( kermetaUnit == null )
-				kermetaUnit = currentKermetaUnit;
+				setKermetaUnit( currentKermetaUnit );
 		}
+	}
+	
+	private void setKermetaUnit(KermetaUnit source) {
+		IFile file = ((IFileEditorInput) getEditorInput()).getFile();
+		String uri = "platform:/resource" + file.getProject().getFullPath().toString() + "/" + file.getName();
+		uri = uri.substring(0, uri.length()-4) + "_text_editor_.kmt";
+		source.setUri( uri );
+		kermetaUnit = source;
 	}
 	
 	@Override
@@ -368,8 +372,9 @@ public class KermetaTextEditor extends TextEditor implements Interest {
 			} catch (URIMalformedException e) {
 				e.printStackTrace();
 			}
-		} /*else {
-			final Interest interest = this;
+		} else {
+			unit.setLastTimeModified( new Date() );
+			/*final Interest interest = this;
 			UIJob job = new UIJob("") {
 				public IStatus runInUIThread(IProgressMonitor monitor) {
 					KermetaUnitHost.getInstance().declareInterest(interest, unit);
@@ -381,8 +386,8 @@ public class KermetaTextEditor extends TextEditor implements Interest {
 					return Status.OK_STATUS;
 				}
 			};
-			job.schedule();
-		}*/
+			job.schedule();*/
+		}
 
 	}	
 	
