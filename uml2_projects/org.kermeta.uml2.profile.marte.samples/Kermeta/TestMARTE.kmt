@@ -1,0 +1,38 @@
+/* $Id: $
+ * Creation date: January 11, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/UMLMARTE.ecore"
+require "HwProcessor.kmt"
+class Main
+{
+	operation main() : Void is do 
+	
+	stdio.writeln("launching the load")
+		var origModelName : kermeta::standard::String init "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/HwProcessor.xmi"
+		var mm_name : kermeta::standard::String init "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Marte_exp.ecore" 
+    	// load the given MARTE resource
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var inputResource : kermeta::persistence::EMFResource
+    	inputResource ?= inputRepository.createResource(origModelName, mm_name)
+    	stdio.writeln("resource created!")
+    	inputResource.load()
+    	stdio.writeln("model loaded !")
+    	var proc : MARTE::MARTE_DesignModel::HRM::HwLogical::HwComputing::HwProcessor
+    	proc ?= inputResource.instances.one
+    	stdio.writeln("nb of MMUs : " + proc.ownedMMUs.size.toString)
+    	proc.checkAllInvariants
+    	stdio.writeln("invariants checked !")
+	
+	end
+}

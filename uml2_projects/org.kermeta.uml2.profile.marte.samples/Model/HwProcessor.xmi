@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<HwComputing:HwProcessor xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:HwComputing="http://MARTE/MARTE_DesignModel/HwLogical/HwComputing" xsi:schemaLocation="http://MARTE/MARTE_DesignModel/HwLogical/HwComputing ../../model/ecore/Marte_exp.ecore#/0/MARTE_DesignModel/HRM/HwLogical/HwComputing">
+  <ownedISAs/>
+  <caches/>
+  <ownedMMUs/>
+  <ownedMMUs/>
+  <ownedMMUs/>
+</HwComputing:HwProcessor>

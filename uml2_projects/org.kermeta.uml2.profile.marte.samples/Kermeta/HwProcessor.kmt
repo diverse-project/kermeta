@@ -1,0 +1,20 @@
+/* $Id: $
+ * Creation date: January 12, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+
+package MARTE::MARTE_DesignModel::HRM::HwLogical::HwComputing;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/UMLMARTE.ecore"
+
+aspect class HwProcessor
+{
+	inv maxHwMMU is do
+		self.ownedMMUs.size <= 2
+	end
+}
