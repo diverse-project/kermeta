@@ -106,7 +106,7 @@ class TestOpposites inherits kermeta::kunit::TestCase {
 	
 		a.b1star.add(b1)
 		a.b1star.add(b2)
-		a.b1star.remove()(b2)
+		a.b1star.remove(b2)
 		
 		assert(a.b1star.size == 1)
 		assert(a.b1star.contains(b1))
