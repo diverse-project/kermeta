@@ -1,4 +1,4 @@
-/* $Id: RunnerPlugin.java,v 1.20 2007-12-05 10:46:02 cfaucher Exp $
+/* $Id: RunnerPlugin.java,v 1.21 2008-01-17 10:06:02 ftanguy Exp $
  * Project: Kermeta.runner
  * File: runner.java
  * License: EPL
@@ -157,7 +157,7 @@ public class RunnerPlugin extends AbstractUIPlugin
 				{
 					shell.getDisplay().syncExec(new DisplayErrorThread(shell, message,status));
 				}
-				return null;
+				return Status.OK_STATUS;
 			}
 		};
 		job.schedule();
