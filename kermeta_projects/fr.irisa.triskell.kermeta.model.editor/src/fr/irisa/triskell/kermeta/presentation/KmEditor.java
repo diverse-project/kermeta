@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmEditor.java,v 1.7 2007-10-02 15:15:59 ftanguy Exp $
+ * $Id: KmEditor.java,v 1.8 2008-01-17 16:02:17 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -936,7 +936,7 @@ public class KmEditor
 		// Assumes that the input is a file object.
 		//
 		IFileEditorInput modelFile = (IFileEditorInput)getEditorInput();
-		URI resourceURI = URI.createPlatformResourceURI(modelFile.getFile().getFullPath().toString());
+		URI resourceURI = URI.createPlatformResourceURI(modelFile.getFile().getFullPath().toString(), true);
 		Exception exception = null;
 		Resource resource = null;
 		
