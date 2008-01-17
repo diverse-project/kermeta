@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.11 2008-01-04 14:21:05 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.12 2008-01-17 10:38:44 ftanguy Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -937,7 +937,40 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.StringLiteral)
 	 */
 	public Object visitStringLiteral(StringLiteral node) {
-		return "\"" + node.getValue().replace("\"", "\\\"") +"\"";
+		String value = "\"";
+		/*
+		 * 
+		 * We must be carefull about special characters.
+		 * 
+		 */
+		int size = node.getValue().length();
+		for ( int i = 0; i < size; i++ ) {
+			char c = node.getValue().charAt(i);
+			switch (c) {
+			case '\n' :
+				value += "\\n";
+				break;
+			case '"' :
+				value += "\\\"";
+				break;
+			case '\t' :
+				value += "\\t";
+				break;
+			case '\r' :
+				value += "\\r";
+				break;
+			case '\\' :
+				value += "\\\\";
+				break;
+			default :
+				value += c;
+				break;
+			}
+		}
+		
+		value += "\"";
+		return value;	
+//		return "\"" + node.getValue().replace("\"", "\\\"") +"\"";
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeLiteral)
