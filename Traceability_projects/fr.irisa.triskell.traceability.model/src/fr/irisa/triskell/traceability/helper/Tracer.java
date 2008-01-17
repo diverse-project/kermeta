@@ -1,4 +1,4 @@
-/* $Id: Tracer.java,v 1.8 2007-12-17 14:07:43 ftanguy Exp $
+/* $Id: Tracer.java,v 1.9 2008-01-17 16:01:05 cfaucher Exp $
  * Project    : fr.irisa.triskell.traceability.model
  * File       : Tracer.java
  * License    : EPL
@@ -14,11 +14,9 @@ package fr.irisa.triskell.traceability.helper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -30,10 +28,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.traceability.ModelReference;
-import fr.irisa.triskell.traceability.TraceModel;
 import fr.irisa.triskell.traceability.Reference;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.Trace;
+import fr.irisa.triskell.traceability.TraceModel;
 import fr.irisa.triskell.traceability.TraceabilityFactory;
 
 /**
@@ -59,11 +57,9 @@ public class Tracer {
 
 		// try to retreive the model in this ressource 
 		Iterator<EObject> it = traceResource.getContents().iterator();
-		while (it.hasNext())
-		{
+		while (it.hasNext()) {
 			Object o = it.next();
-			if(o instanceof TraceModel)
-			{
+			if(o instanceof TraceModel) {
 				modelTrace = (TraceModel)o;
 			}
 		}
@@ -416,6 +412,14 @@ public class Tracer {
 		}
 		
 		return new ArrayList<ModelReference>();
+	}
+
+	public TraceModel getTraceModel() {
+		return modelTrace;
+	}
+
+	public void setTraceModel(TraceModel modelTrace) {
+		this.modelTrace = modelTrace;
 	}
 	
 	/*public ModelReference findFirstReference(int offset, int length, String uri) {
