@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<acm:PolicyType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:acm="http://www.kermeta.org/acm" xsi:schemaLocation="http://www.kermeta.org/acm acm.ecore" name="RBAC">
+  <ruleTypes name="UserRole" parameters="//@elementTypes.0 //@elementTypes.2"/>
+  <ruleTypes name="RolePermission" parameters="//@elementTypes.2 //@elementTypes.1 //@elementTypes.3"/>
+  <elementTypes name="User"/>
+  <elementTypes name="Permission"/>
+  <elementTypes name="Role"/>
+  <elementTypes name="Constraint"/>
+</acm:PolicyType>

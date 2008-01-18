@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ASCII"?>
+<acm:Policy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:acm="http://www.kermeta.org/acm" xsi:schemaLocation="http://www.kermeta.org/acm acm.ecore" name="LibraryOrBAC">
+  <elements name="Student">
+    <type href="OrBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="Library">
+    <type href="OrBAC.xmi#//@elementTypes.0"/>
+  </elements>
+  <elements name="Borrow">
+    <type href="OrBAC.xmi#//@elementTypes.2"/>
+  </elements>
+  <elements name="ModifyAccount">
+    <type href="OrBAC.xmi#//@elementTypes.2"/>
+  </elements>
+  <elements name="Book">
+    <type href="OrBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <elements name="UserAccount">
+    <type href="OrBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <elements name="WorkingDays">
+    <type href="OrBAC.xmi#//@elementTypes.4"/>
+  </elements>
+  <elements name="Hollydays">
+    <type href="OrBAC.xmi#//@elementTypes.4"/>
+  </elements>
+  <elements name="Default">
+    <type href="OrBAC.xmi#//@elementTypes.4"/>
+  </elements>
+  <elements name="Personnel">
+    <type href="OrBAC.xmi#//@elementTypes.1"/>
+    <children name="Director">
+      <type href="OrBAC.xmi#//@elementTypes.1"/>
+    </children>
+    <children name="Secretary">
+      <type href="OrBAC.xmi#//@elementTypes.1"/>
+    </children>
+  </elements>
+  <elements name="CreateAccount">
+    <type href="OrBAC.xmi#//@elementTypes.2"/>
+  </elements>
+  <rules name="R1" parameters="//@elements.1 //@elements.0 //@elements.2 //@elements.4 //@elements.6">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R2" parameters="//@elements.1 //@elements.0 //@elements.2 //@elements.4 //@elements.7">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R3" parameters="//@elements.1 //@elements.9/@children.1 //@elements.2 //@elements.4 //@elements.8">
+    <type href="OrBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R4" parameters="//@elements.1 //@elements.9 //@elements.3 //@elements.5 //@elements.6">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R5" parameters="//@elements.1 //@elements.9/@children.0 //@elements.10 //@elements.5 //@elements.6">
+    <type href="OrBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <type href="OrBAC.xmi#/"/>
+</acm:Policy>

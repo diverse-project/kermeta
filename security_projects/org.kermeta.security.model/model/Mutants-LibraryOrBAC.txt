@@ -1,0 +1,391 @@
+ORIGINAL : 
+**********
+
+POLICY LibraryOrBAC (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+MUTANTS RER : 
+*************
+
+POLICY LibraryOrBAC-RER-R1 (OrBAC)
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RER-R2 (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RER-R3 (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RER-R4 (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RER-R5 (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+
+
+MUTANTS RTT : 
+*************
+
+POLICY LibraryOrBAC-RTS-R1-Prohibition (OrBAC)
+  R1 -> Prohibition( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RTS-R1-Obligation (OrBAC)
+  R1 -> Obligation( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RTS-R2-Permission (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Permission( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RTS-R2-Obligation (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Obligation( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RTS-R3-Permission (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Permission( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RTS-R3-Obligation (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Obligation( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RTS-R4-Prohibition (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Prohibition( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RTS-R4-Obligation (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Obligation( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RTS-R5-Prohibition (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Prohibition( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RTS-R5-Obligation (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Obligation( Library Director CreateAccount UserAccount WorkingDays )
+
+
+MUTANTS PPR : 
+*************
+
+POLICY LibraryOrBAC-RDD-R1-Student-Personnel (OrBAC)
+  R1 -> Permission( Library Personnel Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R1-Borrow-ModifyAccount (OrBAC)
+  R1 -> Permission( Library Student ModifyAccount Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R1-Borrow-CreateAccount (OrBAC)
+  R1 -> Permission( Library Student CreateAccount Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R1-Book-UserAccount (OrBAC)
+  R1 -> Permission( Library Student Borrow UserAccount WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R1-WorkingDays-Hollydays (OrBAC)
+  R1 -> Permission( Library Student Borrow Book Hollydays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R1-WorkingDays-Default (OrBAC)
+  R1 -> Permission( Library Student Borrow Book Default )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R2-Student-Personnel (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Personnel Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R2-Borrow-ModifyAccount (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student ModifyAccount Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R2-Borrow-CreateAccount (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student CreateAccount Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R2-Book-UserAccount (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow UserAccount Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R2-Hollydays-WorkingDays (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book WorkingDays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R2-Hollydays-Default (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Default )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R3-Secretary-Student (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Student Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R3-Secretary-Personnel (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Personnel Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R3-Borrow-ModifyAccount (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary ModifyAccount Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R3-Borrow-CreateAccount (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary CreateAccount Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R3-Book-UserAccount (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow UserAccount Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R3-Default-WorkingDays (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book WorkingDays )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R3-Default-Hollydays (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Hollydays )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R4-Personnel-Student (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Student ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R4-ModifyAccount-Borrow (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel Borrow UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R4-ModifyAccount-CreateAccount (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel CreateAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R4-UserAccount-Book (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount Book WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R4-WorkingDays-Hollydays (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount Hollydays )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R4-WorkingDays-Default (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount Default )
+  R5 -> Permission( Library Director CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R5-Director-Student (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Student CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R5-Director-Personnel (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Personnel CreateAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R5-CreateAccount-Borrow (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director Borrow UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R5-CreateAccount-ModifyAccount (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director ModifyAccount UserAccount WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R5-UserAccount-Book (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount Book WorkingDays )
+
+
+POLICY LibraryOrBAC-RDD-R5-WorkingDays-Hollydays (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount Hollydays )
+
+
+POLICY LibraryOrBAC-RDD-R5-WorkingDays-Default (OrBAC)
+  R1 -> Permission( Library Student Borrow Book WorkingDays )
+  R2 -> Prohibition( Library Student Borrow Book Hollydays )
+  R3 -> Prohibition( Library Secretary Borrow Book Default )
+  R4 -> Permission( Library Personnel ModifyAccount UserAccount WorkingDays )
+  R5 -> Permission( Library Director CreateAccount UserAccount Default )
+
+

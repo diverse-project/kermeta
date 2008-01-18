@@ -1,0 +1,279 @@
+/* $Id: Mutation.kmt,v 1.1 2008-01-18 10:19:37 ffleurey Exp $
+ * Creation date: January 9, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "acm::Main"
+@mainOperation "main"
+
+package acm;
+
+require kermeta
+require "http://www.kermeta.org/acm"
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using kermeta::io
+
+/***********************************************
+/* IMPLEMENTATION OF OPERATIONS IN THE METAMODEL
+/**********************************************/
+
+aspect class PolicyType {
+	
+	method toString() : String is do
+		result := name + " {\n"
+		result := result + "  Element Types:\n    "
+		elementTypes.each{ e |
+			result := result + e.name + " "
+		}
+		result := result + "\n  Rule Types:\n"
+		ruleTypes.each{ r | 
+			result := result + "    " + r.toString + "\n"
+		}
+		result := result + "}\n"
+	end
+
+}
+
+aspect class RuleType {
+	
+	/**
+	 * Two RuleType are compatible if they have the same parameters
+	 */
+	operation isCompatible(other : RuleType) : Boolean is do
+		result := self.parameters.size == other.parameters.size
+		if result then
+			from var i : Integer init 0
+			until i == self.parameters.size or not result
+			loop
+				result := self.parameters.at(i) == other.parameters.at(i)
+				i := i + 1
+			end
+		end
+	end
+	
+	method toString() : String is do
+		result := name + " ( "
+		parameters.each{ p | 
+			result := result + ":" + p.name + " "
+		}
+		result := result + ")"
+	end
+	
+}
+
+
+aspect class Policy {
+
+	method toString() : String is do
+		result := "POLICY " + name + " (" + type.name + ")\n"
+		rules.each{ r | 
+			result := result + r.toString + "\n"
+		}
+	end
+	
+	operation allElements() : Set<Element> is do
+		result := Set<Element>.new
+		elements.each{ e | 
+			result.add(e)
+			result.addAll(e.allChildren)
+		}
+	end
+	
+	/**
+	 * Create a copy of current policy (Elements and Rules are copied)
+	 */
+	operation copy() : Policy is do
+		// Copy the policy
+		result := Policy.new
+		result.name := self.name
+		result.type := self.type
+		
+		// Copy the elements
+		var elem : Element
+		var table : Hashtable<Element, Element> init Hashtable<Element, Element>.new
+		self.elements.each{ e | 
+			elem := e.copy(table)
+			result.elements.add(elem)
+		}
+		// Copy the rules
+		var rule : Rule
+		self.rules.each{ r | 
+			rule := Rule.new
+			rule.name := r.name
+			rule.type := r.type
+			r.parameters.each{ p |
+				rule.parameters.add(table.getValue(p))
+			}
+			result.rules.add(rule)
+		}
+	end
+}
+
+aspect class Rule {
+
+	operation replaceParameter(old : Element, new : Element) : Void is do
+		var i : Integer
+		from i := 0
+		until parameters.at(i) == old
+		loop i := i + 1 end
+		parameters.removeAt(i)
+		parameters.addAt(i, new)
+	end
+
+	method toString() : String is do
+		result := "  " + name + " -> " + type.name + "( "
+		parameters.each{ p |
+			result := result + p.name + " "
+		}
+		result := result + ")"
+	end
+}
+
+aspect class Element { 
+	
+	operation allChildren() : Set<Element> is do
+		result := Set<Element>.new
+		children.each{ e | 
+			result.addAll(e.allChildren)
+		}
+		result.addAll(children)
+	end
+
+	operation copy(table : Hashtable<Element, Element>) : Element is do
+		result := Element.new
+		result.name := name
+		result.type := type
+		table.put(self, result)
+		children.each{ c | 
+			result.children.add(c.copy(table))
+		}
+	end
+	
+	method equals(other : kermeta::reflection::Object) : Boolean is do
+		result := other.getMetaClass == self.getMetaClass
+		if result then 
+			result := other.asType(Element).name == self.name and 
+					  other.asType(Element).type == self.type
+		end
+	end
+
+}
+
+/***************************************
+/* IMPLEMENTATION OF MUTATION OPERATORS 
+/***************************************/
+
+/**
+ * Abstract class for all mutation operators
+ */
+ 
+abstract class SPMutator {
+	operation mute(p : Policy) : set Policy[*] is abstract
+}
+
+class RER inherits SPMutator {
+
+
+	method mute(p : Policy) : set Policy[*] is do
+		var mutant : Policy
+		result := Set<Policy>.new
+		p.rules.each{ r |
+			// create mutated policy
+			mutant := p.copy
+			mutant.name := p.name + "-RER-" + r.name
+			mutant.rules.remove(mutant.rules.detect{x | x.name == r.name})
+			result.add(mutant)
+		}
+	end
+}
+
+class RTT inherits SPMutator {
+
+	method mute(p : Policy) : set Policy[*] is do
+		var mutant : Policy
+		result := Set<Policy>.new
+		p.rules.each{ r |
+			p.type.ruleTypes.select{ rt | rt.isCompatible(r.type) and rt != r.type}.each{ rt |
+				// create mutated policy
+				mutant := p.copy
+				mutant.name := p.name + "-RTS-" + r.name + "-" + rt.name
+				mutant.rules.detect{ x | x.name == r.name }.type := rt
+				result.add(mutant)
+			}
+		}
+	end
+}
+
+class PPR inherits SPMutator {
+
+	method mute(p : Policy) : set Policy[*] is do
+		var mutant : Policy
+		result := Set<Policy>.new
+		p.rules.each{ rule |
+			rule.parameters.each{ param | 
+				p.elements.select{ e | e != param and e.type == param.type}.each { e |
+					mutant := p.copy
+					mutant.name := p.name + "-RDD-" + rule.name + "-" + param.name + "-" + e.name
+					var r : Rule init mutant.rules.detect{ x | x.name == rule.name } 
+					r.replaceParameter(r.parameters.detect{ u | u.name == param.name}, e)
+					result.add(mutant)				
+				}
+			}
+		}
+	end
+
+}
+
+
+class Main
+{
+
+	operation loadSecurityModel(uri : String) : Policy is do
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://www.kermeta.org/acm")
+        resource.load()
+        result ?= resource.instances.one  
+	end
+
+	operation main() : Void is do 
+		var policy : Policy init loadSecurityModel("platform:/resource/SecurityMutation/model/LibraryOrBAC.xmi")
+		//var policy : Policy init loadSecurityModel("platform:/resource/SecurityMutation/model/LibraryRBAC.xmi")
+		
+		stdio.writeln(policy.type.toString)
+		
+		stdio.writeln("ORIGINAL : ")
+		stdio.writeln("**********\n")
+		stdio.writeln(policy.toString)
+		stdio.writeln("")
+		
+		stdio.writeln("MUTANTS RER : ")
+		stdio.writeln("*************\n")
+		var rer : SPMutator init RER.new
+		rer.mute(policy).each{ p |
+			stdio.writeln(p.toString)
+		    stdio.writeln("")
+		}
+		
+		stdio.writeln("MUTANTS RTT : ")
+		stdio.writeln("*************\n")
+		var rtt : SPMutator init RTT.new
+		rtt.mute(policy).each{ p |
+			stdio.writeln(p.toString)
+		    stdio.writeln("")
+		}
+		
+		stdio.writeln("MUTANTS PPR : ")
+		stdio.writeln("*************\n")
+		var ppr : SPMutator init PPR.new
+		ppr.mute(policy).each{ p |
+			stdio.writeln(p.toString)
+		    stdio.writeln("")
+		}
+		
+		
+	end
+}

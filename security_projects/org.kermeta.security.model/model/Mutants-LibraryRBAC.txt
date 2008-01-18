@@ -1,0 +1,312 @@
+ORIGINAL : 
+**********
+
+POLICY LibraryRBAC (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+MUTANTS RER : 
+*************
+
+POLICY LibraryRBAC-RER-R1 (RBAC)
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RER-R2 (RBAC)
+  R1 -> UserRole( romain Student )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RER-R3 (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RER-R4 (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RER-R5 (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RER-R6 (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+
+
+MUTANTS RTT : 
+*************
+
+MUTANTS PPR : 
+*************
+
+POLICY LibraryRBAC-RDD-R1-romain-alice (RBAC)
+  R1 -> UserRole( alice Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R1-romain-yves (RBAC)
+  R1 -> UserRole( yves Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R1-Student-Personnel (RBAC)
+  R1 -> UserRole( romain Personnel )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R2-yves-alice (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( alice Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R2-yves-romain (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( romain Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R2-Director-Personnel (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Personnel )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R2-Director-Student (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Student )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R3-alice-yves (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( yves Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R3-alice-romain (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( romain Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R3-Secretary-Personnel (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Personnel )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R3-Secretary-Student (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Student )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R4-Student-Personnel (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Personnel BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R4-BorrowBook-ModifyUserAccount (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student ModifyUserAccount WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R4-BorrowBook-CreateAccount (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student CreateAccount WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R4-WorkingDays-AllTime (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook AllTime )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R4-WorkingDays-Hollydays (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook Hollydays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R5-Personnel-Student (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Student ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R5-ModifyUserAccount-BorrowBook (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel BorrowBook WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R5-ModifyUserAccount-CreateAccount (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel CreateAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R5-WorkingDays-AllTime (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount AllTime )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R5-WorkingDays-Hollydays (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount Hollydays )
+  R6 -> RolePermission( Director CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R6-Director-Personnel (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Personnel CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R6-Director-Student (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Student CreateAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R6-CreateAccount-BorrowBook (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director BorrowBook AllTime )
+
+
+POLICY LibraryRBAC-RDD-R6-CreateAccount-ModifyUserAccount (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director ModifyUserAccount AllTime )
+
+
+POLICY LibraryRBAC-RDD-R6-AllTime-Hollydays (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount Hollydays )
+
+
+POLICY LibraryRBAC-RDD-R6-AllTime-WorkingDays (RBAC)
+  R1 -> UserRole( romain Student )
+  R2 -> UserRole( yves Director )
+  R3 -> UserRole( alice Secretary )
+  R4 -> RolePermission( Student BorrowBook WorkingDays )
+  R5 -> RolePermission( Personnel ModifyUserAccount WorkingDays )
+  R6 -> RolePermission( Director CreateAccount WorkingDays )
+
+

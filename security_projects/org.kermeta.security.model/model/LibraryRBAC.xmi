@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ASCII"?>
+<acm:Policy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:acm="http://www.kermeta.org/acm" xsi:schemaLocation="http://www.kermeta.org/acm acm.ecore" name="LibraryRBAC">
+  <elements name="Personnel">
+    <type href="RBAC.xmi#//@elementTypes.2"/>
+    <children name="Secretary">
+      <type href="RBAC.xmi#//@elementTypes.2"/>
+    </children>
+    <children name="Director">
+      <type href="RBAC.xmi#//@elementTypes.2"/>
+    </children>
+  </elements>
+  <elements name="Student">
+    <type href="RBAC.xmi#//@elementTypes.2"/>
+  </elements>
+  <elements name="BorrowBook">
+    <type href="RBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="ModifyUserAccount">
+    <type href="RBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="alice">
+    <type href="RBAC.xmi#//@elementTypes.0"/>
+  </elements>
+  <elements name="yves">
+    <type href="RBAC.xmi#//@elementTypes.0"/>
+  </elements>
+  <elements name="romain">
+    <type href="RBAC.xmi#//@elementTypes.0"/>
+  </elements>
+  <elements name="CreateAccount">
+    <type href="RBAC.xmi#//@elementTypes.1"/>
+  </elements>
+  <elements name="AllTime">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <elements name="Hollydays">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <elements name="WorkingDays">
+    <type href="RBAC.xmi#//@elementTypes.3"/>
+  </elements>
+  <rules name="R1" parameters="//@elements.6 //@elements.1">
+    <type href="RBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R2" parameters="//@elements.5 //@elements.0/@children.1">
+    <type href="RBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R3" parameters="//@elements.4 //@elements.0/@children.0">
+    <type href="RBAC.xmi#//@ruleTypes.0"/>
+  </rules>
+  <rules name="R4" parameters="//@elements.1 //@elements.2 //@elements.10">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R5" parameters="//@elements.0 //@elements.3 //@elements.10">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <rules name="R6" parameters="//@elements.0/@children.1 //@elements.7 //@elements.8">
+    <type href="RBAC.xmi#//@ruleTypes.1"/>
+  </rules>
+  <type href="RBAC.xmi#/"/>
+</acm:Policy>
