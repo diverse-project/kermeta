@@ -2,18 +2,18 @@
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
     <nestedPackage tag="//@packages.0/ecore/@ownedTag.0" name="ecore" uri="http://www.kermeta.org/kermeta/ecore">
-      <ownedTag value="/** &#xA; * Contains the definition of a Kermeta classes used for compatibility with Ecore &#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png&quot;>&#xA; */" object="//@packages.0/ecore"/>
+      <ownedTag value="/** &#xD;&#xA; * Contains the definition of a Kermeta classes used for compatibility with Ecore &#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/ecore"/>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/ecore/EFeatureMapEntry/@ownedTag.0" name="EFeatureMapEntry" superType="//@packages.0/ecore/EFeatureMapEntry/@containedType.0">
-        <ownedTag value="/**&#xA; * Kermeta representation of EMF EFeatureMapEntry&#xA; * it contains the name of the required feature and the actual value&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png&quot;>&#xA; */" object="//@packages.0/ecore/EFeatureMapEntry"/>
+        <ownedTag value="/**&#xD;&#xA; * Kermeta representation of EMF EFeatureMapEntry&#xD;&#xA; * it contains the name of the required feature and the actual value&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png&quot;>&#xD;&#xA; */" object="//@packages.0/ecore/EFeatureMapEntry"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedAttribute name="eStructuralFeatureName" type="//@packages.0/ecore/EFeatureMapEntry/eStructuralFeatureName/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
+        <ownedAttribute name="eStructuralFeatureName" type="//@packages.0/ecore/EFeatureMapEntry/eStructuralFeatureName/@containedType.0" isOrdered="true" upper="1" isComposite="true" isGetterAbstract="true" isSetterAbstract="true">
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
         </ownedAttribute>
-        <ownedAttribute name="value" type="//@packages.0/ecore/EFeatureMapEntry/value/@containedType.0" isOrdered="true" upper="1" isGetterAbstract="true" isSetterAbstract="true" isComposite="true">
+        <ownedAttribute name="value" type="//@packages.0/ecore/EFeatureMapEntry/value/@containedType.0" isOrdered="true" upper="1" isComposite="true" isGetterAbstract="true" isSetterAbstract="true">
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
           </containedType>
