@@ -24,8 +24,6 @@ the terms of the EPL licence.
    </url>
 
    <requires>
-      <import feature="fr.irisa.triskell.kermeta" version="0.5.0"/>
-      <import feature="fr.irisa.triskell.kermeta" version="0.5.0"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore.edit"/>
       <import plugin="org.eclipse.ui.ide"/>
@@ -40,6 +38,12 @@ the terms of the EPL licence.
       <import plugin="org.eclipse.ui"/>
       <import plugin="fr.irisa.triskell.kermeta.io"/>
       <import plugin="fr.irisa.triskell.kermeta.ui"/>
+      <import plugin="fr.irisa.triskell.eclipse.util"/>
+      <import plugin="fr.irisa.triskell.kermeta"/>
+      <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
+      <import plugin="fr.irisa.triskell.kermeta.model"/>
+      <import plugin="fr.irisa.triskell.kermeta.model.edit"/>
+      <import plugin="fr.irisa.triskell.traceability"/>
    </requires>
 
    <plugin
