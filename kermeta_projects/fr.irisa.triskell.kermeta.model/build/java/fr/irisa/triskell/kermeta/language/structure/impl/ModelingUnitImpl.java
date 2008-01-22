@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelingUnitImpl.java,v 1.3 2007-07-24 13:47:32 ftanguy Exp $
+ * $Id: ModelingUnitImpl.java,v 1.4 2008-01-22 14:24:29 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -31,25 +31,35 @@ import fr.irisa.triskell.kermeta.language.structure.Using;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelingUnitImpl#getOwnedTags <em>Owned Tags</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelingUnitImpl#getPackages <em>Packages</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelingUnitImpl#getRequires <em>Requires</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelingUnitImpl#getUsings <em>Usings</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelingUnitImpl#getReferencedModelingUnits <em>Referenced Modeling Units</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelingUnitImpl#getIncludeFilters <em>Include Filters</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelingUnitImpl#getExcludeFilters <em>Exclude Filters</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelingUnitImpl#getOwnedTags <em>Owned Tags</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ModelingUnitImpl extends EObjectImpl implements ModelingUnit {
+public class ModelingUnitImpl extends ObjectImpl implements ModelingUnit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
+	 * The cached value of the '{@link #getOwnedTags() <em>Owned Tags</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedTags()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Tag> ownedTags;
 
 	/**
 	 * The cached value of the '{@link #getPackages() <em>Packages</em>}' containment reference list.
@@ -110,16 +120,6 @@ public class ModelingUnitImpl extends EObjectImpl implements ModelingUnit {
 	 * @ordered
 	 */
 	protected EList<Filter> excludeFilters;
-
-	/**
-	 * The cached value of the '{@link #getOwnedTags() <em>Owned Tags</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedTags()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Tag> ownedTags;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -232,6 +232,8 @@ public class ModelingUnitImpl extends EObjectImpl implements ModelingUnit {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
+				return ((InternalEList<?>)getOwnedTags()).basicRemove(otherEnd, msgs);
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				return ((InternalEList<?>)getPackages()).basicRemove(otherEnd, msgs);
 			case StructurePackage.MODELING_UNIT__REQUIRES:
@@ -242,8 +244,6 @@ public class ModelingUnitImpl extends EObjectImpl implements ModelingUnit {
 				return ((InternalEList<?>)getIncludeFilters()).basicRemove(otherEnd, msgs);
 			case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
 				return ((InternalEList<?>)getExcludeFilters()).basicRemove(otherEnd, msgs);
-			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
-				return ((InternalEList<?>)getOwnedTags()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -256,6 +256,8 @@ public class ModelingUnitImpl extends EObjectImpl implements ModelingUnit {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
+				return getOwnedTags();
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				return getPackages();
 			case StructurePackage.MODELING_UNIT__REQUIRES:
@@ -268,8 +270,6 @@ public class ModelingUnitImpl extends EObjectImpl implements ModelingUnit {
 				return getIncludeFilters();
 			case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
 				return getExcludeFilters();
-			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
-				return getOwnedTags();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -283,6 +283,10 @@ public class ModelingUnitImpl extends EObjectImpl implements ModelingUnit {
 		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
+				getOwnedTags().clear();
+				getOwnedTags().addAll((Collection<? extends Tag>)newValue);
+				return;
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				getPackages().clear();
 				getPackages().addAll((Collection<? extends fr.irisa.triskell.kermeta.language.structure.Package>)newValue);
@@ -307,10 +311,6 @@ public class ModelingUnitImpl extends EObjectImpl implements ModelingUnit {
 				getExcludeFilters().clear();
 				getExcludeFilters().addAll((Collection<? extends Filter>)newValue);
 				return;
-			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
-				getOwnedTags().clear();
-				getOwnedTags().addAll((Collection<? extends Tag>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -323,6 +323,9 @@ public class ModelingUnitImpl extends EObjectImpl implements ModelingUnit {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
+				getOwnedTags().clear();
+				return;
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				getPackages().clear();
 				return;
@@ -341,9 +344,6 @@ public class ModelingUnitImpl extends EObjectImpl implements ModelingUnit {
 			case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
 				getExcludeFilters().clear();
 				return;
-			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
-				getOwnedTags().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -356,6 +356,8 @@ public class ModelingUnitImpl extends EObjectImpl implements ModelingUnit {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
+				return ownedTags != null && !ownedTags.isEmpty();
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				return packages != null && !packages.isEmpty();
 			case StructurePackage.MODELING_UNIT__REQUIRES:
@@ -368,8 +370,6 @@ public class ModelingUnitImpl extends EObjectImpl implements ModelingUnit {
 				return includeFilters != null && !includeFilters.isEmpty();
 			case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
 				return excludeFilters != null && !excludeFilters.isEmpty();
-			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
-				return ownedTags != null && !ownedTags.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

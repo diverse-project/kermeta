@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Property.java,v 1.5 2007-10-02 15:15:46 ftanguy Exp $
+ * $Id: Property.java,v 1.6 2008-01-22 14:24:30 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -16,17 +16,17 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getGetterBody <em>Getter Body</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getSetterBody <em>Setter Body</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsGetterAbstract <em>Is Getter Abstract</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsSetterAbstract <em>Is Setter Abstract</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getOpposite <em>Opposite</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsReadOnly <em>Is Read Only</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getDefault <em>Default</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsComposite <em>Is Composite</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsDerived <em>Is Derived</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsID <em>Is ID</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getGetterBody <em>Getter Body</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getSetterBody <em>Setter Body</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsGetterAbstract <em>Is Getter Abstract</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsSetterAbstract <em>Is Setter Abstract</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getOwningClass <em>Owning Class</em>}</li>
  * </ul>
  * </p>
  *

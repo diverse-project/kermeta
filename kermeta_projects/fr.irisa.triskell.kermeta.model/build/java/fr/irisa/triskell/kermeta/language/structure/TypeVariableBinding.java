@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableBinding.java,v 1.3 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: TypeVariableBinding.java,v 1.4 2008-01-22 14:24:30 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -24,7 +24,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * @model
  * @generated
  */
-public interface TypeVariableBinding extends fr.irisa.triskell.kermeta.language.structure.Object, TypeContainer {
+public interface TypeVariableBinding extends TypeContainer, fr.irisa.triskell.kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

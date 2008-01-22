@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackage.java,v 1.15 2007-10-02 15:15:46 ftanguy Exp $
+ * $Id: StructurePackage.java,v 1.16 2008-01-22 14:24:30 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -76,7 +76,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getObject()
 	 * @generated
 	 */
-	int OBJECT = 0;
+	int OBJECT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -113,7 +113,442 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeContainer()
 	 * @generated
 	 */
-	int TYPE_CONTAINER = 5;
+	int TYPE_CONTAINER = 7;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypedElementImpl <em>Typed Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypedElementImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypedElement()
+	 * @generated
+	 */
+	int TYPED_ELEMENT = 18;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.MultiplicityElementImpl <em>Multiplicity Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.MultiplicityElementImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getMultiplicityElement()
+	 * @generated
+	 */
+	int MULTIPLICITY_ELEMENT = 10;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.OperationImpl <em>Operation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.OperationImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getOperation()
+	 * @generated
+	 */
+	int OPERATION = 4;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.PropertyImpl <em>Property</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.PropertyImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getProperty()
+	 * @generated
+	 */
+	int PROPERTY = 5;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeImpl <em>Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getType()
+	 * @generated
+	 */
+	int TYPE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__TAG = OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__OWNED_TAG = OBJECT__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__TYPE_CONTAINER = OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.NamedElementImpl <em>Named Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.NamedElementImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getNamedElement()
+	 * @generated
+	 */
+	int NAMED_ELEMENT = 14;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.EnumerationLiteralImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getEnumerationLiteral()
+	 * @generated
+	 */
+	int ENUMERATION_LITERAL = 8;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableBindingImpl <em>Type Variable Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableBindingImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeVariableBinding()
+	 * @generated
+	 */
+	int TYPE_VARIABLE_BINDING = 9;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ParameterizedTypeImpl <em>Parameterized Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ParameterizedTypeImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getParameterizedType()
+	 * @generated
+	 */
+	int PARAMETERIZED_TYPE = 27;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__TAG = TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__OWNED_TAG = TYPE__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Virtual Type Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__TYPE_PARAM_BINDING = TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Type Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__TYPE_DEFINITION = TYPE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Parameterized Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl <em>Class</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getClass_()
+	 * @generated
+	 */
+	int CLASS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__TAG = PARAMETERIZED_TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__OWNED_TAG = PARAMETERIZED_TYPE__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__TYPE_CONTAINER = PARAMETERIZED_TYPE__TYPE_CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Virtual Type Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__VIRTUAL_TYPE_BINDING = PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING;
+
+	/**
+	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__TYPE_PARAM_BINDING = PARAMETERIZED_TYPE__TYPE_PARAM_BINDING;
+
+	/**
+	 * The feature id for the '<em><b>Type Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__TYPE_DEFINITION = PARAMETERIZED_TYPE__TYPE_DEFINITION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Attribute</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__OWNED_ATTRIBUTE = PARAMETERIZED_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Operation</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__OWNED_OPERATION = PARAMETERIZED_TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Super Class</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__SUPER_CLASS = PARAMETERIZED_TYPE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__IS_ABSTRACT = PARAMETERIZED_TYPE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__NAME = PARAMETERIZED_TYPE_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_FEATURE_COUNT = PARAMETERIZED_TYPE_FEATURE_COUNT + 5;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelImpl <em>Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModel()
+	 * @generated
+	 */
+	int MODEL = 2;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__TAG = OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__OWNED_TAG = OBJECT__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Contents</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__CONTENTS = OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl <em>Model Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModelType()
+	 * @generated
+	 */
+	int MODEL_TYPE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__TAG = TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__OWNED_TAG = TYPE__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__NAME = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__BASE_ASPECTS = TYPE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Included Type Definition</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__INCLUDED_TYPE_DEFINITION = TYPE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Model Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -150,16 +585,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_CONTAINER_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypedElementImpl <em>Typed Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypedElementImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypedElement()
-	 * @generated
-	 */
-	int TYPED_ELEMENT = 13;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -214,16 +639,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPED_ELEMENT_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.MultiplicityElementImpl <em>Multiplicity Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.MultiplicityElementImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getMultiplicityElement()
-	 * @generated
-	 */
-	int MULTIPLICITY_ELEMENT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -316,16 +731,6 @@ public interface StructurePackage extends EPackage {
 	int MULTIPLICITY_ELEMENT_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.OperationImpl <em>Operation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.OperationImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getOperation()
-	 * @generated
-	 */
-	int OPERATION = 2;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -407,40 +812,13 @@ public interface StructurePackage extends EPackage {
 	int OPERATION__UPPER = MULTIPLICITY_ELEMENT__UPPER;
 
 	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__BODY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Super Operation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__SUPER_OPERATION = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__OWNING_CLASS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Type Parameter</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__TYPE_PARAMETER = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 3;
+	int OPERATION__IS_ABSTRACT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Raised Exception</b></em>' reference list.
@@ -449,7 +827,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__RAISED_EXCEPTION = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 4;
+	int OPERATION__RAISED_EXCEPTION = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Parameter</b></em>' containment reference list.
@@ -458,7 +836,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__OWNED_PARAMETER = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 5;
+	int OPERATION__OWNED_PARAMETER = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Pre</b></em>' containment reference list.
@@ -467,7 +845,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__PRE = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 6;
+	int OPERATION__PRE = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Post</b></em>' containment reference list.
@@ -476,16 +854,43 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__POST = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 7;
+	int OPERATION__POST = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__IS_ABSTRACT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 8;
+	int OPERATION__BODY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Super Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__SUPER_OPERATION = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__OWNING_CLASS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameter</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__TYPE_PARAMETER = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
@@ -495,16 +900,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_FEATURE_COUNT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 9;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.PropertyImpl <em>Property</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.PropertyImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getProperty()
-	 * @generated
-	 */
-	int PROPERTY = 3;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -588,58 +983,13 @@ public interface StructurePackage extends EPackage {
 	int PROPERTY__UPPER = MULTIPLICITY_ELEMENT__UPPER;
 
 	/**
-	 * The feature id for the '<em><b>Getter Body</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__GETTER_BODY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Setter Body</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__SETTER_BODY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Is Getter Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__IS_GETTER_ABSTRACT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Is Setter Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__IS_SETTER_ABSTRACT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__OWNING_CLASS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
 	 * The feature id for the '<em><b>Opposite</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__OPPOSITE = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 5;
+	int PROPERTY__OPPOSITE = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Is Read Only</b></em>' attribute.
@@ -648,7 +998,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__IS_READ_ONLY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 6;
+	int PROPERTY__IS_READ_ONLY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Default</b></em>' attribute.
@@ -657,7 +1007,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__DEFAULT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 7;
+	int PROPERTY__DEFAULT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Is Composite</b></em>' attribute.
@@ -666,7 +1016,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__IS_COMPOSITE = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 8;
+	int PROPERTY__IS_COMPOSITE = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Is Derived</b></em>' attribute.
@@ -675,7 +1025,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__IS_DERIVED = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 9;
+	int PROPERTY__IS_DERIVED = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Is ID</b></em>' attribute.
@@ -684,7 +1034,52 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__IS_ID = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 10;
+	int PROPERTY__IS_ID = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Getter Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__GETTER_BODY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Setter Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__SETTER_BODY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Is Getter Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__IS_GETTER_ABSTRACT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Is Setter Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__IS_SETTER_ABSTRACT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__OWNING_CLASS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Property</em>' class.
@@ -694,62 +1089,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_FEATURE_COUNT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 11;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeImpl <em>Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getType()
-	 * @generated
-	 */
-	int TYPE = 4;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE__TAG = OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE__OWNED_TAG = OBJECT__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE__TYPE_CONTAINER = OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.NamedElementImpl <em>Named Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.NamedElementImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getNamedElement()
-	 * @generated
-	 */
-	int NAMED_ELEMENT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -786,16 +1125,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int NAMED_ELEMENT_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.EnumerationLiteralImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getEnumerationLiteral()
-	 * @generated
-	 */
-	int ENUMERATION_LITERAL = 6;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -843,23 +1172,13 @@ public interface StructurePackage extends EPackage {
 	int ENUMERATION_LITERAL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableBindingImpl <em>Type Variable Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableBindingImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeVariableBinding()
-	 * @generated
-	 */
-	int TYPE_VARIABLE_BINDING = 7;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE_BINDING__TAG = OBJECT__TAG;
+	int TYPE_VARIABLE_BINDING__TAG = TYPE_CONTAINER__TAG;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
@@ -868,7 +1187,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE_BINDING__OWNED_TAG = OBJECT__OWNED_TAG;
+	int TYPE_VARIABLE_BINDING__OWNED_TAG = TYPE_CONTAINER__OWNED_TAG;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -877,7 +1196,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE_BINDING__CONTAINED_TYPE = OBJECT_FEATURE_COUNT + 0;
+	int TYPE_VARIABLE_BINDING__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -886,7 +1205,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE_BINDING__VARIABLE = OBJECT_FEATURE_COUNT + 1;
+	int TYPE_VARIABLE_BINDING__VARIABLE = TYPE_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -895,7 +1214,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE_BINDING__TYPE = OBJECT_FEATURE_COUNT + 2;
+	int TYPE_VARIABLE_BINDING__TYPE = TYPE_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Type Variable Binding</em>' class.
@@ -904,326 +1223,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE_BINDING_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ParameterizedTypeImpl <em>Parameterized Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ParameterizedTypeImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getParameterizedType()
-	 * @generated
-	 */
-	int PARAMETERIZED_TYPE = 21;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__TAG = TYPE__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__OWNED_TAG = TYPE__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__TYPE_PARAM_BINDING = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Type Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__TYPE_DEFINITION = TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Virtual Type Binding</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING = TYPE_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Parameterized Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl <em>Class</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getClass_()
-	 * @generated
-	 */
-	int CLASS = 8;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__TAG = PARAMETERIZED_TYPE__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__OWNED_TAG = PARAMETERIZED_TYPE__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__TYPE_CONTAINER = PARAMETERIZED_TYPE__TYPE_CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__TYPE_PARAM_BINDING = PARAMETERIZED_TYPE__TYPE_PARAM_BINDING;
-
-	/**
-	 * The feature id for the '<em><b>Type Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__TYPE_DEFINITION = PARAMETERIZED_TYPE__TYPE_DEFINITION;
-
-	/**
-	 * The feature id for the '<em><b>Virtual Type Binding</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__VIRTUAL_TYPE_BINDING = PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING;
-
-	/**
-	 * The feature id for the '<em><b>Owned Attribute</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__OWNED_ATTRIBUTE = PARAMETERIZED_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Operation</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__OWNED_OPERATION = PARAMETERIZED_TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Super Class</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__SUPER_CLASS = PARAMETERIZED_TYPE_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__IS_ABSTRACT = PARAMETERIZED_TYPE_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__NAME = PARAMETERIZED_TYPE_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>Class</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_FEATURE_COUNT = PARAMETERIZED_TYPE_FEATURE_COUNT + 5;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelImpl <em>Model</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModel()
-	 * @generated
-	 */
-	int MODEL = 9;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__TAG = OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__OWNED_TAG = OBJECT__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Contents</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__CONTENTS = OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Model</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl <em>Model Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModelType()
-	 * @generated
-	 */
-	int MODEL_TYPE = 10;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__TAG = TYPE__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__OWNED_TAG = TYPE__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__NAME = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__BASE_ASPECTS = TYPE_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Included Type Definition</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__INCLUDED_TYPE_DEFINITION = TYPE_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>Model Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 4;
+	int TYPE_VARIABLE_BINDING_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableImpl <em>Type Variable</em>}' class.
@@ -1233,70 +1233,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeVariable()
 	 * @generated
 	 */
-	int TYPE_VARIABLE = 24;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE__TAG = TYPE__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE__OWNED_TAG = TYPE__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE__NAME = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE__CONTAINED_TYPE = TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Supertype</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE__SUPERTYPE = TYPE_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Type Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 3;
+	int TYPE_VARIABLE = 28;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ObjectTypeVariableImpl <em>Object Type Variable</em>}' class.
@@ -1306,70 +1243,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getObjectTypeVariable()
 	 * @generated
 	 */
-	int OBJECT_TYPE_VARIABLE = 11;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_TYPE_VARIABLE__TAG = TYPE_VARIABLE__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_TYPE_VARIABLE__OWNED_TAG = TYPE_VARIABLE__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_TYPE_VARIABLE__TYPE_CONTAINER = TYPE_VARIABLE__TYPE_CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_TYPE_VARIABLE__NAME = TYPE_VARIABLE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_TYPE_VARIABLE__CONTAINED_TYPE = TYPE_VARIABLE__CONTAINED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Supertype</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_TYPE_VARIABLE__SUPERTYPE = TYPE_VARIABLE__SUPERTYPE;
-
-	/**
-	 * The number of structural features of the '<em>Object Type Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_TYPE_VARIABLE_FEATURE_COUNT = TYPE_VARIABLE_FEATURE_COUNT + 0;
+	int OBJECT_TYPE_VARIABLE = 29;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
@@ -1379,7 +1253,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeDefinition()
 	 * @generated
 	 */
-	int TYPE_DEFINITION = 18;
+	int TYPE_DEFINITION = 11;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1443,70 +1317,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getGenericTypeDefinition()
 	 * @generated
 	 */
-	int GENERIC_TYPE_DEFINITION = 22;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION__TAG = TYPE_DEFINITION__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION__OWNED_TAG = TYPE_DEFINITION__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION__NAME = TYPE_DEFINITION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION__IS_ASPECT = TYPE_DEFINITION__IS_ASPECT;
-
-	/**
-	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION__BASE_ASPECTS = TYPE_DEFINITION__BASE_ASPECTS;
-
-	/**
-	 * The feature id for the '<em><b>Type Parameter</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION__TYPE_PARAMETER = TYPE_DEFINITION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Generic Type Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 1;
+	int GENERIC_TYPE_DEFINITION = 26;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl <em>Class Definition</em>}' class.
@@ -1516,124 +1327,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getClassDefinition()
 	 * @generated
 	 */
-	int CLASS_DEFINITION = 14;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__TAG = GENERIC_TYPE_DEFINITION__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__OWNED_TAG = GENERIC_TYPE_DEFINITION__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__NAME = GENERIC_TYPE_DEFINITION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__IS_ASPECT = GENERIC_TYPE_DEFINITION__IS_ASPECT;
-
-	/**
-	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__BASE_ASPECTS = GENERIC_TYPE_DEFINITION__BASE_ASPECTS;
-
-	/**
-	 * The feature id for the '<em><b>Type Parameter</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__TYPE_PARAMETER = GENERIC_TYPE_DEFINITION__TYPE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__CONTAINED_TYPE = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__IS_ABSTRACT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Owned Attribute</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__OWNED_ATTRIBUTE = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__OWNED_OPERATION = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__SUPER_TYPE = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Inv</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__INV = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 5;
-
-	/**
-	 * The number of structural features of the '<em>Class Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION_FEATURE_COUNT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 6;
+	int CLASS_DEFINITION = 21;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.FunctionTypeImpl <em>Function Type</em>}' class.
@@ -1643,70 +1337,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getFunctionType()
 	 * @generated
 	 */
-	int FUNCTION_TYPE = 15;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__TAG = TYPE__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__OWNED_TAG = TYPE__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__CONTAINED_TYPE = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Left</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__LEFT = TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Right</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__RIGHT = TYPE_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Function Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 3;
+	int FUNCTION_TYPE = 34;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ProductTypeImpl <em>Product Type</em>}' class.
@@ -1716,61 +1347,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getProductType()
 	 * @generated
 	 */
-	int PRODUCT_TYPE = 16;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__TAG = TYPE__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__OWNED_TAG = TYPE__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__CONTAINED_TYPE = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__TYPE = TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Product Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+	int PRODUCT_TYPE = 33;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionContainerImpl <em>Type Definition Container</em>}' class.
@@ -1780,7 +1357,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeDefinitionContainer()
 	 * @generated
 	 */
-	int TYPE_DEFINITION_CONTAINER = 23;
+	int TYPE_DEFINITION_CONTAINER = 36;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.PackageImpl <em>Package</em>}' class.
@@ -1790,7 +1367,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getPackage()
 	 * @generated
 	 */
-	int PACKAGE = 17;
+	int PACKAGE = 15;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.VoidTypeImpl <em>Void Type</em>}' class.
@@ -1800,7 +1377,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getVoidType()
 	 * @generated
 	 */
-	int VOID_TYPE = 19;
+	int VOID_TYPE = 35;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl <em>Data Type</em>}' class.
@@ -1810,7 +1387,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 20;
+	int DATA_TYPE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1819,7 +1396,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION_CONTAINER__TAG = NAMED_ELEMENT__TAG;
+	int DATA_TYPE__TAG = TYPE__TAG;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
@@ -1828,124 +1405,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION_CONTAINER__OWNED_TAG = NAMED_ELEMENT__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_CONTAINER__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type Definition</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Type Definition Container</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_CONTAINER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__TAG = TYPE_DEFINITION_CONTAINER__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__OWNED_TAG = TYPE_DEFINITION_CONTAINER__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__NAME = TYPE_DEFINITION_CONTAINER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type Definition</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__OWNED_TYPE_DEFINITION = TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION;
-
-	/**
-	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__NESTED_PACKAGE = TYPE_DEFINITION_CONTAINER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__NESTING_PACKAGE = TYPE_DEFINITION_CONTAINER_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__URI = TYPE_DEFINITION_CONTAINER_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Package</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE_FEATURE_COUNT = TYPE_DEFINITION_CONTAINER_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE__TAG = TYPE__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE__OWNED_TAG = TYPE__OWNED_TAG;
+	int DATA_TYPE__OWNED_TAG = TYPE__OWNED_TAG;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -1954,34 +1414,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOID_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
-
-	/**
-	 * The number of structural features of the '<em>Void Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TYPE__TAG = TYPE_DEFINITION__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TYPE__OWNED_TAG = TYPE_DEFINITION__OWNED_TAG;
+	int DATA_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1990,7 +1423,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE__NAME = TYPE_DEFINITION__NAME;
+	int DATA_TYPE__NAME = TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
@@ -1999,7 +1432,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE__IS_ASPECT = TYPE_DEFINITION__IS_ASPECT;
+	int DATA_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
@@ -2008,16 +1441,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE__BASE_ASPECTS = TYPE_DEFINITION__BASE_ASPECTS;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TYPE__TYPE_CONTAINER = TYPE_DEFINITION_FEATURE_COUNT + 0;
+	int DATA_TYPE__BASE_ASPECTS = TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Data Type</em>' class.
@@ -2026,7 +1450,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 1;
+	int DATA_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.RequireImpl <em>Require</em>}' class.
@@ -2036,43 +1460,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getRequire()
 	 * @generated
 	 */
-	int REQUIRE = 25;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REQUIRE__TAG = OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REQUIRE__OWNED_TAG = OBJECT__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REQUIRE__URI = OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Require</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REQUIRE_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+	int REQUIRE = 23;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.UsingImpl <em>Using</em>}' class.
@@ -2082,43 +1470,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getUsing()
 	 * @generated
 	 */
-	int USING = 26;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USING__TAG = OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USING__OWNED_TAG = OBJECT__OWNED_TAG;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USING__QUALIFIED_NAME = OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Using</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USING_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+	int USING = 24;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelingUnitImpl <em>Modeling Unit</em>}' class.
@@ -2128,79 +1480,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModelingUnit()
 	 * @generated
 	 */
-	int MODELING_UNIT = 27;
-
-	/**
-	 * The feature id for the '<em><b>Packages</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODELING_UNIT__PACKAGES = 0;
-
-	/**
-	 * The feature id for the '<em><b>Requires</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODELING_UNIT__REQUIRES = 1;
-
-	/**
-	 * The feature id for the '<em><b>Usings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODELING_UNIT__USINGS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Referenced Modeling Units</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODELING_UNIT__REFERENCED_MODELING_UNITS = 3;
-
-	/**
-	 * The feature id for the '<em><b>Include Filters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODELING_UNIT__INCLUDE_FILTERS = 4;
-
-	/**
-	 * The feature id for the '<em><b>Exclude Filters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODELING_UNIT__EXCLUDE_FILTERS = 5;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODELING_UNIT__OWNED_TAGS = 6;
-
-	/**
-	 * The number of structural features of the '<em>Modeling Unit</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODELING_UNIT_FEATURE_COUNT = 7;
+	int MODELING_UNIT = 22;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.FilterImpl <em>Filter</em>}' class.
@@ -2210,25 +1490,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getFilter()
 	 * @generated
 	 */
-	int FILTER = 28;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILTER__QUALIFIED_NAME = 0;
-
-	/**
-	 * The number of structural features of the '<em>Filter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILTER_FEATURE_COUNT = 1;
+	int FILTER = 25;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.EnumerationImpl <em>Enumeration</em>}' class.
@@ -2238,7 +1500,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getEnumeration()
 	 * @generated
 	 */
-	int ENUMERATION = 29;
+	int ENUMERATION = 13;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2257,6 +1519,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION__OWNED_TAG = DATA_TYPE__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__TYPE_CONTAINER = DATA_TYPE__TYPE_CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2286,15 +1557,6 @@ public interface StructurePackage extends EPackage {
 	int ENUMERATION__BASE_ASPECTS = DATA_TYPE__BASE_ASPECTS;
 
 	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION__TYPE_CONTAINER = DATA_TYPE__TYPE_CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Owned Literal</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2313,6 +1575,78 @@ public interface StructurePackage extends EPackage {
 	int ENUMERATION_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__TAG = NAMED_ELEMENT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__OWNED_TAG = NAMED_ELEMENT__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Type Definition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__OWNED_TYPE_DEFINITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__NESTED_PACKAGE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__NESTING_PACKAGE = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__URI = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Package</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ParameterImpl <em>Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2320,7 +1654,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getParameter()
 	 * @generated
 	 */
-	int PARAMETER = 30;
+	int PARAMETER = 16;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2429,7 +1763,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getPrimitiveType()
 	 * @generated
 	 */
-	int PRIMITIVE_TYPE = 31;
+	int PRIMITIVE_TYPE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2448,6 +1782,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE__OWNED_TAG = DATA_TYPE__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__TYPE_CONTAINER = DATA_TYPE__TYPE_CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2475,15 +1818,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE__BASE_ASPECTS = DATA_TYPE__BASE_ASPECTS;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_TYPE__TYPE_CONTAINER = DATA_TYPE__TYPE_CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2520,7 +1854,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTag()
 	 * @generated
 	 */
-	int TAG = 32;
+	int TAG = 19;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2584,7 +1918,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getConstraint()
 	 * @generated
 	 */
-	int CONSTRAINT = 33;
+	int CONSTRAINT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2677,6 +2011,510 @@ public interface StructurePackage extends EPackage {
 	int CONSTRAINT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION__TAG = TYPE_DEFINITION__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION__OWNED_TAG = TYPE_DEFINITION__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION__NAME = TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION__IS_ASPECT = TYPE_DEFINITION__IS_ASPECT;
+
+	/**
+	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION__BASE_ASPECTS = TYPE_DEFINITION__BASE_ASPECTS;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameter</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION__TYPE_PARAMETER = TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Generic Type Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__TAG = GENERIC_TYPE_DEFINITION__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__OWNED_TAG = GENERIC_TYPE_DEFINITION__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__NAME = GENERIC_TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__IS_ASPECT = GENERIC_TYPE_DEFINITION__IS_ASPECT;
+
+	/**
+	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__BASE_ASPECTS = GENERIC_TYPE_DEFINITION__BASE_ASPECTS;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameter</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__TYPE_PARAMETER = GENERIC_TYPE_DEFINITION__TYPE_PARAMETER;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__CONTAINED_TYPE = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Inv</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__INV = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__IS_ABSTRACT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Owned Attribute</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__OWNED_ATTRIBUTE = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__OWNED_OPERATION = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__SUPER_TYPE = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of structural features of the '<em>Class Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION_FEATURE_COUNT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODELING_UNIT__TAG = OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODELING_UNIT__OWNED_TAG = OBJECT__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODELING_UNIT__OWNED_TAGS = OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Packages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODELING_UNIT__PACKAGES = OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Requires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODELING_UNIT__REQUIRES = OBJECT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Usings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODELING_UNIT__USINGS = OBJECT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Referenced Modeling Units</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODELING_UNIT__REFERENCED_MODELING_UNITS = OBJECT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Include Filters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODELING_UNIT__INCLUDE_FILTERS = OBJECT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Exclude Filters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODELING_UNIT__EXCLUDE_FILTERS = OBJECT_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of structural features of the '<em>Modeling Unit</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODELING_UNIT_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REQUIRE__TAG = OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REQUIRE__OWNED_TAG = OBJECT__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REQUIRE__URI = OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Require</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REQUIRE_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USING__TAG = OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USING__OWNED_TAG = OBJECT__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USING__QUALIFIED_NAME = OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Using</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USING_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER__TAG = OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER__OWNED_TAG = OBJECT__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER__QUALIFIED_NAME = OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Filter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE__TAG = TYPE_CONTAINER__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE__OWNED_TAG = TYPE_CONTAINER__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE__TYPE_CONTAINER = TYPE_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE__NAME = TYPE_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Supertype</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE__SUPERTYPE = TYPE_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Type Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_VARIABLE__TAG = TYPE_VARIABLE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_VARIABLE__OWNED_TAG = TYPE_VARIABLE__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_VARIABLE__CONTAINED_TYPE = TYPE_VARIABLE__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_VARIABLE__TYPE_CONTAINER = TYPE_VARIABLE__TYPE_CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_VARIABLE__NAME = TYPE_VARIABLE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Supertype</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_VARIABLE__SUPERTYPE = TYPE_VARIABLE__SUPERTYPE;
+
+	/**
+	 * The number of structural features of the '<em>Object Type Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_VARIABLE_FEATURE_COUNT = TYPE_VARIABLE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.VirtualTypeContainerImpl <em>Virtual Type Container</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2684,7 +2522,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getVirtualTypeContainer()
 	 * @generated
 	 */
-	int VIRTUAL_TYPE_CONTAINER = 34;
+	int VIRTUAL_TYPE_CONTAINER = 30;
 
 	/**
 	 * The feature id for the '<em><b>Virtual Type</b></em>' containment reference list.
@@ -2712,7 +2550,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeVariable()
 	 * @generated
 	 */
-	int MODEL_TYPE_VARIABLE = 35;
+	int MODEL_TYPE_VARIABLE = 31;
 
 	/**
 	 * The feature id for the '<em><b>Virtual Type</b></em>' containment reference list.
@@ -2742,13 +2580,22 @@ public interface StructurePackage extends EPackage {
 	int MODEL_TYPE_VARIABLE__OWNED_TAG = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_VARIABLE__CONTAINED_TYPE = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_VARIABLE__TYPE_CONTAINER = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 2;
+	int MODEL_TYPE_VARIABLE__TYPE_CONTAINER = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2757,16 +2604,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_VARIABLE__NAME = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_VARIABLE__CONTAINED_TYPE = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 4;
+	int MODEL_TYPE_VARIABLE__NAME = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Supertype</b></em>' reference.
@@ -2794,7 +2632,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getVirtualType()
 	 * @generated
 	 */
-	int VIRTUAL_TYPE = 36;
+	int VIRTUAL_TYPE = 32;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2815,6 +2653,15 @@ public interface StructurePackage extends EPackage {
 	int VIRTUAL_TYPE__OWNED_TAG = OBJECT_TYPE_VARIABLE__OWNED_TAG;
 
 	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TYPE__CONTAINED_TYPE = OBJECT_TYPE_VARIABLE__CONTAINED_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2831,15 +2678,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int VIRTUAL_TYPE__NAME = OBJECT_TYPE_VARIABLE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIRTUAL_TYPE__CONTAINED_TYPE = OBJECT_TYPE_VARIABLE__CONTAINED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Supertype</b></em>' reference.
@@ -2885,6 +2723,204 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int VIRTUAL_TYPE_FEATURE_COUNT = OBJECT_TYPE_VARIABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__TAG = TYPE_CONTAINER__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__OWNED_TAG = TYPE_CONTAINER__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__TYPE_CONTAINER = TYPE_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__TYPE = TYPE_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Product Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__TAG = TYPE_CONTAINER__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__OWNED_TAG = TYPE_CONTAINER__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__TYPE_CONTAINER = TYPE_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Left</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__LEFT = TYPE_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Right</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__RIGHT = TYPE_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Function Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__TAG = TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__OWNED_TAG = TYPE__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
+
+	/**
+	 * The number of structural features of the '<em>Void Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CONTAINER__TAG = NAMED_ELEMENT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CONTAINER__OWNED_TAG = NAMED_ELEMENT__OWNED_TAG;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CONTAINER__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Type Definition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Type Definition Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CONTAINER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.

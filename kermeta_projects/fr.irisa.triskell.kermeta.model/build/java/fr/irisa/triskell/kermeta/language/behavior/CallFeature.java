@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeature.java,v 1.6 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: CallFeature.java,v 1.7 2008-01-22 14:24:31 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -18,11 +18,11 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallFeature#getTarget <em>Target</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallFeature#isIsAtpre <em>Is Atpre</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallFeature#getStaticProperty <em>Static Property</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallFeature#getStaticOperation <em>Static Operation</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallFeature#getStaticEnumLiteral <em>Static Enum Literal</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallFeature#getTarget <em>Target</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallFeature#isIsAtpre <em>Is Atpre</em>}</li>
  * </ul>
  * </p>
  *

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Operation.java,v 1.5 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: Operation.java,v 1.6 2008-01-22 14:24:30 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -18,15 +18,15 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getBody <em>Body</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getSuperOperation <em>Super Operation</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getOwningClass <em>Owning Class</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getTypeParameter <em>Type Parameter</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getRaisedException <em>Raised Exception</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getOwnedParameter <em>Owned Parameter</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getPre <em>Pre</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getPost <em>Post</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#isIsAbstract <em>Is Abstract</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getBody <em>Body</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getSuperOperation <em>Super Operation</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getOwningClass <em>Owning Class</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getTypeParameter <em>Type Parameter</em>}</li>
  * </ul>
  * </p>
  *

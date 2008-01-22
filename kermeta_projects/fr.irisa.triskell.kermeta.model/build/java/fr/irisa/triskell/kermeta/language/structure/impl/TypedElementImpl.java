@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypedElementImpl.java,v 1.6 2007-07-20 15:09:01 ftanguy Exp $
+ * $Id: TypedElementImpl.java,v 1.7 2008-01-22 14:24:28 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class TypedElementImpl extends TypeContainerImpl implements TypedElement {
+public abstract class TypedElementImpl extends TypeContainerImpl implements TypedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

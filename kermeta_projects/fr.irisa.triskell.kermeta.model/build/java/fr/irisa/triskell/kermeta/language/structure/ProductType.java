@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProductType.java,v 1.3 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: ProductType.java,v 1.4 2008-01-22 14:24:31 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ProductType extends Type, TypeContainer {
+public interface ProductType extends TypeContainer, Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

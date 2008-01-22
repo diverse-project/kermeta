@@ -1,7 +1,7 @@
 /**
  * IRISA / INRIA / Universite de Rennes 1
  *
- * $Id: FilterImpl.java,v 1.2 2007-07-20 15:09:01 ftanguy Exp $
+ * $Id: FilterImpl.java,v 1.3 2008-01-22 14:24:29 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *
  * @generated
  */
-public class FilterImpl extends EObjectImpl implements Filter {
+public class FilterImpl extends ObjectImpl implements Filter {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

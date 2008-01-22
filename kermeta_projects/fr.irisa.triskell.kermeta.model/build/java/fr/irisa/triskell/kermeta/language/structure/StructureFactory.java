@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactory.java,v 1.6 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: StructureFactory.java,v 1.7 2008-01-22 14:24:30 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -131,24 +131,6 @@ public interface StructureFactory extends EFactory {
 	ObjectTypeVariable createObjectTypeVariable();
 
 	/**
-	 * Returns a new object of class '<em>Named Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Named Element</em>'.
-	 * @generated
-	 */
-	NamedElement createNamedElement();
-
-	/**
-	 * Returns a new object of class '<em>Typed Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Typed Element</em>'.
-	 * @generated
-	 */
-	TypedElement createTypedElement();
-
-	/**
 	 * Returns a new object of class '<em>Class Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -201,15 +183,6 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	VoidType createVoidType();
-
-	/**
-	 * Returns a new object of class '<em>Data Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Type</em>'.
-	 * @generated
-	 */
-	DataType createDataType();
 
 	/**
 	 * Returns a new object of class '<em>Require</em>'.

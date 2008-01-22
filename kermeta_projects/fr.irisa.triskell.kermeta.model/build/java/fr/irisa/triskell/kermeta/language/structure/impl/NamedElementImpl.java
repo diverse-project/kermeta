@@ -2,10 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NamedElementImpl.java,v 1.6 2007-07-20 15:09:01 ftanguy Exp $
- * $Id: NamedElementImpl.java,v 1.6 2007-07-20 15:09:01 ftanguy Exp $
- * $Id: NamedElementImpl.java,v 1.6 2007-07-20 15:09:01 ftanguy Exp $
- * $Id: NamedElementImpl.java,v 1.6 2007-07-20 15:09:01 ftanguy Exp $
+ * $Id: NamedElementImpl.java,v 1.7 2008-01-22 14:24:29 cfaucher Exp $
+ * $Id: NamedElementImpl.java,v 1.7 2008-01-22 14:24:29 cfaucher Exp $
+ * $Id: NamedElementImpl.java,v 1.7 2008-01-22 14:24:29 cfaucher Exp $
+ * $Id: NamedElementImpl.java,v 1.7 2008-01-22 14:24:29 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -37,7 +37,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class NamedElementImpl extends ObjectImpl implements NamedElement {
+public abstract class NamedElementImpl extends ObjectImpl implements NamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactoryImpl.java,v 1.12 2007-07-20 15:09:01 ftanguy Exp $
+ * $Id: StructureFactoryImpl.java,v 1.13 2008-01-22 14:24:28 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -99,37 +99,34 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case StructurePackage.CLASS: return createClass();
 			case StructurePackage.OBJECT: return createObject();
-			case StructurePackage.MULTIPLICITY_ELEMENT: return createMultiplicityElement();
+			case StructurePackage.MODEL: return createModel();
+			case StructurePackage.MODEL_TYPE: return createModelType();
 			case StructurePackage.OPERATION: return createOperation();
 			case StructurePackage.PROPERTY: return createProperty();
 			case StructurePackage.TYPE: return createType();
 			case StructurePackage.ENUMERATION_LITERAL: return createEnumerationLiteral();
 			case StructurePackage.TYPE_VARIABLE_BINDING: return createTypeVariableBinding();
-			case StructurePackage.CLASS: return createClass();
-			case StructurePackage.MODEL: return createModel();
-			case StructurePackage.MODEL_TYPE: return createModelType();
-			case StructurePackage.OBJECT_TYPE_VARIABLE: return createObjectTypeVariable();
-			case StructurePackage.NAMED_ELEMENT: return createNamedElement();
-			case StructurePackage.TYPED_ELEMENT: return createTypedElement();
-			case StructurePackage.CLASS_DEFINITION: return createClassDefinition();
-			case StructurePackage.FUNCTION_TYPE: return createFunctionType();
-			case StructurePackage.PRODUCT_TYPE: return createProductType();
-			case StructurePackage.PACKAGE: return createPackage();
+			case StructurePackage.MULTIPLICITY_ELEMENT: return createMultiplicityElement();
 			case StructurePackage.TYPE_DEFINITION: return createTypeDefinition();
-			case StructurePackage.VOID_TYPE: return createVoidType();
-			case StructurePackage.DATA_TYPE: return createDataType();
-			case StructurePackage.REQUIRE: return createRequire();
-			case StructurePackage.USING: return createUsing();
-			case StructurePackage.MODELING_UNIT: return createModelingUnit();
-			case StructurePackage.FILTER: return createFilter();
 			case StructurePackage.ENUMERATION: return createEnumeration();
+			case StructurePackage.PACKAGE: return createPackage();
 			case StructurePackage.PARAMETER: return createParameter();
 			case StructurePackage.PRIMITIVE_TYPE: return createPrimitiveType();
 			case StructurePackage.TAG: return createTag();
 			case StructurePackage.CONSTRAINT: return createConstraint();
+			case StructurePackage.CLASS_DEFINITION: return createClassDefinition();
+			case StructurePackage.MODELING_UNIT: return createModelingUnit();
+			case StructurePackage.REQUIRE: return createRequire();
+			case StructurePackage.USING: return createUsing();
+			case StructurePackage.FILTER: return createFilter();
+			case StructurePackage.OBJECT_TYPE_VARIABLE: return createObjectTypeVariable();
 			case StructurePackage.MODEL_TYPE_VARIABLE: return createModelTypeVariable();
 			case StructurePackage.VIRTUAL_TYPE: return createVirtualType();
+			case StructurePackage.PRODUCT_TYPE: return createProductType();
+			case StructurePackage.FUNCTION_TYPE: return createFunctionType();
+			case StructurePackage.VOID_TYPE: return createVoidType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -300,26 +297,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NamedElement createNamedElement() {
-		NamedElementImpl namedElement = new NamedElementImpl();
-		return namedElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TypedElement createTypedElement() {
-		TypedElementImpl typedElement = new TypedElementImpl();
-		return typedElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ClassDefinition createClassDefinition() {
 		ClassDefinitionImpl classDefinition = new ClassDefinitionImpl();
 		return classDefinition;
@@ -373,16 +350,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	public VoidType createVoidType() {
 		VoidTypeImpl voidType = new VoidTypeImpl();
 		return voidType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DataType createDataType() {
-		DataTypeImpl dataType = new DataTypeImpl();
-		return dataType;
 	}
 
 	/**

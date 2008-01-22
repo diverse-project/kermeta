@@ -1,7 +1,7 @@
 /**
  * IRISA / INRIA / Universite de Rennes 1
  *
- * $Id: ModelingUnit.java,v 1.2 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: ModelingUnit.java,v 1.3 2008-01-22 14:24:30 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -17,13 +17,13 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ModelingUnit#getOwnedTags <em>Owned Tags</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ModelingUnit#getPackages <em>Packages</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ModelingUnit#getRequires <em>Requires</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ModelingUnit#getUsings <em>Usings</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ModelingUnit#getReferencedModelingUnits <em>Referenced Modeling Units</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ModelingUnit#getIncludeFilters <em>Include Filters</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ModelingUnit#getExcludeFilters <em>Exclude Filters</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ModelingUnit#getOwnedTags <em>Owned Tags</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ModelingUnit extends EObject {
+public interface ModelingUnit extends fr.irisa.triskell.kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

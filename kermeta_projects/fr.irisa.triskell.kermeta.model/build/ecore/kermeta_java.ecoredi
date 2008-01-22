@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="ASCII"?>
-<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_A5LAABQ6Edya8YD8Vgb7-g" activeDiagram="_M0vmgEdFEdyds4uQuZm0Wg">
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_A5LAABQ6Edya8YD8Vgb7-g" activeDiagram="_A5UxARQ6Edya8YD8Vgb7-g">
   <model href="kermeta_java.ecore#/"/>
   <subdiagrams xmi:id="_A5UxABQ6Edya8YD8Vgb7-g">
     <model href="kermeta_java.ecore#//language/structure"/>
@@ -17,7 +17,7 @@
         <element href="kermeta_java.ecore#//language/structure"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode" xmi:id="_A5UxDBQ6Edya8YD8Vgb7-g" position="665,38" size="191,-1">
-        <anchorage xmi:id="_A5d68BQ6Edya8YD8Vgb7-g" graphEdge="_A5xc-xQ6Edya8YD8Vgb7-g _A5xdARQ6Edya8YD8Vgb7-g _A5xdBxQ6Edya8YD8Vgb7-g _A5xdCRQ6Edya8YD8Vgb7-g _A5xdCxQ6Edya8YD8Vgb7-g _A5xdDRQ6Edya8YD8Vgb7-g _A5xdDxQ6Edya8YD8Vgb7-g _DCEFUETxEdyye4TIJj6n6g _DCEFVETxEdyye4TIJj6n6g _DCOdYETxEdyye4TIJj6n6g _DCRgsETxEdyye4TIJj6n6g"/>
+        <anchorage xmi:id="_A5d68BQ6Edya8YD8Vgb7-g" graphEdge="_A5xc-xQ6Edya8YD8Vgb7-g _A5xdARQ6Edya8YD8Vgb7-g _A5xdBxQ6Edya8YD8Vgb7-g _A5xdCRQ6Edya8YD8Vgb7-g _A5xdCxQ6Edya8YD8Vgb7-g _A5xdDRQ6Edya8YD8Vgb7-g _A5xdDxQ6Edya8YD8Vgb7-g _DCEFUETxEdyye4TIJj6n6g _DCEFVETxEdyye4TIJj6n6g _DCOdYETxEdyye4TIJj6n6g _DCRgsETxEdyye4TIJj6n6g _WfD-YKJYEdy7kvDBvupEWg"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A5d68RQ6Edya8YD8Vgb7-g" presentation="default">
           <element href="kermeta_java.ecore#//language/structure/Object"/>
         </semanticModel>
@@ -89,7 +89,7 @@
         </contained>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_A5d7ExQ6Edya8YD8Vgb7-g" position="308,291" size="115,-1">
-        <anchorage xmi:id="_A5d7FBQ6Edya8YD8Vgb7-g" graphEdge="_A5xc-xQ6Edya8YD8Vgb7-g _A5xdARQ6Edya8YD8Vgb7-g _A5xdBxQ6Edya8YD8Vgb7-g _DCSu0ETxEdyye4TIJj6n6g"/>
+        <anchorage xmi:id="_A5d7FBQ6Edya8YD8Vgb7-g" graphEdge="_A5xc-xQ6Edya8YD8Vgb7-g _A5xdARQ6Edya8YD8Vgb7-g _A5xdBxQ6Edya8YD8Vgb7-g _DCSu0ETxEdyye4TIJj6n6g _WfD-YKJYEdy7kvDBvupEWg"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A5d7FRQ6Edya8YD8Vgb7-g" presentation="default">
           <element href="kermeta_java.ecore#//language/structure/Tag"/>
         </semanticModel>
@@ -443,8 +443,8 @@
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5nscxQ6Edya8YD8Vgb7-g" anchor="_A5nsaxQ6Edya8YD8Vgb7-g _A5nsCxQ6Edya8YD8Vgb7-g">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A5nsdBQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -80, -920, 178]</waypoints>
-        <waypoints>[920, -80, 0, 178]</waypoints>
+        <waypoints>[0, -170, -906, 88]</waypoints>
+        <waypoints>[906, -170, 0, 88]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_A5nsdRQ6Edya8YD8Vgb7-g" anchor="_A5nsaxQ6Edya8YD8Vgb7-g _A5nsKxQ6Edya8YD8Vgb7-g">
         <property xmi:id="_A5nsdhQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
@@ -562,6 +562,16 @@
             <property xmi:id="_A5nssRQ6Edya8YD8Vgb7-g" key="font" value="-regular-8"/>
             <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A5nsshQ6Edya8YD8Vgb7-g" presentation="default">
               <element href="kermeta_java.ecore#//language/structure/Property/isID"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" xmi:id="_FJq_4aJYEdy7kvDBvupEWg" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_FJq_4qJYEdy7kvDBvupEWg" presentation="default">
+              <element href="kermeta_java.ecore#//language/structure/Property/isGetterAbstract"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" xmi:id="_FJq_46JYEdy7kvDBvupEWg" position="0,0" size="-1,-1">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_FJq_5KJYEdy7kvDBvupEWg" presentation="default">
+              <element href="kermeta_java.ecore#//language/structure/Property/isSetterAbstract"/>
             </semanticModel>
           </contained>
         </contained>
@@ -1642,8 +1652,15 @@
         <contained xsi:type="di:EdgeObjectUV" xmi:id="_DChYUkTxEdyye4TIJj6n6g" id="nameLabel" uDistance="20" vDistance="20"/>
         <contained xsi:type="di:EdgeObjectUV" xmi:id="_DChYU0TxEdyye4TIJj6n6g" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
       </contained>
+      <contained xsi:type="di:GraphEdge" xmi:id="_WfD-YKJYEdy7kvDBvupEWg" anchor="_A5d68BQ6Edya8YD8Vgb7-g _A5d7FBQ6Edya8YD8Vgb7-g">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_WfD-YaJYEdy7kvDBvupEWg" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Object/ownedTag"/>
+        </semanticModel>
+        <contained xsi:type="di:EdgeObjectUV" xmi:id="_WfD-YqJYEdy7kvDBvupEWg" id="nameLabel" uDistance="20" vDistance="20"/>
+        <contained xsi:type="di:EdgeObjectUV" xmi:id="_WfD-Y6JYEdy7kvDBvupEWg" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      </contained>
     </diagrams>
-    <diagrams xmi:id="_A5xdFxQ6Edya8YD8Vgb7-g" position="0,0" size="100,100" name="TypeSystem" zoom="0.75" viewport="490,107">
+    <diagrams xmi:id="_A5xdFxQ6Edya8YD8Vgb7-g" position="0,0" size="100,100" name="TypeSystem" zoom="0.75" viewport="89,0">
       <property xmi:id="_A5xdGBQ6Edya8YD8Vgb7-g" key="pageFormatName" value="A2"/>
       <property xmi:id="_A5xdGRQ6Edya8YD8Vgb7-g" key="diagramWidth" value="1680"/>
       <property xmi:id="_A5xdGhQ6Edya8YD8Vgb7-g" key="diagramHeight" value="2376"/>
@@ -4455,826 +4472,6 @@
         <waypoints>[74, -35, 0, 44]</waypoints>
       </contained>
     </diagrams>
-    <diagrams xmi:id="_A6OJ0hQ6Edya8YD8Vgb7-g" position="0,0" size="100,100" name="behavior with links" viewport="0,0">
-      <property xmi:id="_A6OJ0xQ6Edya8YD8Vgb7-g" key="pageFormatName" value="A4"/>
-      <property xmi:id="_A6OJ1BQ6Edya8YD8Vgb7-g" key="diagramWidth" value="840"/>
-      <property xmi:id="_A6OJ1RQ6Edya8YD8Vgb7-g" key="diagramHeight" value="1188"/>
-      <property xmi:id="_A6OJ1hQ6Edya8YD8Vgb7-g" key="pageMarginName" value="Small Margin"/>
-      <property xmi:id="_A6OJ1xQ6Edya8YD8Vgb7-g" key="diagramTopMargin" value="20"/>
-      <property xmi:id="_A6OJ2BQ6Edya8YD8Vgb7-g" key="diagramBottomMargin" value="20"/>
-      <property xmi:id="_A6XS0BQ6Edya8YD8Vgb7-g" key="diagramLeftMargin" value="20"/>
-      <property xmi:id="_A6XS0RQ6Edya8YD8Vgb7-g" key="diagramRightMargin" value="20"/>
-      <property xmi:id="_A6XS0hQ6Edya8YD8Vgb7-g" key="orientation" value="landscape"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XS0xQ6Edya8YD8Vgb7-g" presentation="org.topcased.modeler.ecore.ediagram">
-        <element href="kermeta_java.ecore#//language/behavior"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XS1BQ6Edya8YD8Vgb7-g" position="207,322" size="121,-1">
-        <anchorage xmi:id="_A6XS1RQ6Edya8YD8Vgb7-g" graphEdge="_A6XS6BQ6Edya8YD8Vgb7-g _A6XS7RQ6Edya8YD8Vgb7-g _A6XS-RQ6Edya8YD8Vgb7-g _A6XTBhQ6Edya8YD8Vgb7-g _A6XTFhQ6Edya8YD8Vgb7-g _A6XTLRQ6Edya8YD8Vgb7-g _A6XTOxQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XS1hQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/CallExpression"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XS1xQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XS2BQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XS2RQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/CallExpression"/>
-          </semanticModel>
-          <contained xsi:type="di:GraphNode" xmi:id="_A6XS2hQ6Edya8YD8Vgb7-g" position="0,0" size="-1,-1">
-            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XS2xQ6Edya8YD8Vgb7-g" presentation="default">
-              <element href="kermeta_java.ecore#//language/behavior/CallExpression/name"/>
-            </semanticModel>
-          </contained>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XS3BQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XS3RQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XS3hQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/CallExpression"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XS3xQ6Edya8YD8Vgb7-g" position="219,181" size="98,-1">
-        <anchorage xmi:id="_A6XS4BQ6Edya8YD8Vgb7-g" graphEdge="_A6XS6BQ6Edya8YD8Vgb7-g _A6XS7RQ6Edya8YD8Vgb7-g _A6XTCBQ6Edya8YD8Vgb7-g _A6XTPxQ6Edya8YD8Vgb7-g _A6XTRBQ6Edya8YD8Vgb7-g _A6XTTxQ6Edya8YD8Vgb7-g _A6XTVBQ6Edya8YD8Vgb7-g _A6XTXxQ6Edya8YD8Vgb7-g _A6XTYxQ6Edya8YD8Vgb7-g _A6XTaBQ6Edya8YD8Vgb7-g _A6XTbRQ6Edya8YD8Vgb7-g _A6XTeBQ6Edya8YD8Vgb7-g _A6XTfRQ6Edya8YD8Vgb7-g _A6XTihQ6Edya8YD8Vgb7-g _A6XTqRQ6Edya8YD8Vgb7-g _A6XTtBQ6Edya8YD8Vgb7-g _A6XTwxQ6Edya8YD8Vgb7-g _A6XTxRQ6Edya8YD8Vgb7-g _A6XT0xQ6Edya8YD8Vgb7-g _A6XT2BQ6Edya8YD8Vgb7-g _A6XUOBQ6Edya8YD8Vgb7-g _A6XUPRQ6Edya8YD8Vgb7-g _A6XUQhQ6Edya8YD8Vgb7-g _A6XURxQ6Edya8YD8Vgb7-g _A6XUUhQ6Edya8YD8Vgb7-g _A6XUXxQ6Edya8YD8Vgb7-g _A6XUZBQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XS4RQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Expression"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XS4hQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XS4xQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XS5BQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Expression"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XS5RQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XS5hQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XS5xQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Expression"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XS6BQ6Edya8YD8Vgb7-g" anchor="_A6XS1RQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XS6RQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XS6hQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/CallExpression/parameters"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XS6xQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="48"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XS7BQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="22"/>
-        <waypoints>[95, -23, 94, 124]</waypoints>
-        <waypoints>[95, -139, 94, 8]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XS7RQ6Edya8YD8Vgb7-g" anchor="_A6XS1RQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XS7hQ6Edya8YD8Vgb7-g" key="router" value="Oblique"/>
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XS7xQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XS8BQ6Edya8YD8Vgb7-g" position="180,425" size="103,-1">
-        <anchorage xmi:id="_A6XS8RQ6Edya8YD8Vgb7-g" graphEdge="_A6XS-RQ6Edya8YD8Vgb7-g _A6XTIRQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XS8hQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/CallVariable"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XS8xQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XS9BQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XS9RQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/CallVariable"/>
-          </semanticModel>
-          <contained xsi:type="di:GraphNode" xmi:id="_gRXy4EXHEdyN9PsDqxYcWw" position="0,0" size="-1,-1">
-            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_gRXy4UXHEdyN9PsDqxYcWw" presentation="default">
-              <element href="kermeta_java.ecore#//language/behavior/CallVariable/isAtpre"/>
-            </semanticModel>
-          </contained>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XS9hQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XS9xQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XS-BQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/CallVariable"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XS-RQ6Edya8YD8Vgb7-g" anchor="_A6XS8RQ6Edya8YD8Vgb7-g _A6XS1RQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XS-hQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XS-xQ6Edya8YD8Vgb7-g" position="32,425" size="136,-1">
-        <anchorage xmi:id="_A6XS_BQ6Edya8YD8Vgb7-g" graphEdge="_A6XTBhQ6Edya8YD8Vgb7-g _A6XTCBQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XS_RQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/CallFeature"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XS_hQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XS_xQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTABQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/CallFeature"/>
-          </semanticModel>
-          <contained xsi:type="di:GraphNode" xmi:id="_A6XTARQ6Edya8YD8Vgb7-g" position="0,0" size="-1,-1">
-            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTAhQ6Edya8YD8Vgb7-g" presentation="default">
-              <element href="kermeta_java.ecore#//language/behavior/CallFeature/isAtpre"/>
-            </semanticModel>
-          </contained>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTAxQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTBBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTBRQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/CallFeature"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTBhQ6Edya8YD8Vgb7-g" anchor="_A6XS_BQ6Edya8YD8Vgb7-g _A6XS1RQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XTBxQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTCBQ6Edya8YD8Vgb7-g" anchor="_A6XS_BQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XTCRQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTChQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/CallFeature/target"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTCxQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="39"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTDBQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="13"/>
-        <waypoints>[-96, 0, -264, 250]</waypoints>
-        <waypoints>[-96, -260, -264, -10]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XTDRQ6Edya8YD8Vgb7-g" position="293,425" size="146,-1">
-        <anchorage xmi:id="_A6XTDhQ6Edya8YD8Vgb7-g" graphEdge="_A6XTFhQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTDxQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/CallSuperOperation"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTEBQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTERQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTEhQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/CallSuperOperation"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTExQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTFBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTFRQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/CallSuperOperation"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTFhQ6Edya8YD8Vgb7-g" anchor="_A6XTDhQ6Edya8YD8Vgb7-g _A6XS1RQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XTFxQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XTGBQ6Edya8YD8Vgb7-g" position="185,496" size="94,-1">
-        <anchorage xmi:id="_A6XTGRQ6Edya8YD8Vgb7-g" graphEdge="_A6XTIRQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTGhQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/CallResult"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTGxQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTHBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTHRQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/CallResult"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTHhQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTHxQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTIBQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/CallResult"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTIRQ6Edya8YD8Vgb7-g" anchor="_A6XTGRQ6Edya8YD8Vgb7-g _A6XS8RQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XTIhQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XTIxQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XTJBQ6Edya8YD8Vgb7-g" position="449,425" size="89,-1">
-        <anchorage xmi:id="_A6XTJRQ6Edya8YD8Vgb7-g" graphEdge="_A6XTLRQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTJhQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/CallValue"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTJxQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTKBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTKRQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/CallValue"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTKhQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTKxQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTLBQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/CallValue"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTLRQ6Edya8YD8Vgb7-g" anchor="_A6XTJRQ6Edya8YD8Vgb7-g _A6XS1RQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XTLhQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XTLxQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[-5, -104, 182, 58]</waypoints>
-        <waypoints>[-187, -104, 0, 58]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XTMBQ6Edya8YD8Vgb7-g" position="9,322" size="133,-1">
-        <anchorage xmi:id="_A6XTMRQ6Edya8YD8Vgb7-g" graphEdge="_A6XTOxQ6Edya8YD8Vgb7-g _A6XTPxQ6Edya8YD8Vgb7-g _A6XTRBQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTMhQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Assignment"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTMxQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTNBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTNRQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Assignment"/>
-          </semanticModel>
-          <contained xsi:type="di:GraphNode" xmi:id="_A6XTNhQ6Edya8YD8Vgb7-g" position="0,0" size="-1,-1">
-            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTNxQ6Edya8YD8Vgb7-g" presentation="default">
-              <element href="kermeta_java.ecore#//language/behavior/Assignment/isCast"/>
-            </semanticModel>
-          </contained>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTOBQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTORQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTOhQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Assignment"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTOxQ6Edya8YD8Vgb7-g" anchor="_A6XTMRQ6Edya8YD8Vgb7-g _A6XS1RQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTPBQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Assignment/target"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTPRQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="5" vDistance="2"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTPhQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="13" vDistance="-4"/>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTPxQ6Edya8YD8Vgb7-g" anchor="_A6XTMRQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XTQBQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTQRQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Assignment/value"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTQhQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="28"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTQxQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="16"/>
-        <waypoints>[-26, -134, -219, 13]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTRBQ6Edya8YD8Vgb7-g" anchor="_A6XTMRQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XTRRQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XTRhQ6Edya8YD8Vgb7-g" position="362,342" size="66,-1">
-        <anchorage xmi:id="_A6XTRxQ6Edya8YD8Vgb7-g" graphEdge="_A6XTTxQ6Edya8YD8Vgb7-g _A6XTVBQ6Edya8YD8Vgb7-g _A6XTjhQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTSBQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Block"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTSRQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTShQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTSxQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Block"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTTBQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTTRQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTThQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Block"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTTxQ6Edya8YD8Vgb7-g" anchor="_A6XTRxQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XTUBQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTURQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Block/statement"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTUhQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="50"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTUxQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="24"/>
-        <waypoints>[18, -173, 145, -12]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTVBQ6Edya8YD8Vgb7-g" anchor="_A6XTRxQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XTVRQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XTVhQ6Edya8YD8Vgb7-g" position="434,267" size="98,-1">
-        <anchorage xmi:id="_A6XTVxQ6Edya8YD8Vgb7-g" graphEdge="_A6XTXxQ6Edya8YD8Vgb7-g _A6XTYxQ6Edya8YD8Vgb7-g _A6XTaBQ6Edya8YD8Vgb7-g _A6XTbRQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTWBQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Conditional"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTWRQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTWhQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTWxQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Conditional"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTXBQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTXRQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTXhQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Conditional"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTXxQ6Edya8YD8Vgb7-g" anchor="_A6XTVxQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTYBQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Conditional/thenBody"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTYRQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="6" vDistance="13"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTYhQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="7"/>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTYxQ6Edya8YD8Vgb7-g" anchor="_A6XTVxQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XTZBQ6Edya8YD8Vgb7-g" key="router" value="Oblique"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTZRQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Conditional/elseBody"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTZhQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="40"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTZxQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="58"/>
-        <waypoints>[-172, 0, 43, 86]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTaBQ6Edya8YD8Vgb7-g" anchor="_A6XTVxQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XTaRQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTahQ6Edya8YD8Vgb7-g" presentation="default"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTaxQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="6" vDistance="41"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTbBQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="8" vDistance="31"/>
-        <waypoints>[0, -121, 215, -35]</waypoints>
-        <waypoints>[-169, -121, 46, -35]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTbRQ6Edya8YD8Vgb7-g" anchor="_A6XTVxQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XTbhQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XTbxQ6Edya8YD8Vgb7-g" position="537,267" size="67,-1">
-        <anchorage xmi:id="_A6XTcBQ6Edya8YD8Vgb7-g" graphEdge="_A6XTeBQ6Edya8YD8Vgb7-g _A6XTfRQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTcRQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Raise"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTchQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTcxQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTdBQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Raise"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTdRQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTdhQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTdxQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Raise"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTeBQ6Edya8YD8Vgb7-g" anchor="_A6XTcBQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XTeRQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTehQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Raise/expression"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTexQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="22" vDistance="55"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTfBQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="21" vDistance="44"/>
-        <waypoints>[0, -135, 302, -49]</waypoints>
-        <waypoints>[-267, -135, 35, -49]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTfRQ6Edya8YD8Vgb7-g" anchor="_A6XTcBQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XTfhQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XTfxQ6Edya8YD8Vgb7-g" position="396,615" size="173,-1">
-        <anchorage xmi:id="_A6XTgBQ6Edya8YD8Vgb7-g" graphEdge="_A6XTihQ6Edya8YD8Vgb7-g _A6XTjhQ6Edya8YD8Vgb7-g _A6XTnBQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTgRQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Rescue"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTghQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTgxQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XThBQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Rescue"/>
-          </semanticModel>
-          <contained xsi:type="di:GraphNode" xmi:id="_A6XThRQ6Edya8YD8Vgb7-g" position="0,0" size="-1,-1">
-            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XThhQ6Edya8YD8Vgb7-g" presentation="default">
-              <element href="kermeta_java.ecore#//language/behavior/Rescue/exceptionName"/>
-            </semanticModel>
-          </contained>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XThxQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTiBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTiRQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Rescue"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTihQ6Edya8YD8Vgb7-g" anchor="_A6XTgBQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTixQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Rescue/body"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTjBQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="15"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTjRQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="14" vDistance="-17"/>
-        <waypoints>[-275, -300, -61, 82]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTjhQ6Edya8YD8Vgb7-g" anchor="_A6XTRxQ6Edya8YD8Vgb7-g _A6XTgBQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XTjxQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTkBQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Block/rescueBlock"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTkRQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="12" vDistance="2"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTkhQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="14" vDistance="-4"/>
-        <waypoints>[112, 14, 25, -207]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XTkxQ6Edya8YD8Vgb7-g" position="705,620" size="122,-1">
-        <anchorage xmi:id="_A6XTlBQ6Edya8YD8Vgb7-g" graphEdge="_A6XTnBQ6Edya8YD8Vgb7-g _A6XT5RQ6Edya8YD8Vgb7-g _A6XUHhQ6Edya8YD8Vgb7-g _A6XUZhQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTlRQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/TypeReference"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTlhQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTlxQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTmBQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/TypeReference"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTmRQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTmhQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTmxQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/TypeReference"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTnBQ6Edya8YD8Vgb7-g" anchor="_A6XTgBQ6Edya8YD8Vgb7-g _A6XTlBQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTnRQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Rescue/exceptionType"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTnhQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="5" vDistance="1"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTnxQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="20" vDistance="-7"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XToBQ6Edya8YD8Vgb7-g" position="597,357" size="68,-1">
-        <anchorage xmi:id="_A6XToRQ6Edya8YD8Vgb7-g" graphEdge="_A6XTqRQ6Edya8YD8Vgb7-g _A6XT-RQ6Edya8YD8Vgb7-g _A6XUBhQ6Edya8YD8Vgb7-g _A6XUExQ6Edya8YD8Vgb7-g _A6XUIhQ6Edya8YD8Vgb7-g _A6XULRQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTohQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Literal"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XToxQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTpBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTpRQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Literal"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTphQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTpxQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTqBQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Literal"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTqRQ6Edya8YD8Vgb7-g" anchor="_A6XToRQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XTqhQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XTqxQ6Edya8YD8Vgb7-g" position="648,267" size="136,-1">
-        <anchorage xmi:id="_A6XTrBQ6Edya8YD8Vgb7-g" graphEdge="_A6XTtBQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTrRQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/EmptyExpression"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTrhQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTrxQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTsBQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/EmptyExpression"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTsRQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTshQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTsxQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/EmptyExpression"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTtBQ6Edya8YD8Vgb7-g" anchor="_A6XTrBQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XTtRQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XTthQ6Edya8YD8Vgb7-g" position="715,327" size="128,-1">
-        <anchorage xmi:id="_A6XTtxQ6Edya8YD8Vgb7-g" graphEdge="_A6XTwxQ6Edya8YD8Vgb7-g _A6XTxRQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTuBQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/JavaStaticCall"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTuRQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTuhQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTuxQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/JavaStaticCall"/>
-          </semanticModel>
-          <contained xsi:type="di:GraphNode" xmi:id="_A6XTvBQ6Edya8YD8Vgb7-g" position="0,0" size="-1,-1">
-            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTvRQ6Edya8YD8Vgb7-g" presentation="default">
-              <element href="kermeta_java.ecore#//language/behavior/JavaStaticCall/jclass"/>
-            </semanticModel>
-          </contained>
-          <contained xsi:type="di:GraphNode" xmi:id="_A6XTvhQ6Edya8YD8Vgb7-g" position="0,0" size="-1,-1">
-            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTvxQ6Edya8YD8Vgb7-g" presentation="default">
-              <element href="kermeta_java.ecore#//language/behavior/JavaStaticCall/jmethod"/>
-            </semanticModel>
-          </contained>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTwBQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTwRQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTwhQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/JavaStaticCall"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTwxQ6Edya8YD8Vgb7-g" anchor="_A6XTtxQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XTxBQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XTxRQ6Edya8YD8Vgb7-g" anchor="_A6XTtxQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XTxhQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTxxQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/JavaStaticCall/parameters"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTyBQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="35" vDistance="78"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XTyRQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="35" vDistance="52"/>
-        <waypoints>[24, -222, 535, -61]</waypoints>
-        <waypoints>[-488, -222, 23, -61]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XTyhQ6Edya8YD8Vgb7-g" position="853,357" size="144,-1">
-        <anchorage xmi:id="_A6XTyxQ6Edya8YD8Vgb7-g" graphEdge="_A6XT0xQ6Edya8YD8Vgb7-g _A6XT2BQ6Edya8YD8Vgb7-g _A6XT6RQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTzBQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/LambdaExpression"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XTzRQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XTzhQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XTzxQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/LambdaExpression"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XT0BQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XT0RQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XT0hQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/LambdaExpression"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XT0xQ6Edya8YD8Vgb7-g" anchor="_A6XTyxQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XT1BQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XT1RQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/LambdaExpression/body"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XT1hQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="99" vDistance="66"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XT1xQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="99" vDistance="50"/>
-        <waypoints>[-19, -303, 638, -127]</waypoints>
-        <waypoints>[-682, -303, -25, -127]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XT2BQ6Edya8YD8Vgb7-g" anchor="_A6XTyxQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XT2RQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XT2hQ6Edya8YD8Vgb7-g" position="961,554" size="139,-1">
-        <anchorage xmi:id="_A6XT2xQ6Edya8YD8Vgb7-g" graphEdge="_A6XT5RQ6Edya8YD8Vgb7-g _A6XT6RQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XT3BQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/LambdaParameter"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XT3RQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XT3hQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XT3xQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/LambdaParameter"/>
-          </semanticModel>
-          <contained xsi:type="di:GraphNode" xmi:id="_A6XT4BQ6Edya8YD8Vgb7-g" position="0,0" size="-1,-1">
-            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XT4RQ6Edya8YD8Vgb7-g" presentation="default">
-              <element href="kermeta_java.ecore#//language/behavior/LambdaParameter/name"/>
-            </semanticModel>
-          </contained>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XT4hQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XT4xQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XT5BQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/LambdaParameter"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XT5RQ6Edya8YD8Vgb7-g" anchor="_A6XT2xQ6Edya8YD8Vgb7-g _A6XTlBQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XT5hQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/LambdaParameter/type"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XT5xQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="36" vDistance="-7"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XT6BQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="22" vDistance="-5"/>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XT6RQ6Edya8YD8Vgb7-g" anchor="_A6XTyxQ6Edya8YD8Vgb7-g _A6XT2xQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XT6hQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XT6xQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/LambdaExpression/parameters"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XT7BQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="18" vDistance="4"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XT7RQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="15" vDistance="-8"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XT7hQ6Edya8YD8Vgb7-g" position="648,514" size="119,-1">
-        <anchorage xmi:id="_A6XT7xQ6Edya8YD8Vgb7-g" graphEdge="_A6XT-RQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XT8BQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/IntegerLiteral"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XT8RQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XT8hQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XT8xQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/IntegerLiteral"/>
-          </semanticModel>
-          <contained xsi:type="di:GraphNode" xmi:id="_A6XT9BQ6Edya8YD8Vgb7-g" position="0,0" size="-1,-1">
-            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XT9RQ6Edya8YD8Vgb7-g" presentation="default">
-              <element href="kermeta_java.ecore#//language/behavior/IntegerLiteral/value"/>
-            </semanticModel>
-          </contained>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XT9hQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XT9xQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XT-BQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/IntegerLiteral"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XT-RQ6Edya8YD8Vgb7-g" anchor="_A6XT7xQ6Edya8YD8Vgb7-g _A6XToRQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XT-hQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -96, 11, 59]</waypoints>
-        <waypoints>[-14, -96, -3, 59]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XT-xQ6Edya8YD8Vgb7-g" position="730,445" size="113,-1">
-        <anchorage xmi:id="_A6XT_BQ6Edya8YD8Vgb7-g" graphEdge="_A6XUBhQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XT_RQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/StringLiteral"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XT_hQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XT_xQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUABQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/StringLiteral"/>
-          </semanticModel>
-          <contained xsi:type="di:GraphNode" xmi:id="_A6XUARQ6Edya8YD8Vgb7-g" position="0,0" size="-1,-1">
-            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUAhQ6Edya8YD8Vgb7-g" presentation="default">
-              <element href="kermeta_java.ecore#//language/behavior/StringLiteral/value"/>
-            </semanticModel>
-          </contained>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XUAxQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XUBBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUBRQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/StringLiteral"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XUBhQ6Edya8YD8Vgb7-g" anchor="_A6XT_BQ6Edya8YD8Vgb7-g _A6XToRQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XUBxQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -45, 96, 59]</waypoints>
-        <waypoints>[-99, -45, -3, 59]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XUCBQ6Edya8YD8Vgb7-g" position="794,514" size="126,-1">
-        <anchorage xmi:id="_A6XUCRQ6Edya8YD8Vgb7-g" graphEdge="_A6XUExQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUChQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/BooleanLiteral"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XUCxQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XUDBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUDRQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/BooleanLiteral"/>
-          </semanticModel>
-          <contained xsi:type="di:GraphNode" xmi:id="_A6XUDhQ6Edya8YD8Vgb7-g" position="0,0" size="-1,-1">
-            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUDxQ6Edya8YD8Vgb7-g" presentation="default">
-              <element href="kermeta_java.ecore#//language/behavior/BooleanLiteral/value"/>
-            </semanticModel>
-          </contained>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XUEBQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XUERQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUEhQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/BooleanLiteral"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XUExQ6Edya8YD8Vgb7-g" anchor="_A6XUCRQ6Edya8YD8Vgb7-g _A6XToRQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XUFBQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -105, 167, 59]</waypoints>
-        <waypoints>[-170, -105, -3, 59]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XUFRQ6Edya8YD8Vgb7-g" position="597,450" size="97,-1">
-        <anchorage xmi:id="_A6XUFhQ6Edya8YD8Vgb7-g" graphEdge="_A6XUHhQ6Edya8YD8Vgb7-g _A6XUIhQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUFxQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/TypeLiteral"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XUGBQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XUGRQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUGhQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/TypeLiteral"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XUGxQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XUHBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUHRQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/TypeLiteral"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XUHhQ6Edya8YD8Vgb7-g" anchor="_A6XUFhQ6Edya8YD8Vgb7-g _A6XTlBQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUHxQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/TypeLiteral/typeref"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XUIBQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="22" vDistance="2"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XUIRQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="17" vDistance="-14"/>
-        <waypoints>[0, 74, -158, -63]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XUIhQ6Edya8YD8Vgb7-g" anchor="_A6XUFhQ6Edya8YD8Vgb7-g _A6XToRQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XUIxQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -39, -82, 59]</waypoints>
-        <waypoints>[79, -39, -3, 59]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XUJBQ6Edya8YD8Vgb7-g" position="524,514" size="94,-1">
-        <anchorage xmi:id="_A6XUJRQ6Edya8YD8Vgb7-g" graphEdge="_A6XULRQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUJhQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/VoidLiteral"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XUJxQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XUKBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUKRQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/VoidLiteral"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XUKhQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XUKxQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XULBQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/VoidLiteral"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XULRQ6Edya8YD8Vgb7-g" anchor="_A6XUJRQ6Edya8YD8Vgb7-g _A6XToRQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XULhQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -39, 225, 59]</waypoints>
-        <waypoints>[-228, -39, -3, 59]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XULxQ6Edya8YD8Vgb7-g" position="826,267" size="61,-1">
-        <anchorage xmi:id="_A6XUMBQ6Edya8YD8Vgb7-g" graphEdge="_A6XUOBQ6Edya8YD8Vgb7-g _A6XUPRQ6Edya8YD8Vgb7-g _A6XUQhQ6Edya8YD8Vgb7-g _A6XURxQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUMRQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Loop"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XUMhQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XUMxQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUNBQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Loop"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XUNRQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XUNhQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUNxQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/Loop"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XUOBQ6Edya8YD8Vgb7-g" anchor="_A6XUMBQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XUORQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUOhQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Loop/initialization"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XUOxQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="49" vDistance="89"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XUPBQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="50" vDistance="62"/>
-        <waypoints>[18, -161, 606, -75]</waypoints>
-        <waypoints>[-578, -161, 10, -75]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XUPRQ6Edya8YD8Vgb7-g" anchor="_A6XUMBQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XUPhQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUPxQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Loop/body"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XUQBQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="78" vDistance="59"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XUQRQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="78" vDistance="33"/>
-        <waypoints>[18, -193, 606, -107]</waypoints>
-        <waypoints>[-602, -193, -14, -107]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XUQhQ6Edya8YD8Vgb7-g" anchor="_A6XUMBQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XUQxQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XURBQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/Loop/stopCondition"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XURRQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="64" vDistance="98"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XURhQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="63" vDistance="87"/>
-        <waypoints>[18, -176, 606, -90]</waypoints>
-        <waypoints>[-589, -176, -1, -90]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XURxQ6Edya8YD8Vgb7-g" anchor="_A6XUMBQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XUSBQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XUSRQ6Edya8YD8Vgb7-g" position="929,267" size="121,-1">
-        <anchorage xmi:id="_A6XUShQ6Edya8YD8Vgb7-g" graphEdge="_A6XUUhQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUSxQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/SelfExpression"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XUTBQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XUTRQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUThQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/SelfExpression"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XUTxQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XUUBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUURQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/SelfExpression"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XUUhQ6Edya8YD8Vgb7-g" anchor="_A6XUShQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XUUxQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_A6XUVBQ6Edya8YD8Vgb7-g" position="1023,352" size="131,-1">
-        <anchorage xmi:id="_A6XUVRQ6Edya8YD8Vgb7-g" graphEdge="_A6XUXxQ6Edya8YD8Vgb7-g _A6XUZBQ6Edya8YD8Vgb7-g _A6XUZhQ6Edya8YD8Vgb7-g"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUVhQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/VariableDecl"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XUVxQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XUWBQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="19"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUWRQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/VariableDecl"/>
-          </semanticModel>
-          <contained xsi:type="di:GraphNode" xmi:id="_A6XUWhQ6Edya8YD8Vgb7-g" position="0,0" size="-1,-1">
-            <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUWxQ6Edya8YD8Vgb7-g" presentation="default">
-              <element href="kermeta_java.ecore#//language/behavior/VariableDecl/identifier"/>
-            </semanticModel>
-          </contained>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_A6XUXBQ6Edya8YD8Vgb7-g">
-          <property xmi:id="_A6XUXRQ6Edya8YD8Vgb7-g" key="eStructuralFeatureID" value="9"/>
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUXhQ6Edya8YD8Vgb7-g" presentation="default">
-            <element href="kermeta_java.ecore#//language/behavior/VariableDecl"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XUXxQ6Edya8YD8Vgb7-g" anchor="_A6XUVRQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XUYBQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUYRQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/VariableDecl/initialization"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XUYhQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="117" vDistance="79"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XUYxQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="117" vDistance="65"/>
-        <waypoints>[18, -319, 838, -142]</waypoints>
-        <waypoints>[-860, -319, -40, -142]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XUZBQ6Edya8YD8Vgb7-g" anchor="_A6XUVRQ6Edya8YD8Vgb7-g _A6XS4BQ6Edya8YD8Vgb7-g">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_A6XUZRQ6Edya8YD8Vgb7-g" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -124, 820, 53]</waypoints>
-        <waypoints>[-820, -124, 0, 53]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_A6XUZhQ6Edya8YD8Vgb7-g" anchor="_A6XUVRQ6Edya8YD8Vgb7-g _A6XTlBQ6Edya8YD8Vgb7-g">
-        <property xmi:id="_A6XUZxQ6Edya8YD8Vgb7-g" key="router" value="Rectilinear"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A6XUaBQ6Edya8YD8Vgb7-g" presentation="default">
-          <element href="kermeta_java.ecore#//language/behavior/VariableDecl/type"/>
-        </semanticModel>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XUaRQ6Edya8YD8Vgb7-g" id="nameLabel" uDistance="25" vDistance="3"/>
-        <contained xsi:type="di:EdgeObjectUV" xmi:id="_A6XUahQ6Edya8YD8Vgb7-g" id="cardinalityLabel" uDistance="59" vDistance="7"/>
-        <waypoints>[31, 269, 353, 7]</waypoints>
-      </contained>
-    </diagrams>
     <diagrams xmi:id="_AVLB8EZJEdyN9PsDqxYcWw" position="0,0" size="100,100" name="kermeta_var_expressions" zoom="0.75" viewport="0,0">
       <property xmi:id="_AVqKIEZJEdyN9PsDqxYcWw" key="pageFormatName" value="A4"/>
       <property xmi:id="_AVqKIUZJEdyN9PsDqxYcWw" key="diagramWidth" value="840"/>
@@ -6109,7 +5306,7 @@
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_NUROQUZMEdyN9PsDqxYcWw" presentation="default" typeInfo="Inheritance"/>
       </contained>
     </diagrams>
-    <diagrams xmi:id="_mKmOoEZMEdyN9PsDqxYcWw" position="0,0" size="100,100" name="kermeta_lambda_expressions" zoom="0.75" viewport="0,0">
+    <diagrams xmi:id="_mKmOoEZMEdyN9PsDqxYcWw" position="0,0" size="100,100" name="kermeta_lambda_expressions" viewport="0,80">
       <property xmi:id="_mLF94EZMEdyN9PsDqxYcWw" key="pageFormatName" value="A4"/>
       <property xmi:id="_mLF94UZMEdyN9PsDqxYcWw" key="diagramWidth" value="840"/>
       <property xmi:id="_mLF94kZMEdyN9PsDqxYcWw" key="diagramHeight" value="1188"/>
@@ -6122,8 +5319,8 @@
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_mKmOoUZMEdyN9PsDqxYcWw" presentation="org.topcased.modeler.ecore.ediagram">
         <element href="kermeta_java.ecore#//language/behavior"/>
       </semanticModel>
-      <contained xsi:type="di:GraphNode" xmi:id="_1NJn0EZMEdyN9PsDqxYcWw" position="105,100" size="104,-1">
-        <anchorage xmi:id="_1NOgUUZMEdyN9PsDqxYcWw" graphEdge="_1NPHYEZMEdyN9PsDqxYcWw _1NPucEZMEdyN9PsDqxYcWw _7mhksEZMEdyN9PsDqxYcWw"/>
+      <contained xsi:type="di:GraphNode" xmi:id="_1NJn0EZMEdyN9PsDqxYcWw" position="105,98" size="104,-1">
+        <anchorage xmi:id="_1NOgUUZMEdyN9PsDqxYcWw" graphEdge="_1NPHYEZMEdyN9PsDqxYcWw _7mhksEZMEdyN9PsDqxYcWw _1NPucEZMEdyN9PsDqxYcWw"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_1NJn0UZMEdyN9PsDqxYcWw" presentation="default">
           <element href="kermeta_java.ecore#//language/behavior/Expression"/>
         </semanticModel>
@@ -6141,7 +5338,7 @@
         </contained>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_1NK18EZMEdyN9PsDqxYcWw" position="79,260" size="155,-1">
-        <anchorage xmi:id="_1NOgUEZMEdyN9PsDqxYcWw" graphEdge="_1NPHYEZMEdyN9PsDqxYcWw _1NPucEZMEdyN9PsDqxYcWw _1NQVgEZMEdyN9PsDqxYcWw"/>
+        <anchorage xmi:id="_1NOgUEZMEdyN9PsDqxYcWw" graphEdge="_1NPHYEZMEdyN9PsDqxYcWw _1NQVgEZMEdyN9PsDqxYcWw _1NPucEZMEdyN9PsDqxYcWw"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_1NK18UZMEdyN9PsDqxYcWw" presentation="default">
           <element href="kermeta_java.ecore#//language/behavior/LambdaExpression"/>
         </semanticModel>
@@ -6205,13 +5402,8 @@
         </semanticModel>
         <contained xsi:type="di:EdgeObjectUV" xmi:id="_1NPHYkZMEdyN9PsDqxYcWw" id="nameLabel" uDistance="16" vDistance="-3"/>
         <contained xsi:type="di:EdgeObjectUV" xmi:id="_1NPHY0ZMEdyN9PsDqxYcWw" id="cardinalityLabel" uDistance="15" vDistance="8"/>
-        <waypoints>[-114, 0, -115, 160]</waypoints>
-        <waypoints>[-114, -160, -115, 0]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_1NPucEZMEdyN9PsDqxYcWw" anchor="_1NOgUEZMEdyN9PsDqxYcWw _1NOgUUZMEdyN9PsDqxYcWw">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_1NPucUZMEdyN9PsDqxYcWw" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -107, -1, 53]</waypoints>
-        <waypoints>[0, -107, -1, 53]</waypoints>
+        <waypoints>[-114, -1, -115, 161]</waypoints>
+        <waypoints>[-114, -162, -115, 0]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_1NQVgEZMEdyN9PsDqxYcWw" anchor="_1NOgUEZMEdyN9PsDqxYcWw _1NPuckZMEdyN9PsDqxYcWw">
         <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_1NQVgUZMEdyN9PsDqxYcWw" presentation="default">
@@ -6289,7 +5481,7 @@
         </contained>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_7mbeEkZMEdyN9PsDqxYcWw" position="374,182" size="146,-1">
-        <anchorage xmi:id="_7mgWk0ZMEdyN9PsDqxYcWw" graphEdge="_7mg9oEZMEdyN9PsDqxYcWw _7mhktEZMEdyN9PsDqxYcWw"/>
+        <anchorage xmi:id="_7mgWk0ZMEdyN9PsDqxYcWw" graphEdge="_7mhktEZMEdyN9PsDqxYcWw _7mg9oEZMEdyN9PsDqxYcWw"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_7mcFIEZMEdyN9PsDqxYcWw" presentation="default">
           <element href="kermeta_java.ecore#//language/structure/TypedElement"/>
         </semanticModel>
@@ -6307,12 +5499,8 @@
         </contained>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_7mgWkUZMEdyN9PsDqxYcWw" anchor="_1NQVhEZMEdyN9PsDqxYcWw _7mgWkEZMEdyN9PsDqxYcWw">
+        <property xmi:id="_Hs7kQE79Edyhx5pxh3Rg9A" key="router" value="Oblique"/>
         <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_7mgWkkZMEdyN9PsDqxYcWw" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -17, 9, 96]</waypoints>
-        <waypoints>[0, -17, 9, 96]</waypoints>
-      </contained>
-      <contained xsi:type="di:GraphEdge" xmi:id="_7mg9oEZMEdyN9PsDqxYcWw" anchor="_7mgWkEZMEdyN9PsDqxYcWw _7mgWk0ZMEdyN9PsDqxYcWw">
-        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_7mg9oUZMEdyN9PsDqxYcWw" presentation="default" typeInfo="Inheritance"/>
       </contained>
       <contained xsi:type="di:GraphEdge" xmi:id="_7mhksEZMEdyN9PsDqxYcWw" anchor="_1NOgUUZMEdyN9PsDqxYcWw _7mg9okZMEdyN9PsDqxYcWw">
         <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_7mhksUZMEdyN9PsDqxYcWw" presentation="default">
@@ -6327,6 +5515,14 @@
         </semanticModel>
         <contained xsi:type="di:EdgeObjectUV" xmi:id="_7mhktkZMEdyN9PsDqxYcWw" id="nameLabel" vDistance="14"/>
         <contained xsi:type="di:EdgeObjectUV" xmi:id="_7mhkt0ZMEdyN9PsDqxYcWw" id="cardinalityLabel" vDistance="-12"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" xmi:id="_1NPucEZMEdyN9PsDqxYcWw" anchor="_1NOgUEZMEdyN9PsDqxYcWw _1NOgUUZMEdyN9PsDqxYcWw">
+        <property xmi:id="_OkVg8E79Edyhx5pxh3Rg9A" key="router" value="Oblique"/>
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_1NPucUZMEdyN9PsDqxYcWw" presentation="default" typeInfo="Inheritance"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" xmi:id="_7mg9oEZMEdyN9PsDqxYcWw" anchor="_7mgWkEZMEdyN9PsDqxYcWw _7mgWk0ZMEdyN9PsDqxYcWw">
+        <property xmi:id="_SCgQ8E79Edyhx5pxh3Rg9A" key="router" value="Oblique"/>
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_7mg9oUZMEdyN9PsDqxYcWw" presentation="default" typeInfo="Inheritance"/>
       </contained>
     </diagrams>
     <diagrams xmi:id="_M0vmgEdFEdyds4uQuZm0Wg" position="0,0" size="100,100" name="kermeta_control_struct" zoom="0.75" viewport="0,0">

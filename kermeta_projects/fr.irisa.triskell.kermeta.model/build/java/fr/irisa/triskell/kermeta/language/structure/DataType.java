@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DataType.java,v 1.3 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: DataType.java,v 1.4 2008-01-22 14:24:30 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -14,10 +14,10 @@ package fr.irisa.triskell.kermeta.language.structure;
  *
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getDataType()
- * @model
+ * @model abstract="true"
  * @generated
  */
-public interface DataType extends TypeDefinition, Type {
+public interface DataType extends Type, TypeDefinition {
 
 	/**
 	 * <!-- begin-user-doc -->

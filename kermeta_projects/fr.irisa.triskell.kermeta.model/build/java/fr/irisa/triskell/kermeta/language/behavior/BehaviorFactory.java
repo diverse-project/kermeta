@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactory.java,v 1.5 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: BehaviorFactory.java,v 1.6 2008-01-22 14:24:31 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -75,15 +75,6 @@ public interface BehaviorFactory extends EFactory {
 	 * @generated
 	 */
 	CallFeature createCallFeature();
-
-	/**
-	 * Returns a new object of class '<em>Call Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Call Expression</em>'.
-	 * @generated
-	 */
-	CallExpression createCallExpression();
 
 	/**
 	 * Returns a new object of class '<em>Empty Expression</em>'.

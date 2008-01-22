@@ -1,7 +1,7 @@
 /**
  * IRISA / INRIA / Universite de Rennes 1
  *
- * $Id: Filter.java,v 1.2 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: Filter.java,v 1.3 2008-01-22 14:24:30 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Filter extends EObject {
+public interface Filter extends fr.irisa.triskell.kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

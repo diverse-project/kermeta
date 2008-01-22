@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedType.java,v 1.5 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: ParameterizedType.java,v 1.6 2008-01-22 14:24:31 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -16,9 +16,9 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ParameterizedType#getVirtualTypeBinding <em>Virtual Type Binding</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ParameterizedType#getTypeParamBinding <em>Type Param Binding</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ParameterizedType#getTypeDefinition <em>Type Definition</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ParameterizedType#getVirtualTypeBinding <em>Virtual Type Binding</em>}</li>
  * </ul>
  * </p>
  *

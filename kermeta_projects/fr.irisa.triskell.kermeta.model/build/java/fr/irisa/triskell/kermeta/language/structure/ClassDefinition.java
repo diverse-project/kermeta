@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinition.java,v 1.8 2007-07-20 15:09:02 ftanguy Exp $
+ * $Id: ClassDefinition.java,v 1.9 2008-01-22 14:24:30 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -16,11 +16,11 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getInv <em>Inv</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getOwnedAttribute <em>Owned Attribute</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getOwnedOperation <em>Owned Operation</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getSuperType <em>Super Type</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getInv <em>Inv</em>}</li>
  * </ul>
  * </p>
  *

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactoryImpl.java,v 1.8 2007-08-07 13:35:04 ftanguy Exp $
+ * $Id: BehaviorFactoryImpl.java,v 1.9 2008-01-22 14:24:28 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -91,30 +91,29 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case BehaviorPackage.CONDITIONAL: return createConditional();
-			case BehaviorPackage.LAMBDA_EXPRESSION: return createLambdaExpression();
-			case BehaviorPackage.LAMBDA_PARAMETER: return createLambdaParameter();
-			case BehaviorPackage.TYPE_REFERENCE: return createTypeReference();
-			case BehaviorPackage.CALL_FEATURE: return createCallFeature();
-			case BehaviorPackage.CALL_EXPRESSION: return createCallExpression();
-			case BehaviorPackage.EMPTY_EXPRESSION: return createEmptyExpression();
-			case BehaviorPackage.RAISE: return createRaise();
-			case BehaviorPackage.RESCUE: return createRescue();
+			case BehaviorPackage.ASSIGNMENT: return createAssignment();
 			case BehaviorPackage.BLOCK: return createBlock();
 			case BehaviorPackage.CALL_VARIABLE: return createCallVariable();
+			case BehaviorPackage.CALL_FEATURE: return createCallFeature();
 			case BehaviorPackage.CALL_SUPER_OPERATION: return createCallSuperOperation();
 			case BehaviorPackage.CALL_RESULT: return createCallResult();
 			case BehaviorPackage.CALL_VALUE: return createCallValue();
+			case BehaviorPackage.CONDITIONAL: return createConditional();
+			case BehaviorPackage.RAISE: return createRaise();
+			case BehaviorPackage.RESCUE: return createRescue();
+			case BehaviorPackage.TYPE_REFERENCE: return createTypeReference();
+			case BehaviorPackage.EMPTY_EXPRESSION: return createEmptyExpression();
+			case BehaviorPackage.JAVA_STATIC_CALL: return createJavaStaticCall();
+			case BehaviorPackage.LAMBDA_EXPRESSION: return createLambdaExpression();
+			case BehaviorPackage.LAMBDA_PARAMETER: return createLambdaParameter();
 			case BehaviorPackage.INTEGER_LITERAL: return createIntegerLiteral();
 			case BehaviorPackage.STRING_LITERAL: return createStringLiteral();
 			case BehaviorPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
 			case BehaviorPackage.TYPE_LITERAL: return createTypeLiteral();
 			case BehaviorPackage.VOID_LITERAL: return createVoidLiteral();
-			case BehaviorPackage.ASSIGNMENT: return createAssignment();
-			case BehaviorPackage.JAVA_STATIC_CALL: return createJavaStaticCall();
-			case BehaviorPackage.VARIABLE_DECL: return createVariableDecl();
 			case BehaviorPackage.LOOP: return createLoop();
 			case BehaviorPackage.SELF_EXPRESSION: return createSelfExpression();
+			case BehaviorPackage.VARIABLE_DECL: return createVariableDecl();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -168,16 +167,6 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	public CallFeature createCallFeature() {
 		CallFeatureImpl callFeature = new CallFeatureImpl();
 		return callFeature;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CallExpression createCallExpression() {
-		CallExpressionImpl callExpression = new CallExpressionImpl();
-		return callExpression;
 	}
 
 	/**

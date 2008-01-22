@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Package.java,v 1.4 2007-07-20 15:09:02 ftanguy Exp $
+ * $Id: Package.java,v 1.5 2008-01-22 14:24:30 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Package extends TypeDefinitionContainer, NamedElement {
+public interface Package extends NamedElement, TypeDefinitionContainer {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

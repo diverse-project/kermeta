@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallExpression.java,v 1.5 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: CallExpression.java,v 1.6 2008-01-22 14:24:31 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -17,14 +17,14 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallExpression#getStaticTypeVariableBindings <em>Static Type Variable Bindings</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallExpression#getParameters <em>Parameters</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallExpression#getName <em>Name</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallExpression#getStaticTypeVariableBindings <em>Static Type Variable Bindings</em>}</li>
  * </ul>
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface CallExpression extends Expression {

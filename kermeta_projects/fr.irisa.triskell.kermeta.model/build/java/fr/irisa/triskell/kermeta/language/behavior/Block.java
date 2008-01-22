@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Block.java,v 1.6 2007-07-20 15:09:00 ftanguy Exp $
+ * $Id: Block.java,v 1.7 2008-01-22 14:24:31 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -16,8 +16,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.Block#getRescueBlock <em>Rescue Block</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.Block#getStatement <em>Statement</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.Block#getRescueBlock <em>Rescue Block</em>}</li>
  * </ul>
  * </p>
  *
