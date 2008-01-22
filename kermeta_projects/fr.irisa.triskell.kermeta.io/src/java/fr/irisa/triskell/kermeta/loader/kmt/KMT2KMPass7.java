@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.39 2008-01-04 14:17:24 dvojtise Exp $
+/* $Id: KMT2KMPass7.java,v 1.40 2008-01-22 14:25:28 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : EPL
@@ -81,8 +81,14 @@ public class KMT2KMPass7 extends KMT2KMPass {
 					if ( mainClass == null )
 						builder.warning("Main Class nof found.", km2ecore.get( mainClassTag));
 					else {
+						
+						mainClassTag.getObject().add(builder.getModelingUnit());
+						
 						fr.irisa.triskell.kermeta.language.structure.Tag mainOperationTag = ModelingUnitHelper.getMainOperation(builder);
 						if ( mainOperationTag != null ) {
+							
+							mainOperationTag.getObject().add(builder.getModelingUnit());
+							
 							Operation op = ClassDefinitionHelper.findOperationByName( (ClassDefinition) mainClass, mainOperationTag.getValue() );
 							if ( op == null )
 								builder.warning("Main Operation not found.", km2ecore.get(mainOperationTag));
