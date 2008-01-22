@@ -1,7 +1,7 @@
 /**
  * IRISA / INRIA / Universite de Rennes 1
  *
- * $Id: ModelingUnitItemProvider.java,v 1.2 2007-07-20 15:08:28 ftanguy Exp $
+ * $Id: ModelingUnitItemProvider.java,v 1.3 2008-01-22 16:13:25 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -39,7 +39,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ModelingUnitItemProvider
-	extends ItemProviderAdapter
+	extends ObjectItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -113,12 +113,12 @@ public class ModelingUnitItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__OWNED_TAGS);
 			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__PACKAGES);
 			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__REQUIRES);
 			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__USINGS);
 			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__INCLUDE_FILTERS);
 			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__EXCLUDE_FILTERS);
-			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__OWNED_TAGS);
 		}
 		return childrenFeatures;
 	}
@@ -170,12 +170,12 @@ public class ModelingUnitItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ModelingUnit.class)) {
+			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 			case StructurePackage.MODELING_UNIT__REQUIRES:
 			case StructurePackage.MODELING_UNIT__USINGS:
 			case StructurePackage.MODELING_UNIT__INCLUDE_FILTERS:
 			case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
-			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -192,6 +192,11 @@ public class ModelingUnitItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.MODELING_UNIT__OWNED_TAGS,
+				 StructureFactory.eINSTANCE.createTag()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -217,11 +222,6 @@ public class ModelingUnitItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.MODELING_UNIT__EXCLUDE_FILTERS,
 				 StructureFactory.eINSTANCE.createFilter()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.MODELING_UNIT__OWNED_TAGS,
-				 StructureFactory.eINSTANCE.createTag()));
 	}
 
 	/**
@@ -236,6 +236,8 @@ public class ModelingUnitItemProvider
 		Object childObject = child;
 
 		boolean qualify =
+			childFeature == StructurePackage.Literals.OBJECT__OWNED_TAG ||
+			childFeature == StructurePackage.Literals.MODELING_UNIT__OWNED_TAGS ||
 			childFeature == StructurePackage.Literals.MODELING_UNIT__INCLUDE_FILTERS ||
 			childFeature == StructurePackage.Literals.MODELING_UNIT__EXCLUDE_FILTERS;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureItemProvider.java,v 1.8 2007-07-20 15:08:28 ftanguy Exp $
+ * $Id: CallFeatureItemProvider.java,v 1.9 2008-01-22 16:13:25 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -74,10 +74,10 @@ public class CallFeatureItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addIsAtprePropertyDescriptor(object);
 			addStaticPropertyPropertyDescriptor(object);
 			addStaticOperationPropertyDescriptor(object);
 			addStaticEnumLiteralPropertyDescriptor(object);
-			addIsAtprePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -261,32 +261,7 @@ public class CallFeatureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
-				 BehaviorFactory.eINSTANCE.createConditional()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
-				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
-				 BehaviorFactory.eINSTANCE.createCallExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
-				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
-				 BehaviorFactory.eINSTANCE.createRaise()));
+				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -297,6 +272,11 @@ public class CallFeatureItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
+				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -312,6 +292,31 @@ public class CallFeatureItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
+				 BehaviorFactory.eINSTANCE.createConditional()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
+				 BehaviorFactory.eINSTANCE.createRaise()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
+				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
+				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
+				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -341,27 +346,17 @@ public class CallFeatureItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
-				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
-				 BehaviorFactory.eINSTANCE.createVariableDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
+				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 	}
 
 	/**

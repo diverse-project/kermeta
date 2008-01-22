@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BlockItemProvider.java,v 1.8 2007-07-20 15:08:28 ftanguy Exp $
+ * $Id: BlockItemProvider.java,v 1.9 2008-01-22 16:13:25 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -89,8 +89,8 @@ public class BlockItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BehaviorPackage.Literals.BLOCK__RESCUE_BLOCK);
 			childrenFeatures.add(BehaviorPackage.Literals.BLOCK__STATEMENT);
+			childrenFeatures.add(BehaviorPackage.Literals.BLOCK__RESCUE_BLOCK);
 		}
 		return childrenFeatures;
 	}
@@ -142,8 +142,8 @@ public class BlockItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Block.class)) {
-			case BehaviorPackage.BLOCK__RESCUE_BLOCK:
 			case BehaviorPackage.BLOCK__STATEMENT:
+			case BehaviorPackage.BLOCK__RESCUE_BLOCK:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -163,38 +163,8 @@ public class BlockItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.Literals.BLOCK__RESCUE_BLOCK,
-				 BehaviorFactory.eINSTANCE.createRescue()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(BehaviorPackage.Literals.BLOCK__STATEMENT,
-				 BehaviorFactory.eINSTANCE.createConditional()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.BLOCK__STATEMENT,
-				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.BLOCK__STATEMENT,
-				 BehaviorFactory.eINSTANCE.createCallExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.BLOCK__STATEMENT,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.BLOCK__STATEMENT,
-				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.BLOCK__STATEMENT,
-				 BehaviorFactory.eINSTANCE.createRaise()));
+				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -205,6 +175,11 @@ public class BlockItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
+				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -220,6 +195,31 @@ public class BlockItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
+				 BehaviorFactory.eINSTANCE.createConditional()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
+				 BehaviorFactory.eINSTANCE.createRaise()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
+				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
+				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
+				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -249,12 +249,12 @@ public class BlockItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.BLOCK__STATEMENT,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
+				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.BLOCK__STATEMENT,
-				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
+				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -263,13 +263,8 @@ public class BlockItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.Literals.BLOCK__STATEMENT,
-				 BehaviorFactory.eINSTANCE.createLoop()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.BLOCK__STATEMENT,
-				 BehaviorFactory.eINSTANCE.createSelfExpression()));
+				(BehaviorPackage.Literals.BLOCK__RESCUE_BLOCK,
+				 BehaviorFactory.eINSTANCE.createRescue()));
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedTypeItemProvider.java,v 1.10 2007-07-20 15:08:26 ftanguy Exp $
+ * $Id: ParameterizedTypeItemProvider.java,v 1.11 2008-01-22 16:13:25 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -113,8 +113,8 @@ public class ParameterizedTypeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
 			childrenFeatures.add(StructurePackage.Literals.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING);
+			childrenFeatures.add(StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
 		}
 		return childrenFeatures;
 	}
@@ -158,8 +158,8 @@ public class ParameterizedTypeItemProvider
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 			case StructurePackage.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING:
+			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -179,12 +179,12 @@ public class ParameterizedTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING,
+				(StructurePackage.Literals.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING,
 				 StructureFactory.eINSTANCE.createTypeVariableBinding()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING,
+				(StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING,
 				 StructureFactory.eINSTANCE.createTypeVariableBinding()));
 	}
 
@@ -200,8 +200,8 @@ public class ParameterizedTypeItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING ||
-			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING;
+			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING ||
+			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING;
 
 		if (qualify) {
 			return getString

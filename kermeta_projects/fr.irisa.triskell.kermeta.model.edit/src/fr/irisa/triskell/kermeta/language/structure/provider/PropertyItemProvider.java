@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.20 2007-10-02 15:15:50 ftanguy Exp $
+ * $Id: PropertyItemProvider.java,v 1.21 2008-01-22 16:13:25 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -79,14 +79,14 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addIsGetterAbstractPropertyDescriptor(object);
-			addIsSetterAbstractPropertyDescriptor(object);
 			addOppositePropertyDescriptor(object);
 			addIsReadOnlyPropertyDescriptor(object);
 			addDefaultPropertyDescriptor(object);
 			addIsCompositePropertyDescriptor(object);
 			addIsDerivedPropertyDescriptor(object);
 			addIsIDPropertyDescriptor(object);
+			addIsGetterAbstractPropertyDescriptor(object);
+			addIsSetterAbstractPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -429,13 +429,13 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Property.class)) {
-			case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
-			case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
 			case StructurePackage.PROPERTY__IS_READ_ONLY:
 			case StructurePackage.PROPERTY__DEFAULT:
 			case StructurePackage.PROPERTY__IS_COMPOSITE:
 			case StructurePackage.PROPERTY__IS_DERIVED:
 			case StructurePackage.PROPERTY__IS_ID:
+			case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
+			case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case StructurePackage.PROPERTY__GETTER_BODY:
@@ -460,32 +460,7 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createConditional()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createCallExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createRaise()));
+				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -496,6 +471,11 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -511,6 +491,31 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createConditional()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createRaise()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -540,21 +545,6 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createVariableDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
@@ -564,33 +554,13 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createConditional()));
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createCallExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createRaise()));
+				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -601,6 +571,11 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -616,6 +591,31 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createConditional()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createRaise()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -645,27 +645,17 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				 BehaviorFactory.eINSTANCE.createVariableDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OperationItemProvider.java,v 1.9 2007-07-20 15:08:26 ftanguy Exp $
+ * $Id: OperationItemProvider.java,v 1.10 2008-01-22 16:13:25 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -77,10 +77,10 @@ public class OperationItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addIsAbstractPropertyDescriptor(object);
+			addRaisedExceptionPropertyDescriptor(object);
 			addSuperOperationPropertyDescriptor(object);
 			addTypeParameterPropertyDescriptor(object);
-			addRaisedExceptionPropertyDescriptor(object);
-			addIsAbstractPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -185,10 +185,10 @@ public class OperationItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.OPERATION__BODY);
 			childrenFeatures.add(StructurePackage.Literals.OPERATION__OWNED_PARAMETER);
 			childrenFeatures.add(StructurePackage.Literals.OPERATION__PRE);
 			childrenFeatures.add(StructurePackage.Literals.OPERATION__POST);
+			childrenFeatures.add(StructurePackage.Literals.OPERATION__BODY);
 		}
 		return childrenFeatures;
 	}
@@ -245,10 +245,10 @@ public class OperationItemProvider
 			case StructurePackage.OPERATION__IS_ABSTRACT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case StructurePackage.OPERATION__BODY:
 			case StructurePackage.OPERATION__OWNED_PARAMETER:
 			case StructurePackage.OPERATION__PRE:
 			case StructurePackage.OPERATION__POST:
+			case StructurePackage.OPERATION__BODY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -268,33 +268,23 @@ public class OperationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.OPERATION__BODY,
-				 BehaviorFactory.eINSTANCE.createConditional()));
+				(StructurePackage.Literals.OPERATION__OWNED_PARAMETER,
+				 StructureFactory.eINSTANCE.createParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.OPERATION__PRE,
+				 StructureFactory.eINSTANCE.createConstraint()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.OPERATION__POST,
+				 StructureFactory.eINSTANCE.createConstraint()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.OPERATION__BODY,
-				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.OPERATION__BODY,
-				 BehaviorFactory.eINSTANCE.createCallExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.OPERATION__BODY,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.OPERATION__BODY,
-				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.OPERATION__BODY,
-				 BehaviorFactory.eINSTANCE.createRaise()));
+				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -305,6 +295,11 @@ public class OperationItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.OPERATION__BODY,
+				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -320,6 +315,31 @@ public class OperationItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.OPERATION__BODY,
+				 BehaviorFactory.eINSTANCE.createConditional()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.OPERATION__BODY,
+				 BehaviorFactory.eINSTANCE.createRaise()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.OPERATION__BODY,
+				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.OPERATION__BODY,
+				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.OPERATION__BODY,
+				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -349,21 +369,6 @@ public class OperationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.OPERATION__BODY,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.OPERATION__BODY,
-				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.OPERATION__BODY,
-				 BehaviorFactory.eINSTANCE.createVariableDecl()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
@@ -373,18 +378,8 @@ public class OperationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.OPERATION__OWNED_PARAMETER,
-				 StructureFactory.eINSTANCE.createParameter()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.OPERATION__PRE,
-				 StructureFactory.eINSTANCE.createConstraint()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.OPERATION__POST,
-				 StructureFactory.eINSTANCE.createConstraint()));
+				(StructurePackage.Literals.OPERATION__BODY,
+				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 	}
 
 	/**
