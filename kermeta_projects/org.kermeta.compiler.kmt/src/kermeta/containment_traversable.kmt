@@ -1,0 +1,37 @@
+/* $Id: containment_traversable.kmt,v 1.1 2008-01-23 17:43:06 cfaucher Exp $
+ * Creation date: January 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::language::structure;
+
+require kermeta
+require "compile_behavior.kmt"
+
+using kermeta::language::structure
+//using kermeta::language::behavior
+using kermeta::standard
+
+
+aspect class Package {
+	operation eachOwnedElement(func : <TypeDefinition -> Object>) : Void is do
+        self.ownedTypeDefinition.each{ o |
+			func(o.asType(TypeDefinition))
+		}
+	end
+}
+
+aspect class ClassDefinition {
+	operation eachOwnedElement(func : <MultiplicityElement -> Object>) : Void is do
+        self.ownedAttribute.each{ o |
+			func(o.asType(Property))
+		}
+		
+		self.ownedOperation.each{ o |
+			func(o.asType(Operation))
+		}
+	end	
+}
+

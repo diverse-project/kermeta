@@ -1,0 +1,52 @@
+/* $Id: compile_helper.kmt,v 1.1 2008-01-23 17:43:06 cfaucher Exp $
+ * Creation date: January 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package compile::helper;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "trace_structure.kmt"
+
+using kermeta::language::structure
+using ecore
+
+
+class CompileHelper {
+
+	operation findEClassProxy(cd : ClassDefinition) : EClass is do
+		var pack : Package init Package.new
+		pack ?= cd.container
+		var eclassifier : EClassifier init pack.ecoreProxy.eClassifiers.detect{ c |
+			if c.isInstanceOf(EClass) then
+				c.asType(EClass).name.equals(cd.name)
+			end
+		}
+		result := eclassifier.asType(EClass)
+	end
+	
+	operation findEOperationProxy(op : Operation) : EOperation is do
+		var cd : ClassDefinition init ClassDefinition.new
+		cd ?= op.container
+		var eop : EOperation init cd.ecoreProxy.eOperations.detect{ c |
+			if c.isInstanceOf(EOperation) then
+				c.asType(EOperation).name.equals(op.name)
+			end
+		}
+		result := eop.asType(EOperation)
+	end
+	
+	operation addAnnotationGenModelImpl( eModelElement : EModelElement , body : String) : Void is do
+		var newEAnnot : EAnnotation init EAnnotation.new
+		newEAnnot.source := "http://www.eclipse.org/emf/2002/GenModel"
+		
+		var newDetail : EStringToStringMapEntry init EStringToStringMapEntry.new
+		newDetail.key := "body"
+		newDetail.~value := body
+		newEAnnot.details.add(newDetail)
+		eModelElement.eAnnotations.add(newEAnnot)
+	end
+}

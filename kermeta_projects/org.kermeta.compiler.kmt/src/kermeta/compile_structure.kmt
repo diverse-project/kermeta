@@ -1,0 +1,108 @@
+package kermeta::language::structure;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "compile_behavior.kmt"
+require "containment_traversable.kmt"
+require "trace_structure.kmt"
+require "compile_helper.kmt"
+
+using kermeta::language::structure
+using kermeta::language::behavior
+using kermeta::standard
+using kermeta::utils
+using ecore
+using compile::helper
+
+
+aspect class Package {
+	operation compile(context : Integer) : String is do
+		result := ""
+		// Compile the owned elements
+		self.eachOwnedElement{ cd | cd.compile(context) }
+	end
+}
+
+aspect class TypeDefinition {
+	operation compile(context : Integer) : String is do
+		result := ""
+		//stdio.writeln("F7-1: " + self.name)
+	end
+}
+
+aspect class ClassDefinition {
+	method compile(context : Integer) : String from TypeDefinition is do
+		result := ""
+		// Set the traceability
+		self.ecoreProxy := CompileHelper.new.findEClassProxy(self)
+		// Compile the owned elements
+		self.eachOwnedElement{ o | o.compile(context) }
+	end
+	
+}
+
+aspect class PrimitiveType {
+	method compile(context : Integer) : String from TypeDefinition is do
+		result := ""
+		//stdio.writeln("F2-2: " + self.name)
+	end
+}
+
+aspect class ClassDefinition {
+}
+
+aspect class MultiplicityElement {
+	operation compile(context : Integer) : String is do
+		result := ""
+		//stdio.writeln("F2-311111: " + self.name)
+	end
+}
+
+aspect class Property {
+	method compile(context : Integer) : String is do
+		result := ""
+		// Set the traceability
+	end
+}
+
+aspect class Operation {
+	method compile(context : Integer) : String is do
+		result := ""
+		// Set the traceability
+		self.ecoreProxy := CompileHelper.new.findEOperationProxy( self )
+		
+		var javaCode : StringBuffer init StringBuffer.new
+		
+		if (self.body != void) then
+		
+			var type : String init self.type.asType(Type).compile(context)
+			if ( type!="Void" and type!="void" ) then
+				javaCode.append("\n" + type + " result = null;\n")
+			end
+			
+			// The Java source code is provided by: self.body.compile(context)
+			javaCode.append(self.body.compile(context))
+			
+			if ( type!="Void" and type!="void" ) then
+				javaCode.append("\nreturn result;\n")
+			end
+		end
+		
+		// Finally add the EAnnotation containing the Java code in the Ecore model
+        CompileHelper.new.addAnnotationGenModelImpl(self.ecoreProxy, javaCode.toString)
+	end
+}
+
+aspect class Type {
+	operation compile(context : Integer) : String is do
+		result := ""
+		
+		/*if (self.isInstanceOf(PrimitiveType)) then
+			var pt : kermeta::language::structure::PrimitiveType
+			pt ?= self
+			result := pt.instanceType.compile(context)
+		else
+			result := self.toString
+		end*/
+	end
+}

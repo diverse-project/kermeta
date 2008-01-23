@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModellingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="kermeta::language::structure|comptest2|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comptest2" nsURI="platform:/resource/testCompiler/models/Attempt01.ecore#/" nsPrefix="comptest2">
+    <eClassifiers xsi:type="ecore:EClass" name="Main">
+      <eSuperTypes href="../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object"/>
+      <eOperations name="main">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var aPrinter : comptest2::Printer init comptest2::Printer.new&#xA;&#x9;aPrinter.print&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Printer">
+      <eSuperTypes href="../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object"/>
+      <eOperations name="print">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var text1 : kermeta::language::structure::String init &quot;Hello &quot;&#xA;&#x9;var text2 : kermeta::language::structure::String&#xA;&#x9;text2 := &quot;World&quot;&#xA;&#x9;stdio.writeln(text1.plus(text2))&#xA;&#x9;text2 := void&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Printer2" eSuperTypes="/1/Printer /1/Main">
+      <eOperations name="test" eType="/1/String">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;attr1 := &quot;test_attr1&quot;&#xA;&#x9;result := attr1&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="attr1" eType="/1/String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Printer3">
+      <eTypeParameters name="A"/>
+      <eSuperTypes href="../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Printer4">
+      <eTypeParameters name="B"/>
+      <eTypeParameters name="String"/>
+      <eSuperTypes href="../../../plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object"/>
+      <eOperations name="test">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;end"/>
+        </eAnnotations>
+        <eTypeParameters name="B"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attr1" containment="true">
+        <eGenericType eTypeParameter="/1/Printer4/B"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

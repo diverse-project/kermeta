@@ -1,0 +1,38 @@
+/* $Id: trace_structure.kmt,v 1.1 2008-01-23 17:43:06 cfaucher Exp $
+ * Creation date: January 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+/**
+ * This Modeling Unit is used to define and store the traceability during the Km to Ecore process
+ */
+package kermeta::language::structure;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::language::structure
+using ecore
+
+
+aspect class Package {
+	reference ecoreProxy : EPackage
+}
+
+aspect class TypeDefinition {
+
+}
+
+aspect class ClassDefinition {
+	reference ecoreProxy : EClass
+}
+
+aspect class Operation {
+	reference ecoreProxy : EOperation
+}
+
+aspect class Property {
+	reference ecoreProxy : EOperation
+}

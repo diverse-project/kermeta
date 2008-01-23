@@ -1,0 +1,52 @@
+@mainClass "comptest2::Main"
+@mainOperation "main"
+
+package comptest2;
+
+require kermeta
+
+using kermeta::language::structure
+
+class Main
+{
+	operation main() : Void is
+	do
+		var aPrinter : Printer init Printer.new
+		aPrinter.print
+	end
+}
+
+class Printer
+{
+	operation print() : Void is
+	do
+		var text1 : String init "Hello "
+		var text2 : String // mettre à null au lieu de ""
+		text2 := "World"
+		stdio.writeln(text1 + text2)
+		text2 := void
+	end
+
+}
+
+class Printer2 inherits Printer, Main {
+
+	attribute attr1 : String[0..1]
+	
+	operation test() : String is do
+		attr1 := "test_attr1"
+		result := attr1
+	end
+}
+
+class Printer3<A>
+{
+}
+
+class Printer4<B,String>
+{
+	attribute attr1 : B [0..1]
+	
+	operation test<B>() : Void is do
+	end
+}
