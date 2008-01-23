@@ -1,0 +1,11 @@
+
+package comp_inheritance_test002;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using ecore
+
+class A inherits EClassifier
+{
+}

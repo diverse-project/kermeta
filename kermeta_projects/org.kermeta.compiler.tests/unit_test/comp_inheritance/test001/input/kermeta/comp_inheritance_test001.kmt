@@ -1,0 +1,12 @@
+
+package comp_inheritance_test001;
+
+require kermeta
+
+class A
+{
+}
+
+class B inherits A
+{
+}

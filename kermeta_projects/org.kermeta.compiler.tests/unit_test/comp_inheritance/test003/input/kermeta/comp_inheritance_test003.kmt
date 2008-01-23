@@ -1,0 +1,11 @@
+
+package comp_inheritance_test003;
+
+require kermeta
+require "http://www.eclipse.org/uml2/2.1.0/UML"
+
+using uml
+
+class A inherits Classifier
+{
+}
