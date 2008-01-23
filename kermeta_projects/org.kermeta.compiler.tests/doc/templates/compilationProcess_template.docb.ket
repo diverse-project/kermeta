@@ -11,10 +11,64 @@
 	<section>
 		<title id="kermeta2ecore.title.link">Step 1: Kermeta to Ecore</title>
 		<para>
-			Implementation in Kermeta of a visitor to transform a Kermeta structure into an Ecore structure. [currently written in Java] This step is implemented in "fr.irisa.triskell.kermeta.io" plugin, EcoreExporter.
+			The compilation process is divided in 2 steps: the first one consists in the translation of a Kermeta model into a Ecore model, the second one consists in the generation of the Java source code from the previous Ecore model.
+		</para>
+	</section>
+	<section>
+		<title id="kermeta2ecore.title.link">Step 1: Kermeta to Ecore</title>
+		<para>
+			Currently this implementation is divided in 2 steps: Km 2 Ecore structure (written in Java), Km 2 Ecore behavior (written in Kermeta and Java).
 		</para>
 		<para>
-			Implementation in Kermeta of a Java pretty-printer for including Java sources in EAnnotations. [currently written in Java] This step is implemented in "org.kermeta.compiler" plugin.
+			"Km 2 Ecore structure" implements a visitor desing pattern and consists in the translation of each Kermeta concept to Ecore concept.
+			This step is implemented in "fr.irisa.triskell.kermeta.io" plugin, EcoreExporter.
+		</para>
+		<para>
+			"Km 2 Ecore behavior" is written in Kermeta. This implementation is Aspect-Oriented, i.e.: we are using the aspect-oriented techniques in order to define how a concept is compiled.
+		</para>
+		<para>
+			Some examples:</para>
+		<para>
+			<programlisting>aspect class ClassDefinition {
+		method compile(context : Integer) : String is do
+			result := ""
+			// Set the traceability
+			self.ecoreProxy := CompileHelper.new.findEClassProxy(self)
+			// Compile the owned elements
+			self.eachOwnedElement{ o | o.compile(context) }
+		end
+	}</programlisting>
+			
+			<programlisting>aspect class ClassDefinition {
+	operation eachOwnedElement(func : <MultiplicityElement -> Object>) : Void is do
+		//if self.isInstanceOf(Property)
+		stdio.writeln("F2")
+        self.ownedAttribute.each{ o |
+			func(o.asType(Property))
+		}
+		stdio.writeln("F3")
+		self.ownedOperation.each{ o |
+			func(o.asType(Operation))
+		}
+		stdio.writeln("F4")
+	end	
+}</programlisting>
+
+		<programlisting>aspect class Package {
+	reference ecoreProxy : EPackage
+	}
+	
+	aspect class ClassDefinition {
+		reference ecoreProxy : EClass
+	}
+	
+	aspect class Operation {
+		reference ecoreProxy : EOperation
+	}</programlisting>
+
+		</para>
+		<para>
+			This technique has further advantages: the separation of concerns and the reutilisability of several aspects, i.e.: some aspects are grouped by usage like: "containment discovering", "compile" or "traceability".
 		</para>
 	</section>
 	<section>
@@ -25,7 +79,8 @@
 		</para>
 		<para>
 			Generation of the source code from the genmodel file thanks to the EMF generator abilities:
-			Emf-model interfaces + implementation. This step is implemented in “org.kermeta.compiler" plugin.
+			Emf-model interfaces + implementation. This step is implemented in "org.kermeta.compiler" plugin.
+			During this step, a Simk is used too, this model contains informations about the generation of Runners, Launchers and other static methods. A Java source code generation step is made to take in account this model, and also to generate the corresponding Java classes.
 		</para>
 	</section>
 </chapter>
