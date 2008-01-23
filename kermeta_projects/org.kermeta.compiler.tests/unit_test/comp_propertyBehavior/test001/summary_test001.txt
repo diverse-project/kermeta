@@ -1,0 +1,1 @@
+<para>This sample shows an example of the compilation a derived property with a getter and a setter.</para>

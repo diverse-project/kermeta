@@ -1,0 +1,1 @@
+<para>This sample shows the structural compilation of derived property in different cases: property typed by a PrimitiveType or by a ClassDefinition. The second variation is the "readonly" property.</para>

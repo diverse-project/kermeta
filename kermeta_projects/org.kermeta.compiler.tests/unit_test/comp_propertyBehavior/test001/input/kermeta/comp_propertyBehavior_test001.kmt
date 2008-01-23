@@ -1,0 +1,53 @@
+/* $Id: comp_propertyBehavior_test001.kmt,v 1.1 2008-01-23 09:59:33 cfaucher Exp $
+ * Creation date: January 9, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+@mainClass "comp_propertyBehavior_test001::Main"
+@mainOperation "main"
+
+package comp_propertyBehavior_test001;
+
+require kermeta
+
+using kermeta
+using kermeta::standard
+
+class Main {
+	/**
+	 *
+	 */
+	operation main() : Void is do
+		var b : B init B.new
+		b.period := 50
+		stdio.writeln(b.frequency.toString)
+	end
+
+}
+
+/*class A 
+{
+    attribute period : Integer
+    property readonly frequency : Real // property : keyword for derived property
+        getter is do
+            result := 1/period
+        end
+    
+    operation titi(r:String) : Void is do end
+
+}*/
+
+class B 
+{
+    attribute period : Integer
+    property frequency : Real
+        getter is do
+            result := 1/period
+        end 
+        setter is do
+            period := (1/frequency).toInteger
+        end
+}
+

@@ -1,0 +1,31 @@
+/* $Id: comp_propertyStructure_test001.kmt,v 1.1 2008-01-23 09:59:33 cfaucher Exp $
+ * Creation date: January 9, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package comp_propertyBehavior_test001;
+
+require kermeta
+
+using kermeta::language::structure
+//using kermeta::standard
+
+class Main
+{
+	property prop_aString : String
+	
+	property readonly prop_ro_aString : String
+	
+	property prop_aA : A
+	
+	property readonly prop_ro_aA : A
+
+}
+
+/**
+*
+*/
+class A {
+}

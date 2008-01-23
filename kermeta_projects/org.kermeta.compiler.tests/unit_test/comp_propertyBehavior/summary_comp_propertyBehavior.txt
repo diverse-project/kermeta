@@ -1,4 +1,7 @@
 <para>Design:</para>
 
 <para>Behavior of a derived property: getter/ setter.</para>
-<para>This ability is not supported by the EMF mechanism based on the use of EAnnotations containing the Java source code corresponding the expected behavior.</para>
+<para>This ability is not supported by the EMF mechanism based on the use of EAnnotations containing the Java source code corresponding to the expected behavior.</para>
+<para>Thus, we are using the "overloadable" property of the JET templates. In a JET template, that is able to define some pieces of source code that will be overloadable. The expected source code is also added via a file with a specific name and location (define in the JET template)</para>
+<para>During the compilation, we are using the JET templates from EMF (plugin: org.eclipse.emf.codegen.ecore). Also, in your case, the derived property, we have written new implementations for the getter and setter. This new implementation uses a EAnnotation containing the Java source code implementing the getter and setter. Finally, the mechanism to get and put the code is very close to this one used by EMF to compile the EOperation behavior</para>
+<para>The specific source added are located in the plugin: org.kermeta.compiler.generator.emftemplates</para>
