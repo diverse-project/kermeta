@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.50 2007-11-21 14:05:18 ftanguy Exp $
+/* $Id: KM2EcorePass2.java,v 1.51 2008-01-23 14:12:50 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass2.java
  * License    : EPL
@@ -647,7 +647,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 	 */
 	public Object visitPrimitiveType(PrimitiveType node)
 	{
-		String type_name = NamedElementHelper.getMangledQualifiedName(node);
+		String type_name = TypeHelper.getMangledQualifiedName(node.getInstanceType());
 		
  		if ( exporterOptions.isIndependent ) {
 			EClassifier newEClassifier = primitiveTypesMappingForIndependency.get(node);
@@ -670,6 +670,9 @@ public class KM2EcorePass2 extends KM2Ecore {
 			
 			if (newEClassifier ==  null)
 			{
+				if( KM2Ecore.types_mapping.containsKey(type_name)) {
+					type_name = KM2Ecore.types_mapping.get(type_name);
+				}
 				if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
 					internalLog.debug(loggerTabs + "Creating DataType: "+ node.getName());
 					type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
@@ -678,6 +681,14 @@ public class KM2EcorePass2 extends KM2Ecore {
 					EPackage root_EPackage = (EPackage)km2ecoremapping.get( currentPackage );
 					root_EPackage.getEClassifiers().add(newEClassifier);
 					km2ecoremapping.put(node,newEClassifier);
+				}
+			} else {
+				if( KM2Ecore.types_mapping.containsKey(type_name)) {
+					type_name = KM2Ecore.types_mapping.get(type_name);
+				}
+				if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
+					type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
+					newEClassifier.setInstanceClassName(type_name);
 				}
 			}
 

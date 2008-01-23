@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.56 2008-01-04 14:17:25 dvojtise Exp $
+/* $Id: KM2EcorePass1.java,v 1.57 2008-01-23 14:12:50 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass1.java
  * License    : EPL
@@ -703,7 +703,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(PrimitiveType)
 	 */
 	public Object visitPrimitiveType(PrimitiveType node) {
-		String qualifiedName = TypeHelper.getMangledQualifiedName(node.getInstanceType());
+		String qualifiedName = TypeHelper.getMangledQualifiedName(node);
 		
 		if ( qualifiedName == null ) 
 			throw new KM2ECoreConversionException(
@@ -722,7 +722,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 		 * Creating the datatype. If instance class name is null, the java.lang.Object is used by default.
 		 * 
 		 */
-		EDataType datatype = EcoreModelHelper.EDataType.create(qualifiedName, instanceClassName);
+		EDataType datatype = EcoreModelHelper.EDataType.create(node.getName(), instanceClassName);
 
 		/*
 		 * 
@@ -735,7 +735,7 @@ public class KM2EcorePass1 extends KM2Ecore {
 					datatype,
 					KM2Ecore.ANNOTATION,
 					KM2Ecore.ANNOTATION_ALIAS_DETAILS,
-					qualifiedName,
+					TypeHelper.getMangledQualifiedName(node.getInstanceType()),
 					null);
 		}
 		
