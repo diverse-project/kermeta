@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
-  <packages tag="//@packages.0/@ownedTag.0" name="kermeta" uri="http://www.kermeta.org/kermeta">
-    <ownedTag value="/**&#xD;&#xA; * The root package. See the other packages if you want to browse the classes of Kermeta api.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png&quot;>&#xD;&#xA; */" object="//@packages.0"/>
+  <packages tag="//@packages.0/@ownedTags.0" name="kermeta" uri="http://www.kermeta.org/kermeta">
+    <ownedTags value="/**&#xD;&#xA; * The root package. See the other packages if you want to browse the classes of Kermeta api.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png&quot;>&#xD;&#xA; */" object="//@packages.0"/>
   </packages>
   <requires uri="standard/collections.kmt"/>
   <requires uri="language/behavior.kmt"/>
@@ -29,7 +29,7 @@
   <referencedModelingUnits href="utils/utils.km#/"/>
   <referencedModelingUnits href="utils/StringBuffer.km#/"/>
   <referencedModelingUnits href="utils/hashtable.km#/"/>
-  <referencedModelingUnits href="utils/Stack.km#/"/>
+  <referencedModelingUnits href="utils/stack.km#/"/>
   <referencedModelingUnits href="io/std_io.km#/"/>
   <referencedModelingUnits href="io/file_io.km#/"/>
   <referencedModelingUnits href="exceptions/exceptions.km#/"/>

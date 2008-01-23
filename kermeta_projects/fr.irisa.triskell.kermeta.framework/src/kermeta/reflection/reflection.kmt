@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.61 2007-12-07 03:11:55 ffleurey Exp $
+/* $Id: reflection.kmt,v 1.62 2008-01-23 10:49:37 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -36,7 +36,7 @@ abstract class Object
 	 * Be careful, owning a tag doesn't means that the tag applies to the Object
 	 * To know which Tags apply to the object use the "tag" reference
 	 */
-	attribute ownedTag : set Tag[0..*]
+	attribute ownedTags : set Tag[0..*]
 
 	/**
 	 * An Object can be tagged by a Tag. 
@@ -319,7 +319,7 @@ abstract class ModelType inherits Type, TypeDefinition
 
 /**
  * Is the holder of a set of model elements (Object) that are compatible with the ModelType that has 
- * instanciated this Model.
+ * instantiated this Model.
  */
 abstract class Model inherits Object
 {
@@ -915,11 +915,6 @@ abstract class ModelingUnit inherits Object
 	 * To be written
 	 */
 	reference referencedModelingUnits : set ModelingUnit[0..*]
-
-	/**
-	 * Tag directly owned by this ModelingUnit.  (typically the mainClass and mainOperation tags)
-	 */
-	attribute ownedTags : set Tag[0..*]
 	
 	/**
 	 * list of filters that apply to this modeling unit.

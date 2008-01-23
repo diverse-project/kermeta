@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreExporter.java,v 1.13 2007-11-21 14:05:18 ftanguy Exp $
+/*$Id: EcoreExporter.java,v 1.14 2008-01-23 10:49:49 cfaucher Exp $
 * Project : io
 * File : 	EcoreExporter.java
 * License : EPL
@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -42,6 +43,7 @@ import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
+import fr.irisa.triskell.eclipse.resources.URIHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -51,6 +53,7 @@ import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
 import fr.irisa.triskell.kermeta.modelhelper.StringHelper;
+import fr.irisa.triskell.traceability.helper.Tracer;
 
 public class EcoreExporter {
 
@@ -73,6 +76,9 @@ public class EcoreExporter {
 	private Hashtable <KermetaUnit, Boolean> pass3done = new Hashtable <KermetaUnit, Boolean> ();
 
 	private ExporterOptions exporterOptions = ExporterOptions.getDefault();
+	
+	private KermetaUnit source = null;
+	
 
 	/**
 	 * This datatype is used as an extra datatype to represent (in the built Ecore file)
@@ -234,6 +240,31 @@ public class EcoreExporter {
 		save();
 	}
 	
+	public Tracer getKm2ecoremappingTracer() {
+		//URI tracerUri = URI.createURI(source.getUri());
+		//tracerUri = tracerUri.appendFileExtension("traceability");
+
+		//Resource tarcerResource = Tracer.getResource(tracerUri);
+		//Tracer tracer = new Tracer(tarcerResource);
+		Tracer tracer = new Tracer();
+		tracer.newModelTrace();
+		
+		for(Map.Entry<fr.irisa.triskell.kermeta.language.structure.Object,EObject> eObjSet : km2ecoremapping.entrySet()) {
+			System.out.println(eObjSet);
+			System.out.println(eObjSet + " Key: " + eObjSet.getKey() + " - Value: " + eObjSet.getValue());
+			tracer.addMappingTrace((EObject) eObjSet.getKey(), eObjSet.getValue(), "");
+		}
+		
+		return tracer;
+		
+		/*try {
+			tarcerResource.save(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	}
+	
 	
 	public void save() {
 		try {
@@ -281,6 +312,9 @@ public class EcoreExporter {
 	 * @return
 	 */
 	public ResourceSet exportInMemory(KermetaUnit kermetaUnit, String rep, String fileName, ExporterOptions exporterOptions) {
+		
+		this.source = kermetaUnit;
+		
 		initialize(kermetaUnit, rep, fileName);
 		
 		this.exporterOptions = exporterOptions;
@@ -577,6 +611,10 @@ public class EcoreExporter {
 	
 	public Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, EObject> getKm2ecoremapping() {
 		return km2ecoremapping;
+	}
+	
+	public KermetaUnit getSource() {
+		return this.source;
 	}
 }
 

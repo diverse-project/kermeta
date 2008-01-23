@@ -58,7 +58,7 @@
         </eOperations>
         <eOperations name="forAllCpl">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := self.forAll{x | self.forAll{y | f(x, y)}}&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := self.forAll{x | do&#xA;&#x9;&#x9;&#x9;self.forAll{y | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;f(x, y)&#xA;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;end}&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * To be written #####################################&#xD;&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
@@ -73,7 +73,7 @@
         </eOperations>
         <eOperations name="existsCpl">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := self.exists{x | self.exists{y | f(x, y)}}&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := self.exists{x | do&#xA;&#x9;&#x9;&#x9;self.exists{y | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;f(x, y)&#xA;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;end}&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * To be written #####################################&#xD;&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
@@ -97,7 +97,7 @@
         </eOperations>
         <eOperations name="remove">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var elem : G&#xA;&#x9;from elem := self.detect{e | e.equals(element)}&#xA;&#x9;until elem.equals(void)&#xA;&#x9;loop&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#x9;&#x9;elem := self.detect{e | e.equals(element)}&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var elem : G&#xA;&#x9;from elem := self.detect{e | do&#xA;&#x9;&#x9;&#x9;e.equals(element)&#xA;&#x9;&#x9;end}&#xA;&#x9;until elem.equals(void)&#xA;&#x9;loop&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#x9;&#x9;elem := self.detect{e | do&#xA;&#x9;&#x9;&#x9;&#x9;e.equals(element)&#xA;&#x9;&#x9;&#x9;end}&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Removes all instances of element from the Collection, based on&#xD;&#xA;  * G.equals(Object) definition&#xD;&#xA;  */"/>
           </eAnnotations>
           <eAnnotations source="kermeta.post">
@@ -115,7 +115,7 @@
         </eOperations>
         <eOperations name="addAll">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;elements.each{element | add(element)}&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;elements.each{element | do&#xA;&#x9;&#x9;&#x9;add(element)&#xA;&#x9;&#x9;end}&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Adds all elements from the Collection elements in the current Collection&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="elements" eType="/1/standard/Collection"/>
@@ -330,7 +330,7 @@
         </eOperations>
         <eOperations name="reject">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := self.~select{elem | not (rejector(elem))}&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := self.~select{elem | do&#xA;&#x9;&#x9;&#x9;not (rejector(elem))&#xA;&#x9;&#x9;end}&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Sequence composed of elements of the Collection that&#xD;&#xA;  * do not validate the rejector function&#xD;&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Sequence">
@@ -346,7 +346,7 @@
         </eOperations>
         <eOperations name="count">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := self.~select{e | e.equals(element)}.size&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := self.~select{e | do&#xA;&#x9;&#x9;&#x9;e.equals(element)&#xA;&#x9;&#x9;end}.size&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns the number of instances of element in the Collection&#xD;&#xA;  */"/>
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
@@ -379,7 +379,7 @@
         </eOperations>
         <eOperations name="remove">
           <eAnnotations source="kermeta" references="/1/standard/Collection/remove">
-            <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | e.equals(element)}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | do&#xA;&#x9;&#x9;&#x9;e.equals(element)&#xA;&#x9;&#x9;end}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Overrides Collection&lt;G>.remove(G)&#xD;&#xA;  * Removes the element from the Set if it is contained by the Set&#xD;&#xA;  */"/>
             <details key="superOperation" value="kermeta::standard::Collection"/>
           </eAnnotations>
@@ -595,11 +595,11 @@
         </eOperations>
         <eOperations name="removeFromOid">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | (e.oid) == (elementOid)}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | do&#xA;&#x9;&#x9;&#x9;(e.oid) == (elementOid)&#xA;&#x9;&#x9;end}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Removes the element identified by the provided Oid from the Bag&#xD;&#xA;  */"/>
           </eAnnotations>
           <eAnnotations source="kermeta.post">
-            <details key="doesntContainsElementAnymore" value="not (exists{e | (e.oid) == (elementOid)})"/>
+            <details key="doesntContainsElementAnymore" value="not (exists{e | do&#xA;&#x9;&#x9;(e.oid) == (elementOid)&#xA;&#x9;end})"/>
           </eAnnotations>
           <eParameters name="elementOid">
             <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
@@ -607,7 +607,7 @@
         </eOperations>
         <eOperations name="removeOne">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | e.equals(element)}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | do&#xA;&#x9;&#x9;&#x9;e.equals(element)&#xA;&#x9;&#x9;end}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Removes one instance of element from the Bag&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="element">
@@ -1036,29 +1036,35 @@
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
+    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
+    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/Stack.ecore#/0"/>
-    <references href="../utils/Stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/0"/>
+    <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="java.ecore#/0"/>
     <references href="java.ecore#/1"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>

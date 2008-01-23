@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.40 2008-01-22 14:25:28 cfaucher Exp $
+/* $Id: KMT2KMPass7.java,v 1.41 2008-01-23 10:49:45 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : EPL
@@ -97,11 +97,11 @@ public class KMT2KMPass7 extends KMT2KMPass {
 				}
 			} else if ( tag.getName() != null ) {
 				if ( TagHelper.findTagFromName(object, tag.getName()) == null ){
-						object.getOwnedTag().add( tag ); // tag is owned by this object
+						object.getOwnedTags().add( tag ); // tag is owned by this object
 						object.getTag().add( tag ); // this object is tagged
 				}
 			} else{
-				object.getOwnedTag().add( tag ); // tag is owned by this object
+				object.getOwnedTags().add( tag ); // tag is owned by this object
 				object.getTag().add( tag ); // this object is tagged
 			}
 		}

@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass.java,v 1.12 2007-08-09 14:58:03 dvojtise Exp $
+/* $Id: Jar2KMPass.java,v 1.13 2008-01-23 10:49:49 cfaucher Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass.java
  * License : EPL
@@ -154,7 +154,7 @@ public abstract class Jar2KMPass {
 	        	Tag tag = StructureFactory.eINSTANCE.createTag();
 	        	tag.setName(IS_PROXY_FOR_JAVA_TYPE);
 	        	tag.setValue(name);
-	        	result.getOwnedTag().add(tag); // owned by this object
+	        	result.getOwnedTags().add(tag); // owned by this object
 	        	result.getTag().add(tag); // this object is tagged
 	        }
 	        result.setTypeDefinition(cd);

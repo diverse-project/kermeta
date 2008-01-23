@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
-    <nestedPackage tag="//@packages.0/kunit/@ownedTag.0" name="kunit" uri="http://www.kermeta.org/kermeta/kunit">
-      <ownedTag value="/**&#xD;&#xA; * main features of the famous *Unit tool for Kermeta language&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/assert_view.png&quot;>&#xD;&#xA; */" object="//@packages.0/kunit"/>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/AbstractFallible/@ownedTag.0" name="AbstractFallible" isAbstract="true" superType="//@packages.0/kunit/AbstractFallible/@containedType.0">
-        <ownedTag value="/**&#xD;&#xA; * to be written ############################&#xD;&#xA; */" object="//@packages.0/kunit/AbstractFallible"/>
+    <nestedPackage tag="//@packages.0/kunit/@ownedTags.0" name="kunit" uri="http://www.kermeta.org/kermeta/kunit">
+      <ownedTags value="/**&#xD;&#xA; * main features of the famous *Unit tool for Kermeta language&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/assert_view.png&quot;>&#xD;&#xA; */" object="//@packages.0/kunit"/>
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/AbstractFallible/@ownedTags.0" name="AbstractFallible" isAbstract="true" superType="//@packages.0/kunit/AbstractFallible/@containedType.0">
+        <ownedTags value="/**&#xD;&#xA; * to be written ############################&#xD;&#xA; */" object="//@packages.0/kunit/AbstractFallible"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
         </containedType>
-        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assert/@ownedTag.0" name="assert" type="//@packages.0/kunit/AbstractFallible/assert/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/** process the given condition and react if it is not satisfied */" object="//@packages.0/kunit/AbstractFallible/assert"/>
+        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assert/@ownedTags.0" name="assert" type="//@packages.0/kunit/AbstractFallible/assert/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+          <ownedTags value="/** process the given condition and react if it is not satisfied */" object="//@packages.0/kunit/AbstractFallible/assert"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="condition" type="//@packages.0/kunit/AbstractFallible/assert/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -17,8 +17,8 @@
             </containedType>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertWithMsg/@ownedTag.0" name="assertWithMsg" type="//@packages.0/kunit/AbstractFallible/assertWithMsg/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/**&#xD;&#xA;     * process the given condition and react with the given message&#xD;&#xA;     * if it is not satisfied&#xD;&#xA;     */" object="//@packages.0/kunit/AbstractFallible/assertWithMsg"/>
+        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertWithMsg/@ownedTags.0" name="assertWithMsg" type="//@packages.0/kunit/AbstractFallible/assertWithMsg/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+          <ownedTags value="/**&#xD;&#xA;     * process the given condition and react with the given message&#xD;&#xA;     * if it is not satisfied&#xD;&#xA;     */" object="//@packages.0/kunit/AbstractFallible/assertWithMsg"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="condition" type="//@packages.0/kunit/AbstractFallible/assertWithMsg/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -31,8 +31,8 @@
             </containedType>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/fail/@ownedTag.0" name="fail" type="//@packages.0/kunit/AbstractFallible/fail/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/** to be used if a failure reaction is needed */" object="//@packages.0/kunit/AbstractFallible/fail"/>
+        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/fail/@ownedTags.0" name="fail" type="//@packages.0/kunit/AbstractFallible/fail/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+          <ownedTags value="/** to be used if a failure reaction is needed */" object="//@packages.0/kunit/AbstractFallible/fail"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="msg" type="//@packages.0/kunit/AbstractFallible/fail/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -40,8 +40,8 @@
             </containedType>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertTrue/@ownedTag.0" name="assertTrue" type="//@packages.0/kunit/AbstractFallible/assertTrue/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/** process the given condition and react if it is not satisfied */" object="//@packages.0/kunit/AbstractFallible/assertTrue"/>
+        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertTrue/@ownedTags.0" name="assertTrue" type="//@packages.0/kunit/AbstractFallible/assertTrue/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+          <ownedTags value="/** process the given condition and react if it is not satisfied */" object="//@packages.0/kunit/AbstractFallible/assertTrue"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="condition" type="//@packages.0/kunit/AbstractFallible/assertTrue/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -49,8 +49,8 @@
             </containedType>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertTrueWithMsg/@ownedTag.0" name="assertTrueWithMsg" type="//@packages.0/kunit/AbstractFallible/assertTrueWithMsg/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/**&#xD;&#xA;     * process the given condition and react with the given message&#xD;&#xA;     * if it is not satisfied&#xD;&#xA;     */" object="//@packages.0/kunit/AbstractFallible/assertTrueWithMsg"/>
+        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertTrueWithMsg/@ownedTags.0" name="assertTrueWithMsg" type="//@packages.0/kunit/AbstractFallible/assertTrueWithMsg/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+          <ownedTags value="/**&#xD;&#xA;     * process the given condition and react with the given message&#xD;&#xA;     * if it is not satisfied&#xD;&#xA;     */" object="//@packages.0/kunit/AbstractFallible/assertTrueWithMsg"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="condition" type="//@packages.0/kunit/AbstractFallible/assertTrueWithMsg/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -63,8 +63,8 @@
             </containedType>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertFalse/@ownedTag.0" name="assertFalse" type="//@packages.0/kunit/AbstractFallible/assertFalse/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/** process the given condition and react if it is satisfied */" object="//@packages.0/kunit/AbstractFallible/assertFalse"/>
+        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertFalse/@ownedTags.0" name="assertFalse" type="//@packages.0/kunit/AbstractFallible/assertFalse/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+          <ownedTags value="/** process the given condition and react if it is satisfied */" object="//@packages.0/kunit/AbstractFallible/assertFalse"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="condition" type="//@packages.0/kunit/AbstractFallible/assertFalse/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -72,8 +72,8 @@
             </containedType>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertFalseWithMsg/@ownedTag.0" name="assertFalseWithMsg" type="//@packages.0/kunit/AbstractFallible/assertFalseWithMsg/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/**&#xD;&#xA;     * process the given condition and react with the given message&#xD;&#xA;     * if it is satisfied&#xD;&#xA;     */" object="//@packages.0/kunit/AbstractFallible/assertFalseWithMsg"/>
+        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertFalseWithMsg/@ownedTags.0" name="assertFalseWithMsg" type="//@packages.0/kunit/AbstractFallible/assertFalseWithMsg/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+          <ownedTags value="/**&#xD;&#xA;     * process the given condition and react with the given message&#xD;&#xA;     * if it is satisfied&#xD;&#xA;     */" object="//@packages.0/kunit/AbstractFallible/assertFalseWithMsg"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="condition" type="//@packages.0/kunit/AbstractFallible/assertFalseWithMsg/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -86,8 +86,8 @@
             </containedType>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertEqual/@ownedTag.0" name="assertEqual" type="//@packages.0/kunit/AbstractFallible/assertEqual/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-          <ownedTag value="/** process the two given string and react if they are not equal */" object="//@packages.0/kunit/AbstractFallible/assertEqual"/>
+        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertEqual/@ownedTags.0" name="assertEqual" type="//@packages.0/kunit/AbstractFallible/assertEqual/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+          <ownedTags value="/** process the two given string and react if they are not equal */" object="//@packages.0/kunit/AbstractFallible/assertEqual"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="expected" type="//@packages.0/kunit/AbstractFallible/assertEqual/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -100,8 +100,8 @@
             </containedType>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertSimilar/@ownedTag.0" name="assertSimilar" type="//@packages.0/kunit/AbstractFallible/assertSimilar/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/**&#xD;&#xA;   * Log a failure if the two strings are not identical modulo-white-space&#xD;&#xA;   */" object="//@packages.0/kunit/AbstractFallible/assertSimilar"/>
+        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/assertSimilar/@ownedTags.0" name="assertSimilar" type="//@packages.0/kunit/AbstractFallible/assertSimilar/@containedType.0" isOrdered="true" upper="1">
+          <ownedTags value="/**&#xD;&#xA;   * Log a failure if the two strings are not identical modulo-white-space&#xD;&#xA;   */" object="//@packages.0/kunit/AbstractFallible/assertSimilar"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="expected" type="//@packages.0/kunit/AbstractFallible/assertSimilar/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -164,8 +164,8 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/distil/@ownedTag.0" name="distil" type="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.0/@containedType.0" isOrdered="true" upper="1">
-          <ownedTag value="/** &#xD;&#xA;  ** reduces all runs of white-space to a single space character&#xD;&#xA;  **/" object="//@packages.0/kunit/AbstractFallible/distil"/>
+        <ownedOperation tag="//@packages.0/kunit/AbstractFallible/distil/@ownedTags.0" name="distil" type="//@packages.0/kunit/AbstractFallible/assertSimilar/@body/@statement.0/@containedType.0" isOrdered="true" upper="1">
+          <ownedTags value="/** &#xD;&#xA;  ** reduces all runs of white-space to a single space character&#xD;&#xA;  **/" object="//@packages.0/kunit/AbstractFallible/distil"/>
           <ownedParameter name="s" type="//@packages.0/kunit/AbstractFallible/distil/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
@@ -310,16 +310,16 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/AssertionFailedError/@ownedTag.0" name="AssertionFailedError" superType="//@packages.0/kunit/AssertionFailedError/@containedType.0">
-        <ownedTag value="/** AssertionViolatedException are raised when assertions are violated */" object="//@packages.0/kunit/AssertionFailedError"/>
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="//@packages.0/kunit/AssertionFailedError/@ownedTags.0" name="AssertionFailedError" superType="//@packages.0/kunit/AssertionFailedError/@containedType.0">
+        <ownedTags value="/** AssertionViolatedException are raised when assertions are violated */" object="//@packages.0/kunit/AssertionFailedError"/>
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/Exception"/>
         </containedType>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Assert" superType="//@packages.0/kunit/Assert/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/kunit/AbstractFallible"/>
-        <ownedOperation tag="//@packages.0/kunit/Assert/assert/@ownedTag.0" name="assert" type="//@packages.0/kunit/Assert/assert/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assert">
-          <ownedTag value="/** Fails if condition is false */" object="//@packages.0/kunit/Assert/assert"/>
+        <ownedOperation tag="//@packages.0/kunit/Assert/assert/@ownedTags.0" name="assert" type="//@packages.0/kunit/Assert/assert/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assert">
+          <ownedTags value="/** Fails if condition is false */" object="//@packages.0/kunit/Assert/assert"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="condition" type="//@packages.0/kunit/Assert/assert/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -342,8 +342,8 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/Assert/assertTrue/@ownedTag.0" name="assertTrue" type="//@packages.0/kunit/Assert/assertTrue/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assertTrue">
-          <ownedTag value="/** will fail if condition is false */" object="//@packages.0/kunit/Assert/assertTrue"/>
+        <ownedOperation tag="//@packages.0/kunit/Assert/assertTrue/@ownedTags.0" name="assertTrue" type="//@packages.0/kunit/Assert/assertTrue/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assertTrue">
+          <ownedTags value="/** will fail if condition is false */" object="//@packages.0/kunit/Assert/assertTrue"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="condition" type="//@packages.0/kunit/Assert/assertTrue/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -365,8 +365,8 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/Assert/assertTrueWithMsg/@ownedTag.0" name="assertTrueWithMsg" type="//@packages.0/kunit/Assert/assertTrueWithMsg/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assertTrueWithMsg">
-          <ownedTag value="/** will fail if condition is false */" object="//@packages.0/kunit/Assert/assertTrueWithMsg"/>
+        <ownedOperation tag="//@packages.0/kunit/Assert/assertTrueWithMsg/@ownedTags.0" name="assertTrueWithMsg" type="//@packages.0/kunit/Assert/assertTrueWithMsg/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assertTrueWithMsg">
+          <ownedTags value="/** will fail if condition is false */" object="//@packages.0/kunit/Assert/assertTrueWithMsg"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="condition" type="//@packages.0/kunit/Assert/assertTrueWithMsg/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -398,8 +398,8 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/Assert/assertFalse/@ownedTag.0" name="assertFalse" type="//@packages.0/kunit/Assert/assertFalse/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assertFalse">
-          <ownedTag value="/** will fail if condition is true */" object="//@packages.0/kunit/Assert/assertFalse"/>
+        <ownedOperation tag="//@packages.0/kunit/Assert/assertFalse/@ownedTags.0" name="assertFalse" type="//@packages.0/kunit/Assert/assertFalse/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assertFalse">
+          <ownedTags value="/** will fail if condition is true */" object="//@packages.0/kunit/Assert/assertFalse"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="condition" type="//@packages.0/kunit/Assert/assertFalse/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -417,8 +417,8 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/Assert/assertFalseWithMsg/@ownedTag.0" name="assertFalseWithMsg" type="//@packages.0/kunit/Assert/assertFalseWithMsg/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assertFalseWithMsg">
-          <ownedTag value="/** will fail if condition is true */" object="//@packages.0/kunit/Assert/assertFalseWithMsg"/>
+        <ownedOperation tag="//@packages.0/kunit/Assert/assertFalseWithMsg/@ownedTags.0" name="assertFalseWithMsg" type="//@packages.0/kunit/Assert/assertFalseWithMsg/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assertFalseWithMsg">
+          <ownedTags value="/** will fail if condition is true */" object="//@packages.0/kunit/Assert/assertFalseWithMsg"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="condition" type="//@packages.0/kunit/Assert/assertFalseWithMsg/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -446,8 +446,8 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/Assert/assertWithMsg/@ownedTag.0" name="assertWithMsg" type="//@packages.0/kunit/Assert/assertWithMsg/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assertWithMsg">
-          <ownedTag value="/** will fail if condition is false */" object="//@packages.0/kunit/Assert/assertWithMsg"/>
+        <ownedOperation tag="//@packages.0/kunit/Assert/assertWithMsg/@ownedTags.0" name="assertWithMsg" type="//@packages.0/kunit/Assert/assertWithMsg/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assertWithMsg">
+          <ownedTags value="/** will fail if condition is false */" object="//@packages.0/kunit/Assert/assertWithMsg"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="condition" type="//@packages.0/kunit/Assert/assertWithMsg/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
@@ -479,8 +479,8 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/Assert/fail/@ownedTag.0" name="fail" type="//@packages.0/kunit/Assert/assert/@body/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/fail">
-          <ownedTag value="/** raise a AssertionViolatedException with the provided message */" object="//@packages.0/kunit/Assert/fail"/>
+        <ownedOperation tag="//@packages.0/kunit/Assert/fail/@ownedTags.0" name="fail" type="//@packages.0/kunit/Assert/assert/@body/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/fail">
+          <ownedTags value="/** raise a AssertionViolatedException with the provided message */" object="//@packages.0/kunit/Assert/fail"/>
           <ownedParameter name="msg" type="//@packages.0/kunit/Assert/fail/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
@@ -514,8 +514,8 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="//@packages.0/kunit/Assert/assertEqual/@ownedTag.0" name="assertEqual" type="//@packages.0/kunit/Assert/assertEqual/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assertEqual">
-          <ownedTag value="/** Will fail if the two strings are not identical */" object="//@packages.0/kunit/Assert/assertEqual"/>
+        <ownedOperation tag="//@packages.0/kunit/Assert/assertEqual/@ownedTags.0" name="assertEqual" type="//@packages.0/kunit/Assert/assertEqual/@containedType.0" isOrdered="true" upper="1" superOperation="//@packages.0/kunit/AbstractFallible/assertEqual">
+          <ownedTags value="/** Will fail if the two strings are not identical */" object="//@packages.0/kunit/Assert/assertEqual"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="expected" type="//@packages.0/kunit/Assert/assertEqual/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">

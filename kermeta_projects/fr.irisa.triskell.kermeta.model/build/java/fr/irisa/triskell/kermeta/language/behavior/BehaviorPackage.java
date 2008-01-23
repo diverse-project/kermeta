@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackage.java,v 1.12 2008-01-22 14:24:31 cfaucher Exp $
+ * $Id: BehaviorPackage.java,v 1.13 2008-01-23 10:50:21 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -88,13 +88,13 @@ public interface BehaviorPackage extends EPackage {
 	int EXPRESSION__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION__OWNED_TAG = StructurePackage.OBJECT__OWNED_TAG;
+	int EXPRESSION__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -343,13 +343,13 @@ public interface BehaviorPackage extends EPackage {
 	int ASSIGNMENT__TAG = EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT__OWNED_TAG = EXPRESSION__OWNED_TAG;
+	int ASSIGNMENT__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -415,13 +415,13 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_EXPRESSION__TAG = EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_EXPRESSION__OWNED_TAG = EXPRESSION__OWNED_TAG;
+	int CALL_EXPRESSION__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -487,13 +487,13 @@ public interface BehaviorPackage extends EPackage {
 	int BLOCK__TAG = EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BLOCK__OWNED_TAG = EXPRESSION__OWNED_TAG;
+	int BLOCK__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -550,13 +550,13 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_VARIABLE__TAG = CALL_EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_VARIABLE__OWNED_TAG = CALL_EXPRESSION__OWNED_TAG;
+	int CALL_VARIABLE__OWNED_TAGS = CALL_EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -631,13 +631,13 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_FEATURE__TAG = CALL_EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_FEATURE__OWNED_TAG = CALL_EXPRESSION__OWNED_TAG;
+	int CALL_FEATURE__OWNED_TAGS = CALL_EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -748,13 +748,13 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_SUPER_OPERATION__TAG = CALL_EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_SUPER_OPERATION__OWNED_TAG = CALL_EXPRESSION__OWNED_TAG;
+	int CALL_SUPER_OPERATION__OWNED_TAGS = CALL_EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -820,13 +820,13 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_RESULT__TAG = CALL_VARIABLE__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_RESULT__OWNED_TAG = CALL_VARIABLE__OWNED_TAG;
+	int CALL_RESULT__OWNED_TAGS = CALL_VARIABLE__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -901,13 +901,13 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_VALUE__TAG = CALL_EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_VALUE__OWNED_TAG = CALL_EXPRESSION__OWNED_TAG;
+	int CALL_VALUE__OWNED_TAGS = CALL_EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -973,13 +973,13 @@ public interface BehaviorPackage extends EPackage {
 	int CONDITIONAL__TAG = EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONDITIONAL__OWNED_TAG = EXPRESSION__OWNED_TAG;
+	int CONDITIONAL__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1045,13 +1045,13 @@ public interface BehaviorPackage extends EPackage {
 	int RAISE__TAG = EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RAISE__OWNED_TAG = EXPRESSION__OWNED_TAG;
+	int RAISE__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1099,13 +1099,13 @@ public interface BehaviorPackage extends EPackage {
 	int RESCUE__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESCUE__OWNED_TAG = StructurePackage.OBJECT__OWNED_TAG;
+	int RESCUE__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference list.
@@ -1153,13 +1153,13 @@ public interface BehaviorPackage extends EPackage {
 	int TYPE_REFERENCE__TAG = StructurePackage.MULTIPLICITY_ELEMENT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_REFERENCE__OWNED_TAG = StructurePackage.MULTIPLICITY_ELEMENT__OWNED_TAG;
+	int TYPE_REFERENCE__OWNED_TAGS = StructurePackage.MULTIPLICITY_ELEMENT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1243,13 +1243,13 @@ public interface BehaviorPackage extends EPackage {
 	int LITERAL__TAG = EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LITERAL__OWNED_TAG = EXPRESSION__OWNED_TAG;
+	int LITERAL__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1288,13 +1288,13 @@ public interface BehaviorPackage extends EPackage {
 	int EMPTY_EXPRESSION__TAG = EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPTY_EXPRESSION__OWNED_TAG = EXPRESSION__OWNED_TAG;
+	int EMPTY_EXPRESSION__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1343,13 +1343,13 @@ public interface BehaviorPackage extends EPackage {
 	int JAVA_STATIC_CALL__TAG = EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_STATIC_CALL__OWNED_TAG = EXPRESSION__OWNED_TAG;
+	int JAVA_STATIC_CALL__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1415,13 +1415,13 @@ public interface BehaviorPackage extends EPackage {
 	int LAMBDA_EXPRESSION__TAG = EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LAMBDA_EXPRESSION__OWNED_TAG = EXPRESSION__OWNED_TAG;
+	int LAMBDA_EXPRESSION__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1478,13 +1478,13 @@ public interface BehaviorPackage extends EPackage {
 	int LAMBDA_PARAMETER__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LAMBDA_PARAMETER__OWNED_TAG = StructurePackage.OBJECT__OWNED_TAG;
+	int LAMBDA_PARAMETER__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1523,13 +1523,13 @@ public interface BehaviorPackage extends EPackage {
 	int INTEGER_LITERAL__TAG = LITERAL__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_LITERAL__OWNED_TAG = LITERAL__OWNED_TAG;
+	int INTEGER_LITERAL__OWNED_TAGS = LITERAL__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1577,13 +1577,13 @@ public interface BehaviorPackage extends EPackage {
 	int STRING_LITERAL__TAG = LITERAL__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_LITERAL__OWNED_TAG = LITERAL__OWNED_TAG;
+	int STRING_LITERAL__OWNED_TAGS = LITERAL__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1631,13 +1631,13 @@ public interface BehaviorPackage extends EPackage {
 	int BOOLEAN_LITERAL__TAG = LITERAL__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_LITERAL__OWNED_TAG = LITERAL__OWNED_TAG;
+	int BOOLEAN_LITERAL__OWNED_TAGS = LITERAL__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1685,13 +1685,13 @@ public interface BehaviorPackage extends EPackage {
 	int TYPE_LITERAL__TAG = LITERAL__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_LITERAL__OWNED_TAG = LITERAL__OWNED_TAG;
+	int TYPE_LITERAL__OWNED_TAGS = LITERAL__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1739,13 +1739,13 @@ public interface BehaviorPackage extends EPackage {
 	int VOID_LITERAL__TAG = LITERAL__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VOID_LITERAL__OWNED_TAG = LITERAL__OWNED_TAG;
+	int VOID_LITERAL__OWNED_TAGS = LITERAL__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1804,13 +1804,13 @@ public interface BehaviorPackage extends EPackage {
 	int LOOP__TAG = EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOOP__OWNED_TAG = EXPRESSION__OWNED_TAG;
+	int LOOP__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1886,13 +1886,13 @@ public interface BehaviorPackage extends EPackage {
 	int SELF_EXPRESSION__TAG = EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SELF_EXPRESSION__OWNED_TAG = EXPRESSION__OWNED_TAG;
+	int SELF_EXPRESSION__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1931,13 +1931,13 @@ public interface BehaviorPackage extends EPackage {
 	int VARIABLE_DECL__TAG = EXPRESSION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DECL__OWNED_TAG = EXPRESSION__OWNED_TAG;
+	int VARIABLE_DECL__OWNED_TAGS = EXPRESSION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.

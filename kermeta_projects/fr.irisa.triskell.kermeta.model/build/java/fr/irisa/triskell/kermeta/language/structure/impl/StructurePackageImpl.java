@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackageImpl.java,v 1.21 2008-01-22 14:24:29 cfaucher Exp $
+ * $Id: StructurePackageImpl.java,v 1.22 2008-01-23 10:50:20 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -484,7 +484,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getObject_OwnedTag() {
+	public EReference getObject_OwnedTags() {
 		return (EReference)objectEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1268,7 +1268,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getModelingUnit_Packages() {
-		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(1);
+		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1277,7 +1277,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getModelingUnit_Requires() {
-		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(2);
+		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1286,7 +1286,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getModelingUnit_Usings() {
-		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(3);
+		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1295,7 +1295,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getModelingUnit_ReferencedModelingUnits() {
-		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(4);
+		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1304,7 +1304,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getModelingUnit_IncludeFilters() {
-		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(5);
+		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1313,16 +1313,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	public EReference getModelingUnit_ExcludeFilters() {
-		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getModelingUnit_OwnedTags() {
-		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(0);
+		return (EReference)modelingUnitEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1650,7 +1641,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		objectEClass = createEClass(OBJECT);
 		createEReference(objectEClass, OBJECT__TAG);
-		createEReference(objectEClass, OBJECT__OWNED_TAG);
+		createEReference(objectEClass, OBJECT__OWNED_TAGS);
 
 		modelEClass = createEClass(MODEL);
 		createEReference(modelEClass, MODEL__CONTENTS);
@@ -1748,7 +1739,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEReference(classDefinitionEClass, CLASS_DEFINITION__SUPER_TYPE);
 
 		modelingUnitEClass = createEClass(MODELING_UNIT);
-		createEReference(modelingUnitEClass, MODELING_UNIT__OWNED_TAGS);
 		createEReference(modelingUnitEClass, MODELING_UNIT__PACKAGES);
 		createEReference(modelingUnitEClass, MODELING_UNIT__REQUIRES);
 		createEReference(modelingUnitEClass, MODELING_UNIT__USINGS);
@@ -1902,7 +1892,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		initEClass(objectEClass, fr.irisa.triskell.kermeta.language.structure.Object.class, "Object", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getObject_Tag(), this.getTag(), this.getTag_Object(), "tag", null, 0, -1, fr.irisa.triskell.kermeta.language.structure.Object.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getObject_OwnedTag(), this.getTag(), null, "ownedTag", null, 0, -1, fr.irisa.triskell.kermeta.language.structure.Object.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getObject_OwnedTags(), this.getTag(), null, "ownedTags", null, 0, -1, fr.irisa.triskell.kermeta.language.structure.Object.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(objectEClass, this.getClass_(), "getMetaClass", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -2041,7 +2031,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEReference(getClassDefinition_SuperType(), this.getType(), null, "superType", null, 0, -1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelingUnitEClass, ModelingUnit.class, "ModelingUnit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelingUnit_OwnedTags(), this.getTag(), null, "ownedTags", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelingUnit_Packages(), this.getPackage(), null, "packages", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelingUnit_Requires(), this.getRequire(), null, "requires", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelingUnit_Usings(), this.getUsing(), null, "usings", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

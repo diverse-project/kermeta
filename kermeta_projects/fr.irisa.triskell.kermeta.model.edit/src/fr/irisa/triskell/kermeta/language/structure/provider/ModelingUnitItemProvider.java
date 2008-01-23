@@ -1,7 +1,7 @@
 /**
  * IRISA / INRIA / Universite de Rennes 1
  *
- * $Id: ModelingUnitItemProvider.java,v 1.3 2008-01-22 16:13:25 cfaucher Exp $
+ * $Id: ModelingUnitItemProvider.java,v 1.4 2008-01-23 10:49:55 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -113,7 +113,6 @@ public class ModelingUnitItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__OWNED_TAGS);
 			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__PACKAGES);
 			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__REQUIRES);
 			childrenFeatures.add(StructurePackage.Literals.MODELING_UNIT__USINGS);
@@ -170,7 +169,6 @@ public class ModelingUnitItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ModelingUnit.class)) {
-			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 			case StructurePackage.MODELING_UNIT__REQUIRES:
 			case StructurePackage.MODELING_UNIT__USINGS:
@@ -192,11 +190,6 @@ public class ModelingUnitItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.MODELING_UNIT__OWNED_TAGS,
-				 StructureFactory.eINSTANCE.createTag()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -236,8 +229,6 @@ public class ModelingUnitItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == StructurePackage.Literals.OBJECT__OWNED_TAG ||
-			childFeature == StructurePackage.Literals.MODELING_UNIT__OWNED_TAGS ||
 			childFeature == StructurePackage.Literals.MODELING_UNIT__INCLUDE_FILTERS ||
 			childFeature == StructurePackage.Literals.MODELING_UNIT__EXCLUDE_FILTERS;
 

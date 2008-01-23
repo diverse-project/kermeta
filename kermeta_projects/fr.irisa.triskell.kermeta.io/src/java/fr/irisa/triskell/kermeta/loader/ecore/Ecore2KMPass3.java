@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.32 2007-11-29 15:34:23 ftanguy Exp $
+/* $Id: Ecore2KMPass3.java,v 1.33 2008-01-23 10:49:47 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -271,7 +271,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 					tag.setValue(result);
 					fr.irisa.triskell.kermeta.language.structure.Object o = getObjectForEModelElement(node.getEModelElement()); 
 					if (o!=null) {
-						o.getOwnedTag().add(tag); // owned by this object
+						o.getOwnedTags().add(tag); // owned by this object
 						o.getTag().add(tag); // this object is tagged
 					}
 				}
@@ -296,7 +296,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 			tag.setValue(result);
 			fr.irisa.triskell.kermeta.language.structure.Object o = getObjectForEModelElement(node.getEModelElement()); 
 			if ( o != null ) {
-				o.getOwnedTag().add( tag );
+				o.getOwnedTags().add( tag );
 				o.getTag().add(tag);
 			} 
 		}

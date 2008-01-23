@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelingUnitImpl.java,v 1.4 2008-01-22 14:24:29 cfaucher Exp $
+ * $Id: ModelingUnitImpl.java,v 1.5 2008-01-23 10:50:20 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -31,7 +31,6 @@ import fr.irisa.triskell.kermeta.language.structure.Using;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelingUnitImpl#getOwnedTags <em>Owned Tags</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelingUnitImpl#getPackages <em>Packages</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelingUnitImpl#getRequires <em>Requires</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelingUnitImpl#getUsings <em>Usings</em>}</li>
@@ -50,16 +49,6 @@ public class ModelingUnitImpl extends ObjectImpl implements ModelingUnit {
 	 * @generated
 	 */
 	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
-
-	/**
-	 * The cached value of the '{@link #getOwnedTags() <em>Owned Tags</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedTags()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Tag> ownedTags;
 
 	/**
 	 * The cached value of the '{@link #getPackages() <em>Packages</em>}' containment reference list.
@@ -217,23 +206,9 @@ public class ModelingUnitImpl extends ObjectImpl implements ModelingUnit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Tag> getOwnedTags() {
-		if (ownedTags == null) {
-			ownedTags = new EObjectContainmentEList.Resolving<Tag>(Tag.class, this, StructurePackage.MODELING_UNIT__OWNED_TAGS);
-		}
-		return ownedTags;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
-				return ((InternalEList<?>)getOwnedTags()).basicRemove(otherEnd, msgs);
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				return ((InternalEList<?>)getPackages()).basicRemove(otherEnd, msgs);
 			case StructurePackage.MODELING_UNIT__REQUIRES:
@@ -256,8 +231,6 @@ public class ModelingUnitImpl extends ObjectImpl implements ModelingUnit {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
-				return getOwnedTags();
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				return getPackages();
 			case StructurePackage.MODELING_UNIT__REQUIRES:
@@ -283,10 +256,6 @@ public class ModelingUnitImpl extends ObjectImpl implements ModelingUnit {
 		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
-				getOwnedTags().clear();
-				getOwnedTags().addAll((Collection<? extends Tag>)newValue);
-				return;
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				getPackages().clear();
 				getPackages().addAll((Collection<? extends fr.irisa.triskell.kermeta.language.structure.Package>)newValue);
@@ -323,9 +292,6 @@ public class ModelingUnitImpl extends ObjectImpl implements ModelingUnit {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
-				getOwnedTags().clear();
-				return;
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				getPackages().clear();
 				return;
@@ -356,8 +322,6 @@ public class ModelingUnitImpl extends ObjectImpl implements ModelingUnit {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StructurePackage.MODELING_UNIT__OWNED_TAGS:
-				return ownedTags != null && !ownedTags.isEmpty();
 			case StructurePackage.MODELING_UNIT__PACKAGES:
 				return packages != null && !packages.isEmpty();
 			case StructurePackage.MODELING_UNIT__REQUIRES:

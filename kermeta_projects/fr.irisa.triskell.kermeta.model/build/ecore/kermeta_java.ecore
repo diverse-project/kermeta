@@ -165,7 +165,7 @@
         <eOperations name="checkAllInvariants"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="tag" upperBound="-1"
             eType="#//language/structure/Tag" eOpposite="#//language/structure/Tag/object"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTag" upperBound="-1"
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTags" upperBound="-1"
             eType="#//language/structure/Tag" containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//language/structure/Object">
@@ -327,8 +327,6 @@
         <eLiterals name="post" value="2"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ModelingUnit" eSuperTypes="#//language/structure/Object">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTags" upperBound="-1"
-            eType="#//language/structure/Tag" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
             eType="#//language/structure/Package" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="requires" upperBound="-1"

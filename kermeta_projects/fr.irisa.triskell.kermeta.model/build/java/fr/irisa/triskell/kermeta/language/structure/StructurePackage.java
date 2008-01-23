@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackage.java,v 1.16 2008-01-22 14:24:30 cfaucher Exp $
+ * $Id: StructurePackage.java,v 1.17 2008-01-23 10:50:20 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -88,13 +88,13 @@ public interface StructurePackage extends EPackage {
 	int OBJECT__TAG = 0;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT__OWNED_TAG = 1;
+	int OBJECT__OWNED_TAGS = 1;
 
 	/**
 	 * The number of structural features of the '<em>Object</em>' class.
@@ -175,13 +175,13 @@ public interface StructurePackage extends EPackage {
 	int TYPE__TAG = OBJECT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE__OWNED_TAG = OBJECT__OWNED_TAG;
+	int TYPE__OWNED_TAGS = OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -251,13 +251,13 @@ public interface StructurePackage extends EPackage {
 	int PARAMETERIZED_TYPE__TAG = TYPE__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE__OWNED_TAG = TYPE__OWNED_TAG;
+	int PARAMETERIZED_TYPE__OWNED_TAGS = TYPE__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -324,13 +324,13 @@ public interface StructurePackage extends EPackage {
 	int CLASS__TAG = PARAMETERIZED_TYPE__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__OWNED_TAG = PARAMETERIZED_TYPE__OWNED_TAG;
+	int CLASS__OWNED_TAGS = PARAMETERIZED_TYPE__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -442,13 +442,13 @@ public interface StructurePackage extends EPackage {
 	int MODEL__TAG = OBJECT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__OWNED_TAG = OBJECT__OWNED_TAG;
+	int MODEL__OWNED_TAGS = OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contents</b></em>' reference list.
@@ -488,13 +488,13 @@ public interface StructurePackage extends EPackage {
 	int MODEL_TYPE__TAG = TYPE__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__OWNED_TAG = TYPE__OWNED_TAG;
+	int MODEL_TYPE__OWNED_TAGS = TYPE__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -560,13 +560,13 @@ public interface StructurePackage extends EPackage {
 	int TYPE_CONTAINER__TAG = OBJECT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_CONTAINER__OWNED_TAG = OBJECT__OWNED_TAG;
+	int TYPE_CONTAINER__OWNED_TAGS = OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -596,13 +596,13 @@ public interface StructurePackage extends EPackage {
 	int TYPED_ELEMENT__TAG = TYPE_CONTAINER__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_ELEMENT__OWNED_TAG = TYPE_CONTAINER__OWNED_TAG;
+	int TYPED_ELEMENT__OWNED_TAGS = TYPE_CONTAINER__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -650,13 +650,13 @@ public interface StructurePackage extends EPackage {
 	int MULTIPLICITY_ELEMENT__TAG = TYPED_ELEMENT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLICITY_ELEMENT__OWNED_TAG = TYPED_ELEMENT__OWNED_TAG;
+	int MULTIPLICITY_ELEMENT__OWNED_TAGS = TYPED_ELEMENT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -740,13 +740,13 @@ public interface StructurePackage extends EPackage {
 	int OPERATION__TAG = MULTIPLICITY_ELEMENT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__OWNED_TAG = MULTIPLICITY_ELEMENT__OWNED_TAG;
+	int OPERATION__OWNED_TAGS = MULTIPLICITY_ELEMENT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -911,13 +911,13 @@ public interface StructurePackage extends EPackage {
 	int PROPERTY__TAG = MULTIPLICITY_ELEMENT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__OWNED_TAG = MULTIPLICITY_ELEMENT__OWNED_TAG;
+	int PROPERTY__OWNED_TAGS = MULTIPLICITY_ELEMENT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1100,13 +1100,13 @@ public interface StructurePackage extends EPackage {
 	int NAMED_ELEMENT__TAG = OBJECT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT__OWNED_TAG = OBJECT__OWNED_TAG;
+	int NAMED_ELEMENT__OWNED_TAGS = OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1136,13 +1136,13 @@ public interface StructurePackage extends EPackage {
 	int ENUMERATION_LITERAL__TAG = NAMED_ELEMENT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_LITERAL__OWNED_TAG = NAMED_ELEMENT__OWNED_TAG;
+	int ENUMERATION_LITERAL__OWNED_TAGS = NAMED_ELEMENT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1181,13 +1181,13 @@ public interface StructurePackage extends EPackage {
 	int TYPE_VARIABLE_BINDING__TAG = TYPE_CONTAINER__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE_BINDING__OWNED_TAG = TYPE_CONTAINER__OWNED_TAG;
+	int TYPE_VARIABLE_BINDING__OWNED_TAGS = TYPE_CONTAINER__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1265,13 +1265,13 @@ public interface StructurePackage extends EPackage {
 	int TYPE_DEFINITION__TAG = NAMED_ELEMENT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__OWNED_TAG = NAMED_ELEMENT__OWNED_TAG;
+	int TYPE_DEFINITION__OWNED_TAGS = NAMED_ELEMENT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1399,13 +1399,13 @@ public interface StructurePackage extends EPackage {
 	int DATA_TYPE__TAG = TYPE__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE__OWNED_TAG = TYPE__OWNED_TAG;
+	int DATA_TYPE__OWNED_TAGS = TYPE__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -1512,13 +1512,13 @@ public interface StructurePackage extends EPackage {
 	int ENUMERATION__TAG = DATA_TYPE__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION__OWNED_TAG = DATA_TYPE__OWNED_TAG;
+	int ENUMERATION__OWNED_TAGS = DATA_TYPE__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -1584,13 +1584,13 @@ public interface StructurePackage extends EPackage {
 	int PACKAGE__TAG = NAMED_ELEMENT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__OWNED_TAG = NAMED_ELEMENT__OWNED_TAG;
+	int PACKAGE__OWNED_TAGS = NAMED_ELEMENT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1666,13 +1666,13 @@ public interface StructurePackage extends EPackage {
 	int PARAMETER__TAG = MULTIPLICITY_ELEMENT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER__OWNED_TAG = MULTIPLICITY_ELEMENT__OWNED_TAG;
+	int PARAMETER__OWNED_TAGS = MULTIPLICITY_ELEMENT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1775,13 +1775,13 @@ public interface StructurePackage extends EPackage {
 	int PRIMITIVE_TYPE__TAG = DATA_TYPE__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE__OWNED_TAG = DATA_TYPE__OWNED_TAG;
+	int PRIMITIVE_TYPE__OWNED_TAGS = DATA_TYPE__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -1866,13 +1866,13 @@ public interface StructurePackage extends EPackage {
 	int TAG__TAG = OBJECT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TAG__OWNED_TAG = OBJECT__OWNED_TAG;
+	int TAG__OWNED_TAGS = OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1930,13 +1930,13 @@ public interface StructurePackage extends EPackage {
 	int CONSTRAINT__TAG = NAMED_ELEMENT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT__OWNED_TAG = NAMED_ELEMENT__OWNED_TAG;
+	int CONSTRAINT__OWNED_TAGS = NAMED_ELEMENT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2020,13 +2020,13 @@ public interface StructurePackage extends EPackage {
 	int GENERIC_TYPE_DEFINITION__TAG = TYPE_DEFINITION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION__OWNED_TAG = TYPE_DEFINITION__OWNED_TAG;
+	int GENERIC_TYPE_DEFINITION__OWNED_TAGS = TYPE_DEFINITION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2083,13 +2083,13 @@ public interface StructurePackage extends EPackage {
 	int CLASS_DEFINITION__TAG = GENERIC_TYPE_DEFINITION__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION__OWNED_TAG = GENERIC_TYPE_DEFINITION__OWNED_TAG;
+	int CLASS_DEFINITION__OWNED_TAGS = GENERIC_TYPE_DEFINITION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2200,22 +2200,13 @@ public interface StructurePackage extends EPackage {
 	int MODELING_UNIT__TAG = OBJECT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODELING_UNIT__OWNED_TAG = OBJECT__OWNED_TAG;
-
-	/**
 	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__OWNED_TAGS = OBJECT_FEATURE_COUNT + 0;
+	int MODELING_UNIT__OWNED_TAGS = OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Packages</b></em>' containment reference list.
@@ -2224,7 +2215,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__PACKAGES = OBJECT_FEATURE_COUNT + 1;
+	int MODELING_UNIT__PACKAGES = OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Requires</b></em>' containment reference list.
@@ -2233,7 +2224,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__REQUIRES = OBJECT_FEATURE_COUNT + 2;
+	int MODELING_UNIT__REQUIRES = OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Usings</b></em>' containment reference list.
@@ -2242,7 +2233,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__USINGS = OBJECT_FEATURE_COUNT + 3;
+	int MODELING_UNIT__USINGS = OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Referenced Modeling Units</b></em>' reference list.
@@ -2251,7 +2242,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__REFERENCED_MODELING_UNITS = OBJECT_FEATURE_COUNT + 4;
+	int MODELING_UNIT__REFERENCED_MODELING_UNITS = OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Include Filters</b></em>' containment reference list.
@@ -2260,7 +2251,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__INCLUDE_FILTERS = OBJECT_FEATURE_COUNT + 5;
+	int MODELING_UNIT__INCLUDE_FILTERS = OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Exclude Filters</b></em>' containment reference list.
@@ -2269,7 +2260,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT__EXCLUDE_FILTERS = OBJECT_FEATURE_COUNT + 6;
+	int MODELING_UNIT__EXCLUDE_FILTERS = OBJECT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Modeling Unit</em>' class.
@@ -2278,7 +2269,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODELING_UNIT_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 7;
+	int MODELING_UNIT_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2290,13 +2281,13 @@ public interface StructurePackage extends EPackage {
 	int REQUIRE__TAG = OBJECT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRE__OWNED_TAG = OBJECT__OWNED_TAG;
+	int REQUIRE__OWNED_TAGS = OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Uri</b></em>' attribute.
@@ -2326,13 +2317,13 @@ public interface StructurePackage extends EPackage {
 	int USING__TAG = OBJECT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USING__OWNED_TAG = OBJECT__OWNED_TAG;
+	int USING__OWNED_TAGS = OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
@@ -2362,13 +2353,13 @@ public interface StructurePackage extends EPackage {
 	int FILTER__TAG = OBJECT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILTER__OWNED_TAG = OBJECT__OWNED_TAG;
+	int FILTER__OWNED_TAGS = OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
@@ -2398,13 +2389,13 @@ public interface StructurePackage extends EPackage {
 	int TYPE_VARIABLE__TAG = TYPE_CONTAINER__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE__OWNED_TAG = TYPE_CONTAINER__OWNED_TAG;
+	int TYPE_VARIABLE__OWNED_TAGS = TYPE_CONTAINER__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2461,13 +2452,13 @@ public interface StructurePackage extends EPackage {
 	int OBJECT_TYPE_VARIABLE__TAG = TYPE_VARIABLE__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TYPE_VARIABLE__OWNED_TAG = TYPE_VARIABLE__OWNED_TAG;
+	int OBJECT_TYPE_VARIABLE__OWNED_TAGS = TYPE_VARIABLE__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2571,13 +2562,13 @@ public interface StructurePackage extends EPackage {
 	int MODEL_TYPE_VARIABLE__TAG = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_VARIABLE__OWNED_TAG = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 1;
+	int MODEL_TYPE_VARIABLE__OWNED_TAGS = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2644,13 +2635,13 @@ public interface StructurePackage extends EPackage {
 	int VIRTUAL_TYPE__TAG = OBJECT_TYPE_VARIABLE__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIRTUAL_TYPE__OWNED_TAG = OBJECT_TYPE_VARIABLE__OWNED_TAG;
+	int VIRTUAL_TYPE__OWNED_TAGS = OBJECT_TYPE_VARIABLE__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2734,13 +2725,13 @@ public interface StructurePackage extends EPackage {
 	int PRODUCT_TYPE__TAG = TYPE_CONTAINER__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRODUCT_TYPE__OWNED_TAG = TYPE_CONTAINER__OWNED_TAG;
+	int PRODUCT_TYPE__OWNED_TAGS = TYPE_CONTAINER__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2788,13 +2779,13 @@ public interface StructurePackage extends EPackage {
 	int FUNCTION_TYPE__TAG = TYPE_CONTAINER__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_TYPE__OWNED_TAG = TYPE_CONTAINER__OWNED_TAG;
+	int FUNCTION_TYPE__OWNED_TAGS = TYPE_CONTAINER__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2851,13 +2842,13 @@ public interface StructurePackage extends EPackage {
 	int VOID_TYPE__TAG = TYPE__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VOID_TYPE__OWNED_TAG = TYPE__OWNED_TAG;
+	int VOID_TYPE__OWNED_TAGS = TYPE__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
@@ -2887,13 +2878,13 @@ public interface StructurePackage extends EPackage {
 	int TYPE_DEFINITION_CONTAINER__TAG = NAMED_ELEMENT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION_CONTAINER__OWNED_TAG = NAMED_ELEMENT__OWNED_TAG;
+	int TYPE_DEFINITION_CONTAINER__OWNED_TAGS = NAMED_ELEMENT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3002,15 +2993,15 @@ public interface StructurePackage extends EPackage {
 	EReference getObject_Tag();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.language.structure.Object#getOwnedTag <em>Owned Tag</em>}'.
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.language.structure.Object#getOwnedTags <em>Owned Tags</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Tag</em>'.
-	 * @see fr.irisa.triskell.kermeta.language.structure.Object#getOwnedTag()
+	 * @return the meta object for the containment reference list '<em>Owned Tags</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.Object#getOwnedTags()
 	 * @see #getObject()
 	 * @generated
 	 */
-	EReference getObject_OwnedTag();
+	EReference getObject_OwnedTags();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.structure.MultiplicityElement <em>Multiplicity Element</em>}'.
@@ -3998,17 +3989,6 @@ public interface StructurePackage extends EPackage {
 	EReference getModelingUnit_ExcludeFilters();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.language.structure.ModelingUnit#getOwnedTags <em>Owned Tags</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Tags</em>'.
-	 * @see fr.irisa.triskell.kermeta.language.structure.ModelingUnit#getOwnedTags()
-	 * @see #getModelingUnit()
-	 * @generated
-	 */
-	EReference getModelingUnit_OwnedTags();
-
-	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.structure.Filter <em>Filter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4387,12 +4367,12 @@ public interface StructurePackage extends EPackage {
 		EReference OBJECT__TAG = eINSTANCE.getObject_Tag();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Tag</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Tags</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OBJECT__OWNED_TAG = eINSTANCE.getObject_OwnedTag();
+		EReference OBJECT__OWNED_TAGS = eINSTANCE.getObject_OwnedTags();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.MultiplicityElementImpl <em>Multiplicity Element</em>}' class.
@@ -5183,14 +5163,6 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MODELING_UNIT__EXCLUDE_FILTERS = eINSTANCE.getModelingUnit_ExcludeFilters();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Tags</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MODELING_UNIT__OWNED_TAGS = eINSTANCE.getModelingUnit_OwnedTags();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.FilterImpl <em>Filter</em>}' class.

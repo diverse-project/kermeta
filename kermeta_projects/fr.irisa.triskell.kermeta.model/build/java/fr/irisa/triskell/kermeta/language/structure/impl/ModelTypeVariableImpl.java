@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeVariableImpl.java,v 1.5 2008-01-22 14:24:28 cfaucher Exp $
+ * $Id: ModelTypeVariableImpl.java,v 1.6 2008-01-23 10:50:20 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -41,7 +41,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeVariableImpl#getTag <em>Tag</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeVariableImpl#getOwnedTag <em>Owned Tag</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeVariableImpl#getOwnedTags <em>Owned Tags</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeVariableImpl#getContainedType <em>Contained Type</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeVariableImpl#getTypeContainer <em>Type Container</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeVariableImpl#getName <em>Name</em>}</li>
@@ -70,14 +70,14 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	protected EList<Tag> tag;
 
 	/**
-	 * The cached value of the '{@link #getOwnedTag() <em>Owned Tag</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedTags() <em>Owned Tags</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedTag()
+	 * @see #getOwnedTags()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Tag> ownedTag;
+	protected EList<Tag> ownedTags;
 
 	/**
 	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
@@ -155,11 +155,11 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Tag> getOwnedTag() {
-		if (ownedTag == null) {
-			ownedTag = new EObjectContainmentEList.Resolving<Tag>(Tag.class, this, StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAG);
+	public EList<Tag> getOwnedTags() {
+		if (ownedTags == null) {
+			ownedTags = new EObjectContainmentEList.Resolving<Tag>(Tag.class, this, StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAGS);
 		}
-		return ownedTag;
+		return ownedTags;
 	}
 
 	/**
@@ -425,8 +425,8 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE_VARIABLE__TAG:
 				return ((InternalEList<?>)getTag()).basicRemove(otherEnd, msgs);
-			case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAG:
-				return ((InternalEList<?>)getOwnedTag()).basicRemove(otherEnd, msgs);
+			case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAGS:
+				return ((InternalEList<?>)getOwnedTags()).basicRemove(otherEnd, msgs);
 			case StructurePackage.MODEL_TYPE_VARIABLE__CONTAINED_TYPE:
 				return ((InternalEList<?>)getContainedType()).basicRemove(otherEnd, msgs);
 			case StructurePackage.MODEL_TYPE_VARIABLE__TYPE_CONTAINER:
@@ -459,8 +459,8 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE_VARIABLE__TAG:
 				return getTag();
-			case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAG:
-				return getOwnedTag();
+			case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAGS:
+				return getOwnedTags();
 			case StructurePackage.MODEL_TYPE_VARIABLE__CONTAINED_TYPE:
 				return getContainedType();
 			case StructurePackage.MODEL_TYPE_VARIABLE__TYPE_CONTAINER:
@@ -488,9 +488,9 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 				getTag().clear();
 				getTag().addAll((Collection<? extends Tag>)newValue);
 				return;
-			case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAG:
-				getOwnedTag().clear();
-				getOwnedTag().addAll((Collection<? extends Tag>)newValue);
+			case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAGS:
+				getOwnedTags().clear();
+				getOwnedTags().addAll((Collection<? extends Tag>)newValue);
 				return;
 			case StructurePackage.MODEL_TYPE_VARIABLE__CONTAINED_TYPE:
 				getContainedType().clear();
@@ -520,8 +520,8 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 			case StructurePackage.MODEL_TYPE_VARIABLE__TAG:
 				getTag().clear();
 				return;
-			case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAG:
-				getOwnedTag().clear();
+			case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAGS:
+				getOwnedTags().clear();
 				return;
 			case StructurePackage.MODEL_TYPE_VARIABLE__CONTAINED_TYPE:
 				getContainedType().clear();
@@ -549,8 +549,8 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE_VARIABLE__TAG:
 				return tag != null && !tag.isEmpty();
-			case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAG:
-				return ownedTag != null && !ownedTag.isEmpty();
+			case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAGS:
+				return ownedTags != null && !ownedTags.isEmpty();
 			case StructurePackage.MODEL_TYPE_VARIABLE__CONTAINED_TYPE:
 				return containedType != null && !containedType.isEmpty();
 			case StructurePackage.MODEL_TYPE_VARIABLE__TYPE_CONTAINER:
@@ -573,7 +573,7 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 		if (baseClass == fr.irisa.triskell.kermeta.language.structure.Object.class) {
 			switch (derivedFeatureID) {
 				case StructurePackage.MODEL_TYPE_VARIABLE__TAG: return StructurePackage.OBJECT__TAG;
-				case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAG: return StructurePackage.OBJECT__OWNED_TAG;
+				case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAGS: return StructurePackage.OBJECT__OWNED_TAGS;
 				default: return -1;
 			}
 		}
@@ -614,7 +614,7 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 		if (baseClass == fr.irisa.triskell.kermeta.language.structure.Object.class) {
 			switch (baseFeatureID) {
 				case StructurePackage.OBJECT__TAG: return StructurePackage.MODEL_TYPE_VARIABLE__TAG;
-				case StructurePackage.OBJECT__OWNED_TAG: return StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAG;
+				case StructurePackage.OBJECT__OWNED_TAGS: return StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAGS;
 				default: return -1;
 			}
 		}

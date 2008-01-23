@@ -1,7 +1,7 @@
-//$Id: KermetaOptimizedVisitor.java,v 1.11 2008-01-22 14:24:32 cfaucher Exp $
+//$Id: KermetaOptimizedVisitor.java,v 1.12 2008-01-23 10:49:28 cfaucher Exp $
 /*
  * This code has been generated to visit a kermeta model
- * Creation date: Tue Jan 22 14:33:04 CET 2008
+ * Creation date: Wed Jan 23 11:38:49 CET 2008
  * Template Created on feb. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * IRISA / INRIA / University of rennes 1

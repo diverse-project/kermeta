@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeVariableItemProvider.java,v 1.7 2008-01-22 16:13:25 cfaucher Exp $
+ * $Id: ModelTypeVariableItemProvider.java,v 1.8 2008-01-23 10:49:55 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -160,7 +160,7 @@ public class ModelTypeVariableItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.OBJECT__OWNED_TAG);
+			childrenFeatures.add(StructurePackage.Literals.OBJECT__OWNED_TAGS);
 			childrenFeatures.add(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE);
 		}
 		return childrenFeatures;
@@ -219,7 +219,7 @@ public class ModelTypeVariableItemProvider
 			case StructurePackage.MODEL_TYPE_VARIABLE__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAG:
+			case StructurePackage.MODEL_TYPE_VARIABLE__OWNED_TAGS:
 			case StructurePackage.MODEL_TYPE_VARIABLE__CONTAINED_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -240,7 +240,7 @@ public class ModelTypeVariableItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.OBJECT__OWNED_TAG,
+				(StructurePackage.Literals.OBJECT__OWNED_TAGS,
 				 StructureFactory.eINSTANCE.createTag()));
 
 		newChildDescriptors.add

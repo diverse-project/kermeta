@@ -1,4 +1,4 @@
-/* $Id: TagHelper.java,v 1.4 2007-08-09 14:58:15 dvojtise Exp $
+/* $Id: TagHelper.java,v 1.5 2008-01-23 10:49:48 cfaucher Exp $
  * Project   : Kermeta 
  * File      : TagHelper.java
  * License   : EPL
@@ -30,7 +30,7 @@ public class TagHelper {
 			Tag newTag =  StructurePackageImpl.init().getStructureFactory().createTag();
 			newTag.setName(tagname);
 			newTag.setValue(tagvalue);
-			element.getOwnedTag().add(newTag); // tag owned by the element
+			element.getOwnedTags().add(newTag); // tag owned by the element
 			element.getTag().add(newTag); // the element is tagged
 			return newTag;
 		}

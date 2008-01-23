@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass6.java,v 1.10 2007-10-12 09:19:41 ftanguy Exp $
+/* $Id: Ecore2KMPass6.java,v 1.11 2008-01-23 10:49:47 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -107,7 +107,7 @@ public class Ecore2KMPass6 extends Ecore2KMPass {
 					Tag tag = StructureFactory.eINSTANCE.createTag();
 					tag.setName((String) annot_name);
 					tag.setValue((String) node.getDetails().get(annot_name));
-					tgtElt.getOwnedTag().add(tag); // owned by this element
+					tgtElt.getOwnedTags().add(tag); // owned by this element
 					tgtElt.getTag().add(tag); // this element is tagged
 				}
 			}

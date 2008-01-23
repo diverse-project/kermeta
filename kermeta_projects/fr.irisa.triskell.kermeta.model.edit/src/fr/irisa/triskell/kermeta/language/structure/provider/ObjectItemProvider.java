@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ObjectItemProvider.java,v 1.8 2007-07-20 15:08:27 ftanguy Exp $
+ * $Id: ObjectItemProvider.java,v 1.9 2008-01-23 10:49:55 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -113,7 +113,7 @@ public class ObjectItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.OBJECT__OWNED_TAG);
+			childrenFeatures.add(StructurePackage.Literals.OBJECT__OWNED_TAGS);
 		}
 		return childrenFeatures;
 	}
@@ -165,7 +165,7 @@ public class ObjectItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(fr.irisa.triskell.kermeta.language.structure.Object.class)) {
-			case StructurePackage.OBJECT__OWNED_TAG:
+			case StructurePackage.OBJECT__OWNED_TAGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -185,7 +185,7 @@ public class ObjectItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.OBJECT__OWNED_TAG,
+				(StructurePackage.Literals.OBJECT__OWNED_TAGS,
 				 StructureFactory.eINSTANCE.createTag()));
 	}
 

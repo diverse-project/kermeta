@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Object.java,v 1.4 2007-07-20 15:09:03 ftanguy Exp $
+ * $Id: Object.java,v 1.5 2008-01-23 10:50:20 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Object#getTag <em>Tag</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Object#getOwnedTag <em>Owned Tag</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Object#getOwnedTags <em>Owned Tags</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,20 +54,20 @@ public interface Object extends EObject {
 	EList<Tag> getTag();
 
 	/**
-	 * Returns the value of the '<em><b>Owned Tag</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Tags</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Tag}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Tag</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Tags</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Tag</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getObject_OwnedTag()
+	 * @return the value of the '<em>Owned Tags</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getObject_OwnedTags()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList<Tag> getOwnedTag();
+	EList<Tag> getOwnedTags();
 
 	/**
 	 * <!-- begin-user-doc -->

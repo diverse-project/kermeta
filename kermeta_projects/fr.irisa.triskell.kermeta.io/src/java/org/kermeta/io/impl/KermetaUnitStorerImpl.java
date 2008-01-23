@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitStorerImpl.java,v 1.22 2007-12-06 14:10:53 ftanguy Exp $
+ * $Id: KermetaUnitStorerImpl.java,v 1.23 2008-01-23 10:49:48 cfaucher Exp $
  */
 package org.kermeta.io.impl;
 
@@ -380,7 +380,7 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			for ( TypeDefinition typeDefinition : KermetaUnitHelper.getInternalTypeDefinitions( kermetaUnit ) ) {
 				//typeDefinition.getAspects().clear();
 				typeDefinition.getBaseAspects().clear();
-				typeDefinition.getOwnedTag().clear();
+				typeDefinition.getOwnedTags().clear();
 				typeDefinition.getTag().clear();
 
 				for ( KermetaUnit importer : kermetaUnit.getImportedKermetaUnits() ) {
@@ -400,7 +400,7 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 			kermetaUnit.getImporters().clear();		
 			
 			for ( Package p : (List<Package>) kermetaUnit.getInternalPackages() ) {
-				p.getOwnedTag().clear();
+				p.getOwnedTags().clear();
 				p.getTag().clear();
 				p.getOwnedTypeDefinition().clear();
 			}

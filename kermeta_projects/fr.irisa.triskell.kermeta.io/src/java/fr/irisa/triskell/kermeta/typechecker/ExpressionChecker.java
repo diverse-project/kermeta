@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.59 2008-01-08 09:57:11 dvojtise Exp $
+/* $Id: ExpressionChecker.java,v 1.60 2008-01-23 10:49:48 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -502,7 +502,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		preVisit();
 
 	    // Visit contained expressions
-	    this.accept(expression.getTarget());
+	    this.accept(expression.getTarget());    
 	    this.accept(expression.getValue());
 	    
 	    
