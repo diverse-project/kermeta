@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: unit_test.docb.xml,v 1.1 2007-12-21 15:21:39 cfaucher Exp $ -->
+<!-- $Id: unit_test.docb.xml,v 1.2 2008-01-23 15:30:10 cfaucher Exp $ -->
 <book lang="en-US">
 	<bookinfo>
 	    <title>Kermeta Compiler Documentation</title>
 		<pubdate>Build date: @BUILD.DATE@</pubdate>
-	    <pubdate>$Date: 2007-12-21 15:21:39 $</pubdate>
+	    <pubdate>$Date: 2008-01-23 15:30:10 $</pubdate>
 	    <author>
 	      <firstname>Cyril</firstname>
 	      <surname>Faucher</surname>
@@ -62,10 +62,64 @@
 	<section>
 		<title id="kermeta2ecore.title.link">Step 1: Kermeta to Ecore</title>
 		<para>
-			Implementation in Kermeta of a visitor to transform a Kermeta structure into an Ecore structure. [currently written in Java] This step is implemented in "fr.irisa.triskell.kermeta.io" plugin, EcoreExporter.
+			The compilation process is divided in 2 steps: the first one consists in the translation of a Kermeta model into a Ecore model, the second one consists in the generation of the Java source code from the previous Ecore model.
+		</para>
+	</section>
+	<section>
+		<title id="kermeta2ecore.title.link">Step 1: Kermeta to Ecore</title>
+		<para>
+			Currently this implementation is divided in 2 steps: Km 2 Ecore structure (written in Java), Km 2 Ecore behavior (written in Kermeta and Java).
 		</para>
 		<para>
-			Implementation in Kermeta of a Java pretty-printer for including Java sources in EAnnotations. [currently written in Java] This step is implemented in "org.kermeta.compiler" plugin.
+			"Km 2 Ecore structure" implements a visitor desing pattern and consists in the translation of each Kermeta concept to Ecore concept.
+			This step is implemented in "fr.irisa.triskell.kermeta.io" plugin, EcoreExporter.
+		</para>
+		<para>
+			"Km 2 Ecore behavior" is written in Kermeta. This implementation is Aspect-Oriented, i.e.: we are using the aspect-oriented techniques in order to define how a concept is compiled.
+		</para>
+		<para>
+			Some examples:</para>
+		<para>
+			<programlisting>aspect class ClassDefinition {
+		method compile(context : Integer) : String is do
+			result := ""
+			// Set the traceability
+			self.ecoreProxy := CompileHelper.new.findEClassProxy(self)
+			// Compile the owned elements
+			self.eachOwnedElement{ o | o.compile(context) }
+		end
+	}</programlisting>
+			
+			<programlisting>aspect class ClassDefinition {
+	operation eachOwnedElement(func : <MultiplicityElement -> Object>) : Void is do
+		//if self.isInstanceOf(Property)
+		stdio.writeln("F2")
+        self.ownedAttribute.each{ o |
+			func(o.asType(Property))
+		}
+		stdio.writeln("F3")
+		self.ownedOperation.each{ o |
+			func(o.asType(Operation))
+		}
+		stdio.writeln("F4")
+	end	
+}</programlisting>
+
+		<programlisting>aspect class Package {
+	reference ecoreProxy : EPackage
+	}
+	
+	aspect class ClassDefinition {
+		reference ecoreProxy : EClass
+	}
+	
+	aspect class Operation {
+		reference ecoreProxy : EOperation
+	}</programlisting>
+
+		</para>
+		<para>
+			This technique has further advantages: the separation of concerns and the reutilisability of several aspects, i.e.: some aspects are grouped by usage like: "containment discovering", "compile" or "traceability".
 		</para>
 	</section>
 	<section>
@@ -76,7 +130,8 @@
 		</para>
 		<para>
 			Generation of the source code from the genmodel file thanks to the EMF generator abilities:
-			Emf-model interfaces + implementation. This step is implemented in ?org.kermeta.compiler" plugin.
+			Emf-model interfaces + implementation. This step is implemented in "org.kermeta.compiler" plugin.
+			During this step, a Simk is used too, this model contains informations about the generation of Runners, Launchers and other static methods. A Java source code generation step is made to take in account this model, and also to generate the corresponding Java classes.
 		</para>
 	</section>
 </chapter><chapter>
@@ -231,6 +286,17 @@
               </row>
               <row>
                 <entry><para><link linkend="uc_Generics.link">Generics</link></para></entry>
+                <entry><para></para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
+              </row>
+              <row>
+                <entry><para><link linkend="uc_Inheritance.link">Inheritance</link></para></entry>
                 <entry><para></para></entry>
                 <entry>
                 	<para>Impl_Java [OK]</para>
@@ -450,9 +516,9 @@
                 
                 	<para>Impl_Kermeta [NOK]</para>
                 
-                	<para>Impl_Jet [NOK]</para>
+                	<para>Impl_Jet [OK]</para>
                 
-                	<para>Design [in progress]</para>
+                	<para>Design [OK]</para>
                 </entry>
               </row>
               <row>
@@ -774,6 +840,35 @@ a.ref.each{ r |
     
     <para></para>
 </section> 
+<section id="uc_Inheritance.link">
+    <title id="uc_Inheritance.title.link">Inheritance</title>
+    
+    <para>Simple inheritance support.</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
+
+<para>Simple inheritance sample between 2 Kermeta ClassDefinition</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test002/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
+
+<para>Simple inheritance sample between a new ClassDefinition and an EClass from the Ecore metamodel</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test003</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test003/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test003/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test003/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
+
+<para>Simple inheritance sample between a new ClassDefinition and an EClass from the UML metamodel</para>
+<para/>
+</section> 
 <section id="uc_Initialization.link">
     <title id="uc_Initialization.title.link">Initialization</title>
     
@@ -1067,14 +1162,33 @@ Comp_new_test001Factory.eINSTANCE.createA();
     <para>Design:</para>
 
 <para>Behavior of a derived property: getter/ setter.</para>
-<para>This ability is not supported by the EMF mechanism based on the use of EAnnotations containing the Java source code corresponding the expected behavior.</para>
+<para>This ability is not supported by the EMF mechanism based on the use of EAnnotations containing the Java source code corresponding to the expected behavior.</para>
+<para>Thus, we are using the "overloadable" property of the JET templates. In a JET template, that is able to define some pieces of source code that will be overloadable. The expected source code is also added via a file with a specific name and location (define in the JET template)</para>
+<para>During the compilation, we are using the JET templates from EMF (plugin: org.eclipse.emf.codegen.ecore). Also, in your case, the derived property, we have written new implementations for the getter and setter. This new implementation uses a EAnnotation containing the Java source code implementing the getter and setter. Finally, the mechanism to get and put the code is very close to this one used by EMF to compile the EOperation behavior</para>
+<para>The specific source added are located in the plugin: org.kermeta.compiler.generator.emftemplates</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyBehavior/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyBehavior/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyBehavior/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
+
+<para>This sample shows an example of the compilation a derived property with a getter and a setter.</para>
+<para/>
 </section> 
 <section id="uc_PropertyStructure.link">
     <title id="uc_PropertyStructure.title.link">PropertyStructure</title>
     
     <para>Design:</para>
 
-<para>Derived property signature.</para>
+<para>Derived property signature.</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyStructure/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyStructure/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyStructure/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
+
+<para>This sample shows the structural compilation of derived property in different cases: property typed by a PrimitiveType or by a ClassDefinition. The second variation is the "readonly" property.</para>
+<para/>
 </section> 
 <section id="uc_Reference.link">
     <title id="uc_Reference.title.link">Reference</title>
