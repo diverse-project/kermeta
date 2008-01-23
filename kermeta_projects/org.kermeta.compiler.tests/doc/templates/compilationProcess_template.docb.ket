@@ -40,17 +40,13 @@
 	}</programlisting>
 			
 			<programlisting>aspect class ClassDefinition {
-	operation eachOwnedElement(func : <MultiplicityElement -> Object>) : Void is do
-		//if self.isInstanceOf(Property)
-		stdio.writeln("F2")
+	operation eachOwnedElement(func : MultiplicityElement -> Object) : Void is do
         self.ownedAttribute.each{ o |
 			func(o.asType(Property))
 		}
-		stdio.writeln("F3")
 		self.ownedOperation.each{ o |
 			func(o.asType(Operation))
 		}
-		stdio.writeln("F4")
 	end	
 }</programlisting>
 
