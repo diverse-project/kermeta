@@ -29,7 +29,7 @@ class Main
 	end
 	
 	
-	/****** Cases that should be in error ******/
+	/****** Cases that should be errorneous ******/
 	
 	// This method should not infer a "main" runner, because this one has at least one parameter with a type different to String
 	operation main3(condition : Boolean) : Void is

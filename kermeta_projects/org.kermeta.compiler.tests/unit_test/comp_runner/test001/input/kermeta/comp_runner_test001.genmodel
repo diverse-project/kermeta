@@ -3,7 +3,9 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org"
     modelDirectory="/org.kermeta.compiled.comp_runner_test001/src" creationIcons="false"
     editDirectory="" editorDirectory="" modelPluginID="org.kermeta.compiled.comp_runner_test001"
-    modelName="Comp_runner_test001" testsDirectory="" complianceLevel="5.0" copyrightFields="false">
+    templateDirectory="platform:/plugin/org.kermeta.compiler.generator.emftemplates/templates"
+    dynamicTemplates="true" modelName="Comp_runner_test001" testsDirectory="" complianceLevel="5.0"
+    copyrightFields="false">
   <foreignModel>C:/eclipse3.3M5/eclipse/runtime-New_configuration2/org.kermeta.compiler.tests/unit_test/comp_runner/test001/input/kermeta/comp_runner_test001.ecore</foreignModel>
   <genPackages prefix="Comp_runner_test001" disposableProviderFactory="true" ecorePackage="comp_runner_test001.ecore#/1">
     <genDataTypes ecoreDataType="comp_runner_test001.ecore#/1/String"/>

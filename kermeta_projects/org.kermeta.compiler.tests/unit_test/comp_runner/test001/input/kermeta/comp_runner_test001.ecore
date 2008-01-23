@@ -36,7 +36,7 @@
       <eOperations name="main3">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;The runner class will not be generated for main3&quot;)&#xA;end"/>
-          <details key="documentation" value="/****** Cases that should be in error ******/"/>
+          <details key="documentation" value="/****** Cases that should be errorneous ******/"/>
         </eAnnotations>
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="body" value="&#x9;System.out.println(&quot;The runner class will not be generated for main3&quot;)&#xA;"/>

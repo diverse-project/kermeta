@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/">
+  <packages name="comp_runner_test001">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Main"
+        superType="#//@packages.0/Main/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
+      <ownedOperation name="main0" type="#//@packages.0/Main/main0/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="The runner class will be generated for main0"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="main1" type="#//@packages.0/Main/main1/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="The runner class will be generated for main1"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+        <ownedParameter name="text0" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/String"
+            isOrdered="true" upper="1"/>
+      </ownedOperation>
+      <ownedOperation name="main2" type="#//@packages.0/Main/main2/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="The runner class will be generated for main2"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+        <ownedParameter name="text0" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/String"
+            isOrdered="true" upper="1"/>
+        <ownedParameter name="text1" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/String"
+            isOrdered="true" upper="1"/>
+      </ownedOperation>
+      <ownedOperation tag="#//@packages.0/Main/main3/@ownedTag.0" name="main3" type="#//@packages.0/Main/main3/@containedType.0"
+          isOrdered="true" upper="1">
+        <ownedTag value="/****** Cases that should be errorneous ******/" object="#//@packages.0/Main/main3"/>
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="The runner class will not be generated for main3"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+        <ownedParameter name="condition" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Boolean"
+            isOrdered="true" upper="1"/>
+      </ownedOperation>
+      <ownedOperation name="main4" type="#//@packages.0/Main/main4/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="The runner class will not be generated for main4"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+        <ownedParameter name="text0" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/String"
+            isOrdered="true" upper="1"/>
+        <ownedParameter name="condition" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Boolean"
+            isOrdered="true" upper="1"/>
+      </ownedOperation>
+      <ownedOperation name="main5" type="#//@packages.0/Main/main5/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="The runner class will not be generated for main5"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+        <ownedParameter name="text0" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/String"
+            isOrdered="true" upper="1"/>
+        <ownedParameter name="text1" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/String"
+            isOrdered="true" upper="1"/>
+        <ownedParameter name="condition" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Boolean"
+            isOrdered="true" upper="1"/>
+      </ownedOperation>
+      <ownedOperation name="main6" type="#//@packages.0/Main/main6/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="The runner class will not be generated for main6"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+        <ownedParameter name="condition" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Boolean"
+            isOrdered="true" upper="1"/>
+        <ownedParameter name="text0" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/String"
+            isOrdered="true" upper="1"/>
+      </ownedOperation>
+      <ownedOperation name="main7" type="#//@packages.0/Main/main7/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="The runner class will not be generated for main7"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+        <ownedParameter name="text0" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/String"
+            isOrdered="true" upper="1"/>
+        <ownedParameter name="condition" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Boolean"
+            isOrdered="true" upper="1"/>
+        <ownedParameter name="text1" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/String"
+            isOrdered="true" upper="1"/>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="kermeta::language::structure"/>
+  <usings qualifiedName="comp_runner_test001"/>
+  <ownedTags name="mainClass" value="comp_runner_test001::Main"/>
+  <ownedTags name="mainOperation" value="main1"/>
+</kermeta_language_structure:ModelingUnit>

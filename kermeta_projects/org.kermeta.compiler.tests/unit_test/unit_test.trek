@@ -74,6 +74,14 @@
     <status key="Impl_Kermeta"/>
     <status key="Design"/>
   </kuseCases>
+  <kuseCases name="Inheritance" summary="&lt;para>Simple inheritance support.&lt;/para>" id="comp_inheritance">
+    <verifiedBy href="comp_inheritance/comp_inheritance.trek#//@ktestCases.0"/>
+    <verifiedBy href="comp_inheritance/comp_inheritance.trek#//@ktestCases.1"/>
+    <verifiedBy href="comp_inheritance/comp_inheritance.trek#//@ktestCases.2"/>
+    <status progress="100" key="Impl_Java"/>
+    <status key="Impl_Kermeta"/>
+    <status key="Design"/>
+  </kuseCases>
   <kuseCases name="Initialization" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>- Initialization of a variable:&lt;/para>&#xD;&#xA;&lt;programlisting>// In kmt:&#xD;&#xA;var aPrinter : Printer init Printer.new&#xD;&#xA;&#xD;&#xA;// In Java:&#xD;&#xA;comptest2.Printer aPrinter = comptest2.Comptest2Factory.eINSTANCE.createPrinter();&lt;/programlisting>&#xD;&#xA;&#xD;&#xA;&lt;para/>&#xD;&#xA;&#xD;&#xA;&lt;para>- Initialization of a String:&lt;/para>&#xD;&#xA;&lt;programlisting>// In kmt:&#xD;&#xA;var text1 : String init &quot;Hello&quot;&#xD;&#xA;&#xD;&#xA;// In Java:&#xD;&#xA;String text1 = &quot;Hello &quot;;&lt;/programlisting>&#xD;&#xA;&#xD;&#xA;&lt;para/>&#xD;&#xA;&#xD;&#xA;&lt;programlisting>// In kmt:&#xD;&#xA;var text2 : String&#xD;&#xA;text2 := &quot;World&quot;&#xD;&#xA;&#xD;&#xA;// In Java:&#xD;&#xA;String text2 = null;&#xD;&#xA;text2 = &quot;World&quot;;&lt;/programlisting>" id="comp_initialization">
     <verifiedBy href="comp_initialization/comp_initialization.trek#//@ktestCases.0"/>
     <verifiedBy href="comp_initialization/comp_initialization.trek#//@ktestCases.1"/>
@@ -178,13 +186,15 @@
     <status key="Impl_Kermeta"/>
     <status progress="50" key="Design"/>
   </kuseCases>
-  <kuseCases name="PropertyBehavior" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>Behavior of a derived property: getter/ setter.&lt;/para>&#xD;&#xA;&lt;para>This ability is not supported by the EMF mechanism based on the use of EAnnotations containing the Java source code corresponding the expected behavior.&lt;/para>" id="comp_propertyBehavior">
+  <kuseCases name="PropertyBehavior" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>Behavior of a derived property: getter/ setter.&lt;/para>&#xD;&#xA;&lt;para>This ability is not supported by the EMF mechanism based on the use of EAnnotations containing the Java source code corresponding to the expected behavior.&lt;/para>&#xD;&#xA;&lt;para>Thus, we are using the &quot;overloadable&quot; property of the JET templates. In a JET template, that is able to define some pieces of source code that will be overloadable. The expected source code is also added via a file with a specific name and location (define in the JET template)&lt;/para>&#xD;&#xA;&lt;para>During the compilation, we are using the JET templates from EMF (plugin: org.eclipse.emf.codegen.ecore). Also, in your case, the derived property, we have written new implementations for the getter and setter. This new implementation uses a EAnnotation containing the Java source code implementing the getter and setter. Finally, the mechanism to get and put the code is very close to this one used by EMF to compile the EOperation behavior&lt;/para>&#xD;&#xA;&lt;para>The specific source added are located in the plugin: org.kermeta.compiler.generator.emftemplates&lt;/para>" id="comp_propertyBehavior">
+    <verifiedBy href="comp_propertyBehavior/comp_propertyBehavior.trek#//@ktestCases.0"/>
     <status key="Impl_Java"/>
     <status key="Impl_Kermeta"/>
-    <status key="Impl_Jet"/>
-    <status progress="50" key="Design"/>
+    <status progress="100" key="Impl_Jet"/>
+    <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="PropertyStructure" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>Derived property signature.&lt;/para>" id="comp_propertyStructure">
+    <verifiedBy href="comp_propertyStructure/comp_propertyStructure.trek#//@ktestCases.0"/>
     <status progress="100" key="Impl_Java"/>
     <status key="Impl_Kermeta"/>
     <status key="Design"/>

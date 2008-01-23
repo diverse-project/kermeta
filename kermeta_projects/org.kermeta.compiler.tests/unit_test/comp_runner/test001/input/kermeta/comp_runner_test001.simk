@@ -19,6 +19,7 @@
   <staticMethods sMContext="//@sMContexts.1">
     <sMParameters name="text0" type="String"/>
     <usages>Runner</usages>
+    <usages>Launcher</usages>
     <parentMethod href="comp_runner_test001.ecore#/1/Main/main1"/>
   </staticMethods>
   <staticMethods sMContext="//@sMContexts.2">

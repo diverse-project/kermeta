@@ -1,1 +1,1 @@
-<para>Simple inheritance support</para>
+<para>Simple inheritance support.</para>
