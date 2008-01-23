@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass2.java,v 1.3 2007-12-06 23:29:26 ftanguy Exp $
+/*$Id: Pass2.java,v 1.4 2008-01-23 12:09:45 cfaucher Exp $
 * Project : org.kermeta.merger
 * File : 	Pass2.java
 * License : EPL
@@ -267,11 +267,11 @@ public class Pass2 extends MergePass {
 	}
 	
 	private void createTags(Object newObject, Object o) {
-		for ( Tag t : o.getOwnedTag() ) {
+		for ( Tag t : o.getOwnedTags() ) {
 			Tag newTag = StructureFactory.eINSTANCE.createTag();
 			newTag.setName( t.getName() );
 			newTag.setValue( t.getValue() );
-			newObject.getOwnedTag().add( newTag );
+			newObject.getOwnedTags().add( newTag );
 		}
 	}
 	
