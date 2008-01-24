@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.9 2007-12-07 01:54:43 ffleurey Exp $
+/* $Id: EcoreHelper.kmt,v 1.10 2008-01-24 14:10:13 dvojtise Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -25,7 +25,7 @@ using kermeta::exceptions
 using kermeta::persistence 
 //using qualifiedNames
 using ecore
- 
+
 /** This class provides some helper methods to load/save Ecore models
     Plus some other useful navigation methods
  */
@@ -106,7 +106,9 @@ class EcoreHelper
     	do
     		if (c.ePackage != void) then
     			result := getPackageFQN(c.ePackage)
-    			result.append(c.name)
+    			if (result != void ) then // no need to continue there is an error the PAckage was not found
+    				result.append(c.name)
+    			end
     		else
     			result := qualifiedNames::QualifiedName.new.fromString(c.name)
     		end
@@ -153,9 +155,11 @@ class EcoreHelper
     			e.name == s}
     		end
     		if (pack== void) then
-    		 	stdio.writeln("can't find package: " + name.toString)
+    		 	stdio.writeln("   can't find EClassifiers: " + name.toString)
+    		 	result := void
+    		else
+    			result := pack.eClassifiers.detect{e| e.name == classifierName }
     		end
-    		result := pack.eClassifiers.detect{e| e.name == classifierName }
     	end
 
 	/** 

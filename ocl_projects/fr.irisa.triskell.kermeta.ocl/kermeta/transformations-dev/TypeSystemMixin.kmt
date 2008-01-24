@@ -1,8 +1,11 @@
-/* $Id: TypeSystemMixin.kmt,v 1.3 2007-12-07 01:54:43 ffleurey Exp $
+/* $Id: TypeSystemMixin.kmt,v 1.4 2008-01-24 14:10:13 dvojtise Exp $
  * Creation date: July 25, 2007
- * License:
- * Copyright:
- * Authors: Mark Skipper
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors: 
+ *          Mark Skipper
+ *          Olivier Barais
+ *          Didier Vojtisek
  */
 
 package ocl2kmt;
@@ -10,15 +13,14 @@ require kermeta
 //require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 require "EcoreHelper.kmt" 
 require "oclcstvisitor.kmt" 
+require "../helpers/QualifiedName.kmt"
+ 
 
- 
- 
 using kermeta::standard 
 using ocl::cst
 using kermeta::standard
 using kermeta::utils
 using kermeta::exceptions
-using qualifiedNames 
 
 /** A stack frame is used to hold the mappings of local variables to their 
  ** type information -- expressed as a Ecore ETypedElement.
@@ -102,10 +104,10 @@ class VarStack {
 class TypeSystemMixin {
 
 	/** The name of the package from the "package xxxx" context part of the OCL file **/
-	reference contextPackageName : QualifiedName 
+	reference contextPackageName : qualifiedNames::QualifiedName 
 	
 	/** the name of the class given in the "context C ..." part of the OCL declaration **/
-	reference contextClassifierFQN : QualifiedName
+	reference contextClassifierFQN : qualifiedNames::QualifiedName
 	
 	/** This is a typed element that represents the current or "this" instance  **/
 	reference localFeature: ecore::ETypedElement
@@ -265,7 +267,7 @@ class TypeSystemMixin {
 	/** called when a new "context ...." is met to set the local context classifier name  **/
 	operation setContextClassifierName(stringSequence: Sequence<String>) is
 		do
-			contextClassifierFQN := contextPackageName.concat(QualifiedName.new.fromSequence(stringSequence))
+			contextClassifierFQN := contextPackageName.concat(qualifiedNames::QualifiedName.new.fromSequence(stringSequence))
 			stdio.writeln("Set context classifier to [" + contextClassifierFQN.toString + "]")
 		//post:
 			if contextClassifierFQN.size == 0 then
@@ -278,7 +280,7 @@ class TypeSystemMixin {
 	/**  called when a "package ..." is met to set the package name **/
 	operation  setContextPackageName(stringSequence: Sequence<String>) is
 		do
-			contextPackageName := QualifiedName.new.fromSequence(stringSequence)
+			contextPackageName := qualifiedNames::QualifiedName.new.fromSequence(stringSequence)
 			stdio.writeln("Setting context package name [" + contextPackageName.toString + "]")
 		end
 		
@@ -309,7 +311,7 @@ class TypeSystemMixin {
 		end
 		
 	/** search for a type in the metamodel using its fully qualified name **/
-	operation findType(typeName: QualifiedName): ecore::EClassifier is
+	operation findType(typeName : qualifiedNames::QualifiedName): ecore::EClassifier is
 		do
 			stdio.writeln("Resolving type [" + typeName.toString + "]")
 			if isPrimitiveType(typeName.toString) then
@@ -330,9 +332,9 @@ class TypeSystemMixin {
 		do
 			context.top.add( createAttribute(name, type, lowerBound, upperBound, ordered))
 		end
-		
+	
 	/** add a local variable to the stack frame  with the qualified name of its type as its type **/
-	operation addLocalVariable(name: String, typeName: QualifiedName, lowerBound: Integer, upperBound: Integer, ordered: Boolean) is
+	operation addLocalVariable(name: String, typeName: qualifiedNames::QualifiedName, lowerBound: Integer, upperBound: Integer, ordered: Boolean) is
 		do
 			stdio.writeln("Adding variable [" + name + "] with a type called  [" + typeName.toString +"] lower bound: ["+lowerBound.toString+"] upper bound: ["+upperBound.toString+"]")
 			addLocalTypedVariable( name, findType(typeName), lowerBound, upperBound, ordered )

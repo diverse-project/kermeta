@@ -1,9 +1,12 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.13 2007-12-07 01:54:44 ffleurey Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.13 2007-12-07 01:54:44 ffleurey Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.14 2008-01-24 14:10:13 dvojtise Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.14 2008-01-24 14:10:13 dvojtise Exp $
  * Creation date: February 5, 2007
- * License:
- * Copyright:
- * Authors:
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors: 
+ *          Mark Skipper
+ *          Olivier Barais
+ *          Didier Vojtisek
  */
 
   
@@ -12,7 +15,7 @@ require kermeta
 require "TypeSystemMixin.kmt"
 require "IOMixin.kmt"
 
- 
+
 require "../helpers/QualifiedName.kmt"
 require "OperatorPolicies.kmt"  
 require "IteratorPolicies.kmt" 
