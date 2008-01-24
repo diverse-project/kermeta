@@ -1,8 +1,11 @@
- /* $Id: DefinitionPreprocessor.kmt,v 1.4 2007-12-07 01:54:44 ffleurey Exp $
+ /* $Id: DefinitionPreprocessor.kmt,v 1.5 2008-01-24 14:09:59 dvojtise Exp $
  * Creation date: August 20, 2007
- * License:
- * Copyright:
- * Authors:
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors: 
+ *          Mark Skipper
+ *          Olivier Barais
+ *          Didier Vojtisek
  */
 
 
@@ -11,6 +14,7 @@ package ocl2kmt;
 //require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 require "EcoreHelper.kmt" 
 require "TypeSystemMixin.kmt" 
+require "../helpers/QualifiedName.kmt"
 
 using EcoreHelpers  
 using ocl::cst 
@@ -22,7 +26,7 @@ using kermeta::exceptions
 class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor  
 { 
 
-	attribute packageFQN: qualifiedNames::QualifiedName 
+	attribute packageFQN: qualifiedNames::QualifiedName
 	attribute classifierQN: qualifiedNames::QualifiedName 
 	reference classifier : ecore::EClass
 	reference newOperation: ecore::EOperation
@@ -47,7 +51,7 @@ class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor
 
 	method visitPackageDeclarationCS(visitable : PackageDeclarationCS) : kermeta::standard::~Void is
 		do
-			stdio.writeln("Visiting Package Delcaration")
+			stdio.writeln("Visiting package declaration")
 			packageFQN := qualifiedNames::QualifiedName.new.fromSequence( visitable.pathNameCS.sequenceOfNames.asSequence()) 
 			stdio.writeln("   got package: " + packageFQN.toString)
 			visitable.contextDecls.each{ cd | cd.accept(self) }
@@ -61,12 +65,12 @@ class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor
 		do
 			stdio.writeln("Visiting classifier context")
 			classifierQN := qualifiedNames::QualifiedName.new.fromSequence( visitable.pathNameCS.sequenceOfNames.asSequence()	)
-			var fqn:qualifiedNames::QualifiedName init packageFQN.concat(classifierQN)
-			classifier ?= helper.getClassifierByFQN(fqn)    
+			var fqn : qualifiedNames::QualifiedName init packageFQN.concat(classifierQN)
+			classifier ?= helper.getClassifierByFQN(fqn) 			  
 			if classifier == void then
-				raise TypeError.new.setMessage("Can only define method for classes [" + fqn.toString+ "]")
+				raise TypeError.new.setMessage( "Cannot retreive class [" + fqn.toString+ "]. Please check that you have used the correct metamodel")
 			else
-    			stdio.writeln("   classifier set to : "+ classifier.name)
+    			stdio.writeln("   got classifier : "+ classifier.name)
 			end
 			visitable.invOrDefCS.accept(self)
     	end
