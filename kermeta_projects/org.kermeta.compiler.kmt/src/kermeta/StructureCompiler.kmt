@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.1 2008-01-24 16:52:37 ftanguy Exp $
+/* $Id: StructureCompiler.kmt,v 1.2 2008-01-24 17:02:47 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -30,13 +30,13 @@ class Main
 		var mu : ModelingUnit init loadKmModel
 		
 		mu.packages.each{ p |
-			p.compile(0)
+			p.asType(Package).compile(0)
 		}
 		
    		var repository : EMFRepository init EMFRepository.new             
    		var resource : Resource init repository.createResource("platform:/resource/org.kermeta.compiler.kmt/models/result.ecore", "http://www.eclipse.org/emf/2002/Ecore")
 		mu.packages.each{ p |
-			resource.instances.add(p.ecoreProxy)
+			resource.instances.add(p.asType(Package).ecoreProxy)
 		}
 		stdio.writeln("Save the Ecore Model")
 		resource.save		
