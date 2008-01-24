@@ -14,55 +14,67 @@ using kermeta::utils
 using ecore
 using compile::helper
 
-
-aspect class Package {
-	operation compile(context : Integer) : String is do
-		result := ""
-		// Compile the owned elements
-		self.eachOwnedElement{ cd | cd.compile(context) }
-	end
-}
-
-aspect class TypeDefinition {
+aspect class Object {
 	operation compile(context : Integer) : String is do
 		result := ""
 		//stdio.writeln("F7-1: " + self.name)
 	end
 }
 
-aspect class ClassDefinition {
-	method compile(context : Integer) : String from TypeDefinition is do
+aspect class Package {
+	method compile(context : Integer) : String is do
 		result := ""
-		// Set the traceability
-		self.ecoreProxy := CompileHelper.new.findEClassProxy(self)
+		// Creating the associated ecore package
+		var ecorePackage : EPackage init EPackage.new
+		ecorePackage.name := self.name
+		ecorePackage.nsURI := self.uri
+		// Setting the ecore proxy
+		self.ecoreProxy := ecorePackage
 		// Compile the owned elements
-		self.eachOwnedElement{ o | o.compile(context) }
+		self.eachOwnedElement{ cd | cd.compile(context) }
+	end
+}
+ 
+aspect class ClassDefinition {
+	method compile(context : Integer) : String is do
+		result := ""
+		// Creating the associated ecore class
+		var ecoreClass : EClass init EClass.new
+		ecoreClass.interface := false
+		ecoreClass.name := self.name
+		ecoreClass.~abstract := self.isAbstract
+		
+		var p : Package
+		p ?= self.container()
+		p.ecoreProxy.eClassifiers.add(ecoreClass)
+		
+		// Setting the ecore proxy
+		self.ecoreProxy := ecoreClass
+		// Compile the owned elements
+		//self.eachOwnedElement{ o | o.compile(context) }
 	end
 	
 }
 
 aspect class PrimitiveType {
-	method compile(context : Integer) : String from TypeDefinition is do
+	method compile(context : Integer) : String is do
 		result := ""
 		//stdio.writeln("F2-2: " + self.name)
 	end
 }
 
-aspect class ClassDefinition {
-}
-
 aspect class MultiplicityElement {
-	operation compile(context : Integer) : String is do
+	method compile(context : Integer) : String is do
 		result := ""
 		//stdio.writeln("F2-311111: " + self.name)
 	end
 }
-
+  
 aspect class Property {
 	method compile(context : Integer) : String is do
 		result := ""
 		// Set the traceability
-	end
+	end 
 }
 
 aspect class Operation {
@@ -79,7 +91,7 @@ aspect class Operation {
 			if ( type!="Void" and type!="void" ) then
 				javaCode.append("\n" + type + " result = null;\n")
 			end
-			
+			 
 			// The Java source code is provided by: self.body.compile(context)
 			javaCode.append(self.body.compile(context))
 			
@@ -94,7 +106,7 @@ aspect class Operation {
 }
 
 aspect class Type {
-	operation compile(context : Integer) : String is do
+	method compile(context : Integer) : String is do
 		result := ""
 		
 		/*if (self.isInstanceOf(PrimitiveType)) then

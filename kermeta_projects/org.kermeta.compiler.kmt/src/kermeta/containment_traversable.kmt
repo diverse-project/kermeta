@@ -1,4 +1,4 @@
-/* $Id: containment_traversable.kmt,v 1.1 2008-01-23 17:43:06 cfaucher Exp $
+/* $Id: containment_traversable.kmt,v 1.2 2008-01-24 16:52:37 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -26,11 +26,11 @@ aspect class Package {
 aspect class ClassDefinition {
 	operation eachOwnedElement(func : <MultiplicityElement -> Object>) : Void is do
         self.ownedAttribute.each{ o |
-			func(o.asType(Property))
+			func(o.asType(MultiplicityElement))
 		}
 		
 		self.ownedOperation.each{ o |
-			func(o.asType(Operation))
+			func(o.asType(MultiplicityElement))
 		}
 	end	
 }

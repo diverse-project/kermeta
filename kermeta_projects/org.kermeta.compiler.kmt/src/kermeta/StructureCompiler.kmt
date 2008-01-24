@@ -1,0 +1,55 @@
+/* $Id: StructureCompiler.kmt,v 1.1 2008-01-24 16:52:37 ftanguy Exp $
+ * Creation date: January 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+@mainClass "kermeta::compiler::Main" 
+@mainOperation "main"
+
+package kermeta::compiler;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "trace_structure.kmt"
+require "compile_structure.kmt"
+
+using ecore
+using kermeta::persistence
+//using kermeta::standard
+using kermeta::language::behavior
+using kermeta::language::structure
+
+
+class Main
+{
+
+    operation main() : Void is do		
+		
+		var mu : ModelingUnit init loadKmModel
+		
+		mu.packages.each{ p |
+			p.compile(0)
+		}
+		
+   		var repository : EMFRepository init EMFRepository.new             
+   		var resource : Resource init repository.createResource("platform:/resource/org.kermeta.compiler.kmt/models/result.ecore", "http://www.eclipse.org/emf/2002/Ecore")
+		mu.packages.each{ p |
+			resource.instances.add(p.ecoreProxy)
+		}
+		stdio.writeln("Save the Ecore Model")
+		resource.save		
+		stdio.writeln("Finish")
+    end
+
+	operation loadKmModel() : kermeta::language::structure::ModelingUnit is do             
+	   		var repository : EMFRepository init EMFRepository.new             
+	   		var resource : Resource init repository.getResource("platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.km")
+	       	resource.load()
+	      	
+	      	// result is a ModelingUnit
+	        result ?= resource.instances.one
+   	end
+   	
+}

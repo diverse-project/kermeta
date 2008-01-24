@@ -1,4 +1,4 @@
-/* $Id: trace_structure.kmt,v 1.1 2008-01-23 17:43:06 cfaucher Exp $
+/* $Id: trace_structure.kmt,v 1.2 2008-01-24 16:52:37 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -16,13 +16,8 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 using kermeta::language::structure
 using ecore
 
-
 aspect class Package {
 	reference ecoreProxy : EPackage
-}
-
-aspect class TypeDefinition {
-
 }
 
 aspect class ClassDefinition {
@@ -34,5 +29,5 @@ aspect class Operation {
 }
 
 aspect class Property {
-	reference ecoreProxy : EOperation
+	reference ecoreProxy : EStructuralFeature
 }
