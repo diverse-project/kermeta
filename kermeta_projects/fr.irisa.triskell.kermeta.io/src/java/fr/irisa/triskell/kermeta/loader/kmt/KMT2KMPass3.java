@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.30 2008-01-04 14:17:24 dvojtise Exp $
+/* $Id: KMT2KMPass3.java,v 1.31 2008-01-24 12:22:21 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -156,7 +156,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 					context.current_class.getSuperType().add(supertype);
 				}
 			}
-		} else {
+		} else if ( ! context.current_class.isIsAspect() ) {
 			
 			String qualifiedName = NamedElementHelper.getQualifiedName( context.current_class );
 			if ( ! qualifiedName.matches("kermeta::reflection.+") 
