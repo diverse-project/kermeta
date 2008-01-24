@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModellingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="kermeta::exceptions|root_package|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="root_package" nsURI="platform:/resource/TestKM/testInvException.ecore#/"
+      nsPrefix="root_package">
+    <eAnnotations source="kermeta"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Main" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+      <eOperations name="main">
+        <eAnnotations source="kermeta.pre"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Toto" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+      <eAnnotations source="kermeta.inv"/>
+      <eOperations name="totoOp">
+        <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte">
+          <eAnnotations source="kermeta"/>
+        </eParameters>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="toto" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte">
+        <eAnnotations source="kermeta"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object">
+      <eAnnotations source="kermeta"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="toto" instanceClassName="java.lang.String">
+      <eTypeParameters name="toto"/>
+    </eClassifiers>
+    <eSubpackages>
+      <eSubpackages>
+        <eSubpackages>
+          <eSubpackages>
+            <eSubpackages name="root_package" nsURI="platform:/resource/TestKM/testInvException.ecore#/"
+                nsPrefix="root_package">
+              <eAnnotations source="kermeta"/>
+              <eClassifiers xsi:type="ecore:EClass" name="Main" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+                <eOperations name="main">
+                  <eAnnotations source="kermeta.pre"/>
+                </eOperations>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EClass" name="Toto" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+                <eAnnotations source="kermeta.inv"/>
+                <eOperations name="totoOp">
+                  <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte">
+                    <eAnnotations source="kermeta"/>
+                  </eParameters>
+                </eOperations>
+                <eStructuralFeatures xsi:type="ecore:EAttribute" name="toto" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte">
+                  <eAnnotations source="kermeta"/>
+                </eStructuralFeatures>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_"
+                  instanceClassName="java.lang.Object">
+                <eAnnotations source="kermeta"/>
+              </eClassifiers>
+              <eClassifiers xsi:type="ecore:EDataType" name="toto" instanceClassName="java.lang.String">
+                <eTypeParameters name="toto"/>
+              </eClassifiers>
+              <eSubpackages>
+                <eSubpackages>
+                  <eSubpackages>
+                    <eSubpackages/>
+                  </eSubpackages>
+                </eSubpackages>
+              </eSubpackages>
+            </eSubpackages>
+          </eSubpackages>
+        </eSubpackages>
+      </eSubpackages>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

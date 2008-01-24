@@ -1,0 +1,106 @@
+/* $Id: $
+ * Creation date: January 23, 2008
+ * License: EPL
+ * Copyright: 
+ * Authors: Gilles Perrouin
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+require kermeta
+using kermeta::persistence
+using kermeta::standard
+using ecore
+
+
+// TODO: Transform this class in a valid KUnit test case...
+class Main {
+operation main(): Void is do
+var cl: CleanEcoreKMAnnotation init CleanEcoreKMAnnotation.new
+cl.cleanEcore("platform:/resource/fr.irisa.triskell.kermeta.ecore/test/kmt_testcases/ecore/testInvException.backup.ecore",
+"platform:/resource/fr.irisa.triskell.kermeta.ecore/test/kmt_testcases/ecore/testInvExceptionClean.ecore")
+end
+
+}
+
+
+
+class CleanEcoreKMAnnotation
+{
+	operation cleanEcore(modelURI:String,newModelURI:String) : Void is do 
+	
+	var lsEcore : LoadStoreEcore init LoadStoreEcore.new
+	var emf_res: EMFResource 
+	emf_res := lsEcore.loadEcore(modelURI)
+	// Removing the EAnnotations at the top of the resource
+	emf_res.instances.select{o|o.isInstanceOf(EAnnotation)}.select{o|o.asType(EAnnotation).source.indexOf("ModellingUnit") != -1
+							or o.asType(EAnnotation).source.indexOf("kermeta") != -1
+							}.each{e|emf_res.contents.each{o|if o.equals(e) then 
+							o.containingResource.remove(o)
+							end}}						
+	// Removing Kermeta EAnnotations on the packages of the resource
+	emf_res.instances.each{p|
+	if p.isInstanceOf(EPackage) then
+		removeKMAnnotations(p.asType(EPackage))
+		end}
+	
+	lsEcore.store(newModelURI,emf_res)
+	end
+
+	operation removeKMAnnotations(p: EPackage): Void  is do
+	if p.eSubpackages.size != 0 then
+		 p.eSubpackages.each{sp|removeKMAnnotations(sp)}
+	end
+	// removing KM annotation at the package level
+	if p.eAnnotations.size != 0 then
+		stdio.writeln("Annotation at the package level")
+		
+		p.eAnnotations.select{e | e.source.indexOf("kermeta")!=-1
+								or e.source.indexOf("ModellingUnit")!=-1}.each{e|p.eAnnotations.remove(e)}
+	end
+	// removing classifier annotations i.e. classes and datatypes 
+	if p.eClassifiers.size != 0 then
+		stdio.writeln("classifiers found")
+		p.eClassifiers.each{c|
+		c.eAnnotations.select{e | e.source.indexOf("kermeta") !=-1}.each{e|c.eAnnotations.remove(e)}
+		if c.isInstanceOf(EClass) then
+		// removing annotations on operations
+		c.asType(EClass).eOperations.each{op|op.eAnnotations.select{e | e.source.indexOf("kermeta") !=-1}.each{e|c.asType(EClass).eOperations.each{op|op.eAnnotations.remove(e)}}}
+		c.asType(EClass).eStructuralFeatures.each{op|op.eAnnotations.select{e | e.source.indexOf("kermeta") !=-1}.each{e|c.asType(EClass).eStructuralFeatures.each{op|op.eAnnotations.remove(e)}}}
+		// removing annotation on operation parameters...
+		c.asType(EClass).eOperations.each{op | 
+										  op.eParameters.each{p|
+										  					  p.eAnnotations.select{e | e.source.indexOf("kermeta") !=-1}.each{e|c.asType(EClass).eOperations.each{op|op.eParameters.each{op|op.eAnnotations.remove(e)}}}}}
+		end
+		if c.isInstanceOf(EDataType) then
+		c.asType(EDataType).eTypeParameters.each{op|op.eAnnotations.select{e | e.source.indexOf("kermeta") !=-1}.each{e|c.asType(EDataType).eTypeParameters.each{op|op.eAnnotations.remove(e)}}}
+		end
+		}
+		//p.eClassifiers.each{c|
+		//c.eAnnotations.select{e | e.source.indexOf("kermeta") !=-1}.each{e|c.eAnnotations.remove(e)}}
+	end
+	end 
+}
+
+
+class LoadStoreEcore
+{
+
+operation loadEcore(modelURI: String): EMFResource is do 
+ var emf_store : EMFRepository init EMFRepository.new
+// emf_store.ignoreLoadErrors := false
+ var emf_res : EMFResource
+emf_res ?= emf_store.createResource(modelURI,"http://www.eclipse.org/emf/2002/Ecore")
+emf_res.load
+result := emf_res 
+end
+
+operation store(newModelURI: String,resource:EMFResource): Void is do
+resource.saveWithNewURI(newModelURI)
+end
+
+}
