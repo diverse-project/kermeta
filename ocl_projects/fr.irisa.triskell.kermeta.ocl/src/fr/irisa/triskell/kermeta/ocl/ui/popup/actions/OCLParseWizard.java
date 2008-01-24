@@ -1,4 +1,4 @@
-/* $Id: OCLParseWizard.java,v 1.10 2007-12-07 01:54:45 ffleurey Exp $
+/* $Id: OCLParseWizard.java,v 1.11 2008-01-24 14:15:17 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.ocl
 * File : 	OCLParseWizard.java
 * License : EPL
@@ -12,44 +12,20 @@
 */
 package fr.irisa.triskell.kermeta.ocl.ui.popup.actions;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EPackage.Registry;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
-import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
-import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
-import fr.irisa.triskell.eclipse.console.messages.OKMessage;
-import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.ocl.GenerateKMT;
-import fr.irisa.triskell.kermeta.ocl.MyOCLParser;
-import fr.irisa.triskell.kermeta.ocl.TestOCLParser;
 
 
 public class OCLParseWizard extends Wizard {
@@ -214,7 +190,8 @@ public class OCLParseWizard extends Wizard {
 		URI ecoreURI = URI.createURI(ecorePath);
 		URI oclURI = URI.createURI(oclPath);
 		URI kmtURI = URI.createURI(kmtPath);
-		new GenerateKMT().generate(ecoreURI, oclURI, kmtURI);		
+		GenerateKMT generator = new GenerateKMT(new EclipseConsole("OCL 2 KMT"));
+		generator.generate(ecoreURI, oclURI, kmtURI);		
 				
 			
 			

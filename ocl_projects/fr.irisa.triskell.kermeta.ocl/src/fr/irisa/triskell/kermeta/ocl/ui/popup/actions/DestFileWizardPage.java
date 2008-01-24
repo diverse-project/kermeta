@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.5 2007-07-30 14:54:41 cfaucher Exp $
+/* $Id: DestFileWizardPage.java,v 1.6 2008-01-24 14:15:18 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -32,6 +32,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.dialogs.ErrorDialog;
@@ -59,6 +60,9 @@ import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.internal.ide.dialogs.CreateLinkedResourceGroup;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
+
+import fr.irisa.triskell.kermeta.ocl.Activator;
+import fr.irisa.triskell.kermeta.ocl.OptionManager;
 
 
 
@@ -210,14 +214,20 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		ecoreSelectGrp.setLayout(ecoreLayout);
 		ecoreSelectGrp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		ecoreSelectGrp.setFont(parent.getFont());
-		ecoreSelectGrp.setText("Syntactic model selection:");
+		ecoreSelectGrp.setText("Metamodel selection:");
 		
 //		sMdlLbl = new Label(sMdlSelectGrp, SWT.NULL);
 		Label ecoreLbl = new Label(topLevel, SWT.LEFT);
 		ecoreLbl.setText("Ecore meta-model: ");
 		
-		 ecoreText = new Text(ecoreSelectGrp, SWT.SINGLE | SWT.BORDER);
-		ecoreText.setText("Select you ecore Meta Model");
+		ecoreText = new Text(ecoreSelectGrp, SWT.SINGLE | SWT.BORDER);
+		ecoreText.setMessage("Select the ecore Metamodel containing the definition of the context of your constraints");
+		// use previous value to prefill the field
+		ecoreText.setText(Activator.getDefault().getOptionManager().getLastUsedMetamodel());
+		if(!Activator.getDefault().getOptionManager().getLastUsedMetamodel().equals(OptionManager.LastUsedMetaModelDefaultValue)){
+			IPath ecoreFilePath = Path.fromPortableString(Activator.getDefault().getOptionManager().getLastUsedMetamodel());
+			ecoreFile = createFileHandle(ecoreFilePath);			
+		}
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		ecoreText.setLayoutData( gridData );
 		
@@ -228,7 +238,8 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 			new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent e) {
 					ecoreFile = handleBrowseButtonSelect();
-					ecoreText.setText(ecoreFile.getName());
+					ecoreText.setText(ecoreFile.getFullPath().toPortableString());
+					Activator.getDefault().getOptionManager().setLastUsedMetamodel(ecoreFile.getFullPath().toPortableString());
 				}
 			}
 		);

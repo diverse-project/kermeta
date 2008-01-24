@@ -1,3 +1,13 @@
+/* $Id: GenerateKMT.java,v 1.9 2008-01-24 14:15:17 dvojtise Exp $
+ * Project: OCL
+ * File: GenerateKMT.java
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * Authors : 
+ * 		Mark Skipper
+ *		Olivier Barais
+ * 		Didier Vojtisek
+ */
 package fr.irisa.triskell.kermeta.ocl;
 
 import java.awt.List;
@@ -14,6 +24,11 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.ocl.ParserException;
 //import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.console.LocalIOConsole;
+import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
+import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
+import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.ocl.kmtactions.GenerateOCL;
 
 
@@ -24,8 +39,15 @@ public class GenerateKMT {
 	private static String ecore_ecore =  project_path + "Ecore.ecore";
 	private static String oclcst_ecore =  project_path + "OCLCST.ecore";
 	
+	private IOConsole defaultConsole = new LocalIOConsole();
+	
 	public GenerateKMT(){
 		setUpURIMappings();
+	}
+	
+	public GenerateKMT(IOConsole console){
+		setUpURIMappings();
+		defaultConsole = console;
 	}
 	
 	private Resource getResource() {
@@ -43,10 +65,18 @@ public class GenerateKMT {
 		try {
 				OCLFileParser.parseTextFileToXmiFile(inputOclFileURI, xmiTempFileURI);
 		} catch (ParserException e) {
-				System.err.println(e.getMessage());
+				defaultConsole.println(new ThrowableMessage(e));
 				return;
 		}
-		runOclCstToKmtPrinter( xmiTempFileURI, ecoreURI,  outputKMTFileURI);
+		try {
+			runOclCstToKmtPrinter( xmiTempFileURI, ecoreURI,  outputKMTFileURI);
+		} catch (KermetaRaisedException e) {
+			defaultConsole.println(new ErrorMessage(e.toString()));
+			return;
+		} catch (Throwable t) {
+			defaultConsole.println(new ThrowableMessage(t));
+			return;
+		}
 	}
 	
 	
@@ -55,7 +85,7 @@ public class GenerateKMT {
 		registerPackages(EcorePackage.eINSTANCE);
 		EPackage ePack = (EPackage) getResource().getContents().get(0);
 		registerPackages(ePack); 
-		GenerateOCL.run(cstXmiURI.toString(), ecoreURI.toString(),  outputKmtFileURI.toString());
+		GenerateOCL.run(cstXmiURI.toString(), ecoreURI.toString(),  outputKmtFileURI.toString(), defaultConsole);
 	}
 	
 	private static void registerPackages(EPackage pack) {

@@ -1,4 +1,4 @@
-/* $Id: GenerateOCL.java,v 1.10 2007-12-07 01:54:45 ffleurey Exp $
+/* $Id: GenerateOCL.java,v 1.11 2008-01-24 14:15:17 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.ocl
  * File       : GenerateOCL.java
  * License    : EPL
@@ -20,8 +20,8 @@ import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
-import fr.irisa.triskell.eclipse.console.LocalIOConsole;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
+import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -41,7 +41,7 @@ public class GenerateOCL {
 	 * @param outKmtPath
 	 */
 	public static void run(String inCstXmiPath, String modelEcorePath, String outKmtPath) {
-		run(inCstXmiPath, modelEcorePath, outKmtPath, new LocalIOConsole());
+		run(inCstXmiPath, modelEcorePath, outKmtPath);
 	}
 	
 	/**
@@ -52,13 +52,12 @@ public class GenerateOCL {
 	 * @param console
 	 */
 	public static void run(String inCstXmiPath, String modelEcorePath, String outKmtPath, IOConsole console ) {
-		System.out.println("running OCL2KMT Transformation \n from " + inCstXmiPath + "\n to " + outKmtPath + "\n against: " + modelEcorePath);
+		console.println(new InfoMessage("running OCL2KMT Transformation \n from " + inCstXmiPath + "\n to " + outKmtPath + "\n against: " + modelEcorePath));
 		KermetaUnit unit=null;
 		try {
 			unit = KermetaUnitChecker.basicCheck(oclKmtPrinterKmtPath,null, new NullProgressMonitor());
 		} catch (URIMalformedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			console.println(new ThrowableMessage(e));
 		}
 	
 		
@@ -74,7 +73,7 @@ public class GenerateOCL {
 		inter.setEntryParameters(params);
 		// And we launch the interpreter
 		inter.launch();
-		System.out.println("file generated " + outKmtPath);
+		console.println(new InfoMessage("file generated " + outKmtPath));
 		
 	}
 
