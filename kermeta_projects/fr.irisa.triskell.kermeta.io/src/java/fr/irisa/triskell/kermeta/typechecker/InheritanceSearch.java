@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.25 2008-01-08 11:07:39 dvojtise Exp $
+/* $Id: InheritanceSearch.java,v 1.26 2008-01-24 13:31:29 ftanguy Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
@@ -138,12 +139,14 @@ public class InheritanceSearch {
 			 * Just make sure that the Object class definition is processed the last.
 			 * 
 			 */
-			if ( NamedElementHelper.getQualifiedName(current.getTypeDefinition()).equals("kermeta::language::structure::Object") && toVisit.size() >= 1 )
-				toVisit.add(current);
-			else {
-				if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
+			if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
+			
+				String qualifiedName = NamedElementHelper.getQualifiedName(current.getTypeDefinition());
+				if ( (! current.getTypeDefinition().isIsAspect() && qualifiedName.equals("kermeta::language::structure::Object") && toVisit.size() >= 1) )
+					toVisit.add(current);
+				else {
 					classDefinitionProcessed.add( (ClassDefinition) current.getTypeDefinition() );
-			 				
+
 					// Add all operations of current parsed class
 					for (Object next_op : ((ClassDefinition) current.getTypeDefinition()).getOwnedOperation()) {
 						Operation op = (Operation)next_op;
