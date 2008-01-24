@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIO.java,v 1.9 2008-01-08 14:50:32 cfaucher Exp $
+/* $Id: SimpleFileIO.java,v 1.10 2008-01-24 14:01:59 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -77,6 +77,10 @@ public class SimpleFileIO {
             // Refresh the content of the folder that contains the created file
         	try {
             	int i_folder = String.getValue(filename).lastIndexOf("/");
+            	if(i_folder == -1){
+            		// maybe this is a windows like path
+            		i_folder = String.getValue(filename).lastIndexOf("\\");
+            	}
 				IFolder result_folder = ResourceHelper.getIFolder(String.getValue(filename).substring(0, i_folder));
 				if(result_folder != null)
 					result_folder.refreshLocal(1, new NullProgressMonitor());
