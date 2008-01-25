@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.27 2008-01-25 09:24:26 ftanguy Exp $
+/* $Id: InheritanceSearch.java,v 1.28 2008-01-25 10:45:21 cfaucher Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -141,10 +141,10 @@ public class InheritanceSearch {
 			 */
 			if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
 			
-				String qualifiedName = NamedElementHelper.getQualifiedName(current.getTypeDefinition());
+/*				String qualifiedName = NamedElementHelper.getQualifiedName(current.getTypeDefinition());
 				if ( (! current.getTypeDefinition().isIsAspect() && qualifiedName.equals("kermeta::language::structure::Object") && toVisit.size() >= 1) )
 					toVisit.add(current);
-				else {
+				else {*/
 					classDefinitionProcessed.add( (ClassDefinition) current.getTypeDefinition() );
 
 					// Add all operations of current parsed class
@@ -197,7 +197,7 @@ public class InheritanceSearch {
 						}
 					}
 				}
-			}		    
+			//}		    
 
 		}
 		
@@ -300,10 +300,10 @@ public class InheritanceSearch {
 			 */
 			if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
 		
-				String qualifiedName = NamedElementHelper.getQualifiedName(current.getTypeDefinition());
+				/*String qualifiedName = NamedElementHelper.getQualifiedName(current.getTypeDefinition());
 				if ( (! current.getTypeDefinition().isIsAspect() && qualifiedName.equals("kermeta::language::structure::Object") && toVisit.size() >= 1) )
 					toVisit.add(current);
-				else {
+				else {*/
 				
 					classDefinitionProcessed.add( (ClassDefinition) current.getTypeDefinition() );
 			 				
@@ -356,7 +356,7 @@ public class InheritanceSearch {
 			    			toVisit.add(aspectClassType);
 						}
 					}
-				}
+				//}
 			}		    
 
 		}
