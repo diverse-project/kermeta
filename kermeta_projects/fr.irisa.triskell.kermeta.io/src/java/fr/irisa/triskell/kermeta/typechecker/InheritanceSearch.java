@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.26 2008-01-24 13:31:29 ftanguy Exp $
+/* $Id: InheritanceSearch.java,v 1.27 2008-01-25 09:24:26 ftanguy Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : EPL
@@ -298,10 +298,13 @@ public class InheritanceSearch {
 			 * Just make sure that the Object class definition is processed the last.
 			 * 
 			 */
-			if ( NamedElementHelper.getQualifiedName(current.getTypeDefinition()).equals("kermeta::language::structure::Object") && toVisit.size() >= 1 )
-				toVisit.add(current);
-			else {
-				if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
+			if ( ! classDefinitionProcessed.contains(current.getTypeDefinition()) ) {
+		
+				String qualifiedName = NamedElementHelper.getQualifiedName(current.getTypeDefinition());
+				if ( (! current.getTypeDefinition().isIsAspect() && qualifiedName.equals("kermeta::language::structure::Object") && toVisit.size() >= 1) )
+					toVisit.add(current);
+				else {
+				
 					classDefinitionProcessed.add( (ClassDefinition) current.getTypeDefinition() );
 			 				
 					// Add all operations of current parsed class
