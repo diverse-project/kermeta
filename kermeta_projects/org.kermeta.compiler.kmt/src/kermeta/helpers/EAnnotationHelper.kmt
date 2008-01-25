@@ -1,0 +1,33 @@
+/* $Id: EAnnotationHelper.kmt,v 1.1 2008-01-25 16:36:26 ftanguy Exp $
+ * Creation date: January 25, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package ecore::helper;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::language::structure
+using ecore
+
+class EAnnotationHelper
+{
+
+	operation createAbstract() : EAnnotation is do
+		result := create("kermeta", "isAbstract", "true")
+	end
+
+	operation create(source : String, key : String, ~value : String) : EAnnotation is do 
+		var annotation : EAnnotation init EAnnotation.new
+		annotation.source := source
+		var entry : EStringToStringMapEntry init EStringToStringMapEntry.new
+		entry.key := key
+		entry.~value := ~value 
+		annotation.details.add(entry)
+		result := annotation
+	end
+}

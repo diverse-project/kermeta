@@ -1,4 +1,4 @@
-/* $Id: compile_builder.kmt,v 1.1 2008-01-25 15:02:13 ftanguy Exp $
+/* $Id: compile_builder.kmt,v 1.2 2008-01-25 16:36:26 ftanguy Exp $
  * Creation date: January 25, 2008
  * License:
  * Copyright:
@@ -10,9 +10,11 @@ package kermeta::language::structure;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helpers/EcoreHelper.kmt"
 
 using kermeta::language::structure
 using ecore
+using ecore::helper
 
 aspect class Package {
 	operation build() : EPackage is do
@@ -31,5 +33,57 @@ aspect class ClassDefinition {
 		ecoreClass.name := self.name
 		ecoreClass.~abstract := self.isAbstract
 		result := ecoreClass
+	end
+}
+
+aspect class Operation {
+	operation build() : EOperation is do
+		var ecoreOperation : EOperation init EOperation.new
+		ecoreOperation.name := self.name
+		ecoreOperation.ordered := self.isOrdered
+		ecoreOperation.unique := self.isUnique
+		ecoreOperation.lowerBound := self.lower
+		ecoreOperation.upperBound := self.upper
+		//ecoreOperation.many := 
+		//ecoreOperation.required :=
+		if ( self.isAbstract ) then
+			var ecoreAnnotation : EAnnotation init EAnnotationHelper.new.createAbstract()
+			ecoreOperation.eAnnotations.add( ecoreAnnotation )
+		end 
+		result := ecoreOperation 
+	end
+}
+
+/**
+ *
+ */
+aspect class Property {
+	operation build() : EStructuralFeature is do
+		var ecoreStructuralFeature : EStructuralFeature
+		if ( self.isComposite and self.type.isInstanceOf(PrimitiveType) ) then
+			ecoreStructuralFeature := EAttribute.new
+			//ecoreStructuralFeature.iD := 
+		else
+			ecoreStructuralFeature := EReference.new
+			ecoreStructuralFeature.asType(EReference).containment := self.isComposite
+		end
+		stdio.writeln( self.isComposite.toString + " " + self.type.getMetaClass.toString )
+		ecoreStructuralFeature.name := self.name
+		ecoreStructuralFeature.ordered := self.isOrdered
+		ecoreStructuralFeature.unique := self.isUnique
+		ecoreStructuralFeature.lowerBound := self.lower
+		ecoreStructuralFeature.upperBound := self.upper
+		//ecoreStructuralFeature.many := 
+		//ecoreStructuralFeature.required := 
+		//ecoreStructuralFeature.changeable := 
+		//ecoreStructuralFeature.volatile := 
+		//ecoreStructuralFeature.transient :=
+		//ecoreStructuralFeature.defaultValueLiteral := 
+		//ecoreStructuralFeature.defaultValue := 
+		//ecoreStructuralFeature.unsettable := 
+		ecoreStructuralFeature.derived := self.isDerived
+		// gestion du read only
+		// gestion du default		
+		result := ecoreStructuralFeature
 	end
 }

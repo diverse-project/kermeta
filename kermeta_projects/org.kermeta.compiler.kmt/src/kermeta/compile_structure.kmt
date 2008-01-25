@@ -1,12 +1,13 @@
 package kermeta::language::structure;
-
+ 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "compile_behavior.kmt"
 require "containment_traversable.kmt"
 require "trace_structure.kmt"
 require "compile_helper.kmt"
-
+require "compile_builder.kmt"
+  
 using kermeta::language::structure
 using kermeta::language::behavior
 using kermeta::standard
@@ -19,15 +20,19 @@ aspect class Object {
 		result := ""
 		//stdio.writeln("F7-1: " + self.name)
 	end
-}
+} 
 
 aspect class Package {
 	method compile(context : Integer) : String is do
 		result := ""
 		// Creating the associated ecore package
-		var ecorePackage : EPackage init EPackage.new
-		ecorePackage.name := self.name
-		ecorePackage.nsURI := self.uri
+		var ecorePackage : EPackage init build()
+		// Setting the container
+		var p : Package
+		p ?= self.container()
+		if ( p != void ) then
+			p.ecoreProxy.eSubpackages.add(ecorePackage)
+		end
 		// Setting the ecore proxy
 		self.ecoreProxy := ecorePackage
 		// Compile the owned elements
@@ -39,19 +44,15 @@ aspect class ClassDefinition {
 	method compile(context : Integer) : String is do
 		result := ""
 		// Creating the associated ecore class
-		var ecoreClass : EClass init EClass.new
-		ecoreClass.interface := false
-		ecoreClass.name := self.name
-		ecoreClass.~abstract := self.isAbstract
-		
+		var ecoreClass : EClass init build()		
+		// Setting the container
 		var p : Package
 		p ?= self.container()
 		p.ecoreProxy.eClassifiers.add(ecoreClass)
-		
 		// Setting the ecore proxy
 		self.ecoreProxy := ecoreClass
 		// Compile the owned elements
-		//self.eachOwnedElement{ o | o.compile(context) }
+		self.eachOwnedElement{ o | o.compile(context) }
 	end
 	
 }
@@ -62,26 +63,33 @@ aspect class PrimitiveType {
 		//stdio.writeln("F2-2: " + self.name)
 	end
 }
-
-aspect class MultiplicityElement {
-	method compile(context : Integer) : String is do
-		result := ""
-		//stdio.writeln("F2-311111: " + self.name)
-	end
-}
   
 aspect class Property {
 	method compile(context : Integer) : String is do
 		result := ""
-		// Set the traceability
+		stdio.writeln("coucou")
+		// Creating the associated ecore class
+		var ecoreStructuralFeature : EStructuralFeature init build()
+		// Setting the container
+		var c : ClassDefinition
+		c ?= self.container()
+		c.ecoreProxy.eStructuralFeatures.add( ecoreStructuralFeature )
+		// Setting the ecore proxy
+		self.ecoreProxy := ecoreStructuralFeature
 	end 
 }
 
 aspect class Operation {
 	method compile(context : Integer) : String is do
 		result := ""
-		// Set the traceability
-		self.ecoreProxy := CompileHelper.new.findEOperationProxy( self )
+		// Creating the associated ecore class
+		var ecoreOperation : EOperation init build()
+		// Setting the container
+		var c : ClassDefinition
+		c ?= self.container()
+		c.ecoreProxy.eOperations.add(ecoreOperation)
+		// Setting the ecore proxy
+		self.ecoreProxy := ecoreOperation
 		
 		var javaCode : StringBuffer init StringBuffer.new
 		

@@ -1,4 +1,4 @@
-/* $Id: compile_behavior.kmt,v 1.1 2008-01-23 17:43:06 cfaucher Exp $
+/* $Id: compile_behavior.kmt,v 1.2 2008-01-25 16:36:26 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -14,7 +14,7 @@ using kermeta::language::behavior
 using kermeta::standard
 
 aspect class Block {
-
+ 
 	method compile(context : Integer) : String is do
 	//stdio.writeln("F2-55555555555555")
 		result := "{"
@@ -25,7 +25,7 @@ aspect class Block {
 	end
 
 }
-
+ 
 aspect class CallResult {
 	method compile(context : Integer) : String is do
 		result := "result"
