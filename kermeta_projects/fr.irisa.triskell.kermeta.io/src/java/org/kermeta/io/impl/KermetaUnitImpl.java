@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.25 2008-01-04 14:20:07 dvojtise Exp $
+ * $Id: KermetaUnitImpl.java,v 1.26 2008-01-25 16:04:35 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -1020,7 +1020,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	public TypeDefinition getTypeDefinitionByName(String name) {
 		if ( typeDefinitionCache == null )
 			return null;
-		return typeDefinitionCache.getTypeDefinitionByName(name);
+		TypeDefinition result =  typeDefinitionCache.getTypeDefinitionByName(name);
+		return result;
 	}
 
 	/**
@@ -1031,7 +1032,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	public TypeDefinition getTypeDefinitionByQualifiedName(String qualifiedName) {
 		if ( typeDefinitionCache == null )
 			return null;
-		return typeDefinitionCache.getTypeDefinitionByQualifiedName(qualifiedName);
+		TypeDefinition result =  typeDefinitionCache.getTypeDefinitionByQualifiedName(qualifiedName);		
+		return result;
 	}
 
 	/**
@@ -1042,7 +1044,26 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	public TypeDefinition getInternalTypeDefinitionByName(String name) {
 		if ( typeDefinitionCache == null )
 			return null;
-		return typeDefinitionCache.getInternalTypeDefinitionByQualifiedName(name);
+		TypeDefinition result = getTypeDefinitionCache().getInternalTypeDefinitionByQualifiedName(name);
+		if(result == null){
+			// not finding the value in the cache doesn't means it doesn't exists. it may means that the unit was loaded from a simple km
+			// that doesn't fill the cache
+			int packSeparator = name.lastIndexOf(":");
+			if(packSeparator != -1){
+				String packName = name.substring(0, packSeparator-1);
+				String className = name.substring(packSeparator+1, name.length());
+				Package p = getInternalPackage(packName);
+				for(TypeDefinition td : p.getOwnedTypeDefinition()){
+					if(td.getName().equals(className)) {
+						// we have found it
+						result = td;
+						// update the cache
+						getTypeDefinitionCache().addTypeDefinition(name, td);
+					}
+				}
+			}
+		}
+		return result;
 	}
 
 	/**
