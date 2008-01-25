@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaContentAssistProcessor.java,v 1.11 2007-12-20 16:14:53 ftanguy Exp $
+/*$Id: KermetaContentAssistProcessor.java,v 1.12 2008-01-25 16:07:52 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -110,14 +110,17 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 					int trueOffset = offset;
 					char c;
 					boolean goOn = true;
-					while ( goOn &&  trueOffset < viewer.getDocument().getLength() ) {
+					while ( goOn &&  trueOffset < viewer.getDocument().getLength() && trueOffset >= 0) {
 						try {
 							c = viewer.getDocument().getChar(trueOffset);
 							if ( Character.isWhitespace(c) )
 								trueOffset--;
 							else
 								goOn = false;
-						} catch (BadLocationException exception) {exception.printStackTrace();}
+						} catch (BadLocationException exception) {
+							exception.printStackTrace(); 
+							goOn = false;
+						}
 					}
 					
 					/*
