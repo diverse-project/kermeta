@@ -1,4 +1,4 @@
-/* $Id: GetTextVisitor.java,v 1.12 2007-08-31 14:15:16 dvojtise Exp $
+/* $Id: GetTextVisitor.java,v 1.13 2008-01-25 08:30:52 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetTextVisitor.java
 * License : EPL
@@ -14,7 +14,9 @@
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import java.util.Iterator;
+import java.util.Set;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -28,12 +30,16 @@ import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -65,9 +71,26 @@ public class GetTextVisitor extends KermetaOptimizedVisitor {
 			result += ">";
 		}
 		
-		if (node.getSuperType().size() > 0) {
+		// build the list of inherited classes using all aspects
+		Set <TypeDefinition> baseClasses = ClassDefinitionHelper.getAllBaseClasses( node );
+		EList<Type> allSuperTypes = new BasicEList<Type>(node.getSuperType());
+		for ( TypeDefinition typeDefinition : baseClasses ) {	    	
+	    	if ( typeDefinition instanceof ClassDefinition ) {
+	    		ClassDefinition cl = (ClassDefinition) typeDefinition;
+	    		for ( Type t : cl.getSuperType()) {
+	    			if(t instanceof ParameterizedType){
+	    				ParameterizedType pt = (ParameterizedType)t;
+	    				TypeDefinition td = pt.getTypeDefinition();
+	    				// no duplicate
+	    				if(!allSuperTypes.contains(td)) 
+	    					allSuperTypes.add(t);
+	    			}
+	    		}
+	    	}	    	
+	    }
+		if (allSuperTypes.size() > 0) {
 			result += " -> ";
-			result += ppComaSeparatedNodes(node.getSuperType());
+			result += ppComaSeparatedNodes(allSuperTypes);
 		}
 		
 		return result;
