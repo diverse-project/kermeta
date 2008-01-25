@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.32 2007-12-06 14:10:11 ftanguy Exp $
+/*$Id: IOPlugin.java,v 1.33 2008-01-25 16:01:41 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -15,8 +15,10 @@ package org.kermeta.io.plugin;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -383,24 +385,31 @@ public class IOPlugin extends AbstractUIPlugin {
 	}
 	
 	public void unload( String uri ) {
+		List <KermetaUnit> unitsToUnload = new ArrayList <KermetaUnit> ();		
+		KermetaUnit kermetaUnit;
+		Set<KermetaUnit> gcExcludedUnits = new HashSet<KermetaUnit>();
 		synchronized ( IOPlugin.class ) {
-			List <KermetaUnit> unitToUnload = new ArrayList <KermetaUnit> ();
 			IOPlugin.internalLog.debug( "unloading " + uri);
-			KermetaUnit kermetaUnit;
+			
 			try {
 				kermetaUnit = getKermetaUnit(uri);
 				for ( KermetaUnit importedUnit : new ArrayList<KermetaUnit>(kermetaUnit.getImportedKermetaUnits()) )
 					if ( importedUnit.getImportedKermetaUnits().contains( kermetaUnit ) )
-						unitToUnload.add( importedUnit );
+						unitsToUnload.add( importedUnit );
+
+				// cleanup but only older unit not recently unloaded ones
+				gcExcludedUnits.addAll(unitsToUnload);
+				gcExcludedUnits.add(kermetaUnit);
 			} catch (URIMalformedException e) {
 				e.printStackTrace();
 			}
 			storer.unload(uri);
 			IOPlugin.internalLog.debug( "unloading " + uri + " done");
-			for ( KermetaUnit unit : unitToUnload )
+			for ( KermetaUnit unit : unitsToUnload )
 				unload( unit.getUri() );
+			
 		}
-		garbageCollect();
+		garbageCollect(gcExcludedUnits);
 	}
 	
 	public void unload(IFile file) {
@@ -415,13 +424,17 @@ public class IOPlugin extends AbstractUIPlugin {
 		}
 	}
 	
-	private void garbageCollect() {
-		List <KermetaUnit> unitToUnload = new ArrayList <KermetaUnit> ();
+	/**
+	 * cleanup some unused KermetaUnit
+	 * @param gcExcludedUnits some unit that are excluded for the gc
+	 */
+	private void garbageCollect(Set<KermetaUnit> gcExcludedUnits) {
+		List <KermetaUnit> unitsToGarbageCollect = new ArrayList <KermetaUnit> ();
 		for ( KermetaUnit unit : storer.getKermetaUnits() ) {
-			if ( unit.getImporters().isEmpty() && ! unit.isLocked() )
-				unitToUnload.add( unit );
+			if ( unit.getImporters().isEmpty() && ! unit.isLocked() && ! gcExcludedUnits.contains(unit))
+				unitsToGarbageCollect.add( unit );
 		}
-		for ( KermetaUnit unit : unitToUnload )
+		for ( KermetaUnit unit : unitsToGarbageCollect )
 			if ( ! unit.getUri().equals( ECORE_URI ) )
 				storer.unload(unit.getUri() );
 		internalLog.info("Available Memory before running garbage collection : " + Runtime.getRuntime().freeMemory());
