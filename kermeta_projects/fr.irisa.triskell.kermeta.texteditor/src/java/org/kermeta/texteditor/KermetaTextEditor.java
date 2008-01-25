@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaTextEditor.java,v 1.3 2008-01-15 09:32:09 ftanguy Exp $
+/*$Id: KermetaTextEditor.java,v 1.4 2008-01-25 16:07:21 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaTextEditor.java
 * License : EPL
@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
@@ -325,30 +326,23 @@ public class KermetaTextEditor extends TextEditor implements Interest {
 		if ( newValue != null ) {
 			KermetaUnit currentKermetaUnit = (KermetaUnit) newValue;
 			if ( ! currentKermetaUnit.isErroneous() && currentKermetaUnit != kermetaUnit ) {
-				//KermetaUnitHelper.getAllErrorsAsString(currentKermetaUnit)
-				currentKermetaUnit.setLocked(true);
-				
-				if ( kermetaUnit != null ) {
-					kermetaUnit.setLocked(false);
-					IOPlugin.getDefault().unload( kermetaUnit.getUri() );
-				}
-				
-				setKermetaUnit( currentKermetaUnit );
+				this.kermetaUnit = (KermetaUnit) EcoreUtil.copy(currentKermetaUnit);
 				
 				if ( outline != null )
 					outline.update();
 			} else if ( kermetaUnit == null )
-				setKermetaUnit( currentKermetaUnit );
+				this.kermetaUnit = (KermetaUnit) EcoreUtil.copy(currentKermetaUnit);
+			
 		}
 	}
 	
-	private void setKermetaUnit(KermetaUnit source) {
+	/*private void setKermetaUnit(KermetaUnit source) {
 		IFile file = ((IFileEditorInput) getEditorInput()).getFile();
 		String uri = "platform:/resource" + file.getProject().getFullPath().toString() + "/" + file.getName();
 		uri = uri.substring(0, uri.length()-4) + "_text_editor_.kmt";
 		source.setUri( uri );
 		kermetaUnit = source;
-	}
+	}*/
 	
 	@Override
 	public void doSave(final IProgressMonitor progressMonitor) {
