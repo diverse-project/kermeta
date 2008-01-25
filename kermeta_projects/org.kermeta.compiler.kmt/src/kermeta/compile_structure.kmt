@@ -1,26 +1,27 @@
 package kermeta::language::structure;
- 
+
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "compile_behavior.kmt"
 require "containment_traversable.kmt"
 require "trace_structure.kmt"
-require "compile_helper.kmt"
 require "compile_builder.kmt"
-  
+require "compile_structure_common.kmt"
+
 using kermeta::language::structure
 using kermeta::language::behavior
 using kermeta::standard
 using kermeta::utils
 using ecore
-using compile::helper
 
-aspect class Object {
-	operation compile(context : Integer) : String is do
+
+aspect class ModelingUnit {
+	method compile(context : Integer) : String is do
 		result := ""
-		//stdio.writeln("F7-1: " + self.name)
+		// Compile the owned elements: Package or Tag
+		self.eachOwnedElement{ o | o.compile(context) }
 	end
-} 
+}
 
 aspect class Package {
 	method compile(context : Integer) : String is do
@@ -39,7 +40,7 @@ aspect class Package {
 		self.eachOwnedElement{ cd | cd.compile(context) }
 	end
 }
- 
+
 aspect class ClassDefinition {
 	method compile(context : Integer) : String is do
 		result := ""
@@ -58,12 +59,11 @@ aspect class ClassDefinition {
 }
 
 aspect class PrimitiveType {
-	method compile(context : Integer) : String is do
+	method compile(context : Integer) : String from TypeDefinition is do
 		result := ""
-		//stdio.writeln("F2-2: " + self.name)
 	end
 }
-  
+
 aspect class Property {
 	method compile(context : Integer) : String is do
 		result := ""
@@ -116,13 +116,5 @@ aspect class Operation {
 aspect class Type {
 	method compile(context : Integer) : String is do
 		result := ""
-		
-		/*if (self.isInstanceOf(PrimitiveType)) then
-			var pt : kermeta::language::structure::PrimitiveType
-			pt ?= self
-			result := pt.instanceType.compile(context)
-		else
-			result := self.toString
-		end*/
 	end
 }

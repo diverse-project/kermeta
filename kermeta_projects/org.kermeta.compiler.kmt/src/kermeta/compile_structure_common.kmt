@@ -1,4 +1,4 @@
-/* $Id: compile_structure_common.kmt,v 1.1 2008-01-25 13:27:09 cfaucher Exp $
+/* $Id: compile_structure_common.kmt,v 1.2 2008-01-25 17:33:23 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -16,4 +16,6 @@ aspect class Object {
 	operation compile(context : Integer) : String is do
 		result := ""
 	end
+	
+	operation print(context : Integer) : Void is abstract
 }

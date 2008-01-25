@@ -1,4 +1,4 @@
-/* $Id: compilerWithAspect.kmt,v 1.1 2008-01-23 17:43:06 cfaucher Exp $
+/* $Id: compilerWithAspect.kmt,v 1.2 2008-01-25 17:33:23 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -13,11 +13,10 @@ package kermeta::compiler;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "trace_structure.kmt"
-require "compile_structure.kmt"
+require "compile_structure_pass2.kmt"
 
 using ecore
 using kermeta::persistence
-//using kermeta::standard
 using kermeta::language::behavior
 using kermeta::language::structure
 
