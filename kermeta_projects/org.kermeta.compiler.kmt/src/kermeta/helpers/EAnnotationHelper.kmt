@@ -1,4 +1,4 @@
-/* $Id: EAnnotationHelper.kmt,v 1.1 2008-01-25 16:36:26 ftanguy Exp $
+/* $Id: EAnnotationHelper.kmt,v 1.2 2008-01-25 17:13:52 cfaucher Exp $
  * Creation date: January 25, 2008
  * License:
  * Copyright:
@@ -29,5 +29,16 @@ class EAnnotationHelper
 		entry.~value := ~value 
 		annotation.details.add(entry)
 		result := annotation
+	end
+	
+	operation addAnnotationGenModelImpl( eModelElement : EModelElement , body : String) : Void is do
+		var newEAnnot : EAnnotation init EAnnotation.new
+		newEAnnot.source := "http://www.eclipse.org/emf/2002/GenModel"
+		
+		var newDetail : EStringToStringMapEntry init EStringToStringMapEntry.new
+		newDetail.key := "body"
+		newDetail.~value := body
+		newEAnnot.details.add(newDetail)
+		eModelElement.eAnnotations.add(newEAnnot)
 	end
 }
