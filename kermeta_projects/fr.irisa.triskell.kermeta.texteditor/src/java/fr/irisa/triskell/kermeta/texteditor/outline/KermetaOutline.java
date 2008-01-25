@@ -1,11 +1,13 @@
-/* $Id: KermetaOutline.java,v 1.17 2007-12-17 15:26:05 ftanguy Exp $
+/* $Id: KermetaOutline.java,v 1.18 2008-01-25 16:06:10 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
-* Copyright : IRISA / Universite de Rennes 1
+* Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 09 feb. 2005
-* Author : Franck Fleurey (ffleurey@irisa.fr)
+* Authors : 
+* 		Franck Fleurey <ffleurey@irisa.fr>
+* 		Didier Vojtisek <dvojtise@irisa.fr>
 */
 
 package fr.irisa.triskell.kermeta.texteditor.outline;
@@ -51,6 +53,14 @@ public class KermetaOutline extends ContentOutlinePage {
 
 	protected IPreferenceStore preferences;
 	
+	// keys used by the preference store
+	private static final String PREFIX = "kermeta.outline.";
+	public static final String SORTED_OUTLINE_PREF_KEY     = PREFIX + "sorted";
+	public static final String PACKAGETREE_OUTLINE_PREF_KEY     = PREFIX + "package_tree";
+	public static final String INHERITANCEFLATTENING_OUTLINE_PREF_KEY     = PREFIX + "inheritance_flattening";
+	public static final String SHOWIMPORTED_OUTLINE_PREF_KEY     = PREFIX + "show_imported";
+	
+	
 	/**
 	 * 
 	 */
@@ -60,13 +70,22 @@ public class KermetaOutline extends ContentOutlinePage {
 		contentProvider = new OutlineContentProvider(this);
 		labelProvider = new OutlineLabelProvider();
 		preferences = new PreferenceStore();
+		initializeDefaultsPreference();
 	}
 	
 	public KermetaOutline(KermetaTextEditor editor) {
 		textEditor = editor;
 		contentProvider = new OutlineContentProvider(this);
 		labelProvider = new OutlineLabelProvider();
-		preferences = new PreferenceStore();		
+		preferences = new PreferenceStore();
+		initializeDefaultsPreference();		
+	}
+	
+	/**
+	 * Set default in preference store.
+	 */
+	public void initializeDefaultsPreference() {
+		preferences.setDefault(SORTED_OUTLINE_PREF_KEY, true);
 	}
 	
 	public KermetaUnit getKermetaUnit() {
@@ -78,19 +97,19 @@ public class KermetaOutline extends ContentOutlinePage {
 	}
 	
 	public boolean prefSortedOutline() {
-	    return preferences.getBoolean("kermeta.outline.sorted");
+	    return preferences.getBoolean(SORTED_OUTLINE_PREF_KEY);
 	}
 	
 	public boolean prefPackageTree() {
-	    return preferences.getBoolean("kermeta.outline.package_tree");
+	    return preferences.getBoolean(PACKAGETREE_OUTLINE_PREF_KEY);
 	}
 	
 	public boolean prefInheritanceFlattening() {
-	    return preferences.getBoolean("kermeta.outline.inheritance_flattening");
+	    return preferences.getBoolean(INHERITANCEFLATTENING_OUTLINE_PREF_KEY);
 	}
 	
 	public boolean prefShowImported() {
-	    return preferences.getBoolean("kermeta.outline.show_imported");
+	    return preferences.getBoolean(SHOWIMPORTED_OUTLINE_PREF_KEY);
 	}
 	
 	public void dispose()
@@ -114,22 +133,22 @@ public class KermetaOutline extends ContentOutlinePage {
     public void setActionBars(IActionBars actionBars) {
         super.setActionBars(actionBars);
         
-        BooleanPropertyAction act = new MyBooleanPropertyAction("Sort features", preferences, "kermeta.outline.sorted");
+        BooleanPropertyAction act = new MyBooleanPropertyAction("Sort features", preferences, SORTED_OUTLINE_PREF_KEY);
         act.setImageDescriptor(ButtonIcons.SORT);
         act.setToolTipText("Sort features");
         actionBars.getToolBarManager().add(act);
         
-        act = new MyBooleanPropertyAction("Show package hierarchy", preferences, "kermeta.outline.package_tree");
+        act = new MyBooleanPropertyAction("Show package hierarchy", preferences, PACKAGETREE_OUTLINE_PREF_KEY);
         act.setImageDescriptor(ButtonIcons.PACKAGE_TREE);
         act.setToolTipText("Show package hierarchy");
         actionBars.getToolBarManager().add(act);
         
-        act = new MyBooleanPropertyAction("Flatten inheritance", preferences, "kermeta.outline.inheritance_flattening");
+        act = new MyBooleanPropertyAction("Flatten inheritance", preferences, INHERITANCEFLATTENING_OUTLINE_PREF_KEY);
         act.setImageDescriptor(ButtonIcons.INHERITANCE_FLAT);
         act.setToolTipText("Flatten inheritance");
         actionBars.getToolBarManager().add(act);
         
-        act = new MyBooleanPropertyAction("Show imported types", preferences, "kermeta.outline.show_imported");
+        act = new MyBooleanPropertyAction("Show imported types", preferences, SHOWIMPORTED_OUTLINE_PREF_KEY);
         act.setImageDescriptor(ButtonIcons.SHOW_IMPORTED);
         act.setToolTipText("Show imported types");
         actionBars.getToolBarManager().add(act);
