@@ -1,0 +1,35 @@
+/* $Id: compile_builder.kmt,v 1.1 2008-01-25 15:02:13 ftanguy Exp $
+ * Creation date: January 25, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package kermeta::language::structure;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::language::structure
+using ecore
+
+aspect class Package {
+	operation build() : EPackage is do
+		var ecorePackage : EPackage init EPackage.new
+		ecorePackage.name := self.name
+		ecorePackage.nsURI := self.uri
+		ecorePackage.nsPrefix := self.uri
+		result := ecorePackage	
+	end
+}
+
+aspect class ClassDefinition {
+	operation build() : EClass is do
+		var ecoreClass : EClass init EClass.new
+		ecoreClass.interface := false
+		ecoreClass.name := self.name
+		ecoreClass.~abstract := self.isAbstract
+		result := ecoreClass
+	end
+}
