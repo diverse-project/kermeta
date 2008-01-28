@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.17 2008-01-04 14:20:07 dvojtise Exp $
+ * $Id: KermetaUnit.java,v 1.18 2008-01-28 09:44:23 dvojtise Exp $
  */
 package org.kermeta.io;
 
@@ -853,5 +853,29 @@ public interface KermetaUnit extends EObject {
 	 * @generated
 	 */
 	void unlock();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	KermetaUnit copy();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void fillTypeDefinitionCache(fr.irisa.triskell.kermeta.language.structure.Package aPackage);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void fillTypeDefinitionCache();
 
 } // KermetaUnit
