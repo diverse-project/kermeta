@@ -1,4 +1,4 @@
-/* $Id: KermetaVisitorError.java,v 1.3 2008-01-02 10:28:00 vmahe Exp $
+/* $Id: KermetaVisitorError.java,v 1.4 2008-01-28 09:58:51 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : KermetaVisitorError.java
  * License    : EPL
@@ -19,6 +19,11 @@ package fr.irisa.triskell.kermeta.error;
 public class KermetaVisitorError extends KermetaError {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8708765533529295325L;
+
+	/**
      * Constructs a new Kermeta error with the specified cause.
      * @param cause
      */
