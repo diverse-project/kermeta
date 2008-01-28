@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.27 2008-01-28 09:43:47 dvojtise Exp $
+ * $Id: KermetaUnitImpl.java,v 1.28 2008-01-28 09:54:33 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -1465,8 +1465,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 */
 	public KermetaUnit copy() {
 		KermetaUnit result = (KermetaUnit) EcoreUtil.copy(this);
-		// fill the cache for correct use of the unit
-		fillTypeDefinitionCache();
+		// fill the cache for correct use of the copied unit
+		result.fillTypeDefinitionCache();
 		return result;
 	}
 
