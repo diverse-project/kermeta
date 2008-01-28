@@ -1,9 +1,9 @@
-/* $Id: trace_structure.kmt,v 1.3 2008-01-25 17:33:23 cfaucher Exp $
+/* $Id: trace_structure.kmt,v 1.4 2008-01-28 12:21:05 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Cyril Faucher <cfaucher@irisa.fr>
- *			François Tanguy <ftanguy@irisa.fr>
+ *			Franï¿½ois Tanguy <ftanguy@irisa.fr>
  */
 
 /**
@@ -16,6 +16,12 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 
 using kermeta::language::structure
 using ecore
+
+aspect class ModelingUnit {
+	reference ecoreProxy : EAnnotation
+	
+	reference ecorePackages : EPackage[0..*]
+}
 
 aspect class Package {
 	reference ecoreProxy : EPackage

@@ -1,0 +1,11 @@
+/* $Id: KermetaHelper.kmt,v 1.1 2008-01-28 12:21:05 ftanguy Exp $
+ * Creation date: January 28, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package kermeta::helper;
+
+
+require "TypeHelper.kmt"

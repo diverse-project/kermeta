@@ -1,25 +1,40 @@
 package kermeta::language::structure;
-
+ 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "compile_behavior.kmt"
 require "containment_traversable.kmt"
 require "trace_structure.kmt"
+require "compile_helper.kmt"
 require "compile_builder.kmt"
-require "compile_structure_common.kmt"
-
+  
 using kermeta::language::structure
 using kermeta::language::behavior
 using kermeta::standard
 using kermeta::utils
 using ecore
+using compile::helper
 
+aspect class Object {
+	operation compile(context : Integer) : String is do
+		result := ""
+		//stdio.writeln("F7-1: " + self.name)
+	end
+} 
 
 aspect class ModelingUnit {
 	method compile(context : Integer) : String is do
 		result := ""
-		// Compile the owned elements: Package or Tag
-		self.eachOwnedElement{ o | o.compile(context) }
+		// Creating the associated ecore package
+		var ecoreAnnotation : EAnnotation init build()
+		// Setting the ecore proxy
+		self.ecoreProxy := ecoreAnnotation
+		// Compile the owned elements
+		self.eachOwnedElement{ p | p.compile(context) }
+		// Getting the ecore packages
+		self.packages.each{p|
+			self.ecorePackages.add( p.ecoreProxy )
+		}
 	end
 }
 
@@ -40,7 +55,7 @@ aspect class Package {
 		self.eachOwnedElement{ cd | cd.compile(context) }
 	end
 }
-
+ 
 aspect class ClassDefinition {
 	method compile(context : Integer) : String is do
 		result := ""
@@ -59,11 +74,11 @@ aspect class ClassDefinition {
 }
 
 aspect class PrimitiveType {
-	method compile(context : Integer) : String from TypeDefinition is do
+	method compile(context : Integer) : String is do
 		result := ""
 	end
 }
-
+  
 aspect class Property {
 	method compile(context : Integer) : String is do
 		result := ""

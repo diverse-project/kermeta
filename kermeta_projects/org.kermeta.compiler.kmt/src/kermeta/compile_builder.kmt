@@ -1,4 +1,4 @@
-/* $Id: compile_builder.kmt,v 1.2 2008-01-25 16:36:26 ftanguy Exp $
+/* $Id: compile_builder.kmt,v 1.3 2008-01-28 12:21:05 ftanguy Exp $
  * Creation date: January 25, 2008
  * License:
  * Copyright:
@@ -10,11 +10,38 @@ package kermeta::language::structure;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helpers/EcoreHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helpers/ecore/EcoreHelper.kmt"
 
 using kermeta::language::structure
 using ecore
 using ecore::helper
+
+aspect class ModelingUnit {
+	operation build() : EAnnotation is do
+		var ecoreAnnotation : EAnnotation init EAnnotation.new
+		ecoreAnnotation.source := "ModelingUnit"
+		// Creation of the require entry
+		var requireEntry : EStringToStringMapEntry init EStringToStringMapEntry.new
+		requireEntry.key := "require"
+		var v : String init String.new
+		self.requires.each{r|
+			v.append( r.uri + "|" )
+		}
+		requireEntry.~value := v
+		// Creation of the using entry
+		var usingEntry : EStringToStringMapEntry init EStringToStringMapEntry.new
+		usingEntry.key := "using"
+		v := String.new
+		self.usings.each{u|
+			v.append( u.qualifiedName + "|" )
+		}
+		usingEntry.~value := v
+		// Setting the details
+		ecoreAnnotation.details.add(requireEntry)
+		ecoreAnnotation.details.add(usingEntry)
+		result := ecoreAnnotation
+	end
+}
 
 aspect class Package {
 	operation build() : EPackage is do
