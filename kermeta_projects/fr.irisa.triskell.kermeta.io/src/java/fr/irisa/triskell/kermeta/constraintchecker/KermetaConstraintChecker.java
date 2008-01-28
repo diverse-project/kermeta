@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.17 2008-01-09 14:20:03 dvojtise Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.18 2008-01-28 09:57:55 dvojtise Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -131,17 +131,15 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	 */
 	public Object visitConstraint(Constraint node) {
 		current_constraint = node;
-		Boolean result = false;
 		// stereotype = Constraint implies container is a ClassDefinition
 		if ((node.getStereotype() == ConstraintType.INV_LITERAL && node.eContainer() instanceof ClassDefinition) ||
 				(node.getStereotype()== ConstraintType.PRE_LITERAL && isPre(node)) ||
 				(node.getStereotype()== ConstraintType.POST_LITERAL && isPost(node)))
 		{
-			result = true;
+			// nothing to do
 		}else{
 			addProblem(CONSTRAINT_ERROR, node);
 		}
-		//return result;
 		return super.visitConstraint(node);
 	}
 /**
