@@ -1,4 +1,4 @@
-/* $Id: FixPackageNSUri.java,v 1.9 2007-09-04 16:25:06 dvojtise Exp $
+/* $Id: FixPackageNSUri.java,v 1.10 2008-01-28 16:44:48 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : FixPackageNSUri.java
  * License    : EPL
@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
  */
 public class FixPackageNSUri {
 	
-	public static final String BaseNsURI = "http://www.kermeta.org/kermeta";
+	public static final String BaseNsURI = "http://www.kermeta.org/kermeta/1_0_0//kermeta";
 	/**
 	 * Loads the ecore model from a xmi 2.0 (*.ecore) file
 	 * @param xmifile Path to the file to load
@@ -87,7 +87,7 @@ public class FixPackageNSUri {
 	 */
 	public static void processPackage(EPackage p) {
 		String prefix = getPrefix(p);
-		String suffix = p.getName().equals("kermeta")?"":"//"+getPackageNsPath(p);
+		String suffix = p.getName().equals("kermeta")?"":"/"+getPackageNsPath(p);
 		System.out.println("Package " + p.getName() + "; nsPrefix = "+ prefix + "; nsURI = " + BaseNsURI+suffix);
 		p.setNsURI(BaseNsURI + suffix);
 		p.setNsPrefix(prefix);
