@@ -1,13 +1,16 @@
-/* $Id: RegistrationIcons.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
- * Project   : org.eclipse.emf.ecoretools.registration
- * File      : RegistrationIcons.java
- * License   : EPL
- * Copyright : INRIA
- * ----------------------------------------------------------------------------
- * Creation date : Feb 14, 2006
- * Authors       : Didier Vojtisek <dvojtise@irisa.fr>
- */
-package org.eclipse.emf.ecoretools.registration;
+/* $Id: RegistrationIcons.java,v 1.1 2008-01-28 15:44:46 dvojtise Exp $ */
+/* **********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    INRIA - initial API and implementation
+ **********************************************************************/
+package org.eclipse.emf.ecoretools.registration.internal;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,8 +26,6 @@ import org.eclipse.emf.ecoretools.registration.RegistrationPlugin;
  * It automatically loads some images in the initialize method and provides
  * a getImage method to access to image corresponding to the given path.
  * 
- * @author ftanguy
- *
  */
 public class RegistrationIcons {
 
@@ -71,7 +72,7 @@ public class RegistrationIcons {
 	}
 	
 	/**
-	 * 
+	 * Retreives an image for the given path
 	 * @param path
 	 * @return
 	 */

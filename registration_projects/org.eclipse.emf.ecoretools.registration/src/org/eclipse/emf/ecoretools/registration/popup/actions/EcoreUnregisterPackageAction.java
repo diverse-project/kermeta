@@ -1,13 +1,15 @@
-/*$Id: EcoreUnregisterPackageAction.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
-* Project : org.eclipse.emf.ecoretools.registration
-* File : 	EcoreUnregisterPackageAction.java
-* License : EPL
-* Copyright : INRIA
-* ----------------------------------------------------------------------------
-* Creation date : 29 mai 07
-* Authors : 
-*     dvojtise <dvojtise@irisa.fr>
-*/
+/*$Id: EcoreUnregisterPackageAction.java,v 1.3 2008-01-28 15:44:46 dvojtise Exp $ */
+/* **********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    INRIA - initial API and implementation
+ **********************************************************************/
 
 package org.eclipse.emf.ecoretools.registration.popup.actions;
 
@@ -20,19 +22,31 @@ import org.eclipse.emf.ecoretools.registration.view.RegisteredPackageView;
 import org.eclipse.jface.action.Action;
 /**
  * 
- * Action on the RegisteredPackageView that unregister a Ns uri 
+ * Action on the RegisteredPackageView that unregisters a Ns uri 
  * and the corresponding children
  *
  */
 public class EcoreUnregisterPackageAction extends Action {
 
+	/**
+	 * view associated to the action
+	 */
 	private RegisteredPackageView view;
 
+	/**
+	 * Constructor
+	 * @param view associated to the action
+	 * @param text text passed to the action
+	 */
 	public EcoreUnregisterPackageAction(RegisteredPackageView view, String text) {
 		super(text);
 		this.view = view;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.action.Action#run()
+	 */
+	@Override
 	public void run() {
 		for(int i = 0; i < view.getSelectedPackages().length; i++){
 			EPackage p = view.getSelectedPackages()[i];;

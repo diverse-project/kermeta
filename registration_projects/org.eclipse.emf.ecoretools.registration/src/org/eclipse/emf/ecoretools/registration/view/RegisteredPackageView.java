@@ -1,14 +1,15 @@
-/*$Id: RegisteredPackageView.java,v 1.2 2007-12-13 15:23:10 dvojtise Exp $
-* Project : org.eclipse.emf.ecoretools.registration
-* File : 	RegisteredPackageView.java
-* License : EPL
-* Copyright : INRIA
-* ----------------------------------------------------------------------------
-* Creation date : 01 jan. 07
-* Authors : 
-* 			Cyril Faucher <cfaucher@irisa.fr
-* 			Didier Vojtisek <dvojtise@irisa.fr>
-*/
+/*$Id: RegisteredPackageView.java,v 1.3 2008-01-28 15:44:46 dvojtise Exp $ */
+/* **********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    INRIA - initial API and implementation
+ **********************************************************************/
 
 package org.eclipse.emf.ecoretools.registration.view;
 
@@ -16,6 +17,8 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecoretools.registration.EMFRegistryHelper;
+import org.eclipse.emf.ecoretools.registration.internal.NsURIComparator;
+import org.eclipse.emf.ecoretools.registration.internal.RegisteredPackageComparator;
 import org.eclipse.emf.ecoretools.registration.popup.actions.CopyNSURIAction;
 import org.eclipse.emf.ecoretools.registration.popup.actions.EcoreUnregisterPackageAction;
 import org.eclipse.jface.action.IMenuListener;
@@ -45,17 +48,21 @@ import org.eclipse.ui.part.ViewPart;
  */
 public class RegisteredPackageView extends ViewPart {
 
+	/**
+	 * Internal TreeViewer
+	 */
 	private TreeViewer viewer;
 	
+	// internal actions
 	private EcoreUnregisterPackageAction unregisterPackageAction;
+	private CopyNSURIAction copyNSURIAction;
 	
 	Clipboard clipboard;
-	private CopyNSURIAction copyNSURIAction;
 	
 	public static final String ID = "org.eclipse.emf.ecoretools.registration.viewregisteredpackages";
 
 	/**
-	 * 
+	 * constructor
 	 */
 	public RegisteredPackageView() {
 		super();
@@ -93,6 +100,11 @@ public class RegisteredPackageView extends ViewPart {
 	         
 	}
 
+	/**
+	 * used by createPartControl
+	 * Creates the columns in the view
+	 * @param viewer
+	 */
 	private void createColumns(TreeViewer viewer) {
 		TreeColumn column1 = new TreeColumn(viewer.getTree(), SWT.LEFT);
 		column1.setText("Registered URI");
@@ -180,11 +192,14 @@ public class RegisteredPackageView extends ViewPart {
 		return items;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.part.WorkbenchPart#setFocus()
+	 */
 	@Override
-	public void setFocus() {		
-		refresh();
+	public void setFocus() {
+		// nothing to do
+		
 	}
-
 
 	/**
 	 * rebuild the view, also refresh its content from the ContentProvider
@@ -194,6 +209,11 @@ public class RegisteredPackageView extends ViewPart {
 		viewer.refresh();
 	}
 	
+	/**
+	 * checks if the selection is dynamically registered or not
+	 * @param selection
+	 * @return
+	 */
 	private boolean isSelectionDynamicallyRegistered(IStructuredSelection selection){
 		boolean result = true;
 		

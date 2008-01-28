@@ -1,13 +1,15 @@
-/* $Id: CopyNSURIAction.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
- * Project : org.eclipse.emf.ecoretools.registration
- * File : CopyNSURIAction.java
- * License : EPL
- * Copyright : INRIA
- * ----------------------------------------------------------------------------
- * Creation date : 24 Set. 2007
- * Authors : 
- * 		Didier Vojtisek	<dvojtise@irisa.fr>
- */
+/* $Id: CopyNSURIAction.java,v 1.3 2008-01-28 15:44:46 dvojtise Exp $ */
+/* **********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    INRIA - initial API and implementation
+ **********************************************************************/
 package org.eclipse.emf.ecoretools.registration.popup.actions;
 
 
@@ -25,16 +27,31 @@ import org.eclipse.swt.dnd.Transfer;
 public class CopyNSURIAction extends Action {
 		
 
+	/**
+	 * view associated to the action
+	 */
 	private RegisteredPackageView view;
 	
+	/**
+	 * Clipboard for the copy/paste action
+	 */
 	private Clipboard clipboard;
 
+	/**
+	 * Constructor
+	 * @param view associated to the action
+	 * @param clip clipboard used for copy/paste action
+	 * @param text text passed to the action
+	 */
 	public CopyNSURIAction(RegisteredPackageView view, Clipboard clip, String text) {
 		super(text);
 		clipboard = clip;
 		this.view = view;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
+	 */
 	public void run() {
 		String stringToClip = "";
 		

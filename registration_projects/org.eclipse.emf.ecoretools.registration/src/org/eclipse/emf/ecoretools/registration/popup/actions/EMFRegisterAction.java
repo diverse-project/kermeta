@@ -1,13 +1,15 @@
-/*$Id: EMFRegisterAction.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
-* Project : org.eclipse.emf.ecoretools.registration
-* File : 	EMFRegisterAction.java
-* License : EPL
-* Copyright : INRIA
-* ----------------------------------------------------------------------------
-* Creation date : 29 mai 07
-* Authors : 
-*     dvojtise <dvojtise@irisa.fr>
-*/
+/*$Id: EMFRegisterAction.java,v 1.3 2008-01-28 15:44:46 dvojtise Exp $ */
+/* **********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    INRIA - initial API and implementation
+ **********************************************************************/
 package org.eclipse.emf.ecoretools.registration.popup.actions;
 
 import java.util.ArrayList;
@@ -15,7 +17,6 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecoretools.registration.RegistrationPlugin;
 import org.eclipse.emf.ecoretools.registration.view.RegisteredPackageView;
 import org.eclipse.jface.action.IAction;
@@ -34,11 +35,10 @@ import org.eclipse.ui.PlatformUI;
 public class EMFRegisterAction implements IObjectActionDelegate {
 	
 	protected StructuredSelection currentSelection;
-    //protected IFile ecoreFile;
-    protected ArrayList<IFile> ecoreFiles; // = new ArrayList<IFile>();
+    protected ArrayList<IFile> ecoreFiles; 
 
 	/**
-	 * 
+	 * Constructor
 	 */
 	public EMFRegisterAction() {
 		ecoreFiles = new ArrayList<IFile>();
@@ -74,10 +74,9 @@ public class EMFRegisterAction implements IObjectActionDelegate {
 			}
 		}
 	}
-
 	
 	/**
-	 * 
+	 * refresh the view with the current content of the registry
 	 */
 	protected void displayRegisteredPackages() {
 		try {
@@ -91,24 +90,5 @@ public class EMFRegisterAction implements IObjectActionDelegate {
                     "not able to open Registered Package View : \""+RegisteredPackageView.ID+"\"", 
                     e));
 		}
-	}
-	
-	
-	/**
-	 * @param p
-	 * @return
-	 */
-	protected String getEPackageQualifiedName(EPackage p) {
-		String result = null;
-		if(p == null)
-			result = "";
-		else
-			if(p.getESuperPackage() != null)
-				result = getEPackageQualifiedName(p.getESuperPackage()) + "::" + p.getName();
-			else
-				result = p.getName();
-		return result;
-	}
-	
-
+	}	
 }

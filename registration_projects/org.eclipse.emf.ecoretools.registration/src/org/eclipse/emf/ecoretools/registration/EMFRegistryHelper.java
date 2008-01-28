@@ -1,12 +1,16 @@
-/* $Id: EMFRegistryHelper.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
- * Project   : org.eclipse.emf.ecoretools.registration 
- * File      : EMFRegistryHelper.java
- * License   : EPL
- * Copyright : INRIA
- * ----------------------------------------------------------------------------
- * Creation date : 28 feb. 07
- * Authors       : Didier Vojtisek <dvojtise.irisa.fr>
- */
+/* $Id: EMFRegistryHelper.java,v 1.3 2008-01-28 15:44:46 dvojtise Exp $ */
+/* **********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    INRIA - initial API and implementation
+ **********************************************************************/
+
 package org.eclipse.emf.ecoretools.registration;
 
 import java.util.HashSet;
@@ -102,7 +106,7 @@ public class EMFRegistryHelper {
 				EPackage subPackage = subPackageIt.next();
 				if(EMFRegistryHelper.isRegistered(subPackage.getNsURI())){
 					result.add(subPackage.getNsURI());
-					// also add the granchildreen ...
+					// also add the grandchildren ...
 					result.addAll(getAllRegisteredChildren(subPackage.getNsURI()));
 				}
 			}
@@ -111,8 +115,8 @@ public class EMFRegistryHelper {
 	}
 	
 	/**
-	 * add in the registry only if it isn't already in the main registry
-	 * @param registry : envetually used to add in a local ResourceSet registry or in the main registry via Registry.INSTANCE
+	 * add the EPackage in the registry only if it isn't already in the main registry
+	 * @param registry : eventually used to add in a local ResourceSet registry or in the main registry via Registry.INSTANCE
 	 * @param pack
 	 */
 	public static void safeRegisterPackages(Registry registry, EPackage pack) {
@@ -131,27 +135,11 @@ public class EMFRegistryHelper {
 		}
 	}
 	
-    /** print the content of the EMF Registry */
-	public static String logEMFRegistryContent() {
-		String msg = "";
-		try {
-				
-			Boolean isFirst = true;
-	    	Iterator<String> it = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().iterator();
-	    	while(it.hasNext()) {
-	    		if(!isFirst) msg += " | ";
-	    		else isFirst = false;
-	    		// weird sometime it crashes here with a null pointer !
-	    		msg += it.next().toString();
-	    	}
-		}
-	    catch(Exception e){
-	    	
-	    	e.printStackTrace();
-	    }
-    	return msg;
-	}
-	
+	/**
+	 * Retreives the resource associated to the given URI in the registry
+	 * @param uri
+	 * @return
+	 */
 	static public Resource getResource(URI uri) {
 		EPackage p = EPackage.Registry.INSTANCE.getEPackage( uri.toString() );
 		if ( p != null )

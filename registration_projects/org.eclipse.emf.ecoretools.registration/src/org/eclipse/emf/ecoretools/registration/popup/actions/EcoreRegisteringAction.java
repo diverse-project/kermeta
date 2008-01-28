@@ -1,13 +1,15 @@
-/* $Id: EcoreRegisteringAction.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
- * Project : org.eclipse.emf.ecoretools.registration
- * File : EcoreRegisteringAction.java
- * License : EPL
- * Copyright : INRIA
- * ----------------------------------------------------------------------------
- * Creation date : 24 juil. 2006
- * Authors : 
- * 		David Touzet <dtouzet@irisa.fr>
- */
+/* $Id: EcoreRegisteringAction.java,v 1.3 2008-01-28 15:44:46 dvojtise Exp $ */
+/* **********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    INRIA - initial API and implementation
+ **********************************************************************/
 package org.eclipse.emf.ecoretools.registration.popup.actions;
 
 import org.eclipse.core.resources.IFile;
@@ -25,12 +27,12 @@ import org.eclipse.swt.widgets.Shell;
 
 /**
  * Action that register an ecore file
- *
+ * It will register all the contained EPackages
  */
 public class EcoreRegisteringAction extends EMFRegisterAction {
 	
 	/**
-	 * 
+	 * Constructor
 	 */
 	public EcoreRegisteringAction() {
 		super();
@@ -62,11 +64,10 @@ public class EcoreRegisteringAction extends EMFRegisterAction {
 	}
 	
 	/**
-	 * 
+	 * Register the given EPackage and all its contained packages
 	 * @param pack
 	 */
 	private void registerPackages(EPackage pack) {
-		// Fixing bug #4033
 		if( pack.getNsURI() != null && !pack.getNsURI().equals("") ) {
 			Registry.INSTANCE.put(pack.getNsURI(), pack);
 

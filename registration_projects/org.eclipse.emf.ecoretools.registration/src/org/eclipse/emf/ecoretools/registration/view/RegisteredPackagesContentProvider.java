@@ -1,13 +1,15 @@
-/*$Id: RegisteredPackagesContentProvider.java,v 1.2 2007-12-13 15:23:10 dvojtise Exp $
-* Project : org.eclipse.emf.ecoretools.registration
-* File : 	RegisteredPackagesContentProvider.java
-* License : EPL
-* Copyright : INRIA
-* ----------------------------------------------------------------------------
-* Creation date : 7 nov. 07
-* Authors : 
-* 			Didier Vojtisek <dvojtise@irisa.fr>
-*/
+/*$Id: RegisteredPackagesContentProvider.java,v 1.3 2008-01-28 15:44:46 dvojtise Exp $*/
+/* **********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    INRIA - initial API and implementation
+ **********************************************************************/
 
 package org.eclipse.emf.ecoretools.registration.view;
 
@@ -21,13 +23,26 @@ import org.eclipse.emf.ecoretools.registration.EMFRegistryHelper;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
+/**
+ * ContentProvider for the tree of registered packages
+ */
 public class RegisteredPackagesContentProvider implements ITreeContentProvider {
 
-	public void inputChanged( Viewer v, Object oldInput, Object newInput) {
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer, java.lang.Object, java.lang.Object)
+	 */
+	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+		// Nothing to do
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
+	 */
 	public void dispose() {
+		// Nothing to do
+		
 	}
 
 	/**

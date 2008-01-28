@@ -1,21 +1,28 @@
-/*$Id: PackageNsURIColumnSelectionListener.java,v 1.2 2007-12-13 15:23:10 dvojtise Exp $
-* Project : org.eclipse.emf.ecoretools.registration
-* File : 	PackageNameColumnSelectionListener.java
-* License : EPL
-* Copyright : INRIA
-* ----------------------------------------------------------------------------
-* Creation date : 8 nov. 07
-* Authors : 
-*		Didier Vojtisek <dvojtise@irisa.fr>
-*/
+/*$Id: PackageNsURIColumnSelectionListener.java,v 1.3 2008-01-28 15:44:46 dvojtise Exp $ */
+/* **********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    INRIA - initial API and implementation
+ **********************************************************************/
 
 package org.eclipse.emf.ecoretools.registration.view;
 
+import org.eclipse.emf.ecoretools.registration.internal.NsURIComparator;
+import org.eclipse.emf.ecoretools.registration.internal.RegisteredPackageComparator;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
+/**
+ * Listener for the selection in the Package NsURI column
+ */
 public class PackageNsURIColumnSelectionListener implements SelectionListener {
 
 	private TreeViewer viewer = null;

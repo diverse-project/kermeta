@@ -1,27 +1,35 @@
-/*$Id: RegisteredPackagesLabelProvider.java,v 1.2 2007-12-13 15:23:10 dvojtise Exp $
-* Project : org.eclipse.emf.ecoretools.registration
-* File : 	RegisteredPackagesLabelProvider.java
-* License : EPL
-* Copyright : INRIA
-* ----------------------------------------------------------------------------
-* Creation date : 7 nov. 07
-* Authors : 
-* 			Didier Vojtisek <dvojtise@irisa.fr>
-*/
+/*$Id: RegisteredPackagesLabelProvider.java,v 1.3 2008-01-28 15:44:46 dvojtise Exp $ */
+/* **********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    INRIA - initial API and implementation
+ **********************************************************************/
 
 package org.eclipse.emf.ecoretools.registration.view;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecoretools.registration.EMFRegistryHelper;
-import org.eclipse.emf.ecoretools.registration.RegistrationConstants;
-import org.eclipse.emf.ecoretools.registration.RegistrationIcons;
+import org.eclipse.emf.ecoretools.registration.internal.RegistrationConstants;
+import org.eclipse.emf.ecoretools.registration.internal.RegistrationIcons;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
+/**
+ * LabelProvider for the registered packages
+ */
 public class RegisteredPackagesLabelProvider extends LabelProvider implements ITableLabelProvider {
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object, int)
+	 */
 	public String getColumnText(Object obj, int index) {
 		EPackage p = (EPackage) obj;
 		switch (index) {
@@ -45,6 +53,9 @@ public class RegisteredPackagesLabelProvider extends LabelProvider implements IT
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object, int)
+	 */
 	public Image getColumnImage(Object obj, int index) {
 		if ((index == 2)){				
 			return getImage( obj );
@@ -52,20 +63,17 @@ public class RegisteredPackagesLabelProvider extends LabelProvider implements IT
 		}
 		return null;
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
+	 */
+	@Override
 	public Image getImage(Object obj) {
 		if(obj.getClass() == EPackageImpl.class){ // if this is exactly an EPackage then this comes from a files, otherwise it comes from generated java
 			return RegistrationIcons.get(RegistrationConstants.IMG_ECORE_FILE);
-			/*return PlatformUI.getWorkbench().getSharedImages()
-			.getImage(org.eclipse.ui.ISharedImages.IMG_OBJ_FILE);*/
 		}
 		else return RegistrationIcons.get(RegistrationConstants.IMG_GENERATED_PACKAGE); 
-			//return PlatformUI.getWorkbench().getSharedImages()
-		//.getImage(org.eclipse.ui.ISharedImages.IMG_OBJ_ELEMENT);
-		// org.eclipse.ui.ISharedImages
-		//org.eclipse.jdt.ui.ISharedImages.;
 	}
-
 }
 
 
