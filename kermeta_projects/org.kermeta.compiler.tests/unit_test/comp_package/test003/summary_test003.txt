@@ -1,0 +1,1 @@
+<para>This sample shows the generation of a kmt file for one root package with several sub and subub packages.</para>

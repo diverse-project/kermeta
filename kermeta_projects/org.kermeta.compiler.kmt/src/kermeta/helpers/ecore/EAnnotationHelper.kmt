@@ -1,11 +1,11 @@
-/* $Id: EAnnotationHelper.kmt,v 1.2 2008-01-28 12:46:48 cfaucher Exp $
+/* $Id: EAnnotationHelper.kmt,v 1.3 2008-01-28 17:13:18 ftanguy Exp $
  * Creation date: January 25, 2008
  * License:
  * Copyright:
  * Authors:
  */
 
-package ecore::helper;
+package compiler::helper::ecore;
 
 
 require kermeta

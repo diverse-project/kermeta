@@ -1,0 +1,14 @@
+
+package comptest2;
+
+require kermeta
+
+using kermeta::standard
+
+class A {
+
+	operation f() is do
+		stdio.writeln("coucou")
+	end
+
+}

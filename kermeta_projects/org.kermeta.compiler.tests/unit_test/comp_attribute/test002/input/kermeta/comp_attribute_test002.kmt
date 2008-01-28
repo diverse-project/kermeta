@@ -1,0 +1,12 @@
+
+package comptest2;
+
+require kermeta
+
+using kermeta::standard
+
+class A {
+
+	attribute s : String[0..*]
+	
+}

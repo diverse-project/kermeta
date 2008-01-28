@@ -1,0 +1,6 @@
+package comptest2;
+
+require kermeta
+
+package SubPackage {
+}

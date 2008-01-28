@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModellingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="comptest2|kermeta::standard|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comptest2" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test002/expected_output/ecore/comp_primitiveType_test002.ecore#/" nsPrefix="comptest2">
+    <eClassifiers xsi:type="ecore:EDataType" name="kermeta::language::structure::ClassDefinition" instanceClassName="java.lang.Object">
+      <eAnnotations source="kermeta">
+        <details key="alias" value="kermeta::language::structure::ClassDefinition"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EPackage name="comptest2">
+    <eSubpackages name="SubPackage1">
+      <eSubpackages name="SubSubPackage1"/>
+    </eSubpackages>
+    <eSubpackages name="SubPackage2">
+      <eSubpackages name="SubSubPackage2">
+        <eSubpackages name="SubSubSubPackage2"/>
+      </eSubpackages>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EPackage name="comptest3">
+    <eSubpackages name="SubPackage1">
+      <eSubpackages name="SubSubPackage1"/>
+    </eSubpackages>
+    <eSubpackages name="SubPackage2">
+      <eSubpackages name="SubSubPackage2">
+        <eSubpackages name="SubSubSubPackage2"/>
+      </eSubpackages>
+    </eSubpackages>
+  </ecore:EPackage>
+</xmi:XMI>

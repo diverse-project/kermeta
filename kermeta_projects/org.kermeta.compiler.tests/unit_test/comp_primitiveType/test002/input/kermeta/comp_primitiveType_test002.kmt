@@ -1,0 +1,8 @@
+
+package comptest2;
+
+require kermeta
+
+using kermeta::standard
+
+alias MyNewPrimitiveType : kermeta::language::structure::ClassDefinition;

@@ -1,0 +1,1 @@
+<para>Same test as test003 (one root package with several sub and subsub packages) but with uris. The resulting ecore package must have the nsPrefix and nsUri attribute set with the uri of the kermeta package.</para>

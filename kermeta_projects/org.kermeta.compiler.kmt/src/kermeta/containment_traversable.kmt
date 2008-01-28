@@ -1,4 +1,4 @@
-/* $Id: containment_traversable.kmt,v 1.5 2008-01-28 12:21:05 ftanguy Exp $
+/* $Id: containment_traversable.kmt,v 1.6 2008-01-28 17:13:17 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -14,10 +14,8 @@
 package kermeta::language::structure;
  
 require kermeta
-require "compile_behavior.kmt"
- 
+  
 using kermeta::language::structure
-//using kermeta::language::behavior
 using kermeta::standard
 
 aspect class ModelingUnit {
@@ -40,6 +38,14 @@ aspect class Package {
 			func(p.asType(Package))
 		} 
 	end
+}
+
+aspect class Enumeration {
+	operation eachOwnedElement(func : <Object -> Object>) : Void is do
+        self.ownedLiteral.each{ l |
+        	func(l.asType(EnumerationLiteral))
+		}
+	end	
 }
 
 aspect class ClassDefinition {

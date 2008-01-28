@@ -1,0 +1,1 @@
+<para>Generation of a primitive type pointing on a kermeta type.</para>

@@ -1,4 +1,4 @@
-/* $Id: trace_structure.kmt,v 1.4 2008-01-28 12:21:05 ftanguy Exp $
+/* $Id: trace_structure.kmt,v 1.5 2008-01-28 17:13:17 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -25,6 +25,18 @@ aspect class ModelingUnit {
 
 aspect class Package {
 	reference ecoreProxy : EPackage
+}
+
+aspect class PrimitiveType {
+	reference ecoreProxy : EDataType
+}
+
+aspect class Enumeration {
+	reference ecoreProxy : EEnum
+}
+
+aspect class EnumerationLiteral {
+	reference ecoreProxy : EEnumLiteral
 }
 
 aspect class ClassDefinition {

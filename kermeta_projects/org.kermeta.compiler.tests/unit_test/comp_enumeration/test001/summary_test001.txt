@@ -1,0 +1,1 @@
+<para>Generation of one enumeration with several literals.</para>

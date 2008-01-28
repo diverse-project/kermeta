@@ -1,10 +1,10 @@
-/* $Id: EcoreHelper.kmt,v 1.1 2008-01-28 12:21:06 ftanguy Exp $
+/* $Id: EcoreHelper.kmt,v 1.2 2008-01-28 17:13:17 ftanguy Exp $
  * Creation date: January 25, 2008
  * License:
  * Copyright:
  * Authors:
  */
 
-package ecore::helper;
+package compiler::helper::ecore;
 
 require "EAnnotationHelper.kmt"

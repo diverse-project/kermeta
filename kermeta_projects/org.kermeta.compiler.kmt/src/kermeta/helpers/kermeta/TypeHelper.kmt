@@ -1,11 +1,11 @@
-/* $Id: TypeHelper.kmt,v 1.1 2008-01-28 12:21:05 ftanguy Exp $
+/* $Id: TypeHelper.kmt,v 1.2 2008-01-28 17:13:17 ftanguy Exp $
  * Creation date: January 28, 2008
  * License:
  * Copyright:
  * Authors:
  */
 
-package kermeta::helper;
+package compiler::helper::kermeta;
 
 
 require kermeta
@@ -16,7 +16,10 @@ using kermeta::standard
 class TypeHelper
 {
 	operation primitiveTypes() : Collection<String> is do
-		result := void
+		result := Sequence<String>.new
+		result.add("kermeta::standard::String")
+		result.add("kermeta::standard::Integer")
+		result.add("kermeta::standard::Boolean")	
 	end
 
 	operation isPrimitiveType(type : Type) : Boolean is do 
@@ -24,7 +27,7 @@ class TypeHelper
 		if ( not result and type.isInstanceOf(Class) ) then
 			var c : Class init type.asType(Class)
 			var qualifiedName : String init c.typeDefinition.qualifiedName()
-			
+			result := primitiveTypes.contains(qualifiedName)
 		end
 	end
 }

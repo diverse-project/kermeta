@@ -1,9 +1,9 @@
-/* $Id: StructureCompiler.kmt,v 1.4 2008-01-28 12:21:05 ftanguy Exp $
+/* $Id: StructureCompiler.kmt,v 1.5 2008-01-28 17:13:17 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Cyril Faucher <cfaucher@irisa.fr>
- *			Fran�ois Tanguy <ftanguy@irisa.fr>
+ *			François Tanguy <ftanguy@irisa.fr>
  */
 
 @mainClass "kermeta::compiler::Main" 
@@ -14,7 +14,7 @@ package kermeta::compiler;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "trace_structure.kmt"
-require "compile_structure.kmt"
+require "compile_structure.kmt" 
 
 using ecore
 using kermeta::persistence

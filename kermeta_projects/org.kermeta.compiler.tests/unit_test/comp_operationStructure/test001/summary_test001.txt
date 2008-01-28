@@ -1,0 +1,1 @@
+<para>This sample shows the generation of an operation without returned type.</para>

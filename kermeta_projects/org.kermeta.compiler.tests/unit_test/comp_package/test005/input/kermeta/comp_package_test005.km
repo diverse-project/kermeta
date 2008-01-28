@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/">
+  <packages tag="#//@packages.0/@ownedTag.0" name="comptest2">
+    <ownedTag name="uri" value="tete" object="#//@packages.0"/>
+    <nestedPackage tag="#//@packages.0/SubPackage1/@ownedTag.0" name="SubPackage1">
+      <ownedTag name="uri" value="toto" object="#//@packages.0/SubPackage1"/>
+      <nestedPackage tag="#//@packages.0/SubPackage1/SubSubPackage1/@ownedTag.0" name="SubSubPackage1">
+        <ownedTag name="uri" value="titi" object="#//@packages.0/SubPackage1/SubSubPackage1"/>
+      </nestedPackage>
+    </nestedPackage>
+    <nestedPackage tag="#//@packages.0/SubPackage2/@ownedTag.0" name="SubPackage2">
+      <ownedTag name="uri" value="tata" object="#//@packages.0/SubPackage2"/>
+      <nestedPackage tag="#//@packages.0/SubPackage2/SubSubPackage2/@ownedTag.0" name="SubSubPackage2">
+        <ownedTag name="uri" value="tutu" object="#//@packages.0/SubPackage2/SubSubPackage2"/>
+        <nestedPackage tag="#//@packages.0/SubPackage2/SubSubPackage2/SubSubSubPackage2/@ownedTag.0"
+            name="SubSubSubPackage2">
+          <ownedTag name="uri" value="tyty" object="#//@packages.0/SubPackage2/SubSubPackage2/SubSubSubPackage2"/>
+        </nestedPackage>
+      </nestedPackage>
+    </nestedPackage>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="comptest2"/>
+  <usings qualifiedName="comptest2::SubPackage1"/>
+  <usings qualifiedName="comptest2::SubPackage1::SubSubPackage1"/>
+  <usings qualifiedName="comptest2::SubPackage2"/>
+  <usings qualifiedName="comptest2::SubPackage2::SubSubPackage2"/>
+  <usings qualifiedName="comptest2::SubPackage2::SubSubPackage2::SubSubSubPackage2"/>
+</kermeta_language_structure:ModelingUnit>

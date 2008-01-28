@@ -1,0 +1,19 @@
+package comptest2;
+
+require kermeta
+
+package SubPackage1 {
+
+	package SubSubPackage1 {
+	}
+
+}
+
+package SubPackage2 {
+
+	package SubSubPackage2 {
+		package SubSubSubPackage2 {
+		}
+	}
+
+}

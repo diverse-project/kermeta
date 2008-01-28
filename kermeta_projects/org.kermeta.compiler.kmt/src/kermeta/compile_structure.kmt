@@ -2,26 +2,20 @@ package kermeta::language::structure;
  
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "compile_behavior.kmt"
 require "containment_traversable.kmt"
 require "trace_structure.kmt"
-require "compile_helper.kmt"
 require "compile_builder.kmt"
+require "compile_structure_common.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helpers/CompilerHelper.kmt"
   
 using kermeta::language::structure
 using kermeta::language::behavior
 using kermeta::standard
 using kermeta::utils
 using ecore
-using compile::helper
+using compiler::helper::ecore
 
-aspect class Object {
-	operation compile(context : Integer) : String is do
-		result := ""
-		//stdio.writeln("F7-1: " + self.name)
-	end
-} 
-
+ 
 aspect class ModelingUnit {
 	method compile(context : Integer) : String is do
 		result := ""
@@ -44,8 +38,8 @@ aspect class Package {
 		// Creating the associated ecore package
 		var ecorePackage : EPackage init build()
 		// Setting the container
-		var p : Package
-		p ?= self.container()
+		var p : Package init self.nestingPackage
+		//p ?= self.container()
 		if ( p != void ) then
 			p.ecoreProxy.eSubpackages.add(ecorePackage)
 		end
@@ -55,15 +49,56 @@ aspect class Package {
 		self.eachOwnedElement{ cd | cd.compile(context) }
 	end
 }
- 
+  
+aspect class PrimitiveType {
+	method compile(context : Integer) : String from Object is do
+		result := ""
+		// Creating the associated ecore class
+		var ecoreDataType : EDataType init build()
+		// Setting the container
+		var p : Package init self.container().asType(Package)
+		p.ecoreProxy.eClassifiers.add(ecoreDataType)
+		// Setting the ecore proxy
+		self.ecoreProxy := ecoreDataType
+	end 
+}
+
+aspect class Enumeration { 
+	method compile(context : Integer) : String from Object is do
+		result := ""
+		// Creating the associated ecore class
+		var ecoreEnumeration : EEnum init build()
+		// Setting the container
+		var p : Package init self.container().asType(Package)
+		p.ecoreProxy.eClassifiers.add(ecoreEnumeration)
+		// Setting the ecore proxy
+		self.ecoreProxy := ecoreEnumeration
+		// Compile the owned elements
+		self.eachOwnedElement{ l | l.compile(context) }
+		
+	end
+} 
+  
+aspect class EnumerationLiteral {
+	method compile(context : Integer) : String is do
+		result := ""
+		// Creating the associated ecore class
+		var ecoreEnumLiteral : EEnumLiteral init build()
+		// Setting the container
+		var e : Enumeration init self.~enumeration.asType(Enumeration)
+		e.ecoreProxy.eLiterals.add(ecoreEnumLiteral)
+		// Setting the ecore proxy
+		self.ecoreProxy := ecoreEnumLiteral
+	end
+}  
+  
 aspect class ClassDefinition {
 	method compile(context : Integer) : String is do
 		result := ""
 		// Creating the associated ecore class
 		var ecoreClass : EClass init build()		
 		// Setting the container
-		var p : Package
-		p ?= self.container()
+		var p : Package init self.container().asType(Package)
 		p.ecoreProxy.eClassifiers.add(ecoreClass)
 		// Setting the ecore proxy
 		self.ecoreProxy := ecoreClass
@@ -71,13 +106,7 @@ aspect class ClassDefinition {
 		self.eachOwnedElement{ o | o.compile(context) }
 	end
 	
-}
-
-aspect class PrimitiveType {
-	method compile(context : Integer) : String is do
-		result := ""
-	end
-}
+} 
   
 aspect class Property {
 	method compile(context : Integer) : String is do
@@ -124,7 +153,7 @@ aspect class Operation {
 		end
 		
 		// Finally add the EAnnotation containing the Java code in the Ecore model
-        CompileHelper.new.addAnnotationGenModelImpl(self.ecoreProxy, javaCode.toString)
+        EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreProxy, javaCode.toString)
 	end
 }
 

@@ -1,0 +1,49 @@
+@uri "tete"
+package comptest2;
+
+require kermeta
+
+class A {}
+
+@uri "toto"
+package SubPackage1 {
+
+	class B {
+	}
+
+	@uri "titi"
+	package SubSubPackage1 {
+		
+		class C{}
+	
+	}
+	
+	class D{}
+ 
+}
+
+class E{}
+ 
+@uri "tata"
+package SubPackage2 {
+
+	class F{}
+
+	@uri "tutu"
+	package SubSubPackage2 {
+		
+		class G{}
+		
+		@uri "tyty"
+		package SubSubSubPackage2 {
+			class H{}
+		}
+		
+		class I{}
+	}
+	
+	class J{}
+
+}
+
+class K{}

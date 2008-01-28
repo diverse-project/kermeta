@@ -1,4 +1,4 @@
-/* $Id: compile_behavior.kmt,v 1.3 2008-01-25 17:33:23 cfaucher Exp $
+/* $Id: compile_behavior.kmt,v 1.4 2008-01-28 17:13:17 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -14,7 +14,7 @@ using kermeta::language::structure
 using kermeta::language::behavior
 using kermeta::standard
 
-aspect class Block {
+aspect class Block { 
 
 	method compile(context : Integer) : String is do
 		result := "{"

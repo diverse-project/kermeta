@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="comptest2"
+    nsURI="tete" nsPrefix="tete">
+  <eSubpackages name="SubPackage1" nsURI="toto" nsPrefix="toto">
+    <eSubpackages name="SubSubPackage1" nsURI="titi" nsPrefix="titi"/>
+  </eSubpackages>
+  <eSubpackages name="SubPackage2" nsURI="tata" nsPrefix="tata">
+    <eSubpackages name="SubSubPackage2" nsURI="tutu" nsPrefix="tutu">
+      <eSubpackages name="SubSubSubPackage2" nsURI="tyty" nsPrefix="tyty"/>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>

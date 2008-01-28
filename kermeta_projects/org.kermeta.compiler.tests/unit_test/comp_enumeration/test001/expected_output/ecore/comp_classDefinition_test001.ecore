@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="comptest2"
+    nsURI="tete" nsPrefix="tete">
+  <eClassifiers xsi:type="ecore:EClass" name="A"/>
+  <eClassifiers xsi:type="ecore:EClass" name="E"/>
+  <eClassifiers xsi:type="ecore:EClass" name="K"/>
+  <eSubpackages name="SubPackage1" nsURI="toto" nsPrefix="toto">
+    <eClassifiers xsi:type="ecore:EClass" name="B"/>
+    <eClassifiers xsi:type="ecore:EClass" name="D"/>
+    <eSubpackages name="SubSubPackage1" nsURI="titi" nsPrefix="titi">
+      <eClassifiers xsi:type="ecore:EClass" name="C"/>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="SubPackage2" nsURI="tata" nsPrefix="tata">
+    <eClassifiers xsi:type="ecore:EClass" name="F"/>
+    <eClassifiers xsi:type="ecore:EClass" name="J"/>
+    <eSubpackages name="SubSubPackage2" nsURI="tutu" nsPrefix="tutu">
+      <eClassifiers xsi:type="ecore:EClass" name="G"/>
+      <eClassifiers xsi:type="ecore:EClass" name="I"/>
+      <eSubpackages name="SubSubSubPackage2" nsURI="tyty" nsPrefix="tyty">
+        <eClassifiers xsi:type="ecore:EClass" name="H"/>
+      </eSubpackages>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>

@@ -1,0 +1,1 @@
+<para>This sample shows the generation of a kmt file with one root package and several sub and subsub packages with class definitions inside.</para>

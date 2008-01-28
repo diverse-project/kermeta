@@ -1,0 +1,26 @@
+@uri "tete"
+package comptest2;
+
+require kermeta
+
+@uri "toto"
+package SubPackage1 {
+
+	@uri "titi"
+	package SubSubPackage1 {
+	}
+
+}
+ 
+@uri "tata"
+package SubPackage2 {
+
+	@uri "tutu"
+	package SubSubPackage2 {
+		
+		@uri "tyty"
+		package SubSubSubPackage2 {
+		}
+	}
+
+}

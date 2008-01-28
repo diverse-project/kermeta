@@ -1,0 +1,10 @@
+/* $Id: CompilerHelper.kmt,v 1.1 2008-01-28 17:13:17 ftanguy Exp $
+ * Creation date: January 28, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+package compiler::helper;
+
+require "kermeta/KermetaHelper.kmt"
+require "ecore/EcoreHelper.kmt"

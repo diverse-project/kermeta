@@ -1,0 +1,4 @@
+package comptest2;
+
+require kermeta
+

@@ -1,4 +1,4 @@
-/* $Id: compile_builder.kmt,v 1.3 2008-01-28 12:21:05 ftanguy Exp $
+/* $Id: compile_builder.kmt,v 1.4 2008-01-28 17:13:17 ftanguy Exp $
  * Creation date: January 25, 2008
  * License:
  * Copyright:
@@ -10,11 +10,12 @@ package kermeta::language::structure;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helpers/ecore/EcoreHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helpers/CompilerHelper.kmt"
 
 using kermeta::language::structure
 using ecore
-using ecore::helper
+using compiler::helper::ecore
+using compiler::helper::kermeta
 
 aspect class ModelingUnit {
 	operation build() : EAnnotation is do
@@ -53,6 +54,47 @@ aspect class Package {
 	end
 }
 
+aspect class PrimitiveType {
+	operation build() : EDataType is do
+		var ecoreDataType : EDataType init EDataType.new
+		ecoreDataType.name := self.name
+		//ecoreDataType.serializable
+		//ecoreDataType.instanceClass
+		//ecoreDataType.instanceTypeName
+		//ecoreDataType.defaultValue
+		ecoreDataType.instanceClassName := "java.lang.Object"
+		if ( self.instanceType.isInstanceOf(Class) ) then
+			var qualifiedName : String init self.instanceType.asType(Class).typeDefinition.qualifiedName
+			ecoreDataType.eAnnotations.add(EAnnotationHelper.new.create("kermeta", "alias", qualifiedName))
+		end
+		result := ecoreDataType
+	end
+}
+
+aspect class Enumeration {
+	operation build() : EEnum is do
+		var ecoreEnumeration : EEnum init EEnum.new
+		ecoreEnumeration.name := self.name
+		//ecoreEnumeration.serializable
+		//ecoreEnumeration.instanceClass
+		//ecoreEnumeration.instanceTypeName
+		//ecoreEnumeration.instanceClassName
+		//ecoreDataType.defaultValue
+		result := ecoreEnumeration
+	end
+}
+
+aspect class EnumerationLiteral {
+	operation build() : EEnumLiteral is do
+		var ecoreEnumerationLiteral : EEnumLiteral init EEnumLiteral.new
+		ecoreEnumerationLiteral.name := self.name
+		ecoreEnumerationLiteral.literal := self.name
+		ecoreEnumerationLiteral.~value := self.~enumeration.ecoreProxy.eLiterals.size
+		//ecoreEnumerationLiteral.instance
+		result := ecoreEnumerationLiteral
+	end
+}
+
 aspect class ClassDefinition {
 	operation build() : EClass is do
 		var ecoreClass : EClass init EClass.new
@@ -87,14 +129,13 @@ aspect class Operation {
 aspect class Property {
 	operation build() : EStructuralFeature is do
 		var ecoreStructuralFeature : EStructuralFeature
-		if ( self.isComposite and self.type.isInstanceOf(PrimitiveType) ) then
+		if ( self.isComposite and TypeHelper.new.isPrimitiveType(self.type) ) then
 			ecoreStructuralFeature := EAttribute.new
 			//ecoreStructuralFeature.iD := 
 		else
 			ecoreStructuralFeature := EReference.new
 			ecoreStructuralFeature.asType(EReference).containment := self.isComposite
 		end
-		stdio.writeln( self.isComposite.toString + " " + self.type.getMetaClass.toString )
 		ecoreStructuralFeature.name := self.name
 		ecoreStructuralFeature.ordered := self.isOrdered
 		ecoreStructuralFeature.unique := self.isUnique

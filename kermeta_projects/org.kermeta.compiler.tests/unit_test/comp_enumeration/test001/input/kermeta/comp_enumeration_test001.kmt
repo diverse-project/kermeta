@@ -1,0 +1,10 @@
+
+package comptest2;
+
+require kermeta
+
+using kermeta::standard
+
+enumeration MyEnum {
+	bleu; rouge; vert;
+}

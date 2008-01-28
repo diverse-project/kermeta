@@ -1,0 +1,1 @@
+<para>This sample shows the generation of a km file with several root packages with several sub and subub packages.</para>
