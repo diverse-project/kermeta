@@ -1,4 +1,4 @@
-/* $Id: RegistrationConstants.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
+/* $Id: RegistrationConstants.java,v 1.3 2008-01-28 13:47:32 dvojtise Exp $
  * Project   : org.eclipse.emf.ecoretools.registration
  * File      : RegistrationConstants.java
  * License   : EPL
@@ -9,7 +9,6 @@
  */
 package org.eclipse.emf.ecoretools.registration;
 
-import org.apache.log4j.Logger;
 
 public class RegistrationConstants {
 
@@ -20,6 +19,4 @@ public class RegistrationConstants {
 	public static final String IMG_GENERATED_PACKAGE = "IMG_GENERATED_PACKAGE";
 	public static final String IMG_ECORE_FILE = "IMG_ECORE_FILE";
 	
-	// it is required to use a logger here
-	final static public Logger internalLog = Logger.getRootLogger();
 }

@@ -1,4 +1,4 @@
-/* $Id: RegistrationPlugin.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
+/* $Id: RegistrationPlugin.java,v 1.3 2008-01-28 13:47:32 dvojtise Exp $
  * Project   : org.eclipse.emf.ecoretools.registration
  * File      : RegistrationPlugin.java
  * License   : EPL
@@ -9,7 +9,6 @@
  */
 package org.eclipse.emf.ecoretools.registration;
 
-import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -24,8 +23,6 @@ public class RegistrationPlugin extends AbstractUIPlugin {
 	// The shared instance
 	private static RegistrationPlugin plugin;
 	
-	// Logger for this plugin
-	protected static Logger pluginLog;
 	
 	/**
 	 * The constructor
@@ -60,13 +57,5 @@ public class RegistrationPlugin extends AbstractUIPlugin {
 		return plugin;
 	}
 	
-	/**	 
-	 * @return Logger : a log4j logger
-	 */
-	public static Logger getLogger()
-	{
-		if(pluginLog == null) pluginLog = Logger.getRootLogger();
-		return pluginLog;
-	}
 
 }

@@ -1,4 +1,4 @@
-/* $Id: EcoreUnregisteringAction.java,v 1.2 2007-12-13 15:23:11 dvojtise Exp $
+/* $Id: EcoreUnregisteringAction.java,v 1.3 2008-01-28 13:47:32 dvojtise Exp $
  * Project : org.eclipse.emf.ecoretools.registration
  * File : EcoreUnregisteringAction.java
  * License : EPL
@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecoretools.registration.RegistrationPlugin;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -51,7 +50,6 @@ public class EcoreUnregisteringAction extends EMFRegisterAction {
 		
 		for(IFile ecoreFile : ecoreFiles) {
 			strURI = "platform:/resource" + ecoreFile.getFullPath().toString(); 
-			RegistrationPlugin.getLogger().debug("Unregistering file : " +strURI);
 			mmURI = URI.createURI(strURI);
 			res = rs.getResource(mmURI, true);
 
@@ -71,7 +69,6 @@ public class EcoreUnregisteringAction extends EMFRegisterAction {
 	 * @param p
 	 */
 	private void unregisterPackages(EPackage pack) {
-		// Fixing bug #4033
 		if( pack.getNsURI() != null && !pack.getNsURI().equals("") ) {
 			
 			for(EPackage subpack : pack.getESubpackages()) {
@@ -79,7 +76,6 @@ public class EcoreUnregisteringAction extends EMFRegisterAction {
 			}
 			
 			Registry.INSTANCE.remove(pack.getNsURI());
-			RegistrationPlugin.getLogger().debug("   Unregistering NsURI : " +pack.getNsURI());
 		} else {
 			Shell shell = new Shell();
 			MessageDialog.openWarning(
