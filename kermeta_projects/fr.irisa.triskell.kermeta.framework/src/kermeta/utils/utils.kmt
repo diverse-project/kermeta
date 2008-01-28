@@ -1,6 +1,6 @@
 
  @uri "http://www.kermeta.org/kermeta/utils"
-package utils;
+package kermeta::utils;
 
 require "./StringBuffer.kmt"
 require "./hashtable.kmt"
