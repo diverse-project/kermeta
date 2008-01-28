@@ -1,11 +1,14 @@
-/* $Id: GetImageVisitor.java,v 1.11 2008-01-04 09:41:46 dvojtise Exp $
+/* $Id: GetImageVisitor.java,v 1.12 2008-01-28 10:49:18 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetImageVisitor.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 13 feb. 2005
-* Author : Franck Fleurey (ffleurey@irisa.fr)
+* Authors : 
+* 		Franck Fleurey (ffleurey@irisa.fr)
+* 		Francois Tanguy
+* 		Didier Vojtisek
 */
 
 package fr.irisa.triskell.kermeta.texteditor.outline;
@@ -34,7 +37,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 
 /**
- * @author Franck Fleurey
+ * this visitor is used to calculate the correct image for the outline of Kermeta text editor
  */
 public class GetImageVisitor extends KermetaOptimizedVisitor {
     
@@ -138,14 +141,14 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Package)
 	 */
 	public Object visitPackage(Package arg0) {
-	    
+	    // DVK: be careful this code is never used , the correct code is in the PackageItem, not ModelElementOutlineItem !!!
 	    if (arg0.getOwnedTypeDefinition().size() == 0) {
 	        return KermetaSpecialIcons.PACKAGE_GRAY;
 	    }
 	    
-	    if (item.isPackageFullyImported()) return KermetaIconsBlue.PACKAGE;
+	    if (item.isPartiallyImported()) return KermetaSpecialIcons.PACKAGE_BLUE_RED;
 	    else if (item.isPackageFullyLocal()) return KermetaIconsRed.PACKAGE;
-	    else return KermetaSpecialIcons.PACKAGE_BLUE_RED;
+	    else return KermetaIconsBlue.PACKAGE;
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.PrimitiveType)

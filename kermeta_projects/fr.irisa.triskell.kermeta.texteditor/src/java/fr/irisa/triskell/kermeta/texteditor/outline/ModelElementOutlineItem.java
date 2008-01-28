@@ -1,4 +1,4 @@
-/* $Id: ModelElementOutlineItem.java,v 1.3 2008-01-25 16:08:23 dvojtise Exp $
+/* $Id: ModelElementOutlineItem.java,v 1.4 2008-01-28 10:49:18 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineItem.java
 * License : EPL
@@ -23,7 +23,8 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
- * @author Franck Fleurey
+ * Item that represent a ModelElement in Kermeta Outline
+ * note : it doesn't represent Package that use their own PackageItem representation
  */
 public class ModelElementOutlineItem extends OutlineItem implements Comparable<ModelElementOutlineItem> {
 
@@ -132,6 +133,33 @@ public class ModelElementOutlineItem extends OutlineItem implements Comparable<M
                 if (!result) break;
             }
             return result;
+        }
+        else return false;
+    }
+    
+    /**
+     * returns true if it contains at least one imported typedefinition and one local typeDefintion 
+     * @return
+     */
+    public boolean isPartiallyImported(){
+    	KermetaUnit unit = getKermetaUnit();
+    	boolean hasLocal = false;
+    	boolean hasImported = false;
+        
+        if (unit == null) 
+        	return false;
+        
+        if (modelElement instanceof Package) { 
+            for (int i=0; i<getChildren().length;i++) {
+                ModelElementOutlineItem child = (ModelElementOutlineItem) getChildren()[i];
+                if (child.modelElement instanceof TypeDefinition) {
+                    boolean isTDImported = child.isTypeDefinitionImported();
+                    if (isTDImported) hasImported = true;
+                    else hasLocal = true;                    	
+                }
+                if (hasLocal && hasImported) break;
+            }
+            return hasLocal && hasImported;
         }
         else return false;
     }
