@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.26 2008-01-25 16:04:35 dvojtise Exp $
+ * $Id: KermetaUnitImpl.java,v 1.27 2008-01-28 09:43:47 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -1045,24 +1045,6 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		if ( typeDefinitionCache == null )
 			return null;
 		TypeDefinition result = getTypeDefinitionCache().getInternalTypeDefinitionByQualifiedName(name);
-		if(result == null){
-			// not finding the value in the cache doesn't means it doesn't exists. it may means that the unit was loaded from a simple km
-			// that doesn't fill the cache
-			int packSeparator = name.lastIndexOf(":");
-			if(packSeparator != -1){
-				String packName = name.substring(0, packSeparator-1);
-				String className = name.substring(packSeparator+1, name.length());
-				Package p = getInternalPackage(packName);
-				for(TypeDefinition td : p.getOwnedTypeDefinition()){
-					if(td.getName().equals(className)) {
-						// we have found it
-						result = td;
-						// update the cache
-						getTypeDefinitionCache().addTypeDefinition(name, td);
-					}
-				}
-			}
-		}
 		return result;
 	}
 
@@ -1178,8 +1160,8 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * because it creates references to the whole ast, and java cannot claim to get all this memory back
 	 * @generated NOT
 	 */
-	protected Hashtable traceT2M = new Hashtable();
-	protected Hashtable traceM2T = new Hashtable();
+	protected Hashtable<Object, fr.irisa.triskell.kermeta.language.structure.Object> traceT2M = new Hashtable<Object, fr.irisa.triskell.kermeta.language.structure.Object>();
+	protected Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, Object> traceM2T = new Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, Object>();
 	
 	/**
 	 * @generated NOT
@@ -1473,6 +1455,46 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 		for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(this) ) {
 			importedUnit.setLocked(false);
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Copy this unit and ensures that the cache is correctly filled
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public KermetaUnit copy() {
+		KermetaUnit result = (KermetaUnit) EcoreUtil.copy(this);
+		// fill the cache for correct use of the unit
+		fillTypeDefinitionCache();
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Fill the TypeDefinitionCache from the content of this Package
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void fillTypeDefinitionCache(fr.irisa.triskell.kermeta.language.structure.Package aPackage) {
+		for ( TypeDefinition typeDefinition : aPackage.getOwnedTypeDefinition() ) {
+			String qualifiedName = NamedElementHelper.getQualifiedName(typeDefinition);
+			this.getTypeDefinitionCache().addTypeDefinition(qualifiedName, typeDefinition);
+		}
+		
+		for( Package nestedPackage : (List<Package>) aPackage.getNestedPackage() )
+			fillTypeDefinitionCache( nestedPackage);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Fill the TypeDefinitionCache from the content of this unit
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void fillTypeDefinitionCache() {
+		for ( Package p : (List<Package>) this.getModelingUnit().getPackages() )
+			fillTypeDefinitionCache( p);
 	}
 
 	/**

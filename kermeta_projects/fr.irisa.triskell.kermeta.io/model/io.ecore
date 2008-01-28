@@ -136,6 +136,11 @@
     </eOperations>
     <eOperations name="lock"/>
     <eOperations name="unlock"/>
+    <eOperations name="copy" eType="#//KermetaUnit"/>
+    <eOperations name="fillTypeDefinitionCache">
+      <eParameters name="aPackage" eType="ecore:EClass ../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/Package"/>
+    </eOperations>
+    <eOperations name="fillTypeDefinitionCache"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="storer" lowerBound="1"
         eType="#//KermetaUnitStorer" eOpposite="#//KermetaUnitStorer/kermetaUnits"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">

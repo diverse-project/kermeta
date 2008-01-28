@@ -131,6 +131,11 @@
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/isIndirectlyErroneous"/>
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/lock"/>
       <genOperations ecoreOperation="io.ecore#//KermetaUnit/unlock"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/copy"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/fillTypeDefinitionCache">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/fillTypeDefinitionCache/aPackage"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/fillTypeDefinitionCache.1"/>
     </genClasses>
     <genClasses image="false" ecoreClass="io.ecore#//IBuildingState"/>
     <genClasses ecoreClass="io.ecore#//KermetaUnitStorer">

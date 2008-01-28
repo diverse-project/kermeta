@@ -1,13 +1,13 @@
-
-
-/*$Id: KMUnitLoader.java,v 1.13 2007-12-13 08:30:06 ftanguy Exp $
+/*$Id: KMUnitLoader.java,v 1.14 2008-01-28 09:43:48 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	KmUnitLoader.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 21 juin 07
-* Authors : paco
+* Authors : 
+* 		Francois Tanguy
+* 		Didier Vojtisek
 */
 
 package fr.irisa.triskell.kermeta.loader.km;
@@ -37,9 +37,7 @@ import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -189,23 +187,10 @@ public class KMUnitLoader extends AbstractKermetaUnitLoader {
 	
 	private void createTypeDefinitionCache() {
 		for ( KermetaUnit kermetaUnit : kermetaUnits.values() ) {
-			
-			for ( Package p : (List<Package>) kermetaUnit.getModelingUnit().getPackages() )
-				createTypeDefinitionCache(kermetaUnit, p);
-			
+			kermetaUnit.fillTypeDefinitionCache();			
 		}
 	}
 	
-	private void createTypeDefinitionCache(KermetaUnit unit, Package p) {
-		for ( TypeDefinition typeDefinition : p.getOwnedTypeDefinition() ) {
-			String qualifiedName = NamedElementHelper.getQualifiedName(typeDefinition);
-			unit.getTypeDefinitionCache().addTypeDefinition(qualifiedName, typeDefinition);
-		}
-		
-		for( Package nestedPackage : (List<Package>) p.getNestedPackage() )
-			createTypeDefinitionCache(unit, nestedPackage);
-		
-	}
 	
 	private void importAllKermetaUnits() {
 		
