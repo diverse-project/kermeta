@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaTextEditor.java,v 1.4 2008-01-25 16:07:21 dvojtise Exp $
+/*$Id: KermetaTextEditor.java,v 1.5 2008-01-28 09:45:25 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaTextEditor.java
 * License : EPL
@@ -12,49 +12,31 @@
 
 package org.kermeta.texteditor;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.Position;
-import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.text.source.Annotation;
-import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
-import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.text.source.projection.ProjectionAnnotation;
 import org.eclipse.jface.text.source.projection.ProjectionAnnotationModel;
 import org.eclipse.jface.text.source.projection.ProjectionSupport;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.progress.UIJob;
-import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.kermeta.checker.KermetaUnitChecker;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.merger.Merger;
-import org.kermeta.texteditor.context.TextEditorContext;
 import org.kermeta.texteditor.folding.FoldingStrategyHelper;
 
 import antlr.RecognitionException;
@@ -67,7 +49,6 @@ import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
 
@@ -326,23 +307,14 @@ public class KermetaTextEditor extends TextEditor implements Interest {
 		if ( newValue != null ) {
 			KermetaUnit currentKermetaUnit = (KermetaUnit) newValue;
 			if ( ! currentKermetaUnit.isErroneous() && currentKermetaUnit != kermetaUnit ) {
-				this.kermetaUnit = (KermetaUnit) EcoreUtil.copy(currentKermetaUnit);
-				
+				this.kermetaUnit = currentKermetaUnit.copy();
 				if ( outline != null )
 					outline.update();
 			} else if ( kermetaUnit == null )
-				this.kermetaUnit = (KermetaUnit) EcoreUtil.copy(currentKermetaUnit);
+				this.kermetaUnit = currentKermetaUnit.copy();
 			
 		}
 	}
-	
-	/*private void setKermetaUnit(KermetaUnit source) {
-		IFile file = ((IFileEditorInput) getEditorInput()).getFile();
-		String uri = "platform:/resource" + file.getProject().getFullPath().toString() + "/" + file.getName();
-		uri = uri.substring(0, uri.length()-4) + "_text_editor_.kmt";
-		source.setUri( uri );
-		kermetaUnit = source;
-	}*/
 	
 	@Override
 	public void doSave(final IProgressMonitor progressMonitor) {
