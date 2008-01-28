@@ -1968,7 +1968,7 @@
                   </target>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0" name="isKindOf">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1" name="isKindOf">
                 <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Collection/iterator/@body/@statement.0/@value/@target/@containedType.0">
                   <typeref type="//@packages.0/standard/Set/flatten/@body/@statement.1/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Collection">
@@ -1979,7 +1979,7 @@
                 <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Collection/iterator/@body/@statement.0/@value/@target/@containedType.0">
                   <typeref type="//@packages.0/standard/Set/G" upper="1"/>
                 </target>
-                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isKindOf"/>
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isKindOf"/>
               </condition>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Set/flatten/@body/@containedType.0">
@@ -2998,7 +2998,7 @@
                   </target>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0" name="isKindOf">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1" name="isKindOf">
                 <parameters xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Collection/iterator/@body/@statement.0/@value/@target/@containedType.0">
                   <typeref type="//@packages.0/standard/Bag/flatten/@body/@statement.1/@condition/@parameters.0/@typeref/@containedType.0" upper="1">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Collection">
@@ -3009,7 +3009,7 @@
                 <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/standard/Collection/iterator/@body/@statement.0/@value/@target/@containedType.0">
                   <typeref type="//@packages.0/standard/Bag/G" upper="1"/>
                 </target>
-                <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isKindOf"/>
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isKindOf"/>
               </condition>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/Bag/flatten/@body/@containedType.0">

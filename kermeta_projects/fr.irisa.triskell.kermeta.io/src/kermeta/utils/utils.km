@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
-  <packages name="utils" uri="http://www.kermeta.org/kermeta/utils"/>
+  <packages name="kermeta">
+    <nestedPackage name="utils" uri="http://www.kermeta.org/kermeta/utils"/>
+  </packages>
   <requires uri="StringBuffer.kmt"/>
   <requires uri="hashtable.kmt"/>
   <requires uri="stack.kmt"/>
-  <usings qualifiedName="utils"/>
+  <usings qualifiedName="kermeta::utils"/>
   <referencedModelingUnits href="StringBuffer.km#/"/>
   <referencedModelingUnits href="../Standard.km#/"/>
   <referencedModelingUnits href="../standard/collections.km#/"/>

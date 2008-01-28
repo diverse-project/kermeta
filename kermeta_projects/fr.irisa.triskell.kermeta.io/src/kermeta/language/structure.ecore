@@ -4,37 +4,35 @@
     <details key="require" value="../Standard.kmt|behavior.kmt|"/>
     <details key="using" value="kermeta::language::structure|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
-    <eSubpackages name="language" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/kermeta/language" nsPrefix="language">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="language" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/language/structure.ecore#/kermeta/language" nsPrefix="language">
       <eSubpackages name="structure" nsURI="http://www.kermeta.org/kermeta/language/structure" nsPrefix="structure">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Contains the concrete implementation (including the operation bodies) &#xD;&#xA; * of the classes of the &lt;code>kermeta::reflection&lt;/code> package.&#xD;&#xA; * If you need more documentation, please take a look at the&#xD;&#xA; * &lt;code>kermeta::reflection&lt;/code> package which is more complete.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_package.png&quot;>&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_visitor_view.png&quot;>&#xD;&#xA; */"/>
         </eAnnotations>
-        <eClassifiers xsi:type="ecore:EDataType" name="kermeta::standard::String" instanceClassName="java.lang.Object">
+        <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String">
           <eAnnotations source="kermeta">
-            <details key="alias" value="kermeta::standard::String"/>
             <details key="documentation" value="/** Alias to kermeta::standard::String */"/>
           </eAnnotations>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EDataType" name="kermeta::standard::Boolean" instanceClassName="java.lang.Boolean">
+        <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/** Alias to kermeta::standard::Boolean */"/>
           </eAnnotations>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EDataType" name="kermeta::standard::Integer" instanceClassName="java.lang.Object">
+        <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer">
           <eAnnotations source="kermeta">
-            <details key="alias" value="kermeta::standard::Integer"/>
             <details key="documentation" value="/** Alias to kermeta::standard::Integer */"/>
           </eAnnotations>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EDataType" name="kermeta::standard::Real" instanceClassName="java.lang.Double">
+        <eClassifiers xsi:type="ecore:EDataType" name="Real" instanceClassName="java.lang.Double">
           <eAnnotations source="kermeta">
+            <details key="alias" value="kermeta::standard::Real"/>
             <details key="documentation" value="/** Alias to kermeta::standard::Real */"/>
           </eAnnotations>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EDataType" name="kermeta::standard::UnlimitedNatural" instanceClassName="java.lang.Object">
+        <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Integer">
           <eAnnotations source="kermeta">
-            <details key="alias" value="kermeta::standard::UnlimitedNatural"/>
             <details key="documentation" value="/** Alias to kermeta::standard::UnlimitedNatural */"/>
           </eAnnotations>
         </eClassifiers>
@@ -78,7 +76,7 @@
               <references href="../reflection/reflection.ecore#/1/reflection/Object/checkAllInvariants"/>
             </eAnnotations>
           </eOperations>
-          <eOperations name="equals" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3ABoolean">
+          <eOperations name="equals" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(self, element)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.equals()&#xD;&#xA;   */"/>
@@ -89,7 +87,7 @@
               <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Object"/>
             </eParameters>
           </eOperations>
-          <eOperations name="isNotEqual" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3ABoolean">
+          <eOperations name="isNotEqual" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := not (equals(element))&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isNotEqual()&#xD;&#xA;   */"/>
@@ -100,7 +98,7 @@
               <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Object"/>
             </eParameters>
           </eOperations>
-          <eOperations name="isKindOf" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3ABoolean">
+          <eOperations name="isKindOf" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := self.getMetaClass.equals(cl)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isKindOf(Class)&#xD;&#xA;   */"/>
@@ -137,7 +135,7 @@
               <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Object"/>
             </eParameters>
           </eOperations>
-          <eOperations name="isSet" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3ABoolean">
+          <eOperations name="isSet" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(self, ~property)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isSet(Property)&#xD;&#xA;   */"/>
@@ -159,7 +157,7 @@
               <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Property"/>
             </eParameters>
           </eOperations>
-          <eOperations name="oid" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3AInteger">
+          <eOperations name="oid" eType="/1/language/structure/Integer">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.oid(self)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.oid()&#xD;&#xA;   */"/>
@@ -167,7 +165,7 @@
               <references href="../reflection/reflection.ecore#/1/reflection/Object/oid"/>
             </eAnnotations>
           </eOperations>
-          <eOperations name="toString" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3AString">
+          <eOperations name="toString" eType="/1/language/structure/String">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := &quot;[&quot;.plus(self.getMetaClass.typeDefinition.qualifiedName).plus(&quot;:&quot;).plus(oid.toString).plus(&quot;]&quot;)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.toString()&#xD;&#xA;   * Returns a String of form [qn:oid] where 'qn' is the qualified name of&#xD;&#xA;   * the object type, and oid the unique ID of the object&#xD;&#xA;   */"/>
@@ -175,7 +173,7 @@
               <references href="../reflection/reflection.ecore#/1/reflection/Object/toString"/>
             </eAnnotations>
           </eOperations>
-          <eOperations name="isFrozen" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3ABoolean">
+          <eOperations name="isFrozen" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isFrozen(self)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isFrozen()&#xD;&#xA;   */"/>
@@ -183,7 +181,7 @@
               <references href="../reflection/reflection.ecore#/1/reflection/Object/isFrozen"/>
             </eAnnotations>
           </eOperations>
-          <eOperations name="isVoid" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3ABoolean">
+          <eOperations name="isVoid" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := false&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isVoid()&#xD;&#xA;   */"/>
@@ -191,7 +189,7 @@
               <references href="../reflection/reflection.ecore#/1/reflection/Object/isVoid"/>
             </eAnnotations>
           </eOperations>
-          <eOperations name="hashcode" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3AInteger">
+          <eOperations name="hashcode" eType="/1/language/structure/Integer">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.hashcode(self)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.hashcode()&#xD;&#xA;   */"/>
@@ -219,7 +217,7 @@
               <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Class"/>
             </eParameters>
           </eOperations>
-          <eOperations name="isInstanceOf" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3ABoolean">
+          <eOperations name="isInstanceOf" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isInstanceOf(self, type)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Object.isInstanceOf(Type)&#xD;&#xA;   */"/>
@@ -293,7 +291,7 @@
             </eAnnotations>
             <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Model"/>
           </eOperations>
-          <eOperations name="isModelTypeOf" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3ABoolean">
+          <eOperations name="isModelTypeOf" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.isModelTypeOf(self, m)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::ModelType.isModelTypeOf(Model)&#xD;&#xA;   */"/>
@@ -337,7 +335,7 @@
             </eAnnotations>
             <eParameters name="objectToClone" eType="/1/language/structure/Object"/>
           </eOperations>
-          <eOperations name="equals" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3ABoolean">
+          <eOperations name="equals" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta" references="/1/language/structure/Object/equals">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.equals(self, other)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::language::structure::Object.equals(Object)&#xD;&#xA;   */"/>
@@ -832,7 +830,7 @@
             </eAnnotations>
             <eParameters name="objectToClone" eType="/1/language/structure/Object"/>
           </eOperations>
-          <eOperations name="isInstance" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3ABoolean">
+          <eOperations name="isInstance" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := element.isInstanceOf(self)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;  * Implements kermeta::reflection::Type.isInstance(Object)&#xD;&#xA;  */"/>
@@ -857,7 +855,7 @@
               <eGenericType eTypeParameter="/1/language/structure/Type/acceptKMStructureVisitor/ContextType"/>
             </eParameters>
           </eOperations>
-          <eOperations name="isSuperTypeOf" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3ABoolean">
+          <eOperations name="isSuperTypeOf" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Type.hasSubType(self, object)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Type.isSuperTypeOf(Type)&#xD;&#xA;   * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)&#xD;&#xA;   * it won't work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers&#xD;&#xA;   * to extend it.&#xD;&#xA;   */"/>
@@ -868,7 +866,7 @@
               <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Type"/>
             </eParameters>
           </eOperations>
-          <eOperations name="isSubTypeOf" eType="/1/language/structure/kermeta%3A%3Astandard%3A%3ABoolean">
+          <eOperations name="isSubTypeOf" eType="/1/language/structure/Boolean">
             <eAnnotations source="kermeta">
               <details key="body" value="do&#xA;&#x9;result := object.isSuperTypeOf(self)&#xA;end"/>
               <details key="documentation" value="/**&#xD;&#xA;   * Implements kermeta::reflection::Type.isSubTypeOf(Type)&#xD;&#xA;   * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)&#xD;&#xA;   * it won't work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers&#xD;&#xA;   * to extend it.&#xD;&#xA;   */"/>
@@ -1633,27 +1631,24 @@
     <references href="../Standard.ecore#/1"/>
     <references href="../standard/collections.ecore#/0"/>
     <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="behavior.ecore#/0"/>
     <references href="behavior.ecore#/1"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
     <references href="reflective_collections.ecore#/0"/>
     <references href="reflective_collections.ecore#/1"/>
-    <references href="reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
-    <references href="../kunit/assert.ecore#/2"/>
     <references href="../utils/utils.ecore#/0"/>
     <references href="../utils/utils.ecore#/1"/>
-    <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
     <references href="../utils/hashtable.ecore#/0"/>
@@ -1662,12 +1657,12 @@
     <references href="../utils/stack.ecore#/1"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="dynamic_expression.ecore#/0"/>
     <references href="dynamic_expression.ecore#/1"/>
     <references href="dynamic_expression.ecore#/2"/>
@@ -1675,5 +1670,6 @@
     <references href="../standard/java.ecore#/1"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
+    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

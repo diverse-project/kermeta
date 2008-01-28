@@ -16,8 +16,10 @@
     <references href="standard/collections.ecore#/2"/>
     <references href="standard/primitive_types.ecore#/0"/>
     <references href="standard/primitive_types.ecore#/1"/>
+    <references href="standard/primitive_types.ecore#/2"/>
     <references href="language/behavior.ecore#/0"/>
     <references href="language/behavior.ecore#/1"/>
+    <references href="language/behavior.ecore#/2"/>
     <references href="language/structure.ecore#/0"/>
     <references href="language/structure.ecore#/1"/>
     <references href="language/structure.ecore#/2"/>
@@ -47,6 +49,7 @@
     <references href="utils/hashtable.ecore#/2"/>
     <references href="utils/stack.ecore#/0"/>
     <references href="utils/stack.ecore#/1"/>
+    <references href="utils/stack.ecore#/2"/>
     <references href="io/std_io.ecore#/0"/>
     <references href="io/std_io.ecore#/1"/>
     <references href="io/std_io.ecore#/2"/>
@@ -55,6 +58,7 @@
     <references href="io/file_io.ecore#/2"/>
     <references href="exceptions/exceptions.ecore#/0"/>
     <references href="exceptions/exceptions.ecore#/1"/>
+    <references href="exceptions/exceptions.ecore#/2"/>
     <references href="language/dynamic_expression.ecore#/0"/>
     <references href="language/dynamic_expression.ecore#/1"/>
     <references href="language/dynamic_expression.ecore#/2"/>
@@ -63,5 +67,6 @@
     <references href="standard/java.ecore#/2"/>
     <references href="ecore/ecore_compatibility.ecore#/0"/>
     <references href="ecore/ecore_compatibility.ecore#/1"/>
+    <references href="ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

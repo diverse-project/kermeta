@@ -4,16 +4,12 @@
     <details key="require" value="primitive_types.kmt|"/>
     <details key="using" value="kermeta::exceptions|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="standard" nsURI="http://www.kermeta.org/kermeta/standard" nsPrefix="standard">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xD;&#xA; * Defines Collection types &#xD;&#xA; * &lt;img src=&quot;./figures/collections_view.png&quot;>&#xD;&#xA; */"/>
       </eAnnotations>
-      <eClassifiers xsi:type="ecore:EDataType" name="kermeta::language::structure::Object" instanceClassName="java.lang.Object">
-        <eAnnotations source="kermeta">
-          <details key="alias" value="kermeta::language::structure::Object"/>
-        </eAnnotations>
-      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"/>
       <eClassifiers xsi:type="ecore:EClass" name="Collection" abstract="true">
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Collection is the root abstract class for all kermeta collections&#xD;&#xA; */"/>
@@ -495,7 +491,7 @@
             <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Set which content includes all non-Collection elements&#xD;&#xA;  * of the current Set, and, for each Collection element of the current&#xD;&#xA;  * Set, as many elements as the Collection contains&#xD;&#xA;  * Duplicates are removed&#xD;&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Set">
-            <eTypeArguments eClassifier="/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
+            <eTypeArguments eClassifier="/1/standard/Object"/>
           </eGenericType>
         </eOperations>
         <eOperations name="sortedBy">
@@ -684,7 +680,7 @@
             <details key="documentation" value="/**&#xD;&#xA;  * Returns a new Bag which content includes all non-Collection elements&#xD;&#xA;  * of the current Set, and, for each Collection element of the current&#xD;&#xA;  * Bag, as many elements as the Collection contains&#xD;&#xA;  */"/>
           </eAnnotations>
           <eGenericType eClassifier="/1/standard/Bag">
-            <eTypeArguments eClassifier="/1/standard/kermeta%3A%3Alanguage%3A%3Astructure%3A%3AObject"/>
+            <eTypeArguments eClassifier="/1/standard/Object"/>
           </eGenericType>
         </eOperations>
         <eOperations name="sortedBy">
@@ -1026,12 +1022,15 @@
   <ecore:EAnnotation source="dependentResource">
     <references href="primitive_types.ecore#/0"/>
     <references href="primitive_types.ecore#/1"/>
+    <references href="primitive_types.ecore#/2"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
+    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
     <references href="../reflection/reflection.ecore#/0"/>
     <references href="../reflection/reflection.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
@@ -1042,6 +1041,7 @@
     <references href="../language/reflective_collections.ecore#/2"/>
     <references href="../kunit/kunit.ecore#/0"/>
     <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../kunit/assert.ecore#/0"/>
     <references href="../kunit/assert.ecore#/1"/>
     <references href="../kunit/assert.ecore#/2"/>
@@ -1050,24 +1050,29 @@
     <references href="../utils/utils.ecore#/2"/>
     <references href="../utils/StringBuffer.ecore#/0"/>
     <references href="../utils/StringBuffer.ecore#/1"/>
+    <references href="../utils/StringBuffer.ecore#/2"/>
     <references href="../utils/hashtable.ecore#/0"/>
     <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="java.ecore#/0"/>
     <references href="java.ecore#/1"/>
+    <references href="java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
+    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

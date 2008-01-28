@@ -1250,9 +1250,9 @@
                           <condition xsi:type="kermeta_language_behavior:CallFeature" name="not">
                             <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
                             <target xsi:type="kermeta_language_behavior:CallFeature" name="isVoid">
-                              <staticType href="../standard/collections.km#//@packages.0/standard/Set/equals/@body/@statement.1/@condition/@target/@containedType.0"/>
+                              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
                               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/persistence/Repository/findDanglingModelElements/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0/@body/@statement.0/@containedType.0" name="classDef"/>
-                              <staticOperation href="../reflection/reflection.km#//@packages.0/reflection/Object/isVoid"/>
+                              <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/isVoid"/>
                             </target>
                             <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
                           </condition>

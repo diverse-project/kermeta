@@ -4,12 +4,12 @@
     <details key="require" value="../standard/collections.kmt|../persistence/resource.kmt|"/>
     <details key="using" value="kermeta::reflection|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3M5/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/reflection/reflection.ecore#/" nsPrefix="kermeta">
+  <ecore:EPackage name="kermeta" nsURI="file:/C:/eclipse3.3/eclipse/workspace/fr.irisa.triskell.kermeta.framework/dist/reflection/reflection.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="reflection" nsURI="http://www.kermeta.org/kermeta/reflection" nsPrefix="reflection">
       <eAnnotations source="kermeta">
         <details key="documentation" value="/**&#xD;&#xA; * Contains all the abstract classes used in the reflection mechanism. Implements the &lt;b>derived&#xD;&#xA; * properties&lt;/b> contained in the classes; declares the abstract operations.&#xD;&#xA; * Concrete implementation is in kermeta.language.structure.&#xD;&#xA; * &lt;img src=&quot;platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/reflection_package.png&quot;>&#xD;&#xA; */"/>
       </eAnnotations>
-      <eClassifiers xsi:type="ecore:EDataType" name="kermeta::standard::String" instanceClassName="java.lang.Object">
+      <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String">
         <eAnnotations source="kermeta">
           <details key="alias" value="kermeta::standard::String"/>
         </eAnnotations>
@@ -42,28 +42,28 @@
             <details key="documentation" value="/**&#xD;&#xA;  * Recursively runs checking of invariants defined for the metaclass of the Object&#xD;&#xA;  * and its supertypes&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="equals" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eOperations name="equals" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * semantic equality,&#xD;&#xA;  * if you wish to test for object identity you need to use the method oid&#xD;&#xA;  * ex: x.oid == y.oid&#xD;&#xA;  * by default, (ie. if not overloaded), the equals method for class Object implements &#xD;&#xA;  * the most discriminating possible equivalence relation on objects; that is, for any non-null &#xD;&#xA;  * reference values x and y, this method returns true if and only if x and y refer to the same &#xD;&#xA;  * object (x.oid == y.oid has the value true). &#xD;&#xA;  *&#xD;&#xA;  * note1: the operator == is mapped to this &#xD;&#xA;  * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="element" eType="/1/reflection/Object"/>
         </eOperations>
-        <eOperations name="isNotEqual" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eOperations name="isNotEqual" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * See kermeta::reflection::Object.equals(Object)&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="element" eType="/1/reflection/Object"/>
         </eOperations>
-        <eOperations name="isKindOf" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eOperations name="isKindOf" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether the current Object is an instance of the given Class&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="cl" eType="/1/reflection/Class"/>
         </eOperations>
-        <eOperations name="isInstanceOf" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eOperations name="isInstanceOf" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether the current Object conforms to given Type&#xD;&#xA;  * This means: is this object an instance of this type, or is it an instance of its subtype &#xD;&#xA;  */"/>
@@ -92,7 +92,7 @@
           <eParameters name="property" eType="/1/reflection/Property"/>
           <eParameters name="element" eType="/1/reflection/Object"/>
         </eOperations>
-        <eOperations name="isSet" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eOperations name="isSet" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * True if the &lt;code>~property&lt;/code> of the object has been set&#xD;&#xA;  */"/>
@@ -106,19 +106,19 @@
           </eAnnotations>
           <eParameters name="property" eType="/1/reflection/Property"/>
         </eOperations>
-        <eOperations name="oid" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AInteger">
+        <eOperations name="oid" eType="/1/reflection/Integer">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns the unique Oid of the Object&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="toString" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AString">
+        <eOperations name="toString" eType="/1/reflection/String">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns the String representation of the Object&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="isFrozen" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eOperations name="isFrozen" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether the Object is currently in a&#xD;&#xA;  * frozen state&#xD;&#xA;  */"/>
@@ -130,13 +130,13 @@
             <details key="documentation" value="/**&#xD;&#xA;  * Freeze the Object&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="isVoid" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eOperations name="isVoid" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether the Object is Void&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="hashcode" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AInteger">
+        <eOperations name="hashcode" eType="/1/reflection/Integer">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * code used in hashtable in order to identify an object in the hashtable keys&#xD;&#xA;  * This system is similar to the hashcode used in java. Please refer to java documentation&#xD;&#xA;  * for more information about hashcode&#xD;&#xA;  */"/>
@@ -160,18 +160,19 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EDataType" name="kermeta::standard::Boolean" instanceClassName="java.lang.Boolean">
+      <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean">
         <eAnnotations source="kermeta">
+          <details key="alias" value="kermeta::standard::Boolean"/>
           <details key="documentation" value="/** Alias for kermeta::standard::Boolean */"/>
         </eAnnotations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EDataType" name="kermeta::standard::Integer" instanceClassName="java.lang.Object">
+      <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Object">
         <eAnnotations source="kermeta">
           <details key="alias" value="kermeta::standard::Integer"/>
           <details key="documentation" value="/** Alias for kermeta::standard::Integer */"/>
         </eAnnotations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EDataType" name="kermeta::standard::UnlimitedNatural" instanceClassName="java.lang.Object">
+      <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Object">
         <eAnnotations source="kermeta">
           <details key="alias" value="kermeta::standard::UnlimitedNatural"/>
           <details key="documentation" value="/** Alias for kermeta::standard::UnlimitedNatural */"/>
@@ -207,7 +208,7 @@
             <details key="documentation" value="/**&#xD;&#xA;  * Instantiates a new occurence for this Class&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="toString" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AString">
+        <eOperations name="toString" eType="/1/reflection/String">
           <eAnnotations source="kermeta" references="/1/reflection/Object/toString">
             <details key="body" value="do&#xA;&#x9;result := self.typeDefinition.name&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns the String representation of this class. &#xD;&#xA;  *  Note : throws an exception if this class has no classDefinition&#xD;&#xA;  *  or if the classDefinition is not well constructed.&#xD;&#xA;  */"/>
@@ -241,7 +242,7 @@
             <details key="body" value="do&#xA;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;cDef ?= typeDefinition&#xA;&#x9;result := cDef.superType&#xA;end"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean" changeable="false" volatile="true" transient="true" derived="true">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="/1/reflection/Boolean" changeable="false" volatile="true" transient="true" derived="true">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="false"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns a Boolean stating whether ClassDefinition of this Class is abstract.&#xD;&#xA;  */"/>
@@ -260,7 +261,7 @@
             <details key="body" value="do&#xA;&#x9;result ?= typeDefinition&#xA;end"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AString" changeable="false" volatile="true" transient="true" derived="true">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="/1/reflection/String" changeable="false" volatile="true" transient="true" derived="true">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="false"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns the name of the ClassDefinition of this Class&#xD;&#xA;  */"/>
@@ -281,7 +282,7 @@
             <details key="documentation" value="/**&#xD;&#xA;  * To be written ##########################################&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="isModelTypeOf" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eOperations name="isModelTypeOf" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * To be written ############################################&#xD;&#xA;  */"/>
@@ -349,25 +350,25 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; *  Model elements with a multiplicity [lower..upper] inherit this class&#xD;&#xA; */"/>
         </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOrdered" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOrdered" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Boolean stating whether the element is ordered&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Boolean stating whether duplicated elements are allowed&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AInteger">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="/1/reflection/Integer">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Min cardinality of the element&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AUnlimitedNatural">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="/1/reflection/UnlimitedNatural">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Max cardinality of the element, '-1' for '*'&#xD;&#xA;  */"/>
@@ -398,7 +399,7 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Every one knows what an operation is.&#xD;&#xA; */"/>
         </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Boolean stating whether the Operation is abstract&#xD;&#xA;  */"/>
@@ -449,13 +450,13 @@
             <details key="documentation" value="/**&#xD;&#xA;  * Objects to which the Tag is attached to&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AString">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="/1/reflection/String">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Name of the Tag&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AString">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="/1/reflection/String">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * String value of the Tag&#xD;&#xA;  */"/>
@@ -476,43 +477,43 @@
             <details key="documentation" value="/**&#xD;&#xA;  * Opposite Property of the Property, void if the Property has no opposite&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReadOnly" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReadOnly" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Boolean stating whether the Property is read-only&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AString">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="/1/reflection/String">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * To be written #######################################&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isComposite" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isComposite" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Boolean stating whether the Property has a containment role&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDerived" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDerived" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * If True, the value of the property is not stored but computed from other properties&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isID" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isID" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Boolean stating whether the property allows to identify its containing Object&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isGetterAbstract" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isGetterAbstract" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Boolean stating wether the getter is abstract.&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSetterAbstract" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSetterAbstract" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Boolean stating wether the setter is abstract.&#xD;&#xA;  */"/>
@@ -553,7 +554,7 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * The definition of a class definition :)&#xD;&#xA; *  &lt;pre>class A&#xD;&#xA; *{ &#xD;&#xA; *   attribute s : String&#xD;&#xA; *}&#xD;&#xA; *   &lt;/pre> is a class definition; in :&#xD;&#xA; * &lt;pre>&#xD;&#xA; * main() : A is do end&#xD;&#xA; * &lt;/pre>&#xD;&#xA; * A is a &lt;b>Class&lt;/b> : it corresponds to the &lt;b>use&lt;/b> of the class definition of A&#xD;&#xA; */"/>
         </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Boolean stating whether the ClassDefinition is abstract (which means that&#xD;&#xA;  * no instance can be allocated)&#xD;&#xA;  */"/>
@@ -680,21 +681,21 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Base class definition for the &lt;b>use&lt;/b> of a type.&#xD;&#xA; */"/>
         </eAnnotations>
-        <eOperations name="isInstance" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eOperations name="isInstance" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns a boolean stating if &lt;code>element&lt;/code> is an instance of the type&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="element" eType="/1/reflection/Object"/>
         </eOperations>
-        <eOperations name="isSuperTypeOf" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eOperations name="isSuperTypeOf" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns true if element is a supertype of self&#xD;&#xA;  */"/>
           </eAnnotations>
           <eParameters name="element" eType="/1/reflection/Type"/>
         </eOperations>
-        <eOperations name="isSubTypeOf" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eOperations name="isSubTypeOf" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns true if element is a subtype of self&#xD;&#xA;  */"/>
@@ -736,13 +737,13 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Any element that contain a  name (example : Operation, Property) inherit this&#xD;&#xA; * class.&#xD;&#xA; */"/>
         </eAnnotations>
-        <eOperations name="qualifiedName" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AString">
+        <eOperations name="qualifiedName" eType="/1/reflection/String">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var elem : kermeta::reflection::NamedElement init self&#xA;&#x9;result := self.name&#xA;&#x9;from elem ?= elem.container&#xA;&#x9;until elem.equals(void)&#xA;&#x9;loop&#xA;&#x9;&#x9;result := elem.name.plus(&quot;::&quot;).plus(result)&#xA;&#x9;&#x9;elem ?= elem.container&#xA;&#x9;end&#xA;end"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Returns the qualified name of this named element. Qualified name is &#xD;&#xA;  * the list of the names of the packages hierarchically ordered, delimited by&#xD;&#xA;  * a &quot;::&quot;, followed by the name of this named element.&#xD;&#xA;  */"/>
           </eAnnotations>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AString">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="/1/reflection/String">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;     * Name of this named element&#xD;&#xA;     */"/>
@@ -778,7 +779,7 @@
             <details key="documentation" value="/**&#xD;&#xA;  * Owning Package, if any&#xD;&#xA;  */"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AString">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="/1/reflection/String">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * Uri of the Package&#xD;&#xA;  */"/>
@@ -824,7 +825,7 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Filter is the class that represent a filter on a ModelingUnit.&#xD;&#xA; * the qualifiedName represent the beginning of the matched names&#xD;&#xA; */"/>
         </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AString">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="/1/reflection/String">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
           </eAnnotations>
@@ -834,7 +835,7 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
         </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AString">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="/1/reflection/String">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
@@ -845,7 +846,7 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * To be written&#xD;&#xA; */"/>
         </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="/1/reflection/kermeta%3A%3Astandard%3A%3AString">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="/1/reflection/String">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * To be written&#xD;&#xA;  */"/>
@@ -856,7 +857,7 @@
         <eAnnotations source="kermeta">
           <details key="documentation" value="/**&#xD;&#xA; * Abstraction for type definitions (ClassDefinition, ModelTypeDefinition, DataType inherit&#xD;&#xA; * this class)&#xD;&#xA; */"/>
         </eAnnotations>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAspect" eType="/1/reflection/kermeta%3A%3Astandard%3A%3ABoolean">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAspect" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
             <details key="documentation" value="/**&#xD;&#xA;  * This boolean allows to tell if this Type definition is an aspect or not&#xD;&#xA;  * If it is an aspect, then at runtime, its definition will be merged with the definition of another&#xD;&#xA;  * TypeDefinition that has exactly the same qualified name&#xD;&#xA;  */"/>
@@ -916,10 +917,12 @@
     <references href="../standard/collections.ecore#/2"/>
     <references href="../standard/primitive_types.ecore#/0"/>
     <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/2"/>
     <references href="../Standard.ecore#/0"/>
     <references href="../Standard.ecore#/1"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
+    <references href="../language/behavior.ecore#/2"/>
     <references href="../language/structure.ecore#/0"/>
     <references href="../language/structure.ecore#/1"/>
     <references href="../language/structure.ecore#/2"/>
@@ -946,14 +949,15 @@
     <references href="../utils/hashtable.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
     <references href="../io/file_io.ecore#/0"/>
     <references href="../io/file_io.ecore#/1"/>
     <references href="../io/file_io.ecore#/2"/>
     <references href="../exceptions/exceptions.ecore#/0"/>
     <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
     <references href="../language/dynamic_expression.ecore#/0"/>
     <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../language/dynamic_expression.ecore#/2"/>
@@ -962,5 +966,6 @@
     <references href="../standard/java.ecore#/2"/>
     <references href="../ecore/ecore_compatibility.ecore#/0"/>
     <references href="../ecore/ecore_compatibility.ecore#/1"/>
+    <references href="../ecore/ecore_compatibility.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>
