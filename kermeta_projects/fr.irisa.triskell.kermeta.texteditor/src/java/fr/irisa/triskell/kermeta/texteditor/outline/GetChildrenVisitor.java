@@ -1,4 +1,4 @@
-/* $Id: GetChildrenVisitor.java,v 1.11 2007-12-17 14:05:11 ftanguy Exp $
+/* $Id: GetChildrenVisitor.java,v 1.12 2008-01-28 14:01:46 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetChildrenVisitor.java
 * License : EPL
@@ -67,31 +67,12 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	 */
 	public Object visitClassDefinition(ClassDefinition arg0) {
 		ArrayList<ModelElementOutlineItem> result = new ArrayList<ModelElementOutlineItem>();
-		if (outline.prefInheritanceFlattening()) {
-		    for (Object next : InheritanceSearch.callableProperties(InheritanceSearch.getFClassForClassDefinition(arg0)))
-		    {
-		        CallableProperty cp = (CallableProperty)next;
-		        if (cp.getFclass().getTypeDefinition() != arg0)
-		            result.add(new ModelElementOutlineItem(cp.getTypeBoundedProperty(), item, outline));
-		    }
-		    
-		    for (Object next : InheritanceSearch.callableOperations(InheritanceSearch.getFClassForClassDefinition(arg0)))
-		    {
-		        CallableOperation cop = (CallableOperation)next;
-		        if (cop.getFclass().getTypeDefinition() != arg0)
-		            result.add(new ModelElementOutlineItem(cop.getTypeBoundedOperation(), item, outline));
-		    }
-		    
-		    for (Object next : arg0.getSuperType()) {
-		    	 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)next;
-			     ClassDefinition parent = (ClassDefinition)metaClass.getTypeDefinition();
-			     for (Object inv : parent.getInv()) {
-			        result.add(new ModelElementOutlineItem((Constraint)inv, item, outline));
-		    	 }
-		    }
 		
-		}
-
+		// groups used to have a nice sort
+		ArrayList<ModelElementOutlineItem> invariantsMEOIs = new ArrayList<ModelElementOutlineItem>();
+		ArrayList<ModelElementOutlineItem> propertiesMEOIs = new ArrayList<ModelElementOutlineItem>();
+		ArrayList<ModelElementOutlineItem> operationsMEOIs = new ArrayList<ModelElementOutlineItem>();
+		
 		Set <TypeDefinition> baseClasses = ClassDefinitionHelper.getAllBaseClasses( arg0 );
 		
 		Set <String> propertiesName = new HashSet <String> ();
@@ -103,14 +84,14 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		 * 
 		 */
 		for (Object ci : arg0.getInv())
-	    	result.add(new ModelElementOutlineItem((Constraint)ci, item, outline));
+			invariantsMEOIs.add(new ModelElementOutlineItem((Constraint)ci, item, outline));
 
 	    for ( TypeDefinition typeDefinition : baseClasses ) {
 	    	
 	    	if ( typeDefinition instanceof ClassDefinition ) {
 	    		ClassDefinition cl = (ClassDefinition) typeDefinition;
 	    		for ( Constraint c : (List<Constraint>) cl.getInv() ) {
-	    			result.add( new ModelElementOutlineItem( c, item, outline ) );
+	    			invariantsMEOIs.add( new ModelElementOutlineItem( c, item, outline ) );
 	    		}
 	    	}
 	    	
@@ -122,7 +103,7 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		 * 
 		 */
 	    for (Property p : (List<Property>) arg0.getOwnedAttribute()) {
-	        result.add(new ModelElementOutlineItem((Property)p, item, outline));
+	    	propertiesMEOIs.add(new ModelElementOutlineItem((Property)p, item, outline));
 	        propertiesName.add( p.getName() );
 	    }
 	        
@@ -132,7 +113,7 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	    		ClassDefinition cl = (ClassDefinition) typeDefinition;
 	    		for ( Property p : (List<Property>) cl.getOwnedAttribute() ) {
 	    			if ( ! propertiesName.contains(p.getName()) ) {
-	    				result.add( new ModelElementOutlineItem( p, item, outline ) );
+	    				propertiesMEOIs.add( new ModelElementOutlineItem( p, item, outline ) );
 	    				propertiesName.add( p.getName() );
 	    			}
 	    		}
@@ -146,7 +127,7 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	     * 
 	     */
 	    for (Operation op : (List<Operation>) arg0.getOwnedOperation()) {
-	        result.add(new ModelElementOutlineItem((Operation)op, item, outline));
+	    	operationsMEOIs.add(new ModelElementOutlineItem((Operation)op, item, outline));
 	        operationsName.add( op.getName() );
 	    }
 	    
@@ -156,15 +137,59 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	    		ClassDefinition cl = (ClassDefinition) typeDefinition;
 	    		for ( Operation o : (List<Operation>) cl.getOwnedOperation() )
 	    			if ( ! operationsName.contains(o.getName()) ) {
-	    				result.add( new ModelElementOutlineItem( o, item, outline ) );
+	    				operationsMEOIs.add( new ModelElementOutlineItem( o, item, outline ) );
 	    				operationsName.add( o.getName() );
 	    			}
 	    	}
 	    	
 	    }
 	    
-		if (outline.prefSortedOutline())
-		    Collections.sort(result);
+	    // add inherited properties and operations if necessary
+	    if (outline.prefInheritanceFlattening()) {
+			fr.irisa.triskell.kermeta.language.structure.Class fclass = InheritanceSearch.getFClassForClassDefinition(arg0);
+		    for (Object next : InheritanceSearch.callableProperties(fclass))
+		    {
+		        CallableProperty cp = (CallableProperty)next;
+		        if (cp.getFclass().getTypeDefinition() != arg0){
+		        	Property p = cp.getTypeBoundedProperty();
+		        	if ( ! propertiesName.contains(p.getName()) ) {
+		        		propertiesMEOIs.add( new ModelElementOutlineItem( p, item, outline ) );
+	    				propertiesName.add( p.getName() );
+	    			}
+		        }
+		    }
+		    
+		    for (Object next : InheritanceSearch.callableOperations(fclass))
+		    {
+		        CallableOperation cop = (CallableOperation)next;
+		        if (cop.getFclass().getTypeDefinition() != arg0){
+		        	Operation o = cop.getTypeBoundedOperation();		        
+		        	if ( ! operationsName.contains(o.getName()) ) {
+		        		operationsMEOIs.add( new ModelElementOutlineItem( o, item, outline ) );
+	    				operationsName.add( o.getName() );
+	    			}
+		        }
+		    }
+		    
+		    for (Object next : arg0.getSuperType()) {
+		    	 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)next;
+			     ClassDefinition parent = (ClassDefinition)metaClass.getTypeDefinition();
+			     for (Object inv : parent.getInv()) {
+			    	 invariantsMEOIs.add(new ModelElementOutlineItem((Constraint)inv, item, outline));
+		    	 }
+		    }
+		
+		}
+	    
+	    // sort result if necessary
+		if (outline.prefSortedOutline()){
+		    Collections.sort(invariantsMEOIs);
+		    Collections.sort(propertiesMEOIs);
+		    Collections.sort(operationsMEOIs);
+		}
+		result.addAll(invariantsMEOIs);
+		result.addAll(propertiesMEOIs);
+		result.addAll(operationsMEOIs);
 		return result.toArray();
 	}
 	

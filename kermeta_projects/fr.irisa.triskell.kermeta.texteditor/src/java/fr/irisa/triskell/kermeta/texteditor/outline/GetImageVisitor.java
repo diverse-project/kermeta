@@ -1,4 +1,4 @@
-/* $Id: GetImageVisitor.java,v 1.12 2008-01-28 10:49:18 dvojtise Exp $
+/* $Id: GetImageVisitor.java,v 1.13 2008-01-28 14:01:46 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetImageVisitor.java
 * License : EPL
@@ -121,21 +121,24 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	 */
 	public Object visitOperation(Operation arg0) {
 	    
-	    if (item.isOperationInherited()) {
-            if (arg0.isIsAbstract()) return KermetaIconsYellow.OPERATION_ABSTRACT;
-    		if (arg0.getSuperOperation() != null) return KermetaIconsYellow.METHOD;
-    		return KermetaIconsYellow.OPERATION;
-	    }
-	    /*
-	    if (item.parent.isTypeDefinitionImported()) {
-            if (arg0.isFIsAbstract()) return KermetaIconsBlue.OPERATION_ABSTRACT;
-    		if (arg0.getFSuperOperation() != null) return KermetaIconsBlue.METHOD;
-    		return KermetaIconsBlue.OPERATION;
-	    }
-	    */
-	    if (arg0.isIsAbstract()) return KermetaIconsGreen.OPERATION_ABSTRACT;
-		if (arg0.getSuperOperation() != null) return KermetaIconsGreen.METHOD;
-		return KermetaIconsGreen.OPERATION;
+		if(item.isOperationLocal()){
+		    if (arg0.isIsAbstract()) return KermetaIconsRed.OPERATION_ABSTRACT;
+			if (arg0.getSuperOperation() != null) return KermetaIconsRed.METHOD;
+			return KermetaIconsRed.OPERATION;
+		}
+		else{
+		    if (item.isOperationInherited()) {
+	            if (arg0.isIsAbstract()) return KermetaIconsYellow.OPERATION_ABSTRACT;
+	    		if (arg0.getSuperOperation() != null) return KermetaIconsYellow.METHOD;
+	    		return KermetaIconsYellow.OPERATION;
+		    }
+		    else {
+		    	// is imported from an aspect
+			    if (arg0.isIsAbstract()) return KermetaIconsBlue.OPERATION_ABSTRACT;
+				if (arg0.getSuperOperation() != null) return KermetaIconsBlue.METHOD;
+				return KermetaIconsGreen.OPERATION;
+		    }
+		}
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Package)
@@ -166,16 +169,25 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	 */
 	public Object visitProperty(Property node) {
 
-	    if (item.isPropertyInherited()) {
-	        if (node.isIsComposite()) return KermetaIconsYellow.PROPERTY_CONTAINED;
-    		if (node.isIsDerived()) return KermetaIconsYellow.PROPERTY_DERIVED;
-    		return KermetaIconsYellow.PROPERTY;
-    	
-	    }
 	    
-	    if (node.isIsComposite()) return KermetaIconsGreen.PROPERTY_CONTAINED;
-		if (node.isIsDerived()) return KermetaIconsGreen.PROPERTY_DERIVED;
-		return KermetaIconsGreen.PROPERTY;
+	    if(item.isPropertyLocal()){
+		    if (node.isIsComposite()) return KermetaIconsRed.PROPERTY_CONTAINED;
+			if (node.isIsDerived()) return KermetaIconsRed.PROPERTY_DERIVED;
+			return KermetaIconsRed.PROPERTY;
+	    }
+	    else{
+	    	if (item.isPropertyInherited()) {
+		        if (node.isIsComposite()) return KermetaIconsYellow.PROPERTY_CONTAINED;
+	    		if (node.isIsDerived()) return KermetaIconsYellow.PROPERTY_DERIVED;
+	    		return KermetaIconsYellow.PROPERTY;
+	    	
+		    }
+	    	else {
+		    	if (node.isIsComposite()) return KermetaIconsBlue.PROPERTY_CONTAINED;
+		    	if (node.isIsDerived()) return KermetaIconsBlue.PROPERTY_DERIVED;
+		    	return KermetaIconsBlue.PROPERTY;
+	    	}
+	    }
 	}
 	
   

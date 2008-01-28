@@ -1,4 +1,4 @@
-/* $Id: ModelElementOutlineItem.java,v 1.4 2008-01-28 10:49:18 dvojtise Exp $
+/* $Id: ModelElementOutlineItem.java,v 1.5 2008-01-28 14:01:46 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineItem.java
 * License : EPL
@@ -87,13 +87,47 @@ public class ModelElementOutlineItem extends OutlineItem implements Comparable<M
         else return false;
     }
     
-    public boolean isPropertyInherited() {
+    public boolean isPropertyInherited() {   	
+    	if ( parent instanceof ModelElementOutlineItem ) {
+    		ModelElementOutlineItem parentItem = (ModelElementOutlineItem) parent;
+    	
+    		if (modelElement instanceof Property && parent != null && parentItem.modelElement instanceof ClassDefinition) {
+    			boolean isDefinedOnClass = false;
+    			isDefinedOnClass = ((ClassDefinition)parentItem.modelElement).getOwnedAttribute().contains(modelElement);
+    			if(!isDefinedOnClass){
+    				// let's try on aspects
+    				for(TypeDefinition td  : ((ClassDefinition)parentItem.modelElement).getBaseAspects()) {
+    					if(td instanceof ClassDefinition){
+    						ClassDefinition cd = (ClassDefinition)td;
+    						if(cd.getOwnedAttribute().contains(modelElement)) {
+    							isDefinedOnClass = true;
+    							break;
+    						}
+    					}
+    				}
+    			}
+    			return !isDefinedOnClass; 
+    		}
+    	}
+    	return false;
+    }
+
+    /**
+     * is this property local to this modeling unit ?
+     * @return
+     */
+    public boolean isPropertyLocal() {
     	
     	if ( parent instanceof ModelElementOutlineItem ) {
     		ModelElementOutlineItem parentItem = (ModelElementOutlineItem) parent;
     	
-    		if (modelElement instanceof Property && parent != null && parentItem.modelElement instanceof ClassDefinition)
-    			return !((ClassDefinition)parentItem.modelElement).getOwnedAttribute().contains(modelElement);
+    		if (modelElement instanceof Property && parent != null && parentItem.modelElement instanceof ClassDefinition){
+    			if(parentItem.isTypeDefinitionImported()){
+    				return false;
+    			}
+    			else
+    				return ((ClassDefinition)parentItem.modelElement).getOwnedAttribute().contains(modelElement);
+    		}
     	}
     	return false;
     }
@@ -101,8 +135,41 @@ public class ModelElementOutlineItem extends OutlineItem implements Comparable<M
     public boolean isOperationInherited() {
     	if ( parent instanceof ModelElementOutlineItem ) {
     		ModelElementOutlineItem parentItem = (ModelElementOutlineItem) parent;
-    		if (modelElement instanceof Operation && parentItem != null && parentItem.modelElement instanceof ClassDefinition)
-    			return !((ClassDefinition)parentItem.modelElement).getOwnedOperation().contains(modelElement);
+    		if (modelElement instanceof Operation && parentItem != null && parentItem.modelElement instanceof ClassDefinition) {
+    			boolean isDefinedOnClass = false;
+    			isDefinedOnClass = ((ClassDefinition)parentItem.modelElement).getOwnedAttribute().contains(modelElement);
+    			if(!isDefinedOnClass){
+    				// let's try on aspects
+    				for(TypeDefinition td  : ((ClassDefinition)parentItem.modelElement).getBaseAspects()) {
+    					if(td instanceof ClassDefinition){
+    						ClassDefinition cd = (ClassDefinition)td;
+    						if(cd.getOwnedOperation().contains(modelElement)) {
+    							isDefinedOnClass = true;
+    							break;
+    						}
+    					}
+    				}
+    			}
+    			return !isDefinedOnClass; 
+    		}
+        }
+    	return false;
+    }
+    
+    /**
+     * is this operation local to this modeling unit ?
+     * @return
+     */
+    public boolean isOperationLocal() {
+    	if ( parent instanceof ModelElementOutlineItem ) {
+    		ModelElementOutlineItem parentItem = (ModelElementOutlineItem) parent;
+    		if (modelElement instanceof Operation && parentItem != null && parentItem.modelElement instanceof ClassDefinition){
+    			if(parentItem.isTypeDefinitionImported()){
+    				return false;
+    			}
+    			else
+    				return ((ClassDefinition)parentItem.modelElement).getOwnedOperation().contains(modelElement); 
+    		}
         }
     	return false;
     }
