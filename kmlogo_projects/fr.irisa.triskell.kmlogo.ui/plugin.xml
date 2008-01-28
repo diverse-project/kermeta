@@ -6,6 +6,31 @@
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.asmlogo"
+            id="fr.irisa.triskell.kmlogo.ui.contribution1">
+         <menu
+               label="Logo"
+               path="additions"
+               id="fr.irisa.triskell.kmlogo.ui.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Run Logo Interpreter"
+               class="fr.irisa.triskell.kmlogo.ui.popup.actions.RunLogo"
+               menubarPath="fr.irisa.triskell.kmlogo.ui.menu1/group1"
+               enablesFor="1"
+               id="fr.irisa.triskell.kmlogo.ui.newAction">
+         </action>
+         <action
+               class="fr.irisa.triskell.kmlogo.ui.popup.actions.CompileLogoNXC"
+               id="fr.irisa.triskell.kmlogo.ui.action1"
+               label="Compile to NXC"
+               menubarPath="fr.irisa.triskell.kmlogo.ui.menu1/group1"/>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
             nameFilter="*.xmi"
             id="fr.irisa.triskell.kmlogo.ui.contribution1">
          <menu
