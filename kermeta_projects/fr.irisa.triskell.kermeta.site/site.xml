@@ -3,34 +3,43 @@
    <description url="http://www.kermeta.org/update">
       Kermeta eclipse update site
    </description>
-   <feature url="features/fr.irisa.triskell.traceability_0.1.0.jar" id="fr.irisa.triskell.traceability" version="0.1.0">
-      <category name="Kermeta"/>
+   <feature url="features/fr.irisa.triskell.kermeta.ket.feature_0.2.0.jar" id="fr.irisa.triskell.kermeta.ket.feature" version="0.2.0">
+      <category name="Kermeta IDE"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.samples.fsm_0.1.1.jar" id="fr.irisa.triskell.kermeta.samples.fsm" version="0.1.1">
-      <category name="Kermeta"/>
+   <feature url="features/fr.irisa.triskell.kermeta.ocl_1.1.0.jar" id="fr.irisa.triskell.kermeta.ocl" version="1.1.0">
+      <category name="MDKs"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.ocl_0.1.0.jar" id="fr.irisa.triskell.kermeta.ocl" version="0.1.0">
-      <category name="Kermeta"/>
+   <feature url="features/fr.irisa.triskell.kermeta.ecore_0.1.1.jar" id="fr.irisa.triskell.kermeta.ecore" version="0.1.1">
+      <category name="MDKs"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta_0.99.0.200711161637.jar" id="fr.irisa.triskell.kermeta" version="0.99.0.200711161637">
-      <category name="Kermeta"/>
+   <feature url="features/org.kermeta.sintaks.feature_0.1.3.jar" id="org.kermeta.sintaks.feature" version="0.1.3">
+      <category name="Sintaks"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.ecore_0.0.3.jar" id="fr.irisa.triskell.kermeta.ecore" version="0.0.3">
-      <category name="Kermeta"/>
+   <feature url="features/fr.irisa.triskell.traceability_1.0.0.jar" id="fr.irisa.triskell.traceability" version="1.0.0">
+      <category name="MDKs"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.graphical_0.99.0.200711161637.jar" id="fr.irisa.triskell.kermeta.graphical" version="0.99.0.200711161637">
-      <category name="Kermeta"/>
+   <feature url="features/fr.irisa.triskell.kermeta_1.0.0.jar" id="fr.irisa.triskell.kermeta" version="1.0.0">
+      <category name="Kermeta IDE"/>
    </feature>
-   <feature url="features/org.kermeta.sintaks.feature_0.1.1.200711161640.jar" id="org.kermeta.sintaks.feature" version="0.1.1.200711161640">
-      <category name="Kermeta"/>
+   <feature url="features/fr.irisa.triskell.kermeta.graphical_1.0.0.jar" id="fr.irisa.triskell.kermeta.graphical" version="1.0.0">
+      <category name="Kermeta IDE"/>
    </feature>
-   <feature url="features/com.ibm.eclipse.emfatic.feature_0.0.2.jar" id="com.ibm.eclipse.emfatic.feature" version="0.0.2">
-      <category name="extra"/>
+   <feature url="features/org.kermeta.tutorial.aspects_1.0.0.jar" id="org.kermeta.tutorial.aspects" version="1.0.0">
+      <category name="Samples"/>
    </feature>
-   <category-def name="Kermeta" label="Kermeta and its MDKs">
+   <feature url="features/fr.irisa.triskell.kermeta.samples.fsm_1.0.0.jar" id="fr.irisa.triskell.kermeta.samples.fsm" version="1.0.0">
+      <category name="Samples"/>
+   </feature>
+   <feature url="features/org.antlr.ui_4.1.1.jar" id="org.antlr.ui" version="4.1.1">
+      <category name="OtherTools"/>
+   </feature>
+   <category-def name="Kermeta IDE" label="Kermeta workbench">
       <description>
          provided by Triskell team
       </description>
    </category-def>
-   <category-def name="extra" label="extra"/>
+   <category-def name="MDKs" label="Kermeta MDKs"/>
+   <category-def name="Sintaks" label="Sintaks"/>
+   <category-def name="Samples" label="Additional samples and tutorials"/>
+   <category-def name="OtherTools" label="OtherTools"/>
 </site>
