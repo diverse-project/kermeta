@@ -60,7 +60,7 @@
                enablesFor="+"
                icon="icons/delete.png"
                id="org.kermeta.compiler.trek.ui.DeleteTrekSummary"
-               label="Delete the summary files for the compilation doc"
+               label="UC | TC | Delete the summary files for the compilation doc"
                menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.highLevel/summary">
          </action>
          <action
@@ -68,7 +68,7 @@
                enablesFor="+"
                icon="icons/add.png"
                id="org.kermeta.compiler.trek.ui.InitializeTrekLocalSummary"
-               label="Initialize the summary files directly inside the selected folder(s)"
+               label="UC | TC | Initialize the summary files directly inside the selected folder(s)"
                menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.lowLevel/specific">
          </action>
          <action
@@ -76,7 +76,7 @@
                enablesFor="+"
                icon="icons/add.png"
                id="org.kermeta.compiler.trek.ui.InitializeTrekSummary"
-               label="Initialize the summary files inside the subfolder(s) of the selected folder(s)"
+               label="UC | TC | Initialize the summary files inside the subfolder(s) of the selected folder(s)"
                menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.highLevel/summary">
          </action>
          <action
@@ -84,7 +84,7 @@
                enablesFor="+"
                icon="icons/delete.png"
                id="org.kermeta.compiler.trek.ui.DeleteTrekProgress"
-               label="Delete the progress files for the compilation doc"
+               label="UC | Delete the progress files for the compilation doc"
                menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.highLevel/progress">
          </action>
          <action
@@ -92,7 +92,7 @@
                enablesFor="+"
                icon="icons/add.png"
                id="org.kermeta.compiler.trek.ui.InitializeTrekLocalProgress"
-               label="Initialize the progress files directly inside the selected folder(s)"
+               label="UC | Initialize the progress files directly inside the selected folder(s)"
                menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.lowLevel/specific">
          </action>
          <action
@@ -100,7 +100,7 @@
                enablesFor="+"
                icon="icons/add.png"
                id="org.kermeta.compiler.trek.ui.InitializeTrekProgress"
-               label="Initialize the progress files inside the subfolder(s) of the selected folder(s)"
+               label="UC | Initialize the progress files inside the subfolder(s) of the selected folder(s)"
                menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.highLevel/progress">
          </action>
          <action
@@ -108,7 +108,7 @@
                enablesFor="+"
                icon="icons/add.png"
                id="org.kermeta.compiler.trek.ui.InitializeTrekLocalVerifiesUC"
-               label="Initialize the verifies files directly inside the selected folder(s)"
+               label="TC | Initialize the verifies files directly inside the selected folder(s)"
                menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.lowLevel/specific">
          </action>
          <action
@@ -116,7 +116,7 @@
                enablesFor="+"
                icon="icons/add.png"
                id="org.kermeta.compiler.trek.ui.InitializeTrekLocalRefinesUC"
-               label="Initialize the refines files directly inside the selected folder(s)"
+               label="UC | Initialize the refines files directly inside the selected folder(s)"
                menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.lowLevel/specific">
          </action>
          <action
@@ -124,7 +124,15 @@
                enablesFor="+"
                icon="icons/add.png"
                id="org.kermeta.compiler.trek.ui.InitializeTrekAllLocalTextFiles"
-               label="Initialize all the text files directly inside the selected folder(s)"
+               label="UC | Initialize all the text files directly inside the selected folder(s)"
+               menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.lowLevel/all">
+         </action>
+         <action
+               class="org.kermeta.compiler.trek.ui.popup.actions.AddNewTestCaseFolder"
+               enablesFor="1"
+               icon="icons/add.png"
+               id="org.kermeta.compiler.trek.ui.AddNewTestCaseFolder"
+               label="UC | Add a new Test Case folder inside the selected folder(s)"
                menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.lowLevel/all">
          </action>
       </objectContribution>

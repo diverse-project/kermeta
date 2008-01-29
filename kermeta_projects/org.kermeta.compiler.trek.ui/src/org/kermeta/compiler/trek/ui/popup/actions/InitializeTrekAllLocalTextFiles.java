@@ -1,4 +1,4 @@
-/*$Id: InitializeTrekAllLocalTextFiles.java,v 1.1 2007-12-12 09:55:34 cfaucher Exp $
+/*$Id: InitializeTrekAllLocalTextFiles.java,v 1.2 2008-01-29 08:27:13 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeTrekAllLocalTextFiles.java
 * License : EPL
@@ -49,6 +49,7 @@ public class InitializeTrekAllLocalTextFiles implements IObjectActionDelegate {
 		for(IFolder folder : folders) {
 			InitializeTrekLocalSummary.createSummaryTextFile(folder);
 			InitializeTrekLocalProgress.createProgressTextFile(folder);
+			InitializeTrekLocalRefinesUC.createSummaryTextFile(folder);
 		}
 	}
 

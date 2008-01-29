@@ -1,4 +1,4 @@
-/*$Id: KCompilerConstants.java,v 1.6 2007-12-14 08:43:34 cfaucher Exp $
+/*$Id: KCompilerConstants.java,v 1.7 2008-01-29 08:27:14 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	KCompilerConstants.java
 * License : EPL
@@ -25,6 +25,12 @@ public final class KCompilerConstants {
 	public static final String VERIFIES_UC_EXT = "txt";
 
 	public static final String REFINES_UC_EXT = "txt";
+	
+	public static final String INPUT_FOLDER = "input";
+	
+	public static final String EXPECTED_OUTPUT_FOLDER = "expected_output";
+	
+	public static final String KMT_EXT = "kmt";
 
 	public static final String STATUS_KERMETA = "Kermeta";
 	

@@ -1,4 +1,4 @@
-/*$Id: InitializeTrekLocalSummary.java,v 1.3 2007-12-14 08:43:34 cfaucher Exp $
+/*$Id: InitializeTrekLocalSummary.java,v 1.4 2008-01-29 08:27:13 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeTrekLocalSummary.java
 * License : EPL
@@ -82,10 +82,10 @@ public class InitializeTrekLocalSummary implements IObjectActionDelegate {
 	protected static void createSummaryTextFile(IFolder subFolder)
     {
 		try {
-					IFile summary_file = ResourcesPlugin.getWorkspace().getRoot().getFile(subFolder.getFullPath().append("/" + KCompilerConstants.SUMMARY_PREFIX + subFolder.getName()).addFileExtension(KCompilerConstants.SUMMARY_EXT));
-					if( !summary_file.exists() ) {
-						summary_file.create(new ByteArrayInputStream("<para></para>".getBytes()), true, new NullProgressMonitor());
-					}
+			IFile summary_file = ResourcesPlugin.getWorkspace().getRoot().getFile(subFolder.getFullPath().append("/" + KCompilerConstants.SUMMARY_PREFIX + subFolder.getName()).addFileExtension(KCompilerConstants.SUMMARY_EXT));
+			if( !summary_file.exists() ) {
+				summary_file.create(new ByteArrayInputStream("<para>TODO</para>".getBytes()), true, new NullProgressMonitor());
+			}
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

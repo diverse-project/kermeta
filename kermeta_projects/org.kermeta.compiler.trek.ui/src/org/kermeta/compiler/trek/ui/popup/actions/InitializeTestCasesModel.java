@@ -1,4 +1,4 @@
-/*$Id: InitializeTestCasesModel.java,v 1.6 2007-12-13 17:16:53 cfaucher Exp $
+/*$Id: InitializeTestCasesModel.java,v 1.7 2008-01-29 08:27:13 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	InitializeTestCasesModel.java
 * License : EPL
@@ -121,9 +121,9 @@ public class InitializeTestCasesModel implements IObjectActionDelegate {
 		String outputResources = "<para>Output resources:";
 		
 		// Get the docbook xml-text corresponding to the input resources
-		inputResources += getRelatedResources("input", folder) + "</para>";
+		inputResources += getRelatedResources(KCompilerConstants.INPUT_FOLDER, folder) + "</para>";
 		// Get the docbook xml-text corresponding to the output resources
-		outputResources += getRelatedResources("expected_output", folder) + "</para>";
+		outputResources += getRelatedResources(KCompilerConstants.EXPECTED_OUTPUT_FOLDER, folder) + "</para>";
 		
 		aTestCase.setSummary(inputResources + "\n\n" + outputResources + "\n\n" +TrekModelHelper.getSummaryContent(folder));
 		return aTestCase;
