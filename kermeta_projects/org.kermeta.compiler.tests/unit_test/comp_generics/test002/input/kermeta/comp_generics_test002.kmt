@@ -1,0 +1,14 @@
+
+package comp_generics_test002;
+
+require kermeta
+
+using kermeta::standard
+
+class A<G> {
+
+	operation foo<G>() : G is do
+		result := void
+	end
+
+}

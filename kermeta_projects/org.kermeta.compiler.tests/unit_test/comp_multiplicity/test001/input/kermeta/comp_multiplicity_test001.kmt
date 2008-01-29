@@ -1,0 +1,12 @@
+
+package comp_multiplicity_test001;
+
+require kermeta
+
+using kermeta::standard
+
+class A {
+
+	reference s : String[0..4]
+
+}

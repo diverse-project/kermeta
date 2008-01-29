@@ -1,0 +1,20 @@
+
+package comp_invariant_test002;
+
+require kermeta
+
+class A {
+
+	inv myInv1 is do
+		true
+	end
+
+	inv myInv2 is do
+		true
+	end
+
+	inv myInv3 is do
+		true
+	end
+
+}

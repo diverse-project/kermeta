@@ -1,0 +1,12 @@
+
+package comp_operationStructure_test002;
+
+require kermeta
+
+using kermeta::standard
+
+class A {
+
+	operation f() is abstract
+
+}

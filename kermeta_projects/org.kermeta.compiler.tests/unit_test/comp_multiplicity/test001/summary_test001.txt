@@ -1,0 +1,1 @@
+<para>Generation of one reference with 0..4 multiplicity.</para>

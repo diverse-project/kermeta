@@ -3,29 +3,31 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior"
     xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/">
-  <packages name="comp_operationStructure_test001">
+  <packages name="comp_invariant_test002">
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="A"
         superType="#//@packages.0/A/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
-      <ownedOperation name="f" type="#//@packages.0/A/f/@containedType.0" upper="1">
-        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
-        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0">
-          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#//@packages.0/kunit/TestRunner/printTestResult/@body/@containedType.0"
-              name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO/writeln">
-            <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/A/f/@body/@statement.0/@parameters.0/@containedType.0"
-                value="coucou">
-              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/String"/>
-            </parameters>
-            <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/A/f/@body/@statement.0/@target/@containedType.0"
-                name="stdio">
-              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#//@packages.0/io/StdIO"/>
-            </target>
-          </statement>
+      <inv name="myInv1">
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/A/myInv1/@body/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean"/>
+          <statement xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/A/myInv1/@body/@containedType.0"
+              value="true"/>
         </body>
-      </ownedOperation>
+      </inv>
+      <inv name="myInv2">
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/A/myInv1/@body/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/A/myInv1/@body/@containedType.0"
+              value="true"/>
+        </body>
+      </inv>
+      <inv name="myInv3">
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/A/myInv1/@body/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="#//@packages.0/A/myInv1/@body/@containedType.0"
+              value="true"/>
+        </body>
+      </inv>
     </ownedTypeDefinition>
   </packages>
   <requires uri="kermeta"/>
-  <usings qualifiedName="comp_operationStructure_test001"/>
-  <usings qualifiedName="kermeta::standard"/>
+  <usings qualifiedName="comp_invariant_test002"/>
 </kermeta_language_structure:ModelingUnit>

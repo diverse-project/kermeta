@@ -4,16 +4,16 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
   <ecore:EAnnotation source="ModellingUnit">
     <details key="require" value="kermeta|"/>
-    <details key="using" value="comp_operationStructure_test001|kermeta::standard|"/>
+    <details key="using" value="comp_multiplicity_test001|kermeta::standard|"/>
   </ecore:EAnnotation>
-  <ecore:EPackage name="comp_operationStructure_test001" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_operationStructure/test001/expected_output/ecore/comp_operationStructure_test001.ecore#/"
-      nsPrefix="comp_operationStructure_test001">
+  <ecore:EPackage name="comp_multiplicity_test001" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_multiplicity/test001/expected_output/ecore/comp_multiplicity_test001.ecore#/"
+      nsPrefix="comp_multiplicity_test001">
     <eClassifiers xsi:type="ecore:EClass" name="A" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object">
-      <eOperations name="f" ordered="false" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Void">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="s" upperBound="4" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/String">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;coucou&quot;)&#xA;end"/>
+          <details key="isComposite" value="false"/>
         </eAnnotations>
-      </eOperations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
   </ecore:EPackage>
