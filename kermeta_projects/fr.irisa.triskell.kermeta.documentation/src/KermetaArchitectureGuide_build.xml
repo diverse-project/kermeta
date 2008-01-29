@@ -1,4 +1,4 @@
-<!-- $Id: KermetaArchitectureGuide_build.xml,v 1.4 2006-11-03 08:32:17 dvojtise Exp $ -->
+<!-- $Id: KermetaArchitectureGuide_build.xml,v 1.5 2008-01-29 15:17:21 dvojtise Exp $ -->
 <project name="KermetaArchitectureGuide" default="all">
 	<!-- configuration properties -->		
 	<!-- project configuration -->
@@ -11,7 +11,7 @@
 	<!--<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\docs"/>-->
 	<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\kermeta.org\\docs"/>
 			
-	<target name="all" depends="OOo2dbk, html.single, html.chunked ,pdf.fop">
+	<target name="all" depends="OOo2dbk, html.single, html.chunked, eclipse.help ,pdf.fop">
 	</target>
 	
 
