@@ -1,8 +1,9 @@
-/* $Id: containment_traversable.kmt,v 1.7 2008-01-29 14:51:30 ftanguy Exp $
+/* $Id: containment_traversable.kmt,v 1.8 2008-01-29 16:15:49 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *			François Tanguy <ftanguy@irisa.fr>
  */
 
 /**
@@ -18,19 +19,24 @@ require kermeta
 using kermeta::language::structure
 using kermeta::standard
 
-aspect class ModelingUnit {
+aspect class Object {
 	operation eachOwnedElement(func : <Object -> Object>) : Void is do
-        self.packages.each{p|
-			func(p.asType(Package))
-		}
-		self.ownedTags.each{ o |
+    	self.ownedTag.each{ o |
 			func(o.asType(Tag))
+		}
+	end
+}
+
+aspect class ModelingUnit {
+	method eachOwnedElement(func : <Object -> Object>) : Void is do
+		self.packages.each{p|
+			func(p.asType(Package))
 		}
 	end
 }
  
 aspect class Package {
-	operation eachOwnedElement(func : <Object -> Object>) : Void is do
+	method eachOwnedElement(func : <Object -> Object>) : Void is do
         self.ownedTypeDefinition.each{ o |
 			func(o.asType(TypeDefinition))
 		}
@@ -41,7 +47,7 @@ aspect class Package {
 }
 
 aspect class Enumeration {
-	operation eachOwnedElement(func : <Object -> Object>) : Void is do
+	method eachOwnedElement(func : <Object -> Object>) : Void is do
         self.ownedLiteral.each{ l |
         	func(l.asType(EnumerationLiteral))
 		}
@@ -49,7 +55,7 @@ aspect class Enumeration {
 }
 
 aspect class ClassDefinition {
-	operation eachOwnedElement(func : <Object -> Object>) : Void is do
+	method eachOwnedElement(func : <Object -> Object>) : Void is do
         self.ownedAttribute.each{ o |
 			func(o.asType(MultiplicityElement))
 		}
@@ -63,13 +69,14 @@ aspect class ClassDefinition {
 		}
 		
 		self.typeParameter.each{ t | 
+		stdio.writeln("class def")
 			func(t.asType(TypeVariable))
 		}
 	end	
 }
 
 aspect class Operation {
-	operation eachOwnedElement(func : <Object -> Object>) : Void is do
+	method eachOwnedElement(func : <Object -> Object>) : Void is do
         self.ownedParameter.each{ o |
 			func(o.asType(Parameter))
 		}
@@ -80,6 +87,11 @@ aspect class Operation {
 		
 		self.~post.each{ o |
 			func(o.asType(Constraint))
+		}
+		
+		self.typeParameter.each{ t |
+		stdio.writeln("operation")
+			func(t.asType(TypeVariable))
 		}
 	end	
 }

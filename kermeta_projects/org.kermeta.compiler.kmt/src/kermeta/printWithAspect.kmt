@@ -1,4 +1,4 @@
-/* $Id: printWithAspect.kmt,v 1.2 2008-01-25 17:33:23 cfaucher Exp $
+/* $Id: printWithAspect.kmt,v 1.3 2008-01-29 16:15:49 ftanguy Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -31,7 +31,7 @@ class Main
 		var epack : EPackage init loadEcoreModel
 		
 		loadKmModel.packages.each{ p |
-			p.asType(Package).ecoreProxy := epack
+			p.asType(Package).ecoreModelElement := epack
 			p.asType(Package).print(0)
 		}
 		

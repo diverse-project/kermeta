@@ -23,12 +23,12 @@ aspect class ModelingUnit {
 		// Creating the associated ecore package
 		var ecoreAnnotation : EAnnotation init build()
 		// Setting the ecore proxy
-		self.ecoreProxy := ecoreAnnotation
+		self.ecoreModelElement := ecoreAnnotation
 		// Compile the owned elements
 		self.eachOwnedElement{ p | p.compile(context) }
 		// Getting the ecore packages
 		self.packages.each{p|
-			self.ecorePackages.add( p.ecoreProxy )
+			self.ecorePackages.add( p.ecoreModelElement )
 		}
 	end
 }
@@ -42,10 +42,10 @@ aspect class Package {
 		var p : Package init self.nestingPackage
 		//p ?= self.container()
 		if ( p != void ) then
-			p.ecoreProxy.eSubpackages.add(ecorePackage)
+			p.ecoreModelElement.eSubpackages.add(ecorePackage)
 		end
 		// Setting the ecore proxy
-		self.ecoreProxy := ecorePackage
+		self.ecoreModelElement := ecorePackage
 		// Compile the owned elements
 		self.eachOwnedElement{ cd | cd.compile(context) }
 	end
@@ -58,9 +58,9 @@ aspect class PrimitiveType {
 		var ecoreDataType : EDataType init build()
 		// Setting the container
 		var p : Package init self.container().asType(Package)
-		p.ecoreProxy.eClassifiers.add(ecoreDataType)
+		p.ecoreModelElement.eClassifiers.add(ecoreDataType)
 		// Setting the ecore proxy
-		self.ecoreProxy := ecoreDataType
+		self.ecoreModelElement := ecoreDataType
 	end 
 }
 
@@ -71,9 +71,9 @@ aspect class Enumeration {
 		var ecoreEnumeration : EEnum init build()
 		// Setting the container
 		var p : Package init self.container().asType(Package)
-		p.ecoreProxy.eClassifiers.add(ecoreEnumeration)
+		p.ecoreModelElement.eClassifiers.add(ecoreEnumeration)
 		// Setting the ecore proxy
-		self.ecoreProxy := ecoreEnumeration
+		self.ecoreModelElement := ecoreEnumeration
 		// Compile the owned elements
 		self.eachOwnedElement{ l | l.compile(context) }
 		
@@ -87,9 +87,9 @@ aspect class EnumerationLiteral {
 		var ecoreEnumLiteral : EEnumLiteral init build()
 		// Setting the container
 		var e : Enumeration init self.~enumeration.asType(Enumeration)
-		e.ecoreProxy.eLiterals.add(ecoreEnumLiteral)
+		e.ecoreModelElement.eLiterals.add(ecoreEnumLiteral)
 		// Setting the ecore proxy
-		self.ecoreProxy := ecoreEnumLiteral
+		self.ecoreModelElement := ecoreEnumLiteral
 	end
 }  
   
@@ -100,9 +100,9 @@ aspect class ClassDefinition {
 		var ecoreClass : EClass init build()		
 		// Setting the container
 		var p : Package init self.container().asType(Package)
-		p.ecoreProxy.eClassifiers.add(ecoreClass)
+		p.ecoreModelElement.eClassifiers.add(ecoreClass)
 		// Setting the ecore proxy
-		self.ecoreProxy := ecoreClass
+		self.ecoreModelElement := ecoreClass
 		// Compile the owned elements
 		self.eachOwnedElement{ o | o.compile(context) }
 	end
@@ -117,9 +117,9 @@ aspect class Property {
 		// Setting the container
 		var c : ClassDefinition
 		c ?= self.container()
-		c.ecoreProxy.eStructuralFeatures.add( ecoreStructuralFeature )
+		c.ecoreModelElement.eStructuralFeatures.add( ecoreStructuralFeature )
 		// Setting the ecore proxy
-		self.ecoreProxy := ecoreStructuralFeature
+		self.ecoreModelElement := ecoreStructuralFeature
 	end 
 }
 
@@ -131,15 +131,15 @@ aspect class Operation {
 		// Setting the container
 		var c : ClassDefinition
 		c ?= self.container()
-		c.ecoreProxy.eOperations.add(ecoreOperation)
+		c.ecoreModelElement.eOperations.add(ecoreOperation)
 		// Setting the ecore proxy
-		self.ecoreProxy := ecoreOperation
+		self.ecoreModelElement := ecoreOperation
 		
 		var javaCode : StringBuffer init StringBuffer.new
 		
 		if (self.body != void) then
 		
-			var type : String init self.type.asType(Type).compile(context)
+			/*var type : String init self.type.asType(Type).compile(context)
 			if ( type!="Void" and type!="void" ) then
 				javaCode.append("\n" + type + " result = null;\n")
 			end
@@ -149,11 +149,11 @@ aspect class Operation {
 			
 			if ( type!="Void" and type!="void" ) then
 				javaCode.append("\nreturn result;\n")
-			end
+			end*/
 		end
 		
 		// Finally add the EAnnotation containing the Java code in the Ecore model
-        EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreProxy, javaCode.toString)
+        EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreModelElement, javaCode.toString)
 
 		// Compile the owned elements
 		self.eachOwnedElement{ o | o.compile(context) }
@@ -167,9 +167,9 @@ aspect class Parameter {
 		var ecoreParameter : EParameter init build()
 		// Setting the container
 		var o : Operation init self.container().asType(Operation)
-		o.ecoreProxy.eParameters.add( ecoreParameter )
+		o.ecoreModelElement.eParameters.add( ecoreParameter )
 		// Setting the ecore proxy
-		self.ecoreProxy := ecoreParameter
+		self.ecoreModelElement := ecoreParameter
 	end
 }
 
@@ -180,13 +180,13 @@ aspect class Constraint {
 		var ecoreAnnotation : EAnnotation init build()
 		// Setting the container
 		var c : Object init self.container
-		var p : Property init ObjectHelper.new.getPropertyValue(c, "ecoreProxy")
+		var p : Property init ObjectHelper.new.getPropertyValue(c, "ecoreModelElement")
 		if ( p!= void ) then
 			var ecoreModelElement : EModelElement init c.get(p).asType(EModelElement)
 			ecoreModelElement.eAnnotations.add(ecoreAnnotation)
 		end
 		// Setting the ecore proxy
-		self.ecoreProxy := ecoreAnnotation
+		self.ecoreModelElement := ecoreAnnotation
 	end
 }
 
@@ -199,12 +199,17 @@ aspect class Type {
 aspect class ObjectTypeVariable {
 	method compile(context : Integer) : String is do
 		result := ""
+		stdio.writeln("inside")
 		// Creating the associated ecore class
 		var ecoreTypeParameter : ETypeParameter init build()
 		// Setting the container
-		var t : ClassDefinition init self.container.asType(ClassDefinition)		
-		t.ecoreProxy.eTypeParameters.add(ecoreTypeParameter)
+		var container : Object init self.container
+		if ( container.isInstanceOf(ClassDefinition) ) then		
+			container.asType(ClassDefinition).ecoreModelElement.eTypeParameters.add(ecoreTypeParameter)
+		else
+			container.asType(Operation).ecoreModelElement.eTypeParameters.add(ecoreTypeParameter)
+		end
 		// Setting the ecore proxy
-		self.ecoreProxy := ecoreTypeParameter
+		self.ecoreModelElement := ecoreTypeParameter
 	end
 }

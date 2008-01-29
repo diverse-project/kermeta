@@ -1,4 +1,4 @@
-/* $Id: trace_structure.kmt,v 1.6 2008-01-29 14:51:30 ftanguy Exp $
+/* $Id: trace_structure.kmt,v 1.7 2008-01-29 16:15:49 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -18,47 +18,47 @@ using kermeta::language::structure
 using ecore
 
 aspect class ModelingUnit {
-	reference ecoreProxy : EAnnotation
+	reference ecoreModelElement : EAnnotation
 	
 	reference ecorePackages : EPackage[0..*]
 }
 
 aspect class Package {
-	reference ecoreProxy : EPackage
+	reference ecoreModelElement : EPackage
 }
 
 aspect class PrimitiveType {
-	reference ecoreProxy : EDataType
+	reference ecoreModelElement : EDataType
 }
 
 aspect class Enumeration {
-	reference ecoreProxy : EEnum
+	reference ecoreModelElement : EEnum
 }
 
 aspect class EnumerationLiteral {
-	reference ecoreProxy : EEnumLiteral
+	reference ecoreModelElement : EEnumLiteral
 }
 
 aspect class ClassDefinition {
-	reference ecoreProxy : EClass
+	reference ecoreModelElement : EClass
 }
 
 aspect class Operation {
-	reference ecoreProxy : EOperation
+	reference ecoreModelElement : EOperation
 }
 
 aspect class Parameter {
-	reference ecoreProxy : EParameter
+	reference ecoreModelElement : EParameter
 }
 
 aspect class Property {
-	reference ecoreProxy : EStructuralFeature
+	reference ecoreModelElement : EStructuralFeature
 }
 
 aspect class Constraint {
-	reference ecoreProxy : EAnnotation
+	reference ecoreModelElement : EAnnotation
 }
 
 aspect class ObjectTypeVariable {
-	reference ecoreProxy : ETypeParameter
+	reference ecoreModelElement : ETypeParameter
 }

@@ -1,4 +1,4 @@
-/* $Id: print_structure.kmt,v 1.2 2008-01-25 17:33:23 cfaucher Exp $
+/* $Id: print_structure.kmt,v 1.3 2008-01-29 16:15:49 ftanguy Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -13,7 +13,7 @@ require "compile_structure_common.kmt"
 require "compile_structure_pass2.kmt"
 require "containment_traversable.kmt"
 require "trace_structure.kmt"
-require "helpers/EcoreProxyHelper.kmt"
+require "helpers/ecoreModelElementHelper.kmt"
 
 using kermeta::language::structure
 using kermeta::language::behavior
@@ -41,7 +41,7 @@ aspect class ClassDefinition {
 	method print(context : Integer) : Void from TypeDefinition is do
 		stdio.writeln("class " + self.name + " {")
 		// Set the traceability
-		self.ecoreProxy := EcoreProxyHelper.new.findEClassProxy(self)
+		self.ecoreModelElement := ecoreModelElementHelper.new.findEClassProxy(self)
 		// Compile the owned elements
 		self.eachOwnedElement{ o | o.print(context) }
 		stdio.writeln("}\n")

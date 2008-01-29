@@ -7,7 +7,7 @@ require "compile_behavior.kmt"
 require "containment_traversable.kmt"
 require "trace_structure.kmt"
 require "helpers/EAnnotationHelper.kmt"
-require "helpers/EcoreProxyHelper.kmt"
+require "helpers/ecoreModelElementHelper.kmt"
 
 using kermeta::language::structure
 using kermeta::language::behavior
@@ -56,7 +56,7 @@ aspect class ClassDefinition {
 	method compile(context : Integer) : String from TypeDefinition is do
 		result := void
 		// Set the traceability
-		self.ecoreProxy := EcoreProxyHelper.new.findEClassProxy(self)
+		self.ecoreModelElement := ecoreModelElementHelper.new.findEClassProxy(self)
 		// Compile the owned elements
 		self.eachOwnedElement{ o | o.compile(context) }
 	end
@@ -89,7 +89,7 @@ aspect class Operation {
 	method compile(context : Integer) : String is do
 		result := void
 		// Set the traceability
-		self.ecoreProxy := EcoreProxyHelper.new.findEOperationProxy( self )
+		self.ecoreModelElement := ecoreModelElementHelper.new.findEOperationProxy( self )
 		
 		var javaCode : StringBuffer init StringBuffer.new
 		
@@ -108,7 +108,7 @@ aspect class Operation {
 		end
 		
 		// Finally add the EAnnotation containing the Java code in the Ecore model
-        EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreProxy, javaCode.toString)
+        EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreModelElement, javaCode.toString)
         
         result := javaCode.toString
 	end

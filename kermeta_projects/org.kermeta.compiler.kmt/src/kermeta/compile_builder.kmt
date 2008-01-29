@@ -1,4 +1,4 @@
-/* $Id: compile_builder.kmt,v 1.5 2008-01-29 14:51:30 ftanguy Exp $
+/* $Id: compile_builder.kmt,v 1.6 2008-01-29 16:15:49 ftanguy Exp $
  * Creation date: January 25, 2008
  * License:
  * Copyright:
@@ -90,7 +90,7 @@ aspect class EnumerationLiteral {
 		var ecoreEnumerationLiteral : EEnumLiteral init EEnumLiteral.new
 		ecoreEnumerationLiteral.name := self.name
 		ecoreEnumerationLiteral.literal := self.name
-		ecoreEnumerationLiteral.~value := self.~enumeration.ecoreProxy.eLiterals.size
+		ecoreEnumerationLiteral.~value := self.~enumeration.ecoreModelElement.eLiterals.size
 		//ecoreEnumerationLiteral.instance
 		result := ecoreEnumerationLiteral
 	end 
