@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.27 2007-12-20 16:38:52 cfaucher Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.28 2008-01-29 10:15:11 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2007-12-20 16:38:52 $</pubdate>
+    <pubdate>$Date: 2008-01-29 10:15:11 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -3886,7 +3886,7 @@ and op.name.indexOf("All")==-1}
 
       <para>Obviously, the merge will be successful only if there is no
       conflict between all the declared features.</para>
-
+      
       <section>
         <title>Textual syntax for merging</title>
 
@@ -3899,14 +3899,14 @@ and op.name.indexOf("All")==-1}
         qualified name (packages names + class name)</para>
 
         <para>In order to keep the compatibility with previous behaviour, the
-        merge is allowed only if you add some tags:</para>
+        merge is allowed only if you add some keyword or tag:</para>
 
         <variablelist>
           <varlistentry>
-            <term>@aspect "true"</term>
+            <term>aspect</term>
 
             <listitem>
-              <para>is placed on a class, it indicates that this class is an
+              <para>This keyword is placed on a class, it indicates that this class is an
               aspect of another one. This allows to complement a class with
               the features of the aspect class.</para>
             </listitem>
@@ -3916,7 +3916,7 @@ and op.name.indexOf("All")==-1}
             <term>@overloadable "true"</term>
 
             <listitem>
-              <para>is placed on an operation, it indicates that the body of
+              <para>This tag is placed on an operation, it indicates that the body of
               the operation can be overloaded by another definition of the
               same operation in an aspect class. This is useful in some
               situation were the code expect to be overloaded.</para>
@@ -3927,6 +3927,11 @@ and op.name.indexOf("All")==-1}
         <note><para>
            When using overloadable tag, for a given set of definition, the operation that is not tagged overlodable will overload all other definitions. If all the declaration declare to be overloadable, then the declaration order is important. The last declared will be used by the interpreter. 
         </para></note>
+        <note><para>
+            Since version 1.0.0, there is a dedicated keyword <emphasis>aspect</emphasis>, with previous version this feature was possible using the tag <emphasis>@aspect "true"</emphasis>
+            on classes.
+        </para>
+      </note>
       </section>
 
       <section>
@@ -3937,9 +3942,10 @@ and op.name.indexOf("All")==-1}
          <para>In this sample, writing:</para>
 
         <programlisting>// aspect1.kmt
+package pack;
+require kermeta
 // this is the first aspect of class A
-@aspect "true"
-class A {
+aspect class A {
 	attribute decorations : Decoration[0..*]
 }
 // this aspect also declares a new class, visible only when requiring this aspect
@@ -3950,6 +3956,8 @@ class Decoration{
          
 
         <programlisting>// base.kmt
+package pack;
+require kermeta
 // this is the base class
 class A {
 	attribute name : kermeta::standard::String
@@ -3963,12 +3971,13 @@ class A {
          
 
         <programlisting>// aspect2.kmt
+package pack;
+require kermeta
 require "base.kmt"
 require "aspect1.kmt"
 
 // is this context we have access to all the features of class A : from base, aspect1 and aspect2
-@aspect "true"
-class A {
+aspect class A {
 	attribute id : kermeta::standard::Integer
 	operation getFullSpecification() : kermeta::standard::String is do
 		result := name
@@ -4032,12 +4041,11 @@ class Decoration{
         aspect of another one which is concrete. This is useful in order to
         add pre or post conditions to a given operation.</para>
 
-        <para>Currently, (v0.4.1) the <link
+        <para>Currently, (v1.0.0) the <link
         linkend="section_derived_properties.link">derived properties</link>
         cannot be redefined in several aspect classes.</para>
 
-        <programlisting>@aspect "true"        
-class A {
+        <programlisting>aspect class A {
 	//the feature is equivalent to the one define in the base class, so this is legal
 	attribute name : kermeta::standard::String	
 	
@@ -4047,7 +4055,9 @@ class A {
 		is abstract
 }</programlisting>
 
-        <programlisting>class A {
+        <programlisting>package pack;
+require kermeta
+class A {
 
 	attribute name : kermeta::standard::String
 	operation getQualifiedName() : kermeta::standard::String is do
@@ -4061,18 +4071,18 @@ class A {
 
         <para>This sample shows the use of the overloadable tag</para>
 
-        <programlisting>@aspect "true"        
-class A {
-	
+        <programlisting>package pack;
+require kermeta
+aspect class A {	
 	@overloadable "true"
 	operation getQualifiedName() : kermeta::standard::String 
 		post notVoid is not result == Void
 		is abstract
 }</programlisting>
 
-        <programlisting>@aspect "true"        
-class A {
-	
+        <programlisting>package pack;
+require kermeta
+aspect class A {	
 	@overloadable "true"
 	operation getQualifiedName() : kermeta::standard::String is do
 		raise kermeta::exceptions::NotImplementedException.new
@@ -4080,7 +4090,6 @@ class A {
 }</programlisting>
 
         <programlisting>class A {
-
 	attribute name : kermeta::standard::String
 	operation getQualifiedName() : kermeta::standard::String is do
 		result := name
@@ -4101,13 +4110,31 @@ class A {
 
         <para></para>
       </section>
+      <section>
+        <title>Aspect and inheritance</title>
+
+        <para>If you define some inheritance in one of your aspects, all the aspects that require this aspect will have access to it. You
+        don't need to redefine it. However, if it helps to clarify the code to write it again, it will behave the same way.</para>
+      </section>
+      <section>
+        <title>Aspect and abstract</title>
+
+        <para>In kermeta textual syntax, the keyword aspect must be placed before the keyword abstract.</para>
+        <para>Example :</para>
+        <programlisting>package pack;
+require kermeta
+aspect abstract class A {	
+	// add something
+}</programlisting>
+        
+      </section>
     </section>
 
     <section id="section_modeltype.link">
       <title id="section_modeltype.title.link">Model type</title>
 
       <warning><para>
-         In current version of Kermeta(v0.4.2), ModelType is still a prototype. Any help, feedback, contribution is welcome to help us to finalize it. 
+         In current version of Kermeta(v1.0.0), ModelType is still a prototype. Any help, feedback, contribution is welcome to help us to finalize it. 
       </para></warning>
 
       <para>Kermeta is clearly a model oriented language, one of its first
