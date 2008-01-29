@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kermeta_language_structure:ModelingUnit xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/">
-  <packages name="comptest2" uri="tete">
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/">
+  <packages name="comp_classDefinition_test001" uri="tete">
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="A"
         superType="#//@packages.0/A/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
@@ -15,7 +15,7 @@
         superType="#//@packages.0/K/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
     </ownedTypeDefinition>
-    <nestedPackage name="SubPackage1" uri="toto">
+    <nestedPackage name="SubPackage1">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="B"
           superType="#//@packages.0/SubPackage1/B/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
@@ -24,14 +24,14 @@
           superType="#//@packages.0/SubPackage1/D/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
       </ownedTypeDefinition>
-      <nestedPackage name="SubSubPackage1" uri="titi">
+      <nestedPackage name="SubSubPackage1">
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
             name="C" superType="#//@packages.0/SubPackage1/SubSubPackage1/C/@containedType.0">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         </ownedTypeDefinition>
       </nestedPackage>
     </nestedPackage>
-    <nestedPackage name="SubPackage2" uri="tata">
+    <nestedPackage name="SubPackage2">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="F"
           superType="#//@packages.0/SubPackage2/F/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
@@ -40,7 +40,7 @@
           superType="#//@packages.0/SubPackage2/J/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
       </ownedTypeDefinition>
-      <nestedPackage name="SubSubPackage2" uri="tutu">
+      <nestedPackage name="SubSubPackage2">
         <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
             name="G" superType="#//@packages.0/SubPackage2/SubSubPackage2/G/@containedType.0">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
@@ -49,7 +49,7 @@
             name="I" superType="#//@packages.0/SubPackage2/SubSubPackage2/I/@containedType.0">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
         </ownedTypeDefinition>
-        <nestedPackage name="SubSubSubPackage2" uri="tyty">
+        <nestedPackage name="SubSubSubPackage2">
           <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
               name="H" superType="#//@packages.0/SubPackage2/SubSubPackage2/SubSubSubPackage2/H/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
@@ -59,10 +59,10 @@
     </nestedPackage>
   </packages>
   <requires uri="kermeta"/>
-  <usings qualifiedName="comptest2"/>
-  <usings qualifiedName="comptest2::SubPackage1"/>
-  <usings qualifiedName="comptest2::SubPackage1::SubSubPackage1"/>
-  <usings qualifiedName="comptest2::SubPackage2"/>
-  <usings qualifiedName="comptest2::SubPackage2::SubSubPackage2"/>
-  <usings qualifiedName="comptest2::SubPackage2::SubSubPackage2::SubSubSubPackage2"/>
+  <usings qualifiedName="comp_classDefinition_test001"/>
+  <usings qualifiedName="comp_classDefinition_test001::SubPackage1"/>
+  <usings qualifiedName="comp_classDefinition_test001::SubPackage1::SubSubPackage1"/>
+  <usings qualifiedName="comp_classDefinition_test001::SubPackage2"/>
+  <usings qualifiedName="comp_classDefinition_test001::SubPackage2::SubSubPackage2"/>
+  <usings qualifiedName="comp_classDefinition_test001::SubPackage2::SubSubPackage2::SubSubSubPackage2"/>
 </kermeta_language_structure:ModelingUnit>

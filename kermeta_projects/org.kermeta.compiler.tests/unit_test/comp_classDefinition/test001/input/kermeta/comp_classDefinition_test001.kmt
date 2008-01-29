@@ -1,5 +1,5 @@
 @uri "tete"
-package comptest2;
+package comp_classDefinition_test001;
 
 require kermeta
 

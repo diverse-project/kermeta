@@ -1,5 +1,5 @@
 
-package comp_inheritance_test003;
+package comp_parameter_test001;
 
 require kermeta
 
