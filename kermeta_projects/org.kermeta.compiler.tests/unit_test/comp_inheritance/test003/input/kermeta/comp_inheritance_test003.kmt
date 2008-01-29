@@ -2,10 +2,10 @@
 package comp_inheritance_test003;
 
 require kermeta
-require "http://www.eclipse.org/emf/2002/Ecore"
+require "http://www.eclipse.org/uml2/2.1.0/UML"
 
-using ecore
+using uml
 
-class A inherits EClass
+class A inherits Classifier
 {
 }
