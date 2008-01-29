@@ -1,4 +1,4 @@
-/* $Id: trace_structure.kmt,v 1.5 2008-01-28 17:13:17 ftanguy Exp $
+/* $Id: trace_structure.kmt,v 1.6 2008-01-29 14:51:30 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -47,6 +47,18 @@ aspect class Operation {
 	reference ecoreProxy : EOperation
 }
 
+aspect class Parameter {
+	reference ecoreProxy : EParameter
+}
+
 aspect class Property {
 	reference ecoreProxy : EStructuralFeature
+}
+
+aspect class Constraint {
+	reference ecoreProxy : EAnnotation
+}
+
+aspect class ObjectTypeVariable {
+	reference ecoreProxy : ETypeParameter
 }

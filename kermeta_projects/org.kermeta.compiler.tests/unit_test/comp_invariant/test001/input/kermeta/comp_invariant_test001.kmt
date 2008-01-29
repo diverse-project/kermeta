@@ -1,0 +1,14 @@
+
+package comptest2;
+
+require kermeta
+
+using kermeta::standard
+
+class A {
+
+	inv myInv is do
+		true
+	end
+
+}

@@ -1,0 +1,33 @@
+/* $Id: ConstraintHelper.kmt,v 1.1 2008-01-29 14:51:30 ftanguy Exp $
+ * Creation date: January 29, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: François Tanguy <ftanguy@irisa.fr>
+ */
+
+package compiler::helper::kermeta;
+
+
+require kermeta
+
+using kermeta::language::structure
+using kermeta::standard
+
+class ConstraintHelper
+{
+	operation isPre(c : Constraint) : Boolean is do 
+		result := false
+		var op : Operation init c.container().asType(Operation)
+		if ( op != void ) then
+			result := op.~pre.contains(c)
+		end
+	end
+
+	operation isPost(c : Constraint) : Boolean is do 
+		result := false
+		var op : Operation init c.container().asType(Operation)
+		if ( op != void ) then
+			result := op.~post.contains(c)
+		end
+	end
+}

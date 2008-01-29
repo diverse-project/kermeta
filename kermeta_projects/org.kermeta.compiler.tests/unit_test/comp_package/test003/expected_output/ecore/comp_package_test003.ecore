@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="comptest2">
-  <eSubpackages name="SubPackage1">
-    <eSubpackages name="SubSubPackage1"/>
-  </eSubpackages>
-  <eSubpackages name="SubPackage2">
-    <eSubpackages name="SubSubPackage2">
-      <eSubpackages name="SubSubSubPackage2"/>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModellingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="comp_package_test003|comp_package_test003::SubPackage1|comp_package_test003::SubPackage1::SubSubPackage1|comp_package_test003::SubPackage2|comp_package_test003::SubPackage2::SubSubPackage2|comp_package_test003::SubPackage2::SubSubPackage2::SubSubSubPackage2|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comp_package_test003" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_package/test003/expected_output/ecore/comp_package_test003.ecore#/"
+      nsPrefix="comp_package_test003">
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+    <eSubpackages name="SubPackage1" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_package/test003/expected_output/ecore/comp_package_test003.ecore#/comp_package_test003/SubPackage1"
+        nsPrefix="SubPackage1">
+      <eSubpackages name="SubSubPackage1" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_package/test003/expected_output/ecore/comp_package_test003.ecore#/comp_package_test003/SubPackage1/SubSubPackage1"
+          nsPrefix="SubSubPackage1"/>
     </eSubpackages>
-  </eSubpackages>
-</ecore:EPackage>
+    <eSubpackages name="SubPackage2" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_package/test003/expected_output/ecore/comp_package_test003.ecore#/comp_package_test003/SubPackage2"
+        nsPrefix="SubPackage2">
+      <eSubpackages name="SubSubPackage2" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_package/test003/expected_output/ecore/comp_package_test003.ecore#/comp_package_test003/SubPackage2/SubSubPackage2"
+          nsPrefix="SubSubPackage2">
+        <eSubpackages name="SubSubSubPackage2" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_package/test003/expected_output/ecore/comp_package_test003.ecore#/comp_package_test003/SubPackage2/SubSubPackage2/SubSubSubPackage2"
+            nsPrefix="SubSubSubPackage2"/>
+      </eSubpackages>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

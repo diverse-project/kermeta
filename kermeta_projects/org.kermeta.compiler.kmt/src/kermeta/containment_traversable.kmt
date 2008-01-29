@@ -1,4 +1,4 @@
-/* $Id: containment_traversable.kmt,v 1.6 2008-01-28 17:13:17 ftanguy Exp $
+/* $Id: containment_traversable.kmt,v 1.7 2008-01-29 14:51:30 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -57,6 +57,29 @@ aspect class ClassDefinition {
 		self.ownedOperation.each{ o |
 			func(o.asType(MultiplicityElement))
 		}
+		
+		self.~inv.each{ i |
+			func(i.asType(Constraint))
+		}
+		
+		self.typeParameter.each{ t | 
+			func(t.asType(TypeVariable))
+		}
 	end	
 }
 
+aspect class Operation {
+	operation eachOwnedElement(func : <Object -> Object>) : Void is do
+        self.ownedParameter.each{ o |
+			func(o.asType(Parameter))
+		}
+		
+		self.~pre.each{ o |
+			func(o.asType(Constraint))
+		}
+		
+		self.~post.each{ o |
+			func(o.asType(Constraint))
+		}
+	end	
+}

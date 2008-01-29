@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModellingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="comp_postcondition_test002|kermeta::standard|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comp_postcondition_test002" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_postcondition/test002/expected_output/ecore/comp_postcondition_test002.ecore#/"
+      nsPrefix="comp_postcondition_test002">
+    <eClassifiers xsi:type="ecore:EClass" name="Main" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object">
+      <eOperations name="foo" ordered="false" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Void">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta.post">
+          <details key="postFoo1" value="do&#xA;&#x9;true&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta.post">
+          <details key="postFoo2" value="do&#xA;&#x9;true&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta.post">
+          <details key="postFoo3" value="do&#xA;&#x9;true&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="s1" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/String"/>
+        <eParameters name="s2" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/String"/>
+        <eParameters name="s3" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/String"/>
+        <eParameters name="s4" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/String"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

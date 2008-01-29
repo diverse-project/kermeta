@@ -1,4 +1,5 @@
-package comptest2;
+
+package comp_package_test002;
 
 require kermeta
 

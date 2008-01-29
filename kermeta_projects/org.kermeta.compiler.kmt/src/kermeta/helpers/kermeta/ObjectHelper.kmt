@@ -1,0 +1,23 @@
+/* $Id: ObjectHelper.kmt,v 1.1 2008-01-29 14:51:30 ftanguy Exp $
+ * Creation date: January 29, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: François Tanguy <ftanguy@irisa.fr>
+ */
+
+
+package compiler::helper::kermeta;
+
+
+require kermeta
+
+using kermeta::language::structure
+using kermeta::standard
+
+class ObjectHelper
+{
+	operation getPropertyValue(o : Object, propertyName : String) : Property is do 
+		var classDefinition : ClassDefinition init o.getMetaClass().typeDefinition.asType(ClassDefinition)
+		result := classDefinition.allAttribute.detect{ p | p.name == propertyName }
+	end
+}

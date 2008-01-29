@@ -1,0 +1,27 @@
+
+package comp_precondition_test002;
+
+require kermeta
+
+using kermeta::standard
+
+class Main {
+
+	operation foo(s1 : String, s2 : String, s3 : String, s4 : String) 
+		pre preFoo1 is do
+			true
+		end
+		
+		pre preFoo2 is do
+			true
+		end
+		
+		pre preFoo3 is do
+			true
+		end
+		
+		is do
+		
+		end
+
+}

@@ -1,4 +1,4 @@
-/* $Id: KermetaHelper.kmt,v 1.2 2008-01-28 17:13:17 ftanguy Exp $
+/* $Id: KermetaHelper.kmt,v 1.3 2008-01-29 14:51:30 ftanguy Exp $
  * Creation date: January 28, 2008
  * License:
  * Copyright:
@@ -8,3 +8,5 @@
 package compiler::helper::kermeta;
 
 require "TypeHelper.kmt"
+require "ConstraintHelper.kmt"
+require "ObjectHelper.kmt"

@@ -1,0 +1,9 @@
+
+package comptest2;
+
+require kermeta
+
+using kermeta::standard
+
+class MyCollection<G> {
+}

@@ -1,4 +1,4 @@
-/* $Id: compile_builder.kmt,v 1.4 2008-01-28 17:13:17 ftanguy Exp $
+/* $Id: compile_builder.kmt,v 1.5 2008-01-29 14:51:30 ftanguy Exp $
  * Creation date: January 25, 2008
  * License:
  * Copyright:
@@ -11,6 +11,7 @@ package kermeta::language::structure;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helpers/CompilerHelper.kmt"
+require "trace_structure.kmt"
 
 using kermeta::language::structure
 using ecore
@@ -92,7 +93,7 @@ aspect class EnumerationLiteral {
 		ecoreEnumerationLiteral.~value := self.~enumeration.ecoreProxy.eLiterals.size
 		//ecoreEnumerationLiteral.instance
 		result := ecoreEnumerationLiteral
-	end
+	end 
 }
 
 aspect class ClassDefinition {
@@ -120,6 +121,37 @@ aspect class Operation {
 			ecoreOperation.eAnnotations.add( ecoreAnnotation )
 		end 
 		result := ecoreOperation 
+	end
+}
+
+aspect class Parameter {
+	operation build() : EParameter is do
+		var ecoreParameter : EParameter init EParameter.new
+		ecoreParameter.name := self.name
+		//ecoreParameter.ordered
+		//ecoreParameter.unique
+		//ecoreParameter.lowerBound
+		//ecoreParameter.upperBound
+		//ecoreParameter.many
+		//ecoreParameter.required
+		result := ecoreParameter
+	end
+}
+
+aspect class Constraint {
+	operation build() : EAnnotation is do
+		// TODO : Fill the body using the java pretty printer
+		var body : String init ""
+				
+		if ( self.container.isInstanceOf(ClassDefinition) ) then
+			result := EAnnotationHelper.new.create("kermeta.inv", self.name, body)		
+		else
+			if ( ConstraintHelper.new.isPre(self) ) then
+				result := EAnnotationHelper.new.create("kermeta.pre", self.name, body)	
+			else
+				result := EAnnotationHelper.new.create("kermeta.post", self.name, body)
+			end
+		end
 	end
 }
 
@@ -153,5 +185,13 @@ aspect class Property {
 		// gestion du read only
 		// gestion du default		
 		result := ecoreStructuralFeature
+	end
+}
+
+aspect class ObjectTypeVariable {
+	operation build() : ETypeParameter is do
+		var ecoreTypeParameter : ETypeParameter init ETypeParameter.new
+		ecoreTypeParameter.name := self.name
+		result := ecoreTypeParameter
 	end
 }

@@ -1,0 +1,13 @@
+
+package comp_parameter_test002;
+
+require kermeta
+
+using kermeta::standard
+
+class A
+{
+
+	operation foo(s1 : String, s2 : String, s3 : String, s4 : String) is abstract
+
+}

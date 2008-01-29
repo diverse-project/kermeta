@@ -829,26 +829,26 @@
   <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_inheritance/test001/expected_output/java/comp_inheritance_test001/util/Comp_inheritance_test001Switch.java"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_inheritance/comp_inheritance.trek"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_inheritance/test003/summary_test003.txt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-23T13:54:44.578+0000" value="/org.kermeta.compiler.tests/unit_test/comp_inheritance/test003/input/kermeta/comp_inheritance_test003.kmt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-29T10:07:55.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_inheritance/test003/input/kermeta/comp_inheritance_test003.kmt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/compiler_unit_test.kpm.backup"/>
-  <units rules="//@rules.1 //@rules.4 //@rules.0" lastTimeModified="2008-01-25T10:14:21.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test001/input/kermeta/comp_package_test001.kmt"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test001/input/kermeta/comp_package_test001.km"/>
-  <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test001/expected_output/ecore/comp_package_test001.ecore"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test002/input/kermeta/comp_package_test002.kmt"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test002/input/kermeta/comp_package_test002.km"/>
-  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-01-25T12:29:14.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test002/expected_output/ecore/comp_package_test002.ecore"/>
+  <units rules="//@rules.1 //@rules.4 //@rules.0" lastTimeModified="2008-01-29T13:08:53.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test001/input/kermeta/comp_package_test001.kmt"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="2008-01-29T13:08:59.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test001/input/kermeta/comp_package_test001.km"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-01-29T13:09:06.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test001/expected_output/ecore/comp_package_test001.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-29T13:08:31.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test002/input/kermeta/comp_package_test002.kmt"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="2008-01-29T13:08:36.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test002/input/kermeta/comp_package_test002.km"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-01-29T13:08:43.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test002/expected_output/ecore/comp_package_test002.ecore"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test002/summary_test002.txt"/>
-  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-01-25T14:04:20.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test003/expected_output/ecore/comp_package_test003.ecore"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test003/input/kermeta/comp_package_test003.km"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test003/input/kermeta/comp_package_test003.kmt"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-01-29T13:08:05.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test003/expected_output/ecore/comp_package_test003.ecore"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="2008-01-29T13:07:52.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test003/input/kermeta/comp_package_test003.km"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-29T13:07:47.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test003/input/kermeta/comp_package_test003.kmt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test003/summary_test003.txt"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test004/summary_test004.txt"/>
   <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test004/input/kermeta/comp_package_test004.km"/>
   <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test004/expected_output/ecore/comp_package_test004.ecore"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test005/summary_test005.txt"/>
-  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-25T14:23:57.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test005/input/kermeta/comp_package_test005.kmt"/>
-  <units rules="//@rules.0 //@rules.2" lastTimeModified="2008-01-25T14:12:27.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test005/input/kermeta/comp_package_test005.km"/>
-  <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test005/expected_output/ecore/comp_package_test005.ecore"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-29T13:07:19.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test005/input/kermeta/comp_package_test005.kmt"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="2008-01-29T13:07:24.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test005/input/kermeta/comp_package_test005.km"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-01-29T13:08:18.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_package/test005/expected_output/ecore/comp_package_test005.ecore"/>
   <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_classDefinition/test001/summary_test001.txt"/>
   <units rules="//@rules.0 //@rules.2" lastTimeModified="2008-01-25T15:04:12.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_classDefinition/test001/input/kermeta/comp_classDefinition_test001.km"/>
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_classDefinition/test001/input/kermeta/comp_classDefinition_test001.kmt"/>
@@ -884,6 +884,41 @@
   <units rules="//@rules.0 //@rules.2" lastTimeModified="2008-01-28T14:34:40.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_enumeration/test001/input/kermeta/comp_enumeration_test001.km"/>
   <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-28T17:09:37.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_enumeration/test001/input/kermeta/comp_enumeration_test001.kmt"/>
   <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_enumeration/test001/expected_output/ecore/comp_enumeration_test001.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_invariant/test001/summary_test001.txt"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_invariant/test001/input/kermeta/comp_invariant_test001.km"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_invariant/test001/input/kermeta/comp_invariant_test001.kmt"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-01-29T09:15:43.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_invariant/test001/expected_output/ecore/comp_invariant_test001.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_generics/test001/summary_test001.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-29T09:17:11.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_generics/test001/input/kermeta/comp_generics_test001.kmt"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_generics/test001/input/kermeta/comp_generics_test001.km"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-01-29T09:30:13.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_generics/test001/expected_output/ecore/comp_generics_test001.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_parameter/test001/summary_test001.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-29T10:19:11.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_parameter/test001/input/kermeta/comp_parameter_test001.kmt"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="2008-01-29T10:19:17.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_parameter/test001/input/kermeta/comp_parameter_test001.km"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-01-29T10:21:31.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_parameter/test001/expected_output/ecore/comp_parameter_test001.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_parameter/summary_comp_parameter.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_parameter/progress_comp_parameter.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_parameter/refines_uc_comp_parameter.txt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_parameter/test002/summary_test002.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-29T13:05:25.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_parameter/test002/input/kermeta/comp_parameter_test002.kmt"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_parameter/test002/input/kermeta/comp_parameter_test002.km"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_parameter/test002/expected_output/ecore/comp_parameter_test002.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_precondition/test001/summary_test001.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-29T14:41:27.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_precondition/test001/input/kermeta/comp_precondition_test001.kmt"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="2008-01-29T14:41:42.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_precondition/test001/input/kermeta/comp_precondition_test001.km"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-01-29T14:41:50.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_precondition/test001/expected_output/ecore/comp_precondition_test001.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_precondition/test002/summary_test002.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-29T14:43:26.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_precondition/test002/input/kermeta/comp_precondition_test002.kmt"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_precondition/test002/input/kermeta/comp_precondition_test002.km"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-01-29T14:43:37.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_precondition/test002/expected_output/ecore/comp_precondition_test002.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_postcondition/test001/summary_test001.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-29T14:46:32.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_postcondition/test001/input/kermeta/comp_postcondition_test001.kmt"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="2008-01-29T14:46:37.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_postcondition/test001/input/kermeta/comp_postcondition_test001.km"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_postcondition/test001/expected_output/ecore/comp_postcondition_test001.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_postcondition/test002/summary_test002.txt"/>
+  <units rules="//@rules.0 //@rules.1 //@rules.4" lastTimeModified="2008-01-29T14:48:15.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_postcondition/test002/input/kermeta/comp_postcondition_test002.kmt"/>
+  <units rules="//@rules.0 //@rules.2" lastTimeModified="1970-01-01T00:00:00.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_postcondition/test002/input/kermeta/comp_postcondition_test002.km"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-01-29T14:48:28.000+0000" value="/org.kermeta.compiler.tests/unit_test/comp_postcondition/test002/expected_output/ecore/comp_postcondition_test002.ecore"/>
   <ruleTypes name="require"/>
   <ruleTypes name="normal"/>
 </kpm:KPM>

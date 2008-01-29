@@ -14,6 +14,7 @@ using kermeta::standard
 using kermeta::utils
 using ecore
 using compiler::helper::ecore
+using compiler::helper::kermeta
 
  
 aspect class ModelingUnit {
@@ -111,7 +112,6 @@ aspect class ClassDefinition {
 aspect class Property {
 	method compile(context : Integer) : String is do
 		result := ""
-		stdio.writeln("coucou")
 		// Creating the associated ecore class
 		var ecoreStructuralFeature : EStructuralFeature init build()
 		// Setting the container
@@ -154,11 +154,57 @@ aspect class Operation {
 		
 		// Finally add the EAnnotation containing the Java code in the Ecore model
         EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreProxy, javaCode.toString)
+
+		// Compile the owned elements
+		self.eachOwnedElement{ o | o.compile(context) }
+	end
+}
+
+aspect class Parameter {
+	method compile(context : Integer) : String is do
+		result := ""
+		// Creating the associated ecore class
+		var ecoreParameter : EParameter init build()
+		// Setting the container
+		var o : Operation init self.container().asType(Operation)
+		o.ecoreProxy.eParameters.add( ecoreParameter )
+		// Setting the ecore proxy
+		self.ecoreProxy := ecoreParameter
+	end
+}
+
+aspect class Constraint {
+	method compile(context : Integer) : String is do
+		result := ""
+		// Creating the associated ecore class
+		var ecoreAnnotation : EAnnotation init build()
+		// Setting the container
+		var c : Object init self.container
+		var p : Property init ObjectHelper.new.getPropertyValue(c, "ecoreProxy")
+		if ( p!= void ) then
+			var ecoreModelElement : EModelElement init c.get(p).asType(EModelElement)
+			ecoreModelElement.eAnnotations.add(ecoreAnnotation)
+		end
+		// Setting the ecore proxy
+		self.ecoreProxy := ecoreAnnotation
 	end
 }
 
 aspect class Type {
 	method compile(context : Integer) : String is do
 		result := ""
+	end
+}
+
+aspect class ObjectTypeVariable {
+	method compile(context : Integer) : String is do
+		result := ""
+		// Creating the associated ecore class
+		var ecoreTypeParameter : ETypeParameter init build()
+		// Setting the container
+		var t : ClassDefinition init self.container.asType(ClassDefinition)		
+		t.ecoreProxy.eTypeParameters.add(ecoreTypeParameter)
+		// Setting the ecore proxy
+		self.ecoreProxy := ecoreTypeParameter
 	end
 }
