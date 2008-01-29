@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="0.99.0.qualifier"
+      version="1.0.0"
       provider-name="IRISA/INRIA"
       image="images/kmt_32.gif">
    <install-handler/>
@@ -40,7 +40,7 @@ GPL license.
          version="0.0.0"/>
 
    <requires>
-      <import feature="fr.irisa.triskell.traceability" version="0.1.0" match="greaterOrEqual"/>
+      <import feature="fr.irisa.triskell.traceability" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.debug.core"/>

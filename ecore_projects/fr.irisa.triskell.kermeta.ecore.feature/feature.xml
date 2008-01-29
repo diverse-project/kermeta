@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta.ecore"
       label="Kermeta MDK for Ecore"
-      version="0.1.0"
+      version="0.1.1"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.example.com/description">
@@ -23,7 +23,7 @@
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
-      <import feature="fr.irisa.triskell.kermeta" version="0.4.1"/>
+      <import feature="fr.irisa.triskell.kermeta" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="fr.irisa.triskell.kermeta.io"/>
       <import plugin="fr.irisa.triskell.kermeta.interpreter"/>

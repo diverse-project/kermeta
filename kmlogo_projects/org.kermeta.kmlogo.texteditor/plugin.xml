@@ -7,7 +7,9 @@
             Documentation="Sintaks mapping file for the Abstract Syntax of kmLogo"
             Extension="logo"
             File="sts/ASMLogo.sts"
-            ModelExtension="asmlogo">
+            ModelExtension="asmlogo"
+            model2text_popup_label="Logo model 2 text"
+            text2model_popup_label="Logo text 2 model">
       </StsFile>
    </extension>
 
