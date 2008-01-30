@@ -1,4 +1,4 @@
-/* $Id: compile_builder.kmt,v 1.7 2008-01-30 12:35:27 ftanguy Exp $
+/* $Id: compile_builder.kmt,v 1.8 2008-01-30 13:24:16 cfaucher Exp $
  * Creation date: January 25, 2008
  * License:
  * Copyright:
@@ -90,7 +90,7 @@ aspect class EnumerationLiteral {
 		var ecoreEnumerationLiteral : EEnumLiteral init EEnumLiteral.new
 		ecoreEnumerationLiteral.name := self.name
 		ecoreEnumerationLiteral.literal := self.name
-		ecoreEnumerationLiteral.~value := self.~enumeration.ecoreModelElement.eLiterals.size
+		ecoreEnumerationLiteral.~value := self.~enumeration.asType(Enumeration).ecoreModelElement.eLiterals.size
 		//ecoreEnumerationLiteral.instance
 		result := ecoreEnumerationLiteral
 	end 
@@ -161,7 +161,7 @@ aspect class Constraint {
 aspect class Property {
 	operation build() : EStructuralFeature is do
 		var ecoreStructuralFeature : EStructuralFeature
-		if ( self.isComposite and TypeHelper.new.isPrimitiveType(self.type) ) then
+		if ( self.isComposite and TypeHelper.new.isPrimitiveType(self.type.asType(Type)) ) then
 			ecoreStructuralFeature := EAttribute.new
 			//ecoreStructuralFeature.iD := 
 		else
