@@ -1,0 +1,72 @@
+/* $Id: trek2junit.kmt,v 1.1 2008-01-30 17:42:34 cfaucher Exp $
+ * Creation date: Jan 30, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+@mainClass "org::kermeta::compiler::trek2docbook::Main"
+@mainOperation "main"
+
+package org::kermeta::compiler::trek2docbook;
+
+require kermeta
+require "http://www.kermeta.org/trek"
+
+require "test_suite.kmt"
+
+using ecore
+using kermeta::standard
+using kermeta::persistence
+using kermeta::language::structure
+using kermeta::utils
+using kermeta::io
+using trek
+using org::kermeta::compiler::trek2junit::kermeta
+
+class Main
+{
+
+	/** Load the given UseKaseModel */
+	operation load() : UseKaseModel is do
+		var firstPackage : UseKaseModel init UseKaseModel.new
+		var repository : EMFRepository init EMFRepository.new             
+
+   		var resource : Resource init repository.getResource("platform:/resource/org.kermeta.compiler.tests/unit_test/unit_test.trek")
+       	
+       	stdio.writeln("Resource loading start")
+       	resource.load()
+		stdio.writeln("Resource loading end")
+		result ?=resource.instances.one
+	end
+
+	/**
+	 *
+	 */
+	operation main(mainFolder : String) : Void is do
+	
+		var useKaseModel : UseKaseModel init UseKaseModel.new
+       	useKaseModel := load()
+       	
+       	var structure_uc : KUseCase init KUseCase.new
+       	structure_uc := useKaseModel.kuseCases.detect{ uc | uc.id == "comp_structure"
+       	}
+
+       	structure_uc.refinedBy.each{ uc |
+
+       		uc.verifiedBy.each{ tc | 
+				do
+					var content : StringBuffer init StringBuffer.new
+	       			content.append(JUnitTestSuiteTemplate.new.generate(uc, tc))
+	       			
+					var ioHelper : FileIO init FileIO.new
+					var filename : String init mainFolder + "/test_suite/" + uc.id + "_" + tc.name + ".java"
+			           			
+					ioHelper.writeTextFile(filename,content.toString)
+				end
+			}
+       	}
+       	
+		stdio.writeln("End of the generation of Test suite")
+
+	end
+}

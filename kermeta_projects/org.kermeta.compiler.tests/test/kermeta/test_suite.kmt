@@ -1,0 +1,17 @@
+package org::kermeta::compiler::trek2junit::kermeta;
+require kermeta
+require "http://www.kermeta.org/trek"
+using kermeta::standard
+using kermeta::utils
+using trek
+class JUnitTestSuiteTemplate{
+operation generate(uc:KUseCase, tc:KTestCase):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\r\nclass ")
+_res.append( uc.name + "_" + tc.name )
+_res.append(" {\r\n\r\n\tpublic ")
+_res.append( uc.name + "_" + tc.name )
+_res.append("() {\r\n\t}\r\n\t\r\n}")
+result := _res.toString
+end
+}

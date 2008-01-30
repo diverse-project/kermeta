@@ -1,0 +1,15 @@
+<%@ket
+	package="org::kermeta::compiler::trek2junit::kermeta"
+	require="http://www.kermeta.org/trek"
+	using="kermeta::language::structure"
+	using="trek"
+	class="JUnitTestSuiteTemplate"
+	parameters="uc:KUseCase, tc:KTestCase"
+%>
+
+class <%= uc.name + "_" + tc.name %> {
+
+	public <%= uc.name + "_" + tc.name %>() {
+	}
+	
+}
