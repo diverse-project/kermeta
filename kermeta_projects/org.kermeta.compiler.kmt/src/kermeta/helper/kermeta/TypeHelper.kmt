@@ -1,8 +1,8 @@
-/* $Id: TypeHelper.kmt,v 1.2 2008-01-28 17:13:17 ftanguy Exp $
+/* $Id: TypeHelper.kmt,v 1.1 2008-01-30 16:42:10 cfaucher Exp $
  * Creation date: January 28, 2008
- * License:
- * Copyright:
- * Authors:
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Francois Tanguy <ftanguy@irisa.fr>
  */
 
 package compiler::helper::kermeta;

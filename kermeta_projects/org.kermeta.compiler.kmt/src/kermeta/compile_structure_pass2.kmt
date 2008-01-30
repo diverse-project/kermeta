@@ -1,3 +1,11 @@
+/* $Id: compile_structure_pass2.kmt,v 1.3 2008-01-30 16:42:11 cfaucher Exp $
+ * Creation date: January 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Francois Tanguy <ftanguy@irisa.fr>
+ *			Cyril Faucher <cfaucher@irisa.fr>
+ */
+
 package kermeta::language::structure;
 
 require kermeta
@@ -6,16 +14,15 @@ require "compile_structure_common.kmt"
 require "compile_behavior.kmt"
 require "containment_traversable.kmt"
 require "trace_structure.kmt"
-require "helpers/EAnnotationHelper.kmt"
-require "helpers/ecoreModelElementHelper.kmt"
+require "helper/CompilerHelper.kmt"
 
 using kermeta::language::structure
 using kermeta::language::behavior
 using kermeta::standard
 using kermeta::utils
 using ecore
-using ecore::helper
 using compiler::helper
+using compiler::helper::ecore
 
 /**
  * unused for the moment
@@ -56,7 +63,7 @@ aspect class ClassDefinition {
 	method compile(context : Integer) : String from TypeDefinition is do
 		result := void
 		// Set the traceability
-		self.ecoreModelElement := ecoreModelElementHelper.new.findEClassProxy(self)
+		self.ecoreModelElement := EcoreModelElementHelper.new.findEClassProxy(self)
 		// Compile the owned elements
 		self.eachOwnedElement{ o | o.compile(context) }
 	end
@@ -89,7 +96,7 @@ aspect class Operation {
 	method compile(context : Integer) : String is do
 		result := void
 		// Set the traceability
-		self.ecoreModelElement := ecoreModelElementHelper.new.findEOperationProxy( self )
+		self.ecoreModelElement := EcoreModelElementHelper.new.findEOperationProxy( self )
 		
 		var javaCode : StringBuffer init StringBuffer.new
 		

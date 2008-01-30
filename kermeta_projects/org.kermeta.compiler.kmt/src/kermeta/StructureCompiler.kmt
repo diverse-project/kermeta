@@ -1,9 +1,9 @@
-/* $Id: StructureCompiler.kmt,v 1.7 2008-01-30 12:35:27 ftanguy Exp $
+/* $Id: StructureCompiler.kmt,v 1.8 2008-01-30 16:42:11 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Cyril Faucher <cfaucher@irisa.fr>
- *			François Tanguy <ftanguy@irisa.fr>
+ *			Francois Tanguy <ftanguy@irisa.fr>
  */
 
 @mainClass "kermeta::compiler::Main" 
@@ -18,7 +18,6 @@ require "compile_structure.kmt"
 
 using ecore
 using kermeta::persistence
-//using kermeta::standard
 using kermeta::language::behavior
 using kermeta::language::structure
 

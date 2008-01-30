@@ -1,4 +1,4 @@
-/* $Id: EcoreModelElementHelper.kmt,v 1.1 2008-01-29 17:22:03 cfaucher Exp $
+/* $Id: EcoreModelElementHelper.kmt,v 1.1 2008-01-30 16:42:11 cfaucher Exp $
  * Creation date: January 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -9,12 +9,12 @@ package compiler::helper;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "../trace_structure.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/trace_structure.kmt"
 
 using kermeta::language::structure
 using ecore
 
-class ecoreModelElementHelper {
+class EcoreModelElementHelper {
 	
 	operation findEClassProxy(cd : ClassDefinition) : EClass is do
 		var pack : Package init Package.new

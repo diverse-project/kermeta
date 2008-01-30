@@ -1,0 +1,12 @@
+/* $Id: KermetaHelper.kmt,v 1.1 2008-01-30 16:42:10 cfaucher Exp $
+ * Creation date: January 28, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Francois Tanguy <ftanguy@irisa.fr>
+ */
+
+package compiler::helper::kermeta;
+
+require "TypeHelper.kmt"
+require "ConstraintHelper.kmt"
+require "ObjectHelper.kmt"

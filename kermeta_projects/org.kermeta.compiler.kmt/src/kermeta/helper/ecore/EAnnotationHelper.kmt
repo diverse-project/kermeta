@@ -1,8 +1,8 @@
-/* $Id: EAnnotationHelper.kmt,v 1.4 2008-01-29 16:15:49 ftanguy Exp $
+/* $Id: EAnnotationHelper.kmt,v 1.1 2008-01-30 16:42:11 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
- * Authors: François Tanguy <ftanguy@irisa.fr>
+ * Authors: Francois Tanguy <ftanguy@irisa.fr>
  */
 
 package compiler::helper::ecore;

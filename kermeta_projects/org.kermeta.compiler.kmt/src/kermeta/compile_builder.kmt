@@ -1,16 +1,17 @@
-/* $Id: compile_builder.kmt,v 1.8 2008-01-30 13:24:16 cfaucher Exp $
+/* $Id: compile_builder.kmt,v 1.9 2008-01-30 16:42:11 cfaucher Exp $
  * Creation date: January 25, 2008
- * License:
- * Copyright:
- * Authors:
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: François Tanguy <ftanguy@irisa.fr>
  */
+
 
 package kermeta::language::structure;
 
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helpers/CompilerHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/CompilerHelper.kmt"
 require "trace_structure.kmt"
 
 using kermeta::language::structure
