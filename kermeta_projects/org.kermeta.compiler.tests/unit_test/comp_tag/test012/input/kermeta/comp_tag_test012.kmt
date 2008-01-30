@@ -1,0 +1,9 @@
+
+package comp_tag_test012;
+
+require kermeta
+
+using kermeta::standard
+
+@tag1 "valueTag"
+alias MyString : kermeta::standard::String;

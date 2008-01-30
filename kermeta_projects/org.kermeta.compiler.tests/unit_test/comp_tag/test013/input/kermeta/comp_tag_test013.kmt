@@ -1,0 +1,13 @@
+
+package comp_tag_test013;
+
+require kermeta
+
+/**
+ * One comment.
+ */
+enumeration Couleur {
+	bleau;
+	rouge;
+	vert;
+}

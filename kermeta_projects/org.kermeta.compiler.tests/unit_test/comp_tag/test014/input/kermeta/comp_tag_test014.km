@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_0_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/utils.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/">
+  <packages name="comp_tag_test014">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:Enumeration" tag="#//@packages.0/Couleur/@ownedTags.0"
+        name="Couleur">
+      <ownedTags name="rag1" value="tagValue" object="#//@packages.0/Couleur"/>
+      <ownedLiteral name="bleau"/>
+      <ownedLiteral name="rouge"/>
+      <ownedLiteral name="vert"/>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="comp_tag_test014"/>
+</kermeta_language_structure:ModelingUnit>

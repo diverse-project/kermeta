@@ -1,0 +1,9 @@
+
+package comp_tag_test011;
+
+require kermeta
+
+/**
+ * One comment.
+ */
+alias MyString : kermeta::standard::String;
