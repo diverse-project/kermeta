@@ -1,4 +1,4 @@
-/*$Id: CompareModel.java,v 1.2 2007-11-29 14:28:19 dvojtise Exp $
+/*$Id: CompareModel.java,v 1.3 2008-01-30 16:59:34 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.tests
 * File : 	CompareModel.java
 * License : EPL
@@ -10,17 +10,7 @@
 
 package fr.irisa.triskell.kermeta.tests.comparison;
 
-import java.io.IOException;
-
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.compare.diff.generic.DiffMaker;
-import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
-import org.eclipse.emf.compare.diff.metamodel.DiffModel;
-import org.eclipse.emf.compare.match.metamodel.MatchModel;
-import org.eclipse.emf.compare.match.statistic.DifferencesServices;
-import org.eclipse.emf.compare.util.ModelUtils;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -54,13 +44,19 @@ public class CompareModel {
 		init();
 	}
 	
+	/**
+	 * 
+	 */
 	private void init() {
 		TestPlugin.getDefault();
 		this.leftModelURI = URI.createFileURI(this.leftModelPath);
 		this.rightModelURI = URI.createFileURI(this.rightModelPath);
 	}
 
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean compareWithEcoreUtil() {
 		Resource leftModelRes = resourceSet.getResource(leftModelURI, true);
 		Resource rightModelRes = resourceSet.getResource(rightModelURI, true);
@@ -71,49 +67,10 @@ public class CompareModel {
 	
 	/**
 	 * 
-	 * @param result_dir
-	 * @param result_fileName
+	 * @return
 	 */
-	public boolean compareWithEMFCompare(/*String result_dir, String result_fileName*/) {
-		boolean res = false;
-		try {
-			// Loads the two models passed as arguments
-			final EObject model1 = ModelUtils.load(leftModelURI, resourceSet);
-			final EObject model2 = ModelUtils.load(rightModelURI, resourceSet);
-			// Creates the match then the diff model for those two models
-			final MatchModel match = new DifferencesServices().modelMatch(model1, model2, new NullProgressMonitor());
-			final DiffModel diff = new DiffMaker().doDiff(match);
-			
-			if(((DiffGroup)diff.getOwnedElements().get(0)).getSubchanges()> 0) {
-				res = false;
-			} else {
-				res = true;
-			}
-					
-			// Prints the results
-			//System.out.println(ModelUtils.serialize(match));
-			//System.out.println(ModelUtils.serialize(diff));
-			//System.out.println("saving diff as \"result.diff\"");
-			//ModelUtils.save(diff, "result.diff");
-			//System.out.println("saving match as \"result.match\"");
-			//ModelUtils.save(match, "result.match");
-					
-			// Serializes the result as "result.emfdiff" in the directory this class has been called from.
-			//System.out.println("saving emfdiff as " + result_dir + "/" + result_fileName); //$NON-NLS-1$
-			//final ModelInputSnapshot snapshot = DiffFactory.eINSTANCE.createModelInputSnapshot();
-			//snapshot.setDate(Calendar.getInstance().getTime());
-			//snapshot.setMatch(match);
-			//snapshot.setDiff(diff);
-			//ModelUtils.save(snapshot, result_dir + "/" + result_fileName); //$NON-NLS-1$
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return res;
+	public boolean compareWithEMFCompare() {
+		return EMFCompareModelHelper.compare(leftModelPath, rightModelPath);
 	}
 
 	public String getLeftModel() {
@@ -143,9 +100,9 @@ public class CompareModel {
 	public static void main (String args[]) {
 		String l = "test/interpreter/emf_testcases/instances/kmLogo.km";
 		String r = "test/interpreter/emf_testcases/instances/ecore.km";
-		CompareModel modelComparison = new CompareModel(r, r);
+		CompareModel modelComparison = new CompareModel(l, r);
 		System.out.println(modelComparison.compareWithEcoreUtil());
-		System.out.println(modelComparison.compareWithEMFCompare(/*"test", "ecore.emfdiff"*/));
+		System.out.println(modelComparison.compareWithEMFCompare());
 	}
 }
 
