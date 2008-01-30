@@ -1,0 +1,9 @@
+
+package comp_tag_test007;
+
+require kermeta
+
+@tag1 "tagValue"
+class A {
+
+}

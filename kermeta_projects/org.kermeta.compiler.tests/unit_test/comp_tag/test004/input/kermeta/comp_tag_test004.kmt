@@ -1,0 +1,12 @@
+
+package comp_tag_test004;
+
+require kermeta
+
+class A {
+
+	/**
+	 * One comment on operation.
+	 */
+	operation foo() is abstract
+}

@@ -1,0 +1,18 @@
+
+package comp_tag_test002;
+
+require kermeta
+
+/**
+ * One comment on a sub package.
+ */
+package subPackage {
+
+	/**
+	 * One comment on a sub sub package.
+	 */
+	package subsubPackage {
+	
+	}
+
+}

@@ -1,0 +1,1 @@
+<para>One tag on a reference, an attribute and a derived property.</para>

@@ -1,0 +1,9 @@
+@mainClass "comp_tag_test010::Main"
+@mainOperation "main"
+
+package comp_tag_test010;
+
+require kermeta
+
+class Main {
+}

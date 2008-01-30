@@ -1,0 +1,11 @@
+
+package comp_tag_test008;
+
+require kermeta
+
+class A {
+
+
+	@tag1 "tagValue"
+	operation foo() is abstract
+}

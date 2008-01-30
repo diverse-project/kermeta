@@ -1,0 +1,4 @@
+verifies_uc_0=comp_tag
+verifies_uc_1=comp_attribute
+verifies_uc_2=comp_reference
+verifies_uc_3=comp_propertyStructure

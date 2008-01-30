@@ -1,0 +1,1 @@
+<para>A comment on the root package.</para>

@@ -1,0 +1,18 @@
+
+package comp_tag_test009;
+
+require kermeta
+
+using kermeta::standard
+
+class A {
+
+	@tag1 "tagValue1"
+	reference s1 : String
+
+	@tag2 "tagValue2"
+	attribute s2 : String
+
+	@tag3 "tagValue3"
+	property s3 : String
+}

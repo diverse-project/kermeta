@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModellingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="comp_tag_test010|"/>
+  </ecore:EAnnotation>
+  <ecore:EAnnotation source="kermeta">
+    <details key="mainClass" value="comp_tag_test010::Main"/>
+  </ecore:EAnnotation>
+  <ecore:EAnnotation source="kermeta">
+    <details key="mainOperation" value="main"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comp_tag_test010" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_tag/test010/expected_output/ecore/comp_tag_test010.ecore#/"
+      nsPrefix="comp_tag_test010">
+    <eClassifiers xsi:type="ecore:EClass" name="Main" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

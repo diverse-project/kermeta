@@ -1,0 +1,11 @@
+
+package comp_tag_test003;
+
+require kermeta
+
+/**
+ * One comment on a class definition.
+ */
+class A {
+
+}

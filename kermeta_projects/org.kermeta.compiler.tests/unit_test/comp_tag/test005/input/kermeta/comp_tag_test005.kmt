@@ -1,0 +1,24 @@
+
+package comp_tag_test005;
+
+require kermeta
+
+using kermeta::standard
+
+class A {
+
+	/**
+	 * One comment on reference.
+	 */
+	reference s1 : String
+
+	/**
+	 * One comment on attribute.
+	 */	
+	attribute s2 : String
+
+	/**
+	 * One comment on property.
+	 */		
+	property s3 : String
+}

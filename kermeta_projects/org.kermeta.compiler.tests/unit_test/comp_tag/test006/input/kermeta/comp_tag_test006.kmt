@@ -1,0 +1,14 @@
+
+package comp_tag_test006;
+
+require kermeta
+
+@tag1 "uri1"
+package subPackage {
+
+	@tag1 "uri2"
+	package subsubPackage {
+	
+	}
+
+}

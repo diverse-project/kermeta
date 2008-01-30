@@ -1,0 +1,10 @@
+
+/**
+ * One comment on a root package.
+ */
+package comp_tag_test001;
+
+require kermeta
+
+class Main {
+}
