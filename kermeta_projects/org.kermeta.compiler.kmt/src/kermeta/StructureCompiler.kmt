@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.6 2008-01-29 16:15:49 ftanguy Exp $
+/* $Id: StructureCompiler.kmt,v 1.7 2008-01-30 12:35:27 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -35,6 +35,10 @@ class Main
    		var repository : EMFRepository init EMFRepository.new             
    		var resource : Resource init repository.createResource("platform:/resource/org.kermeta.compiler.kmt/models/result.ecore", "http://www.eclipse.org/emf/2002/Ecore")
 		resource.instances.add(mu.ecoreModelElement)
+		//resource.instances.addAll(mu.entryPoints)
+		mu.entryPoints.each{ e |
+			resource.instances.add(e)
+		}//resource.instances.addAll(mu.ecorePackages)
 		mu.ecorePackages.each{ p |
 			resource.instances.add(p)
 		}

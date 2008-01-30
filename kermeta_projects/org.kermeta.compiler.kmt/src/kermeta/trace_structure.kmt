@@ -1,4 +1,4 @@
-/* $Id: trace_structure.kmt,v 1.7 2008-01-29 16:15:49 ftanguy Exp $
+/* $Id: trace_structure.kmt,v 1.8 2008-01-30 12:35:27 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -21,6 +21,8 @@ aspect class ModelingUnit {
 	reference ecoreModelElement : EAnnotation
 	
 	reference ecorePackages : EPackage[0..*]
+	
+	reference entryPoints : EAnnotation[0..*]
 }
 
 aspect class Package {
@@ -61,4 +63,8 @@ aspect class Constraint {
 
 aspect class ObjectTypeVariable {
 	reference ecoreModelElement : ETypeParameter
+}
+
+aspect class Tag {
+	reference ecoreModelElement : EAnnotation
 }

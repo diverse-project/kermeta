@@ -1,4 +1,4 @@
-/* $Id: compile_builder.kmt,v 1.6 2008-01-29 16:15:49 ftanguy Exp $
+/* $Id: compile_builder.kmt,v 1.7 2008-01-30 12:35:27 ftanguy Exp $
  * Creation date: January 25, 2008
  * License:
  * Copyright:
@@ -193,5 +193,17 @@ aspect class ObjectTypeVariable {
 		var ecoreTypeParameter : ETypeParameter init ETypeParameter.new
 		ecoreTypeParameter.name := self.name
 		result := ecoreTypeParameter
+	end
+}
+
+aspect class Tag {
+	operation build() : EAnnotation is do
+		var ecoreAnnotation : EAnnotation
+		if ( self.name == void ) then
+			ecoreAnnotation := EAnnotationHelper.new.create("kermeta", "documentation", self.~value)
+		else
+			ecoreAnnotation := EAnnotationHelper.new.create("kermeta", self.name, self.~value)
+		end
+		result := ecoreAnnotation
 	end
 }

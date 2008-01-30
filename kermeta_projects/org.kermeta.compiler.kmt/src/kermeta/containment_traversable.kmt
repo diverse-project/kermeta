@@ -1,4 +1,4 @@
-/* $Id: containment_traversable.kmt,v 1.8 2008-01-29 16:15:49 ftanguy Exp $
+/* $Id: containment_traversable.kmt,v 1.9 2008-01-30 12:35:27 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -21,7 +21,7 @@ using kermeta::standard
 
 aspect class Object {
 	operation eachOwnedElement(func : <Object -> Object>) : Void is do
-    	self.ownedTag.each{ o |
+       	self.ownedTags.each{ o |
 			func(o.asType(Tag))
 		}
 	end
@@ -29,6 +29,8 @@ aspect class Object {
 
 aspect class ModelingUnit {
 	method eachOwnedElement(func : <Object -> Object>) : Void is do
+   		super(func)
+		
 		self.packages.each{p|
 			func(p.asType(Package))
 		}
@@ -37,6 +39,8 @@ aspect class ModelingUnit {
  
 aspect class Package {
 	method eachOwnedElement(func : <Object -> Object>) : Void is do
+        super(func)
+        
         self.ownedTypeDefinition.each{ o |
 			func(o.asType(TypeDefinition))
 		}
@@ -48,6 +52,8 @@ aspect class Package {
 
 aspect class Enumeration {
 	method eachOwnedElement(func : <Object -> Object>) : Void is do
+        super(func)
+        
         self.ownedLiteral.each{ l |
         	func(l.asType(EnumerationLiteral))
 		}
@@ -56,6 +62,8 @@ aspect class Enumeration {
 
 aspect class ClassDefinition {
 	method eachOwnedElement(func : <Object -> Object>) : Void is do
+        super(func)
+        
         self.ownedAttribute.each{ o |
 			func(o.asType(MultiplicityElement))
 		}
@@ -77,6 +85,8 @@ aspect class ClassDefinition {
 
 aspect class Operation {
 	method eachOwnedElement(func : <Object -> Object>) : Void is do
+        super(func)
+        
         self.ownedParameter.each{ o |
 			func(o.asType(Parameter))
 		}
