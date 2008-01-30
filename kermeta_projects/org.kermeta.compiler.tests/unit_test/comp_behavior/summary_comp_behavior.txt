@@ -1,0 +1,1 @@
+<para>Use case dedicated to the compilation of the Kermeta behavior.</para>
