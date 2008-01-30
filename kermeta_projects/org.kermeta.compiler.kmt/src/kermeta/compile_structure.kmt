@@ -1,3 +1,10 @@
+/* $Id: compile_structure.kmt,v 1.10 2008-01-30 13:26:56 cfaucher Exp $
+ * Creation date: January 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Francois Tanguy <ftanguy@irisa.fr>
+ */
+
 package kermeta::language::structure;
  
 require kermeta
@@ -6,7 +13,7 @@ require "containment_traversable.kmt"
 require "trace_structure.kmt"
 require "compile_builder.kmt"
 require "compile_structure_common.kmt"
-require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helpers/CompilerHelper.kmt"
+require "helpers/CompilerHelper.kmt"
   
 using kermeta::language::structure
 using kermeta::language::behavior
@@ -28,7 +35,7 @@ aspect class ModelingUnit {
 		self.eachOwnedElement{ p | p.compile(context) }
 		// Getting the ecore packages
 		self.packages.each{p|
-			self.ecorePackages.add( p.ecoreModelElement )
+			self.ecorePackages.add( p.asType(Package).ecoreModelElement )
 		}
 	end
 }
@@ -39,7 +46,7 @@ aspect class Package {
 		// Creating the associated ecore package
 		var ecorePackage : EPackage init build()
 		// Setting the container
-		var p : Package init self.nestingPackage
+		var p : Package init self.nestingPackage.asType(Package)
 		//p ?= self.container()
 		if ( p != void ) then
 			p.ecoreModelElement.eSubpackages.add(ecorePackage)
@@ -138,27 +145,6 @@ aspect class Operation {
 		c.ecoreModelElement.eOperations.add(ecoreOperation)
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreOperation
-		
-		var javaCode : StringBuffer init StringBuffer.new
-		
-		if (self.body != void) then
-		
-			/*var type : String init self.type.asType(Type).compile(context)
-			if ( type!="Void" and type!="void" ) then
-				javaCode.append("\n" + type + " result = null;\n")
-			end
-			 
-			// The Java source code is provided by: self.body.compile(context)
-			javaCode.append(self.body.compile(context))
-			
-			if ( type!="Void" and type!="void" ) then
-				javaCode.append("\nreturn result;\n")
-			end*/
-		end
-		
-		// Finally add the EAnnotation containing the Java code in the Ecore model
-        EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreModelElement, javaCode.toString)
-
 		// Compile the owned elements
 		self.eachOwnedElement{ o | o.compile(context) }
 	end
@@ -191,12 +177,6 @@ aspect class Constraint {
 		end
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreAnnotation
-	end
-}
-
-aspect class Type {
-	method compile(context : Integer) : String is do
-		result := ""
 	end
 }
 
