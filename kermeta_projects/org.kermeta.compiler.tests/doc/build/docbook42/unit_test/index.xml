@@ -1,8 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: index.xml,v 1.1 2007-12-11 15:42:03 cfaucher Exp $ -->
-<book lang="en-US"><chapter>
+<!-- $Id: index.xml,v 1.2 2008-01-30 13:04:06 cfaucher Exp $ -->
+<book lang="en-US">
+	<bookinfo>
+	    <title>Kermeta Compiler Documentation</title>
+		<pubdate>Build date: 30-January-2008</pubdate>
+	    <pubdate>$Date: 2008-01-30 13:04:06 $</pubdate>
+	    <author>
+	      <firstname>Cyril</firstname>
+	      <surname>Faucher</surname>
+	    </author>
+	    <author>
+	      <firstname>Francois</firstname>
+	      <surname>Tanguy</surname>
+	    </author>
+	    <author>
+	      <firstname>Didier</firstname>
+	      <surname>Vojtisek</surname>
+	    </author>
+		<keywordset>
+	      <keyword>Kermeta</keyword>
+	      <keyword>compiler</keyword>
+		  <keyword>specification</keyword>
+	      <keyword>use case</keyword>	
+	      <keyword>test case</keyword>	      	      
+	    </keywordset>
+	
+	    <bibliomisc>License EPL</bibliomisc>
+	
+	    <abstract>
+	      <para>This document aims to provide a development plan of the Kermeta compiler: Kermeta to Java.</para>
+	    </abstract>
+	
+	    <publisher>
+	      <publishername>INRIA</publishername>
+	      <address><state>France</state>
+			<otheraddr><ulink url="http://www.inria.fr">http://www.inria.fr</ulink></otheraddr>
+		  </address>
+	    </publisher>
+	  </bookinfo>
+	  
+	  <preface id="preface.link">
+		 <title id="preface.title.link">Preface<phrase id="preface"></phrase></title>
+		<para>This document aims to provide a development plan of the Kermeta compiler: Kermeta to Java. The document is divided in three parts:</para>		
+	    
+	    <itemizedlist>
+	    	<listitem><para>An introduction dedicated to the architecture shows the process of the generation of the Java source code,</para></listitem>
+			<listitem><para>a status board showing the state of the whole of tasks,</para></listitem>
+			<listitem><para>a listing of the issues in compiling, giving the description of the issue and links to the files in the Kermeta CVS. These kmt files are pieces of KMT source code to explain and show the issues in different cases. A piece of a Java source code is as well provided to show the expected Java source code and to finish the generated Ecore file corresponding to the KMT file. All the resources are available at [<ulink type="" url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/?cvsroot=kermeta">cvs</ulink>].</para></listitem>
+		</itemizedlist>
+		
+		<important>
+    		<para>
+			   Kermeta is an evolving software and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
+				<ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+			    <emphasis role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+			    </ulink> or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v0.99.0
+    		</para>
+    	</important>
+
+    	<!--tip> The most update version of this document is available on line from <ulink type="" url="http://www.kermeta.org/">http://www.kermeta.org</ulink>.</tip-->
+  	  </preface><chapter>
+	<title>Compilation Process</title>
+	<section>
+		<title id="kermeta2ecore.title.link">Step 1: Kermeta to Ecore</title>
+		<para>
+			The compilation process is divided in 2 steps: the first one consists in the translation of a Kermeta model into a Ecore model, the second one consists in the generation of the Java source code from the previous Ecore model.
+		</para>
+	</section>
+	<section>
+		<title id="kermeta2ecore.title.link">Step 1: Kermeta to Ecore</title>
+		<para>
+			Currently this implementation is divided in 2 steps: Km 2 Ecore structure (written in Java), Km 2 Ecore behavior (written in Kermeta and Java).
+		</para>
+		<para>
+			"Km 2 Ecore structure" implements a visitor desing pattern and consists in the translation of each Kermeta concept to Ecore concept.
+			This step is implemented in "fr.irisa.triskell.kermeta.io" plugin, EcoreExporter.
+		</para>
+		<para>
+			"Km 2 Ecore behavior" is written in Kermeta. This implementation is Aspect-Oriented, i.e.: we are using the aspect-oriented techniques in order to define how a concept is compiled.
+		</para>
+		<para>
+			Some examples:</para>
+		<para>
+			<programlisting>aspect class ClassDefinition {
+		method compile(context : Integer) : String is do
+			result := ""
+			// Set the traceability
+			self.ecoreProxy := CompileHelper.new.findEClassProxy(self)
+			// Compile the owned elements
+			self.eachOwnedElement{ o | o.compile(context) }
+		end
+	}</programlisting>
+			
+			<programlisting>aspect class ClassDefinition {
+	operation eachOwnedElement(func : MultiplicityElement -> Object) : Void is do
+        self.ownedAttribute.each{ o |
+			func(o.asType(Property))
+		}
+		self.ownedOperation.each{ o |
+			func(o.asType(Operation))
+		}
+	end	
+}</programlisting>
+
+		<programlisting>aspect class Package {
+	reference ecoreProxy : EPackage
+	}
+	
+	aspect class ClassDefinition {
+		reference ecoreProxy : EClass
+	}
+	
+	aspect class Operation {
+		reference ecoreProxy : EOperation
+	}</programlisting>
+
+		</para>
+		<para>
+			This technique has further advantages: the separation of concerns and the reutilisability of several aspects, i.e.: some aspects are grouped by usage like: "containment discovering", "compile" or "traceability".
+		</para>
+	</section>
+	<section>
+		<title id="ecore2java.title.link">Step 2: Ecore to Java</title>
+		<para>
+			Generation of a genmodel file from the Ecore file.
+			This generation is automatic and the genmodel is modified to customize and fix some parameters for the source code generation. This step is implemented in ?org.kermeta.compiler" plugin.
+		</para>
+		<para>
+			Generation of the source code from the genmodel file thanks to the EMF generator abilities:
+			Emf-model interfaces + implementation. This step is implemented in "org.kermeta.compiler" plugin.
+			During this step, a Simk is used too, this model contains informations about the generation of Runners, Launchers and other static methods. A Java source code generation step is made to take in account this model, and also to generate the corresponding Java classes.
+		</para>
+	</section>
+</chapter><chapter>
 	<title>Listing of the issues in compiling</title>
 	<section>
 		<title id="statusBoard.title.link">Status board of the issues</title>
@@ -10,288 +142,509 @@
 		</para>
 		
 		<informaltable>
-          <tgroup cols="4">
+          <tgroup cols="3">
             <colspec colname="c1"/>
             <colspec colname="c2"/>
             <colspec colname="c3"/>
-            <colspec colname="c4"/>
-            <colspec colname="c5"/>
+            <!--colspec colname="c4"/-->
+            <!--colspec colname="c5"/-->
             <!--colspec colname="c6"/-->
             <thead>
               <row>
                 <!--entry><para>Doc ref</para></entry-->
                 <entry><para>Identifier</para></entry>
                 <entry><para>Note</para></entry>
-                <entry><para>Design</para></entry>
-                <entry><para>Impl</para></entry>
+                <entry><para>Status</para></entry>
+                <!--entry><para>Impl</para></entry-->
               </row>
             </thead>
             <tbody>
               <row>
                 <entry><para><link linkend="uc_Assignment.link">Assignment</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [in progress]</para>
+                
+                	<para>Impl_Kermeta [in progress]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Attribute.link">Attribute</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
+              </row>
+              <row>
+                <entry><para><link linkend="uc_Behavior.link">Behavior</link></para></entry>
+                <entry><para></para></entry>
+                <entry>
+                	<para>Impl_Java [in progress]</para>
+                
+                	<para>Impl_Kermeta [in progress]</para>
+                
+                	<para>Design [in progress]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Body.link">Body</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [OK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_CallResult.link">CallResult</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [OK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_CallSuperOperation.link">CallSuperOperation</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_ClassDefinition.link">ClassDefinition</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Collection.link">Collection</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [in progress]</para>
+                
+                	<para>Impl_Kermeta [in progress]</para>
+                
+                	<para>Design [in progress]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Conditional.link">Conditional</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Containment.link">Containment</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
+              </row>
+              <row>
+                <entry><para><link linkend="uc_Enumeration.link">Enumeration</link></para></entry>
+                <entry><para></para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Exception.link">Exception</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [in progress]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [in progress]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_FunctionType.link">FunctionType</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [in progress]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Impl_Simk [OK]</para>
+                
+                	<para>Impl_Jet [OK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Generics.link">Generics</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
+              </row>
+              <row>
+                <entry><para><link linkend="uc_Inheritance.link">Inheritance</link></para></entry>
+                <entry><para></para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Initialization.link">Initialization</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_InstanceOf.link">InstanceOf</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Invariant.link">Invariant</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
+              </row>
+              <row>
+                <entry><para><link linkend="uc_InvariantBehavior.link">InvariantBehavior</link></para></entry>
+                <entry><para></para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_JavaStaticCall.link">JavaStaticCall</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_LambdaExpression.link">LambdaExpression</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [in progress]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Impl_Simk [OK]</para>
+                
+                	<para>Impl_Jet [OK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Loop.link">Loop</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_ModelElementReflexivity.link">ModelElementReflexivity</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_ModelingUnit.link">ModelingUnit</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_MultipleInheritance.link">MultipleInheritance</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_MultiplePackagesRoot.link">MultiplePackagesRoot</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [OK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Multiplicity.link">Multiplicity</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_New.link">New</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [OK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_OperationStructure.link">OperationStructure</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Opposite.link">Opposite</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Package.link">Package</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
+              </row>
+              <row>
+                <entry><para><link linkend="uc_Parameter.link">Parameter</link></para></entry>
+                <entry><para></para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Postcondition.link">Postcondition</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [in progress]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Precondition.link">Precondition</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [in progress]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_PrimitiveType.link">PrimitiveType</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [in progress]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [in progress]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_PropertyBehavior.link">PropertyBehavior</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Impl_Jet [OK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_PropertyStructure.link">PropertyStructure</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Reference.link">Reference</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Runner.link">Runner</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Impl_Simk [OK]</para>
+                
+                	<para>Impl_Jet [OK]</para>
+                
+                	<para>Design [OK]</para>
+                </entry>
               </row>
               <row>
-                <entry><para><link linkend="uc_SubPackage.link">SubPackage</link></para></entry>
+                <entry><para><link linkend="uc_Structure.link">Structure</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [in progress]</para>
+                
+                	<para>Design [in progress]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Tag.link">Tag</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_Traceability.link">Traceability</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [in progress]</para>
+                </entry>
               </row>
               <row>
                 <entry><para><link linkend="uc_UriManagement.link">UriManagement</link></para></entry>
                 <entry><para></para></entry>
-                	<entry><para>Design 100 %</para></entry>
-                	<entry><para>Impl_Java 100 %</para></entry>
-                	<entry><para>Impl_Kermeta 0 %</para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [in progress]</para>
+                </entry>
               </row>
             </tbody>
           </tgroup>
@@ -305,97 +658,129 @@
 <section id="uc_Assignment.link">
     <title id="uc_Assignment.title.link">Assignment</title>
     
-    <para>Design:
+    <para>Design:</para>
+<para/>
 
-If the left and right expressions have the same type and "attr" is a property from a Class Definition "myCD" and the multiplicity is [0..1] or [1..1]
-In kmt: attr := theValueOfAttr
-In Java: myCD.setAttr(theValueOfAttr);
+<para>If the left and right expressions have the same type and "attr" is a property from a Class Definition "myCD" and the multiplicity is [0..1] or [1..1]</para>
+<programlisting>//In kmt:
+attr := theValueOfAttr
 
-If the left and right expressions have the same type and "attr" is a property from a Class Definition "myCD" and the multiplicity is [0..*] or [1..*]
-In kmt: attr := theValueOfAttr
-In Java: myCD.getAttr.add(theValueOfAttr);</para> 
+//In Java:
+myCD.setAttr(theValueOfAttr);</programlisting>
+
+<para>If the left and right expressions have the same type and "attr" is a property from a Class Definition "myCD" and the multiplicity is [0..*] or [1..*]</para>
+<programlisting>// In kmt:
+attr := theValueOfAttr
+
+// In Java:
+myCD.getAttr.add(theValueOfAttr);</programlisting> 
 <para/>
 <para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-Assignment of a variable has type: String.</para>
+<para>Assignment of a variable has type: String.</para>
 <para/> 
 <para/>
 <para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test002/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-Assignment of a variable has type: Integer.</para>
+<para>Assignment of a variable has type: Integer.</para>
 <para/> 
 <para/>
 <para><emphasis role="bold">test003</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test003/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-Assignment of a variable has type of a feature from another ClassDefinition.</para>
+<para>Assignment of a variable has type of a feature from another ClassDefinition.</para>
 <para/> 
 <para/>
 <para><emphasis role="bold">test004</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[eclipse_launcher] [ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/eclipse_launcher/?cvsroot=kermeta">eclipse_launcher</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_assignment/test004/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-Assignment of a feature has type of a feature from another ClassDefinition with further cases: different multiplicities.
+<para>Assignment of a feature has type of a feature from another ClassDefinition with further cases: different multiplicities.</para>
 
-Important note: the semantic of the assignment is delegated to EMF, i.e.: the assignment semantic is defined by the Java source code that EMF generate. It would be interesting to add a survey of the behaviour of EMF in order to track semantic evolution from EMF.
-</para>
+<para>Important note: the semantic of the assignment is delegated to EMF, i.e.: the assignment semantic is defined by the Java source code that EMF generate. It would be interesting to add a survey of the behaviour of EMF in order to track semantic evolution from EMF.</para>
+
 <para/>
 </section> 
 <section id="uc_Attribute.link">
     <title id="uc_Attribute.title.link">Attribute</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_attribute/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_attribute/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one attribute.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_attribute/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_attribute/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one attribute with 0..* cardinality.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test005</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on a reference, an attribute and a derived property.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test009</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on a reference, an attribute and a derived property.</para>
+<para/>
+</section> 
+<section id="uc_Behavior.link">
+    <title id="uc_Behavior.title.link">Behavior</title>
+    
+    <para>Use case dedicated to the compilation of the Kermeta behavior.</para>
 </section> 
 <section id="uc_Body.link">
     <title id="uc_Body.title.link">Body</title>
     
-    <para>In kmt the body of an operation begins by "do" and is closed by "end".
-In Java: "{" to begin and "}" to close an operation body.</para> 
+    <para>In kmt the body of an operation begins by "do" and is closed by "end".</para>
+<para>In Java: "{" to begin and "}" to close an operation body.</para> 
 <para/>
 <para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-Design:
-Empty body of the operation
-
-Implementation:
-If the body is empty, the generation is not processed.</para>
+<para>Design:</para>
+<para>Empty body of the operation.</para>
+<para/>
+<para>Implementation:</para>
+<para>If the body is empty, the generation is not processed.</para>
 <para/> 
 <para/>
 <para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_body/test002/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-Design:
-The body of the operation is not empty
+<para>Design:</para>
+<para>The body of the operation is not empty</para>
+<para/>
+<para>Implementation:</para>
+<para>If the body is not empty, the generation is processed and "do" is replaced by "{" and "end" by "}".</para>
 
-Implementation:
-If the body is not empty, the generation is processed and "do" is replaced by "{" and "end" by "}".
-</para>
 <para/>
 </section> 
 <section id="uc_CallResult.link">
@@ -404,33 +789,27 @@ If the body is not empty, the generation is processed and "do" is replaced by "{
     <para>In Kermeta syntax the type of the CallResult variable: "result" can be used anywhere, in Java the "return" statement must be used as a root expression in the operation body. Also, we have to add systematically a first declaration of a variable which has the type of the return type with an initialization: String result=null; and as well as the "return" statement at the end of the operation: return result;.</para> 
 <para/>
 <para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-The result type of the method is String, then the result variable (having String as type) and the return statement will be added.</para>
+<para>The result type of the method is String, then the result variable (having String as type) and the return statement will be added.</para>
 <para/> 
 <para/>
 <para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test002/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-The result type of the method is VoidType, then the return is not required.</para>
+<para>The result type of the method is VoidType, then the return is not required.</para>
 <para/> 
 <para/>
 <para><emphasis role="bold">test003</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_callResult/test003/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-The result type of the method is a class A, then the result variable (having A as type) and the return statement will be added.</para>
+<para>The result type of the method is a class A, then the result variable (having A as type) and the return statement will be added.</para>
 <para/>
 </section> 
 <section id="uc_CallSuperOperation.link">
@@ -441,51 +820,71 @@ The result type of the method is a class A, then the result variable (having A a
 <section id="uc_ClassDefinition.link">
     <title id="uc_ClassDefinition.title.link">ClassDefinition</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_classDefinition/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_classDefinition/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>This sample shows the generation of a kmt file with one root package and several sub and subsub packages with class definitions inside.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test003</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test003/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test003/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on a class definition.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test007</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test007/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test007/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on a class definition.</para>
+<para/>
 </section> 
 <section id="uc_Collection.link">
     <title id="uc_Collection.title.link">Collection</title>
     
-    <para>Design:
-
-Helper:
-In order to access to the specific Kermeta?s methods on the Collections, we could use Java static methods. These methods will be generated from the framework in external Java classes, but not integrated into the Ecore model, because the EMF generation does not support static methods.</para>
+    <para>Design:</para>
+<para/>
+<para>Helper:</para>
+<para>In order to access to the specific Kermeta?s methods on the Collections, we could use Java static methods. These methods will be generated from the framework in external Java classes, but not integrated into the Ecore model, because the EMF generation does not support static methods.</para>
 </section> 
 <section id="uc_Conditional.link">
     <title id="uc_Conditional.title.link">Conditional</title>
     
-    <para>Design:
+    <para>Design:</para>
+<para/>
+<programlisting>// In kmt:
+if(...) then
+...
+else
+...
+end
 
-In kmt:
-	if(...) then
-	?
-	else
-	?
-	end
-
-In Java:
-	if(...) {
-	} else {
-	}</para> 
+//In Java:
+if(...) {
+} else {
+}</programlisting> 
 <para/>
 <para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_conditional/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-An example of a Conditional with a simple "if".</para>
+<para>An example of a Conditional with a simple "if".</para>
 <para/> 
 <para/>
 <para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_conditional/test002/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-An example of a Conditional with an "if" with an "else".</para>
+<para>An example of a Conditional with an "if" with an "else".</para>
 <para/>
 </section> 
 <section id="uc_Containment.link">
@@ -494,13 +893,40 @@ An example of a Conditional with an "if" with an "else".</para>
     <para></para> 
 <para/>
 <para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_containment/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_containment/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-</para>
+
+<para/>
+</section> 
+<section id="uc_Enumeration.link">
+    <title id="uc_Enumeration.title.link">Enumeration</title>
+    
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_enumeration/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_enumeration/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one enumeration with several literals.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test013</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test013/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test013/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on enumeration.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test014</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test014/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test014/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>TODO</para>
 <para/>
 </section> 
 <section id="uc_Exception.link">
@@ -511,14 +937,16 @@ Output resources:
 <section id="uc_FunctionType.link">
     <title id="uc_FunctionType.title.link">FunctionType</title>
     
-    <para>A Function Type is called inside another method.
+    <para>Design:</para>
+<para>A Function Type is called inside another method.</para>
 
-The function type is prettyprinted in a specific static method and called by the method that uses it.
+<para>The function type is prettyprinted in a specific static method and called by the method that uses it.</para>
 
-In the context of a lambda expression:
+<para>In the context of a lambda expression:</para>
 
-The two methods are generated in a same new Java Class in a "helper" package.
+<para>The two methods are generated in a same new Java Class in a "helper" package.</para>
 
+<programlisting>
 /** Kermeta source code **/
 a.ref.each{ r |
 	stdio.writeln(r.toString)
@@ -536,205 +964,268 @@ a.ref.each{ r |
   private static void func(String r) {
     System.out.println(r.toString());
   }
+</programlisting>
 
-The call of the method from the original method: 
-Main_3_Helper.each(a.getRef());</para>
+<para>The call of the method from the original method:</para>
+<programlisting>Main_3_Helper.each(a.getRef());</programlisting>
 </section> 
 <section id="uc_Generics.link">
     <title id="uc_Generics.title.link">Generics</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_generics/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_generics/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one class definition with one type parameter.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_generics/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_generics/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one generic class with one generic method.</para>
+<para/>
+</section> 
+<section id="uc_Inheritance.link">
+    <title id="uc_Inheritance.title.link">Inheritance</title>
+    
+    <para>Simple inheritance support.</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
+
+<para>Simple inheritance sample between 2 Kermeta ClassDefinition</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test002/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
+
+<para>Simple inheritance sample between a new ClassDefinition and an EClass from the Ecore metamodel</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test003</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test003/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test003/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_inheritance/test003/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
+
+<para>Simple inheritance sample between a new ClassDefinition and an EClass from the UML metamodel</para>
+<para/>
 </section> 
 <section id="uc_Initialization.link">
     <title id="uc_Initialization.title.link">Initialization</title>
     
-    <para>Design:
+    <para>Design:</para>
 
-- Initialization of a variable:
+<para>- Initialization of a variable:</para>
+<programlisting>// In kmt:
+var aPrinter : Printer init Printer.new
 
-In kmt: var aPrinter : Printer init Printer.new
-In Java: comptest2.Printer aPrinter = comptest2.Comptest2Factory.eINSTANCE.createPrinter();
+// In Java:
+comptest2.Printer aPrinter = comptest2.Comptest2Factory.eINSTANCE.createPrinter();</programlisting>
 
-- Initialization of a String:
+<para/>
 
-In kmt: var text1 : String init "Hello"
-In Java: String text1 = "Hello ";
+<para>- Initialization of a String:</para>
+<programlisting>// In kmt:
+var text1 : String init "Hello"
 
-In kmt:
-	var text2 : String
-	text2 := "World"
-In Java:
-	String text2 = null;
-	text2 = "World";</para> 
+// In Java:
+String text1 = "Hello ";</programlisting>
+
+<para/>
+
+<programlisting>// In kmt:
+var text2 : String
+text2 := "World"
+
+// In Java:
+String text2 = null;
+text2 = "World";</programlisting> 
 <para/>
 <para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-Direct initialization of a variable (String).</para>
+<para>Direct initialization of a variable (String).</para>
 <para/> 
 <para/>
 <para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test002/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-Indirect initialization of a variable (String).</para>
+<para>Indirect initialization of a variable (String).</para>
 <para/> 
 <para/>
 <para><emphasis role="bold">test003</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test003/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-Direct initialization of a variable (Integer).</para>
+<para>Direct initialization of a variable (Integer).</para>
 <para/> 
 <para/>
 <para><emphasis role="bold">test004</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test004/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-Indirect initialization of a variable (Integer).</para>
+<para>Indirect initialization of a variable (Integer).</para>
 <para/> 
 <para/>
 <para><emphasis role="bold">test005</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test005/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-Direct initialization of a feature (A).</para>
+<para>Direct initialization of a feature (A).</para>
 <para/> 
 <para/>
 <para><emphasis role="bold">test006</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_initialization/test006/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-Indirect initialization of a feature (A).</para>
+<para>Indirect initialization of a feature (A).</para>
 <para/>
 </section> 
 <section id="uc_InstanceOf.link">
     <title id="uc_InstanceOf.title.link">InstanceOf</title>
     
-    <para></para> 
+    <para>TODO</para> 
 <para/>
 <para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_instanceOf/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-</para>
+<para>TODO</para>
 <para/>
 </section> 
 <section id="uc_Invariant.link">
     <title id="uc_Invariant.title.link">Invariant</title>
+    
+    <para>TODO</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_invariant/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_invariant/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one invariant.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_invariant/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_invariant/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of several invariants.</para>
+<para/>
+</section> 
+<section id="uc_InvariantBehavior.link">
+    <title id="uc_InvariantBehavior.title.link">InvariantBehavior</title>
     
     <para></para>
 </section> 
 <section id="uc_JavaStaticCall.link">
     <title id="uc_JavaStaticCall.title.link">JavaStaticCall</title>
     
-    <para>Design:
+    <para>Design:</para>
 
-In kmt: extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)
-In Java: fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.writeTextFile(filename, text);</para> 
+<programlisting>//In kmt:
+extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)
+
+//In Java:
+fr.irisa.triskell.kermeta.runtime.io.SimpleFileIO.writeTextFile(filename, text);</programlisting> 
 <para/>
 <para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_javaStaticCall/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-An example of a JavaStaticCall.</para>
+<para>An example of a JavaStaticCall.</para>
 <para/>
 </section> 
 <section id="uc_LambdaExpression.link">
     <title id="uc_LambdaExpression.title.link">LambdaExpression</title>
     
-    <para>A Function Type is called inside another method.
+    <para>A Function Type is called inside another method.</para>
 
-The function type is prettyprinted in a specific static method and called by the method that uses it.
+<para>The function type is prettyprinted in a specific static method and called by the method that uses it.</para>
 
-In the context of a lambda expression:
+<para>In the context of a lambda expression:</para>
 
-The two methods are generated in a same new Java Class in a "helper" package.
+<para>The two methods are generated in a same new Java Class in a "helper" package.</para>
 
+<programlisting>
 /** Kermeta source code **/
 a.ref.each{ r |
-	stdio.writeln(r.toString)
+  stdio.writeln(r.toString)
 }
 
 /** Java source code **/
 // Method that uses the function type
-  public static void each(EList String list) {
-    for(String it : list) {
-      func(it);
-    }
+public static void each(EList String list) {
+  for(String it : list) {
+    func(it);
   }
+}
   
 // The FunctionType prettyprinted in the same Java class
-  private static void func(String r) {
-    System.out.println(r.toString());
-  }
+private static void func(String r) {
+  System.out.println(r.toString());
+}
+</programlisting>
 
-The call of the method from the original method: 
-Main_3_Helper.each(a.getRef());</para> 
+<programlisting>
+// The call of the method from the original method:
+Main_3_Helper.each(a.getRef());
+</programlisting> 
 <para/>
 <para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[eclipse_launcher] [ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/eclipse_launcher/?cvsroot=kermeta">eclipse_launcher</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_lambdaExpression/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-</para>
+
 <para/>
 </section> 
 <section id="uc_Loop.link">
     <title id="uc_Loop.title.link">Loop</title>
     
-    <para>Design:
+    <para>Design:</para>
 
-In kmt:
-	var j : Integer init 5
-	from var i : Integer init 0
-	until i == self
-	loop
-		i := i + 1
-	end
+<programlisting>// In kmt:
+var j : Integer init 5
+from var i : Integer init 0
+until i == self
+loop
+	i := i + 1
+end
 
-In Java:
-	int j = 5;
-	int i = 0;
-	while( i != j ) {
-		i = i + 1;
-	}</para> 
+// In Java:
+int j = 5;
+int i = 0;
+while( i != j ) {
+	i = i + 1;
+}</programlisting> 
 <para/>
 <para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_loop/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_loop/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-An example of a loop.</para>
+<para>An example of a loop.</para>
 <para/>
 </section> 
 <section id="uc_ModelElementReflexivity.link">
@@ -745,7 +1236,15 @@ An example of a loop.</para>
 <section id="uc_ModelingUnit.link">
     <title id="uc_ModelingUnit.title.link">ModelingUnit</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test010</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test010/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test010/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of tags for modeling unit.</para>
+<para/>
 </section> 
 <section id="uc_MultipleInheritance.link">
     <title id="uc_MultipleInheritance.title.link">MultipleInheritance</title>
@@ -755,129 +1254,504 @@ An example of a loop.</para>
 <section id="uc_MultiplePackagesRoot.link">
     <title id="uc_MultiplePackagesRoot.title.link">MultiplePackagesRoot</title>
     
-    <para></para>
+    <para>Test wether it is possible to generate several root packages. 
+At the moment it is possible when editing a km file but not with kmt file
+because the syntax grammar does not allow multiple root package definitions</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_multiplePackagesRoot/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_multiplePackagesRoot/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of several root packages. Does not work when the model comes from a kmt file.</para>
+<para/>
 </section> 
 <section id="uc_Multiplicity.link">
     <title id="uc_Multiplicity.title.link">Multiplicity</title>
     
-    <para>Design:
+    <para>Design:</para>
 
-Implemented by the structural part (?model? plugin) of the EMF generated source code.
-Some issues for multiplicity have taken into account during the assignment translation.</para>
+<para>Implemented by the structural part (?model? plugin) of the EMF generated source code.</para>
+<para>Some issues for multiplicity have taken into account during the assignment translation.</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_multiplicity/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_multiplicity/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one reference with 0..4 multiplicity.</para>
+<para/>
 </section> 
 <section id="uc_New.link">
     <title id="uc_New.title.link">New</title>
     
-    <para>Design:
+    <para>Design:</para>
 
-The creation of Object is performed by the new method, in EMF-Java: a factory is used and it can be called like:
+<para>The creation of Object is performed by the new method, in EMF-Java: a factory is used and it can be called like:</para>
 
-For MyClassDefinition owns by the package: comp_new_test001
+<para>For MyClassDefinition owns by the package: comp_new_test001</para>
 
-In Kermeta: A.new
-In EMF-Java: Comp_new_test001Factory.eINSTANCE.createA();
-</para> 
+<programlisting>
+// In Kermeta:
+A.new
+
+// In EMF-Java:
+Comp_new_test001Factory.eINSTANCE.createA();
+</programlisting>
+ 
 <para/>
 <para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_new/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
+<para>Output resources:</para>
 
-
-</para>
+<para>TODO</para>
 <para/>
 </section> 
 <section id="uc_OperationStructure.link">
     <title id="uc_OperationStructure.title.link">OperationStructure</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_operationStructure/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_operationStructure/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>This sample shows the generation of an operation without returned type.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_operationStructure/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_operationStructure/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one abstract operation.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test004</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test004/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources:</para>
+
+<para>One comment on an operation.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test008</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test008/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test008/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on an operation.</para>
+<para/>
 </section> 
 <section id="uc_Opposite.link">
     <title id="uc_Opposite.title.link">Opposite</title>
     
-    <para>Design:
+    <para>Design:</para>
 
-Implemented by the structural part (?model? plugin) of the EMF generated source code.</para>
+<para>Implemented by the structural part (?model? plugin) of the EMF generated source code.</para>
 </section> 
 <section id="uc_Package.link">
     <title id="uc_Package.title.link">Package</title>
     
-    <para>Design:
-The granularity of the EMF regeneration is the EPackage. If we want to generate incrementally the Java source code, also we regenerate the whole of the EPackage.</para>
+    <para>Design:</para>
+
+<para>The granularity of the EMF regeneration is the EPackage. If we want to generate incrementally the Java source code, also we regenerate the whole of the EPackage.</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>This sample shows the generation of a kmt file with one root package.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>This sample shows the generation of a kmt file for one root package and one sub package.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test003</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test003/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test003/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>This sample shows the generation of a kmt file for one root package with several sub and subub packages.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test004</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test004/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test004/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>This sample shows the generation of a km file with several root packages with several sub and subub packages.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test005</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test005/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test005/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Same test as test003 (one root package with several sub and subsub packages) but with uris. The resulting ecore package must have the nsPrefix and nsUri attribute set with the uri of the kermeta package.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>A comment on the root package.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on sub and subsub packages.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test006</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test006/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test006/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on sub and sub sub packages.</para>
+<para/>
+</section> 
+<section id="uc_Parameter.link">
+    <title id="uc_Parameter.title.link">Parameter</title>
+    
+    <para>TODO</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_parameter/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_parameter/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one attribute.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_parameter/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_parameter/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of several parameters for an operation.</para>
+<para/>
 </section> 
 <section id="uc_Postcondition.link">
     <title id="uc_Postcondition.title.link">Postcondition</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_postcondition/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_postcondition/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one post condition.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_postcondition/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_postcondition/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of several post conditions.</para>
+<para/>
 </section> 
 <section id="uc_Precondition.link">
     <title id="uc_Precondition.title.link">Precondition</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_precondition/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_precondition/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one pre condition.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_precondition/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_precondition/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of several pre conditions.</para>
+<para/>
 </section> 
 <section id="uc_PrimitiveType.link">
     <title id="uc_PrimitiveType.title.link">PrimitiveType</title>
     
-    <para>Design:
+    <para>Design:</para>
 
-Helper:
-In order to access to the specific Kermeta?s methods on the Primitive Types, we could use Java static methods. These methods will be generated from the framework in external Java classes, but not integrated into the Ecore model, because the EMF generation does not support static methods.</para> 
+<para>Helper:</para>
+<para>In order to access to the specific Kermeta?s methods on the Primitive Types, we could use Java static methods. These methods will be generated from the framework in external Java classes, but not integrated into the Ecore model, because the EMF generation does not support static methods.</para> 
 <para/>
 <para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-</para>
+<para>TODO</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of a primitive type pointing on a kermeta type.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test011</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test011/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test011/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on primitive type.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test012</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test012/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test012/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on primitive type.</para>
 <para/>
 </section> 
 <section id="uc_PropertyBehavior.link">
     <title id="uc_PropertyBehavior.title.link">PropertyBehavior</title>
     
-    <para>Design:
+    <para>Design:</para>
 
-This ability is not supported by the EMF mechanism based on the use of EAnnotations containing the Java source code corresponding the expected behavior.</para>
+<para>Behavior of a derived property: getter/ setter.</para>
+<para>This ability is not supported by the EMF mechanism based on the use of EAnnotations containing the Java source code corresponding to the expected behavior.</para>
+<para>Thus, we are using the "overloadable" property of the JET templates. In a JET template, that is able to define some pieces of source code that will be overloadable. The expected source code is also added via a file with a specific name and location (define in the JET template)</para>
+<para>During the compilation, we are using the JET templates from EMF (plugin: org.eclipse.emf.codegen.ecore). Also, in your case, the derived property, we have written new implementations for the getter and setter. This new implementation uses a EAnnotation containing the Java source code implementing the getter and setter. Finally, the mechanism to get and put the code is very close to this one used by EMF to compile the EOperation behavior</para>
+<para>The specific source added are located in the plugin: org.kermeta.compiler.generator.emftemplates</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyBehavior/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyBehavior/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyBehavior/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
+
+<para>This sample shows an example of the compilation a derived property with a getter and a setter.</para>
+<para/>
 </section> 
 <section id="uc_PropertyStructure.link">
     <title id="uc_PropertyStructure.title.link">PropertyStructure</title>
     
-    <para></para>
+    <para>Design:</para>
+
+<para>Derived property signature.</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyStructure/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyStructure/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyStructure/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
+
+<para>This sample shows the structural compilation of derived property in different cases: property typed by a PrimitiveType or by a ClassDefinition. The second variation is the "readonly" property.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test005</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on a reference, an attribute and a derived property.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test009</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on a reference, an attribute and a derived property.</para>
+<para/>
 </section> 
 <section id="uc_Reference.link">
     <title id="uc_Reference.title.link">Reference</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_reference/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_reference/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one reference.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_reference/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_reference/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one reference with 0..* cardinality.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test005</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on a reference, an attribute and a derived property.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test009</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on a reference, an attribute and a derived property.</para>
+<para/>
 </section> 
 <section id="uc_Runner.link">
     <title id="uc_Runner.title.link">Runner</title>
     
-    <para>Design:
+    <para>Design:</para>
 
-In order to facilitate the accessibility for the users of the generated source code, some runners are generated. A Runner is a Java Class containing a main method which is able to launch the execution of a method. Not all the methods should infer a runner, only the methods which have none parameter or some parameters having String as type. The parameterized Method and method owning by a parameterized Class should not infer a Runner too. The runners are generated in a specific Java Package for each source code package.
-Another file is generated that is a ?Eclipse Java Application Launch? file: *.launch (generated in the root of the project). This one is able to configure automatically the ?Run ?? assist of Eclipse to launch quickly an execution. The parameters of this file are provided by the tags: mainClass and mainOperation given by the ModelingUnit.</para> 
+<para>In order to facilitate the accessibility for the users of the generated source code, some runners are generated. A Runner is a Java Class containing a main method which is able to launch the execution of a method. Not all the methods should infer a runner, only the methods which have none parameter or some parameters having String as type. The parameterized Method and method owning by a parameterized Class should not infer a Runner too. The runners are generated in a specific Java Package for each source code package.
+Another file is generated that is a ?Eclipse Java Application Launch? file: *.launch (generated in the root of the project). This one is able to configure automatically the "Run ?" assist of Eclipse to launch quickly an execution. The parameters of this file are provided by the tags: mainClass and mainOperation given by the ModelingUnit.</para>
+
+<warning><para>The simk model should be populated by the pass written in Kermeta and not in Java.</para></warning> 
 <para/>
 <para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
-<para>Input resources:
-[kermeta] 
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_runner/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
 
-Output resources:
-[eclipse_launcher] [ecore] [java] 
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/eclipse_launcher/?cvsroot=kermeta">eclipse_launcher</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_runner/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
-This sample shows the different cases for the generation of Runners: none parameters, one parameter having String as type, one parameter with different type, multiple parameters having String as type, multiple parameters with different types.</para>
+<para>This sample shows the different cases for the generation of Runners: none parameters, one parameter having String as type, one parameter with different type, multiple parameters having String as type, multiple parameters with different types.</para>
 <para/>
 </section> 
-<section id="uc_SubPackage.link">
-    <title id="uc_SubPackage.title.link">SubPackage</title>
+<section id="uc_Structure.link">
+    <title id="uc_Structure.title.link">Structure</title>
     
-    <para></para>
+    <para>Use case dedicated to the compilation of a Kermeta structure.</para>
 </section> 
 <section id="uc_Tag.link">
     <title id="uc_Tag.title.link">Tag</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>A comment on the root package.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on sub and subsub packages.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test003</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test003/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test003/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on a class definition.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test004</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test004/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources:</para>
+
+<para>One comment on an operation.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test005</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on a reference, an attribute and a derived property.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test006</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test006/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test006/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on sub and sub sub packages.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test007</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test007/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test007/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on a class definition.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test008</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test008/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test008/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on an operation.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test009</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on a reference, an attribute and a derived property.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test010</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test010/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test010/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of tags for modeling unit.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test011</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test011/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test011/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on primitive type.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test012</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test012/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test012/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on primitive type.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test013</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test013/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test013/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on enumeration.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test014</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test014/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test014/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>TODO</para>
+<para/>
 </section> 
 <section id="uc_Traceability.link">
     <title id="uc_Traceability.title.link">Traceability</title>
@@ -887,6 +1761,21 @@ This sample shows the different cases for the generation of Runners: none parame
 <section id="uc_UriManagement.link">
     <title id="uc_UriManagement.title.link">UriManagement</title>
     
-    <para></para>
+    <para>Problem:</para>
+<para>To load the user model (conforms to a metamodel in ecore), we are using the uri-registry mechanism from EMF.</para>
+<para/>
+<para>In the context where an user has its own generated source code, then the both uri: this one generated by the user and this one generated by the compiler are the same.
+If the two plugins are deployed then some conflicts will appear.</para>
+<para>A primary approach is to ignore if the user has generated its own source code.
+Also we consider the uri generated by the compiler as the reference.</para>
+<para/>
+<para>Several solutions could be considered:</para>
+<para>using the plugin extension: factory_override</para>
+
+<para>From Eclipse: (http://dev.eclipse.org/newslists/news.eclipse.tools.emf/msg22892.html)</para>
+<para>This extension point is used to register an overriding Ecore factory implementation against a namespace URI (Uniform Resource Identifier) in EMF's global package registry, EPackage.Registry.INSTANCE. When the corresponding Ecore package is initialized, the package registry is consulted for the registered factory implementation to override the default that would otherwise be used.</para>
+
+<para>uri - A URI that uniquely identifies an Ecore package for which this factory in an override.</para>
+<para>class - A fully qualified Java classname of an overriding factory implementation.</para>
 </section>
 </chapter></book>

@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: unit_test.docb.xml,v 1.2 2008-01-23 15:30:10 cfaucher Exp $ -->
+<!-- $Id: unit_test.docb.xml,v 1.3 2008-01-30 13:00:25 cfaucher Exp $ -->
 <book lang="en-US">
 	<bookinfo>
 	    <title>Kermeta Compiler Documentation</title>
 		<pubdate>Build date: @BUILD.DATE@</pubdate>
-	    <pubdate>$Date: 2008-01-23 15:30:10 $</pubdate>
+	    <pubdate>$Date: 2008-01-30 13:00:25 $</pubdate>
 	    <author>
 	      <firstname>Cyril</firstname>
 	      <surname>Faucher</surname>
+	    </author>
+	    <author>
+	      <firstname>Francois</firstname>
+	      <surname>Tanguy</surname>
 	    </author>
 	    <author>
 	      <firstname>Didier</firstname>
@@ -91,17 +95,13 @@
 	}</programlisting>
 			
 			<programlisting>aspect class ClassDefinition {
-	operation eachOwnedElement(func : <MultiplicityElement -> Object>) : Void is do
-		//if self.isInstanceOf(Property)
-		stdio.writeln("F2")
+	operation eachOwnedElement(func : MultiplicityElement -> Object) : Void is do
         self.ownedAttribute.each{ o |
 			func(o.asType(Property))
 		}
-		stdio.writeln("F3")
 		self.ownedOperation.each{ o |
 			func(o.asType(Operation))
 		}
-		stdio.writeln("F4")
 	end	
 }</programlisting>
 
@@ -182,6 +182,17 @@
                 </entry>
               </row>
               <row>
+                <entry><para><link linkend="uc_Behavior.link">Behavior</link></para></entry>
+                <entry><para></para></entry>
+                <entry>
+                	<para>Impl_Java [in progress]</para>
+                
+                	<para>Impl_Kermeta [in progress]</para>
+                
+                	<para>Design [in progress]</para>
+                </entry>
+              </row>
+              <row>
                 <entry><para><link linkend="uc_Body.link">Body</link></para></entry>
                 <entry><para></para></entry>
                 <entry>
@@ -252,6 +263,17 @@
                 <entry><para></para></entry>
                 <entry>
                 	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
+              </row>
+              <row>
+                <entry><para><link linkend="uc_Enumeration.link">Enumeration</link></para></entry>
+                <entry><para></para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
                 
                 	<para>Impl_Kermeta [NOK]</para>
                 
@@ -340,6 +362,17 @@
                 </entry>
               </row>
               <row>
+                <entry><para><link linkend="uc_InvariantBehavior.link">InvariantBehavior</link></para></entry>
+                <entry><para></para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
+              </row>
+              <row>
                 <entry><para><link linkend="uc_JavaStaticCall.link">JavaStaticCall</link></para></entry>
                 <entry><para></para></entry>
                 <entry>
@@ -413,11 +446,11 @@
                 <entry><para><link linkend="uc_MultiplePackagesRoot.link">MultiplePackagesRoot</link></para></entry>
                 <entry><para></para></entry>
                 <entry>
-                	<para>Impl_Java [NOK]</para>
+                	<para>Impl_Java [OK]</para>
                 
-                	<para>Impl_Kermeta [NOK]</para>
+                	<para>Impl_Kermeta [OK]</para>
                 
-                	<para>Design [NOK]</para>
+                	<para>Design [OK]</para>
                 </entry>
               </row>
               <row>
@@ -469,6 +502,17 @@
                 <entry><para></para></entry>
                 <entry>
                 	<para>Impl_Java [OK]</para>
+                
+                	<para>Impl_Kermeta [NOK]</para>
+                
+                	<para>Design [NOK]</para>
+                </entry>
+              </row>
+              <row>
+                <entry><para><link linkend="uc_Parameter.link">Parameter</link></para></entry>
+                <entry><para></para></entry>
+                <entry>
+                	<para>Impl_Java [NOK]</para>
                 
                 	<para>Impl_Kermeta [NOK]</para>
                 
@@ -559,14 +603,14 @@
                 </entry>
               </row>
               <row>
-                <entry><para><link linkend="uc_SubPackage.link">SubPackage</link></para></entry>
+                <entry><para><link linkend="uc_Structure.link">Structure</link></para></entry>
                 <entry><para></para></entry>
                 <entry>
                 	<para>Impl_Java [OK]</para>
                 
-                	<para>Impl_Kermeta [NOK]</para>
+                	<para>Impl_Kermeta [in progress]</para>
                 
-                	<para>Design [NOK]</para>
+                	<para>Design [in progress]</para>
                 </entry>
               </row>
               <row>
@@ -669,7 +713,44 @@ myCD.getAttr.add(theValueOfAttr);</programlisting>
 <section id="uc_Attribute.link">
     <title id="uc_Attribute.title.link">Attribute</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_attribute/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_attribute/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one attribute.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_attribute/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_attribute/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one attribute with 0..* cardinality.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test005</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on a reference, an attribute and a derived property.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test009</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on a reference, an attribute and a derived property.</para>
+<para/>
+</section> 
+<section id="uc_Behavior.link">
+    <title id="uc_Behavior.title.link">Behavior</title>
+    
+    <para>Use case dedicated to the compilation of the Kermeta behavior.</para>
 </section> 
 <section id="uc_Body.link">
     <title id="uc_Body.title.link">Body</title>
@@ -739,7 +820,31 @@ myCD.getAttr.add(theValueOfAttr);</programlisting>
 <section id="uc_ClassDefinition.link">
     <title id="uc_ClassDefinition.title.link">ClassDefinition</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_classDefinition/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_classDefinition/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>This sample shows the generation of a kmt file with one root package and several sub and subsub packages with class definitions inside.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test003</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test003/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test003/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on a class definition.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test007</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test007/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test007/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on a class definition.</para>
+<para/>
 </section> 
 <section id="uc_Collection.link">
     <title id="uc_Collection.title.link">Collection</title>
@@ -795,6 +900,35 @@ if(...) {
 
 <para/>
 </section> 
+<section id="uc_Enumeration.link">
+    <title id="uc_Enumeration.title.link">Enumeration</title>
+    
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_enumeration/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_enumeration/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one enumeration with several literals.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test013</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test013/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test013/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on enumeration.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test014</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test014/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test014/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>TODO</para>
+<para/>
+</section> 
 <section id="uc_Exception.link">
     <title id="uc_Exception.title.link">Exception</title>
     
@@ -838,7 +972,23 @@ a.ref.each{ r |
 <section id="uc_Generics.link">
     <title id="uc_Generics.title.link">Generics</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_generics/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_generics/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one class definition with one type parameter.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_generics/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_generics/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one generic class with one generic method.</para>
+<para/>
 </section> 
 <section id="uc_Inheritance.link">
     <title id="uc_Inheritance.title.link">Inheritance</title>
@@ -964,6 +1114,27 @@ text2 = "World";</programlisting>
 <section id="uc_Invariant.link">
     <title id="uc_Invariant.title.link">Invariant</title>
     
+    <para>TODO</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_invariant/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_invariant/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one invariant.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_invariant/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_invariant/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of several invariants.</para>
+<para/>
+</section> 
+<section id="uc_InvariantBehavior.link">
+    <title id="uc_InvariantBehavior.title.link">InvariantBehavior</title>
+    
     <para></para>
 </section> 
 <section id="uc_JavaStaticCall.link">
@@ -1065,7 +1236,15 @@ while( i != j ) {
 <section id="uc_ModelingUnit.link">
     <title id="uc_ModelingUnit.title.link">ModelingUnit</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test010</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test010/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test010/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of tags for modeling unit.</para>
+<para/>
 </section> 
 <section id="uc_MultipleInheritance.link">
     <title id="uc_MultipleInheritance.title.link">MultipleInheritance</title>
@@ -1075,7 +1254,17 @@ while( i != j ) {
 <section id="uc_MultiplePackagesRoot.link">
     <title id="uc_MultiplePackagesRoot.title.link">MultiplePackagesRoot</title>
     
-    <para></para>
+    <para>Test wether it is possible to generate several root packages. 
+At the moment it is possible when editing a km file but not with kmt file
+because the syntax grammar does not allow multiple root package definitions</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_multiplePackagesRoot/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_multiplePackagesRoot/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of several root packages. Does not work when the model comes from a kmt file.</para>
+<para/>
 </section> 
 <section id="uc_Multiplicity.link">
     <title id="uc_Multiplicity.title.link">Multiplicity</title>
@@ -1083,7 +1272,15 @@ while( i != j ) {
     <para>Design:</para>
 
 <para>Implemented by the structural part (?model? plugin) of the EMF generated source code.</para>
-<para>Some issues for multiplicity have taken into account during the assignment translation.</para>
+<para>Some issues for multiplicity have taken into account during the assignment translation.</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_multiplicity/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_multiplicity/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one reference with 0..4 multiplicity.</para>
+<para/>
 </section> 
 <section id="uc_New.link">
     <title id="uc_New.title.link">New</title>
@@ -1114,7 +1311,39 @@ Comp_new_test001Factory.eINSTANCE.createA();
 <section id="uc_OperationStructure.link">
     <title id="uc_OperationStructure.title.link">OperationStructure</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_operationStructure/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_operationStructure/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>This sample shows the generation of an operation without returned type.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_operationStructure/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_operationStructure/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one abstract operation.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test004</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test004/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources:</para>
+
+<para>One comment on an operation.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test008</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test008/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test008/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on an operation.</para>
+<para/>
 </section> 
 <section id="uc_Opposite.link">
     <title id="uc_Opposite.title.link">Opposite</title>
@@ -1128,17 +1357,134 @@ Comp_new_test001Factory.eINSTANCE.createA();
     
     <para>Design:</para>
 
-<para>The granularity of the EMF regeneration is the EPackage. If we want to generate incrementally the Java source code, also we regenerate the whole of the EPackage.</para>
+<para>The granularity of the EMF regeneration is the EPackage. If we want to generate incrementally the Java source code, also we regenerate the whole of the EPackage.</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>This sample shows the generation of a kmt file with one root package.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>This sample shows the generation of a kmt file for one root package and one sub package.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test003</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test003/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test003/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>This sample shows the generation of a kmt file for one root package with several sub and subub packages.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test004</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test004/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test004/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>This sample shows the generation of a km file with several root packages with several sub and subub packages.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test005</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test005/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_package/test005/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Same test as test003 (one root package with several sub and subsub packages) but with uris. The resulting ecore package must have the nsPrefix and nsUri attribute set with the uri of the kermeta package.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>A comment on the root package.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on sub and subsub packages.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test006</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test006/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test006/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on sub and sub sub packages.</para>
+<para/>
+</section> 
+<section id="uc_Parameter.link">
+    <title id="uc_Parameter.title.link">Parameter</title>
+    
+    <para>TODO</para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_parameter/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_parameter/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one attribute.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_parameter/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_parameter/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of several parameters for an operation.</para>
+<para/>
 </section> 
 <section id="uc_Postcondition.link">
     <title id="uc_Postcondition.title.link">Postcondition</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_postcondition/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_postcondition/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one post condition.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_postcondition/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_postcondition/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of several post conditions.</para>
+<para/>
 </section> 
 <section id="uc_Precondition.link">
     <title id="uc_Precondition.title.link">Precondition</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_precondition/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_precondition/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one pre condition.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_precondition/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_precondition/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of several pre conditions.</para>
+<para/>
 </section> 
 <section id="uc_PrimitiveType.link">
     <title id="uc_PrimitiveType.title.link">PrimitiveType</title>
@@ -1154,6 +1500,30 @@ Comp_new_test001Factory.eINSTANCE.createA();
 <para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
 <para>TODO</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_primitiveType/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of a primitive type pointing on a kermeta type.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test011</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test011/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test011/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on primitive type.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test012</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test012/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test012/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on primitive type.</para>
 <para/>
 </section> 
 <section id="uc_PropertyBehavior.link">
@@ -1188,12 +1558,60 @@ Comp_new_test001Factory.eINSTANCE.createA();
 <para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyStructure/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>]  [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_propertyStructure/test001/expected_output/java/?cvsroot=kermeta">java</ulink>] </para>
 
 <para>This sample shows the structural compilation of derived property in different cases: property typed by a PrimitiveType or by a ClassDefinition. The second variation is the "readonly" property.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test005</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on a reference, an attribute and a derived property.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test009</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on a reference, an attribute and a derived property.</para>
 <para/>
 </section> 
 <section id="uc_Reference.link">
     <title id="uc_Reference.title.link">Reference</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_reference/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_reference/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one reference.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_reference/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_reference/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of one reference with 0..* cardinality.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test005</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on a reference, an attribute and a derived property.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test009</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on a reference, an attribute and a derived property.</para>
+<para/>
 </section> 
 <section id="uc_Runner.link">
     <title id="uc_Runner.title.link">Runner</title>
@@ -1213,15 +1631,127 @@ Another file is generated that is a ?Eclipse Java Application Launch? file: *.la
 <para>This sample shows the different cases for the generation of Runners: none parameters, one parameter having String as type, one parameter with different type, multiple parameters having String as type, multiple parameters with different types.</para>
 <para/>
 </section> 
-<section id="uc_SubPackage.link">
-    <title id="uc_SubPackage.title.link">SubPackage</title>
+<section id="uc_Structure.link">
+    <title id="uc_Structure.title.link">Structure</title>
     
-    <para></para>
+    <para>Use case dedicated to the compilation of a Kermeta structure.</para>
 </section> 
 <section id="uc_Tag.link">
     <title id="uc_Tag.title.link">Tag</title>
     
-    <para></para>
+    <para></para> 
+<para/>
+<para><emphasis role="bold">test001</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test001/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test001/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>A comment on the root package.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test002</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test002/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test002/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on sub and subsub packages.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test003</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test003/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test003/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on a class definition.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test004</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test004/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources:</para>
+
+<para>One comment on an operation.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test005</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test005/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on a reference, an attribute and a derived property.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test006</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test006/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test006/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on sub and sub sub packages.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test007</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test007/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test007/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on a class definition.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test008</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test008/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test008/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on an operation.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test009</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test009/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on a reference, an attribute and a derived property.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test010</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test010/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test010/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>Generation of tags for modeling unit.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test011</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test011/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test011/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on primitive type.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test012</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test012/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test012/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One tag on primitive type.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test013</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test013/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test013/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>One comment on enumeration.</para>
+<para/> 
+<para/>
+<para><emphasis role="bold">test014</emphasis> [UnitTest]:</para>
+<para>Input resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test014/input/kermeta/?cvsroot=kermeta">kermeta</ulink>] </para>
+
+<para>Output resources: [<ulink url="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kermeta_projects/org.kermeta.compiler.tests/unit_test/comp_tag/test014/expected_output/ecore/?cvsroot=kermeta">ecore</ulink>] </para>
+
+<para>TODO</para>
+<para/>
 </section> 
 <section id="uc_Traceability.link">
     <title id="uc_Traceability.title.link">Traceability</title>
