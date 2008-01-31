@@ -1,4 +1,4 @@
-/*$Id: CompareModel.java,v 1.3 2008-01-30 16:59:34 cfaucher Exp $
+/*$Id: CompareModel.java,v 1.4 2008-01-31 08:26:57 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.tests
 * File : 	CompareModel.java
 * License : EPL
@@ -70,7 +70,7 @@ public class CompareModel {
 	 * @return
 	 */
 	public boolean compareWithEMFCompare() {
-		return EMFCompareModelHelper.compare(leftModelPath, rightModelPath);
+		return EMFCompareModelHelper.isSimilar(leftModelPath, rightModelPath);
 	}
 
 	public String getLeftModel() {
@@ -100,7 +100,7 @@ public class CompareModel {
 	public static void main (String args[]) {
 		String l = "test/interpreter/emf_testcases/instances/kmLogo.km";
 		String r = "test/interpreter/emf_testcases/instances/ecore.km";
-		CompareModel modelComparison = new CompareModel(l, r);
+		CompareModel modelComparison = new CompareModel(r, r);
 		System.out.println(modelComparison.compareWithEcoreUtil());
 		System.out.println(modelComparison.compareWithEMFCompare());
 	}

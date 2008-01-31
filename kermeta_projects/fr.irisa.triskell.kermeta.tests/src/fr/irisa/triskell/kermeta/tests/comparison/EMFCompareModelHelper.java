@@ -1,4 +1,4 @@
-/* $Id: EMFCompareModelHelper.java,v 1.1 2008-01-30 15:33:38 cfaucher Exp $
+/* $Id: EMFCompareModelHelper.java,v 1.2 2008-01-31 08:26:57 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.tests.comparison
  * File      : EMFCompareModelHelper.java
  * License   : EPL
@@ -10,6 +10,8 @@
 package fr.irisa.triskell.kermeta.tests.comparison;
 
 
+import java.io.IOException;
+
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.compare.diff.generic.DiffMaker;
@@ -17,11 +19,13 @@ import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
 import org.eclipse.emf.compare.match.metamodel.MatchModel;
 import org.eclipse.emf.compare.match.statistic.DifferencesServices;
+import org.eclipse.emf.compare.util.ModelUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
 
 public class EMFCompareModelHelper {
@@ -83,11 +87,31 @@ public class EMFCompareModelHelper {
 	 * @param rightModelPath
 	 * @return
 	 */
-	public static boolean compare(String leftModelPath, String rightModelPath) {
+	public static boolean isSimilar(String leftModelPath, String rightModelPath) {
 		if(((DiffGroup) getDiffModel(leftModelPath, rightModelPath).getOwnedElements().get(0)).getSubchanges()> 0) {
 			return false;
 		}
 		return true;
 	}
 	
+	/**
+	 * 
+	 * @param leftModelPath
+	 * @param rightModelPath
+	 * @param diffModelPath
+	 * @return
+	 */
+	public static boolean isDifferentAndSaveDiff(String leftModelPath, String rightModelPath, String diffModelPath) {
+		DiffModel diffModel = getDiffModel(leftModelPath, rightModelPath);
+		if( ((DiffGroup) diffModel.getOwnedElements().get(0)).getSubchanges() > 0 ) {
+			try {
+				ModelUtils.save(diffModel, diffModelPath);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return true;
+		}
+		return false;
+	}
 }
