@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.5 2008-01-09 13:50:36 cfaucher Exp $
+/* $Id: KermetaCompiler.java,v 1.1 2008-01-31 13:28:29 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -8,32 +8,28 @@
  * Authors       : cfaucher
  */
 
-package org.kermeta.compiler.popup.actions;
+package org.kermeta.compiler;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
-import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
-import org.eclipse.ui.IObjectActionDelegate;
-import org.eclipse.ui.IWorkbenchPart;
-import org.kermeta.compiler.Compiler;
 import org.kermeta.compiler.exporter.KM2JavaPrettyPrinter;
 import org.kermeta.compiler.generator.helper.model.SimkModelHelper;
+import org.kermeta.compiler.model.compiler.impl.AbstractCompilerImpl;
+import org.kermeta.compiler.util.CompilerUtil;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.merger.Merger;
@@ -47,88 +43,52 @@ import org.kermeta.simk.SimkFactory;
 import org.kermeta.simk.StaticMethod;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
-import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.eclipse.resources.URIHelper;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
+import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import fr.irisa.triskell.traceability.TraceModel;
+import fr.irisa.triskell.traceability.helper.Tracer;
 
-public class CompileKermetaAction implements IObjectActionDelegate {
-
-	protected StructuredSelection currentSelection;
+public class KermetaCompiler extends AbstractCompilerImpl {
 
 	protected IFile kermetafile;
+	private EcoreExporter km2ecoreGen;
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
 
 	/**
 	 * Constructor for CompileKermetaAction.
 	 */
-	public CompileKermetaAction() {
+	public KermetaCompiler(IFile kermetaFile) {
 		super();
+		this.kermetafile = kermetaFile;
+		km2ecoreGen = new EcoreExporter();
 	}
 
-	/**
-	 * @see IObjectActionDelegate#setActivePart(IAction, IWorkbenchPart)
-	 */
-	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-	}
-
-	/**
-	 * @see IActionDelegate#run(IAction)
-	 */
-	public void run(IAction action) {
+	public void run() {
 
 		String ecorePath = kermetafile.getLocation().removeFileExtension().addFileExtension("ecore").toString();
-		String ecoreRelativePath = kermetafile.getFullPath().removeFileExtension().addFileExtension("ecore").toString();
 		
 		// Create the KermetaUnit
 		KermetaUnit unit = null;
 		try {
 			unit = IOPlugin.getDefault().loadKermetaUnit(kermetafile, new NullProgressMonitor());
 			unit.setLocked(true);
-		
-		
-			// ResourceSet resource_set;// = new ResourceSetImpl();
-			// Resource resource =
-			// resource_set.createResource(URI.createFileURI(ecorePath));
-			// Generate Ecore in memory and saving
-			EcoreExporter km2ecoreGen = new EcoreExporter();
+
+			this.generateEcoreVersion(unit);
+			// Save the tracer that store the "km2ecoremapping" trace 
+			//saveKm2ecoremappingTracer(km2ecoreGen);
 			
-			ExporterOptions exporterOptions = ExporterOptions.getDefault();
-			exporterOptions.isIndependent = true;
-			exporterOptions.isOnlyStructural = false; // method's body will be
-														// generated
-			exporterOptions.isExportedWithMerger = false;
-			exporterOptions.isRemoveKermetaEAnnotations = false;
-			
-			if(exporterOptions.isExportedWithMerger) {
-				LinkedHashSet<KermetaUnit> relatedUnit = new LinkedHashSet<KermetaUnit>();
-				relatedUnit.add( unit );
-				relatedUnit.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(unit) );
-				Merger mergedVersion = new Merger();
-			
-				
-				for ( KermetaUnit kunit : relatedUnit )
-					kunit.setLocked(true);
-					
-				unit = mergedVersion.processInMemory(relatedUnit,"platform:/resource" + ecoreRelativePath);
-	
-				for ( KermetaUnit kunit : relatedUnit )
-					kunit.setLocked(false);
-			}
-			
-		
-			/* ResourceSet resource_set = */km2ecoreGen.exportInMemory(unit, kermetafile.getParent().getFullPath().toString(), exporterOptions);
-			internalLog.info("Ecore structure has been generated");
 			
 			prettyPrintJavaCode(km2ecoreGen,unit);
 	
@@ -141,19 +101,12 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 			// kermetafile.getParent().refreshLocal(1, null);
 	
 			Compiler compiler = new Compiler(ecorePath, unit, km2ecoreGen);
-		
+			// run the generation of Java Classes
 			compiler.run();
 			internalLog.info("The compilation process is complete");
 			
-		} catch (KermetaIOFileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (URIMalformedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//unit.setLocked(false);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -175,34 +128,70 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 		 */
 
 	}
-
-	/**
-	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
-	 */
-	public void selectionChanged(IAction action, ISelection selection) {
-		if (selection instanceof StructuredSelection) {
-			// the selection should be a single *.ecore file
-			currentSelection = (StructuredSelection) selection;
-			Iterator<IFile> it = currentSelection.iterator();
-
-			while (it.hasNext()) {
-				kermetafile = (IFile) it.next();
-			}
-		}
+	
+	public void saveKm2ecoremappingTracer(EcoreExporter km2ecoreGen) {
+		URI tracerUri = URI.createURI(km2ecoreGen.getSource().getUri());
+		tracerUri = tracerUri.appendFileExtension("traceability");
+		
+		Resource tarcerResource = Tracer.getResource(tracerUri);
+		
+		Tracer tracer = km2ecoreGen.getKm2ecoremappingTracer();
+		
+		TraceModel traceModel = tracer.getTraceModel();
+		
+		tarcerResource.getContents().add(traceModel);
+		
 		try {
-			action.setEnabled(false);
-			KermetaUnit ku_fromFile = IOPlugin.getDefault().loadKermetaUnit(
-					kermetafile, new NullProgressMonitor());
-			if (!ku_fromFile.isErroneous()) {
-				action.setEnabled(true);
-			}
-		} catch (KermetaIOFileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (URIMalformedException e) {
+			tarcerResource.save(null);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	
+	private EcoreExporter generateEcoreVersion(KermetaUnit unit) {
+		// Generate Ecore in memory and saving in file
+		String ecoreRelativePath = kermetafile.getFullPath().removeFileExtension().addFileExtension("ecore").toString();
+		
+		ExporterOptions exporterOptions = ExporterOptions.getDefault();
+		exporterOptions.isIndependent = true;
+		exporterOptions.isOnlyStructural = false; // method's body will be generated
+		exporterOptions.isExportedWithMerger = true;
+		exporterOptions.isRemoveKermetaEAnnotations = false;
+		
+		if(exporterOptions.isExportedWithMerger) {
+			LinkedHashSet<KermetaUnit> relatedUnit = new LinkedHashSet<KermetaUnit>();
+			relatedUnit.add( unit );
+			relatedUnit.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(unit) );
+			Merger mergedVersion = new Merger();
+		
+			
+			for ( KermetaUnit kunit : relatedUnit )
+				kunit.setLocked(true);
+				
+			try {
+				unit = mergedVersion.processInMemory(relatedUnit,"platform:/resource" + ecoreRelativePath);
+			} catch (URIMalformedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			for ( KermetaUnit kunit : relatedUnit )
+				kunit.setLocked(false);
+		}
+		
+	
+		/* ResourceSet resource_set = */km2ecoreGen.exportInMemory(unit, kermetafile.getParent().getFullPath().toString(), exporterOptions);
+		internalLog.info("Ecore structure has been generated");
+		
+		KmExporter kmExporter = new KmExporter();
+		kmExporter.export(unit, URIHelper.removeFileName(unit.getUri()));
+		
+		return km2ecoreGen;
 	}
 
 	/**
@@ -226,8 +215,13 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 
 			prettyPrinter.setHelperModel(simkModel);
 			
-			String mainClass = ModelingUnitHelper.getMainClass(unit).getValue();
-			String mainOperation = ModelingUnitHelper.getMainOperation(unit).getValue();
+			String mainClass = "";
+			String mainOperation = "";
+			// The two parameters must be setted
+			if( ModelingUnitHelper.getMainClassAsString(unit) != null && ModelingUnitHelper.getMainOperationAsString(unit) != null ) {
+				mainClass = ModelingUnitHelper.getMainClassAsString(unit);
+				mainOperation = ModelingUnitHelper.getMainOperationAsString(unit);
+			}
 
 			for (TypeDefinition aTypeDef : fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper
 					.getTypeDefinitions(unit)) {
@@ -262,7 +256,7 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 							EObject eObj = km2ecore.getKm2ecoremapping()
 									.get(op);
 							if (eObj != null && eObj instanceof EOperation) {
-								addAnnotation((EOperation) eObj,
+								CompilerUtil.addAnnotation((EOperation) eObj,
 										KM2Ecore.ANNOTATION_GENMODEL,
 										KM2Ecore.ANNOTATION_BODY_DETAILS,
 										bodyString, null);
@@ -283,7 +277,7 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 								 * eOp.eContainer()).getEOperations().add(eOp_class);
 								 */
 
-								if (isRunnable(eOp)
+								if ( CompilerUtil.isRunnable(eOp)
 										&& !EcoreHelper.getQualifiedName(eOp)
 												.contains("kermeta")) {
 									StaticMethod newStaticMethod = SimkFactory.eINSTANCE
@@ -419,59 +413,6 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 		}
 	}
 
-	/**
-	 * 
-	 * FIXME CF To factorize
-	 * 
-	 * @param annotedModelElement
-	 * @param annotationName
-	 * @param annotationDetailKey
-	 * @param annotationDetailValue
-	 * @param referedEObject
-	 */
-	public static void addAnnotation(EModelElement annotedModelElement,
-			String annotationName, String annotationDetailKey,
-			String annotationDetailValue, EObject referedEObject) {
-		// find the Annotation or create a new one
-		EAnnotation newEAnnotation = annotedModelElement
-				.getEAnnotation(annotationName);
-		if (newEAnnotation == null) {
-			newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-			newEAnnotation.setSource(annotationName);
-			annotedModelElement.getEAnnotations().add(newEAnnotation);
-		}
-		// add the info in the Details map
-		if (annotationDetailKey != null)
-			newEAnnotation.getDetails().put(annotationDetailKey,
-					annotationDetailValue);
-		else {
-			newEAnnotation.getDetails().put(KMT2KMPass7.KERMETA_DOCUMENTATION,
-					annotationDetailValue);
-		}
-		// try a direct link additionnaly to the detail map.
-		if (referedEObject != null) {
-			internalLog.debug(" adding annotation reference for "
-					+ annotationDetailKey + " = " + annotationDetailValue);
-			newEAnnotation.getReferences().add(referedEObject);
-		}
-	}
+	
 
-	/**
-	 * Check if an EOperation is runnable via for the generation the main and
-	 * class method
-	 * 
-	 * @param eop
-	 * @return
-	 */
-	public boolean isRunnable(EOperation eop) {
-		boolean res = true;
-		for (EParameter eparam : eop.getEParameters()) {
-			if (eparam.getEType().getName().equals("String")) {
-				res = true;
-			} else {
-				return false;
-			}
-		}
-		return res;
-	}
 }

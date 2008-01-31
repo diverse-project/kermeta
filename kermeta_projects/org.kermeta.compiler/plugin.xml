@@ -1,89 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.2"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.4 2008-01-31 13:29:04 cfaucher Exp $
+-->
+
 <plugin>
-   <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            id="org.kermeta.compiler.compileecorecontribution"
-            nameFilter="*.ecore"
-            objectClass="org.eclipse.core.resources.IFile">
-         <menu
-               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-               label="Kermeta"
-               path="additions">
-            <separator name="kermetagroup1"/>
-         </menu>
-         <action
-               class="org.kermeta.compiler.popup.actions.CompileEcoreAction"
-               enablesFor="1"
-               icon="icons/emfCode.png"
-               id="fr.irisa.triskell.kermeta.compiler.CompileEcoreAction"
-               label="Compile Ecore to EMF plugin (experimental)"
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
-      </objectContribution>
-      <objectContribution
-            id="org.kermeta.compiler.compilekmtcontribution"
-            nameFilter="*.kmt"
-            objectClass="org.eclipse.core.resources.IFile">
-         <menu
-               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-               label="Kermeta"
-               path="additions">
-            <separator name="kermetagroup1"/>
-         </menu>
-         <action
-               class="org.kermeta.compiler.popup.actions.CompileKermetaAction"
-               enablesFor="1"
-               icon="icons/emfCode.png"
-               id="fr.irisa.triskell.kermeta.compiler.CompileKmtAction"
-               label="Compile Kmt to EMF plugin (experimental)"
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
-      </objectContribution>
-      <objectContribution
-            id="org.kermeta.compiler.compilekmtcontribution"
-            nameFilter="*.km"
-            objectClass="org.eclipse.core.resources.IFile">
-         <menu
-               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-               label="Kermeta"
-               path="additions">
-            <separator name="kermetagroup1"/>
-         </menu>
-         <action
-               class="org.kermeta.compiler.popup.actions.CompileKermetaAction"
-               enablesFor="1"
-               icon="icons/emfCode.png"
-               id="fr.irisa.triskell.kermeta.compiler.CompileKmtAction"
-               label="Compile Km to EMF plugin (experimental)"
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
-         </action>
-      </objectContribution>
-      <!--objectContribution
-            id="org.kermeta.compiler.compilekmtwithparamcontribution"
-            nameFilter="*.kmt"
-            objectClass="org.eclipse.core.resources.IFile">
-         <menu
-               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-               label="Kermeta"
-               path="additions">
-            <separator name="kermetagroup1"/>
-         </menu>
-         <action
-               class="org.kermeta.compiler.popup.actions.CompileKermetaActionWithParam"
-               enablesFor="1"
-               icon="icons/emfCode.png"
-               id="fr.irisa.triskell.kermeta.compiler.CompileKmtActionWithParam"
-               label="Compile Kmt to EMF plugin with params (experimental) ..."
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
-      </objectContribution-->
-   </extension>
-   <!--<extension
-         point="org.eclipse.emf.codegen.ecore.generatorAdapters">
-      <adapter
-            class="test.GenClassGeneratorAdapter"
-            modelClass="EClass"
-            modelPackage="http://www.eclipse.org/emf/2002/Ecore">
-      </adapter>
-   </extension>-->
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.kermeta.org/compiler" 
+       class = "org.kermeta.compiler.model.compiler.CompilerPackage"
+       genModel = "model/ecore/compiler.genmodel" /> 
+  </extension>
 
 </plugin>

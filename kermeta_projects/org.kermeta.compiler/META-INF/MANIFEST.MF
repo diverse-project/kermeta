@@ -1,19 +1,29 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Kermeta Compiler
-Bundle-SymbolicName: org.kermeta.compiler;singleton:=true
-Bundle-Version: 0.1.99.qualifier
-Bundle-Activator: org.kermeta.compiler.CompilerPlugin
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.kermeta.compiler; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.kermeta.compiler,
+ org.kermeta.compiler.exporter,
+ org.kermeta.compiler.model.compiler,
+ org.kermeta.compiler.model.compiler.impl,
+ org.kermeta.compiler.model.compiler.util,
+ org.kermeta.compiler.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.codegen.ecore;visibility:=reexport,
+ org.kermeta.simk;visibility:=reexport,
+ org.eclipse.ui,
  org.eclipse.emf.codegen,
- org.eclipse.emf.codegen.ecore,
  org.eclipse.emf.codegen.ecore.ui,
  org.eclipse.emf.codegen.ui,
  org.eclipse.core.resources,
  fr.irisa.triskell.kermeta.model,
  fr.irisa.triskell.kermeta.io,
- org.eclipse.ui.console,
  fr.irisa.triskell.eclipse.util,
  fr.irisa.triskell.traceability,
  org.eclipse.jdt.core,
@@ -22,31 +32,5 @@ Require-Bundle: org.eclipse.ui,
  org.kermeta.merger,
  org.kermeta.compiler.generator,
  org.kermeta.generator,
- org.kermeta.simk,
  org.kermeta.compiler.generator.emftemplates
 Eclipse-LazyStart: true
-Bundle-Vendor: IRISA/INRIA
-Export-Package: org.kermeta.compiler;
-  uses:="org.osgi.framework,
-   org.eclipse.ui.plugin,
-   org.eclipse.emf.codegen.ecore,
-   org.eclipse.core.resources",
- org.kermeta.compiler.exporter;
-  uses:="fr.irisa.triskell.kermeta.visitor,
-   fr.irisa.triskell.kermeta.utils,
-   org.eclipse.emf.common.util,
-   fr.irisa.triskell.kermeta.loader,
-   org.eclipse.emf.ecore.resource,
-   org.apache.log4j,
-   fr.irisa.triskell.kermeta.language.structure,
-   fr.irisa.triskell.kermeta.language.behavior,
-   fr.irisa.triskell.kermeta.loader.message,
-   fr.irisa.triskell.traceability.helper,
-   org.eclipse.emf.ecore",
- org.kermeta.compiler.popup.actions;
-  uses:="org.eclipse.jface.viewers,
-   org.eclipse.core.resources,
-   org.eclipse.jface.action,
-   org.eclipse.ui",
- org.kermeta.compiler.util;uses:="org.eclipse.emf.codegen.ecore.genmodel"
-Bundle-ClassPath: .

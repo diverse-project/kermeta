@@ -1,4 +1,4 @@
-/* $Id: CompilerUtil.java,v 1.3 2007-10-19 16:34:13 cfaucher Exp $
+/* $Id: CompilerUtil.java,v 1.4 2008-01-31 13:28:19 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompilerUtil.java
  * License   : EPL
@@ -12,14 +12,26 @@ package org.kermeta.compiler.util;
 
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.EcoreFactory;
+
+import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  * Provide some useful methods to manage the Kermeta Compiler
  */
 public class CompilerUtil {
+	
+	final static public Logger internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
 
 	/**
 	 * 
@@ -33,4 +45,61 @@ public class CompilerUtil {
 		}
 	}
 	
+	
+	/**
+	 * Check if an EOperation is runnable via for the generation the main and
+	 * class method
+	 * 
+	 * @param eop
+	 * @return
+	 */
+	public static boolean isRunnable(EOperation eop) {
+		boolean res = true;
+		for (EParameter eparam : eop.getEParameters()) {
+			if (eparam.getEType().getName().equals("String")) {
+				res = true;
+			} else {
+				return false;
+			}
+		}
+		return res;
+	}
+	
+	
+	/**
+	 * 
+	 * FIXME CF To factorize
+	 * 
+	 * @param annotedModelElement
+	 * @param annotationName
+	 * @param annotationDetailKey
+	 * @param annotationDetailValue
+	 * @param referedEObject
+	 */
+	public static void addAnnotation(EModelElement annotedModelElement,
+			String annotationName, String annotationDetailKey,
+			String annotationDetailValue, EObject referedEObject) {
+		// find the Annotation or create a new one
+		EAnnotation newEAnnotation = annotedModelElement
+				.getEAnnotation(annotationName);
+		if (newEAnnotation == null) {
+			newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+			newEAnnotation.setSource(annotationName);
+			annotedModelElement.getEAnnotations().add(newEAnnotation);
+		}
+		// add the info in the Details map
+		if (annotationDetailKey != null)
+			newEAnnotation.getDetails().put(annotationDetailKey,
+					annotationDetailValue);
+		else {
+			newEAnnotation.getDetails().put(KMT2KMPass7.KERMETA_DOCUMENTATION,
+					annotationDetailValue);
+		}
+		// try a direct link additionnaly to the detail map.
+		if (referedEObject != null) {
+			internalLog.debug(" adding annotation reference for "
+					+ annotationDetailKey + " = " + annotationDetailValue);
+			newEAnnotation.getReferences().add(referedEObject);
+		}
+	}
 }
