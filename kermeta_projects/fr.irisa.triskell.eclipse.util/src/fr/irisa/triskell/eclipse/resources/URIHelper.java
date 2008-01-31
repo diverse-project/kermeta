@@ -1,6 +1,6 @@
 
 
-/*$Id: URIHelper.java,v 1.1 2007-02-08 15:30:03 ftanguy Exp $
+/*$Id: URIHelper.java,v 1.2 2008-01-31 13:42:59 cfaucher Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	URIHelper.java
 * License : EPL
@@ -43,7 +43,13 @@ public class URIHelper {
 				path += "/" + segment;
 		}
 		return path;
-	}	
+	}
+	
+	static public String removeFileName(String uri) {
+		URI u = URI.createURI(uri);
+		String path = u.toString().replace(u.lastSegment(), "");
+		return path;
+	}
 		
 }
 
