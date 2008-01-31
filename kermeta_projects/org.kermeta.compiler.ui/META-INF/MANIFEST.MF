@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kermeta Compiler UIi
+Bundle-SymbolicName: org.kermeta.compiler.ui;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: org.kermeta.compiler.ui.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.emf,
+ org.eclipse.emf.common,
+ org.eclipse.emf.ecore,
+ fr.irisa.triskell.eclipse.util,
+ org.kermeta.merger,
+ fr.irisa.triskell.kermeta.io,
+ org.kermeta.compiler,
+ org.kermeta.compiler.generator,
+ org.kermeta.simk,
+ fr.irisa.triskell.traceability
+Eclipse-LazyStart: true
+Export-Package: org.kermeta.compiler.ui,
+ org.kermeta.compiler.ui.popup.actions;
+  uses:="org.eclipse.jface.viewers,
+   org.eclipse.core.resources,
+   org.eclipse.jface.action,
+   org.eclipse.ui"
