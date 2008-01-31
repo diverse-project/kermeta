@@ -132,7 +132,7 @@
                enablesFor="1"
                icon="icons/add.png"
                id="org.kermeta.compiler.trek.ui.AddNewTestCaseFolder"
-               label="UC | Add a new Test Case folder inside the selected folder(s)"
+               label="UC | Add a new Test Case folder inside the selected folder"
                menubarPath="org.kermeta.compiler.trek.subMenu/org.kermeta.compiler.trek.subMenu.lowLevel/all">
          </action>
       </objectContribution>
