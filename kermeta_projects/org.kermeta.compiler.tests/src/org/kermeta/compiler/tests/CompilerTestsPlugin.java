@@ -1,4 +1,4 @@
-/*$Id: CompilerTestsPlugin.java,v 1.1 2007-12-12 13:49:27 cfaucher Exp $
+/*$Id: CompilerTestsPlugin.java,v 1.2 2008-01-31 10:03:36 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * File : 	CompilerTestsPlugin.java
 * License : EPL
@@ -14,6 +14,8 @@ import org.eclipse.core.runtime.Plugin;
 
 public class CompilerTestsPlugin extends Plugin {
 
+	public static final String PLUGIN_TESTS_PATH = "platform:/plugin/org.kermeta.compiler.tests/";
+	
 	public CompilerTestsPlugin() {
 		// TODO Auto-generated constructor stub
 	}
