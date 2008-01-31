@@ -1,5 +1,5 @@
 
-/*$Id: Kcomp_oppositeUseCase.java,v 1.1 2008-01-31 14:34:07 cfaucher Exp $
+/*$Id: Kcomp_oppositeUseCase.java,v 1.2 2008-01-31 15:52:20 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * File : 	CompPackageTestCase.java
 * License : EPL
@@ -28,6 +28,7 @@ import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.kpm.helper.RunnerHelper;
 import org.kermeta.loader.LoadingOptions;
+import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -118,6 +119,7 @@ public class Kcomp_oppositeUseCase {
 			/*
 			 * Start the interpreter.
 			 */
+     		interpreter.setKStream( new LocalIOConsole() );
 			interpreter.launch();
 			/*
 			 * Assertion
@@ -133,7 +135,7 @@ public class Kcomp_oppositeUseCase {
 	}
 	
 	private boolean compare(String output, String expected_output) {
-		return EMFCompareModelHelper.isDifferentAndSaveDiff(expected_output, output,  output + ".diff");
+		return ! EMFCompareModelHelper.isDifferentAndSaveDiff(expected_output, output,  output + "_diff.xmi");
 	}
 	
 	/**

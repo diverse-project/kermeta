@@ -1,5 +1,5 @@
 
-/*$Id: Kcomp_tagUseCase.java,v 1.1 2008-01-31 14:34:07 cfaucher Exp $
+/*$Id: Kcomp_tagUseCase.java,v 1.2 2008-01-31 15:52:20 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * File : 	CompPackageTestCase.java
 * License : EPL
@@ -28,6 +28,7 @@ import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.kpm.helper.RunnerHelper;
 import org.kermeta.loader.LoadingOptions;
+import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -96,7 +97,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test001 = "";
 	
 	@Before public void setParams_comp_tag_test001() {
-		String prefix = "/" + "comp_tag/test001" + "/";
+		String prefix = "comp_tag/test001";
 		input_comp_tag_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test001 + ".km";
 		output_comp_tag_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test001 + ".ecore";
 		expected_output_comp_tag_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test001 + ".ecore";
@@ -115,7 +116,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test002 = "";
 	
 	@Before public void setParams_comp_tag_test002() {
-		String prefix = "/" + "comp_tag/test002" + "/";
+		String prefix = "comp_tag/test002";
 		input_comp_tag_test002 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test002 + ".km";
 		output_comp_tag_test002 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test002 + ".ecore";
 		expected_output_comp_tag_test002 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test002 + ".ecore";
@@ -134,7 +135,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test003 = "";
 	
 	@Before public void setParams_comp_tag_test003() {
-		String prefix = "/" + "comp_tag/test003" + "/";
+		String prefix = "comp_tag/test003";
 		input_comp_tag_test003 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test003 + ".km";
 		output_comp_tag_test003 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test003 + ".ecore";
 		expected_output_comp_tag_test003 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test003 + ".ecore";
@@ -153,7 +154,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test004 = "";
 	
 	@Before public void setParams_comp_tag_test004() {
-		String prefix = "/" + "comp_tag/test004" + "/";
+		String prefix = "comp_tag/test004";
 		input_comp_tag_test004 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test004 + ".km";
 		output_comp_tag_test004 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test004 + ".ecore";
 		expected_output_comp_tag_test004 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test004 + ".ecore";
@@ -172,7 +173,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test005 = "";
 	
 	@Before public void setParams_comp_tag_test005() {
-		String prefix = "/" + "comp_tag/test005" + "/";
+		String prefix = "comp_tag/test005";
 		input_comp_tag_test005 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test005 + ".km";
 		output_comp_tag_test005 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test005 + ".ecore";
 		expected_output_comp_tag_test005 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test005 + ".ecore";
@@ -191,7 +192,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test006 = "";
 	
 	@Before public void setParams_comp_tag_test006() {
-		String prefix = "/" + "comp_tag/test006" + "/";
+		String prefix = "comp_tag/test006";
 		input_comp_tag_test006 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test006 + ".km";
 		output_comp_tag_test006 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test006 + ".ecore";
 		expected_output_comp_tag_test006 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test006 + ".ecore";
@@ -210,7 +211,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test007 = "";
 	
 	@Before public void setParams_comp_tag_test007() {
-		String prefix = "/" + "comp_tag/test007" + "/";
+		String prefix = "comp_tag/test007";
 		input_comp_tag_test007 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test007 + ".km";
 		output_comp_tag_test007 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test007 + ".ecore";
 		expected_output_comp_tag_test007 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test007 + ".ecore";
@@ -229,7 +230,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test008 = "";
 	
 	@Before public void setParams_comp_tag_test008() {
-		String prefix = "/" + "comp_tag/test008" + "/";
+		String prefix = "comp_tag/test008";
 		input_comp_tag_test008 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test008 + ".km";
 		output_comp_tag_test008 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test008 + ".ecore";
 		expected_output_comp_tag_test008 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test008 + ".ecore";
@@ -248,7 +249,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test009 = "";
 	
 	@Before public void setParams_comp_tag_test009() {
-		String prefix = "/" + "comp_tag/test009" + "/";
+		String prefix = "comp_tag/test009";
 		input_comp_tag_test009 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test009 + ".km";
 		output_comp_tag_test009 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test009 + ".ecore";
 		expected_output_comp_tag_test009 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test009 + ".ecore";
@@ -267,7 +268,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test010 = "";
 	
 	@Before public void setParams_comp_tag_test010() {
-		String prefix = "/" + "comp_tag/test010" + "/";
+		String prefix = "comp_tag/test010";
 		input_comp_tag_test010 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test010 + ".km";
 		output_comp_tag_test010 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test010 + ".ecore";
 		expected_output_comp_tag_test010 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test010 + ".ecore";
@@ -286,7 +287,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test011 = "";
 	
 	@Before public void setParams_comp_tag_test011() {
-		String prefix = "/" + "comp_tag/test011" + "/";
+		String prefix = "comp_tag/test011";
 		input_comp_tag_test011 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test011 + ".km";
 		output_comp_tag_test011 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test011 + ".ecore";
 		expected_output_comp_tag_test011 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test011 + ".ecore";
@@ -305,7 +306,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test012 = "";
 	
 	@Before public void setParams_comp_tag_test012() {
-		String prefix = "/" + "comp_tag/test012" + "/";
+		String prefix = "comp_tag/test012";
 		input_comp_tag_test012 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test012 + ".km";
 		output_comp_tag_test012 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test012 + ".ecore";
 		expected_output_comp_tag_test012 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test012 + ".ecore";
@@ -324,7 +325,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test013 = "";
 	
 	@Before public void setParams_comp_tag_test013() {
-		String prefix = "/" + "comp_tag/test013" + "/";
+		String prefix = "comp_tag/test013";
 		input_comp_tag_test013 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test013 + ".km";
 		output_comp_tag_test013 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test013 + ".ecore";
 		expected_output_comp_tag_test013 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test013 + ".ecore";
@@ -343,7 +344,7 @@ public class Kcomp_tagUseCase {
 	private String expected_output_comp_tag_test014 = "";
 	
 	@Before public void setParams_comp_tag_test014() {
-		String prefix = "/" + "comp_tag/test014" + "/";
+		String prefix = "comp_tag/test014";
 		input_comp_tag_test014 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test014 + ".km";
 		output_comp_tag_test014 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test014 + ".ecore";
 		expected_output_comp_tag_test014 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test014 + ".ecore";
@@ -384,6 +385,7 @@ public class Kcomp_tagUseCase {
 			/*
 			 * Start the interpreter.
 			 */
+     		interpreter.setKStream( new LocalIOConsole() );
 			interpreter.launch();
 			/*
 			 * Assertion
@@ -399,7 +401,7 @@ public class Kcomp_tagUseCase {
 	}
 	
 	private boolean compare(String output, String expected_output) {
-		return EMFCompareModelHelper.isDifferentAndSaveDiff(expected_output, output,  output + ".diff");
+		return ! EMFCompareModelHelper.isDifferentAndSaveDiff(expected_output, output,  output + "_diff.xmi");
 	}
 	
 	/**

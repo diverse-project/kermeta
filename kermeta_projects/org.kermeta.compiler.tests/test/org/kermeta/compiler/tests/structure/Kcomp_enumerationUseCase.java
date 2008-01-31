@@ -1,5 +1,5 @@
 
-/*$Id: Kcomp_enumerationUseCase.java,v 1.1 2008-01-31 14:34:07 cfaucher Exp $
+/*$Id: Kcomp_enumerationUseCase.java,v 1.2 2008-01-31 15:52:20 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * File : 	CompPackageTestCase.java
 * License : EPL
@@ -28,6 +28,7 @@ import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.kpm.helper.RunnerHelper;
 import org.kermeta.loader.LoadingOptions;
+import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -96,7 +97,7 @@ public class Kcomp_enumerationUseCase {
 	private String expected_output_comp_enumeration_test001 = "";
 	
 	@Before public void setParams_comp_enumeration_test001() {
-		String prefix = "/" + "comp_enumeration/test001" + "/";
+		String prefix = "comp_enumeration/test001";
 		input_comp_enumeration_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_enumeration_test001 + ".km";
 		output_comp_enumeration_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_enumeration_test001 + ".ecore";
 		expected_output_comp_enumeration_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_enumeration_test001 + ".ecore";
@@ -115,7 +116,7 @@ public class Kcomp_enumerationUseCase {
 	private String expected_output_comp_tag_test013 = "";
 	
 	@Before public void setParams_comp_tag_test013() {
-		String prefix = "/" + "comp_tag/test013" + "/";
+		String prefix = "comp_tag/test013";
 		input_comp_tag_test013 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test013 + ".km";
 		output_comp_tag_test013 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test013 + ".ecore";
 		expected_output_comp_tag_test013 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test013 + ".ecore";
@@ -134,7 +135,7 @@ public class Kcomp_enumerationUseCase {
 	private String expected_output_comp_tag_test014 = "";
 	
 	@Before public void setParams_comp_tag_test014() {
-		String prefix = "/" + "comp_tag/test014" + "/";
+		String prefix = "comp_tag/test014";
 		input_comp_tag_test014 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_tag_test014 + ".km";
 		output_comp_tag_test014 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_tag_test014 + ".ecore";
 		expected_output_comp_tag_test014 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_tag_test014 + ".ecore";
@@ -175,6 +176,7 @@ public class Kcomp_enumerationUseCase {
 			/*
 			 * Start the interpreter.
 			 */
+     		interpreter.setKStream( new LocalIOConsole() );
 			interpreter.launch();
 			/*
 			 * Assertion
@@ -190,7 +192,7 @@ public class Kcomp_enumerationUseCase {
 	}
 	
 	private boolean compare(String output, String expected_output) {
-		return EMFCompareModelHelper.isDifferentAndSaveDiff(expected_output, output,  output + ".diff");
+		return ! EMFCompareModelHelper.isDifferentAndSaveDiff(expected_output, output,  output + "_diff.xmi");
 	}
 	
 	/**

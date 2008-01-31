@@ -1,5 +1,5 @@
 
-/*$Id: Kcomp_containmentUseCase.java,v 1.1 2008-01-31 14:34:07 cfaucher Exp $
+/*$Id: Kcomp_containmentUseCase.java,v 1.2 2008-01-31 15:52:20 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * File : 	CompPackageTestCase.java
 * License : EPL
@@ -28,6 +28,7 @@ import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.kpm.helper.RunnerHelper;
 import org.kermeta.loader.LoadingOptions;
+import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -96,7 +97,7 @@ public class Kcomp_containmentUseCase {
 	private String expected_output_comp_containment_test001 = "";
 	
 	@Before public void setParams_comp_containment_test001() {
-		String prefix = "/" + "comp_containment/test001" + "/";
+		String prefix = "comp_containment/test001";
 		input_comp_containment_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_containment_test001 + ".km";
 		output_comp_containment_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_containment_test001 + ".ecore";
 		expected_output_comp_containment_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_containment_test001 + ".ecore";
@@ -137,6 +138,7 @@ public class Kcomp_containmentUseCase {
 			/*
 			 * Start the interpreter.
 			 */
+     		interpreter.setKStream( new LocalIOConsole() );
 			interpreter.launch();
 			/*
 			 * Assertion
@@ -152,7 +154,7 @@ public class Kcomp_containmentUseCase {
 	}
 	
 	private boolean compare(String output, String expected_output) {
-		return EMFCompareModelHelper.isDifferentAndSaveDiff(expected_output, output,  output + ".diff");
+		return ! EMFCompareModelHelper.isDifferentAndSaveDiff(expected_output, output,  output + "_diff.xmi");
 	}
 	
 	/**

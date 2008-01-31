@@ -7,7 +7,7 @@
 	parameters="uc:KUseCase"
 %>
 
-/*$Id: CompilerUseCase.ket,v 1.3 2008-01-31 15:41:35 ftanguy Exp $
+/*$Id: CompilerUseCase.ket,v 1.4 2008-01-31 15:52:20 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * File : 	CompPackageTestCase.java
 * License : EPL
@@ -110,7 +110,7 @@ public class K<%= uc.id %>UseCase {
 	private String expected_output_<%= suffix %> = "";
 	
 	@Before public void setParams_<%= suffix %>() {
-		String prefix = "/" + "<%= pre_suffix %>" + "/";
+		String prefix = "<%= pre_suffix %>";
 		input_<%= suffix %> = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_<%= suffix %> + ".km";
 		output_<%= suffix %> = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_<%= suffix %> + ".ecore";
 		expected_output_<%= suffix %> = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_<%= suffix %> + ".ecore";
