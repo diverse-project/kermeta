@@ -1,4 +1,4 @@
-/* $Id: trek2junit.kmt,v 1.1 2008-01-30 17:42:34 cfaucher Exp $
+/* $Id: trek2junit.kmt,v 1.2 2008-01-31 14:33:41 cfaucher Exp $
  * Creation date: Jan 30, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
@@ -12,7 +12,8 @@ package org::kermeta::compiler::trek2docbook;
 require kermeta
 require "http://www.kermeta.org/trek"
 
-require "test_suite.kmt"
+require "CompilerTestSuite.kmt"
+require "CompilerUseCase.kmt"
 
 using ecore
 using kermeta::standard
@@ -42,28 +43,32 @@ class Main
 	/**
 	 *
 	 */
-	operation main(mainFolder : String) : Void is do
+	operation main(generationFolder : String) : Void is do
 	
 		var useKaseModel : UseKaseModel init UseKaseModel.new
        	useKaseModel := load()
        	
-       	var structure_uc : KUseCase init KUseCase.new
-       	structure_uc := useKaseModel.kuseCases.detect{ uc | uc.id == "comp_structure"
+       	var main_uc : KUseCase init KUseCase.new
+       	main_uc := useKaseModel.kuseCases.detect{ uc |
+       		uc.id == "comp_structure"
        	}
+       	var content_uc : StringBuffer init StringBuffer.new
+		content_uc.append(JUnitTestSuiteTemplate.new.generate(main_uc))
+		    			
+		var ioHelper_uc : FileIO init FileIO.new
+		var filename_uc : String init generationFolder + "K" + main_uc.id + "TestSuite.java"
+				           			
+		ioHelper_uc.writeTextFile(filename_uc,content_uc.toString)
 
-       	structure_uc.refinedBy.each{ uc |
 
-       		uc.verifiedBy.each{ tc | 
-				do
-					var content : StringBuffer init StringBuffer.new
-	       			content.append(JUnitTestSuiteTemplate.new.generate(uc, tc))
+       	main_uc.refinedBy.each{ uc |
+			var content : StringBuffer init StringBuffer.new
+	       	content.append(JUnitUseCaseTemplate.new.generate(uc))
 	       			
-					var ioHelper : FileIO init FileIO.new
-					var filename : String init mainFolder + "/test_suite/" + uc.id + "_" + tc.name + ".java"
+			var ioHelper : FileIO init FileIO.new
+			var filename : String init generationFolder + "K" + uc.id + "UseCase.java"
 			           			
-					ioHelper.writeTextFile(filename,content.toString)
-				end
-			}
+			ioHelper.writeTextFile(filename,content.toString)
        	}
        	
 		stdio.writeln("End of the generation of Test suite")

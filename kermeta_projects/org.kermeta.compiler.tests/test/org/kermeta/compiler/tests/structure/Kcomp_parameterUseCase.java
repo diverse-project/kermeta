@@ -1,6 +1,5 @@
 
-
-/*$Id: CompPackageUseCase.java,v 1.1 2008-01-31 09:06:24 ftanguy Exp $
+/*$Id: Kcomp_parameterUseCase.java,v 1.1 2008-01-31 14:34:07 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * File : 	CompPackageTestCase.java
 * License : EPL
@@ -22,6 +21,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.kermeta.compiler.tests.KCompilerConstants;
 import org.kermeta.compiler.tests.helper.Constants;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
@@ -35,10 +35,25 @@ import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.tests.comparison.EMFCompareModelHelper;
 
-public class CompPackageUseCase {
+public class Kcomp_parameterUseCase {
 
-	private String use_case = "comp_package";
+	/*
+     * 
+     * Beginning dynamic code for the current use case
+     * 
+     */
+	private String use_case = "comp_parameter";
+	/*
+     * 
+     * Ending dynamic code for the current use case
+     * 
+     */
 	
+	/*
+	 * 
+	 * Beginning static code
+	 *  
+	 */
 	static private KermetaUnit executable;
 	
 	/*
@@ -53,76 +68,97 @@ public class CompPackageUseCase {
 		try {
 			IOPlugin.LOCAL_USE = true;
 			IOPlugin.getDefault();
-			executable = LoaderPlugin.getDefault().load( "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/StructureCompiler.kmt", options);
+			executable = LoaderPlugin.getDefault().load( Constants.TEST_COMP_STRUCTURE_LAUNCHER, options);
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
 		} catch (NotRegisteredURIException e) {
 			e.printStackTrace();
 		}
     }
+    /*
+	 * 
+	 * Ending static code
+	 *  
+	 */
 	
     /*
      * 
-     * Beginning test case 001.
+     * Beginning dynamic code for each test case
      * 
      */
-	private String test_case001 = "test001";
+
+	private String test_case_comp_parameter_test001 = "test001";
 	
-	private String input001 = "";
+	private String input_comp_parameter_test001 = "";
 	
-	private String output001 = "";
+	private String output_comp_parameter_test001 = "";
 	
-	private String expected_output001 = "";
+	private String expected_output_comp_parameter_test001 = "";
 	
-	@Before public void setParams001() {
-		String prefix = "/" + use_case + "/" + test_case001;
-		input001 = Constants.SOURCE_PATH + prefix + "/input/kermeta/" + use_case + "_" + test_case001 + ".km";
-		output001 = Constants.SOURCE_PATH + prefix + "/output/" + use_case + "_" + test_case001 + ".ecore";
-		expected_output001 = Constants.SOURCE_PATH + prefix + "/expected_output/ecore/" + use_case + "_" + test_case001 + ".ecore";
+	@Before public void setParams_comp_parameter_test001() {
+		String prefix = "/" + "comp_parameter/test001" + "/";
+		input_comp_parameter_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_parameter_test001 + ".km";
+		output_comp_parameter_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_parameter_test001 + ".ecore";
+		expected_output_comp_parameter_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_parameter_test001 + ".ecore";
 	}
 	
-	@Test public void comp_package_test001() {
-		run(input001, output001, expected_output001);
+	@Test public void comp_package_test_comp_parameter_test001() {
+		run(input_comp_parameter_test001, output_comp_parameter_test001, expected_output_comp_parameter_test001);
+	}
+
+	private String test_case_comp_parameter_test002 = "test002";
+	
+	private String input_comp_parameter_test002 = "";
+	
+	private String output_comp_parameter_test002 = "";
+	
+	private String expected_output_comp_parameter_test002 = "";
+	
+	@Before public void setParams_comp_parameter_test002() {
+		String prefix = "/" + "comp_parameter/test002" + "/";
+		input_comp_parameter_test002 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_parameter_test002 + ".km";
+		output_comp_parameter_test002 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_parameter_test002 + ".ecore";
+		expected_output_comp_parameter_test002 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_parameter_test002 + ".ecore";
+	}
+	
+	@Test public void comp_package_test_comp_parameter_test002() {
+		run(input_comp_parameter_test002, output_comp_parameter_test002, expected_output_comp_parameter_test002);
 	}
 	/*
 	 * 
-	 * Ending test case 001.
+	 * Ending dynamic code for each test case
 	 * 
 	 */
 	
+	
+	/*
+	 * 
+	 * Beginning static code
+	 *  
+	 */
 	private void run(String input, String output, String expected_output) {
 		try {
 			/*
-			 * 
 			 * Getting the kermeta unit to execute.
-			 * 
 			 */
 			KermetaUnit unitToExecute = RunnerHelper.getKermetaUnitToExecute( executable, Constants.BIN_PATH);
 			/*
-			 * 
 			 * Creating the interpreter.
-			 * 
 			 */
 			KermetaInterpreter interpreter = new KermetaInterpreter(unitToExecute, null);
 			/*
-			 * 
 			 * Setting the parameters.
-			 * 
 			 */
 			ArrayList<RuntimeObject> params = new ArrayList<RuntimeObject>();
 			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(input, interpreter.getMemory().getROFactory()));
 			params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(output, interpreter.getMemory().getROFactory()));
 			interpreter.setEntryParameters(params);
 			/*
-			 * 
 			 * Start the interpreter.
-			 * 
 			 */
 			interpreter.launch();
 			/*
-			 * 
 			 * Assertion
-			 * 
 			 */
 			Assert.assertTrue( compare(output, expected_output) );
 		} catch (URIMalformedException e) {
@@ -135,10 +171,10 @@ public class CompPackageUseCase {
 	}
 	
 	private boolean compare(String output, String expected_output) {
-		return EMFCompareModelHelper.compare(expected_output, output);
+		return EMFCompareModelHelper.isDifferentAndSaveDiff(expected_output, output,  output + ".diff");
 	}
 	
-	/*
+	/**
 	 * 
 	 * Once all the tests have been run, unload the program.
 	 * 
@@ -147,6 +183,9 @@ public class CompPackageUseCase {
     public static void unloadProgram() {
 		LoaderPlugin.getDefault().unload( executable.getUri() );
     }
+    /*
+	 * 
+	 * Ending static code
+	 *  
+	 */
 }
-
-

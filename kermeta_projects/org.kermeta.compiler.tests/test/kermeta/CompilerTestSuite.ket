@@ -1,0 +1,41 @@
+<%@ket
+	package="org::kermeta::compiler::trek2junit::kermeta"
+	require="http://www.kermeta.org/trek"
+	using="kermeta::language::structure"
+	using="trek"
+	class="JUnitTestSuiteTemplate"
+	parameters="main_uc:KUseCase"
+%>
+
+/*$Id: CompilerTestSuite.ket,v 1.1 2008-01-31 14:33:41 cfaucher Exp $
+* Project : org.kermeta.compiler.tests
+* File : 	CompilerStructureTestSuite.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 30 janv. 08
+* Authors : paco
+*/
+
+package org.kermeta.compiler.tests.structure;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
+@RunWith(Suite.class)
+@Suite.SuiteClasses(
+	{
+		<% 
+		var i : Integer init 0
+		
+		main_uc.refinedBy.each{ uc |
+		if i==1 then %>	, <% end %>
+		K<%=uc.id%>UseCase.class
+		<% i := 1
+		}%>
+	}
+)
+public class K<%=main_uc.id%>TestSuite {
+}
+
+
