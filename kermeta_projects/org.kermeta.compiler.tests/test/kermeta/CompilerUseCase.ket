@@ -7,7 +7,7 @@
 	parameters="uc:KUseCase"
 %>
 
-/*$Id: CompilerUseCase.ket,v 1.1 2008-01-31 14:33:41 cfaucher Exp $
+/*$Id: CompilerUseCase.ket,v 1.2 2008-01-31 15:22:24 ftanguy Exp $
 * Project : org.kermeta.compiler.tests
 * File : 	CompPackageTestCase.java
 * License : EPL
@@ -36,6 +36,7 @@ import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.kpm.helper.RunnerHelper;
 import org.kermeta.loader.LoadingOptions;
+import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -152,6 +153,7 @@ public class K<%= uc.id %>UseCase {
 			/*
 			 * Start the interpreter.
 			 */
+     		interpreter.setKStream( new LocalIOConsole() );
 			interpreter.launch();
 			/*
 			 * Assertion
