@@ -1,9 +1,11 @@
-/* $Id: compile_structure_pass2.kmt,v 1.1 2008-02-01 09:40:43 ftanguy Exp $
+/* $Id: compile_structure_pass2.kmt,v 1.2 2008-02-01 17:31:16 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Francois Tanguy <ftanguy@irisa.fr>
  *			Cyril Faucher <cfaucher@irisa.fr>
+ *
+ * @deprecated
  */
 
 package kermeta::language::structure;
