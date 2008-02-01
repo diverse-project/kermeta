@@ -1,0 +1,17 @@
+/* $Id: CreateBehavior.kmt,v 1.1 2008-02-01 09:48:43 ftanguy Exp $
+ * Creation date: February 1, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+
+package kermeta::language::structure;
+
+
+require kermeta
+
+aspect class Object {
+	operation createBehavior() is do
+	end
+}
