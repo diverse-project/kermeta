@@ -1,0 +1,16 @@
+
+package comp_inheritance_test005;
+
+require kermeta
+
+class A {
+
+}
+
+
+class B
+{
+}
+
+class C inherits A, B {
+}

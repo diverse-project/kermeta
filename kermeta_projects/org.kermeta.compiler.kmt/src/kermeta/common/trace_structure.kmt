@@ -1,9 +1,9 @@
-/* $Id: trace_structure.kmt,v 1.1 2008-02-01 09:40:46 ftanguy Exp $
+/* $Id: trace_structure.kmt,v 1.2 2008-02-01 15:23:27 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Cyril Faucher <cfaucher@irisa.fr>
- *			Fran�ois Tanguy <ftanguy@irisa.fr>
+ *			Francois Tanguy <ftanguy@irisa.fr>
  */
 
 /**
@@ -20,51 +20,147 @@ using ecore
 aspect class ModelingUnit {
 	reference ecoreModelElement : EAnnotation
 	
+	operation getEcoreModelElement() : EAnnotation is do
+		result := ecoreModelElement
+	end
+	
+	operation setEcoreModelElement(element : EAnnotation) is do
+		ecoreModelElement := element
+	end
+	
 	reference ecorePackages : EPackage[0..*]
 	
 	reference entryPoints : EAnnotation[0..*]
 }
 
+
 aspect class Package {
 	reference ecoreModelElement : EPackage
+
+	operation getEcoreModelElement() : EPackage is do
+		result := ecoreModelElement
+	end
+
+	operation setEcoreModelElement(element : EPackage) is do
+		ecoreModelElement := element
+	end
 }
+
 
 aspect class PrimitiveType {
 	reference ecoreModelElement : EDataType
+
+	operation getEcoreModelElement() : EDataType is do
+		result := ecoreModelElement
+	end
+
+	operation setEcoreModelElement(element : EDataType) is do
+		ecoreModelElement := element
+	end
 }
 
 aspect class Enumeration {
 	reference ecoreModelElement : EEnum
+	
+	operation getEcoreModelElement() : EEnum is do
+		result := ecoreModelElement
+	end
+
+	operation setEcoreModelElement(element : EEnum) is do
+		ecoreModelElement := element
+	end
 }
 
 aspect class EnumerationLiteral {
 	reference ecoreModelElement : EEnumLiteral
+	
+	operation getEcoreModelElement() : EEnumLiteral is do
+		result := ecoreModelElement
+	end
+
+	operation setEcoreModelElement(element : EEnumLiteral) is do
+		ecoreModelElement := element
+	end
 }
 
 aspect class ClassDefinition {
 	reference ecoreModelElement : EClass
+	
+	operation getEcoreModelElement() : EClass is do
+		result := ecoreModelElement
+	end
+
+	operation setEcoreModelElement(element : EClass) is do
+		ecoreModelElement := element
+	end
+}
+
+aspect class TypedElement {
+	reference ecoreModelElement : ETypedElement
 }
 
 aspect class Operation {
-	reference ecoreModelElement : EOperation
+	operation getEcoreModelElement() : EOperation is do
+		result ?= ecoreModelElement
+	end
+	
+	operation setEcoreModelElement(element : EOperation) is do
+		ecoreModelElement := element
+	end
 }
 
 aspect class Parameter {
-	reference ecoreModelElement : EParameter
+	operation getEcoreModelElement() : EParameter is do
+		result ?= ecoreModelElement
+	end
+
+	operation setEcoreModelElement(element : EParameter) is do
+		ecoreModelElement := element
+	end
 }
 
 aspect class Property {
-	reference ecoreModelElement : EStructuralFeature
+	operation getEcoreModelElement() : EStructuralFeature is do
+		result ?= ecoreModelElement
+	end
+
+	operation setEcoreModelElement(element : EStructuralFeature) is do
+		ecoreModelElement := element
+	end
 }
 
 aspect class Constraint {
 	reference ecoreModelElement : EAnnotation
+	
+	operation getEcoreModelElement() : EAnnotation is do
+		result := ecoreModelElement
+	end
+
+	operation setEcoreModelElement(element : EAnnotation) is do
+		ecoreModelElement := element
+	end
 }
 
 aspect class ObjectTypeVariable {
 	reference ecoreModelElement : ETypeParameter
+	
+	operation getEcoreModelElement() : ETypeParameter is do
+		result := ecoreModelElement
+	end
+
+	operation setEcoreModelElement(element : ETypeParameter) is do
+		ecoreModelElement := element
+	end
 }
 
 aspect class Tag {
 	reference ecoreModelElement : EAnnotation
+	
+	operation getEcoreModelElement() : EAnnotation is do
+		result := ecoreModelElement
+	end
+
+	operation setEcoreModelElement(element : EAnnotation) is do
+		ecoreModelElement := element
+	end
 }

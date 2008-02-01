@@ -1,0 +1,1 @@
+<para>One parameter which type is an instance of a data type.</para>

@@ -1,0 +1,14 @@
+
+package comp_propertyStructure_test002;
+
+require kermeta
+
+class A {
+
+}
+
+class B {
+
+	property a : A
+
+}

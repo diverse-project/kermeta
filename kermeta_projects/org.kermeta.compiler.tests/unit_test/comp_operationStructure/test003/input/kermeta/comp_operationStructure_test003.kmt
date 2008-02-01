@@ -1,0 +1,18 @@
+
+package comp_operationStructure_test003;
+
+require kermeta
+
+class A {
+
+}
+
+
+class B
+{
+
+	operation foo() : A is do
+		result := A.new
+	end
+
+}

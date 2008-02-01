@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="comp_propertyStructure_test002|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comp_propertyStructure_test002" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_propertyStructure/test002/expected_output/ecore/comp_propertyStructure_test002.ecore#/"
+      nsPrefix="comp_propertyStructure_test002">
+    <eClassifiers xsi:type="ecore:EClass" name="A" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object"/>
+    <eClassifiers xsi:type="ecore:EClass" name="B" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="a" eType="#/1/A" volatile="true"
+          transient="true" derived="true">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;   //TODO: implement setterfor derived property a&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;   //TODO: implement getterfor derived property a&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

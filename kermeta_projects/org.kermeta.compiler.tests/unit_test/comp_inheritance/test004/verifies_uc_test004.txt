@@ -1,0 +1,2 @@
+verifies_uc_0=comp_inheritance
+verifies_uc_1=comp_generics

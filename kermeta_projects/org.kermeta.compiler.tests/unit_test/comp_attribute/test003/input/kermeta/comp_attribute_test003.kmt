@@ -1,0 +1,14 @@
+
+package comp_attribute_test003;
+
+require kermeta
+
+class A {
+
+}
+
+class B {
+
+	attribute a : A
+
+}

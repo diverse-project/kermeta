@@ -1,0 +1,1 @@
+<para>A reference which type is an instance of a class definition.</para>

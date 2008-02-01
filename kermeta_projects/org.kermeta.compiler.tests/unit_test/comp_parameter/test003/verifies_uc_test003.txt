@@ -1,0 +1,3 @@
+verifies_uc_0=comp_parameter
+verifies_uc_1=comp_operationStructure
+verifies_uc_2=comp_classDefinition

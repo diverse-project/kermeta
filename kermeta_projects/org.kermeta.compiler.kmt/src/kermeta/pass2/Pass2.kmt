@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.2 2008-02-01 12:33:30 ftanguy Exp $
+/* $Id: Pass2.kmt,v 1.3 2008-02-01 15:23:27 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -7,7 +7,7 @@
  */
 
 
-/*
+/* 
  *
  *	Because the type setting and the behavior's creation (kmt or java style) can be done at the same time, we can only visit once the model.
  *	So dependending on the visited object, we apply some specific actions and still visiting the contained elements.
@@ -40,10 +40,25 @@ package structure {
 		end
 	}
 	
+	aspect class Property {
+		method applyPass2() is do
+			self.setType()
+			self.createBehavior()
+			super()
+		end
+	}
+	
 	aspect class Operation {
 		method applyPass2() is do
 			self.setType()
 			self.createBehavior()
+			super()
+		end
+	}
+	
+	aspect class Parameter {
+		method applyPass2() is do
+			self.setType()
 			super()
 		end
 	}

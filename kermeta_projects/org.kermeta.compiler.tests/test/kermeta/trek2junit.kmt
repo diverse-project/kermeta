@@ -1,4 +1,4 @@
-/* $Id: trek2junit.kmt,v 1.2 2008-01-31 14:33:41 cfaucher Exp $
+/* $Id: trek2junit.kmt,v 1.3 2008-02-01 15:27:10 ftanguy Exp $
  * Creation date: Jan 30, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
@@ -57,7 +57,7 @@ class Main
 		    			
 		var ioHelper_uc : FileIO init FileIO.new
 		var filename_uc : String init generationFolder + "K" + main_uc.id + "TestSuite.java"
-				           			
+				          	
 		ioHelper_uc.writeTextFile(filename_uc,content_uc.toString)
 
 

@@ -1,0 +1,13 @@
+
+package comp_inheritance_test004;
+
+require kermeta
+
+class MyCollection<G> {
+
+}
+
+
+class MySubCollection<G> inherits MyCollection<G>
+{
+}

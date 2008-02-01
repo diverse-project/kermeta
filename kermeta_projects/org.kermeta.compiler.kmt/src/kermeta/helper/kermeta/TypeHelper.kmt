@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.kmt,v 1.2 2008-02-01 09:40:43 ftanguy Exp $
+/* $Id: TypeHelper.kmt,v 1.3 2008-02-01 15:23:26 ftanguy Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -28,6 +28,22 @@ class TypeHelper
 			var c : Class init type.asType(Class)
 			var qualifiedName : String init c.typeDefinition.qualifiedName()
 			result := primitiveTypes.contains(qualifiedName)
+		end
+	end
+	
+	operation getClassDefinition(c : Class) : ClassDefinition is do
+		result := c.asType(Class).typeDefinition.asType(ClassDefinition)
+	end
+	
+	operation getClassFromPrimitiveType( p : Type ) : Class is do
+		if ( p.isInstanceOf(PrimitiveType) ) then
+			if ( p.asType(PrimitiveType).instanceType.isInstanceOf(Class) ) then
+				result := p.asType(PrimitiveType).instanceType.asType(Class)
+			else
+				result := getClassFromPrimitiveType(p.asType(PrimitiveType).instanceType)
+			end
+		else
+			result := void
 		end
 	end
 }

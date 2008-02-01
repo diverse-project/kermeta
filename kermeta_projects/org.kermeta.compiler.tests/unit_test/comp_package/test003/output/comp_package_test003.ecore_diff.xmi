@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diff:DiffModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diff="http://www.eclipse.org/emf/compare/diff/1.1" left="/home/paco/workspace/org.kermeta.compiler.tests/unit_test/comp_package/test003/expected_output/ecore/comp_package_test003.ecore" right="/home/paco/workspace/org.kermeta.compiler.tests/unit_test/comp_package/test003/output/comp_package_test003.ecore">
+  <ownedElements xsi:type="diff:DiffGroup">
+    <subDiffElements xsi:type="diff:DiffGroup">
+      <subDiffElements xsi:type="diff:UpdateAttribute">
+        <attribute href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/nsURI"/>
+        <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/1"/>
+        <rightElement href="comp_package_test003.ecore#/1"/>
+      </subDiffElements>
+      <subDiffElements xsi:type="diff:UpdateAttribute">
+        <attribute href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/nsPrefix"/>
+        <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/1"/>
+        <rightElement href="comp_package_test003.ecore#/1"/>
+      </subDiffElements>
+      <subDiffElements xsi:type="diff:DiffGroup">
+        <subDiffElements xsi:type="diff:UpdateAttribute">
+          <attribute href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/nsURI"/>
+          <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage1"/>
+          <rightElement href="comp_package_test003.ecore#/1/SubPackage1"/>
+        </subDiffElements>
+        <subDiffElements xsi:type="diff:UpdateAttribute">
+          <attribute href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/nsPrefix"/>
+          <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage1"/>
+          <rightElement href="comp_package_test003.ecore#/1/SubPackage1"/>
+        </subDiffElements>
+        <subDiffElements xsi:type="diff:DiffGroup">
+          <subDiffElements xsi:type="diff:UpdateAttribute">
+            <attribute href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/nsURI"/>
+            <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage1/SubSubPackage1"/>
+            <rightElement href="comp_package_test003.ecore#/1/SubPackage1/SubSubPackage1"/>
+          </subDiffElements>
+          <subDiffElements xsi:type="diff:UpdateAttribute">
+            <attribute href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/nsPrefix"/>
+            <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage1/SubSubPackage1"/>
+            <rightElement href="comp_package_test003.ecore#/1/SubPackage1/SubSubPackage1"/>
+          </subDiffElements>
+          <leftParent href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage1/SubSubPackage1"/>
+        </subDiffElements>
+        <leftParent href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage1"/>
+      </subDiffElements>
+      <subDiffElements xsi:type="diff:DiffGroup">
+        <subDiffElements xsi:type="diff:UpdateAttribute">
+          <attribute href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/nsURI"/>
+          <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage2"/>
+          <rightElement href="comp_package_test003.ecore#/1/SubPackage2"/>
+        </subDiffElements>
+        <subDiffElements xsi:type="diff:UpdateAttribute">
+          <attribute href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/nsPrefix"/>
+          <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage2"/>
+          <rightElement href="comp_package_test003.ecore#/1/SubPackage2"/>
+        </subDiffElements>
+        <subDiffElements xsi:type="diff:DiffGroup">
+          <subDiffElements xsi:type="diff:UpdateAttribute">
+            <attribute href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/nsURI"/>
+            <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage2/SubSubPackage2"/>
+            <rightElement href="comp_package_test003.ecore#/1/SubPackage2/SubSubPackage2"/>
+          </subDiffElements>
+          <subDiffElements xsi:type="diff:UpdateAttribute">
+            <attribute href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/nsPrefix"/>
+            <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage2/SubSubPackage2"/>
+            <rightElement href="comp_package_test003.ecore#/1/SubPackage2/SubSubPackage2"/>
+          </subDiffElements>
+          <subDiffElements xsi:type="diff:DiffGroup">
+            <subDiffElements xsi:type="diff:UpdateAttribute">
+              <attribute href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/nsURI"/>
+              <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage2/SubSubPackage2/SubSubSubPackage2"/>
+              <rightElement href="comp_package_test003.ecore#/1/SubPackage2/SubSubPackage2/SubSubSubPackage2"/>
+            </subDiffElements>
+            <subDiffElements xsi:type="diff:UpdateAttribute">
+              <attribute href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/nsPrefix"/>
+              <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage2/SubSubPackage2/SubSubSubPackage2"/>
+              <rightElement href="comp_package_test003.ecore#/1/SubPackage2/SubSubPackage2/SubSubSubPackage2"/>
+            </subDiffElements>
+            <leftParent href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage2/SubSubPackage2/SubSubSubPackage2"/>
+          </subDiffElements>
+          <leftParent href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage2/SubSubPackage2"/>
+        </subDiffElements>
+        <leftParent href="../expected_output/ecore/comp_package_test003.ecore#/1/SubPackage2"/>
+      </subDiffElements>
+      <subDiffElements xsi:type="diff:RemoveModelElement">
+        <rightParent href="comp_package_test003.ecore#/1"/>
+        <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/1/_KermetaSpecialTypesAlias_"/>
+      </subDiffElements>
+      <leftParent href="../expected_output/ecore/comp_package_test003.ecore#/1"/>
+    </subDiffElements>
+    <subDiffElements xsi:type="diff:RemoveModelElement">
+      <leftElement href="../expected_output/ecore/comp_package_test003.ecore#/2"/>
+    </subDiffElements>
+  </ownedElements>
+</diff:DiffModel>

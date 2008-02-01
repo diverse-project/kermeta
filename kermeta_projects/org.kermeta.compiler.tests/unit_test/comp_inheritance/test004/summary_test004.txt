@@ -1,0 +1,1 @@
+<para>Generation of one generic class inheriting from an other generic class.</para>
