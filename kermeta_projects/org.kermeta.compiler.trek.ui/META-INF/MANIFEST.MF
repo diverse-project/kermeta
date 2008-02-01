@@ -14,7 +14,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.codegen,
  org.eclipse.emf.codegen.ecore,
  org.eclipse.emf.codegen.ecore.ui,
- org.eclipse.emf.codegen.ui
+ org.eclipse.emf.codegen.ui,
+ org.kermeta.compiler.tests
 Eclipse-LazyStart: true
 Export-Package: org.kermeta.compiler.trek.ui,
  org.kermeta.compiler.trek.ui.command,

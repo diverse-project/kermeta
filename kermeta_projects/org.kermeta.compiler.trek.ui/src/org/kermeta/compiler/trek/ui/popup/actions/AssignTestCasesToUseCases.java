@@ -1,4 +1,4 @@
-/*$Id: AssignTestCasesToUseCases.java,v 1.7 2007-12-14 16:46:02 cfaucher Exp $
+/*$Id: AssignTestCasesToUseCases.java,v 1.8 2008-02-01 13:27:00 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	AssignTestCasesToUseCases.java
 * License : EPL
@@ -22,7 +22,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-import org.kermeta.compiler.trek.ui.KCompilerConstants;
+import org.kermeta.compiler.tests.KCompilerConstants;
 import org.kermeta.compiler.trek.ui.command.AssignTestCasesToUseCasesCommand;
 
 
