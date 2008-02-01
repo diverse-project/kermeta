@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.8 2008-01-30 16:42:11 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.9 2008-02-01 09:40:44 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -13,26 +13,24 @@ package kermeta::compiler;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "trace_structure.kmt"
-require "compile_structure.kmt" 
-
+require "pass1/Pass1.kmt"
+ 
 using ecore
 using kermeta::persistence
-using kermeta::language::behavior
 using kermeta::language::structure
 
 
 class Main
 {
 
-    operation main() : Void is do		
+    operation main(input : String, output : String) : Void is do		
 		
-		var mu : ModelingUnit init loadKmModel
+		var mu : ModelingUnit init loadKmModel(input)
 		
-		mu.compile(0)
+		mu.applyPass1()
 		
    		var repository : EMFRepository init EMFRepository.new             
-   		var resource : Resource init repository.createResource("platform:/resource/org.kermeta.compiler.kmt/models/result.ecore", "http://www.eclipse.org/emf/2002/Ecore")
+   		var resource : Resource init repository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
 		resource.instances.add(mu.ecoreModelElement)
 		//resource.instances.addAll(mu.entryPoints)
 		mu.entryPoints.each{ e |
@@ -46,9 +44,9 @@ class Main
 		stdio.writeln("Finish")
     end
 
-	operation loadKmModel() : kermeta::language::structure::ModelingUnit is do             
+	operation loadKmModel(input: String) : kermeta::language::structure::ModelingUnit is do             
 	   		var repository : EMFRepository init EMFRepository.new             
-	   		var resource : Resource init repository.getResource("platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.km")
+	   		var resource : Resource init repository.getResource(input)
 	       	resource.load()
 	      	
 	      	// result is a ModelingUnit

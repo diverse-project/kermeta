@@ -1,52 +1,49 @@
-/* $Id: compile_structure.kmt,v 1.11 2008-01-30 16:42:11 cfaucher Exp $
- * Creation date: January 21, 2008
- * License: EPL
- * Copyright: IRISA / INRIA / Universite Rennes 1
- * Authors: Francois Tanguy <ftanguy@irisa.fr>
+/* $Id: Pass1.kmt,v 1.1 2008-02-01 09:40:46 ftanguy Exp $
+ * Creation date: January 31, 2008
+ * License:
+ * Copyright:
+ * Authors:
  */
 
-package kermeta::language::structure;
- 
-require kermeta
-require "http://www.eclipse.org/emf/2002/Ecore"
-require "containment_traversable.kmt"
-require "trace_structure.kmt"
-require "compile_builder.kmt"
-require "compile_structure_common.kmt"
-require "helper/CompilerHelper.kmt"
-  
-using kermeta::language::structure
-using kermeta::language::behavior
-using kermeta::standard
-using kermeta::utils
-using ecore
-using compiler::helper::ecore
-using compiler::helper::kermeta
 
- 
+package kermeta::language::structure;
+
+
+require kermeta
+require "CreateEcoreModelElement.kmt"
+require "../common/trace_structure.kmt"
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "../helper/KM2EcoreHelper.kmt"
+
+using ecore
+using km2ecore::helper::kermeta
+
+aspect class Object {
+	operation applyPass1() is do
+	end
+}
+
 aspect class ModelingUnit {
-	method compile(context : Integer) : String is do
-		result := ""
+	method applyPass1() is do
 		// Creating the associated ecore package
-		var ecoreAnnotation : EAnnotation init build()
+		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement()
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreAnnotation
 		// Compile the owned elements
-		self.eachOwnedElement{ p | p.compile(context) }
+		self.eachOwnedElement{ p | p.applyPass1() }
 		// Getting the ecore packages
 		self.packages.each{p|
-			self.ecorePackages.add( p.asType(Package).ecoreModelElement )
+			self.ecorePackages.add( p.ecoreModelElement )
 		}
 	end
 }
 
 aspect class Package {
-	method compile(context : Integer) : String is do
-		result := ""
+	method applyPass1() is do
 		// Creating the associated ecore package
-		var ecorePackage : EPackage init build()
+		var ecorePackage : EPackage init self.createEcoreModelElement()
 		// Setting the container
-		var p : Package init self.nestingPackage.asType(Package)
+		var p : Package init self.nestingPackage
 		//p ?= self.container()
 		if ( p != void ) then
 			p.ecoreModelElement.eSubpackages.add(ecorePackage)
@@ -54,46 +51,43 @@ aspect class Package {
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecorePackage
 		// Compile the owned elements
-		self.eachOwnedElement{ cd | cd.compile(context) }
+		self.eachOwnedElement{ cd | cd.applyPass1() }
 	end
-}
-  
+} 
+
 aspect class PrimitiveType {
-	method compile(context : Integer) : String from Type is do
-		result := ""
+	method applyPass1() is do
 		// Creating the associated ecore class
-		var ecoreDataType : EDataType init build()
+		var ecoreDataType : EDataType init self.createEcoreModelElement()
 		// Setting the container
 		var p : Package init self.container().asType(Package)
 		p.ecoreModelElement.eClassifiers.add(ecoreDataType)
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreDataType
 		// Compile the owned elements
-		self.eachOwnedElement{ cd | cd.compile(context) }
+		self.eachOwnedElement{ cd | cd.applyPass1() }
 	end 
 }
 
 aspect class Enumeration { 
-	method compile(context : Integer) : String from TypeDefinition is do
-		result := ""
+	method applyPass1() is do
 		// Creating the associated ecore class
-		var ecoreEnumeration : EEnum init build()
+		var ecoreEnumeration : EEnum init self.createEcoreModelElement()
 		// Setting the container
 		var p : Package init self.container().asType(Package)
 		p.ecoreModelElement.eClassifiers.add(ecoreEnumeration)
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreEnumeration
 		// Compile the owned elements
-		self.eachOwnedElement{ l | l.compile(context) }
+		self.eachOwnedElement{ l | l.applyPass1() }
 		
 	end
 } 
   
 aspect class EnumerationLiteral {
-	method compile(context : Integer) : String is do
-		result := ""
+	method applyPass1() is do
 		// Creating the associated ecore class
-		var ecoreEnumLiteral : EEnumLiteral init build()
+		var ecoreEnumLiteral : EEnumLiteral init self.createEcoreModelElement()
 		// Setting the container
 		var e : Enumeration init self.~enumeration.asType(Enumeration)
 		e.ecoreModelElement.eLiterals.add(ecoreEnumLiteral)
@@ -103,26 +97,24 @@ aspect class EnumerationLiteral {
 }  
   
 aspect class ClassDefinition {
-	method compile(context : Integer) : String is do
-		result := ""
+	method applyPass1() is do
 		// Creating the associated ecore class
-		var ecoreClass : EClass init build()		
+		var ecoreClass : EClass init self.createEcoreModelElement()		
 		// Setting the container
 		var p : Package init self.container().asType(Package)
 		p.ecoreModelElement.eClassifiers.add(ecoreClass)
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreClass
 		// Compile the owned elements
-		self.eachOwnedElement{ o | o.compile(context) }
+		self.eachOwnedElement{ o | o.applyPass1() }
 	end
 	
 } 
   
 aspect class Property {
-	method compile(context : Integer) : String is do
-		result := ""
+	method applyPass1() is do
 		// Creating the associated ecore class
-		var ecoreStructuralFeature : EStructuralFeature init build()
+		var ecoreStructuralFeature : EStructuralFeature init self.createEcoreModelElement()
 		// Setting the container
 		var c : ClassDefinition
 		c ?= self.container()
@@ -130,15 +122,14 @@ aspect class Property {
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreStructuralFeature
 		// Compile the owned elements
-		self.eachOwnedElement{ o | o.compile(context) }
+		self.eachOwnedElement{ o | o.applyPass1() }
 	end 
 }
 
 aspect class Operation {
-	method compile(context : Integer) : String is do
-		result := ""
+	method applyPass1() is do
 		// Creating the associated ecore class
-		var ecoreOperation : EOperation init build()
+		var ecoreOperation : EOperation init self.createEcoreModelElement()
 		// Setting the container
 		var c : ClassDefinition
 		c ?= self.container()
@@ -146,15 +137,14 @@ aspect class Operation {
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreOperation
 		// Compile the owned elements
-		self.eachOwnedElement{ o | o.compile(context) }
+		self.eachOwnedElement{ o | o.applyPass1() }
 	end
 }
 
 aspect class Parameter {
-	method compile(context : Integer) : String is do
-		result := ""
+	method applyPass1() is do
 		// Creating the associated ecore class
-		var ecoreParameter : EParameter init build()
+		var ecoreParameter : EParameter init self.createEcoreModelElement()
 		// Setting the container
 		var o : Operation init self.container().asType(Operation)
 		o.ecoreModelElement.eParameters.add( ecoreParameter )
@@ -164,10 +154,9 @@ aspect class Parameter {
 }
 
 aspect class Constraint {
-	method compile(context : Integer) : String is do
-		result := ""
+	method applyPass1() is do
 		// Creating the associated ecore class
-		var ecoreAnnotation : EAnnotation init build()
+		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement()
 		// Setting the container
 		var c : Object init self.container
 		var p : Property init ObjectHelper.new.getPropertyValue(c, "ecoreModelElement")
@@ -181,10 +170,9 @@ aspect class Constraint {
 }
 
 aspect class ObjectTypeVariable {
-	method compile(context : Integer) : String is do
-		result := ""
+	method applyPass1() is do
 		// Creating the associated ecore class
-		var ecoreTypeParameter : ETypeParameter init build()
+		var ecoreTypeParameter : ETypeParameter init self.createEcoreModelElement()
 		// Setting the container
 		var container : Object init self.container
 		if ( container.isInstanceOf(ClassDefinition) ) then		
@@ -198,10 +186,9 @@ aspect class ObjectTypeVariable {
 }
 
 aspect class Tag {
-	method compile(context : Integer) : String is do
-		result := ""
+	method applyPass1() is do
 		// Creating the associated ecore class
-		var ecoreAnnotation : EAnnotation init build()
+		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement()
 		// Setting the container
 		var c : Object init self.container
 		if ( c.isInstanceOf(ModelingUnit) ) then

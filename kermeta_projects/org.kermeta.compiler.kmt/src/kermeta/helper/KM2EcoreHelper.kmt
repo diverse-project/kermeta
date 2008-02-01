@@ -1,11 +1,11 @@
-/* $Id: CompilerHelper.kmt,v 1.1 2008-01-30 16:42:11 cfaucher Exp $
+/* $Id: KM2EcoreHelper.kmt,v 1.1 2008-02-01 09:40:44 ftanguy Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Francois Tanguy <ftanguy@irisa.fr>
  */
 
-package compiler::helper;
+package km2ecore::helper;
 
-require "kermeta/KermetaHelper.kmt"
+require "kermeta/KermetaHelper.kmt" 
 require "ecore/EcoreHelper.kmt"

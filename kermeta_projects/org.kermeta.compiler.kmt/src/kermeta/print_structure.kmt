@@ -1,4 +1,4 @@
-/* $Id: print_structure.kmt,v 1.4 2008-01-30 16:42:11 cfaucher Exp $
+/* $Id: print_structure.kmt,v 1.5 2008-02-01 09:40:44 ftanguy Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -9,18 +9,18 @@ package kermeta::language::structure;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "compile_structure_common.kmt"
-require "compile_structure_pass2.kmt"
-require "containment_traversable.kmt"
-require "trace_structure.kmt"
-require "helper/CompilerHelper.kmt"
+require "aspects/compile_structure_common.kmt"
+require "aspects/compile_structure_pass2.kmt"
+require "common/containment_traversable.kmt"
+require "common/trace_structure.kmt"
+require "helper/KM2EcoreHelper.kmt"
 
 using kermeta::language::structure
 using kermeta::language::behavior
 using kermeta::standard
 using kermeta::utils
 using ecore
-using compiler::helper
+using km2ecore::helper::ecore
 
 
 aspect class Package {

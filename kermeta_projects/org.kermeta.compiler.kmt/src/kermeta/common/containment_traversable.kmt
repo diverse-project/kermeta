@@ -1,4 +1,4 @@
-/* $Id: containment_traversable.kmt,v 1.9 2008-01-30 12:35:27 ftanguy Exp $
+/* $Id: containment_traversable.kmt,v 1.1 2008-02-01 09:40:46 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -15,14 +15,14 @@
 package kermeta::language::structure;
  
 require kermeta
-  
+ 
 using kermeta::language::structure
 using kermeta::standard
 
 aspect class Object {
 	operation eachOwnedElement(func : <Object -> Object>) : Void is do
        	self.ownedTags.each{ o |
-			func(o.asType(Tag))
+			func(o)
 		}
 	end
 }
@@ -32,7 +32,7 @@ aspect class ModelingUnit {
    		super(func)
 		
 		self.packages.each{p|
-			func(p.asType(Package))
+			func(p)
 		}
 	end
 }
@@ -42,10 +42,10 @@ aspect class Package {
         super(func)
         
         self.ownedTypeDefinition.each{ o |
-			func(o.asType(TypeDefinition))
+			func(o)
 		}
 		self.nestedPackage.each{ p |
-			func(p.asType(Package))
+			func(p)
 		} 
 	end
 }
@@ -55,7 +55,7 @@ aspect class Enumeration {
         super(func)
         
         self.ownedLiteral.each{ l |
-        	func(l.asType(EnumerationLiteral))
+        	func(l)
 		}
 	end	
 }
@@ -65,20 +65,19 @@ aspect class ClassDefinition {
         super(func)
         
         self.ownedAttribute.each{ o |
-			func(o.asType(MultiplicityElement))
+			func(o)
 		}
 		
 		self.ownedOperation.each{ o |
-			func(o.asType(MultiplicityElement))
+			func(o)
 		}
 		
 		self.~inv.each{ i |
-			func(i.asType(Constraint))
+			func(i)
 		}
 		
 		self.typeParameter.each{ t | 
-		stdio.writeln("class def")
-			func(t.asType(TypeVariable))
+			func(t)
 		}
 	end	
 }
@@ -88,20 +87,19 @@ aspect class Operation {
         super(func)
         
         self.ownedParameter.each{ o |
-			func(o.asType(Parameter))
+			func(o)
 		}
 		
 		self.~pre.each{ o |
-			func(o.asType(Constraint))
+			func(o)
 		}
 		
 		self.~post.each{ o |
-			func(o.asType(Constraint))
+			func(o)
 		}
 		
 		self.typeParameter.each{ t |
-		stdio.writeln("operation")
-			func(t.asType(TypeVariable))
+			func(t)
 		}
 	end	
 }
