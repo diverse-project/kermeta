@@ -7,7 +7,7 @@
 	parameters="uc:KUseCase"
 %>
 
-/*$Id: CompilerUseCase.ket,v 1.4 2008-01-31 15:52:20 cfaucher Exp $
+/*$Id: CompilerUseCase.ket,v 1.5 2008-02-01 08:36:53 ftanguy Exp $
 * Project : org.kermeta.compiler.tests
 * File : 	CompPackageTestCase.java
 * License : EPL
@@ -169,7 +169,10 @@ public class K<%= uc.id %>UseCase {
 	}
 	
 	private boolean compare(String output, String expected_output) {
-		return ! EMFCompareModelHelper.isDifferentAndSaveDiff(expected_output, output,  output + "_diff.xmi");
+		boolean result = ! EMFCompareModelHelper.isDifferentAndSaveDiff(expected_output, output,  output + "_diff.xmi");
+		if ( ! result )
+			result = DiffHelper.interpreteDiff( output + "_diff.xmi" );
+		return result;
 	}
 	
 	/**
