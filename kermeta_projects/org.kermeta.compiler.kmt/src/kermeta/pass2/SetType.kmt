@@ -1,16 +1,38 @@
-/* $Id: SetType.kmt,v 1.1 2008-02-01 09:48:43 ftanguy Exp $
- * Creation date: February 1, 2008
- * License:
- * Copyright:
- * Authors:
+/* $Id: SetType.kmt,v 1.2 2008-02-01 12:33:30 ftanguy Exp $
+ * Creation date: January 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *			François Tanguy <ftanguy@irisa.fr>
  */
 
 package kermeta::language::structure;
 
 
 require kermeta
+require "../common/trace_structure.kmt"
+require "http://www.eclipse.org/emf/2002/Ecore"
 
-aspect class Object {
+using ecore
+
+aspect class ClassDefinition {
 	operation setType() is do
+		self.superType.each{ t |
+			if ( t.isInstanceOf(Class) ) then
+				var classDefinition : ClassDefinition init t.asType(Class).typeDefinition.asType(ClassDefinition)
+				self.ecoreModelElement.eSuperTypes.add( classDefinition.ecoreModelElement )
+			end
+		}
+	end
+}
+
+aspect class Operation {
+	operation setType() is do
+		/*self.superType.each{ t |
+			if ( t.isInstanceOf(Class) ) then
+				var classDefinition : ClassDefinition init t.asType(Class).typeDefinition.asType(ClassDefinition)
+				self.ecoreModelElement.eSuperTypes.add( classDefinition.ecoreModelElement )
+			end
+		}*/
 	end
 }

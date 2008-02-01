@@ -1,8 +1,9 @@
-/* $Id: Pass1.kmt,v 1.1 2008-02-01 09:40:46 ftanguy Exp $
- * Creation date: January 31, 2008
- * License:
- * Copyright:
- * Authors:
+/* $Id: Pass1.kmt,v 1.2 2008-02-01 12:33:30 ftanguy Exp $
+ * Creation date: January 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *			François Tanguy <ftanguy@irisa.fr>
  */
 
 

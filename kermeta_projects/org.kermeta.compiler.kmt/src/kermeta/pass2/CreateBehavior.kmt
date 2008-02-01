@@ -1,17 +1,39 @@
-/* $Id: CreateBehavior.kmt,v 1.1 2008-02-01 09:48:43 ftanguy Exp $
- * Creation date: February 1, 2008
- * License:
- * Copyright:
- * Authors:
+/* $Id: CreateBehavior.kmt,v 1.2 2008-02-01 12:33:30 ftanguy Exp $
+ * Creation date: January 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *			François Tanguy <ftanguy@irisa.fr>
  */
 
 
-package kermeta::language::structure;
+package kermeta::language;
 
 
 require kermeta
 
-aspect class Object {
-	operation createBehavior() is do
-	end
+package structure {
+
+	aspect class Object {
+		operation createBehavior() : String is do
+			result := ""
+		end
+	}
+	
+	aspect class Operation {
+		method createBehavior() : String is do
+			result := ""
+		end
+	}
+	
+}
+
+package behavior {
+
+	aspect class Expression {
+		method createBehavior() : String is do
+			result := super()
+		end
+	}
+
 }

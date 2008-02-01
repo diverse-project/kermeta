@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.9 2008-02-01 09:40:44 ftanguy Exp $
+/* $Id: StructureCompiler.kmt,v 1.10 2008-02-01 12:33:30 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -14,6 +14,7 @@ package kermeta::compiler;
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "pass1/Pass1.kmt"
+require "pass2/Pass2.kmt"
  
 using ecore
 using kermeta::persistence
@@ -28,6 +29,7 @@ class Main
 		var mu : ModelingUnit init loadKmModel(input)
 		
 		mu.applyPass1()
+		mu.applyPass2()
 		
    		var repository : EMFRepository init EMFRepository.new             
    		var resource : Resource init repository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")

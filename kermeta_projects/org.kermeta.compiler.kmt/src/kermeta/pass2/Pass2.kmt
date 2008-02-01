@@ -1,11 +1,22 @@
-/* $Id: Pass2.kmt,v 1.1 2008-02-01 09:48:43 ftanguy Exp $
- * Creation date: February 1, 2008
- * License:
- * Copyright:
- * Authors:
+/* $Id: Pass2.kmt,v 1.2 2008-02-01 12:33:30 ftanguy Exp $
+ * Creation date: January 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *			François Tanguy <ftanguy@irisa.fr>
  */
 
-package kermeta::language::structure;
+
+/*
+ *
+ *	Because the type setting and the behavior's creation (kmt or java style) can be done at the same time, we can only visit once the model.
+ *	So dependending on the visited object, we apply some specific actions and still visiting the contained elements.
+ *
+ *
+ */
+
+
+package kermeta::language;
 
 
 require kermeta
@@ -13,11 +24,39 @@ require "SetType.kmt"
 require "CreateBehavior.kmt"
 require "../common/containment_traversable.kmt"
 
-aspect class Object {
-	operation applyPass2() is do
-		self.setType()
-		self.createBehavior()
-		// Compile the owned elements
-		self.eachOwnedElement{ p | p.applyPass2() }
-	end
+package structure {
+	
+	aspect class Object {
+		operation applyPass2() is do
+			// Compile the owned elements
+			self.eachOwnedElement{ p | p.applyPass2() }
+		end
+	}
+	
+	aspect class ClassDefinition {
+		method applyPass2() is do
+			self.setType()
+			super()
+		end
+	}
+	
+	aspect class Operation {
+		method applyPass2() is do
+			self.setType()
+			self.createBehavior()
+			super()
+		end
+	}
+	
+}
+
+package behavior {
+
+	aspect class Expression {
+		method applyPass2() is do
+			self.createBehavior()
+			super()
+		end
+	}
+
 }
