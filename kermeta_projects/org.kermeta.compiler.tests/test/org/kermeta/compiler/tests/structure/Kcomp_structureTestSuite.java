@@ -1,5 +1,5 @@
 
-/*$Id: Kcomp_structureTestSuite.java,v 1.2 2008-01-31 15:52:20 cfaucher Exp $
+/*$Id: Kcomp_structureTestSuite.java,v 1.3 2008-02-01 08:51:01 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * File : 	CompilerStructureTestSuite.java
 * License : EPL

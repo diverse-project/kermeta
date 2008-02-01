@@ -1,5 +1,5 @@
 
-/*$Id: Kcomp_packageUseCase.java,v 1.2 2008-01-31 15:52:20 cfaucher Exp $
+/*$Id: Kcomp_packageUseCase.java,v 1.3 2008-02-01 08:51:01 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * File : 	CompPackageTestCase.java
 * License : EPL
@@ -287,7 +287,10 @@ public class Kcomp_packageUseCase {
 	}
 	
 	private boolean compare(String output, String expected_output) {
-		return ! EMFCompareModelHelper.isDifferentAndSaveDiff(expected_output, output,  output + "_diff.xmi");
+		boolean result = ! EMFCompareModelHelper.isDifferentAndSaveDiff(expected_output, output,  output + "_diff.xmi");
+		if ( ! result )
+			result = DiffHelper.interpreteDiff( output + "_diff.xmi" );
+		return result;
 	}
 	
 	/**
