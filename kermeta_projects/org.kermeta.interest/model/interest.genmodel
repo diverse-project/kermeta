@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.interest/src"
+    modelPluginID="org.kermeta.interest" modelName="Interest" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>interest.ecore</foreignModel>
+  <genPackages prefix="Interest" basePackage="org.kermeta.model" disposableProviderFactory="true"
+      ecorePackage="interest.ecore#/">
+    <genDataTypes ecoreDataType="interest.ecore#//IdNotFoundException"/>
+    <genDataTypes ecoreDataType="interest.ecore#//InterestedObject"/>
+    <genClasses ecoreClass="interest.ecore#//InterestHost">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interest.ecore#//InterestHost/concerns"/>
+      <genOperations ecoreOperation="interest.ecore#//InterestHost/updateValue">
+        <genParameters ecoreParameter="interest.ecore#//InterestHost/updateValue/id"/>
+        <genParameters ecoreParameter="interest.ecore#//InterestHost/updateValue/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="interest.ecore#//InterestHost/beConcernedAbout">
+        <genParameters ecoreParameter="interest.ecore#//InterestHost/beConcernedAbout/id"/>
+        <genParameters ecoreParameter="interest.ecore#//InterestHost/beConcernedAbout/target"/>
+      </genOperations>
+      <genOperations ecoreOperation="interest.ecore#//InterestHost/beUnconcernedAbout">
+        <genParameters ecoreParameter="interest.ecore#//InterestHost/beUnconcernedAbout/id"/>
+        <genParameters ecoreParameter="interest.ecore#//InterestHost/beUnconcernedAbout/target"/>
+      </genOperations>
+      <genOperations ecoreOperation="interest.ecore#//InterestHost/getConcern">
+        <genParameters ecoreParameter="interest.ecore#//InterestHost/getConcern/id"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="interest.ecore#//Concern">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute interest.ecore#//Concern/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interest.ecore#//Concern/listeners"/>
+      <genOperations ecoreOperation="interest.ecore#//Concern/updateValue">
+        <genParameters ecoreParameter="interest.ecore#//Concern/updateValue/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="interest.ecore#//Concern/beConcernedAbout">
+        <genParameters ecoreParameter="interest.ecore#//Concern/beConcernedAbout/target"/>
+      </genOperations>
+      <genOperations ecoreOperation="interest.ecore#//Concern/beUnconcernedAbout">
+        <genParameters ecoreParameter="interest.ecore#//Concern/beUnconcernedAbout/target"/>
+      </genOperations>
+      <genOperations ecoreOperation="interest.ecore#//Concern/getWorriedObject">
+        <genParameters ecoreParameter="interest.ecore#//Concern/getWorriedObject/target"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="interest.ecore#//WorriedObject">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute interest.ecore#//WorriedObject/target"/>
+      <genOperations ecoreOperation="interest.ecore#//WorriedObject/updateValue">
+        <genParameters ecoreParameter="interest.ecore#//WorriedObject/updateValue/value"/>
+      </genOperations>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

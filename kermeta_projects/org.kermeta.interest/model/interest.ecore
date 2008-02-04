@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="interest"
+    nsURI="http://interest" nsPrefix="interest">
+  <eClassifiers xsi:type="ecore:EClass" name="InterestHost">
+    <eOperations name="updateValue" eExceptions="#//IdNotFoundException">
+      <eParameters name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eOperations name="beConcernedAbout">
+      <eParameters name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="target" eType="#//InterestedObject"/>
+    </eOperations>
+    <eOperations name="beUnconcernedAbout">
+      <eParameters name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="target" eType="#//InterestedObject"/>
+    </eOperations>
+    <eOperations name="getConcern" eType="#//Concern">
+      <eParameters name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concerns" upperBound="-1"
+        eType="#//Concern" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Concern">
+    <eOperations name="updateValue">
+      <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eOperations name="beConcernedAbout">
+      <eParameters name="target" eType="#//InterestedObject"/>
+    </eOperations>
+    <eOperations name="beUnconcernedAbout">
+      <eParameters name="target" eType="#//InterestedObject"/>
+    </eOperations>
+    <eOperations name="getWorriedObject" eType="#//WorriedObject">
+      <eParameters name="target" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listeners" upperBound="-1"
+        eType="#//WorriedObject" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WorriedObject">
+    <eOperations name="updateValue">
+      <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" lowerBound="1"
+        eType="#//InterestedObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="IdNotFoundException" instanceClassName="org.kermeta.interest.exception.IdNotFoundException"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="InterestedObject" instanceClassName="org.kermeta.interest.InterestedObject"/>
+</ecore:EPackage>

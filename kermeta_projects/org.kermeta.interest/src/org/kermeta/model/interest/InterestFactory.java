@@ -1,0 +1,64 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id: InterestFactory.java,v 1.1 2008-02-04 10:40:25 ftanguy Exp $
+ */
+package org.kermeta.model.interest;
+
+import org.eclipse.emf.ecore.EFactory;
+
+/**
+ * <!-- begin-user-doc -->
+ * The <b>Factory</b> for the model.
+ * It provides a create method for each non-abstract class of the model.
+ * <!-- end-user-doc -->
+ * @see org.kermeta.model.interest.InterestPackage
+ * @generated
+ */
+public interface InterestFactory extends EFactory {
+	/**
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	InterestFactory eINSTANCE = org.kermeta.model.interest.impl.InterestFactoryImpl.init();
+
+	/**
+	 * Returns a new object of class '<em>Host</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Host</em>'.
+	 * @generated
+	 */
+	InterestHost createInterestHost();
+
+	/**
+	 * Returns a new object of class '<em>Concern</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Concern</em>'.
+	 * @generated
+	 */
+	Concern createConcern();
+
+	/**
+	 * Returns a new object of class '<em>Worried Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Worried Object</em>'.
+	 * @generated
+	 */
+	WorriedObject createWorriedObject();
+
+	/**
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
+	InterestPackage getInterestPackage();
+
+} //InterestFactory
