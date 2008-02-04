@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdaptersBase.kmt,v 1.5 2007-12-07 07:15:14 bmorin Exp $
+/* $Id: genericSmartAdaptersBase.kmt,v 1.6 2008-02-04 09:23:58 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -24,7 +24,7 @@ package smartadapters
 	{
 		class Adapter
 		{
-			attribute aspect : Aspect[1..1]
+			attribute ~aspect : Aspect[1..1]
 			
 			attribute adapt : Adaptation[0..*]#adapter
 						
@@ -89,16 +89,16 @@ package smartadapters
 			
 			method check() : Boolean is do
 				var res:Boolean init false
-				if(adapter.aspect.structure!=void)then
-					if(adapter.aspect.structure.content!=void) then
-						res:=(element!=void and adapter.aspect.structure.content.contains(element))
+				if(adapter.~aspect.structure!=void)then
+					if(adapter.~aspect.structure.content!=void) then
+						res:=(element!=void and adapter.~aspect.structure.content.contains(element))
 					end			
 				end
 				result:=res
 			end
 			
 			method execute() : Void is do
-				adapter.aspect.persistent.add(element)
+				adapter.~aspect.persistent.add(element)
 			end
 		}
 		

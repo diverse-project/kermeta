@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.7 2008-01-09 15:07:54 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.8 2008-02-04 09:23:58 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -24,8 +24,7 @@ package smartadapters
 {
 	package core
 	{
-		@aspect "true"
-		class Adapter
+		aspect class Adapter
 		{	
 			/**
 			key : aspect element
@@ -68,8 +67,8 @@ package smartadapters
 			*/
 			operation initClone() is do
 				initAdapter
-				if (aspect.structure!=void) then
-					aspect.structure.content.each{elt |
+				if (~aspect.structure!=void) then
+					~aspect.structure.content.each{elt |
 							var newCloned:Object
 							newCloned:=converter.getConverted(elt)
 							if (newCloned!=void) then
@@ -83,9 +82,9 @@ package smartadapters
 			updateClone must be called after every binding
 			*/
 			operation updateClones() is do
-				if (aspect.structure!=void) then
-					aspect.structure.content.each{o | 
-						if (not(aspect.persistent.contains(o))) then
+				if (~aspect.structure!=void) then
+					~aspect.structure.content.each{o | 
+						if (not(~aspect.persistent.contains(o))) then
 							updateClone(o,void)
 						end
 					}
@@ -217,8 +216,7 @@ package smartadapters
 	
 	package extension
 	{
-		@aspect "true"
-		class DerivableAdapter inherits Adapter
+		aspect class DerivableAdapter inherits Adapter
 		{
 			operation resolve(derivation:Derivation):Adapter is do
 				var adapter:DerivableAdapter init DerivableAdapter.new
