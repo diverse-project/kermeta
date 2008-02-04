@@ -1,4 +1,4 @@
-/*$Id: KMT2KM.java,v 1.4 2007-12-20 09:13:00 ftanguy Exp $
+/*$Id: KMT2KM.java,v 1.5 2008-02-04 10:54:45 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -16,6 +16,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.PropertyNotFoundException;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
@@ -91,7 +92,7 @@ public class KMT2KM implements IAction {
 			 * 
 			 * 
 			 */
-			KermetaUnit kermetaUnit = KermetaUnitHost.getInstance().getValue(unit);
+			KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit( "platform:/resource" + unit.getValue() );
 			
 			if ( kermetaUnit == null )
 				return;

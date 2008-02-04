@@ -1,4 +1,4 @@
-/*$Id: AddMarkers.java,v 1.3 2007-12-20 09:13:01 ftanguy Exp $
+/*$Id: AddMarkers.java,v 1.4 2008-02-04 10:54:45 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
@@ -20,13 +20,13 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.QualifiedName;
+import org.kermeta.interest.InterestedObject;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.extension.IAction;
-import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Parameter;
@@ -36,7 +36,7 @@ import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 
-public class AddMarkers implements IAction, Interest {
+public class AddMarkers implements IAction, InterestedObject {
 
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {
 		
@@ -53,7 +53,7 @@ public class AddMarkers implements IAction, Interest {
 			 * Getting the Kermeta Unit.
 			 * 
 			 */
-			KermetaUnit kermetaUnit = KermetaUnitHost.getInstance().getValue(unit);
+			KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit( "platform:/resource" + unit.getValue() );
 			
 			
 			/*
@@ -119,7 +119,7 @@ public class AddMarkers implements IAction, Interest {
 				while ( iterator.hasNext() ) {
 					Unit currentUnit = iterator.next().getFrom();
 					if ( ! updatedUnits.contains(currentUnit) ) {
-						KermetaUnitHost.getInstance().declareInterest(this, currentUnit);
+						KermetaUnitHost.getInstance().declareInterest(this, file);
 						map.put("forceTypechecking", true);
 						
 						/*
@@ -132,7 +132,7 @@ public class AddMarkers implements IAction, Interest {
 								currentUnit.receiveSynchroneEvent("update", map, monitor);
 						} catch (CoreException e) {}
 						
-						KermetaUnitHost.getInstance().undeclareInterest(this, currentUnit);
+						KermetaUnitHost.getInstance().undeclareInterest(this, file);
 					}
 				}
 				

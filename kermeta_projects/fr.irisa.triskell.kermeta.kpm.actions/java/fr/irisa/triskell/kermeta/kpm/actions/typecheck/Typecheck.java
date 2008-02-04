@@ -1,4 +1,4 @@
-/*$Id: Typecheck.java,v 1.4 2007-12-20 09:13:00 ftanguy Exp $
+/*$Id: Typecheck.java,v 1.5 2008-02-04 10:54:46 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -16,6 +16,7 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.checker.KermetaUnitChecker;
+import org.kermeta.interest.exception.IdNotFoundException;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
@@ -136,11 +137,13 @@ public class Typecheck implements IAction {
 				 * 
 				 * 
 				 */
-				KermetaUnitHost.getInstance().update(unit, kermetaUnit);
+				KermetaUnitHost.getInstance().updateValue(file, kermetaUnit);
 				
 			} catch (KermetaIOFileNotFoundException e) {
 				e.printStackTrace();
 			} catch (URIMalformedException e) {
+				e.printStackTrace();
+			} catch (IdNotFoundException e) {
 				e.printStackTrace();
 			}
 			

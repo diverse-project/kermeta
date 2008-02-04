@@ -1,4 +1,4 @@
-/*$Id: WorkspaceDeltaVisitor.java,v 1.14 2007-11-28 14:00:59 ftanguy Exp $
+/*$Id: WorkspaceDeltaVisitor.java,v 1.15 2008-02-04 10:54:36 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -23,10 +23,10 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.kermeta.interest.InterestedObject;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.NatureHelper;
-import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
@@ -44,7 +44,7 @@ import fr.irisa.triskell.kermeta.resources.KermetaNature;
  *
  */
 
-public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, Interest {
+public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, InterestedObject {
 	
 	
 	private KermetaProject currentProject;
@@ -53,12 +53,18 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, Interest {
 	
 	class EventToDispatch {
 		
+		private IFile file = null;
 		private Unit unit = null;
 		private String event = "";
 		
-		public EventToDispatch(Unit unit, String event) {
+		public EventToDispatch(IFile file, Unit unit, String event) {
+			this.file = file;
 			this.unit = unit;
 			this.event = event;
+		}
+		
+		public IFile getFile() {
+			return file;
 		}
 		
 		public String getEvent() {
@@ -120,7 +126,7 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, Interest {
 				KPMHelper.addUpdateDependencyOnKMTFile(currentProject.getKpm(), unit);*/
 				KPMHelper.addRules(currentProject.getKpm(), unit);
 				if ( ! projectsToOpen.contains(currentProject) && ! unit.getValue().matches(".+/\\.bin/.+") )
-					events.add( new EventToDispatch(unit, "update") );
+					events.add( new EventToDispatch( (IFile)resource, unit, "update") );
 				//sendEvent("update", unit);
 	    		/*KermetaUnitHost.getInstance().declareInterest(this, unit);
 	    		unit.receiveSynchroneEvent("update", null, new NullProgressMonitor() );
@@ -196,7 +202,7 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, Interest {
 					
 					if ( mustBeUpdated )
 						if ( ! unit.getValue().matches(".+/\\.bin/.+") )
-							events.add( new EventToDispatch(unit, "update") );
+							events.add( new EventToDispatch( (IFile)resource, unit, "update") );
 			//			unit.receiveAsynchroneEvent("update", null, null);
 				}
 			}
@@ -256,7 +262,7 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, Interest {
 	
 	public void dispatchEvents() {
 		
-		final Interest interest = this;
+		final InterestedObject interest = this;
 		
 		Runnable runnable = new Runnable() {
 
@@ -268,9 +274,9 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, Interest {
 			    		Iterator <EventToDispatch> iterator = events.iterator();
 			    		while ( iterator.hasNext() ) {
 			    			EventToDispatch event = iterator.next();
-			    			KermetaUnitHost.getInstance().declareInterest(interest, event.getUnit());
+			    			KermetaUnitHost.getInstance().declareInterest(interest, event.getFile());
 			    			event.getUnit().receiveSynchroneEvent(event.getEvent(), null, new NullProgressMonitor() );			    			
-			    			KermetaUnitHost.getInstance().undeclareInterest(interest, event.getUnit());
+			    			KermetaUnitHost.getInstance().undeclareInterest(interest, event.getFile());
 			    		}
 			    		
 			    	}

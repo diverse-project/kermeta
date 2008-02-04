@@ -1,4 +1,4 @@
-/* $Id: TypecheckingStrategy.java,v 1.10 2007-12-17 14:05:06 ftanguy Exp $
+/* $Id: TypecheckingStrategy.java,v 1.11 2008-02-04 10:54:42 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : TypecheckingStrategy.java
 * License : EPL
@@ -21,17 +21,17 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.kermeta.checker.KermetaUnitChecker;
+import org.kermeta.interest.InterestedObject;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 
-public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
+public class TypecheckingStrategy implements IReconcilingStrategy, InterestedObject {
 
 	private KMTEditor editor;
 
@@ -116,7 +116,7 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 
 			} else {
 				
-				final Interest interest = this;
+				final InterestedObject interest = this;
 				if (job != null) {
 					job.cancel();
 					try {
@@ -135,14 +135,14 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 							//KermetaUnitHelper.abortTypechecking(editor.getFile());
 								
 							Unit unit = editor.getUnit();
-							KermetaUnitHost.getInstance().declareInterest(interest, unit);
+							KermetaUnitHost.getInstance().declareInterest(interest, editor.getFile());
 						
 							HashMap args = new HashMap();
 							//args.put("content", editor.getFileContent());
 							args.put("content", editor.getCurrentContent());
 							unit.receiveSynchroneEvent("update", args, monitor);
 						
-							KermetaUnitHost.getInstance().undeclareInterest(interest, unit);
+							KermetaUnitHost.getInstance().undeclareInterest(interest, editor.getFile());
 						} finally {
 							editor.isTypechecking = false;
 						}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackageImpl.java,v 1.15 2007-12-20 09:13:06 ftanguy Exp $
+ * $Id: KpmPackageImpl.java,v 1.16 2008-02-04 10:54:36 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -42,8 +42,6 @@ import fr.irisa.triskell.kermeta.kpm.SimpleExpression;
 import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.TypeFilter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.interest.InterestPackage;
-import fr.irisa.triskell.kermeta.kpm.interest.impl.InterestPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

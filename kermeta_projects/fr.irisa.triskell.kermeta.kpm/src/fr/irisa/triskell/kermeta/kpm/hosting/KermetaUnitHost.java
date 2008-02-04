@@ -1,4 +1,4 @@
-/*$Id: KermetaUnitHost.java,v 1.3 2007-07-20 15:08:48 ftanguy Exp $
+/*$Id: KermetaUnitHost.java,v 1.4 2008-02-04 10:54:36 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -9,12 +9,12 @@
 */
 package fr.irisa.triskell.kermeta.kpm.hosting;
 
+import org.eclipse.core.resources.IFile;
+import org.kermeta.interest.InterestedObject;
+import org.kermeta.interest.exception.IdNotFoundException;
 import org.kermeta.io.KermetaUnit;
-
-import fr.irisa.triskell.kermeta.extension.Interest;
-import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.interest.InterestFactory;
-import fr.irisa.triskell.kermeta.kpm.interest.InterestHost;
+import org.kermeta.model.interest.InterestFactory;
+import org.kermeta.model.interest.InterestHost;
 
 public class KermetaUnitHost {
 
@@ -29,24 +29,29 @@ public class KermetaUnitHost {
 			instance = new KermetaUnitHost();
 		return instance;
 	}
-	
-	public void declareInterest(Interest declaringObject, Unit key, Object value) {
-		host.declareInterest(declaringObject, key, value);
+		
+	public void declareInterest(InterestedObject target, IFile file) {
+		declareInterest(target, "platform:/resource" + file.getFullPath().toString());
 	}
 	
-	public void declareInterest(Interest declaringObject, Unit key) {
-		host.declareInterest(declaringObject, key);
+	private void declareInterest(InterestedObject target, String id) {
+		host.beConcernedAbout(id, target);
 	}
 
-	public void update(Unit key, Object newValue) {
-		host.update(key, newValue);
+	public void updateValue(IFile file, KermetaUnit newValue) throws IdNotFoundException {
+		updateValue("platform:/resource" + file.getFullPath().toString(), newValue);
 	}
 	
-	public void undeclareInterest(Interest declaringObject, Unit key) {
-		host.undeclareInterest(declaringObject, key);
+	private void updateValue(String id, KermetaUnit newValue) throws IdNotFoundException {
+		host.updateValue(id, newValue);
+	}
+
+	public void undeclareInterest(InterestedObject target, IFile file) {
+		undeclareInterest(target, "platform:/resource" + file.getFullPath().toString());
 	}
 	
-	public KermetaUnit getValue(Unit key) {
-		return (KermetaUnit) host.getValue(key);
+	private void undeclareInterest(InterestedObject target, String id) {
+		host.beUnconcernedAbout(id, target);
 	}
+	
 }

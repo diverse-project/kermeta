@@ -1,4 +1,4 @@
-/* $Id: KMTEditor.java,v 1.24 2008-01-04 14:34:26 dvojtise Exp $
+/* $Id: KMTEditor.java,v 1.25 2008-02-04 10:54:42 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KMTEditor.java
 * License : EPL
@@ -34,11 +34,11 @@ import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.kermeta.checker.KermetaUnitChecker;
+import org.kermeta.interest.InterestedObject;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
@@ -53,7 +53,7 @@ import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
 /**
  * @author Franck Fleurey
  */
-public class KMTEditor extends TextEditor implements Interest {
+public class KMTEditor extends TextEditor implements InterestedObject {
 	
 	protected KermetaUnit mcunit; 
 	protected KermetaOutline outline;
@@ -119,7 +119,7 @@ public class KMTEditor extends TextEditor implements Interest {
 		//KermetaUnit kermetaUnit = IOPlugin.getDefault().loadKermetaUnit( getFile() );
 		//updateValue(kermetaUnit);
 		
-		KermetaUnitHost.getInstance().declareInterest(this, unit);
+		KermetaUnitHost.getInstance().declareInterest(this, getFile());
 		mcunit = KermetaUnitChecker.check( getFile() );
 		
 		/*mcunit = IOPlugin.getDefault().loadKermetaUnit( getFile() );
@@ -285,11 +285,11 @@ public class KMTEditor extends TextEditor implements Interest {
 			}
 			
 		} else {
-			KermetaUnitHost.getInstance().undeclareInterest(this, unit);
+			KermetaUnitHost.getInstance().undeclareInterest(this, getFile());
 			mcunit = null;
 			if ( ! savedContent.equals( currentContent ) ) {
 				
-				final Interest interest = this;
+				final InterestedObject interest = this;
 				Job job = new Job("Building Workspace") {
 					
 					public IStatus run(IProgressMonitor monitor) {
@@ -298,7 +298,7 @@ public class KMTEditor extends TextEditor implements Interest {
 						//KermetaUnitHelper.unloadKermetaUnit( getMcunit() );
 						
 						Unit unit = getUnit();
-						KermetaUnitHost.getInstance().declareInterest(interest, unit);
+						KermetaUnitHost.getInstance().declareInterest(interest, getFile());
 						
 						HashMap<String, Object> args = new HashMap<String, Object>();
 						if ( ! savedContent.equals("") )
@@ -308,7 +308,7 @@ public class KMTEditor extends TextEditor implements Interest {
 						
 						unit.receiveSynchroneEvent("update", args, monitor);
 	
-						KermetaUnitHost.getInstance().undeclareInterest(interest, unit);
+						KermetaUnitHost.getInstance().undeclareInterest(interest, getFile());
 						//IOPlugin.getDefault().unload( getFile() );
 						return Status.OK_STATUS;
 					}

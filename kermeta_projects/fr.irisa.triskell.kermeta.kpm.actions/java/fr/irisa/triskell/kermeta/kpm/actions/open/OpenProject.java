@@ -9,11 +9,12 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.kermeta.interest.InterestedObject;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
-import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Parameter;
@@ -24,7 +25,7 @@ import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 
-public class OpenProject implements IAction, Interest {
+public class OpenProject implements IAction, InterestedObject {
 
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map<String, Object> args, List<Parameter> parameters) {
 		
@@ -33,6 +34,8 @@ public class OpenProject implements IAction, Interest {
 			KPM kpm = (KPM) unit.eContainer();	
 			monitor.beginTask("", kpm.getUnits().size() );
 			monitor.subTask("Opening Kermeta Project " + unit.getValue());
+			
+			IFile file = ResourceHelper.getIFile(unit.getValue());
 			
 			/*
 			 * 
@@ -100,14 +103,14 @@ public class OpenProject implements IAction, Interest {
 						
 						//KermetaUnitHelper.unloadAllKermetaUnit();
 						
-						KermetaUnitHost.getInstance().declareInterest(this, currentUnit);
+						KermetaUnitHost.getInstance().declareInterest(this, file);
 						map.put("forceTypechecking", true);
 						currentUnit.receiveSynchroneEvent("update", map, new SubProgressMonitor(monitor, 0) );
-						KermetaUnit kermetaUnit = KermetaUnitHost.getInstance().getValue(currentUnit);
+						KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit( "platform:/resource" + currentUnit.getValue() );
 						if ( kermetaUnit != null ) {
 							markAsUpdated(currentUnit, kermetaUnit, updatedUnits, kpm);
 						}
-						KermetaUnitHost.getInstance().undeclareInterest(this, currentUnit);
+						KermetaUnitHost.getInstance().undeclareInterest(this, file);
 						
 					}
 				}

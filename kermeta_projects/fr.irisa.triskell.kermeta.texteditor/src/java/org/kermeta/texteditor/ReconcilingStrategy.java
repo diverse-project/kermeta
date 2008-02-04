@@ -1,6 +1,6 @@
 
 
-/*$Id: ReconcilingStrategy.java,v 1.2 2007-12-20 08:24:24 gperroui Exp $
+/*$Id: ReconcilingStrategy.java,v 1.3 2008-02-04 10:54:41 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	FoldingStrategy.java
 * License : EPL
@@ -23,8 +23,9 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
-import org.eclipse.ui.part.FileEditorInput;
 import org.kermeta.checker.KermetaUnitChecker;
+import org.kermeta.interest.InterestedObject;
+import org.kermeta.interest.exception.IdNotFoundException;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.texteditor.folding.FoldingStrategyHelper;
@@ -33,15 +34,13 @@ import antlr.RecognitionException;
 import antlr.TokenStreamException;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
-import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
-public class ReconcilingStrategy implements IReconcilingStrategy, Interest {
+public class ReconcilingStrategy implements IReconcilingStrategy, InterestedObject {
 
 	private KermetaTextEditor editor = null;
 	
@@ -100,11 +99,11 @@ public class ReconcilingStrategy implements IReconcilingStrategy, Interest {
 	public void updateValue(Object newValue) {}
 	
 	private void setJobForKermetaProject() {
-		final Interest interest = this;
+		final InterestedObject interest = this;
 		modelCheckingJob = new Job("Model Checking " + kpmUnit.getValue()) {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				KermetaUnitHost.getInstance().declareInterest(interest, kpmUnit);
+				KermetaUnitHost.getInstance().declareInterest(interest, editor.getFile());
 
 				int value = TexteditorPlugin.getDefault().getModelCheckingStrategy();
 				
@@ -120,7 +119,7 @@ public class ReconcilingStrategy implements IReconcilingStrategy, Interest {
 					break;
 				}
 				
-				KermetaUnitHost.getInstance().undeclareInterest(interest, kpmUnit);
+				KermetaUnitHost.getInstance().undeclareInterest(interest, editor.getFile());
 				
 				return Status.OK_STATUS;
 			}
@@ -128,6 +127,7 @@ public class ReconcilingStrategy implements IReconcilingStrategy, Interest {
 	}
 	
 	private void setJobForNonKermetaProject() {
+		final InterestedObject interest = this;
 		modelCheckingJob = new Job("Model Checking " + editor.getFile().getFullPath().toString()) {
 			
 			public IStatus run(IProgressMonitor monitor) {
@@ -136,24 +136,21 @@ public class ReconcilingStrategy implements IReconcilingStrategy, Interest {
 				
 				switch (value) {
 				case ModelcheckingStrategy.INPUT_CHANGED:
-					KermetaMarkersHelper.clearMarkers(editor.getFile());
-					IOPlugin.getDefault().unload( editor.getFile() );
-					
 					KermetaUnit kermetaUnit;
 					try {
+						KermetaUnitHost.getInstance().declareInterest(interest, editor.getFile());
+						IOPlugin.getDefault().unload( editor.getFile() );
 						kermetaUnit = KermetaUnitChecker.check( editor.getFile(), editor.getDocumentProvider().getDocument(editor.getEditorInput()).get() );
-						
-						if (monitor.isCanceled())
-							return Status.CANCEL_STATUS;
-				
-						editor.updateValue(kermetaUnit);
-						KermetaMarkersHelper.createMarkers(editor.getFile(), kermetaUnit);	
-						kermetaUnit.setLocked(false);
+						KermetaUnitHost.getInstance().updateValue(editor.getFile(), kermetaUnit);
 					} catch (KermetaIOFileNotFoundException e) {
 						e.printStackTrace();
 					} catch (URIMalformedException e) {
 						e.printStackTrace();
-					} 
+					} catch (IdNotFoundException e) {
+						e.printStackTrace();
+					}  finally {
+						KermetaUnitHost.getInstance().undeclareInterest(interest, editor.getFile());
+					}
 
 					break;
 					

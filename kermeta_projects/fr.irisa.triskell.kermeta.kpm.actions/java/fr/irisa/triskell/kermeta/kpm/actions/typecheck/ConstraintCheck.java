@@ -1,6 +1,6 @@
 
 
-/*$Id: ConstraintCheck.java,v 1.4 2007-12-20 09:13:00 ftanguy Exp $
+/*$Id: ConstraintCheck.java,v 1.5 2008-02-04 10:54:46 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	ConstraintCheck.java
 * License : EPL
@@ -15,10 +15,14 @@ package fr.irisa.triskell.kermeta.kpm.actions.typecheck;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.kermeta.interest.exception.IdNotFoundException;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Out;
@@ -36,13 +40,15 @@ public class ConstraintCheck implements IAction {
 			
 			monitor.beginTask("", 1);
 			monitor.subTask( "Constraint Checking " + unit.getValue() );
-			
+
+			IFile file = ResourceHelper.getIFile(unit.getValue());
+
 			/*
 			 * 
 			 * Getting the Kermeta Unit.
 			 * 
 			 */
-			KermetaUnit kermetaUnit = KermetaUnitHost.getInstance().getValue(unit);
+			KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit( "platform:/resource" + unit.getValue() );
 			
 			/*
 			 * 
@@ -72,10 +78,11 @@ public class ConstraintCheck implements IAction {
 			 * 
 			 * 
 			 */
-			KermetaUnitHost.getInstance().update(unit, kermetaUnit);
+			KermetaUnitHost.getInstance().updateValue(file, kermetaUnit);
 			
 			monitor.worked(1);
-			
+		} catch (IdNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			
 			monitor.done();

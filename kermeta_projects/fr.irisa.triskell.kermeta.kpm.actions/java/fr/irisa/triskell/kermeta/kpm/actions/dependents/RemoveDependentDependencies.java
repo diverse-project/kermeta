@@ -1,4 +1,4 @@
-/*$Id: RemoveDependentDependencies.java,v 1.4 2007-12-20 09:13:01 ftanguy Exp $
+/*$Id: RemoveDependentDependencies.java,v 1.5 2008-02-04 10:54:46 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	RemoveDependentDependencies.java
 * License : EPL
@@ -17,6 +17,7 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
@@ -45,7 +46,7 @@ public class RemoveDependentDependencies implements IAction {
 			 * 
 			 * 
 			 */
-			KermetaUnit kermetaUnit = KermetaUnitHost.getInstance().getValue(unit);
+			KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit( "platform:/resource" + unit.getValue() );
 			
 			
 			/*

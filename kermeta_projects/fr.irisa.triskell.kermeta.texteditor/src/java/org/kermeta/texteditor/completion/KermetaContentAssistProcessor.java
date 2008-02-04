@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaContentAssistProcessor.java,v 1.12 2008-01-25 16:07:52 dvojtise Exp $
+/*$Id: KermetaContentAssistProcessor.java,v 1.13 2008-02-04 10:54:41 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -798,7 +798,9 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 							String replacedString = operation.getName();
 							if ( (operation.getOwnedParameter().size() == 1) && (operation.getOwnedParameter().get(0).getType() instanceof FunctionType) ) {
 								replacedString += "{";
-								Type t = c.getTypeParamBinding().get(0).getType();
+								Type t = c;
+								if ( ! c.getTypeParamBinding().isEmpty() )
+									t = c.getTypeParamBinding().get(0).getType();
 								if ( t instanceof Class )
 									replacedString += Character.toLowerCase( ((Class) t).getTypeDefinition().getName().charAt(0) );
 								else
