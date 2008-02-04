@@ -1,23 +1,24 @@
-/* $Id: Profile.kmt,v 1.2 2008-01-04 17:32:03 gperroui Exp $
+/* $Id: Profile.kmt,v 1.3 2008-02-04 15:19:58 gperroui Exp $
  * Creation date: November 30, 2007
  * License: EPL
  * Copyright:
  * Authors: Gilles Perrouin
  */
-
  
 package uml; 
 
-
 require kermeta
-require "http://www.eclipse.org/emf/2002/Ecore"
-require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
-require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+
+// the decision of choosing one or 
+//the another ecore depends if the source file uses UML defined stereotypes. Indeed Standard.profile.ecore defines 
+//such stereotypes and extends UML...
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore" 
+//require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+
 require "ToEcore.kmt"
 require "UMLProfilesUtils.kmt"
-require "UMLProfile2EcoreTrace.kmt"   
+require "UMLProfile2EcoreTrace.kmt"
 require "UML2.kmt"
-   
 
 using ecore
 using kermeta::standard
@@ -26,7 +27,7 @@ using kermeta::persistence
 using UMLProfileUtils
  
 @aspect "true"
-class Profile inherits ToEcore  
+class Profile inherits ToEcore
 {
 	reference prof : EObject
 	/** This method deals with creation of new Ecore objects */
@@ -262,6 +263,9 @@ if self.type.isVoid
 			if self.type.isInstanceOf(uml::Class) 
 			then
 				trace.traceLog("class reference... " + self.type.name)
+				// "Hack" for managing types that are not directly imported...
+				trace.registerBaseType(self.type.name)
+				
 				ref:= EReference.new
 				ref.name := self.name
 				if self.lowerValue != void then
@@ -320,7 +324,17 @@ else
 		// reference having base_ in their name refers to the metaclass 
 		//their containing stereotype extends. we need to retrieve it from the trace hashtables 
 		if ref.name.indexOf("base_") != -1 then
-			ref.eType := trace.getBaseType(self.type.name)
+			var c:EClass init trace.getBaseType(self.type.name)
+			var t:ecore::EObject init trace.getEcoreFromUMLQualName(self.type.getQualifiedName)
+			if c != void then
+				ref.eType := c
+			else
+				if t != void then
+					ref.eType := t.asType(ecore::EClass)
+				else
+					trace.traceLog("ERROR refered base type not retrieved !!!" + self.type.name)
+				end	
+			end
 			// whatever the original multiplicity was, in ecore bass_Class have lowerBound = upperBound =1
 			ref.lowerBound := 1
 			ref.upperBound := 1
@@ -332,7 +346,13 @@ else
 			if t != void then
 				ref.eType := t.asType(ecore::EClass)
 			else
+				// managing external types
+				var et:ecore::EObject init trace.getBaseType(self.type.name)
+				if et != void then
+				ref.eType := et.asType(ecore::EClass)
+				else
 				trace.traceLog("ERROR refered type not retrieved !!!" + self.type.name)
+				end
 			end
 		end
 		ref.containingResource.instances.remove(ref)
@@ -354,7 +374,7 @@ reference type : EClassifier
 /** This method deals with creation of new Ecore objects*/
 method toEcorePass1(trace: UMLProfile2EcoreTrace): EObject is do
 trace.traceLog("Entering DataType : Pass1")
-type := EClassifier.new
+type := EClass.new
 // registering elements in the trace to keep track of them...
 	var qName: String init self.getQualifiedName
 	trace.setQualNameObj(qName,type)
@@ -410,13 +430,21 @@ method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
 trace.traceLog("Entering ElementImport : Pass1")
 trace.traceLog("ElementImport.... " + self.importedElement.getQualifiedName)
 
-if self.importedElement.getQualifiedName.indexOf("UMLPrimitiveTypes") != -1	then
+if self.importedElement.getQualifiedName.indexOf("UMLPrimitiveTypes") != -1
+	then
 		trace.registerEcoreDataType(self.importedElement.name)
 		obj := ecore::EObject.new
 		result := obj
 	else
+		// if the type is coming from uml we handle it the same way as for an extension
+		if self.importedElement.getQualifiedName.indexOf("uml::") != -1 then
+			trace.registerBaseType(self.importedElement.name)
+			obj := ecore::EObject.new
+			result := obj 
 		// if the type is not primitive we try to transform it as any UML element...
-		obj := self.importedElement.asType(ToEcore).toEcorePass1(trace)
+		else	
+			obj := self.importedElement.asType(ToEcore).toEcorePass1(trace)
+		end
 		if obj != void then
 			result := obj
 		else
@@ -440,6 +468,35 @@ end
 trace.traceLog("Quitting ElementImport : Pass2")
 end
 
+}
+
+aspect class PackageImport inherits ToEcore {
+
+reference obj: EObject
+/** This method deals with creation of new Ecore objects*/
+method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+trace.traceLog("Entering PackageImport : Pass1")
+obj := EObject.new
+if self.importedPackage.name.indexOf("uml") != -1 then
+	trace.traceLog("Registering elements via PackageImport: " + self.importedPackage.name) 
+	//trace.traceLog("Imported Package size: " + self.importedPackage.packagedElement.select{c|c.isInstanceOf(uml::Classifier)}.size.toString())
+	//.each{c|trace.registerBaseType(c.asType(uml::Classifier).name)}
+end
+// registering elements in the trace to keep track of them...
+	//var qName: String init self.getQualifiedName
+	//trace.setQualNameObj(qName,obj)
+
+result := obj
+trace.traceLog("Quitting PackageImport : Pass1")
+end 
+
+/** This method deals with relationship establishment*/
+method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
+trace.traceLog("Entering PackageImport : Pass2")
+// removing the element from the resource
+obj.containingResource.instances.remove(obj)
+trace.traceLog("Quitting PackageImport : Pass2")
+end
 }
 
 @aspect "true"
@@ -467,6 +524,7 @@ trace.traceLog("Quitting EAnnotation : Pass2")
 end
 
 }
+
 
 @aspect "true"
 class LiteralString inherits ToEcore {

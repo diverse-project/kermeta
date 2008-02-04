@@ -1,23 +1,24 @@
-/* $Id: UMLProfile2EcoreTrace.kmt,v 1.1 2008-01-04 17:15:44 gperroui Exp $
+/* $Id: UMLProfile2EcoreTrace.kmt,v 1.2 2008-02-04 15:19:58 gperroui Exp $
  * Creation date: December 13, 2007
  * License: EPL
  * Copyright:
  * Authors: Gilles Perrouin
  */
-
-
+ 
 package  UMLProfileUtils;
-
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
-require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+//require "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/Ecore.profile.ecore"
+//require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore"  // we use this one because the standard one is buggy
+//require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
 require "KLog.kmt"
+
 using kermeta::utils
 using kermeta::persistence
-using uml
+using kermeta::standard
 using ecore
+
 /** This class keeps track of some objects useful for ecore creation...  */
 
 class UMLProfile2EcoreTrace {
@@ -45,10 +46,15 @@ end
 operation initRep(rep: EMFRepository): Void is do
 tgt_store := rep
 uml_resource := EMFResource.new 
-ecore_resource := EMFResource.new 
-uml_resource ?= tgt_store.createResource("platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore","http://www.eclipse.org/emf/2002/Ecore") 
-ecore_resource ?=  tgt_store.createResource("platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/ecore.ecore","http://www.eclipse.org/emf/2002/Ecore")
-uml_resource.load
+ecore_resource := EMFResource.new
+
+// The standard way would be to use UML.ecore provided by eclipse:
+//uml_resource ?= tgt_store.createResource("platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore","http://www.eclipse.org/emf/2002/Ecore")
+//However, it is buggy (references the same type at several places) which cause kermeta to fail.
+// We use our patched version instead::
+uml_resource ?= tgt_store.getResource("platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore") 
+ecore_resource ?=  tgt_store.getResource("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore")
+uml_resource.load 
 ecore_resource.load
 end
 
@@ -61,7 +67,7 @@ result := qualNamesTable.getValue(qualName)
 if result.isVoid then
 	log.print("sorry, no object for: " + qualName) 
 	end
-end
+end 
 
 operation initializeLog(b: Boolean): Void is do
 	log := UMLProfileUtils::KLogger.new
@@ -76,14 +82,19 @@ end
 operation registerBaseType(name: String) : Void is do
 log.print("registering external base type " + name)
 var c: EClass init EClass.new
-//log.print("uml classes to search : " + resource.instances.one.asType(EPackage).eClassifiers.size.toString) 
-c := uml_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.asType(EClassifier).name == name}.one.asType(EClass)
-if c != void then
+//log.print("uml classes to search : " + resource.instances.one.asType(EPackage).eClassifiers.size.toString)
+//c := typesTable.getValue(name).asType(EClass) 
+//if c != void then
+	//log.print("Type already registered...") 
+//else
+	c := uml_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.asType(EClassifier).name == name}.one.asType(EClass)
+	if c != void then
 		typesTable.put(name,c)
 		log.print("external base type " + name + " found and registered")
 	else
 		log.print("external base type " + name + " not found, houston we have a problem...")
-end
+	end
+	
 end
 
 operation getBaseType(name: String): EClass is do
@@ -98,7 +109,7 @@ log.print("registering ecore element " + name)
 var e: EDataType //init EDataType.new
 
 //ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EEnum)}.each{e|log.print("primitive type found: " + e.name)}
-log.print("ecore classes to search : " + ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EDataType)}.size.toString)
+//log.print("ecore classes to search : " + ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.isInstanceOf(ecore::EDataType)}.size.toString)
  
 // dealing with UML primitve types mappings...
  if name == "Integer" then

@@ -1,4 +1,4 @@
-/* $Id: UMLProfile2Ecore.kmt,v 1.2 2008-01-04 17:32:03 gperroui Exp $
+/* $Id: UMLProfile2Ecore.kmt,v 1.3 2008-02-04 15:19:58 gperroui Exp $
  * Creation date: November 29, 2007
  * License: EPL
  * Copyright:
@@ -11,15 +11,21 @@
 package UMLProfiles;
 
 require kermeta
- 
-require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
-require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+require "http://www.eclipse.org/emf/2002/Ecore"
 require "UMLProfilesUtils.kmt"
 require "Profile.kmt"
-require "ToEcore.kmt"  
-require "UMLProfile2EcoreTrace.kmt" 
-require "KLog.kmt" 
- 
+require "ToEcore.kmt"
+require "UMLProfile2EcoreTrace.kmt"
+require "KLog.kmt"
+
+// generated Ecore form the UML model via EMF to bootstrap MARTE.profile.uml loading for kermeta
+//require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/MARTE_Library.ecore" 
+//require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/MARTE.ecore"
+
+require "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/Standard.profile.ecore"
+require "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/Ecore.profile.ecore"
+
+using ecore
 using kermeta::persistence
 using kermeta::standard
 using kermeta::exceptions
@@ -27,16 +33,16 @@ using UMLProfileUtils
  
 @aspect "true"
 class Main
-{ 
-	
+{
+ 
 	operation main() : Void is do 
 	
 	// source model and metamodel
-	var srcModelURI: String init  "platform:/resource/org.kermeta.uml2.profiles.model/model/uml/BasicClock.profile.uml"
-	var srcMetamodelURI: String init "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore"
+	var srcModelURI: String init  "platform:/resource/org.kermeta.uml2.profiles.model/model/uml/bootstrapMARTE/MARTE.profile.uml"
+	var srcMetamodelURI: String init "http://www.eclipse.org/uml2/2.1.0/UML"
 	
 	// target model and metamodel
-	var tgtModelURI: String init "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/BasicClock_test.profile.ecore"
+	var tgtModelURI: String init "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/MARTE_test.profile.ecore"
 	var tgtMetamodelURI: String init "http://www.eclipse.org/emf/2002/Ecore"
 	
 	var srcEmf_res : EMFResource
@@ -66,17 +72,18 @@ class Main
 	// transforming the UML profile
 	do 
 	// initializing trace
-	var trace: UMLProfileUtils::UMLProfile2EcoreTrace init UMLProfileUtils::UMLProfile2EcoreTrace.new 
-	trace.initRep(tgtEmf_store)   
+	var trace: UMLProfileUtils::UMLProfile2EcoreTrace init UMLProfileUtils::UMLProfile2EcoreTrace.new
+	trace.initRep(tgtEmf_store)
 	trace.initTables  
 	trace.initializeLog(true) 
 	// Converting UML elements...  
 	log.print("////////////////// First pass ////////////////// ")
+	//log.print("size of MARTE : " + srcEmf_res.contents.select{e|e.isInstanceOf(uml::ToEcore)}.size.toString)
 	srcEmf_res.contents.select{e|e.isInstanceOf(uml::ToEcore)}.each {e| 
-		tgtEmf_res.add(e.asType(uml::ToEcore).toEcorePass1(trace))} 
+		tgtEmf_res.add(e.asType(uml::ToEcore).toEcorePass1(trace))}
 	log.print("////////////////// Second pass ////////////////// ")
 	srcEmf_res.contents.select{e|e.isInstanceOf(uml::ToEcore)}.each {e| 
-		e.asType(uml::ToEcore).toEcorePass2(trace)} 
+		e.asType(uml::ToEcore).toEcorePass2(trace)}
 	//rescue (e: Exception )
 	//stdio.writeln("Sorry Transformation for "+ e.stackTrace + " not supported yet...")
 	end
