@@ -1,32 +1,30 @@
-/* $Id: UMLProfilesUtils.kmt,v 1.2 2008-02-04 15:19:58 gperroui Exp $
+/* $Id: UMLProfilesUtils.kmt,v 1.1 2008-02-04 15:45:39 dvojtise Exp $
  * Creation date: November 9, 2007
  * License: EPL
  * Copyright:
  * Authors: Gilles Perrouin
  */
-@mainClass "UMLProfileUtils::LoadStoreMM"
+
 
 
 
 package UMLProfileUtils;
 
+
 require kermeta
-require "http://www.eclipse.org/emf/2002/Ecore"
 using kermeta::persistence
 using kermeta::standard
 using kermeta::reflection
 using kermeta::utils
-using ecore
 
 class LoadStoreMM
 {
 operation load(modelURI: String, metamodelURI: String): EMFResource is do 
  var emf_store : EMFRepository init EMFRepository.new
- emf_store.ignoreLoadErrors := false
  var emf_res : EMFResource
 emf_res ?= emf_store.createResource(modelURI,metamodelURI)
 emf_res.load
-result := emf_res 
+result := emf_res
 end
 
 operation store(newModelURI: String,resource:EMFResource): Void is do
@@ -42,27 +40,5 @@ stdio.writeln("============================================")
 end
 }
 
-class UML2EcoreHelper {
-
-
-
-
-operation getETypeFromUML(typeName: String, qualifiedName: String) : ecore::EClassifier is do
-
-var eType : EDataType
-
-if qualifiedName.indexOf("UMLPrimitiveTypes") != -1 
-	then
-		if typeName.indexOf("String") != -1  then
-		result := EString.new.asType(EClassifier)
-		end
-		
-end
-
-
-end 
-
-
-}
 
 

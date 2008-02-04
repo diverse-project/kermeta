@@ -1,4 +1,4 @@
-/* $Id: UMLProfile2Ecore.kmt,v 1.3 2008-02-04 15:19:58 gperroui Exp $
+/* $Id: UMLProfile2Ecore.kmt,v 1.1 2008-02-04 15:45:39 dvojtise Exp $
  * Creation date: November 29, 2007
  * License: EPL
  * Copyright:
@@ -12,18 +12,18 @@ package UMLProfiles;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "UMLProfilesUtils.kmt"
+require "../UMLUtils/UMLProfilesUtils.kmt"
 require "Profile.kmt"
 require "ToEcore.kmt"
 require "UMLProfile2EcoreTrace.kmt"
-require "KLog.kmt"
+require "../utils/KLog.kmt"
 
 // generated Ecore form the UML model via EMF to bootstrap MARTE.profile.uml loading for kermeta
 //require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/MARTE_Library.ecore" 
 //require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/MARTE.ecore"
 
-require "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/Standard.profile.ecore"
-require "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/Ecore.profile.ecore"
+//require "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/Standard.profile.ecore"
+//require "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/Ecore.profile.ecore"
 
 using ecore
 using kermeta::persistence

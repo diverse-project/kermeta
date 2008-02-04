@@ -1,4 +1,4 @@
-/* $Id: UML2.kmt,v 1.3 2008-02-04 15:19:58 gperroui Exp $
+/* $Id: UMLQualifiedNameAspect.kmt,v 1.1 2008-02-04 15:45:39 dvojtise Exp $
  * Creation date: December 13, 2007
  * License: EPL
  * Copyright:
@@ -8,9 +8,12 @@
 
 package uml;
 
+ 
 require kermeta
-require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore"  // we use this one because the standard is buggy...
-//require "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/Standard.profile.ecore"
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+
 using kermeta::standard
 
 /** The role of this file is to extend the UML 2 metamodel  with several behaviors useful to implement the transformation */ 

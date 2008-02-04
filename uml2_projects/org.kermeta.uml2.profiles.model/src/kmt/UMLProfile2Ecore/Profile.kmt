@@ -1,24 +1,27 @@
-/* $Id: Profile.kmt,v 1.3 2008-02-04 15:19:58 gperroui Exp $
+/* $Id: Profile.kmt,v 1.1 2008-02-04 15:45:39 dvojtise Exp $
  * Creation date: November 30, 2007
  * License: EPL
  * Copyright:
  * Authors: Gilles Perrouin
  */
+
  
 package uml; 
 
-require kermeta
 
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
 // the decision of choosing one or 
 //the another ecore depends if the source file uses UML defined stereotypes. Indeed Standard.profile.ecore defines 
 //such stereotypes and extends UML...
-require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore" 
-//require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
-
+//require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore" 
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
 require "ToEcore.kmt"
-require "UMLProfilesUtils.kmt"
-require "UMLProfile2EcoreTrace.kmt"
-require "UML2.kmt"
+require "../UMLUtils/UMLProfilesUtils.kmt"
+require "UMLProfile2EcoreTrace.kmt"   
+require "../UMLUtils/UMLQualifiedNameAspect.kmt"
+   
 
 using ecore
 using kermeta::standard
@@ -27,7 +30,7 @@ using kermeta::persistence
 using UMLProfileUtils
  
 @aspect "true"
-class Profile inherits ToEcore
+class Profile inherits ToEcore  
 {
 	reference prof : EObject
 	/** This method deals with creation of new Ecore objects */
@@ -524,7 +527,6 @@ trace.traceLog("Quitting EAnnotation : Pass2")
 end
 
 }
-
 
 @aspect "true"
 class LiteralString inherits ToEcore {
