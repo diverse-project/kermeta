@@ -23,8 +23,8 @@ package smartadapters
 {
 	package core
 	{
-		@aspect "true"
-		class Adapter 
+		
+		aspect class Adapter 
 		{
 			operation initConvert(): Void is do
 				stdio.write("Mapping MM\' to MM...")
@@ -124,7 +124,7 @@ package smartadapters
 			
 			//Object to clone should not be void
 			method check(): Boolean is do
-				result := TransitionToClone!=void
+				result := TransitionToClone != void
 			end
 			
 			method execute(): Void

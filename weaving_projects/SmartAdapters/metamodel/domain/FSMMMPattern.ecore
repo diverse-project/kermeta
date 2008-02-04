@@ -9,23 +9,24 @@
       nsPrefix="pattern">
     <eSubpackages name="FSM" nsURI="platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore#/pattern/FSM"
         nsPrefix="FSM">
-      <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/PObject">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#/1/FSM/label">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/PObject">
+      <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
         <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#/1/FSM/State"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#/1/FSM/State"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Fsm" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/PObject">
+      <eClassifiers xsi:type="ecore:EClass" name="Fsm" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
         <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
             eType="#/1/FSM/State" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
             eType="#/1/FSM/Transition" containment="true"/>
       </eClassifiers>
+      <eClassifiers xsi:type="ecore:EDataType" name="label" instanceClassName="java.lang.String"/>
     </eSubpackages>
   </ecore:EPackage>
 </xmi:XMI>

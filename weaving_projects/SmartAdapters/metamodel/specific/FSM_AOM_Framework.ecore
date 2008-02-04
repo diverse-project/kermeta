@@ -26,13 +26,13 @@
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Aspect" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="ecore:EClass ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/ModelPattern"
+        <eStructuralFeatures xsi:type="ecore:EReference" name="template" eType="ecore:EClass ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//ModelPattern"
             containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="structure" lowerBound="1"
-            eType="ecore:EClass ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/PModel"
+            eType="ecore:EClass ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PModel"
             containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="persistent" upperBound="-1"
-            eType="ecore:EClass ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/PObject">
+            eType="ecore:EClass ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
           <eAnnotations source="kermeta">
             <details key="documentation" value="/**&#xD;&#xA;   persistent refers to aspectual PObject that must not be&#xD;&#xA;   cloned between two bindings&#xD;&#xA;   TODO : contraints...&#xD;&#xA;   */"/>
           </eAnnotations>
@@ -89,7 +89,7 @@
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
-            eType="ecore:EClass ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#/1/PObject"/>
+            eType="ecore:EClass ../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EEnum" name="uniqueType">
         <eLiterals name="unique" literal="unique"/>

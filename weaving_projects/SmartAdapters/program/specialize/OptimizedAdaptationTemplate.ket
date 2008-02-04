@@ -25,8 +25,7 @@ package smartadapters
 {
 	package core
 	{
-		@aspect "true"
-		class Adapter 
+		aspect class Adapter 
 		{
 			operation initConvert(): Void is do
 				stdio.write("Mapping MM' to MM...")
@@ -64,7 +63,7 @@ package smartadapters
 			attribute new<%=c.name%> : pattern::<%=qualifiedName%>
 					
 			method check(): Boolean is do
-				result := new<%=c.name%>!=void
+				result := new<%=c.name%> != void
 			end
 					
 			method execute(): Void is do
@@ -78,7 +77,7 @@ package smartadapters
 			attribute cloned<%=c.name%> : pattern::<%=qualifiedName%>
 			
 			method check(): Boolean is do
-				result := <%=c.name%>ToClone!=void
+				result := <%=c.name%>ToClone != void
 			end
 			
 			method execute(): Void is do
@@ -114,7 +113,7 @@ package smartadapters
 				}%>
 			
 			method check(): Boolean is do
-				result := <%=c.name%>ToSet!=void
+				result := <%=c.name%>ToSet != void
 			end
 			
 			method execute(): Void is do
@@ -156,7 +155,7 @@ package smartadapters
 			<%}%>
 			
 			method check(): Boolean is do
-				result := <%=c.name%>ToUnset!=void
+				result := <%=c.name%>ToUnset != void
 			end
 			
 			method execute(): Void is do
