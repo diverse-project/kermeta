@@ -22,6 +22,8 @@ class TestAB inherits kermeta::kunit::TestCase
 	reference bclaz : ecore::EClass
 	reference s : Serializer
 	attribute str : String
+	
+	attribute platformURI : String
  	
  	/**
  	 * entry operation for running in standalone 
@@ -33,6 +35,11 @@ class TestAB inherits kermeta::kunit::TestCase
  	end
  	
 	method setUp() is do
+	
+		// change this depending if you are runnning from a workbench or from the test suite
+		platformURI := "platform:/plugin"
+		//platformURI := "platform:/resource"
+		
 		s := Serializer.new 
 		s.__init__()
 	end
@@ -44,7 +51,7 @@ class TestAB inherits kermeta::kunit::TestCase
     /** Test structural features*/
     operation testeStructuralFeatures() is do
     	var o : ecore::EPackage
-        o ?= s.loadModelWithClass("platform:/resource/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_AB01opp.ecore", "http://www.eclipse.org/emf/2002/Ecore")  
+        o ?= s.loadModelWithClass(platformURI +"/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_AB01opp.ecore", "http://www.eclipse.org/emf/2002/Ecore")  
         
         // Check that we have the right number of classes
         assert(o.name == "root")
@@ -76,7 +83,7 @@ class TestAB inherits kermeta::kunit::TestCase
  	/** Test kermeta "container" method */
     operation testcontainerAB01opp() : Void is do 
     	var o : ecore::EPackage
-        o ?= s.loadModelWithClass("platform:/resource/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_AB01opp.ecore", "http://www.eclipse.org/emf/2002/Ecore")  
+        o ?= s.loadModelWithClass(platformURI +"/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_AB01opp.ecore", "http://www.eclipse.org/emf/2002/Ecore")  
 		assert(o.eClassifiers.size == 2)
 		aclaz ?= o.eClassifiers.one bclaz ?= o.eClassifiers.last
 		// Check that the container is correctly set
@@ -88,7 +95,7 @@ class TestAB inherits kermeta::kunit::TestCase
     /** Test eContainer ecore method on classifiers (on model AB01opp.ecore) */
     operation testeContainerAB01opp() : Void is do 
     	var o : ecore::EPackage
-        o ?= s.loadModelWithClass("platform:/resource/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_AB01opp.ecore", "http://www.eclipse.org/emf/2002/Ecore")  
+        o ?= s.loadModelWithClass(platformURI +"/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_AB01opp.ecore", "http://www.eclipse.org/emf/2002/Ecore")  
         
         assert(o.eClassifiers.size == 2)
         aclaz ?= o.eClassifiers.first
@@ -103,7 +110,7 @@ class TestAB inherits kermeta::kunit::TestCase
     /** Test eContainer ecore method on classifiers (on model AB01.ecore) */
     operation testeContainerAB01() : Void is do 
     	var o : ecore::EPackage	var aclaz : ecore::EClass var bclaz : ecore::EClass
-        o ?= s.loadModelWithClass("platform:/resource/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_AB01.ecore", "http://www.eclipse.org/emf/2002/Ecore")  
+        o ?= s.loadModelWithClass(platformURI +"/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_AB01.ecore", "http://www.eclipse.org/emf/2002/Ecore")  
 		aclaz ?= o.eClassifiers.one 
 		bclaz ?= o.eClassifiers.last
 		// Check that the container is correctly set
@@ -114,7 +121,7 @@ class TestAB inherits kermeta::kunit::TestCase
     
     /** Test eOpposite property (on model AB01opp.ecore) */
     operation testeOppositeAB01opp() : Void is do
-        root ?= s.loadModelWithClass("platform:/resource/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_AB01opp.ecore", "http://www.eclipse.org/emf/2002/Ecore")  
+        root ?= s.loadModelWithClass(platformURI +"/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_AB01opp.ecore", "http://www.eclipse.org/emf/2002/Ecore")  
         
         // Check that we have the right number of classes
         assert(root.name == "root")
@@ -131,7 +138,7 @@ class TestAB inherits kermeta::kunit::TestCase
     
     /** Test EFactory property (this is a "dummy" property and a dummy test) */
     operation testeFactoryAB01() is do
-        root ?= s.loadModelWithClass("platform:/resource/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_AB01.ecore", "http://www.eclipse.org/emf/2002/Ecore")
+        root ?= s.loadModelWithClass(platformURI +"/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_AB01.ecore", "http://www.eclipse.org/emf/2002/Ecore")
         // eFactoryInstance is not a value of Kermeta
     	assert (root.eFactoryInstance == void)
     end
