@@ -1,0 +1,87 @@
+/*@mainClass "serializer::Serializer"
+@mainOperation "load"
+*/
+
+package serializer;
+
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+require kermeta
+using kermeta::persistence
+using kermeta::standard  
+/** 
+ * This class defines a set of [short] helpers for load/save of models for the tests.
+*/
+class GenericSerializer<RootModel> inherits Serializer
+{
+	/** 
+	* params : 
+	*   - repository : the repository that handle EMF models
+	*   - uri : the uri of the model to load
+	*   - mm_uri : the uri of the meta-model of which model is an instance
+	*/
+    operation loadModel<RootModel>(uri : String, mmuri : String) : RootModel is do 
+    	stdio.writeln("loading model")
+    	var resource : EMFResource 
+		resource ?= _repository.createResource(uri , mmuri)
+    	resource.load
+    	var instances : Set<Object> init resource.instances
+    	result ?= instances.one
+    	stdio.writeln("done!")
+    end
+    
+    operation saveModel(uri : String, mmuri : String, a : RootModel) : Void is do
+    	
+   		var resource : EMFResource 
+		resource ?= _repository.getResource(uri)
+    	if resource==void then resource ?= _repository.createResource(uri, mmuri) end
+    	if resource != void then
+	    	resource.instances.add(a)
+	    	resource.save()
+	    else
+	    	stdio.writeln("I'm sorry, I'm afraid that your automaton is not valid; please check the following rules : ")
+	    	stdio.writeln(" - Do the transitions source and target states belong to the set of states of the automaton?")
+	    end
+    end
+}
+
+
+class Serializer
+{
+	reference _repository : EMFRepository
+	reference _resource : EMFResource
+	reference _maptest : kermeta::utils::Hashtable<String, kermeta::standard::Collection<Object>>
+	
+	operation __init__() is do
+		_repository := EMFRepository.new
+		stdio.writeln("init done")
+	end
+	
+	operation __init_params__(r : EMFRepository) is do
+		_repository := r
+	end
+	
+	operation loadModelWithClass(uri : String, mmuri : String) : Object is do 
+    	if (_repository.resources.detect { r | r.uri == uri }==void) then
+	    	_resource ?= _repository.createResource(uri , mmuri)
+	    	_resource.load
+	    else
+	    	_resource ?= _repository.getResource(uri)
+	    end
+    	var instances : Set<Object> init _resource.instances
+    	result := _resource.rootContents.one
+    end    
+    
+    operation saveModelWithObject(uri : String, mmuri : String, newuri : String, a : Object) : Void is do
+    	
+   		var resource : EMFResource
+    	resource ?= _repository.createResource(uri, mmuri)
+    	if resource != void then
+	    	resource.instances.add(a)
+	    	resource.saveWithNewURI(newuri)
+	    else
+	    	stdio.writeln("I'm sorry, I'm afraid that your automaton is not valid; please check the following rules : ")
+	    	stdio.writeln(" - Do the transitions source and target states belong to the set of states of the automaton?")
+	    end
+    end
+}

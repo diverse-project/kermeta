@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<testsuite errors="1" failures="0" ignored="0" name="fr.irisa.triskell.kermeta.ecore.tests.launcher.EcoreTestSuite" tests="1" time="0.015">
+<testcase classname="fr.irisa.triskell.kermeta.launcher.RunJunitFactory$FailedTestCase" methodname="001_testAB.main.kmt" name="001_testAB.main.kmt(fr.irisa.triskell.kermeta.launcher.RunJunitFactory$FailedTestCase)" status="haserror" time="0.0">
+<error message="Unit platform:/plugin/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/001_testAB.main.kmt contains errors (ie. didn't load or typecheck correctly)In platform:/plugin/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/serializer.kmt : TYPE-CHECKER : cannot resolve feature rootContents in type kermeta::persistence::EMFResource.&#10;In platform:/plugin/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/serializer.kmt : TYPE-CHECKER : cannot resolve feature one in type kermeta::standard::~Void.&#10;" type="java.lang.Exception">java.lang.Exception: Unit platform:/plugin/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/001_testAB.main.kmt contains errors (ie. didn't load or typecheck correctly)In platform:/plugin/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/serializer.kmt : TYPE-CHECKER : cannot resolve feature rootContents in type kermeta::persistence::EMFResource.
+In platform:/plugin/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/serializer.kmt : TYPE-CHECKER : cannot resolve feature one in type kermeta::standard::~Void.
+
+	fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:157)
+	fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:119)
+	fr.irisa.triskell.kermeta.ecore.tests.kmttestsuite.KermetaTestSuite.testWithFile(KermetaTestSuite.java:69)
+	fr.irisa.triskell.kermeta.ecore.tests.kmttestsuite.KermetaTestSuite.&lt;init&gt;(KermetaTestSuite.java:60)
+	fr.irisa.triskell.kermeta.ecore.tests.kmttestsuite.KermetaTestSuite.suite(KermetaTestSuite.java:35)
+	sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	java.lang.reflect.Method.invoke(Unknown Source)
+	sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	java.lang.reflect.Constructor.newInstance(Unknown Source)
+	sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	java.lang.reflect.Constructor.newInstance(Unknown Source)
+	org.openembedd.tests.TestRunner.run(TestRunner.java:55)
+	org.openembedd.tests.TestLauncher.launchTest(TestLauncher.java:74)
+	org.openembedd.tests.TestLauncher.access$0(TestLauncher.java:42)
+	org.openembedd.tests.TestLauncher$2.run(TestLauncher.java:94)
+	java.lang.Thread.run(Unknown Source)</error>
+</testcase>
+</testsuite>

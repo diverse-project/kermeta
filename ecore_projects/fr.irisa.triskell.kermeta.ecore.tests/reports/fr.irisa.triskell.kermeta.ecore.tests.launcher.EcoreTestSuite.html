@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<TITLE>
+Testing </TITLE>
+</HEAD>
+<BODY>
+<H2>Testing fr.irisa.triskell.kermeta.ecore.tests.launcher.EcoreTestSuite</H2>
+<BR>Results:
+<BR> - Number of effective tests = 1
+<BR> - Number of failed tests = 0
+<BR> - Number of errors = 1
+<BR> - Number of ignored tests = 0
+<BR> - Total time = 0.015
+<BR>Test cases :<UL>
+<LI>
+<FONT COLOR="red">TestClass fr.irisa.triskell.kermeta.launcher.RunJunitFactory$FailedTestCase - test 001_testAB.main.kmt(): PROGRAM ERROR!</FONT>
+<PRE><FONT size="1">java.lang.Exception: Unit platform:/plugin/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/001_testAB.main.kmt contains errors (ie. didn't load or typecheck correctly)In platform:/plugin/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/serializer.kmt : TYPE-CHECKER : cannot resolve feature rootContents in type kermeta::persistence::EMFResource.
+In platform:/plugin/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/serializer.kmt : TYPE-CHECKER : cannot resolve feature one in type kermeta::standard::~Void.
+
+	fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:157)
+	fr.irisa.triskell.kermeta.launcher.RunJunitFactory.addTestsForUnit(RunJunitFactory.java:119)
+	fr.irisa.triskell.kermeta.ecore.tests.kmttestsuite.KermetaTestSuite.testWithFile(KermetaTestSuite.java:69)
+	fr.irisa.triskell.kermeta.ecore.tests.kmttestsuite.KermetaTestSuite.<init>(KermetaTestSuite.java:60)
+	fr.irisa.triskell.kermeta.ecore.tests.kmttestsuite.KermetaTestSuite.suite(KermetaTestSuite.java:35)
+	sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	java.lang.reflect.Method.invoke(Unknown Source)
+	sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	java.lang.reflect.Constructor.newInstance(Unknown Source)
+	sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	java.lang.reflect.Constructor.newInstance(Unknown Source)
+	org.openembedd.tests.TestRunner.run(TestRunner.java:55)
+	org.openembedd.tests.TestLauncher.launchTest(TestLauncher.java:74)
+	org.openembedd.tests.TestLauncher.access$0(TestLauncher.java:42)
+	org.openembedd.tests.TestLauncher$2.run(TestLauncher.java:94)
+	java.lang.Thread.run(Unknown Source)</FONT></PRE>
+</LI>
+</UL>
+</BODY>
