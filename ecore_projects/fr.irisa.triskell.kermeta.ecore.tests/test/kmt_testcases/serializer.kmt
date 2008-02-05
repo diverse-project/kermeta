@@ -4,7 +4,8 @@
 
 package serializer;
 
-require "http://www.eclipse.org/emf/2002/Ecore"
+//require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
 
 require kermeta
 using kermeta::persistence
