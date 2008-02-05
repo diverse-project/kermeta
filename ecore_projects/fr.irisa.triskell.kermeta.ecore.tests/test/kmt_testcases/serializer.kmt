@@ -69,7 +69,7 @@ class Serializer
 	    	_resource ?= _repository.getResource(uri)
 	    end
     	var instances : Set<Object> init _resource.instances
-    	result := _resource.rootContents.one
+    	result := _resource.one
     end    
     
     operation saveModelWithObject(uri : String, mmuri : String, newuri : String, a : Object) : Void is do
