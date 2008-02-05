@@ -1,4 +1,4 @@
-/* $Id: Profile.kmt,v 1.1 2008-02-04 15:45:39 dvojtise Exp $
+/* $Id: Profile.kmt,v 1.2 2008-02-05 09:20:33 dvojtise Exp $
  * Creation date: November 30, 2007
  * License: EPL
  * Copyright:
@@ -15,8 +15,8 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 //the another ecore depends if the source file uses UML defined stereotypes. Indeed Standard.profile.ecore defines 
 //such stereotypes and extends UML...
 //require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore" 
-require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
-require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
 require "ToEcore.kmt"
 require "../UMLUtils/UMLProfilesUtils.kmt"
 require "UMLProfile2EcoreTrace.kmt"   
