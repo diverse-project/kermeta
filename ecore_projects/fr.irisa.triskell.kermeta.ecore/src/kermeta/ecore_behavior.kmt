@@ -1,4 +1,4 @@
-/* $Id: ecore_behavior.kmt,v 1.1 2008-02-05 14:31:06 dvojtise Exp $
+/* $Id: ecore_behavior.kmt,v 1.2 2008-02-05 16:58:24 dvojtise Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -139,9 +139,9 @@ aspect class EClass
 	end
 	
 	/** Get a structural feature among AllStructuralFeatures */
-	/*operation getEStructuralFeature(featureID : EInt) : EStructuralFeature is do
+	operation op_getEStructuralFeature(featureID : EInt) : EStructuralFeature is do
 		result := self.eAllStructuralFeatures.detect{ e | e.getFeatureID() == featureID }
-	end*/
+	end
 	
 	/** Return the position of the feature in the list of AllStructuralFeatures */
 	operation getFeatureID(feature : EStructuralFeature) : EInt is do
@@ -153,7 +153,7 @@ aspect class EClass
 		end
 	end
 	
-	operation getEStructuralFeature2(featureName : EString) : EStructuralFeature is do
+	operation getEStructuralFeature(featureName : EString) : EStructuralFeature is do
 		result := self.eAllStructuralFeatures.detect{ e | e.name == featureName }
 	end
 }
