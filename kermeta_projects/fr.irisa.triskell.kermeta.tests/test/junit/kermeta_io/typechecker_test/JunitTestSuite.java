@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.7 2008-01-14 10:53:50 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.8 2008-02-05 12:45:32 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -253,6 +253,10 @@ testinvalidFile("test/io/typechecher_tests/invalid","023_mt_att_ref_invalid_test
 
 public void testinvalid_024_mt_property_order_invalid_tests() throws Exception {
 testinvalidFile("test/io/typechecher_tests/invalid","024_mt_property_order_invalid_tests.kmt" );
+}
+
+public void testinvalid_026_assignmenterror() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","026_assignmenterror.kmt" );
 }
 
 public void testinvalid_1_ClassSubTyping_1() throws Exception {
