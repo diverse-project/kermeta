@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:HwStorageManager="http://MARTE.MARTE_DesignModel.HRM.HwLogical/schemas/HwStorageManager/_k8L1cKSsEdy-NrxVBTpLyA/9" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http://MARTE.MARTE_DesignModel.HRM.HwLogical/schemas/HwStorageManager/_k8L1cKSsEdy-NrxVBTpLyA/9 ../../org.kermeta.uml2.profile.marte/model/uml/MARTE.profile.uml#_k-MnoKSsEdy-NrxVBTpLyA">
+  <uml:Model xmi:id="_qb8akM37EdqwVrslYOdUDA">
+    <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="DefaultName">
+      <packagedElement xmi:type="uml:Class" xmi:id="_KdI78MOGEdy2v5aMj6RBCg" name="Class1"/>
+      <profileApplication xmi:id="_VrJFcMOGEdy2v5aMj6RBCg">
+        <eAnnotations xmi:id="_VrRBQMOGEdy2v5aMj6RBCg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="../../org.kermeta.uml2.profile.marte/model/uml/MARTE.profile.uml#_lNF_r6SsEdy-NrxVBTpLyA"/>
+        </eAnnotations>
+        <appliedProfile href="../../org.kermeta.uml2.profile.marte/model/uml/MARTE.profile.uml#_CHiIYA-LEdyNj8xzjk-DoA"/>
+      </profileApplication>
+      <profileApplication xmi:id="_cFfSsMOGEdy2v5aMj6RBCg">
+        <eAnnotations xmi:id="_cFfSscOGEdy2v5aMj6RBCg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="../../org.kermeta.uml2.profile.marte/model/uml/MARTE.profile.uml#_kwWY4KSsEdy-NrxVBTpLyA"/>
+        </eAnnotations>
+        <appliedProfile href="../../org.kermeta.uml2.profile.marte/model/uml/MARTE.profile.uml#_YgAioAPMEdyuUt-4qHuVvQ"/>
+      </profileApplication>
+      <profileApplication xmi:id="_gq5XkMOGEdy2v5aMj6RBCg">
+        <eAnnotations xmi:id="_gq5XkcOGEdy2v5aMj6RBCg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="../../org.kermeta.uml2.profile.marte/model/uml/MARTE.profile.uml#_lKORcKSsEdy-NrxVBTpLyA"/>
+        </eAnnotations>
+        <appliedProfile href="../../org.kermeta.uml2.profile.marte/model/uml/MARTE.profile.uml#_5ZCOIAPMEdyuUt-4qHuVvQ"/>
+      </profileApplication>
+      <profileApplication xmi:id="_gq5-oMOGEdy2v5aMj6RBCg">
+        <eAnnotations xmi:id="_gq5-ocOGEdy2v5aMj6RBCg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="../../org.kermeta.uml2.profile.marte/model/uml/MARTE.profile.uml#_lNF_QKSsEdy-NrxVBTpLyA"/>
+        </eAnnotations>
+        <appliedProfile href="../../org.kermeta.uml2.profile.marte/model/uml/MARTE.profile.uml#_DIIJoAPNEdyuUt-4qHuVvQ"/>
+      </profileApplication>
+      <profileApplication xmi:id="_gq5-osOGEdy2v5aMj6RBCg">
+        <eAnnotations xmi:id="_gq5-o8OGEdy2v5aMj6RBCg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="../../org.kermeta.uml2.profile.marte/model/uml/MARTE.profile.uml#_k-MnoKSsEdy-NrxVBTpLyA"/>
+        </eAnnotations>
+        <appliedProfile href="../../org.kermeta.uml2.profile.marte/model/uml/MARTE.profile.uml#_hst0sBJwEdygQ5HMNSpiZw"/>
+      </profileApplication>
+    </packagedElement>
+  </uml:Model>
+  <HwStorageManager:HwMMU xmi:id="_i1jRQMOGEdy2v5aMj6RBCg" base_Classifier="_KdI78MOGEdy2v5aMj6RBCg"/>
+</xmi:XMI>

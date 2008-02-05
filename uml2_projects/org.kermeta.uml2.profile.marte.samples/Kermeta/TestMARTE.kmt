@@ -12,15 +12,17 @@ package root_package;
 
 
 require kermeta
-require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/UMLMARTE.ecore"
+require "platform:/resource/org.kermeta.uml2.profile.marte.samples/Kermeta/UMLMARTE2.ecore"
+//require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
 require "HwProcessor.kmt"
 class Main
 {
 	operation main() : Void is do 
 	
 	stdio.writeln("launching the load")
-		var origModelName : kermeta::standard::String init "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/HwProcessor.xmi"
-		var mm_name : kermeta::standard::String init "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Marte_exp.ecore" 
+		var origModelName : kermeta::standard::String init "platform:/resource/org.kermeta.uml2.profile.marte.samples/Model/DefaultName.uml"
+		//var mm_name : kermeta::standard::String init "platform:/plugin/org.kermeta.uml2.profile.marte/model/ecore/UMLMARTE.ecore" 
+    	var mm_name : kermeta::standard::String init "platform:/resource/org.kermeta.uml2.profile.marte.samples/Kermeta/UMLMARTE2.ecore"
     	// load the given MARTE resource
     	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var inputResource : kermeta::persistence::EMFResource

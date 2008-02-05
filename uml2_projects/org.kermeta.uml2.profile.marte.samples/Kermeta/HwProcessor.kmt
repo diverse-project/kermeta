@@ -10,8 +10,8 @@ package MARTE::MARTE_DesignModel::HRM::HwLogical::HwComputing;
 
 
 require kermeta
-require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/UMLMARTE.ecore"
-
+//require "platform:/plugin/org.kermeta.uml2.profile.marte/model/ecore/UMLMARTE.ecore"
+require "platform:/resource/org.kermeta.uml2.profile.marte.samples/Kermeta/UMLMARTE2.ecore"
 aspect class HwProcessor
 {
 	inv maxHwMMU is do

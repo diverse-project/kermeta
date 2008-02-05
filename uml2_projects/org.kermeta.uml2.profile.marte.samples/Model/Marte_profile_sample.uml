@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:HwCommunication="http://MARTE.MARTE_DesignModel.HRM.HwLogical/schemas/HwCommunication/_GUys4DODEdyxeuQjhu_igA/3" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http://MARTE.MARTE_DesignModel.HRM.HwLogical/schemas/HwCommunication/_GUys4DODEdyxeuQjhu_igA/3 pathmap://MARTE_PROFILE/MARTE.profile.uml#_GWbroDODEdyxeuQjhu_igA">
+  <uml:Model xmi:id="_qb8akM37EdqwVrslYOdUDA">
+    <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="Marte_profile_sample*">
+      <packagedElement xmi:type="uml:Class" xmi:id="_3MtZUJ3DEdych_LXgc3zSA" name="Class1"/>
+      <profileApplication xmi:id="_6EfewJ3DEdych_LXgc3zSA">
+        <eAnnotations xmi:id="_6EkXQJ3DEdych_LXgc3zSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_GQBhxTODEdyxeuQjhu_igA"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_2dtsgAPMEdyuUt-4qHuVvQ"/>
+      </profileApplication>
+      <profileApplication xmi:id="_6Ek-UJ3DEdych_LXgc3zSA">
+        <eAnnotations xmi:id="_6Ek-UZ3DEdych_LXgc3zSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_GR-CYDODEdyxeuQjhu_igA"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_WGZ44BJwEdygQ5HMNSpiZw"/>
+      </profileApplication>
+      <profileApplication xmi:id="_6Ek-Up3DEdych_LXgc3zSA">
+        <eAnnotations xmi:id="_6Ek-U53DEdych_LXgc3zSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_GUWoADODEdyxeuQjhu_igA"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_aMhZsBJwEdygQ5HMNSpiZw"/>
+      </profileApplication>
+      <profileApplication xmi:id="_6Ek-VJ3DEdych_LXgc3zSA">
+        <eAnnotations xmi:id="_6Ek-VZ3DEdych_LXgc3zSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_GWbroDODEdyxeuQjhu_igA"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_bmL7UBJwEdygQ5HMNSpiZw"/>
+      </profileApplication>
+      <profileApplication xmi:id="_6EllYJ3DEdych_LXgc3zSA">
+        <eAnnotations xmi:id="_6EllYZ3DEdych_LXgc3zSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_GZHzQDODEdyxeuQjhu_igA"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_dG2c0BJwEdygQ5HMNSpiZw"/>
+      </profileApplication>
+      <profileApplication xmi:id="_6EllYp3DEdych_LXgc3zSA">
+        <eAnnotations xmi:id="_6EllY53DEdych_LXgc3zSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_GbWn4DODEdyxeuQjhu_igA"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_gHI-ABJwEdygQ5HMNSpiZw"/>
+      </profileApplication>
+      <profileApplication xmi:id="_6EmMcJ3DEdych_LXgc3zSA">
+        <eAnnotations xmi:id="_6EmMcZ3DEdych_LXgc3zSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_GeCIcDODEdyxeuQjhu_igA"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_hst0sBJwEdygQ5HMNSpiZw"/>
+      </profileApplication>
+      <profileApplication xmi:id="_6EmMcp3DEdych_LXgc3zSA">
+        <eAnnotations xmi:id="_6EmMc53DEdych_LXgc3zSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_Gf04MDODEdyxeuQjhu_igA"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_ja8REBJwEdygQ5HMNSpiZw"/>
+      </profileApplication>
+      <profileApplication xmi:id="_6EmMdJ3DEdych_LXgc3zSA">
+        <eAnnotations xmi:id="_6EmMdZ3DEdych_LXgc3zSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_GQBhxzODEdyxeuQjhu_igA"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_P80EcBJwEdygQ5HMNSpiZw"/>
+      </profileApplication>
+      <profileApplication xmi:id="_6EmzgJ3DEdych_LXgc3zSA">
+        <eAnnotations xmi:id="_6EmzgZ3DEdych_LXgc3zSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_Gf05KDODEdyxeuQjhu_igA"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_r-BFYBJwEdygQ5HMNSpiZw"/>
+      </profileApplication>
+      <profileApplication xmi:id="_6Emzgp3DEdych_LXgc3zSA">
+        <eAnnotations xmi:id="_6EnakJ3DEdych_LXgc3zSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_Gh6i4DODEdyxeuQjhu_igA"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_uAf6gBJwEdygQ5HMNSpiZw"/>
+      </profileApplication>
+      <profileApplication xmi:id="_6EnakZ3DEdych_LXgc3zSA">
+        <eAnnotations xmi:id="_6Enakp3DEdych_LXgc3zSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_GkJXgDODEdyxeuQjhu_igA"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_vrbyUBJwEdygQ5HMNSpiZw"/>
+      </profileApplication>
+      <profileApplication xmi:id="_6Enak53DEdych_LXgc3zSA">
+        <eAnnotations xmi:id="_6EnalJ3DEdych_LXgc3zSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_Gf05JjODEdyxeuQjhu_igA"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://MARTE_PROFILE/MARTE.profile.uml#_R7sL8BJwEdygQ5HMNSpiZw"/>
+      </profileApplication>
+    </packagedElement>
+  </uml:Model>
+  <HwCommunication:HwBridge xmi:id="_77W5wJ3DEdych_LXgc3zSA" base_Classifier="_3MtZUJ3DEdych_LXgc3zSA"/>
+</xmi:XMI>
