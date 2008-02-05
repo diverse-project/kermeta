@@ -1,4 +1,4 @@
-/* $Id: 025_weaving_in_kermeta_aspect8.kmt,v 1.2 2008-02-05 12:32:46 dvojtise Exp $ */
+/* $Id: 025_weaving_in_kermeta_aspect8b.kmt,v 1.1 2008-02-05 12:32:46 dvojtise Exp $ */
 
 // Type checking of kermeta weavinf
 
@@ -14,10 +14,13 @@ using kermeta::standard
 
 @aspect "true"
 class A {
-	operation amethod() : A is do // must fail here because of the multiplicity problem
-		result := A.new
+	operation amethod() : B is do // must fail here because of the bad return type problem
+		result := B.new
 	end
 
+}
+
+class B{
 }
 
 /* END OF FILE */
