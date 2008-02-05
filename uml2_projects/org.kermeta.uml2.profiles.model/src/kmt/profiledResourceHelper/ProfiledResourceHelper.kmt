@@ -1,4 +1,4 @@
-/* $Id: ProfiledResourceHelper.kmt,v 1.1 2008-02-04 15:32:18 dvojtise Exp $
+/* $Id: ProfiledResourceHelper.kmt,v 1.2 2008-02-05 09:58:50 dvojtise Exp $
  * Creation date: June 19, 2007
  * License: EPL
  * Copyright:
@@ -23,9 +23,15 @@ using kermeta::standard
 using ecore
 using uml
 
+/**
+ * This class is an helper for resources containing an UML model with profiles
+ * It provides several operations that will search for stereotypes in the resource 
+ * this is needed because of the special implementation of stereotypes and profiles in UML2
+ */
 class ProfilesHelper {
 	
 	reference profilResource : Resource
+
 
 	reference modelResource : Resource
 
@@ -40,6 +46,11 @@ class ProfilesHelper {
 	reference stereotypes : Set <ecore::EClass>
 
 
+	/**
+	 * A call to this operation is mandatory for a correct use of this class
+	 * It takes 2 resources, in case the profile resource is different of the uml model resource.
+	 * However, in most situations you can use the same resource for both parameter
+	 */
 	operation initialize( modelResource : Resource, profileResource : Resource ) : ProfilesHelper is do
 		self.profilResource := profilResource
 		self.modelResource := modelResource
@@ -49,7 +60,9 @@ class ProfilesHelper {
 		result := self
 	end
 		
-		
+	/**
+	 * Retreives all the stereotypes that decorate the given object 
+	 */
 	operation getStereotypesFor( object : Object ) : Set <Object> is do
 	
 		var stereotypes : Set <Object> init Set <Object>.new
@@ -85,7 +98,10 @@ class ProfilesHelper {
 	
 	end	
 			
-	 
+	/**
+	 * Fills the internal set 'stereotypes'
+	 * (called by the initialize() operation, user is not supposed to call it directly)
+	 */
 	operation getStereotypes() is do
 	
 		var p : EPackage 
