@@ -1,0 +1,182 @@
+
+@mainClass "testABTypes_001::TestABTypes"
+@mainOperation "mainTester"
+
+package testABTypes_001;
+
+require "serializer.kmt"
+//require "./ecore/ABC01_inh_att_opp.ecore" 
+require kermeta
+using kermeta::standard 
+using serializer
+
+/** 
+ * This class tests the operations related to types on an ecore model :
+ * - the eAll<blah> operations
+ * - the super types
+*/
+class TestABTypes inherits kermeta::kunit::TestCase
+{
+	reference resource : kermeta::persistence::EMFResource
+	reference root : ecore::EPackage
+	reference aclaz : ecore::EClass
+	reference bclaz : ecore::EClass
+	reference cclaz : ecore::EClass	
+	reference dclaz : ecore::EClass 
+	reference abcrootclaz : ecore::EClass
+	reference s : Serializer
+	attribute str : String
+
+
+	attribute platformURI : String
+	
+	/**
+ 	 * entry operation for running in standalone 
+ 	 */
+ 	operation mainTester() is do
+ 		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(TestABTypes)
+		tr.printTestResult
+ 	end
+ 	
+	operation doesNotWorkInsideSetup() : ecore::EPackage is do
+		result ?= s.loadModelWithClass(platformURI +"/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_ABC01_inh_att_opp.ecore", "http://www.eclipse.org/emf/2002/Ecore")  
+   	    abcrootclaz ?= result.eClassifiers.detect { c | c.name == "Root" }
+   	    bclaz ?= result.eClassifiers.detect { f | f.name == "B" } 
+        aclaz ?= result.eClassifiers.detect { f | f.name == "A" } 
+        cclaz ?= result.eClassifiers.detect { f | f.name == "C" } 
+        dclaz ?= result.eClassifiers.detect { f | f.name == "D" } 
+        root := result
+	end
+ 	
+	method setUp() is do
+		// change this depending if you are runnning from a workbench or from the test suite
+		platformURI := "platform:/plugin"
+		//platformURI := "platform:/resource"
+		
+		s := Serializer.new 
+		s.__init__()
+		doesNotWorkInsideSetup
+	end
+	
+	method tearDown() is do
+		s := void
+		aclaz := void bclaz := void cclaz := void
+	end
+ 
+    
+    operation testeAllStructuralFeatures() is do 
+        //self.doesNotWorkInsideSetup
+		if (bclaz.eStructuralFeatures!=void) then assert(bclaz.eStructuralFeatures.size==0) end
+		assert(bclaz.eAllStructuralFeatures.size==1)
+		assert(bclaz.eAllStructuralFeatures.one.eType.name=="C") 
+    end
+    
+    operation testeAllReferences() is do
+	    //self.doesNotWorkInsideSetup
+        if (bclaz.eReferences!=void) then assert(bclaz.eReferences.size==0) end
+		assert(bclaz.eAllReferences.size==1)
+		assert(bclaz.eAllReferences.one.eType.name=="C")
+    end
+    
+    operation testeAllContainments() is do
+	    //self.doesNotWorkInsideSetup
+        stdio.writeln(bclaz.eAllContainments.size.toString + " containments.")
+        assert(bclaz.eAllContainments.size==1)
+		assert(bclaz.eAllContainments.one.eType.name=="C")
+		assert(bclaz.eAllContainments.one.name=="c") 
+    end
+    
+    operation testeAllOperations() is do 
+        //self.doesNotWorkInsideSetup
+    	assert(aclaz.eOperations.size==2)
+    	assert(bclaz.eOperations.size==1)
+    	assert(bclaz.eAllOperations.size==3)
+    	assert(bclaz.eAllOperations.contains(aclaz.eOperations.first))
+    	assert(bclaz.eAllOperations.contains(aclaz.eOperations.last))
+    end
+    
+    operation testeAllSuperTypes() is do
+        //self.doesNotWorkInsideSetup
+    	assert(dclaz.eSuperTypes.size==1)
+    	assert(dclaz.eAllSuperTypes.size==2)
+    	assert(dclaz.eAllSuperTypes.contains(bclaz))
+    	assert(dclaz.eAllSuperTypes.contains(aclaz))
+    end 
+    
+    operation testisSuperTypeOf() is do
+        //self.doesNotWorkInsideSetup
+        assert(not aclaz.isVoid)
+        assert(not bclaz.isVoid)
+        assert(not dclaz.isVoid)
+    	assert(bclaz.isSuperTypeOf(dclaz))
+    	assert(aclaz.isSuperTypeOf(dclaz))
+    end
+
+    
+    // Here we test the accessors (get<blah>) 
+    
+    /**
+     * retreive a feature from its featureID
+     */
+    operation testop_getEStructuralFeature() is do
+        //self.doesNotWorkInsideSetup
+    	assert(bclaz.op_getEStructuralFeature(1).name=="c")
+    end
+    
+    operation testgetEStructuralFeature() is do
+        //self.doesNotWorkInsideSetup
+	    assert(bclaz.getEStructuralFeature("c")==aclaz.getEStructuralFeature("c"))
+    	assert(bclaz.getEStructuralFeature("c").eType.name=="C")
+    end
+    
+    operation testgetFeatureCount() is do
+        //self.doesNotWorkInsideSetup
+        bclaz ?= root.eClassifiers.detect { f | f.name == "B" } 
+        stdio.writeln(bclaz.getFeatureCount.toString + " features counted in B class")
+		assert(bclaz.getFeatureCount == 1)
+    end
+    
+     	/* Test if we can save the model
+ 	 *
+ 	 */
+ 	operation testSave() is do
+ 		var d : ecore::EPackage init ecore::EPackage.new
+// 		d.name := "jesuisunnouveaupackage"
+		//s._resource.instances.add(d)
+ 		s.saveModelWithObject(platformURI +"/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_ABC01_inh_att_opp.xmi", 
+ 			"http://www.eclipse.org/emf/2002/Ecore", 
+ 			"platform:/resource/fr.irisa.triskell.kermeta.ecore.tests/test/kmt_testcases/ecore/001_ABC01_inh_att_opp2.ecore", d)
+ 	end
+     
+     /* ****************************************************** *
+     *
+     * Special tests on resource -- should be put elsewhere than
+     * in this test suite!
+     *
+     * ****************************************************** */
+   	operation testRootContents() is do
+   		stdio.writeln("root:"+s._resource.toString)
+  		stdio.writeln("root:"+s._resource.one.toString)
+   		assert(s._resource.size==1)
+	end
+	/*
+	operation testAllRootContents() is do
+		assert(s._resource.contents.size==2)
+	end */
+	/*
+	operation testAllContents() is do
+		stdio.writeln("\nallContents : " + s._resource.contents.toString)
+		stdio.writeln("allContents : " + s._resource.contents.size.toString)
+		assertTrueWithMsg(s._resource.contents.size==178,"s._resource.contents.size: expecting 10, found " + s._resource.contents.size.toString)
+	end*/ 
+	
+	operation testContents() is do
+		stdio.writeln("\ncontents : " + s._resource.contents.toString)
+		stdio.writeln("-- contents : " + s._resource.contents.size.toString)
+		assertTrueWithMsg(s._resource.contents.size==20,"s._resource.contents.size: expecting 20, found " + s._resource.contents.size.toString)
+	end
+    
+    
+}
+
