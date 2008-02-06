@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.25 2008-01-04 14:17:24 dvojtise Exp $
+/* $Id: KMT2KMPass6.java,v 1.26 2008-02-06 09:38:25 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -18,12 +18,22 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
+import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.parser.gen.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.parser.gen.ast.GetterBody;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Invariant;
@@ -34,19 +44,6 @@ import fr.irisa.triskell.kermeta.parser.gen.ast.Postcondition;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Precondition;
 import fr.irisa.triskell.kermeta.parser.gen.ast.SetterBody;
 import fr.irisa.triskell.kermeta.parser.helper.KermetaASTHelper;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Constraint;
-import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
-import fr.irisa.triskell.kermeta.language.structure.Parameter;
-import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 

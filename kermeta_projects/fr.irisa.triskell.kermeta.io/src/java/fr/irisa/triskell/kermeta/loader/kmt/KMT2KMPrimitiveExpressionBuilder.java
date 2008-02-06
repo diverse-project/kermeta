@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.22 2008-01-04 14:17:24 dvojtise Exp $
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.23 2008-02-06 09:38:25 dvojtise Exp $
  * Project : Kermeta io
  * File : KMT2KMExpressionBuilder.java
  * License : EPL
@@ -15,10 +15,22 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.CallResult;
+import fr.irisa.triskell.kermeta.language.behavior.CallSuperOperation;
+import fr.irisa.triskell.kermeta.language.behavior.CallValue;
+import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
+import fr.irisa.triskell.kermeta.language.behavior.Conditional;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaParameter;
+import fr.irisa.triskell.kermeta.language.behavior.Raise;
+import fr.irisa.triskell.kermeta.language.behavior.SelfExpression;
+import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.parser.gen.ast.ActualParameter;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Basictype;
 import fr.irisa.triskell.kermeta.parser.gen.ast.FBlock;
@@ -43,19 +55,6 @@ import fr.irisa.triskell.kermeta.parser.gen.ast.ParentExp;
 import fr.irisa.triskell.kermeta.parser.gen.ast.PrimitiveExpression;
 import fr.irisa.triskell.kermeta.parser.gen.ast.ResultCall;
 import fr.irisa.triskell.kermeta.parser.gen.ast.ValueCall;
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
-import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
-import fr.irisa.triskell.kermeta.language.behavior.CallResult;
-import fr.irisa.triskell.kermeta.language.behavior.CallSuperOperation;
-import fr.irisa.triskell.kermeta.language.behavior.CallValue;
-import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
-import fr.irisa.triskell.kermeta.language.behavior.Conditional;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.language.behavior.LambdaParameter;
-import fr.irisa.triskell.kermeta.language.behavior.Raise;
-import fr.irisa.triskell.kermeta.language.behavior.SelfExpression;
-import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
-import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 
 /**
  * @author Franck Fleurey

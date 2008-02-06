@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.30 2007-11-21 14:00:45 ftanguy Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.31 2008-02-06 09:37:19 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -38,11 +38,8 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
-import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
-import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
-//import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
 /**
  * @author Franck Fleurey

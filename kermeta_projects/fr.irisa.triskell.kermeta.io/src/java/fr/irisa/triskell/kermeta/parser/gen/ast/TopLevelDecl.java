@@ -1,7 +1,6 @@
 package fr.irisa.triskell.kermeta.parser.gen.ast;
 
 import org.eclipse.gymnast.runtime.core.ast.ASTNode;
-import org.eclipse.gymnast.runtime.core.ast.TokenInfo;
 
 /**
  *

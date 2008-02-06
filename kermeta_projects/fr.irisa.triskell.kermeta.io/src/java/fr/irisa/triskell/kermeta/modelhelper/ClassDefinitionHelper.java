@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.java,v 1.11 2007-10-29 16:13:59 ftanguy Exp $
+/* $Id: ClassDefinitionHelper.java,v 1.12 2008-02-06 09:38:24 dvojtise Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL
@@ -10,16 +10,11 @@
 package fr.irisa.triskell.kermeta.modelhelper;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -27,12 +22,10 @@ import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 /**
  * this class proposes various helper functions that applies to ClassDefinition in the Kermeta model

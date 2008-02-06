@@ -1,4 +1,4 @@
-/* $Id: EMFCompareModelHelper.java,v 1.3 2008-02-06 09:32:48 dvojtise Exp $
+/* $Id: EMFCompareModelHelper.java,v 1.4 2008-02-06 09:36:00 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.tests.comparison
  * File      : EMFCompareModelHelper.java
  * License   : EPL
@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
 
 public class EMFCompareModelHelper {

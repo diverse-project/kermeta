@@ -6,15 +6,18 @@ package fr.irisa.triskell.kermeta.parser.gen.parser;
 
 import java.io.Reader;
 
+import org.eclipse.gymnast.runtime.core.parser.IParser;
+import org.eclipse.gymnast.runtime.core.parser.ParseContext;
+import org.eclipse.gymnast.runtime.core.parser.ParseError;
+import org.eclipse.gymnast.runtime.core.parser.ParseMessage;
+
 import antlr.MismatchedCharException;
 import antlr.MismatchedTokenException;
 import antlr.NoViableAltException;
 import antlr.NoViableAltForCharException;
 import antlr.RecognitionException;
 import antlr.TokenStreamRecognitionException;
-
-import fr.irisa.triskell.kermeta.parser.gen.ast.*;
-import org.eclipse.gymnast.runtime.core.parser.*;
+import fr.irisa.triskell.kermeta.parser.gen.ast.CompUnit;
 
 public class KermetaParserDriver implements IParser {
 

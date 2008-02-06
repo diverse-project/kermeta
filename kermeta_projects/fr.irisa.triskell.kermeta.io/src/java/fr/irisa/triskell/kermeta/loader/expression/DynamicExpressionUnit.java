@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.17 2008-01-04 14:17:25 dvojtise Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.18 2008-02-06 09:38:25 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -14,7 +14,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -24,12 +23,12 @@ import org.kermeta.io.TypeDefinitionCacheEntry;
 import org.kermeta.io.impl.KermetaUnitImpl;
 import org.kermeta.loader.LoadingContext;
 
-import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
@@ -38,11 +37,11 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.parser.gen.ast.FExpression;
 import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.gen.parser.KermetaParser;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
-import fr.irisa.triskell.kermeta.language.structure.Operation; 
 
 /**
  * @author Franck Fleurey

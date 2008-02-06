@@ -1,6 +1,6 @@
 
 
-/*$Id: AbstractKermetaUnitLoader.java,v 1.10 2007-10-12 09:14:48 ftanguy Exp $
+/*$Id: AbstractKermetaUnitLoader.java,v 1.11 2008-02-06 09:38:25 dvojtise Exp $
 * Project : io
 * File : 	KermetaUnitLoader.java
 * License : EPL
@@ -12,7 +12,6 @@
 
 package org.kermeta.loader;
 
-import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
@@ -27,22 +26,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.kermeta.io.IBuildingState;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitLoader;
-import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KMLoader;
-import fr.irisa.triskell.kermeta.loader.ecore.EcoreBuildingState;
-import fr.irisa.triskell.kermeta.loader.java.JavaBuildingState;
-import fr.irisa.triskell.kermeta.loader.java.JavaKermetaUnitLoader;
-import fr.irisa.triskell.kermeta.loader.km.KMUnitLoader;
-import fr.irisa.triskell.kermeta.loader.km.KmBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.AbstractBuildingState;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTBuildingState;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 

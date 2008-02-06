@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitHelper.java,v 1.10 2007-10-01 15:14:45 ftanguy Exp $
+/*$Id: KermetaUnitHelper.java,v 1.11 2008-02-06 09:38:24 dvojtise Exp $
 * Project : io
 * File : 	KermetaUnitHelper.java
 * License : EPL
@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EObject;

@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.java,v 1.8 2007-10-12 09:15:56 ftanguy Exp $
+/* $Id: OperationHelper.java,v 1.9 2008-02-06 09:38:24 dvojtise Exp $
  * Project   : Kermeta 
  * File      : OperationHelper.java
  * License   : EPL
@@ -20,7 +20,6 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
-import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;

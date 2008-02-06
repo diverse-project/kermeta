@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoSwitch.java,v 1.7 2007-10-04 07:22:14 ftanguy Exp $
+ * $Id: IoSwitch.java,v 1.8 2008-02-06 09:38:25 dvojtise Exp $
  */
 package org.kermeta.io.util;
 
@@ -11,17 +11,19 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.kermeta.io.*;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.IBuildingState;
 import org.kermeta.io.IoPackage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitLoader;
+import org.kermeta.io.KermetaUnitRequire;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.Message;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.ParseErrorMessage;
 import org.kermeta.io.ParsingError;
+import org.kermeta.io.TypeDefinitionCache;
+import org.kermeta.io.TypeDefinitionCacheEntry;
 import org.kermeta.io.WarningMessage;
 
 /**

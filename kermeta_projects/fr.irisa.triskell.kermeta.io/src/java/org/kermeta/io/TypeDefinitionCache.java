@@ -2,17 +2,16 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionCache.java,v 1.2 2008-01-04 14:20:07 dvojtise Exp $
+ * $Id: TypeDefinitionCache.java,v 1.3 2008-02-06 09:38:25 dvojtise Exp $
  */
 package org.kermeta.io;
 
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-
 import java.util.Map;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 /**
  * <!-- begin-user-doc -->

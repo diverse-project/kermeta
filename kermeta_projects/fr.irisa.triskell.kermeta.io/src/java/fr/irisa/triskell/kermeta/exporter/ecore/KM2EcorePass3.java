@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass3.java,v 1.9 2007-11-21 14:05:18 ftanguy Exp $
+/* $Id: KM2EcorePass3.java,v 1.10 2008-02-06 09:38:26 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcorePass3.java
  * License    : EPL
@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.kermeta.ecore.model.helper.EcoreModelHelper;
 import org.kermeta.io.KermetaUnit;

@@ -1,4 +1,4 @@
-/* $Id: KermetaASTHelper.java,v 1.1 2008-01-04 14:16:06 dvojtise Exp $
+/* $Id: KermetaASTHelper.java,v 1.2 2008-02-06 09:38:25 dvojtise Exp $
  * Project   : Kermeta 
  * File      : KermetaASTHelper.java
  * License   : EPL
@@ -13,7 +13,6 @@ package fr.irisa.triskell.kermeta.parser.helper;
 import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 
 import fr.irisa.triskell.kermeta.parser.gen.ast.AnnotableClassMemberDecl;
-import fr.irisa.triskell.kermeta.parser.gen.ast.AnnotableElement;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Annotation;
 import fr.irisa.triskell.kermeta.parser.gen.ast.Annotations;
 import fr.irisa.triskell.kermeta.parser.gen.ast.ClassDecl;

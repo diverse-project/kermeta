@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.25 2008-01-04 14:17:24 dvojtise Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.26 2008-02-06 09:38:25 dvojtise Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -15,24 +15,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.loader.LoadingContext;
 
-import org.eclipse.gymnast.runtime.core.ast.ASTNode;
-
-import fr.irisa.triskell.kermeta.parser.gen.ast.Basictype;
-import fr.irisa.triskell.kermeta.parser.gen.ast.Functype;
-import fr.irisa.triskell.kermeta.parser.gen.ast.Prodtype;
-import fr.irisa.triskell.kermeta.parser.gen.ast.Type;
-import fr.irisa.triskell.kermeta.parser.gen.ast.Typelst;
-import fr.irisa.triskell.kermeta.parser.gen.ast.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
-import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
@@ -43,6 +35,12 @@ import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ModelTypeHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Basictype;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Functype;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Prodtype;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Type;
+import fr.irisa.triskell.kermeta.parser.gen.ast.Typelst;
+import fr.irisa.triskell.kermeta.parser.gen.ast.VoidType;
 
 
 /**

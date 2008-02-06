@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.10 2008-01-04 14:20:07 dvojtise Exp $
+ * $Id: IoFactoryImpl.java,v 1.11 2008-02-06 09:38:25 dvojtise Exp $
  */
 package org.kermeta.io.impl;
 
@@ -16,22 +16,22 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.kermeta.io.*;
+import org.eclipse.gymnast.runtime.core.ast.ASTNode;
 import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.IoPackage;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.KermetaUnitRequire;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.io.PackageEntry;
 import org.kermeta.io.ParseErrorMessage;
 import org.kermeta.io.ParsingError;
+import org.kermeta.io.TypeDefinitionCache;
+import org.kermeta.io.TypeDefinitionCacheEntry;
 import org.kermeta.io.WarningMessage;
 import org.kermeta.io.plugin.IOPlugin;
 
 import antlr.ANTLRException;
-
-import org.eclipse.gymnast.runtime.core.ast.ASTNode;
-
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
