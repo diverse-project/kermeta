@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Standard="http://www.eclipse.org/uml2/schemas/Standard/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/uml2/schemas/Standard/1 pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w">
+  <uml:Model xmi:id="_qb8akM37EdqwVrslYOdUDA">
+    <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="001_standardProf_test1">
+      <packagedElement xmi:type="uml:Class" xmi:id="_LY6LsCYJEdypotqnn2cGDg" name="MClass1"/>
+      <profileApplication xmi:id="_KX8d8CYJEdypotqnn2cGDg">
+        <eAnnotations xmi:id="_KX8d8SYJEdypotqnn2cGDg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
+        </eAnnotations>
+        <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+      </profileApplication>
+    </packagedElement>
+  </uml:Model>
+  <Standard:Metaclass xmi:id="_Ppcz0CYJEdypotqnn2cGDg" base_Class="_LY6LsCYJEdypotqnn2cGDg"/>
+</xmi:XMI>
