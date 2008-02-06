@@ -1,4 +1,4 @@
-/* $Id: KermetaTestSuite.java,v 1.3 2008-02-06 09:45:44 dvojtise Exp $
+/* $Id: KermetaTestSuite.java,v 1.4 2008-02-06 10:00:59 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : KermetaTestSuite.java
  * License : EPL
@@ -57,7 +57,9 @@ public class KermetaTestSuite extends TestSuite {
 		
 /*** BEGIN GENERATED TESTS ***/
 		testWithFile("test/kmt_testcases","001_testAB.main.kmt" );
+
 		testWithFile("test/kmt_testcases","001_testABTypes.main.kmt" );
+
 /*** END GENERATED TESTS ***/
 	}
 
