@@ -1,4 +1,4 @@
-/*$Id: Ket2Kmt.java,v 1.2 2007-12-20 13:41:55 ffleurey Exp $
+/*$Id: Ket2Kmt.java,v 1.3 2008-02-06 10:14:38 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.ket
 * File : 	Ket2Kmt.java
 * License : EPL
@@ -16,7 +16,6 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Path;
 import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.PropertyNotFoundException;

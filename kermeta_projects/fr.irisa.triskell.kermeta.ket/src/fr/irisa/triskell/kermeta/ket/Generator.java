@@ -1,4 +1,4 @@
-/* $Id: Generator.java,v 1.7 2007-12-07 05:31:58 cfaucher Exp $
+/* $Id: Generator.java,v 1.8 2008-02-06 10:14:38 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.ket
  * File       : Generator.java
  * License    : EPL
@@ -17,11 +17,9 @@ package fr.irisa.triskell.kermeta.ket;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.io.StringBufferInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -29,11 +27,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.filebuffers.ITextFileBufferManager;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jet.core.parser.IJETParser;
 import org.eclipse.jet.core.parser.ITagLibraryResolver;
 import org.eclipse.jet.core.parser.ITemplateInput;
