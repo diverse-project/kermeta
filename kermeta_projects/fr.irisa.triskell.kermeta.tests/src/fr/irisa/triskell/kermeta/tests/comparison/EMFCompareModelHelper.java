@@ -1,4 +1,4 @@
-/* $Id: EMFCompareModelHelper.java,v 1.2 2008-01-31 08:26:57 cfaucher Exp $
+/* $Id: EMFCompareModelHelper.java,v 1.3 2008-02-06 09:32:48 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.tests.comparison
  * File      : EMFCompareModelHelper.java
  * License   : EPL
@@ -69,7 +69,7 @@ public class EMFCompareModelHelper {
 	        final EObject model2 = right_resource.getContents().get(0);
 			
 			// Creates the match then the diff model for those two models
-			final MatchModel match = new DifferencesServices().modelMatch(model1, model2, new NullProgressMonitor(), null);
+			final MatchModel match = new DifferencesServices().modelMatch(model1, model2, new NullProgressMonitor());
 			
 			return match;
 			
