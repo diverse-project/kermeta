@@ -106,7 +106,7 @@
           point="org.eclipse.ui.perspectives">
        <perspective
              class="fr.irisa.triskell.kermeta.ui.perspective.KermetaPerspective"
-             icon="images/kermeta_logo.gif"
+             icon="images/kermeta_logo_32.gif"
              id="fr.irisa.triskell.kermeta.ui.perspective"
              name="Kermeta"/>
     </extension>
