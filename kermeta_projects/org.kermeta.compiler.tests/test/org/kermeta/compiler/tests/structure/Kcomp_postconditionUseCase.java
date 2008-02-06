@@ -1,12 +1,10 @@
 
-/*$Id: Kcomp_postconditionUseCase.java,v 1.4 2008-02-01 15:27:09 ftanguy Exp $
+/*$Id: Kcomp_postconditionUseCase.java,v 1.5 2008-02-06 12:36:22 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
-* File : 	CompPackageTestCase.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 30 janv. 08
-* Authors : paco
+* This is generated thanks to the KET template: CompilerUseCase.ket
 */
 
 package org.kermeta.compiler.tests.structure;

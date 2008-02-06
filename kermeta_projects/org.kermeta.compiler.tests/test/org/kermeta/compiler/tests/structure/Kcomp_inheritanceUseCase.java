@@ -1,12 +1,10 @@
 
-/*$Id: Kcomp_inheritanceUseCase.java,v 1.4 2008-02-01 15:27:09 ftanguy Exp $
+/*$Id: Kcomp_inheritanceUseCase.java,v 1.5 2008-02-06 12:36:22 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
-* File : 	CompPackageTestCase.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 30 janv. 08
-* Authors : paco
+* This is generated thanks to the KET template: CompilerUseCase.ket
 */
 
 package org.kermeta.compiler.tests.structure;
@@ -144,6 +142,44 @@ public class Kcomp_inheritanceUseCase {
 	
 	@Test public void comp_package_test_comp_inheritance_test003() {
 		run(input_comp_inheritance_test003, output_comp_inheritance_test003, expected_output_comp_inheritance_test003);
+	}
+
+	private String test_case_comp_inheritance_test004 = "test004";
+	
+	private String input_comp_inheritance_test004 = "";
+	
+	private String output_comp_inheritance_test004 = "";
+	
+	private String expected_output_comp_inheritance_test004 = "";
+	
+	@Before public void setParams_comp_inheritance_test004() {
+		String prefix = "comp_inheritance/test004";
+		input_comp_inheritance_test004 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_inheritance_test004 + ".km";
+		output_comp_inheritance_test004 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_inheritance_test004 + ".ecore";
+		expected_output_comp_inheritance_test004 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_inheritance_test004 + ".ecore";
+	}
+	
+	@Test public void comp_package_test_comp_inheritance_test004() {
+		run(input_comp_inheritance_test004, output_comp_inheritance_test004, expected_output_comp_inheritance_test004);
+	}
+
+	private String test_case_comp_inheritance_test005 = "test005";
+	
+	private String input_comp_inheritance_test005 = "";
+	
+	private String output_comp_inheritance_test005 = "";
+	
+	private String expected_output_comp_inheritance_test005 = "";
+	
+	@Before public void setParams_comp_inheritance_test005() {
+		String prefix = "comp_inheritance/test005";
+		input_comp_inheritance_test005 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_inheritance_test005 + ".km";
+		output_comp_inheritance_test005 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_inheritance_test005 + ".ecore";
+		expected_output_comp_inheritance_test005 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_inheritance_test005 + ".ecore";
+	}
+	
+	@Test public void comp_package_test_comp_inheritance_test005() {
+		run(input_comp_inheritance_test005, output_comp_inheritance_test005, expected_output_comp_inheritance_test005);
 	}
 	/*
 	 * 

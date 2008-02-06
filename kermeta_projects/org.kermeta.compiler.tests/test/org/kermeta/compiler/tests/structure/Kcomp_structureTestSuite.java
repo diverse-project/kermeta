@@ -1,12 +1,10 @@
 
-/*$Id: Kcomp_structureTestSuite.java,v 1.4 2008-02-01 15:27:09 ftanguy Exp $
+/*$Id: Kcomp_structureTestSuite.java,v 1.5 2008-02-06 12:36:22 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
-* File : 	CompilerStructureTestSuite.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 30 janv. 08
-* Authors : paco
+* This is generated thanks to the KET template: CompilerTestSuite.ket
 */
 
 package org.kermeta.compiler.tests.structure;
@@ -18,8 +16,6 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses(
 	{
 		
-		Kcomp_attributeUseCase.class
-	, 
 		Kcomp_classDefinitionUseCase.class
 	, 
 		Kcomp_containmentUseCase.class

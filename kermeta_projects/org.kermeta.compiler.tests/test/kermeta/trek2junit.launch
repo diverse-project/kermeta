@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="KermetaLaunchConfiguration">
 <stringAttribute key="bad_container_name" value="/org.kermeta.compiler.tests/test/kermeta"/>
-<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS" value="/home/paco/workspace/org.kermeta.compiler.tests/test/org/kermeta/compiler/tests/structure/"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS" value="platform:/resource/org.kermeta.compiler.tests/test/org/kermeta/compiler/tests/"/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_CLASSQNAME" value="org::kermeta::compiler::trek2docbook::Main"/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_FILENAME" value="/org.kermeta.compiler.tests/test/kermeta/trek2junit.kmt"/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_OPERATIONNAME" value="main"/>

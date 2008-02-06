@@ -1,23 +1,20 @@
 <%@ket
 	package="org::kermeta::compiler::trek2junit::kermeta"
 	require="http://www.kermeta.org/trek"
-	using="kermeta::language::structure"
 	using="trek"
 	class="JUnitUseCaseTemplate"
-	parameters="uc:KUseCase"
+	parameters="uc:KUseCase, mode:String"
 %>
 
-/*$Id: CompilerUseCase.ket,v 1.6 2008-02-01 15:27:10 ftanguy Exp $
+/*$Id: CompilerUseCase.ket,v 1.7 2008-02-06 12:36:22 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
-* File : 	CompPackageTestCase.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 30 janv. 08
-* Authors : paco
+* This is generated thanks to the KET template: CompilerUseCase.ket
 */
 
-package org.kermeta.compiler.tests.structure;
+package org.kermeta.compiler.tests.<%=mode%>;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,12 +1,10 @@
 
-/*$Id: Kcomp_primitiveTypeUseCase.java,v 1.4 2008-02-01 15:27:09 ftanguy Exp $
+/*$Id: Kcomp_primitiveTypeUseCase.java,v 1.5 2008-02-06 12:36:22 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
-* File : 	CompPackageTestCase.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 30 janv. 08
-* Authors : paco
+* This is generated thanks to the KET template: CompilerUseCase.ket
 */
 
 package org.kermeta.compiler.tests.structure;
@@ -88,6 +86,44 @@ public class Kcomp_primitiveTypeUseCase {
      * Beginning dynamic code for each test case
      * 
      */
+
+	private String test_case_comp_operationStructure_test003 = "test003";
+	
+	private String input_comp_operationStructure_test003 = "";
+	
+	private String output_comp_operationStructure_test003 = "";
+	
+	private String expected_output_comp_operationStructure_test003 = "";
+	
+	@Before public void setParams_comp_operationStructure_test003() {
+		String prefix = "comp_operationStructure/test003";
+		input_comp_operationStructure_test003 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_operationStructure_test003 + ".km";
+		output_comp_operationStructure_test003 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_operationStructure_test003 + ".ecore";
+		expected_output_comp_operationStructure_test003 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_operationStructure_test003 + ".ecore";
+	}
+	
+	@Test public void comp_package_test_comp_operationStructure_test003() {
+		run(input_comp_operationStructure_test003, output_comp_operationStructure_test003, expected_output_comp_operationStructure_test003);
+	}
+
+	private String test_case_comp_parameter_test004 = "test004";
+	
+	private String input_comp_parameter_test004 = "";
+	
+	private String output_comp_parameter_test004 = "";
+	
+	private String expected_output_comp_parameter_test004 = "";
+	
+	@Before public void setParams_comp_parameter_test004() {
+		String prefix = "comp_parameter/test004";
+		input_comp_parameter_test004 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_parameter_test004 + ".km";
+		output_comp_parameter_test004 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_parameter_test004 + ".ecore";
+		expected_output_comp_parameter_test004 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_parameter_test004 + ".ecore";
+	}
+	
+	@Test public void comp_package_test_comp_parameter_test004() {
+		run(input_comp_parameter_test004, output_comp_parameter_test004, expected_output_comp_parameter_test004);
+	}
 
 	private String test_case_comp_primitiveType_test001 = "test001";
 	

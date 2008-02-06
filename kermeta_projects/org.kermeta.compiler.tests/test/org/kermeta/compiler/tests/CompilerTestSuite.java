@@ -1,6 +1,6 @@
 
 
-/*$Id: CompilerTestSuite.java,v 1.2 2008-01-31 14:30:08 cfaucher Exp $
+/*$Id: CompilerTestSuite.java,v 1.3 2008-02-06 12:36:22 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * File : 	CompilerTestSuite.java
 * License : EPL
@@ -19,6 +19,7 @@ import org.kermeta.compiler.tests.structure.Kcomp_structureTestSuite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	Kcomp_structureTestSuite.class
+	Kcomp_behaviorTestSuite.class
 })
 public class CompilerTestSuite {
 

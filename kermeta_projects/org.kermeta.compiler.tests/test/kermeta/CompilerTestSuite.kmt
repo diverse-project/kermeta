@@ -5,9 +5,11 @@ using kermeta::standard
 using kermeta::utils
 using trek
 class JUnitTestSuiteTemplate{
-operation generate(main_uc:KUseCase):String is do
+operation generate(main_uc:KUseCase, mode:String):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("\r\n/*$Id: CompilerTestSuite.kmt,v 1.1 2008-01-31 14:33:41 cfaucher Exp $\r\n* Project : org.kermeta.compiler.tests\r\n* File : \tCompilerStructureTestSuite.java\r\n* License : EPL\r\n* Copyright : IRISA / INRIA / Universite de Rennes 1\r\n* ----------------------------------------------------------------------------\r\n* Creation date : 30 janv. 08\r\n* Authors : paco\r\n*/\r\n\r\npackage org.kermeta.compiler.tests.structure;\r\n\r\nimport org.junit.runner.RunWith;\r\nimport org.junit.runners.Suite;\r\n\r\n@RunWith(Suite.class)\r\n@Suite.SuiteClasses(\r\n\t{\r\n\t\t")
+_res.append("\r\n/*$Id: CompilerTestSuite.kmt,v 1.2 2008-02-06 12:36:22 cfaucher Exp $\r\n* Project : org.kermeta.compiler.tests\r\n* License : EPL\r\n* Copyright : IRISA / INRIA / Universite de Rennes 1\r\n* ----------------------------------------------------------------------------\r\n* This is generated thanks to the KET template: CompilerTestSuite.ket\r\n*/\r\n\r\npackage org.kermeta.compiler.tests.")
+_res.append(mode)
+_res.append(";\r\n\r\nimport org.junit.runner.RunWith;\r\nimport org.junit.runners.Suite;\r\n\r\n@RunWith(Suite.class)\r\n@Suite.SuiteClasses(\r\n\t{\r\n\t\t")
  
 		var i : Integer init 0
 		

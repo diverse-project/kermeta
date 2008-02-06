@@ -1,5 +1,5 @@
 
-/*$Id: Kcomp_oppositeUseCase.java,v 1.5 2008-02-06 12:36:22 cfaucher Exp $
+/*$Id: Kcomp_functionTypeUseCase.java,v 1.1 2008-02-06 12:36:21 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
 * This is generated thanks to the KET template: CompilerUseCase.ket
 */
 
-package org.kermeta.compiler.tests.structure;
+package org.kermeta.compiler.tests.behavior;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,14 +35,14 @@ import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.tests.comparison.EMFCompareModelHelper;
 
-public class Kcomp_oppositeUseCase {
+public class Kcomp_functionTypeUseCase {
 
 	/*
      * 
      * Beginning dynamic code for the current use case
      * 
      */
-	private String use_case = "comp_opposite";
+	private String use_case = "comp_functionType";
 	/*
      * 
      * Ending dynamic code for the current use case

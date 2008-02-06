@@ -1,5 +1,5 @@
 
-/*$Id: Kcomp_oppositeUseCase.java,v 1.5 2008-02-06 12:36:22 cfaucher Exp $
+/*$Id: Kcomp_propertyBehaviorUseCase.java,v 1.1 2008-02-06 12:36:21 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
 * This is generated thanks to the KET template: CompilerUseCase.ket
 */
 
-package org.kermeta.compiler.tests.structure;
+package org.kermeta.compiler.tests.behavior;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,14 +35,14 @@ import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.tests.comparison.EMFCompareModelHelper;
 
-public class Kcomp_oppositeUseCase {
+public class Kcomp_propertyBehaviorUseCase {
 
 	/*
      * 
      * Beginning dynamic code for the current use case
      * 
      */
-	private String use_case = "comp_opposite";
+	private String use_case = "comp_propertyBehavior";
 	/*
      * 
      * Ending dynamic code for the current use case
@@ -86,6 +86,25 @@ public class Kcomp_oppositeUseCase {
      * Beginning dynamic code for each test case
      * 
      */
+
+	private String test_case_comp_propertyBehavior_test001 = "test001";
+	
+	private String input_comp_propertyBehavior_test001 = "";
+	
+	private String output_comp_propertyBehavior_test001 = "";
+	
+	private String expected_output_comp_propertyBehavior_test001 = "";
+	
+	@Before public void setParams_comp_propertyBehavior_test001() {
+		String prefix = "comp_propertyBehavior/test001";
+		input_comp_propertyBehavior_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.INPUT_FOLDER + "/kermeta/" + use_case + "_" + test_case_comp_propertyBehavior_test001 + ".km";
+		output_comp_propertyBehavior_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.OUTPUT_FOLDER + "/" + use_case + "_" + test_case_comp_propertyBehavior_test001 + ".ecore";
+		expected_output_comp_propertyBehavior_test001 = Constants.SOURCE_PATH + prefix + "/" + KCompilerConstants.EXPECTED_OUTPUT_FOLDER +"/ecore/" + use_case + "_" + test_case_comp_propertyBehavior_test001 + ".ecore";
+	}
+	
+	@Test public void comp_package_test_comp_propertyBehavior_test001() {
+		run(input_comp_propertyBehavior_test001, output_comp_propertyBehavior_test001, expected_output_comp_propertyBehavior_test001);
+	}
 	/*
 	 * 
 	 * Ending dynamic code for each test case

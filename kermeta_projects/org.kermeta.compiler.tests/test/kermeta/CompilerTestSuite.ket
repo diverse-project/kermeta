@@ -4,20 +4,18 @@
 	using="kermeta::language::structure"
 	using="trek"
 	class="JUnitTestSuiteTemplate"
-	parameters="main_uc:KUseCase"
+	parameters="main_uc:KUseCase, mode:String"
 %>
 
-/*$Id: CompilerTestSuite.ket,v 1.1 2008-01-31 14:33:41 cfaucher Exp $
+/*$Id: CompilerTestSuite.ket,v 1.2 2008-02-06 12:36:22 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
-* File : 	CompilerStructureTestSuite.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 30 janv. 08
-* Authors : paco
+* This is generated thanks to the KET template: CompilerTestSuite.ket
 */
 
-package org.kermeta.compiler.tests.structure;
+package org.kermeta.compiler.tests.<%=mode%>;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
