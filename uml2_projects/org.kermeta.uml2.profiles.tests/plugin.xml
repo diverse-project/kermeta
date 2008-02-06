@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         id="umlprofilestestlauncher"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="org.kermeta.uml2.profiles.tests.launcher.UMLProfilesTestLauncher">
+         </run>
+      </application>
+   </extension>
+
+</plugin>

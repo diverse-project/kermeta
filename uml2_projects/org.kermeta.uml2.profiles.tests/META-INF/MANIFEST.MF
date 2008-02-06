@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests Plug-in
+Bundle-SymbolicName: org.kermeta.uml2.profiles.tests;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: org.kermeta.uml2.profiles.tests.Activator
+Bundle-Vendor: IRISA/INRIA
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ fr.irisa.triskell.kermeta.tests,
+ org.junit4,
+ org.eclipse.core.resources,
+ org.openembedd.tests,
+ org.kermeta.uml2.profiles.model
+Eclipse-LazyStart: true
+Export-Package: org.kermeta.uml2.profiles.tests,
+ org.kermeta.uml2.profiles.tests.kmttestsuite,
+ org.kermeta.uml2.profiles.tests.launcher
