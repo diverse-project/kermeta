@@ -1,14 +1,16 @@
-/* $Id: UMLProfile2Ecore.kmt,v 1.1 2008-02-04 15:45:39 dvojtise Exp $
+/* $Id: UMLProfile2Ecore.kmt,v 1.2 2008-02-06 15:44:10 dvojtise Exp $
  * Creation date: November 29, 2007
  * License: EPL
  * Copyright:
- * Authors: Gilles Perrouin
+ * Authors: 
+ *		Gilles Perrouin
+ *		Didier Vojtisek
  */
-@mainClass "UMLProfiles::Main"
-@mainOperation "main" 
+@mainClass "UMLProfileUtils::Main"
+@mainOperation "standaloneTestMain" 
 
 
-package UMLProfiles;
+package UMLProfileUtils;
 
 require kermeta
 require "http://www.eclipse.org/emf/2002/Ecore"
@@ -35,14 +37,19 @@ using UMLProfileUtils
 class Main
 {
  
-	operation main() : Void is do 
+ 	operation standaloneTestMain() : Void is do
+ 		main("platform:/resource/org.kermeta.uml2.profiles.model/model/uml/bootstrapMARTE/MARTE.profile.uml",
+ 			"platform:/resource/org.kermeta.uml2.profiles.model/test/instances/MARTE_test.profile.ecore")
+ 	end
+ 	
+	operation main(input : String, output : String) : Void is do 
 	
 	// source model and metamodel
-	var srcModelURI: String init  "platform:/resource/org.kermeta.uml2.profiles.model/model/uml/bootstrapMARTE/MARTE.profile.uml"
+	var srcModelURI: String init  input
 	var srcMetamodelURI: String init "http://www.eclipse.org/uml2/2.1.0/UML"
 	
 	// target model and metamodel
-	var tgtModelURI: String init "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/MARTE_test.profile.ecore"
+	var tgtModelURI: String init output
 	var tgtMetamodelURI: String init "http://www.eclipse.org/emf/2002/Ecore"
 	
 	var srcEmf_res : EMFResource
