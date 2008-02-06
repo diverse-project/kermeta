@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: GenerateHelperAction.java,v 1.4 2008-01-08 09:35:13 cfaucher Exp $
+/*$Id: GenerateHelperAction.java,v 1.5 2008-02-06 15:40:05 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	GenerateHelperAction.java
 * License : EPL
@@ -46,8 +46,9 @@ import org.kermeta.compiler.generator.internal.generators.CompilerHelperGenerato
 import org.kermeta.generator.AbstractGenerator;
 import org.kermeta.generator.util.ConfiguratorObjectManager;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 
@@ -114,8 +115,11 @@ public class GenerateHelperAction implements IActionDelegate
         String genModelPath = file.getFullPath().removeFileExtension().addFileExtension("kmt").toString();
 
         try {
-        	kermetaUnit = IOPlugin.getDefault().getKermetaUnit("platform:/resource" + genModelPath);
+        	kermetaUnit = LoaderPlugin.getDefault().load("platform:/resource" + genModelPath, null);
 		} catch (URIMalformedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotRegisteredURIException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

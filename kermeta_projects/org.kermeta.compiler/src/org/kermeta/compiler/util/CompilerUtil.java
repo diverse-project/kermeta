@@ -1,4 +1,4 @@
-/* $Id: CompilerUtil.java,v 1.4 2008-01-31 13:28:19 cfaucher Exp $
+/* $Id: CompilerUtil.java,v 1.5 2008-02-06 15:40:01 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompilerUtil.java
  * License   : EPL
@@ -22,8 +22,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.kermeta.model.KermetaModelHelper;
 
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
@@ -92,7 +92,7 @@ public class CompilerUtil {
 			newEAnnotation.getDetails().put(annotationDetailKey,
 					annotationDetailValue);
 		else {
-			newEAnnotation.getDetails().put(KMT2KMPass7.KERMETA_DOCUMENTATION,
+			newEAnnotation.getDetails().put(KermetaModelHelper.Tag.KERMETA_DOCUMENTATION,
 					annotationDetailValue);
 		}
 		// try a direct link additionnaly to the detail map.

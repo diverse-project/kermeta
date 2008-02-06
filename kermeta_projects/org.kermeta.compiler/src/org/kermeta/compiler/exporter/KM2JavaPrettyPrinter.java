@@ -1,4 +1,4 @@
-/* $Id: KM2JavaPrettyPrinter.java,v 1.5 2008-01-07 14:17:50 cfaucher Exp $
+/* $Id: KM2JavaPrettyPrinter.java,v 1.6 2008-02-06 15:40:02 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : KM2JavaPrettyPrinter.java
  * License   : EPL
@@ -21,6 +21,7 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.kermeta.model.KermetaModelHelper;
 import org.kermeta.simk.SIMKModel;
 import org.kermeta.simk.SMContext;
 import org.kermeta.simk.SMPackage;
@@ -30,7 +31,6 @@ import org.kermeta.simk.SMUsage;
 import org.kermeta.simk.SimkFactory;
 import org.kermeta.simk.StaticMethod;
 
-import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
@@ -78,9 +78,9 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
+import fr.irisa.triskell.kermeta.parser.helper.KMTHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -1183,7 +1183,7 @@ public class KM2JavaPrettyPrinter extends KermetaOptimizedVisitor {
     public Object visitTag(Tag node) {
         String result = "";
         // User can choose to add a "@kdoc" tag
-        if (node.getName().equals(KMT2KMPass7.KERMETA_DOCUMENTATION) && !node.getValue().startsWith("/**"))
+        if (node.getName().equals(KermetaModelHelper.Tag.KERMETA_DOCUMENTATION) && !node.getValue().startsWith("/**"))
         {
             result = "/**" + node.getValue() + "*/";
         }

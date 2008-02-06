@@ -1,4 +1,4 @@
-/* $Id: KermetaCompiler.java,v 1.1 2008-01-31 13:28:29 cfaucher Exp $
+/* $Id: KermetaCompiler.java,v 1.2 2008-02-06 15:40:01 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -16,7 +16,6 @@ import java.util.LinkedHashSet;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -24,14 +23,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.ui.IActionDelegate;
 import org.kermeta.compiler.exporter.KM2JavaPrettyPrinter;
 import org.kermeta.compiler.generator.helper.model.SimkModelHelper;
 import org.kermeta.compiler.model.compiler.impl.AbstractCompilerImpl;
 import org.kermeta.compiler.util.CompilerUtil;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.merger.Merger;
 import org.kermeta.simk.SIMKModel;
 import org.kermeta.simk.SMClass;
@@ -44,6 +41,7 @@ import org.kermeta.simk.StaticMethod;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.eclipse.resources.URIHelper;
+import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.exporter.ecore.ExporterOptions;
@@ -82,7 +80,7 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 		// Create the KermetaUnit
 		KermetaUnit unit = null;
 		try {
-			unit = IOPlugin.getDefault().loadKermetaUnit(kermetafile, new NullProgressMonitor());
+			unit = LoaderPlugin.getDefault().load("platform:/resource/" + kermetafile.getFullPath(), null);
 			unit.setLocked(true);
 
 			this.generateEcoreVersion(unit);
@@ -129,7 +127,7 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 
 	}
 	
-	public void saveKm2ecoremappingTracer(EcoreExporter km2ecoreGen) {
+	/*public void saveKm2ecoremappingTracer(EcoreExporter km2ecoreGen) {
 		URI tracerUri = URI.createURI(km2ecoreGen.getSource().getUri());
 		tracerUri = tracerUri.appendFileExtension("traceability");
 		
@@ -147,7 +145,7 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	
 	private EcoreExporter generateEcoreVersion(KermetaUnit unit) {
@@ -171,7 +169,11 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 				kunit.setLocked(true);
 				
 			try {
-				unit = mergedVersion.processInMemory(relatedUnit,"platform:/resource" + ecoreRelativePath);
+
+					unit = mergedVersion.processInMemory(relatedUnit,"platform:/resource" + ecoreRelativePath);
+			} catch (NotRegisteredURIException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			} catch (URIMalformedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
