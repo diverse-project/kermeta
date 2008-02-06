@@ -1,4 +1,4 @@
-/* $Id: trek2junit.kmt,v 1.4 2008-02-06 12:36:22 cfaucher Exp $
+/* $Id: trek2junit.kmt,v 1.5 2008-02-06 12:52:32 cfaucher Exp $
  * Creation date: Jan 30, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
@@ -43,10 +43,7 @@ class Main
 	/**
 	 *
 	 */
-	operation main(generationFolder : String) : Void is do
-	
-		var mode : String init "structure"
-		//var mode : String init "behavior"
+	operation main(generationFolder : String, mode : String) : Void is do
 		
 		var useKaseModel : UseKaseModel init UseKaseModel.new
        	useKaseModel := load()
@@ -55,8 +52,6 @@ class Main
        	main_uc := useKaseModel.kuseCases.detect{ uc |
        		uc.id == "comp_" + mode
        	}
-       	
-       	stdio.writeln(main_uc.name)
        	
        	var content_uc : StringBuffer init StringBuffer.new
 		content_uc.append(JUnitTestSuiteTemplate.new.generate(main_uc, mode))
@@ -70,10 +65,10 @@ class Main
        	main_uc.refinedBy.each{ uc |
 			var content : StringBuffer init StringBuffer.new
 	       	content.append(JUnitUseCaseTemplate.new.generate(uc, mode))
-	       			stdio.writeln(uc.name)
+	       	
 			var ioHelper : FileIO init FileIO.new
 			var filename : String init generationFolder + mode + "/" + "K" + uc.id + "UseCase.java"
-			           			stdio.writeln(filename)
+			
 			ioHelper.writeTextFile(filename,content.toString)
        	}
        	
