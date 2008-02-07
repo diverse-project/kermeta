@@ -1,4 +1,4 @@
-/* $Id: EcoreModelElementHelper.kmt,v 1.2 2008-02-01 09:40:46 ftanguy Exp $
+/* $Id: EcoreModelElementHelper.kmt,v 1.3 2008-02-07 13:04:55 ftanguy Exp $
  * Creation date: January 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -17,7 +17,7 @@ using ecore
 class EcoreModelElementHelper {
 	
 	operation findEClassProxy(cd : ClassDefinition) : EClass is do
-		var pack : Package init Package.new
+		var pack : Package init Package.new 
 		pack ?= cd.container
 		var eclassifier : EClassifier init pack.ecoreModelElement.eClassifiers.detect{ c |
 			if c.isInstanceOf(EClass) then

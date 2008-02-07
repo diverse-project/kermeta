@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.3 2008-02-01 15:23:27 ftanguy Exp $
+/* $Id: Pass2.kmt,v 1.4 2008-02-07 13:04:55 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -20,7 +20,7 @@ package kermeta::language;
 
 
 require kermeta
-require "SetType.kmt"
+require "SetLinks.kmt"
 require "CreateBehavior.kmt"
 require "../common/containment_traversable.kmt"
 
@@ -35,30 +35,30 @@ package structure {
 	
 	aspect class ClassDefinition {
 		method applyPass2() is do
-			self.setType()
+			self.setLinks() 
 			super()
 		end
 	}
 	
 	aspect class Property {
 		method applyPass2() is do
-			self.setType()
-			self.createBehavior()
+			self.setLinks()
+			self.createBehaviorJava(0)
 			super()
 		end
 	}
 	
 	aspect class Operation {
 		method applyPass2() is do
-			self.setType()
-			self.createBehavior()
+			self.setLinks()
+			self.createBehaviorJava(0)
 			super()
 		end
 	}
 	
 	aspect class Parameter {
 		method applyPass2() is do
-			self.setType()
+			self.setLinks()
 			super()
 		end
 	}
@@ -69,7 +69,7 @@ package behavior {
 
 	aspect class Expression {
 		method applyPass2() is do
-			self.createBehavior()
+			self.createBehaviorJava(0)
 			super()
 		end
 	}

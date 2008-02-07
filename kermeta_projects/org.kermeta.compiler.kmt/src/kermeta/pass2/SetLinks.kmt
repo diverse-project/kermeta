@@ -1,0 +1,73 @@
+/* $Id: SetLinks.kmt,v 1.1 2008-02-07 13:04:55 ftanguy Exp $
+ * Creation date: January 21, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ *			François Tanguy <ftanguy@irisa.fr>
+ */
+
+package kermeta::language::structure;
+
+ 
+require kermeta
+require "../common/trace_structure.kmt"
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "../helper/KM2EcoreHelper.kmt"
+
+using ecore
+using km2ecore::helper::kermeta
+
+aspect class ClassDefinition {
+	operation setLinks() is do
+		self.superType.each{ t |
+			if ( t.isInstanceOf(Class) ) then
+				var classDefinition : ClassDefinition init TypeHelper.new.getClassDefinition(t.asType(Class))
+				self.ecoreModelElement.eSuperTypes.add( classDefinition.ecoreModelElement )
+			end
+		}
+	end
+}
+
+aspect class Operation {
+	operation setLinks() is do
+		var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
+		s.setLinks(self, self.ecoreModelElement)
+	end
+}
+
+aspect class Parameter {
+	operation setLinks() is do
+		var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
+		s.setLinks(self, self.ecoreModelElement)
+	end
+}
+
+aspect class Property {
+	operation setLinks() is do
+		var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
+		s.setLinks(self, self.ecoreModelElement)
+	end
+}
+
+
+class LinkSetterForTypedElement {
+	operation setLinks(element : TypedElement, ecoreModelElement : ETypedElement) is do
+		if ( element.type.isInstanceOf(Class) ) then
+			var c : Class init element.type.asType(Class)
+			var classDefinition : ClassDefinition init TypeHelper.new.getClassDefinition(c)
+			var genericType : EGenericType init EGenericType.new
+			genericType.eClassifier  := classDefinition.ecoreModelElement
+			ecoreModelElement.eGenericType := genericType
+			c.typeParamBinding.each{ tpb |
+				var typeArgument : EGenericType init EGenericType.new
+				var cd : ClassDefinition init TypeHelper.new.getClassDefinition( tpb.type.asType(Class) )
+				typeArgument.eClassifier := cd.ecoreModelElement
+				ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
+			}
+		else
+			if ( element.type.isInstanceOf(PrimitiveType) ) then
+				ecoreModelElement.eType := element.type.asType(PrimitiveType).ecoreModelElement			
+			end
+		end
+	end
+}

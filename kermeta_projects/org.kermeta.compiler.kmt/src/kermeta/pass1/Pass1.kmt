@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.3 2008-02-01 15:23:26 ftanguy Exp $
+/* $Id: Pass1.kmt,v 1.4 2008-02-07 13:04:55 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -29,7 +29,7 @@ aspect class ModelingUnit {
 		// Creating the associated ecore package
 		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement()
 		// Setting the ecore proxy
-		self.setEcoreModelElement( ecoreAnnotation )
+		self.ecoreModelElement := ecoreAnnotation
 		// Compile the owned elements
 		self.eachOwnedElement{ p | p.applyPass1() }
 		// Getting the ecore packages
@@ -47,10 +47,10 @@ aspect class Package {
 		var p : Package init self.nestingPackage
 		//p ?= self.container()
 		if ( p != void ) then
-			p.getEcoreModelElement().eSubpackages.add(ecorePackage)
+			p.ecoreModelElement.eSubpackages.add(ecorePackage)
 		end
 		// Setting the ecore proxy
-		self.setEcoreModelElement( ecorePackage )
+		self.ecoreModelElement := ecorePackage
 		// Compile the owned elements
 		self.eachOwnedElement{ cd | cd.applyPass1() }
 	end
@@ -62,9 +62,9 @@ aspect class PrimitiveType {
 		var ecoreDataType : EDataType init self.createEcoreModelElement()
 		// Setting the container
 		var p : Package init self.container().asType(Package)
-		p.getEcoreModelElement().eClassifiers.add(ecoreDataType)
+		p.ecoreModelElement.eClassifiers.add(ecoreDataType)
 		// Setting the ecore proxy
-		self.setEcoreModelElement( ecoreDataType )
+		self.ecoreModelElement := ecoreDataType
 		// Compile the owned elements
 		self.eachOwnedElement{ cd | cd.applyPass1() }
 	end 
@@ -76,9 +76,9 @@ aspect class Enumeration {
 		var ecoreEnumeration : EEnum init self.createEcoreModelElement()
 		// Setting the container
 		var p : Package init self.container().asType(Package)
-		p.getEcoreModelElement().eClassifiers.add(ecoreEnumeration)
+		p.ecoreModelElement.eClassifiers.add(ecoreEnumeration)
 		// Setting the ecore proxy
-		self.setEcoreModelElement( ecoreEnumeration )
+		self.ecoreModelElement := ecoreEnumeration
 		// Compile the owned elements
 		self.eachOwnedElement{ l | l.applyPass1() }
 		
@@ -91,9 +91,9 @@ aspect class EnumerationLiteral {
 		var ecoreEnumLiteral : EEnumLiteral init self.createEcoreModelElement()
 		// Setting the container
 		var e : Enumeration init self.~enumeration.asType(Enumeration)
-		e.getEcoreModelElement().eLiterals.add(ecoreEnumLiteral)
+		e.ecoreModelElement.eLiterals.add(ecoreEnumLiteral)
 		// Setting the ecore proxy
-		self.setEcoreModelElement( ecoreEnumLiteral )
+		self.ecoreModelElement := ecoreEnumLiteral
 	end
 }  
   
@@ -103,9 +103,9 @@ aspect class ClassDefinition {
 		var ecoreClass : EClass init self.createEcoreModelElement()		
 		// Setting the container
 		var p : Package init self.container().asType(Package)
-		p.getEcoreModelElement().eClassifiers.add(ecoreClass)
+		p.ecoreModelElement.eClassifiers.add(ecoreClass)
 		// Setting the ecore proxy
-		self.setEcoreModelElement( ecoreClass )
+		self.ecoreModelElement := ecoreClass
 		// Compile the owned elements
 		self.eachOwnedElement{ o | o.applyPass1() }
 	end
@@ -119,9 +119,9 @@ aspect class Property {
 		// Setting the container
 		var c : ClassDefinition
 		c ?= self.container()
-		c.getEcoreModelElement().eStructuralFeatures.add( ecoreStructuralFeature )
+		c.ecoreModelElement.eStructuralFeatures.add( ecoreStructuralFeature )
 		// Setting the ecore proxy
-		self.setEcoreModelElement( ecoreStructuralFeature )
+		self.ecoreModelElement := ecoreStructuralFeature
 		// Compile the owned elements
 		self.eachOwnedElement{ o | o.applyPass1() }
 	end 
@@ -134,9 +134,9 @@ aspect class Operation {
 		// Setting the container
 		var c : ClassDefinition
 		c ?= self.container()
-		c.getEcoreModelElement().eOperations.add(ecoreOperation)
+		c.ecoreModelElement.eOperations.add(ecoreOperation)
 		// Setting the ecore proxy
-		self.setEcoreModelElement( ecoreOperation )
+		self.ecoreModelElement := ecoreOperation
 		// Compile the owned elements
 		self.eachOwnedElement{ o | o.applyPass1() }
 	end
@@ -148,9 +148,9 @@ aspect class Parameter {
 		var ecoreParameter : EParameter init self.createEcoreModelElement()
 		// Setting the container
 		var o : Operation init self.container().asType(Operation)
-		o.getEcoreModelElement().eParameters.add( ecoreParameter )
+		o.ecoreModelElement.eParameters.add( ecoreParameter )
 		// Setting the ecore proxy
-		self.setEcoreModelElement( ecoreParameter )
+		self.ecoreModelElement := ecoreParameter
 	end
 }
 
@@ -177,12 +177,12 @@ aspect class ObjectTypeVariable {
 		// Setting the container
 		var container : Object init self.container
 		if ( container.isInstanceOf(ClassDefinition) ) then		
-			container.asType(ClassDefinition).getEcoreModelElement().eTypeParameters.add(ecoreTypeParameter)
+			container.asType(ClassDefinition).ecoreModelElement.eTypeParameters.add(ecoreTypeParameter)
 		else
-			container.asType(Operation).getEcoreModelElement().eTypeParameters.add(ecoreTypeParameter)
+			container.asType(Operation).ecoreModelElement.eTypeParameters.add(ecoreTypeParameter)
 		end
 		// Setting the ecore proxy
-		self.setEcoreModelElement( ecoreTypeParameter )
+		self.ecoreModelElement := ecoreTypeParameter
 	end
 }
 
@@ -198,10 +198,10 @@ aspect class Tag {
 			var p : Property init ObjectHelper.new.getPropertyValue(c, "ecoreModelElement")
 			if ( p!= void ) then
 				var ecoreModelElement : EModelElement init c.get(p).asType(EModelElement)
-				self.getEcoreModelElement().eAnnotations.add(ecoreAnnotation)
+				self.ecoreModelElement.eAnnotations.add(ecoreAnnotation)
 			end
 		end
 		// Setting the ecore proxy
-		self.setEcoreModelElement( ecoreAnnotation )
+		self.ecoreModelElement := ecoreAnnotation
 	end
 }
