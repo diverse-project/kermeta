@@ -1,5 +1,5 @@
 
-/*$Id: Kcomp_initializationUseCase.java,v 1.1 2008-02-06 12:36:21 cfaucher Exp $
+/*$Id: Kcomp_initializationUseCase.java,v 1.2 2008-02-07 17:27:24 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -68,7 +68,7 @@ public class Kcomp_initializationUseCase {
 		try {
 			IOPlugin.LOCAL_USE = true;
 			IOPlugin.getDefault();
-			executable = LoaderPlugin.getDefault().load( Constants.TEST_COMP_STRUCTURE_LAUNCHER, options);
+			executable = LoaderPlugin.getDefault().load( Constants.TEST_COMP_BEHAVIOR_LAUNCHER, options);
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
 		} catch (NotRegisteredURIException e) {

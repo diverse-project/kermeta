@@ -6,7 +6,7 @@
 	parameters="uc:KUseCase, mode:String"
 %>
 
-/*$Id: CompilerUseCase.ket,v 1.7 2008-02-06 12:36:22 cfaucher Exp $
+/*$Id: CompilerUseCase.ket,v 1.8 2008-02-07 17:27:24 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -75,7 +75,7 @@ public class K<%= uc.id %>UseCase {
 		try {
 			IOPlugin.LOCAL_USE = true;
 			IOPlugin.getDefault();
-			executable = LoaderPlugin.getDefault().load( Constants.TEST_COMP_STRUCTURE_LAUNCHER, options);
+			executable = LoaderPlugin.getDefault().load( Constants.TEST_COMP_<%=mode.toUpperCase%>_LAUNCHER, options);
 		} catch (URIMalformedException e) {
 			e.printStackTrace();
 		} catch (NotRegisteredURIException e) {

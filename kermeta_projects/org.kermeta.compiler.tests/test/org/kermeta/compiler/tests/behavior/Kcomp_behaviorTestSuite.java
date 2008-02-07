@@ -1,5 +1,5 @@
 
-/*$Id: Kcomp_behaviorTestSuite.java,v 1.1 2008-02-06 12:36:21 cfaucher Exp $
+/*$Id: Kcomp_behaviorTestSuite.java,v 1.2 2008-02-07 17:27:24 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
