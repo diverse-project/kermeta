@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.4 2008-02-07 13:04:55 ftanguy Exp $
+/* $Id: CreateBehavior.kmt,v 1.5 2008-02-07 18:20:20 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -76,24 +76,24 @@ package structure {
 	}
 	
 	aspect class Type {
-	method createBehaviorJava(context : Integer) : String is do
-		result := "Void"
-		stdio.writeln("type self: " + self.toString)
-		if self.isInstanceOf(PrimitiveType) then
-			stdio.writeln("\ncoucou2\n")
-			var pt : kermeta::language::structure::PrimitiveType
-			pt ?= self
-			result := pt.instanceType.asType(Type).createBehaviorJava(context)
+		method createBehaviorJava(context : Integer) : String is do
+			result := "Void"
+			stdio.writeln("type self: " + self.toString)
+			if self.isInstanceOf(PrimitiveType) then
+				stdio.writeln("\ncoucou2\n")
+				var pt : kermeta::language::structure::PrimitiveType
+				pt ?= self
+				result := pt.instanceType.asType(Type).createBehaviorJava(context)
+			end
+	
+			if self.isInstanceOf(ParameterizedType) then
+				//stdio.writeln("\ncoucou2\n")
+				var c : Class
+				c ?= self
+				result := c.typeDefinition.name
+			end
 		end
-
-		if self.isInstanceOf(ParameterizedType) then
-			//stdio.writeln("\ncoucou2\n")
-			var c : Class
-			c ?= self
-			result := c.typeDefinition.name
-		end
-	end
-}
+	}
 	
 }
 

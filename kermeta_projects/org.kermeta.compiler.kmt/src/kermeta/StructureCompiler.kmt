@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.10 2008-02-01 12:33:30 ftanguy Exp $
+/* $Id: StructureCompiler.kmt,v 1.11 2008-02-07 18:20:20 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -7,7 +7,7 @@
  */
 
 @mainClass "kermeta::compiler::Main" 
-@mainOperation "main"
+@mainOperation "main_inner"
 
 package kermeta::compiler;
 
@@ -24,12 +24,33 @@ using kermeta::language::structure
 class Main
 {
 
-    operation main(input : String, output : String) : Void is do		
+    operation main_inner() : Void is do
+		var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01.km"
+		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Attempt01_.ecore"
+		var mode : String init "behaviorJava"
 		
+		main_mode(input, output, mode)
+	end
+	
+    operation main(input : String, output : String) : Void is do
+    	var mode : String init "behaviorJava"
+    	main_mode(input, output, mode)
+    end
+    	
+	operation main_mode(input : String, output : String, mode : String) : Void is do
 		var mu : ModelingUnit init loadKmModel(input)
 		
 		mu.applyPass1()
-		mu.applyPass2()
+		if mode == "onlyEcore" then
+			mu.applyPass2
+		end
+		if mode == "behaviorKmt" then
+			mu.applyPass2BehaviorKmt
+		end
+		
+		if mode == "behaviorJava" then
+			mu.applyPass2BehaviorJava
+		end
 		
    		var repository : EMFRepository init EMFRepository.new             
    		var resource : Resource init repository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")

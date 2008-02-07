@@ -1,9 +1,9 @@
-/* $Id: Pass2.kmt,v 1.4 2008-02-07 13:04:55 ftanguy Exp $
+/* $Id: Pass2.kmt,v 1.5 2008-02-07 18:20:20 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Cyril Faucher <cfaucher@irisa.fr>
- *			François Tanguy <ftanguy@irisa.fr>
+ *			Francois Tanguy <ftanguy@irisa.fr>
  */
 
 
@@ -31,10 +31,27 @@ package structure {
 			// Compile the owned elements
 			self.eachOwnedElement{ p | p.applyPass2() }
 		end
+		
+		operation applyPass2BehaviorJava() is do
+			// Compile the owned elements
+			self.eachOwnedElement{ p | p.applyPass2BehaviorJava() }
+		end
+		
+		operation applyPass2BehaviorKmt() is do
+			// TODO
+		end
+	}
+	
+	class Pass2 {
 	}
 	
 	aspect class ClassDefinition {
 		method applyPass2() is do
+			self.setLinks() 
+			super()
+		end
+		
+		method applyPass2BehaviorJava() is do
 			self.setLinks() 
 			super()
 		end
@@ -43,16 +60,26 @@ package structure {
 	aspect class Property {
 		method applyPass2() is do
 			self.setLinks()
-			self.createBehaviorJava(0)
 			super()
+		end
+		
+		method applyPass2BehaviorJava() is do
+			self.setLinks()
+			super()
+			self.createBehaviorJava(0)
 		end
 	}
 	
 	aspect class Operation {
 		method applyPass2() is do
 			self.setLinks()
-			self.createBehaviorJava(0)
 			super()
+		end
+		
+		method applyPass2BehaviorJava() is do
+			self.setLinks()
+			super()
+			self.createBehaviorJava(0)
 		end
 	}
 	
@@ -61,17 +88,22 @@ package structure {
 			self.setLinks()
 			super()
 		end
+		
+		method applyPass2BehaviorJava() is do
+			self.setLinks()
+			super()
+		end
 	}
 	
 }
-
+/*
 package behavior {
 
 	aspect class Expression {
-		method applyPass2() is do
+		method applyPass2BehaviorJava() is do
 			self.createBehaviorJava(0)
 			super()
 		end
 	}
 
-}
+}*/
