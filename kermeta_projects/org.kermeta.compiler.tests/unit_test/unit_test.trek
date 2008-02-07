@@ -9,14 +9,15 @@
     <status progress="80" key="Impl_Kermeta"/>
     <status progress="100" key="Design"/>
   </kuseCases>
-  <kuseCases name="Attribute" summary="&lt;para>&lt;/para>" id="comp_attribute" refines="comp_structure">
+  <kuseCases name="Attribute" summary="&lt;para>&lt;/para>" id="comp_attribute" refines="comp_classDefinition">
     <verifiedBy href="comp_attribute/comp_attribute.trek#//@ktestCases.0"/>
     <verifiedBy href="comp_attribute/comp_attribute.trek#//@ktestCases.1"/>
+    <verifiedBy href="comp_attribute/comp_attribute.trek#//@ktestCases.2"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.4"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.8"/>
     <status progress="100" key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status key="Design"/>
+    <status progress="80" key="Impl_Kermeta"/>
+    <status progress="80" key="Design"/>
   </kuseCases>
   <kuseCases name="Behavior" summary="&lt;para>Use case dedicated to the compilation of the Kermeta behavior.&lt;/para>" id="comp_behavior" refinedBy="comp_assignment comp_body comp_callResult comp_callSuperOperation comp_conditional comp_exception comp_functionType comp_initialization comp_instanceOf comp_invariantBehavior comp_javaStaticCall comp_lambdaExpression comp_loop comp_new comp_propertyBehavior">
     <status progress="50" key="Impl_Java"/>
@@ -43,13 +44,16 @@
     <status key="Impl_Kermeta"/>
     <status key="Design"/>
   </kuseCases>
-  <kuseCases name="ClassDefinition" summary="&lt;para>&lt;/para>" id="comp_classDefinition" refines="comp_structure">
+  <kuseCases name="ClassDefinition" summary="&lt;para>&lt;/para>" id="comp_classDefinition" refines="comp_structure" refinedBy="comp_attribute">
     <verifiedBy href="comp_classDefinition/comp_classDefinition.trek#//@ktestCases.0"/>
+    <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.2"/>
+    <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.3"/>
+    <verifiedBy href="comp_reference/comp_reference.trek#//@ktestCases.2"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.2"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.6"/>
     <status progress="100" key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status key="Design"/>
+    <status progress="100" key="Impl_Kermeta"/>
+    <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="Collection" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&lt;para/>&#xD;&#xA;&lt;para>Helper:&lt;/para>&#xD;&#xA;&lt;para>In order to access to the specific Kermeta&#x92;s methods on the Collections, we could use Java static methods. These methods will be generated from the framework in external Java classes, but not integrated into the Ecore model, because the EMF generation does not support static methods.&lt;/para>" id="comp_collection">
     <status progress="50" key="Impl_Java"/>
@@ -74,8 +78,8 @@
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.12"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.13"/>
     <status key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status key="Design"/>
+    <status progress="100" key="Impl_Kermeta"/>
+    <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="Exception" summary="&lt;para>&lt;/para>" id="comp_exception" refines="comp_behavior">
     <status progress="80" key="Impl_Java"/>
@@ -92,17 +96,20 @@
   <kuseCases name="Generics" summary="&lt;para>&lt;/para>" id="comp_generics" refines="comp_structure">
     <verifiedBy href="comp_generics/comp_generics.trek#//@ktestCases.0"/>
     <verifiedBy href="comp_generics/comp_generics.trek#//@ktestCases.1"/>
+    <verifiedBy href="comp_inheritance/comp_inheritance.trek#//@ktestCases.3"/>
     <status progress="100" key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status key="Design"/>
+    <status progress="80" key="Impl_Kermeta"/>
+    <status progress="80" key="Design"/>
   </kuseCases>
   <kuseCases name="Inheritance" summary="&lt;para>Simple inheritance support.&lt;/para>" id="comp_inheritance" refines="comp_structure">
     <verifiedBy href="comp_inheritance/comp_inheritance.trek#//@ktestCases.0"/>
     <verifiedBy href="comp_inheritance/comp_inheritance.trek#//@ktestCases.1"/>
     <verifiedBy href="comp_inheritance/comp_inheritance.trek#//@ktestCases.2"/>
+    <verifiedBy href="comp_inheritance/comp_inheritance.trek#//@ktestCases.3"/>
+    <verifiedBy href="comp_inheritance/comp_inheritance.trek#//@ktestCases.4"/>
     <status progress="100" key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status key="Design"/>
+    <status progress="100" key="Impl_Kermeta"/>
+    <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="Initialization" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>- Initialization of a variable:&lt;/para>&#xD;&#xA;&lt;programlisting>// In kmt:&#xD;&#xA;var aPrinter : Printer init Printer.new&#xD;&#xA;&#xD;&#xA;// In Java:&#xD;&#xA;comptest2.Printer aPrinter = comptest2.Comptest2Factory.eINSTANCE.createPrinter();&lt;/programlisting>&#xD;&#xA;&#xD;&#xA;&lt;para/>&#xD;&#xA;&#xD;&#xA;&lt;para>- Initialization of a String:&lt;/para>&#xD;&#xA;&lt;programlisting>// In kmt:&#xD;&#xA;var text1 : String init &quot;Hello&quot;&#xD;&#xA;&#xD;&#xA;// In Java:&#xD;&#xA;String text1 = &quot;Hello &quot;;&lt;/programlisting>&#xD;&#xA;&#xD;&#xA;&lt;para/>&#xD;&#xA;&#xD;&#xA;&lt;programlisting>// In kmt:&#xD;&#xA;var text2 : String&#xD;&#xA;text2 := &quot;World&quot;&#xD;&#xA;&#xD;&#xA;// In Java:&#xD;&#xA;String text2 = null;&#xD;&#xA;text2 = &quot;World&quot;;&lt;/programlisting>" id="comp_initialization" refines="comp_behavior">
     <verifiedBy href="comp_initialization/comp_initialization.trek#//@ktestCases.0"/>
@@ -164,11 +171,6 @@
     <status key="Impl_Kermeta"/>
     <status key="Design"/>
   </kuseCases>
-  <kuseCases name="MultipleInheritance" summary="&lt;para>&lt;/para>" id="comp_multipleInheritance">
-    <status key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status key="Design"/>
-  </kuseCases>
   <kuseCases name="MultiplePackagesRoot" summary="&lt;para>Test wether it is possible to generate several root packages. &#xD;&#xA;At the moment it is possible when editing a km file but not with kmt file&#xD;&#xA;because the syntax grammar does not allow multiple root package definitions&lt;/para>" id="comp_multiplePackagesRoot" refines="comp_package">
     <verifiedBy href="comp_multiplePackagesRoot/comp_multiplePackagesRoot.trek#//@ktestCases.0"/>
     <status progress="100" key="Impl_Java"/>
@@ -190,11 +192,15 @@
   <kuseCases name="OperationStructure" summary="&lt;para>&lt;/para>" id="comp_operationStructure" refines="comp_structure">
     <verifiedBy href="comp_operationStructure/comp_operationStructure.trek#//@ktestCases.0"/>
     <verifiedBy href="comp_operationStructure/comp_operationStructure.trek#//@ktestCases.1"/>
+    <verifiedBy href="comp_operationStructure/comp_operationStructure.trek#//@ktestCases.2"/>
+    <verifiedBy href="comp_operationStructure/comp_operationStructure.trek#//@ktestCases.3"/>
+    <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.2"/>
+    <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.3"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.3"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.7"/>
     <status progress="100" key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status key="Design"/>
+    <status progress="90" key="Impl_Kermeta"/>
+    <status progress="90" key="Design"/>
   </kuseCases>
   <kuseCases name="Opposite" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>Implemented by the structural part (&#x93;model&#x94; plugin) of the EMF generated source code.&lt;/para>" id="comp_opposite" refines="comp_structure">
     <status progress="100" key="Impl_Java"/>
@@ -211,38 +217,42 @@
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.1"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.5"/>
     <status progress="100" key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status key="Design"/>
+    <status progress="100" key="Impl_Kermeta"/>
+    <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="Parameter" summary="&lt;para>TODO&lt;/para>" id="comp_parameter" refines="comp_structure">
     <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.0"/>
     <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.1"/>
+    <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.2"/>
+    <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.3"/>
     <status key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status key="Design"/>
+    <status progress="90" key="Impl_Kermeta"/>
+    <status progress="90" key="Design"/>
   </kuseCases>
   <kuseCases name="Postcondition" summary="&lt;para>&lt;/para>" id="comp_postcondition" refines="comp_structure">
     <verifiedBy href="comp_postcondition/comp_postcondition.trek#//@ktestCases.0"/>
     <verifiedBy href="comp_postcondition/comp_postcondition.trek#//@ktestCases.1"/>
-    <status key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status progress="10" key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status progress="100" key="Impl_Kermeta"/>
+    <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="Precondition" summary="&lt;para>&lt;/para>" id="comp_precondition" refines="comp_structure">
     <verifiedBy href="comp_precondition/comp_precondition.trek#//@ktestCases.0"/>
     <verifiedBy href="comp_precondition/comp_precondition.trek#//@ktestCases.1"/>
-    <status key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status progress="10" key="Design"/>
+    <status progress="100" key="Impl_Java"/>
+    <status progress="100" key="Impl_Kermeta"/>
+    <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="PrimitiveType" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>Helper:&lt;/para>&#xD;&#xA;&lt;para>In order to access to the specific Kermeta&#x92;s methods on the Primitive Types, we could use Java static methods. These methods will be generated from the framework in external Java classes, but not integrated into the Ecore model, because the EMF generation does not support static methods.&lt;/para>" id="comp_primitiveType" refines="comp_structure">
+    <verifiedBy href="comp_operationStructure/comp_operationStructure.trek#//@ktestCases.2"/>
+    <verifiedBy href="comp_parameter/comp_parameter.trek#//@ktestCases.3"/>
     <verifiedBy href="comp_primitiveType/comp_primitiveType.trek#//@ktestCases.0"/>
     <verifiedBy href="comp_primitiveType/comp_primitiveType.trek#//@ktestCases.1"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.10"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.11"/>
     <status progress="20" key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status progress="50" key="Design"/>
+    <status progress="100" key="Impl_Kermeta"/>
+    <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="PropertyBehavior" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>Behavior of a derived property: getter/ setter.&lt;/para>&#xD;&#xA;&lt;para>This ability is not supported by the EMF mechanism based on the use of EAnnotations containing the Java source code corresponding to the expected behavior.&lt;/para>&#xD;&#xA;&lt;para>Thus, we are using the &quot;overloadable&quot; property of the JET templates. In a JET template, that is able to define some pieces of source code that will be overloadable. The expected source code is also added via a file with a specific name and location (define in the JET template)&lt;/para>&#xD;&#xA;&lt;para>During the compilation, we are using the JET templates from EMF (plugin: org.eclipse.emf.codegen.ecore). Also, in your case, the derived property, we have written new implementations for the getter and setter. This new implementation uses a EAnnotation containing the Java source code implementing the getter and setter. Finally, the mechanism to get and put the code is very close to this one used by EMF to compile the EOperation behavior&lt;/para>&#xD;&#xA;&lt;para>The specific source added are located in the plugin: org.kermeta.compiler.generator.emftemplates&lt;/para>" id="comp_propertyBehavior" refines="comp_behavior">
     <verifiedBy href="comp_propertyBehavior/comp_propertyBehavior.trek#//@ktestCases.0"/>
@@ -253,20 +263,22 @@
   </kuseCases>
   <kuseCases name="PropertyStructure" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>Derived property signature.&lt;/para>" id="comp_propertyStructure" refines="comp_structure">
     <verifiedBy href="comp_propertyStructure/comp_propertyStructure.trek#//@ktestCases.0"/>
+    <verifiedBy href="comp_propertyStructure/comp_propertyStructure.trek#//@ktestCases.1"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.4"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.8"/>
     <status progress="100" key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status key="Design"/>
+    <status progress="100" key="Impl_Kermeta"/>
+    <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="Reference" summary="&lt;para>&lt;/para>" id="comp_reference" refines="comp_structure">
     <verifiedBy href="comp_reference/comp_reference.trek#//@ktestCases.0"/>
     <verifiedBy href="comp_reference/comp_reference.trek#//@ktestCases.1"/>
+    <verifiedBy href="comp_reference/comp_reference.trek#//@ktestCases.2"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.4"/>
     <verifiedBy href="comp_tag/comp_tag.trek#//@ktestCases.8"/>
     <status progress="100" key="Impl_Java"/>
-    <status key="Impl_Kermeta"/>
-    <status key="Design"/>
+    <status progress="100" key="Impl_Kermeta"/>
+    <status progress="100" key="Design"/>
   </kuseCases>
   <kuseCases name="Runner" summary="&lt;para>Design:&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;para>In order to facilitate the accessibility for the users of the generated source code, some runners are generated. A Runner is a Java Class containing a main method which is able to launch the execution of a method. Not all the methods should infer a runner, only the methods which have none parameter or some parameters having String as type. The parameterized Method and method owning by a parameterized Class should not infer a Runner too. The runners are generated in a specific Java Package for each source code package.&#xD;&#xA;Another file is generated that is a &#x93;Eclipse Java Application Launch&#x94; file: *.launch (generated in the root of the project). This one is able to configure automatically the &quot;Run &#x85;&quot; assist of Eclipse to launch quickly an execution. The parameters of this file are provided by the tags: mainClass and mainOperation given by the ModelingUnit.&lt;/para>&#xD;&#xA;&#xD;&#xA;&lt;warning>&lt;para>The simk model should be populated by the pass written in Kermeta and not in Java.&lt;/para>&lt;/warning>" id="comp_runner">
     <verifiedBy href="comp_runner/comp_runner.trek#//@ktestCases.0"/>
@@ -276,7 +288,7 @@
     <status progress="100" key="Impl_Jet"/>
     <status progress="100" key="Design"/>
   </kuseCases>
-  <kuseCases name="Structure" summary="&lt;para>Use case dedicated to the compilation of a Kermeta structure.&lt;/para>" id="comp_structure" refinedBy="comp_attribute comp_classDefinition comp_containment comp_enumeration comp_generics comp_inheritance comp_invariant comp_multiplicity comp_operationStructure comp_opposite comp_package comp_parameter comp_postcondition comp_precondition comp_primitiveType comp_propertyStructure comp_reference comp_tag">
+  <kuseCases name="Structure" summary="&lt;para>Use case dedicated to the compilation of a Kermeta structure.&lt;/para>" id="comp_structure" refinedBy="comp_classDefinition comp_containment comp_enumeration comp_generics comp_inheritance comp_invariant comp_multiplicity comp_operationStructure comp_opposite comp_package comp_parameter comp_postcondition comp_precondition comp_primitiveType comp_propertyStructure comp_reference comp_tag">
     <status progress="100" key="Impl_Java"/>
     <status progress="90" key="Impl_Kermeta"/>
     <status progress="80" key="Design"/>
