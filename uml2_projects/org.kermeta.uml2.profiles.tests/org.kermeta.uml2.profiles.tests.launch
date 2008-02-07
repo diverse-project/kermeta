@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.pde.ui.RuntimeWorkbench">
-<stringAttribute key="application" value="fr.irisa.triskell.kermeta.ecore.tests.ecoretestlauncher"/>
+<stringAttribute key="application" value="org.kermeta.uml2.profiles.tests.umlprofilestestlauncher"/>
 <booleanAttribute key="askclear" value="true"/>
 <booleanAttribute key="automaticAdd" value="true"/>
 <booleanAttribute key="automaticValidate" value="false"/>

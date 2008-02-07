@@ -11,8 +11,15 @@ Require-Bundle: org.eclipse.ui,
  org.junit4,
  org.eclipse.core.resources,
  org.openembedd.tests,
- org.kermeta.uml2.profiles.model
+ org.kermeta.uml2.profiles.model,
+ fr.irisa.triskell.kermeta,
+ fr.irisa.triskell.kermeta.interpreter,
+ fr.irisa.triskell.kermeta.io,
+ org.eclipse.emf.compare,
+ org.eclipse.emf.compare.diff
 Eclipse-LazyStart: true
 Export-Package: org.kermeta.uml2.profiles.tests,
+ org.kermeta.uml2.profiles.tests.helper,
  org.kermeta.uml2.profiles.tests.kmttestsuite,
- org.kermeta.uml2.profiles.tests.launcher
+ org.kermeta.uml2.profiles.tests.launcher,
+ org.kermeta.uml2.profiles.tests.toecoretestsuite
