@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_dguFQNWHEdyrVMeU3idGzQ" activeDiagram="_dguFQdWHEdyrVMeU3idGzQ">
-  <model href="003_NestedBasicClock_test1.uml#_w8IxIM37EdqwVrslYOdUDA"/>
-  <diagrams xmi:id="_dguFQdWHEdyrVMeU3idGzQ" position="0,0" size="100,100" name="003_NestedBasicClock_test1" viewport="0,0">
+  <model href="003_BasicClock_nested_test1.uml#_w8IxIM37EdqwVrslYOdUDA"/>
+  <diagrams xmi:id="_dguFQdWHEdyrVMeU3idGzQ" position="0,0" size="100,100" name="003_BasicClock_nested_test1" viewport="0,0">
     <property xmi:id="_dhKxMNWHEdyrVMeU3idGzQ" key="pageFormatName" value="A4"/>
     <property xmi:id="_dhKxMdWHEdyrVMeU3idGzQ" key="diagramWidth" value="840"/>
     <property xmi:id="_dhKxMtWHEdyrVMeU3idGzQ" key="diagramHeight" value="1188"/>
@@ -12,39 +12,39 @@
     <property xmi:id="_dhKxN9WHEdyrVMeU3idGzQ" key="diagramRightMargin" value="20"/>
     <property xmi:id="_dhKxONWHEdyrVMeU3idGzQ" key="orientation" value="portrait"/>
     <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_dguFQtWHEdyrVMeU3idGzQ" presentation="org.topcased.modeler.uml.classdiagram">
-      <element href="003_NestedBasicClock_test1.uml#_w8IxIM37EdqwVrslYOdUDA"/>
+      <element href="003_BasicClock_nested_test1.uml#_w8IxIM37EdqwVrslYOdUDA"/>
     </semanticModel>
     <contained xsi:type="di:GraphNode" xmi:id="_f13-wNWHEdyrVMeU3idGzQ" position="169,105" size="100,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_f13-wdWHEdyrVMeU3idGzQ" presentation="default">
-        <element href="003_NestedBasicClock_test1.uml#_f2d0oNWHEdyrVMeU3idGzQ"/>
+        <element href="003_BasicClock_nested_test1.uml#_f2d0oNWHEdyrVMeU3idGzQ"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode" xmi:id="_f13-wtWHEdyrVMeU3idGzQ">
         <property xmi:id="_f13-w9WHEdyrVMeU3idGzQ" key="eStructuralFeatureID" value="37"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_f13-xNWHEdyrVMeU3idGzQ" presentation="default">
-          <element href="003_NestedBasicClock_test1.uml#_f2d0oNWHEdyrVMeU3idGzQ"/>
+          <element href="003_BasicClock_nested_test1.uml#_f2d0oNWHEdyrVMeU3idGzQ"/>
         </semanticModel>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_f13-xdWHEdyrVMeU3idGzQ">
         <property xmi:id="_f13-xtWHEdyrVMeU3idGzQ" key="eStructuralFeatureID" value="47"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_f13-x9WHEdyrVMeU3idGzQ" presentation="default">
-          <element href="003_NestedBasicClock_test1.uml#_f2d0oNWHEdyrVMeU3idGzQ"/>
+          <element href="003_BasicClock_nested_test1.uml#_f2d0oNWHEdyrVMeU3idGzQ"/>
         </semanticModel>
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_jkkhQNWLEdyHBbqElWVSZQ" position="505,110" size="100,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jkkhQdWLEdyHBbqElWVSZQ" presentation="default">
-        <element href="003_NestedBasicClock_test1.uml#_jktrMNWLEdyHBbqElWVSZQ"/>
+        <element href="003_BasicClock_nested_test1.uml#_jktrMNWLEdyHBbqElWVSZQ"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode" xmi:id="_jkkhQtWLEdyHBbqElWVSZQ">
         <property xmi:id="_jkkhQ9WLEdyHBbqElWVSZQ" key="eStructuralFeatureID" value="37"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jkkhRNWLEdyHBbqElWVSZQ" presentation="default">
-          <element href="003_NestedBasicClock_test1.uml#_jktrMNWLEdyHBbqElWVSZQ"/>
+          <element href="003_BasicClock_nested_test1.uml#_jktrMNWLEdyHBbqElWVSZQ"/>
         </semanticModel>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_jkkhRdWLEdyHBbqElWVSZQ">
         <property xmi:id="_jkkhRtWLEdyHBbqElWVSZQ" key="eStructuralFeatureID" value="47"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_jkkhR9WLEdyHBbqElWVSZQ" presentation="default">
-          <element href="003_NestedBasicClock_test1.uml#_jktrMNWLEdyHBbqElWVSZQ"/>
+          <element href="003_BasicClock_nested_test1.uml#_jktrMNWLEdyHBbqElWVSZQ"/>
         </semanticModel>
       </contained>
     </contained>
