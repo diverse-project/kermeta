@@ -1,6 +1,6 @@
 
 
-/*$Id: RequireConstraint.java,v 1.3 2008-02-08 13:52:12 dvojtise Exp $
+/*$Id: RequireConstraint.java,v 1.4 2008-02-08 16:57:15 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	RequireConstraint.java
 * License : EPL
@@ -68,6 +68,8 @@ public class RequireConstraint {
 				l.add( p );
 			}
 		}
+		Map<Require, List<String>> errorsForRequireStatement = new HashMap<Require, List<String>>();
+		Map<Require, List<String>> warningsForRequireStatement = new HashMap<Require, List<String>>();
 		
 		for ( String packageQualifiedName : mappings.keySet() ) {
 			Set<Package> l = mappings.get(packageQualifiedName);
@@ -112,24 +114,60 @@ public class RequireConstraint {
 							KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(tdef);
 							if ( ! unitsProcessed.contains(unit) ) {
 								units += unit.getUri() + "\n";
-								requiresErroneous.add( getRequire(unit) );
+								requiresErroneous.addAll( getIndirectRequire(kermetaUnit, unit) );
+								//requiresErroneous.add( getRequire( unit) );
 								if(!EMFRegistryHelper.isRegistered(unit.getUri())) 
 									nbComingFromAFile++;
 							}
 						}
 						message += units;
 						for ( Require r : requiresErroneous ) {
-							if(nbComingFromAFile>1)
-								kermetaUnit.error(message, r);
-							else
-								kermetaUnit.warning(message, r);
+							
+							if(nbComingFromAFile>1){
+								if(!errorsForRequireStatement.containsKey(r)){
+									errorsForRequireStatement.put(r, new ArrayList<String>());
+								}
+								errorsForRequireStatement.get(r).add(message);
+							}
+							else{
+								if(!warningsForRequireStatement.containsKey(r))
+									warningsForRequireStatement.put(r, new ArrayList<String>());
+								warningsForRequireStatement.get(r).add(message);
+							}
+							
 						}
 					}
 				}
 				
 			}
 		}
-		
+		// mark the require
+		for(Require req : errorsForRequireStatement.keySet()){
+			List<String> msgs = errorsForRequireStatement.get(req);
+			if(msgs.size() > 1){
+				// we have many error on the same require, print only the first
+				String message = "This unit imports "+ msgs.size()+ " definitions that comes from several files. The first is :\n";
+				message += msgs.get(0);
+				kermetaUnit.error(message, req);
+			} 
+			else if (msgs.size() == 1){
+				// print the only message 
+				kermetaUnit.error(msgs.get(0), req);
+			}
+		}
+		for(Require req : warningsForRequireStatement.keySet()){
+			List<String> msgs = warningsForRequireStatement.get(req);
+			if(msgs.size() > 1){
+				// we have many error on the same require, print only the first
+				String message = "This unit imports several "+ msgs.size()+ " definitions that comes from several files. The first is :\n";
+				message += msgs.get(0);
+				kermetaUnit.warning(message, req);
+			} 
+			else if (msgs.size() == 1){
+				// print the only message 
+				kermetaUnit.warning(msgs.get(0), req);
+			}
+		}
 		requires.clear();
 		kermetaUnit = null;
 	}
@@ -150,12 +188,46 @@ public class RequireConstraint {
 		}
 	}
 	
-	private Require getRequire(KermetaUnit requiredUnit) {
-		for ( KermetaUnitRequire kuRequire : kermetaUnit.getKermetaUnitRequires() ) {
+	
+	/**
+	 * which Require statement of this.kermetaUnit directly require the requiredUnit
+	 * @param requiredUnit
+	 * @return
+	 */
+	private Require getRequire(KermetaUnit selfUnit, KermetaUnit requiredUnit){
+		
+		for ( KermetaUnitRequire kuRequire : selfUnit.getKermetaUnitRequires() ) {
 			if ( kuRequire.getKermetaUnit() == requiredUnit )
 				return kuRequire.getRequire();
 		}
 		return null;
+		
+	}
+	
+	/**
+	 * get list of Require from selfUnit that directly or indirectly require the requiredUnit
+	 * @param selfUnit
+	 * @param requiredUnit
+	 * @return
+	 */
+	private Set<Require> getIndirectRequire(KermetaUnit selfUnit, KermetaUnit requiredUnit){
+		Set<Require> result = new HashSet<Require>();
+		
+		if(getRequire(selfUnit, requiredUnit) != null)
+			result.add(getRequire(selfUnit, requiredUnit));
+		List<KermetaUnit> allImportedUnit = KermetaUnitHelper.getAllImportedKermetaUnits(selfUnit);
+		// this is an indirect require
+		for(KermetaUnit iu : allImportedUnit){
+			if(iu != requiredUnit){
+				
+				if(getRequire(iu, requiredUnit) != null){
+					// search the require that was requiring it
+					result.addAll(getIndirectRequire(selfUnit,iu));
+				}
+			}
+		}
+		
+		return result;
 	}
 	
 }
