@@ -1,0 +1,12 @@
+
+package comp_opposite_test001;
+
+require kermeta
+
+class A {
+	reference b : B#a
+}
+
+class B {
+	reference a: A#b
+}

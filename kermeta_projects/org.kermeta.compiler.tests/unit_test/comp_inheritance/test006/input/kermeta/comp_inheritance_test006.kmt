@@ -1,0 +1,19 @@
+
+package comp_inheritance_test006;
+
+require kermeta
+
+class A<X> {
+
+}
+
+class ABinded{}
+
+class B<Z>
+{
+}
+
+class BBinded{}
+
+class C inherits A<ABinded>, B<BBinded> {
+}
