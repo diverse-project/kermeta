@@ -1,0 +1,19 @@
+
+package comp_operationStructure_test006;
+
+require kermeta
+
+class A {
+	operation foo() is do
+	end
+}
+
+class B {
+	operation foo() is do
+	end
+}
+
+class C inherits A, B {
+	method foo() from B is do
+	end
+}

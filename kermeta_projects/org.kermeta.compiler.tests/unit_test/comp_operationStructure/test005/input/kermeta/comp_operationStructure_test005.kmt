@@ -1,0 +1,16 @@
+@mainClass "comp_operationStructure_test005::Main"
+@mainOperation "main"
+
+package comp_operationStructure_test005;
+
+require kermeta
+
+class A {
+	operation foo() is do
+	end
+}
+
+class B inherits A {
+	method foo() is do
+	end
+}

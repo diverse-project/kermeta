@@ -1,0 +1,1 @@
+<para>Generation of one operation that overrides an other one by selecting the super class with the "from" directive.</para>

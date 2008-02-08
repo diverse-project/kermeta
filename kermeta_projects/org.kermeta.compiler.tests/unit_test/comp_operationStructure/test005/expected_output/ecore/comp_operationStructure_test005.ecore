@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="comp_operationStructure_test005|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="comp_operationStructure_test005" nsURI="platform:/resource/org.kermeta.compiler.tests/unit_test/comp_operationStructure/test005/expected_output/ecore/comp_operationStructure_test005.ecore#/"
+      nsPrefix="comp_operationStructure_test005">
+    <eClassifiers xsi:type="ecore:EClass" name="A" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kermeta_java.ecore#/1/language/structure/Object">
+      <eOperations name="foo" ordered="false" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Void">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="B" eSuperTypes="#/1/A">
+      <eOperations name="foo" ordered="false" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore#/1/standard/Void">
+        <eAnnotations source="kermeta" references="#/1/A/foo">
+          <details key="body" value="do&#xA;end"/>
+          <details key="superOperation" value="comp_operationStructure_test005::A"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>

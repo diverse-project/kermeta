@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.3 2008-02-08 07:45:00 ftanguy Exp $
+/* $Id: SetLinks.kmt,v 1.4 2008-02-08 08:00:49 ftanguy Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -16,6 +16,7 @@ require "../helper/KM2EcoreHelper.kmt"
 
 using ecore
 using km2ecore::helper::kermeta
+using km2ecore::helper::ecore
 
 aspect class ClassDefinition {
 	operation setLinks() is do
@@ -32,6 +33,11 @@ aspect class Operation {
 	operation setLinks() is do
 		var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
 		s.setLinks(self, self.ecoreModelElement)
+		if ( self.superOperation != void ) then
+			var qualifiedName : String init self.superOperation.owningClass.qualifiedName
+			var ecoreAnnotation : EAnnotation init EAnnotationHelper.new.create("kermeta", "superOperation", qualifiedName)
+			self.ecoreModelElement.eAnnotations.add(ecoreAnnotation)
+		end
 	end
 }
 
