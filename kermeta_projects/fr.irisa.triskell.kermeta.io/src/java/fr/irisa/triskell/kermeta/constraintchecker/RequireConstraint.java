@@ -1,13 +1,15 @@
 
 
-/*$Id: RequireConstraint.java,v 1.2 2007-10-04 08:38:44 ftanguy Exp $
+/*$Id: RequireConstraint.java,v 1.3 2008-02-08 13:52:12 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	RequireConstraint.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 3 oct. 07
-* Authors : paco
+* Authors : 
+*		Francois Tanguy
+*		Didier Vojtisek
 */
 
 package fr.irisa.triskell.kermeta.constraintchecker;
@@ -19,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecoretools.registration.EMFRegistryHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitRequire;
 
@@ -103,16 +106,23 @@ public class RequireConstraint {
 						String units = "";
 						Set<KermetaUnit> unitsProcessed = new HashSet<KermetaUnit>(); 
 						Set<Require> requiresErroneous = new HashSet<Require>();
+						// used to count the number of definition that comes from a file, it ignores definitions coming from unit that correspond to registered EPackage
+						int nbComingFromAFile = 0;
 						for ( TypeDefinition tdef : typeDefinitions ) {
 							KermetaUnit unit = KermetaUnitHelper.getKermetaUnitFromObject(tdef);
 							if ( ! unitsProcessed.contains(unit) ) {
 								units += unit.getUri() + "\n";
 								requiresErroneous.add( getRequire(unit) );
+								if(!EMFRegistryHelper.isRegistered(unit.getUri())) 
+									nbComingFromAFile++;
 							}
 						}
 						message += units;
 						for ( Require r : requiresErroneous ) {
-							kermetaUnit.error(message, r);
+							if(nbComingFromAFile>1)
+								kermetaUnit.error(message, r);
+							else
+								kermetaUnit.warning(message, r);
 						}
 					}
 				}
