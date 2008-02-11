@@ -1,4 +1,4 @@
-/* $Id: 001_BasicClockProfile2Ecore.kmt,v 1.1 2008-02-06 16:00:25 dvojtise Exp $
+/* $Id: 001_BasicClockProfile2Ecore.kmt,v 1.2 2008-02-11 15:08:54 dvojtise Exp $
  * Creation date: November 29, 2007
  * License: EPL
  * Copyright:
@@ -29,10 +29,10 @@ class Main
 	operation main() : Void is do 
 	
 		// source model 
-		var srcModelURI: String init  "platform:/resource/org.kermeta.uml2.profiles.tests/test/profile2ecore_testcases/input/001_BasicClock.profile.uml"
+		var srcModelURI: String init  "platform:/resource/org.kermeta.uml2.profiles.tests/test/profile2ecore_testcases/input/BasicClock.profile.uml"
 		
 		// target model 
-		var tgtModelURI: String init "platform:/resource/org.kermeta.uml2.profiles.tests/test/profile2ecore_testcases/output/001_BasicClock.profile.ecore"
+		var tgtModelURI: String init "platform:/resource/org.kermeta.uml2.profiles.tests/test/profile2ecore_testcases/output/BasicClock.profile.ecore"
 		var converter : UMLProfileUtils::Main init UMLProfileUtils::Main.new
 		converter.main(srcModelURI, tgtModelURI)
 	end
