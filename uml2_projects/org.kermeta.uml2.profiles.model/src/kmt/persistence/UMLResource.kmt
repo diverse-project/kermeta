@@ -1,5 +1,5 @@
 
-/* $Id: UMLResource.kmt,v 1.1 2008-02-11 15:03:29 dvojtise Exp $
+/* $Id: UMLResource.kmt,v 1.2 2008-02-11 16:33:38 dvojtise Exp $
  * Creation date: February 11, 2008
  * License: EPL
  * Copyright:	IRISA/INRIA
@@ -20,6 +20,9 @@ require kermeta
 using kermeta::standard
 using kermeta::exceptions
 
+/**
+ * Aspect that add UML load/save ability to EMFRepository
+ */
 aspect class EMFRepository
 {
 	/**
@@ -43,9 +46,28 @@ aspect class EMFRepository
 	end
 }
 
+/**
+ * Special resource that is able to load UML model that use nested profile
+ */
 class UMLResource inherits EMFResource
 {
-	method load() : Void is do 
+	/** Loads a resource. Once loaded, you'll be able to query the resource for its instances.  
+	 * even if the metamodelURI was not set, (for example the registered packages are enough) after a succesful load
+	 * the attribute metamodelURI will be filled with the nsuri of the root package of the metamodel used to load this resource
+	 */
+	method load() : Void is do
+		self.clear
+		// make sure we can deal with UML units
+		extern org::kermeta::uml2::profiles::kermeta::runtime::basetypes::Resource.addUMLRuntimeUnitFactory()
 		
-	end 
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
+		    self, uri, metaModelURI, "UML"
+		)
+		// If load failed
+		if(self.size == 0) then
+			stdio.writeln("Resource load failed!")
+			var e : ResourceLoadException init ResourceLoadException.new
+			raise e
+		end
+	end
 }
