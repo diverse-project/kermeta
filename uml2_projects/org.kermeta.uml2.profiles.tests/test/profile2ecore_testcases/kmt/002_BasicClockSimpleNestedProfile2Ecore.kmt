@@ -1,0 +1,40 @@
+/* $Id: 002_BasicClockSimpleNestedProfile2Ecore.kmt,v 1.1 2008-02-11 15:08:18 dvojtise Exp $
+ * Creation date: November 29, 2007
+ * License: EPL
+ * Copyright:
+ * Authors: Gilles Perrouin
+ */
+@mainClass "BasicClockProfile2Ecore_001::Main"
+@mainOperation "main" 
+
+/**
+ * Do some test about UMLProfiles 2 Ecore using the BasicClock sample profile
+ */
+package BasicClockProfile2Ecore_001;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+//require "platform:/plugin/org.kermeta.uml2.profiles.model/src/kmt/UMLProfile2Ecore/UMLProfile2Ecore.kmt"
+require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/UMLProfile2Ecore/UMLProfile2Ecore.kmt"
+
+
+using ecore
+using kermeta::persistence
+using kermeta::standard
+using kermeta::exceptions
+using UMLProfileUtils
+ 
+class Main
+{
+ 
+	operation main() : Void is do 
+	
+		// source model 
+		var srcModelURI: String init  "platform:/resource/org.kermeta.uml2.profiles.tests/test/profile2ecore_testcases/input/BasicClock_simple_nested.profile.uml"
+		
+		// target model 
+		var tgtModelURI: String init "platform:/resource/org.kermeta.uml2.profiles.tests/test/profile2ecore_testcases/output/BasicClock_simple_nested.profile.ecore"
+		var converter : UMLProfileUtils::Main init UMLProfileUtils::Main.new
+		converter.main(srcModelURI, tgtModelURI)
+	end
+}

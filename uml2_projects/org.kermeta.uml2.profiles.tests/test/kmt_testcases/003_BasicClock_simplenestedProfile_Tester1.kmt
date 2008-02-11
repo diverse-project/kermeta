@@ -1,0 +1,126 @@
+/* $Id: 003_BasicClock_simplenestedProfile_Tester1.kmt,v 1.1 2008-02-11 15:08:18 dvojtise Exp $
+ * Creation date: June 29, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "basicClocknestedProfileTester_003::TestBasicClockNestedProfile"
+@mainOperation "mainTester"
+
+/**
+ * Checks that every classes in the UML model are stereotyped 
+ * some with "normal" profile
+ * some with "nested" profile 
+ * TODO add more tests
+ */
+package basicClocknestedProfileTester_003;
+
+ 
+require kermeta
+require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
+require "./ecore/BasicClock_simple_nested.profile.ecore"
+//require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+ 
+using kermeta::persistence
+using kermeta::standard 
+using ecore
+using uml
+
+class TestBasicClockNestedProfile inherits kermeta::kunit::TestCase
+{
+	reference resource : Resource
+	reference umlHelper : profiledResourceHelper::ProfilesHelper
+	
+	
+	reference class1 : Class
+	
+	attribute platformURI : String
+	
+	/**
+ 	 * entry operation for running in standalone 
+ 	 */
+ 	operation mainTester() is do
+ 		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		tr.run(TestBasicClockNestedProfile)
+		tr.printTestResult 
+		//setUp
+		//testLoadAndVisit
+ 	end
+	
+	method setUp() is do
+	
+		// change this depending if you are runnning from a workbench or from the test suite
+		//platformURI := "platform:/plugin"
+		platformURI := "platform:/resource"
+		
+	end
+	
+	method tearDown() is do
+	end
+	
+	operation testLoadAndVisit() : Void is do 
+		var rep : Repository  init EMFRepository.new
+		resource := rep.createResource(platformURI +"/org.kermeta.uml2.profiles.tests/test/kmt_testcases/uml/003_BasicClock_simplenested_test1.uml",
+		     "")
+			//"../../model/ecore/Standard.profile.ecore")
+		resource.load
+		umlHelper := profiledResourceHelper::ProfilesHelper.new.initialize(resource,resource)
+		stdio.writeln(resource.size.toString)
+		resource.each{o | 
+			if (o.isInstanceOf(uml::Package)) then
+				
+				if (o.isInstanceOf(uml::Package)) then
+					visitModel(o.asType(uml::Model),"")
+				else		
+					visitPackage(o.asType(uml::Package),"")
+				end
+			else		
+				stdio.writeln(o.toString )
+			end
+		}
+	end
+	
+	operation visitModel(pack : uml::Model, indent : kermeta::standard::String) is do
+		stdio.writeln(indent + "model " + pack.name)
+		pack.packagedElement.each{ o |
+			if(o.isInstanceOf(uml::Package)) then
+				visitPackage(o.asType(uml::Package),indent + "   ")
+			else if(o.isInstanceOf(uml::Class)) then
+				visitClass(o.asType(uml::Class),indent + "   ")
+			else 		
+				stdio.writeln(indent + "   " + o.toString )
+			end end
+		}
+	end
+	operation visitPackage(pack : uml::Package, indent : kermeta::standard::String) is do
+		stdio.writeln(indent + "package " + pack.name)
+		pack.packagedElement.each{ o |
+			if(o.isInstanceOf(uml::Package)) then
+				visitPackage(o.asType(uml::Package),indent + "   ")
+			else if(o.isInstanceOf(uml::Class)) then
+				visitClass(o.asType(uml::Class),indent + "   ")
+			else 		
+				stdio.writeln(indent + "   " + o.toString )
+			end end
+		}
+	end
+	operation visitClass(cl : uml::Class, indent : kermeta::standard::String) is do
+		stdio.write(indent + "class " + cl.name)
+		// all class of the test model must have some stereotype
+		assertTrueWithMsg(umlHelper.getStereotypesFor(cl).size > 0, "class " + cl.name + " has no stereotype")
+		umlHelper.getStereotypesFor(cl).each{st | 		
+			stdio.write(" <" + st.getMetaClass.name +">")
+			if ( cl.name == "class1" ) then
+				// class 1 is stereotyped with AbstractWatch
+				assertTrueWithMsg(st.getMetaClass.name == "AbstractWatch", "class " + cl.name + " isn't stereotyped as an \"AbstractWatch\"")
+			end
+			if ( cl.name == "class2" ) then
+				// class 1 is stereotyped with DidierWatch (from nested profile
+				assertTrueWithMsg(st.getMetaClass.name == "DidierWatch", "class " + cl.name + " isn't stereotyped as a \"DidierWatch\"")
+			end
+		}
+		stdio.writeln("")
+	end
+}
+
+
