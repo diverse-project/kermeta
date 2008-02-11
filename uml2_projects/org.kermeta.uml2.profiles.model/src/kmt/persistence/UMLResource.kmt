@@ -1,0 +1,51 @@
+
+/* $Id: UMLResource.kmt,v 1.1 2008-02-11 15:03:29 dvojtise Exp $
+ * Creation date: February 11, 2008
+ * License: EPL
+ * Copyright:	IRISA/INRIA
+ * Authors:
+ *		Didier Vojtisek
+ */
+
+
+/**
+ * Aspect that adds support for UMLResource to Kermeta persistence package (in EMFRepository)
+ * It introduces the new Resource and the dedicated builder operation
+ */
+package kermeta::persistence;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::exceptions
+
+aspect class EMFRepository
+{
+	/**
+	 * Create a new resource for a model given by its uri, 
+	 * which meta-model is stored in file given by mm_uri
+	 * If file already exists, you'll be able to call the load method to concretly load the model
+	 * otherwise, you can only call the save method
+	 */
+	operation createUMLResource(uri : String, mm_uri : String) : Resource is do
+		var nUri : String
+		nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
+
+		if(not resources.collect{r | extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(r.uri)}.contains(nUri)) then
+			result ?= extern org::kermeta::uml2::profiles::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)
+		else
+			var e : ResourceCreateException init ResourceCreateException.new
+			e.message := "Trying to create a resource already existing at " + uri + ".\n"
+					+ "Remove existing resource from repository first, or use \"getResource\" operation."
+			raise e
+		end
+	end
+}
+
+class UMLResource inherits EMFResource
+{
+	method load() : Void is do 
+		
+	end 
+}
