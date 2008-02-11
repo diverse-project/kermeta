@@ -1,29 +1,36 @@
-/* $Id: 001_standardProfileTester1.kmt,v 1.3 2008-02-11 15:09:19 dvojtise Exp $
+/* $Id: 002_BasicClockProfile_Tester1.kmt,v 1.1 2008-02-11 15:09:19 dvojtise Exp $
  * Creation date: June 29, 2007
  * License:
  * Copyright:
  * Authors:
  */
-@mainClass "standardProfileTester_001::TestStandardProfile"
+@mainClass "basicClockProfileTester_002::TestBasicClockProfile"
 @mainOperation "mainTester"
 
 /**
  * Checks that every classes in the UML model are stereotyped with "Metaclass"
  * TODO add more tests
  */
-package standardProfileTester_001;
+package basicClockProfileTester_002;
 
  
 require kermeta
-require "platform:/plugin/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
+require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
+require "./ecore/BasicClock.profile.ecore"
+//require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
  
 using kermeta::persistence
 using kermeta::standard 
-class TestStandardProfile inherits kermeta::kunit::TestCase
+using ecore
+using uml
+
+class TestBasicClockProfile inherits kermeta::kunit::TestCase
 {
 	reference resource : Resource
 	reference umlHelper : profiledResourceHelper::ProfilesHelper
 	
+	
+	reference class1 : Class
 	
 	attribute platformURI : String
 	
@@ -32,15 +39,15 @@ class TestStandardProfile inherits kermeta::kunit::TestCase
  	 */
  	operation mainTester() is do
  		var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
-		tr.run(TestStandardProfile)
+		tr.run(TestBasicClockProfile)
 		tr.printTestResult
  	end
 	
 	method setUp() is do
 	
 		// change this depending if you are runnning from a workbench or from the test suite
-		//platformURI := "platform:/plugin"
-		platformURI := "platform:/resource"
+		platformURI := "platform:/plugin"
+		//platformURI := "platform:/resource"
 		
 	end
 	
@@ -49,7 +56,7 @@ class TestStandardProfile inherits kermeta::kunit::TestCase
 	
 	operation testLoadAndVisit() : Void is do 
 		var rep : Repository  init EMFRepository.new
-		resource := rep.createResource(platformURI +"/org.kermeta.uml2.profiles.tests/test/kmt_testcases/uml/001_standardProf_test1.uml",
+		resource := rep.createResource(platformURI +"/org.kermeta.uml2.profiles.tests/test/kmt_testcases/uml/002_BasicClock_test1.uml",
 		     "")
 			//"../../model/ecore/Standard.profile.ecore")
 		resource.load
@@ -95,11 +102,17 @@ class TestStandardProfile inherits kermeta::kunit::TestCase
 	end
 	operation visitClass(cl : uml::Class, indent : kermeta::standard::String) is do
 		stdio.write(indent + "class " + cl.name)
+		// all class of the test model must have some stereotype
 		assertTrueWithMsg(umlHelper.getStereotypesFor(cl).size > 0, "class " + cl.name + " has no stereotype")
 		umlHelper.getStereotypesFor(cl).each{st | 		
 			stdio.write(" <" + st.getMetaClass.name +">")
-			assertTrueWithMsg(st.getMetaClass.name == "Metaclass", "class " + cl.name + " isn't stereotyped as a \"Metaclass\"")
+			if ( cl.name == "class1" ) then
+				// class 1 is stereotyped with AbstractWatch
+				assertTrueWithMsg(st.getMetaClass.name == "AbstractWatch", "class " + cl.name + " isn't stereotyped as an \"AbstractWatch\"")
+			end
 		}
 		stdio.writeln("")
 	end
 }
+
+
