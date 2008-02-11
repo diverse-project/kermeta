@@ -1,4 +1,4 @@
-/* $Id: PatternMatchingFlora2.kmt,v 1.6 2008-02-11 16:31:26 bmorin Exp $
+/* $Id: PatternMatchingFlora2.kmt,v 1.7 2008-02-11 16:51:57 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -38,23 +38,29 @@ using kermeta::flora2::pattern
 class PatternMatchingFlora2 inherits PatternMatching
 {
    attribute debug : Boolean 
+   
    attribute interpreter : FloraInterpreter //interpreter is now an attribute
+   attribute factClauses :  OrderedSet<flora2::Clause> //facts are now an attribute
+   attribute tranfoMode2Flora : Model2Flora
    
    method matchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
        template : patternframework::ModelPattern) : Sequence<Hashtable<Object, Object>> is do
         // ### ------------------
         debug := true
         // ### ------------------
-        if debug then stdio.writeln("...PatternMatchingFlora2.Step1()")  end
+        if debug then stdio.writeln("...PatternMatchingFlora2.Step1()") end
                       
-        var factClauses : flora2::Clause[0..*] init OrderedSet<flora2::Clause>.new
+        //var factClauses : flora2::Clause[0..*] init OrderedSet<flora2::Clause>.new
+        factClauses := OrderedSet<flora2::Clause>.new
      
        //  creating facts related to the metamodel and model ...        
         if debug then stdio.writeln("...creating facts related to the metamodel")  end       
         var tranfoEcore2Flora : Ecore2Flora init Ecore2Flora.new
         factClauses.addAll( tranfoEcore2Flora.transformMetamodel(metamodel))
         if debug then stdio.writeln("...creating facts related to the model")  end       
-        var tranfoMode2Flora : Model2Flora init Model2Flora.new               
+        
+        //var tranfoMode2Flora : Model2Flora init Model2Flora.new
+        tranfoMode2Flora := Model2Flora.new              
         tranfoMode2Flora.initialize() 
         factClauses.addAll( tranfoMode2Flora.transformModel(model))
 
@@ -112,5 +118,62 @@ class PatternMatchingFlora2 inherits PatternMatching
    method finalize() is
    do
 		interpreter.finalize
+   end
+
+   
+   /**
+   This operation should be called after match, if the metamodel remains unchanged
+   TODO: avoid duplicate code (cf matchStep1)
+   */
+   method matchAgain(model : Set<Object>, template : patternframework::ModelPattern) : Iterator<Hashtable<Object, Object>> is
+   do
+   		tranfoMode2Flora := Model2Flora.new              
+        tranfoMode2Flora.initialize() 
+        factClauses.addAll( tranfoMode2Flora.transformModel(model))
+   
+		//  creating a query for the pattern ...
+        if debug then stdio.writeln("...creating a query for the pattern ")  end              
+        var tranfoPattern2Flora : ModelPattern2Flora init ModelPattern2Flora.new               
+        tranfoPattern2Flora.initialize()             
+        var queryPattern : flora2::Query init 
+                    tranfoPattern2Flora.transformModelPattern(template)
+
+       if debug then stdio.writeln("...running flora2 interpreter ")  end              
+       //var interpreter : FloraInterpreter init FloraInterpreter.new
+       //interpreter := FloraInterpreter.new
+       //interpreter.initialize      
+       
+       //  inserting facts related to the metamodel and model ...
+       if debug then stdio.writeln("inserting "+factClauses.select{c |Fact.isInstance(c)}.
+                   collect{c | var fact : Fact fact ?= c}.size.toString+" facts related to the metamodel and model ...") end
+      
+       factClauses.select{c |Fact.isInstance(c)}.
+                   collect{c | var fact : Fact fact ?= c}.
+                   each{fact |
+                    if debug then stdio.writeln("%>inserting "+fact.toString)  end
+                   	interpreter.insertFactInDefaultModule(fact)}
+
+
+       var itBindings : Iterator<Hashtable<String, String>> init
+               interpreter.queryInDefaultModule(queryPattern, 
+               tranfoPattern2Flora.lastIdVariants(template))
+      //interpreter.finalize 
+
+       if debug then stdio.writeln("...linking bindings ")  end                      
+      var resultBindings : Sequence<Hashtable<Object, Object>> init Sequence<Hashtable<Object, Object>>.new
+      from itBindings until itBindings.isOff loop  
+	    var hash : Hashtable<String, String> init itBindings.next
+        var hashObj : Hashtable<Object, Object> init Hashtable<Object, Object>.new	    
+	       stdio.writeln("#--- Bindings in the flora side (Identifier into Identifier)")
+	    hash.keys.each{ k | 
+	       stdio.writeln(k.toString + " => " + hash.getValue(k).toString)
+	       hashObj.put(
+              tranfoPattern2Flora.objTable.getObj( k),
+              tranfoMode2Flora.objTable.getObj( hash.getValue(k)))
+	       stdio.writeln(tranfoPattern2Flora.objTable.getObj( k).toString + " => " + tranfoMode2Flora.objTable.getObj( hash.getValue(k)).toString)              
+	    }   
+	    resultBindings.add( hashObj)
+	  end
+      result := resultBindings.iterator   
    end
 }
