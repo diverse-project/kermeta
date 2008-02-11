@@ -1,4 +1,4 @@
-/* $Id: PatternMatching.kmt,v 1.4 2007-12-21 16:25:42 bmorin Exp $
+/* $Id: PatternMatching.kmt,v 1.5 2008-02-11 16:31:26 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -46,6 +46,12 @@ class PatternMatching
         end                                    
    end
    
+   /**
+   This operation should be called after the last execution of the pattern matching
+   to finalize properly the matching
+   */
+   operation finalize() is
+   		abstract
    
    operation checkConstraint( template : MockPatternModel) : Boolean is do
      var bool : Set<Boolean> init  Set<Boolean>.new

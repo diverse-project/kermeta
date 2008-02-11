@@ -1,4 +1,4 @@
-/* $Id: PatternMatchingFlora2.kmt,v 1.5 2007-12-21 16:25:42 bmorin Exp $
+/* $Id: PatternMatchingFlora2.kmt,v 1.6 2008-02-11 16:31:26 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -21,7 +21,7 @@ require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Mo
 require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/visitor/Flora2SerializerVisitor.kmt"
  
  
-require "./ModelPattern2Flora.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/ModelPattern2Flora.kmt"
 
 
  
@@ -38,11 +38,12 @@ using kermeta::flora2::pattern
 class PatternMatchingFlora2 inherits PatternMatching
 {
    attribute debug : Boolean 
+   attribute interpreter : FloraInterpreter //interpreter is now an attribute
    
    method matchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
        template : patternframework::ModelPattern) : Sequence<Hashtable<Object, Object>> is do
         // ### ------------------
-        debug := false
+        debug := true
         // ### ------------------
         if debug then stdio.writeln("...PatternMatchingFlora2.Step1()")  end
                       
@@ -65,19 +66,25 @@ class PatternMatchingFlora2 inherits PatternMatching
                     tranfoPattern2Flora.transformModelPattern(template)
 
        if debug then stdio.writeln("...running flora2 interpreter ")  end              
-       var interpreter : FloraInterpreter init FloraInterpreter.new
+       //var interpreter : FloraInterpreter init FloraInterpreter.new
+       interpreter := FloraInterpreter.new
        interpreter.initialize      
        
        //  inserting facts related to the metamodel and model ...
+       if debug then stdio.writeln("inserting "+factClauses.select{c |Fact.isInstance(c)}.
+                   collect{c | var fact : Fact fact ?= c}.size.toString+" facts related to the metamodel and model ...") end
+      
        factClauses.select{c |Fact.isInstance(c)}.
                    collect{c | var fact : Fact fact ?= c}.
-                   each{fact | interpreter.insertFactInDefaultModule(fact)}
+                   each{fact |
+                    if debug then stdio.writeln("%>inserting "+fact.toString)  end
+                   	interpreter.insertFactInDefaultModule(fact)}
 
 
        var itBindings : Iterator<Hashtable<String, String>> init
                interpreter.queryInDefaultModule(queryPattern, 
                tranfoPattern2Flora.lastIdVariants(template))
-      interpreter.finalize 
+      //interpreter.finalize 
 
        if debug then stdio.writeln("...linking bindings ")  end                      
       var resultBindings : Sequence<Hashtable<Object, Object>> init Sequence<Hashtable<Object, Object>>.new
@@ -97,5 +104,13 @@ class PatternMatchingFlora2 inherits PatternMatching
       result := resultBindings
 
    end    
-   
+
+   /**
+   This operation should be called after the last execution of the pattern matching
+   to finalize properly the matching
+   */   
+   method finalize() is
+   do
+		interpreter.finalize
+   end
 }

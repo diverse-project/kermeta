@@ -7,7 +7,7 @@
   </ecore:EAnnotation>
   <ecore:EPackage name="FSM" nsURI="platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore#/FSM"
       nsPrefix="FSM">
-    <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+    <eClassifiers xsi:type="ecore:EClass" name="State">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="#/1/label">
         <eAnnotations source="kermeta">
@@ -15,13 +15,13 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+    <eClassifiers xsi:type="ecore:EClass" name="Transition">
       <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
           eType="#/1/State"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
           eType="#/1/State"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Fsm" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore#/1/language/structure/Object">
+    <eClassifiers xsi:type="ecore:EClass" name="Fsm">
       <eStructuralFeatures xsi:type="ecore:EReference" name="states" lowerBound="1"
           upperBound="-1" eType="#/1/State" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
