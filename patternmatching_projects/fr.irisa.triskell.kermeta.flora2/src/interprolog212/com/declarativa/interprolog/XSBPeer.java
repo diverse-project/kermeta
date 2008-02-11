@@ -8,6 +8,7 @@
 package com.declarativa.interprolog;
 import java.util.*;
 import java.io.*;
+
 import com.declarativa.interprolog.util.*;
 
 public class XSBPeer extends PrologImplementationPeer{
@@ -93,5 +94,21 @@ public class XSBPeer extends PrologImplementationPeer{
 	public boolean isInterrupt(Object error){
 		return error.toString().startsWith("Aborting");
 	}
+	
+	public String unescapedFilePath(String p) {
+		if (File.separatorChar != '\\' || p.indexOf(File.separator) == -1)
+			return p;
+		StringBuffer newPath = new StringBuffer(p.length() + 10);
+		for (int c = 0; c < p.length(); c++) {
+			char ch = p.charAt(c);
+			if (ch == File.separatorChar)
+				newPath.append('/');
+			else
+				newPath.append(ch);
+		}
+
+		return newPath.toString();
+	}
+
 
 }
