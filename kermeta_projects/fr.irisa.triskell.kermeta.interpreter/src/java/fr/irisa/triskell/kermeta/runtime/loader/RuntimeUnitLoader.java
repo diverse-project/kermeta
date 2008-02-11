@@ -1,4 +1,4 @@
-/* $Id: RuntimeUnitLoader.java,v 1.3 2007-03-08 14:16:37 cfaucher Exp $
+/* $Id: RuntimeUnitLoader.java,v 1.4 2008-02-11 16:13:33 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : RuntimeUnitLoader.java
  * License   : EPL
@@ -19,11 +19,11 @@ import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnitFactory;
 public class RuntimeUnitLoader {
 
     public static RuntimeUnitLoader defaultLoader;
-    public Hashtable factories;
+    public Hashtable<String, RuntimeUnitFactory> factories;
 
     private RuntimeUnitLoader()
     {
-        factories = new Hashtable();
+        factories = new Hashtable<String, RuntimeUnitFactory>();
     }
     
     /**
