@@ -1,4 +1,4 @@
-/* $Id: Flora2XSBEngine.java,v 1.8 2007-12-21 15:19:17 bmorin Exp $
+/* $Id: Flora2XSBEngine.java,v 1.9 2008-02-12 14:32:35 bmorin Exp $
  * Project : Kermeta (First iteration)
  * License : GPL
  * Copyright : IRISA / Universite de Rennes 1
@@ -120,6 +120,18 @@ public class Flora2XSBEngine {
         if (session != null) session.close();
         session = null;    
       }           
+
+	public static RuntimeObject flush(RuntimeObject self) {
+		flush();
+		return self;
+		//return self.getFactory().getMemory().voidINSTANCE;    
+	}    
+
+	private static void flush () {
+		FloraSession session = getSession();
+		if (session != null) 
+			session.ExecuteCommand("?- abolish_all_tables");
+	}    
     
     private static RuntimeObject createRuntimeObject(RuntimeObject self, fr.irisa.triskell.kermeta.language.structure.Class classOfObject) {
         return self.getFactory().createRuntimeObjectFromClass(self.getFactory().createMetaClass( classOfObject));        
