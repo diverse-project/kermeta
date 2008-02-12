@@ -1,4 +1,4 @@
-/* $Id: PatternMatchingFlora2.kmt,v 1.7 2008-02-11 16:51:57 bmorin Exp $
+/* $Id: PatternMatchingFlora2.kmt,v 1.8 2008-02-12 14:34:35 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -19,7 +19,6 @@ require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Fl
 require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Ecore2Flora.kmt"
 require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Model2Flora.kmt"
 require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/visitor/Flora2SerializerVisitor.kmt"
- 
  
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/ModelPattern2Flora.kmt"
 
@@ -73,8 +72,12 @@ class PatternMatchingFlora2 inherits PatternMatching
 
        if debug then stdio.writeln("...running flora2 interpreter ")  end              
        //var interpreter : FloraInterpreter init FloraInterpreter.new
-       interpreter := FloraInterpreter.new
-       interpreter.initialize      
+       if interpreter == void then 
+       		initialize 
+       end
+       
+        if debug then stdio.writeln("flushing tables...") end 
+	  	interpreter.flush
        
        //  inserting facts related to the metamodel and model ...
        if debug then stdio.writeln("inserting "+factClauses.select{c |Fact.isInstance(c)}.
@@ -90,7 +93,7 @@ class PatternMatchingFlora2 inherits PatternMatching
        var itBindings : Iterator<Hashtable<String, String>> init
                interpreter.queryInDefaultModule(queryPattern, 
                tranfoPattern2Flora.lastIdVariants(template))
-      //interpreter.finalize 
+      //interpreter.finalize
 
        if debug then stdio.writeln("...linking bindings ")  end                      
       var resultBindings : Sequence<Hashtable<Object, Object>> init Sequence<Hashtable<Object, Object>>.new
@@ -111,6 +114,12 @@ class PatternMatchingFlora2 inherits PatternMatching
 
    end    
 
+   operation initialize() is
+   do
+   	   interpreter := FloraInterpreter.new
+       interpreter.initialize 
+   end
+
    /**
    This operation should be called after the last execution of the pattern matching
    to finalize properly the matching
@@ -118,62 +127,5 @@ class PatternMatchingFlora2 inherits PatternMatching
    method finalize() is
    do
 		interpreter.finalize
-   end
-
-   
-   /**
-   This operation should be called after match, if the metamodel remains unchanged
-   TODO: avoid duplicate code (cf matchStep1)
-   */
-   method matchAgain(model : Set<Object>, template : patternframework::ModelPattern) : Iterator<Hashtable<Object, Object>> is
-   do
-   		tranfoMode2Flora := Model2Flora.new              
-        tranfoMode2Flora.initialize() 
-        factClauses.addAll( tranfoMode2Flora.transformModel(model))
-   
-		//  creating a query for the pattern ...
-        if debug then stdio.writeln("...creating a query for the pattern ")  end              
-        var tranfoPattern2Flora : ModelPattern2Flora init ModelPattern2Flora.new               
-        tranfoPattern2Flora.initialize()             
-        var queryPattern : flora2::Query init 
-                    tranfoPattern2Flora.transformModelPattern(template)
-
-       if debug then stdio.writeln("...running flora2 interpreter ")  end              
-       //var interpreter : FloraInterpreter init FloraInterpreter.new
-       //interpreter := FloraInterpreter.new
-       //interpreter.initialize      
-       
-       //  inserting facts related to the metamodel and model ...
-       if debug then stdio.writeln("inserting "+factClauses.select{c |Fact.isInstance(c)}.
-                   collect{c | var fact : Fact fact ?= c}.size.toString+" facts related to the metamodel and model ...") end
-      
-       factClauses.select{c |Fact.isInstance(c)}.
-                   collect{c | var fact : Fact fact ?= c}.
-                   each{fact |
-                    if debug then stdio.writeln("%>inserting "+fact.toString)  end
-                   	interpreter.insertFactInDefaultModule(fact)}
-
-
-       var itBindings : Iterator<Hashtable<String, String>> init
-               interpreter.queryInDefaultModule(queryPattern, 
-               tranfoPattern2Flora.lastIdVariants(template))
-      //interpreter.finalize 
-
-       if debug then stdio.writeln("...linking bindings ")  end                      
-      var resultBindings : Sequence<Hashtable<Object, Object>> init Sequence<Hashtable<Object, Object>>.new
-      from itBindings until itBindings.isOff loop  
-	    var hash : Hashtable<String, String> init itBindings.next
-        var hashObj : Hashtable<Object, Object> init Hashtable<Object, Object>.new	    
-	       stdio.writeln("#--- Bindings in the flora side (Identifier into Identifier)")
-	    hash.keys.each{ k | 
-	       stdio.writeln(k.toString + " => " + hash.getValue(k).toString)
-	       hashObj.put(
-              tranfoPattern2Flora.objTable.getObj( k),
-              tranfoMode2Flora.objTable.getObj( hash.getValue(k)))
-	       stdio.writeln(tranfoPattern2Flora.objTable.getObj( k).toString + " => " + tranfoMode2Flora.objTable.getObj( hash.getValue(k)).toString)              
-	    }   
-	    resultBindings.add( hashObj)
-	  end
-      result := resultBindings.iterator   
    end
 }

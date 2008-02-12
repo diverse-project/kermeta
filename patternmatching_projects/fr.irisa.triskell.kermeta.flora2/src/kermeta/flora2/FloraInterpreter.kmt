@@ -1,4 +1,4 @@
-/* $Id: FloraInterpreter.kmt,v 1.5 2007-07-26 12:40:07 bmorin Exp $
+/* $Id: FloraInterpreter.kmt,v 1.6 2008-02-12 14:32:52 bmorin Exp $
  * Creation date: October 16, 2006
  * License:
  * Copyright:
@@ -45,4 +45,8 @@ class FloraInterpreter
 	operation finalize() is do
        extern fr::irisa::triskell::kermeta::flora2::Flora2XSBEngine.close(self)
 	end
+	
+	operation flush() is do
+		extern fr::irisa::triskell::kermeta::flora2::Flora2XSBEngine.flush(self)
+	end	
 }

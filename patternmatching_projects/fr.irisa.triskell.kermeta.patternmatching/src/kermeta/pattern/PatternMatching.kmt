@@ -1,4 +1,4 @@
-/* $Id: PatternMatching.kmt,v 1.6 2008-02-11 16:51:57 bmorin Exp $
+/* $Id: PatternMatching.kmt,v 1.7 2008-02-12 14:34:35 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -29,12 +29,6 @@ class PatternMatching
       finalResult := matchStep2 (model, template, firsResult)
       result := finalResult.iterator
    end    
-
-   /**
-   This operation should be called after match, if the metamodel remains unchanged
-   */
-   operation matchAgain(model : Set<Object>, template : patternframework::ModelPattern) : Iterator<Hashtable<Object, Object>> is
-   		abstract
 
    operation matchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
        template : patternframework::ModelPattern) : Sequence<Hashtable<Object, Object>> is abstract
