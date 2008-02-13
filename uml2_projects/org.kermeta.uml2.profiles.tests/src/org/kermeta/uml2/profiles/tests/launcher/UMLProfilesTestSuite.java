@@ -12,7 +12,7 @@ import org.kermeta.uml2.profiles.tests.toecoretestsuite.ProfileToEcoreTestSuite;
 @RunWith(Suite.class)  
 @Suite.SuiteClasses({
 	// generic test suites that call some kermeta code
-	//KermetaTestSuite.class,
+	KermetaTestSuite.class,
 	// you can add here some other junit4 test suites
 	ProfileToEcoreTestSuite.class
 })

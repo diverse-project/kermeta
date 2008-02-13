@@ -1,10 +1,10 @@
-/* $Id: GenerateKermetaTestSuite.java,v 1.1 2008-02-06 13:03:44 dvojtise Exp $
+/* $Id: GenerateKermetaTestSuite.java,v 1.2 2008-02-13 16:18:43 vmahe Exp $
  * Project : Kermeta.interpreter
  * File : GenerateJUnitTestSuite.java
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
- * Creation date : 16 févr. 2005
+ * Creation date : 16 fï¿½vr. 2005
  * Authors : 
  * 		Franck FLEUREY (ffleurey@irisa.fr)
  * Description :  	
@@ -25,7 +25,7 @@ public class GenerateKermetaTestSuite extends kermeta_interpreter.jutils.Generat
 		String[] newfiletypes = {"kmt"};
 		folders = newfolders;
 		filetypes = newfiletypes;
-		junitfile = "src/fr/irisa/triskell/kermeta/ecore/tests/kmttestsuite/KermetaTestSuite.java";
+		junitfile = "src/org/kermeta/uml2/profiles/tests/kmttestsuite/KermetaTestSuite.java";
 		genericmain(args);
 	}	
 }

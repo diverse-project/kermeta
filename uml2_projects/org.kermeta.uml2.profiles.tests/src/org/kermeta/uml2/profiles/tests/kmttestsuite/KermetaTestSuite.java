@@ -1,4 +1,4 @@
-/* $Id: KermetaTestSuite.java,v 1.1 2008-02-06 13:03:44 dvojtise Exp $
+/* $Id: KermetaTestSuite.java,v 1.2 2008-02-13 16:18:43 vmahe Exp $
  * Project : Kermeta.interpreter
  * File : KermetaTestSuite.java
  * License : EPL
@@ -20,13 +20,14 @@ import junit.framework.TestSuite;
 
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
 import org.kermeta.uml2.profiles.tests.Activator;
+import org.openembedd.tests.utils.UiTools;
 
 /**
  * Test suite that calls some kermeta code
  */
 public class KermetaTestSuite extends TestSuite {
 
-	static final String RUNTIMEPROJECTNAME = "fr.irisa.triskell.kermeta.ecore.tests";
+	static final String RUNTIMEPROJECTNAME = "org.kermeta.uml2.profiles.tests";
     
 //    private static TestSuite _suite;
     
@@ -44,6 +45,10 @@ public class KermetaTestSuite extends TestSuite {
 	public KermetaTestSuite() {
 		super();
 
+    	
+    	//DEBUG
+    	UiTools.debugLog("KermetaTestSuite constructor - beginning");
+    	
 		// ensure projects are created in the workbench
 		IProject project =
 			ResourcesPlugin.getWorkspace().getRoot().getProject(RUNTIMEPROJECTNAME);
@@ -56,9 +61,7 @@ public class KermetaTestSuite extends TestSuite {
 		}
 		
 /*** BEGIN GENERATED TESTS ***/
-		testWithFile("test/kmt_testcases","001_testAB.main.kmt" );
-
-		testWithFile("test/kmt_testcases","001_testABTypes.main.kmt" );
+		testWithFile("test/kmt_testcases","001_standardProfileTester1.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 	}
