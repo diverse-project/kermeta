@@ -1,0 +1,354 @@
+/* $Id: ecoreClone.kmt,v 1.1 2008-02-13 16:30:26 bmorin Exp $
+ * Creation date: May 2, 2006
+ * License: E.P.L.
+ * Copyright:
+ * 	Implementation of ECORE metamodel in Kermeta
+ * Authors:	
+ *	Vincent MAHE vmahe@irisa.fr
+ */
+package ecore;
+
+require kermeta
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+using kermeta::standard
+using kermeta::utils
+  
+
+
+/** This class is responsible for the link between
+*   former and cloned metamodel
+*/
+class CloneRoot{
+	reference cacheType : Hashtable<EClassifier,EClassifier>
+	reference cacheOpposite : Hashtable<EReference,EReference>
+	operation initialize():Void is do
+		cacheType := Hashtable<EClassifier,EClassifier>.new
+		cacheOpposite :=  Hashtable<EReference,EReference>.new
+	end
+
+}
+
+/** This class refers to any EDataType feature*/
+aspect class EAttribute 
+{			
+	method clone (r : CloneRoot) : EStructuralFeature is do
+		var p : EAttribute init EAttribute.new
+		
+		p.name := self.name
+		p.ordered  := self.ordered
+		p.unique := self.unique
+		//p.lowerBound := self.lowerBound
+		p.lowerBound := 0 //all features are now optionnal
+		p.upperBound := self.upperBound
+		p.changeable := self.changeable
+		p.volatile := self.volatile
+		p.transient := self.transient
+		p.defaultValueLiteral := self.defaultValueLiteral
+		p.unsettable := self.unsettable
+		p.derived := self.derived
+		p.iD := self.iD
+		self.eAnnotations.each{ a | p. eAnnotations.add(a.clone())}
+		p.eType:= self.eType
+		result := p
+	end
+		
+}
+
+aspect class EClass 
+{
+
+	operation setType(r : CloneRoot):Void is do
+		
+		var cl : EClass
+			cl ?= r.cacheType.keys().detect{k|self.equals(r.cacheType.getValue(k))}
+		cl.eSuperTypes.each{a | 
+		
+		var superClassCache:EClass
+		superClassCache ?= r.cacheType.getValue(a)
+		if (superClassCache != void) then
+			self.eSuperTypes.add(superClassCache)	
+		else
+			self.eSuperTypes.add(a)	
+		end
+		
+		}
+		
+		if cl.eGenericSuperTypes != void then
+			cl.eGenericSuperTypes.each{a | 
+				var superClassCache:EClass
+				superClassCache ?= r.cacheType.getValue(a.eClassifier)
+				if (superClassCache != void) then
+					var gen : EGenericType init EGenericType.new
+					gen.eClassifier := superClassCache
+					self.eGenericSuperTypes.add(gen)	
+				else
+					var gen : EGenericType init EGenericType.new
+					gen.eClassifier := a.eClassifier
+					self.eGenericSuperTypes.add(gen)	
+				end
+			}
+		end
+		
+		self.eStructuralFeatures.each{a|a.setType(r)}
+		self.eOperations.each{a|a.setType(r)}
+		
+		
+	end
+	
+	operation setPObject(pobject : EClass):Void is do
+		if (self.eSuperTypes.size == 0) then
+			self.eSuperTypes.add(pobject)
+		end
+	end
+	
+	
+		
+	method clone (r : CloneRoot) : EClassifier is do
+		var p : EClass init EClass.new 
+		 
+		p.name := self.name
+//		p.~abstract := self.~abstract
+		p.~abstract := false
+		p.interface := self.interface
+		p.instanceClassName := self.instanceClassName
+		
+		self.eAnnotations.each{ a | p. eAnnotations.add(a.clone())}
+		self.eOperations.each{ a | p. eOperations.add(a.clone())}
+		self.eStructuralFeatures.each{ a | p. eStructuralFeatures.add(a.clone(r))}	
+					
+		r.cacheType.put(self,p)
+		result := p
+		
+	end
+}
+
+aspect abstract class EClassifier
+{
+	operation clone (r : CloneRoot) : EClassifier is abstract
+}
+
+
+aspect class EEnum 
+{
+	method clone (r : CloneRoot) : EClassifier is do
+		var p : EEnum init EEnum.new
+		
+		p.name := self.name
+		p.instanceClassName := self.instanceClassName
+		p.serializable := self.serializable
+		self.eLiterals.each{ a | p. eLiterals.add(a.clone())}
+		
+		self.eAnnotations.each{ a | p. eAnnotations.add(a.clone())}
+		r.cacheType.put(self,p)
+		
+		result := p
+	end
+	
+}
+
+aspect class EPackage
+{
+	operation clone (r : CloneRoot) : EPackage is do
+		var p : EPackage init EPackage.new
+		
+		p.name := self.name
+		p.nsURI := self.nsURI
+		p.nsPrefix := self.nsPrefix
+		self.eAnnotations.each{ a | p. eAnnotations.add(a.clone())}
+		self.eClassifiers.each{ a | p. eClassifiers.add(a.clone(r))}
+		self.eSubpackages.each{ a | p. eSubpackages.add(a.clone(r))}	
+		result := p
+		
+	end
+	
+	operation setType(r : CloneRoot):Void is do
+		self.eSubpackages.each{ a | a.setType(r)}
+		self.eClassifiers.each{ a | 
+			var c : EClass 
+			c?= a 
+			if (c != void) then 
+				c.setType(r)
+			end
+		}
+	end
+	
+	operation setPObject(pobject : EClass):Void is do
+		self.eSubpackages.each{ a | a.setPObject(pobject)}
+		self.eClassifiers.each{ a | 
+			var c : EClass 
+			c?= a 
+			if (c != void) then 
+				c.setPObject(pobject)
+			end
+		}
+	end
+		
+}
+
+aspect class EReference 
+{	
+	method clone (r : CloneRoot) : EStructuralFeature is do
+		var p : EReference init EReference.new
+		
+		p.name := self.name
+		p.ordered  := self.ordered
+		p.unique := self.unique
+		//p.lowerBound := self.lowerBound
+		p.lowerBound := 0
+		p.upperBound := self.upperBound
+		p.changeable := self.changeable
+		p.volatile := self.volatile
+		p.transient := self.transient
+		p.defaultValueLiteral := self.defaultValueLiteral
+		p.unsettable := self.unsettable
+		p.derived := self.derived
+		p.containment := self.containment
+		p.resolveProxies := self.resolveProxies
+		self.eAnnotations.each{ a | p. eAnnotations.add(a.clone())}
+		
+		p.eType:= self.eType
+		p.eOpposite := self.eOpposite
+		if (self.eOpposite != void) then
+			r.cacheOpposite.put(self,p)
+		end
+				
+		result := p
+	end
+	
+	method setType(r : CloneRoot):Void is do
+		var type :EClassifier
+		type := r.cacheType.getValue(self.eType)
+		if (type != self.eType) then 
+			self.eType := type
+		end
+		
+		if (self.eGenericType != void) then
+			type := r.cacheType.getValue(self.eGenericType.eClassifier)
+			if (type != self.eGenericType.eClassifier) then 
+				var gtype :EGenericType init EGenericType.new
+				gtype.eClassifier := type
+				self.eGenericType := gtype
+			end
+		end
+	
+		if (self.eOpposite != void) then
+			self.eOpposite := r.cacheOpposite.getValue(self.eOpposite)
+		end
+
+	 end
+}
+
+aspect abstract class EStructuralFeature 
+{
+	
+		operation clone (r : CloneRoot) : EStructuralFeature is abstract
+}
+
+aspect class EOperation
+{
+	operation clone () : EOperation is do
+		var p : EOperation init EOperation.new
+		p.name := self.name
+		p.ordered  := self.ordered
+		p.unique := self.unique
+		//p.lowerBound := self.lowerBound
+		p.lowerBound := 0
+		p.upperBound := self.upperBound
+		self.eAnnotations.each{ a | p. eAnnotations.add(a.clone())}
+		self.eParameters.each{ a | p. eParameters.add(a.clone())}
+		p.eType:= self.eType
+		result := p
+	end
+	
+	method setType(r : CloneRoot):Void is do
+		var type :EClassifier
+		type := r.cacheType.getValue(self.eType)
+		if (type != self.eType) then 
+			self.eType := type
+		end
+			
+		if (self.eGenericType != void) then
+			type := r.cacheType.getValue(self.eGenericType.eClassifier)
+			if (type != self.eGenericType.eClassifier) then 
+				var gtype :EGenericType init EGenericType.new
+				gtype.eClassifier := type
+				self.eGenericType := gtype
+			end
+		end
+			
+		self.eParameters.each{a | 	a.setType(r)}
+			
+	 end	 
+}
+	
+aspect class EParameter
+{
+	operation clone () : EParameter is do
+		var p : EParameter init EParameter.new
+		p.name := self.name
+		p.ordered  := self.ordered
+		p.unique := self.unique
+		//p.lowerBound := self.lowerBound
+		p.lowerBound := 0
+		p.upperBound := self.upperBound
+		self.eAnnotations.each{ a | p. eAnnotations.add(a.clone())}
+		p.eType:= self.eType
+		result := p
+	end
+}
+	
+aspect class EDataType
+{
+	method clone (r : CloneRoot) : EClassifier is do
+		var p : EDataType init EDataType.new
+		p.name := self.name
+		p.instanceClassName := self.instanceClassName
+		p.serializable := self.serializable
+		self.eAnnotations.each{ a | p. eAnnotations.add(a.clone())}
+		r.cacheType.put(self,p)
+		
+		result := p
+	end
+}
+
+aspect class EAnnotation
+{
+	operation clone () : EAnnotation is do
+		var p : EAnnotation init EAnnotation.new		
+		p.source := self.source
+		result := p
+	end
+}
+	
+aspect class EEnumLiteral
+{
+	operation clone () : EEnumLiteral is do
+		var p : EEnumLiteral init EEnumLiteral.new		
+		p.name := self.name
+		p.~value := self.~value
+//		p.instance := self.instance
+		p.literal := self.literal
+		result := p
+	end
+}
+	
+aspect class ETypedElement
+{
+	operation setType(r : CloneRoot):Void is do
+		var type :EClassifier
+		type := r.cacheType.getValue(self.eType)
+		if (type != self.eType) then 
+			self.eType := type
+		end
+		
+		if (self.eGenericType != void) then
+			type := r.cacheType.getValue(self.eGenericType.eClassifier)
+			if (type != self.eGenericType.eClassifier) then 
+				var gtype :EGenericType init EGenericType.new
+				gtype.eClassifier := type
+				self.eGenericType := gtype
+			end
+		end
+	end
+}
+	

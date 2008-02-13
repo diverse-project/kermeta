@@ -1,6 +1,6 @@
-/* $Id: PatternMetamodelBuilder.kmt,v 1.2 2007-12-21 16:02:46 bmorin Exp $
+/* $Id: PatternMetamodelBuilder.kmt,v 1.3 2008-02-13 16:30:26 bmorin Exp $
  * Creation date: October 12, 2006
- * Authors: Rodrigo Ramos
+ * Authors: Rodrigo Ramos, Olivier Barais, Brice Morin
  */
 @mainClass "kermeta::pattern::CreatePatternExample"
 @mainOperation "main"
@@ -8,125 +8,93 @@
 package kermeta::pattern;
 
 require kermeta
-require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
-require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
-
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/ecoreClone.kmt"
+  
 using kermeta::standard
 using kermeta::persistence
 using ecore
-
+ 
 
 class PatternMetamodelBuilder {
-    attribute helper : EcoreHelpers::EcoreHelper
-   	attribute repository : EMFRepository 
-   	      
-    operation initialize( rep : EMFRepository) is do
-		helper := EcoreHelpers::EcoreHelper.new
-    	helper.initialize        
-    	repository := rep
-    end
     
     operation addPatternFramework(sequencePack : Sequence<EPackage>, newURI : String) : EPackage is do 
-       //var outputModel : Model init Model.new
-      
-      var patternFramework : Sequence<EPackage> init 
-              helper.loadEcoreModel(repository, "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore")
-      var pattern : EPackage init EPackage.new
-      
+      var patternFramework : Sequence<EPackage> init loadEcoreModel(EMFRepository.new, 
+      			"platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore")
+                  
+      var pattern : EPackage init EPackage.new  
       pattern.name := "pattern"
       pattern.nsPrefix:="pattern"      
-      pattern.nsURI:=newURI 
+      pattern.nsURI:=sequencePack.first.nsURI+"/pattern" 
       
       
-      var frameworkPack : EPackage init helper.findPackageByName(patternFramework, "patternframework")      
-      var basicObject : EClass init helper.findClassByName(frameworkPack, "PObject")
-
-
-      // add package corresponding pattern framwwork
-      pattern.eSubpackages.addAll(sequencePack)                 
+      var cache : CloneRoot init CloneRoot.new
+      cache.initialize
       
-      // put the correct reference to all subPackges  
-      pattern.nsURI :=  newURI
+	  var ewp : EPackage
+	  ewp := sequencePack.first.clone(cache)      
+	  ewp.setType(cache)      
+	 
+	  var frameworkPack : EPackage init patternFramework.first     
+      var basicObject : EClass init findClassByName(frameworkPack, "PObject")
+	  ewp.setPObject(basicObject)
+     
+      pattern.eSubpackages.add(ewp)
       setSubPackagesURI(pattern)
 
-      // Link model to the pattern framwwork      
-      var eclassifiers : Set<EClassifier> init Set<EClassifier>.new
-      sequencePack.each{pck | eclassifiers.addAll( getAllNestedClassifiers(pck))}        
-      addBasicObjectAsSupertype( eclassifiers , basicObject)
-
-      // remove invariants and constraints on upper multiplicities
-      sequencePack.each{p | makeMetaModelLessRestricted(p)} 
-
-      //clean instanceClassName
       result := pattern
     end
     
-    operation getAllNestedClassifiers(pack : EPackage) : Set<EClassifier> is do
-       var eclassifiers : Set<EClassifier> init Set<EClassifier>.new
-       eclassifiers.addAll( pack.eClassifiers)
-       pack.eSubpackages.each{ subpack | 
-                eclassifiers.addAll( getAllNestedClassifiers(subpack))}  
-       result := eclassifiers
-    end
-        
-    operation addBasicObjectAsSupertype(seqClassifiers : Set<EClassifier>, basicObject : EClass) is do
-    
-        seqClassifiers.each{ eClassifier | 
-            var eClass : EClass
-            eClass ?= eClassifier
-            if eClass != void then
-            	if (not eClass.eSuperTypes.exists{ ec | 
-            	               seqClassifiers.exists { ec2 | ec == ec2}}) then
-            		eClass.eSuperTypes.add(basicObject)
-    			end
-        	end
-        }
-    end    
-      
-    operation makeMetaModelLessRestricted(model : EPackage) is do 
-      var eTypedElements :  Set<ETypedElement> init Set<ETypedElement>.new
-      
-      // get all eTypedElements from each operator, attribute and reference 
-      // from EClass iW the package
-      model.eClassifiers.select{ eClassifier | EClass.isInstance(eClassifier)}.
-              each{eClassifier | 
-                 var eClass : EClass
-                 eClass ?= eClassifier
-
-                 eClass.eReferences.each{ e | eTypedElements.add(e) }
-                 eClass.eAttributes.each{ e | eTypedElements.add(e) }                 
-                 eClass.eOperations.each{ e | eTypedElements.add(e) }                                  
-                 eClass.eOperations.each{op | 
-                     op.eParameters.each{e | eTypedElements.add(e)}}
-                 
-                 // avoid abstract classes
-                 eClass.~abstract := false    
-               }
-      // zero the lower bounds of each eTypedElement         
-      eTypedElements.each{ e | e.lowerBound := 0 }
-      
-      model.eSubpackages.each{p | makeMetaModelLessRestricted(p)}       
-    end
-
-    operation setSubPackagesURI (pack :EPackage) is do   
+    operation setSubPackagesURI (pack :EPackage) is do
+      stdio.writeln(pack.nsURI)   
       pack.eSubpackages.each{p |  
-          p.nsURI:=pack.nsURI+"#/"+p.name 
+          p.nsURI:=pack.nsURI+"/"+p.name 
           p.nsPrefix:=p.name 
           setSubPackagesURI(p)
       }    
     end  
-    
-    operation cleanInstanceClassNames(pack :EPackage) is do
-      pack.eClassifiers.select{ eClassifier | EClass.isInstance(eClassifier)}.
-              each{eClassifier | 
-                 var eClass : EClass
-                 eClass ?= eClassifier
-                 eClass.instanceClassName := void
-           }      
-      pack.eSubpackages.each{ p | cleanInstanceClassNames(p)}
-    end      
-} 
 
+	operation loadEcoreModel(repository : EMFRepository, modelUri : String) : Sequence<EPackage> is 
+    do
+    	var resource : Resource init repository.createResource(modelUri , "http://www.eclipse.org/emf/2002/Ecore")
+    	resource.load
+    	var instances : Set<Object> init resource.instances
+    	var pack : EPackage
+    	result := instances.select { e | EPackage.isInstance(e) }.collect{p | pack ?= p}	
+    end
+
+	operation saveEcoreModel(obj : Set<Object>, uri : String) is 
+	do
+    	obj.each{o | stdio.writeln(o.toString)}
+    	var repository:EMFRepository init EMFRepository.new
+	    var resource : Resource init repository.createResource(uri , "http://www.eclipse.org/emf/2002/Ecore")
+	    obj.each{o | resource.instances.add(o)}
+	    resource.save
+    end
+    
+    operation findClassByName(pack : EPackage, name : String) : EClass is
+    do
+    	var res : EClass
+    	pack.eClassifiers.each{c |
+    		var cl : EClass
+    		cl ?= c
+    		if (cl != void) then
+    			if cl.name == name then
+    				res := cl
+    			end
+    		end
+    	}
+   	
+    	pack.eSubpackages.each{p |
+    		if res == void then
+    			res := findClassByName(p, name)
+    		end
+    	}
+    	
+    	result := res
+    end
+
+}
+ 
 class CreatePatternExample {
 
   operation main() is do 
