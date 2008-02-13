@@ -1,5 +1,5 @@
 
-/*$Id: Kcomp_packageUseCase.java,v 1.5 2008-02-06 12:36:22 cfaucher Exp $
+/*$Id: Kcomp_packageUseCase.java,v 1.6 2008-02-13 10:01:37 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -24,7 +24,7 @@ import org.kermeta.compiler.tests.helper.Constants;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.kpm.helper.RunnerHelper;
+import fr.irisa.triskell.kermeta.kpm.helpers.RunnerHelper;
 import org.kermeta.loader.LoadingOptions;
 import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 import org.kermeta.compiler.tests.helper.DiffHelper;
