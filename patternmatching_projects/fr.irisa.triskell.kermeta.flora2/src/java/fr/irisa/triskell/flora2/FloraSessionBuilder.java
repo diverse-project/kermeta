@@ -1,4 +1,4 @@
-/* $Id: FloraSessionBuilder.java,v 1.5 2007-07-26 12:40:13 bmorin Exp $
+/* $Id: FloraSessionBuilder.java,v 1.6 2008-02-13 08:36:25 bmorin Exp $
  * Project: fr.irisa.triskell.kermeta.flora2
  * File: FloraSessionBuilder.java
  * License: EPL
@@ -12,7 +12,7 @@ package fr.irisa.triskell.flora2;
 
 import java.io.IOException;
 import java.net.URL;
-import java.io.File;
+//import java.io.File;
 
 import net.sourceforge.flora.javaAPI.src.FloraSession;
 
@@ -42,7 +42,7 @@ public class FloraSessionBuilder {
         }    
         return session;
     }
-    
+
     private static void initializeFloraProperties(){
 	   try { 
 		   //get Bundle of this Plugin
@@ -50,7 +50,19 @@ public class FloraSessionBuilder {
 
 	 	   // get flora2.properties 
 		   Path propertiesPath = new Path(PluginConstants.PROPERTY_FILE);
+		   System.out.println(bundle);
+		 
 		   URL fileURL = FileLocator.find(bundle, propertiesPath, null);
+		   
+		   /*URL fileURL = null;
+		   if (bundle== null){
+				fileURL = new URL("file:/C:/NOSAVE/kermetaCVS/fr.irisa.triskell.kermeta.flora2/flora2.properties");
+		   }else
+		   {
+			   fileURL = FileLocator.find(bundle, propertiesPath, null);
+		   }*/
+		   
+		
 		   Properties flora2pro = new Properties();
 		   flora2pro.load(fileURL.openStream());
 		   
@@ -59,13 +71,13 @@ public class FloraSessionBuilder {
 		   String xsbPath = flora2pro.getProperty(PluginConstants.XSB_PATH); 
 		   String flora2Path = flora2pro.getProperty(PluginConstants.FLORA2_PATH);
 		   
-		   java.io.File fil = new java.io.File ("z:\\rodrigoteste.txt");
+		  /* java.io.File fil = new java.io.File ("z:\\rodrigoteste.txt");
 		   java.io.PrintWriter pq = new java.io.PrintWriter(fil); 
            pq.println("XSB: "+xsbPath); 
            pq.println("FLORA2: "+flora2Path);          
          
            
-           pq.flush();
+           pq.flush();*/
 		   if ( !useAbsPath){
 			   xsbPath = getResolvedPath(bundle, xsbPath);			   
 			   flora2Path= getResolvedPath(bundle, flora2Path);
@@ -79,11 +91,12 @@ public class FloraSessionBuilder {
 			   
 			   ///getXSBConfig(xsbPath).replace('/', File.separatorChar);
 		   
-		   pq.println("XSB: "+xsbPath);
+		 /*  pq.println("XSB: "+xsbPath);
 		   pq.println("FLORA2: "+flora2Path);
            pq.flush();
            pq.close();  
-           
+          */
+		   
            //workaround to permit a Flora2 instalation independent of 
            // the location
            String flora2Patch =
@@ -117,7 +130,7 @@ public class FloraSessionBuilder {
 			return str.substring(1, str.length());
     }
      
-    private static String getXSBConfig(String path) throws IOException{    
+/*    private static String getXSBConfig(String path) throws IOException{    
     	String arch = System.getProperty("os.arch");
         String completeOSName = System.getProperty("os.name");
         // In order to avoid os.name like "Windows XP", the next lines transforms these cases in windows
@@ -127,6 +140,6 @@ public class FloraSessionBuilder {
         // Return a path in the form "<XSB_DIR>/config/x86-pc-windows/bin      
         return path+File.separator+"config"+File.separator+arch+"-pc-"+osName+File.separator+"bin";
     }
-    
+ */   
 
 }
