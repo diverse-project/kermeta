@@ -1,5 +1,5 @@
 
-/*$Id: Comp_structureTestSuite.java,v 1.1 2008-02-13 10:32:09 cfaucher Exp $
+/*$Id: Comp_structureTestSuite.java,v 1.2 2008-02-13 10:37:37 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -51,7 +51,7 @@ import org.junit.runners.Suite;
 		Comp_tagUseCase.class
 	}
 )
-public class Kcomp_structureTestSuite {
+public class Comp_structureTestSuite {
 }
 
 

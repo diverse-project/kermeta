@@ -7,7 +7,7 @@ using trek
 class JUnitTestSuiteTemplate{
 operation generate(main_uc:KUseCase, mode:String):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("\r\n/*$Id: CompilerTestSuite.kmt,v 1.3 2008-02-13 10:32:10 cfaucher Exp $\r\n* Project : org.kermeta.compiler.tests\r\n* License : EPL\r\n* Copyright : IRISA / INRIA / Universite de Rennes 1\r\n* ----------------------------------------------------------------------------\r\n* This is generated thanks to the KET template: CompilerTestSuite.ket\r\n*/\r\n\r\npackage org.kermeta.compiler.tests.")
+_res.append("\r\n/*$Id: CompilerTestSuite.kmt,v 1.4 2008-02-13 10:37:39 cfaucher Exp $\r\n* Project : org.kermeta.compiler.tests\r\n* License : EPL\r\n* Copyright : IRISA / INRIA / Universite de Rennes 1\r\n* ----------------------------------------------------------------------------\r\n* This is generated thanks to the KET template: CompilerTestSuite.ket\r\n*/\r\n\r\npackage org.kermeta.compiler.tests.")
 _res.append(mode)
 _res.append(";\r\n\r\nimport org.junit.runner.RunWith;\r\nimport org.junit.runners.Suite;\r\n\r\n@RunWith(Suite.class)\r\n@Suite.SuiteClasses(\r\n\t{\r\n\t\t")
  
@@ -23,8 +23,9 @@ _res.append(uc.id.substring(1,uc.id.size))
 _res.append("UseCase.class\r\n")
  i := 1
 		}
-_res.append("\t}\r\n)\r\npublic class K")
-_res.append(main_uc.id)
+_res.append("\t}\r\n)\r\npublic class ")
+_res.append(main_uc.id.substring(0,1).toUpperCase)
+_res.append(main_uc.id.substring(1,main_uc.id.size))
 _res.append("TestSuite {\r\n}\r\n\r\n\r\n")
 result := _res.toString
 end

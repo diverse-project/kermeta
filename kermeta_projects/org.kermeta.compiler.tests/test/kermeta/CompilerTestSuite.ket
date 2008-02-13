@@ -7,7 +7,7 @@
 	parameters="main_uc:KUseCase, mode:String"
 %>
 
-/*$Id: CompilerTestSuite.ket,v 1.3 2008-02-13 10:32:10 cfaucher Exp $
+/*$Id: CompilerTestSuite.ket,v 1.4 2008-02-13 10:37:39 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -33,7 +33,7 @@ import org.junit.runners.Suite;
 		}%>
 	}
 )
-public class K<%=main_uc.id%>TestSuite {
+public class <%=main_uc.id.substring(0,1).toUpperCase%><%=main_uc.id.substring(1,main_uc.id.size)%>TestSuite {
 }
 
 
