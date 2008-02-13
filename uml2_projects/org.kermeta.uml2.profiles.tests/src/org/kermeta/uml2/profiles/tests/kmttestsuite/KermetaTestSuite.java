@@ -1,4 +1,4 @@
-/* $Id: KermetaTestSuite.java,v 1.2 2008-02-13 16:18:43 vmahe Exp $
+/* $Id: KermetaTestSuite.java,v 1.3 2008-02-13 16:23:20 vmahe Exp $
  * Project : Kermeta.interpreter
  * File : KermetaTestSuite.java
  * License : EPL
@@ -45,10 +45,6 @@ public class KermetaTestSuite extends TestSuite {
 	public KermetaTestSuite() {
 		super();
 
-    	
-    	//DEBUG
-    	UiTools.debugLog("KermetaTestSuite constructor - beginning");
-    	
 		// ensure projects are created in the workbench
 		IProject project =
 			ResourcesPlugin.getWorkspace().getRoot().getProject(RUNTIMEPROJECTNAME);
