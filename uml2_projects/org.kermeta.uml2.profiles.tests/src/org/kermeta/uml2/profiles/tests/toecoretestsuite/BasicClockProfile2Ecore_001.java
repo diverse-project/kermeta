@@ -1,5 +1,5 @@
 
-/*$Id: BasicClockProfile2Ecore_001.java,v 1.1 2008-02-07 09:09:00 dvojtise Exp $
+/*$Id: BasicClockProfile2Ecore_001.java,v 1.2 2008-02-13 16:22:44 vmahe Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -9,7 +9,6 @@
 
 package org.kermeta.uml2.profiles.tests.toecoretestsuite;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +26,7 @@ import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.loader.LoadingOptions;
 import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 import org.kermeta.uml2.profiles.tests.helper.DiffHelper;
+import org.openembedd.tests.utils.UiTools;
 
 //import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
@@ -69,9 +69,9 @@ public class BasicClockProfile2Ecore_001 {
 		try {
 			IOPlugin.LOCAL_USE = true;
 			IOPlugin.getDefault();
-				executable = IOPlugin.getDefault().loadKermetaUnit( Constants.TEST_COMP_PROFILE2ECORE_LAUNCHER, new NullProgressMonitor());
-				KermetaTypeChecker typechecker = new KermetaTypeChecker( executable, new NullProgressMonitor() );
-	        	typechecker.checkUnit();
+			executable = IOPlugin.getDefault().loadKermetaUnit( Constants.TEST_COMP_PROFILE2ECORE_LAUNCHER, new NullProgressMonitor());
+			KermetaTypeChecker typechecker = new KermetaTypeChecker( executable, new NullProgressMonitor() );
+        	typechecker.checkUnit();
 		} catch (KermetaIOFileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();			
@@ -101,8 +101,12 @@ public class BasicClockProfile2Ecore_001 {
 	@Before public void setParams_basic_clock_test001() {
 		String prefix = "basicclock/test001";
 		input_test001 = Constants.SOURCE_PATH + prefix + "/" + Constants.INPUT_FOLDER + "/001_BasicClock.profile.uml";
+		/* no file can be put in plugins!!!!!!
 		output_test001 = Constants.SOURCE_PATH + prefix + "/" + Constants.OUTPUT_FOLDER + "/001_BasicClock.profile.ecore";
 		expected_output_test001 = Constants.SOURCE_PATH + prefix + "/" + Constants.EXPECTED_OUTPUT_FOLDER +"/001_BasicClock.profile.ecore";
+		*/
+		output_test001 = UiTools.getWorkspacePath() + prefix + "/" + Constants.OUTPUT_FOLDER + "/001_BasicClock.profile.ecore";
+		expected_output_test001 = UiTools.getWorkspacePath() + prefix + "/" + Constants.EXPECTED_OUTPUT_FOLDER +"/001_BasicClock.profile.ecore";
 	}
 	
 	@Test public void basic_clock_test001() {
