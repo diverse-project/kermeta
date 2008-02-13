@@ -1,4 +1,4 @@
-/* $Id: PatternMatching.kmt,v 1.7 2008-02-12 14:34:35 bmorin Exp $
+/* $Id: PatternMatching.kmt,v 1.8 2008-02-13 08:37:41 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -19,6 +19,19 @@ using kermeta::interpreter
 
 class PatternMatching
 {
+	operation optimizedMatch(metamodel : Sequence<EPackage>, model : Set<Object>, 
+       template : patternframework::ModelPattern, 
+       keepMetamodel : Boolean, keepModel : Boolean, keepTemplate : Boolean) : Iterator<Hashtable<Object, Object>> is 
+    do
+      // match structural part 
+      var firsResult : Sequence<Hashtable<Object, Object>> 
+      firsResult := optimizedMatchStep1 (metamodel, model, template, keepMetamodel, keepModel, keepTemplate)
+       
+      var finalResult : Sequence<Hashtable<Object, Object>>      
+      finalResult := matchStep2 (model, template, firsResult)
+      result := finalResult.iterator   
+    end
+
    operation match(metamodel : Sequence<EPackage>, model : Set<Object>, 
        template : patternframework::ModelPattern) : Iterator<Hashtable<Object, Object>> is do
       // match structural part 
@@ -32,6 +45,10 @@ class PatternMatching
 
    operation matchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
        template : patternframework::ModelPattern) : Sequence<Hashtable<Object, Object>> is abstract
+       
+   operation optimizedMatchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
+       template : patternframework::ModelPattern,
+       keepMetamodel : Boolean, keepModel : Boolean, keepTemplate : Boolean) : Sequence<Hashtable<Object, Object>> is abstract
        
    operation matchStep2(model : Set<Object>, template : patternframework::ModelPattern, 
        bindings : Sequence<Hashtable<Object, Object>>) : Sequence<Hashtable<Object, Object>> is do

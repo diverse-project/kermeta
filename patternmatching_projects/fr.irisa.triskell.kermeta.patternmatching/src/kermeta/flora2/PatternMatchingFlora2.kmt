@@ -1,4 +1,4 @@
-/* $Id: PatternMatchingFlora2.kmt,v 1.9 2008-02-12 17:10:41 bmorin Exp $
+/* $Id: PatternMatchingFlora2.kmt,v 1.10 2008-02-13 08:37:41 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -40,30 +40,42 @@ class PatternMatchingFlora2 inherits PatternMatching
    attribute tranfoModel2Flora : Model2Flora
    attribute tranfoPattern2Flora : ModelPattern2Flora
    
-   attribute metamodelFactClauses : OrderedSet<flora2::Clause> //facts related to the metamodel (not supposed to change)
-   attribute modelFactClauses : OrderedSet<flora2::Clause> //facts related to the model (may change)
-   attribute queryPattern : flora2::Query //query (not supposed to change)
+   attribute metamodelFactClauses : OrderedSet<flora2::Clause> 
+   attribute modelFactClauses : OrderedSet<flora2::Clause> 
+   attribute queryPattern : flora2::Query
    
-   method matchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
-       template : patternframework::ModelPattern) : Sequence<Hashtable<Object, Object>> is do
-
+	method optimizedMatchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
+	       template : patternframework::ModelPattern,
+	       keepMetamodel : Boolean, keepModel : Boolean, keepTemplate : Boolean) : Sequence<Hashtable<Object, Object>> is
+	do
 		initialize
 		if debug then stdio.writeln("...PatternMatchingFlora2.Step1()") end 
 		interpreter.flush
 
-		if debug then stdio.writeln("...creating facts related to the metamodel")  end  
-        insertFactsForMetamodel(metamodel)
+		if debug then stdio.writeln("...creating facts related to the metamodel")  end
+		if metamodelFactClauses == void or not(keepMetamodel) then
+			computeFactsForMetamodel(metamodel)
+		end 
+        insertFactsForMetamodel()
         
         if debug then stdio.writeln("...creating facts related to the model")  end
-        insertFactsForModel(model)
-
-       //  creating a query for the pattern ...
-        if debug then stdio.writeln("...creating a query for the pattern ")  end              
-		insertQueryForTemplate(template)
+        if modelFactClauses == void or not(keepModel) then
+			computeFactsForModel(model)
+		end 
+        insertFactsForModel()
+        	
+        if debug then stdio.writeln("...creating a query for the pattern ")  end
+        if queryPattern == void or not(keepTemplate) then          
+			computeQueryForTemplate(template)
+		end
 
        if debug then stdio.writeln("...running flora2 interpreter ")  end                
-      result := search(template)
-
+       result := search(template)	
+	end
+   
+   method matchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
+       template : patternframework::ModelPattern) : Sequence<Hashtable<Object, Object>> is do
+		result := optimizedMatchStep1(metamodel, model, template, false, false, false)
    end    
 
 	/**
@@ -75,59 +87,65 @@ class PatternMatchingFlora2 inherits PatternMatching
                interpreter.queryInDefaultModule(queryPattern, 
                tranfoPattern2Flora.lastIdVariants(template))
 
-       if debug then stdio.writeln("...linking bindings ")  end                      
-      var resultBindings : Sequence<Hashtable<Object, Object>> init Sequence<Hashtable<Object, Object>>.new
-      from itBindings until itBindings.isOff loop  
-	    var hash : Hashtable<String, String> init itBindings.next
-        var hashObj : Hashtable<Object, Object> init Hashtable<Object, Object>.new	    
-	      if debug then stdio.writeln("#--- Bindings in the flora side (Identifier into Identifier)") end
-	    hash.keys.each{ k | 
-	       if debug then stdio.writeln(k.toString + " => " + hash.getValue(k).toString) end
-	       hashObj.put(
-              tranfoPattern2Flora.objTable.getObj( k),
-              tranfoModel2Flora.objTable.getObj( hash.getValue(k)))
-	          if debug then stdio.writeln(tranfoPattern2Flora.objTable.getObj( k).toString + " => " + tranfoModel2Flora.objTable.getObj( hash.getValue(k)).toString) end              
-	    }   
-	    resultBindings.add( hashObj)
-	  end  
-	  result := resultBindings  
+        if debug then stdio.writeln("...linking bindings ")  end                      
+        var resultBindings : Sequence<Hashtable<Object, Object>> init Sequence<Hashtable<Object, Object>>.new
+        from itBindings until itBindings.isOff loop  
+	    	var hash : Hashtable<String, String> init itBindings.next
+        	var hashObj : Hashtable<Object, Object> init Hashtable<Object, Object>.new	    
+	      	if debug then stdio.writeln("#--- Bindings in the flora side (Identifier into Identifier)") end
+	    	hash.keys.each{ k | 
+	       		if debug then stdio.writeln(k.toString + " => " + hash.getValue(k).toString) end
+	       		hashObj.put(
+              		tranfoPattern2Flora.objTable.getObj( k),
+              		tranfoModel2Flora.objTable.getObj( hash.getValue(k)))
+	          	if debug then stdio.writeln(tranfoPattern2Flora.objTable.getObj( k).toString + " => " + tranfoModel2Flora.objTable.getObj( hash.getValue(k)).toString) end              
+	    	}   
+	    	resultBindings.add( hashObj)
+	  	end  
+	  	result := resultBindings  
     end
 
 	/**
-	* This operation computes and inserts facts related to the metamodel
-	* We assume that the metamodel remains unchanges between two matching
-	* However, it is possible to compute these facts by removing the condition
+	* This operation computes facts related to the metamodel
 	*/
-   operation insertFactsForMetamodel(metamodel : Sequence<EPackage>) is
-   do
-   		if metamodelFactClauses == void then
-   			metamodelFactClauses := OrderedSet<flora2::Clause>.new     
-	        var tranfoEcore2Flora : Ecore2Flora init Ecore2Flora.new
-	        metamodelFactClauses.addAll( tranfoEcore2Flora.transformMetamodel(metamodel))
-	        
-	        if debug then 
-	        	stdio.writeln("inserting "+metamodelFactClauses.select{c |Fact.isInstance(c)}.
-	            collect{c | var fact : Fact fact ?= c}.size.toString+" facts related to the metamodel") 
-	        end
-       end
-       
+	operation computeFactsForMetamodel(metamodel : Sequence<EPackage>) is
+    do    
+		metamodelFactClauses := OrderedSet<flora2::Clause>.new
+	    var tranfoEcore2Flora : Ecore2Flora init Ecore2Flora.new
+	    metamodelFactClauses.addAll( tranfoEcore2Flora.transformMetamodel(metamodel)) 
+	    if debug then 
+	      	stdio.writeln("inserting "+metamodelFactClauses.select{c |Fact.isInstance(c)}.
+	        collect{c | var fact : Fact fact ?= c}.size.toString+" facts related to the metamodel") 
+	    end 
+   end
+
+	/**
+	* This operation inserts facts related to the metamodel
+	*/
+   operation insertFactsForMetamodel() is
+   do       
        //Prolog tables may be abolished, so we have to insert again all the facts
        metamodelFactClauses.select{c |Fact.isInstance(c)}.
 	                   collect{c | var fact : Fact fact ?= c}.
 	                   each{fact |
-	                    if debug then stdio.writeln("%>inserting "+fact.toString)  end
-	                   	interpreter.insertFactInDefaultModule(fact)}
+	                   		if debug then stdio.writeln("%>inserting "+fact.toString)  end
+	                   		interpreter.insertFactInDefaultModule(fact)}
    end
+
+   /**
+   * This operation computes facts related to the model
+   */
+	operation computeFactsForModel(model : Set<Object>) is
+	do
+		modelFactClauses := OrderedSet<flora2::Clause>.new
+		modelFactClauses.addAll(tranfoModel2Flora.transformModel(model)) 	
+	end
    
    /**
-   * This operation computes and inserts facts related to the model
-   * We assume that the model can change between two matching
-   * so, we compute and inserts again these facts
+   * This operation inserts facts related to the model
    */
-   operation insertFactsForModel(model : Set<Object>) is
-   do		
-		modelFactClauses.clear
-		modelFactClauses.addAll(tranfoModel2Flora.transformModel(model)) 
+   operation insertFactsForModel() is
+   do	
 		
 		if debug then 
         	stdio.writeln("inserting "+modelFactClauses.select{c |Fact.isInstance(c)}.
@@ -137,20 +155,16 @@ class PatternMatchingFlora2 inherits PatternMatching
         modelFactClauses.select{c |Fact.isInstance(c)}.
                    collect{c | var fact : Fact fact ?= c}.
                    each{fact |
-                    if debug then stdio.writeln("%>inserting "+fact.toString)  end
-                   	interpreter.insertFactInDefaultModule(fact)}  
+                   		if debug then stdio.writeln("%>inserting "+fact.toString)  end
+                   		interpreter.insertFactInDefaultModule(fact)}  
    end
    
    /**
    * This operation computes the Prolog query from the template
-   * We assume that the query (i.e., the template) is identical for each matching
-   * However, it is possible to compute the query by removing the condition
    */
-   operation insertQueryForTemplate(template : patternframework::ModelPattern) is
+   operation computeQueryForTemplate(template : patternframework::ModelPattern) is
    do	
-   		if queryPattern == void then //if the template may change, just remove this condition
-   			queryPattern := tranfoPattern2Flora.transformModelPattern(template)              
-        end   
+   		queryPattern := tranfoPattern2Flora.transformModelPattern(template)              
    end
 
    operation initialize() is
@@ -172,10 +186,6 @@ class PatternMatchingFlora2 inherits PatternMatching
         if tranfoPattern2Flora == void then
    			tranfoPattern2Flora := ModelPattern2Flora.new
    			tranfoPattern2Flora.initialize()
-   		end
-   		
-   		if modelFactClauses == void then
-   			modelFactClauses := OrderedSet<flora2::Clause>.new
    		end
    end
 
