@@ -1,5 +1,5 @@
 
-/*$Id: Comp_assignmentUseCase.java,v 1.2 2008-02-13 10:37:36 cfaucher Exp $
+/*$Id: Comp_assignmentUseCase.java,v 1.3 2008-02-13 10:40:52 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -35,7 +35,7 @@ import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.tests.comparison.EMFCompareModelHelper;
 
-public class Kcomp_assignmentUseCase {
+public class Comp_assignmentUseCase {
 
 	/*
      * 

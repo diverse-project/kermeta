@@ -6,7 +6,7 @@
 	parameters="uc:KUseCase, mode:String"
 %>
 
-/*$Id: CompilerUseCase.ket,v 1.9 2008-02-13 10:01:37 cfaucher Exp $
+/*$Id: CompilerUseCase.ket,v 1.10 2008-02-13 10:40:53 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -42,7 +42,7 @@ import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.tests.comparison.EMFCompareModelHelper;
 
-public class K<%= uc.id %>UseCase {
+public class <%=uc.id.substring(0,1).toUpperCase%><%=uc.id.substring(1,uc.id.size)%>UseCase {
 
 	/*
      * 
