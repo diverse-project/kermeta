@@ -1,0 +1,70 @@
+<project name="tests" default="test" basedir=".">
+	
+	<!-- Properties passed by calling Ant file:
+		"plugin": name of the tests plug-in
+		"pluginversion": version number of the tests plug-in
+				("plugin"_"pluginversion" gives the directory root for this plug-in)
+		"platform" : bundle platform directory (within the installation dir)
+		"application" : name of the plug-in extension
+		"test*" : parameters for test running (suite class, workspace, results)
+	 -->
+	
+		<!-- must be the extension point ID (usualy low case version of the class name) -->
+		<property name="application" value="org.kermeta.uml2.profiles.tests.umlprofilestestlauncher"/>
+		
+	<!-- Work to be done before running the test: initialization of workspace (data needed by test),.... -->
+	<target name="setUp">
+		<echo message="Test plug-in '${plugin}': setting up"/>
+		
+		<!-- See if a chmod is needed -->
+		<condition property="chmodTarget" value="emptyTarget">
+			<os family="windows"/>
+		</condition>
+		<condition property="chmodTarget" value="chmod">
+			<os family="unix"/>
+		</condition>
+		<antcall target="${chmodTarget}"></antcall>
+		
+	</target>
+	
+	<!-- Execution of the test(s) -->
+	<target name="test" depends="setUp">
+		<echo message="Test plug-in '${plugin}': running ..."/>
+		
+		<!-- Specify the class to be run -->
+		<condition property="runtime" value="${platform}/eclipse">
+			<os family="unix"/>
+		</condition>
+		<condition property="runtime" value="${platform}/eclipse.exe">
+			<os family="windows"/>
+		</condition>
+		<exec executable="${runtime}">
+		    <arg line="-application ${application}"/>
+		    <arg line="-data ${testsworkspace}"/>
+		    <arg line="-testclassname ${classname}"/>
+		    <arg line="-testresultname ${classname}.xml"/>
+		    <arg line="-testresultdirectory ${testsresultsdir}"/>
+			<arg line="-showversion"/> <!-- for debugging purposes -->
+		</exec>
+
+		<!-- Then clean up the context -->
+		<antcall target="tearDown"/>
+	</target>
+	
+	<!-- Work (clean up) to be done after the test ran -->
+	<target name="tearDown">
+		<echo message="Test plug-in '${plugin}': cleaning out"/>
+		
+	</target>
+	
+	<target name="chmod">
+		<!-- The unzipped "eclipse" has lost its executable property -->
+		<echo>Changing the mod of platform "eclipse" file to be executable</echo>
+		<exec executable="/bin/chmod">
+		    <arg line="+x"/>
+			<arg line="${platform}/eclipse"/>
+		</exec>
+	</target>
+	<target name="emptyTarget"></target>
+	
+</project>

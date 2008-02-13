@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <launchConfiguration type="org.eclipse.pde.ui.RuntimeWorkbench">
 <stringAttribute key="application" value="org.kermeta.uml2.profiles.tests.umlprofilestestlauncher"/>
 <booleanAttribute key="askclear" value="true"/>

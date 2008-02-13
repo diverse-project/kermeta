@@ -3,6 +3,7 @@
 <plugin>
    <extension
          id="umlprofilestestlauncher"
+         name="Tests on UML2 profiles tools"
          point="org.eclipse.core.runtime.applications">
       <application>
          <run
