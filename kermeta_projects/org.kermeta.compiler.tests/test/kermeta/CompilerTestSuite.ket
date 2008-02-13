@@ -7,7 +7,7 @@
 	parameters="main_uc:KUseCase, mode:String"
 %>
 
-/*$Id: CompilerTestSuite.ket,v 1.2 2008-02-06 12:36:22 cfaucher Exp $
+/*$Id: CompilerTestSuite.ket,v 1.3 2008-02-13 10:32:10 cfaucher Exp $
 * Project : org.kermeta.compiler.tests
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -28,7 +28,7 @@ import org.junit.runners.Suite;
 		
 		main_uc.refinedBy.each{ uc |
 		if i==1 then %>	, <% end %>
-		K<%=uc.id%>UseCase.class
+		<%=uc.id.substring(0,1).toUpperCase%><%=uc.id.substring(1,uc.id.size)%>UseCase.class
 		<% i := 1
 		}%>
 	}

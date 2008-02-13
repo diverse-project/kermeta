@@ -1,4 +1,4 @@
-/* $Id: trek2junit.kmt,v 1.5 2008-02-06 12:52:32 cfaucher Exp $
+/* $Id: trek2junit.kmt,v 1.6 2008-02-13 10:32:10 cfaucher Exp $
  * Creation date: Jan 30, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
@@ -55,9 +55,10 @@ class Main
        	
        	var content_uc : StringBuffer init StringBuffer.new
 		content_uc.append(JUnitTestSuiteTemplate.new.generate(main_uc, mode))
-		    			
+		
 		var ioHelper_uc : FileIO init FileIO.new
-		var filename_uc : String init generationFolder + mode + "/" + "K" + main_uc.id + "TestSuite.java"
+		
+		var filename_uc : String init generationFolder + mode + "/" + main_uc.id.substring(0,1).toUpperCase + main_uc.id.substring(1,main_uc.id.size) + "TestSuite.java"
 				          	
 		ioHelper_uc.writeTextFile(filename_uc,content_uc.toString)
 
@@ -67,7 +68,7 @@ class Main
 	       	content.append(JUnitUseCaseTemplate.new.generate(uc, mode))
 	       	
 			var ioHelper : FileIO init FileIO.new
-			var filename : String init generationFolder + mode + "/" + "K" + uc.id + "UseCase.java"
+			var filename : String init generationFolder + mode + "/" + uc.id.substring(0,1).toUpperCase + uc.id.substring(1,uc.id.size) + "UseCase.java"
 			
 			ioHelper.writeTextFile(filename,content.toString)
        	}
