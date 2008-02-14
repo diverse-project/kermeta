@@ -1,6 +1,6 @@
 
 
-/*$Id: ClassDefinitionHelper.java,v 1.4 2008-02-14 13:09:35 ftanguy Exp $
+/*$Id: ClassDefinitionHelper.java,v 1.5 2008-02-14 14:08:56 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.model
 * File : 	ClassDefinitionHelper.java
 * License : EPL
@@ -136,7 +136,7 @@ public class ClassDefinitionHelper {
 			 * Aspects
 			 * 
 			 */
-			if ( unit.getAspects().get(current) != null ) {
+			if ( unit.getAspects() != null && unit.getAspects().get(current) != null ) {
 				for ( TypeDefinition aspect : unit.getAspects().get(current) )  {
 					if ( aspect instanceof ClassDefinition )
 						getContext( units, (ClassDefinition) aspect, l, deep+1 );
@@ -148,7 +148,7 @@ public class ClassDefinitionHelper {
 			 * Base Classes
 			 *  
 			 */
-			if ( unit.getBaseAspects().get(current) != null ) {
+			if ( unit.getBaseAspects() != null && unit.getBaseAspects().get(current) != null ) {
 				for ( TypeDefinition base : unit.getBaseAspects().get(current) )  {
 					if ( base instanceof ClassDefinition )
 						getContext( units, (ClassDefinition) base, l, deep+1 );
