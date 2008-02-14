@@ -1,4 +1,4 @@
-/* $Id: test.kmt,v 1.4 2007-07-26 07:15:06 bmorin Exp $
+/* $Id: test.kmt,v 1.5 2008-02-14 12:14:51 bmorin Exp $
  * Creation date: May 4, 2007
  * License:
  * Copyright:
@@ -12,7 +12,7 @@ package test;
 
 
 require kermeta
-require "../../program/specialize/AdaptationBuilder.kmt"
+require "platform:/resource/SmartAdapters/program/specialize/AdaptationBuilder.kmt"
 
 using kermeta::standard
 using specialize
@@ -20,9 +20,19 @@ using specialize
 class frameworkGenerator
 {
 	operation main() : Void is do
-		generateFSM()
+		generatePDCA()
+		//generateFSM()
 		//generateClassDiag()
 		//generateUML()
+	end
+
+	operation generatePDCA() : Void is do 
+		var specializer:AdaptationBuilder init AdaptationBuilder.new
+		var domainMM:String init "platform:/resource/SmartAdapters/metamodel/domain/PDCA.ecore"
+		var domainMMPrime:String init "platform:/resource/SmartAdapters/metamodel/domain/PDCAPattern.ecore"
+		var ecore:String init "http://www.eclipse.org/emf/2002/Ecore" 
+		var file:String init "C:\\temp\\PDCA_AOM_Framework.kmt"
+		specializer.generateFramework(domainMM, domainMMPrime, ecore, file)		
 	end
 
 	operation generateFSM() : Void is do 

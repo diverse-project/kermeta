@@ -1,4 +1,4 @@
-/* $Id: MMPatternBuilder.kmt,v 1.4 2007-10-19 09:06:04 bmorin Exp $
+/* $Id: MMPatternBuilder.kmt,v 1.5 2008-02-14 12:14:51 bmorin Exp $
  * Creation date: October 18, 2006
  * License:
  * Copyright:
@@ -25,44 +25,63 @@ using kermeta::pattern
 class EcorePatternMetamodelBuilder {
 
   operation main() is do 
-      var sourceMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
-      var targetMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"
+      var sourceMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/PDCA.ecore"
+      var targetMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/PDCAPattern.ecore"
 
-   	  var repository : EMFRepository
-   	  var repository2 : EMFRepository init EMFRepository.new 
-      var handler : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new   	  
-      handler.initialize()        	 
-      repository:=handler.loadMetamodel(sourceMetamodelUri)    
-      //var seqPack:Sequence<EPackage> init handler.loadEcoreModel(repository,sourceMetamodelUri)
-              	 
-      var seqPack : Sequence<EPackage> init handler.packages
+   	  var sourceMetamodel : Sequence<EPackage> init loadEcoreModel(EMFRepository.new, sourceMetamodelUri)
  
       // Link packages to the framework of patterns (the content of the packages are changed 
       var patternCreator : PatternMetamodelBuilder init PatternMetamodelBuilder.new       
-      patternCreator.initialize(repository2)       
-      var patternPack : EPackage init patternCreator.addPatternFramework(seqPack, targetMetamodelUri) 
-      
-      // remove the source packages from their previours container
-      //packagesModelModel.each{p | repository.getResource(sourceMetamodelUri).remove(p)} 
-      
-      // problem in Kermeta: we have to clea instance class name
-      //var emfhandler : kermeta::pattern::persistence::EMFHandler init kermeta::pattern::persistence::EMFHandler.new 
-      //emfhandler.cleanInstanceClassNames(patternPack)
-      
-      patternPack.eSubpackages.each{p | 
-			p.eClassifiers.each{c |
-				var cl:EClass
-				cl?=c
-				if(cl!=void) then
-					stdio.writeln(cl.name)
-					cl.eSuperTypes.each{s | stdio.write(s.name+" ")}
-					stdio.writeln("")
-				end 
-		}}
-      
+      var patternPack : EPackage init patternCreator.addPatternFramework(sourceMetamodel, targetMetamodelUri) 
+         
       stdio.write("Saving...")
-      repository2.resources.each{r | stdio.writeln(r.uri)}
-      handler.saveEcoreModel(repository2,patternPack,targetMetamodelUri)
+      var setPack : Set<Object> init Set<Object>.new
+      setPack.add(patternPack)
+      
+      prettyPrintPackage(patternPack)
+      
+      saveEcoreModel(setPack, targetMetamodelUri, EMFRepository.new)
       stdio.writeln("OK!") 
   end
+  
+  operation prettyPrintPackage(pack : EPackage) is
+  do
+        stdio.writeln(pack.nsURI)
+      	pack.eClassifiers.each{c | 
+      		var cl : EClass
+      		cl ?= c
+      		if (cl != void) then		
+     			stdio.write(c.name+"->")
+     			if cl.eSuperTypes != void and cl.eSuperTypes.size > 0 then
+     				stdio.writeln(cl.eSuperTypes.first.name)
+     			else
+     				stdio.writeln("EMPTY")
+     			end
+      		end
+      	var setPack : Set<Object> init Set<Object>.new
+      	setPack.add(pack)
+      	//saveEcoreModel(setPack, "platform:/resource/SmartAdapters/metamodel/domain/"+pack.name+".ecore", EMFRepository.new)
+      	pack.eSubpackages.each{p | prettyPrintPackage(p)}
+      	
+      }
+  
+  end
+  
+	operation loadEcoreModel(repository : EMFRepository, modelUri : String) : Sequence<EPackage> is 
+    do
+    	var resource : Resource init repository.createResource(modelUri , "http://www.eclipse.org/emf/2002/Ecore")
+    	resource.load
+    	var instances : Set<Object> init resource.instances
+    	var pack : EPackage
+    	result := instances.select { e | EPackage.isInstance(e) }.collect{p | pack ?= p}	
+    end
+
+	operation saveEcoreModel(obj : Set<Object>, uri : String, repository : EMFRepository) is 
+	do
+    	obj.each{o | stdio.writeln(o.toString)}
+    	//var repository:EMFRepository init EMFRepository.new
+	    var resource : Resource init repository.createResource(uri , "http://www.eclipse.org/emf/2002/Ecore")
+	    obj.each{o | resource.instances.add(o)}
+	    resource.save
+    end 
 }

@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.9 2008-02-13 13:28:20 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.10 2008-02-14 12:14:51 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -9,7 +9,7 @@ package org;
 
 require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.kmt"
 require "platform:/resource/SmartAdapters/program/weaving/converter.kmt"
-
+ 
 using kermeta::standard
 using kermeta::utils
 using kermeta::persistence
@@ -33,8 +33,8 @@ package smartadapters
 			attribute clone : Hashtable<Object, Object>
 			attribute binding : Hashtable<Object, Object>
 			attribute cloned : Set<Object>
-			attribute convert : Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>
-			attribute enum : Hashtable<kermeta::reflection::Enumeration,kermeta::reflection::Enumeration>
+			attribute convert : Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>
+			attribute enum : Hashtable<kermeta::language::structure::Enumeration,kermeta::language::structure::Enumeration>
 			attribute converter : Converter
 			
 			operation initConvert() : Void is abstract
@@ -139,12 +139,12 @@ package smartadapters
 			
 			operation setMultipleProperty(prty : Object, o : Object) : Void is do
 				if(o != void) then
-					var coll : Collection<kermeta::reflection::Object>
-					var collToSet : Collection<kermeta::reflection::Object>
+					var coll : Collection<kermeta::language::structure::Object>
+					var collToSet : Collection<kermeta::language::structure::Object>
 					coll ?= o
 					collToSet ?= prty
 					if(coll != void and collToSet != void and coll.size > 0) then
-						var realColl : Collection<kermeta::reflection::Object>
+						var realColl : Collection<kermeta::language::structure::Object>
 						realColl ?= getRealObject(o,true)
 						collToSet.addAll(realColl)
 					end
@@ -169,12 +169,12 @@ package smartadapters
 
 			operation unsetMultipleProperty(prty : Object, o : Object) : Void is do
 				if(prty != void and o != void) then
-					var coll : Collection<kermeta::reflection::Object>
-					var collToSet : Collection<kermeta::reflection::Object>
+					var coll : Collection<kermeta::language::structure::Object>
+					var collToSet : Collection<kermeta::language::structure::Object>
 					coll ?= o
 					collToSet ?= prty
 					if(coll != void and collToSet != void) then
-						var realColl : Collection<kermeta::reflection::Object>
+						var realColl : Collection<kermeta::language::structure::Object>
 						realColl ?= getRealObject(o,true)
 						realColl.each{o |
 							collToSet.remove(o)
@@ -185,7 +185,7 @@ package smartadapters
 						
 			operation getRealObject(obj : Object, isCollect:Boolean) : Object is do
 				if (isCollect) then
-					var col : Collection<kermeta::reflection::Object>
+					var col : Collection<kermeta::language::structure::Object>
 					col ?= obj
 					var res : Set<Object> init Set<Object>.new
 					col.each{o | res.add(getRealObject(o,false))}

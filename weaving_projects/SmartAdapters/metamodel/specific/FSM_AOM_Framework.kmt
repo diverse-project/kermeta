@@ -29,7 +29,7 @@ package smartadapters
 			operation initConvert(): Void is do
 				stdio.write("Mapping MM\' to MM...")
 				converter := Converter.new
-				convert := Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new
+				convert := Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new
 				convert.put(pattern::FSM::State,FSM::State)
 				convert.put(pattern::FSM::Transition,FSM::Transition)
 				convert.put(pattern::FSM::Fsm,FSM::Fsm)

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pattern"
+    nsURI="http://www.objectweb.org/models@runtime/pattern" nsPrefix="pattern">
+  <eSubpackages name="runtime" nsURI="http://www.objectweb.org/models@runtime/pattern/runtime"
+      nsPrefix="runtime">
+    <eClassifiers xsi:type="ecore:EClass" name="NamedElement" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//runtime/Name"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelElement" eSuperTypes="#//runtime/NamedElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="#//runtime/ModelElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="#//runtime/instance/CompositeInstance"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="services" upperBound="-1"
+          eType="#//runtime/type/Service" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+          eType="#//runtime/type/ComponentType" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="dataTypes" upperBound="-1"
+          eType="#//runtime/DataType" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//runtime/ModelElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypedElement" eSuperTypes="#//runtime/ModelElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//runtime/DataType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Name" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Text" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Value" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+    <eSubpackages name="instance" nsURI="http://www.objectweb.org/models@runtime/pattern/runtime/instance"
+        nsPrefix="instance">
+      <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" eSuperTypes="#//runtime/ModelElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//runtime/type/ComponentType"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//runtime/instance/InstanceState"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="superComponent" eType="#//runtime/instance/CompositeInstance"
+            eOpposite="#//runtime/instance/CompositeInstance/subComponent"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
+            eType="#//runtime/instance/ValuedAttribute" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="binding" upperBound="-1"
+            eType="#//runtime/instance/TransmissionBinding" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="controllerDesc" eType="#//runtime/Text"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentDesc" eType="#//runtime/Text"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PrimitiveInstance" eSuperTypes="#//runtime/instance/ComponentInstance"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CompositeInstance" eSuperTypes="#//runtime/instance/ComponentInstance">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="subComponent" upperBound="-1"
+            eType="#//runtime/instance/ComponentInstance" containment="true" eOpposite="#//runtime/instance/ComponentInstance/superComponent"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="delegation" upperBound="-1"
+            eType="#//runtime/instance/DelegationBinding" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="InstanceState">
+        <eLiterals name="OFF" literal="OFF"/>
+        <eLiterals name="ON" value="1" literal="ON"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ValuedAttribute" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//runtime/type/Attribute"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//runtime/Value"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Binding" eSuperTypes="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="serverInstance" eType="#//runtime/instance/ComponentInstance"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TransmissionBinding" eSuperTypes="#//runtime/instance/Binding">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="client" eType="#//runtime/type/PrimitivePort"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="server" eType="#//runtime/type/PrimitivePort"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DelegationBinding" eSuperTypes="#//runtime/instance/Binding">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//runtime/type/PrimitivePort"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="exported" eType="#//runtime/type/PrimitivePort"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="type" nsURI="http://www.objectweb.org/models@runtime/pattern/runtime/type"
+        nsPrefix="type">
+      <eClassifiers xsi:type="ecore:EClass" name="ComponentType" eSuperTypes="#//runtime/ModelElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="port" upperBound="-1"
+            eType="#//runtime/type/Port" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
+            eType="#//runtime/type/Attribute" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//runtime/type/ComponentType">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="binding" upperBound="-1"
+            eType="#//runtime/instance/TransmissionBinding" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CompositeType" eSuperTypes="#//runtime/type/ComponentType">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="subTypes" upperBound="-1"
+            eType="#//runtime/type/CompositeType"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="delegation" upperBound="-1"
+            eType="#//runtime/instance/DelegationBinding" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Service" eSuperTypes="#//runtime/ModelElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="operation" upperBound="-1"
+            eType="#//runtime/type/Operation" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//runtime/ModelElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="input" upperBound="-1"
+            eType="#//runtime/type/Parameter" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="output" upperBound="-1"
+            eType="#//runtime/type/Parameter" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//runtime/TypedElement"/>
+      <eClassifiers xsi:type="ecore:EClass" name="FunctionalService" eSuperTypes="#//runtime/type/Service"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ControlService" eSuperTypes="#//runtime/type/Service"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//runtime/ModelElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="sub" upperBound="-1"
+            eType="#//runtime/type/PrimitivePort" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" eType="#//runtime/Boolean"
+            defaultValueLiteral="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//runtime/TypedElement"/>
+      <eClassifiers xsi:type="ecore:EClass" name="PrimitivePort" eSuperTypes="#//runtime/ModelElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//runtime/type/Service"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="#//runtime/type/PortRole"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="PortRole">
+        <eLiterals name="client" literal="client"/>
+        <eLiterals name="server" value="1" literal="server"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="impl" nsURI="http://www.objectweb.org/models@runtime/pattern/runtime/impl"
+        nsPrefix="impl"/>
+  </eSubpackages>
+</ecore:EPackage>
