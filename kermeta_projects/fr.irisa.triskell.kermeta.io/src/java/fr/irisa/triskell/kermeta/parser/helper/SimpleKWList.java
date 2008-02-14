@@ -27,6 +27,7 @@ public class SimpleKWList {
 	protected SimpleKWList() {
 		super();
 		keywords = new Hashtable<String,String>();
+		addKeyword("aspect");
 		addKeyword("package");
 		addKeyword("require");
 		addKeyword("includeFilter");
